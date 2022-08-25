@@ -7,20 +7,25 @@
     "build": "rollup --config rollup.config.js",
     "build:watch": "npm run build -- --watch",
     "dev": "npm run build:watch & npm run serve",
-    "serve": "wds --watch --open"
+    "serve": "wds --watch --open",
+    "test": "tsc && wtr --coverage"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "bootstrap-icons": "^1.9.1",
     "clk-styletest": "^2.0.6",
-    "lit": "latest",
+    "lit": "^2.3.1",
     "tslib": "^2.2.0"
   },
   "devDependencies": {
+    "@esm-bundle/chai": "^4.3.4-fix.0",
+    "@open-wc/testing": "^3.0.0-next.5",
     "@rollup/plugin-node-resolve": "^11.2.1",
     "@types/bootstrap": "^5.2.2",
     "@web/dev-server": "^0.1.17",
+    "@web/dev-server-esbuild": "^0.3.2",
+    "@web/test-runner": "^0.14.0",
     "autoprefixer": "^10.4.8",
     "postcss": "^8.2.13",
     "rollup": "^2.46.0",

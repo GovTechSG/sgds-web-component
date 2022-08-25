@@ -1,16 +1,18 @@
 import { LitElement, html } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import styles from "./alert-element.scss";
 
 @customElement("alert-element")
 export class AlertElement extends LitElement {
   static styles = styles;
+  @property()
+  classes=""
 
   render() {
     return html`
     <div
     role="alert"
-    class="fade d-flex align-items-center alert alert-primary alert-dismissible show sgds"
+    class=" ${this.classes} fade d-flex align-items-center alert alert-primary alert-dismissible show sgds"
   >
     <button
       type="button"
