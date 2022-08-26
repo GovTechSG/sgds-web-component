@@ -11,9 +11,14 @@
     "skipLibCheck": true,
     "noImplicitAny": false,
     "importHelpers": true,
+    "rootDir": "src"
   },
   "include": [
     "**/*.ts",
   ],
-  "exclude": [],
+  "exclude": [
+    "node_modules",
+    "lib",
+    "test"
+  ],
 }

@@ -1,5 +1,5 @@
 import './Button/button-element';
-import './alert-element';
+import './Alert/alert-element';
 import './Footer/footer-element';
 import './Footer/footer-top-element';
 import './SideNav/sidenav-element';

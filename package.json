@@ -2,15 +2,16 @@
   "name": "lit-sass-ts-starter",
   "version": "0.0.1",
   "description": "",
-  "main": "lib/cjs/index.js",
+  "main": "lib/umd/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "build": "rollup --config rollup.config.js",
+    "build": "rm -rf lib && rollup --config rollup.config.js",
     "build:watch": "npm run build -- --watch",
     "dev": "npm run build:watch & npm run serve",
     "serve": "wds --watch --open",
-    "test": "web-test-runner"
+    "test": "rm -rf test-outdir && rollup --c rollup.test.config.js && web-test-runner",
+    "storybook": "start-storybook -p 6006 --no-manager-cache"
   },
   "author": "",
   "license": "MIT",
@@ -27,6 +28,8 @@
     "@types/bootstrap": "^5.2.2",
     "@web/dev-server": "^0.1.17",
     "@web/dev-server-esbuild": "^0.3.2",
+    "@web/dev-server-rollup": "^0.3.19",
+    "@web/dev-server-storybook": "^0.5.4",
     "@web/test-runner": "^0.14.0",
     "autoprefixer": "^10.4.8",
     "esbuild-sass-plugin": "^2.3.2",
