@@ -14,9 +14,7 @@ export class ButtonElement extends LitElement {
 
   render() {
     return html`
-      <button class="btn btn-${this.variant} ${this.classes}">
-        <slot></slot>
-      </button>
+      <button class="btn btn-${this.variant} ${this.classes}"><slot></slot></button>
     `;
   }
 }

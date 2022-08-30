@@ -12,7 +12,6 @@
     "noImplicitAny": false,
     "importHelpers": true,
     "rootDir": "src",
-    "useDefineForClassFields": false
   },
   "include": [
     "**/*.ts",
