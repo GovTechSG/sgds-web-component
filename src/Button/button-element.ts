@@ -10,11 +10,13 @@ export class ButtonElement extends LitElement {
   variant = "primary";
 
   @property()
-  classes = ""
+  classes = "";
 
   render() {
     return html`
-      <button class="btn btn-${this.variant} ${this.classes}">Hello World</button>
+      <button class="btn btn-${this.variant} ${this.classes}">
+        <slot></slot>
+      </button>
     `;
   }
 }
