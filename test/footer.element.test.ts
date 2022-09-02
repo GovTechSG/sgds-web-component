@@ -1,4 +1,4 @@
-import { FooterElement, LinksArray } from "../src/Footer/footer-element";
+import { FooterElement, ColumnLinks } from "../src/Footer/footer-element";
 import "../src/Footer/footer-element";
 import { fixture, assert, expect } from "@open-wc/testing";
 import { html } from "lit";
@@ -13,7 +13,7 @@ describe("button-element", () => {
     assert.shadowDom.equal(
       el,
       `
-          <footer class="footer">
+          <footer class="sgds footer">
           <section class="footer-top">
             <div class="container-fluid">
               <div class="row footer-header">
@@ -146,8 +146,9 @@ describe("button-element", () => {
     ).to.contain("Terms of use");
   });
 
+  
   it("links prop accepts an array", async () => {
-    const linkArray: LinksArray[] = [
+    const linkArray: ColumnLinks[] = [
       {
         title: "test-1",
         links: [

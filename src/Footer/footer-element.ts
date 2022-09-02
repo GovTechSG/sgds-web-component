@@ -6,24 +6,21 @@ type Links = {
   href: string;
   label: string;
 }
-export interface LinksArray {
+export interface ColumnLinks {
   title: string;
   links: Links[]
 }
 @customElement("footer-element")
 export class FooterElement extends LitElement {
-  static styles = styles;
+  static styles = styles
   @property()
   title = ``;
   @property()
   description = ``;
   @property({
-    type: Array,
-    converter(value, type?) {
-      return typeof value === type ? value : JSON.parse(value);
-    },
+    type: Array
   })
-  links: LinksArray[] = [];
+  links: ColumnLinks[] = [];
 
   @property({ type: String })
   lastUpdatedDate = "";
@@ -43,7 +40,7 @@ export class FooterElement extends LitElement {
 
   render() {
     return html`
-      <footer class="footer">
+      <footer class="sgds footer">
         <section class="footer-top">
           <div class="container-fluid">
             <div class="row footer-header">
@@ -54,7 +51,7 @@ export class FooterElement extends LitElement {
             </div>
             <div class="row footer-items">
               ${this.links.map(
-                (item: LinksArray) =>
+                (item: ColumnLinks) =>
                   html`
                     <div class="col-xxl-2 col-md-4 mb-3">
                       <div class="title">${item.title}</div>
@@ -81,8 +78,7 @@ export class FooterElement extends LitElement {
                         href="https://www.reach.gov.sg/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        >Reach.gov.sg</a
-                      >
+                        >Reach.gov.sg</a>
                     </li>
                   </ul>
                 </div>
@@ -100,8 +96,7 @@ export class FooterElement extends LitElement {
                       href="${this.vulnerabilityHref}"
                       target="_blank"
                       rel="noopener noreferrer"
-                      >Report Vulnerability</a
-                    >
+                      >Report Vulnerability</a>
                   </li>
                   <li><a href="${this.privacyHref}">Privacy Statement</a></li>
                   <li><a href="${this.termsOfUseHref}">Terms of use</a></li>
