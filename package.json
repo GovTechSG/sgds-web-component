@@ -12,7 +12,8 @@
     "serve": "wds --watch --open",
     "test": "rm -rf test-outdir && rollup --config rollup.test.config.js && web-test-runner",
     "storybook": "npm run build && start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepare": "husky install"
   },
   "author": "",
   "license": "MIT",
@@ -23,6 +24,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@open-wc/storybook": "^0.2.8",
     "@open-wc/testing": "^3.0.0-next.5",
@@ -44,7 +47,9 @@
     "@web/test-runner": "^0.14.0",
     "autoprefixer": "^10.4.8",
     "babel-loader": "^8.2.5",
+    "cz-conventional-changelog": "^3.3.0",
     "esbuild-sass-plugin": "^2.3.2",
+    "husky": "^8.0.0",
     "lit-html": "^2.3.1",
     "postcss": "^8.2.13",
     "rollup": "^2.46.0",
@@ -57,5 +62,10 @@
     "storybook-addon-web-components-knobs": "^0.3.20",
     "tslib": "^2.4.0",
     "typescript": "^4.2.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
