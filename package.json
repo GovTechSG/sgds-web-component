@@ -45,6 +45,7 @@
     "@web/dev-server-rollup": "^0.3.19",
     "@web/dev-server-storybook": "^0.5.4",
     "@web/test-runner": "^0.14.0",
+    "@web/test-runner-playwright": "^0.8.10",
     "autoprefixer": "^10.4.8",
     "babel-loader": "^8.2.5",
     "cz-conventional-changelog": "^3.3.0",
