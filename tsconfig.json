@@ -5,6 +5,7 @@
     "moduleResolution": "node",
     "lib": ["es2017", "dom", "dom.iterable"],
     "declaration": true,
+    "declarationDir": "lib",
     "sourceMap": true,
     "inlineSources": true,
     "experimentalDecorators": true,

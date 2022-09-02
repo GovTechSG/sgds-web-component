@@ -18,3 +18,5 @@ export class ButtonElement extends LitElement {
     `;
   }
 }
+
+export default ButtonElement;

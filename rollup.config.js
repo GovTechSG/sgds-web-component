@@ -3,6 +3,48 @@ import resolve from "@rollup/plugin-node-resolve";
 import postcss from "rollup-plugin-postcss";
 import litcss from "rollup-plugin-postcss-lit";
 const packageJson = require("./package.json");
+import { getFolders } from './scripts/buildUtils';
+import generatePackageJson from 'rollup-plugin-generate-package-json';
+
+const plugins = [
+  resolve({
+    browser: true,
+  }),
+  postcss({
+    minimize: false,
+    inject: false,
+  }),
+  litcss(),
+  typescript({
+    useTsconfigDeclarationDir: true,
+  }),
+]
+const subfolderPlugins = (folderName) => [
+  ...plugins,
+  generatePackageJson({
+    baseContents: {
+      name: `${packageJson.name}/${folderName}`,
+      private: true,
+      main: '../umd/index.js',
+      module: './index.js',
+      types: './index.d.ts',
+    },
+  }),
+];
+const folderBuilds = getFolders('./src').map((folder) => {
+  return {
+    input: `src/${folder}/index.ts`,
+    output: [
+      {
+      file: `lib/${folder}/index.js`,
+      sourcemap: true,
+      exports: 'named',
+      format: 'esm',
+      }
+    ],
+    plugins: subfolderPlugins(folder),
+  };
+});
 
 export default [
   {
@@ -10,20 +52,17 @@ export default [
     output: [
       {
         file: packageJson.module,
-        format: "es",
+        format: "esm",
         sourcemap: true,
       },
+      {
+        file: packageJson.main,
+        format: "umd",
+        sourcemap: true,
+        name: "index"
+      },
     ],
-    plugins: [
-      resolve({
-        browser: true,
-      }),
-      typescript(),
-      postcss({
-        minimize: false,
-        inject: false,
-      }),
-      litcss(),
-    ],
-  }
+    plugins
+  },
+  ...folderBuilds
 ];

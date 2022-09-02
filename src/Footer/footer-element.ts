@@ -117,3 +117,5 @@ export class FooterElement extends LitElement {
     `;
   }
 }
+
+export default FooterElement;

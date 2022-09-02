@@ -1,6 +1,5 @@
 import { Story, Meta } from '@storybook/web-components';
-import  '../lib'
-import {  TemplateResult } from 'lit';
+import '../lib/Button'
 import {html } from 'lit'
 
 export default {
