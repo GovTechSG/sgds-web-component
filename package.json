@@ -12,7 +12,7 @@
     "serve": "wds --watch --open",
     "test": "rm -rf test-outdir && rollup --config rollup.test.config.js && web-test-runner",
     "storybook": "npm run build && start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "build-storybook": "rm -rf lib && npm run build && build-storybook",
     "prepare": "husky install"
   },
   "author": "",
