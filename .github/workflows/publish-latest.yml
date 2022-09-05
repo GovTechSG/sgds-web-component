@@ -15,8 +15,8 @@ jobs:
           node-version: 14
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
-      - run: npm run ci:test
-      - run: npm run build
+      - run: npm run test
+      - run: npm run build:lib
       - run: npm publish --tag latest ./lib --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
