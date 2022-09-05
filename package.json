@@ -1,6 +1,6 @@
 {
   "name": "@govtechsg/sgds-web-component",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "",
   "main": "lib/umd/index.js",
   "module": "lib/index.js",
@@ -8,7 +8,7 @@
   "scripts": {
     "build": "rm -rf lib && rollup --config rollup.config.js",
     "post:build": "node ./scripts/frankBuild.js",
-    "build:lib": "npm run build && npm run post:build", 
+    "build:lib": "npm run build && npm run post:build",
     "build:watch": "npm run build -- --watch",
     "dev": "npm run build:watch & npm run serve",
     "serve": "wds --watch --open",
