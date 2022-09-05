@@ -2,7 +2,7 @@
 const { resolve, join, basename } = require('path');
 const { readFile, writeFile, copy } = require('fs-extra');
 const packagePath = process.cwd();
-const distPath = join(packagePath, './dist');
+const distPath = join(packagePath, './lib');
 
 const writeJson = (targetPath, obj) =>
   writeFile(targetPath, JSON.stringify(obj, null, 2), 'utf8');
@@ -18,7 +18,7 @@ async function createPackageFile() {
     ...packageOthers,
     private: false,
     typings: './index.d.ts',
-    main: './cjs/index.js',
+    main: './umd/index.js',
     module: './index.js',
   };
 

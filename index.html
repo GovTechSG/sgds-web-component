@@ -4,7 +4,8 @@
 <head>
     <script src="lib/index.js"></script>
     <link href='https://designsystem.gov.sg/css/sgds.css' rel='stylesheet' type='text/css' />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel='stylesheet' type='text/css' />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel='stylesheet'
+        type='text/css' />
     <style>
         col-element {
             border: 1px red solid;
@@ -17,13 +18,26 @@
         * {
             font-family: "bootstrap-icons", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         }
+
+        footer-element::theme(footer-container) {
+            border: 1px red solid;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        button-element{
+            flex: 1;
+        }
     </style>
 </head>
 
 <body>
     <button-element>Hello World</button-element>
-    <footer-element class="fixed-bottom" description="this is a prop description"
-        title="Singapore Government Design System" lastUpdatedDate="08 Feb 2022" links='[
+    <footer-element description="this is a prop description" title="Singapore Government Design System"
+        lastUpdatedDate="08 Feb 2022" links='[
         {
             "title": "Column 1",
             "links" : [
