@@ -3,39 +3,35 @@
 
 <head>
     <script src="lib/index.js"></script>
-    <link href='https://designsystem.gov.sg/css/sgds.css' rel='stylesheet' type='text/css' />
+    <link href='node_modules/clk-styletest/css/sgds.containers.css' rel='stylesheet' type='text/css' />
+    <link href='node_modules/clk-styletest/css/sgds.helpers.css' rel='stylesheet' type='text/css' />
+    <link href='node_modules/clk-styletest/css/sgds.grid.css' rel='stylesheet' type='text/css' />
+    <link href='node_modules/clk-styletest/css/sgds.positions.css' rel='stylesheet' type='text/css' />
+    <link href='node_modules/clk-styletest/css/sgds.css' rel='stylesheet' type='text/css' />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel='stylesheet'
         type='text/css' />
     <style>
-        col-element {
-            border: 1px red solid;
-        }
-
-        container-element {
-            border: 1px blue solid;
-        }
-
         * {
             font-family: "bootstrap-icons", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         }
 
-        footer-element::theme(footer-container) {
-            border: 1px red solid;
+        footer-element::part(footer-bottom) {
+           background-color: red;
         }
 
-        body {
+        /* body {
             display: flex;
             min-height: 100vh;
             flex-direction: column;
         }
         button-element{
             flex: 1;
-        }
+        } */
     </style>
 </head>
 
-<body>
-    <button-element>Hello World</button-element>
+<body class="d-flex flex-column min-vh-100">
+    <button-element class="flex-grow-1">Hello World</button-element>
     <footer-element description="this is a prop description" title="Singapore Government Design System"
         lastUpdatedDate="08 Feb 2022" links='[
         {
@@ -124,6 +120,27 @@
         },
         {
             "title": "Column 5",
+            "links" : [
+                {
+                    "href": "#1",
+                    "label": "About Us"
+                },
+                {
+                    "href": "#2",
+                    "label": "This is a super long link"
+                },
+                {
+                    "href": "#3",
+                    "label": "Test"
+                },
+                {
+                    "href": "#4",
+                    "label": "Test"
+                }
+            ]
+        },
+        {
+            "title": "Column 6",
             "links" : [
                 {
                     "href": "#1",

@@ -18,7 +18,7 @@ export class FooterElement extends LitElement {
   @property()
   description = ``;
   @property({
-    type: Array
+    type: Array,
   })
   links: ColumnLinks[] = [];
 
@@ -37,11 +37,10 @@ export class FooterElement extends LitElement {
   @property({ type: String })
   termsOfUseHref = "#";
   
-
   render() {
     return html`
       <footer class="sgds footer">
-        <section class="footer-top">
+        <section class="footer-top" part="footer-top">
           <div class="container-fluid">
             <div class="row footer-header">
               <div class="col col-lg-6 col-md-12">
@@ -86,7 +85,7 @@ export class FooterElement extends LitElement {
             </div>
           </div>
         </section>
-        <section class="footer-bottom">
+        <section class="footer-bottom" part="footer-bottom">
           <div class="container-fluid">
             <div class="row footer-mandatory-links">
               <div class="col">

@@ -14,7 +14,7 @@ describe("button-element", () => {
       el,
       `
           <footer class="sgds footer">
-          <section class="footer-top">
+          <section class="footer-top" part="footer-top">
             <div class="container-fluid">
               <div class="row footer-header">
                 <div class="col col-lg-6 col-md-12">
@@ -44,7 +44,7 @@ describe("button-element", () => {
               </div>
             </div>
           </section>
-          <section class="footer-bottom">
+          <section class="footer-bottom" part="footer-bottom">
             <div class="container-fluid">
               <div class="row footer-mandatory-links">
                 <div class="col">

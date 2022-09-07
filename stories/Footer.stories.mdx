@@ -3,21 +3,28 @@ import { html } from "lit";
 import { withWebComponentsKnobs } from "storybook-addon-web-components-knobs";
 import { withKnobs, text, number } from "@storybook/addon-knobs";
 import { FooterElement, LinksArray } from "../lib/Footer";
+import { partDescription } from "./common";
 
 <Meta
   title="Components/Footer"
   component={FooterElement}
   argTypes={{
-    title: { control: "text", description: "Sets title of FooterElement" },
+    title: {
+      control: "text",
+      description: "Sets title of FooterElement",
+      table: { category: "props" },
+    },
     description: {
       control: "text",
       description: "Sets description of FooterElement",
+      table: { category: "props" },
     },
     links: {
       control: "object",
       description: "Array of type `ColumnLinks`",
       table: {
         defaultValue: "[]",
+        category: "props",
         type: {
           summary: `
     interface ColumnLinks {
@@ -35,17 +42,40 @@ import { FooterElement, LinksArray } from "../lib/Footer";
     lastUpdatedDate: {
       control: "text",
       description: "String date for last updated date",
+      table: { category: "props" },
     },
-    contactHref: { control: "text", description: "href link for contacts" },
-    feedbackHref: { control: "text", description: "href link for feedback" },
+    contactHref: {
+      control: "text",
+      description: "href link for contacts",
+      table: { category: "props" },
+    },
+    feedbackHref: {
+      control: "text",
+      description: "href link for feedback",
+      table: { category: "props" },
+    },
     vulnerabilityHref: {
       control: "text",
       description: "href link for vulnerability",
+      table: { category: "props" },
     },
-    privacyHref: { control: "text", description: "href link for privacy" },
+    privacyHref: {
+      control: "text",
+      description: "href link for privacy",
+      table: { category: "props" },
+    },
     termsOfUseHref: {
       control: "text",
       description: "href link for terms of use",
+      table: { category: "props" },
+    },
+    "footer-top": {
+      table: { category: "part" },
+      description: partDescription,
+    },
+    "footer-bottom": {
+      table: { category: "part" },
+      description: partDescription,
     },
   }}
 />
@@ -225,11 +255,10 @@ export const Template = ({
   </Story>
 </Canvas>
 
-## API 
+## API
 
 ```jsx
-import { FooterElement, ColumnLinks } from '@govtechsg/sgds-web-component';
+import { FooterElement, ColumnLinks } from "@govtechsg/sgds-web-component";
 ```
 
 <ArgsTable story="Basic" />
-
