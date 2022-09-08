@@ -20,6 +20,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.9.1",
     "clk-styletest": "^2.0.9",
     "lit": "^2.3.1"
