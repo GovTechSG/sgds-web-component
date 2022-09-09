@@ -36,7 +36,13 @@
         <br />
         <sidenav-element class="mt-3" id="test-id">
             <sidenav-item menuLinks='[{"href": "#1", "itemName": "first-item"},
-                {"href": "#2", "itemName": "second-item"}]'>
+                {"href": "#2", "itemName": "second-item"}]' parentId="test-id" visible>
+                <span slot="title">Test Button</span>
+                <!-- <sidenav-button>test button</sidenav-button> -->
+
+            </sidenav-item>
+            <sidenav-item menuLinks='[{"href": "#1", "itemName": "first-item"},
+                {"href": "#2", "itemName": "second-item"}]' parentId="test-id" >
                 <span slot="title">Test Button</span>
                 <!-- <sidenav-button>test button</sidenav-button> -->
 

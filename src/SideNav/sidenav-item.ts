@@ -29,10 +29,10 @@ export class SideNavItem extends LitElement {
   alwaysOpen = false;
 
   @property({ type: Boolean })
-  visible = false; //visible on first load?
+  visible = false//visible on first load?
 
-  @state()
-  private show = this.visible;
+  // @state()
+  // private show = this.visible;
 
   @property({ type: String })
   parentId = "";
@@ -41,37 +41,41 @@ export class SideNavItem extends LitElement {
   menuLinks: MenuLink[] = [];
 
   onClick() {
-    this.show ? this.bsCollapse.hide() : this.bsCollapse.show();
+    this.bsCollapse.toggle()
   }
 
   firstUpdated() {
     console.log("in firstupdated");
-    this.bsCollapse = new Collapse(this.myCollapse.value);
+    this.bsCollapse = new Collapse(this.myCollapse.value, {
+      parent: `#parentId`,
+      toggle: this.visible,
+    });
     this.myCollapse.value.addEventListener("show.bs.collapse", () => {
       console.log("show.bs.collapse");
-      this.show = true;
-      this.active = true;
+      // this.show = true;
+      // this.active = true;
     });
     this.myCollapse.value.addEventListener("shown.bs.collapse", () => {
       console.log("shown.bs.collapse");
-      console.log(this.show)
-      this.show = true
+      // console.log(this.show);
+      // this.show = true;
     });
     this.myCollapse.value.addEventListener("hide.bs.collapse", () => {
       console.log("hide.bs.collapse");
-      this.show = false;
-      this.active = false;
+        // this.show = false;
+        // this.active = false;
     });
     this.myCollapse.value.addEventListener("hidden.bs.collapse", () => {
       console.log("hidden.bs.collapse");
-      this.show = false
-      console.log(this.show)
+      // this.show = false;
+      // console.log(this.show);
     });
   }
 
   render() {
-    console.log("in render", this.show);
+    // console.log("in render", this.show);
     return html`
+          <!-- <nav class="sidenav accordion" id="parentId"> -->
       <li class="sidenav-item">
         <button
           @click=${(e) => this.onClick()}
@@ -81,9 +85,8 @@ export class SideNavItem extends LitElement {
           <i class="bi bi-chevron-down"></i>
         </button>
         <div
-        class=""
+          class="collapse"
           ${ref(this.myCollapse)}
-          data-bs-parent="${this.parentId || null}"
         >
           <ul class="sidenav-list">
             ${this.menuLinks.map(
@@ -94,8 +97,17 @@ export class SideNavItem extends LitElement {
               `
             )}
           </ul>
+          <!-- <ul class="sidenav-list">
+            <li>
+              <a href="#" class="nav-link">test</a>
+            </li>
+            <li>
+              <a href="#" class="nav-link">test</a>
+            </li>
+          </ul> -->
         </div>
       </li>
+            <!-- </nav> -->
     `;
   }
 }

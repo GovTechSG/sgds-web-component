@@ -9,6 +9,15 @@
 @import "~clk-styletest/sass/accordion";
 
 
+.sidenav {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 1rem;
+    width: auto;
+    font-size: 1rem;
+}
+
 
 .sidenav-btn {
   width: 100%;

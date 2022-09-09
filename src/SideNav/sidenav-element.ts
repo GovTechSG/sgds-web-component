@@ -13,11 +13,14 @@ export class SideNavElement extends LitElement {
     super();
   }
 
+ 
+
 
   render() {
+    const id = 'test-id'
     return html`
-      <nav class="sidenav accordion">
-        <slot></slot>
+      <nav class="sidenav accordion" id="${id}">
+     <slot></slot>
       </nav>
     `;
   }
