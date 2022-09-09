@@ -32,32 +32,20 @@
 
 <body class="d-flex flex-column min-vh-100 ">
     <div class="container">
-        <!-- <nav-element></nav-element> -->
         <br />
-        <sidenav-element class="mt-3" id="test-id">
+        <!-- <sidenav-element class="mt-3" id="test-id"> -->
             <sidenav-item menuLinks='[{"href": "#1", "itemName": "first-item"},
-                {"href": "#2", "itemName": "second-item"}]' parentId="test-id" visible>
+                {"href": "#2", "itemName": "second-item"}]' visible id="sidenav1" collapseId="collapseOne">
                 <span slot="title">Test Button</span>
-                <!-- <sidenav-button>test button</sidenav-button> -->
-
-            </sidenav-item>
-            <sidenav-item menuLinks='[{"href": "#1", "itemName": "first-item"},
-                {"href": "#2", "itemName": "second-item"}]' parentId="test-id" >
-                <span slot="title">Test Button</span>
-                <!-- <sidenav-button>test button</sidenav-button> -->
 
             </sidenav-item>
             <!-- <sidenav-item menuLinks='[{"href": "#1", "itemName": "first-item"},
-                {"href": "#2", "itemName": "second-item"}]'>
-                <span slot="title">Test Button</span>
-
-            </sidenav-item>
-            <sidenav-item>
+                {"href": "#2", "itemName": "second-item"}]' visible id="sidenav2" collapseId="collapseTwo">
                 <span slot="title">Test Button</span>
 
             </sidenav-item> -->
 
-        </sidenav-element>
+        <!-- </sidenav-element> -->
         <br />
         <button-element class="flex-grow-1">Hello World</button-element>
     </div>

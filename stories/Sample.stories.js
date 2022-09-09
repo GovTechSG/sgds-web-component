@@ -11,11 +11,14 @@ export default {
     },
   };
 
-  const Template = ({variant, classes}) => html`
-  <button-element .variant=${variant} .classes=${classes}>
-    Blaze it
-  </button-element>
-  `;
+  const Template = ({variant, classes}) => {
+
+    return  html`
+    <button-element .variant=${variant} .classes=${classes}>
+      Blaze it
+    </button-element>
+    `;
+  }
 
 
   export const Primary = Template.bind({})

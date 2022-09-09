@@ -1,0 +1,49 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit";
+import { withWebComponentsKnobs } from "storybook-addon-web-components-knobs";
+import { withKnobs, text, number } from "@storybook/addon-knobs";
+import { SideNavElement, SideNavItem } from "../lib/SideNav";
+import { partDescription } from "./common";
+
+<Meta title="Components/SideNav" component={SideNavElement} />
+
+export const Template = ({}) => {
+// document.addEventListener('active.sidenav', (e) => {
+//         console.log('i heard the active', e.detail.activeTarget)
+//     document.getElementById(e.detail.activeTarget).setAttribute("visible", true)
+// })
+  return html`
+    <sidenav-element>
+      <sidenav-item
+        menuLinks='[{"href": "#1", "itemName": "first-item"},
+                {"href": "#2", "itemName": "second-item"}]'
+        id="sidenav1"
+        collapseId="collapseOne"
+      >
+        <span slot="title">Test Button</span>
+      </sidenav-item>
+      <sidenav-item
+        menuLinks='[{"href": "#1", "itemName": "first-item"},
+                {"href": "#2", "itemName": "second-item"}]'
+        id="sidenav2"
+        collapseId="collapseTwo"
+      >
+        <span slot="title">Test Button</span>
+      </sidenav-item>
+    </sidenav-element>
+  `;
+};
+
+# FooterElement
+
+<Canvas>
+  <Story name="Basic">{Template.bind({})}</Story>
+</Canvas>
+
+## API
+
+```jsx
+import { FooterElement, ColumnLinks } from "@govtechsg/sgds-web-component";
+```
+
+<ArgsTable story="Basic" />
