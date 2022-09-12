@@ -2,7 +2,7 @@ import { LitElement, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import styles from "./footer.scss";
 
-type Links = {
+export type Links = {
   href: string;
   label: string;
 }
