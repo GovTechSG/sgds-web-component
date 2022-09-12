@@ -2,16 +2,24 @@
 @import "~clk-styletest/sass/containers";
 @import "~clk-styletest/sass/grid";
 
+
 .sgds-masthead{
     font-size: 0.875rem;
-    background-color: var(--sgds-masthead-background-color);
+    background-color: hsl(0, 0%, 94%);
     font-family: var(--sgds-masthead-font-family);
-    color: var(--sgds-masthead-text-color);
+    color: hsl(0, 0%, 28%);
+    @media screen and (max-width: 1023px){
+        font-size: var(--sgds-masthead-mobile-font-size);
+        .container, .col{
+            padding-left:0;
+            padding-right: 0;
+        }
+    }
 }
 
 .sg-crest {
-    width: 20px;
-    height: 28px;
+    width: 1.25rem;
+    height: 1.75rem;
     path{
         fill: var(--sgds-masthead-crest-color);
     }
@@ -19,43 +27,74 @@
 
 .masthead-layout{
     display: flex;
+    align-items: center;
     gap: 0.25rem;
 }
 
 .row{
     padding-top:0.1rem;
     padding-bottom: 0.1rem;
+    @media screen and (max-width: 1023px) {
+        padding-left: var(--sgds-masthead-tablet-padding-x);
+        padding-right: var(--sgds-masthead-tablet-padding-x);
+    }
 }
 
 .sgds-masthead-identify-icon {
-    width: 12px;
-    height: 21px;
+    width: 0.6rem;
+    height: 1.3125rem;
     display: block;
     transform: rotate(0deg);
     user-select: none;
     transition: all 0.3s ease-in-out 0s;
     align-self: center;
+    &.open{
+        transform: rotate(180deg);
+    }
 }
 
 .sgds-masthead-button {
     display: flex;
-    color: var(--sgds-info);
+    color: var(--sgds-masthead-link-color);
     cursor: pointer;
     &-text{
         text-decoration: underline;
+        &:hover{
+            color: var(--sgds-masthead-link-hover-color);
+        }
     }
 }
 
 .sgds-masthead-content{
     padding-top: 2.5rem;
     padding-bottom: 3rem;
+    display: none;
+    @media screen and (max-width: 1023px) {
+        padding-top: 1rem;
+        padding-bottom: 2rem;
+    }
     .content-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 10rem;
+        @media screen and (max-width: 1023px){
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            .banner-icon-inline {
+                width: 0.6rem;
+                height: 0.6rem;
+                margin-bottom: 0.1875rem;
+            }
+        }
+        .icon{
+            line-height: 1.5rem;
+            @media screen and (max-width: 1023px){
+                line-height: 1.25rem;
+            }
+        }
     }
     
-    .column-wrapper {
+    .wrapper {
         display: flex;
         gap: 1rem;
         font-size: 1rem;
@@ -63,33 +102,65 @@
             .title {
                 font-weight: 600;
                 margin-bottom: 0.5rem;
+                @media screen and (max-width: 1023px) {
+                    margin-bottom: 0.25rem;
+                }
             }
             article{
                 line-height: 1.5rem;
             }
         }
         .banner-icon{
-            width: 18px;
+            width: 1.125rem;
+            @media screen and (max-width: 1023px) {
+                width: 0.75rem;
+            }
+            svg{
+                line-height: 1.5rem;
+                @media screen and (max-width: 1023px) {
+                    width: 1.25rem;
+                }
+            }
+        }
+        @media screen and (max-width: 1023px){
+            font-size: var(--sgds-masthead-tablet-font-size);
+            gap: 0.5rem;
         }
     }
-    
-}
 
-
-a[target="_blank"]::after {
-    content: none;
-    
+    &.open{
+        display: block;
+    }
 }
 
 a[target="_blank"]{
     text-decoration: none;
+    &::after{
+        content: none;
+    }
 }
 
-.sgds-masthead-content .column-wrapper .content article {
-    line-height: 1.5rem;
+
+a.trusted-websites-link{
+    display: inline-flex;
+    align-items: center;
+    color: var(--sgds-masthead-link-color);
+    margin-left: 0.125rem;
+    svg{
+        margin-left: 0.125rem;
+        fill: var(--sgds-masthead-link-color);
+    }
+    &:hover{
+        color: var(--sgds-masthead-link-hover-color); 
+        svg{
+            fill: var(--sgds-masthead-link-hover-color); 
+        }
+    }
 }
 
-.trusted-websites-link{
-    fill: var(--sgds-masthead-link-color);
-    margin-left: 2px;
+@media screen and (max-width: 1023px){
+    .trusted-websites-icon{
+        width:0.75rem;
+    }
 }
+
