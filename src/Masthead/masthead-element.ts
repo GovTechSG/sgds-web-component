@@ -1,9 +1,9 @@
 import { LitElement, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import styles from "./masthead.scss";
 
 /**
- * @property fluid - Add fluid attribute for full width container
+ * @property fluid - Include this attribute for full width container
  */
 
 @customElement("masthead-element")
@@ -12,6 +12,14 @@ export class MastheadElement extends LitElement {
 
   @property({ type: Boolean, reflect: true })
   fluid: boolean = false;
+
+  @state()
+  toggleVisibility = false;
+
+  private _toggleVisibility() {
+    this.toggleVisibility = !this.toggleVisibility;
+  }
+
 
   render() {
     return html`
@@ -57,11 +65,12 @@ export class MastheadElement extends LitElement {
                   class="sgds-masthead-button"
                   id="sgds-masthead-identify"
                   role="button"
-                  aria-expanded="false"
+                  aria-expanded="${this.toggleVisibility}"
                   aria-controls="sgds-masthead-content"
+                  @click=${() => this._toggleVisibility()}
 
                 >
-                  <span class="is-text sgds-masthead-button-text"
+                  <span class="sgds-masthead-button-text"
                     >How to identify</span
                   >
                   <svg
@@ -70,7 +79,7 @@ export class MastheadElement extends LitElement {
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
-                    class="sgds-masthead-identify-icon open"
+                    class="sgds-masthead-identify-icon ${!this.toggleVisibility ? "open" : null}"
                   >
                     <path
                       d="M8.65188 6.85L8.64813 6.84625L10.0031 5.49125L17.0744 12.5625L15.7194 13.9175L10.0075 8.20562L4.2875 13.9256L2.9325 12.5706L8.6525 6.85062L8.65188 6.85Z"
@@ -83,11 +92,11 @@ export class MastheadElement extends LitElement {
           </div>
         </div>
 
-        <div id="sgds-masthead-content" class="container sgds-masthead-content">
+        <div id="sgds-masthead-content" class="container sgds-masthead-content ${this.toggleVisibility ? "open" : null }">
           <div class="row">
             <div class="col">
               <div class="content-grid">
-                <div class="column-wrapper">
+                <div class="wrapper">
                   <div class="icon">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +142,7 @@ export class MastheadElement extends LitElement {
                     </article>
                   </div>
                 </div>
-                <div class="column-wrapper">
+                <div class="wrapper">
                   <div class="icon">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
