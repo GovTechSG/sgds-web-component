@@ -11,31 +11,18 @@ import { useState } from 'react';
 <Meta title="Components/SideNav" component={SideNavElement} />
 
 export const Template = ({}) => {
-   function  _click () {
-        console.log('hello')
-    }
-// document.addEventListener('active.sidenav', (e) => {
-//         console.log('i heard the active', e.detail.activeTarget)
-//     document.getElementById(e.detail.activeTarget).setAttribute("visible", true)
-// })
   return html`
-    <sidenav-element @click=${_click}>
-      <sidenav-item
-        menuLinks='[{"href": "#1", "itemName": "first-item"},
-                {"href": "#2", "itemName": "second-item"}]'
-        id="sidenav1"
-        collapseId="collapseOne"
-      >
-        <span slot="title">Test Button</span>
-      </sidenav-item>
-      <sidenav-item
-        menuLinks='[{"href": "#1", "itemName": "first-item"},
-                {"href": "#2", "itemName": "second-item"}]'
-        id="sidenav2"
-        collapseId="collapseTwo"
-      >
-        <span slot="title">Test Button</span>
-      </sidenav-item>
+    <sidenav-element id="test-id">
+         <sidenav-item visible id="sidenav1" collapseId="collapseOne" title="Test title 1">
+                <sidenav-link href="#" active>first-test</sidenav-link>
+                <sidenav-link href="#" >first-test</sidenav-link>
+                <sidenav-link href="#" >first-test</sidenav-link>
+            </sidenav-item>
+            <sidenav-item id="sidenav2" collapseId="collapseTwo" title="Test title 2">
+                <sidenav-link href="#">first-test</sidenav-link>
+                <sidenav-link href="#" >first-test</sidenav-link>
+                <sidenav-link href="#" >first-test</sidenav-link>
+            </sidenav-item>
     </sidenav-element>
   `;
 };

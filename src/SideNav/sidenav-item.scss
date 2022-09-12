@@ -52,20 +52,3 @@
 .collapsing {
   margin-top: $sidenav-item-spacing;
 }
-
-a.nav-link {
-  color: inherit;
-  font-size: inherit;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: calc(
-    #{$sidenav-item-spacing * 4} + #{$sidenav-btn-border-width}
-  );
-  padding-right: 0;
-  text-decoration: none;
-
-  &.active,
-  &:hover {
-    color: $sidenav-color;
-  }
-}
