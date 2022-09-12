@@ -4,16 +4,22 @@ import { withWebComponentsKnobs } from "storybook-addon-web-components-knobs";
 import { withKnobs, text, number } from "@storybook/addon-knobs";
 import { SideNavElement, SideNavItem } from "../lib/SideNav";
 import { partDescription } from "./common";
+import { useState } from 'react';
+
+
 
 <Meta title="Components/SideNav" component={SideNavElement} />
 
 export const Template = ({}) => {
+   function  _click () {
+        console.log('hello')
+    }
 // document.addEventListener('active.sidenav', (e) => {
 //         console.log('i heard the active', e.detail.activeTarget)
 //     document.getElementById(e.detail.activeTarget).setAttribute("visible", true)
 // })
   return html`
-    <sidenav-element>
+    <sidenav-element @click=${_click}>
       <sidenav-item
         menuLinks='[{"href": "#1", "itemName": "first-item"},
                 {"href": "#2", "itemName": "second-item"}]'

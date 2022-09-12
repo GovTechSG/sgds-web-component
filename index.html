@@ -33,24 +33,23 @@
 <body class="d-flex flex-column min-vh-100 ">
     <div class="container">
         <br />
-        <!-- <sidenav-element class="mt-3" id="test-id"> -->
-            <sidenav-item menuLinks='[{"href": "#1", "itemName": "first-item"},
+        <sidenav-element class="mt-3" id="test-id">
+            <sidenav-item menuLinks='[{"href": "#1", "itemName": "first-item", "active": true},
                 {"href": "#2", "itemName": "second-item"}]' visible id="sidenav1" collapseId="collapseOne">
-                <span slot="title">Test Button</span>
+                <span slot="title">Test Button 1</span>
 
             </sidenav-item>
-            <!-- <sidenav-item menuLinks='[{"href": "#1", "itemName": "first-item"},
-                {"href": "#2", "itemName": "second-item"}]' visible id="sidenav2" collapseId="collapseTwo">
-                <span slot="title">Test Button</span>
+            <sidenav-item menuLinks='[{"href": "#1", "itemName": "first-item"},
+                {"href": "#2", "itemName": "second-item"}]' id="sidenav2" collapseId="collapseTwo">
+                <span slot="title">Test Button 2</span>
 
-            </sidenav-item> -->
-
-        <!-- </sidenav-element> -->
+            </sidenav-item>
+        </sidenav-element>
         <br />
         <button-element class="flex-grow-1">Hello World</button-element>
     </div>
 
-    <footer-element description="this is a prop description" title="Singapore Government Design System"
+    <footer-dcds description="this is a prop description" title="Singapore Government Design System"
         lastUpdatedDate="08 Feb 2022" links='[
         {
             "title": "Column 1",
@@ -200,7 +199,7 @@
             ]
         }
       ]'>
-    </footer-element>
+    </footer-dcds>
 
 </body>
 

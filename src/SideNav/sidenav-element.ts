@@ -10,25 +10,31 @@ export class SideNavElement extends LitElement {
   static styles = styles;
 
   @state()
-  activeKey = ''
+  activeKey = "";
+
+  @state()
+  activeLinkKey = ""
 
   constructor() {
     super();
-    this.addEventListener('active.sidenav', (e: CustomEvent) => {
-        console.log('i heard the active', e.detail.activeTarget)
-        this.activeKey = e.detail.activeTarget
+    this.addEventListener("active.sidenav", (e: CustomEvent) => {
+      console.log("i heard the active", e.detail.activeTarget);
+      this.activeKey = e.detail.activeTarget;
+    });
+
+    this.addEventListener("active.link.key", (e: CustomEvent) => {
+        this.activeLinkKey = e.detail.activeLinkKey
     })
   }
 
-    firstUpdated() {
-      console.log(this.shadowRoot)
+  firstUpdated() {
+    console.log(this.shadowRoot);
   }
-
 
   render() {
     return html`
-      <nav class="sidenav accordion" id="test-id">
-     <slot></slot>
+      <nav class="sidenav" id="test-id">
+        <slot></slot>
       </nav>
     `;
   }

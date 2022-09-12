@@ -7,6 +7,7 @@ import { Collapse } from "bootstrap";
 export interface MenuLink {
   itemName: string;
   href: string;
+  active?: boolean;
 }
 
 @customElement("sidenav-item")
@@ -15,8 +16,8 @@ export class SideNavItem extends LitElement {
 
   myCollapse: Ref<HTMLElement> = createRef();
   bsCollapse: Collapse;
-  my2Collapse: Ref<HTMLElement> = createRef();
-  bs2Collapse: Collapse;
+  // my2Collapse: Ref<HTMLElement> = createRef();
+  // bs2Collapse: Collapse;
 
   @property()
   eventKey = "";
@@ -39,9 +40,9 @@ export class SideNavItem extends LitElement {
   onClick() {
     this.bsCollapse.toggle();
   }
-  on2Click() {
-    this.bs2Collapse.toggle();
-  }
+  // on2Click() {
+  //   this.bs2Collapse.toggle();
+  // }
 
   firstUpdated() {
     // console.log("in firstupdated", this.parentElement.getRootNode());
@@ -50,22 +51,23 @@ export class SideNavItem extends LitElement {
       toggle: this.visible,
     });
 
-    this.bs2Collapse = new Collapse(this.my2Collapse.value, {
-      // parent: "#test-id",
-      toggle: this.visible
-    })
+    // this.bs2Collapse = new Collapse(this.my2Collapse.value, {
+    //   // parent: "#test-id",
+    //   toggle: this.visible
+    // })
 
     this.myCollapse.value.addEventListener("show.bs.collapse", () => {
       console.log("show.bs.collapse");
       // this.show = true;
       // this.active = true;
       //emit event if alwaysOpen is false
-      this.bs2Collapse.hide()
+      // this.bs2Collapse.hide()
     });
     this.myCollapse.value.addEventListener("shown.bs.collapse", () => {
       console.log("shown.bs.collapse");
       // console.log(this.show);
       // this.show = true;
+      this.active = true
       const options = {
         detail: { activeTarget: this.id },
         bubbles: true,
@@ -81,6 +83,7 @@ export class SideNavItem extends LitElement {
     this.myCollapse.value.addEventListener("hidden.bs.collapse", () => {
       console.log("hidden.bs.collapse");
       // this.show = false;
+      this.active = false
       // console.log(this.show);
     });
   }
@@ -96,9 +99,14 @@ export class SideNavItem extends LitElement {
       }
     });
   }
+  @state()
+  isActiveLink
+  activateLink (e: Event){
+    (e.target as HTMLElement).classList.add("active")
+    console.log(e.target as Element)
+  }
   render() {
     return html`
-      <nav class="sidenav accordion" id="test-id">
         <li class="sidenav-item">
           <button
             @click=${(e) => this.onClick()}
@@ -110,31 +118,15 @@ export class SideNavItem extends LitElement {
           <div class="collapse" ${ref(this.myCollapse)} id="${this.collapseId}">
             <ul class="sidenav-list">
               ${this.menuLinks.map(
-                (ml) => html`
+                (ml, idx) => html`
                   <li>
-                    <a href="${ml.href}" class="nav-link">${ml.itemName}</a>
+                    <a @click="${(e: Event) => this.activateLink(e)}" href="${ml.href}" class="nav-link ${ml.active ? "active": null}">${ml.itemName}</a>
                   </li>
                 `
               )}
             </ul>
           </div>
         </li>
-        <li class="sidenav-item">
-          <button
-            @click=${(e) => this.on2Click()}
-            class="collapsed sidenav-btn ${this.active ? "active" : null}"
-          >
-            second
-            <i class="bi bi-chevron-down"></i>
-          </button>
-          <div class="collapse" ${ref(this.my2Collapse)} id="${this.collapseId}">
-            <ul class="sidenav-list">
-              <li><a>go home</a></li>
-              <li><a>go home</a></li>
-            </ul>
-          </div>
-        </li>
-      </nav>
     `;
   }
 }
