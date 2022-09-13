@@ -1,15 +1,15 @@
 import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit";
 import { withWebComponentsKnobs } from "storybook-addon-web-components-knobs";
-import { withKnobs, text, number, radio } from "@storybook/addon-knobs";
-import { MastheadElement } from "../lib/Masthead";
+import { withKnobs, radio } from "@storybook/addon-knobs";
+import "../lib/Masthead";
 
 <Meta
   title="Components/Masthead"
-  component={MastheadElement}
   argTypes={{
     fluid: {
-      control: { type: 'boolean' }
+      control: { type: 'boolean' },
+      description: "Sets the container width:100% to all breakpoints",
     }
   }}
 />
@@ -23,13 +23,19 @@ export const Template = ({
 
 # MastheadElement
 
-This is the sample file for MDX
+All .gov.sg digital services shall adopt The Official Government Banner for every page in the digital service and be placed at the top of the page.
 
 <Canvas>
   <Story name="Basic" args={{ fluid : 'true' }}>
     {Template.bind({})}
   </Story>
 </Canvas>
+
+## API
+
+```jsx
+import { MastheadElement } from "@govtechsg/sgds-web-component";
+```
 
 <ArgsTable story="Basic" />
 

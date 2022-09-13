@@ -1,1 +1,1 @@
-import './masthead-element';
+export {MastheadElement} from './masthead-element';
