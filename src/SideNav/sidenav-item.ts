@@ -21,58 +21,54 @@ export class SideNavItem extends LitElement {
 
   private index = "-1";
 
-  /** when true, toggles the sidenav-item to open on first load. Sets the initial active state which controls the active css of the button.
+  /**  when true, toggles the sidenav-item to open on first load and set the active stylings.
+   *   If sidenav-item has a truthy href, it sets the active stylings to it.
    */
   @property({ type: Boolean })
-  visible = false;
-
-  @state()
-  active = this.visible;
-
-  @property({ type: String })
-  collapseId = "";
+  active = false;
 
   @property({ type: String })
   href = "";
 
-  _onClick() {
+  private _onClick() {
     const event = new CustomEvent("openEventOnClick", {
       bubbles: true,
       composed: true,
       detail: { index: this.index },
     });
-    this.dispatchEvent(event);   
+    this.dispatchEvent(event);
   }
-  _onClickButton () {
-    this._onClick()
+
+  private _onClickButton() {
+    this._onClick();
     if (this.bsCollapse) {
       this.bsCollapse.toggle();
     }
   }
-  _onClickLink () {
-    this._onClick()
-    this.active = true
+  private _onClickLink() {
+    this._onClick();
+    this.active = true;
   }
 
   /**
    * closeItem
    */
   public closeItem() {
-    this.active = false
+    this.active = false;
     if (this.bsCollapse) this.bsCollapse.hide();
   }
   /**
    * openItem
    */
   public openItem() {
-    this.active = true
+    this.active = true;
     if (this.bsCollapse) this.bsCollapse.show();
   }
 
-  async firstUpdated() {
+  firstUpdated() {
     if (!this.href) {
       this.bsCollapse = new Collapse(this.myCollapse.value, {
-        toggle: this.visible,
+        toggle: this.active,
       });
 
       this.myCollapse.value.addEventListener("show.bs.collapse", () => {
@@ -95,10 +91,22 @@ export class SideNavItem extends LitElement {
         @click=${() => this._onClickButton()}
         class="collapsed sidenav-btn ${this.active ? "active" : null}"
       >
-        ${this.title}
-        <i class="bi bi-chevron-down"></i>
+        <slot name="title"></slot>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-chevron-down"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+          />
+        </svg>
       </button>
-      <div class="collapse" ${ref(this.myCollapse)} id="${this.collapseId}">
+      <div class="collapse" ${ref(this.myCollapse)}>
         <ul class="sidenav-list">
           <slot></slot>
         </ul>
@@ -110,7 +118,7 @@ export class SideNavItem extends LitElement {
         @click=${() => this._onClickLink()}
         class="sidenav-btn ${this.active ? "active" : null}"
       >
-        ${this.title}
+      <slot name="title"></slot>
       </a>
     `;
     return html`
