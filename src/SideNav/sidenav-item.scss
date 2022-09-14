@@ -38,6 +38,12 @@
   }
 }
 
+a.sidenav-btn {
+  color: inherit;
+  text-decoration: none;
+}
+
+
 .sidenav-list {
   list-style: none;
   display: flex;
@@ -46,6 +52,7 @@
   padding-left: 0;
   margin: 0;
 }
+
 
 .collapse,
 .collapse.show,

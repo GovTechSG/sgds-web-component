@@ -1,6 +1,6 @@
 import { ButtonElement } from '../src/Button/button-element'
 import '../src/Button/button-element';
-import {fixture, assert} from '@open-wc/testing';
+import {fixture, assert, expect} from '@open-wc/testing';
 import {html} from 'lit';
 
 describe('button-element', () => {
