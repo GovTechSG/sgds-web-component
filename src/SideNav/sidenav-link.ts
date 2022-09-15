@@ -17,8 +17,7 @@ export class SideNavLink extends LitElement {
     return html`
       <li>
         <a href="${this.href}" class="nav-link ${this.active ? "active" : null}"
-          ><slot></slot
-        ></a>
+          ><slot></slot></a>
       </li>
     `;
   }

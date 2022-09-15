@@ -2,32 +2,145 @@ import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit";
 import { withWebComponentsKnobs } from "storybook-addon-web-components-knobs";
 import { withKnobs, text, number } from "@storybook/addon-knobs";
-import { SideNavElement, SideNavItem } from "../lib/SideNav";
+import "../lib/SideNav";
+import { SideNavItem, SideNavElement } from "../lib/SideNav";
 import { partDescription } from "./common";
-import { useState } from 'react';
+import { useState } from "react";
 
+<Meta
+  title="Components/SideNav"
+  argTypes={{
+    // SideNavElement
+    alwaysOpen: {
+      control: "boolean",
+      defaultValue: false,
+      description:
+        "Allow sidenav items to stay open when another item is opened",
+      table: {
+        category: "props: SideNavElement",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    default: {
+      description: "default slot for SideNavItem element",
+      table: {
+        category: "slot: SideNavElement",
+      },
+    },
+    //SideNavItem
+    active: {
+      control: "boolean",
+      description:
+        "when true, toggles the sidenav-item to open on first load and set the active stylings",
+      table: {
+        category: "props: SideNavItem",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    href: {
+      control: "text",
+      description:
+        "When defined, converts SideNavItem from a button element to an Anchor element",
+      table: {
+        defaultValue: { summary: "" },
+        category: "props",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    openItem: {
+      control: "disable",
+      description: "When invoked, opens the SideNavItem",
+      table: {
+        category: "methods: SideNavItem",
+        type: {
+          summary: "function",
+        },
+      },
+    },
+    closeItem: {
+      control: "disable",
+      description: "When invoked, closes the SideNavItem",
+      table: {
+        category: "methods: SideNavItem",
+        type: {
+          summary: "function",
+        },
+      },
+    },
+    defaultSNI: {
+      name: "default",
+      description: "default slot for SideNavLink element",
+      table: {
+        category: "slot: SideNavItem",
+      },
+    },
+    title: {
+      description:
+        "title slot for the content of SideNavItem's button / anchor element",
+      table: {
+        category: "slot: SideNavItem",
+      },
+    },
+    // SideNavLink
+    activeSNL: {
+      name: "active",
+      control: "boolean",
+      description: "When true, sets the active styling of SideNavLink",
+      table: { category: "props: SideNavLink" },
+    },
+    hrefSNL: {
+      name: "href",
+      control: "text",
+      description: "href link for SideNavLink",
+      table: { category: "props: SideNavLink" },
+    },
+    defaultSNL: {
+      name: "default",
+      description: "default slot for the title of SideNavLink",
+      table: {
+        category: "slot: SideNavLink",
+      },
+    },
+  }}
+/>
 
-
-<Meta title="Components/SideNav" component={SideNavElement} />
-
-export const Template = ({}) => {
+export const Template = ({ alwaysOpen, active, href, activeSNL, hrefSNL }) => {
   return html`
-    <sidenav-element id="test-id">
-         <sidenav-item visible id="sidenav1" collapseId="collapseOne" title="Test title 1">
-                <sidenav-link href="#" active>first-test</sidenav-link>
-                <sidenav-link href="#" >first-test</sidenav-link>
-                <sidenav-link href="#" >first-test</sidenav-link>
-            </sidenav-item>
-            <sidenav-item id="sidenav2" collapseId="collapseTwo" title="Test title 2">
-                <sidenav-link href="#">first-test</sidenav-link>
-                <sidenav-link href="#" >first-test</sidenav-link>
-                <sidenav-link href="#" >first-test</sidenav-link>
-            </sidenav-item>
+    <sidenav-element .alwaysOpen=${alwaysOpen}>
+      <sidenav-item .active=${active} .href=${href}>
+        <span slot="title"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code" viewBox="0 0 16 16">
+  <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z"/>
+</svg> SideNav Item #1 (control by Argstable) </span>
+        <sidenav-link .href=${hrefSNL} .active=${activeSNL}>sidenav-link (control by Argstable)</sidenav-link>
+        <sidenav-link href="#">sidenav-link</sidenav-link>
+        <sidenav-link href="#">sidenav-link</sidenav-link>
+      </sidenav-item>
+      <sidenav-item>
+        <span slot="title"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code" viewBox="0 0 16 16">
+  <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z"/>
+</svg></i>SideNav Item #2</span>
+        <sidenav-link href="#">sidenav-link</sidenav-link>
+        <sidenav-link href="#">sidenav-link</sidenav-link>
+        <sidenav-link href="#">sidenav-link</sidenav-link>
+      </sidenav-item>
+      <sidenav-item href="#">
+        <span slot="title"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code" viewBox="0 0 16 16">
+  <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z"/>
+</svg></i>SideNav Item #3</span>
+      </sidenav-item>
     </sidenav-element>
   `;
 };
 
-# FooterElement
+# SideNavElement, SideNavItem, SideNavLink
 
 <Canvas>
   <Story name="Basic">{Template.bind({})}</Story>
@@ -36,7 +149,31 @@ export const Template = ({}) => {
 ## API
 
 ```jsx
-import { FooterElement, ColumnLinks } from "@govtechsg/sgds-web-component";
+import {
+  SideNavElement,
+  SideNavLink,
+  SideNavItem,
+} from "@govtechsg/sgds-web-component/SideNav";
 ```
 
 <ArgsTable story="Basic" />
+
+
+## SideNavItem methods 
+
+ `openItem()` and  `closeItem()` are public methods exposed by SideNavItem component for user to customize the opening and closing of SideNavItems when required.
+
+  ```jsx
+  // class method 
+
+  const sideNavItem = new SideNavItem()
+  sideNavItem.openItem()
+  sideNavItem.closeItem()
+  
+  //dom method 
+
+  const sideNavItemEl = document.querySelector("sidenav-item#specificId")
+  sideNavItemEl.openItem()
+  sideNavItemEl.closeItem()
+  
+  ```

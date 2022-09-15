@@ -16,8 +16,8 @@ export class SideNavItem extends LitElement {
   @property()
   title = "";
 
-  /**  when true, toggles the sidenav-item to open on first load and set the active stylings.
-   *   If sidenav-item has a truthy href, it sets the active stylings to it.
+  /**  when true, toggles the sidenav-item to open on first load and 
+   * set the active stylings.
    */
   @property({ type: Boolean })
   active = false;

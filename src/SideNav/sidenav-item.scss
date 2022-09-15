@@ -56,3 +56,9 @@ a.sidenav-btn {
 .collapsing {
   margin-top: $sidenav-item-spacing;
 }
+
+::slotted(*[slot="title"]) {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
