@@ -1,8 +1,7 @@
-import { LitElement, html, PropertyDeclaration } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { LitElement, html } from "lit";
+import { customElement, property } from "lit/decorators.js";
 import styles from "./sidenav-link.scss";
-import { ref, createRef, Ref } from "lit/directives/ref.js";
-import { Collapse } from "bootstrap";
+
 
 @customElement("sidenav-link")
 export class SideNavLink extends LitElement {

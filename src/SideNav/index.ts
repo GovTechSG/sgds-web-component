@@ -1,3 +1,4 @@
-import './sidenav-element'
-import './sidenav-item'
-import './sidenav-link'
+
+export { SideNavElement } from "./sidenav-element";
+export { SideNavItem } from "./sidenav-item";
+export { SideNavLink } from "./sidenav-link";

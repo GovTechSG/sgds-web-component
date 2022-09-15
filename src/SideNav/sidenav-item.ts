@@ -1,14 +1,11 @@
-import { LitElement, html, PropertyDeclaration } from "lit";
+import { LitElement, html } from "lit";
 import {
   customElement,
   property,
-  state,
-  queryAssignedElements,
 } from "lit/decorators.js";
 import styles from "./sidenav-item.scss";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { Collapse } from "bootstrap";
-import "./sidenav-link";
 @customElement("sidenav-item")
 export class SideNavItem extends LitElement {
   static styles = styles;
@@ -19,8 +16,6 @@ export class SideNavItem extends LitElement {
   @property()
   title = "";
 
-  private index = "-1";
-
   /**  when true, toggles the sidenav-item to open on first load and set the active stylings.
    *   If sidenav-item has a truthy href, it sets the active stylings to it.
    */
@@ -29,6 +24,8 @@ export class SideNavItem extends LitElement {
 
   @property({ type: String })
   href = "";
+
+  private index = "-1";
 
   private _onClick() {
     const event = new CustomEvent("openEventOnClick", {
