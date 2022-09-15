@@ -10,7 +10,7 @@
     color: hsl(0, 0%, 28%);
     @media screen and (max-width: 1023px){
         font-size: var(--sgds-masthead-mobile-font-size);
-        .container, .col{
+        .container,.container-fluid, .col{
             padding-left:0;
             padding-right: 0;
         }
