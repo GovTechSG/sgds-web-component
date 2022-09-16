@@ -1,8 +1,5 @@
 import { LitElement, html } from "lit";
-import {
-  customElement,
-  property,
-} from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import styles from "./sidenav-item.scss";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { Collapse } from "bootstrap";
@@ -10,13 +7,10 @@ import { Collapse } from "bootstrap";
 export class SideNavItem extends LitElement {
   static styles = styles;
 
-  myCollapse: Ref<HTMLElement> = createRef();
-  bsCollapse: Collapse = null;
+  private myCollapse: Ref<HTMLElement> = createRef();
+  private bsCollapse: Collapse = null;
 
-  @property()
-  title = "";
-
-  /**  when true, toggles the sidenav-item to open on first load and 
+  /**  when true, toggles the sidenav-item to open on first load and
    * set the active stylings.
    */
   @property({ type: Boolean })
@@ -28,7 +22,7 @@ export class SideNavItem extends LitElement {
   private index = "-1";
 
   private _onClick() {
-    const event = new CustomEvent("openEventOnClick", {
+    const event = new CustomEvent("toggle-onclick", {
       bubbles: true,
       composed: true,
       detail: { index: this.index },
@@ -48,7 +42,7 @@ export class SideNavItem extends LitElement {
   }
 
   /**
-   * closeItem
+   * closeItem - closes sidenav and inactivates it
    */
   public closeItem() {
     this.active = false;
@@ -63,6 +57,7 @@ export class SideNavItem extends LitElement {
   }
 
   firstUpdated() {
+    // if sidenav has menu, initialise bootstrap collapse
     if (!this.href) {
       this.bsCollapse = new Collapse(this.myCollapse.value, {
         toggle: this.active,
@@ -115,7 +110,7 @@ export class SideNavItem extends LitElement {
         @click=${() => this._onClickLink()}
         class="sidenav-btn ${this.active ? "active" : null}"
       >
-      <slot name="title"></slot>
+        <slot name="title"></slot>
       </a>
     `;
     return html`

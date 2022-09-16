@@ -63,6 +63,7 @@
     "rollup-plugin-typescript2": "^0.33.0",
     "sass": "^1.54.4",
     "sass-loader": "^13.0.2",
+    "sinon": "^14.0.0",
     "storybook-addon-web-components-knobs": "^0.3.20",
     "tslib": "^2.4.0",
     "typescript": "^4.2.4"

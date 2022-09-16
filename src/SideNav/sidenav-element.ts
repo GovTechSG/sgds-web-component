@@ -13,7 +13,8 @@ export class SideNavElement extends LitElement {
   render() {
     this.alwaysOpen
       ? null
-      : this.addEventListener("openEventOnClick", (e: CustomEvent) => {
+      : this.addEventListener("toggle-onclick", (e: CustomEvent) => {
+        console.log('hearing ')
           const children = this.querySelectorAll("sidenav-item");
           for (let i = 0; i < children.length; i++) {
             if (e.detail.index != i) {
