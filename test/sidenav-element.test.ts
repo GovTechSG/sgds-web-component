@@ -3,15 +3,17 @@ import "../src/SideNav";
 import {
   fixture,
   assert,
-  oneEvent,
   expect,
   waitUntil,
   elementUpdated,
   fixtureCleanup,
+  aTimeout,
 } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 import { EventEmitter } from "events";
+import { Collapse } from "bootstrap";
+
 describe("sidenav-element", () => {
   afterEach(() => {
     sinon.restore();
@@ -125,6 +127,7 @@ describe("sidenav-item", () => {
     const el = await fixture<SideNavItem>(
       html`<sidenav-item href="#"></sidenav-item>`
     );
+
     const toggleHandler = sinon.spy();
     el.addEventListener("toggle-onclick", toggleHandler);
 
@@ -235,25 +238,136 @@ describe("sidenav-link", () => {
 });
 
 describe("sidenav-element, -item, -link interactions", () => {
-  it("test", async () => {
+  it("by default when click on another item (link or button) should close opened sidenav", async () => {
     const el = await fixture(html` <sidenav-element>
-    <sidenav-item active>
+      <sidenav-item active>
         <span slot="title">Title 1</span>
         <sidenav-link href="https://google.com" active>1</sidenav-link>
-        <sidenav-link href="https://google.com" >2</sidenav-link>
-        <sidenav-link href="https://google.com" >3</sidenav-link>
-    </sidenav-item>
-    <sidenav-item>
+        <sidenav-link href="https://google.com">2</sidenav-link>
+        <sidenav-link href="https://google.com">3</sidenav-link>
+      </sidenav-item>
+      <sidenav-item>
         <span slot="title">Title 2</span>
         <sidenav-link href="https://google.com">4</sidenav-link>
-        <sidenav-link href="https://google.com" >5</sidenav-link>
-        <sidenav-link href="https://google.com" >6</sidenav-link>
-    </sidenav-item>
-    <sidenav-item href="#">
+        <sidenav-link href="https://google.com">5</sidenav-link>
+        <sidenav-link href="https://google.com">6</sidenav-link>
+      </sidenav-item>
+      <sidenav-item href="#">
         <span slot="title">Title 3</span>
-    </sidenav-item>
-</sidenav-element>`);
-assert.shadowDom.equal('test')
-  });
+      </sidenav-item>
+    </sidenav-element>`);
+    // assert.shadowDom.equal(el, 'test')
+    expect(el.querySelectorAll("sidenav-item").length).to.equal(3);
+    const sideNavItemOne = el.querySelectorAll("sidenav-item")[0];
+    const sideNavItemTwo = el.querySelectorAll("sidenav-item")[1];
+    const sideNavItemThree = el.querySelectorAll("sidenav-item")[2];
 
+    expect(sideNavItemThree.shadowRoot?.querySelector("div")).to.be.null;
+    await waitUntil(() =>
+      sideNavItemOne.shadowRoot?.querySelector("div.collapse")
+    );
+    await waitUntil(() =>
+      sideNavItemTwo.shadowRoot?.querySelector("div.collapse")
+    );
+    expect(
+      sideNavItemOne.shadowRoot?.querySelector("div.collapse")
+    ).to.have.class("show");
+    expect(
+      sideNavItemTwo.shadowRoot?.querySelector("div.collapse")
+    ).not.to.have.class("show");
+
+    //onclick sideNavItemTwo button, should remove show from first
+    sideNavItemTwo?.shadowRoot?.querySelector("button")?.click();
+
+    await waitUntil(() =>
+      sideNavItemTwo.shadowRoot?.querySelector("div.collapse.show")
+    );
+    expect(
+      sideNavItemOne.shadowRoot?.querySelector("div.collapse")
+    ).not.to.have.class("show");
+    expect(
+      sideNavItemTwo.shadowRoot?.querySelector("div.collapse")
+    ).to.have.class("show");
+
+    // click on link should collapse the other two side navs
+    sideNavItemThree?.shadowRoot?.querySelector("a")?.click();
+
+    // wait sometime for collapse to take place
+    await aTimeout(500);
+    expect(
+      sideNavItemOne.shadowRoot?.querySelector("div.collapse")
+    ).not.to.have.class("show");
+    expect(
+      sideNavItemTwo.shadowRoot?.querySelector("div.collapse")
+    ).not.to.have.class("show");
+    expect(
+      sideNavItemThree.shadowRoot?.querySelector("a.sidenav-btn")
+    ).to.have.class("active");
+  });
+  it("when alwaysOpen is true, click on another item (link or button) should NOT close other opened sidenav", async () => {
+    const el = await fixture(html` <sidenav-element alwaysOpen>
+      <sidenav-item active>
+        <span slot="title">Title 1</span>
+        <sidenav-link href="https://google.com" active>1</sidenav-link>
+        <sidenav-link href="https://google.com">2</sidenav-link>
+        <sidenav-link href="https://google.com">3</sidenav-link>
+      </sidenav-item>
+      <sidenav-item>
+        <span slot="title">Title 2</span>
+        <sidenav-link href="https://google.com">4</sidenav-link>
+        <sidenav-link href="https://google.com">5</sidenav-link>
+        <sidenav-link href="https://google.com">6</sidenav-link>
+      </sidenav-item>
+      <sidenav-item href="#">
+        <span slot="title">Title 3</span>
+      </sidenav-item>
+    </sidenav-element>`);
+
+    expect(el.querySelectorAll("sidenav-item").length).to.equal(3);
+    const sideNavItemOne = el.querySelectorAll("sidenav-item")[0];
+    const sideNavItemTwo = el.querySelectorAll("sidenav-item")[1];
+    const sideNavItemThree = el.querySelectorAll("sidenav-item")[2];
+
+    expect(sideNavItemThree.shadowRoot?.querySelector("div")).to.be.null;
+    await waitUntil(() =>
+      sideNavItemOne.shadowRoot?.querySelector("div.collapse")
+    );
+    await waitUntil(() =>
+      sideNavItemTwo.shadowRoot?.querySelector("div.collapse")
+    );
+    expect(
+      sideNavItemOne.shadowRoot?.querySelector("div.collapse")
+    ).to.have.class("show");
+    expect(
+      sideNavItemTwo.shadowRoot?.querySelector("div.collapse")
+    ).not.to.have.class("show");
+
+    //onclick sideNavItemTwo button, should NOT remove show from first
+    sideNavItemTwo?.shadowRoot?.querySelector("button")?.click();
+
+    await waitUntil(() =>
+      sideNavItemTwo.shadowRoot?.querySelector("div.collapse.show")
+    );
+    expect(
+      sideNavItemOne.shadowRoot?.querySelector("div.collapse")
+    ).to.have.class("show");
+    expect(
+      sideNavItemTwo.shadowRoot?.querySelector("div.collapse")
+    ).to.have.class("show");
+
+    // click on link should NOT collapse the other two side navs
+    sideNavItemThree?.shadowRoot?.querySelector("a")?.click();
+
+    // wait sometime for collapse to take place
+    await aTimeout(1000);
+    expect(
+      sideNavItemOne.shadowRoot?.querySelector("div.collapse")
+    ).to.have.class("show");
+    expect(
+      sideNavItemTwo.shadowRoot?.querySelector("div.collapse")
+    ).to.have.class("show");
+    expect(
+      sideNavItemThree.shadowRoot?.querySelector("a.sidenav-btn")
+    ).to.have.class("active");
+  });
 });
