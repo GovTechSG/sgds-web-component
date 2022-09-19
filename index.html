@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <script src="lib/index.js"></script>
+    
     <link href='node_modules/clk-styletest/css/sgds.containers.css' rel='stylesheet' type='text/css' />
     <link href='node_modules/clk-styletest/css/sgds.helpers.css' rel='stylesheet' type='text/css' />
     <link href='node_modules/clk-styletest/css/sgds.grid.css' rel='stylesheet' type='text/css' />
@@ -19,6 +19,11 @@
            background-color: red;
         }
 
+        masthead-element{
+            --sgds-masthead-crest-color: white;
+            --sgds-masthead-text-color: red;
+        }
+
         /* body {
             display: flex;
             min-height: 100vh;
@@ -28,6 +33,7 @@
             flex: 1;
         } */
     </style>
+    <script src="lib/index.js"></script>
 </head>
 
 <body class="d-flex flex-column min-vh-100">

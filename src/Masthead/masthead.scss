@@ -2,12 +2,24 @@
 @import "~clk-styletest/sass/containers";
 @import "~clk-styletest/sass/grid";
 
+:host{
+    --sgds-masthead-font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --sgds-masthead-background-color: hsl(0, 0%, 94%);
+    --sgds-masthead-text-color: hsl(0, 0%, 28%);
+    --sgds-masthead-link-color: #2f60ce;
+    --sgds-masthead-identify-hover-color: hsl(222, 63%, 37%);
+    --sgds-masthead-link-hover-color: hsl(221, 64%, 55%);
+    --sgds-masthead-tablet-padding-x: 1.25rem;
+    --sgds-masthead-tablet-font-size: 0.75rem;
+    --sgds-masthead-mobile-font-size: 0.6875rem;
+    --sgds-masthead-crest-color: rgb(239, 51, 32);
+}
 
 .sgds-masthead{
     font-size: 0.875rem;
     background-color: hsl(0, 0%, 94%);
     font-family: var(--sgds-masthead-font-family);
-    color: hsl(0, 0%, 28%);
+    color: var(--sgds-masthead-text-color);
     @media screen and (max-width: 1023px){
         font-size: var(--sgds-masthead-mobile-font-size);
         .container,.container-fluid, .col{
