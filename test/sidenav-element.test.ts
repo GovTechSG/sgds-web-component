@@ -6,7 +6,6 @@ import {
   expect,
   waitUntil,
   elementUpdated,
-  fixtureCleanup,
   aTimeout,
 } from "@open-wc/testing";
 import { html } from "lit";

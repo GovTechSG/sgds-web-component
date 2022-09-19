@@ -1,6 +1,5 @@
 import { LitElement, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { SideNavItem } from "./sidenav-item";
 import styles from "./sidenav.scss";
 
 @customElement("sidenav-element")
