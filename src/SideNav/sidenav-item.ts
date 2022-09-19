@@ -3,6 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import styles from "./sidenav-item.scss";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { Collapse } from "bootstrap";
+import genId from "../utils/generateId";
 @customElement("sidenav-item")
 export class SideNavItem extends LitElement {
   static styles = styles;
@@ -18,6 +19,12 @@ export class SideNavItem extends LitElement {
 
   @property({ type: String })
   href = "";
+
+  @property({ type: String })
+  collapseId = genId('sidenav','collapse');
+
+  @property({ type: String })
+  buttonId = genId('sidenav','button');
 
   private index = "-1";
 
@@ -82,6 +89,10 @@ export class SideNavItem extends LitElement {
     const withMenuTemplate = html` <button
         @click=${() => this._onClickButton()}
         class="collapsed sidenav-btn ${this.active ? "active" : null}"
+        aria-expanded="${this.active}" 
+        aria-controls="${this.collapseId}"
+        aria-selected="${this.active}"
+        id="${this.buttonId}"
       >
         <slot name="title"></slot>
         <svg
@@ -98,8 +109,8 @@ export class SideNavItem extends LitElement {
           />
         </svg>
       </button>
-      <div class="collapse" ${ref(this.myCollapse)}>
-        <ul class="sidenav-list">
+      <div class="collapse" ${ref(this.myCollapse)} id="${this.collapseId}">
+        <ul class="sidenav-list" aria-labelledby="${this.buttonId}">
           <slot></slot>
         </ul>
       </div>`;
@@ -109,12 +120,13 @@ export class SideNavItem extends LitElement {
         href=${this.href}
         @click=${() => this._onClickLink()}
         class="sidenav-btn ${this.active ? "active" : null}"
+        aria-selected="${this.active}"
       >
         <slot name="title"></slot>
       </a>
     `;
     return html`
-      <li class="sidenav-item">
+      <li class="sidenav-item" aria-haspopup="${!this.href}">
         ${this.href ? noMenuTemplate : withMenuTemplate}
       </li>
     `;

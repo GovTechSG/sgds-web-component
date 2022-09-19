@@ -43,6 +43,28 @@ import { useState } from "react";
         },
       },
     },
+    collapseId: {
+      control: "text",
+      description:
+        "Forwards to id attribute of div.collapse and aria-controls attribute of button in SideNavItem. By default, SideNavItem auto-generates a unique id. Override the default id by specifiying your own",
+      table: {
+        category: "props: SideNavItem",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    buttonId: {
+      control: "text",
+      description:
+        "Forwards to id attribute of button and aria-labelledby attribute of ul.sidenav-list in SideNavItem. By default, SideNavItem auto-generates a unique id. Override the default id by specifiying your own",
+      table: {
+        category: "props: SideNavItem",
+        type: {
+          summary: "string",
+        },
+      },
+    },
     href: {
       control: "text",
       description:
@@ -112,10 +134,10 @@ import { useState } from "react";
   }}
 />
 
-export const Template = ({ alwaysOpen, active, href, activeSNL, hrefSNL }) => {
+export const Template = ({ alwaysOpen, active, href, activeSNL, hrefSNL, collapseId, buttonId }) => {
   return html`
     <sidenav-element .alwaysOpen=${alwaysOpen}>
-      <sidenav-item .active=${active} .href=${href}>
+      <sidenav-item .active=${active} .href=${href} .collapseId=${collapseId} .buttonId=${buttonId}>
         <span slot="title"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code" viewBox="0 0 16 16">
   <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z"/>
 </svg> SideNav Item #1 (control by Argstable) </span>
