@@ -11,8 +11,6 @@ import {
 } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
-import { EventEmitter } from "events";
-import { Collapse } from "bootstrap";
 
 describe("sidenav-element", () => {
   afterEach(() => {
@@ -33,33 +31,6 @@ describe("sidenav-element", () => {
       </nav>`
     );
   });
-
-  //   it("when alwaysOpen is false, it has an event listern openEventOnClick", async (done) => {
-  //    try{
-
-  //     // const spyListener =  sinon.spy(document, 'addEventListener')
-  //     const el = await fixture(html`<sidenav-element>
-  //       <!-- <sidenav-item active></sidenav-item>
-  //       <sidenav-item></sidenav-item> -->
-  //   </sidenav-element>`);
-  //   const spy = sinon.spy()
-  // const emitter = new EventEmitter()
-  // emitter.on('openEventOnClick', spy)
-  // emitter.emit('openEventOnClick')
-  // sinon.assert.calledOnce(spy)
-  //     // const itemBtn = el.querySelectorAll('sidenav-item')[1]?.shadowRoot?.querySelector('button')
-
-  //     // itemBtn?.click()
-  //     // await waitUntil(() => {
-  //     //   // spyListener.calledOnce
-  //     //   expect(spyListener).to.have.been.calledOnce
-  //     // } )
-  //   }catch (e) {
-  //     done(e)
-  //     console.log(e,'inerror')
-  //   }
-  //     // expect(el.querySelector('sidenav-item')?.shadowRoot?.querySelector('button')?.classList).to.contain('active')
-  // });
 });
 
 describe("sidenav-item", () => {
@@ -116,11 +87,6 @@ describe("sidenav-item", () => {
     const toggleHandler = sinon.spy();
     el.addEventListener("toggle-onclick", toggleHandler);
     el.shadowRoot?.querySelector("button")?.click();
-    // await elementUpdated(el)
-    // await waitUntil(() => {
-    //    return toggleHandler.calledOnce
-    //   // done()
-    // })
     expect(toggleHandler).to.have.been.calledOnce;
   });
   it("as a link (href defined), should emit toggle-onclick event when button is clicked", async () => {
@@ -133,8 +99,6 @@ describe("sidenav-item", () => {
 
     el.shadowRoot?.querySelector("a")?.click();
     expect(toggleHandler).to.have.been.calledOnce;
-
-    // expect(bsCollapseShowHandler).to.have.been.calledOnce;
   });
   it("openItem and closeItem methods changes active class of sidenav button", async () => {
     const el = await fixture<SideNavItem>(html`<sidenav-item></sidenav-item>`);
@@ -189,22 +153,7 @@ describe("sidenav-item", () => {
     el.shadowRoot?.querySelector("a")?.click();
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("a")).to.have.class("active");
-    // el.shadowRoot?.querySelector("a")?.click();
-    // await elementUpdated(el);
-    // expect(el.shadowRoot?.querySelector("a")).not.to.have.class("active");
   });
-  //TODO: DOES NOT WORK
-  // it("when clicked on an active sidenav-btn, turns it into inactive", async () => {
-  //   const el = await fixture<SideNavItem>(
-  //     html`<sidenav-item active></sidenav-item>`
-  //   );
-  //   expect(el.shadowRoot?.querySelector("button")?.classList.value).to.contain(
-  //     "active"
-  //   );
-  //   el.shadowRoot?.querySelector("button")?.click();
-  //   await elementUpdated(el);
-  //   expect(el.shadowRoot?.querySelector("button")).not.to.have.class("active");
-  // });
 });
 
 describe("sidenav-link", () => {
@@ -359,7 +308,7 @@ describe("sidenav-element, -item, -link interactions", () => {
     sideNavItemThree?.shadowRoot?.querySelector("a")?.click();
 
     // wait sometime for collapse to take place
-    await aTimeout(1000);
+    await aTimeout(500);
     expect(
       sideNavItemOne.shadowRoot?.querySelector("div.collapse")
     ).to.have.class("show");
