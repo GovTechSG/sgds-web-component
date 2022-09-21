@@ -1,16 +1,17 @@
 @import "../utils/base.scss";
 @import "~clk-styletest/sass/transitions";
+@import "~bootstrap-icons/font/fonts/bootstrap-icons.css";
 
 :host   {
   --sidenav-theme-color: #5925DC;
-  --sidenav-font-size: 1rem;
+  // --sidenav-font-size: 1rem;
 }
 
 .sidenav-btn {
   width: 100%;
   text-align: initial;
   line-height: 1.5rem;
-  font-size: var(--sidenav-font-size);
+  font-size: 1rem;
   border: 0;
   background: 0;
   padding: 0.5rem 1rem;

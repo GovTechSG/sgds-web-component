@@ -146,25 +146,19 @@ export const Template = ({
   return html`
     <sidenav-element .alwaysOpen=${alwaysOpen}>
       <sidenav-item .active=${active} .href=${href} .collapseId=${collapseId} .buttonId=${buttonId}>
-        <span slot="title"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code" viewBox="0 0 16 16">
-  <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z"/>
-</svg> SideNav Item #1 (control by Argstable) </span>
+        <span slot="title"> <sl-icon name="stack"></sl-icon> SideNav Item #1 (control by Argstable) </span>
         <sidenav-link .href=${hrefSNL} .active=${activeSNL}>sidenav-link (control by Argstable)</sidenav-link>
         <sidenav-link href="#">sidenav-link</sidenav-link>
         <sidenav-link href="#">sidenav-link</sidenav-link>
       </sidenav-item>
       <sidenav-item>
-        <span slot="title"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code" viewBox="0 0 16 16">
-  <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z"/>
-</svg></i>SideNav Item #2</span>
+        <span slot="title"> <sl-icon name="stack"></sl-icon>SideNav Item #2</span>
         <sidenav-link href="#">sidenav-link</sidenav-link>
         <sidenav-link href="#">sidenav-link</sidenav-link>
         <sidenav-link href="#">sidenav-link</sidenav-link>
       </sidenav-item>
       <sidenav-item href="#">
-        <span slot="title"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code" viewBox="0 0 16 16">
-  <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z"/>
-</svg></i>SideNav Item #3</span>
+        <span slot="title">SideNav Item #3</span>
       </sidenav-item>
     </sidenav-element>
   `;
@@ -175,6 +169,8 @@ export const Template = ({
 <Canvas>
   <Story name="Basic">{Template.bind({})}</Story>
 </Canvas>
+
+*Example is using shoelace's icon. See [here](https://shoelace.style/components/icon)*
 
 ## API
 
@@ -211,4 +207,3 @@ sideNavItemEl.closeItem();
 | Name                    | Description                                                                                 |
 | ----------------------- | ------------------------------------------------------------------------------------------- |
 | `--sidenav-theme-color` | Sets color of all text and left-border of sidenav. Default to sgds primary color (#5925DC). |
-| `--sidenav-font-size`   | Sets font size of all text in sidenav. Default to 1rem.                                     |
