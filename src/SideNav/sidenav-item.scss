@@ -1,11 +1,16 @@
 @import "../utils/base.scss";
 @import "~clk-styletest/sass/transitions";
 
+:host   {
+  --sidenav-theme-color: #5925DC;
+  --sidenav-font-size: 1rem;
+}
+
 .sidenav-btn {
   width: 100%;
   text-align: initial;
   line-height: 1.5rem;
-  font-size: $sidenav-fontsize;
+  font-size: var(--sidenav-font-size);
   border: 0;
   background: 0;
   padding: 0.5rem 1rem;
@@ -16,8 +21,8 @@
 
   &.active,
   &:hover {
-    color: $sidenav-color;
-    border-left-color: $sidenav-color;
+    color: var(--sidenav-theme-color);
+    border-left-color: var(--sidenav-theme-color);
     font-weight: $font-weight-bold;
   }
   svg {

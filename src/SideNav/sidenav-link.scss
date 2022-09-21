@@ -2,9 +2,9 @@
 
 
 a.nav-link {
-  display: block;
+    display: block;
     color: inherit;
-    font-size: $sidenav-fontsize;
+    font-size: var(--sidenav-font-size);
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: calc(
@@ -15,7 +15,7 @@ a.nav-link {
   
     &.active,
     &:hover {
-      color: $sidenav-color;
+      color: var(--sidenav-theme-color);
     }
   }
   

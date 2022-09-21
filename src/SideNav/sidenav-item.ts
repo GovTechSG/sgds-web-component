@@ -121,7 +121,7 @@ export class SideNavItem extends LitElement {
         @click=${() => this._onClickLink()}
         class="sidenav-btn ${this.active ? "active" : null}"
         aria-selected="${this.active}"
-      >
+        >
         <slot name="title"></slot>
       </a>
     `;

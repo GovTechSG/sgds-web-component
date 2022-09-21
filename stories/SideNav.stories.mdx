@@ -134,7 +134,15 @@ import { useState } from "react";
   }}
 />
 
-export const Template = ({ alwaysOpen, active, href, activeSNL, hrefSNL, collapseId, buttonId }) => {
+export const Template = ({
+  alwaysOpen,
+  active,
+  href,
+  activeSNL,
+  hrefSNL,
+  collapseId,
+  buttonId,
+}) => {
   return html`
     <sidenav-element .alwaysOpen=${alwaysOpen}>
       <sidenav-item .active=${active} .href=${href} .collapseId=${collapseId} .buttonId=${buttonId}>
@@ -180,22 +188,27 @@ import {
 
 <ArgsTable story="Basic" />
 
+## SideNavItem methods
 
-## SideNavItem methods 
+`openItem()` and `closeItem()` are public methods exposed by SideNavItem component for user to customize the opening and closing of SideNavItems when required.
 
- `openItem()` and  `closeItem()` are public methods exposed by SideNavItem component for user to customize the opening and closing of SideNavItems when required.
+```jsx
+// class method
 
-  ```jsx
-  // class method 
+const sideNavItem = new SideNavItem();
+sideNavItem.openItem();
+sideNavItem.closeItem();
 
-  const sideNavItem = new SideNavItem()
-  sideNavItem.openItem()
-  sideNavItem.closeItem()
-  
-  //dom method 
+//dom method
 
-  const sideNavItemEl = document.querySelector("sidenav-item#specificId")
-  sideNavItemEl.openItem()
-  sideNavItemEl.closeItem()
-  
-  ```
+const sideNavItemEl = document.querySelector("sidenav-item#specificId");
+sideNavItemEl.openItem();
+sideNavItemEl.closeItem();
+```
+
+## CSS Custom Properties
+
+| Name                    | Description                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------- |
+| `--sidenav-theme-color` | Sets color of all text and left-border of sidenav. Default to sgds primary color (#5925DC). |
+| `--sidenav-font-size`   | Sets font size of all text in sidenav. Default to 1rem.                                     |
