@@ -62,6 +62,7 @@ export class MastheadElement extends LitElement {
                 <span>A Singapore Government Agency Website</span>
                 <div
                   class="sgds-masthead-button"
+                  id="sgds-masthead-identify"
                   role="button"
                   aria-expanded="${this.toggleVisibility}"
                   aria-controls="sgds-masthead-content"
