@@ -3,24 +3,21 @@
 @import "~clk-styletest/sass/grid";
 
 :host{
-    --sgds-masthead-font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --sgds-masthead-background-color: hsl(0, 0%, 94%);
-    --sgds-masthead-text-color: hsl(0, 0%, 28%);
-    --sgds-masthead-link-color: #2f60ce;
-    --sgds-masthead-link-hover-color: hsl(221, 64%, 55%);
-    --sgds-masthead-tablet-padding-x: 1.25rem;
-    --sgds-masthead-tablet-font-size: 0.75rem;
-    --sgds-masthead-mobile-font-size: 0.6875rem;
-    --sgds-masthead-crest-color: rgb(239, 51, 32);
+    --masthead-font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    --masthead-text-color: hsl(0, 0%, 28%);
+    --masthead-link-color: hsl(222, 63%, 50%);
+    --masthead-link-color-hover: hsl(221, 64%, 55%);
+    --masthead-mobile-font-size: 0.6875rem;
+    --masthead-crest-color: rgb(239, 51, 32);
 }
 
 .sgds-masthead{
     font-size: 0.875rem;
     background-color: hsl(0, 0%, 94%);
-    font-family: var(--sgds-masthead-font-family);
-    color: var(--sgds-masthead-text-color);
+    font-family: var(--masthead-font-family);
+    color: var(--masthead-text-color);
     @media screen and (max-width: 1023px){
-        font-size: var(--sgds-masthead-mobile-font-size);
+        font-size: var(--masthead-mobile-font-size);
         .container,.container-fluid, .col{
             padding-left:0;
             padding-right: 0;
@@ -32,7 +29,7 @@
     width: 1.25rem;
     height: 1.75rem;
     path{
-        fill: var(--sgds-masthead-crest-color);
+        fill: var(--masthead-crest-color);
     }
 }
 
@@ -46,8 +43,8 @@
     padding-top:0.1rem;
     padding-bottom: 0.1rem;
     @media screen and (max-width: 1023px) {
-        padding-left: var(--sgds-masthead-tablet-padding-x);
-        padding-right: var(--sgds-masthead-tablet-padding-x);
+        padding-left: var(--masthead-tablet-padding-x);
+        padding-right: var(--masthead-tablet-padding-x);
     }
 }
 
@@ -66,12 +63,12 @@
 
 .sgds-masthead-button {
     display: flex;
-    color: var(--sgds-masthead-link-color);
+    color: var(--masthead-link-color);
     cursor: pointer;
     &-text{
         text-decoration: underline;
         &:hover{
-            color: var(--sgds-masthead-link-hover-color);
+            color: var(--masthead-link-color-hover);
         }
     }
 }
@@ -112,7 +109,7 @@
         gap: 1rem;
         font-size: 1rem;
         @media screen and (max-width: 1023px){
-            font-size: var(--sgds-masthead-tablet-font-size);
+            font-size: var(--masthead-tablet-font-size);
             gap: 0.5rem;
         }
         .content {
@@ -130,7 +127,7 @@
         .banner-icon{
             width: 1.125rem;
             path{
-                fill: var(--sgds-masthead-text-color);
+                fill: var(--masthead-text-color);
             }
             
             @media screen and (max-width: 1023px) {
@@ -145,7 +142,7 @@
         }
         .banner-icon-inline{
             path{
-                fill: var(--sgds-masthead-text-color);
+                fill: var(--masthead-text-color);
             }
             @media screen and (max-width: 1023px){
                     width: 0.6rem;
@@ -172,16 +169,16 @@ a[target="_blank"]{
 a.trusted-websites-link{
     display: inline-flex;
     align-items: center;
-    color: var(--sgds-masthead-link-color);
+    color: var(--masthead-link-color);
     margin-left: 0.125rem;
     svg{
         margin-left: 0.125rem;
-        fill: var(--sgds-masthead-link-color);
+        fill: var(--masthead-link-color);
     }
     &:hover{
-        color: var(--sgds-masthead-link-hover-color); 
+        color: var(--masthead-link-color-hover); 
         svg{
-            fill: var(--sgds-masthead-link-hover-color); 
+            fill: var(--masthead-link-color-hover); 
         }
     }
 }
