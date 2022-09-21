@@ -20,7 +20,6 @@ export class MastheadElement extends LitElement {
     this.toggleVisibility = !this.toggleVisibility;
   }
 
-
   render() {
     return html`
       <div
@@ -28,7 +27,7 @@ export class MastheadElement extends LitElement {
         class="sgds-masthead"
         aria-label="A Singapore Government Agency Website"
       >
-        <div class="${!this.fluid ? "container" : "container-fluid"}">
+        <div class="${this.fluid ? "container-fluid" : "container"}">
           <div class="row">
             <div class="col">
               <div class="masthead-layout">
@@ -63,12 +62,10 @@ export class MastheadElement extends LitElement {
                 <span>A Singapore Government Agency Website</span>
                 <div
                   class="sgds-masthead-button"
-                  id="sgds-masthead-identify"
                   role="button"
                   aria-expanded="${this.toggleVisibility}"
                   aria-controls="sgds-masthead-content"
                   @click=${() => this._toggleVisibility()}
-
                 >
                   <span class="sgds-masthead-button-text"
                     >How to identify</span
@@ -79,7 +76,7 @@ export class MastheadElement extends LitElement {
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
-                    class="sgds-masthead-identify-icon ${!this.toggleVisibility ? "open" : null}"
+                    class="sgds-masthead-identify-icon ${!this.toggleVisibility ? null : "show"}"
                   >
                     <path
                       d="M8.65188 6.85L8.64813 6.84625L10.0031 5.49125L17.0744 12.5625L15.7194 13.9175L10.0075 8.20562L4.2875 13.9256L2.9325 12.5706L8.6525 6.85062L8.65188 6.85Z"
@@ -92,7 +89,7 @@ export class MastheadElement extends LitElement {
           </div>
         </div>
 
-        <div id="sgds-masthead-content" class="container sgds-masthead-content ${this.toggleVisibility ? "open" : null }">
+        <div id="sgds-masthead-content" class="container sgds-masthead-content ${this.toggleVisibility ? "show" : null }">
           <div class="row">
             <div class="col">
               <div class="content-grid">

@@ -7,7 +7,6 @@
     --sgds-masthead-background-color: hsl(0, 0%, 94%);
     --sgds-masthead-text-color: hsl(0, 0%, 28%);
     --sgds-masthead-link-color: #2f60ce;
-    --sgds-masthead-identify-hover-color: hsl(222, 63%, 37%);
     --sgds-masthead-link-hover-color: hsl(221, 64%, 55%);
     --sgds-masthead-tablet-padding-x: 1.25rem;
     --sgds-masthead-tablet-font-size: 0.75rem;
@@ -56,12 +55,12 @@
     width: 0.6rem;
     height: 1.3125rem;
     display: block;
-    transform: rotate(0deg);
+    transform: rotate(180deg);
     user-select: none;
     transition: all 0.3s ease-in-out 0s;
     align-self: center;
-    &.open{
-        transform: rotate(180deg);
+    &.show{
+        transform: rotate(0deg);
     }
 }
 
@@ -96,6 +95,7 @@
                 width: 0.6rem;
                 height: 0.6rem;
                 margin-bottom: 0.1875rem;
+                
             }
         }
         .icon{
@@ -105,11 +105,16 @@
             }
         }
     }
+
     
     .wrapper {
         display: flex;
         gap: 1rem;
         font-size: 1rem;
+        @media screen and (max-width: 1023px){
+            font-size: var(--sgds-masthead-tablet-font-size);
+            gap: 0.5rem;
+        }
         .content {
             .title {
                 font-weight: 600;
@@ -124,6 +129,10 @@
         }
         .banner-icon{
             width: 1.125rem;
+            path{
+                fill: var(--sgds-masthead-text-color);
+            }
+            
             @media screen and (max-width: 1023px) {
                 width: 0.75rem;
             }
@@ -134,13 +143,20 @@
                 }
             }
         }
-        @media screen and (max-width: 1023px){
-            font-size: var(--sgds-masthead-tablet-font-size);
-            gap: 0.5rem;
+        .banner-icon-inline{
+            path{
+                fill: var(--sgds-masthead-text-color);
+            }
+            @media screen and (max-width: 1023px){
+                    width: 0.6rem;
+                    height: 0.6rem;
+                    margin-bottom: 0.1875rem;
+            }
         }
+
     }
 
-    &.open{
+    &.show{
         display: block;
     }
 }
