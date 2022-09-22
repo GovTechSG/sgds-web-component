@@ -1,6 +1,8 @@
 import { Story, Meta } from '@storybook/web-components';
 import '../lib/Button'
 import {html } from 'lit'
+import { state, property} from "lit/decorators.js";
+
 
 export default {
     title: 'Components/Sample-js',
@@ -11,11 +13,14 @@ export default {
     },
   };
 
-  const Template = ({variant, classes}) => html`
-  <button-element .variant=${variant} .classes=${classes}>
-    Blaze it
-  </button-element>
-  `;
+  const Template = ({variant, classes}) => {
+
+    return  html`
+    <button-element .variant=${variant} .classes=${classes}>
+      Blaze it
+    </button-element>
+    `;
+  }
 
 
   export const Primary = Template.bind({})
