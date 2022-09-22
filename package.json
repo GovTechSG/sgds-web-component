@@ -55,7 +55,6 @@
     "cz-conventional-changelog": "^3.3.0",
     "esbuild-sass-plugin": "^2.3.2",
     "husky": "^8.0.0",
-    "lit-html": "^2.3.1",
     "postcss": "^8.2.13",
     "rollup": "^2.46.0",
     "rollup-plugin-generate-package-json": "^3.2.0",
