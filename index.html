@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <script src="lib/index.js"></script>
+    
     <link href='node_modules/clk-styletest/css/sgds.containers.css' rel='stylesheet' type='text/css' />
     <link href='node_modules/clk-styletest/css/sgds.helpers.css' rel='stylesheet' type='text/css' />
     <link href='node_modules/clk-styletest/css/sgds.grid.css' rel='stylesheet' type='text/css' />
@@ -36,6 +36,11 @@
             /* --sidenav-font-size: 40rem; */
         }
 
+        masthead-element{
+            --sgds-masthead-crest-color: white;
+            --sgds-masthead-text-color: red;
+        }
+
         /* body {
             display: flex;
             min-height: 100vh;
@@ -45,9 +50,11 @@
             flex: 1;
         } */
     </style>
+    <script src="lib/index.js"></script>
 </head>
 
-<body class="d-flex flex-column min-vh-100 ">
+<body class="d-flex flex-column min-vh-100">
+    <masthead-element></masthead-element>
     <div class="container">
         <br />
         <sidenav-element class="mt-3" id="test-id">
@@ -82,7 +89,6 @@
         <br />
         <button-element class="flex-grow-1">Hello World</button-element>
     </div>
-
     <footer-element description="this is a prop description" title="Singapore Government Design System"
         lastUpdatedDate="08 Feb 2022" links='[
         {
