@@ -11,6 +11,7 @@
       "skipLibCheck": true,
       "noImplicitAny": false,
       "importHelpers": true,
+      "allowSyntheticDefaultImports": true
     },
     "include": [
       "**/*.ts",
