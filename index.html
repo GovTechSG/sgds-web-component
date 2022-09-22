@@ -2,18 +2,14 @@
 <html>
 
 <head>
-    
-    <link href='node_modules/clk-styletest/css/sgds.containers.css' rel='stylesheet' type='text/css' />
-    <link href='node_modules/clk-styletest/css/sgds.helpers.css' rel='stylesheet' type='text/css' />
-    <link href='node_modules/clk-styletest/css/sgds.grid.css' rel='stylesheet' type='text/css' />
-    <link href='node_modules/clk-styletest/css/sgds.positions.css' rel='stylesheet' type='text/css' />
-    <!-- <link href='node_modules/clk-styletest/css/sgds.css' rel='stylesheet' type='text/css' /> -->
+
+    <link href='node_modules/@govtechsg/sgds/css/sgds.util.css' rel='stylesheet' type='text/css' />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel='stylesheet'
         type='text/css' />
-        <script data-shoelace="node_modules/@shoelace-style/shoelace/dist"></script>
-        <script type="module" src="node_modules/@shoelace-style/shoelace/dist/components/icon/icon.js"></script>
+    <script data-shoelace="node_modules/@shoelace-style/shoelace/dist"></script>
+    <script type="module" src="node_modules/@shoelace-style/shoelace/dist/components/icon/icon.js"></script>
 
-        <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script> -->
+    <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script> -->
     <style>
         * {
             font-family: "bootstrap-icons", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -36,7 +32,7 @@
             /* --sidenav-font-size: 40rem; */
         }
 
-        masthead-element{
+        masthead-element {
             --sgds-masthead-crest-color: white;
             --sgds-masthead-text-color: red;
         }
@@ -59,31 +55,31 @@
         <br />
         <sidenav-element class="mt-3" id="test-id">
             <sidenav-item active>
-                <span slot="title"> <sl-icon name="stack"></sl-icon> Title
-
+                <span slot="title">
+                    <sl-icon name="stack"></sl-icon> Title
                 </span>
                 <sidenav-link href="https://google.com" active>first-test</sidenav-link>
                 <sidenav-link href="https://google.com">first-test</sidenav-link>
                 <sidenav-link href="https://google.com">first-test</sidenav-link>
             </sidenav-item>
             <sidenav-item title="Test title 2" active>
-                <span slot="title"> <i class="bi bi-1-circle"></i>Title</span>
+                <span slot="title">Title</span>
                 <sidenav-link href="https://google.com">first-test</sidenav-link>
                 <sidenav-link href="https://google.com">first-test</sidenav-link>
                 <sidenav-link href="https://google.com">first-test</sidenav-link>
 
             </sidenav-item>
             <sidenav-item title="Test title 2">
-                <span slot="title"> <i class="bi bi-1-circle"></i>Title</span>
+                <span slot="title">Title</span>
                 <sidenav-link href="https://google.com">first-test</sidenav-link>
                 <sidenav-link href="https://google.com">first-test</sidenav-link>
                 <sidenav-link href="https://google.com">first-test</sidenav-link>
             </sidenav-item>
             <sidenav-item title="Test title 2" href="#">
-                <span slot="title"> <i class="bi bi-1-circle"></i>Title</span>
+                <span slot="title">Title</span>
             </sidenav-item>
             <sidenav-item title="Test title 2" href="#">
-                <span slot="title"> <i class="bi bi-1-circle"></i>Title</span>
+                <span slot="title">Title</span>
             </sidenav-item>
         </sidenav-element>
         <br />
