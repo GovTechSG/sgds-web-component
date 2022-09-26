@@ -1,0 +1,209 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit";
+import { withWebComponentsKnobs } from "storybook-addon-web-components-knobs";
+import { withKnobs, text, number } from "@storybook/addon-knobs";
+import "../lib/SideNav";
+import { SideNavItem, SideNavElement } from "../lib/SideNav";
+import { partDescription } from "./common";
+import { useState } from "react";
+
+<Meta
+  title="Components/SideNav"
+  argTypes={{
+    // SideNavElement
+    alwaysOpen: {
+      control: "boolean",
+      defaultValue: false,
+      description:
+        "Allow sidenav items to stay open when another item is opened",
+      table: {
+        category: "props: SideNavElement",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    default: {
+      description: "default slot for SideNavItem element",
+      table: {
+        category: "slot: SideNavElement",
+      },
+    },
+    //SideNavItem
+    active: {
+      control: "boolean",
+      description:
+        "when true, toggles the sidenav-item to open on first load and set the active stylings",
+      table: {
+        category: "props: SideNavItem",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    collapseId: {
+      control: "text",
+      description:
+        "Forwards to id attribute of div.collapse and aria-controls attribute of button in SideNavItem. By default, SideNavItem auto-generates a unique id. Override the default id by specifiying your own",
+      table: {
+        category: "props: SideNavItem",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    buttonId: {
+      control: "text",
+      description:
+        "Forwards to id attribute of button and aria-labelledby attribute of ul.sidenav-list in SideNavItem. By default, SideNavItem auto-generates a unique id. Override the default id by specifiying your own",
+      table: {
+        category: "props: SideNavItem",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    href: {
+      control: "text",
+      description:
+        "When defined, converts SideNavItem from a button element to an Anchor element",
+      table: {
+        defaultValue: { summary: "" },
+        category: "props",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    openItem: {
+      control: "disable",
+      description: "When invoked, opens the SideNavItem",
+      table: {
+        category: "methods: SideNavItem",
+        type: {
+          summary: "function",
+        },
+      },
+    },
+    closeItem: {
+      control: "disable",
+      description: "When invoked, closes the SideNavItem",
+      table: {
+        category: "methods: SideNavItem",
+        type: {
+          summary: "function",
+        },
+      },
+    },
+    defaultSNI: {
+      name: "default",
+      description: "default slot for SideNavLink element",
+      table: {
+        category: "slot: SideNavItem",
+      },
+    },
+    title: {
+      description:
+        "title slot for the content of SideNavItem's button / anchor element",
+      table: {
+        category: "slot: SideNavItem",
+      },
+    },
+    // SideNavLink
+    activeSNL: {
+      name: "active",
+      control: "boolean",
+      description: "When true, sets the active styling of SideNavLink",
+      table: { category: "props: SideNavLink" },
+    },
+    hrefSNL: {
+      name: "href",
+      control: "text",
+      description: "href link for SideNavLink",
+      table: { category: "props: SideNavLink" },
+    },
+    defaultSNL: {
+      name: "default",
+      description: "default slot for the title of SideNavLink",
+      table: {
+        category: "slot: SideNavLink",
+      },
+    },
+  }}
+/>
+
+export const Template = ({
+  alwaysOpen,
+  active,
+  href,
+  activeSNL,
+  hrefSNL,
+  collapseId,
+  buttonId,
+}) => {
+  return html`
+    <sidenav-element .alwaysOpen=${alwaysOpen}>
+      <sidenav-item .active=${active} .href=${href} .collapseId=${collapseId} .buttonId=${buttonId}>
+        <span slot="title"> <sl-icon name="stack"></sl-icon> SideNav Item #1 (control by Argstable) </span>
+        <sidenav-link .href=${hrefSNL} .active=${activeSNL}>sidenav-link (control by Argstable)</sidenav-link>
+        <sidenav-link href="#">sidenav-link</sidenav-link>
+        <sidenav-link href="#">sidenav-link</sidenav-link>
+      </sidenav-item>
+      <sidenav-item>
+        <span slot="title"> <sl-icon name="stack"></sl-icon>SideNav Item #2</span>
+        <sidenav-link href="#">sidenav-link</sidenav-link>
+        <sidenav-link href="#">sidenav-link</sidenav-link>
+        <sidenav-link href="#">sidenav-link</sidenav-link>
+      </sidenav-item>
+      <sidenav-item href="#">
+        <span slot="title">SideNav Item #3</span>
+      </sidenav-item>
+    </sidenav-element>
+  `;
+};
+
+# SideNavElement, SideNavItem, SideNavLink
+
+<Canvas>
+  <Story name="Basic">{Template.bind({})}</Story>
+</Canvas>
+
+*Example is using shoelace's icon. See [here](https://shoelace.style/components/icon)*
+
+## API
+
+```jsx
+import {
+  SideNavElement,
+  SideNavLink,
+  SideNavItem,
+} from "@govtechsg/sgds-web-component/SideNav";
+```
+
+<ArgsTable story="Basic" />
+
+## SideNavItem methods
+
+`openItem()` and `closeItem()` are public methods exposed by SideNavItem component for user to customize the opening and closing of SideNavItems when required.
+
+```jsx
+// class method
+
+const sideNavItem = new SideNavItem();
+sideNavItem.openItem();
+sideNavItem.closeItem();
+
+//dom method
+
+const sideNavItemEl = document.querySelector("sidenav-item#specificId");
+sideNavItemEl.openItem();
+sideNavItemEl.closeItem();
+```
+
+## CSS Custom Properties
+
+| Name                    | Description                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------- |
+| `--sidenav-theme-color` | Sets color of all text and left-border of sidenav. Default to sgds primary color (#5925DC). |
