@@ -50,8 +50,8 @@
 }
 
 .sgds-masthead-identify-icon {
-    width: 0.6rem;
-    height: 1.3125rem;
+    width: 12px;
+    height: 21px;
     display: block;
     transform: rotate(180deg);
     user-select: none;
@@ -65,6 +65,7 @@
 .sgds-masthead-button {
     display: flex;
     color: var(--masthead-link-color);
+    align-items: center;
     cursor: pointer;
     &-text{
         text-decoration: underline;
