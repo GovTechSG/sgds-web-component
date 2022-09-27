@@ -8,6 +8,7 @@
     --masthead-link-color: hsl(222, 63%, 50%);
     --masthead-link-color-hover: hsl(221, 64%, 55%);
     --masthead-mobile-font-size: 0.6875rem;
+    --masthead-mobile-padding-x: 1.25rem;
     --masthead-crest-color: rgb(239, 51, 32);
 }
 
@@ -43,14 +44,14 @@
     padding-top:0.1rem;
     padding-bottom: 0.1rem;
     @media screen and (max-width: 1023px) {
-        padding-left: var(--masthead-tablet-padding-x);
-        padding-right: var(--masthead-tablet-padding-x);
+        padding-left: var(--masthead-mobile-padding-x);
+        padding-right: var(--masthead-mobile-padding-x);
     }
 }
 
 .sgds-masthead-identify-icon {
-    width: 0.6rem;
-    height: 1.3125rem;
+    width: 12px;
+    height: 21px;
     display: block;
     transform: rotate(180deg);
     user-select: none;
@@ -64,6 +65,7 @@
 .sgds-masthead-button {
     display: flex;
     color: var(--masthead-link-color);
+    align-items: center;
     cursor: pointer;
     &-text{
         text-decoration: underline;
@@ -109,7 +111,7 @@
         gap: 1rem;
         font-size: 1rem;
         @media screen and (max-width: 1023px){
-            font-size: var(--masthead-tablet-font-size);
+            font-size: var(--masthead-mobile-font-size);
             gap: 0.5rem;
         }
         .content {
@@ -122,6 +124,9 @@
             }
             article{
                 line-height: 1.5rem;
+                @media screen and (max-width: 1023px) {
+                    line-height: 1.2rem;
+                }
             }
         }
         .banner-icon{
