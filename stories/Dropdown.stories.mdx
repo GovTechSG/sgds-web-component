@@ -6,7 +6,15 @@ import "../lib/Dropdown";
 
 <Meta title="Components/Dropdown" />
 
-export const Template = (args) => html` <dropdown-element></dropdown-element> `;
+export const Template = (args) => {
+  return html`
+  <dropdown-element buttonText="Dropdown">
+    <dropdown-item>test</dropdown-item>
+    <dropdown-item href="#">test</dropdown-item>
+    <dropdown-item href="#">test</dropdown-item>
+  </dropdown-element>
+`;
+};
 
 # Sample
 
