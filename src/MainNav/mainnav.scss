@@ -1,0 +1,17 @@
+@import "../utils/base.scss";
+// @import "~@govtechsg/sgds/sass/buttons";
+// @import "~@govtechsg/sgds/sass/sgds";
+@import "~@govtechsg/sgds/sass/navbar";
+@import "~@govtechsg/sgds/sass/transitions";
+
+.navbar-nav {
+  display: flex;
+  align-self: center;
+  gap: 1rem;
+}
+.navbar-toggler {
+  border: none;
+}
+.navbar-toggler:focus {
+  box-shadow: none;
+}

@@ -1,0 +1,65 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit";
+import { withWebComponentsKnobs } from "storybook-addon-web-components-knobs";
+import { withKnobs, text, number } from "@storybook/addon-knobs";
+import "../lib/MainNav";
+import { partDescription } from "./common";
+
+<Meta
+  title="Components/MainNav"
+/>
+
+export const Template = ({
+}) => {
+  return html`
+    <mainnav-element>
+    <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand"/>
+    <mainnav-item href="#">Home</mainnav-item>
+    <mainnav-item href="#">About</mainnav-item>
+    </mainnav-element>
+  `;
+};
+
+# MainNavElement
+
+<Canvas>
+  <Story name="Basic">{Template.bind({})}</Story>
+</Canvas>
+
+*Example is using shoelace's icon. See [here](https://shoelace.style/components/icon)*
+
+## API
+
+```jsx
+import {
+  SideNavElement,
+  SideNavLink,
+  SideNavItem,
+} from "@govtechsg/sgds-web-component/SideNav";
+```
+
+<ArgsTable story="Basic" />
+
+## SideNavItem methods
+
+`openItem()` and `closeItem()` are public methods exposed by SideNavItem component for user to customize the opening and closing of SideNavItems when required.
+
+```jsx
+// class method
+
+const sideNavItem = new SideNavItem();
+sideNavItem.openItem();
+sideNavItem.closeItem();
+
+//dom method
+
+const sideNavItemEl = document.querySelector("sidenav-item#specificId");
+sideNavItemEl.openItem();
+sideNavItemEl.closeItem();
+```
+
+## CSS Custom Properties
+
+| Name                    | Description                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------- |
+| `--sidenav-theme-color` | Sets color of all text and left-border of sidenav. Default to sgds primary color (#5925DC). |

@@ -1,0 +1,15 @@
+@import "../utils/base.scss";
+
+@import "~@govtechsg/sgds/sass/sgds";
+
+
+a.nav-link {
+  color: #344054;
+  border-bottom: $navbar-border-bottom-height solid transparent;
+
+  &.active,
+  &:hover {
+    color: $primary;
+    border-color: $primary;
+  }
+}
