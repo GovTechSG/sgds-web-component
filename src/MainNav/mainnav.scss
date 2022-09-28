@@ -1,6 +1,4 @@
 @import "../utils/base.scss";
-// @import "~@govtechsg/sgds/sass/buttons";
-// @import "~@govtechsg/sgds/sass/sgds";
 @import "~@govtechsg/sgds/sass/navbar";
 @import "~@govtechsg/sgds/sass/transitions";
 
@@ -8,10 +6,18 @@
   display: flex;
   align-self: center;
   gap: 1rem;
+  height: 100%;
+  // width: 100%;
 }
 .navbar-toggler {
   border: none;
 }
 .navbar-toggler:focus {
   box-shadow: none;
+}
+
+slot[name="non-collapsible"] {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }

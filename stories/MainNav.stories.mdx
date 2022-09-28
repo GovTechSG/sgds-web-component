@@ -7,15 +7,31 @@ import { partDescription } from "./common";
 
 <Meta
   title="Components/MainNav"
+  argTypes= {{
+    expand: {
+      control: "text",
+      defaultValue: 'always',
+      description:
+        "Allow sidenav items to stay open when another item is opened",
+      table: {
+        category: "props: SideNavElement",
+        defaultValue: { summary: "lg" },
+        type: {
+          summary: "string",
+        },
+      },
+    },
+  }}
 />
 
 export const Template = ({
+  expand
 }) => {
   return html`
-    <mainnav-element>
-    <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand"/>
-    <mainnav-item href="#">Home</mainnav-item>
-    <mainnav-item href="#">About</mainnav-item>
+  <mainnav-element .expand=${expand}>
+        <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
+        <mainnav-item href="#">Home</mainnav-item>
+        <mainnav-item href="#">About</mainnav-item>
     </mainnav-element>
   `;
 };

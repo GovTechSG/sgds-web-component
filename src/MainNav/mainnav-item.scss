@@ -1,11 +1,16 @@
 @import "../utils/base.scss";
+@import "~@govtechsg/sgds/sass/navbar";
 
-@import "~@govtechsg/sgds/sass/sgds";
-
+.nav-item {
+  height: 100%;
+}
 
 a.nav-link {
+  display: flex;
   color: #344054;
   border-bottom: $navbar-border-bottom-height solid transparent;
+  min-height: 100%;
+  align-items: center;
 
   &.active,
   &:hover {
