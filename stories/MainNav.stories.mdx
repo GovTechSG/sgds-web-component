@@ -7,10 +7,10 @@ import { partDescription } from "./common";
 
 <Meta
   title="Components/MainNav"
-  argTypes= {{
+  argTypes={{
     expand: {
       control: "text",
-      defaultValue: 'always',
+      defaultValue: "lg",
       description:
         "Allow sidenav items to stay open when another item is opened",
       table: {
@@ -24,14 +24,16 @@ import { partDescription } from "./common";
   }}
 />
 
-export const Template = ({
-  expand
-}) => {
+export const Template = ({ expand }) => {
   return html`
-  <mainnav-element .expand=${expand}>
-        <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
-        <mainnav-item href="#">Home</mainnav-item>
-        <mainnav-item href="#">About</mainnav-item>
+    <mainnav-element expand=${expand}>
+      <img
+        width="130"
+        src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
+        slot="brand"
+      />
+      <mainnav-item href="#">Home</mainnav-item>
+      <mainnav-item href="#">About</mainnav-item>
     </mainnav-element>
   `;
 };
@@ -39,10 +41,12 @@ export const Template = ({
 # MainNavElement
 
 <Canvas>
-  <Story name="Basic">{Template.bind({})}</Story>
+  <Story name="Basic" args={{ expand: "always" }}>
+    {Template.bind({})}
+  </Story>
 </Canvas>
 
-*Example is using shoelace's icon. See [here](https://shoelace.style/components/icon)*
+_Example is using shoelace's icon. See [here](https://shoelace.style/components/icon)_
 
 ## API
 
