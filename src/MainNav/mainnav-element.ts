@@ -1,10 +1,9 @@
-import { LitElement, html } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { LitElement, html, PropertyValueMap } from "lit";
+import { customElement, property, query, state } from "lit/decorators.js";
 import styles from "./mainnav.scss";
 import { Collapse, Offcanvas } from "bootstrap";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import genId from "../utils/generateId";
-import { ResizeController } from "@lit-labs/observers/resize_controller.js";
 
 type Size = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
 export const SM_BREAKPOINT = 576;
@@ -26,9 +25,18 @@ const SIZES = {
 export class MainNavElement extends LitElement {
   static styles = styles;
 
+
   constructor() {
     super();
+      window.addEventListener("resize", () => {
+      const newBreakpointReachedValue = window.innerWidth < SIZES[this.expand.toString()]
+      if (newBreakpointReachedValue !== this.breakpointReached) this.requestUpdate()
+
+      this.breakpointReached = newBreakpointReachedValue
+    })
+
   }
+
 
   private myCollapse: Ref<HTMLElement> = createRef();
   private bsCollapse: Collapse = null;
@@ -53,10 +61,17 @@ export class MainNavElement extends LitElement {
   expand: Size = "lg";
 
   @state()
+  breakpointReached: Boolean  = window.innerWidth < SIZES[this.expand.toString()]
+
+  @state()
   expanded: Boolean = false;
 
   @property({ type: String })
   mode: "offcanvas" | "default" = "default";
+
+
+  @query('nav.sgds.navbar')
+  navbarElement: Element
 
   firstUpdated() {
     if (this.mode === "default") {
@@ -87,13 +102,10 @@ export class MainNavElement extends LitElement {
       });
     }
   }
-  // Detects changes in element size and runs update
-  _resizeController = new ResizeController(this, {});
 
   render() {
-    const breakpointReached = this.offsetWidth < SIZES[this.expand.toString()];
     const collapseClass = "collapse navbar-collapse order-4";
-    const offcanvasClass = "offcanvas offcanvas-start";
+    const offcanvasClass = "offcanvas offcanvas-start order-4";
     return html`
       <nav
         class="sgds navbar navbar-light
@@ -104,7 +116,7 @@ export class MainNavElement extends LitElement {
         </a>
         <slot
           name="non-collapsible"
-          class="${breakpointReached ? "order-2" : "order-5"}"
+          class="${this.breakpointReached ? "order-2" : "order-5"}"
         ></slot>
         <button
           class="navbar-toggler order-3"
