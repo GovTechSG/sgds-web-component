@@ -67,8 +67,7 @@ import { partDescription } from "./common";
     // MainNavItem props
     active: {
       control: "boolean",
-      description:
-        "when true, sets the active stylings of .nav-link",
+      description: "when true, sets the active stylings of .nav-link",
       table: {
         category: "props: MainNavItem",
         defaultValue: { summary: false },
@@ -77,10 +76,9 @@ import { partDescription } from "./common";
         },
       },
     },
-      href: {
+    href: {
       control: "text",
-      description:
-        "Href attribute for anchor element in MainNavItem",
+      description: "Href attribute for anchor element in MainNavItem",
       table: {
         defaultValue: { summary: "" },
         category: "props: MainNavItem",
@@ -111,7 +109,9 @@ export const Template = ({ expand, brandHref, collapseId, active, href }) => {
         src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
         slot="brand"
       />
-      <mainnav-item .active=${active} .href=${href}>Home (argsTable controlled) </mainnav-item>
+      <mainnav-item .active=${active} .href=${href}
+        >Home (argsTable controlled)
+      </mainnav-item>
       <mainnav-item href="#">About</mainnav-item>
     </mainnav-element>
   `;
@@ -120,7 +120,7 @@ export const Template = ({ expand, brandHref, collapseId, active, href }) => {
 # MainNavElement
 
 <Canvas>
-  <Story name="Basic" args={{ expand: "always" }}>
+  <Story name="Basic">
     {Template.bind({})}
   </Story>
 </Canvas>
@@ -138,26 +138,8 @@ import {
 
 <ArgsTable story="Basic" />
 
-## SideNavItem methods
-
-`openItem()` and `closeItem()` are public methods exposed by SideNavItem component for user to customize the opening and closing of SideNavItems when required.
-
-```jsx
-// class method
-
-const sideNavItem = new SideNavItem();
-sideNavItem.openItem();
-sideNavItem.closeItem();
-
-//dom method
-
-const sideNavItemEl = document.querySelector("sidenav-item#specificId");
-sideNavItemEl.openItem();
-sideNavItemEl.closeItem();
-```
-
 ## CSS Custom Properties
 
-| Name                    | Description                                                                                 |
-| ----------------------- | ------------------------------------------------------------------------------------------- |
-| `--sidenav-theme-color` | Sets color of all text and left-border of sidenav. Default to sgds primary color (#5925DC). |
+| Name                         | Description                                                                                                   |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `--mainnav-item-theme-color` | Sets color of hovered/active text and bottom-border of`<mainnav-item/>` Default to sgds primary color (#5925DC). |

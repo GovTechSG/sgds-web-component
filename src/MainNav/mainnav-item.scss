@@ -1,6 +1,10 @@
 @import "../utils/base.scss";
 @import "~@govtechsg/sgds/sass/navbar";
 
+:host   {
+  --mainnav-item-theme-color: #5925DC;
+}
+
 .nav-item {
   height: 100%;
 }
@@ -14,7 +18,7 @@ a.nav-link {
 
   &.active,
   &:hover {
-    color: $primary;
-    border-color: $primary;
+    color: var(--mainnav-item-theme-color);
+    border-color: var(--mainnav-item-theme-color);
   }
 }
