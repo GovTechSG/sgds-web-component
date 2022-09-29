@@ -1,16 +1,25 @@
-import { LitElement, html, PropertyValueMap } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { LitElement, html } from "lit";
+import { customElement, property, state } from "lit/decorators.js";
 import styles from "./mainnav.scss";
 import { Collapse, Offcanvas } from "bootstrap";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import genId from "../utils/generateId";
+import {
+  SM_BREAKPOINT,
+  MD_BREAKPOINT,
+  LG_BREAKPOINT,
+  XL_BREAKPOINT,
+  XXL_BREAKPOINT,
+} from "../utils/breakpoints";
 
-type Size = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
-export const SM_BREAKPOINT = 576;
-export const MD_BREAKPOINT = 768;
-export const LG_BREAKPOINT = 992;
-export const XL_BREAKPOINT = 1200;
-export const XXL_BREAKPOINT = 1400;
+export type MainNavExpandSize =
+  | "sm"
+  | "md"
+  | "lg"
+  | "xl"
+  | "xxl"
+  | "always"
+  | "never";
 
 const SIZES = {
   sm: SM_BREAKPOINT,
@@ -19,28 +28,26 @@ const SIZES = {
   xl: XL_BREAKPOINT,
   XXL: XXL_BREAKPOINT,
   never: Infinity,
-  always: 0,
+  always: -1,
 };
 @customElement("mainnav-element")
 export class MainNavElement extends LitElement {
   static styles = styles;
 
-
   constructor() {
     super();
-      window.addEventListener("resize", () => {
-      const newBreakpointReachedValue = window.innerWidth < SIZES[this.expand.toString()]
-      if (newBreakpointReachedValue !== this.breakpointReached) this.requestUpdate()
-
-      this.breakpointReached = newBreakpointReachedValue
-    })
-
+    window.addEventListener("resize", () => {
+      const newBreakpointReachedValue =
+        window.innerWidth < SIZES[this.expand.toString()];
+      if (newBreakpointReachedValue !== this.breakpointReached) {
+        this.requestUpdate();
+      }
+    });
   }
-
 
   private myCollapse: Ref<HTMLElement> = createRef();
   private bsCollapse: Collapse = null;
-  // TODO: stylings and slots are incomplete for offcanvas mode 
+  // TODO: stylings and slots are incomplete for offcanvas mode
   private myOffcanvas: Ref<HTMLElement> = createRef();
   private bsOffcanvas: Offcanvas = null;
 
@@ -58,20 +65,16 @@ export class MainNavElement extends LitElement {
   collapseId = genId("mainnav", "collapse");
 
   @property()
-  expand: Size = "lg";
-
-  @state()
-  breakpointReached: Boolean  = window.innerWidth < SIZES[this.expand.toString()]
-
-  @state()
-  expanded: Boolean = false;
+  expand: MainNavExpandSize = "lg";
 
   @property({ type: String })
   mode: "offcanvas" | "default" = "default";
 
+  @state()
+  breakpointReached: Boolean = false;
 
-  @query('nav.sgds.navbar')
-  navbarElement: Element
+  @state()
+  expanded: Boolean = false;
 
   firstUpdated() {
     if (this.mode === "default") {
@@ -104,6 +107,7 @@ export class MainNavElement extends LitElement {
   }
 
   render() {
+    this.breakpointReached = window.innerWidth < SIZES[this.expand.toString()];
     const collapseClass = "collapse navbar-collapse order-4";
     const offcanvasClass = "offcanvas offcanvas-start order-4";
     return html`
