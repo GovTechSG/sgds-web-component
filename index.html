@@ -26,6 +26,15 @@
         sidenav-link::part(sidenav-anchor) {
             color: red;
         } */
+        .grid{
+            /* display: grid; */
+            grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+            gap:0.5rem;
+        }
+
+        .grid + .grid{
+            margin-top: 1rem;
+        }
 
         sidenav-item {
             --sidenav-theme-color: orange;
@@ -37,14 +46,16 @@
             --sgds-masthead-text-color: red;
         }
 
-        /* body {
+        body {
+            margin:0;
+            padding:0;
             display: flex;
             min-height: 100vh;
             flex-direction: column;
         }
         button-element{
             flex: 1;
-        } */
+        } 
     </style>
     <script src="lib/index.js"></script>
 </head>
@@ -84,15 +95,34 @@
         </sidenav-element>
         <br />
         
-        <button-element variant="primary"><span slot="label">Hello World</span></button-element>
-        <button-element variant="secondary"><span slot="label">Hello World</span></button-element>
-        <button-element variant="outline-success"><span slot="label">Hello World</span></button-element>
-        <button-element variant="danger" disabled><span slot="label">Hello World</span></button-element>
-        <button-element variant="info" href="#" target="_blank"><span slot="label">Link</span></button-element>
-        <button-element variant="primary"><span slot="label">Hello World</span></button-element>
-        <button-element variant="outline-warning" disabled><span slot="label">Hello World</span></button-element>
-           
-        
+        <div class="container">
+            <h2>Button</h2>
+            <p>Button size</p>
+            <div class="row">
+                <div class="grid">
+                    <button-element class="btn-sm" variant="primary"><span slot="label">Hello World</span></button-element>
+                    <button-element class="btn" variant="primary"><span slot="label">Hello World</span></button-element>
+                    <button-element class="btn-lg" variant="primary"><span slot="label">Hello World</span></button-element>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <p>Variant</p>
+            <div class="row">
+                <div class="grid">
+                    <button-element variant="primary"><span slot="label">Primary</span></button-element>
+                    <button-element variant="outline-secondary"><span slot="label">Outline</span></button-element>
+                    <button-element variant="success" disabled><span slot="label">Disabled</span></button-element>
+                    <button-element variant="success" href="#"><span slot="label">Link button</span></button-element>
+                    <button-element variant="danger" href="#" target="_blank">
+                        <span slot="label">Link button _blank</span>
+                    </button-element>
+                    <button-element variant="danger" download="logo.svg">
+                        <span slot="label">Link button _blank</span>
+                    </button-element>
+                </div>
+            </div>
+        </div>
     </div>
     <footer-element description="this is a prop description" title="Singapore Government Design System"
         lastUpdatedDate="08 Feb 2022" links='[
@@ -247,5 +277,4 @@
     </footer-element>
 
 </body>
-
 </html>
