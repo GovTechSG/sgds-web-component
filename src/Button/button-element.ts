@@ -34,7 +34,7 @@ export class ButtonElement extends LitElement {
 
     return html`
       <${tag}
-        class="btn btn-${this.variant} ${this.class}"
+        class="btn btn-${this.variant} ${this.class} ${isLink && this.disabled ? 'disabled' : undefined}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
         href=${ifDefined(isLink ? this.href : undefined)}
