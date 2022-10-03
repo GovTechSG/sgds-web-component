@@ -13,8 +13,13 @@ export class ButtonElement extends LitElement {
   
   @property({ reflect: true }) class? : string;
 
-  @property({ reflect: true }) size :'default' | 'sm' | 'lg' ;
+  /** Button sizes */
+  @property({ reflect: true }) size : 'btn-sm' | 'btn-lg' ;
 
+  /** Button active state */
+  @property({ type: Boolean, reflect: true }) active = false ;
+
+  /** Button disabled state */
   @property({ type: Boolean, reflect: true }) disabled = false ;
 
   @property() type: 'button' | 'submit' | 'reset' = 'button' ;
@@ -31,10 +36,9 @@ export class ButtonElement extends LitElement {
   render() {
     const isLink = this.href ? true : false;
     const tag = isLink ? literal`a` : literal`button`;
-
     return html`
       <${tag}
-        class="btn btn-${this.variant} ${this.class} ${isLink && this.disabled ? 'disabled' : undefined}"
+        class="sgds btn ${this.variant ? 'btn-' + this.variant : undefined} ${this.active ? 'active' : undefined} ${this.class} ${isLink && this.disabled ? 'disabled' : undefined} ${this.size ? 'btn-' + this.size : undefined}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
         href=${ifDefined(isLink ? this.href : undefined)}

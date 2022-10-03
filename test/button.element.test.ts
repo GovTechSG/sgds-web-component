@@ -12,7 +12,7 @@ describe('button-element', () => {
     const el = await fixture(html`<button-element></button-element>`);
     assert.shadowDom.equal(
       el,
-      `<button class="btn btn-primary" type="button" aria-disabled="false" tabindex="0">
+      `<button class="btn btn-primary sgds" type="button" aria-disabled="false" tabindex="0">
         <span part="label">
           <slot name="label"></slot>
         </span>
