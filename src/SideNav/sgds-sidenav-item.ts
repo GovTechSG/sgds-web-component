@@ -1,11 +1,12 @@
-import { LitElement, html } from "lit";
+import { html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import styles from "./sidenav-item.scss";
+import SgdsElement from "../utils/sgds-element";
+import styles from "./sgds-sidenav-item.scss";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { Collapse } from "bootstrap";
 import genId from "../utils/generateId";
-@customElement("sidenav-item")
-export class SideNavItem extends LitElement {
+@customElement("sgds-sidenav-item")
+export class SgdsSidenavItem extends SgdsElement {
   static styles = styles;
 
   private myCollapse: Ref<HTMLElement> = createRef();
@@ -29,12 +30,7 @@ export class SideNavItem extends LitElement {
   private index = "-1";
 
   private _onClick() {
-    const event = new CustomEvent("toggle-onclick", {
-      bubbles: true,
-      composed: true,
-      detail: { index: this.index },
-    });
-    this.dispatchEvent(event);
+    this.emit('sgds-toggle', {detail : {index: this.index}})
   }
 
   private _onClickButton() {

@@ -1,1 +1,1 @@
-export {MastheadElement} from './masthead-element';
+export {SgdsMasthead} from './sgds-masthead';

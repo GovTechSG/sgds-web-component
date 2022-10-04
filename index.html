@@ -20,24 +20,24 @@
             font-family: "bootstrap-icons", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         }
 
-        footer-element::part(footer-bottom) {
+        sgds-footer::part(footer-bottom) {
             background-color: red;
         }
 
-        /* sidenav-item::part(sidenav-btn) {
+        /* sgds-sidenav-item::part(sidenav-btn) {
             color: red;
             border-left-color: red;
         }
-        sidenav-link::part(sidenav-anchor) {
+        sgds-sidenav-link::part(sidenav-anchor) {
             color: red;
         } */
 
-        sidenav-item {
+        sgds-sidenav-item {
             --sidenav-theme-color: orange;
             /* --sidenav-font-size: 40rem; */
         }
 
-        masthead-element {
+        sgds-masthead {
             --sgds-masthead-crest-color: white;
             --sgds-masthead-text-color: red;
         }
@@ -49,8 +49,6 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <!-- <masthead-element></masthead-element> -->
-
     <mainnav-element expand="never" mode="offcanvas">
         <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
 
@@ -59,41 +57,42 @@
         <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px"></dev-console-widget>
     </mainnav-element>
 
+    <sgds-masthead></sgds-masthead>
     <div class="container">
         <br />
-        <sidenav-element class="mt-3" id="test-id">
-            <sidenav-item active>
+        <sgds-sidenav class="mt-3" id="test-id">
+            <sgds-sidenav-item active>
                 <span slot="title">
                     <sl-icon name="stack"></sl-icon> Title
                 </span>
-                <sidenav-link href="https://google.com" active>first-test</sidenav-link>
-                <sidenav-link href="https://google.com">first-test</sidenav-link>
-                <sidenav-link href="https://google.com">first-test</sidenav-link>
-            </sidenav-item>
-            <sidenav-item title="Test title 2" active>
+                <sgds-sidenav-link href="https://google.com" active>first-test</sgds-sidenav-link>
+                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+            </sgds-sidenav-item>
+            <sgds-sidenav-item title="Test title 2" active>
                 <span slot="title">Title</span>
-                <sidenav-link href="https://google.com">first-test</sidenav-link>
-                <sidenav-link href="https://google.com">first-test</sidenav-link>
-                <sidenav-link href="https://google.com">first-test</sidenav-link>
+                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
 
-            </sidenav-item>
-            <sidenav-item title="Test title 2">
+            </sgds-sidenav-item>
+            <sgds-sidenav-item title="Test title 2">
                 <span slot="title">Title</span>
-                <sidenav-link href="https://google.com">first-test</sidenav-link>
-                <sidenav-link href="https://google.com">first-test</sidenav-link>
-                <sidenav-link href="https://google.com">first-test</sidenav-link>
-            </sidenav-item>
-            <sidenav-item title="Test title 2" href="#">
+                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+            </sgds-sidenav-item>
+            <sgds-sidenav-item title="Test title 2" href="#">
                 <span slot="title">Title</span>
-            </sidenav-item>
-            <sidenav-item title="Test title 2" href="#">
+            </sgds-sidenav-item>
+            <sgds-sidenav-item title="Test title 2" href="#">
                 <span slot="title">Title</span>
-            </sidenav-item>
-        </sidenav-element>
+            </sgds-sidenav-item>
+        </sgds-sidenav>
         <br />
         <button-element class="flex-grow-1">Hello World</button-element>
     </div>
-    <footer-element description="this is a prop description" title="Singapore Government Design System"
+    <sgds-footer description="this is a prop description" title="Singapore Government Design System"
         lastUpdatedDate="08 Feb 2022" links='[
         {
             "title": "Column 1",
@@ -243,7 +242,7 @@
             ]
         }
       ]'>
-    </footer-element>
+    </sgds-footer>
 
 </body>
 

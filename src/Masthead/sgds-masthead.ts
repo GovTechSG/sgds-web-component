@@ -1,13 +1,14 @@
-import { LitElement, html } from "lit";
+import { html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import styles from "./masthead.scss";
+import styles from "./sgds-masthead.scss";
+import SgdsElement from "../utils/sgds-element";
 
 /**
  * @property fluid - Include this attribute for full width container
  */
 
-@customElement("masthead-element")
-export class MastheadElement extends LitElement {
+@customElement("sgds-masthead")
+export class SgdsMasthead extends SgdsElement {
   static styles = styles;
 
   @property({ type: Boolean, reflect: true })
@@ -185,4 +186,4 @@ export class MastheadElement extends LitElement {
   }
 }
 
-export default MastheadElement;
+export default SgdsMasthead;
