@@ -10,12 +10,12 @@ import { partDescription } from "./common";
   argTypes={{
     title: {
       control: "text",
-      description: "Sets title of FooterElement",
+      description: "Sets title of SgdsFooter",
       table: { category: "props" },
     },
     description: {
       control: "text",
-      description: "Sets description of FooterElement",
+      description: "Sets description of SgdsFooter",
       table: { category: "props" },
     },
     links: {
@@ -91,7 +91,7 @@ export const Template = ({
   termsOfUseHref,
 }) =>
   html`
-    <footer-element
+    <sgds-footer
       .title=${title}
       .description=${description}
       .lastUpdatedDate=${lastUpdatedDate}
@@ -102,10 +102,10 @@ export const Template = ({
       .termsOfUseHref=${termsOfUseHref}
       .links=${links}
     >
-    </footer-element>
+    </sgds-footer>
   `;
 
-# FooterElement
+# SgdsFooter
 
 <Canvas>
   <Story
@@ -257,7 +257,7 @@ export const Template = ({
 ## API
 
 ```jsx
-import { FooterElement, ColumnLinks } from "@govtechsg/sgds-web-component";
+import { SgdsFooter, ColumnLinks } from "@govtechsg/sgds-web-component";
 ```
 
 <ArgsTable story="Basic" />

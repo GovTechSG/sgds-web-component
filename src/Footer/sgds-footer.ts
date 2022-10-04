@@ -1,6 +1,7 @@
-import { LitElement, html } from "lit";
+import { html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import styles from "./footer.scss";
+import SgdsElement from "../utils/sgds-element";
 
 export type Links = {
   href: string;
@@ -10,8 +11,8 @@ export interface ColumnLinks {
   title: string;
   links: Links[]
 }
-@customElement("footer-element")
-export class FooterElement extends LitElement {
+@customElement("sgds-footer")
+export class SgdsFooter extends SgdsElement {
   static styles = styles
   @property()
   title = ``;
@@ -117,4 +118,4 @@ export class FooterElement extends LitElement {
   }
 }
 
-export default FooterElement;
+export default SgdsFooter;
