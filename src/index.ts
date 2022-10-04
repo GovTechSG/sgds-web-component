@@ -1,6 +1,6 @@
 import './Masthead';
 import './Button';
 import './Footer';
-import './SideNav';
+import './Sidenav';
 import './Dropdown';
 import './SlDropdown';

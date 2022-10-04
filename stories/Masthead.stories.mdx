@@ -18,10 +18,10 @@ export const Template = ({
   fluid
 }) =>
   html`
-    <masthead-element .fluid=${fluid}></masthead-element>
+    <sgds-masthead .fluid=${fluid}></sgds-masthead>
   `;
 
-# MastheadElement
+# SgdsMasthead
 
 All .gov.sg digital services shall adopt The Official Government Banner for every page in the digital service and be placed at the top of the page.
 
@@ -34,7 +34,7 @@ All .gov.sg digital services shall adopt The Official Government Banner for ever
 ## API
 
 ```jsx
-import { MastheadElement } from "@govtechsg/sgds-web-component";
+import { SgdsMasthead } from "@govtechsg/sgds-web-component";
 ```
 <ArgsTable story="Basic" />
 
@@ -82,6 +82,15 @@ import { MastheadElement } from "@govtechsg/sgds-web-component";
         Sets link hover color for  "How to identify?" and "Trusted Site"
       </td>
       <td>hsl(221, 64%, 55%)</td>
+    </tr>
+    <tr>
+      <td>
+        <code>--masthead-mobile-padding-x</code>
+      </td>
+      <td>
+        Sets the padding left and right for viewport width 1024px and below
+      </td>
+      <td>1.25rem</td>
     </tr>
     <tr>
       <td>

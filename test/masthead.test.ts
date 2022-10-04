@@ -1,18 +1,18 @@
-import { MastheadElement } from "../src/Masthead/masthead-element";
-import "../src/Masthead/masthead-element";
+import { SgdsMasthead } from "../src/Masthead";
+import "../src/Masthead/sgds-masthead";
 import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 
-describe("masthead-element", () => {
+describe("sgds-masthead", () => {
   it("is defined", () => {
-    const el = document.createElement("masthead-element");
-    assert.instanceOf(el, MastheadElement);
+    const el = document.createElement("sgds-masthead");
+    assert.instanceOf(el, SgdsMasthead);
   });
 
 
   
   it("renders with default values", async () => {
-    const el = await fixture(html`<masthead-element></masthead-element>`);
+    const el = await fixture(html`<sgds-masthead></sgds-masthead>`);
     assert.shadowDom.equal(
       el,
       ` 
@@ -90,7 +90,7 @@ describe("masthead-element", () => {
   });
 
   it("when clicked on #sgds-masthead-identify, shows #sgds-masthead-content", async () => {
-    const el = await fixture<MastheadElement>(html`<masthead-element></masthead-element>`);
+    const el = await fixture<SgdsMasthead>(html`<sgds-masthead></sgds-masthead>`);
     expect(
       el.shadowRoot?.getElementById("sgds-masthead-content")?.classList.value
     ).not.to.contain("show");
@@ -102,7 +102,7 @@ describe("masthead-element", () => {
   });
 
   it("when fluid attriubute is inserted, .container class should update to .container-fluid", async () => {
-    const el = await fixture<MastheadElement>(html`<masthead-element></masthead-element>`);
+    const el = await fixture<SgdsMasthead>(html`<sgds-masthead></sgds-masthead>`);
     const containerWrapper = el.shadowRoot?.getElementById("sgds-masthead")?.children[0]
     expect(
       containerWrapper?.classList.value
