@@ -2,19 +2,24 @@ import { LitElement} from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import {classMap} from 'lit/directives/class-map.js';
 import styles from "./button-element.scss";
+
+export type ButtonVariant = 
+"primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark" | "link" |
+"outline-primary" | "outline-secondary" | "outline-success" | "outline-danger" | "outline-warning" | "outline-info" | "outline-light" | "outline-dark"
 
 @customElement("button-element")
 export class ButtonElement extends LitElement {
   static styles = styles;
 
   /** The button's variant. */
-  @property({ reflect: true }) variant = "primary";
+  @property({ reflect: true }) variant: ButtonVariant = "primary";
   
-  @property({ reflect: true }) class? : string;
+  @property({ reflect: true }) buttonClasses? : string;
 
   /** Button sizes */
-  @property({ reflect: true }) size : 'btn-sm' | 'btn-lg' ;
+  @property({ reflect: true }) size : 'sm' | 'lg' ;
 
   /** Button active state */
   @property({ type: Boolean, reflect: true }) active = false ;
@@ -34,11 +39,19 @@ export class ButtonElement extends LitElement {
   @property({ reflect: true }) download?: string;
 
   render() {
-    const isLink = this.href ? true : false;
+    const isLink = this.href;
     const tag = isLink ? literal`a` : literal`button`;
     return html`
       <${tag}
-        class="sgds btn ${this.variant ? 'btn-' + this.variant : undefined} ${this.active ? 'active' : undefined} ${this.class} ${isLink && this.disabled ? 'disabled' : undefined} ${this.size ? 'btn-' + this.size : undefined}"
+        class="sgds btn ${classMap(
+          {
+            'disabled': isLink && this.disabled,
+            'active': this.active, 
+            [`btn-${this.variant}`]: this.variant,
+            [`btn-${this.size}`]: this.size,
+            [`${this.buttonClasses}`]: this.buttonClasses
+          }
+        )}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
         href=${ifDefined(isLink ? this.href : undefined)}
@@ -49,9 +62,7 @@ export class ButtonElement extends LitElement {
         aria-disabled=${this.disabled ? 'true' : 'false'}
         tabindex=${this.disabled ? '-1' : '0'}
       >
-        <span part="label">
-          <slot name="label"></slot>
-        </span>
+        <slot name="label"></slot>
       </${tag}>
     `;
   }
