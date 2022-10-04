@@ -41,21 +41,21 @@
             --sgds-masthead-crest-color: white;
             --sgds-masthead-text-color: red;
         }
-        mainnav-item {
-            --mainnav-item-theme-color:red;
+        sgds-mainnav-item {
+            --sgds-mainnav-item-theme-color:red;
         }
     </style>
     <script src="lib/index.js"></script>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <mainnav-element expand="never" mode="offcanvas">
+    <sgds-mainnav expand="never" mode="offcanvas">
         <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
 
-        <mainnav-item href="#">Home</mainnav-item>
-        <mainnav-item href="#">About</mainnav-item>
+        <sgds-mainnav-item href="#">Home</sgds-mainnav-item>
+        <sgds-mainnav-item href="#">About</sgds-mainnav-item>
         <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px"></dev-console-widget>
-    </mainnav-element>
+    </sgds-mainnav>
 
     <sgds-masthead></sgds-masthead>
     <div class="container">

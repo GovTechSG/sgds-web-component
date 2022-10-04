@@ -1,5 +1,5 @@
 import './Masthead';
 import './Button'
 import './Footer';
-import './MainNav';
+import './Mainnav';
 import './Sidenav';

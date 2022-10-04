@@ -1,9 +1,10 @@
-import { LitElement, html } from "lit";
+import { html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import styles from "./mainnav-item.scss";
+import SgdsElement from "../utils/sgds-element";
+import styles from "./sgds-mainnav-item.scss";
 
-@customElement("mainnav-item")
-export class MainNavItem extends LitElement {
+@customElement("sgds-mainnav-item")
+export class SgdsMainnavItem extends SgdsElement {
   static styles = styles;
 
   @property({ type: Boolean })

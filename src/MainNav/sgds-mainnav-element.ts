@@ -1,9 +1,10 @@
-import { LitElement, html } from "lit";
+import { html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import styles from "./mainnav.scss";
+import styles from "./sgds-mainnav.scss";
 import { Collapse, Offcanvas } from "bootstrap";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import genId from "../utils/generateId";
+import SgdsElement from "../utils/sgds-element";
 import {
   SM_BREAKPOINT,
   MD_BREAKPOINT,
@@ -12,7 +13,7 @@ import {
   XXL_BREAKPOINT,
 } from "../utils/breakpoints";
 
-export type MainNavExpandSize =
+export type MainnavExpandSize =
   | "sm"
   | "md"
   | "lg"
@@ -30,8 +31,8 @@ const SIZES = {
   never: Infinity,
   always: -1,
 };
-@customElement("mainnav-element")
-export class MainNavElement extends LitElement {
+@customElement("sgds-mainnav")
+export class SgdsMainnav extends SgdsElement {
   static styles = styles;
 
   constructor() {
@@ -65,7 +66,7 @@ export class MainNavElement extends LitElement {
   collapseId = genId("mainnav", "collapse");
 
   @property()
-  expand: MainNavExpandSize = "lg";
+  expand: MainnavExpandSize = "lg";
 
   @property({ type: String })
   mode: "offcanvas" | "default" = "default";
@@ -158,4 +159,4 @@ export class MainNavElement extends LitElement {
   }
 }
 
-export default MainNavElement;
+export default SgdsMainnav;

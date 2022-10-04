@@ -1,27 +1,24 @@
-import { MainNavElement, MainNavItem } from "../src/MainNav";
-import "../src/MainNav";
+import { SgdsMainnavItem, SgdsMainnav } from "../src/Mainnav";
+import "../src/Mainnav";
 import {
   fixture,
   assert,
   expect,
-  waitUntil,
-  elementUpdated,
   aTimeout,
   fixtureCleanup,
 } from "@open-wc/testing";
 import { html } from "lit";
-import sinon from "sinon";
 
-describe("mainnav-element", () => {
+describe("sgds-mainnav", () => {
   afterEach(() => fixtureCleanup())
   it("is defined", () => {
-    const el = document.createElement("mainnav-element");
-    assert.instanceOf(el, MainNavElement);
+    const el = document.createElement("sgds-mainnav");
+    assert.instanceOf(el, SgdsMainnav);
   });
 
   it("can be semantically compare with shadowDom trees", async () => {
     const el = await fixture(
-      html`<mainnav-element collapseId="collapse-test-id"></mainnav-element>`
+      html`<sgds-mainnav collapseId="collapse-test-id"></sgds-mainnav>`
     );
     assert.shadowDom.equal(
       el,
@@ -62,7 +59,7 @@ describe("mainnav-element", () => {
 
   it("brandHref props forwards to a.navbar-brand  href attribute", async () => {
     const el = await fixture(
-      html`<mainnav-element brandHref="test"></mainnav-element>`
+      html`<sgds-mainnav brandHref="test"></sgds-mainnav>`
     );
     expect(
       el.shadowRoot?.querySelector("a.navbar-brand")?.getAttribute("href")
@@ -71,7 +68,7 @@ describe("mainnav-element", () => {
 
   it("when mode is offcanvas, offcanvas classes are present instead of collapse classes", async () => {
     const el = await fixture(
-      html`<mainnav-element mode="offcanvas"></mainnav-element>`
+      html`<sgds-mainnav mode="offcanvas"></sgds-mainnav>`
     );
     expect(el.shadowRoot?.querySelector(".offcanvas.offcanvas-start.order-4"))
       .to.exist;
@@ -81,7 +78,7 @@ describe("mainnav-element", () => {
 
   it("when expand=always, nav class has .navbar-expand", async () => {
     const el = await fixture(
-      html`<mainnav-element expand="always"></mainnav-element>`
+      html`<sgds-mainnav expand="always"></sgds-mainnav>`
     );
     expect(el.shadowRoot?.querySelector("nav.sgds.navbar")).to.have.class(
       "navbar-expand"
@@ -92,7 +89,7 @@ describe("mainnav-element", () => {
   });
   it("when expand=never, nav class does not have .navbar-expand", async () => {
     const el = await fixture(
-      html`<mainnav-element expand="never"></mainnav-element>`
+      html`<sgds-mainnav expand="never"></sgds-mainnav>`
     );
     const classList =
       el.shadowRoot?.querySelector("nav.sgds.navbar")?.classList.value;
@@ -102,7 +99,7 @@ describe("mainnav-element", () => {
   testSizes.forEach((size) => {
     it(`when expand=${size}, nav class have .navbar-expand=${size}`, async () => {
       const el = await fixture(
-        html`<mainnav-element expand=${size}></mainnav-element>`
+        html`<sgds-mainnav expand=${size}></sgds-mainnav>`
       );
       const classList =
         el.shadowRoot?.querySelector("nav.sgds.navbar")?.classList.value;
@@ -113,7 +110,7 @@ describe("mainnav-element", () => {
 
   it("in default mode (collapse menu), when .navbar-toggler is clicked .navbar-collapse has .show class and toggler has aria-expanded true", async () => {
     const el = await fixture(
-      html`<mainnav-element expand="never"></mainnav-element>`
+      html`<sgds-mainnav expand="never"></sgds-mainnav>`
     );
     const mainNavCollapse = el.shadowRoot?.querySelector(".navbar-collapse");
     expect(mainNavCollapse).not.to.have.class("show");
@@ -135,8 +132,8 @@ describe("mainnav-element", () => {
   // LG_BREAKPOINT = 992 
   // since window.innerWidth < LG_BREAKPOINT --> expect non-collapsible slot to be .order-2 (see first test)
   it('when expand=lg and window resize event occurs to above breakpoint, it changes order of non-collapsible slot, ', async() => {
-    const el = await fixture<MainNavElement>(
-      html`<mainnav-element expand="lg"></mainnav-element>`
+    const el = await fixture<SgdsMainnav>(
+      html`<sgds-mainnav expand="lg"></sgds-mainnav>`
     );
     expect(el.shadowRoot?.querySelector("slot[name='non-collapsible']")).to.have.class('order-2')
     Object.defineProperty(window, 'innerWidth', {
@@ -151,11 +148,10 @@ describe("mainnav-element", () => {
   //SM_BREAKPOINT = 576
   // now window.innerWidth = 1000
   it('when expand=sm and window resize event occurs to above breakpoint, it changes order of non-collapsible slot, ', async() => {
-    const el = await fixture<MainNavElement>(
-      html`<mainnav-element expand="sm"></mainnav-element>`
+    const el = await fixture<SgdsMainnav>(
+      html`<sgds-mainnav expand="sm"></sgds-mainnav>`
     );
     expect(el.shadowRoot?.querySelector("slot[name='non-collapsible']")).to.have.class('order-5')
-  // //   console.log(window.innerWidth)
     Object.defineProperty(window, 'innerWidth', {
     writable: true,
     configurable: true,
@@ -167,8 +163,8 @@ describe("mainnav-element", () => {
   })
   // now window.innerWidth = 575
   it('when expand=always and window resize event occurs, it NEVER changes order of non-collapsible slot, ', async() => {
-    const el = await fixture<MainNavElement>(
-      html`<mainnav-element expand="always"></mainnav-element>`
+    const el = await fixture<SgdsMainnav>(
+      html`<sgds-mainnav expand="always"></sgds-mainnav>`
     );
     expect(el.shadowRoot?.querySelector("slot[name='non-collapsible']")).to.have.class('order-5')
     Object.defineProperty(window, 'innerWidth', {
@@ -190,8 +186,8 @@ describe("mainnav-element", () => {
    expect(el.shadowRoot?.querySelector('slot[name="non-collapsible"]')).to.have.class('order-5')
   })
   it('when expand=never and window resize event occurs, it NEVER changes order of non-collapsible slot, ', async() => {
-    const el = await fixture<MainNavElement>(
-      html`<mainnav-element expand="never"></mainnav-element>`
+    const el = await fixture<SgdsMainnav>(
+      html`<sgds-mainnav expand="never"></sgds-mainnav>`
     );
     expect(el.shadowRoot?.querySelector("slot[name='non-collapsible']")).to.have.class('order-2')
     Object.defineProperty(window, 'innerWidth', {
@@ -214,8 +210,8 @@ describe("mainnav-element", () => {
   })
 
   it('keyboard esc to exit offcanvas works', async() => {
-    const el = await fixture<MainNavElement>(
-      html`<mainnav-element expand="never" mode="offcanvas"></mainnav-element>`
+    const el = await fixture<SgdsMainnav>(
+      html`<sgds-mainnav expand="never" mode="offcanvas"></sgds-mainnav>`
     );
     el.shadowRoot?.querySelector('button')?.click()
     await el.updateComplete
@@ -228,13 +224,13 @@ describe("mainnav-element", () => {
   })
 });
 
-describe('mainnav-item', () => {
+describe('sgds-mainnav-item', () => {
   it("is defined", () => {
-    const el = document.createElement("mainnav-item");
-    assert.instanceOf(el, MainNavItem);
+    const el = document.createElement("sgds-mainnav-item");
+    assert.instanceOf(el, SgdsMainnavItem);
   });
   it("can be semantically compare with shadowDom trees", async () => {
-    const el = await fixture(html`<mainnav-item></mainnav-item>`);
+    const el = await fixture(html`<sgds-mainnav-item></sgds-mainnav-item>`);
     assert.shadowDom.equal(
       el,
       `  <li class="nav-item">
@@ -249,11 +245,11 @@ describe('mainnav-item', () => {
     );
   });
   it("href prop is forwarded to a tag href attr", async () => {
-    const el = await fixture(html`<mainnav-item href="#">test</mainnav-item>`);
+    const el = await fixture(html`<sgds-mainnav-item href="#">test</sgds-mainnav-item>`);
     expect(el.shadowRoot?.querySelector("a")).to.have.attribute("href", "#");
   });
   it("active prop is forwarded to <a> class", async () => {
-    const el = await fixture(html`<mainnav-item  active>test</mainnav-item >`);
+    const el = await fixture(html`<sgds-mainnav-item  active>test</sgds-mainnav-item >`);
     expect(el.shadowRoot?.querySelector("a")).to.have.class("active");
   });
 })

@@ -2,11 +2,11 @@ import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit";
 import { withWebComponentsKnobs } from "storybook-addon-web-components-knobs";
 import { withKnobs, text, number } from "@storybook/addon-knobs";
-import "../lib/MainNav";
+import "../lib/Mainnav";
 import { partDescription } from "./common";
 
 <Meta
-  title="Components/MainNav"
+  title="Components/Mainnav"
   argTypes={{
     expand: {
       control: "select",
@@ -15,7 +15,7 @@ import { partDescription } from "./common";
       description:
         "The breakpoint, below which, the Navbar will collapse. When `always` the Navbar will always be expanded regardless of screen size. When `never`, the Navbar will always be collapsed",
       table: {
-        category: "props: MainNavElement",
+        category: "props: SgdsMainnav",
         defaultValue: { summary: "lg" },
         type: {
           summary: "MainNavExpandSize",
@@ -28,48 +28,48 @@ import { partDescription } from "./common";
       description: "The href link for brand logo",
       table: {
         defaultValue: { summary: "" },
-        category: "props: MainNavElement",
+        category: "props: SgdsMainnav",
         type: { summary: "string" },
       },
     },
     collapseId: {
       control: "text",
       description:
-        "Forwards to id attribute of div.collapse and aria-controls attribute of toggler button in MainNavElement. By default, MainNavElement auto-generates a unique id. Override the default id by specifiying your own",
+        "Forwards to id attribute of div.collapse and aria-controls attribute of toggler button in SgdsMainnav. By default, SgdsMainnav auto-generates a unique id. Override the default id by specifiying your own",
       table: {
-        category: "props: MainNavElement",
+        category: "props: SgdsMainnav",
         type: {
           summary: "string",
         },
       },
     },
-    // MainNavElement slots
+    // SgdsMainnav slots
     default: {
       description:
-        "default slot of MainNavElement. Pass in MainNavItem elements here",
+        "default slot of SgdsMainnav. Pass in SgdsMainnavItem elements here",
       table: {
-        category: "slot: MainNavElement",
+        category: "slot: SgdsMainnav",
       },
     },
     brand: {
       description:
-        "Brand slot of MainNavElement. Pass in brand logo or img here",
+        "Brand slot of SgdsMainnav. Pass in brand logo or img here",
       table: {
-        category: "slot: MainNavElement",
+        category: "slot: SgdsMainnav",
       },
     },
     "non-collapsible": {
       description: "Elements in this slot will not be collapsed",
       table: {
-        category: "slot: MainNavElement",
+        category: "slot: SgdsMainnav",
       },
     },
-    // MainNavItem props
+    // SgdsMainnavItem props
     active: {
       control: "boolean",
       description: "when true, sets the active stylings of .nav-link",
       table: {
-        category: "props: MainNavItem",
+        category: "props: SgdsMainnavItem",
         defaultValue: { summary: false },
         type: {
           summary: "boolean",
@@ -78,10 +78,10 @@ import { partDescription } from "./common";
     },
     href: {
       control: "text",
-      description: "Href attribute for anchor element in MainNavItem",
+      description: "Href attribute for anchor element in SgdsMainnavItem",
       table: {
         defaultValue: { summary: "" },
-        category: "props: MainNavItem",
+        category: "props: SgdsMainnavItem",
         type: {
           summary: "string",
         },
@@ -89,9 +89,9 @@ import { partDescription } from "./common";
     },
     defaultMNI: {
       name: "default",
-      description: "default slot for MainNavItem element",
+      description: "default slot for SgdsMainnavItem element",
       table: {
-        category: "slot: MainNavItem",
+        category: "slot: SgdsMainnavItem",
       },
     },
   }}
@@ -99,7 +99,7 @@ import { partDescription } from "./common";
 
 export const Template = ({ expand, brandHref, collapseId, active, href }) => {
   return html`
-    <mainnav-element
+    <sgds-mainnav
       .expand=${expand}
       .brandHref=${brandHref}
       .collapseId=${collapseId}
@@ -109,21 +109,21 @@ export const Template = ({ expand, brandHref, collapseId, active, href }) => {
         src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
         slot="brand"
       />
-      <mainnav-item .active=${active} .href=${href}
+      <sgds-mainnav-item .active=${active} .href=${href}
         >Home (argsTable controlled)
-      </mainnav-item>
-      <mainnav-item href="#">About</mainnav-item>
+      </sgds-mainnav-item>
+      <sgds-mainnav-item href="#">About</sgds-mainnav-item>
       <dev-console-widget
         slot="non-collapsible"
         iconColor="black"
         iconWidth="28px"
         iconHeight="28px"
       ></dev-console-widget>
-    </mainnav-element>
+    </sgds-mainnav>
   `;
 };
 
-# MainNavElement
+# SgdsMainnav
 
 <Canvas>
   <Story name="Basic">{Template.bind({})}</Story>
@@ -134,8 +134,8 @@ export const Template = ({ expand, brandHref, collapseId, active, href }) => {
 
 ```jsx
 import {
-  MainNavElement,
-  MainNavItem,
+  SgdsMainnav,
+  SgdsMainnavItem,
   MainNavExpandSize
 } from "@govtechsg/sgds-web-component/MainNav";
 ```
@@ -146,4 +146,4 @@ import {
 
 | Name                         | Description                                                                                                      |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `--mainnav-item-theme-color` | Sets color of hovered/active text and bottom-border of`<mainnav-item/>` Default to sgds primary color (#5925DC). |
+| `--mainnav-item-theme-color` | Sets color of hovered/active text and bottom-border of`<sgds-mainnav-item/>` Default to sgds primary color (#5925DC). |
