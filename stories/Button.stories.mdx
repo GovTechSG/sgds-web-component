@@ -7,11 +7,16 @@ import "../lib/Button";
 <Meta
   title="Components/Button"
   argTypes={{
-    buttonclasses: { control: "text" },
+    buttonclasses: { 
+      control: "text" ,
+      table: { category: "props" }
+    },
+    
     label: { 
       control: "text",
       defaultValue: 'Hello World',
       type: {name: 'string', required: true},
+      table: { category: "props" },
       description:''
     },
     variant: {
@@ -35,27 +40,32 @@ import "../lib/Button";
         'outline-dark',
         'outline-light',
       ],
+      table: { category: "props" },
       description: "One or more button variant combinations buttons may be one of a variety of visual variants such as: 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark', 'light', 'link' as well as 'outline' versions (prefixed by 'outline-*')"
     },
     size:{
       control: 'select',
-      options:['md','sm','lg'],
+      options:['sm','lg'],
       defaultValue: '',
       description:'Specifies a large or small button',
+      table: { category: "props" },
     },
     active:{
       control:'boolean',
       defaultValue: false,
+      table: { category: "props" },
       description: 'Manually set the visual state of the button to :active'
     },
     disabled:{
       control: "boolean",
       defaultValue: false,
+      table: { category: "props" },
       description:'The disabled state of the button'
     },
     href:{
       control:"text",
       defaultValue: undefined,
+      table: { category: "props" },
       description:'When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`.'
     },
     target:{
@@ -67,10 +77,12 @@ import "../lib/Button";
         '_top'
       ],
       defaultValue: '_self',
+      table: { category: "props" },
       description:'Tells the browser where to open the link. Only used when `href` is set.'
     },
     download:{
       control: 'text',
+      table: { category: "props" },
       description: 'Tells the browser to download the linked file as this filename. Only used when `href` is set.'
     }
   }}
