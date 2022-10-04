@@ -7,17 +7,17 @@ import "../lib/Button";
 <Meta
   title="Components/Button"
   argTypes={{
+    buttonLabel:{
+      name: 'label',
+      control: "text" ,
+      defaultValue: 'Hello World',
+      type: { name: 'string', required: true },
+      description: "The button's label"
+    },
     buttonclasses: { 
       control: "text" ,
-      table: { category: "props" }
-    },
-    
-    label: { 
-      control: "text",
-      defaultValue: 'Hello World',
-      type: {name: 'string', required: true},
       table: { category: "props" },
-      description:''
+      description: 'Optional. Can be used to insert any utility classes such as `me-auto`'
     },
     variant: {
       control: 'select',
@@ -40,13 +40,13 @@ import "../lib/Button";
         'outline-dark',
         'outline-light',
       ],
+      defaultValue: 'primary',
       table: { category: "props" },
-      description: "One or more button variant combinations buttons may be one of a variety of visual variants such as: 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark', 'light', 'link' as well as 'outline' versions (prefixed by 'outline-*')"
+      description: "One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as `outline` versions (prefixed by `outline-*`)"
     },
     size:{
       control: 'select',
-      options:['sm','lg'],
-      defaultValue: '',
+      options:['(default)','sm','lg'],
       description:'Specifies a large or small button',
       table: { category: "props" },
     },
@@ -84,6 +84,10 @@ import "../lib/Button";
       control: 'text',
       table: { category: "props" },
       description: 'Tells the browser to download the linked file as this filename. Only used when `href` is set.'
+    },
+    label:{
+      table: { category: "slot" },
+      description: "The slot name for the button's label."
     }
   }}
 />
@@ -100,7 +104,7 @@ export const Template = (args) =>
       .target=${args.target}
       .download=${args.download}
     >
-      <span slot="label">${args.label}</span>
+      <span slot="label">${args.buttonLabel}</span>
     </sgds-button>
   `;
 
