@@ -1,15 +1,15 @@
-import { FooterElement, ColumnLinks } from "../src/Footer/footer-element";
-import "../src/Footer/footer-element";
+import { SgdsFooter, ColumnLinks } from "../src/Footer";
+import "../src/Footer/sgds-footer";
 import { fixture, assert, expect } from "@open-wc/testing";
 import { html } from "lit";
 
 describe("button-element", () => {
   it("is defined", () => {
-    const el = document.createElement("footer-element");
-    assert.instanceOf(el, FooterElement);
+    const el = document.createElement("sgds-footer");
+    assert.instanceOf(el, SgdsFooter);
   });
   it("renders with default values", async () => {
-    const el = await fixture(html`<footer-element></footer-element>`);
+    const el = await fixture(html`<sgds-footer></sgds-footer>`);
     assert.shadowDom.equal(
       el,
       `
@@ -79,7 +79,7 @@ describe("button-element", () => {
 
   it("description prop forward to .description class", async () => {
     const el = await fixture(
-      html`<footer-element description="test description"></footer-element>`
+      html`<sgds-footer description="test description"></sgds-footer>`
     );
     expect(el.shadowRoot?.querySelector(".description")?.textContent).to.equal(
       "test description"
@@ -88,7 +88,7 @@ describe("button-element", () => {
 
   it("title prop forward to approriate .title class", async () => {
     const el = await fixture(
-      html`<footer-element title="test title"></footer-element>`
+      html`<sgds-footer title="test title"></sgds-footer>`
     );
     expect(el.shadowRoot?.querySelector(".title")?.textContent).to.equal(
       "test title"
@@ -96,7 +96,7 @@ describe("button-element", () => {
   });
   it("lastUpdatedDate prop forward to approriate div el", async () => {
     const el = await fixture(
-      html`<footer-element lastUpdatedDate="08 Feb 2022"></footer-element>`
+      html`<sgds-footer lastUpdatedDate="08 Feb 2022"></sgds-footer>`
     );
     expect(
       el.shadowRoot?.querySelector(".footer-copyrights>div.col>div")
@@ -106,7 +106,7 @@ describe("button-element", () => {
 
   it("contactHref prop forward to contact's href attr", async () => {
     const el = await fixture(
-      html`<footer-element contactHref="test"></footer-element>`
+      html`<sgds-footer contactHref="test"></sgds-footer>`
     );
     expect(
       el.shadowRoot?.querySelector("a[href='test']")?.textContent
@@ -115,7 +115,7 @@ describe("button-element", () => {
 
   it("feedbackHref prop forward to feedback's href attr", async () => {
     const el = await fixture(
-      html`<footer-element feedbackHref="test"></footer-element>`
+      html`<sgds-footer feedbackHref="test"></sgds-footer>`
     );
     expect(
       el.shadowRoot?.querySelector("a[href='test']")?.textContent
@@ -123,7 +123,7 @@ describe("button-element", () => {
   });
   it("vulnerabilityHref prop forward to Report Vulnerability's href attr", async () => {
     const el = await fixture(
-      html`<footer-element vulnerabilityHref="test"></footer-element>`
+      html`<sgds-footer vulnerabilityHref="test"></sgds-footer>`
     );
     expect(
       el.shadowRoot?.querySelector("a[href='test']")?.textContent
@@ -131,7 +131,7 @@ describe("button-element", () => {
   });
   it("privacyHref prop forward to Privacy Statement's href attr", async () => {
     const el = await fixture(
-      html`<footer-element privacyHref="test"></footer-element>`
+      html`<sgds-footer privacyHref="test"></sgds-footer>`
     );
     expect(
       el.shadowRoot?.querySelector("a[href='test']")?.textContent
@@ -139,7 +139,7 @@ describe("button-element", () => {
   });
   it("termsOfUseHref prop forward to Terms of use's href attr", async () => {
     const el = await fixture(
-      html`<footer-element termsOfUseHref="test"></footer-element>`
+      html`<sgds-footer termsOfUseHref="test"></sgds-footer>`
     );
     expect(
       el.shadowRoot?.querySelector("a[href='test']")?.textContent
@@ -165,7 +165,7 @@ describe("button-element", () => {
       },
     ];
     const el = await fixture(
-      html`<footer-element .links=${linkArray}></footer-element>`
+      html`<sgds-footer .links=${linkArray}></sgds-footer>`
     );
     
     expect(el.shadowRoot?.querySelectorAll('.footer-items>div').length).to.equal(2)

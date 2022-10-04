@@ -1,3 +1,3 @@
 
-export {FooterElement} from './footer-element'
-export type { ColumnLinks, Links } from './footer-element' 
+export {SgdsFooter} from './sgds-footer'
+export type { ColumnLinks, Links } from './sgds-footer' 
