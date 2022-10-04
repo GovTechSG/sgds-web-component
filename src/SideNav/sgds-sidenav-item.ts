@@ -1,7 +1,7 @@
 import { html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import SgdsElement from "../utils/sgds-element";
-import styles from "./sidenav-item.scss";
+import styles from "./sgds-sidenav-item.scss";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { Collapse } from "bootstrap";
 import genId from "../utils/generateId";

@@ -1,6 +1,6 @@
 import { html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import styles from "./footer.scss";
+import styles from "./sgds-footer.scss";
 import SgdsElement from "../utils/sgds-element";
 
 export type Links = {

@@ -1,7 +1,7 @@
 import { html } from "lit";
 import SgdsElement from "../utils/sgds-element";
 import { customElement, property } from "lit/decorators.js";
-import styles from "./sidenav-link.scss";
+import styles from "./sgds-sidenav-link.scss";
 
 @customElement("sgds-sidenav-link")
 export class SgdsSidenavLink extends SgdsElement {
