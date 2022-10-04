@@ -53,7 +53,7 @@
             min-height: 100vh;
             flex-direction: column;
         }
-        button-element{
+        sgds-button{
             flex: 1;
         } 
     </style>
@@ -100,9 +100,9 @@
             <p>Button size</p>
             <div class="row">
                 <div class="grid">
-                    <button-element size="sm" variant="primary"><span slot="label">Hello World</span></button-element>
-                    <button-element variant="primary" active><span slot="label">Hello World</span></button-element>
-                    <button-element size="lg" variant="primary"><span slot="label">Hello World</span></button-element>
+                    <sgds-button size="sm" variant="primary"><span slot="label">Hello World</span></sgds-button>
+                    <sgds-button variant="primary" active><span slot="label">Hello World</span></sgds-button>
+                    <sgds-button size="lg" variant="primary"><span slot="label">Hello World</span></sgds-button>
                 </div>
             </div>
         </div>
@@ -110,16 +110,16 @@
             <p>Variant</p>
             <div class="row">
                 <div class="grid">
-                    <button-element variant="primary"><span slot="label">Primary</span></button-element>
-                    <button-element variant="outline-secondary"><span slot="label">Outline</span></button-element>
-                    <button-element variant="success" disabled><span slot="label">Disabled</span></button-element>
-                    <button-element variant="success" href="#"><span slot="label">Link button</span></button-element>
-                    <button-element variant="warning" href="#" target="_blank" disabled>
+                    <sgds-button variant="primary"><span slot="label">Primary</span></sgds-button>
+                    <sgds-button variant="outline-secondary"><span slot="label">Outline</span></sgds-button>
+                    <sgds-button variant="success" disabled><span slot="label">Disabled</span></sgds-button>
+                    <sgds-button variant="success" href="#"><span slot="label">Link button</span></sgds-button>
+                    <sgds-button variant="warning" href="#" target="_blank" disabled>
                         <span slot="label">Link button _blank</span>
-                    </button-element>
-                    <button-element variant="danger" download="logo.svg">
+                    </sgds-button>
+                    <sgds-button variant="danger" download="logo.svg">
                         <span slot="label">Link button _blank</span>
-                    </button-element>
+                    </sgds-button>
                 </div>
             </div>
         </div>

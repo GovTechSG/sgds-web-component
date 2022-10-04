@@ -3,20 +3,20 @@ import { customElement, property } from "lit/decorators.js";
 import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import {classMap} from 'lit/directives/class-map.js';
-import styles from "./button-element.scss";
+import styles from "./sgds-button.scss";
 
 export type ButtonVariant = 
 "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark" | "link" |
 "outline-primary" | "outline-secondary" | "outline-success" | "outline-danger" | "outline-warning" | "outline-info" | "outline-light" | "outline-dark"
 
-@customElement("button-element")
-export class ButtonElement extends LitElement {
+@customElement("sgds-button")
+export class SgdsButton extends LitElement {
   static styles = styles;
 
   /** The button's variant. */
   @property({ reflect: true }) variant: ButtonVariant = "primary";
   
-  @property({ reflect: true }) buttonClasses? : string;
+  @property({ reflect: true }) buttonclasses? : string;
 
   /** Button sizes */
   @property({ reflect: true }) size : 'sm' | 'lg' ;
@@ -49,7 +49,7 @@ export class ButtonElement extends LitElement {
             'active': this.active, 
             [`btn-${this.variant}`]: this.variant,
             [`btn-${this.size}`]: this.size,
-            [`${this.buttonClasses}`]: this.buttonClasses
+            [`${this.buttonclasses}`]: this.buttonclasses
           }
         )}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
@@ -68,4 +68,4 @@ export class ButtonElement extends LitElement {
   }
 }
 
-export default ButtonElement;
+export default SgdsButton;

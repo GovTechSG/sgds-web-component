@@ -1,5 +1,5 @@
-import { ButtonElement } from '../src/Button/button-element'
-import '../src/Button/button-element';
+import { ButtonElement } from '../src/Button/sgds-button'
+import '../src/Button/sgds-button';
 import {fixture, assert, expect} from '@open-wc/testing';
 import {html} from 'lit';
 
