@@ -85,6 +85,10 @@ import "../lib/Button";
       table: { category: "props" },
       description: 'Tells the browser to download the linked file as this filename. Only used when `href` is set.'
     },
+    prefix:{
+      table: { category: "slot" },
+      description: "The prefix name for the button's label. Only use for inserting an icon"
+    },
     label:{
       table: { category: "slot" },
       description: "The slot name for the button's label."
@@ -104,7 +108,7 @@ export const Template = (args) =>
       .target=${args.target}
       .download=${args.download}
     >
-      <span slot="label">${args.buttonLabel}</span>
+      ${args.buttonLabel}
     </sgds-button>
   `;
 
