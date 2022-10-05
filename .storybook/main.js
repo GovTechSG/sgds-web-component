@@ -12,11 +12,4 @@ module.exports = {
   "core": {
     "builder": "@storybook/builder-webpack5"
   },
-  // babel: async (options) => {
-  //   Object.assign(options.plugins.find((plugin) => plugin[0].includes('plugin-proposal-decorators'))[1], {
-  //     decoratorsBeforeExport: true,
-  //     legacy: false
-  //   })
-  //   return options;
-  // }
 }
