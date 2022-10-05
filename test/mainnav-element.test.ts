@@ -1,5 +1,5 @@
-import { SgdsMainnavItem, SgdsMainnav } from "../src/Mainnav";
-import "../src/Mainnav";
+import { SgdsMainnavItem, SgdsMainnav } from "../src/MainNavsdf";
+import "../src/MainNavsdf";
 import {
   fixture,
   assert,
