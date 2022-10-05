@@ -4,11 +4,16 @@
 <head>
 
     <link href='node_modules/@govtechsg/sgds/css/sgds.util.css' rel='stylesheet' type='text/css' />
+    <!-- <link href='node_modules/@govtechsg/sgds/css/sgds.css' rel='stylesheet' type='text/css' /> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel='stylesheet'
         type='text/css' />
     <script data-shoelace="node_modules/@shoelace-style/shoelace/dist"></script>
     <script type="module" src="node_modules/@shoelace-style/shoelace/dist/components/icon/icon.js"></script>
-
+    <script
+    type="module"
+    id="dev-console-gateway"
+    src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"
+  ></script>
     <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script> -->
     <style>
         * {
@@ -45,6 +50,9 @@
             --sgds-masthead-crest-color: white;
             --sgds-masthead-text-color: red;
         }
+        sgds-mainnav-item {
+            --sgds-mainnav-item-theme-color:red;
+        }
 
         body {
             margin:0;
@@ -61,6 +69,14 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+    <sgds-mainnav expand="never" mode="offcanvas">
+        <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
+
+        <sgds-mainnav-item href="#">Home</sgds-mainnav-item>
+        <sgds-mainnav-item href="#">About</sgds-mainnav-item>
+        <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px"></dev-console-widget>
+    </sgds-mainnav>
+
     <sgds-masthead></sgds-masthead>
     <div class="container">
         <br />

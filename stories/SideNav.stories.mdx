@@ -5,7 +5,6 @@ import { withKnobs, text, number } from "@storybook/addon-knobs";
 import "../lib/Sidenav";
 import { SgdsSidenavItem, SgdsSidenav } from "../lib/Sidenav";
 import { partDescription } from "./common";
-import { useState } from "react";
 
 <Meta
   title="Components/Sidenav"
@@ -25,7 +24,7 @@ import { useState } from "react";
       },
     },
     default: {
-      description: "default slot for SgdsSidenavItem element",
+      description: "default slot of SgdsSidenavItem. Pass in SideNavItem elements here",
       table: {
         category: "slot: SgdsSidenav",
       },
