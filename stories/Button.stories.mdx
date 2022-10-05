@@ -1,0 +1,117 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit";
+import { withWebComponentsKnobs } from "storybook-addon-web-components-knobs";
+import { withKnobs, text, number } from "@storybook/addon-knobs";
+import "../lib/Button";
+
+<Meta
+  title="Components/Button"
+  argTypes={{
+    buttonClasses: { 
+      control: "text" ,
+      table: { category: "props" },
+      description: 'Optional. Can be used to insert any utility classes such as `me-auto`'
+    },
+    variant: {
+      control: 'select',
+      options: [
+        'primary',
+        'secondary',
+        'success',
+        'danger',
+        'warning',
+        'info',
+        'dark',
+        'light',
+        'link',
+        'outline-primary',
+        'outline-secondary',
+        'outline-success',
+        'outline-danger',
+        'outline-warning',
+        'outline-info',
+        'outline-dark',
+        'outline-light',
+      ],
+      defaultValue: 'primary',
+      table: { category: "props" },
+      description: "One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as `outline` versions (prefixed by `outline-*`)"
+    },
+    size:{
+      control: 'select',
+      options:['(default)','sm','lg'],
+      description:'Specifies a large or small button',
+      table: { category: "props" },
+    },
+    active:{
+      control:'boolean',
+      defaultValue: false,
+      table: { category: "props" },
+      description: 'Manually set the visual state of the button to :active'
+    },
+    disabled:{
+      control: "boolean",
+      defaultValue: false,
+      table: { category: "props" },
+      description:'The disabled state of the button'
+    },
+    href:{
+      control:"text",
+      defaultValue: undefined,
+      table: { category: "props" },
+      description:'When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`.'
+    },
+    target:{
+      control: 'select',
+      options:[
+        '_self',
+        '_blank',
+        '_parent',
+        '_top'
+      ],
+      defaultValue: '_self',
+      table: { category: "props" },
+      description:'Tells the browser where to open the link. Only used when `href` is set.'
+    },
+    download:{
+      control: 'text',
+      table: { category: "props" },
+      description: 'Tells the browser to download the linked file as this filename. Only used when `href` is set.'
+    }
+  }}
+/>
+
+export const Template = (args) =>
+  html`
+    <sgds-button 
+      .variant=${args.variant} 
+      .buttonClasses=${args.buttonClasses} 
+      .size=${args.size}
+      .active=${args.active}
+      .disabled=${args.disabled}
+      .href=${args.href}
+      .target=${args.target}
+      .download=${args.download}
+    >
+      ${args.variant} 
+    </sgds-button>
+  `;
+
+# SgdsButton
+
+Buttons communicate actions that users can take throughout your portal which can be used in places such as modals, forms and cards
+
+<Canvas>
+  <Story name="Basic" args={{ variant: "primary" }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## API
+
+```jsx
+import { SgdsButton } from "@govtechsg/sgds-web-component";
+```
+
+<ArgsTable story="Basic" />
+

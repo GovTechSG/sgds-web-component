@@ -1,1 +1,1 @@
-export { ButtonElement } from "./button-element";
+export { SgdsButton } from "./sgds-button";
