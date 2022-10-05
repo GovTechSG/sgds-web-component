@@ -128,33 +128,40 @@ export class DropdownElement extends LitElement {
 
 
     const firstMenuItem = menuItems[0]
-    console.log(firstMenuItem)
+    // console.log(firstMenuItem)
     const lastMenuItem = menuItems[menuItems.length - 1]
     // const menu = this.getMenuItems()
 
     // const firstMenuItem = this.shadowRoot.querySelectorAll('.dropdown-item')[0] as HTMLAnchorElement  
     this.addEventListener('keydown', (e) => {
+      if (!this.menuIsOpen) return this.bsDropdown.show()
+
+      if (this.menuIsOpen && e.key === ARROW_DOWN) {
+        if (this.nextItemNo === menuItems.length) {
+          return this.setCurrentItem(0)
+        } else {
+          return this.setCurrentItem(this.nextItemNo > 0 ? this.nextItemNo : 0)
+        }
+      }
         // ArrowDown clicked but menu is close 
-        requestAnimationFrame(() => {
-            if (e.key === ARROW_DOWN) {
-                this.setCurrentItem()
-            }
-            if (e.key === ARROW_DOWN && !this.menuIsOpen) {
-                console.log('here')
-                this.bsDropdown.show()
-                this.setCurrentItem(firstMenuItem)
-                // firstMenuItem._focus()
-            }
-            if (e.key === ARROW_UP && !this.menuIsOpen) {
-                console.log('here')
-                this.bsDropdown.show()
-                this.setCurrentItem(lastMenuItem)
-                // lastMenuItem._focus()
-            }
-            
-        })
-    
-      console.log(e)
+      //   console.log(e, 'test')
+      //   if (e.key === ARROW_DOWN && this.menuIsOpen) {
+      //     this.setCurrentItem(menuItems[1])
+      //   }
+      //       if (e.key === ARROW_DOWN && !this.menuIsOpen) {
+      //           // console.log('here')
+      //           this.bsDropdown.show()
+      //           this.setCurrentItem(firstMenuItem)
+      //           // firstMenuItem._focus()
+      //       }
+      //       if (e.key === ARROW_UP && !this.menuIsOpen) {
+      //           // console.log('here')
+      //           this.bsDropdown.show()
+      //           this.setCurrentItem(lastMenuItem)
+      //           // lastMenuItem._focus()
+      //       }
+                
+      // console.log(e)
     })
     
 
@@ -171,16 +178,23 @@ export class DropdownElement extends LitElement {
     return this.shadowRoot.querySelector('slot').assignedElements({flatten: true}) as DropdownItem[]
   }
 
-  setCurrentItem(item: DropdownItem) {
+  @state()
+  nextItemNo: number = 0
+
+  setCurrentItem(itemNo: number) {
+    // console.log(item, "item")
+    console.log(itemNo)
     const items = this.getMenuItems() //this.getAllItems({ includeDisabled: false });
+    const item = items[itemNo]
     const activeItem = item.disabled ? items[0] : item;
+    this.nextItemNo = itemNo + 1
     // console.log(activeItem)
     // return activeItem.shadowRoot.querySelector('a').focus()
     // Update tab indexes
     items.forEach(i => {
-    //   i.setAttribute('tabindex', i === activeItem ? '0' : '-1');
-      if (i === activeItem) i.shadowRoot.querySelector('a').focus()
-       else i.shadowRoot.querySelector('a').blur() // activeElement.blur()
+      i.setAttribute('tabindex', i === activeItem ? '0' : '-1');
+      if (i === activeItem) i.focus()
+       else i.blur() // activeElement.blur()
     });
   }
   render() {

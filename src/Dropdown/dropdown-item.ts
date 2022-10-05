@@ -26,6 +26,7 @@ export class DropdownItem extends LitElement {
   }
 
   render() {
+    console.log('render')
     return html`
       <li>
         <a
