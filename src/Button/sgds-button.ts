@@ -16,7 +16,7 @@ export class SgdsButton extends LitElement {
   /** The button's variant. */
   @property({ reflect: true }) variant: ButtonVariant = "primary";
   
-  @property({ reflect: true }) buttonclasses? : string;
+  @property({ reflect: true }) buttonClasses? : string;
 
   /** Button sizes */
   @property({ reflect: true }) size : 'sm' | 'lg' ;
@@ -49,7 +49,7 @@ export class SgdsButton extends LitElement {
             'active': this.active, 
             [`btn-${this.variant}`]: this.variant,
             [`btn-${this.size}`]: this.size,
-            [`${this.buttonclasses}`]: this.buttonclasses
+            [`${this.buttonClasses}`]: this.buttonClasses
           }
         )}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
@@ -62,7 +62,7 @@ export class SgdsButton extends LitElement {
         aria-disabled=${this.disabled ? 'true' : 'false'}
         tabindex=${this.disabled ? '-1' : '0'}
       >
-        <slot name="label"></slot>
+        <slot></slot>
       </${tag}>
     `;
   }
