@@ -62,10 +62,7 @@ export class SgdsButton extends LitElement {
         aria-disabled=${this.disabled ? 'true' : 'false'}
         tabindex=${this.disabled ? '-1' : '0'}
       >
-        <span part="prefix" class="button__prefix">
-          <slot name="prefix"></slot>
-        </span>
-        <slot></slot>
+        <slot name="label"></slot>
       </${tag}>
     `;
   }

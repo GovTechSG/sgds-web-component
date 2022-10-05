@@ -100,9 +100,9 @@
             <p>Button size</p>
             <div class="row">
                 <div class="grid">
-                    <sgds-button size="sm" variant="primary">Hello World</sgds-button>
-                    <sgds-button variant="primary" active>Hello World</sgds-button>
-                    <sgds-button size="lg" variant="primary">Hello World</sgds-button>
+                    <sgds-button size="sm" variant="primary"><span slot="label">Hello World</span></sgds-button>
+                    <sgds-button variant="primary" active><span slot="label">Hello World</span></sgds-button>
+                    <sgds-button size="lg" variant="primary"><span slot="label">Hello World</span></sgds-button>
                 </div>
             </div>
         </div>
@@ -111,19 +111,16 @@
             <div class="row">
                 <div class="grid">
                     <sgds-button variant="primary">
-                        <span slot="prefix">
-                            <sl-icon name="gear"></sl-icon>
-                        </span>
-                        Primary
+                        <span slot="label">Primary</span>
                     </sgds-button>
-                    <sgds-button variant="outline-secondary">Outline</sgds-button>
-                    <sgds-button variant="success" disabled>Disabled</sgds-button>
-                    <sgds-button variant="success" href="#">Link button</sgds-button>
+                    <sgds-button variant="outline-secondary"><span slot="label">Outline</span></sgds-button>
+                    <sgds-button variant="success" disabled><span slot="label">Disabled</span></sgds-button>
+                    <sgds-button variant="success" href="#"><span slot="label">Link button</span></sgds-button>
                     <sgds-button variant="warning" href="#" target="_blank" disabled>
-                        Link button _blank
+                        <span slot="label">Link button _blank</span>
                     </sgds-button>
                     <sgds-button variant="danger" download="logo.svg">
-                        Link button _blank
+                        <span slot="label">Link button _blank</span>
                     </sgds-button>
                 </div>
             </div>
