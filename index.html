@@ -31,6 +31,15 @@
         sgds-sidenav-link::part(sidenav-anchor) {
             color: red;
         } */
+        .grid{
+            /* display: grid; */
+            grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+            gap:0.5rem;
+        }
+
+        .grid + .grid{
+            margin-top: 1rem;
+        }
 
         sgds-sidenav-item {
             --sidenav-theme-color: orange;
@@ -44,6 +53,17 @@
         sgds-mainnav-item {
             --sgds-mainnav-item-theme-color:red;
         }
+
+        body {
+            margin:0;
+            padding:0;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        sgds-button{
+            flex: 1;
+        } 
     </style>
     <script src="lib/index.js"></script>
 </head>
@@ -90,7 +110,37 @@
             </sgds-sidenav-item>
         </sgds-sidenav>
         <br />
-        <button-element class="flex-grow-1">Hello World</button-element>
+        
+        <div class="container">
+            <h2>Button</h2>
+            <p>Button size</p>
+            <div class="row">
+                <div class="grid">
+                    <sgds-button size="sm" variant="primary">Hello World</sgds-button>
+                    <sgds-button variant="primary" active>Hello World</sgds-button>
+                    <sgds-button size="lg" variant="primary">Hello World</sgds-button>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <p>Variant</p>
+            <div class="row">
+                <div class="grid">
+                    <sgds-button variant="primary">
+                        Primary
+                    </sgds-button>
+                    <sgds-button variant="outline-secondary">Outline</sgds-button>
+                    <sgds-button variant="success" disabled>Disabled</sgds-button>
+                    <sgds-button variant="success" href="#">Link button</sgds-button>
+                    <sgds-button variant="warning" href="#" target="_blank" disabled>
+                        Link button _blank
+                    </sgds-button>
+                    <sgds-button variant="danger" download="logo.svg">
+                        Link button _blank
+                    </sgds-button>
+                </div>
+            </div>
+        </div>
     </div>
     <sgds-footer description="this is a prop description" title="Singapore Government Design System"
         lastUpdatedDate="08 Feb 2022" links='[
@@ -245,5 +295,4 @@
     </sgds-footer>
 
 </body>
-
 </html>
