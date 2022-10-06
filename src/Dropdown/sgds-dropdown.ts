@@ -4,19 +4,18 @@ import { Dropdown } from "bootstrap";
 import * as Popper from "@popperjs/core";
 import type { StrictModifiers } from "@popperjs/core";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
-import styles from "./dropdown.scss";
+import styles from "./sgds-dropdown.scss";
 import mergeDeep from "../utils/mergeDeep";
 import genId from "../utils/generateId";
-import "./dropdown-item";
-import { DropdownItem } from "./dropdown-item";
+import {SgdsDropdownItem} from "./sgds-dropdown-item";
 import SgdsElement from "../utils/sgds-element";
 
 const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
 const ESC = "Escape";
 const ENTER = "Enter";
-@customElement("dropdown-element")
-export class DropdownElement extends SgdsElement {
+@customElement("sgds-dropdown")
+export class SgdsDropdown extends SgdsElement {
   @query(".dropdown-menu") menu: HTMLElement;
 
   private myDropdown: Ref<HTMLElement> = createRef();
@@ -95,19 +94,16 @@ export class DropdownElement extends SgdsElement {
       },
     });
     this.myDropdown.value.addEventListener("show.bs.dropdown", () => {
-      console.log("show");
       this.menuIsOpen = true;
     });
     this.myDropdown.value.addEventListener("shown.bs.dropdown", () => {
-      console.log("shown");
       this.menuIsOpen = true;
     });
     this.myDropdown.value.addEventListener("hide.bs.dropdown", () => {
-      console.log("hide");
       this.menuIsOpen = false;
+      this._resetMenu()
     });
     this.myDropdown.value.addEventListener("hidden.bs.dropdown", () => {
-      console.log("hidden");
       this.menuIsOpen = false;
     });
 
@@ -119,13 +115,18 @@ export class DropdownElement extends SgdsElement {
   @state()
   prevItemNo: number = -1;
 
-  _getMenuItems(): DropdownItem[] {
-    return this.shadowRoot
-      .querySelector("slot")
-      .assignedElements({ flatten: true }) as DropdownItem[];
+  _resetMenu() {
+    this.nextItemNo = 0
+    this.prevItemNo = -1
   }
 
-  _setItem(currentItemIdx: number) {
+  _getMenuItems(): SgdsDropdownItem[] {
+    return this.shadowRoot
+      .querySelector("slot")
+      .assignedElements({ flatten: true }) as SgdsDropdownItem[];
+  }
+
+  _setMenuItem(currentItemIdx: number) {
     const items = this._getMenuItems();
     const item = items[currentItemIdx];
     const activeItem = item; // item.disabled ? items[0] : item;
@@ -140,13 +141,15 @@ export class DropdownElement extends SgdsElement {
 
   _handleSelectSlot(e: KeyboardEvent | MouseEvent) {
     const items = this._getMenuItems();
-    const currentItemNo = items.indexOf(e.target as DropdownItem);
+    const currentItemNo = items.indexOf(e.target as SgdsDropdownItem);
     this.nextItemNo = currentItemNo + 1;
     this.prevItemNo = currentItemNo <= 0 ? items.length - 1 : currentItemNo - 1;
 
     // assign selected dropdown-item value to sgds-dropdown value
-    this.value = (e.target as DropdownItem).value
+    const selectedItem = e.target as SgdsDropdownItem
+    this.value = selectedItem.value
     this.emit("sgds-select");
+    this.bsDropdown.hide()
   }
   _handleKeyboardEvent(e: KeyboardEvent) {
     const menuItems = this._getMenuItems();
@@ -154,23 +157,22 @@ export class DropdownElement extends SgdsElement {
       case ARROW_DOWN:
         if (!this.menuIsOpen) return this.bsDropdown.show();
         if (this.nextItemNo === menuItems.length) {
-          return this._setItem(0);
+          return this._setMenuItem(0);
         } else {
-          return this._setItem(this.nextItemNo > 0 ? this.nextItemNo : 0);
+          return this._setMenuItem(this.nextItemNo > 0 ? this.nextItemNo : 0);
         }
       case ARROW_UP:
         if (!this.menuIsOpen) return this.bsDropdown.show();
         if (this.prevItemNo < 0) {
-          return this._setItem(menuItems.length - 1);
+          return this._setMenuItem(menuItems.length - 1);
         } else {
-          return this._setItem(this.prevItemNo);
+          return this._setMenuItem(this.prevItemNo);
         }
       case ESC:
         return this.bsDropdown.hide();
       case ENTER:
-        if ((e.target as Element).localName === "dropdown-item") {
-          this._handleSelectSlot(e);
-          return this.bsDropdown.hide();
+        if (menuItems.includes(e.target as SgdsDropdownItem)) {
+         return this._handleSelectSlot(e);
         }
         break;
       default:
@@ -207,18 +209,6 @@ export class DropdownElement extends SgdsElement {
         </button>
         <ul class="dropdown-menu" role="menu" part="menu">
           <slot @click=${this._handleSelectSlot}></slot>
-          <!-- <li>
-        <a href="#" class="dropdown-item"
-          >hello</a>
-      </li>        
-        <li>
-        <a href="#" class="dropdown-item"
-          >test</a>
-      </li>        
-        <li>
-        <a href="#" class="dropdown-item"
-          >test</a>
-      </li>         -->
         </ul>
       </div>
     `;

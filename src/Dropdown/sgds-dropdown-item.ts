@@ -1,9 +1,9 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import styles from "./dropdown.scss";
+import styles from "./sgds-dropdown.scss";
 
-@customElement("dropdown-item")
-export class DropdownItem extends LitElement {
+@customElement("sgds-dropdown-item")
+export class SgdsDropdownItem extends LitElement {
   static styles = css`
     ${styles}
     /* :host(:focus) {
@@ -22,10 +22,6 @@ export class DropdownItem extends LitElement {
   disabled = false;
   @property({ type: String })
   value = undefined;
-
-  public _focus() {
-    (this.shadowRoot.querySelector(".dropdown-item") as HTMLElement).focus();
-  }
 
   render() {
     console.log('render')
