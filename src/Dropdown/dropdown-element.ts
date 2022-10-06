@@ -1,4 +1,4 @@
-import { LitElement, html, PropertyPart } from "lit";
+import { html } from "lit";
 import { customElement, property, query, state } from "lit/decorators.js";
 import { Dropdown } from "bootstrap";
 import * as Popper from "@popperjs/core";
@@ -7,14 +7,17 @@ import { createRef, Ref, ref } from "lit/directives/ref.js";
 import styles from "./dropdown.scss";
 import mergeDeep from "../utils/mergeDeep";
 import genId from "../utils/generateId";
-import './dropdown-item';
+import "./dropdown-item";
 import { DropdownItem } from "./dropdown-item";
+import SgdsElement from "../utils/sgds-element";
 
-const ARROW_DOWN = 'ArrowDown'
-const ARROW_UP = 'ArrowUp'
+const ARROW_DOWN = "ArrowDown";
+const ARROW_UP = "ArrowUp";
+const ESC = "Escape"
+const ENTER = "Enter"
 @customElement("dropdown-element")
-export class DropdownElement extends LitElement {
-    @query('.dropdown-menu') menu: HTMLElement;
+export class DropdownElement extends SgdsElement {
+  @query(".dropdown-menu") menu: HTMLElement;
 
   private myDropdown: Ref<HTMLElement> = createRef();
   private bsDropdown: Dropdown = null;
@@ -35,10 +38,10 @@ export class DropdownElement extends LitElement {
   popperOpts = {};
   @property({ type: String })
   toggleBtnId = genId("dropdown", "button");
-  @property({type: String})
-  buttonText = ""
-  @property({type: String})
-  variant = "secondary"
+  @property({ type: String })
+  buttonText = "";
+  @property({ type: String })
+  variant = "secondary";
 
   @state()
   menuIsOpen = false;
@@ -47,28 +50,28 @@ export class DropdownElement extends LitElement {
     this.bsDropdown.toggle();
   }
 
-//   connectedCallback(): void {
-//       super.connectedCallback()
-//       console.log(this.menuIsOpen, 'menuisOpen')
-//       const firstMenuItem = this.shadowRoot.querySelectorAll('.dropdown-item')[0] as HTMLAnchorElement  
-//       this.addEventListener('keydown', (e) => {
-//         if (e.key === ARROW_DOWN && !this.menuIsOpen) {
-//             console.log('here')
-//             this.bsDropdown.show()
-//             firstMenuItem.focus()
-            
-//         }
-//         console.log(e)
-//       })
-      
-//   }
+  //   connectedCallback(): void {
+  //       super.connectedCallback()
+  //       console.log(this.menuIsOpen, 'menuisOpen')
+  //       const firstMenuItem = this.shadowRoot.querySelectorAll('.dropdown-item')[0] as HTMLAnchorElement
+  //       this.addEventListener('keydown', (e) => {
+  //         if (e.key === ARROW_DOWN && !this.menuIsOpen) {
+  //             console.log('here')
+  //             this.bsDropdown.show()
+  //             firstMenuItem.focus()
 
+  //         }
+  //         console.log(e)
+  //       })
+
+  //   }
 
   firstUpdated() {
     this.bsDropdown = new Dropdown(this.myDropdown.value, {
-      autoClose: true, // not working as bootstrap is using attribute data-bs-toggle="dropdown" to configure autoclose. But it doesnt look into this attribute in the shadow dom 
-      reference: "toggle", // working 
-      popperConfig: (defaultConfig?: Partial<Popper.Options>) => { //working
+      autoClose: true, // not working as bootstrap is using attribute data-bs-toggle="dropdown" to configure autoclose. But it doesnt look into this attribute in the shadow dom
+      reference: "toggle", // working
+      popperConfig: (defaultConfig?: Partial<Popper.Options>) => {
+        //working
         const modifierOpt: StrictModifiers[] = [
           {
             name: "offset",
@@ -124,85 +127,88 @@ export class DropdownElement extends LitElement {
     // console.log(this.getMenuItems(), 'getMenu')
     // console.log(this.shadowRoot.querySelector('slot'))
     // const menuItems = this.shadowRoot.querySelector('slot').assignedElements({flatten: true}) as DropdownItem[]
-    const menuItems = this.getMenuItems()
+    const menuItems = this.getMenuItems();
 
-
-    const firstMenuItem = menuItems[0]
+    const firstMenuItem = menuItems[0];
     // console.log(firstMenuItem)
-    const lastMenuItem = menuItems[menuItems.length - 1]
+    const lastMenuItem = menuItems[menuItems.length - 1];
     // const menu = this.getMenuItems()
 
-    // const firstMenuItem = this.shadowRoot.querySelectorAll('.dropdown-item')[0] as HTMLAnchorElement  
-    this.addEventListener('keydown', (e) => {
-      if (!this.menuIsOpen) return this.bsDropdown.show()
-
-      if (this.menuIsOpen && e.key === ARROW_DOWN) {
-        if (this.nextItemNo === menuItems.length) {
-          return this.setCurrentItem(0)
-        } else {
-          return this.setCurrentItem(this.nextItemNo > 0 ? this.nextItemNo : 0)
-        }
+    // const firstMenuItem = this.shadowRoot.querySelectorAll('.dropdown-item')[0] as HTMLAnchorElement
+    this.addEventListener("keydown", (e) => {
+      // if (e.key === ARROW_DOWN || (e.key === ARROW_UP && !this.menuIsOpen)) {
+      //   return this.bsDropdown.show();
+      // }
+      switch (e.key) {
+        case ARROW_DOWN:
+          if (!this.menuIsOpen) return this.bsDropdown.show()
+          if (this.nextItemNo === menuItems.length) {
+            return this.setCurrentItem(0);
+          } else {
+            return this.setCurrentItem(this.nextItemNo > 0 ? this.nextItemNo : 0);
+          }
+          case ARROW_UP : 
+          if (!this.menuIsOpen) return this.bsDropdown.show()
+          if (this.prevItemNo < 0) {
+            return this.setCurrentItem(menuItems.length - 1);
+          } else {
+            return this.setCurrentItem(this.prevItemNo);
+          }
+          case ESC:
+            return this.bsDropdown.hide()
+          case ENTER: 
+          console.log(e)
+          if ((e.target as Element).localName === "dropdown-item") {
+            this.handleClickSlot(e)
+            return this.bsDropdown.hide()
+          } 
+          break;
+          default:  
+            break;
       }
-        // ArrowDown clicked but menu is close 
-      //   console.log(e, 'test')
-      //   if (e.key === ARROW_DOWN && this.menuIsOpen) {
-      //     this.setCurrentItem(menuItems[1])
-      //   }
-      //       if (e.key === ARROW_DOWN && !this.menuIsOpen) {
-      //           // console.log('here')
-      //           this.bsDropdown.show()
-      //           this.setCurrentItem(firstMenuItem)
-      //           // firstMenuItem._focus()
-      //       }
-      //       if (e.key === ARROW_UP && !this.menuIsOpen) {
-      //           // console.log('here')
-      //           this.bsDropdown.show()
-      //           this.setCurrentItem(lastMenuItem)
-      //           // lastMenuItem._focus()
-      //       }
-                
-      // console.log(e)
-    })
-    
-
-    // this.addEventListener('keydown', () => {
-    //     console.log('keydown')
-    //     console.log(this.myDropdown)
-    //     if (this.myDropdown.value.classList.contains('show')) {
-    //         console.log('test')
-    //         (document.querySelector('dropdown-item').shadowRoot.querySelectorAll('li')[0    ] as any).focus()
-    //     }
-    // })
+    });
   }
-  getMenuItems (): DropdownItem[] {
-    return this.shadowRoot.querySelector('slot').assignedElements({flatten: true}) as DropdownItem[]
+  getMenuItems(): DropdownItem[] {
+    return this.shadowRoot
+      .querySelector("slot")
+      .assignedElements({ flatten: true }) as DropdownItem[];
   }
 
   @state()
-  nextItemNo: number = 0
+  nextItemNo: number = 0;
+  @state()
+  prevItemNo: number = -1;
 
   setCurrentItem(itemNo: number) {
     // console.log(item, "item")
-    console.log(itemNo)
-    const items = this.getMenuItems() //this.getAllItems({ includeDisabled: false });
-    const item = items[itemNo]
+    console.log(itemNo);
+    const items = this.getMenuItems(); //this.getAllItems({ includeDisabled: false });
+    const item = items[itemNo];
     const activeItem = item.disabled ? items[0] : item;
-    this.nextItemNo = itemNo + 1
+    this.nextItemNo = itemNo + 1;
+    this.prevItemNo = itemNo - 1;
     // console.log(activeItem)
     // return activeItem.shadowRoot.querySelector('a').focus()
     // Update tab indexes
-    items.forEach(i => {
-      i.setAttribute('tabindex', i === activeItem ? '0' : '-1');
-      if (i === activeItem) i.focus()
-       else i.blur() // activeElement.blur()
+    items.forEach((i) => {
+      i.setAttribute("tabindex", i === activeItem ? "0" : "-1");
+      if (i === activeItem) i.focus();
+      else i.blur(); // activeElement.blur()
     });
+  }
+  handleClickSlot(e) {
+    const items = this.getMenuItems();
+    const currentItemNo = items.indexOf(e.target as DropdownItem);
+    this.nextItemNo = currentItemNo + 1;
+    this.prevItemNo = currentItemNo <= 0 ? items.length - 1 : currentItemNo - 1;
+    console.log(this.prevItemNo);
   }
   render() {
     return html`
       <div class="sgds dropdown">
-        <button
+        <button 
           class="btn btn-outline-${this.variant} dropdown-toggle"
-          type="button" 
+          type="button"
           aria-expanded="false"
           @click=${() => this._onClickButton()}
           id=${this.toggleBtnId}
@@ -225,8 +231,8 @@ export class DropdownElement extends LitElement {
           </svg>
         </button>
         <ul class="dropdown-menu" role="menu" part="menu">
-            <slot></slot>
-        <!-- <li>
+          <slot @click=${this.handleClickSlot}></slot>
+          <!-- <li>
         <a href="#" class="dropdown-item"
           >hello</a>
       </li>        
@@ -238,7 +244,7 @@ export class DropdownElement extends LitElement {
         <a href="#" class="dropdown-item"
           >test</a>
       </li>         -->
-    </ul>
+        </ul>
       </div>
     `;
   }
