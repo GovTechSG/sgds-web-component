@@ -13,8 +13,8 @@ import SgdsElement from "../utils/sgds-element";
 
 const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
-const ESC = "Escape"
-const ENTER = "Enter"
+const ESC = "Escape";
+const ENTER = "Enter";
 @customElement("dropdown-element")
 export class DropdownElement extends SgdsElement {
   @query(".dropdown-menu") menu: HTMLElement;
@@ -42,29 +42,16 @@ export class DropdownElement extends SgdsElement {
   buttonText = "";
   @property({ type: String })
   variant = "secondary";
+  @property({ type: String })
+  value = undefined;
 
+  
   @state()
   menuIsOpen = false;
 
   private _onClickButton() {
     this.bsDropdown.toggle();
   }
-
-  //   connectedCallback(): void {
-  //       super.connectedCallback()
-  //       console.log(this.menuIsOpen, 'menuisOpen')
-  //       const firstMenuItem = this.shadowRoot.querySelectorAll('.dropdown-item')[0] as HTMLAnchorElement
-  //       this.addEventListener('keydown', (e) => {
-  //         if (e.key === ARROW_DOWN && !this.menuIsOpen) {
-  //             console.log('here')
-  //             this.bsDropdown.show()
-  //             firstMenuItem.focus()
-
-  //         }
-  //         console.log(e)
-  //       })
-
-  //   }
 
   firstUpdated() {
     this.bsDropdown = new Dropdown(this.myDropdown.value, {
@@ -123,55 +110,8 @@ export class DropdownElement extends SgdsElement {
       console.log("hidden");
       this.menuIsOpen = false;
     });
-    // this.bsDropdown.show()
-    // console.log(this.getMenuItems(), 'getMenu')
-    // console.log(this.shadowRoot.querySelector('slot'))
-    // const menuItems = this.shadowRoot.querySelector('slot').assignedElements({flatten: true}) as DropdownItem[]
-    const menuItems = this.getMenuItems();
 
-    const firstMenuItem = menuItems[0];
-    // console.log(firstMenuItem)
-    const lastMenuItem = menuItems[menuItems.length - 1];
-    // const menu = this.getMenuItems()
-
-    // const firstMenuItem = this.shadowRoot.querySelectorAll('.dropdown-item')[0] as HTMLAnchorElement
-    this.addEventListener("keydown", (e) => {
-      // if (e.key === ARROW_DOWN || (e.key === ARROW_UP && !this.menuIsOpen)) {
-      //   return this.bsDropdown.show();
-      // }
-      switch (e.key) {
-        case ARROW_DOWN:
-          if (!this.menuIsOpen) return this.bsDropdown.show()
-          if (this.nextItemNo === menuItems.length) {
-            return this.setCurrentItem(0);
-          } else {
-            return this.setCurrentItem(this.nextItemNo > 0 ? this.nextItemNo : 0);
-          }
-          case ARROW_UP : 
-          if (!this.menuIsOpen) return this.bsDropdown.show()
-          if (this.prevItemNo < 0) {
-            return this.setCurrentItem(menuItems.length - 1);
-          } else {
-            return this.setCurrentItem(this.prevItemNo);
-          }
-          case ESC:
-            return this.bsDropdown.hide()
-          case ENTER: 
-          console.log(e)
-          if ((e.target as Element).localName === "dropdown-item") {
-            this.handleClickSlot(e)
-            return this.bsDropdown.hide()
-          } 
-          break;
-          default:  
-            break;
-      }
-    });
-  }
-  getMenuItems(): DropdownItem[] {
-    return this.shadowRoot
-      .querySelector("slot")
-      .assignedElements({ flatten: true }) as DropdownItem[];
+    this.addEventListener("keydown", this._handleKeyboardEvent);
   }
 
   @state()
@@ -179,34 +119,69 @@ export class DropdownElement extends SgdsElement {
   @state()
   prevItemNo: number = -1;
 
-  setCurrentItem(itemNo: number) {
-    // console.log(item, "item")
-    console.log(itemNo);
-    const items = this.getMenuItems(); //this.getAllItems({ includeDisabled: false });
-    const item = items[itemNo];
-    const activeItem = item.disabled ? items[0] : item;
-    this.nextItemNo = itemNo + 1;
-    this.prevItemNo = itemNo - 1;
-    // console.log(activeItem)
-    // return activeItem.shadowRoot.querySelector('a').focus()
-    // Update tab indexes
+  _getMenuItems(): DropdownItem[] {
+    return this.shadowRoot
+      .querySelector("slot")
+      .assignedElements({ flatten: true }) as DropdownItem[];
+  }
+
+  _setItem(currentItemIdx: number) {
+    const items = this._getMenuItems();
+    const item = items[currentItemIdx];
+    const activeItem = item; // item.disabled ? items[0] : item;
+    this.nextItemNo = currentItemIdx + 1;
+    this.prevItemNo = currentItemIdx - 1;
+    // focus or blur items depending on active or not
     items.forEach((i) => {
       i.setAttribute("tabindex", i === activeItem ? "0" : "-1");
-      if (i === activeItem) i.focus();
-      else i.blur(); // activeElement.blur()
+      i === activeItem ? i.focus() : i.blur();
     });
   }
-  handleClickSlot(e) {
-    const items = this.getMenuItems();
+
+  _handleSelectSlot(e: KeyboardEvent | MouseEvent) {
+    const items = this._getMenuItems();
     const currentItemNo = items.indexOf(e.target as DropdownItem);
     this.nextItemNo = currentItemNo + 1;
     this.prevItemNo = currentItemNo <= 0 ? items.length - 1 : currentItemNo - 1;
-    console.log(this.prevItemNo);
+
+    // assign selected dropdown-item value to sgds-dropdown value
+    this.value = (e.target as DropdownItem).value
+    this.emit("sgds-select");
   }
+  _handleKeyboardEvent(e: KeyboardEvent) {
+    const menuItems = this._getMenuItems();
+    switch (e.key) {
+      case ARROW_DOWN:
+        if (!this.menuIsOpen) return this.bsDropdown.show();
+        if (this.nextItemNo === menuItems.length) {
+          return this._setItem(0);
+        } else {
+          return this._setItem(this.nextItemNo > 0 ? this.nextItemNo : 0);
+        }
+      case ARROW_UP:
+        if (!this.menuIsOpen) return this.bsDropdown.show();
+        if (this.prevItemNo < 0) {
+          return this._setItem(menuItems.length - 1);
+        } else {
+          return this._setItem(this.prevItemNo);
+        }
+      case ESC:
+        return this.bsDropdown.hide();
+      case ENTER:
+        if ((e.target as Element).localName === "dropdown-item") {
+          this._handleSelectSlot(e);
+          return this.bsDropdown.hide();
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
   render() {
     return html`
       <div class="sgds dropdown">
-        <button 
+        <button
           class="btn btn-outline-${this.variant} dropdown-toggle"
           type="button"
           aria-expanded="false"
@@ -231,7 +206,7 @@ export class DropdownElement extends SgdsElement {
           </svg>
         </button>
         <ul class="dropdown-menu" role="menu" part="menu">
-          <slot @click=${this.handleClickSlot}></slot>
+          <slot @click=${this._handleSelectSlot}></slot>
           <!-- <li>
         <a href="#" class="dropdown-item"
           >hello</a>

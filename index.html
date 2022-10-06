@@ -15,7 +15,11 @@
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
     <script type="module" src="node_modules/@shoelace-style/shoelace/dist/components/icon/icon.js"></script>
-
+    <script
+    type="module"
+    id="dev-console-gateway"
+    src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"
+  ></script>
     <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script> -->
     <style>
         * {
@@ -33,6 +37,15 @@
         sgds-sidenav-link::part(sidenav-anchor) {
             color: red;
         } */
+        .grid{
+            /* display: grid; */
+            grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+            gap:0.5rem;
+        }
+
+        .grid + .grid{
+            margin-top: 1rem;
+        }
 
         sgds-sidenav-item {
             --sidenav-theme-color: orange;
@@ -43,20 +56,33 @@
             --sgds-masthead-crest-color: white;
             --sgds-masthead-text-color: red;
         }
+        sgds-mainnav-item {
+            --sgds-mainnav-item-theme-color:red;
+        }
 
-        /* body {
+        body {
+            margin:0;
+            padding:0;
             display: flex;
             min-height: 100vh;
             flex-direction: column;
         }
-        button-element{
+        sgds-button{
             flex: 1;
-        } */
+        } 
     </style>
     <script src="lib/index.js"></script>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+    <sgds-mainnav expand="never" mode="offcanvas">
+        <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
+
+        <sgds-mainnav-item href="#">Home</sgds-mainnav-item>
+        <sgds-mainnav-item href="#">About</sgds-mainnav-item>
+        <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px"></dev-console-widget>
+    </sgds-mainnav>
+
     <sgds-masthead></sgds-masthead>
     <div class="container">
         <dropdown-element></dropdown-element>
@@ -91,7 +117,37 @@
             </sgds-sidenav-item>
         </sgds-sidenav>
         <br />
-        <button-element class="flex-grow-1">Hello World</button-element>
+        
+        <div class="container">
+            <h2>Button</h2>
+            <p>Button size</p>
+            <div class="row">
+                <div class="grid">
+                    <sgds-button size="sm" variant="primary">Hello World</sgds-button>
+                    <sgds-button variant="primary" active>Hello World</sgds-button>
+                    <sgds-button size="lg" variant="primary">Hello World</sgds-button>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <p>Variant</p>
+            <div class="row">
+                <div class="grid">
+                    <sgds-button variant="primary">
+                        Primary
+                    </sgds-button>
+                    <sgds-button variant="outline-secondary">Outline</sgds-button>
+                    <sgds-button variant="success" disabled>Disabled</sgds-button>
+                    <sgds-button variant="success" href="#">Link button</sgds-button>
+                    <sgds-button variant="warning" href="#" target="_blank" disabled>
+                        Link button _blank
+                    </sgds-button>
+                    <sgds-button variant="danger" download="logo.svg">
+                        Link button _blank
+                    </sgds-button>
+                </div>
+            </div>
+        </div>
     </div>
     <sgds-footer description="this is a prop description" title="Singapore Government Design System"
         lastUpdatedDate="08 Feb 2022" links='[
@@ -246,5 +302,4 @@
     </sgds-footer>
 
 </body>
-
 </html>

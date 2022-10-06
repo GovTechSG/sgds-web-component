@@ -7,11 +7,14 @@ import "../lib/Dropdown";
 <Meta title="Components/Dropdown" />
 
 export const Template = (args) => {
+  const listen = window.addEventListener('sgds-select', (e) => {
+    console.log(e.target)
+  })
   return html`
   <dropdown-element buttonText="Dropdown">
-    <dropdown-item>test</dropdown-item>
-    <dropdown-item href="#">test</dropdown-item>
-    <dropdown-item href="#">test</dropdown-item>
+    <dropdown-item value="1">test</dropdown-item>
+    <dropdown-item href="#" value="2">test</dropdown-item>
+    <dropdown-item href="#" value="3">test</dropdown-item>
   </dropdown-element>
 `;
 };

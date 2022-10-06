@@ -20,6 +20,8 @@ export class DropdownItem extends LitElement {
   href = "";
   @property({ type: Boolean })
   disabled = false;
+  @property({ type: String })
+  value = undefined;
 
   public _focus() {
     (this.shadowRoot.querySelector(".dropdown-item") as HTMLElement).focus();
