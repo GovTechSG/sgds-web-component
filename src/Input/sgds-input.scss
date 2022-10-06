@@ -1,0 +1,11 @@
+
+@import '../utils/base.scss';
+@import "~@govtechsg/sgds/sass/forms"; 
+
+:host{
+    --sgds-body-line-height: 2rem;
+}
+
+.form-group{
+    line-height: var(--sgds-body-line-height);
+}
