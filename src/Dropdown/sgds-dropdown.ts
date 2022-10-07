@@ -7,50 +7,71 @@ import { createRef, Ref, ref } from "lit/directives/ref.js";
 import styles from "./sgds-dropdown.scss";
 import mergeDeep from "../utils/mergeDeep";
 import genId from "../utils/generateId";
-import {SgdsDropdownItem} from "./sgds-dropdown-item";
+import { SgdsDropdownItem } from "./sgds-dropdown-item";
 import SgdsElement from "../utils/sgds-element";
 
 const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
 const ESC = "Escape";
 const ENTER = "Enter";
+const TAB = "Tab";
+
+export type DropdownButtonVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark" 
+export type DropDirection = "left" | "right" | "up" | "down"
 @customElement("sgds-dropdown")
 export class SgdsDropdown extends SgdsElement {
-  @query(".dropdown-menu") menu: HTMLElement;
+  static styles = styles;
+
+  constructor() {
+    super();
+    // during blur event, when clicking outside (document/window), hides the dropdown. 
+    this.addEventListener("blur", (e) => {
+      return e.relatedTarget == null
+        ? this.bsDropdown.hide()
+        : e.stopPropagation();
+    });
+  }
+  // Close dropdown when clicking outside of current dropdown  (i.e. other dropdowns, or elsewhere in the window)
+  connectedCallback() {
+    super.connectedCallback();
+    addEventListener("click", (e) => this._handleClickOutOfElement(e, this));
+
+  }
+  // removing this listener from windows when dropdown is destroyed 
+  disconnectedCallback() {
+   removeEventListener("click",(e) => this._handleClickOutOfElement(e, this) );
+    super.disconnectedCallback();
+  }
 
   private myDropdown: Ref<HTMLElement> = createRef();
   private bsDropdown: Dropdown = null;
 
-  static styles = styles;
 
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   noFlip = false;
-  @property({ type: Boolean })
-  right = false;
-  @property({ type: Boolean })
-  dropup = false;
-  @property({ type: Boolean })
-  dropright = false;
-  @property({ type: Boolean })
-  dropleft = false;
+  @property({ type: Boolean, reflect: true })
+  menuAlignRight = false;
+  @property({ type: String, reflect: true})
+  drop : DropDirection = "down"
   @property({ type: Object })
   popperOpts = {};
   @property({ type: String })
   toggleBtnId = genId("dropdown", "button");
+
   @property({ type: String })
   buttonText = "";
   @property({ type: String })
-  variant = "secondary";
-  @property({ type: String })
+  variant: DropdownButtonVariant = "secondary";
+
+  @property({ type: String , reflect: true})
   value = undefined;
 
-  
   @state()
   menuIsOpen = false;
-
-  private _onClickButton() {
-    this.bsDropdown.toggle();
-  }
+  @state()
+  nextItemNo: number = 0;
+  @state()
+  prevItemNo: number = -1;
 
   firstUpdated() {
     this.bsDropdown = new Dropdown(this.myDropdown.value, {
@@ -78,14 +99,19 @@ export class SgdsDropdown extends SgdsElement {
                 },
               ],
         };
-        if (this.dropup) {
-          dropDownConfig.placement = this.right ? "top-end" : "top-start";
-        } else if (this.dropright) {
+        switch(this.drop) {
+          case "up" : 
+          dropDownConfig.placement = this.menuAlignRight ? "top-end" : "top-start";
+          break;
+          case "right": 
           dropDownConfig.placement = "right-start";
-        } else if (this.dropleft) {
+          break;
+          case "left" : 
           dropDownConfig.placement = "left-start";
-        } else if (this.right) {
-          dropDownConfig.placement = "bottom-end";
+          break;
+          case "down": 
+          dropDownConfig.placement = this.menuAlignRight ? "bottom-end" :  "bottom-start";
+          break;
         }
         return mergeDeep(
           defaultConfig,
@@ -101,7 +127,7 @@ export class SgdsDropdown extends SgdsElement {
     });
     this.myDropdown.value.addEventListener("hide.bs.dropdown", () => {
       this.menuIsOpen = false;
-      this._resetMenu()
+      this._resetMenu();
     });
     this.myDropdown.value.addEventListener("hidden.bs.dropdown", () => {
       this.menuIsOpen = false;
@@ -110,23 +136,27 @@ export class SgdsDropdown extends SgdsElement {
     this.addEventListener("keydown", this._handleKeyboardEvent);
   }
 
-  @state()
-  nextItemNo: number = 0;
-  @state()
-  prevItemNo: number = -1;
-
-  _resetMenu() {
-    this.nextItemNo = 0
-    this.prevItemNo = -1
+  private _onClickButton() {
+    this.bsDropdown.toggle();
   }
 
-  _getMenuItems(): SgdsDropdownItem[] {
+  private _resetMenu() {
+    this.nextItemNo = 0;
+    this.prevItemNo = -1;
+    // reset the tabindex
+    const items = this._getMenuItems();
+    items.forEach((i) => {
+      i.removeAttribute("tabindex");
+    });
+  }
+
+  private _getMenuItems(): SgdsDropdownItem[] {
     return this.shadowRoot
       .querySelector("slot")
       .assignedElements({ flatten: true }) as SgdsDropdownItem[];
   }
 
-  _setMenuItem(currentItemIdx: number) {
+ private _setMenuItem(currentItemIdx: number) {
     const items = this._getMenuItems();
     const item = items[currentItemIdx];
     const activeItem = item; // item.disabled ? items[0] : item;
@@ -139,19 +169,19 @@ export class SgdsDropdown extends SgdsElement {
     });
   }
 
-  _handleSelectSlot(e: KeyboardEvent | MouseEvent) {
+  private _handleSelectSlot(e: KeyboardEvent | MouseEvent) {
     const items = this._getMenuItems();
     const currentItemNo = items.indexOf(e.target as SgdsDropdownItem);
     this.nextItemNo = currentItemNo + 1;
     this.prevItemNo = currentItemNo <= 0 ? items.length - 1 : currentItemNo - 1;
 
     // assign selected dropdown-item value to sgds-dropdown value
-    const selectedItem = e.target as SgdsDropdownItem
-    this.value = selectedItem.value
-    this.emit("sgds-select");
-    this.bsDropdown.hide()
+    const selectedItem = e.target as SgdsDropdownItem;
+    this.value = selectedItem.value;
+    this.emit("sgds-dropdown-select");
+    this.bsDropdown.hide();
   }
-  _handleKeyboardEvent(e: KeyboardEvent) {
+  private _handleKeyboardEvent(e: KeyboardEvent) {
     const menuItems = this._getMenuItems();
     switch (e.key) {
       case ARROW_DOWN:
@@ -172,21 +202,28 @@ export class SgdsDropdown extends SgdsElement {
         return this.bsDropdown.hide();
       case ENTER:
         if (menuItems.includes(e.target as SgdsDropdownItem)) {
-         return this._handleSelectSlot(e);
+          return this._handleSelectSlot(e);
         }
+      case TAB: 
+        return this.bsDropdown.toggle()
         break;
       default:
         break;
     }
   }
 
+  private _handleClickOutOfElement(e: MouseEvent, self: SgdsDropdown){
+    if (!e.composedPath().includes(self)) {
+    this.bsDropdown.hide();
+  }
+}
   render() {
     return html`
       <div class="sgds dropdown">
         <button
           class="btn btn-outline-${this.variant} dropdown-toggle"
           type="button"
-          aria-expanded="false"
+          aria-expanded="${this.menuIsOpen}"
           @click=${() => this._onClickButton()}
           id=${this.toggleBtnId}
           data-bs-toggle="dropdown"
