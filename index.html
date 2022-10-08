@@ -282,4 +282,10 @@
     </sgds-footer>
 
 </body>
+<script>
+    const inputForm = document.querySelector('sgds-input');
+    inputForm.addEventListener('sgds-change', (e)=>{
+        console.log(e.target.value)
+    })
+</script>
 </html>
