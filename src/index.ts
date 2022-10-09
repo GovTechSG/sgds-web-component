@@ -1,5 +1,6 @@
-import "./Masthead";
-import "./Button";
-import "./Footer";
-import "./Sidenav";
-import "./Checkbox";
+import './Masthead';
+import './Button'
+import './Footer';
+import './Mainnav';
+import './Sidenav';
+import './Checkbox';
