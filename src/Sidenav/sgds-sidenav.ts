@@ -14,7 +14,7 @@ export class SgdsSidenav extends SgdsElement {
     this.alwaysOpen
       ? null
       : this.addEventListener("sgds-toggle", (e: CustomEvent) => {
-          const children = this.querySelectorAll("sgds-sidenav-item");
+          const children = this.shadowRoot.querySelector('slot').assignedElements({flatten: true});
           for (let i = 0; i < children.length; i++) {
             if (e.detail.index != i) {
               (children[i] as any).closeItem();
