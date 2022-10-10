@@ -64,7 +64,6 @@ import "../lib/Dropdown";
     },
     buttonText: {
       control: "text",
-      defaultValue: "false",
       description: "Sets the text content of Dropdown button ",
       table: {
         defaultValue: { summary: "" },
@@ -148,7 +147,7 @@ import "../lib/Dropdown";
       control: "boolean",
       description: "Disables the dropdown item when true",
       table: {
-        defaultValue: { summary: "" },
+        defaultValue: { summary: "false" },
         category: "props: SgdsDropdownItem",
         type: {
           summary: "string",
@@ -181,45 +180,27 @@ export const Template = ({
   active,
   href,
   disabled,
+  value
 }) => {
-  const listen = window.addEventListener("sgds-dropdown-select", (e) => {
+  const listen = window.addEventListener("sgds-select", (e) => {
     console.log(e.target);
   });
   return html`
-    <div class="container d-flex">
+    <div class="d-flex justify-content-center">
       <sgds-dropdown
         .buttonText=${buttonText}
         .noFlip=${noFlip}
-        .menuAlignRight=${menuAlignRight}
+        ?menuAlignRight=${menuAlignRight}
         .drop=${drop}
         .popperOpts=${popperOpts}
         .toggleBtnId=${toggleBtnId}
         .variant=${variant}
->
-        <sgds-dropdown-item value="1" .active=${active} .disabled=${disabled}>test</sgds-dropdown-item>
-        <sgds-dropdown-item href="#" value="2">test</sgds-dropdown-item>
-        <sgds-dropdown-item href="#" value="3">test</sgds-dropdown-item>
-        <sgds-dropdown-item href="#" value="3">test</sgds-dropdown-item>
-        <sgds-dropdown-item href="#" value="3">test</sgds-dropdown-item>
-        <sgds-dropdown-item href="#" value="3">test</sgds-dropdown-item>
-      </sgds-dropdown>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <sgds-dropdown buttonText="Dropdown">
-        <sgds-dropdown-item value="1">test</sgds-dropdown-item>
-        <sgds-dropdown-item href="#" value="2">test</sgds-dropdown-item>
-        <sgds-dropdown-item href="#" value="3">test</sgds-dropdown-item>
-        <sgds-dropdown-item href="#" value="3">test</sgds-dropdown-item>
-        <sgds-dropdown-item href="#" value="3">test</sgds-dropdown-item>
-        <sgds-dropdown-item href="#" value="3">test</sgds-dropdown-item>
+      >
+        <sgds-dropdown-item .value=${value} .href=${href} .active=${active} .disabled=${disabled}
+          >item #1 (argsTable controlled)</sgds-dropdown-item
+        >
+        <sgds-dropdown-item href="#" value="2">item #2</sgds-dropdown-item>
+        <sgds-dropdown-item href="#" value="3">item #3</sgds-dropdown-item>
       </sgds-dropdown>
     </div>
   `;
@@ -229,6 +210,8 @@ export const Template = ({
 
 This is the sample file for MDX
 
-<Story name="Basic">{Template.bind({})}</Story>
+<Story name="Basic" args={{ buttonText: "Dropdown", variant: "secondary", href:"#", valueDI: "1"}}>
+  {Template.bind({})}
+</Story>
 
 <ArgsTable story="Basic" />

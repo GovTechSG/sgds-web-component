@@ -101,7 +101,7 @@ export class SgdsDropdown extends SgdsElement {
         };
         switch(this.drop) {
           case "up" : 
-          dropDownConfig.placement = this.menuAlignRight ? "top-end" : "top-start";
+          dropDownConfig.placement = this.menuAlignRight ? "top-start" : "top-end";
           break;
           case "right": 
           dropDownConfig.placement = "right-start";
@@ -110,7 +110,7 @@ export class SgdsDropdown extends SgdsElement {
           dropDownConfig.placement = "left-start";
           break;
           case "down": 
-          dropDownConfig.placement = this.menuAlignRight ? "bottom-end" :  "bottom-start";
+          dropDownConfig.placement = this.menuAlignRight ? "bottom-start" :  "bottom-end";
           break;
         }
         return mergeDeep(
@@ -178,7 +178,7 @@ export class SgdsDropdown extends SgdsElement {
     // assign selected dropdown-item value to sgds-dropdown value
     const selectedItem = e.target as SgdsDropdownItem;
     this.value = selectedItem.value;
-    this.emit("sgds-dropdown-select");
+    this.emit("sgds-select");
     this.bsDropdown.hide();
   }
   private _handleKeyboardEvent(e: KeyboardEvent) {
@@ -203,10 +203,9 @@ export class SgdsDropdown extends SgdsElement {
       case ENTER:
         if (menuItems.includes(e.target as SgdsDropdownItem)) {
           return this._handleSelectSlot(e);
-        }
+        } else return this.bsDropdown.toggle()
       case TAB: 
         return this.bsDropdown.toggle()
-        break;
       default:
         break;
     }

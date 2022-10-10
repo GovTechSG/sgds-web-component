@@ -15,7 +15,7 @@ export class SgdsDropdownItem extends SgdsElement {
   @property({ type: String, reflect: true })
   href = "";
   @property({ type: Boolean, reflect: true })
-  disabled = true;
+  disabled = false;
   @property({ type: String, reflect: true })
   value = undefined;
 
