@@ -19,6 +19,13 @@
         * {
             font-family: "bootstrap-icons", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         }
+        body {
+            margin:0;
+            padding:0;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
 
         sgds-footer::part(footer-bottom) {
             background-color: red;
@@ -31,35 +38,43 @@
         sgds-sidenav-link::part(sidenav-anchor) {
             color: red;
         } */
-        .grid{
-            /* display: grid; */
-            grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
-            gap:0.5rem;
-        }
 
-        .grid + .grid{
-            margin-top: 1rem;
-        }
+        .grid{
+            display: grid;
+            grid-template-areas: 
+            "masthead masthead masthead "
+            "nav nav nav "
+            "sidenav main main "
+            "footer footer footer ";
+            grid-template-columns: 240px repeat(2,1fr);
+            width: 100%;
+        }   
 
         sgds-sidenav-item {
             --sidenav-theme-color: orange;
-            /* --sidenav-font-size: 40rem; */
         }
 
         sgds-masthead {
             --sgds-masthead-crest-color: white;
             --sgds-masthead-text-color: red;
+            grid-area: masthead;
+        }
+        sgds-sidenav{
+            grid-area: sidenav;
+
+        }
+        sgds-mainnav{
+            grid-area: nav;
+        }
+        main{
+            padding: 1rem;
+            grid-area: main;
+        }
+        sgds-footer{
+            grid-area: footer;
         }
         sgds-mainnav-item {
             --sgds-mainnav-item-theme-color:red;
-        }
-
-        body {
-            margin:0;
-            padding:0;
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
         }
         sgds-button{
             flex: 1;
@@ -69,6 +84,8 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+    <div class="grid">
+    <sgds-masthead fluid></sgds-masthead>
     <sgds-mainnav expand="never" mode="offcanvas">
         <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
 
@@ -76,41 +93,37 @@
         <sgds-mainnav-item href="#">About</sgds-mainnav-item>
         <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px"></dev-console-widget>
     </sgds-mainnav>
+    <sgds-sidenav class="mt-3" id="test-id">
+        <sgds-sidenav-item active>
+            <span slot="title">
+                <sl-icon name="stack"></sl-icon> Title
+            </span>
+            <sgds-sidenav-link href="https://google.com" active>first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+        </sgds-sidenav-item>
+        <sgds-sidenav-item title="Test title 2">
+            <span slot="title"><sl-icon name="stack"></sl-icon> Title</span>
+            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
 
-    <sgds-masthead></sgds-masthead>
-    <div class="container">
-        <br />
-        <sgds-sidenav class="mt-3" id="test-id">
-            <sgds-sidenav-item active>
-                <span slot="title">
-                    <sl-icon name="stack"></sl-icon> Title
-                </span>
-                <sgds-sidenav-link href="https://google.com" active>first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-            </sgds-sidenav-item>
-            <sgds-sidenav-item title="Test title 2" active>
-                <span slot="title">Title</span>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-
-            </sgds-sidenav-item>
-            <sgds-sidenav-item title="Test title 2">
-                <span slot="title">Title</span>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-            </sgds-sidenav-item>
-            <sgds-sidenav-item title="Test title 2" href="#">
-                <span slot="title">Title</span>
-            </sgds-sidenav-item>
-            <sgds-sidenav-item title="Test title 2" href="#">
-                <span slot="title">Title</span>
-            </sgds-sidenav-item>
-        </sgds-sidenav>
-        <br />
-        
+        </sgds-sidenav-item>
+        <sgds-sidenav-item title="Test title 2">
+            <span slot="title">Title</span>
+            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+        </sgds-sidenav-item>
+        <sgds-sidenav-item title="Test title 2" href="#">
+            <span slot="title">Title</span>
+        </sgds-sidenav-item>
+        <sgds-sidenav-item title="Test title 2" href="#">
+            <span slot="title">Title</span>
+        </sgds-sidenav-item>
+    </sgds-sidenav>
+    
+    <main>
         <div class="container">
             <h2>Button</h2>
             <p>Button size</p>
@@ -141,10 +154,37 @@
                 </div>
             </div>
         </div>
+        
         <div class="container">
-            <sgds-input></sgds-input>
+            <h2>Input</h2>
+            <div class="row">
+                <div class="col-6 mb-2">
+                    <sgds-input hintText="help me pls"></sgds-input>
+                </div>
+                <div class="col-6 mb-2">
+                    <sgds-input disabled placeholder="i am disabled"></sgds-input>
+                </div>
+                <div class="col-6 mb-2">
+                    <sgds-input value="this is a readonly" readonly></sgds-input>
+                </div>
+                <div class="col-6 mb-2">
+                    <sgds-input label="type = number" type="number" placeholder="key in a number"></sgds-input>
+                </div>
+                <div class="col-6 mb-2">
+                    <sgds-input label="with left icon" iconName="search"></sgds-input>
+                </div>
+                <div class="col-6">
+                    <sgds-input label="validation with pattern" pattern="[A-Za-z]{3}" iconName="stack" wasValidated required></sgds-input>
+                </div>
+                <div class="col-6">
+                    <sgds-input feedback="must contain at least 3 letters" hintText="this is a hint text" value="sgd" label="validation with pattern" pattern="[A-Za-z]{3}" wasValidated required></sgds-input>
+                </div>
+            </div>
+            
+           
         </div>
-    </div>
+
+    </main>
     <sgds-footer description="this is a prop description" title="Singapore Government Design System"
         lastUpdatedDate="08 Feb 2022" links='[
         {
@@ -296,12 +336,12 @@
         }
       ]'>
     </sgds-footer>
-
+</div>  
 </body>
 <script>
     const inputForm = document.querySelector('sgds-input');
-    inputForm.addEventListener('sgds-change', (e)=>{
-        console.log(e.target.value)
+    inputForm.addEventListener('sgds-input', (e)=>{
+        console.log(e)
     })
 </script>
 </html>
