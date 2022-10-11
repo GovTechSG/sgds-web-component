@@ -22,7 +22,6 @@ import "../lib/Dropdown";
     },
     menuAlignRight: {
       control: "boolean",
-      defaultValue: "false",
       description:
         "When true, aligns right edge of menu with right edge of button ",
       table: {
@@ -186,12 +185,12 @@ export const Template = ({
     console.log(e.target);
   });
   return html`
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" style=" margin: 100px;">
       <sgds-dropdown
         .buttonText=${buttonText}
         .noFlip=${noFlip}
-        ?menuAlignRight=${menuAlignRight}
         .drop=${drop}
+        .menuAlignRight=${menuAlignRight}
         .popperOpts=${popperOpts}
         .toggleBtnId=${toggleBtnId}
         .variant=${variant}
