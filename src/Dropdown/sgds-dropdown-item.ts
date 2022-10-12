@@ -18,6 +18,8 @@ export class SgdsDropdownItem extends SgdsElement {
   disabled = false;
   @property({ type: String, reflect: true })
   value = undefined;
+  @property({type: String, reflect: true})
+  tabindex = '-1'
 
   render() {
     return html`

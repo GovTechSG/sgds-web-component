@@ -30,26 +30,6 @@ export type DropDirection = "left" | "right" | "up" | "down";
 export class SgdsDropdown extends SgdsElement {
   static styles = styles;
 
-  constructor() {
-    super();
-    // during blur event, when clicking outside (document/window), hides the dropdown.
-    this.addEventListener("blur", (e) => {
-      return e.relatedTarget == null
-        ? this.bsDropdown.hide()
-        : e.stopPropagation();
-    });
-  }
-  // Close dropdown when clicking outside of current dropdown  (i.e. other dropdowns, or elsewhere in the window)
-  connectedCallback() {
-    super.connectedCallback();
-    addEventListener("click", (e) => this._handleClickOutOfElement(e, this));
-  }
-  // removing this listener from windows when dropdown is destroyed
-  disconnectedCallback() {
-    removeEventListener("click", (e) => this._handleClickOutOfElement(e, this));
-    super.disconnectedCallback();
-  }
-
   private myDropdown: Ref<HTMLElement> = createRef();
   private bsDropdown: Dropdown = null;
 
@@ -72,8 +52,10 @@ export class SgdsDropdown extends SgdsElement {
   @property({ type: String, reflect: true })
   value = undefined;
 
-  @property({type: Boolean})
+  @property({ type: Boolean })
   menuIsOpen = false;
+  @property({ type: String })
+  close: "outside" | "default" | "inside" = "default";
 
   @state()
   nextDropdownItemNo: number = 0;
@@ -149,8 +131,16 @@ export class SgdsDropdown extends SgdsElement {
     });
 
     this.addEventListener("keydown", this._handleKeyboardEvent);
+    if (this.close !== "inside") {
+      this.addEventListener("blur", (e) => {
+        return e.relatedTarget == null
+          ? this.bsDropdown.hide()
+          : e.stopPropagation();
+      });
+      addEventListener("click", (e) => this._handleClickOutOfElement(e, this));
+    }
 
-   if(this.menuIsOpen) this.bsDropdown.show()
+    if (this.menuIsOpen) this.bsDropdown.show();
   }
 
   public showMenu() {
@@ -170,7 +160,7 @@ export class SgdsDropdown extends SgdsElement {
     // reset the tabindex
     const items = this._getMenuItems();
     items.forEach((i) => {
-      i.removeAttribute("tabindex");
+      i.setAttribute("tabindex", "-1");
     });
   }
 
@@ -180,12 +170,24 @@ export class SgdsDropdown extends SgdsElement {
       .assignedElements({ flatten: true }) as SgdsDropdownItem[];
   }
 
-  private _setMenuItem(currentItemIdx: number) {
-    const items = this._getMenuItems();
-    const item = items[currentItemIdx];
-    const activeItem = item; // item.disabled ? items[0] : item;
+  private _getActiveMenuItems(): SgdsDropdownItem[] {
+    return this._getMenuItems().filter((item) => !item.disabled);
+  }
+
+  private _setMenuItem(currentItemIdx: number, isArrowDown: boolean = true) {
+    const items = this._getActiveMenuItems();
+    if (items.length === 0) return;
+    let item = items[currentItemIdx];
     this.nextDropdownItemNo = currentItemIdx + 1;
-    this.prevDropdownItemNo = currentItemIdx - 1;
+    this.prevDropdownItemNo =
+      currentItemIdx - 1 < 0 ? items.length - 1 : currentItemIdx - 1;
+    let activeItem: SgdsDropdownItem;
+    if (item.disabled) {
+      return this._setMenuItem(
+        isArrowDown ? this.nextDropdownItemNo : this.prevDropdownItemNo
+      );
+    } else activeItem = item;
+
     // focus or blur items depending on active or not
     items.forEach((i) => {
       i.setAttribute("tabindex", i === activeItem ? "0" : "-1");
@@ -194,33 +196,38 @@ export class SgdsDropdown extends SgdsElement {
   }
 
   private _handleSelectSlot(e: KeyboardEvent | MouseEvent) {
-    const items = this._getMenuItems();
+    const items = this._getActiveMenuItems();
     const currentItemNo = items.indexOf(e.target as SgdsDropdownItem);
     this.nextDropdownItemNo = currentItemNo + 1;
-    this.prevDropdownItemNo = currentItemNo <= 0 ? items.length - 1 : currentItemNo - 1;
+    this.prevDropdownItemNo =
+      currentItemNo <= 0 ? items.length - 1 : currentItemNo - 1;
 
     // assign selected dropdown-item value to sgds-dropdown value
     const selectedItem = e.target as SgdsDropdownItem;
-    this.value = selectedItem.value;
-    this.emit("sgds-select");
-    this.bsDropdown.hide();
+    if (!selectedItem.disabled) {
+      this.value = selectedItem.value;
+      this.emit("sgds-select");
+      this.close !== "outside" && this.bsDropdown.hide();
+    } else return;
   }
   private _handleKeyboardEvent(e: KeyboardEvent) {
-    const menuItems = this._getMenuItems();
+    const menuItems = this._getActiveMenuItems();
     switch (e.key) {
       case ARROW_DOWN:
         if (!this.menuIsOpen) return this.bsDropdown.show();
         if (this.nextDropdownItemNo === menuItems.length) {
           return this._setMenuItem(0);
         } else {
-          return this._setMenuItem(this.nextDropdownItemNo > 0 ? this.nextDropdownItemNo : 0);
+          return this._setMenuItem(
+            this.nextDropdownItemNo > 0 ? this.nextDropdownItemNo : 0
+          );
         }
       case ARROW_UP:
         if (!this.menuIsOpen) return this.bsDropdown.show();
         if (this.prevDropdownItemNo < 0) {
-          return this._setMenuItem(menuItems.length - 1);
+          return this._setMenuItem(menuItems.length - 1, false);
         } else {
-          return this._setMenuItem(this.prevDropdownItemNo);
+          return this._setMenuItem(this.prevDropdownItemNo, false);
         }
       case ESC:
         return this.bsDropdown.hide();

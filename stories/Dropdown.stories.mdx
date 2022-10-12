@@ -30,6 +30,16 @@ import "../lib/Dropdown";
         type: { summary: "boolean" },
       },
     },
+    menuIsOpen: {
+      control: "boolean",
+      description:
+        "When true, dropdown menu shows",
+      table: {
+        defaultValue: { summary: "false" },
+        category: "props: SgdsDropdown",
+        type: { summary: "boolean" },
+      },
+    },
     noFlip: {
       control: "boolean",
       description: "Controls auto-flipping of menu",
@@ -72,7 +82,6 @@ import "../lib/Dropdown";
         },
       },
     },
-    // SgdsMainnavItem props
     variant: {
       control: "select",
       description: "Sets color of Dropdown button",
@@ -100,6 +109,19 @@ import "../lib/Dropdown";
         "The value of selected SgdsDropdownItem (if defined). Use event listener `sgds-select` to obtain value of SgdsDropdown",
       table: {
         defaultValue: { summary: "undefined" },
+        category: "props: SgdsDropdown",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    close: {
+      control: "select",
+      options: ["default", "outside", "inside"],
+      description:
+        "Controls the close behaviour of dropdown menu. By default menu auto-closes when SgdsDropdownItem or area outside dropdown is clicked",
+      table: {
+        defaultValue: { summary: "default" },
         category: "props: SgdsDropdown",
         type: {
           summary: "string",
@@ -179,7 +201,8 @@ export const Template = ({
   active,
   href,
   disabled,
-  value
+  value,
+  close
 }) => {
   const listen = window.addEventListener("sgds-select", (e) => {
     console.log(e.target);
@@ -194,12 +217,15 @@ export const Template = ({
         .popperOpts=${popperOpts}
         .toggleBtnId=${toggleBtnId}
         .variant=${variant}
+        .close=${close}
       >
-        <sgds-dropdown-item .value=${value} .href=${href} .active=${active} .disabled=${disabled}
+        <sgds-dropdown-item .value=${value} disabled .href=${href} .active=${active} 
           >item #1 (argsTable controlled)</sgds-dropdown-item
         >
-        <sgds-dropdown-item href="#" value="2">item #2</sgds-dropdown-item>
-        <sgds-dropdown-item href="#" value="3">item #3</sgds-dropdown-item>
+        <sgds-dropdown-item href="#" value="2" >item #2</sgds-dropdown-item>
+        <sgds-dropdown-item href="#" value="3" disabled>item #3</sgds-dropdown-item>
+        <sgds-dropdown-item href="#" value="3" >item #3</sgds-dropdown-item>
+        <sgds-dropdown-item href="#" value="3" disabled>item #3</sgds-dropdown-item>
       </sgds-dropdown>
     </div>
   `;
