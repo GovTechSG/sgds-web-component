@@ -194,10 +194,10 @@ describe("sgds-dropdown", () => {
     );
     expect(el.menuIsOpen).to.be.true;
     el.shadowRoot?.querySelector("button")?.focus();
-    await el.updateComplete;
+    await waitUntil(() => el.shadowRoot?.querySelector("button:focus"))
     await sendKeys({ press: "Enter" });
-    await el.updateComplete;
-    expect(el.menuIsOpen).to.be.false;
+    await waitUntil(() => el.menuIsOpen === false)
+    // expect(el.menuIsOpen).to.be.false;
   });
   it(`should close an opened menu on Escape press`, async () => {
     const el = await fixture<SgdsDropdown>(
