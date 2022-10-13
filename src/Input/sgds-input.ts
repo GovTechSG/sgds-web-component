@@ -33,7 +33,7 @@ export class SgdsInput extends SgdsElement {
     | 'url' = 'text';
   @property({ type: String, reflect: true }) label = "label";
   @property({ type: String, reflect: true}) hintText;
-  @property({ type:String, reflect: true }) id = genId("input");
+  @property({ type:String, reflect: true }) id = genId("input", this.type);
   @property({ type:String, reflect: true }) name;
   @property({ type: String, reflect: true }) inputClasses?;
   @property({ type: String, reflect: true }) iconName;
