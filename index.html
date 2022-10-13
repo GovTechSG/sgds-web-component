@@ -14,6 +14,7 @@
     id="dev-console-gateway"
     src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"
   ></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
     <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script> -->
     <style>
         * {
@@ -27,7 +28,7 @@
             flex-direction: column;
         }
 
-        sgds-footer::part(footer-bottom) {
+        sgds-footer::part(footer-bottom) {  
             background-color: red;
         }
 
@@ -159,9 +160,15 @@
             <h2>Input</h2>
             <div class="row">
                 <div class="col-6 mb-2">
-                    <sgds-input hintText="help me pls"></sgds-input>
+                    <sgds-input iconName="search" autofocus pattern="[A-Za-z]{5}" required></sgds-input>
                 </div>
                 <div class="col-6 mb-2">
+                    <form>
+                    <sgds-input iconName="search" autofocus pattern="[A-Za-z]{5}" required></sgds-input>
+                    <sgds-button type="submit">Submit</sgds-button>
+                </form>
+                </div>
+                <!-- <div class="col-6 mb-2">
                     <sgds-input disabled placeholder="i am disabled"></sgds-input>
                 </div>
                 <div class="col-6 mb-2">
@@ -178,7 +185,7 @@
                 </div>
                 <div class="col-6">
                     <sgds-input feedback="must contain at least 3 letters" hintText="this is a hint text" value="sgd" label="validation with pattern" pattern="[A-Za-z]{3}" wasValidated required></sgds-input>
-                </div>
+                </div> -->
             </div>
             
            
@@ -339,9 +346,14 @@
 </div>  
 </body>
 <script>
+    
     const inputForm = document.querySelector('sgds-input');
     inputForm.addEventListener('sgds-input', (e)=>{
-        console.log(e)
+        console.log(e.target.value)
     })
+
+  
+
+
 </script>
 </html>
