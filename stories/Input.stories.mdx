@@ -64,7 +64,7 @@ import "../lib/Input";
         category: "props",
         type: { summary: "string" },
       },
-      description: 'Can be used to insert any utility classes such as `is-invalid` for validation with required field'
+      description: 'Can be used to insert any classes such as `mt-2`'
     },
     iconName:{
       control: "text",
@@ -73,10 +73,11 @@ import "../lib/Input";
         category: "props",
         type: { summary: "string" },
       },
-      description:"Optional. The name of the bootstrap's icon."
+      description:"Optional. The name of the [bootstrap's icon](https://icons.getbootstrap.com/)"
     },
     value:{
       control: 'text',
+      defaultValue: "",
       table:{ 
         category: "props",
         type: { summary: "string" },
@@ -85,7 +86,7 @@ import "../lib/Input";
     },
     placeholder:{
       control: 'text',
-      defaultValue: "this is a placehlder text",
+      defaultValue: "this is a placeholder text",
       table:{ 
         category: "props",
         type: { summary: "string" },
@@ -101,9 +102,9 @@ import "../lib/Input";
       },
       description:'A pattern to validate input against.',
     },
-    feedback:{
+    invalidFeedback:{
       control:'text',
-      defaultValue: "this is an error message",
+      defaultValue: "Please key in 5 letters",
       table:{ 
         category: "props",
         type: { summary: "string" },
@@ -176,6 +177,20 @@ import "../lib/Input";
       },
       description: 'Emitted when the control receives input and its value changes.'
     },
+    'sgds-focus':{
+      table:{ 
+        category: "Events",
+        type: { summary: "Event" },
+      },
+      description: "Emitted when input is in focus"
+    },
+    'sgds-blur':{
+      table:{ 
+        category: "Events",
+        type: { summary: "Event" },
+      },
+      description: "Emitted when input is not focus"
+    },
   }}
 />
 
@@ -190,7 +205,7 @@ export const Template = (args) =>
       .inputClasses=${args.inputClasses}
       .value=${args.value}
       .pattern=${args.pattern} 
-      .feedback=${args.feedback}
+      .invalidFeedback=${args.invalidFeedback}
       .iconName=${args.iconName}
       .placeholder=${args.placeholder}
       ?autofocus=${args.autofocus}
