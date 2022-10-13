@@ -44,8 +44,8 @@ export class SgdsInput extends SgdsElement {
 
   @property({ type: String, reflect: true }) placeholder = "Placeholder";
   
-  @property({ type: String, reflect: true }) pattern;
-  @property({ type: String, reflect: true }) feedback = "default feedback";
+  @property({ type: String }) pattern;
+  @property({ type: String, reflect: true }) invalidFeedback = "default feedback";
   
   @property({ type: Boolean, reflect: true }) autofocus = false;
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -141,7 +141,7 @@ export class SgdsInput extends SgdsElement {
         @blur=${this.handleBlur}
         
       >
-      <div id="${this.id}-invalid" class="invalid-feedback">${this.feedback}</div>
+      <div id="${this.id}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
     `
     // if iconName is defined
     const inputWithIcon = html`
