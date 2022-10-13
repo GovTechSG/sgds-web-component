@@ -7,6 +7,12 @@ import { SgdsCheckbox } from "../lib/Checkbox";
 
 <Meta
   title='Components/Checkbox'
+  //handles format: ['eventName', 'selector']
+  parameters={{
+    actions: {
+      handles: ["sgds-checkbox", "sgds-checkbox"],
+    },
+  }}
   argTypes={{
     value: {
       control: "text",
@@ -18,6 +24,16 @@ import { SgdsCheckbox } from "../lib/Checkbox";
       },
       description:
         "Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name.",
+    },
+    id: {
+      control: "text",
+      description: "For label/input value pair",
+      table: {
+        category: "props",
+        type: {
+          summary: "string",
+        },
+      },
     },
     name: {
       control: "text",
@@ -68,6 +84,76 @@ import { SgdsCheckbox } from "../lib/Checkbox";
         },
       },
     },
+    isValid: {
+      control: "boolean",
+      defaultValue: false,
+      description:
+        "Manually style the input as valid. If showFeedback is true, styles feedback div element as well",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    isInvalid: {
+      control: "boolean",
+      defaultValue: false,
+      description:
+        "Manually style the input as invalid. if showFeedback is true, styles feedback div element as well",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    showFeedback: {
+      control: "boolean",
+      defaultValue: false,
+      description: "Manually render feedback element",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    defaultSlot: {
+      control: "text",
+      defaultValue: "Default text here",
+      description: "default slot for label element",
+      table: {
+        category: "slots",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    feedbackSlot: {
+      control: "text",
+      defaultValue: "Feedback text here",
+      description: "feedback slot for div element",
+      table: {
+        category: "slots",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    customEvent: {
+      name: "sgds-checkbox",
+      control: "disable",
+      defaultValue: "Feedback text here",
+      description:
+        "Emits a custom event on click. Refer to canvas mode to view event handler in action.",
+      table: {
+        category: "events",
+      },
+    },
   }}
 />
 
@@ -75,11 +161,15 @@ export const Template = (args) => {
   return html`
     <sgds-checkbox
       .name=${args.name}
-      .disabled=${args.disabled}
-      .value=${args.value}
-      .required=${args.required}
+      ?disabled=${args.disabled}
+      value=${args.value}
+      ?required=${args.required}
       .checked=${args.checked}
-      >Default</sgds-checkbox
+      .isInvalid=${args.isInvalid}
+      .isValid=${args.isValid}
+      .id=${args.id}
+      .showFeedback=${args.showFeedback}
+      >${args.defaultSlot}<div slot="feedback">${args.feedbackSlot}<div></sgds-checkbox
     >
   `;
 };

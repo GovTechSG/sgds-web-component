@@ -68,86 +68,84 @@
     <script src="lib/index.js"></script>
 </head>
 
-<body class="d-flex flex-column min-vh-100">
-    <sgds-mainnav expand="never" mode="offcanvas">
-        <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
+<body class="d-flex flex-column min-vh-100"></body>
+    <script type="module">
+      const checkbox1 = document.querySelector("sgds-checkbox#checkbox1");
+      checkbox1.addEventListener("sgds-checkbox", (event) => {
+        event.preventDefault();
+        console.log(event.target.value);
+      });
 
-        <sgds-mainnav-item href="#">Home</sgds-mainnav-item>
-        <sgds-mainnav-item href="#">About</sgds-mainnav-item>
-        <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px"></dev-console-widget>
-    </sgds-mainnav>
+      const checkbox3 = document.querySelector("sgds-checkbox#checkbox3");
+      checkbox3.addEventListener("sgds-checkbox", (event) => {
+        event.preventDefault();
+        console.log(event.target.value);
+      });
+    </script>
+  </head>
 
-    <sgds-masthead></sgds-masthead>
-    <div class="container">
-        <br />
-        <sgds-sidenav class="mt-3" id="test-id">
-            <sgds-sidenav-item active>
-                <span slot="title">
-                    <sl-icon name="stack"></sl-icon> Title
-                </span>
-                <sgds-sidenav-link href="https://google.com" active>first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-            </sgds-sidenav-item>
-            <sgds-sidenav-item title="Test title 2" active>
-                <span slot="title">Title</span>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-
-            </sgds-sidenav-item>
-            <sgds-sidenav-item title="Test title 2">
-                <span slot="title">Title</span>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-            </sgds-sidenav-item>
-            <sgds-sidenav-item title="Test title 2" href="#">
-                <span slot="title">Title</span>
-            </sgds-sidenav-item>
-            <sgds-sidenav-item title="Test title 2" href="#">
-                <span slot="title">Title</span>
-            </sgds-sidenav-item>
-        </sgds-sidenav>
-        <br />
-        
-        <div class="container">
-            <h2>Button</h2>
-            <p>Button size</p>
-            <div class="row">
-                <div class="grid">
-                    <sgds-button size="sm" variant="primary">Hello World</sgds-button>
-                    <sgds-button variant="primary" active>Hello World</sgds-button>
-                    <sgds-button size="lg" variant="primary">Hello World</sgds-button>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <p>Variant</p>
-            <div class="row">
-                <div class="grid">
-                    <sgds-button variant="primary">
-                        Primary
-                    </sgds-button>
-                    <sgds-button variant="outline-secondary">Outline</sgds-button>
-                    <sgds-button variant="success" disabled>Disabled</sgds-button>
-                    <sgds-button variant="success" href="#">Link button</sgds-button>
-                    <sgds-button variant="warning" href="#" target="_blank" disabled>
-                        Link button _blank
-                    </sgds-button>
-                    <sgds-button variant="danger" download="logo.svg">
-                        Link button _blank
-                    </sgds-button>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <sgds-checkbox>Default</sgds-checkbox>
-                </div>
-            </div>
-        </div>
+  <body class="d-flex flex-column min-vh-100">
+      <br />
+      <sgds-masthead></sgds-masthead>
+      <br/>
+      <div class="container">
+        <sgds-checkbox value="1" id="checkbox1" ariaLabel="checkboxlabel" showFeedback
+      >Checkbox<div slot="feedback">asdasd</div></sgds-checkbox
+    >
+    <sgds-checkbox value="2" disabled>Checkbox</sgds-checkbox>
+    <sgds-checkbox value="3" id="checkbox3" isValid
+      >Checkbox</sgds-checkbox
+    >
+    <sgds-checkbox value="4" isInvalid required showFeedback
+      >Checkbox<div slot="feedback">asdasd</div></sgds-checkbox
+    >
+      <br />
+      <sgds-sidenav class="mt-3" id="test-id">
+        <sgds-sidenav-item active>
+          <span slot="title"> <sl-icon name="stack"></sl-icon> Title </span>
+          <sgds-sidenav-link href="https://google.com" active
+            >first-test</sgds-sidenav-link
+          >
+          <sgds-sidenav-link href="https://google.com"
+            >first-test</sgds-sidenav-link
+          >
+          <sgds-sidenav-link href="https://google.com"
+            >first-test</sgds-sidenav-link
+          >
+        </sgds-sidenav-item>
+        <sgds-sidenav-item title="Test title 2" active>
+          <span slot="title">Title</span>
+          <sgds-sidenav-link href="https://google.com"
+            >first-test</sgds-sidenav-link
+          >
+          <sgds-sidenav-link href="https://google.com"
+            >first-test</sgds-sidenav-link
+          >
+          <sgds-sidenav-link href="https://google.com"
+            >first-test</sgds-sidenav-link
+          >
+        </sgds-sidenav-item>
+        <sgds-sidenav-item title="Test title 2">
+          <span slot="title">Title</span>
+          <sgds-sidenav-link href="https://google.com"
+            >first-test</sgds-sidenav-link
+          >
+          <sgds-sidenav-link href="https://google.com"
+            >first-test</sgds-sidenav-link
+          >
+          <sgds-sidenav-link href="https://google.com"
+            >first-test</sgds-sidenav-link
+          >
+        </sgds-sidenav-item>
+        <sgds-sidenav-item title="Test title 2" href="#">
+          <span slot="title">Title</span>
+        </sgds-sidenav-item>
+        <sgds-sidenav-item title="Test title 2" href="#">
+          <span slot="title">Title</span>
+        </sgds-sidenav-item>
+      </sgds-sidenav>
+      <br />
+      <button-element class="flex-grow-1">Hello World</button-element>
     </div>
     <sgds-footer description="this is a prop description" title="Singapore Government Design System"
         lastUpdatedDate="08 Feb 2022" links='[
