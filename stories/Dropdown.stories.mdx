@@ -3,6 +3,7 @@ import { html } from "lit";
 import { withWebComponentsKnobs } from "storybook-addon-web-components-knobs";
 import { withKnobs, text, number } from "@storybook/addon-knobs";
 import "../lib/Dropdown";
+import { partDescription } from "./common";
 
 <Meta
   title="Components/Dropdown"
@@ -31,9 +32,8 @@ import "../lib/Dropdown";
       },
     },
     menuIsOpen: {
-      control: "boolean",
-      description:
-        "When true, dropdown menu shows",
+      control: "disable",
+      description: "When true, dropdown menu shows on first load",
       table: {
         defaultValue: { summary: "false" },
         category: "props: SgdsDropdown",
@@ -136,9 +136,59 @@ import "../lib/Dropdown";
     },
     "sgds-select": {
       description:
-        "Emitted event from SgdsDropdown element when a dropdown item is selected/clicked",
+        "Emitted event from SgdsDropdown element when a the slot item is selected/clicked",
       table: {
         category: "Event: SgdsDropdown",
+      },
+    },
+    "sgds-show": {
+      description: "Emitted event when show instance is called ",
+      table: {
+        category: "Event: SgdsDropdown",
+      },
+    },
+    "sgds-shown": {
+      description:
+        "Emitted event when dropdown has been made visible to the user and CSS transitions have completed",
+      table: {
+        category: "Event: SgdsDropdown",
+      },
+    },
+    "sgds-hide": {
+      description: "Emitted event when hide instance is called",
+      table: {
+        category: "Event: SgdsDropdown",
+      },
+    },
+    "sgds-hide": {
+      description:
+        "Emitted event when the dropdown has finished being hidden from the user and CSS transitions have completed",
+      table: {
+        category: "Event: SgdsDropdown",
+      },
+    },
+    menu: {
+      table: { category: "part: SgdsDropdown" },
+      description: partDescription,
+    },
+    showMenu: {
+      control: "disable",
+      description: "When invoked, opens the dropdown menu",
+      table: {
+        category: "methods: SgdsDropdown",
+        type: {
+          summary: "function",
+        },
+      },
+    },
+    hideMenu: {
+      control: "disable",
+      description: "When invoked, hides the dropdown menu",
+      table: {
+        category: "methods: SgdsDropdown",
+        type: {
+          summary: "function",
+        },
       },
     },
     // sgds-dropdown-item
@@ -202,7 +252,8 @@ export const Template = ({
   href,
   disabled,
   value,
-  close
+  close,
+  menuIsOpen
 }) => {
   const listen = window.addEventListener("sgds-select", (e) => {
     console.log(e.target);
@@ -218,14 +269,23 @@ export const Template = ({
         .toggleBtnId=${toggleBtnId}
         .variant=${variant}
         .close=${close}
+        .menuIsOpen=${menuIsOpen}
       >
-        <sgds-dropdown-item .value=${value} disabled .href=${href} .active=${active} 
+        <sgds-dropdown-item
+          .value=${value}
+          disabled
+          .href=${href}
+          .active=${active}
           >item #1 (argsTable controlled)</sgds-dropdown-item
         >
-        <sgds-dropdown-item href="#" value="2" >item #2</sgds-dropdown-item>
-        <sgds-dropdown-item href="#" value="3" disabled>item #3</sgds-dropdown-item>
-        <sgds-dropdown-item href="#" value="3" >item #3</sgds-dropdown-item>
-        <sgds-dropdown-item href="#" value="3" disabled>item #3</sgds-dropdown-item>
+        <sgds-dropdown-item href="#" value="2">item #2</sgds-dropdown-item>
+        <sgds-dropdown-item href="#" value="3" disabled
+          >item #3</sgds-dropdown-item
+        >
+        <sgds-dropdown-item href="#" value="3">item #3</sgds-dropdown-item>
+        <sgds-dropdown-item href="#" value="3" disabled
+          >item #3</sgds-dropdown-item
+        >
       </sgds-dropdown>
     </div>
   `;
@@ -235,7 +295,16 @@ export const Template = ({
 
 This is the sample file for MDX
 
-<Story name="Basic" args={{ buttonText: "Dropdown", variant: "secondary", href:"#", valueDI: "1"}}>
+<Story
+  name="Basic"
+  args={{
+    buttonText: "Dropdown",
+    variant: "secondary",
+    href: "#",
+    valueDI: "1",
+    menuIsOpen: true
+  }}
+>
   {Template.bind({})}
 </Story>
 

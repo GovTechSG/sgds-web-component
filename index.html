@@ -20,6 +20,7 @@
     id="dev-console-gateway"
     src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"
   ></script>
+  
     <style>
         * {
             font-family: "bootstrap-icons", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -72,6 +73,8 @@
     </style>
     <script src="lib/index.js"></script>
 </head>
+<script>
+</script>
 
 <body class="d-flex flex-column min-vh-100">
     <sgds-mainnav expand="never" mode="offcanvas">
@@ -83,7 +86,8 @@
 
     <sgds-masthead></sgds-masthead>
     <div class="container">
-        <sgds-dropdown buttonText="Dropdown">
+
+        <sgds-dropdown buttonText="Dropdown" drop="right">
             <sgds-dropdown-item value="1">test</sgds-dropdown-item>
             <sgds-dropdown-item href="#" value="2">test</sgds-dropdown-item>
             <sgds-dropdown-item href="#" value="3">test</sgds-dropdown-item>

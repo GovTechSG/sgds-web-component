@@ -54,6 +54,7 @@ export class SgdsDropdown extends SgdsElement {
 
   @property({ type: Boolean })
   menuIsOpen = false;
+
   @property({ type: String })
   close: "outside" | "default" | "inside" = "default";
 
@@ -61,6 +62,8 @@ export class SgdsDropdown extends SgdsElement {
   nextDropdownItemNo: number = 0;
   @state()
   prevDropdownItemNo: number = -1;
+  @state()
+  dropdownConfig: Partial<Popper.Options>
 
   firstUpdated() {
     this.bsDropdown = new Dropdown(this.myDropdown.value, {
@@ -76,8 +79,8 @@ export class SgdsDropdown extends SgdsElement {
             },
           },
         ];
-        const dropDownConfig = {
-          placement: undefined,
+        this.dropdownConfig = {
+          placement: "bottom-start",
           modifiers: !this.noFlip
             ? modifierOpt
             : [
@@ -91,43 +94,47 @@ export class SgdsDropdown extends SgdsElement {
 
         switch (this.drop) {
           case "up":
-            dropDownConfig.placement = this.menuAlignRight
+            this.dropdownConfig.placement = this.menuAlignRight
               ? "top-end"
               : "top-start";
             break;
           case "right":
-            dropDownConfig.placement = "right-start";
+            this.dropdownConfig.placement = "right-start";
             break;
           case "left":
-            dropDownConfig.placement = "left-start";
+            this.dropdownConfig.placement = "left-start";
             break;
           case "down":
-            dropDownConfig.placement = this.menuAlignRight
+            this.dropdownConfig.placement = this.menuAlignRight
               ? "bottom-end"
               : "bottom-start";
             break;
           default:
-            dropDownConfig.placement = undefined;
+            this.dropdownConfig.placement = undefined;
             break;
         }
         return mergeDeep(
           defaultConfig,
-          mergeDeep(dropDownConfig, this.popperOpts)
+          mergeDeep(this.dropdownConfig, this.popperOpts)
         );
       },
     });
     this.myDropdown.value.addEventListener("show.bs.dropdown", () => {
       this.menuIsOpen = true;
+      this.emit("sgds-show");
     });
     this.myDropdown.value.addEventListener("shown.bs.dropdown", () => {
       this.menuIsOpen = true;
+      this.emit("sgds-shown");
     });
     this.myDropdown.value.addEventListener("hide.bs.dropdown", () => {
       this.menuIsOpen = false;
       this._resetMenu();
+      this.emit("sgds-hide");
     });
     this.myDropdown.value.addEventListener("hidden.bs.dropdown", () => {
       this.menuIsOpen = false;
+      this.emit("sgds-hidden");
     });
 
     this.addEventListener("keydown", this._handleKeyboardEvent);
@@ -139,7 +146,6 @@ export class SgdsDropdown extends SgdsElement {
       });
       addEventListener("click", (e) => this._handleClickOutOfElement(e, this));
     }
-
     if (this.menuIsOpen) this.bsDropdown.show();
   }
 
@@ -255,7 +261,6 @@ export class SgdsDropdown extends SgdsElement {
           aria-expanded="${this.menuIsOpen}"
           @click=${() => this._onClickButton()}
           id=${this.toggleBtnId}
-          data-bs-toggle="dropdown"
           ${ref(this.myDropdown)}
         >
           ${this.buttonText}
