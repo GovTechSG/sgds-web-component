@@ -160,6 +160,9 @@
             <h2>Input</h2>
             <div class="row">
                 <div class="col-6 mb-2">
+                    <form action="">
+                        <sgds-input id="test-id"></sgds-input>
+                    </form>
                     <sgds-input id="test-id"></sgds-input>
                     <sgds-input iconName='search' id="defaultID"></sgds-input>
                 </div>
@@ -174,6 +177,9 @@
 
                 <div class="col-6 mb-2">
                     <sgds-input iconName="search" label="Not Required" required></sgds-input>
+                </div>
+                <div class="col-6 mb-2">
+                    <sgds-input id="abc" pattern="abc" required></sgds-input>
                 </div>
                 <!-- <div class="col-6 mb-2">
                     <sgds-input disabled placeholder="i am disabled"></sgds-input>
@@ -359,8 +365,9 @@
         console.log(e.target.value)
     })
 
-  
-
+    const inputEL = document.querySelector('#abc');
+    console.log(inputEL.shadowRoot?.query)
+    inputEL.setAttribute('value', 'abcc')
 
 </script>
 </html>

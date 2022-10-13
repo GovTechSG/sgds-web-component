@@ -1,13 +1,16 @@
-import { SgdsInput } from '../src/Input/sgds-input'
+import { SgdsInput } from '../src/Input/sgds-input';
 import '../src/Input/sgds-input';
 import {
   fixture,
   assert,
   expect,
   elementUpdated,
-  oneEvent
+  waitUntil,
+  aTimeout
 } from '@open-wc/testing';
 import {html} from 'lit';
+import sinon from 'sinon';
+import { sendKeys } from '@web/test-runner-commands';
 
 describe('sgds-input', () => {
   it('is defined', () => {
@@ -95,8 +98,48 @@ describe('sgds-input', () => {
     expect( placeHolder?.getAttribute('placeholder')).to.equal("Hello");
   })
 
-  // TODO: Events
-  it("should emit sgds-input event when value is entered", async () => {
-    
+  it('should focus the input when clicking on the label', async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input label="Name"></sgds-input> `);
+    const label = el.shadowRoot?.querySelector('label')!;
+    const submitHandler = sinon.spy();
+
+    el.addEventListener('sgds-focus', submitHandler);
+    (label as HTMLElement).click();
+    await waitUntil(() => submitHandler.calledOnce);
+
+    expect(submitHandler).to.have.been.calledOnce;
   });
+
+  it('should be invalid when the pattern does not match', async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input pattern="^test" value="fail"></sgds-input> `);
+    expect(el.invalid).to.be.true;
+    expect(el.reportValidity()).to.be.false;
+  });
+
+});
+
+
+describe('when input has value', () => {
+  // TODO : fail at firefox. Event will only fire if <sgds-button type="submit"> is clicked on firefox. 
+  // it('should submit the form when pressing enter in a form without a submit button', async () => {
+  //   const form = await fixture<HTMLFormElement>(html` <form><sgds-input type="submit" value="asd" autofocus></sgds-input></form> `);
+  //   const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+
+  //   form.addEventListener('submit', submitHandler);
+  //   await sendKeys({ press: 'Enter' });
+  //   await aTimeout(1000);
+  //   expect(submitHandler).to.have.been.calledOnce;
+  // });
+
+  
+  // it('dscsdc', async () => {
+  //   const el = await fixture(html` <sgds-input value="asd" autofocus></sgds-input> `);
+  //   const inputHandler = sinon.spy();
+
+  //   el.addEventListener('sgds-input', inputHandler);
+  //   await sendKeys({ press: 'A' });
+  //   await aTimeout(1000);
+  //   expect(inputHandler).to.have.been.calledOnce;
+  // });
+
 });
