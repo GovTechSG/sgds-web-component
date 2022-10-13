@@ -132,14 +132,16 @@ describe('when input has value', () => {
   // });
 
   
-  // it('dscsdc', async () => {
-  //   const el = await fixture(html` <sgds-input value="asd" autofocus></sgds-input> `);
-  //   const inputHandler = sinon.spy();
-
-  //   el.addEventListener('sgds-input', inputHandler);
-  //   await sendKeys({ press: 'A' });
-  //   await aTimeout(1000);
-  //   expect(inputHandler).to.have.been.calledOnce;
-  // });
+  it('fires sgds-input event when value is entered', async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input></sgds-input> `);
+    const inputHandler = sinon.spy();
+    const label = el.shadowRoot?.querySelector('label')!;
+    (label as HTMLElement).click();
+    el.addEventListener('sgds-input', inputHandler);
+    await sendKeys({ press: 'A' });
+    // await aTimeout(1000);
+    waitUntil(()=> inputHandler.calledOnce)
+    expect(inputHandler).to.have.been.calledOnce;
+  });
 
 });
