@@ -8,8 +8,6 @@ import {
   oneEvent
 } from '@open-wc/testing';
 import {html} from 'lit';
-import sinon from "sinon";
-
 
 describe('sgds-input', () => {
   it('is defined', () => {
@@ -17,14 +15,14 @@ describe('sgds-input', () => {
       assert.instanceOf(el, SgdsInput)
   })
   it('renders with default values', async () => {
-    const el = await fixture(html`<sgds-input></sgds-input>`);
+    const el = await fixture(html`<sgds-input id="test-id"></sgds-input>`);
     assert.shadowDom.equal(
       el,
       `
       <div class="sgds form-group ">
-        <label class="form-label" for="defaultID">label</label>
-        <input type="text" class="form-control " id="defaultID" placeholder="Placeholder">
-        <div class="invalid-feedback" id="defaultIDInvalid">default feedback</div>  
+        <label class="form-label" for="test-id">label</label>
+        <input type="text" class="form-control " id="test-id" placeholder="Placeholder" aria-invalid="false">
+        <div class="invalid-feedback" id="test-id-invalid">default feedback</div>
       </div>
     `
     );
@@ -51,19 +49,23 @@ describe('sgds-input', () => {
 
   // Icon
   it('should render with fom-control-group if iconName attribute is defined', async () => {
-    const el = await fixture(html`<sgds-input iconName='search'></sgds-input>`);
+    const el = await fixture(html`<sgds-input iconName='search' id="defaultID"></sgds-input>`);
     assert.shadowDom.equal(
       el,
-      `<div class="sgds form-group ">
+      `
+      <div class="sgds form-group ">
         <label class="form-label" for="defaultID">label</label>
         <div class="sgds form-control-group">
           <span class="form-control-icon">
             <sl-icon name="search"></sl-icon> 
-          </span>  
-          <input type="text" class="form-control " id="defaultID" placeholder="Placeholder">
-          <div class="invalid-feedback" id="defaultIDInvalid">default feedback</div>
+          </span>
+          
+          <input type="text" class="form-control " id="defaultID" placeholder="Placeholder" aria-invalid="false">
+          <div class="invalid-feedback" id="defaultID-invalid">default feedback</div>
+      
         </div>
-      </div>`
+      </div>
+      `
     );
   })
 
