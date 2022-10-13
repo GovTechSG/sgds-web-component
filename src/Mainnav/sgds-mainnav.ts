@@ -12,6 +12,7 @@ import {
   XL_BREAKPOINT,
   XXL_BREAKPOINT,
 } from "../utils/breakpoints";
+import { classMap } from "lit/directives/class-map.js";
 
 export type MainnavExpandSize =
   | "sm"
@@ -154,6 +155,7 @@ export class SgdsMainnav extends SgdsElement {
         >
           <ul class="navbar-nav">
             <slot></slot>
+            <slot name="end" class=${classMap({"slot-end": !this.breakpointReached})}></slot>
           </ul>
         </div>
       </nav>
