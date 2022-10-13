@@ -23,6 +23,7 @@ describe("sgds-dropdown", () => {
          class="btn btn-outline-secondary dropdown-toggle"
          id="dropdown-test-id"
            type="button"
+           part="toggle" 
          >
          </button>
        <ul
@@ -94,24 +95,24 @@ describe("sgds-dropdown", () => {
     expect(el.dropdownConfig.placement).to.equal("left-start");
   });
 
-  it('when noFlip is false, dropdownConfig.modifiers array has only offset obj', async() => {
+  it("when noFlip is false, dropdownConfig.modifiers array has only offset obj", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown></sgds-dropdown>`
     );
     el.shadowRoot?.querySelector("button")?.click();
     expect(el.dropdownConfig.modifiers?.length).to.equal(1);
-    expect(el.dropdownConfig.modifiers?.[0].name).to.equal('offset');
+    expect(el.dropdownConfig.modifiers?.[0].name).to.equal("offset");
     expect(el.dropdownConfig.modifiers?.[0].options?.offset[0]).to.equal(0);
     expect(el.dropdownConfig.modifiers?.[0].options?.offset[1]).to.equal(10);
-  })
-  it('when noFlip is true, dropdownConfig.modifiers array has flip obj', async() => {
+  });
+  it("when noFlip is true, dropdownConfig.modifiers array has flip obj", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown noFlip></sgds-dropdown>`
     );
     el.shadowRoot?.querySelector("button")?.click();
     expect(el.dropdownConfig.modifiers?.length).to.equal(2);
-    expect(el.dropdownConfig.modifiers?.[1].name).to.equal('flip');
-  })
+    expect(el.dropdownConfig.modifiers?.[1].name).to.equal("flip");
+  });
   it("buttonText prop is forwarded to text content of button element", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown buttonText="Hello World"></sgds-dropdown>`

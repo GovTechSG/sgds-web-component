@@ -262,6 +262,7 @@ export class SgdsDropdown extends SgdsElement {
           @click=${() => this._onClickButton()}
           id=${this.toggleBtnId}
           ${ref(this.myDropdown)}
+          part="toggle"
         >
           ${this.buttonText}
           <svg
