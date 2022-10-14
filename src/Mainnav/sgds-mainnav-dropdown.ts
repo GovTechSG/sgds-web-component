@@ -1,29 +1,18 @@
-import { html } from "lit";
+import { html, css } from "lit";
 import { customElement } from "lit/decorators.js";
-import {  ref } from "lit/directives/ref.js";
-import styles from "./sgds-dropdown.scss";
-import { DropdownElement } from "./dropdown";
+import { ref } from "lit/directives/ref.js";
+import styles from "./sgds-mainnav-dropdown.scss";
+import { DropdownElement } from "../Dropdown/dropdown";
 
-export type DropDirection = "left" | "right" | "up" | "down";
-@customElement("sgds-dropdown")
-export class SgdsDropdown extends DropdownElement {
+@customElement("sgds-mainnav-dropdown")
+export class SgdsMainnavDropdown extends DropdownElement {
   static styles = styles;
-  constructor(){
-    super()
-    this.modifierOpt = [
-      {
-        name: "offset",
-        options: {
-          offset: [0, 10],
-        },
-      },
-    ];
-  }
+
   render() {
     return html`
-      <div>
-        <sgds-button
-          variant="outline-${this.variant}"
+      <li class="nav-item">
+        <a
+          class="nav-link"
           ?disabled=${this.disabled}
           aria-expanded="${this.menuIsOpen}"
           ${ref(this.myDropdown)}
@@ -44,11 +33,11 @@ export class SgdsDropdown extends DropdownElement {
               d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
             />
           </svg>
-        </sgds-button>
+        </a>
         <ul class="dropdown-menu" role="menu" part="menu">
           <slot @click=${this._handleSelectSlot}></slot>
         </ul>
-      </div>
+      </li>
     `;
   }
 }

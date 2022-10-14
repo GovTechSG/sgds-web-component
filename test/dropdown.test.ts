@@ -1,9 +1,252 @@
 import { SgdsDropdown, SgdsDropdownItem } from "../src/Dropdown";
+import { SgdsButton } from "../src/Button";
 import "../src/Dropdown";
-import { fixture, assert, expect, waitUntil } from "@open-wc/testing";
+import {
+  fixture,
+  assert,
+  expect,
+  waitUntil,
+} from "@open-wc/testing";
 import sinon from "sinon";
 import { html } from "lit";
 import { sendKeys, sendMouse } from "@web/test-runner-commands";
+import { MockDropdown } from "../mocks/dropdown";
+import "../mocks/dropdown";
+
+describe('dropdown-element generic keyboard interactions', () => {
+    // //keyboard navigation
+    const closeKeys = ["Enter", "Escape"];
+    closeKeys.forEach((key) => {
+      it(`should close an opened menu on ${key} press`, async () => {
+        const el = await fixture<MockDropdown>(
+          html`<mock-dropdown menuIsOpen>
+            <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
+            <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
+          </mock-dropdown> `
+        );
+        expect(el.menuIsOpen).to.be.true;
+        el.shadowRoot?.querySelector("button")?.focus();
+        await waitUntil(() => el.shadowRoot?.querySelector("button:focus"));
+        await sendKeys({ press: key });
+        await el.updateComplete;
+        await waitUntil(
+          () => !el.shadowRoot?.querySelector("ul.dropdown-menu.show"),
+          "element should disappear",
+          { timeout: 3000 }
+        );
+        expect(el.menuIsOpen).to.be.false;
+      }).retries(1);
+    });
+    const openKeys = ["ArrowDown", "ArrowUp", "Enter"];
+    openKeys.forEach((key) => {
+      it(`should open menu on ${key} key`, async () => {
+        const el = await fixture<MockDropdown>(
+          html`<mock-dropdown>
+            <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
+            <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
+          </mock-dropdown> `
+        );
+        expect(el.menuIsOpen).to.be.false;
+        el.shadowRoot?.querySelector("button")?.focus();
+        await sendKeys({ press: key });
+        await waitUntil(() =>
+          el.shadowRoot?.querySelector("ul.dropdown-menu.show")
+        );
+        expect(el.menuIsOpen).to.be.true;
+      }).retries(1); // allowing retries as these tests tends to be flaky on firefox
+    });
+
+    it("for a newly opened menu with no focus on any items, ArrowDown key will navigate to the first dropdown-item on the menu and continue looping once it reaches the last menu item", async () => {
+      const el = await fixture<MockDropdown>(
+        html`<mock-dropdown menuIsOpen>
+          <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
+          <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
+        </mock-dropdown> `
+      );
+      expect(el.nextDropdownItemNo).to.equal(0);
+      expect(el.prevDropdownItemNo).to.equal(-1);
+      expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
+        "tabindex",
+        "-1"
+      );
+      expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
+        "tabindex",
+        "-1"
+      );
+      el.shadowRoot?.querySelector("button")?.focus();
+
+      await sendKeys({ press: "ArrowDown" });
+      // currentItem = 0
+      await el.updateComplete;
+      expect(el.nextDropdownItemNo).to.equal(1);
+      expect(el.prevDropdownItemNo).to.equal(1);
+      expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
+        "tabindex",
+        "0"
+      );
+      expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
+        "tabindex",
+        "-1"
+      );
+      await sendKeys({ press: "ArrowDown" });
+      //currentItem = 1
+      await el.updateComplete;
+      expect(el.nextDropdownItemNo).to.equal(2);
+      expect(el.prevDropdownItemNo).to.equal(0);
+      expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
+        "tabindex",
+        "-1"
+      );
+      expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
+        "tabindex",
+        "0"
+      );
+      await sendKeys({ press: "ArrowDown" });
+      //currentItem = 0
+      await el.updateComplete;
+      expect(el.nextDropdownItemNo).to.equal(1);
+      expect(el.prevDropdownItemNo).to.equal(1);
+      expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
+        "tabindex",
+        "0"
+      );
+      expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
+        "tabindex",
+        "-1"
+      );
+    });
+    it("for a newly opened menu with no focus on any items, ArrowUp key will navigate to the last dropdown-item on the menu and continue looping once it reaches the last menu item", async () => {
+      const el = await fixture<MockDropdown>(
+        html`<mock-dropdown menuIsOpen>
+          <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
+          <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
+        </mock-dropdown> `
+      );
+      expect(el.nextDropdownItemNo).to.equal(0);
+      expect(el.prevDropdownItemNo).to.equal(-1);
+      expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
+        "tabindex",
+        "-1"
+      );
+      expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
+        "tabindex",
+        "-1"
+      );
+      el.shadowRoot?.querySelector("button")?.focus();
+      await sendKeys({ press: "ArrowUp" });
+      // currentItem = 1
+      await el.updateComplete;
+      expect(el.nextDropdownItemNo).to.equal(2);
+      expect(el.prevDropdownItemNo).to.equal(0);
+      expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
+        "tabindex",
+        "-1"
+      );
+      expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
+        "tabindex",
+        "0"
+      );
+      await sendKeys({ press: "ArrowUp" });
+      //currentItem = 0
+      await el.updateComplete;
+      expect(el.nextDropdownItemNo).to.equal(1);
+      expect(el.prevDropdownItemNo).to.equal(1);
+      expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
+        "tabindex",
+        "0"
+      );
+      expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
+        "tabindex",
+        "-1"
+      );
+      await sendKeys({ press: "ArrowUp" });
+      //currentItem = 1
+      await el.updateComplete;
+      expect(el.nextDropdownItemNo).to.equal(2);
+      expect(el.prevDropdownItemNo).to.equal(0);
+      expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
+        "tabindex",
+        "-1"
+      );
+      expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
+        "tabindex",
+        "0"
+      );
+
+      //closing the menu resets the states nextDropdownItemNo and prevDropdownItemNo
+      await sendKeys({ press: "Escape" });
+      await el.updateComplete;
+      expect(el.menuIsOpen).to.be.false;
+      expect(el.nextDropdownItemNo).to.equal(0);
+      expect(el.prevDropdownItemNo).to.equal(-1);
+      expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
+        "tabindex",
+        "-1"
+      );
+      expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
+        "tabindex",
+        "-1"
+      );
+    });
+    it("keyboard navigation skips disabled items", async () => {
+      const el = await fixture<MockDropdown>(
+        html`<mock-dropdown menuIsOpen>
+          <sgds-dropdown-item value="1" disabled>slot 1</sgds-dropdown-item>
+          <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
+          <sgds-dropdown-item value="2">slot 3</sgds-dropdown-item>
+          <sgds-dropdown-item value="2" disabled>slot 4</sgds-dropdown-item>
+        </mock-dropdown> `
+      );
+      el.shadowRoot?.querySelector("button")?.focus();
+      await sendKeys({ press: "ArrowDown" });
+      expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(
+        el.querySelectorAll("sgds-dropdown-item")[1]
+      );
+      await sendKeys({ press: "ArrowDown" });
+      expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(
+        el.querySelectorAll("sgds-dropdown-item")[2]
+      );
+      await sendKeys({ press: "ArrowDown" });
+      expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(
+        el.querySelectorAll("sgds-dropdown-item")[1]
+      );
+      expect(el.querySelector("sgds-dropdown-item:focus")).not.to.equal(
+        el.querySelectorAll("sgds-dropdown-item")[3]
+      );
+    });
+    // test case: when close="outside" and user mouse clicks on menu and then change to keyboard navigation
+    it("transition from mouse click to keyboard navigation should be seamless", async () => {
+      const el = await fixture<MockDropdown>(
+        html`<mock-dropdown menuIsOpen close="outside">
+          <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
+          <sgds-dropdown-item value="2" disabled>slot 2</sgds-dropdown-item>
+          <sgds-dropdown-item value="2">slot 3</sgds-dropdown-item>
+          <sgds-dropdown-item value="2">slot 4</sgds-dropdown-item>
+        </mock-dropdown> `
+      );
+      const itemOne = el.querySelectorAll(
+        "sgds-dropdown-item"
+      )[0] as SgdsDropdownItem;
+      itemOne.click();
+      await sendKeys({ press: "ArrowDown" });
+      expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(
+        el.querySelectorAll("sgds-dropdown-item")[2]
+      );
+      await sendKeys({ press: "ArrowDown" });
+      expect(el.querySelector("sgds-dropdown-item:focus")).not.to.equal(
+        el.querySelectorAll("sgds-dropdown-item")[2]
+      );
+      expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(
+        el.querySelectorAll("sgds-dropdown-item")[3]
+      );
+
+      itemOne.click();
+      await sendKeys({ press: "ArrowUp" });
+      expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(
+        el.querySelectorAll("sgds-dropdown-item")[3]
+      );
+    });
+})
 
 describe("sgds-dropdown", () => {
   it("is defined", () => {
@@ -17,15 +260,26 @@ describe("sgds-dropdown", () => {
     );
     assert.shadowDom.equal(
       el,
-      `  <div class="dropdown sgds">
-         <button
+      `  <div>
+         <sgds-button
            aria-expanded="false"
-         class="btn btn-outline-secondary dropdown-toggle"
          id="dropdown-test-id"
-           type="button"
-           part="toggle" 
+         variant="outline-secondary"
          >
-         </button>
+         <svg
+         xmlns="http://www.w3.org/2000/svg"
+         width="16"
+         height="16"
+         fill="currentColor"
+         class="bi bi-chevron-down"
+         viewBox="0 0 16 16"
+       >
+         <path
+           fill-rule="evenodd"
+           d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+         />
+       </svg>
+         </sgds-button>
        <ul
          class="dropdown-menu"
          part="menu"
@@ -38,11 +292,19 @@ describe("sgds-dropdown", () => {
     `
     );
   });
+  it("when disabled is true, toggle is disabled ", async () => {
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown disabled></sgds-dropdown>`
+    );
+    expect(el.shadowRoot?.querySelector("sgds-button")).to.have.attribute(
+      "disabled"
+    );
+  });
   it("when menuAlignRight is false (default) on default dropdown, data-popper-placement on ul.dropdown-menu is bottom-start ", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown></sgds-dropdown>`
     );
-    el.shadowRoot?.querySelector("button")?.click();
+    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
     await waitUntil(() =>
       el.shadowRoot?.querySelector("ul.dropdown-menu.show")
     );
@@ -52,13 +314,13 @@ describe("sgds-dropdown", () => {
         ?.getAttribute("data-popper-placement")
     ).to.equal("bottom-start");
   });
-  //Popper attri data-popper-placemetn not responding to test changes in open-wc
-  //unsure why not working when console logging values are bottom-end
+  // //Popper attri data-popper-placemetn not responding to test changes in open-wc
+  // //unsure why not working when console logging values are bottom-end
   it("when menuAlignRight is true on default dropdown, dropdownConfig placement is bottom-end ", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown menuAlignRight></sgds-dropdown>`
     );
-    el.shadowRoot?.querySelector("button")?.click();
+    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
 
     expect(el.dropdownConfig.placement).to.equal("bottom-end");
   });
@@ -66,7 +328,7 @@ describe("sgds-dropdown", () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown menuAlignRight drop="up"></sgds-dropdown>`
     );
-    el.shadowRoot?.querySelector("button")?.click();
+    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
 
     expect(el.dropdownConfig.placement).to.equal("top-end");
   });
@@ -74,7 +336,7 @@ describe("sgds-dropdown", () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown drop="up"></sgds-dropdown>`
     );
-    el.shadowRoot?.querySelector("button")?.click();
+    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
 
     expect(el.dropdownConfig.placement).to.equal("top-start");
   });
@@ -82,7 +344,7 @@ describe("sgds-dropdown", () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown drop="right"></sgds-dropdown>`
     );
-    el.shadowRoot?.querySelector("button")?.click();
+    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
 
     expect(el.dropdownConfig.placement).to.equal("right-start");
   });
@@ -90,7 +352,7 @@ describe("sgds-dropdown", () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown drop="left"></sgds-dropdown>`
     );
-    el.shadowRoot?.querySelector("button")?.click();
+    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
 
     expect(el.dropdownConfig.placement).to.equal("left-start");
   });
@@ -99,7 +361,7 @@ describe("sgds-dropdown", () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown></sgds-dropdown>`
     );
-    el.shadowRoot?.querySelector("button")?.click();
+    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
     expect(el.dropdownConfig.modifiers?.length).to.equal(1);
     expect(el.dropdownConfig.modifiers?.[0].name).to.equal("offset");
     expect(el.dropdownConfig.modifiers?.[0].options?.offset[0]).to.equal(0);
@@ -109,24 +371,25 @@ describe("sgds-dropdown", () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown noFlip></sgds-dropdown>`
     );
-    el.shadowRoot?.querySelector("button")?.click();
+    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
     expect(el.dropdownConfig.modifiers?.length).to.equal(2);
     expect(el.dropdownConfig.modifiers?.[1].name).to.equal("flip");
   });
-  it("buttonText prop is forwarded to text content of button element", async () => {
+  it("toggleText prop is forwarded to text content of button element", async () => {
     const el = await fixture<SgdsDropdown>(
-      html`<sgds-dropdown buttonText="Hello World"></sgds-dropdown>`
+      html`<sgds-dropdown toggleText="Hello World"></sgds-dropdown>`
     );
-    expect(el.shadowRoot?.querySelector("button")?.textContent).to.contain(
+    expect(el.shadowRoot?.querySelector("sgds-button")?.textContent).to.contain(
       "Hello World"
     );
   });
-  it("variant prop is forwarded to text content of button element", async () => {
+  it("variant prop is forwarded to text content of sgds-button element", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown variant="primary"></sgds-dropdown>`
     );
-    expect(el.shadowRoot?.querySelector("button")).to.have.class(
-      "btn-outline-primary"
+    expect(el.shadowRoot?.querySelector("sgds-button")).to.have.attribute(
+      "variant",
+      "outline-primary"
     );
   });
   it("value prop assigns value to the element", async () => {
@@ -143,7 +406,7 @@ describe("sgds-dropdown", () => {
       "show"
     );
   });
-  //emits events when dropdown is toggle open/close
+  // //emits events when dropdown is toggle open/close
   it("emits sgds-show/shown/hide/hidden events when dropdown toggles", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown></sgds-dropdown>`
@@ -157,7 +420,7 @@ describe("sgds-dropdown", () => {
     el.addEventListener("sgds-hide", hideHandler);
     el.addEventListener("sgds-hidden", hiddenHandler);
 
-    const button = el.shadowRoot?.querySelector("button");
+    const button = el.shadowRoot?.querySelector("sgds-button") as SgdsButton;
     button?.click();
     await el.updateComplete;
     expect(showHandler).to.be.calledOnce;
@@ -192,7 +455,7 @@ describe("sgds-dropdown", () => {
       "show"
     );
   });
-  // testing _handleSelectSlot functionality
+  // // testing _handleSelectSlot functionality
   it("emits sgds-select event when its slots are clicked on", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown>
@@ -228,7 +491,7 @@ describe("sgds-dropdown", () => {
     slots?.[0].click();
     expect(selectHandler).not.to.be.called;
   });
-  // testing _handleSelectSlot functionality
+  // // testing _handleSelectSlot functionality
   it("when clicked on slot, menu closes and value of sgds-dropdown to be updated", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown menuIsOpen>
@@ -250,7 +513,7 @@ describe("sgds-dropdown", () => {
     );
     expect(el.value).to.equal("1");
   });
-  // tests _handleClickOutOfElement & blur event listener
+  // // tests _handleClickOutOfElement & blur event listener
   it("click outside of component, closes the dropdown by default", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown menuIsOpen>
@@ -339,7 +602,7 @@ describe("sgds-dropdown", () => {
       expect(el.shadowRoot?.querySelector("ul.dropdown-menu")).to.have.class(
         "show"
       );
-      el.shadowRoot?.querySelector("button")?.click();
+      (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
       // proving that clicking inside menu item will not close the menu
       await el.updateComplete;
       expect(
@@ -348,239 +611,8 @@ describe("sgds-dropdown", () => {
       expect(el.menuIsOpen).to.be.false;
     });
   });
+})
 
-  //keyboard navigation
-  const closeKeys = ["Enter", "Escape"];
-  closeKeys.forEach((key) => {
-    it(`should close an opened menu on ${key} press`, async () => {
-      const el = await fixture<SgdsDropdown>(
-        html`<sgds-dropdown menuIsOpen>
-          <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
-          <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
-        </sgds-dropdown> `
-      );
-      expect(el.menuIsOpen).to.be.true;
-      el.shadowRoot?.querySelector("button")?.focus();
-      await waitUntil(() => el.shadowRoot?.querySelector("button:focus"));
-      await sendKeys({ press: key });
-      await waitUntil(
-        () => !el.shadowRoot?.querySelector("ul.dropdown-menu.show"),
-        "element should disappear",
-        { timeout: 3000 }
-      );
-      expect(el.menuIsOpen).to.be.false;
-    }).retries(1);
-  });
-  const openKeys = ["ArrowDown", "ArrowUp", "Enter"];
-  openKeys.forEach((key) => {
-    it(`should open menu on ${key} key`, async () => {
-      const el = await fixture<SgdsDropdown>(
-        html`<sgds-dropdown>
-          <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
-          <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
-        </sgds-dropdown> `
-      );
-      expect(el.menuIsOpen).to.be.false;
-      el.shadowRoot?.querySelector("button")?.focus();
-      await sendKeys({ press: key });
-      await waitUntil(() =>
-        el.shadowRoot?.querySelector("ul.dropdown-menu.show")
-      );
-      expect(el.menuIsOpen).to.be.true;
-    }).retries(1); // allowing retries as these tests tends to be flaky on firefox
-  });
-
-  it("for a newly opened menu with no focus on any items, ArrowDown key will navigate to the first dropdown-item on the menu and continue looping once it reaches the last menu item", async () => {
-    const el = await fixture<SgdsDropdown>(
-      html`<sgds-dropdown menuIsOpen>
-        <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
-        <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
-      </sgds-dropdown> `
-    );
-    expect(el.nextDropdownItemNo).to.equal(0);
-    expect(el.prevDropdownItemNo).to.equal(-1);
-    expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
-      "tabindex",
-      "-1"
-    );
-    expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
-      "tabindex",
-      "-1"
-    );
-
-    el.shadowRoot?.querySelector("button")?.focus();
-    await sendKeys({ press: "ArrowDown" });
-    // currentItem = 0
-    await el.updateComplete;
-    expect(el.nextDropdownItemNo).to.equal(1);
-    expect(el.prevDropdownItemNo).to.equal(1);
-    expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
-      "tabindex",
-      "0"
-    );
-    expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
-      "tabindex",
-      "-1"
-    );
-    await sendKeys({ press: "ArrowDown" });
-    //currentItem = 1
-    await el.updateComplete;
-    expect(el.nextDropdownItemNo).to.equal(2);
-    expect(el.prevDropdownItemNo).to.equal(0);
-    expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
-      "tabindex",
-      "-1"
-    );
-    expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
-      "tabindex",
-      "0"
-    );
-    await sendKeys({ press: "ArrowDown" });
-    //currentItem = 0
-    await el.updateComplete;
-    expect(el.nextDropdownItemNo).to.equal(1);
-    expect(el.prevDropdownItemNo).to.equal(1);
-    expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
-      "tabindex",
-      "0"
-    );
-    expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
-      "tabindex",
-      "-1"
-    );
-  });
-  it("for a newly opened menu with no focus on any items, ArrowUp key will navigate to the last dropdown-item on the menu and continue looping once it reaches the last menu item", async () => {
-    const el = await fixture<SgdsDropdown>(
-      html`<sgds-dropdown menuIsOpen>
-        <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
-        <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
-      </sgds-dropdown> `
-    );
-    expect(el.nextDropdownItemNo).to.equal(0);
-    expect(el.prevDropdownItemNo).to.equal(-1);
-    expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
-      "tabindex",
-      "-1"
-    );
-    expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
-      "tabindex",
-      "-1"
-    );
-    el.shadowRoot?.querySelector("button")?.focus();
-    await sendKeys({ press: "ArrowUp" });
-    // currentItem = 1
-    await el.updateComplete;
-    expect(el.nextDropdownItemNo).to.equal(2);
-    expect(el.prevDropdownItemNo).to.equal(0);
-    expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
-      "tabindex",
-      "-1"
-    );
-    expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
-      "tabindex",
-      "0"
-    );
-    await sendKeys({ press: "ArrowUp" });
-    //currentItem = 0
-    await el.updateComplete;
-    expect(el.nextDropdownItemNo).to.equal(1);
-    expect(el.prevDropdownItemNo).to.equal(1);
-    expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
-      "tabindex",
-      "0"
-    );
-    expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
-      "tabindex",
-      "-1"
-    );
-    await sendKeys({ press: "ArrowUp" });
-    //currentItem = 1
-    await el.updateComplete;
-    expect(el.nextDropdownItemNo).to.equal(2);
-    expect(el.prevDropdownItemNo).to.equal(0);
-    expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
-      "tabindex",
-      "-1"
-    );
-    expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
-      "tabindex",
-      "0"
-    );
-
-    //closing the menu resets the states nextDropdownItemNo and prevDropdownItemNo
-    await sendKeys({ press: "Escape" });
-    await el.updateComplete;
-    expect(el.menuIsOpen).to.be.false;
-    expect(el.nextDropdownItemNo).to.equal(0);
-    expect(el.prevDropdownItemNo).to.equal(-1);
-    expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
-      "tabindex",
-      "-1"
-    );
-    expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
-      "tabindex",
-      "-1"
-    );
-  });
-  it("keyboard navigation skips disabled items", async () => {
-    const el = await fixture<SgdsDropdown>(
-      html`<sgds-dropdown menuIsOpen>
-        <sgds-dropdown-item value="1" disabled>slot 1</sgds-dropdown-item>
-        <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
-        <sgds-dropdown-item value="2">slot 3</sgds-dropdown-item>
-        <sgds-dropdown-item value="2" disabled>slot 4</sgds-dropdown-item>
-      </sgds-dropdown> `
-    );
-    el.shadowRoot?.querySelector("button")?.focus();
-    await sendKeys({ press: "ArrowDown" });
-    expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(
-      el.querySelectorAll("sgds-dropdown-item")[1]
-    );
-    await sendKeys({ press: "ArrowDown" });
-    expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(
-      el.querySelectorAll("sgds-dropdown-item")[2]
-    );
-    await sendKeys({ press: "ArrowDown" });
-    expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(
-      el.querySelectorAll("sgds-dropdown-item")[1]
-    );
-    expect(el.querySelector("sgds-dropdown-item:focus")).not.to.equal(
-      el.querySelectorAll("sgds-dropdown-item")[3]
-    );
-  });
-  // test case: when close="outside" and user mouse clicks on menu and then change to keyboard navigation
-  it("transition from mouse click to keyboard navigation should be seamless", async () => {
-    const el = await fixture<SgdsDropdown>(
-      html`<sgds-dropdown menuIsOpen close="outside">
-        <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
-        <sgds-dropdown-item value="2" disabled>slot 2</sgds-dropdown-item>
-        <sgds-dropdown-item value="2">slot 3</sgds-dropdown-item>
-        <sgds-dropdown-item value="2">slot 4</sgds-dropdown-item>
-      </sgds-dropdown> `
-    );
-    const itemOne = el.querySelectorAll(
-      "sgds-dropdown-item"
-    )[0] as SgdsDropdownItem;
-    itemOne.click();
-    await sendKeys({ press: "ArrowDown" });
-    expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(
-      el.querySelectorAll("sgds-dropdown-item")[2]
-    );
-    await sendKeys({ press: "ArrowDown" });
-    expect(el.querySelector("sgds-dropdown-item:focus")).not.to.equal(
-      el.querySelectorAll("sgds-dropdown-item")[2]
-    );
-    expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(
-      el.querySelectorAll("sgds-dropdown-item")[3]
-    );
-
-    itemOne.click();
-    await sendKeys({ press: "ArrowUp" });
-    expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(
-      el.querySelectorAll("sgds-dropdown-item")[3]
-    );
-  });
-});
 
 describe("sgds-dropdown-item", () => {
   it("is defined", () => {
@@ -635,4 +667,4 @@ describe("sgds-dropdown-item", () => {
     );
     expect(el.value).to.equal("hello");
   });
-});
+})

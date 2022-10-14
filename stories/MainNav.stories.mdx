@@ -112,7 +112,12 @@ export const Template = ({ expand, brandHref, collapseId, active, href }) => {
       <sgds-mainnav-item .active=${active} .href=${href}
         >Home (argsTable controlled)
       </sgds-mainnav-item>
-      <sgds-mainnav-item href="#">About</sgds-mainnav-item>
+      <sgds-mainnav-dropdown toggleText="Dropdown">
+      <sgds-dropdown-item>Item 1</sgds-dropdown-item>
+      <sgds-dropdown-item>Item 1</sgds-dropdown-item>
+      <sgds-dropdown-item>Item 1</sgds-dropdown-item>
+      </sgds-mainnav-dropdown>
+   <sgds-mainnav-item href="#">About</sgds-mainnav-item>
             <sgds-button href="#" slot="non-collapsible">Login</sgds-button>
       <dev-console-widget
         slot="non-collapsible"
@@ -127,7 +132,7 @@ export const Template = ({ expand, brandHref, collapseId, active, href }) => {
 # SgdsMainnav
 
 <Canvas>
-  <Story name="Basic">{Template.bind({})}</Story>
+  <Story name="Basic" height="500px">{Template.bind({})}</Story>
 </Canvas>
 
 

@@ -3,7 +3,6 @@ import { customElement, property } from "lit/decorators.js";
 import SgdsElement from "../utils/sgds-element";
 import styles from "./sgds-dropdown.scss";
 import {classMap} from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
 
 @customElement("sgds-dropdown-item")
 export class SgdsDropdownItem extends SgdsElement {

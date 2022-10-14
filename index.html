@@ -77,21 +77,16 @@
 </script>
 
 <body class="d-flex flex-column min-vh-100">
-    <sgds-mainnav expand="never" mode="offcanvas">
+    <sgds-mainnav expand="always">
         <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
         <sgds-mainnav-item href="#">Home</sgds-mainnav-item>
+        <sgds-mainnav-item href="#">About</sgds-mainnav-item>
         <sgds-mainnav-item href="#">About</sgds-mainnav-item>
         <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px"></dev-console-widget>
     </sgds-mainnav>
 
     <sgds-masthead></sgds-masthead>
     <div class="container">
-
-        <sgds-dropdown buttonText="Dropdown" drop="right">
-            <sgds-dropdown-item value="1">test</sgds-dropdown-item>
-            <sgds-dropdown-item href="#" value="2">test</sgds-dropdown-item>
-            <sgds-dropdown-item href="#" value="3">test</sgds-dropdown-item>
-          </sgds-dropdown>        <br />
         <sgds-sidenav class="mt-3" id="test-id">
             <sgds-sidenav-item active>
                 <span slot="title">

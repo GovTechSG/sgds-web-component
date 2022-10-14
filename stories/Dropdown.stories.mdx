@@ -71,7 +71,7 @@ import { partDescription } from "./common";
         category: "props: SgdsDropdown",
       },
     },
-    buttonText: {
+    toggleText: {
       control: "text",
       description: "Sets the text content of Dropdown button ",
       table: {
@@ -128,6 +128,18 @@ import { partDescription } from "./common";
         },
       },
     },
+    disabled: {
+      control: "boolean",
+      description:
+        "Disables the dropdown toggle",
+      table: {
+        defaultValue: { summary: "false" },
+        category: "props: SgdsDropdown",
+        type: {
+          summary: "string",
+        },
+      },
+    },
     default: {
       description: "default slot for SgdsDropdownItem element",
       table: {
@@ -166,10 +178,6 @@ import { partDescription } from "./common";
       table: {
         category: "Event: SgdsDropdown",
       },
-    },
-    toggle: {
-      table: { category: "part: SgdsDropdown" },
-      description: partDescription,
     },
     menu: {
       table: { category: "part: SgdsDropdown" },
@@ -218,7 +226,8 @@ import { partDescription } from "./common";
         },
       },
     },
-    disabled: {
+    disabledDI: {
+      name: "disabled",
       control: "boolean",
       description: "Disables the dropdown item when true",
       table: {
@@ -250,22 +259,20 @@ export const Template = ({
   drop,
   popperOpts,
   toggleBtnId,
-  buttonText,
+  toggleText,
   variant,
   active,
   href,
-  disabled,
+  disabledDI,
   value,
   close,
-  menuIsOpen
+  menuIsOpen,
+  disabled,
 }) => {
-  const listen = window.addEventListener("sgds-select", (e) => {
-    console.log(e.target);
-  });
   return html`
-    <div class="d-flex justify-content-center" style=" margin: 100px;">
+      <div class="d-flex justify-content-center" style="padding-top: 7rem;">
       <sgds-dropdown
-        .buttonText=${buttonText}
+        .toggleText=${toggleText}
         .noFlip=${noFlip}
         .drop=${drop}
         .menuAlignRight=${menuAlignRight}
@@ -274,42 +281,38 @@ export const Template = ({
         .variant=${variant}
         .close=${close}
         .menuIsOpen=${menuIsOpen}
+        .disabled=${disabled}
       >
         <sgds-dropdown-item
           .value=${value}
-          disabled
           .href=${href}
           .active=${active}
+          .disabled=${disabledDI}
           >item #1 (argsTable controlled)</sgds-dropdown-item
         >
         <sgds-dropdown-item href="#" value="2">item #2</sgds-dropdown-item>
         <sgds-dropdown-item href="#" value="3" disabled
           >item #3</sgds-dropdown-item
         >
-        <sgds-dropdown-item href="#" value="3">item #3</sgds-dropdown-item>
-        <sgds-dropdown-item href="#" value="3" disabled
-          >item #3</sgds-dropdown-item
-        >
       </sgds-dropdown>
-    </div>
+      </div>
   `;
 };
 
-# Sample
+# SgdsDropdown, SgdsDropdownItem
 
-This is the sample file for MDX
-
-<Story
-  name="Basic"
-  args={{
-    buttonText: "Dropdown",
-    variant: "secondary",
-    href: "#",
-    valueDI: "1",
-    menuIsOpen: true
-  }}
->
-  {Template.bind({})}
-</Story>
+<Canvas>
+  <Story
+    name="Basic"
+    height="300px"
+    args={{
+      toggleText: "Dropdown",
+      variant: "secondary",
+      href: "#",
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
 
 <ArgsTable story="Basic" />

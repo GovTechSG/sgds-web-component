@@ -4,13 +4,14 @@ import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import {classMap} from 'lit/directives/class-map.js';
 import styles from "./sgds-button.scss";
+import SgdsElement from "../utils/sgds-element";
 
 export type ButtonVariant = 
 "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark" | "link" |
 "outline-primary" | "outline-secondary" | "outline-success" | "outline-danger" | "outline-warning" | "outline-info" | "outline-light" | "outline-dark"
 
 @customElement("sgds-button")
-export class SgdsButton extends LitElement {
+export class SgdsButton extends SgdsElement {
   static styles = styles;
 
   /** The button's variant. */
@@ -61,8 +62,9 @@ export class SgdsButton extends LitElement {
         role=${ifDefined(isLink ? 'button': undefined )}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         tabindex=${this.disabled ? '-1' : '0'}
+        @focus=${this.onfocus}
       >
-        <slot></slot>
+          <slot></slot>
       </${tag}>
     `;
   }
