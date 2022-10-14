@@ -5,11 +5,11 @@
 .navbar-nav {
   display: flex;
   align-self: center;
-  gap: 1rem; 
+  gap: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
   height: 100%;
-  width:100%;
+  width: 100%;
 }
 
 .navbar-toggler {
@@ -26,8 +26,13 @@ slot[name="non-collapsible"] {
 }
 
 .slot-end {
-  display: flex;
-  margin-left: auto;
-  align-items: center;
-  gap: 1rem;
+    display: flex;
+    margin-left: auto;
+    align-items: stretch;
+    gap: 1rem;
+
+}
+
+.slot-end::slotted(:not(sgds-mainnav-item)){
+  align-self: center;
 }
