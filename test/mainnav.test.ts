@@ -62,6 +62,8 @@ describe("sgds-mainnav", () => {
          <ul class="navbar-nav">
            <slot>
            </slot>
+          <slot name="end">
+          </slot>
          </ul>
        </div>
     `
@@ -142,11 +144,12 @@ describe("sgds-mainnav", () => {
   // initial window.innerWidth = 800 
   // LG_BREAKPOINT = 992 
   // since window.innerWidth < LG_BREAKPOINT --> expect non-collapsible slot to be .order-2 (see first test)
-  it('when expand=lg and window resize event occurs to above breakpoint, it changes order of non-collapsible slot, ', async() => {
+  it('when expand=lg and window resize event occurs to above breakpoint, it changes order of non-collapsible slot, and end slot has class .slot-end', async() => {
     const el = await fixture<SgdsMainnav>(
       html`<sgds-mainnav expand="lg"></sgds-mainnav>`
     );
     expect(el.shadowRoot?.querySelector("slot[name='non-collapsible']")).to.have.class('order-2')
+    expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class('slot-end')
     Object.defineProperty(window, 'innerWidth', {
     writable: true,
     configurable: true,
@@ -155,14 +158,17 @@ describe("sgds-mainnav", () => {
    window.dispatchEvent(new Event('resize'));
    await el.updateComplete
    expect(el.shadowRoot?.querySelector('slot[name="non-collapsible"]')).to.have.class('order-5')
+   expect(el.shadowRoot?.querySelector("slot[name='end']")).to.have.class('slot-end')
+
   })
   //SM_BREAKPOINT = 576
   // now window.innerWidth = 1000
-  it('when expand=sm and window resize event occurs to above breakpoint, it changes order of non-collapsible slot, ', async() => {
+  it('when expand=sm and window resize event occurs to above breakpoint, it changes order of non-collapsible slot and end slot has class slot-end ', async() => {
     const el = await fixture<SgdsMainnav>(
       html`<sgds-mainnav expand="sm"></sgds-mainnav>`
     );
     expect(el.shadowRoot?.querySelector("slot[name='non-collapsible']")).to.have.class('order-5')
+    expect(el.shadowRoot?.querySelector("slot[name='end']")).to.have.class('slot-end')
     Object.defineProperty(window, 'innerWidth', {
     writable: true,
     configurable: true,
@@ -171,13 +177,17 @@ describe("sgds-mainnav", () => {
    window.dispatchEvent(new Event('resize'));
    await el.updateComplete
    expect(el.shadowRoot?.querySelector('slot[name="non-collapsible"]')).to.have.class('order-2')
+   expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class('slot-end')
+
   })
   // now window.innerWidth = 575
-  it('when expand=always and window resize event occurs, it NEVER changes order of non-collapsible slot, ', async() => {
+  it('when expand=always and window resize event occurs, it NEVER changes order of non-collapsible slot and end slot ALWAYS have slot-end ', async() => {
     const el = await fixture<SgdsMainnav>(
       html`<sgds-mainnav expand="always"></sgds-mainnav>`
     );
     expect(el.shadowRoot?.querySelector("slot[name='non-collapsible']")).to.have.class('order-5')
+    expect(el.shadowRoot?.querySelector("slot[name='end']")).to.have.class('slot-end')
+
     Object.defineProperty(window, 'innerWidth', {
     writable: true,
     configurable: true,
@@ -186,6 +196,8 @@ describe("sgds-mainnav", () => {
    window.dispatchEvent(new Event('resize'));
    await el.updateComplete
    expect(el.shadowRoot?.querySelector('slot[name="non-collapsible"]')).to.have.class('order-5')
+   expect(el.shadowRoot?.querySelector("slot[name='end']")).to.have.class('slot-end')
+
 
    Object.defineProperty(window, 'innerWidth', {
     writable: true,
@@ -196,11 +208,13 @@ describe("sgds-mainnav", () => {
    await el.updateComplete
    expect(el.shadowRoot?.querySelector('slot[name="non-collapsible"]')).to.have.class('order-5')
   })
-  it('when expand=never and window resize event occurs, it NEVER changes order of non-collapsible slot, ', async() => {
+  it('when expand=never and window resize event occurs, it NEVER changes order of non-collapsible slot,  and end slot NEVER has class slot-end', async() => {
     const el = await fixture<SgdsMainnav>(
       html`<sgds-mainnav expand="never"></sgds-mainnav>`
     );
     expect(el.shadowRoot?.querySelector("slot[name='non-collapsible']")).to.have.class('order-2')
+    expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class('slot-end')
+
     Object.defineProperty(window, 'innerWidth', {
     writable: true,
     configurable: true,
@@ -209,6 +223,7 @@ describe("sgds-mainnav", () => {
    window.dispatchEvent(new Event('resize'));
    await el.updateComplete
    expect(el.shadowRoot?.querySelector('slot[name="non-collapsible"]')).to.have.class('order-2')
+   expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class('slot-end')
 
    Object.defineProperty(window, 'innerWidth', {
     writable: true,
@@ -218,6 +233,8 @@ describe("sgds-mainnav", () => {
    window.dispatchEvent(new Event('resize'));
    await el.updateComplete
    expect(el.shadowRoot?.querySelector('slot[name="non-collapsible"]')).to.have.class('order-2')
+   expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class('slot-end')
+
   })
 
   it('keyboard esc to exit offcanvas works', async() => {
