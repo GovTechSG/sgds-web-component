@@ -14,7 +14,7 @@ export class MockDropdown extends DropdownElement {
           aria-expanded="${this.menuIsOpen}"
           ${ref(this.myDropdown)}
           @click=${() => this._onClickButton()}
-          id=${this.toggleBtnId}
+          id=${this.togglerId}
         >
           Mock Dropdown
         </button>

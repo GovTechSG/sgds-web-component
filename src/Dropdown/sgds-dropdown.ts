@@ -28,9 +28,9 @@ export class SgdsDropdown extends DropdownElement {
           aria-expanded="${this.menuIsOpen}"
           ${ref(this.myDropdown)}
           @click=${() => this._onClickButton()}
-          id=${this.toggleBtnId}
+          id=${this.togglerId}
         >
-          ${this.toggleText}
+          ${this.togglerText}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"

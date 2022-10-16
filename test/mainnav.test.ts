@@ -1,4 +1,4 @@
-import { SgdsMainnavItem, SgdsMainnav } from "../src/Mainnav";
+import { SgdsMainnavItem, SgdsMainnav, SgdsMainnavDropdown } from "../src/Mainnav";
 import "../src/Mainnav";
 import {
   fixture,
@@ -251,5 +251,45 @@ describe('sgds-mainnav-item', () => {
   it("active prop is forwarded to <a> class", async () => {
     const el = await fixture(html`<sgds-mainnav-item  active>test</sgds-mainnav-item >`);
     expect(el.shadowRoot?.querySelector("a")).to.have.class("active");
+  });
+})
+
+describe('sgds-mainnav-dropdown', () => {
+  it("is defined", () => {
+    const el = document.createElement("sgds-mainnav-dropdown");
+    assert.instanceOf(el, SgdsMainnavDropdown);
+  });
+  it("can be semantically compare with shadowDom trees", async () => {
+    const el = await fixture(html`<sgds-mainnav-dropdown togglerId="test-dropdown" togglerText="test"></sgds-mainnav-dropdown>`);
+    assert.shadowDom.equal(
+      el,
+      ` <li class="nav-item">
+      <a
+        class="nav-link"
+        aria-expanded="false"
+        id="test-dropdown"
+        tabindex="0"
+        role="button"
+        >
+        test
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"    
+          height="16"
+          fill="currentColor"
+          class="bi bi-chevron-down"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+          />
+        </svg>
+      </a>
+      <ul class="dropdown-menu" role="menu" part="menu">
+        <slot></slot>
+      </ul>
+    </li>`
+    );
   });
 })

@@ -1,4 +1,4 @@
-import {  property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { Dropdown } from "bootstrap";
 import * as Popper from "@popperjs/core";
 import type { StrictModifiers } from "@popperjs/core";
@@ -12,6 +12,7 @@ const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
 const ESC = "Escape";
 const ENTER = "Enter";
+const TAB = "Tab";
 
 export type DropdownButtonVariant =
   | "primary"
@@ -25,7 +26,6 @@ export type DropdownButtonVariant =
 export type DropDirection = "left" | "right" | "up" | "down";
 
 export class DropdownElement extends SgdsElement {
-
   myDropdown: Ref<HTMLElement> = createRef();
   bsDropdown: Dropdown = null;
 
@@ -38,10 +38,10 @@ export class DropdownElement extends SgdsElement {
   @property({ type: Object })
   popperOpts = {};
   @property({ type: String })
-  toggleBtnId = genId("dropdown", "button");
+  togglerId = genId("dropdown", "button");
 
   @property({ type: String })
-  toggleText = "";
+  togglerText = "";
   @property({ type: String })
   variant: DropdownButtonVariant = "secondary";
 
@@ -64,7 +64,7 @@ export class DropdownElement extends SgdsElement {
   @state()
   dropdownConfig: Partial<Popper.Options>;
   @state()
-  modifierOpt: StrictModifiers[] = []
+  modifierOpt: StrictModifiers[] = [];
 
   firstUpdated() {
     this.bsDropdown = new Dropdown(this.myDropdown.value, {
@@ -149,31 +149,31 @@ export class DropdownElement extends SgdsElement {
     this.bsDropdown.hide();
   }
 
-   _onClickButton() {
+  _onClickButton() {
     this.bsDropdown.toggle();
   }
 
-   _resetMenu() {
+  _resetMenu() {
     this.nextDropdownItemNo = 0;
     this.prevDropdownItemNo = -1;
     // reset the tabindex
     const items = this._getMenuItems();
     items.forEach((i) => {
-      i.setAttribute("tabindex", "-1");
+      i.removeAttribute("tabindex");
     });
   }
 
-   _getMenuItems(): SgdsDropdownItem[] {
+  _getMenuItems(): SgdsDropdownItem[] {
     return this.shadowRoot
       .querySelector("slot")
       .assignedElements({ flatten: true }) as SgdsDropdownItem[];
   }
 
-   _getActiveMenuItems(): SgdsDropdownItem[] {
+  _getActiveMenuItems(): SgdsDropdownItem[] {
     return this._getMenuItems().filter((item) => !item.disabled);
   }
 
-   _setMenuItem(currentItemIdx: number, isArrowDown: boolean = true) {
+  _setMenuItem(currentItemIdx: number, isArrowDown: boolean = true) {
     const items = this._getActiveMenuItems();
     if (items.length === 0) return;
     let item = items[currentItemIdx];
@@ -194,7 +194,7 @@ export class DropdownElement extends SgdsElement {
     });
   }
 
-   _handleSelectSlot(e: KeyboardEvent | MouseEvent) {
+  _handleSelectSlot(e: KeyboardEvent | MouseEvent) {
     const items = this._getActiveMenuItems();
     const currentItemNo = items.indexOf(e.target as SgdsDropdownItem);
     this.nextDropdownItemNo = currentItemNo + 1;
@@ -209,7 +209,7 @@ export class DropdownElement extends SgdsElement {
       this.close !== "outside" && this.bsDropdown.hide();
     } else return;
   }
-   _handleKeyboardEvent(e: KeyboardEvent) {
+  _handleKeyboardEvent(e: KeyboardEvent) {
     const menuItems = this._getActiveMenuItems();
     switch (e.key) {
       case ARROW_DOWN:
@@ -234,13 +234,13 @@ export class DropdownElement extends SgdsElement {
         if (menuItems.includes(e.target as SgdsDropdownItem)) {
           return this._handleSelectSlot(e);
         }
-        break;
+        break;  
       default:
         break;
     }
   }
 
-   _handleClickOutOfElement(e: MouseEvent, self: DropdownElement) {
+  _handleClickOutOfElement(e: MouseEvent, self: DropdownElement) {
     if (!e.composedPath().includes(self)) {
       this.bsDropdown.hide();
     }

@@ -52,8 +52,7 @@ import { partDescription } from "./common";
       },
     },
     brand: {
-      description:
-        "Brand slot of SgdsMainnav. Pass in brand logo or img here",
+      description: "Brand slot of SgdsMainnav. Pass in brand logo or img here",
       table: {
         category: "slot: SgdsMainnav",
       },
@@ -110,15 +109,15 @@ export const Template = ({ expand, brandHref, collapseId, active, href }) => {
         slot="brand"
       />
       <sgds-mainnav-item .active=${active} .href=${href}
-        >Home (argsTable controlled)
+        >ArgsTable Controlled
       </sgds-mainnav-item>
-      <sgds-mainnav-dropdown toggleText="Dropdown">
-      <sgds-dropdown-item>Item 1</sgds-dropdown-item>
-      <sgds-dropdown-item>Item 1</sgds-dropdown-item>
-      <sgds-dropdown-item>Item 1</sgds-dropdown-item>
+      <sgds-mainnav-dropdown togglerText="Dropdown">
+         <sgds-dropdown-item href="https://google.com">Item 1</sgds-dropdown-item>
+         <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
+         <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
       </sgds-mainnav-dropdown>
-   <sgds-mainnav-item href="#">About</sgds-mainnav-item>
-            <sgds-button href="#" slot="non-collapsible">Login</sgds-button>
+      <sgds-mainnav-item href="#">About</sgds-mainnav-item>
+      <sgds-button href="#" slot="non-collapsible">Login</sgds-button>
       <dev-console-widget
         slot="non-collapsible"
         iconColor="black"
@@ -132,9 +131,10 @@ export const Template = ({ expand, brandHref, collapseId, active, href }) => {
 # SgdsMainnav
 
 <Canvas>
-  <Story name="Basic" height="500px">{Template.bind({})}</Story>
+  <Story name="Basic" height="500px">
+    {Template.bind({})}
+  </Story>
 </Canvas>
-
 
 ## API
 
@@ -142,7 +142,7 @@ export const Template = ({ expand, brandHref, collapseId, active, href }) => {
 import {
   SgdsMainnav,
   SgdsMainnavItem,
-  MainNavExpandSize
+  MainNavExpandSize,
 } from "@govtechsg/sgds-web-component/MainNav";
 ```
 
@@ -150,6 +150,6 @@ import {
 
 ## CSS Custom Properties
 
-| Name                         | Description                                                                                                      |
-| ---------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Name                         | Description                                                                                                           |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | `--mainnav-item-theme-color` | Sets color of hovered/active text and bottom-border of`<sgds-mainnav-item/>` Default to sgds primary color (#5925DC). |

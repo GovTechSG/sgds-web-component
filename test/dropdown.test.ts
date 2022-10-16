@@ -65,14 +65,6 @@ describe('dropdown-element generic keyboard interactions', () => {
       );
       expect(el.nextDropdownItemNo).to.equal(0);
       expect(el.prevDropdownItemNo).to.equal(-1);
-      expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
-        "tabindex",
-        "-1"
-      );
-      expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
-        "tabindex",
-        "-1"
-      );
       el.shadowRoot?.querySelector("button")?.focus();
 
       await sendKeys({ press: "ArrowDown" });
@@ -124,14 +116,6 @@ describe('dropdown-element generic keyboard interactions', () => {
       );
       expect(el.nextDropdownItemNo).to.equal(0);
       expect(el.prevDropdownItemNo).to.equal(-1);
-      expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
-        "tabindex",
-        "-1"
-      );
-      expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
-        "tabindex",
-        "-1"
-      );
       el.shadowRoot?.querySelector("button")?.focus();
       await sendKeys({ press: "ArrowUp" });
       // currentItem = 1
@@ -179,13 +163,10 @@ describe('dropdown-element generic keyboard interactions', () => {
       expect(el.menuIsOpen).to.be.false;
       expect(el.nextDropdownItemNo).to.equal(0);
       expect(el.prevDropdownItemNo).to.equal(-1);
-      expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute(
+      expect(el.querySelectorAll("sgds-dropdown-item")[0]).not.to.have.attribute(
+        "tabindex"      );
+      expect(el.querySelectorAll("sgds-dropdown-item")[1]).not.to.have.attribute(
         "tabindex",
-        "-1"
-      );
-      expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute(
-        "tabindex",
-        "-1"
       );
     });
     it("keyboard navigation skips disabled items", async () => {
@@ -256,7 +237,7 @@ describe("sgds-dropdown", () => {
 
   it("can be semantically compare with shadowDom trees", async () => {
     const el = await fixture(
-      html`<sgds-dropdown toggleBtnId="dropdown-test-id"></sgds-dropdown>`
+      html`<sgds-dropdown togglerId="dropdown-test-id"></sgds-dropdown>`
     );
     assert.shadowDom.equal(
       el,
@@ -375,9 +356,9 @@ describe("sgds-dropdown", () => {
     expect(el.dropdownConfig.modifiers?.length).to.equal(2);
     expect(el.dropdownConfig.modifiers?.[1].name).to.equal("flip");
   });
-  it("toggleText prop is forwarded to text content of button element", async () => {
+  it("togglerText prop is forwarded to text content of button element", async () => {
     const el = await fixture<SgdsDropdown>(
-      html`<sgds-dropdown toggleText="Hello World"></sgds-dropdown>`
+      html`<sgds-dropdown togglerText="Hello World"></sgds-dropdown>`
     );
     expect(el.shadowRoot?.querySelector("sgds-button")?.textContent).to.contain(
       "Hello World"
@@ -630,6 +611,7 @@ describe("sgds-dropdown-item", () => {
           class="dropdown-item"
           aria-disabled="false"
           href=""
+          tabindex="0"
         >
           <slot>
           </slot>
@@ -637,7 +619,6 @@ describe("sgds-dropdown-item", () => {
       </li>`
     );
     expect(el.value).to.be.undefined;
-    expect(el.tabindex).to.equal("-1");
   });
   it("href prop is forwarded to a tag href attr", async () => {
     const el = await fixture(
@@ -660,6 +641,7 @@ describe("sgds-dropdown-item", () => {
       "aria-disabled",
       "true"
     );
+    expect(el.shadowRoot?.querySelector('a')).to.have.attribute('tabindex', '-1')
   });
   it("value prop assigns the element target its value", async () => {
     const el = await fixture<SgdsDropdownItem>(

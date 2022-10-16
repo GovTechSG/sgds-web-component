@@ -1,5 +1,5 @@
 import { html, css } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, query, queryAsync } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import styles from "./sgds-mainnav-dropdown.scss";
 import { DropdownElement } from "../Dropdown/dropdown";
@@ -17,12 +17,14 @@ export class SgdsMainnavDropdown extends DropdownElement {
           aria-expanded="${this.menuIsOpen}"
           ${ref(this.myDropdown)}
           @click=${() => this._onClickButton()}
-          id=${this.toggleBtnId}
-        >
-          ${this.toggleText}
+          id=${this.togglerId}
+          tabindex=${this.disabled ? '-1' : '0'}
+          role="button"
+          >
+          ${this.togglerText}
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="16"
+            width="16"    
             height="16"
             fill="currentColor"
             class="bi bi-chevron-down"
