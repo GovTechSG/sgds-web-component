@@ -1,7 +1,7 @@
 import { html } from "lit";
 import { customElement } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
-import { DropdownElement } from "../src/Dropdown/dropdown";
+import { DropdownElement } from "../src/utils/dropdown-element";
 
 @customElement("mock-dropdown")
 export class MockDropdown extends DropdownElement {

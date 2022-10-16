@@ -233,10 +233,11 @@ describe('sgds-mainnav-item', () => {
     const el = await fixture(html`<sgds-mainnav-item></sgds-mainnav-item>`);
     assert.shadowDom.equal(
       el,
-      `  <li class="nav-item">
+      `  <li>
         <a
           class="nav-link"
           href=""
+          aria-disabled="false"
         >
           <slot>
           </slot>

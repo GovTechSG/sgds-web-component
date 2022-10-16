@@ -167,6 +167,7 @@ describe("sgds-sidenav-link", () => {
         <a
           class="nav-link"
           href=""
+          aria-disabled="false"
         >
           <slot>
           </slot>
@@ -182,6 +183,13 @@ describe("sgds-sidenav-link", () => {
     const el = await fixture(html`<sgds-sidenav-link active>test</sgds-sidenav-link>`);
     expect(el.shadowRoot?.querySelector("a")).to.have.class("active");
   });
+  it('disabled prop apply disable props and attr to sgds-sidenav-item', async() => {
+    const el = await fixture(html`<sgds-sidenav-link disabled>test</sgds-sidenav-link>`);
+    expect(el.shadowRoot?.querySelector("a")).to.have.class("disabled");
+    expect(el.shadowRoot?.querySelector("a")).to.have.attribute("disabled");
+    expect(el.shadowRoot?.querySelector("a")).to.have.attribute("aria-disabled", "true");
+
+  })
 });
 
 describe("sgds-sidenav, -item, -link interactions", () => {

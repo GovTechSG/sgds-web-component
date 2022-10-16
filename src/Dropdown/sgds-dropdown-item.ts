@@ -1,20 +1,13 @@
 import { html } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
-import SgdsElement from "../utils/sgds-element";
+import LinkElement from "../utils/link-element";
 import styles from "./sgds-dropdown.scss";
 import {classMap} from 'lit/directives/class-map.js';
 
 @customElement("sgds-dropdown-item")
-export class SgdsDropdownItem extends SgdsElement {
+export class SgdsDropdownItem extends LinkElement {
   static styles = styles
 
-  @property({ type: Boolean, reflect: true })
-  active = false;
-
-  @property({ type: String, reflect: true })
-  href = "";
-  @property({ type: Boolean, reflect: true })
-  disabled = false;
   @property({ type: String, reflect: true })
   value = undefined;
 
