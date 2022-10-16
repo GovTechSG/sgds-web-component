@@ -40,7 +40,7 @@ describe("sgds-sidenav-item", () => {
     assert.shadowDom.equal(
       el,
       `  <li class="sidenav-item" aria-haspopup="true">
-       <button class="collapsed sidenav-btn" aria-expanded="false" aria-controls="collapseEg" aria-selected="false" id="buttonEg">
+       <button class="collapsed sidenav-btn" aria-expanded="false" aria-controls="collapseEg" aria-selected="false" id="buttonEg" aria-disabled="false">
          <slot name="title">
          </slot>
        </button>
@@ -62,6 +62,7 @@ describe("sgds-sidenav-item", () => {
          class="sidenav-btn"
          href="#"
          aria-selected="false"
+         aria-disabled="false"
        >
            <slot name="title">
            </slot>
@@ -79,6 +80,15 @@ describe("sgds-sidenav-item", () => {
     );
     const sideNavBtn = el.shadowRoot?.querySelector(".sidenav-btn");
     expect(sideNavBtn?.classList.value).to.contain("active");
+  });
+  it("when disabled is true it conveys disabled class to .sidenav-btn and attributes", async () => {
+    const el = await fixture(
+      html`<sgds-sidenav-item disabled ></sgds-sidenav-item>`
+    );
+    const sideNavBtn = el.shadowRoot?.querySelector(".sidenav-btn");
+    expect(sideNavBtn?.classList.value).to.contain("disabled");
+    expect(sideNavBtn).to.have.attribute("disabled");
+    expect(sideNavBtn).to.have.attribute("aria-disabled", "true");
   });
   it("should emit sgds-toggle event when button is clicked", async () => {
     const el = await fixture(html`<sgds-sidenav-item></sgds-sidenav-item>`);
@@ -159,37 +169,6 @@ describe("sgds-sidenav-link", () => {
     const el = document.createElement("sgds-sidenav-link");
     assert.instanceOf(el, SgdsSidenavLink);
   });
-  it("can be semantically compare with shadowDom trees", async () => {
-    const el = await fixture(html`<sgds-sidenav-link></sgds-sidenav-link>`);
-    assert.shadowDom.equal(
-      el,
-      `  <li>
-        <a
-          class="nav-link"
-          href=""
-          aria-disabled="false"
-        >
-          <slot>
-          </slot>
-        </a>
-      </li>`
-    );
-  });
-  it("href prop is forwarded to a tag href attr", async () => {
-    const el = await fixture(html`<sgds-sidenav-link href="#">test</sgds-sidenav-link>`);
-    expect(el.shadowRoot?.querySelector("a")).to.have.attribute("href", "#");
-  });
-  it("active prop is forwarded to <a> class", async () => {
-    const el = await fixture(html`<sgds-sidenav-link active>test</sgds-sidenav-link>`);
-    expect(el.shadowRoot?.querySelector("a")).to.have.class("active");
-  });
-  it('disabled prop apply disable props and attr to sgds-sidenav-item', async() => {
-    const el = await fixture(html`<sgds-sidenav-link disabled>test</sgds-sidenav-link>`);
-    expect(el.shadowRoot?.querySelector("a")).to.have.class("disabled");
-    expect(el.shadowRoot?.querySelector("a")).to.have.attribute("disabled");
-    expect(el.shadowRoot?.querySelector("a")).to.have.attribute("aria-disabled", "true");
-
-  })
 });
 
 describe("sgds-sidenav, -item, -link interactions", () => {

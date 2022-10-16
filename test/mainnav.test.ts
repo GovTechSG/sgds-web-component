@@ -229,30 +229,6 @@ describe('sgds-mainnav-item', () => {
     const el = document.createElement("sgds-mainnav-item");
     assert.instanceOf(el, SgdsMainnavItem);
   });
-  it("can be semantically compare with shadowDom trees", async () => {
-    const el = await fixture(html`<sgds-mainnav-item></sgds-mainnav-item>`);
-    assert.shadowDom.equal(
-      el,
-      `  <li>
-        <a
-          class="nav-link"
-          href=""
-          aria-disabled="false"
-        >
-          <slot>
-          </slot>
-        </a>
-      </li>`
-    );
-  });
-  it("href prop is forwarded to a tag href attr", async () => {
-    const el = await fixture(html`<sgds-mainnav-item href="#">test</sgds-mainnav-item>`);
-    expect(el.shadowRoot?.querySelector("a")).to.have.attribute("href", "#");
-  });
-  it("active prop is forwarded to <a> class", async () => {
-    const el = await fixture(html`<sgds-mainnav-item  active>test</sgds-mainnav-item >`);
-    expect(el.shadowRoot?.querySelector("a")).to.have.class("active");
-  });
 })
 
 describe('sgds-mainnav-dropdown', () => {

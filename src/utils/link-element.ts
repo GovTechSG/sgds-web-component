@@ -11,7 +11,7 @@ export default class LinkElement extends SgdsElement {
   @property({ type: String })
   href = "";
 
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   disabled = false;
 
   render() {

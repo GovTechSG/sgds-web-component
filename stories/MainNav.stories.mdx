@@ -86,6 +86,12 @@ import { partDescription, dropdownElementProps } from "./common";
         },
       },
     },
+    disabledMNI: {
+       name: "disabled",
+      control: "boolean",
+      description: "Disables the SgdsMainnavItem",
+      table: { category: "props: SgdsMainnavItem" },
+    },
     defaultMNI: {
       name: "default",
       description: "default slot for SgdsMainnavItem element",
@@ -97,7 +103,7 @@ import { partDescription, dropdownElementProps } from "./common";
   }}
 />
 
-export const Template = ({ expand, brandHref, collapseId, active, href }) => {
+export const Template = ({ expand, brandHref, collapseId, active, href, disabledMNI }) => {
   return html`
     <sgds-mainnav
       .expand=${expand}
@@ -109,7 +115,7 @@ export const Template = ({ expand, brandHref, collapseId, active, href }) => {
         src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
         slot="brand"
       />
-      <sgds-mainnav-item .active=${active} .href=${href}
+      <sgds-mainnav-item .active=${active} .href=${href} .disabled=${disabledMNI}
         >ArgsTable Controlled
       </sgds-mainnav-item>
       <sgds-mainnav-dropdown togglerText="Dropdown">
