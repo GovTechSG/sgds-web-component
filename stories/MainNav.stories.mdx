@@ -63,6 +63,13 @@ import { partDescription, dropdownElementProps } from "./common";
         category: "slot: SgdsMainnav",
       },
     },
+    end: {
+      description:
+        "Elements in this slot will be positioned to the right end of .navbar-nav. Elements in this slot will also be included in collapsed menu",
+      table: {
+        category: "slot: SgdsMainnav",
+      },
+    },
     // SgdsMainnavItem props
     active: {
       control: "boolean",
@@ -124,7 +131,8 @@ export const Template = ({ expand, brandHref, collapseId, active, href, disabled
          <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
       </sgds-mainnav-dropdown>
       <sgds-mainnav-item href="#">About</sgds-mainnav-item>
-      <sgds-button href="#" slot="non-collapsible">Login</sgds-button>
+      <sgds-mainnav-item href="#" slot="end">Contact Us</sgds-mainnav-item>
+      <sgds-button slot="end">Login</sgds-button>
       <dev-console-widget
         slot="non-collapsible"
         iconColor="black"

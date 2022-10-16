@@ -2,14 +2,16 @@
 @import "~@govtechsg/sgds/sass/navbar";
 @import "~@govtechsg/sgds/sass/transitions";
 @import "~@govtechsg/sgds/sass/offcanvas";
-
 .navbar-nav {
   display: flex;
   align-self: center;
   gap: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   height: 100%;
-  margin-left: 1rem;
+  width: 100%;
 }
+
 .navbar-toggler {
   border: none;
 }
@@ -21,4 +23,16 @@ slot[name="non-collapsible"] {
   display: flex;
   gap: 1rem;
   align-items: center;
+}
+
+.slot-end {
+    display: flex;
+    margin-left: auto;
+    align-items: stretch;
+    gap: 1rem;
+
+}
+
+.slot-end::slotted(:not(sgds-mainnav-item)){
+  align-self: center;
 }
