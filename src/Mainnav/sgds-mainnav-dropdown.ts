@@ -1,5 +1,5 @@
-import { html, css } from "lit";
-import { customElement, query, queryAsync } from "lit/decorators.js";
+import { html } from "lit";
+import { customElement} from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import styles from "./sgds-mainnav-dropdown.scss";
 import { DropdownElement } from "../Dropdown/dropdown";

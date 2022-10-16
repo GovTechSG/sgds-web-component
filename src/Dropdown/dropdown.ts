@@ -68,7 +68,7 @@ export class DropdownElement extends SgdsElement {
 
   firstUpdated() {
     this.bsDropdown = new Dropdown(this.myDropdown.value, {
-      autoClose: true, // not working as bootstrap is using attribute data-bs-toggle="dropdown" to configure autoclose. But it doesnt look into this attribute in the shadow dom
+    // autoClose not working as bootstrap is using attribute data-bs-toggle="dropdown" to configure autoclose. But it doesnt look into this attribute in the shadow dom
       reference: "toggle", // working
       popperConfig: (defaultConfig?: Partial<Popper.Options>) => {
         //working

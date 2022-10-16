@@ -3,7 +3,7 @@ import { html } from "lit";
 import { withWebComponentsKnobs } from "storybook-addon-web-components-knobs";
 import { withKnobs, text, number } from "@storybook/addon-knobs";
 import "../lib/Mainnav";
-import { partDescription } from "./common";
+import { partDescription, dropdownElementProps } from "./common";
 
 <Meta
   title="Components/Mainnav"
@@ -93,6 +93,7 @@ import { partDescription } from "./common";
         category: "slot: SgdsMainnavItem",
       },
     },
+    ...dropdownElementProps('SgdsMainnavDropdown', true)
   }}
 />
 
@@ -142,6 +143,7 @@ export const Template = ({ expand, brandHref, collapseId, active, href }) => {
 import {
   SgdsMainnav,
   SgdsMainnavItem,
+  SgdsMainnavDropdown,
   MainNavExpandSize,
 } from "@govtechsg/sgds-web-component/MainNav";
 ```
