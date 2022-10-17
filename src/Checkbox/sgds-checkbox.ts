@@ -50,7 +50,7 @@ export class SgdsCheckbox extends SgdsElement {
 
   handleClick() {
     this.checked = !this.checked;
-    if (this.checked == true) this.emit("sgds-checkbox");
+    if (this.checked == true) this.emit("sgds-change");
   }
 
   handleDisabledChange() {
@@ -62,6 +62,7 @@ export class SgdsCheckbox extends SgdsElement {
     return html`
       <div part="base" class="form-check">
         <input
+          part="control"
           class=${classMap({
             "form-check-input": true,
             "is-invalid": this.isInvalid,

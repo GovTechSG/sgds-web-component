@@ -8,8 +8,8 @@ import {
   waitUntil,
 } from "@open-wc/testing";
 import sinon from "sinon";
-import "../src/Checkbox/";
-import { SgdsCheckbox } from "../src/Checkbox/";
+import "../src/Checkbox";
+import { SgdsCheckbox } from "../src/Checkbox";
 
 describe("<sgds-checkbox>", () => {
   it("is defined", () => {

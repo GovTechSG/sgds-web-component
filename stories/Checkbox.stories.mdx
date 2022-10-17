@@ -10,7 +10,7 @@ import { SgdsCheckbox } from "../lib/Checkbox";
   //handles format: ['eventName', 'selector']
   parameters={{
     actions: {
-      handles: ["sgds-checkbox", "sgds-checkbox"],
+      handles: ["sgds-change", "sgds-checkbox"],
     },
   }}
   argTypes={{
@@ -123,6 +123,7 @@ import { SgdsCheckbox } from "../lib/Checkbox";
       },
     },
     defaultSlot: {
+      name: "default",
       control: "text",
       defaultValue: "Default text here",
       description: "default slot for label element",
@@ -144,14 +145,34 @@ import { SgdsCheckbox } from "../lib/Checkbox";
         },
       },
     },
-    customEvent: {
-      name: "sgds-checkbox",
+    Event: {
+      name: "sgds-change",
       control: "disable",
-      defaultValue: "Feedback text here",
       description:
-        "Emits a custom event on click. Refer to canvas mode to view event handler in action.",
+        "Emitted when checkbox is checked. Refer to canvas mode to view event handler in action.",
       table: {
         category: "events",
+      },
+    },
+    base: {
+      name: "base",
+      description: "The component's internal wrapper div",
+      table: {
+        category: "CSS Parts",
+      },
+    },
+    control: {
+      name: "control",
+      description: "The checkbox control input",
+      table: {
+        category: "CSS Parts",
+      },
+    },
+    label: {
+      name: "label",
+      description: "The checkbox label.",
+      table: {
+        category: "CSS Parts",
       },
     },
   }}
