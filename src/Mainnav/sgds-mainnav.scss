@@ -33,6 +33,7 @@ slot[name="non-collapsible"] {
 
 }
 
-.slot-end::slotted(:not(sgds-mainnav-item)){
+// there is no wildcard selector for element tag names in css :/
+.slot-end::slotted(:not([name$="-mainnav-item"])){
   align-self: center;
 }

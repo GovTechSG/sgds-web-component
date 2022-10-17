@@ -250,6 +250,19 @@ describe("sgds-mainnav", () => {
     expect(el.shadowRoot?.querySelector('.offcanvas')).not.to.have.class('show')
       
   })
+  it('adds name attribute to elements in slot="end" only', async() => {
+    const el = await fixture<SgdsMainnav>(
+      html`<sgds-mainnav>
+        <div></div>
+        <sgds-mainnav-item slot="end"></sgds-mainnav-item>
+        <sgds-button slot="end"></sgds-button>
+      </sgds-mainnav>`
+    );
+    expect(el.querySelector('div')).not.to.have.attribute('name', 'div')
+    expect(el.querySelector('sgds-mainnav-item')).to.have.attribute('name', 'sgds-mainnav-item')
+    expect(el.querySelector('sgds-button')).to.have.attribute('name', 'sgds-button')
+
+  })
 });
 
 describe('sgds-mainnav-item', () => {

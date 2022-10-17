@@ -1,5 +1,5 @@
-import { html } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { html, PropertyValueMap } from "lit";
+import { customElement, property, queryAssignedElements, state } from "lit/decorators.js";
 import styles from "./sgds-mainnav.scss";
 import { Collapse, Offcanvas } from "bootstrap";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
@@ -79,6 +79,7 @@ export class SgdsMainnav extends SgdsElement {
   expanded: Boolean = false;
 
   firstUpdated() {
+    
     if (this.mode === "default") {
       this.bsCollapse = new Collapse(this.myCollapse.value, {
         toggle: false,
@@ -106,7 +107,13 @@ export class SgdsMainnav extends SgdsElement {
         }
       });
     }
+
   }
+// assigning name attribute to elements added in slot="end", to use wildcard css selector to assign styles only to *-mainnav-item
+_handleSlotChange(e: Event){
+const childElements = (e.target as HTMLSlotElement).assignedElements({flatten: true})
+childElements.forEach(e => e.setAttribute('name', e.tagName.toLowerCase()))
+} 
 
   render() {
     this.breakpointReached = window.innerWidth < SIZES[this.expand.toString()];
@@ -155,7 +162,7 @@ export class SgdsMainnav extends SgdsElement {
         >
           <ul class="navbar-nav">
             <slot></slot>
-            <slot name="end" class=${classMap({"slot-end": !this.breakpointReached})}></slot>
+            <slot name="end" class=${classMap({"slot-end": !this.breakpointReached})} @slotchange=${this._handleSlotChange}></slot>
           </ul>
         </div>
       </nav>
