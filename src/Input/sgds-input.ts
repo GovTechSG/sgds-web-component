@@ -6,6 +6,7 @@ import {classMap} from 'lit/directives/class-map.js';
 import { live } from 'lit/directives/live.js';
 import styles from "./sgds-input.scss";
 import SgdsElement from "../utils/sgds-element";
+import { defaultValue } from "../utils/defaultvalue";
 import { FormSubmitController } from "../utils/form";
 import genId from "../utils/generateId";
 import { watch } from "../utils/watch";
@@ -55,8 +56,17 @@ export class SgdsInput extends SgdsElement {
 
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  @defaultValue()
+  defaultValue = '';
+
   firstUpdated() {
     this.invalid = !this.input.checkValidity();
+  }
+
+  /** Sets focus on the input. */
+  focus(options?: FocusOptions) {
+    this.input.focus(options);
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
