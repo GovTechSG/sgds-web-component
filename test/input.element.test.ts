@@ -1,14 +1,7 @@
 import { SgdsInput } from '../src/Input/sgds-input';
-import '../src/Input/sgds-input';
-import {
-  fixture,
-  assert,
-  expect,
-  elementUpdated,
-  waitUntil,
-  aTimeout
-} from '@open-wc/testing';
-import {html} from 'lit';
+import '../src/Input';
+import '../src/Button';
+import { expect, fixture, html, oneEvent, waitUntil, assert,elementUpdated, aTimeout } from '@open-wc/testing';
 import sinon from 'sinon';
 import { sendKeys } from '@web/test-runner-commands';
 
@@ -118,18 +111,28 @@ describe('sgds-input', () => {
 
 });
 
+describe('when calling HTMLFormElement.reportValidity()', () => {
+  it('should be invalid when the input is empty and form.reportValidity() is called', async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input required value=""></sgds-input>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
 
-describe('when input has value', () => {
-  // TODO : fail at firefox. Event will only fire if <sgds-button type="submit"> is clicked on firefox. 
-  // it('should submit the form when pressing enter in a form without a submit button', async () => {
-  //   const form = await fixture<HTMLFormElement>(html` <form><sgds-input type="submit" value="asd" autofocus></sgds-input></form> `);
-  //   const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    expect(form.reportValidity()).to.be.false;
+  });
 
-  //   form.addEventListener('submit', submitHandler);
-  //   await sendKeys({ press: 'Enter' });
-  //   await aTimeout(1000);
-  //   expect(submitHandler).to.have.been.calledOnce;
-  // });
+  it('should be valid when the input is empty, reportValidity() is called, and the form has novalidate', async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-input required value=""></sgds-input>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+
+    expect(form.reportValidity()).to.be.true;
+  });
 
   
   it('fires sgds-input event when value is entered', async () => {
@@ -139,9 +142,25 @@ describe('when input has value', () => {
     (label as HTMLElement).click();
     el.addEventListener('sgds-input', inputHandler);
     await sendKeys({ press: 'A' });
-    // await aTimeout(1000);
     waitUntil(()=> inputHandler.calledOnce)
     expect(inputHandler).to.have.been.calledOnce;
   });
+
+  // it('should reset the element to its initial value', async () => {
+  //   const form = await fixture<HTMLFormElement>(html`
+  //     <form>
+  //       <sgds-input name="a" value="test"></sgds-input>
+  //       <sgds-button type="reset">Reset</sgds-button>
+  //     </form>
+  //   `);
+  //   const button = form.querySelector('sgds-button');
+  //   const input = form.querySelector('sgds-input');
+
+  //   (button as HTMLElement).click();
+    
+  //   await aTimeout(3000);
+
+  //   expect((input as HTMLInputElement).value).to.equal('');
+  // });
 
 });
