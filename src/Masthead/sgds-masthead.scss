@@ -8,7 +8,7 @@
     --masthead-link-color: hsl(222, 63%, 50%);
     --masthead-link-color-hover: hsl(221, 64%, 55%);
     --masthead-mobile-font-size: 0.6875rem;
-    --masthead-mobile-padding-x: 1.25rem;
+    --masthead-mobile-padding-x: 0.75rem;
     --masthead-crest-color: rgb(239, 51, 32);
 }
 
@@ -22,6 +22,10 @@
         .container,.container-fluid, .col{
             padding-left:0;
             padding-right: 0;
+        }
+        .row{
+            margin-right:0;
+            margin-left:0;
         }
     }
 }
@@ -98,10 +102,8 @@
             }
         }
         .icon{
-            line-height: 1.5rem;
-            @media screen and (max-width: 1023px){
-                line-height: 1.25rem;
-            }
+            margin-top: -0.1em;
+
         }
     }
 
@@ -194,3 +196,10 @@ a.trusted-websites-link{
     }
 }
 
+.sgds-masthead:not([fluid]){
+    @media screen and (max-width: 1023px){
+        .container{
+            margin: 0;
+        }
+    }
+}
