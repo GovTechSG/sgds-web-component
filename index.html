@@ -22,6 +22,15 @@
       id="dev-console-gateway"
       src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"
     ></script>
+    <script>
+      const radio1 = document.querySelector("sgds-radiogroup");
+      if (radio1) {
+        radio1.addEventListener("sgds-change", (event) => {
+          event.preventDefault();
+          console.log(event.target.value);
+        });
+      }
+    </script>
     <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script> -->
     <style>
       * {
@@ -112,6 +121,13 @@
         <sgds-radio value="1" isInline>Option 1</sgds-radio>
         <sgds-radio value="2" isInline>Option 2</sgds-radio>
         <sgds-radio value="3" isInline>Option 3</sgds-radio>
+      </sgds-radiogroup>
+
+      <sgds-radiogroup>
+        <span slot="label">Label 2</span>
+        <sgds-radio value="4">Option 4</sgds-radio>
+        <sgds-radio value="5">Option 5</sgds-radio>
+        <sgds-radio value="6">Option 6</sgds-radio>
       </sgds-radiogroup>
 
       <br />

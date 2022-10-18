@@ -8,17 +8,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import genId from "../utils/generateId";
 
-/**
- * @since 2.0
- * @status stable
- *
- * @slot - The radio's label.
- *
- *
- * @csspart base - The component's internal wrapper.
- * @csspart control - The radio control.
- * @csspart label - The radio label.
- */
+
 @customElement("sgds-radio")
 export class SgdsRadio extends SgdsElement {
   static styles = styles;
@@ -28,8 +18,8 @@ export class SgdsRadio extends SgdsElement {
   /** The radio's value attribute. */
   @property() value: string;
 
-  /** For Id/For pair of the HTML form control. */
-  @property({ type: String, reflect: true }) id = genId("checkbox");
+  /** For id/for pair of the HTML form control. */
+  @property({ type: String, reflect: true }) inputId = genId("radio");
 
   /** Disables the radio. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -57,26 +47,14 @@ export class SgdsRadio extends SgdsElement {
     this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
   }
 
-  // private handleBlur() {
-  //   this.hasFocus = false;
-  //   this.emit("sgds-blur");
-  // }
-
   private handleClick() {
     if (!this.disabled) {
       this.checked = true;
     }
   }
 
-  // private handleFocus() {
-  //   this.hasFocus = true;
-  //   this.emit("sgds-focus");
-  // }
-
   private addEventListeners() {
-    // this.addEventListener("blur", () => this.handleBlur());
     this.addEventListener("click", () => this.handleClick());
-    // this.addEventListener("focus", () => this.handleFocus());
   }
 
   private setInitialAttributes() {
@@ -100,7 +78,7 @@ export class SgdsRadio extends SgdsElement {
             "form-check-input": true,
           })}
           type="radio"
-          id=${ifDefined(this.id)}
+          id=${ifDefined(this.inputId)}
           value=${ifDefined(this.value)}
           .checked=${live(this.checked)}
           ?disabled=${this.disabled}
@@ -110,7 +88,7 @@ export class SgdsRadio extends SgdsElement {
         />
         <label
           part="label"
-          for="${ifDefined(this.id)}"
+          for="${ifDefined(this.inputId)}"
           aria-label=${ifDefined(this.ariaLabel)}
           class="form-check-label"
           ><slot></slot

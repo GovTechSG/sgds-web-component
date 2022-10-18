@@ -4,23 +4,8 @@ import { classMap } from "lit/directives/class-map.js";
 import { watch } from "../utils/watch";
 import styles from "./sgds-radio.scss";
 import SgdsElement from "../utils/sgds-element";
-import  SgdsRadio from "./sgds-radiogroup";
+import SgdsRadio from "./sgds-radiogroup";
 
-/**
- * @since 2.0
- * @status stable
- *
- * @dependency sl-button-group
- *
- * @slot - The default slot where radio controls are placed.
- * @slot label - The radio group label. Required for proper accessibility. Alternatively, you can use the `label` attribute.
- *
- * @event sgds-change - Emitted when the radio group's selected value changes.
- *
- * @csspart base - The component's internal wrapper.
- * @csspart button-group - The button group that wraps radio buttons.
- * @csspart button-group__base - The button group's `base` part.
- */
 @customElement("sgds-radiogroup")
 export class SgdsRadioGroup extends SgdsElement {
   static styles = styles;
@@ -49,19 +34,11 @@ export class SgdsRadioGroup extends SgdsElement {
    */
   // @property({ type: Boolean, reflect: true }) invalid = false;
 
-  /** Shows the fieldset and legend that surrounds the radio group. */
-  // @property({ type: Boolean, attribute: "fieldset", reflect: true }) fieldset =
-  //   false;
-
-  /** Ensures a child radio is checked before allowing the containing form to submit. */
-  // @property({ type: Boolean, reflect: true }) required = false;
-
   /** Aligns the radios horizontally */
   @property({ type: Boolean, reflect: true }) isInline = false;
 
   checked: boolean;
   disabled: any;
-
 
   @watch("value")
   handleValueChange() {
@@ -92,21 +69,14 @@ export class SgdsRadioGroup extends SgdsElement {
 
   private handleKeyDown(event: KeyboardEvent) {
     if (
-      !["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(
-        event.key
-      )
+      !["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)
     ) {
       return;
     }
 
     const radios = this.getAllRadios().filter((radio) => !radio.disabled);
     const checkedRadio = radios.find((radio) => radio.checked) ?? radios[0];
-    const incr =
-      event.key === " "
-        ? 0
-        : ["ArrowUp", "ArrowLeft"].includes(event.key)
-        ? -1
-        : 1;
+    const incr = ["ArrowUp", "ArrowLeft"].includes(event.key) ? -1 : 1;
     let index = radios.indexOf(checkedRadio) + incr;
     if (index < 0) {
       index = radios.length - 1;
