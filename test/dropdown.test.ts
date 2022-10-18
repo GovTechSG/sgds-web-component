@@ -20,8 +20,8 @@ describe('dropdown-element generic keyboard interactions', () => {
       it(`should close an opened menu on ${key} press`, async () => {
         const el = await fixture<MockDropdown>(
           html`<mock-dropdown menuIsOpen>
-            <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
-            <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
+            <sgds-dropdown-item>slot 1</sgds-dropdown-item>
+            <sgds-dropdown-item>slot 2</sgds-dropdown-item>
           </mock-dropdown> `
         );
         expect(el.menuIsOpen).to.be.true;
@@ -42,8 +42,8 @@ describe('dropdown-element generic keyboard interactions', () => {
       it(`should open menu on ${key} key`, async () => {
         const el = await fixture<MockDropdown>(
           html`<mock-dropdown>
-            <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
-            <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
+            <sgds-dropdown-item>slot 1</sgds-dropdown-item>
+            <sgds-dropdown-item>slot 2</sgds-dropdown-item>
           </mock-dropdown> `
         );
         expect(el.menuIsOpen).to.be.false;
@@ -59,8 +59,8 @@ describe('dropdown-element generic keyboard interactions', () => {
     it("for a newly opened menu with no focus on any items, ArrowDown key will navigate to the first dropdown-item on the menu and continue looping once it reaches the last menu item", async () => {
       const el = await fixture<MockDropdown>(
         html`<mock-dropdown menuIsOpen>
-          <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
-          <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
+          <sgds-dropdown-item>slot 1</sgds-dropdown-item>
+          <sgds-dropdown-item>slot 2</sgds-dropdown-item>
         </mock-dropdown> `
       );
       expect(el.nextDropdownItemNo).to.equal(0);
@@ -110,8 +110,8 @@ describe('dropdown-element generic keyboard interactions', () => {
     it("for a newly opened menu with no focus on any items, ArrowUp key will navigate to the last dropdown-item on the menu and continue looping once it reaches the last menu item", async () => {
       const el = await fixture<MockDropdown>(
         html`<mock-dropdown menuIsOpen>
-          <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
-          <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
+          <sgds-dropdown-item>slot 1</sgds-dropdown-item>
+          <sgds-dropdown-item>slot 2</sgds-dropdown-item>
         </mock-dropdown> `
       );
       expect(el.nextDropdownItemNo).to.equal(0);
@@ -172,10 +172,10 @@ describe('dropdown-element generic keyboard interactions', () => {
     it("keyboard navigation skips disabled items", async () => {
       const el = await fixture<MockDropdown>(
         html`<mock-dropdown menuIsOpen>
-          <sgds-dropdown-item value="1" disabled>slot 1</sgds-dropdown-item>
-          <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
-          <sgds-dropdown-item value="2">slot 3</sgds-dropdown-item>
-          <sgds-dropdown-item value="2" disabled>slot 4</sgds-dropdown-item>
+          <sgds-dropdown-item  disabled>slot 1</sgds-dropdown-item>
+          <sgds-dropdown-item>slot 2</sgds-dropdown-item>
+          <sgds-dropdown-item>slot 3</sgds-dropdown-item>
+          <sgds-dropdown-item disabled>slot 4</sgds-dropdown-item>
         </mock-dropdown> `
       );
       el.shadowRoot?.querySelector("button")?.focus();
@@ -199,10 +199,10 @@ describe('dropdown-element generic keyboard interactions', () => {
     it("transition from mouse click to keyboard navigation should be seamless", async () => {
       const el = await fixture<MockDropdown>(
         html`<mock-dropdown menuIsOpen close="outside">
-          <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
-          <sgds-dropdown-item value="2" disabled>slot 2</sgds-dropdown-item>
-          <sgds-dropdown-item value="2">slot 3</sgds-dropdown-item>
-          <sgds-dropdown-item value="2">slot 4</sgds-dropdown-item>
+          <sgds-dropdown-item>slot 1</sgds-dropdown-item>
+          <sgds-dropdown-item disabled>slot 2</sgds-dropdown-item>
+          <sgds-dropdown-item>slot 3</sgds-dropdown-item>
+          <sgds-dropdown-item>slot 4</sgds-dropdown-item>
         </mock-dropdown> `
       );
       const itemOne = el.querySelectorAll(
@@ -373,12 +373,6 @@ describe("sgds-dropdown", () => {
       "outline-primary"
     );
   });
-  it("value prop assigns value to the element", async () => {
-    const el = await fixture<SgdsDropdown>(
-      html`<sgds-dropdown value="test"></sgds-dropdown>`
-    );
-    expect(el.value).to.equal("test");
-  });
   it("menuIsOpen prop opens menu on first load", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown menuIsOpen></sgds-dropdown>`
@@ -473,14 +467,13 @@ describe("sgds-dropdown", () => {
     expect(selectHandler).not.to.be.called;
   });
   // // testing _handleSelectSlot functionality
-  it("when clicked on slot, menu closes and value of sgds-dropdown to be updated", async () => {
+  it("when clicked on slot, menu closes", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown menuIsOpen>
-        <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
-        <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
+        <sgds-dropdown-item>slot 1</sgds-dropdown-item>
+        <sgds-dropdown-item>slot 2</sgds-dropdown-item>
       </sgds-dropdown>`
     );
-    expect(el.value).to.be.undefined;
     expect(el.shadowRoot?.querySelector("ul.dropdown-menu")).to.have.class(
       "show"
     );
@@ -492,14 +485,13 @@ describe("sgds-dropdown", () => {
     expect(el.shadowRoot?.querySelector("ul.dropdown-menu")).not.to.have.class(
       "show"
     );
-    expect(el.value).to.equal("1");
   });
   // // tests _handleClickOutOfElement & blur event listener
   it("click outside of component, closes the dropdown by default", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown menuIsOpen>
-        <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
-        <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
+        <sgds-dropdown-item>slot 1</sgds-dropdown-item>
+        <sgds-dropdown-item>slot 2</sgds-dropdown-item>
       </sgds-dropdown> `
     );
     expect(el.menuIsOpen).to.be.true;
@@ -516,8 +508,8 @@ describe("sgds-dropdown", () => {
   it("when close=inside , dropdown menu closes only when clicked on menu item", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown menuIsOpen close="inside">
-        <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
-        <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
+        <sgds-dropdown-item>slot 1</sgds-dropdown-item>
+        <sgds-dropdown-item>slot 2</sgds-dropdown-item>
       </sgds-dropdown> `
     );
     expect(el.menuIsOpen).to.be.true;
@@ -544,8 +536,8 @@ describe("sgds-dropdown", () => {
   it("when close=outside , dropdown menu closes only when clicked on menu item", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown menuIsOpen close="outside">
-        <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
-        <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
+        <sgds-dropdown-item>slot 1</sgds-dropdown-item>
+        <sgds-dropdown-item>slot 2</sgds-dropdown-item>
       </sgds-dropdown> `
     );
     expect(el.menuIsOpen).to.be.true;
@@ -575,8 +567,8 @@ describe("sgds-dropdown", () => {
     it(`dropdown menu always closes regardless of prop close value = ${closeVal}`, async () => {
       const el = await fixture<SgdsDropdown>(
         html`<sgds-dropdown menuIsOpen close=${closeVal}>
-          <sgds-dropdown-item value="1">slot 1</sgds-dropdown-item>
-          <sgds-dropdown-item value="2">slot 2</sgds-dropdown-item>
+          <sgds-dropdown-item >slot 1</sgds-dropdown-item>
+          <sgds-dropdown-item >slot 2</sgds-dropdown-item>
         </sgds-dropdown> `
       );
       expect(el.menuIsOpen).to.be.true;
@@ -618,7 +610,6 @@ describe("sgds-dropdown-item", () => {
         </a>
       </li>`
     );
-    expect(el.value).to.be.undefined;
   });
   it("href prop is forwarded to a tag href attr", async () => {
     const el = await fixture(
@@ -642,11 +633,5 @@ describe("sgds-dropdown-item", () => {
       "true"
     );
     expect(el.shadowRoot?.querySelector('a')).to.have.attribute('tabindex', '-1')
-  });
-  it("value prop assigns the element target its value", async () => {
-    const el = await fixture<SgdsDropdownItem>(
-      html`<sgds-dropdown-item value="hello">test</sgds-dropdown-item>`
-    );
-    expect(el.value).to.equal("hello");
   });
 })

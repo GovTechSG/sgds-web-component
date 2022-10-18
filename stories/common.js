@@ -97,18 +97,6 @@ export const dropdownElementProps = (componentName, disableControl = false) => {
         },
       },
     },
-    value: {
-      control: "text",
-      description:
-        "The value of selected SgdsDropdownItem (if defined). Use event listener `sgds-select` to obtain value of SgdsDropdown",
-      table: {
-        defaultValue: { summary: "undefined" },
-        category: `props: ${componentName}`,
-        type: {
-          summary: "string",
-        },
-      },
-    },
     close: {
       control: "select",
       options: ["default", "outside", "inside"],

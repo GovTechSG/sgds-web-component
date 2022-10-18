@@ -8,9 +8,6 @@ import {classMap} from 'lit/directives/class-map.js';
 export class SgdsDropdownItem extends LinkElement {
   static styles = styles
 
-  @property({ type: String, reflect: true })
-  value = undefined;
-
   @query('a')
   anchor: HTMLElement
   firstUpdated(){

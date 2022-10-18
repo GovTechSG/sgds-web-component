@@ -44,10 +44,7 @@ export class DropdownElement extends SgdsElement {
   togglerText = "";
   @property({ type: String })
   variant: DropdownButtonVariant = "secondary";
-
-  @property({ type: String, reflect: true })
-  value = undefined;
-
+  
   @property({ type: Boolean })
   menuIsOpen = false;
 
@@ -204,7 +201,6 @@ export class DropdownElement extends SgdsElement {
     // assign selected dropdown-item value to sgds-dropdown value
     const selectedItem = e.target as SgdsDropdownItem;
     if (!selectedItem.disabled) {
-      this.value = selectedItem.value;
       this.emit("sgds-select");
       this.close !== "outside" && this.bsDropdown.hide();
     } else return;
