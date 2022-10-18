@@ -4,6 +4,7 @@ import '../src/Button';
 import { expect, fixture, html, oneEvent, waitUntil, assert,elementUpdated, aTimeout } from '@open-wc/testing';
 import sinon from 'sinon';
 import { sendKeys } from '@web/test-runner-commands';
+import { SgdsButton } from '../src/Button';
 
 describe('sgds-input', () => {
   it('is defined', () => {
@@ -138,29 +139,45 @@ describe('when calling HTMLFormElement.reportValidity()', () => {
   it('fires sgds-input event when value is entered', async () => {
     const el = await fixture<SgdsInput>(html` <sgds-input></sgds-input> `);
     const inputHandler = sinon.spy();
-    const label = el.shadowRoot?.querySelector('label')!;
-    (label as HTMLElement).click();
+    el.focus();
     el.addEventListener('sgds-input', inputHandler);
     await sendKeys({ press: 'A' });
     waitUntil(()=> inputHandler.calledOnce)
     expect(inputHandler).to.have.been.calledOnce;
   });
 
-  // it('should reset the element to its initial value', async () => {
-  //   const form = await fixture<HTMLFormElement>(html`
-  //     <form>
-  //       <sgds-input name="a" value="test"></sgds-input>
-  //       <sgds-button type="reset">Reset</sgds-button>
-  //     </form>
-  //   `);
-  //   const button = form.querySelector('sgds-button');
-  //   const input = form.querySelector('sgds-input');
+  it('should reset the element to its initial value', async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input name="a" value="test"></sgds-input>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const resetButton = form.querySelector('sgds-button') as HTMLButtonElement;
+    const input = form.querySelector('sgds-input') as HTMLInputElement;
+    resetButton.click();
+    await aTimeout(1000);
+    expect(input.value).to.equal('test');
+  });
 
-  //   (button as HTMLElement).click();
-    
-  //   await aTimeout(3000);
+  it('should prevent submission when pressing enter in an input and canceling the keydown event', async () => {
+    const form = await fixture<HTMLFormElement>(html` <form><sgds-input></sgds-input></form> `);
+    const input = form.querySelector('sgds-input') as HTMLInputElement;
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    const keydownHandler = sinon.spy((event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+      }
+    });
 
-  //   expect((input as HTMLInputElement).value).to.equal('');
-  // });
+    form.addEventListener('submit', submitHandler);
+    input.addEventListener('keydown', keydownHandler);
+    input.focus();
+    await sendKeys({ press: 'Enter' });
+    await waitUntil(() => keydownHandler.calledOnce);
+
+    expect(keydownHandler).to.have.been.calledOnce;
+    expect(submitHandler).to.not.have.been.called;
+  });
 
 });

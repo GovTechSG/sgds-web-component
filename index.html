@@ -163,7 +163,7 @@
             <div class="row">
                 <div class="col-6 mb-2">
                     <form action="">
-                        <sgds-input id="test-id" required pattern="abc"></sgds-input>
+                        <sgds-input id="test-id" required pattern="abc" value="test"></sgds-input>
                         <sgds-button type="submit">Submit</sgds-button>
                         <sgds-button type="reset">Reset</sgds-button>
                     </form>
@@ -362,16 +362,5 @@
     </sgds-footer>
 </div>  
 </body>
-<script>
-    
-    const inputForm = document.querySelector('sgds-input');
-    inputForm.addEventListener('sgds-input', (e)=>{
-        console.log(e.target.value)
-    })
 
-    const inputEL = document.querySelector('#abc');
-    console.log(inputEL.shadowRoot?.query)
-    inputEL.setAttribute('value', 'abcc')
-
-</script>
 </html>
