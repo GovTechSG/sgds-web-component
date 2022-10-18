@@ -50,6 +50,11 @@
             grid-template-columns: 240px repeat(2,1fr);
             width: 100%;
         }   
+        .box{
+            padding: 2rem;
+            border: 1px solid #dcdcdc;
+            border-radius: 1rem;
+        }
 
         sgds-sidenav-item {
             --sidenav-theme-color: orange;
@@ -77,9 +82,6 @@
         sgds-mainnav-item {
             --mainnav-item-theme-color:red;
         }
-        sgds-button{
-            flex: 1;
-        } 
     </style>
     <script src="lib/index.js"></script>
 </head>
@@ -162,13 +164,16 @@
             <h2>Input</h2>
             <div class="row">
                 <div class="col-6 mb-2">
-                    <form action="">
-                        <sgds-input id="test-id" required pattern="abc"></sgds-input>
-                        <sgds-button type="submit">Submit</sgds-button>
-                        <sgds-button type="reset">Reset</sgds-button>
-                    </form>
-                    <sgds-input id="test-id"></sgds-input>
-                    <sgds-input iconName='search' id="defaultID"></sgds-input>
+                    <div class="box">
+                        <form>
+                            <sgds-input id="test-id" required pattern="abc" invalidFeedback="pattern='abc'"></sgds-input>
+                            <sgds-textarea textareaClasses="mt-4" maxlength="10" required invalidFeedback="please key in something"></sgds-textarea>
+                            <div class="d-flex justify-content-end mt-3">
+                                <sgds-button type="reset" variant="link">Reset</sgds-button>
+                                <sgds-button type="submit">Submit</sgds-button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="col-6 mb-2">
                     <form action="">
