@@ -75,7 +75,7 @@
             grid-area: footer;
         }
         sgds-mainnav-item {
-            --sgds-mainnav-item-theme-color:red;
+            --mainnav-item-theme-color:red;
         }
         sgds-button{
             flex: 1;
@@ -85,13 +85,15 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <div class="grid">
     <sgds-masthead fluid></sgds-masthead>
-    <sgds-mainnav expand="never" mode="offcanvas">
+    <sgds-mainnav>
         <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
 
         <sgds-mainnav-item href="#">Home</sgds-mainnav-item>
         <sgds-mainnav-item href="#">About</sgds-mainnav-item>
+        <sgds-mainnav-item href="#" slot="end" class="test test2">Info</sgds-mainnav-item>
+        <sgds-mainnav-item href="#" slot="end">Contact Us</sgds-mainnav-item>
+            <sgds-button slot="end">Login</sgds-button>
         <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px"></dev-console-widget>
     </sgds-mainnav>
     <sgds-sidenav class="mt-3" id="test-id">
