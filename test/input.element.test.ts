@@ -117,7 +117,6 @@ describe('when calling HTMLFormElement.reportValidity()', () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
         <sgds-input required value=""></sgds-input>
-        <sgds-button type="submit">Submit</sgds-button>
       </form>
     `);
 
@@ -128,7 +127,6 @@ describe('when calling HTMLFormElement.reportValidity()', () => {
     const form = await fixture<HTMLFormElement>(html`
       <form novalidate>
         <sgds-input required value=""></sgds-input>
-        <sgds-button type="submit">Submit</sgds-button>
       </form>
     `);
 
