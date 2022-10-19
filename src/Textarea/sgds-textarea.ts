@@ -23,7 +23,7 @@ export class SgdsTextArea extends SgdsElement {
   
   @property({ type: String, reflect: true }) label = "label";
   @property({ type: String, reflect: true}) hintText;
-  @property({ type:String, reflect: true }) id = genId("textarea", null);
+  @property({ type:String, reflect: true }) id = genId("textarea","textarea");
   @property({ type:String, reflect: true }) name;
   @property({ type: String, reflect: true }) textareaClasses?;
   @property({ type: String, reflect: true }) value = '';
