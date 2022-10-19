@@ -1,4 +1,3 @@
-import { LitElement} from "lit";
 import { customElement, property, state, query} from "lit/decorators.js";
 import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -80,6 +79,11 @@ export class SgdsButton extends SgdsElement {
   /** Sets focus on the button. */
   focus(options?: FocusOptions) {
     this.button.focus(options);
+  }
+
+  /** Simulates a click on the button. */
+  click() {
+    this.button.click();
   }
 
   /** Removes focus from the button. */
