@@ -138,7 +138,7 @@ export class SgdsButton extends SgdsElement {
         tabindex=${this.disabled ? '-1' : '0'}
         @click=${this.handleClick}
         @focus=${this.handleFocus}
-        @click=${this.handleClick}
+        @blur=${this.handleBlur}
       >
         <slot></slot>
       </${tag}>
