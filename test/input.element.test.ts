@@ -1,10 +1,11 @@
 import { SgdsInput } from '../src/Input/sgds-input';
+import { SgdsButton } from '../src/Button/sgds-button';
 import '../src/Input';
 import '../src/Button';
 import { expect, fixture, html, oneEvent, waitUntil, assert,elementUpdated, aTimeout } from '@open-wc/testing';
 import sinon from 'sinon';
 import { sendKeys } from '@web/test-runner-commands';
-import { SgdsButton } from '../src/Button';
+
 
 describe('sgds-input', () => {
   it('is defined', () => {
@@ -25,6 +26,13 @@ describe('sgds-input', () => {
     );
   })
 
+  it('should be disabled with the disabled attribute', async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input disabled></sgds-input> `);
+    const input = el.shadowRoot!.querySelector<HTMLInputElement>('input')!;
+
+    expect(input.disabled).to.be.true;
+  });
+
   // Labels
   it('should replace label value the if updated', async () => {
     const el = await fixture(html`<sgds-input></sgds-input>`);
@@ -37,9 +45,9 @@ describe('sgds-input', () => {
   // Hint Text
   it('should render hint text element if hintText attribute is defined', async () => {
     const el = await fixture(html`<sgds-input></sgds-input>`);
+    const hintText = el.shadowRoot?.querySelector(".form-text");
     el.setAttribute('hintText', 'hint');
     await elementUpdated(el);
-    const hintText = el.shadowRoot?.querySelector(".form-text");
     expect(hintText?.textContent).to.equal("hint");
     expect(hintText).to.exist;
   })
@@ -111,6 +119,33 @@ describe('sgds-input', () => {
   });
 
 });
+describe('when using constraint validation', () => {
+  it('should be valid by default', async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input></sgds-input> `);
+    expect(el.invalid).to.be.false;
+  });
+
+  it('should be invalid when required and empty', async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input required></sgds-input> `);
+    expect(el.reportValidity()).to.be.false;
+    expect(el.invalid).to.be.true;
+  });
+
+  it('should be invalid when the pattern does not match', async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input pattern="^test" value="fail"></sgds-input> `);
+    expect(el.invalid).to.be.true;
+    expect(el.reportValidity()).to.be.false;
+  });
+
+  it('should be invalid when required and disabled is removed', async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input disabled required></sgds-input> `);
+    el.disabled = false;
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+  });
+});
+
+
 
 describe('when calling HTMLFormElement.reportValidity()', () => {
   it('should be invalid when the input is empty and form.reportValidity() is called', async () => {
@@ -143,24 +178,44 @@ describe('when calling HTMLFormElement.reportValidity()', () => {
     waitUntil(()=> inputHandler.calledOnce)
     expect(inputHandler).to.have.been.calledOnce;
   });
+  
 
-  it('should reset the element to its initial value', async () => {
-    const form = await fixture<HTMLFormElement>(html`
+});
+
+describe('when submitting a form', () => {
+  it('should submit the form when pressing enter in a form without a submit button', async () => {
+    const form = await fixture<HTMLFormElement>(html` <form><sgds-input></sgds-input></form> `);
+    const input = form.querySelector<SgdsInput>('sgds-input')!;
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+
+    form.addEventListener('submit', submitHandler);
+    input.focus();
+    await sendKeys({ press: 'Enter' });
+    await waitUntil(() => submitHandler.calledOnce);
+
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it('should submit the form when pressing enter in a form with a submit button', async () => {
+    const form = await fixture<HTMLFormElement>(html` 
       <form>
-        <sgds-input name="a" value="test"></sgds-input>
-        <sgds-button type="reset">Reset</sgds-button>
-      </form>
+        <sgds-input></sgds-input>
+        <sgds-button type="submit"></sgds-button>
+    </form> 
     `);
-    const resetButton = form.querySelector('sgds-button') as HTMLButtonElement;
-    const input = form.querySelector('sgds-input') as HTMLInputElement;
-    resetButton.click();
-    await aTimeout(1000);
-    expect(input.value).to.equal('test');
+    const input = form.querySelector<SgdsInput>('sgds-input')!;
+    const submitButton = form.querySelector<SgdsButton>('sgds-button')!;
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+
+    submitButton.addEventListener('submit', submitHandler);
+    submitButton.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
   });
 
   it('should prevent submission when pressing enter in an input and canceling the keydown event', async () => {
     const form = await fixture<HTMLFormElement>(html` <form><sgds-input></sgds-input></form> `);
-    const input = form.querySelector('sgds-input') as HTMLInputElement;
+    const input = form.querySelector<SgdsInput>('sgds-input')!;
     const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
     const keydownHandler = sinon.spy((event: KeyboardEvent) => {
       if (event.key === 'Enter') {
@@ -177,5 +232,34 @@ describe('when calling HTMLFormElement.reportValidity()', () => {
     expect(keydownHandler).to.have.been.calledOnce;
     expect(submitHandler).to.not.have.been.called;
   });
+});
 
+describe('when resetting a form', () => {
+  it('should reset the element to its initial value', async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input name="a" value="test"></sgds-input>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const button = form.querySelector<SgdsButton>('sgds-button')!;
+    const input = form.querySelector<SgdsInput>('sgds-input')!;
+    input.value = '1234';
+
+    await input.updateComplete;
+
+    setTimeout(() => button.click());
+    await oneEvent(form, 'reset');
+    await input.updateComplete;
+
+    expect(input.value).to.equal('test');
+
+    input.defaultValue = '';
+
+    setTimeout(() => button.click());
+    await oneEvent(form, 'reset');
+    await input.updateComplete;
+
+    expect(input.value).to.equal('');
+  });
 });

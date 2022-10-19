@@ -66,36 +66,6 @@ describe('sgds-button', () => {
 
 });
 
-describe('when using methods', () => {
-  it('should emit sgds-focus and sgds-blur when the button is focused and blurred', async () => {
-    const el = await fixture<SgdsButton>(html` <sgds-button>Button</sgds-button> `);
-    const focusHandler = sinon.spy();
-    const blurHandler = sinon.spy();
-
-    el.addEventListener('sgds-focus', focusHandler);
-    el.addEventListener('sgds-blur', blurHandler);
-
-    el.focus();
-    await waitUntil(() => focusHandler.calledOnce);
-
-    el.blur();
-    await waitUntil(() => blurHandler.calledOnce);
-
-    expect(focusHandler).to.have.been.calledOnce;
-    expect(blurHandler).to.have.been.calledOnce;
-  });
-
-  it('should emit a click event when calling click()', async () => {
-    const el = await fixture<SgdsButton>(html` <sgds-button></sgds-button> `);
-    const clickHandler = sinon.spy();
-
-    el.addEventListener('click', clickHandler);
-    el.click();
-    await waitUntil(() => clickHandler.calledOnce);
-
-    expect(clickHandler).to.have.been.calledOnce;
-  });
-});
 
 
 describe('when submitting a form', () => {
@@ -183,3 +153,33 @@ describe('when submitting a form', () => {
   });
 });
 
+describe('when using methods', () => {
+  it('should emit sgds-focus and sgds-blur when the button is focused and blurred', async () => {
+    const el = await fixture<SgdsButton>(html` <sgds-button>Button</sgds-button> `);
+    const focusHandler = sinon.spy();
+    const blurHandler = sinon.spy();
+
+    el.addEventListener('sgds-focus', focusHandler);
+    el.addEventListener('sgds-blur', blurHandler);
+
+    el.focus();
+    await waitUntil(() => focusHandler.calledOnce);
+
+    el.blur();
+    await waitUntil(() => blurHandler.calledOnce);
+
+    expect(focusHandler).to.have.been.calledOnce;
+    expect(blurHandler).to.have.been.calledOnce;
+  });
+
+  it('should emit a click event when calling click()', async () => {
+    const el = await fixture<SgdsButton>(html` <sgds-button></sgds-button> `);
+    const clickHandler = sinon.spy();
+
+    el.addEventListener('click', clickHandler);
+    el.click();
+    await waitUntil(() => clickHandler.calledOnce);
+
+    expect(clickHandler).to.have.been.calledOnce;
+  });
+});
