@@ -12,7 +12,7 @@ describe('sgds-input', () => {
       assert.instanceOf(el, SgdsInput)
   })
   it('renders with default values', async () => {
-    const el = await fixture(html`<sgds-input id="test-id"></sgds-input>`);
+    const el = await fixture(html`<sgds-input inputId="test-id"></sgds-input>`);
     assert.shadowDom.equal(
       el,
       `
@@ -46,11 +46,11 @@ describe('sgds-input', () => {
 
   // Icon
   it('should render with fom-control-group if iconName attribute is defined', async () => {
-    const el = await fixture(html`<sgds-input iconName='search' id="defaultID"></sgds-input>`);
+    const el = await fixture(html`<sgds-input iconName='search' inputId="defaultID"></sgds-input>`);
     assert.shadowDom.equal(
       el,
       `
-      <div class="sgds form-group ">
+      <div class="sgds form-group">
         <label class="form-label" for="defaultID">label</label>
         <div class="sgds form-control-group">
           <span class="form-control-icon">
