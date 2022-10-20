@@ -21,7 +21,31 @@ const plugins = [
   }),
   litcss(),
   typescript({
+    tsconfig: 'tsconfig.json',
     useTsconfigDeclarationDir: true,
+  }),
+]
+const reactBuildPlugins = [
+  resolve(),
+  postcss({
+    minimize: false,
+    inject: false,
+  }),
+  litcss(),
+  typescript({
+    useTsconfigDeclarationDir: true,
+  })
+]
+const reactSubFolderBuildPlugins = (folderName) =>  [
+  ...reactBuildPlugins,
+  generatePackageJson({
+    baseContents: {
+      name: `${packageJson.name}/react/${folderName}`,
+      private: true,
+      main: '../cjs/index.js',
+      module: './index.js',
+      types: './index.d.ts',
+    },
   }),
 ]
 const subfolderPlugins = (folderName) => [
@@ -51,6 +75,25 @@ const folderBuilds = getFolders('./src').map((folder) => {
   };
 });
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+const reactFolderBuilds = getFolders('src/react').map((folder) => {
+  return {
+    input: `src/react/${folder}/index.ts`,
+    output: [
+      {
+      file: `lib/react/${folder}/index.js`,
+      sourcemap: true,
+      exports: 'named',
+      format: 'esm',
+      }
+    ],
+    external: ['@lit-labs/react', 'react'],
+    plugins : reactSubFolderBuildPlugins(folder)
+  }
+})
 export default [
   {
     input: "src/index.ts",
@@ -69,5 +112,25 @@ export default [
     ],
     plugins
   },
-  ...folderBuilds
+  ...folderBuilds,
+  {
+    input: 'src/react/index.ts',
+    output: [
+      {
+        file: "lib/react/index.js",
+        format: 'esm',
+        sourcemap: true,
+        exports: 'named',
+      },
+      {
+        file: "lib/react/cjs/index.js",
+        format: 'cjs',
+        sourcemap: true,
+        exports: 'named',
+      },
+    ],
+    plugins: reactBuildPlugins,
+    external: ['@lit-labs/react', 'react'],
+  },
+  ...reactFolderBuilds
 ];

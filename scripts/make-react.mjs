@@ -10,7 +10,7 @@ import { getAllComponents } from './shared.mjs';
 
 const { outdir } = commandLineArgs({ name: 'outdir', type: String });
 
-const reactDir = path.join('./react');
+const reactDir = path.join('src/react');
 
 // Clear build directory
 deleteSync(reactDir);
@@ -30,7 +30,7 @@ components.map(component => {
   const componentDir = path.join(reactDir, tagWithoutPrefix);
   const componentFile = path.join(componentDir, 'index.ts');
   // const importPath = component.modulePath.replace(/^src\//, '').replace(/\.ts$/, '');
-  const importPath = component.modulePath.replace(/\.ts$/, '')
+  const importPath = component.modulePath.replace(/^src\//, '').replace(/\.ts$/, '')
   const events = (component.events || []).map(event => `${event.reactName}: '${event.name}'`).join(',\n');
 
   fs.mkdirSync(componentDir, { recursive: true });

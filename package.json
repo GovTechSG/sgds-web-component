@@ -18,10 +18,25 @@
     "prepare": "husky install",
     "build:readme" : "gulp"
   },
-  "author": "",
+  "author": "GovTechSG",
+  "contributors": [
+    {
+      "name": "rav3",
+      "url": "https://github.com/rav3"
+    },
+    {
+      "name": "haphizi",
+      "url": "https://github.com/haphizi"
+    },
+    {
+      "name": "clukhei",
+      "url": "https://github.com/clukhei"
+    }
+  ],
   "license": "MIT",
   "dependencies": {
     "@govtechsg/sgds": "^2.1.1",
+    "@lit-labs/react": "^1.0.9",
     "bootstrap": "^5.1.3",
     "lit": "^2.3.1"
   },
