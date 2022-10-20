@@ -9,7 +9,9 @@
     --masthead-link-color-hover: hsl(221, 64%, 55%);
     --masthead-mobile-font-size: 0.6875rem;
     --masthead-mobile-padding-x: 0.75rem;
+    --masthead-fluid-padding-x: 0.75rem;
     --masthead-crest-color: rgb(239, 51, 32);
+    
 }
 
 .sgds-masthead{
@@ -19,7 +21,7 @@
     color: var(--masthead-text-color);
     @media screen and (max-width: 1023px){
         font-size: var(--masthead-mobile-font-size);
-        .container,.container-fluid, .col{
+        .col,.row{
             padding-left:0;
             padding-right: 0;
         }
@@ -44,14 +46,7 @@
     gap: 0.25rem;
 }
 
-.row{
-    padding-top:0.1rem;
-    padding-bottom: 0.1rem;
-    @media screen and (max-width: 1023px) {
-        padding-left: var(--masthead-mobile-padding-x);
-        padding-right: var(--masthead-mobile-padding-x);
-    }
-}
+
 
 .sgds-masthead-identify-icon {
     width: 12px;
@@ -196,10 +191,27 @@ a.trusted-websites-link{
     }
 }
 
-.sgds-masthead:not([fluid]){
-    @media screen and (max-width: 1023px){
-        .container{
-            margin: 0;
+.sgds-masthead{
+    > .container{
+        @media screen and (max-width: 1023px){
+            padding-left: var(--masthead-mobile-padding-x);
+            padding-right: var(--masthead-mobile-padding-x);
+        }
+    }
+    > .container-fluid{
+        padding-left: var(--masthead-fluid-padding-x);
+        padding-right: var(--masthead-fluid-padding-x);
+        @media screen and (max-width: 1023px){
+            padding-left: var(--masthead-mobile-padding-x);
+            padding-right: var(--masthead-mobile-padding-x);
+        }
+    }
+    
+    &:not([fluid]){
+        @media screen and (max-width: 1023px){
+            .container{
+                margin: 0;
+            }
         }
     }
 }
