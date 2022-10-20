@@ -23,7 +23,7 @@ export class SgdsTextArea extends SgdsElement {
   
   @property({ type: String, reflect: true }) label = "label";
   @property({ type: String, reflect: true}) hintText;
-  @property({ type:String, reflect: true }) id = genId("textarea","textarea");
+  @property({ type:String, reflect: true }) textareaId = genId("textarea","input");
   @property({ type:String, reflect: true }) name;
   @property({ type: String, reflect: true }) textareaClasses?;
   @property({ type: String, reflect: true }) value = '';
@@ -143,23 +143,24 @@ export class SgdsTextArea extends SgdsElement {
 
   render() {
     return html`
-      <div class="sgds form-group 
-      ${classMap(
-          { 
-            [`${this.textareaClasses}`]: this.textareaClasses
-          })}"
-      >
+      <div 
+        class="${classMap({
+          'sgds': true,
+          'form-group': true,
+          [`${this.textareaClasses}`]: this.textareaClasses
+        })}">
         <div class="d-flex justify-content-between">
-          <div for=${ifDefined(this.id)} class="form-label">${this.label}</div>
+          <div for=${ifDefined(this.textareaId)} class="form-label">${this.label}</div>
           <div class="form-text">${this.value.length}/${this.maxlength}</div>
         </div>
         <textarea 
-          class="form-control ${classMap(
+          class="${classMap(
           { 
+            'form-control': true,
             'is-invalid' : this.required && this.invalid,
             'is-valid' : this.required && !this.invalid
           })}"
-          id=${ifDefined(this.id)}
+          textareaId=${ifDefined(this.textareaId)}
           rows=${ifDefined(this.rows)}
           placeholder=${ifDefined(this.placeholder)}
           .value=${live(this.value)}
