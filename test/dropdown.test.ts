@@ -106,7 +106,7 @@ describe('dropdown-element generic keyboard interactions', () => {
         "tabindex",
         "-1"
       );
-    });
+    }).retries(1);
     it("for a newly opened menu with no focus on any items, ArrowUp key will navigate to the last dropdown-item on the menu and continue looping once it reaches the last menu item", async () => {
       const el = await fixture<MockDropdown>(
         html`<mock-dropdown menuIsOpen>
@@ -168,7 +168,7 @@ describe('dropdown-element generic keyboard interactions', () => {
       expect(el.querySelectorAll("sgds-dropdown-item")[1]).not.to.have.attribute(
         "tabindex",
       );
-    });
+    }).retries(1);
     it("keyboard navigation skips disabled items", async () => {
       const el = await fixture<MockDropdown>(
         html`<mock-dropdown menuIsOpen>
@@ -194,7 +194,7 @@ describe('dropdown-element generic keyboard interactions', () => {
       expect(el.querySelector("sgds-dropdown-item:focus")).not.to.equal(
         el.querySelectorAll("sgds-dropdown-item")[3]
       );
-    });
+    }).retries(1);
     // test case: when close="outside" and user mouse clicks on menu and then change to keyboard navigation
     it("transition from mouse click to keyboard navigation should be seamless", async () => {
       const el = await fixture<MockDropdown>(
@@ -226,7 +226,7 @@ describe('dropdown-element generic keyboard interactions', () => {
       expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(
         el.querySelectorAll("sgds-dropdown-item")[3]
       );
-    });
+    }).retries(1);
 })
 
 describe("sgds-dropdown", () => {
