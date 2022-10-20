@@ -3,6 +3,13 @@ import SgdsElement from "../utils/sgds-element";
 import { customElement, property } from "lit/decorators.js";
 import styles from "./sgds-sidenav.scss";
 
+/**
+ * @since 0.0.8
+ * @status stable
+ *
+ *
+ * @slot - default slot for SgdsSidenavItem element.
+ */
 @customElement("sgds-sidenav")
 export class SgdsSidenav extends SgdsElement {
   static styles = styles;
@@ -31,3 +38,5 @@ export class SgdsSidenav extends SgdsElement {
     `;
   }
 }
+
+export default SgdsSidenav;

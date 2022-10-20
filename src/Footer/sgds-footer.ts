@@ -11,6 +11,17 @@ export interface ColumnLinks {
   title: string;
   links: Links[]
 }
+
+/**
+ * @since 0.0.8
+ * @status stable
+ *
+ *
+ *
+ *
+ * @csspart footer-top - The component's footer-top section container.
+ * @csspart footer-bottom - The component's footer-bottom section container.
+ */
 @customElement("sgds-footer")
 export class SgdsFooter extends SgdsElement {
   static styles = styles

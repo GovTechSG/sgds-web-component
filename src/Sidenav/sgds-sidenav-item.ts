@@ -7,6 +7,18 @@ import { Collapse } from "bootstrap";
 import genId from "../utils/generateId";
 import { classMap } from "lit/directives/class-map.js";
 
+
+/**
+ * @since 0.0.8
+ * @status stable
+ *
+ * @dependency sl-spinner
+ *
+ * @event sgds-toggle - Emitted when the dropdown is clicked.
+ *
+ * @slot - default slot for SgdsSidenavLink element.
+ * @slot title - title slot for the content of SgdsSidenavItem's button / anchor element.
+ */
 @customElement("sgds-sidenav-item")
 export class SgdsSidenavItem extends SgdsElement {
   static styles = styles;
@@ -144,3 +156,5 @@ export class SgdsSidenavItem extends SgdsElement {
     `;
   }
 }
+
+export default SgdsSidenavItem;

@@ -1,0 +1,1095 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/Button/sgds-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SgdsButton",
+          "slots": [
+            {
+              "description": "The button's label.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "\"primary\"",
+              "description": "The button's variant.",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "buttonClasses",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "buttonClasses",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'lg'"
+              },
+              "description": "Button sizes",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Button active state",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Button disabled state",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "'button' | 'submit' | 'reset'"
+              },
+              "default": "'button'",
+              "attribute": "type"
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`.",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": {
+                "text": "'_blank' | '_parent' | '_self' | '_top' | undefined"
+              },
+              "description": "Tells the browser where to open the link. Only used when `href` is set.",
+              "attribute": "target"
+            },
+            {
+              "kind": "field",
+              "name": "download",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Tells the browser to download the linked file as this filename. Only used when `href` is set.",
+              "attribute": "download",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "\"primary\"",
+              "description": "The button's variant.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "buttonClasses",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "buttonClasses"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'lg'"
+              },
+              "description": "Button sizes",
+              "fieldName": "size"
+            },
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Button active state",
+              "fieldName": "active"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Button disabled state",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "'button' | 'submit' | 'reset'"
+              },
+              "default": "'button'",
+              "fieldName": "type"
+            },
+            {
+              "name": "href",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`.",
+              "fieldName": "href"
+            },
+            {
+              "name": "target",
+              "type": {
+                "text": "'_blank' | '_parent' | '_self' | '_top' | undefined"
+              },
+              "description": "Tells the browser where to open the link. Only used when `href` is set.",
+              "fieldName": "target"
+            },
+            {
+              "name": "download",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Tells the browser to download the linked file as this filename. Only used when `href` is set.",
+              "fieldName": "download"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "since": "0.0.8",
+          "status": "stable",
+          "tagName": "sgds-button",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SgdsButton",
+          "declaration": {
+            "name": "SgdsButton",
+            "module": "src/Button/sgds-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sgds-button",
+          "declaration": {
+            "name": "SgdsButton",
+            "module": "src/Button/sgds-button.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SgdsButton",
+            "module": "src/Button/sgds-button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/Footer/sgds-footer.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SgdsFooter",
+          "cssParts": [
+            {
+              "description": "The component's footer-top section container.",
+              "name": "footer-top"
+            },
+            {
+              "description": "The component's footer-bottom section container.",
+              "name": "footer-bottom"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "title",
+              "default": "``",
+              "attribute": "title"
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "default": "``",
+              "attribute": "description"
+            },
+            {
+              "kind": "field",
+              "name": "links",
+              "type": {
+                "text": "ColumnLinks[]"
+              },
+              "default": "[]",
+              "attribute": "links"
+            },
+            {
+              "kind": "field",
+              "name": "lastUpdatedDate",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "attribute": "lastUpdatedDate"
+            },
+            {
+              "kind": "field",
+              "name": "contactHref",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"#\"",
+              "attribute": "contactHref"
+            },
+            {
+              "kind": "field",
+              "name": "feedbackHref",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"#\"",
+              "attribute": "feedbackHref"
+            },
+            {
+              "kind": "field",
+              "name": "vulnerabilityHref",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"#\"",
+              "attribute": "vulnerabilityHref"
+            },
+            {
+              "kind": "field",
+              "name": "privacyHref",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"#\"",
+              "attribute": "privacyHref"
+            },
+            {
+              "kind": "field",
+              "name": "termsOfUseHref",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"#\"",
+              "attribute": "termsOfUseHref"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "title",
+              "default": "``",
+              "fieldName": "title"
+            },
+            {
+              "name": "description",
+              "default": "``",
+              "fieldName": "description"
+            },
+            {
+              "name": "links",
+              "type": {
+                "text": "ColumnLinks[]"
+              },
+              "default": "[]",
+              "fieldName": "links"
+            },
+            {
+              "name": "lastUpdatedDate",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "fieldName": "lastUpdatedDate"
+            },
+            {
+              "name": "contactHref",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"#\"",
+              "fieldName": "contactHref"
+            },
+            {
+              "name": "feedbackHref",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"#\"",
+              "fieldName": "feedbackHref"
+            },
+            {
+              "name": "vulnerabilityHref",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"#\"",
+              "fieldName": "vulnerabilityHref"
+            },
+            {
+              "name": "privacyHref",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"#\"",
+              "fieldName": "privacyHref"
+            },
+            {
+              "name": "termsOfUseHref",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"#\"",
+              "fieldName": "termsOfUseHref"
+            }
+          ],
+          "superclass": {
+            "name": "SgdsElement",
+            "module": "/src/utils/sgds-element"
+          },
+          "since": "0.0.8",
+          "status": "stable",
+          "tagName": "sgds-footer",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SgdsFooter",
+          "declaration": {
+            "name": "SgdsFooter",
+            "module": "src/Footer/sgds-footer.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sgds-footer",
+          "declaration": {
+            "name": "SgdsFooter",
+            "module": "src/Footer/sgds-footer.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SgdsFooter",
+            "module": "src/Footer/sgds-footer.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/Mainnav/sgds-mainnav-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SgdsMainnavItem",
+          "slots": [
+            {
+              "description": "Label for the anchor tag.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "active"
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "attribute": "href"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "active"
+            },
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "fieldName": "href"
+            }
+          ],
+          "superclass": {
+            "name": "SgdsElement",
+            "module": "/src/utils/sgds-element"
+          },
+          "since": "0.0.8",
+          "status": "stable",
+          "tagName": "sgds-mainnav-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SgdsMainnavItem",
+          "declaration": {
+            "name": "SgdsMainnavItem",
+            "module": "src/Mainnav/sgds-mainnav-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sgds-mainnav-item",
+          "declaration": {
+            "name": "SgdsMainnavItem",
+            "module": "src/Mainnav/sgds-mainnav-item.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/Mainnav/sgds-mainnav.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SgdsMainnav",
+          "slots": [
+            {
+              "description": "Pass in SgdsMainnavItem elements here.",
+              "name": ""
+            },
+            {
+              "description": "Elements in this slot will be positioned to the right end of .navbar-nav. Elements in this slot will also be included in collapsed menu.",
+              "name": "end"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "myCollapse",
+              "type": {
+                "text": "Ref<HTMLElement>"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "bsCollapse",
+              "type": {
+                "text": "Collapse"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "myOffcanvas",
+              "type": {
+                "text": "Ref<HTMLElement>"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "bsOffcanvas",
+              "type": {
+                "text": "Offcanvas"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "method",
+              "name": "_onClickButton",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "brandHref",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "attribute": "brandHref"
+            },
+            {
+              "kind": "field",
+              "name": "collapseId",
+              "attribute": "collapseId"
+            },
+            {
+              "kind": "field",
+              "name": "expand",
+              "type": {
+                "text": "MainnavExpandSize"
+              },
+              "default": "\"lg\"",
+              "attribute": "expand"
+            },
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "\"offcanvas\" | \"default\""
+              },
+              "default": "\"default\"",
+              "attribute": "mode"
+            },
+            {
+              "kind": "field",
+              "name": "breakpointReached",
+              "type": {
+                "text": "Boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "expanded",
+              "type": {
+                "text": "Boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "_handleSlotChange",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_expandClass"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "brandHref",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "fieldName": "brandHref"
+            },
+            {
+              "name": "collapseId",
+              "fieldName": "collapseId"
+            },
+            {
+              "name": "expand",
+              "type": {
+                "text": "MainnavExpandSize"
+              },
+              "default": "\"lg\"",
+              "fieldName": "expand"
+            },
+            {
+              "name": "mode",
+              "type": {
+                "text": "\"offcanvas\" | \"default\""
+              },
+              "default": "\"default\"",
+              "fieldName": "mode"
+            }
+          ],
+          "superclass": {
+            "name": "SgdsElement",
+            "module": "/src/utils/sgds-element"
+          },
+          "since": "0.0.8",
+          "status": "stable",
+          "tagName": "sgds-mainnav",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SgdsMainnav",
+          "declaration": {
+            "name": "SgdsMainnav",
+            "module": "src/Mainnav/sgds-mainnav.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sgds-mainnav",
+          "declaration": {
+            "name": "SgdsMainnav",
+            "module": "src/Mainnav/sgds-mainnav.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SgdsMainnav",
+            "module": "src/Mainnav/sgds-mainnav.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/Masthead/sgds-masthead.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SgdsMasthead",
+          "members": [
+            {
+              "kind": "field",
+              "name": "fluid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "fluid",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "toggleVisibility",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "_toggleVisibility",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "fluid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "fluid"
+            }
+          ],
+          "superclass": {
+            "name": "SgdsElement",
+            "module": "/src/utils/sgds-element"
+          },
+          "since": "0.0.8",
+          "status": "stable",
+          "tagName": "sgds-masthead",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SgdsMasthead",
+          "declaration": {
+            "name": "SgdsMasthead",
+            "module": "src/Masthead/sgds-masthead.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sgds-masthead",
+          "declaration": {
+            "name": "SgdsMasthead",
+            "module": "src/Masthead/sgds-masthead.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SgdsMasthead",
+            "module": "src/Masthead/sgds-masthead.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/Sidenav/sgds-sidenav-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SgdsSidenavItem",
+          "slots": [
+            {
+              "description": "default slot for SgdsSidenavLink element.",
+              "name": ""
+            },
+            {
+              "description": "title slot for the content of SgdsSidenavItem's button / anchor element.",
+              "name": "title"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "myCollapse",
+              "type": {
+                "text": "Ref<HTMLElement>"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "bsCollapse",
+              "type": {
+                "text": "Collapse"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "when true, toggles the sidenav-item to open on first load and\nset the active stylings.",
+              "attribute": "active"
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "collapseId",
+              "attribute": "collapseId"
+            },
+            {
+              "kind": "field",
+              "name": "buttonId",
+              "attribute": "buttonId"
+            },
+            {
+              "kind": "field",
+              "name": "index",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "\"-1\""
+            },
+            {
+              "kind": "method",
+              "name": "_onClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "_onClickButton",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "_onClickLink",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "closeItem",
+              "privacy": "public",
+              "description": "closeItem - closes sidenav and inactivates it"
+            },
+            {
+              "kind": "method",
+              "name": "openItem",
+              "privacy": "public",
+              "description": "openItem"
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted when the dropdown is clicked.",
+              "name": "sgds-toggle",
+              "reactName": "onSgdsToggle"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "when true, toggles the sidenav-item to open on first load and\nset the active stylings.",
+              "fieldName": "active"
+            },
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "fieldName": "href"
+            },
+            {
+              "name": "collapseId",
+              "fieldName": "collapseId"
+            },
+            {
+              "name": "buttonId",
+              "fieldName": "buttonId"
+            }
+          ],
+          "superclass": {
+            "name": "SgdsElement",
+            "module": "/src/utils/sgds-element"
+          },
+          "since": "0.0.8",
+          "status": "stable",
+          "dependencies": [
+            "sl-spinner"
+          ],
+          "tagName": "sgds-sidenav-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SgdsSidenavItem",
+          "declaration": {
+            "name": "SgdsSidenavItem",
+            "module": "src/Sidenav/sgds-sidenav-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sgds-sidenav-item",
+          "declaration": {
+            "name": "SgdsSidenavItem",
+            "module": "src/Sidenav/sgds-sidenav-item.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/Sidenav/sgds-sidenav-link.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SgdsSidenavLink",
+          "slots": [
+            {
+              "description": "default slot for label of anchor tag.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "active"
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "attribute": "href"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "active"
+            },
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "fieldName": "href"
+            }
+          ],
+          "superclass": {
+            "name": "SgdsElement",
+            "module": "/src/utils/sgds-element"
+          },
+          "since": "0.0.8",
+          "status": "stable",
+          "tagName": "sgds-sidenav-link",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SgdsSidenavLink",
+          "declaration": {
+            "name": "SgdsSidenavLink",
+            "module": "src/Sidenav/sgds-sidenav-link.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sgds-sidenav-link",
+          "declaration": {
+            "name": "SgdsSidenavLink",
+            "module": "src/Sidenav/sgds-sidenav-link.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/Sidenav/sgds-sidenav.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SgdsSidenav",
+          "slots": [
+            {
+              "description": "default slot for SgdsSidenavItem element.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "alwaysOpen",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "alwaysOpen"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "alwaysOpen",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "alwaysOpen"
+            }
+          ],
+          "superclass": {
+            "name": "SgdsElement",
+            "module": "/src/utils/sgds-element"
+          },
+          "since": "0.0.8",
+          "status": "stable",
+          "tagName": "sgds-sidenav",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SgdsSidenav",
+          "declaration": {
+            "name": "SgdsSidenav",
+            "module": "src/Sidenav/sgds-sidenav.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sgds-sidenav",
+          "declaration": {
+            "name": "SgdsSidenav",
+            "module": "src/Sidenav/sgds-sidenav.ts"
+          }
+        }
+      ]
+    }
+  ],
+  "package": {
+    "name": "@govtechsg/sgds-web-component",
+    "description": "",
+    "version": "0.0.8",
+    "author": "",
+    "license": "MIT"
+  }
+}

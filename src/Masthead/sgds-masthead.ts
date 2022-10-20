@@ -1,13 +1,14 @@
-import { html } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
-import styles from "./sgds-masthead.scss";
-import SgdsElement from "../utils/sgds-element";
+import { html } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
+import styles from './sgds-masthead.scss';
+import SgdsElement from '../utils/sgds-element';
 
 /**
- * @property fluid - Include this attribute for full width container
+ * @since 0.0.8
+ * @status stable
  */
 
-@customElement("sgds-masthead")
+@customElement('sgds-masthead')
 export class SgdsMasthead extends SgdsElement {
   static styles = styles;
 
@@ -23,12 +24,8 @@ export class SgdsMasthead extends SgdsElement {
 
   render() {
     return html`
-      <div
-        id="sgds-masthead"
-        class="sgds-masthead"
-        aria-label="A Singapore Government Agency Website"
-      >
-        <div class="${this.fluid ? "container-fluid" : "container"}">
+      <div id="sgds-masthead" class="sgds-masthead" aria-label="A Singapore Government Agency Website">
+        <div class="${this.fluid ? 'container-fluid' : 'container'}">
           <div class="row">
             <div class="col">
               <div class="masthead-layout">
@@ -69,16 +66,14 @@ export class SgdsMasthead extends SgdsElement {
                   aria-controls="sgds-masthead-content"
                   @click=${() => this._toggleVisibility()}
                 >
-                  <span class="sgds-masthead-button-text"
-                    >How to identify</span
-                  >
+                  <span class="sgds-masthead-button-text">How to identify</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
-                    class="sgds-masthead-identify-icon ${!this.toggleVisibility ? null : "show"}"
+                    class="sgds-masthead-identify-icon ${!this.toggleVisibility ? null : 'show'}"
                   >
                     <path
                       d="M8.65188 6.85L8.64813 6.84625L10.0031 5.49125L17.0744 12.5625L15.7194 13.9175L10.0075 8.20562L4.2875 13.9256L2.9325 12.5706L8.6525 6.85062L8.65188 6.85Z"
@@ -91,7 +86,10 @@ export class SgdsMasthead extends SgdsElement {
           </div>
         </div>
 
-        <div id="sgds-masthead-content" class="container sgds-masthead-content ${this.toggleVisibility ? "show" : null }">
+        <div
+          id="sgds-masthead-content"
+          class="container sgds-masthead-content ${this.toggleVisibility ? 'show' : null}"
+        >
           <div class="row">
             <div class="col">
               <div class="content-grid">
@@ -112,12 +110,9 @@ export class SgdsMasthead extends SgdsElement {
                     </svg>
                   </div>
                   <div class="content">
-                    <div class="title">
-                      Official website links end with .gov.sg
-                    </div>
+                    <div class="title">Official website links end with .gov.sg</div>
                     <article>
-                      Government agencies communicate via .gov.sg websites (e.g.
-                      go.gov.sg/open).<a
+                      Government agencies communicate via .gov.sg websites (e.g. go.gov.sg/open).<a
                         href="https://www.gov.sg/trusted-sites#govsites"
                         class="trusted-websites-link"
                         rel="noreferrer"
@@ -136,8 +131,7 @@ export class SgdsMasthead extends SgdsElement {
                           ></path>
                           <path
                             d="M22.667 25.333h-16v-16h8v-2.667h-8c-1.473 0-2.667 1.194-2.667 2.667v16c0 1.473 1.194 2.667 2.667 2.667h16c1.473 0 2.667-1.194 2.667-2.667v-8h-2.667v8z"
-                          ></path></svg
-                      ></a>
+                          ></path></svg></a>
                     </article>
                   </div>
                 </div>
@@ -171,9 +165,8 @@ export class SgdsMasthead extends SgdsElement {
                         <path
                           d="M14.1663 9.00008C14.1663 8.08091 13.4188 7.33342 12.4997 7.33342H11.6663V4.83342C11.6663 2.53591 9.79717 0.666748 7.49967 0.666748C5.20217 0.666748 3.33301 2.53591 3.33301 4.83342V7.33342H2.49967C1.58051 7.33342 0.833008 8.08091 0.833008 9.00008V15.6667C0.833008 16.5859 1.58051 17.3334 2.49967 17.3334H12.4997C13.4188 17.3334 14.1663 16.5859 14.1663 15.6667V9.00008ZM4.99967 4.83342C4.99967 3.45508 6.12134 2.33341 7.49967 2.33341C8.87801 2.33341 9.99967 3.45508 9.99967 4.83342V7.33342H4.99967V4.83342Z"
                           fill="#242425"
-                        ></path></svg
-                      >) or https:// as an added precaution. Share sensitive
-                      information only on official, secure websites.
+                        ></path></svg>) or https:// as an added precaution. Share sensitive information only on official, secure
+                      websites.
                     </article>
                   </div>
                 </div>

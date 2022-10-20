@@ -37,6 +37,14 @@ interface MyStepper extends SgdsStepper {
   lastStep(): void;
 }
 
+/**
+ * @since 0.0.8
+ * @status stable
+ *
+ *
+ *
+ * @slot - The button's label.
+ */
 @customElement("sgds-button")
 export class SgdsButton extends SgdsElement {
   static styles = styles;
