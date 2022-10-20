@@ -2,7 +2,7 @@
 <html>
 
 <head>
-
+    
     <link href='node_modules/@govtechsg/sgds/css/sgds.util.css' rel='stylesheet' type='text/css' />
     <!-- <link href='node_modules/@govtechsg/sgds/css/sgds.css' rel='stylesheet' type='text/css' /> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel='stylesheet'
@@ -167,50 +167,22 @@
                     <div class="box">
                         <form>
                             <sgds-input id="test-id" required pattern="abc" invalidFeedback="pattern='abc'"></sgds-input>
-                            <sgds-textarea textareaClasses="mt-4" maxlength="10" required invalidFeedback="please key in something"></sgds-textarea>
+                            <sgds-textarea textareaClasses="mt-4"  label="optional"></sgds-textarea>
+                            <sgds-textarea textareaClasses="mt-4"  label="Required" required invalidFeedback="Do not leave blank"></sgds-textarea>
+                            <sgds-textarea textareaClasses="mt-4"  maxlength="10" required invalidFeedback="maxlength char" label="required"></sgds-textarea>
+                            <sgds-textarea textareaClasses="mt-4"  minlength="10" required invalidFeedback="minlength 10"></sgds-textarea>
                             <div class="d-flex justify-content-end mt-3">
                                 <sgds-button type="reset" variant="link">Reset</sgds-button>
                                 <sgds-button type="submit">Submit</sgds-button>
                             </div>
                         </form>
                     </div>
+                    <form>
+                        <sgds-input required pattern="test" value="a"></sgds-input>
+                        <sgds-button type="submit" formnovalidate>Submit</sgds-button>
+                      </form> 
                 </div>
-                <div class="col-6 mb-2">
-                    <form action="">
-                    <sgds-input iconName="search" label="Required" autofocus pattern="[A-Za-z]{5}" required feedback="Please key in 5 alphabets"></sgds-input>
-                </form>
-                </div>
-                <div class="col-6 mb-2">
-                    <sgds-input iconName="search" label="Not Required"></sgds-input>
-                </div>
-
-                <div class="col-6 mb-2">
-                    <sgds-input iconName="search" label="Not Required" required></sgds-input>
-                </div>
-                <div class="col-6 mb-2">
-                    <sgds-input id="abc" pattern="abc" required></sgds-input>
-                </div>
-                <!-- <div class="col-6 mb-2">
-                    <sgds-input disabled placeholder="i am disabled"></sgds-input>
-                </div>
-                <div class="col-6 mb-2">
-                    <sgds-input value="this is a readonly" readonly></sgds-input>
-                </div>
-                <div class="col-6 mb-2">
-                    <sgds-input label="type = number" type="number" placeholder="key in a number"></sgds-input>
-                </div>
-                <div class="col-6 mb-2">
-                    <sgds-input label="with left icon" iconName="search"></sgds-input>
-                </div>
-                <div class="col-6">
-                    <sgds-input label="validation with pattern" pattern="[A-Za-z]{3}" iconName="stack" wasValidated required></sgds-input>
-                </div>
-                <div class="col-6">
-                    <sgds-input feedback="must contain at least 3 letters" hintText="this is a hint text" value="sgd" label="validation with pattern" pattern="[A-Za-z]{3}" wasValidated required></sgds-input>
-                </div> -->
             </div>
-            
-           
         </div>
 
     </main>
@@ -366,17 +338,14 @@
       ]'>
     </sgds-footer>
 </div>  
-</body>
 <script>
-    
-    const inputForm = document.querySelector('sgds-input');
-    inputForm.addEventListener('sgds-input', (e)=>{
-        console.log(e.target.value)
-    })
-
-    const inputEL = document.querySelector('#abc');
-    console.log(inputEL.shadowRoot?.query)
-    inputEL.setAttribute('value', 'abcc')
-
+    const button = document.querySelector('sgds-button[variant="primary"');
+    button.addEventListener('submit', submitHandler);
+    function submitHandler(event){
+        event.preventDefault();
+        alert("submitted")
+    }
 </script>
+</body>
+
 </html>

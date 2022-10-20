@@ -34,7 +34,7 @@ export class SgdsInput extends SgdsElement {
     | 'url' = 'text';
   @property({ type: String, reflect: true }) label = "label";
   @property({ type: String, reflect: true}) hintText;
-  @property({ type:String, reflect: true }) id = genId("input", this.type);
+  @property({ type:String, reflect: true }) inputId = genId("input", this.type);
   @property({ type:String, reflect: true }) name;
   @property({ type: String, reflect: true }) inputClasses?;
   @property({ type: String, reflect: true }) iconName;
@@ -131,7 +131,7 @@ export class SgdsInput extends SgdsElement {
           })}
         " 
         type=${this.type}
-        id=${this.id}
+        id=${this.inputId}
         name=${ifDefined(this.name)}
         placeholder=${ifDefined(this.placeholder)}
         aria-invalid=${this.invalid ? 'true' : 'false'}
@@ -151,7 +151,7 @@ export class SgdsInput extends SgdsElement {
         @blur=${this.handleBlur}
         
       >
-      <div id="${this.id}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
+      <div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
     `
     // if iconName is defined
     const inputWithIcon = html`
@@ -164,12 +164,12 @@ export class SgdsInput extends SgdsElement {
     `
     // if hintText is defined
     const withHintText = html`
-    <small id="${ifDefined(this.id)}Help" class="text-muted form-text">${this.hintText}</small>
+    <small id="${ifDefined(this.inputId)}Help" class="text-muted form-text">${this.hintText}</small>
     `
 
     return html`
       <div class="sgds form-group ${this.inputClasses}">
-        <label for=${ifDefined(this.id)} class="form-label">${this.label}</label>
+        <label for=${ifDefined(this.inputId)} class="form-label">${this.label}</label>
         ${this.hintText ? withHintText : undefined }
         ${this.iconName ? inputWithIcon : input}
       </div>

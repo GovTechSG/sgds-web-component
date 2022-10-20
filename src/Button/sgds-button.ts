@@ -1,4 +1,3 @@
-import { LitElement} from "lit";
 import { customElement, property, state, query} from "lit/decorators.js";
 import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -82,6 +81,11 @@ export class SgdsButton extends SgdsElement {
     this.button.focus(options);
   }
 
+  /** Simulates a click on the button. */
+  click() {
+    this.button.click();
+  }
+
   /** Removes focus from the button. */
   blur() {
     this.button.blur();
@@ -138,7 +142,7 @@ export class SgdsButton extends SgdsElement {
         tabindex=${this.disabled ? '-1' : '0'}
         @click=${this.handleClick}
         @focus=${this.handleFocus}
-        @click=${this.handleClick}
+        @blur=${this.handleBlur}
       >
         <slot></slot>
       </${tag}>
