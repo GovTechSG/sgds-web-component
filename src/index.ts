@@ -4,3 +4,4 @@ import './Footer';
 import './Mainnav';
 import './Sidenav';
 import './Checkbox';
+import './Input';
