@@ -7,7 +7,7 @@
     <!-- <link href='node_modules/@govtechsg/sgds/css/sgds.css' rel='stylesheet' type='text/css' /> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel='stylesheet'
         type='text/css' />
-    <script data-shoelace="node_modules/@shoelace-style/shoelace/dist"></script>
+    <!-- <script data-shoelace="node_modules/@shoelace-style/shoelace/dist"></script> -->
     <script type="module" src="node_modules/@shoelace-style/shoelace/dist/components/icon/icon.js"></script>
     <script
     type="module"
@@ -165,22 +165,19 @@
             <div class="row">
                 <div class="col-6 mb-2">
                     <div class="box">
-                        <form>
+                        <form id="a" class="needs-validation">
                             <sgds-input id="test-id" required pattern="abc" invalidFeedback="pattern='abc'"></sgds-input>
                             <sgds-textarea textareaClasses="mt-4"  label="optional"></sgds-textarea>
                             <sgds-textarea textareaClasses="mt-4"  label="Required" required invalidFeedback="Do not leave blank"></sgds-textarea>
                             <sgds-textarea textareaClasses="mt-4"  maxlength="10" required invalidFeedback="maxlength char" label="required"></sgds-textarea>
                             <sgds-textarea textareaClasses="mt-4"  minlength="10" required invalidFeedback="minlength 10"></sgds-textarea>
+                            <sgds-textarea textareaClasses="mt-4"  hintText="this is a hint text"></sgds-textarea>
                             <div class="d-flex justify-content-end mt-3">
                                 <sgds-button type="reset" variant="link">Reset</sgds-button>
-                                <sgds-button type="submit">Submit</sgds-button>
+                                <sgds-button type="submit" form="a">Submit</sgds-button>
                             </div>
                         </form>
                     </div>
-                    <form>
-                        <sgds-input required pattern="test" value="a"></sgds-input>
-                        <sgds-button type="submit" formnovalidate>Submit</sgds-button>
-                      </form> 
                 </div>
             </div>
         </div>
@@ -339,12 +336,22 @@
     </sgds-footer>
 </div>  
 <script>
-    const button = document.querySelector('sgds-button[variant="primary"');
-    button.addEventListener('submit', submitHandler);
-    function submitHandler(event){
-        event.preventDefault();
-        alert("submitted")
-    }
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+
 </script>
 </body>
 

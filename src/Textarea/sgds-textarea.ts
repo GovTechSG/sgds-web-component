@@ -22,13 +22,12 @@ export class SgdsTextArea extends SgdsElement {
   
   
   @property({ type: String, reflect: true }) label = "label";
-  @property({ type: String, reflect: true}) hintText;
   @property({ type:String, reflect: true }) textareaId = genId("textarea","input");
   @property({ type:String, reflect: true }) name;
   @property({ type: String, reflect: true }) textareaClasses?;
   @property({ type: String, reflect: true }) value = '';
   @property({ type: String, reflect: true}) minlength;
-  @property({ type: Number, reflect: true}) maxlength = 200;
+  @property({ type: Number, reflect: true}) maxlength;
   @property({ type: Boolean, reflect: true}) spellcheck = false;
    /** The number of rows to display by default. */
   @property({ type: Number }) rows = 4;
@@ -115,11 +114,6 @@ export class SgdsTextArea extends SgdsElement {
     this.setTextareaHeight();
   }
 
-  @watch('value', { waitUntilFirstUpdate: true })
-  handleCharCount() {
-   if(this.value.length > this.maxlength) return this.invalid = true;
-  }
-
   setTextareaHeight() {
     if (this.resize === 'auto') {
       this.textarea.style.height = 'auto';
@@ -139,9 +133,20 @@ export class SgdsTextArea extends SgdsElement {
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
     this.invalid = !this.textarea.checkValidity();
+    this.updateComplete.then(() => this.setTextareaHeight());
   }
 
   render() {
+
+    // if maxlength is defined
+    const wordCount = html`
+    <div class="form-text">${this.value.length}/${this.maxlength}</div>
+    `
+    // if hintText is defined
+    const withHintText = html`
+    <small id="${ifDefined(this.textareaId)}Help" class="text-muted form-text">${this.hintText}</small>
+    `
+
     return html`
       <div 
         class="${classMap({
@@ -151,7 +156,7 @@ export class SgdsTextArea extends SgdsElement {
         })}">
         <div class="d-flex justify-content-between">
           <div for=${ifDefined(this.textareaId)} class="form-label">${this.label}</div>
-          <div class="form-text">${this.value.length}/${this.maxlength}</div>
+          ${this.maxlength || this.maxlength ? wordCount : undefined}
         </div>
         <textarea 
           class="${classMap(
@@ -163,6 +168,8 @@ export class SgdsTextArea extends SgdsElement {
           textareaId=${ifDefined(this.textareaId)}
           rows=${ifDefined(this.rows)}
           placeholder=${ifDefined(this.placeholder)}
+          minlength=${ifDefined(this.minlength)}
+          maxlength=${ifDefined(this.maxlength)}
           .value=${live(this.value)}
           aria-invalid=${this.invalid ? 'true' : 'false'}
           spellcheck=${ifDefined(this.spellcheck)}
@@ -170,7 +177,7 @@ export class SgdsTextArea extends SgdsElement {
           ?readonly=${this.readonly}
           ?required=${this.required}
           ?autofocus=${this.autofocus}
-          @keyup=${this.handleCharCount}
+          @keyup=${this.handleValueChange}
           @input=${()=> this.handleChange('sgds-input')}
           @change=${()=> this.handleChange('sgds-change')}
           @invalid=${this.handleInvalid}
