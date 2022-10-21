@@ -41,7 +41,6 @@ export default {
             });
 
             const parsed = parse(`${customComments}\n */`);
-            console.log(customComments)
             parsed[0].tags.forEach(t => {
               switch (t.tag) {
                 // Animations

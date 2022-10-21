@@ -3,12 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
 import { deleteSync } from 'del';
-import { pascalCase } from 'pascal-case';
 import prettier from 'prettier';
 import prettierConfig from '../prettier.config.cjs';
 import { getAllComponents } from './shared.mjs';
-
-const { outdir } = commandLineArgs({ name: 'outdir', type: String });
 
 const reactDir = path.join('src/react');
 
@@ -55,7 +52,7 @@ components.map(component => {
     })
   );
 
-  index.push(`export * from './${tagWithoutPrefix}';`);
+  index.push(`export { default as ${component.name} } from './${tagWithoutPrefix}';`);
 
   fs.writeFileSync(componentFile, source, 'utf8');
 });
