@@ -135,7 +135,7 @@ export class SgdsCheckbox extends SgdsElement {
           class="form-check-label"
           ><slot></slot
         ></label>
-        ${this.invalid
+        ${this.required && this.invalid
           ? html`<slot
               name="feedback"
               part="feedback"

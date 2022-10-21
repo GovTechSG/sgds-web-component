@@ -6,6 +6,7 @@ import {
   oneEvent,
   assert,
   waitUntil,
+  elementUpdated,
 } from "@open-wc/testing";
 import sinon from "sinon";
 import "../src/Checkbox";
@@ -24,9 +25,9 @@ describe("<sgds-checkbox>", () => {
     expect(checkbox).to.have.attribute("aria-disabled", "true");
   });
 
-  it("should be able to pass in value to attributes(id/for pair)", async () => {
+  it("should be able to pass in inputId to attributes(id/for pair)", async () => {
     const el = await fixture(
-      html`<sgds-checkbox id="checkbox-123"></sgds-checkbox>`
+      html`<sgds-checkbox inputId="checkbox-123"></sgds-checkbox>`
     );
     const input = el.shadowRoot?.querySelector("input");
     expect(input).to.have.attribute("id", "checkbox-123");
@@ -34,23 +35,7 @@ describe("<sgds-checkbox>", () => {
     expect(label).to.have.attribute("for", "checkbox-123");
   });
 
-  it("should render id to attributes(id/for pair) by default", async () => {
-    const el = await fixture(html`<sgds-checkbox></sgds-checkbox>`);
-    const input = el.shadowRoot?.querySelector("input");
-    expect(input).to.have.attribute("id");
-    const label = el.shadowRoot?.querySelector("label");
-    expect(label).to.have.attribute("for");
-  });
-
-  it("should render aria-label attribute by default", async () => {
-    const el = await fixture(
-      html`<sgds-checkbox ariaLabel="label"></sgds-checkbox>`
-    );
-    const checkbox = el.shadowRoot?.querySelector("label");
-    expect(checkbox).to.have.attribute("aria-label");
-  });
-
-  it("should be able to pass in value to aria-label attribute", async () => {
+  it("should be able to pass in aria-label attribute", async () => {
     const el = await fixture(
       html`<sgds-checkbox ariaLabel="label"></sgds-checkbox>`
     );
@@ -58,41 +43,25 @@ describe("<sgds-checkbox>", () => {
     expect(checkbox).to.have.attribute("aria-label", "label");
   });
 
-  it("should have class .is-invalid with isInvalid prop", async () => {
-    const el = await fixture(html`<sgds-checkbox isInvalid></sgds-checkbox>`);
+  it("should have class .is-invalid with invalid and required attribute", async () => {
+    const el = await fixture(
+      html`<sgds-checkbox invalid required></sgds-checkbox>`
+    );
     const checkbox = el.shadowRoot?.querySelector("input");
     expect(checkbox?.classList.value).to.contain("is-invalid");
   });
 
-  it("should have class .is-valid with isValid prop", async () => {
-    const el = await fixture(html`<sgds-checkbox isValid></sgds-checkbox>`);
+  it("should render aria-invalid to true with invalid and required attribute", async () => {
+    const el = await fixture(
+      html`<sgds-checkbox invalid required></sgds-checkbox>`
+    );
     const checkbox = el.shadowRoot?.querySelector("input");
-    expect(checkbox?.classList.value).to.contain("is-valid");
-  });
-
-  it("if prop showFeedback is false, feedback element should not be defined", async () => {
-    const el = await fixture(
-      html`<sgds-checkbox isValid
-        ><div slot="feedback">Hello world</div></sgds-checkbox
-      >`
-    );
-    const checkbox = el.shadowRoot?.querySelector("div > slot");
-    expect(checkbox).to.be.null;
-  });
-
-  it("if class input is .is-valid, feedback div should contain .valid-feedback", async () => {
-    const el = await fixture(
-      html`<sgds-checkbox isValid showFeedback
-        ><div slot="feedback">Hello world</div></sgds-checkbox
-      >`
-    );
-    const checkbox = el.shadowRoot?.querySelector("div > slot");
-    expect(checkbox?.classList.value).to.contain("valid-feedback");
+    expect(checkbox).to.have.attribute("aria-invalid", "true");
   });
 
   it("if class input is .is-invalid, feedback div should contain .invalid-feedback", async () => {
     const el = await fixture(
-      html`<sgds-checkbox isInvalid showFeedback
+      html`<sgds-checkbox invalid required
         ><div slot="feedback">Hello world</div></sgds-checkbox
       >`
     );
@@ -100,20 +69,30 @@ describe("<sgds-checkbox>", () => {
     expect(checkbox?.classList.value).to.contain("invalid-feedback");
   });
 
-  it("should click the inner input", async () => {
-    const el = await fixture<SgdsCheckbox>(
-      html`<sgds-checkbox></sgds-checkbox>`
+  it("if class input is not .is-invalid, feedback el should be undefined", async () => {
+    const el = await fixture(
+      html`<sgds-checkbox
+        ><div slot="feedback">Hello world</div></sgds-checkbox
+      >`
     );
-    const checkbox = el.shadowRoot!.querySelector("input")!;
-    const clickSpy = sinon.spy();
+    const checkbox = el.shadowRoot?.querySelector("slot[name='feedback']");
+    expect(checkbox).to.not.exist;
+  });
 
-    checkbox.addEventListener("click", clickSpy, { once: true });
+  it("should emit sgds-change event when input is clicked", async () => {
+    const el = await fixture(html`<sgds-checkbox></sgds-checkbox>`);
+    const toggleHandler = sinon.spy();
+    el.addEventListener("sgds-change", toggleHandler);
+    el.shadowRoot?.querySelector("input")?.click();
+    expect(toggleHandler).to.have.been.calledOnce;
+  });
 
-    el.click();
-    await el.updateComplete;
-
-    expect(clickSpy.called).to.equal(true);
-    expect(el.checked).to.equal(true);
+  it("should emit sgds-change event when label is clicked", async () => {
+    const el = await fixture(html`<sgds-checkbox></sgds-checkbox>`);
+    const toggleHandler = sinon.spy();
+    el.addEventListener("sgds-change", toggleHandler);
+    el.shadowRoot?.querySelector("label")?.click();
+    expect(toggleHandler).to.have.been.calledOnce;
   });
 
   it("should have input aria-checked false by default", async () => {
@@ -141,18 +120,48 @@ describe("<sgds-checkbox>", () => {
     expect(el.checked).to.equal(true);
     expect(checkbox).to.have.attribute("aria-checked", "true");
   });
+});
 
-  //   it("should focus the inner input", async () => {
-  //     const el = await fixture<SgdsCheckbox>(html`<sl-checkbox></sl-checkbox>`);
-  //     const checkbox = el.shadowRoot!.querySelector("input")!;
-  //     const focusSpy = sinon.spy();
+it("should be invalid when the input is empty and form.reportValidity() is called", async () => {
+  const form = await fixture<HTMLFormElement>(html`
+    <form>
+      <sgds-checkbox required value=""></sgds-checkbox>
+    </form>
+  `);
 
-  //     checkbox.addEventListener("focus", focusSpy, { once: true });
+  expect(form.reportValidity()).to.be.false;
+});
 
-  //     el.focus();
-  //     await el.updateComplete;
+it("should be valid when the input is not checked, reportValidity() is called, and the form has novalidate", async () => {
+  const form = await fixture<HTMLFormElement>(html`
+    <form novalidate>
+      <sgds-checkbox required value="hello"></sgds-checkbox>
+    </form>
+  `);
 
-  //     expect(focusSpy.called).to.equal(true);
-  //     expect(el.shadowRoot!.activeElement).to.equal(checkbox);
-  //   });
+  expect(form.reportValidity()).to.be.true;
+});
+
+it("should be valid by default", async () => {
+  const el = await fixture<SgdsCheckbox>(
+    html` <sgds-checkbox></sgds-checkbox> `
+  );
+  expect(el.invalid).to.be.false;
+});
+
+it("should be invalid when required and empty", async () => {
+  const el = await fixture<SgdsCheckbox>(
+    html` <sgds-checkbox required></sgds-checkbox> `
+  );
+  expect(el.reportValidity()).to.be.false;
+  expect(el.invalid).to.be.true;
+});
+
+it("should be invalid when required and disabled is removed", async () => {
+  const el = await fixture<SgdsCheckbox>(
+    html` <sgds-checkbox disabled required></sgds-checkbox> `
+  );
+  el.disabled = false;
+  await el.updateComplete;
+  expect(el.invalid).to.be.true;
 });
