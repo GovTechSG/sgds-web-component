@@ -78,21 +78,21 @@ export class SgdsCheckbox extends SgdsElement {
   //   this.emit("sgds-click");
   // }
 
-  handleChange(event: string) {
+  handleChange() {
+    console.log('when this.click() is fired, input detects a change --> handleChange runs')
     this.checked = !this.checked;
     this.value = this.input.value;
-    this.emit(event);
+    this.emit("sgds-change");
   }
 
-  // handleKeyDown(event: KeyboardEvent) {
-  //   const hasModifier =
-  //     event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
-  //   if (event.key === "Enter" && !hasModifier) {
-  //     this.checked = !this.checked;
-  //   } else if(event.key === "Enter" && !hasModifier && this.input.required && this.invalid) {
-  //     this.checked = !this.checked;
-  //   }
-  // }
+  handleKeyDown(event: KeyboardEvent) {
+    const hasModifier =
+      event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+    if (event.key === "Enter" && !hasModifier) {
+      console.log('so here we are trying to mimick keydown enter event like a mousclick event')
+      this.click()
+    } 
+  }
 
   @watch("disabled", { waitUntilFirstUpdate: true })
   handleDisabledChange() {
@@ -105,6 +105,8 @@ export class SgdsCheckbox extends SgdsElement {
   handleStateChange() {
     this.invalid = !this.input.checkValidity();
   }
+
+
 
   render() {
     return html`
@@ -126,7 +128,8 @@ export class SgdsCheckbox extends SgdsElement {
           ?required=${this.required}
           aria-disabled=${this.disabled ? "true" : "false"}
           aria-checked=${this.checked ? "true" : "false"}
-          @change=${() => this.handleChange("sgds-change")}
+          @change=${this.handleChange}
+          @keydown=${this.handleKeyDown}
         />
         <label
           part="label"
