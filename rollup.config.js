@@ -34,7 +34,16 @@ const reactBuildPlugins = [
   litcss(),
   typescript({
     useTsconfigDeclarationDir: true,
-  })
+  }),
+  generatePackageJson({
+    baseContents: {
+      name: `${packageJson.name}/react`,
+      private: false,
+      main: './cjs/index.js',
+      module: './index.js',
+      types: './index.d.ts',
+    },
+  }),
 ]
 const reactSubFolderBuildPlugins = (folderName) =>  [
   ...reactBuildPlugins,

@@ -7,8 +7,9 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "rm -rf lib && rollup --config rollup.config.js",
+    "build:react": "cem analyze --litelement && node ./scripts/makeReact.mjs",
     "post:build": "node ./scripts/frankBuild.js",
-    "build:lib": "npm run build && npm run post:build",
+    "build:lib": "npm run build:react && npm run build && npm run post:build",
     "build:watch": "npm run build -- --watch",
     "dev": "npm run build:watch & npm run serve",
     "serve": "wds --watch --open",

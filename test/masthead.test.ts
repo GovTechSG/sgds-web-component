@@ -1,17 +1,15 @@
-import { SgdsMasthead } from "../src/Masthead";
-import "../src/Masthead/sgds-masthead";
-import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
-import { html } from "lit";
+import { SgdsMasthead } from '../src/Masthead';
+import '../src/Masthead/sgds-masthead';
+import { fixture, assert, expect, elementUpdated } from '@open-wc/testing';
+import { html } from 'lit';
 
-describe("sgds-masthead", () => {
-  it("is defined", () => {
-    const el = document.createElement("sgds-masthead");
+describe('sgds-masthead', () => {
+  it('is defined', () => {
+    const el = document.createElement('sgds-masthead');
     assert.instanceOf(el, SgdsMasthead);
   });
 
-
-  
-  it("renders with default values", async () => {
+  it('renders with default values', async () => {
     const el = await fixture(html`<sgds-masthead></sgds-masthead>`);
     assert.shadowDom.equal(
       el,
@@ -56,8 +54,7 @@ describe("sgds-masthead", () => {
                       Official website links end with .gov.sg
                     </div>
                     <article>
-                      Government agencies communicate via .gov.sg websites (e.g.
-                      go.gov.sg/open).
+                      Government agencies communicate via .gov.sg websites (e.g. go.gov.sg/open).
                       <a href="https://www.gov.sg/trusted-sites#govsites" class="trusted-websites-link" rel="noreferrer" target="_blank">Trusted websites<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 32 32" class="trusted-websites-icon">
                           <title>Trusted websites</title>
                           <path d="M18.667 4v2.667h4c0.186-0.020 0.374-0.020 0.56 0l-2.667 2.667-6.973 6.987 1.88 1.88 9.733-9.667c0.092 0.257 0.137 0.528 0.133 0.8v4h2.667v-9.333h-9.333z"></path>
@@ -75,8 +72,8 @@ describe("sgds-masthead", () => {
                     <div class="title">Secure websites use HTTPS</div>
                     <article>
                       Look for a<b> lock </b>(<svg xmlns="http://www.w3.org/2000/svg" width="15" height="18" viewBox="0 0 15 18" fill="none" class="banner-icon-inline">
-                        <path d="M14.1663 9.00008C14.1663 8.08091 13.4188 7.33342 12.4997 7.33342H11.6663V4.83342C11.6663 2.53591 9.79717 0.666748 7.49967 0.666748C5.20217 0.666748 3.33301 2.53591 3.33301 4.83342V7.33342H2.49967C1.58051 7.33342 0.833008 8.08091 0.833008 9.00008V15.6667C0.833008 16.5859 1.58051 17.3334 2.49967 17.3334H12.4997C13.4188 17.3334 14.1663 16.5859 14.1663 15.6667V9.00008ZM4.99967 4.83342C4.99967 3.45508 6.12134 2.33341 7.49967 2.33341C8.87801 2.33341 9.99967 3.45508 9.99967 4.83342V7.33342H4.99967V4.83342Z" fill="#242425"></path></svg>) or https:// as an added precaution. Share sensitive
-                      information only on official, secure websites.
+                        <path d="M14.1663 9.00008C14.1663 8.08091 13.4188 7.33342 12.4997 7.33342H11.6663V4.83342C11.6663 2.53591 9.79717 0.666748 7.49967 0.666748C5.20217 0.666748 3.33301 2.53591 3.33301 4.83342V7.33342H2.49967C1.58051 7.33342 0.833008 8.08091 0.833008 9.00008V15.6667C0.833008 16.5859 1.58051 17.3334 2.49967 17.3334H12.4997C13.4188 17.3334 14.1663 16.5859 14.1663 15.6667V9.00008ZM4.99967 4.83342C4.99967 3.45508 6.12134 2.33341 7.49967 2.33341C8.87801 2.33341 9.99967 3.45508 9.99967 4.83342V7.33342H4.99967V4.83342Z" fill="#242425"></path></svg>) or https:// as an added precaution. Share sensitive information only on official, secure
+                      websites.
                     </article>
                   </div>
                 </div>
@@ -89,28 +86,20 @@ describe("sgds-masthead", () => {
     );
   });
 
-  it("when clicked on #sgds-masthead-identify, shows #sgds-masthead-content", async () => {
+  it('when clicked on #sgds-masthead-identify, shows #sgds-masthead-content', async () => {
     const el = await fixture<SgdsMasthead>(html`<sgds-masthead></sgds-masthead>`);
-    expect(
-      el.shadowRoot?.getElementById("sgds-masthead-content")?.classList.value
-    ).not.to.contain("show");
-    el.shadowRoot?.getElementById("sgds-masthead-identify")?.click();
+    expect(el.shadowRoot?.getElementById('sgds-masthead-content')?.classList.value).not.to.contain('show');
+    el.shadowRoot?.getElementById('sgds-masthead-identify')?.click();
     await elementUpdated(el);
-    expect(
-      el.shadowRoot?.getElementById("sgds-masthead-content")
-    ).to.have.class("show");
+    expect(el.shadowRoot?.getElementById('sgds-masthead-content')).to.have.class('show');
   });
 
-  it("when fluid attriubute is inserted, .container class should update to .container-fluid", async () => {
+  it('when fluid attriubute is inserted, .container class should update to .container-fluid', async () => {
     const el = await fixture<SgdsMasthead>(html`<sgds-masthead></sgds-masthead>`);
-    const containerWrapper = el.shadowRoot?.getElementById("sgds-masthead")?.children[0]
-    expect(
-      containerWrapper?.classList.value
-    ).to.contain("container");
-    el.setAttribute("fluid","")
+    const containerWrapper = el.shadowRoot?.getElementById('sgds-masthead')?.children[0];
+    expect(containerWrapper?.classList.value).to.contain('container');
+    el.setAttribute('fluid', '');
     await elementUpdated(el);
-    expect(
-      containerWrapper?.classList.value
-    ).to.contain("container-fluid");
+    expect(containerWrapper?.classList.value).to.contain('container-fluid');
   });
 });

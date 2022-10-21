@@ -1,5 +1,4 @@
 import { SgdsFooter, ColumnLinks } from "../src/Footer";
-import "../src/Footer/sgds-footer";
 import { fixture, assert, expect } from "@open-wc/testing";
 import { html } from "lit";
 

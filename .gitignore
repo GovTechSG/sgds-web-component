@@ -3,5 +3,9 @@ lib
 test-outdir
 storybook-static
 react
+<<<<<<< HEAD
 src/react
 custom-elements.json
+=======
+src/react
+>>>>>>> deee0ad (build(scripts): add build react script)

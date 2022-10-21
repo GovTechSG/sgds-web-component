@@ -1,1 +1,1 @@
-export { SgdsButton } from "./sgds-button";
+export * from "./sgds-button";
