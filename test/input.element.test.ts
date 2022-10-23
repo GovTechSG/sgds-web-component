@@ -44,7 +44,7 @@ describe('sgds-input', () => {
 
   // Hint Text
   it('should render hint text element if hintText attribute is defined', async () => {
-    const el = await fixture(html`<sgds-input></sgds-input>`);
+    const el = await fixture(html`<sgds-input hintText="hint"></sgds-input>`);
     const hintText = el.shadowRoot?.querySelector(".form-text");
     el.setAttribute('hintText', 'hint');
     await elementUpdated(el);
@@ -201,13 +201,13 @@ describe('when submitting a form', () => {
       <form>
         <sgds-input></sgds-input>
         <sgds-button type="submit"></sgds-button>
-    </form> 
+     </form> 
     `);
     const input = form.querySelector<SgdsInput>('sgds-input')!;
     const submitButton = form.querySelector<SgdsButton>('sgds-button')!;
     const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
 
-    submitButton.addEventListener('submit', submitHandler);
+    form.addEventListener('submit', submitHandler);
     submitButton.click();
     await waitUntil(() => submitHandler.calledOnce);
     expect(submitHandler).to.have.been.calledOnce;
@@ -261,5 +261,6 @@ describe('when resetting a form', () => {
     await input.updateComplete;
 
     expect(input.value).to.equal('');
+    
   });
 });
