@@ -25,9 +25,9 @@ describe("<sgds-checkbox>", () => {
     expect(checkbox).to.have.attribute("aria-disabled", "true");
   });
 
-  it("should be able to pass in inputId to attributes(id/for pair)", async () => {
+  it("should be able to pass in checkboxId to attributes(id/for pair)", async () => {
     const el = await fixture(
-      html`<sgds-checkbox inputId="checkbox-123"></sgds-checkbox>`
+      html`<sgds-checkbox checkboxId="checkbox-123"></sgds-checkbox>`
     );
     const input = el.shadowRoot?.querySelector("input");
     expect(input).to.have.attribute("id", "checkbox-123");

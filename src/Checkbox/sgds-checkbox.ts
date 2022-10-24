@@ -28,7 +28,7 @@ export class SgdsCheckbox extends SgdsElement {
   @property() name: string;
 
   /** For Id/For pair of the HTML form control. */
-  @property({ type: String, reflect: true }) inputId = genId("checkbox");
+  @property({ type: String, reflect: true }) checkboxId = genId("checkbox");
 
   /** For aria-label when there is no appropriate text label visible */
   @property({ type: String, reflect: true }) ariaLabel = "checkbox";
@@ -119,7 +119,7 @@ export class SgdsCheckbox extends SgdsElement {
             // "is-valid": this.required && this.valid,
           })}
           type="checkbox"
-          id=${ifDefined(this.inputId)}
+          id=${ifDefined(this.checkboxId)}
           aria-invalid=${this.invalid ? "true" : "false"}
           name=${ifDefined(this.name)}
           value=${ifDefined(this.value)}
@@ -133,7 +133,7 @@ export class SgdsCheckbox extends SgdsElement {
         />
         <label
           part="label"
-          for="${ifDefined(this.inputId)}"
+          for="${ifDefined(this.checkboxId)}"
           aria-label=${ifDefined(this.ariaLabel)}
           class="form-check-label"
           ><slot></slot
