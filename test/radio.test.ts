@@ -29,7 +29,7 @@ describe("<sgds-radio>", () => {
   });
 
   it("should be able to pass in value to attributes(id/for pair)", async () => {
-    const el = await fixture(html`<sgds-radio id="radio-123"></sgds-radio>`);
+    const el = await fixture(html`<sgds-radio radioId="radio-123"></sgds-radio>`);
     const input = el.shadowRoot?.querySelector("input");
     expect(input).to.have.attribute("id", "radio-123");
     const label = el.shadowRoot?.querySelector("label");
