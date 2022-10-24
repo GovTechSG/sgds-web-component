@@ -153,6 +153,19 @@ import "../lib/Textarea";
       },
       description: "The textarea's autocorrect attribute."
     },
+    resize:{
+      control:'select',
+      options: [
+        'none',
+        'vertical',
+      ],
+      defaultValue: "none",
+      table:{ 
+        category: "props",
+        type: { summary: "string" },
+      },
+      description: "Controls how the textarea can be resized."
+    },
     'sgds-change':{
       table:{ 
         category: "Events",
@@ -210,6 +223,7 @@ export const Template = (args) =>
       maxlength=${args.maxlength}
       ?spellcheck=${args.spellcheck}
       ?autocorrect=${args.autocorrect}
+      resize=${args.resize}
     >
     </sgds-textarea>
   `;
