@@ -14,3 +14,10 @@
 .form-group{
     line-height: var(--sgds-body-line-height);
 }
+
+.textarea-resize-none{
+    resize: none;
+}
+.textarea-resize-vertical {
+    resize: vertical;
+}

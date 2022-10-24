@@ -155,7 +155,8 @@ export class SgdsTextArea extends SgdsElement {
         class="${classMap({
           'sgds': true,
           'form-group': true,
-          [`${this.textareaClasses}`]: this.textareaClasses
+          [`${this.textareaClasses}`]: this.textareaClasses,
+          
         })}">
         <div class="d-flex justify-content-between">
           <label for=${ifDefined(this.textareaId)} class="form-label">${this.label}</label>
@@ -167,7 +168,10 @@ export class SgdsTextArea extends SgdsElement {
           { 
             'form-control': true,
             'is-invalid' : this.required && this.invalid,
-            'is-valid' : this.required && !this.invalid
+            'is-valid' : this.required && !this.invalid,
+            'textarea-resize-none': this.resize === 'none',
+            'textarea-resize-vertical': this.resize === 'vertical',
+            'textarea-resize-auto': this.resize === 'auto'
           })}"
           id=${ifDefined(this.textareaId)}
           name=${ifDefined(this.name)}
