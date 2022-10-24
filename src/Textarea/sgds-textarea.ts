@@ -22,8 +22,8 @@ export class SgdsTextArea extends SgdsElement {
   
   
   @property({ type: String, reflect: true }) label = "label";
-  @property({ type:String, reflect: true }) textareaId = genId("textarea","input");
-  @property({ type:String, reflect: true }) name;
+  @property({ type: String, reflect: true }) textareaId = genId("textarea","input");
+  @property({ type: String, reflect: true }) name;
   @property({ type: String, reflect: true }) textareaClasses?;
   @property({ type: String, reflect: true }) value = '';
   @property({ type: String, reflect: true}) minlength;
@@ -41,10 +41,10 @@ export class SgdsTextArea extends SgdsElement {
   @property({ type: Boolean, reflect: true }) invalid = false;
   /** Controls how the textarea can be resized. */
   @property() resize: 'none' | 'vertical' | 'auto' = 'vertical';
-  @property({reflect: true, type: Number}) valueLength = 0;
   /** The textarea's inputmode attribute. */
   @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
-
+  /* The textarea's autocorrect attribute. */
+  @property() autocorrect: string;
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = '';
@@ -170,6 +170,7 @@ export class SgdsTextArea extends SgdsElement {
             'is-valid' : this.required && !this.invalid
           })}"
           id=${ifDefined(this.textareaId)}
+          name=${ifDefined(this.name)}
           rows=${ifDefined(this.rows)}
           placeholder=${ifDefined(this.placeholder)}
           minlength=${ifDefined(this.minlength)}
@@ -181,6 +182,7 @@ export class SgdsTextArea extends SgdsElement {
           ?readonly=${this.readonly}
           ?required=${this.required}
           ?autofocus=${this.autofocus}
+          autocorrect=${ifDefined(this.autocorrect)}
           inputmode=${ifDefined(this.inputmode)}
           @keyup=${this.handleValueChange}
           @input=${()=> this.handleChange('sgds-input')}
