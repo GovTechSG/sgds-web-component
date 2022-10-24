@@ -1,8 +1,9 @@
-import { LitElement} from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state, query} from "lit/decorators.js";
 import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import {classMap} from 'lit/directives/class-map.js';
+import { FormSubmitController } from "../utils/form";
+import SgdsElement from "../utils/sgds-element";
 import styles from "./sgds-button.scss";
 
 export type ButtonVariant = 
@@ -10,8 +11,27 @@ export type ButtonVariant =
 "outline-primary" | "outline-secondary" | "outline-success" | "outline-danger" | "outline-warning" | "outline-info" | "outline-light" | "outline-dark"
 
 @customElement("sgds-button")
-export class SgdsButton extends LitElement {
+export class SgdsButton extends SgdsElement {
   static styles = styles;
+
+  @query('.btn') button: HTMLButtonElement | HTMLLinkElement;
+
+  private readonly formSubmitController = new FormSubmitController(this, {
+    form: (input: HTMLInputElement) => {
+      // Buttons support a form attribute that points to an arbitrary form, so if this attribute it set we need to query
+      // the form from the same root using its id
+      if (input.hasAttribute('form')) {
+        const doc = input.getRootNode() as Document | ShadowRoot;
+        const formId = input.getAttribute('form')!;
+        return doc.getElementById(formId) as HTMLFormElement;
+      }
+
+      // Fall back to the closest containing form
+      return input.closest('form');
+    }
+  });
+
+  @state() private hasFocus = false;
 
   /** The button's variant. */
   @property({ reflect: true }) variant: ButtonVariant = "primary";
@@ -38,6 +58,65 @@ export class SgdsButton extends LitElement {
   /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
   @property({ reflect: true }) download?: string;
 
+  /**
+   * The "form owner" to associate the button with. If omitted, the closest containing form will be used instead. The
+   * value of this attribute must be an id of a form in the same document or shadow root as the button.
+   */
+   @property() form: string;
+
+   /** Used to override the form owner's `action` attribute. */
+   @property({ attribute: 'formaction' }) formAction: string;
+ 
+   /** Used to override the form owner's `method` attribute.  */
+   @property({ attribute: 'formmethod' }) formMethod: 'post' | 'get';
+ 
+   /** Used to override the form owner's `novalidate` attribute. */
+   @property({ attribute: 'formnovalidate', type: Boolean }) formNoValidate: boolean;
+ 
+   /** Used to override the form owner's `target` attribute. */
+   @property({ attribute: 'formtarget' }) formTarget: '_self' | '_blank' | '_parent' | '_top' | string;
+
+  /** Sets focus on the button. */
+  focus(options?: FocusOptions) {
+    this.button.focus(options);
+  }
+
+  /** Simulates a click on the button. */
+  click() {
+    this.button.click();
+  }
+
+  /** Removes focus from the button. */
+  blur() {
+    this.button.blur();
+  }
+
+  handleBlur() {
+    this.hasFocus = false;
+    this.emit('sgds-blur');
+  }
+
+  handleFocus() {
+    this.hasFocus = true;
+    this.emit('sgds-focus');
+  }
+
+  handleClick(event: MouseEvent) {
+    if (this.disabled) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+
+    if (this.type === 'submit') {
+      this.formSubmitController.submit(this);
+    }
+
+    if (this.type === 'reset') {
+      this.formSubmitController.reset(this);
+    }
+  }
+
   render() {
     const isLink = this.href;
     const tag = isLink ? literal`a` : literal`button`;
@@ -61,6 +140,9 @@ export class SgdsButton extends LitElement {
         role=${ifDefined(isLink ? 'button': undefined )}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         tabindex=${this.disabled ? '-1' : '0'}
+        @click=${this.handleClick}
+        @focus=${this.handleFocus}
+        @blur=${this.handleBlur}
       >
         <slot></slot>
       </${tag}>
