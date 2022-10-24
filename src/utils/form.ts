@@ -1,3 +1,4 @@
+import type SgdsButton from '../Button/sgds-button';
 import type { ReactiveController, ReactiveControllerHost } from 'lit';
 
 const reportValidityOverloads: WeakMap<HTMLFormElement, () => boolean> = new WeakMap();
@@ -142,7 +143,7 @@ export class FormSubmitController implements ReactiveController {
     return true;
   }
 
-  doAction(type: 'submit' | 'reset', invoker?: HTMLInputElement) {
+  doAction(type: 'submit' | 'reset', invoker?: HTMLInputElement | SgdsButton) {
     if (this.form) {
       const button = document.createElement('button');
       button.type = type;
@@ -169,12 +170,12 @@ export class FormSubmitController implements ReactiveController {
   }
 
   /** Resets the form, restoring all the control to their default value */
-  reset(invoker?: HTMLInputElement) {
+  reset(invoker?: HTMLInputElement | SgdsButton) {
     this.doAction('reset', invoker);
   }
 
   /** Submits the form, triggering validation and form data injection. */
-  submit(invoker?: HTMLInputElement) {
+  submit(invoker?: HTMLInputElement | SgdsButton) {
     // Calling form.submit() bypasses the submit event and constraint validation. To prevent this, we can inject a
     // native submit button into the form, "click" it, then remove it to simulate a standard form submission.
     this.doAction('submit', invoker);

@@ -43,20 +43,14 @@ export function watch(propName: string, options?: WatchOptions) {
     if (propName in proto) {
       const propNameKey = propName as keyof ElemClass;
       // @ts-expect-error -- update is a protected property
-      proto.update = function (
-        this: ElemClass,
-        changedProps: Map<keyof ElemClass, ElemClass[keyof ElemClass]>
-      ) {
+      proto.update = function (this: ElemClass, changedProps: Map<keyof ElemClass, ElemClass[keyof ElemClass]>) {
         if (changedProps.has(propNameKey)) {
           const oldValue = changedProps.get(propNameKey);
           const newValue = this[propNameKey];
 
           if (oldValue !== newValue) {
             if (!resolvedOptions.waitUntilFirstUpdate || this.hasUpdated) {
-              (this[decoratedFnName] as unknown as UpdateHandler)(
-                oldValue,
-                newValue
-              );
+              (this[decoratedFnName] as unknown as UpdateHandler)(oldValue, newValue);
             }
           }
         }

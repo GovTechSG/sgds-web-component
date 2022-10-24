@@ -77,6 +77,85 @@ import "../lib/Button";
       control: 'text',
       table: { category: "props" },
       description: 'Tells the browser to download the linked file as this filename. Only used when `href` is set.'
+    },
+    form:{
+      control: 'text',
+      table: {
+         category: "props",
+         type: { summary: "string" },
+      },
+      description: 'The "form owner" to associate the button with. If omitted, the closest containing form will be used instead. The value of this attribute must be an id of a form in the same document or shadow root as the button. Read [more](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-form)'
+    },
+    formAction:{
+      control: 'text',
+      table: {
+         category: "props",
+         type: { summary: "string" },
+      },
+      description: "Used to override the form owner's `action` attribute. Read [more](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-formaction)"
+    },
+    formMethod:{
+      control: 'select',
+      options:['_get','_post'],
+      table: {
+         category: "props",
+         type: { summary: "string" },
+      },
+      description: "Used to override the form owner's `method` attribute.. Read [more](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-formmethod)"
+    },
+    formNoValidate:{
+      control: 'boolean',
+      table: {
+         category: "props",
+         type: { summary: "boolean" },
+      },
+      description: "Used to override the form owner's `novalidate` attribute. Read [more](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-formnovalidate)"
+    },
+    formTarget:{
+      control: 'select',
+      options:[
+        '_self' , '_blank' , '_parent' , '_top'
+      ],
+      table: {
+         category: "props",
+         type: { summary: "string" },
+      },
+      description: "Used to override the form owner's `target` attribute. Read [more](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-formtarget)"
+    },
+    click:{
+      table: { 
+        category: "Method",
+        type: { summary: "Method" },
+      },
+      description: 'Simulates a click on the button.'
+    },
+    blur:{
+      table: { 
+        category: "Method",
+        type: { summary: "Method" },
+      },
+      description: 'Removes focus from the button.'
+    },
+    focus:{
+      table: { 
+        category: "Method",
+        type: { summary: "Method" },
+      },
+      description: 'Sets focus on the button.'
+    },
+    'sgds-blur':{
+      table: { 
+        category: "Events",
+        type: { summary: "Event" },
+      },
+      description: 'Removes focus from the button.'
+    },
+    'sgds-focus':{
+      table: { 
+        category: "Events",
+        type: { summary: "Event" },
+      },
+      description: 'Sets focus on the button.'
     }
   }}
 />
