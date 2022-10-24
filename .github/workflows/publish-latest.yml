@@ -2,10 +2,8 @@ name: Publish Latest
 
 on:
   push:
-    branch:
-      - 'react-generator'
-    # tags:
-    #   - 'v[0-9]+.[0-9]+.[0-9]+'
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   publish:    
