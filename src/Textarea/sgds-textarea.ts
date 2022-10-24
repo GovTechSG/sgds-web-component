@@ -42,6 +42,8 @@ export class SgdsTextArea extends SgdsElement {
   /** Controls how the textarea can be resized. */
   @property() resize: 'none' | 'vertical' | 'auto' = 'vertical';
   @property({reflect: true, type: Number}) valueLength = 0;
+  /** The textarea's inputmode attribute. */
+  @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
@@ -95,6 +97,11 @@ export class SgdsTextArea extends SgdsElement {
     this.emit('sgds-blur');
   }
 
+   /** Selects all the text in the textarea. */
+   select() {
+    this.textarea.select();
+  }
+
   handleKeyDown(event: KeyboardEvent) {
     const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
 
@@ -142,10 +149,6 @@ export class SgdsTextArea extends SgdsElement {
     const wordCount = html`
     <div class="form-text">${this.value.length}/${this.maxlength}</div>
     `
-    // if hintText is defined
-    const withHintText = html`
-    <small id="${ifDefined(this.textareaId)}Help" class="text-muted form-text">${this.hintText}</small>
-    `
 
     return html`
       <div 
@@ -155,9 +158,10 @@ export class SgdsTextArea extends SgdsElement {
           [`${this.textareaClasses}`]: this.textareaClasses
         })}">
         <div class="d-flex justify-content-between">
-          <div for=${ifDefined(this.textareaId)} class="form-label">${this.label}</div>
-          ${this.maxlength || this.maxlength ? wordCount : undefined}
+          <label for=${ifDefined(this.textareaId)} class="form-label">${this.label}</label>
+          ${this.maxlength > "0" ? wordCount : undefined}
         </div>
+        
         <textarea 
           class="${classMap(
           { 
@@ -165,7 +169,7 @@ export class SgdsTextArea extends SgdsElement {
             'is-invalid' : this.required && this.invalid,
             'is-valid' : this.required && !this.invalid
           })}"
-          textareaId=${ifDefined(this.textareaId)}
+          id=${ifDefined(this.textareaId)}
           rows=${ifDefined(this.rows)}
           placeholder=${ifDefined(this.placeholder)}
           minlength=${ifDefined(this.minlength)}
@@ -177,6 +181,7 @@ export class SgdsTextArea extends SgdsElement {
           ?readonly=${this.readonly}
           ?required=${this.required}
           ?autofocus=${this.autofocus}
+          inputmode=${ifDefined(this.inputmode)}
           @keyup=${this.handleValueChange}
           @input=${()=> this.handleChange('sgds-input')}
           @change=${()=> this.handleChange('sgds-change')}
@@ -185,7 +190,8 @@ export class SgdsTextArea extends SgdsElement {
           @blur=${this.handleBlur}
         >
         </textarea>
-        <div id="${this.id}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
+        
+        <div id="${this.textareaId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
       </div>
     `;
 
