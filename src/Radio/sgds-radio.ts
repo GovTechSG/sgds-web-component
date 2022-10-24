@@ -19,7 +19,7 @@ export class SgdsRadio extends SgdsElement {
   @property() value: string;
 
   /** For id/for pair of the HTML form control. */
-  @property({ type: String, reflect: true }) inputId = genId("radio");
+  @property({ type: String, reflect: true }) radioId = genId("radio");
 
   /** Disables the radio. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -78,7 +78,7 @@ export class SgdsRadio extends SgdsElement {
             "form-check-input": true,
           })}
           type="radio"
-          id=${ifDefined(this.inputId)}
+          id=${ifDefined(this.radioId)}
           value=${ifDefined(this.value)}
           .checked=${live(this.checked)}
           ?disabled=${this.disabled}
@@ -88,7 +88,7 @@ export class SgdsRadio extends SgdsElement {
         />
         <label
           part="label"
-          for="${ifDefined(this.inputId)}"
+          for="${ifDefined(this.radioId)}"
           aria-label=${ifDefined(this.ariaLabel)}
           class="form-check-label"
           ><slot></slot
