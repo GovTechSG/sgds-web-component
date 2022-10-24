@@ -34,11 +34,6 @@ const SIZES = {
 };
 
 /**
- * @since 0.0.8
- * @status stable
- *
- *
- *
  * @slot - Pass in SgdsMainnavItem elements here.
  * @slot end - Elements in this slot will be positioned to the right end of .navbar-nav. Elements in this slot will also be included in collapsed menu.
  */

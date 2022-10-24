@@ -9,10 +9,6 @@ import { classMap } from "lit/directives/class-map.js";
 
 
 /**
- * @since 0.0.8
- * @status stable
- *
- * @dependency sl-spinner
  *
  * @event sgds-toggle - Emitted when the dropdown is clicked.
  *

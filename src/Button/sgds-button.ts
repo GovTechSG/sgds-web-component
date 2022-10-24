@@ -38,11 +38,6 @@ interface MyStepper extends SgdsStepper {
 }
 
 /**
- * @since 0.0.8
- * @status stable
- *
- *
- *
  * @slot - The button's label.
  */
 @customElement("sgds-button")

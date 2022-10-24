@@ -13,12 +13,6 @@ export interface ColumnLinks {
 }
 
 /**
- * @since 0.0.8
- * @status stable
- *
- *
- *
- *
  * @csspart footer-top - The component's footer-top section container.
  * @csspart footer-bottom - The component's footer-bottom section container.
  */

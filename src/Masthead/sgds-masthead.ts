@@ -3,10 +3,6 @@ import { customElement, property, state } from 'lit/decorators.js';
 import styles from './sgds-masthead.scss';
 import SgdsElement from '../utils/sgds-element';
 
-/**
- * @since 0.0.8
- * @status stable
- */
 
 @customElement('sgds-masthead')
 export class SgdsMasthead extends SgdsElement {

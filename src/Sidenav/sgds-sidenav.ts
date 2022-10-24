@@ -4,10 +4,6 @@ import { customElement, property } from "lit/decorators.js";
 import styles from "./sgds-sidenav.scss";
 
 /**
- * @since 0.0.8
- * @status stable
- *
- *
  * @slot - default slot for SgdsSidenavItem element.
  */
 @customElement("sgds-sidenav")
