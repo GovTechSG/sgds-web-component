@@ -163,10 +163,10 @@
             <div class="row">
                 <div class="col-6 mb-2">
                     <form>
-                        <sgds-input name="input1" id="input1" pattern="test" required></sgds-input>
+                        <sgds-input name="input1" id="input1" pattern="test"></sgds-input>
                         <sgds-checkbox name="cb1" id="cb1" value="lolol">I have read the terms and conditions.<span slot="feedback">You are required to check this.</span></sgds-checkbox>
-                        <sgds-checkbox name="cb2" id="cb2" value="lolol1" required>I have read the terms and conditions.<span slot="feedback">You are required to check this.</span></sgds-checkbox>
-                        <sgds-checkbox name="cb3" id="cb3" value="lolol2" disabled>I have read the terms and conditions.<span slot="feedback">You are required to check this.</span></sgds-checkbox>
+                        <sgds-checkbox name="cb2" id="cb2" value="lolol1" dirty required>I have read the terms and conditions.<span slot="feedback">You are required to check this.</span></sgds-checkbox>
+                        <sgds-checkbox name="cb3" id="cb3" value="lolol2" required>I have read the terms and conditions.<span slot="feedback">You are required to check this.</span></sgds-checkbox>
                         <sgds-button id="submitButton" type="submit">Submit</sgds-button>
                       </form> 
                 </div>
@@ -327,10 +327,10 @@
     </sgds-footer>
 </div>  
 <script>
-    // const cb = document.querySelector('sgds-checkbox#haha');
-    // cb.addEventListener('sgds-change', (e) => {
+    // const submitButton = document.querySelector('sgds-button#submitButton');
+    // submitButton.addEventListener('sgds-change', (e) => {
     //     e.preventDefault();
-    //     console.log(e);
+    //     console.log(e)
     // });
 
     // const input = document.querySelector('sgds-checkbox#hehe');

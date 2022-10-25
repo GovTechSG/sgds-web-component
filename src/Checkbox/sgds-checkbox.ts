@@ -51,15 +51,16 @@ export class SgdsCheckbox extends SgdsElement {
   /** Disables the checkbox (so the user can't check / uncheck it). */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  // /** Toggles display feedback */
-  // @property({ type: Boolean, reflect: true }) showFeedback = false;
+  /** Toggle between dirty and clean field, default is clean). */
+  @property({ type: Boolean, reflect: true }) dirty = false;
+
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("checked")
   defaultChecked = false;
 
   firstUpdated() {
-    this.invalid = !this.input.checkValidity();
+    if (this.dirty) this.invalid = !this.input.checkValidity();
   }
 
   /** Simulates a click on the checkbox. */
@@ -69,8 +70,12 @@ export class SgdsCheckbox extends SgdsElement {
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
+    if (!this.input.reportValidity()) {
+      this.invalid = !this.input.checkValidity();
+    }
     return this.input.reportValidity();
   }
+
 
   // handleClick() {
   //   this.checked = !this.checked;
@@ -79,7 +84,9 @@ export class SgdsCheckbox extends SgdsElement {
   // }
 
   handleChange() {
-    console.log('when this.click() is fired, input detects a change --> handleChange runs')
+    // console.log(
+    //   "when this.click() is fired, input detects a change --> handleChange runs"
+    // );
     this.checked = !this.checked;
     this.value = this.input.value;
     this.emit("sgds-change");
@@ -89,9 +96,11 @@ export class SgdsCheckbox extends SgdsElement {
     const hasModifier =
       event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
     if (event.key === "Enter" && !hasModifier) {
-      console.log('so here we are trying to mimick keydown enter event like a mousclick event')
-      this.click()
-    } 
+      // console.log(
+      //   "so here we are trying to mimick keydown enter event like a mousclick event"
+      // );
+      this.click();
+    }
   }
 
   @watch("disabled", { waitUntilFirstUpdate: true })
@@ -103,10 +112,11 @@ export class SgdsCheckbox extends SgdsElement {
 
   @watch("checked", { waitUntilFirstUpdate: true })
   handleStateChange() {
+    if(this.dirty)
     this.invalid = !this.input.checkValidity();
+    if(this.checked)
+    this.invalid = false;
   }
-
-
 
   render() {
     return html`
