@@ -10,8 +10,6 @@ import { defaultValue } from "../utils/defaultvalue";
 import { FormSubmitController } from "../utils/form";
 import genId from "../utils/generateId";
 import { watch } from "../utils/watch";
-
-
 @customElement("sgds-input")
 export class SgdsInput extends SgdsElement {
   @query('input.form-control') input: HTMLInputElement;
@@ -32,12 +30,12 @@ export class SgdsInput extends SgdsElement {
     | 'text'
     | 'time'
     | 'url' = 'text';
-  @property({ type: String, reflect: true }) label = "label";
-  @property({ type: String, reflect: true}) hintText;
+  @property({  reflect: true }) label : string;
+  @property({  reflect: true}) hintText : string;
   @property({ type:String, reflect: true }) inputId = genId("input", this.type);
-  @property({ type:String, reflect: true }) name;
-  @property({ type: String, reflect: true }) inputClasses?;
-  @property({ type: String, reflect: true }) iconName;
+  @property({  reflect: true }) name : string;
+  @property({  reflect: true }) inputClasses : string;
+  @property({  reflect: true }) iconName: string;
 
   @property({ type: String, reflect: true }) value = '';
   @property({ type: String, reflect: true}) minlength;
@@ -149,15 +147,14 @@ export class SgdsInput extends SgdsElement {
         @invalid=${this.handleInvalid}
         @focus=${this.handleFocus}
         @blur=${this.handleBlur}
-        
       >
       <div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
     `
     // if iconName is defined
     const inputWithIcon = html`
-      <div class="sgds form-control-group">
+      <div class="sgds form-control-group ${this.inputClasses}">
         <span class="form-control-icon">
-          <sl-icon name=${this.iconName}></sl-icon> 
+          <sl-icon name=${this.iconName}></sl-icon>
         </span>
         ${input}
       </div>
@@ -167,12 +164,15 @@ export class SgdsInput extends SgdsElement {
     <small id="${ifDefined(this.inputId)}Help" class="text-muted form-text">${this.hintText}</small>
     `
 
+    // if label is defined
+    const withLabel = html`
+    <label for=${ifDefined(this.inputId)} class="form-label">${this.label}</label>
+    `
+
     return html`
-      <div class="sgds form-group ${this.inputClasses}">
-        <label for=${ifDefined(this.inputId)} class="form-label">${this.label}</label>
+        ${this.label ? withLabel : undefined }
         ${this.hintText ? withHintText : undefined }
         ${this.iconName ? inputWithIcon : input}
-      </div>
     `;
   }
 }

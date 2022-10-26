@@ -2,7 +2,7 @@ import { SgdsInput } from '../src/Input/sgds-input';
 import type SgdsButton from '../src/Button/sgds-button';
 import '../src/Input';
 import '../src/Button';
-import { expect, fixture, html, oneEvent, waitUntil, assert,elementUpdated, aTimeout } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent, waitUntil, assert,elementUpdated } from '@open-wc/testing';
 import sinon from 'sinon';
 import { sendKeys } from '@web/test-runner-commands';
 
@@ -13,15 +13,13 @@ describe('sgds-input', () => {
       assert.instanceOf(el, SgdsInput)
   })
   it('renders with default values', async () => {
-    const el = await fixture(html`<sgds-input inputId="test-id"></sgds-input>`);
+    const el = await fixture(html`<sgds-input inputId="test-id" label="label"></sgds-input>`);
     assert.shadowDom.equal(
       el,
       `
-      <div class="sgds form-group ">
         <label class="form-label" for="test-id">label</label>
         <input type="text" class="form-control " id="test-id" placeholder="Placeholder" aria-invalid="false">
         <div class="invalid-feedback" id="test-id-invalid">default feedback</div>
-      </div>
     `
     );
   })
@@ -58,18 +56,13 @@ describe('sgds-input', () => {
     assert.shadowDom.equal(
       el,
       `
-      <div class="sgds form-group">
-        <label class="form-label" for="defaultID">label</label>
         <div class="sgds form-control-group">
           <span class="form-control-icon">
             <sl-icon name="search"></sl-icon> 
           </span>
-          
           <input type="text" class="form-control " id="defaultID" placeholder="Placeholder" aria-invalid="false">
           <div class="invalid-feedback" id="defaultID-invalid">default feedback</div>
-      
         </div>
-      </div>
       `
     );
   })
