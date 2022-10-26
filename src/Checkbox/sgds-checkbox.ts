@@ -52,7 +52,7 @@ export class SgdsCheckbox extends SgdsElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Toggle between dirty and clean field, default is clean). */
-  @property({ type: Boolean, reflect: true }) dirty = false;
+  @property({ type: Boolean, reflect: true }) clean = false;
 
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
@@ -60,7 +60,7 @@ export class SgdsCheckbox extends SgdsElement {
   defaultChecked = false;
 
   firstUpdated() {
-    if (this.dirty) this.invalid = !this.input.checkValidity();
+    if (!this.clean) this.invalid = !this.input.checkValidity();
   }
 
   /** Simulates a click on the checkbox. */
@@ -112,7 +112,7 @@ export class SgdsCheckbox extends SgdsElement {
 
   @watch("checked", { waitUntilFirstUpdate: true })
   handleStateChange() {
-    if(this.dirty)
+    if(!this.clean)
     this.invalid = !this.input.checkValidity();
     if(this.checked)
     this.invalid = false;
