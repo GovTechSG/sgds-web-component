@@ -39,6 +39,7 @@ export class SgdsTextArea extends SgdsElement {
   /** Makes the input readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
   @property({ type: Boolean, reflect: true }) invalid = false;
+  @property({ type: Boolean, reflect: true }) valid = false;
   /** Controls how the textarea can be resized. */
   @property() resize: 'none' | 'vertical' | 'auto' = 'vertical';
   /** The textarea's inputmode attribute. */
@@ -62,10 +63,6 @@ export class SgdsTextArea extends SgdsElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.resizeObserver.unobserve(this.textarea);
-  }
-
-  firstUpdated() {
-    this.invalid = !this.textarea.checkValidity();
   }
 
   /** Sets focus on the textarea. */
@@ -140,6 +137,7 @@ export class SgdsTextArea extends SgdsElement {
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
     this.invalid = !this.textarea.checkValidity();
+    this.valid = this.textarea.checkValidity()
     this.updateComplete.then(() => this.setTextareaHeight());
   }
 
@@ -151,14 +149,8 @@ export class SgdsTextArea extends SgdsElement {
     `
 
     return html`
-      <div 
-        class="${classMap({
-          'sgds': true,
-          'form-group': true,
-          [`${this.textareaClasses}`]: this.textareaClasses,
-          
-        })}">
-        <div class="d-flex justify-content-between">
+
+        <div class="text-area-label-wrapper d-flex justify-content-between">
           <label for=${ifDefined(this.textareaId)} class="form-label">${this.label}</label>
           ${this.maxlength > "0" ? wordCount : undefined}
         </div>
@@ -167,11 +159,12 @@ export class SgdsTextArea extends SgdsElement {
           class="${classMap(
           { 
             'form-control': true,
-            'is-invalid' : this.required && this.invalid,
-            'is-valid' : this.required && !this.invalid,
+            'is-invalid' : this.invalid,
+            'is-valid' : this.valid,
             'textarea-resize-none': this.resize === 'none',
             'textarea-resize-vertical': this.resize === 'vertical',
-            'textarea-resize-auto': this.resize === 'auto'
+            'textarea-resize-auto': this.resize === 'auto',
+            [`${this.textareaClasses}`]: this.textareaClasses,
           })}"
           id=${ifDefined(this.textareaId)}
           name=${ifDefined(this.name)}
@@ -198,10 +191,11 @@ export class SgdsTextArea extends SgdsElement {
         </textarea>
         
         <div id="${this.textareaId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
-      </div>
+
     `;
 
   }
 }
 
 export default SgdsTextArea;
+

@@ -9,15 +9,15 @@
 
 :host{
     --sgds-body-line-height: 2rem;
+    & > .text-area-label-wrapper{
+        line-height: var(--sgds-body-line-height);
+    }
+
+    .textarea-resize-none{
+        resize: none;
+    }
+    .textarea-resize-vertical {
+        resize: vertical;
+    }
 }
 
-.form-group{
-    line-height: var(--sgds-body-line-height);
-}
-
-.textarea-resize-none{
-    resize: none;
-}
-.textarea-resize-vertical {
-    resize: vertical;
-}
