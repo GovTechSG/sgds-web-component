@@ -1,3 +1,7 @@
 
 @import '../utils/base.scss';
 @import "~@govtechsg/sgds/sass/buttons"; 
+
+:host {
+    display: inline-block;
+  }
