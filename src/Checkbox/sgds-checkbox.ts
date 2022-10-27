@@ -25,7 +25,7 @@ export class SgdsCheckbox extends SgdsElement {
   });
 
   /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
-  @property() name: string;
+  @property({reflect: true }) name: string;
 
   /** For Id/For pair of the HTML form control. */
   @property({ type: String, reflect: true }) checkboxId = genId("checkbox");
@@ -34,7 +34,7 @@ export class SgdsCheckbox extends SgdsElement {
   @property({ type: String, reflect: true }) ariaLabel = "checkbox";
 
   /** Manually style the input as valid */
-  // @property({ type: Boolean, reflect: true }) valid = false;
+  @property({ type: Boolean, reflect: true }) valid = false;
 
   /** Manually style the input as invalid */
   @property({ type: Boolean, reflect: true }) invalid = false;
@@ -51,17 +51,10 @@ export class SgdsCheckbox extends SgdsElement {
   /** Disables the checkbox (so the user can't check / uncheck it). */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** Toggle between dirty and clean field, default is clean). */
-  @property({ type: Boolean, reflect: true }) clean = false;
-
-
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("checked")
   defaultChecked = false;
 
-  firstUpdated() {
-    if (!this.clean) this.invalid = !this.input.checkValidity();
-  }
 
   /** Simulates a click on the checkbox. */
   click() {
@@ -75,13 +68,6 @@ export class SgdsCheckbox extends SgdsElement {
     }
     return this.input.reportValidity();
   }
-
-
-  // handleClick() {
-  //   this.checked = !this.checked;
-  //   this.value = this.input.value;
-  //   this.emit("sgds-click");
-  // }
 
   handleChange() {
     // console.log(
@@ -112,10 +98,8 @@ export class SgdsCheckbox extends SgdsElement {
 
   @watch("checked", { waitUntilFirstUpdate: true })
   handleStateChange() {
-    if(!this.clean)
     this.invalid = !this.input.checkValidity();
-    if(this.checked)
-    this.invalid = false;
+    if (this.required) this.valid = this.input.checkValidity();
   }
 
   render() {
@@ -125,8 +109,8 @@ export class SgdsCheckbox extends SgdsElement {
           part="control"
           class=${classMap({
             "form-check-input": true,
-            "is-invalid": this.required && this.invalid,
-            // "is-valid": this.required && this.valid,
+            "is-invalid": this.invalid,
+            "is-valid": this.valid,
           })}
           type="checkbox"
           id=${ifDefined(this.checkboxId)}
@@ -148,13 +132,12 @@ export class SgdsCheckbox extends SgdsElement {
           class="form-check-label"
           ><slot></slot
         ></label>
-        ${this.required && this.invalid
+        ${this.invalid
           ? html`<slot
               name="feedback"
               part="feedback"
               class=${classMap({
                 "invalid-feedback": true,
-                // "valid-feedback": this.valid,
               })}
             ></slot>`
           : undefined}
