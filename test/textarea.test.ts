@@ -15,14 +15,12 @@ describe('sgds-textarea', () => {
     assert.shadowDom.equal(
       el,
       `
-      <div class=" sgds form-group ">
-        <div class="d-flex justify-content-between">
-          <label class="form-label" for="test">label</label>
-          <div class="form-text">0/10</div>
-        </div>
-        <textarea class="form-control is-invalid" id="test" rows="4" placeholder="Placeholder" maxlength="10" aria-invalid="true" spellcheck="false" required=""></textarea>
-        <div class="invalid-feedback" id="test-invalid">Do not leave blank</div>
+      <div class="text-area-label-wrapper d-flex justify-content-between">
+        <label class="form-label" for="test">label</label>
+        <div class="form-text">0/10</div>
       </div>
+      <textarea class=" form-control textarea-resize-vertical " id="test" rows="4" placeholder="Placeholder" maxlength="10" aria-invalid="false" spellcheck="false" required=""></textarea>
+      <div class="invalid-feedback" id="test-invalid">Do not leave blank</div>
     `
     );
   })
@@ -52,14 +50,13 @@ describe('sgds-textarea', () => {
 describe('when using constraint validation', () => {
   it('should be valid by default', async () => {
     const el = await fixture<SgdsTextArea>(html` <sgds-textarea></sgds-textarea> `);
-
     expect(el.invalid).to.be.false;
   });
 
-  it('should be invalid when required and empty', async () => {
+  it('should be valid when required and empty by default', async () => {
     const el = await fixture<SgdsTextArea>(html` <sgds-textarea required></sgds-textarea> `);
 
-    expect(el.invalid).to.be.true;
+    expect(el.invalid).to.be.false;
   });
 
   it('should be invalid when required and after removing disabled ', async () => {
