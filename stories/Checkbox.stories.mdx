@@ -25,7 +25,7 @@ import { SgdsCheckbox } from "../lib/Checkbox";
       description:
         "Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name.",
     },
-    inputId: {
+    checkboxId: {
       control: "text",
       description: "For label/input value pair",
       table: {
@@ -50,7 +50,7 @@ import { SgdsCheckbox } from "../lib/Checkbox";
       control: "boolean",
       defaultValue: false,
       description:
-        "Disables the checkbox '(so the user can't check / uncheck it)'",
+        "Disables the checkbox",
       table: {
         category: "props",
         defaultValue: { summary: false },
@@ -62,7 +62,7 @@ import { SgdsCheckbox } from "../lib/Checkbox";
     required: {
       control: "boolean",
       defaultValue: false,
-      description: "Makes the checkbox a required field. On first update renders the invalid state",
+      description: "Makes the checkbox a required field. Only renders validation state ontouch or upon form submission ",
       table: {
         category: "props",
         defaultValue: { summary: false },
@@ -97,6 +97,19 @@ import { SgdsCheckbox } from "../lib/Checkbox";
         },
       },
     },
+     valid: {
+      control: "boolean",
+      defaultValue: false,
+      description:
+        "Manually style the input as valid.",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     defaultSlot: {
       name: "default",
       control: "text",
@@ -112,7 +125,7 @@ import { SgdsCheckbox } from "../lib/Checkbox";
     feedbackSlot: {
       control: "text",
       defaultValue: "Feedback text here",
-      description: "feedback slot for div element",
+      description: "feedback slot for invalid state",
       table: {
         category: "slots",
         type: {
@@ -124,7 +137,7 @@ import { SgdsCheckbox } from "../lib/Checkbox";
       name: "sgds-change",
       control: "disable",
       description:
-        "Emitted when checkbox is clicked. Refer to canvas mode to view event handler in action.",
+        "Emitted when checkbox is checked/unchecked. Refer to canvas mode to view event handler in action.",
       table: {
         category: "events",
       },
@@ -162,8 +175,9 @@ export const Template = (args) => {
       ?required=${args.required}
       .checked=${args.checked}
       .invalid=${args.invalid}
-      .inputId=${args.inputId}
-      >${args.defaultSlot}<div slot="feedback">${args.feedbackSlot}<div></sgds-checkbox
+      .valid=${args.valid}
+      .checkboxId=${args.checkboxId}
+      >${args.defaultSlot}<span slot="feedback">${args.feedbackSlot}<span></sgds-checkbox
     >
   `;
 };
