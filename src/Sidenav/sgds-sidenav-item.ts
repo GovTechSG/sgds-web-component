@@ -5,6 +5,8 @@ import styles from "./sgds-sidenav-item.scss";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { Collapse } from "bootstrap";
 import genId from "../utils/generateId";
+import { classMap } from "lit/directives/class-map.js";
+
 @customElement("sgds-sidenav-item")
 export class SgdsSidenavItem extends SgdsElement {
   static styles = styles;
@@ -22,15 +24,18 @@ export class SgdsSidenavItem extends SgdsElement {
   href = "";
 
   @property({ type: String })
-  collapseId = genId('sidenav','collapse');
+  collapseId = genId("sidenav", "collapse");
 
   @property({ type: String })
-  buttonId = genId('sidenav','button');
+  buttonId = genId("sidenav", "button");
+
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
 
   private index = "-1";
 
   private _onClick() {
-    this.emit('sgds-toggle', {detail : {index: this.index}})
+    this.emit("sgds-toggle", { detail: { index: this.index } });
   }
 
   private _onClickButton() {
@@ -84,11 +89,16 @@ export class SgdsSidenavItem extends SgdsElement {
   render() {
     const withMenuTemplate = html` <button
         @click=${() => this._onClickButton()}
-        class="collapsed sidenav-btn ${this.active ? "active" : null}"
-        aria-expanded="${this.active}" 
+        class="collapsed sidenav-btn ${classMap({
+          disabled: this.disabled,
+          active: this.active,
+        })} "
+        aria-expanded="${this.active}"
         aria-controls="${this.collapseId}"
         aria-selected="${this.active}"
         id="${this.buttonId}"
+        ?disabled=${this.disabled}
+        aria-disabled=${this.disabled ? "true" : "false"}
       >
         <slot name="title"></slot>
         <svg
@@ -115,9 +125,14 @@ export class SgdsSidenavItem extends SgdsElement {
       <a
         href=${this.href}
         @click=${() => this._onClickLink()}
-        class="sidenav-btn ${this.active ? "active" : null}"
+        class="sidenav-btn ${classMap({
+          disabled: this.disabled,
+          active: this.active,
+        })} "
         aria-selected="${this.active}"
-        >
+        ?disabled=${this.disabled}
+        aria-disabled=${this.disabled ? "true" : "false"}
+      >
         <slot name="title"></slot>
       </a>
     `;

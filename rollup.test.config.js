@@ -3,6 +3,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import postcss from "rollup-plugin-postcss";
 import litcss from "rollup-plugin-postcss-lit";
 import path from "path";
+import replace from '@rollup/plugin-replace'; 
 const packageJson = require("./package.json");
 const fs = require('fs');
 
@@ -24,6 +25,9 @@ export default [
     plugins: [
       resolve({
         browser: true,
+      }),
+      replace({
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       }),
       typescript({
         tsconfig: './tsconfig.test.json'
