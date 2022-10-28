@@ -170,8 +170,11 @@
             <div class="row">
                 <div class="col-6 mb-2">
                     <form>
-                        <sgds-input required pattern="test" value="a"></sgds-input>
-                        <sgds-button type="submit">Submit</sgds-button>
+                        <sgds-input name="input1" id="input1" pattern="test" required></sgds-input>
+                        <sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are required to check this.</span></sgds-checkbox>
+                        <sgds-checkbox name="cb2" id="cb2" value="lolol1" required>with required<span slot="feedback">You are required to check this.</span></sgds-checkbox>
+                        <sgds-checkbox name="cb2" id="cb2" value="lolol1" required disabled>disabled<span slot="feedback">You are required to check this.</span></sgds-checkbox>
+                        <sgds-button id="submitButton" type="submit">Submit</sgds-button>
                       </form> 
                 </div>
             </div>
@@ -331,12 +334,56 @@
     </sgds-footer>
 </div>  
 <script>
-    const button = document.querySelector('sgds-button[variant="primary"');
-    button.addEventListener('submit', submitHandler);
-    function submitHandler(event){
-        event.preventDefault();
-        alert("submitted")
-    }
+    // const submitButton = document.querySelector('sgds-button#submitButton');
+    // submitButton.addEventListener('sgds-change', (e) => {
+    //     e.preventDefault();
+    //     console.log(e)
+    // });
+
+    // const input = document.querySelector('sgds-checkbox#hehe');
+    // input.addEventListener('sgds-change', (e) => {
+    //     e.preventDefault();
+    //     console.log(e);
+    // }); 
+
+// } ;
+
+
+// grab reference to form
+
+const formElem = document.querySelector('form');
+
+// submit handler
+
+formElem.addEventListener('submit', (e) => {
+  // on form submission, prevent default
+  e.preventDefault();
+
+//   console.log(formElem.shadowRoot?.querySelector('input[name="input1"]'));
+//   console.log(formElem.shadowRoot?.querySelector('input[name="cb1"]')); 
+//   console.log(formElem.shadowRoot?.querySelector('input[name="cb2"]')); 
+
+  // construct a FormData object, which fires the formdata event
+  const formData = new FormData(formElem);
+  // formdata gets modified by the formdata event
+  console.log(formData.get('input1')); 
+  console.log(formData.get('cb1')); 
+  console.log(formData.get('cb2'));
+});
+
+// formdata handler to retrieve data
+
+// formElem.addEventListener('formdata', (e) => {
+//   console.log('formdata fired');
+
+//   // modifies the form data
+//   const formData = e.formData;
+//   // formdata gets modified by the formdata event
+//   formData.set('cb1', formData.get('cb1').toUpperCase());
+//   formData.set('cb2', formData.get('cb2').toUpperCase());
+// });
+
+ 
 </script>
 </body>
 
