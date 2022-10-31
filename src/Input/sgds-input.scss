@@ -11,6 +11,10 @@
     --sgds-body-line-height: 2rem;
 }
 
-.form-group{
-    line-height: var(--sgds-body-line-height);
+.form{
+    &-label,
+    &-text
+    {
+        line-height: var(--sgds-body-line-height);
+    }
 }
