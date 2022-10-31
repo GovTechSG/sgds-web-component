@@ -12,12 +12,14 @@ import { ButtonElement } from "../lib/Button";
   }}
 />
 
-export const Template = (args) =>
-  html`
+export const Template = (args) => {
+ return html`
     <button-element .variant=${args.variant} .classes=${args.classes}>
       Blaze it
     </button-element>
   `;
+}
+
 
 # Sample
 

@@ -25,6 +25,10 @@
     border-left-color: var(--sidenav-theme-color);
     font-weight: $font-weight-bold;
   }
+  &.disabled{
+      opacity: 0.65;
+      pointer-events: none;
+  }
   svg {
     &.bi-chevron-down {
       @extend .ms-auto;

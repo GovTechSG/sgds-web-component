@@ -24,7 +24,8 @@ import { partDescription } from "./common";
       },
     },
     default: {
-      description: "default slot of SgdsSidenavItem. Pass in SideNavItem elements here",
+      description:
+        "default slot of SgdsSidenavItem. Pass in SideNavItem elements here",
       table: {
         category: "slot: SgdsSidenav",
       },
@@ -74,6 +75,15 @@ import { partDescription } from "./common";
         type: {
           summary: "string",
         },
+      },
+    },
+    disabledSNI: {
+      name: "disabled",
+      control: "boolean",
+      description: "Disables the SgdsSidenavItem",
+      table: {
+        category: "props: SgdsSidenavItem",
+        defaultValue: { summary: "false" },
       },
     },
     openItem: {
@@ -130,6 +140,15 @@ import { partDescription } from "./common";
         category: "slot: SgdsSidenavLink",
       },
     },
+    disabledSNL: {
+      name: "disabled",
+      control: "boolean",
+      description: "Disables the SgdsSidenavLink",
+      table: {
+        category: "props: SgdsSidenavLink",
+        defaultValue: { summary: "false" },
+      },
+    },
   }}
 />
 
@@ -141,17 +160,35 @@ export const Template = ({
   hrefSNL,
   collapseId,
   buttonId,
+  disabledSNL,
+  disabledSNI,
 }) => {
   return html`
     <sgds-sidenav .alwaysOpen=${alwaysOpen}>
-      <sgds-sidenav-item .active=${active} .href=${href} .collapseId=${collapseId} .buttonId=${buttonId}>
-        <span slot="title"> <sl-icon name="stack"></sl-icon> SideNav Item #1 (control by Argstable) </span>
-        <sgds-sidenav-link .href=${hrefSNL} .active=${activeSNL}>sgds-sidenav-link (control by Argstable)</sgds-sidenav-link>
+      <sgds-sidenav-item
+        .active=${active}
+        .href=${href}
+        .collapseId=${collapseId}
+        .buttonId=${buttonId}
+        .disabled=${disabledSNI}
+      >
+        <span slot="title">
+          <sl-icon name="stack"></sl-icon> SideNav Item #1 (control by
+          Argstable)
+        </span>
+        <sgds-sidenav-link
+          .href=${hrefSNL}
+          .active=${activeSNL}
+          .disabled=${disabledSNL}
+          >sgds-sidenav-link (control by Argstable)</sgds-sidenav-link
+        >
         <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
         <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
       </sgds-sidenav-item>
       <sgds-sidenav-item>
-        <span slot="title"> <sl-icon name="stack"></sl-icon>SideNav Item #2</span>
+        <span slot="title">
+          <sl-icon name="stack"></sl-icon>SideNav Item #2</span
+        >
         <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
         <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
         <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
@@ -169,7 +206,7 @@ export const Template = ({
   <Story name="Basic">{Template.bind({})}</Story>
 </Canvas>
 
-*Example is using shoelace's icon. See [here](https://shoelace.style/components/icon)*
+_Example is using shoelace's icon. See [here](https://shoelace.style/components/icon)_
 
 ## API
 
@@ -196,7 +233,9 @@ SgdsSidenavItem.closeItem();
 
 //dom method
 
-const SgdsSidenavItemEl = document.querySelector("sgds-sidenav-item#specificId");
+const SgdsSidenavItemEl = document.querySelector(
+  "sgds-sidenav-item#specificId"
+);
 SgdsSidenavItemEl.openItem();
 SgdsSidenavItemEl.closeItem();
 ```
