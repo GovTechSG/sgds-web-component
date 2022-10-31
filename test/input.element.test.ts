@@ -119,13 +119,6 @@ describe("sgds-input", () => {
 
     expect(submitHandler).to.have.been.calledOnce;
   });
-
-  // it('should be invalid when the pattern does not match', async () => {
-  //   const el = await fixture<SgdsInput>(html` <sgds-input pattern="test"></sgds-input> `);
-  //   expect(el.invalid).to.be.false;
-  //   expect(el.valid).to.be.false;
-  //   expect(el.reportValidity()).to.be.true;
-  // });
 });
 describe("when using constraint validation", () => {
   it("by default, invalid and valid should be false", async () => {

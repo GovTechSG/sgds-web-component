@@ -144,7 +144,7 @@ export class SgdsButton extends SgdsElement {
         @focus=${this.handleFocus}
         @blur=${this.handleBlur}
       >
-        <slot></slot>
+          <slot></slot>
       </${tag}>
     `;
   }
