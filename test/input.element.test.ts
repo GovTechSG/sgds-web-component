@@ -1,5 +1,5 @@
 import { SgdsInput } from '../src/Input/sgds-input';
-import type SgdsButton from '../src/Button/sgds-button';
+import { SgdsButton } from '../src/Button/sgds-button';
 import '../src/Input';
 import '../src/Button';
 import { expect, fixture, html, oneEvent, waitUntil, assert,elementUpdated } from '@open-wc/testing';
