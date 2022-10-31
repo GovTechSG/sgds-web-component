@@ -27,7 +27,7 @@ export class SgdsTextArea extends SgdsElement {
   @property({ type: String, reflect: true }) textareaClasses?;
   @property({ type: String, reflect: true }) value = '';
   @property({ type: String, reflect: true}) minlength;
-  @property({ type: Number, reflect: true}) maxlength;
+  @property({ type: String, reflect: true}) maxlength;
   @property({ type: Boolean, reflect: true}) spellcheck = false;
    /** The number of rows to display by default. */
   @property({ type: Number }) rows = 4;
@@ -152,7 +152,7 @@ export class SgdsTextArea extends SgdsElement {
 
         <div class="text-area-label-wrapper d-flex justify-content-between">
           <label for=${ifDefined(this.textareaId)} class="form-label">${this.label}</label>
-          ${this.maxlength > "0" ? wordCount : undefined}
+          ${parseInt(this.maxlength) > 0 ? wordCount : undefined}
         </div>
         
         <textarea 
