@@ -53,14 +53,11 @@ export class SgdsInput extends SgdsElement {
   @property({ type: Boolean, reflect: true }) readonly = false;
 
   @property({ type: Boolean, reflect: true }) invalid = false;
+  @property({ type: Boolean, reflect: true }) valid = false;
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = '';
-
-  firstUpdated() {
-    this.invalid = !this.input.checkValidity();
-  }
 
   /** Sets focus on the input. */
   focus(options?: FocusOptions) {
@@ -115,6 +112,7 @@ export class SgdsInput extends SgdsElement {
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
     this.invalid = !this.input.checkValidity();
+    this.valid = this.input.checkValidity()
   }
 
   render() {
@@ -123,8 +121,8 @@ export class SgdsInput extends SgdsElement {
         class="form-control 
         ${classMap(
           { 
-            'is-invalid' : this.required && this.invalid,
-            'is-valid' : this.required && !this.invalid,
+            'is-invalid' : this.invalid,
+            'is-valid' : this.valid,
             [`${this.inputClasses}`]: this.inputClasses
           })}
         " 
