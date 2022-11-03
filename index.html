@@ -14,26 +14,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
-    <script
-    type="module"
-    id="dev-console-gateway"
-    src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"
-  ></script>
-  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script>
+    <script type="module" id="dev-console-gateway"
+        src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script type="module"
+        src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script>
     <style>
         * {
             font-family: "bootstrap-icons", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         }
+
         body {
-            margin:0;
-            padding:0;
+            margin: 0;
+            padding: 0;
             display: flex;
             min-height: 100vh;
             flex-direction: column;
         }
 
-        sgds-footer::part(footer-bottom) {  
+        sgds-footer::part(footer-bottom) {
             background-color: red;
         }
 
@@ -45,16 +44,16 @@
             color: red;
         } */
 
-        .grid{
+        .grid {
             display: grid;
-            grid-template-areas: 
-            "masthead masthead masthead "
-            "nav nav nav "
-            "sidenav main main "
-            "footer footer footer ";
-            grid-template-columns: 240px repeat(2,1fr);
+            grid-template-areas:
+                "masthead masthead masthead "
+                "nav nav nav "
+                "sidenav main main "
+                "footer footer footer ";
+            grid-template-columns: 240px repeat(2, 1fr);
             width: 100%;
-        }   
+        }
 
         sgds-sidenav-item {
             --sidenav-theme-color: orange;
@@ -65,46 +64,51 @@
             --sgds-masthead-text-color: red;
             grid-area: masthead;
         }
-        sgds-sidenav{
+
+        sgds-sidenav {
             grid-area: sidenav;
 
         }
-        sgds-mainnav{
+
+        sgds-mainnav {
             grid-area: nav;
         }
-        main{
+
+        main {
             padding: 1rem;
             grid-area: main;
         }
-        sgds-footer{
+
+        sgds-footer {
             grid-area: footer;
         }
+
         sgds-mainnav-item {
-            --mainnav-item-theme-color:red;
+            --mainnav-item-theme-color: red;
         }
-        sgds-button{
+
+        sgds-button {
             flex: 1;
-        } 
+        }
     </style>
     <script src="lib/index.js"></script>
 </head>
-<script>
-</script>
+
 
 <body class="d-flex flex-column min-vh-100">
-    <div>
-        <sgds-masthead></sgds-masthead>
-        <sgds-masthead fluid></sgds-masthead>
-    </div>
     
+    <sgds-masthead fluid></sgds-masthead>
+    
+    <div class="grid">
     <sgds-mainnav>
         <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
         <sgds-mainnav-item href="#">Home</sgds-mainnav-item>
         <sgds-mainnav-item href="#">About</sgds-mainnav-item>
         <sgds-mainnav-item href="#" slot="end" class="test test2">Info</sgds-mainnav-item>
         <sgds-mainnav-item href="#" slot="end">Contact Us</sgds-mainnav-item>
-            <sgds-button slot="end">Login</sgds-button>
-        <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px"></dev-console-widget>
+        <sgds-button slot="end">Login</sgds-button>
+        <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px">
+        </dev-console-widget>
     </sgds-mainnav>
     <sgds-sidenav class="mt-3" id="test-id">
         <sgds-sidenav-item active>
@@ -116,45 +120,18 @@
             <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
         </sgds-sidenav-item>
         <sgds-sidenav-item title="Test title 2">
-            <span slot="title"><sl-icon name="stack"></sl-icon> Title</span>
+            <span slot="title">
+                <sl-icon name="stack"></sl-icon> Title
+            </span>
             <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
             <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
             <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
 
-    
-    <div class="container">
-        <br />
-        <sgds-sidenav class="mt-3" id="test-id">
-            <sgds-sidenav-item active>
-                <span slot="title">
-                    <sl-icon name="stack"></sl-icon> Title
-                </span>
-                <sgds-sidenav-link href="https://google.com" active>first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-            </sgds-sidenav-item>
-            <sgds-sidenav-item title="Test title 2" active>
-                <span slot="title">Title</span>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+        </sgds-sidenav-item>
+    </sgds-sidenav>
 
-            </sgds-sidenav-item>
-            <sgds-sidenav-item title="Test title 2">
-                <span slot="title">Title</span>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-                <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-            </sgds-sidenav-item>
-            <sgds-sidenav-item title="Test title 2" href="#">
-                <span slot="title">Title</span>
-            </sgds-sidenav-item>
-            <sgds-sidenav-item title="Test title 2" href="#">
-                <span slot="title">Title</span>
-            </sgds-sidenav-item>
-        </sgds-sidenav>
-        <br />
-        
+
+    <main>
         <div class="container">
             <h2>Button</h2>
             <p>Button size</p>
@@ -185,26 +162,30 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="container">
             <h2>Input</h2>
             <div class="row">
                 <div class="col-6 mb-2">
                     <form>
                         <sgds-input name="input1" id="input1" pattern="test" required></sgds-input>
-                        <sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are required to check this.</span></sgds-checkbox>
-                        <sgds-checkbox name="cb2" id="cb2" value="lolol1" required>with required<span slot="feedback">You are required to check this.</span></sgds-checkbox>
-                        <sgds-checkbox name="cb2" id="cb2" value="lolol1" required disabled>disabled<span slot="feedback">You are required to check this.</span></sgds-checkbox>
+                        <sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are
+                                required to check this.</span></sgds-checkbox>
+                        <sgds-checkbox name="cb2" id="cb2" value="lolol1" required>with required<span
+                                slot="feedback">You are required to check this.</span></sgds-checkbox>
+                        <sgds-checkbox name="cb2" id="cb2" value="lolol1" required disabled>disabled<span
+                                slot="feedback">You are required to check this.</span></sgds-checkbox>
                         <sgds-button id="submitButton" type="submit">Submit</sgds-button>
-                        <sgds-input label="Name" iconName="stack" hintText="this is a hint" required pattern="test" value="a"></sgds-input>
+                        <sgds-input label="Name" iconName="stack" hintText="this is a hint" required pattern="test"
+                            value="a"></sgds-input>
                         <sgds-button type="submit">Submit</sgds-button>
-                      </form> 
+                    </form>
                 </div>
                 <div class="col-6 mb-2">
                     <form>
                         <sgds-input inputId="test-id" label="label"></sgds-input>
-                     <sgds-button type="submit">Submit</sgds-button>
-                      </form> 
+                        <sgds-button type="submit">Submit</sgds-button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -212,14 +193,14 @@
             <h2>Quantity Toggle</h2>
             <div class="row">
                 <div class="col is-6">
-                    <sgds-quantitytoggle step="1" count="5" quanttoggleId="heyhey"></sgds-quantitytoggle>
+                    <sgds-quantitytoggle count="5" quanttoggleId="heyhey"></sgds-quantitytoggle>
                     <sgds-quantitytoggle step="10" count="5" disabled></sgds-quantitytoggle>
                     <sgds-quantitytoggle step="10" count="5"></sgds-quantitytoggle>
                 </div>
             </div>
         </div>
-
     </main>
+    </div>
     <sgds-footer description="this is a prop description" title="Singapore Government Design System"
         lastUpdatedDate="08 Feb 2022" links='[
         {
@@ -371,45 +352,45 @@
         }
       ]'>
     </sgds-footer>
-</div>  
-<script>
-    const submitButton = document.querySelector('sgds-quantitytoggle#heyhey');
-    console.log(submitButton)
-    // submitButton.addEventListener('sgds-change', (e) => {
-    //     e.preventDefault();
-    //     console.log(e)
-    // });
+    </div>
+    <script>
+        const submitButton = document.querySelector('sgds-quantitytoggle#heyhey');
+        console.log(submitButton)
+        // submitButton.addEventListener('sgds-change', (e) => {
+        //     e.preventDefault();
+        //     console.log(e)
+        // });
 
-    // const input = document.querySelector('sgds-checkbox#hehe');
-    // input.addEventListener('sgds-change', (e) => {
-    //     e.preventDefault();
-    //     console.log(e);
-    // }); 
+        // const input = document.querySelector('sgds-checkbox#hehe');
+        // input.addEventListener('sgds-change', (e) => {
+        //     e.preventDefault();
+        //     console.log(e);
+        // }); 
 
-// } ;
+        // } ;
 
 
-// grab reference to form
+        // grab reference to form
 
-const formElem = document.querySelector('form');
+        const formElem = document.querySelector('form');
 
-// submit handler
+        // submit handler
 
-formElem.addEventListener('submit', (e) => {
-  // on form submission, prevent default
-  e.preventDefault();
+        formElem.addEventListener('submit', (e) => {
+            // on form submission, prevent default
+            e.preventDefault();
 
-//   console.log(formElem.shadowRoot?.querySelector('input[name="input1"]'));
-//   console.log(formElem.shadowRoot?.querySelector('input[name="cb1"]')); 
-//   console.log(formElem.shadowRoot?.querySelector('input[name="cb2"]')); 
+            //   console.log(formElem.shadowRoot?.querySelector('input[name="input1"]'));
+            //   console.log(formElem.shadowRoot?.querySelector('input[name="cb1"]')); 
+            //   console.log(formElem.shadowRoot?.querySelector('input[name="cb2"]')); 
 
-  // construct a FormData object, which fires the formdata event
-  const formData = new FormData(formElem);
-  // formdata gets modified by the formdata event
-  console.log(formData.get('input1')); 
-  console.log(formData.get('cb1')); 
-  console.log(formData.get('cb2'));
-});
+            // construct a FormData object, which fires the formdata event
+            const formData = new FormData(formElem);
+            // formdata gets modified by the formdata event
+            console.log(formData.get('input1'));
+            console.log(formData.get('cb1'));
+            console.log(formData.get('cb2'));
+        });
 
 // formdata handler to retrieve data
 
@@ -423,8 +404,8 @@ formElem.addEventListener('submit', (e) => {
 //   formData.set('cb2', formData.get('cb2').toUpperCase());
 // });
 
- 
-</script>
+
+    </script>
 </body>
 
 </html>

@@ -34,7 +34,7 @@ export class SgdsQuantityToggle extends SgdsElement {
   * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
   * implied, allowing any numeric value.
   */
-  @property() step: number;
+  @property() step = 1 ;
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
