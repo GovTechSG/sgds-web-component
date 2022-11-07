@@ -7,6 +7,7 @@ import genId from "../utils/generateId";
 import { live } from 'lit/directives/live.js';
 import { watch } from "../utils/watch";
 import {SgdsButton} from "../Button";
+import {classMap} from 'lit/directives/class-map.js';
 import styles from "./sgds-quantitytoggle.scss";
 
 @customElement("sgds-quantitytoggle")
@@ -16,19 +17,22 @@ export class SgdsQuantityToggle extends SgdsElement {
   @query('sgds-button.button-group_button-last') lastBtn: SgdsButton;
   static styles = styles;
 
+
   @property({ reflect: true, type: String}) quantToggleId = genId("quantToggle", "toggle");
   
   @property({reflect: true}) name : string;
-  
    /** The input's minimum value. */
   @property() min: number | string;
-
    /** The input's maximum value. */
   @property() max: number | string;
+
+  @property() size : 'sm' | 'lg' | "default" = "sm" ;
 
   @property ({reflect: true}) count : number | string;
 
   @property({ type: Boolean, reflect: true }) disabled = false;
+
+  @property({ reflect: true }) quantityToggleClasses? : string;
  
   /**
   * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
@@ -44,24 +48,6 @@ export class SgdsQuantityToggle extends SgdsElement {
     this.emit(event);
     this.count = this.input.value;
   }
-  handleClick(event:MouseEvent){
-    if (this.disabled) {
-      event.preventDefault();
-      event.stopPropagation();
-      return;
-    }
-    if(this.leftBtn){
-      if (this.count < this.step) {
-        this.count = 0;
-      }
-      else {
-        this.count = parseInt(this.input.value) - parseInt(this.input.step);
-      }
-    }
-    if(this.lastBtn){
-      this.count = parseInt(this.input.value) + parseInt(this.input.step);
-    }
-  }
   onPlus(event:MouseEvent){
     if (this.disabled) {
       event.preventDefault();
@@ -69,8 +55,6 @@ export class SgdsQuantityToggle extends SgdsElement {
       return;
     }
     this.count = parseInt(this.input.value) + parseInt(this.input.step);
-    
-
   };
   onMinus(event:MouseEvent){
     if (this.disabled) {
@@ -87,21 +71,30 @@ export class SgdsQuantityToggle extends SgdsElement {
     
   };
 
+
+
   @watch('count', { waitUntilFirstUpdate: true })
 
   render() {
     return html`
     <div 
       part="base"
-      class="sgds input-group" 
+      class="${classMap(
+          {
+            "sgds" : true,
+            'disabled': this.disabled,
+            "input-group" : true,
+            [`${this.quantityToggleClasses}`]: this.quantityToggleClasses
+          })}"
       variant="quantity-toggle"
       id=${this.quantToggleId}
-      
+      size=${this.size}
     >
       <sgds-button 
         part="button" 
         variant="primary" 
         class="button-group_button-first"
+        size=${this.size}
         @click=${this.onMinus}
         ?disabled=${this.disabled}
       >
@@ -109,7 +102,7 @@ export class SgdsQuantityToggle extends SgdsElement {
       </sgds-button>
       <input 
         type="number" 
-        class="form-control text-center"
+        class="form-control ${"form-control-" + this.size} text-center"
         name=${ifDefined(this.name)}
         step=${ifDefined(this.step as number)}
         min=${ifDefined(this.min)}
@@ -123,6 +116,7 @@ export class SgdsQuantityToggle extends SgdsElement {
         part="button" 
         variant="primary" 
         class="button-group_button-last"
+        size=${this.size}
         @click=${this.onPlus}
         ?disabled=${this.disabled}
       >
