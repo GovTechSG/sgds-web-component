@@ -14,6 +14,7 @@ export class SgdsRadio extends SgdsElement {
   static styles = styles;
 
   @state() checked = false;
+  @state() protected hasFocus = false;
 
   /** The radio's value attribute. */
   @property() value: string;
@@ -47,14 +48,26 @@ export class SgdsRadio extends SgdsElement {
     this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
   }
 
+  private handleBlur() {
+    this.hasFocus = false;
+    this.emit('sgds-blur');
+  }
+
   private handleClick() {
     if (!this.disabled) {
       this.checked = true;
     }
   }
 
+  private handleFocus() {
+    this.hasFocus = true;
+    this.emit('sgds-focus');
+  }
+
   private addEventListeners() {
-    this.addEventListener("click", () => this.handleClick());
+    this.addEventListener('blur', () => this.handleBlur());
+    this.addEventListener('click', () => this.handleClick());
+    this.addEventListener('focus', () => this.handleFocus());
   }
 
   private setInitialAttributes() {
@@ -95,6 +108,12 @@ export class SgdsRadio extends SgdsElement {
         ></label>
       </div>
     `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'sgds-radio': SgdsRadio;
   }
 }
 
