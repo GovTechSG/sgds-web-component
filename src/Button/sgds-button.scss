@@ -4,4 +4,12 @@
 
 :host {
     display: inline-block;
+}
+
+.btn-icon{
+  background: transparent;
+  border: 0;
+  &:hover{
+    background: transparent;
   }
+}
