@@ -1,0 +1,111 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit";
+import { withWebComponentsKnobs } from "storybook-addon-web-components-knobs";
+import { withKnobs, text, number } from "@storybook/addon-knobs";
+import "../lib/Modal";
+import "../lib/Button";
+
+<Meta
+  title="Components/Modal"
+  argTypes={{
+    open: { 
+      control: "boolean" ,
+      table: { category: "props" },
+      description: 'Indicates whether or not the modal is open. You can use this in lieu of the show/hide methods.',
+      defaultValue: false,
+    },
+    title: { 
+      control: "text" ,
+      table: { category: "props" },
+      description: "The modal's title as displayed in the header",
+      defaultValue: 'This is a title',
+    },
+    titleIcon: { 
+      control: "text" ,
+      table: { category: "props" },
+      description: "The modal's icon as displayed in the header",
+      defaultValue: 'stack',
+    },
+    centeredAlignVariant: { 
+      control: "boolean" ,
+      table: { category: "props" },
+      description: "Align label and buttons to center",
+      defaultValue: false,
+    },
+    'sgds-show': { 
+      table: { category: "Events" },
+      description: "Emitted when the modal opens.",
+    },
+    'sgds-after-show': { 
+      table: { category: "Events" },
+      description: "	Emitted after the modal opens and all animations are complete.",
+    },
+    'sgds-hide': { 
+      table: { category: "Events" },
+      description: "Emitted when the modal closes.",
+    },
+    'sgds-after-hide': { 
+      table: { category: "Events" },
+      description: "Emitted after the modal closes and all animations are complete.",
+    },
+    'hide': { 
+      table: { category: "Methods" },
+      description: "Hides the modal.",
+    },
+    'show': { 
+      table: { category: "Methods" },
+      description: "Shows the modal.",
+    },
+    default: { 
+      control: "text" ,
+      table: { category: "Slots" },
+      description: "The modal's content.",
+      defaultValue: 'This is the modal body',
+    },
+    'label ': { 
+      table: { category: "Slots" },
+      description: "The modal's label.",
+    },
+    'footer': { 
+      table: { category: "Slots" },
+      description: "The modal's footer.",
+    },
+    '--sgds-modal-width': { 
+      table: { category: "CSS Custom Properties" },
+      description: "The preferred width of the modal. Note that the modal will shrink to accommodate smaller screens.",
+    }
+  }}
+/>
+
+export const Template = (args) =>
+  html`
+    <sgds-modal
+      .open=${args.open}
+      .title=${args.title}
+      .titleIcon=${args.titleIcon}
+      .centeredAlignVariant=${args.centeredAlignVariant}
+    >
+      ${args.default}
+      <sgds-button slot="footer" variant="link" class="close-modal">Close</sgds-button>
+      <sgds-button slot="footer" variant="primary" type="submit" form="formA" >Submit</sgds-button>
+    </sgds-modal>
+  `;
+
+# SgdsModal
+
+The modal component inform users about a specific task and may contain critical information which users then have to make a decision. E.g Accepting the T&Cs during signup
+
+<Canvas>
+  <Story name="Basic" args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## API
+
+```jsx
+import { SgdsModal } from "@govtechsg/sgds-web-component";
+```
+
+<ArgsTable story="Basic" />
+
