@@ -7,3 +7,4 @@ import "./Checkbox";
 import "./Dropdown";
 import "./Input";
 import "./Textarea";
+import "./Modal";
