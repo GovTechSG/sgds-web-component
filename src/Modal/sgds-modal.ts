@@ -27,7 +27,7 @@ export class SgdsModal extends SgdsElement {
   private originalTrigger: HTMLElement | null;
 
   @property({ type: Boolean, reflect: true }) open = false;
-  @property({ type: Boolean, reflect: true }) centeredAlignVariant = false;
+  // @property({ type: Boolean, reflect: true }) centeredAlignVariant = false;
 
   @property({ reflect: true }) title = '';
   @property({ reflect: true }) titleIcon = '';
@@ -227,14 +227,14 @@ export class SgdsModal extends SgdsElement {
                 <h3 part="header" 
                   class=${classMap({
                     'modal-header' : true,
-                    centered: this.centeredAlignVariant,
+                    // centered: this.centeredAlignVariant,
                   })}
                 >
                   <div 
                     part="title" 
                     class=${classMap({
                       'modal-title d-flex align-items-center': true,
-                      centered : this.centeredAlignVariant,
+                      // centered : this.centeredAlignVariant,
                     })}
                     id="title"
                   >
@@ -248,7 +248,7 @@ export class SgdsModal extends SgdsElement {
                     exportparts="base:close-button__base"
                     class=${classMap({
                       'modal-close': true,
-                      'centered': this.centeredAlignVariant,
+                      // 'centered': this.centeredAlignVariant,
                     })}
                     @click="${() => this.requestClose('close-button')}"
                   ><sl-icon name="x-lg"></sl-icon></sgds-button>
@@ -264,7 +264,7 @@ export class SgdsModal extends SgdsElement {
             part="footer" 
             class=${classMap({
               'modal-footer': true,
-              centered: this.centeredAlignVariant,
+              // centered: this.centeredAlignVariant,
             })}
           >
             <slot name="footer"></slot>

@@ -15,7 +15,7 @@ import "../lib/Button";
       defaultValue: false,
     },
     title: { 
-      control: "text" ,
+      control: "text",
       table: { category: "props" },
       description: "The modal's title as displayed in the header",
       defaultValue: 'This is a title',
@@ -25,12 +25,6 @@ import "../lib/Button";
       table: { category: "props" },
       description: "The modal's icon as displayed in the header",
       defaultValue: 'stack',
-    },
-    centeredAlignVariant: { 
-      control: "boolean" ,
-      table: { category: "props" },
-      description: "Align label and buttons to center",
-      defaultValue: false,
     },
     'sgds-show': { 
       table: { category: "Events" },
@@ -71,6 +65,7 @@ import "../lib/Button";
       description: "The modal's footer.",
     },
     '--sgds-modal-width': { 
+      control: "text" ,
       table: { category: "CSS Custom Properties" },
       description: "The preferred width of the modal. Note that the modal will shrink to accommodate smaller screens.",
     }
@@ -108,4 +103,3 @@ import { SgdsModal } from "@govtechsg/sgds-web-component";
 ```
 
 <ArgsTable story="Basic" />
-
