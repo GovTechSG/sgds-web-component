@@ -8,3 +8,5 @@ import "./Dropdown";
 import "./Input";
 import "./Textarea";
 import "./Modal";
+import './QuantityToggle';
+import "./Textarea";
