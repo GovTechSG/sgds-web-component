@@ -3,7 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - rm -rf node_modules && npm ci
+        - rm -rf node_modules && npm install
     build:
       commands:
         - npm run test && npm run build-storybook
