@@ -237,7 +237,7 @@ describe("sgds-mainnav", () => {
 
   })
 
-  it('keyboard esc to exit offcanvas works', async() => {
+  xit('keyboard esc to exit offcanvas works', async() => {
     const el = await fixture<SgdsMainnav>(
       html`<sgds-mainnav expand="never" mode="offcanvas"></sgds-mainnav>`
     );
