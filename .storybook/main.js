@@ -10,6 +10,10 @@ module.exports = {
   ],
   "framework": "@storybook/web-components",
   "core": {
-    "builder": "@storybook/builder-webpack5"
+    "builder": "webpack5"
+  },
+  webpackFinal: async (config) => {
+    config.optimization.minimize = false;
+    return config;
   },
 }
