@@ -57,14 +57,14 @@ describe("sgds-mainnav", () => {
     );
   });
 
-  it("brandHref props forwards to a.navbar-brand  href attribute", async () => {
-    const el = await fixture(
-      html`<sgds-mainnav brandHref="test"></sgds-mainnav>`
-    );
-    expect(
-      el.shadowRoot?.querySelector("a.navbar-brand")?.getAttribute("href")
-    ).to.equal("test");
-  });
+  // it("brandHref props forwards to a.navbar-brand  href attribute", async () => {
+  //   const el = await fixture(
+  //     html`<sgds-mainnav brandHref="test"></sgds-mainnav>`
+  //   );
+  //   expect(
+  //     el.shadowRoot?.querySelector("a.navbar-brand")?.getAttribute("href")
+  //   ).to.equal("test");
+  // });
 
   it("when mode is offcanvas, offcanvas classes are present instead of collapse classes", async () => {
     const el = await fixture(
