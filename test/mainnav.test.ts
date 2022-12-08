@@ -244,11 +244,9 @@ describe("sgds-mainnav", () => {
     el.shadowRoot?.querySelector('button')?.click()
     await el.updateComplete
     expect(el.shadowRoot?.querySelector(".offcanvas.show")).to.exist
-
     el.dispatchEvent(new KeyboardEvent("keydown", {key: "Escape"}))
     await el.updateComplete
     expect(el.shadowRoot?.querySelector('.offcanvas')).not.to.have.class('show')
-      
   })
   it('adds name attribute to elements in slot="end" only', async() => {
     const el = await fixture<SgdsMainnav>(

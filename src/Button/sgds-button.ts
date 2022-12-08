@@ -7,7 +7,7 @@ import SgdsElement from "../utils/sgds-element";
 import styles from "./sgds-button.scss";
 
 export type ButtonVariant = 
-"primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark" | "link" |
+"primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark" | "link" | "icon" |
 "outline-primary" | "outline-secondary" | "outline-success" | "outline-danger" | "outline-warning" | "outline-info" | "outline-light" | "outline-dark"
 
 @customElement("sgds-button")
