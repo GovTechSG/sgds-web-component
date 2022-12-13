@@ -57,6 +57,18 @@ import "../lib/Card";
       table: { category: "props" },
       description: "Toggles the border color of the card",
     },
+    active: {
+      control: "boolean",
+      description:
+        "By default, with variant card-action, set the active stylings when input is checked",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     disabled: {
       control: "boolean",
       defaultValue: false,
@@ -111,14 +123,12 @@ import "../lib/Card";
     },
     type: {
       control: "select",
-       options: [
-        'checkbox',
-        'radio',
-       ],
+      options: ["checkbox", "radio"],
       defaultValue: "checkbox",
-      description: "For variant card-action, change the type to radio or checkbox by default",
+      description:
+        "For variant card-action, change the type to radio or checkbox by default",
       table: {
-        category: "slots",
+        category: "props",
         type: {
           summary: "string",
         },
@@ -130,11 +140,12 @@ import "../lib/Card";
 export const Template = (args) =>
   html`
     <sgds-action-card
+      .active=${args.active}
       .bgColor=${args.bgColor}
       .borderColor=${args.borderColor}
       .textColor=${args.textColor}
       .disabled=${args.disabled}
-      ?iconName=${args.iconName}
+      .iconName=${args.iconName}
       .type=${args.type}
     >
       <span slot="card-subtitle">${args.cardSubtitleSlot}</span>
