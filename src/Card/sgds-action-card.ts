@@ -24,12 +24,13 @@ export class SgdsActionCard extends CardElement {
   @property({ reflect: true }) variant?: CardVariant = "card-action";
 
   /** The card's subtitle iconName. */
-  @property() iconName?: string;
+  @property({ reflect: true }) iconName?: string;
 
   /** The input's id. */
-  @property() inputId?: string;
+  @property({ reflect: true }) inputId?: string;
 
-  @property() active = false;
+  @property({ reflect: true, type: Boolean })
+  active = false;
 
   // Declare the click event listener
   onInputChange() {
