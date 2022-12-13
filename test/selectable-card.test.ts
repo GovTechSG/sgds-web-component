@@ -12,9 +12,12 @@ import sinon from "sinon";
 import "../src/Card";
 import { SgdsActionCard } from "../src/Card";
 import "../src/Checkbox";
+import "../src/Radio";
 import { SgdsCheckbox } from "../src/Checkbox";
 import { SgdsButton } from "../src/Button";
 import { sendKeys } from "@web/test-runner-commands";
+import { CardElement } from "../src/utils/card-element";
+import { Button } from "bootstrap";
 
 describe("<sgds-action-card>", () => {
   // Card test cases
@@ -94,22 +97,62 @@ describe("<sgds-action-card>", () => {
     expect(el?.getAttribute("type")).to.equal("radio");
   });
 
-  it("when input is checked via click, card should contain class is-active", async () => {
+  it("when card is clicked, card should contain class is-active", async () => {
     const el = await fixture<SgdsActionCard>(
       html`<sgds-action-card></sgds-action-card>`
     );
-    const checkbox = el.shadowRoot?.querySelector(
-      "sgds-checkbox"
-    ) as HTMLInputElement;
-    expect(checkbox.checked).to.be.false;
-    checkbox?.click();
-    await elementUpdated(el);
-    expect(checkbox.checked).to.be.true;
-    expect(el.shadowRoot?.querySelector("div.sgds")?.classList.value).to.contain(
+
+    expect(el.shadowRoot?.querySelector("div.sgds.card")).to.not.have.class(
       "is-active"
     );
-    // expect(card?.classList.value).to.contain("is-active");
+    const cardBody = el.shadowRoot?.querySelector(
+      "div.card-body"
+    ) as HTMLInputElement;
+    cardBody.click();
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector("div.sgds.card")).to.have.class(
+      "is-active"
+    );
+  });
+
+  it("when card is disabled, card should be clickable and does not contain class is-active", async () => {
+    const el = await fixture<SgdsActionCard>(
+      html`<sgds-action-card disabled></sgds-action-card>`
+    );
+
+    expect(el.shadowRoot?.querySelector("div.sgds.card")).to.not.have.class(
+      "is-active"
+    );
+    const cardBody = el.shadowRoot?.querySelector(
+      "div.card-body"
+    ) as HTMLInputElement;
+    cardBody.click();
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector("div.sgds.card")).to.not.have.class(
+      "is-active"
+    );
+  });
+
+  it("when card is focus, card should be able to be checked with key Enter and contains class is-active", async () => {
+    const el = await fixture<SgdsActionCard>(
+      html`<sgds-action-card></sgds-action-card>`
+    );
+
+    expect(el.shadowRoot?.querySelector("div.sgds.card")).to.not.have.class(
+      "is-active"
+    );
+    // const cardBody = el.shadowRoot?.querySelector(
+    //   "div.card-body"
+    // ) as HTMLInputElement;
+    const card = el.shadowRoot?.querySelector(
+      "div.sgds.card"
+    ) as HTMLInputElement;
+    card.focus();
+    await sendKeys({ press: "Enter" });
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector("div.sgds.card")).to.have.class(
+      "is-active"
+    );
   });
 });
 
-// if input is not checked, card not to contain is-active
