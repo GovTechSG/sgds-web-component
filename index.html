@@ -92,6 +92,14 @@
         }
     </style>
     <script src="lib/index.js"></script>
+    <script>
+        const steps = [
+  { title: 1, stepHeader: "Marker title", template: `<p>Step 1 Content</p>` },
+  { title: 2, stepHeader: "Marker title", template: `<p>Step 2 Content</p>` },
+  { title: 3, stepHeader: "Marker title", template: `<p>Step 3 Content</p>` },
+];
+    </script>
+   
 </head>
 
 
@@ -110,6 +118,8 @@
         <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px">
         </dev-console-widget>
     </sgds-mainnav>
+
+    
     <sgds-sidenav class="mt-3" id="test-id">
         <sgds-sidenav-item active>
             <span slot="title">
@@ -188,6 +198,43 @@
                     </form>
                 </div>
             </div>
+        </div>
+        <div class="container">
+            <h2>Stepper</h2>
+            <!-- <sgds-stepper  methods='[
+            {
+                "title": "1",
+                "stepHeader" : "Personal Details"
+            }, 
+            {
+                "title": "2",
+                "stepHeader" : "Address and Contact Information"
+            },
+            {
+                "title": "3",
+                "stepHeader" : "Review"
+            }
+            ]'></sgds-stepper> -->
+            <!-- <sgds-stepper>
+                <sgds-stepper-item isCompleted title="1" stepHeader="one"></sgds-stepper-item>
+                <sgds-stepper-item active title="2" stepHeader="two"></sgds-stepper-item>
+                <sgds-stepper-item title="3" stepHeader="three"></sgds-stepper-item>
+            </sgds-stepper> -->
+            <my-tabs>
+        <h2 slot="tab">Tab 1</h2>
+        <section slot="panel">Content for tab 1</section>
+        <h2 slot="tab">Tab 2</h2>
+        <section slot="panel">Content for tab 2</section>
+        <h2 slot="tab">Tab 3</h2>
+        <section slot="panel">Content for tab 3</section>
+            </my-tabs>
+          <sgds-stepper >
+            <div slot="0">Content for step 1</div>
+            <div slot="1">Content for step 2</div>
+            <div slot="2">Content for step 3</div>
+          </sgds-stepper>
+          <sgds-button @click="${() => this.next()}" variant="primary">next</sgds-button>
+          <sgds-button @click="${() => this.back()}" variant="primary">back</sgds-button>
         </div>
         <div class="container">
             <h2>Quantity Toggle</h2>
