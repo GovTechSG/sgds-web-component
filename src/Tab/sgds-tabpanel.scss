@@ -1,0 +1,12 @@
+@import '../utils/components.style';
+:host {
+    --padding: 1rem;
+    display: block;
+  }
+  .tab-panel {
+    display: block;
+    padding: var(--padding) 0;
+  }
+  .tab-panel:not(.tab-panel--active) {
+    display: none;
+  }
