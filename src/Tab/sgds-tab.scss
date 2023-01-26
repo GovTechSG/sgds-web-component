@@ -14,9 +14,8 @@
 .tab {
   display: inline-flex;
   align-items: center;
-  font-family: var(--sl-font-sans);
+  font-family: $font-family-sans-serif;
   font-size: $font-size-base;
-  font-weight: var(--sl-font-weight-semibold);
   color: $gray-600;
   padding: $nav-sgds-tabs-padding-y 0;
   white-space: nowrap;
@@ -24,7 +23,6 @@
   cursor: pointer;
   transition: var(--transition-speed) box-shadow, var(--transition-speed) color;
 }
-
 
 .tab:focus {
   outline: none;
@@ -35,8 +33,8 @@
 }
 
 .tab:focus-visible {
-  outline: var(--sl-focus-ring);
-  outline-offset: calc(-1 * var(--sl-focus-ring-width) - var(--sl-focus-ring-offset));
+  outline: $blue-500 solid $input-btn-focus-width;
+  outline-offset: calc(-1 * #{$input-btn-focus-width} - 1px);
 }
 
 .tab.tab--active:not(.tab--disabled) {
@@ -45,23 +43,13 @@
   border-bottom: solid $nav-tabs-border-width $blue-500;
 }
 
-.tab.tab--closable {
-  padding-inline-end: var(--sl-spacing-small);
-}
+
 
 .tab.tab--disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.tab__close-button {
-  font-size: var(--sl-font-size-small);
-  margin-inline-start: var(--sl-spacing-small);
-}
-
-.tab__close-button::part(base) {
-  padding: var(--sl-spacing-3x-small);
-}
 
 @media (forced-colors: active) {
   .tab.tab--active:not(.tab--disabled) {
@@ -79,8 +67,8 @@
     margin-left: 0.5rem;
   }
   &--basic-toggle{
-    background-color: #fff;
-    border: 1px solid #98a2b3;
+    background-color: $white;
+    border: 1px solid $gray-400;
     border-radius: 0;
     color: #1d2939;
     padding: 0.75rem 1.5rem;
@@ -90,7 +78,7 @@
     &.tab--active:not(.tab--disabled){
       background: var(--indicator-color);
       color: white;
-      border-bottom: 1px solid #98a2b3;
+      border-bottom: 1px solid $gray-400;
     }
   }
 }
