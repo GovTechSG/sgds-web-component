@@ -25,7 +25,7 @@ describe('<sgds-tab>', () => {
     expect(el.disabled).to.equal(false);
   });
 
-  !it('should disable tab by attribute', async () => {
+  it('should disable tab by attribute', async () => {
     const el = await fixture<SgdsTab>(html` <sgds-tab disabled>Test</sgds-tab> `);
 
     const tab = el.shadowRoot!.querySelector<HTMLElement>('.tab')!;
@@ -36,7 +36,7 @@ describe('<sgds-tab>', () => {
     expect(tab.getAttribute('tabindex')).to.equal('-1');
   });
 
-  !it('should set active tab by attribute', async () => {
+  it('should set active tab by attribute', async () => {
     const el = await fixture<SgdsTab>(html` <sgds-tab active>Test</sgds-tab> `);
 
     const tab = el.shadowRoot!.querySelector<HTMLElement>('.tab')!;
@@ -47,7 +47,7 @@ describe('<sgds-tab>', () => {
     expect(tab.getAttribute('tabindex')).to.equal('0');
   });
 
-  !describe('focus', () => {
+  describe('focus', () => {
     it('should focus inner div', async () => {
       const el = await fixture<SgdsTab>(html` <sgds-tab>Test</sgds-tab> `);
 
@@ -60,7 +60,7 @@ describe('<sgds-tab>', () => {
     });
   });
 
-  !describe('blur', () => {
+  describe('blur', () => {
     it('should blur inner div', async () => {
       const el = await fixture<SgdsTab>(html` <sgds-tab>Test</sgds-tab> `);
 
