@@ -8,6 +8,8 @@ import "./Input";
 import "./Checkbox";
 import "./Dropdown";
 import "./Input";
+import "./Textarea";
+import "./Modal";
 import './QuantityToggle';
 import "./Textarea";
 import "./Tab";
