@@ -12,3 +12,5 @@ import "./Textarea";
 import "./Modal";
 import './QuantityToggle';
 import "./Textarea";
+import "./Tab";
+import "./Card";
