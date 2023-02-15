@@ -14,3 +14,4 @@ import './QuantityToggle';
 import "./Textarea";
 import "./Tab";
 import "./Card";
+import "./Badge";
