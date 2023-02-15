@@ -12,8 +12,8 @@ export class SgdsBadge extends SgdsElement {
     static styles = styles;
 
     @property({ reflect: true }) variant: ButtonVariant = "primary";
-    @property({ reflect: true }) leftIconName
-    @property({ reflect: true }) rightIconName
+    @property({ type: Boolean, reflect: true}) isLight;
+    @property({ type: Boolean, reflect: true}) roundedPill;
     render() {
         return html`
             <span 
@@ -21,6 +21,8 @@ export class SgdsBadge extends SgdsElement {
                 ${classMap({
                     'sgds badge' : true,
                     [`bg-${this.variant}`]: this.variant,
+                    'badge-light' : this.isLight,
+                    'rounded-pill' : this.roundedPill
                 })}
             ">
                 <slot name="leftIcon"></slot>
