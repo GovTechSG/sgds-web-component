@@ -201,40 +201,67 @@
         </div>
         <div class="container">
             <h2>Stepper</h2>
-            <!-- <sgds-stepper  methods='[
-            {
-                "title": "1",
-                "stepHeader" : "Personal Details"
-            }, 
-            {
-                "title": "2",
-                "stepHeader" : "Address and Contact Information"
-            },
-            {
-                "title": "3",
-                "stepHeader" : "Review"
-            }
-            ]'></sgds-stepper> -->
-            <!-- <sgds-stepper>
-                <sgds-stepper-item isCompleted title="1" stepHeader="one"></sgds-stepper-item>
-                <sgds-stepper-item active title="2" stepHeader="two"></sgds-stepper-item>
-                <sgds-stepper-item title="3" stepHeader="three"></sgds-stepper-item>
-            </sgds-stepper> -->
-            <my-tabs>
-        <h2 slot="tab">Tab 1</h2>
-        <section slot="panel">Content for tab 1</section>
-        <h2 slot="tab">Tab 2</h2>
-        <section slot="panel">Content for tab 2</section>
-        <h2 slot="tab">Tab 3</h2>
-        <section slot="panel">Content for tab 3</section>
-            </my-tabs>
-          <sgds-stepper >
-            <div slot="0">Content for step 1</div>
-            <div slot="1">Content for step 2</div>
-            <div slot="2">Content for step 3</div>
+          <sgds-stepper id="myStepper" activeStep="0">
+            <div slot="step-1" class="mb-4"> 
+                <div class="row">
+                    <div class="col mb-2">
+                        <form>
+                            <h2>Content for Step 1</h2>
+                            <sgds-input name="input1" id="input1" pattern="test" required></sgds-input>
+                            <sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are
+                                    required to check this.</span></sgds-checkbox>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div slot="step-2" class="mb-4">
+                <div class="row">
+                    <div class="col mb-2">
+                        <form>
+                            <h2>Content for Step 2</h2>
+                            <sgds-input name="input1" id="input1" pattern="test" required></sgds-input>
+                            <sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are
+                                    required to check this.</span></sgds-checkbox>
+                            <sgds-checkbox name="cb2" id="cb2" value="lolol1" required>with required<span
+                                    slot="feedback">You are required to check this.</span></sgds-checkbox>
+                            <sgds-checkbox name="cb2" id="cb2" value="lolol1" required disabled>disabled<span
+                                    slot="feedback">You are required to check this.</span></sgds-checkbox>
+                            <sgds-input label="Name" iconName="stack" hintText="this is a hint" required pattern="test"
+                                value="a"></sgds-input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div slot="step-3" class="mb-4">
+                <div class="row">
+                    <div class="col mb-2">
+                        <form>
+                            <h2>Content for Step 3</h2>
+                            <sgds-input name="input1" id="input1" pattern="test" required></sgds-input>
+                            <sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are
+                                    required to check this.</span></sgds-checkbox>
+                            <sgds-checkbox name="cb2" id="cb2" value="lolol1" required>with required<span
+                                    slot="feedback">You are required to check this.</span></sgds-checkbox>
+                            <sgds-checkbox name="cb2" id="cb2" value="lolol1" required disabled>disabled<span
+                                    slot="feedback">You are required to check this.</span></sgds-checkbox>
+                            <sgds-input label="Name" iconName="stack" hintText="this is a hint" required pattern="test"
+                                value="a"></sgds-input>
+                        </form>
+                    </div>
+                </div>
+            </div>
           </sgds-stepper>
-          <sgds-button @click="${() => this.next()}" variant="primary">next</sgds-button>
-          <sgds-button @click="${() => this.back()}" variant="primary">back</sgds-button>
+
+          <!-- <div>
+            <sgds-input id="input001">
+            </sgds-input>
+            <sgds-input id="input002">
+            </sgds-input>
+          </div> -->
+          <sgds-button stepperId="myStepper" methodType="increment" variant="primary">Next</sgds-button>
+          <sgds-button stepperId="myStepper" methodType="decrement" variant="secondary">Back</sgds-button>
+          <sgds-button stepperId="myStepper" methodType="last" variant="warning">Go to last page</sgds-button>
+          <sgds-button stepperId="myStepper" methodType="first" variant="danger">Go to first page</sgds-button>
         </div>
         <div class="container">
             <h2>Quantity Toggle</h2>
@@ -438,6 +465,32 @@
             console.log(formData.get('cb1'));
             console.log(formData.get('cb2'));
         });
+
+        // const sgdsStepper = document.querySelector("sgds-stepper");
+
+        // const nextButton = document.querySelector("#nextButton");
+        // nextButton.addEventListener("click", () => {
+        //   sgdsStepper.incrementStep();
+        //   console.log("incremented..."); 
+        // });
+
+        // const backButton = document.querySelector("#backButton");
+        // backButton.addEventListener("click", () => {
+        //   sgdsStepper.decrementStep();
+        //   console.log("decremented..."); 
+        // });
+
+        // const lastStepButton = document.querySelector("#lastStepButton");
+        // lastStepButton.addEventListener("click", () => {
+        //   sgdsStepper.lastStep();
+        //   console.log("go to last..."); 
+        // });
+
+        // const firstStepButton = document.querySelector("#firstStepButton");
+        // firstStepButton.addEventListener("click", () => {
+        //   sgdsStepper.firstStep();
+        //   console.log("go to first..."); 
+        // });
 
 // formdata handler to retrieve data
 
