@@ -7,15 +7,21 @@ import "../lib/Breadcrumb";
   argTypes={{
     breadcrumbClasses: { 
       control: "text" ,
-      table: { category: "sgds-breadcrumb" },
+      table: { 
+        category: "sgds-breadcrumb" 
+        },
       description: 'Optional. Can be used to insert any utility classes such as `me-auto`'
     },
     href:{
       control:"text",
       defaultValue: undefined,
-      table: { category: "sgds-breadcrumb-item" },
-      description:'When set, the breadcrumb item will be rendered as an `<a>` with this `href` instead of a `<div>`.'
+      table: { 
+        category: "sgds-breadcrumb-item",
+        type: { summary: "Attribute"}
+        },
+      description:'When href is set, the breadcrumb item will be rendered as an `<a>` with this `href` instead of a `<div>`.'
     },
+    
     target:{
       control: 'select',
       options:[
@@ -24,21 +30,20 @@ import "../lib/Breadcrumb";
         '_parent',
         '_top'
       ],
-      defaultValue: '_self',
-      table: { category: "sgds-breadcrumb-item" },
+      defaultValue: '',
+      table: { 
+        category: "sgds-breadcrumb-item",
+        type: { summary: "Attribute"}
+        },
       description:'Tells the browser where to open the link. Only used when `href` is set.'
     },
-    target:{
-      control: 'select',
-      options:[
-        '_self',
-        '_blank',
-        '_parent',
-        '_top'
-      ],
-      defaultValue: '_self',
-      table: { category: "sgds-breadcrumb-item" },
-      description:'Tells the browser where to open the link. Only used when `href` is set.'
+    rel:{
+      defaultValue: "noreferrer noopener",
+      table: { 
+        category: "sgds-breadcrumb-item",
+        type: { summary: "Attribute"}
+        },
+      description:'When target is set, rel="noreferrer noopener" attribute will be added to the breadcrumb-item'
     }
   }}
 />
