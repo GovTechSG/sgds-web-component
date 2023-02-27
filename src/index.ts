@@ -16,3 +16,4 @@ import "./Tab";
 import "./Card";
 import "./Alert";
 import "./CloseButton";
+import "./Toast";
