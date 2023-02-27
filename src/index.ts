@@ -15,3 +15,4 @@ import "./Textarea";
 import "./Tab";
 import "./Card";
 import "./Alert";
+import "./CloseButton";
