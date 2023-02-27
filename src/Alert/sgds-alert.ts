@@ -86,7 +86,6 @@ export class SgdsAlert extends SgdsElement {
               <slot></slot>
               ${this.dismissible
                 ? html`<sgds-closebutton
-                    class="btn-close btn-sm"
                     closeLabel=${ifDefined(this.closeLabel)}
                     @click=${this.handleCloseClick}
                   ></sgds-closebutton>`
