@@ -30,7 +30,7 @@ export class SgdsBreadcrumbItem extends SgdsElement {
             >${isLink ? html`
                 <a 
                     part="label"
-                    href="${this.href!}"
+                    href="${this.href}"
                     rel=${ifDefined(this.target ? this.rel : undefined )}
                     target=${ifDefined(this.target)}
                 ><slot></slot></a>

@@ -49,10 +49,11 @@ export class SgdsBreadcrumb extends SgdsElement {
           }
     
           // The last breadcrumb item is the "current page"
+          
           if (index === items.length - 1) {
+            console.log(items.length - 1)
             item.setAttribute('aria-current', 'page');
-            // Force remove any href for last item
-            item.removeAttribute('href');
+            
           } else {
             item.removeAttribute('aria-current');
           }
@@ -61,11 +62,9 @@ export class SgdsBreadcrumb extends SgdsElement {
 
     render() {
         return html`
-            <nav class="
-            ${classMap(
-            {
-                'sgds breadcrumb' : true,
-                [`${this.breadcrumbClasses}`]: this.breadcrumbClasses
+            <nav class="sgds breadcrumb
+            ${classMap({
+              [`${this.breadcrumbClasses}`]: this.breadcrumbClasses
             }
             )}" 
             aria-label=${this.ariaLabel}
