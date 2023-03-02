@@ -21,6 +21,21 @@ import "../lib/CloseButton";
       table: { category: "props", type: { summary: "string" } },
       description: "The toast bg visual color variant",
     },
+    variant: {
+      control: "select",
+      options: [
+        "primary",
+        "secondary",
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "dark",
+        "light",
+      ],
+      table: { category: "props", type: { summary: "string" } },
+      description: "The toast bg visual color variant",
+    },
     status: {
       control: "select",
       options: ["success", "danger", "warning"],
@@ -63,6 +78,7 @@ export const Template = (args) =>
     <sgds-toast
       .show=${args.show}
       .bg=${args.bg}
+      .variant=${args.variant}
       .status=${args.status}
       .closeLabel=${args.closeLabel}
       .autohide=${args.autohide}

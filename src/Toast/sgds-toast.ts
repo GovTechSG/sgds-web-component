@@ -32,6 +32,8 @@ export class SgdsToast extends SgdsElement {
 
   @property({ type: Number, reflect: true }) delay = Infinity;
 
+  @property ({ type: String, reflect: true}) variant;
+
   /** The toast variant. */
   @property({ type: String, reflect: true }) bg?:
     | "primary"
@@ -68,6 +70,7 @@ export class SgdsToast extends SgdsElement {
             <div
               part="base"
               class="fade toast sgds show ${classMap({
+                [`is-${this.variant}`]: this.variant,
                 [`bg-${this.bg}`]: this.bg,
                 [`is-${this.status}`]: this.status,
               })}"
