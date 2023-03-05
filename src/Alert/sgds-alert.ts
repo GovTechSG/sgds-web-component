@@ -4,7 +4,9 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../utils/sgds-element";
 import styles from "./sgds-alert.scss";
+import { styleMap } from "lit-html/directives/style-map.js";
 import { watch } from "../utils/watch";
+import { repeat } from "lit/directives/repeat.js";
 
 // const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
 
@@ -61,7 +63,12 @@ export class SgdsAlert extends SgdsElement {
 
   @property({ reflect: true }) alertClasses?: string;
 
-  //   @property({ reflect: true }) transition?: TransitionType;
+  toggleShow() {
+    if (!this.show) {
+      this.show = true;
+      this.emit("sgds-open");
+    }
+  }
 
   handleCloseClick(event: string) {
     this.show = false;
@@ -74,7 +81,7 @@ export class SgdsAlert extends SgdsElement {
         ? html`
             <div
               part="base"
-              class="sgds alert fade ${classMap({
+              class="sgds alert fade show ${classMap({
                 [`alert-${this.variant}`]: this.variant,
                 [`alert-dismissible`]: this.dismissible,
                 [`${this.alertClasses}`]: this.alertClasses,
@@ -82,10 +89,10 @@ export class SgdsAlert extends SgdsElement {
               role="alert"
               aria-hidden=${this.show ? "false" : "true"}
             >
-              <slot part="icon" name="icon"></slot>
               <slot></slot>
               ${this.dismissible
                 ? html`<sgds-closebutton
+                    class="btn-close btn-sm"
                     closeLabel=${ifDefined(this.closeLabel)}
                     @click=${this.handleCloseClick}
                   ></sgds-closebutton>`
