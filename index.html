@@ -218,6 +218,48 @@
                 </div>
             </div>
         </div>
+
+        <div class="container">
+            <h2>Input</h2>
+            <div class="row">
+                <div class="col is-6">
+                    <sgds-toast></sgds-toast><br>
+                    <sgds-toast bg="warning" status="success" delay="5000" autohide="true"></sgds-toast><br>
+                    <sgds-toast></sgds-toast>
+                    </div></div></div>
+        <div class="container">
+            <h2>Alert</h2>
+            <div class="row">
+                <div class="col is-6">
+                    <h3>Basic</h3>
+                    <sgds-alert alertClasses="d-flex align-items-center" dismissible><sl-icon name="info-circle" class="flex-shrink-0 me-4 align-self-start mt-1"></sl-icon><div>This is an Alert component</div></sgds-alert>
+
+                    <h3>Links</h3>
+                    <sgds-alert alertClasses="d-flex align-items-center" dismissible><sl-icon name="info-circle" class="flex-shrink-0 me-4 align-self-start mt-1"></sl-icon>
+                        <div> This is a primary alert with&nbsp;<a class="alert-link" href="#">an example link</a>. Give it a click if you like.</div>
+                        </sgds-alert>
+
+                        <h3>With additional content</h3>
+
+                        <sgds-alert variant="success" alertClasses="d-flex align-items-center" dismissible>
+                            <sl-icon name="info-circle" class="flex-shrink-0 me-4 align-self-start mt-2"></sl-icon>
+                            <div><h4 class="alert-heading">Hey, nice to see you</h4>
+                            
+                              <p>
+                                Aww yeah, you successfully read this important alert message. This
+                                example text is going to run a bit longer so that you can see how
+                                spacing within an alert works with this kind of content.
+                              </p>
+                              <hr />
+                              <p className="mb-0">
+                                Whenever you need to, be sure to use margin utilities to keep things
+                                nice and tidy.
+                              </p>
+                            </div>
+                        </sgds-alert>
+                </div>
+            </div>
+        </div>
         <div class="container">
             <h2>Stepper</h2>
           <sgds-stepper id="myStepper" activeStep="0">
