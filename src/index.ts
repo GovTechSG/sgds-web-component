@@ -18,3 +18,4 @@ import "./Card";
 import "./Alert";
 import "./CloseButton";
 import "./Toast";
+import "./Accordion";

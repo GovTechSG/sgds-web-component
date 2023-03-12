@@ -1,0 +1,32 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import "../lib/Accordion";
+
+<Meta
+  title="Components/Accordion"
+/>
+
+export const Template = (args) =>
+  html`
+    <sgds-accordion summary="title"> 
+      Lorem ipsum dolor sit amet.
+    </sgds-accordion>
+  `;
+
+# SgdsButton
+
+Buttons communicate actions that users can take throughout your portal which can be used in places such as modals, forms and cards
+
+<Canvas>
+  <Story name="Basic" args={{ variant: "primary" }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## API
+
+```jsx
+import { SgdsButton } from "@govtechsg/sgds-web-component";
+```
+
+<ArgsTable story="Basic" />
