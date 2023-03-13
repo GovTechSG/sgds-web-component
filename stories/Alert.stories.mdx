@@ -8,7 +8,7 @@ import "../lib/CloseButton";
   argTypes={{
     alertClasses: {
       control: "text",
-      table: { category: "props", type: { summary: "string" }, },
+      table: { category: "props", type: { summary: "string" } },
       description:
         "Optional. Can be used to insert any utility classes such as `me-auto`",
     },
@@ -24,29 +24,36 @@ import "../lib/CloseButton";
         "light",
       ],
       defaultValue: "primary",
-      table: { category: "props", type: { summary: "string" }, },
+      table: { category: "props", type: { summary: "string" } },
       description: "The Alert visual color variant",
     },
     dismissible: {
       control: "boolean",
       defaultValue: false,
-      table: { category: "props" , type: { summary: "boolean" }, },
+      table: { category: "props", type: { summary: "boolean" } },
       description:
         "Renders a properly aligned dismiss button, as well as adding extra horizontal padding to the Alert",
     },
     show: {
       control: "boolean",
       defaultValue: true,
-      table: { category: "props", type: { summary: "boolean" }, },
+      table: { category: "props", type: { summary: "boolean" } },
       description: "Controls the visual state of the Alert",
     },
     closeLabel: {
       control: "text",
-      table: { category: "props", type: { summary: "string" }, },
+      table: { category: "props", type: { summary: "string" } },
       description: "Sets the aria-label for alert close button",
     },
     "sgds-close": {
       description: "Emitted event when dismissible button is clicked",
+      table: {
+        category: `Event: SgdsAlert`,
+      },
+    },
+    "sgds-open": {
+      description:
+        "Emitted event with toggleShow method when sgds-button is clicked",
       table: {
         category: `Event: SgdsAlert`,
       },
@@ -71,10 +78,10 @@ export const Template = (args) =>
 
 export const TemplateLinks = (args) =>
   html`
-    <sgds-alert alertClasses="d-flex align-items-center"
-      ><sl-icon name="info-circle" class="flex-shrink-0 me-4"></sl-icon>
+    <sgds-alert alertClasses="d-flex align-items-center">
+      <sl-icon name="info-circle" class="flex-shrink-0 me-4"></sl-icon>
       <div>
-        This is a primary alert with&nbsp;<a class="alert-link" href="#"
+        This is a primary alert with&nbsp;<a class="alert-link"
           >an example link</a
         >. Give it a click if you like.
       </div>
@@ -83,11 +90,7 @@ export const TemplateLinks = (args) =>
 
 export const TemplateAddContent = (args) =>
   html`
-    <sgds-alert
-      variant="success"
-      alertClasses="d-flex align-items-center"
-      dismissible
-    >
+    <sgds-alert variant="success" alertClasses="d-flex align-items-center">
       <sl-icon
         name="info-circle"
         class="flex-shrink-0 me-4 align-self-start mt-2"
@@ -106,6 +109,24 @@ export const TemplateAddContent = (args) =>
         </p>
       </div>
     </sgds-alert>
+  `;
+
+export const TemplateWithButton = (args) =>
+  html`
+    <sgds-alert
+      id="alertExample"
+      variant="warning"
+      alertClasses="d-flex align-items-center"
+      dismissible
+      ><sl-icon name="info-circle" class="flex-shrink-0 me-4"></sl-icon>
+      <div>
+        This is an Alert component. You may add the dismissible option.
+      </div></sgds-alert
+    >
+    <br />
+    <sgds-button variant="danger" refId="alertExample" methodType="toggleShow"
+      >Show Alert</sgds-button
+    >
   `;
 
 # SgdsAlert
@@ -146,13 +167,13 @@ Alerts can contain whatever content you like. Headers, paragraphs, dividers etc.
 
 ## Dismissible
 
-Add the dismissible prop to add a functioning dismiss button to the Alert.
+Add the dismissible prop to add a dismiss button to the Alert. An `sgds-button` with id reference `refId` prop to the alert can also be used to show the dismissed alert with `methodType` prop of value `toggleShow`.
 
 <Canvas>
   <Story
     name='Dismissible'
-    args={{ dismissible: "true", alertClasses: "d-flex align-items-center" }}
+    args={{ alertClasses: "d-flex align-items-center" }}
   >
-    {Template.bind({})}
+    {TemplateWithButton.bind({})}
   </Story>
 </Canvas>

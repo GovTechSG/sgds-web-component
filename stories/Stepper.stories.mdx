@@ -46,7 +46,7 @@ import "../lib/Stepper";
     methodType: {
       control: "disable",
       description:
-        "prop that holds value to invoke the stepper methods such as: `decrement`, `increment`, `first` and `last`. To be used with stepperId.",
+        "prop that holds value to invoke the stepper methods such as: `decrement`, `increment`, `first` and `last`. To be used with refId.",
       table: {
         category: "props `sgds-button`",
         type: {
@@ -54,7 +54,7 @@ import "../lib/Stepper";
         },
       },
     },
-    stepperId: {
+    refId: {
       control: "text",
       description:
         "Takes an id reference to `sgds-stepper` component, allowing to invoke the different methodType available.",
@@ -176,13 +176,13 @@ export const TemplateExample = ({ steps, activeStep, namedSlot }) => {
       <div>
         <sgds-button
           class="me-3"
-          stepperId="myStepper"
+          refId="myStepper"
           methodType="increment"
           variant="primary"
           >Next</sgds-button
         >
         <sgds-button
-          stepperId="myStepper"
+          refId="myStepper"
           methodType="decrement"
           variant="secondary"
           >Back</sgds-button
@@ -191,14 +191,14 @@ export const TemplateExample = ({ steps, activeStep, namedSlot }) => {
       <div>
         <sgds-button
           class="m-2"
-          stepperId="myStepper"
+          refId="myStepper"
           methodType="first"
           variant="danger"
           >Go to first page</sgds-button
         >
         <sgds-button
           class="m-2"
-          stepperId="myStepper"
+          refId="myStepper"
           methodType="last"
           variant="warning"
           >Go to last page</sgds-button

@@ -5,6 +5,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { FormSubmitController } from "../utils/form";
 import SgdsElement from "../utils/sgds-element";
 import styles from "./sgds-button.scss";
+import { SgdsAlert } from "../Alert";
 import { SgdsStepper } from "../Stepper";
 
 export type ButtonVariant =
@@ -26,6 +27,9 @@ export type ButtonVariant =
   | "outline-light"
   | "outline-dark";
 
+interface MyAlert extends SgdsAlert {
+  toggleShow(): void;
+}
 interface MyStepper extends SgdsStepper {
   incrementStep(): void;
   decrementStep(): void;
@@ -105,13 +109,16 @@ export class SgdsButton extends SgdsElement {
     | "_top"
     | string;
 
-  @property({ reflect: true }) stepperId?: string;
+  @property({ reflect: true }) refId?: string;
 
   @property({ reflect: true }) methodType?:
+    | "toggleShow"
     | "decrement"
     | "increment"
     | "first"
     | "last";
+
+  @property({ reflect: true }) stepperId?: string;
 
   /** Sets focus on the button. */
   focus(options?: FocusOptions) {
@@ -156,11 +163,12 @@ export class SgdsButton extends SgdsElement {
     if (this.type === "reset") {
       this.formSubmitController.reset(this);
     }
-    if (this.stepperId != null) {
-      const sgdsStepper = document.querySelector(
-        `#${this.stepperId}`
-      ) as MyStepper;
+    if (this.refId != null) {
+      const sgdsAlert = document.querySelector(`#${this.refId}`) as MyAlert;
+      const sgdsStepper = document.querySelector(`#${this.refId}`) as MyStepper;
       switch (this.methodType) {
+        case "toggleShow":
+          sgdsAlert.toggleShow();
         case "increment":
           sgdsStepper.incrementStep();
           break;

@@ -240,12 +240,11 @@
             <h2>Alert</h2>
             <div class="row">
                 <div class="col is-6">
-                    <h3>Basic</h3>
-                    <sgds-alert alertClasses="d-flex align-items-center" dismissible><sl-icon name="info-circle" class="flex-shrink-0 me-4 align-self-start mt-1"></sl-icon><div>This is an Alert component</div></sgds-alert>
 
                     <h3>Links</h3>
-                    <sgds-alert alertClasses="d-flex align-items-center" dismissible><sl-icon name="info-circle" class="flex-shrink-0 me-4 align-self-start mt-1"></sl-icon>
-                        <div> This is a primary alert with&nbsp;<a class="alert-link" href="#">an example link</a>. Give it a click if you like.</div>
+                    <sgds-alert alertClasses="d-flex align-items-center" dismissible>
+                        <sl-icon name="info-circle" class="flex-shrink-0 me-4 align-self-start mt-1"></sl-icon>
+                        <div> This is a primary alert with&nbsp;<a class="alert-link">an example link</a>. Give it a click if you like.</div>
                         </sgds-alert>
 
                         <h3>With additional content</h3>
@@ -328,10 +327,10 @@
             <sgds-input id="input002">
             </sgds-input>
           </div> -->
-          <sgds-button stepperId="myStepper" methodType="increment" variant="primary">Next</sgds-button>
-          <sgds-button stepperId="myStepper" methodType="decrement" variant="secondary">Back</sgds-button>
-          <sgds-button stepperId="myStepper" methodType="last" variant="warning">Go to last page</sgds-button>
-          <sgds-button stepperId="myStepper" methodType="first" variant="danger">Go to first page</sgds-button>
+          <sgds-button refId="myStepper" methodType="increment" variant="primary">Next</sgds-button>
+          <sgds-button refId="myStepper" methodType="decrement" variant="secondary">Back</sgds-button>
+          <sgds-button refId="myStepper" methodType="last" variant="warning">Go to last page</sgds-button>
+          <sgds-button refId="myStepper" methodType="first" variant="danger">Go to first page</sgds-button>
         </div>
         <div class="container">
             <h2>Quantity Toggle</h2>
