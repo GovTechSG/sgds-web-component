@@ -12,6 +12,7 @@ import "./Modal";
 import "./QuantityToggle";
 import "./Tab";
 import "./Card";
+import "./Badge";
 import "./Table";
 import "./Breadcrumb";
 import "./Stepper";

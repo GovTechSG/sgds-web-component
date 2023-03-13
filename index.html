@@ -9,8 +9,7 @@
         type='text/css' />
     <!-- JavaScript Bundle with Popper -->
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds@2.1.1/css/sgds.min.css" rel="stylesheet" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
@@ -142,6 +141,16 @@
 
 
     <main>
+        <div class="container">
+            <h2>Badge</h2>
+            <div class="row">
+                <sgds-badge variant="danger">
+                    Testing
+                    <i slot="rightIcon" class="bi bi-apple"></i>
+                    <i slot="leftIcon" class="bi bi-123"></i>
+                </sgds-badge>
+            </div>
+        </div>
         <div class="container">
             <h2>Button</h2>
             <p>Button size</p>
