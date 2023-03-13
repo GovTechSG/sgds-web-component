@@ -91,6 +91,14 @@
         }
     </style>
     <script src="lib/index.js"></script>
+    <script>
+        const steps = [
+  { title: 1, stepHeader: "Marker title", template: `<p>Step 1 Content</p>` },
+  { title: 2, stepHeader: "Marker title", template: `<p>Step 2 Content</p>` },
+  { title: 3, stepHeader: "Marker title", template: `<p>Step 3 Content</p>` },
+];
+    </script>
+   
 </head>
 
 
@@ -109,6 +117,8 @@
         <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px">
         </dev-console-widget>
     </sgds-mainnav>
+
+    
     <sgds-sidenav class="mt-3" id="test-id">
         <sgds-sidenav-item active>
             <span slot="title">
@@ -260,6 +270,70 @@
             </div>
         </div>
         <div class="container">
+            <h2>Stepper</h2>
+          <sgds-stepper id="myStepper" activeStep="0">
+            <div slot="step-1" class="mb-4"> 
+                <div class="row">
+                    <div class="col mb-2">
+                        <form>
+                            <h2>Content for Step 1</h2>
+                            <sgds-input name="input1" id="input1" pattern="test" required></sgds-input>
+                            <sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are
+                                    required to check this.</span></sgds-checkbox>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div slot="step-2" class="mb-4">
+                <div class="row">
+                    <div class="col mb-2">
+                        <form>
+                            <h2>Content for Step 2</h2>
+                            <sgds-input name="input1" id="input1" pattern="test" required></sgds-input>
+                            <sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are
+                                    required to check this.</span></sgds-checkbox>
+                            <sgds-checkbox name="cb2" id="cb2" value="lolol1" required>with required<span
+                                    slot="feedback">You are required to check this.</span></sgds-checkbox>
+                            <sgds-checkbox name="cb2" id="cb2" value="lolol1" required disabled>disabled<span
+                                    slot="feedback">You are required to check this.</span></sgds-checkbox>
+                            <sgds-input label="Name" iconName="stack" hintText="this is a hint" required pattern="test"
+                                value="a"></sgds-input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div slot="step-3" class="mb-4">
+                <div class="row">
+                    <div class="col mb-2">
+                        <form>
+                            <h2>Content for Step 3</h2>
+                            <sgds-input name="input1" id="input1" pattern="test" required></sgds-input>
+                            <sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are
+                                    required to check this.</span></sgds-checkbox>
+                            <sgds-checkbox name="cb2" id="cb2" value="lolol1" required>with required<span
+                                    slot="feedback">You are required to check this.</span></sgds-checkbox>
+                            <sgds-checkbox name="cb2" id="cb2" value="lolol1" required disabled>disabled<span
+                                    slot="feedback">You are required to check this.</span></sgds-checkbox>
+                            <sgds-input label="Name" iconName="stack" hintText="this is a hint" required pattern="test"
+                                value="a"></sgds-input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+          </sgds-stepper>
+
+          <!-- <div>
+            <sgds-input id="input001">
+            </sgds-input>
+            <sgds-input id="input002">
+            </sgds-input>
+          </div> -->
+          <sgds-button stepperId="myStepper" methodType="increment" variant="primary">Next</sgds-button>
+          <sgds-button stepperId="myStepper" methodType="decrement" variant="secondary">Back</sgds-button>
+          <sgds-button stepperId="myStepper" methodType="last" variant="warning">Go to last page</sgds-button>
+          <sgds-button stepperId="myStepper" methodType="first" variant="danger">Go to first page</sgds-button>
+        </div>
+        <div class="container">
             <h2>Quantity Toggle</h2>
             <div class="row">
                 <div class="col is-6">
@@ -269,160 +343,25 @@
                 </div>
             </div>
         </div>
-    </main>
-    </div>
-    <sgds-footer description="this is a prop description" title="Singapore Government Design System"
-        lastUpdatedDate="08 Feb 2022" links='[
-        {
-            "title": "Column 1",
-            "links" : [
-                {
-                    "href": "#1",
-                    "label": "About Us"
-                },
-                {
-                    "href": "#2",
-                    "label": "This is a super long link"
-                },
-                {
-                    "href": "#3",
-                    "label": "Test"
-                },
-                {
-                    "href": "#4",
-                    "label": "Test"
-                }
-            ]
-        },
-        {
-            "title": "Column 2",
-            "links" : [
-                {
-                    "href": "#1",
-                    "label": "About Us"
-                },
-                {
-                    "href": "#2",
-                    "label": "This is a super long link"
-                },
-                {
-                    "href": "#3",
-                    "label": "Test"
-                },
-                {
-                    "href": "#4",
-                    "label": "Test"
-                }
-            ]
-        },
-        {
-            "title": "Column 3",
-            "links" : [
-                {
-                    "href": "#1",
-                    "label": "About Us"
-                },
-                {
-                    "href": "#2",
-                    "label": "This is a super long link"
-                },
-                {
-                    "href": "#3",
-                    "label": "Test"
-                },
-                {
-                    "href": "#4",
-                    "label": "Test"
-                }
-            ]
-        },
-        {
-            "title": "Column 4",
-            "links" : [
-                {
-                    "href": "#1",
-                    "label": "About Us"
-                },
-                {
-                    "href": "#2",
-                    "label": "This is a super long link"
-                },
-                {
-                    "href": "#3",
-                    "label": "Test"
-                },
-                {
-                    "href": "#4",
-                    "label": "Test"
-                }
-            ]
-        },
-        {
-            "title": "Column 5",
-            "links" : [
-                {
-                    "href": "#1",
-                    "label": "About Us"
-                },
-                {
-                    "href": "#2",
-                    "label": "This is a super long link"
-                },
-                {
-                    "href": "#3",
-                    "label": "Test"
-                },
-                {
-                    "href": "#4",
-                    "label": "Test"
-                }
-            ]
-        },
-        {
-            "title": "Column 6",
-            "links" : [
-                {
-                    "href": "#1",
-                    "label": "About Us"
-                },
-                {
-                    "href": "#2",
-                    "label": "This is a super long link"
-                },
-                {
-                    "href": "#3",
-                    "label": "Test"
-                },
-                {
-                    "href": "#4",
-                    "label": "Test"
-                }
-            ]
-        },
-        {
-            "title": "Column 6",
-            "links" : [
-                {
-                    "href": "#1",
-                    "label": "About Us"
-                },
-                {
-                    "href": "#2",
-                    "label": "This is a super long link"
-                },
-                {
-                    "href": "#3",
-                    "label": "Test"
-                },
-                {
-                    "href": "#4",
-                    "label": "Test"
-                }
-            ]
-        }
-      ]'>
-    </sgds-footer>
-    </div>
+        <div class="container">
+            <h2>Table Default</h2>
+            <div class="row">
+                    <sgds-table tableHeaders='["#", "First Names", "Last Name", "Username"]' tableData='[[1, "Mark", "Otto", "@mdo"],
+                    [2, "Jacob", "Thornton", "@fat"],
+                    [3, "Larry", "the Bird", "@twitter"],
+                    [4, "Chuck", "Norris", "@asdasdasd"]
+                  ]'></sgds-table>
+            </div>
+            <br>
+            <h2>Table w/ Sort</h2>
+            <div class="row">
+                <sgds-table sort bordered tableHeaders='["#", "First Names", "Last Name", "Username"]' tableData='[[1, "Mark", "Otto", "@mdo"],
+                [2, "Jacob", "Thornton", "@fat"],
+                [3, "Larry", "the Bird", "@twitter"],
+                [4, "Chuck", "Norris", "@asdasdasd"]
+              ]'></sgds-table>
+            </div>
+            
     <script>
         const submitButton = document.querySelector('sgds-quantitytoggle#heyhey');
         console.log(submitButton)
@@ -461,18 +400,6 @@
             console.log(formData.get('cb1'));
             console.log(formData.get('cb2'));
         });
-
-// formdata handler to retrieve data
-
-// formElem.addEventListener('formdata', (e) => {
-//   console.log('formdata fired');
-
-//   // modifies the form data
-//   const formData = e.formData;
-//   // formdata gets modified by the formdata event
-//   formData.set('cb1', formData.get('cb1').toUpperCase());
-//   formData.set('cb2', formData.get('cb2').toUpperCase());
-// });
 
 
     </script>
