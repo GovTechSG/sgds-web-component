@@ -334,160 +334,25 @@
                 </div>
             </div>
         </div>
-    </main>
-    </div>
-    <sgds-footer description="this is a prop description" title="Singapore Government Design System"
-        lastUpdatedDate="08 Feb 2022" links='[
-        {
-            "title": "Column 1",
-            "links" : [
-                {
-                    "href": "#1",
-                    "label": "About Us"
-                },
-                {
-                    "href": "#2",
-                    "label": "This is a super long link"
-                },
-                {
-                    "href": "#3",
-                    "label": "Test"
-                },
-                {
-                    "href": "#4",
-                    "label": "Test"
-                }
-            ]
-        },
-        {
-            "title": "Column 2",
-            "links" : [
-                {
-                    "href": "#1",
-                    "label": "About Us"
-                },
-                {
-                    "href": "#2",
-                    "label": "This is a super long link"
-                },
-                {
-                    "href": "#3",
-                    "label": "Test"
-                },
-                {
-                    "href": "#4",
-                    "label": "Test"
-                }
-            ]
-        },
-        {
-            "title": "Column 3",
-            "links" : [
-                {
-                    "href": "#1",
-                    "label": "About Us"
-                },
-                {
-                    "href": "#2",
-                    "label": "This is a super long link"
-                },
-                {
-                    "href": "#3",
-                    "label": "Test"
-                },
-                {
-                    "href": "#4",
-                    "label": "Test"
-                }
-            ]
-        },
-        {
-            "title": "Column 4",
-            "links" : [
-                {
-                    "href": "#1",
-                    "label": "About Us"
-                },
-                {
-                    "href": "#2",
-                    "label": "This is a super long link"
-                },
-                {
-                    "href": "#3",
-                    "label": "Test"
-                },
-                {
-                    "href": "#4",
-                    "label": "Test"
-                }
-            ]
-        },
-        {
-            "title": "Column 5",
-            "links" : [
-                {
-                    "href": "#1",
-                    "label": "About Us"
-                },
-                {
-                    "href": "#2",
-                    "label": "This is a super long link"
-                },
-                {
-                    "href": "#3",
-                    "label": "Test"
-                },
-                {
-                    "href": "#4",
-                    "label": "Test"
-                }
-            ]
-        },
-        {
-            "title": "Column 6",
-            "links" : [
-                {
-                    "href": "#1",
-                    "label": "About Us"
-                },
-                {
-                    "href": "#2",
-                    "label": "This is a super long link"
-                },
-                {
-                    "href": "#3",
-                    "label": "Test"
-                },
-                {
-                    "href": "#4",
-                    "label": "Test"
-                }
-            ]
-        },
-        {
-            "title": "Column 6",
-            "links" : [
-                {
-                    "href": "#1",
-                    "label": "About Us"
-                },
-                {
-                    "href": "#2",
-                    "label": "This is a super long link"
-                },
-                {
-                    "href": "#3",
-                    "label": "Test"
-                },
-                {
-                    "href": "#4",
-                    "label": "Test"
-                }
-            ]
-        }
-      ]'>
-    </sgds-footer>
-    </div>
+        <div class="container">
+            <h2>Table Default</h2>
+            <div class="row">
+                    <sgds-table tableHeaders='["#", "First Names", "Last Name", "Username"]' tableData='[[1, "Mark", "Otto", "@mdo"],
+                    [2, "Jacob", "Thornton", "@fat"],
+                    [3, "Larry", "the Bird", "@twitter"],
+                    [4, "Chuck", "Norris", "@asdasdasd"]
+                  ]'></sgds-table>
+            </div>
+            <br>
+            <h2>Table w/ Sort</h2>
+            <div class="row">
+                <sgds-table sort bordered tableHeaders='["#", "First Names", "Last Name", "Username"]' tableData='[[1, "Mark", "Otto", "@mdo"],
+                [2, "Jacob", "Thornton", "@fat"],
+                [3, "Larry", "the Bird", "@twitter"],
+                [4, "Chuck", "Norris", "@asdasdasd"]
+              ]'></sgds-table>
+            </div>
+            
     <script>
         const submitButton = document.querySelector('sgds-quantitytoggle#heyhey');
         console.log(submitButton)
