@@ -1,0 +1,47 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import "../lib/Tooltip";
+import { partDescription, dropdownElementProps } from "./common";
+
+<Meta
+  title="Components/Tooltip"
+/>
+
+export const Template = () => {
+  return html`
+    <sgds-tooltip>
+    the content of tooltip can be split to the hovered and the content
+    </sgds-tooltip>
+  `;
+};
+
+# SgdsDropdown, SgdsDropdownItem
+
+
+<Story
+  name="Basic"
+>
+  {Template.bind({})}
+</Story>
+
+```jsx
+import {
+  SgdsDropdown,
+  SgdsDropdownItem,
+} from "@govtechsg/sgds-web-component/Dropdown";
+// SgdsDropdown uses SgdsButton under the hood
+import { SgdsButton } from "@govtechsg/sgds-web-component/Button"
+```
+
+<ArgsTable story="Basic" />
+
+
+```jsx
+<sgds-dropdown>
+  <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
+  <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
+  <sgds-dropdown-item href="#" disabled>
+    item #3
+  </sgds-dropdown-item>
+</sgds-dropdown>
+``` 
