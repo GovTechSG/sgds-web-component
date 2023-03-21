@@ -5,43 +5,82 @@ import { partDescription, dropdownElementProps } from "./common";
 
 <Meta
   title="Components/Tooltip"
+    argTypes={{
+    content: {
+      control: "text",
+      defaultValue: "This is a tooltip",
+      table: {
+        category: "props",
+        type: {
+          summary: "string",
+        },
+      },
+      description: "Set the textual content of Tooltip",
+    },
+    placement: {
+      control: "select",
+      options: ["top", "bottom", "left", "right"],
+      defaultValue: "top",
+      table: {
+        category: "props",
+        type: {
+          summary: "top | bottom | left | right",
+        },
+      },
+      description:
+        "Where the Tooltip is positioned relative to its target element",
+    },
+    offset: {
+      control: "object",
+      defaultValue: [0, 0],
+      table: { category: "props", type: { summary: "[number, number]" } },
+      description:
+        "Offset of the tooltip relative to its target using a array of two numbers: [skidding, distance] ",
+    },
+    trigger: {
+      control: "select",
+      options: ["click", "hover", "focus", "hover focus"],
+      defaultValue: "hover focus",
+      description: "How the tooltip is triggered",
+      table: {
+        category: "props",
+        type: {
+          summary: "click | hover | focus | hover focus",
+        },
+      },
+    },
+  }}
 />
 
-export const Template = () => {
+export const Template = ({content, offset, trigger, placement}) => {
   return html`
-    <sgds-tooltip>
-    the content of tooltip can be split to the hovered and the content
+     <sgds-tooltip
+      .content=${content}
+      .offset=${offset}
+      .trigger=${trigger}
+      .placement=${placement}
+    >
+      <sgds-button variant="warning">Hover me</sgds-button>
     </sgds-tooltip>
   `;
 };
 
-# SgdsDropdown, SgdsDropdownItem
+# SgdsTooltip
 
-
-<Story
-  name="Basic"
->
-  {Template.bind({})}
-</Story>
+<Canvas>
+  <Story name="Basic">{Template.bind({})}</Story>
+</Canvas>
 
 ```jsx
 import {
-  SgdsDropdown,
-  SgdsDropdownItem,
-} from "@govtechsg/sgds-web-component/Dropdown";
-// SgdsDropdown uses SgdsButton under the hood
-import { SgdsButton } from "@govtechsg/sgds-web-component/Button"
+  SgdsTooltip,
+} from "@govtechsg/sgds-web-component/Tooltip";
 ```
 
 <ArgsTable story="Basic" />
 
-
 ```jsx
-<sgds-dropdown>
-  <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
-  <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
-  <sgds-dropdown-item href="#" disabled>
-    item #3
-  </sgds-dropdown-item>
-</sgds-dropdown>
-``` 
+<sgds-tooltip>
+      <sgds-button variant="warning">Hover me</sgds-button>
+    </sgds-tooltip>
+```
