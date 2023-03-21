@@ -1,53 +1,72 @@
 import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, query } from "lit/decorators.js";
 import SgdsElement from "../utils/sgds-element";
-import styles from "./sgds-tooltip.scss";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { Tooltip } from "bootstrap";
-import genId from "../utils/generateId";
 
 @customElement("sgds-tooltip")
 export class SgdsTooltip extends SgdsElement {
-  static styles = styles;
-
   myTooltip: Ref<HTMLElement> = createRef();
   bsTooltip: Tooltip = null;
 
+  @query('.tooltip-inner') tooltipInner: HTMLDivElement
+
+  @property({ type: String })
+  content = "hello";
+  @property({ type: Array })
+  offset: [number, number] = [0,0];
+
+  @property({ type: String })
+  placement: "top" | "bottom" | "left" | "right" = "top";
+
+  @property({ type: String })
+  trigger: "click" | "hover" | "focus" | "hover focus" = "hover focus";
+
   firstUpdated() {
     this.bsTooltip = new Tooltip(this.myTooltip.value, {
-      trigger: "manual",
-      title: "hello world",
+      trigger: this.trigger,
+      title: this.content,
+      placement: this.placement,
+      offset:this.offset,
+      html: true
     });
     this.myTooltip.value.addEventListener("show.bs.tooltip", () => {
-      //   this.active = true;
-      console.log("show");
+      this.emit("sgds-show");
     });
     this.myTooltip.value.addEventListener("shown.bs.tooltip", () => {
-      //   this.active = true;
-      console.log("shown");
+      this.emit("sgds-shown");
     });
     this.myTooltip.value.addEventListener("hide.bs.tooltip", () => {
-      //   this.active = false;
-      console.log("hide");
+      this.emit("sgds-hide");
     });
     this.myTooltip.value.addEventListener("hidden.bs.tooltip", () => {
-      //   this.active = false;
-      console.log("hidden");
+      this.emit("sgds-hidden");
     });
-  }
-  _onClickButton() {
-    this.bsTooltip.toggle();
-  }
 
+   
+
+  }
+  closeTooltip(){
+    this.bsTooltip.hide()
+  }
+  updated() {
+    if (this.trigger === 'click') {
+      console.log('hello')
+      let closeBtn : HTMLButtonElement  = document.createElement('button')
+      closeBtn.classList.add('btn-close')
+      closeBtn.classList.add('btn-close-white')
+      this.bsTooltip.setContent({ '.tooltip-inner': closeBtn })
+
+      console.log(this.tooltipInner.shadowRoot.innerHTML)
+      this.tooltipInner.insertAdjacentElement("beforeend", closeBtn)
+    }
+  }
   render() {
+
     return html`
-      <div ${ref(this.myTooltip)}>
-        <button @mouseenter=${() => this.bsTooltip.toggle()} @mouseleave=${() => this.bsTooltip.toggle()}>hover me</button>
-      </div>
+      <span ${ref(this.myTooltip)}>
+        <slot></slot>
+      </span>
     `;
   }
 }
-//    <div >
-// <div class="tooltip-arrow"></div>
-// <div class="tooltip-inner">This is a sample Tooltip</div>
-// </div>
