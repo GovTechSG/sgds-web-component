@@ -5,7 +5,7 @@ import { partDescription, dropdownElementProps } from "./common";
 
 <Meta
   title="Components/Tooltip"
-    argTypes={{
+  argTypes={{
     content: {
       control: "text",
       defaultValue: "This is a tooltip",
@@ -52,9 +52,9 @@ import { partDescription, dropdownElementProps } from "./common";
   }}
 />
 
-export const Template = ({content, offset, trigger, placement}) => {
+export const Template = ({ content, offset, trigger, placement }) => {
   return html`
-     <sgds-tooltip
+    <sgds-tooltip
       .content=${content}
       .offset=${offset}
       .trigger=${trigger}
@@ -67,19 +67,20 @@ export const Template = ({content, offset, trigger, placement}) => {
 
 # SgdsTooltip
 
-<Story name="Basic">{Template.bind({})}</Story>
-
+<Canvas>
+  <Story name="Basic">{Template.bind({})}</Story>
+</Canvas>
 
 ```jsx
-import {
-  SgdsTooltip,
-} from "@govtechsg/sgds-web-component/Tooltip";
+import { SgdsTooltip } from "@govtechsg/sgds-web-component/Tooltip";
 ```
 
 <ArgsTable story="Basic" />
 
 ```jsx
 <sgds-tooltip>
-      <sgds-button variant="warning">Hover me</sgds-button>
-    </sgds-tooltip>
+  <sgds-button size="sm" variant="warning">
+    Hover me
+  </sgds-button>
+</sgds-tooltip>
 ```
