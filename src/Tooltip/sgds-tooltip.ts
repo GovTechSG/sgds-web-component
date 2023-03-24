@@ -62,9 +62,9 @@ export class SgdsTooltip extends SgdsElement {
           return mod;
         });
         this.popperConfig.modifiers = newModifiers;
-        this.popperConfig.placement = this.placement;
         return this.popperConfig;
       },
+      placement: this.placement,
       trigger: this.trigger,
       title: this.trigger === "click" ? this.closableContainer : this.content,
       html: true,

@@ -4,8 +4,10 @@ import {
   fixture,
   assert,
   expect,
+  waitUntil
 } from "@open-wc/testing";
 import { html } from "lit";
+import Sinon from "sinon";
 
 describe("sgds-tooltip", () => {
   it("is defined", () => {
@@ -42,12 +44,10 @@ describe("sgds-tooltip", () => {
     expect(el.tooltipConfig.title).to.equal(el.closableContainer)
     expect(el.closableContainer.innerHTML).to.equal('hello<button class="btn-close btn-close-white" aria-label="Close"></button>')
   })
-  it('placement props updates popperConfig', async() => {
+  it('placement props updates tooltipConfig', async() => {
     const el = await fixture<SgdsTooltip>(
       html`<sgds-tooltip content="hello" placement="bottom"><sgds-button>Hover me</sgds-button></sgds-tooltip>`
     );
-    expect(el.popperConfig.placement).to.equal('bottom')
-    expect(el.tooltipConfig.title).to.equal(el.closableContainer)
-    expect(el.closableContainer.innerHTML).to.equal('hello<button class="btn-close btn-close-white" aria-label="Close"></button>')
+    expect(el.tooltipConfig.placement).to.equal('bottom')
   })
 })
