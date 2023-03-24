@@ -14,8 +14,6 @@ export class SgdsTooltip extends SgdsElement {
 
   @property({ type: String })
   content = "";
-  @property({ type: Array })
-  offset: [number, number] = [0, 0];
 
   @property({ type: String })
   placement: "top" | "bottom" | "left" | "right" = "top";
@@ -23,7 +21,13 @@ export class SgdsTooltip extends SgdsElement {
   @property({ type: String })
   trigger: "click" | "hover" | "focus" | "hover focus" = "hover focus";
 
-  private closableContainer: HTMLElement;
+  closableContainer: HTMLElement;
+
+  @state()
+  popperConfig: Partial<Popper.Options>;
+
+  @state()
+  tooltipConfig: Partial<Tooltip.Options>;
 
   firstUpdated() {
     // refer to Bootstrap's Tooltip options
@@ -47,9 +51,9 @@ export class SgdsTooltip extends SgdsElement {
         .querySelector(".btn-close")
         ?.addEventListener("click", () => this.closeTooltip());
     }
-
-    this.bsTooltip = new Tooltip(this.myTooltip.value, {
+    this.tooltipConfig = {
       popperConfig: (defaultConfig?: Partial<Popper.Options>) => {
+        this.popperConfig = defaultConfig;
         const defaultModifiers = defaultConfig.modifiers;
         const newModifiers = defaultModifiers.map((mod) => {
           if (mod.name === "flip") {
@@ -57,17 +61,17 @@ export class SgdsTooltip extends SgdsElement {
           }
           return mod;
         });
-        defaultConfig.modifiers = newModifiers;
-        defaultConfig.placement = this.placement;
-        return defaultConfig;
+        this.popperConfig.modifiers = newModifiers;
+        this.popperConfig.placement = this.placement;
+        return this.popperConfig;
       },
       trigger: this.trigger,
       title: this.trigger === "click" ? this.closableContainer : this.content,
       html: true,
-      offset: this.offset,
       sanitize: false, // to allow button element,
       container: this.shadowRoot.querySelector("div"), // tooltip to appear inside the shadow root of sgds-tooltip instead of anywhere in the DOM, so that scoped styles can apply
-    } as Partial<Tooltip.Options>);
+    } as Partial<Tooltip.Options>;
+    this.bsTooltip = new Tooltip(this.myTooltip.value, this.tooltipConfig);
 
     this.myTooltip.value.addEventListener("show.bs.tooltip", () => {
       this.emit("sgds-show");

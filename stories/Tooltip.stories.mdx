@@ -30,13 +30,6 @@ import { partDescription, dropdownElementProps } from "./common";
       description:
         "Where the Tooltip is positioned relative to its target element",
     },
-    offset: {
-      control: "object",
-      defaultValue: [0, 0],
-      table: { category: "props", type: { summary: "[number, number]" } },
-      description:
-        "Offset of the tooltip relative to its target using a array of two numbers: [skidding, distance] ",
-    },
     trigger: {
       control: "select",
       options: ["click", "hover", "focus", "hover focus"],
@@ -52,11 +45,10 @@ import { partDescription, dropdownElementProps } from "./common";
   }}
 />
 
-export const Template = ({ content, offset, trigger, placement }) => {
+export const Template = ({ content, trigger, placement }) => {
   return html`
     <sgds-tooltip
       .content=${content}
-      .offset=${offset}
       .trigger=${trigger}
       .placement=${placement}
     >
