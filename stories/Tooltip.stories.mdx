@@ -2,6 +2,7 @@ import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import "../lib/Tooltip";
 import { partDescription, dropdownElementProps } from "./common";
+import { commonEvents } from "./common"
 
 <Meta
   title="Components/Tooltip"
@@ -42,6 +43,7 @@ import { partDescription, dropdownElementProps } from "./common";
         },
       },
     },
+    ...commonEvents("SgdsTooltip")
   }}
 />
 
@@ -59,9 +61,12 @@ export const Template = ({ content, trigger, placement }) => {
 
 # SgdsTooltip
 
-<Canvas>
-  <Story name="Basic">{Template.bind({})}</Story>
-</Canvas>
+`Tooltip` provides a brief description of a feature or page element.
+
+The default `Tooltip` is hoverable, with top placement. Pass in the Tooltip text through the `content` prop as a string
+The `Tooltip` component works as a wrapper around its target children element.
+
+<Story name="Basic">{Template.bind({})}</Story>
 
 ```jsx
 import { SgdsTooltip } from "@govtechsg/sgds-web-component/Tooltip";
