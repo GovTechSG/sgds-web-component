@@ -15,6 +15,7 @@ export class SgdsTable extends SgdsElement {
   @property({ type: String, reflect: true }) size?: string;
   @property({ type: String, reflect: true }) variant?: string;
   @property({ type: Boolean, reflect: true  }) sort = false;
+  @property({ type: Boolean, reflect: true }) removableSort = false;
 
   @property({ type: String, reflect: true }) responsive?: 'sm' | 'md' | 'lg' | 'xl';
 
@@ -24,6 +25,10 @@ export class SgdsTable extends SgdsElement {
 
   @state() sortColumn: number | null = null;
   @state() sortDirection: "asc" | "desc" = "asc";
+  @state() activeColumn: number | null = null;
+  @state() sortClickCount = 0;
+  @state() clickCount = 0;
+
 
   handleHeaderClick(columnIndex: number) {
     if (this.sort == true) {
@@ -33,11 +38,11 @@ export class SgdsTable extends SgdsElement {
         this.sortColumn = columnIndex;
         this.sortDirection = "asc";
       }
-
+  
       this.tableData = [...this.tableData].sort((a, b) => {
         const aValue = a[columnIndex];
         const bValue = b[columnIndex];
-
+  
         if (typeof aValue === "string" && typeof bValue === "string") {
           return this.sortDirection === "asc"
             ? aValue.localeCompare(bValue)
@@ -47,7 +52,40 @@ export class SgdsTable extends SgdsElement {
             ? (aValue as any) - (bValue as any)
             : (bValue as any) - (aValue as any);
         }
+      })
+  
+      // update the active column
+      if (this.activeColumn === columnIndex) {
+        this.clickCount++;
+        if (this.clickCount === 3 && this.removableSort == true) {
+          this.activeColumn = null;
+          this.clickCount = 0;
+        }
+      } else {
+        this.activeColumn = columnIndex;
+        this.clickCount = 1;
+      }
+  
+      // add the .active class to the clicked header cell
+      const thElements = this.shadowRoot!.querySelectorAll("th");
+      thElements.forEach((thElement, index) => {
+        if (index === columnIndex) {
+          thElement.classList.add("active");
+        } else {
+          thElement.classList.remove("active");
+        }
       });
+    }
+  }
+
+  
+  getIcon(columnIndex: number) {
+    if (this.activeColumn !== columnIndex) {
+      return html`<sl-icon name="arrow-down-up" class="ms-2 align-self-center"></sl-icon>`;
+    } else {
+      return this.sortDirection === "asc"
+        ? html`<sl-icon name="sort-up-alt" class="ms-2 align-self-center"></sl-icon>`
+        : html`<sl-icon name="sort-down" class="ms-2 align-self-center"></sl-icon>`;
     }
   }
 
@@ -72,12 +110,19 @@ export class SgdsTable extends SgdsElement {
         >
           <thead>
             <tr>
-              ${this.tableHeaders.map(
-                (header: string, index: number) =>
-                  html`<th @click=${() => this.handleHeaderClick(index)}>
-                    ${header}
-                  </th>`
-              )}
+            ${this.tableHeaders.map(
+          (header: string, index: number) => html`
+            <th
+              class="${classMap({
+                "sortable-header": this.sort,
+                active: this.activeColumn === index,
+              })}"
+              @click=${() => this.handleHeaderClick(index)}
+            >
+              ${header} ${this.sort ? this.getIcon(index) : null}
+            </th>
+          `
+        )}
             </tr>
           </thead>
           <tbody>
