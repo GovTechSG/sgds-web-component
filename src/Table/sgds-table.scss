@@ -1,2 +1,21 @@
 @import "../utils/base.scss";
 @import "~@govtechsg/sgds/sass/table";
+
+:host {
+  --tableheader-theme-color: #5925dc;
+}
+
+.sortable-header {
+  cursor: pointer;
+
+  // &:hover {
+  //   background-color: #f5f5f5;
+  // }
+
+  &.active {
+    background-color:white;
+    border-bottom: 2px solid var(--tableheader-theme-color);
+    color: var(--tableheader-theme-color);
+  }
+}
+
