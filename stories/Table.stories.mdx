@@ -53,7 +53,19 @@ import "../lib/Table";
     sort: {
       control: "boolean",
       description:
-        "Enables a sorting functionality for each of the `<thead>` column",
+        "Sorting on a column is enabled by adding the sort property.",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    removableSort: {
+      control: "boolean",
+      description:
+        "When removableSort property is present, the third click removes the sorting from the column.",
       table: {
         category: "props",
         defaultValue: { summary: false },
@@ -130,6 +142,7 @@ export const Template = (args) => {
       .tableHeaders=${args.tableHeaders}
       .tableData=${args.tableData}
       .sort=${args.sort}
+      .removableSort=${args.removableSort}
     >
     </sgds-table>
   `;
@@ -215,7 +228,7 @@ Use `size="sm"` to make tables compact by cutting cell padding in half.
 
 ## Sorting
 
-Use `sort=true` to enable the sorting functionality for each of the `<thead>` column.
+Sorting on a column is enabled by adding the `sort` property.
 
 <Canvas>
   <Story
@@ -227,7 +240,31 @@ Use `sort=true` to enable the sorting functionality for each of the `<thead>` co
         ["2", "Jane", "Doe", "@janedoe"],
         ["3", "Bob", "Smith", "@bobsmith"],
       ],
+      bordered: true,
       sort: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Removable Sort
+
+When `removableSort` is present, the third click removes the sorting from the column.
+
+<Canvas>
+  <Story
+    name='Removable Sort'
+    args={{
+      tableHeaders: ["#", "First Names", "Last Name", "Username"],
+      tableData: [
+        ["1", "John", "Doe", "@johndoe"],
+        ["2", "Jane", "Doe", "@janedoe"],
+        ["3", "Bob", "Smith", "@bobsmith"],
+      ],
+      bordered: true,
+      sort: true,
+      removableSort: true,
     }}
   >
     {Template.bind({})}
