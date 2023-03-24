@@ -180,6 +180,35 @@ export const dropdownElementProps = (componentName, disableControl = false) => {
     for (const [key, value] of Object.entries(argsObj)) {
       value.control = "disable";
     }
-    return argsObj
-  } else return argsObj
+    return argsObj;
+  } else return argsObj;
 };
+
+export const commonEvents = (componentName) => ({
+  "sgds-show": {
+    description: "Emitted event when show instance is called ",
+    table: {
+      category: `Event: ${componentName}`,
+    },
+  },
+  "sgds-shown": {
+    description:
+      "Emitted event when dropdown has been made visible to the user and CSS transitions have completed",
+    table: {
+      category: `Event: ${componentName}`,
+    },
+  },
+  "sgds-hide": {
+    description: "Emitted event when hide instance is called",
+    table: {
+      category: `Event: ${componentName}`,
+    },
+  },
+  "sgds-hidden": {
+    description:
+      "Emitted event when the dropdown has finished being hidden from the user and CSS transitions have completed",
+    table: {
+      category: `Event: ${componentName}`,
+    },
+  },
+});
