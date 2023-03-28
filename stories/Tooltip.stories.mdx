@@ -2,7 +2,7 @@ import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import "../lib/Tooltip";
 import { partDescription, dropdownElementProps } from "./common";
-import { commonEvents } from "./common"
+import { commonEvents } from "./common";
 
 <Meta
   title="Components/Tooltip"
@@ -43,18 +43,33 @@ import { commonEvents } from "./common"
         },
       },
     },
-    ...commonEvents("SgdsTooltip")
+    ...commonEvents("SgdsTooltip"),
   }}
 />
 
 export const Template = ({ content, trigger, placement }) => {
   return html`
+  Hover over the icon
     <sgds-tooltip
       .content=${content}
       .trigger=${trigger}
       .placement=${placement}
     >
-      <sgds-button variant="warning">Hover me</sgds-button>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-info-circle"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+        />
+        <path
+          d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+        />
+      </svg>
     </sgds-tooltip>
   `;
 };
@@ -64,7 +79,9 @@ export const Template = ({ content, trigger, placement }) => {
 `Tooltip` provides a brief description of a feature or page element.
 
 The default `Tooltip` is hoverable, with top placement. Pass in the Tooltip text through the `content` prop as a string
-The `Tooltip` component works as a wrapper around its target children element.
+The `Tooltip` component works as a wrapper around its target children element. 
+
+It is recommended to use hoverable tooltips for buttons and hyperlinks to avoid clashes with the native click functions of the component. You can use clickable tooltips for elements which does not have click features e.g. icon, plain text.
 
 <Story name="Basic">{Template.bind({})}</Story>
 
