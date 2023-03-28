@@ -11,7 +11,7 @@ export class SgdsCloseButton extends SgdsElement {
   @property({ type: Boolean, reflect: true })
   closed = false;
 
-  @property({ type: String }) closeLabel =  "Close alert";
+  @property({ type: String }) closeLabel = "Close alert";
 
   handleClick() {
     this.closed = true;
@@ -21,6 +21,7 @@ export class SgdsCloseButton extends SgdsElement {
   render() {
     return html`
       <button
+        type="button"
         class=${classMap({ "btn-close btn-sm": true })}
         aria-label=${this.closeLabel}
         @click="${this.handleClick}"
