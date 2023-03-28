@@ -4,7 +4,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { getAnimation, setDefaultAnimation } from '../utils/animation-registry';
 import { html } from 'lit';
-// import { LocalizeController } from '../../utilities/localize';
 import { waitForEvent } from '../utils/event';
 import { watch } from '../utils/watch';
 import SgdsElement from "../utils/sgds-element";
@@ -17,14 +16,11 @@ export class SgdsAccordion extends SgdsElement {
   @query('.accordion') accordion: HTMLElement;
   @query('.accordion-header') header: HTMLElement;
   @query('.accordion-body') body: HTMLElement;
-  @query('.accordion__expand-icon-slot') expandIconSlot: HTMLSlotElement;
 
   @property({ type: Boolean, reflect: true }) open = false;
 
-  /** The summary to show in the header. If you need to display HTML, use the `summary` slot instead. */
   @property() summary: string;
 
-  /** Disables the accordion so it can't be toggled. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   firstUpdated() {
@@ -136,10 +132,13 @@ export class SgdsAccordion extends SgdsElement {
           	'accordion--disabled': this.disabled
         })}
       >
-        <header
+        <button
           part="header"
+          class=${classMap({
+            "accordion-button": true,
+            'collapsed' : !this.open
+          })}
           id="header"
-          class="accordion-button"
           role="button"
           aria-expanded=${this.open ? 'true' : 'false'}
           aria-controls="content"
@@ -149,15 +148,7 @@ export class SgdsAccordion extends SgdsElement {
           @keydown=${this.handleSummaryKeyDown}
         >
           <slot name="summary" part="summary" class="accordion__summary">${this.summary}</slot>
-          <span part="summary-icon" class="accordion__summary-icon">
-            <slot name="expand-icon">
-              <sl-icon library="system" name='chevron-up'></sl-icon>
-            </slot>
-            <slot name="collapse-icon">
-              <sl-icon library="system" name='chevron-down'></sl-icon>
-            </slot>
-          </span>
-        </header>
+        </button>
         <div class="accordion-body">
           <slot part="content" id="content" class="accordion-content" role="region" aria-labelledby="header"></slot>
         </div>
@@ -171,7 +162,7 @@ setDefaultAnimation('accordion.show', {
     { height: '0', opacity: '0' },
     { height: 'auto', opacity: '1' }
   ],
-  options: { duration: 300, easing: 'linear' }
+  options: { duration: 200, easing: 'ease-in-out' }
 });
 
 setDefaultAnimation('accordion.hide', {
@@ -179,7 +170,7 @@ setDefaultAnimation('accordion.hide', {
     { height: 'auto', opacity: '1' },
     { height: '0', opacity: '0' }
   ],
-  options: { duration: 300, easing: 'linear' }
+  options: { duration: 200, easing: 'ease-in-out' }
 });
 
 export default SgdsAccordion;
