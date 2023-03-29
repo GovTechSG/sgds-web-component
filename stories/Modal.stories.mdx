@@ -6,72 +6,77 @@ import "../lib/Button";
 <Meta
   title="Components/Modal"
   argTypes={{
-    open: { 
-      control: "boolean" ,
+    open: {
+      control: "boolean",
       table: { category: "props" },
-      description: 'Indicates whether or not the modal is open. You can use this in lieu of the show/hide methods.',
+      description:
+        "Indicates whether or not the modal is open. You can use this in lieu of the show/hide methods.",
       defaultValue: false,
     },
-    title: { 
+    title: {
       control: "text",
       table: { category: "props" },
       description: "The modal's title as displayed in the header",
-      defaultValue: 'This is a title',
+      defaultValue: "This is a title",
     },
-    titleIcon: { 
-      control: "text" ,
+    titleIcon: {
+      control: "text",
       table: { category: "props" },
       description: "The modal's icon as displayed in the header",
-      defaultValue: 'stack',
+      defaultValue: "stack",
     },
-    'sgds-show': { 
+    "sgds-show": {
       table: { category: "Events" },
       description: "Emitted when the modal opens.",
     },
-    'sgds-after-show': { 
+    "sgds-after-show": {
       table: { category: "Events" },
-      description: "	Emitted after the modal opens and all animations are complete.",
+      description:
+        "	Emitted after the modal opens and all animations are complete.",
     },
-    'sgds-hide': { 
+    "sgds-hide": {
       table: { category: "Events" },
       description: "Emitted when the modal closes.",
     },
-    'sgds-after-hide': { 
+    "sgds-after-hide": {
       table: { category: "Events" },
-      description: "Emitted after the modal closes and all animations are complete.",
+      description:
+        "Emitted after the modal closes and all animations are complete.",
     },
-    'hide': { 
+    hide: {
       table: { category: "Methods" },
       description: "Hides the modal.",
     },
-    'show': { 
+    show: {
       table: { category: "Methods" },
       description: "Shows the modal.",
     },
-    default: { 
-      control: "text" ,
+    default: {
+      control: "text",
       table: { category: "Slots" },
       description: "The modal's content.",
-      defaultValue: 'This is the modal body',
+      defaultValue: "This is the modal body",
     },
-    'label ': { 
+    "label ": {
       table: { category: "Slots" },
       description: "The modal's label.",
     },
-    'footer': { 
+    footer: {
       table: { category: "Slots" },
       description: "The modal's footer.",
     },
-    '--sgds-modal-width': { 
-      control: "text" ,
+    "--sgds-modal-width": {
+      control: "text",
       table: { category: "CSS Custom Properties" },
-      description: "The preferred width of the modal. Note that the modal will shrink to accommodate smaller screens.",
-    }
+      description:
+        "The preferred width of the modal. Note that the modal will shrink to accommodate smaller screens.",
+    },
   }}
 />
 
-export const Template = (args) =>
-  html`
+export const Template = (args) => {
+  return html`
+    <sgds-button @click=${clickModal}>Open Modal</sgds-button>
     <sgds-modal
       .open=${args.open}
       .title=${args.title}
@@ -79,10 +84,20 @@ export const Template = (args) =>
       .centeredAlignVariant=${args.centeredAlignVariant}
     >
       ${args.default}
-      <sgds-button slot="footer" variant="link" class="close-modal">Close</sgds-button>
-      <sgds-button slot="footer" variant="primary" type="submit" form="formA" >Submit</sgds-button>
+      <sgds-button slot="footer" variant="link" class="close-modal"
+        >Close</sgds-button
+      >
+      <sgds-button slot="footer" variant="primary" type="submit" form="formA"
+        >Submit</sgds-button
+      >
     </sgds-modal>
   `;
+};
+
+export const clickModal = () => {
+  const modal = document.querySelector('sgds-modal')
+  modal.show()
+}
 
 # SgdsModal
 
