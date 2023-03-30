@@ -76,7 +76,7 @@ import "../lib/Button";
 
 export const Template = (args) => {
   return html`
-    <sgds-button @click=${clickModal}>Open Modal</sgds-button>
+    <sgds-button @click=${showModal}>Open Modal</sgds-button>
     <sgds-modal
       .open=${args.open}
       .title=${args.title}
@@ -84,7 +84,7 @@ export const Template = (args) => {
       .centeredAlignVariant=${args.centeredAlignVariant}
     >
       ${args.default}
-      <sgds-button slot="footer" variant="link" class="close-modal"
+      <sgds-button @click=${closeModal} slot="footer" variant="link" class="close-modal"
         >Close</sgds-button
       >
       <sgds-button slot="footer" variant="primary" type="submit" form="formA"
@@ -94,9 +94,13 @@ export const Template = (args) => {
   `;
 };
 
-export const clickModal = () => {
+export const showModal = () => {
   const modal = document.querySelector('sgds-modal')
   modal.show()
+}
+export const closeModal = () => {
+  const modal = document.querySelector('sgds-modal')
+  modal.hide()
 }
 
 # SgdsModal
@@ -112,7 +116,7 @@ The modal component inform users about a specific task and may contain critical 
 ## API
 
 ```jsx
-import { SgdsModal } from "@govtechsg/sgds-web-component";
+import { SgdsModal } from "@govtechsg/sgds-web-component/Modal";
 ```
 
 <ArgsTable story="Basic" />
