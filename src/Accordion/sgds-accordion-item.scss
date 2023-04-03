@@ -1,0 +1,16 @@
+@import "../utils/base.scss";
+@import "~@govtechsg/sgds/sass/accordion";
+
+.accordion-body {
+    padding: 0;
+    overflow: hidden;
+}
+
+.accordion-content {
+    display: block;
+    padding: $accordion-button-padding-y $accordion-button-padding-x;
+  }
+
+.accordion-button:not(.collapsed){
+  box-shadow: none;
+}
