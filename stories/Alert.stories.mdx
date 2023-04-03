@@ -69,7 +69,7 @@ export const Template = (args) =>
       .variant=${args.variant}
       .show=${args.show}
       .closeLabel=${args.closeLabel}
-      ><sgds-icon name="info-circle" class="flex-shrink-0 me-4"></sgds-icon>
+      ><sl-icon name="info-circle" class="flex-shrink-0 me-4"></sl-icon>
       <div>
         This is an Alert component. You may add the dismissible option.
       </div></sgds-alert
@@ -79,7 +79,7 @@ export const Template = (args) =>
 export const TemplateLinks = (args) =>
   html`
     <sgds-alert alertClasses="d-flex align-items-center">
-      <sgds-icon name="info-circle" class="flex-shrink-0 me-4"></sgds-icon>
+      <sl-icon name="info-circle" class="flex-shrink-0 me-4"></sl-icon>
       <div>
         This is a primary alert with&nbsp;<a class="alert-link"
           >an example link</a
@@ -91,10 +91,10 @@ export const TemplateLinks = (args) =>
 export const TemplateAddContent = (args) =>
   html`
     <sgds-alert variant="success" alertClasses="d-flex align-items-center">
-      <sgds-icon
+      <sl-icon
         name="info-circle"
         class="flex-shrink-0 me-4 align-self-start mt-2"
-      ></sgds-icon>
+      ></sl-icon>
       <div>
         <h4 class="alert-heading">Hey, nice to see you</h4>
         <p>
@@ -118,7 +118,7 @@ export const TemplateWithButton = (args) =>
       variant="warning"
       alertClasses="d-flex align-items-center"
       dismissible
-      ><sgds-icon name="info-circle" class="flex-shrink-0 me-4"></sgds-icon>
+      ><sl-icon name="info-circle" class="flex-shrink-0 me-4"></sl-icon>
       <div>
         This is an Alert component. You may add the dismissible option.
       </div></sgds-alert

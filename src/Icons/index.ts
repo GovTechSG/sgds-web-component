@@ -1,1 +1,0 @@
-export { SgdsIcon } from './sgds-icon'

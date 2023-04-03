@@ -13,5 +13,4 @@ module.exports = {
   "core": {
     "builder": "@storybook/builder-webpack5"
   },
-  staticDirs: [{from: "../assets/icons", to: "/assets/icons"}]
 }

@@ -11,7 +11,7 @@ import { HasSlotController } from '../utils/slot';
 import { watch } from '../utils/watch';
 import { getAnimation, setDefaultAnimation } from '../utils/animation-registry';
 import styles from "./sgds-modal.scss";
-import "../Icons"
+
 
 @customElement('sgds-modal')
 export class SgdsModal extends SgdsElement {
@@ -199,7 +199,7 @@ export class SgdsModal extends SgdsElement {
   render() {
      // if label is defined
      const withLabelIcon = html`
-     <sgds-icon name=${this.titleIcon} class="pe-2 flex-shrink-0"></sgds-icon>`
+     <sl-icon name=${this.titleIcon} class="pe-2 flex-shrink-0"></sl-icon>`
 
     return html`
       <div
@@ -251,7 +251,7 @@ export class SgdsModal extends SgdsElement {
                       // 'centered': this.centeredAlignVariant,
                     })}
                     @click="${() => this.requestClose('close-button')}"
-                  ><sgds-icon name="x-lg"></sgds-icon></sgds-button>
+                  ><sl-icon name="x-lg"></sl-icon></sgds-button>
                 </h3>
               `
             : ''}

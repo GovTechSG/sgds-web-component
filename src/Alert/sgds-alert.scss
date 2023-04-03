@@ -23,7 +23,7 @@
   .alert-#{$state} {
     @include alert-variant($alert-background, $alert-border, $alert-color);
 
-    ::slotted(sgds-icon),
+    ::slotted(sl-icon),
     ::slotted(i) {
       color: map-get($map: $value, $key: #{$state}-600);
     }

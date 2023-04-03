@@ -19,4 +19,3 @@ import "./Stepper";
 import "./Alert";
 import "./CloseButton";
 import "./Toast";
-import "./Icons"
