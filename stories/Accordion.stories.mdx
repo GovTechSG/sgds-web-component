@@ -8,7 +8,13 @@ import "../lib/Accordion";
     summary:{
       control: "text" ,
       table: { category: "props" },
-      description: 'Title of the accordion'
+      description: 'Title of the accordion',
+    },
+    'allowMultiple':{
+      control: "boolean" ,
+      table: { category: "props" },
+      description: 'Allows multiple accordion items to be opened at the same time',
+      type: { summary: "Boolean" },
     },
     'sgds-show':{
       table: { 
@@ -52,16 +58,20 @@ import "../lib/Accordion";
 
 export const Template = (args) =>
   html`
-    <sgds-accordion
-     .summary=${args.summary}
-    > 
-      ${args.content} 
-    </sgds-accordion>
-    <sgds-accordion
-     .summary=${args.summary}
-    > 
-      ${args.content} 
-    </sgds-accordion>
+  <sgds-accordion
+    .allowMultiple=${args.allowMultiple}
+    >
+      <sgds-accordion-item
+      .summary=${args.summary}
+      > 
+        ${args.content} 
+      </sgds-accordion-item>
+      <sgds-accordion-item
+      .summary=${args.summary}
+      > 
+        ${args.content} 
+      </sgds-accordion-item>
+    </sgds-accordion
   `;
 
 # SgdsAccordion
