@@ -24,19 +24,24 @@ export class SgdsTable extends SgdsElement {
   @property({ type: Array<String> }) tableData = [];
 
   @state() sortColumn: number | null = null;
-  @state() sortDirection: "asc" | "desc" = "asc";
+  @state() sortAsc = true
   @state() activeColumn: number | null = null;
   @state() sortClickCount = 0;
   @state() clickCount = 0;
+  @state() originalTableData: Array<string[]> = [];
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.originalTableData = [...this.tableData];
+  }
 
   handleHeaderClick(columnIndex: number) {
-    if (this.sort == true) {
+    if (this.sort) {
       if (this.sortColumn === columnIndex) {
-        this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc";
+        this.sortAsc = !this.sortAsc
       } else {
         this.sortColumn = columnIndex;
-        this.sortDirection = "asc";
+        this.sortAsc = true
       }
   
       this.tableData = [...this.tableData].sort((a, b) => {
@@ -44,11 +49,11 @@ export class SgdsTable extends SgdsElement {
         const bValue = b[columnIndex];
   
         if (typeof aValue === "string" && typeof bValue === "string") {
-          return this.sortDirection === "asc"
+          return this.sortAsc
             ? aValue.localeCompare(bValue)
             : bValue.localeCompare(aValue);
         } else {
-          return this.sortDirection === "asc"
+          return this.sortAsc
             ? (aValue as any) - (bValue as any)
             : (bValue as any) - (aValue as any);
         }
@@ -57,9 +62,10 @@ export class SgdsTable extends SgdsElement {
       // update the active column
       if (this.activeColumn === columnIndex) {
         this.clickCount++;
-        if (this.clickCount === 3 && this.removableSort == true) {
+        if (this.clickCount === 3 && this.removableSort) {
           this.activeColumn = null;
           this.clickCount = 0;
+          this.tableData = [...this.originalTableData];
         }
       } else {
         this.activeColumn = columnIndex;
@@ -83,7 +89,7 @@ export class SgdsTable extends SgdsElement {
     if (this.activeColumn !== columnIndex) {
       return html`<sl-icon name="arrow-down-up" class="ms-2 align-self-center"></sl-icon>`;
     } else {
-      return this.sortDirection === "asc"
+      return this.sortAsc
         ? html`<sl-icon name="sort-up-alt" class="ms-2 align-self-center"></sl-icon>`
         : html`<sl-icon name="sort-down" class="ms-2 align-self-center"></sl-icon>`;
     }
