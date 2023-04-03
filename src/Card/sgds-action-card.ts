@@ -70,7 +70,7 @@ export class SgdsActionCard extends CardElement {
       @keydown=${this.handleKeyDown}
     ></sgds-radio>`;
 
-    const icon = html`<sl-icon name="${this.iconName}"></sl-icon>`;
+    const icon = html`<sgds-icon name="${this.iconName}"></sgds-icon>`;
 
     return html`
       <div

@@ -152,7 +152,7 @@ export class SgdsInput extends SgdsElement {
     const inputWithIcon = html`
       <div class="sgds form-control-group ${this.inputClasses}">
         <span class="form-control-icon">
-          <sl-icon name=${this.iconName}></sl-icon>
+          <sgds-icon name=${this.iconName}></sgds-icon>
         </span>
         ${input}
       </div>

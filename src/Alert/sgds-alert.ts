@@ -16,10 +16,10 @@ import { repeat } from "lit/directives/repeat.js";
  * @status stable
  * @since 2.0
  *
- * @dependency sl-icon-button
+ * @dependency sgds-icon-button
  *
  * @slot - The alert's main content.
- * @slot icon - An icon to show in the alert. Works best with `<sl-icon>`.
+ * @slot icon - An icon to show in the alert. Works best with `<sgds-icon>`.
  *
  * @event sl-show - Emitted when the alert opens.
  * @event sl-after-show - Emitted after the alert opens and all animations are complete.
@@ -29,7 +29,7 @@ import { repeat } from "lit/directives/repeat.js";
  * @csspart base - The component's base wrapper.
  * @csspart icon - The container that wraps the optional icon.
  * @csspart message - The container that wraps the alert's main content.
- * @csspart close-button - The close button, an `<sl-icon-button>`.
+ * @csspart close-button - The close button, an `<sgds-icon-button>`.
  * @csspart close-button__base - The close button's exported `base` part.
  *
  * @animation alert.show - The animation to use when showing the alert.

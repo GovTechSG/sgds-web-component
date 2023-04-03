@@ -13,6 +13,7 @@
     "noImplicitAny": false,
     "importHelpers": true,
     "rootDir": "src",
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "**/*.ts",

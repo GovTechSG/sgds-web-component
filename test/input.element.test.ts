@@ -71,7 +71,7 @@ describe("sgds-input", () => {
       `
         <div class="sgds form-control-group">
           <span class="form-control-icon">
-            <sl-icon name="search"></sl-icon> 
+            <sgds-icon name="search"></sgds-icon> 
           </span>
           <input type="text" class="form-control " id="defaultID" placeholder="Placeholder" aria-invalid="false">
           <div class="invalid-feedback" id="defaultID-invalid">default feedback</div>
@@ -82,7 +82,7 @@ describe("sgds-input", () => {
 
   it("updates the iconName attribute value to 'stack'", async () => {
     const el = await fixture(html`<sgds-input iconName="search"></sgds-input>`);
-    const iconElement = el.shadowRoot?.querySelector("sl-icon");
+    const iconElement = el.shadowRoot?.querySelector("sgds-icon");
     iconElement?.setAttribute("name", "stack");
     await elementUpdated(el);
     expect(iconElement?.getAttribute("name")).to.equal("stack");

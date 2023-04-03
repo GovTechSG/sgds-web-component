@@ -98,7 +98,7 @@ export class SgdsQuantityToggle extends SgdsElement {
         @click=${this.onMinus}
         ?disabled=${this.disabled}
       >
-        <sl-icon name="dash-lg"></sl-icon>
+        <sgds-icon name="dash-lg"></sgds-icon>
       </sgds-button>
       <input 
         type="number" 
@@ -120,7 +120,7 @@ export class SgdsQuantityToggle extends SgdsElement {
         @click=${this.onPlus}
         ?disabled=${this.disabled}
       >
-        <sl-icon name="plus-lg"></sl-icon>
+        <sgds-icon name="plus-lg"></sgds-icon>
       </sgds-button>
     </div>
     `;
