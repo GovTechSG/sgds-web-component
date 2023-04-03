@@ -1,12 +1,12 @@
-import { SgdsAccordion } from '../src/Accordion/sgds-accordion';
-import '../src/Accordion/sgds-accordion';
+import { SgdsAccordionItem } from '../src/Accordion/sgds-accordion-item';
+import '../src/Accordion/sgds-accordion-item';
 import {fixture, assert, expect, aTimeout, waitUntil} from '@open-wc/testing';
 import {html} from 'lit';
 import sinon  from 'sinon';
 
 describe('<sgds-accordion>', () => {
     it('should be visible with the open attribute', async () => {
-      const el = await fixture<SgdsAccordion>(html`
+      const el = await fixture<SgdsAccordionItem>(html`
         <sgds-accordion open>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -19,7 +19,7 @@ describe('<sgds-accordion>', () => {
     });
   
     it('should not be visible without the open attribute', async () => {
-      const el = await fixture<SgdsAccordion>(html`
+      const el = await fixture<SgdsAccordionItem>(html`
         <sgds-accordion>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -32,7 +32,7 @@ describe('<sgds-accordion>', () => {
     });
   
     it('should emit sgds-show and sgds-after-show when calling show()', async () => {
-      const el = await fixture<SgdsAccordion>(html`
+      const el = await fixture<SgdsAccordionItem>(html`
         <sgds-accordion>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -56,7 +56,7 @@ describe('<sgds-accordion>', () => {
     });
   
     it('should emit sgds-hide and sgds-after-hide when calling hide()', async () => {
-      const el = await fixture<SgdsAccordion>(html`
+      const el = await fixture<SgdsAccordionItem>(html`
         <sgds-accordion open>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -80,7 +80,7 @@ describe('<sgds-accordion>', () => {
     });
   
     it('should emit sgds-show and sgds-after-show when setting open = true', async () => {
-      const el = await fixture<SgdsAccordion>(html`
+      const el = await fixture<SgdsAccordionItem>(html`
         <sgds-accordion>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -104,7 +104,7 @@ describe('<sgds-accordion>', () => {
     });
   
     it('should emit sgds-hide and sgds-after-hide when setting open = false', async () => {
-      const el = await fixture<SgdsAccordion>(html`
+      const el = await fixture<SgdsAccordionItem>(html`
         <sgds-accordion open>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -128,7 +128,7 @@ describe('<sgds-accordion>', () => {
     });
   
     it('should not open when preventing sgds-show', async () => {
-      const el = await fixture<SgdsAccordion>(html`
+      const el = await fixture<SgdsAccordionItem>(html`
         <sgds-accordion>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -147,7 +147,7 @@ describe('<sgds-accordion>', () => {
     });
   
     it('should not close when preventing sgds-hide', async () => {
-      const el = await fixture<SgdsAccordion>(html`
+      const el = await fixture<SgdsAccordionItem>(html`
         <sgds-accordion open>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
