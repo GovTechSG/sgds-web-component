@@ -20,3 +20,4 @@ import "./Alert";
 import "./CloseButton";
 import "./Toast";
 import "./Accordion";
+import "./Tooltip";
