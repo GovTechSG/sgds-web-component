@@ -1,0 +1,118 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import "../lib/FileUpload";
+// import '@shoelace-style/shoelace/dist/shoelace/icons.js';
+
+<Meta
+  title='Components/File Upload'
+  argTypes={{
+    size: {
+      control: "radio",
+      options: ["sm", "md", "lg"],
+      defaultValue: "md",
+      table: { category: "props", type: { summary: "string" } },
+      description: "Specifies a large or small button",
+    },
+    checkedIcon: {
+      control: "text",
+      defaultValue: "check",
+      table: { category: "props", type: { summary: "Element" } },
+      description: "Customize the checked icon",
+    },
+    cancelIcon: {
+      control: "text",
+      defaultValue: "x-octagon",
+      table: { category: "props", type: { summary: "Element" } },
+      description: "Customize the cancel icon",
+    },
+    variant: {
+      control: "select",
+      options: [
+        "primary",
+        "secondary",
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "dark",
+        "light",
+        "link",
+        "outline-primary",
+        "outline-secondary",
+        "outline-success",
+        "outline-danger",
+        "outline-warning",
+        "outline-info",
+        "outline-dark",
+        "outline-light",
+      ],
+      defaultValue: "primary",
+      table: { category: "props" },
+      description:
+        "One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as `outline` versions (prefixed by `outline-*`)",
+    },
+    disabled: {
+      control: "boolean",
+      defaultValue: false,
+      table: { category: "props" },
+      description: "The disabled state of the button",
+    },
+    defaultSlot: {
+      name: "default",
+      description: "default slot for button element",
+      table: {
+        category: "slots",
+      },
+    },
+     'sgds-change':{
+      table:{ 
+        category: "Events",
+        type: { summary: "Event" },
+      },
+      description: "Emitted the updated fileList obj when item is added or removed"
+    },
+  }}
+/>
+
+export const Template = (args) => html`
+  <sgds-fileupload
+    .size=${args.size}
+    .variant=${args.variant}
+    .disabled=${args.disabled}
+    .checkedIcon=${args.checkedIcon}
+    .cancelIcon=${args.cancelIcon}
+    ><sl-icon name="upload" class="me-2 align-middle"></sl-icon>Choose a
+    File</sgds-fileupload
+  >
+`;
+
+# SgdsFileUpload
+
+File Upload is the process of publishing information (web pages, text, pictures, video, etc.) to a remote server. It allows uploading of a single or multiple files at any one time.
+
+<Canvas>
+  <Story name='Basic' args={{ variant: "primary" }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## API
+
+```jsx
+import { SgdsFileUpload } from "@govtechsg/sgds-web-component";
+```
+
+<ArgsTable story='Basic' />
+
+## Customize the checked and cancel icons
+
+Change up the default checked and cancel icons by passing in icons of your choice.
+
+<Canvas>
+  <Story
+    name='Custom Icons'
+    args={{ checkedIcon: "check2-circle", cancelIcon: "x-octagon" }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
