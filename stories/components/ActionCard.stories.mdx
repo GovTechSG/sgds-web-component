@@ -1,9 +1,9 @@
 import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
-import "../lib/Card";
+import "../../lib/Card";
 
 <Meta
-  title='Components/Card/Action Card'
+  title='Components/Action Card'
   argTypes={{
     bgColor: {
       control: "select",
@@ -174,7 +174,8 @@ export const Template = (args) =>
   <div>
 `;
 
-# SgdsActionCard
+# ActionCard 
+## `<sgds-action-card>`
 
 Action Cards are Cards that are able to perform actions like selection or quantity toggling. Usually with built-in input elements.
 
@@ -183,10 +184,6 @@ Action Cards are Cards that are able to perform actions like selection or quanti
 </Canvas>
 
 ## API
-
-```jsx
-import { SgdsActionCard } from "@govtechsg/sgds-web-component";
-```
 
 <ArgsTable story='Basic' />
 

@@ -1,34 +1,17 @@
 import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
-import "../lib/Input";
+import "../../lib/Textarea";
 
 <Meta
-  title="Components/Input"
+  title="Components/Textarea"
   argTypes={{
-    type: {
-      control: 'select',
-      options: [
-        'text',
-        'date',
-        'email',
-        'number',
-        'password',
-        'url',
-      ],
-      defaultValue: 'text',
-      table: { 
-        category: "props",
-        type: { summary: "string" },
-      },
-      description: "The input's type"
-    },
     name:{
       control: "text",
       table:{ 
         category: "props",
         type: { summary: "string" },
       },
-      description: "The input's name attribute"
+      description: "The textarea's name attribute"
     },
     label:{
       control: "text",
@@ -37,41 +20,24 @@ import "../lib/Input";
         category: "props",
         type: { summary: "string" },
       },
-      description: "The input's label"
+      description: "The textarea's label"
     },
-    hintText:{
-      control: "text",
-      defaultValue: 'This is a hint text',
-      table:{ 
-        category: "props",
-        type: { summary: "string" },
-      },
-      description: "The input's hint text below the label"
-    },
-    inputId:{
+    textareaId:{
       control: 'text',
+      defaultValue: 'textarea',
       table:{ 
         category: "props",
         type: { summary: "string" },
       },
-      description: "The input's unique id"
+      description: "The textarea's unique id"
     },
-    inputClasses: { 
+    textareaClasses: { 
       control: "text",
       table:{ 
         category: "props",
         type: { summary: "string" },
       },
       description: 'Can be used to insert any classes such as `mt-2`'
-    },
-    iconName:{
-      control: "text",
-      defaultValue: "badge-8k-fill",
-      table:{ 
-        category: "props",
-        type: { summary: "string" },
-      },
-      description:"Optional. The name of the [bootstrap's icon](https://icons.getbootstrap.com/)"
     },
     value:{
       control: 'text',
@@ -80,7 +46,16 @@ import "../lib/Input";
         category: "props",
         type: { summary: "string" },
       },
-      description:"The input's value attribute."
+      description:"The textarea's value attribute."
+    },
+    rows:{
+      control: 'number',
+      defaultValue: 4,
+      table:{ 
+        category: "props",
+        type: { summary: "number" },
+      },
+      description:"The number of rows to display by default."
     },
     placeholder:{
       control: 'text',
@@ -89,16 +64,7 @@ import "../lib/Input";
         category: "props",
         type: { summary: "string" },
       },
-      description:"The input's placeholder text."
-    },
-    pattern:{
-      control: 'text',
-      defaultValue: "[A-Za-z]{5}",
-      table:{ 
-        category: "props",
-        type: { summary: "string" },
-      },
-      description:'A pattern to validate input against.',
+      description:"The textarea's placeholder text."
     },
     invalidFeedback:{
       control:'text',
@@ -147,6 +113,7 @@ import "../lib/Input";
     },
     minlength:{
       control:'text',
+      defaultValue: "0",
       table:{ 
         category: "props",
         type: { summary: "string" },
@@ -155,11 +122,47 @@ import "../lib/Input";
     },
     maxlength:{
       control:'text',
+      defaultValue: "100",
       table:{ 
         category: "props",
         type: { summary: "string" },
       },
       description: 'Sets the maximum length of the input'
+    },
+    spellcheck:{
+      control:'boolean',
+      defaultValue: false,
+      table:{ 
+        category: "props",
+        type: { summary: "boolean" },
+      },
+      description: 'Enables spell checking on the textarea'
+    },
+    autocorrect:{
+      control:'select',
+      options: [
+        'on',
+        'off',
+      ],
+      defaultValue: "off",
+      table:{ 
+        category: "props",
+        type: { summary: "string" },
+      },
+      description: "The textarea's autocorrect attribute."
+    },
+    resize:{
+      control:'select',
+      options: [
+        'none',
+        'vertical',
+      ],
+      defaultValue: "none",
+      table:{ 
+        category: "props",
+        type: { summary: "string" },
+      },
+      description: "Controls how the textarea can be resized."
     },
     'sgds-change':{
       table:{ 
@@ -180,40 +183,54 @@ import "../lib/Input";
         category: "Events",
         type: { summary: "Event" },
       },
-      description: "Emitted when input is in focus"
+      description: "Emitted when textarea is in focus"
     },
     'sgds-blur':{
       table:{ 
         category: "Events",
         type: { summary: "Event" },
       },
-      description: "Emitted when input is not focus"
+      description: "Emitted when textarea is not focus"
+    },
+    select:{
+      table:{ 
+        category: "Methods",
+        type: { summary: "Method" },
+      },
+      description: "Select textarea content"
+    },
+    focus:{
+      table:{ 
+        category: "Methods",
+        type: { summary: "Method" },
+      },
+      description: "Sets the focus of textarea. <br>Parameters (options: [FocusOptions](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus#parameters))",
     },
   }}
 />
 
 export const Template = (args) =>
   html`
-    <sgds-input 
-      .type=${args.type} 
+    <sgds-textarea 
       .label=${args.label} 
-      .hintText=${args.hintText} 
       .name=${args.name}
-      .id=${args.inputID}
-      .inputClasses=${args.inputClasses}
-      .value=${args.value}
-      .pattern=${args.pattern} 
+      .id=${args.textareaId}
+      .textareaClasses=${args.textareaClasses}
+      value=${args.value}
+      rows=${args.rows}
       .invalidFeedback=${args.invalidFeedback}
-      .iconName=${args.iconName}
       .placeholder=${args.placeholder}
       ?autofocus=${args.autofocus}
       ?disabled=${args.disabled}
       ?required=${args.required}
       ?readonly=${args.readonly}
-      ?minlength=${args.minlength}
-      ?maxlength=${args.maxlength}
+      minlength=${args.minlength}
+      maxlength=${args.maxlength}
+      ?spellcheck=${args.spellcheck}
+      ?autocorrect=${args.autocorrect}
+      resize=${args.resize}
     >
-    </sgds-input>
+    </sgds-textarea>
   `;
 
 # SgdsInput
@@ -221,7 +238,7 @@ export const Template = (args) =>
 Text inputs allow your users to enter letters, numbers and symbols on a single line.
 
 <Canvas>
-  <Story name="Basic" args={{ type: "text" }}>
+  <Story name="Basic" args={{ name: "textarea" }}>
     {Template.bind({})}
   </Story>
 </Canvas>
@@ -229,7 +246,7 @@ Text inputs allow your users to enter letters, numbers and symbols on a single l
 ## API
 
 ```jsx
-import { SgdsInput } from "@govtechsg/sgds-web-component";
+import { SgdsATextArea } from "@govtechsg/sgds-web-component/Textarea";
 ```
 
 <ArgsTable story="Basic" />

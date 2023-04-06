@@ -100,6 +100,7 @@ export class SgdsSidenavItem extends SgdsElement {
         ?disabled=${this.disabled}
         aria-disabled=${this.disabled ? "true" : "false"}
       >
+        <slot name="icon"></slot>
         <slot name="title"></slot>
         <svg
           xmlns="http://www.w3.org/2000/svg"

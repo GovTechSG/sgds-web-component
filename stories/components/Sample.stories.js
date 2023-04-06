@@ -1,5 +1,5 @@
 import { Story, Meta } from '@storybook/web-components';
-import '../lib/Button'
+import '../../lib/Button'
 import {html } from 'lit'
 import { state, property} from "lit/decorators.js";
 
