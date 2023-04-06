@@ -9,8 +9,8 @@ import {
     elementUpdated,
   } from "@open-wc/testing";
   import sinon from "sinon";
-  import "../src/Card";
-  import { SgdsActionCard } from "../src/Card";
+  import "../src/ActionCard";
+  import { SgdsActionCard } from "../src/ActionCard";
   import "../src/Checkbox";
   import "../src/Radio";
   import { SgdsCheckbox } from "../src/Checkbox";

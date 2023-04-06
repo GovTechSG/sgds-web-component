@@ -198,12 +198,12 @@
         </div>
         <div class="container">
             <h2>Radiogroup</h2>
-                <sgds-radiogroup>
+                <sgds-radio-group>
                 <span slot="label">Select an option</span>
                     <sgds-radio value="1">Option 1</sgds-radio>
                     <sgds-radio value="2">Option 2</sgds-radio>
                     <sgds-radio value="3">Option 3</sgds-radio>
-                </sgds-radiogroup>
+                </sgds-radio-group>
         </div>
         <div class="container">
             <h2>Selectable card</h2>
@@ -344,9 +344,9 @@
             <h2>Quantity Toggle</h2>
             <div class="row">
                 <div class="col is-6">
-                    <sgds-quantitytoggle count="5" quanttoggleId="heyhey"></sgds-quantitytoggle>
-                    <sgds-quantitytoggle step="10" count="5" disabled></sgds-quantitytoggle>
-                    <sgds-quantitytoggle step="10" count="5"></sgds-quantitytoggle>
+                    <sgds-quantity-toggle count="5" quanttoggleId="heyhey"></sgds-quantity-toggle>
+                    <sgds-quantity-toggle step="10" count="5" disabled></sgds-quantity-toggle>
+                    <sgds-quantity-toggle step="10" count="5"></sgds-quantity-toggle>
                 </div>
             </div>
         </div>
@@ -402,7 +402,7 @@
                       </sgds-tooltip>
                 </div>
     <script>
-        const submitButton = document.querySelector('sgds-quantitytoggle#heyhey');
+        const submitButton = document.querySelector('sgds-quantity-toggle#heyhey');
         // submitButton.addEventListener('sgds-change', (e) => {
         //     e.preventDefault();
         //     console.log(e)

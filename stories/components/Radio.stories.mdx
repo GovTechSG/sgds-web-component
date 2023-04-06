@@ -188,21 +188,21 @@ import "../../lib/Radio";
     },
     controlRadioGroup: {
       name: "control",
-      description: "SgdsRadioGroup component's radiogroup control.",
+      description: "SgdsRadioGroup component's radio-group control.",
       table: {
         category: "Css Parts: SgdsRadioGroup",
       },
     },
     labelRadioGroup: {
       name: "label",
-      description: "SgdsRadioGroup component's radiogroup label.",
+      description: "SgdsRadioGroup component's radio-group label.",
       table: {
         category: "Css Parts: SgdsRadioGroup",
       },
     },
     invalidFeedbackRadioGroup: {
       name: "invalidFeedback",
-      description: "SgdsRadioGroup component's radiogroup invalid feedback.",
+      description: "SgdsRadioGroup component's radio-group invalid feedback.",
       table: {
         category: "Css Parts: SgdsRadioGroup",
       },
@@ -225,7 +225,7 @@ export const Template = ({
   invalidFeedback,
 }) => {
   return html`
-    <sgds-radiogroup
+    <sgds-radio-group
       .name=${name}
       .value=${defaultValue}
       .required=${required}
@@ -243,20 +243,18 @@ export const Template = ({
       >
       <sgds-radio value="2" .isInline=${isInline}>Option 2</sgds-radio>
       <sgds-radio value="3" .isInline=${isInline}>Option 3</sgds-radio>
-    </sgds-radiogroup>
+    </sgds-radio-group>
   `;
 };
 
-# SgdsRadio
+# Radio
+
+## `<sgds-radio>`, `<sgds-radio-group>`
 
 <Canvas>
   <Story name='Basic'>{Template.bind({})}</Story>
 </Canvas>
 
 ## API
-
-```jsx
-import { SgdsRadioGroup, SgdsRadio } from "@govtechsg/sgds-web-component/Radio";
-```
 
 <ArgsTable story='Basic' />
