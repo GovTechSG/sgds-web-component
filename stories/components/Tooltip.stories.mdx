@@ -1,6 +1,6 @@
 import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
-import "../lib/Tooltip";
+import "../../lib/Tooltip";
 import { partDescription, dropdownElementProps } from "./common";
 import { commonEvents } from "./common";
 
@@ -74,7 +74,9 @@ export const Template = ({ content, trigger, placement }) => {
   `;
 };
 
-# SgdsTooltip
+# Tooltip
+
+##  `<sgds-tooltip>`
 
 `Tooltip` provides a brief description of a feature or page element.
 
@@ -85,9 +87,6 @@ It is recommended to use hoverable tooltips for buttons and hyperlinks to avoid 
 
 <Story name="Basic">{Template.bind({})}</Story>
 
-```jsx
-import { SgdsTooltip } from "@govtechsg/sgds-web-component/Tooltip";
-```
 
 <ArgsTable story="Basic" />
 

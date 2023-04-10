@@ -64,15 +64,15 @@ describe("<sgds-radio>", () => {
   });
 });
 
-describe("<sgds-radiogroup>", () => {
+describe("<sgds-radio-group>", () => {
   it("is defined", () => {
-    const el = document.createElement("sgds-radiogroup");
+    const el = document.createElement("sgds-radio-group");
     assert.instanceOf(el, SgdsRadioGroup);
   });
 
   it("should render the name attribute when passed", async () => {
     const el = await fixture(
-      html`<sgds-radiogroup name="option"></sgds-radiogroup>`
+      html`<sgds-radio-group name="option"></sgds-radio-group>`
     );
     const fieldset = el.shadowRoot?.querySelector("fieldset");
     expect(fieldset).to.have.attribute("name", "option");
@@ -80,9 +80,9 @@ describe("<sgds-radiogroup>", () => {
 
   it("radio2 should have aria-checked to be true when checked", async () => {
     const el = await fixture(
-      html`<sgds-radiogroup name="option"
+      html`<sgds-radio-group name="option"
         ><sgds-radio id="radio1" value="1">one</sgds-radio
-        ><sgds-radio id="radio2" value="2">two</sgds-radio></sgds-radiogroup
+        ><sgds-radio id="radio2" value="2">two</sgds-radio></sgds-radio-group
       >`
     );
     const radio1 = <SgdsRadio>el.querySelector("sgds-radio#radio1");
@@ -100,10 +100,10 @@ describe("<sgds-radiogroup>", () => {
     expect(radio2).to.have.attribute("aria-checked", "true");
   });
 
-  it("radiogroup should emit sgds-change event when one of the radio is clicked", async () => {
+  it("radio-group should emit sgds-change event when one of the radio is clicked", async () => {
     const el = await fixture(
-      html`<sgds-radiogroup name="option">
-        <sgds-radio id="radio2" value="2">two</sgds-radio></sgds-radiogroup
+      html`<sgds-radio-group name="option">
+        <sgds-radio id="radio2" value="2">two</sgds-radio></sgds-radio-group
       >`
     );
     const toggleHandler = sinon.spy();
@@ -114,11 +114,11 @@ describe("<sgds-radiogroup>", () => {
     expect(toggleHandler).to.have.been.calledOnce;
   });
 
-  it("radiogroup should update and reflect the value for the checked radio", async () => {
+  it("radio-group should update and reflect the value for the checked radio", async () => {
     const el = await fixture<SgdsRadioGroup>(
-      html`<sgds-radiogroup id="radiogroup">
+      html`<sgds-radio-group id="radio-group">
         <sgds-radio id="radio2" value="2">two</sgds-radio>
-      </sgds-radiogroup>`
+      </sgds-radio-group>`
     );
 
     expect(el).to.have.attribute("value", undefined);
@@ -132,9 +132,9 @@ describe("<sgds-radiogroup>", () => {
   it("should be invalid state on form submission with required passed in", async () => {
     const el = await fixture<HTMLFormElement>(
       html`<form>
-        <sgds-radiogroup id="radiogroup" required>
+        <sgds-radio-group id="radio-group" required>
           <sgds-radio id="radio2" value="2">two</sgds-radio>
-        </sgds-radiogroup>
+        </sgds-radio-group>
         <sgds-button type="submit">Submit</sgds-button>
       </form>`
     );
@@ -143,16 +143,16 @@ describe("<sgds-radiogroup>", () => {
     button?.click();
     await el.updateComplete;
     expect(el.reportValidity()).to.be.false;
-    const radioGroup = <SgdsRadioGroup>el.querySelector("sgds-radiogroup");
+    const radioGroup = <SgdsRadioGroup>el.querySelector("sgds-radio-group");
     expect(radioGroup.invalid).to.be.true;
   });
 
   it("upon validation, it should have invalid feedback with text 'default feedback' by default, and also able to render other text when specified", async () => {
     const el = await fixture<SgdsRadioGroup>(
       html`
-        <sgds-radiogroup id="radiogroup" required>
+        <sgds-radio-group id="radio-group" required>
           <sgds-radio id="radio2" value="2">two</sgds-radio>
-        </sgds-radiogroup>
+        </sgds-radio-group>
       `
     );
     const invalidFeedback = el.shadowRoot?.querySelector(
@@ -165,11 +165,11 @@ describe("<sgds-radiogroup>", () => {
   });
 
   it("by default, first radio is tabindex 0", async () => {
-    const el = await fixture<SgdsRadioGroup>(html`<sgds-radiogroup>
+    const el = await fixture<SgdsRadioGroup>(html`<sgds-radio-group>
       <sgds-radio value="1">one</sgds-radio>
       <sgds-radio value="2">two</sgds-radio>
       <sgds-radio value="3">three</sgds-radio>
-    </sgds-radiogroup>`);
+    </sgds-radio-group>`);
 
     expect(el.querySelectorAll("sgds-radio")[0]).to.have.attribute(
       "tabindex",
@@ -186,11 +186,11 @@ describe("<sgds-radiogroup>", () => {
   });
 
   it("should toggle tabindex 0 for checked radio & tabindex -1 when unchecked upon clicking", async () => {
-    const el = await fixture<SgdsRadioGroup>(html`<sgds-radiogroup>
+    const el = await fixture<SgdsRadioGroup>(html`<sgds-radio-group>
       <sgds-radio value="1">one</sgds-radio>
       <sgds-radio value="2">two</sgds-radio>
       <sgds-radio value="3">three</sgds-radio>
-    </sgds-radiogroup>`);
+    </sgds-radio-group>`);
 
     const radio1 = el.querySelectorAll("sgds-radio")[0];
     const radio2 = el.querySelectorAll("sgds-radio")[1];
@@ -212,13 +212,13 @@ describe("<sgds-radiogroup>", () => {
   });
 
   it("clicking label should focus on first radio when radios unchecked", async () => {
-    const el = await fixture<SgdsRadioGroup>(html`<sgds-radiogroup
+    const el = await fixture<SgdsRadioGroup>(html`<sgds-radio-group
       label="Hello world"
     >
       <sgds-radio value="1">one</sgds-radio>
       <sgds-radio value="2">two</sgds-radio>
       <sgds-radio value="3">three</sgds-radio>
-    </sgds-radiogroup>`);
+    </sgds-radio-group>`);
 
     const radio1 = el.querySelectorAll("sgds-radio")[0];
 
@@ -232,13 +232,13 @@ describe("<sgds-radiogroup>", () => {
   });
 
   it("when a radio is checked, clicking label should focus on the checked radio", async () => {
-    const el = await fixture<SgdsRadioGroup>(html`<sgds-radiogroup
+    const el = await fixture<SgdsRadioGroup>(html`<sgds-radio-group
       label="Hello world"
     >
       <sgds-radio value="1">one</sgds-radio>
       <sgds-radio value="2">two</sgds-radio>
       <sgds-radio value="3">three</sgds-radio>
-    </sgds-radiogroup>`);
+    </sgds-radio-group>`);
 
     const radio2 = el.querySelectorAll("sgds-radio")[1];
 
@@ -255,13 +255,13 @@ describe("<sgds-radiogroup>", () => {
   });
 
   it("should allow for the following keyboard interactions upon keydown", async () => {
-    const el = await fixture<SgdsRadioGroup>(html`<sgds-radiogroup
+    const el = await fixture<SgdsRadioGroup>(html`<sgds-radio-group
       label="Hello world"
     >
       <sgds-radio value="1">one</sgds-radio>
       <sgds-radio value="2">two</sgds-radio>
       <sgds-radio value="3">three</sgds-radio>
-    </sgds-radiogroup>`);
+    </sgds-radio-group>`);
 
     const radio1 = el.querySelectorAll("sgds-radio")[0];
     const radio2 = el.querySelectorAll("sgds-radio")[1];

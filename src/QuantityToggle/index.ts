@@ -1,1 +1,1 @@
-export { SgdsQuantityToggle } from "./sgds-quantitytoggle";
+export { SgdsQuantityToggle } from "./sgds-quantity-toggle";

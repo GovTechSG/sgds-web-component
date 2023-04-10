@@ -1,6 +1,6 @@
 import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
-import "../lib/Stepper";
+import "../../lib/Stepper";
 
 <Meta
   title='Components/Stepper'
@@ -135,10 +135,10 @@ export const TemplateExample = ({ steps, activeStep, namedSlot }) => {
                 hintText="Enter last name"
                 required
               ></sgds-input>
-              <sgds-radiogroup required>
+              <sgds-radio-group required>
                 <sgds-radio value="1" isInline>Option 1</sgds-radio>
                 <sgds-radio value="2" isInline>Option 2</sgds-radio>
-              </sgds-radiogroup>
+              </sgds-radio-group>
             </form>
           </div>
         </div>
@@ -210,6 +210,8 @@ export const TemplateExample = ({ steps, activeStep, namedSlot }) => {
 
 # Stepper
 
+## `<sgds-stepper>`, `<sgds-stepper-item>`
+
 Stepper informs users which step they are in a form or process. Each step markers indicate the stage of the process.
 
 The default Stepper component consist of step markers and stepHeaders. The step markers consist of three states, inactive, active and done, indicated by the colors: grey, border-purple and filled-purple respectively.
@@ -241,10 +243,6 @@ The step markers are clickable for backwards navigation.
 </Canvas>
 
 ## API
-
-```jsx
-import { SgdsStepper } from "@govtechsg/sgds-web-component/Stepper";
-```
 
 <ArgsTable story='Basic' />
 

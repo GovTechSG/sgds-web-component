@@ -11,7 +11,7 @@ import "./Textarea";
 import "./Modal";
 import "./QuantityToggle";
 import "./Tab";
-import "./Card";
+import "./ActionCard";
 import "./Badge";
 import "./Table";
 import "./Breadcrumb";
