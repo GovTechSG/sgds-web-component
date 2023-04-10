@@ -15,7 +15,7 @@ SCSS files specific to the component should be stored here. Create an entry poin
 Place common/reusable functions and global stylings in utils folder 
 
 ### Filename 
-Custom elements must be in kebab case. Prefix the files with *-element.ts
+Custom elements must be in kebab case. Prefix the files with sgds-*.ts
 
 ## Testing 
 
