@@ -10,6 +10,16 @@ import "../lib/Accordion";
       table: { category: "props" },
       description: 'Title of the accordion',
     },
+    accordionClasses: { 
+      control: "text" ,
+      table: { category: "props" },
+      description: 'Optional for accordion wrapper. Can be used to insert any utility classes such as `me-auto`'
+    },
+    accordionItemClasses: { 
+      control: "text" ,
+      table: { category: "props" },
+      description: 'Optional for accordion item. Can be used to insert any utility classes such as `me-auto`'
+    },
     'allowMultiple':{
       control: "boolean" ,
       table: { category: "props" },
@@ -60,23 +70,39 @@ export const Template = (args) =>
   html`
   <sgds-accordion
     .allowMultiple=${args.allowMultiple}
+    .accordionClasses=${args.accordionClasses} 
     >
       <sgds-accordion-item
       .summary=${args.summary}
+      .accordionItemClasses=${args.accordionItemClasses} 
       > 
         ${args.content} 
       </sgds-accordion-item>
       <sgds-accordion-item
       .summary=${args.summary}
+      .accordionItemClasses=${args.accordionItemClasses} 
       > 
         ${args.content} 
       </sgds-accordion-item>
-    </sgds-accordion
+      <sgds-accordion-item
+      .summary=${args.summary}
+      .accordionItemClasses=${args.accordionItemClasses} 
+      > 
+        ${args.content} 
+      </sgds-accordion-item>
+      <sgds-accordion-item
+      .summary=${args.summary}
+      .accordionItemClasses=${args.accordionItemClasses} 
+      > 
+        ${args.content} 
+      </sgds-accordion-item>
+    </sgds-accordion>
   `;
 
 # SgdsAccordion
+## `<sgds-accordion>`,`<sgds-accordion-item>`
 
-Buttons communicate actions that users can take throughout your portal which can be used in places such as modals, forms and cards
+A dropdown mechanism that allow users to either show or hide related content.
 
 <Canvas>
   <Story name="Basic" args={{ summary: "This is an accordion" }}>
@@ -84,10 +110,7 @@ Buttons communicate actions that users can take throughout your portal which can
   </Story>
 </Canvas>
 
-## API
 
-```jsx
-import { SgdsBAccordion } from "@govtechsg/sgds-web-component";
-```
+## API
 
 <ArgsTable story="Basic" />
