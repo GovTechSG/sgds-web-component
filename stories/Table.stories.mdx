@@ -228,17 +228,18 @@ Use `size="sm"` to make tables compact by cutting cell padding in half.
 
 ## Sorting
 
-Sorting on a column is enabled by adding the `sort` property.
+Sorting on a column is enabled by adding the `sort` property. The sorting algorithm is based on javascript array.sort() method. In ascending order from bottom, alphabets come first, followed by numbers, and then symbols. Similarly, in descending order from bottom, symbols come first, followed by numbers, and then alphabets.
 
 <Canvas>
   <Story
     name='Sorting'
     args={{
-      tableHeaders: ["#", "First Names", "Last Name", "Username"],
+      tableHeaders: ["Serial No.", "Title", "Name", "Username"],
       tableData: [
-        ["1", "John", "Doe", "@johndoe"],
-        ["2", "Jane", "Doe", "@janedoe"],
-        ["3", "Bob", "Smith", "@bobsmith"],
+        ["S901021", "David", "Doe", "@johndoe"],
+        ["S892002", "2be", "Zoe", "@janedoe"],
+        ["S879192", "#55", "Smith", "@bobsmith"],
+        ["S829132", "@hey", "Alex", "@davidsmith"],
       ],
       bordered: true,
       sort: true,
