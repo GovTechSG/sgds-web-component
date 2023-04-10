@@ -14,3 +14,24 @@
 .accordion-button:not(.collapsed){
   box-shadow: none;
 }
+
+:host([first-of-type]){
+  .accordion-item{
+    border-radius: $accordion-border-radius $accordion-border-radius 0 0;
+  }
+}
+
+:host([nth-of-type]){
+  .accordion-item{
+    border-radius: 0;
+    border-top:0;
+  }
+}
+
+:host([last-of-type]){
+  .accordion-item{
+    border-radius: 0 0 $accordion-border-radius $accordion-border-radius;
+    border-top:0;
+  }
+}
+

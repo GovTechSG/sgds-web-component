@@ -23,6 +23,8 @@ export class SgdsAccordionItem extends SgdsElement {
 
   @property({ type: Boolean, reflect: true }) disabled = false;
 
+  @property({ reflect: true }) accordionItemClasses?: string;
+
   firstUpdated() {
     this.body.hidden = !this.open;
     this.body.style.height = this.open ? 'auto' : '0';
@@ -124,10 +126,11 @@ export class SgdsAccordionItem extends SgdsElement {
       <div
         part="base"
         class=${classMap({
-			sgds: true,
+			      sgds: true,
           	'accordion-item': true,
           	'accordion--open': this.open,
-          	'accordion--disabled': this.disabled
+          	'accordion--disabled': this.disabled,
+            [`${this.accordionItemClasses}`]: this.accordionItemClasses,
         })}
       >
         <button

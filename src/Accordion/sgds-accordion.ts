@@ -11,6 +11,8 @@ export class SgdsAccordion extends SgdsElement {
 
     @property({ type: Boolean, reflect: true }) allowMultiple = false;
 
+    @property({ reflect: true }) accordionClasses?: string;
+
     @queryAssignedNodes()
     private defaultNodes!: NodeListOf<SgdsAccordionItem>;
 
@@ -19,6 +21,24 @@ export class SgdsAccordion extends SgdsElement {
             (node: HTMLElement) => typeof node.tagName !== 'undefined'
         ) as SgdsAccordionItem[];
     }
+
+    firstUpdated(){
+        const items = [...this.items] as SgdsAccordionItem[];
+        items.forEach((item, index) => {
+            if (items.length > 1) {
+                if (index == 0) {
+                    item.setAttribute('first-of-type','')
+                }
+                else if (index == items.length-1){
+                    item.setAttribute('last-of-type','')
+                }
+                else{
+                    item.setAttribute('nth-of-type','')
+                }
+            }
+        });
+    }
+    
 
     async onToggle(event: Event): Promise<void> {
         const target = event.target as SgdsAccordionItem;
@@ -30,7 +50,6 @@ export class SgdsAccordion extends SgdsElement {
         }
         const items = [...this.items] as SgdsAccordionItem[];
         
-        /* c8 ignore next 3 */
         if (items && !items.length) {
             // no toggling when there aren't items.
             return;
@@ -45,10 +64,13 @@ export class SgdsAccordion extends SgdsElement {
         });
     }
 
-
     render() {
         return html`
-            <div class="sgds accordion">
+            <div class="sgds accordion 
+            ${classMap({
+                "sgds accordion": true,
+                [`${this.accordionClasses}`]: this.accordionClasses,
+            })}">
                 <slot @click=${this.onToggle}></slot>
             </div>
         `
