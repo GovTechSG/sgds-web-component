@@ -25,20 +25,23 @@ export class SgdsAccordion extends SgdsElement {
     firstUpdated(){
         const items = [...this.items] as SgdsAccordionItem[];
         items.forEach((item, index) => {
+        //TODO: swtich case
             if (items.length > 1) {
-                if (index == 0) {
+                switch(index){
+                    case 0:
                     item.setAttribute('first-of-type','')
-                }
-                else if (index == items.length-1){
+                    break;
+
+                    case items.length-1:
                     item.setAttribute('last-of-type','')
-                }
-                else{
+                    break;
+
+                    default:
                     item.setAttribute('nth-of-type','')
                 }
             }
         });
     }
-    
 
     async onToggle(event: Event): Promise<void> {
         const target = event.target as SgdsAccordionItem;
