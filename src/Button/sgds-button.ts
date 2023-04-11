@@ -39,6 +39,9 @@ interface MyStepper extends SgdsStepper {
 
 /**
  * @slot - The button's label.
+ * 
+ * @event sgds-blur - Emitted when the button is not focused.
+ * @event sgds-focus - Emitted when the button is focused.
  */
 @customElement("sgds-button")
 export class SgdsButton extends SgdsElement {
