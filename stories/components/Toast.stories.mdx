@@ -1,7 +1,7 @@
 import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
-import "../lib/Toast";
-import "../lib/CloseButton";
+import "../../lib/Toast";
+import "../../lib/CloseButton";
 
 <Meta
   title='Components/Toast'
@@ -86,7 +86,9 @@ export const Template = (args) =>
     ></sgds-toast>
   `;
 
-# SgdsAlert
+# Toast
+
+## `<sgds-toast>`
 
 ## Basic
 
@@ -97,9 +99,5 @@ Provide contextual feedback messages for typical user actions with the handful o
 </Canvas>
 
 ## API
-
-```jsx
-import { SgdsAlert } from "@govtechsg/sgds-web-component";
-```
 
 <ArgsTable story='Basic' />

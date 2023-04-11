@@ -8,9 +8,9 @@ import { live } from 'lit/directives/live.js';
 import { watch } from "../utils/watch";
 import {SgdsButton} from "../Button";
 import {classMap} from 'lit/directives/class-map.js';
-import styles from "./sgds-quantitytoggle.scss";
+import styles from "./sgds-quantity-toggle.scss";
 
-@customElement("sgds-quantitytoggle")
+@customElement("sgds-quantity-toggle")
 export class SgdsQuantityToggle extends SgdsElement {
   @query('input.form-control') input: HTMLInputElement;
   @query('sgds-button.button-group_button-first') leftBtn: SgdsButton;

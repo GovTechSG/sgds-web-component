@@ -2,12 +2,12 @@ import { html, css } from "lit";
 import { customElement, property, state, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { watch } from "../utils/watch";
-import styles from "./sgds-radiogroup.scss";
+import styles from "./sgds-radio-group.scss";
 import SgdsElement from "../utils/sgds-element";
 import SgdsRadio from "./sgds-radio";
 import { FormSubmitController } from "../utils/form";
 
-@customElement("sgds-radiogroup")
+@customElement("sgds-radio-group")
 export class SgdsRadioGroup extends SgdsElement {
   static styles = styles;
 
@@ -194,7 +194,7 @@ export class SgdsRadioGroup extends SgdsElement {
       </div>
     `;
     return html`
-      <fieldset role="radiogroup" part="base" name=${this.name}>
+      <fieldset role="radio-group" part="base" name=${this.name}>
         <label @click=${this.handleLabelClick} class="form-label" part="label">
           <slot name="label">${this.label}</slot>
         </label>
