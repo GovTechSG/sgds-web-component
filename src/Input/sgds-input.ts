@@ -1,6 +1,6 @@
 
 import { customElement, property,query, state } from "lit/decorators.js";
-import { html, literal } from 'lit/static-html.js';
+import { html } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import {classMap} from 'lit/directives/class-map.js';
 import { live } from 'lit/directives/live.js';

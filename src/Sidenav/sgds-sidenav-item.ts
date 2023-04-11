@@ -15,6 +15,7 @@ import { classMap } from "lit/directives/class-map.js";
  * @slot - default slot for SgdsSidenavLink element.
  * @slot title - title slot for the content of SgdsSidenavItem's button / anchor element.
  */
+
 @customElement("sgds-sidenav-item")
 export class SgdsSidenavItem extends SgdsElement {
   static styles = styles;

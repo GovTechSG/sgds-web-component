@@ -37,3 +37,5 @@ export class SgdsDropdownItem extends LinkElement {
     `;
   }
 }
+
+export default SgdsDropdownItem;

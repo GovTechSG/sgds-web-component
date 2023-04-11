@@ -52,3 +52,5 @@ export class SgdsDropdown extends DropdownElement {
     `;
   }
 }
+
+export default SgdsDropdown;
