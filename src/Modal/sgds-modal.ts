@@ -11,8 +11,6 @@ import { HasSlotController } from '../utils/slot';
 import { watch } from '../utils/watch';
 import { getAnimation, setDefaultAnimation } from '../utils/animation-registry';
 import styles from "./sgds-modal.scss";
-
-
 @customElement('sgds-modal')
 export class SgdsModal extends SgdsElement {
 
