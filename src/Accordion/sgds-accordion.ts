@@ -25,7 +25,6 @@ export class SgdsAccordion extends SgdsElement {
     firstUpdated(){
         const items = [...this.items] as SgdsAccordionItem[];
         items.forEach((item, index) => {
-        //TODO: swtich case
             if (items.length > 1) {
                 switch(index){
                     case 0:

@@ -1,9 +1,42 @@
 import { SgdsAccordionItem } from '../src/Accordion/sgds-accordion-item';
 import '../src/Accordion/sgds-accordion-item';
+import { SgdsAccordion } from '../src/Accordion/sgds-accordion';
+import '../src/Accordion/sgds-accordion';
 import {fixture, expect, waitUntil} from '@open-wc/testing';
 import {html} from 'lit';
 import sinon  from 'sinon';
 
+describe('<sgds-accordion>', () => {
+  it('accordion items should contain the attribute [first,nth,last]-of-type if items is more than 2', async ()=> {
+    const el= await fixture<SgdsAccordion>(html`
+      <sgds-accordion> 
+        <sgds-accordion-item>
+          Lorem ipsum
+        </sgds-accordion-item>
+        <sgds-accordion-item>
+          Lorem ipsum
+        </sgds-accordion-item>
+        <sgds-accordion-item>
+          Lorem ipsum
+        </sgds-accordion-item>
+        <sgds-accordion-item>
+          Lorem ipsum
+        </sgds-accordion-item>
+      </sgds-accordion>
+    `)
+
+    const first = el.shadowRoot!.querySelector('slot')?.assignedNodes()[1];
+    expect(first).to.have.attribute('first-of-type');
+
+    const second = el.shadowRoot!.querySelector('slot')?.assignedNodes()[3];
+    const third = el.shadowRoot!.querySelector('slot')?.assignedNodes()[5];
+    expect(second).to.have.attribute('nth-of-type');
+    expect(third).to.have.attribute('nth-of-type');
+
+    const last = el.shadowRoot!.querySelector('slot')?.assignedNodes()[7];
+    expect(last).to.have.attribute('last-of-type');
+  })
+});
 
 describe('<sgds-accordion-item>', () => {
     it('should be visible with the open attribute', async () => {
