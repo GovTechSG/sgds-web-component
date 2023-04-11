@@ -53,3 +53,5 @@ export class SgdsTabPanel extends SgdsElement {
     `;
   }
 }
+
+export default SgdsTabPanel;

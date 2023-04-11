@@ -85,3 +85,5 @@ export class SgdsTab extends SgdsElement {
     `;
   }
 }
+
+export default SgdsTab;

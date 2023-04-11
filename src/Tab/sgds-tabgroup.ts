@@ -293,3 +293,5 @@ export class SgdsTabGroup extends SgdsElement {
     `;
   }
 }
+
+export default SgdsTabGroup;

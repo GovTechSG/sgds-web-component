@@ -1,2 +1,2 @@
-export { SgdsRadio } from "./sgds-radio";
-export { SgdsRadioGroup } from "./sgds-radio-group";
+export * from "./sgds-radio";
+export * from "./sgds-radio-group";

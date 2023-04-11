@@ -1,3 +1,3 @@
-export { SgdsTab } from './sgds-tab';
-export { SgdsTabPanel } from './sgds-tabpanel';
-export { SgdsTabGroup } from './sgds-tabgroup';
+export * from './sgds-tab';
+export * from './sgds-tabpanel';
+export * from './sgds-tabgroup';

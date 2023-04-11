@@ -43,3 +43,5 @@ export class SgdsMainnavDropdown extends DropdownElement {
     `;
   }
 }
+
+export default SgdsMainnavDropdown

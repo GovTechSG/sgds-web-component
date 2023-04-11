@@ -1,1 +1,1 @@
-export { SgdsInput } from "./sgds-input";
+export * from "./sgds-input";
