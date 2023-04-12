@@ -19,4 +19,5 @@ import "./Stepper";
 import "./Alert";
 import "./CloseButton";
 import "./Toast";
-import "./Tooltip"
+import "./Accordion";
+import "./Tooltip";
