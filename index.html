@@ -4,20 +4,26 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link href='node_modules/@govtechsg/sgds/css/sgds.util.css' rel='stylesheet' type='text/css' /> -->
-    <!-- <link href='node_modules/@govtechsg/sgds/css/sgds.css' rel='stylesheet' type='text/css' /> -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel='stylesheet'
-        type='text/css' />
+    <link href='node_modules/@govtechsg/sgds/css/sgds.css' rel='stylesheet' type='text/css' />
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel='stylesheet'
+        type='text/css' /> -->
     <!-- JavaScript Bundle with Popper -->
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds@2.1.1/css/sgds.min.css" rel="stylesheet" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> -->
     <script type="module" id="dev-console-gateway"
         src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
     <script type="module"
-        src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script>
+        src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.3.0/dist/components/icon/icon.js"></script>
+
+        <script type="module" data-shoelace="node_modules/@shoelace-style/shoelace/dist">
+            import '@shoelace-style/shoelace/dist/components/icon/icon.js';
+          
+            // <sl-button> is ready to use!
+          </script>
     <style>
         * {
             font-family: "bootstrap-icons", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -90,7 +96,7 @@
             flex: 1;
         }
     </style>
-    <script src="lib/index.js"></script>
+    <script src="lib/index.js" type="module"></script>
     <script>
         const steps = [
   { title: 1, stepHeader: "Marker title", template: `<p>Step 1 Content</p>` },
@@ -103,9 +109,7 @@
 
 
 <body class="d-flex flex-column min-vh-100">
-    
-    <sgds-masthead fluid></sgds-masthead>
-    
+    <sgds-masthead fluid></sgds-masthead>  
     <div class="grid">
     <sgds-mainnav>
         <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
@@ -122,8 +126,12 @@
     <sgds-sidenav class="mt-3" id="test-id">
         <sgds-sidenav-item active>
             <span slot="title">
-                <sl-icon name="stack"></sl-icon> Title
-            </span>
+                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-0-circle" viewBox="0 0 16 16">
+                    <path d="M7.988 12.158c-1.851 0-2.941-1.57-2.941-3.99V7.84c0-2.408 1.101-3.996 2.965-3.996 1.857 0 2.935 1.57 2.935 3.996v.328c0 2.408-1.101 3.99-2.959 3.99ZM8 4.951c-1.008 0-1.629 1.09-1.629 2.895v.31c0 1.81.627 2.895 1.629 2.895s1.623-1.09 1.623-2.895v-.31c0-1.8-.621-2.895-1.623-2.895Z"/>
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Z"/>
+                  </svg>
+                  Title
+            </span> 
             <sgds-sidenav-link href="https://google.com" active>first-test</sgds-sidenav-link>
             <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
             <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
@@ -142,6 +150,32 @@
 
     <main>
         <div class="container">
+            <h2>Accordion</h2>
+            <div class="row">
+                <sgds-accordion>
+                    <sgds-accordion-item summary="Toggle Me 1">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </sgds-accordion-item>
+                </sgds-accordion>
+                <sgds-accordion>
+                    <sgds-accordion-item summary="Toggle Me 2">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </sgds-accordion-item>
+                    <sgds-accordion-item summary="Toggle Me 3">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </sgds-accordion-item>
+                    <sgds-accordion-item summary="Toggle Me 4">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </sgds-accordion-item>
+                    <sgds-accordion-item summary="Toggle Me 5">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </sgds-accordion-item>
+                </sgds-accordion>
             <h2>Badge</h2>
             <div class="row">
                 <sgds-badge variant="danger">
@@ -190,12 +224,12 @@
         </div>
         <div class="container">
             <h2>Radiogroup</h2>
-                <sgds-radiogroup>
+                <sgds-radio-group>
                 <span slot="label">Select an option</span>
                     <sgds-radio value="1">Option 1</sgds-radio>
                     <sgds-radio value="2">Option 2</sgds-radio>
                     <sgds-radio value="3">Option 3</sgds-radio>
-                </sgds-radiogroup>
+                </sgds-radio-group>
         </div>
         <div class="container">
             <h2>Selectable card</h2>
@@ -354,9 +388,9 @@
             <h2>Quantity Toggle</h2>
             <div class="row">
                 <div class="col is-6">
-                    <sgds-quantitytoggle count="5" quanttoggleId="heyhey"></sgds-quantitytoggle>
-                    <sgds-quantitytoggle step="10" count="5" disabled></sgds-quantitytoggle>
-                    <sgds-quantitytoggle step="10" count="5"></sgds-quantitytoggle>
+                    <sgds-quantity-toggle count="5" quanttoggleId="heyhey"></sgds-quantity-toggle>
+                    <sgds-quantity-toggle step="10" count="5" disabled></sgds-quantity-toggle>
+                    <sgds-quantity-toggle step="10" count="5"></sgds-quantity-toggle>
                 </div>
             </div>
         </div>
@@ -378,10 +412,41 @@
                 [4, "Chuck", "Norris", "@asdasdasd"]
               ]'></sgds-table>
             </div>
-            
+            <div class="container">
+                <h2>Dropdown</h2>
+                <div class="row">
+                    <sgds-dropdown togglerText="Dropdown">
+                        <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
+                        <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
+                        <sgds-dropdown-item href="#" disabled>
+                          item #3
+                        </sgds-dropdown-item>
+                      </sgds-dropdown>
+                </div>
+            </div>
+            <div class="container">
+                <h2>Tooltip</h2>
+                Hover me
+                    <sgds-tooltip content="This is a tooltip">
+                        <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-info-circle"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                        />
+                        <path
+                          d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+                        />
+                      </svg>
+                      </sgds-tooltip>
+                </div>
     <script>
-        const submitButton = document.querySelector('sgds-quantitytoggle#heyhey');
-        console.log(submitButton)
+        const submitButton = document.querySelector('sgds-quantity-toggle#heyhey');
         // submitButton.addEventListener('sgds-change', (e) => {
         //     e.preventDefault();
         //     console.log(e)

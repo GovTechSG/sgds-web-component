@@ -1,0 +1,237 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import "../../lib/Sidenav";
+import { SgdsSidenavItem, SgdsSidenav } from "../../lib/Sidenav";
+import { partDescription } from "./common";
+
+<Meta
+  title="Components/Sidenav"
+  argTypes={{
+    // SgdsSidenav
+    alwaysOpen: {
+      control: "boolean",
+      defaultValue: false,
+      description:
+        "Allow sidenav items to stay open when another item is opened",
+      table: {
+        category: "props: SgdsSidenav",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    default: {
+      description:
+        "default slot of SgdsSidenavItem. Pass in SideNavItem elements here",
+      table: {
+        category: "slot: SgdsSidenav",
+      },
+    },
+    //SgdsSidenavItem
+    active: {
+      control: "boolean",
+      description:
+        "when true, toggles the sgds-sidenav-item to open on first load and set the active stylings",
+      table: {
+        category: "props: SgdsSidenavItem",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    collapseId: {
+      control: "text",
+      description:
+        "Forwards to id attribute of div.collapse and aria-controls attribute of button in SgdsSidenavItem. By default, SgdsSidenavItem auto-generates a unique id. Override the default id by specifiying your own",
+      table: {
+        category: "props: SgdsSidenavItem",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    buttonId: {
+      control: "text",
+      description:
+        "Forwards to id attribute of button and aria-labelledby attribute of ul.sidenav-list in SgdsSidenavItem. By default, SgdsSidenavItem auto-generates a unique id. Override the default id by specifiying your own",
+      table: {
+        category: "props: SgdsSidenavItem",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    href: {
+      control: "text",
+      description:
+        "When defined, converts SgdsSidenavItem from a button element to an Anchor element",
+      table: {
+        defaultValue: { summary: "" },
+        category: "props: SgdsSidenavItem",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    disabledSNI: {
+      name: "disabled",
+      control: "boolean",
+      description: "Disables the SgdsSidenavItem",
+      table: {
+        category: "props: SgdsSidenavItem",
+        defaultValue: { summary: "false" },
+      },
+    },
+    openItem: {
+      control: "disable",
+      description: "When invoked, opens the SgdsSidenavItem",
+      table: {
+        category: "methods: SgdsSidenavItem",
+        type: {
+          summary: "function",
+        },
+      },
+    },
+    closeItem: {
+      control: "disable",
+      description: "When invoked, closes the SgdsSidenavItem",
+      table: {
+        category: "methods: SgdsSidenavItem",
+        type: {
+          summary: "function",
+        },
+      },
+    },
+    defaultSNI: {
+      name: "default",
+      description: "default slot for SgdsSidenavLink element",
+      table: {
+        category: "slot: SgdsSidenavItem",
+      },
+    },
+    title: {
+      description:
+        "title slot for the content of SgdsSidenavItem's button / anchor element",
+      table: {
+        category: "slot: SgdsSidenavItem",
+      },
+    },
+    // SgdsSidenavLink
+    activeSNL: {
+      name: "active",
+      control: "boolean",
+      description: "When true, sets the active styling of SgdsSidenavLink",
+      table: { category: "props: SgdsSidenavLink" },
+    },
+    hrefSNL: {
+      name: "href",
+      control: "text",
+      description: "href link for SgdsSidenavLink",
+      table: { category: "props: SgdsSidenavLink" },
+    },
+    defaultSNL: {
+      name: "default",
+      description: "default slot for the title of SgdsSidenavLink",
+      table: {
+        category: "slot: SgdsSidenavLink",
+      },
+    },
+    disabledSNL: {
+      name: "disabled",
+      control: "boolean",
+      description: "Disables the SgdsSidenavLink",
+      table: {
+        category: "props: SgdsSidenavLink",
+        defaultValue: { summary: "false" },
+      },
+    },
+  }}
+/>
+
+export const Template = ({
+  alwaysOpen,
+  active,
+  href,
+  activeSNL,
+  hrefSNL,
+  collapseId,
+  buttonId,
+  disabledSNL,
+  disabledSNI,
+}) => {
+  return html`
+    <sgds-sidenav .alwaysOpen=${alwaysOpen}>
+      <sgds-sidenav-item
+        .active=${active}
+        .href=${href}
+        .collapseId=${collapseId}
+        .buttonId=${buttonId}
+        .disabled=${disabledSNI}
+      >
+        <span slot="title">
+          <sl-icon name="stack"></sl-icon> SideNav Item #1 (control by
+          Argstable)
+        </span>
+        <sgds-sidenav-link
+          .href=${hrefSNL}
+          .active=${activeSNL}
+          .disabled=${disabledSNL}
+          >sgds-sidenav-link (control by Argstable)</sgds-sidenav-link
+        >
+        <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
+        <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
+      </sgds-sidenav-item>
+      <sgds-sidenav-item>
+        <span slot="title">
+          <sl-icon name="stack"></sl-icon>SideNav Item #2</span
+        >
+        <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
+        <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
+        <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
+      </sgds-sidenav-item>
+      <sgds-sidenav-item href="#">
+        <span slot="title">SideNav Item #3</span>
+      </sgds-sidenav-item>
+    </sgds-sidenav>
+  `;
+};
+
+# Sidenav
+
+## `<sgds-sidenav>`, `<sgds-sidenav-item>`, `<sgds-sidenav-link>`
+
+<Canvas>
+  <Story name="Basic">{Template.bind({})}</Story>
+</Canvas>
+
+## API
+
+<ArgsTable story="Basic" />
+
+## SgdsSidenavItem methods
+
+`openItem()` and `closeItem()` are public methods exposed by SgdsSidenavItem component for user to customize the opening and closing of SgdsSidenavItems when required.
+
+```jsx
+// class method
+
+const SgdsSidenavItem = new SgdsSidenavItem();
+SgdsSidenavItem.openItem();
+SgdsSidenavItem.closeItem();
+
+//dom method
+
+const SgdsSidenavItemEl = document.querySelector(
+  "sgds-sidenav-item#specificId"
+);
+SgdsSidenavItemEl.openItem();
+SgdsSidenavItemEl.closeItem();
+```
+
+## CSS Custom Properties
+
+| Name                    | Description                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------- |
+| `--sidenav-theme-color` | Sets color of all text and left-border of sidenav. Default to sgds primary color (#5925DC). |

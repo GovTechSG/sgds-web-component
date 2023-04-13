@@ -41,7 +41,9 @@ describe("sgds-sidenav-item", () => {
       el,
       `  <li class="sidenav-item" aria-haspopup="true">
        <button class="collapsed sidenav-btn" aria-expanded="false" aria-controls="collapseEg" aria-selected="false" id="buttonEg" aria-disabled="false">
-         <slot name="title">
+       <slot name="icon">
+          </slot> 
+       <slot name="title">
          </slot>
        </button>
        <div class="collapse" id="collapseEg">

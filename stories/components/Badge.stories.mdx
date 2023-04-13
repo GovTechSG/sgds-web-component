@@ -1,0 +1,80 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import "../../lib/Badge";
+
+<Meta
+  title="Components/Badge"
+  argTypes={{
+    variant: {
+      control: 'select',
+      options: [
+        'primary',
+        'secondary',
+        'success',
+        'danger',
+        'warning',
+        'info',
+        'dark',
+        'light'
+      ],
+      defaultValue: 'primary',
+      table: { category: "props" },
+      description: "The badge's variant."
+    },
+    isLight:{
+      control:'boolean',
+      defaultValue: false,
+      table: { category: "props" },
+      description: 'Light badge variant'
+    },
+    roundedPill:{
+      control:'boolean',
+      defaultValue: false,
+      table: { category: "props" },
+      description: 'Roudned-edge badge'
+    },
+    'leftIcon':{
+      table:{ 
+        category: "Slot",
+        type: { summary: "Slot" },
+      },
+      description: "left icon slot"
+    },
+    'rightIcon':{
+      table:{ 
+        category: "Slot",
+        type: { summary: "Slot" },
+      },
+      description: "right icon slot"
+    },
+  }}
+/>
+
+export const Template = (args) =>
+  html`
+<sgds-badge .variant=${args.variant} .isLight=${args.isLight} .roundedPill=${args.roundedPill}>${args.variant}</sgds-badge>
+<sgds-badge .variant=${args.variant} .isLight=${args.isLight} .roundedPill=${args.roundedPill}>
+    <i slot="leftIcon" class="bi bi-credit-card-fill"></i>
+    leftIcon slot
+</sgds-badge>
+<sgds-badge .variant=${args.variant} .isLight=${args.isLight} .roundedPill=${args.roundedPill}>
+    <i slot="rightIcon" class="bi bi-credit-card-fill"></i>
+    rightIcon slot
+</sgds-badge>
+  `;
+
+# Badge
+
+## `<sgds-badge>`
+
+Badges can be used to highlight important bits of information such as labels, notifications & status.
+
+<Canvas>
+  <Story name="Basic" args={{ variant: "primary" }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## API
+
+<ArgsTable story="Basic" />
