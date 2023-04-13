@@ -68,7 +68,7 @@ export class SgdsAccordion extends SgdsElement {
 
     render() {
         return html`
-            <div class="sgds accordion 
+            <div class="
             ${classMap({
                 "sgds accordion": true,
                 [`${this.accordionClasses}`]: this.accordionClasses,

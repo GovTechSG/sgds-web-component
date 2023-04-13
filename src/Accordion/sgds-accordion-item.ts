@@ -9,6 +9,14 @@ import { watch } from '../utils/watch';
 import SgdsElement from "../utils/sgds-element";
 import styles from "./sgds-accordion-item.scss";
 
+/**
+ * @slot - content of the accordion item
+ * 
+ * @event sgds-show - Emitted on show.
+ * @event sgds-after-show - Emitted on show after animation has completed.
+ * @event sgds-hide - Emitted on hide.
+ * @event sgds-after-hide - Emitted on hide after animation has completed.
+ */
 @customElement('sgds-accordion-item')
 export class SgdsAccordionItem extends SgdsElement {
 
@@ -148,7 +156,7 @@ export class SgdsAccordionItem extends SgdsElement {
           @click=${this.handleSummaryClick}
           @keydown=${this.handleSummaryKeyDown}
         >
-          <slot name="summary" part="summary" class="accordion__summary">${this.summary}</slot>
+          ${this.summary}
         </button>
         <div class="accordion-body">
           <slot part="content" id="content" class="accordion-content" role="region" aria-labelledby="header"></slot>

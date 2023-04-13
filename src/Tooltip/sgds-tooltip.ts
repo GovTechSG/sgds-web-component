@@ -99,3 +99,5 @@ export class SgdsTooltip extends SgdsElement {
     `;
   }
 }
+
+export default SgdsTooltip;
