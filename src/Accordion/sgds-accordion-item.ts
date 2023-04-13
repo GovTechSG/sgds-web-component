@@ -16,6 +16,10 @@ import styles from "./sgds-accordion-item.scss";
  * @event sgds-after-show - Emitted on show after animation has completed.
  * @event sgds-hide - Emitted on hide.
  * @event sgds-after-hide - Emitted on hide after animation has completed.
+ * 
+ * @csspart base - The accordion-item base wrapper
+ * @csspart header - The accordion-item button header
+ * @csspart content - The accordion-item  content
  */
 @customElement('sgds-accordion-item')
 export class SgdsAccordionItem extends SgdsElement {

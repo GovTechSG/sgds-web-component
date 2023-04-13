@@ -2,6 +2,8 @@ import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import "../../lib/Accordion";
 
+// TODO - categorize props to Accordion and AccordionItem
+// TODO - document all cssparts
 <Meta
   title="Components/Accordion"
   argTypes={{
@@ -61,7 +63,7 @@ import "../../lib/Accordion";
         category: "Slot",
         type: { summary: "Slot" },
       },
-       description: 'Content of the accordion.'
+       description: 'Default slot for the content of the accordion.'
     }
   }}
 />
@@ -82,25 +84,25 @@ export const Template = (args) =>
       .summary=${args.summary}
       .accordionItemClasses=${args.accordionItemClasses} 
       > 
-        ${args.content} 
+        ${args.default} 
       </sgds-accordion-item>
       <sgds-accordion-item
       summary="Accordion 1"
       .accordionItemClasses=${args.accordionItemClasses} 
       > 
-        ${args.content} 
+        ${args.default} 
       </sgds-accordion-item>
       <sgds-accordion-item
       summary="Accordion 2"
       .accordionItemClasses=${args.accordionItemClasses} 
       > 
-        ${args.content} 
+        ${args.default} 
       </sgds-accordion-item>
       <sgds-accordion-item
       summary="Accordion 3"
       .accordionItemClasses=${args.accordionItemClasses} 
       > 
-        ${args.content} 
+        ${args.default} 
       </sgds-accordion-item>
     </sgds-accordion>
   `;

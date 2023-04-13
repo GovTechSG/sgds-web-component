@@ -5,6 +5,9 @@ import SgdsElement from "../utils/sgds-element";
 import styles from "./sgds-accordion.scss";
 import type SgdsAccordionItem from './sgds-accordion-item';
 
+/**
+ * @slot - default slot for accordion-item
+ */
 @customElement('sgds-accordion')
 export class SgdsAccordion extends SgdsElement {
     static styles = styles;
