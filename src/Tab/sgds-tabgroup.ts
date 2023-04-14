@@ -108,6 +108,7 @@ export class SgdsTabGroup extends SgdsElement {
 
   handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
+    //FIXME: too specific this will not work in dc design system
     const tab = target.closest('sgds-tab') as SgdsTab;
     const tabGroup = tab?.closest('sgds-tab-group');
 

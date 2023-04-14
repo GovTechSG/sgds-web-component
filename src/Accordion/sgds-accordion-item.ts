@@ -10,7 +10,9 @@ import SgdsElement from "../utils/sgds-element";
 import styles from "./sgds-accordion-item.scss";
 
 /**
- * @slot - content of the accordion item
+ * Alerts are used to display important messages inline or as toast notifications.
+ * @dependency test-dependency
+ * @slot default - content of the accordion item
  * 
  * @event sgds-show - Emitted on show.
  * @event sgds-after-show - Emitted on show after animation has completed.
@@ -19,22 +21,26 @@ import styles from "./sgds-accordion-item.scss";
  * 
  * @csspart base - The accordion-item base wrapper
  * @csspart header - The accordion-item button header
- * @csspart content - The accordion-item  content
+ * @csspart content - The accordion-item content
  */
 @customElement('sgds-accordion-item')
 export class SgdsAccordionItem extends SgdsElement {
 
   static styles = styles;
+  /** @internal */
   @query('.accordion-item') accordion: HTMLElement;
+    /** @internal */
   @query('.accordion-button') header: HTMLElement;
+    /** @internal */
   @query('.accordion-body') body: HTMLElement;
 
+  /** Controls whether accordion-item is open or close */
   @property({ type: Boolean, reflect: true }) open = false;
-
+  /** Title of the accordion */
   @property() summary: string;
-
+  /** Disables the accordion-item. When true, accordion-item cannot open */
   @property({ type: Boolean, reflect: true }) disabled = false;
-
+ /** Optional for accordion item. Can be used to insert any utility classes such as `me-auto` */
   @property({ reflect: true }) accordionItemClasses?: string;
 
   firstUpdated() {
@@ -114,7 +120,7 @@ export class SgdsAccordionItem extends SgdsElement {
   }
 
   /** Shows the accordion. */
-  async show() {
+  public async show() {
     if (this.open || this.disabled) {
       return undefined;
     }
@@ -123,8 +129,8 @@ export class SgdsAccordionItem extends SgdsElement {
     return waitForEvent(this, 'sgds-after-show');
   }
 
-  /** Hides the accordion */
-  async hide() {
+  /** Hide the accordion */
+  public async hide() {
     if (!this.open || this.disabled) {
       return undefined;
     }

@@ -91,6 +91,7 @@ export class SgdsRadioGroup extends SgdsElement {
   }
 
   private getAllRadios() {
+    //FIXME: too specific selector , this will not work if its on dev console design system
     return [...this.querySelectorAll<SgdsRadio>("sgds-radio")];
   }
 

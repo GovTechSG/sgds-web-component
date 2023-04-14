@@ -73,7 +73,7 @@ export class SgdsModal extends SgdsElement {
   }
 
   private requestClose(source: 'close-button' | 'keyboard' | 'overlay') {
-    const slRequestClose = this.emit('sgds-request-close', {
+    const slRequestClose = this.emit('sgds-close', {
       cancelable: true,
       detail: { source }
     });

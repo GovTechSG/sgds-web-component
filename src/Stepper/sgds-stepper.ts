@@ -4,6 +4,7 @@ import { customElement, property, query } from "lit/decorators.js";
 import styles from "./sgds-stepper.scss";
 import { classMap } from "lit/directives/class-map.js";
 
+// TODO: any events emitted? 
 @customElement("sgds-stepper")
 export class SgdsStepper extends SgdsElement {
   static styles = styles;

@@ -9,12 +9,10 @@ export type CardVariant = "card-action" | "card-action-quantity-toggle";
 
 export type TypeVariant = "checkbox" | "radio";
 
+//TODO: add jsdocs for slot, event, csspart
 @customElement("sgds-action-card")
 export class SgdsActionCard extends CardElement {
   static styles = styles;
-
-  // @query("sgds-checkbox") // Define the query
-  // inputEl!: HTMLInputElement; // Declare the prop
 
   inputRef: Ref<HTMLInputElement> = createRef();
 

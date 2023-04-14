@@ -1,72 +1,33 @@
-import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { Canvas, Meta, Story, ArgsTable, Props } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import "../../lib/Accordion";
+import { SgdsAccordion } from '../../lib/Accordion'
+import { getCustomElements } from '@storybook/web-components';
+
+
 
 // TODO - categorize props to Accordion and AccordionItem
 // TODO - document all cssparts
 <Meta
   title="Components/Accordion"
+  component="sgds-accordion-item"
   argTypes={{
     summary:{
       control: "text" ,
-      table: { category: "props" },
-      description: 'Title of the accordion',
     },
     accordionClasses: { 
       control: "text" ,
-      table: { category: "props" },
-      description: 'Optional for accordion wrapper. Can be used to insert any utility classes such as `me-auto`'
     },
     accordionItemClasses: { 
       control: "text" ,
-      table: { category: "props" },
-      description: 'Optional for accordion item. Can be used to insert any utility classes such as `me-auto`'
     },
     'allowMultiple':{
       control: "boolean" ,
       table: { category: "props" },
-      description: 'Allows multiple accordion items to be opened at the same time',
-      type: { summary: "Boolean" },
     },
-    'sgds-show':{
-      table: { 
-        category: "Events",
-        type: { summary: "Event" },
-      },
-      description: 'Trigger an event on show.'
-    },
-    'sgds-after-show':{
-      table: { 
-        category: "Events",
-        type: { summary: "Event" },
-      },
-      description: 'Trigger an event on show after animation is completed.'
-    },
-    'sgds-hide':{
-      table: { 
-        category: "Events",
-        type: { summary: "Event" },
-      },
-      description: 'Trigger an event on hide.'
-    },
-    'sgds-after-hide':{
-      table: { 
-        category: "Events",
-        type: { summary: "Event" },
-      },
-       description: 'Trigger an event on hide after animation is completed.'
-    },
-    "default":{
-      defaultValue: 'This is the accordion content',
-      control: "text" ,
-      table: { 
-        category: "Slot",
-        type: { summary: "Slot" },
-      },
-       description: 'Default slot for the content of the accordion.'
-    }
   }}
 />
+
 
 export const Template = (args) =>
   html`
@@ -84,7 +45,7 @@ export const Template = (args) =>
       .summary=${args.summary}
       .accordionItemClasses=${args.accordionItemClasses} 
       > 
-        ${args.default} 
+      ${console.log(getCustomElements())}
       </sgds-accordion-item>
       <sgds-accordion-item
       summary="Accordion 1"
@@ -118,7 +79,37 @@ A dropdown mechanism that allow users to either show or hide related content.
   </Story>
 </Canvas>
 
-
 ## API
 
-<ArgsTable story="Basic" />
+<Props of="sgds-accordion-item" />
+<Props of="sgds-accordion" />
+
+
+export const MethodsTable = () => {
+  const {modules} =  getCustomElements()
+  // const accordionModule = modules[0]
+  const accordionMembers = modules[0].declarations[0].members
+    console.log(accordionMembers)
+  const accordionMethods = accordionMembers.filter(member => member.kind === "method" && member.privacy === "public")
+  console.log({accordionMethods})
+return (
+<table>
+<thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  {accordionMethods.map(method => (
+    <tr>
+      <td>{method.name}</td>
+      <td>{method.description}</td>
+    </tr>
+  ))}
+</tbody>
+</table>)
+}
+
+# Methods 
+ <MethodsTable />

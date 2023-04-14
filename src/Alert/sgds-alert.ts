@@ -8,13 +8,8 @@ import { styleMap } from "lit-html/directives/style-map.js";
 import { watch } from "../utils/watch";
 import { repeat } from "lit/directives/repeat.js";
 
-// const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
 
 /**
- * @summary Alerts are used to display important messages inline or as toast notifications.
- * @documentation https://shoelace.style/components/alert
- * @status stable
- * @since 2.0
  *
  * @dependency sl-icon-button
  *

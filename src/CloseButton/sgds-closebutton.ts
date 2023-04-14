@@ -15,7 +15,7 @@ export class SgdsCloseButton extends SgdsElement {
 
   handleClick() {
     this.closed = true;
-    this.dispatchEvent(new CustomEvent("closed", { detail: this.closed }));
+    this.dispatchEvent(new CustomEvent("sgds-close", { detail: this.closed }));
   }
 
   render() {
