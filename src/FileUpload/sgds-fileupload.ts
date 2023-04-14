@@ -55,23 +55,17 @@ export class SgdsFileUpload extends SgdsElement {
 
   constructor() {
     super();
-    this.addEventListener("sgds-change", () => {
+    this.addEventListener("sgds-files-select", () => {
       this.selectedFiles = Array.from(this.fileList || []);
-      this.dispatchEvent(
-        new CustomEvent("selected-files-changed", {
-          detail: { selectedFiles: this.selectedFiles },
-          bubbles: true,
-          composed: true,
-        })
-      );
+      this.emit("selected-files-changed", {
+        detail: { selectedFiles: this.selectedFiles },
+      });
     });
   }
 
   setFileList(fileList) {
     this.fileList = fileList[0];
-    this.dispatchEvent(
-      new CustomEvent("sgds-change", { bubbles: true, composed: true })
-    );
+    this.emit("sgds-files-select");
   }
 
   static styles = styles;
