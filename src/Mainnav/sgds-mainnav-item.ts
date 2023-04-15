@@ -1,7 +1,7 @@
 
 import { customElement } from "lit/decorators.js";
 import styles from "./sgds-mainnav-item.scss";
-import LinkElement from "../utils/link-element";
+import LinkElement from "../base/link-element";
 
 /**
  * @slot - Label for the anchor tag.

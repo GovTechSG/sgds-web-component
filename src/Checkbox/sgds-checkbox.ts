@@ -3,7 +3,7 @@ import { customElement, property, query, state } from "lit/decorators.js";
 import { live } from "lit/directives/live.js";
 import styles from "./sgds-checkbox.scss";
 import { ifDefined } from "lit/directives/if-defined.js";
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import { classMap } from "lit/directives/class-map.js";
 import genId from "../utils/generateId";
 import { defaultValue } from "../utils/defaultvalue";

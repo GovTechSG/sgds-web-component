@@ -3,7 +3,7 @@ import { html, literal } from "lit/static-html.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
 import { FormSubmitController } from "../utils/form";
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import styles from "./sgds-button.scss";
 import { SgdsAlert } from "../Alert";
 import { SgdsStepper } from "../Stepper";

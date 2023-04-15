@@ -1,6 +1,6 @@
 import { html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import styles from "./sgds-sidenav-item.scss";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { Collapse } from "bootstrap";

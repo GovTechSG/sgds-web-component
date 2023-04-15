@@ -1,3 +1,3 @@
-import LinkElement from "../src/utils/link-element";
+import LinkElement from "../src/base/link-element";
 export declare class MockLink extends LinkElement {
 }

@@ -1,5 +1,5 @@
 import { css, html } from "lit";
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import { customElement, property, query } from "lit/decorators.js";
 import styles from "./sgds-stepper.scss";
 import { classMap } from "lit/directives/class-map.js";

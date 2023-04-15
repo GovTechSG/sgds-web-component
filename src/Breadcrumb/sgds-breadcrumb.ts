@@ -2,7 +2,7 @@ import { customElement, property, state, query} from "lit/decorators.js";
 import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import {classMap} from 'lit/directives/class-map.js';
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import styles from "./sgds-breadcrumb.scss";
 import type SgdsBreadcrumbItem from './sgds-breadcrumb-item';
 

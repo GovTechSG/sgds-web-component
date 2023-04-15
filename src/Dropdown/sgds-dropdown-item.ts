@@ -1,6 +1,6 @@
 import { html } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
-import LinkElement from "../utils/link-element";
+import LinkElement from "../base/link-element";
 import styles from "./sgds-dropdown.scss";
 import {classMap} from 'lit/directives/class-map.js';
 

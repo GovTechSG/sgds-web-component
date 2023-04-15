@@ -9,7 +9,7 @@ const noDash = string => string.replace(/^\s?-/, '').trim();
 
 export default {
   globs: ['src/**/sgds-*.ts'],
-  exclude: ['**/*.scss', 'src/utils/'],
+  exclude: ['**/*.scss'],
   plugins: [
     // Append package data
     {

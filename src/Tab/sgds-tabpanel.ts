@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import { watch } from "../utils/watch";
 import styles from "./sgds-tabpanel.scss";
 let id = 0;

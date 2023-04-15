@@ -1,7 +1,7 @@
 import { LitElement, html } from "lit";
 import { customElement, property, query, state } from "lit/decorators.js";
 import styles from "./sgds-table.scss";
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import { classMap } from "lit/directives/class-map.js";
 
 @customElement("sgds-table")

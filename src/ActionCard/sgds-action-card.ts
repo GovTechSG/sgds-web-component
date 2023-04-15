@@ -2,7 +2,7 @@ import { customElement, property, state, query } from "lit/decorators.js";
 import { html, literal } from "lit/static-html.js";
 import { classMap } from "lit/directives/class-map.js";
 import styles from "./sgds-action-card.scss";
-import { CardElement } from "../utils/card-element";
+import { CardElement } from "../base/card-element";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 
 export type CardVariant = "card-action" | "card-action-quantity-toggle";

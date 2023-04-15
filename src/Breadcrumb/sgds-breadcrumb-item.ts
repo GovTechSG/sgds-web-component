@@ -2,7 +2,7 @@ import { customElement, property} from "lit/decorators.js";
 import { html} from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import {classMap} from 'lit/directives/class-map.js';
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import styles from "./sgds-breadcrumb.scss";
 
 @customElement("sgds-breadcrumb-item")

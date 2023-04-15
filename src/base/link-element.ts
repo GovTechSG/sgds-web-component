@@ -1,5 +1,5 @@
 import { html } from "lit";
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "./sgds-element";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 

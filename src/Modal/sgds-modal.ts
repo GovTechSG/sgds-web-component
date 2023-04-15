@@ -6,7 +6,7 @@ import { animateTo, stopAnimations } from '../utils/animate';
 import { waitForEvent } from '../utils/event';
 import Modal from '../utils/modal';
 import { lockBodyScrolling, unlockBodyScrolling } from '../utils/scroll';
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import { HasSlotController } from '../utils/slot';
 import { watch } from '../utils/watch';
 import { getAnimation, setDefaultAnimation } from '../utils/animation-registry';

@@ -2,7 +2,7 @@ import { html } from "lit";
 import { customElement} from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import styles from "./sgds-mainnav-dropdown.scss";
-import { DropdownElement } from "../utils/dropdown-element";
+import { DropdownElement } from "../base/dropdown-element";
 
 @customElement("sgds-mainnav-dropdown")
 export class SgdsMainnavDropdown extends DropdownElement {

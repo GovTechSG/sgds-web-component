@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import styles from './sgds-masthead.scss';
-import SgdsElement from '../utils/sgds-element';
+import SgdsElement from '../base/sgds-element';
 
 
 @customElement('sgds-masthead')

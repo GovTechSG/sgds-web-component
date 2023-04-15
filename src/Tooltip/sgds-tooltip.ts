@@ -1,6 +1,6 @@
 import { html } from "lit";
 import { customElement, property, query, state } from "lit/decorators.js";
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { Tooltip } from "bootstrap";
 import styles from "./sgds-tooltip.scss";

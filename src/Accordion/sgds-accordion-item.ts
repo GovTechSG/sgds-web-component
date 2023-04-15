@@ -6,7 +6,7 @@ import { getAnimation, setDefaultAnimation } from '../utils/animation-registry';
 import { html } from 'lit';
 import { waitForEvent } from '../utils/event';
 import { watch } from '../utils/watch';
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import styles from "./sgds-accordion-item.scss";
 
 /**

@@ -1,7 +1,7 @@
 import { customElement, property,query, state } from "lit/decorators.js";
 import { html } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import { defaultValue } from "../utils/defaultvalue";
 import genId from "../utils/generateId";
 import { live } from 'lit/directives/live.js';

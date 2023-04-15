@@ -4,7 +4,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import {classMap} from 'lit/directives/class-map.js';
 import { live } from 'lit/directives/live.js';
 import styles from "./sgds-textarea.scss";
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import { defaultValue } from "../utils/defaultvalue";
 import { FormSubmitController } from "../utils/form";
 import genId from "../utils/generateId";

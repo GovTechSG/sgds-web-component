@@ -1,7 +1,7 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { html } from 'lit';
 import { customElement, property, queryAssignedNodes } from 'lit/decorators.js';
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import styles from "./sgds-accordion.scss";
 import type SgdsAccordionItem from './sgds-accordion-item';
 

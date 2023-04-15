@@ -3,8 +3,8 @@ import { Dropdown } from "bootstrap";
 import * as Popper from "@popperjs/core";
 import type { StrictModifiers } from "@popperjs/core";
 import { createRef, Ref } from "lit/directives/ref.js";
-import mergeDeep from "./mergeDeep";
-import genId from "./generateId";
+import mergeDeep from "../utils/mergeDeep";
+import genId from "../utils/generateId";
 import { SgdsDropdownItem } from "../Dropdown/sgds-dropdown-item";
 import SgdsElement from "./sgds-element";
 

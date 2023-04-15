@@ -3,7 +3,7 @@ import { customElement, property, state, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { watch } from "../utils/watch";
 import styles from "./sgds-radio-group.scss";
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import SgdsRadio from "./sgds-radio";
 import { FormSubmitController } from "../utils/form";
 

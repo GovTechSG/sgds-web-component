@@ -2,7 +2,7 @@ import { html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import {classMap} from 'lit/directives/class-map.js';
 import styles from "./sgds-badge.scss";
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 
 export type ButtonVariant = 
 "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark" 

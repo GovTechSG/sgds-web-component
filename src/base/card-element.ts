@@ -1,5 +1,5 @@
 import { property, state } from "lit/decorators.js";
-import genId from "./generateId";
+import genId from "../utils/generateId";
 import SgdsElement from "./sgds-element";
 
 export type Variant =

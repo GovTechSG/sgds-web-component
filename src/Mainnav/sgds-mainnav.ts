@@ -4,7 +4,7 @@ import styles from "./sgds-mainnav.scss";
 import { Collapse, Offcanvas } from "bootstrap";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import genId from "../utils/generateId";
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import {
   SM_BREAKPOINT,
   MD_BREAKPOINT,

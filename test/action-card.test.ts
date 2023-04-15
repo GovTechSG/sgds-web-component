@@ -16,7 +16,7 @@ import {
   import { SgdsCheckbox } from "../src/Checkbox";
   import { SgdsButton } from "../src/Button";
   import { sendKeys } from "@web/test-runner-commands";
-  import { CardElement } from "../src/utils/card-element";
+  import { CardElement } from "../src/base/card-element";
   import { Button } from "bootstrap";
   
   describe("<sgds-action-card>", () => {
