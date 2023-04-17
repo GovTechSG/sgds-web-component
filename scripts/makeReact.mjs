@@ -5,7 +5,7 @@ import chalk from 'chalk';
 import { deleteSync } from 'del';
 import prettier from 'prettier';
 import prettierConfig from '../prettier.config.cjs';
-import { getAllComponents } from './shared.mjs';
+import { getAllComponents, getSgdsComponents } from './shared.mjs';
 
 const reactDir = path.join('src/react');
 
@@ -19,7 +19,7 @@ const metadata = JSON.parse(fs.readFileSync(path.join("./", 'custom-elements.jso
 // Wrap components
 console.log('Wrapping components for React...');
 
-const components = getAllComponents(metadata);
+const components = getSgdsComponents(getAllComponents(metadata))
 const index = [];
 
 components.map(component => {

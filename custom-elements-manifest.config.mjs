@@ -8,8 +8,8 @@ const { name, description, version, author, homepage, license } = packageData;
 const noDash = string => string.replace(/^\s?-/, '').trim();
 
 export default {
-  globs: ['src/**/sgds-*.ts'],
-  exclude: ['**/*.scss'],
+  globs: ['src/**/sgds-*.ts', 'src/**/*-element.ts'],
+  exclude: ['**/*.scss', 'src/utils/'],
   plugins: [
     // Append package data
     {

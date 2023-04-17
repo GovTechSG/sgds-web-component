@@ -5,7 +5,7 @@ import chalk from 'chalk';
 import { deleteSync } from 'del';
 import prettier from 'prettier';
 import prettierConfig from '../prettier.config.cjs';
-import { getAllComponents } from './shared.mjs';
+import { getAllComponents, getSgdsComponents } from './shared.mjs';
 
 const storiesDir = path.join('stories-test');
 
@@ -19,18 +19,15 @@ const metadata = JSON.parse(fs.readFileSync(path.join('./', 'custom-elements.jso
 // Wrap components
 console.log('Wrapping components for Storybook...');
 
-const components = getAllComponents(metadata);
+// should get all components except base components
+const components = getSgdsComponents(getAllComponents(metadata))
 const index = [];
-
+console.log(components)
 components.map(component => {
-  // console.log(component);
+  // console.log(component.members);
   const componentFolderName = component.modulePath.split('/')[1];
   const nameWithoutPrefix = component.name.replace(/^Sgds/, '');
-  const tagWithoutPrefix = component.tagName.replace(/^sgds-/, '');
-  const componentDir = path.join(storiesDir, tagWithoutPrefix);
   const componentFile = path.join(storiesDir, `${nameWithoutPrefix}.mdx`);
-  const importPath = component.modulePath.replace(/^src\//, '').replace(/\.ts$/, '');
-  const events = (component.events || []).map(event => `${event.reactName}: '${event.name}'`).join(',\n');
   const props = component.members.filter(member => member.kind === 'field');
   const makeArgTypes = props.reduce((obj, item) => {
     let controlType
@@ -54,10 +51,8 @@ components.map(component => {
         controlType = 'object'
       
     }
-      
   return Object.assign(obj, { [item.name]: { "control": controlType} });
   }, {});
-
   // fs.mkdirSync(componentDir, { recursive: true });
 
   const source = prettier.format(
@@ -71,6 +66,12 @@ components.map(component => {
       title="Components/${nameWithoutPrefix}"
       argTypes={${JSON.stringify(makeArgTypes)}}
     />
+
+    <Contributing />
+    
+    ## API
+
+<ArgsTable story='Basic' />
     `,
     Object.assign(prettierConfig, {
       parser: 'babel-ts'

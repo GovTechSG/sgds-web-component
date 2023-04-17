@@ -15,6 +15,7 @@
     "dev": "npm run build:watch & npm run serve",
     "serve": "wds --watch --open",
     "test": "rm -rf test-outdir && rollup --config rollup.test.config.js && web-test-runner",
+    "test:scripts": "wtr scripts/__tests__/**/*.test.js",
     "storybook": "npm run build:dev && start-storybook -p 6006",
     "build-storybook": "rm -rf lib && npm run build && build-storybook",
     "prepare": "husky install",

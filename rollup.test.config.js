@@ -38,5 +38,5 @@ export default [
       }),
       litcss(),                     // process adoptedStylesheets for lit 
     ],
-  },
+  }
 ];

@@ -27,7 +27,6 @@ describe('<sgds-accordion>', () => {
 
     const first = el.shadowRoot!.querySelector('slot')?.assignedNodes()[1];
     expect(first).to.have.attribute('first-of-type');
-
     const second = el.shadowRoot!.querySelector('slot')?.assignedNodes()[3];
     const third = el.shadowRoot!.querySelector('slot')?.assignedNodes()[5];
     expect(second).to.have.attribute('nth-of-type');
