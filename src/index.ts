@@ -19,5 +19,6 @@ import "./Stepper";
 import "./Alert";
 import "./CloseButton";
 import "./Toast";
+import "./FileUpload"
 import "./Accordion";
 import "./Tooltip";
