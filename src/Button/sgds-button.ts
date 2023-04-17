@@ -109,8 +109,6 @@ export class SgdsButton extends SgdsElement {
     | "_top"
     | string;
 
-  @property({ reflect: true }) refId?: string;
-
   @property({ reflect: true }) methodType?:
     | "toggleShow"
     | "decrement"
@@ -162,26 +160,6 @@ export class SgdsButton extends SgdsElement {
     }
     if (this.type === "reset") {
       this.formSubmitController.reset(this);
-    }
-    if (this.refId != null) {
-      const sgdsAlert = document.querySelector(`#${this.refId}`) as MyAlert;
-      const sgdsStepper = document.querySelector(`#${this.refId}`) as MyStepper;
-      switch (this.methodType) {
-        case "toggleShow":
-          sgdsAlert.toggleShow();
-        case "increment":
-          sgdsStepper.incrementStep();
-          break;
-        case "decrement":
-          sgdsStepper.decrementStep();
-          break;
-        case "first":
-          sgdsStepper.firstStep();
-          break;
-        case "last":
-          sgdsStepper.lastStep();
-          break;
-      }
     }
   };
 
