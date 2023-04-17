@@ -15,7 +15,7 @@ SCSS files specific to the component should be stored here. Create an entry poin
 Place common/reusable functions and global stylings in utils folder 
 
 ### Filename 
-Custom elements must be in kebab case. Prefix the files with *-element.ts
+Custom elements must be in kebab case. Prefix the files with sgds-*.ts
 
 ## Testing 
 
@@ -31,6 +31,12 @@ To run single test file, run the output javascript test file instead of the type
 ## Storybook 
 
 Write documentation in storybook in MDX format. Include API argstable, import instructions, at least a basic example and custom css properties table (if present)
+
+## Markdown files and README.md
+
+.md files are located in docs folder. These markdown files are used in both Storybook and github's README.
+ Do not edit README.md file directly. Instead edit the markdown files in docs folder and run `npm run build:readme`. Note that Gulp-concat will combine the files in alphabetical order - name any new markdown files with this in mind.
+
 
 ## Publishing (for admin only)
 Library publication is performed in workflow by github actions. When ready for publishing, perform the following steps

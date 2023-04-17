@@ -1,6 +1,6 @@
 {
   "name": "@govtechsg/sgds-web-component",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "",
   "main": "lib/umd/index.js",
   "module": "lib/index.js",
@@ -15,7 +15,8 @@
     "test": "rm -rf test-outdir && rollup --config rollup.test.config.js && web-test-runner",
     "storybook": "npm run build && start-storybook -p 6006",
     "build-storybook": "rm -rf lib && npm run build && build-storybook",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build:readme" : "gulp"
   },
   "author": "",
   "license": "MIT",
@@ -36,9 +37,9 @@
     "@rollup/plugin-replace": "^5.0.0",
     "@shoelace-style/shoelace": "^2.0.0-beta.83",
     "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-controls": "^6.5.16",
     "@storybook/addon-docs": "^6.5.16",
     "@storybook/addon-essentials": "^6.5.16",
-    "@storybook/addon-controls": "^6.5.16",
     "@storybook/addon-links": "^6.5.16",
     "@storybook/builder-webpack5": "^6.5.16",
     "@storybook/manager-webpack5": "^6.5.16",
@@ -56,6 +57,8 @@
     "babel-loader": "^8.2.5",
     "cz-conventional-changelog": "^3.3.0",
     "esbuild-sass-plugin": "^2.3.2",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
     "husky": "^8.0.0",
     "postcss": "^8.2.13",
     "rollup": "^2.46.0",

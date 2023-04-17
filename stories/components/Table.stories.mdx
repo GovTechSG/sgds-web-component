@@ -1,0 +1,505 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import "../../lib/Table";
+
+<Meta
+  title='Components/Table'
+  argTypes={{
+    striped: {
+      control: "boolean",
+      description: "Adds zebra-striping to any table row within the `<tbody>`.",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    bordered: {
+      control: "boolean",
+      description: "Adds borders on all sides of the table and cells.",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    borderless: {
+      control: "boolean",
+      description:
+        "Removes all borders on the table and cells, including table header",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    hover: {
+      control: "boolean",
+      description: "Enable a hover state on table rows within a `<tbody>`",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    sort: {
+      control: "boolean",
+      description:
+        "Sorting on a column is enabled by adding the sort property.",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    removableSort: {
+      control: "boolean",
+      description:
+        "When removableSort property is present, the third click removes the sorting from the column.",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    size: {
+      control: "text",
+      description:
+        "Make tables more compact by cutting cell padding in half by setting size as `sm`.",
+      table: {
+        category: "props",
+        defaultValue: { summary: "string" },
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    variant: {
+      control: "text",
+      description:
+        "Invert the colors of the table — with light text on dark backgrounds by setting variant as `dark`.",
+      table: {
+        category: "props",
+        defaultValue: { summary: "string" },
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    responsive: {
+      control: "object",
+      description: `Allow tables to be scrolled horizontally with ease. Across every breakpoint, use responsive for horizontally scrolling tables. 
+        Responsive tables are wrapped automatically in a div. Use responsive="sm", responsive="md", responsive="lg", or responsive="xl" as needed to create responsive tables up to a particular breakpoint. 
+        From that breakpoint and up, the table will behave normally and not scroll horizontally. Alternatively, set boolean to true instead to make it always responsive throughout breakpoints`,
+      table: {
+        category: "props",
+        type: {
+          summary: ["string", "boolean"],
+        },
+      },
+    },
+    tableHeaders: {
+      control: "object",
+      description: "Array of tableHeaders",
+      table: {
+        defaultValue: "[]",
+        category: "props",
+      },
+    },
+    tableData: {
+      control: "object",
+      description: "Array of tableData",
+      table: {
+        defaultValue: "[]",
+        category: "props",
+      },
+    },
+  }}
+/>
+
+export const Template = (args) => {
+  return html`
+    <sgds-table
+      ?striped=${args.striped}
+      ?bordered=${args.bordered}
+      ?borderless=${args.borderless}
+      ?hover=${args.hover}
+      .size=${args.size}
+      .variant=${args.variant}
+      .responsive=${args.responsive}
+      .tableHeaders=${args.tableHeaders}
+      .tableData=${args.tableData}
+      .sort=${args.sort}
+      .removableSort=${args.removableSort}
+    >
+    </sgds-table>
+  `;
+};
+
+export const TemplateBreakpointSpecific = (args) => {
+  return html`
+    <sgds-table
+      .responsive=${`sm`}
+      .tableHeaders=${args.tableHeaders}
+      .tableData=${args.tableData}
+    >
+    </sgds-table>
+    <sgds-table
+      .responsive=${`md`}
+      .tableHeaders=${args.tableHeaders}
+      .tableData=${args.tableData}
+    >
+    </sgds-table>
+    <sgds-table
+      .responsive=${`lg`}
+      .tableHeaders=${args.tableHeaders}
+      .tableData=${args.tableData}
+    >
+    </sgds-table>
+    <sgds-table
+      .responsive=${`xl`}
+      .tableHeaders=${args.tableHeaders}
+      .tableData=${args.tableData}
+    >
+    </sgds-table>
+  `;
+};
+
+# Table
+
+## `<sgds-table>`
+
+Use the `striped`, `bordered` and `hover` props to customise the table.
+
+<Canvas>
+  <Story
+    name='Basic'
+    args={{
+      tableHeaders: ["#", "First Names", "Last Name", "Username"],
+      tableData: [
+        ["1", "John", "Doe", "@johndoe"],
+        ["2", "Jane", "Doe", "@janedoe"],
+        ["3", "Bob", "Smith", "@bobsmith"],
+      ],
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## API
+
+<ArgsTable story='Basic' />
+
+## Small Table
+
+Use `size="sm"` to make tables compact by cutting cell padding in half.
+
+<Canvas>
+  <Story
+    name='Small table'
+    args={{
+      tableHeaders: ["#", "First Names", "Last Name", "Username"],
+      tableData: [
+        ["1", "John", "Doe", "@johndoe"],
+        ["2", "Jane", "Doe", "@janedoe"],
+        ["3", "Bob", "Smith", "@bobsmith"],
+      ],
+      size: "sm",
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Sorting
+
+Sorting on a column is enabled by adding the `sort` property. The sorting algorithm is based on javascript array.sort() method. In ascending order from bottom, alphabets come first, followed by numbers, and then symbols. Similarly, in descending order from bottom, symbols come first, followed by numbers, and then alphabets.
+
+<Canvas>
+  <Story
+    name='Sorting'
+    args={{
+      tableHeaders: ["Serial No.", "Title", "Name", "Username"],
+      tableData: [
+        ["S901021", "David", "Doe", "@johndoe"],
+        ["S892002", "2be", "Zoe", "@janedoe"],
+        ["S879192", "#55", "Smith", "@bobsmith"],
+        ["S829132", "@hey", "Alex", "@davidsmith"],
+      ],
+      bordered: true,
+      sort: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Removable Sort
+
+When `removableSort` is present, the third click removes the sorting from the column.
+
+<Canvas>
+  <Story
+    name='Removable Sort'
+    args={{
+      tableHeaders: ["#", "First Names", "Last Name", "Username"],
+      tableData: [
+        ["1", "John", "Doe", "@johndoe"],
+        ["2", "Jane", "Doe", "@janedoe"],
+        ["3", "Bob", "Smith", "@bobsmith"],
+      ],
+      bordered: true,
+      sort: true,
+      removableSort: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Striped Body
+
+Adds zebra-striping using striped to table row within the `<tbody>`.
+
+<Canvas>
+  <Story
+    name='Striped Body'
+    args={{
+      tableHeaders: ["#", "First Names", "Last Name", "Username"],
+      tableData: [
+        ["1", "John", "Doe", "@johndoe"],
+        ["2", "Jane", "Doe", "@janedoe"],
+        ["3", "Bob", "Smith", "@bobsmith"],
+      ],
+      striped: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Bordered Body
+
+Use `bordered` to add borders on all sides of the table and cells.
+
+<Canvas>
+  <Story
+    name='Bordered Body'
+    args={{
+      tableHeaders: ["#", "First Names", "Last Name", "Username"],
+      tableData: [
+        ["1", "John", "Doe", "@johndoe"],
+        ["2", "Jane", "Doe", "@janedoe"],
+        ["3", "Bob", "Smith", "@bobsmith"],
+      ],
+      bordered: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Borderless Body
+
+Add `borderless` to remove all borders on the table and cells, including table header.
+
+<Canvas>
+  <Story
+    name='Borderless Body'
+    args={{
+      tableHeaders: ["#", "First Names", "Last Name", "Username"],
+      tableData: [
+        ["1", "John", "Doe", "@johndoe"],
+        ["2", "Jane", "Doe", "@janedoe"],
+        ["3", "Bob", "Smith", "@bobsmith"],
+      ],
+      borderless: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Hovered Body
+
+Use hover to enable a hover state on table rows within a `<tbody>`.
+
+<Canvas>
+  <Story
+    name='Hovered Body'
+    args={{
+      tableHeaders: ["#", "First Names", "Last Name", "Username"],
+      tableData: [
+        ["1", "John", "Doe", "@johndoe"],
+        ["2", "Jane", "Doe", "@janedoe"],
+        ["3", "Bob", "Smith", "@bobsmith"],
+      ],
+      hover: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Dark Table
+
+Use `variant="dark"` to invert the colors of the table and get light text on a dark background.
+
+<Canvas>
+  <Story
+    name='Dark mode'
+    args={{
+      tableHeaders: ["#", "First Names", "Last Name", "Username"],
+      tableData: [
+        ["1", "John", "Doe", "@johndoe"],
+        ["2", "Jane", "Doe", "@janedoe"],
+        ["3", "Bob", "Smith", "@bobsmith"],
+      ],
+      variant: "dark",
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Responsive
+
+Responsive tables allow tables to be scrolled horizontally with ease.
+
+## Always Responsive
+
+Across every breakpoint, use `responsive` for horizontally scrolling tables. Responsive tables are wrapped automatically in a `div`. The following example has 12 columns that are scrollable horizontally.
+
+<Canvas>
+  <Story
+    name='Responsive'
+    args={{
+      tableHeaders: [
+        "#",
+        "Table heading",
+        "Table heading",
+        "Table heading",
+        "Table heading",
+        "Table heading",
+        "Table heading",
+        "Table heading",
+        "Table heading",
+        "Table heading",
+        "Table heading",
+        "Table heading",
+      ],
+      tableData: [
+        [
+          "1",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+        ],
+        [
+          "2",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+        ],
+        [
+          "3",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+        ],
+      ],
+      responsive: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Breakpoint Specific
+
+Use `responsive="sm"`, `responsive="md"` , `responsive="lg"`, or `responsive="xl"` as needed to create responsive tables up to a particular breakpoint. From that breakpoint and up, the table will behave normally and not scroll horizontally.
+
+<Canvas>
+  <Story
+    name='Breakpoint specific'
+    args={{
+      tableHeaders: [
+        "#",
+        "Table heading",
+        "Table heading",
+        "Table heading",
+        "Table heading",
+        "Table heading",
+        "Table heading",
+      ],
+      tableData: [
+        [
+          "1",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+        ],
+        [
+          "2",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+        ],
+        [
+          "3",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+          "Table cell",
+        ],
+      ],
+    }}
+  >
+    {TemplateBreakpointSpecific.bind({})}
+  </Story>
+</Canvas>

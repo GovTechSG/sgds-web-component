@@ -1,0 +1,194 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import "../../lib/Checkbox";
+
+<Meta
+  title='Components/Checkbox'
+  //handles format: ['eventName', 'selector']
+  parameters={{
+    actions: {
+      handles: ["sgds-change", "sgds-checkbox"],
+    },
+  }}
+  argTypes={{
+    value: {
+      control: "text",
+      table: {
+        category: "props",
+        type: {
+          summary: "string",
+        },
+      },
+      description:
+        "Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name.",
+    },
+    checkboxId: {
+      control: "text",
+      description: "For label/input value pair",
+      table: {
+        category: "props",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    name: {
+      control: "text",
+      table: {
+        category: "props",
+        type: {
+          summary: "string",
+        },
+      },
+      description:
+        "Name of the HTML form control. Submitted with the form as part of a name/value pair.",
+    },
+    disabled: {
+      control: "boolean",
+      defaultValue: false,
+      description:
+        "Disables the checkbox",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    required: {
+      control: "boolean",
+      defaultValue: false,
+      description: "Makes the checkbox a required field. Only renders validation state ontouch or upon form submission ",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    checked: {
+      control: "boolean",
+      defaultValue: false,
+      description:
+        "Draws the checkbox in a checked state, which toggles input aria-checked to true",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    invalid: {
+      control: "boolean",
+      defaultValue: false,
+      description:
+        "Manually style the input as invalid.",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+     valid: {
+      control: "boolean",
+      defaultValue: false,
+      description:
+        "Manually style the input as valid.",
+      table: {
+        category: "props",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    defaultSlot: {
+      name: "default",
+      control: "text",
+      defaultValue: "Default text here",
+      description: "default slot for label element",
+      table: {
+        category: "slots",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    feedbackSlot: {
+      control: "text",
+      defaultValue: "Feedback text here",
+      description: "feedback slot for invalid state",
+      table: {
+        category: "slots",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    Event: {
+      name: "sgds-change",
+      control: "disable",
+      description:
+        "Emitted when checkbox is checked/unchecked. Refer to canvas mode to view event handler in action.",
+      table: {
+        category: "events",
+      },
+    },
+    base: {
+      name: "base",
+      description: "The component's internal wrapper div",
+      table: {
+        category: "CSS Parts",
+      },
+    },
+    control: {
+      name: "control",
+      description: "The checkbox control input",
+      table: {
+        category: "CSS Parts",
+      },
+    },
+    label: {
+      name: "label",
+      description: "The checkbox label.",
+      table: {
+        category: "CSS Parts",
+      },
+    },
+  }}
+/>
+
+export const Template = (args) => {
+  return html`
+    <sgds-checkbox
+      .name=${args.name}
+      ?disabled=${args.disabled}
+      value=${args.value}
+      ?required=${args.required}
+      .checked=${args.checked}
+      .invalid=${args.invalid}
+      .valid=${args.valid}
+      .checkboxId=${args.checkboxId}
+      >${args.defaultSlot}<span slot="feedback">${args.feedbackSlot}<span></sgds-checkbox
+    >
+  `;
+};
+
+# Checkbox
+
+## `<sgds-checkbox>`
+
+## Basic
+
+<Canvas>
+  <Story name='Basic'>{Template.bind({})}</Story>
+</Canvas>
+
+## API
+
+<ArgsTable story='Basic' />

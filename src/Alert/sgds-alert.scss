@@ -5,6 +5,45 @@
   --alert-link-color: #2a3343;
 }
 
-sgds-alert ::slotted(a) {
-  color: var(--alert-link-color) !important;
+// ::slotted(div.alert-link) {
+//   color: var(--alert-link-color) !important;
+// }
+
+@each $state, $value in $theme-colors-set {
+  $alert-background: map-get(
+    $map: $value,
+    $key: #{$state}-100,
+  );
+  $alert-border: map-get(
+    $map: $value,
+    $key: #{$state}-400,
+  );
+  $alert-color: $gray-600;
+
+  .alert-#{$state} {
+    @include alert-variant($alert-background, $alert-border, $alert-color);
+
+    ::slotted(sl-icon),
+    ::slotted(i) {
+      color: map-get($map: $value, $key: #{$state}-600);
+    }
+  }
 }
+
+// @mixin alert-variant($background, $border, $color) {
+//   color: $color;
+//   @include gradient-bg($background);
+//   border-color: $border;
+
+//   ::slotted(.alert-link) {
+//     color: #2a3343 !important;
+//   }
+// }
+
+// sgds-alert ::slotted(a.alert-link) {
+  /* Define the styles for the anchor element within the slot */
+  // color: #2a3343 !important;
+  // text-decoration: underline;
+// }
+
+

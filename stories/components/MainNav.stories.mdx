@@ -1,0 +1,162 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import "../../lib/Mainnav";
+import { partDescription, dropdownElementProps } from "./common";
+
+<Meta
+  title="Components/Mainnav"
+  argTypes={{
+    expand: {
+      control: "select",
+      options: ["always", "never", "sm", "md", "lg", "xl", "xxl"],
+      defaultValue: "lg",
+      description:
+        "The breakpoint, below which, the Navbar will collapse. When `always` the Navbar will always be expanded regardless of screen size. When `never`, the Navbar will always be collapsed",
+      table: {
+        category: "props: SgdsMainnav",
+        defaultValue: { summary: "lg" },
+        type: {
+          summary: "MainnavExpandSize",
+        },
+      },
+    },
+    brandHref: {
+      control: "text",
+      defaultValue: "",
+      description: "The href link for brand logo",
+      table: {
+        defaultValue: { summary: "" },
+        category: "props: SgdsMainnav",
+        type: { summary: "string" },
+      },
+    },
+    collapseId: {
+      control: "text",
+      description:
+        "Forwards to id attribute of div.collapse and aria-controls attribute of toggler button in SgdsMainnav. By default, SgdsMainnav auto-generates a unique id. Override the default id by specifiying your own",
+      table: {
+        category: "props: SgdsMainnav",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    // SgdsMainnav slots
+    default: {
+      description:
+        "default slot of SgdsMainnav. Pass in SgdsMainnavItem elements here",
+      table: {
+        category: "slot: SgdsMainnav",
+      },
+    },
+    brand: {
+      description: "Brand slot of SgdsMainnav. Pass in brand logo or img here",
+      table: {
+        category: "slot: SgdsMainnav",
+      },
+    },
+    "non-collapsible": {
+      description: "Elements in this slot will not be collapsed",
+      table: {
+        category: "slot: SgdsMainnav",
+      },
+    },
+    end: {
+      description:
+        "Elements in this slot will be positioned to the right end of .navbar-nav. Elements in this slot will also be included in collapsed menu",
+      table: {
+        category: "slot: SgdsMainnav",
+      },
+    },
+    // SgdsMainnavItem props
+    active: {
+      control: "boolean",
+      description: "when true, sets the active stylings of .nav-link",
+      table: {
+        category: "props: SgdsMainnavItem",
+        defaultValue: { summary: false },
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    href: {
+      control: "text",
+      description: "Href attribute for anchor element in SgdsMainnavItem",
+      table: {
+        defaultValue: { summary: "" },
+        category: "props: SgdsMainnavItem",
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    disabledMNI: {
+       name: "disabled",
+      control: "boolean",
+      description: "Disables the SgdsMainnavItem",
+      table: { category: "props: SgdsMainnavItem" },
+    },
+    defaultMNI: {
+      name: "default",
+      description: "default slot for SgdsMainnavItem element",
+      table: {
+        category: "slot: SgdsMainnavItem",
+      },
+    },
+    ...dropdownElementProps('SgdsMainnavDropdown', true)
+  }}
+/>
+
+export const Template = ({ expand, brandHref, collapseId, active, href, disabledMNI }) => {
+  return html`
+    <sgds-mainnav
+      .expand=${expand}
+      .brandHref=${brandHref}
+      .collapseId=${collapseId}
+    >
+      <img
+        width="130"
+        src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
+        slot="brand"
+      />
+      <sgds-mainnav-item .active=${active} .href=${href} .disabled=${disabledMNI}
+        >ArgsTable Controlled
+      </sgds-mainnav-item>
+      <sgds-mainnav-dropdown togglerText="Dropdown">
+         <sgds-dropdown-item href="https://google.com">Item 1</sgds-dropdown-item>
+         <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
+         <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
+      </sgds-mainnav-dropdown>
+      <sgds-mainnav-item href="#">About</sgds-mainnav-item>
+      <sgds-mainnav-item href="#" slot="end">Contact Us</sgds-mainnav-item>
+      <sgds-button slot="end">Login</sgds-button>
+      <dev-console-widget
+        slot="non-collapsible"
+        iconColor="black"
+        iconWidth="28px"
+        iconHeight="28px"
+      ></dev-console-widget>
+    </sgds-mainnav>
+  `;
+};
+
+# Mainnav
+
+## `<sgds-mainnav>`, `<sgds-mainnav-item>`, `<sgds-mainnav-dropdown>`
+
+<Canvas>
+  <Story name="Basic" height="500px">
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## API
+
+<ArgsTable story="Basic" />
+
+## CSS Custom Properties
+
+| Name                         | Description                                                                                                           |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `--mainnav-item-theme-color` | Sets color of hovered/active text and bottom-border of`<sgds-mainnav-item/>` Default to sgds primary color (#5925DC). |

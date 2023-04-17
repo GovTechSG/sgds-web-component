@@ -1,0 +1,111 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import "../../lib/Masthead";
+
+<Meta
+  title="Components/Masthead"
+  argTypes={{
+    fluid: {
+      control: { type: 'boolean' },
+      description: "Sets the container width:100% to all breakpoints",
+    }
+  }}
+/>
+
+export const Template = ({
+  fluid
+}) =>
+  html`
+    <sgds-masthead .fluid=${fluid}></sgds-masthead>
+  `;
+
+# Masthead
+
+## `<sgds-masthead>`
+
+All .gov.sg digital services shall adopt The Official Government Banner for every page in the digital service and be placed at the top of the page.
+
+<Canvas>
+  <Story name="Basic" args={{ fluid : 'true' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## API
+
+<ArgsTable story="Basic" />
+
+## CSS Custom Properties
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Default Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>--masthead-font-family</code>
+      </td>
+      <td>Sets font family for masthead</td>
+      <td>system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif</td>
+    </tr>
+    <tr>
+      <td>
+        <code>--masthead-text-color</code>
+      </td>
+      <td>
+        Sets overall text color 
+      </td>
+      <td>hsl(0, 0%, 28%)</td>
+    </tr>
+    <tr>
+      <td>
+        <code>--masthead-link-color</code>
+      </td>
+      <td>
+        Sets link color for  "How to identify?" and "Trusted Site"
+      </td>
+      <td>hsl(222, 63%, 50%)</td>
+    </tr>
+    <tr>
+      <td>
+        <code>--masthead-link-color-hover</code>
+      </td>
+      <td>
+        Sets link hover color for  "How to identify?" and "Trusted Site"
+      </td>
+      <td>hsl(221, 64%, 55%)</td>
+    </tr>
+    <tr>
+      <td>
+        <code>--masthead-mobile-padding-x</code>
+      </td>
+      <td>
+        Sets the padding left and right for viewport width 1024px and below
+      </td>
+      <td>0.75rem</td>
+    </tr>
+    <tr>
+      <td>
+        <code>--masthead-mobile-font-size</code>
+      </td>
+      <td>
+        Sets the font size for viewport width 1024px and below
+      </td>
+      <td>0.6875rem</td>
+    </tr>
+    <tr>
+      <td>
+        <code>--masthead-fluid-padding-x</code>
+      </td>
+      <td>
+        Sets the container-fluid padding left and right for viewport width 1024px and above
+      </td>
+      <td>0.75rem</td>
+    </tr>
+  </tbody>
+</table>
