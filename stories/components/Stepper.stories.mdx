@@ -43,28 +43,6 @@ import "../../lib/Stepper";
         },
       },
     },
-    methodType: {
-      control: "disable",
-      description:
-        "prop that holds value to invoke the stepper methods such as: `decrement`, `increment`, `first` and `last`. To be used with refId.",
-      table: {
-        category: "props `sgds-button`",
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    refId: {
-      control: "text",
-      description:
-        "Takes an id reference to `sgds-stepper` component, allowing to invoke the different methodType available.",
-      table: {
-        category: "props `sgds-button`",
-        type: {
-          summary: "string",
-        },
-      },
-    },
     decrementStep: {
       control: "disable",
       description:
@@ -179,11 +157,13 @@ export const TemplateExample = ({ steps, activeStep, namedSlot }) => {
           refId="myStepper"
           methodType="increment"
           variant="primary"
+          @click="${incrementStep}"
           >Next</sgds-button
         >
         <sgds-button
           refId="myStepper"
           methodType="decrement"
+          @click="${decrementStep}"
           variant="secondary"
           >Back</sgds-button
         >
@@ -194,6 +174,7 @@ export const TemplateExample = ({ steps, activeStep, namedSlot }) => {
           refId="myStepper"
           methodType="first"
           variant="danger"
+          @click="${firstStep}"
           >Go to first page</sgds-button
         >
         <sgds-button
@@ -201,6 +182,7 @@ export const TemplateExample = ({ steps, activeStep, namedSlot }) => {
           refId="myStepper"
           methodType="last"
           variant="warning"
+          @click="${lastStep}"
           >Go to last page</sgds-button
         >
       </div>
@@ -208,9 +190,26 @@ export const TemplateExample = ({ steps, activeStep, namedSlot }) => {
   `;
 };
 
+export const incrementStep = () => {
+  const stepper = document.querySelector('#myStepper')
+  stepper.incrementStep()
+} 
+export const decrementStep = () => {
+  const stepper = document.querySelector('#myStepper')
+  stepper.decrementStep()
+}
+export const lastStep = () => {
+  const stepper = document.querySelector('#myStepper')
+  stepper.lastStep()
+}
+export const firstStep = () => {
+  const stepper = document.querySelector('#myStepper')
+  stepper.firstStep()
+}
+
 # Stepper
 
-## `<sgds-stepper>`, `<sgds-stepper-item>`
+## `<sgds-stepper>`
 
 Stepper informs users which step they are in a form or process. Each step markers indicate the stage of the process.
 

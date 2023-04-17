@@ -3,6 +3,7 @@ import SgdsElement from "../base/sgds-element";
 import { customElement, property, query } from "lit/decorators.js";
 import styles from "./sgds-stepper.scss";
 import { classMap } from "lit/directives/class-map.js";
+import { watch } from "../utils/watch";
 
 // TODO: any events emitted? 
 @customElement("sgds-stepper")
@@ -29,7 +30,7 @@ export class SgdsStepper extends SgdsElement {
   public incrementStep() {
     if (this.activeStep < this.steps.length - 1) {
       this.activeStep++;
-    }
+    }   
   }
 
   public decrementStep() {
@@ -55,7 +56,6 @@ export class SgdsStepper extends SgdsElement {
       this.activeStep = index;
     }
   }
-
   render() {
     return html`
       <div class="sgds stepper">

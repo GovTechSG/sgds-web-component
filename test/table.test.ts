@@ -64,6 +64,57 @@ describe("Table", () => {
     ]);
   });
 
+  it("should be able to sort the table data when a header is clicked and return to default sort on third click when removableSort is set to true", async () => {
+    // Set up the table data and headers
+    const tableHeaders = ["Name", "Age", "City"];
+    const tableData = [
+      ["John", "30", "New York"],
+      ["Alice", "25", "San Francisco"],
+      ["Bob", "40", "Chicago"],
+    ];
+  
+    // Create the table element
+    const table = await fixture<SgdsTable>(
+      html`<sgds-table
+        .tableHeaders=${tableHeaders}
+        .tableData=${tableData}
+        .sort=${true}
+        .removableSort=${true}
+      ></sgds-table>`
+    );
+  
+    // Click the header for the first column to sort by name
+    const nameHeader = table.shadowRoot!.querySelector("thead th:first-child")!;
+    (nameHeader as HTMLElement).click();
+  
+    // Check that the table data is sorted by name in ascending order
+    assert.deepEqual(table.tableData, [
+      ["Alice", "25", "San Francisco"],
+      ["Bob", "40", "Chicago"],
+      ["John", "30", "New York"],
+    ]);
+  
+    // Click the header for the first column again to sort by name in descending order
+    (nameHeader as HTMLElement).click();
+  
+    // Check that the table data is sorted by name in descending order
+    assert.deepEqual(table.tableData, [
+      ["John", "30", "New York"],
+      ["Bob", "40", "Chicago"],
+      ["Alice", "25", "San Francisco"],
+    ]);
+  
+    // Click the header for the first column a third time to return to default sort
+    (nameHeader as HTMLElement).click();
+  
+    // Check that the table data is sorted by the original order
+    assert.deepEqual(table.tableData, [
+      ["John", "30", "New York"],
+      ["Alice", "25", "San Francisco"],
+      ["Bob", "40", "Chicago"],
+    ]);
+  });
+
   it("outer wrapper is a table element", async () => {
     const el = await fixture<SgdsTable>(html`<sgds-table></sgds-table>`);
     expect(el).shadowDom.to.equalSnapshot();
@@ -141,4 +192,5 @@ describe("Table", () => {
         ?.classList.contains("table-responsive-md")
     ).to.be.true;
   });
+
 });
