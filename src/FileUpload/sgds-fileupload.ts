@@ -3,7 +3,6 @@ import { customElement, property } from "lit/decorators.js";
 import styles from "./sgds-fileupload.scss";
 import SgdsElement from "../utils/sgds-element";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
-import genId from "../utils/generateId";
 import { createRef, ref } from "lit/directives/ref.js";
 
 export type ButtonVariant =
@@ -55,7 +54,7 @@ export class SgdsFileUpload extends SgdsElement {
 
   constructor() {
     super();
-    this.addEventListener("sgds-files-select", () => {
+    this.addEventListener("sgds-files-selected", () => {
       this.selectedFiles = Array.from(this.fileList || []);
       this.emit("selected-files-changed", {
         detail: { selectedFiles: this.selectedFiles },
@@ -65,7 +64,7 @@ export class SgdsFileUpload extends SgdsElement {
 
   setFileList(fileList) {
     this.fileList = fileList[0];
-    this.emit("sgds-files-select");
+    this.emit("sgds-files-selected");
   }
 
   static styles = styles;
@@ -128,7 +127,7 @@ export class SgdsFileUpload extends SgdsElement {
         width="16"
         height="16"
         fill="green"
-        class="bi bi-check align-middle me-2"
+        class="bi bi-check"
         viewBox="0 0 16 16"
       >
         <path
@@ -146,7 +145,7 @@ export class SgdsFileUpload extends SgdsElement {
         width="16"
         height="16"
         fill="red"
-        class="bi bi-x-circle align-middle ms-2"
+        class="bi bi-x-circle"
         viewBox="0 0 16 16"
       >
         <path
@@ -161,9 +160,9 @@ export class SgdsFileUpload extends SgdsElement {
     const listItems = this.selectedFiles.map(
       (file, index) => html`
         <li key=${index} class="fileupload-list-item">
-          ${getCheckedIcon(this.checkedIcon)}
+          <span class="me-2" >${getCheckedIcon(this.checkedIcon)}</span>
           <span class="filename">${file.name}</span>
-          <span @click=${() => this.removeFileHandler(index)}
+          <span class="ms-2" @click=${() => this.removeFileHandler(index)}
             >${getCancelIcon(this.cancelIcon)}</span
           >
         </li>
