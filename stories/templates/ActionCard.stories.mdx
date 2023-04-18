@@ -1,0 +1,62 @@
+import { html } from "lit-html";
+import "../../lib/ActionCard";
+
+export const Template = (args) =>
+  html`
+    <sgds-action-card
+      .active=${args.active}
+      .bgColor=${args.bgColor}
+      .borderColor=${args.borderColor}
+      .textColor=${args.textColor}
+      .disabled=${args.disabled}
+      .iconName=${args.iconName}
+      .type=${args.type}
+    >
+      <span slot="card-subtitle">${args.cardSubtitleSlot}</span>
+      <span slot="card-title">${args.cardTitleSlot}</span>
+      <span slot="card-text">${args.cardTextSlot}</span>
+    </sgds-action-card>
+  `;
+  export const TemplateType = (args) =>
+  html`
+  
+  <div class="col">
+    <sgds-action-card
+      type="radio"
+    >
+      <span slot="card-subtitle">${args.cardSubtitleSlot}</span>
+      <span slot="card-title">${args.cardTitleSlot}</span>
+      <span slot="card-text">${args.cardTextSlot}</span>
+    </sgds-action-card>
+  <div>
+  <div class="col">
+    <sgds-action-card
+      type="checkbox"
+    >
+      <span slot="card-subtitle">${args.cardSubtitleSlot}</span>
+      <span slot="card-title">${args.cardTitleSlot}</span>
+      <span slot="card-text">${args.cardTextSlot}</span>
+    </sgds-action-card>
+  <div>
+`;
+
+# ActionCard 
+## `<sgds-action-card>`
+
+Action Cards are Cards that are able to perform actions like selection or quantity toggling. Usually with built-in input elements.
+
+<Canvas>
+  <Story name='Basic'>{Template.bind({})}</Story>
+</Canvas>
+
+## API
+
+<ArgsTable story='Basic' />
+
+## Type
+
+Use `type` prop : `radio` / `checkbox` to change the selectable card input type
+
+<Canvas>
+  <Story name='Type'>{TemplateType.bind({})}</Story>
+</Canvas>

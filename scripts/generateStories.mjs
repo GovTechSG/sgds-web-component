@@ -32,7 +32,6 @@ for (const [key, value] of Object.entries(groupedComponents)) {
   const allMembers = value.map(i => i.members).flat();
   const methodsMeta = methodsTable(value);
   const summary = value.filter(i => i.summary).map(i => i.summary).join('')
-  console.log(summary)
   const args = allMembers.filter(member => member.kind === 'field');
   const componentFile = path.join(storiesDir, `${key}.stories.mdx`);
   const ArgsTable = value.map(
@@ -46,8 +45,8 @@ for (const [key, value] of Object.entries(groupedComponents)) {
     `
 import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
-import "../lib/${key}";
 import { getCustomElements } from '@storybook/web-components';
+import {Template} from '../stories/templates/Accordion.mdx';
 
 <Meta
  title="Components/${key}"
@@ -56,6 +55,12 @@ import { getCustomElements } from '@storybook/web-components';
 
 # ${key}  
 ${summary ? summary +"\n" : "\n"}
+<Canvas>
+  <Story name="Basic" args={{ summary: "This is an accordion" }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
 ## API
 ${ArgsTable.join('\n')}
 
