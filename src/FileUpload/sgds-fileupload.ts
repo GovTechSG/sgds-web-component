@@ -1,7 +1,7 @@
 import { html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import styles from "./sgds-fileupload.scss";
-import SgdsElement from "../utils/sgds-element";
+import SgdsElement from "../base/sgds-element";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import { createRef, ref } from "lit/directives/ref.js";
 

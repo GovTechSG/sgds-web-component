@@ -6,9 +6,10 @@ import { deleteSync } from 'del';
 import prettier from 'prettier';
 import prettierConfig from '../prettier.config.cjs';
 import { getAllComponents, getSgdsComponents } from './shared.mjs';
-
+import { makeArgTypes } from './makeArgTypes.mjs';
+import groupBy from 'lodash/groupBy.js';
 const storiesDir = path.join('stories-test');
-
+import { methodsTable } from './methodsTable.mjs';
 // Clear build directory
 deleteSync(storiesDir);
 fs.mkdirSync(storiesDir, { recursive: true });
@@ -20,66 +21,70 @@ const metadata = JSON.parse(fs.readFileSync(path.join('./', 'custom-elements.jso
 console.log('Wrapping components for Storybook...');
 
 // should get all components except base components
-const components = getSgdsComponents(getAllComponents(metadata))
+const components = getSgdsComponents(getAllComponents(metadata));
 const index = [];
-console.log(components)
-components.map(component => {
-  // console.log(component.members);
-  const componentFolderName = component.modulePath.split('/')[1];
-  const nameWithoutPrefix = component.name.replace(/^Sgds/, '');
-  const componentFile = path.join(storiesDir, `${nameWithoutPrefix}.mdx`);
-  const props = component.members.filter(member => member.kind === 'field');
-  const makeArgTypes = props.reduce((obj, item) => {
-    let controlType
-    switch(true) {
-      case /string/.test(item.type?.text):
-        controlType = 'text';
-        break;
-      case /boolean/.test(item.type?.text):
-        controlType = 'boolean';
-        break;
-      case /number/.test(item.type?.text):
-        controlType = 'number';
-        break;
-      case /|/.test(item.type?.text):
-        controlType = 'select';
-        break;
-      case /array/.test(item.type?.text):
-        controlType = 'object';
-        break;
-        default:
-        controlType = 'object'
-      
-    }
-  return Object.assign(obj, { [item.name]: { "control": controlType} });
-  }, {});
-  // fs.mkdirSync(componentDir, { recursive: true });
+
+const groupedComponents = groupBy(components, (k, v) => {
+  return k.modulePath.split('/')[1];
+});
+
+for (const [key, value] of Object.entries(groupedComponents)) {
+  const allMembers = value.map(i => i.members).flat();
+  const methodsMeta = methodsTable(value);
+  const summary = value.filter(i => i.summary)
+  const args = allMembers.filter(member => member.kind === 'field');
+  const componentFile = path.join(storiesDir, `${key}.stories.mdx`);
+  const ArgsTable = value.map(
+    component =>
+      `### ${component.tagName}
+<ArgsTable of="${component.tagName}"/>\n
+  `
+  );
 
   const source = prettier.format(
     `
-      import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
-      import { html } from "lit-html";
-      import "../../lib/${componentFolderName}";
-      import { getCustomElements } from '@storybook/web-components';  
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import "../lib/${key}";
+import { getCustomElements } from '@storybook/web-components';
 
-      <Meta
-      title="Components/${nameWithoutPrefix}"
-      argTypes={${JSON.stringify(makeArgTypes)}}
-    />
+<Meta
+ title="Components/${key}"
+ argTypes={${JSON.stringify(makeArgTypes(args))}}
+ />
 
-    <Contributing />
-    
-    ## API
+# ${key}  
+## API
+${ArgsTable.join('\n')}
 
-<ArgsTable story='Basic' />
+
+${methodsMeta.map(meta => {
+  if (meta.methods.length > 0){
+    return `## Methods \n### ${meta.tagName}\n<table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${meta.methods.map(method => (
+            `<tr>
+              <td>${method.name}</td>
+              <td>${method.description}</td>
+            </tr>`
+          )).join('')}
+        </tbody>
+      </table>
+    `
+  } else return
+}
+ ).join('')}
     `,
-    Object.assign(prettierConfig, {
-      parser: 'babel-ts'
-    })
+    { parser: 'mdx' }
   );
-
-    fs.writeFileSync(componentFile, source, 'utf8');
-});
+  fs.writeFileSync(componentFile, source, 'utf8');
+}
 
 // // Generate the index file
 // fs.writeFileSync(path.join(storiesDir, 'index.ts'), index.join('\n'), 'utf8');

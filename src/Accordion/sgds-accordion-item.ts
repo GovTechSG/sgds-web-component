@@ -10,7 +10,6 @@ import SgdsElement from "../base/sgds-element";
 import styles from "./sgds-accordion-item.scss";
 
 /**
- * Alerts are used to display important messages inline or as toast notifications.
  * @dependency test-dependency
  * @slot default - content of the accordion item
  * 

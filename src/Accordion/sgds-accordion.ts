@@ -6,6 +6,7 @@ import styles from "./sgds-accordion.scss";
 import type SgdsAccordionItem from './sgds-accordion-item';
 
 /**
+ * @summary A dropdown mechanism that allow users to either show or hide related content.
  * @slot - default slot for accordion-item
  */
 @customElement('sgds-accordion')
