@@ -27,16 +27,6 @@ export type ButtonVariant =
   | "outline-light"
   | "outline-dark";
 
-interface MyAlert extends SgdsAlert {
-  toggleShow(): void;
-}
-interface MyStepper extends SgdsStepper {
-  incrementStep(): void;
-  decrementStep(): void;
-  firstStep(): void;
-  lastStep(): void;
-}
-
 @customElement("sgds-button")
 export class SgdsButton extends SgdsElement {
   static styles = styles;
@@ -109,14 +99,6 @@ export class SgdsButton extends SgdsElement {
     | "_top"
     | string;
 
-  @property({ reflect: true }) methodType?:
-    | "toggleShow"
-    | "decrement"
-    | "increment"
-    | "first"
-    | "last";
-
-  @property({ reflect: true }) stepperId?: string;
 
   /** Sets focus on the button. */
   focus(options?: FocusOptions) {

@@ -23,27 +23,38 @@
   .alert-#{$state} {
     @include alert-variant($alert-background, $alert-border, $alert-color);
 
+    /* Use :host-context() to include .alert-#{$state} class by default */
+    // :host-context(.alert-#{$state}) ::slotted(a.alert-link) {
+    //   color: #2a3343;
+    // }
+
     ::slotted(sl-icon),
-    ::slotted(i) {
+    ::slotted(i),
+    ::slotted(svg) {
       color: map-get($map: $value, $key: #{$state}-600);
+    }
+
+    // ~ ::slotted(a.alert-link) {
+    //   color: #2a3343 !important;
+    // }
+    :host-context(.alert-#{$state}) ::slotted(a.alert-link) {
+      color: inherit;
     }
   }
 }
+
+
+// ::slotted(.alert-link) {
+//   color: #2a3343 !important;
+// }
 
 // @mixin alert-variant($background, $border, $color) {
 //   color: $color;
 //   @include gradient-bg($background);
 //   border-color: $border;
 
-//   ::slotted(.alert-link) {
-//     color: #2a3343 !important;
-//   }
-// }
-
 // sgds-alert ::slotted(a.alert-link) {
-  /* Define the styles for the anchor element within the slot */
-  // color: #2a3343 !important;
-  // text-decoration: underline;
+/* Define the styles for the anchor element within the slot */
+// color: #2a3343 !important;
+// text-decoration: underline;
 // }
-
-
