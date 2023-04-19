@@ -44,9 +44,8 @@ for (const [key, value] of Object.entries(groupedComponents)) {
   const source = prettier.format(
     `
 import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
-import { html } from "lit-html";
-import { getCustomElements } from '@storybook/web-components';
-import {Template} from '../stories/templates/Accordion.mdx';
+import {Template, args} from '../stories/templates/${key}/basic.js';
+import '../lib/${key}';
 
 <Meta
  title="Components/${key}"
@@ -56,7 +55,7 @@ import {Template} from '../stories/templates/Accordion.mdx';
 # ${key}  
 ${summary ? summary +"\n" : "\n"}
 <Canvas>
-  <Story name="Basic" args={{ summary: "This is an accordion" }}>
+  <Story name="Basic" args={args}>
     {Template.bind({})}
   </Story>
 </Canvas>

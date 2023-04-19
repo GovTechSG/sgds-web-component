@@ -1,0 +1,29 @@
+export const TemplateType = (args) =>
+  html`
+  <div class="col">
+    <sgds-action-card
+      type="radio"
+    >
+      <span slot="card-subtitle">${args.cardSubtitleSlot}</span>
+      <span slot="card-title">${args.cardTitleSlot}</span>
+      <span slot="card-text">${args.cardTextSlot}</span>
+    </sgds-action-card>
+  <div>
+  <div class="col">
+    <sgds-action-card
+      type="checkbox"
+    >
+      <span slot="card-subtitle">${args.cardSubtitleSlot}</span>
+      <span slot="card-title">${args.cardTitleSlot}</span>
+      <span slot="card-text">${args.cardTextSlot}</span>
+    </sgds-action-card>
+  <div>
+`;
+
+## Type
+
+Use `type` prop : `radio` / `checkbox` to change the selectable card input type
+
+<Canvas>
+  <Story name='Type'>{TemplateType.bind({})}</Story>
+</Canvas>

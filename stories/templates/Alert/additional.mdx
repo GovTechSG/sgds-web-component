@@ -1,0 +1,81 @@
+export const TemplateLinks = (args) =>
+  html`
+    <sgds-alert alertClasses="d-flex align-items-center">
+      <sl-icon name="info-circle" class="flex-shrink-0 me-4"></sl-icon>
+      <div>
+        This is a primary alert with&nbsp;<a class="alert-link"
+          >an example link</a
+        >. Give it a click if you like.
+      </div>
+    </sgds-alert>
+  `;
+
+export const TemplateAddContent = (args) =>
+  html`
+    <sgds-alert variant="success" alertClasses="d-flex align-items-center">
+      <sl-icon
+        name="info-circle"
+        class="flex-shrink-0 me-4 align-self-start mt-2"
+      ></sl-icon>
+      <div>
+        <h4 class="alert-heading">Hey, nice to see you</h4>
+        <p>
+          Aww yeah, you successfully read this important alert message. This
+          example text is going to run a bit longer so that you can see how
+          spacing within an alert works with this kind of content.
+        </p>
+        <hr />
+        <p className="mb-0">
+          Whenever you need to, be sure to use margin utilities to keep things
+          nice and tidy.
+        </p>
+      </div>
+    </sgds-alert>
+  `;
+
+export const TemplateWithButton = (args) =>
+  html`
+    <sgds-alert
+      id="alertExample"
+      variant="warning"
+      alertClasses="d-flex align-items-center"
+      dismissible
+      ><sl-icon name="info-circle" class="flex-shrink-0 me-4"></sl-icon>
+      <div>
+        This is an Alert component. You may add the dismissible option.
+      </div></sgds-alert
+    >
+    <br />
+    <sgds-button variant="danger" refId="alertExample" methodType="toggleShow"
+      >Show Alert</sgds-button
+    >
+  `;
+
+## Links
+
+For links, use the following code snippets for any of the alert variants
+
+<Canvas>
+  <Story name='Links'>{TemplateLinks.bind({})}</Story>
+</Canvas>
+
+## Additional Content
+
+Alerts can contain whatever content you like. Headers, paragraphs, dividers etc.
+
+<Canvas>
+  <Story name='Additional Content'>{TemplateAddContent.bind({})}</Story>
+</Canvas>
+
+## Dismissible
+
+Add the dismissible prop to add a dismiss button to the Alert. An `sgds-button` with id reference `refId` prop to the alert can also be used to show the dismissed alert with `methodType` prop of value `toggleShow`.
+
+<Canvas>
+  <Story
+    name='Dismissible'
+    args={{ alertClasses: "d-flex align-items-center" }}
+  >
+    {TemplateWithButton.bind({})}
+  </Story>
+</Canvas>

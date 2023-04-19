@@ -19,7 +19,8 @@
     "storybook": "npm run build:dev && start-storybook -p 6006",
     "build-storybook": "rm -rf lib && npm run build && build-storybook",
     "prepare": "husky install",
-    "build:readme": "gulp"
+    "build:readme": "gulp",
+    "build:stories": "node ./scripts/generateStories.mjs"
   },
   "author": "GovTechSG",
   "contributors": [
@@ -79,6 +80,7 @@
     "esbuild-sass-plugin": "^2.3.2",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
+    "gulp-mustache": "^5.0.0",
     "husky": "^8.0.0",
     "lodash": "^4.17.21",
     "postcss": "^8.2.13",
