@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from "lit-html";
 
 export const Template = args =>
   html`
@@ -24,4 +24,4 @@ export const Template = args =>
     </sgds-input>
   `;
 
-export const args = { type: 'text' };
+export const args = { type: "text" };

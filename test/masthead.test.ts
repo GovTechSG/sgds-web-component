@@ -1,15 +1,15 @@
-import { SgdsMasthead } from '../src/Masthead';
-import '../src/Masthead/sgds-masthead';
-import { fixture, assert, expect, elementUpdated } from '@open-wc/testing';
-import { html } from 'lit';
+import { SgdsMasthead } from "../src/Masthead";
+import "../src/Masthead/sgds-masthead";
+import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
+import { html } from "lit";
 
-describe('sgds-masthead', () => {
-  it('is defined', () => {
-    const el = document.createElement('sgds-masthead');
+describe("sgds-masthead", () => {
+  it("is defined", () => {
+    const el = document.createElement("sgds-masthead");
     assert.instanceOf(el, SgdsMasthead);
   });
 
-  it('renders with default values', async () => {
+  it("renders with default values", async () => {
     const el = await fixture(html`<sgds-masthead></sgds-masthead>`);
     assert.shadowDom.equal(
       el,
@@ -86,20 +86,20 @@ describe('sgds-masthead', () => {
     );
   });
 
-  it('when clicked on #sgds-masthead-identify, shows #sgds-masthead-content', async () => {
+  it("when clicked on #sgds-masthead-identify, shows #sgds-masthead-content", async () => {
     const el = await fixture<SgdsMasthead>(html`<sgds-masthead></sgds-masthead>`);
-    expect(el.shadowRoot?.getElementById('sgds-masthead-content')?.classList.value).not.to.contain('show');
-    el.shadowRoot?.getElementById('sgds-masthead-identify')?.click();
+    expect(el.shadowRoot?.getElementById("sgds-masthead-content")?.classList.value).not.to.contain("show");
+    el.shadowRoot?.getElementById("sgds-masthead-identify")?.click();
     await elementUpdated(el);
-    expect(el.shadowRoot?.getElementById('sgds-masthead-content')).to.have.class('show');
+    expect(el.shadowRoot?.getElementById("sgds-masthead-content")).to.have.class("show");
   });
 
-  it('when fluid attriubute is inserted, .container class should update to .container-fluid', async () => {
+  it("when fluid attriubute is inserted, .container class should update to .container-fluid", async () => {
     const el = await fixture<SgdsMasthead>(html`<sgds-masthead></sgds-masthead>`);
-    const containerWrapper = el.shadowRoot?.getElementById('sgds-masthead')?.children[0];
-    expect(containerWrapper?.classList.value).to.contain('container');
-    el.setAttribute('fluid', '');
+    const containerWrapper = el.shadowRoot?.getElementById("sgds-masthead")?.children[0];
+    expect(containerWrapper?.classList.value).to.contain("container");
+    el.setAttribute("fluid", "");
     await elementUpdated(el);
-    expect(containerWrapper?.classList.value).to.contain('container-fluid');
+    expect(containerWrapper?.classList.value).to.contain("container-fluid");
   });
 });

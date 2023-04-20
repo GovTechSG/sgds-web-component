@@ -1,10 +1,10 @@
-import { html } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import SgdsElement from '../base/sgds-element';
-import styles from './sgds-table.scss';
+import { html } from "lit";
+import { customElement, property, state } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import SgdsElement from "../base/sgds-element";
+import styles from "./sgds-table.scss";
 
-@customElement('sgds-table')
+@customElement("sgds-table")
 export class SgdsTable extends SgdsElement {
   static styles = styles;
 
@@ -17,7 +17,7 @@ export class SgdsTable extends SgdsElement {
   @property({ type: Boolean, reflect: true }) sort = false;
   @property({ type: Boolean, reflect: true }) removableSort = false;
 
-  @property({ type: String, reflect: true }) responsive?: 'sm' | 'md' | 'lg' | 'xl';
+  @property({ type: String, reflect: true }) responsive?: "sm" | "md" | "lg" | "xl";
 
   @property({ type: Array<string> }) tableHeaders = [];
   @property({ type: Array<string> }) tableData = [];
@@ -47,7 +47,7 @@ export class SgdsTable extends SgdsElement {
         const aValue = a[columnIndex];
         const bValue = b[columnIndex];
 
-        if (typeof aValue === 'string' && typeof bValue === 'string') {
+        if (typeof aValue === "string" && typeof bValue === "string") {
           return this.sortAsc ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
         } else {
           return this.sortAsc ? (aValue as number) - (bValue as number) : (bValue as number) - (aValue as number);
@@ -68,12 +68,12 @@ export class SgdsTable extends SgdsElement {
       }
 
       // add the .active class to the clicked header cell
-      const thElements = this.shadowRoot?.querySelectorAll('th');
+      const thElements = this.shadowRoot?.querySelectorAll("th");
       thElements.forEach((thElement, index) => {
         if (index === columnIndex) {
-          thElement.classList.add('active');
+          thElement.classList.add("active");
         } else {
-          thElement.classList.remove('active');
+          thElement.classList.remove("active");
         }
       });
     }
@@ -127,11 +127,11 @@ export class SgdsTable extends SgdsElement {
     return html`
       <div
         class=${classMap({
-          'table-responsive': !!this.responsive,
-          'table-responsive-sm': this.responsive === 'sm',
-          'table-responsive-md': this.responsive === 'md',
-          'table-responsive-lg': this.responsive === 'lg',
-          'table-responsive-xl': this.responsive === 'xl'
+          "table-responsive": !!this.responsive,
+          "table-responsive-sm": this.responsive === "sm",
+          "table-responsive-md": this.responsive === "md",
+          "table-responsive-lg": this.responsive === "lg",
+          "table-responsive-xl": this.responsive === "xl"
         })}
         tabindex="0"
       >
@@ -151,7 +151,7 @@ export class SgdsTable extends SgdsElement {
                 (header: string, index: number) => html`
                   <th
                     class="${classMap({
-                      'sortable-header': this.sort,
+                      "sortable-header": this.sort,
                       active: this.activeColumn === index
                     })}"
                     @click=${() => this.handleHeaderClick(index)}

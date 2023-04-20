@@ -1,19 +1,19 @@
-import { property } from 'lit/decorators.js';
-import SgdsElement from './sgds-element';
+import { property } from "lit/decorators.js";
+import SgdsElement from "./sgds-element";
 
-export type Variant = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light' | string;
+export type Variant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light" | string;
 
 export type Color =
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'danger'
-  | 'warning'
-  | 'info'
-  | 'dark'
-  | 'light'
-  | 'white'
-  | 'muted';
+  | "primary"
+  | "secondary"
+  | "success"
+  | "danger"
+  | "warning"
+  | "info"
+  | "dark"
+  | "light"
+  | "white"
+  | "muted";
 
 export class CardElement extends SgdsElement {
   @property({ type: String })

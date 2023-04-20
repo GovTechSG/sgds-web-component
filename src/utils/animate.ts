@@ -4,7 +4,7 @@
 export function animateTo(el: HTMLElement, keyframes: Keyframe[], options?: KeyframeAnimationOptions) {
   return new Promise(resolve => {
     if (options?.duration === Infinity) {
-      throw new Error('Promise-based animations must be finite.');
+      throw new Error("Promise-based animations must be finite.");
     }
 
     const animation = el.animate(keyframes, {
@@ -12,8 +12,8 @@ export function animateTo(el: HTMLElement, keyframes: Keyframe[], options?: Keyf
       duration: prefersReducedMotion() ? 0 : options?.duration
     });
 
-    animation.addEventListener('cancel', resolve, { once: true });
-    animation.addEventListener('finish', resolve, { once: true });
+    animation.addEventListener("cancel", resolve, { once: true });
+    animation.addEventListener("finish", resolve, { once: true });
   });
 }
 
@@ -23,11 +23,11 @@ export function animateTo(el: HTMLElement, keyframes: Keyframe[], options?: Keyf
 export function parseDuration(delay: number | string) {
   delay = delay.toString().toLowerCase();
 
-  if (delay.indexOf('ms') > -1) {
+  if (delay.indexOf("ms") > -1) {
     return parseFloat(delay);
   }
 
-  if (delay.indexOf('s') > -1) {
+  if (delay.indexOf("s") > -1) {
     return parseFloat(delay) * 1000;
   }
 
@@ -38,7 +38,7 @@ export function parseDuration(delay: number | string) {
 // Tells if the user has enabled the "reduced motion" setting in their browser or OS.
 //
 export function prefersReducedMotion() {
-  const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const query = window.matchMedia("(prefers-reduced-motion: reduce)");
   return query.matches;
 }
 
@@ -51,8 +51,8 @@ export function stopAnimations(el: HTMLElement) {
       return new Promise(resolve => {
         const handleAnimationEvent = requestAnimationFrame(resolve);
 
-        animation.addEventListener('cancel', () => handleAnimationEvent, { once: true });
-        animation.addEventListener('finish', () => handleAnimationEvent, { once: true });
+        animation.addEventListener("cancel", () => handleAnimationEvent, { once: true });
+        animation.addEventListener("finish", () => handleAnimationEvent, { once: true });
         animation.cancel();
       });
     })
@@ -64,6 +64,6 @@ export function stopAnimations(el: HTMLElement) {
 export function shimKeyframesHeightAuto(keyframes: Keyframe[], calculatedHeight: number) {
   return keyframes.map(keyframe => ({
     ...keyframe,
-    height: keyframe.height === 'auto' ? `${calculatedHeight}px` : keyframe.height
+    height: keyframe.height === "auto" ? `${calculatedHeight}px` : keyframe.height
   }));
 }

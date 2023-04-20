@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from "lit-html";
 
 export const Template = ({
   noFlip,
@@ -38,7 +38,7 @@ export const Template = ({
 };
 
 export const args = {
-  togglerText: 'Dropdown',
-  variant: 'secondary',
-  href: '#'
+  togglerText: "Dropdown",
+  variant: "secondary",
+  href: "#"
 };

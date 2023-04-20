@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from "lit-html";
 
 export const Template = ({ expand, brandHref, collapseId, active, href, disabledMNI }) => {
   return html`

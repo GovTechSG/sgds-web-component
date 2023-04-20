@@ -1,1 +1,1 @@
-export * from './sgds-masthead';
+export * from "./sgds-masthead";

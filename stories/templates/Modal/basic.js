@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from "lit-html";
 
 export const Template = args => {
   return html`
@@ -12,11 +12,11 @@ export const Template = args => {
 };
 
 export const showModal = () => {
-  const modal = document.querySelector('sgds-modal');
+  const modal = document.querySelector("sgds-modal");
   modal.show();
 };
 export const closeModal = () => {
-  const modal = document.querySelector('sgds-modal');
+  const modal = document.querySelector("sgds-modal");
   modal.hide();
 };
 

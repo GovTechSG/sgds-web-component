@@ -1,16 +1,16 @@
-import { SgdsTextArea } from '../src/Textarea/sgds-textarea';
-import '../src/Textarea';
-import { SgdsButton } from '../src/Button/sgds-button';
-import '../src/Button';
-import { assert, fixture, html, expect, waitUntil, oneEvent } from '@open-wc/testing';
-import sinon from 'sinon';
+import { SgdsTextArea } from "../src/Textarea/sgds-textarea";
+import "../src/Textarea";
+import { SgdsButton } from "../src/Button/sgds-button";
+import "../src/Button";
+import { assert, fixture, html, expect, waitUntil, oneEvent } from "@open-wc/testing";
+import sinon from "sinon";
 
-describe('sgds-textarea', () => {
-  it('is defined', () => {
-    const el = document.createElement('sgds-textarea');
+describe("sgds-textarea", () => {
+  it("is defined", () => {
+    const el = document.createElement("sgds-textarea");
     assert.instanceOf(el, SgdsTextArea);
   });
-  it('renders with default values', async () => {
+  it("renders with default values", async () => {
     const el = await fixture(
       html`<sgds-textarea
         textareaId="test"
@@ -32,19 +32,19 @@ describe('sgds-textarea', () => {
     );
   });
 
-  it('should be disabled with the disabled attribute', async () => {
+  it("should be disabled with the disabled attribute", async () => {
     const el = await fixture<SgdsTextArea>(html` <sgds-textarea disabled></sgds-textarea> `);
-    const textarea = el.shadowRoot?.querySelector<HTMLTextAreaElement>('textarea');
+    const textarea = el.shadowRoot?.querySelector<HTMLTextAreaElement>("textarea");
 
     expect(textarea?.disabled).to.be.true;
   });
 
-  it('should focus the textarea when clicking on the label', async () => {
+  it("should focus the textarea when clicking on the label", async () => {
     const el = await fixture<SgdsTextArea>(html` <sgds-textarea label="Name"></sgds-textarea> `);
-    const label = el.shadowRoot?.querySelector('.form-label');
+    const label = el.shadowRoot?.querySelector(".form-label");
     const submitHandler = sinon.spy();
 
-    el.addEventListener('sgds-focus', submitHandler);
+    el.addEventListener("sgds-focus", submitHandler);
     (label as HTMLLabelElement).click();
     await waitUntil(() => submitHandler.calledOnce);
 
@@ -52,19 +52,19 @@ describe('sgds-textarea', () => {
   });
 });
 
-describe('when using constraint validation', () => {
-  it('should be valid by default', async () => {
+describe("when using constraint validation", () => {
+  it("should be valid by default", async () => {
     const el = await fixture<SgdsTextArea>(html` <sgds-textarea></sgds-textarea> `);
     expect(el.invalid).to.be.false;
   });
 
-  it('should be valid when required and empty by default', async () => {
+  it("should be valid when required and empty by default", async () => {
     const el = await fixture<SgdsTextArea>(html` <sgds-textarea required></sgds-textarea> `);
 
     expect(el.invalid).to.be.false;
   });
 
-  it('should be invalid when required and after removing disabled ', async () => {
+  it("should be invalid when required and after removing disabled ", async () => {
     const el = await fixture<SgdsTextArea>(html` <sgds-textarea disabled required></sgds-textarea> `);
 
     el.disabled = false;
@@ -73,7 +73,7 @@ describe('when using constraint validation', () => {
     expect(el.invalid).to.be.true;
   });
 
-  it('should be invalid when required and disabled is removed', async () => {
+  it("should be invalid when required and disabled is removed", async () => {
     const el = await fixture<SgdsTextArea>(html` <sgds-textarea disabled required></sgds-textarea> `);
     el.disabled = false;
     await el.updateComplete;
@@ -81,48 +81,48 @@ describe('when using constraint validation', () => {
   });
 });
 
-describe('when resetting a form', () => {
-  it('should reset the element to its initial value', async () => {
+describe("when resetting a form", () => {
+  it("should reset the element to its initial value", async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
         <sgds-textarea name="a" value="test"></sgds-textarea>
         <sgds-button type="reset">Reset</sgds-button>
       </form>
     `);
-    const button = form.querySelector<SgdsButton>('sgds-button');
-    const textarea = form.querySelector<SgdsTextArea>('sgds-textarea');
-    if (textarea) textarea.value = '1234'
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    const textarea = form.querySelector<SgdsTextArea>("sgds-textarea");
+    if (textarea) textarea.value = "1234";
 
     await textarea?.updateComplete;
 
     setTimeout(() => button?.click());
-    await oneEvent(form, 'reset');
+    await oneEvent(form, "reset");
     await textarea?.updateComplete;
 
-    expect(textarea?.value).to.equal('test');
+    expect(textarea?.value).to.equal("test");
 
-    if (textarea) textarea.defaultValue = ''
+    if (textarea) textarea.defaultValue = "";
 
     setTimeout(() => button?.click());
-    await oneEvent(form, 'reset');
+    await oneEvent(form, "reset");
     await textarea?.updateComplete;
 
-    expect(textarea?.value).to.equal('');
+    expect(textarea?.value).to.equal("");
   });
 });
 
-describe('when maxlength is declared', () => {
-  it('form text should exist', async () => {
+describe("when maxlength is declared", () => {
+  it("form text should exist", async () => {
     const el = await fixture<SgdsTextArea>(html` <sgds-textarea required maxlength="250"></sgds-textarea> `);
-    const formtext = el.shadowRoot?.querySelector('.form-text');
+    const formtext = el.shadowRoot?.querySelector(".form-text");
 
     expect(formtext).to.exist;
-    expect(formtext?.textContent).to.contain('0/250');
+    expect(formtext?.textContent).to.contain("0/250");
 
-    el.setAttribute('maxlength', '300');
+    el.setAttribute("maxlength", "300");
     await el.updateComplete;
 
     expect(formtext).to.exist;
-    expect(formtext?.textContent).to.contain('0/300');
+    expect(formtext?.textContent).to.contain("0/300");
   });
 });

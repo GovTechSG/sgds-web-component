@@ -1,14 +1,14 @@
-import { assert, fixture } from '@open-wc/testing';
-import { html } from 'lit';
-import { SgdsBreadcrumb } from '../src/Breadcrumb/sgds-breadcrumb';
-import { SgdsBreadcrumbItem } from '../src/Breadcrumb/sgds-breadcrumb-item';
+import { assert, fixture } from "@open-wc/testing";
+import { html } from "lit";
+import { SgdsBreadcrumb } from "../src/Breadcrumb/sgds-breadcrumb";
+import { SgdsBreadcrumbItem } from "../src/Breadcrumb/sgds-breadcrumb-item";
 
-describe('sgds-breadcrumb', () => {
-  it('is defined', () => {
-    const el = document.createElement('sgds-breadcrumb');
+describe("sgds-breadcrumb", () => {
+  it("is defined", () => {
+    const el = document.createElement("sgds-breadcrumb");
     assert.instanceOf(el, SgdsBreadcrumb);
   });
-  it('renders with default values', async () => {
+  it("renders with default values", async () => {
     const el = await fixture(html`<sgds-breadcrumb></sgds-breadcrumb>`);
     assert.shadowDom.equal(
       el,
@@ -23,12 +23,12 @@ describe('sgds-breadcrumb', () => {
   });
 });
 
-describe('sgds-breadcrumb-item', () => {
-  it('is defined', () => {
-    const el = document.createElement('sgds-breadcrumb-item');
+describe("sgds-breadcrumb-item", () => {
+  it("is defined", () => {
+    const el = document.createElement("sgds-breadcrumb-item");
     assert.instanceOf(el, SgdsBreadcrumbItem);
   });
-  it('renders with default values', async () => {
+  it("renders with default values", async () => {
     const el = await fixture(html`<sgds-breadcrumb-item></sgds-breadcrumb-item>`);
     assert.shadowDom.equal(
       el,
@@ -40,7 +40,7 @@ describe('sgds-breadcrumb-item', () => {
     );
   });
 
-  it('should convert to a tag if href attribute is added', async () => {
+  it("should convert to a tag if href attribute is added", async () => {
     const el = await fixture(html`<sgds-breadcrumb-item href="#a"></sgds-breadcrumb-item>`);
     assert.shadowDom.equal(
       el,

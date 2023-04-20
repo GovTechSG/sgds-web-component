@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { assign, keys } from './object';
+import { assign, keys } from "./object";
 function _isObject(item: any) {
-  return item && typeof item === 'object' && item.constructor === Object;
+  return item && typeof item === "object" && item.constructor === Object;
 }
 
 const mergeDeep = (target: any, source: any) => {

@@ -4,7 +4,7 @@ import path from 'path';
 import chalk from 'chalk';
 import { deleteSync } from 'del';
 import prettier from 'prettier';
-import prettierConfig from '../prettier.config.cjs';
+import prettierConfig from '../prettier.config.js';
 import { getAllComponents, getSgdsComponents } from './shared.mjs';
 import { makeArgTypes } from './makeArgTypes.mjs';
 import groupBy from 'lodash/groupBy.js';

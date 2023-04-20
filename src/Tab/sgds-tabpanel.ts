@@ -1,9 +1,9 @@
-import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import SgdsElement from '../base/sgds-element';
-import { watch } from '../utils/watch';
-import styles from './sgds-tabpanel.scss';
+import { html } from "lit";
+import { customElement, property } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import SgdsElement from "../base/sgds-element";
+import { watch } from "../utils/watch";
+import styles from "./sgds-tabpanel.scss";
 let id = 0;
 
 /**
@@ -18,14 +18,14 @@ let id = 0;
  *
  * @cssproperty --padding - The tab panel's padding.
  */
-@customElement('sgds-tab-panel')
+@customElement("sgds-tab-panel")
 export class SgdsTabPanel extends SgdsElement {
   static styles = styles;
   private readonly attrId = ++id;
   private readonly componentId = `sgds-tab-panel-${this.attrId}`;
 
   /** The tab panel's name. */
-  @property({ reflect: true }) name = '';
+  @property({ reflect: true }) name = "";
 
   /** When true, the tab panel will be shown. */
   @property({ type: Boolean, reflect: true }) active = false;
@@ -33,12 +33,12 @@ export class SgdsTabPanel extends SgdsElement {
   connectedCallback() {
     super.connectedCallback();
     this.id = this.id.length > 0 ? this.id : this.componentId;
-    this.setAttribute('role', 'tabpanel');
+    this.setAttribute("role", "tabpanel");
   }
 
-  @watch('active')
+  @watch("active")
   handleActiveChange() {
-    this.setAttribute('aria-hidden', this.active ? 'false' : 'true');
+    this.setAttribute("aria-hidden", this.active ? "false" : "true");
   }
 
   render() {
@@ -46,8 +46,8 @@ export class SgdsTabPanel extends SgdsElement {
       <slot
         part="base"
         class=${classMap({
-          'tab-panel': true,
-          'tab-panel--active': this.active
+          "tab-panel": true,
+          "tab-panel--active": this.active
         })}
       ></slot>
     `;

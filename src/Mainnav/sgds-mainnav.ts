@@ -1,14 +1,14 @@
-import { Collapse, Offcanvas } from 'bootstrap';
-import { html } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { createRef, ref, Ref } from 'lit/directives/ref.js';
-import SgdsElement from '../base/sgds-element';
-import { LG_BREAKPOINT, MD_BREAKPOINT, SM_BREAKPOINT, XL_BREAKPOINT, XXL_BREAKPOINT } from '../utils/breakpoints';
-import genId from '../utils/generateId';
-import styles from './sgds-mainnav.scss';
+import { Collapse, Offcanvas } from "bootstrap";
+import { html } from "lit";
+import { customElement, property, state } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import { createRef, ref, Ref } from "lit/directives/ref.js";
+import SgdsElement from "../base/sgds-element";
+import { LG_BREAKPOINT, MD_BREAKPOINT, SM_BREAKPOINT, XL_BREAKPOINT, XXL_BREAKPOINT } from "../utils/breakpoints";
+import genId from "../utils/generateId";
+import styles from "./sgds-mainnav.scss";
 
-export type MainnavExpandSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'always' | 'never';
+export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
 
 const SIZES = {
   sm: SM_BREAKPOINT,
@@ -24,13 +24,13 @@ const SIZES = {
  * @slot - Pass in SgdsMainnavItem elements here.
  * @slot end - Elements in this slot will be positioned to the right end of .navbar-nav. Elements in this slot will also be included in collapsed menu.
  */
-@customElement('sgds-mainnav')
+@customElement("sgds-mainnav")
 export class SgdsMainnav extends SgdsElement {
   static styles = styles;
 
   constructor() {
     super();
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       const newBreakpointReachedValue = window.innerWidth < SIZES[this.expand.toString()];
       if (newBreakpointReachedValue !== this.breakpointReached) {
         this.requestUpdate();
@@ -45,23 +45,23 @@ export class SgdsMainnav extends SgdsElement {
   private bsOffcanvas: Offcanvas = null;
 
   private _onClickButton() {
-    if (this.mode === 'offcanvas') {
+    if (this.mode === "offcanvas") {
       return this.bsOffcanvas.toggle();
     }
     this.bsCollapse.toggle();
   }
 
   @property({ type: String })
-  brandHref = '';
+  brandHref = "";
 
   @property({ type: String })
-  collapseId = genId('mainnav', 'collapse');
+  collapseId = genId("mainnav", "collapse");
 
   @property()
-  expand: MainnavExpandSize = 'lg';
+  expand: MainnavExpandSize = "lg";
 
   @property({ type: String })
-  mode: 'offcanvas' | 'default' = 'default';
+  mode: "offcanvas" | "default" = "default";
 
   @state()
   breakpointReached = false;
@@ -70,29 +70,29 @@ export class SgdsMainnav extends SgdsElement {
   expanded = false;
 
   firstUpdated() {
-    if (this.mode === 'default') {
+    if (this.mode === "default") {
       this.bsCollapse = new Collapse(this.myCollapse.value, {
         toggle: false
       });
-      this.myCollapse.value.addEventListener('show.bs.collapse', () => {
+      this.myCollapse.value.addEventListener("show.bs.collapse", () => {
         this.expanded = true;
       });
-      this.myCollapse.value.addEventListener('shown.bs.collapse', () => {
+      this.myCollapse.value.addEventListener("shown.bs.collapse", () => {
         this.expanded = true;
       });
-      this.myCollapse.value.addEventListener('hide.bs.collapse', () => {
+      this.myCollapse.value.addEventListener("hide.bs.collapse", () => {
         this.expanded = false;
       });
-      this.myCollapse.value.addEventListener('hidden.bs.collapse', () => {
+      this.myCollapse.value.addEventListener("hidden.bs.collapse", () => {
         this.expanded = false;
       });
     }
 
-    if (this.mode === 'offcanvas') {
+    if (this.mode === "offcanvas") {
       this.bsOffcanvas = new Offcanvas(this.myOffcanvas.value);
       //add esc keyboard event for bsOffcanvas
-      this.addEventListener('keydown', ev => {
-        if (ev.key === 'Escape') {
+      this.addEventListener("keydown", ev => {
+        if (ev.key === "Escape") {
           this.bsOffcanvas.hide();
         }
       });
@@ -101,13 +101,13 @@ export class SgdsMainnav extends SgdsElement {
   // assigning name attribute to elements added in slot="end", to use wildcard css selector to assign styles only to *-mainnav-item
   _handleSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
-    childElements.forEach(e => e.setAttribute('name', e.tagName.toLowerCase()));
+    childElements.forEach(e => e.setAttribute("name", e.tagName.toLowerCase()));
   }
 
   render() {
     this.breakpointReached = window.innerWidth < SIZES[this.expand.toString()];
-    const collapseClass = 'collapse navbar-collapse order-4';
-    const offcanvasClass = 'offcanvas offcanvas-start order-4';
+    const collapseClass = "collapse navbar-collapse order-4";
+    const offcanvasClass = "offcanvas offcanvas-start order-4";
     return html`
       <nav
         class="sgds navbar navbar-light
@@ -116,7 +116,7 @@ export class SgdsMainnav extends SgdsElement {
         <a class="navbar-brand me-auto order-1" href=${this.brandHref}>
           <slot name="brand"></slot>
         </a>
-        <slot name="non-collapsible" class="${this.breakpointReached ? 'order-2' : 'order-5'}"></slot>
+        <slot name="non-collapsible" class="${this.breakpointReached ? "order-2" : "order-5"}"></slot>
         <button
           class="navbar-toggler order-3"
           type="button"
@@ -140,15 +140,15 @@ export class SgdsMainnav extends SgdsElement {
           </svg>
         </button>
         <div
-          class=${this.mode === 'default' ? collapseClass : offcanvasClass}
-          ${this.mode === 'default' ? ref(this.myCollapse) : ref(this.myOffcanvas)}
+          class=${this.mode === "default" ? collapseClass : offcanvasClass}
+          ${this.mode === "default" ? ref(this.myCollapse) : ref(this.myOffcanvas)}
           id=${this.collapseId}
         >
           <ul class="navbar-nav">
             <slot></slot>
             <slot
               name="end"
-              class=${classMap({ 'slot-end': !this.breakpointReached })}
+              class=${classMap({ "slot-end": !this.breakpointReached })}
               @slotchange=${this._handleSlotChange}
             ></slot>
           </ul>
@@ -158,9 +158,9 @@ export class SgdsMainnav extends SgdsElement {
   }
   _expandClass() {
     switch (this.expand) {
-      case 'always':
-        return 'navbar-expand';
-      case 'never':
+      case "always":
+        return "navbar-expand";
+      case "never":
         break;
       default:
         return `navbar-expand-${this.expand}`;

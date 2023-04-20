@@ -1,12 +1,12 @@
-import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../utils/animate';
-import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query } from 'lit/decorators.js';
-import { getAnimation, setDefaultAnimation } from '../utils/animation-registry';
-import { html } from 'lit';
-import { waitForEvent } from '../utils/event';
-import { watch } from '../utils/watch';
-import SgdsElement from '../base/sgds-element';
-import styles from './sgds-accordion-item.scss';
+import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../utils/animate";
+import { classMap } from "lit/directives/class-map.js";
+import { customElement, property, query } from "lit/decorators.js";
+import { getAnimation, setDefaultAnimation } from "../utils/animation-registry";
+import { html } from "lit";
+import { waitForEvent } from "../utils/event";
+import { watch } from "../utils/watch";
+import SgdsElement from "../base/sgds-element";
+import styles from "./sgds-accordion-item.scss";
 
 /**
  * @dependency test-dependency
@@ -21,15 +21,15 @@ import styles from './sgds-accordion-item.scss';
  * @csspart header - The accordion-item button header
  * @csspart content - The accordion-item content
  */
-@customElement('sgds-accordion-item')
+@customElement("sgds-accordion-item")
 export class SgdsAccordionItem extends SgdsElement {
   static styles = styles;
   /** @internal */
-  @query('.accordion-item') accordion: HTMLElement;
+  @query(".accordion-item") accordion: HTMLElement;
   /** @internal */
-  @query('.accordion-button') header: HTMLElement;
+  @query(".accordion-button") header: HTMLElement;
   /** @internal */
-  @query('.accordion-body') body: HTMLElement;
+  @query(".accordion-body") body: HTMLElement;
 
   /** Controls whether accordion-item is open or close */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -42,7 +42,7 @@ export class SgdsAccordionItem extends SgdsElement {
 
   firstUpdated() {
     this.body.hidden = !this.open;
-    this.body.style.height = this.open ? 'auto' : '0';
+    this.body.style.height = this.open ? "auto" : "0";
   }
 
   private handleSummaryClick() {
@@ -58,7 +58,7 @@ export class SgdsAccordionItem extends SgdsElement {
   }
 
   private handleSummaryKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Enter' || event.key === ' ') {
+    if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
 
       if (this.open) {
@@ -68,22 +68,22 @@ export class SgdsAccordionItem extends SgdsElement {
       }
     }
 
-    if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+    if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
       event.preventDefault();
       this.hide();
     }
 
-    if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+    if (event.key === "ArrowDown" || event.key === "ArrowRight") {
       event.preventDefault();
       this.show();
     }
   }
 
-  @watch('open', { waitUntilFirstUpdate: true })
+  @watch("open", { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.open) {
       // Show
-      const sgdsShow = this.emit('sgds-show', { cancelable: true });
+      const sgdsShow = this.emit("sgds-show", { cancelable: true });
       if (sgdsShow.defaultPrevented) {
         this.open = false;
         return;
@@ -92,14 +92,14 @@ export class SgdsAccordionItem extends SgdsElement {
       await stopAnimations(this.body);
       this.body.hidden = false;
 
-      const { keyframes, options } = getAnimation(this, 'accordion.show');
+      const { keyframes, options } = getAnimation(this, "accordion.show");
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
-      this.body.style.height = 'auto';
+      this.body.style.height = "auto";
 
-      this.emit('sgds-after-show');
+      this.emit("sgds-after-show");
     } else {
       // Hide
-      const slHide = this.emit('sgds-hide', { cancelable: true });
+      const slHide = this.emit("sgds-hide", { cancelable: true });
       if (slHide.defaultPrevented) {
         this.open = true;
         return;
@@ -107,12 +107,12 @@ export class SgdsAccordionItem extends SgdsElement {
 
       await stopAnimations(this.body);
 
-      const { keyframes, options } = getAnimation(this, 'accordion.hide');
+      const { keyframes, options } = getAnimation(this, "accordion.hide");
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
       this.body.hidden = true;
-      this.body.style.height = 'auto';
+      this.body.style.height = "auto";
 
-      this.emit('sgds-after-hide');
+      this.emit("sgds-after-hide");
     }
   }
 
@@ -123,7 +123,7 @@ export class SgdsAccordionItem extends SgdsElement {
     }
 
     this.open = true;
-    return waitForEvent(this, 'sgds-after-show');
+    return waitForEvent(this, "sgds-after-show");
   }
 
   /** Hide the accordion */
@@ -133,7 +133,7 @@ export class SgdsAccordionItem extends SgdsElement {
     }
 
     this.open = false;
-    return waitForEvent(this, 'sgds-after-hide');
+    return waitForEvent(this, "sgds-after-hide");
   }
 
   render() {
@@ -142,24 +142,24 @@ export class SgdsAccordionItem extends SgdsElement {
         part="base"
         class=${classMap({
           sgds: true,
-          'accordion-item': true,
-          'accordion--open': this.open,
-          'accordion--disabled': this.disabled,
+          "accordion-item": true,
+          "accordion--open": this.open,
+          "accordion--disabled": this.disabled,
           [`${this.accordionItemClasses}`]: this.accordionItemClasses
         })}
       >
         <button
           part="header"
           class=${classMap({
-            'accordion-button': true,
+            "accordion-button": true,
             collapsed: !this.open
           })}
           id="header"
           role="button"
-          aria-expanded=${this.open ? 'true' : 'false'}
+          aria-expanded=${this.open ? "true" : "false"}
           aria-controls="content"
-          aria-disabled=${this.disabled ? 'true' : 'false'}
-          tabindex=${this.disabled ? '-1' : '0'}
+          aria-disabled=${this.disabled ? "true" : "false"}
+          tabindex=${this.disabled ? "-1" : "0"}
           @click=${this.handleSummaryClick}
           @keydown=${this.handleSummaryKeyDown}
         >
@@ -173,20 +173,20 @@ export class SgdsAccordionItem extends SgdsElement {
   }
 }
 
-setDefaultAnimation('accordion.show', {
+setDefaultAnimation("accordion.show", {
   keyframes: [
-    { height: '0', opacity: '0' },
-    { height: 'auto', opacity: '1' }
+    { height: "0", opacity: "0" },
+    { height: "auto", opacity: "1" }
   ],
-  options: { duration: 200, easing: 'ease-in-out' }
+  options: { duration: 200, easing: "ease-in-out" }
 });
 
-setDefaultAnimation('accordion.hide', {
+setDefaultAnimation("accordion.hide", {
   keyframes: [
-    { height: 'auto', opacity: '1' },
-    { height: '0', opacity: '0' }
+    { height: "auto", opacity: "1" },
+    { height: "0", opacity: "0" }
   ],
-  options: { duration: 200, easing: 'ease-in-out' }
+  options: { duration: 200, easing: "ease-in-out" }
 });
 
 export default SgdsAccordionItem;

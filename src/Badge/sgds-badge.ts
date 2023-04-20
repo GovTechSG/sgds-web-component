@@ -1,16 +1,16 @@
-import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import SgdsElement from '../base/sgds-element';
-import styles from './sgds-badge.scss';
+import { html } from "lit";
+import { customElement, property } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import SgdsElement from "../base/sgds-element";
+import styles from "./sgds-badge.scss";
 
-export type ButtonVariant = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
+export type ButtonVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
 
-@customElement('sgds-badge')
+@customElement("sgds-badge")
 export class SgdsBadge extends SgdsElement {
   static styles = styles;
 
-  @property({ reflect: true }) variant: ButtonVariant = 'primary';
+  @property({ reflect: true }) variant: ButtonVariant = "primary";
   @property({ type: Boolean, reflect: true }) isLight;
   @property({ type: Boolean, reflect: true }) roundedPill;
   render() {
@@ -18,10 +18,10 @@ export class SgdsBadge extends SgdsElement {
       <span
         class="  
                 ${classMap({
-          'sgds badge': true,
+          "sgds badge": true,
           [`bg-${this.variant}`]: this.variant,
-          'badge-light': this.isLight,
-          'rounded-pill': this.roundedPill
+          "badge-light": this.isLight,
+          "rounded-pill": this.roundedPill
         })}
             "
       >

@@ -1,5 +1,5 @@
-import type SgdsButton from '../Button/sgds-button';
-import type { ReactiveController, ReactiveControllerHost } from 'lit';
+import type SgdsButton from "../Button/sgds-button";
+import type { ReactiveController, ReactiveControllerHost } from "lit";
 
 const reportValidityOverloads: WeakMap<HTMLFormElement, () => boolean> = new WeakMap();
 
@@ -32,13 +32,13 @@ export class FormSubmitController implements ReactiveController {
   constructor(host: ReactiveControllerHost & Element, options?: Partial<FormSubmitControllerOptions>) {
     (this.host = host).addController(this);
     this.options = {
-      form: (input: HTMLInputElement) => input.closest('form'),
+      form: (input: HTMLInputElement) => input.closest("form"),
       name: (input: HTMLInputElement) => input.name,
       value: (input: HTMLInputElement) => input.value,
       defaultValue: (input: HTMLInputElement) => input.defaultValue,
       disabled: (input: HTMLInputElement) => input.disabled,
       reportValidity: (input: HTMLInputElement) => {
-        return typeof input.reportValidity === 'function' ? input.reportValidity() : true;
+        return typeof input.reportValidity === "function" ? input.reportValidity() : true;
       },
       setValue: (input: HTMLInputElement, value: string) => {
         input.value = value;
@@ -55,9 +55,9 @@ export class FormSubmitController implements ReactiveController {
     this.form = this.options.form(this.host);
 
     if (this.form) {
-      this.form.addEventListener('formdata', this.handleFormData);
-      this.form.addEventListener('submit', this.handleFormSubmit);
-      this.form.addEventListener('reset', this.handleFormReset);
+      this.form.addEventListener("formdata", this.handleFormData);
+      this.form.addEventListener("submit", this.handleFormSubmit);
+      this.form.addEventListener("reset", this.handleFormReset);
 
       // Overload the form's reportValidity() method so it looks at Shoelace form controls
       if (!reportValidityOverloads.has(this.form)) {
@@ -69,9 +69,9 @@ export class FormSubmitController implements ReactiveController {
 
   hostDisconnected() {
     if (this.form) {
-      this.form.removeEventListener('formdata', this.handleFormData);
-      this.form.removeEventListener('submit', this.handleFormSubmit);
-      this.form.removeEventListener('reset', this.handleFormReset);
+      this.form.removeEventListener("formdata", this.handleFormData);
+      this.form.removeEventListener("submit", this.handleFormSubmit);
+      this.form.removeEventListener("reset", this.handleFormReset);
 
       // Remove the overload and restore the original method
       if (reportValidityOverloads.has(this.form)) {
@@ -88,7 +88,7 @@ export class FormSubmitController implements ReactiveController {
     const name = this.options.name(this.host);
     const value = this.options.value(this.host);
 
-    if (!disabled && typeof name === 'string' && typeof value !== 'undefined') {
+    if (!disabled && typeof name === "string" && typeof value !== "undefined") {
       if (Array.isArray(value)) {
         (value as unknown[]).forEach(val => {
           event.formData.append(name, (val as string | number | boolean).toString());
@@ -129,10 +129,10 @@ export class FormSubmitController implements ReactiveController {
     if (this.form && !this.form.noValidate) {
       // This seems sloppy, but checking all elements will cover native inputs, Shoelace inputs, and other custom
       // elements that support the constraint validation API.
-      const elements = this.form.querySelectorAll<HTMLInputElement>('*');
+      const elements = this.form.querySelectorAll<HTMLInputElement>("*");
 
       for (const element of elements) {
-        if (typeof element.reportValidity === 'function') {
+        if (typeof element.reportValidity === "function") {
           if (!element.reportValidity()) {
             return false;
           }
@@ -143,20 +143,20 @@ export class FormSubmitController implements ReactiveController {
     return true;
   }
 
-  doAction(type: 'submit' | 'reset', invoker?: HTMLInputElement | SgdsButton) {
+  doAction(type: "submit" | "reset", invoker?: HTMLInputElement | SgdsButton) {
     if (this.form) {
-      const button = document.createElement('button');
+      const button = document.createElement("button");
       button.type = type;
-      button.style.position = 'absolute';
-      button.style.width = '0';
-      button.style.height = '0';
-      button.style.clipPath = 'inset(50%)';
-      button.style.overflow = 'hidden';
-      button.style.whiteSpace = 'nowrap';
+      button.style.position = "absolute";
+      button.style.width = "0";
+      button.style.height = "0";
+      button.style.clipPath = "inset(50%)";
+      button.style.overflow = "hidden";
+      button.style.whiteSpace = "nowrap";
 
       // Pass form attributes through to the temporary button
       if (invoker) {
-        ['formaction', 'formmethod', 'formnovalidate', 'formtarget'].forEach(attr => {
+        ["formaction", "formmethod", "formnovalidate", "formtarget"].forEach(attr => {
           if (invoker.hasAttribute(attr)) {
             button.setAttribute(attr, invoker.getAttribute(attr));
           }
@@ -171,13 +171,13 @@ export class FormSubmitController implements ReactiveController {
 
   /** Resets the form, restoring all the control to their default value */
   reset(invoker?: HTMLInputElement | SgdsButton) {
-    this.doAction('reset', invoker);
+    this.doAction("reset", invoker);
   }
 
   /** Submits the form, triggering validation and form data injection. */
   submit(invoker?: HTMLInputElement | SgdsButton) {
     // Calling form.submit() bypasses the submit event and constraint validation. To prevent this, we can inject a
     // native submit button into the form, "click" it, then remove it to simulate a standard form submission.
-    this.doAction('submit', invoker);
+    this.doAction("submit", invoker);
   }
 }

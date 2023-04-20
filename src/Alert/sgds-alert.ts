@@ -1,9 +1,9 @@
-import { customElement, property } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { html } from 'lit/static-html.js';
-import SgdsElement from '../base/sgds-element';
-import styles from './sgds-alert.scss';
+import { customElement, property } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { html } from "lit/static-html.js";
+import SgdsElement from "../base/sgds-element";
+import styles from "./sgds-alert.scss";
 
 /**
  *
@@ -27,9 +27,9 @@ import styles from './sgds-alert.scss';
  * @animation alert.hide - The animation to use when hiding the alert.
  */
 
-export type AlertVariant = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light';
+export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light";
 
-@customElement('sgds-alert')
+@customElement("sgds-alert")
 export class SgdsAlert extends SgdsElement {
   static styles = styles;
 
@@ -41,7 +41,7 @@ export class SgdsAlert extends SgdsElement {
   @property({ type: Boolean, reflect: true }) dismissible? = false;
 
   /** The alert's theme variant. */
-  @property({ reflect: true }) variant: AlertVariant = 'primary';
+  @property({ reflect: true }) variant: AlertVariant = "primary";
 
   @property({ type: String }) closeLabel?: string;
 
@@ -50,13 +50,13 @@ export class SgdsAlert extends SgdsElement {
   toggleShow() {
     if (!this.show) {
       this.show = true;
-      this.emit('sgds-open');
+      this.emit("sgds-open");
     }
   }
 
   handleCloseClick() {
     this.show = false;
-    this.emit('sgds-close');
+    this.emit("sgds-close");
   }
 
   render() {
@@ -71,7 +71,7 @@ export class SgdsAlert extends SgdsElement {
                 [`${this.alertClasses}`]: this.alertClasses
               })}"
               role="alert"
-              aria-hidden=${this.show ? 'false' : 'true'}
+              aria-hidden=${this.show ? "false" : "true"}
             >
               <slot></slot>
               ${this.dismissible

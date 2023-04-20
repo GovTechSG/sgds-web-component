@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from "lit-html";
 
 export const Template = ({ steps, activeStep, namedSlot }) => {
   return html` <sgds-stepper .steps=${steps} .activeStep=${activeStep}> </sgds-stepper> `;
@@ -64,35 +64,35 @@ export const TemplateExample = ({ steps, activeStep, namedSlot }) => {
 };
 
 export const incrementStep = () => {
-  const stepper = document.querySelector('#myStepper');
+  const stepper = document.querySelector("#myStepper");
   stepper.incrementStep();
 };
 export const decrementStep = () => {
-  const stepper = document.querySelector('#myStepper');
+  const stepper = document.querySelector("#myStepper");
   stepper.decrementStep();
 };
 export const lastStep = () => {
-  const stepper = document.querySelector('#myStepper');
+  const stepper = document.querySelector("#myStepper");
   stepper.lastStep();
 };
 export const firstStep = () => {
-  const stepper = document.querySelector('#myStepper');
+  const stepper = document.querySelector("#myStepper");
   stepper.firstStep();
 };
 
 export const args = {
   steps: [
     {
-      title: '1',
-      stepHeader: 'Marker 1'
+      title: "1",
+      stepHeader: "Marker 1"
     },
     {
-      title: '2',
-      stepHeader: 'Marker 2'
+      title: "2",
+      stepHeader: "Marker 2"
     },
     {
-      title: '3',
-      stepHeader: 'Marker 3'
+      title: "3",
+      stepHeader: "Marker 3"
     }
   ]
 };

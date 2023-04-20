@@ -1,13 +1,13 @@
-import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { html } from 'lit/static-html.js';
-import SgdsElement from '../base/sgds-element';
-import styles from './sgds-toast.scss';
+import { customElement, property, query } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { html } from "lit/static-html.js";
+import SgdsElement from "../base/sgds-element";
+import styles from "./sgds-toast.scss";
 
-export type Variant = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light';
+export type Variant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light";
 
-@customElement('sgds-toast')
+@customElement("sgds-toast")
 export class SgdsToast extends SgdsElement {
   static styles = styles;
 
@@ -28,23 +28,23 @@ export class SgdsToast extends SgdsElement {
 
   /** The toast variant. */
   @property({ type: String, reflect: true }) bg?:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'info'
-    | 'dark'
-    | 'light';
+    | "primary"
+    | "secondary"
+    | "success"
+    | "danger"
+    | "warning"
+    | "info"
+    | "dark"
+    | "light";
 
   @property({ type: String }) closeLabel?: string;
 
   /**Adds CSS styling to `<Toast />` based on the defined status */
-  @property({ type: String, reflect: true }) status?: 'success' | 'warning' | 'danger';
+  @property({ type: String, reflect: true }) status?: "success" | "warning" | "danger";
 
   handleCloseClick() {
     this.show = false;
-    this.emit('sgds-close');
+    this.emit("sgds-close");
   }
 
   render() {
@@ -64,7 +64,7 @@ export class SgdsToast extends SgdsElement {
                 [`is-${this.status}`]: this.status
               })}"
               role="alert"
-              aria-hidden=${this.show ? 'false' : 'true'}
+              aria-hidden=${this.show ? "false" : "true"}
               aria-live="assertive"
               aria-atomic="true"
             >

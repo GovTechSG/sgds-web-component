@@ -1,12 +1,12 @@
-const fs = require('fs');
+const fs = require("fs");
 export const getFolders = entry => {
   const dirs = fs.readdirSync(entry);
   const dirsWithoutIndex = dirs
-    .filter(name => name !== 'index.ts')
-    .filter(name => name !== 'entry.ts')
-    .filter(name => name !== 'utils')
-    .filter(name => name !== 'react')
-    .filter(name => name !== 'base');
+    .filter(name => name !== "index.ts")
+    .filter(name => name !== "entry.ts")
+    .filter(name => name !== "utils")
+    .filter(name => name !== "react")
+    .filter(name => name !== "base");
   return dirsWithoutIndex;
 };
 

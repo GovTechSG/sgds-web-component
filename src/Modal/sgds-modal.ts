@@ -1,34 +1,34 @@
-import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { animateTo, stopAnimations } from '../utils/animate';
-import { waitForEvent } from '../utils/event';
-import Modal from '../utils/modal';
-import { lockBodyScrolling, unlockBodyScrolling } from '../utils/scroll';
-import SgdsElement from '../base/sgds-element';
-import { HasSlotController } from '../utils/slot';
-import { watch } from '../utils/watch';
-import { getAnimation, setDefaultAnimation } from '../utils/animation-registry';
-import styles from './sgds-modal.scss';
-@customElement('sgds-modal')
+import { html } from "lit";
+import { customElement, property, query } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { animateTo, stopAnimations } from "../utils/animate";
+import { waitForEvent } from "../utils/event";
+import Modal from "../utils/modal";
+import { lockBodyScrolling, unlockBodyScrolling } from "../utils/scroll";
+import SgdsElement from "../base/sgds-element";
+import { HasSlotController } from "../utils/slot";
+import { watch } from "../utils/watch";
+import { getAnimation, setDefaultAnimation } from "../utils/animation-registry";
+import styles from "./sgds-modal.scss";
+@customElement("sgds-modal")
 export class SgdsModal extends SgdsElement {
   static styles = styles;
 
-  @query('.modal') dialog: HTMLElement;
-  @query('.modal-panel') panel: HTMLElement;
-  @query('.modal-overlay') overlay: HTMLElement;
+  @query(".modal") dialog: HTMLElement;
+  @query(".modal-panel") panel: HTMLElement;
+  @query(".modal-overlay") overlay: HTMLElement;
 
-  private readonly hasSlotController = new HasSlotController(this, 'footer');
+  private readonly hasSlotController = new HasSlotController(this, "footer");
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
 
   @property({ type: Boolean, reflect: true }) open = false;
   // @property({ type: Boolean, reflect: true }) centeredAlignVariant = false;
 
-  @property({ reflect: true }) title = '';
-  @property({ reflect: true }) titleIcon = '';
-  @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader = false;
+  @property({ reflect: true }) title = "";
+  @property({ reflect: true }) titleIcon = "";
+  @property({ attribute: "no-header", type: Boolean, reflect: true }) noHeader = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -58,7 +58,7 @@ export class SgdsModal extends SgdsElement {
     }
 
     this.open = true;
-    return waitForEvent(this, 'sgds-after-show');
+    return waitForEvent(this, "sgds-after-show");
   }
 
   /** Hides the dialog */
@@ -68,17 +68,17 @@ export class SgdsModal extends SgdsElement {
     }
 
     this.open = false;
-    return waitForEvent(this, 'sgds-after-hide');
+    return waitForEvent(this, "sgds-after-hide");
   }
 
-  private requestClose(source: 'close-button' | 'keyboard' | 'overlay') {
-    const slRequestClose = this.emit('sgds-close', {
+  private requestClose(source: "close-button" | "keyboard" | "overlay") {
+    const slRequestClose = this.emit("sgds-close", {
       cancelable: true,
       detail: { source }
     });
 
     if (slRequestClose.defaultPrevented) {
-      const animation = getAnimation(this, 'modal.denyClose');
+      const animation = getAnimation(this, "modal.denyClose");
       animateTo(this.panel, animation.keyframes);
       return;
     }
@@ -87,25 +87,25 @@ export class SgdsModal extends SgdsElement {
   }
 
   addOpenListeners() {
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
+    document.addEventListener("keydown", this.handleDocumentKeyDown);
   }
 
   removeOpenListeners() {
-    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    document.removeEventListener("keydown", this.handleDocumentKeyDown);
   }
 
   handleDocumentKeyDown(event: KeyboardEvent) {
-    if (this.open && event.key === 'Escape') {
+    if (this.open && event.key === "Escape") {
       event.stopPropagation();
-      this.requestClose('keyboard');
+      this.requestClose("keyboard");
     }
   }
 
-  @watch('open', { waitUntilFirstUpdate: true })
+  @watch("open", { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.open) {
       // Show
-      this.emit('sgds-show');
+      this.emit("sgds-show");
       this.addOpenListeners();
       this.originalTrigger = document.activeElement as HTMLElement;
       this.modal.activate();
@@ -118,9 +118,9 @@ export class SgdsModal extends SgdsElement {
       //
       // Related: https://github.com/shoelace-style/shoelace/issues/693
       //
-      const autoFocusTarget = this.querySelector('[autofocus]');
+      const autoFocusTarget = this.querySelector("[autofocus]");
       if (autoFocusTarget) {
-        autoFocusTarget.removeAttribute('autofocus');
+        autoFocusTarget.removeAttribute("autofocus");
       }
 
       await Promise.all([stopAnimations(this.dialog), stopAnimations(this.overlay)]);
@@ -128,7 +128,7 @@ export class SgdsModal extends SgdsElement {
 
       // Set initial focus
       requestAnimationFrame(() => {
-        const slInitialFocus = this.emit('sgds-initial-focus', { cancelable: true });
+        const slInitialFocus = this.emit("sgds-initial-focus", { cancelable: true });
 
         if (!slInitialFocus.defaultPrevented) {
           // Set focus to the autofocus target and restore the attribute
@@ -141,27 +141,27 @@ export class SgdsModal extends SgdsElement {
 
         // Restore the autofocus attribute
         if (autoFocusTarget) {
-          autoFocusTarget.setAttribute('autofocus', '');
+          autoFocusTarget.setAttribute("autofocus", "");
         }
       });
 
-      const panelAnimation = getAnimation(this, 'modal.show');
-      const overlayAnimation = getAnimation(this, 'modal.overlay.show');
+      const panelAnimation = getAnimation(this, "modal.show");
+      const overlayAnimation = getAnimation(this, "modal.overlay.show");
       await Promise.all([
         animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
         animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
       ]);
 
-      this.emit('sgds-after-show');
+      this.emit("sgds-after-show");
     } else {
       // Hide
-      this.emit('sgds-hide');
+      this.emit("sgds-hide");
       this.removeOpenListeners();
       this.modal.deactivate();
 
       await Promise.all([stopAnimations(this.dialog), stopAnimations(this.overlay)]);
-      const panelAnimation = getAnimation(this, 'modal.hide');
-      const overlayAnimation = getAnimation(this, 'modal.overlay.hide');
+      const panelAnimation = getAnimation(this, "modal.hide");
+      const overlayAnimation = getAnimation(this, "modal.overlay.hide");
 
       // Animate the overlay and the panel at the same time. Because animation durations might be different, we need to
       // hide each one individually when the animation finishes, otherwise the first one that finishes will reappear
@@ -185,11 +185,11 @@ export class SgdsModal extends SgdsElement {
 
       // Restore focus to the original trigger
       const trigger = this.originalTrigger;
-      if (typeof trigger?.focus === 'function') {
+      if (typeof trigger?.focus === "function") {
         setTimeout(() => trigger.focus());
       }
 
-      this.emit('sgds-after-hide');
+      this.emit("sgds-after-hide");
     }
   }
 
@@ -202,20 +202,20 @@ export class SgdsModal extends SgdsElement {
         part="base"
         class=${classMap({
           modal: true,
-          'modal--open': this.open,
-          'modal--has-footer': this.hasSlotController.test('footer')
+          "modal--open": this.open,
+          "modal--has-footer": this.hasSlotController.test("footer")
         })}
       >
-        <div part="overlay" class="modal-overlay" @click=${() => this.requestClose('overlay')} tabindex="-1"></div>
+        <div part="overlay" class="modal-overlay" @click=${() => this.requestClose("overlay")} tabindex="-1"></div>
 
         <div
           part="panel"
           class="modal-panel"
           role="dialog"
           aria-modal="true"
-          aria-hidden=${this.open ? 'false' : 'true'}
+          aria-hidden=${this.open ? "false" : "true"}
           aria-label=${ifDefined(this.noHeader ? this.title : undefined)}
-          aria-labelledby=${ifDefined(!this.noHeader ? 'title' : undefined)}
+          aria-labelledby=${ifDefined(!this.noHeader ? "title" : undefined)}
           tabindex="0"
         >
           ${!this.noHeader
@@ -223,14 +223,14 @@ export class SgdsModal extends SgdsElement {
                 <h3
                   part="header"
                   class=${classMap({
-                    'modal-header': true
+                    "modal-header": true
                     // centered: this.centeredAlignVariant,
                   })}
                 >
                   <div
                     part="title"
                     class=${classMap({
-                      'modal-title d-flex align-items-center': true
+                      "modal-title d-flex align-items-center": true
                       // centered : this.centeredAlignVariant,
                     })}
                     id="title"
@@ -243,15 +243,15 @@ export class SgdsModal extends SgdsElement {
                     variant="icon"
                     exportparts="base:close-button__base"
                     class=${classMap({
-                      'modal-close': true
+                      "modal-close": true
                       // 'centered': this.centeredAlignVariant,
                     })}
-                    @click="${() => this.requestClose('close-button')}"
+                    @click="${() => this.requestClose("close-button")}"
                     ><sl-icon name="x-lg"></sl-icon
                   ></sgds-button>
                 </h3>
               `
-            : ''}
+            : ""}
 
           <div part="body" class="modal-body">
             <slot></slot>
@@ -260,7 +260,7 @@ export class SgdsModal extends SgdsElement {
           <footer
             part="footer"
             class=${classMap({
-              'modal-footer': true
+              "modal-footer": true
               // centered: this.centeredAlignVariant,
             })}
           >
@@ -272,33 +272,33 @@ export class SgdsModal extends SgdsElement {
   }
 }
 
-setDefaultAnimation('modal.show', {
+setDefaultAnimation("modal.show", {
   keyframes: [
-    { opacity: 0, transform: 'scale(0.8)' },
-    { opacity: 1, transform: 'scale(1)' }
+    { opacity: 0, transform: "scale(0.8)" },
+    { opacity: 1, transform: "scale(1)" }
   ],
-  options: { duration: 250, easing: 'ease' }
+  options: { duration: 250, easing: "ease" }
 });
 
-setDefaultAnimation('modal.hide', {
+setDefaultAnimation("modal.hide", {
   keyframes: [
-    { opacity: 1, transform: 'scale(1)' },
-    { opacity: 0, transform: 'scale(0.8)' }
+    { opacity: 1, transform: "scale(1)" },
+    { opacity: 0, transform: "scale(0.8)" }
   ],
-  options: { duration: 250, easing: 'ease' }
+  options: { duration: 250, easing: "ease" }
 });
 
-setDefaultAnimation('modal.denyClose', {
-  keyframes: [{ transform: 'scale(1)' }, { transform: 'scale(1.02)' }, { transform: 'scale(1)' }],
+setDefaultAnimation("modal.denyClose", {
+  keyframes: [{ transform: "scale(1)" }, { transform: "scale(1.02)" }, { transform: "scale(1)" }],
   options: { duration: 250 }
 });
 
-setDefaultAnimation('modal.overlay.show', {
+setDefaultAnimation("modal.overlay.show", {
   keyframes: [{ opacity: 0 }, { opacity: 1 }],
   options: { duration: 250 }
 });
 
-setDefaultAnimation('modal.overlay.hide', {
+setDefaultAnimation("modal.overlay.hide", {
   keyframes: [{ opacity: 1 }, { opacity: 0 }],
   options: { duration: 250 }
 });

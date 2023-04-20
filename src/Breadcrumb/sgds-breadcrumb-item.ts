@@ -1,11 +1,11 @@
-import { customElement, property } from 'lit/decorators.js';
-import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { classMap } from 'lit/directives/class-map.js';
-import SgdsElement from '../base/sgds-element';
-import styles from './sgds-breadcrumb.scss';
+import { customElement, property } from "lit/decorators.js";
+import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { classMap } from "lit/directives/class-map.js";
+import SgdsElement from "../base/sgds-element";
+import styles from "./sgds-breadcrumb.scss";
 
-@customElement('sgds-breadcrumb-item')
+@customElement("sgds-breadcrumb-item")
 export class SgdsBreadcrumbItem extends SgdsElement {
   static styles = styles;
 
@@ -13,9 +13,9 @@ export class SgdsBreadcrumbItem extends SgdsElement {
 
   @property({ type: String }) href;
 
-  @property() target?: '_blank' | '_parent' | '_self' | '_top';
+  @property() target?: "_blank" | "_parent" | "_self" | "_top";
 
-  @property() rel = 'noreferrer noopener';
+  @property() rel = "noreferrer noopener";
 
   render() {
     const isLink = this.href ? true : false;
@@ -24,7 +24,7 @@ export class SgdsBreadcrumbItem extends SgdsElement {
       <div
         part="base"
         class=${classMap({
-          'breadcrumb-item': true
+          "breadcrumb-item": true
         })}
       >
         ${isLink

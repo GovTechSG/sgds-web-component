@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from "lit-html";
 
 export const Template = args => {
   return html`
@@ -29,11 +29,11 @@ export const TemplateBreakpointSpecific = args => {
 };
 
 export const args = {
-  tableHeaders: ['#', 'First Names', 'Last Name', 'Username'],
+  tableHeaders: ["#", "First Names", "Last Name", "Username"],
   tableData: [
-    ['1', 'John', 'Doe', '@johndoe'],
-    ['2', 'Jane', 'Doe', '@janedoe'],
-    ['3', 'Bob', 'Smith', '@bobsmith']
+    ["1", "John", "Doe", "@johndoe"],
+    ["2", "Jane", "Doe", "@janedoe"],
+    ["3", "Bob", "Smith", "@bobsmith"]
   ]
 };
 

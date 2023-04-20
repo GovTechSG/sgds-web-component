@@ -1,7 +1,7 @@
-import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import styles from './sgds-footer.scss';
-import SgdsElement from '../base/sgds-element';
+import { html } from "lit";
+import { customElement, property } from "lit/decorators.js";
+import styles from "./sgds-footer.scss";
+import SgdsElement from "../base/sgds-element";
 
 export type Links = {
   href: string;
@@ -16,7 +16,7 @@ export interface ColumnLinks {
  * @csspart footer-top - The component's footer-top section container.
  * @csspart footer-bottom - The component's footer-bottom section container.
  */
-@customElement('sgds-footer')
+@customElement("sgds-footer")
 export class SgdsFooter extends SgdsElement {
   static styles = styles;
   @property()
@@ -29,19 +29,19 @@ export class SgdsFooter extends SgdsElement {
   links: ColumnLinks[] = [];
 
   @property({ type: String })
-  lastUpdatedDate = '';
+  lastUpdatedDate = "";
 
   //href
   @property({ type: String })
-  contactHref = '#';
+  contactHref = "#";
   @property({ type: String })
-  feedbackHref = '#';
+  feedbackHref = "#";
   @property({ type: String })
-  vulnerabilityHref = '#';
+  vulnerabilityHref = "#";
   @property({ type: String })
-  privacyHref = '#';
+  privacyHref = "#";
   @property({ type: String })
-  termsOfUseHref = '#';
+  termsOfUseHref = "#";
 
   render() {
     return html`

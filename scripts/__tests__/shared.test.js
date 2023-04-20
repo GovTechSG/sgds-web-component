@@ -1,5 +1,5 @@
-import { getSgdsComponents } from '../shared.mjs';
-import { fixture, expect, waitUntil } from '@open-wc/testing';
+import { getSgdsComponents } from "../shared.mjs";
+import { fixture, expect, waitUntil } from "@open-wc/testing";
 
 /**
  * {
@@ -73,24 +73,24 @@ import { fixture, expect, waitUntil } from '@open-wc/testing';
   modulePath: 'src/Tooltip/sgds-tooltip.ts'
 }
  */
-describe('getSgdsComponents()', () => {
+describe("getSgdsComponents()", () => {
   const input = [
     {
-      modulePath: 'src/Tooltip/sgds-tooltip.ts'
+      modulePath: "src/Tooltip/sgds-tooltip.ts"
     },
     {
-      modulePath: 'rubbish/test'
+      modulePath: "rubbish/test"
     },
     {
-      modulePath: 'src/base/test'
+      modulePath: "src/base/test"
     }
   ];
 
-  it('returns an array', () => {
+  it("returns an array", () => {
     expect(Array.isArray(getSgdsComponents(input))).to.be.true;
   });
-  it('should output components starting with sgds-* only', () => {
-    const expected = [{ modulePath: 'src/Tooltip/sgds-tooltip.ts' }];
+  it("should output components starting with sgds-* only", () => {
+    const expected = [{ modulePath: "src/Tooltip/sgds-tooltip.ts" }];
     expect(JSON.stringify(getSgdsComponents(input))).to.equal(JSON.stringify(expected));
   });
 });

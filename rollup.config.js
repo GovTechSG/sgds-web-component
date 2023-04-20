@@ -1,18 +1,18 @@
-import typescript from 'rollup-plugin-typescript2';
-import resolve from '@rollup/plugin-node-resolve';
-import postcss from 'rollup-plugin-postcss';
-import litcss from 'rollup-plugin-postcss-lit';
-const packageJson = require('./package.json');
-import { getFolders } from './scripts/buildUtils';
-import generatePackageJson from 'rollup-plugin-generate-package-json';
-import replace from '@rollup/plugin-replace';
+import typescript from "rollup-plugin-typescript2";
+import resolve from "@rollup/plugin-node-resolve";
+import postcss from "rollup-plugin-postcss";
+import litcss from "rollup-plugin-postcss-lit";
+const packageJson = require("./package.json");
+import { getFolders } from "./scripts/buildUtils";
+import generatePackageJson from "rollup-plugin-generate-package-json";
+import replace from "@rollup/plugin-replace";
 
 const wcPlugins = [
   resolve({
     browser: true
   }),
   replace({
-    'process.env.NODE_ENV': JSON.stringify('production'),
+    "process.env.NODE_ENV": JSON.stringify("production"),
     preventAssignment: true
   }),
   postcss({
@@ -21,7 +21,7 @@ const wcPlugins = [
   }),
   litcss(),
   typescript({
-    tsconfig: 'tsconfig.json',
+    tsconfig: "tsconfig.json",
     useTsconfigDeclarationDir: true
   })
 ];
@@ -31,9 +31,9 @@ const subfolderWCPlugins = folderName => [
     baseContents: {
       name: `${packageJson.name}/${folderName}`,
       private: true,
-      main: '../umd/index.js',
-      module: './index.js',
-      types: './index.d.ts'
+      main: "../umd/index.js",
+      module: "./index.js",
+      types: "./index.d.ts"
     }
   })
 ];
@@ -55,70 +55,70 @@ const reactSubFolderBuildPlugins = folderName => [
     baseContents: {
       name: `${packageJson.name}/react/${folderName}`,
       private: true,
-      main: '../cjs/index.js',
-      module: './index.js',
-      types: './index.d.ts'
+      main: "../cjs/index.js",
+      module: "./index.js",
+      types: "./index.d.ts"
     }
   })
 ];
 
-const wcfolderBuilds = getFolders('./src').map(folder => {
+const wcfolderBuilds = getFolders("./src").map(folder => {
   return {
     input: `src/${folder}/index.ts`,
     output: [
       {
         file: `lib/${folder}/index.js`,
         sourcemap: true,
-        exports: 'named',
-        format: 'esm'
+        exports: "named",
+        format: "esm"
       }
     ],
     plugins: subfolderWCPlugins(folder)
   };
 });
 
-const reactFolderBuilds = getFolders('src/react').map(folder => {
+const reactFolderBuilds = getFolders("src/react").map(folder => {
   return {
     input: `src/react/${folder}/index.ts`,
     output: [
       {
         file: `lib/react/${folder}/index.js`,
         sourcemap: true,
-        exports: 'named',
-        format: 'esm'
+        exports: "named",
+        format: "esm"
       }
     ],
-    external: ['@lit-labs/react', 'react'],
+    external: ["@lit-labs/react", "react"],
     plugins: reactSubFolderBuildPlugins(folder)
   };
 });
 export default [
   {
-    input: 'src/index.ts',
+    input: "src/index.ts",
     output: [
       {
         file: packageJson.module,
-        format: 'esm',
+        format: "esm",
         sourcemap: true
       },
       {
         file: packageJson.main,
-        format: 'umd',
+        format: "umd",
         sourcemap: true,
-        name: 'index'
+        name: "index"
       }
     ],
     plugins: wcPlugins
   },
   ...wcfolderBuilds,
   {
-    input: 'src/react/index.ts',
+    input: "src/react/index.ts",
     output: [
       {
-        file: 'lib/react/index.js',
-        format: 'esm',
+        file: "lib/react/index.js",
+        format: "esm",
         sourcemap: true,
-        exports: 'named'
+        exports: "named"
       }
     ],
     plugins: [
@@ -127,26 +127,26 @@ export default [
         baseContents: {
           name: `${packageJson.name}/react`,
           private: false,
-          main: './cjs/index.js',
-          module: './index.js',
-          types: './index.d.ts'
+          main: "./cjs/index.js",
+          module: "./index.js",
+          types: "./index.d.ts"
         }
       })
     ],
-    external: ['@lit-labs/react', 'react']
+    external: ["@lit-labs/react", "react"]
   },
   {
-    input: 'src/react/index.ts',
+    input: "src/react/index.ts",
     output: [
       {
-        file: 'lib/react/cjs/index.js',
-        format: 'cjs',
+        file: "lib/react/cjs/index.js",
+        format: "cjs",
         sourcemap: true,
-        exports: 'named'
+        exports: "named"
       }
     ],
     plugins: [...reactBuildPlugins],
-    external: ['@lit-labs/react', 'react']
+    external: ["@lit-labs/react", "react"]
   },
   ...reactFolderBuilds
 ];

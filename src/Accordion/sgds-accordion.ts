@@ -1,15 +1,15 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { html } from 'lit';
-import { customElement, property, queryAssignedNodes } from 'lit/decorators.js';
-import SgdsElement from '../base/sgds-element';
-import styles from './sgds-accordion.scss';
-import type SgdsAccordionItem from './sgds-accordion-item';
+import { classMap } from "lit/directives/class-map.js";
+import { html } from "lit";
+import { customElement, property, queryAssignedNodes } from "lit/decorators.js";
+import SgdsElement from "../base/sgds-element";
+import styles from "./sgds-accordion.scss";
+import type SgdsAccordionItem from "./sgds-accordion-item";
 
 /**
  * @summary A dropdown mechanism that allow users to either show or hide related content.
  * @slot - default slot for accordion-item
  */
-@customElement('sgds-accordion')
+@customElement("sgds-accordion")
 export class SgdsAccordion extends SgdsElement {
   static styles = styles;
 
@@ -22,7 +22,7 @@ export class SgdsAccordion extends SgdsElement {
 
   get items(): SgdsAccordionItem[] {
     return [...(this.defaultNodes || [])].filter(
-      (node: HTMLElement) => typeof node.tagName !== 'undefined'
+      (node: HTMLElement) => typeof node.tagName !== "undefined"
     ) as SgdsAccordionItem[];
   }
 
@@ -32,15 +32,15 @@ export class SgdsAccordion extends SgdsElement {
       if (items.length > 1) {
         switch (index) {
           case 0:
-            item.setAttribute('first-of-type', '');
+            item.setAttribute("first-of-type", "");
             break;
 
           case items.length - 1:
-            item.setAttribute('last-of-type', '');
+            item.setAttribute("last-of-type", "");
             break;
 
           default:
-            item.setAttribute('nth-of-type', '');
+            item.setAttribute("nth-of-type", "");
         }
       }
     });
@@ -73,7 +73,7 @@ export class SgdsAccordion extends SgdsElement {
       <div
         class="
             ${classMap({
-          'sgds accordion': true,
+          "sgds accordion": true,
           [`${this.accordionClasses}`]: this.accordionClasses
         })}"
       >

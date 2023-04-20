@@ -1,18 +1,17 @@
 /* eslint-env node */
 module.exports = {
-  arrowParens: 'avoid',
+  arrowParens: "avoid",
   bracketSpacing: true,
-  htmlWhitespaceSensitivity: 'css',
+  htmlWhitespaceSensitivity: "css",
   insertPragma: false,
   bracketSameLine: false,
-  jsxSingleQuote: false,
   singleQuote: false,
   printWidth: 120,
-  proseWrap: 'preserve',
-  quoteProps: 'as-needed',
+  proseWrap: "preserve",
+  quoteProps: "as-needed",
   requirePragma: false,
   semi: true,
   tabWidth: 2,
-  trailingComma: 'none',
+  trailingComma: "none",
   useTabs: false
-}
+};

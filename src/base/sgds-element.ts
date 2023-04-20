@@ -1,4 +1,4 @@
-import { LitElement } from 'lit';
+import { LitElement } from "lit";
 
 export default class SgdsElement extends LitElement {
   /** Emits a custom event with more convenient defaults. */

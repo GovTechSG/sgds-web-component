@@ -12,7 +12,7 @@
 //    ...
 //  }
 
-import type { LitElement } from 'lit';
+import type { LitElement } from "lit";
 
 type UpdateHandler = (prev?: unknown, next?: unknown) => void;
 

@@ -1,11 +1,11 @@
-import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import SgdsElement from '../base/sgds-element';
-import styles from './sgds-stepper.scss';
+import { html } from "lit";
+import { customElement, property } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import SgdsElement from "../base/sgds-element";
+import styles from "./sgds-stepper.scss";
 
 // TODO: any events emitted?
-@customElement('sgds-stepper')
+@customElement("sgds-stepper")
 export class SgdsStepper extends SgdsElement {
   static styles = styles;
 
@@ -13,10 +13,10 @@ export class SgdsStepper extends SgdsElement {
   steps = [
     {
       title: 1,
-      stepHeader: 'Marker title 1'
+      stepHeader: "Marker title 1"
     },
-    { title: 2, stepHeader: 'Marker title 2' },
-    { title: 3, stepHeader: 'Marker title 3' }
+    { title: 2, stepHeader: "Marker title 2" },
+    { title: 3, stepHeader: "Marker title 3" }
   ];
 
   @property({ type: Number })
@@ -62,9 +62,9 @@ export class SgdsStepper extends SgdsElement {
           return html`
             <div
               class="stepper-item ${classMap({
-                'is-active': this.activeStep === index,
-                'is-completed': this.activeStep > index,
-                'is-clickable': this.activeStep > index
+                "is-active": this.activeStep === index,
+                "is-completed": this.activeStep > index,
+                "is-clickable": this.activeStep > index
               })}"
               @click="${() => this._onStepperItemClick(index)}"
             >

@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from "lit-html";
 
 export const Template = args => html`
   <sgds-fileupload
@@ -25,7 +25,7 @@ export const Template = args => html`
   >
 `;
 
-export const args = { variant: 'primary' };
+export const args = { variant: "primary" };
 
 // ## Customize the checked and cancel icons
 

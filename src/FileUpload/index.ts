@@ -1,1 +1,1 @@
-export { SgdsFileUpload } from './sgds-fileupload';
+export { SgdsFileUpload } from "./sgds-fileupload";

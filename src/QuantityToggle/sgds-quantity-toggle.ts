@@ -1,23 +1,23 @@
-import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { live } from 'lit/directives/live.js';
-import { html } from 'lit/static-html.js';
-import { SgdsButton } from '../Button';
-import SgdsElement from '../base/sgds-element';
-import { defaultValue } from '../utils/defaultvalue';
-import genId from '../utils/generateId';
-import { watch } from '../utils/watch';
-import styles from './sgds-quantity-toggle.scss';
+import { customElement, property, query } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { live } from "lit/directives/live.js";
+import { html } from "lit/static-html.js";
+import { SgdsButton } from "../Button";
+import SgdsElement from "../base/sgds-element";
+import { defaultValue } from "../utils/defaultvalue";
+import genId from "../utils/generateId";
+import { watch } from "../utils/watch";
+import styles from "./sgds-quantity-toggle.scss";
 
-@customElement('sgds-quantity-toggle')
+@customElement("sgds-quantity-toggle")
 export class SgdsQuantityToggle extends SgdsElement {
-  @query('input.form-control') input: HTMLInputElement;
-  @query('sgds-button.button-group_button-first') leftBtn: SgdsButton;
-  @query('sgds-button.button-group_button-last') lastBtn: SgdsButton;
+  @query("input.form-control") input: HTMLInputElement;
+  @query("sgds-button.button-group_button-first") leftBtn: SgdsButton;
+  @query("sgds-button.button-group_button-last") lastBtn: SgdsButton;
   static styles = styles;
 
-  @property({ reflect: true, type: String }) quantToggleId = genId('quantToggle', 'toggle');
+  @property({ reflect: true, type: String }) quantToggleId = genId("quantToggle", "toggle");
 
   @property({ reflect: true }) name: string;
   /** The input's minimum value. */
@@ -25,9 +25,9 @@ export class SgdsQuantityToggle extends SgdsElement {
   /** The input's maximum value. */
   @property() max: number | string;
 
-  @property() size: 'sm' | 'lg' | 'default' = 'sm';
+  @property() size: "sm" | "lg" | "default" = "sm";
 
-  @property({ reflect: true, type: Number }) count: number; 
+  @property({ reflect: true, type: Number }) count: number;
 
   @property({ type: Boolean, reflect: true }) disabled = false;
 
@@ -41,7 +41,7 @@ export class SgdsQuantityToggle extends SgdsElement {
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
-  defaultValue = '';
+  defaultValue = "";
 
   handleChange(event: string) {
     this.emit(event);
@@ -68,7 +68,7 @@ export class SgdsQuantityToggle extends SgdsElement {
     }
   }
 
-  @watch('count', { waitUntilFirstUpdate: true })
+  @watch("count", { waitUntilFirstUpdate: true })
   render() {
     return html`
       <div
@@ -76,7 +76,7 @@ export class SgdsQuantityToggle extends SgdsElement {
         class="${classMap({
           sgds: true,
           disabled: this.disabled,
-          'input-group': true,
+          "input-group": true,
           [`${this.quantityToggleClasses}`]: this.quantityToggleClasses
         })}"
         variant="quantity-toggle"
@@ -95,14 +95,14 @@ export class SgdsQuantityToggle extends SgdsElement {
         </sgds-button>
         <input
           type="number"
-          class="form-control ${'form-control-' + this.size} text-center"
+          class="form-control ${"form-control-" + this.size} text-center"
           name=${ifDefined(this.name)}
           step=${ifDefined(this.step as number)}
           min=${ifDefined(this.min)}
           max=${ifDefined(this.max)}
           .value=${live(this.count)}
-          @change=${() => this.handleChange('sgds-change')}
-          @input=${() => this.handleChange('sgds-input')}
+          @change=${() => this.handleChange("sgds-change")}
+          @input=${() => this.handleChange("sgds-input")}
           ?disabled=${this.disabled}
         />
         <sgds-button

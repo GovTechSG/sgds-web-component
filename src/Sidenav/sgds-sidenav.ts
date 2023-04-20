@@ -1,13 +1,13 @@
-import { html } from 'lit';
-import SgdsElement from '../base/sgds-element';
-import { customElement, property } from 'lit/decorators.js';
-import styles from './sgds-sidenav.scss';
-import SgdsSidenavItem from './sgds-sidenav-item';
+import { html } from "lit";
+import SgdsElement from "../base/sgds-element";
+import { customElement, property } from "lit/decorators.js";
+import styles from "./sgds-sidenav.scss";
+import SgdsSidenavItem from "./sgds-sidenav-item";
 
 /**
  * @slot - default slot for SgdsSidenavItem element.
  */
-@customElement('sgds-sidenav')
+@customElement("sgds-sidenav")
 export class SgdsSidenav extends SgdsElement {
   static styles = styles;
 
@@ -17,8 +17,8 @@ export class SgdsSidenav extends SgdsElement {
   render() {
     this.alwaysOpen
       ? null
-      : this.addEventListener('sgds-toggle', (e: CustomEvent) => {
-          const children = this.shadowRoot.querySelector('slot').assignedElements({ flatten: true });
+      : this.addEventListener("sgds-toggle", (e: CustomEvent) => {
+          const children = this.shadowRoot.querySelector("slot").assignedElements({ flatten: true });
           for (let i = 0; i < children.length; i++) {
             if (e.detail.index != i) {
               (children[i] as SgdsSidenavItem).closeItem();

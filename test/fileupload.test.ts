@@ -1,117 +1,117 @@
-import { expect, fixture, oneEvent } from '@open-wc/testing';
-import { html } from 'lit';
-import '../src/FileUpload';
-import { SgdsFileUpload } from '../src/FileUpload';
+import { expect, fixture, oneEvent } from "@open-wc/testing";
+import { html } from "lit";
+import "../src/FileUpload";
+import { SgdsFileUpload } from "../src/FileUpload";
 
-describe('sgds-fileupload', () => {
-  it('should be able to pass in content in between the slot', async () => {
+describe("sgds-fileupload", () => {
+  it("should be able to pass in content in between the slot", async () => {
     const el = await fixture<SgdsFileUpload>(html` <sgds-fileupload>Hello</sgds-fileupload> `);
 
-    const slot = el.shadowRoot?.querySelector('slot');
+    const slot = el.shadowRoot?.querySelector("slot");
     expect(slot).to.exist;
 
     const slotContent = slot?.assignedNodes()[0].textContent;
-    expect(slotContent).to.equal('Hello');
+    expect(slotContent).to.equal("Hello");
   });
 
-  it('Should output a child input element', async () => {
+  it("Should output a child input element", async () => {
     const el = await fixture(html`<sgds-fileupload></sgds-fileupload>`);
-    expect(el.shadowRoot?.querySelector('input')).to.exist;
+    expect(el.shadowRoot?.querySelector("input")).to.exist;
   });
 
-  it('Should output a child sgds-button element', async () => {
+  it("Should output a child sgds-button element", async () => {
     const el = await fixture(html`<sgds-fileupload></sgds-fileupload>`);
-    expect(el.shadowRoot?.querySelector('sgds-button')).to.exist;
+    expect(el.shadowRoot?.querySelector("sgds-button")).to.exist;
   });
 
-  it('Should not display the input element modal popup when disabled prop is true', async () => {
+  it("Should not display the input element modal popup when disabled prop is true", async () => {
     const el = await fixture<SgdsFileUpload>(html`<sgds-fileupload disabled></sgds-fileupload>`);
 
     // simulate click on the button
-    (el.shadowRoot?.querySelector('sgds-button') as HTMLButtonElement)?.click();
+    (el.shadowRoot?.querySelector("sgds-button") as HTMLButtonElement)?.click();
 
     // check if the input element modal popup is not displayed
-    const inputEl = el.shadowRoot?.querySelector('input') as HTMLInputElement;
-    expect(inputEl.hasAttribute('open')).to.be.false;
+    const inputEl = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    expect(inputEl.hasAttribute("open")).to.be.false;
   });
 
-  it('should render a ul with list of selected files using DataTransfer object', async () => {
-    const fileList = [new File(['file1'], 'file1.txt'), new File(['file2'], 'file2.txt')];
+  it("should render a ul with list of selected files using DataTransfer object", async () => {
+    const fileList = [new File(["file1"], "file1.txt"), new File(["file2"], "file2.txt")];
     const dt = new DataTransfer();
     fileList.forEach(file => {
       dt.items.add(file);
     });
 
     const el = await fixture<SgdsFileUpload>(html`<sgds-fileupload>Hello</sgds-fileupload>`);
-    const input = el.shadowRoot?.querySelector<HTMLInputElement>('input');
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
     if (input) {
       input.files = dt.files;
-      const changeEvent = new Event('change');
+      const changeEvent = new Event("change");
       input.dispatchEvent(changeEvent);
       await el.updateComplete;
 
-      const listItems = el.shadowRoot?.querySelectorAll('.fileupload-list-item');
+      const listItems = el.shadowRoot?.querySelectorAll(".fileupload-list-item");
       expect(listItems?.length).to.equal(2);
 
-      expect(listItems?.[0].querySelector('.filename')?.textContent).to.equal('file1.txt');
-      expect(listItems?.[1].querySelector('.filename')?.textContent).to.equal('file2.txt');
+      expect(listItems?.[0].querySelector(".filename")?.textContent).to.equal("file1.txt");
+      expect(listItems?.[1].querySelector(".filename")?.textContent).to.equal("file2.txt");
     }
   });
 
-  it('should render a ul with list of selected files using DataTransfer object and trigger sgds-change event', async () => {
-    const fileList = [new File(['file1'], 'file1.txt'), new File(['file2'], 'file2.txt')];
+  it("should render a ul with list of selected files using DataTransfer object and trigger sgds-change event", async () => {
+    const fileList = [new File(["file1"], "file1.txt"), new File(["file2"], "file2.txt")];
     const dt = new DataTransfer();
     fileList.forEach(file => {
       dt.items.add(file);
     });
 
     const el = await fixture<SgdsFileUpload>(html`<sgds-fileupload>Hello</sgds-fileupload>`);
-    const input = el.shadowRoot?.querySelector<HTMLInputElement>('input');
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
     if (input) {
-      const promise = oneEvent(el, 'sgds-files-selected'); // add event listener to the component
+      const promise = oneEvent(el, "sgds-files-selected"); // add event listener to the component
       input.files = dt.files;
-      const changeEvent = new Event('change');
+      const changeEvent = new Event("change");
       input.dispatchEvent(changeEvent);
       await promise; // wait for the event to be triggered
       // returns a promise that resolves when the specified event is dispatched from the component.
 
-      const listItems = el.shadowRoot?.querySelectorAll('.fileupload-list-item');
+      const listItems = el.shadowRoot?.querySelectorAll(".fileupload-list-item");
       expect(listItems?.length).to.equal(2);
 
-      expect(listItems?.[0].querySelector('.filename')?.textContent).to.equal('file1.txt');
-      expect(listItems?.[1].querySelector('.filename')?.textContent).to.equal('file2.txt');
+      expect(listItems?.[0].querySelector(".filename")?.textContent).to.equal("file1.txt");
+      expect(listItems?.[1].querySelector(".filename")?.textContent).to.equal("file2.txt");
     }
   });
-  it('should remove a file from the list when the removefileHandler is clicked', async () => {
-    const fileList = [new File(['file1'], 'file1.txt'), new File(['file2'], 'file2.txt')];
+  it("should remove a file from the list when the removefileHandler is clicked", async () => {
+    const fileList = [new File(["file1"], "file1.txt"), new File(["file2"], "file2.txt")];
     const dt = new DataTransfer();
     fileList.forEach(file => {
       dt.items.add(file);
     });
 
     const el = await fixture<SgdsFileUpload>(html`<sgds-fileupload>Hello</sgds-fileupload>`);
-    const input = el.shadowRoot?.querySelector<HTMLInputElement>('input');
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
     if (input) {
-      const promise = oneEvent(el, 'sgds-files-selected'); // add event listener to the component
+      const promise = oneEvent(el, "sgds-files-selected"); // add event listener to the component
       input.files = dt.files;
-      const changeEvent = new Event('change');
+      const changeEvent = new Event("change");
       input.dispatchEvent(changeEvent);
       await promise; // wait for the event to be triggered
 
-      let listItems = el.shadowRoot?.querySelectorAll('.fileupload-list-item');
+      let listItems = el.shadowRoot?.querySelectorAll(".fileupload-list-item");
       expect(listItems?.length).to.equal(2);
 
-      const removeBtn = listItems?.[0].querySelector('.fileupload-list-item span:last-child');
-      console.log('removeBtn', removeBtn);
-      removeBtn?.dispatchEvent(new Event('click'));
+      const removeBtn = listItems?.[0].querySelector(".fileupload-list-item span:last-child");
+      console.log("removeBtn", removeBtn);
+      removeBtn?.dispatchEvent(new Event("click"));
       await el.updateComplete;
 
-      listItems = el.shadowRoot?.querySelectorAll('.fileupload-list-item');
+      listItems = el.shadowRoot?.querySelectorAll(".fileupload-list-item");
       expect(listItems?.length).to.equal(1);
     }
   });
-  it('should be able to pass in SVG icons as string for both checkedIcon and cancelIcon', async () => {
-    const fileList = [new File(['file1'], 'file1.txt'), new File(['file2'], 'file2.txt')];
+  it("should be able to pass in SVG icons as string for both checkedIcon and cancelIcon", async () => {
+    const fileList = [new File(["file1"], "file1.txt"), new File(["file2"], "file2.txt")];
     const dt = new DataTransfer();
     fileList.forEach(file => {
       dt.items.add(file);
@@ -130,19 +130,19 @@ describe('sgds-fileupload', () => {
         >Hello</sgds-fileupload
       >`
     );
-    const input = el.shadowRoot?.querySelector<HTMLInputElement>('input');
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
     if (input) {
-      const promise = oneEvent(el, 'sgds-files-selected'); // add event listener to the component
+      const promise = oneEvent(el, "sgds-files-selected"); // add event listener to the component
       input.files = dt.files;
-      const changeEvent = new Event('change');
+      const changeEvent = new Event("change");
       input.dispatchEvent(changeEvent);
       await promise; // wait for the event to be triggered
 
-      const listItems = el.shadowRoot?.querySelectorAll('.fileupload-list-item');
+      const listItems = el.shadowRoot?.querySelectorAll(".fileupload-list-item");
       expect(listItems?.length).to.equal(2);
 
-      const checkedIconSvg = listItems?.[0].querySelector('.fileupload-list-item .bi-check2-circle');
-      const cancelIconSvg = listItems?.[0].querySelector('.fileupload-list-item .bi-x-octagon');
+      const checkedIconSvg = listItems?.[0].querySelector(".fileupload-list-item .bi-check2-circle");
+      const cancelIconSvg = listItems?.[0].querySelector(".fileupload-list-item .bi-x-octagon");
 
       expect(checkedIconSvg).to.exist;
       expect(cancelIconSvg).to.exist;

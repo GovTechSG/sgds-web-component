@@ -1,1 +1,1 @@
-export { SgdsTable } from './sgds-table';
+export { SgdsTable } from "./sgds-table";

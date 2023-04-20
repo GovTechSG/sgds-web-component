@@ -1,20 +1,20 @@
-import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { scrollIntoView } from '../utils/scroll';
-import SgdsElement from '../base/sgds-element';
-import { watch } from '../utils/watch';
-import styles from './sgds-tabgroup.scss';
-import { SgdsTabPanel } from './sgds-tabpanel';
-import { SgdsTab } from './sgds-tab';
+import { html } from "lit";
+import { customElement, property, query, state } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import { scrollIntoView } from "../utils/scroll";
+import SgdsElement from "../base/sgds-element";
+import { watch } from "../utils/watch";
+import styles from "./sgds-tabgroup.scss";
+import { SgdsTabPanel } from "./sgds-tabpanel";
+import { SgdsTab } from "./sgds-tab";
 
-@customElement('sgds-tab-group')
+@customElement("sgds-tab-group")
 export class SgdsTabGroup extends SgdsElement {
   static styles = styles;
 
-  @query('.tab-group') tabGroup: HTMLElement;
-  @query('.tab-group__body') body: HTMLSlotElement;
-  @query('.tab-group__nav') nav: HTMLElement;
+  @query(".tab-group") tabGroup: HTMLElement;
+  @query(".tab-group__body") body: HTMLSlotElement;
+  @query(".tab-group__nav") nav: HTMLElement;
 
   private activeTab?: SgdsTab;
   private mutationObserver: MutationObserver;
@@ -25,17 +25,17 @@ export class SgdsTabGroup extends SgdsElement {
   @state() private hasScrollControls = false;
 
   /** The placement of the tabs. */
-  @property() placement: 'top' | 'bottom' | 'start' | 'end' = 'top';
+  @property() placement: "top" | "bottom" | "start" | "end" = "top";
 
-  @property({ reflect: true }) TabVariant: 'basic-toggle' | 'info-toggle';
+  @property({ reflect: true }) TabVariant: "basic-toggle" | "info-toggle";
   /**
    * When set to auto, navigating tabs with the arrow keys will instantly show the corresponding tab panel. When set to
    * manual, the tab will receive focus but will not show until the user presses spacebar or enter.
    */
-  @property() activation: 'auto' | 'manual' = 'auto';
+  @property() activation: "auto" | "manual" = "auto";
 
   /** Disables the scroll arrows that appear when tabs overflow. */
-  @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls = false;
+  @property({ attribute: "no-scroll-controls", type: Boolean }) noScrollControls = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -46,12 +46,12 @@ export class SgdsTabGroup extends SgdsElement {
 
     this.mutationObserver = new MutationObserver(mutations => {
       // Update aria labels when the DOM changes
-      if (mutations.some(m => !['aria-labelledby', 'aria-controls'].includes(m.attributeName))) {
+      if (mutations.some(m => !["aria-labelledby", "aria-controls"].includes(m.attributeName))) {
         setTimeout(() => this.setAriaLabels());
       }
 
       // Sync tabs when disabled states change
-      if (mutations.some(m => m.attributeName === 'disabled')) {
+      if (mutations.some(m => m.attributeName === "disabled")) {
         this.syncTabsAndPanels();
       }
     });
@@ -84,7 +84,7 @@ export class SgdsTabGroup extends SgdsElement {
     const tab = this.tabs.find(el => el.panel === panel);
 
     if (tab) {
-      this.setActiveTab(tab, { scrollBehavior: 'smooth' });
+      this.setActiveTab(tab, { scrollBehavior: "smooth" });
     }
   }
 
@@ -93,13 +93,13 @@ export class SgdsTabGroup extends SgdsElement {
 
     return [...(slot.assignedElements() as SgdsTab[])].filter(el => {
       return options.includeDisabled
-        ? el.tagName.toLowerCase() === 'sgds-tab'
-        : el.tagName.toLowerCase() === 'sgds-tab' && !el.disabled;
+        ? el.tagName.toLowerCase() === "sgds-tab"
+        : el.tagName.toLowerCase() === "sgds-tab" && !el.disabled;
     });
   }
 
   getAllPanels() {
-    return [...this.body.assignedElements()].filter(el => el.tagName.toLowerCase() === 'sgds-tab-panel') as [
+    return [...this.body.assignedElements()].filter(el => el.tagName.toLowerCase() === "sgds-tab-panel") as [
       SgdsTabPanel
     ];
   }
@@ -111,8 +111,8 @@ export class SgdsTabGroup extends SgdsElement {
   handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     //FIXME: too specific this will not work in dc design system
-    const tab = target.closest('sgds-tab') as SgdsTab;
-    const tabGroup = tab?.closest('sgds-tab-group');
+    const tab = target.closest("sgds-tab") as SgdsTab;
+    const tabGroup = tab?.closest("sgds-tab-group");
 
     // Ensure the target tab is in this tab group
     if (tabGroup !== this) {
@@ -120,14 +120,14 @@ export class SgdsTabGroup extends SgdsElement {
     }
 
     if (tab !== null) {
-      this.setActiveTab(tab, { scrollBehavior: 'smooth' });
+      this.setActiveTab(tab, { scrollBehavior: "smooth" });
     }
   }
 
   handleKeyDown(event: KeyboardEvent) {
     const target = event.target as HTMLElement;
-    const tab = target.closest('sgds-tab') as SgdsTab;
-    const tabGroup = tab?.closest('sgds-tab-group');
+    const tab = target.closest("sgds-tab") as SgdsTab;
+    const tabGroup = tab?.closest("sgds-tab-group");
 
     // Ensure the target tab is in this tab group
     if (tabGroup !== this) {
@@ -135,32 +135,32 @@ export class SgdsTabGroup extends SgdsElement {
     }
 
     // Activate a tab
-    if (['Enter', ' '].includes(event.key)) {
+    if (["Enter", " "].includes(event.key)) {
       if (tab !== null) {
-        this.setActiveTab(tab, { scrollBehavior: 'smooth' });
+        this.setActiveTab(tab, { scrollBehavior: "smooth" });
         event.preventDefault();
       }
     }
 
     // Move focus left or right
-    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
-      const activeEl = this.tabs.find(t => t.matches(':focus'));
+    if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) {
+      const activeEl = this.tabs.find(t => t.matches(":focus"));
 
-      if (activeEl?.tagName.toLowerCase() === 'sgds-tab') {
+      if (activeEl?.tagName.toLowerCase() === "sgds-tab") {
         let index = this.tabs.indexOf(activeEl);
 
-        if (event.key === 'Home') {
+        if (event.key === "Home") {
           index = 0;
-        } else if (event.key === 'End') {
+        } else if (event.key === "End") {
           index = this.tabs.length - 1;
         } else if (
-          ['top', 'bottom'].includes(this.placement) ||
-          (['start', 'end'].includes(this.placement) && event.key === 'ArrowUp')
+          ["top", "bottom"].includes(this.placement) ||
+          (["start", "end"].includes(this.placement) && event.key === "ArrowUp")
         ) {
           index--;
         } else if (
-          ['top', 'bottom'].includes(this.placement) ||
-          (['start', 'end'].includes(this.placement) && event.key === 'ArrowDown')
+          ["top", "bottom"].includes(this.placement) ||
+          (["start", "end"].includes(this.placement) && event.key === "ArrowDown")
         ) {
           index++;
         }
@@ -175,12 +175,12 @@ export class SgdsTabGroup extends SgdsElement {
 
         this.tabs[index].focus({ preventScroll: true });
 
-        if (this.activation === 'auto') {
-          this.setActiveTab(this.tabs[index], { scrollBehavior: 'smooth' });
+        if (this.activation === "auto") {
+          this.setActiveTab(this.tabs[index], { scrollBehavior: "smooth" });
         }
 
-        if (['top', 'bottom'].includes(this.placement)) {
-          scrollIntoView(this.tabs[index], this.nav, 'horizontal');
+        if (["top", "bottom"].includes(this.placement)) {
+          scrollIntoView(this.tabs[index], this.nav, "horizontal");
         }
 
         event.preventDefault();
@@ -191,31 +191,31 @@ export class SgdsTabGroup extends SgdsElement {
   handleScrollToStart() {
     this.nav.scroll({
       left: this.nav.scrollLeft - this.nav.clientWidth,
-      behavior: 'smooth'
+      behavior: "smooth"
     });
   }
 
   handleScrollToEnd() {
     this.nav.scroll({
       left: this.nav.scrollLeft + this.nav.clientWidth,
-      behavior: 'smooth'
+      behavior: "smooth"
     });
   }
 
-  @watch('noScrollControls', { waitUntilFirstUpdate: true })
+  @watch("noScrollControls", { waitUntilFirstUpdate: true })
   updateScrollControls() {
     if (this.noScrollControls) {
       this.hasScrollControls = false;
     } else {
       this.hasScrollControls =
-        ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth;
+        ["top", "bottom"].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth;
     }
   }
 
-  setActiveTab(tab: SgdsTab, options?: { emitEvents?: boolean; scrollBehavior?: 'auto' | 'smooth' }) {
+  setActiveTab(tab: SgdsTab, options?: { emitEvents?: boolean; scrollBehavior?: "auto" | "smooth" }) {
     options = {
       emitEvents: true,
-      scrollBehavior: 'auto',
+      scrollBehavior: "auto",
       ...options
     };
 
@@ -227,17 +227,17 @@ export class SgdsTabGroup extends SgdsElement {
       this.tabs.map(el => (el.active = el === this.activeTab));
       this.panels.map(el => (el.active = el.name === this.activeTab?.panel));
 
-      if (['top', 'bottom'].includes(this.placement)) {
-        scrollIntoView(this.activeTab, this.nav, 'horizontal', options.scrollBehavior);
+      if (["top", "bottom"].includes(this.placement)) {
+        scrollIntoView(this.activeTab, this.nav, "horizontal", options.scrollBehavior);
       }
 
       // Emit events
       if (options.emitEvents) {
         if (previousTab) {
-          this.emit('sgds-tab-hide', { detail: { name: previousTab.panel } });
+          this.emit("sgds-tab-hide", { detail: { name: previousTab.panel } });
         }
 
-        this.emit('sgds-tab-show', { detail: { name: this.activeTab.panel } });
+        this.emit("sgds-tab-show", { detail: { name: this.activeTab.panel } });
       }
     }
   }
@@ -247,8 +247,8 @@ export class SgdsTabGroup extends SgdsElement {
     this.tabs.forEach(tab => {
       const panel = this.panels.find(el => el.name === tab.panel);
       if (panel) {
-        tab.setAttribute('aria-controls', panel.getAttribute('id'));
-        panel.setAttribute('aria-labelledby', tab.getAttribute('id'));
+        tab.setAttribute("aria-controls", panel.getAttribute("id"));
+        panel.setAttribute("aria-labelledby", tab.getAttribute("id"));
       }
     });
   }
@@ -256,7 +256,7 @@ export class SgdsTabGroup extends SgdsElement {
   setTabVariant() {
     // Link each tab with its corresponding panel
     this.tabs.forEach(tab => {
-      tab.setAttribute('variant', this.TabVariant);
+      tab.setAttribute("variant", this.TabVariant);
     });
   }
 
@@ -271,13 +271,13 @@ export class SgdsTabGroup extends SgdsElement {
       <div
         part="base"
         class=${classMap({
-          'tab-group': true,
-          'tab-group--top': this.placement === 'top',
-          'tab-group--bottom': this.placement === 'bottom',
-          'tab-group--start': this.placement === 'start',
-          'tab-group--end': this.placement === 'end',
-          'tab-group--basic-toggle': this.TabVariant === 'basic-toggle',
-          'tab-group--info-toggle': this.TabVariant === 'info-toggle'
+          "tab-group": true,
+          "tab-group--top": this.placement === "top",
+          "tab-group--bottom": this.placement === "bottom",
+          "tab-group--start": this.placement === "start",
+          "tab-group--end": this.placement === "end",
+          "tab-group--basic-toggle": this.TabVariant === "basic-toggle",
+          "tab-group--info-toggle": this.TabVariant === "info-toggle"
         })}
         @click=${this.handleClick}
         @keydown=${this.handleKeyDown}

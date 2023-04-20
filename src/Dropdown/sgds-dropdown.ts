@@ -1,18 +1,18 @@
-import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { ref } from 'lit/directives/ref.js';
-import styles from './sgds-dropdown.scss';
-import { DropdownElement } from '../base/dropdown-element';
+import { html } from "lit";
+import { customElement } from "lit/decorators.js";
+import { ref } from "lit/directives/ref.js";
+import styles from "./sgds-dropdown.scss";
+import { DropdownElement } from "../base/dropdown-element";
 
-export type DropDirection = 'left' | 'right' | 'up' | 'down';
-@customElement('sgds-dropdown')
+export type DropDirection = "left" | "right" | "up" | "down";
+@customElement("sgds-dropdown")
 export class SgdsDropdown extends DropdownElement {
   static styles = styles;
   constructor() {
     super();
     this.modifierOpt = [
       {
-        name: 'offset',
+        name: "offset",
         options: {
           offset: [0, 10]
         }

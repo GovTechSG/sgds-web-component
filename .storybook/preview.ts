@@ -1,5 +1,5 @@
-import { setCustomElements } from '@storybook/web-components';
-import customElements from '../custom-elements.json';
+import { setCustomElements } from "@storybook/web-components";
+import customElements from "../custom-elements.json";
 
 // import { setCustomElementsManifest } from '@storybook/web-components';
 
@@ -27,7 +27,7 @@ import customElements from '../custom-elements.json';
 setCustomElements(customElements, { privateFields: false });
 
 export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
+  actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {
       color: /(background|color)$/i,
@@ -36,7 +36,7 @@ export const parameters = {
   },
   options: {
     storySort: {
-      order: ['Getting Started', 'Components']
+      order: ["Getting Started", "Components"]
     }
   }
 };

@@ -1,5 +1,5 @@
-import { methodsTable } from '../methodsTable.jsx';
-import { expect } from '@open-wc/testing';
+import { methodsTable } from "../methodsTable.jsx";
+import { expect } from "@open-wc/testing";
 /**
  * [
   {
@@ -60,6 +60,6 @@ import { expect } from '@open-wc/testing';
   }
 ]
  */
-describe('MethodsTable', () => {
-  it('a component returning ');
+describe("MethodsTable", () => {
+  it("a component returning ");
 });
