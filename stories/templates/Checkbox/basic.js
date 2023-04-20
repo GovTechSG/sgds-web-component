@@ -1,6 +1,6 @@
-import { html } from "lit-html";
+import { html } from 'lit-html';
 
-export const Template = (args) => {
+export const Template = args => {
   return html`
     <sgds-checkbox
       .name=${args.name}
@@ -15,3 +15,4 @@ export const Template = (args) => {
     >
   `;
 };
+export const args = {};

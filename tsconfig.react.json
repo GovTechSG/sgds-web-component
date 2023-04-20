@@ -12,15 +12,8 @@
     "skipLibCheck": true,
     "noImplicitAny": false,
     "importHelpers": true,
-    "rootDir": "react",
+    "rootDir": "react"
   },
-  "include": [
-    "**/*.ts",
-  ],
-  "exclude": [
-    "node_modules",
-    "lib",
-    "test",
-    "react"
-  ],
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "lib", "test", "react"]
 }

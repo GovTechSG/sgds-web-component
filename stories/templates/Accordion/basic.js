@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from 'lit-html';
 
 export const Template = args =>
   html`
@@ -21,5 +21,4 @@ export const Template = args =>
     </sgds-accordion>
   `;
 
-
-export const args = { summary: "This is an accordion" }
+export const args = { summary: 'This is an accordion' };

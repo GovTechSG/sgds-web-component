@@ -1,37 +1,37 @@
-import { html, css } from "lit";
-import { customElement, property, state, query } from "lit/decorators.js";
-import { classMap } from "lit/directives/class-map.js";
-import { watch } from "../utils/watch";
-import styles from "./sgds-radio-group.scss";
-import SgdsElement from "../base/sgds-element";
-import SgdsRadio from "./sgds-radio";
-import { FormSubmitController } from "../utils/form";
+import { html } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
+import SgdsElement from '../base/sgds-element';
+import { FormSubmitController } from '../utils/form';
+import { watch } from '../utils/watch';
+import SgdsRadio from './sgds-radio';
+import styles from './sgds-radio-group.scss';
 
-@customElement("sgds-radio-group")
+@customElement('sgds-radio-group')
 export class SgdsRadioGroup extends SgdsElement {
   static styles = styles;
 
   protected readonly formSubmitController = new FormSubmitController(this, {
-    defaultValue: (control: SgdsRadioGroup) => control.defaultValue,
+    defaultValue: (control: SgdsRadioGroup) => control.defaultValue
   });
 
-  @query("slot:not([name])") defaultSlot: HTMLSlotElement;
-  @query(".radio-group__validation-input") input: HTMLInputElement;
+  @query('slot:not([name])') defaultSlot: HTMLSlotElement;
+  @query('.radio-group__validation-input') input: HTMLInputElement;
 
-  @state() private defaultValue = "";
-  @state() private customErrorMessage = "";
+  @state() private defaultValue = '';
+  @state() private customErrorMessage = '';
 
   /**
    * The radio group label. Required for proper accessibility. If you need to display HTML, you can use the `label` slot
    * instead.
    */
-  @property() label = "";
+  @property() label = '';
 
   /** The selected value of the control. */
-  @property({ reflect: true }) value = "";
+  @property({ reflect: true }) value = '';
 
   /** The name assigned to the radio controls. */
-  @property({ reflect: true }) name = "option";
+  @property({ reflect: true }) name = 'option';
 
   /** Ensures a child radio is checked before allowing the containing form to submit. */
   @property({ type: Boolean, reflect: true }) required = false;
@@ -41,13 +41,12 @@ export class SgdsRadioGroup extends SgdsElement {
    */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
-  @property({ type: String, reflect: true }) invalidFeedback =
-    "default feedback";
+  @property({ type: String, reflect: true }) invalidFeedback = 'default feedback';
 
-  @watch("value")
+  @watch('value')
   handleValueChange() {
     if (this.hasUpdated) {
-      this.emit("sgds-change");
+      this.emit('sgds-change');
       this.updateCheckedRadio();
     }
   }
@@ -59,7 +58,7 @@ export class SgdsRadioGroup extends SgdsElement {
 
   get validity(): ValidityState {
     const hasMissingData = !((this.value && this.required) || !this.required);
-    const hasCustomError = this.customErrorMessage !== "";
+    const hasCustomError = this.customErrorMessage !== '';
     return {
       badInput: false,
       customError: hasCustomError,
@@ -71,7 +70,7 @@ export class SgdsRadioGroup extends SgdsElement {
       tooShort: false,
       typeMismatch: false,
       valid: hasMissingData ? false : true,
-      valueMissing: !hasMissingData,
+      valueMissing: !hasMissingData
     };
   }
 
@@ -92,7 +91,7 @@ export class SgdsRadioGroup extends SgdsElement {
 
   private getAllRadios() {
     //FIXME: too specific selector , this will not work if its on dev console design system
-    return [...this.querySelectorAll<SgdsRadio>("sgds-radio")];
+    return [...this.querySelectorAll<SgdsRadio>('sgds-radio')];
   }
 
   handleRadioClick(event: MouseEvent) {
@@ -104,27 +103,18 @@ export class SgdsRadioGroup extends SgdsElement {
 
     this.value = target.value;
     const radios = this.getAllRadios();
-    radios.forEach((radio) => (radio.checked = radio === target));
+    radios.forEach(radio => (radio.checked = radio === target));
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    if (
-      !["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(
-        event.key
-      )
-    ) {
+    if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(event.key)) {
       return;
     }
 
-    const radios = this.getAllRadios().filter((radio) => !radio.disabled);
-    const checkedRadio = radios.find((radio) => radio.checked) ?? radios[0];
+    const radios = this.getAllRadios().filter(radio => !radio.disabled);
+    const checkedRadio = radios.find(radio => radio.checked) ?? radios[0];
     //if eventkey is space, index increment is 0, if eventkey arrowup/arrowleft, index is -1, arrowright/arrowdown, index incr is 1
-    const incr =
-      event.key === " "
-        ? 0
-        : ["ArrowUp", "ArrowLeft"].includes(event.key)
-        ? -1
-        : 1;
+    const incr = event.key === ' ' ? 0 : ['ArrowUp', 'ArrowLeft'].includes(event.key) ? -1 : 1;
     let index = radios.indexOf(checkedRadio) + incr;
     if (index < 0) {
       index = radios.length - 1;
@@ -133,7 +123,7 @@ export class SgdsRadioGroup extends SgdsElement {
       index = 0;
     }
 
-    this.getAllRadios().forEach((radio) => {
+    this.getAllRadios().forEach(radio => {
       radio.checked = false;
       radio.tabIndex = -1;
     });
@@ -148,7 +138,7 @@ export class SgdsRadioGroup extends SgdsElement {
 
   handleLabelClick() {
     const radios = this.getAllRadios();
-    const checked = radios.find((radio) => radio.checked);
+    const checked = radios.find(radio => radio.checked);
     const radioToFocus = checked || radios[0];
 
     // Move focus to the checked radio (or the first one if none are checked) when clicking the label
@@ -160,10 +150,10 @@ export class SgdsRadioGroup extends SgdsElement {
   handleSlotChange() {
     const radios = this.getAllRadios();
 
-    radios.forEach((radio) => (radio.checked = radio.value === this.value));
+    radios.forEach(radio => (radio.checked = radio.value === this.value));
 
-    if (!radios.some((radio) => radio.checked)) {
-      if (radios[0]) radios[0]!.tabIndex = 0;
+    if (!radios.some(radio => radio.checked)) {
+      if (radios[0]) radios[0].tabIndex = 0;
     }
   }
 
@@ -179,7 +169,7 @@ export class SgdsRadioGroup extends SgdsElement {
 
   updateCheckedRadio() {
     const radios = this.getAllRadios();
-    radios.forEach((radio) => (radio.checked = radio.value === this.value));
+    radios.forEach(radio => (radio.checked = radio.value === this.value));
     this.invalid = !this.validity.valid;
   }
 
@@ -204,16 +194,14 @@ export class SgdsRadioGroup extends SgdsElement {
           part="control"
           type="text"
           class="radio-group__validation-input visually-hidden ${classMap({
-            "is-invalid": this.invalid,
+            'is-invalid': this.invalid
           })}"
           ?required=${this.required}
           tabindex="-1"
           @invalid=${this.handleInvalid}
           hidden
         />
-        <div class="invalid-feedback" part="invalidFeedback">
-          ${this.invalidFeedback}
-        </div>
+        <div class="invalid-feedback" part="invalidFeedback">${this.invalidFeedback}</div>
       </fieldset>
     `;
   }

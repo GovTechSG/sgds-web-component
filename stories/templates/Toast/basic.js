@@ -1,7 +1,6 @@
-import { html } from "lit-html";
+import { html } from 'lit-html';
 
-
-export const Template = (args) =>
+export const Template = args =>
   html`
     <sgds-toast
       .show=${args.show}
@@ -13,3 +12,5 @@ export const Template = (args) =>
       .delay=${args.delay}
     ></sgds-toast>
   `;
+
+export const args = {};

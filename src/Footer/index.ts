@@ -1,1 +1,1 @@
-export * from "./sgds-footer";
+export * from './sgds-footer';

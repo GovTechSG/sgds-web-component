@@ -3,13 +3,12 @@ import { customElement, property, state } from 'lit/decorators.js';
 import styles from './sgds-masthead.scss';
 import SgdsElement from '../base/sgds-element';
 
-
 @customElement('sgds-masthead')
 export class SgdsMasthead extends SgdsElement {
   static styles = styles;
 
   @property({ type: Boolean, reflect: true })
-  fluid: boolean = false;
+  fluid = false;
 
   @state()
   toggleVisibility = false;
@@ -127,7 +126,8 @@ export class SgdsMasthead extends SgdsElement {
                           ></path>
                           <path
                             d="M22.667 25.333h-16v-16h8v-2.667h-8c-1.473 0-2.667 1.194-2.667 2.667v16c0 1.473 1.194 2.667 2.667 2.667h16c1.473 0 2.667-1.194 2.667-2.667v-8h-2.667v8z"
-                          ></path></svg></a>
+                          ></path>
+                          </svg></a>
                     </article>
                   </div>
                 </div>

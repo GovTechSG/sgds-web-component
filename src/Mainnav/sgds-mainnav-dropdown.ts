@@ -1,10 +1,10 @@
-import { html } from "lit";
-import { customElement} from "lit/decorators.js";
-import { ref } from "lit/directives/ref.js";
-import styles from "./sgds-mainnav-dropdown.scss";
-import { DropdownElement } from "../base/dropdown-element";
+import { html } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { ref } from 'lit/directives/ref.js';
+import styles from './sgds-mainnav-dropdown.scss';
+import { DropdownElement } from '../base/dropdown-element';
 
-@customElement("sgds-mainnav-dropdown")
+@customElement('sgds-mainnav-dropdown')
 export class SgdsMainnavDropdown extends DropdownElement {
   static styles = styles;
 
@@ -20,11 +20,11 @@ export class SgdsMainnavDropdown extends DropdownElement {
           id=${this.togglerId}
           tabindex=${this.disabled ? '-1' : '0'}
           role="button"
-          >
+        >
           ${this.togglerText}
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="16"    
+            width="16"
             height="16"
             fill="currentColor"
             class="bi bi-chevron-down"
@@ -44,4 +44,4 @@ export class SgdsMainnavDropdown extends DropdownElement {
   }
 }
 
-export default SgdsMainnavDropdown
+export default SgdsMainnavDropdown;

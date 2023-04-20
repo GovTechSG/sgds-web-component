@@ -1,6 +1,6 @@
-import { html } from "lit-html";
+import { html } from 'lit-html';
 
-export const Template = (args) =>
+export const Template = args =>
   html`
     <sgds-action-card
       .active=${args.active}
@@ -11,8 +11,10 @@ export const Template = (args) =>
       .iconName=${args.iconName}
       .type=${args.type}
     >
-      <span slot="card-subtitle">${args.cardSubtitleSlot}</span>
-      <span slot="card-title">${args.cardTitleSlot}</span>
-      <span slot="card-text">${args.cardTextSlot}</span>
+      <span slot="card-subtitle">Laptop</span>
+      <span slot="card-title">Apple</span>
+      <span slot="card-text">Macbook Pro M1</span>
     </sgds-action-card>
   `;
+
+export const args = {};

@@ -1,6 +1,6 @@
-import { html } from "lit-html";
+import { html } from 'lit-html';
 
-export const Template = (args) => html`
+export const Template = args => html`
   <sgds-fileupload
     .size=${args.size}
     .variant=${args.variant}
@@ -20,12 +20,12 @@ export const Template = (args) => html`
       />
       <path
         d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"
-      /></svg >Choose a File</sgds-fileupload>
+      /></svg
+    >Choose a File</sgds-fileupload
+  >
 `;
 
-export const args={ variant: "primary" }
- 
-
+export const args = { variant: 'primary' };
 
 // ## Customize the checked and cancel icons
 

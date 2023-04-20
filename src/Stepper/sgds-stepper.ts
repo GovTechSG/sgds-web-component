@@ -1,12 +1,11 @@
-import { css, html } from "lit";
-import SgdsElement from "../base/sgds-element";
-import { customElement, property, query } from "lit/decorators.js";
-import styles from "./sgds-stepper.scss";
-import { classMap } from "lit/directives/class-map.js";
-import { watch } from "../utils/watch";
+import { html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
+import SgdsElement from '../base/sgds-element';
+import styles from './sgds-stepper.scss';
 
-// TODO: any events emitted? 
-@customElement("sgds-stepper")
+// TODO: any events emitted?
+@customElement('sgds-stepper')
 export class SgdsStepper extends SgdsElement {
   static styles = styles;
 
@@ -14,10 +13,10 @@ export class SgdsStepper extends SgdsElement {
   steps = [
     {
       title: 1,
-      stepHeader: "Marker title 1",
+      stepHeader: 'Marker title 1'
     },
-    { title: 2, stepHeader: "Marker title 2" },
-    { title: 3, stepHeader: "Marker title 3" },
+    { title: 2, stepHeader: 'Marker title 2' },
+    { title: 3, stepHeader: 'Marker title 3' }
   ];
 
   @property({ type: Number })
@@ -30,7 +29,7 @@ export class SgdsStepper extends SgdsElement {
   public incrementStep() {
     if (this.activeStep < this.steps.length - 1) {
       this.activeStep++;
-    }   
+    }
   }
 
   public decrementStep() {
@@ -63,9 +62,9 @@ export class SgdsStepper extends SgdsElement {
           return html`
             <div
               class="stepper-item ${classMap({
-                "is-active": this.activeStep === index,
-                "is-completed": this.activeStep > index,
-                "is-clickable": this.activeStep > index,
+                'is-active': this.activeStep === index,
+                'is-completed': this.activeStep > index,
+                'is-clickable': this.activeStep > index
               })}"
               @click="${() => this._onStepperItemClick(index)}"
             >
@@ -77,13 +76,9 @@ export class SgdsStepper extends SgdsElement {
           `;
         })}
       </div>
-      <slot
-        name="step-${this.activeStep + 1}"
-        ?hidden="${this.activeStep === -1}"
-      ></slot>
+      <slot name="step-${this.activeStep + 1}" ?hidden="${this.activeStep === -1}"></slot>
     `;
   }
 }
 
 export default SgdsStepper;
-

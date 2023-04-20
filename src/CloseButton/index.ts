@@ -1,1 +1,1 @@
-export { SgdsCloseButton } from "./sgds-closebutton";
+export { SgdsCloseButton } from './sgds-closebutton';

@@ -1,4 +1,3 @@
-
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../utils/animate';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query } from 'lit/decorators.js';
@@ -6,31 +5,30 @@ import { getAnimation, setDefaultAnimation } from '../utils/animation-registry';
 import { html } from 'lit';
 import { waitForEvent } from '../utils/event';
 import { watch } from '../utils/watch';
-import SgdsElement from "../base/sgds-element";
-import styles from "./sgds-accordion-item.scss";
+import SgdsElement from '../base/sgds-element';
+import styles from './sgds-accordion-item.scss';
 
 /**
  * @dependency test-dependency
  * @slot default - content of the accordion item
- * 
+ *
  * @event sgds-show - Emitted on show.
  * @event sgds-after-show - Emitted on show after animation has completed.
  * @event sgds-hide - Emitted on hide.
  * @event sgds-after-hide - Emitted on hide after animation has completed.
- * 
+ *
  * @csspart base - The accordion-item base wrapper
  * @csspart header - The accordion-item button header
  * @csspart content - The accordion-item content
  */
 @customElement('sgds-accordion-item')
 export class SgdsAccordionItem extends SgdsElement {
-
   static styles = styles;
   /** @internal */
   @query('.accordion-item') accordion: HTMLElement;
-    /** @internal */
+  /** @internal */
   @query('.accordion-button') header: HTMLElement;
-    /** @internal */
+  /** @internal */
   @query('.accordion-body') body: HTMLElement;
 
   /** Controls whether accordion-item is open or close */
@@ -39,7 +37,7 @@ export class SgdsAccordionItem extends SgdsElement {
   @property() summary: string;
   /** Disables the accordion-item. When true, accordion-item cannot open */
   @property({ type: Boolean, reflect: true }) disabled = false;
- /** Optional for accordion item. Can be used to insert any utility classes such as `me-auto` */
+  /** Optional for accordion item. Can be used to insert any utility classes such as `me-auto` */
   @property({ reflect: true }) accordionItemClasses?: string;
 
   firstUpdated() {
@@ -143,18 +141,18 @@ export class SgdsAccordionItem extends SgdsElement {
       <div
         part="base"
         class=${classMap({
-			      sgds: true,
-          	'accordion-item': true,
-          	'accordion--open': this.open,
-          	'accordion--disabled': this.disabled,
-            [`${this.accordionItemClasses}`]: this.accordionItemClasses,
+          sgds: true,
+          'accordion-item': true,
+          'accordion--open': this.open,
+          'accordion--disabled': this.disabled,
+          [`${this.accordionItemClasses}`]: this.accordionItemClasses
         })}
       >
         <button
           part="header"
           class=${classMap({
-            "accordion-button": true,
-            'collapsed' : !this.open
+            'accordion-button': true,
+            collapsed: !this.open
           })}
           id="header"
           role="button"

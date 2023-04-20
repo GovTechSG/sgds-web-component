@@ -9,7 +9,7 @@ export function animateTo(el: HTMLElement, keyframes: Keyframe[], options?: Keyf
 
     const animation = el.animate(keyframes, {
       ...options,
-      duration: prefersReducedMotion() ? 0 : options!.duration
+      duration: prefersReducedMotion() ? 0 : options?.duration
     });
 
     animation.addEventListener('cancel', resolve, { once: true });

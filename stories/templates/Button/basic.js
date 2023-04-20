@@ -1,10 +1,10 @@
-import { html } from "lit-html";
+import { html } from 'lit-html';
 
-export const Template = (args) =>
+export const Template = args =>
   html`
-    <sgds-button 
-      .variant=${args.variant} 
-      .buttonClasses=${args.buttonClasses} 
+    <sgds-button
+      .variant=${args.variant}
+      .buttonClasses=${args.buttonClasses}
       .size=${args.size}
       .active=${args.active}
       .disabled=${args.disabled}
@@ -12,7 +12,7 @@ export const Template = (args) =>
       .target=${args.target}
       .download=${args.download}
     >
-      ${args.variant} 
+      ${args.variant}
     </sgds-button>
   `;
-
+export const args = {};

@@ -1,22 +1,22 @@
 {
-    "workbench.colorCustomizations": {
-        "activityBar.background": "#203220",
-        "titleBar.activeBackground": "#2C452D",
-        "titleBar.activeForeground": "#FAFCFA"
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#203220",
+    "titleBar.activeBackground": "#2C452D",
+    "titleBar.activeForeground": "#FAFCFA"
+  },
+  "todo-tree.highlights.customHighlight": {
+    "TODO": {
+      "icon": "check",
+      "type": "line",
+      "iconColour": "yellow",
+      "foreground": "red",
+      "background": "yellow"
     },
-    "todo-tree.highlights.customHighlight": {
-        "TODO": {
-            "icon": "check",
-            "type": "line",
-            "iconColour": "yellow",
-            "foreground": "red",
-            "background": "yellow"
-        },
-        "FIXME": {
-            "icon": "beaker",
-            "iconColour": "red",
-            "foreground": "white",
-            "background": "red"
-        }
+    "FIXME": {
+      "icon": "beaker",
+      "iconColour": "red",
+      "foreground": "white",
+      "background": "red"
     }
+  }
 }

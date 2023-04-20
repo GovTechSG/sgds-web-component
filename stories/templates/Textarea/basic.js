@@ -1,10 +1,9 @@
-import { html } from "lit-html";
+import { html } from 'lit-html';
 
-
-export const Template = (args) =>
+export const Template = args =>
   html`
-    <sgds-textarea 
-      .label=${args.label} 
+    <sgds-textarea
+      .label=${args.label}
       .name=${args.name}
       .id=${args.textareaId}
       .textareaClasses=${args.textareaClasses}
@@ -25,8 +24,4 @@ export const Template = (args) =>
     </sgds-textarea>
   `;
 
- export const args={ name: "textarea" }
-
-
-
-
+export const args = { name: 'textarea' };

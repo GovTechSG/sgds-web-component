@@ -1,23 +1,22 @@
-
-import { customElement, property,query, state } from "lit/decorators.js";
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import {classMap} from 'lit/directives/class-map.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { live } from 'lit/directives/live.js';
-import styles from "./sgds-input.scss";
-import SgdsElement from "../base/sgds-element";
-import { defaultValue } from "../utils/defaultvalue";
-import { FormSubmitController } from "../utils/form";
-import genId from "../utils/generateId";
-import { watch } from "../utils/watch";
-@customElement("sgds-input")
+import styles from './sgds-input.scss';
+import SgdsElement from '../base/sgds-element';
+import { defaultValue } from '../utils/defaultvalue';
+import { FormSubmitController } from '../utils/form';
+import genId from '../utils/generateId';
+import { watch } from '../utils/watch';
+@customElement('sgds-input')
 export class SgdsInput extends SgdsElement {
   @query('input.form-control') input: HTMLInputElement;
 
   @state() private hasFocus = false;
 
   private readonly formSubmitController = new FormSubmitController(this);
-  
+
   static styles = styles;
   @property({ reflect: true }) type:
     | 'date'
@@ -30,22 +29,22 @@ export class SgdsInput extends SgdsElement {
     | 'text'
     | 'time'
     | 'url' = 'text';
-  @property({  reflect: true }) label : string;
-  @property({  reflect: true}) hintText : string;
-  @property({ type:String, reflect: true }) inputId = genId("input", this.type);
-  @property({  reflect: true }) name : string;
-  @property({  reflect: true }) inputClasses : string;
-  @property({  reflect: true }) iconName: string;
+  @property({ reflect: true }) label: string;
+  @property({ reflect: true }) hintText: string;
+  @property({ type: String, reflect: true }) inputId = genId('input', this.type);
+  @property({ reflect: true }) name: string;
+  @property({ reflect: true }) inputClasses: string;
+  @property({ reflect: true }) iconName: string;
 
   @property({ type: String, reflect: true }) value = '';
-  @property({ type: String, reflect: true}) minlength;
-  @property({ type: String, reflect: true}) maxlength;
+  @property({ type: String, reflect: true }) minlength;
+  @property({ type: String, reflect: true }) maxlength;
 
-  @property({ type: String, reflect: true }) placeholder = "Placeholder";
-  
+  @property({ type: String, reflect: true }) placeholder = 'Placeholder';
+
   @property({ type: String }) pattern;
-  @property({ type: String, reflect: true }) invalidFeedback = "default feedback";
-  
+  @property({ type: String, reflect: true }) invalidFeedback = 'default feedback';
+
   @property({ type: Boolean, reflect: true }) autofocus = false;
   @property({ type: Boolean, reflect: true }) disabled = false;
   @property({ type: Boolean, reflect: true }) required = false;
@@ -73,7 +72,7 @@ export class SgdsInput extends SgdsElement {
     this.invalid = true;
   }
 
-  handleChange(event: string){
+  handleChange(event: string) {
     this.value = this.input.value;
     this.emit(event);
   }
@@ -112,20 +111,19 @@ export class SgdsInput extends SgdsElement {
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
     this.invalid = !this.input.checkValidity();
-    this.valid = this.input.checkValidity()
+    this.valid = this.input.checkValidity();
   }
 
   render() {
     const input = html`
-      <input type="text"
+      <input
         class="form-control 
-        ${classMap(
-          { 
-            'is-invalid' : this.invalid,
-            'is-valid' : this.valid,
-            [`${this.inputClasses}`]: this.inputClasses
-          })}
-        " 
+        ${classMap({
+          'is-invalid': this.invalid,
+          'is-valid': this.valid,
+          [`${this.inputClasses}`]: this.inputClasses
+        })}
+        "
         type=${this.type}
         id=${this.inputId}
         name=${ifDefined(this.name)}
@@ -139,15 +137,15 @@ export class SgdsInput extends SgdsElement {
         .value=${live(this.value)}
         minlength=${ifDefined(this.minlength)}
         maxlength=${ifDefined(this.maxlength)}
-        @input=${()=> this.handleChange('sgds-input')}
-        @change=${()=> this.handleChange('sgds-change')}
+        @input=${() => this.handleChange('sgds-input')}
+        @change=${() => this.handleChange('sgds-change')}
         @keydown=${this.handleKeyDown}
         @invalid=${this.handleInvalid}
         @focus=${this.handleFocus}
         @blur=${this.handleBlur}
-      >
+      />
       <div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
-    `
+    `;
     // if iconName is defined
     const inputWithIcon = html`
       <div class="sgds form-control-group ${this.inputClasses}">
@@ -156,21 +154,18 @@ export class SgdsInput extends SgdsElement {
         </span>
         ${input}
       </div>
-    `
+    `;
     // if hintText is defined
     const withHintText = html`
-    <small id="${ifDefined(this.inputId)}Help" class="text-muted form-text">${this.hintText}</small>
-    `
+      <small id="${ifDefined(this.inputId)}Help" class="text-muted form-text">${this.hintText}</small>
+    `;
 
     // if label is defined
-    const withLabel = html`
-    <label for=${ifDefined(this.inputId)} class="form-label">${this.label}</label>
-    `
+    const withLabel = html` <label for=${ifDefined(this.inputId)} class="form-label">${this.label}</label> `;
 
     return html`
-        ${this.label ? withLabel : undefined }
-        ${this.hintText ? withHintText : undefined }
-        ${this.iconName ? inputWithIcon : input}
+      ${this.label ? withLabel : undefined} ${this.hintText ? withHintText : undefined}
+      ${this.iconName ? inputWithIcon : input}
     `;
   }
 }

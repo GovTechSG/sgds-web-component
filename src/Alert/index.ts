@@ -1,1 +1,1 @@
-export { SgdsAlert } from "./sgds-alert";
+export { SgdsAlert } from './sgds-alert';

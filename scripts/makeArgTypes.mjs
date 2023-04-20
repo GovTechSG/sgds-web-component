@@ -1,6 +1,8 @@
 export const makeArgTypes = componentProps =>
   componentProps.reduce((obj, item) => {
     let controlObject = {};
+    controlObject.defaultValue = item.default
+    console.log(item.default?.replace(/\"/g, ""))
     switch (true) {
       case /string/.test(item.type?.text):
         controlObject.control = 'text';

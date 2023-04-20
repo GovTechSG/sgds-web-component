@@ -61,5 +61,5 @@ import { expect } from '@open-wc/testing';
 ]
  */
 describe('MethodsTable', () => {
- it('a component returning ')
-})
+  it('a component returning ');
+});

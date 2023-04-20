@@ -1,17 +1,24 @@
 import { SgdsTextArea } from '../src/Textarea/sgds-textarea';
 import '../src/Textarea';
-import {SgdsButton} from '../src/Button/sgds-button';
+import { SgdsButton } from '../src/Button/sgds-button';
 import '../src/Button';
 import { assert, fixture, html, expect, waitUntil, oneEvent } from '@open-wc/testing';
 import sinon from 'sinon';
 
 describe('sgds-textarea', () => {
   it('is defined', () => {
-      const el = document.createElement('sgds-textarea');
-      assert.instanceOf(el, SgdsTextArea)
-  })
+    const el = document.createElement('sgds-textarea');
+    assert.instanceOf(el, SgdsTextArea);
+  });
   it('renders with default values', async () => {
-    const el = await fixture(html`<sgds-textarea textareaId="test" required invalidFeedback="Do not leave blank" maxlength="10"></sgds-textarea>`);
+    const el = await fixture(
+      html`<sgds-textarea
+        textareaId="test"
+        required
+        invalidFeedback="Do not leave blank"
+        maxlength="10"
+      ></sgds-textarea>`
+    );
     assert.shadowDom.equal(
       el,
       `
@@ -23,19 +30,18 @@ describe('sgds-textarea', () => {
       <div class="invalid-feedback" id="test-invalid">Do not leave blank</div>
     `
     );
-  })
-
+  });
 
   it('should be disabled with the disabled attribute', async () => {
     const el = await fixture<SgdsTextArea>(html` <sgds-textarea disabled></sgds-textarea> `);
-    const textarea = el.shadowRoot!.querySelector<HTMLTextAreaElement>('textarea')!;
+    const textarea = el.shadowRoot?.querySelector<HTMLTextAreaElement>('textarea');
 
-    expect(textarea.disabled).to.be.true;
+    expect(textarea?.disabled).to.be.true;
   });
 
   it('should focus the textarea when clicking on the label', async () => {
     const el = await fixture<SgdsTextArea>(html` <sgds-textarea label="Name"></sgds-textarea> `);
-    const label = el.shadowRoot!.querySelector('.form-label')!;
+    const label = el.shadowRoot?.querySelector('.form-label');
     const submitHandler = sinon.spy();
 
     el.addEventListener('sgds-focus', submitHandler);
@@ -44,7 +50,6 @@ describe('sgds-textarea', () => {
 
     expect(submitHandler).to.have.been.calledOnce;
   });
-
 });
 
 describe('when using constraint validation', () => {
@@ -84,43 +89,40 @@ describe('when resetting a form', () => {
         <sgds-button type="reset">Reset</sgds-button>
       </form>
     `);
-    const button = form.querySelector<SgdsButton>('sgds-button')!;
-    const textarea = form.querySelector<SgdsTextArea>('sgds-textarea')!;
-    textarea.value = '1234';
+    const button = form.querySelector<SgdsButton>('sgds-button');
+    const textarea = form.querySelector<SgdsTextArea>('sgds-textarea');
+    if (textarea) textarea.value = '1234'
 
-    await textarea.updateComplete;
+    await textarea?.updateComplete;
 
-    setTimeout(() => button.click());
+    setTimeout(() => button?.click());
     await oneEvent(form, 'reset');
-    await textarea.updateComplete;
+    await textarea?.updateComplete;
 
-    expect(textarea.value).to.equal('test');
+    expect(textarea?.value).to.equal('test');
 
-    textarea.defaultValue = '';
+    if (textarea) textarea.defaultValue = ''
 
-    setTimeout(() => button.click());
+    setTimeout(() => button?.click());
     await oneEvent(form, 'reset');
-    await textarea.updateComplete;
+    await textarea?.updateComplete;
 
-    expect(textarea.value).to.equal('');
+    expect(textarea?.value).to.equal('');
   });
 });
 
 describe('when maxlength is declared', () => {
   it('form text should exist', async () => {
-    const el = await fixture<SgdsTextArea>(html` 
-      <sgds-textarea required maxlength="250"></sgds-textarea>
-    `);
+    const el = await fixture<SgdsTextArea>(html` <sgds-textarea required maxlength="250"></sgds-textarea> `);
     const formtext = el.shadowRoot?.querySelector('.form-text');
 
     expect(formtext).to.exist;
-    expect(formtext?.textContent).to.contain('0/250')
+    expect(formtext?.textContent).to.contain('0/250');
 
-    el.setAttribute('maxlength', '300')
+    el.setAttribute('maxlength', '300');
     await el.updateComplete;
 
     expect(formtext).to.exist;
-    expect(formtext?.textContent).to.contain('0/300')
-
+    expect(formtext?.textContent).to.contain('0/300');
   });
 });

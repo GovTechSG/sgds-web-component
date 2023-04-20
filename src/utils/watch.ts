@@ -12,7 +12,7 @@
 //    ...
 //  }
 
-import type { LitElement } from "lit";
+import type { LitElement } from 'lit';
 
 type UpdateHandler = (prev?: unknown, next?: unknown) => void;
 
@@ -32,7 +32,7 @@ interface WatchOptions {
 export function watch(propName: string, options?: WatchOptions) {
   const resolvedOptions: Required<WatchOptions> = {
     waitUntilFirstUpdate: false,
-    ...options,
+    ...options
   };
   return <ElemClass extends LitElement>(
     proto: ElemClass,

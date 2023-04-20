@@ -1,10 +1,7 @@
-import { html } from "lit-html";
-
+import { html } from 'lit-html';
 
 export const Template = ({ steps, activeStep, namedSlot }) => {
-  return html`
-    <sgds-stepper .steps=${steps} .activeStep=${activeStep}> </sgds-stepper>
-  `;
+  return html` <sgds-stepper .steps=${steps} .activeStep=${activeStep}> </sgds-stepper> `;
 };
 
 export const TemplateExample = ({ steps, activeStep, namedSlot }) => {
@@ -14,16 +11,8 @@ export const TemplateExample = ({ steps, activeStep, namedSlot }) => {
         <div class="row">
           <div class="col mb-2">
             <form>
-              <sgds-input
-                label="First Name"
-                hintText="Enter first name"
-                required
-              ></sgds-input>
-              <sgds-input
-                label="Last Name"
-                hintText="Enter last name"
-                required
-              ></sgds-input>
+              <sgds-input label="First Name" hintText="Enter first name" required></sgds-input>
+              <sgds-input label="Last Name" hintText="Enter last name" required></sgds-input>
               <sgds-radio-group required>
                 <sgds-radio value="1" isInline>Option 1</sgds-radio>
                 <sgds-radio value="2" isInline>Option 2</sgds-radio>
@@ -36,16 +25,8 @@ export const TemplateExample = ({ steps, activeStep, namedSlot }) => {
         <div class="row">
           <div class="col mb-2">
             <form>
-              <sgds-input
-                label="Email"
-                hintText="Enter email"
-                required
-              ></sgds-input>
-              <sgds-input
-                label="Address"
-                hintText="eg. Blk 243 Sengkang Avenue #02-11"
-                required
-              ></sgds-input>
+              <sgds-input label="Email" hintText="Enter email" required></sgds-input>
+              <sgds-input label="Address" hintText="eg. Blk 243 Sengkang Avenue #02-11" required></sgds-input>
             </form>
           </div>
         </div>
@@ -63,37 +44,18 @@ export const TemplateExample = ({ steps, activeStep, namedSlot }) => {
     </sgds-stepper>
     <div class="d-flex justify-content-between">
       <div>
-        <sgds-button
-          class="me-3"
-          refId="myStepper"
-          methodType="increment"
-          variant="primary"
-          @click="${incrementStep}"
+        <sgds-button class="me-3" refId="myStepper" methodType="increment" variant="primary" @click="${incrementStep}"
           >Next</sgds-button
         >
-        <sgds-button
-          refId="myStepper"
-          methodType="decrement"
-          @click="${decrementStep}"
-          variant="secondary"
+        <sgds-button refId="myStepper" methodType="decrement" @click="${decrementStep}" variant="secondary"
           >Back</sgds-button
         >
       </div>
       <div>
-        <sgds-button
-          class="m-2"
-          refId="myStepper"
-          methodType="first"
-          variant="danger"
-          @click="${firstStep}"
+        <sgds-button class="m-2" refId="myStepper" methodType="first" variant="danger" @click="${firstStep}"
           >Go to first page</sgds-button
         >
-        <sgds-button
-          class="m-2"
-          refId="myStepper"
-          methodType="last"
-          variant="warning"
-          @click="${lastStep}"
+        <sgds-button class="m-2" refId="myStepper" methodType="last" variant="warning" @click="${lastStep}"
           >Go to last page</sgds-button
         >
       </div>
@@ -102,38 +64,38 @@ export const TemplateExample = ({ steps, activeStep, namedSlot }) => {
 };
 
 export const incrementStep = () => {
-  const stepper = document.querySelector('#myStepper')
-  stepper.incrementStep()
-} 
+  const stepper = document.querySelector('#myStepper');
+  stepper.incrementStep();
+};
 export const decrementStep = () => {
-  const stepper = document.querySelector('#myStepper')
-  stepper.decrementStep()
-}
+  const stepper = document.querySelector('#myStepper');
+  stepper.decrementStep();
+};
 export const lastStep = () => {
-  const stepper = document.querySelector('#myStepper')
-  stepper.lastStep()
-}
+  const stepper = document.querySelector('#myStepper');
+  stepper.lastStep();
+};
 export const firstStep = () => {
-  const stepper = document.querySelector('#myStepper')
-  stepper.firstStep()
-}
+  const stepper = document.querySelector('#myStepper');
+  stepper.firstStep();
+};
 
 export const args = {
-    steps: [
-      {
-        title: "1",
-        stepHeader: "Marker 1",
-      },
-      {
-        title: "2",
-        stepHeader: "Marker 2",
-      },
-      {
-        title: "3",
-        stepHeader: "Marker 3",
-      },
-    ],
-  }
+  steps: [
+    {
+      title: '1',
+      stepHeader: 'Marker 1'
+    },
+    {
+      title: '2',
+      stepHeader: 'Marker 2'
+    },
+    {
+      title: '3',
+      stepHeader: 'Marker 3'
+    }
+  ]
+};
 
 // ## Example
 

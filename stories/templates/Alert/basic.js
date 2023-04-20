@@ -1,6 +1,6 @@
-import { html } from "lit-html";
+import { html } from 'lit-html';
 
-export const Template = (args) =>
+export const Template = args =>
   html`
     <sgds-alert
       .alertClasses=${args.alertClasses}
@@ -9,8 +9,7 @@ export const Template = (args) =>
       .show=${args.show}
       .closeLabel=${args.closeLabel}
       ><sl-icon name="info-circle" class="flex-shrink-0 me-4"></sl-icon>
-      <div>
-        This is an Alert component. You may add the dismissible option.
-      </div></sgds-alert
+      <div>This is an Alert component. You may add the dismissible option.</div></sgds-alert
     >
   `;
+export const args = {};

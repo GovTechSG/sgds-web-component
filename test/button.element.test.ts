@@ -1,14 +1,14 @@
-import  SgdsButton  from '../src/Button/sgds-button'
+import SgdsButton from '../src/Button/sgds-button';
 import '../src/Button/sgds-button';
-import {fixture, assert, expect, aTimeout, waitUntil} from '@open-wc/testing';
-import {html} from 'lit';
-import sinon  from 'sinon';
+import { fixture, assert, expect, waitUntil } from '@open-wc/testing';
+import { html } from 'lit';
+import sinon from 'sinon';
 
 describe('sgds-button', () => {
   it('is defined', () => {
-      const el = document.createElement('sgds-button');
-      assert.instanceOf(el, SgdsButton)
-  })
+    const el = document.createElement('sgds-button');
+    assert.instanceOf(el, SgdsButton);
+  });
   it('renders with default values', async () => {
     const el = await fixture(html`<sgds-button></sgds-button>`);
     assert.shadowDom.equal(
@@ -18,40 +18,40 @@ describe('sgds-button', () => {
       </button>
     `
     );
-  })
+  });
 
   it('should convert from button tag to anchor tag if href is defined', async () => {
     const el = await fixture(html`<sgds-button href="#"></sgds-button>`);
-    const anchorTag = el.shadowRoot?.querySelector("a");
-    expect(anchorTag).to.have.attribute('href','#');
-    expect(anchorTag).to.have.attribute('role','button');
-    expect(anchorTag).not.to.have.attribute('type','button');
-    expect(el.shadowRoot?.querySelector("button")).not.to.exist;
-  })
+    const anchorTag = el.shadowRoot?.querySelector('a');
+    expect(anchorTag).to.have.attribute('href', '#');
+    expect(anchorTag).to.have.attribute('role', 'button');
+    expect(anchorTag).not.to.have.attribute('type', 'button');
+    expect(el.shadowRoot?.querySelector('button')).not.to.exist;
+  });
 
   it('should convert to anchor tag if download and href attributes are defined, button tag', async () => {
     const el = await fixture(html`<sgds-button download="logo.svg" href="folder/subfolder/logo.svg"></sgds-button>`);
-    const anchorTag = el.shadowRoot?.querySelector("a");
-    expect(anchorTag).to.have.attribute('download','logo.svg');
-    expect(el.shadowRoot?.querySelector("button")).not.to.exist;
-  })
+    const anchorTag = el.shadowRoot?.querySelector('a');
+    expect(anchorTag).to.have.attribute('download', 'logo.svg');
+    expect(el.shadowRoot?.querySelector('button')).not.to.exist;
+  });
 
   it('anchor tag should contain rel="noreferrer noopener" attribute if href and target="_blank" attributes are defined', async () => {
     const el = await fixture(html`<sgds-button href="#" target="_blank"></sgds-button>`);
-    const anchorTag = el.shadowRoot?.querySelector("a");
-    expect(anchorTag).to.have.attribute('rel','noreferrer noopener');
-    expect(el.shadowRoot?.querySelector("button")).not.to.exist;
-  })
+    const anchorTag = el.shadowRoot?.querySelector('a');
+    expect(anchorTag).to.have.attribute('rel', 'noreferrer noopener');
+    expect(el.shadowRoot?.querySelector('button')).not.to.exist;
+  });
 
   it('should contain disabled if is an anchor tag and disabled attributes are defined', async () => {
     const el = await fixture(html`<sgds-button href="#" disabled></sgds-button>`);
-    const anchorTag = el.shadowRoot?.querySelector("a");
-    expect(anchorTag).to.have.class("disabled");
-    expect(anchorTag).to.have.attribute('aria-disabled','true');
-    expect(anchorTag).to.have.attribute('tabindex','-1');
-    expect(anchorTag).not.to.have.attribute('disabled','');
-    expect(el.shadowRoot?.querySelector("button")).not.to.exist;
-  })
+    const anchorTag = el.shadowRoot?.querySelector('a');
+    expect(anchorTag).to.have.class('disabled');
+    expect(anchorTag).to.have.attribute('aria-disabled', 'true');
+    expect(anchorTag).to.have.attribute('tabindex', '-1');
+    expect(anchorTag).not.to.have.attribute('disabled', '');
+    expect(el.shadowRoot?.querySelector('button')).not.to.exist;
+  });
 
   it('should emit a click event when calling click()', async () => {
     const el = await fixture<SgdsButton>(html` <sgds-button></sgds-button> `);
@@ -63,10 +63,7 @@ describe('sgds-button', () => {
 
     expect(clickHandler).to.have.been.calledOnce;
   });
-
 });
-
-
 
 describe('when submitting a form', () => {
   it('should submit when the button is inside the form', async () => {
@@ -75,11 +72,11 @@ describe('when submitting a form', () => {
         <sgds-button type="submit"></sgds-button>
       </form>
     `);
-    const button = form.querySelector<SgdsButton>('sgds-button')!;
+    const button = form.querySelector<SgdsButton>('sgds-button');
     const handleSubmit = sinon.spy((event: SubmitEvent) => event.preventDefault());
 
     form.addEventListener('submit', handleSubmit);
-    button.click();
+    button?.click();
     expect(handleSubmit).to.have.been.calledOnce;
   });
 
@@ -90,12 +87,12 @@ describe('when submitting a form', () => {
         <sgds-button type="submit" form="a">Submit</sgds-button>
       </div>
     `);
-    const form = el.querySelector<HTMLFormElement>('form')!;
-    const button = el.querySelector<SgdsButton>('sgds-button')!;
+    const form = el.querySelector<HTMLFormElement>('form');
+    const button = el.querySelector<SgdsButton>('sgds-button');
     const handleSubmit = sinon.spy((event: SubmitEvent) => event.preventDefault());
 
-    form.addEventListener('submit', handleSubmit);
-    button.click();
+    form?.addEventListener('submit', handleSubmit);
+    button?.click();
 
     expect(handleSubmit).to.have.been.calledOnce;
   });
@@ -108,21 +105,23 @@ describe('when submitting a form', () => {
         </sgds-button>
       </form>
     `);
-    const button = form.querySelector<SgdsButton>('sgds-button')!;
+    const button = form.querySelector<SgdsButton>('sgds-button');
+    let submitter: HTMLButtonElement;
     const handleSubmit = sinon.spy((event: SubmitEvent) => {
       submitter = event.submitter as HTMLButtonElement;
       event.preventDefault();
+      expect(submitter.formAction.endsWith('/bar')).to.be.true;
+      expect(submitter.formMethod).to.equal('get');
+      expect(submitter.formTarget).to.equal('_blank');
+      expect(submitter.formNoValidate).to.be.true;
     });
-    let submitter!: HTMLButtonElement;
+   
 
     form.addEventListener('submit', handleSubmit);
-    button.click();
+    button?.click();
 
     expect(handleSubmit).to.have.been.calledOnce;
-    expect(submitter.formAction.endsWith('/bar')).to.be.true;
-    expect(submitter.formMethod).to.equal('get');
-    expect(submitter.formTarget).to.equal('_blank');
-    expect(submitter.formNoValidate).to.be.true;
+   
   });
 
   it('should override form attributes when formaction, formmethod, formnovalidate, and formtarget are used outside a form', async () => {
@@ -134,22 +133,24 @@ describe('when submitting a form', () => {
         </sgds-button>
       </div>
     `);
-    const form = el.querySelector<HTMLFormElement>('form')!;
-    const button = el.querySelector<SgdsButton>('sgds-button')!;
+    const form = el.querySelector<HTMLFormElement>('form');
+    const button = el.querySelector<SgdsButton>('sgds-button');
+
+    let submitter: HTMLButtonElement;
     const handleSubmit = sinon.spy((event: SubmitEvent) => {
       submitter = event.submitter as HTMLButtonElement;
       event.preventDefault();
+      expect(submitter.formAction.endsWith('/bar')).to.be.true;
+      expect(submitter.formMethod).to.equal('get');
+      expect(submitter.formTarget).to.equal('_blank');
+      expect(submitter.formNoValidate).to.be.true;
     });
-    let submitter!: HTMLButtonElement;
 
-    form.addEventListener('submit', handleSubmit);
-    button.click();
+    form?.addEventListener('submit', handleSubmit);
+    button?.click();
 
     expect(handleSubmit).to.have.been.calledOnce;
-    expect(submitter.formAction.endsWith('/bar')).to.be.true;
-    expect(submitter.formMethod).to.equal('get');
-    expect(submitter.formTarget).to.equal('_blank');
-    expect(submitter.formNoValidate).to.be.true;
+   
   });
 });
 

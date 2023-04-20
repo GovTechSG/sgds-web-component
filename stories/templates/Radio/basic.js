@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from 'lit-html';
 
 export const Template = ({
   name,
@@ -12,7 +12,7 @@ export const Template = ({
   ariaLabel,
   required,
   invalid,
-  invalidFeedback,
+  invalidFeedback
 }) => {
   return html`
     <sgds-radio-group
@@ -37,4 +37,4 @@ export const Template = ({
   `;
 };
 
-
+export const args = {};

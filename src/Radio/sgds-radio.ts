@@ -1,15 +1,14 @@
-import { html } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
-import { classMap } from "lit/directives/class-map.js";
-import { watch } from "../utils/watch";
-import styles from "./sgds-radio.scss";
-import SgdsElement from "../base/sgds-element";
-import { ifDefined } from "lit/directives/if-defined.js";
-import { live } from "lit/directives/live.js";
-import genId from "../utils/generateId";
+import { html } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
+import { watch } from '../utils/watch';
+import styles from './sgds-radio.scss';
+import SgdsElement from '../base/sgds-element';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { live } from 'lit/directives/live.js';
+import genId from '../utils/generateId';
 
-
-@customElement("sgds-radio")
+@customElement('sgds-radio')
 export class SgdsRadio extends SgdsElement {
   static styles = styles;
 
@@ -20,7 +19,7 @@ export class SgdsRadio extends SgdsElement {
   @property() value: string;
 
   /** For id/for pair of the HTML form control. */
-  @property({ type: String, reflect: true }) radioId = genId("radio");
+  @property({ type: String, reflect: true }) radioId = genId('radio');
 
   /** Disables the radio. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -29,7 +28,7 @@ export class SgdsRadio extends SgdsElement {
   @property({ type: Boolean, reflect: true }) isInline = false;
 
   /** For aria-label */
-  @property({ type: String, reflect: true }) ariaLabel = "";
+  @property({ type: String, reflect: true }) ariaLabel = '';
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -37,15 +36,15 @@ export class SgdsRadio extends SgdsElement {
     this.addEventListeners();
   }
 
-  @watch("checked")
+  @watch('checked')
   handleCheckedChange() {
-    this.setAttribute("aria-checked", this.checked ? "true" : "false");
-    this.setAttribute("tabindex", this.checked ? "0" : "-1");
+    this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+    this.setAttribute('tabindex', this.checked ? '0' : '-1');
   }
 
-  @watch("disabled", { waitUntilFirstUpdate: true })
+  @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
-    this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
+    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
   }
 
   private handleBlur() {
@@ -71,9 +70,9 @@ export class SgdsRadio extends SgdsElement {
   }
 
   private setInitialAttributes() {
-    this.setAttribute("role", "radio");
-    this.setAttribute("tabindex", "-1");
-    this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
+    this.setAttribute('role', 'radio');
+    this.setAttribute('tabindex', '-1');
+    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
   }
 
   render() {
@@ -81,22 +80,22 @@ export class SgdsRadio extends SgdsElement {
       <div
         part="base"
         class=${classMap({
-          "form-check": true,
-          "form-check-inline": this.isInline,
+          'form-check': true,
+          'form-check-inline': this.isInline
         })}
       >
         <input
           part="control"
           class=${classMap({
-            "form-check-input": true,
+            'form-check-input': true
           })}
           type="radio"
           id=${ifDefined(this.radioId)}
           value=${ifDefined(this.value)}
           .checked=${live(this.checked)}
           ?disabled=${this.disabled}
-          aria-disabled=${this.disabled ? "true" : "false"}
-          aria-checked=${this.checked ? "true" : "false"}
+          aria-disabled=${this.disabled ? 'true' : 'false'}
+          aria-checked=${this.checked ? 'true' : 'false'}
           @click=${this.handleClick}
         />
         <label

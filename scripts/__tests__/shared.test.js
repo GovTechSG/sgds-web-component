@@ -90,7 +90,7 @@ describe('getSgdsComponents()', () => {
     expect(Array.isArray(getSgdsComponents(input))).to.be.true;
   });
   it('should output components starting with sgds-* only', () => {
-    const expected = [{modulePath: 'src/Tooltip/sgds-tooltip.ts'}];
+    const expected = [{ modulePath: 'src/Tooltip/sgds-tooltip.ts' }];
     expect(JSON.stringify(getSgdsComponents(input))).to.equal(JSON.stringify(expected));
   });
 });

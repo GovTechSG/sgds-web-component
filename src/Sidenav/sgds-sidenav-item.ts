@@ -1,12 +1,11 @@
-import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import SgdsElement from "../base/sgds-element";
-import styles from "./sgds-sidenav-item.scss";
-import { ref, createRef, Ref } from "lit/directives/ref.js";
-import { Collapse } from "bootstrap";
-import genId from "../utils/generateId";
-import { classMap } from "lit/directives/class-map.js";
-
+import { html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import SgdsElement from '../base/sgds-element';
+import styles from './sgds-sidenav-item.scss';
+import { ref, createRef, Ref } from 'lit/directives/ref.js';
+import { Collapse } from 'bootstrap';
+import genId from '../utils/generateId';
+import { classMap } from 'lit/directives/class-map.js';
 
 /**
  *
@@ -16,7 +15,7 @@ import { classMap } from "lit/directives/class-map.js";
  * @slot title - title slot for the content of SgdsSidenavItem's button / anchor element.
  */
 
-@customElement("sgds-sidenav-item")
+@customElement('sgds-sidenav-item')
 export class SgdsSidenavItem extends SgdsElement {
   static styles = styles;
 
@@ -30,21 +29,21 @@ export class SgdsSidenavItem extends SgdsElement {
   active = false;
 
   @property({ type: String })
-  href = "";
+  href = '';
 
   @property({ type: String })
-  collapseId = genId("sidenav", "collapse");
+  collapseId = genId('sidenav', 'collapse');
 
   @property({ type: String })
-  buttonId = genId("sidenav", "button");
+  buttonId = genId('sidenav', 'button');
 
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
-  private index = "-1";
+  private index = '-1';
 
   private _onClick() {
-    this.emit("sgds-toggle", { detail: { index: this.index } });
+    this.emit('sgds-toggle', { detail: { index: this.index } });
   }
 
   private _onClickButton() {
@@ -77,19 +76,19 @@ export class SgdsSidenavItem extends SgdsElement {
     // if sidenav has menu, initialise bootstrap collapse
     if (!this.href) {
       this.bsCollapse = new Collapse(this.myCollapse.value, {
-        toggle: this.active,
+        toggle: this.active
       });
 
-      this.myCollapse.value.addEventListener("show.bs.collapse", () => {
+      this.myCollapse.value.addEventListener('show.bs.collapse', () => {
         this.active = true;
       });
-      this.myCollapse.value.addEventListener("shown.bs.collapse", () => {
+      this.myCollapse.value.addEventListener('shown.bs.collapse', () => {
         this.active = true;
       });
-      this.myCollapse.value.addEventListener("hide.bs.collapse", () => {
+      this.myCollapse.value.addEventListener('hide.bs.collapse', () => {
         this.active = false;
       });
-      this.myCollapse.value.addEventListener("hidden.bs.collapse", () => {
+      this.myCollapse.value.addEventListener('hidden.bs.collapse', () => {
         this.active = false;
       });
     }
@@ -100,14 +99,14 @@ export class SgdsSidenavItem extends SgdsElement {
         @click=${() => this._onClickButton()}
         class="collapsed sidenav-btn ${classMap({
           disabled: this.disabled,
-          active: this.active,
+          active: this.active
         })} "
         aria-expanded="${this.active}"
         aria-controls="${this.collapseId}"
         aria-selected="${this.active}"
         id="${this.buttonId}"
         ?disabled=${this.disabled}
-        aria-disabled=${this.disabled ? "true" : "false"}
+        aria-disabled=${this.disabled ? 'true' : 'false'}
       >
         <slot name="icon"></slot>
         <slot name="title"></slot>
@@ -137,19 +136,17 @@ export class SgdsSidenavItem extends SgdsElement {
         @click=${() => this._onClickLink()}
         class="sidenav-btn ${classMap({
           disabled: this.disabled,
-          active: this.active,
+          active: this.active
         })} "
         aria-selected="${this.active}"
         ?disabled=${this.disabled}
-        aria-disabled=${this.disabled ? "true" : "false"}
+        aria-disabled=${this.disabled ? 'true' : 'false'}
       >
         <slot name="title"></slot>
       </a>
     `;
     return html`
-      <li class="sidenav-item" aria-haspopup="${!this.href}">
-        ${this.href ? noMenuTemplate : withMenuTemplate}
-      </li>
+      <li class="sidenav-item" aria-haspopup="${!this.href}">${this.href ? noMenuTemplate : withMenuTemplate}</li>
     `;
   }
 }

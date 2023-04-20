@@ -1,1 +1,1 @@
-export { SgdsToast } from "./sgds-toast";
+export { SgdsToast } from './sgds-toast';

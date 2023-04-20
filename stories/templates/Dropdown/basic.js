@@ -37,10 +37,8 @@ export const Template = ({
   `;
 };
 
-export const storyProps = {
-  args: {
-    togglerText: 'Dropdown',
-    variant: 'secondary',
-    href: '#'
-  }
+export const args = {
+  togglerText: 'Dropdown',
+  variant: 'secondary',
+  href: '#'
 };

@@ -2,9 +2,9 @@ import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { scrollIntoView } from '../utils/scroll';
-import SgdsElement from "../base/sgds-element";
-import { watch } from "../utils/watch";
-import styles from "./sgds-tabgroup.scss";
+import SgdsElement from '../base/sgds-element';
+import { watch } from '../utils/watch';
+import styles from './sgds-tabgroup.scss';
 import { SgdsTabPanel } from './sgds-tabpanel';
 import { SgdsTab } from './sgds-tab';
 
@@ -27,7 +27,7 @@ export class SgdsTabGroup extends SgdsElement {
   /** The placement of the tabs. */
   @property() placement: 'top' | 'bottom' | 'start' | 'end' = 'top';
 
-  @property({reflect: true}) TabVariant: 'basic-toggle' | 'info-toggle';
+  @property({ reflect: true }) TabVariant: 'basic-toggle' | 'info-toggle';
   /**
    * When set to auto, navigating tabs with the arrow keys will instantly show the corresponding tab panel. When set to
    * manual, the tab will receive focus but will not show until the user presses spacebar or enter.
@@ -46,7 +46,7 @@ export class SgdsTabGroup extends SgdsElement {
 
     this.mutationObserver = new MutationObserver(mutations => {
       // Update aria labels when the DOM changes
-      if (mutations.some(m => !['aria-labelledby', 'aria-controls'].includes(m.attributeName!))) {
+      if (mutations.some(m => !['aria-labelledby', 'aria-controls'].includes(m.attributeName))) {
         setTimeout(() => this.setAriaLabels());
       }
 
@@ -89,7 +89,7 @@ export class SgdsTabGroup extends SgdsElement {
   }
 
   getAllTabs(options: { includeDisabled: boolean } = { includeDisabled: true }) {
-    const slot = this.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="nav"]')!;
+    const slot = this.shadowRoot.querySelector<HTMLSlotElement>('slot[name="nav"]');
 
     return [...(slot.assignedElements() as SgdsTab[])].filter(el => {
       return options.includeDisabled
@@ -99,7 +99,9 @@ export class SgdsTabGroup extends SgdsElement {
   }
 
   getAllPanels() {
-    return [...this.body.assignedElements()].filter(el => el.tagName.toLowerCase() === 'sgds-tab-panel') as [SgdsTabPanel];
+    return [...this.body.assignedElements()].filter(el => el.tagName.toLowerCase() === 'sgds-tab-panel') as [
+      SgdsTabPanel
+    ];
   }
 
   getActiveTab() {
@@ -143,7 +145,6 @@ export class SgdsTabGroup extends SgdsElement {
     // Move focus left or right
     if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
       const activeEl = this.tabs.find(t => t.matches(':focus'));
-      
 
       if (activeEl?.tagName.toLowerCase() === 'sgds-tab') {
         let index = this.tabs.indexOf(activeEl);
@@ -226,7 +227,6 @@ export class SgdsTabGroup extends SgdsElement {
       this.tabs.map(el => (el.active = el === this.activeTab));
       this.panels.map(el => (el.active = el.name === this.activeTab?.panel));
 
-
       if (['top', 'bottom'].includes(this.placement)) {
         scrollIntoView(this.activeTab, this.nav, 'horizontal', options.scrollBehavior);
       }
@@ -247,8 +247,8 @@ export class SgdsTabGroup extends SgdsElement {
     this.tabs.forEach(tab => {
       const panel = this.panels.find(el => el.name === tab.panel);
       if (panel) {
-        tab.setAttribute('aria-controls', panel.getAttribute('id')!);
-        panel.setAttribute('aria-labelledby', tab.getAttribute('id')!);
+        tab.setAttribute('aria-controls', panel.getAttribute('id'));
+        panel.setAttribute('aria-labelledby', tab.getAttribute('id'));
       }
     });
   }
@@ -277,7 +277,7 @@ export class SgdsTabGroup extends SgdsElement {
           'tab-group--start': this.placement === 'start',
           'tab-group--end': this.placement === 'end',
           'tab-group--basic-toggle': this.TabVariant === 'basic-toggle',
-          'tab-group--info-toggle': this.TabVariant === 'info-toggle',
+          'tab-group--info-toggle': this.TabVariant === 'info-toggle'
         })}
         @click=${this.handleClick}
         @keydown=${this.handleKeyDown}

@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from 'lit-html';
 
 export const Template = ({
   alwaysOpen,
@@ -9,7 +9,7 @@ export const Template = ({
   collapseId,
   buttonId,
   disabledSNL,
-  disabledSNI,
+  disabledSNI
 }) => {
   return html`
     <sgds-sidenav .alwaysOpen=${alwaysOpen}>
@@ -20,23 +20,15 @@ export const Template = ({
         .buttonId=${buttonId}
         .disabled=${disabledSNI}
       >
-        <span slot="title">
-          <sl-icon name="stack"></sl-icon> SideNav Item #1 (control by
-          Argstable)
-        </span>
-        <sgds-sidenav-link
-          .href=${hrefSNL}
-          .active=${activeSNL}
-          .disabled=${disabledSNL}
+        <span slot="title"> <sl-icon name="stack"></sl-icon> SideNav Item #1 (control by Argstable) </span>
+        <sgds-sidenav-link .href=${hrefSNL} .active=${activeSNL} .disabled=${disabledSNL}
           >sgds-sidenav-link (control by Argstable)</sgds-sidenav-link
         >
         <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
         <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
       </sgds-sidenav-item>
       <sgds-sidenav-item>
-        <span slot="title">
-          <sl-icon name="stack"></sl-icon>SideNav Item #2</span
-        >
+        <span slot="title"> <sl-icon name="stack"></sl-icon>SideNav Item #2</span>
         <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
         <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
         <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
@@ -48,4 +40,4 @@ export const Template = ({
   `;
 };
 
-
+export const args = {};

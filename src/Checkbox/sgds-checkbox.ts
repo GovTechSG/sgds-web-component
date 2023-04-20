@@ -1,37 +1,35 @@
-import { LitElement, html } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
-import { live } from "lit/directives/live.js";
-import styles from "./sgds-checkbox.scss";
-import { ifDefined } from "lit/directives/if-defined.js";
-import SgdsElement from "../base/sgds-element";
-import { classMap } from "lit/directives/class-map.js";
-import genId from "../utils/generateId";
-import { defaultValue } from "../utils/defaultvalue";
-import { FormSubmitController } from "../utils/form";
-import { watch } from "../utils/watch";
+import { html } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { live } from 'lit/directives/live.js';
+import SgdsElement from '../base/sgds-element';
+import { defaultValue } from '../utils/defaultvalue';
+import { FormSubmitController } from '../utils/form';
+import genId from '../utils/generateId';
+import { watch } from '../utils/watch';
+import styles from './sgds-checkbox.scss';
 
-@customElement("sgds-checkbox")
+@customElement('sgds-checkbox')
 export class SgdsCheckbox extends SgdsElement {
   static styles = styles;
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
 
   private readonly formSubmitController = new FormSubmitController(this, {
-    value: (control: SgdsCheckbox) =>
-      control.checked ? control.value : undefined,
+    value: (control: SgdsCheckbox) => (control.checked ? control.value : undefined),
     defaultValue: (control: SgdsCheckbox) => control.defaultChecked,
-    setValue: (control: SgdsCheckbox, checked: boolean) =>
-      (control.checked = checked),
+    setValue: (control: SgdsCheckbox, checked: boolean) => (control.checked = checked)
   });
 
   /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
-  @property({reflect: true }) name: string;
+  @property({ reflect: true }) name: string;
 
   /** For Id/For pair of the HTML form control. */
-  @property({ type: String, reflect: true }) checkboxId = genId("checkbox");
+  @property({ type: String, reflect: true }) checkboxId = genId('checkbox');
 
   /** For aria-label when there is no appropriate text label visible */
-  @property({ type: String, reflect: true }) ariaLabel = "checkbox";
+  @property({ type: String, reflect: true }) ariaLabel = 'checkbox';
 
   /** Manually style the input as valid */
   @property({ type: Boolean, reflect: true }) valid = false;
@@ -52,9 +50,8 @@ export class SgdsCheckbox extends SgdsElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
-  @defaultValue("checked")
+  @defaultValue('checked')
   defaultChecked = false;
-
 
   /** Simulates a click on the checkbox. */
   click() {
@@ -75,13 +72,12 @@ export class SgdsCheckbox extends SgdsElement {
     // );
     this.checked = !this.checked;
     this.value = this.input.value;
-    this.emit("sgds-change");
+    this.emit('sgds-change');
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    const hasModifier =
-      event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
-    if (event.key === "Enter" && !hasModifier) {
+    const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+    if (event.key === 'Enter' && !hasModifier) {
       // console.log(
       //   "so here we are trying to mimick keydown enter event like a mousclick event"
       // );
@@ -89,14 +85,14 @@ export class SgdsCheckbox extends SgdsElement {
     }
   }
 
-  @watch("disabled", { waitUntilFirstUpdate: true })
+  @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
     this.input.disabled = this.disabled;
     this.invalid = !this.input.checkValidity();
   }
 
-  @watch("checked", { waitUntilFirstUpdate: true })
+  @watch('checked', { waitUntilFirstUpdate: true })
   handleStateChange() {
     this.invalid = !this.input.checkValidity();
     if (this.required) this.valid = this.input.checkValidity();
@@ -108,20 +104,20 @@ export class SgdsCheckbox extends SgdsElement {
         <input
           part="control"
           class=${classMap({
-            "form-check-input": true,
-            "is-invalid": this.invalid,
-            "is-valid": this.valid,
+            'form-check-input': true,
+            'is-invalid': this.invalid,
+            'is-valid': this.valid
           })}
           type="checkbox"
           id=${ifDefined(this.checkboxId)}
-          aria-invalid=${this.invalid ? "true" : "false"}
+          aria-invalid=${this.invalid ? 'true' : 'false'}
           name=${ifDefined(this.name)}
           value=${ifDefined(this.value)}
           .checked=${live(this.checked)}
           ?disabled=${this.disabled}
           ?required=${this.required}
-          aria-disabled=${this.disabled ? "true" : "false"}
-          aria-checked=${this.checked ? "true" : "false"}
+          aria-disabled=${this.disabled ? 'true' : 'false'}
+          aria-checked=${this.checked ? 'true' : 'false'}
           @change=${this.handleChange}
           @keydown=${this.handleKeyDown}
         />
@@ -137,7 +133,7 @@ export class SgdsCheckbox extends SgdsElement {
               name="feedback"
               part="feedback"
               class=${classMap({
-                "invalid-feedback": true,
+                'invalid-feedback': true
               })}
             ></slot>`
           : undefined}

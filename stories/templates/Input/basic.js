@@ -1,16 +1,16 @@
-import { html } from "lit-html";
+import { html } from 'lit-html';
 
-export const Template = (args) =>
+export const Template = args =>
   html`
-    <sgds-input 
-      .type=${args.type} 
-      .label=${args.label} 
-      .hintText=${args.hintText} 
+    <sgds-input
+      .type=${args.type}
+      .label=${args.label}
+      .hintText=${args.hintText}
       .name=${args.name}
       .id=${args.inputID}
       .inputClasses=${args.inputClasses}
       .value=${args.value}
-      .pattern=${args.pattern} 
+      .pattern=${args.pattern}
       .invalidFeedback=${args.invalidFeedback}
       .iconName=${args.iconName}
       .placeholder=${args.placeholder}
@@ -24,5 +24,4 @@ export const Template = (args) =>
     </sgds-input>
   `;
 
-export const storyProps ={args: { type: "text" }}
- 
+export const args = { type: 'text' };

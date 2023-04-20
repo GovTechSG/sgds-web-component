@@ -6,14 +6,13 @@ import { animateTo, stopAnimations } from '../utils/animate';
 import { waitForEvent } from '../utils/event';
 import Modal from '../utils/modal';
 import { lockBodyScrolling, unlockBodyScrolling } from '../utils/scroll';
-import SgdsElement from "../base/sgds-element";
+import SgdsElement from '../base/sgds-element';
 import { HasSlotController } from '../utils/slot';
 import { watch } from '../utils/watch';
 import { getAnimation, setDefaultAnimation } from '../utils/animation-registry';
-import styles from "./sgds-modal.scss";
+import styles from './sgds-modal.scss';
 @customElement('sgds-modal')
 export class SgdsModal extends SgdsElement {
-
   static styles = styles;
 
   @query('.modal') dialog: HTMLElement;
@@ -195,9 +194,8 @@ export class SgdsModal extends SgdsElement {
   }
 
   render() {
-     // if label is defined
-     const withLabelIcon = html`
-     <sl-icon name=${this.titleIcon} class="pe-2 flex-shrink-0"></sl-icon>`
+    // if label is defined
+    const withLabelIcon = html` <sl-icon name=${this.titleIcon} class="pe-2 flex-shrink-0"></sl-icon>`;
 
     return html`
       <div
@@ -222,34 +220,35 @@ export class SgdsModal extends SgdsElement {
         >
           ${!this.noHeader
             ? html`
-                <h3 part="header" 
+                <h3
+                  part="header"
                   class=${classMap({
-                    'modal-header' : true,
+                    'modal-header': true
                     // centered: this.centeredAlignVariant,
                   })}
                 >
-                  <div 
-                    part="title" 
+                  <div
+                    part="title"
                     class=${classMap({
-                      'modal-title d-flex align-items-center': true,
+                      'modal-title d-flex align-items-center': true
                       // centered : this.centeredAlignVariant,
                     })}
                     id="title"
                   >
-                      ${this.titleIcon ? withLabelIcon : null}
-                      ${this.title.length > 0 ? this.title : String.fromCharCode(65279)}
-                    
+                    ${this.titleIcon ? withLabelIcon : null}
+                    ${this.title.length > 0 ? this.title : String.fromCharCode(65279)}
                   </div>
                   <sgds-button
                     part="close-button"
                     variant="icon"
                     exportparts="base:close-button__base"
                     class=${classMap({
-                      'modal-close': true,
+                      'modal-close': true
                       // 'centered': this.centeredAlignVariant,
                     })}
                     @click="${() => this.requestClose('close-button')}"
-                  ><sl-icon name="x-lg"></sl-icon></sgds-button>
+                    ><sl-icon name="x-lg"></sl-icon
+                  ></sgds-button>
                 </h3>
               `
             : ''}
@@ -258,10 +257,10 @@ export class SgdsModal extends SgdsElement {
             <slot></slot>
           </div>
 
-          <footer 
-            part="footer" 
+          <footer
+            part="footer"
             class=${classMap({
-              'modal-footer': true,
+              'modal-footer': true
               // centered: this.centeredAlignVariant,
             })}
           >

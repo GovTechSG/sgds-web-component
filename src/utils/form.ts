@@ -75,7 +75,7 @@ export class FormSubmitController implements ReactiveController {
 
       // Remove the overload and restore the original method
       if (reportValidityOverloads.has(this.form)) {
-        this.form.reportValidity = reportValidityOverloads.get(this.form)!;
+        this.form.reportValidity = reportValidityOverloads.get(this.form);
         reportValidityOverloads.delete(this.form);
       }
 
@@ -158,7 +158,7 @@ export class FormSubmitController implements ReactiveController {
       if (invoker) {
         ['formaction', 'formmethod', 'formnovalidate', 'formtarget'].forEach(attr => {
           if (invoker.hasAttribute(attr)) {
-            button.setAttribute(attr, invoker.getAttribute(attr)!);
+            button.setAttribute(attr, invoker.getAttribute(attr));
           }
         });
       }

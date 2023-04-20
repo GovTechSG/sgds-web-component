@@ -1,16 +1,16 @@
-import { customElement, property,query, state } from "lit/decorators.js";
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import {classMap} from 'lit/directives/class-map.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { live } from 'lit/directives/live.js';
-import styles from "./sgds-textarea.scss";
-import SgdsElement from "../base/sgds-element";
-import { defaultValue } from "../utils/defaultvalue";
-import { FormSubmitController } from "../utils/form";
-import genId from "../utils/generateId";
-import { watch } from "../utils/watch";
+import styles from './sgds-textarea.scss';
+import SgdsElement from '../base/sgds-element';
+import { defaultValue } from '../utils/defaultvalue';
+import { FormSubmitController } from '../utils/form';
+import genId from '../utils/generateId';
+import { watch } from '../utils/watch';
 
-@customElement("sgds-textarea")
+@customElement('sgds-textarea')
 export class SgdsTextArea extends SgdsElement {
   static styles = styles;
 
@@ -19,20 +19,19 @@ export class SgdsTextArea extends SgdsElement {
 
   private readonly formSubmitController = new FormSubmitController(this);
   private resizeObserver: ResizeObserver;
-  
-  
-  @property({ type: String, reflect: true }) label = "label";
-  @property({ type: String, reflect: true }) textareaId = genId("textarea","input");
+
+  @property({ type: String, reflect: true }) label = 'label';
+  @property({ type: String, reflect: true }) textareaId = genId('textarea', 'input');
   @property({ type: String, reflect: true }) name;
   @property({ type: String, reflect: true }) textareaClasses?;
   @property({ type: String, reflect: true }) value = '';
-  @property({ type: String, reflect: true}) minlength;
-  @property({ type: String, reflect: true}) maxlength;
-  @property({ type: Boolean, reflect: true}) spellcheck = false;
-   /** The number of rows to display by default. */
+  @property({ type: String, reflect: true }) minlength;
+  @property({ type: String, reflect: true }) maxlength;
+  @property({ type: Boolean, reflect: true }) spellcheck = false;
+  /** The number of rows to display by default. */
   @property({ type: Number }) rows = 4;
-  @property({ type: String, reflect: true }) placeholder = "Placeholder";
-  @property({ type: String, reflect: true }) invalidFeedback = "default feedback";
+  @property({ type: String, reflect: true }) placeholder = 'Placeholder';
+  @property({ type: String, reflect: true }) invalidFeedback = 'default feedback';
   @property({ type: Boolean, reflect: true }) autofocus = false;
   @property({ type: Boolean, reflect: true }) disabled = false;
   @property({ type: Boolean, reflect: true }) required = false;
@@ -79,7 +78,7 @@ export class SgdsTextArea extends SgdsElement {
     this.invalid = true;
   }
 
-  handleChange(event: string){
+  handleChange(event: string) {
     this.value = this.textarea.value;
     this.emit(event);
   }
@@ -94,8 +93,8 @@ export class SgdsTextArea extends SgdsElement {
     this.emit('sgds-blur');
   }
 
-   /** Selects all the text in the textarea. */
-   select() {
+  /** Selects all the text in the textarea. */
+  select() {
     this.textarea.select();
   }
 
@@ -137,65 +136,57 @@ export class SgdsTextArea extends SgdsElement {
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
     this.invalid = !this.textarea.checkValidity();
-    this.valid = this.textarea.checkValidity()
+    this.valid = this.textarea.checkValidity();
     this.updateComplete.then(() => this.setTextareaHeight());
   }
 
   render() {
-
     // if maxlength is defined
-    const wordCount = html`
-    <div class="form-text">${this.value.length}/${this.maxlength}</div>
-    `
+    const wordCount = html` <div class="form-text">${this.value.length}/${this.maxlength}</div> `;
 
     return html`
+      <div class="text-area-label-wrapper d-flex justify-content-between">
+        <label for=${ifDefined(this.textareaId)} class="form-label">${this.label}</label>
+        ${parseInt(this.maxlength) > 0 ? wordCount : undefined}
+      </div>
 
-        <div class="text-area-label-wrapper d-flex justify-content-between">
-          <label for=${ifDefined(this.textareaId)} class="form-label">${this.label}</label>
-          ${parseInt(this.maxlength) > 0 ? wordCount : undefined}
-        </div>
-        
-        <textarea 
-          class="${classMap(
-          { 
-            'form-control': true,
-            'is-invalid' : this.invalid,
-            'is-valid' : this.valid,
-            'textarea-resize-none': this.resize === 'none',
-            'textarea-resize-vertical': this.resize === 'vertical',
-            'textarea-resize-auto': this.resize === 'auto',
-            [`${this.textareaClasses}`]: this.textareaClasses,
-          })}"
-          id=${ifDefined(this.textareaId)}
-          name=${ifDefined(this.name)}
-          rows=${ifDefined(this.rows)}
-          placeholder=${ifDefined(this.placeholder)}
-          minlength=${ifDefined(this.minlength)}
-          maxlength=${ifDefined(this.maxlength)}
-          .value=${live(this.value)}
-          aria-invalid=${this.invalid ? 'true' : 'false'}
-          spellcheck=${ifDefined(this.spellcheck)}
-          ?disabled=${this.disabled}
-          ?readonly=${this.readonly}
-          ?required=${this.required}
-          ?autofocus=${this.autofocus}
-          autocorrect=${ifDefined(this.autocorrect)}
-          inputmode=${ifDefined(this.inputmode)}
-          @keyup=${this.handleValueChange}
-          @input=${()=> this.handleChange('sgds-input')}
-          @change=${()=> this.handleChange('sgds-change')}
-          @invalid=${this.handleInvalid}
-          @focus=${this.handleFocus}
-          @blur=${this.handleBlur}
-        >
-        </textarea>
-        
-        <div id="${this.textareaId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
+      <textarea
+        class="${classMap({
+          'form-control': true,
+          'is-invalid': this.invalid,
+          'is-valid': this.valid,
+          'textarea-resize-none': this.resize === 'none',
+          'textarea-resize-vertical': this.resize === 'vertical',
+          'textarea-resize-auto': this.resize === 'auto',
+          [`${this.textareaClasses}`]: this.textareaClasses
+        })}"
+        id=${ifDefined(this.textareaId)}
+        name=${ifDefined(this.name)}
+        rows=${ifDefined(this.rows)}
+        placeholder=${ifDefined(this.placeholder)}
+        minlength=${ifDefined(this.minlength)}
+        maxlength=${ifDefined(this.maxlength)}
+        .value=${live(this.value)}
+        aria-invalid=${this.invalid ? 'true' : 'false'}
+        spellcheck=${ifDefined(this.spellcheck)}
+        ?disabled=${this.disabled}
+        ?readonly=${this.readonly}
+        ?required=${this.required}
+        ?autofocus=${this.autofocus}
+        autocorrect=${ifDefined(this.autocorrect)}
+        inputmode=${ifDefined(this.inputmode)}
+        @keyup=${this.handleValueChange}
+        @input=${() => this.handleChange('sgds-input')}
+        @change=${() => this.handleChange('sgds-change')}
+        @invalid=${this.handleInvalid}
+        @focus=${this.handleFocus}
+        @blur=${this.handleBlur}
+      >
+      </textarea>
 
+      <div id="${this.textareaId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
     `;
-
   }
 }
 
 export default SgdsTextArea;
-

@@ -1,35 +1,34 @@
-import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import styles from "./sgds-fileupload.scss";
-import SgdsElement from "../base/sgds-element";
-import { unsafeSVG } from "lit/directives/unsafe-svg.js";
-import { createRef, ref } from "lit/directives/ref.js";
+import { html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import styles from './sgds-fileupload.scss';
+import SgdsElement from '../base/sgds-element';
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
+import { createRef, ref } from 'lit/directives/ref.js';
 
 export type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info"
-  | "light"
-  | "dark"
-  | "link"
-  | "outline-primary"
-  | "outline-secondary"
-  | "outline-success"
-  | "outline-danger"
-  | "outline-warning"
-  | "outline-info"
-  | "outline-light"
-  | "outline-dark";
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'danger'
+  | 'warning'
+  | 'info'
+  | 'light'
+  | 'dark'
+  | 'link'
+  | 'outline-primary'
+  | 'outline-secondary'
+  | 'outline-success'
+  | 'outline-danger'
+  | 'outline-warning'
+  | 'outline-info'
+  | 'outline-light'
+  | 'outline-dark';
 
-type SelectedFileType = FileList | {};
 
-@customElement("sgds-fileupload")
+@customElement('sgds-fileupload')
 export class SgdsFileUpload extends SgdsElement {
   /** The button's variant. */
-  @property({ reflect: true }) variant: ButtonVariant = "primary";
+  @property({ reflect: true }) variant: ButtonVariant = 'primary';
 
   // /** Sets a unique id to the file input, required. */
   // @property({ type: String }) controlId = "";
@@ -38,13 +37,13 @@ export class SgdsFileUpload extends SgdsElement {
   disabled = false;
 
   /** Button sizes */
-  @property({ reflect: true }) size: "sm" | "lg";
+  @property({ reflect: true }) size: 'sm' | 'lg';
 
   @property({ type: String })
-  checkedIcon? = "";
+  checkedIcon? = '';
 
   @property({ type: String })
-  cancelIcon? = "";
+  cancelIcon? = '';
 
   @property({ type: FileList })
   private fileList: FileList | undefined;
@@ -54,17 +53,17 @@ export class SgdsFileUpload extends SgdsElement {
 
   constructor() {
     super();
-    this.addEventListener("sgds-files-selected", () => {
+    this.addEventListener('sgds-files-selected', () => {
       this.selectedFiles = Array.from(this.fileList || []);
-      this.emit("selected-files-changed", {
-        detail: { selectedFiles: this.selectedFiles },
+      this.emit('selected-files-changed', {
+        detail: { selectedFiles: this.selectedFiles }
       });
     });
   }
 
   setFileList(fileList) {
     this.fileList = fileList[0];
-    this.emit("sgds-files-selected");
+    this.emit('sgds-files-selected');
   }
 
   static styles = styles;
@@ -86,7 +85,7 @@ export class SgdsFileUpload extends SgdsElement {
     const inputElement = event.target as HTMLInputElement;
     const fileList = inputElement.files as FileList;
 
-    var dt = new DataTransfer();
+    const dt = new DataTransfer();
     for (let i = 0; i < fileList.length; i++) {
       dt.items.add(fileList[i]);
     }
@@ -102,7 +101,7 @@ export class SgdsFileUpload extends SgdsElement {
     const inputElement = this.inputRef.value;
     const attachments = inputElement.files;
 
-    let fileBuffer = new DataTransfer();
+    const fileBuffer = new DataTransfer();
     for (let i = 0; i < attachments.length; i++) {
       if (index !== i) fileBuffer.items.add(attachments[i]);
     }
@@ -148,9 +147,7 @@ export class SgdsFileUpload extends SgdsElement {
         class="bi bi-x-circle"
         viewBox="0 0 16 16"
       >
-        <path
-          d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-        />
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
         <path
           d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
         />
@@ -160,11 +157,9 @@ export class SgdsFileUpload extends SgdsElement {
     const listItems = this.selectedFiles.map(
       (file, index) => html`
         <li key=${index} class="fileupload-list-item">
-          <span class="me-2" >${getCheckedIcon(this.checkedIcon)}</span>
+          <span class="me-2">${getCheckedIcon(this.checkedIcon)}</span>
           <span class="filename">${file.name}</span>
-          <span class="ms-2" @click=${() => this.removeFileHandler(index)}
-            >${getCancelIcon(this.cancelIcon)}</span
-          >
+          <span class="ms-2" @click=${() => this.removeFileHandler(index)}>${getCancelIcon(this.cancelIcon)}</span>
         </li>
       `
     );
@@ -179,11 +174,7 @@ export class SgdsFileUpload extends SgdsElement {
             @change=${this.handleInputChange}
             multiple
           />
-          <sgds-button
-            size=${this.size}
-            variant=${this.variant}
-            ?disabled=${this.disabled}
-            @click=${this.handleClick}
+          <sgds-button size=${this.size} variant=${this.variant} ?disabled=${this.disabled} @click=${this.handleClick}
             ><slot></slot
           ></sgds-button>
         </div>
