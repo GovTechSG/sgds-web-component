@@ -16,7 +16,7 @@ export class SgdsAccordion extends SgdsElement {
   @property({ type: Boolean, reflect: true }) allowMultiple = false;
 
   @property({ reflect: true }) accordionClasses?: string;
- 
+
   /** @internal */
   @queryAssignedNodes()
   private defaultNodes!: NodeListOf<SgdsAccordionItem>;

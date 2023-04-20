@@ -1,6 +1,11 @@
 import { setCustomElements } from "@storybook/web-components";
 import customElements from "../custom-elements.json";
+import { setCustomElementsManifest } from "@storybook/web-components";
+import { createArgsExtractor, createLitRenderer } from "cem-plugin-better-lit-types/storybook";
 
+/**
+ * Custom renderer made specially for LitComponents
+ */
 // import { setCustomElementsManifest } from '@storybook/web-components';
 
 // export const setCustomElementsManifestWithOptions = (
@@ -24,7 +29,8 @@ import customElements from "../custom-elements.json";
 //   }
 //   return setCustomElementsManifest(customElements);
 // };
-setCustomElements(customElements, { privateFields: false });
+// setCustomElements(customElements, { privateFields: false });
+console.log(customElements)
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -38,5 +44,12 @@ export const parameters = {
     storySort: {
       order: ["Getting Started", "Components"]
     }
-  }
+  },
+    docs: {
+      extractArgTypes: createArgsExtractor(customElements)
+    }
 };
+// export const render = createLitRenderer({
+//   wrapSlots: true, // Wraps a non-default slot in `<span slot="name">`
+//   joinArrays: true  // Converts array to a comma-separated string
+// })

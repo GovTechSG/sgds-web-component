@@ -6,7 +6,12 @@ export const Template = args =>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
     </sgds-accordion-item>
     <sgds-accordion .allowMultiple=${args.allowMultiple} .accordionClasses=${args.accordionClasses}>
-      <sgds-accordion-item .open=${args.open} .disabled=${args.disabled} .summary=${args.summary} .accordionItemClasses=${args.accordionItemClasses}>
+      <sgds-accordion-item
+        .open=${args.open}
+        .disabled=${args.disabled}
+        .summary=${args.summary}
+        .accordionItemClasses=${args.accordionItemClasses}
+      >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
       </sgds-accordion-item>
       <sgds-accordion-item summary="Accordion 1" .accordionItemClasses=${args.accordionItemClasses}>

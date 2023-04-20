@@ -34,7 +34,7 @@ export class SgdsAccordionItem extends SgdsElement {
   @property({ type: Boolean, reflect: true }) open = false;
   /** Title of the accordion */
   @property() summary: string;
-  //TODO: disabled feature is not a supposed feature in accordion? 
+  //TODO: disabled feature is not a supposed feature in accordion?
   /** Disables the accordion-item. When true, accordion-item cannot open */
   @property({ type: Boolean, reflect: true }) disabled = false;
   /** Optional for accordion item. Can be used to insert any utility classes such as `me-auto` */
@@ -143,7 +143,7 @@ export class SgdsAccordionItem extends SgdsElement {
         class=${classMap({
           sgds: true,
           "accordion-item": true,
-          //TODO: Remove unnecessary classes 
+          //TODO: Remove unnecessary classes
           "accordion--open": this.open,
           "accordion--disabled": this.disabled,
           [`${this.accordionItemClasses}`]: this.accordionItemClasses

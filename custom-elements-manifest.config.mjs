@@ -1,6 +1,7 @@
 import fs from 'fs';
 import { parse } from 'comment-parser';
 import { pascalCase } from 'pascal-case';
+import BetterLitTypesPlugin from 'cem-plugin-better-lit-types';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
@@ -18,7 +19,7 @@ export default {
         customElementsManifest.package = { name, description, version, author, homepage, license };
       }
     },
-
+    BetterLitTypesPlugin,
     // Parse custom jsDoc tags
     {
       name: 'sgds-custom-tags',
@@ -93,7 +94,6 @@ export default {
           case ts.SyntaxKind.ClassDeclaration: {
             const className = node.name.getText();
             const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
-
             if (classDoc?.events) {
               classDoc.events.forEach(event => {
                 event.reactName = `on${pascalCase(event.name)}`;
