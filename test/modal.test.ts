@@ -104,13 +104,13 @@ describe("<sgds-modal>", () => {
     expect(base?.hidden).to.be.true;
   });
 
-  it("should not close when sgds-request-close is prevented", async () => {
+  it("should not close when sgds-close is prevented", async () => {
     const el = await fixture<SgdsModal>(html`
       <sgds-modal open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-modal>
     `);
     const overlay = el.shadowRoot?.querySelector<HTMLElement>('[part="overlay"]');
 
-    el.addEventListener("sgds-request-close", event => {
+    el.addEventListener("sgds-close", event => {
       event.preventDefault();
     });
     overlay?.click();

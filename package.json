@@ -80,6 +80,7 @@
     "@web/test-runner-playwright": "^0.8.10",
     "autoprefixer": "^10.4.8",
     "babel-loader": "^8.2.5",
+    "cem-plugin-better-lit-types": "^0.2.0",
     "cz-conventional-changelog": "^3.3.0",
     "del": "^7.0.0",
     "esbuild-sass-plugin": "^2.3.2",

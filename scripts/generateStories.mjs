@@ -29,7 +29,7 @@ const groupedComponents = groupBy(components, (k, v) => {
 });
 
 for (const [key, value] of Object.entries(groupedComponents)) {
-  const allMembers = value.map(i => i.members).flat();
+  const allMembers = value.map(i => i.members).flat().filter(member => !(member.privacy && member.privacy === 'private'))
   const methodsMeta = methodsTable(value);
   const summary = value.filter(i => i.summary).map(i => i.summary).join('')
   const args = allMembers.filter(member => member.kind === 'field');
@@ -40,7 +40,6 @@ for (const [key, value] of Object.entries(groupedComponents)) {
 <ArgsTable of="${component.tagName}"/>\n
   `
   );
-
   const source = prettier.format(
     `
 import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";

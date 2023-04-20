@@ -7,7 +7,7 @@ import type SgdsAccordionItem from "./sgds-accordion-item";
 
 /**
  * @summary A dropdown mechanism that allow users to either show or hide related content.
- * @slot - default slot for accordion-item
+ * @slot default - slot for accordion-item
  */
 @customElement("sgds-accordion")
 export class SgdsAccordion extends SgdsElement {
@@ -16,10 +16,13 @@ export class SgdsAccordion extends SgdsElement {
   @property({ type: Boolean, reflect: true }) allowMultiple = false;
 
   @property({ reflect: true }) accordionClasses?: string;
-
+ 
+  /** @internal */
   @queryAssignedNodes()
   private defaultNodes!: NodeListOf<SgdsAccordionItem>;
 
+  //TODO: confirm if this is a public method or for internal usage only
+  /** @internal */
   get items(): SgdsAccordionItem[] {
     return [...(this.defaultNodes || [])].filter(
       (node: HTMLElement) => typeof node.tagName !== "undefined"

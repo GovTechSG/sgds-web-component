@@ -12,7 +12,7 @@ export type TypeVariant = "checkbox" | "radio";
 @customElement("sgds-action-card")
 export class SgdsActionCard extends CardElement {
   static styles = styles;
-
+  /** @internal */
   inputRef: Ref<HTMLInputElement> = createRef();
 
   @property({ type: String, reflect: true }) type?: TypeVariant = "checkbox";
