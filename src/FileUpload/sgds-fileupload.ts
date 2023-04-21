@@ -5,7 +5,7 @@ import SgdsElement from "../base/sgds-element";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import { createRef, ref } from "lit/directives/ref.js";
 
-export type ButtonVariant =
+export type FileUploadButtonVariant =
   | "primary"
   | "secondary"
   | "success"
@@ -27,7 +27,7 @@ export type ButtonVariant =
 @customElement("sgds-fileupload")
 export class SgdsFileUpload extends SgdsElement {
   /** The button's variant. */
-  @property({ reflect: true }) variant: ButtonVariant = "primary";
+  @property({ reflect: true }) variant: FileUploadButtonVariant = "primary";
 
   // /** Sets a unique id to the file input, required. */
   // @property({ type: String }) controlId = "";

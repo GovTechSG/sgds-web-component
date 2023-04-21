@@ -5,7 +5,7 @@ import { html } from "lit/static-html.js";
 import { CardElement } from "../base/card-element";
 import styles from "./sgds-action-card.scss";
 
-export type CardVariant = "card-action" | "card-action-quantity-toggle";
+export type CardVariant = "card-action" | "card-action-quantity-toggle" ;
 
 export type TypeVariant = "checkbox" | "radio";
 
@@ -18,7 +18,7 @@ export class SgdsActionCard extends CardElement {
   @property({ type: String, reflect: true }) type?: TypeVariant = "checkbox";
 
   /** Use on actionable cards like SelectableCard and Quantity Toggle Card' */
-  @property({ reflect: true }) variant?: CardVariant = "card-action";
+  @property({ reflect: true }) variant: CardVariant = "card-action";
 
   /** The card's subtitle iconName. */
   @property({ reflect: true }) iconName?: string;

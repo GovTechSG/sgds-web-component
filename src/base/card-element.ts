@@ -1,9 +1,9 @@
 import { property } from "lit/decorators.js";
 import SgdsElement from "./sgds-element";
 
-export type Variant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light" | string;
+export type CardBorderVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light" ;
 
-export type Color =
+export type CardTextVariant =
   | "primary"
   | "secondary"
   | "success"
@@ -20,13 +20,13 @@ export class CardElement extends SgdsElement {
 
   /** The border's variant. */
   @property()
-  borderColor?: Variant;
+  borderColor?: CardBorderVariant;
 
   /** The bg's variant. */
-  @property() bgColor?: Variant;
+  @property() bgColor?: CardBorderVariant;
 
   /** The text's variant. */
-  @property() textColor?: Color;
+  @property() textColor?: CardTextVariant;
 
   @property({ type: Boolean, reflect: true })
   disabled = false;

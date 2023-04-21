@@ -5,7 +5,7 @@ import { html } from "lit/static-html.js";
 import SgdsElement from "../base/sgds-element";
 import styles from "./sgds-toast.scss";
 
-export type Variant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light";
+export type ToastVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light";
 
 @customElement("sgds-toast")
 export class SgdsToast extends SgdsElement {

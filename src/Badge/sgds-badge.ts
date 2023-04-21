@@ -4,13 +4,13 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../base/sgds-element";
 import styles from "./sgds-badge.scss";
 
-export type ButtonVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
+export type BadgeVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
 
 @customElement("sgds-badge")
 export class SgdsBadge extends SgdsElement {
   static styles = styles;
 
-  @property({ reflect: true }) variant: ButtonVariant = "primary";
+  @property({ reflect: true }) variant: BadgeVariant = "primary";
   @property({ type: Boolean, reflect: true }) isLight;
   @property({ type: Boolean, reflect: true }) roundedPill;
   render() {
