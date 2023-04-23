@@ -22,3 +22,4 @@ import "./Toast";
 import "./FileUpload"
 import "./Accordion";
 import "./Tooltip";
+import "./Spinner";
