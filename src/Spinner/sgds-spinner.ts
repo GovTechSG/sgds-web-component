@@ -8,10 +8,21 @@ export type Type =
   | "border"
   | "grow";
 
+  export type Color =
+  | "primary"
+  | "secondary"
+  | "success"
+  | "danger"
+  | "warning"
+  | "info"
+  | "light"
+  | "dark"
+
 @customElement("sgds-spinner")
 export class SgdsSpinner extends SgdsElement {
     static styles = styles;
     @property({ reflect: true }) type: Type = "border" ;
+    @property({ reflect: true }) color: Color = "primary" ;
     @property({ reflect: true }) spinnerClasses?: string;
   render() {
     return html`
@@ -20,6 +31,7 @@ export class SgdsSpinner extends SgdsElement {
             ${classMap(
                 {
                     [`spinner-${this.type}`]: this.type,
+                    [`text-${this.color}`]: this.color,
                     [`${this.spinnerClasses}`]: this.spinnerClasses,
                 }
             )
