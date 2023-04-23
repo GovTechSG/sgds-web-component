@@ -1,13 +1,15 @@
 export const makeArgTypes = componentProps =>
   componentProps.reduce((obj, item) => {
     let controlObject = {};
-    controlObject.defaultValue = item.default
+    controlObject.defaultValue = item?.default?.replaceAll('"', '')
     switch (true) {
       case /string/.test(item.type?.text):
         controlObject.control = 'text';
+        // controlObject.defaultValue = item?.default?.replaceAll('"', '')
         break;
       case /boolean/.test(item.type?.text):
         controlObject.control = 'boolean';
+        controlObject.defaultValue = (item.default === 'true')
         break;
       case /number/.test(item.type?.text):
         controlObject.control = 'number';
@@ -17,6 +19,7 @@ export const makeArgTypes = componentProps =>
         break;
       case /\|/.test(item.type?.text):
         controlObject.control = 'select';
+        // controlObject.defaultValue = item?.default?.replaceAll('"', '')
         controlObject.options = item.type?.text
           .replaceAll('"', '')
           .split('|')

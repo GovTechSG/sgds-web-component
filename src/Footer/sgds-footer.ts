@@ -3,7 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import styles from "./sgds-footer.scss";
 import SgdsElement from "../base/sgds-element";
 
-export interface Links  {
+export interface Links {
   href: string;
   label: string;
 }

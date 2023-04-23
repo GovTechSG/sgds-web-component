@@ -24,7 +24,8 @@ import customElements from "../custom-elements.json";
 //   }
 //   return setCustomElementsManifest(customElements);
 // };
-setCustomElements(customElements, { privateFields: false });
+setCustomElements(customElements);
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -39,4 +40,3 @@ export const parameters = {
     }
   }
 };
-

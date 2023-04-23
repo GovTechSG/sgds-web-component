@@ -1,7 +1,7 @@
 import { property } from "lit/decorators.js";
 import SgdsElement from "./sgds-element";
 
-export type CardBorderVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light" ;
+export type CardBorderVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light";
 
 export type CardTextVariant =
   | "primary"

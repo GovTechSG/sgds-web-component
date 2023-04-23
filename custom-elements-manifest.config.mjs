@@ -59,28 +59,28 @@ export default {
     },
     // BetterLitTypesPlugin,
     // Parse custom jsDoc tags
-    // {
-    //   name: 'my-plugin',
-    //   // Runs for all modules in a project, before continuing to the `analyzePhase`
-    //   collectPhase({ts, node, context}){},
-    //   // Runs for each module
-    //   analyzePhase({ts, node, moduleDoc, context}){
-    //     switch (node.kind) {
-    //       case ts.SyntaxKind.TypeAliasDeclaration: {
-    //         const typeName = node.name.getText();
-    //         const enumValues = node.type?.types?.map(n => '"' + n.literal?.text + '"')
-    //         typesByAliasMap.set(typeName, enumValues)
-    //       }
-    //     }
-    //     // You can use this phase to access a module's AST nodes and mutate the custom-elements-manifest
-    //   },
-    //   // Runs for each module, after analyzing, all information about your module should now be available
-    //   moduleLinkPhase({moduleDoc, context}){
-    //     moduleDoc.declarations = transformDeclarations(moduleDoc?.declarations)
-    //   },
-    //   // Runs after modules have been parsed and after post-processing
-    //   packageLinkPhase({customElementsManifest, context}){},
-    // },
+    {
+      name: 'my-plugin',
+      // Runs for all modules in a project, before continuing to the `analyzePhase`
+      collectPhase({ts, node, context}){},
+      // Runs for each module
+      analyzePhase({ts, node, moduleDoc, context}){
+        switch (node.kind) {
+          case ts.SyntaxKind.TypeAliasDeclaration: {
+            const typeName = node.name.getText();
+            const enumValues = node.type?.types?.map(n => '"' + n.literal?.text + '"')
+            typesByAliasMap.set(typeName, enumValues)
+          }
+        }
+        // You can use this phase to access a module's AST nodes and mutate the custom-elements-manifest
+      },
+      // Runs for each module, after analyzing, all information about your module should now be available
+      moduleLinkPhase({moduleDoc, context}){
+        moduleDoc.declarations = transformDeclarations(moduleDoc?.declarations)
+      },
+      // Runs after modules have been parsed and after post-processing
+      packageLinkPhase({customElementsManifest, context}){},
+    },
     {
       name: 'sgds-custom-tags',
       analyzePhase({ ts, node, moduleDoc }) {

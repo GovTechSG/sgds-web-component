@@ -12,4 +12,7 @@ export const Template = args =>
       <div>This is an Alert component. You may add the dismissible option.</div></sgds-alert
     >
   `;
-export const args = {};
+export const args = {
+  alertClasses : "d-flex align-items-center"
+}
+;
