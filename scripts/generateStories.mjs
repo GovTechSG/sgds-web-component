@@ -8,7 +8,7 @@ import prettierConfig from '../prettier.config.js';
 import { getAllComponents, getSgdsComponents } from './shared.mjs';
 import { makeArgTypes } from './makeArgTypes.mjs';
 import groupBy from 'lodash/groupBy.js';
-const storiesDir = path.join('stories-test');
+const storiesDir = path.join('stories/components');
 import { methodsTable } from './methodsTable.mjs';
 // Clear build directory
 deleteSync(storiesDir);
@@ -43,8 +43,9 @@ for (const [key, value] of Object.entries(groupedComponents)) {
   const source = prettier.format(
     `
 import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
-import {Template, args} from '../stories/templates/${key}/basic.js';
-import '../lib/${key}';
+import {Template, args} from '../templates/${key}/basic.js';
+import '../../lib/${key}';
+import { html } from "lit-html";
 
 <Meta
  title="Components/${key}"

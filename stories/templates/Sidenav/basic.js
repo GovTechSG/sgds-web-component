@@ -1,5 +1,4 @@
 import { html } from "lit-html";
-
 export const Template = ({
   alwaysOpen,
   active,

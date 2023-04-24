@@ -4,16 +4,17 @@
     "module": "es2015",
     "moduleResolution": "node",
     "lib": ["es2017", "dom", "dom.iterable"],
-    "declaration": true,
-    "declarationDir": "lib",
+    // "declaration": true,
+    // "declarationDir": "lib",
     "sourceMap": true,
     "inlineSources": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "noImplicitAny": false,
     "importHelpers": true,
-    "rootDir": "src"
+    "rootDir": "src",
+    "allowJs": true
   },
-  "include": ["**/*.ts", "stories/templates/Accordion/basic.js", "stories/templates/Accordion/basic.js"],
+  "include": ["**/*.ts"],
   "exclude": ["node_modules", "lib", "test", "mocks", "react"]
 }
