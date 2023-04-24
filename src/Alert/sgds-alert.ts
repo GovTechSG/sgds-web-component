@@ -4,11 +4,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../utils/sgds-element";
 import styles from "./sgds-alert.scss";
-import { styleMap } from "lit-html/directives/style-map.js";
-import { watch } from "../utils/watch";
-import { repeat } from "lit/directives/repeat.js";
 
-// const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
 
 /**
  * @summary Alerts are used to display important messages inline or as toast notifications.
@@ -66,13 +62,13 @@ export class SgdsAlert extends SgdsElement {
   toggleShow() {
     if (!this.show) {
       this.show = true;
-      this.emit("sgds-open");
+      this.emit("sgds-show");
     }
   }
 
   handleCloseClick(event: string) {
     this.show = false;
-    this.emit("sgds-close");
+    this.emit("sgds-hide");
   }
 
   render() {
