@@ -5,13 +5,19 @@ import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { Tooltip } from "bootstrap";
 import styles from "./sgds-tooltip.scss";
 import * as Popper from "@popperjs/core";
+
+/**
+ * @summary Tooltip summary
+ * @slot default - slot for Tooltip's contentz
+ */
 @customElement("sgds-tooltip")
 export class SgdsTooltip extends SgdsElement {
   static styles = styles;
-
+  /**@internal */
   myTooltip: Ref<HTMLElement> = createRef();
+  /**@internal */
   bsTooltip: Tooltip = null;
-
+   /** */
   @property({ type: String })
   content = "";
 
@@ -20,12 +26,12 @@ export class SgdsTooltip extends SgdsElement {
 
   @property({ type: String })
   trigger: "click" | "hover" | "focus" | "hover focus" = "hover focus";
-
+  /**@internal */
   closableContainer: HTMLElement;
-
+  /**@internal */
   @state()
   popperConfig: Partial<Popper.Options>;
-
+  /**@internal */
   @state()
   tooltipConfig: Partial<Tooltip.Options>;
 
@@ -84,8 +90,8 @@ export class SgdsTooltip extends SgdsElement {
       this.emit("sgds-hidden");
     });
   }
-
-  closeTooltip() {
+  /** Hides the Tooltip */
+   public closeTooltip() {
     this.bsTooltip.hide();
   }
 

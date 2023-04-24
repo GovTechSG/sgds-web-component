@@ -5,7 +5,7 @@ import { html } from "lit/static-html.js";
 import { CardElement } from "../base/card-element";
 import styles from "./sgds-action-card.scss";
 
-export type CardVariant = "card-action" | "card-action-quantity-toggle" ;
+export type CardVariant = "card-action" | "card-action-quantity-toggle";
 
 export type TypeVariant = "checkbox" | "radio";
 

@@ -21,4 +21,7 @@ export const Template = ({ content, trigger, placement }) => {
   `;
 };
 
-export const args = {};
+export const args = {
+  content: 'This is a tooltip',
+  placement: 'top'
+};

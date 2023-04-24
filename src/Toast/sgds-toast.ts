@@ -4,6 +4,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../base/sgds-element";
 import styles from "./sgds-toast.scss";
+import { Toast } from "bootstrap";
 
 export type ToastVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light";
 
@@ -24,7 +25,7 @@ export class SgdsToast extends SgdsElement {
 
   @property({ type: Number, reflect: true }) delay = Infinity;
 
-  @property({ type: String, reflect: true }) variant;
+  @property({ type: String, reflect: true }) variant : ToastVariant;
 
   /** The toast variant. */
   @property({ type: String, reflect: true }) bg?:
