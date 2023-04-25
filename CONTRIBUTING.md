@@ -7,6 +7,14 @@ Thank you so much for contributing to @govtechsg/sgds-web-component. Please read
 
 This project uses Lit 2.0 + SASS + TS and bundled with rollup 
 
+### Recommended : Auto-generate boilerplate code
+
+A simple plop generator is written to help kickstart component writing. On your terminal, run `npm run write:component`. This will generate the boilerplate code for the main component and its storybook template
+
+**NOTE** Please add any sub-component manually
+
+Alternatively, you can set up your files and folders manually. See the instructions below
+
 ### Folder Structure
 
 Build new components in src folder. Create folder name according to the component you are building.
@@ -30,7 +38,25 @@ To run single test file, run the output javascript test file instead of the type
 
 ## Storybook 
 
-The basic storybook documentation is auto-generated from the cem metadata. Write your template examples inside `stories/templates/<Component>` folder.
+To start the storybook server 
+
+```npm run storybook``` 
+
+The basic storybook documentation is auto-generated from the cem metadata. Write your basic template example inside `stories/templates/<Component>/basic.js`. Follow this template and be sure to export `args` and `Template` 
+
+```hbs
+import { html } from "lit-html";
+
+export const Template = args =>
+      html`<sgds-{{kebabCase main-component-name}}></sgds-{{kebabCase main-component-name}}>`
+
+
+export const args = {};
+
+```
+
+Beyond basic template, any additional documentation and storybook template examples should go into `stories/templates/<Component>/additional.mdx file`.
+This file will be concatenated with the basic template to give the final stories.mdx files
 
 ## Markdown files and README.md
 

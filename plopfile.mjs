@@ -26,6 +26,11 @@ export default function (plop) {
         path: "stories/templates/{{main-component-name}}/basic.js",
         templateFile: "plop-templates/basic.hbs"
       },
+      {
+        type: "add",
+        path: "test/{{kebabCase main-component-name}}.test.ts",
+        templateFile: "plop-templates/test.hbs"
+      },
     ]
   });
 }
