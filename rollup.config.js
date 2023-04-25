@@ -12,7 +12,7 @@ const wcPlugins = [
     browser: true
   }),
   replace({
-    "process.env.NODE_ENV": JSON.stringify("production"),
+    "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
     preventAssignment: true
   }),
   postcss({
@@ -92,25 +92,7 @@ const reactFolderBuilds = getFolders("src/react").map(folder => {
     plugins: reactSubFolderBuildPlugins(folder)
   };
 });
-export default [
-  {
-    input: "src/index.ts",
-    output: [
-      {
-        file: packageJson.module,
-        format: "esm",
-        sourcemap: true
-      },
-      {
-        file: packageJson.main,
-        format: "umd",
-        sourcemap: true,
-        name: "index"
-      }
-    ],
-    plugins: wcPlugins
-  },
-  ...wcfolderBuilds,
+const reactPackage = [
   {
     input: "src/react/index.ts",
     output: [
@@ -150,3 +132,29 @@ export default [
   },
   ...reactFolderBuilds
 ];
+const buildSgdsPackage = () => {
+  const sgdsWcPackage = [
+    {
+      input: "src/index.ts",
+      output: [
+        {
+          file: packageJson.module,
+          format: "esm",
+          sourcemap: true
+        },
+        {
+          file: packageJson.main,
+          format: "umd",
+          sourcemap: true,
+          name: "index"
+        }
+      ],
+      plugins: wcPlugins
+    },
+    ...wcfolderBuilds
+  ];
+  if (process.env.NODE_ENV === "production") return sgdsWcPackage.concat(reactPackage);
+  return sgdsWcPackage;
+};
+
+export default buildSgdsPackage;

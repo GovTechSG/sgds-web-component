@@ -3,31 +3,31 @@
 ## Table of contents
 
 - [sgds-web-components coding style guide](#typescript-coding-style-guide)
-  - [Naming](#naming)
-  - [Naming Conventions](#naming-conventions)
-  - [Naming Booleans](#naming-booleans)
-  - [Brackets](#brackets)
-  - [Spaces](#spaces)
-  - [Semicolons](#semicolons)
-  - [Code Comments](#code-comments)
-  - [Barrels](#barrels)
-- [Angular coding style guide](#angular-coding-style-guide)
 
-  - [Organize imports](#organize-imports)
-  - [Use typescript aliases](#use-typescript-aliases)
-  - [Specify component member accessor explicitly](#specify-component-member-accessor-explicitly)
-  - [Component structure](#component-structure)
-  - [private Subject, public Observable pattern](#private-subject,-public-observable-pattern)
-  - [Services inside HTML templates](#services-inside-HTML-templates)
-  - [Manage Subscriptions Declaratively](#manage-subscriptions-declaratively)
+  - [Events](#events)
+  - [Typescript](#typescript)
+  - [Jsdocs](#jsdoc)
 
-  ### Naming
+  ### Events
 
-  ### Typescript
+  1. Events should be named with an action word , prefix with `sgds-`
 
-  All variables, properties and functions should be typed. The Tscompiler can infer the type of properties when a default value is assigned but not when none is defined. If a variable does not need to have a default variable, assign a type to it.
+  Bad: `hide`, `show`
+  Good: `sgds-hide, sgds-show, sgds-after-show, sgds-toggle`
 
-  Bad:
+  2. Before creating a new event name, check if there are existing names for the same purposed.
+   
+  3. Use the `emit` method of SgdsElement class to emit a custom event 
+
+#### variable
+
+Variables should be
+
+### Typescript
+
+All variables, properties and functions should be typed. The Tscompiler can infer the type of properties when a default value is assigned but not when none is defined. If a variable does not need to have a default variable, assign a type to it.
+
+Bad:
 
 ```typescript
     @property({ type: Boolean, reflect: true }) isLight;
@@ -90,7 +90,7 @@ export class SgdsAccordionItem extends SgdsElement {
 
 4. Annotate public methods with jsdocs comments. Any methods that is meant expose for users should be marked with the "public" access modifier
 
-```typescript 
+```typescript
 /** Shows the accordion. */
   public async show() {
   }

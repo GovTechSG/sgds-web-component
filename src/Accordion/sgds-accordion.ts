@@ -21,7 +21,6 @@ export class SgdsAccordion extends SgdsElement {
   @queryAssignedNodes()
   private defaultNodes!: NodeListOf<SgdsAccordionItem>;
 
-  //TODO: confirm if this is a public method or for internal usage only
   /** @internal */
   get items(): SgdsAccordionItem[] {
     return [...(this.defaultNodes || [])].filter(

@@ -1,15 +1,13 @@
-import commandLineArgs from 'command-line-args';
-import fs from 'fs';
-import path from 'path';
-import chalk from 'chalk';
 import { deleteSync } from 'del';
-import prettier from 'prettier';
-import prettierConfig from '../prettier.config.js';
-import { getAllComponents, getSgdsComponents } from './shared.mjs';
-import { makeArgTypes } from './makeArgTypes.mjs';
+import fs from 'fs';
 import groupBy from 'lodash/groupBy.js';
-const storiesDir = path.join('stories/components');
+import path from 'path';
+import prettier from 'prettier';
+import { makeArgTypes } from './makeArgTypes.mjs';
 import { methodsTable } from './methodsTable.mjs';
+import { getAllComponents, getSgdsComponents } from './shared.mjs';
+
+const storiesDir = path.join('stories/components');
 
 // Clear build directory
 deleteSync(storiesDir);

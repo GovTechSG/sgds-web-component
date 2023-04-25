@@ -30,7 +30,7 @@ To run single test file, run the output javascript test file instead of the type
 
 ## Storybook 
 
-Write documentation in storybook in MDX format. Include API argstable, import instructions, at least a basic example and custom css properties table (if present)
+The basic storybook documentation is auto-generated from the cem metadata. Write your template examples inside `stories/templates/<Component>` folder 
 
 ## Markdown files and README.md
 
