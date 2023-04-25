@@ -22,7 +22,6 @@ const components = getSgdsComponents(getAllComponents(metadata))
 const index = [];
 
 components.map(component => {
-  console.log(component.tagName)
   const tagWithoutPrefix = component.tagName.replace(/^sgds-/, '');
   const componentDir = path.join(reactDir, tagWithoutPrefix);
   const componentFile = path.join(componentDir, 'index.ts');
