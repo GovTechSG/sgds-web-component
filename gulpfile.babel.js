@@ -7,7 +7,7 @@ exports.default = task("build-readme", () => {
   return src("docs/*.md").pipe(concat("README.md")).pipe(dest("."));
 });
 
-exports.default = task("concat-storybook-mdx", (done) => {
+exports.default = task("concat-storybook-mdx", done => {
   const components = getFolders("./src");
   components.forEach(c => {
     if (fs.existsSync(`stories/templates/${c}/additional.mdx`)) {

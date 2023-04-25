@@ -25,7 +25,7 @@ export class SgdsToast extends SgdsElement {
 
   @property({ type: Number, reflect: true }) delay = Infinity;
 
-  @property({ type: String, reflect: true }) variant : ToastVariant;
+  @property({ type: String, reflect: true }) variant: ToastVariant;
 
   /** The toast variant. */
   @property({ type: String, reflect: true }) bg?:

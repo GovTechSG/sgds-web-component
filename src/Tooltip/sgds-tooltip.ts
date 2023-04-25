@@ -17,7 +17,7 @@ export class SgdsTooltip extends SgdsElement {
   myTooltip: Ref<HTMLElement> = createRef();
   /**@internal */
   bsTooltip: Tooltip = null;
-   /** */
+  /** */
   @property({ type: String })
   content = "";
 
@@ -91,7 +91,7 @@ export class SgdsTooltip extends SgdsElement {
     });
   }
   /** Hides the Tooltip */
-   public closeTooltip() {
+  public closeTooltip() {
     this.bsTooltip.hide();
   }
 

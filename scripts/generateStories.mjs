@@ -10,6 +10,7 @@ import { makeArgTypes } from './makeArgTypes.mjs';
 import groupBy from 'lodash/groupBy.js';
 const storiesDir = path.join('stories/components');
 import { methodsTable } from './methodsTable.mjs';
+
 // Clear build directory
 deleteSync(storiesDir);
 fs.mkdirSync(storiesDir, { recursive: true });

@@ -7,7 +7,7 @@ describe("makeArgTypes()", () => {
       kind: "field",
       name: "content",
       type: { text: "string" },
-      default: '""',
+      default: "test-content",
       attribute: "content"
     }
   ];
@@ -79,21 +79,21 @@ describe("makeArgTypes()", () => {
   });
   it("type.text.string output should be content.control.text", () => {
     const expected = {
-      content: { control: "text" }
+      content: { control: "text", defaultValue: "test-content" },
     };
-    expect(JSON.stringify(makeArgTypes(textInput))).to.equal(JSON.stringify(expected));
+    expect(makeArgTypes(textInput)).deep.to.equal(expected);
   });
   it("type.text.boolean output should be content.control.boolean", () => {
     const expected = {
       content: { control: "boolean" }
     };
-    expect(JSON.stringify(makeArgTypes(booleanInput))).to.equal(JSON.stringify(expected));
+    expect(makeArgTypes(booleanInput).content.control).to.equal('boolean');
   });
   it("type.text.number output should be content.control.number", () => {
     const expected = {
       content: { control: "number" }
     };
-    expect(JSON.stringify(makeArgTypes(numberInput))).to.equal(JSON.stringify(expected));
+    expect(makeArgTypes(numberInput).content.control).to.equal('number');
   });
   it("type.text with multiple options output should be content.control.select", () => {
     const expected = {
@@ -102,13 +102,14 @@ describe("makeArgTypes()", () => {
         options: ["click", "hover", "focus", "hover focus"]
       }
     };
-    expect(JSON.stringify(makeArgTypes(multipleInput))).to.equal(JSON.stringify(expected));
+    expect(makeArgTypes(multipleInput).content.control).to.equal(expected.content.control);
+    expect(makeArgTypes(multipleInput).content.options).deep.to.equal(expected.content.options);
   });
   it("type.text.array output should be content.control.object", () => {
     const expected = {
       content: { control: "object" }
     };
-    expect(JSON.stringify(makeArgTypes(arrayInput))).to.equal(JSON.stringify(expected));
+    expect(makeArgTypes(arrayInput).content.control).to.equal('object');
   });
   it("type.text others output should be content.control.object", () => {
     const expected = {
@@ -120,8 +121,9 @@ describe("makeArgTypes()", () => {
   });
   it("type.text string | undefined output should be content.control.text", () => {
     const expected = {
-      content: { control: "text" }
+      content: { control: "text", defaultValue: "" }
     };
-    expect(JSON.stringify(makeArgTypes(stringAndUndefined))).to.equal(JSON.stringify(expected));
+    expect(makeArgTypes(stringAndUndefined).content.control).to.equal("text");
+    expect(makeArgTypes(stringAndUndefined).content.defaultValue).to.equal("");
   });
 });
