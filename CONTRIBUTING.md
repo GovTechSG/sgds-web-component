@@ -30,7 +30,7 @@ To run single test file, run the output javascript test file instead of the type
 
 ## Storybook 
 
-The basic storybook documentation is auto-generated from the cem metadata. Write your template examples inside `stories/templates/<Component>` folder 
+The basic storybook documentation is auto-generated from the cem metadata. Write your template examples inside `stories/templates/<Component>` folder.
 
 ## Markdown files and README.md
 
