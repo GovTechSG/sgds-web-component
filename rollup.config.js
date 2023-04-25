@@ -77,7 +77,6 @@ const wcfolderBuilds = getFolders("./src/components").map(folder => {
   };
 });
 
-
 const buildSgdsPackage = () => {
   const sgdsWcPackage = [
     {
@@ -99,24 +98,23 @@ const buildSgdsPackage = () => {
     },
     ...wcfolderBuilds
   ];
- 
-  if (process.env.NODE_ENV === "production") {
 
-const reactFolderBuilds = getFolders("src/react").map(folder => {
-  return {
-    input: `src/react/${folder}/index.ts`,
-    output: [
-      {
-        file: `lib/react/${folder}/index.js`,
-        sourcemap: true,
-        exports: "named",
-        format: "esm"
-      }
-    ],
-    external: ["@lit-labs/react", "react"],
-    plugins: reactSubFolderBuildPlugins(folder)
-  };
-});
+  if (process.env.NODE_ENV === "production") {
+    const reactFolderBuilds = getFolders("src/react").map(folder => {
+      return {
+        input: `src/react/${folder}/index.ts`,
+        output: [
+          {
+            file: `lib/react/${folder}/index.js`,
+            sourcemap: true,
+            exports: "named",
+            format: "esm"
+          }
+        ],
+        external: ["@lit-labs/react", "react"],
+        plugins: reactSubFolderBuildPlugins(folder)
+      };
+    });
     const reactPackage = [
       {
         input: "src/react/index.ts",
@@ -157,7 +155,7 @@ const reactFolderBuilds = getFolders("src/react").map(folder => {
       },
       ...reactFolderBuilds
     ];
-    return sgdsWcPackage.concat(reactPackage)
+    return sgdsWcPackage.concat(reactPackage);
   }
   return sgdsWcPackage;
 };

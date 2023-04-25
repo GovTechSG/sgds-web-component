@@ -24,7 +24,7 @@ const components = getSgdsComponents(getAllComponents(metadata));
 const index = [];
 
 const groupedComponents = groupBy(components, (k, v) => {
-  return k.modulePath.split('/')[1];
+  return k.modulePath.split('/')[2];
 });
 
 for (const [key, value] of Object.entries(groupedComponents)) {
