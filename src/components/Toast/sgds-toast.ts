@@ -4,7 +4,6 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-toast.scss";
-import { Toast } from "bootstrap";
 
 export type ToastVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light";
 

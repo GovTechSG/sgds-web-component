@@ -5,7 +5,6 @@ import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-alert.scss";
 
-
 /**
  *
  * @dependency sl-icon-button
