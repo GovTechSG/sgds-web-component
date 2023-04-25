@@ -5,6 +5,7 @@ import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-alert.scss";
 
+
 /**
  *
  * @dependency sl-icon-button
@@ -50,13 +51,13 @@ export class SgdsAlert extends SgdsElement {
   toggleShow() {
     if (!this.show) {
       this.show = true;
-      this.emit("sgds-open");
+      this.emit("sgds-show");
     }
   }
 
   handleCloseClick() {
     this.show = false;
-    this.emit("sgds-close");
+    this.emit("sgds-hide");
   }
 
   render() {

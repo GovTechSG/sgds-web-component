@@ -31,10 +31,12 @@ describe("<Alert>", () => {
     assert.isTrue(alert?.classList.contains("alert-primary"));
   });
 
-  it("Should trigger the handleCloseClick method and emit the sgds-close event on dismiss click of sgds-closebutton", async () => {
-    const el = await fixture<SgdsAlert>(html`<sgds-alert dismissible></sgds-alert>`);
+  it("Should trigger the handleCloseClick method and emit the sgds-hide event on dismiss click of sgds-closebutton", async () => {
+    const el = await fixture<SgdsAlert>(
+      html`<sgds-alert dismissible></sgds-alert>`
+    );
     const onCloseSpy = sinon.spy();
-    el.addEventListener("sgds-close", onCloseSpy);
+    el.addEventListener("sgds-hide", onCloseSpy);
 
     const closeButton = el.shadowRoot?.querySelector("sgds-closebutton") as SgdsCloseButton;
     closeButton?.click();

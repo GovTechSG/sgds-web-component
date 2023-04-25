@@ -98,9 +98,6 @@ export class SgdsButton extends SgdsElement {
   /** Used to override the form owner's `target` attribute. */
   @property({ attribute: "formtarget" }) formTarget: "_self" | "_blank" | "_parent" | "_top" | string;
 
-  @property({ reflect: true }) methodType?: "toggleShow" | "decrement" | "increment" | "first" | "last";
-
-  @property({ reflect: true }) stepperId?: string;
 
   /** Sets focus on the button. */
   focus(options?: FocusOptions) {
