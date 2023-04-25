@@ -1,9 +1,9 @@
 import { assert, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
-import "../src/Alert/sgds-alert";
-import { SgdsAlert } from "../src/Alert/sgds-alert";
-import { SgdsCloseButton } from "../src/CloseButton";
+import "../src/components/Alert/sgds-alert";
+import { SgdsAlert } from "../src/components/Alert/sgds-alert";
+import { SgdsCloseButton } from "../src/components/CloseButton";
 
 describe("<Alert>", () => {
   it("Should output a alert with message", async () => {

@@ -1,0 +1,25 @@
+
+@import '../../utils/base.scss';
+@import "~@govtechsg/sgds/sass/breadcrumb";  
+
+:host{
+    --sgds-breadcrumb-seperator: "/";
+}
+
+.breadcrumb-item{
+    display: inline-block;
+}
+
+::slotted(.sgds-breadcrumb-seperator){
+    display: inline-block;
+    align-items: center;
+    padding-left: 0.25rem;
+    padding-right: 0.5rem;
+    &:before{
+        content: var(--sgds-breadcrumb-seperator);
+    }
+}
+
+:host(:last-of-type) .breadcrumb-item__separator {
+    display: none;
+}

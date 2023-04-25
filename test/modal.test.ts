@@ -1,5 +1,5 @@
-import { SgdsModal } from "../src/Modal/sgds-modal";
-import "../src/Modal/sgds-modal";
+import { SgdsModal } from "../src/components/Modal/sgds-modal";
+import "../src/components/Modal/sgds-modal";
 import { expect, fixture, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";

@@ -1,5 +1,5 @@
-import { SgdsMainnavItem, SgdsMainnav, SgdsMainnavDropdown } from "../src/Mainnav";
-import "../src/Mainnav";
+import { SgdsMainnavItem, SgdsMainnav, SgdsMainnavDropdown } from "../src/components/Mainnav";
+import "../src/components/Mainnav";
 import { fixture, assert, expect, aTimeout, fixtureCleanup } from "@open-wc/testing";
 import { html } from "lit";
 

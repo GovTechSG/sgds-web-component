@@ -1,4 +1,4 @@
-import type SgdsButton from "../Button/sgds-button";
+import type SgdsButton from "../components/Button/sgds-button";
 import type { ReactiveController, ReactiveControllerHost } from "lit";
 
 const reportValidityOverloads: WeakMap<HTMLFormElement, () => boolean> = new WeakMap();

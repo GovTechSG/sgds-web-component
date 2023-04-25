@@ -1,7 +1,7 @@
 import { assert, fixture } from "@open-wc/testing";
 import { html } from "lit";
-import { SgdsBreadcrumb } from "../src/Breadcrumb/sgds-breadcrumb";
-import { SgdsBreadcrumbItem } from "../src/Breadcrumb/sgds-breadcrumb-item";
+import { SgdsBreadcrumb } from "../src/components/Breadcrumb/sgds-breadcrumb";
+import { SgdsBreadcrumbItem } from "../src/components/Breadcrumb/sgds-breadcrumb-item";
 
 describe("sgds-breadcrumb", () => {
   it("is defined", () => {

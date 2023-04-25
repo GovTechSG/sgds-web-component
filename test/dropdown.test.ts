@@ -1,6 +1,6 @@
-import { SgdsDropdown, SgdsDropdownItem } from "../src/Dropdown";
-import { SgdsButton } from "../src/Button";
-import "../src/Dropdown";
+import { SgdsDropdown, SgdsDropdownItem } from "../src/components/Dropdown";
+import { SgdsButton } from "../src/components/Button";
+import "../src/components/Dropdown";
 import { fixture, assert, expect, waitUntil } from "@open-wc/testing";
 import sinon from "sinon";
 import { html } from "lit";

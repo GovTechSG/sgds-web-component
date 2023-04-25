@@ -1,0 +1,24 @@
+@import "../../utils/base.scss";
+@import "~@govtechsg/sgds/sass/navbar";
+
+:host   {
+  --mainnav-item-theme-color: #5925DC;
+}
+
+li {
+  height: 100%;
+}
+
+a.nav-link {
+  display: flex;
+  color: #344054;
+  border-bottom: $navbar-border-bottom-height solid transparent;
+  min-height: 100%;
+  align-items: center;
+
+  &.active,
+  &:hover {
+    color: var(--mainnav-item-theme-color);
+    border-color: var(--mainnav-item-theme-color);
+  }
+}

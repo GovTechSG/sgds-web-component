@@ -1,5 +1,5 @@
-import SgdsButton from "../src/Button/sgds-button";
-import "../src/Button/sgds-button";
+import SgdsButton from "../src/components/Button/sgds-button";
+import "../src/components/Button/sgds-button";
 import { fixture, assert, expect, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";

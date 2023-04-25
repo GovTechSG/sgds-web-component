@@ -1,0 +1,27 @@
+@import "../../utils/base.scss";
+@import "~@govtechsg/sgds/sass/card/";
+
+:host {
+  .sgds {
+    &.card {
+      &[variant*="card-action"] {
+        .card-body {
+          sl-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+          }
+        }
+      }
+    }
+    @each $color, $value in $theme-colors {
+      &.text-#{$color} {
+        color: $value !important;
+      }
+    }
+    @each $color, $value in $theme-colors {
+      &.bg-#{$color} {
+        background-color: $value !important;
+      }
+    }
+  }
+}

@@ -1,8 +1,7 @@
-import commandLineArgs from 'command-line-args';
-import fs from 'fs';
-import path from 'path';
 import chalk from 'chalk';
 import { deleteSync } from 'del';
+import fs from 'fs';
+import path from 'path';
 import prettier from 'prettier';
 import prettierConfig from '../prettier.config.js';
 import { getAllComponents, getSgdsComponents } from './shared.mjs';
@@ -23,10 +22,11 @@ const components = getSgdsComponents(getAllComponents(metadata))
 const index = [];
 
 components.map(component => {
+  console.log(component.tagName)
   const tagWithoutPrefix = component.tagName.replace(/^sgds-/, '');
   const componentDir = path.join(reactDir, tagWithoutPrefix);
   const componentFile = path.join(componentDir, 'index.ts');
-  const importPath = component.modulePath.replace(/^src\//, '').replace(/\.ts$/, '')
+  const importPath = component.modulePath.replace(/^src\/components\//, '').replace(/\.ts$/, '')
   const events = (component.events || []).map(event => `${event.reactName}: '${event.name}'`).join(',\n');
 
   fs.mkdirSync(componentDir, { recursive: true });
@@ -35,7 +35,7 @@ components.map(component => {
     `
       import * as React from 'react';
       import { createComponent } from '@lit-labs/react';
-      import Component from '../../${importPath}';
+      import Component from '../../components/${importPath}';
 
       export default createComponent({
         react: React,

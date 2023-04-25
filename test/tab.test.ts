@@ -1,6 +1,6 @@
 import { expect, fixture, html } from "@open-wc/testing";
-import { SgdsTab } from "../src/Tab/sgds-tab";
-import "../src/Tab";
+import { SgdsTab } from "../src/components/Tab/sgds-tab";
+import "../src/components/Tab";
 
 describe("<sgds-tab>", () => {
   it("passes accessibility test", async () => {

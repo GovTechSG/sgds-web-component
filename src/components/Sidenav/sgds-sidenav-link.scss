@@ -1,0 +1,25 @@
+@import "../../utils/base.scss";
+
+a.nav-link {
+  display: block;
+  color: inherit;
+  font-size: $sidenav-fontsize;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: calc(
+    #{$sidenav-item-spacing * 4} + #{$sidenav-btn-border-width}
+  );
+  padding-right: 0;
+  text-decoration: none;
+
+  &.active,
+  &:hover {
+    color: var(--sidenav-theme-color);
+  }
+  // Disabled state lightens text
+  &.disabled {
+    color: $nav-link-disabled-color;
+    pointer-events: none;
+    cursor: default;
+  }
+}

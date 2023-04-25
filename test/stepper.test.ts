@@ -1,8 +1,8 @@
 import { assert, elementUpdated, expect, fixture, html } from "@open-wc/testing";
-import "../src/Button";
-import { SgdsButton } from "../src/Button/sgds-button";
-import "../src/Stepper";
-import { SgdsStepper } from "../src/Stepper/sgds-stepper";
+import "../src/components/Button";
+import { SgdsButton } from "../src/components/Button/sgds-button";
+import "../src/components/Stepper";
+import { SgdsStepper } from "../src/components/Stepper/sgds-stepper";
 
 describe("sgds-stepper", () => {
   it("is defined", () => {

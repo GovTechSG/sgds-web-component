@@ -1,7 +1,7 @@
-import { SgdsTextArea } from "../src/Textarea/sgds-textarea";
-import "../src/Textarea";
-import { SgdsButton } from "../src/Button/sgds-button";
-import "../src/Button";
+import { SgdsTextArea } from "../src/components/Textarea/sgds-textarea";
+import "../src/components/Textarea";
+import { SgdsButton } from "../src/components/Button/sgds-button";
+import "../src/components/Button";
 import { assert, fixture, html, expect, waitUntil, oneEvent } from "@open-wc/testing";
 import sinon from "sinon";
 

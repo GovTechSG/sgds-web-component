@@ -2,9 +2,9 @@ import { assert, expect, fixture, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
-import { SgdsButton } from "../src/Button";
-import "../src/QuantityToggle/sgds-quantity-toggle";
-import { SgdsQuantityToggle } from "../src/QuantityToggle/sgds-quantity-toggle";
+import { SgdsButton } from "../src/components/Button";
+import "../src/components/QuantityToggle/sgds-quantity-toggle";
+import { SgdsQuantityToggle } from "../src/components/QuantityToggle/sgds-quantity-toggle";
 
 describe("sgds-quantity-toggle", () => {
   it("is defined", () => {

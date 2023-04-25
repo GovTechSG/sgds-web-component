@@ -1,0 +1,84 @@
+@import '../../utils/components.style';
+@import '../../utils/base.scss';
+
+:host {
+  display: inline-block;
+
+  sgds-tab {
+    + sgds-tab{
+      margin-right: 1rem;
+    }
+  }
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  font-family: $font-family-sans-serif;
+  font-size: $font-size-base;
+  color: $gray-600;
+  padding: $nav-sgds-tabs-padding-y 0;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  transition: var(--transition-speed) box-shadow, var(--transition-speed) color;
+}
+
+.tab:focus {
+  outline: none;
+}
+
+.tab:focus-visible:not(.tab--disabled) {
+  color: $blue-500;
+}
+
+.tab:focus-visible {
+  outline: $blue-500 solid $input-btn-focus-width;
+  outline-offset: calc(-1 * #{$input-btn-focus-width} - 1px);
+}
+
+.tab.tab--active:not(.tab--disabled) {
+  color: $body-color;
+  font-weight: $font-weight-bold;
+  border-bottom: solid $nav-tabs-border-width $blue-500;
+}
+
+
+
+.tab.tab--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+@media (forced-colors: active) {
+  .tab.tab--active:not(.tab--disabled) {
+    outline: solid 1px transparent;
+    outline-offset: -3px;
+  }
+}
+
+.tab {
+  ::slotted(i){
+    margin-top:-4px;
+    margin-right: 0.5rem;
+  }
+  ::slotted(.badge){
+    margin-left: 0.5rem;
+  }
+  &--basic-toggle{
+    background-color: $white;
+    border: 1px solid $gray-400;
+    border-radius: 0;
+    color: #1d2939;
+    padding: 0.75rem 1.5rem;
+    + .tab--basic-toggle{
+      margin-left: -2px;
+    }
+    &.tab--active:not(.tab--disabled){
+      background: var(--indicator-color);
+      color: white;
+      border-bottom: 1px solid $gray-400;
+    }
+  }
+}

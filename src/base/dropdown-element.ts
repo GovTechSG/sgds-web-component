@@ -5,7 +5,7 @@ import type { StrictModifiers } from "@popperjs/core";
 import { createRef, Ref } from "lit/directives/ref.js";
 import mergeDeep from "../utils/mergeDeep";
 import genId from "../utils/generateId";
-import { SgdsDropdownItem } from "../Dropdown/sgds-dropdown-item";
+import { SgdsDropdownItem } from "../components/Dropdown/sgds-dropdown-item";
 import SgdsElement from "./sgds-element";
 
 const ARROW_DOWN = "ArrowDown";

@@ -79,7 +79,7 @@ describe("makeArgTypes()", () => {
   });
   it("type.text.string output should be content.control.text", () => {
     const expected = {
-      content: { control: "text", defaultValue: "test-content" },
+      content: { control: "text", defaultValue: "test-content" }
     };
     expect(makeArgTypes(textInput)).deep.to.equal(expected);
   });
@@ -87,13 +87,13 @@ describe("makeArgTypes()", () => {
     const expected = {
       content: { control: "boolean" }
     };
-    expect(makeArgTypes(booleanInput).content.control).to.equal('boolean');
+    expect(makeArgTypes(booleanInput).content.control).to.equal("boolean");
   });
   it("type.text.number output should be content.control.number", () => {
     const expected = {
       content: { control: "number" }
     };
-    expect(makeArgTypes(numberInput).content.control).to.equal('number');
+    expect(makeArgTypes(numberInput).content.control).to.equal("number");
   });
   it("type.text with multiple options output should be content.control.select", () => {
     const expected = {
@@ -109,7 +109,7 @@ describe("makeArgTypes()", () => {
     const expected = {
       content: { control: "object" }
     };
-    expect(makeArgTypes(arrayInput).content.control).to.equal('object');
+    expect(makeArgTypes(arrayInput).content.control).to.equal("object");
   });
   it("type.text others output should be content.control.object", () => {
     const expected = {

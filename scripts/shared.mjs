@@ -18,6 +18,6 @@ export function getAllComponents(metadata) {
 }
 
 export function getSgdsComponents(allComponents) {
-  const srcComponents = allComponents.filter(component => component.modulePath.startsWith('src/'))
-  return srcComponents.filter(component =>  !component.modulePath.includes('src/base'))
+  const srcComponents = allComponents.filter(component => component.modulePath.startsWith('src/components'))
+  return srcComponents
 }

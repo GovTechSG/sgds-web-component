@@ -2,10 +2,10 @@ import { assert, elementUpdated, expect, fixture, fixtureCleanup, triggerFocusFo
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
-import "../src/Button";
-import { SgdsButton } from "../src/Button";
-import "../src/Radio";
-import { SgdsRadio, SgdsRadioGroup } from "../src/Radio";
+import "../src/components/Button";
+import { SgdsButton } from "../src/components/Button";
+import "../src/components/Radio";
+import { SgdsRadio, SgdsRadioGroup } from "../src/components/Radio";
 
 describe("<sgds-radio>", () => {
   afterEach(() => fixtureCleanup());

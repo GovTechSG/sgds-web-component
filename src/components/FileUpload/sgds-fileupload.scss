@@ -1,0 +1,19 @@
+@import "../../utils/base.scss";
+@import "~@govtechsg/sgds/sass/fileupload";
+
+.sgds {
+  &.fileupload-list {
+    .fileupload-list-item {
+      i,
+      sl-icon {
+        &:first-child {
+          color: $success;
+        }
+
+        &:last-child {
+          color: $danger;
+        }
+      }
+    }
+  }
+}

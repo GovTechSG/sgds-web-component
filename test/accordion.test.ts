@@ -1,7 +1,7 @@
-import { SgdsAccordionItem } from "../src/Accordion/sgds-accordion-item";
-import "../src/Accordion/sgds-accordion-item";
-import { SgdsAccordion } from "../src/Accordion/sgds-accordion";
-import "../src/Accordion/sgds-accordion";
+import { SgdsAccordionItem } from "../src/components/Accordion/sgds-accordion-item";
+import "../src/components/Accordion/sgds-accordion-item";
+import { SgdsAccordion } from "../src/components/Accordion/sgds-accordion";
+import "../src/components/Accordion/sgds-accordion";
 import { fixture, expect, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";

@@ -1,7 +1,7 @@
-import { SgdsInput } from "../src/Input/sgds-input";
-import type SgdsButton from "../src/Button/sgds-button";
-import "../src/Input";
-import "../src/Button";
+import { SgdsInput } from "../src/components/Input/sgds-input";
+import type SgdsButton from "../src/components/Button/sgds-button";
+import "../src/components/Input";
+import "../src/components/Button";
 import { expect, fixture, html, oneEvent, waitUntil, assert, elementUpdated } from "@open-wc/testing";
 import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";

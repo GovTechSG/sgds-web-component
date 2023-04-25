@@ -1,7 +1,7 @@
 import { assert, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
-import "../src/Tooltip";
-import { SgdsTooltip } from "../src/Tooltip";
+import "../src/components/Tooltip";
+import { SgdsTooltip } from "../src/components/Tooltip";
 
 describe("sgds-tooltip", () => {
   it("is defined", () => {

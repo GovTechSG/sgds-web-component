@@ -1,0 +1,73 @@
+@import "../../utils/base.scss";
+@import "~@govtechsg/sgds/sass/transitions";
+@import "~bootstrap-icons/font/fonts/bootstrap-icons.css";
+
+:host   {
+  --sidenav-theme-color: #5925DC;
+}
+
+.sidenav-btn {
+  width: 100%;
+  text-align: initial;
+  line-height: 1.5rem;
+  font-size: 1rem;
+  border: 0;
+  background: 0;
+  padding: 0.5rem 1rem;
+  border-left: $navbar-border-bottom-height solid transparent;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+
+  &.active,
+  &:hover {
+    color: var(--sidenav-theme-color);
+    border-left-color: var(--sidenav-theme-color);
+    font-weight: $font-weight-bold;
+  }
+  &.disabled{
+      opacity: 0.65;
+      pointer-events: none;
+  }
+  svg {
+    &.bi-chevron-down {
+      @extend .ms-auto;
+      transition: all 0.3s ease-in-out;
+      transform: rotate(180deg);
+    }
+  }
+  &:not(.active) {
+    svg {
+      &.bi-chevron-down {
+        transform: rotate(0deg);
+      }
+    }
+  }
+}
+
+a.sidenav-btn {
+  color: inherit;
+  text-decoration: none;
+  line-height: 1.5rem;
+}
+
+.sidenav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin: 0;
+  line-height: 2rem;
+}
+
+.collapse,
+.collapse.show,
+.collapsing {
+  margin-top: $sidenav-item-spacing;
+}
+
+::slotted(*[slot="title"]) {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}

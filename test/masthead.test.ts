@@ -1,5 +1,5 @@
-import { SgdsMasthead } from "../src/Masthead";
-import "../src/Masthead/sgds-masthead";
+import { SgdsMasthead } from "../src/components/Masthead";
+import "../src/components/Masthead/sgds-masthead";
 import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 

@@ -1,9 +1,9 @@
 import { assert, elementUpdated, expect, fixture, html } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
-import { SgdsButton } from "../src/Button";
-import "../src/Checkbox";
-import { SgdsCheckbox } from "../src/Checkbox";
+import { SgdsButton } from "../src/components/Button";
+import "../src/components/Checkbox";
+import { SgdsCheckbox } from "../src/components/Checkbox";
 
 describe("<sgds-checkbox>", () => {
   it("is defined", () => {

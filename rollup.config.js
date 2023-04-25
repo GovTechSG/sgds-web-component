@@ -62,9 +62,9 @@ const reactSubFolderBuildPlugins = folderName => [
   })
 ];
 
-const wcfolderBuilds = getFolders("./src").map(folder => {
+const wcfolderBuilds = getFolders("./src/components").map(folder => {
   return {
-    input: `src/${folder}/index.ts`,
+    input: `src/components/${folder}/index.ts`,
     output: [
       {
         file: `lib/${folder}/index.js`,
@@ -77,61 +77,7 @@ const wcfolderBuilds = getFolders("./src").map(folder => {
   };
 });
 
-const reactFolderBuilds = getFolders("src/react").map(folder => {
-  return {
-    input: `src/react/${folder}/index.ts`,
-    output: [
-      {
-        file: `lib/react/${folder}/index.js`,
-        sourcemap: true,
-        exports: "named",
-        format: "esm"
-      }
-    ],
-    external: ["@lit-labs/react", "react"],
-    plugins: reactSubFolderBuildPlugins(folder)
-  };
-});
-const reactPackage = [
-  {
-    input: "src/react/index.ts",
-    output: [
-      {
-        file: "lib/react/index.js",
-        format: "esm",
-        sourcemap: true,
-        exports: "named"
-      }
-    ],
-    plugins: [
-      ...reactBuildPlugins,
-      generatePackageJson({
-        baseContents: {
-          name: `${packageJson.name}/react`,
-          private: false,
-          main: "./cjs/index.js",
-          module: "./index.js",
-          types: "./index.d.ts"
-        }
-      })
-    ],
-    external: ["@lit-labs/react", "react"]
-  },
-  {
-    input: "src/react/index.ts",
-    output: [
-      {
-        file: "lib/react/cjs/index.js",
-        format: "cjs",
-        sourcemap: true,
-        exports: "named"
-      }
-    ],
-    plugins: [...reactBuildPlugins],
-    external: ["@lit-labs/react", "react"]
-  },
-  ...reactFolderBuilds
-];
+
 const buildSgdsPackage = () => {
   const sgdsWcPackage = [
     {
@@ -153,7 +99,66 @@ const buildSgdsPackage = () => {
     },
     ...wcfolderBuilds
   ];
-  if (process.env.NODE_ENV === "production") return sgdsWcPackage.concat(reactPackage);
+ 
+  if (process.env.NODE_ENV === "production") {
+
+const reactFolderBuilds = getFolders("src/react").map(folder => {
+  return {
+    input: `src/react/${folder}/index.ts`,
+    output: [
+      {
+        file: `lib/react/${folder}/index.js`,
+        sourcemap: true,
+        exports: "named",
+        format: "esm"
+      }
+    ],
+    external: ["@lit-labs/react", "react"],
+    plugins: reactSubFolderBuildPlugins(folder)
+  };
+});
+    const reactPackage = [
+      {
+        input: "src/react/index.ts",
+        output: [
+          {
+            file: "lib/react/index.js",
+            format: "esm",
+            sourcemap: true,
+            exports: "named"
+          }
+        ],
+        plugins: [
+          ...reactBuildPlugins,
+          generatePackageJson({
+            baseContents: {
+              name: `${packageJson.name}/react`,
+              private: false,
+              main: "./cjs/index.js",
+              module: "./index.js",
+              types: "./index.d.ts"
+            }
+          })
+        ],
+        external: ["@lit-labs/react", "react"]
+      },
+      {
+        input: "src/react/index.ts",
+        output: [
+          {
+            file: "lib/react/cjs/index.js",
+            format: "cjs",
+            sourcemap: true,
+            exports: "named"
+          }
+        ],
+        plugins: [...reactBuildPlugins],
+        external: ["@lit-labs/react", "react"]
+      },
+      ...reactFolderBuilds
+    ];
+    return sgdsWcPackage.concat(reactPackage)
+  }
   return sgdsWcPackage;
 };
 

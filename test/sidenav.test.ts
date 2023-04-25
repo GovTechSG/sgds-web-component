@@ -1,5 +1,5 @@
-import { SgdsSidenav, SgdsSidenavItem, SgdsSidenavLink } from "../src/Sidenav";
-import "../src/Sidenav";
+import { SgdsSidenav, SgdsSidenavItem, SgdsSidenavLink } from "../src/components/Sidenav";
+import "../src/components/Sidenav";
 import { fixture, assert, expect, waitUntil, elementUpdated, aTimeout } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";

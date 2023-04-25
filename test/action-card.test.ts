@@ -1,9 +1,9 @@
 import { assert, elementUpdated, expect, fixture, html } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
-import "../src/ActionCard";
-import { SgdsActionCard } from "../src/ActionCard";
-import "../src/Checkbox";
-import "../src/Radio";
+import "../src/components/ActionCard";
+import { SgdsActionCard } from "../src/components/ActionCard";
+import "../src/components/Checkbox";
+import "../src/components/Radio";
 
 describe("<sgds-action-card>", () => {
   // Card test cases

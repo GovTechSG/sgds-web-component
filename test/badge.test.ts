@@ -1,5 +1,5 @@
-import { SgdsBadge } from "../src/Badge";
-import "../src/Badge/sgds-badge";
+import { SgdsBadge } from "../src/components/Badge";
+import "../src/components/Badge/sgds-badge";
 import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 
