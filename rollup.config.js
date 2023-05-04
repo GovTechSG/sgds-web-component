@@ -16,7 +16,7 @@ const wcPlugins = [
     preventAssignment: true
   }),
   postcss({
-    minimize: false,
+    minimize: true,
     inject: false
   }),
   litcss(),
@@ -33,7 +33,7 @@ const subfolderWCPlugins = folderName => [
       private: true,
       main: "../umd/index.js",
       module: "./index.js",
-      types: "./index.d.ts"
+      types: `../components/${folderName}/index.d.ts`
     }
   })
 ];
@@ -41,7 +41,7 @@ const subfolderWCPlugins = folderName => [
 const reactBuildPlugins = [
   resolve(),
   postcss({
-    minimize: false,
+    minimize: true,
     inject: false
   }),
   litcss(),
@@ -81,19 +81,21 @@ const buildSgdsPackage = () => {
   const sgdsWcPackage = [
     {
       input: "src/index.ts",
-      output: [
-        {
-          file: packageJson.module,
-          format: "esm",
-          sourcemap: true
-        },
-        {
-          file: packageJson.main,
-          format: "umd",
-          sourcemap: true,
-          name: "index"
-        }
-      ],
+      output: {
+        file: packageJson.module,
+        format: "esm",
+        sourcemap: true
+      },
+      plugins: wcPlugins
+    },
+    {
+      input: "src/main.ts",
+      output: {
+        file: packageJson.main,
+        format: "umd",
+        sourcemap: true,
+        name: "index"
+      },
       plugins: wcPlugins
     },
     ...wcfolderBuilds
