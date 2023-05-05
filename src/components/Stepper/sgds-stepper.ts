@@ -7,7 +7,7 @@ import styles from "./sgds-stepper.scss";
 // TODO: any events emitted?
 @customElement("sgds-stepper")
 export class SgdsStepper extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   @property({ type: Array })
   steps = [

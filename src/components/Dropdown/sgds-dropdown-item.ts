@@ -6,7 +6,7 @@ import styles from "./sgds-dropdown.scss";
 
 @customElement("sgds-dropdown-item")
 export class SgdsDropdownItem extends LinkElement {
-  static styles = styles;
+  static styles = [LinkElement.styles, styles];
 
   @query("a")
   anchor: HTMLElement;

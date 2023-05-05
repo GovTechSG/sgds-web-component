@@ -65,7 +65,7 @@ export class SgdsFileUpload extends SgdsElement {
     this.emit("sgds-files-selected");
   }
 
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   // Create a ref to the input element
   private inputRef = createRef<HTMLInputElement>();

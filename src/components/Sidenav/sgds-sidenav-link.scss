@@ -1,13 +1,20 @@
-@import "../../utils/base.scss";
+
+:host {
+  //Sidenav
+--sidenav-fontsize: 1rem;
+--sidenav-item-spacing: 1rem;
+--sidenav-btn-border-width: 0.125rem;
+--nav-link-disabled-color: #344054;
+}
 
 a.nav-link {
   display: block;
   color: inherit;
-  font-size: $sidenav-fontsize;
+  font-size: var(--sidenav-fontsize);
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: calc(
-    #{$sidenav-item-spacing * 4} + #{$sidenav-btn-border-width}
+    var(--sidenav-item-spacing) * 4 + var(--sidenav-btn-border-width)
   );
   padding-right: 0;
   text-decoration: none;
@@ -18,7 +25,7 @@ a.nav-link {
   }
   // Disabled state lightens text
   &.disabled {
-    color: $nav-link-disabled-color;
+    color: var(--nav-link-disabled-color);
     pointer-events: none;
     cursor: default;
   }

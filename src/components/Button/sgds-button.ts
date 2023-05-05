@@ -33,7 +33,7 @@ export type ButtonVariant =
  */
 @customElement("sgds-button")
 export class SgdsButton extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   @query(".btn") button: HTMLButtonElement | HTMLLinkElement;
 

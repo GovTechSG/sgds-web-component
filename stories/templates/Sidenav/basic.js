@@ -23,7 +23,7 @@ export const Template = ({
         <sgds-sidenav-link .href=${hrefSNL} .active=${activeSNL} .disabled=${disabledSNL}
           >sgds-sidenav-link (control by Argstable)</sgds-sidenav-link
         >
-        <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
+        <sgds-sidenav-link href="#" disabled>sgds-sidenav-link</sgds-sidenav-link>
         <sgds-sidenav-link href="#">sgds-sidenav-link</sgds-sidenav-link>
       </sgds-sidenav-item>
       <sgds-sidenav-item>

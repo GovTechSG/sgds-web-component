@@ -8,7 +8,7 @@ export type BadgeVariant = "primary" | "secondary" | "success" | "danger" | "war
 
 @customElement("sgds-badge")
 export class SgdsBadge extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles,styles];
 
   @property({ reflect: true }) variant: BadgeVariant = "primary";
   @property({ type: Boolean, reflect: true }) isLight;

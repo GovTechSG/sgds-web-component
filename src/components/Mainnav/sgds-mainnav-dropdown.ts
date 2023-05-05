@@ -6,7 +6,7 @@ import { DropdownElement } from "../../base/dropdown-element";
 
 @customElement("sgds-mainnav-dropdown")
 export class SgdsMainnavDropdown extends DropdownElement {
-  static styles = styles;
+  static styles = [DropdownElement.styles, styles];
 
   render() {
     return html`

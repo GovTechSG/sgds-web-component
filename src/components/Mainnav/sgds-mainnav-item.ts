@@ -7,7 +7,7 @@ import LinkElement from "../../base/link-element";
  */
 @customElement("sgds-mainnav-item")
 export class SgdsMainnavItem extends LinkElement {
-  static styles = styles;
+  static styles = [LinkElement.styles,styles];
 }
 
 export default SgdsMainnavItem;

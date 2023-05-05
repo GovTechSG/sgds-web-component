@@ -6,7 +6,7 @@ import styles from "./sgds-closebutton.scss";
 
 @customElement("sgds-closebutton")
 export class SgdsCloseButton extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   @property({ type: Boolean, reflect: true })
   closed = false;

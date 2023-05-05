@@ -12,7 +12,7 @@ import styles from "./sgds-checkbox.scss";
 
 @customElement("sgds-checkbox")
 export class SgdsCheckbox extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
 

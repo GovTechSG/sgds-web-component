@@ -6,7 +6,7 @@ import styles from "./sgds-table.scss";
 
 @customElement("sgds-table")
 export class SgdsTable extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   @property({ type: Boolean, reflect: true }) striped = false;
   @property({ type: Boolean, reflect: true }) bordered = false;

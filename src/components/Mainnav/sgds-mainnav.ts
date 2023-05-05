@@ -26,7 +26,7 @@ const SIZES = {
  */
 @customElement("sgds-mainnav")
 export class SgdsMainnav extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   constructor() {
     super();

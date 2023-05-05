@@ -10,7 +10,7 @@ import genId from "../../utils/generateId";
 
 @customElement("sgds-radio")
 export class SgdsRadio extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles,styles];
 
   @state() checked = false;
   @state() protected hasFocus = false;

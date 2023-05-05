@@ -17,7 +17,7 @@ import { classMap } from "lit/directives/class-map.js";
 
 @customElement("sgds-sidenav-item")
 export class SgdsSidenavItem extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   private myCollapse: Ref<HTMLElement> = createRef();
   private bsCollapse: Collapse = null;
