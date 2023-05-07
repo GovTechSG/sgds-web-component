@@ -7,7 +7,7 @@ import styles from "./sgds-breadcrumb.scss";
 
 @customElement("sgds-breadcrumb-item")
 export class SgdsBreadcrumbItem extends SgdsElement {
-  static styles = [SgdsElement.styles,styles];
+  static styles = [SgdsElement.styles, styles];
 
   @property({ type: String, reflect: true }) currentPage;
 

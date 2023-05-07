@@ -7,7 +7,7 @@ import styles from "./sgds-breadcrumb.scss";
 
 @customElement("sgds-breadcrumb")
 export class SgdsBreadcrumb extends SgdsElement {
-  static styles = [SgdsElement.styles,styles];
+  static styles = [SgdsElement.styles, styles];
 
   @property({ type: String, reflect: true }) ariaLabel = "breadcrumb";
 

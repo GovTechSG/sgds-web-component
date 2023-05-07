@@ -1,11 +1,10 @@
-@import '../../utils/base.scss';
-
+// @import '../../utils/base.scss';
+//TODO: Double check with LT if still need the classes below 
   :host {
     --sgds-modal-width: 35rem;
     --sgds-modal-z-index: 1055;
     --sgds-modal-padding: 1.5rem;
     --sgds-modal-border-radius: 5px;
-
     --sgds-modal-border-width: 1px;
     --sgds-modal-overlay-color:rgba(0,0,0,0.5);
     display: contents;
@@ -58,27 +57,35 @@
 
   .modal-header {
     flex: 0 0 auto;
+    margin-bottom: 0.5rem;
+    margin-top: 0px;
+    font-weight: 700;
+    line-height: 1.33;
+    font-size: calc(1.275rem + 0.3vw);
     display: flex;
     padding: var(--sgds-modal-padding);
     align-items: center;
     border-bottom: var(--sgds-modal-border-width) solid var(--sgds-gray-400, #98a2b3);
     &.centered{
-      @extend .border-bottom-0;
-      @extend .pb-0;
-      @extend .mb-0; 
-      
+      border-bottom: 0;
+      padding-bottom: 0;
+      margin-bottom: 0;
     }
   }
 
   .modal-title {
     flex: 1 1 auto;
-    @extend .h3;
-    @extend .gap-3;
+    // @extend .h3;
+    // @extend .gap-3;
+    gap: 1rem;
     margin: 0;
     &.centered{
-      @extend .justify-content-center; 
-      @extend .flex-column; 
-      @extend .text-center; 
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      // @extend .justify-content-center; 
+      // @extend .flex-column; 
+      // @extend .text-center; 
       margin-left: 3rem;
     }
   }
@@ -88,7 +95,8 @@
     display: flex;
     align-items: center;
     &.centered{
-      @extend .align-self-start;
+      // @extend .align-self-start;
+      align-self: flex-start;
       margin-top: -0.5rem;
     }
   }

@@ -25,8 +25,8 @@ export type DropdownButtonVariant =
 export type DropDirection = "left" | "right" | "up" | "down";
 
 export class DropdownElement extends SgdsElement {
-  static styles = SgdsElement.styles
-  
+  static styles = SgdsElement.styles;
+
   myDropdown: Ref<HTMLElement> = createRef();
   bsDropdown: Dropdown = null;
 

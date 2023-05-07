@@ -1,5 +1,9 @@
-@import "../../utils/base.scss";
-@import "~@govtechsg/sgds/sass/accordion";
+
+:host{
+  --accordion-padding-y: 1rem;
+  --accordion-padding-x: 1.25rem;
+  --accordion-border-radius: 0.25rem;
+}
 
 .accordion-body {
     padding: 0;
@@ -8,7 +12,7 @@
 
 .accordion-content {
     display: block;
-    padding: $accordion-button-padding-y $accordion-button-padding-x;
+    padding: var(--accordion-padding-y) var(--accordion-padding-x);
   }
 
 .accordion-button:not(.collapsed){
@@ -17,7 +21,7 @@
 
 :host([first-of-type]){
   .accordion-item{
-    border-radius: $accordion-border-radius $accordion-border-radius 0 0;
+    border-radius: var(--accordion-border-radius) var(--accordion-border-radius) 0 0;
   }
 }
 
@@ -30,7 +34,7 @@
 
 :host([last-of-type]){
   .accordion-item{
-    border-radius: 0 0 $accordion-border-radius $accordion-border-radius;
+    border-radius: 0 0 var(--accordion-border-radius) var(--accordion-border-radius);
     border-top:0;
   }
 }

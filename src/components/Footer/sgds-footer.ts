@@ -19,7 +19,7 @@ export interface ColumnLinks {
 @customElement("sgds-footer")
 export class SgdsFooter extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
-  
+
   @property()
   title = ``;
   @property()
