@@ -62,20 +62,20 @@ const reactSubFolderBuildPlugins = folderName => [
   })
 ];
 
-const wcfolderBuilds = getFolders("./src/components").map(folder => {
-  return {
-    input: `src/components/${folder}/index.ts`,
-    output: [
-      {
-        file: `lib/${folder}/index.js`,
-        sourcemap: true,
-        exports: "named",
-        format: "esm"
-      }
-    ],
-    plugins: subfolderWCPlugins(folder)
-  };
-});
+// const wcfolderBuilds = getFolders("./src/components").map(folder => {
+//   return {
+//     input: `src/components/${folder}/index.ts`,
+//     output: [
+//       {
+//         file: `lib/${folder}/index.js`,
+//         sourcemap: true,
+//         exports: "named",
+//         format: "esm"
+//       }
+//     ],
+//     plugins: subfolderWCPlugins(folder)
+//   };
+// });
 
 const buildSgdsPackage = () => {
   const sgdsWcPackage = [
@@ -98,7 +98,7 @@ const buildSgdsPackage = () => {
       },
       plugins: wcPlugins
     },
-    ...wcfolderBuilds
+    // ...wcfolderBuilds
   ];
 
   if (process.env.NODE_ENV === "production") {
