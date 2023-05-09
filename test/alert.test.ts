@@ -61,12 +61,12 @@ describe("<Alert>", () => {
     expect(base?.classList.contains("show")).to.be.false;
   });
 
-  it('when show is true, alert should have show class', async () => {
+  it("when show is true, alert should have show class", async () => {
     const el = await fixture(html`<sgds-alert variant="primary" show>Test alert</sgds-alert>`);
     const base = el.shadowRoot?.querySelector(".sgds.alert");
-    console.log(base)
+    console.log(base);
     expect(base?.classList.contains("show")).to.be.true;
-  })
+  });
 
   describe("Web Accessibility", () => {
     it("Should have alert role", async () => {

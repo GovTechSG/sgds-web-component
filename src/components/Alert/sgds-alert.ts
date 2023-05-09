@@ -62,29 +62,29 @@ export class SgdsAlert extends SgdsElement {
 
   render() {
     return html`
-            <div
-              part="base"
-              class="${classMap({
-                "sgds": true,
-                "alert": true,
-                "fade": true,
-                "show": this.show,
-                [`alert-${this.variant}`]: this.variant,
-                [`alert-dismissible`]: this.dismissible,
-                [`${this.alertClasses}`]: this.alertClasses
-              })}"
-              role="alert"
-              aria-hidden=${this.show ? "false" : "true"}
-            >
-              <slot></slot>
-              ${this.dismissible
-                ? html`<sgds-closebutton
-                    class="btn-close btn-sm"
-                    closeLabel=${ifDefined(this.closeLabel)}
-                    @click=${this.handleCloseClick}
-                  ></sgds-closebutton>`
-                : null}
-            </div>
+      <div
+        part="base"
+        class="${classMap({
+          sgds: true,
+          alert: true,
+          fade: true,
+          show: this.show,
+          [`alert-${this.variant}`]: this.variant,
+          [`alert-dismissible`]: this.dismissible,
+          [`${this.alertClasses}`]: this.alertClasses
+        })}"
+        role="alert"
+        aria-hidden=${this.show ? "false" : "true"}
+      >
+        <slot></slot>
+        ${this.dismissible
+          ? html`<sgds-closebutton
+              class="btn-close btn-sm"
+              closeLabel=${ifDefined(this.closeLabel)}
+              @click=${this.handleCloseClick}
+            ></sgds-closebutton>`
+          : null}
+      </div>
     `;
   }
 }
