@@ -22,7 +22,7 @@ Please describe the tests that you ran to verify your changes. Provide instructi
 - [ ] Test A
 - [ ] Test B
 
-## Checklist:
+## :white_check_mark: Checklist:
 
 - [ ] My code follows the SGDS style guidelines and naming conventions
 - [ ] I have performed a self-review of my own code
