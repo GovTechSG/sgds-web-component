@@ -25,5 +25,6 @@ export const Template = args =>
     >
   `;
 export const args = {
-  alertClasses: "d-flex align-items-center"
+  alertClasses: "d-flex align-items-center",
+  show: true
 };

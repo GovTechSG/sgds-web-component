@@ -11,7 +11,7 @@ import type SgdsAccordionItem from "./sgds-accordion-item";
  */
 @customElement("sgds-accordion")
 export class SgdsAccordion extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   @property({ type: Boolean, reflect: true }) allowMultiple = false;
 

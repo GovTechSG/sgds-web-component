@@ -12,7 +12,7 @@ import { watch } from "../../utils/watch";
 
 @customElement("sgds-textarea")
 export class SgdsTextArea extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   @query("textarea.form-control") textarea: HTMLTextAreaElement;
   @state() private hasFocus = false;

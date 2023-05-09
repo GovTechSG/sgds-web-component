@@ -62,20 +62,20 @@ const reactSubFolderBuildPlugins = folderName => [
   })
 ];
 
-const wcfolderBuilds = getFolders("./src/components").map(folder => {
-  return {
-    input: `src/components/${folder}/index.ts`,
-    output: [
-      {
-        file: `lib/${folder}/index.js`,
-        sourcemap: true,
-        exports: "named",
-        format: "esm"
-      }
-    ],
-    plugins: subfolderWCPlugins(folder)
-  };
-});
+// const wcfolderBuilds = getFolders("./src/components").map(folder => {
+//   return {
+//     input: `src/components/${folder}/index.ts`,
+//     output: [
+//       {
+//         file: `lib/${folder}/index.js`,
+//         sourcemap: true,
+//         exports: "named",
+//         format: "esm"
+//       }
+//     ],
+//     plugins: subfolderWCPlugins(folder)
+//   };
+// });
 
 const buildSgdsPackage = () => {
   const sgdsWcPackage = [
@@ -97,26 +97,26 @@ const buildSgdsPackage = () => {
         name: "index"
       },
       plugins: wcPlugins
-    },
-    ...wcfolderBuilds
+    }
+    // ...wcfolderBuilds
   ];
 
   if (process.env.NODE_ENV === "production") {
-    const reactFolderBuilds = getFolders("src/react").map(folder => {
-      return {
-        input: `src/react/${folder}/index.ts`,
-        output: [
-          {
-            file: `lib/react/${folder}/index.js`,
-            sourcemap: true,
-            exports: "named",
-            format: "esm"
-          }
-        ],
-        external: ["@lit-labs/react", "react"],
-        plugins: reactSubFolderBuildPlugins(folder)
-      };
-    });
+    // const reactFolderBuilds = getFolders("src/react").map(folder => {
+    //   return {
+    //     input: `src/react/${folder}/index.ts`,
+    //     output: [
+    //       {
+    //         file: `lib/react/${folder}/index.js`,
+    //         sourcemap: true,
+    //         exports: "named",
+    //         format: "esm"
+    //       }
+    //     ],
+    //     external: ["@lit-labs/react", "react"],
+    //     plugins: reactSubFolderBuildPlugins(folder)
+    //   };
+    // });
     const reactPackage = [
       {
         input: "src/react/index.ts",
@@ -154,8 +154,8 @@ const buildSgdsPackage = () => {
         ],
         plugins: [...reactBuildPlugins],
         external: ["@lit-labs/react", "react"]
-      },
-      ...reactFolderBuilds
+      }
+      // ...reactFolderBuilds
     ];
     return sgdsWcPackage.concat(reactPackage);
   }

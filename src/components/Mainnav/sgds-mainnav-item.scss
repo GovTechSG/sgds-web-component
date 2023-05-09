@@ -1,5 +1,3 @@
-@import "../../utils/base.scss";
-@import "~@govtechsg/sgds/sass/navbar";
 
 :host   {
   --mainnav-item-theme-color: #5925DC;
@@ -12,7 +10,7 @@ li {
 a.nav-link {
   display: flex;
   color: #344054;
-  border-bottom: $navbar-border-bottom-height solid transparent;
+  border-bottom: 0.125 solid transparent;
   min-height: 100%;
   align-items: center;
 

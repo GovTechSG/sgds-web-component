@@ -5,7 +5,7 @@ import SgdsElement from "../../base/sgds-element";
 
 @customElement("sgds-masthead")
 export class SgdsMasthead extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   @property({ type: Boolean, reflect: true })
   fluid = false;

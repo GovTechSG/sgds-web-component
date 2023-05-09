@@ -15,7 +15,7 @@ export class SgdsQuantityToggle extends SgdsElement {
   @query("input.form-control") input: HTMLInputElement;
   @query("sgds-button.button-group_button-first") leftBtn: SgdsButton;
   @query("sgds-button.button-group_button-last") lastBtn: SgdsButton;
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   @property({ reflect: true, type: String }) quantToggleId = genId("quantToggle", "toggle");
 

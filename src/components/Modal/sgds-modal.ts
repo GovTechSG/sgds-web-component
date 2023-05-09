@@ -13,7 +13,7 @@ import { getAnimation, setDefaultAnimation } from "../../utils/animation-registr
 import styles from "./sgds-modal.scss";
 @customElement("sgds-modal")
 export class SgdsModal extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   @query(".modal") dialog: HTMLElement;
   @query(".modal-panel") panel: HTMLElement;

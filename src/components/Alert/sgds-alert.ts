@@ -5,6 +5,7 @@ import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-alert.scss";
 
+//TODO: Alert Link
 /**
  *
  * @dependency sl-icon-button
@@ -31,11 +32,11 @@ export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "war
 
 @customElement("sgds-alert")
 export class SgdsAlert extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   // @query('[part~="base"]') base: HTMLElement;
 
-  @property({ type: Boolean, reflect: true }) show = true;
+  @property({ type: Boolean, reflect: true }) show = false;
 
   /** Enables a close button that allows the user to dismiss the alert. */
   @property({ type: Boolean, reflect: true }) dismissible? = false;
@@ -61,29 +62,29 @@ export class SgdsAlert extends SgdsElement {
 
   render() {
     return html`
-      ${this.show
-        ? html`
-            <div
-              part="base"
-              class="sgds alert fade show ${classMap({
-                [`alert-${this.variant}`]: this.variant,
-                [`alert-dismissible`]: this.dismissible,
-                [`${this.alertClasses}`]: this.alertClasses
-              })}"
-              role="alert"
-              aria-hidden=${this.show ? "false" : "true"}
-            >
-              <slot></slot>
-              ${this.dismissible
-                ? html`<sgds-closebutton
-                    class="btn-close btn-sm"
-                    closeLabel=${ifDefined(this.closeLabel)}
-                    @click=${this.handleCloseClick}
-                  ></sgds-closebutton>`
-                : null}
-            </div>
-          `
-        : null}
+      <div
+        part="base"
+        class="${classMap({
+          sgds: true,
+          alert: true,
+          fade: true,
+          show: this.show,
+          [`alert-${this.variant}`]: this.variant,
+          [`alert-dismissible`]: this.dismissible,
+          [`${this.alertClasses}`]: this.alertClasses
+        })}"
+        role="alert"
+        aria-hidden=${this.show ? "false" : "true"}
+      >
+        <slot></slot>
+        ${this.dismissible
+          ? html`<sgds-closebutton
+              class="btn-close btn-sm"
+              closeLabel=${ifDefined(this.closeLabel)}
+              @click=${this.handleCloseClick}
+            ></sgds-closebutton>`
+          : null}
+      </div>
     `;
   }
 }

@@ -17,7 +17,7 @@ export class SgdsInput extends SgdsElement {
 
   private readonly formSubmitController = new FormSubmitController(this);
 
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
   @property({ reflect: true }) type:
     | "date"
     | "datetime-local"

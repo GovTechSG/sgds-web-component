@@ -9,7 +9,7 @@ export type ToastVariant = "primary" | "secondary" | "success" | "danger" | "war
 
 @customElement("sgds-toast")
 export class SgdsToast extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   @query('[part~="base"]') base: HTMLElement;
 

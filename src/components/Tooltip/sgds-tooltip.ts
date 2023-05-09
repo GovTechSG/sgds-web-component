@@ -12,7 +12,7 @@ import * as Popper from "@popperjs/core";
  */
 @customElement("sgds-tooltip")
 export class SgdsTooltip extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
   /**@internal */
   myTooltip: Ref<HTMLElement> = createRef();
   /**@internal */

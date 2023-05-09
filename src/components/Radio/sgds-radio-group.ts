@@ -9,7 +9,7 @@ import styles from "./sgds-radio-group.scss";
 
 @customElement("sgds-radio-group")
 export class SgdsRadioGroup extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   protected readonly formSubmitController = new FormSubmitController(this, {
     defaultValue: (control: SgdsRadioGroup) => control.defaultValue

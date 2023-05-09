@@ -4,6 +4,8 @@ import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 
 export default class LinkElement extends SgdsElement {
+  static styles = SgdsElement.styles;
+
   @property({ type: Boolean })
   active = false;
 

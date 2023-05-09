@@ -1,6 +1,3 @@
-@import "../../utils/base.scss";
-@import "~@govtechsg/sgds/sass/card/";
-
 :host {
   .sgds {
     &.card {
@@ -11,16 +8,6 @@
             margin-right: 1rem;
           }
         }
-      }
-    }
-    @each $color, $value in $theme-colors {
-      &.text-#{$color} {
-        color: $value !important;
-      }
-    }
-    @each $color, $value in $theme-colors {
-      &.bg-#{$color} {
-        background-color: $value !important;
       }
     }
   }

@@ -22,7 +22,7 @@ import styles from "./sgds-accordion-item.scss";
  */
 @customElement("sgds-accordion-item")
 export class SgdsAccordionItem extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
   /** @internal */
   @query(".accordion-item") accordion: HTMLElement;
   /** @internal */
