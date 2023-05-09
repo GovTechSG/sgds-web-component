@@ -97,7 +97,7 @@ const buildSgdsPackage = () => {
         name: "index"
       },
       plugins: wcPlugins
-    },
+    }
     // ...wcfolderBuilds
   ];
 
@@ -154,7 +154,7 @@ const buildSgdsPackage = () => {
         ],
         plugins: [...reactBuildPlugins],
         external: ["@lit-labs/react", "react"]
-      },
+      }
       // ...reactFolderBuilds
     ];
     return sgdsWcPackage.concat(reactPackage);

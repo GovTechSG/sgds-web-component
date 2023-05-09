@@ -49,12 +49,24 @@ describe("<Alert>", () => {
     assert.isTrue(alert?.classList.contains("alert-warning"));
   });
 
-  it("should have fade and show class when rendered", async () => {
+  it("should have fade class when rendered", async () => {
     const el = await fixture(html`<sgds-alert variant="primary">Test alert</sgds-alert>`);
     const base = el.shadowRoot?.querySelector(".sgds.alert");
     expect(base?.classList.contains("fade")).to.be.true;
-    expect(base?.classList.contains("show")).to.be.true;
   });
+
+  it("should not have show class when rendered", async () => {
+    const el = await fixture(html`<sgds-alert variant="primary">Test alert</sgds-alert>`);
+    const base = el.shadowRoot?.querySelector(".sgds.alert");
+    expect(base?.classList.contains("show")).to.be.false;
+  });
+
+  it('when show is true, alert should have show class', async () => {
+    const el = await fixture(html`<sgds-alert variant="primary" show>Test alert</sgds-alert>`);
+    const base = el.shadowRoot?.querySelector(".sgds.alert");
+    console.log(base)
+    expect(base?.classList.contains("show")).to.be.true;
+  })
 
   describe("Web Accessibility", () => {
     it("Should have alert role", async () => {

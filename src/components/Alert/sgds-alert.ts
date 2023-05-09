@@ -5,6 +5,7 @@ import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-alert.scss";
 
+//TODO: Alert Link
 /**
  *
  * @dependency sl-icon-button
@@ -31,11 +32,11 @@ export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "war
 
 @customElement("sgds-alert")
 export class SgdsAlert extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
   // @query('[part~="base"]') base: HTMLElement;
 
-  @property({ type: Boolean, reflect: true }) show = true;
+  @property({ type: Boolean, reflect: true }) show = false;
 
   /** Enables a close button that allows the user to dismiss the alert. */
   @property({ type: Boolean, reflect: true }) dismissible? = false;
@@ -61,11 +62,13 @@ export class SgdsAlert extends SgdsElement {
 
   render() {
     return html`
-      ${this.show
-        ? html`
             <div
               part="base"
-              class="sgds alert fade show ${classMap({
+              class="${classMap({
+                "sgds": true,
+                "alert": true,
+                "fade": true,
+                "show": this.show,
                 [`alert-${this.variant}`]: this.variant,
                 [`alert-dismissible`]: this.dismissible,
                 [`${this.alertClasses}`]: this.alertClasses
@@ -82,8 +85,6 @@ export class SgdsAlert extends SgdsElement {
                   ></sgds-closebutton>`
                 : null}
             </div>
-          `
-        : null}
     `;
   }
 }

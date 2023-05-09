@@ -16,6 +16,8 @@ export type CardTextVariant =
   | "muted";
 
 export class CardElement extends SgdsElement {
+  static styles = SgdsElement.styles;
+
   @property({ type: String })
 
   /** The border's variant. */
