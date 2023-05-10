@@ -9,15 +9,16 @@ import { defaultValue } from "../../utils/defaultvalue";
 import { FormSubmitController } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
+import type { SgdsFormControl } from "../../base/sgds-element";
+
 @customElement("sgds-input")
-export class SgdsInput extends SgdsElement {
+export class SgdsInput extends SgdsElement implements SgdsFormControl {
+  static styles = [SgdsElement.styles, styles];
+  /**@internal */
   @query("input.form-control") input: HTMLInputElement;
-
-  @state() private hasFocus = false;
-
+  /**@internal */
   private readonly formSubmitController = new FormSubmitController(this);
 
-  static styles = [SgdsElement.styles, styles];
   @property({ reflect: true }) type:
     | "date"
     | "datetime-local"
@@ -64,10 +65,9 @@ export class SgdsInput extends SgdsElement {
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  reportValidity() {
+  public reportValidity() {
     return this.input.reportValidity();
   }
-
   handleInvalid() {
     this.invalid = true;
   }
@@ -78,12 +78,10 @@ export class SgdsInput extends SgdsElement {
   }
 
   handleFocus() {
-    this.hasFocus = true;
     this.emit("sgds-focus");
   }
 
   handleBlur() {
-    this.hasFocus = false;
     this.emit("sgds-blur");
   }
 
