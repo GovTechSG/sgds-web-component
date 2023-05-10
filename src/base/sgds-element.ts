@@ -31,7 +31,7 @@ export interface SgdsFormControl extends SgdsElement {
   pattern?: string;
   min?: number | string | Date;
   max?: number | string | Date;
-  step?: number | 'any';
+  step?: number | "any";
   required?: boolean;
   minlength?: number;
   maxlength?: number;

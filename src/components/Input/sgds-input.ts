@@ -1,4 +1,4 @@
-import { customElement, property, query, state } from "lit/decorators.js";
+import { customElement, property, query } from "lit/decorators.js";
 import { html } from "lit/static-html.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -10,6 +10,7 @@ import { FormSubmitController } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import type { SgdsFormControl } from "../../base/sgds-element";
+import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 
 @customElement("sgds-input")
 export class SgdsInput extends SgdsElement implements SgdsFormControl {
@@ -35,7 +36,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @property({ type: String, reflect: true }) inputId = genId("input", this.type);
   @property({ reflect: true }) name: string;
   @property({ reflect: true }) inputClasses: string;
-  @property({ reflect: true }) iconName: string;
+  @property({ type: String }) icon: string;
 
   @property({ type: String, reflect: true }) value = "";
   @property({ type: String, reflect: true }) minlength;
@@ -148,7 +149,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     const inputWithIcon = html`
       <div class="sgds form-control-group ${this.inputClasses}">
         <span class="form-control-icon">
-          <sl-icon name=${this.iconName}></sl-icon>
+          ${unsafeSVG(this.icon)}
         </span>
         ${input}
       </div>
@@ -163,7 +164,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
 
     return html`
       ${this.label ? withLabel : undefined} ${this.hintText ? withHintText : undefined}
-      ${this.iconName ? inputWithIcon : input}
+      ${this.icon ? inputWithIcon : input}
     `;
   }
 }
