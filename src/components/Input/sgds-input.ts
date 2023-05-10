@@ -19,7 +19,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @query("input.form-control") input: HTMLInputElement;
   /**@internal */
   private readonly formSubmitController = new FormSubmitController(this);
-
+  /** The type of input which works the same as HTMLInputElement*/
   @property({ reflect: true }) type:
     | "date"
     | "datetime-local"
@@ -31,37 +31,48 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     | "text"
     | "time"
     | "url" = "text";
+  /** The input's label  */
   @property({ reflect: true }) label: string;
+  /** The input's hint text below the label */
   @property({ reflect: true }) hintText: string;
+  /**The input's id. This value gets forwarded into the HTMLInputElement of the component. Defaults to a unique value */
   @property({ type: String, reflect: true }) inputId = genId("input", this.type);
+  /**The input's name attribute */
   @property({ reflect: true }) name: string;
+  /**Forwards classes to the native HTMLInputElement of the component. Can be used to insert any classes from bootstrap such as mt-2 */
   @property({ reflect: true }) inputClasses: string;
+  /**Optional. Pass svg html of icons in string form*/
   @property({ type: String }) icon: string;
-
+  /**The input's value attribute. */
   @property({ type: String, reflect: true }) value = "";
+  /**Sets the minimum length of the input */
   @property({ type: String, reflect: true }) minlength;
+    /**Sets the maximum length of the input */
   @property({ type: String, reflect: true }) maxlength;
-
+  /**The input's placeholder text. */
   @property({ type: String, reflect: true }) placeholder = "Placeholder";
-
+  /**A pattern to validate input against. */
   @property({ type: String }) pattern;
+  /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback = "default feedback";
-
+  /**	Autofocus the input */
   @property({ type: Boolean, reflect: true }) autofocus = false;
+  /**Disables the input. */
   @property({ type: Boolean, reflect: true }) disabled = false;
+  /**Makes the input a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
   /** Makes the input readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
-
+  /**Sets the initial invalid state of the input */
   @property({ type: Boolean, reflect: true }) invalid = false;
+  /**Sets the initial valid state of the input */
   @property({ type: Boolean, reflect: true }) valid = false;
-
-  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  /**Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = "";
 
   /** Sets focus on the input. */
-  focus(options?: FocusOptions) {
+  public focus(options?: FocusOptions) {
     this.input.focus(options);
   }
 
@@ -148,9 +159,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     // if iconName is defined
     const inputWithIcon = html`
       <div class="sgds form-control-group ${this.inputClasses}">
-        <span class="form-control-icon">
-          ${unsafeSVG(this.icon)}
-        </span>
+        <span class="form-control-icon"> ${unsafeSVG(this.icon)} </span>
         ${input}
       </div>
     `;

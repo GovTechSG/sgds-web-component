@@ -7,7 +7,7 @@ export const Template = args =>
       .label=${args.label}
       .hintText=${args.hintText}
       .name=${args.name}
-      .id=${args.inputID}
+      .inputId=${args.inputId}
       .inputClasses=${args.inputClasses}
       .value=${args.value}
       .pattern=${args.pattern}

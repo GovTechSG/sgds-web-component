@@ -261,7 +261,10 @@ describe("when resetting a form", () => {
     `);
     const button = form.querySelector<SgdsButton>("sgds-button");
     const input = form.querySelector<SgdsInput>("sgds-input");
+    expect(input?.defaultValue).to.equal('test')
     if (input) input.value = "1234";
+    // defaultValue should still be test as set when first created
+    expect(input?.defaultValue).to.equal('test')
 
     await input?.updateComplete;
 
