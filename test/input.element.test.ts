@@ -18,7 +18,7 @@ describe("sgds-input", () => {
       `
         <label class="form-label" for="test-id">label</label>
         <input type="text" class="form-control " id="test-id" placeholder="Placeholder" aria-invalid="false">
-        <div class="invalid-feedback" id="test-id-invalid">default feedback</div>
+        <div class="invalid-feedback" id="test-id-invalid"></div>
     `
     );
   });
@@ -67,7 +67,7 @@ describe("sgds-input", () => {
         </svg> 
           </span>
           <input type="text" class="form-control " id="defaultID" placeholder="Placeholder" aria-invalid="false">
-          <div class="invalid-feedback" id="defaultID-invalid">default feedback</div>
+          <div class="invalid-feedback" id="defaultID-invalid"></div>
         </div>
       `
     );
@@ -261,10 +261,10 @@ describe("when resetting a form", () => {
     `);
     const button = form.querySelector<SgdsButton>("sgds-button");
     const input = form.querySelector<SgdsInput>("sgds-input");
-    expect(input?.defaultValue).to.equal('test')
+    expect(input?.defaultValue).to.equal("test");
     if (input) input.value = "1234";
     // defaultValue should still be test as set when first created
-    expect(input?.defaultValue).to.equal('test')
+    expect(input?.defaultValue).to.equal("test");
 
     await input?.updateComplete;
 

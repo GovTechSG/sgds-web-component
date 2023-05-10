@@ -12,6 +12,17 @@ import { watch } from "../../utils/watch";
 import type { SgdsFormControl } from "../../base/sgds-element";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 
+//TODO: Clarify if sgds-input must always validate
+//TODO: Clarify if sgds-input minlength maxlength
+
+/**
+ * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
+ * 
+ * @event sgds-change - Emitted when an alteration to the control's value is committed by the user.
+ * @event sgds-input - Emitted when the control receives input and its value changes.
+ * @event sgds-focus - Emitted when input is in focus.
+ * @event sgds-blur - Emitted when input is not in focus.
+ */
 @customElement("sgds-input")
 export class SgdsInput extends SgdsElement implements SgdsFormControl {
   static styles = [SgdsElement.styles, styles];
@@ -36,25 +47,23 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   /** The input's hint text below the label */
   @property({ reflect: true }) hintText: string;
   /**The input's id. This value gets forwarded into the HTMLInputElement of the component. Defaults to a unique value */
-  @property({ type: String, reflect: true }) inputId = genId("input", this.type);
+  @property({ type: String, reflect: true }) inputId: string = genId("input", this.type);
   /**The input's name attribute */
   @property({ reflect: true }) name: string;
   /**Forwards classes to the native HTMLInputElement of the component. Can be used to insert any classes from bootstrap such as mt-2 */
   @property({ reflect: true }) inputClasses: string;
   /**Optional. Pass svg html of icons in string form*/
   @property({ type: String }) icon: string;
-  /**The input's value attribute. */
-  @property({ type: String, reflect: true }) value = "";
   /**Sets the minimum length of the input */
-  @property({ type: String, reflect: true }) minlength;
-    /**Sets the maximum length of the input */
-  @property({ type: String, reflect: true }) maxlength;
+  @property({ type: Number, reflect: true }) minlength: string;
+  /**Sets the maximum length of the input */
+  @property({ type: Number, reflect: true }) maxlength: string;
   /**The input's placeholder text. */
   @property({ type: String, reflect: true }) placeholder = "Placeholder";
   /**A pattern to validate input against. */
-  @property({ type: String }) pattern;
+  @property({ type: String }) pattern: string;
   /**Feedback text for error state when validated */
-  @property({ type: String, reflect: true }) invalidFeedback = "default feedback";
+  @property({ type: String, reflect: true }) invalidFeedback = "";
   /**	Autofocus the input */
   @property({ type: Boolean, reflect: true }) autofocus = false;
   /**Disables the input. */
@@ -67,6 +76,8 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @property({ type: Boolean, reflect: true }) invalid = false;
   /**Sets the initial valid state of the input */
   @property({ type: Boolean, reflect: true }) valid = false;
+  /**The input's value attribute. */
+  @property({ reflect: true }) value = "";
   /**Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = "";
@@ -171,10 +182,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     // if label is defined
     const withLabel = html` <label for=${ifDefined(this.inputId)} class="form-label">${this.label}</label> `;
 
-    return html`
-      ${this.label ? withLabel : undefined} ${this.hintText ? withHintText : undefined}
-      ${this.icon ? inputWithIcon : input}
-    `;
+    return html` ${this.label && withLabel} ${this.hintText && withHintText} ${this.icon ? inputWithIcon : input} `;
   }
 }
 
