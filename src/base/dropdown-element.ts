@@ -25,11 +25,11 @@ export type DropdownButtonVariant =
 export type DropDirection = "left" | "right" | "up" | "down";
 
 /**
- * @event sgds-show - Emitted event when show instance is called 
- * @event sgds-shown - Emitted event when dropdown has been made visible to the user and CSS transitions have completed 
- * @event sgds-hide - Emitted event when hide instance is called 
- * @event sgds-hidden - Emitted event when dropdown has hidden to the user and CSS transitions have completed 
-*/
+ * @event sgds-show - Emitted event when show instance is called
+ * @event sgds-shown - Emitted event when dropdown has been made visible to the user and CSS transitions have completed
+ * @event sgds-hide - Emitted event when hide instance is called
+ * @event sgds-hidden - Emitted event when dropdown has hidden to the user and CSS transitions have completed
+ */
 
 export class DropdownElement extends SgdsElement {
   static styles = SgdsElement.styles;
@@ -131,7 +131,7 @@ export class DropdownElement extends SgdsElement {
         return mergeDeep(defaultConfig, mergeDeep(this.dropdownConfig, this.popperOpts));
       }
     });
-    
+
     this.myDropdown.value.addEventListener("show.bs.dropdown", () => {
       this.menuIsOpen = true;
       this.emit("sgds-show");
@@ -141,7 +141,7 @@ export class DropdownElement extends SgdsElement {
       this.menuIsOpen = true;
       this.emit("sgds-shown");
     });
-    
+
     this.myDropdown.value.addEventListener("hide.bs.dropdown", () => {
       this.menuIsOpen = false;
       this._resetMenu();
