@@ -24,10 +24,19 @@ export type DropdownButtonVariant =
   | "dark";
 export type DropDirection = "left" | "right" | "up" | "down";
 
+/**
+ * @event sgds-show - Emitted event when show instance is called 
+ * @event sgds-shown - Emitted event when dropdown has been made visible to the user and CSS transitions have completed 
+ * @event sgds-hide - Emitted event when hide instance is called 
+ * @event sgds-hidden - Emitted event when dropdown has hidden to the user and CSS transitions have completed 
+*/
+
 export class DropdownElement extends SgdsElement {
   static styles = SgdsElement.styles;
 
+  /** @internal */
   myDropdown: Ref<HTMLElement> = createRef();
+  /** @internal */
   bsDropdown: Dropdown = null;
 
   /** Controls auto-flipping of menu */
@@ -70,12 +79,16 @@ export class DropdownElement extends SgdsElement {
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  /** @internal */
   @state()
   nextDropdownItemNo = 0;
+  /** @internal */
   @state()
   prevDropdownItemNo = -1;
+  /** @internal */
   @state()
   dropdownConfig: Partial<Popper.Options>;
+  /** @internal */
   @state()
   modifierOpt: StrictModifiers[] = [];
 
@@ -118,26 +131,23 @@ export class DropdownElement extends SgdsElement {
         return mergeDeep(defaultConfig, mergeDeep(this.dropdownConfig, this.popperOpts));
       }
     });
-    /** Emitted event when show instance is called */
+    
     this.myDropdown.value.addEventListener("show.bs.dropdown", () => {
       this.menuIsOpen = true;
       this.emit("sgds-show");
     });
 
-    /** Emitted event when dropdown has been made visible to the user and CSS transitions have completed */
     this.myDropdown.value.addEventListener("shown.bs.dropdown", () => {
       this.menuIsOpen = true;
       this.emit("sgds-shown");
     });
-
-    /** Emitted event when hide instance is called */
+    
     this.myDropdown.value.addEventListener("hide.bs.dropdown", () => {
       this.menuIsOpen = false;
       this._resetMenu();
       this.emit("sgds-hide");
     });
 
-    /** Emitted event when dropdown has hidden to the user and CSS transitions have completed */
     this.myDropdown.value.addEventListener("hidden.bs.dropdown", () => {
       this.menuIsOpen = false;
       this.emit("sgds-hidden");

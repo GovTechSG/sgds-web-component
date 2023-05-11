@@ -39,8 +39,9 @@ export class SgdsMainnav extends SgdsElement {
       }
     });
   }
-
+  /** @internal */
   private myCollapse: Ref<HTMLElement> = createRef();
+  /** @internal */
   private bsCollapse: Collapse = null;
 
   private _onClickButton() {
@@ -59,9 +60,11 @@ export class SgdsMainnav extends SgdsElement {
   @property()
   expand: MainnavExpandSize = "lg";
 
+  /** @internal */
   @state()
   breakpointReached = false;
 
+  /** @internal */
   @state()
   expanded = false;
 
