@@ -152,10 +152,12 @@ export class DropdownElement extends SgdsElement {
     }
     if (this.menuIsOpen) this.bsDropdown.show();
   }
-
+  /** When invoked, opens the dropdown menu */
   public showMenu() {
     this.bsDropdown.show();
   }
+
+  /** When invoked, hides the dropdown menu */
   public hideMenu() {
     this.bsDropdown.hide();
   }
