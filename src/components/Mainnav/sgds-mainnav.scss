@@ -1,3 +1,22 @@
+:host{
+  --mainnav-background-color: white;
+  --maninav-padding-x: 1rem;
+  --mainnav-mobile-padding-x: 0.5rem;
+}
+
+.sgds{
+  &.navbar{
+    background-color: var(--mainnav-background-color);
+    padding-left: var(--maninav-padding-x);
+    padding-right: var(--maninav-padding-x);
+    
+    @media (max-width: 768px) { 
+      padding-left: var(--maninav-mobile=padding-x);
+      padding-right: var(--maninav-mobile=padding-x);
+    }
+  }
+}
+
 .navbar-nav {
   display: flex;
   gap: 1rem;
