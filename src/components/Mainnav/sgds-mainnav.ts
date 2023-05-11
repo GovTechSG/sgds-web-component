@@ -122,11 +122,7 @@ export class SgdsMainnav extends SgdsElement {
             />
           </svg>
         </button>
-        <div
-          class=${collapseClass}
-          ${ref(this.myCollapse)}
-          id=${this.collapseId}
-        >
+        <div class=${collapseClass} ${ref(this.myCollapse)} id=${this.collapseId}>
           <ul class="navbar-nav">
             <slot></slot>
             <slot
