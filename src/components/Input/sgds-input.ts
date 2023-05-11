@@ -1,4 +1,4 @@
-import { customElement, property, query } from "lit/decorators.js";
+import { customElement, property, query, state } from "lit/decorators.js";
 import { html } from "lit/static-html.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -12,12 +12,9 @@ import { watch } from "../../utils/watch";
 import type { SgdsFormControl } from "../../base/sgds-element";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 
-//TODO: Clarify if sgds-input must always validate
-//TODO: Clarify if sgds-input minlength maxlength
-
 /**
  * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
- * 
+ *
  * @event sgds-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sgds-input - Emitted when the control receives input and its value changes.
  * @event sgds-focus - Emitted when input is in focus.
@@ -55,15 +52,13 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   /**Optional. Pass svg html of icons in string form*/
   @property({ type: String }) icon: string;
   /**Sets the minimum length of the input */
-  @property({ type: Number, reflect: true }) minlength: string;
+  @property({ type: Number, reflect: true }) minlength: number;
   /**Sets the maximum length of the input */
-  @property({ type: Number, reflect: true }) maxlength: string;
+  @property({ type: Number, reflect: true }) maxlength: number;
   /**The input's placeholder text. */
   @property({ type: String, reflect: true }) placeholder = "Placeholder";
   /**A pattern to validate input against. */
   @property({ type: String }) pattern: string;
-  /**Feedback text for error state when validated */
-  @property({ type: String, reflect: true }) invalidFeedback = "";
   /**	Autofocus the input */
   @property({ type: Boolean, reflect: true }) autofocus = false;
   /**Disables the input. */
@@ -72,15 +67,22 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @property({ type: Boolean, reflect: true }) required = false;
   /** Makes the input readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
-  /**Sets the initial invalid state of the input */
-  @property({ type: Boolean, reflect: true }) invalid = false;
-  /**Sets the initial valid state of the input */
-  @property({ type: Boolean, reflect: true }) valid = false;
+
   /**The input's value attribute. */
   @property({ reflect: true }) value = "";
   /**Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = "";
+
+  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
+  @property({ type: Boolean, reflect: true }) hasFeedback = false;
+  /**Feedback text for error state when validated */
+  @property({ type: String, reflect: true }) invalidFeedback = "";
+
+  /**@internal */
+  @state() invalid = false;
+  /**@internal */
+  @state() valid = false;
 
   /** Sets focus on the input. */
   public focus(options?: FocusOptions) {
@@ -133,6 +135,10 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   handleValueChange() {
     this.invalid = !this.input.checkValidity();
     this.valid = this.input.checkValidity();
+    // remove validation for input that is not required, is already dirty and has empty value 
+    if (!this.required && this.value === "") {
+      this.valid = false;
+    }
   }
 
   render() {
@@ -140,8 +146,8 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
       <input
         class="form-control 
         ${classMap({
-          "is-invalid": this.invalid,
-          "is-valid": this.valid,
+          "is-invalid": this.hasFeedback && this.invalid,
+          "is-valid": this.hasFeedback && this.valid,
           [`${this.inputClasses}`]: this.inputClasses
         })}
         "
@@ -165,7 +171,9 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
         @focus=${this.handleFocus}
         @blur=${this.handleBlur}
       />
-      <div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
+      ${this.hasFeedback
+        ? html`<div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
+        : ""}
     `;
     // if iconName is defined
     const inputWithIcon = html`

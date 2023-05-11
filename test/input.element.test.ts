@@ -18,7 +18,6 @@ describe("sgds-input", () => {
       `
         <label class="form-label" for="test-id">label</label>
         <input type="text" class="form-control " id="test-id" placeholder="Placeholder" aria-invalid="false">
-        <div class="invalid-feedback" id="test-id-invalid"></div>
     `
     );
   });
@@ -67,7 +66,6 @@ describe("sgds-input", () => {
         </svg> 
           </span>
           <input type="text" class="form-control " id="defaultID" placeholder="Placeholder" aria-invalid="false">
-          <div class="invalid-feedback" id="defaultID-invalid"></div>
         </div>
       `
     );
@@ -89,7 +87,6 @@ describe("sgds-input", () => {
     const placeHolder = el.shadowRoot?.querySelector(".form-control");
     expect(placeHolder?.getAttribute("placeholder")).to.equal("Hello");
   });
-
   it("should focus the input when clicking on the label", async () => {
     const el = await fixture<SgdsInput>(html` <sgds-input label="Name"></sgds-input> `);
     const label = el.shadowRoot?.querySelector("label");
@@ -100,6 +97,37 @@ describe("sgds-input", () => {
     await waitUntil(() => submitHandler.calledOnce);
 
     expect(submitHandler).to.have.been.calledOnce;
+  });
+});
+describe("Feedback UI optional", () => {
+  it("when hasFeedback is true, div.invalid-feedback appears in shadowDOM", async () => {
+    const el = await fixture<SgdsInput>(
+      html` <sgds-input hasFeedback invalidFeedback="invalid feedback"></sgds-input> `
+    );
+    expect(el.shadowRoot?.querySelector("div.invalid-feedback")).not.to.be.null;
+    expect(el.shadowRoot?.querySelector("div.invalid-feedback")?.textContent).to.equal("invalid feedback");
+  });
+  it("when hasFeedback is true and invalid state is true, invalid stylings", async () => {
+    const el = await fixture<SgdsInput>(
+      html` <sgds-input hasFeedback invalidFeedback="invalid feedback"></sgds-input> `
+    );
+    expect(el.invalid).to.be.false;
+    expect(el.valid).to.be.false;
+    expect(el.shadowRoot?.querySelector("input")).does.not.have.class("is-invalid");
+    expect(el.shadowRoot?.querySelector("input")).does.not.have.class("is-valid");
+    //force an invalid state
+    el.invalid = true;
+    expect(el.invalid).to.be.true;
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector("input")).to.have.class("is-invalid");
+    expect(el.shadowRoot?.querySelector("input")).does.not.have.class("is-valid");
+
+    //force an valid state
+    el.invalid = false;
+    el.valid = true;
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector("input")).to.have.class("is-valid");
+    expect(el.shadowRoot?.querySelector("input")).does.not.have.class("is-invalid");
   });
 });
 describe("when using constraint validation", () => {
@@ -165,6 +193,31 @@ describe("when using constraint validation", () => {
     el.disabled = false;
     await el.updateComplete;
     expect(el.invalid).to.be.true;
+  });
+
+  it("should be valid=false when input is not required, has other validation,  and has no value", async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input minlength="3" value="t"></sgds-input> `);
+    expect(el.valid).to.be.false;
+    expect(el.invalid).to.be.false;
+    el.focus();
+    await sendKeys({ type: "es" });
+    await el.updateComplete;
+    expect(el.value).to.equal("tes");
+    expect(el.valid).to.be.true;
+    expect(el.invalid).to.be.false;
+
+    await sendKeys({ press: "Backspace" });
+    await el.updateComplete;
+    expect(el.value).to.equal("te");
+    expect(el.valid).to.be.false;
+    expect(el.invalid).to.be.true;
+    // when empty value and input is optional, valid/invalid state should go back to default state
+    await sendKeys({ press: "Backspace" });
+    await sendKeys({ press: "Backspace" });
+    await el.updateComplete;
+    expect(el.value).to.equal("");
+    expect(el.valid).to.be.false;
+    expect(el.invalid).to.be.false;
   });
 });
 
