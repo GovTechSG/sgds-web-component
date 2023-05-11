@@ -33,6 +33,8 @@ const SIZES = {
  * @cssproperty --mainnav-padding-y - top and bottom padding for browser width > 768px
  * @cssproperty --mainnav-mobile-padding-x - left and right padding for browser width < 768px
  * @cssproperty --mainnav-mobile-padding-y - top and bottom padding for browser width < 768px
+ * @cssproperty --mainnav-borderBottom-width - bottom border width 
+ * @cssproperty --mainnav-borderBottom-color - borderBottom width color
  */
 @customElement("sgds-mainnav")
 export class SgdsMainnav extends SgdsElement {
