@@ -3,7 +3,7 @@ import styles from "./sgds-mainnav-item.scss";
 import LinkElement from "../../base/link-element";
 
 /**
- * @slot - Label for the anchor tag.
+ * @slot - default slot for SgdsMainnavItem element.
  */
 @customElement("sgds-mainnav-item")
 export class SgdsMainnavItem extends LinkElement {
