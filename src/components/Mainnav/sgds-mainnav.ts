@@ -21,10 +21,18 @@ const SIZES = {
 };
 
 /**
+ * @summary This component is the primary means that your users will use to navigate through your portal. It includes horizontal navigation and branding to identify your site.
+ *
  * @slot - Default slot of SgdsMainnav. Pass in SgdsMainnavItem elements here.
  * @slot end - Elements in this slot will be positioned to the right end of .navbar-nav. Elements in this slot will also be included in collapsed menu.
  * @slot brand - Brand slot of SgdsMainnav. Pass in brand logo img here
  * @slot non-collapsible - Elements in this slot will not be collapsed
+ *
+ * @cssproperty --mainnav-background-color - Navbar's background color.
+ * @cssproperty --mainnav-padding-x - left and right padding for browser width > 768px
+ * @cssproperty --mainnav-padding-y - top and bottom padding for browser width > 768px
+ * @cssproperty --mainnav-mobile-padding-x - left and right padding for browser width < 768px
+ * @cssproperty --mainnav-mobile-padding-y - top and bottom padding for browser width < 768px
  */
 @customElement("sgds-mainnav")
 export class SgdsMainnav extends SgdsElement {

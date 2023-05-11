@@ -1,18 +1,18 @@
 :host{
   --mainnav-background-color: white;
   --maninav-padding-x: 1rem;
+  --mainnav-padding-y: 0;
   --mainnav-mobile-padding-x: 0.5rem;
+  --mainnav-mobile-padding-y: 0;
 }
 
 .sgds{
   &.navbar{
     background-color: var(--mainnav-background-color);
-    padding-left: var(--maninav-padding-x);
-    padding-right: var(--maninav-padding-x);
-    
+    padding: var(--maninav-padding-y) var(--maninav-padding-x);
+
     @media (max-width: 768px) { 
-      padding-left: var(--maninav-mobile=padding-x);
-      padding-right: var(--maninav-mobile=padding-x);
+      padding: var(--maninav-mobile-padding-y) var(--mainnav-mobile-padding-x);
     }
   }
 }
