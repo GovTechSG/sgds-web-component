@@ -1,9 +1,4 @@
-:host{
-    align-self: center;
-    @media (max-width: 992px) { 
-        align-self:unset;    
-    }
-}
+@import  "./sgds-mainnav-item.scss";
 
 .nav-link {
     gap: 1rem;
