@@ -12,11 +12,12 @@ describe("sgds-input", () => {
     assert.instanceOf(el, SgdsInput);
   });
   it("renders with default values", async () => {
-    const el = await fixture(html`<sgds-input inputId="test-id" label="label"></sgds-input>`);
+    const el = await fixture(html`<sgds-input inputId="test-id" label="label" hintText="hello"></sgds-input>`);
     assert.shadowDom.equal(
       el,
       `
-        <label class="form-label" for="test-id">label</label>
+        <label class="form-label" for="test-id" part="label">label</label>
+        <small class="form-text text-muted" id="test-idHelp" part="hint">hello</small>
         <input type="text" class="form-control " id="test-id" aria-invalid="false">
     `
     );
@@ -88,11 +89,11 @@ describe("sgds-input", () => {
     expect(placeHolder?.getAttribute("placeholder")).to.equal("Hello");
   });
 
-  it("placeholder prop is passed to input", async() => {
+  it("placeholder prop is passed to input", async () => {
     const el = await fixture(html`<sgds-input placeholder="hello"></sgds-input>`);
     const placeHolder = el.shadowRoot?.querySelector(".form-control");
     expect(placeHolder?.getAttribute("placeholder")).to.equal("hello");
-  })
+  });
   it("should focus the input when clicking on the label", async () => {
     const el = await fixture<SgdsInput>(html` <sgds-input label="Name"></sgds-input> `);
     const label = el.shadowRoot?.querySelector("label");
