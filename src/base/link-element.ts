@@ -3,15 +3,22 @@ import SgdsElement from "./sgds-element";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 
+/**
+ * @slot default - Default slot for SgdsMainnavItem anchor element
+ */
+
 export default class LinkElement extends SgdsElement {
   static styles = SgdsElement.styles;
 
+  /** when true, sets the active stylings of .nav-link */
   @property({ type: Boolean })
   active = false;
 
+  /** Href attribute for anchor element in SgdsMainnavItem */
   @property({ type: String })
   href = "";
 
+  /** Disables the SgdsMainnavItem */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 

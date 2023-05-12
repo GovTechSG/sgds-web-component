@@ -1,6 +1,8 @@
 
 :host   {
   --mainnav-item-theme-color: #5925DC;
+  --mainnav-item-color: #344054;
+  --mainnav-item-borderBottom-width: 0.125rem;
 }
 
 li {
@@ -9,8 +11,8 @@ li {
 
 a.nav-link {
   display: flex;
-  color: #344054;
-  border-bottom: 0.125 solid transparent;
+  color: var(--mainnav-item-color);
+  border-bottom: var(--mainnav-item-borderBottom-width) solid transparent;
   min-height: 100%;
   align-items: center;
 

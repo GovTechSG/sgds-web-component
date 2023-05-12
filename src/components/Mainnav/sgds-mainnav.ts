@@ -21,8 +21,20 @@ const SIZES = {
 };
 
 /**
- * @slot - Pass in SgdsMainnavItem elements here.
+ * @summary This component is the primary means that your users will use to navigate through your portal. It includes horizontal navigation and branding to identify your site.
+ *
+ * @slot - Default slot of SgdsMainnav. Pass in SgdsMainnavItem elements here.
  * @slot end - Elements in this slot will be positioned to the right end of .navbar-nav. Elements in this slot will also be included in collapsed menu.
+ * @slot brand - Brand slot of SgdsMainnav. Pass in brand logo img here
+ * @slot non-collapsible - Elements in this slot will not be collapsed
+ *
+ * @cssproperty --mainnav-background-color - Navbar's background color.
+ * @cssproperty --mainnav-padding-x - left and right padding for browser width > 768px
+ * @cssproperty --mainnav-padding-y - top and bottom padding for browser width > 768px
+ * @cssproperty --mainnav-mobile-padding-x - left and right padding for browser width < 768px
+ * @cssproperty --mainnav-mobile-padding-y - top and bottom padding for browser width < 768px
+ * @cssproperty --mainnav-borderBottom-width - bottom border width 
+ * @cssproperty --mainnav-borderBottom-color - borderBottom width color
  */
 @customElement("sgds-mainnav")
 export class SgdsMainnav extends SgdsElement {
@@ -37,66 +49,51 @@ export class SgdsMainnav extends SgdsElement {
       }
     });
   }
-
+  /** @internal */
   private myCollapse: Ref<HTMLElement> = createRef();
+  /** @internal */
   private bsCollapse: Collapse = null;
-  // TODO: stylings and slots are incomplete for offcanvas mode
-  private myOffcanvas: Ref<HTMLElement> = createRef();
-  private bsOffcanvas: Offcanvas = null;
 
   private _onClickButton() {
-    if (this.mode === "offcanvas") {
-      return this.bsOffcanvas.toggle();
-    }
     this.bsCollapse.toggle();
   }
 
+  /** The href link for brand logo */
   @property({ type: String })
   brandHref = "";
 
+  /** Forwards to id attribute of div.collapse and aria-controls attribute of toggler button in SgdsMainnav. By default, SgdsMainnav auto-generates a unique id. Override the default id by specifiying your own */
   @property({ type: String })
   collapseId = genId("mainnav", "collapse");
 
+  /** The breakpoint, below which, the Navbar will collapse. When always the Navbar will always be expanded regardless of screen size. When never, the Navbar will always be collapsed */
   @property()
   expand: MainnavExpandSize = "lg";
 
-  @property({ type: String })
-  mode: "offcanvas" | "default" = "default";
-
+  /** @internal */
   @state()
   breakpointReached = false;
 
+  /** @internal */
   @state()
   expanded = false;
 
   firstUpdated() {
-    if (this.mode === "default") {
-      this.bsCollapse = new Collapse(this.myCollapse.value, {
-        toggle: false
-      });
-      this.myCollapse.value.addEventListener("show.bs.collapse", () => {
-        this.expanded = true;
-      });
-      this.myCollapse.value.addEventListener("shown.bs.collapse", () => {
-        this.expanded = true;
-      });
-      this.myCollapse.value.addEventListener("hide.bs.collapse", () => {
-        this.expanded = false;
-      });
-      this.myCollapse.value.addEventListener("hidden.bs.collapse", () => {
-        this.expanded = false;
-      });
-    }
-
-    if (this.mode === "offcanvas") {
-      this.bsOffcanvas = new Offcanvas(this.myOffcanvas.value);
-      //add esc keyboard event for bsOffcanvas
-      this.addEventListener("keydown", ev => {
-        if (ev.key === "Escape") {
-          this.bsOffcanvas.hide();
-        }
-      });
-    }
+    this.bsCollapse = new Collapse(this.myCollapse.value, {
+      toggle: false
+    });
+    this.myCollapse.value.addEventListener("show.bs.collapse", () => {
+      this.expanded = true;
+    });
+    this.myCollapse.value.addEventListener("shown.bs.collapse", () => {
+      this.expanded = true;
+    });
+    this.myCollapse.value.addEventListener("hide.bs.collapse", () => {
+      this.expanded = false;
+    });
+    this.myCollapse.value.addEventListener("hidden.bs.collapse", () => {
+      this.expanded = false;
+    });
   }
   // assigning name attribute to elements added in slot="end", to use wildcard css selector to assign styles only to *-mainnav-item
   _handleSlotChange(e: Event) {
@@ -106,19 +103,18 @@ export class SgdsMainnav extends SgdsElement {
 
   render() {
     this.breakpointReached = window.innerWidth < SIZES[this.expand.toString()];
-    const collapseClass = "collapse navbar-collapse order-4";
-    const offcanvasClass = "offcanvas offcanvas-start order-4";
+    const collapseClass = "collapse navbar-collapse order-2";
     return html`
       <nav
         class="sgds navbar navbar-light
         ${this._expandClass()}"
       >
-        <a class="navbar-brand me-auto order-1" href=${this.brandHref}>
+        <a class="navbar-brand me-auto order-first" href=${this.brandHref}>
           <slot name="brand"></slot>
         </a>
-        <slot name="non-collapsible" class="${this.breakpointReached ? "order-2" : "order-5"}"></slot>
+        <slot name="non-collapsible" class="${this.breakpointReached ? "order-1" : "order-last"}"></slot>
         <button
-          class="navbar-toggler order-3"
+          class="navbar-toggler order-1"
           type="button"
           @click=${() => this._onClickButton()}
           aria-controls="${this.collapseId}"
@@ -139,11 +135,7 @@ export class SgdsMainnav extends SgdsElement {
             />
           </svg>
         </button>
-        <div
-          class=${this.mode === "default" ? collapseClass : offcanvasClass}
-          ${this.mode === "default" ? ref(this.myCollapse) : ref(this.myOffcanvas)}
-          id=${this.collapseId}
-        >
+        <div class=${collapseClass} ${ref(this.myCollapse)} id=${this.collapseId}>
           <ul class="navbar-nav">
             <slot></slot>
             <slot
