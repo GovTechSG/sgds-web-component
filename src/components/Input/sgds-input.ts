@@ -19,9 +19,7 @@ import { unsafeSVG } from "lit/directives/unsafe-svg.js";
  * @event sgds-input - Emitted when the control receives input and its value changes.
  * @event sgds-focus - Emitted when input is in focus.
  * @event sgds-blur - Emitted when input is not in focus.
- * 
- * @csspart label - The label of input 
- * @csspart hint - The hint text of input 
+ *
  */
 @customElement("sgds-input")
 export class SgdsInput extends SgdsElement implements SgdsFormControl {
@@ -191,11 +189,13 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     `;
     // if hintText is defined
     const withHintText = html`
-      <small id="${ifDefined(this.inputId)}Help" class="text-muted form-text" part="hint">${this.hintText}</small>
+      <small id="${ifDefined(this.inputId)}Help" class="text-muted form-text">${this.hintText}</small>
     `;
 
     // if label is defined
-    const withLabel = html` <label for=${ifDefined(this.inputId)} class="form-label" part="label">${this.label}</label> `;
+    const withLabel = html`
+      <label for=${ifDefined(this.inputId)} class="form-label">${this.label}</label>
+    `;
 
     return html` ${this.label && withLabel} ${this.hintText && withHintText} ${this.icon ? inputWithIcon : input} `;
   }
