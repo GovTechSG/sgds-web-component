@@ -56,17 +56,18 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   /**Sets the maximum length of the input */
   @property({ type: Number, reflect: true }) maxlength: number;
   /**The input's placeholder text. */
-  @property({ type: String, reflect: true }) placeholder = "Placeholder";
+  @property({ type: String, reflect: true }) placeholder: string;
   /**A pattern to validate input against. */
   @property({ type: String }) pattern: string;
-  /**	Autofocus the input */
+  /**Autofocus the input */
   @property({ type: Boolean, reflect: true }) autofocus = false;
   /**Disables the input. */
   @property({ type: Boolean, reflect: true }) disabled = false;
   /**Makes the input a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
-  /** Makes the input readonly. */
+  /**Makes the input readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
+
 
   /**The input's value attribute. */
   @property({ reflect: true }) value = "";
@@ -87,6 +88,10 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   /** Sets focus on the input. */
   public focus(options?: FocusOptions) {
     this.input.focus(options);
+  }
+  /** Sets blur on the input. */
+  public blur() {
+    this.input.blur();
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
@@ -135,7 +140,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   handleValueChange() {
     this.invalid = !this.input.checkValidity();
     this.valid = this.input.checkValidity();
-    // remove validation for input that is not required, is already dirty and has empty value 
+    // remove validation for input that is not required, is already dirty and has empty value
     if (!this.required && this.value === "") {
       this.valid = false;
     }
