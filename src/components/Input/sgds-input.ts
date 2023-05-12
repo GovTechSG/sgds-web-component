@@ -193,9 +193,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     `;
 
     // if label is defined
-    const withLabel = html`
-      <label for=${ifDefined(this.inputId)} class="form-label">${this.label}</label>
-    `;
+    const withLabel = html` <label for=${ifDefined(this.inputId)} class="form-label">${this.label}</label> `;
 
     return html` ${this.label && withLabel} ${this.hintText && withHintText} ${this.icon ? inputWithIcon : input} `;
   }
