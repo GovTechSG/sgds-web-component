@@ -7,19 +7,22 @@ import SgdsElement from "../../base/sgds-element";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import genId from "../../utils/generateId";
-
+/**
+ * @summary Radio buttons allow the user to select one option from a set while seeing all available options.
+ * 
+ * @slot default - The label of the radio button
+ */
 @customElement("sgds-radio")
 export class SgdsRadio extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
-
+  /**@internal */
   @state() checked = false;
-  @state() protected hasFocus = false;
 
   /** The radio's value attribute. */
   @property() value: string;
 
   /** For id/for pair of the HTML form control. */
-  @property({ type: String, reflect: true }) radioId = genId("radio");
+  @property({ type: String, reflect: true }) radioId: string = genId("radio");
 
   /** Disables the radio. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -48,7 +51,6 @@ export class SgdsRadio extends SgdsElement {
   }
 
   private handleBlur() {
-    this.hasFocus = false;
     this.emit("sgds-blur");
   }
 
@@ -59,7 +61,6 @@ export class SgdsRadio extends SgdsElement {
   }
 
   private handleFocus() {
-    this.hasFocus = true;
     this.emit("sgds-focus");
   }
 
@@ -78,14 +79,12 @@ export class SgdsRadio extends SgdsElement {
   render() {
     return html`
       <div
-        part="base"
         class=${classMap({
           "form-check": true,
           "form-check-inline": this.isInline
         })}
       >
         <input
-          part="control"
           class=${classMap({
             "form-check-input": true
           })}
@@ -99,7 +98,6 @@ export class SgdsRadio extends SgdsElement {
           @click=${this.handleClick}
         />
         <label
-          part="label"
           for="${ifDefined(this.radioId)}"
           aria-label=${ifDefined(this.ariaLabel)}
           class="form-check-label"

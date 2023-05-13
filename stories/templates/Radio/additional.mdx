@@ -1,0 +1,24 @@
+## Validation
+
+`SgdsRadioGroup` runs native HTMLInputElement methods to check on the [constraint validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation) of the input and applies our own validation stylings
+
+Set `hasFeedback` to true to enable sgds validation stylings.
+
+Try submitting the required form below without clicking on any radio buttons to trigger the error message
+
+export const ValidationTemplate = () =>
+  html`
+    <form>
+      <sgds-radio-group required hasFeedback invalidFeedback="This is required">
+        <span slot="label">Select an option</span>
+        <sgds-radio value="1">Option 1</sgds-radio>
+        <sgds-radio value="2">Option 2</sgds-radio>
+        <sgds-radio value="3">Option 3</sgds-radio>
+      </sgds-radio-group>
+      <sgds-button type="submit">Submit</sgds-button>
+    </form>
+  `;
+
+<Canvas>
+  <Story name="Validation">{ValidationTemplate.bind({})}</Story>
+</Canvas>
