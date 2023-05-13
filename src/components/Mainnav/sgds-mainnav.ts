@@ -1,4 +1,4 @@
-import { Collapse, Offcanvas } from "bootstrap";
+import { Collapse } from "bootstrap";
 import { html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -33,7 +33,7 @@ const SIZES = {
  * @cssproperty --mainnav-padding-y - top and bottom padding for browser width > 768px
  * @cssproperty --mainnav-mobile-padding-x - left and right padding for browser width < 768px
  * @cssproperty --mainnav-mobile-padding-y - top and bottom padding for browser width < 768px
- * @cssproperty --mainnav-borderBottom-width - bottom border width 
+ * @cssproperty --mainnav-borderBottom-width - bottom border width
  * @cssproperty --mainnav-borderBottom-color - borderBottom width color
  */
 @customElement("sgds-mainnav")
