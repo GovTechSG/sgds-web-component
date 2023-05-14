@@ -12,12 +12,7 @@ export const Template = ({
   invalidFeedback
 }) => {
   return html`
-    <sgds-radio-group
-      .name=${name}
-      .value=${defaultValue}
-      .required=${required}
-      .invalidFeedback=${invalidFeedback}
-    >
+    <sgds-radio-group .name=${name} .value=${defaultValue} .required=${required} .invalidFeedback=${invalidFeedback}>
       <span slot="label">Select an option</span>
       <sgds-radio
         .value=${radioValue}

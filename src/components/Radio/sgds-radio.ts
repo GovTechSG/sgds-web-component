@@ -8,9 +8,12 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import genId from "../../utils/generateId";
 /**
- * @summary Radio buttons allow the user to select one option from a set while seeing all available options.
- * 
+ * @summary Radio allows the user to select one option from a set while seeing all available options.
+ *
  * @slot default - The label of the radio button
+ * 
+ * @event sgds-focus - Emitted when the control gains focus.
+ * @event sgds-blur - Emitted when the control loses focus.
  */
 @customElement("sgds-radio")
 export class SgdsRadio extends SgdsElement {
@@ -97,10 +100,7 @@ export class SgdsRadio extends SgdsElement {
           aria-checked=${this.checked ? "true" : "false"}
           @click=${this.handleClick}
         />
-        <label
-          for="${ifDefined(this.radioId)}"
-          aria-label=${ifDefined(this.ariaLabel)}
-          class="form-check-label"
+        <label for="${ifDefined(this.radioId)}" aria-label=${ifDefined(this.ariaLabel)} class="form-check-label"
           ><slot></slot
         ></label>
       </div>

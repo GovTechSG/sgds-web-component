@@ -6,10 +6,14 @@ import { FormSubmitController } from "../../utils/form";
 import { watch } from "../../utils/watch";
 import SgdsRadio from "./sgds-radio";
 import styles from "./sgds-radio-group.scss";
-import { SgdsFormControl } from "../../utils/form"
+import { SgdsFormControl } from "../../utils/form";
 
 /**
- * @summary test
+ * @summary RadioGroup group multiple radios so they function as a single form control.
+ * 
+ * @slot default - The default slot where sgds-radio are placed.
+ * 
+ * @event sgds-change - Emitted when the radio group's selected value changes.
  */
 @customElement("sgds-radio-group")
 export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
@@ -42,7 +46,6 @@ export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
   @property({ type: String, reflect: true }) invalidFeedback = "";
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
-  
 
   @watch("value")
   handleValueChange() {
@@ -57,7 +60,7 @@ export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
     this.defaultValue = this.value;
   }
 
-  /** Gets the validity state object */
+  /** Gets and return the ValidityState object.  */
   get validity(): ValidityState {
     const hasMissingData = !((this.value && this.required) || !this.required);
     const hasCustomError = this.customErrorMessage !== "";
@@ -67,7 +70,7 @@ export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
       patternMismatch: false,
       rangeOverflow: false,
       rangeUnderflow: false,
-      stepMismatch: false,
+      stepMismatch: false,  
       tooLong: false,
       tooShort: false,
       typeMismatch: false,
@@ -159,7 +162,7 @@ export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
   }
 
   handleInvalid(e: Event) {
-    e.preventDefault()
+    e.preventDefault();
     this.invalid = true;
   }
 
@@ -202,13 +205,14 @@ export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
           @invalid=${(e: Event) => this.handleInvalid(e)}
           hidden
         />
-        ${this.hasFeedback
-        ? html`<div class="invalid-feedback">${this.invalidFeedback}</div>`
-        : ""}
-        
+        ${this.hasFeedback ? html`<div class="invalid-feedback">${this.invalidFeedback}</div>` : ""}
       </fieldset>
     `;
   }
 }
-
+declare global {
+  interface HTMLElementTagNameMap {
+    "sgds-radio-group": SgdsRadioGroup;
+  }
+}
 export default SgdsRadioGroup;

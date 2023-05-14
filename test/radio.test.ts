@@ -131,7 +131,7 @@ describe("<sgds-radio-group>", () => {
     const radioGroup = <SgdsRadioGroup>el.querySelector("sgds-radio-group");
     expect(radioGroup.invalid).to.be.true;
   });
-  it("when hasFeedback is true, feedback message is empty string", async() => {
+  it("when hasFeedback is true, feedback message is empty string", async () => {
     const el = await fixture<SgdsRadioGroup>(
       html`
         <sgds-radio-group id="radio-group" hasFeedback>
@@ -140,9 +140,9 @@ describe("<sgds-radio-group>", () => {
       `
     );
     const invalidFeedback = el.shadowRoot?.querySelector("div.invalid-feedback");
-    expect(invalidFeedback?.textContent).to.equal("")
-  })
-  it("invalidFeedback sets the feedback message", async() => {
+    expect(invalidFeedback?.textContent).to.equal("");
+  });
+  it("invalidFeedback sets the feedback message", async () => {
     const el = await fixture<SgdsRadioGroup>(
       html`
         <sgds-radio-group id="radio-group" hasFeedback invalidFeedback="test">
@@ -151,9 +151,9 @@ describe("<sgds-radio-group>", () => {
       `
     );
     const invalidFeedback = el.shadowRoot?.querySelector("div.invalid-feedback");
-    expect(invalidFeedback?.textContent).to.equal("test")
-  })
- 
+    expect(invalidFeedback?.textContent).to.equal("test");
+  });
+
   it("by default, first radio is tabindex 0", async () => {
     const el = await fixture<SgdsRadioGroup>(html`<sgds-radio-group>
       <sgds-radio value="1">one</sgds-radio>
