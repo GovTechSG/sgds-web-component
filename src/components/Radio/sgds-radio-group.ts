@@ -10,9 +10,9 @@ import { SgdsFormControl } from "../../utils/form";
 
 /**
  * @summary RadioGroup group multiple radios so they function as a single form control.
- * 
+ *
  * @slot default - The default slot where sgds-radio are placed.
- * 
+ *
  * @event sgds-change - Emitted when the radio group's selected value changes.
  */
 @customElement("sgds-radio-group")
@@ -70,7 +70,7 @@ export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
       patternMismatch: false,
       rangeOverflow: false,
       rangeUnderflow: false,
-      stepMismatch: false,  
+      stepMismatch: false,
       tooLong: false,
       tooShort: false,
       typeMismatch: false,
@@ -216,3 +216,4 @@ declare global {
   }
 }
 export default SgdsRadioGroup;
+

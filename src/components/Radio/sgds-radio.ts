@@ -11,7 +11,7 @@ import genId from "../../utils/generateId";
  * @summary Radio allows the user to select one option from a set while seeing all available options.
  *
  * @slot default - The label of the radio button
- * 
+ *
  * @event sgds-focus - Emitted when the control gains focus.
  * @event sgds-blur - Emitted when the control loses focus.
  */
