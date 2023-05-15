@@ -1,6 +1,6 @@
 import type SgdsButton from "../components/Button/sgds-button";
 import type { ReactiveController, ReactiveControllerHost } from "lit";
-
+import SgdsElement from "../base/sgds-element";
 const reportValidityOverloads: WeakMap<HTMLFormElement, () => boolean> = new WeakMap();
 
 export interface FormSubmitControllerOptions {
@@ -180,4 +180,23 @@ export class FormSubmitController implements ReactiveController {
     // native submit button into the form, "click" it, then remove it to simulate a standard form submission.
     this.doAction("submit", invoker);
   }
+}
+
+export interface SgdsFormControl extends SgdsElement {
+  // Form attributes
+  name: string;
+  value: unknown;
+  disabled?: boolean;
+  defaultValue?: unknown;
+  defaultChecked?: boolean;
+  form?: string;
+
+  // Constraint validation attributes
+  pattern?: string;
+  min?: number | string | Date;
+  max?: number | string | Date;
+  step?: number | "any";
+  required?: boolean;
+  minlength?: number;
+  maxlength?: number;
 }

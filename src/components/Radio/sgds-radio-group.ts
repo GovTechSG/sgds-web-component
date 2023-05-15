@@ -6,26 +6,32 @@ import { FormSubmitController } from "../../utils/form";
 import { watch } from "../../utils/watch";
 import SgdsRadio from "./sgds-radio";
 import styles from "./sgds-radio-group.scss";
+import { SgdsFormControl } from "../../utils/form";
 
+/**
+ * @summary RadioGroup group multiple radios so they function as a single form control.
+ *
+ * @slot default - The default slot where sgds-radio are placed.
+ *
+ * @event sgds-change - Emitted when the radio group's selected value changes.
+ */
 @customElement("sgds-radio-group")
-export class SgdsRadioGroup extends SgdsElement {
+export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
   static styles = [SgdsElement.styles, styles];
-
+  /**@internal */
   protected readonly formSubmitController = new FormSubmitController(this, {
     defaultValue: (control: SgdsRadioGroup) => control.defaultValue
   });
-
+  /**@internal */
   @query("slot:not([name])") defaultSlot: HTMLSlotElement;
+  /**@internal */
   @query(".radio-group__validation-input") input: HTMLInputElement;
-
-  @state() private defaultValue = "";
+  /**@internal */
+  @state() defaultValue = "";
+  /**@internal */
   @state() private customErrorMessage = "";
-
-  /**
-   * The radio group label. Required for proper accessibility. If you need to display HTML, you can use the `label` slot
-   * instead.
-   */
-  @property() label = "";
+  /** @internal This will be true when the control is in an invalid state. */
+  @state() invalid = false;
 
   /** The selected value of the control. */
   @property({ reflect: true }) value = "";
@@ -36,12 +42,10 @@ export class SgdsRadioGroup extends SgdsElement {
   /** Ensures a child radio is checked before allowing the containing form to submit. */
   @property({ type: Boolean, reflect: true }) required = false;
 
-  /**
-   * This will be true when the control is in an invalid state.
-   */
-  @property({ type: Boolean, reflect: true }) invalid = false;
-
-  @property({ type: String, reflect: true }) invalidFeedback = "default feedback";
+  /**Feedback text for error state when validated */
+  @property({ type: String, reflect: true }) invalidFeedback = "";
+  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
+  @property({ type: Boolean, reflect: true }) hasFeedback = false;
 
   @watch("value")
   handleValueChange() {
@@ -56,6 +60,7 @@ export class SgdsRadioGroup extends SgdsElement {
     this.defaultValue = this.value;
   }
 
+  /** Gets and return the ValidityState object.  */
   get validity(): ValidityState {
     const hasMissingData = !((this.value && this.required) || !this.required);
     const hasCustomError = this.customErrorMessage !== "";
@@ -75,7 +80,7 @@ export class SgdsRadioGroup extends SgdsElement {
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  reportValidity(): boolean {
+  public reportValidity(): boolean {
     const validity = this.validity;
 
     // this.errorMessage = this.customErrorMessage || validity.valid ? '' : this.input.validationMessage;
@@ -90,7 +95,6 @@ export class SgdsRadioGroup extends SgdsElement {
   }
 
   private getAllRadios() {
-    //FIXME: too specific selector , this will not work if its on dev console design system
     return [...this.querySelectorAll<SgdsRadio>("sgds-radio")];
   }
 
@@ -157,7 +161,8 @@ export class SgdsRadioGroup extends SgdsElement {
     }
   }
 
-  handleInvalid() {
+  handleInvalid(e: Event) {
+    e.preventDefault();
     this.invalid = true;
   }
 
@@ -185,26 +190,30 @@ export class SgdsRadioGroup extends SgdsElement {
       </div>
     `;
     return html`
-      <fieldset role="radio-group" part="base" name=${this.name}>
-        <label @click=${this.handleLabelClick} class="form-label" part="label">
-          <slot name="label">${this.label}</slot>
+      <fieldset role="radio-group" name=${this.name}>
+        <label @click=${this.handleLabelClick} class="form-label">
+          <slot name="label"></slot>
         </label>
         ${defaultSlot}
         <input
-          part="control"
           type="text"
           class="radio-group__validation-input visually-hidden ${classMap({
-            "is-invalid": this.invalid
+            "is-invalid": this.hasFeedback && this.invalid
           })}"
           ?required=${this.required}
           tabindex="-1"
-          @invalid=${this.handleInvalid}
+          @invalid=${(e: Event) => this.handleInvalid(e)}
           hidden
         />
-        <div class="invalid-feedback" part="invalidFeedback">${this.invalidFeedback}</div>
+        ${this.hasFeedback ? html`<div class="invalid-feedback">${this.invalidFeedback}</div>` : ""}
       </fieldset>
     `;
   }
 }
-
+declare global {
+  interface HTMLElementTagNameMap {
+    "sgds-radio-group": SgdsRadioGroup;
+  }
+}
 export default SgdsRadioGroup;
+

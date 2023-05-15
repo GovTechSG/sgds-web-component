@@ -131,20 +131,27 @@ describe("<sgds-radio-group>", () => {
     const radioGroup = <SgdsRadioGroup>el.querySelector("sgds-radio-group");
     expect(radioGroup.invalid).to.be.true;
   });
-
-  it("upon validation, it should have invalid feedback with text 'default feedback' by default, and also able to render other text when specified", async () => {
+  it("when hasFeedback is true, feedback message is empty string", async () => {
     const el = await fixture<SgdsRadioGroup>(
       html`
-        <sgds-radio-group id="radio-group" required>
+        <sgds-radio-group id="radio-group" hasFeedback>
           <sgds-radio id="radio2" value="2">two</sgds-radio>
         </sgds-radio-group>
       `
     );
     const invalidFeedback = el.shadowRoot?.querySelector("div.invalid-feedback");
-    expect(invalidFeedback?.textContent).to.contain("default feedback");
-    el.setAttribute("invalidFeedback", "Fill up this field.");
-    await elementUpdated(el);
-    expect(invalidFeedback?.textContent).to.contain("Fill up this field.");
+    expect(invalidFeedback?.textContent).to.equal("");
+  });
+  it("invalidFeedback sets the feedback message", async () => {
+    const el = await fixture<SgdsRadioGroup>(
+      html`
+        <sgds-radio-group id="radio-group" hasFeedback invalidFeedback="test">
+          <sgds-radio id="radio2" value="2">two</sgds-radio>
+        </sgds-radio-group>
+      `
+    );
+    const invalidFeedback = el.shadowRoot?.querySelector("div.invalid-feedback");
+    expect(invalidFeedback?.textContent).to.equal("test");
   });
 
   it("by default, first radio is tabindex 0", async () => {
