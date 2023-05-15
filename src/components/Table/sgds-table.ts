@@ -6,63 +6,72 @@ import styles from "./sgds-table.scss";
 
 /**
  * @summary The use of a table is to organise a collections of data into readable rows
+ * 
+ * @cssproperty --sgds-table-bg - Table's background color
+ * @cssproperty --sgds-table-accent-bg - Table's accent background color
+ * @cssproperty --sgds-table-striped-color - Text color for striped table
+ * @cssproperty --sgds-table-striped-bg - Background color for striped table
+ * @cssproperty --sgds-table-active-color - Active text color for hovered row
+ * @cssproperty --sgds-table-active-bg - Active background color for hovered row
+ * @cssproperty --sgds-table-hover-color - Hovered text color for hover table
+ * @cssproperty --sgds-table-hover-bg - Hovered background color for hover table
  */
 
 @customElement("sgds-table")
 export class SgdsTable extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
-  /** 
-   * Adds zebra-striping using striped to table row within the <tbody> 
+  /**
+   * Adds zebra-striping using striped to table row within the <tbody>
    */
   @property({ type: Boolean, reflect: true }) striped = false;
 
-  /** 
-   * Add borders to all sides of table and cells 
+  /**
+   * Add borders to all sides of table and cells
    */
   @property({ type: Boolean, reflect: true }) bordered = false;
 
-  /** 
-   * Remove all borders to table and cells 
+  /**
+   * Remove all borders to table and cells
    */
   @property({ type: Boolean, reflect: true }) borderless = false;
 
-  /** 
-   * Add hoverable state on table rows 
+  /**
+   * Add hoverable state on table rows
    */
   @property({ type: Boolean, reflect: true }) hover = false;
 
-  /** 
-   * Add <code>.table-sm</code> to make table more compact 
+  /**
+   * Add <code>.table-sm</code> to make table more compact
    */
   @property({ type: String, reflect: true }) size?: string;
 
-  /** 
-   * Use contextual classes to add colors to table 
+  /**
+   * Use contextual classes to add colors to table
    */
   @property({ type: String, reflect: true }) variant?: string;
 
-  /** 
-   * Sorting on a column is enabled by adding the sort property. The sorting algorithm is based on javascript array.sort() method. In ascending order from bottom, alphabets come first, followed by numbers, and then symbols. Similarly, in descending order from bottom, symbols come first, followed by numbers, and then alphabets. 
+  /**
+   * Sorting on a column is enabled by adding the sort property. The sorting algorithm is based on javascript array.sort() method. In ascending order from bottom, alphabets come first, followed by numbers, and then symbols. Similarly, in descending order from bottom, symbols come first, followed by numbers, and then alphabets.
    */
   @property({ type: Boolean, reflect: true }) sort = false;
 
-  /** 
-   * When removableSort is present, the third click removes the sorting from the column. 
+  /**
+   * When removableSort is present, the third click removes the sorting from the column.
    */
   @property({ type: Boolean, reflect: true }) removableSort = false;
 
-  /** 
-   * Use responsive="sm", responsive="md" , responsive="lg", or responsive="xl" as needed to create responsive tables up to a particular breakpoint. From that breakpoint and up, the table will behave normally and not scroll horizontally. 
+  /**
+   * Use responsive="sm", responsive="md" , responsive="lg", or responsive="xl" as needed to create responsive tables up to a particular breakpoint. From that breakpoint and up, the table will behave normally and not scroll horizontally.
    */
   @property({ type: String, reflect: true }) responsive?: "sm" | "md" | "lg" | "xl";
-  
-  /** 
+
+  /**
    * Populate header cells using Arrays
    */
   @property({ type: Array<string> }) tableHeaders = [];
 
-  /** 
+  /**
    * Populate data cells using Arrays
    */
   @property({ type: Array<string> }) tableData = [];
@@ -73,8 +82,8 @@ export class SgdsTable extends SgdsElement {
   /** @internal */
   @state() sortAsc = true;
 
-  //TODO aria-sort 
-  
+  //TODO aria-sort
+
   /** @internal */
   @state() activeColumn: number | null = null;
 
@@ -86,8 +95,6 @@ export class SgdsTable extends SgdsElement {
 
   /** @internal */
   @state() originalTableData: Array<string[]> = [];
-
-
 
   connectedCallback() {
     super.connectedCallback();
@@ -126,7 +133,7 @@ export class SgdsTable extends SgdsElement {
         this.activeColumn = columnIndex;
         this.clickCount = 1;
       }
-      
+
       // add the .active class to the clicked header cell
       const thElements = this.shadowRoot?.querySelectorAll("th");
       thElements.forEach((thElement, index) => {
