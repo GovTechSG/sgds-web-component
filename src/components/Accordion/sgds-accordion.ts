@@ -2,7 +2,6 @@ import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit";
 import { customElement, property, queryAssignedNodes } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-accordion.scss";
 import type SgdsAccordionItem from "./sgds-accordion-item";
 
 /**
@@ -11,10 +10,12 @@ import type SgdsAccordionItem from "./sgds-accordion-item";
  */
 @customElement("sgds-accordion")
 export class SgdsAccordion extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [SgdsElement.styles];
 
+  /** Allows multiple accordion items to be opened at the same time */
   @property({ type: Boolean, reflect: true }) allowMultiple = false;
 
+  /** Optional for accordion wrapper. Can be used to insert any utility classes such as me-auto */
   @property({ reflect: true }) accordionClasses?: string;
 
   /** @internal */
@@ -73,11 +74,10 @@ export class SgdsAccordion extends SgdsElement {
   render() {
     return html`
       <div
-        class="
-            ${classMap({
+        class=${classMap({
           "sgds accordion": true,
           [`${this.accordionClasses}`]: this.accordionClasses
-        })}"
+        })}
       >
         <slot @click=${this.onToggle}></slot>
       </div>
