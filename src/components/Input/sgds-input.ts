@@ -9,7 +9,7 @@ import { defaultValue } from "../../utils/defaultvalue";
 import { FormSubmitController } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import type { SgdsFormControl } from "../../base/sgds-element";
+import type { SgdsFormControl } from "../../utils/form";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 
 /**
