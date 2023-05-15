@@ -10,12 +10,19 @@ import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import styles from "./sgds-checkbox.scss";
 
+/**
+ * @summary Checkbox component is used when you require users to select multiple items from a list.
+ *
+ * @slot default - The label of checkbox.
+ *
+ * @event sgds-change - Emitted when the radio group's selected value changes.
+ */
 @customElement("sgds-checkbox")
 export class SgdsCheckbox extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
-
+  /**@internal */
   @query('input[type="checkbox"]') input: HTMLInputElement;
-
+  /**@internal */
   private readonly formSubmitController = new FormSubmitController(this, {
     value: (control: SgdsCheckbox) => (control.checked ? control.value : undefined),
     defaultValue: (control: SgdsCheckbox) => control.defaultChecked,
@@ -49,17 +56,31 @@ export class SgdsCheckbox extends SgdsElement {
   /** Disables the checkbox (so the user can't check / uncheck it). */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
+  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
+  @property({ type: Boolean, reflect: true }) hasFeedback = false;
+
+  /**Feedback text for error state when validated */
+  @property({ type: String, reflect: true }) invalidFeedback: string;
+
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("checked")
   defaultChecked = false;
 
   /** Simulates a click on the checkbox. */
-  click() {
+  public click() {
     this.input.click();
   }
+  /** Sets focus on the checkbox. */
+  public focus(options?: FocusOptions) {
+    this.input.focus(options);
+  }
 
+  /** Removes focus from the checkbox. */
+  public blur() {
+    this.input.blur();
+  }
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  reportValidity() {
+  public reportValidity() {
     if (!this.input.reportValidity()) {
       this.invalid = !this.input.checkValidity();
     }
@@ -67,9 +88,6 @@ export class SgdsCheckbox extends SgdsElement {
   }
 
   handleChange() {
-    // console.log(
-    //   "when this.click() is fired, input detects a change --> handleChange runs"
-    // );
     this.checked = !this.checked;
     this.value = this.input.value;
     this.emit("sgds-change");
@@ -78,9 +96,6 @@ export class SgdsCheckbox extends SgdsElement {
   handleKeyDown(event: KeyboardEvent) {
     const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
     if (event.key === "Enter" && !hasModifier) {
-      // console.log(
-      //   "so here we are trying to mimick keydown enter event like a mousclick event"
-      // );
       this.click();
     }
   }
@@ -100,9 +115,8 @@ export class SgdsCheckbox extends SgdsElement {
 
   render() {
     return html`
-      <div part="base" class="form-check">
+      <div class="form-check">
         <input
-          part="control"
           class=${classMap({
             "form-check-input": true,
             "is-invalid": this.invalid,
@@ -122,21 +136,12 @@ export class SgdsCheckbox extends SgdsElement {
           @keydown=${this.handleKeyDown}
         />
         <label
-          part="label"
           for="${ifDefined(this.checkboxId)}"
           aria-label=${ifDefined(this.ariaLabel)}
           class="form-check-label"
           ><slot></slot
         ></label>
-        ${this.invalid
-          ? html`<slot
-              name="feedback"
-              part="feedback"
-              class=${classMap({
-                "invalid-feedback": true
-              })}
-            ></slot>`
-          : undefined}
+        ${this.hasFeedback ? html`<div class="invalid-feedback">${this.invalidFeedback}</div>` : ""}
       </div>
     `;
   }
