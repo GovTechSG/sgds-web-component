@@ -289,7 +289,7 @@ jsdoc annotations is used to generate the custom-element.json, the metadata of s
 export class SgdsAccordion extends SgdsElement {}
 ```
 
-2. Include @slots, @event, @csspart and their respective name whenever present in the component.
+2. Include `@slots`, `@event`, `@csspart` , `@cssproperty` and their respective name whenever present in the component.
 
 ```typescript
 /**
@@ -303,6 +303,10 @@ export class SgdsAccordion extends SgdsElement {}
  * @csspart base - The accordion-item base wrapper
  * @csspart header - The accordion-item button header
  * @csspart content - The accordion-item content
+ * 
+ * @cssproperty --mainnav-item-theme-color - Hover and active color for mainnav items.
+ * @cssproperty --mainnav-item-color - Text color of nav item.
+ * @cssproperty --mainnav-item-borderBottom-width - border bottom width for hover and active state for nav item
  */
 @customElement("sgds-accordion-item")
 export class SgdsAccordionItem extends SgdsElement {

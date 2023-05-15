@@ -208,12 +208,15 @@
         </div>
         <div class="container">
             <h2>Radiogroup</h2>
-                <sgds-radio-group>
+            <form>
+                <sgds-radio-group required hasFeedback invalidFeedback="This is required">
                 <span slot="label">Select an option</span>
                     <sgds-radio value="1">Option 1</sgds-radio>
                     <sgds-radio value="2">Option 2</sgds-radio>
                     <sgds-radio value="3">Option 3</sgds-radio>
                 </sgds-radio-group>
+                <sgds-button type="submit">Submit</sgds-button>
+            </form>
         </div>
         <div class="container">
             <h2>Selectable card</h2>

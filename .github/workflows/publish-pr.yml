@@ -15,7 +15,7 @@ jobs:
         run: echo "NPM_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: 18
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
       - run: npm run test

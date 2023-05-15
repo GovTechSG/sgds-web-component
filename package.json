@@ -1,6 +1,6 @@
 {
   "name": "@govtechsg/sgds-web-component",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "",
   "main": "lib/umd/index.js",
   "module": "lib/index.js",
@@ -19,8 +19,8 @@
     "serve": "wds --watch --open",
     "test": "rm -rf test-outdir && rollup --config rollup.test.config.js && web-test-runner",
     "test:scripts": "wtr scripts/__tests__/**/*.test.js --node-resolve",
-    "storybook": "npm run build:dev && nodemon --exec \"npm run write:stories &&  start-storybook -p 6006\" --watch stories/templates stories/getting-started -e js,mdx",
-    "build-storybook": "npm run build:dev && npm run write:stories && build-storybook",
+    "storybook": "npm run build:dev && nodemon --exec \"npm run write:stories &&  STORYBOOK_ENV=development start-storybook -p 6006\" --watch stories/templates stories/getting-started -e js,mdx",
+    "build-storybook": "npm run build:dev && npm run write:stories && STORYBOOK_ENV=production build-storybook",
     "prepare": "husky install",
     "concat:stories": "gulp concat-storybook-mdx",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",

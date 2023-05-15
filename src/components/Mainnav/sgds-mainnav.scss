@@ -1,7 +1,27 @@
-  
+:host{
+  --mainnav-background-color: white;
+  --mainnav-padding-x: 1rem;
+  --mainnav-padding-y: 0;
+  --mainnav-mobile-padding-x: 0.5rem;
+  --mainnav-mobile-padding-y: 0;
+  --mainnav-borderBottom-width: 1px;
+  //TODO possible upgrade to bs5.2 for gray color css variables. hard code for now
+  --mainnav-borderBottom-color: #98a2b3;
+}
+
+.sgds{
+  &.navbar{
+    background-color: var(--mainnav-background-color);
+    padding: var(--mainnav-padding-y) var(--mainnav-padding-x);
+    border-bottom: var(--mainnav-borderBottom-width) solid var(--mainnav-borderBottom-color);
+    @media (max-width: 768px) { 
+      padding: var(--mainnav-mobile-padding-y) var(--mainnav-mobile-padding-x);
+    }
+  }
+}
+
 .navbar-nav {
   display: flex;
-  align-self: center;
   gap: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
