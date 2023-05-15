@@ -140,9 +140,7 @@ export class SgdsAccordionItem extends SgdsElement {
       <div
         part="base"
         class=${classMap({
-          sgds: true,
-          "accordion-item": true,
-          //TODO: Remove unnecessary classes
+          "sgds accordion-item": true,
           "accordion--open": this.open,
           "accordion--disabled": this.disabled,
           [`${this.accordionItemClasses}`]: this.accordionItemClasses
