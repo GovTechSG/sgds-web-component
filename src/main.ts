@@ -22,3 +22,5 @@ import "./components/Toast";
 import "./components/FileUpload";
 import "./components/Accordion";
 import "./components/Tooltip";
+import "./components/Spinner";
+

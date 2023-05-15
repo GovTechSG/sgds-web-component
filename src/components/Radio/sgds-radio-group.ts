@@ -216,4 +216,3 @@ declare global {
   }
 }
 export default SgdsRadioGroup;
-

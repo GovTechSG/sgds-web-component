@@ -22,3 +22,4 @@ export * from "./components/Toast";
 export * from "./components/FileUpload";
 export * from "./components/Accordion";
 export * from "./components/Tooltip";
+export * from "./components/Spinner";

@@ -1,0 +1,44 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { Template, args } from "../templates/Spinner/basic.js";
+import "../../lib/index.js";
+import { html } from "lit-html";
+
+<Meta
+  title="Components/Spinner"
+  argTypes={{
+    type: {
+      defaultValue: "border",
+      control: "select",
+      options: ["border", "grow"],
+    },
+    color: {
+      defaultValue: "primary",
+      control: "select",
+      options: [
+        "primary",
+        "secondary",
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "light",
+        "dark",
+      ],
+    },
+    spinnerClasses: { control: "text" },
+  }}
+/>
+
+# Spinner
+
+<Canvas>
+  <Story name="Basic" args={args}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## API
+
+### sgds-spinner
+
+<ArgsTable of="sgds-spinner" />
