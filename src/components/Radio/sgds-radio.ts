@@ -24,7 +24,7 @@ export class SgdsRadio extends SgdsElement {
   /** The radio's value attribute. */
   @property() value: string;
 
-  /** For id/for pair of the HTML form control. */
+  /** For id/for pair of the HTML form control and label. */
   @property({ type: String, reflect: true }) radioId: string = genId("radio");
 
   /** Disables the radio. */

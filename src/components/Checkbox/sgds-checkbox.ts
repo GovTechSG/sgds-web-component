@@ -1,11 +1,11 @@
 import { html } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { customElement, property, query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
-import { FormSubmitController } from "../../utils/form";
+import { FormSubmitController, SgdsFormControl } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import styles from "./sgds-checkbox.scss";
@@ -18,7 +18,7 @@ import styles from "./sgds-checkbox.scss";
  * @event sgds-change - Emitted when the radio group's selected value changes.
  */
 @customElement("sgds-checkbox")
-export class SgdsCheckbox extends SgdsElement {
+export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
   static styles = [SgdsElement.styles, styles];
   /**@internal */
   @query('input[type="checkbox"]') input: HTMLInputElement;
@@ -32,17 +32,11 @@ export class SgdsCheckbox extends SgdsElement {
   /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
   @property({ reflect: true }) name: string;
 
-  /** For Id/For pair of the HTML form control. */
-  @property({ type: String, reflect: true }) checkboxId = genId("checkbox");
+  /** For Id/For pair of the HTML form control and label. */
+  @property({ type: String, reflect: true }) checkboxId: string = genId("checkbox");
 
   /** For aria-label when there is no appropriate text label visible */
   @property({ type: String, reflect: true }) ariaLabel = "checkbox";
-
-  /** Manually style the input as valid */
-  @property({ type: Boolean, reflect: true }) valid = false;
-
-  /** Manually style the input as invalid */
-  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name. */
   @property() value: string;
@@ -60,11 +54,17 @@ export class SgdsCheckbox extends SgdsElement {
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
 
   /**Feedback text for error state when validated */
-  @property({ type: String, reflect: true }) invalidFeedback: string;
+  @property({ type: String, reflect: true }) invalidFeedback?: string;
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("checked")
   defaultChecked = false;
+
+    /** @internal */
+  @state() valid = false;
+
+  /** @internal */
+  @state() invalid = false;
 
   /** Simulates a click on the checkbox. */
   public click() {
@@ -100,6 +100,12 @@ export class SgdsCheckbox extends SgdsElement {
     }
   }
 
+  handleInvalid(e: Event) {
+    e.preventDefault();
+    this.invalid = true;
+  }
+
+
   @watch("disabled", { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
@@ -119,8 +125,8 @@ export class SgdsCheckbox extends SgdsElement {
         <input
           class=${classMap({
             "form-check-input": true,
-            "is-invalid": this.invalid,
-            "is-valid": this.valid
+            "is-invalid": this.hasFeedback && this.invalid,
+            "is-valid": this.hasFeedback && this.valid
           })}
           type="checkbox"
           id=${ifDefined(this.checkboxId)}
@@ -134,11 +140,9 @@ export class SgdsCheckbox extends SgdsElement {
           aria-checked=${this.checked ? "true" : "false"}
           @change=${this.handleChange}
           @keydown=${this.handleKeyDown}
+          @invalid=${(e: Event) => this.handleInvalid(e)}
         />
-        <label
-          for="${ifDefined(this.checkboxId)}"
-          aria-label=${ifDefined(this.ariaLabel)}
-          class="form-check-label"
+        <label for="${ifDefined(this.checkboxId)}" aria-label=${ifDefined(this.ariaLabel)} class="form-check-label"
           ><slot></slot
         ></label>
         ${this.hasFeedback ? html`<div class="invalid-feedback">${this.invalidFeedback}</div>` : ""}
