@@ -60,7 +60,7 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
   @defaultValue("checked")
   defaultChecked = false;
 
-    /** @internal */
+  /** @internal */
   @state() valid = false;
 
   /** @internal */
@@ -104,7 +104,6 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
     e.preventDefault();
     this.invalid = true;
   }
-
 
   @watch("disabled", { waitUntilFirstUpdate: true })
   handleDisabledChange() {

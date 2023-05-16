@@ -19,5 +19,5 @@ export const Template = args => {
 };
 export const args = {
   name: "check-me",
-  value: "check-me",
+  value: "check-me"
 };
