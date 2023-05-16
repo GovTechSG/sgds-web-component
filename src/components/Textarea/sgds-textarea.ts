@@ -12,7 +12,7 @@ import { watch } from "../../utils/watch";
 
 /**
  * @summary Text areas allow for the collection of input longer than a single line.
- * 
+ *
  * @event sgds-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sgds-input - Emitted when the control receives input and its value changes.
  * @event sgds-focus - Emitted when textarea is in focus.

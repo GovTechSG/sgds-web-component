@@ -27,7 +27,6 @@ describe("sgds-textarea", () => {
         <div class="form-text">0/10</div>
       </div>
       <textarea class=" form-control textarea-resize-vertical " id="test" rows="4" placeholder="Placeholder" maxlength="10" aria-invalid="false" spellcheck="false" required=""></textarea>
-      <div class="invalid-feedback" id="test-invalid">Do not leave blank</div>
     `
     );
   });
@@ -49,6 +48,38 @@ describe("sgds-textarea", () => {
     await waitUntil(() => submitHandler.calledOnce);
 
     expect(submitHandler).to.have.been.calledOnce;
+  });
+  it("when hasFeedback is true, div.invalid-feedback appears", async () => {
+    const el = await fixture<SgdsTextArea>(html` <sgds-textarea label="Name" hasFeedback></sgds-textarea> `);
+    expect(el.shadowRoot?.querySelector("div.invalid-feedback")).to.exist;
+  });
+  it("when hasFeedback is true, div.invalid-feedback appears and invalidFeedback value is forwarded to it", async () => {
+    const el = await fixture<SgdsTextArea>(html`
+      <sgds-textarea label="Name" hasFeedback invalidFeedback="teast"></sgds-textarea>
+    `);
+    expect(el.shadowRoot?.querySelector("div.invalid-feedback")).to.exist;
+    expect(el.shadowRoot?.querySelector("div.invalid-feedback")?.textContent).to.equal("teast");
+  });
+
+  it(".is-invalid appears on textarea when hasFeedback and state of component is invalid", async () => {
+    const el = await fixture<SgdsTextArea>(html` <sgds-textarea label="Name" hasFeedback></sgds-textarea> `);
+    const textarea = el.shadowRoot?.querySelector("textarea");
+    expect(textarea?.className).not.to.include("is-invalid");
+
+    //force an invalid state
+    el.invalid = true;
+    await el.updateComplete;
+    expect(textarea?.className).to.include("is-invalid");
+  });
+  it(".is-valid appears on textarea when hasFeedback and state of component is valid", async () => {
+    const el = await fixture<SgdsTextArea>(html` <sgds-textarea label="Name" hasFeedback></sgds-textarea> `);
+    const textarea = el.shadowRoot?.querySelector("textarea");
+    expect(textarea?.className).not.to.include("is-valid");
+
+    //force an invalid state
+    el.valid = true;
+    await el.updateComplete;
+    expect(textarea?.className).to.include("is-valid");
   });
 });
 
