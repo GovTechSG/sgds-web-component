@@ -140,8 +140,7 @@ export class SgdsFooter extends SgdsElement {
             <div class="row footer-copyrights">
               <div class="col">
                 <div class="d-flex justify-content-lg-end text-end">
-                  © ${new Date().getFullYear()}
-                  ${this.copyrightLiner ? this.copyrightLiner : "Government of Singapore"}<br />
+                  © ${new Date().getFullYear()} ${this.copyrightLiner ? this.copyrightLiner : "Government of Singapore"}<br />
                   Last Updated ${this.lastUpdatedDate}
                 </div>
               </div>
