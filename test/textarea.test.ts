@@ -1,4 +1,4 @@
-import { SgdsTextArea } from "../src/components/Textarea/sgds-textarea";
+import { SgdsTextarea } from "../src/components/Textarea/sgds-textarea";
 import "../src/components/Textarea";
 import { SgdsButton } from "../src/components/Button/sgds-button";
 import "../src/components/Button";
@@ -9,7 +9,7 @@ import { sendKeys } from "@web/test-runner-commands";
 describe("sgds-textarea", () => {
   it("is defined", () => {
     const el = document.createElement("sgds-textarea");
-    assert.instanceOf(el, SgdsTextArea);
+    assert.instanceOf(el, SgdsTextarea);
   });
   it("renders with default values", async () => {
     const el = await fixture(
@@ -33,14 +33,14 @@ describe("sgds-textarea", () => {
   });
 
   it("should be disabled with the disabled attribute", async () => {
-    const el = await fixture<SgdsTextArea>(html` <sgds-textarea disabled></sgds-textarea> `);
+    const el = await fixture<SgdsTextarea>(html` <sgds-textarea disabled></sgds-textarea> `);
     const textarea = el.shadowRoot?.querySelector<HTMLTextAreaElement>("textarea");
 
     expect(textarea?.disabled).to.be.true;
   });
 
   it("should focus the textarea when clicking on the label", async () => {
-    const el = await fixture<SgdsTextArea>(html` <sgds-textarea label="Name"></sgds-textarea> `);
+    const el = await fixture<SgdsTextarea>(html` <sgds-textarea label="Name"></sgds-textarea> `);
     const label = el.shadowRoot?.querySelector(".form-label");
     const submitHandler = sinon.spy();
 
@@ -51,11 +51,11 @@ describe("sgds-textarea", () => {
     expect(submitHandler).to.have.been.calledOnce;
   });
   it("when hasFeedback is true, div.invalid-feedback appears", async () => {
-    const el = await fixture<SgdsTextArea>(html` <sgds-textarea label="Name" hasFeedback></sgds-textarea> `);
+    const el = await fixture<SgdsTextarea>(html` <sgds-textarea label="Name" hasFeedback></sgds-textarea> `);
     expect(el.shadowRoot?.querySelector("div.invalid-feedback")).to.exist;
   });
   it("when hasFeedback is true, div.invalid-feedback appears and invalidFeedback value is forwarded to it", async () => {
-    const el = await fixture<SgdsTextArea>(html`
+    const el = await fixture<SgdsTextarea>(html`
       <sgds-textarea label="Name" hasFeedback invalidFeedback="teast"></sgds-textarea>
     `);
     expect(el.shadowRoot?.querySelector("div.invalid-feedback")).to.exist;
@@ -63,7 +63,7 @@ describe("sgds-textarea", () => {
   });
 
   it(".is-invalid appears on textarea when hasFeedback and state of component is invalid", async () => {
-    const el = await fixture<SgdsTextArea>(html` <sgds-textarea label="Name" hasFeedback></sgds-textarea> `);
+    const el = await fixture<SgdsTextarea>(html` <sgds-textarea label="Name" hasFeedback></sgds-textarea> `);
     const textarea = el.shadowRoot?.querySelector("textarea");
     expect(textarea?.className).not.to.include("is-invalid");
 
@@ -73,7 +73,7 @@ describe("sgds-textarea", () => {
     expect(textarea?.className).to.include("is-invalid");
   });
   it(".is-valid appears on textarea when hasFeedback and state of component is valid", async () => {
-    const el = await fixture<SgdsTextArea>(html` <sgds-textarea label="Name" hasFeedback></sgds-textarea> `);
+    const el = await fixture<SgdsTextarea>(html` <sgds-textarea label="Name" hasFeedback></sgds-textarea> `);
     const textarea = el.shadowRoot?.querySelector("textarea");
     expect(textarea?.className).not.to.include("is-valid");
 
@@ -86,18 +86,18 @@ describe("sgds-textarea", () => {
 
 describe("when using constraint validation", () => {
   it("should be valid by default", async () => {
-    const el = await fixture<SgdsTextArea>(html` <sgds-textarea></sgds-textarea> `);
+    const el = await fixture<SgdsTextarea>(html` <sgds-textarea></sgds-textarea> `);
     expect(el.invalid).to.be.false;
   });
 
   it("should be valid when required and empty by default", async () => {
-    const el = await fixture<SgdsTextArea>(html` <sgds-textarea required></sgds-textarea> `);
+    const el = await fixture<SgdsTextarea>(html` <sgds-textarea required></sgds-textarea> `);
 
     expect(el.invalid).to.be.false;
   });
 
   it("should be invalid when required and after removing disabled ", async () => {
-    const el = await fixture<SgdsTextArea>(html` <sgds-textarea disabled required></sgds-textarea> `);
+    const el = await fixture<SgdsTextarea>(html` <sgds-textarea disabled required></sgds-textarea> `);
 
     el.disabled = false;
     await el.updateComplete;
@@ -106,13 +106,13 @@ describe("when using constraint validation", () => {
   });
 
   it("should be invalid when required and disabled is removed", async () => {
-    const el = await fixture<SgdsTextArea>(html` <sgds-textarea disabled required></sgds-textarea> `);
+    const el = await fixture<SgdsTextarea>(html` <sgds-textarea disabled required></sgds-textarea> `);
     el.disabled = false;
     await el.updateComplete;
     expect(el.invalid).to.be.true;
   });
   it("should be valid=false when input is not required, has other validation,  and has no value", async () => {
-    const el = await fixture<SgdsTextArea>(html` <sgds-textarea minlength="3" value="t"></sgds-textarea> `);
+    const el = await fixture<SgdsTextarea>(html` <sgds-textarea minlength="3" value="t"></sgds-textarea> `);
     expect(el.valid).to.be.false;
     expect(el.invalid).to.be.false;
     el.focus();
@@ -146,7 +146,7 @@ describe("when resetting a form", () => {
       </form>
     `);
     const button = form.querySelector<SgdsButton>("sgds-button");
-    const textarea = form.querySelector<SgdsTextArea>("sgds-textarea");
+    const textarea = form.querySelector<SgdsTextarea>("sgds-textarea");
     if (textarea) textarea.value = "1234";
 
     await textarea?.updateComplete;
@@ -169,7 +169,7 @@ describe("when resetting a form", () => {
 
 describe("when maxlength is declared", () => {
   it("form text should exist", async () => {
-    const el = await fixture<SgdsTextArea>(html` <sgds-textarea required maxlength="250"></sgds-textarea> `);
+    const el = await fixture<SgdsTextarea>(html` <sgds-textarea required maxlength="250"></sgds-textarea> `);
     const formtext = el.shadowRoot?.querySelector(".form-text");
 
     expect(formtext).to.exist;
@@ -185,14 +185,14 @@ describe("when maxlength is declared", () => {
 
 describe("Feedback UI optional", () => {
   it("when hasFeedback is true, div.invalid-feedback appears in shadowDOM", async () => {
-    const el = await fixture<SgdsTextArea>(
+    const el = await fixture<SgdsTextarea>(
       html` <sgds-textarea hasFeedback invalidFeedback="invalid feedback"></sgds-textarea> `
     );
     expect(el.shadowRoot?.querySelector("div.invalid-feedback")).not.to.be.null;
     expect(el.shadowRoot?.querySelector("div.invalid-feedback")?.textContent).to.equal("invalid feedback");
   });
   it("when hasFeedback is true and invalid state is true, invalid stylings", async () => {
-    const el = await fixture<SgdsTextArea>(
+    const el = await fixture<SgdsTextarea>(
       html` <sgds-textarea hasFeedback invalidFeedback="invalid feedback"></sgds-textarea> `
     );
     expect(el.invalid).to.be.false;

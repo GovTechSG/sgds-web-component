@@ -10,3 +10,41 @@ export const ValidationTemplate = () =>
 <Canvas>
   <Story name="Validation">{ValidationTemplate.bind({})}</Story>
 </Canvas>
+
+## Default Value 
+
+SgdsTextarea has an internal property that saves the initial value of `value` as the default value of the control.
+On form reset, the control defaults to the initial value of control.
+
+Test this out by following the instructions below 
+1. Change the value of textarea below by typing in it and then click the reset button.
+    - Observe how the value resets to the initial value on load
+2. Click on the yellow button to change the defaultValue of the textarea
+3. Click reset button again 
+    - Observe now the default value has changed 
+
+export const DefaultValueTemplate = () => html`
+  <form>
+  <sgds-textarea id="default-value-eg" value="The initial value"></sgds-textarea> 
+  <sgds-button type="reset" class="mt-5">Reset</sgds-button>
+  <sgds-button variant="warning" @click=${(e) => changeValue(e)}>Click to change the default value</sgds-button>
+  </form>
+`
+
+<Canvas>
+  <Story name="Default Value">{DefaultValueTemplate.bind({})}</Story>
+</Canvas>
+
+export const changeValue = (e) => {
+  e.preventDefault()
+  const textarea = document.querySelector("sgds-textarea#default-value-eg")
+  textarea.defaultValue = "Default value has changed!"
+}
+
+```jsx
+export const changeValue = (e) => {
+  e.preventDefault()
+  const textarea = document.querySelector("sgds-textarea#default-value-eg")
+  textarea.defaultValue = "Default value has changed!"
+}
+```

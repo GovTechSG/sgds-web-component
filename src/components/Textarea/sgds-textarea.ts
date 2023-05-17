@@ -19,7 +19,7 @@ import { watch } from "../../utils/watch";
  * @event sgds-blur - Emitted when textarea loses focus.
  */
 @customElement("sgds-textarea")
-export class SgdsTextArea extends SgdsElement implements SgdsFormControl{
+export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   static styles = [SgdsElement.styles, styles];
   /**@internal */
   @query("textarea.form-control") textarea: HTMLTextAreaElement;
@@ -37,9 +37,9 @@ export class SgdsTextArea extends SgdsElement implements SgdsFormControl{
   @property({ type: String, reflect: true }) textareaClasses?: string;
   /**The textarea's value attribute. */
   @property({ type: String, reflect: true }) value = "";
-  /**Sets the minimum length of the input */
+  /**Sets the minimum length of the textarea */
   @property({ type: Number, reflect: true }) minlength: number;
-  /**Sets the maximum length of the input */
+  /**Sets the maximum length of the textarea */
   @property({ type: Number, reflect: true }) maxlength: number;
   /**Enables spell checking on the textarea */
   @property({ type: Boolean, reflect: true }) spellcheck = false;
@@ -49,20 +49,20 @@ export class SgdsTextArea extends SgdsElement implements SgdsFormControl{
   @property({ type: String, reflect: true }) placeholder = "Placeholder";
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback = "";
-  /**Autofocus the input */
+  /**Autofocus the textarea */
   @property({ type: Boolean, reflect: true }) autofocus = false;
-  /**Disables the input. */
+  /**Disables the textarea. */
   @property({ type: Boolean, reflect: true }) disabled = false;
-  /**Makes the input a required field. */
+  /**Makes the textarea a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
-  /** Makes the input readonly. */
+  /** Makes the textarea readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** Controls how the textarea can be resized. */
   @property() resize: "none" | "vertical" | "auto" = "vertical";
-  /** The textarea's inputmode attribute. */
+  /** The native textarea's inputmode attribute. It hints at the type of data that might be entered by the user while editing the element or its contents. This allows a browser to display an appropriate virtual keyboard. */
   @property() inputmode: "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
-  /* The textarea's autocorrect attribute. */
+  /** The native textarea's autocorrect attribute. */
   @property() autocorrect: string;
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
@@ -104,7 +104,7 @@ export class SgdsTextArea extends SgdsElement implements SgdsFormControl{
     this.textarea.select();
   }
   handleInvalid(e: Event) {
-    e.preventDefault()
+    e.preventDefault();
     this.invalid = true;
   }
 
@@ -217,4 +217,4 @@ export class SgdsTextArea extends SgdsElement implements SgdsFormControl{
   }
 }
 
-export default SgdsTextArea;
+export default SgdsTextarea;

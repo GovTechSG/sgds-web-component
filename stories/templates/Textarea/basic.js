@@ -5,7 +5,7 @@ export const Template = args =>
     <sgds-textarea
       label=${args.label}
       name=${args.name}
-      id=${args.textareaId}
+      textareaId=${args.textareaId}
       textareaClasses=${args.textareaClasses}
       .value=${args.value}
       rows=${args.rows}
@@ -21,8 +21,9 @@ export const Template = args =>
       ?autocorrect=${args.autocorrect}
       resize=${args.resize}
       ?hasFeedback=${args.hasFeedback}
+      defaultValue=${args.defaultValue}
     >
     </sgds-textarea>
   `;
 
-export const args = { name: "textarea" };
+export const args = { name: "textarea", label: "Label", maxlength: 100 };
