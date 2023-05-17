@@ -2,9 +2,11 @@ import { html } from "lit-html";
 
 export const Template = args =>
   html`
-    <sgds-accordion-item summary="Solo Accordion" accordionItemClasses="mb-4">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio?
-    </sgds-accordion-item>
+    <sgds-accordion>
+      <sgds-accordion-item summary="Solo Accordion" accordionItemClasses="mb-4">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio?
+      </sgds-accordion-item>
+    </sgds-accordion>
     <sgds-accordion .allowMultiple=${args.allowMultiple} .accordionClasses=${args.accordionClasses}>
       <sgds-accordion-item
         .open=${args.open}

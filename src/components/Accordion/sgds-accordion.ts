@@ -5,7 +5,7 @@ import SgdsElement from "../../base/sgds-element";
 import type SgdsAccordionItem from "./sgds-accordion-item";
 
 /**
- * @summary A dropdown mechanism that allow users to either show or hide related content.
+ * @summary A dropdown mechanism that allow users to either show or hide related content. `SgdsAccordion` is a wrapper to manage the behaviour for multiple `SgdsAccordionItems`
  * @slot default - slot for accordion-item
  */
 @customElement("sgds-accordion")
