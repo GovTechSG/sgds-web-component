@@ -26,6 +26,8 @@ export type ButtonVariant =
   | "outline-dark";
 
 /**
+ * @summary - Custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
+ *
  * @slot - The button's label.
  *
  * @event sgds-blur - Emitted when the button is not focused.
@@ -35,8 +37,10 @@ export type ButtonVariant =
 export class SgdsButton extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
+  /** @internal */
   @query(".btn") button: HTMLButtonElement | HTMLLinkElement;
 
+  /** @internal */
   private readonly formSubmitController = new FormSubmitController(this, {
     form: (input: HTMLInputElement) => {
       // Buttons support a form attribute that points to an arbitrary form, so if this attribute it set we need to query
@@ -52,22 +56,25 @@ export class SgdsButton extends SgdsElement {
     }
   });
 
+  /** @internal */
   @state() private hasFocus = false;
 
-  /** The button's variant. */
+  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as "outline" versions (prefixed by `outline-*`) */
   @property({ reflect: true }) variant: ButtonVariant = "primary";
 
+  /** Optional for button. Can be used to insert any utility classes such as me-auto **/
   @property({ reflect: true }) buttonClasses?: string;
 
-  /** Button sizes */
+  /** Specifies a large or small button */
   @property({ reflect: true }) size: "sm" | "lg";
 
-  /** Button active state */
+  /** Manually set the visual state of the button to `:active` */
   @property({ type: Boolean, reflect: true }) active = false;
 
-  /** Button disabled state */
+  /** The disabled state of the button */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
+  /** The behavior of the button with default as `type='button', `reset` resets all the controls to their initial values and `submit` submits the form data to the server */
   @property() type: "button" | "submit" | "reset" = "button";
 
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
@@ -99,7 +106,7 @@ export class SgdsButton extends SgdsElement {
   @property({ attribute: "formtarget" }) formTarget: "_self" | "_blank" | "_parent" | "_top" | string;
 
   /** Sets focus on the button. */
-  focus(options?: FocusOptions) {
+  public focus(options?: FocusOptions) {
     this.button.focus(options);
   }
 
@@ -109,7 +116,7 @@ export class SgdsButton extends SgdsElement {
   }
 
   /** Removes focus from the button. */
-  blur() {
+   public blur() {
     this.button.blur();
   }
 
@@ -134,6 +141,8 @@ export class SgdsButton extends SgdsElement {
     this.addEventListener("click", this.clickHandler);
   }
 
+
+  /** @internal */
   clickHandler = () => {
     if (this.type === "submit") {
       this.formSubmitController.submit(this);
