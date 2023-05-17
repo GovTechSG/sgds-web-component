@@ -57,7 +57,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   /**Sets the maximum length of the input */
   @property({ type: Number, reflect: true }) maxlength: number;
   /**The input's placeholder text. */
-  @property({ type: String, reflect: true }) placeholder = "";
+  @property({ type: String, reflect: true }) placeholder = "placeholder";
   /**A pattern to validate input against. */
   @property({ type: String }) pattern: string;
   /**Autofocus the input */
@@ -182,7 +182,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     `;
     // if iconName is defined
     const inputWithIcon = html`
-      <div class="sgds form-control-group ${this.inputClasses}">
+      <div class="form-control-group ${this.inputClasses}">
         <span class="form-control-icon"> ${unsafeSVG(this.icon)} </span>
         ${input}
       </div>
