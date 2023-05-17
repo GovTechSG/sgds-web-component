@@ -1,7 +1,7 @@
 import { html } from "lit-html";
 
 export const Template = args => {
-   return html`
+  return html`
     <sgds-footer
       title=${args.title}
       description=${args.description}
@@ -11,10 +11,11 @@ export const Template = args => {
       privacyHref=${args.privacyHref}
       termsOfUseHref=${args.termsOfUseHref}
       .links=${args.links}
+      copyrightLiner=${args.copyrightLiner}
     >
     </sgds-footer>
-  `
-}
+  `;
+};
 
 export const args = {
   title: "Singapore Government Design System",
@@ -25,6 +26,7 @@ export const args = {
   feedbackHref: "https://form.gov.sg/",
   privacyHref: "https://www.designsystem.tech.gov.sg/privacy/",
   termsOfUseHref: "https://www.designsystem.tech.gov.sg/terms-of-use/",
+  copyrightLiner: "Government of Singapore",
   links: [
     {
       title: "Column 1",
