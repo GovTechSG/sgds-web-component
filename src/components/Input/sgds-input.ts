@@ -181,7 +181,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     `;
     // if iconName is defined
     const inputWithIcon = html`
-      <div class="form-control-group ${this.inputClasses}">
+      <div class="sgds form-control-group ${this.inputClasses}">
         <span class="form-control-icon"> ${unsafeSVG(this.icon)} </span>
         ${input}
       </div>
