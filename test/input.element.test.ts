@@ -57,8 +57,8 @@ describe("sgds-input", () => {
   </svg>'
       inputId="defaultID"
     ></sgds-input>`);
-    expect(el.shadowRoot?.querySelector("div.form-control-group")).to.exist
-    expect(el.shadowRoot?.querySelector("div.form-control-group>span.form-control-icon>svg")).to.exist
+    expect(el.shadowRoot?.querySelector("div.form-control-group")).to.exist;
+    expect(el.shadowRoot?.querySelector("div.form-control-group>span.form-control-icon>svg")).to.exist;
   });
   //Name
   it("updates the name attribute value to 'Hello'", async () => {
