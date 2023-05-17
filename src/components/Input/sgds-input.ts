@@ -41,9 +41,9 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     | "time"
     | "url" = "text";
   /** The input's label  */
-  @property({ reflect: true }) label: string;
+  @property({ reflect: true }) label = "";
   /** The input's hint text below the label */
-  @property({ reflect: true }) hintText: string;
+  @property({ reflect: true }) hintText = "";
   /**The input's id. This value gets forwarded into the HTMLInputElement of the component. Defaults to a unique value */
   @property({ type: String, reflect: true }) inputId: string = genId("input", this.type);
   /**The input's name attribute */
@@ -57,7 +57,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   /**Sets the maximum length of the input */
   @property({ type: Number, reflect: true }) maxlength: number;
   /**The input's placeholder text. */
-  @property({ type: String, reflect: true }) placeholder: string;
+  @property({ type: String, reflect: true }) placeholder = "";
   /**A pattern to validate input against. */
   @property({ type: String }) pattern: string;
   /**Autofocus the input */
@@ -149,13 +149,13 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   render() {
     const input = html`
       <input
-        class="form-control 
+        class=
         ${classMap({
+          "form-control" : true,
           "is-invalid": this.hasFeedback && this.invalid,
           "is-valid": this.hasFeedback && this.valid,
           [`${this.inputClasses}`]: this.inputClasses
         })}
-        "
         type=${this.type}
         id=${this.inputId}
         name=${ifDefined(this.name)}
