@@ -19,6 +19,12 @@ import styles from "./sgds-accordion-item.scss";
  * @csspart base - The accordion-item base wrapper
  * @csspart header - The accordion-item button header
  * @csspart content - The accordion-item content
+ *
+ * @cssprop --accordion-item-padding-y - The top and bottom padding for the container of accordion item's content
+ * @cssprop --accordion-item-padding-x - The right and left padding for the container of accordion item's content
+ * @cssprop --accordion-item-border-radius - The border radius of the accordion item
+ * @cssprop --accordion-item-font-weight - The font weight of accordion-button when it is not collapsed
+ * @cssprop --accordion-item-line-height- The line height of accordion
  */
 @customElement("sgds-accordion-item")
 export class SgdsAccordionItem extends SgdsElement {
@@ -141,8 +147,6 @@ export class SgdsAccordionItem extends SgdsElement {
         part="base"
         class=${classMap({
           "sgds accordion-item": true,
-          "accordion--open": this.open,
-          "accordion--disabled": this.disabled,
           [`${this.accordionItemClasses}`]: this.accordionItemClasses
         })}
       >

@@ -1,35 +1,34 @@
 :host {
-  --accordion-padding-y: 1rem;
-  --accordion-padding-x: 1.25rem;
-  --accordion-border-radius: 0.25rem;
-  --accordion-padding-bottom: 1.5rem;
-  --font-weight-bold: 700;
-  --line-height: 2rem;
+  --accordion-item-padding-y: 1rem;
+  --accordion-item-padding-x: 1.25rem;
+  --accordion-item-border-radius: 0.25rem;
+  --accordion-item-font-weight: 700;
+  --accordion-item-line-height: 2rem;
 }
 
 .accordion-body {
   padding: 0;
-  line-height: var(--line-height);
+  line-height: var(--accordion-item-line-height);
   overflow: hidden;
 }
 
 .accordion-content {
   display: block;
-  padding: var(--accordion-padding-y) var(--accordion-padding-x);
+  padding: var(--accordion-item-padding-y) var(--accordion-item-padding-x);
 }
 
 .accordion-button {
-  line-height: var(--line-height);
+  line-height: var(--accordion-item-line-height);
 }
 
 .accordion-button:not(.collapsed) {
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--accordion-item-font-weight);
   box-shadow: none;
 }
 
 :host([first-of-type]) {
   .accordion-item {
-    border-radius: var(--accordion-border-radius) var(--accordion-border-radius) 0 0;
+    border-radius: var(--accordion-item-border-radius) var(--accordion-item-border-radius) 0 0;
   }
 }
 
@@ -42,7 +41,7 @@
 
 :host([last-of-type]) {
   .accordion-item {
-    border-radius: 0 0 var(--accordion-border-radius) var(--accordion-border-radius);
+    border-radius: 0 0 var(--accordion-item-border-radius) var(--accordion-item-border-radius);
     border-top: 0;
   }
 }
