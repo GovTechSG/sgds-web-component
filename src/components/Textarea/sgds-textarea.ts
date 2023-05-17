@@ -6,7 +6,7 @@ import { live } from "lit/directives/live.js";
 import styles from "./sgds-textarea.scss";
 import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
-import { FormSubmitController } from "../../utils/form";
+import { FormSubmitController, SgdsFormControl } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 
@@ -19,7 +19,7 @@ import { watch } from "../../utils/watch";
  * @event sgds-blur - Emitted when textarea loses focus.
  */
 @customElement("sgds-textarea")
-export class SgdsTextArea extends SgdsElement {
+export class SgdsTextArea extends SgdsElement implements SgdsFormControl{
   static styles = [SgdsElement.styles, styles];
   /**@internal */
   @query("textarea.form-control") textarea: HTMLTextAreaElement;
@@ -103,7 +103,8 @@ export class SgdsTextArea extends SgdsElement {
   public select() {
     this.textarea.select();
   }
-  handleInvalid() {
+  handleInvalid(e: Event) {
+    e.preventDefault()
     this.invalid = true;
   }
 
@@ -200,7 +201,7 @@ export class SgdsTextArea extends SgdsElement {
         @keyup=${this.handleValueChange}
         @input=${() => this.handleChange("sgds-input")}
         @change=${() => this.handleChange("sgds-change")}
-        @invalid=${this.handleInvalid}
+        @invalid=${(e: Event) => this.handleInvalid(e)}
         @focus=${this.handleFocus}
         @blur=${this.handleBlur}
       >
