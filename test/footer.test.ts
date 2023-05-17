@@ -27,8 +27,8 @@ describe("button-element", () => {
                 <div class="col">
                   <div class="d-flex justify-content-lg-end">
                     <ul>
-                      <li><a href="#">Contact</a></li>
-                      <li><a href="#">Feedback</a></li>
+                      <li><a href="">Contact</a></li>
+                      <li><a href="">Feedback</a></li>
                       <li>
                         <a
                           href="https://www.reach.gov.sg/"
@@ -50,14 +50,14 @@ describe("button-element", () => {
                   <ul>
                     <li>
                       <a
-                        href="#"
+                        href="https://tech.gov.sg/report_vulnerability"
                         target="_blank"
                         rel="noopener noreferrer"
                         >Report Vulnerability</a
                       >
                     </li>
-                    <li><a href="#">Privacy Statement</a></li>
-                    <li><a href="#">Terms of use</a></li>
+                    <li><a href="">Privacy Statement</a></li>
+                    <li><a href="">Terms of use</a></li>
                   </ul>
                 </div>
               </div>
@@ -98,10 +98,6 @@ describe("button-element", () => {
   it("feedbackHref prop forward to feedback's href attr", async () => {
     const el = await fixture(html`<sgds-footer feedbackHref="test"></sgds-footer>`);
     expect(el.shadowRoot?.querySelector("a[href='test']")?.textContent).to.contain("Feedback");
-  });
-  it("vulnerabilityHref prop forward to Report Vulnerability's href attr", async () => {
-    const el = await fixture(html`<sgds-footer vulnerabilityHref="test"></sgds-footer>`);
-    expect(el.shadowRoot?.querySelector("a[href='test']")?.textContent).to.contain("Report Vulnerability");
   });
   it("privacyHref prop forward to Privacy Statement's href attr", async () => {
     const el = await fixture(html`<sgds-footer privacyHref="test"></sgds-footer>`);
