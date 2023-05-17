@@ -17,8 +17,8 @@ describe("button-element", () => {
             <div class="container-fluid">
               <div class="row footer-header">
                 <div class="col col-lg-6 col-md-12">
-                  <div class="title"></div>
-                  <div class="description"></div>
+                  <div class="title">Footer title</div>
+                  <div class="description">Footer description</div>
                 </div>
               </div>
               <div class="row footer-items">
@@ -27,8 +27,8 @@ describe("button-element", () => {
                 <div class="col">
                   <div class="d-flex justify-content-lg-end">
                     <ul>
-                      <li><a href="">Contact</a></li>
-                      <li><a href="">Feedback</a></li>
+                      <li><a href="#">Contact</a></li>
+                      <li><a href="#">Feedback</a></li>
                       <li>
                         <a
                           href="https://www.reach.gov.sg/"
@@ -56,8 +56,8 @@ describe("button-element", () => {
                         >Report Vulnerability</a
                       >
                     </li>
-                    <li><a href="">Privacy Statement</a></li>
-                    <li><a href="">Terms of use</a></li>
+                    <li><a href="#">Privacy Statement</a></li>
+                    <li><a href="#">Terms of use</a></li>
                   </ul>
                 </div>
               </div>
@@ -85,6 +85,12 @@ describe("button-element", () => {
     const el = await fixture(html`<sgds-footer title="test title"></sgds-footer>`);
     expect(el.shadowRoot?.querySelector(".title")?.textContent).to.equal("test title");
   });
+
+  it("copyrightLiner prop forward to approriate div el", async () => {
+    const el = await fixture(html`<sgds-footer copyrightLiner="copyright liner"></sgds-footer>`);
+    expect(el.shadowRoot?.querySelector(".footer-copyrights>div.col>div")?.textContent).to.contain("copyright liner");
+  });
+
   it("lastUpdatedDate prop forward to approriate div el", async () => {
     const el = await fixture(html`<sgds-footer lastUpdatedDate="08 Feb 2022"></sgds-footer>`);
     expect(el.shadowRoot?.querySelector(".footer-copyrights>div.col>div")?.textContent).to.contain("08 Feb 2022");
