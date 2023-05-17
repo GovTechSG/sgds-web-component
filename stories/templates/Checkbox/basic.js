@@ -10,7 +10,7 @@ export const Template = args => {
       .checked=${args.checked}
       .invalid=${args.invalid}
       .valid=${args.valid}
-      ?invalidFeedback=${args.invalidFeedback}
+      invalidFeedback=${args.invalidFeedback}
       ?hasFeedback=${args.hasFeedback}
       ariaLabel=${args.ariaLabel}
       >Check me</sgds-checkbox
