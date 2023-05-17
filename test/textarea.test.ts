@@ -4,6 +4,7 @@ import { SgdsButton } from "../src/components/Button/sgds-button";
 import "../src/components/Button";
 import { assert, fixture, html, expect, waitUntil, oneEvent } from "@open-wc/testing";
 import sinon from "sinon";
+import { sendKeys } from "@web/test-runner-commands";
 
 describe("sgds-textarea", () => {
   it("is defined", () => {
@@ -110,6 +111,30 @@ describe("when using constraint validation", () => {
     await el.updateComplete;
     expect(el.invalid).to.be.true;
   });
+  it("should be valid=false when input is not required, has other validation,  and has no value", async () => {
+    const el = await fixture<SgdsTextArea>(html` <sgds-textarea minlength="3" value="t"></sgds-textarea> `);
+    expect(el.valid).to.be.false;
+    expect(el.invalid).to.be.false;
+    el.focus();
+    await sendKeys({ type: "es" });
+    await el.updateComplete;
+    expect(el.value).to.equal("tes");
+    expect(el.valid).to.be.true;
+    expect(el.invalid).to.be.false;
+
+    await sendKeys({ press: "Backspace" });
+    await el.updateComplete;
+    expect(el.value).to.equal("te");
+    expect(el.valid).to.be.false;
+    expect(el.invalid).to.be.true;
+    // when empty value and input is optional, valid/invalid state should go back to default state
+    await sendKeys({ press: "Backspace" });
+    await sendKeys({ press: "Backspace" });
+    await el.updateComplete;
+    expect(el.value).to.equal("");
+    expect(el.valid).to.be.false;
+    expect(el.invalid).to.be.false;
+  });
 });
 
 describe("when resetting a form", () => {
@@ -155,5 +180,37 @@ describe("when maxlength is declared", () => {
 
     expect(formtext).to.exist;
     expect(formtext?.textContent).to.contain("0/300");
+  });
+});
+
+describe("Feedback UI optional", () => {
+  it("when hasFeedback is true, div.invalid-feedback appears in shadowDOM", async () => {
+    const el = await fixture<SgdsTextArea>(
+      html` <sgds-textarea hasFeedback invalidFeedback="invalid feedback"></sgds-textarea> `
+    );
+    expect(el.shadowRoot?.querySelector("div.invalid-feedback")).not.to.be.null;
+    expect(el.shadowRoot?.querySelector("div.invalid-feedback")?.textContent).to.equal("invalid feedback");
+  });
+  it("when hasFeedback is true and invalid state is true, invalid stylings", async () => {
+    const el = await fixture<SgdsTextArea>(
+      html` <sgds-textarea hasFeedback invalidFeedback="invalid feedback"></sgds-textarea> `
+    );
+    expect(el.invalid).to.be.false;
+    expect(el.valid).to.be.false;
+    expect(el.shadowRoot?.querySelector("textarea")).does.not.have.class("is-invalid");
+    expect(el.shadowRoot?.querySelector("textarea")).does.not.have.class("is-valid");
+    //force an invalid state
+    el.invalid = true;
+    expect(el.invalid).to.be.true;
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector("textarea")).to.have.class("is-invalid");
+    expect(el.shadowRoot?.querySelector("textarea")).does.not.have.class("is-valid");
+
+    // //force an valid state
+    el.invalid = false;
+    el.valid = true;
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector("textarea")).to.have.class("is-valid");
+    expect(el.shadowRoot?.querySelector("textarea")).does.not.have.class("is-invalid");
   });
 });

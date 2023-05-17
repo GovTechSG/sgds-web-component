@@ -48,7 +48,7 @@ export class SgdsTextArea extends SgdsElement implements SgdsFormControl{
   /**The textarea's placeholder text. */
   @property({ type: String, reflect: true }) placeholder = "Placeholder";
   /**Feedback text for error state when validated */
-  @property({ type: String, reflect: true }) invalidFeedback = "default feedback";
+  @property({ type: String, reflect: true }) invalidFeedback = "";
   /**Autofocus the input */
   @property({ type: Boolean, reflect: true }) autofocus = false;
   /**Disables the input. */
@@ -161,6 +161,9 @@ export class SgdsTextArea extends SgdsElement implements SgdsFormControl{
     this.invalid = !this.textarea.checkValidity();
     this.valid = this.textarea.checkValidity();
     this.updateComplete.then(() => this.setTextareaHeight());
+    if (!this.required && this.value === "") {
+      this.valid = false;
+    }
   }
 
   render() {
@@ -174,7 +177,7 @@ export class SgdsTextArea extends SgdsElement implements SgdsFormControl{
       </div>
 
       <textarea
-        class="${classMap({
+        class=${classMap({
           "form-control": true,
           "is-invalid": this.hasFeedback && this.invalid,
           "is-valid": this.hasFeedback && this.valid,
@@ -182,7 +185,7 @@ export class SgdsTextArea extends SgdsElement implements SgdsFormControl{
           "textarea-resize-vertical": this.resize === "vertical",
           "textarea-resize-auto": this.resize === "auto",
           [`${this.textareaClasses}`]: this.textareaClasses
-        })}"
+        })}
         id=${ifDefined(this.textareaId)}
         name=${ifDefined(this.name)}
         rows=${ifDefined(this.rows)}
