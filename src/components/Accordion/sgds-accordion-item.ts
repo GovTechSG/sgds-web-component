@@ -38,10 +38,8 @@ export class SgdsAccordionItem extends SgdsElement {
 
   /** Controls whether accordion-item is open or close */
   @property({ type: Boolean, reflect: true }) open = false;
-  /** Title of the accordion */
-  @property() summary: string;
-  /** Disables the accordion-item. When true, accordion-item cannot open */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  /** The summary to show in the header of the accordion */
+  @property() summary = "";
   /** Optional for accordion item. Can be used to insert any utility classes such as `me-auto` */
   @property({ reflect: true }) accordionItemClasses?: string;
 
@@ -51,15 +49,13 @@ export class SgdsAccordionItem extends SgdsElement {
   }
 
   private handleSummaryClick() {
-    if (!this.disabled) {
-      if (this.open) {
-        this.hide();
-      } else {
-        this.show();
-      }
-
-      this.header.focus();
+    if (this.open) {
+      this.hide();
+    } else {
+      this.show();
     }
+
+    this.header.focus();
   }
 
   private handleSummaryKeyDown(event: KeyboardEvent) {
@@ -123,8 +119,8 @@ export class SgdsAccordionItem extends SgdsElement {
 
   /** Shows the accordion. */
   public async show() {
-    if (this.open || this.disabled) {
-      return undefined;
+    if (this.open) {
+      return;
     }
 
     this.open = true;
@@ -133,10 +129,9 @@ export class SgdsAccordionItem extends SgdsElement {
 
   /** Hide the accordion */
   public async hide() {
-    if (!this.open || this.disabled) {
-      return undefined;
+    if (!this.open) {
+      return;
     }
-
     this.open = false;
     return waitForEvent(this, "sgds-after-hide");
   }
@@ -160,8 +155,7 @@ export class SgdsAccordionItem extends SgdsElement {
           role="button"
           aria-expanded=${this.open ? "true" : "false"}
           aria-controls="content"
-          aria-disabled=${this.disabled ? "true" : "false"}
-          tabindex=${this.disabled ? "-1" : "0"}
+          tabindex="0"
           @click=${this.handleSummaryClick}
           @keydown=${this.handleSummaryKeyDown}
         >
