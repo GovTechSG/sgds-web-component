@@ -84,6 +84,10 @@ export class SgdsFooter extends SgdsElement {
   termsOfUseHref: string;
 
   render() {
+
+    // if description is defined
+    const hasDescription = html` <div class="description">${this.description}</div>`;
+
     return html`
       <footer class="sgds footer">
         <section class="footer-top" part="footer-top">
@@ -91,7 +95,7 @@ export class SgdsFooter extends SgdsElement {
             <div class="row footer-header">
               <div class="col col-lg-6 col-md-12">
                 <div class="title">${this.title ? this.title : "Footer title"}</div>
-                <div class="description">${this.description ? this.description : "Footer description"}</div>
+                ${this.description ? hasDescription : undefined}
               </div>
             </div>
             <div class="row footer-items">
