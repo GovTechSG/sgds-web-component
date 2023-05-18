@@ -252,6 +252,7 @@ class Alert extends LitElement {
 1. Events should be named with an action word , prefix with `sgds-`
 
 :x: Bad: `hide`, `show`
+
 :white_check_mark: Good: `sgds-hide, sgds-show, sgds-after-show, sgds-toggle`
 
 2. Before creating a new event name, check if there are existing names for the same purposed.
@@ -322,21 +323,21 @@ export class SgdsAccordion extends SgdsElement {}
 export class SgdsAccordionItem extends SgdsElement {
 ```
 
-2. Annotate Lit's property decorator, @property, with jsdocs comments. Custom-element Analyzer is able to parse Lit's @property decorator as params.
+3. Annotate Lit's property decorator, @property, with jsdocs comments. Custom-element Analyzer is able to parse Lit's @property decorator as params.
 
 ```typescript
   /** Controls whether accordion-item is open or close */
  @property({ type: Boolean, reflect: true }) open = false;
 ```
 
-3.  Annotate all @query with @internal tag
+4.  Annotate all @query with @internal tag
 
 ```typescript
   /** @internal */
   @query(".accordion-body") body: HTMLElement;
 ```
 
-4. Annotate public methods with jsdocs comments. Any methods that is meant expose for users should be marked with the "public" access modifier
+5. Annotate public methods with jsdocs comments. Any methods that is meant expose for users should be marked with the "public" access modifier
 
 ```typescript
 /** Shows the accordion. */
