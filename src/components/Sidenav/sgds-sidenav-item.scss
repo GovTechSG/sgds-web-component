@@ -1,19 +1,23 @@
-
-:host   {
-  --sidenav-theme-color: #5925DC;
+:host{
+  --sidenav-item-button-border-left-width: 0.125rem;
+  --sidenav-item-padding-x: 1rem;
+  --sidenav-item-padding-y: 0.5rem;
+  --sidenav-item-icon-title-gap: 1rem;
 }
+
 
 .sidenav-btn {
   width: 100%;
   text-align: initial;
   line-height: 1.5rem;
-  font-size: 1rem;
+  font-size: var(--sgds-body-font-size);
   border: 0;
   background: 0;
   padding: 0.5rem 1rem;
-  border-left: 0.125rem solid transparent;
+  border-left: var(--sidenav-item-button-border-left-width) solid transparent;
   border-radius: 0;
   display: flex;
+  gap: var(--sidenav-item-icon-title-gap);
   align-items: center;
 
   &.active,
@@ -61,10 +65,4 @@ a.sidenav-btn {
 .collapse.show,
 .collapsing {
   margin-top: 1rem;
-}
-
-::slotted(*[slot="title"]) {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
 }
