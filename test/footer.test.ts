@@ -1,5 +1,5 @@
 import { SgdsFooter, ColumnLinks } from "../src/components/Footer";
-import { fixture, assert, expect } from "@open-wc/testing";
+import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 
 describe("button-element", () => {
@@ -18,7 +18,6 @@ describe("button-element", () => {
               <div class="row footer-header">
                 <div class="col col-lg-6 col-md-12">
                   <div class="title">Footer title</div>
-                  <div class="description">Footer description</div>
                 </div>
               </div>
               <div class="row footer-items">
@@ -84,6 +83,15 @@ describe("button-element", () => {
   it("title prop forward to approriate .title class", async () => {
     const el = await fixture(html`<sgds-footer title="test title"></sgds-footer>`);
     expect(el.shadowRoot?.querySelector(".title")?.textContent).to.equal("test title");
+  });
+
+  it("description should render when description attribute exist", async () => {
+    const el = await fixture(html`<sgds-footer></sgds-footer>`);
+    expect(el.shadowRoot?.querySelector(".description")?.textContent).to.be.undefined;
+
+    el.setAttribute("description", "test description")
+    await elementUpdated(el);
+    expect(el.shadowRoot?.querySelector(".description")?.textContent).to.equal("test description");
   });
 
   it("copyrightLiner prop forward to approriate div el", async () => {
