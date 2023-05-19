@@ -44,12 +44,12 @@ export class SgdsTable extends SgdsElement {
   /**
    * Add <code>.table-sm</code> to make table more compact
    */
-  @property({ type: String, reflect: true }) size?: string;
+  @property({ type: String, reflect: true }) size: string;
 
   /**
    * Use contextual classes to add colors to table
    */
-  @property({ type: String, reflect: true }) variant?: string;
+  @property({ type: String, reflect: true }) variant: string;
 
   /**
    * Sorting on a column is enabled by adding the sort property. The sorting algorithm is based on javascript array.sort() method. In ascending order from bottom, alphabets come first, followed by numbers, and then symbols. Similarly, in descending order from bottom, symbols come first, followed by numbers, and then alphabets.
@@ -62,19 +62,19 @@ export class SgdsTable extends SgdsElement {
   @property({ type: Boolean, reflect: true }) removableSort = false;
 
   /**
-   * Use responsive="sm", responsive="md" , responsive="lg", or responsive="xl" as needed to create responsive tables up to a particular breakpoint. From that breakpoint and up, the table will behave normally and not scroll horizontally.
+   * Use responsive="sm", responsive="md" , responsive="lg", or responsive="xl" as needed to create responsive tables up to a particular breakpoint. From that breakpoint and up, the table will behave normally and not scroll horizontally. Use reponsive="always" to let table be always responsive
    */
-  @property({ type: String, reflect: true }) responsive?: "sm" | "md" | "lg" | "xl";
+  @property({ type: String, reflect: true }) responsive: "sm" | "md" | "lg" | "xl" | "always";
 
   /**
    * Populate header cells using Arrays
    */
-  @property({ type: Array<string> }) tableHeaders = [];
+  @property({ type: Array }) tableHeaders = [];
 
   /**
    * Populate data cells using Arrays
    */
-  @property({ type: Array<string> }) tableData = [];
+  @property({ type: Array }) tableData = [];
 
   /** @internal */
   @state() sortColumn: number | null = null;
@@ -194,7 +194,7 @@ export class SgdsTable extends SgdsElement {
     return html`
       <div
         class=${classMap({
-          "table-responsive": !!this.responsive,
+          "table-responsive": this.responsive === "always",
           "table-responsive-sm": this.responsive === "sm",
           "table-responsive-md": this.responsive === "md",
           "table-responsive-lg": this.responsive === "lg",
