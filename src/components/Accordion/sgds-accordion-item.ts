@@ -24,7 +24,7 @@ import styles from "./sgds-accordion-item.scss";
  * @cssprop --accordion-item-padding-x - The right and left padding for the container of accordion item's content
  * @cssprop --accordion-item-border-radius - The border radius of the accordion item
  * @cssprop --accordion-item-font-weight - The font weight of accordion-button when it is not collapsed
- * @cssprop --accordion-item-line-height- The line height of accordion
+ * @cssprop --accordion-item-line-height - The line height of accordion
  */
 @customElement("sgds-accordion-item")
 export class SgdsAccordionItem extends SgdsElement {
@@ -41,7 +41,7 @@ export class SgdsAccordionItem extends SgdsElement {
   /** The summary to show in the header of the accordion */
   @property() summary = "";
   /** Optional for accordion item. Can be used to insert any utility classes such as `me-auto` */
-  @property({ reflect: true }) accordionItemClasses?: string;
+  @property({ reflect: true }) accordionItemClasses: string;
 
   firstUpdated() {
     this.body.hidden = !this.open;

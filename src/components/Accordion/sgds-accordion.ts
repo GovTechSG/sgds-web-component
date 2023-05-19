@@ -16,7 +16,7 @@ export class SgdsAccordion extends SgdsElement {
   @property({ type: Boolean, reflect: true }) allowMultiple = false;
 
   /** Optional for accordion wrapper. Can be used to insert any utility classes such as me-auto */
-  @property({ reflect: true }) accordionClasses?: string;
+  @property({ reflect: true }) accordionClasses: string;
 
   /** @internal */
   @queryAssignedNodes()
