@@ -1,4 +1,4 @@
-import { customElement, property, state, query } from "lit/decorators.js";
+import { customElement, property, query } from "lit/decorators.js";
 import { html, literal } from "lit/static-html.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -26,9 +26,9 @@ export type ButtonVariant =
   | "outline-dark";
 
 /**
- * @summary - Custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
+ * @summary Custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
  *
- * @slot - The button's label.
+ * @slot default - The button's label.
  *
  * @event sgds-blur - Emitted when the button is not focused.
  * @event sgds-focus - Emitted when the button is focused.
@@ -60,7 +60,7 @@ export class SgdsButton extends SgdsElement {
   @property({ reflect: true }) variant: ButtonVariant = "primary";
 
   /** Optional for button. Can be used to insert any utility classes such as me-auto **/
-  @property({ reflect: true }) buttonClasses?: string;
+  @property({ reflect: true }) buttonClasses: string;
 
   /** Specifies a large or small button */
   @property({ reflect: true }) size: "sm" | "lg";
@@ -108,12 +108,12 @@ export class SgdsButton extends SgdsElement {
   }
 
   /** Simulates a click on the button. */
-  click() {
+  public click() {
     this.button.click();
   }
 
   /** Removes focus from the button. */
-   public blur() {
+  public blur() {
     this.button.blur();
   }
 
@@ -135,7 +135,6 @@ export class SgdsButton extends SgdsElement {
     this.removeEventListener("click", this.clickHandler);
     this.addEventListener("click", this.clickHandler);
   }
-
 
   /** @internal */
   clickHandler = () => {
