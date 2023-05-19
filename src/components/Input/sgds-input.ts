@@ -3,7 +3,6 @@ import { html } from "lit/static-html.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
 import { live } from "lit/directives/live.js";
-import styles from "./sgds-input.scss";
 import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { FormSubmitController } from "../../utils/form";
@@ -23,7 +22,7 @@ import { unsafeSVG } from "lit/directives/unsafe-svg.js";
  */
 @customElement("sgds-input")
 export class SgdsInput extends SgdsElement implements SgdsFormControl {
-  static styles = [SgdsElement.styles, styles];
+  static styles = SgdsElement.styles;
   /**@internal */
   @query("input.form-control") input: HTMLInputElement;
   /**@internal */
