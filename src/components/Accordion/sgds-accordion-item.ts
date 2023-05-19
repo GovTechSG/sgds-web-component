@@ -19,6 +19,12 @@ import styles from "./sgds-accordion-item.scss";
  * @csspart base - The accordion-item base wrapper
  * @csspart header - The accordion-item button header
  * @csspart content - The accordion-item content
+ *
+ * @cssprop --accordion-item-padding-y - The top and bottom padding for the container of accordion item's content
+ * @cssprop --accordion-item-padding-x - The right and left padding for the container of accordion item's content
+ * @cssprop --accordion-item-border-radius - The border radius of the accordion item
+ * @cssprop --accordion-item-font-weight - The font weight of accordion-button when it is not collapsed
+ * @cssprop --accordion-item-line-height - The line height of accordion
  */
 @customElement("sgds-accordion-item")
 export class SgdsAccordionItem extends SgdsElement {
@@ -32,12 +38,10 @@ export class SgdsAccordionItem extends SgdsElement {
 
   /** Controls whether accordion-item is open or close */
   @property({ type: Boolean, reflect: true }) open = false;
-  /** Title of the accordion */
-  @property() summary: string;
-  /** Disables the accordion-item. When true, accordion-item cannot open */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  /** The summary to show in the header of the accordion */
+  @property() summary = "";
   /** Optional for accordion item. Can be used to insert any utility classes such as `me-auto` */
-  @property({ reflect: true }) accordionItemClasses?: string;
+  @property({ reflect: true }) accordionItemClasses: string;
 
   firstUpdated() {
     this.body.hidden = !this.open;
@@ -45,15 +49,13 @@ export class SgdsAccordionItem extends SgdsElement {
   }
 
   private handleSummaryClick() {
-    if (!this.disabled) {
-      if (this.open) {
-        this.hide();
-      } else {
-        this.show();
-      }
-
-      this.header.focus();
+    if (this.open) {
+      this.hide();
+    } else {
+      this.show();
     }
+
+    this.header.focus();
   }
 
   private handleSummaryKeyDown(event: KeyboardEvent) {
@@ -117,8 +119,8 @@ export class SgdsAccordionItem extends SgdsElement {
 
   /** Shows the accordion. */
   public async show() {
-    if (this.open || this.disabled) {
-      return undefined;
+    if (this.open) {
+      return;
     }
 
     this.open = true;
@@ -127,10 +129,9 @@ export class SgdsAccordionItem extends SgdsElement {
 
   /** Hide the accordion */
   public async hide() {
-    if (!this.open || this.disabled) {
-      return undefined;
+    if (!this.open) {
+      return;
     }
-
     this.open = false;
     return waitForEvent(this, "sgds-after-hide");
   }
@@ -140,11 +141,7 @@ export class SgdsAccordionItem extends SgdsElement {
       <div
         part="base"
         class=${classMap({
-          sgds: true,
-          "accordion-item": true,
-          //TODO: Remove unnecessary classes
-          "accordion--open": this.open,
-          "accordion--disabled": this.disabled,
+          "sgds accordion-item": true,
           [`${this.accordionItemClasses}`]: this.accordionItemClasses
         })}
       >
@@ -158,8 +155,7 @@ export class SgdsAccordionItem extends SgdsElement {
           role="button"
           aria-expanded=${this.open ? "true" : "false"}
           aria-controls="content"
-          aria-disabled=${this.disabled ? "true" : "false"}
-          tabindex=${this.disabled ? "-1" : "0"}
+          tabindex="0"
           @click=${this.handleSummaryClick}
           @keydown=${this.handleSummaryKeyDown}
         >
