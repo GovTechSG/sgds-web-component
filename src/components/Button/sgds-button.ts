@@ -56,9 +56,6 @@ export class SgdsButton extends SgdsElement {
     }
   });
 
-  /** @internal */
-  @state() private hasFocus = false;
-
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as "outline" versions (prefixed by `outline-*`) */
   @property({ reflect: true }) variant: ButtonVariant = "primary";
 
@@ -78,13 +75,13 @@ export class SgdsButton extends SgdsElement {
   @property() type: "button" | "submit" | "reset" = "button";
 
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
-  @property() href?: string;
+  @property() href: string;
 
   /** Tells the browser where to open the link. Only used when `href` is set. */
-  @property() target?: "_blank" | "_parent" | "_self" | "_top";
+  @property() target: "_blank" | "_parent" | "_self" | "_top";
 
   /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
-  @property({ reflect: true }) download?: string;
+  @property({ reflect: true }) download: string;
 
   /**
    * The "form owner" to associate the button with. If omitted, the closest containing form will be used instead. The
@@ -121,12 +118,10 @@ export class SgdsButton extends SgdsElement {
   }
 
   handleBlur() {
-    this.hasFocus = false;
     this.emit("sgds-blur");
   }
 
   handleFocus() {
-    this.hasFocus = true;
     this.emit("sgds-focus");
   }
 
