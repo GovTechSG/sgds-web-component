@@ -158,5 +158,4 @@ describe("Table", () => {
   });
 });
 
-
 //TODO: Test cases needs to be revised :3

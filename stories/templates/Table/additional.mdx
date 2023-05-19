@@ -1,32 +1,15 @@
-
 ## Sorting
 
 Sorting on a column is enabled by adding the `sort` property. The sorting algorithm is based on javascript array.sort() method. In ascending order from bottom, alphabets come first, followed by numbers, and then symbols. Similarly, in descending order from bottom, symbols come first, followed by numbers, and then alphabets.
 
-export const sortTemplate = (
-  { 
-    sort
-  }
-) =>
-  html` 
-  <sgds-table 
-    sort=${sort}
-    tableHeaders='["Serial No.", "Title", "Name", "Username"]'
-    tableData='[
-        ["S901021", "David", "Doe", "@johndoe"],
-        ["S892002", "2be", "Zoe", "@janedoe"],
-        ["S879192", "#55", "Smith", "@bobsmith"],
-        ["S829132", "@hey", "Alex", "@davidsmith"]
-      ]'
-> 
-  </sgds-table>
-  `;
-
 <Canvas>
-  <Story name="Sorting">
-    {sortTemplate({
-      sort: true
-    })}
+  <Story
+    name="Sorting"
+    args={{
+      sort: "true"
+    }}
+  >
+    {Template.bind({})}
   </Story>
 </Canvas>
 
@@ -34,30 +17,9 @@ export const sortTemplate = (
 
 When `removableSort` is present, the third click removes the sorting from the column.
 
-export const removableSortTemplate = (
-  { 
-    removableSort
-  }
-) =>
-  html` 
-  <sgds-table 
-    removableSort=${removableSort}
-    tableHeaders='["Serial No.", "Title", "Name", "Username"]'
-    tableData='[
-        ["S901021", "David", "Doe", "@johndoe"],
-        ["S892002", "2be", "Zoe", "@janedoe"],
-        ["S879192", "#55", "Smith", "@bobsmith"],
-        ["S829132", "@hey", "Alex", "@davidsmith"]
-      ]'
-> 
-  </sgds-table>
-  `;
-
 <Canvas>
-  <Story name="removableSort">
-    {removableSortTemplate({
-      removableSort: true
-    })}
+  <Story name="removableSort" args={{ removableSort: true }}>
+    {Template.bind({})}
   </Story>
 </Canvas>
 
@@ -65,30 +27,9 @@ export const removableSortTemplate = (
 
 Adds zebra-striping using striped to table row within the `<tbody>`.
 
-export const stripedTemplate = (
-  { 
-    striped,
-  }
-) =>
-  html` 
-  <sgds-table 
-    striped=${striped}
-    tableHeaders='["Serial No.", "Title", "Name", "Username"]'
-    tableData='[
-        ["S901021", "David", "Doe", "@johndoe"],
-        ["S892002", "2be", "Zoe", "@janedoe"],
-        ["S879192", "#55", "Smith", "@bobsmith"],
-        ["S829132", "@hey", "Alex", "@davidsmith"]
-      ]'
-> 
-  </sgds-table>
-  `;
-
 <Canvas>
-  <Story name="striped">
-    {stripedTemplate({
-      striped: true
-    })}
+  <Story name="striped" args={{ striped: true }}>
+    {Template.bind({})}
   </Story>
 </Canvas>
 
@@ -96,30 +37,9 @@ export const stripedTemplate = (
 
 Use `bordered` to add borders on all sides of the table and cells.
 
-export const borderedTemplate = (
-  { 
-    bordered,
-  }
-) =>
-  html` 
-  <sgds-table 
-    bordered=${bordered}
-    tableHeaders='["Serial No.", "Title", "Name", "Username"]'
-    tableData='[
-        ["S901021", "David", "Doe", "@johndoe"],
-        ["S892002", "2be", "Zoe", "@janedoe"],
-        ["S879192", "#55", "Smith", "@bobsmith"],
-        ["S829132", "@hey", "Alex", "@davidsmith"]
-      ]'
-> 
-  </sgds-table>
-  `;
-
 <Canvas>
-  <Story name="bordered">
-    {borderedTemplate({
-      bordered: true
-    })}
+  <Story name="bordered" args={{ bordered: true }}>
+    {Template.bind({})}
   </Story>
 </Canvas>
 
@@ -127,30 +47,9 @@ export const borderedTemplate = (
 
 Add `borderless` to remove all borders on the table and cells, including table header.
 
-export const borderlessTemplate = (
-  { 
-    borderless,
-  }
-) =>
-  html` 
-  <sgds-table 
-    borderless=${borderless}
-    tableHeaders='["Serial No.", "Title", "Name", "Username"]'
-    tableData='[
-        ["S901021", "David", "Doe", "@johndoe"],
-        ["S892002", "2be", "Zoe", "@janedoe"],
-        ["S879192", "#55", "Smith", "@bobsmith"],
-        ["S829132", "@hey", "Alex", "@davidsmith"]
-      ]'
-> 
-  </sgds-table>
-  `;
-
 <Canvas>
-  <Story name="borderless">
-    {borderlessTemplate({
-      borderless: true
-    })}
+  <Story name="borderless" args={{ borderless: true }}>
+    {Template.bind({})}
   </Story>
 </Canvas>
 
@@ -158,30 +57,9 @@ export const borderlessTemplate = (
 
 Use hover to enable a hover state on table rows within a `<tbody>`.
 
-export const hoverTemplate = (
-  { 
-    hover,
-  }
-) =>
-  html` 
-  <sgds-table 
-    hover=${hover}
-    tableHeaders='["Serial No.", "Title", "Name", "Username"]'
-    tableData='[
-        ["S901021", "David", "Doe", "@johndoe"],
-        ["S892002", "2be", "Zoe", "@janedoe"],
-        ["S879192", "#55", "Smith", "@bobsmith"],
-        ["S829132", "@hey", "Alex", "@davidsmith"]
-      ]'
-> 
-  </sgds-table>
-  `;
-
 <Canvas>
-  <Story name="hover">
-    {hoverTemplate({
-      hover: true
-    })}
+  <Story name="hover" args={{ hover: true }}>
+    {Template.bind({})}
   </Story>
 </Canvas>
 
@@ -189,33 +67,11 @@ export const hoverTemplate = (
 
 Use `variant="dark"` to invert the colors of the table and get light text on a dark background.
 
-export const variantTemplate = (
-  { 
-    variant,
-  }
-) =>
-  html` 
-  <sgds-table 
-    variant=${variant}
-    tableHeaders='["Serial No.", "Title", "Name", "Username"]'
-    tableData='[
-        ["S901021", "David", "Doe", "@johndoe"],
-        ["S892002", "2be", "Zoe", "@janedoe"],
-        ["S879192", "#55", "Smith", "@bobsmith"],
-        ["S829132", "@hey", "Alex", "@davidsmith"]
-      ]'
-> 
-  </sgds-table>
-  `;
-
 <Canvas>
-  <Story name="variant">
-    {variantTemplate({
-      variant: "dark"
-    })}
+  <Story name="variant" args={{ variant: "dark" }}>
+    {Template.bind({})}
   </Story>
 </Canvas>
-
 
 ## Responsive
 
@@ -223,32 +79,11 @@ Responsive tables allow tables to be scrolled horizontally with ease.
 
 ## Always Responsive
 
-Across every breakpoint, use `responsive` for horizontally scrolling tables. Responsive tables are wrapped automatically in a `div`. The following example has 12 columns that are scrollable horizontally.
-
-export const alwaysResponsiveTemplate = (
-  { 
-    alwaysResponsive,
-  }
-) =>
-  html` 
-  <sgds-table 
-    alwaysResponsive=${alwaysResponsive}
-    tableHeaders='["Serial No.", "Title", "Name", "Username"]'
-    tableData='[
-        ["S901021", "David", "Doe", "@johndoe"],
-        ["S892002", "2be", "Zoe", "@janedoe"],
-        ["S879192", "#55", "Smith", "@bobsmith"],
-        ["S829132", "@hey", "Alex", "@davidsmith"]
-      ]'
-> 
-  </sgds-table>
-  `;
+Across every breakpoint, use `responsive="always"` for horizontally scrolling tables. Responsive tables are wrapped automatically in a `div`. The following example has 12 columns that are scrollable horizontally.
 
 <Canvas>
-  <Story name="alwaysResponsive">
-    {alwaysResponsiveTemplate({
-      alwaysResponsive: true
-    })}
+  <Story name="alwaysResponsive" args={{ responsive: "always" }}>
+    {Template.bind({})}
   </Story>
 </Canvas>
 
@@ -256,29 +91,8 @@ export const alwaysResponsiveTemplate = (
 
 Use `responsive="sm"`, `responsive="md"` , `responsive="lg"`, or `responsive="xl"` as needed to create responsive tables up to a particular breakpoint. From that breakpoint and up, the table will behave normally and not scroll horizontally.
 
-export const responsiveTemplate = (
-  { 
-    responsive,
-  }
-) =>
-  html` 
-  <sgds-table 
-    responsive=${responsive}
-    tableHeaders='["Serial No.", "Title", "Name", "Username"]'
-    tableData='[
-        ["S901021", "David", "Doe", "@johndoe"],
-        ["S892002", "2be", "Zoe", "@janedoe"],
-        ["S879192", "#55", "Smith", "@bobsmith"],
-        ["S829132", "@hey", "Alex", "@davidsmith"]
-      ]'
-> 
-  </sgds-table>
-  `;
-
 <Canvas>
-  <Story name="responsive">
-    {responsiveTemplate({
-      responsive: "sm"
-    })}
+  <Story name="responsive" args={{ responsive: "sm" }}>
+    {Template.bind({})}
   </Story>
 </Canvas>

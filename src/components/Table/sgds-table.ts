@@ -6,7 +6,7 @@ import styles from "./sgds-table.scss";
 
 /**
  * @summary The use of a table is to organise a collections of data into readable rows
- * 
+ *
  * @cssproperty --sgds-table-bg - Table's background color
  * @cssproperty --sgds-table-accent-bg - Table's accent background color
  * @cssproperty --sgds-table-striped-color - Text color for striped table
