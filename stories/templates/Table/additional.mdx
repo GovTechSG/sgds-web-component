@@ -1,0 +1,98 @@
+## Sorting
+
+Sorting on a column is enabled by adding the `sort` property. The sorting algorithm is based on javascript array.sort() method. In ascending order from bottom, alphabets come first, followed by numbers, and then symbols. Similarly, in descending order from bottom, symbols come first, followed by numbers, and then alphabets.
+
+<Canvas>
+  <Story
+    name="Sorting"
+    args={{
+      sort: "true"
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Removable Sort
+
+When `removableSort` is present, the third click removes the sorting from the column.
+
+<Canvas>
+  <Story name="removableSort" args={{ removableSort: true }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Striped Body
+
+Adds zebra-striping using striped to table row within the `<tbody>`.
+
+<Canvas>
+  <Story name="striped" args={{ striped: true }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Bordered Body
+
+Use `bordered` to add borders on all sides of the table and cells.
+
+<Canvas>
+  <Story name="bordered" args={{ bordered: true }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Borderless Body
+
+Add `borderless` to remove all borders on the table and cells, including table header.
+
+<Canvas>
+  <Story name="borderless" args={{ borderless: true }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Hovered Body
+
+Use hover to enable a hover state on table rows within a `<tbody>`.
+
+<Canvas>
+  <Story name="hover" args={{ hover: true }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Dark Table
+
+Use `variant="dark"` to invert the colors of the table and get light text on a dark background.
+
+<Canvas>
+  <Story name="variant" args={{ variant: "dark" }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Responsive
+
+Responsive tables allow tables to be scrolled horizontally with ease.
+
+## Always Responsive
+
+Across every breakpoint, use `responsive="always"` for horizontally scrolling tables. Responsive tables are wrapped automatically in a `div`. The following example has 12 columns that are scrollable horizontally.
+
+<Canvas>
+  <Story name="alwaysResponsive" args={{ responsive: "always" }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Breakpoint Specific
+
+Use `responsive="sm"`, `responsive="md"` , `responsive="lg"`, or `responsive="xl"` as needed to create responsive tables up to a particular breakpoint. From that breakpoint and up, the table will behave normally and not scroll horizontally.
+
+<Canvas>
+  <Story name="responsive" args={{ responsive: "sm" }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>

@@ -145,9 +145,8 @@ describe("Table", () => {
     const el = await fixture<SgdsTable>(html`<sgds-table variant="dark"></sgds-table>`);
     expect(el.shadowRoot?.querySelector("table")).to.have.class("table-dark");
   });
-
   it("Should have responsive wrapper with tabindex", async () => {
-    const el = await fixture<SgdsTable>(html`<sgds-table responsive="true"></sgds-table>`);
+    const el = await fixture<SgdsTable>(html`<sgds-table responsive="always"></sgds-table>`);
 
     expect(el.shadowRoot?.querySelector("div")?.classList.contains("table-responsive")).to.be.true;
     expect(el.shadowRoot?.querySelector("div")).to.have.attribute("tabindex", "0");
@@ -158,3 +157,5 @@ describe("Table", () => {
     expect(el.shadowRoot?.querySelector("div")?.classList.contains("table-responsive-md")).to.be.true;
   });
 });
+
+//TODO: Test cases needs to be revised :3

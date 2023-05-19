@@ -4,29 +4,96 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-table.scss";
 
+/**
+ * @summary The use of a table is to organise a collections of data into readable rows
+ *
+ * @cssproperty --sgds-table-bg - Table's background color
+ * @cssproperty --sgds-table-accent-bg - Table's accent background color
+ * @cssproperty --sgds-table-striped-color - Text color for striped table
+ * @cssproperty --sgds-table-striped-bg - Background color for striped table
+ * @cssproperty --sgds-table-active-color - Active text color for hovered row
+ * @cssproperty --sgds-table-active-bg - Active background color for hovered row
+ * @cssproperty --sgds-table-hover-color - Hovered text color for hover table
+ * @cssproperty --sgds-table-hover-bg - Hovered background color for hover table
+ */
+
 @customElement("sgds-table")
 export class SgdsTable extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
+  /**
+   * Adds zebra-striping using striped to table row within the <tbody>
+   */
   @property({ type: Boolean, reflect: true }) striped = false;
+
+  /**
+   * Add borders to all sides of table and cells
+   */
   @property({ type: Boolean, reflect: true }) bordered = false;
+
+  /**
+   * Remove all borders to table and cells
+   */
   @property({ type: Boolean, reflect: true }) borderless = false;
+
+  /**
+   * Add hoverable state on table rows
+   */
   @property({ type: Boolean, reflect: true }) hover = false;
-  @property({ type: String, reflect: true }) size?: string;
-  @property({ type: String, reflect: true }) variant?: string;
+
+  /**
+   * Add <code>.table-sm</code> to make table more compact
+   */
+  @property({ type: String, reflect: true }) size: string;
+
+  /**
+   * Use contextual classes to add colors to table
+   */
+  @property({ type: String, reflect: true }) variant: string;
+
+  /**
+   * Sorting on a column is enabled by adding the sort property. The sorting algorithm is based on javascript array.sort() method. In ascending order from bottom, alphabets come first, followed by numbers, and then symbols. Similarly, in descending order from bottom, symbols come first, followed by numbers, and then alphabets.
+   */
   @property({ type: Boolean, reflect: true }) sort = false;
+
+  /**
+   * When removableSort is present, the third click removes the sorting from the column.
+   */
   @property({ type: Boolean, reflect: true }) removableSort = false;
 
-  @property({ type: String, reflect: true }) responsive?: "sm" | "md" | "lg" | "xl";
+  /**
+   * Use responsive="sm", responsive="md" , responsive="lg", or responsive="xl" as needed to create responsive tables up to a particular breakpoint. From that breakpoint and up, the table will behave normally and not scroll horizontally. Use reponsive="always" to let table be always responsive
+   */
+  @property({ type: String, reflect: true }) responsive: "sm" | "md" | "lg" | "xl" | "always";
 
-  @property({ type: Array<string> }) tableHeaders = [];
-  @property({ type: Array<string> }) tableData = [];
+  /**
+   * Populate header cells using Arrays
+   */
+  @property({ type: Array }) tableHeaders = [];
 
+  /**
+   * Populate data cells using Arrays
+   */
+  @property({ type: Array }) tableData = [];
+
+  /** @internal */
   @state() sortColumn: number | null = null;
+
+  /** @internal */
   @state() sortAsc = true;
+
+  //TODO aria-sort
+
+  /** @internal */
   @state() activeColumn: number | null = null;
+
+  /** @internal */
   @state() sortClickCount = 0;
+
+  /** @internal */
   @state() clickCount = 0;
+
+  /** @internal */
   @state() originalTableData: Array<string[]> = [];
 
   connectedCallback() {
@@ -127,7 +194,7 @@ export class SgdsTable extends SgdsElement {
     return html`
       <div
         class=${classMap({
-          "table-responsive": !!this.responsive,
+          "table-responsive": this.responsive === "always",
           "table-responsive-sm": this.responsive === "sm",
           "table-responsive-md": this.responsive === "md",
           "table-responsive-lg": this.responsive === "lg",
@@ -136,14 +203,14 @@ export class SgdsTable extends SgdsElement {
         tabindex="0"
       >
         <table
-          class="table ${classMap({
+          class="table sgds ${classMap({
             [`table-striped`]: this.striped,
             [`table-bordered`]: this.bordered,
             [`table-borderless`]: this.borderless,
             [`table-hover`]: this.hover,
             [`table-${this.size}`]: this.size,
             [`table-${this.variant}`]: this.variant
-          })} sgds"
+          })}"
         >
           <thead>
             <tr>
@@ -155,6 +222,7 @@ export class SgdsTable extends SgdsElement {
                       active: this.activeColumn === index
                     })}"
                     @click=${() => this.handleHeaderClick(index)}
+                    //TODO aria-sort 
                   >
                     ${header} ${this.sort ? this.getIcon(index) : null}
                   </th>
