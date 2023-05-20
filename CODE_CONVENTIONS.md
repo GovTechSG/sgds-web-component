@@ -262,13 +262,25 @@ class Alert extends LitElement {
 ---
 ### Naming CSS custom variables
 
-1. Follow the naming convention from Bootstrap 5.1 `--componentname-subcomponentname-element-properties`.
+1. Follow the naming convention from Bootstrap 5.1 `--componentname-subcomponentname-element-state-properties`.
 
-Example `--sidenav-item-button-border-left-width`;
+Example with kebab case for properties with 2 or more words
+
+```css
+  --sidenav-item-button-border-left-width;
+```
+
+Example with element state
+
+```css
+  --sidenav-item-button-hover-color;
+  --sidenav-item-button-active-bg;
+```
 
 ---
 ---
-### Typescript
+
+## Typescript
 
 All variables, properties and functions should be typed. The Tscompiler can infer the type of properties when a default value is assigned but not when none is defined. If a variable does not need to have a default variable, assign a type to it.
 
@@ -285,8 +297,11 @@ All variables, properties and functions should be typed. The Tscompiler can infe
     @property({ type: Boolean, reflect: true }) isLight: boolean;
     @property({ type: Boolean, reflect: true }) roundedPill = false;
 ```
+
 ---
-### jsdoc
+---
+
+## jsdoc
 
 jsdoc annotations is used to generate the custom-element.json, the metadata of sgds-web-components. The metadata is then used in generating the react package and storybook documentations
 
