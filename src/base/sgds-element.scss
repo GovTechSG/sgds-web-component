@@ -1,2 +1,9 @@
 
 @import "~@govtechsg/sgds/sass/sgds.scss";
+
+:host {
+    font-family: $font-family-sans-serif;
+    font-size: $font-size-base;
+    font-weight: $font-weight-base;
+    line-height: $line-height-base;
+}
