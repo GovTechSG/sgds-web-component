@@ -29,19 +29,19 @@ export class SgdsFooter extends SgdsElement {
    * 	Sets title of SgdsFooter
    */
   @property({ type: String })
-  title: string;
+  title: string = "";
 
   /**
    * 	Sets description of SgdsFooter
    */
   @property({ type: String })
-  description: string;
+  description: string = "";
 
   /**
    * 	Sets copyrightLiner of SgdsFooter
    */
   @property({ type: String })
-  copyrightLiner: string;
+  copyrightLiner: string = "";
 
   /**
    * Array of type
@@ -57,34 +57,33 @@ export class SgdsFooter extends SgdsElement {
    * String date for last updated date
    */
   @property({ type: String })
-  lastUpdatedDate: string;
+  lastUpdatedDate: string = "";
 
   /**
    * 	href link for contacts
    */
   @property({ type: String })
-  contactHref: string;
+  contactHref: string = "#";
 
   /**
    * 	href link for feedback
    */
   @property({ type: String })
-  feedbackHref: string;
+  feedbackHref: string = "#";
 
   /**
    * 	href link for privacy statement
    */
   @property({ type: String })
-  privacyHref: string;
+  privacyHref: string = "#";
 
   /**
    * 	href link for terms of use
    */
   @property({ type: String })
-  termsOfUseHref: string;
+  termsOfUseHref: string = "#";
 
   render() {
-
     // if description is defined
     const hasDescription = html` <div class="description">${this.description}</div>`;
 
@@ -115,8 +114,8 @@ export class SgdsFooter extends SgdsElement {
               <div class="col">
                 <div class="d-flex justify-content-lg-end">
                   <ul>
-                    <li><a href=${this.contactHref ? this.contactHref : "#"}>Contact</a></li>
-                    <li><a href=${this.feedbackHref ? this.feedbackHref : "#"}>Feedback</a></li>
+                    <li><a href=${this.contactHref}>Contact</a></li>
+                    <li><a href=${this.feedbackHref}>Feedback</a></li>
                     <li>
                       <a href="https://www.reach.gov.sg/" target="_blank" rel="noopener noreferrer">Reach.gov.sg</a>
                     </li>
@@ -136,15 +135,15 @@ export class SgdsFooter extends SgdsElement {
                       >Report Vulnerability</a
                     >
                   </li>
-                  <li><a href=${this.privacyHref ? this.privacyHref : "#"}>Privacy Statement</a></li>
-                  <li><a href=${this.termsOfUseHref ? this.termsOfUseHref : "#"}>Terms of use</a></li>
+                  <li><a href=${this.privacyHref}>Privacy Statement</a></li>
+                  <li><a href=${this.termsOfUseHref}>Terms of use</a></li>
                 </ul>
               </div>
             </div>
             <div class="row footer-copyrights">
               <div class="col">
                 <div class="d-flex justify-content-lg-end text-end">
-                  © ${new Date().getFullYear()} ${this.copyrightLiner ? this.copyrightLiner : "Government of Singapore"}<br />
+                  © ${new Date().getFullYear()} ${this.copyrightLiner}<br />
                   Last Updated ${this.lastUpdatedDate}
                 </div>
               </div>

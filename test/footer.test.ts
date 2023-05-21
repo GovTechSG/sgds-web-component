@@ -89,7 +89,7 @@ describe("button-element", () => {
     const el = await fixture(html`<sgds-footer></sgds-footer>`);
     expect(el.shadowRoot?.querySelector(".description")?.textContent).to.be.undefined;
 
-    el.setAttribute("description", "test description")
+    el.setAttribute("description", "test description");
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector(".description")?.textContent).to.equal("test description");
   });
