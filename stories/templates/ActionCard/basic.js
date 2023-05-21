@@ -2,13 +2,16 @@ import { html } from "lit-html";
 export const Template = args =>
   html`
     <sgds-action-card
-      .active=${args.active}
-      .bgColor=${args.bgColor}
-      .borderColor=${args.borderColor}
-      .textColor=${args.textColor}
-      .disabled=${args.disabled}
-      .iconName=${args.iconName}
-      .type=${args.type}
+      ?active=${args.active}
+      bgColor=${args.bgColor}
+      borderColor=${args.borderColor}
+      textColor=${args.textColor}
+      ?disabled=${args.disabled}
+      type=${args.type}
+      ?checked=${args.checked}
+      name=${args.name}
+      .value=${args.value}
+      inputId=${args.inputId}
     >
       <svg
         slot="icon"

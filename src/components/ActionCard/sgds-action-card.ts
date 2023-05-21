@@ -11,9 +11,24 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import { watch } from "../../utils/watch";
 
-export type CardVariant = "card-action" | "card-action-quantity-toggle";
-
 export type TypeVariant = "checkbox" | "radio";
+
+/**
+ * @summary Action Card are cards with built in checkbox or radio components. The ref of input is extended to the Card's body.
+ * @slot icon - Icon content in the card-subtitile
+ * @slot card-subtitle - The subtitle of the card
+ * @slot card-title - The title of the card
+ * @slot card-text - The paragrapher text of the card
+ *
+ * @event sgds-change - Emitted when the checked state of card's checkbox changes or when the selected card's radio has changed
+ *
+ * @csspart base - The action card base wrapper
+ * @csspart body - The action card body 
+ * @csspart subtitle - The action card subtitle
+ * @csspart title - The action card title
+ * @csspart text - The action card text
+ *
+ */
 
 @customElement("sgds-action-card")
 export class SgdsActionCard extends CardElement {
@@ -70,6 +85,7 @@ export class SgdsActionCard extends CardElement {
       @click=${this.handleInputChange}
       @keydown=${this.handleKeyDown}
       .value=${ifDefined(this.value)}
+      ?checked=${live(this.checked)}
       @sgds-change=${(e: CustomEvent) => (this.checked = e.detail.checked)}
     ></sgds-checkbox>`;
 
@@ -88,7 +104,6 @@ export class SgdsActionCard extends CardElement {
       tabindex=${this.disabled ? "-1" : "0"}
       @click=${this.handleInputChange}
      @keydown=${this.handleKeyDown}
-     
         variant="card-action"
         class="sgds card
         ${classMap({
@@ -98,9 +113,10 @@ export class SgdsActionCard extends CardElement {
           ["is-active"]: this.active
         })}
         "
+        part="base"
       >
-        <div class="card-body">
-          <h6 class="text-muted card-subtitle">
+        <div class="card-body" part="body">
+          <h6 class="text-muted card-subtitle" part="subtitle">
             <div>
               <slot name="icon"></slot>
               <slot name="card-subtitle"></slot></slot>
@@ -109,8 +125,8 @@ export class SgdsActionCard extends CardElement {
             ${this.type === "checkbox" ? checkbox : radio}
             </div>
           </h6>
-          <h5 class="card-title"><slot name="card-title"></slot></h5>
-          <p class="card-text"><slot name="card-text"></slot></p>
+          <h5 class="card-title" part="title"><slot name="card-title"></slot></h5>
+          <p class="card-text" part="text"><slot name="card-text"></slot></p>
         </div>
       </div>
     `;

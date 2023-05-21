@@ -48,10 +48,10 @@ describe("<sgds-action-card>", () => {
       el,
       `
         <div tabindex="0" variant="card-action" class="sgds card
-            
-          ">
-          <div class="card-body">
-            <h6 class="text-muted card-subtitle">
+          " part="base"  
+          >
+          <div class="card-body" part="body">
+            <h6 class="text-muted card-subtitle" part="subtitle">
               <div>
               <slot name="icon"></slot>
                 <slot name="card-subtitle"></slot>
@@ -60,8 +60,8 @@ describe("<sgds-action-card>", () => {
              <sgds-checkbox checkboxid="checkbox" arialabel="checkbox"></sgds-checkbox>
             </div>
             </h6>
-            <h5 class="card-title"><slot name="card-title"></slot></h5>
-            <p class="card-text"><slot name="card-text"></slot></p>
+            <h5 class="card-title" part="title"><slot name="card-title"></slot></h5>
+            <p class="card-text" part="text"><slot name="card-text"></slot></p>
           </div>
         </div>
       `

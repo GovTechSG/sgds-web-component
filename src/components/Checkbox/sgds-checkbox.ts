@@ -15,7 +15,7 @@ import styles from "./sgds-checkbox.scss";
  *
  * @slot default - The label of checkbox.
  *
- * @event sgds-change - Emitted when the radio group's selected value changes.
+ * @event sgds-change - Emitted when the checked state changes.
  */
 @customElement("sgds-checkbox")
 export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
