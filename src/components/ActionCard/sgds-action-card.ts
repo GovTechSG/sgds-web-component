@@ -69,6 +69,10 @@ export class SgdsActionCard extends CardElement {
   async handleRadioCheckedChange() {
     this.active = this.checked;
   }
+  @watch("disabled")
+  async handleDisabledChange() {
+    this.active = !this.disabled;
+  }
 
   handleKeyDown(event: KeyboardEvent) {
     const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;

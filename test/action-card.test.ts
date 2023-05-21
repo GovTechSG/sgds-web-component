@@ -92,13 +92,14 @@ describe("<sgds-action-card>", () => {
     expect(el.shadowRoot?.querySelector("div.sgds.card")).to.have.class("is-active");
   });
 
-  it("when card is disabled, card should be clickable and does not contain class is-active", async () => {
-    const el = await fixture<SgdsActionCard>(html`<sgds-action-card disabled></sgds-action-card>`);
+  it("when card is checked and disabled, class is-active is removed", async () => {
+    const el = await fixture<SgdsActionCard>(html`<sgds-action-card checked></sgds-action-card>`);
+    expect(el.shadowRoot?.querySelector("sgds-checkbox")?.getAttribute("checked")).to.exist;
+    expect(el.shadowRoot?.querySelector("div.sgds.card")).to.have.class("is-active");
 
-    expect(el.shadowRoot?.querySelector("div.sgds.card")).to.not.have.class("is-active");
-    const cardBody = el.shadowRoot?.querySelector("div.card-body") as HTMLInputElement;
-    cardBody.click();
+    el.disabled = true;
     await el.updateComplete;
+    expect(el.shadowRoot?.querySelector("sgds-checkbox")?.getAttribute("disabled")).to.exist;
     expect(el.shadowRoot?.querySelector("div.sgds.card")).to.not.have.class("is-active");
   });
 
