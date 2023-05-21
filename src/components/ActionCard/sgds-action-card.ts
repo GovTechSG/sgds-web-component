@@ -4,6 +4,12 @@ import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { html } from "lit/static-html.js";
 import { CardElement } from "../../base/card-element";
 import styles from "./sgds-action-card.scss";
+import generateId from "../../utils/generateId";
+import { SgdsCheckbox } from "../Checkbox";
+import { SgdsRadio } from "../Radio";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { live } from "lit/directives/live.js";
+import { watch } from "../../utils/watch";
 
 export type CardVariant = "card-action" | "card-action-quantity-toggle";
 
@@ -12,66 +18,75 @@ export type TypeVariant = "checkbox" | "radio";
 @customElement("sgds-action-card")
 export class SgdsActionCard extends CardElement {
   static styles = [CardElement.styles, styles];
+
   /** @internal */
-  inputRef: Ref<HTMLInputElement> = createRef();
+  inputRef: Ref<SgdsCheckbox | SgdsRadio> = createRef();
+  /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
+  @property({ reflect: true }) name: string;
+  /** Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name. */
+  @property() value: string;
+  /** Disables the input (so the user can't check / uncheck it). */
+  @property({ type: Boolean, reflect: true }) disabled = false;
+  /** Draws the input in a checked state. */
+  @property({ type: Boolean, reflect: true }) checked = false;
 
-  @property({ type: String, reflect: true }) type?: TypeVariant = "checkbox";
-
-  /** Use on actionable cards like SelectableCard and Quantity Toggle Card' */
-  @property({ reflect: true }) variant: CardVariant = "card-action";
-
-  /** The card's subtitle iconName. */
-  @property({ reflect: true }) iconName?: string;
+  /** The type of input of the action card */
+  @property({ type: String, reflect: true }) type: TypeVariant = "checkbox";
 
   /** The input's id. */
-  @property({ reflect: true }) inputId?: string;
+  @property({ reflect: true }) inputId: string = generateId("action-card", "input");
 
+  /** Controls the active styling of the action card */
   @property({ reflect: true, type: Boolean })
   active = false;
 
-  // Declare the click event listener
-  onInputChange() {
+  /** Simulates a click on the input control*/
+  public click() {
     this.inputRef.value.click();
-    if (this.inputRef.value.checked && !this.inputRef.value.disabled) this.active = true;
-    else if (!this.inputRef.value.checked) {
-      this.active = false;
-    }
+  }
+  /** @internal Declare the click event listener*/
+  async handleInputChange() {
+    this.inputRef.value.click();
+    this.emit("sgds-change");
+  }
+
+  @watch("checked")
+  async handleRadioCheckedChange() {
+    this.active = this.checked;
   }
 
   handleKeyDown(event: KeyboardEvent) {
     const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
     if (event.key === "Enter" && !hasModifier) {
-      this.onInputChange();
+      this.handleInputChange();
     }
   }
-  // handleChange(event: string){
-  //   this.checked = this.inputRef.value.checked;
-  //   this.emit(event);
-  // }
 
   render() {
     const checkbox = html`<sgds-checkbox
       ${ref(this.inputRef)}
       ?disabled=${this.disabled}
       checkboxId=${this.inputId}
-      @click=${this.onInputChange}
+      @click=${this.handleInputChange}
       @keydown=${this.handleKeyDown}
+      .value=${ifDefined(this.value)}
+      @sgds-change=${(e: CustomEvent) => (this.checked = e.detail.checked)}
     ></sgds-checkbox>`;
 
     const radio = html`<sgds-radio
       ${ref(this.inputRef)}
       ?disabled=${this.disabled}
       radioId=${this.inputId}
-      @click=${this.onInputChange}
+      @click=${this.handleInputChange}
       @keydown=${this.handleKeyDown}
+      .value=${ifDefined(this.value)}
+      ?checked=${live(this.checked)}
     ></sgds-radio>`;
-
-    const icon = html`<sl-icon name="${this.iconName}"></sl-icon>`;
 
     return html`
       <div
       tabindex=${this.disabled ? "-1" : "0"}
-      @click=${this.onInputChange}
+      @click=${this.handleInputChange}
      @keydown=${this.handleKeyDown}
      
         variant="card-action"
@@ -87,17 +102,11 @@ export class SgdsActionCard extends CardElement {
         <div class="card-body">
           <h6 class="text-muted card-subtitle">
             <div>
-              ${this.iconName == undefined ? undefined : icon}
+              <slot name="icon"></slot>
               <slot name="card-subtitle"></slot></slot>
             </div>
             <div class="card-input">
-            ${
-              this.type == "checkbox" && this.variant == "card-action"
-                ? checkbox
-                : this.type == "radio" && this.variant == "card-action"
-                ? radio
-                : undefined
-            }
+            ${this.type === "checkbox" ? checkbox : radio}
             </div>
           </h6>
           <h5 class="card-title"><slot name="card-title"></slot></h5>

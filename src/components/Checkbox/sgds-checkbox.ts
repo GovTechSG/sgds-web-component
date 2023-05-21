@@ -90,7 +90,7 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
   handleChange() {
     this.checked = !this.checked;
     this.value = this.input.value;
-    this.emit("sgds-change");
+    this.emit("sgds-change", { detail: { checked: this.checked, value: this.value } });
   }
 
   handleKeyDown(event: KeyboardEvent) {
