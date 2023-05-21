@@ -23,7 +23,7 @@ export type TypeVariant = "checkbox" | "radio";
  * @event sgds-change - Emitted when the checked state of card's checkbox changes or when the selected card's radio has changed
  *
  * @csspart base - The action card base wrapper
- * @csspart body - The action card body 
+ * @csspart body - The action card body
  * @csspart subtitle - The action card subtitle
  * @csspart title - The action card title
  * @csspart text - The action card text
