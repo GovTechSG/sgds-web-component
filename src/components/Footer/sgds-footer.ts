@@ -41,7 +41,7 @@ export class SgdsFooter extends SgdsElement {
    * 	Sets copyrightLiner of SgdsFooter
    */
   @property({ type: String })
-  copyrightLiner: string = "";
+  copyrightLiner: string = "Government of Singapore";
 
   /**
    * Array of type
