@@ -12,7 +12,7 @@
     - [Naming CSS custom variables](#naming-css-custom-variables)
   - [Typescript](#typescript)
   - [Jsdocs](#jsdoc)
-  - [Lit] (#lit)
+  - [Lit](#lit)
 
 ------
 ------
