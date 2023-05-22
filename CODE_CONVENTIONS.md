@@ -1,30 +1,33 @@
-# sgds-web-components coding style guide
+# `sgds-web-components` coding style guide
 
 ## Table of contents
 
 - [sgds-web-components coding style guide](#typescript-coding-style-guide)
-
   - [Naming](#naming)
     - [Naming Variables](#naming-variables)
     - [Naming Conventions](#naming-conventions)
     - [Naming Booleans](#naming-booleans)
     - [Naming Methods](#naming-methods)
     - [Naming Events](#naming-events)
+    - [Naming CSS custom variables](#naming-css-custom-variables)
   - [Typescript](#typescript)
   - [Jsdocs](#jsdoc)
   - [Lit] (#lit)
 
-### Naming
+------
+------
+## Naming
 
 The name of a variable, function, or class, should answer all the big questions. It should tell you why it exists, what it does, and how it is used. If a name requires a comment, then the name does not reveal its intent.
 
+---
 ### Naming Variables
 
 **Use meaningful variable names.**
 
 Distinguish names in such a way that the reader knows what the differences offer.
 
-Bad:
+:x: Bad:
 
  ``` typescript
  function isBetween(a1: number, a2: number, a3: number): boolean {
@@ -32,7 +35,7 @@ Bad:
  }
 ```
 
-Good: 
+:white_check_mark: Good: 
 
 ``` typescript
  function isBetween(value: number, left: number, right: number): boolean {
@@ -44,7 +47,7 @@ Good:
 
 If you can't pronounce it, you can't discuss it without sounding weird.
 
-Bad:
+:x: Bad:
 
 ``` typescript
 class Subs {
@@ -54,7 +57,7 @@ class Subs {
 }
 ```
 
-Good:
+:white_check_mark: Good:
 
 ``` typescript
 class Subscription {
@@ -69,7 +72,7 @@ class Subscription {
 Explicit is better than implicit.<br />
 *Clarity is king.*
 
-Bad:
+:x: Bad:
 
 ``` typescript
 const u = getUser();
@@ -77,7 +80,7 @@ const s = getSubscription();
 const t = charge(u, s);
 ```
 
-Good:
+:white_check_mark: Good:
 
 ``` typescript
 const user = getUser();
@@ -89,7 +92,7 @@ const transaction = charge(user, subscription);
 
 If your class/type/object name tells you something, don't repeat that in your variable name.
 
-Bad:
+:x: Bad:
 
 ``` typescript
 type Car = {
@@ -103,7 +106,7 @@ function print(car: Car): void {
 }
 ```
 
-Good:
+:white_check_mark: Good:
 
 ``` typescript
 type Car = {
@@ -116,19 +119,19 @@ function print(car: Car): void {
   console.log(`${car.make} ${car.model} (${car.color})`);
 }
 ```
-
+---
 ### Naming Conventions
 
 * Use camelCase for variable and function names
 
-Bad:
+:x: Bad:
 
 ``` typescript
 var FooVar;
 function BarFunc() { }
 ```
 
-Good:
+:white_check_mark: Good:
 
 ``` typescript
 var fooVar;
@@ -137,7 +140,7 @@ function barFunc() { }
 
 * Use camelCase of class members, interface members, methods and methods parameters
 
-Bad:
+:x: Bad:
 
 ``` typescript
 class Foo {
@@ -146,7 +149,7 @@ class Foo {
 }
 ```
 
-Good:
+:white_check_mark: Good:
 
 ``` typescript
 class Foo {
@@ -157,13 +160,13 @@ class Foo {
 
 * Use PascalCase for class names and interface names.
 
-Bad:
+:x: Bad:
 
 ``` typescript
 class foo { }
 ```
 
-Good:
+:white_check_mark: Good:
 
 ``` typescript
 class Foo { }
@@ -171,7 +174,7 @@ class Foo { }
 
 * Use PascalCase for enums and camelCase for enum members
 
-Bad:
+:x: Bad:
 
 ``` typescript
 enum notificationTypes {
@@ -183,7 +186,7 @@ enum notificationTypes {
 }
 ```
 
-Good:
+:white_check_mark: Good:
 
 ``` typescript
 enum NotificationTypes {
@@ -194,34 +197,34 @@ enum NotificationTypes {
   warning = 4
 }
 ```
-
+---
 ### Naming Booleans
 
 * Don't use negative names for boolean variables.
 
-Bad:
+:x: Bad:
 
 ``` typescript
 const isNotEnabled = true;
 ```
 
-Good:
+:white_check_mark: Good:
 
 ``` typescript
 const isEnabled = false;
 ```
-
+---
 ### Naming Methods
 
 * Keep it simple. If the action can be understood with the least amount of words. If the method has many action and needs to be described in multiple words, then you should refactor the method to have a single responsibility 
 
-Bad: 
+:x: Bad: 
 
 ```typescript 
 handleCloseClick() {}
 ```
 
-Good: 
+:white_check_mark: Good: 
 
 ```typescript
 close()
@@ -229,7 +232,7 @@ close()
 
 * If your class/type/object name tells you something, don't repeat that in your variable name.
 
-Bad: 
+:x: Bad: 
 
 ```typescript 
 class Alert extends LitElement {
@@ -237,45 +240,69 @@ class Alert extends LitElement {
 }
 ```
 
-Good: 
+:white_check_mark: Good: 
 
 ```typescript
 class Alert extends LitElement {
   close() {}
 }
 ```
-
+---
 ### Naming Events
 
 1. Events should be named with an action word , prefix with `sgds-`
 
-Bad: `hide`, `show`
-Good: `sgds-hide, sgds-show, sgds-after-show, sgds-toggle`
+:x: Bad: `hide`, `show`
+
+:white_check_mark: Good: `sgds-hide, sgds-show, sgds-after-show, sgds-toggle`
 
 2. Before creating a new event name, check if there are existing names for the same purposed.
 
 3. Use the `emit` method of SgdsElement class to emit a custom event
 
+---
+### Naming CSS custom variables
 
-### Typescript
+1. Follow the naming convention from Bootstrap 5.1 `--componentname-subcomponentname-element-state-properties`.
+
+Example with kebab case for properties with 2 or more words
+
+```css
+  --sidenav-item-button-border-left-width;
+```
+
+Example with element state
+
+```css
+  --sidenav-item-button-hover-color;
+  --sidenav-item-button-active-bg;
+```
+
+---
+---
+
+## Typescript
 
 All variables, properties and functions should be typed. The Tscompiler can infer the type of properties when a default value is assigned but not when none is defined. If a variable does not need to have a default variable, assign a type to it.
 
-Bad:
+:x: Bad:
 
 ```typescript
     @property({ type: Boolean, reflect: true }) isLight;
     @property({ type: Boolean, reflect: true }) roundedPill;
 ```
 
-Good:
+:white_check_mark: Good:
 
 ```typescript
     @property({ type: Boolean, reflect: true }) isLight: boolean;
     @property({ type: Boolean, reflect: true }) roundedPill = false;
 ```
 
-### jsdoc
+---
+---
+
+## jsdoc
 
 jsdoc annotations is used to generate the custom-element.json, the metadata of sgds-web-components. The metadata is then used in generating the react package and storybook documentations
 
@@ -312,39 +339,39 @@ export class SgdsAccordion extends SgdsElement {}
 export class SgdsAccordionItem extends SgdsElement {
 ```
 
-2. Annotate Lit's property decorator, @property, with jsdocs comments. Custom-element Analyzer is able to parse Lit's @property decorator as params.
+3. Annotate Lit's property decorator, @property, with jsdocs comments. Custom-element Analyzer is able to parse Lit's @property decorator as params.
 
 ```typescript
   /** Controls whether accordion-item is open or close */
  @property({ type: Boolean, reflect: true }) open = false;
 ```
 
-3.  Annotate all @query with @internal tag
+4.  Annotate all @query with @internal tag
 
 ```typescript
   /** @internal */
   @query(".accordion-body") body: HTMLElement;
 ```
 
-4. Annotate public methods with jsdocs comments. Any methods that is meant expose for users should be marked with the "public" access modifier
+5. Annotate public methods with jsdocs comments. Any methods that is meant expose for users should be marked with the "public" access modifier
 
 ```typescript
 /** Shows the accordion. */
   public async show() {
   }
 ```
-
+---
 ### Lit 
 
 1. Avoid sgds specific querying of children components to allow reusability and implementation of our Lit components by other users. [Example](https://github.com/GovTechSG/sgds-web-component/commit/2c30a4dcfab31f52074dec6dde3446356da33373)
 
-Bad: 
+:x: Bad: 
 
 ```typescript
 const children = this.querySelectorAll("sgds-sidenav-item");
 ```
 
-Good: 
+:white_check_mark: Good: 
 
 ```typescript
 const children = this.shadowRoot.querySelector('slot').assignedElements({flatten: true});
