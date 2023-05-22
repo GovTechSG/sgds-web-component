@@ -1,4 +1,4 @@
-import { customElement, property, state, query } from "lit/decorators.js";
+import { customElement, property, query } from "lit/decorators.js";
 import { html, literal } from "lit/static-html.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -26,7 +26,9 @@ export type ButtonVariant =
   | "outline-dark";
 
 /**
- * @slot - The button's label.
+ * @summary Custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
+ *
+ * @slot default - The button's label.
  *
  * @event sgds-blur - Emitted when the button is not focused.
  * @event sgds-focus - Emitted when the button is focused.
@@ -35,8 +37,10 @@ export type ButtonVariant =
 export class SgdsButton extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
+  /** @internal */
   @query(".btn") button: HTMLButtonElement | HTMLLinkElement;
 
+  /** @internal */
   private readonly formSubmitController = new FormSubmitController(this, {
     form: (input: HTMLInputElement) => {
       // Buttons support a form attribute that points to an arbitrary form, so if this attribute it set we need to query
@@ -52,32 +56,32 @@ export class SgdsButton extends SgdsElement {
     }
   });
 
-  @state() private hasFocus = false;
-
-  /** The button's variant. */
+  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as "outline" versions (prefixed by `outline-*`) */
   @property({ reflect: true }) variant: ButtonVariant = "primary";
 
-  @property({ reflect: true }) buttonClasses?: string;
+  /** Optional for button. Can be used to insert any utility classes such as me-auto **/
+  @property({ reflect: true }) buttonClasses: string;
 
-  /** Button sizes */
+  /** Specifies a large or small button */
   @property({ reflect: true }) size: "sm" | "lg";
 
-  /** Button active state */
+  /** Manually set the visual state of the button to `:active` */
   @property({ type: Boolean, reflect: true }) active = false;
 
-  /** Button disabled state */
+  /** The disabled state of the button */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
+  /** The behavior of the button with default as `type='button', `reset` resets all the controls to their initial values and `submit` submits the form data to the server */
   @property() type: "button" | "submit" | "reset" = "button";
 
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
-  @property() href?: string;
+  @property() href: string;
 
   /** Tells the browser where to open the link. Only used when `href` is set. */
-  @property() target?: "_blank" | "_parent" | "_self" | "_top";
+  @property() target: "_blank" | "_parent" | "_self" | "_top";
 
   /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
-  @property({ reflect: true }) download?: string;
+  @property({ reflect: true }) download: string;
 
   /**
    * The "form owner" to associate the button with. If omitted, the closest containing form will be used instead. The
@@ -99,27 +103,25 @@ export class SgdsButton extends SgdsElement {
   @property({ attribute: "formtarget" }) formTarget: "_self" | "_blank" | "_parent" | "_top" | string;
 
   /** Sets focus on the button. */
-  focus(options?: FocusOptions) {
+  public focus(options?: FocusOptions) {
     this.button.focus(options);
   }
 
   /** Simulates a click on the button. */
-  click() {
+  public click() {
     this.button.click();
   }
 
   /** Removes focus from the button. */
-  blur() {
+  public blur() {
     this.button.blur();
   }
 
   handleBlur() {
-    this.hasFocus = false;
     this.emit("sgds-blur");
   }
 
   handleFocus() {
-    this.hasFocus = true;
     this.emit("sgds-focus");
   }
 
@@ -134,6 +136,7 @@ export class SgdsButton extends SgdsElement {
     this.addEventListener("click", this.clickHandler);
   }
 
+  /** @internal */
   clickHandler = () => {
     if (this.type === "submit") {
       this.formSubmitController.submit(this);
