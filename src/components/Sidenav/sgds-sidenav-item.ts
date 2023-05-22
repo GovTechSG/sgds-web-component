@@ -13,33 +13,54 @@ import { classMap } from "lit/directives/class-map.js";
  *
  * @slot - default slot for SgdsSidenavLink element.
  * @slot title - title slot for the content of SgdsSidenavItem's button / anchor element.
+ * @slot icon - icon slot for the content of SgdsSidenavItem's button / anchor element.
+ *
+ * @cssproperty --sidenav-item-button-border-left-width - sidenav item left border width
+ * @cssproperty --sidenav-item-padding-x - sidenav item padding left and right
+ * @cssproperty --sidenav-item-padding-y - sidenav item padding top and bottom
+ * @cssproperty --sidenav-item-icon-title-gap - the flex gap between sidenav item icon and title
  */
 
 @customElement("sgds-sidenav-item")
 export class SgdsSidenavItem extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
+  /** @internal */
   private myCollapse: Ref<HTMLElement> = createRef();
+  /** @internal */
   private bsCollapse: Collapse = null;
 
-  /**  when true, toggles the sidenav-item to open on first load and
-   * set the active stylings.
+  /**
+   *  when true, toggles the sidenav-item to open on first load and set the active stylings.
    */
   @property({ type: Boolean })
   active = false;
 
+  /**
+   *  When defined, converts SgdsSidenavItem from a button element to an Anchor element
+   */
   @property({ type: String })
   href = "";
 
+  /**
+   * Forwards to id attribute of div.collapse and aria-controls attribute of button in SgdsSidenavItem. By default, SgdsSidenavItem auto-generates a unique id. Override the default id by specifiying your own
+   */
   @property({ type: String })
-  collapseId = genId("sidenav", "collapse");
+  collapseId: string = genId("sidenav", "collapse");
 
+  /**
+   * Forwards to id attribute of button and aria-labelledby attribute of ul.sidenav-list in SgdsSidenavItem. By default, SgdsSidenavItem auto-generates a unique id. Override the default id by specifiying your own
+   */
   @property({ type: String })
-  buttonId = genId("sidenav", "button");
+  buttonId: string = genId("sidenav", "button");
 
+  /**
+   * Disables the SgdsSidenavItem
+   */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  /** @internal */
   private index = "-1";
 
   private _onClick() {
@@ -58,14 +79,14 @@ export class SgdsSidenavItem extends SgdsElement {
   }
 
   /**
-   * closeItem - closes sidenav and inactivates it
+   * When invoked, closes the SgdsSidenavItem
    */
   public closeItem() {
     this.active = false;
     if (this.bsCollapse) this.bsCollapse.hide();
   }
   /**
-   * openItem
+   * When invoked, opens the SgdsSidenavItem
    */
   public openItem() {
     this.active = true;
@@ -142,6 +163,7 @@ export class SgdsSidenavItem extends SgdsElement {
         ?disabled=${this.disabled}
         aria-disabled=${this.disabled ? "true" : "false"}
       >
+        <slot name="icon"></slot>
         <slot name="title"></slot>
       </a>
     `;

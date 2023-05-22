@@ -59,8 +59,8 @@ describe("sgds-sidenav-item", () => {
          aria-selected="false"
          aria-disabled="false"
        >
-           <slot name="title">
-           </slot>
+          <slot name="icon"></slot>
+          <slot name="title"></slot>
        </a>`
     );
   });

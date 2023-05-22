@@ -1,0 +1,19 @@
+## Validation
+
+`SgdsCheckbox` runs native HTMLInputElement methods to check on the [constraint validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation) of the input and applies our own validation stylings
+
+Set `hasFeedback` to true to enable sgds validation stylings.
+
+Try submitting the required form below without checking the checkbox to trigger the error message
+
+export const ValidationTemplate = () =>
+  html`
+    <form>
+      <sgds-checkbox required hasFeedback invalidFeedback="This is required">Check me</sgds-checkbox>
+      <sgds-button type="submit">Submit</sgds-button>
+    </form>
+  `;
+
+<Canvas>
+  <Story name="Validation">{ValidationTemplate.bind({})}</Story>
+</Canvas>

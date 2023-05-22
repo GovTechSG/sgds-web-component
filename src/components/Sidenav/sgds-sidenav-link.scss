@@ -1,21 +1,20 @@
 
 :host {
-  //Sidenav
---sidenav-fontsize: 1rem;
---sidenav-item-spacing: 1rem;
---sidenav-btn-border-width: 0.125rem;
---nav-link-disabled-color: #344054;
+  --sidenav-link-font-size: var(--sgds-body-font-size);
+  --sidenav-link-padding-x: 1rem;
+  --sidenav-link-padding-y: 0.5rem;
+  --sidenav-link-disabled-color: var(--sgds-gray-600);
 }
+
+
 
 a.nav-link {
   display: block;
   color: inherit;
-  font-size: var(--sidenav-fontsize);
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: calc(
-    var(--sidenav-item-spacing) * 4 + var(--sidenav-btn-border-width)
-  );
+  font-size: var(--sidenav-link-font-size);
+  padding-top: var(--sidenav-link-padding-y);
+  padding-bottom: var(--sidenav-link-padding-y);
+  padding-left: calc(var(--sidenav-link-padding-y) * 4 + var(--sidenav-item-button-border-left-width));
   padding-right: 0;
   text-decoration: none;
 
@@ -23,9 +22,9 @@ a.nav-link {
   &:hover {
     color: var(--sidenav-theme-color);
   }
-  // Disabled state lightens text
+
   &.disabled {
-    color: var(--nav-link-disabled-color);
+    color: var(--sidenav-link-disabled-color);
     pointer-events: none;
     cursor: default;
   }

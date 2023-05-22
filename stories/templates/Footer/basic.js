@@ -1,30 +1,21 @@
 import { html } from "lit-html";
 
-export const Template = ({
-  title,
-  description,
-  links,
-  lastUpdatedDate,
-  contactHref,
-  feedbackHref,
-  vulnerabilityHref,
-  privacyHref,
-  termsOfUseHref
-}) =>
-  html`
+export const Template = args => {
+  return html`
     <sgds-footer
-      .title=${title}
-      .description=${description}
-      .lastUpdatedDate=${lastUpdatedDate}
-      .contactHref=${contactHref}
-      .feedbackHref=${feedbackHref}
-      .vulnerabilityHref=${vulnerabilityHref}
-      .privacyHref=${privacyHref}
-      .termsOfUseHref=${termsOfUseHref}
-      .links=${links}
+      title=${args.title}
+      description=${args.description}
+      lastUpdatedDate=${args.lastUpdatedDate}
+      contactHref=${args.contactHref}
+      feedbackHref=${args.feedbackHref}
+      privacyHref=${args.privacyHref}
+      termsOfUseHref=${args.termsOfUseHref}
+      .links=${args.links}
+      copyrightLiner=${args.copyrightLiner}
     >
     </sgds-footer>
   `;
+};
 
 export const args = {
   title: "Singapore Government Design System",
@@ -33,9 +24,9 @@ export const args = {
   lastUpdatedDate: "01 Sep 2020",
   contactHref: "https://form.gov.sg/",
   feedbackHref: "https://form.gov.sg/",
-  vulnerabilityHref: "https://www.tech.gov.sg/report_vulnerability",
   privacyHref: "https://www.designsystem.tech.gov.sg/privacy/",
   termsOfUseHref: "https://www.designsystem.tech.gov.sg/terms-of-use/",
+  copyrightLiner: "Government of Singapore",
   links: [
     {
       title: "Column 1",

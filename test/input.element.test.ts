@@ -12,13 +12,13 @@ describe("sgds-input", () => {
     assert.instanceOf(el, SgdsInput);
   });
   it("renders with default values", async () => {
-    const el = await fixture(html`<sgds-input inputId="test-id" label="label"></sgds-input>`);
+    const el = await fixture(html`<sgds-input inputId="test-id" label="label" hintText="hello"></sgds-input>`);
     assert.shadowDom.equal(
       el,
       `
         <label class="form-label" for="test-id">label</label>
-        <input type="text" class="form-control " id="test-id" placeholder="Placeholder" aria-invalid="false">
-        <div class="invalid-feedback" id="test-id-invalid">default feedback</div>
+        <small class="form-text text-muted" id="test-idHelp">hello</small>
+        <input type="text" class="form-control " id="test-id" aria-invalid="false" placeholder="placeholder">
     `
     );
   });
@@ -50,30 +50,16 @@ describe("sgds-input", () => {
   });
 
   // Icon
-  it("should render with fom-control-group if iconName attribute is defined", async () => {
-    const el = await fixture(html`<sgds-input iconName="search" inputId="defaultID"></sgds-input>`);
-    assert.shadowDom.equal(
-      el,
-      `
-        <div class="sgds form-control-group">
-          <span class="form-control-icon">
-            <sl-icon name="search"></sl-icon> 
-          </span>
-          <input type="text" class="form-control " id="defaultID" placeholder="Placeholder" aria-invalid="false">
-          <div class="invalid-feedback" id="defaultID-invalid">default feedback</div>
-        </div>
-      `
-    );
+  it("should render with form-control-group if icon attribute is defined", async () => {
+    const el = await fixture(html`<sgds-input
+      icon='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+  </svg>'
+      inputId="defaultID"
+    ></sgds-input>`);
+    expect(el.shadowRoot?.querySelector("div.form-control-group.sgds")).to.exist;
+    expect(el.shadowRoot?.querySelector("div.form-control-group.sgds>span.form-control-icon>svg")).to.exist;
   });
-
-  it("updates the iconName attribute value to 'stack'", async () => {
-    const el = await fixture(html`<sgds-input iconName="search"></sgds-input>`);
-    const iconElement = el.shadowRoot?.querySelector("sl-icon");
-    iconElement?.setAttribute("name", "stack");
-    await elementUpdated(el);
-    expect(iconElement?.getAttribute("name")).to.equal("stack");
-  });
-
   //Name
   it("updates the name attribute value to 'Hello'", async () => {
     const el = await fixture(html`<sgds-input></sgds-input>`);
@@ -92,6 +78,11 @@ describe("sgds-input", () => {
     expect(placeHolder?.getAttribute("placeholder")).to.equal("Hello");
   });
 
+  it("placeholder prop is passed to input", async () => {
+    const el = await fixture(html`<sgds-input placeholder="hello"></sgds-input>`);
+    const placeHolder = el.shadowRoot?.querySelector(".form-control");
+    expect(placeHolder?.getAttribute("placeholder")).to.equal("hello");
+  });
   it("should focus the input when clicking on the label", async () => {
     const el = await fixture<SgdsInput>(html` <sgds-input label="Name"></sgds-input> `);
     const label = el.shadowRoot?.querySelector("label");
@@ -102,6 +93,37 @@ describe("sgds-input", () => {
     await waitUntil(() => submitHandler.calledOnce);
 
     expect(submitHandler).to.have.been.calledOnce;
+  });
+});
+describe("Feedback UI optional", () => {
+  it("when hasFeedback is true, div.invalid-feedback appears in shadowDOM", async () => {
+    const el = await fixture<SgdsInput>(
+      html` <sgds-input hasFeedback invalidFeedback="invalid feedback"></sgds-input> `
+    );
+    expect(el.shadowRoot?.querySelector("div.invalid-feedback")).not.to.be.null;
+    expect(el.shadowRoot?.querySelector("div.invalid-feedback")?.textContent).to.equal("invalid feedback");
+  });
+  it("when hasFeedback is true and invalid state is true, invalid stylings", async () => {
+    const el = await fixture<SgdsInput>(
+      html` <sgds-input hasFeedback invalidFeedback="invalid feedback"></sgds-input> `
+    );
+    expect(el.invalid).to.be.false;
+    expect(el.valid).to.be.false;
+    expect(el.shadowRoot?.querySelector("input")).does.not.have.class("is-invalid");
+    expect(el.shadowRoot?.querySelector("input")).does.not.have.class("is-valid");
+    //force an invalid state
+    el.invalid = true;
+    expect(el.invalid).to.be.true;
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector("input")).to.have.class("is-invalid");
+    expect(el.shadowRoot?.querySelector("input")).does.not.have.class("is-valid");
+
+    //force an valid state
+    el.invalid = false;
+    el.valid = true;
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector("input")).to.have.class("is-valid");
+    expect(el.shadowRoot?.querySelector("input")).does.not.have.class("is-invalid");
   });
 });
 describe("when using constraint validation", () => {
@@ -167,6 +189,31 @@ describe("when using constraint validation", () => {
     el.disabled = false;
     await el.updateComplete;
     expect(el.invalid).to.be.true;
+  });
+
+  it("should be valid=false when input is not required, has other validation,  and has no value", async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input minlength="3" value="t"></sgds-input> `);
+    expect(el.valid).to.be.false;
+    expect(el.invalid).to.be.false;
+    el.focus();
+    await sendKeys({ type: "es" });
+    await el.updateComplete;
+    expect(el.value).to.equal("tes");
+    expect(el.valid).to.be.true;
+    expect(el.invalid).to.be.false;
+
+    await sendKeys({ press: "Backspace" });
+    await el.updateComplete;
+    expect(el.value).to.equal("te");
+    expect(el.valid).to.be.false;
+    expect(el.invalid).to.be.true;
+    // when empty value and input is optional, valid/invalid state should go back to default state
+    await sendKeys({ press: "Backspace" });
+    await sendKeys({ press: "Backspace" });
+    await el.updateComplete;
+    expect(el.value).to.equal("");
+    expect(el.valid).to.be.false;
+    expect(el.invalid).to.be.false;
   });
 });
 
@@ -263,7 +310,10 @@ describe("when resetting a form", () => {
     `);
     const button = form.querySelector<SgdsButton>("sgds-button");
     const input = form.querySelector<SgdsInput>("sgds-input");
+    expect(input?.defaultValue).to.equal("test");
     if (input) input.value = "1234";
+    // defaultValue should still be test as set when first created
+    expect(input?.defaultValue).to.equal("test");
 
     await input?.updateComplete;
 

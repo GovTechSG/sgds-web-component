@@ -4,8 +4,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link href='node_modules/@govtechsg/sgds/css/sgds.util.css' rel='stylesheet' type='text/css' /> -->
-    <link href='node_modules/@govtechsg/sgds/css/sgds.css' rel='stylesheet' type='text/css' />
-    <link href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds@2.1.1/css/sgds.min.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- <link href='node_modules/@govtechsg/sgds/css/sgds.css' rel='stylesheet' type='text/css' /> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds@2.1.1/css/sgds.min.css" rel="stylesheet" crossorigin="anonymous"> -->
     <script type="module" id="dev-console-gateway"
         src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
@@ -80,6 +80,7 @@
         sgds-button {
             flex: 1;
         }
+
     </style>
     <script src="lib/index.js" type="module"></script>
     <script>
@@ -225,8 +226,8 @@
             <h2>Input</h2>
             <div class="row">
                 <div class="col-6 mb-2">
-                    <form>
-                        <sgds-input name="input1" id="input1" pattern="test" required></sgds-input>
+                    <form novalidate>
+                        <sgds-input name="input1" id="input1" minlength="5" required value="hi" hasFeedback invalidFeedback="Minimum length 5"></sgds-input>
                         <sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are
                                 required to check this.</span></sgds-checkbox>
                         <sgds-checkbox name="cb2" id="cb2" value="lolol1" required>with required<span

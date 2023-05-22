@@ -6,48 +6,74 @@ import { live } from "lit/directives/live.js";
 import styles from "./sgds-textarea.scss";
 import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
-import { FormSubmitController } from "../../utils/form";
+import { FormSubmitController, SgdsFormControl } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 
+/**
+ * @summary Text areas allow for the collection of input longer than a single line.
+ *
+ * @event sgds-change - Emitted when an alteration to the control's value is committed by the user.
+ * @event sgds-input - Emitted when the control receives input and its value changes.
+ * @event sgds-focus - Emitted when textarea is in focus.
+ * @event sgds-blur - Emitted when textarea loses focus.
+ */
 @customElement("sgds-textarea")
-export class SgdsTextArea extends SgdsElement {
+export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   static styles = [SgdsElement.styles, styles];
-
+  /**@internal */
   @query("textarea.form-control") textarea: HTMLTextAreaElement;
-  @state() private hasFocus = false;
-
+  /**@internal */
   private readonly formSubmitController = new FormSubmitController(this);
+  /**@internal */
   private resizeObserver: ResizeObserver;
-
+  /**The textarea's label */
   @property({ type: String, reflect: true }) label = "label";
+  /**The textarea's unique id */
   @property({ type: String, reflect: true }) textareaId = genId("textarea", "input");
-  @property({ type: String, reflect: true }) name;
-  @property({ type: String, reflect: true }) textareaClasses?;
+  /**The textarea's name attribute */
+  @property({ type: String, reflect: true }) name: string;
+  /**Forwarded to the HTML native textarea element. Can be used to insert any bootstrap classes such as mt-2 */
+  @property({ type: String, reflect: true }) textareaClasses?: string;
+  /**The textarea's value attribute. */
   @property({ type: String, reflect: true }) value = "";
-  @property({ type: String, reflect: true }) minlength;
-  @property({ type: String, reflect: true }) maxlength;
+  /**Sets the minimum length of the textarea */
+  @property({ type: Number, reflect: true }) minlength: number;
+  /**Sets the maximum length of the textarea */
+  @property({ type: Number, reflect: true }) maxlength: number;
+  /**Enables spell checking on the textarea */
   @property({ type: Boolean, reflect: true }) spellcheck = false;
   /** The number of rows to display by default. */
   @property({ type: Number }) rows = 4;
+  /**The textarea's placeholder text. */
   @property({ type: String, reflect: true }) placeholder = "Placeholder";
-  @property({ type: String, reflect: true }) invalidFeedback = "default feedback";
+  /**Feedback text for error state when validated */
+  @property({ type: String, reflect: true }) invalidFeedback = "";
+  /**Autofocus the textarea */
   @property({ type: Boolean, reflect: true }) autofocus = false;
+  /**Disables the textarea. */
   @property({ type: Boolean, reflect: true }) disabled = false;
+  /**Makes the textarea a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
-  /** Makes the input readonly. */
+  /** Makes the textarea readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
-  @property({ type: Boolean, reflect: true }) invalid = false;
-  @property({ type: Boolean, reflect: true }) valid = false;
+
   /** Controls how the textarea can be resized. */
   @property() resize: "none" | "vertical" | "auto" = "vertical";
-  /** The textarea's inputmode attribute. */
+  /** The native textarea's inputmode attribute. It hints at the type of data that might be entered by the user while editing the element or its contents. This allows a browser to display an appropriate virtual keyboard. */
   @property() inputmode: "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
-  /* The textarea's autocorrect attribute. */
+  /** The native textarea's autocorrect attribute. */
   @property() autocorrect: string;
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = "";
+  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
+  @property({ type: Boolean, reflect: true }) hasFeedback = false;
+
+  /**@internal */
+  @state() invalid = false;
+  /**@internal */
+  @state() valid = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -65,16 +91,20 @@ export class SgdsTextArea extends SgdsElement {
   }
 
   /** Sets focus on the textarea. */
-  focus(options?: FocusOptions) {
+  public focus(options?: FocusOptions) {
     this.textarea.focus(options);
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  reportValidity() {
+  public reportValidity() {
     return this.textarea.reportValidity();
   }
-
-  handleInvalid() {
+  /** Selects all the text in the textarea. */
+  public select() {
+    this.textarea.select();
+  }
+  handleInvalid(e: Event) {
+    e.preventDefault();
     this.invalid = true;
   }
 
@@ -84,18 +114,11 @@ export class SgdsTextArea extends SgdsElement {
   }
 
   handleFocus() {
-    this.hasFocus = true;
     this.emit("sgds-focus");
   }
 
   handleBlur() {
-    this.hasFocus = false;
     this.emit("sgds-blur");
-  }
-
-  /** Selects all the text in the textarea. */
-  select() {
-    this.textarea.select();
   }
 
   handleKeyDown(event: KeyboardEvent) {
@@ -138,6 +161,9 @@ export class SgdsTextArea extends SgdsElement {
     this.invalid = !this.textarea.checkValidity();
     this.valid = this.textarea.checkValidity();
     this.updateComplete.then(() => this.setTextareaHeight());
+    if (!this.required && this.value === "") {
+      this.valid = false;
+    }
   }
 
   render() {
@@ -147,19 +173,19 @@ export class SgdsTextArea extends SgdsElement {
     return html`
       <div class="text-area-label-wrapper d-flex justify-content-between">
         <label for=${ifDefined(this.textareaId)} class="form-label">${this.label}</label>
-        ${parseInt(this.maxlength) > 0 ? wordCount : undefined}
+        ${this.maxlength > 0 ? wordCount : undefined}
       </div>
 
       <textarea
-        class="${classMap({
+        class=${classMap({
           "form-control": true,
-          "is-invalid": this.invalid,
-          "is-valid": this.valid,
+          "is-invalid": this.hasFeedback && this.invalid,
+          "is-valid": this.hasFeedback && this.valid,
           "textarea-resize-none": this.resize === "none",
           "textarea-resize-vertical": this.resize === "vertical",
           "textarea-resize-auto": this.resize === "auto",
           [`${this.textareaClasses}`]: this.textareaClasses
-        })}"
+        })}
         id=${ifDefined(this.textareaId)}
         name=${ifDefined(this.name)}
         rows=${ifDefined(this.rows)}
@@ -178,15 +204,17 @@ export class SgdsTextArea extends SgdsElement {
         @keyup=${this.handleValueChange}
         @input=${() => this.handleChange("sgds-input")}
         @change=${() => this.handleChange("sgds-change")}
-        @invalid=${this.handleInvalid}
+        @invalid=${(e: Event) => this.handleInvalid(e)}
         @focus=${this.handleFocus}
         @blur=${this.handleBlur}
       >
       </textarea>
 
-      <div id="${this.textareaId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
+      ${this.hasFeedback
+        ? html`<div id="${this.textareaId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
+        : ""}
     `;
   }
 }
 
-export default SgdsTextArea;
+export default SgdsTextarea;
