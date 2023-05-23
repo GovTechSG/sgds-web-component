@@ -121,7 +121,8 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     // submitting to allow users to cancel the keydown event if they need to
     if (event.key === "Enter" && !hasModifier) {
       setTimeout(() => {
-        if (!event.defaultPrevented) {
+        // Prevent submission when enter is click on a submission in an Input Method Editor with isComposing
+        if (!event.defaultPrevented && !event.isComposing) {
           this.formSubmitController.submit();
         }
       });

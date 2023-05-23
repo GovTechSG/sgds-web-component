@@ -29,19 +29,19 @@ export class SgdsFooter extends SgdsElement {
    * 	Sets title of SgdsFooter
    */
   @property({ type: String })
-  title: string = "";
+  title = "";
 
   /**
    * 	Sets description of SgdsFooter
    */
   @property({ type: String })
-  description: string = "";
+  description = "";
 
   /**
    * 	Sets copyrightLiner of SgdsFooter
    */
   @property({ type: String })
-  copyrightLiner: string = "Government of Singapore";
+  copyrightLiner = "Government of Singapore";
 
   /**
    * Array of type
@@ -57,31 +57,31 @@ export class SgdsFooter extends SgdsElement {
    * String date for last updated date
    */
   @property({ type: String })
-  lastUpdatedDate: string = "";
+  lastUpdatedDate = "";
 
   /**
    * 	href link for contacts
    */
   @property({ type: String })
-  contactHref: string = "#";
+  contactHref = "#";
 
   /**
    * 	href link for feedback
    */
   @property({ type: String })
-  feedbackHref: string = "#";
+  feedbackHref = "#";
 
   /**
    * 	href link for privacy statement
    */
   @property({ type: String })
-  privacyHref: string = "#";
+  privacyHref = "#";
 
   /**
    * 	href link for terms of use
    */
   @property({ type: String })
-  termsOfUseHref: string = "#";
+  termsOfUseHref = "#";
 
   render() {
     // if description is defined

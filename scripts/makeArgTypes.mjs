@@ -3,6 +3,13 @@ export const makeArgTypes = componentProps =>
     let controlObject = {};
     controlObject.defaultValue = item?.default?.replaceAll('"', '')
     switch (true) {
+      case /\|/.test(item.type?.text):
+        controlObject.control = 'select';
+        controlObject.options = item.type?.text
+          .replaceAll('"', '')
+          .split('|')
+          .map(opt => opt.trim());
+        break;
       case /string/.test(item.type?.text):
         controlObject.control = 'text';
         // controlObject.defaultValue = item?.default?.replaceAll('"', '')
@@ -16,14 +23,6 @@ export const makeArgTypes = componentProps =>
         break;
       case /array/.test(item.type?.text):
         controlObject.control = 'object';
-        break;
-      case /\|/.test(item.type?.text):
-        controlObject.control = 'select';
-        // controlObject.defaultValue = item?.default?.replaceAll('"', '')
-        controlObject.options = item.type?.text
-          .replaceAll('"', '')
-          .split('|')
-          .map(opt => opt.trim());
         break;
       default:
         controlObject.control = 'object';

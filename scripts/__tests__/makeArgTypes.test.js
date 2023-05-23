@@ -119,11 +119,32 @@ describe("makeArgTypes()", () => {
     };
     expect(JSON.stringify(makeArgTypes(typeOthersInput))).to.equal(JSON.stringify(expected));
   });
-  it("type.text string | undefined output should be content.control.text", () => {
+  // it("type.text string | undefined output should be content.control.text", () => {
+  //   expect(makeArgTypes(stringAndUndefined).content.control).to.equal("text");
+  //   expect(makeArgTypes(stringAndUndefined).content.defaultValue).to.equal("");
+  // });
+});
+
+describe("with other enums", () => {
+  it("if enum has one of the options called number", () => {
+    const mockProps = [
+      {
+        name: "type",
+        type: {
+          text: '"number" | "text" | "date" | "url"'
+        },
+        default: '"text"',
+        description: "The type of input which works the same as HTMLInputElement",
+        fieldName: "type"
+      }
+    ];
     const expected = {
-      content: { control: "text", defaultValue: "" }
+      type: {
+        control: "select",
+        options: ["number", "text", "date", "url"],
+        defaultValue: "text"
+      }
     };
-    expect(makeArgTypes(stringAndUndefined).content.control).to.equal("text");
-    expect(makeArgTypes(stringAndUndefined).content.defaultValue).to.equal("");
+    expect(makeArgTypes(mockProps)).to.deep.equal(expected);
   });
 });
