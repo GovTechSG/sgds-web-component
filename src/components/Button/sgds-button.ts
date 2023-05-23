@@ -171,7 +171,7 @@ export class SgdsButton extends SgdsElement {
         @focus=${this.handleFocus}
         @blur=${this.handleBlur}
       >
-          <slot></slot>
+        <slot class="d-flex align-items-center gap-2"></slot>
       </${tag}>
     `;
   }
