@@ -3,7 +3,7 @@ import { customElement } from "lit/decorators.js";
 import styles from "./sgds-sidenav-link.scss";
 
 /**
- * @slot - default slot for label of anchor tag.
+ * @slot default - slot for label of anchor tag.
  *
  * @cssproperty --sidenav-link-font-size - sidenav link font size, default to `--sgds-body-font-size`
  * @cssproperty --sidenav-link-padding-x - sidenav link padding left and right

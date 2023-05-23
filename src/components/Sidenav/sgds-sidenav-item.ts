@@ -37,7 +37,7 @@ export class SgdsSidenavItem extends SgdsElement {
   active = false;
 
   /**
-   *  When defined, converts SgdsSidenavItem from a button element to an Anchor element
+   *  When defined, converts SgdsSidenavItem from a button element to an Anchor element. In this case, only one level of navigation is allowed
    */
   @property({ type: String })
   href = "";
