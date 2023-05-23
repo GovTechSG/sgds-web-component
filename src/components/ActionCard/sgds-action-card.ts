@@ -123,7 +123,7 @@ export class SgdsActionCard extends CardElement {
           <h6 class="text-muted card-subtitle" part="subtitle">
             <div>
               <slot name="icon"></slot>
-              <slot name="card-subtitle"></slot></slot>
+              <slot name="card-subtitle"></slot>
             </div>
             <div class="card-input">
             ${this.type === "checkbox" ? checkbox : radio}
