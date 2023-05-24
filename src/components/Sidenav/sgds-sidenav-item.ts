@@ -42,23 +42,23 @@ export class SgdsSidenavItem extends SgdsElement {
   @property({ type: String })
   href = "";
 
-  /**
-   * Forwards to id attribute of div.collapse and aria-controls attribute of button in SgdsSidenavItem. By default, SgdsSidenavItem auto-generates a unique id. Override the default id by specifiying your own
-   */
-  @property({ type: String })
-  collapseId: string = genId("sidenav", "collapse");
-
-  /**
-   * Forwards to id attribute of button and aria-labelledby attribute of ul.sidenav-list in SgdsSidenavItem. By default, SgdsSidenavItem auto-generates a unique id. Override the default id by specifiying your own
-   */
-  @property({ type: String })
-  buttonId: string = genId("sidenav", "button");
 
   /**
    * Disables the SgdsSidenavItem
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
+
+  /**
+   * @internal Forwards to id attribute of div.collapse and aria-controls attribute of button in SgdsSidenavItem. By default, SgdsSidenavItem auto-generates a unique id. Override the default id by specifiying your own
+   */
+  
+  private collapseId: string = genId("sidenav", "collapse");
+
+  /**
+   * @internal Forwards to id attribute of button and aria-labelledby attribute of ul.sidenav-list in SgdsSidenavItem. By default, SgdsSidenavItem auto-generates a unique id. Override the default id by specifiying your own
+   */
+  private buttonId: string = genId("sidenav", "button");
 
   /** @internal */
   private index = "-1";

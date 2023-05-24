@@ -17,8 +17,6 @@ export class SgdsQuantityToggle extends SgdsElement {
   @query("sgds-button.button-group_button-last") lastBtn: SgdsButton;
   static styles = [SgdsElement.styles, styles];
 
-  @property({ reflect: true, type: String }) quantToggleId = genId("quantToggle", "toggle");
-
   @property({ reflect: true }) name: string;
   /** The input's minimum value. */
   @property() min: number | string;
@@ -80,7 +78,7 @@ export class SgdsQuantityToggle extends SgdsElement {
           [`${this.quantityToggleClasses}`]: this.quantityToggleClasses
         })}"
         variant="quantity-toggle"
-        id=${this.quantToggleId}
+        id=${genId("quantToggle", "toggle")}
         size=${this.size}
       >
         <sgds-button

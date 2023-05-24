@@ -29,8 +29,6 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   private resizeObserver: ResizeObserver;
   /**The textarea's label */
   @property({ type: String, reflect: true }) label = "label";
-  /**The textarea's unique id */
-  @property({ type: String, reflect: true }) textareaId = genId("textarea", "input");
   /**The textarea's name attribute */
   @property({ type: String, reflect: true }) name: string;
   /**Forwarded to the HTML native textarea element. Can be used to insert any bootstrap classes such as mt-2 */
@@ -75,6 +73,9 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   /**@internal */
   @state() valid = false;
 
+  /** @internal The textarea's unique id */
+  private textareaId = genId("textarea", "input");
+  
   connectedCallback() {
     super.connectedCallback();
     this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());
@@ -172,7 +173,7 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
 
     return html`
       <div class="text-area-label-wrapper d-flex justify-content-between">
-        <label for=${ifDefined(this.textareaId)} class="form-label">${this.label}</label>
+        <label for=${this.textareaId} class="form-label">${this.label}</label>
         ${this.maxlength > 0 ? wordCount : undefined}
       </div>
 
@@ -186,7 +187,7 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
           "textarea-resize-auto": this.resize === "auto",
           [`${this.textareaClasses}`]: this.textareaClasses
         })}
-        id=${ifDefined(this.textareaId)}
+        id=${this.textareaId}
         name=${ifDefined(this.name)}
         rows=${ifDefined(this.rows)}
         placeholder=${ifDefined(this.placeholder)}

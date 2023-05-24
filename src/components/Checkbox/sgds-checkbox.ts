@@ -32,9 +32,6 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
   /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
   @property({ reflect: true }) name: string;
 
-  /** For Id/For pair of the HTML form control and label. */
-  @property({ type: String, reflect: true }) checkboxId: string = genId("checkbox");
-
   /** For aria-label when there is no appropriate text label visible */
   @property({ type: String, reflect: true }) ariaLabel = "checkbox";
 
@@ -65,6 +62,10 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
 
   /** @internal */
   @state() invalid = false;
+
+  /** @internal For Id/For pair of the HTML form control and label. */
+ private inputId: string = genId("checkbox");
+
 
   /** Simulates a click on the checkbox. */
   public click() {
@@ -128,7 +129,7 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
             "is-valid": this.hasFeedback && this.valid
           })}
           type="checkbox"
-          id=${ifDefined(this.checkboxId)}
+          id=${ifDefined(this.inputId)}
           aria-invalid=${this.invalid ? "true" : "false"}
           name=${ifDefined(this.name)}
           value=${ifDefined(this.value)}
@@ -141,7 +142,7 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
           @keydown=${this.handleKeyDown}
           @invalid=${(e: Event) => this.handleInvalid(e)}
         />
-        <label for="${ifDefined(this.checkboxId)}" aria-label=${ifDefined(this.ariaLabel)} class="form-check-label"
+        <label for="${this.inputId}" aria-label=${ifDefined(this.ariaLabel)} class="form-check-label"
           ><slot></slot
         ></label>
         ${this.hasFeedback ? html`<div class="invalid-feedback">${this.invalidFeedback}</div>` : ""}
