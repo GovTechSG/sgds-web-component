@@ -30,13 +30,13 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
   @query("button[aria-label=minus-button]") private minusBtn: HTMLButtonElement;
 
   static styles = [SgdsElement.styles, styles];
-
+  /**@internal */
   private readonly formSubmitController = new FormSubmitController(this);
 
   /** The name of the input */
   @property({ reflect: true }) name: string;
   /** The id forwarded to input element */
-  @property({ reflect: true, type: String }) inputId = genId("quantity-toggle", "input");
+  @property({ reflect: true, type: String }) inputId: string = genId("quantity-toggle", "input");
   /** The input's minimum value. */
   @property({ type: Number, reflect: true }) min: number;
   /** The input's maximum value. */
