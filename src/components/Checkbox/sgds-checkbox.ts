@@ -15,7 +15,7 @@ import styles from "./sgds-checkbox.scss";
  *
  * @slot default - The label of checkbox.
  *
- * @event sgds-change - Emitted when the radio group's selected value changes.
+ * @event sgds-change - Emitted when the checked state changes.
  */
 @customElement("sgds-checkbox")
 export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
@@ -90,7 +90,7 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
   handleChange() {
     this.checked = !this.checked;
     this.value = this.input.value;
-    this.emit("sgds-change");
+    this.emit("sgds-change", { detail: { checked: this.checked, value: this.value } });
   }
 
   handleKeyDown(event: KeyboardEvent) {

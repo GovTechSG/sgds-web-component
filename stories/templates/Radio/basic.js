@@ -9,7 +9,8 @@ export const Template = ({
   radioId,
   ariaLabel,
   required,
-  invalidFeedback
+  invalidFeedback,
+  checked
 }) => {
   return html`
     <sgds-radio-group .name=${name} .value=${defaultValue} .required=${required} .invalidFeedback=${invalidFeedback}>
@@ -20,6 +21,7 @@ export const Template = ({
         .radioId=${radioId}
         .ariaLabel=${ariaLabel}
         .isInline=${isInline}
+        ?checked=${checked}
         >Option 1</sgds-radio
       >
       <sgds-radio value="2" .isInline=${isInline}>Option 2</sgds-radio>
