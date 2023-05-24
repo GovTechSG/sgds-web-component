@@ -5,10 +5,10 @@ import styles from "./sgds-sidenav.scss";
 import SgdsSidenavItem from "./sgds-sidenav-item";
 
 /**
- * @summary The side navigation is used to display a list of links to move between pages within a related category. 
- * It is used as a secondary form of navigation where the primary navigation is located hierachically above the page frame. 
- * Maximum two levels of navigations are allowed. 
- * 
+ * @summary The side navigation is used to display a list of links to move between pages within a related category.
+ * It is used as a secondary form of navigation where the primary navigation is located hierachically above the page frame.
+ * Maximum two levels of navigations are allowed.
+ *
  * @slot default - Default slot for SgdsSidenavItem element.
  *
  * @cssproperty --sidenav-theme-color - overall sidenav theme color

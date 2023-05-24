@@ -2,11 +2,13 @@
 
 Use any of the available button style types to quickly create a styled button. Modify the `variant` prop to the intended value.
 
+export const VariantTemplate = variantArray => {
+  return html`${variantArray.map(v => html`<sgds-button variant=${v}> ${v} </sgds-button>`)}`;
+};
+
 <Canvas>
   <Story name="Variants">
-    {["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(
-      variant => html` <sgds-button .variant=${variant}> ${variant} </sgds-button> `
-    )}
+    {() => VariantTemplate(["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"])}
   </Story>
 </Canvas>
 
@@ -16,16 +18,18 @@ For a lighter touch, Buttons also come in `outline-*` variants with no backgroun
 
 <Canvas>
   <Story name="Outline buttons">
-    {[
-      "outline-primary",
-      "outline-secondary",
-      "outline-success",
-      "outline-danger",
-      "outline-warning",
-      "outline-info",
-      "outline-light",
-      "outline-dark"
-    ].map(variant => html` <sgds-button .variant=${variant}> ${variant} </sgds-button> `)}
+    {() =>
+      VariantTemplate([
+        "outline-primary",
+        "outline-secondary",
+        "outline-success",
+        "outline-danger",
+        "outline-warning",
+        "outline-info",
+        "outline-light",
+        "outline-dark"
+      ])
+    }
   </Story>
 </Canvas>
 
@@ -35,7 +39,10 @@ Fancy larger or smaller buttons? Add size="lg", size="sm" for additional sizes.
 
 <Canvas>
   <Story name="Sizes">
-    {["sm", "lg"].map(size => html` <sgds-button .size=${size}> ${size}-button </sgds-button> `)}
+    {() => html`
+      <sgds-button size="sm"> sm-button </sgds-button>
+      <sgds-button size="lg"> lg-button </sgds-button>
+    `}
   </Story>
 </Canvas>
 
@@ -45,9 +52,10 @@ To set a button's active state simply set the component's `active` prop.
 
 <Canvas>
   <Story name="Active state">
-    {["primary", "secondary"].map(
-      variant => html` <sgds-button .variant=${variant} active> ${variant}-button </sgds-button> `
-    )}
+    {() => html`
+      <sgds-button variant="primary" active> primary-button </sgds-button>
+      <sgds-button variant="secondary" active> secondary-button </sgds-button>
+    `}
   </Story>
 </Canvas>
 
@@ -57,9 +65,10 @@ Make buttons look inactive by adding the `disabled` prop to.
 
 <Canvas>
   <Story name="Disabled state">
-    {["primary", "secondary"].map(
-      variant => html` <sgds-button .variant=${variant} disabled> ${variant}-button </sgds-button> `
-    )}
+    {() => html`
+      <sgds-button variant="primary" disabled> primary-button </sgds-button>
+      <sgds-button variant="secondary" disabled> secondary-button </sgds-button>
+    `}
   </Story>
 </Canvas>
 
@@ -67,10 +76,10 @@ Make buttons look inactive by adding the `disabled` prop to.
 
 Use SVG element to add icon to the slot.
 
-
 <Canvas>
   <Story name="Button with Icon">
-    ${() => html`
+    $
+    {() => html`
       <sgds-button>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -80,9 +89,11 @@ Use SVG element to add icon to the slot.
           class="bi bi-box"
           viewBox="0 0 16 16"
         >
-          <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
+          <path
+            d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"
+          />
         </svg>
-      Button with Icon
+        Button with Icon
       </sgds-button>
     `}
   </Story>
