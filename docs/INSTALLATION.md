@@ -23,7 +23,7 @@ npm install @govtechsg/sgds-web-component
 
 ```
 
-and import the library once in your entry point
+and import the library once in your entry point and use it globally throughout your project
 
 ```js
 
