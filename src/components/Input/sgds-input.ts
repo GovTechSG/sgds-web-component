@@ -188,9 +188,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
       </div>
     `;
     // if hintText is defined
-    const withHintText = html`
-      <small id="${ifDefined(this.inputId)}Help" class="text-muted form-text">${this.hintText}</small>
-    `;
+    const withHintText = html` <small id="${this.inputId}Help" class="text-muted form-text">${this.hintText}</small> `;
 
     // if label is defined
     const withLabel = html` <label for=${this.inputId} class="form-label">${this.label}</label> `;

@@ -25,12 +25,11 @@ describe("<sgds-radio>", () => {
     expect(radio?.classList.value).to.contain("form-check-inline");
   });
 
-  it("should be able to pass in value to attributes(id/for pair)", async () => {
-    const el = await fixture(html`<sgds-radio radioId="radio-123"></sgds-radio>`);
+  it("input's id should be equal to label's for attribute", async () => {
+    const el = await fixture(html`<sgds-radio></sgds-radio>`);
     const input = el.shadowRoot?.querySelector("input");
-    expect(input).to.have.attribute("id", "radio-123");
     const label = el.shadowRoot?.querySelector("label");
-    expect(label).to.have.attribute("for", "radio-123");
+    expect(input?.getAttribute("id")).to.equal(label?.getAttribute("for"));
   });
 
   it("should be disabled with the disabled attribute & aria-disabled to be true", async () => {

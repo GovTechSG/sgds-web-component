@@ -42,7 +42,6 @@ export class SgdsSidenavItem extends SgdsElement {
   @property({ type: String })
   href = "";
 
-
   /**
    * Disables the SgdsSidenavItem
    */
@@ -52,7 +51,7 @@ export class SgdsSidenavItem extends SgdsElement {
   /**
    * @internal Forwards to id attribute of div.collapse and aria-controls attribute of button in SgdsSidenavItem. By default, SgdsSidenavItem auto-generates a unique id. Override the default id by specifiying your own
    */
-  
+
   private collapseId: string = genId("sidenav", "collapse");
 
   /**

@@ -12,7 +12,7 @@ describe("sgds-textarea", () => {
     assert.instanceOf(el, SgdsTextarea);
   });
   it("renders with default values", async () => {
-    const el = await fixture(
+    const el = await fixture<SgdsTextarea>(
       html`<sgds-textarea
         textareaId="test"
         required
@@ -24,14 +24,26 @@ describe("sgds-textarea", () => {
       el,
       `
       <div class="text-area-label-wrapper d-flex justify-content-between">
-        <label class="form-label" for="test">label</label>
+        <label class="form-label">label</label>
         <div class="form-text">0/10</div>
       </div>
-      <textarea class=" form-control textarea-resize-vertical " id="test" rows="4" placeholder="Placeholder" maxlength="10" aria-invalid="false" spellcheck="false" required=""></textarea>
-    `
+      <textarea class=" form-control textarea-resize-vertical "  rows="4" placeholder="Placeholder" maxlength="10" aria-invalid="false" spellcheck="false" required=""></textarea>
+    `,
+      { ignoreAttributes: ["id", "for"] }
     );
   });
-
+  it("label for attr should equal to textarea id attribute", async () => {
+    const el = await fixture<SgdsTextarea>(html` <sgds-textarea></sgds-textarea> `);
+    const label = el.shadowRoot?.querySelector("label");
+    const textarea = el.shadowRoot?.querySelector("textarea");
+    expect(label?.getAttribute("for")).to.equal(textarea?.getAttribute("id"));
+  });
+  it("when invalid feedback element is in shadowm dom, its div id should contain same id value as textarea", async () => {
+    const el = await fixture<SgdsTextarea>(html` <sgds-textarea hasFeedback></sgds-textarea> `);
+    const feedback = el.shadowRoot?.querySelector("div.invalid-feedback");
+    const textarea = el.shadowRoot?.querySelector("textarea");
+    expect(feedback?.getAttribute("id")).to.contain(textarea?.getAttribute("id"));
+  });
   it("should be disabled with the disabled attribute", async () => {
     const el = await fixture<SgdsTextarea>(html` <sgds-textarea disabled></sgds-textarea> `);
     const textarea = el.shadowRoot?.querySelector<HTMLTextAreaElement>("textarea");

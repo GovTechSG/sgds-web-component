@@ -64,8 +64,7 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
   @state() invalid = false;
 
   /** @internal For Id/For pair of the HTML form control and label. */
- private inputId: string = genId("checkbox");
-
+  private inputId: string = genId("checkbox");
 
   /** Simulates a click on the checkbox. */
   public click() {
@@ -129,7 +128,7 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
             "is-valid": this.hasFeedback && this.valid
           })}
           type="checkbox"
-          id=${ifDefined(this.inputId)}
+          id=${this.inputId}
           aria-invalid=${this.invalid ? "true" : "false"}
           name=${ifDefined(this.name)}
           value=${ifDefined(this.value)}
@@ -145,7 +144,9 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
         <label for="${this.inputId}" aria-label=${ifDefined(this.ariaLabel)} class="form-check-label"
           ><slot></slot
         ></label>
-        ${this.hasFeedback ? html`<div class="invalid-feedback">${this.invalidFeedback}</div>` : ""}
+        ${this.hasFeedback
+          ? html`<div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
+          : ""}
       </div>
     `;
   }

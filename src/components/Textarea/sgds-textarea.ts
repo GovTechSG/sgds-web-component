@@ -75,7 +75,7 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
 
   /** @internal The textarea's unique id */
   private textareaId = genId("textarea", "input");
-  
+
   connectedCallback() {
     super.connectedCallback();
     this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());

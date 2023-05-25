@@ -170,13 +170,12 @@ describe("sgds-dropdown", () => {
   });
 
   it("can be semantically compare with shadowDom trees", async () => {
-    const el = await fixture(html`<sgds-dropdown togglerId="dropdown-test-id"></sgds-dropdown>`);
+    const el = await fixture(html`<sgds-dropdown></sgds-dropdown>`);
     assert.shadowDom.equal(
       el,
       `  <div>
          <sgds-button
            aria-expanded="false"
-         id="dropdown-test-id"
          variant="outline-secondary"
          >
          <svg
@@ -202,7 +201,8 @@ describe("sgds-dropdown", () => {
         </slot>
       </ul>
        </div>
-    `
+    `,
+      { ignoreAttributes: ["id"] }
     );
   });
   it("when disabled is true, toggle is disabled ", async () => {

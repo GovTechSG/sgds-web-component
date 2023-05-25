@@ -84,7 +84,7 @@ export class SgdsActionCard extends CardElement {
     const checkbox = html`<sgds-checkbox
       ${ref(this.inputRef)}
       ?disabled=${this.disabled}
-      checkboxId=${this.inputId}
+      id=${this.inputId}
       @click=${this.handleInputChange}
       @keydown=${this.handleKeyDown}
       .value=${ifDefined(this.value)}
@@ -95,7 +95,7 @@ export class SgdsActionCard extends CardElement {
     const radio = html`<sgds-radio
       ${ref(this.inputRef)}
       ?disabled=${this.disabled}
-      radioId=${this.inputId}
+      id=${this.inputId}
       @click=${this.handleInputChange}
       @keydown=${this.handleKeyDown}
       .value=${ifDefined(this.value)}

@@ -11,7 +11,7 @@ describe("sgds-mainnav", () => {
   });
 
   it("can be semantically compare with shadowDom trees", async () => {
-    const el = await fixture(html`<sgds-mainnav collapseId="collapse-test-id"></sgds-mainnav>`);
+    const el = await fixture(html`<sgds-mainnav></sgds-mainnav>`);
     assert.shadowDom.equal(
       el,
       `<nav class="navbar navbar-expand-lg navbar-light sgds">
@@ -27,7 +27,6 @@ describe("sgds-mainnav", () => {
        >
        </slot>
        <button
-         aria-controls="collapse-test-id"
          aria-expanded="false"
          aria-label="Toggle navigation"
          class="navbar-toggler order-1"
@@ -49,7 +48,6 @@ describe("sgds-mainnav", () => {
        </button>
        <div
          class="collapse navbar-collapse order-2"
-         id="collapse-test-id"
        >
          <ul class="navbar-nav">
            <slot>
@@ -58,10 +56,16 @@ describe("sgds-mainnav", () => {
           </slot>
          </ul>
        </div>
-    `
+    `,
+      { ignoreAttributes: ["id", "aria-controls"] }
     );
   });
-
+  it("expect div.collapse's id to equal to button's aria-controls", async () => {
+    const el = await fixture(html`<sgds-mainnav></sgds-mainnav>`);
+    const collapse = el.shadowRoot?.querySelector("div.collapse");
+    const button = el.shadowRoot?.querySelector("button");
+    expect(collapse?.getAttribute("id")).to.equal(button?.getAttribute("aria-controls"));
+  });
   it("brandHref props forwards to a.navbar-brand  href attribute", async () => {
     const el = await fixture(html`<sgds-mainnav brandHref="test"></sgds-mainnav>`);
     expect(el.shadowRoot?.querySelector("a.navbar-brand")?.getAttribute("href")).to.equal("test");
@@ -234,16 +238,13 @@ describe("sgds-mainnav-dropdown", () => {
     assert.instanceOf(el, SgdsMainnavDropdown);
   });
   it("can be semantically compare with shadowDom trees", async () => {
-    const el = await fixture(
-      html`<sgds-mainnav-dropdown togglerId="test-dropdown" togglerText="test"></sgds-mainnav-dropdown>`
-    );
+    const el = await fixture(html`<sgds-mainnav-dropdown togglerText="test"></sgds-mainnav-dropdown>`);
     assert.shadowDom.equal(
       el,
       ` <li class="nav-item">
       <a
         class="nav-link"
         aria-expanded="false"
-        id="test-dropdown"
         tabindex="0"
         role="button"
         >
@@ -265,7 +266,8 @@ describe("sgds-mainnav-dropdown", () => {
       <ul class="dropdown-menu" role="menu" part="menu">
         <slot></slot>
       </ul>
-    </li>`
+    </li>`,
+      { ignoreAttributes: ["id"] }
     );
   });
 });

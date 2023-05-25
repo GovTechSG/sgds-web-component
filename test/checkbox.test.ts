@@ -18,12 +18,18 @@ describe("<sgds-checkbox>", () => {
     expect(checkbox).to.have.attribute("aria-disabled", "true");
   });
 
-  it("should be able to pass in checkboxId to attributes(id/for pair)", async () => {
-    const el = await fixture(html`<sgds-checkbox checkboxId="checkbox-123"></sgds-checkbox>`);
+  it("id attribute should equal to label for attribute", async () => {
+    const el = await fixture(html`<sgds-checkbox></sgds-checkbox>`);
     const input = el.shadowRoot?.querySelector("input");
-    expect(input).to.have.attribute("id", "checkbox-123");
     const label = el.shadowRoot?.querySelector("label");
-    expect(label).to.have.attribute("for", "checkbox-123");
+    expect(input?.getAttribute("id")).to.equal(label?.getAttribute("for"));
+  });
+
+  it("id attribute should contain in .invalid-feedback id attribute", async () => {
+    const el = await fixture(html`<sgds-checkbox hasFeedback></sgds-checkbox>`);
+    const input = el.shadowRoot?.querySelector("input");
+    const feedback = el.shadowRoot?.querySelector(".invalid-feedback");
+    expect(feedback?.getAttribute("id")).to.contain(input?.getAttribute("id"));
   });
 
   it("should be able to pass in aria-label attribute", async () => {
