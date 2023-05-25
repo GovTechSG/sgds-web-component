@@ -14,30 +14,26 @@ describe("sgds-quantity-toggle", () => {
 });
 
 describe("when minusBtn or plusBtn is clicked", () => {
-  it("should decrease and increase the count by 1 respectively", async () => {
-    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle count="10"></sgds-quantity-toggle>`);
-    const minusBtn = el.shadowRoot?.querySelector(".button-group_button-first") as SgdsButton;
-    const plusBtn = el.shadowRoot?.querySelector(".button-group_button-last") as SgdsButton;
+  it("should decrease and increase the value by 1 respectively", async () => {
+    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="10"></sgds-quantity-toggle>`);
+    const minusBtn = el.shadowRoot?.querySelector("button[aria-label=minus-button]") as SgdsButton;
+    const plusBtn = el.shadowRoot?.querySelector("button[aria-label=plus-button]") as SgdsButton;
 
-    const minusclickHandler = sinon.spy();
-    el.addEventListener("click", minusclickHandler);
     minusBtn.click();
-    await waitUntil(() => minusclickHandler.calledOnce);
+    await el.updateComplete;
 
-    expect(el.count).to.equal(9);
+    expect(el.value).to.equal(9);
 
-    const plusclickHandler = sinon.spy();
-    el.addEventListener("click", plusclickHandler);
     plusBtn.click();
-    await waitUntil(() => plusclickHandler.calledOnce);
+    await el.updateComplete;
 
-    expect(el.count).to.equal(10);
+    expect(el.value).to.equal(10);
   });
 });
 
-describe("when count change", () => {
+describe("when value change", () => {
   it("fires sgds-input event when value is entered", async () => {
-    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle count="10"></sgds-quantity-toggle>`);
+    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="10"></sgds-quantity-toggle>`);
     const inputEl = el.shadowRoot?.querySelector("input.form-control") as HTMLInputElement;
     const inputHandler = sinon.spy();
     inputEl.focus();
@@ -51,23 +47,55 @@ describe("when count change", () => {
 describe("when step", () => {
   it("should decrease and increase with steps", async () => {
     const el = await fixture<SgdsQuantityToggle>(
-      html`<sgds-quantity-toggle count="10" step="91"></sgds-quantity-toggle>`
+      html`<sgds-quantity-toggle value="10" step="91"></sgds-quantity-toggle>`
     );
-    const minusBtn = el.shadowRoot?.querySelector(".button-group_button-first") as SgdsButton;
-    const plusBtn = el.shadowRoot?.querySelector(".button-group_button-last") as SgdsButton;
+    const minusBtn = el.shadowRoot?.querySelector("button[aria-label=minus-button]") as SgdsButton;
+    const plusBtn = el.shadowRoot?.querySelector("button[aria-label=plus-button]") as SgdsButton;
 
-    const minusclickHandler = sinon.spy();
-    el.addEventListener("click", minusclickHandler);
     minusBtn.click();
-    await waitUntil(() => minusclickHandler.calledOnce);
+    await el.updateComplete;
 
-    expect(el.count).to.equal(0);
+    expect(el.value).to.equal(0);
 
-    const plusclickHandler = sinon.spy();
-    el.addEventListener("click", plusclickHandler);
     plusBtn.click();
-    await waitUntil(() => plusclickHandler.calledOnce);
+    await el.updateComplete;
 
-    expect(el.count).to.equal(91);
+    expect(el.value).to.equal(91);
+  });
+});
+
+describe("methods", () => {
+  it("plus method works to increment value of quantity-toggle", async () => {
+    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="10"></sgds-quantity-toggle>`);
+    el.plus();
+    await el.updateComplete;
+    expect(el.value).to.equal(11);
+  });
+  it("minus method works to increment value of quantity-toggle", async () => {
+    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="10"></sgds-quantity-toggle>`);
+    el.minus();
+    await el.updateComplete;
+    expect(el.value).to.equal(9);
+  });
+});
+
+describe("in form context", () => {
+  it("resets to defaultValue when reset button is clicked", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-quantity-toggle name="a" value="5"></sgds-quantity-toggle>
+      </form>
+    `);
+    const qtyToggle = form.querySelector<SgdsQuantityToggle>("sgds-quantity-toggle");
+    expect(qtyToggle?.defaultValue).to.equal(5);
+    //force a random value different from default value
+    if (qtyToggle) qtyToggle.value = 10;
+
+    await qtyToggle?.updateComplete;
+    expect(qtyToggle?.defaultValue).to.equal(5);
+    form.reset();
+    await qtyToggle?.updateComplete;
+
+    expect(qtyToggle?.value).to.equal(5);
   });
 });
