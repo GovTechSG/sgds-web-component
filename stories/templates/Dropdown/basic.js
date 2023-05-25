@@ -5,7 +5,6 @@ export const Template = ({
   menuAlignRight,
   drop,
   popperOpts,
-  togglerId,
   togglerText,
   variant,
   active,
@@ -22,7 +21,6 @@ export const Template = ({
       .drop=${drop}
       .menuAlignRight=${menuAlignRight}
       .popperOpts=${popperOpts}
-      .togglerId=${togglerId}
       .variant=${variant}
       .close=${close}
       .menuIsOpen=${menuIsOpen}

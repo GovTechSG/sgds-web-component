@@ -1,8 +1,8 @@
 import { html } from "lit-html";
 
-export const Template = ({ expand, brandHref, collapseId, active, href, disabledMNI }) => {
+export const Template = ({ expand, brandHref, active, href, disabledMNI }) => {
   return html`
-    <sgds-mainnav .expand=${expand} .brandHref=${brandHref} .collapseId=${collapseId}>
+    <sgds-mainnav .expand=${expand} .brandHref=${brandHref}>
       <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
       <sgds-mainnav-item .active=${active} .href=${href} .disabled=${disabledMNI}
         >ArgsTable Controlled

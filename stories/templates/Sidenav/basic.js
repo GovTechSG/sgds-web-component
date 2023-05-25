@@ -5,8 +5,6 @@ export const Template = ({
   href,
   activeSNL,
   hrefSNL,
-  collapseId,
-  buttonId,
   disabledSNL,
   disabledSNI
 }) => {
@@ -15,8 +13,6 @@ export const Template = ({
       <sgds-sidenav-item
         ?active=${active}
         href=${href}
-        collapseId=${collapseId}
-        buttonId=${buttonId}
         ?disabled=${disabledSNI}
       >
         <span slot="title">SideNav Item #1 (control by Argstable) </span>
