@@ -105,9 +105,9 @@ export class SgdsActionCard extends CardElement {
 
     return html`
       <div
-      tabindex=${this.disabled ? "-1" : "0"}
-      @click=${this.handleInputChange}
-     @keydown=${this.handleKeyDown}
+        tabindex=${this.disabled ? "-1" : "0"}
+        @click=${this.handleInputChange}
+        @keydown=${this.handleKeyDown}
         variant="card-action"
         class="sgds card
         ${classMap({
@@ -125,9 +125,7 @@ export class SgdsActionCard extends CardElement {
               <slot name="icon"></slot>
               <slot name="card-subtitle"></slot>
             </div>
-            <div class="card-input">
-            ${this.type === "checkbox" ? checkbox : radio}
-            </div>
+            <div class="card-input">${this.type === "checkbox" ? checkbox : radio}</div>
           </h6>
           <h5 class="card-title" part="title"><slot name="card-title"></slot></h5>
           <p class="card-text" part="text"><slot name="card-text"></slot></p>

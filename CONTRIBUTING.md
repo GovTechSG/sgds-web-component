@@ -78,11 +78,6 @@ This file will be concatenated with the basic template to give the final stories
 - React users should import as such : 
 named exports when importing from whole library entry point
 ```import {SgdsMasthead} from 'clk-web-components/react';``` 
-or
-default exports when importing from specific component entry points
-```import SgdsMasthead from 'clk-web-components/react/masthead'```; 
-```import SgdsSidenavItem from 'clk-web-components/react/sidenav-item'```;
-```import Sidenav from 'clk-web-components/react/sidenav'```;
 
 - All steps in this section are included in ```npm run build:lib``` 
 

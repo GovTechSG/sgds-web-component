@@ -23,3 +23,4 @@ export * from "./components/FileUpload";
 export * from "./components/Accordion";
 export * from "./components/Tooltip";
 export * from "./components/Spinner";
+export * from "./components/Card";
