@@ -1,1 +1,1 @@
-export * from "./sgds-card"
+export * from "./sgds-card";

@@ -30,9 +30,9 @@ export class SgdsCard extends CardElement {
       return console.error("Multiple elements passed into SgdsCard's link slot");
     }
     if (this.stretchedLink) {
-        childNodes[0].classList.add("stretched-link");
+      childNodes[0].classList.add("stretched-link");
     }
-    childNodes[0].classList.add("fw-bold")
+    childNodes[0].classList.add("fw-bold");
     return;
   }
 
@@ -49,9 +49,9 @@ export class SgdsCard extends CardElement {
         class="${classMap({
           sgds: true,
           card: true,
-          [`text-${this.textColor}`]:  this.textColor,
+          [`text-${this.textColor}`]: this.textColor,
           [`bg-${this.bgColor}`]: this.bgColor,
-          [`border-${this.borderColor}`]: this.borderColor,
+          [`border-${this.borderColor}`]: this.borderColor
         })}
         "
         part="base"

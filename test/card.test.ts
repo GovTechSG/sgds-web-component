@@ -28,15 +28,15 @@ describe("<sgds-card>", () => {
             `
     );
   });
-  it("when link is passed into slot[name=card-link], it has class fw-bold added", async() => {
+  it("when link is passed into slot[name=card-link], it has class fw-bold added", async () => {
     const el = await fixture(html`<sgds-card><a slot="card-link" href="#">Link</a></sgds-card>`);
 
-    expect(el.querySelector("a[slot=card-link]")?.className).to.contain("fw-bold")
-  })
-  it("when stretchedLink is true, adds a .stretched-link class to slot card link", async() => {
+    expect(el.querySelector("a[slot=card-link]")?.className).to.contain("fw-bold");
+  });
+  it("when stretchedLink is true, adds a .stretched-link class to slot card link", async () => {
     const el = await fixture(html`<sgds-card stretchedLink><a slot="card-link" href="#">Link</a></sgds-card>`);
 
-    expect(el.querySelector("a[slot=card-link]")?.className).to.contain("fw-bold")
-    expect(el.querySelector("a[slot=card-link]")?.className).to.contain("stretched-link")
-  })
+    expect(el.querySelector("a[slot=card-link]")?.className).to.contain("fw-bold");
+    expect(el.querySelector("a[slot=card-link]")?.className).to.contain("stretched-link");
+  });
 });
