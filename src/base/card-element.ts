@@ -18,18 +18,13 @@ export type CardTextVariant =
 export class CardElement extends SgdsElement {
   static styles = SgdsElement.styles;
 
-  @property({ type: String })
-
   /** The border's variant. */
   @property()
-  borderColor?: CardBorderVariant;
+  borderColor: CardBorderVariant;
 
   /** The bg's variant. */
-  @property() bgColor?: CardBorderVariant;
+  @property() bgColor: CardBorderVariant;
 
   /** The text's variant. */
-  @property() textColor?: CardTextVariant;
-
-  @property({ type: Boolean, reflect: true })
-  disabled = false;
+  @property() textColor: CardTextVariant;
 }
