@@ -25,6 +25,18 @@ export type FileUploadButtonVariant =
   | "outline-light"
   | "outline-dark";
 
+  /**
+ * @summary Allows users to upload files of various sizes and formats
+ * @slot default - Label for fileuploader button
+ *
+ * @event selected-files-changed - Emitted when files are selected for uploading
+ *
+ * @cssproperty --fileuploader-file-icon-fill - Left icon fill color
+ * @cssproperty --fileuploader-remove-icon-fill - Remove icon fill color
+ * @cssproperty --fileuploader-remove-icon-hover-fill - Remove icon mouse over fill color
+ *
+ */
+
 @customElement("sgds-fileupload")
 export class SgdsFileUpload extends SgdsElement {
 
@@ -35,28 +47,34 @@ export class SgdsFileUpload extends SgdsElement {
 
   // /** Sets a unique id to the file input, required. */
   // @property({ type: String }) controlId = "";
-
+  //** Disable the fileuploader button */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  /** Allows multiple files to be listed for uploading */
   @property({ type: Boolean, reflect: true })
   multiple = false;
 
+  /** Specify the acceptable file type  */
   @property({ type: Boolean, reflect: true })
   accept = "";
 
-  /** Button sizes */
+  /** Specifies a large or small button */
   @property({ reflect: true }) size: "sm" | "lg";
 
+  /** Customize the check icon with SVG */
   @property({ type: String })
   checkedIcon? = "";
 
+  /** Customize the cancel icon with SVG */
   @property({ type: String })
   cancelIcon? = "";
 
+  /** @internal */
   @property({ type: FileList })
   private fileList: FileList | undefined;
 
+  /** @internal */
   @property({ type: Array })
   private selectedFiles: File[] = [];
 
@@ -69,15 +87,17 @@ export class SgdsFileUpload extends SgdsElement {
       });
     });
   }
-
+  
   setFileList(fileList) {
     this.fileList = fileList[0];
     this.emit("sgds-files-selected");
   }
 
   // Create a ref to the input element
+  /** @internal */
   private inputRef = createRef<HTMLInputElement>();
 
+  /** @internal */
   private handleClick(event: Event) {
     event.preventDefault();
     if (!this.disabled) {
@@ -88,6 +108,7 @@ export class SgdsFileUpload extends SgdsElement {
     }
   }
 
+  /** @internal */
   private handleInputChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const fileList = inputElement.files as FileList;
@@ -101,6 +122,7 @@ export class SgdsFileUpload extends SgdsElement {
 
   }
 
+  /** @internal */
   removeFileHandler(index: number) {
     const inputElement = this.inputRef.value;
     const attachments = inputElement.files;
@@ -126,15 +148,9 @@ export class SgdsFileUpload extends SgdsElement {
         return html`${unsafeSVG(checkedIcon)}`;
       }
       return html`
-        <svg xmlns="http://www.w3.org/2000/svg" 
-        width="16" 
-        height="16" 
-        fill="currentColor" 
-        class="bi bi-file-earmark-check-fill" 
-        viewBox="0 0 16 16"
-        >
-        <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm1.354 4.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708.708z"/>
-      </svg>`;
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+  <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+</svg>`;
     };
 
     const getCancelIcon = (cancelIcon: string) => {
@@ -167,7 +183,6 @@ export class SgdsFileUpload extends SgdsElement {
     );
 
     return html`
-      <form>
           <input
             ${ref(this.inputRef)}
             type="file"
@@ -183,7 +198,7 @@ export class SgdsFileUpload extends SgdsElement {
             @click=${this.handleClick}>
               <slot></slot>
           </sgds-button>
-      </form>
+
       <ul class="sgds fileupload-list">
         ${listItems}
       </ul>

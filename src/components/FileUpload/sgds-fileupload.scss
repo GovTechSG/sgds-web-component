@@ -1,5 +1,5 @@
 :host{
-    --fileuploader-file-icon-fill: green;
+    --fileuploader-left-icon-fill: green;
     --fileuploader-remove-icon-fill: red;
     --fileuploader-remove-icon-hover-fill: hsl(0, 100%, 40%);
 }
@@ -8,7 +8,7 @@
     cursor: pointer;
     &:first-of-type{
         svg{
-            fill: var(--fileuploader-file-icon-fill);
+            fill: var(--fileuploader-left-icon-fill);
         }
     }
     &:last-of-type{
