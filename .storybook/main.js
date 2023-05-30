@@ -1,13 +1,14 @@
-require('dotenv').config()
+require("dotenv").config();
 
 const mode = process.env.STORYBOOK_ENV;
 
 const componentStories = () => {
-  const productionStories = JSON.parse(process.env.BUILD_STORYBOOK_ENV).map(c => `../stories/components/${c}.stories.@(js|jsx|ts|tsx|mdx)`);
+  const productionStories = JSON.parse(process.env.BUILD_STORYBOOK_ENV).map(
+    c => `../stories/components/${c}.stories.@(js|jsx|ts|tsx|mdx)`
+  );
   if (mode === "development") {
     return ["../stories/components/*.stories.@(js|jsx|ts|tsx|mdx)"];
-  } else 
-  return productionStories;
+  } else return productionStories;
 };
 
 module.exports = {
