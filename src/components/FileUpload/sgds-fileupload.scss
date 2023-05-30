@@ -1,1 +1,22 @@
- 
+:host{
+    --fileuploader-file-icon-fill: green;
+    --fileuploader-remove-icon-fill: red;
+    --fileuploader-remove-icon-hover-fill: hsl(0, 100%, 40%);
+}
+
+.fileupload-list-item span{
+    cursor: pointer;
+    &:first-of-type{
+        svg{
+            fill: var(--fileuploader-file-icon-fill);
+        }
+    }
+    &:last-of-type{
+        svg{
+            fill: var(--fileuploader-remove-icon-fill);
+            &:hover{
+                fill: var(--fileuploader-remove-icon-hover-fill);
+            }
+        }
+    }
+}
