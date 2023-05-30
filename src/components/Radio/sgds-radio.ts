@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { watch } from "../../utils/watch";
 import styles from "./sgds-radio.scss";
@@ -18,8 +18,10 @@ import genId from "../../utils/generateId";
 @customElement("sgds-radio")
 export class SgdsRadio extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
-  /**@internal */
-  @state() checked = false;
+  /**
+   * Draws the radio in a checked state
+   */
+  @property({ type: Boolean, reflect: true }) checked = false;
 
   /** The radio's value attribute. */
   @property() value: string;

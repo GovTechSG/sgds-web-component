@@ -1,27 +1,32 @@
 export const TemplateType = args =>
   html`
     <div class="col">
-      <sgds-action-card type="radio">
+    <form> 
+    <sgds-radio-group>
+      <sgds-action-card type="radio" name="apple">
         <span slot="card-subtitle">Laptop</span>
         <span slot="card-title">Apple</span>
         <span slot="card-text">Macbook Pro M1</span>
       </sgds-action-card>
-      <div>
-        <div class="col">
-          <sgds-action-card type="checkbox">
-            <span slot="card-subtitle">Laptop</span>
-            <span slot="card-title">Apple</span>
-            <span slot="card-text">Macbook Pro M1</span>
-          </sgds-action-card>
-          <div></div>
-        </div>
-      </div>
+      <sgds-action-card type="radio" name="microsoft">
+        <span slot="card-subtitle">Laptop</span>
+        <span slot="card-title">Microsoft</span>
+        <span slot="card-text">Microsoft Surface Pro</span>
+      </sgds-action-card>
+      <sgds-action-card type="radio" name="acer">
+        <span slot="card-subtitle">Laptop</span>
+        <span slot="card-title">Acer</span>
+        <span slot="card-text">Aspire 5</span>
+      </sgds-action-card>
+      </sgds-radio-group>
+      </form>
     </div>
   `;
 
-## Type
+## SgdsActionCard as radio
 
-Use `type` prop : `radio` / `checkbox` to change the selectable card input type
+`SgdsActionCard` `type='radio'` is essentially form radio with a card UI. 
+Use `SgdsRadioGroup` as a wrapper to enable radio behaviour.
 
 <Canvas>
   <Story name="Type">{TemplateType.bind({})}</Story>

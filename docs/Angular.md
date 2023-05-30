@@ -46,30 +46,12 @@ import "@govtechsg/sgds-web-component";
 })
 export class AppModule {}
 ```
-
-Alternatively, you can import specific components
-
-```typescript
-//button.component.ts
-import { Component } from "@angular/core";
-import "@govtechsg/sgds-web-component/Button";
-
-@Component({
-  selector: "app-button",
-  templateUrl: "./button.component.html",
-  styleUrls: ["./button.component.css"]
-})
-export class ButtonComponent {}
-```
-
 ## Referencing sgds-web-components in Angular
 
 ```typescript
 //alert.component.ts
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { SgdsAlert } from '@govtechsg/sgds-web-component/Alert';
-import "@govtechsg/sgds-web-component/Button"
-import "@govtechsg/sgds-web-component/Alert"
+import { SgdsAlert } from '@govtechsg/sgds-web-component';
 
 @Component({
   selector: 'app-alert',

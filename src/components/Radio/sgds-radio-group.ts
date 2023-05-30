@@ -1,12 +1,11 @@
 import { html } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { FormSubmitController } from "../../utils/form";
 import { watch } from "../../utils/watch";
 import SgdsRadio from "./sgds-radio";
 import styles from "./sgds-radio-group.scss";
-import { SgdsFormControl } from "../../utils/form";
 
 /**
  * @summary RadioGroup group multiple radios so they function as a single form control.
@@ -16,7 +15,7 @@ import { SgdsFormControl } from "../../utils/form";
  * @event sgds-change - Emitted when the radio group's selected value changes.
  */
 @customElement("sgds-radio-group")
-export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
+export class SgdsRadioGroup extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
   /**@internal */
   protected readonly formSubmitController = new FormSubmitController(this, {
@@ -50,7 +49,7 @@ export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
   @watch("value")
   handleValueChange() {
     if (this.hasUpdated) {
-      this.emit("sgds-change");
+      this.emit("sgds-change", { detail: { value: this.value } });
       this.updateCheckedRadio();
     }
   }
@@ -93,10 +92,9 @@ export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
 
     return !this.invalid;
   }
-
-  private getAllRadios() {
-    return [...this.querySelectorAll<SgdsRadio>("sgds-radio")];
-  }
+  /**@internal */
+  @queryAssignedElements()
+  private _radios!: Array<SgdsRadio>;
 
   handleRadioClick(event: MouseEvent) {
     const target = event.target as SgdsRadio;
@@ -106,7 +104,7 @@ export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
     }
 
     this.value = target.value;
-    const radios = this.getAllRadios();
+    const radios = this._radios;
     radios.forEach(radio => (radio.checked = radio === target));
   }
 
@@ -115,7 +113,7 @@ export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
       return;
     }
 
-    const radios = this.getAllRadios().filter(radio => !radio.disabled);
+    const radios = this._radios.filter(radio => !radio.disabled);
     const checkedRadio = radios.find(radio => radio.checked) ?? radios[0];
     //if eventkey is space, index increment is 0, if eventkey arrowup/arrowleft, index is -1, arrowright/arrowdown, index incr is 1
     const incr = event.key === " " ? 0 : ["ArrowUp", "ArrowLeft"].includes(event.key) ? -1 : 1;
@@ -127,7 +125,7 @@ export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
       index = 0;
     }
 
-    this.getAllRadios().forEach(radio => {
+    this._radios.forEach(radio => {
       radio.checked = false;
       radio.tabIndex = -1;
     });
@@ -141,7 +139,7 @@ export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
   }
 
   handleLabelClick() {
-    const radios = this.getAllRadios();
+    const radios = this._radios;
     const checked = radios.find(radio => radio.checked);
     const radioToFocus = checked || radios[0];
 
@@ -152,7 +150,7 @@ export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
   }
 
   handleSlotChange() {
-    const radios = this.getAllRadios();
+    const radios = this._radios;
 
     radios.forEach(radio => (radio.checked = radio.value === this.value));
 
@@ -173,7 +171,7 @@ export class SgdsRadioGroup extends SgdsElement implements SgdsFormControl {
   }
 
   updateCheckedRadio() {
-    const radios = this.getAllRadios();
+    const radios = this._radios;
     radios.forEach(radio => (radio.checked = radio.value === this.value));
     this.invalid = !this.validity.valid;
   }

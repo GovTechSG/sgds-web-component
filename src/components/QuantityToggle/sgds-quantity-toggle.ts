@@ -3,72 +3,94 @@ import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import { html } from "lit/static-html.js";
-import { SgdsButton } from "../Button";
+import { ButtonVariant } from "../Button";
 import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import genId from "../../utils/generateId";
-import { watch } from "../../utils/watch";
 import styles from "./sgds-quantity-toggle.scss";
+import { FormSubmitController, SgdsFormControl } from "../../utils/form";
 
+/**
+ * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
+ *
+ * @csspart base - The base wrapper of the quantity toggle component.
+ * @csspart button - The plus and minus button of quantity toggle
+ *
+ * @event sgds-change - Emitted when an alteration to the control's value is committed by the user.
+ * @event sgds-input - Emitted when the control receives input and its value changes.
+ *
+ */
 @customElement("sgds-quantity-toggle")
-export class SgdsQuantityToggle extends SgdsElement {
-  @query("input.form-control") input: HTMLInputElement;
-  @query("sgds-button.button-group_button-first") leftBtn: SgdsButton;
-  @query("sgds-button.button-group_button-last") lastBtn: SgdsButton;
+export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
+  /**@internal */
+  @query("input.form-control") private input: HTMLInputElement;
+  /**@internal */
+  @query("button[aria-label=plus-button]") private plusBtn: HTMLButtonElement;
+  /**@internal */
+  @query("button[aria-label=minus-button]") private minusBtn: HTMLButtonElement;
+
   static styles = [SgdsElement.styles, styles];
+  /**@internal */
+  private readonly formSubmitController = new FormSubmitController(this);
 
-  @property({ reflect: true, type: String }) quantToggleId = genId("quantToggle", "toggle");
-
+  /** The name of the input */
   @property({ reflect: true }) name: string;
+  /** The id forwarded to input element */
+  @property({ reflect: true, type: String }) inputId: string = genId("quantity-toggle", "input");
   /** The input's minimum value. */
-  @property() min: number | string;
+  @property({ type: Number, reflect: true }) min: number;
   /** The input's maximum value. */
-  @property() max: number | string;
+  @property({ type: Number, reflect: true }) max: number;
 
-  @property() size: "sm" | "lg" | "default" = "sm";
+  /**Controls the size of the quantity toggle */
+  @property() size: "sm" | "lg" = "sm";
 
-  @property({ reflect: true, type: Number }) count: number;
+  /**The input's value. Set to 0 by default */
+  @property({ reflect: true, type: Number }) value = 0;
 
+  /** Disables the entire quantity toggle  */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  @property({ reflect: true }) quantityToggleClasses?: string;
+  /** The quantity toggle's button variants */
+  @property({ type: String, reflect: true }) buttonVariant: ButtonVariant = "primary";
 
   /**
-   * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
-   * implied, allowing any numeric value.
+   * Controls the incremental / decremental value of the input
    */
-  @property() step = 1;
+  @property({ type: Number, reflect: true }) step = 1;
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
-  defaultValue = "";
+  defaultValue = 0;
 
   handleChange(event: string) {
+    this.value = parseInt(this.input.value);
     this.emit(event);
-    this.count = parseInt(this.input.value);
   }
-  onPlus(event: MouseEvent) {
-    if (this.disabled) {
-      event.preventDefault();
-      event.stopPropagation();
-      return;
-    }
-    this.count = parseInt(this.input.value) + parseInt(this.input.step);
+  /** Simulates a click on the plus button */
+  public plus() {
+    this.plusBtn.click();
   }
-  onMinus(event: MouseEvent) {
-    if (this.disabled) {
-      event.preventDefault();
-      event.stopPropagation();
-      return;
-    }
-    if (this.count < this.step) {
-      this.count = 0;
-    } else {
-      this.count = parseInt(this.input.value) - parseInt(this.input.step);
-    }
+  /** Simulates a click on the minus button */
+  public minus() {
+    this.minusBtn.click();
   }
 
-  @watch("count", { waitUntilFirstUpdate: true })
+  onPlus(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.value = parseInt(this.input.value) + parseInt(this.input.step);
+  }
+
+  onMinus(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.value < this.step) {
+      this.value = 0;
+    } else {
+      this.value = parseInt(this.input.value) - parseInt(this.input.step);
+    }
+  }
   render() {
     return html`
       <div
@@ -77,44 +99,69 @@ export class SgdsQuantityToggle extends SgdsElement {
           sgds: true,
           disabled: this.disabled,
           "input-group": true,
-          [`${this.quantityToggleClasses}`]: this.quantityToggleClasses
+          [`input-group-${this.size}`]: this.size
         })}"
         variant="quantity-toggle"
-        id=${this.quantToggleId}
         size=${this.size}
       >
-        <sgds-button
+        <button
+          aria-label="minus-button"
           part="button"
-          variant="primary"
-          class="button-group_button-first"
-          size=${this.size}
+          class=${classMap({
+            sgds: true,
+            btn: true,
+            [`btn-${this.buttonVariant}`]: this.buttonVariant
+          })}
           @click=${this.onMinus}
           ?disabled=${this.disabled}
         >
-          <sl-icon name="dash-lg"></sl-icon>
-        </sgds-button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-dash"
+            viewBox="0 0 16 16"
+          >
+            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+          </svg>
+        </button>
         <input
           type="number"
           class="form-control ${"form-control-" + this.size} text-center"
           name=${ifDefined(this.name)}
-          step=${ifDefined(this.step as number)}
+          step=${ifDefined(this.step)}
           min=${ifDefined(this.min)}
           max=${ifDefined(this.max)}
-          .value=${live(this.count)}
+          .value=${live(this.value)}
           @change=${() => this.handleChange("sgds-change")}
           @input=${() => this.handleChange("sgds-input")}
           ?disabled=${this.disabled}
         />
-        <sgds-button
+        <button
+          aria-label="plus-button"
           part="button"
-          variant="primary"
-          class="button-group_button-last"
-          size=${this.size}
+          class=${classMap({
+            sgds: true,
+            btn: true,
+            [`btn-${this.buttonVariant}`]: this.buttonVariant
+          })}
           @click=${this.onPlus}
           ?disabled=${this.disabled}
         >
-          <sl-icon name="plus-lg"></sl-icon>
-        </sgds-button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-plus"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+            />
+          </svg>
+        </button>
       </div>
     `;
   }

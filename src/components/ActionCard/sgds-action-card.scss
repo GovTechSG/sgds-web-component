@@ -3,8 +3,7 @@
     &.card {
       &[variant*="card-action"] {
         .card-body {
-          sl-icon {
-            font-size: 1.5rem;
+          ::slotted(svg) {
             margin-right: 1rem;
           }
         }
