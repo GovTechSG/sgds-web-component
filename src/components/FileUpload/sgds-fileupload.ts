@@ -1,6 +1,5 @@
 import { html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { ifDefined } from "lit/directives/if-defined.js";
 import styles from "./sgds-fileupload.scss";
 import SgdsElement from "../../base/sgds-element";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
@@ -29,7 +28,7 @@ export type FileUploadButtonVariant =
  * @summary Allows users to upload files of various sizes and formats
  * @slot default - Label for fileuploader button
  *
- * @event selected-files-changed - Emitted when files are selected for uploading
+ * @event sgds-files-selected - Emitted when files are selected for uploading
  *
  * @cssproperty --fileuploader-file-icon-fill - Left icon fill color
  * @cssproperty --fileuploader-remove-icon-fill - Remove icon fill color
