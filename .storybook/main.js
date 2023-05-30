@@ -3,7 +3,7 @@ require("dotenv").config();
 const mode = process.env.STORYBOOK_ENV;
 
 const componentStories = () => {
-  const productionStories = JSON.parse(process.env.BUILD_STORYBOOK_ENV).map(
+  const productionStories = JSON.parse(process.env.STORIES_TO_BUILD).map(
     c => `../stories/components/${c}.stories.@(js|jsx|ts|tsx|mdx)`
   );
   if (mode === "development") {
