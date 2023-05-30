@@ -7,8 +7,8 @@ frontend:
     build:
       commands:
         - STORIES_TO_BUILD=${STORIES_TO_BUILD}
-        - npm run test && npm run test:scripts && npm run build-storybook
         - echo "TWITCH_CLIENT_ID=$TWITCH_CLIENT_ID" >> .env
+        - npm run test && npm run test:scripts && npm run build-storybook
   artifacts:
     baseDirectory: /storybook-static
     files:
