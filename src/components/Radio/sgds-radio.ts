@@ -26,9 +26,6 @@ export class SgdsRadio extends SgdsElement {
   /** The radio's value attribute. */
   @property() value: string;
 
-  /** For id/for pair of the HTML form control and label. */
-  @property({ type: String, reflect: true }) radioId: string = genId("radio");
-
   /** Disables the radio. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
@@ -37,6 +34,8 @@ export class SgdsRadio extends SgdsElement {
 
   /** For aria-label */
   @property({ type: String, reflect: true }) ariaLabel = "";
+
+  private radioId: string = genId("radio");
 
   connectedCallback(): void {
     super.connectedCallback();

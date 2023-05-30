@@ -5,7 +5,6 @@ export const Template = args =>
     <sgds-textarea
       label=${args.label}
       name=${args.name}
-      textareaId=${args.textareaId}
       textareaClasses=${args.textareaClasses}
       .value=${args.value}
       rows=${args.rows}

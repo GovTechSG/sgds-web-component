@@ -34,7 +34,7 @@ export class SgdsSidenav extends SgdsElement {
         });
 
     return html`
-      <nav class="sidenav" id="${this.id}">
+      <nav class="sidenav">
         <ul>
           <slot></slot>
         </ul>

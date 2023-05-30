@@ -62,9 +62,7 @@ export class SgdsMainnav extends SgdsElement {
   @property({ type: String })
   brandHref = "";
 
-  /** Forwards to id attribute of div.collapse and aria-controls attribute of toggler button in SgdsMainnav. By default, SgdsMainnav auto-generates a unique id. Override the default id by specifiying your own */
-  @property({ type: String })
-  collapseId = genId("mainnav", "collapse");
+  private collapseId = genId("mainnav", "collapse");
 
   /** The breakpoint, below which, the Navbar will collapse. When always the Navbar will always be expanded regardless of screen size. When never, the Navbar will always be collapsed */
   @property()

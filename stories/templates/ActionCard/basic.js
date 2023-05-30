@@ -11,7 +11,6 @@ export const Template = args =>
       ?checked=${args.checked}
       name=${args.name}
       .value=${args.value}
-      inputId=${args.inputId}
     >
       <svg
         slot="icon"

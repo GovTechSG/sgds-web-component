@@ -29,24 +29,37 @@ describe("sgds-sidenav-item", () => {
     assert.instanceOf(el, SgdsSidenavItem);
   });
   it("without href, can be semantically compare with shadowDom trees", async () => {
-    const el = await fixture(html`<sgds-sidenav-item collapseId="collapseEg" buttonId="buttonEg"></sgds-sidenav-item>`);
+    const el = await fixture(html`<sgds-sidenav-item></sgds-sidenav-item>`);
     assert.shadowDom.equal(
       el,
       `  <li class="sidenav-item" aria-haspopup="true">
-       <button class="collapsed sidenav-btn" aria-expanded="false" aria-controls="collapseEg" aria-selected="false" id="buttonEg" aria-disabled="false">
+       <button class="collapsed sidenav-btn" aria-expanded="false" aria-selected="false" aria-disabled="false">
        <slot name="icon">
           </slot> 
        <slot name="title">
          </slot>
        </button>
-       <div class="collapse" id="collapseEg">
-         <ul class="sidenav-list" aria-labelledby="buttonEg">
+       <div class="collapse">
+         <ul class="sidenav-list">
            <slot>
            </slot>
          </ul>
        </div>
-     </li>`
+     </li>`,
+      { ignoreAttributes: ["id", "aria-labelledby", "aria-controls"] }
     );
+  });
+  it("button id should equal to ul's aria-labelledBy attr", async () => {
+    const el = await fixture(html`<sgds-sidenav-item></sgds-sidenav-item>`);
+    const button = el.shadowRoot?.querySelector("button");
+    const ul = el.shadowRoot?.querySelector("ul");
+    expect(button?.getAttribute("id")).to.equal(ul?.getAttribute("aria-labelledby"));
+  });
+  it("div.collapse id should equal to button's aria-controls attr", async () => {
+    const el = await fixture(html`<sgds-sidenav-item></sgds-sidenav-item>`);
+    const button = el.shadowRoot?.querySelector("button");
+    const collapse = el.shadowRoot?.querySelector("div.collapse");
+    expect(collapse?.getAttribute("id")).to.equal(button?.getAttribute("aria-controls"));
   });
   it("with href, can be semantically compare with shadowDom trees", async () => {
     const el = await fixture(html`<sgds-sidenav-item href="#"></sgds-sidenav-item>`);

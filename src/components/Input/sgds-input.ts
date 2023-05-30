@@ -43,8 +43,6 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @property({ reflect: true }) label = "";
   /** The input's hint text below the label */
   @property({ reflect: true }) hintText = "";
-  /**The input's id. This value gets forwarded into the HTMLInputElement of the component. Defaults to a unique value */
-  @property({ type: String, reflect: true }) inputId: string = genId("input", this.type);
   /**The input's name attribute */
   @property({ reflect: true }) name: string;
   /**Forwards classes to the native HTMLInputElement of the component. Can be used to insert any classes from bootstrap such as mt-2 */
@@ -83,6 +81,9 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @state() invalid = false;
   /**@internal */
   @state() valid = false;
+
+  /**@internal */
+  private inputId: string = genId("input", this.type);
 
   /** Sets focus on the input. */
   public focus(options?: FocusOptions) {
@@ -187,12 +188,10 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
       </div>
     `;
     // if hintText is defined
-    const withHintText = html`
-      <small id="${ifDefined(this.inputId)}Help" class="text-muted form-text">${this.hintText}</small>
-    `;
+    const withHintText = html` <small id="${this.inputId}Help" class="text-muted form-text">${this.hintText}</small> `;
 
     // if label is defined
-    const withLabel = html` <label for=${ifDefined(this.inputId)} class="form-label">${this.label}</label> `;
+    const withLabel = html` <label for=${this.inputId} class="form-label">${this.label}</label> `;
 
     return html` ${this.label && withLabel} ${this.hintText && withHintText} ${this.icon ? inputWithIcon : input} `;
   }

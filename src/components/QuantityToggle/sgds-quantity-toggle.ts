@@ -35,8 +35,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
 
   /** The name of the input */
   @property({ reflect: true }) name: string;
-  /** The id forwarded to input element */
-  @property({ reflect: true, type: String }) inputId: string = genId("quantity-toggle", "input");
+
   /** The input's minimum value. */
   @property({ type: Number, reflect: true }) min: number;
   /** The input's maximum value. */
@@ -62,6 +61,9 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = 0;
+
+  /** @internal The id forwarded to input element */
+  private inputId: string = genId("quantity-toggle", "input");
 
   handleChange(event: string) {
     this.value = parseInt(this.input.value);
@@ -137,6 +139,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
           @change=${() => this.handleChange("sgds-change")}
           @input=${() => this.handleChange("sgds-input")}
           ?disabled=${this.disabled}
+          id=${this.inputId}
         />
         <button
           aria-label="plus-button"

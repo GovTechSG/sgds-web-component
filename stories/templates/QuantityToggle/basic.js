@@ -9,7 +9,6 @@ export const Template = args =>
       ?disabled=${args.disabled}
       size=${args.size}
       name=${args.name}
-      inputId=${args.inputId}
       min=${args.min}
       max=${args.max}
       buttonVariant=${args.buttonVariant}

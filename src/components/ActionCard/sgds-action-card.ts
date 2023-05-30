@@ -4,7 +4,7 @@ import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { html } from "lit/static-html.js";
 import { CardElement } from "../../base/card-element";
 import styles from "./sgds-action-card.scss";
-import generateId from "../../utils/generateId";
+import genId from "../../utils/generateId";
 import { SgdsCheckbox } from "../Checkbox";
 import { SgdsRadio } from "../Radio";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -48,9 +48,6 @@ export class SgdsActionCard extends CardElement {
   /** The type of input of the action card */
   @property({ type: String, reflect: true }) type: TypeVariant = "checkbox";
 
-  /** The input's id. */
-  @property({ reflect: true }) inputId: string = generateId("action-card", "input");
-
   /** Controls the active styling of the action card */
   @property({ reflect: true, type: Boolean })
   active = false;
@@ -64,6 +61,8 @@ export class SgdsActionCard extends CardElement {
     this.inputRef.value.click();
     this.emit("sgds-change");
   }
+  /** @internal The input's id. */
+  private inputId: string = genId("action-card", "input");
 
   @watch("checked")
   async handleRadioCheckedChange() {
@@ -85,7 +84,7 @@ export class SgdsActionCard extends CardElement {
     const checkbox = html`<sgds-checkbox
       ${ref(this.inputRef)}
       ?disabled=${this.disabled}
-      checkboxId=${this.inputId}
+      id=${this.inputId}
       @click=${this.handleInputChange}
       @keydown=${this.handleKeyDown}
       .value=${ifDefined(this.value)}
@@ -96,7 +95,7 @@ export class SgdsActionCard extends CardElement {
     const radio = html`<sgds-radio
       ${ref(this.inputRef)}
       ?disabled=${this.disabled}
-      radioId=${this.inputId}
+      id=${this.inputId}
       @click=${this.handleInputChange}
       @keydown=${this.handleKeyDown}
       .value=${ifDefined(this.value)}
@@ -105,9 +104,9 @@ export class SgdsActionCard extends CardElement {
 
     return html`
       <div
-      tabindex=${this.disabled ? "-1" : "0"}
-      @click=${this.handleInputChange}
-     @keydown=${this.handleKeyDown}
+        tabindex=${this.disabled ? "-1" : "0"}
+        @click=${this.handleInputChange}
+        @keydown=${this.handleKeyDown}
         variant="card-action"
         class="sgds card
         ${classMap({
@@ -125,9 +124,7 @@ export class SgdsActionCard extends CardElement {
               <slot name="icon"></slot>
               <slot name="card-subtitle"></slot>
             </div>
-            <div class="card-input">
-            ${this.type === "checkbox" ? checkbox : radio}
-            </div>
+            <div class="card-input">${this.type === "checkbox" ? checkbox : radio}</div>
           </h6>
           <h5 class="card-title" part="title"><slot name="card-title"></slot></h5>
           <p class="card-text" part="text"><slot name="card-text"></slot></p>

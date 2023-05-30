@@ -43,7 +43,7 @@ describe("<sgds-action-card>", () => {
   });
 
   it("can be semantically compare with shadowDom trees", async () => {
-    const el = await fixture(html`<sgds-action-card inputId="checkbox"></sgds-action-card>`);
+    const el = await fixture(html`<sgds-action-card></sgds-action-card>`);
     assert.shadowDom.equal(
       el,
       `
@@ -57,14 +57,15 @@ describe("<sgds-action-card>", () => {
                 <slot name="card-subtitle"></slot>
                 </div>
               <div class="card-input">
-             <sgds-checkbox checkboxid="checkbox" arialabel="checkbox"></sgds-checkbox>
+             <sgds-checkbox arialabel="checkbox"></sgds-checkbox>
             </div>
             </h6>
             <h5 class="card-title" part="title"><slot name="card-title"></slot></h5>
             <p class="card-text" part="text"><slot name="card-text"></slot></p>
           </div>
         </div>
-      `
+      `,
+      { ignoreAttributes: ["id"] }
     );
   });
 

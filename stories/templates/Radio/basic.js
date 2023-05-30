@@ -6,7 +6,6 @@ export const Template = ({
   disabled,
   isInline,
   radioValue,
-  radioId,
   ariaLabel,
   required,
   invalidFeedback,
@@ -18,7 +17,6 @@ export const Template = ({
       <sgds-radio
         .value=${radioValue}
         .disabled=${disabled}
-        .radioId=${radioId}
         .ariaLabel=${ariaLabel}
         .isInline=${isInline}
         ?checked=${checked}
