@@ -6,3 +6,4 @@ react
 src/react
 custom-elements.json
 stories/components
+.env

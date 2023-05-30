@@ -6,7 +6,8 @@ frontend:
         - rm -rf node_modules && npm ci
     build:
       commands:
-        - npm run test && npm run test:scripts && npm run build-storybook
+        - npm run test && npm run test:scripts && npm run build-storybook:$BUILD_ENV
+        - echo "TWITCH_CLIENT_ID=$TWITCH_CLIENT_ID" >> frontend/.env
   artifacts:
     baseDirectory: /storybook-static
     files:
