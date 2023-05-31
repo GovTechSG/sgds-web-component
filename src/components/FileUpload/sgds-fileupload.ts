@@ -69,17 +69,17 @@ export class SgdsFileUpload extends SgdsElement {
   cancelIcon: string = "";
 
   /** @internal */
-  @property({ type: FileList })
-  private fileList: FileList | undefined;
+  @property({ type: Object, state: true })
+  private files: FileList | undefined;
 
   /** @internal */
   @property({ type: Array })
   private selectedFiles: File[] = [];
 
-  setFileList(fileList) {
-    this.fileList = fileList;
+  setFileList(files: FileList) {
+    this.files = files;
     this.emit("sgds-files-selected");
-    //Possible to pass in the fileList
+    //Possible to pass in the files
   }
 
   // Create a ref to the input element
@@ -100,13 +100,13 @@ export class SgdsFileUpload extends SgdsElement {
   /** @internal */
   private handleInputChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
-    const fileList = inputElement.files as FileList;
+    const files = inputElement.files as FileList;
 
-    if (fileList.length > 0) {
-      this.selectedFiles = Array.from(fileList);
+    if (files.length > 0) {
+      this.selectedFiles = Array.from(files);
     }
     // Trigger a re-render of the component to update the list of selected files
-    this.setFileList(fileList);
+    this.setFileList(files);
     this.requestUpdate();
   }
 
