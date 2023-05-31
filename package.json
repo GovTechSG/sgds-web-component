@@ -1,6 +1,6 @@
 {
   "name": "@govtechsg/sgds-web-component",
-  "version": "0.0.12",
+  "version": "1.0.0-rc.0",
   "description": "",
   "main": "lib/umd/index.js",
   "module": "lib/index.js",
