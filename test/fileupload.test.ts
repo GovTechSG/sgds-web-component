@@ -3,9 +3,9 @@ import { html } from "lit";
 import "../src/components/FileUpload";
 import { SgdsFileUpload } from "../src/components/FileUpload";
 
-describe("sgds-fileupload", () => {
+describe("sgds-file-upload", () => {
   it("should be able to pass in content in between the slot", async () => {
-    const el = await fixture<SgdsFileUpload>(html` <sgds-fileupload>Hello</sgds-fileupload> `);
+    const el = await fixture<SgdsFileUpload>(html` <sgds-file-upload>Hello</sgds-file-upload> `);
 
     const slot = el.shadowRoot?.querySelector("slot");
     expect(slot).to.exist;
@@ -15,17 +15,17 @@ describe("sgds-fileupload", () => {
   });
 
   it("Should output a child input element", async () => {
-    const el = await fixture(html`<sgds-fileupload></sgds-fileupload>`);
+    const el = await fixture(html`<sgds-file-upload></sgds-file-upload>`);
     expect(el.shadowRoot?.querySelector("input")).to.exist;
   });
 
   it("Should output a child sgds-button element", async () => {
-    const el = await fixture(html`<sgds-fileupload></sgds-fileupload>`);
+    const el = await fixture(html`<sgds-file-upload></sgds-file-upload>`);
     expect(el.shadowRoot?.querySelector("sgds-button")).to.exist;
   });
 
   it("Should not display the input element modal popup when disabled prop is true", async () => {
-    const el = await fixture<SgdsFileUpload>(html`<sgds-fileupload disabled></sgds-fileupload>`);
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload disabled></sgds-file-upload>`);
 
     // simulate click on the button
     (el.shadowRoot?.querySelector("sgds-button") as HTMLButtonElement)?.click();
@@ -36,7 +36,7 @@ describe("sgds-fileupload", () => {
   });
 
   it("adds multiple attribute to input eement", async () => {
-    const el = await fixture<SgdsFileUpload>(html`<sgds-fileupload multiple></sgds-fileupload>`);
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple></sgds-file-upload>`);
 
     // check if the input element modal popup is not displayed
     const inputEl = el.shadowRoot?.querySelector("input") as HTMLInputElement;
@@ -44,7 +44,7 @@ describe("sgds-fileupload", () => {
   });
 
   it("adds multiple attribute to input element", async () => {
-    const el = await fixture<SgdsFileUpload>(html`<sgds-fileupload accept="test"></sgds-fileupload>`);
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload accept="test"></sgds-file-upload>`);
     const inputEl = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     expect(inputEl.hasAttribute("accept")).to.be.true;
     expect(inputEl?.getAttribute("accept")).to.equal("test");
@@ -57,7 +57,7 @@ describe("sgds-fileupload", () => {
       dt.items.add(file);
     });
 
-    const el = await fixture<SgdsFileUpload>(html`<sgds-fileupload>Hello</sgds-fileupload>`);
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload>Hello</sgds-file-upload>`);
     const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
     if (input) {
       input.files = dt.files;
@@ -80,7 +80,7 @@ describe("sgds-fileupload", () => {
       dt.items.add(file);
     });
 
-    const el = await fixture<SgdsFileUpload>(html`<sgds-fileupload>Hello</sgds-fileupload>`);
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload>Hello</sgds-file-upload>`);
     const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
     if (input) {
       const promise = oneEvent(el, "sgds-files-selected"); // add event listener to the component
@@ -104,7 +104,7 @@ describe("sgds-fileupload", () => {
       dt.items.add(file);
     });
 
-    const el = await fixture<SgdsFileUpload>(html`<sgds-fileupload>Hello</sgds-fileupload>`);
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload>Hello</sgds-file-upload>`);
     const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
     if (input) {
       const promise = oneEvent(el, "sgds-files-selected"); // add event listener to the component
@@ -133,7 +133,7 @@ describe("sgds-fileupload", () => {
     });
 
     const el = await fixture<SgdsFileUpload>(
-      html`<sgds-fileupload
+      html`<sgds-file-upload
         checkedIcon='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
       <path d="M2.5 8a5.  5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
       <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
@@ -142,7 +142,7 @@ describe("sgds-fileupload", () => {
       <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"/>
       <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
     </svg>'
-        >Hello</sgds-fileupload
+        >Hello</sgds-file-upload
       >`
     );
     const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
