@@ -1,5 +1,25 @@
 # Stylings
 
+## Global Styles
+
+The following css custom variable are exposed to enable users to make modifications across all web components in our library
+
+| css custom variable name | description                               |
+| ------------------------ | ----------------------------------------- |
+| --sgds-body-font-family  | Set the font family of the web components |
+| --sgds-body-font-size    | Set the font size of the web components   |
+| --sgds-body-font-weight  | Set the font weight of the web components |
+| --sgds-body-line-height  | Set the line height of the web components |
+
+```css
+
+:root {
+  --sgds-body-font-family: Helvetica;
+  --sgds-body-font-size: 5rem;
+}
+
+```
+
 ## Component Styles
 
 SGDS web component library is shipped with SGDS v2 stylings and does not require you to configure or install any other styling files.
@@ -15,9 +35,7 @@ SGDS web component library is shipped with our v2 design library, a spin-off fro
 For example, you can pass "btn-lg" and "me-2" to `buttonClasses` prop as another way to customise the stylings of your button.
 
 ```html
-
 <sgds-button buttonClasses="btn-lg me-2">Hello world</sgds-button>
-
 ```
 
 **NOTE** Do not use `class` attribute to attempt to style the shadow tree of the host. We did not the forward of `class` attribute to the shadow DOM so that users are able to style the light dom with it. Use `class` attribute when you need to style the light DOM.
