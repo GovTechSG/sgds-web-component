@@ -47,26 +47,26 @@ export class SgdsFileUpload extends SgdsElement {
   // @property({ type: String }) controlId = "";
   //** Disable the fileuploader button */
   @property({ type: Boolean, reflect: true })
-  disabled: boolean = false;
+  disabled = false;
 
   /** Allows multiple files to be listed for uploading */
   @property({ type: Boolean, reflect: true })
-  multiple: boolean = false;
+  multiple = false;
 
   /** Specify the acceptable file type  */
   @property({ type: String, reflect: true })
-  accept: string = "";
+  accept = "";
 
   /** Specifies a large or small button */
   @property({ reflect: true }) size: "sm" | "lg";
 
   /** Customize the check icon with SVG */
   @property({ type: String })
-  checkedIcon: string = "";
+  checkedIcon = "";
 
   /** Customize the cancel icon with SVG */
   @property({ type: String })
-  cancelIcon: string = "";
+  cancelIcon = "";
 
   /** @internal */
   @property({ type: Object, state: true })

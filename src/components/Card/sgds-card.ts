@@ -68,3 +68,5 @@ export class SgdsCard extends CardElement {
     `;
   }
 }
+
+export default SgdsCard;
