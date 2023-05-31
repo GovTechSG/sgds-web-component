@@ -35,6 +35,21 @@ describe("sgds-fileupload", () => {
     expect(inputEl.hasAttribute("open")).to.be.false;
   });
 
+  it("adds multiple attribute to input eement", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-fileupload multiple></sgds-fileupload>`);
+
+    // check if the input element modal popup is not displayed
+    const inputEl = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    expect(inputEl.hasAttribute("multiple")).to.be.true;
+  });
+
+  it("adds multiple attribute to input element", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-fileupload accept="test"></sgds-fileupload>`);
+    const inputEl = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    expect(inputEl.hasAttribute("accept")).to.be.true;
+    expect(inputEl?.getAttribute("accept")).to.equal("test");
+  });
+
   it("should render a ul with list of selected files using DataTransfer object", async () => {
     const fileList = [new File(["file1"], "file1.txt"), new File(["file2"], "file2.txt")];
     const dt = new DataTransfer();
