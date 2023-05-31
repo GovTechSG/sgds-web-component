@@ -31,10 +31,7 @@ module.exports = {
     "../stories/getting-started/**/*.stories.@(js|jsx|ts|tsx|mdx)",
     ...componentStories()
   ],
-  addons: [
-    "@storybook/addon-essentials",
-    "@storybook/preset-scss",
-  ],
+  addons: ["@storybook/addon-essentials", "@storybook/preset-scss"],
   framework: "@storybook/web-components",
   core: {
     builder: "@storybook/builder-webpack5"
