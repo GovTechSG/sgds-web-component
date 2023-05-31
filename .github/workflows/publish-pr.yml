@@ -25,5 +25,7 @@ jobs:
         if: contains(env.NPM_TAG, 'alpha')
       - run: npm publish --tag beta ./lib
         if: contains(env.NPM_TAG, 'beta')
+      - run: npm publish --tag rc ./lib
+        if: contains(env.NPM_TAG, 'rc')
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
