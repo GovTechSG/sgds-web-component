@@ -5,6 +5,7 @@ on:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+-alpha.[0-9]+'
       - 'v[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-rc.[0-9]+'
 
 jobs:
   publish:    
@@ -15,7 +16,7 @@ jobs:
         run: echo "NPM_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: 18
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
       - run: npm run test
@@ -24,5 +25,7 @@ jobs:
         if: contains(env.NPM_TAG, 'alpha')
       - run: npm publish --tag beta ./lib
         if: contains(env.NPM_TAG, 'beta')
+      - run: npm publish --tag rc ./lib
+        if: contains(env.NPM_TAG, 'rc')
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

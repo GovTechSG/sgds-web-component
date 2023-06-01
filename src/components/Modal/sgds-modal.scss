@@ -1,0 +1,136 @@
+// @import '../../utils/base.scss';
+//TODO: Double check with LT if still need the classes below 
+  :host {
+    --sgds-modal-width: 35rem;
+    --sgds-modal-z-index: 1055;
+    --sgds-modal-padding: 1.5rem;
+    --sgds-modal-border-radius: 5px;
+    --sgds-modal-border-width: 1px;
+    --sgds-modal-overlay-color:rgba(0,0,0,0.5);
+    display: contents;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  .modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    font-family: var(--sgds-body-font-family);
+  }
+
+  .modal-panel {
+    display: flex;
+    flex-direction: column;
+    z-index: var(--sgds-modal-z-index);
+    width: var(--sgds-modal-width);
+    max-width: calc(100% - 2.25rem);
+    max-height: calc(100% - 2.25rem);
+    background-color: white;
+    border-radius: var(--sgds-modal-border-radius);
+  }
+
+  .modal-panel:focus {
+    outline: none;
+  }
+
+  /* Ensure there's enough vertical padding for phones that don't update vh when chrome appears (e.g. iPhone) */
+  @media screen and (max-width: 420px) {
+    .modal-panel {
+      max-height: 80vh;
+    }
+  }
+
+  .modal--open .modal-panel {
+    display: flex;
+    opacity: 1;
+    transform: none;
+  }
+
+  .modal-header {
+    flex: 0 0 auto;
+    margin-bottom: 0.5rem;
+    margin-top: 0px;
+    font-weight: 700;
+    line-height: 1.33;
+    font-size: calc(1.275rem + 0.3vw);
+    display: flex;
+    padding: var(--sgds-modal-padding);
+    align-items: center;
+    border-bottom: var(--sgds-modal-border-width) solid var(--sgds-gray-400, #98a2b3);
+    &.centered{
+      border-bottom: 0;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  .modal-title {
+    flex: 1 1 auto;
+    // @extend .h3;
+    // @extend .gap-3;
+    gap: 1rem;
+    margin: 0;
+    &.centered{
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      // @extend .justify-content-center; 
+      // @extend .flex-column; 
+      // @extend .text-center; 
+      margin-left: 3rem;
+    }
+  }
+  
+  .modal-close {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    &.centered{
+      // @extend .align-self-start;
+      align-self: flex-start;
+      margin-top: -0.5rem;
+    }
+  }
+
+  .modal-body {
+    flex: 1 1 auto;
+    padding: var(--sgds-modal-padding);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .modal-footer {
+    flex: 0 0 auto;
+    text-align: right;
+    padding: var(--sgds-modal-padding);
+    padding-top:0;
+    &.centered{
+      text-align: center;
+    }
+  }
+
+  .modal-footer ::slotted(sgds-button) {
+    margin-inline-start: 0.5rem;
+  }
+
+  .modal:not(.modal--has-footer) .modal-footer {
+    display: none;
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: var(--sgds-modal-overlay-color);
+  }

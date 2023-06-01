@@ -1,0 +1,12 @@
+@import  "./sgds-mainnav-item.scss";
+
+.nav-link {
+    gap: 1rem;
+}
+.dropdown-menu {
+    margin-top: 0;
+    border: 1px solid rgba(#000, .1);
+    border-radius: 0 0 5px 5px;
+    background-color: #fff;
+    box-shadow: 0 .5rem 1rem rgba(#000, .15);
+}

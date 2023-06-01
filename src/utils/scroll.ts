@@ -1,4 +1,4 @@
-import { getOffset } from './offset';
+import { getOffset } from "./offset";
 
 const locks = new Set();
 
@@ -8,7 +8,7 @@ const locks = new Set();
  */
 export function lockBodyScrolling(lockingEl: HTMLElement) {
   locks.add(lockingEl);
-  document.body.classList.add('sl-scroll-lock');
+  document.body.classList.add("sl-scroll-lock");
 }
 
 /**
@@ -18,7 +18,7 @@ export function unlockBodyScrolling(lockingEl: HTMLElement) {
   locks.delete(lockingEl);
 
   if (locks.size === 0) {
-    document.body.classList.remove('sl-scroll-lock');
+    document.body.classList.remove("sl-scroll-lock");
   }
 }
 
@@ -28,8 +28,8 @@ export function unlockBodyScrolling(lockingEl: HTMLElement) {
 export function scrollIntoView(
   element: HTMLElement,
   container: HTMLElement,
-  direction: 'horizontal' | 'vertical' | 'both' = 'vertical',
-  behavior: 'smooth' | 'auto' = 'smooth'
+  direction: "horizontal" | "vertical" | "both" = "vertical",
+  behavior: "smooth" | "auto" = "smooth"
 ) {
   const offset = getOffset(element, container);
   const offsetTop = offset.top + container.scrollTop;
@@ -39,7 +39,7 @@ export function scrollIntoView(
   const minY = container.scrollTop;
   const maxY = container.scrollTop + container.offsetHeight;
 
-  if (direction === 'horizontal' || direction === 'both') {
+  if (direction === "horizontal" || direction === "both") {
     if (offsetLeft < minX) {
       container.scrollTo({ left: offsetLeft, behavior });
     } else if (offsetLeft + element.clientWidth > maxX) {
@@ -47,7 +47,7 @@ export function scrollIntoView(
     }
   }
 
-  if (direction === 'vertical' || direction === 'both') {
+  if (direction === "vertical" || direction === "both") {
     if (offsetTop < minY) {
       container.scrollTo({ top: offsetTop, behavior });
     } else if (offsetTop + element.clientHeight > maxY) {
