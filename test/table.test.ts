@@ -1,6 +1,6 @@
 import { assert, expect, fixture, html } from "@open-wc/testing";
-import { SgdsTable } from "../src/Table";
-import "../src/Table";
+import { SgdsTable } from "../src/components/Table";
+import "../src/components/Table";
 
 describe("Table", () => {
   it("should be able to sort the table data when a header is clicked", async () => {
@@ -9,27 +9,23 @@ describe("Table", () => {
     const tableData = [
       ["John", "30", "New York"],
       ["Alice", "25", "San Francisco"],
-      ["Bob", "40", "Chicago"],
+      ["Bob", "40", "Chicago"]
     ];
 
     // Create the table element
     const table = await fixture<SgdsTable>(
-      html`<sgds-table
-        .tableHeaders=${tableHeaders}
-        .tableData=${tableData}
-        .sort=${true}
-      ></sgds-table>`
+      html`<sgds-table .tableHeaders=${tableHeaders} .tableData=${tableData} .sort=${true}></sgds-table>`
     );
 
     // Click the header for the first column to sort by name
-    const nameHeader = table.shadowRoot!.querySelector("thead th:first-child")!;
+    const nameHeader = table.shadowRoot?.querySelector("thead th:first-child");
     (nameHeader as HTMLElement).click();
 
     // Check that the table data is sorted by name in ascending order
     assert.deepEqual(table.tableData, [
       ["Alice", "25", "San Francisco"],
       ["Bob", "40", "Chicago"],
-      ["John", "30", "New York"],
+      ["John", "30", "New York"]
     ]);
 
     // Click the header for the first column again to sort by name in descending order
@@ -39,18 +35,18 @@ describe("Table", () => {
     assert.deepEqual(table.tableData, [
       ["John", "30", "New York"],
       ["Bob", "40", "Chicago"],
-      ["Alice", "25", "San Francisco"],
+      ["Alice", "25", "San Francisco"]
     ]);
 
     // Click the header for the second column to sort by age
-    const ageHeader = table.shadowRoot!.querySelector("thead th:nth-child(2)")!;
+    const ageHeader = table.shadowRoot?.querySelector("thead th:nth-child(2)");
     (ageHeader as HTMLElement).click();
 
     // Check that the table data is sorted by age in ascending order
     assert.deepEqual(table.tableData, [
       ["Alice", "25", "San Francisco"],
       ["John", "30", "New York"],
-      ["Bob", "40", "Chicago"],
+      ["Bob", "40", "Chicago"]
     ]);
 
     // Click the header for the second column again to sort by age in descending order
@@ -60,7 +56,7 @@ describe("Table", () => {
     assert.deepEqual(table.tableData, [
       ["Bob", "40", "Chicago"],
       ["John", "30", "New York"],
-      ["Alice", "25", "San Francisco"],
+      ["Alice", "25", "San Francisco"]
     ]);
   });
 
@@ -70,9 +66,9 @@ describe("Table", () => {
     const tableData = [
       ["John", "30", "New York"],
       ["Alice", "25", "San Francisco"],
-      ["Bob", "40", "Chicago"],
+      ["Bob", "40", "Chicago"]
     ];
-  
+
     // Create the table element
     const table = await fixture<SgdsTable>(
       html`<sgds-table
@@ -82,36 +78,36 @@ describe("Table", () => {
         .removableSort=${true}
       ></sgds-table>`
     );
-  
+
     // Click the header for the first column to sort by name
-    const nameHeader = table.shadowRoot!.querySelector("thead th:first-child")!;
+    const nameHeader = table.shadowRoot?.querySelector("thead th:first-child");
     (nameHeader as HTMLElement).click();
-  
+
     // Check that the table data is sorted by name in ascending order
     assert.deepEqual(table.tableData, [
       ["Alice", "25", "San Francisco"],
       ["Bob", "40", "Chicago"],
-      ["John", "30", "New York"],
+      ["John", "30", "New York"]
     ]);
-  
+
     // Click the header for the first column again to sort by name in descending order
     (nameHeader as HTMLElement).click();
-  
+
     // Check that the table data is sorted by name in descending order
     assert.deepEqual(table.tableData, [
       ["John", "30", "New York"],
       ["Bob", "40", "Chicago"],
-      ["Alice", "25", "San Francisco"],
+      ["Alice", "25", "San Francisco"]
     ]);
-  
+
     // Click the header for the first column a third time to return to default sort
     (nameHeader as HTMLElement).click();
-  
+
     // Check that the table data is sorted by the original order
     assert.deepEqual(table.tableData, [
       ["John", "30", "New York"],
       ["Alice", "25", "San Francisco"],
-      ["Bob", "40", "Chicago"],
+      ["Bob", "40", "Chicago"]
     ]);
   });
 
@@ -121,12 +117,8 @@ describe("Table", () => {
   });
 
   it("Should have correct class when striped", async () => {
-    const el = await fixture<SgdsTable>(
-      html`<sgds-table striped></sgds-table>`
-    );
-    expect(el.shadowRoot?.querySelector("table")).to.have.class(
-      "table-striped"
-    );
+    const el = await fixture<SgdsTable>(html`<sgds-table striped></sgds-table>`);
+    expect(el.shadowRoot?.querySelector("table")).to.have.class("table-striped");
   });
 
   it("Should have correct class when hover", async () => {
@@ -135,62 +127,35 @@ describe("Table", () => {
   });
 
   it("Should have correct class when bordered", async () => {
-    const el = await fixture<SgdsTable>(
-      html`<sgds-table bordered></sgds-table>`
-    );
-    expect(el.shadowRoot?.querySelector("table")).to.have.class(
-      "table-bordered"
-    );
+    const el = await fixture<SgdsTable>(html`<sgds-table bordered></sgds-table>`);
+    expect(el.shadowRoot?.querySelector("table")).to.have.class("table-bordered");
   });
 
   it("Should have correct class when borderless", async () => {
-    const el = await fixture<SgdsTable>(
-      html`<sgds-table borderless></sgds-table>`
-    );
-    expect(el.shadowRoot?.querySelector("table")).to.have.class(
-      "table-borderless"
-    );
+    const el = await fixture<SgdsTable>(html`<sgds-table borderless></sgds-table>`);
+    expect(el.shadowRoot?.querySelector("table")).to.have.class("table-borderless");
   });
 
   it("Should have correct class when small", async () => {
-    const el = await fixture<SgdsTable>(
-      html`<sgds-table size="sm"></sgds-table>`
-    );
+    const el = await fixture<SgdsTable>(html`<sgds-table size="sm"></sgds-table>`);
     expect(el.shadowRoot?.querySelector("table")).to.have.class("table-sm");
   });
 
   it("Should have correct class when dark", async () => {
-    const el = await fixture<SgdsTable>(
-      html`<sgds-table variant="dark"></sgds-table>`
-    );
+    const el = await fixture<SgdsTable>(html`<sgds-table variant="dark"></sgds-table>`);
     expect(el.shadowRoot?.querySelector("table")).to.have.class("table-dark");
   });
-
   it("Should have responsive wrapper with tabindex", async () => {
-    const el = await fixture<SgdsTable>(
-      html`<sgds-table responsive="true"></sgds-table>`
-    );
+    const el = await fixture<SgdsTable>(html`<sgds-table responsive="always"></sgds-table>`);
 
-    expect(
-      el.shadowRoot
-        ?.querySelector("div")
-        ?.classList.contains("table-responsive")
-    ).to.be.true;
-    expect(el.shadowRoot?.querySelector("div")).to.have.attribute(
-      "tabindex",
-      "0"
-    );
+    expect(el.shadowRoot?.querySelector("div")?.classList.contains("table-responsive")).to.be.true;
+    expect(el.shadowRoot?.querySelector("div")).to.have.attribute("tabindex", "0");
   });
 
   it("Should have responsive breakpoints", async () => {
-    const el = await fixture<SgdsTable>(
-      html`<sgds-table responsive="md"></sgds-table>`
-    );
-    expect(
-      el.shadowRoot
-        ?.querySelector("div")
-        ?.classList.contains("table-responsive-md")
-    ).to.be.true;
+    const el = await fixture<SgdsTable>(html`<sgds-table responsive="md"></sgds-table>`);
+    expect(el.shadowRoot?.querySelector("div")?.classList.contains("table-responsive-md")).to.be.true;
   });
-
 });
+
+//TODO: Test cases needs to be revised :3

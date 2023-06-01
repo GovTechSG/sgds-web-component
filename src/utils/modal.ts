@@ -1,10 +1,10 @@
-import { getTabbableBoundary } from './tabbable';
+import { getTabbableBoundary } from "./tabbable";
 
 let activeModals: HTMLElement[] = [];
 
 export default class Modal {
   element: HTMLElement;
-  tabDirection: 'forward' | 'backward' = 'forward';
+  tabDirection: "forward" | "backward" = "forward";
 
   constructor(element: HTMLElement) {
     this.element = element;
@@ -15,16 +15,16 @@ export default class Modal {
 
   activate() {
     activeModals.push(this.element);
-    document.addEventListener('focusin', this.handleFocusIn);
-    document.addEventListener('keydown', this.handleKeyDown);
-    document.addEventListener('keyup', this.handleKeyUp);
+    document.addEventListener("focusin", this.handleFocusIn);
+    document.addEventListener("keydown", this.handleKeyDown);
+    document.addEventListener("keyup", this.handleKeyUp);
   }
 
   deactivate() {
     activeModals = activeModals.filter(modal => modal !== this.element);
-    document.removeEventListener('focusin', this.handleFocusIn);
-    document.removeEventListener('keydown', this.handleKeyDown);
-    document.removeEventListener('keyup', this.handleKeyUp);
+    document.removeEventListener("focusin", this.handleFocusIn);
+    document.removeEventListener("keydown", this.handleKeyDown);
+    document.removeEventListener("keyup", this.handleKeyUp);
   }
 
   isActive() {
@@ -34,11 +34,11 @@ export default class Modal {
 
   checkFocus() {
     if (this.isActive()) {
-      if (!this.element.matches(':focus-within')) {
+      if (!this.element.matches(":focus-within")) {
         const { start, end } = getTabbableBoundary(this.element);
-        const target = this.tabDirection === 'forward' ? start : end;
+        const target = this.tabDirection === "forward" ? start : end;
 
-        if (typeof target?.focus === 'function') {
+        if (typeof target?.focus === "function") {
           target.focus({ preventScroll: true });
         }
       }
@@ -50,8 +50,8 @@ export default class Modal {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Tab' && event.shiftKey) {
-      this.tabDirection = 'backward';
+    if (event.key === "Tab" && event.shiftKey) {
+      this.tabDirection = "backward";
 
       // Ensure focus remains trapped after the key is pressed
       requestAnimationFrame(() => this.checkFocus());
@@ -59,6 +59,6 @@ export default class Modal {
   }
 
   handleKeyUp() {
-    this.tabDirection = 'forward';
+    this.tabDirection = "forward";
   }
 }

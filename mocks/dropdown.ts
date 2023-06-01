@@ -1,8 +1,8 @@
 import { html } from "lit";
 import { customElement } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
-import { DropdownElement } from "../src/utils/dropdown-element";
-
+import { DropdownElement } from "../src/base/dropdown-element";
+import genId from "../src/utils/generateId";
 @customElement("mock-dropdown")
 export class MockDropdown extends DropdownElement {
   render() {
@@ -14,7 +14,7 @@ export class MockDropdown extends DropdownElement {
           aria-expanded="${this.menuIsOpen}"
           ${ref(this.myDropdown)}
           @click=${() => this._onClickButton()}
-          id=${this.togglerId}
+          id=${genId("dropdown", "button")}
         >
           Mock Dropdown
         </button>

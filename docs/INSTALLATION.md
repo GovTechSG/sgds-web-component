@@ -11,10 +11,6 @@ The CDN loader registers all SGDS elements up front. Note that, if you're only u
 
 <script type="module" src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component"></script>
 
-//cherry picked
-<script type="module" src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component/${Component}/index.js"></script>
-
-
 ```
 
 ## Local Installation
@@ -27,7 +23,7 @@ npm install @govtechsg/sgds-web-component
 
 ```
 
-and import the library once in your entry point
+and import the library once in your entry point and use it globally throughout your project
 
 ```js
 

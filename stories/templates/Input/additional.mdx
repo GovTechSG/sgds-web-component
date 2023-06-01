@@ -1,0 +1,22 @@
+## Validation
+
+`SgdsInput` runs native HTMLInputElement methods to check on the [constraint validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation) of the input and applies our own validation stylings
+
+Set `hasFeedback` to true to enable sgds validation stylings.
+
+export const ValidationTemplate = () => 
+    html`
+    <sgds-input 
+    name="input1" 
+    id="input1" 
+    minlength="5" 
+    hasFeedback="true" 
+    invalidFeedback="Minimum length 5"
+    hintText="At least 5 characters"
+    label="Name"
+    >
+    </sgds-input>`
+
+<Canvas>
+  <Story name='Validation'>{ValidationTemplate.bind({})}</Story>
+</Canvas>

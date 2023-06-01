@@ -29,10 +29,10 @@ describe("link-element", () => {
     const el = await fixture(html`<mock-link active>test</mock-link>`);
     expect(el.shadowRoot?.querySelector("a")).to.have.class("active");
   });
-  it('disabled prop apply disable props and attr to anchor element', async() => {
+  it("disabled prop apply disable props and attr to anchor element", async () => {
     const el = await fixture(html`<mock-link disabled>test</mock-link>`);
     expect(el.shadowRoot?.querySelector("a")).to.have.class("disabled");
     expect(el.shadowRoot?.querySelector("a")).to.have.attribute("disabled");
     expect(el.shadowRoot?.querySelector("a")).to.have.attribute("aria-disabled", "true");
-  })
+  });
 });

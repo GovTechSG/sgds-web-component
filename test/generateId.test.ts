@@ -13,6 +13,6 @@ describe("generateId function", () => {
   });
 
   it("when suffix specified , should return with suffix", () => {
-    expect(generateId("test", 'test')).to.equal("id-3456-sgds-test-test");
+    expect(generateId("test", "test")).to.equal("id-3456-sgds-test-test");
   });
 });

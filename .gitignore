@@ -2,3 +2,7 @@ node_modules
 lib
 test-outdir
 storybook-static
+react
+src/react
+custom-elements.json
+stories/components

@@ -1,17 +1,14 @@
-import { SgdsAlert } from "../src/Alert/sgds-alert";
-import "../src/Alert/sgds-alert";
-import { fixture, assert, expect, aTimeout, waitUntil } from "@open-wc/testing";
+import { assert, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
-import sinon, { SinonSpy } from "sinon";
-import { SgdsButton } from "../src/Button";
-import { SgdsCloseButton } from "../src/CloseButton";
+import sinon from "sinon";
+import "../src/components/Alert/sgds-alert";
+import { SgdsAlert } from "../src/components/Alert/sgds-alert";
+import { SgdsCloseButton } from "../src/components/CloseButton";
 
 describe("<Alert>", () => {
   it("Should output a alert with message", async () => {
     const message = "This is a test alert";
-    const el = await fixture<SgdsAlert>(html`
-      <sgds-alert>${message}</sgds-alert>
-    `);
+    const el = await fixture<SgdsAlert>(html` <sgds-alert>${message}</sgds-alert> `);
 
     const alert = el.shadowRoot?.querySelector(".alert");
     assert.exists(alert, "Alert element exists");
@@ -22,9 +19,7 @@ describe("<Alert>", () => {
   });
 
   it("Should have dismissible style", async () => {
-    const el = await fixture<SgdsAlert>(html`
-      <sgds-alert dismissible></sgds-alert>
-    `);
+    const el = await fixture<SgdsAlert>(html` <sgds-alert dismissible></sgds-alert> `);
 
     const alert = el.shadowRoot?.querySelector(".sgds.alert");
     expect(alert?.classList.value).to.contain("alert-dismissible");
@@ -37,36 +32,39 @@ describe("<Alert>", () => {
   });
 
   it("Should trigger the handleCloseClick method and emit the sgds-hide event on dismiss click of sgds-closebutton", async () => {
-    const el = await fixture<SgdsAlert>(
-      html`<sgds-alert dismissible></sgds-alert>`
-    );
+    const el = await fixture<SgdsAlert>(html`<sgds-alert dismissible></sgds-alert>`);
     const onCloseSpy = sinon.spy();
     el.addEventListener("sgds-hide", onCloseSpy);
 
-    const closeButton = el.shadowRoot?.querySelector(
-      "sgds-closebutton"
-    ) as SgdsCloseButton;
+    const closeButton = el.shadowRoot?.querySelector("sgds-closebutton") as SgdsCloseButton;
     closeButton?.click();
 
     expect(onCloseSpy).to.have.been.calledOnce;
   });
 
- 
   it("Should use variant class", async () => {
-    const el = await fixture<SgdsAlert>(html`
-      <sgds-alert variant="warning"></sgds-alert>
-    `);
+    const el = await fixture<SgdsAlert>(html` <sgds-alert variant="warning"></sgds-alert> `);
 
     const alert = el.shadowRoot?.querySelector(".alert");
     assert.isTrue(alert?.classList.contains("alert-warning"));
   });
 
-  it("should have fade and show class when rendered", async () => {
-    const el = await fixture(
-      html`<sgds-alert variant="primary">Test alert</sgds-alert>`
-    );
+  it("should have fade class when rendered", async () => {
+    const el = await fixture(html`<sgds-alert variant="primary">Test alert</sgds-alert>`);
     const base = el.shadowRoot?.querySelector(".sgds.alert");
     expect(base?.classList.contains("fade")).to.be.true;
+  });
+
+  it("should not have show class when rendered", async () => {
+    const el = await fixture(html`<sgds-alert variant="primary">Test alert</sgds-alert>`);
+    const base = el.shadowRoot?.querySelector(".sgds.alert");
+    expect(base?.classList.contains("show")).to.be.false;
+  });
+
+  it("when show is true, alert should have show class", async () => {
+    const el = await fixture(html`<sgds-alert variant="primary" show>Test alert</sgds-alert>`);
+    const base = el.shadowRoot?.querySelector(".sgds.alert");
+    console.log(base);
     expect(base?.classList.contains("show")).to.be.true;
   });
 
