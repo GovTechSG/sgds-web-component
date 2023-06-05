@@ -5,19 +5,15 @@ import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-stepper.scss";
 
 // TODO: any events emitted?
+
 @customElement("sgds-stepper")
 export class SgdsStepper extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
+  /** The header name for steps in chronological title
+   */
   @property({ type: Array })
-  steps = [
-    {
-      title: 1,
-      stepHeader: "Marker title 1"
-    },
-    { title: 2, stepHeader: "Marker title 2" },
-    { title: 3, stepHeader: "Marker title 3" }
-  ];
+  steps: string[] = ["Marker title 1", "Marker title 2", "Marker title 3"];
 
   @property({ type: Number })
   activeStep: number;
@@ -68,9 +64,9 @@ export class SgdsStepper extends SgdsElement {
               })}"
               @click="${() => this._onStepperItemClick(index)}"
             >
-              <div class="stepper-marker">${step.title}</div>
+              <div class="stepper-marker">${index + 1}</div>
               <div class="stepper-detail">
-                <p><b>${step.stepHeader}</b></p>
+                <p><b>${step}</b></p>
               </div>
             </div>
           `;
