@@ -16,12 +16,14 @@ describe("sgds-stepper", () => {
   });
   it("should render the correct number of steps when passed in steps prop", async () => {
     const el = await fixture(html`
-      <sgds-stepper
-        steps='[{"title": 1, "stepHeader": "Marker title 1"},{"title": 2, "stepHeader": "Marker title 2"},{"title": 3, "stepHeader": "Marker title 3"},{"title": 4, "stepHeader": "Marker title 4"}]'
-      ></sgds-stepper>
+      <sgds-stepper steps='["Marker title 1", "Marker title 2", "Marker title 3", "Marker title 4"]'></sgds-stepper>
     `);
     const stepperItems = el.shadowRoot?.querySelectorAll(".stepper-item");
     expect(stepperItems?.length).to.equal(4);
+  });
+  it("should have default activeStep=0", async () => {
+    const el = await fixture<SgdsStepper>(html` <sgds-stepper></sgds-stepper> `);
+    expect(el.activeStep).to.equal(0);
   });
 
   it("should have the is-active class on step 1 when activeStep set to 0", async () => {
@@ -154,5 +156,18 @@ describe("sgds-stepper, sgds-button interactions", () => {
       expect(stepper?.shadowRoot?.querySelectorAll(".stepper-item")[1]).not.to.have.class("is-active");
       expect(stepper?.shadowRoot?.querySelectorAll(".stepper-item")[0]).to.have.class("is-active");
     }
+  });
+
+  it("when reset method is fired, activeStep is back to defaultValue", async () => {
+    const el = await fixture<SgdsStepper>(html` <sgds-stepper activeStep="1"></sgds-stepper> `);
+    expect(el.defaultActiveStep).to.equal(1);
+    expect(el.activeStep).to.equal(1);
+
+    el.incrementStep();
+    await el.updateComplete;
+    expect(el.activeStep).to.equal(2);
+    el.reset();
+    await el.updateComplete;
+    expect(el.activeStep).to.equal(el.defaultActiveStep);
   });
 });
