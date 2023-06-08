@@ -64,7 +64,7 @@ describe("makeArgTypes()", () => {
       default: '""',
       attribute: "content"
     }
-  ]
+  ];
   const typeOthersInput = [
     {
       kind: "field",

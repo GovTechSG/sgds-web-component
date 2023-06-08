@@ -38,20 +38,20 @@ export const StepperFormTemplate = ({ steps }) => {
         </div>
       </div>
     </sgds-stepper>
-    <div class="d-flex justify-content-between">
+    <div style="display:flex;justify-content:space-between;margin-top:2rem;">
       <div>
-        <sgds-button class="me-3" refId="myStepper" methodType="increment" variant="primary" @click="${incrementStep}"
+        <sgds-button class="me-3"  variant="primary" @click="${nextStep}"
           >Next</sgds-button
         >
-        <sgds-button refId="myStepper" methodType="decrement" @click="${decrementStep}" variant="secondary"
+        <sgds-button @click="${previousStep}" variant="secondary"
           >Back</sgds-button
         >
       </div>
       <div>
-        <sgds-button class="m-2" refId="myStepper" methodType="first" variant="danger" @click="${firstStep}"
+        <sgds-button class="m-2" variant="danger" @click="${firstStep}"
           >Go to first page</sgds-button
         >
-        <sgds-button class="m-2" refId="myStepper" methodType="last" variant="warning" @click="${lastStep}"
+        <sgds-button class="m-2" variant="warning" @click="${lastStep}"
           >Go to last page</sgds-button
         >
       </div>
@@ -59,13 +59,13 @@ export const StepperFormTemplate = ({ steps }) => {
   `;
 };
 
-export const incrementStep = () => {
+export const nextStep = () => {
   const stepper = document.querySelector("#myStepper");
-  stepper.incrementStep();
+  stepper.nextStep();
 };
-export const decrementStep = () => {
+export const previousStep = () => {
   const stepper = document.querySelector("#myStepper");
-  stepper.decrementStep();
+  stepper.previousStep();
 };
 export const lastStep = () => {
   const stepper = document.querySelector("#myStepper");
