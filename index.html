@@ -134,6 +134,25 @@
 
     <main>
         <div class="container">
+            <h2>Datepicker</h2>
+            <sgds-datepicker minDate="2023-05-19T12:00:00.000Z" maxDate="2023-05-23T12:00:00.000Z" .displayDateInput="${new Date('2020-01-01')}"></sgds-datepicker>
+<br><br><br><br><br><br><br><br><br>
+            <sgds-datepicker mode="range" dateFormat="YYYY/MM/DD" ></sgds-datepicker>
+        </div>
+
+        <div class="container">
+            <h2>Dropdown</h2>
+            <div class="row">
+                <sgds-dropdown togglerText="Dropdown">
+                    <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
+                    <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
+                    <sgds-dropdown-item href="#" disabled>
+                      item #3
+                    </sgds-dropdown-item>
+                  </sgds-dropdown>
+            </div>
+        </div>
+        <div class="container">
             <h2>Accordion</h2>
             <div class="row">
                 <sgds-accordion>

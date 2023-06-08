@@ -1,0 +1,36 @@
+:host {
+  --datepicker-theme-color: #5925dc;
+  --datepicker-background-color: #ECE6FB;
+}
+
+.datepicker-body {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.monthpicker,
+.yearpicker {
+  display: grid;
+  grid-template-columns: repeat(3, 48px);
+  grid-template-rows: repeat(4, 48px);
+  justify-content: space-between;
+  align-content: space-between;
+  padding: 1rem 1rem 0;
+}
+
+.month,
+.year {
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  &.active {
+    color: var(--datepicker-theme-color);
+    background-color: var(--datepicker-background-color);
+  }
+}
+
+td {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+}

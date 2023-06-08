@@ -1,0 +1,16 @@
+:host {
+  --sgds-body-line-height: 2rem;
+  --input-border-radius: .3125rem;
+}
+.form {
+  &-label,
+  &-text {
+    line-height: var(--sgds-body-line-height);
+  }
+}
+
+.form {
+    &-control {
+        border-radius: var(--input-border-radius);
+    }
+}
