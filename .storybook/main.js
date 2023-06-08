@@ -15,7 +15,8 @@ const V1_0_0_rc = [
   "Radio",
   "Sidenav",
   "Table",
-  "Textarea"
+  "Textarea",
+  "Stepper"
 ];
 
 const componentStories = () => {
