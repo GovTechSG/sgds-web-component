@@ -143,7 +143,7 @@ export class DropdownElement extends SgdsElement {
 
     this.myDropdown.value.addEventListener("hide.bs.dropdown", () => {
       this.menuIsOpen = false;
-      this._resetMenu();
+      // this._resetMenu();
       this.emit("sgds-hide");
     });
 

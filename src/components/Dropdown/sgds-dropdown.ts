@@ -8,6 +8,7 @@ export type DropDirection = "left" | "right" | "up" | "down";
 @customElement("sgds-dropdown")
 export class SgdsDropdown extends DropdownElement {
   static styles = [DropdownElement.styles, styles];
+
   constructor() {
     super();
     this.modifierOpt = [

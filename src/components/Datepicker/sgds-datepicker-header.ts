@@ -100,7 +100,7 @@ export class SgdsCalendarHeader extends SgdsElement {
 
   render() {
     return html`
-      <div class="datepicker-header dropdown-header">
+      <div class="datepicker-header dropdown-header" role="heading">
         <div class="text-center d-flex justify-content-between">
           <svg
             @click="${this.handleClickPrevious}"
