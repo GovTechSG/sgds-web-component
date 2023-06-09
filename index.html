@@ -103,6 +103,11 @@
         <sgds-mainnav-item href="#">About</sgds-mainnav-item>
         <sgds-mainnav-item href="#" slot="end" class="test test2">Info</sgds-mainnav-item>
         <sgds-mainnav-item href="#" slot="end">Contact Us</sgds-mainnav-item>
+        <sgds-mainnav-dropdown togglerText="Dropdown" menuIsOpen>
+            <sgds-dropdown-item href="https://google.com">Item 1</sgds-dropdown-item>
+            <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
+            <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
+          </sgds-mainnav-dropdown>
         <sgds-button slot="end">Login</sgds-button>
         <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px">
         </dev-console-widget>
@@ -411,7 +416,7 @@
             <div class="container">
                 <h2>Dropdown</h2>
                 <div class="row">
-                    <sgds-dropdown togglerText="Dropdown">
+                    <sgds-dropdown togglerText="Dropdown" menuIsOpen>
                         <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
                         <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
                         <sgds-dropdown-item href="#" disabled>

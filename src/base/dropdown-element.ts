@@ -1,11 +1,11 @@
-import { property, state } from "lit/decorators.js";
-import { Dropdown } from "bootstrap";
-import * as Popper from "@popperjs/core";
 import type { StrictModifiers } from "@popperjs/core";
-import { createRef, Ref } from "lit/directives/ref.js";
-import mergeDeep from "../utils/mergeDeep";
-import genId from "../utils/generateId";
+import * as Popper from "@popperjs/core";
+import { Dropdown } from "bootstrap";
+import { property, state } from "lit/decorators.js";
+import { Ref, createRef } from "lit/directives/ref.js";
 import { SgdsDropdownItem } from "../components/Dropdown/sgds-dropdown-item";
+import genId from "../utils/generateId";
+import mergeDeep from "../utils/mergeDeep";
 import SgdsElement from "./sgds-element";
 
 const ARROW_DOWN = "ArrowDown";
@@ -34,6 +34,7 @@ export type DropDirection = "left" | "right" | "up" | "down";
 export class DropdownElement extends SgdsElement {
   static styles = SgdsElement.styles;
 
+  
   /** @internal */
   myDropdown: Ref<HTMLElement> = createRef();
   /** @internal */
@@ -67,7 +68,7 @@ export class DropdownElement extends SgdsElement {
   variant: DropdownButtonVariant = "secondary";
 
   /** When true, dropdown menu shows on first load */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   menuIsOpen = false;
 
   /** Controls the close behaviour of dropdown menu. By default menu auto-closes when SgdsDropdownItem or area outside dropdown is clicked */
@@ -92,6 +93,7 @@ export class DropdownElement extends SgdsElement {
   modifierOpt: StrictModifiers[] = [];
 
   firstUpdated() {
+    console.log(this.myDropdown.value)
     this.bsDropdown = new Dropdown(this.myDropdown.value, {
       // autoClose not working as bootstrap is using attribute data-bs-toggle="dropdown" to configure autoclose. But it doesnt look into this attribute in the shadow dom
       reference: "toggle", // working
@@ -143,7 +145,6 @@ export class DropdownElement extends SgdsElement {
 
     this.myDropdown.value.addEventListener("hide.bs.dropdown", () => {
       this.menuIsOpen = false;
-      this._resetMenu();
       this.emit("sgds-hide");
     });
 
@@ -159,7 +160,6 @@ export class DropdownElement extends SgdsElement {
       });
       addEventListener("click", e => this._handleClickOutOfElement(e, this));
     }
-    if (this.menuIsOpen) this.bsDropdown.show();
   }
   /** When invoked, opens the dropdown menu */
   public showMenu() {
@@ -184,7 +184,6 @@ export class DropdownElement extends SgdsElement {
       i.removeAttribute("tabindex");
     });
   }
-
   _getMenuItems(): SgdsDropdownItem[] {
     return this.shadowRoot.querySelector("slot").assignedElements({ flatten: true }) as SgdsDropdownItem[];
   }

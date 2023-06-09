@@ -1,8 +1,9 @@
 import { html } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, queryAsync } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
-import styles from "./sgds-dropdown.scss";
 import { DropdownElement } from "../../base/dropdown-element";
+import { SgdsButton } from "../Button";
+import styles from "./sgds-dropdown.scss";
 
 export type DropDirection = "left" | "right" | "up" | "down";
 @customElement("sgds-dropdown")
@@ -18,6 +19,21 @@ export class SgdsDropdown extends DropdownElement {
         }
       }
     ];
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    this.addEventListener("sgds-hide", this._resetMenu)
+  }
+  @queryAsync("sgds-button")
+  dropdownRef: Promise<SgdsButton>;
+
+   async firstUpdated() {
+    super.firstUpdated();
+    if (this.menuIsOpen) {
+      await this.dropdownRef;
+      this.bsDropdown.show();
+    }
   }
   render() {
     return html`
