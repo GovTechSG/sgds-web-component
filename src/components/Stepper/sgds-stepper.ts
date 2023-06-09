@@ -86,6 +86,13 @@ export class SgdsStepper extends SgdsElement {
   _handleActiveStepChange() {
     this.emit("sgds-arrived");
   }
+  
+  /**@internal */
+  _handleKeyDown(event: KeyboardEvent, index: number) {
+    if(event.key === "Enter"){
+      this._onStepperItemClick(index)
+    }
+  }
 
   render() {
     return html`
@@ -100,6 +107,7 @@ export class SgdsStepper extends SgdsElement {
               })}"
               tabindex=${this.activeStep > index ? "0" : "-1"}
               @click="${() => this._onStepperItemClick(index)}"
+              @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e,index)}
             >
               <div class="stepper-marker">${index + 1}</div>
               <div class="stepper-detail">
