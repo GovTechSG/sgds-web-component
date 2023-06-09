@@ -1,10 +1,26 @@
 import { html } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, queryAsync } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../src/base/dropdown-element";
 import genId from "../src/utils/generateId";
 @customElement("mock-dropdown")
 export class MockDropdown extends DropdownElement {
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    this.addEventListener("sgds-hide", this._resetMenu)
+  }
+  
+  @queryAsync("button")
+  button: Promise<HTMLButtonElement>;
+
+  async firstUpdated() {
+    super.firstUpdated();
+    if (this.menuIsOpen) {
+      const button = await this.button;
+      button.click();
+    }
+  }
   render() {
     return html`
       <div>
