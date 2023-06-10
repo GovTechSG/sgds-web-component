@@ -34,15 +34,14 @@ export type DropDirection = "left" | "right" | "up" | "down";
 export class DropdownElement extends SgdsElement {
   static styles = SgdsElement.styles;
 
-  
   /** @internal */
   myDropdown: Ref<HTMLElement> = createRef();
   /** @internal */
   bsDropdown: Dropdown = null;
 
-  /** Controls auto-flipping of menu */
-  @property({ type: Boolean, reflect: true })
-  noFlip = false;
+  /** @internal Controls auto-flipping of menu */
+  @property({ type: Boolean, state: true })
+  protected noFlip = false;
 
   /** When true, aligns right edge of menu with right edge of button */
   @property({ type: Boolean, reflect: true })
@@ -93,7 +92,6 @@ export class DropdownElement extends SgdsElement {
   modifierOpt: StrictModifiers[] = [];
 
   firstUpdated() {
-    console.log(this.myDropdown.value)
     this.bsDropdown = new Dropdown(this.myDropdown.value, {
       // autoClose not working as bootstrap is using attribute data-bs-toggle="dropdown" to configure autoclose. But it doesnt look into this attribute in the shadow dom
       reference: "toggle", // working

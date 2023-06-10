@@ -5,12 +5,11 @@ import { DropdownElement } from "../src/base/dropdown-element";
 import genId from "../src/utils/generateId";
 @customElement("mock-dropdown")
 export class MockDropdown extends DropdownElement {
-
   connectedCallback(): void {
-    super.connectedCallback()
-    this.addEventListener("sgds-hide", this._resetMenu)
+    super.connectedCallback();
+    this.addEventListener("sgds-hide", this._resetMenu);
   }
-  
+
   @queryAsync("button")
   button: Promise<HTMLButtonElement>;
 

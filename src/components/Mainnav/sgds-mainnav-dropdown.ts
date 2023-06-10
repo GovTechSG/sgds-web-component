@@ -12,7 +12,7 @@ export class SgdsMainnavDropdown extends DropdownElement {
     super.connectedCallback();
     this.addEventListener("sgds-hide", this._resetMenu);
   }
-
+  /**@internal */
   @queryAsync("a")
   dropdownRef: Promise<HTMLAnchorElement>;
 
