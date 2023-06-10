@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { customElement, queryAsync } from "lit/decorators.js";
+import { customElement, queryAsync, property } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
 import { SgdsButton } from "../Button";
@@ -9,6 +9,7 @@ export type DropDirection = "left" | "right" | "up" | "down";
 @customElement("sgds-dropdown")
 export class SgdsDropdown extends DropdownElement {
   static styles = [DropdownElement.styles, styles];
+
   constructor() {
     super();
     this.modifierOpt = [
@@ -20,15 +21,18 @@ export class SgdsDropdown extends DropdownElement {
       }
     ];
   }
+  /** Controls auto-flipping of menu */
+  @property({ type: Boolean, reflect: true })
+  public noFlip = false;
 
   connectedCallback(): void {
-    super.connectedCallback()
-    this.addEventListener("sgds-hide", this._resetMenu)
+    super.connectedCallback();
+    this.addEventListener("sgds-hide", this._resetMenu);
   }
   @queryAsync("sgds-button")
   dropdownRef: Promise<SgdsButton>;
 
-   async firstUpdated() {
+  async firstUpdated() {
     super.firstUpdated();
     if (this.menuIsOpen) {
       await this.dropdownRef;
