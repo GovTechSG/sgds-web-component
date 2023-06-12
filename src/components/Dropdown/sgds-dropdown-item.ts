@@ -2,20 +2,19 @@ import { html } from "lit";
 import { customElement, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import LinkElement from "../../base/link-element";
-import styles from "./sgds-dropdown.scss";
 /**
- * @summary SgdsDropdownItem are navigation links built with HTMLAnchorElement. It should be used in the default slot of SgdsDropdown
+ * @summary `SgdsDropdownItem` are navigation links built with `HTMLAnchorElement`. It should be used in the default slot of `SgdsDropdown`
  */
 @customElement("sgds-dropdown-item")
 export class SgdsDropdownItem extends LinkElement {
-  static styles = [LinkElement.styles, styles];
+  static styles = [LinkElement.styles];
 
   /**@internal */
   @query("a")
   private anchor: HTMLElement;
 
   connectedCallback(): void {
-    super.connectedCallback()
+    super.connectedCallback();
     this.addEventListener("keydown", (e: KeyboardEvent) => {
       if (e.key === "Enter") {
         this.anchor.click();
