@@ -20,3 +20,5 @@ export const Template = args =>
   </sgds-card>`;
 
 export const args = {};
+
+export const parameters = {};

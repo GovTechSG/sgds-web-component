@@ -16,9 +16,9 @@ export const Template = ({
 }) => {
   return html`
     <sgds-dropdown
-      .togglerText=${togglerText}
-      .noFlip=${noFlip}
-      .drop=${drop}
+      togglerText=${togglerText}
+      ?noFlip=${noFlip}
+      drop=${drop}
       .menuAlignRight=${menuAlignRight}
       .popperOpts=${popperOpts}
       .variant=${variant}
@@ -39,4 +39,8 @@ export const args = {
   togglerText: "Dropdown",
   variant: "secondary",
   href: "#"
+};
+
+export const parameters = {
+  layout: "centered"
 };
