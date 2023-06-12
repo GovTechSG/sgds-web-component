@@ -53,6 +53,8 @@ export const Template = args =>
 
 export const args = {};
 
+export const parameters= {};
+
 ```
 
 Beyond basic template, any additional documentation and storybook template examples should go into `stories/templates/<Component>/additional.mdx file`.

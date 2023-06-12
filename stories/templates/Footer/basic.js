@@ -156,3 +156,5 @@ export const args = {
     }
   ]
 };
+
+export const parameters = {};

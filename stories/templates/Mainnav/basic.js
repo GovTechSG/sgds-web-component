@@ -26,6 +26,8 @@ export const Template = ({ expand, brandHref, active, href, disabledMNI, menuIsO
 };
 
 export const args = {};
+
+export const parameters = {};
 // export const storyProps = {
 //   height: "500px",
 // }

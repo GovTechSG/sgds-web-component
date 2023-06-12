@@ -42,7 +42,7 @@ for (const [key, value] of Object.entries(groupedComponents)) {
   const source = prettier.format(
     `
 import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
-import {Template, args} from '../templates/${key}/basic.js';
+import {Template, args, parameters} from '../templates/${key}/basic.js';
 import '../../lib/index.js';
 import { html } from "lit-html";
 
@@ -54,7 +54,7 @@ import { html } from "lit-html";
 # ${key}  
 ${summary ? summary +"\n" : "\n"}
 <Canvas>
-  <Story name="Basic" args={args}>
+  <Story name="Basic" args={args} parameters={parameters}>
     {Template.bind({})}
   </Story>
 </Canvas>

@@ -58,3 +58,5 @@ export const Template = ({ alwaysOpen, active, href, activeSNL, hrefSNL, disable
 };
 
 export const args = {};
+
+export const parameters = {};
