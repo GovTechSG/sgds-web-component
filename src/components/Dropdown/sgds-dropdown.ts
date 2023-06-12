@@ -27,6 +27,7 @@ export class SgdsDropdown extends DropdownElement {
 
   constructor() {
     super();
+    /**@internal */
     this.modifierOpt = [
       {
         name: "offset",
