@@ -25,7 +25,6 @@ export class MockDropdown extends DropdownElement {
     return html`
       <div>
         <button
-          variant="outline-${this.variant}"
           ?disabled=${this.disabled}
           aria-expanded="${this.menuIsOpen}"
           ${ref(this.myDropdown)}
