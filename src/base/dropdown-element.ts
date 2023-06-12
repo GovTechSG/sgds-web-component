@@ -13,15 +13,6 @@ const ARROW_UP = "ArrowUp";
 const ESC = "Escape";
 const ENTER = "Enter";
 
-export type DropdownButtonVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info"
-  | "light"
-  | "dark";
 export type DropDirection = "left" | "right" | "up" | "down";
 
 /**
@@ -43,15 +34,15 @@ export class DropdownElement extends SgdsElement {
   @property({ type: Boolean, state: true })
   protected noFlip = false;
 
-  /** When true, aligns right edge of menu with right edge of button */
-  @property({ type: Boolean, reflect: true })
-  menuAlignRight = false;
+  /** @internal When true, aligns right edge of menu with right edge of button */
+  @property({ type: Boolean, reflect: true, state: true })
+  protected menuAlignRight = false;
 
-  /** The drop position of menu relative to the toggle button */
-  @property({ type: String, reflect: true })
-  drop: DropDirection = "down";
+  /** @internal The drop position of menu relative to the toggle button */
+  @property({ type: String, reflect: true, state: true })
+  protected drop: DropDirection = "down";
 
-  /** Additional configuration to pass to Popper.js. See https://popper.js.org/ for config opts */
+  /**  Additional configuration to pass to Popper.js. See https://popper.js.org/ for config opts */
   @property({ type: Object })
   popperOpts = {};
 
@@ -61,10 +52,6 @@ export class DropdownElement extends SgdsElement {
   /** Sets the text content of Dropdown button */
   @property({ type: String })
   togglerText = "";
-
-  /** Sets color of Dropdown button */
-  @property({ type: String })
-  variant: DropdownButtonVariant = "secondary";
 
   /** When true, dropdown menu shows on first load */
   @property({ type: Boolean, reflect: true })
