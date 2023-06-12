@@ -3,15 +3,19 @@ import { customElement, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import LinkElement from "../../base/link-element";
 import styles from "./sgds-dropdown.scss";
-
+/**
+ * @summary SgdsDropdownItem are navigation links built with HTMLAnchorElement. It should be used in the default slot of SgdsDropdown
+ */
 @customElement("sgds-dropdown-item")
 export class SgdsDropdownItem extends LinkElement {
   static styles = [LinkElement.styles, styles];
 
+  /**@internal */
   @query("a")
-  anchor: HTMLElement;
-  firstUpdated() {
-    //required when navigate with ArrowDown/ArrowUp
+  private anchor: HTMLElement;
+
+  connectedCallback(): void {
+    super.connectedCallback()
     this.addEventListener("keydown", (e: KeyboardEvent) => {
       if (e.key === "Enter") {
         this.anchor.click();
@@ -30,7 +34,9 @@ export class SgdsDropdownItem extends LinkElement {
           })}"
           ?disabled=${this.disabled}
           aria-disabled=${this.disabled ? "true" : "false"}
+          role="menuitem"
           tabindex=${this.disabled ? "-1" : "0"}
+          target=${this.target}
           ><slot></slot
         ></a>
       </li>

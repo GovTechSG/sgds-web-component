@@ -6,6 +6,13 @@ import { SgdsButton } from "../Button";
 import styles from "./sgds-dropdown.scss";
 
 export type DropDirection = "left" | "right" | "up" | "down";
+
+/**
+ * @summary Dropdown toggles contextual overlays for displaying lists of links.
+ * @slot default - slot for sgds-dropdown-item passed into dropdown's menu
+ *
+ * @csspart menu - The dropdown's menu (ul element)
+ */
 @customElement("sgds-dropdown")
 export class SgdsDropdown extends DropdownElement {
   static styles = [DropdownElement.styles, styles];
@@ -21,16 +28,18 @@ export class SgdsDropdown extends DropdownElement {
       }
     ];
   }
-  /** Controls auto-flipping of menu */
-  @property({ type: Boolean, reflect: true })
-  public noFlip = false;
 
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("sgds-hide", this._resetMenu);
   }
+  /** Controls auto-flipping of menu */
+  @property({ type: Boolean, reflect: true })
+  public noFlip = false;
+  
+  /**@internal */
   @queryAsync("sgds-button")
-  dropdownRef: Promise<SgdsButton>;
+  private dropdownRef: Promise<SgdsButton>;
 
   async firstUpdated() {
     super.firstUpdated();

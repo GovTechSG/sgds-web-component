@@ -26,9 +26,9 @@ export type DropDirection = "left" | "right" | "up" | "down";
 
 /**
  * @event sgds-show - Emitted event when show instance is called
- * @event sgds-shown - Emitted event when dropdown has been made visible to the user and CSS transitions have completed
+ * @event sgds-after-show - Emitted event when dropdown has been made visible to the user and CSS transitions have completed
  * @event sgds-hide - Emitted event when hide instance is called
- * @event sgds-hidden - Emitted event when dropdown has hidden to the user and CSS transitions have completed
+ * @event sgds-after-hide - Emitted event when dropdown has hidden to the user and CSS transitions have completed
  */
 
 export class DropdownElement extends SgdsElement {
@@ -138,7 +138,7 @@ export class DropdownElement extends SgdsElement {
 
     this.myDropdown.value.addEventListener("shown.bs.dropdown", () => {
       this.menuIsOpen = true;
-      this.emit("sgds-shown");
+      this.emit("sgds-after-show");
     });
 
     this.myDropdown.value.addEventListener("hide.bs.dropdown", () => {
@@ -148,7 +148,7 @@ export class DropdownElement extends SgdsElement {
 
     this.myDropdown.value.addEventListener("hidden.bs.dropdown", () => {
       this.menuIsOpen = false;
-      this.emit("sgds-hidden");
+      this.emit("sgds-after-hide");
     });
 
     this.addEventListener("keydown", this._handleKeyboardEvent);
