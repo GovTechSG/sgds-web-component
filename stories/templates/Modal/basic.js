@@ -21,3 +21,5 @@ export const closeModal = () => {
 };
 
 export const args = {};
+
+export const parameters = {};

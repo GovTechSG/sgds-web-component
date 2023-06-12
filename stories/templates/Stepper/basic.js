@@ -97,6 +97,8 @@ export const args = {
   ]
 };
 
+export const parameters = {};
+
 // ## Example
 
 // Try out the Stepper Component functionality below with Forms and Buttons
