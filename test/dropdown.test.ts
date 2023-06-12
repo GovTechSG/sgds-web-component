@@ -284,9 +284,9 @@ describe("sgds-dropdown", () => {
     const hideHandler = sinon.spy();
     const hiddenHandler = sinon.spy();
     el.addEventListener("sgds-show", showHandler);
-    el.addEventListener("sgds-shown", shownHandler);
+    el.addEventListener("sgds-after-show", shownHandler);
     el.addEventListener("sgds-hide", hideHandler);
-    el.addEventListener("sgds-hidden", hiddenHandler);
+    el.addEventListener("sgds-after-hide", hiddenHandler);
 
     const button = el.shadowRoot?.querySelector("sgds-button") as SgdsButton;
     button?.click();
@@ -452,6 +452,8 @@ describe("sgds-dropdown-item", () => {
           aria-disabled="false"
           href=""
           tabindex="0"
+          role="menuitem"
+          target="_self"
         >
           <slot>
           </slot>

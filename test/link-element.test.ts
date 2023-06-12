@@ -13,6 +13,7 @@ describe("link-element", () => {
           aria-disabled="false"
           class="nav-link"
           href=""
+          target="_self"
         >
           <slot>
           </slot>
