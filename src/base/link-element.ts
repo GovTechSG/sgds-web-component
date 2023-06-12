@@ -23,7 +23,7 @@ export default class LinkElement extends SgdsElement {
   disabled = false;
 
   /** Where to display the linked URL, as the name for a browsing context. Forwards to the HTMLAnchor target attribute */
-  @property({type: String, reflect: true})
+  @property({ type: String, reflect: true })
   target: "_blank" | "_parent" | "_self" | "_top" = "_self";
 
   render() {

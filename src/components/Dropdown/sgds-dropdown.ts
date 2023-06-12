@@ -3,19 +3,18 @@ import { customElement, queryAsync, property } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
 import { SgdsButton } from "../Button";
-import styles from "./sgds-dropdown.scss";
 
 export type DropDirection = "left" | "right" | "up" | "down";
 
 /**
- * @summary Dropdown toggles contextual overlays for displaying lists of links.
+ * @summary `SgdsDropdown` toggles contextual overlays for displaying lists of links.
  * @slot default - slot for sgds-dropdown-item passed into dropdown's menu
  *
  * @csspart menu - The dropdown's menu (ul element)
  */
 @customElement("sgds-dropdown")
 export class SgdsDropdown extends DropdownElement {
-  static styles = [DropdownElement.styles, styles];
+  static styles = [DropdownElement.styles];
 
   constructor() {
     super();
@@ -36,7 +35,6 @@ export class SgdsDropdown extends DropdownElement {
   /** Controls auto-flipping of menu */
   @property({ type: Boolean, reflect: true })
   public noFlip = false;
-  
   /**@internal */
   @queryAsync("sgds-button")
   private dropdownRef: Promise<SgdsButton>;
