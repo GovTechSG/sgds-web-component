@@ -28,3 +28,5 @@ export const args = {
   alertClasses: "d-flex align-items-center",
   show: true
 };
+
+export const parameters = {};

@@ -29,3 +29,5 @@ export const Template = args =>
   `;
 
 export const args = { summary: "This is an accordion" };
+
+export const parameters = {};

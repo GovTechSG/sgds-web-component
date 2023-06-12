@@ -15,3 +15,5 @@ export const Template = args =>
     </sgds-badge>
   `;
 export const args = {};
+
+export const parameters = {};

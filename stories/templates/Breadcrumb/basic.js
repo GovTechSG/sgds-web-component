@@ -11,3 +11,5 @@ export const Template = args =>
     </sgds-breadcrumb>
   `;
 export const args = {};
+
+export const parameters = {};

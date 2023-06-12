@@ -7,3 +7,6 @@ export const Template = ({ steps, activeStep }) => {
 export const args = {
   steps: ["Marker 1", "Marker 2", "Marker 3"]
 };
+
+export const parameters = {};
+

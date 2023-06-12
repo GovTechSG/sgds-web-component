@@ -21,3 +21,5 @@ export const args = {
   name: "check-me",
   value: "check-me"
 };
+
+export const parameters = {};
