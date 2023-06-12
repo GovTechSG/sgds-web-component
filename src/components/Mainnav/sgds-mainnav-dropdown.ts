@@ -26,7 +26,7 @@ export class SgdsMainnavDropdown extends DropdownElement {
 
   render() {
     return html`
-      <li class="nav-item">
+      <li class="nav-item dropdown">
         <a
           class="nav-link"
           ?disabled=${this.disabled}
