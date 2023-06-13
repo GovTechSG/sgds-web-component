@@ -81,6 +81,7 @@ export class Calendar extends SgdsElement {
   handleDayClick(event: MouseEvent) {
     const day = (event.currentTarget as HTMLTableCellElement).dataset.day!;
     const displayDateClone = new Date(this.displayDate);
+    console.log("check for value",displayDateClone)
     displayDateClone.setDate(parseInt(day));
 
     if (this.mode === "single") {
@@ -181,7 +182,7 @@ export class Calendar extends SgdsElement {
       const week = [];
       for (let j = 0; j <= 6; j++) {
         if (day <= monthLength && (i > 0 || j >= startingDay)) {
-          let className = undefined;
+          let className = undefined
           const date = new Date(year, month, day, 12, 0, 0, 0).toISOString();
           const beforeMinDate = minimumDate && Date.parse(date) < Date.parse(minimumDate.toISOString());
           const afterMinDate = maximumDate && Date.parse(date) > Date.parse(maximumDate.toISOString());

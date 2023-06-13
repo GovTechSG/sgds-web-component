@@ -9,8 +9,6 @@ export class DatepickerElement extends DropdownElement {
   @property({ reflect: true }) datepickerClasses?: string;
   @property({ type: Boolean, reflect: true }) required = false;
 
-
-
   _handleKeyboardEvent(e: KeyboardEvent) {
     switch (e.key) {
       case ARROW_DOWN:
