@@ -11,25 +11,37 @@ import { HasSlotController } from "../../utils/slot";
 import { watch } from "../../utils/watch";
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import styles from "./sgds-modal.scss";
+import { unsafeSVG } from "lit/directives/unsafe-svg.js";
+
+/**
+ * @summary The modal component inform users about a specific task and may contain critical information which users then have to make a decision.
+ */
 @customElement("sgds-modal")
 export class SgdsModal extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
+  /**@internal */
   @query(".modal") dialog: HTMLElement;
+  /**@internal */
   @query(".modal-panel") panel: HTMLElement;
+  /**@internal */
   @query(".modal-overlay") overlay: HTMLElement;
-
+  /**@internal */
   private readonly hasSlotController = new HasSlotController(this, "footer");
+  /**@internal */
   private modal: Modal;
+  /**@internal */
   private originalTrigger: HTMLElement | null;
 
+  /**Indicates whether or not the modal is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
   // @property({ type: Boolean, reflect: true }) centeredAlignVariant = false;
-
+  /**The modal's title as displayed in the header */
   @property({ reflect: true }) title = "";
+  /**The modal's icon as displayed in the header. Pass in SVG format icons as string directly  */
   @property({ reflect: true }) titleIcon = "";
-  @property({ attribute: "no-header", type: Boolean, reflect: true }) noHeader = false;
-
+  /** Disables the header. This will also remove the default close button */
+  @property({ type: Boolean, reflect: true }) noHeader = false;
   connectedCallback() {
     super.connectedCallback();
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
@@ -52,7 +64,7 @@ export class SgdsModal extends SgdsElement {
   }
 
   /** Shows the dialog. */
-  async show() {
+  public async show() {
     if (this.open) {
       return undefined;
     }
@@ -62,7 +74,7 @@ export class SgdsModal extends SgdsElement {
   }
 
   /** Hides the dialog */
-  async hide() {
+  public async hide() {
     if (!this.open) {
       return undefined;
     }
@@ -194,9 +206,7 @@ export class SgdsModal extends SgdsElement {
   }
 
   render() {
-    // if label is defined
-    const withLabelIcon = html` <sl-icon name=${this.titleIcon} class="pe-2 flex-shrink-0"></sl-icon>`;
-
+    const withLabelIcon = html`${unsafeSVG(this.titleIcon)}`;
     return html`
       <div
         part="base"
@@ -224,31 +234,21 @@ export class SgdsModal extends SgdsElement {
                   part="header"
                   class=${classMap({
                     "modal-header": true
-                    // centered: this.centeredAlignVariant,
                   })}
                 >
                   <div
                     part="title"
                     class=${classMap({
-                      "modal-title d-flex align-items-center": true
-                      // centered : this.centeredAlignVariant,
+                      "modal-title": true,
+                      "d-flex": true,
+                      "align-items-center": true,
+                      "gap-3": true
                     })}
                     id="title"
                   >
-                    ${this.titleIcon ? withLabelIcon : null}
-                    ${this.title.length > 0 ? this.title : String.fromCharCode(65279)}
+                    ${this.titleIcon ? withLabelIcon : ""} ${this.title}
                   </div>
-                  <sgds-button
-                    part="close-button"
-                    variant="icon"
-                    exportparts="base:close-button__base"
-                    class=${classMap({
-                      "modal-close": true
-                      // 'centered': this.centeredAlignVariant,
-                    })}
-                    @click="${() => this.requestClose("close-button")}"
-                    ><sl-icon name="x-lg"></sl-icon
-                  ></sgds-button>
+                  <sgds-closebutton @click="${() => this.requestClose("close-button")}"> </sgds-closebutton>
                 </h3>
               `
             : ""}
@@ -261,7 +261,6 @@ export class SgdsModal extends SgdsElement {
             part="footer"
             class=${classMap({
               "modal-footer": true
-              // centered: this.centeredAlignVariant,
             })}
           >
             <slot name="footer"></slot>
