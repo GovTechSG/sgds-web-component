@@ -54,7 +54,7 @@ export class SgdsDatepicker extends DatepickerElement {
   /** Changes DatePicker to single date selection or range date selection */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
 
-  @property({ type: Date }) currentDate: Date = new Date();
+  @property({ type: Date }) setInitialDate: Date = new Date();
 
   /** Controls the close behaviour of dropdown menu. By default menu auto-closes when SgdsDropdownItem or area outside dropdown is clicked */
   @property({ type: String })
@@ -84,12 +84,11 @@ export class SgdsDatepicker extends DatepickerElement {
     // console.log(this.initialValue)
     // Set the initial value of displayDateInput if not already set
     if (this.initialValue) {
-      const currentDate = new Date(this.initialValue);
-      console.log(currentDate);
+      const setInitialDate = new Date(this.initialValue);
+
       // on initial load, to highlight the correct day,month,year date in view
-      this.currentDate = currentDate;
-      // on initial load, to display the initialValue
-      this.displayDateInput = currentDate;
+      this.displayDate = setInitialDate
+      this.displayDateInput = setInitialDate
     }
  
   }
@@ -263,7 +262,7 @@ export class SgdsDatepicker extends DatepickerElement {
           <sgds-datepicker-header .view=${this.view} .switchDate=${this.displayDate}></sgds-datepicker-header>
           <sgds-datepicker-calendar
             .view=${this.view}
-            .displayDate=${this.currentDate}
+            .displayDate=${this.displayDate}
             .mode=${this.mode}
             minDate=${this.minDate}
             maxDate=${this.maxDate}

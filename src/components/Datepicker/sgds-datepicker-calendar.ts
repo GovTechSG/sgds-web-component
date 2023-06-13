@@ -38,22 +38,14 @@ export class Calendar extends SgdsElement {
   /** @internal */
   @state() displayDateInternal: Date = new Date();
 
+
   // changeView(view: string) {
   //   this.view = view;
   //   this.dispatchEvent(new CustomEvent("view-changed", { detail: this.view }));
   //   console.log(this.view)
   // }
 
-  // connectedCallback() {
-  //   super.connectedCallback();
-  //   this.displayDate = new Date(); // Set the current date as the displayDate
-  // }
-  // handleClick(e: Event) {
-  //   const day = (e.currentTarget as HTMLTableCellElement).getAttribute("data-day")!;
-
-  // const newSelectedDate = this.setTimeToNoon(displayDateClone);
-  // newSelectedDate.setDate(parseInt(day));
-  // }
+  
 
   setTimeToNoon(date: Date) {
     const newDate = new Date(date);
