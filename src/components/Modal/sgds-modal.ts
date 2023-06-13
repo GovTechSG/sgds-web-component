@@ -42,6 +42,10 @@ export class SgdsModal extends SgdsElement {
   @property({ reflect: true }) titleIcon = "";
   /** Disables the header. This will also remove the default close button */
   @property({ type: Boolean, reflect: true }) noHeader = false;
+  /** Centers the modal vertically in page */
+  @property({ type: Boolean, reflect: true }) centered = false;
+  /** Centers the contents inside the modal */
+  @property({ type: Boolean, reflect: true }) centeredAlignVariant = false;
   connectedCallback() {
     super.connectedCallback();
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
@@ -213,7 +217,8 @@ export class SgdsModal extends SgdsElement {
         class=${classMap({
           modal: true,
           "modal--open": this.open,
-          "modal--has-footer": this.hasSlotController.test("footer")
+          "modal--has-footer": this.hasSlotController.test("footer"),
+          centered: this.centered
         })}
       >
         <div part="overlay" class="modal-overlay" @click=${() => this.requestClose("overlay")} tabindex="-1"></div>
@@ -233,34 +238,44 @@ export class SgdsModal extends SgdsElement {
                 <h3
                   part="header"
                   class=${classMap({
-                    "modal-header": true
+                    "modal-header": true,
+                    centered: this.centeredAlignVariant
                   })}
                 >
                   <div
                     part="title"
                     class=${classMap({
                       "modal-title": true,
-                      "d-flex": true,
-                      "align-items-center": true,
-                      "gap-3": true
+                      centered: this.centeredAlignVariant
                     })}
                     id="title"
                   >
                     ${this.titleIcon ? withLabelIcon : ""} ${this.title}
                   </div>
-                  <sgds-closebutton @click="${() => this.requestClose("close-button")}"> </sgds-closebutton>
+                  <sgds-closebutton
+                    class=${classMap({
+                      "modal-close": true,
+                      centered: this.centeredAlignVariant
+                    })}
+                    @click="${() => this.requestClose("close-button")}"
+                  >
+                  </sgds-closebutton>
                 </h3>
               `
             : ""}
 
-          <div part="body" class="modal-body">
+          <div part="body" class=${classMap({
+            "modal-body": true,
+            centered: this.centeredAlignVariant
+          })}>
             <slot></slot>
           </div>
 
           <footer
             part="footer"
             class=${classMap({
-              "modal-footer": true
+              "modal-footer": true,
+              centered: this.centeredAlignVariant,
             })}
           >
             <slot name="footer"></slot>

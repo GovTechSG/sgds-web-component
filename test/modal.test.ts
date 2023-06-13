@@ -146,4 +146,9 @@ describe("<sgds-modal>", () => {
 
     expect(el.open).to.be.false;
   });
+
+  it("centered prop adds .centered to .modal", async() => {
+    const el = await fixture<SgdsModal>(html` <sgds-modal centered></sgds-modal> `);
+    expect(el.shadowRoot?.querySelector(".modal")).to.have.class("centered")
+  })
 });
