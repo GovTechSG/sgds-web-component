@@ -46,6 +46,9 @@ export class SgdsModal extends SgdsElement {
   @property({ type: Boolean, reflect: true }) centered = false;
   /** Centers the contents inside the modal */
   @property({ type: Boolean, reflect: true }) centeredAlignVariant = false;
+  /** Removes the default animation when opening and closing of modal */
+  @property({ type: Boolean, reflect: true }) noAnimation = false;
+
   connectedCallback() {
     super.connectedCallback();
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
@@ -88,12 +91,12 @@ export class SgdsModal extends SgdsElement {
   }
 
   private requestClose(source: "close-button" | "keyboard" | "overlay") {
-    const slRequestClose = this.emit("sgds-close", {
+    const sgdsRequestClose = this.emit("sgds-close", {
       cancelable: true,
       detail: { source }
     });
 
-    if (slRequestClose.defaultPrevented) {
+    if (sgdsRequestClose.defaultPrevented) {
       const animation = getAnimation(this, "modal.denyClose");
       animateTo(this.panel, animation.keyframes);
       return;
@@ -163,10 +166,11 @@ export class SgdsModal extends SgdsElement {
 
       const panelAnimation = getAnimation(this, "modal.show");
       const overlayAnimation = getAnimation(this, "modal.overlay.show");
-      await Promise.all([
-        animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
-        animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
-      ]);
+      !this.noAnimation &&
+        (await Promise.all([
+          animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
+          animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
+        ]));
 
       this.emit("sgds-after-show");
     } else {
@@ -182,14 +186,15 @@ export class SgdsModal extends SgdsElement {
       // Animate the overlay and the panel at the same time. Because animation durations might be different, we need to
       // hide each one individually when the animation finishes, otherwise the first one that finishes will reappear
       // unexpectedly. We'll unhide them after all animations have completed.
-      await Promise.all([
-        animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options).then(() => {
-          this.overlay.hidden = true;
-        }),
-        animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options).then(() => {
-          this.panel.hidden = true;
-        })
-      ]);
+      !this.noAnimation &&
+        (await Promise.all([
+          animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options).then(() => {
+            this.overlay.hidden = true;
+          }),
+          animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options).then(() => {
+            this.panel.hidden = true;
+          })
+        ]));
 
       this.dialog.hidden = true;
 
@@ -264,10 +269,13 @@ export class SgdsModal extends SgdsElement {
               `
             : ""}
 
-          <div part="body" class=${classMap({
-            "modal-body": true,
-            centered: this.centeredAlignVariant
-          })}>
+          <div
+            part="body"
+            class=${classMap({
+              "modal-body": true,
+              centered: this.centeredAlignVariant
+            })}
+          >
             <slot></slot>
           </div>
 
@@ -275,7 +283,7 @@ export class SgdsModal extends SgdsElement {
             part="footer"
             class=${classMap({
               "modal-footer": true,
-              centered: this.centeredAlignVariant,
+              centered: this.centeredAlignVariant
             })}
           >
             <slot name="footer"></slot>
@@ -288,33 +296,33 @@ export class SgdsModal extends SgdsElement {
 
 setDefaultAnimation("modal.show", {
   keyframes: [
-    { opacity: 0, transform: "scale(0.8)" },
-    { opacity: 1, transform: "scale(1)" }
+    { opacity: 0, transform: "scale(1) translate(0, -100%)" },
+    { opacity: 1, transform: "scale(1) translate(0, 0%)" }
   ],
-  options: { duration: 250, easing: "ease" }
+  options: { duration: 400, easing: "ease" }
 });
 
 setDefaultAnimation("modal.hide", {
   keyframes: [
-    { opacity: 1, transform: "scale(1)" },
-    { opacity: 0, transform: "scale(0.8)" }
+    { opacity: 1, transform: "scale(1) translate(0, 0)" },
+    { opacity: 0, transform: "scale(1) translate(0, -100%)" }
   ],
-  options: { duration: 250, easing: "ease" }
+  options: { duration: 400, easing: "ease" }
 });
 
 setDefaultAnimation("modal.denyClose", {
   keyframes: [{ transform: "scale(1)" }, { transform: "scale(1.02)" }, { transform: "scale(1)" }],
-  options: { duration: 250 }
+  options: { duration: 400 }
 });
 
 setDefaultAnimation("modal.overlay.show", {
   keyframes: [{ opacity: 0 }, { opacity: 1 }],
-  options: { duration: 250 }
+  options: { duration: 400 }
 });
 
 setDefaultAnimation("modal.overlay.hide", {
   keyframes: [{ opacity: 1 }, { opacity: 0 }],
-  options: { duration: 250 }
+  options: { duration: 400 }
 });
 
 export default SgdsModal;
