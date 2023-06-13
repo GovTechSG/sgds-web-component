@@ -15,6 +15,28 @@ import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 
 /**
  * @summary The modal component inform users about a specific task and may contain critical information which users then have to make a decision.
+ *
+ * @slot default - The content of the Modal's body
+ * @slot footer - The content of the Modal's footer, typically used to pass in buttons for call to action.
+ *
+ * @event sgds-close - Emitted when the modal is called to close via mouseclick of close button, overlay or via keyboard 
+ * @event sgds-show - Emitted when the modal is open 
+ * @csspart base - The component's base wrapper
+ * @csspart overlay - The overlay that covers the screen behind the dialog
+ * @csspart panel - The modal's dialog panel
+ * @csspart header - The modal's header (h3 element) that wraps the title, titleIcon and close button
+ * @csspart title - The div element wrapping title and titleIcon
+ * @csspart body - The modal's body where the content lies
+ * @csspart footer - The modal's footer
+ * 
+ * @cssproperty --modal-padding - The general modal padding of modal component. Applied to body, footer and header.
+ * @cssproperty --modal-panel-z-index - The z-index of modal panel
+ * @cssproperty --modal-panel-width - The width of modal panel.
+ * @cssproperty --modal-panel-height - The height of modal panel.
+ * @cssproperty --modal-panel-background-color - The background color of modal panel
+ * @cssproperty --modal-panel-border-radius - The border radius of modal panel
+ * @cssproperty --modal-header-bottom-border-line-width - The line width of header's bottom border
+ * @cssproperty --modal-overlay-background-color - The overlay's background color
  */
 @customElement("sgds-modal")
 export class SgdsModal extends SgdsElement {
@@ -146,23 +168,23 @@ export class SgdsModal extends SgdsElement {
       this.dialog.hidden = false;
 
       // Set initial focus
-      requestAnimationFrame(() => {
-        const slInitialFocus = this.emit("sgds-initial-focus", { cancelable: true });
+      // requestAnimationFrame(() => {
+      //   const slInitialFocus = this.emit("sgds-initial-focus", { cancelable: true });
 
-        if (!slInitialFocus.defaultPrevented) {
-          // Set focus to the autofocus target and restore the attribute
-          if (autoFocusTarget) {
-            (autoFocusTarget as HTMLInputElement).focus({ preventScroll: true });
-          } else {
-            this.panel.focus({ preventScroll: true });
-          }
-        }
+      //   if (!slInitialFocus.defaultPrevented) {
+      //     // Set focus to the autofocus target and restore the attribute
+      //     if (autoFocusTarget) {
+      //       (autoFocusTarget as HTMLInputElement).focus({ preventScroll: true });
+      //     } else {
+      //       this.panel.focus({ preventScroll: true });
+      //     }
+      //   }
 
-        // Restore the autofocus attribute
-        if (autoFocusTarget) {
-          autoFocusTarget.setAttribute("autofocus", "");
-        }
-      });
+      //   // Restore the autofocus attribute
+      //   if (autoFocusTarget) {
+      //     autoFocusTarget.setAttribute("autofocus", "");
+      //   }
+      // });
 
       const panelAnimation = getAnimation(this, "modal.show");
       const overlayAnimation = getAnimation(this, "modal.overlay.show");
