@@ -12,7 +12,7 @@ export const Template = args => {
       ?centeredAlignVariant=${args.centeredAlignVariant}
       ?noAnimation=${args.noAnimation}
     >
-     This is a Modal
+      This is a Modal
       <sgds-button @click=${closeModal} slot="footer" variant="link" class="close-modal">Close</sgds-button>
       <sgds-button slot="footer" variant="primary" type="submit" form="formA">Submit</sgds-button>
     </sgds-modal>

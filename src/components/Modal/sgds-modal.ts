@@ -19,8 +19,12 @@ import { unsafeSVG } from "lit/directives/unsafe-svg.js";
  * @slot default - The content of the Modal's body
  * @slot footer - The content of the Modal's footer, typically used to pass in buttons for call to action.
  *
- * @event sgds-close - Emitted when the modal is called to close via mouseclick of close button, overlay or via keyboard 
- * @event sgds-show - Emitted when the modal is open 
+ * @event sgds-close - Emitted when the modal is called to close via mouseclick of close button, overlay or via keyboard esc key
+ * @event sgds-show - Emitted when the modal opens
+ * @event sgds-hide - Emitted when the modal closes
+ * @event sgds-after-show - Emitted after modal opens and the animations has completed 
+ * @event sgds-after-hide - Emitted after modal closes and the animations has completed 
+ * 
  * @csspart base - The component's base wrapper
  * @csspart overlay - The overlay that covers the screen behind the dialog
  * @csspart panel - The modal's dialog panel
@@ -28,7 +32,7 @@ import { unsafeSVG } from "lit/directives/unsafe-svg.js";
  * @csspart title - The div element wrapping title and titleIcon
  * @csspart body - The modal's body where the content lies
  * @csspart footer - The modal's footer
- * 
+ *
  * @cssproperty --modal-padding - The general modal padding of modal component. Applied to body, footer and header.
  * @cssproperty --modal-panel-z-index - The z-index of modal panel
  * @cssproperty --modal-panel-width - The width of modal panel.
