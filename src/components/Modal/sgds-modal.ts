@@ -16,22 +16,22 @@ import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 /**
  * @summary The modal component inform users about a specific task and may contain critical information which users then have to make a decision.
  *
- * @slot default - The content of the Modal's body
+ * @slot default - The content of the Modal's body.
  * @slot footer - The content of the Modal's footer, typically used to pass in buttons for call to action.
  *
  * @event sgds-close - Emitted when the modal is called to close via mouseclick of close button, overlay or via keyboard esc key
  * @event sgds-show - Emitted when the modal opens
  * @event sgds-hide - Emitted when the modal closes
- * @event sgds-after-show - Emitted after modal opens and the animations has completed 
- * @event sgds-after-hide - Emitted after modal closes and the animations has completed 
- * 
+ * @event sgds-after-show - Emitted after modal opens and the animations has completed
+ * @event sgds-after-hide - Emitted after modal closes and the animations has completed
+ *
  * @csspart base - The component's base wrapper
  * @csspart overlay - The overlay that covers the screen behind the dialog
  * @csspart panel - The modal's dialog panel
  * @csspart header - The modal's header (h3 element) that wraps the title, titleIcon and close button
  * @csspart title - The div element wrapping title and titleIcon
  * @csspart body - The modal's body where the content lies
- * @csspart footer - The modal's footer
+ * @csspart footers - The modal's footer
  *
  * @cssproperty --modal-padding - The general modal padding of modal component. Applied to body, footer and header.
  * @cssproperty --modal-panel-z-index - The z-index of modal panel
@@ -157,38 +157,8 @@ export class SgdsModal extends SgdsElement {
 
       lockBodyScrolling(this);
 
-      // When the dialog is shown, Safari will attempt to set focus on whatever element has autofocus. This can cause
-      // the dialogs's animation to jitter (if it starts offscreen), so we'll temporarily remove the attribute, call
-      // `focus({ preventScroll: true })` ourselves, and add the attribute back afterwards.
-      //
-      // Related: https://github.com/shoelace-style/shoelace/issues/693
-      //
-      const autoFocusTarget = this.querySelector("[autofocus]");
-      if (autoFocusTarget) {
-        autoFocusTarget.removeAttribute("autofocus");
-      }
-
       await Promise.all([stopAnimations(this.dialog), stopAnimations(this.overlay)]);
       this.dialog.hidden = false;
-
-      // Set initial focus
-      // requestAnimationFrame(() => {
-      //   const slInitialFocus = this.emit("sgds-initial-focus", { cancelable: true });
-
-      //   if (!slInitialFocus.defaultPrevented) {
-      //     // Set focus to the autofocus target and restore the attribute
-      //     if (autoFocusTarget) {
-      //       (autoFocusTarget as HTMLInputElement).focus({ preventScroll: true });
-      //     } else {
-      //       this.panel.focus({ preventScroll: true });
-      //     }
-      //   }
-
-      //   // Restore the autofocus attribute
-      //   if (autoFocusTarget) {
-      //     autoFocusTarget.setAttribute("autofocus", "");
-      //   }
-      // });
 
       const panelAnimation = getAnimation(this, "modal.show");
       const overlayAnimation = getAnimation(this, "modal.overlay.show");

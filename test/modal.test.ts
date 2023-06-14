@@ -118,23 +118,6 @@ describe("<sgds-modal>", () => {
     expect(el.open).to.be.true;
   });
 
-  // it("should allow initial focus to be set", async () => {
-  //   const el = await fixture<SgdsModal>(html` <sgds-modal><input /></sgds-modal> `);
-  //   const input = el.querySelector("input");
-  //   const initialFocusHandler = sinon.spy((event: Event) => {
-  //     event.preventDefault();
-  //     input?.focus();
-  //   });
-
-  //   el.addEventListener("sgds-initial-focus", initialFocusHandler);
-  //   el.show();
-
-  //   await waitUntil(() => initialFocusHandler.calledOnce);
-
-  //   expect(initialFocusHandler).to.have.been.calledOnce;
-  //   expect(document.activeElement).to.equal(input);
-  // });
-
   it("should close when pressing Escape", async () => {
     const el = await fixture<SgdsModal>(html` <sgds-modal open></sgds-modal> `);
     const hideHandler = sinon.spy();
