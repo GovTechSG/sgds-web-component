@@ -11,7 +11,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
  * @slot default - The slot to pass in custom elements of `SgdsBreadcrumbItems`.
  * @slot separator - Defines all the separator of `SgdsBreadcrumbItems`. Defaults to "/"
  *
- * @csspart base - The nav element wrapper of `SgdsBreadcrumb` w
+ * @csspart base - The nav element wrapper of `SgdsBreadcrumb`
  */
 @customElement("sgds-breadcrumb")
 export class SgdsBreadcrumb extends SgdsElement {
