@@ -268,7 +268,7 @@ export class SgdsDatepicker extends DatepickerElement {
             ?disabled=${this.disabled}
           ></sgds-input>
           <sgds-button ?disabled=${this.disabled} buttonClasses="rounded-0 h-100" type="reset">${svgEl}</sgds-button>
-          <ul class="dropdown-menu" role="menu" part="menu">
+          <ul class="sgds datepicker dropdown-menu" role="menu" part="menu">
             <sgds-datepicker-header .view=${this.view} .switchDate=${this.displayDate}></sgds-datepicker-header>
             <sgds-datepicker-calendar
               .view=${this.view}

@@ -4,7 +4,7 @@ import { customElement, property, state } from "lit/decorators.js";
 import styles from "./sgds-datepicker-calendar.scss";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
-import {styleMap} from 'lit/directives/style-map.js';
+import { styleMap } from "lit/directives/style-map.js";
 
 @customElement("sgds-datepicker-calendar")
 export class Calendar extends SgdsElement {
@@ -41,7 +41,7 @@ export class Calendar extends SgdsElement {
   /** @internal */
   @state() displayDateInternal: Date = new Date();
   /** @internal */
-  @state() isDateSelected: boolean = false;
+  @state() isDateSelected = false;
 
   // changeView(view: string) {
   //   this.view = view;
