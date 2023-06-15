@@ -12,57 +12,57 @@ sgds-input {
   margin-right: 0; /* Remove the margin on the right */
 }
 
-.sgds {
-  &.datepicker {
-    font-size: var(--datepicker-font-size);
-    width: 10rem;
-    max-width: 10rem;
-    border-color: var(--datepicker-border-color);
+// .sgds {
+//   &.datepicker {
+//     font-size: var(--datepicker-font-size);
+//     width: 10rem;
+//     max-width: 10rem;
+//     border-color: var(--datepicker-border-color);
 
-    > .datepicker-header {
-      padding: 1.5rem 1.5rem 0;
-      border: none;
-      color: var(--datepicker-font-color);
+//     > .datepicker-header {
+//       padding: 1.5rem 1.5rem 0;
+//       border: none;
+//       color: var(--datepicker-font-color);
 
-      button {
-        background-color: transparent;
-        color: var(--datepicker-font-color);
-        border: none;
-        font-weight: bold;
-      }
+//       button {
+//         background-color: transparent;
+//         color: var(--datepicker-font-color);
+//         border: none;
+//         font-weight: bold;
+//       }
 
-      i {
-        font-size: var(--datepicker-icon-size);
-      }
-    }
+//       i {
+//         font-size: var(--datepicker-icon-size);
+//       }
+//     }
 
-    > .datepicker-body {
-      padding: 0 1.5rem 1.5rem;
-    }
+//     > .datepicker-body {
+//       padding: 0 1.5rem 1.5rem;
+//     }
 
-    .monthpicker,
-    .yearpicker {
-      display: grid;
-      grid-template-columns: repeat(3, 48px);
-      grid-template-rows: repeat(4, 48px);
-      justify-content: space-between;
-      align-content: space-between;
-      padding: 1rem 1rem 0;
-    }
+//     .monthpicker,
+//     .yearpicker {
+//       display: grid;
+//       grid-template-columns: repeat(3, 48px);
+//       grid-template-rows: repeat(4, 48px);
+//       justify-content: space-between;
+//       align-content: space-between;
+//       padding: 1rem 1rem 0;
+//     }
 
-    .month,
-    .year {
-      padding: 0;
-      border: 0;
-      background-color: transparent;
-      cursor: pointer;
-      &.active {
-        color: var(--datepicker-font-color);
-        background-color: var(--datepicker-active-bg);
-      }
-    }
-  }
-}
+//     .month,
+//     .year {
+//       padding: 0;
+//       border: 0;
+//       background-color: transparent;
+//       cursor: pointer;
+//       &.active {
+//         color: var(--datepicker-font-color);
+//         background-color: var(--datepicker-active-bg);
+//       }
+//     }
+//   }
+// }
 
 // .sgds {
 //   &.datepicker {

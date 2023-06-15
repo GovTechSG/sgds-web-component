@@ -5,6 +5,10 @@
 
 .datepicker-body {
   padding: 0 1.5rem 1.5rem;
+
+  .text-primary {
+    color: var(--datepicker-theme-color) !important;
+  }
 }
 
 .monthpicker,
@@ -16,6 +20,7 @@
   align-content: space-between;
   padding: 1rem 1rem 0;
 }
+
 
 .month,
 .year {
@@ -34,3 +39,5 @@ td {
   height: 48px;
   padding: 0;
 }
+
+

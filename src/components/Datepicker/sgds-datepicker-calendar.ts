@@ -21,7 +21,7 @@ export class Calendar extends SgdsElement {
   /** @internal */
   @property({ type: Date }) displayDate: Date = new Date();
   /** @internal */
-  @property({ type: Date }) displayDateInput: Date = new Date();
+  @property({ type: Date }) displayDateInput: Date
   /** @internal */
   @property({ type: String }) minDate?: string;
   /** @internal */
@@ -75,10 +75,12 @@ export class Calendar extends SgdsElement {
     const displayDateClone = new Date(this.displayDate);
     console.log("check for value",displayDateClone)
     displayDateClone.setDate(parseInt(day));
+    console.log(this.displayDateInput)
 
     if (this.mode === "single") {
       // Single mode: Select a single date
-      this.displayDateInput = displayDateClone;
+      // this.displayDateInput = displayDateClone;
+      this.displayDate = displayDateClone;
       this.emit("sgds-selectdate", { detail: this.displayDateInput });
     } else if (this.mode === "range") {
       // Range mode: Select a range of dates
@@ -168,62 +170,53 @@ export class Calendar extends SgdsElement {
     }
 
     const weeks = [];
+let day = 1;
+  for (let i = 0; i < 9; i++) {
+    const week = [];
+    for (let j = 0; j <= 6; j++) {
+      if (day <= monthLength && (i > 0 || j >= startingDay)) {
+        let className = undefined;
+        const date = new Date(year, month, day, 12, 0, 0, 0).toISOString();
+        // Check if the date matches the current date
+        const isCurrentDate = new Date();
+        // console.log(isCurrentDate)
+        console.log(this.displayDate.getDate())
+        // Check if the date is in the selectedDates array
+        const isSelected = selectedDates.some((selectedDate) => Date.parse(date) === Date.parse(selectedDate.toISOString()));
+        const beforeMinDate = minimumDate && Date.parse(date) < Date.parse(minimumDate.toISOString());
+        const afterMinDate = maximumDate && Date.parse(date) > Date.parse(maximumDate.toISOString());
+        const clickHandler = beforeMinDate || afterMinDate ? undefined : this.handleDayClick;
+        // if (isCurrentDate) {
+        //   className = "text-primary";
+        // } else if (isSelected) {
+        //   className = "bg-primary-100";
+        // }
 
-    let day = 1;
-    for (let i = 0; i < 9; i++) {
-      const week = [];
-      for (let j = 0; j <= 6; j++) {
-        if (day <= monthLength && (i > 0 || j >= startingDay)) {
-          let className = undefined
-          const date = new Date(year, month, day, 12, 0, 0, 0).toISOString();
-          const beforeMinDate = minimumDate && Date.parse(date) < Date.parse(minimumDate.toISOString());
-          const afterMinDate = maximumDate && Date.parse(date) > Date.parse(maximumDate.toISOString());
-
-          const clickHandler = beforeMinDate || afterMinDate ? undefined : this.handleDayClick;
-          const style = {
-            cursor: beforeMinDate || afterMinDate ? "default" : "pointer",
-            borderRadius: 0
-          };
-
-          if (Date.parse(date) === Date.parse(currentDate.toISOString())) {
-            className = "text-primary";
-          }
-          // if (beforeMinDate || afterMinDate) {
-          //   className = "text-muted";
-          //   // clickHandler = undefined;
-          //   style.cursor = "default";
-          // }
-          if (selectedDates.length > 0) {
-            rangeSelectedDates.forEach(d => {
-              if (Date.parse(date) === Date.parse(d.toISOString())) {
-                className = "bg-primary-100";
-              }
-            });
-            if (Date.parse(date) === Date.parse(selectedDates[0]!.toISOString())) {
-              className = "bg-primary-100";
-            }
-          }
-
-          week.push(
-            html` <td key=${j} data-day=${day} @click=${clickHandler} style=${style} class=${className}>${day}</td> `
-          );
-          day++;
-        } else {
-          week.push(html` <td key=${j}></td> `);
-        }
-      }
-
-      weeks.push(
-        html`
-          <tr key=${i}>
-            ${week}
-          </tr>
-        `
-      );
-      if (day > monthLength) {
-        break;
+        week.push(
+          html`<td
+          key=${j}
+          data-day=${day}
+          class=${classMap({
+            'text-primary': isCurrentDate.getDate() === day,
+            'bg-primary-100': this.displayDate.getDate() === day
+      })}
+          @click=${clickHandler}
+        >
+          ${day}
+        </td>`
+        );
+        day++;
+      } else {
+        week.push(html`<td key=${j}></td>`);
       }
     }
+
+    weeks.push(html`<tr key=${i}>${week}</tr>`);
+    if (day > monthLength) {
+      break;
+    }
+  }
+
 
     // monthView
 

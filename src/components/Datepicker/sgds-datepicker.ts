@@ -87,10 +87,9 @@ export class SgdsDatepicker extends DatepickerElement {
       const setInitialDate = new Date(this.initialValue);
 
       // on initial load, to highlight the correct day,month,year date in view
-      this.displayDate = setInitialDate
-      this.displayDateInput = setInitialDate
+      this.displayDate = setInitialDate;
+      this.displayDateInput = setInitialDate;
     }
- 
   }
 
   // updated(changedProperties) {
@@ -164,6 +163,8 @@ export class SgdsDatepicker extends DatepickerElement {
     // };
 
     // , endDate: Date | undefined,
+
+
     const makeInputValueString = (startDate: Date | undefined, dateFormat: DateFormat) => {
       // if (!startDate && !endDate) return "";
 
@@ -200,7 +201,7 @@ export class SgdsDatepicker extends DatepickerElement {
     let formattedDate = "";
     // Include the initialValue in the formattedDate if it exists
     if (this.mode === "single") {
-      formattedDate = this.displayDateInput ? makeInputValueString(this.displayDateInput, this.dateFormat) : ""; // Removed the check for initialValue
+      formattedDate = makeInputValueString(this.displayDateInput, this.dateFormat);
     }
     //  else if (this.mode === "range") {
     //   formattedDate =
@@ -241,35 +242,34 @@ export class SgdsDatepicker extends DatepickerElement {
   </svg>
     `;
     return html`
-    <form>
-      <div class="">
-        <sgds-input
-          icon=${svgIcon}
-          .value=${formattedDate}
-          inputClasses="rounded-0 rounded-start"
-          placeholder="${getPlaceholder()}"
-          id=${this.togglerId}
-          aria-expanded="${this.menuIsOpen}"
-          ${ref(this.myDropdown)}
-          @click=${() => this._onClickButton()}
-          readonly
-          ?required=${this.required}
-          ?disabled=${this.disabled}
-          
-        ></sgds-input>
-        <sgds-button ?disabled=${this.disabled} buttonClasses="rounded-0 h-100" type="reset">${svgEl}</sgds-button>
-        <ul class="dropdown-menu" role="menu" part="menu">
-          <sgds-datepicker-header .view=${this.view} .switchDate=${this.displayDate}></sgds-datepicker-header>
-          <sgds-datepicker-calendar
-            .view=${this.view}
-            .displayDate=${this.displayDate}
-            .mode=${this.mode}
-            minDate=${this.minDate}
-            maxDate=${this.maxDate}
-          ></sgds-datepicker-calendar>
-        </ul>
-      </div>
-  </form>
+      <form>
+        <div class="">
+          <sgds-input
+            icon=${svgIcon}
+            .value=${formattedDate}
+            inputClasses="rounded-0 rounded-start"
+            placeholder="${getPlaceholder()}"
+            id=${this.togglerId}
+            aria-expanded="${this.menuIsOpen}"
+            ${ref(this.myDropdown)}
+            @click=${() => this._onClickButton()}
+            readonly
+            ?required=${this.required}
+            ?disabled=${this.disabled}
+          ></sgds-input>
+          <sgds-button ?disabled=${this.disabled} buttonClasses="rounded-0 h-100" type="reset">${svgEl}</sgds-button>
+          <ul class="dropdown-menu" role="menu" part="menu">
+            <sgds-datepicker-header .view=${this.view} .switchDate=${this.displayDate}></sgds-datepicker-header>
+            <sgds-datepicker-calendar
+              .view=${this.view}
+              .displayDate=${this.displayDate}
+              .mode=${this.mode}
+              minDate=${this.minDate}
+              maxDate=${this.maxDate}
+            ></sgds-datepicker-calendar>
+          </ul>
+        </div>
+      </form>
     `;
   }
 }
