@@ -276,23 +276,25 @@ describe("Stepper events", () => {
   });
 });
 
-describe("Stepper keyboard interactions", () =>{
-  it("keyboard enter will simulate a click behaviour on the markers", async() => {
+describe("Stepper keyboard interactions", () => {
+  it("keyboard enter will simulate a click behaviour on the markers", async () => {
     const el = await fixture<SgdsStepper>(
-      html` <sgds-stepper activeStep="2" steps='["Marker title 1", "Marker title 2", "Marker title 3"]'></sgds-stepper> `
+      html`
+        <sgds-stepper activeStep="2" steps='["Marker title 1", "Marker title 2", "Marker title 3"]'></sgds-stepper>
+      `
     );
-    const arrivedHandler = sinon.spy()
-    el.addEventListener("sgds-arrived", arrivedHandler)
-    const markers = el.shadowRoot?.querySelectorAll("div.stepper-item")
-    expect(markers?.[0]).to.have.class("is-completed").and.have.class("is-clickable")
-    expect(markers?.[0]).to.have.attribute("tabindex", "0")
-    expect(markers?.[1]).to.have.class("is-completed").and.have.class("is-clickable")
-    expect(markers?.[1]).to.have.attribute("tabindex", "0")
+    const arrivedHandler = sinon.spy();
+    el.addEventListener("sgds-arrived", arrivedHandler);
+    const markers = el.shadowRoot?.querySelectorAll("div.stepper-item");
+    expect(markers?.[0]).to.have.class("is-completed").and.have.class("is-clickable");
+    expect(markers?.[0]).to.have.attribute("tabindex", "0");
+    expect(markers?.[1]).to.have.class("is-completed").and.have.class("is-clickable");
+    expect(markers?.[1]).to.have.attribute("tabindex", "0");
 
-    await sendKeys({press: "Tab"})
-    await sendKeys({press: "Enter"})
-    await el.updateComplete
-    expect(markers?.[0]).to.have.class("is-active")
-    expect(arrivedHandler).to.be.calledOnce
-  })
-} )
+    await sendKeys({ press: "Tab" });
+    await sendKeys({ press: "Enter" });
+    await el.updateComplete;
+    expect(markers?.[0]).to.have.class("is-active");
+    expect(arrivedHandler).to.be.calledOnce;
+  });
+});
