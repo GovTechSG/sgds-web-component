@@ -56,6 +56,15 @@ describe("makeArgTypes()", () => {
       attribute: "content"
     }
   ];
+  const arrayOfStrings = [
+    {
+      kind: "field",
+      name: "content",
+      type: { text: "string[]" },
+      default: '""',
+      attribute: "content"
+    }
+  ];
   const typeOthersInput = [
     {
       kind: "field",
@@ -106,10 +115,10 @@ describe("makeArgTypes()", () => {
     expect(makeArgTypes(multipleInput).content.options).deep.to.equal(expected.content.options);
   });
   it("type.text.array output should be content.control.object", () => {
-    const expected = {
-      content: { control: "object" }
-    };
     expect(makeArgTypes(arrayInput).content.control).to.equal("object");
+  });
+  it("type.text.string[] output should be content.control.object", () => {
+    expect(makeArgTypes(arrayOfStrings).content.control).to.equal("object");
   });
   it("type.text others output should be content.control.object", () => {
     const expected = {
