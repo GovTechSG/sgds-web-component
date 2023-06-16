@@ -1,101 +1,87 @@
-export const TemplateLinks = (args) =>
+export const TemplateLinks = args =>
   html`
-    <sgds-alert alertClasses="d-flex align-items-center">
+    <sgds-alert show>
       <svg
+        slot="icon"
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"
         fill="currentColor"
-        class="bi bi-info-circle flex-shrink-0 me-4 align-self-start mt-2"
+        class="bi bi-info-circle"
         viewBox="0 0 16 16"
       >
-        <path
-          d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-        />
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
         <path
           d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
         />
       </svg>
-      <div>
-        This is a primary alert with&nbsp;<a class="alert-link"
-          >an example link</a
-        >. Give it a click if you like.
-      </div>
+        <div>This is a primary alert with&nbsp;<a>an example link</a>. Give it a click if you like.</div>
     </sgds-alert>
   `;
 
-export const TemplateAddContent = (args) =>
+export const TemplateAddContent = args =>
   html`
-    <sgds-alert variant="success" alertClasses="d-flex align-items-center">
-     <svg
+    <sgds-alert variant="success" show>
+      <svg
+        slot="icon"
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"
         fill="currentColor"
-        class="bi bi-info-circle flex-shrink-0 me-4 align-self-start mt-2"
+        class="bi bi-info-circle"
         viewBox="0 0 16 16"
       >
-        <path
-          d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-        />
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
         <path
           d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
         />
       </svg>
       <div>
-        <h4 class="alert-heading">Hey, nice to see you</h4>
+        <sgds-alert-heading>Hello, nice to meet you</sgds-alert-heading>
         <p>
-          Aww yeah, you successfully read this important alert message. This
-          example text is going to run a bit longer so that you can see how
-          spacing within an alert works with this kind of content.
+          Aww yeah, you successfully read this important <sgds-alert-link>alert message</sgds-alert-link>. This example text is going to run a bit longer
+          so that you can see how spacing within an alert works with this kind of content.
         </p>
         <hr />
-        <p className="mb-0">
-          Whenever you need to, be sure to use margin utilities to keep things
-          nice and tidy.
-        </p>
+        <p>Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
       </div>
     </sgds-alert>
   `;
 
-export const TemplateWithButton = (args) =>
+export const TemplateWithButton = args =>
   html`
-    <sgds-alert
-      id="alertExample"
-      variant="warning"
-      alertClasses="d-flex align-items-center"
-      dismissible
+    <sgds-alert show id="showAlertExample" variant="warning" dismissible
       ><svg
+        slot="icon"
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"
         fill="currentColor"
-        class="bi bi-info-circle flex-shrink-0 me-4 align-self-start mt-2"
+        class="bi bi-info-circle"
         viewBox="0 0 16 16"
       >
-        <path
-          d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-        />
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
         <path
           d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
         />
       </svg>
-      <div>
-        This is an Alert component. You may add the dismissible option.
-      </div></sgds-alert
+      <div>This is an Alert component. You may add the dismissible option.</div></sgds-alert
     >
     <br />
-    <sgds-button variant="danger" refId="alertExample" methodType="toggleShow"
-      >Show Alert</sgds-button
-    >
+    <sgds-button @click=${showAlert}>Show Alert</sgds-button>
   `;
+
+export const showAlert = () => {
+  const alert = document.querySelector("sgds-alert#showAlertExample")
+  alert.showAlert()
+}
 
 ## Links
 
 For links, use the following code snippets for any of the alert variants
 
 <Canvas>
-  <Story name='Links'>{TemplateLinks.bind({})}</Story>
+  <Story name="Links">{TemplateLinks.bind({})}</Story>
 </Canvas>
 
 ## Additional Content
@@ -103,7 +89,7 @@ For links, use the following code snippets for any of the alert variants
 Alerts can contain whatever content you like. Headers, paragraphs, dividers etc.
 
 <Canvas>
-  <Story name='Additional Content'>{TemplateAddContent.bind({})}</Story>
+  <Story name="Additional Content">{TemplateAddContent.bind({})}</Story>
 </Canvas>
 
 ## Dismissible
@@ -111,10 +97,7 @@ Alerts can contain whatever content you like. Headers, paragraphs, dividers etc.
 Add the dismissible prop to add a dismiss button to the Alert. An `sgds-button` with id reference `refId` prop to the alert can also be used to show the dismissed alert with `methodType` prop of value `toggleShow`.
 
 <Canvas>
-  <Story
-    name='Dismissible'
-    args={{ alertClasses: "d-flex align-items-center" }}
-  >
+  <Story name="Dismissible" args={{ alertClasses: "d-flex align-items-center" }}>
     {TemplateWithButton.bind({})}
   </Story>
 </Canvas>

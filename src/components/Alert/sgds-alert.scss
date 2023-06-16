@@ -1,0 +1,17 @@
+slot[name="icon"]::slotted(svg) {
+  margin-right: 1.5rem;
+}
+
+i {
+  position: relative;
+  top: 2px;
+}
+
+
+.alert-link{
+    color: #2A3343;
+    cursor: pointer;
+    &:hover {
+      color: #2A3343;
+    }
+}
