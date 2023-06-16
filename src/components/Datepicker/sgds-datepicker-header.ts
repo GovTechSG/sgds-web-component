@@ -99,6 +99,10 @@ export class SgdsCalendarHeader extends SgdsElement {
   }
 
   render() {
+    const { view, switchDate } = this;
+    const currentDate = new Date(); // Get the current date
+     // Check if the displayed date matches the currently selected date
+     const isCurrentDate = currentDate.toDateString() === switchDate.toDateString();
     return html`
       <div class="datepicker-header dropdown-header" role="heading">
         <div class="text-center d-flex justify-content-between align-items-center">

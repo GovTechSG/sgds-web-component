@@ -40,14 +40,15 @@ export class Calendar extends SgdsElement {
   @state() view = "days";
   /** @internal */
   @state() displayDateInternal: Date = new Date();
-  /** @internal */
-  @state() isDateSelected = false;
 
-  // changeView(view: string) {
-  //   this.view = view;
-  //   this.dispatchEvent(new CustomEvent("view-changed", { detail: this.view }));
-  //   console.log(this.view)
-  // }
+  connectedCallback() {
+    super.connectedCallback();
+  
+    if (this.initialValue) {
+      // Assign the initialValue to selectedDate array
+      this.selectedDate = [this.initialValue];
+    }
+  }
 
   setTimeToNoon(date: Date) {
     const newDate = new Date(date);
@@ -85,7 +86,8 @@ export class Calendar extends SgdsElement {
       this.displayDate = displayDateClone;
       this.emit("sgds-displayvalue", { detail: this.displayDateInput });
       this.emit("sgds-selectvalue", { detail: this.displayDate });
-      if (this.displayDateInput) this.isDateSelected = true;
+      // Add the selected date to the selectedDate array, for highlighting/maintaining the correct date
+      this.selectedDate = [displayDateClone];
     } else if (this.mode === "range") {
       // Range mode: Select a range of dates
       const selectedDates = [...this.selectedDate];
@@ -179,16 +181,16 @@ export class Calendar extends SgdsElement {
       const week = [];
       for (let j = 0; j <= 6; j++) {
         if (day <= monthLength && (i > 0 || j >= startingDay)) {
-          const className = undefined;
+          // Remove the existing className assignment
+          let className: string | undefined;
           const date = new Date(year, month, day, 12, 0, 0, 0).toISOString();
           // Check if the date matches the current date
           const isCurrentDate = new Date();
-          // console.log(isCurrentDate)
-          console.log(this.displayDate.getDate());
-          // Check if the date is in the selectedDates array
+
           const isSelected = selectedDates.some(
             selectedDate => Date.parse(date) === Date.parse(selectedDate.toISOString())
           );
+
           const beforeMinDate = minimumDate && Date.parse(date) < Date.parse(minimumDate.toISOString());
           const afterMinDate = maximumDate && Date.parse(date) > Date.parse(maximumDate.toISOString());
           const clickHandler = beforeMinDate || afterMinDate ? undefined : this.handleDayClick;
@@ -200,6 +202,10 @@ export class Calendar extends SgdsElement {
           const isCurrentMonth = isCurrentDate.getMonth() === this.displayDate.getMonth();
           const isCurrentYear = isCurrentDate.getFullYear() === this.displayDate.getFullYear();
           const isCurrentDay = isCurrentDate.getDate() === day;
+
+          // const shouldHighlight = (this.displayDateInput || this.initialValue) && this.displayDate.getDate() === day;
+          // const shouldHighlight = day === this.displayDate.getDate();
+
           const style = {
             cursor: "pointer",
             borderRadius: "0"
@@ -210,7 +216,7 @@ export class Calendar extends SgdsElement {
               data-day=${day}
               class=${classMap({
                 "text-primary": isCurrentDay && isCurrentMonth && isCurrentYear,
-                "bg-primary-100": (this.displayDateInput || this.initialValue) && this.displayDate.getDate() === day
+                "bg-primary-100": isSelected
               })}
               style=${styleMap(style)}
               @click=${clickHandler}
