@@ -43,7 +43,7 @@ export class Calendar extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
-  
+
     if (this.initialValue) {
       // Assign the initialValue to selectedDate array
       this.selectedDate = [this.initialValue];
@@ -199,14 +199,17 @@ export class Calendar extends SgdsElement {
           // } else if (isSelected) {
           //   className = "bg-primary-100";
           // }
+
           const isCurrentMonth = isCurrentDate.getMonth() === this.displayDate.getMonth();
           const isCurrentYear = isCurrentDate.getFullYear() === this.displayDate.getFullYear();
           const isCurrentDay = isCurrentDate.getDate() === day;
 
           // const shouldHighlight = (this.displayDateInput || this.initialValue) && this.displayDate.getDate() === day;
           // const shouldHighlight = day === this.displayDate.getDate();
-
-          const style = {
+          const mutedButtonStyle = {
+            cursor: "default"
+          };
+          const buttonStyles = {
             cursor: "pointer",
             borderRadius: "0"
           };
@@ -216,9 +219,10 @@ export class Calendar extends SgdsElement {
               data-day=${day}
               class=${classMap({
                 "text-primary": isCurrentDay && isCurrentMonth && isCurrentYear,
-                "bg-primary-100": isSelected
+                "bg-primary-100": isSelected,
+                "text-muted": beforeMinDate || afterMinDate
               })}
-              style=${styleMap(style)}
+              style=${styleMap(beforeMinDate || afterMinDate ? { ...buttonStyles, ...mutedButtonStyle } : buttonStyles)}
               @click=${clickHandler}
             >
               ${day}

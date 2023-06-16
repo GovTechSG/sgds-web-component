@@ -122,7 +122,6 @@ export class SgdsDatepicker extends DatepickerElement {
   handleDateChanged(event) {
     console.log("received view date event", event.detail);
     this.displayDate = event.detail;
-   
   }
 
   @eventOptions({ capture: true })
