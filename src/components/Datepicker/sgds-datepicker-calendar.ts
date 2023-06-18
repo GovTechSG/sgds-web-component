@@ -30,10 +30,9 @@ export class Calendar extends SgdsElement {
   @property({ type: String }) maxDate?: string;
   /** @internal */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
-
+  /** @internal */
   @property({ type: Date }) initialValue?: Date;
 
-  //   @property({ type: String }) view: string = "days";
   /** @internal */
   @state() year: number = this.displayDate.getFullYear();
   /** @internal */

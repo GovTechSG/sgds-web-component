@@ -1,6 +1,6 @@
 import { property } from "lit/decorators.js";
 import { DropdownElement } from "./dropdown-element";
-import { Calendar, SgdsCalendarHeader, SgdsDatepicker } from "../components/Datepicker";
+import { Calendar, SgdsCalendarHeader, SgdsDatepicker } from "../components/DatePicker";
 
 const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
