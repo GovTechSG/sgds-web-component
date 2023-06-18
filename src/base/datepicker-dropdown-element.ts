@@ -6,14 +6,13 @@ const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
 const ESC = "Escape";
 
-
 export class DatepickerElement extends DropdownElement {
   @property({ reflect: true }) datepickerClasses?: string;
   @property({ type: Boolean, reflect: true }) required = false;
 
-   /** Controls the close behaviour of dropdown menu. By default menu auto-closes when SgdsDropdownItem or area outside dropdown is clicked */
-   @property({ type: String })
-   close: "outside" | "default" | "inside" = "inside";
+  /** Controls the close behaviour of dropdown menu. By default menu auto-closes when SgdsDropdownItem or area outside dropdown is clicked */
+  @property({ type: String })
+  close: "outside" | "default" | "inside" = "inside";
 
   _handleKeyboardEvent(e: KeyboardEvent) {
     switch (e.key) {
@@ -29,6 +28,4 @@ export class DatepickerElement extends DropdownElement {
         break;
     }
   }
-
-  
 }

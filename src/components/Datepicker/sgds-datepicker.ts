@@ -6,7 +6,7 @@ import { DropdownElement } from "../../base/dropdown-element";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 // import { SgdsCalendarHeader } from "./sgds-datepicker";
 import styles from "./sgds-datepicker.scss";
-import { classMap } from "lit/directives/class-map";
+import {classMap} from 'lit/directives/class-map.js';
 
 export type DropDirection = "left" | "right" | "up" | "down";
 export type DropdownButtonVariant =
@@ -26,7 +26,13 @@ export class SgdsDatepicker extends DatepickerElement {
   @query("sgds-datepicker-calendar")
   private datepickerCalendar!: HTMLInputElement;
 
-  @property({ reflect: true }) datepickerClasses?: string;
+
+   /** Forwards classes to the native HTMLInputElement of the component. Can be used to insert any classes from bootstrap such as mt-2 */
+  @property({ reflect: true }) inputClasses?: string;
+
+   /** Forwards classes to the native HTMLButtonElement of the component. Can be used to insert any classes from bootstrap such as mt-2 */
+  @property({ reflect: true }) buttonClasses?: string;
+
   @property({ type: Boolean, reflect: true }) required = false;
   /** Controls auto-flipping of menu */
   @property({ type: Boolean, reflect: true, state: false })
@@ -34,7 +40,10 @@ export class SgdsDatepicker extends DatepickerElement {
   /** Sets color of close button */
   @property({ type: String })
   variant: DropdownButtonVariant = "secondary";
-  noFlip = false;
+
+
+  @property({ type: Boolean, reflect: true })  noFlip = false;
+
   /** @internal */
   @property({ type: String })
   view: string;
@@ -173,8 +182,6 @@ export class SgdsDatepicker extends DatepickerElement {
     this.displayDate = event.detail;
   }
 
-
-
   render() {
     // const onClear = () => {
     //   this.displayDateInput = undefined;
@@ -264,7 +271,7 @@ export class SgdsDatepicker extends DatepickerElement {
           <sgds-input
             icon=${svgIcon}
             .value=${formattedDate}
-            inputClasses="rounded-0 rounded-start"
+            inputClasses="${this.inputClasses ? this.inputClasses : ''} rounded-0 rounded-start"
             placeholder="${getPlaceholder()}"
             id=${this.togglerId}
             aria-expanded="${this.menuIsOpen}"
@@ -276,7 +283,7 @@ export class SgdsDatepicker extends DatepickerElement {
           ></sgds-input>
           <sgds-button
             ?disabled=${this.disabled}
-            buttonClasses="rounded-0 h-100"
+            buttonClasses="${this.buttonClasses ? this.buttonClasses : ''} rounded-0 h-100"
             type="reset"
             @click=${() => this.hideMenu()}
             >${svgEl}</sgds-button
