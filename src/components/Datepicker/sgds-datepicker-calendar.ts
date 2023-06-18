@@ -5,6 +5,7 @@ import styles from "./sgds-datepicker-calendar.scss";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { styleMap } from "lit/directives/style-map.js";
+import { DatepickerElement } from "../../base/datepicker-dropdown-element";
 
 @customElement("sgds-datepicker-calendar")
 export class Calendar extends SgdsElement {
@@ -31,6 +32,7 @@ export class Calendar extends SgdsElement {
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
 
   @property({ type: Date }) initialValue?: Date;
+
   //   @property({ type: String }) view: string = "days";
   /** @internal */
   @state() year: number = this.displayDate.getFullYear();

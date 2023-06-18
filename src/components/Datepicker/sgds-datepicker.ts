@@ -9,17 +9,32 @@ import styles from "./sgds-datepicker.scss";
 import { classMap } from "lit/directives/class-map";
 
 export type DropDirection = "left" | "right" | "up" | "down";
-
+export type DropdownButtonVariant =
+  | "primary"
+  | "secondary"
+  | "success"
+  | "danger"
+  | "warning"
+  | "info"
+  | "light"
+  | "dark";
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 @customElement("sgds-datepicker")
 export class SgdsDatepicker extends DatepickerElement {
   static styles = [DatepickerElement.styles, styles];
 
-  // @query("sgds-datepicker-header")
-  // private datepickerHeader!: SgdsCalendarHeader;
+  @query("sgds-datepicker-calendar")
+  private datepickerCalendar!: HTMLInputElement;
+
   @property({ reflect: true }) datepickerClasses?: string;
   @property({ type: Boolean, reflect: true }) required = false;
+  /** Controls auto-flipping of menu */
+  @property({ type: Boolean, reflect: true, state: false })
 
+  /** Sets color of close button */
+  @property({ type: String })
+  variant: DropdownButtonVariant = "secondary";
+  noFlip = false;
   /** @internal */
   @property({ type: String })
   view: string;
@@ -56,10 +71,6 @@ export class SgdsDatepicker extends DatepickerElement {
 
   @property({ type: Date }) setInitialDate: Date = new Date();
 
-  /** Controls the close behaviour of dropdown menu. By default menu auto-closes when SgdsDropdownItem or area outside dropdown is clicked */
-  @property({ type: String })
-  close: "outside" | "default" | "inside" = "inside";
-
   constructor() {
     super();
     this.modifierOpt = [
@@ -74,6 +85,9 @@ export class SgdsDatepicker extends DatepickerElement {
 
   connectedCallback() {
     super.connectedCallback();
+
+    // Add the click event listener to the document
+    document.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
 
     // Add event listener for "view-changed" event
     this.addEventListener("sgds-view", this.handleViewChanged); // this is for the mid button to change the calendar view
@@ -93,24 +107,12 @@ export class SgdsDatepicker extends DatepickerElement {
     }
   }
 
-  // updated(changedProperties) {
-  //   super.updated(changedProperties);
-  //   if (changedProperties.has("displayDate")) {
-  //     this.requestUpdate("value", null); // Update the placeholder value
-  //   }
-  // }
+  disconnectedCallback() {
+    super.disconnectedCallback();
 
-  // disconnectedCallback() {
-  //   super.disconnectedCallback();
-  //   // Remove event listener when the component is disconnected
-  //   this.removeEventListener("sgds-view", this.handleViewChanged);
-  // }
-
-  // formatDisplayDate() {
-  //   const options = { day: "2-digit", month: "2-digit", year: "numeric" };
-  //   const formattedDate = this.displayDate.toLocaleDateString(undefined, options);
-  //   return formattedDate;
-  // }
+    // Remove the click event listener from the document
+    document.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
+  }
 
   @eventOptions({ capture: true })
   handleViewChanged(event) {
@@ -144,6 +146,9 @@ export class SgdsDatepicker extends DatepickerElement {
         this.displayDateInput = newSelectedDate[0];
       }
     }
+
+    // hide the menu when dayview button is clicked
+    this.hideMenu();
   }
 
   @eventOptions({ capture: true })
@@ -167,6 +172,8 @@ export class SgdsDatepicker extends DatepickerElement {
     console.log("received selected year", event.detail);
     this.displayDate = event.detail;
   }
+
+
 
   render() {
     // const onClear = () => {
@@ -267,8 +274,19 @@ export class SgdsDatepicker extends DatepickerElement {
             ?required=${this.required}
             ?disabled=${this.disabled}
           ></sgds-input>
-          <sgds-button ?disabled=${this.disabled} buttonClasses="rounded-0 h-100" type="reset">${svgEl}</sgds-button>
-          <ul class="sgds datepicker dropdown-menu" role="menu" part="menu">
+          <sgds-button
+            ?disabled=${this.disabled}
+            buttonClasses="rounded-0 h-100"
+            type="reset"
+            @click=${() => this.hideMenu()}
+            >${svgEl}</sgds-button
+          >
+          <ul
+            class="sgds datepicker dropdown-menu"
+            role="menu"
+            part="menu"
+            @click=${(event: MouseEvent) => event.stopPropagation()}
+          >
             <sgds-datepicker-header .view=${this.view} .switchDate=${this.displayDate}></sgds-datepicker-header>
             <sgds-datepicker-calendar
               .view=${this.view}
