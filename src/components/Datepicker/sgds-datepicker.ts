@@ -59,7 +59,7 @@ export class SgdsDatepicker extends DatepickerElement {
   /** @internal */
   @property({ type: Date }) displayDate: Date = new Date();
 
- /** @internal */
+  /** @internal */
   @property({ type: Date }) displayDateInput?: Date;
   /** Date format reflected on input  */
   @property({ type: String }) dateFormat: DateFormat = "DD/MM/YYYY";
@@ -72,8 +72,6 @@ export class SgdsDatepicker extends DatepickerElement {
 
   /** Changes DatePicker to single date selection or range date selection */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
-
-
 
   constructor() {
     super();
@@ -178,11 +176,6 @@ export class SgdsDatepicker extends DatepickerElement {
   }
 
   render() {
-    // const onClear = () => {
-    //   this.displayDateInput = undefined;
-    // };
-
-    // , endDate: Date | undefined,
 
     const makeInputValueString = (startDate: Date | undefined, dateFormat: DateFormat) => {
       // if (!startDate && !endDate) return "";

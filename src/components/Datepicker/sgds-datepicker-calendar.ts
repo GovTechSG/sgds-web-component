@@ -205,8 +205,6 @@ export class Calendar extends SgdsElement {
           const isCurrentYear = isCurrentDate.getFullYear() === this.displayDate.getFullYear();
           const isCurrentDay = isCurrentDate.getDate() === day;
 
-          // const shouldHighlight = (this.displayDateInput || this.initialValue) && this.displayDate.getDate() === day;
-          // const shouldHighlight = day === this.displayDate.getDate();
           const mutedButtonStyle = {
             cursor: "default"
           };
@@ -220,7 +218,11 @@ export class Calendar extends SgdsElement {
               data-day=${day}
               class=${classMap({
                 "text-primary": isCurrentDay && isCurrentMonth && isCurrentYear,
-                "bg-primary-100": isSelected,
+                "bg-primary-100":
+                  isSelected ||
+                  (selectedDates.length > 0 &&
+                    (rangeSelectedDates.some(d => Date.parse(date) === Date.parse(d.toISOString())) ||
+                      Date.parse(date) === Date.parse(selectedDates[0].toISOString()))),
                 "text-muted": beforeMinDate || afterMinDate
               })}
               style=${styleMap(beforeMinDate || afterMinDate ? { ...buttonStyles, ...mutedButtonStyle } : buttonStyles)}
