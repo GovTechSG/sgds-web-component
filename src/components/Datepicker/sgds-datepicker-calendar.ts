@@ -73,7 +73,7 @@ export class Calendar extends SgdsElement {
   }
 
   handleDayClick(event: MouseEvent) {
-    const day = (event.currentTarget as HTMLTableCellElement).dataset.day!;
+    const day = (event.currentTarget as HTMLTableCellElement).dataset.day;
     const displayDateClone = new Date(this.displayDate);
     displayDateClone.setDate(parseInt(day));
 
@@ -178,7 +178,7 @@ export class Calendar extends SgdsElement {
       for (let j = 0; j <= 6; j++) {
         if (day <= monthLength && (i > 0 || j >= startingDay)) {
           // Remove the existing className assignment
-          let className: string | undefined;
+          // let className: string | undefined;
           const date = new Date(year, month, day, 12, 0, 0, 0).toISOString();
           // Check if the date matches the current date
           const isCurrentDate = new Date();
