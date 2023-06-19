@@ -1,0 +1,82 @@
+export const StepperFormTemplate = () => {
+  return html`
+    <sgds-stepper
+      id="myStepper"
+      steps='["Personal Details", "Address & Contact Information", "Additional Details"]'
+      activestep="1"
+    >
+      <div slot="step-1" class="mb-4">
+        <div class="row">
+          <div class="col mb-2">
+            <form>
+              <sgds-input label="First Name" hintText="Enter first name" required></sgds-input>
+              <sgds-input label="Last Name" hintText="Enter last name" required></sgds-input>
+              <sgds-radio-group required>
+                <sgds-radio value="1" isInline>Option 1</sgds-radio>
+                <sgds-radio value="2" isInline>Option 2</sgds-radio>
+              </sgds-radio-group>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div slot="step-2" class="mb-4">
+        <div class="row">
+          <div class="col mb-2">
+            <form>
+              <sgds-input label="Email" hintText="Enter email" required></sgds-input>
+              <sgds-input label="Address" hintText="eg. Blk 243 Sengkang Avenue #02-11" required></sgds-input>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div slot="step-3" class="mb-4">
+        <div class="row">
+          <div class="col mb-2">
+            <form>
+              <sgds-input label="Contact Number" required></sgds-input>
+              <sgds-input label="Employment history" required></sgds-input>
+            </form>
+          </div>
+        </div>
+      </div>
+    </sgds-stepper>
+    <div style="display:flex;justify-content:space-between;margin-top:1rem;">
+      <div>
+        <sgds-button class="me-3" variant="light" @click="${reset}">Reset</sgds-button>
+        <sgds-button class="me-3" variant="primary" @click="${nextStep}">Next</sgds-button>
+        <sgds-button @click="${previousStep}" variant="secondary">Back</sgds-button>
+      </div>
+      <div>
+        <sgds-button class="m-2" variant="danger" @click="${firstStep}">Go to first page</sgds-button>
+        <sgds-button class="m-2" variant="warning" @click="${lastStep}">Go to last page</sgds-button>
+      </div>
+    </div>
+  `;
+};
+
+export const reset = () => {
+  const stepper = document.querySelector("#myStepper");
+  stepper.reset()
+}
+export const nextStep = () => {
+  const stepper = document.querySelector("#myStepper");
+  stepper.nextStep();
+};
+export const previousStep = () => {
+  const stepper = document.querySelector("#myStepper");
+  stepper.previousStep();
+};
+export const lastStep = () => {
+  const stepper = document.querySelector("#myStepper");
+  stepper.lastStep();
+};
+export const firstStep = () => {
+  const stepper = document.querySelector("#myStepper");
+  stepper.firstStep();
+};
+
+## Stepper in a form context
+
+<Canvas>
+  <Story name="Example">{StepperFormTemplate.bind({})}</Story>
+</Canvas>

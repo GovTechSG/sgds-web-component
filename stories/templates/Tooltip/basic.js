@@ -25,3 +25,5 @@ export const args = {
   content: "This is a tooltip",
   placement: "top"
 };
+
+export const parameters = {};

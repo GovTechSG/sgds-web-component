@@ -1,12 +1,12 @@
-// @import '../../utils/base.scss';
-//TODO: Double check with LT if still need the classes below 
   :host {
-    --sgds-modal-width: 35rem;
-    --sgds-modal-z-index: 1055;
-    --sgds-modal-padding: 1.5rem;
-    --sgds-modal-border-radius: 5px;
-    --sgds-modal-border-width: 1px;
-    --sgds-modal-overlay-color:rgba(0,0,0,0.5);
+    --modal-padding: 1.5rem;
+    --modal-panel-z-index: 1055;
+    --modal-panel-width: 35rem;
+    --modal-panel-height: auto;
+    --modal-panel-background-color: white;
+    --modal-panel-border-radius: 5px;
+    --modal-header-bottom-border-line-width: 1px;
+    --modal-overlay-background-color:rgba(0,0,0,0.5);
     display: contents;
   }
 
@@ -16,7 +16,8 @@
 
   .modal {
     display: flex;
-    align-items: center;
+    align-items: start;
+    padding-top: 1.75rem;
     justify-content: center;
     position: fixed;
     top: 0;
@@ -25,17 +26,24 @@
     left: 0;
     z-index: 1050;
     font-family: var(--sgds-body-font-family);
+    
+  }
+
+  .modal.centered {
+    align-items: center;
+    padding-top: 0;
   }
 
   .modal-panel {
     display: flex;
     flex-direction: column;
-    z-index: var(--sgds-modal-z-index);
-    width: var(--sgds-modal-width);
+    z-index: var(--modal-panel-z-index);
+    width: var(--modal-panel-width);
+    height: var(--modal-panel-height);
     max-width: calc(100% - 2.25rem);
     max-height: calc(100% - 2.25rem);
-    background-color: white;
-    border-radius: var(--sgds-modal-border-radius);
+    background-color: var(--modal-panel-background-color);
+    border-radius: var(--modal-panel-border-radius);
   }
 
   .modal-panel:focus {
@@ -63,9 +71,9 @@
     line-height: 1.33;
     font-size: calc(1.275rem + 0.3vw);
     display: flex;
-    padding: var(--sgds-modal-padding);
+    padding: var(--modal-padding);
     align-items: center;
-    border-bottom: var(--sgds-modal-border-width) solid var(--sgds-gray-400, #98a2b3);
+    border-bottom: var(--modal-header-bottom-border-line-width) solid var(--sgds-gray-400, #98a2b3);
     &.centered{
       border-bottom: 0;
       padding-bottom: 0;
@@ -74,18 +82,14 @@
   }
 
   .modal-title {
+    display:flex;
     flex: 1 1 auto;
-    // @extend .h3;
-    // @extend .gap-3;
+    align-items: center;
     gap: 1rem;
-    margin: 0;
     &.centered{
       justify-content: center;
       flex-direction: column;
       text-align: center;
-      // @extend .justify-content-center; 
-      // @extend .flex-column; 
-      // @extend .text-center; 
       margin-left: 3rem;
     }
   }
@@ -95,7 +99,6 @@
     display: flex;
     align-items: center;
     &.centered{
-      // @extend .align-self-start;
       align-self: flex-start;
       margin-top: -0.5rem;
     }
@@ -103,18 +106,22 @@
 
   .modal-body {
     flex: 1 1 auto;
-    padding: var(--sgds-modal-padding);
+    padding: var(--modal-padding);
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+    &.centered{
+      text-align: center;
+    }
   }
 
   .modal-footer {
     flex: 0 0 auto;
     text-align: right;
-    padding: var(--sgds-modal-padding);
+    padding: var(--modal-padding);
     padding-top:0;
     &.centered{
       text-align: center;
+      justify-content: center;
     }
   }
 
@@ -132,5 +139,5 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: var(--sgds-modal-overlay-color);
+    background-color: var(--modal-overlay-background-color);
   }

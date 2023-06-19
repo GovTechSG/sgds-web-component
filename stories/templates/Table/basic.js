@@ -24,3 +24,5 @@ export const Template = args => {
 };
 
 export const args = {};
+
+export const parameters = {};
