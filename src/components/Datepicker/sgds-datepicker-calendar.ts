@@ -45,7 +45,7 @@ export class Calendar extends SgdsElement {
   connectedCallback() {
     super.connectedCallback();
 
-    if (this.initialValue) {
+    if (this.initialValue && this.mode === "single") {
       // Assign the initialValue to selectedDate array
       this.selectedDate = [this.initialValue];
     }
@@ -77,9 +77,7 @@ export class Calendar extends SgdsElement {
   handleDayClick(event: MouseEvent) {
     const day = (event.currentTarget as HTMLTableCellElement).dataset.day!;
     const displayDateClone = new Date(this.displayDate);
-    console.log("check for value", displayDateClone);
     displayDateClone.setDate(parseInt(day));
-    console.log(this.displayDateInput);
 
     if (this.mode === "single") {
       // Single mode: Select a single date
@@ -102,25 +100,25 @@ export class Calendar extends SgdsElement {
       // Add the selected date to the range
       selectedDates.push(displayDateClone);
 
-      // Emit an event with the range of selected dates
-      this.emit("sgds-selectdate", { detail: selectedDates });
-
       // Update the selectedDate property
       this.selectedDate = selectedDates;
 
-      if (this.selectedDate.length === 2) {
-        // Format the start and end dates
-        const startDate = this.selectedDate[0];
-        const endDate = this.selectedDate[1];
-        const formattedStartDate = startDate.toLocaleDateString();
-        const formattedEndDate = endDate.toLocaleDateString();
+      // if (this.selectedDate.length === 2) {
+      //   // Format the start and end dates
+      //   const startDate = this.selectedDate[0];
+      //   const endDate = this.selectedDate[1];
+      //   const formattedStartDate = startDate.toLocaleDateString();
+      //   const formattedEndDate = endDate.toLocaleDateString();
 
-        // Update the displayDateInput with the formatted date range
-        this.displayDateInput = new Date(`${formattedStartDate} - ${formattedEndDate}`);
-      } else {
-        // Only start date is selected, update displayDateInput with the start date
-        this.displayDateInput = new Date(`${displayDateClone} - `);
-      }
+      //   // Update the displayDateInput with the formatted date range
+      //   this.displayDateInput = new Date(`${formattedStartDate} - ${formattedEndDate}`);
+      // } else {
+      //   // Only start date is selected, update displayDateInput with the start date
+      //   this.displayDateInput = new Date(`${displayDateClone} - `);
+      // }
+
+      // Emit an event with the range of selected dates
+      this.emit("sgds-selectdates", { detail: selectedDates });
     }
 
     // Check if the selected date is before minDate or after maxDate
@@ -159,7 +157,6 @@ export class Calendar extends SgdsElement {
   }
 
   render() {
-    const currentDate = this.setTimeToNoon(new Date());
     const selectedDates = this.selectedDate.map(d => this.setTimeToNoon(d));
     const rangeSelectedDates = this.generateIncrementDays(new Date(selectedDates[0]), new Date(selectedDates[1]));
 
@@ -195,11 +192,6 @@ export class Calendar extends SgdsElement {
           const beforeMinDate = minimumDate && Date.parse(date) < Date.parse(minimumDate.toISOString());
           const afterMinDate = maximumDate && Date.parse(date) > Date.parse(maximumDate.toISOString());
           const clickHandler = beforeMinDate || afterMinDate ? undefined : this.handleDayClick;
-          // if (isCurrentDate) {
-          //   className = "text-primary";
-          // } else if (isSelected) {
-          //   className = "bg-primary-100";
-          // }
 
           const isCurrentMonth = isCurrentDate.getMonth() === this.displayDate.getMonth();
           const isCurrentYear = isCurrentDate.getFullYear() === this.displayDate.getFullYear();

@@ -9,7 +9,7 @@ import styles from "./sgds-datepicker.scss";
 import { classMap } from "lit/directives/class-map.js";
 
 export type DropDirection = "left" | "right" | "up" | "down";
-export type DropdownButtonVariant =
+export type ButtonVariant =
   | "primary"
   | "secondary"
   | "success"
@@ -17,11 +17,21 @@ export type DropdownButtonVariant =
   | "warning"
   | "info"
   | "light"
-  | "dark";
+  | "dark"
+  | "link"
+  | "outline-primary"
+  | "outline-secondary"
+  | "outline-success"
+  | "outline-danger"
+  | "outline-warning"
+  | "outline-info"
+  | "outline-light"
+  | "outline-dark";
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 @customElement("sgds-datepicker")
 export class SgdsDatepicker extends DatepickerElement {
   static styles = [DatepickerElement.styles, styles];
+
 
   /** Forwards classes to the native HTMLInputElement of the component. Can be used to insert any classes from bootstrap such as mt-2 */
   @property({ reflect: true }) inputClasses?: string;
@@ -32,6 +42,7 @@ export class SgdsDatepicker extends DatepickerElement {
   /** Forwards classes to the non-calendar datepicker component. Can be used to insert any classes from bootstrap such as w-25 */
   @property({ reflect: true }) datepickerClasses?: string;
 
+  /** When true, adds required attribute to input element */
   @property({ type: Boolean, reflect: true }) required = false;
 
   /** Sets color of close button */
@@ -53,14 +64,18 @@ export class SgdsDatepicker extends DatepickerElement {
   /** @internal */
   @property({ type: Date }) selectedEndDate?: Date;
 
-  /** The initial value of DatePicker on first load. */
-  @property({ type: Date }) initialValue?: Date;
-
   /** @internal */
   @property({ type: Date }) displayDate: Date = new Date();
 
   /** @internal */
   @property({ type: Date }) displayDateInput?: Date;
+
+  /** The initial value of DatePicker on first load. eg. "2020-12-14" */
+  @property({ type: Date }) initialValue?: Date;
+
+  /** The initial value range of DatePicker on first load for range mode. eg.'["2023-06-22", "2023-06-11"]' */
+  @property({ type: Array }) initialValueRange?: Date[];
+
   /** Date format reflected on input  */
   @property({ type: String }) dateFormat: DateFormat = "DD/MM/YYYY";
 
@@ -98,14 +113,22 @@ export class SgdsDatepicker extends DatepickerElement {
     this.addEventListener("sgds-displayvalue", this.handleDisplayValue);
     this.addEventListener("sgds-selectmonth", this.handleSelectMonth);
     this.addEventListener("sgds-selectyear", this.handleSelectYear);
+    this.addEventListener("sgds-selectdates", this.handleSelectDates);
     // console.log(this.initialValue)
     // Set the initial value of displayDateInput if not already set
-    if (this.initialValue) {
+    if (this.mode === "single" && this.initialValue) {
       const setInitialDate = new Date(this.initialValue);
 
       // on initial load, to highlight the correct day,month,year date in view
       this.displayDate = setInitialDate;
       this.displayDateInput = setInitialDate;
+    }
+
+    if (this.mode === "range" && this.initialValueRange && this.initialValueRange.length === 2) {
+      const startDate = new Date(this.initialValueRange[0]);
+      const endDate = new Date(this.initialValueRange[1]);
+      this.selectedDateRange = [startDate, endDate];
+      this.selectedDateRange.sort((a, b) => a.getTime() - b.getTime());
     }
   }
 
@@ -114,6 +137,19 @@ export class SgdsDatepicker extends DatepickerElement {
 
     // Remove the click event listener from the document
     document.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
+  }
+
+  @eventOptions({ capture: true })
+  handleSelectDates(event) {
+    console.log("handle select dates", event.detail);
+    const newSelectedDates = event.detail;
+    if (this.mode === "range") {
+      // Sort the newSelectedDates array in ascending order
+      newSelectedDates.sort((a, b) => a.getTime() - b.getTime());
+
+      this.selectedDateRange = newSelectedDates;
+      this.displayDateInput = newSelectedDates.length > 0 ? newSelectedDates[0] : undefined;
+    }
   }
 
   @eventOptions({ capture: true })
@@ -176,11 +212,10 @@ export class SgdsDatepicker extends DatepickerElement {
   }
 
   render() {
+    const makeInputValueString = (startDate, endDate, dateFormat) => {
+      if (!startDate && !endDate) return "";
 
-    const makeInputValueString = (startDate: Date | undefined, dateFormat: DateFormat) => {
-      // if (!startDate && !endDate) return "";
-
-      const formatDate = (date: Date) => {
+      const formatDate = date => {
         if (!(date instanceof Date) || isNaN(date.getTime())) {
           return ""; // Return an empty string if the date is not a valid Date object
         }
@@ -198,9 +233,9 @@ export class SgdsDatepicker extends DatepickerElement {
           : `${formattedMonth}${separator}${formattedDay}${separator}${date.getFullYear()}`;
       };
 
-      // if (startDate && endDate) {
-      //   return `${formatDate(startDate)} - ${formatDate(endDate)}`;
-      // }
+      if (startDate && endDate) {
+        return `${formatDate(startDate)} - ${formatDate(endDate)}`;
+      }
 
       if (startDate) {
         return formatDate(startDate);
@@ -209,18 +244,12 @@ export class SgdsDatepicker extends DatepickerElement {
       return "";
     };
 
-    // // Get the formatted date string or an empty string if displayDateInput is not set
     let formattedDate = "";
-    // Include the initialValue in the formattedDate if it exists
     if (this.mode === "single") {
-      formattedDate = makeInputValueString(this.displayDateInput, this.dateFormat);
+      formattedDate = makeInputValueString(this.displayDateInput, undefined, this.dateFormat);
+    } else if (this.mode === "range") {
+      formattedDate = makeInputValueString(this.selectedDateRange[0], this.selectedDateRange[1], this.dateFormat);
     }
-    //  else if (this.mode === "range") {
-    //   formattedDate =
-    //     this.selectedDateRange.length > 0
-    //       ? makeInputValueString(this.selectedDateRange[0], this.selectedDateRange[1], this.dateFormat)
-    //       : "";
-    // }
 
     const getPlaceholder = (): string => {
       const validDateFormats: DateFormat[] = ["MM/DD/YYYY", "DD/MM/YYYY", "YYYY/MM/DD"];
@@ -270,6 +299,7 @@ export class SgdsDatepicker extends DatepickerElement {
             ?disabled=${this.disabled}
           ></sgds-input>
           <sgds-button
+            variant=${this.variant}
             ?disabled=${this.disabled}
             buttonClasses="${this.buttonClasses ? this.buttonClasses : ""} rounded-0 h-100"
             type="reset"
@@ -290,6 +320,7 @@ export class SgdsDatepicker extends DatepickerElement {
               .mode=${this.mode}
               minDate=${this.minDate}
               maxDate=${this.maxDate}
+              .selectedDate=${this.selectedDateRange}
             ></sgds-datepicker-calendar>
           </ul>
         </div>
