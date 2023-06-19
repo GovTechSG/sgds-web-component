@@ -1,11 +1,9 @@
 import { html } from "lit";
-import { css, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import styles from "./sgds-datepicker-calendar.scss";
 import { classMap } from "lit/directives/class-map.js";
-import SgdsElement from "../../base/sgds-element";
 import { styleMap } from "lit/directives/style-map.js";
-import { DatepickerElement } from "../../base/datepicker-dropdown-element";
+import SgdsElement from "../../base/sgds-element";
+import styles from "./sgds-datepicker-calendar.scss";
 
 @customElement("sgds-datepicker-calendar")
 export class Calendar extends SgdsElement {
@@ -21,9 +19,9 @@ export class Calendar extends SgdsElement {
   /** @internal */
   @property({ type: Array }) selectedDate: Date[] = [];
   /** @internal */
-  @property({ type: Date }) displayDate: Date = new Date();
+  @property({ attribute: false }) displayDate: Date = new Date();
   /** @internal */
-  @property({ type: Date }) displayDateInput: Date;
+  @property({ attribute: false }) displayDateInput: Date;
   /** @internal */
   @property({ type: String }) minDate?: string;
   /** @internal */
@@ -31,7 +29,7 @@ export class Calendar extends SgdsElement {
   /** @internal */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
   /** @internal */
-  @property({ type: Date }) initialValue?: Date;
+  @property({ attribute: false }) initialValue?: Date;
 
   /** @internal */
   @state() year: number = this.displayDate.getFullYear();

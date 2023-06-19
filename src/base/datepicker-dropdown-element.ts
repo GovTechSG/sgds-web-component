@@ -1,6 +1,5 @@
 import { property, state } from "lit/decorators.js";
 import { DropdownElement } from "./dropdown-element";
-import { Calendar, SgdsCalendarHeader, SgdsDatepicker } from "../components/DatePicker";
 import type { StrictModifiers } from "@popperjs/core";
 const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";

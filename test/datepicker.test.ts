@@ -1,10 +1,7 @@
-// import { assert, elementUpdated, expect, fixture, html } from "@open-wc/testing";
-// import { sendKeys } from "@web/test-runner-commands";
-// import sinon from "sinon";
-// import { SgdsButton } from "../src/components/Button";
-// import { SgdsInput } from "../src/components/Input";
-// import "../src/components/Datepicker";
-// import { Calendar, SgdsDatepicker } from "../src/components/Datepicker";
+import { assert, expect, fixture, html } from "@open-wc/testing";
+import sinon from "sinon";
+import "../src/components/DatePicker";
+import { Calendar, SgdsDatepicker } from "../src/components/DatePicker";
 
 // // Extend the type of SgdsDatepicker to include the custom method
 // interface CustomSgdsDatepicker extends SgdsDatepicker {

@@ -1,7 +1,7 @@
-import { LitElement, html, css } from "lit";
+import { html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import styles from "./sgds-datepicker-header.scss";
 import SgdsElement from "../../base/sgds-element";
+import styles from "./sgds-datepicker-header.scss";
 
 export const MONTH_LABELS = [
   "January",
@@ -23,7 +23,7 @@ export class SgdsCalendarHeader extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
   /** @internal */
-  @property({ type: Date })
+  @property({ attribute: false })
   switchDate: Date;
 
   /** @internal */

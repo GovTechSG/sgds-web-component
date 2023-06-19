@@ -1,12 +1,9 @@
 import { html } from "lit";
-import { customElement, eventOptions, property, query } from "lit/decorators.js";
+import { customElement, eventOptions, property } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DatepickerElement } from "../../base/datepicker-dropdown-element";
-import { DropdownElement } from "../../base/dropdown-element";
-import { unsafeHTML } from "lit/directives/unsafe-html.js";
 // import { SgdsCalendarHeader } from "./sgds-datepicker";
 import styles from "./sgds-datepicker.scss";
-import { classMap } from "lit/directives/class-map.js";
 
 export type DropDirection = "left" | "right" | "up" | "down";
 
@@ -45,22 +42,22 @@ export class SgdsDatepicker extends DatepickerElement {
   view: string;
 
   /** @internal */
-  @property({ type: Date }) selectedStartDate?: Date;
+  @property({ attribute: false }) selectedStartDate?: Date;
 
   /** @internal */
   @property({ type: Array }) selectedDateRange: Date[] = [];
 
   /** @internal */
-  @property({ type: Date }) selectedEndDate?: Date;
+  @property({ attribute: false }) selectedEndDate?: Date;
 
   /** @internal */
-  @property({ type: Date }) displayDate: Date = new Date();
+  @property({ attribute: false }) displayDate: Date = new Date();
 
   /** @internal */
-  @property({ type: Date }) displayDateInput?: Date;
+  @property({ attribute: false }) displayDateInput?: Date;
 
   /** The initial value of DatePicker on first load. eg. "2020-12-14" */
-  @property({ type: Date }) initialValue?: Date;
+  @property({ attribute: false }) initialValue?: Date;
 
   /** The initial value range of DatePicker on first load for range mode. eg.'["2023-06-22", "2023-06-11"]' */
   @property({ type: Array }) initialValueRange?: Date[];
