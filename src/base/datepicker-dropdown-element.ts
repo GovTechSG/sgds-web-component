@@ -6,15 +6,10 @@ const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
 const ESC = "Escape";
 
-
-
 export class DatepickerElement extends DropdownElement {
- 
   /** @internal */
   @state()
   modifierOpt: StrictModifiers[] = [];
-
-
 
   /** Controls the close behaviour of dropdown menu. By default menu auto-closes when SgdsDropdownItem or area outside dropdown is clicked */
   @property({ type: String })

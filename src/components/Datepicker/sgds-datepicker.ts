@@ -9,29 +9,18 @@ import styles from "./sgds-datepicker.scss";
 import { classMap } from "lit/directives/class-map.js";
 
 export type DropDirection = "left" | "right" | "up" | "down";
-export type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info"
-  | "light"
-  | "dark"
-  | "link"
-  | "outline-primary"
-  | "outline-secondary"
-  | "outline-success"
-  | "outline-danger"
-  | "outline-warning"
-  | "outline-info"
-  | "outline-light"
-  | "outline-dark";
+
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
+
+/**
+ * @summary The `DatePicker` Component is built using `Dropdown`, `FormControl` and `Button` components. By default, the Calendar points to current date and input has no value. The FormControl is a read-only input and users can only pick dates using the Calendar.
+ *
+ *
+ *
+ */
 @customElement("sgds-datepicker")
 export class SgdsDatepicker extends DatepickerElement {
   static styles = [DatepickerElement.styles, styles];
-
 
   /** Forwards classes to the native HTMLInputElement of the component. Can be used to insert any classes from bootstrap such as mt-2 */
   @property({ reflect: true }) inputClasses?: string;
@@ -299,7 +288,6 @@ export class SgdsDatepicker extends DatepickerElement {
             ?disabled=${this.disabled}
           ></sgds-input>
           <sgds-button
-            variant=${this.variant}
             ?disabled=${this.disabled}
             buttonClasses="${this.buttonClasses ? this.buttonClasses : ""} rounded-0 h-100"
             type="reset"
