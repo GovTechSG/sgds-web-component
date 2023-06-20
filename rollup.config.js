@@ -88,16 +88,16 @@ const buildSgdsPackage = () => {
       },
       plugins: wcPlugins
     },
-    // {
-    //   input: "src/main.ts",
-    //   output: {
-    //     file: packageJson.main,
-    //     format: "umd",
-    //     sourcemap: true,
-    //     name: "index"
-    //   },
-    //   plugins: wcPlugins
-    // }
+    {
+      input: "src/index.ts",
+      output: {
+        file: packageJson.main,
+        format: "umd",
+        sourcemap: true,
+        name: "index"
+      },
+      plugins: wcPlugins
+    }
     // ...wcfolderBuilds
   ];
 
