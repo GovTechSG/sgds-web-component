@@ -1,1 +1,1 @@
-export {SgdsFooter, ColumnLinks, Links} from "./sgds-footer";
+export { SgdsFooter, ColumnLinks, Links } from "./sgds-footer";
