@@ -1,1 +1,1 @@
-export * from "./sgds-checkbox";
+export {SgdsCheckbox} from "./sgds-checkbox";

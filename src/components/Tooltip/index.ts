@@ -1,1 +1,1 @@
-export * from "./sgds-tooltip";
+export {SgdsTooltip} from "./sgds-tooltip";

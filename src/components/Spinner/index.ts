@@ -1,1 +1,1 @@
-export { SgdsSpinner } from "./sgds-spinner";
+export { SgdsSpinner, Type } from "./sgds-spinner";

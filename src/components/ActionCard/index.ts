@@ -1,1 +1,1 @@
-export * from "./sgds-action-card";
+export { SgdsActionCard } from "./sgds-action-card";

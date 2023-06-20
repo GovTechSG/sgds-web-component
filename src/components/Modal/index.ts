@@ -1,1 +1,1 @@
-export * from "./sgds-modal";
+export {SgdsModal} from "./sgds-modal";

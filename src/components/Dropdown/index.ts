@@ -1,2 +1,2 @@
-export * from "./sgds-dropdown";
-export * from "./sgds-dropdown-item";
+export {SgdsDropdown, DropDirection, DropdownButtonVariant} from "./sgds-dropdown";
+export {SgdsDropdownItem} from "./sgds-dropdown-item";

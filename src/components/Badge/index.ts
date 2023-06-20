@@ -1,1 +1,1 @@
-export { SgdsBadge } from "./sgds-badge";
+export { SgdsBadge, BadgeVariant } from "./sgds-badge";

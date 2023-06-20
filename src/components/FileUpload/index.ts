@@ -1,1 +1,1 @@
-export { SgdsFileUpload } from "./sgds-file-upload";
+export { SgdsFileUpload, FileUploadButtonVariant } from "./sgds-file-upload";

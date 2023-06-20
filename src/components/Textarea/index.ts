@@ -1,1 +1,1 @@
-export * from "./sgds-textarea";
+export {SgdsTextarea} from "./sgds-textarea";

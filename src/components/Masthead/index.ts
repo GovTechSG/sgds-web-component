@@ -1,1 +1,1 @@
-export * from "./sgds-masthead";
+export {SgdsMasthead} from "./sgds-masthead";
