@@ -131,7 +131,7 @@ describe("<Alert>", () => {
     const onShowSpy = sinon.spy();
     el.addEventListener("sgds-show", onShowSpy);
 
-    el.showAlert();
+    el.show = true;
     await el.updateComplete;
     expect(el.show).to.be.true;
     expect(onShowSpy).to.have.been.calledOnce;

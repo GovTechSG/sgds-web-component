@@ -1,17 +1,12 @@
+:host {
+  --alert-icon-margin-right: 0.5rem;
+}
+
 slot[name="icon"]::slotted(svg) {
-  margin-right: 1.5rem;
+  margin-right: var(--alert-icon-margin-right);
 }
 
 i {
   position: relative;
   top: 2px;
-}
-
-
-.alert-link{
-    color: #2A3343;
-    cursor: pointer;
-    &:hover {
-      color: #2A3343;
-    }
 }
