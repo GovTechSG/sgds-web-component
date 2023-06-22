@@ -37,8 +37,6 @@ export class SgdsToast extends SgdsElement {
     | "dark"
     | "light";
 
-  @property({ type: String }) closeLabel?: string;
-
   /**Adds CSS styling to `<Toast />` based on the defined status */
   @property({ type: String, reflect: true }) status?: "success" | "warning" | "danger";
 
@@ -72,7 +70,7 @@ export class SgdsToast extends SgdsElement {
                 <slot name="icon"></slot>
                 <strong class="me-auto">Title</strong>
                 <sgds-closebutton
-                  closeLabel=${ifDefined(this.closeLabel)}
+                  closeLabel="Close the Toast"
                   @click=${this.handleCloseClick}
                   data-dismiss="toast"
                 ></sgds-closebutton>
