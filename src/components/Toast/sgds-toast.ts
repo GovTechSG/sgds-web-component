@@ -69,7 +69,7 @@ export class SgdsToast extends SgdsElement {
               aria-atomic="true"
             >
               <div class="toast-header">
-                <sl-icon name="check-circle" class="me-2"></sl-icon>
+                <slot name="icon"></slot>
                 <strong class="me-auto">Title</strong>
                 <sgds-closebutton
                   closeLabel=${ifDefined(this.closeLabel)}
