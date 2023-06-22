@@ -1,19 +1,26 @@
 import { customElement, property, query } from "lit/decorators.js";
-import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsBreadcrumbItem from "./sgds-breadcrumb-item";
 import styles from "./sgds-breadcrumb.scss";
+import { ifDefined } from "lit/directives/if-defined.js";
 
+/**
+ * @summary Breadcrumbs help users to navigate and understand where they are on the current website or service.
+ *
+ * @slot default - The slot to pass in custom elements of `SgdsBreadcrumbItems`.
+ * @slot separator - Defines all the separator of `SgdsBreadcrumbItems`. Defaults to "/"
+ *
+ * @csspart base - The nav element wrapper of `SgdsBreadcrumb`
+ */
 @customElement("sgds-breadcrumb")
 export class SgdsBreadcrumb extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
-
-  @property({ type: String, reflect: true }) ariaLabel = "breadcrumb";
-
-  @property({ reflect: true }) breadcrumbClasses?: string;
-
+  /** The aria-label of nav element within breadcrumb component. */
+  @property({ type: String }) ariaLabel: string;
+  /**@internal */
   @query("slot") defaultSlot: HTMLSlotElement;
+  /**@internal */
   @query('slot[name="separator"]') separatorSlot: HTMLSlotElement;
 
   // Generates a clone of the separator element to use for each breadcrumb item
@@ -60,19 +67,14 @@ export class SgdsBreadcrumb extends SgdsElement {
 
   render() {
     return html`
-      <nav
-        class="sgds breadcrumb
-            ${classMap({
-          [`${this.breadcrumbClasses}`]: this.breadcrumbClasses
-        })}"
-        aria-label=${this.ariaLabel}
-        part="base"
-      >
-        <slot @slotchange=${this.handleSlotChange}></slot>
+      <nav aria-label=${ifDefined(this.ariaLabel)} part="base">
+        <ol class="breadcrumb">
+          <slot @slotchange=${this.handleSlotChange}></slot>
+          <slot name="separator" hidden aria-hidden="true">
+            <span>/</span>
+          </slot>
+        </ol>
       </nav>
-      <slot name="separator" hidden aria-hidden="true">
-        <span class="sgds-breadcrumb-seperator"></span>
-      </slot>
     `;
   }
 }

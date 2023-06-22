@@ -1,15 +1,33 @@
 import { html } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, queryAsync, property } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
-import styles from "./sgds-dropdown.scss";
 import { DropdownElement } from "../../base/dropdown-element";
+import { SgdsButton } from "../Button";
 
 export type DropDirection = "left" | "right" | "up" | "down";
+export type DropdownButtonVariant =
+  | "primary"
+  | "secondary"
+  | "success"
+  | "danger"
+  | "warning"
+  | "info"
+  | "light"
+  | "dark";
+
+/**
+ * @summary `SgdsDropdown` toggles contextual overlays for displaying lists of links.
+ * @slot default - slot for sgds-dropdown-item passed into dropdown's menu
+ *
+ * @csspart menu - The dropdown's menu (ul element)
+ */
 @customElement("sgds-dropdown")
 export class SgdsDropdown extends DropdownElement {
-  static styles = [DropdownElement.styles, styles];
+  static styles = [DropdownElement.styles];
+
   constructor() {
     super();
+    /**@internal */
     this.modifierOpt = [
       {
         name: "offset",
@@ -18,6 +36,38 @@ export class SgdsDropdown extends DropdownElement {
         }
       }
     ];
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener("sgds-hide", this._resetMenu);
+  }
+  /** Controls auto-flipping of menu */
+  @property({ type: Boolean, reflect: true, state: false })
+  noFlip = false;
+
+  /** When true, aligns right edge of menu with right edge of button */
+  @property({ type: Boolean, reflect: true, state: false })
+  menuAlignRight = false;
+
+  /** The drop position of menu relative to the toggle button */
+  @property({ type: String, reflect: true, state: false })
+  drop: DropDirection = "down";
+
+  /** Sets color of Dropdown button */
+  @property({ type: String })
+  variant: DropdownButtonVariant = "secondary";
+
+  /**@internal */
+  @queryAsync("sgds-button")
+  private dropdownRef: Promise<SgdsButton>;
+
+  async firstUpdated() {
+    super.firstUpdated();
+    if (this.menuIsOpen) {
+      await this.dropdownRef;
+      this.bsDropdown.show();
+    }
   }
   render() {
     return html`
