@@ -13,7 +13,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 export class SgdsAlertLink extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
   /** Forwards to href attribute of anchor element */
-  @property({ type: String, reflect: true }) href: string
+  @property({ type: String, reflect: true }) href: string;
   /** Tells the browser where to open the link */
   @property() target: "_blank" | "_parent" | "_self" | "_top";
 
