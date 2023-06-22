@@ -41,8 +41,9 @@ export const Template = args =>
       <div>
         <sgds-alert-heading headerTag=${args.headerTag}>Hello, nice to meet you</sgds-alert-heading>
         <p>
-          Aww yeah, you successfully read this important <sgds-alert-link href=${args.href} target=${args.target}>alert message</sgds-alert-link>. This example text is going to run a bit longer
-          so that you can see how spacing within an alert works with this kind of content.
+          Aww yeah, you successfully read this important
+          <sgds-alert-link href=${args.href} target=${args.target}>alert message</sgds-alert-link>. This example text is
+          going to run a bit longer so that you can see how spacing within an alert works with this kind of content.
         </p>
         <hr />
         <p>Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>

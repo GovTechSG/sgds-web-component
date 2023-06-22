@@ -5,7 +5,7 @@ import styles from "./sgds-alert-link.scss";
 import { ifDefined } from "lit/directives/if-defined.js";
 /**
  * @summary Alert link are used within the alert's message that is passed into the default slot of `<sgds-alert>`
- * 
+ *
  * @slot default - The text content of the anchor element
  * @cssproperty --alert-link-anchor-color - The margin-right css of icon slot, to position the gap between icon and alert message
  */
