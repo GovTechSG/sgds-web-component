@@ -1,7 +1,8 @@
 import { assert, expect, fixture, html } from "@open-wc/testing";
 import sinon from "sinon";
-import "../src/components/DatePicker";
-import { Calendar, SgdsDatepicker } from "../src/components/DatePicker";
+import "../src/components/Datepicker";
+import { Calendar, SgdsDatepicker } from "../src/components/Datepicker";
+
 
 // // Extend the type of SgdsDatepicker to include the custom method
 // interface CustomSgdsDatepicker extends SgdsDatepicker {

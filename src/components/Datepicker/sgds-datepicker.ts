@@ -5,7 +5,7 @@ import { DatepickerElement } from "../../base/datepicker-dropdown-element";
 // import { SgdsCalendarHeader } from "./sgds-datepicker";
 import styles from "./sgds-datepicker.scss";
 
-export type DropDirection = "left" | "right" | "up" | "down";
+// export type DropDirection = "left" | "right" | "up" | "down";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
