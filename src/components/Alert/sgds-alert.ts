@@ -1,10 +1,9 @@
-import { customElement, property, query, queryAsync } from "lit/decorators.js";
+import { customElement, property, queryAsync } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-alert.scss";
 import { watch } from "../../utils/watch";
+import styles from "./sgds-alert.scss";
 
 //TODO: Alert Link
 /**
@@ -49,10 +48,10 @@ export class SgdsAlert extends SgdsElement {
   defaultSlot: HTMLElement;
 
   public showAlert() {
-      this.show = true;
+    this.show = true;
   }
-  public hideAlert(){
-    this.show = false
+  public hideAlert() {
+    this.show = false;
   }
   private handleCloseClick() {
     this.show = false;
