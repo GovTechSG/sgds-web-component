@@ -5,6 +5,8 @@ import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
 import styles from "./sgds-alert.scss";
 
+
+export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light";
 /**
  * @summary Alerts provide short, timely, and relevant information for your users. It can be a simple text message or customised HTML content with paragraphs, headings and links.
  *
@@ -16,9 +18,6 @@ import styles from "./sgds-alert.scss";
  *
  * @cssproperty --alert-icon-margin-right - The margin-right css of icon slot, to position the gap between icon and alert message
  */
-
-export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light";
-
 @customElement("sgds-alert")
 export class SgdsAlert extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
