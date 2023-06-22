@@ -7,7 +7,7 @@ import styles from "./sgds-alert.scss";
 
 /**
  * @summary Alerts provide short, timely, and relevant information for your users. It can be a simple text message or customised HTML content with paragraphs, headings and links.
- * 
+ *
  * @slot default - The alert's main content.
  * @slot icon - An icon to show in the alert. Pass in SVG elements.
  *
@@ -34,7 +34,7 @@ export class SgdsAlert extends SgdsElement {
 
   /** Optional for alert wrapper. Can be used to insert any utility classes such as me-auto */
   @property({ type: String, reflect: true }) alertClasses: string;
-  
+
   /** Closes the alert  */
   public close() {
     this.show = false;
@@ -61,14 +61,10 @@ export class SgdsAlert extends SgdsElement {
         role="alert"
         aria-hidden=${this.show ? "false" : "true"}
       >
-      <i><slot name="icon"></slot></i>
+        <i><slot name="icon"></slot></i>
         <slot></slot>
         ${this.dismissible
-          ? html`<button
-              class="btn-close btn-sm"
-              aria-label="close the alert"
-              @click=${this.close}
-            ></button>`
+          ? html`<button class="btn-close btn-sm" aria-label="close the alert" @click=${this.close}></button>`
           : null}
       </div>
     `;
