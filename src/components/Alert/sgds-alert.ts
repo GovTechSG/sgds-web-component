@@ -5,7 +5,6 @@ import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
 import styles from "./sgds-alert.scss";
 
-
 export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light";
 /**
  * @summary Alerts provide short, timely, and relevant information for your users. It can be a simple text message or customised HTML content with paragraphs, headings and links.

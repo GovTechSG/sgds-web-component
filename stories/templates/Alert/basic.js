@@ -51,7 +51,7 @@ export const Template = args =>
     </sgds-alert>
   `;
 export const args = {
-  // alertClasses: "d-flex align-items-center",
+  href: "#",
   show: true
 };
 
