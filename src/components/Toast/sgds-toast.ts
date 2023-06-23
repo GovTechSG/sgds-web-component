@@ -1,9 +1,11 @@
 import { customElement, property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-toast.scss";
+import { setDefaultAnimation, getAnimation } from "../../utils/animation-registry";
+import { watch } from "../../utils/watch";
+import { animateTo } from "../../utils/animate";
 
 export type ToastVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light";
 
@@ -11,16 +13,16 @@ export type ToastVariant = "primary" | "secondary" | "success" | "danger" | "war
 export class SgdsToast extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
-  @query('[part~="base"]') base: HTMLElement;
+  @query("div.toast") toast: HTMLElement;
 
   @property({ type: Boolean, reflect: true }) show = true;
 
   /**
    * Apply a CSS fade transition to the toast
    */
-  @property({ type: Boolean, reflect: true }) animation?: boolean;
+  @property({ type: Boolean, reflect: true }) noAnimation = false;
 
-  @property({ type: Boolean, reflect: true }) autohide? = false;
+  @property({ type: Boolean, reflect: true }) autohide = false;
 
   @property({ type: Number, reflect: true }) delay = Infinity;
 
@@ -45,6 +47,26 @@ export class SgdsToast extends SgdsElement {
     this.emit("sgds-close");
   }
 
+  @watch("show", { waitUntilFirstUpdate: true })
+  async handleShowChange() {
+    if (this.show) {
+      this.emit("sgds-show");
+      this.toast.hidden = false;
+
+      const toastAnimation = getAnimation(this, "toast.show");
+      !this.noAnimation && (await animateTo(this.toast, toastAnimation.keyframes, toastAnimation.options));
+
+      this.emit("sgds-after-show");
+    } else {
+      this.emit("sgds-hide");
+      const toastAnimation = getAnimation(this, "toast.hide");
+ 
+      !this.noAnimation && (await animateTo(this.toast, toastAnimation.keyframes, toastAnimation.options));
+      this.emit("sgds-after-hide");
+      this.toast.hidden = true;
+    }
+  }
+
   render() {
     if (this.autohide && this.delay < Infinity) {
       setTimeout(() => {
@@ -52,35 +74,40 @@ export class SgdsToast extends SgdsElement {
       }, this.delay);
     }
     return html`
-      ${this.show
-        ? html`
-            <div
-              part="base"
-              class="fade toast sgds show ${classMap({
-                [`is-${this.variant}`]: this.variant,
-                [`bg-${this.bg}`]: this.bg,
-                [`is-${this.status}`]: this.status
-              })}"
-              role="alert"
-              aria-hidden=${this.show ? "false" : "true"}
-              aria-live="assertive"
-              aria-atomic="true"
-            >
-              <div class="toast-header">
-                <slot name="icon"></slot>
-                <strong class="me-auto">Title</strong>
-                <sgds-closebutton
-                  closeLabel="Close the Toast"
-                  @click=${this.handleCloseClick}
-                  data-dismiss="toast"
-                ></sgds-closebutton>
-              </div>
-              <div class="toast-body">This is a toast message.</div>
-            </div>
-          `
-        : null}
+      <div
+        part="base"
+        class="toast show sgds ${classMap({
+          [`is-${this.variant}`]: this.variant,
+          [`bg-${this.bg}`]: this.bg,
+          [`is-${this.status}`]: this.status
+        })}"
+        role="alert"
+        aria-hidden=${this.show ? "false" : "true"}
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header">
+          <slot name="icon"></slot>
+          <strong class="me-auto">Title</strong>
+          <sgds-closebutton
+            closeLabel="Close the Toast"
+            @click=${this.handleCloseClick}
+            data-dismiss="toast"
+          ></sgds-closebutton>
+        </div>
+        <div class="toast-body">This is a toast message.</div>
+      </div>
     `;
   }
 }
 
 export default SgdsToast;
+
+setDefaultAnimation("toast.show", {
+  keyframes: [{ opacity: 0 }, { opacity: 1 }],
+  options: { duration: 400, easing: "ease" }
+});
+setDefaultAnimation("toast.hide", {
+  keyframes: [{ opacity: 1 }, { opacity: 0 }],
+  options: { duration: 400, easing: "ease" }
+});
