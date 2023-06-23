@@ -72,7 +72,6 @@ describe("<Alert>", () => {
     assert.shadowDom.equal(
       el,
       `      <div
-      part="base"
       class="
         sgds
         alert
@@ -166,7 +165,7 @@ describe("<Alert>", () => {
   describe("Web Accessibility", () => {
     it("Should have alert role", async () => {
       const el = await fixture(html`<sgds-alert></sgds-alert>`);
-      const alertEl = el.shadowRoot?.querySelector('[part="base"]');
+      const alertEl = el.shadowRoot?.querySelector("div.sgds.alert");
       assert.equal(alertEl?.getAttribute("role"), "alert");
     });
   });
