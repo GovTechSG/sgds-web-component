@@ -3,6 +3,7 @@ import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-toast-container.scss";
 import { classMap } from "lit/directives/class-map.js";
+import mergeDeep from "../../utils/mergeDeep";
 export type ToastPosition =
   | "top-start"
   | "top-center"
@@ -15,15 +16,23 @@ export type ToastPosition =
   | "bottom-end";
 
 const positionClasses = {
-  "top-start": "top-0 start-0",
-  "top-center": "top-0 start-50 translate-middle-x",
-  "top-end": "top-0 end-0",
-  "middle-start": "top-50 start-0 translate-middle-y",
-  "middle-center": "top-50 start-50 translate-middle",
-  "middle-end": "top-50 end-0 translate-middle-y",
-  "bottom-start": "bottom-0 start-0",
-  "bottom-center": "bottom-0 start-50 translate-middle-x",
-  "bottom-end": "bottom-0 end-0"
+  "top-start": {
+    top: "top-0",
+    start: "start-50",
+    translate: "translate-middle-x"
+  },
+  "top-center": {
+    top: "top-0",
+    start: "start-50",
+    translate: "translate-middle-x"
+  },
+  "top-end": { top: "top-0", start: "end-0", translate: null },
+  "middle-start": { top: "top-50", start: "start-0", translate: "translate-middle-y" },
+  "middle-center": { top: "top-50", start: "start-50", translate: "translate-middle" },
+  "middle-end": { top: "top-50", start: "end-0", translate: "translate-middle-y" },
+  "bottom-start": { top: "bottom-0", start: "start-0", translate: null },
+  "bottom-center": { top: "bottom-0", start: "start-50", translate: "translate-middle-x" },
+  "bottom-end": { top: "bottom-0", start: "end-0", translate: null }
 };
 
 /**
@@ -41,13 +50,24 @@ export class SgdsToastContainer extends SgdsElement {
   @property({ type: String, reflect: true }) position: ToastPosition;
 
   render() {
+    const generatePositionCssTokenObj = (position: ToastPosition) => {
+      if (!position) return {}
+      const arrayOfCssTokensObj = [positionClasses[position].top, positionClasses[position].start, positionClasses[position].translate]
+      .filter(cssToken => !!cssToken)
+      .map(truthyCssToken => ({ [`${truthyCssToken}`]: true }));
+      return Object.assign({}, ...arrayOfCssTokensObj)
+    }
     return html`
       <div
-        class=${classMap({
-          "sgds toast-container": true,
-          [`position-absolute`]: this.position,
-          [`${positionClasses[this.position]}`]: this.position
-        })}
+        class=${classMap(
+          mergeDeep(
+            {
+              "sgds toast-container": true,
+              [`position-absolute`]: this.position
+            },
+            generatePositionCssTokenObj(this.position)
+          )
+        )}
       >
         <slot></slot>
       </div>
