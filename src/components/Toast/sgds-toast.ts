@@ -55,7 +55,7 @@ export class SgdsToast extends SgdsElement {
   /**Adds CSS styling to `<Toast />` based on the defined status */
   @property({ type: String, reflect: true }) status?: "success" | "warning" | "danger";
 
-  /** Shows the toast. */
+  /** Shows the toast */
   public async showToast() {
     if (this.show) {
       return;
