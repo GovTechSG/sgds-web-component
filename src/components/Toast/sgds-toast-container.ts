@@ -26,11 +26,18 @@ const positionClasses = {
   "bottom-end": "bottom-0 end-0"
 };
 
+/**
+ * @summary ToastContainer is the container component to position `sgds-toast` in screen. When there is multiple toasts in the container, the toast components are stacked vertically.
+ *
+ * @slot default - The slot for `sgds-toast` elements
+ *
+ * @cssproperty --toast-container-slot-elements-gap - The gap between multiple `sgds-toast` elements
+ */
 @customElement("sgds-toast-container")
 export class SgdsToastContainer extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
-  /** The toast variant. */
+  /** Controls the position of `sgds-toast` within itself. When specified, toast container becomes position-absolute */
   @property({ type: String, reflect: true }) position: ToastPosition;
 
   render() {
@@ -38,7 +45,8 @@ export class SgdsToastContainer extends SgdsElement {
       <div
         class=${classMap({
           "sgds toast-container": true,
-          [`position-absolute ${positionClasses[this.position]}`]: this.position
+          [`position-absolute`]: this.position,
+          [`${positionClasses[this.position]}`]: this.position
         })}
       >
         <slot></slot>
