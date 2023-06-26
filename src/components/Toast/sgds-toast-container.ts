@@ -51,12 +51,16 @@ export class SgdsToastContainer extends SgdsElement {
 
   render() {
     const generatePositionCssTokenObj = (position: ToastPosition) => {
-      if (!position) return {}
-      const arrayOfCssTokensObj = [positionClasses[position].top, positionClasses[position].start, positionClasses[position].translate]
-      .filter(cssToken => !!cssToken)
-      .map(truthyCssToken => ({ [`${truthyCssToken}`]: true }));
-      return Object.assign({}, ...arrayOfCssTokensObj)
-    }
+      if (!position) return {};
+      const arrayOfCssTokensObj = [
+        positionClasses[position].top,
+        positionClasses[position].start,
+        positionClasses[position].translate
+      ]
+        .filter(cssToken => !!cssToken)
+        .map(truthyCssToken => ({ [`${truthyCssToken}`]: true }));
+      return Object.assign({}, ...arrayOfCssTokensObj);
+    };
     return html`
       <div
         class=${classMap(
