@@ -40,7 +40,7 @@ const positionClasses = {
  *
  * @slot default - The slot for `sgds-toast` elements
  *
- * @cssproperty --toast-container-slot-elements-gap - The gap between multiple `sgds-toast` elements
+ * @cssproperty --toast-container-slot-elements-gap - The gap between multiple `sgds-toast` elements. Defaults to 0.5rem 
  */
 @customElement("sgds-toast-container")
 export class SgdsToastContainer extends SgdsElement {
