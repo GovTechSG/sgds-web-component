@@ -1,6 +1,5 @@
 import { html } from "lit-html";
 
-
 export const Template = ({ expand, brandHref, active, href, disabled, menuIsOpen, togglerText, close }) => {
   return html`
     <sgds-mainnav .expand=${expand} .brandHref=${brandHref}>
