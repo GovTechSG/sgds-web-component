@@ -2,6 +2,7 @@ import { html } from "lit-html";
 
 export const Template = args =>
   html`
+  <div style="height:400px;">
     <sgds-toast-container .position=${args.position}>
       <sgds-toast
         ?show=${args.show}
@@ -29,6 +30,7 @@ export const Template = args =>
         This is a toast notifications
       </sgds-toast>
     </sgds-toast-container>
+    </div>
   `;
 
 export const args = {
@@ -36,5 +38,5 @@ export const args = {
 };
 
 export const parameters = {
-  height: "500px"
+  docs: { iframeHeight: 400 }
 };
