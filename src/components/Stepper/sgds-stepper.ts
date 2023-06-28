@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, queryAssignedElements, queryAsync } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
@@ -76,6 +76,16 @@ export class SgdsStepper extends SgdsElement {
   public reset() {
     this.emit("sgds-reset");
     this.activeStep = this.defaultActiveStep;
+  }
+  @queryAsync("slot")
+  component: Promise<HTMLSlotElement>
+  public async getSlotComponent(){
+    const p = document.createElement("p");
+    p.innerText = "hello world"
+    return "hello world"
+    // const component = await this.component
+    // console.log(component)
+    //  return component.assignedElements({flatten: true})[0]
   }
 
   /**@internal */
