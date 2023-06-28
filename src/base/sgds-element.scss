@@ -14,8 +14,17 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
         
         --sgds-#{$color}-rgb : #{$value};
     }
+
     @each $color, $value in $theme-colors {
         
         --sgds-#{$color} : #{$value};
+    }
+
+    @each $weight, $value in $grays {
+        --sgds-gray-#{$weight}: #{$value};
+    }
+    // populate primary colors custom variables
+    @each $weight, $value in $primarys {
+        --sgds-#{$weight}: #{$value};
     }
 }

@@ -4,6 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
 import { defaultValue } from "../../utils/defaultvalue";
+import styles from "./sgds-stepper.scss";
 
 /**
  * @summary Steppers are used to inform users which step they are at in a form or a process
@@ -16,10 +17,14 @@ import { defaultValue } from "../../utils/defaultvalue";
  * @event sgds-arrived - Emitted right after the activeStep has updated its state, when upcoming step has arrived and its slot are rendered.
  * @event sgds-reset - Emitted right before the step is reset to its defaultActiveStep. Event is fired when reset method is called.
  *
+ * @cssproperty --sgds-stepper-default-color - Sets the theme color for default stepper marker. <br>Default value `--sgds-gray-400`
+ * @cssproperty --sgds-stepper-theme-color - Sets the theme color for active, completed and clickable stepper marker. <br>Default value `--sgds-primary`
+ * @cssproperty --sgds-stepper-theme-hover-color - Sets the theme hover color for clickable stepper marker. <br>Default value `--sgds-primary-600`
+ *
  */
 @customElement("sgds-stepper")
 export class SgdsStepper extends SgdsElement {
-  static styles = [SgdsElement.styles];
+  static styles = [SgdsElement.styles, styles];
 
   /** The header name for steps in chronological order
    */
