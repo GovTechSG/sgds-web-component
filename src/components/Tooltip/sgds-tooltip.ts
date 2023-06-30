@@ -90,7 +90,6 @@ export class SgdsTooltip extends SgdsElement {
       sanitize: false, // to allow button element,
       container: this.shadowRoot.querySelector("div") // tooltip to appear inside the shadow root of sgds-tooltip instead of anywhere in the DOM, so that scoped styles can apply
     } as Partial<Tooltip.Options>;
-    console.log("here");
     this.bsTooltip = new Tooltip(this.myTooltip.value, this.tooltipConfig);
   }
   firstUpdated() {
