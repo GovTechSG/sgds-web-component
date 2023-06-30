@@ -40,12 +40,19 @@ export class Calendar extends SgdsElement {
   /** @internal */
   @state() displayDateInternal: Date = new Date();
 
+  /** @internal */
+  @state() selectedDay: Number;
+
   connectedCallback() {
     super.connectedCallback();
 
-    if (this.initialValue && this.mode === "single") {
-      // Assign the initialValue to selectedDate array
-      this.selectedDate = [this.initialValue];
+    // if (this.initialValue && this.mode === "single") {
+    //   // Assign the initialValue to selectedDate array
+    //   this.selectedDate = [this.initialValue];
+    //   this.displayDate = this.initialValue;
+    // }
+    if (this.mode === "single") {
+      this.selectedDate = [this.displayDateInput];
     }
   }
 
@@ -75,16 +82,30 @@ export class Calendar extends SgdsElement {
   handleDayClick(event: MouseEvent) {
     const day = (event.currentTarget as HTMLTableCellElement).dataset.day;
     const displayDateClone = new Date(this.displayDate);
+    console.log(displayDateClone);
     displayDateClone.setDate(parseInt(day));
 
     if (this.mode === "single") {
       // Single mode: Select a single date
-      this.displayDateInput = displayDateClone;
+
+      // this.displayDateInput = displayDateClone;
+      // this.emit("sgds-displayvalue", { detail: this.displayDateInput });
       this.displayDate = displayDateClone;
-      this.emit("sgds-displayvalue", { detail: this.displayDateInput });
       this.emit("sgds-selectvalue", { detail: this.displayDate });
-      // Add the selected date to the selectedDate array, for highlighting/maintaining the correct date
+      // this.selectedDate = [displayDateClone];
+
+      // const selectedSingleDate = this.selectedDate;
+      // if (selectedSingleDate .length === 0 || selectedSingleDate .length === 1) {
+      //   selectedSingleDate .length = 0;
+      // }
+
+
+
+      // Update the selectedDate property
       this.selectedDate = [displayDateClone];
+
+      // Emit an event with the range of selected dates
+      this.emit("sgds-selectdates", { detail: this.selectedDate });
     } else if (this.mode === "range") {
       // Range mode: Select a range of dates
       const selectedDates = [...this.selectedDate];
@@ -101,22 +122,8 @@ export class Calendar extends SgdsElement {
       // Update the selectedDate property
       this.selectedDate = selectedDates;
 
-      // if (this.selectedDate.length === 2) {
-      //   // Format the start and end dates
-      //   const startDate = this.selectedDate[0];
-      //   const endDate = this.selectedDate[1];
-      //   const formattedStartDate = startDate.toLocaleDateString();
-      //   const formattedEndDate = endDate.toLocaleDateString();
-
-      //   // Update the displayDateInput with the formatted date range
-      //   this.displayDateInput = new Date(`${formattedStartDate} - ${formattedEndDate}`);
-      // } else {
-      //   // Only start date is selected, update displayDateInput with the start date
-      //   this.displayDateInput = new Date(`${displayDateClone} - `);
-      // }
-
       // Emit an event with the range of selected dates
-      this.emit("sgds-selectdates", { detail: selectedDates });
+      this.emit("sgds-selectdates", { detail: this.selectedDate });
     }
 
     // Check if the selected date is before minDate or after maxDate
@@ -156,6 +163,7 @@ export class Calendar extends SgdsElement {
 
   render() {
     const selectedDates = this.selectedDate.map(d => this.setTimeToNoon(d));
+
     const rangeSelectedDates = this.generateIncrementDays(new Date(selectedDates[0]), new Date(selectedDates[1]));
 
     const minimumDate = this.minDate ? this.setTimeToNoon(new Date(this.minDate)) : null;
@@ -180,12 +188,24 @@ export class Calendar extends SgdsElement {
           // Remove the existing className assignment
           // let className: string | undefined;
           const date = new Date(year, month, day, 12, 0, 0, 0).toISOString();
-          // Check if the date matches the current date
+
           const isCurrentDate = new Date();
 
-          const isSelected = selectedDates.some(
-            selectedDate => Date.parse(date) === Date.parse(selectedDate.toISOString())
-          );
+          const isSelected =
+            selectedDates.length > 0 &&
+            (rangeSelectedDates.some(d => Date.parse(date) === Date.parse(d.toISOString())) ||
+              Date.parse(date) === Date.parse(selectedDates[0].toISOString()));
+ 
+          // const isSingleSelected = selectedDates.length > 0 && Date.parse(date) === Date.parse(selectedDates[0].toISOString());
+          // const isSingleSelected = selectedDates[0]?.toISOString() === date && selectedDates.length > 0;
+
+          // if (this.mode === "single") {
+          //   console.log("issingleselected", this.setTimeToNoon(this.selectedDate[0]));
+          //   console.log("newdategettime", new Date(date));
+          // }
+
+          // const isSingleSelected = (new Date(date)) === this.setTimeToNoon(this.selectedDate[0]);
+          
 
           const beforeMinDate = minimumDate && Date.parse(date) < Date.parse(minimumDate.toISOString());
           const afterMinDate = maximumDate && Date.parse(date) > Date.parse(maximumDate.toISOString());
@@ -208,11 +228,7 @@ export class Calendar extends SgdsElement {
               data-day=${day}
               class=${classMap({
                 "text-primary": isCurrentDay && isCurrentMonth && isCurrentYear,
-                "bg-primary-100":
-                  isSelected ||
-                  (selectedDates.length > 0 &&
-                    (rangeSelectedDates.some(d => Date.parse(date) === Date.parse(d.toISOString())) ||
-                      Date.parse(date) === Date.parse(selectedDates[0].toISOString()))),
+                "bg-primary-100": isSelected,
                 "text-muted": beforeMinDate || afterMinDate
               })}
               style=${styleMap(beforeMinDate || afterMinDate ? { ...buttonStyles, ...mutedButtonStyle } : buttonStyles)}

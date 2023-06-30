@@ -4,6 +4,7 @@ import { ref } from "lit/directives/ref.js";
 import { DatepickerElement } from "../../base/datepicker-dropdown-element";
 // import { SgdsCalendarHeader } from "./sgds-datepicker";
 import styles from "./sgds-datepicker.scss";
+import { initial } from "lodash";
 
 // export type DropDirection = "left" | "right" | "up" | "down";
 
@@ -57,10 +58,20 @@ export class SgdsDatepicker extends DatepickerElement {
   @property({ attribute: false }) displayDateInput?: Date;
 
   /** The initial value of DatePicker on first load. eg. "2020-12-14" */
-  @property({ attribute: false }) initialValue?: Date;
+  // @property({
+  //   converter: {
+  //     fromAttribute(value: string | null): Date | undefined {
+  //       if (value === null) {
+  //         return undefined;
+  //       }
+  //       return new Date(value);
+  //     }
+  //   }
+  // })
+  // initialValue?: Date;
 
-  /** The initial value range of DatePicker on first load for range mode. eg.'["2023-06-22", "2023-06-11"]' */
-  @property({ type: Array }) initialValueRange?: Date[];
+  /** The initial value range of DatePicker on first load for single & range mode. eg.'["2023-06-22", "2023-06-11"]' */
+  @property({ type: Array }) initialValue?: Date[];
 
   /** Date format reflected on input  */
   @property({ type: String }) dateFormat: DateFormat = "DD/MM/YYYY";
@@ -92,7 +103,6 @@ export class SgdsDatepicker extends DatepickerElement {
     // Add the click event listener to the document
     document.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
 
-    // Add event listener for "view-changed" event
     this.addEventListener("sgds-view", this.handleViewChanged); // this is for the mid button to change the calendar view
     this.addEventListener("sgds-view-date", this.handleDateChanged); // this is for the left-right chevron button
     this.addEventListener("sgds-selectvalue", this.handleSelectValue);
@@ -100,19 +110,20 @@ export class SgdsDatepicker extends DatepickerElement {
     this.addEventListener("sgds-selectmonth", this.handleSelectMonth);
     this.addEventListener("sgds-selectyear", this.handleSelectYear);
     this.addEventListener("sgds-selectdates", this.handleSelectDates);
-    // console.log(this.initialValue)
-    // Set the initial value of displayDateInput if not already set
-    if (this.mode === "single" && this.initialValue) {
-      const setInitialDate = new Date(this.initialValue);
 
-      // on initial load, to highlight the correct day,month,year date in view
-      this.displayDate = setInitialDate;
-      this.displayDateInput = setInitialDate;
+    // if (this.initialValue && this.mode === "single") {
+    //   this.displayDate = new Date(this.initialValue);
+    //   this.displayDateInput = new Date(this.initialValue);
+     
+    // } 
+    if(this.mode === "single" && this.initialValue.length === 1){
+      const startDate = new Date(this.initialValue[0]);
+      this.selectedDateRange = [startDate, undefined];
     }
-
-    if (this.mode === "range" && this.initialValueRange && this.initialValueRange.length === 2) {
-      const startDate = new Date(this.initialValueRange[0]);
-      const endDate = new Date(this.initialValueRange[1]);
+    else if (this.mode === "range" && this.initialValue && this.initialValue.length === 2) {
+    
+      const startDate = new Date(this.initialValue[0]);
+      const endDate = new Date(this.initialValue[1]);
       this.selectedDateRange = [startDate, endDate];
       this.selectedDateRange.sort((a, b) => a.getTime() - b.getTime());
     }
@@ -127,14 +138,23 @@ export class SgdsDatepicker extends DatepickerElement {
 
   @eventOptions({ capture: true })
   handleSelectDates(event) {
-    console.log("handle select dates", event.detail);
     const newSelectedDates = event.detail;
     if (this.mode === "range") {
       // Sort the newSelectedDates array in ascending order
       newSelectedDates.sort((a, b) => a.getTime() - b.getTime());
 
       this.selectedDateRange = newSelectedDates;
+      if (this.selectedDateRange.length === 2) {
+        this.hideMenu();
+      }
       this.displayDateInput = newSelectedDates.length > 0 ? newSelectedDates[0] : undefined;
+    } else if ( this.mode === "single") {
+      this.selectedDateRange = [newSelectedDates[0]];
+
+      if (this.selectedDateRange.length === 1) {
+        this.hideMenu();
+      }
+    
     }
   }
 
@@ -156,22 +176,9 @@ export class SgdsDatepicker extends DatepickerElement {
 
     const newSelectedDate = event.detail;
     if (this.mode === "single") {
-      this.displayDate = newSelectedDate;
-      console.log("single:", this.displayDateInput);
-    } else if (this.mode === "range") {
-      if (newSelectedDate.length > 1) {
-        const startDate = newSelectedDate[0];
-        const endDate = newSelectedDate[1];
-
-        this.selectedDateRange = [startDate, endDate];
-        this.displayDateInput = startDate;
-      } else {
-        this.selectedDateRange = [];
-        this.displayDateInput = newSelectedDate[0];
-      }
-    }
-
-    // hide the menu when dayview button is clicked
+      this.displayDateInput = newSelectedDate;
+      this.displayDate = newSelectedDate;}
+  
     this.hideMenu();
   }
 
@@ -232,7 +239,7 @@ export class SgdsDatepicker extends DatepickerElement {
 
     let formattedDate = "";
     if (this.mode === "single") {
-      formattedDate = makeInputValueString(this.displayDateInput, undefined, this.dateFormat);
+      formattedDate = makeInputValueString(this.selectedDateRange[0], undefined, this.dateFormat);
     } else if (this.mode === "range") {
       formattedDate = makeInputValueString(this.selectedDateRange[0], this.selectedDateRange[1], this.dateFormat);
     }
@@ -242,7 +249,7 @@ export class SgdsDatepicker extends DatepickerElement {
 
       if (this.mode === "range" && validDateFormats.includes(this.dateFormat)) {
         return `${this.dateFormat.toLowerCase()} - ${this.dateFormat.toLowerCase()}`;
-      } else if (validDateFormats.includes(this.dateFormat)) {
+      } else if (this.mode === "single" && validDateFormats.includes(this.dateFormat)) {
         return this.dateFormat.toLowerCase();
       }
 
@@ -301,7 +308,7 @@ export class SgdsDatepicker extends DatepickerElement {
             <sgds-datepicker-calendar
               .view=${this.view}
               .displayDate=${this.displayDate}
-              .initialValue=${this.initialValue}
+              .displayDateInput=${this.displayDateInput}
               .mode=${this.mode}
               minDate=${this.minDate}
               maxDate=${this.maxDate}
