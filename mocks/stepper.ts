@@ -35,7 +35,7 @@ export class MockStepper extends SgdsElement {
   firstStep() {
     this.getStepper().firstStep();
   }
-  component = null;
+  component: unknown = null;
   getCurrentComponent() {
     return this.getStepper().getComponent();
   }
