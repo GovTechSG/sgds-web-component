@@ -12,12 +12,16 @@ describe("sgds-breadcrumb", () => {
     const el = await fixture(html`<sgds-breadcrumb></sgds-breadcrumb>`);
     assert.shadowDom.equal(
       el,
-      `<nav part="base" class="sgds breadcrumb" aria-label="breadcrumb">
-          <slot></slot>
-        </nav>
-        <slot name="separator" hidden="" aria-hidden="true">
-          <span class="sgds-breadcrumb-seperator"></span>
+      `<nav
+      part="base"
+    >
+      <ol class="breadcrumb">
+        <slot></slot>
+        <slot name="separator" hidden aria-hidden="true">
+         <span>/</span>
         </slot>
+      </ol>
+    </nav>
         `
     );
   });
@@ -32,10 +36,10 @@ describe("sgds-breadcrumb-item", () => {
     const el = await fixture(html`<sgds-breadcrumb-item></sgds-breadcrumb-item>`);
     assert.shadowDom.equal(
       el,
-      ` <div part="base" class=" breadcrumb-item ">
+      ` <li part="base" class="breadcrumb-item active">
             <span part="label"><slot></slot></span>
-            <slot name="separator" part="separator" class="breadcrumb-item__separator" aria-hidden="true"></slot>
-          </div>
+            <slot name="separator" class="breadcrumb-item__separator" aria-hidden="true"></slot>
+          </li>
         `
     );
   });
@@ -44,10 +48,10 @@ describe("sgds-breadcrumb-item", () => {
     const el = await fixture(html`<sgds-breadcrumb-item href="#a"></sgds-breadcrumb-item>`);
     assert.shadowDom.equal(
       el,
-      ` <div part="base" class=" breadcrumb-item ">
+      ` <li part="base" class=" breadcrumb-item">
             <a href="#a" part="label"><slot></slot></a>
-            <slot name="separator" part="separator" class="breadcrumb-item__separator" aria-hidden="true"></slot>
-          </div>
+            <slot name="separator" class="breadcrumb-item__separator" aria-hidden="true"></slot>
+          </li>
         `
     );
   });

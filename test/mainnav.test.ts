@@ -241,7 +241,7 @@ describe("sgds-mainnav-dropdown", () => {
     const el = await fixture(html`<sgds-mainnav-dropdown togglerText="test"></sgds-mainnav-dropdown>`);
     assert.shadowDom.equal(
       el,
-      ` <li class="nav-item">
+      ` <li class="nav-item dropdown">
       <a
         class="nav-link"
         aria-expanded="false"

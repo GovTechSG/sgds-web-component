@@ -1,69 +1,50 @@
 import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
+import { watch } from "../../utils/watch";
 import styles from "./sgds-alert.scss";
 
-//TODO: Alert Link
-/**
- *
- * @dependency sl-icon-button
- *
- * @slot - The alert's main content.
- * @slot icon - An icon to show in the alert. Works best with `<sl-icon>`.
- *
- * @event sl-show - Emitted when the alert opens.
- * @event sl-after-show - Emitted after the alert opens and all animations are complete.
- * @event sl-hide - Emitted when the alert closes.
- * @event sl-after-hide - Emitted after the alert closes and all animations are complete.
- *
- * @csspart base - The component's base wrapper.
- * @csspart icon - The container that wraps the optional icon.
- * @csspart message - The container that wraps the alert's main content.
- * @csspart close-button - The close button, an `<sl-icon-button>`.
- * @csspart close-button__base - The close button's exported `base` part.
- *
- * @animation alert.show - The animation to use when showing the alert.
- * @animation alert.hide - The animation to use when hiding the alert.
- */
-
 export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light";
-
+/**
+ * @summary Alerts provide short, timely, and relevant information for your users. It can be a simple text message or customised HTML content with paragraphs, headings and links.
+ *
+ * @slot default - The alert's main content.
+ * @slot icon - An icon to show in the alert. Pass in SVG elements.
+ *
+ * @event sgds-show - Emitted when the alert appears.
+ * @event sgds-hide - Emitted after the alert closes.
+ *
+ * @cssproperty --alert-icon-margin-right - The margin-right css of icon slot, to position the gap between icon and alert message
+ */
 @customElement("sgds-alert")
 export class SgdsAlert extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
-  // @query('[part~="base"]') base: HTMLElement;
-
+  /** Controls the appearance of the alert  */
   @property({ type: Boolean, reflect: true }) show = false;
 
   /** Enables a close button that allows the user to dismiss the alert. */
-  @property({ type: Boolean, reflect: true }) dismissible? = false;
+  @property({ type: Boolean, reflect: true }) dismissible = false;
 
   /** The alert's theme variant. */
-  @property({ reflect: true }) variant: AlertVariant = "primary";
+  @property({ type: String, reflect: true }) variant: AlertVariant = "primary";
 
-  @property({ type: String }) closeLabel?: string;
+  /** Optional for alert wrapper. Can be used to insert any utility classes such as me-auto */
+  @property({ type: String, reflect: true }) alertClasses: string;
 
-  @property({ reflect: true }) alertClasses?: string;
-
-  toggleShow() {
-    if (!this.show) {
-      this.show = true;
-      this.emit("sgds-show");
-    }
-  }
-
-  handleCloseClick() {
+  /** Closes the alert  */
+  public close() {
     this.show = false;
-    this.emit("sgds-hide");
   }
-
+  /**@internal */
+  @watch("show")
+  handleShowChange() {
+    this.show ? this.emit("sgds-show") : this.emit("sgds-hide");
+  }
   render() {
     return html`
       <div
-        part="base"
         class="${classMap({
           sgds: true,
           alert: true,
@@ -71,18 +52,17 @@ export class SgdsAlert extends SgdsElement {
           show: this.show,
           [`alert-${this.variant}`]: this.variant,
           [`alert-dismissible`]: this.dismissible,
-          [`${this.alertClasses}`]: this.alertClasses
+          [`${this.alertClasses}`]: this.alertClasses,
+          "d-flex": true,
+          "align-items-center": true
         })}"
         role="alert"
         aria-hidden=${this.show ? "false" : "true"}
       >
+        <i><slot name="icon"></slot></i>
         <slot></slot>
         ${this.dismissible
-          ? html`<sgds-closebutton
-              class="btn-close btn-sm"
-              closeLabel=${ifDefined(this.closeLabel)}
-              @click=${this.handleCloseClick}
-            ></sgds-closebutton>`
+          ? html`<button class="btn-close btn-sm" aria-label="close the alert" @click=${this.close}></button>`
           : null}
       </div>
     `;
