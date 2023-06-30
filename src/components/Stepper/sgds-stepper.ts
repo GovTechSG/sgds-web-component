@@ -6,19 +6,18 @@ import { watch } from "../../utils/watch";
 import { defaultValue } from "../../utils/defaultvalue";
 import styles from "./sgds-stepper.scss";
 
-interface IStepMetaData {
-  component: any;
+export interface IStepMetaData {
+  component: unknown;
   stepHeader: string;
 }
 /**
  * @summary Steppers are used to inform users which step they are at in a form or a process
- * @slot step-n - The slot for content in each step. "n" refers to numeral value starting from 1. e.g. step-1, step-2, step-3 etc.
  *
  * @event sgds-next-step - Emitted right before the next step is reached. Event is fired when nextStep method is called.
  * @event sgds-previous-step - Emitted right before the previous step is reached. Event is fired when previousStep method is called.
  * @event sgds-last-step - Emitted right before the last step is reached. Event is fired when lastStep method is called.
  * @event sgds-first-step - Emitted on hide after animation has completed. Event is fired when firstStep method is called.
- * @event sgds-arrived - Emitted right after the activeStep has updated its state, when upcoming step has arrived and its slot are rendered.
+ * @event sgds-arrived - Emitted right after the activeStep has updated its state, when upcoming step has arrived. Call `getMethod()` on this event to get the current step's component.
  * @event sgds-reset - Emitted right before the step is reset to its defaultActiveStep. Event is fired when reset method is called.
  *
  * @cssproperty --sgds-stepper-default-color - Sets the theme color for default stepper marker. <br>Default value `--sgds-gray-400`
@@ -30,10 +29,8 @@ interface IStepMetaData {
 export class SgdsStepper extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
-  /** The header name for steps in chronological order
+  /** The metadata of stepper that consist of `stepHeader: string` and `component:unknown`. stepHeader is the name of the step and component is the content that should appear at the each step. `component` is set to `unknown` to allow users to pass in their desired component based on the framework of choice. e.g. pass in your own react/angular/vue component or it can also be a text content. 
    */
-  // @property({ type: Array })
-  // steps: IStepMetaData[] = [];
   @property({ type: Array })
   steps: IStepMetaData[] = [];
 
@@ -45,10 +42,9 @@ export class SgdsStepper extends SgdsElement {
   @defaultValue("activeStep")
   defaultActiveStep = 0;
 
-  
- 
-  public getComponent(step = this.activeStep){
-    return this.steps[step].component
+  /** By default, it returns the corresponding component of the current activeStep as defined in the steps metadata. To get other components, pass in your desired step number as the parameter*/
+  public getComponent(step = this.activeStep) {
+    return this.steps[step].component;
   }
   /** Moves the active step forward one step */
   public nextStep() {
@@ -81,19 +77,12 @@ export class SgdsStepper extends SgdsElement {
     if (this.activeStep > 0) {
       this.activeStep = 0;
     }
-  }
+  } 
 
   /** Resets the Stepper to its initial active step state */
   public reset() {
     this.emit("sgds-reset");
     this.activeStep = this.defaultActiveStep;
-  }
-  @queryAsync("slot")
-  component: Promise<HTMLSlotElement>;
-
-  public async getSlotComponent(): Promise<Element> {
-    const component = await this.component;
-    return component.assignedElements({ flatten: true })[0];
   }
 
   /**@internal */
@@ -107,7 +96,6 @@ export class SgdsStepper extends SgdsElement {
   /**@internal */
   @watch("activeStep", { waitUntilFirstUpdate: true })
   _handleActiveStepChange() {
-    this.emit("sgds-step-change")
     this.emit("sgds-arrived");
   }
 
@@ -121,7 +109,7 @@ export class SgdsStepper extends SgdsElement {
   render() {
     return html`
       <div class="sgds stepper">
-        ${this.steps.map(({stepHeader: step}, index )=> {
+        ${this.steps.map(({ stepHeader: step }, index) => {
           return html`
             <div
               class="stepper-item ${classMap({
@@ -141,7 +129,6 @@ export class SgdsStepper extends SgdsElement {
           `;
         })}
       </div>
-      <slot name="step-${this.activeStep + 1}" ?hidden="${this.activeStep === -1}"></slot>
     `;
   }
 }
