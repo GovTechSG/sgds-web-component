@@ -43,7 +43,7 @@ export class SgdsStepper extends SgdsElement {
   defaultActiveStep = 0;
 
   /** By default, it returns the corresponding component of the current activeStep as defined in the steps metadata. To get other components, pass in your desired step number as the parameter*/
-  public getComponent(step = this.activeStep) {
+  public getComponent(step: number = this.activeStep) {
     return this.steps[step].component;
   }
   /** Moves the active step forward one step */
