@@ -29,7 +29,7 @@ export interface IStepMetaData {
 export class SgdsStepper extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
-  /** The metadata of stepper that consist of `stepHeader: string` and `component:unknown`. stepHeader is the name of the step and component is the content that should appear at the each step. `component` is set to `unknown` to allow users to pass in their desired component based on the framework of choice. e.g. pass in your own react/angular/vue component or it can also be a text content.
+  /** The metadata of stepper, type `IStepMetaData`, that consist of `stepHeader: string` and `component:unknown`. `stepHeader` is the name of the step and `component` is the content that should appear at the each step. `component` is set to `unknown` to allow users to pass in their desired component based on the framework of choice. e.g. pass in your own react/angular/vue component or it can also be a text content.
    */
   @property({ type: Array })
   steps: IStepMetaData[] = [];
