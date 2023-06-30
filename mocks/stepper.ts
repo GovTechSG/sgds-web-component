@@ -1,10 +1,7 @@
-import { LitElement, PropertyValueMap, html } from "lit";
-import { customElement, property, queryAsync, state } from "lit/decorators.js";
-import { ref } from "lit/directives/ref.js";
-import genId from "../src/utils/generateId";
+import { PropertyValueMap, html } from "lit";
+import { customElement } from "lit/decorators.js";
 import SgdsElement from "../src/base/sgds-element";
 import { SgdsStepper } from "../src/components/Stepper";
-import { until } from "lit-html/directives/until.js";
 
 @customElement("mock-stepper")
 export class MockStepper extends SgdsElement {

@@ -1,9 +1,9 @@
 import { html } from "lit";
-import { customElement, property, queryAsync } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
-import { watch } from "../../utils/watch";
 import { defaultValue } from "../../utils/defaultvalue";
+import { watch } from "../../utils/watch";
 import styles from "./sgds-stepper.scss";
 
 export interface IStepMetaData {
@@ -29,7 +29,7 @@ export interface IStepMetaData {
 export class SgdsStepper extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
-  /** The metadata of stepper that consist of `stepHeader: string` and `component:unknown`. stepHeader is the name of the step and component is the content that should appear at the each step. `component` is set to `unknown` to allow users to pass in their desired component based on the framework of choice. e.g. pass in your own react/angular/vue component or it can also be a text content. 
+  /** The metadata of stepper that consist of `stepHeader: string` and `component:unknown`. stepHeader is the name of the step and component is the content that should appear at the each step. `component` is set to `unknown` to allow users to pass in their desired component based on the framework of choice. e.g. pass in your own react/angular/vue component or it can also be a text content.
    */
   @property({ type: Array })
   steps: IStepMetaData[] = [];
@@ -77,7 +77,7 @@ export class SgdsStepper extends SgdsElement {
     if (this.activeStep > 0) {
       this.activeStep = 0;
     }
-  } 
+  }
 
   /** Resets the Stepper to its initial active step state */
   public reset() {
