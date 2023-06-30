@@ -1,11 +1,15 @@
 import { html } from "lit";
-import { customElement, property, queryAssignedElements, queryAsync } from "lit/decorators.js";
+import { customElement, property, queryAsync } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
 import { defaultValue } from "../../utils/defaultvalue";
 import styles from "./sgds-stepper.scss";
 
+interface IStepMetaData {
+  component: any;
+  stepHeader: string;
+}
 /**
  * @summary Steppers are used to inform users which step they are at in a form or a process
  * @slot step-n - The slot for content in each step. "n" refers to numeral value starting from 1. e.g. step-1, step-2, step-3 etc.
@@ -28,8 +32,10 @@ export class SgdsStepper extends SgdsElement {
 
   /** The header name for steps in chronological order
    */
+  // @property({ type: Array })
+  // steps: IStepMetaData[] = [];
   @property({ type: Array })
-  steps: string[] = [];
+  steps: IStepMetaData[] = [];
 
   /** The current state of active step. Defaults to 0 */
   @property({ type: Number, reflect: true })
@@ -39,6 +45,11 @@ export class SgdsStepper extends SgdsElement {
   @defaultValue("activeStep")
   defaultActiveStep = 0;
 
+  
+ 
+  public getComponent(step = this.activeStep){
+    return this.steps[step].component
+  }
   /** Moves the active step forward one step */
   public nextStep() {
     this.emit("sgds-next-step");
@@ -78,14 +89,11 @@ export class SgdsStepper extends SgdsElement {
     this.activeStep = this.defaultActiveStep;
   }
   @queryAsync("slot")
-  component: Promise<HTMLSlotElement>
-  public async getSlotComponent(){
-    const p = document.createElement("p");
-    p.innerText = "hello world"
-    return "hello world"
-    // const component = await this.component
-    // console.log(component)
-    //  return component.assignedElements({flatten: true})[0]
+  component: Promise<HTMLSlotElement>;
+
+  public async getSlotComponent(): Promise<Element> {
+    const component = await this.component;
+    return component.assignedElements({ flatten: true })[0];
   }
 
   /**@internal */
@@ -99,6 +107,7 @@ export class SgdsStepper extends SgdsElement {
   /**@internal */
   @watch("activeStep", { waitUntilFirstUpdate: true })
   _handleActiveStepChange() {
+    this.emit("sgds-step-change")
     this.emit("sgds-arrived");
   }
 
@@ -112,7 +121,7 @@ export class SgdsStepper extends SgdsElement {
   render() {
     return html`
       <div class="sgds stepper">
-        ${this.steps.map((step, index) => {
+        ${this.steps.map(({stepHeader: step}, index )=> {
           return html`
             <div
               class="stepper-item ${classMap({

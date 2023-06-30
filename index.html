@@ -321,8 +321,8 @@
         </div>
         <div class="container">
             <h2>Stepper</h2>
-          <sgds-stepper id="myStepper" activeStep="2" steps='["one", "two", "three"]'>
-            <div slot="step-1" class="mb-4"> 
+          <sgds-stepper id="myStepper" activeStep="2" steps='[{"stepHeader":"Personal Details","component":"1 test"},{"stepHeader":"Address and Contact Information","component":"2 test"},{"stepHeader":"Review","component":"3 test"}]'>
+            <!-- <div slot="step-1" class="mb-4"> 
                 <div class="row">
                     <div class="col mb-2">
                         <form>
@@ -369,7 +369,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> -->
           </sgds-stepper>
 
           <!-- <div>
