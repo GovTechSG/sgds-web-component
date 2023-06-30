@@ -1,1 +1,1 @@
-export { SgdsStepper } from "./sgds-stepper";
+export { SgdsStepper, IStepMetaData } from "./sgds-stepper";

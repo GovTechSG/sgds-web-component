@@ -7,7 +7,7 @@ import { SgdsStepper } from "../src/components/Stepper";
 export class MockStepper extends SgdsElement {
   connectedCallback(): void {
     super.connectedCallback();
-    this.addEventListener("sgds-step-change", () => {
+    this.addEventListener("sgds-arrived", () => {
       this.currentStep = this.getStepper().activeStep;
       this.component = this.getCurrentComponent();
       this.requestUpdate();
@@ -121,21 +121,26 @@ export class MockStepper extends SgdsElement {
 
   render() {
     return html`
-      <div class="container">
+      <div style="background:#FAFAFA;padding:30px;">
         <h2>Stepper</h2>
         <sgds-stepper id="myStepper" activeStep=${this.currentStep} .steps=${this.stepMetaData}> </sgds-stepper>
-        ${this.component ? this.component : ""}
-        <div style="display:flex;justify-content:space-between;margin-top:1rem;">
-          <div>
-            <sgds-button class="me-3" variant="light" @click="${this.reset}">Reset</sgds-button>
-            <sgds-button class="me-3" variant="primary" @click="${this.nextStep}">Next</sgds-button>
-            <sgds-button @click="${this.previousStep}" variant="secondary">Back</sgds-button>
+        <section
+          class="container p-3"
+          style="background: #FFFFFF;padding: 30px 32px 30px 32px;border-radius: 5px;box-shadow: 0px 0px 25px 0px #161A1D12;box-shadow: 0px 8px 16px 0px #161A1D08;"
+        >
+          ${this.component ? this.component : ""}
+          <div style="display:flex;justify-content:space-between;margin-top:1rem;">
+            <div>
+              <sgds-button class="me-3" variant="light" @click="${this.reset}">Reset</sgds-button>
+              <sgds-button class="me-3" variant="primary" @click="${this.nextStep}">Next</sgds-button>
+              <sgds-button @click="${this.previousStep}" variant="secondary">Back</sgds-button>
+            </div>
+            <div>
+              <sgds-button class="m-2" variant="danger" @click="${this.firstStep}">Go to first page</sgds-button>
+              <sgds-button class="m-2" variant="warning" @click="${this.lastStep}">Go to last page</sgds-button>
+            </div>
           </div>
-          <div>
-            <sgds-button class="m-2" variant="danger" @click="${this.firstStep}">Go to first page</sgds-button>
-            <sgds-button class="m-2" variant="warning" @click="${this.lastStep}">Go to last page</sgds-button>
-          </div>
-        </div>
+        </section>
       </div>
     `;
   }
