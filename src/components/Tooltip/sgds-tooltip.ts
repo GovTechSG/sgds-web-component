@@ -44,7 +44,14 @@ export class SgdsTooltip extends SgdsElement {
     // For a11y purpose
     this.tooltipTargetElements.forEach(el => el.setAttribute("data-sgds-tooltip", this.content));
   }
-  firstUpdated() {
+  attributeChangedCallback(name, oldValue, newValue) {
+    super.attributeChangedCallback(name, oldValue, newValue);
+    if (this.hasUpdated) {
+      this.bsTooltip.dispose();
+      this.initializeTooltip();
+    }
+  }
+  private initializeTooltip() {
     // refer to Bootstrap's Tooltip options
     // Feature: Add close button when prop trigger === 'click'
     //useless to modify the "template" as BsTooltip "title" option will override anything that is within .tooltip-inner
@@ -61,7 +68,6 @@ export class SgdsTooltip extends SgdsElement {
       closeBtn.setAttribute("aria-label", "Close");
       this.closableContainer.appendChild(closeBtn);
       this.closableContainer.insertAdjacentText("afterbegin", this.content);
-
       this.shadowRoot.querySelector(".btn-close")?.addEventListener("click", () => this.hide());
     }
     this.tooltipConfig = {
@@ -84,8 +90,11 @@ export class SgdsTooltip extends SgdsElement {
       sanitize: false, // to allow button element,
       container: this.shadowRoot.querySelector("div") // tooltip to appear inside the shadow root of sgds-tooltip instead of anywhere in the DOM, so that scoped styles can apply
     } as Partial<Tooltip.Options>;
+    console.log("here");
     this.bsTooltip = new Tooltip(this.myTooltip.value, this.tooltipConfig);
-
+  }
+  firstUpdated() {
+    this.initializeTooltip();
     this.myTooltip.value.addEventListener("show.bs.tooltip", () => {
       this.emit("sgds-show");
     });
