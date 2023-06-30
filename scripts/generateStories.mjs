@@ -4,7 +4,7 @@ import groupBy from 'lodash/groupBy.js';
 import path from 'path';
 import prettier from 'prettier';
 import { makeArgTypes } from './makeArgTypes.mjs';
-import { methodsTable } from './methodsTable.mjs';
+import { methodsTable, writeParams } from './methodsTable.mjs';
 import { getAllComponents, getSgdsComponents } from './shared.mjs';
 
 const storiesDir = path.join('stories/components');
@@ -75,7 +75,7 @@ ${methodsMeta.map(meta => {
         <tbody>
           ${meta.methods.map(method => (
             `<tr>
-              <td>${method.name}</td>
+              <td>${method.name}(${writeParams(method)})</td>
               <td>${method.description}</td>
             </tr>`
           )).join('')}
