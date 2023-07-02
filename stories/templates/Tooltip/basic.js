@@ -3,8 +3,9 @@ import { html } from "lit-html";
 export const Template = ({ content, trigger, placement }) => {
   return html`
     Hover over the icon
-    <sgds-tooltip .content=${content} .trigger=${trigger} .placement=${placement}>
+    <sgds-tooltip content=${content} trigger=${trigger} placement=${placement}>
       <svg
+        tabindex="0"
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"
@@ -26,4 +27,6 @@ export const args = {
   placement: "top"
 };
 
-export const parameters = {};
+export const parameters = {
+  layout: "centered"
+};
