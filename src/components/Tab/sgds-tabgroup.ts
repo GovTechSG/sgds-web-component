@@ -24,9 +24,6 @@ export class SgdsTabGroup extends SgdsElement {
 
   @state() private hasScrollControls = false;
 
-  /** The placement of the tabs. */
-  @property() placement: "top" | "bottom" | "start" | "end" = "top";
-
   @property({ reflect: true }) TabVariant: "basic-toggle" | "info-toggle";
   /**
    * When set to auto, navigating tabs with the arrow keys will instantly show the corresponding tab panel. When set to
@@ -110,7 +107,6 @@ export class SgdsTabGroup extends SgdsElement {
 
   handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    //FIXME: too specific this will not work in dc design system
     const tab = target.closest("sgds-tab") as SgdsTab;
     const tabGroup = tab?.closest("sgds-tab-group");
 
@@ -154,13 +150,11 @@ export class SgdsTabGroup extends SgdsElement {
         } else if (event.key === "End") {
           index = this.tabs.length - 1;
         } else if (
-          ["top", "bottom"].includes(this.placement) ||
-          (["start", "end"].includes(this.placement) && event.key === "ArrowUp")
+          event.key === "ArrowUp" || event.key === "ArrowLeft"
         ) {
           index--;
         } else if (
-          ["top", "bottom"].includes(this.placement) ||
-          (["start", "end"].includes(this.placement) && event.key === "ArrowDown")
+          event.key === "ArrowDown" || event.key === "ArrowRight"
         ) {
           index++;
         }
@@ -179,9 +173,7 @@ export class SgdsTabGroup extends SgdsElement {
           this.setActiveTab(this.tabs[index], { scrollBehavior: "smooth" });
         }
 
-        if (["top", "bottom"].includes(this.placement)) {
           scrollIntoView(this.tabs[index], this.nav, "horizontal");
-        }
 
         event.preventDefault();
       }
@@ -207,8 +199,7 @@ export class SgdsTabGroup extends SgdsElement {
     if (this.noScrollControls) {
       this.hasScrollControls = false;
     } else {
-      this.hasScrollControls =
-        ["top", "bottom"].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth;
+      this.hasScrollControls = this.nav.scrollWidth > this.nav.clientWidth;
     }
   }
 
@@ -227,9 +218,6 @@ export class SgdsTabGroup extends SgdsElement {
       this.tabs.map(el => (el.active = el === this.activeTab));
       this.panels.map(el => (el.active = el.name === this.activeTab?.panel));
 
-      if (["top", "bottom"].includes(this.placement)) {
-        scrollIntoView(this.activeTab, this.nav, "horizontal", options.scrollBehavior);
-      }
 
       // Emit events
       if (options.emitEvents) {
@@ -272,10 +260,7 @@ export class SgdsTabGroup extends SgdsElement {
         part="base"
         class=${classMap({
           "tab-group": true,
-          "tab-group--top": this.placement === "top",
-          "tab-group--bottom": this.placement === "bottom",
-          "tab-group--start": this.placement === "start",
-          "tab-group--end": this.placement === "end",
+          "tab-group--top": true,
           "tab-group--basic-toggle": this.TabVariant === "basic-toggle",
           "tab-group--info-toggle": this.TabVariant === "info-toggle"
         })}
