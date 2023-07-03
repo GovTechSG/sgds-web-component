@@ -4,18 +4,27 @@
 
 The following css custom variable are exposed to enable users to make modifications across all web components in our library
 
-| css custom variable name | description                               |
-| ------------------------ | ----------------------------------------- |
-| --sgds-body-font-family  | Set the font family of the web components |
-| --sgds-body-font-size    | Set the font size of the web components   |
-| --sgds-body-font-weight  | Set the font weight of the web components |
-| --sgds-body-line-height  | Set the line height of the web components |
+| css custom variable name      | description                               |
+| ------------------------      | ----------------------------------------- |
+| --sgds-body-font-family       | Set the font family of the web components |
+| --sgds-body-font-size         | Set the font size of the web components   |
+| --sgds-body-font-weight       | Set the font weight of the web components |
+| --sgds-body-line-height       | Set the line height of the web components |
+| --sgds-{stateColor}-rgb       | State colors in RBG value                 |
+| --sgds-{stateColor}           | State colors in hexadecimal value         |
+| --sgds-{stateColor}           | State colors in hexadecimal value         |
+| --sgds-{stateColor}-{weights} | State colors with different weightage in hexadecimal value |
+| --sgds-gray-{weights}         | Gray colors with different weightage in hexadecimal value |
 
 ```css
 
 :root {
   --sgds-body-font-family: Helvetica;
   --sgds-body-font-size: 5rem;
+  --sgds-primary-rgb : 89,37,220;
+  --sgds-secondary : #1f69ff;
+  --sgds-success-500 : #3bb346;
+  --sgds-gray-500 : #667085;
 }
 
 ```
