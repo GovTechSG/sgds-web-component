@@ -105,6 +105,10 @@ export class SgdsStepper extends SgdsElement {
       this._onStepperItemClick(index);
     }
   }
+  attributeChangedCallback( name: string, _old: string, value: string ): void {
+    console.log("inside stpes watch")
+
+  }
 
   render() {
     return html`
