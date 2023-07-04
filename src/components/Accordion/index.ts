@@ -1,2 +1,2 @@
-export * from "./sgds-accordion";
-export * from "./sgds-accordion-item";
+export { SgdsAccordion } from "./sgds-accordion";
+export {SgdsAccordionItem } from "./sgds-accordion-item";
