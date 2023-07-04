@@ -13,11 +13,11 @@ You can load SGDS's web components via CDN or by installing it locally.
 
 ## CDN
 
-The CDN loader registers all SGDS elements up front. Note that, if you're only using a handful of components. You can also cherry pick components via local imports if you want to load specific ones up front.
+The CDN loader registers all SGDS elements up front. Note that, if you're only using a handful of components.
 
 ```js
 
-<script type="module" src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@rc"></script>
 
 ```
 
@@ -27,7 +27,7 @@ You can also install SGDS web components locally with the following command
 
 ```js
 
-npm install @govtechsg/sgds-web-component
+npm install @govtechsg/sgds-web-component@rc
 
 ```
 
@@ -157,18 +157,31 @@ There are two kinds of slots: default and named slots. In the storybook document
 
 The following css custom variable are exposed to enable users to make modifications across all web components in our library
 
-| css custom variable name | description                               |
-| ------------------------ | ----------------------------------------- |
-| --sgds-body-font-family  | Set the font family of the web components |
-| --sgds-body-font-size    | Set the font size of the web components   |
-| --sgds-body-font-weight  | Set the font weight of the web components |
-| --sgds-body-line-height  | Set the line height of the web components |
+| css custom variable name      | description                               |
+| ------------------------      | ----------------------------------------- |
+| --sgds-body-font-family       | Set the font family of the web components |
+| --sgds-body-font-size         | Set the font size of the web components   |
+| --sgds-body-font-weight       | Set the font weight of the web components |
+| --sgds-body-line-height       | Set the line height of the web components |
+| --sgds-{stateColor}-rgb       | State colors in red,green,blue value                 |
+| --sgds-{stateColor}           | State colors in hexadecimal value         |
+| --sgds-{stateColor}           | State colors in hexadecimal value         |
+| --sgds-{stateColor}-{weight} | State colors with different weightage in hexadecimal value |
+| --sgds-gray-{weight}         | Gray colors with different weightage in hexadecimal value  |
+
+> `{stateColor}` consists of `primary`,`secondary`,`success`,`warning`,`danger`,`info`,`light`,`dark`
+>
+> `{weight}` are color weightage in hundreds starting from `100` up to `900`
 
 ```css
 
 :root {
   --sgds-body-font-family: Helvetica;
   --sgds-body-font-size: 5rem;
+  --sgds-primary-rgb : 89,37,220;
+  --sgds-secondary : #1f69ff;
+  --sgds-success-500 : #3bb346;
+  --sgds-gray-500 : #667085;
 }
 
 ```
