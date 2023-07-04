@@ -18,9 +18,9 @@ const V1_0_0_rc = [
   "Textarea",
   "Tooltip",
   "Modal",
-  "Badge", 
+  "Badge",
   "Alert",
-  "Breadcrumb", 
+  "Breadcrumb",
   "Toast",
   "Dropdown",
   "Spinner"

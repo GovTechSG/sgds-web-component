@@ -1,2 +1,2 @@
 export { SgdsAccordion } from "./sgds-accordion";
-export {SgdsAccordionItem } from "./sgds-accordion-item";
+export { SgdsAccordionItem } from "./sgds-accordion-item";
