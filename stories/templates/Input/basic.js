@@ -34,3 +34,5 @@ export const args = {
   name: "email",
   label: "Label"
 };
+
+export const parameters = {};

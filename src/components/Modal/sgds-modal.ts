@@ -11,24 +11,69 @@ import { HasSlotController } from "../../utils/slot";
 import { watch } from "../../utils/watch";
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import styles from "./sgds-modal.scss";
+import { unsafeSVG } from "lit/directives/unsafe-svg.js";
+
+/**
+ * @summary The modal component inform users about a specific task and may contain critical information which users then have to make a decision.
+ *
+ * @slot default - The content of the Modal's body.
+ * @slot footer - The content of the Modal's footer, typically used to pass in buttons for call to action.
+ *
+ * @event sgds-close - Emitted when the modal is called to close via mouseclick of close button, overlay or via keyboard esc key
+ * @event sgds-show - Emitted when the modal opens
+ * @event sgds-hide - Emitted when the modal closes
+ * @event sgds-after-show - Emitted after modal opens and the animations has completed
+ * @event sgds-after-hide - Emitted after modal closes and the animations has completed
+ *
+ * @csspart base - The component's base wrapper
+ * @csspart overlay - The overlay that covers the screen behind the dialog
+ * @csspart panel - The modal's dialog panel
+ * @csspart header - The modal's header (h3 element) that wraps the title, titleIcon and close button
+ * @csspart title - The div element wrapping title and titleIcon
+ * @csspart body - The modal's body where the content lies
+ * @csspart footers - The modal's footer
+ *
+ * @cssproperty --modal-padding - The general modal padding of modal component. Applied to body, footer and header.
+ * @cssproperty --modal-panel-z-index - The z-index of modal panel
+ * @cssproperty --modal-panel-width - The width of modal panel.
+ * @cssproperty --modal-panel-height - The height of modal panel.
+ * @cssproperty --modal-panel-background-color - The background color of modal panel
+ * @cssproperty --modal-panel-border-radius - The border radius of modal panel
+ * @cssproperty --modal-header-bottom-border-line-width - The line width of header's bottom border
+ * @cssproperty --modal-overlay-background-color - The overlay's background color
+ */
 @customElement("sgds-modal")
 export class SgdsModal extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
+  /**@internal */
   @query(".modal") dialog: HTMLElement;
+  /**@internal */
   @query(".modal-panel") panel: HTMLElement;
+  /**@internal */
   @query(".modal-overlay") overlay: HTMLElement;
-
+  /**@internal */
   private readonly hasSlotController = new HasSlotController(this, "footer");
+  /**@internal */
   private modal: Modal;
+  /**@internal */
   private originalTrigger: HTMLElement | null;
 
+  /**Indicates whether or not the modal is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
   // @property({ type: Boolean, reflect: true }) centeredAlignVariant = false;
-
+  /**The modal's title as displayed in the header */
   @property({ reflect: true }) title = "";
+  /**The modal's icon as displayed in the header. Pass in SVG format icons as string directly  */
   @property({ reflect: true }) titleIcon = "";
-  @property({ attribute: "no-header", type: Boolean, reflect: true }) noHeader = false;
+  /** Disables the header. This will also remove the default close button */
+  @property({ type: Boolean, reflect: true }) noHeader = false;
+  /** Centers the modal vertically in page */
+  @property({ type: Boolean, reflect: true }) centered = false;
+  /** Centers the contents inside the modal */
+  @property({ type: Boolean, reflect: true }) centeredAlignVariant = false;
+  /** Removes the default animation when opening and closing of modal */
+  @property({ type: Boolean, reflect: true }) noAnimation = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -52,7 +97,7 @@ export class SgdsModal extends SgdsElement {
   }
 
   /** Shows the dialog. */
-  async show() {
+  public async show() {
     if (this.open) {
       return undefined;
     }
@@ -62,7 +107,7 @@ export class SgdsModal extends SgdsElement {
   }
 
   /** Hides the dialog */
-  async hide() {
+  public async hide() {
     if (!this.open) {
       return undefined;
     }
@@ -72,12 +117,12 @@ export class SgdsModal extends SgdsElement {
   }
 
   private requestClose(source: "close-button" | "keyboard" | "overlay") {
-    const slRequestClose = this.emit("sgds-close", {
+    const sgdsRequestClose = this.emit("sgds-close", {
       cancelable: true,
       detail: { source }
     });
 
-    if (slRequestClose.defaultPrevented) {
+    if (sgdsRequestClose.defaultPrevented) {
       const animation = getAnimation(this, "modal.denyClose");
       animateTo(this.panel, animation.keyframes);
       return;
@@ -112,45 +157,16 @@ export class SgdsModal extends SgdsElement {
 
       lockBodyScrolling(this);
 
-      // When the dialog is shown, Safari will attempt to set focus on whatever element has autofocus. This can cause
-      // the dialogs's animation to jitter (if it starts offscreen), so we'll temporarily remove the attribute, call
-      // `focus({ preventScroll: true })` ourselves, and add the attribute back afterwards.
-      //
-      // Related: https://github.com/shoelace-style/shoelace/issues/693
-      //
-      const autoFocusTarget = this.querySelector("[autofocus]");
-      if (autoFocusTarget) {
-        autoFocusTarget.removeAttribute("autofocus");
-      }
-
       await Promise.all([stopAnimations(this.dialog), stopAnimations(this.overlay)]);
       this.dialog.hidden = false;
 
-      // Set initial focus
-      requestAnimationFrame(() => {
-        const slInitialFocus = this.emit("sgds-initial-focus", { cancelable: true });
-
-        if (!slInitialFocus.defaultPrevented) {
-          // Set focus to the autofocus target and restore the attribute
-          if (autoFocusTarget) {
-            (autoFocusTarget as HTMLInputElement).focus({ preventScroll: true });
-          } else {
-            this.panel.focus({ preventScroll: true });
-          }
-        }
-
-        // Restore the autofocus attribute
-        if (autoFocusTarget) {
-          autoFocusTarget.setAttribute("autofocus", "");
-        }
-      });
-
       const panelAnimation = getAnimation(this, "modal.show");
       const overlayAnimation = getAnimation(this, "modal.overlay.show");
-      await Promise.all([
-        animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
-        animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
-      ]);
+      !this.noAnimation &&
+        (await Promise.all([
+          animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
+          animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
+        ]));
 
       this.emit("sgds-after-show");
     } else {
@@ -166,14 +182,15 @@ export class SgdsModal extends SgdsElement {
       // Animate the overlay and the panel at the same time. Because animation durations might be different, we need to
       // hide each one individually when the animation finishes, otherwise the first one that finishes will reappear
       // unexpectedly. We'll unhide them after all animations have completed.
-      await Promise.all([
-        animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options).then(() => {
-          this.overlay.hidden = true;
-        }),
-        animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options).then(() => {
-          this.panel.hidden = true;
-        })
-      ]);
+      !this.noAnimation &&
+        (await Promise.all([
+          animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options).then(() => {
+            this.overlay.hidden = true;
+          }),
+          animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options).then(() => {
+            this.panel.hidden = true;
+          })
+        ]));
 
       this.dialog.hidden = true;
 
@@ -194,16 +211,15 @@ export class SgdsModal extends SgdsElement {
   }
 
   render() {
-    // if label is defined
-    const withLabelIcon = html` <sl-icon name=${this.titleIcon} class="pe-2 flex-shrink-0"></sl-icon>`;
-
+    const withLabelIcon = html`${unsafeSVG(this.titleIcon)}`;
     return html`
       <div
         part="base"
         class=${classMap({
           modal: true,
           "modal--open": this.open,
-          "modal--has-footer": this.hasSlotController.test("footer")
+          "modal--has-footer": this.hasSlotController.test("footer"),
+          centered: this.centered
         })}
       >
         <div part="overlay" class="modal-overlay" @click=${() => this.requestClose("overlay")} tabindex="-1"></div>
@@ -223,45 +239,47 @@ export class SgdsModal extends SgdsElement {
                 <h3
                   part="header"
                   class=${classMap({
-                    "modal-header": true
-                    // centered: this.centeredAlignVariant,
+                    "modal-header": true,
+                    centered: this.centeredAlignVariant
                   })}
                 >
                   <div
                     part="title"
                     class=${classMap({
-                      "modal-title d-flex align-items-center": true
-                      // centered : this.centeredAlignVariant,
+                      "modal-title": true,
+                      centered: this.centeredAlignVariant
                     })}
                     id="title"
                   >
-                    ${this.titleIcon ? withLabelIcon : null}
-                    ${this.title.length > 0 ? this.title : String.fromCharCode(65279)}
+                    ${this.titleIcon ? withLabelIcon : ""} ${this.title}
                   </div>
-                  <sgds-button
-                    part="close-button"
-                    variant="icon"
-                    exportparts="base:close-button__base"
+                  <sgds-closebutton
                     class=${classMap({
-                      "modal-close": true
-                      // 'centered': this.centeredAlignVariant,
+                      "modal-close": true,
+                      centered: this.centeredAlignVariant
                     })}
                     @click="${() => this.requestClose("close-button")}"
-                    ><sl-icon name="x-lg"></sl-icon
-                  ></sgds-button>
+                  >
+                  </sgds-closebutton>
                 </h3>
               `
             : ""}
 
-          <div part="body" class="modal-body">
+          <div
+            part="body"
+            class=${classMap({
+              "modal-body": true,
+              centered: this.centeredAlignVariant
+            })}
+          >
             <slot></slot>
           </div>
 
           <footer
             part="footer"
             class=${classMap({
-              "modal-footer": true
-              // centered: this.centeredAlignVariant,
+              "modal-footer": true,
+              centered: this.centeredAlignVariant
             })}
           >
             <slot name="footer"></slot>
@@ -274,33 +292,33 @@ export class SgdsModal extends SgdsElement {
 
 setDefaultAnimation("modal.show", {
   keyframes: [
-    { opacity: 0, transform: "scale(0.8)" },
-    { opacity: 1, transform: "scale(1)" }
+    { opacity: 0, transform: "scale(1) translate(0, -100%)" },
+    { opacity: 1, transform: "scale(1) translate(0, 0%)" }
   ],
-  options: { duration: 250, easing: "ease" }
+  options: { duration: 400, easing: "ease" }
 });
 
 setDefaultAnimation("modal.hide", {
   keyframes: [
-    { opacity: 1, transform: "scale(1)" },
-    { opacity: 0, transform: "scale(0.8)" }
+    { opacity: 1, transform: "scale(1) translate(0, 0)" },
+    { opacity: 0, transform: "scale(1) translate(0, -100%)" }
   ],
-  options: { duration: 250, easing: "ease" }
+  options: { duration: 400, easing: "ease" }
 });
 
 setDefaultAnimation("modal.denyClose", {
   keyframes: [{ transform: "scale(1)" }, { transform: "scale(1.02)" }, { transform: "scale(1)" }],
-  options: { duration: 250 }
+  options: { duration: 400 }
 });
 
 setDefaultAnimation("modal.overlay.show", {
   keyframes: [{ opacity: 0 }, { opacity: 1 }],
-  options: { duration: 250 }
+  options: { duration: 400 }
 });
 
 setDefaultAnimation("modal.overlay.hide", {
   keyframes: [{ opacity: 1 }, { opacity: 0 }],
-  options: { duration: 250 }
+  options: { duration: 400 }
 });
 
 export default SgdsModal;

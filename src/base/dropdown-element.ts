@@ -1,11 +1,11 @@
-import { property, state } from "lit/decorators.js";
-import { Dropdown } from "bootstrap";
-import * as Popper from "@popperjs/core";
 import type { StrictModifiers } from "@popperjs/core";
-import { createRef, Ref } from "lit/directives/ref.js";
-import mergeDeep from "../utils/mergeDeep";
-import genId from "../utils/generateId";
+import * as Popper from "@popperjs/core";
+import { Dropdown } from "bootstrap";
+import { property, state } from "lit/decorators.js";
+import { Ref, createRef } from "lit/directives/ref.js";
 import { SgdsDropdownItem } from "../components/Dropdown/sgds-dropdown-item";
+import genId from "../utils/generateId";
+import mergeDeep from "../utils/mergeDeep";
 import SgdsElement from "./sgds-element";
 
 const ARROW_DOWN = "ArrowDown";
@@ -13,22 +13,13 @@ const ARROW_UP = "ArrowUp";
 const ESC = "Escape";
 const ENTER = "Enter";
 
-export type DropdownButtonVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info"
-  | "light"
-  | "dark";
 export type DropDirection = "left" | "right" | "up" | "down";
 
 /**
  * @event sgds-show - Emitted event when show instance is called
- * @event sgds-shown - Emitted event when dropdown has been made visible to the user and CSS transitions have completed
+ * @event sgds-after-show - Emitted event when dropdown has been made visible to the user and CSS transitions have completed
  * @event sgds-hide - Emitted event when hide instance is called
- * @event sgds-hidden - Emitted event when dropdown has hidden to the user and CSS transitions have completed
+ * @event sgds-after-hide - Emitted event when dropdown has hidden to the user and CSS transitions have completed
  */
 
 export class DropdownElement extends SgdsElement {
@@ -39,19 +30,19 @@ export class DropdownElement extends SgdsElement {
   /** @internal */
   bsDropdown: Dropdown = null;
 
-  /** Controls auto-flipping of menu */
-  @property({ type: Boolean, reflect: true })
-  noFlip = false;
+  /** @internal Controls auto-flipping of menu */
+  @property({ type: Boolean, state: true })
+  protected noFlip = false;
 
-  /** When true, aligns right edge of menu with right edge of button */
-  @property({ type: Boolean, reflect: true })
-  menuAlignRight = false;
+  /** @internal When true, aligns right edge of menu with right edge of button */
+  @property({ type: Boolean, reflect: true, state: true })
+  protected menuAlignRight = false;
 
-  /** The drop position of menu relative to the toggle button */
-  @property({ type: String, reflect: true })
-  drop: DropDirection = "down";
+  /** @internal The drop position of menu relative to the toggle button */
+  @property({ type: String, reflect: true, state: true })
+  protected drop: DropDirection = "down";
 
-  /** Additional configuration to pass to Popper.js. See https://popper.js.org/ for config opts */
+  /**  Additional configuration to pass to Popper.js. See https://popper.js.org/ for config opts */
   @property({ type: Object })
   popperOpts = {};
 
@@ -62,12 +53,8 @@ export class DropdownElement extends SgdsElement {
   @property({ type: String })
   togglerText = "";
 
-  /** Sets color of Dropdown button */
-  @property({ type: String })
-  variant: DropdownButtonVariant = "secondary";
-
   /** When true, dropdown menu shows on first load */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   menuIsOpen = false;
 
   /** Controls the close behaviour of dropdown menu. By default menu auto-closes when SgdsDropdownItem or area outside dropdown is clicked */
@@ -138,18 +125,17 @@ export class DropdownElement extends SgdsElement {
 
     this.myDropdown.value.addEventListener("shown.bs.dropdown", () => {
       this.menuIsOpen = true;
-      this.emit("sgds-shown");
+      this.emit("sgds-after-show");
     });
 
     this.myDropdown.value.addEventListener("hide.bs.dropdown", () => {
       this.menuIsOpen = false;
-      this._resetMenu();
       this.emit("sgds-hide");
     });
 
     this.myDropdown.value.addEventListener("hidden.bs.dropdown", () => {
       this.menuIsOpen = false;
-      this.emit("sgds-hidden");
+      this.emit("sgds-after-hide");
     });
 
     this.addEventListener("keydown", this._handleKeyboardEvent);
@@ -159,7 +145,6 @@ export class DropdownElement extends SgdsElement {
       });
       addEventListener("click", e => this._handleClickOutOfElement(e, this));
     }
-    if (this.menuIsOpen) this.bsDropdown.show();
   }
   /** When invoked, opens the dropdown menu */
   public showMenu() {
@@ -184,7 +169,6 @@ export class DropdownElement extends SgdsElement {
       i.removeAttribute("tabindex");
     });
   }
-
   _getMenuItems(): SgdsDropdownItem[] {
     return this.shadowRoot.querySelector("slot").assignedElements({ flatten: true }) as SgdsDropdownItem[];
   }

@@ -15,7 +15,15 @@ const V1_0_0_rc = [
   "Radio",
   "Sidenav",
   "Table",
-  "Textarea"
+  "Textarea",
+  "Tooltip",
+  "Modal",
+  "Badge",
+  "Alert",
+  "Breadcrumb",
+  "Toast",
+  "Dropdown",
+  "Spinner"
 ];
 
 const componentStories = () => {
@@ -29,6 +37,7 @@ module.exports = {
   stories: [
     "../stories/frameworks/**/*.stories.@(js|jsx|ts|tsx|mdx)",
     "../stories/getting-started/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+    // "../stories/components/*.stories.@(js|jsx|ts|tsx|mdx)",
     ...componentStories()
   ],
   addons: ["@storybook/addon-essentials", "@storybook/preset-scss"],

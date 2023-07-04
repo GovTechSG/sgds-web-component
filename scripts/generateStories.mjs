@@ -4,7 +4,7 @@ import groupBy from 'lodash/groupBy.js';
 import path from 'path';
 import prettier from 'prettier';
 import { makeArgTypes } from './makeArgTypes.mjs';
-import { methodsTable } from './methodsTable.mjs';
+import { methodsTable, writeParams } from './methodsTable.mjs';
 import { getAllComponents, getSgdsComponents } from './shared.mjs';
 
 const storiesDir = path.join('stories/components');
@@ -30,7 +30,7 @@ const groupedComponents = groupBy(components, (k, v) => {
 for (const [key, value] of Object.entries(groupedComponents)) {
   const allMembers = value.map(i => i.members).flat().filter(member => !(member.privacy && member.privacy === 'private'))
   const methodsMeta = methodsTable(value);
-  const summary = value.filter(i => i.summary).map(i => i.summary).join('')
+  const summary = value.filter(i => i.summary).map(i => i.summary).join('<br/>')
   const args = allMembers.filter(member => member.kind === 'field');
   const componentFile = path.join(storiesDir, `${key}.stories.mdx`);
   const ArgsTable = value.map(
@@ -42,7 +42,7 @@ for (const [key, value] of Object.entries(groupedComponents)) {
   const source = prettier.format(
     `
 import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
-import {Template, args} from '../templates/${key}/basic.js';
+import {Template, args, parameters} from '../templates/${key}/basic.js';
 import '../../lib/index.js';
 import { html } from "lit-html";
 
@@ -54,7 +54,7 @@ import { html } from "lit-html";
 # ${key}  
 ${summary ? summary +"\n" : "\n"}
 <Canvas>
-  <Story name="Basic" args={args}>
+  <Story name="Basic" args={args} parameters={parameters}>
     {Template.bind({})}
   </Story>
 </Canvas>
@@ -75,7 +75,7 @@ ${methodsMeta.map(meta => {
         <tbody>
           ${meta.methods.map(method => (
             `<tr>
-              <td>${method.name}</td>
+              <td>${method.name}(${writeParams(method)})</td>
               <td>${method.description}</td>
             </tr>`
           )).join('')}

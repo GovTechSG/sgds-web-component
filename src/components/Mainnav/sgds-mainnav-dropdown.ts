@@ -1,16 +1,32 @@
 import { html } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, queryAsync } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
-import styles from "./sgds-mainnav-dropdown.scss";
 import { DropdownElement } from "../../base/dropdown-element";
+import styles from "./sgds-mainnav-dropdown.scss";
 
 @customElement("sgds-mainnav-dropdown")
 export class SgdsMainnavDropdown extends DropdownElement {
   static styles = [DropdownElement.styles, styles];
 
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener("sgds-hide", this._resetMenu);
+  }
+  /**@internal */
+  @queryAsync("a")
+  dropdownRef: Promise<HTMLAnchorElement>;
+
+  async firstUpdated() {
+    super.firstUpdated();
+    if (this.menuIsOpen) {
+      await this.dropdownRef;
+      this.bsDropdown.show();
+    }
+  }
+
   render() {
     return html`
-      <li class="nav-item">
+      <li class="nav-item dropdown">
         <a
           class="nav-link"
           ?disabled=${this.disabled}

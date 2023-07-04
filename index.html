@@ -6,9 +6,11 @@
     <!-- <link href='node_modules/@govtechsg/sgds/css/sgds.util.css' rel='stylesheet' type='text/css' /> -->
     <!-- <link href='node_modules/@govtechsg/sgds/css/sgds.css' rel='stylesheet' type='text/css' /> -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds@2.1.1/css/sgds.min.css" rel="stylesheet" crossorigin="anonymous"> -->
-    <script type="module" id="dev-console-gateway"
-        src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"></script>
+    <!-- <script type="module" id="dev-console-gateway"
+        src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script type="module" id="console-components-gateway"
+  src="https://dev.assets.developer.tech.gov.sg/console-components/gateway.es5.js" nonce={nonce || undefined}></script>
     <style>
         /* * {
             font-family: "bootstrap-icons", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -80,7 +82,7 @@
         sgds-button {
             flex: 1;
         }
-
+        
     </style>
     <script src="lib/index.js" type="module"></script>
     <script>
@@ -94,15 +96,21 @@
 </head>
 
 
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100"></body>
     <sgds-masthead fluid></sgds-masthead>  
     <div class="grid">
+      
     <sgds-mainnav>
         <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
         <sgds-mainnav-item href="#">Home</sgds-mainnav-item>
         <sgds-mainnav-item href="#">About</sgds-mainnav-item>
         <sgds-mainnav-item href="#" slot="end" class="test test2">Info</sgds-mainnav-item>
         <sgds-mainnav-item href="#" slot="end">Contact Us</sgds-mainnav-item>
+        <sgds-mainnav-dropdown togglerText="Dropdown" menuIsOpen close="inside">
+            <sgds-dropdown-item href="https://google.com">Item 1</sgds-dropdown-item>
+            <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
+            <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
+          </sgds-mainnav-dropdown>
         <sgds-button slot="end">Login</sgds-button>
         <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px">
         </dev-console-widget>
@@ -133,6 +141,20 @@
 
 
     <main>
+        <div class="container">
+            <h2>Breadcrumb</h2>
+            <sgds-breadcrumb>
+                <span slot="separator"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-slash-square" viewBox="0 0 16 16">
+                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                    <path d="M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                  </svg></span>
+                <sgds-breadcrumb-item href="https://www.yahoo.com">Home <span slot="separator">*</span></sgds-breadcrumb-item>
+                <sgds-breadcrumb-item href="https://www.google.com">Item 1</sgds-breadcrumb-item>
+                <sgds-breadcrumb-item href="https://www.google.com">Item 2</sgds-breadcrumb-item>
+                <sgds-breadcrumb-item href="https://www.google.com">Item 3</sgds-breadcrumb-item>
+                <sgds-breadcrumb-item href="https://www.google.com" >Last Item</sgds-breadcrumb-item>
+              </sgds-breadcrumb>
+        </div>
         <div class="container">
             <h2>Accordion</h2>
             <div class="row">
@@ -253,9 +275,17 @@
             <h2>Input</h2>
             <div class="row">
                 <div class="col is-6">
-                    <sgds-toast></sgds-toast><br>
-                    <sgds-toast bg="warning" status="success" delay="5000" autohide="true"></sgds-toast><br>
-                    <sgds-toast></sgds-toast>
+                    <sgds-toast show>
+                        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
+                            <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z"/>
+                          </svg>
+                    </sgds-toast><br>
+                    <sgds-toast show bg="warning" status="success" autohide="true"></sgds-toast><br>
+                    
+                    <sgds-toast-container position="middle-center">
+                        <sgds-toast show title="hello">This is a toast <span slot="duration">just now</span></sgds-toast>
+                        <sgds-toast show title="hello">This is a toast</sgds-toast>
+                    </sgds-toast-container>
                     </div></div></div>
         <div class="container">
             <h2>Alert</h2>
@@ -263,9 +293,11 @@
                 <div class="col is-6">
 
                     <h3>Links</h3>
-                    <sgds-alert alertClasses="d-flex align-items-center" variant="danger" dismissible>
-                        <sl-icon name="info-circle" class="flex-shrink-0 me-4 align-self-start mt-1"></sl-icon>
-                        <div> This is a primary alert with&nbsp;<a class="alert-link">an example link</a>. Give it a click if you like.</div>
+                    <sgds-alert alertClasses="d-flex align-items-center" variant="danger" dismissible show>
+                        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-1-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM9.283 4.002H7.971L6.072 5.385v1.271l1.834-1.318h.065V12h1.312V4.002Z"/>
+                          </svg>
+                        <div> This is a primary alert with&nbsp;<sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like.</div>
                         </sgds-alert>
 
                         <h3>With additional content</h3>
@@ -291,7 +323,7 @@
         </div>
         <div class="container">
             <h2>Stepper</h2>
-          <sgds-stepper id="myStepper" activeStep="0">
+          <sgds-stepper id="myStepper" activeStep="2" steps='["one", "two", "three"]'>
             <div slot="step-1" class="mb-4"> 
                 <div class="row">
                     <div class="col mb-2">
@@ -411,7 +443,7 @@
             <div class="container">
                 <h2>Dropdown</h2>
                 <div class="row">
-                    <sgds-dropdown togglerText="Dropdown">
+                    <sgds-dropdown togglerText="Dropdown" menuIsOpen close="inside">
                         <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
                         <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
                         <sgds-dropdown-item href="#" disabled>
@@ -440,6 +472,7 @@
                         />
                       </svg>
                       </sgds-tooltip>
+                      <button onclick="tooltip.show()">click me</button>
                 </div>
     <script>
         const submitButton = document.querySelector('sgds-quantity-toggle#heyhey');
@@ -457,6 +490,8 @@
         // }); 
 
         // } ;
+        const tooltip = document.querySelector('sgds-tooltip');
+        
 
         const fileUpload = document.querySelector('sgds-fileupload');
 
