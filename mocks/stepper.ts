@@ -1,10 +1,16 @@
 import { PropertyValueMap, html } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, state, property } from "lit/decorators.js";
 import SgdsElement from "../src/base/sgds-element";
 import { SgdsStepper } from "../src/components/Stepper";
+import { SgdsInput } from "../src/components/Input";
+import { watch } from "../src/utils/watch";
+import { FormSubmitController } from "../src/utils/form";
+import { live } from "lit/directives/live.js";
 
 @customElement("mock-stepper")
 export class MockStepper extends SgdsElement {
+  private readonly formSubmitController = new FormSubmitController(this);
+
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("sgds-arrived", () => {
@@ -12,8 +18,23 @@ export class MockStepper extends SgdsElement {
       this.component = this.getCurrentComponent();
       this.requestUpdate();
     });
+    this.addEventListener("sgds-input", (e: Event) => {
+      const target = e.target as SgdsInput
+      this.details[target.name] = target.value
+
+      console.log("listening to sgds-input")
+    })
+  }
+  details ={
+    firstName: "lukhei",
+  lastName: "chong"
   }
   currentStep: number = 2;
+
+  handleInputChange(e: Event){
+    const target = e.target as SgdsInput
+    this.details[target.name] = target.value
+  }
   getStepper() {
     return this.shadowRoot?.querySelector("sgds-stepper") as SgdsStepper;
   }
@@ -48,10 +69,21 @@ export class MockStepper extends SgdsElement {
           <div class="col mb-2">
             <form>
               <h2>Content for Step 1</h2>
-              <sgds-input name="input1" id="input1" pattern="test" required></sgds-input>
-              <sgds-checkbox name="cb1" id="cb1" value="lolol"
-                >no required<span slot="feedback">You are required to check this.</span></sgds-checkbox
-              >
+              <sgds-input
+                label="First Name"
+                hinttext="Enter first name"
+                name="firstName"
+                required
+                inputClasses="mb-3"
+                .value=${live(this.details.firstName)}
+                @sgds-input=${this.handleInputChange}
+              ></sgds-input>
+              <sgds-input label="Last Name" hinttext="Enter last name" name="lastName" required value=${this.details.lastName} @sgds-change=${this.handleInputChange}></sgds-input>
+              <sgds-radio-group>
+                <span slot="label">Gender</span>
+                <sgds-radio value="female" isInline>Female</sgds-radio>
+                <sgds-radio value="male" isInline>Male</sgds-radio>
+              </sgds-radio-group>
             </form>
           </div>
         </div>
@@ -64,7 +96,7 @@ export class MockStepper extends SgdsElement {
           <div class="col mb-2">
             <form>
               <h2>Content for Step 2</h2>
-              <sgds-input name="input1" id="input1" pattern="test" required></sgds-input>
+              <sgds-input name="input1" id="input1" pattern="test" required ></sgds-input>
               <sgds-checkbox name="cb1" id="cb1" value="lolol"
                 >no required<span slot="feedback">You are required to check this.</span></sgds-checkbox
               >
@@ -118,7 +150,10 @@ export class MockStepper extends SgdsElement {
       </div>`
     }
   ];
-
+ @watch("details")
+ handleChange(){
+  console.log('change detected')
+ }
   render() {
     return html`
       <div style="background:#FAFAFA;padding:30px;">
