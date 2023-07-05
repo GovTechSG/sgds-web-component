@@ -37,6 +37,7 @@ export const parameters = {
   options: {
     storySort: {
       order: ["Getting Started", ["Installation", "Imports"], "Frameworks", "Components"]
-    }
+    },
+    enableShortcuts: false,
   }
 };
