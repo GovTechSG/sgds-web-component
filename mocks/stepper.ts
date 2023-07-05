@@ -21,7 +21,7 @@ export class MockStepper extends SgdsElement {
     gender: ""
   };
   currentStep: number = 0;
-  component: Function = () => {}
+  component: Function = () => {};
   stepMetaData = [
     {
       stepHeader: "Personal Details",
@@ -89,7 +89,7 @@ export class MockStepper extends SgdsElement {
               <sgds-radio-group value=${this.details.gender}>
                 <span slot="label">Gender</span>
                 <sgds-radio value="female" isInline disabled>Female</sgds-radio>
-                <sgds-radio value="male" isInline disabled >Male</sgds-radio>
+                <sgds-radio value="male" isInline disabled>Male</sgds-radio>
               </sgds-radio-group>
               <sgds-input name="address" label="Address" required readonly value=${details.address}></sgds-input>
             </form>
@@ -105,10 +105,11 @@ export class MockStepper extends SgdsElement {
   }
 
   _handleRadioChange(e: CustomEvent) {
-    this.details.gender = e.detail.value
+    this.details.gender = e.detail.value;
   }
 
-  _handleInputChange(e: Event) {
+  _handleInputChange(e: KeyboardEvent) {
+    e.preventDefault();
     const target = e.target as SgdsInput;
     this.details[target.name] = target.value;
   }
@@ -146,8 +147,9 @@ export class MockStepper extends SgdsElement {
     this.component = this._getComponent();
     this.requestUpdate();
   }
-  
+
   render() {
+    console.log('render')
     return html`
       <div style="background:#FAFAFA;padding:30px;">
         <h2>Stepper</h2>
