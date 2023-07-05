@@ -149,7 +149,6 @@ export class MockStepper extends SgdsElement {
   }
 
   render() {
-    console.log('render')
     return html`
       <div style="background:#FAFAFA;padding:30px;">
         <h2>Stepper</h2>
