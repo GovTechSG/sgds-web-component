@@ -3,15 +3,13 @@ import { customElement } from "lit/decorators.js";
 import SgdsElement from "../src/base/sgds-element";
 import { SgdsInput } from "../src/components/Input";
 import { SgdsStepper } from "../src/components/Stepper";
-import { watch } from "../src/utils/watch";
 
 interface IDetails {
   firstName: string;
   lastName: string;
   address: string;
-  gender: "male" | "female" | "";
+  gender: string;
 }
-
 @customElement("mock-stepper")
 export class MockStepper extends SgdsElement {
   details: IDetails = {
@@ -19,7 +17,7 @@ export class MockStepper extends SgdsElement {
     lastName: "",
     address: "",
     gender: ""
-  };
+  }
   currentStep: number = 0;
   component: Function = () => {};
   stepMetaData = [
@@ -98,7 +96,10 @@ export class MockStepper extends SgdsElement {
       </div>`
     }
   ];
+  connectedCallback(): void {
+    super.connectedCallback()
 
+  }
   _handleArrived() {
     this.component = this._getComponent();
     this.requestUpdate();
@@ -119,7 +120,13 @@ export class MockStepper extends SgdsElement {
     return stepper;
   }
 
-  _reset() {
+  _reset() {    
+    this.details = {
+      firstName: "",
+      lastName: "",
+      address: "",
+      gender: ""
+    };
     this._getStepper().reset();
   }
 
