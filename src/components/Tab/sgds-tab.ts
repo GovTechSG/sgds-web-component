@@ -10,7 +10,7 @@ let id = 0;
 @customElement("sgds-tab")
 export class SgdsTab extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
-  @query(".tab") tab: HTMLElement;
+  @query(".nav-item") tab: HTMLElement;
 
   private readonly attrId = ++id;
   private readonly componentId = `sgds-tab-${this.attrId}`;
@@ -62,18 +62,19 @@ export class SgdsTab extends SgdsElement {
   render() {
     // If the user didn't provide an ID, we'll set one so we can link tabs and tab panels with aria labels
     this.id = this.id.length > 0 ? this.id : this.componentId;
-
     const parentVariantAttr = this.closest("sgds-tab-group").getAttribute("variant");
-    console.log(parentVariantAttr);
+    const tabsInfo = html`
+      <div class="tabs-info-label">
+        <div><slot name="icon"></slot></div>
+        <div><slot name="label"></slot></div>
+      </div>
+      <div class="tabs-info-count"><slot name="count"></slot></div>
+    `;
     return html`
       <li
         part="base"
         class=${classMap({
           "nav-item": true
-
-          // "tab--closable": this.closable,
-          // "tab--disabled": this.disabled,
-          // [`tab--${parentVariantAttr}`]: parentVariantAttr
         })}
         tabindex=${this.disabled ? "-1" : "0"}
       >
@@ -85,8 +86,7 @@ export class SgdsTab extends SgdsElement {
             disabled: this.disabled
           })}"
         >
-          <div class="tabs-info-label"><slot></slot>hello</div>
-          <div class="tabs-info-count"></div>
+          ${parentVariantAttr === "tabs-info-toggle" ? tabsInfo : html`<slot></slot>`}
         </button>
       </li>
     `;

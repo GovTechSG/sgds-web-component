@@ -237,13 +237,6 @@ export class SgdsTabGroup extends SgdsElement {
     });
   }
 
-  // setTabVariant() {
-  //   // Link each tab with its corresponding panel
-  //   this.tabs.forEach(tab => {
-  //     tab.setAttribute("variant", this.variant);
-  //   });
-  // }
-
   // This stores tabs and panels so we can refer to a cache instead of calling querySelectorAll() multiple times.
   syncTabsAndPanels() {
     this.tabs = this.getAllTabs({ includeDisabled: false });
