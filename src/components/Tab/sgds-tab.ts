@@ -9,7 +9,7 @@ let id = 0;
 
 @customElement("sgds-tab")
 export class SgdsTab extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
   @query(".tab") tab: HTMLElement;
 
   private readonly attrId = ++id;
@@ -63,22 +63,31 @@ export class SgdsTab extends SgdsElement {
     // If the user didn't provide an ID, we'll set one so we can link tabs and tab panels with aria labels
     this.id = this.id.length > 0 ? this.id : this.componentId;
 
-    const getAttr = this.closest("sgds-tab").getAttribute("variant");
-
+    const parentVariantAttr = this.closest("sgds-tab-group").getAttribute("variant");
+    console.log(parentVariantAttr);
     return html`
-      <div
+      <li
         part="base"
         class=${classMap({
-          tab: true,
-          "tab--active": this.active,
-          "tab--closable": this.closable,
-          "tab--disabled": this.disabled,
-          [`tab--${getAttr}`]: getAttr
+          "nav-item": true,    
+          
+          // "tab--closable": this.closable,
+          // "tab--disabled": this.disabled,
+          // [`tab--${parentVariantAttr}`]: parentVariantAttr
         })}
         tabindex=${this.disabled ? "-1" : "0"}
       >
-        <slot></slot>
-      </div>
+        <button class="${classMap({
+          "nav-link": true,
+          [`${parentVariantAttr}`] : parentVariantAttr ,
+          active: this.active,
+          disabled: this.disabled,
+          
+        })}">
+          <div class="tabs-info-label"><slot></slot>hello</div>
+          <div class="tabs-info-count"></div>
+        </button>
+      </li>
     `;
   }
 }

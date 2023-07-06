@@ -7,13 +7,14 @@ import { watch } from "../../utils/watch";
 import styles from "./sgds-tabgroup.scss";
 import { SgdsTabPanel } from "./sgds-tabpanel";
 import { SgdsTab } from "./sgds-tab";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 @customElement("sgds-tab-group")
 export class SgdsTabGroup extends SgdsElement {
-  static styles = styles;
+  static styles = [SgdsElement.styles, styles];
 
-  @query(".tab-group") tabGroup: HTMLElement;
-  @query(".tab-group__body") body: HTMLSlotElement;
+  @query("[part='base']") tabGroup: HTMLElement;
+  @query("[part='body']") body: HTMLSlotElement;
   @query(".tab-group__nav") nav: HTMLElement;
 
   private activeTab?: SgdsTab;
@@ -24,7 +25,7 @@ export class SgdsTabGroup extends SgdsElement {
 
   @state() private hasScrollControls = false;
 
-  @property({ reflect: true }) TabVariant: "basic-toggle" | "info-toggle";
+  @property({ reflect: true, attribute: true }) variant?: "tabs-basic-toggle" | "tabs-info-toggle";
   /**
    * When set to auto, navigating tabs with the arrow keys will instantly show the corresponding tab panel. When set to
    * manual, the tab will receive focus but will not show until the user presses spacebar or enter.
@@ -62,7 +63,7 @@ export class SgdsTabGroup extends SgdsElement {
       const intersectionObserver = new IntersectionObserver((entries, observer) => {
         if (entries[0].intersectionRatio > 0) {
           this.setAriaLabels();
-          this.setTabVariant();
+          // this.setTabVariant();
           this.setActiveTab(this.getActiveTab() ?? this.tabs[0], { emitEvents: false });
           observer.unobserve(entries[0].target);
         }
@@ -149,13 +150,9 @@ export class SgdsTabGroup extends SgdsElement {
           index = 0;
         } else if (event.key === "End") {
           index = this.tabs.length - 1;
-        } else if (
-          event.key === "ArrowUp" || event.key === "ArrowLeft"
-        ) {
+        } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
           index--;
-        } else if (
-          event.key === "ArrowDown" || event.key === "ArrowRight"
-        ) {
+        } else if (event.key === "ArrowDown" || event.key === "ArrowRight") {
           index++;
         }
 
@@ -173,7 +170,7 @@ export class SgdsTabGroup extends SgdsElement {
           this.setActiveTab(this.tabs[index], { scrollBehavior: "smooth" });
         }
 
-          scrollIntoView(this.tabs[index], this.nav, "horizontal");
+        scrollIntoView(this.tabs[index], this.nav, "horizontal");
 
         event.preventDefault();
       }
@@ -218,7 +215,6 @@ export class SgdsTabGroup extends SgdsElement {
       this.tabs.map(el => (el.active = el === this.activeTab));
       this.panels.map(el => (el.active = el.name === this.activeTab?.panel));
 
-
       // Emit events
       if (options.emitEvents) {
         if (previousTab) {
@@ -241,12 +237,12 @@ export class SgdsTabGroup extends SgdsElement {
     });
   }
 
-  setTabVariant() {
-    // Link each tab with its corresponding panel
-    this.tabs.forEach(tab => {
-      tab.setAttribute("variant", this.TabVariant);
-    });
-  }
+  // setTabVariant() {
+  //   // Link each tab with its corresponding panel
+  //   this.tabs.forEach(tab => {
+  //     tab.setAttribute("variant", this.variant);
+  //   });
+  // }
 
   // This stores tabs and panels so we can refer to a cache instead of calling querySelectorAll() multiple times.
   syncTabsAndPanels() {
@@ -259,21 +255,31 @@ export class SgdsTabGroup extends SgdsElement {
       <div
         part="base"
         class=${classMap({
-          "tab-group": true,
-          "tab-group--top": true,
-          "tab-group--basic-toggle": this.TabVariant === "basic-toggle",
-          "tab-group--info-toggle": this.TabVariant === "info-toggle"
+          // "sgds": true,
+          // "nav-tabs": true,
+          // "nav": true,
+          // "tab-group": true,
+          // "tab-group--top": true,
+          // "tab-group--basic-toggle": this.variant === "basic-toggle",
+          // "tab-group--info-toggle": this.variant === "info-toggle"
         })}
         @click=${this.handleClick}
         @keydown=${this.handleKeyDown}
+        variant=${ifDefined(this.variant)}
       >
-        <div class="tab-group__nav-container" part="nav">
-          <div class="tab-group__nav">
-            <div part="tabs" class="tab-group__tabs" role="tablist">
-              <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
-            </div>
-          </div>
+        <!-- <div class="tab-group__nav-container" part="nav">-->
+        <div class="tab-group__nav">
+          <!--  <div part="tabs" class="tab-group__tabs" role="tablist"> -->
+          <slot
+            name="nav"
+            class="sgds nav-tabs nav"
+            role="tablist"
+            variant=${ifDefined(this.variant)}
+            @slotchange=${this.syncTabsAndPanels}
+          ></slot>
         </div>
+        <!-- </div>
+        </div> -->
         <slot part="body" class="tab-group__body" @slotchange=${this.syncTabsAndPanels}></slot>
       </div>
     `;
