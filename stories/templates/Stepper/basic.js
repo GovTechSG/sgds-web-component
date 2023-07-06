@@ -5,7 +5,20 @@ export const Template = ({ steps, activeStep }) => {
 };
 
 export const args = {
-  steps: ["Marker 1", "Marker 2", "Marker 3"]
+  steps: [
+    {
+      stepHeader: "Personal Details",
+      component: "1 test"
+    },
+    {
+      stepHeader: "Address and Contact Information",
+      component: "2 test"
+    },
+    {
+      stepHeader: "Review",
+      component: "3 test"
+    }
+  ]
 };
 
 export const parameters = {};
