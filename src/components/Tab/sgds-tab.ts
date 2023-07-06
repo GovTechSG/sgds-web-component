@@ -69,21 +69,22 @@ export class SgdsTab extends SgdsElement {
       <li
         part="base"
         class=${classMap({
-          "nav-item": true,    
-          
+          "nav-item": true
+
           // "tab--closable": this.closable,
           // "tab--disabled": this.disabled,
           // [`tab--${parentVariantAttr}`]: parentVariantAttr
         })}
         tabindex=${this.disabled ? "-1" : "0"}
       >
-        <button class="${classMap({
-          "nav-link": true,
-          [`${parentVariantAttr}`] : parentVariantAttr ,
-          active: this.active,
-          disabled: this.disabled,
-          
-        })}">
+        <button
+          class="${classMap({
+            "nav-link": true,
+            [`${parentVariantAttr}`]: parentVariantAttr,
+            active: this.active,
+            disabled: this.disabled
+          })}"
+        >
           <div class="tabs-info-label"><slot></slot>hello</div>
           <div class="tabs-info-count"></div>
         </button>
