@@ -4,8 +4,8 @@ import { classMap } from "lit/directives/class-map.js";
 import { scrollIntoView } from "../../utils/scroll";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-tabgroup.scss";
-import { SgdsTabPanel } from "./sgds-tabpanel";
+import styles from "./sgds-tab-group.scss";
+import { SgdsTabPanel } from "./sgds-tab-panel";
 import { SgdsTab } from "./sgds-tab";
 import { ifDefined } from "lit/directives/if-defined.js";
 

@@ -3,7 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-tabpanel.scss";
+import styles from "./sgds-tab-panel.scss";
 let id = 0;
 
 /**
