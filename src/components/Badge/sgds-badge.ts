@@ -20,6 +20,8 @@ export class SgdsBadge extends SgdsElement {
   @property({ type: Boolean, reflect: true }) isLight = false;
   /** Visually set badge with rounded corners. */
   @property({ type: Boolean, reflect: true }) roundedPill = false;
+  /** Forwarded to the base wrapper of sgds-badge. Can be used to insert any utility classes such as `me-auto` or `text-dark` */
+  @property({ type: String, reflect: true }) badgeClasses: string;
   render() {
     return html`
       <span
@@ -28,7 +30,8 @@ export class SgdsBadge extends SgdsElement {
           "sgds badge": true,
           [`bg-${this.variant}`]: this.variant,
           "badge-light": this.isLight,
-          "rounded-pill": this.roundedPill
+          "rounded-pill": this.roundedPill,
+          [`${this.badgeClasses}`]: this.badgeClasses
         })}
             "
       >
