@@ -1,6 +1,5 @@
-:host{
+:host {
   --tab-theme-color: var(--sgds-primary);
-
 }
 li.nav-item {
   button.nav-link {
@@ -30,19 +29,15 @@ li.nav-item {
     }
     &.tabs-basic-toggle {
       padding: initial;
-      border: 1px solid var(--sgds-gray-400)  ; //$gray-400;
+      border: 1px solid var(--sgds-gray-400); //$gray-400;
       border-radius: 0;
       padding: 0.5rem 1.5rem;
       color: #1d2939; //$body-color;
       background-color: #fff; //$white;
-      i,
-      span {
-        &.left {
-          margin-right: 1rem; //$nav-sgds-tabs-icon-padding;
-        }
-        &.right {
-          margin-left: 1rem; //$nav-sgds-tabs-icon-padding;
-        }
+      slot {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
       }
       &.active,
       &:hover {

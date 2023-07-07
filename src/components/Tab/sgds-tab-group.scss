@@ -1,10 +1,3 @@
-
-:host {
-  --indicator-color: #0f71bb;
-  --track-color: transparent;
-  --track-width: 2px;
-  display: block;
-}
 slot[name="nav"] {
   &[variant="tabs-basic-toggle"]::slotted(sgds-tab) {
     margin-left: -2px;

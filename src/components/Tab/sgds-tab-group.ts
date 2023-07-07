@@ -6,13 +6,27 @@ import SgdsElement from "../../base/sgds-element";
 import { SgdsTab } from "./sgds-tab";
 import styles from "./sgds-tab-group.scss";
 import { SgdsTabPanel } from "./sgds-tab-panel";
-
+/**
+ * @summary Tab Group organizes content into a container with the syncing of tab and their corresponding panels.
+ * Each tab must be slotted into the nav slot and its `panel` must refer to a tab panel of the same name.
+ * 
+ * @slot default - The slot for `sgds-tab-panel`
+ * @slot nav - The slot for `sgds-tab`
+ * 
+ * @event sgds-tab-show  Emitted when a tab and its panels are shown
+ * @event sgds-tab-hide  Emitted when a tab and its panels are hidden.
+ * 
+ * @csspart body - The container wrapping the default slot where all `sgds-tab-panel`s are slotted.
+ * @csspart nav - The container wrapping the default slot where all `sgds-tab`s are slotted.
+ */
 @customElement("sgds-tab-group")
 export class SgdsTabGroup extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
-
+  /**@internal */
   @query(".tab-group") tabGroup: HTMLElement;
+  /**@internal */
   @query(".tab-group__body") body: HTMLSlotElement;
+  /**@internal */
   @query(".tab-group__nav") nav: HTMLElement;
 
   private activeTab?: SgdsTab;
@@ -20,9 +34,12 @@ export class SgdsTabGroup extends SgdsElement {
   private resizeObserver: ResizeObserver;
   private tabs: SgdsTab[] = [];
   private panels: SgdsTabPanel[] = [];
-
-  @property({ reflect: true, attribute: true }) variant?: "tabs-basic-toggle" | "tabs-info-toggle";
-  @property({type: String}) tabsClasses: string;
+  /** The variant types of tabs. Controls the visual stylesof all `sgds-tabs` in its slot. It also dynamically changes the slots of `sgds-tab` */
+  @property({ reflect: true, attribute: true }) variant: "tabs-basic-toggle" | "tabs-info-toggle";
+  /** Forwards css tokens to the container div of slot[name=nav] where all `sgds-tab` are slotted in */
+  @property({ type: String, reflect: true }) tabsClasses: string;
+  /** Forwards css tokens to the container div of slot where all `sgds-tab-panel` are slotted in */
+  @property({ type: String, reflect: true }) bodyClasses: string;
 
   connectedCallback() {
     super.connectedCallback();
@@ -67,15 +84,15 @@ export class SgdsTabGroup extends SgdsElement {
   }
 
   /** Shows the specified tab panel. */
-  show(panel: string) {
+  public show(panel: string) {
     const tab = this.tabs.find(el => el.panel === panel);
 
     if (tab) {
       this.setActiveTab(tab);
     }
   }
-
-  getAllTabs(options: { includeDisabled: boolean } = { includeDisabled: true }) {
+  /** @internal */
+  private getAllTabs(options: { includeDisabled: boolean } = { includeDisabled: true }) {
     const slot = this.shadowRoot.querySelector<HTMLSlotElement>('slot[name="nav"]');
 
     return [...(slot.assignedElements() as SgdsTab[])].filter(el => {
@@ -84,18 +101,18 @@ export class SgdsTabGroup extends SgdsElement {
         : el.tagName.toLowerCase() === "sgds-tab" && !el.disabled;
     });
   }
-
-  getAllPanels() {
+  /** @internal */
+  private getAllPanels() {
     return [...this.body.assignedElements()].filter(el => el.tagName.toLowerCase() === "sgds-tab-panel") as [
       SgdsTabPanel
     ];
   }
-
-  getActiveTab() {
+  /** @internal */
+  private getActiveTab() {
     return this.tabs.find(el => el.active);
   }
-
-  handleClick(event: MouseEvent) {
+  /** @internal */
+  private  handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const tab = target.closest("sgds-tab") as SgdsTab;
     const tabGroup = tab?.closest("sgds-tab-group");
@@ -109,8 +126,8 @@ export class SgdsTabGroup extends SgdsElement {
       this.setActiveTab(tab);
     }
   }
-
-  handleKeyDown(event: KeyboardEvent) {
+  /** @internal */
+  private handleKeyDown(event: KeyboardEvent) {
     const target = event.target as HTMLElement;
     const tab = target.closest("sgds-tab") as SgdsTab;
     const tabGroup = tab?.closest("sgds-tab-group");
@@ -161,8 +178,8 @@ export class SgdsTabGroup extends SgdsElement {
       }
     }
   }
-
-  setActiveTab(tab: SgdsTab, options?: { emitEvents?: boolean }) {
+  /** @internal */
+  private setActiveTab(tab: SgdsTab, options?: { emitEvents?: boolean }) {
     options = {
       emitEvents: true,
       ...options
@@ -186,8 +203,8 @@ export class SgdsTabGroup extends SgdsElement {
       }
     }
   }
-
-  setAriaLabels() {
+  /** @internal */
+  private setAriaLabels() {
     // Link each tab with its corresponding panel
     this.tabs.forEach(tab => {
       const panel = this.panels.find(el => el.name === tab.panel);
@@ -199,29 +216,47 @@ export class SgdsTabGroup extends SgdsElement {
   }
 
   // This stores tabs and panels so we can refer to a cache instead of calling querySelectorAll() multiple times.
-  syncTabsAndPanels() {
+  /** @internal */
+  private syncTabsAndPanels() {
     this.tabs = this.getAllTabs({ includeDisabled: false });
     this.panels = this.getAllPanels();
   }
 
   render() {
     return html`
-      <div class="tab-group" @click=${this.handleClick} @keydown=${this.handleKeyDown} variant=${ifDefined(this.variant)}>
-        <div class="tab-group__nav">
+      <div
+        class="tab-group"
+        @click=${this.handleClick}
+        @keydown=${this.handleKeyDown}
+        variant=${ifDefined(this.variant)}
+      >
+        <div
+          part="nav"
+          class=${classMap({
+            "tab-group__nav": true,
+            [`${this.tabsClasses}`]: this.tabsClasses
+          })}
+        >
           <slot
             name="nav"
-            class= ${classMap({
+            class=${classMap({
               sgds: true,
               "nav-tabs": true,
-              nav: true,
-              [`${this.tabsClasses}`] : this.tabsClasses
+              nav: true
             })}
             role="tablist"
             variant=${ifDefined(this.variant)}
             @slotchange=${this.syncTabsAndPanels}
           ></slot>
         </div>
-        <slot part="body" class="tab-group__body" @slotchange=${this.syncTabsAndPanels}></slot>
+        <div
+          part="body"
+          class=${classMap({
+            [`${this.bodyClasses}`]: this.bodyClasses
+          })}
+        >
+          <slot class="tab-group__body" @slotchange=${this.syncTabsAndPanels}></slot>
+        </div>
       </div>
     `;
   }
