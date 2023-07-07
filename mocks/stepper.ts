@@ -17,7 +17,7 @@ export class MockStepper extends SgdsElement {
     lastName: "",
     address: "",
     gender: ""
-  }
+  };
   currentStep: number = 0;
   component: Function = () => {};
   stepMetaData = [
@@ -97,8 +97,7 @@ export class MockStepper extends SgdsElement {
     }
   ];
   connectedCallback(): void {
-    super.connectedCallback()
-
+    super.connectedCallback();
   }
   _handleArrived() {
     this.component = this._getComponent();
@@ -120,7 +119,7 @@ export class MockStepper extends SgdsElement {
     return stepper;
   }
 
-  _reset() {    
+  _reset() {
     this.details = {
       firstName: "",
       lastName: "",

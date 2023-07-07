@@ -1,13 +1,11 @@
 import { html } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
-import { classMap } from "lit/directives/class-map.js";
-import { scrollIntoView } from "../../utils/scroll";
+import { customElement, property, query } from "lit/decorators.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
-import { watch } from "../../utils/watch";
+import { scrollIntoView } from "../../utils/scroll";
+import { SgdsTab } from "./sgds-tab";
 import styles from "./sgds-tab-group.scss";
 import { SgdsTabPanel } from "./sgds-tab-panel";
-import { SgdsTab } from "./sgds-tab";
-import { ifDefined } from "lit/directives/if-defined.js";
 
 @customElement("sgds-tab-group")
 export class SgdsTabGroup extends SgdsElement {
@@ -23,23 +21,13 @@ export class SgdsTabGroup extends SgdsElement {
   private tabs: SgdsTab[] = [];
   private panels: SgdsTabPanel[] = [];
 
-  @state() private hasScrollControls = false;
-
   @property({ reflect: true, attribute: true }) variant?: "tabs-basic-toggle" | "tabs-info-toggle";
-  /**
-   * When set to auto, navigating tabs with the arrow keys will instantly show the corresponding tab panel. When set to
-   * manual, the tab will receive focus but will not show until the user presses spacebar or enter.
-   */
-  @property() activation: "auto" | "manual" = "auto";
-
-  /** Disables the scroll arrows that appear when tabs overflow. */
-  @property({ attribute: "no-scroll-controls", type: Boolean }) noScrollControls = false;
 
   connectedCallback() {
     super.connectedCallback();
 
     this.resizeObserver = new ResizeObserver(() => {
-      this.updateScrollControls();
+      return;
     });
 
     this.mutationObserver = new MutationObserver(mutations => {
@@ -82,7 +70,7 @@ export class SgdsTabGroup extends SgdsElement {
     const tab = this.tabs.find(el => el.panel === panel);
 
     if (tab) {
-      this.setActiveTab(tab, { scrollBehavior: "smooth" });
+      this.setActiveTab(tab);
     }
   }
 
@@ -117,7 +105,7 @@ export class SgdsTabGroup extends SgdsElement {
     }
 
     if (tab !== null) {
-      this.setActiveTab(tab, { scrollBehavior: "smooth" });
+      this.setActiveTab(tab);
     }
   }
 
@@ -134,7 +122,7 @@ export class SgdsTabGroup extends SgdsElement {
     // Activate a tab
     if (["Enter", " "].includes(event.key)) {
       if (tab !== null) {
-        this.setActiveTab(tab, { scrollBehavior: "smooth" });
+        this.setActiveTab(tab);
         event.preventDefault();
       }
     }
@@ -166,10 +154,7 @@ export class SgdsTabGroup extends SgdsElement {
 
         this.tabs[index].focus({ preventScroll: true });
 
-        if (this.activation === "auto") {
-          this.setActiveTab(this.tabs[index], { scrollBehavior: "smooth" });
-        }
-
+        this.setActiveTab(this.tabs[index] /** , { scrollBehavior: "smooth" }*/);
         scrollIntoView(this.tabs[index], this.nav, "horizontal");
 
         event.preventDefault();
@@ -177,33 +162,9 @@ export class SgdsTabGroup extends SgdsElement {
     }
   }
 
-  handleScrollToStart() {
-    this.nav.scroll({
-      left: this.nav.scrollLeft - this.nav.clientWidth,
-      behavior: "smooth"
-    });
-  }
-
-  handleScrollToEnd() {
-    this.nav.scroll({
-      left: this.nav.scrollLeft + this.nav.clientWidth,
-      behavior: "smooth"
-    });
-  }
-
-  @watch("noScrollControls", { waitUntilFirstUpdate: true })
-  updateScrollControls() {
-    if (this.noScrollControls) {
-      this.hasScrollControls = false;
-    } else {
-      this.hasScrollControls = this.nav.scrollWidth > this.nav.clientWidth;
-    }
-  }
-
-  setActiveTab(tab: SgdsTab, options?: { emitEvents?: boolean; scrollBehavior?: "auto" | "smooth" }) {
+  setActiveTab(tab: SgdsTab, options?: { emitEvents?: boolean }) {
     options = {
       emitEvents: true,
-      scrollBehavior: "auto",
       ...options
     };
 
@@ -245,24 +206,8 @@ export class SgdsTabGroup extends SgdsElement {
 
   render() {
     return html`
-      <div
-        part="base"
-        class=${classMap({
-          // "sgds": true,
-          // "nav-tabs": true,
-          // "nav": true,
-          // "tab-group": true,
-          // "tab-group--top": true,
-          // "tab-group--basic-toggle": this.variant === "basic-toggle",
-          // "tab-group--info-toggle": this.variant === "info-toggle"
-        })}
-        @click=${this.handleClick}
-        @keydown=${this.handleKeyDown}
-        variant=${ifDefined(this.variant)}
-      >
-        <!-- <div class="tab-group__nav-container" part="nav">-->
+      <div part="base" @click=${this.handleClick} @keydown=${this.handleKeyDown} variant=${ifDefined(this.variant)}>
         <div class="tab-group__nav">
-          <!--  <div part="tabs" class="tab-group__tabs" role="tablist"> -->
           <slot
             name="nav"
             class="sgds nav-tabs nav"
@@ -271,8 +216,6 @@ export class SgdsTabGroup extends SgdsElement {
             @slotchange=${this.syncTabsAndPanels}
           ></slot>
         </div>
-        <!-- </div>
-        </div> -->
         <slot part="body" class="tab-group__body" @slotchange=${this.syncTabsAndPanels}></slot>
       </div>
     `;

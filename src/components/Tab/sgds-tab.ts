@@ -22,13 +22,9 @@ export class SgdsTab extends SgdsElement {
   /** Draws the tab in an active state. */
   @property({ type: Boolean, reflect: true }) active = false;
 
-  /** Makes the tab closable and shows a close button. */
-  @property({ type: Boolean }) closable = false;
-
   /** Disables the tab and prevents selection. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  @property({ type: Boolean, reflect: true }) variant;
 
   connectedCallback() {
     super.connectedCallback();
