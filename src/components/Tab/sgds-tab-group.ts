@@ -1,8 +1,8 @@
 import { html } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
-import { scrollIntoView } from "../../utils/scroll";
 import { SgdsTab } from "./sgds-tab";
 import styles from "./sgds-tab-group.scss";
 import { SgdsTabPanel } from "./sgds-tab-panel";
@@ -11,8 +11,8 @@ import { SgdsTabPanel } from "./sgds-tab-panel";
 export class SgdsTabGroup extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
-  @query("[part='base']") tabGroup: HTMLElement;
-  @query("[part='body']") body: HTMLSlotElement;
+  @query(".tab-group") tabGroup: HTMLElement;
+  @query(".tab-group__body") body: HTMLSlotElement;
   @query(".tab-group__nav") nav: HTMLElement;
 
   private activeTab?: SgdsTab;
@@ -22,6 +22,7 @@ export class SgdsTabGroup extends SgdsElement {
   private panels: SgdsTabPanel[] = [];
 
   @property({ reflect: true, attribute: true }) variant?: "tabs-basic-toggle" | "tabs-info-toggle";
+  @property({type: String}) tabsClasses: string;
 
   connectedCallback() {
     super.connectedCallback();
@@ -155,7 +156,6 @@ export class SgdsTabGroup extends SgdsElement {
         this.tabs[index].focus({ preventScroll: true });
 
         this.setActiveTab(this.tabs[index] /** , { scrollBehavior: "smooth" }*/);
-        scrollIntoView(this.tabs[index], this.nav, "horizontal");
 
         event.preventDefault();
       }
@@ -206,11 +206,16 @@ export class SgdsTabGroup extends SgdsElement {
 
   render() {
     return html`
-      <div part="base" @click=${this.handleClick} @keydown=${this.handleKeyDown} variant=${ifDefined(this.variant)}>
+      <div class="tab-group" @click=${this.handleClick} @keydown=${this.handleKeyDown} variant=${ifDefined(this.variant)}>
         <div class="tab-group__nav">
           <slot
             name="nav"
-            class="sgds nav-tabs nav"
+            class= ${classMap({
+              sgds: true,
+              "nav-tabs": true,
+              nav: true,
+              [`${this.tabsClasses}`] : this.tabsClasses
+            })}
             role="tablist"
             variant=${ifDefined(this.variant)}
             @slotchange=${this.syncTabsAndPanels}

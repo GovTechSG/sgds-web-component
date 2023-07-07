@@ -15,7 +15,6 @@ export class SgdsTab extends SgdsElement {
   private readonly attrId = ++id;
   private readonly componentId = `sgds-tab-${this.attrId}`;
 
-  @property({ reflect: true }) label = "";
   /** The name of the tab panel this tab is associated with. The panel must be located in the same tab group. */
   @property({ reflect: true }) panel = "";
 
@@ -24,7 +23,6 @@ export class SgdsTab extends SgdsElement {
 
   /** Disables the tab and prevents selection. */
   @property({ type: Boolean, reflect: true }) disabled = false;
-
 
   connectedCallback() {
     super.connectedCallback();
