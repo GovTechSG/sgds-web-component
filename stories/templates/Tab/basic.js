@@ -94,5 +94,5 @@ export const args = {
 };
 
 export const parameters = {
-  controls: { exclude: ['name', 'panel', 'active', 'variant'] }
+  controls: { exclude: ["name", "panel", "active", "variant"] }
 };

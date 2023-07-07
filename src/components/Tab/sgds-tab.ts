@@ -77,9 +77,7 @@ export class SgdsTab extends SgdsElement {
     return html`
       <li
         part="base"
-        class=${classMap({
-          "nav-item": true
-        })}
+        class="nav-item"
         tabindex=${this.disabled ? "-1" : "0"}
       >
         <button

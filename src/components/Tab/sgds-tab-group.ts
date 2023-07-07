@@ -74,7 +74,6 @@ export class SgdsTabGroup extends SgdsElement {
         if (entries[0].intersectionRatio > 0) {
           this.setAriaLabels();
           // this.setTabVariant();
-          console.log(this.getActiveTab())
           this.setActiveTab(this.getActiveTab() ?? this.tabs[0], { emitEvents: false });
           observer.unobserve(entries[0].target);
         }
