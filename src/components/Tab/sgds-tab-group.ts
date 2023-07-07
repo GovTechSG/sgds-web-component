@@ -9,13 +9,13 @@ import { SgdsTabPanel } from "./sgds-tab-panel";
 /**
  * @summary Tab Group organizes content into a container with the syncing of tab and their corresponding panels.
  * Each tab must be slotted into the nav slot and its `panel` must refer to a tab panel of the same name.
- * 
+ *
  * @slot default - The slot for `sgds-tab-panel`
  * @slot nav - The slot for `sgds-tab`
- * 
+ *
  * @event sgds-tab-show  Emitted when a tab and its panels are shown
  * @event sgds-tab-hide  Emitted when a tab and its panels are hidden.
- * 
+ *
  * @csspart body - The container wrapping the default slot where all `sgds-tab-panel`s are slotted.
  * @csspart nav - The container wrapping the default slot where all `sgds-tab`s are slotted.
  */
@@ -112,7 +112,7 @@ export class SgdsTabGroup extends SgdsElement {
     return this.tabs.find(el => el.active);
   }
   /** @internal */
-  private  handleClick(event: MouseEvent) {
+  private handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const tab = target.closest("sgds-tab") as SgdsTab;
     const tabGroup = tab?.closest("sgds-tab-group");
