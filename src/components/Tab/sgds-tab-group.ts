@@ -28,11 +28,15 @@ export class SgdsTabGroup extends SgdsElement {
   @query(".tab-group__body") body: HTMLSlotElement;
   /**@internal */
   @query(".tab-group__nav") nav: HTMLElement;
-
+  /**@internal */
   private activeTab?: SgdsTab;
+  /**@internal */
   private mutationObserver: MutationObserver;
+  /**@internal */
   private resizeObserver: ResizeObserver;
+  /**@internal */
   private tabs: SgdsTab[] = [];
+  /**@internal */
   private panels: SgdsTabPanel[] = [];
   /** The variant types of tabs. Controls the visual stylesof all `sgds-tabs` in its slot. It also dynamically changes the slots of `sgds-tab` */
   @property({ reflect: true, attribute: true }) variant: "tabs-basic-toggle" | "tabs-info-toggle";
@@ -70,6 +74,7 @@ export class SgdsTabGroup extends SgdsElement {
         if (entries[0].intersectionRatio > 0) {
           this.setAriaLabels();
           // this.setTabVariant();
+          console.log(this.getActiveTab())
           this.setActiveTab(this.getActiveTab() ?? this.tabs[0], { emitEvents: false });
           observer.unobserve(entries[0].target);
         }

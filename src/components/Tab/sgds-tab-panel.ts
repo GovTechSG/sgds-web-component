@@ -17,7 +17,9 @@ let id = 0;
 @customElement("sgds-tab-panel")
 export class SgdsTabPanel extends LitElement {
   static styles = styles;
+  /**@internal */
   private readonly attrId = ++id;
+  /**@internal */
   private readonly componentId = `sgds-tab-panel-${this.attrId}`;
 
   /** The tab panel's name. */

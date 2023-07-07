@@ -1,12 +1,12 @@
 import { html } from "lit-html";
 
-export const Template = ({ variant, tabsClasses, bodyClasses, active, disabled, panel, name }) => html`
+export const Template = ({ tabsClasses, bodyClasses, disabled }) => html`
   <h5>Default toggle</h5>
   <sgds-tab-group tabsClasses=${tabsClasses} bodyClasses=${bodyClasses}>
-    <sgds-tab slot="nav" panel=${panel} ?active=${active} ?disabled=${disabled}>Home</sgds-tab>
-    <sgds-tab slot="nav" panel="profile">Profile</sgds-tab>
+    <sgds-tab slot="nav" panel="home" ?disabled=${disabled}>Home</sgds-tab>
+    <sgds-tab slot="nav" panel="profile" active>Profile</sgds-tab>
     <sgds-tab slot="nav" panel="contact">Contact</sgds-tab>
-    <sgds-tab-panel name=${name}
+    <sgds-tab-panel name="home"
       >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
       standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
       type specimen book.</sgds-tab-panel
@@ -20,7 +20,7 @@ export const Template = ({ variant, tabsClasses, bodyClasses, active, disabled, 
   </sgds-tab-group>
   <br />
   <h5>Basic toggle</h5>
-  <sgds-tab-group variant="tabs-basic-toggle">
+  <sgds-tab-group variant="tabs-basic-toggle" tabsClasses=${tabsClasses}>
     <sgds-tab slot="nav" panel="home"
       ><svg
         xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@ export const Template = ({ variant, tabsClasses, bodyClasses, active, disabled, 
     <sgds-tab-panel name="contact">Contact information</sgds-tab-panel>
     <br />
     <h5>Info toggle</h5>
-    <sgds-tab-group variant="tabs-info-toggle">
+    <sgds-tab-group variant="tabs-info-toggle" tabsClasses=${tabsClasses}>
       <sgds-tab slot="nav" panel="home"
         ><svg
           slot="icon"
@@ -93,4 +93,6 @@ export const args = {
   tabsClasses: "mb-3"
 };
 
-export const parameters = {};
+export const parameters = {
+  controls: { exclude: ['name', 'panel', 'active', 'variant'] }
+};
