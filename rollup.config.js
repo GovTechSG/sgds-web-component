@@ -89,7 +89,7 @@ const buildSgdsPackage = () => {
       plugins: wcPlugins
     },
     {
-      input: "src/main.ts",
+      input: "src/index.ts",
       output: {
         file: packageJson.main,
         format: "umd",
