@@ -46,8 +46,11 @@ export class SgdsTabGroup extends SgdsElement {
   @property({ type: String, reflect: true }) bodyClasses: string;
 
   connectedCallback() {
+    const whenAllDefined = Promise.all([
+      customElements.whenDefined("sgds-tab"),
+      customElements.whenDefined("sgds-tab-panel")
+    ]);
     super.connectedCallback();
-
     this.resizeObserver = new ResizeObserver(() => {
       return;
     });
@@ -68,17 +71,18 @@ export class SgdsTabGroup extends SgdsElement {
       this.syncTabsAndPanels();
       this.mutationObserver.observe(this, { attributes: true, childList: true, subtree: true });
       this.resizeObserver.observe(this.nav);
-
-      // Set initial tab state when the tabs first become visible
-      const intersectionObserver = new IntersectionObserver((entries, observer) => {
-        if (entries[0].intersectionRatio > 0) {
-          this.setAriaLabels();
-          // this.setTabVariant();
-          this.setActiveTab(this.getActiveTab() ?? this.tabs[0], { emitEvents: false });
-          observer.unobserve(entries[0].target);
-        }
+      whenAllDefined.then(() => {
+        // Set initial tab state when the tabs first become visible
+        const intersectionObserver = new IntersectionObserver((entries, observer) => {
+          if (entries[0].intersectionRatio > 0) {
+            this.setAriaLabels();
+            // this.setTabVariant();
+            this.setActiveTab(this.getActiveTab() ?? this.tabs[0], { emitEvents: false });
+            observer.unobserve(entries[0].target);
+          }
+        });
+        intersectionObserver.observe(this.tabGroup);
       });
-      intersectionObserver.observe(this.tabGroup);
     });
   }
 
@@ -240,6 +244,7 @@ export class SgdsTabGroup extends SgdsElement {
             "tab-group__nav": true,
             [`${this.tabsClasses}`]: this.tabsClasses
           })}
+          role="tablist"
         >
           <slot
             name="nav"
@@ -248,7 +253,6 @@ export class SgdsTabGroup extends SgdsElement {
               "nav-tabs": true,
               nav: true
             })}
-            role="tablist"
             variant=${ifDefined(this.variant)}
             @slotchange=${this.syncTabsAndPanels}
           ></slot>

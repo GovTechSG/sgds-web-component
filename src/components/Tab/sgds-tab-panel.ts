@@ -21,7 +21,6 @@ export class SgdsTabPanel extends LitElement {
   private readonly attrId = ++id;
   /**@internal */
   private readonly componentId = `sgds-tab-panel-${this.attrId}`;
-
   /** The tab panel's name. */
   @property({ reflect: true }) name = "";
 
