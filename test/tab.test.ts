@@ -123,9 +123,8 @@ describe("<sgds-tab-panel>", () => {
   });
 });
 
-
-describe('<sgds-tab-group>', () => {
-  it('renders', async () => {
+describe("<sgds-tab-group>", () => {
+  it("renders", async () => {
     const tabGroup = await fixture<SgdsTabGroup>(html`
       <sgds-tab-group>
         <sgds-tab slot="nav" panel="general">General</sgds-tab>
@@ -135,7 +134,7 @@ describe('<sgds-tab-group>', () => {
 
     expect(tabGroup).to.be.visible;
   });
-  it('is accessible', async () => {
+  it("is accessible", async () => {
     const tabGroup = await fixture<SgdsTabGroup>(html`
       <sgds-tab-group>
         <sgds-tab slot="nav" panel="general">General</sgds-tab>
@@ -145,7 +144,7 @@ describe('<sgds-tab-group>', () => {
 
     await expect(tabGroup).to.be.accessible();
   });
-  it('displays all tabs', async () => {
+  it("displays all tabs", async () => {
     const tabGroup = await fixture<SgdsTabGroup>(html`
       <sgds-tab-group>
         <sgds-tab slot="nav" panel="general" data-testid="general-tab-header">General</sgds-tab>
@@ -155,10 +154,10 @@ describe('<sgds-tab-group>', () => {
       </sgds-tab-group>
     `);
 
-    expectHeaderToBeVisible(tabGroup, 'general-tab-header');
-    expectHeaderToBeVisible(tabGroup, 'disabled-tab-header');
+    expectHeaderToBeVisible(tabGroup, "general-tab-header");
+    expectHeaderToBeVisible(tabGroup, "disabled-tab-header");
   });
-  it('shows the first tab to be active by default', async () => {
+  it("shows the first tab to be active by default", async () => {
     const tabGroup = await fixture<SgdsTabGroup>(html`
       <sgds-tab-group>
         <sgds-tab slot="nav" panel="general">General</sgds-tab>
@@ -168,35 +167,35 @@ describe('<sgds-tab-group>', () => {
       </sgds-tab-group>
     `);
 
-    await expectOnlyOneTabPanelToBeActive(tabGroup, 'general-tab-content');
+    await expectOnlyOneTabPanelToBeActive(tabGroup, "general-tab-content");
   });
-})
+});
 
 const expectHeaderToBeVisible = (container: HTMLElement, dataTestId: string): void => {
-  const generalHeader = container.querySelector<SgdsTabGroup>((`[data-testid="${dataTestId}"]`))
+  const generalHeader = container.querySelector<SgdsTabGroup>(`[data-testid="${dataTestId}"]`);
   expect(generalHeader).not.to.be.null;
   expect(generalHeader).to.be.visible;
 };
 
 const expectOnlyOneTabPanelToBeActive = async (container: HTMLElement, dataTestIdOfActiveTab: string) => {
   await waitUntil(() => {
-    const tabPanels = Array.from(container.getElementsByTagName('sgds-tab-panel'));
-    const activeTabPanels = tabPanels.filter((element: Element) => element.hasAttribute('active'));
+    const tabPanels = Array.from(container.getElementsByTagName("sgds-tab-panel"));
+    const activeTabPanels = tabPanels.filter((element: Element) => element.hasAttribute("active"));
     return activeTabPanels.length === 1;
   });
-  const tabPanels = Array.from(container.getElementsByTagName('sgds-tab-panel'));
-  const activeTabPanels = tabPanels.filter((element: Element) => element.hasAttribute('active'));
+  const tabPanels = Array.from(container.getElementsByTagName("sgds-tab-panel"));
+  const activeTabPanels = tabPanels.filter((element: Element) => element.hasAttribute("active"));
   expect(activeTabPanels).to.have.lengthOf(1);
-  expect(activeTabPanels[0]).to.have.attribute('data-testid', dataTestIdOfActiveTab);
+  expect(activeTabPanels[0]).to.have.attribute("data-testid", dataTestIdOfActiveTab);
 };
 const expectPromiseToHaveName = async (showEventPromise: Promise<CustomEvent>, expectedName: string) => {
   const showEvent = await showEventPromise;
   expect(showEvent.detail.name).to.equal(expectedName);
 };
 const waitForHeaderToBeActive = async (container: HTMLElement, headerTestId: string): Promise<SgdsTab> => {
-  const generalHeader =  container.querySelector<SgdsTab>(`[data-testid="${headerTestId}"]`);
+  const generalHeader = container.querySelector<SgdsTab>(`[data-testid="${headerTestId}"]`);
   await waitUntil(() => {
-    return generalHeader?.hasAttribute('active');
+    return generalHeader?.hasAttribute("active");
   });
   if (generalHeader) {
     return generalHeader;
@@ -205,42 +204,41 @@ const waitForHeaderToBeActive = async (container: HTMLElement, headerTestId: str
   }
 };
 const expectCustomTabToBeActiveAfter = async (tabGroup: SgdsTabGroup, action: () => Promise<void>): Promise<void> => {
-  const generalHeader = await waitForHeaderToBeActive(tabGroup, 'general-header');
+  const generalHeader = await waitForHeaderToBeActive(tabGroup, "general-header");
   generalHeader.focus();
 
   const customHeader = tabGroup.querySelector<SgdsTab>('[data-testid="custom-header"]');
-  expect(customHeader).not.to.have.attribute('active');
+  expect(customHeader).not.to.have.attribute("active");
 
-  const showEventPromise = oneEvent(tabGroup, 'sgds-tab-show') as Promise<CustomEvent>;
+  const showEventPromise = oneEvent(tabGroup, "sgds-tab-show") as Promise<CustomEvent>;
   await action();
 
-  expect(customHeader).to.have.attribute('active');
-  await expectPromiseToHaveName(showEventPromise, 'custom');
-  return expectOnlyOneTabPanelToBeActive(tabGroup, 'custom-tab-content');
+  expect(customHeader).to.have.attribute("active");
+  await expectPromiseToHaveName(showEventPromise, "custom");
+  return expectOnlyOneTabPanelToBeActive(tabGroup, "custom-tab-content");
 };
 
 const expectGeneralTabToBeStillActiveAfter = async (
   tabGroup: SgdsTabGroup,
   action: () => Promise<void>
 ): Promise<void> => {
-  const generalHeader = await waitForHeaderToBeActive(tabGroup, 'general-header');
+  const generalHeader = await waitForHeaderToBeActive(tabGroup, "general-header");
   generalHeader.focus();
 
   let showEventFired = false;
   let hideEventFired = false;
-  oneEvent(tabGroup, 'sgds-tab-show').then(() => (showEventFired = true));
-  oneEvent(tabGroup, 'sgds-tab-hide').then(() => (hideEventFired = true));
+  oneEvent(tabGroup, "sgds-tab-show").then(() => (showEventFired = true));
+  oneEvent(tabGroup, "sgds-tab-hide").then(() => (hideEventFired = true));
   await action();
 
-  expect(generalHeader).to.have.attribute('active');
+  expect(generalHeader).to.have.attribute("active");
   expect(showEventFired).to.be.false;
   expect(hideEventFired).to.be.false;
-  return expectOnlyOneTabPanelToBeActive(tabGroup, 'general-tab-content');
+  return expectOnlyOneTabPanelToBeActive(tabGroup, "general-tab-content");
 };
 
-describe('tab selection', () => {
- 
-  it('selects a tab by clicking on it', async () => {
+describe("tab selection", () => {
+  it("selects a tab by clicking on it", async () => {
     const tabGroup = await fixture<SgdsTabGroup>(html`
       <sgds-tab-group>
         <sgds-tab slot="nav" panel="general" data-testid="general-header">General</sgds-tab>
@@ -252,9 +250,9 @@ describe('tab selection', () => {
 
     const customHeader = tabGroup.querySelector<SgdsTab>('[data-testid="custom-header"]');
 
-    return customHeader && expectCustomTabToBeActiveAfter(tabGroup, () => clickOnElement(customHeader))
+    return customHeader && expectCustomTabToBeActiveAfter(tabGroup, () => clickOnElement(customHeader));
   });
-  it('does not change if a disabled tab is clicked', async () => {
+  it("does not change if a disabled tab is clicked", async () => {
     const tabGroup = await fixture<SgdsTabGroup>(html`
       <sgds-tab-group>
         <sgds-tab slot="nav" panel="general" data-testid="general-header">General</sgds-tab>
@@ -267,7 +265,7 @@ describe('tab selection', () => {
     const disabledHeader = tabGroup.querySelector<SgdsTab>('[data-testid="disabled-header"]');
     return disabledHeader && expectGeneralTabToBeStillActiveAfter(tabGroup, () => clickOnElement(disabledHeader));
   });
-  it('selects a tab by using the arrow keys', async () => {
+  it("selects a tab by using the arrow keys", async () => {
     const tabGroup = await fixture<SgdsTabGroup>(html`
       <sgds-tab-group>
         <sgds-tab slot="nav" panel="general" data-testid="general-header">General</sgds-tab>
@@ -277,9 +275,9 @@ describe('tab selection', () => {
       </sgds-tab-group>
     `);
 
-    return expectCustomTabToBeActiveAfter(tabGroup, () => sendKeys({ press: 'ArrowRight' }));
+    return expectCustomTabToBeActiveAfter(tabGroup, () => sendKeys({ press: "ArrowRight" }));
   });
-  it('does not allow selection of disabled tabs with arrow keys', async () => {
+  it("does not allow selection of disabled tabs with arrow keys", async () => {
     const tabGroup = await fixture<SgdsTabGroup>(html`
       <sgds-tab-group>
         <sgds-tab slot="nav" panel="general" data-testid="general-header">General</sgds-tab>
@@ -289,10 +287,10 @@ describe('tab selection', () => {
       </sgds-tab-group>
     `);
 
-    return expectGeneralTabToBeStillActiveAfter(tabGroup, () => sendKeys({ press: 'ArrowRight' }));
+    return expectGeneralTabToBeStillActiveAfter(tabGroup, () => sendKeys({ press: "ArrowRight" }));
   });
-  
-  it('selects a tab by using the show function', async () => {
+
+  it("selects a tab by using the show function", async () => {
     const tabGroup = await fixture<SgdsTabGroup>(html`
       <sgds-tab-group>
         <sgds-tab slot="nav" panel="general" data-testid="general-header">General</sgds-tab>
@@ -303,8 +301,8 @@ describe('tab selection', () => {
     `);
 
     return expectCustomTabToBeActiveAfter(tabGroup, () => {
-      tabGroup.show('custom');
+      tabGroup.show("custom");
       return aTimeout(0);
     });
   });
-})
+});

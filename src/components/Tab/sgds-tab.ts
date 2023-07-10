@@ -75,19 +75,19 @@ export class SgdsTab extends SgdsElement {
       <div class="tabs-info-count"><slot name="count"></slot></div>
     `;
     return html`
-    <ul class="list-unstyled">
-      <li part="base" class="nav-item" tabindex=${this.disabled ? "-1" : "0"}>
-        <div
-          class="${classMap({
-            "nav-link": true,
-            [`${parentVariantAttr}`]: parentVariantAttr,
-            active: this.active,
-            disabled: this.disabled
-          })}"          
-        >
-          ${parentVariantAttr === "tabs-info-toggle" ? tabsInfo : html`<slot></slot>`}
-        </div>
-      </li>
+      <ul class="list-unstyled">
+        <li part="base" class="nav-item" tabindex=${this.disabled ? "-1" : "0"}>
+          <div
+            class="${classMap({
+              "nav-link": true,
+              [`${parentVariantAttr}`]: parentVariantAttr,
+              active: this.active,
+              disabled: this.disabled
+            })}"
+          >
+            ${parentVariantAttr === "tabs-info-toggle" ? tabsInfo : html`<slot></slot>`}
+          </div>
+        </li>
       </ul>
     `;
   }
