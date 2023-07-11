@@ -36,7 +36,7 @@ const SIZES = {
  * @cssproperty --mainnav-borderBottom-width - bottom border width
  * @cssproperty --mainnav-borderBottom-color - borderBottom width color
  */
-@customElement("sgds-mainnav")
+// @customElement("sgds-mainnav")
 export class SgdsMainnav extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 

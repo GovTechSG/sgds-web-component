@@ -4,7 +4,7 @@ import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
 import styles from "./sgds-mainnav-dropdown.scss";
 
-@customElement("sgds-mainnav-dropdown")
+// @customElement("sgds-mainnav-dropdown")
 export class SgdsMainnavDropdown extends DropdownElement {
   static styles = [DropdownElement.styles, styles];
 

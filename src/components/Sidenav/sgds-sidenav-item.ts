@@ -21,7 +21,7 @@ import { classMap } from "lit/directives/class-map.js";
  * @cssproperty --sidenav-item-icon-title-gap - the flex gap between sidenav item icon and title
  */
 
-@customElement("sgds-sidenav-item")
+// @customElement("sgds-sidenav-item")
 export class SgdsSidenavItem extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
@@ -171,5 +171,9 @@ export class SgdsSidenavItem extends SgdsElement {
     `;
   }
 }
+if(!customElements.get("sgds-sidenav-item")) {
+  customElements.define("sgds-sidenav-item", SgdsSidenavItem)
+}
+
 
 export default SgdsSidenavItem;

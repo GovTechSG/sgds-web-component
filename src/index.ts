@@ -1,26 +1,33 @@
-export * from "./components/Sidenav";
-export * from "./components/Radio";
-export * from "./components/Masthead";
-export * from "./components/Button";
-export * from "./components/Footer";
-export * from "./components/Mainnav";
-export * from "./components/Input";
-export * from "./components/Checkbox";
-export * from "./components/Dropdown";
-export * from "./components/Textarea";
-export * from "./components/Modal";
-export * from "./components/QuantityToggle";
-// export * from "./components/Tab";
-export * from "./components/ActionCard";
-export * from "./components/Badge";
-export * from "./components/Table";
-export * from "./components/Breadcrumb";
-export * from "./components/Stepper";
-export * from "./components/Alert";
-export * from "./components/CloseButton";
-export * from "./components/Toast";
-export * from "./components/FileUpload";
-export * from "./components/Accordion";
-export * from "./components/Tooltip";
-export * from "./components/Spinner";
-export * from "./components/Card";
+import * as Components from "./components";
+
+const tagNameConverter = (key: string) => key.replace(/([a-z0–9])([A-Z])/g, "$1-$2").toLowerCase();
+for (const [key, value] of Object.entries(Components)) {
+    const customElementTag = tagNameConverter(key)
+    customElements.define(customElementTag, value)
+  }
+// customElements.define("sgds-button", SgdsButton)
+// import "./components/Sidenav";
+// import "./components/Radio";
+// import "./components/Masthead";
+// import "./components/Button";
+// import "./components/Footer";
+// import "./components/Mainnav";
+// import "./components/Input";
+// import "./components/Checkbox";
+// import "./components/Dropdown";
+// import "./components/Textarea";
+// import "./components/Modal";
+// import "./components/QuantityToggle";
+// import "./components/Tab";
+// import "./components/ActionCard";
+// import "./components/Badge";
+// import "./components/Table";
+// import "./components/Breadcrumb";
+// import "./components/Stepper";
+// import "./components/Alert";
+// import "./components/CloseButton";
+// import "./components/Toast";
+// import "./components/FileUpload";
+// import "./components/Accordion";
+// import "./components/Tooltip";
+// import "./components/Spinner";

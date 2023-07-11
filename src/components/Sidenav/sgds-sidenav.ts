@@ -13,7 +13,7 @@ import SgdsSidenavItem from "./sgds-sidenav-item";
  *
  * @cssproperty --sidenav-theme-color - overall sidenav theme color
  */
-@customElement("sgds-sidenav")
+// @customElement("sgds-sidenav")
 export class SgdsSidenav extends SgdsElement {
   static styles = styles;
 
@@ -41,6 +41,10 @@ export class SgdsSidenav extends SgdsElement {
       </nav>
     `;
   }
+}
+if(!customElements.get("sgds-sidenav")) {
+  customElements.define("sgds-sidenav", SgdsSidenav)
+
 }
 
 export default SgdsSidenav;
