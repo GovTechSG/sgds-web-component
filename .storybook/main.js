@@ -23,7 +23,8 @@ const V1_0_0_rc = [
   "Breadcrumb",
   "Toast",
   "Dropdown",
-  "Spinner"
+  "Spinner",
+  "Drawer"
 ];
 
 const componentStories = () => {
