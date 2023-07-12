@@ -31,13 +31,6 @@ function getLogicalAnimation(animation: ElementAnimation) {
   return animation;
 }
 
-
-
-
-
-
-
-
 //
 // Gets an element's animation. Falls back to the default if no animation is found.
 //
@@ -62,25 +55,12 @@ export function getAnimation(el: Element, animationName: string) {
   };
 }
 
-
-
-
-
-
-
-
-
-
-
 //
 // Sets a custom animation for the specified element.
 //
 export function setAnimation(el: Element, animationName: string, animation: ElementAnimation | null) {
   customAnimationRegistry.set(el, { ...customAnimationRegistry.get(el), [animationName]: ensureAnimation(animation) });
 }
-
-
-
 
 //
 // Sets a default animation. Components should use the `name.animation` for primary animations and `name.part.animation`

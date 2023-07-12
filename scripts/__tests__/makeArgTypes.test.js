@@ -88,7 +88,7 @@ describe("makeArgTypes()", () => {
   });
   it("type.text.string output should be content.control.text", () => {
     const expected = {
-      content: { control: "text", defaultValue: "test-content" }
+      content: { control: "text", table: { defaultValue: { summary: "test-content" } } }
     };
     expect(makeArgTypes(textInput)).deep.to.equal(expected);
   });
@@ -151,7 +151,7 @@ describe("with other enums", () => {
       type: {
         control: "select",
         options: ["number", "text", "date", "url"],
-        defaultValue: "text"
+        table: { defaultValue: { summary: "text" } }
       }
     };
     expect(makeArgTypes(mockProps)).to.deep.equal(expected);

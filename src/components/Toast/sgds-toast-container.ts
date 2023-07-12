@@ -67,7 +67,6 @@ const positionClasses = {
   "bottom-end": { top: "bottom-0", start: "end-0", translate: null }
 };
 
-
 export type ToastPosition =
   | "top-start"
   | "top-center"

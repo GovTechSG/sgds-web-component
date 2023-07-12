@@ -32,7 +32,6 @@ export class SgdsSpinner extends SgdsElement {
   }
 }
 
-
 export type SpinnerColor = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
 
 export type SpinnerType = "border" | "grow";

@@ -42,9 +42,6 @@ export function prefersReducedMotion() {
   return query.matches;
 }
 
-
-
-
 // We can't animate `height: auto`, but we can calculate the height and shim keyframes by replacing it with the
 // element's scrollHeight before the animation.
 export function shimKeyframesHeightAuto(keyframes: Keyframe[], calculatedHeight: number) {
@@ -53,8 +50,6 @@ export function shimKeyframesHeightAuto(keyframes: Keyframe[], calculatedHeight:
     height: keyframe.height === "auto" ? `${calculatedHeight}px` : keyframe.height
   }));
 }
-
-
 
 //
 // Stops all active animations on the target element. Returns a promise that resolves after all animations are canceled.

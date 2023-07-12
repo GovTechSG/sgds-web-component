@@ -1,5 +1,4 @@
-
-import '@webcomponents/scoped-custom-element-registry';
+import "@webcomponents/scoped-custom-element-registry";
 export * from "./components/Accordion";
 export * from "./components/ActionCard";
 export * from "./components/Alert";

@@ -1,4 +1,4 @@
-import { ScopedElementsMixin } from '@open-wc/scoped-elements';
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { createRef, ref } from "lit/directives/ref.js";
@@ -42,7 +42,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   static styles = [SgdsElement.styles, styles];
   static get scopedElements() {
     return {
-      'sgds-button': SgdsButton
+      "sgds-button": SgdsButton
     };
   }
   /** The button's variant. */

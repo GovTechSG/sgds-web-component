@@ -11,7 +11,6 @@ export function lockBodyScrolling(lockingEl: HTMLElement) {
   document.body.classList.add("sl-scroll-lock");
 }
 
-
 /**
  * Scrolls an element into view of its container. If the element is already in view, nothing will happen.
  */
@@ -45,7 +44,6 @@ export function scrollIntoView(
     }
   }
 }
-
 
 /**
  * Unlocks body scrolling. Scrolling will only be unlocked once all elements that requested a lock call this method.

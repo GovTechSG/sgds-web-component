@@ -1,4 +1,4 @@
-import { ScopedElementsMixin } from '@open-wc/scoped-elements';
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
 import { property, queryAsync } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
@@ -24,9 +24,9 @@ export type DropdownButtonVariant =
  */
 export class SgdsDropdown extends ScopedElementsMixin(DropdownElement) {
   static styles = [DropdownElement.styles];
- static get scopedElements() {
+  static get scopedElements() {
     return {
-      'sgds-button': SgdsButton
+      "sgds-button": SgdsButton
     };
   }
   constructor() {

@@ -24,6 +24,22 @@ export default {
     },
     // Parse custom jsDoc tags
     resolveTypeAliasPlugin(typesByAliasMap),
+    // Add custom element tagname,
+    {
+      name: 'sgds-custom-element-tag-name',
+      analyzePhase({ ts, node, moduleDoc }) {
+        switch (node.kind) {
+          case ts.SyntaxKind.ClassDeclaration: {
+            const className = node.name.getText();
+            const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
+            const tagName = classDoc.name.replace(/([a-z0–9])([A-Z])/g, "$1-$2").toLowerCase();
+            if(!classDoc.tagName) {
+              classDoc.tagName = tagName
+            }
+          }
+        }
+      }
+    },
     {
       name: 'sgds-custom-tags',
       analyzePhase({ ts, node, moduleDoc }) {
@@ -89,7 +105,6 @@ export default {
         }
       }
     },
-
     {
       name: 'sgds-react-event-names',
       analyzePhase({ ts, node, moduleDoc }) {

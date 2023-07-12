@@ -1,31 +1,38 @@
 export const makeArgTypes = componentProps =>
   componentProps.reduce((obj, item) => {
     let controlObject = {};
-    controlObject.defaultValue = item?.default?.replaceAll('"', '')
+    if (item.default) {
+      const table = { defaultValue: {} };
+      table.defaultValue.summary = item?.default?.replaceAll('"', "");
+      controlObject.table = table;
+    }
+    // controlObject.table.defaultValue.summary = item?.default?.replaceAll('"', '')
     switch (true) {
       case /\|/.test(item.type?.text):
-        controlObject.control = 'select';
+        controlObject.control = "select";
         controlObject.options = item.type?.text
-          .replaceAll('"', '')
-          .split('|')
+          .replaceAll('"', "")
+          .split("|")
           .map(opt => opt.trim());
         break;
       case /^string$/.test(item.type?.text):
-        controlObject.control = 'text';
-        // controlObject.defaultValue = item?.default?.replaceAll('"', '')
+        controlObject.control = "text";
+        // controlObject.table.defaultValue.summary = item?.default?.replaceAll('"', '')
         break;
       case /^boolean$/.test(item.type?.text):
-        controlObject.control = 'boolean';
-        controlObject.defaultValue = (item.default === 'true')
+        controlObject.control = "boolean";
+        if (item.default) {
+          controlObject.table.defaultValue.summary = item.default === "true";
+        }
         break;
       case /^number$/.test(item.type?.text):
-        controlObject.control = 'number';
+        controlObject.control = "number";
         break;
       case /^array$/.test(item.type?.text):
-        controlObject.control = 'object';
+        controlObject.control = "object";
         break;
       default:
-        controlObject.control = 'object';
+        controlObject.control = "object";
     }
     return Object.assign(obj, { [item.name]: controlObject });
   }, {});

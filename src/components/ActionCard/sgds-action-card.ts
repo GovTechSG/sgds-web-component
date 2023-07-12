@@ -130,8 +130,6 @@ export class SgdsActionCard extends CardElement {
   }
 }
 
-
-
 export type TypeVariant = "checkbox" | "radio";
 
 export default SgdsActionCard;

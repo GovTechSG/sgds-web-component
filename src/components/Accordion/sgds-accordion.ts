@@ -8,6 +8,8 @@ import type SgdsAccordionItem from "./sgds-accordion-item";
  * @summary A dropdown mechanism that allow users to either show or hide related content. `SgdsAccordion` is a wrapper to manage the behaviour for multiple `SgdsAccordionItems`
  * @slot default - slot for accordion-item
  */
+
+/**@customElement */
 export class SgdsAccordion extends SgdsElement {
   static styles = [SgdsElement.styles];
 
