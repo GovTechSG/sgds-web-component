@@ -26,4 +26,6 @@ export const closeDrawer = () => {
   drawer.hide();
 };
 
+export const args = {};
+
 export const parameters = {};

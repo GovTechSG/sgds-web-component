@@ -3,7 +3,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { customElement, property, query } from "lit/decorators.js";
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry.js";
 import { HasSlotController } from "../../utils/slot.js";
-import { html } from "lit";
+import { html, nothing } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
 import { waitForEvent } from "../../utils/event.js";
@@ -88,7 +88,7 @@ export class SgdsDrawer extends SgdsElement {
    * Removes the header. This will also remove the default close button, so please ensure you provide an easy,
    * accessible way for users to dismiss the drawer.
    */
-  @property({ attribute: "no-header", type: Boolean, reflect: true }) noHeader = false;
+  @property({ type: Boolean, reflect: true }) noHeader = false;
 
   firstUpdated() {
     this.drawer.hidden = !this.open;
@@ -315,7 +315,7 @@ export class SgdsDrawer extends SgdsElement {
                   </div>
                 </header>
               `
-            : ""}
+            : nothing }
 
           <slot part="body" class="drawer-body"></slot>
 
