@@ -1,11 +1,11 @@
-import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import styles from "./sgds-file-upload.scss";
-import SgdsElement from "../../base/sgds-element";
-import { unsafeSVG } from "lit/directives/unsafe-svg.js";
-import { createRef, ref } from "lit/directives/ref.js";
 import { ScopedElementsMixin } from '@open-wc/scoped-elements';
+import { html } from "lit";
+import { property } from "lit/decorators.js";
+import { createRef, ref } from "lit/directives/ref.js";
+import { unsafeSVG } from "lit/directives/unsafe-svg.js";
+import SgdsElement from "../../base/sgds-element";
 import { SgdsButton } from "../Button";
+import styles from "./sgds-file-upload.scss";
 
 export type FileUploadButtonVariant =
   | "primary"

@@ -1,11 +1,11 @@
-import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-sidenav-item.scss";
-import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { Collapse } from "bootstrap";
-import genId from "../../utils/generateId";
+import { html } from "lit";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { Ref, createRef, ref } from "lit/directives/ref.js";
+import SgdsElement from "../../base/sgds-element";
+import genId from "../../utils/generateId";
+import styles from "./sgds-sidenav-item.scss";
 
 /**
  *
@@ -21,7 +21,6 @@ import { classMap } from "lit/directives/class-map.js";
  * @cssproperty --sidenav-item-icon-title-gap - the flex gap between sidenav item icon and title
  */
 
-// @customElement("sgds-sidenav-item")
 export class SgdsSidenavItem extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
@@ -171,9 +170,5 @@ export class SgdsSidenavItem extends SgdsElement {
     `;
   }
 }
-if(!customElements.get("sgds-sidenav-item")) {
-  customElements.define("sgds-sidenav-item", SgdsSidenavItem)
-}
-
 
 export default SgdsSidenavItem;

@@ -1,8 +1,8 @@
 import { Collapse } from "bootstrap";
 import { html } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { createRef, ref, Ref } from "lit/directives/ref.js";
+import { Ref, createRef, ref } from "lit/directives/ref.js";
 import SgdsElement from "../../base/sgds-element";
 import { LG_BREAKPOINT, MD_BREAKPOINT, SM_BREAKPOINT, XL_BREAKPOINT, XXL_BREAKPOINT } from "../../utils/breakpoints";
 import genId from "../../utils/generateId";
@@ -36,7 +36,6 @@ const SIZES = {
  * @cssproperty --mainnav-borderBottom-width - bottom border width
  * @cssproperty --mainnav-borderBottom-color - borderBottom width color
  */
-// @customElement("sgds-mainnav")
 export class SgdsMainnav extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 

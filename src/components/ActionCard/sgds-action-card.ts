@@ -1,17 +1,15 @@
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { live } from "lit/directives/live.js";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { html } from "lit/static-html.js";
 import { CardElement } from "../../base/card-element";
-import styles from "./sgds-action-card.scss";
 import genId from "../../utils/generateId";
+import { watch } from "../../utils/watch";
 import { SgdsCheckbox } from "../Checkbox";
 import { SgdsRadio } from "../Radio";
-import { ifDefined } from "lit/directives/if-defined.js";
-import { live } from "lit/directives/live.js";
-import { watch } from "../../utils/watch";
-
-export type TypeVariant = "checkbox" | "radio";
+import styles from "./sgds-action-card.scss";
 
 /**
  * @summary Action Card are cards with built in checkbox or radio components. The ref of input is extended to the Card's body.
@@ -29,8 +27,6 @@ export type TypeVariant = "checkbox" | "radio";
  * @csspart text - The action card text
  *
  */
-
-@customElement("sgds-action-card")
 export class SgdsActionCard extends CardElement {
   static styles = [CardElement.styles, styles];
 
@@ -133,5 +129,9 @@ export class SgdsActionCard extends CardElement {
     `;
   }
 }
+
+
+
+export type TypeVariant = "checkbox" | "radio";
 
 export default SgdsActionCard;

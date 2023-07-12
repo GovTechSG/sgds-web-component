@@ -1,8 +1,8 @@
 import { html } from "lit";
+import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
-import { customElement, property } from "lit/decorators.js";
-import styles from "./sgds-sidenav.scss";
 import SgdsSidenavItem from "./sgds-sidenav-item";
+import styles from "./sgds-sidenav.scss";
 
 /**
  * @summary The side navigation is used to display a list of links to move between pages within a related category.
@@ -13,7 +13,6 @@ import SgdsSidenavItem from "./sgds-sidenav-item";
  *
  * @cssproperty --sidenav-theme-color - overall sidenav theme color
  */
-// @customElement("sgds-sidenav")
 export class SgdsSidenav extends SgdsElement {
   static styles = styles;
 
@@ -41,10 +40,6 @@ export class SgdsSidenav extends SgdsElement {
       </nav>
     `;
   }
-}
-if(!customElements.get("sgds-sidenav")) {
-  customElements.define("sgds-sidenav", SgdsSidenav)
-
 }
 
 export default SgdsSidenav;

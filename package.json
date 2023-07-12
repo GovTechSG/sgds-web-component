@@ -97,6 +97,7 @@
     "eslint-plugin-lit": "^1.8.3",
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-sort-exports": "^0.8.0",
     "eslint-plugin-wc": "^1.4.0",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",

@@ -1,9 +1,9 @@
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsBreadcrumbItem from "./sgds-breadcrumb-item";
 import styles from "./sgds-breadcrumb.scss";
-import { ifDefined } from "lit/directives/if-defined.js";
 
 /**
  * @summary Breadcrumbs help users to navigate and understand where they are on the current website or service.
@@ -13,7 +13,6 @@ import { ifDefined } from "lit/directives/if-defined.js";
  *
  * @csspart base - The nav element wrapper of `SgdsBreadcrumb`
  */
-@customElement("sgds-breadcrumb")
 export class SgdsBreadcrumb extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
   /** The aria-label of nav element within breadcrumb component. */

@@ -11,16 +11,6 @@ export function lockBodyScrolling(lockingEl: HTMLElement) {
   document.body.classList.add("sl-scroll-lock");
 }
 
-/**
- * Unlocks body scrolling. Scrolling will only be unlocked once all elements that requested a lock call this method.
- */
-export function unlockBodyScrolling(lockingEl: HTMLElement) {
-  locks.delete(lockingEl);
-
-  if (locks.size === 0) {
-    document.body.classList.remove("sl-scroll-lock");
-  }
-}
 
 /**
  * Scrolls an element into view of its container. If the element is already in view, nothing will happen.
@@ -53,5 +43,17 @@ export function scrollIntoView(
     } else if (offsetTop + element.clientHeight > maxY) {
       container.scrollTo({ top: offsetTop - container.offsetHeight + element.clientHeight, behavior });
     }
+  }
+}
+
+
+/**
+ * Unlocks body scrolling. Scrolling will only be unlocked once all elements that requested a lock call this method.
+ */
+export function unlockBodyScrolling(lockingEl: HTMLElement) {
+  locks.delete(lockingEl);
+
+  if (locks.size === 0) {
+    document.body.classList.remove("sl-scroll-lock");
   }
 }

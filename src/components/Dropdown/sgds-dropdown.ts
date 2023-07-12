@@ -1,9 +1,9 @@
+import { ScopedElementsMixin } from '@open-wc/scoped-elements';
 import { html } from "lit";
-import { customElement, queryAsync, property } from "lit/decorators.js";
+import { property, queryAsync } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
 import { SgdsButton } from "../Button";
-import { ScopedElementsMixin } from '@open-wc/scoped-elements';
 
 export type DropDirection = "left" | "right" | "up" | "down";
 export type DropdownButtonVariant =

@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { customElement, query } from "lit/decorators.js";
+import { query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import LinkElement from "../../base/link-element";
 /**

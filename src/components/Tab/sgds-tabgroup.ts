@@ -1,14 +1,13 @@
 import { html } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { scrollIntoView } from "../../utils/scroll";
 import SgdsElement from "../../base/sgds-element";
+import { scrollIntoView } from "../../utils/scroll";
 import { watch } from "../../utils/watch";
+import { SgdsTab } from "./sgds-tab";
 import styles from "./sgds-tabgroup.scss";
 import { SgdsTabPanel } from "./sgds-tabpanel";
-import { SgdsTab } from "./sgds-tab";
 
-@customElement("sgds-tab-group")
 export class SgdsTabGroup extends SgdsElement {
   static styles = styles;
 

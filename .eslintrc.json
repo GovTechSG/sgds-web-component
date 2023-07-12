@@ -9,6 +9,7 @@
     "plugin:wc/recommended",
     "plugin:lit/recommended"
   ],
+  "plugins": ["sort-exports"],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -18,7 +19,8 @@
   "rules": {
     "lit/attribute-value-entities": 0,
     "lit/no-invalid-html": 0,
-    "lit/binding-positions": 0
+    "lit/binding-positions": 0,
+    "sort-exports/sort-exports": ["error", {"sortDir": "asc"}]
     // "jsx-quotes": [2, "prefer-single"],
   },
   "ignorePatterns": ["**/*.js", "mocks", "**/*.mjs"]
