@@ -7,12 +7,13 @@
   background-color: var(--sgds-gray-200);
   color: var(--sgds-gray-400);
   border-color: var(--sgds-gray-400);
+  cursor: none;
 }
 
 li.nav-item {
-  cursor: pointer;
   div.nav-link {
     &.tabs-info-toggle {
+      cursor: pointer;
       padding: 0.75rem;
       border-radius: 0.3125rem;
       color: #1d2939;
@@ -41,6 +42,7 @@ li.nav-item {
     }
     &.tabs-basic-toggle {
       padding: initial;
+      cursor: pointer;
       border: 1px solid var(--sgds-gray-400); //$gray-400;
       border-radius: 0;
       padding: 0.5rem 1.5rem;
@@ -61,6 +63,7 @@ li.nav-item {
        }
     }
     &:not(.tabs-basic-toggle):not(.tabs-info-toggle) {
+      cursor: pointer;
       padding-top: 0;
       padding-left: 0;
       padding-right: 0;
