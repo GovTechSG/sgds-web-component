@@ -27,4 +27,8 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
     @each $weight, $value in $primarys {
         --sgds-#{$weight}: #{$value};
     }
+
+    //shared variables with modal and drawer
+    --overlay-background-color:rgba(0,0,0,0.5);
+    --zindex-modal : #{$zindex-modal};
 }

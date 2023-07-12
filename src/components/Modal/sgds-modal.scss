@@ -1,12 +1,11 @@
   :host {
     --modal-padding: 1.5rem;
-    --modal-panel-z-index: 1055;
+    --modal-panel-z-index: var(--zindex-modal);
     --modal-panel-width: 35rem;
     --modal-panel-height: auto;
     --modal-panel-background-color: white;
     --modal-panel-border-radius: 5px;
     --modal-header-bottom-border-line-width: 1px;
-    --modal-overlay-background-color:rgba(0,0,0,0.5);
     display: contents;
   }
 
@@ -24,7 +23,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 1050;
+    z-index: var(--zindex-modal);
     font-family: var(--sgds-body-font-family);
     
   }
@@ -139,5 +138,5 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: var(--modal-overlay-background-color);
+    background-color: var(--overlay-background-color);
   }
