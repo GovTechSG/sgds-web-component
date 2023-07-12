@@ -6,6 +6,7 @@
     --modal-panel-background-color: white;
     --modal-panel-border-radius: 5px;
     --modal-header-bottom-border-line-width: 1px;
+    --modal-overlay-background-color: var(--overlay-background-color);
     display: contents;
   }
 
@@ -138,5 +139,5 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: var(--overlay-background-color);
+    background-color: var(--modal-overlay-background-color);
   }

@@ -1,12 +1,12 @@
 import { SgdsDrawer } from "../src/components/Drawer/sgds-drawer";
 import "../src/components/Drawer/sgds-drawer";
 import { fixture, expect, waitUntil } from "@open-wc/testing";
-import { sendKeys } from '@web/test-runner-commands';
+import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
 
-describe('<sgds-drawer>', () => {
-  it('should be visible with the open attribute', async () => {
+describe("<sgds-drawer>", () => {
+  it("should be visible with the open attribute", async () => {
     const el = await fixture<SgdsDrawer>(html`
       <sgds-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
@@ -15,7 +15,7 @@ describe('<sgds-drawer>', () => {
     expect(base.hidden).to.be.false;
   });
 
-  it('should not be visible without the open attribute', async () => {
+  it("should not be visible without the open attribute", async () => {
     const el = await fixture<SgdsDrawer>(
       html` <sgds-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer> `
     );
@@ -24,7 +24,7 @@ describe('<sgds-drawer>', () => {
     expect(base.hidden).to.be.true;
   });
 
-  it('should emit sgds-show and sgds-after-show when calling show()', async () => {
+  it("should emit sgds-show and sgds-after-show when calling show()", async () => {
     const el = await fixture<SgdsDrawer>(html`
       <sgds-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
@@ -32,8 +32,8 @@ describe('<sgds-drawer>', () => {
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
-    el.addEventListener('sgds-show', showHandler);
-    el.addEventListener('sgds-after-show', afterShowHandler);
+    el.addEventListener("sgds-show", showHandler);
+    el.addEventListener("sgds-after-show", afterShowHandler);
     el.show();
 
     await waitUntil(() => showHandler.calledOnce);
@@ -44,7 +44,7 @@ describe('<sgds-drawer>', () => {
     expect(base.hidden).to.be.false;
   });
 
-  it('should emit sgds-hide and sgds-after-hide when calling hide()', async () => {
+  it("should emit sgds-hide and sgds-after-hide when calling hide()", async () => {
     const el = await fixture<SgdsDrawer>(html`
       <sgds-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
@@ -52,8 +52,8 @@ describe('<sgds-drawer>', () => {
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
-    el.addEventListener('sgds-hide', hideHandler);
-    el.addEventListener('sgds-after-hide', afterHideHandler);
+    el.addEventListener("sgds-hide", hideHandler);
+    el.addEventListener("sgds-after-hide", afterHideHandler);
     el.hide();
 
     await waitUntil(() => hideHandler.calledOnce);
@@ -64,7 +64,7 @@ describe('<sgds-drawer>', () => {
     expect(base.hidden).to.be.true;
   });
 
-  it('should emit sgds-show and sgds-after-show when setting open = true', async () => {
+  it("should emit sgds-show and sgds-after-show when setting open = true", async () => {
     const el = await fixture<SgdsDrawer>(html`
       <sgds-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
@@ -72,8 +72,8 @@ describe('<sgds-drawer>', () => {
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
-    el.addEventListener('sgds-show', showHandler);
-    el.addEventListener('sgds-after-show', afterShowHandler);
+    el.addEventListener("sgds-show", showHandler);
+    el.addEventListener("sgds-after-show", afterShowHandler);
     el.open = true;
 
     await waitUntil(() => showHandler.calledOnce);
@@ -84,7 +84,7 @@ describe('<sgds-drawer>', () => {
     expect(base.hidden).to.be.false;
   });
 
-  it('should emit sgds-hide and sgds-after-hide when setting open = false', async () => {
+  it("should emit sgds-hide and sgds-after-hide when setting open = false", async () => {
     const el = await fixture<SgdsDrawer>(html`
       <sgds-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
@@ -92,8 +92,8 @@ describe('<sgds-drawer>', () => {
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
-    el.addEventListener('sgds-hide', hideHandler);
-    el.addEventListener('sgds-after-hide', afterHideHandler);
+    el.addEventListener("sgds-hide", hideHandler);
+    el.addEventListener("sgds-after-hide", afterHideHandler);
     el.open = false;
 
     await waitUntil(() => hideHandler.calledOnce);
@@ -104,13 +104,13 @@ describe('<sgds-drawer>', () => {
     expect(base.hidden).to.be.true;
   });
 
-  it('should not close when sgds-request-close is prevented', async () => {
+  it("should not close when sgds-request-close is prevented", async () => {
     const el = await fixture<SgdsDrawer>(html`
       <sgds-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
     const overlay = el.shadowRoot!.querySelector<HTMLElement>('[part~="overlay"]')!;
 
-    el.addEventListener('sgds-request-close', event => {
+    el.addEventListener("sgds-request-close", event => {
       event.preventDefault();
     });
     overlay.click();
@@ -118,15 +118,15 @@ describe('<sgds-drawer>', () => {
     expect(el.open).to.be.true;
   });
 
-  it('should allow initial focus to be set', async () => {
+  it("should allow initial focus to be set", async () => {
     const el = await fixture<SgdsDrawer>(html` <sgds-drawer><input /></sgds-drawer> `);
-    const input = el.querySelector<HTMLInputElement>('input')!;
+    const input = el.querySelector<HTMLInputElement>("input")!;
     const initialFocusHandler = sinon.spy((event: InputEvent) => {
       event.preventDefault();
       input.focus();
     });
 
-    el.addEventListener('sgds-initial-focus', initialFocusHandler);
+    el.addEventListener("sgds-initial-focus", initialFocusHandler);
     el.show();
 
     await waitUntil(() => initialFocusHandler.calledOnce);
@@ -135,13 +135,13 @@ describe('<sgds-drawer>', () => {
     expect(document.activeElement).to.equal(input);
   });
 
-  it('should close when pressing Escape', async () => {
+  it("should close when pressing Escape", async () => {
     const el = await fixture<SgdsDrawer>(html` <sgds-drawer open></sgds-drawer> `);
     const hideHandler = sinon.spy();
 
-    el.addEventListener('sgds-hide', hideHandler);
+    el.addEventListener("sgds-hide", hideHandler);
 
-    await sendKeys({ press: 'Escape' });
+    await sendKeys({ press: "Escape" });
     await waitUntil(() => hideHandler.calledOnce);
 
     expect(el.open).to.be.false;

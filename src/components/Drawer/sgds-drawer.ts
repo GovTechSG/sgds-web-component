@@ -45,18 +45,22 @@ import styles from "./sgds-drawer.scss";
  * @cssproperty --sgds-drawer-size - The preferred size of the drawer. This will be applied to the drawer's width or height
  *   depending on its `placement`. Note that the drawer will shrink to accommodate smaller screens.
  * @cssproperty --sgds-drawer-padding - The amount of padding to use for the header.
- * @cssproperty --sgds-drawer-bg-color - The drawer's background color.
+ * @cssproperty --sgds-drawer-background-color - The drawer's background color.
  * @cssproperty --sgds-drawer-button-gap - The drawer's flex gap between buttons.
  */
 @customElement("sgds-drawer")
 export class SgdsDrawer extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
+  /** @internal */
   private readonly hasSlotController = new HasSlotController(this, "footer");
+  /** @internal */
   private originalTrigger: HTMLElement | null;
-
+  /** @internal */
   @query(".drawer") drawer: HTMLElement;
+  /** @internal */
   @query(".drawer-panel") panel: HTMLElement;
+  /** @internal */
   @query(".drawer-overlay") overlay: HTMLElement;
 
   /**

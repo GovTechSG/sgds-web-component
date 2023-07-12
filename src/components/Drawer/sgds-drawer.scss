@@ -1,8 +1,9 @@
 :host {
     --sgds-drawer-padding: 1.5rem;
-    --sgds-drawer-size: 40rem;
-    --sgds-drawer-bg-color: white;
+    --sgds-drawer-size: 35rem;
+    --sgds-drawer-background-color: white;
     --sgds-drawer-button-gap: 0.5rem;
+    --sgds-drawer-overlay-background-color: var(--overlay-background-color);
     display: contents;
   }
 
@@ -28,7 +29,7 @@
     z-index: 2;
     max-width: 100%;
     max-height: 100%;
-    background-color: var(--sgds-drawer-bg-color);
+    background-color: var(--sgds-drawer-background-color);
     box-shadow: 0 2px 8px hsl(240 3.8% 46.1% / 12%);
     overflow: auto;
     pointer-events: all;
@@ -131,7 +132,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: var(--overlay-background-color);
+    background-color: var(--sgds-drawer-overlay-background-color);
     pointer-events: all;
   }
 
