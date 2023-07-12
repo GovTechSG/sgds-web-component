@@ -6,9 +6,11 @@
     <!-- <link href='node_modules/@govtechsg/sgds/css/sgds.util.css' rel='stylesheet' type='text/css' /> -->
     <!-- <link href='node_modules/@govtechsg/sgds/css/sgds.css' rel='stylesheet' type='text/css' /> -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds@2.1.1/css/sgds.min.css" rel="stylesheet" crossorigin="anonymous"> -->
-    <script type="module" id="dev-console-gateway"
-        src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"></script>
+    <!-- <script type="module" id="dev-console-gateway"
+        src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script type="module" id="console-components-gateway"
+  src="https://dev.assets.developer.tech.gov.sg/console-components/gateway.es5.js" nonce={nonce || undefined}></script>
     <style>
         /* * {
             font-family: "bootstrap-icons", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -321,8 +323,8 @@
         </div>
         <div class="container">
             <h2>Stepper</h2>
-          <sgds-stepper id="myStepper" activeStep="2" steps='["one", "two", "three"]'>
-            <div slot="step-1" class="mb-4"> 
+          <sgds-stepper id="myStepper" activeStep="2" steps='[{"stepHeader":"Personal Details","component":"1 test"},{"stepHeader":"Address and Contact Information","component":"2 test"},{"stepHeader":"Review","component":"3 test"}]'>
+            <!-- <div slot="step-1" class="mb-4"> 
                 <div class="row">
                     <div class="col mb-2">
                         <form>
@@ -369,7 +371,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> -->
           </sgds-stepper>
 
           <!-- <div>

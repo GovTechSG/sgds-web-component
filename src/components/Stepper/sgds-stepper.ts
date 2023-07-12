@@ -2,19 +2,22 @@ import { html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
-import { watch } from "../../utils/watch";
 import { defaultValue } from "../../utils/defaultvalue";
+import { watch } from "../../utils/watch";
 import styles from "./sgds-stepper.scss";
 
+export interface IStepMetaData {
+  component: unknown;
+  stepHeader: string;
+}
 /**
  * @summary Steppers are used to inform users which step they are at in a form or a process
- * @slot step-n - The slot for content in each step. "n" refers to numeral value starting from 1. e.g. step-1, step-2, step-3 etc.
  *
  * @event sgds-next-step - Emitted right before the next step is reached. Event is fired when nextStep method is called.
  * @event sgds-previous-step - Emitted right before the previous step is reached. Event is fired when previousStep method is called.
  * @event sgds-last-step - Emitted right before the last step is reached. Event is fired when lastStep method is called.
  * @event sgds-first-step - Emitted on hide after animation has completed. Event is fired when firstStep method is called.
- * @event sgds-arrived - Emitted right after the activeStep has updated its state, when upcoming step has arrived and its slot are rendered.
+ * @event sgds-arrived - Emitted right after the activeStep has updated its state, when upcoming step has arrived. Call `getMethod()` on this event to get the current step's component.
  * @event sgds-reset - Emitted right before the step is reset to its defaultActiveStep. Event is fired when reset method is called.
  *
  * @cssproperty --sgds-stepper-default-color - Sets the theme color for default stepper marker. <br>Default value `--sgds-gray-400`
@@ -26,10 +29,10 @@ import styles from "./sgds-stepper.scss";
 export class SgdsStepper extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
-  /** The header name for steps in chronological order
+  /** The metadata of stepper, type `IStepMetaData`, that consist of `stepHeader: string` and `component:unknown`. `stepHeader` is the name of the step and `component` is the content that should appear at the each step. `component` is set to `unknown` to allow users to pass in their desired component based on the framework of choice. e.g. pass in your own react/angular/vue component or it can also be a text content.
    */
   @property({ type: Array })
-  steps: string[] = [];
+  steps: IStepMetaData[] = [];
 
   /** The current state of active step. Defaults to 0 */
   @property({ type: Number, reflect: true })
@@ -39,6 +42,10 @@ export class SgdsStepper extends SgdsElement {
   @defaultValue("activeStep")
   defaultActiveStep = 0;
 
+  /** By default, it returns the corresponding component of the current activeStep as defined in the steps metadata. To get other components, pass in your desired step number as the parameter*/
+  public getComponent(step: number = this.activeStep) {
+    return this.steps[step].component;
+  }
   /** Moves the active step forward one step */
   public nextStep() {
     this.emit("sgds-next-step");
@@ -102,7 +109,7 @@ export class SgdsStepper extends SgdsElement {
   render() {
     return html`
       <div class="sgds stepper">
-        ${this.steps.map((step, index) => {
+        ${this.steps.map(({ stepHeader: step }, index) => {
           return html`
             <div
               class="stepper-item ${classMap({
@@ -122,7 +129,6 @@ export class SgdsStepper extends SgdsElement {
           `;
         })}
       </div>
-      <slot name="step-${this.activeStep + 1}" ?hidden="${this.activeStep === -1}"></slot>
     `;
   }
 }
