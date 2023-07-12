@@ -451,6 +451,15 @@
                 </div>
             </div>
             <div class="container">
+                <h2>Drawer</h2>
+                <sgds-drawer label="Drawer" class="drawer-overview">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    <sgds-button slot="footer" variant="primary">Close</sgds-button>
+                </sgds-drawer>
+                <sgds-button>Open Drawer</sgds-button>
+            </div>
+            
+            <div class="container">
                 <h2>Tooltip</h2>
                 Hover me
                     <sgds-tooltip content="This is a tooltip" placement="bottom">
@@ -473,6 +482,14 @@
                       <button onclick="tooltip.show()">click me</button>
                 </div>
     <script>
+        const drawer = document.querySelector('.drawer-overview');
+        console.log('drawer' + drawer.nextElementSibling)
+        const openButton = drawer.nextElementSibling;
+        const closeButton = drawer.querySelector('sgds-button[variant="primary"]');
+
+        openButton.addEventListener('click', () => drawer.show());
+        closeButton.addEventListener('click', () => drawer.hide());
+        
         const submitButton = document.querySelector('sgds-quantity-toggle#heyhey');
         // submitButton.addEventListener('sgds-change', (e) => {
         //     e.preventDefault();
@@ -518,6 +535,8 @@
             console.log(formData.get('cb1'));
             console.log(formData.get('cb2'));
         });
+
+        
 
 
     </script>
