@@ -21,7 +21,7 @@ export const Template = ({ tabsClasses, bodyClasses, disabled }) => html`
   <br />
   <h5>Basic toggle</h5>
   <sgds-tab-group variant="tabs-basic-toggle" tabsClasses=${tabsClasses}>
-    <sgds-tab slot="nav" panel="home"
+    <sgds-tab slot="nav" panel="home" ?disabled=${disabled}
       ><svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -51,7 +51,7 @@ export const Template = ({ tabsClasses, bodyClasses, disabled }) => html`
     <br />
     <h5>Info toggle</h5>
     <sgds-tab-group variant="tabs-info-toggle" tabsClasses=${tabsClasses}>
-      <sgds-tab slot="nav" panel="home"
+      <sgds-tab slot="nav" panel="home" ?disabled=${disabled}
         ><svg
           slot="icon"
           xmlns="http://www.w3.org/2000/svg"
