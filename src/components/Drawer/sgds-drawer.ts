@@ -18,7 +18,7 @@ import styles from "./sgds-drawer.scss";
  *
  * @slot - The drawer's main content.
  * @slot label - The drawer's label. Alternatively, you can use the `label` attribute.
- * @slot header-actions - Optional actions to add to the header. Works best with `<sgds-icon-button>`.
+ * @slot header-actions - Optional actions to add to the header.
  * @slot footer - The drawer's footer, usually one or more buttons representing various options.
  *
  * @event sgds-show - Emitted when the drawer opens.
@@ -71,7 +71,7 @@ export class SgdsDrawer extends SgdsElement {
 
   /**
    * The drawer's label as displayed in the header. You should always include a relevant label even when using
-   * `no-header`, as it is required for proper accessibility. If you need to display HTML, use the `label` slot instead.
+   * `noHeader`, as it is required for proper accessibility. If you need to display HTML, use the `label` slot instead.
    */
   @property({ reflect: true }) label = "";
 
