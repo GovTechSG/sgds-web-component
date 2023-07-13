@@ -2,7 +2,7 @@ import { html } from "lit";
 import { fixture, assert, expect } from "@open-wc/testing";
 import { SgdsCard } from "../src/components/Card";
 
-customElements.define("sgds-card", SgdsCard)
+customElements.define("sgds-card", SgdsCard);
 describe("<sgds-card>", () => {
   it("can be semantically compare with shadowDom trees", async () => {
     const el = await fixture(html`<sgds-card></sgds-card>`);

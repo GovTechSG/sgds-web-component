@@ -4,8 +4,8 @@ import { fixture, expect, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 
-customElements.define("sgds-accordion", SgdsAccordion)
-customElements.define("sgds-accordion-item", SgdsAccordionItem)
+customElements.define("sgds-accordion", SgdsAccordion);
+customElements.define("sgds-accordion-item", SgdsAccordionItem);
 
 describe("<sgds-accordion>", () => {
   it("accordion items should contain the attribute [first,nth,last]-of-type if items is more than 2", async () => {

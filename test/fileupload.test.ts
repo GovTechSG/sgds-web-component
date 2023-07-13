@@ -2,7 +2,7 @@ import { expect, fixture, oneEvent } from "@open-wc/testing";
 import { html } from "lit";
 import { SgdsFileUpload } from "../src/components/FileUpload";
 
-customElements.define("sgds-file-upload", SgdsFileUpload)
+customElements.define("sgds-file-upload", SgdsFileUpload);
 
 describe("sgds-file-upload", () => {
   it("should be able to pass in content in between the slot", async () => {

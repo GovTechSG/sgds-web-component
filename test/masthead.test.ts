@@ -2,7 +2,7 @@ import { SgdsMasthead } from "../src/components/Masthead";
 import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 
-customElements.define("sgds-masthead", SgdsMasthead)
+customElements.define("sgds-masthead", SgdsMasthead);
 
 describe("sgds-masthead", () => {
   it("renders with default values", async () => {

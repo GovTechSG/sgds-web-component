@@ -3,8 +3,8 @@ import { html } from "lit";
 import { SgdsBreadcrumb } from "../src/components/Breadcrumb/sgds-breadcrumb";
 import { SgdsBreadcrumbItem } from "../src/components/Breadcrumb/sgds-breadcrumb-item";
 
-customElements.define("sgds-breadcrumb", SgdsBreadcrumb)
-customElements.define("sgds-breadcrumb-item", SgdsBreadcrumbItem)
+customElements.define("sgds-breadcrumb", SgdsBreadcrumb);
+customElements.define("sgds-breadcrumb-item", SgdsBreadcrumbItem);
 
 describe("sgds-breadcrumb", () => {
   it("renders with default values", async () => {

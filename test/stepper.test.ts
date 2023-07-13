@@ -4,8 +4,8 @@ import { SgdsStepper } from "../src/components/Stepper/sgds-stepper";
 import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";
 
-customElements.define("sgds-stepper", SgdsStepper)
-customElements.define("sgds-button", SgdsButton)
+customElements.define("sgds-stepper", SgdsStepper);
+customElements.define("sgds-button", SgdsButton);
 
 const stepMetaData = [
   {

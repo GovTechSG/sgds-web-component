@@ -6,7 +6,7 @@ import { sendMouse } from "@web/test-runner-commands";
 import { SgdsButton } from "../src/components/Button";
 import sinon from "sinon";
 customElements.define("sgds-tooltip", SgdsTooltip);
-customElements.define("sgds-button", SgdsButton)
+customElements.define("sgds-button", SgdsButton);
 describe("sgds-tooltip", () => {
   it("is defined", () => {
     const el = document.createElement("sgds-tooltip");

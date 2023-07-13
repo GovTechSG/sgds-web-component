@@ -4,8 +4,8 @@ import sinon from "sinon";
 import { SgdsButton } from "../src/components/Button";
 import { SgdsCheckbox } from "../src/components/Checkbox";
 
-customElements.define("sgds-checkbox", SgdsCheckbox)
-customElements.define("sgds-button", SgdsButton)
+customElements.define("sgds-checkbox", SgdsCheckbox);
+customElements.define("sgds-button", SgdsButton);
 describe("<sgds-checkbox>", () => {
   it("should be disabled with the disabled attribute & aria-disabled to be true", async () => {
     const el = await fixture(html`<sgds-checkbox disabled></sgds-checkbox>`);

@@ -64,7 +64,7 @@ export class SgdsMainnav extends SgdsElement {
   private collapseId = genId("mainnav", "collapse");
 
   /** The breakpoint, below which, the Navbar will collapse. When always the Navbar will always be expanded regardless of screen size. When never, the Navbar will always be collapsed */
-  @property({type: String})
+  @property({ type: String })
   expand: MainnavExpandSize = "lg";
 
   /** @internal */
@@ -97,9 +97,9 @@ export class SgdsMainnav extends SgdsElement {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
 
     childElements.forEach(e => {
-      console.log(e)
-      e.setAttribute("name", e.tagName.toLowerCase())}
-      );
+      console.log(e);
+      e.setAttribute("name", e.tagName.toLowerCase());
+    });
   }
 
   render() {

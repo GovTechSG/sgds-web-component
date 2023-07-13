@@ -3,7 +3,7 @@ import { fixture, assert, expect, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 
-customElements.define("sgds-button", SgdsButton)
+customElements.define("sgds-button", SgdsButton);
 describe("sgds-button", () => {
   it("renders with default values", async () => {
     const el = await fixture(html`<sgds-button></sgds-button>`);

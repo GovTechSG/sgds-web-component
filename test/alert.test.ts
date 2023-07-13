@@ -4,9 +4,9 @@ import sinon from "sinon";
 import { SgdsAlert, SgdsAlertHeading, SgdsAlertLink } from "../src/components/Alert";
 import { SgdsCloseButton } from "../src/components/CloseButton";
 
-customElements.define("sgds-alert", SgdsAlert)
-customElements.define("sgds-alert-heading", SgdsAlertHeading)
-customElements.define("sgds-alert-link", SgdsAlertLink)
+customElements.define("sgds-alert", SgdsAlert);
+customElements.define("sgds-alert-heading", SgdsAlertHeading);
+customElements.define("sgds-alert-link", SgdsAlertLink);
 
 describe("<sgds-alert-heading>", () => {
   it("the default tag is h4", async () => {

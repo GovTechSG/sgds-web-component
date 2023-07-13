@@ -2,7 +2,7 @@ import { SgdsFooter, ColumnLinks } from "../src/components/Footer";
 import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 
-customElements.define("sgds-footer", SgdsFooter)
+customElements.define("sgds-footer", SgdsFooter);
 describe("button-element", () => {
   it("renders with default values", async () => {
     const el = await fixture(html`<sgds-footer></sgds-footer>`);

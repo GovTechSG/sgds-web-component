@@ -1,7 +1,7 @@
 import { SgdsBadge } from "../src/components/Badge";
 import { fixture, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
-customElements.define("sgds-badge", SgdsBadge)
+customElements.define("sgds-badge", SgdsBadge);
 
 describe("attributes added to badge", () => {
   it("should add rounded-pill class if roundedPill attribute is defined", async () => {

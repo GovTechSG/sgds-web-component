@@ -7,8 +7,8 @@ import { sendKeys, sendMouse } from "@web/test-runner-commands";
 import { MockDropdown } from "../mocks/dropdown";
 import "../mocks/dropdown";
 
-customElements.define("sgds-dropdown", SgdsDropdown)
-customElements.define("sgds-dropdown-item", SgdsDropdownItem)
+customElements.define("sgds-dropdown", SgdsDropdown);
+customElements.define("sgds-dropdown-item", SgdsDropdownItem);
 
 describe("dropdown-element generic keyboard interactions", () => {
   // //keyboard navigation
