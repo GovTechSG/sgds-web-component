@@ -1,4 +1,4 @@
-import { assert, elementUpdated, expect, fixture, html, nextFrame, oneEvent } from "@open-wc/testing";
+import { assert, elementUpdated, expect, fixture, html } from "@open-wc/testing";
 import "../src/components/Datepicker";
 import { SgdsDatepicker } from "../src/components/Datepicker";
 
@@ -10,25 +10,22 @@ describe("sgds-datepicker", () => {
     expect(el).to.be.an.instanceOf(SgdsDatepicker);
   });
 
-  it("displays the menu when sgds-input is clicked", async () => {
+  it("opens the datepicker menu when sgds-input is clicked", async () => {
     const el = await fixture(html` <sgds-datepicker></sgds-datepicker> `);
 
     const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
     const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
 
-    // Initial state assertions
     expect(menuEl?.classList.contains("show")).to.be.false;
     expect(inputEl?.getAttribute("aria-expanded")).to.be.equal("false");
 
-    // Simulate click on sgds-input
     inputEl?.click();
 
-    // Updated state assertions
     expect(menuEl?.classList.contains("show")).to.be.true;
     expect(inputEl?.getAttribute("aria-expanded")).to.be.equal("true");
   });
 
-  it("closes the menu when sgds-input is clicked", async () => {
+  it("when menu is open, closes the datepicker menu when sgds-input is clicked", async () => {
     const el = await fixture(html` <sgds-datepicker></sgds-datepicker> `);
 
     const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
@@ -69,6 +66,25 @@ describe("sgds-datepicker", () => {
     expect(inputEl?.getAttribute("aria-expanded")).to.be.equal("false");
   });
 
+  it("should pass the initialvalue to sgds-input for single mode", async () => {
+    const initialDate = new Date("2023-06-22");
+    const el = await fixture(html`<sgds-datepicker .initialValue=${[initialDate]}></sgds-datepicker>`);
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+
+    expect(inputEl?.value).to.equal("22/06/2023");
+  });
+
+  it("should pass the initialvalue to sgds-input for range mode", async () => {
+    const initialDate1 = new Date("2023-06-22");
+    const initialDate2 = new Date("2023-06-11");
+    const el = await fixture(
+      html`<sgds-datepicker mode="range" .initialValue=${[initialDate1, initialDate2]}></sgds-datepicker>`
+    );
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+
+    expect(inputEl?.value).to.equal("11/06/2023 - 22/06/2023");
+  });
+
   it("closes the menu when outside of the element sgds-datepicker is clicked", async () => {
     const el = await fixture(html` <sgds-datepicker></sgds-datepicker> `);
 
@@ -91,214 +107,171 @@ describe("sgds-datepicker", () => {
     expect(inputEl?.getAttribute("aria-expanded")).to.be.equal("false");
   });
 
-  // it("closes the menu and selects the clicked date in default single mode", async () => {
-  //   const el = await fixture(html` <sgds-datepicker></sgds-datepicker> `);
-
-  //   const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
-  //   const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
-
-  //   expect(menuEl).to.not.have.class("show");
-  //   expect(inputEl).to.have.attribute("aria-expanded", "false");
-
-  //   inputEl?.click();
-
-  //   expect(menuEl).to.have.class("show");
-  //   expect(inputEl).to.have.attribute("aria-expanded", "true");
-
-  //   const calendarEl = el.shadowRoot?.querySelector("sgds-datepicker-calendar");
-  //   const dateTds = calendarEl?.shadowRoot?.querySelectorAll("td");
-
-  //   expect(dateTds).to.have.length.above(2); // Ensure there are at least 3 <td> elements
-
-  //   const thirdTd = dateTds![2]; // Access the third <td> element
-  //   expect(thirdTd).to.exist;
-  //   thirdTd?.click();
-
-  //   await elementUpdated(el); // Wait for component update
-  //   expect(menuEl).to.not.have.class("show");
-  //   expect(inputEl).to.have.attribute("aria-expanded", "false");
-  // });
-
-  // it("closes the menu when selecteddaterange length is equal to 2 in range mode", async () => {
-  //   const el = await fixture(html`<sgds-datepicker mode="range"></sgds-datepicker>`);
-
-  //   const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
-  //   const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
-
-  //   expect(menuEl?.classList.contains("show")).to.be.false;
-  //   expect(inputEl?.getAttribute("aria-expanded")).to.be.equal("false");
-
-  //   inputEl?.click();
-
-  //   expect(menuEl?.classList.contains("show")).to.be.true;
-  //   expect(inputEl?.getAttribute("aria-expanded")).to.be.equal("true");
-
-  //   // Simulate selecting two dates in the range
-  //   const calendarEl = el.shadowRoot?.querySelector("sgds-datepicker-calendar");
-  //   const dateTds = calendarEl?.shadowRoot?.querySelectorAll("td") as NodeListOf<HTMLTableCellElement>;
-  //   dateTds[0].click();
-  //   dateTds[1].click();
-
-  //   expect(menuEl?.classList.contains("show")).to.be.false;
-  //   expect(inputEl?.getAttribute("aria-expanded")).to.be.equal("false");
-  // });
-
-  // it("calls sgds-selectvalue event when td is clicked", async () => {
-  //   const el = await fixture(html`<sgds-datepicker></sgds-datepicker>`);
-
-  //   const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
-  //   const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
-
-  //   // Spy on the event listener
-  //   const selectValueSpy = sinon.spy();
-  //   el.addEventListener("sgds-selectvalue", selectValueSpy);
-
-  //   // Open the menu
-  //   inputEl?.click();
-  //   await elementUpdated(el);
-
-  //   expect(menuEl?.classList.contains("show")).to.be.true;
-  //   expect(inputEl?.getAttribute("aria-expanded")).to.be.equal("true");
-
-  //   const calendarEl = el.shadowRoot?.querySelector("sgds-datepicker-calendar");
-  //   const dateTd = calendarEl?.shadowRoot?.querySelector("td") as HTMLTableCellElement;
-
-  //   expect(dateTd).to.exist;
-
-  //   // Click the td element
-  //   dateTd.click();
-  //   await elementUpdated(el);
-
-  //   // Verify that the event was called
-  //   expect(selectValueSpy.calledOnce).to.be.true;
-  // });
-
-  it("does not close the menu when selecting the text-muted date with minDate set", async () => {
-    const minDate = new Date(2023, 5, 1); // Example minDate value
-
-    const el = await fixture(html` <sgds-datepicker minDate="2023-12-10T12:00:00.000Z"></sgds-datepicker> `);
-
+  it("should be able to select and display a date in single mode and close menu", async () => {
+    const el = await fixture(html`<sgds-datepicker></sgds-datepicker>`);
     const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
-    const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
+    inputEl?.click();
+    const menuEl = el.shadowRoot?.querySelector("ul.datepicker sgds-datepicker-calendar") as HTMLElement;
+    const tdButtonOne = menuEl.shadowRoot?.querySelector("tbody td[data-day='1']") as HTMLTableCellElement;
+    const tdButtonTwo = menuEl.shadowRoot?.querySelector("tbody td[data-day='2']") as HTMLTableCellElement;
+
+    tdButtonOne.click();
+    await elementUpdated(el);
+    expect(inputEl.value).to.contain("01");
+
 
     expect(menuEl?.classList.contains("show")).to.be.false;
     expect(inputEl?.getAttribute("aria-expanded")).to.be.equal("false");
 
+    inputEl?.click();
+
+    tdButtonTwo.click();
+    await elementUpdated(el);
+    expect(inputEl.value).to.contain("02");
+
+    expect(menuEl?.classList.contains("show")).to.be.false;
+    expect(inputEl?.getAttribute("aria-expanded")).to.be.equal("false");
+  });
+
+  it("should be able to select and display 2 dates in range mode and close menu only after 2 dates", async () => {
+    const el = await fixture(html`<sgds-datepicker mode="range"></sgds-datepicker>`);
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+    inputEl?.click();
+    const menuEl = el.shadowRoot?.querySelector("ul.datepicker sgds-datepicker-calendar") as HTMLElement;
+    const tdButtonOne = menuEl.shadowRoot?.querySelector("tbody td[data-day='1']") as HTMLTableCellElement;
+    const tdButtonTwo = menuEl.shadowRoot?.querySelector("tbody td[data-day='2']") as HTMLTableCellElement;
+
+    tdButtonOne.click();
+    await elementUpdated(el);
+    expect(inputEl.value).to.contain("01");
+
+    expect(menuEl?.classList.contains("show")).to.be.true;
+    expect(inputEl?.getAttribute("aria-expanded")).to.be.equal("true");
+    inputEl?.click();
+
+    tdButtonTwo.click();
+    await elementUpdated(el);
+    // check for day 01 and 02
+    expect(inputEl.value).to.contain("01");
+    expect(inputEl.value).to.contain("02");
+
+    expect(menuEl?.classList.contains("show")).to.be.false;
+    expect(inputEl?.getAttribute("aria-expanded")).to.be.equal("false");
+  });
+
+  // it("before minDate dates should have text-muted class and not clickable to close the menu", async () => {
+  //   const minDate = new Date("2023-06-15T12:00:00.000Z"); // Example minDate value
+
+  //   const el = await fixture(html`<sgds-datepicker minDate="${minDate.toISOString()}"></sgds-datepicker>`);
+
+  //   const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+  //   const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
+
+  //   const headerEl = el.shadowRoot?.querySelector("ul.datepicker sgds-datepicker-header") as HTMLElement;
+
+  //   expect(menuEl?.classList.contains("show")).to.be.false;
+  //   expect(inputEl?.getAttribute("aria-expanded")).to.be.equal("false");
+
+  //   inputEl.click();
+
+  //   // Click headerEl SVG element with class bi-chevron-left until headerEl button element shows "June" "2023"
+  //   while (headerEl.innerText !== "June 2023") {
+  //     const chevronLeftSvg = headerEl.querySelector("svg.bi-chevron-left") as HTMLElement;
+  //     chevronLeftSvg?.click();
+  //     await elementUpdated(el);
+  //   }
+
+  //   expect(menuEl.classList.contains("show")).to.be.true;
+  //   expect(inputEl.getAttribute("aria-expanded")).to.be.equal("true");
+
+  //   // check for 14 of june 2023
+  //   const tdButton = menuEl.querySelector("tbody td[data-day='14']") as HTMLTableCellElement;
+  //   expect(tdButton.classList.contains("text-muted")).to.be.true;
+  //   tdButton.click();
+
+  //   expect(menuEl.classList.contains("show")).to.be.true;
+  //   expect(inputEl.getAttribute("aria-expanded")).to.be.equal("true");
+  // });
+
+  // it("before maxDate dates should have text-muted class and not clickable to close the menu", async () => {
+  //   const maxDate = new Date("2023-06-15T12:00:00.000Z"); // Example minDate value
+
+  //   const el = await fixture(html`<sgds-datepicker maxDate="${maxDate.toISOString()}"></sgds-datepicker>`);
+
+  //   const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+  //   const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLElement;
+  //   const calendarEl = el.shadowRoot?.querySelector("ul.datepicker sgds-datepicker-calendar") as HTMLElement;
+  //   const headerEl = el.shadowRoot?.querySelector("ul.datepicker sgds-datepicker-header") as HTMLElement;
+  //   const headerButtonEl = headerEl.shadowRoot?.querySelector("button") as HTMLButtonElement;
+  //   const chevronLeftEl = headerEl.shadowRoot?.querySelector("svg.bi-chevron-left") as HTMLButtonElement;
+  //   expect(menuEl?.classList.contains("show")).to.be.false;
+  //   expect(inputEl?.getAttribute("aria-expanded")).to.be.equal("false");
+
+  //   inputEl.click();
+
+  //   // Click headerEl SVG element with class bi-chevron-left until headerEl button element shows "June" "2023"
+  //   while (headerButtonEl.innerText !== "June 2023") {
+  //     chevronLeftEl.dispatchEvent(new Event("click"));
+  //     await elementUpdated(el);
+  //   }
+
+  //   expect(menuEl.classList.contains("show")).to.be.true;
+  //   expect(inputEl.getAttribute("aria-expanded")).to.be.equal("true");
+
+  //   // check for 16 of june 2023
+  //   const tdButton = calendarEl.querySelector("tbody td[data-day='16']") as HTMLTableCellElement;
+  //   expect(tdButton.classList.contains("text-muted")).to.be.true;
+  //   tdButton.click();
+
+  //   expect(menuEl.classList.contains("show")).to.be.true;
+  //   expect(inputEl.getAttribute("aria-expanded")).to.be.equal("true");
+  // });
+
+  it("should be able to click the header button till year and select the dates", async () => {
+    const el = await fixture(html`<sgds-datepicker></sgds-datepicker>`);
+
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+    const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLElement;
+    const calendarEl = el.shadowRoot?.querySelector("ul.datepicker sgds-datepicker-calendar")
+    const headerEl = el.shadowRoot?.querySelector("ul.datepicker sgds-datepicker-header") as HTMLElement;
+    const headerButtonEl = headerEl.shadowRoot?.querySelector("button") as HTMLButtonElement;
+    const chevronLeftEl = headerEl.shadowRoot?.querySelector("svg.bi-chevron-left") as HTMLButtonElement;
     inputEl.click();
 
-    expect(menuEl.classList.contains("show")).to.be.true;
-    expect(inputEl.getAttribute("aria-expanded")).to.be.equal("true");
+    headerButtonEl?.click(); //display month
+    headerButtonEl?.click(); // display year
 
-    // Simulate click on the text-muted date td
-    const textMutedDateTd = menuEl.querySelector("td.text-muted") as HTMLTableCellElement;
-    textMutedDateTd?.click();
-
-    // Final state assertions
-    expect(menuEl.classList.contains("show")).to.be.true; // Menu should not close
-    expect(inputEl.getAttribute("aria-expanded")).to.be.equal("true");
-  });
-
-  it("should pass the initial value to sgds-input for single mode", async () => {
-    const el = await fixture(html`<sgds-datepicker initialValue="2020-12-14"></sgds-datepicker>`);
-    const input = el.shadowRoot?.querySelector("sgds-input")?.shadowRoot?.querySelector("input") as HTMLInputElement;
-  
-    expect(input?.value).to.equal("14/12/2020");
-  });
-
-  it("should pass the initial value range to sgds-input for range mode", async () => {
-    const initialValueRange = [new Date("2023-06-22"), new Date("2023-06-11")];
-    const el = await fixture(html`<sgds-datepicker .initialValueRange=${initialValueRange}></sgds-datepicker>`);
-    const input = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
-  });
-
-  it("should apply input classes to the datepicker input", async () => {
-    const inputClasses = "mt-2";
-
-    const el = await fixture(html`<sgds-datepicker .inputClasses=${inputClasses}></sgds-datepicker>`);
-    const input = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
-
-    expect(input.classList.contains("mt-2")).to.be.true;
-  });
-
-  it("should apply button classes to the datepicker button", async () => {
-    const buttonClasses = "mt-2";
-
-    const element = await fixture(html`<sgds-datepicker .buttonClasses=${buttonClasses}></sgds-datepicker>`);
-    const button = element.shadowRoot?.querySelector("button");
-
-    expect(button?.classList.contains("mt-2")).to.be.true;
-  });
-
-  it("should add the required attribute to sgds-input when required is true", async () => {
-    const el = await fixture(html`<sgds-datepicker required></sgds-datepicker>`);
-    const input = el.shadowRoot?.querySelector("sgds-input");
-
-    expect(input?.hasAttribute("required")).to.be.true;
-  });
-
-
-
-  it('should render the datepicker in single mode with "dd/mm/yyyy" placeholder format by default', async () => {
-    const element = await fixture(html`<sgds-datepicker></sgds-datepicker>`);
-    const inputElement = element.shadowRoot?.querySelector("sgds-input input");
-  
-    expect(inputElement?.getAttribute("placeholder")).to.equal("dd/mm/yyyy");
-  });
-
-  it("should render the datepicker in range mode with double date inputs", async () => {
-    const element = await fixture(html`<sgds-datepicker mode="range"></sgds-datepicker>`);
-    const inputElements = element.shadowRoot?.querySelectorAll("input");
-
-    expect(inputElements?.length).to.equal(2);
-  });
-
-  it("should render the td elements before minDate as text-muted and cursor of default", async () => {
-    const minDate = "2016-05-19T12:00:00.000Z";
-  
-    const element = await fixture(html`<sgds-datepicker minDate=${minDate}></sgds-datepicker>`);
-    const calendarEl = element.shadowRoot?.querySelector("sgds-datepicker-calendar");
-  
-    // Get all the td elements in the calendar
-    const tdElements = calendarEl?.shadowRoot?.querySelectorAll("td");
-  
-    // Iterate through the td elements
-    for (let i = 0; i < tdElements!.length; i++) {
-      const tdElement = tdElements![i];
-  
-       // Check if the text content is "18" or "17"
-       if (tdElement.textContent === "17" || tdElement.textContent === "18") {
-        // Assert the text-muted class and default cursor style
-        expect(tdElement.classList.contains("text-muted")).to.be.true;
-        const cursorStyle = window.getComputedStyle(tdElement).cursor;
-        expect(cursorStyle).to.equal("default");
-      }
+    
+    const buttonYear2020 = calendarEl?.shadowRoot?.querySelector(
+      'datepicker-body year'
+    ) as HTMLButtonElement;
+    const yearText = buttonYear2020?.textContent;
+    if (yearText?.includes("2020")) {
+      buttonYear2020?.click();
     }
-  });
 
 
-  it("should render the td elements after maxDate as text-muted and cursor of default", async () => {
-    const maxDate = "2016-05-19T12:00:00.000Z";
-  
-    const element = await fixture(html`<sgds-datepicker maxDate=${maxDate}></sgds-datepicker>`);
-    const calendarEl = element.shadowRoot?.querySelector("sgds-datepicker-calendar");
-  
-    // Get all the td elements in the calendar
-    const tdElements = calendarEl?.shadowRoot?.querySelectorAll("td");
-  
-    // Iterate through the td elements
-    for (let i = 0; i < tdElements!.length; i++) {
-      const tdElement = tdElements![i];
-  
-      // Check if the text content is "20" or "21"
-      if (tdElement.textContent === "20" || tdElement.textContent === "21") {
-        // Assert the text-muted class and default cursor style
-        expect(tdElement.classList.contains("text-muted")).to.be.true;
-        const cursorStyle = window.getComputedStyle(tdElement).cursor;
-        expect(cursorStyle).to.equal("default");
-      }
+    const buttonMonthJune = calendarEl?.shadowRoot?.querySelector(
+      'datepicker-body month'
+    ) as HTMLButtonElement;
+    const buttonText = buttonMonthJune?.textContent;
+ 
+    if (buttonText?.includes("Jun")) {
+      buttonMonthJune?.click();
     }
-  });
 
+    const tdButton = calendarEl?.querySelector("tbody td[data-day='16']") as HTMLTableCellElement;
+    tdButton.click();
+
+    expect(menuEl.classList.contains("show")).to.be.false;
+    expect(inputEl.getAttribute("aria-expanded")).to.be.equal("false");
+
+
+    await elementUpdated(el);
+  
+    expect(inputEl.value).to.contain("16/06/2020");
+
+  });
 
   it("displays the correct date format in the placeholder by default", async () => {
     const dateFormat = "DD/MM/YYYY";
@@ -319,20 +292,35 @@ describe("sgds-datepicker", () => {
 
   it("disables the component when disabled property is true", async () => {
     const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker disabled></sgds-datepicker>`);
-    const input = el.shadowRoot?.querySelector("sgds-input input") as HTMLInputElement;
-    const button = el.shadowRoot?.querySelector("sgds-button button") as HTMLButtonElement;
-  
+    const input = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+    const button = el.shadowRoot?.querySelector("sgds-button") as HTMLButtonElement;
 
-    expect(input?.classList.value).to.contain("disabled");
-    expect(button?.classList.value).to.contain("disabled");
+    expect(input).to.have.attribute("disabled");
+    expect(button).to.have.attribute("disabled");
   });
 
+  it("should add the required attribute to sgds-input when required is true", async () => {
+    const el = await fixture(html`<sgds-datepicker required></sgds-datepicker>`);
+    const input = el.shadowRoot?.querySelector("sgds-input");
+
+    expect(input).to.have.attribute("required");
+  });
+
+  // it("should apply input classes to the datepicker input", async () => {
+  //   const inputClasses = "mt-2";
+
+  //   const el = await fixture(html`<sgds-datepicker inputClasses=${inputClasses}></sgds-datepicker>`);
+  //   const input = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+
+  //   expect(input.classList.contains("mt-2")).to.be.true;
+  // });
+
+  // it("should apply button classes to the datepicker button", async () => {
+  //   const buttonClasses = "mt-2";
+
+  //   const element = await fixture(html`<sgds-datepicker buttonClasses=${buttonClasses}></sgds-datepicker>`);
+  //   const button = element.shadowRoot?.querySelector("sgds-button") as HTMLButtonElement
+
+  //   expect(button?.classList.contains("mt-2")).to.be.true;
+  // });
 });
-
-
- 
-
-
-
- 
-

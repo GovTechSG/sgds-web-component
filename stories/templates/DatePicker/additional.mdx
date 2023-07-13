@@ -22,9 +22,9 @@ export const FlipTemplate = () => html` <sgds-datepicker mode="range"></sgds-dat
 
 ### single mode
 
-For default `mode="single"`, use the `initialValue` prop to set the initial value of input on first load eg. `"2020-12-14"`
+For default `mode="single"`, use the `initialValue` prop to set the initial value of input on first load eg. `'["2023-06-22"]'` 
 
-export const SingleModeTemplate = () => html` <sgds-datepicker initialValue="2020-12-14"></sgds-datepicker> `;
+export const SingleModeTemplate = () => html` <sgds-datepicker initialValue='["2023-06-22"]'></sgds-datepicker> `;
 
 <Canvas>
   <Story name="Initial Value for Single" height="500px">{SingleModeTemplate.bind({})}</Story>
@@ -33,9 +33,9 @@ export const SingleModeTemplate = () => html` <sgds-datepicker initialValue="202
 
 ### range mode
 
-For `mode="range"`, use the `initialValueRange` prop to set the initial value of startDate and endDate eg. `'["2023-06-22", "2023-06-11"]'`
+For `mode="range"`, use the same `initialValue` prop to set the initial value of startDate and endDate eg. `'["2023-06-22", "2023-06-11"]'`
 
-export const RangeModeTemplate = () => html` <sgds-datepicker mode="range" initialValueRange='["2023-06-22", "2023-06-11"]'></sgds-datepicker> `;
+export const RangeModeTemplate = () => html` <sgds-datepicker mode="range" initialValue='["2023-06-22", "2023-06-11"]'></sgds-datepicker> `;
 
 <Canvas>
   <Story name="Initial Value for Range" height="500px">{RangeModeTemplate.bind({})}</Story>

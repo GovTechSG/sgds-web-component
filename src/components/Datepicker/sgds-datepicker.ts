@@ -32,9 +32,9 @@ export class SgdsDatepicker extends DatepickerElement {
   /** When true, adds required attribute to input element */
   @property({ type: Boolean, reflect: true }) required = false;
 
-  /** Sets color of close button */
-  // @property({ type: String })
-  // variant: DropdownButtonVariant = "secondary";
+   /** When true, adds disabled attribute to input and button element */
+   @property({ type: Boolean, reflect: true }) disabled = false;
+
 
   @property({ type: Boolean, reflect: true, state: false }) noFlip = false;
 
@@ -56,19 +56,6 @@ export class SgdsDatepicker extends DatepickerElement {
 
   /** @internal */
   @property({ attribute: false }) displayDateInput?: Date;
-
-  /** The initial value of DatePicker on first load. eg. "2020-12-14" */
-  // @property({
-  //   converter: {
-  //     fromAttribute(value: string | null): Date | undefined {
-  //       if (value === null) {
-  //         return undefined;
-  //       }
-  //       return new Date(value);
-  //     }
-  //   }
-  // })
-  // initialValue?: Date;
 
   /** The initial value range of DatePicker on first load for single & range mode. eg.'["2023-06-22", "2023-06-11"]' */
   @property({ type: Array }) initialValue?: Date[];
@@ -100,28 +87,19 @@ export class SgdsDatepicker extends DatepickerElement {
   connectedCallback() {
     super.connectedCallback();
 
-    // Add the click event listener to the document
+    // Add click event listener to the document
     document.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
 
-    this.addEventListener("sgds-view", this.handleViewChanged); // this is for the mid button to change the calendar view
-    this.addEventListener("sgds-view-date", this.handleDateChanged); // this is for the left-right chevron button
-    this.addEventListener("sgds-selectvalue", this.handleSelectValue);
-    this.addEventListener("sgds-displayvalue", this.handleDisplayValue);
+    this.addEventListener("sgds-view", this.handleViewChanged); // this is for mid button to change the calendar view
+    this.addEventListener("sgds-view-date", this.handleDateChanged); // this is for the left & right chevron button
     this.addEventListener("sgds-selectmonth", this.handleSelectMonth);
     this.addEventListener("sgds-selectyear", this.handleSelectYear);
     this.addEventListener("sgds-selectdates", this.handleSelectDates);
 
-    // if (this.initialValue && this.mode === "single") {
-    //   this.displayDate = new Date(this.initialValue);
-    //   this.displayDateInput = new Date(this.initialValue);
-     
-    // } 
-    if(this.mode === "single" && this.initialValue.length === 1){
+    if (this.mode === "single" && this.initialValue) {
       const startDate = new Date(this.initialValue[0]);
       this.selectedDateRange = [startDate, undefined];
-    }
-    else if (this.mode === "range" && this.initialValue && this.initialValue.length === 2) {
-    
+    } else if (this.mode === "range" && this.initialValue && this.initialValue.length === 2) {
       const startDate = new Date(this.initialValue[0]);
       const endDate = new Date(this.initialValue[1]);
       this.selectedDateRange = [startDate, endDate];
@@ -136,76 +114,50 @@ export class SgdsDatepicker extends DatepickerElement {
     document.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
   }
 
-  @eventOptions({ capture: true })
-  handleSelectDates(event) {
+
+  handleSelectDates(event: CustomEvent<Date[]>) {
     const newSelectedDates = event.detail;
     if (this.mode === "range") {
       // Sort the newSelectedDates array in ascending order
-      newSelectedDates.sort((a, b) => a.getTime() - b.getTime());
+      newSelectedDates.sort((a: Date, b: Date) => a.getTime() - b.getTime());
 
       this.selectedDateRange = newSelectedDates;
       if (this.selectedDateRange.length === 2) {
         this.hideMenu();
       }
       this.displayDateInput = newSelectedDates.length > 0 ? newSelectedDates[0] : undefined;
-    } else if ( this.mode === "single") {
+    } else if (this.mode === "single") {
       this.selectedDateRange = [newSelectedDates[0]];
 
       if (this.selectedDateRange.length === 1) {
         this.hideMenu();
       }
-    
     }
   }
 
-  @eventOptions({ capture: true })
-  handleViewChanged(event) {
-    console.log("received view event", event.detail);
+ 
+  handleViewChanged(event: CustomEvent<string>) {
     this.view = event.detail;
   }
 
-  @eventOptions({ capture: true })
-  handleDateChanged(event) {
-    console.log("received view date event", event.detail);
+ 
+  handleDateChanged(event: CustomEvent<Date>) {
     this.displayDate = event.detail;
   }
 
-  @eventOptions({ capture: true })
-  handleSelectValue(event) {
-    console.log("received select value", event.detail);
 
-    const newSelectedDate = event.detail;
-    if (this.mode === "single") {
-      this.displayDateInput = newSelectedDate;
-      this.displayDate = newSelectedDate;}
-  
-    this.hideMenu();
-  }
 
-  @eventOptions({ capture: true })
-  handleDisplayValue(event) {
-    console.log("received display values", event.detail);
-
-    const newSelectedDate = event.detail;
-    if (this.mode === "single") {
-      this.displayDateInput = newSelectedDate;
-    }
-  }
-
-  @eventOptions({ capture: true })
-  handleSelectMonth(event) {
-    console.log("received selected month", event.detail);
+  handleSelectMonth(event: CustomEvent<Date>) {
     this.displayDate = event.detail;
   }
 
-  @eventOptions({ capture: true })
-  handleSelectYear(event) {
-    console.log("received selected year", event.detail);
+
+  handleSelectYear(event: CustomEvent<Date>) {
     this.displayDate = event.detail;
   }
 
   render() {
-    const makeInputValueString = (startDate, endDate, dateFormat) => {
+    const makeInputValueString = (startDate: Date, endDate: Date, dateFormat: String) => {
       if (!startDate && !endDate) return "";
 
       const formatDate = date => {

@@ -47,7 +47,7 @@ export class SgdsCalendarHeader extends SgdsElement {
       case "years":
         break;
     }
-    this.emit("sgds-view", { detail: this.view }); //check the correct view is shown when clicked on button
+    this.emit("sgds-view", { detail: this.view }); // emit event to render the correct view
   }
 
   renderHeader() {
@@ -74,8 +74,7 @@ export class SgdsCalendarHeader extends SgdsElement {
       newDisplayDate.setMonth(newDisplayDate.getMonth() - 1);
     }
     this.switchDate = newDisplayDate; // Update the displayDate property
-    console.log(this.switchDate);
-    //this needs to be emitted to change the viewbut shouldnt update the feed to the input
+    // emit event to render correct view
     this.emit("sgds-view-date", { detail: this.switchDate });
   }
 
@@ -93,16 +92,11 @@ export class SgdsCalendarHeader extends SgdsElement {
       newDisplayDate.setMonth(newDisplayDate.getMonth() + 1);
     }
     this.switchDate = newDisplayDate; // Update the displayDate property
-    console.log(this.switchDate);
-    //this needs to be emitted to change the viewbut shouldnt update the feed to the input
+    //emit event to render correct view
     this.emit("sgds-view-date", { detail: this.switchDate });
   }
 
   render() {
-    const { switchDate } = this;
-    const currentDate = new Date(); // Get the current date
-    // Check if the displayed date matches the currently selected date
-    // const isCurrentDate = currentDate.toDateString() === switchDate.toDateString();
     return html`
       <div class="datepicker-header dropdown-header" role="heading">
         <div class="text-center d-flex justify-content-between align-items-center">

@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { HTMLTemplateResult, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { styleMap } from "lit/directives/style-map.js";
@@ -37,23 +37,11 @@ export class Calendar extends SgdsElement {
   @state() month: number = this.displayDate.getMonth();
   /** @internal */
   @state() view = "days";
-  /** @internal */
-  @state() displayDateInternal: Date = new Date();
 
-  /** @internal */
-  @state() selectedDay: Number;
+
 
   connectedCallback() {
     super.connectedCallback();
-
-    // if (this.initialValue && this.mode === "single") {
-    //   // Assign the initialValue to selectedDate array
-    //   this.selectedDate = [this.initialValue];
-    //   this.displayDate = this.initialValue;
-    // }
-    if (this.mode === "single") {
-      this.selectedDate = [this.displayDateInput];
-    }
   }
 
   setTimeToNoon(date: Date) {
@@ -79,7 +67,7 @@ export class Calendar extends SgdsElement {
     return arr;
   }
 
-  handleDayClick(event: MouseEvent) {
+  onClickDay(event: MouseEvent) {
     const day = (event.currentTarget as HTMLTableCellElement).dataset.day;
     const displayDateClone = new Date(this.displayDate);
     console.log(displayDateClone);
@@ -88,23 +76,9 @@ export class Calendar extends SgdsElement {
     if (this.mode === "single") {
       // Single mode: Select a single date
 
-      // this.displayDateInput = displayDateClone;
-      // this.emit("sgds-displayvalue", { detail: this.displayDateInput });
-      this.displayDate = displayDateClone;
-      this.emit("sgds-selectvalue", { detail: this.displayDate });
-      // this.selectedDate = [displayDateClone];
-
-      // const selectedSingleDate = this.selectedDate;
-      // if (selectedSingleDate .length === 0 || selectedSingleDate .length === 1) {
-      //   selectedSingleDate .length = 0;
-      // }
-
-
-
-      // Update the selectedDate property
       this.selectedDate = [displayDateClone];
 
-      // Emit an event with the range of selected dates
+      // Emit event with selected date
       this.emit("sgds-selectdates", { detail: this.selectedDate });
     } else if (this.mode === "range") {
       // Range mode: Select a range of dates
@@ -122,7 +96,7 @@ export class Calendar extends SgdsElement {
       // Update the selectedDate property
       this.selectedDate = selectedDates;
 
-      // Emit an event with the range of selected dates
+      // Emit event with the range of selected dates
       this.emit("sgds-selectdates", { detail: this.selectedDate });
     }
 
@@ -185,31 +159,18 @@ export class Calendar extends SgdsElement {
       const week = [];
       for (let j = 0; j <= 6; j++) {
         if (day <= monthLength && (i > 0 || j >= startingDay)) {
-          // Remove the existing className assignment
-          // let className: string | undefined;
           const date = new Date(year, month, day, 12, 0, 0, 0).toISOString();
-
           const isCurrentDate = new Date();
 
           const isSelected =
             selectedDates.length > 0 &&
             (rangeSelectedDates.some(d => Date.parse(date) === Date.parse(d.toISOString())) ||
               Date.parse(date) === Date.parse(selectedDates[0].toISOString()));
- 
-          // const isSingleSelected = selectedDates.length > 0 && Date.parse(date) === Date.parse(selectedDates[0].toISOString());
-          // const isSingleSelected = selectedDates[0]?.toISOString() === date && selectedDates.length > 0;
 
-          // if (this.mode === "single") {
-          //   console.log("issingleselected", this.setTimeToNoon(this.selectedDate[0]));
-          //   console.log("newdategettime", new Date(date));
-          // }
-
-          // const isSingleSelected = (new Date(date)) === this.setTimeToNoon(this.selectedDate[0]);
-          
 
           const beforeMinDate = minimumDate && Date.parse(date) < Date.parse(minimumDate.toISOString());
           const afterMinDate = maximumDate && Date.parse(date) > Date.parse(maximumDate.toISOString());
-          const clickHandler = beforeMinDate || afterMinDate ? undefined : this.handleDayClick;
+          const clickHandler = beforeMinDate || afterMinDate ? undefined : this.onClickDay;
 
           const isCurrentMonth = isCurrentDate.getMonth() === this.displayDate.getMonth();
           const isCurrentYear = isCurrentDate.getFullYear() === this.displayDate.getFullYear();
@@ -317,7 +278,7 @@ export class Calendar extends SgdsElement {
       </table>
     `;
 
-    let viewContent;
+    let viewContent: HTMLTemplateResult;
     switch (this.view) {
       case "days":
         viewContent = html` ${dayView} `;
