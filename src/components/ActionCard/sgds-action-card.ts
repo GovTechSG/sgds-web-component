@@ -10,6 +10,7 @@ import { watch } from "../../utils/watch";
 import { SgdsCheckbox } from "../Checkbox";
 import { SgdsRadio } from "../Radio";
 import styles from "./sgds-action-card.scss";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 
 /**
  * @summary Action Card are cards with built in checkbox or radio components. The ref of input is extended to the Card's body.
@@ -27,15 +28,20 @@ import styles from "./sgds-action-card.scss";
  * @csspart text - The action card text
  *
  */
-export class SgdsActionCard extends CardElement {
+export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
   static styles = [CardElement.styles, styles];
-
+  static get scopedElements() {
+    return {
+      "sgds-checkbox": SgdsCheckbox,
+      "sgds-radio": SgdsRadio
+    };
+  }
   /** @internal */
   inputRef: Ref<SgdsCheckbox | SgdsRadio> = createRef();
   /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
   @property({ reflect: true }) name: string;
   /** Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name. */
-  @property() value: string;
+  @property({type: String}) value: string;
   /** Disables the input (so the user can't check / uncheck it). */
   @property({ type: Boolean, reflect: true }) disabled = false;
   /** Draws the input in a checked state. */
@@ -83,7 +89,7 @@ export class SgdsActionCard extends CardElement {
       id=${this.inputId}
       @click=${this.handleInputChange}
       @keydown=${this.handleKeyDown}
-      .value=${ifDefined(this.value)}
+      .value=${live(this.value)}
       ?checked=${live(this.checked)}
       @sgds-change=${(e: CustomEvent) => (this.checked = e.detail.checked)}
     ></sgds-checkbox>`;
@@ -94,7 +100,7 @@ export class SgdsActionCard extends CardElement {
       id=${this.inputId}
       @click=${this.handleInputChange}
       @keydown=${this.handleKeyDown}
-      .value=${ifDefined(this.value)}
+      .value=${live(this.value)}
       ?checked=${live(this.checked)}
     ></sgds-radio>`;
 

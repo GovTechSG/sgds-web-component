@@ -80,6 +80,16 @@ const reactSubFolderBuildPlugins = folderName => [
 const buildSgdsPackage = () => {
   const sgdsWcPackage = [
     {
+      input: "src/components.ts",
+      output: {
+        file: "lib/components.js",
+        format: "esm",
+        sourcemap: true,
+        name: "index"
+      },
+      plugins: wcPlugins
+    },
+    {
       input: "src/index.ts",
       output: {
         file: packageJson.module,
@@ -94,16 +104,6 @@ const buildSgdsPackage = () => {
         file: packageJson.main,
         format: "umd",
         sourcemap: true
-      },
-      plugins: wcPlugins
-    },
-    {
-      input: "src/components.ts",
-      output: {
-        file: "lib/components.js",
-        format: "esm",
-        sourcemap: true,
-        name: "index"
       },
       plugins: wcPlugins
     }
