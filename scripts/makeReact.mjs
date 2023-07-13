@@ -36,9 +36,11 @@ components.map(component => {
       import { createComponent } from '@lit-labs/react';
       import Component from '../../components/${importPath}';
 
+      customElements.define("${component.tagName}", Component)
+
       export default createComponent({
         react: React,
-        tagName: '${component.tagName}',
+        tagName: "${component.tagName}",
         elementClass: Component,
         events: {
           ${events}
