@@ -10,7 +10,7 @@ export * from "./components/Dropdown";
 export * from "./components/Textarea";
 export * from "./components/Modal";
 export * from "./components/QuantityToggle";
-// export * from "./components/Tab";
+export * from "./components/Tab";
 export * from "./components/ActionCard";
 export * from "./components/Badge";
 export * from "./components/Table";
