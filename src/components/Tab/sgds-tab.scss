@@ -8,6 +8,7 @@
   color: var(--sgds-gray-400);
   border-color: var(--sgds-gray-400);
   cursor: none;
+  //TODO: disabled state cursor to change to not-allowed
 }
 
 li.nav-item {
@@ -59,7 +60,8 @@ li.nav-item {
         background-color: var(--tab-theme-color); //$link-color;
       }
       &.disabled{
-        @extend .disabled
+        @extend .disabled;
+        
        }
     }
     &:not(.tabs-basic-toggle):not(.tabs-info-toggle) {
@@ -77,7 +79,8 @@ li.nav-item {
         background-color: transparent;
       }
       &.disabled{
-        @extend .disabled
+        @extend .disabled;
+        background-color: transparent;
        }
     }
   }
