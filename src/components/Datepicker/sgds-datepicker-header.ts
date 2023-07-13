@@ -19,7 +19,7 @@ export const MONTH_LABELS = [
 ];
 
 @customElement("sgds-datepicker-header")
-export class SgdsCalendarHeader extends SgdsElement {
+export class SgdsDatepickerHeader extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
   /** @internal */
@@ -36,7 +36,8 @@ export class SgdsCalendarHeader extends SgdsElement {
     this.view = "days";
   }
 
-  changeView() {
+  /** @internal */
+  private changeView() {
     switch (this.view) {
       case "days":
         this.view = "months";
@@ -50,7 +51,8 @@ export class SgdsCalendarHeader extends SgdsElement {
     this.emit("sgds-view", { detail: this.view }); // emit event to render the correct view
   }
 
-  renderHeader() {
+  /** @internal */
+  private renderHeader() {
     const { view, switchDate } = this;
 
     if (view === "months") {
@@ -62,7 +64,8 @@ export class SgdsCalendarHeader extends SgdsElement {
     return html` ${MONTH_LABELS[switchDate.getMonth()]} ${switchDate.getFullYear()} `;
   }
 
-  handleClickPrevious() {
+  /** @internal */
+  private handleClickPrevious() {
     const { view, switchDate } = this;
     const newDisplayDate = new Date(switchDate);
     newDisplayDate.setDate(1);
@@ -78,7 +81,8 @@ export class SgdsCalendarHeader extends SgdsElement {
     this.emit("sgds-view-date", { detail: this.switchDate });
   }
 
-  handleClickNext() {
+  /** @internal */
+  private handleClickNext() {
     const { view, switchDate } = this;
     const newDisplayDate = new Date(switchDate);
     newDisplayDate.setDate(1);
@@ -100,39 +104,41 @@ export class SgdsCalendarHeader extends SgdsElement {
     return html`
       <div class="datepicker-header dropdown-header" role="heading">
         <div class="text-center d-flex justify-content-between align-items-center">
-          <svg
-            @click="${this.handleClickPrevious}"
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-chevron-left"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
-            />
-          </svg>
+          <button @click="${this.handleClickPrevious}">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-chevron-left"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+              />
+            </svg>
+          </button>
           <button @click=${this.changeView}>${this.renderHeader()}</button>
-          <svg
-            @click="${this.handleClickNext}"
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-chevron-right"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-            />
-          </svg>
+          <button @click="${this.handleClickNext}">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-chevron-right"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+              />
+            </svg>
+          </button>
         </div>
       </div>
     `;
   }
 }
 
-export default SgdsCalendarHeader;
+export default SgdsDatepickerHeader;

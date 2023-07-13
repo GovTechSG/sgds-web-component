@@ -4,9 +4,6 @@ import { ref } from "lit/directives/ref.js";
 import { DatepickerElement } from "../../base/datepicker-dropdown-element";
 // import { SgdsCalendarHeader } from "./sgds-datepicker";
 import styles from "./sgds-datepicker.scss";
-import { initial } from "lodash";
-
-// export type DropDirection = "left" | "right" | "up" | "down";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -32,9 +29,8 @@ export class SgdsDatepicker extends DatepickerElement {
   /** When true, adds required attribute to input element */
   @property({ type: Boolean, reflect: true }) required = false;
 
-   /** When true, adds disabled attribute to input and button element */
-   @property({ type: Boolean, reflect: true }) disabled = false;
-
+  /** When true, adds disabled attribute to input and button element */
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   @property({ type: Boolean, reflect: true, state: false }) noFlip = false;
 
@@ -114,8 +110,8 @@ export class SgdsDatepicker extends DatepickerElement {
     document.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
   }
 
-
-  handleSelectDates(event: CustomEvent<Date[]>) {
+  /** @internal */
+  private handleSelectDates(event: CustomEvent<Date[]>) {
     const newSelectedDates = event.detail;
     if (this.mode === "range") {
       // Sort the newSelectedDates array in ascending order
@@ -135,29 +131,28 @@ export class SgdsDatepicker extends DatepickerElement {
     }
   }
 
- 
-  handleViewChanged(event: CustomEvent<string>) {
+  /** @internal */
+  private handleViewChanged(event: CustomEvent<string>) {
     this.view = event.detail;
   }
 
- 
-  handleDateChanged(event: CustomEvent<Date>) {
+  /** @internal */
+  private handleDateChanged(event: CustomEvent<Date>) {
     this.displayDate = event.detail;
   }
 
-
-
-  handleSelectMonth(event: CustomEvent<Date>) {
+  /** @internal */
+  private handleSelectMonth(event: CustomEvent<Date>) {
     this.displayDate = event.detail;
   }
 
-
-  handleSelectYear(event: CustomEvent<Date>) {
+  /** @internal */
+  private handleSelectYear(event: CustomEvent<Date>) {
     this.displayDate = event.detail;
   }
 
   render() {
-    const makeInputValueString = (startDate: Date, endDate: Date, dateFormat: String) => {
+    const makeInputValueString = (startDate: Date, endDate: Date, dateFormat: string) => {
       if (!startDate && !endDate) return "";
 
       const formatDate = date => {

@@ -6,7 +6,7 @@ import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-datepicker-calendar.scss";
 
 @customElement("sgds-datepicker-calendar")
-export class Calendar extends SgdsElement {
+export class SgdsDatepickerCalendar extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
   /** @internal */
@@ -38,13 +38,12 @@ export class Calendar extends SgdsElement {
   /** @internal */
   @state() view = "days";
 
-
-
   connectedCallback() {
     super.connectedCallback();
   }
 
-  setTimeToNoon(date: Date) {
+  /** @internal */
+  private setTimeToNoon(date: Date) {
     const newDate = new Date(date);
     newDate.setHours(12);
     newDate.setMinutes(0);
@@ -53,7 +52,8 @@ export class Calendar extends SgdsElement {
     return newDate;
   }
 
-  generateIncrementDays(start: Date, end: Date) {
+  /** @internal */
+  private generateIncrementDays(start: Date, end: Date) {
     const arr: Date[] = [];
     if (start.getTime() < end.getTime()) {
       for (let dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
@@ -67,7 +67,8 @@ export class Calendar extends SgdsElement {
     return arr;
   }
 
-  onClickDay(event: MouseEvent) {
+  /** @internal */
+  private onClickDay(event: MouseEvent) {
     const day = (event.currentTarget as HTMLTableCellElement).dataset.day;
     const displayDateClone = new Date(this.displayDate);
     console.log(displayDateClone);
@@ -112,7 +113,8 @@ export class Calendar extends SgdsElement {
   }
 
   // clickhandler for month view buttons
-  onClickMonth(month: number) {
+  /** @internal */
+  private onClickMonth(month: number) {
     this.month = month;
     const displayDateClone = new Date(this.displayDate);
     this.view = "days";
@@ -124,7 +126,8 @@ export class Calendar extends SgdsElement {
   }
 
   // clickhandler for year view buttons
-  onClickYear(year: number) {
+  /** @internal */
+  private onClickYear(year: number) {
     this.year = year;
     const displayDateClone = new Date(this.displayDate);
     displayDateClone.setFullYear(this.year);
@@ -146,7 +149,7 @@ export class Calendar extends SgdsElement {
     const month = this.displayDate.getMonth();
     const firstDay = new Date(year, month, 1);
     const startingDay = firstDay.getDay();
-    let monthLength = Calendar.daysInMonth[month];
+    let monthLength = SgdsDatepickerCalendar.daysInMonth[month];
     if (month == 1) {
       if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
         monthLength = 29;
@@ -166,7 +169,6 @@ export class Calendar extends SgdsElement {
             selectedDates.length > 0 &&
             (rangeSelectedDates.some(d => Date.parse(date) === Date.parse(d.toISOString())) ||
               Date.parse(date) === Date.parse(selectedDates[0].toISOString()));
-
 
           const beforeMinDate = minimumDate && Date.parse(date) < Date.parse(minimumDate.toISOString());
           const afterMinDate = maximumDate && Date.parse(date) > Date.parse(maximumDate.toISOString());
@@ -216,11 +218,11 @@ export class Calendar extends SgdsElement {
 
     // monthView
 
-    const displayMonth = Calendar.MONTHVIEW_LABELS[this.displayDate.getMonth()];
+    const displayMonth = SgdsDatepickerCalendar.MONTHVIEW_LABELS[this.displayDate.getMonth()];
 
     const monthView = html`
       <div class="sgds monthpicker">
-        ${Calendar.MONTHVIEW_LABELS.map(
+        ${SgdsDatepickerCalendar.MONTHVIEW_LABELS.map(
           (m, idx) => html`
             <button
               class=${classMap({ active: displayMonth === m, month: true })}
@@ -262,7 +264,7 @@ export class Calendar extends SgdsElement {
       <table class="text-center">
         <thead>
           <tr>
-            ${Calendar.DAY_LABELS.map(
+            ${SgdsDatepickerCalendar.DAY_LABELS.map(
               (label: string, index: number) =>
                 html`
                   <td key=${index}>
@@ -298,4 +300,4 @@ export class Calendar extends SgdsElement {
   }
 }
 
-export default Calendar;
+export default SgdsDatepickerCalendar;
