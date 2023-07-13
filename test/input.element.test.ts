@@ -1,16 +1,12 @@
 import { SgdsInput } from "../src/components/Input/sgds-input";
-import type SgdsButton from "../src/components/Button/sgds-button";
-import "../src/components/Input";
-import "../src/components/Button";
+import SgdsButton from "../src/components/Button/sgds-button";
 import { expect, fixture, html, oneEvent, waitUntil, assert, elementUpdated } from "@open-wc/testing";
 import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";
+customElements.define("sgds-input", SgdsInput)
+customElements.define("sgds-button", SgdsButton)
 
 describe("sgds-input", () => {
-  it("is defined", () => {
-    const el = document.createElement("sgds-input");
-    assert.instanceOf(el, SgdsInput);
-  });
   it("renders with default values", async () => {
     const el = await fixture(html`<sgds-input inputId="test-id" label="label" hintText="hello"></sgds-input>`);
     assert.shadowDom.equal(

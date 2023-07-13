@@ -1,14 +1,10 @@
 import { SgdsMasthead } from "../src/components/Masthead";
-import "../src/components/Masthead/sgds-masthead";
 import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 
-describe("sgds-masthead", () => {
-  it("is defined", () => {
-    const el = document.createElement("sgds-masthead");
-    assert.instanceOf(el, SgdsMasthead);
-  });
+customElements.define("sgds-masthead", SgdsMasthead)
 
+describe("sgds-masthead", () => {
   it("renders with default values", async () => {
     const el = await fixture(html`<sgds-masthead></sgds-masthead>`);
     assert.shadowDom.equal(

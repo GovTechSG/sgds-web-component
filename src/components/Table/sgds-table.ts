@@ -68,12 +68,12 @@ export class SgdsTable extends SgdsElement {
   /**
    * Populate header cells using Arrays
    */
-  @property({ type: Array }) tableHeaders = [];
+  @property({ type: Array }) tableHeaders: string[] = [];
 
   /**
    * Populate data cells using Arrays
    */
-  @property({ type: Array }) tableData = [];
+  @property({ type: Array }) tableData: Array<(string | number)[]> = [];
 
   /** @internal */
   @state() sortColumn: number | null = null;
@@ -93,7 +93,7 @@ export class SgdsTable extends SgdsElement {
   @state() clickCount = 0;
 
   /** @internal */
-  @state() originalTableData: Array<string[]> = [];
+  @state() originalTableData: Array<(string | number)[]> = [];
 
   connectedCallback() {
     super.connectedCallback();

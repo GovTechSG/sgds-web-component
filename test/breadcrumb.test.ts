@@ -3,11 +3,10 @@ import { html } from "lit";
 import { SgdsBreadcrumb } from "../src/components/Breadcrumb/sgds-breadcrumb";
 import { SgdsBreadcrumbItem } from "../src/components/Breadcrumb/sgds-breadcrumb-item";
 
+customElements.define("sgds-breadcrumb", SgdsBreadcrumb)
+customElements.define("sgds-breadcrumb-item", SgdsBreadcrumbItem)
+
 describe("sgds-breadcrumb", () => {
-  it("is defined", () => {
-    const el = document.createElement("sgds-breadcrumb");
-    assert.instanceOf(el, SgdsBreadcrumb);
-  });
   it("renders with default values", async () => {
     const el = await fixture(html`<sgds-breadcrumb></sgds-breadcrumb>`);
     assert.shadowDom.equal(

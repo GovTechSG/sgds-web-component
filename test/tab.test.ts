@@ -1,6 +1,10 @@
 import { expect, fixture, html } from "@open-wc/testing";
 import { SgdsTab } from "../src/components/Tab/sgds-tab";
-import "../src/components/Tab";
+import { SgdsTabGroup, SgdsTabPanel } from "../src/components/Tab";
+
+customElements.define("sgds-tab", SgdsTab);
+customElements.define("sgds-tab-group", SgdsTabGroup);
+customElements.define("sgds-tab-panel", SgdsTabPanel);
 
 describe("<sgds-tab>", () => {
   it("passes accessibility test", async () => {

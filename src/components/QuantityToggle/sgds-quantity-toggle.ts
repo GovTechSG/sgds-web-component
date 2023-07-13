@@ -134,7 +134,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
           step=${ifDefined(this.step)}
           min=${ifDefined(this.min)}
           max=${ifDefined(this.max)}
-          .value=${live(this.value.toString)}
+          .value=${live(this.value.toString())}
           @change=${() => this.handleChange("sgds-change")}
           @input=${() => this.handleChange("sgds-input")}
           ?disabled=${this.disabled}
