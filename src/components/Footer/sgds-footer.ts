@@ -21,7 +21,6 @@ export interface Links {
  * @cssproperty footer-top - The component's footer-top section container.
  * @cssproperty footer-bottom - The component's footer-bottom section container.
  */
-// @customElement("sgds-footer")
 export class SgdsFooter extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
