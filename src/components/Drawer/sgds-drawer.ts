@@ -429,8 +429,4 @@ setDefaultAnimation("drawer.overlay.hide", {
   options: { duration: 250 }
 });
 
-declare global {
-  interface HTMLElementTagNameMap {
-    "sgds-drawer": SgdsDrawer;
-  }
-}
+export default SgdsDrawer;
