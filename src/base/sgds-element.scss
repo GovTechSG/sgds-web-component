@@ -48,4 +48,8 @@ $utilities: map-merge(
     @each $weight, $value in $all-colors {
         --sgds-#{$weight}: #{$value};
     }
+
+    //shared variables with modal and drawer
+    --overlay-background-color:rgba(0,0,0,0.5);
+    --zindex-modal : #{$zindex-modal};
 }
