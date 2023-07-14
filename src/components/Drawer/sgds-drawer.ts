@@ -48,7 +48,6 @@ import styles from "./sgds-drawer.scss";
  * @cssproperty --sgds-drawer-background-color - The drawer's background color.
  * @cssproperty --sgds-drawer-button-gap - The drawer's flex gap between buttons.
  */
-@customElement("sgds-drawer")
 export class SgdsDrawer extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 

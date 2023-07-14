@@ -14,7 +14,6 @@ let id = 0;
  *
  * @cssproperty --tab-panel-padding - The tab panel's padding.
  */
-@customElement("sgds-tab-panel")
 export class SgdsTabPanel extends LitElement {
   static styles = styles;
   /**@internal */

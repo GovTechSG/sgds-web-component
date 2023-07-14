@@ -50,21 +50,6 @@ export async function clickOnElement(
   await sendMouse({ type: "click", position: [clickX, clickY] });
 }
 
-/** A testing utility that moves the mouse onto an element. */
-export async function moveMouseOnElement(
-  /** The element to click */
-  el: Element,
-  /** The location of the element to click */
-  position: "top" | "right" | "bottom" | "left" | "center" = "center",
-  /** The horizontal offset to apply to the position when clicking */
-  offsetX = 0,
-  /** The vertical offset to apply to the position when clicking */
-  offsetY = 0
-) {
-  const { clickX, clickY } = determineMousePosition(el, position, offsetX, offsetY);
-
-  await sendMouse({ type: "move", position: [clickX, clickY] });
-}
 
 /** A testing utility that drags an element with the mouse. */
 export async function dragElement(
@@ -80,4 +65,21 @@ export async function dragElement(
   const { clickX, clickY } = determineMousePosition(el, "center", deltaX, deltaY);
   await sendMouse({ type: "move", position: [clickX, clickY] });
   await sendMouse({ type: "up" });
+}
+
+
+/** A testing utility that moves the mouse onto an element. */
+export async function moveMouseOnElement(
+  /** The element to click */
+  el: Element,
+  /** The location of the element to click */
+  position: "top" | "right" | "bottom" | "left" | "center" = "center",
+  /** The horizontal offset to apply to the position when clicking */
+  offsetX = 0,
+  /** The vertical offset to apply to the position when clicking */
+  offsetY = 0
+) {
+  const { clickX, clickY } = determineMousePosition(el, position, offsetX, offsetY);
+
+  await sendMouse({ type: "move", position: [clickX, clickY] });
 }

@@ -19,7 +19,6 @@ import { SgdsTabPanel } from "./sgds-tab-panel";
  * @csspart body - The container wrapping the default slot where all `sgds-tab-panel`s are slotted.
  * @csspart nav - The container wrapping the default slot where all `sgds-tab`s are slotted.
  */
-@customElement("sgds-tab-group")
 export class SgdsTabGroup extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
   /**@internal */
