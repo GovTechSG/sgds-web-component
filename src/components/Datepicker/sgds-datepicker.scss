@@ -1,10 +1,16 @@
 :host {
   --datepicker-border-color: #98a2b3;
   --datepicker-font-size: 1rem;
+  --datepicker-theme-color: var(--sgds-primary);
+  --datepicker-background-color: white;
 }
 
 div {
   display: flex;
+}
+
+.datepicker{
+  background-color: var(--datepicker-background-color);
 }
 
 sgds-input {

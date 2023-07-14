@@ -1,6 +1,6 @@
 :host {
-  --datepicker-theme-color: #5925dc;
-  --datepicker-background-color: #ECE6FB;
+  --datepicker-theme-color: var(--sgds-primary);
+  --datepicker-hover-background-color: var(--sgds-primary-100);
 }
 
 .datepicker-body {
@@ -14,8 +14,8 @@
 .sgds.monthpicker,
 .sgds.yearpicker {
   display: grid;
-  grid-template-columns: repeat(3, 48px);
-  grid-template-rows: repeat(4, 48px);
+  grid-template-columns: repeat(3, 3rem);
+  grid-template-rows: repeat(4, 3rem);
   justify-content: space-between;
   align-content: space-between;
   padding: 1rem 1rem 0;
@@ -26,18 +26,27 @@
 .year {
   padding: 0;
   border: 0;
-  background-color: transparent;
-  cursor: pointer;
-  &.active {
+  &.active,
+  &:hover {
+    cursor: pointer;
     color: var(--datepicker-theme-color);
-    background-color: var(--datepicker-background-color);
+    background-color: var(--datepicker-hover-background-color);
   }
 }
 
 td {
-  width: 48px;
-  height: 48px;
+  width: 3rem;
+  height: 3rem;
   padding: 0;
+  &.disabled{
+    color: var(--sgds-gray-400);
+  }
+  &[data-day]{
+    &:hover:not(.disabled){
+      color: var(--datepicker-theme-color);
+      background-color: var(--datepicker-hover-background-color);
+    }
+  } 
 }
 
 
