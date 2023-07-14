@@ -4,7 +4,7 @@ import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
 
-customElements.define("sgds-drawer", SgdsDrawer)
+customElements.define("sgds-drawer", SgdsDrawer);
 
 describe("<sgds-drawer>", () => {
   it("should be visible with the open attribute", async () => {

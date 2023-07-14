@@ -1,14 +1,14 @@
-import { animateTo, stopAnimations } from "../../utils/animate.js";
-import { classMap } from "lit/directives/class-map.js";
-import { customElement, property, query } from "lit/decorators.js";
-import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry.js";
-import { HasSlotController } from "../../utils/slot.js";
 import { html, nothing } from "lit";
+import { property, query } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
-import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
-import { waitForEvent } from "../../utils/event.js";
-import { watch } from "../../utils/watch.js";
 import SgdsElement from "../../base/sgds-element";
+import { animateTo, stopAnimations } from "../../utils/animate.js";
+import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry.js";
+import { waitForEvent } from "../../utils/event.js";
+import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
+import { HasSlotController } from "../../utils/slot.js";
+import { watch } from "../../utils/watch.js";
 import styles from "./sgds-drawer.scss";
 
 /**

@@ -50,7 +50,6 @@ export async function clickOnElement(
   await sendMouse({ type: "click", position: [clickX, clickY] });
 }
 
-
 /** A testing utility that drags an element with the mouse. */
 export async function dragElement(
   /** The element to drag */
@@ -66,7 +65,6 @@ export async function dragElement(
   await sendMouse({ type: "move", position: [clickX, clickY] });
   await sendMouse({ type: "up" });
 }
-
 
 /** A testing utility that moves the mouse onto an element. */
 export async function moveMouseOnElement(
