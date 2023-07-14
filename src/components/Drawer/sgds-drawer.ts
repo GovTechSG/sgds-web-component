@@ -315,7 +315,7 @@ export class SgdsDrawer extends SgdsElement {
                   </div>
                 </header>
               `
-            : nothing }
+            : nothing}
 
           <slot part="body" class="drawer-body"></slot>
 

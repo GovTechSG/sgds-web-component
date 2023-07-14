@@ -9,6 +9,7 @@ export const Template = args => {
       placement=${args.placement}
       ?noHeader=${args.noHeader}
       ?noAnimation=${args.noAnimation}
+      ?contained=${args.contained}
     >
       This is a Drawer
       <sgds-button @click=${closeDrawer} slot="footer" variant="link" class="close-drawer">Close</sgds-button>
