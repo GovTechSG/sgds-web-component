@@ -17,7 +17,6 @@ import "./components/Table";
 import "./components/Breadcrumb";
 import "./components/Stepper";
 import "./components/Alert";
-import "./components/CloseButton";
 import "./components/Toast";
 import "./components/FileUpload";
 import "./components/Accordion";

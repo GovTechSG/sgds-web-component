@@ -253,14 +253,17 @@ export class SgdsModal extends SgdsElement {
                   >
                     ${this.titleIcon ? withLabelIcon : ""} ${this.title}
                   </div>
-                  <sgds-closebutton
+                  <button
                     class=${classMap({
                       "modal-close": true,
+                      "btn-sm": true,
+                      "btn-close": true,
                       centered: this.centeredAlignVariant
                     })}
                     @click="${() => this.requestClose("close-button")}"
+                    aria-label="close modal"
                   >
-                  </sgds-closebutton>
+                  </button>
                 </h3>
               `
             : ""}

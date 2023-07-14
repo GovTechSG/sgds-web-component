@@ -25,10 +25,11 @@ describe("<sgds-toast>", () => {
           <slot name="icon"></slot>
           <strong class="me-auto">Title</strong>
           <small class="text-muted me-2"><slot name="duration"></slot></small>
-          <sgds-closebutton
-            closeLabel="Close the Toast"
+          <button
+            class="btn-sm btn-close"
+            aria-label="close toast"
             data-dismiss="toast"
-          ></sgds-closebutton>
+          ></button>
         </div>
         <div class="toast-body"><slot></slot></div>
       </div>
