@@ -116,7 +116,7 @@ describe("<Alert>", () => {
     const onCloseSpy = sinon.spy();
     el.addEventListener("sgds-hide", onCloseSpy);
 
-    const closeButton = el.shadowRoot?.querySelector("button.btn-close") as HTMLButtonElement
+    const closeButton = el.shadowRoot?.querySelector("button.btn-close") as HTMLButtonElement;
     closeButton?.click();
     await el.updateComplete;
     expect(el.show).to.be.false;

@@ -262,8 +262,7 @@ export class SgdsModal extends SgdsElement {
                     })}
                     @click="${() => this.requestClose("close-button")}"
                     aria-label="close modal"
-                  >
-                  </button>
+                  ></button>
                 </h3>
               `
             : ""}
