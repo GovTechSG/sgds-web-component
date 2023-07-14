@@ -1,32 +1,30 @@
-import { html } from "lit";
-import { property } from "lit/decorators.js";
+import { LitElement, html } from "lit";
+import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-tabpanel.scss";
+import styles from "./sgds-tab-panel.scss";
+
 let id = 0;
 
 /**
- * @summary Tab panels are used inside [tab groups](/components/tab-group) to display tabbed content.
- *
- * @since 2.0
- * @status stable
- *
+ * @summary Tab panels are used inside tab groups to display tabbed content.
  * @slot - The tab panel's content.
  *
  * @csspart base - The component's base wrapper.
  *
- * @cssproperty --padding - The tab panel's padding.
+ * @cssproperty --tab-panel-padding - The tab panel's padding.
  */
-export class SgdsTabPanel extends SgdsElement {
+@customElement("sgds-tab-panel")
+export class SgdsTabPanel extends LitElement {
   static styles = styles;
+  /**@internal */
   private readonly attrId = ++id;
+  /**@internal */
   private readonly componentId = `sgds-tab-panel-${this.attrId}`;
-
   /** The tab panel's name. */
   @property({ reflect: true }) name = "";
 
-  /** When true, the tab panel will be shown. */
+  /** When true, the tab panel will be shown. When used with tab-group, this property is already being managed */
   @property({ type: Boolean, reflect: true }) active = false;
 
   connectedCallback() {
