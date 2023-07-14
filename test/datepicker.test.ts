@@ -161,7 +161,7 @@ describe("sgds-datepicker", () => {
     expect(inputEl?.getAttribute("aria-expanded")).to.be.equal("false");
   });
 
-  it("before minDate dates should have text-muted class and not clickable to close the menu", async () => {
+  it("before minDate dates should have disabled class and not clickable to close the menu", async () => {
     const minDate = "2023-05-15T12:00:00.000Z";
     const initialDate = new Date("2023-06-22");
 
@@ -206,12 +206,12 @@ describe("sgds-datepicker", () => {
 
     expect(headerButtonElement?.innerText).contains("May 2023");
 
-    // 3. loop the td from data-day 1st till 14th, and check if all contains text-muted and click 14th
+    // 3. loop the td from data-day 1st till 14th, and check if all contains disabled and click 14th
     expect(calendarTdElement).to.exist;
     calendarTdElement?.forEach(tdButton => {
       const dataDay = tdButton.getAttribute("data-day");
       if (dataDay && parseInt(dataDay) <= 14) {
-        expect(tdButton.classList.contains("text-muted")).to.be.true;
+        expect(tdButton.classList.contains("disabled")).to.be.true;
       }
       if (dataDay && parseInt(dataDay) === 14) {
         tdButton.click();
@@ -228,7 +228,7 @@ describe("sgds-datepicker", () => {
     expect(inputElement?.getAttribute("aria-expanded")).to.be.equal("true");
   });
 
-  it("after maxDate dates should have text-muted class and not clickable to close the menu", async () => {
+  it("after maxDate dates should have disabled class and not clickable to close the menu", async () => {
     const maxDate = "2023-05-15T12:00:00.000Z";
     const initialDate = new Date("2023-06-22");
 
@@ -273,12 +273,12 @@ describe("sgds-datepicker", () => {
 
     expect(headerButtonElement?.innerText).contains("May 2023");
 
-    // 3. loop the td from 16th day till end, and check if all contains text-muted and click 16th
+    // 3. loop the td from 16th day till end, and check if all contains disabled and click 16th
     expect(calendarTdElement).to.exist;
     calendarTdElement?.forEach(tdButton => {
       const dataDay = tdButton.getAttribute("data-day");
       if (dataDay && parseInt(dataDay) >= 16) {
-        expect(tdButton.classList.contains("text-muted")).to.be.true;
+        expect(tdButton.classList.contains("disabled")).to.be.true;
       }
       if (dataDay && parseInt(dataDay) === 16) {
         tdButton.click();

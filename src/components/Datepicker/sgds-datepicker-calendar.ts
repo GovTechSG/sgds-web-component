@@ -192,7 +192,7 @@ export class SgdsDatepickerCalendar extends SgdsElement {
               class=${classMap({
                 "text-primary": isCurrentDay && isCurrentMonth && isCurrentYear,
                 "bg-primary-100": isSelected,
-                "text-muted": beforeMinDate || afterMinDate
+                disabled: beforeMinDate || afterMinDate
               })}
               style=${styleMap(beforeMinDate || afterMinDate ? { ...buttonStyles, ...mutedButtonStyle } : buttonStyles)}
               @click=${clickHandler}
