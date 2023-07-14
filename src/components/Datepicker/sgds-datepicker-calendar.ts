@@ -179,7 +179,7 @@ export class SgdsDatepickerCalendar extends SgdsElement {
           const isCurrentDay = isCurrentDate.getDate() === day;
 
           const mutedButtonStyle = {
-            cursor: "default"
+            cursor: "not-allowed"
           };
           const buttonStyles = {
             cursor: "pointer",

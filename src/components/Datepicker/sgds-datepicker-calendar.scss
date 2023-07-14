@@ -22,10 +22,11 @@
 }
 
 
-.month,
-.year {
+button.month,
+button.year {
   padding: 0;
   border: 0;
+  background-color: transparent;
   &.active,
   &:hover {
     cursor: pointer;
