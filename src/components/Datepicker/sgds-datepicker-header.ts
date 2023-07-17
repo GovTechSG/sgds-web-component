@@ -24,7 +24,7 @@ export class SgdsDatepickerHeader extends SgdsElement {
 
   /** @internal */
   @property({ attribute: false })
-  switchDate: Date;
+  displayDate: Date;
 
   /** @internal */
   @state()
@@ -32,7 +32,7 @@ export class SgdsDatepickerHeader extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.switchDate = new Date(); // Set the current date as the displayDate
+    this.displayDate = new Date(); // Set the current date as the displayDate
     this.view = "days";
   }
 
@@ -53,7 +53,7 @@ export class SgdsDatepickerHeader extends SgdsElement {
 
   /** @internal */
   private renderHeader() {
-    const { view, switchDate } = this;
+    const { view, displayDate: switchDate } = this;
 
     if (view === "months") {
       return html` ${switchDate.getFullYear()} `;
@@ -66,7 +66,7 @@ export class SgdsDatepickerHeader extends SgdsElement {
 
   /** @internal */
   private handleClickPrevious() {
-    const { view, switchDate } = this;
+    const { view, displayDate: switchDate } = this;
     const newDisplayDate = new Date(switchDate);
     newDisplayDate.setDate(1);
     if (view === "months") {
@@ -76,14 +76,14 @@ export class SgdsDatepickerHeader extends SgdsElement {
     } else {
       newDisplayDate.setMonth(newDisplayDate.getMonth() - 1);
     }
-    this.switchDate = newDisplayDate; // Update the displayDate property
+    this.displayDate = newDisplayDate; // Update the displayDate property
     // emit event to render correct view
-    this.emit("sgds-view-date", { detail: this.switchDate });
+    this.emit("sgds-view-date", { detail: this.displayDate });
   }
 
   /** @internal */
   private handleClickNext() {
-    const { view, switchDate } = this;
+    const { view, displayDate: switchDate } = this;
     const newDisplayDate = new Date(switchDate);
     newDisplayDate.setDate(1);
 
@@ -95,9 +95,9 @@ export class SgdsDatepickerHeader extends SgdsElement {
     } else {
       newDisplayDate.setMonth(newDisplayDate.getMonth() + 1);
     }
-    this.switchDate = newDisplayDate; // Update the displayDate property
+    this.displayDate = newDisplayDate; // Update the displayDate property
     //emit event to render correct view
-    this.emit("sgds-view-date", { detail: this.switchDate });
+    this.emit("sgds-view-date", { detail: this.displayDate });
   }
 
   render() {

@@ -1,11 +1,12 @@
 import { html } from "lit";
-import { customElement, eventOptions, property } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DatepickerElement } from "../../base/datepicker-dropdown-element";
 // import { SgdsCalendarHeader } from "./sgds-datepicker";
+import { SgdsInput } from "../Input";
+import "./sgds-datepicker-calendar";
+import "./sgds-datepicker-header";
 import styles from "./sgds-datepicker.scss";
-import SgdsDatepickerCalendar from "./sgds-datepicker-calendar";
-
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
 /**
@@ -17,15 +18,6 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 @customElement("sgds-datepicker")
 export class SgdsDatepicker extends DatepickerElement {
   static styles = [DatepickerElement.styles, styles];
-
-  /** Forwards classes to the native HTMLInputElement of the component. Can be used to insert any classes from bootstrap such as mt-2 */
-  @property({ reflect: true }) inputClasses?: string;
-
-  /** Forwards classes to the native HTMLButtonElement of the component. Can be used to insert any classes from bootstrap such as mt-2 */
-  @property({ reflect: true }) buttonClasses?: string;
-
-  /** Forwards classes to the non-calendar datepicker component. Can be used to insert any classes from bootstrap such as w-25 */
-  @property({ reflect: true }) datepickerClasses?: string;
 
   /** When true, adds required attribute to input element */
   @property({ type: Boolean, reflect: true }) required = false;
@@ -39,14 +31,10 @@ export class SgdsDatepicker extends DatepickerElement {
   @property({ type: String })
   view: string;
 
-  /** @internal */
-  @property({ attribute: false }) selectedStartDate?: Date;
 
   /** @internal */
   @property({ type: Array }) selectedDateRange: Date[] = [];
 
-  /** @internal */
-  @property({ attribute: false }) selectedEndDate?: Date;
 
   /** @internal */
   @property({ attribute: false }) displayDate: Date = new Date();
@@ -158,6 +146,15 @@ export class SgdsDatepicker extends DatepickerElement {
     this.hideMenu();
   }
 
+  private _handleInputChange(e: CustomEvent) {
+    // single date 
+   const target = e.target as SgdsInput
+   const value = target.value
+   this.emit("sgds-change-date", { detail : { value }})
+
+   // range date 
+   
+  }
   render() {
     const makeInputValueString = (startDate: Date, endDate: Date, dateFormat: string) => {
       if (!startDate && !endDate) return "";
@@ -231,23 +228,23 @@ export class SgdsDatepicker extends DatepickerElement {
     `;
     return html`
       <form>
-        <div class=${this.datepickerClasses}>
+        <div>
           <sgds-input
             icon=${svgIcon}
             .value=${formattedDate}
-            inputClasses="${this.inputClasses ? this.inputClasses : ""} rounded-0 rounded-start"
+            inputClasses="rounded-0 rounded-start"
             placeholder="${getPlaceholder()}"
-            id=${this.togglerId}
             aria-expanded="${this.menuIsOpen}"
             ${ref(this.myDropdown)}
-            @click=${() => this._onClickButton()}
+            @click=${() => this._onClickInput()}
             readonly
             ?required=${this.required}
             ?disabled=${this.disabled}
+            @sgds-change=${this._handleInputChange}
           ></sgds-input>
           <sgds-button
             ?disabled=${this.disabled}
-            buttonClasses="${this.buttonClasses ? this.buttonClasses : ""} rounded-0 h-100"
+            buttonClasses="rounded-0 h-100"
             type="reset"
             @click=${() => this.handleButtonResetClick()}
             >${svgEl}</sgds-button
@@ -258,7 +255,7 @@ export class SgdsDatepicker extends DatepickerElement {
             part="menu"
             @click=${(event: MouseEvent) => event.stopPropagation()}
           >
-            <sgds-datepicker-header .view=${this.view} .switchDate=${this.displayDate}></sgds-datepicker-header>
+            <sgds-datepicker-header .view=${this.view} .displayDate=${this.displayDate}></sgds-datepicker-header>
             <sgds-datepicker-calendar
               .view=${this.view}
               .displayDate=${this.displayDate}
