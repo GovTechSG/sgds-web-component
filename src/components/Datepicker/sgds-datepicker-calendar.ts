@@ -38,6 +38,11 @@ export class SgdsDatepickerCalendar extends SgdsElement {
   /** @internal */
   @state() view = "days";
 
+  /** @internal */
+  private resetSelectedDate() {
+    this.selectedDate = [];
+  }
+
   connectedCallback() {
     super.connectedCallback();
   }
@@ -165,11 +170,7 @@ export class SgdsDatepickerCalendar extends SgdsElement {
           const date = new Date(year, month, day, 12, 0, 0, 0).toISOString();
           const isCurrentDate = new Date();
 
-          const isSelected =
-            selectedDates.length > 0 &&
-            (rangeSelectedDates.some(d => Date.parse(date) === Date.parse(d.toISOString())) ||
-              Date.parse(date) === Date.parse(selectedDates[0].toISOString()));
-
+        
           const beforeMinDate = minimumDate && Date.parse(date) < Date.parse(minimumDate.toISOString());
           const afterMinDate = maximumDate && Date.parse(date) > Date.parse(maximumDate.toISOString());
           const clickHandler = beforeMinDate || afterMinDate ? undefined : this.onClickDay;
@@ -177,6 +178,13 @@ export class SgdsDatepickerCalendar extends SgdsElement {
           const isCurrentMonth = isCurrentDate.getMonth() === this.displayDate.getMonth();
           const isCurrentYear = isCurrentDate.getFullYear() === this.displayDate.getFullYear();
           const isCurrentDay = isCurrentDate.getDate() === day;
+
+          const isSelected =
+            selectedDates.length > 0 &&
+            (rangeSelectedDates.some(d => Date.parse(date) === Date.parse(d.toISOString())) ||
+              Date.parse(date) === Date.parse(selectedDates[0].toISOString()));
+
+       
 
           const mutedButtonStyle = {
             cursor: "not-allowed"

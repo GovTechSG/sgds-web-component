@@ -330,7 +330,6 @@ describe("sgds-datepicker", () => {
     await elementUpdated(datepickerCalendar);
 
     expect(datepickerCalendar.view).to.equal("years");
-   
 
     await waitUntil(() => datepickerCalendar.view === "years");
 
@@ -366,22 +365,20 @@ describe("sgds-datepicker", () => {
       "tbody td"
     ) as NodeListOf<HTMLTableCellElement>;
 
-      // 3. loop the td from 16th day till end, and check if all contains disabled and click 16th
-  
-      calendarTdElement?.forEach(tdButton => {
-        const dataDay = tdButton.getAttribute("data-day");
-        if (dataDay && parseInt(dataDay) === 16) {
-          tdButton.click();
-        }
-      });
+    // 3. loop the td from 16th day till end, and check if all contains disabled and click 16th
 
-      await elementUpdated(datepickerHeader);
-      await elementUpdated(el);
-      await elementUpdated(datepickerCalendar);
+    calendarTdElement?.forEach(tdButton => {
+      const dataDay = tdButton.getAttribute("data-day");
+      if (dataDay && parseInt(dataDay) === 16) {
+        tdButton.click();
+      }
+    });
 
+    await elementUpdated(datepickerHeader);
+    await elementUpdated(el);
+    await elementUpdated(datepickerCalendar);
 
-      expect(inputElement?.value).to.equal("16/06/2020");
-  
+    expect(inputElement?.value).to.equal("16/06/2020");
   });
 
   it("displays the correct date format in the placeholder by default", async () => {

@@ -4,6 +4,7 @@ import { ref } from "lit/directives/ref.js";
 import { DatepickerElement } from "../../base/datepicker-dropdown-element";
 // import { SgdsCalendarHeader } from "./sgds-datepicker";
 import styles from "./sgds-datepicker.scss";
+import SgdsDatepickerCalendar from "./sgds-datepicker-calendar";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -101,6 +102,7 @@ export class SgdsDatepicker extends DatepickerElement {
       this.selectedDateRange = [startDate, endDate];
       this.selectedDateRange.sort((a, b) => a.getTime() - b.getTime());
     }
+
   }
 
   disconnectedCallback() {
@@ -149,6 +151,12 @@ export class SgdsDatepicker extends DatepickerElement {
   /** @internal */
   private handleSelectYear(event: CustomEvent<Date>) {
     this.displayDate = event.detail;
+  }
+
+  private handleButtonResetClick() {
+    this.displayDate = new Date();
+    this.selectedDateRange = [];
+    this.hideMenu();
   }
 
   render() {
@@ -242,7 +250,7 @@ export class SgdsDatepicker extends DatepickerElement {
             ?disabled=${this.disabled}
             buttonClasses="${this.buttonClasses ? this.buttonClasses : ""} rounded-0 h-100"
             type="reset"
-            @click=${() => this.hideMenu()}
+            @click=${() => this.handleButtonResetClick()}
             >${svgEl}</sgds-button
           >
           <ul
