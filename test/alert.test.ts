@@ -2,8 +2,6 @@ import { assert, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 import { SgdsAlert, SgdsAlertHeading, SgdsAlertLink } from "../src/components/Alert";
-import "../src/components/Alert/sgds-alert";
-import { SgdsCloseButton } from "../src/components/CloseButton";
 
 describe("<sgds-alert-heading>", () => {
   it("is defined", () => {
@@ -113,12 +111,12 @@ describe("<Alert>", () => {
     assert.isTrue(alert?.classList.contains("alert-primary"));
   });
 
-  it("Should emit the sgds-hide event on dismiss click of sgds-closebutton", async () => {
+  it("Should emit the sgds-hide event on dismiss click of close button", async () => {
     const el = await fixture<SgdsAlert>(html`<sgds-alert show dismissible></sgds-alert>`);
     const onCloseSpy = sinon.spy();
     el.addEventListener("sgds-hide", onCloseSpy);
 
-    const closeButton = el.shadowRoot?.querySelector("button.btn-close") as SgdsCloseButton;
+    const closeButton = el.shadowRoot?.querySelector("button.btn-close") as HTMLButtonElement;
     closeButton?.click();
     await el.updateComplete;
     expect(el.show).to.be.false;

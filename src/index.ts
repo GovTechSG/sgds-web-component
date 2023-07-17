@@ -17,7 +17,6 @@ export * from "./components/Table";
 export * from "./components/Breadcrumb";
 export * from "./components/Stepper";
 export * from "./components/Alert";
-export * from "./components/CloseButton";
 export * from "./components/Toast";
 export * from "./components/FileUpload";
 export * from "./components/Accordion";
