@@ -295,7 +295,7 @@ describe("sgds-datepicker", () => {
     expect(inputElement?.getAttribute("aria-expanded")).to.be.equal("true");
   });
 
-  it("should be able to click and iterate through the calendar views and select the dates", async () => {
+  it("should be able to click and iterate through the calendar views and select the date 16/06/2020", async () => {
     const el = await fixture(html`<sgds-datepicker></sgds-datepicker>`);
 
     // 1.  click the input to open menu, check menu should open
@@ -307,7 +307,6 @@ describe("sgds-datepicker", () => {
     const headerPreviousElement = datepickerHeader.shadowRoot?.querySelectorAll("button")[0] as HTMLButtonElement;
 
     const calendarYearElement = datepickerCalendar.shadowRoot?.querySelectorAll("button.year")[1] as HTMLButtonElement;
-
 
     const headerButtonElement = datepickerHeader.shadowRoot?.querySelectorAll(
       "div.datepicker-header>div.text-center>button"
@@ -331,90 +330,58 @@ describe("sgds-datepicker", () => {
     await elementUpdated(datepickerCalendar);
 
     expect(datepickerCalendar.view).to.equal("years");
-    ///
-
-    // expect(headerButtonElement?.innerText).to("2018 - 2029");
-    // expect(headerButtonElement?.innerText).contains("2018");
-
-    //Check if the calendar year view button is displaying button "2020" and click it
+   
 
     await waitUntil(() => datepickerCalendar.view === "years");
 
-    expect(datepickerCalendar.shadowRoot?.querySelectorAll("button.year")[1] as HTMLButtonElement).to.equal("asdasacac")    
-    expect(calendarYearElement).to.equal("asdasdad");
+    const datepickerYearButtons = Array.from(
+      datepickerCalendar.shadowRoot?.querySelectorAll("button.year") as NodeListOf<HTMLButtonElement>
+    );
 
-    // let has2020YearButton = false
-    // calendarYearElement?.forEach(tdButton => {
-    //   if (tdButton.innerText.includes("2020")) {
-    //     tdButton.click();
-    //     has2020YearButton = true
-    //   }
-    // });
+    // year: loop to find button with 2020 and click it
+    for (const button of datepickerYearButtons) {
+      if (button.innerText.includes("2020")) {
+        button.click();
+        break;
+      }
+    }
 
-    // expect(has2020YearButton).to.be.true
+    await waitUntil(() => datepickerCalendar.view === "months");
 
-    //   const year2020Button = Array.from(calendarYearElement).some(button => button.innerText.includes('2020'));
-    //   expect(year2020Button).click()
+    const datepickerMonthButtons = Array.from(
+      datepickerCalendar.shadowRoot?.querySelectorAll("button.month") as NodeListOf<HTMLButtonElement>
+    );
 
-    //   expect(calendarYearElement).to.equal("")
+    // month: loop to find button with Jun and click it
+    for (const button of datepickerMonthButtons) {
+      if (button.innerText.includes("Jun")) {
+        button.click();
+        break;
+      }
+    }
 
-    //   let clickedYear2020 = false;
+    await waitUntil(() => datepickerCalendar.view === "days");
 
-    //   for (let i = 0; i < calendarYearElement.length; i++) {
-    //     const button = calendarYearElement[i];
-    //     if (button.innerText.includes("2020")) {
-    //       clickedYear2020 = true;
-    //       button.click();
+    const calendarTdElement = datepickerCalendar.shadowRoot?.querySelectorAll(
+      "tbody td"
+    ) as NodeListOf<HTMLTableCellElement>;
 
-    //       break;
-    //     }
-    //   }
+      // 3. loop the td from 16th day till end, and check if all contains disabled and click 16th
+  
+      calendarTdElement?.forEach(tdButton => {
+        const dataDay = tdButton.getAttribute("data-day");
+        if (dataDay && parseInt(dataDay) === 16) {
+          tdButton.click();
+        }
+      });
 
-    //   expect(clickedYear2020).to.be.true;
+      await elementUpdated(datepickerHeader);
+      await elementUpdated(el);
+      await elementUpdated(datepickerCalendar);
 
-    //   await elementUpdated(datepickerHeader);
-    //   await elementUpdated(datepickerCalendar);
-    //   await elementUpdated(el);
 
-    // 4.  click the calendar button month "Mar"
-    //   let clickedMonthMar = false;
-
-    //   for (let i = 0; i < calendarMonthElement.length; i++) {
-    //     const button = calendarMonthElement[i];
-    //     if (button.innerText.includes("Mar")) {
-    //       clickedMonthMar = true;
-    //       button.click();
-    //       break;
-    //     }
-    //   }
-
-    //   expect(clickedMonthMar).to.be.true;
-    //   await elementUpdated(datepickerHeader);
-    //   await elementUpdated(datepickerCalendar);
-    //   await elementUpdated(el);
-
-    //   // 5.  click the calendar td day "7"
-
-    //   let clickedDay7 = false;
-    //   calendarTdElement?.forEach(tdButton => {
-    //     const dataDay = tdButton.getAttribute("data-day");
-    //     if (dataDay && parseInt(dataDay) === 7) {
-    //       clickedDay7 = true;
-    //       tdButton.click();
-    //     }
-    //   });
-
-    //   expect(clickedDay7).to.be.true;
-    //   await elementUpdated(datepickerHeader);
-    //   await elementUpdated(datepickerCalendar);
-    //   await elementUpdated(el);
-
-    //   // 6.  check menu should close
-    //   expect(menuElement?.classList.contains("show")).to.be.false;
-    //   expect(inputElement?.getAttribute("aria-expanded")).to.be.equal("false");
-
-    //   // 7.  check input value should be populated to 07/03/2020
-    //   expect(inputElement?.value).to.equal("07/03/2020");
+      expect(inputElement?.value).to.equal("16/06/2020");
+  
   });
 
   it("displays the correct date format in the placeholder by default", async () => {
