@@ -102,7 +102,6 @@ export class SgdsDatepicker extends DatepickerElement {
       this.selectedDateRange = [startDate, endDate];
       this.selectedDateRange.sort((a, b) => a.getTime() - b.getTime());
     }
-
   }
 
   disconnectedCallback() {

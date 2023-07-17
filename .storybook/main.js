@@ -24,7 +24,8 @@ const V1_0_0_rc = [
   "Toast",
   "Dropdown",
   "Spinner",
-  "Tab"
+  "Tab",
+  "Datepicker"
 ];
 
 const componentStories = () => {

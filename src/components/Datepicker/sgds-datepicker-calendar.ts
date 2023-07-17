@@ -170,7 +170,6 @@ export class SgdsDatepickerCalendar extends SgdsElement {
           const date = new Date(year, month, day, 12, 0, 0, 0).toISOString();
           const isCurrentDate = new Date();
 
-        
           const beforeMinDate = minimumDate && Date.parse(date) < Date.parse(minimumDate.toISOString());
           const afterMinDate = maximumDate && Date.parse(date) > Date.parse(maximumDate.toISOString());
           const clickHandler = beforeMinDate || afterMinDate ? undefined : this.onClickDay;
@@ -183,8 +182,6 @@ export class SgdsDatepickerCalendar extends SgdsElement {
             selectedDates.length > 0 &&
             (rangeSelectedDates.some(d => Date.parse(date) === Date.parse(d.toISOString())) ||
               Date.parse(date) === Date.parse(selectedDates[0].toISOString()));
-
-       
 
           const mutedButtonStyle = {
             cursor: "not-allowed"
