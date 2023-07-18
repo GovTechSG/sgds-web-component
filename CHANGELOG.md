@@ -1,7 +1,36 @@
+## v1.0.0-rc.2 (2023-07-18)
+
+### Feat
+
+- **drawer**: fix noHeader attribute
+- **drawer**: add drawer component
+- **badge**: add badgeClasses prop
+
+### Fix
+
+- *****: merge conflic
+- **drawer**: add padding and center align close btn
+- **drawer**: add export default
+- **react**: patch react lib
+
+### Refactor
+
+- **drawer, tab**: patch new components
+- **drawer**: replace close button compnent with html button
+- **close button**: remove component and replace dependencies with html button.btn-close.btn-sm
+- *****: custom element registration brought out to component.ts
+- **tab**: cleanup
+- **tab**: remove activation prop and scrolling behaviour
+- **tab**: file names to follow convention
+- **tab-group,tab**: stylings done
+- **tab**: establish stylings for the 3 kinds of tabs
+- **tab**: refactor style wip
+
 ## v1.0.0-rc.1 (2023-07-04)
 
 ### Feat
 
+- **stepper**: add method to retrieve slot elements
 - **toast-container**: component to position toasts
 - **toast**: add fade animation for show and hide of toast
 - **alert**: add alert-link and header component
@@ -24,6 +53,8 @@
 
 ### Refactor
 
+- **tab-group**: remove placement
+- **stepper**: remove slot and expose return component method
 - **toast**: remove arialabel prop, write static value of aria label for close button
 - **toast**: replace sl-icon with slots icon
 - **breadcrumb**: jsdocs, remove separator css content in favour of slot
