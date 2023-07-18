@@ -25,7 +25,7 @@ const V1_0_0_rc = [
   "Table",
   "Textarea",
   "Toast",
-  "Tooltip",
+  "Tooltip"
 ];
 
 const componentStories = () => {
