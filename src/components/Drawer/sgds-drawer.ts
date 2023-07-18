@@ -34,9 +34,9 @@ import styles from "./sgds-drawer.scss";
  * @csspart overlay - The overlay that covers the screen behind the drawer.
  * @csspart panel - The drawer's panel (where the drawer and its content are rendered).
  * @csspart header - The drawer's header. This element wraps the title and header actions.
- * @csspart header-actions - Optional actions to add to the header. Works best with `<sgds-icon-button>`.
+ * @csspart header-actions - Optional actions to add to the header.
  * @csspart title - The drawer's title.
- * @csspart close-button - The close button, an `<sgds-icon-button>`.
+ * @csspart close-button - The close button.
  * @csspart body - The drawer's body.
  * @csspart footer - The drawer's footer.
  *
