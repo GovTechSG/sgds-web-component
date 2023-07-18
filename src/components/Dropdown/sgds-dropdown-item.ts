@@ -1,11 +1,10 @@
 import { html } from "lit";
-import { customElement, query } from "lit/decorators.js";
+import { query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import LinkElement from "../../base/link-element";
 /**
  * @summary `SgdsDropdownItem` are navigation links built with `HTMLAnchorElement`. It should be used in the default slot of `SgdsDropdown`
  */
-@customElement("sgds-dropdown-item")
 export class SgdsDropdownItem extends LinkElement {
   static styles = [LinkElement.styles];
 

@@ -1,4 +1,4 @@
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 /**
@@ -6,7 +6,6 @@ import SgdsElement from "../../base/sgds-element";
  *
  * @slot default - The text content of the anchor element
  */
-@customElement("sgds-alert-heading")
 export class SgdsAlertHeading extends SgdsElement {
   static styles = [SgdsElement.styles];
 

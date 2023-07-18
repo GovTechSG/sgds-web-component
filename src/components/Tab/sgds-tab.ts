@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
@@ -18,7 +18,6 @@ let id = 0;
  * @csspart base - The base wrapper of tab
  * @cssproperty  --tab-theme-color - The theme colour for tab. Defaults to `--sgds-primary`
  */
-@customElement("sgds-tab")
 export class SgdsTab extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
   /**@internal */

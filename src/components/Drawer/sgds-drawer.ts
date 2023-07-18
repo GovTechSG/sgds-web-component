@@ -1,14 +1,14 @@
-import { animateTo, stopAnimations } from "../../utils/animate.js";
-import { classMap } from "lit/directives/class-map.js";
-import { customElement, property, query } from "lit/decorators.js";
-import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry.js";
-import { HasSlotController } from "../../utils/slot.js";
 import { html, nothing } from "lit";
+import { property, query } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
-import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
-import { waitForEvent } from "../../utils/event.js";
-import { watch } from "../../utils/watch.js";
 import SgdsElement from "../../base/sgds-element";
+import { animateTo, stopAnimations } from "../../utils/animate.js";
+import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry.js";
+import { waitForEvent } from "../../utils/event.js";
+import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
+import { HasSlotController } from "../../utils/slot.js";
+import { watch } from "../../utils/watch.js";
 import styles from "./sgds-drawer.scss";
 
 /**
@@ -34,9 +34,9 @@ import styles from "./sgds-drawer.scss";
  * @csspart overlay - The overlay that covers the screen behind the drawer.
  * @csspart panel - The drawer's panel (where the drawer and its content are rendered).
  * @csspart header - The drawer's header. This element wraps the title and header actions.
- * @csspart header-actions - Optional actions to add to the header. Works best with `<sgds-icon-button>`.
+ * @csspart header-actions - Optional actions to add to the header.
  * @csspart title - The drawer's title.
- * @csspart close-button - The close button, an `<sgds-icon-button>`.
+ * @csspart close-button - The close button.
  * @csspart body - The drawer's body.
  * @csspart footer - The drawer's footer.
  *
@@ -46,7 +46,6 @@ import styles from "./sgds-drawer.scss";
  * @cssproperty --sgds-drawer-background-color - The drawer's background color.
  * @cssproperty --sgds-drawer-button-gap - The drawer's flex gap between buttons.
  */
-@customElement("sgds-drawer")
 export class SgdsDrawer extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
@@ -246,7 +245,7 @@ export class SgdsDrawer extends SgdsElement {
   }
 
   /** Shows the drawer. */
-  async show() {
+  public async show() {
     if (this.open) {
       return undefined;
     }
@@ -256,7 +255,7 @@ export class SgdsDrawer extends SgdsElement {
   }
 
   /** Hides the drawer */
-  async hide() {
+  public async hide() {
     if (!this.open) {
       return undefined;
     }

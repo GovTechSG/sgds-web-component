@@ -1,14 +1,14 @@
-import { customElement, property, query, state } from "lit/decorators.js";
-import { html } from "lit/static-html.js";
-import { ifDefined } from "lit/directives/if-defined.js";
+import { property, query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
-import styles from "./sgds-textarea.scss";
+import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { FormSubmitController, SgdsFormControl } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
+import styles from "./sgds-textarea.scss";
 
 /**
  * @summary Text areas allow for the collection of input longer than a single line.
@@ -18,7 +18,6 @@ import { watch } from "../../utils/watch";
  * @event sgds-focus - Emitted when textarea is in focus.
  * @event sgds-blur - Emitted when textarea loses focus.
  */
-@customElement("sgds-textarea")
 export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   static styles = [SgdsElement.styles, styles];
   /**@internal */

@@ -3,27 +3,6 @@ import type { ReactiveController, ReactiveControllerHost } from "lit";
 import SgdsElement from "../base/sgds-element";
 const reportValidityOverloads: WeakMap<HTMLFormElement, () => boolean> = new WeakMap();
 
-export interface FormSubmitControllerOptions {
-  /** A function that returns the form containing the form control. */
-  form: (input: unknown) => HTMLFormElement | null;
-  /** A function that returns the form control's name, which will be submitted with the form data. */
-  name: (input: unknown) => string;
-  /** A function that returns the form control's current value. */
-  value: (input: unknown) => unknown | unknown[];
-  /** A function that returns the form control's default value. */
-  defaultValue: (input: unknown) => unknown | unknown[];
-  /** A function that returns the form control's current disabled state. If disabled, the value won't be submitted. */
-  disabled: (input: unknown) => boolean;
-  /**
-   * A function that maps to the form control's reportValidity() function. When the control is invalid, this will
-   * prevent submission and trigger the browser's constraint violation warning.
-   */
-  reportValidity: (input: unknown) => boolean;
-
-  /** A function that sets the form control's value */
-  setValue: (input: unknown, value: unknown) => void;
-}
-
 export class FormSubmitController implements ReactiveController {
   host?: ReactiveControllerHost & Element;
   form?: HTMLFormElement | null;
@@ -180,6 +159,27 @@ export class FormSubmitController implements ReactiveController {
     // native submit button into the form, "click" it, then remove it to simulate a standard form submission.
     this.doAction("submit", invoker);
   }
+}
+
+export interface FormSubmitControllerOptions {
+  /** A function that returns the form containing the form control. */
+  form: (input: unknown) => HTMLFormElement | null;
+  /** A function that returns the form control's name, which will be submitted with the form data. */
+  name: (input: unknown) => string;
+  /** A function that returns the form control's current value. */
+  value: (input: unknown) => unknown | unknown[];
+  /** A function that returns the form control's default value. */
+  defaultValue: (input: unknown) => unknown | unknown[];
+  /** A function that returns the form control's current disabled state. If disabled, the value won't be submitted. */
+  disabled: (input: unknown) => boolean;
+  /**
+   * A function that maps to the form control's reportValidity() function. When the control is invalid, this will
+   * prevent submission and trigger the browser's constraint violation warning.
+   */
+  reportValidity: (input: unknown) => boolean;
+
+  /** A function that sets the form control's value */
+  setValue: (input: unknown, value: unknown) => void;
 }
 
 export interface SgdsFormControl extends SgdsElement {

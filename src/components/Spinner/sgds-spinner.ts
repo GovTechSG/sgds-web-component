@@ -1,16 +1,12 @@
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
-import { classMap } from "lit/directives/class-map.js";
 import styles from "./sgds-spinner.scss";
 
-export type SpinnerType = "border" | "grow";
-
-export type SpinnerColor = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
 /**
  * @summary Spinners notify the users that their request is being processed.
  */
-@customElement("sgds-spinner")
 export class SgdsSpinner extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
   /** The type of spinner */
@@ -35,5 +31,9 @@ export class SgdsSpinner extends SgdsElement {
     `;
   }
 }
+
+export type SpinnerColor = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
+
+export type SpinnerType = "border" | "grow";
 
 export default SgdsSpinner;

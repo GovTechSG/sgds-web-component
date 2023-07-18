@@ -1,26 +1,8 @@
-export * from "./components/Sidenav";
-export * from "./components/Radio";
-export * from "./components/Masthead";
-export * from "./components/Button";
-export * from "./components/Footer";
-export * from "./components/Mainnav";
-export * from "./components/Input";
-export * from "./components/Checkbox";
-export * from "./components/Dropdown";
-export * from "./components/Textarea";
-export * from "./components/Modal";
-export * from "./components/QuantityToggle";
-export * from "./components/Tab";
-export * from "./components/ActionCard";
-export * from "./components/Badge";
-export * from "./components/Table";
-export * from "./components/Breadcrumb";
-export * from "./components/Stepper";
-export * from "./components/Alert";
-export * from "./components/Toast";
-export * from "./components/FileUpload";
-export * from "./components/Accordion";
-export * from "./components/Tooltip";
-export * from "./components/Spinner";
-export * from "./components/Card";
-export * from "./components/Drawer";
+import * as Components from "./components";
+
+//takes all the components exported from index.ts, converts it to kebab case and register it in customElementsRegistry
+const tagNameConverter = (key: string) => key.replace(/([a-z0–9])([A-Z])/g, "$1-$2").toLowerCase();
+for (const [key, value] of Object.entries(Components)) {
+  const customElementTag = tagNameConverter(key);
+  customElements.define(customElementTag, value);
+}

@@ -1,15 +1,15 @@
 import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import styles from "./sgds-footer.scss";
+import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
+import styles from "./sgds-footer.scss";
 
-export interface Links {
-  href: string;
-  label: string;
-}
 export interface ColumnLinks {
   title: string;
   links: Links[];
+}
+export interface Links {
+  href: string;
+  label: string;
 }
 
 /**
@@ -21,7 +21,6 @@ export interface ColumnLinks {
  * @cssproperty footer-top - The component's footer-top section container.
  * @cssproperty footer-bottom - The component's footer-bottom section container.
  */
-@customElement("sgds-footer")
 export class SgdsFooter extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 

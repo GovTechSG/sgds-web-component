@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
@@ -19,7 +19,6 @@ import { SgdsTabPanel } from "./sgds-tab-panel";
  * @csspart body - The container wrapping the default slot where all `sgds-tab-panel`s are slotted.
  * @csspart nav - The container wrapping the default slot where all `sgds-tab`s are slotted.
  */
-@customElement("sgds-tab-group")
 export class SgdsTabGroup extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
   /**@internal */

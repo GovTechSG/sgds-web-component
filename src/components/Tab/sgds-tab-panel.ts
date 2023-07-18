@@ -1,5 +1,5 @@
 import { LitElement, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { watch } from "../../utils/watch";
 import styles from "./sgds-tab-panel.scss";
@@ -14,7 +14,6 @@ let id = 0;
  *
  * @cssproperty --tab-panel-padding - The tab panel's padding.
  */
-@customElement("sgds-tab-panel")
 export class SgdsTabPanel extends LitElement {
   static styles = styles;
   /**@internal */

@@ -3,11 +3,11 @@ import { html } from "lit";
 import sinon from "sinon";
 import { SgdsAlert, SgdsAlertHeading, SgdsAlertLink } from "../src/components/Alert";
 
+customElements.define("sgds-alert", SgdsAlert);
+customElements.define("sgds-alert-heading", SgdsAlertHeading);
+customElements.define("sgds-alert-link", SgdsAlertLink);
+
 describe("<sgds-alert-heading>", () => {
-  it("is defined", () => {
-    const el = document.createElement("sgds-alert-heading");
-    assert.instanceOf(el, SgdsAlertHeading);
-  });
   it("the default tag is h4", async () => {
     const el = await fixture(html`<sgds-alert-heading></sgds-alert-heading>`);
     assert.shadowDom.equal(
@@ -35,10 +35,6 @@ describe("<sgds-alert-heading>", () => {
 });
 
 describe("<sgds-alert-link>", () => {
-  it("is defined", () => {
-    const el = document.createElement("sgds-alert-link");
-    assert.instanceOf(el, SgdsAlertLink);
-  });
   it("semantically matches the DOM", async () => {
     const el = await fixture(html`<sgds-alert-link></sgds-alert-link>`);
     assert.shadowDom.equal(

@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
@@ -25,7 +25,6 @@ export interface IStepMetaData {
  * @cssproperty --sgds-stepper-theme-hover-color - Sets the theme hover color for clickable stepper marker. <br>Default value `--sgds-primary-600`
  *
  */
-@customElement("sgds-stepper")
 export class SgdsStepper extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 

@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-table.scss";
@@ -17,7 +17,6 @@ import styles from "./sgds-table.scss";
  * @cssproperty --sgds-table-hover-bg - Hovered background color for hover table
  */
 
-@customElement("sgds-table")
 export class SgdsTable extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
@@ -69,12 +68,12 @@ export class SgdsTable extends SgdsElement {
   /**
    * Populate header cells using Arrays
    */
-  @property({ type: Array }) tableHeaders = [];
+  @property({ type: Array }) tableHeaders: string[] = [];
 
   /**
    * Populate data cells using Arrays
    */
-  @property({ type: Array }) tableData = [];
+  @property({ type: Array }) tableData: Array<(string | number)[]> = [];
 
   /** @internal */
   @state() sortColumn: number | null = null;
@@ -94,7 +93,7 @@ export class SgdsTable extends SgdsElement {
   @state() clickCount = 0;
 
   /** @internal */
-  @state() originalTableData: Array<string[]> = [];
+  @state() originalTableData: Array<(string | number)[]> = [];
 
   connectedCallback() {
     super.connectedCallback();

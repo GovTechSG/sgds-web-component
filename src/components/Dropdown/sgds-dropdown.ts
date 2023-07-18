@@ -1,5 +1,6 @@
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
-import { customElement, queryAsync, property } from "lit/decorators.js";
+import { property, queryAsync } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
 import { SgdsButton } from "../Button";
@@ -21,10 +22,13 @@ export type DropdownButtonVariant =
  *
  * @csspart menu - The dropdown's menu (ul element)
  */
-@customElement("sgds-dropdown")
-export class SgdsDropdown extends DropdownElement {
+export class SgdsDropdown extends ScopedElementsMixin(DropdownElement) {
   static styles = [DropdownElement.styles];
-
+  static get scopedElements() {
+    return {
+      "sgds-button": SgdsButton
+    };
+  }
   constructor() {
     super();
     /**@internal */

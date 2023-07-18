@@ -1,13 +1,11 @@
 import { aTimeout, assert, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
-import "../src/components/Alert/sgds-alert";
 import { SgdsToast, SgdsToastContainer } from "../src/components/Toast";
+customElements.define("sgds-toast", SgdsToast);
+customElements.define("sgds-toast-container", SgdsToastContainer);
+
 describe("<sgds-toast>", () => {
-  it("it is defined", () => {
-    const el = document.createElement("sgds-toast");
-    assert.instanceOf(el, SgdsToast);
-  });
   it("semantically matches the DOM", async () => {
     const el = await fixture<SgdsToast>(html`<sgds-toast></sgds-toast>`);
     assert.shadowDom.equal(

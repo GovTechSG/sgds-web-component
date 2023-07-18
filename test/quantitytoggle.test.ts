@@ -1,23 +1,16 @@
-import { assert, expect, fixture, waitUntil } from "@open-wc/testing";
+import { expect, fixture, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
-import { SgdsButton } from "../src/components/Button";
-import "../src/components/QuantityToggle/sgds-quantity-toggle";
 import { SgdsQuantityToggle } from "../src/components/QuantityToggle/sgds-quantity-toggle";
 
-describe("sgds-quantity-toggle", () => {
-  it("is defined", () => {
-    const el = document.createElement("sgds-quantity-toggle");
-    assert.instanceOf(el, SgdsQuantityToggle);
-  });
-});
+customElements.define("sgds-quantity-toggle", SgdsQuantityToggle);
 
 describe("when minusBtn or plusBtn is clicked", () => {
   it("should decrease and increase the value by 1 respectively", async () => {
     const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="10"></sgds-quantity-toggle>`);
-    const minusBtn = el.shadowRoot?.querySelector("button[aria-label=minus-button]") as SgdsButton;
-    const plusBtn = el.shadowRoot?.querySelector("button[aria-label=plus-button]") as SgdsButton;
+    const minusBtn = el.shadowRoot?.querySelector("button[aria-label=minus-button]") as HTMLButtonElement;
+    const plusBtn = el.shadowRoot?.querySelector("button[aria-label=plus-button]") as HTMLButtonElement;
 
     minusBtn.click();
     await el.updateComplete;
@@ -49,8 +42,8 @@ describe("when step", () => {
     const el = await fixture<SgdsQuantityToggle>(
       html`<sgds-quantity-toggle value="10" step="91"></sgds-quantity-toggle>`
     );
-    const minusBtn = el.shadowRoot?.querySelector("button[aria-label=minus-button]") as SgdsButton;
-    const plusBtn = el.shadowRoot?.querySelector("button[aria-label=plus-button]") as SgdsButton;
+    const minusBtn = el.shadowRoot?.querySelector("button[aria-label=minus-button]") as HTMLButtonElement;
+    const plusBtn = el.shadowRoot?.querySelector("button[aria-label=plus-button]") as HTMLButtonElement;
 
     minusBtn.click();
     await el.updateComplete;

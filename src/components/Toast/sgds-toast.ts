@@ -1,14 +1,13 @@
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import { animateTo } from "../../utils/animate";
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
+import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
 import styles from "./sgds-toast.scss";
-import { waitForEvent } from "../../utils/event";
 
-export type ToastVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light";
 /**
  * @summary Toast allows you to convey quick messaging notifications to the user.
  *
@@ -23,7 +22,6 @@ export type ToastVariant = "primary" | "secondary" | "success" | "danger" | "war
  *
  * @cssproperty --toast-icon-margin-right - The margin-right between toast's icon and title in its header. Defaults to 0.5rem
  */
-@customElement("sgds-toast")
 export class SgdsToast extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
   /**@internal */
@@ -138,6 +136,8 @@ export class SgdsToast extends SgdsElement {
     `;
   }
 }
+
+export type ToastVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light";
 
 export default SgdsToast;
 
