@@ -39,7 +39,7 @@ module.exports = {
   stories: [
     "../stories/frameworks/**/*.stories.@(js|jsx|ts|tsx|mdx)",
     "../stories/getting-started/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../stories/components/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../stories/components/*.stories.@(js|jsx|ts|tsx|mdx)"
     // ...componentStories()
   ],
   addons: ["@storybook/addon-essentials", "@storybook/preset-scss"],
