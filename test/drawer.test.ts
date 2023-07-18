@@ -11,25 +11,25 @@ describe("<sgds-drawer>", () => {
     const el = await fixture<SgdsDrawer>(html`
       <sgds-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
+    const base = el.shadowRoot?.querySelector<HTMLElement>('[part~="base"]');
 
-    expect(base.hidden).to.be.false;
+    expect(base?.hidden).to.be.false;
   });
 
   it("should not be visible without the open attribute", async () => {
     const el = await fixture<SgdsDrawer>(
       html` <sgds-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer> `
     );
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
+    const base = el.shadowRoot?.querySelector<HTMLElement>('[part~="base"]');
 
-    expect(base.hidden).to.be.true;
+    expect(base?.hidden).to.be.true;
   });
 
   it("should emit sgds-show and sgds-after-show when calling show()", async () => {
     const el = await fixture<SgdsDrawer>(html`
       <sgds-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
+    const base = el.shadowRoot?.querySelector<HTMLElement>('[part~="base"]');
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -42,14 +42,14 @@ describe("<sgds-drawer>", () => {
 
     expect(showHandler).to.have.been.calledOnce;
     expect(afterShowHandler).to.have.been.calledOnce;
-    expect(base.hidden).to.be.false;
+    expect(base?.hidden).to.be.false;
   });
 
   it("should emit sgds-hide and sgds-after-hide when calling hide()", async () => {
     const el = await fixture<SgdsDrawer>(html`
       <sgds-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
+    const base = el.shadowRoot?.querySelector<HTMLElement>('[part~="base"]');
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -62,14 +62,14 @@ describe("<sgds-drawer>", () => {
 
     expect(hideHandler).to.have.been.calledOnce;
     expect(afterHideHandler).to.have.been.calledOnce;
-    expect(base.hidden).to.be.true;
+    expect(base?.hidden).to.be.true;
   });
 
   it("should emit sgds-show and sgds-after-show when setting open = true", async () => {
     const el = await fixture<SgdsDrawer>(html`
       <sgds-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
+    const base = el.shadowRoot?.querySelector<HTMLElement>('[part~="base"]');
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -82,14 +82,14 @@ describe("<sgds-drawer>", () => {
 
     expect(showHandler).to.have.been.calledOnce;
     expect(afterShowHandler).to.have.been.calledOnce;
-    expect(base.hidden).to.be.false;
+    expect(base?.hidden).to.be.false;
   });
 
   it("should emit sgds-hide and sgds-after-hide when setting open = false", async () => {
     const el = await fixture<SgdsDrawer>(html`
       <sgds-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
+    const base = el.shadowRoot?.querySelector<HTMLElement>('[part~="base"]');
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -102,29 +102,29 @@ describe("<sgds-drawer>", () => {
 
     expect(hideHandler).to.have.been.calledOnce;
     expect(afterHideHandler).to.have.been.calledOnce;
-    expect(base.hidden).to.be.true;
+    expect(base?.hidden).to.be.true;
   });
 
   it("should not close when sgds-request-close is prevented", async () => {
     const el = await fixture<SgdsDrawer>(html`
       <sgds-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
-    const overlay = el.shadowRoot!.querySelector<HTMLElement>('[part~="overlay"]')!;
+    const overlay = el.shadowRoot?.querySelector<HTMLElement>('[part~="overlay"]');
 
     el.addEventListener("sgds-request-close", event => {
       event.preventDefault();
     });
-    overlay.click();
+    overlay?.click();
 
     expect(el.open).to.be.true;
   });
 
   it("should allow initial focus to be set", async () => {
     const el = await fixture<SgdsDrawer>(html` <sgds-drawer><input /></sgds-drawer> `);
-    const input = el.querySelector<HTMLInputElement>("input")!;
+    const input = el.querySelector<HTMLInputElement>("input");
     const initialFocusHandler = sinon.spy((event: InputEvent) => {
       event.preventDefault();
-      input.focus();
+      input?.focus();
     });
 
     el.addEventListener("sgds-initial-focus", initialFocusHandler);

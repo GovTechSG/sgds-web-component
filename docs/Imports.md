@@ -11,13 +11,15 @@ import "@govtechsg/sgds-web-component";
 // <sgds-button>Hello World</sgds-button>
 ```
 
-## Using the component's class
+## Using the component's class object
 
 When writing with Typescript, you might be required to type the components in certain cases. Import the component class like so. 
 Each component's Class is exported via named exports, prefixed with `Sgds`.
 
 ```js
+
 import { SgdsButton, SgdsMainnav } from "@govtechsg/sgds-web-component/components";
+
 ```
 
 ## Scoped Elements
@@ -35,6 +37,7 @@ Things to note:
 2. Define the tagName you want to assign to the component's class
 
 Example below
+
 ```jsx
 import { SgdsMasthead, SgdsMainnav, SgdsMainnavDropdown, SgdsMainnavItem } from "@govtechsg/sgds-web-component/components";
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";

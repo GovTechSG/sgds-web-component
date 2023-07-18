@@ -14,8 +14,6 @@ import styles from "./sgds-drawer.scss";
 /**
  * @summary Drawers slide in from a container to expose additional options and information.
  *
- * @dependency sgds-closebutton
- *
  * @slot - The drawer's main content.
  * @slot label - The drawer's label. Alternatively, you can use the `label` attribute.
  * @slot header-actions - Optional actions to add to the header.
@@ -247,7 +245,7 @@ export class SgdsDrawer extends SgdsElement {
   }
 
   /** Shows the drawer. */
-  async show() {
+  public async show() {
     if (this.open) {
       return undefined;
     }
@@ -257,7 +255,7 @@ export class SgdsDrawer extends SgdsElement {
   }
 
   /** Hides the drawer */
-  async hide() {
+  public async hide() {
     if (!this.open) {
       return undefined;
     }
@@ -303,14 +301,15 @@ export class SgdsDrawer extends SgdsElement {
                   </h2>
                   <div part="header-actions" class="drawer-header-actions">
                     <slot name="header-actions"></slot>
-                    <sgds-closebutton
+                    <button
                       part="close-button"
                       class=${classMap({
-                        "drawer-close": true
+                        "drawer-close": true,
+                        "btn-sm": true,
+                        "btn-close": true
                       })}
                       @click="${() => this.requestClose("close-button")}"
-                    >
-                    </sgds-closebutton>
+                    ></button>
                   </div>
                 </header>
               `

@@ -124,11 +124,12 @@ export class SgdsToast extends SgdsElement {
           <slot name="icon"></slot>
           <strong class="me-auto">${this.title}</strong>
           <small class="text-muted me-2"><slot name="duration"></slot></small>
-          <sgds-closebutton
-            closeLabel="Close the Toast"
+          <button
+            class="btn-sm btn-close"
+            aria-label="close toast"
             @click=${this.handleCloseClick}
             data-dismiss="toast"
-          ></sgds-closebutton>
+          ></button>
         </div>
         <div class="toast-body"><slot></slot></div>
       </div>
