@@ -1,3 +1,3 @@
 export * from "./sgds-tab";
-export * from "./sgds-tabpanel";
-export * from "./sgds-tabgroup";
+export * from "./sgds-tab-group";
+export * from "./sgds-tab-panel";

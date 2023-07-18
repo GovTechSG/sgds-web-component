@@ -1,11 +1,11 @@
-import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/animate";
-import { classMap } from "lit/directives/class-map.js";
-import { customElement, property, query } from "lit/decorators.js";
-import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { html } from "lit";
+import { property, query } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import SgdsElement from "../../base/sgds-element";
+import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/animate";
+import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
-import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-accordion-item.scss";
 
 /**
@@ -26,7 +26,6 @@ import styles from "./sgds-accordion-item.scss";
  * @cssprop --accordion-item-font-weight - The font weight of accordion-button when it is not collapsed
  * @cssprop --accordion-item-line-height - The line height of accordion
  */
-@customElement("sgds-accordion-item")
 export class SgdsAccordionItem extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
   /** @internal */

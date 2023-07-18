@@ -1,17 +1,17 @@
 import { html } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { unsafeSVG } from "lit/directives/unsafe-svg.js";
+import SgdsElement from "../../base/sgds-element";
 import { animateTo, stopAnimations } from "../../utils/animate";
+import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { waitForEvent } from "../../utils/event";
 import Modal from "../../utils/modal";
 import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll";
-import SgdsElement from "../../base/sgds-element";
 import { HasSlotController } from "../../utils/slot";
 import { watch } from "../../utils/watch";
-import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import styles from "./sgds-modal.scss";
-import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 
 /**
  * @summary The modal component inform users about a specific task and may contain critical information which users then have to make a decision.
@@ -42,7 +42,6 @@ import { unsafeSVG } from "lit/directives/unsafe-svg.js";
  * @cssproperty --modal-header-bottom-border-line-width - The line width of header's bottom border
  * @cssproperty --modal-overlay-background-color - The overlay's background color
  */
-@customElement("sgds-modal")
 export class SgdsModal extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
@@ -253,14 +252,16 @@ export class SgdsModal extends SgdsElement {
                   >
                     ${this.titleIcon ? withLabelIcon : ""} ${this.title}
                   </div>
-                  <sgds-closebutton
+                  <button
                     class=${classMap({
                       "modal-close": true,
+                      "btn-sm": true,
+                      "btn-close": true,
                       centered: this.centeredAlignVariant
                     })}
                     @click="${() => this.requestClose("close-button")}"
-                  >
-                  </sgds-closebutton>
+                    aria-label="close modal"
+                  ></button>
                 </h3>
               `
             : ""}
