@@ -1,6 +1,8 @@
-import { assert, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
+import {elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
 import "../src/components/Datepicker";
-import { SgdsDatepicker, SgdsDatepickerCalendar, SgdsDatepickerHeader } from "../src/components/Datepicker";
+import { SgdsDatepicker } from "../src/components/Datepicker";
+import SgdsDatepickerCalendar from "../src/components/Datepicker/sgds-datepicker-calendar";
+import SgdsDatepickerHeader from "../src/components/Datepicker/sgds-datepicker-header";
 
 describe("sgds-datepicker", () => {
   it("renders sgds-datepicker component correctly", async () => {
@@ -303,10 +305,6 @@ describe("sgds-datepicker", () => {
     const menuElement = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
     const datepickerHeader = el?.shadowRoot?.querySelector("sgds-datepicker-header") as SgdsDatepickerHeader;
     const datepickerCalendar = el?.shadowRoot?.querySelector("sgds-datepicker-calendar") as SgdsDatepickerCalendar;
-
-    const headerPreviousElement = datepickerHeader.shadowRoot?.querySelectorAll("button")[0] as HTMLButtonElement;
-
-    const calendarYearElement = datepickerCalendar.shadowRoot?.querySelectorAll("button.year")[1] as HTMLButtonElement;
 
     const headerButtonElement = datepickerHeader.shadowRoot?.querySelectorAll(
       "div.datepicker-header>div.text-center>button"
