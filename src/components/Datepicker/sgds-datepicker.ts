@@ -93,6 +93,24 @@ export class SgdsDatepicker extends DatepickerElement {
       this.selectedDateRange = [startDate, endDate];
       this.selectedDateRange.sort((a, b) => a.getTime() - b.getTime());
     }
+
+  
+    if (this.selectedDateRange && this.selectedDateRange.length > 0) {
+      // Get the formattedDate value for the selected dates
+      const formattedDate = this.makeInputValueString(
+        this.selectedDateRange[0],
+        this.selectedDateRange[1],
+        this.dateFormat
+      );
+
+      this.value = formattedDate;
+
+      this.emit("sgds-change-date", { detail: formattedDate });
+    } else {
+      // If selectedDateRange is empty, emit sgds-change-date event with an empty string
+      this.value = "";
+      this.emit("sgds-change-date", { detail: "" });
+    }
   }
 
   disconnectedCallback() {
@@ -192,6 +210,10 @@ export class SgdsDatepicker extends DatepickerElement {
   private handleButtonResetClick() {
     this.displayDate = new Date();
     this.selectedDateRange = [];
+
+    this.value = "";
+    this.emit("sgds-change-date", { detail: "" });
+
     this.hideMenu();
   }
 
