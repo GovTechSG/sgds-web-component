@@ -1,20 +1,20 @@
 import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, query } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DatepickerElement } from "../../base/datepicker-dropdown-element";
-// import { SgdsCalendarHeader } from "./sgds-datepicker";
-import { SgdsInput } from "../Input";
 import "./sgds-datepicker-calendar";
 import "./sgds-datepicker-header";
 import styles from "./sgds-datepicker.scss";
+import { live } from "lit/directives/live.js";
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
 /**
- * @summary The `DatePicker` Component is built using `Dropdown`, `FormControl` and `Button` components. By default, the Calendar points to current date and input has no value. The FormControl is a read-only input and users can only pick dates using the Calendar.
+ * @summary The `DatePicker` Component is built using `Dropdown`, `Input` and `Button` components. By default, the Calendar points to current date and input has no value. It's input is a read-only and users can only pick dates using the Calendar.
  *
- *
+ * @event sgds-change-date - Emitted when the state of datepicker's input changes
  *
  */
+
 @customElement("sgds-datepicker")
 export class SgdsDatepicker extends DatepickerElement {
   static styles = [DatepickerElement.styles, styles];
@@ -25,37 +25,40 @@ export class SgdsDatepicker extends DatepickerElement {
   /** When true, adds disabled attribute to input and button element */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
+  /** When true, adds no flip even when placement does not fit */
   @property({ type: Boolean, reflect: true, state: false }) noFlip = false;
 
   /** @internal */
   @property({ type: String })
   view: string;
 
-
   /** @internal */
   @property({ type: Array }) selectedDateRange: Date[] = [];
-
 
   /** @internal */
   @property({ attribute: false }) displayDate: Date = new Date();
 
   /** @internal */
-  @property({ attribute: false }) displayDateInput?: Date;
+  @property({ attribute: false }) displayDateInput: Date;
 
   /** The initial value range of DatePicker on first load for single & range mode. eg.'["2023-06-22", "2023-06-11"]' */
-  @property({ type: Array }) initialValue?: Date[];
+  @property({ type: Array }) initialValue: Date[];
 
   /** Date format reflected on input  */
   @property({ type: String }) dateFormat: DateFormat = "DD/MM/YYYY";
 
   /** ISO date string to set the lowest allowable date value. e.g. "2016-05-19T12:00:00.000Z" */
-  @property({ type: String }) minDate?: string;
+  @property({ type: String }) minDate: string;
 
   /** ISO date string to set the highest allowable date value. e.g. "2016-05-19T12:00:00.000Z" */
-  @property({ type: String }) maxDate?: string;
+  @property({ type: String }) maxDate: string;
 
   /** Changes DatePicker to single date selection or range date selection */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
+
+
+  /** The DatePicker input's value attribute. */
+  @property({ type: String, reflect: true }) value = ""
 
   constructor() {
     super();
@@ -99,6 +102,38 @@ export class SgdsDatepicker extends DatepickerElement {
     document.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
   }
 
+  private makeInputValueString = (startDate: Date, endDate: Date, dateFormat: string) => {
+    if (!startDate && !endDate) return "";
+
+    const formatDate = (date: Date) => {
+      if (!(date instanceof Date) || isNaN(date.getTime())) {
+        return ""; // Return an empty string if the date is not a valid Date object
+      }
+
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      const separator = "/";
+      const formattedMonth = month > 9 ? month.toString() : `0${month}`;
+      const formattedDay = day > 9 ? day.toString() : `0${day}`;
+
+      return dateFormat === "YYYY/MM/DD"
+        ? `${date.getFullYear()}${separator}${formattedMonth}${separator}${formattedDay}`
+        : dateFormat === "DD/MM/YYYY"
+        ? `${formattedDay}${separator}${formattedMonth}${separator}${date.getFullYear()}`
+        : `${formattedMonth}${separator}${formattedDay}${separator}${date.getFullYear()}`;
+    };
+
+    if (startDate && endDate) {
+      return `${formatDate(startDate)} - ${formatDate(endDate)}`;
+    }
+
+    if (startDate) {
+      return formatDate(startDate);
+    }
+
+    return "";
+  };
+
   /** @internal */
   private handleSelectDates(event: CustomEvent<Date[]>) {
     const newSelectedDates = event.detail;
@@ -118,6 +153,18 @@ export class SgdsDatepicker extends DatepickerElement {
         this.hideMenu();
       }
     }
+
+    // Get the formattedDate value for the selected dates
+    const formattedDate = this.makeInputValueString(
+      this.selectedDateRange[0],
+      this.selectedDateRange[1],
+      this.dateFormat
+    );
+
+   // Set formattedDate value as the new value for sgds-input
+    this.value = formattedDate;
+
+    this.emit("sgds-change-date", { detail: formattedDate });
   }
 
   /** @internal */
@@ -140,59 +187,19 @@ export class SgdsDatepicker extends DatepickerElement {
     this.displayDate = event.detail;
   }
 
+  /** @internal */
   private handleButtonResetClick() {
     this.displayDate = new Date();
     this.selectedDateRange = [];
     this.hideMenu();
   }
 
-  private _handleInputChange(e: CustomEvent) {
-    // single date 
-   const target = e.target as SgdsInput
-   const value = target.value
-   this.emit("sgds-change-date", { detail : { value }})
-
-   // range date 
-   
-  }
   render() {
-    const makeInputValueString = (startDate: Date, endDate: Date, dateFormat: string) => {
-      if (!startDate && !endDate) return "";
-
-      const formatDate = date => {
-        if (!(date instanceof Date) || isNaN(date.getTime())) {
-          return ""; // Return an empty string if the date is not a valid Date object
-        }
-
-        const month = date.getMonth() + 1;
-        const day = date.getDate();
-        const separator = "/";
-        const formattedMonth = month > 9 ? month.toString() : `0${month}`;
-        const formattedDay = day > 9 ? day.toString() : `0${day}`;
-
-        return dateFormat === "YYYY/MM/DD"
-          ? `${date.getFullYear()}${separator}${formattedMonth}${separator}${formattedDay}`
-          : dateFormat === "DD/MM/YYYY"
-          ? `${formattedDay}${separator}${formattedMonth}${separator}${date.getFullYear()}`
-          : `${formattedMonth}${separator}${formattedDay}${separator}${date.getFullYear()}`;
-      };
-
-      if (startDate && endDate) {
-        return `${formatDate(startDate)} - ${formatDate(endDate)}`;
-      }
-
-      if (startDate) {
-        return formatDate(startDate);
-      }
-
-      return "";
-    };
-
     let formattedDate = "";
     if (this.mode === "single") {
-      formattedDate = makeInputValueString(this.selectedDateRange[0], undefined, this.dateFormat);
+      formattedDate = this.makeInputValueString(this.selectedDateRange[0], undefined, this.dateFormat);
     } else if (this.mode === "range") {
-      formattedDate = makeInputValueString(this.selectedDateRange[0], this.selectedDateRange[1], this.dateFormat);
+      formattedDate = this.makeInputValueString(this.selectedDateRange[0], this.selectedDateRange[1], this.dateFormat);
     }
 
     const getPlaceholder = (): string => {
@@ -227,47 +234,45 @@ export class SgdsDatepicker extends DatepickerElement {
   </svg>
     `;
     return html`
-      <form>
-        <div>
-          <sgds-input
-            icon=${svgIcon}
-            .value=${formattedDate}
-            inputClasses="rounded-0 rounded-start"
-            placeholder="${getPlaceholder()}"
-            aria-expanded="${this.menuIsOpen}"
-            ${ref(this.myDropdown)}
-            @click=${() => this._onClickInput()}
-            readonly
-            ?required=${this.required}
-            ?disabled=${this.disabled}
-            @sgds-change=${this._handleInputChange}
-          ></sgds-input>
-          <sgds-button
-            ?disabled=${this.disabled}
-            buttonClasses="rounded-0 h-100"
-            type="reset"
-            @click=${() => this.handleButtonResetClick()}
-            >${svgEl}</sgds-button
-          >
-          <ul
-            class="sgds datepicker dropdown-menu"
-            role="menu"
-            part="menu"
-            @click=${(event: MouseEvent) => event.stopPropagation()}
-          >
-            <sgds-datepicker-header .view=${this.view} .displayDate=${this.displayDate}></sgds-datepicker-header>
-            <sgds-datepicker-calendar
-              .view=${this.view}
-              .displayDate=${this.displayDate}
-              .displayDateInput=${this.displayDateInput}
-              .mode=${this.mode}
-              minDate=${this.minDate}
-              maxDate=${this.maxDate}
-              .selectedDate=${this.selectedDateRange}
-            ></sgds-datepicker-calendar>
-          </ul>
-        </div>
-      </form>
+      <div>
+        <sgds-input
+          id="myInput"
+          icon=${svgIcon}
+          .value=${live(formattedDate)}
+          inputClasses="rounded-0 rounded-start"
+          placeholder="${getPlaceholder()}"
+          aria-expanded="${this.menuIsOpen}"
+          ${ref(this.myDropdown)}
+          @click=${() => this._onClickInput()}
+          readonly
+          ?required=${this.required}
+          ?disabled=${this.disabled}
+        ></sgds-input>
+        <sgds-button
+          ?disabled=${this.disabled}
+          buttonClasses="rounded-0 h-100"
+          type="reset"
+          @click=${() => this.handleButtonResetClick()}
+          >${svgEl}</sgds-button
+        >
+        <ul
+          class="sgds datepicker dropdown-menu"
+          role="menu"
+          part="menu"
+          @click=${(event: MouseEvent) => event.stopPropagation()}
+        >
+          <sgds-datepicker-header .view=${this.view} .displayDate=${this.displayDate}></sgds-datepicker-header>
+          <sgds-datepicker-calendar
+            .view=${this.view}
+            .displayDate=${this.displayDate}
+            .displayDateInput=${this.displayDateInput}
+            .mode=${this.mode}
+            minDate=${this.minDate}
+            maxDate=${this.maxDate}
+            .selectedDate=${this.selectedDateRange}
+          ></sgds-datepicker-calendar>
+        </ul>
+      </div>
     `;
   }
 }

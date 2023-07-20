@@ -38,10 +38,6 @@ export class SgdsDatepickerCalendar extends SgdsElement {
   /** @internal */
   @state() view = "days";
 
-  /** @internal */
-  private resetSelectedDate() {
-    this.selectedDate = [];
-  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -76,7 +72,6 @@ export class SgdsDatepickerCalendar extends SgdsElement {
   private onClickDay(event: MouseEvent) {
     const day = (event.currentTarget as HTMLTableCellElement).dataset.day;
     const displayDateClone = new Date(this.displayDate);
-    console.log(displayDateClone);
     displayDateClone.setDate(parseInt(day));
 
     if (this.mode === "single") {
@@ -86,6 +81,7 @@ export class SgdsDatepickerCalendar extends SgdsElement {
 
       // Emit event with selected date
       this.emit("sgds-selectdates", { detail: this.selectedDate });
+      
     } else if (this.mode === "range") {
       // Range mode: Select a range of dates
       const selectedDates = [...this.selectedDate];

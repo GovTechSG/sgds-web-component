@@ -15,9 +15,9 @@ export type DropDirection = "left" | "right" | "up" | "down";
 
 /**
  * @event sgds-show - Emitted event when show instance is called
- * @event sgds-after-show - Emitted event when dropdown has been made visible to the user and CSS transitions have completed
+ * @event sgds-after-show - Emitted event when datepicker calendar has been made visible to the user and CSS transitions have completed
  * @event sgds-hide - Emitted event when hide instance is called
- * @event sgds-after-hide - Emitted event when dropdown has hidden to the user and CSS transitions have completed
+ * @event sgds-after-hide - Emitted event when datepicker calendar has hidden to the user and CSS transitions have completed
  */
 
 export class DatepickerElement extends SgdsElement {
@@ -45,6 +45,7 @@ export class DatepickerElement extends SgdsElement {
   /** @internal */
   @state()
   dropdownConfig: Partial<Popper.Options>;
+
   /** @internal */
   @state()
   modifierOpt: StrictModifiers[] = [];
@@ -93,16 +94,17 @@ export class DatepickerElement extends SgdsElement {
 
     this.addEventListener("keydown", this._handleKeyboardEvent);
   }
-  /** When invoked, opens the dropdown menu */
+  /** When invoked, opens the Datepicker menu */
   public showMenu() {
     this.bsDropdown.show();
   }
 
-  /** When invoked, hides the dropdown menu */
+  /** When invoked, hides the Datepicker menu */
   public hideMenu() {
     this.bsDropdown.hide();
   }
 
+  
   _onClickInput() {
     this.bsDropdown.toggle();
   }
