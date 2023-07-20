@@ -9,7 +9,6 @@ import SgdsElement from "./sgds-element";
 const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
 const ESC = "Escape";
-const ENTER = "Enter";
 
 export type DropDirection = "left" | "right" | "up" | "down";
 
@@ -104,7 +103,6 @@ export class DatepickerElement extends SgdsElement {
     this.bsDropdown.hide();
   }
 
-  
   _onClickInput() {
     this.bsDropdown.toggle();
   }
