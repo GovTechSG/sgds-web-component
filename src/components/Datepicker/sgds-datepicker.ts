@@ -1,15 +1,16 @@
 import { html } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DatepickerElement } from "../../base/datepicker-dropdown-element";
 import "./sgds-datepicker-calendar";
 import "./sgds-datepicker-header";
 import styles from "./sgds-datepicker.scss";
 import { live } from "lit/directives/live.js";
+
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
 /**
- * @summary The `DatePicker` Component is built using `Dropdown`, `Input` and `Button` components. By default, the Calendar points to current date and input has no value. It's input is a read-only and users can only pick dates using the Calendar.
+ * @summary The `DatePicker` Component is built using `Dropdown`, `Input` and `Button` components. By default, the Calendar points to current date and input has no value. The input is a read-only and users can only pick dates using the Calendar.
  *
  * @event sgds-change-date - Emitted when the state of datepicker's input changes
  *
@@ -56,9 +57,8 @@ export class SgdsDatepicker extends DatepickerElement {
   /** Changes DatePicker to single date selection or range date selection */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
 
-
   /** The DatePicker input's value attribute. */
-  @property({ type: String, reflect: true }) value = ""
+  @property({ type: String, reflect: true }) value = "";
 
   constructor() {
     super();
@@ -102,6 +102,7 @@ export class SgdsDatepicker extends DatepickerElement {
     document.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
   }
 
+  /** @internal */
   private makeInputValueString = (startDate: Date, endDate: Date, dateFormat: string) => {
     if (!startDate && !endDate) return "";
 
@@ -161,7 +162,7 @@ export class SgdsDatepicker extends DatepickerElement {
       this.dateFormat
     );
 
-   // Set formattedDate value as the new value for sgds-input
+    // Set formattedDate value as the new value for sgds-input
     this.value = formattedDate;
 
     this.emit("sgds-change-date", { detail: formattedDate });

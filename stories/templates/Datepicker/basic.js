@@ -4,24 +4,26 @@ export const Template = ({
   noFlip,
   initialValue,
   required,
-  buttonClasses,
-  inputClasses,
   minDate,
   maxDate,
   dateFormat,
-  disabled
+  disabled,
+  menuAlighRight,
+  mode,
+  value
 }) =>
   html`
     <sgds-datepicker
-      .noFlip=${noFlip}
+      ?noFlip=${noFlip}
       .initialValue=${initialValue}
-      .required=${required}
-      .buttonClasses=${buttonClasses}
-      .inputClasses=${inputClasses}
+      ?required=${required}
       .minDate=${minDate}
       .maxDate=${maxDate}
       .dateFormat=${dateFormat}
-      .disabled=${disabled}
+      ?disabled=${disabled}
+      ?menuAlignRight=${menuAlighRight}
+      .mode=${mode}
+      .value=${value}
     >
     </sgds-datepicker>
   `;

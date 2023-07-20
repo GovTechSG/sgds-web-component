@@ -38,7 +38,6 @@ export class SgdsDatepickerCalendar extends SgdsElement {
   /** @internal */
   @state() view = "days";
 
-
   connectedCallback() {
     super.connectedCallback();
   }
@@ -81,7 +80,6 @@ export class SgdsDatepickerCalendar extends SgdsElement {
 
       // Emit event with selected date
       this.emit("sgds-selectdates", { detail: this.selectedDate });
-      
     } else if (this.mode === "range") {
       // Range mode: Select a range of dates
       const selectedDates = [...this.selectedDate];

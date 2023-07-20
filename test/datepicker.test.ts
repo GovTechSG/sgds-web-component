@@ -1,4 +1,4 @@
-import {elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
+import { elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
 import "../src/components/Datepicker";
 import { SgdsDatepicker } from "../src/components/Datepicker";
 import SgdsDatepickerCalendar from "../src/components/Datepicker/sgds-datepicker-calendar";
