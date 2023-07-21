@@ -14,6 +14,9 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  *
  * @event sgds-change-date - Emitted when the state of datepicker's input changes
  *
+ * @cssproperty --datepicker-theme-color - Datepicker's overall theme color
+ * @cssproperty --datepicker-hover-background-color - Datepicker's calendar menu hover color 
+ * @cssproperty --datepicker-background-color - Datepicker's menu background color
  */
 
 @customElement("sgds-datepicker")
@@ -94,7 +97,6 @@ export class SgdsDatepicker extends DatepickerElement {
       this.selectedDateRange.sort((a, b) => a.getTime() - b.getTime());
     }
 
-  
     if (this.selectedDateRange && this.selectedDateRange.length > 0) {
       // Get the formattedDate value for the selected dates
       const formattedDate = this.makeInputValueString(

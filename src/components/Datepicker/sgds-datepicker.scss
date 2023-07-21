@@ -1,7 +1,9 @@
+@import './sgds-datepicker-calendar.scss';
+@import './sgds-datepicker-header.scss';
+
 :host {
-  --datepicker-border-color: #98a2b3;
-  --datepicker-font-size: 1rem;
   --datepicker-theme-color: var(--sgds-primary);
+  --datepicker-hover-background-color: var(--sgds-primary-100);
   --datepicker-background-color: white;
 }
 
@@ -17,4 +19,3 @@ sgds-input {
   flex: 1;
   margin-right: 0; /* Remove the margin on the right */
 }
-
