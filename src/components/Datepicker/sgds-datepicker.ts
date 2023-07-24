@@ -12,11 +12,14 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 /**
  * @summary The `DatePicker` Component is built using `Dropdown`, `Input` and `Button` components. By default, the Calendar points to current date and input has no value. The input is a read-only and users can only pick dates using the Calendar.
  *
- * @event sgds-change-date - Emitted when the state of datepicker's input changes
+ * @event sgds-change-date - Emitted when the state of datepicker's input changes during first load, close button reset click & date click. Date values can be accessed via event.target.value
  *
  * @cssproperty --datepicker-theme-color - Datepicker's overall theme color
- * @cssproperty --datepicker-hover-background-color - Datepicker's calendar menu hover color 
+ * @cssproperty --datepicker-hover-background-color - Datepicker's calendar menu hover color
  * @cssproperty --datepicker-background-color - Datepicker's menu background color
+ * @cssproperty --datepicker-closebutton-background-color - Datepicker's close button background color
+ * @cssproperty --datepicker-closebutton-hover-background-color - Datepicker's close button hover background color
+ * @cssproperty --datepicker-closebutton-color - Datepicker's close button color
  */
 
 @customElement("sgds-datepicker")
@@ -107,11 +110,11 @@ export class SgdsDatepicker extends DatepickerElement {
 
       this.value = formattedDate;
 
-      this.emit("sgds-change-date", { detail: formattedDate });
+      this.emit("sgds-change-date");
     } else {
       // If selectedDateRange is empty, emit sgds-change-date event with an empty string
       this.value = "";
-      this.emit("sgds-change-date", { detail: "" });
+      this.emit("sgds-change-date");
     }
   }
 
@@ -185,7 +188,7 @@ export class SgdsDatepicker extends DatepickerElement {
     // Set formattedDate value as the new value for sgds-input
     this.value = formattedDate;
 
-    this.emit("sgds-change-date", { detail: formattedDate });
+    this.emit("sgds-change-date");
   }
 
   /** @internal */
@@ -214,7 +217,7 @@ export class SgdsDatepicker extends DatepickerElement {
     this.selectedDateRange = [];
 
     this.value = "";
-    this.emit("sgds-change-date", { detail: "" });
+    this.emit("sgds-change-date");
 
     this.hideMenu();
   }
@@ -273,13 +276,13 @@ export class SgdsDatepicker extends DatepickerElement {
           ?required=${this.required}
           ?disabled=${this.disabled}
         ></sgds-input>
-        <sgds-button
+        <button
           ?disabled=${this.disabled}
-          buttonClasses="rounded-0 h-100"
-          type="reset"
+          class="btn sgds rounded-0 d-flex align-items-center"
           @click=${() => this.handleButtonResetClick()}
-          >${svgEl}</sgds-button
         >
+          ${svgEl}
+        </button>
         <ul
           class="sgds datepicker dropdown-menu"
           role="menu"
