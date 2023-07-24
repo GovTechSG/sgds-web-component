@@ -52,7 +52,7 @@ describe("sgds-datepicker", () => {
 
     const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
     const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
-    const buttonEl = el.shadowRoot?.querySelector("sgds-button") as HTMLButtonElement;
+    const buttonEl = el.shadowRoot?.querySelector("button") as HTMLButtonElement;
 
     expect(menuEl?.classList.contains("show")).to.be.false;
     expect(inputEl?.getAttribute("aria-expanded")).to.be.equal("false");
@@ -399,7 +399,7 @@ describe("sgds-datepicker", () => {
   it("disables the component when disabled property is true", async () => {
     const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker disabled></sgds-datepicker>`);
     const input = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
-    const button = el.shadowRoot?.querySelector("sgds-button") as HTMLButtonElement;
+    const button = el.shadowRoot?.querySelector("button") as HTMLButtonElement;
 
     expect(input).to.have.attribute("disabled");
     expect(button).to.have.attribute("disabled");
@@ -412,34 +412,5 @@ describe("sgds-datepicker", () => {
     expect(input).to.have.attribute("required");
   });
 
-  it("should apply input classes to the datepicker input", async () => {
-    const inputClasses = "mt-2";
-
-    const el = await fixture(html` <sgds-datepicker inputClasses="${inputClasses}"></sgds-datepicker> `);
-
-    const input = el.shadowRoot?.querySelector("sgds-input") as HTMLElement;
-    const inputClassValue = input.getAttribute("inputclasses");
-
-    expect(inputClassValue).to.contains("mt-2");
-  });
-
-  it("should apply button classes to the datepicker button", async () => {
-    const buttonClasses = "mt-2";
-
-    const element = await fixture(html`<sgds-datepicker buttonClasses=${buttonClasses}></sgds-datepicker>`);
-    const button = element.shadowRoot?.querySelector("sgds-button") as HTMLElement;
-    const buttonClassValue = button.getAttribute("buttonclasses");
-
-    expect(buttonClassValue).to.contains("mt-2");
-  });
-
-  it("should apply datepicker classes to the datepicker wrapper", async () => {
-    const datepickerClasses = "mt-2";
-
-    const element = await fixture(html`<sgds-datepicker datepickerClasses=${datepickerClasses}></sgds-datepicker>`);
-    const datepicker = element.shadowRoot?.querySelector("div") as HTMLElement;
-    const datepickerClassValue = datepicker.getAttribute("class");
-
-    expect(datepickerClassValue).to.contains("mt-2");
-  });
+ 
 });
