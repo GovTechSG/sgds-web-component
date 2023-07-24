@@ -1,21 +1,33 @@
-@import './sgds-datepicker-calendar.scss';
-@import './sgds-datepicker-header.scss';
+@import "./sgds-datepicker-calendar.scss";
+@import "./sgds-datepicker-header.scss";
 
 :host {
   --datepicker-theme-color: var(--sgds-primary);
   --datepicker-hover-background-color: var(--sgds-primary-100);
   --datepicker-background-color: white;
+  --datepicker-closebutton-background-color: var(--sgds-primary);
+  --datepicker-closebutton-hover-background-color: #491db6;
+  --datepicker-closebutton-color: white;
 }
 
 div {
   display: flex;
 }
 
-.datepicker{
+.datepicker {
   background-color: var(--datepicker-background-color);
 }
 
 sgds-input {
   flex: 1;
   margin-right: 0; /* Remove the margin on the right */
+}
+
+button.btn {
+  background-color: var(--datepicker-closebutton-background-color);
+  color: var(--datepicker-closebutton-color);
+  &:hover {
+    color: var(--datepicker-closebutton-color);
+    background-color: var(--datepicker-closebutton-hover-background-color);
+  }
 }
