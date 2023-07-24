@@ -411,6 +411,4 @@ describe("sgds-datepicker", () => {
 
     expect(input).to.have.attribute("required");
   });
-
- 
 });
