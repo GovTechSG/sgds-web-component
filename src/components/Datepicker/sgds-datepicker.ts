@@ -1,7 +1,7 @@
 import { html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
-import { DatepickerElement } from "../../base/datepicker-dropdown-element";
+import { DatepickerDropdownElement } from "../../base/datepicker-dropdown-element";
 import "./sgds-datepicker-calendar";
 import "./sgds-datepicker-header";
 import styles from "./sgds-datepicker.scss";
@@ -23,8 +23,8 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  */
 
 @customElement("sgds-datepicker")
-export class SgdsDatepicker extends DatepickerElement {
-  static styles = [DatepickerElement.styles, styles];
+export class SgdsDatepicker extends DatepickerDropdownElement {
+  static styles = [DatepickerDropdownElement.styles, styles];
 
   /** When true, adds required attribute to input element */
   @property({ type: Boolean, reflect: true }) required = false;

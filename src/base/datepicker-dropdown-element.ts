@@ -19,7 +19,7 @@ export type DropDirection = "left" | "right" | "up" | "down";
  * @event sgds-after-hide - Emitted event when datepicker calendar has hidden to the user and CSS transitions have completed
  */
 
-export class DatepickerElement extends SgdsElement {
+export class DatepickerDropdownElement extends SgdsElement {
   /** @internal */
   myDropdown: Ref<HTMLElement> = createRef();
   /** @internal */
@@ -122,7 +122,7 @@ export class DatepickerElement extends SgdsElement {
     }
   }
 
-  _handleClickOutOfElement(e: MouseEvent, self: DatepickerElement) {
+  _handleClickOutOfElement(e: MouseEvent, self: DatepickerDropdownElement) {
     if (!e.composedPath().includes(self)) {
       this.bsDropdown.hide();
     }
