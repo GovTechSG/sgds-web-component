@@ -2,6 +2,7 @@ import { html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-datepicker-header.scss";
+import { styleMap } from "lit/directives/style-map.js";
 
 export const MONTH_LABELS = [
   "January",
@@ -101,6 +102,9 @@ export class SgdsDatepickerHeader extends SgdsElement {
   }
 
   render() {
+    const buttonYearStyle = {
+      cursor: "default"
+    };
     return html`
       <div class="datepicker-header dropdown-header" role="heading">
         <div class="text-center d-flex justify-content-between align-items-center">
@@ -119,7 +123,9 @@ export class SgdsDatepickerHeader extends SgdsElement {
               />
             </svg>
           </button>
-          <button @click=${this.changeView}>${this.renderHeader()}</button>
+          <button @click=${this.changeView} style=${styleMap(this.view === "years" ? buttonYearStyle : {})}>
+            ${this.renderHeader()}
+          </button>
           <button @click="${this.handleClickNext}">
             <svg
               xmlns="http://www.w3.org/2000/svg"
