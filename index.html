@@ -57,6 +57,10 @@
             --sidenav-theme-color: orange;
         }
 
+        sgds-progress + sgds-progress{
+            margin-top: 8px;
+        }
+
         sgds-masthead {
             --sgds-masthead-crest-color: white;
             --sgds-masthead-text-color: red;
@@ -148,6 +152,27 @@
 
 
     <main>
+        <div class="cotainer">
+            <h2>Progress</h2>
+            <div class="row">
+                <sgds-progress height="40">
+                    <sgds-progress-bar value="50"></sgds-progress-bar>
+                </sgds-progress>
+
+                <sgds-progress height="40">
+                    <sgds-progress-bar value="50" variant="secondary"></sgds-progress-bar>
+                </sgds-progress>
+
+                <sgds-progress height="10">
+                    <sgds-progress-bar value="50" striped animated variant="danger"></sgds-progress-bar>
+                </sgds-progress>
+
+                <sgds-progress height="40">
+                    <sgds-progress-bar value="50" striped animated variant="danger" label="hey"></sgds-progress-bar>
+                </sgds-progress>
+            </div>
+            
+        </div>
         <div class="container">
             <h2>Breadcrumb</h2>
             <sgds-breadcrumb>
