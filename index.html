@@ -152,7 +152,7 @@
     <main>
         <div class="container">
             <h2>Datepicker</h2>
-            <sgds-datepicker id="myDatepicker"></sgds-datepicker>
+            <sgds-datepicker id="myDatepicker" initialValue='["2023-04-06"]' dateFormat='YYYY/MM/DD'></sgds-datepicker>
 
 <br><br><br><br><br><br><br><br><br>
             <sgds-datepicker id="myDatepicker2" mode="range" initialValue='["2023-06-22", "2023-06-11"]'></sgds-datepicker>
@@ -483,8 +483,8 @@
     
 
 const dp = document.getElementById('myDatepicker');
-let value = dp.value;
-  console.log("Value of input:", value);
+// let value = dp.value;
+//   console.log("Value of input:", value);
 
 dp.addEventListener('sgds-change-date', event => {
   console.log('Input value:', event);

@@ -6,6 +6,7 @@ import "./sgds-datepicker-calendar";
 import "./sgds-datepicker-header";
 import styles from "./sgds-datepicker.scss";
 import { live } from "lit/directives/live.js";
+import { watch } from "../../utils/watch";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -109,12 +110,9 @@ export class SgdsDatepicker extends DatepickerDropdownElement {
       );
 
       this.value = formattedDate;
-
-      this.emit("sgds-change-date");
     } else {
       // If selectedDateRange is empty, emit sgds-change-date event with an empty string
       this.value = "";
-      this.emit("sgds-change-date");
     }
   }
 
@@ -123,6 +121,11 @@ export class SgdsDatepicker extends DatepickerDropdownElement {
 
     // Remove the click event listener from the document
     document.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
+  }
+
+  @watch("value")
+  handleValueChange() {
+    this.emit("sgds-change-date");
   }
 
   /** @internal */
@@ -187,8 +190,6 @@ export class SgdsDatepicker extends DatepickerDropdownElement {
 
     // Set formattedDate value as the new value for sgds-input
     this.value = formattedDate;
-
-    this.emit("sgds-change-date");
   }
 
   /** @internal */
@@ -217,10 +218,11 @@ export class SgdsDatepicker extends DatepickerDropdownElement {
     this.selectedDateRange = [];
 
     this.value = "";
-    this.emit("sgds-change-date");
 
     this.hideMenu();
   }
+
+ 
 
   render() {
     let formattedDate = "";
