@@ -24,7 +24,7 @@ export type DropDirection = "left" | "right" | "up" | "down";
 
 export class DropdownElement extends SgdsElement {
   static styles = SgdsElement.styles;
-  @query("ul.dropdown-menu") menu: HTMLUListElement 
+  @query("ul.dropdown-menu") menu: HTMLUListElement;
   /** @internal */
   myDropdown: Ref<HTMLElement> = createRef();
   /** @internal */
@@ -172,14 +172,14 @@ export class DropdownElement extends SgdsElement {
   }
   _getMenuItems(): SgdsDropdownItem[] {
     // for case when default slot is used e.g. dropdown, mainnavdropdown
-    if (this.shadowRoot.querySelector("slot")){
-     return this.shadowRoot.querySelector("slot").assignedElements({ flatten: true }) as SgdsDropdownItem[]
+    if (this.shadowRoot.querySelector("slot")) {
+      return this.shadowRoot.querySelector("slot").assignedElements({ flatten: true }) as SgdsDropdownItem[];
     }
     // for case when there is no slot e.g. combobox
-    if (this.menu.hasChildNodes()){
-      const menuItems = this.menu.children 
+    if (this.menu.hasChildNodes()) {
+      const menuItems = this.menu.children;
 
-      return [...menuItems] as SgdsDropdownItem[]
+      return [...menuItems] as SgdsDropdownItem[];
     }
   }
 
@@ -201,7 +201,7 @@ export class DropdownElement extends SgdsElement {
     // focus or blur items depending on active or not
     items.forEach(i => {
       i.setAttribute("tabindex", i === activeItem ? "0" : "-1");
-      i === activeItem && i.focus() 
+      i === activeItem && i.focus();
     });
   }
 
