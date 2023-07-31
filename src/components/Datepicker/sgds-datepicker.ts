@@ -7,7 +7,6 @@ import "./sgds-datepicker-header";
 import styles from "./sgds-datepicker.scss";
 import { live } from "lit/directives/live.js";
 import { watch } from "../../utils/watch";
-import { defaultValue } from "../../utils/defaultvalue";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -47,12 +46,8 @@ export class SgdsDatepicker extends DatepickerDropdownElement {
   /** @internal */
   @property({ attribute: false }) displayDate: Date = new Date();
 
-  /** @internal */
-  // @property({ attribute: false }) displayDateInput: Date;
-
   /** The initial value range of DatePicker on first load for single & range mode. eg.'["2023-06-22", "2023-06-11"]' */
   @property({ type: Array, reflect: true }) initialValue: string[];
-  
 
   /** Date format reflected on input  */
   @property({ type: String }) dateFormat: DateFormat = "DD/MM/YYYY";
@@ -102,6 +97,24 @@ export class SgdsDatepicker extends DatepickerDropdownElement {
     return new Date(`${year}-${month}-${day}`);
   }
 
+  /** @internal */
+  private getDateFormatRegex(): string {
+    // validate date strings and adhere to the specified date format
+    return (
+      this.dateFormat
+        // Replace any special characters with their escaped version using "\\$&"
+        .replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+        // Replace 'MM' with '\\d{2}', which matches two digits representing the month (e.g., 01, 12)
+        .replace("MM", "\\d{2}")
+        // Replace 'DD' with '\\d{2}', which matches two digits representing the day (e.g., 01, 31)
+        .replace("DD", "\\d{2}")
+        // Replace 'YYYY' with '\\d{4}', which matches four digits representing the year (e.g., 2021)
+        .replace("YYYY", "\\d{4}")
+        // Replace '/' with '\\/', which matches the forward slash character
+        .replace("/", "\\/")
+    );
+  }
+
   connectedCallback() {
     super.connectedCallback();
 
@@ -115,7 +128,16 @@ export class SgdsDatepicker extends DatepickerDropdownElement {
     this.addEventListener("sgds-selectdates", this.handleSelectDates);
 
     if (this.initialValue && this.initialValue.length > 0) {
+      // Validate initialValue against the dateFormat regex
+      const dateFormatRegex = new RegExp(this.getDateFormatRegex());
       const startDateString = this.initialValue[0];
+
+      if (!dateFormatRegex.test(startDateString)) {
+        // Handle invalid date format in initialValue
+        console.error("Invalid date format in initialValue:", startDateString);
+        return;
+      }
+
       const startDate = this.parseDateStringToDate(startDateString);
 
       if (this.mode === "single" && startDate) {
@@ -125,6 +147,13 @@ export class SgdsDatepicker extends DatepickerDropdownElement {
       } else if (this.mode === "range" && this.initialValue.length === 2) {
         // Range mode
         const endDateString = this.initialValue[1];
+
+        if (!dateFormatRegex.test(endDateString)) {
+          // Handle invalid date format in initialValue
+          console.error("Invalid date format in initialValue:", endDateString);
+          return;
+        }
+
         const endDate = this.parseDateStringToDate(endDateString);
 
         if (startDate && endDate) {

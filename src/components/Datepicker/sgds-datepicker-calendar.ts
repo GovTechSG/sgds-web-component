@@ -41,7 +41,7 @@ export class SgdsDatepickerCalendar extends SgdsElement {
 
   /** @internal */
   @state() month: number = this.displayDate.getMonth();
-  
+
   /** @internal */
   @state() view = "days";
 

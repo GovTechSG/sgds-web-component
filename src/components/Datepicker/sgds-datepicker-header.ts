@@ -54,7 +54,7 @@ export class SgdsDatepickerHeader extends SgdsElement {
 
   /** @internal */
   private renderHeader() {
-    const { view, displayDate} = this;
+    const { view, displayDate } = this;
 
     if (view === "months") {
       return html` ${displayDate.getFullYear()} `;
