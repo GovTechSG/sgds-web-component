@@ -69,23 +69,25 @@ describe("sgds-datepicker", () => {
   });
 
   it("should pass the initialvalue to sgds-input for single mode", async () => {
-    const initialDate = new Date("2023-06-22");
-    const el = await fixture(html`<sgds-datepicker .initialValue=${[initialDate]}></sgds-datepicker>`);
+    const initialDate = '["23/11/2023"]';
+    const initialValueArray = JSON.parse(initialDate) as string[];
+    const el = await fixture(html`<sgds-datepicker .initialValue=${initialValueArray}></sgds-datepicker>`);
     const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
 
-    expect(inputEl?.value).to.equal("22/06/2023");
+    expect(inputEl?.value).to.equal("23/11/2023");
   });
 
-  it("should pass the initialvalue to sgds-input for range mode", async () => {
-    const initialDate1 = new Date("2023-06-22");
-    const initialDate2 = new Date("2023-06-11");
-    const el = await fixture(
-      html`<sgds-datepicker mode="range" .initialValue=${[initialDate1, initialDate2]}></sgds-datepicker>`
-    );
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
 
-    expect(inputEl?.value).to.equal("11/06/2023 - 22/06/2023");
-  });
+it("should pass the initialvalue to sgds-input for range mode", async () => {
+  const initialDate = '["23/11/2023", "25/11/2023"]';
+  const initialValueArray = JSON.parse(initialDate) as string[];
+  const el = await fixture(
+    html`<sgds-datepicker mode="range" .initialValue=${initialValueArray}></sgds-datepicker>`
+  );
+  const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+
+  expect(inputEl?.value).to.equal("23/11/2023 - 25/11/2023");
+});
 
   it("closes the menu when outside of the element sgds-datepicker is clicked", async () => {
     const el = await fixture(html` <sgds-datepicker></sgds-datepicker> `);
@@ -165,10 +167,11 @@ describe("sgds-datepicker", () => {
 
   it("before minDate dates should have disabled class and not clickable to close the menu", async () => {
     const minDate = "2023-05-15T12:00:00.000Z";
-    const initialDate = new Date("2023-06-22");
+    const initialDate = '["22/06/2023"]';
+    const initialValueArray = JSON.parse(initialDate) as string[];
 
     const el = await fixture(
-      html`<sgds-datepicker minDate=${minDate} .initialValue=${[initialDate]}></sgds-datepicker>`
+      html`<sgds-datepicker minDate=${minDate} .initialValue=${initialValueArray}></sgds-datepicker>`
     );
 
     // 1. click the input to open, check the menu has open
@@ -232,10 +235,11 @@ describe("sgds-datepicker", () => {
 
   it("after maxDate dates should have disabled class and not clickable to close the menu", async () => {
     const maxDate = "2023-05-15T12:00:00.000Z";
-    const initialDate = new Date("2023-06-22");
+    const initialDate = '["22/06/2023"]';
+    const initialValueArray = JSON.parse(initialDate) as string[];
 
     const el = await fixture(
-      html`<sgds-datepicker maxDate=${maxDate} .initialValue=${[initialDate]}></sgds-datepicker>`
+      html`<sgds-datepicker maxDate=${maxDate} .initialValue=${initialValueArray}></sgds-datepicker>`
     );
 
     // 1. click the input to open, check the menu has open
@@ -376,7 +380,7 @@ describe("sgds-datepicker", () => {
     await elementUpdated(el);
     await elementUpdated(datepickerCalendar);
 
-    expect(inputElement?.value).to.equal("16/06/2020");
+    expect(inputElement?.value).to.equal("16/07/2020");
   });
 
   it("displays the correct date format in the placeholder by default", async () => {
