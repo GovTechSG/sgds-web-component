@@ -9,8 +9,7 @@ export const Template = ({
   dateFormat,
   disabled,
   menuAlighRight,
-  mode,
-  value
+  mode
 }) =>
   html`
     <sgds-datepicker
@@ -23,7 +22,6 @@ export const Template = ({
       ?disabled=${disabled}
       ?menuAlignRight=${menuAlighRight}
       .mode=${mode}
-      .value=${value}
     >
     </sgds-datepicker>
   `;
