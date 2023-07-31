@@ -54,21 +54,21 @@ export class SgdsDatepickerHeader extends SgdsElement {
 
   /** @internal */
   private renderHeader() {
-    const { view, displayDate: switchDate } = this;
+    const { view, displayDate} = this;
 
     if (view === "months") {
-      return html` ${switchDate.getFullYear()} `;
+      return html` ${displayDate.getFullYear()} `;
     }
     if (view === "years") {
-      return html` ${switchDate.getFullYear() - 5} - ${switchDate.getFullYear() + 6} `;
+      return html` ${displayDate.getFullYear() - 5} - ${displayDate.getFullYear() + 6} `;
     }
-    return html` ${MONTH_LABELS[switchDate.getMonth()]} ${switchDate.getFullYear()} `;
+    return html` ${MONTH_LABELS[displayDate.getMonth()]} ${displayDate.getFullYear()} `;
   }
 
   /** @internal */
   private handleClickPrevious() {
-    const { view, displayDate: switchDate } = this;
-    const newDisplayDate = new Date(switchDate);
+    const { view, displayDate } = this;
+    const newDisplayDate = new Date(displayDate);
     newDisplayDate.setDate(1);
     if (view === "months") {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() - 1);
@@ -84,8 +84,8 @@ export class SgdsDatepickerHeader extends SgdsElement {
 
   /** @internal */
   private handleClickNext() {
-    const { view, displayDate: switchDate } = this;
-    const newDisplayDate = new Date(switchDate);
+    const { view, displayDate } = this;
+    const newDisplayDate = new Date(displayDate);
     newDisplayDate.setDate(1);
 
     newDisplayDate.setDate(1);

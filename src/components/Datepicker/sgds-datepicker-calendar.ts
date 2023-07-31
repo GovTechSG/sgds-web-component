@@ -11,30 +11,37 @@ export class SgdsDatepickerCalendar extends SgdsElement {
 
   /** @internal */
   static DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
   /** @internal */
   static daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
   /** @internal */
   static MONTHVIEW_LABELS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   /** @internal */
   @property({ type: Array }) selectedDate: Date[] = [];
+
   /** @internal */
   @property({ attribute: false }) displayDate: Date = new Date();
-  /** @internal */
-  @property({ attribute: false }) displayDateInput: Date;
+
   /** @internal */
   @property({ type: String }) minDate?: string;
+
   /** @internal */
   @property({ type: String }) maxDate?: string;
+
   /** @internal */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
+
   /** @internal */
   @property({ attribute: false }) initialValue?: Date;
 
   /** @internal */
   @state() year: number = this.displayDate.getFullYear();
+
   /** @internal */
   @state() month: number = this.displayDate.getMonth();
+  
   /** @internal */
   @state() view = "days";
 

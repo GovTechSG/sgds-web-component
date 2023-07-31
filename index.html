@@ -152,10 +152,10 @@
     <main>
         <div class="container">
             <h2>Datepicker</h2>
-            <sgds-datepicker id="myDatepicker" initialValue='["2023-04-06"]' dateFormat='YYYY/MM/DD'></sgds-datepicker>
+            <sgds-datepicker id="myDatepicker"  initialValue='["2023-11-11"]'></sgds-datepicker>
 
 <br><br><br><br><br><br><br><br><br>
-            <sgds-datepicker id="myDatepicker2" mode="range" initialValue='["2023-06-22", "2023-06-11"]'></sgds-datepicker>
+            <sgds-datepicker id="myDatepicker2" mode="range" initialValue='["2023/03/10","2023/04/13"]' dateFormat="YYYY/MM/DD"></sgds-datepicker>
         </div>
 
         <div class="container">
@@ -276,7 +276,7 @@
             <div class="row">
                 <div class="col-6 mb-2">
                     <form novalidate class="formtest">
-                        <sgds-input name="input1" id="input1" minlength="5" required value="hi" hasFeedback invalidFeedback="Minimum length 5"></sgds-input>
+                        <sgds-input name="input1" id="input1" minlength="5" required value="hiz" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
                         <sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are
                                 required to check this.</span></sgds-checkbox>
                         <sgds-checkbox name="cb2" id="cb2" value="lolol1" required>with required<span
@@ -286,7 +286,7 @@
                         <sgds-button id="submitButton" type="submit">Submit</sgds-button>
                         <sgds-input label="Name" iconName="stack" hintText="this is a hint" required pattern="test"
                             value="a"></sgds-input>
-                        <sgds-button type="submit">Submit</sgds-button>
+                        <sgds-button type="reset">Submit</sgds-button>
                     </form>
                 </div>
                 <!-- <div class="col-6 mb-2">
@@ -493,11 +493,10 @@ dp.addEventListener('sgds-change-date', event => {
 });
 
 
-const dp2 = document.getElementById('myDatepicker2');
-dp2.addEventListener('sgds-change-date', event => {
-  console.log('Input value 2:', event);
-});
-           
+// const dp2 = document.getElementById('myDatepicker2');
+// dp2.addEventListener('sgds-change-date', event => {
+//   console.log('Input value 2:', event);
+// });
            
   const input1 = document.querySelector('sgds-input#input1');
   input1.addEventListener('sgds-input', event => {

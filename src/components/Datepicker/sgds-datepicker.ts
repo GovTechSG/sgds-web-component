@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DatepickerDropdownElement } from "../../base/datepicker-dropdown-element";
 import "./sgds-datepicker-calendar";
@@ -7,6 +7,7 @@ import "./sgds-datepicker-header";
 import styles from "./sgds-datepicker.scss";
 import { live } from "lit/directives/live.js";
 import { watch } from "../../utils/watch";
+import { defaultValue } from "../../utils/defaultvalue";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -47,10 +48,11 @@ export class SgdsDatepicker extends DatepickerDropdownElement {
   @property({ attribute: false }) displayDate: Date = new Date();
 
   /** @internal */
-  @property({ attribute: false }) displayDateInput: Date;
+  // @property({ attribute: false }) displayDateInput: Date;
 
   /** The initial value range of DatePicker on first load for single & range mode. eg.'["2023-06-22", "2023-06-11"]' */
-  @property({ type: Array }) initialValue: Date[];
+  @property({ type: Array, reflect: true }) initialValue: string[];
+  
 
   /** Date format reflected on input  */
   @property({ type: String }) dateFormat: DateFormat = "DD/MM/YYYY";
@@ -64,8 +66,8 @@ export class SgdsDatepicker extends DatepickerDropdownElement {
   /** Changes DatePicker to single date selection or range date selection */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
 
-  /** The DatePicker input's value attribute. */
-  @property({ type: String, reflect: true }) value = "";
+  /** @internal */
+  @state() value: string;
 
   constructor() {
     super();
@@ -79,26 +81,59 @@ export class SgdsDatepicker extends DatepickerDropdownElement {
     ];
   }
 
+  /** @internal */
+  private parseDateStringToDate(dateString: string): Date | null {
+    let year: string, month: string, day: string;
+
+    switch (this.dateFormat) {
+      case "MM/DD/YYYY":
+        [month, day, year] = dateString.split("/");
+        break;
+      case "DD/MM/YYYY":
+        [day, month, year] = dateString.split("/");
+        break;
+      case "YYYY/MM/DD":
+        [year, month, day] = dateString.split("/");
+        break;
+      default:
+        return null;
+    }
+
+    return new Date(`${year}-${month}-${day}`);
+  }
+
   connectedCallback() {
     super.connectedCallback();
 
     // Add click event listener to the document
     document.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
 
-    this.addEventListener("sgds-view", this.handleViewChanged); // this is for mid button to change the calendar view
-    this.addEventListener("sgds-view-date", this.handleDateChanged); // this is for the left & right chevron button
+    this.addEventListener("sgds-view", this.handleViewChanged);
+    this.addEventListener("sgds-view-date", this.handleDateChanged);
     this.addEventListener("sgds-selectmonth", this.handleSelectMonth);
     this.addEventListener("sgds-selectyear", this.handleSelectYear);
     this.addEventListener("sgds-selectdates", this.handleSelectDates);
 
-    if (this.mode === "single" && this.initialValue) {
-      const startDate = new Date(this.initialValue[0]);
-      this.selectedDateRange = [startDate, undefined];
-    } else if (this.mode === "range" && this.initialValue && this.initialValue.length === 2) {
-      const startDate = new Date(this.initialValue[0]);
-      const endDate = new Date(this.initialValue[1]);
-      this.selectedDateRange = [startDate, endDate];
-      this.selectedDateRange.sort((a, b) => a.getTime() - b.getTime());
+    if (this.initialValue && this.initialValue.length > 0) {
+      const startDateString = this.initialValue[0];
+      const startDate = this.parseDateStringToDate(startDateString);
+
+      if (this.mode === "single" && startDate) {
+        // Single mode
+        this.selectedDateRange = [startDate];
+        this.displayDate = startDate;
+      } else if (this.mode === "range" && this.initialValue.length === 2) {
+        // Range mode
+        const endDateString = this.initialValue[1];
+        const endDate = this.parseDateStringToDate(endDateString);
+
+        if (startDate && endDate) {
+          this.selectedDateRange = [startDate, endDate];
+          this.selectedDateRange.sort((a, b) => a.getTime() - b.getTime());
+
+          this.displayDate = startDate;
+        }
+      }
     }
 
     if (this.selectedDateRange && this.selectedDateRange.length > 0) {
@@ -172,7 +207,6 @@ export class SgdsDatepicker extends DatepickerDropdownElement {
       if (this.selectedDateRange.length === 2) {
         this.hideMenu();
       }
-      this.displayDateInput = newSelectedDates.length > 0 ? newSelectedDates[0] : undefined;
     } else if (this.mode === "single") {
       this.selectedDateRange = [newSelectedDates[0]];
 
@@ -221,8 +255,6 @@ export class SgdsDatepicker extends DatepickerDropdownElement {
 
     this.hideMenu();
   }
-
- 
 
   render() {
     let formattedDate = "";
@@ -295,7 +327,6 @@ export class SgdsDatepicker extends DatepickerDropdownElement {
           <sgds-datepicker-calendar
             .view=${this.view}
             .displayDate=${this.displayDate}
-            .displayDateInput=${this.displayDateInput}
             .mode=${this.mode}
             minDate=${this.minDate}
             maxDate=${this.maxDate}
