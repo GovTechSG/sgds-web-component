@@ -46,7 +46,7 @@ export class SgdsDatepicker extends DatepickerDropdownElement {
   /** @internal */
   @property({ attribute: false }) displayDate: Date = new Date();
 
-  /** The initial value range of DatePicker on first load for single & range mode. eg.'["2023-06-22", "2023-06-11"]' */
+  /** The initial value of DatePicker on first load for single & range mode as array of string. eg.'["22/12/2023"]' for single & '["22/12/2023","25/12/2023"]' for range respectively  */
   @property({ type: Array, reflect: true }) initialValue: string[];
 
   /** Date format reflected on input  */
