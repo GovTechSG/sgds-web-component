@@ -4,7 +4,7 @@
 
 # sgds-web-component
 
-Project is still in development works. See https://master.d1yxrtldqtp3a0.amplifyapp.com/ for the progress of the components 
+Project is in release candidate phase. See https://v1-0-0-rc.d1yxrtldqtp3a0.amplifyapp.com/?path=/story/getting-started-installation--page for the progress of the components 
 
 # Installation Guide
 
