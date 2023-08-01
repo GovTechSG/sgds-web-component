@@ -1,11 +1,11 @@
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
-import { DropdownElement } from "../../base/dropdown-element";
 import { html } from "lit";
-import { SgdsInput } from "../Input";
+import { property } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
-import { property, query, state } from "lit/decorators.js";
+import { DropdownElement } from "../../base/dropdown-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { SgdsDropdownItem } from "../Dropdown";
+import { SgdsInput } from "../Input";
 
 export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
   static get scopedElements() {
@@ -47,10 +47,11 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
   /**Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = "";
-  @property({ type: Array }) menuList: string[] = ["one", "two", "three"];
+  @property({ type: Array }) menuList: string[] = [];
 
   private _handleInputChange(e: CustomEvent) {
     const value = (e.target as SgdsInput).value;
+    console.log(value)
   }
   render() {
     return html`
@@ -62,18 +63,6 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
           name=${this.name}
           ${ref(this.myDropdown)}
           @click=${() => this._onClickButton()}
-          icon='<svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-search"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
-            />
-          </svg>'
           placeholder=${this.placeholder}
           ?autofocus=${this.autofocus}
           ?disabled=${this.disabled}
@@ -101,7 +90,6 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
           ${this.menuList.map(
             item => html`<sgds-dropdown-item href="#" @click=${this._handleSelectSlot}>${item}</sgds-dropdown-item>`
           )}
-          <!-- <slot @click=${this._handleSelectSlot}></slot> -->
         </ul>
       </div>
     `;
