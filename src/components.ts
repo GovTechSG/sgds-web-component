@@ -7,6 +7,7 @@ export * from "./components/Breadcrumb";
 export * from "./components/Button";
 export * from "./components/Card";
 export * from "./components/Checkbox";
+export * from "./components/Datepicker";
 export * from "./components/Drawer";
 export * from "./components/Dropdown";
 export * from "./components/FileUpload";
@@ -25,3 +26,4 @@ export * from "./components/Table";
 export * from "./components/Textarea";
 export * from "./components/Toast";
 export * from "./components/Tooltip";
+

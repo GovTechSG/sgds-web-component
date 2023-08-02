@@ -1,12 +1,14 @@
 import { html } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DatepickerDropdownElement } from "../../base/datepicker-dropdown-element";
-import "./sgds-datepicker-calendar";
-import "./sgds-datepicker-header";
 import styles from "./sgds-datepicker.scss";
 import { live } from "lit/directives/live.js";
 import { watch } from "../../utils/watch";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { SgdsInput } from "../Input";
+import { SgdsDatepickerCalendar } from "./sgds-datepicker-calendar";
+import { SgdsDatepickerHeader } from "./sgds-datepicker-header";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -23,9 +25,16 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  * @cssproperty --datepicker-closebutton-color - Datepicker's close button color
  */
 
-@customElement("sgds-datepicker")
-export class SgdsDatepicker extends DatepickerDropdownElement {
+export class SgdsDatepicker extends ScopedElementsMixin(DatepickerDropdownElement) {
   static styles = [DatepickerDropdownElement.styles, styles];
+
+  static get scopedElements() {
+    return {
+      "sgds-input": SgdsInput,
+      "sgds-datepicker-calendar": SgdsDatepickerCalendar,
+      "sgds-datepicker-header": SgdsDatepickerHeader
+    };
+  }
 
   /** When true, adds required attribute to input element */
   @property({ type: Boolean, reflect: true }) required = false;

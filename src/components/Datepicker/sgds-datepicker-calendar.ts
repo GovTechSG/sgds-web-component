@@ -1,11 +1,10 @@
 import { HTMLTemplateResult, html } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { styleMap } from "lit/directives/style-map.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-datepicker-calendar.scss";
 
-@customElement("sgds-datepicker-calendar")
 export class SgdsDatepickerCalendar extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
