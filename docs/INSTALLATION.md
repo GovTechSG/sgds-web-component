@@ -5,11 +5,11 @@ You can load SGDS's web components via CDN or by installing it locally.
 
 ## CDN
 
-The CDN loader registers all SGDS elements up front. Note that, if you're only using a handful of components. You can also cherry pick components via local imports if you want to load specific ones up front.
+The CDN loader registers all SGDS elements up front. Note that, if you're only using a handful of components.
 
 ```js
 
-<script type="module" src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@rc"></script>
 
 ```
 
@@ -19,7 +19,7 @@ You can also install SGDS web components locally with the following command
 
 ```js
 
-npm install @govtechsg/sgds-web-component
+npm install @govtechsg/sgds-web-component@rc
 
 ```
 

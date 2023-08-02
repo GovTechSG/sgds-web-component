@@ -1,15 +1,12 @@
 import { SgdsSidenav, SgdsSidenavItem, SgdsSidenavLink } from "../src/components/Sidenav";
-import "../src/components/Sidenav";
+
 import { fixture, assert, expect, waitUntil, elementUpdated, aTimeout } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
-
+customElements.define("sgds-sidenav", SgdsSidenav);
+customElements.define("sgds-sidenav-item", SgdsSidenavItem);
+customElements.define("sgds-sidenav-link", SgdsSidenavLink);
 describe("sgds-sidenav", () => {
-  it("is defined", () => {
-    const el = document.createElement("sgds-sidenav");
-    assert.instanceOf(el, SgdsSidenav);
-  });
-
   it("can be semantically compare with shadowDom trees", async () => {
     const el = await fixture(html`<sgds-sidenav></sgds-sidenav>`);
     assert.shadowDom.equal(
@@ -24,10 +21,6 @@ describe("sgds-sidenav", () => {
 });
 
 describe("sgds-sidenav-item", () => {
-  it("is defined", () => {
-    const el = document.createElement("sgds-sidenav-item");
-    assert.instanceOf(el, SgdsSidenavItem);
-  });
   it("without href, can be semantically compare with shadowDom trees", async () => {
     const el = await fixture(html`<sgds-sidenav-item></sgds-sidenav-item>`);
     assert.shadowDom.equal(
@@ -143,13 +136,6 @@ describe("sgds-sidenav-item", () => {
     el.shadowRoot?.querySelector("a")?.click();
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("a")).to.have.class("active");
-  });
-});
-
-describe("sgds-sidenav-link", () => {
-  it("is defined", () => {
-    const el = document.createElement("sgds-sidenav-link");
-    assert.instanceOf(el, SgdsSidenavLink);
   });
 });
 

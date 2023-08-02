@@ -1,7 +1,10 @@
 import { SgdsMainnavItem, SgdsMainnav, SgdsMainnavDropdown } from "../src/components/Mainnav";
-import "../src/components/Mainnav";
 import { fixture, assert, expect, aTimeout, fixtureCleanup } from "@open-wc/testing";
 import { html } from "lit";
+
+customElements.define("sgds-mainnav", SgdsMainnav);
+customElements.define("sgds-mainnav-dropdown", SgdsMainnavDropdown);
+customElements.define("sgds-mainnav-item", SgdsMainnavItem);
 
 describe("sgds-mainnav", () => {
   afterEach(() => fixtureCleanup());

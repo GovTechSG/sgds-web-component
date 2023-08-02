@@ -1,9 +1,9 @@
-import { customElement, property, query } from "lit/decorators.js";
-import { html, literal } from "lit/static-html.js";
-import { ifDefined } from "lit/directives/if-defined.js";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { FormSubmitController } from "../../utils/form";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { html, literal } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
+import { FormSubmitController } from "../../utils/form";
 import styles from "./sgds-button.scss";
 
 export type ButtonVariant =
@@ -33,7 +33,6 @@ export type ButtonVariant =
  * @event sgds-blur - Emitted when the button is not focused.
  * @event sgds-focus - Emitted when the button is focused.
  */
-@customElement("sgds-button")
 export class SgdsButton extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 

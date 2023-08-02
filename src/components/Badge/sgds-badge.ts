@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-badge.scss";
@@ -10,7 +10,6 @@ export type BadgeVariant = "primary" | "secondary" | "success" | "danger" | "war
  * @summary Badges can be used to highlight important bits of information such as labels, notifications & status.
  * @slot default - slot for badge
  */
-@customElement("sgds-badge")
 export class SgdsBadge extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 

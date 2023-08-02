@@ -8,9 +8,11 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds@2.1.1/css/sgds.min.css" rel="stylesheet" crossorigin="anonymous"> -->
     <!-- <script type="module" id="dev-console-gateway"
         src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-    <script type="module" id="console-components-gateway"
-  src="https://dev.assets.developer.tech.gov.sg/console-components/gateway.es5.js" nonce={nonce || undefined}></script>
+        <!-- <script src="/node_modules/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js"></script> -->
+
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <!-- <script type="module" id="console-components-gateway"
+  src="https://dev.assets.developer.tech.gov.sg/console-components/gateway.es5.js" nonce={nonce || undefined}></script> -->
     <style>
         /* * {
             font-family: "bootstrap-icons", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -93,6 +95,7 @@
         }
         
     </style>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/clk-web-components" type="module"></script> -->
     <script src="lib/index.js" type="module"></script>
     <script>
         const steps = [
@@ -108,7 +111,7 @@
 <body class="d-flex flex-column min-vh-100"></body>
     <sgds-masthead fluid></sgds-masthead>  
     <div class="grid">
-      
+      <sgds-scoped-button>hello`</sgds-scoped-button>
     <sgds-mainnav>
         <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
         <sgds-mainnav-item href="#">Home</sgds-mainnav-item>
@@ -323,7 +326,8 @@
                 <div class="col is-6">
 
                     <h3>Links</h3>
-                    <sgds-alert alertClasses="d-flex align-items-center" variant="danger" dismissible show>
+                    
+                    <sgds-alert  variant="danger" dismissible show>
                         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-1-circle-fill" viewBox="0 0 16 16">
                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM9.283 4.002H7.971L6.072 5.385v1.271l1.834-1.318h.065V12h1.312V4.002Z"/>
                           </svg>
@@ -332,22 +336,32 @@
 
                         <h3>With additional content</h3>
 
-                        <sgds-alert variant="success" alertClasses="d-flex align-items-center" dismissible>
-                            <sl-icon name="info-circle" class="flex-shrink-0 me-4 align-self-start mt-2"></sl-icon>
-                            <div><h4 class="alert-heading">Hey, nice to see you</h4>
-                            
+                        <sgds-alert variant="success" show>
+                            <svg
+                              slot="icon"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              class="bi bi-info-circle"
+                              viewBox="0 0 16 16"
+                            >
+                              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                              <path
+                                d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+                              />
+                            </svg>
+                            <div>
+                              <sgds-alert-heading headerTag=${args.headerTag}>Hello, nice to meet you</sgds-alert-heading>
                               <p>
-                                Aww yeah, you successfully read this important alert message. This
-                                example text is going to run a bit longer so that you can see how
-                                spacing within an alert works with this kind of content.
+                                Aww yeah, you successfully read this important
+                                <sgds-alert-link href=${args.href} target=${args.target}>alert message</sgds-alert-link>. This example text is
+                                going to run a bit longer so that you can see how spacing within an alert works with this kind of content.
                               </p>
                               <hr />
-                              <p className="mb-0">
-                                Whenever you need to, be sure to use margin utilities to keep things
-                                nice and tidy.
-                              </p>
+                              <p>Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
                             </div>
-                        </sgds-alert>
+                          </sgds-alert>
                 </div>
             </div>
         </div>
@@ -394,7 +408,7 @@
             <h2>File Upload</h2>
             <div class="row">
                 <div class="col is-6">
-                    <sgds-fileupload id="my-fileupload" checkedIcon='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-all" viewBox="0 0 16 16">
+                    <sgds-file-upload id="my-fileupload" checkedIcon='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-all" viewBox="0 0 16 16">
                         <path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/>
                       </svg>' cancelIcon='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-5-square" viewBox="0 0 16 16">
                         <path d="M7.994 12.158c-1.57 0-2.654-.902-2.719-2.115h1.237c.14.72.832 1.031 1.529 1.031.791 0 1.57-.597 1.57-1.681 0-.967-.732-1.57-1.582-1.57-.767 0-1.242.45-1.435.808H5.445L5.791 4h4.705v1.103H6.875l-.193 2.343h.064c.17-.258.715-.68 1.611-.68 1.383 0 2.561.944 2.561 2.585 0 1.687-1.184 2.806-2.924 2.806Z"/>
@@ -404,7 +418,7 @@
                         <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                         <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
                       </svg> Choose a File
-                    </sgds-fileupload>
+                    </sgds-file-upload>
                 </div>
             </div>
         </div>
@@ -458,6 +472,15 @@
                 </div>
             </div>
             <div class="container">
+                <h2>Drawer</h2>
+                <sgds-drawer label="Drawer" class="drawer-overview">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    <sgds-button slot="footer" variant="primary">Close</sgds-button>
+                </sgds-drawer>
+                <sgds-button>Open Drawer</sgds-button>
+            </div>
+            
+            <div class="container">
                 <h2>Tooltip</h2>
                 Hover me
                     <sgds-tooltip content="This is a tooltip" placement="bottom">
@@ -505,6 +528,19 @@ dp.addEventListener('sgds-change-date', event => {
 
 
 
+        const drawer = document.querySelector('.drawer-overview');
+        console.log('drawer' + drawer.nextElementSibling)
+        const openButton = drawer.nextElementSibling;
+        const closeButton = drawer.querySelector('sgds-button[variant="primary"]');
+
+        openButton.addEventListener('click', () => drawer.show());
+        closeButton.addEventListener('click', () => drawer.hide());
+        
+        const submitButton = document.querySelector('sgds-quantity-toggle#heyhey');
+        // submitButton.addEventListener('sgds-change', (e) => {
+        //     e.preventDefault();
+        //     console.log(e)
+        // });
 
         const checkedIconSvg1 = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-all" viewBox="0 0 16 16"><path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/></svg>`
 
@@ -560,6 +596,8 @@ dp.addEventListener('sgds-change-date', event => {
             console.log(formData.get('cb2'));
     alert('All fields are valid!');
   });
+        
+
 
     </script>
 </body>

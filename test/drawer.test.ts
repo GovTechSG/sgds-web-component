@@ -1,35 +1,35 @@
-import { SgdsModal } from "../src/components/Modal/sgds-modal";
-import { expect, fixture, waitUntil } from "@open-wc/testing";
+import { SgdsDrawer } from "../src/components/Drawer/sgds-drawer";
+import { fixture, expect, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
-import sinon from "sinon";
 import { html } from "lit";
+import sinon from "sinon";
 
-customElements.define("sgds-modal", SgdsModal);
+customElements.define("sgds-drawer", SgdsDrawer);
 
-describe("<sgds-modal>", () => {
+describe("<sgds-drawer>", () => {
   it("should be visible with the open attribute", async () => {
-    const el = await fixture<SgdsModal>(html`
-      <sgds-modal open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-modal>
+    const el = await fixture<SgdsDrawer>(html`
+      <sgds-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
-    const base = el.shadowRoot?.querySelector<HTMLElement>('[part="base"]');
+    const base = el.shadowRoot?.querySelector<HTMLElement>('[part~="base"]');
 
     expect(base?.hidden).to.be.false;
   });
 
   it("should not be visible without the open attribute", async () => {
-    const el = await fixture<SgdsModal>(
-      html` <sgds-modal>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-modal> `
+    const el = await fixture<SgdsDrawer>(
+      html` <sgds-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer> `
     );
-    const base = el.shadowRoot?.querySelector<HTMLElement>('[part="base"]');
+    const base = el.shadowRoot?.querySelector<HTMLElement>('[part~="base"]');
 
     expect(base?.hidden).to.be.true;
   });
 
   it("should emit sgds-show and sgds-after-show when calling show()", async () => {
-    const el = await fixture<SgdsModal>(html`
-      <sgds-modal>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-modal>
+    const el = await fixture<SgdsDrawer>(html`
+      <sgds-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
-    const base = el.shadowRoot?.querySelector<HTMLElement>('[part="base"]');
+    const base = el.shadowRoot?.querySelector<HTMLElement>('[part~="base"]');
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -46,10 +46,10 @@ describe("<sgds-modal>", () => {
   });
 
   it("should emit sgds-hide and sgds-after-hide when calling hide()", async () => {
-    const el = await fixture<SgdsModal>(html`
-      <sgds-modal open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-modal>
+    const el = await fixture<SgdsDrawer>(html`
+      <sgds-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
-    const base = el.shadowRoot?.querySelector<HTMLElement>('[part="base"]');
+    const base = el.shadowRoot?.querySelector<HTMLElement>('[part~="base"]');
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -66,10 +66,10 @@ describe("<sgds-modal>", () => {
   });
 
   it("should emit sgds-show and sgds-after-show when setting open = true", async () => {
-    const el = await fixture<SgdsModal>(html`
-      <sgds-modal>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-modal>
+    const el = await fixture<SgdsDrawer>(html`
+      <sgds-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
-    const base = el.shadowRoot?.querySelector<HTMLElement>('[part="base"]');
+    const base = el.shadowRoot?.querySelector<HTMLElement>('[part~="base"]');
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -86,10 +86,10 @@ describe("<sgds-modal>", () => {
   });
 
   it("should emit sgds-hide and sgds-after-hide when setting open = false", async () => {
-    const el = await fixture<SgdsModal>(html`
-      <sgds-modal open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-modal>
+    const el = await fixture<SgdsDrawer>(html`
+      <sgds-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
-    const base = el.shadowRoot?.querySelector<HTMLElement>('[part="base"]');
+    const base = el.shadowRoot?.querySelector<HTMLElement>('[part~="base"]');
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -105,13 +105,13 @@ describe("<sgds-modal>", () => {
     expect(base?.hidden).to.be.true;
   });
 
-  it("should not close when sgds-close is prevented", async () => {
-    const el = await fixture<SgdsModal>(html`
-      <sgds-modal open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-modal>
+  it("should not close when sgds-request-close is prevented", async () => {
+    const el = await fixture<SgdsDrawer>(html`
+      <sgds-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-drawer>
     `);
-    const overlay = el.shadowRoot?.querySelector<HTMLElement>('[part="overlay"]');
+    const overlay = el.shadowRoot?.querySelector<HTMLElement>('[part~="overlay"]');
 
-    el.addEventListener("sgds-close", event => {
+    el.addEventListener("sgds-request-close", event => {
       event.preventDefault();
     });
     overlay?.click();
@@ -119,8 +119,25 @@ describe("<sgds-modal>", () => {
     expect(el.open).to.be.true;
   });
 
+  it("should allow initial focus to be set", async () => {
+    const el = await fixture<SgdsDrawer>(html` <sgds-drawer><input /></sgds-drawer> `);
+    const input = el.querySelector<HTMLInputElement>("input");
+    const initialFocusHandler = sinon.spy((event: InputEvent) => {
+      event.preventDefault();
+      input?.focus();
+    });
+
+    el.addEventListener("sgds-initial-focus", initialFocusHandler);
+    el.show();
+
+    await waitUntil(() => initialFocusHandler.calledOnce);
+
+    expect(initialFocusHandler).to.have.been.calledOnce;
+    expect(document.activeElement).to.equal(input);
+  });
+
   it("should close when pressing Escape", async () => {
-    const el = await fixture<SgdsModal>(html` <sgds-modal open></sgds-modal> `);
+    const el = await fixture<SgdsDrawer>(html` <sgds-drawer open></sgds-drawer> `);
     const hideHandler = sinon.spy();
 
     el.addEventListener("sgds-hide", hideHandler);
@@ -129,10 +146,5 @@ describe("<sgds-modal>", () => {
     await waitUntil(() => hideHandler.calledOnce);
 
     expect(el.open).to.be.false;
-  });
-
-  it("centered prop adds .centered to .modal", async () => {
-    const el = await fixture<SgdsModal>(html` <sgds-modal centered></sgds-modal> `);
-    expect(el.shadowRoot?.querySelector(".modal")).to.have.class("centered");
   });
 });

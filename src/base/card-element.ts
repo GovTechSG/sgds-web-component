@@ -3,18 +3,6 @@ import SgdsElement from "./sgds-element";
 
 export type CardBorderVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light";
 
-export type CardTextVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info"
-  | "dark"
-  | "light"
-  | "white"
-  | "muted";
-
 export class CardElement extends SgdsElement {
   static styles = SgdsElement.styles;
 
@@ -28,3 +16,15 @@ export class CardElement extends SgdsElement {
   /** The text's variant. */
   @property() textColor: CardTextVariant;
 }
+
+export type CardTextVariant =
+  | "primary"
+  | "secondary"
+  | "success"
+  | "danger"
+  | "warning"
+  | "info"
+  | "dark"
+  | "light"
+  | "white"
+  | "muted";

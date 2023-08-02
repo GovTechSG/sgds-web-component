@@ -1,10 +1,11 @@
 import { assert, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
-import "../src/components/Button";
 import { SgdsButton } from "../src/components/Button/sgds-button";
-import "../src/components/Stepper";
 import { SgdsStepper } from "../src/components/Stepper/sgds-stepper";
 import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";
+
+customElements.define("sgds-stepper", SgdsStepper);
+customElements.define("sgds-button", SgdsButton);
 
 const stepMetaData = [
   {

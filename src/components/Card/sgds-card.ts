@@ -1,7 +1,7 @@
 import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import { CardElement } from "../../base/card-element";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { CardElement } from "../../base/card-element";
 
 /**
  * @summary Cards can be used for headers and footers, a wide variety of content, contain contextual background colors and images.
@@ -17,7 +17,6 @@ import { classMap } from "lit/directives/class-map.js";
  * @csspart text - The card text
  *
  */
-@customElement("sgds-card")
 export class SgdsCard extends CardElement {
   static styles = CardElement.styles;
 

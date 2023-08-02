@@ -1,17 +1,16 @@
-import { html } from "lit";
-import { customElement, property, queryAssignedElements, state } from "lit/decorators.js";
-import SgdsElement from "../../base/sgds-element";
-import { ref, createRef, Ref } from "lit/directives/ref.js";
-import { Tooltip } from "bootstrap";
-import styles from "./sgds-tooltip.scss";
 import * as Popper from "@popperjs/core";
+import { Tooltip } from "bootstrap";
+import { html } from "lit";
+import { property, queryAssignedElements, state } from "lit/decorators.js";
+import { Ref, createRef, ref } from "lit/directives/ref.js";
+import SgdsElement from "../../base/sgds-element";
+import styles from "./sgds-tooltip.scss";
 
 /**
  * @summary Tooltips display more information when users hover over, focus on, or interact with an element.
  * @slot default - The element to target the tooltip to.
  *
  */
-@customElement("sgds-tooltip")
 export class SgdsTooltip extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
   /**@internal */

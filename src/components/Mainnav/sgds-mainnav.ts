@@ -1,8 +1,8 @@
 import { Collapse } from "bootstrap";
 import { html } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { createRef, ref, Ref } from "lit/directives/ref.js";
+import { Ref, createRef, ref } from "lit/directives/ref.js";
 import SgdsElement from "../../base/sgds-element";
 import { LG_BREAKPOINT, MD_BREAKPOINT, SM_BREAKPOINT, XL_BREAKPOINT, XXL_BREAKPOINT } from "../../utils/breakpoints";
 import genId from "../../utils/generateId";
@@ -36,14 +36,13 @@ const SIZES = {
  * @cssproperty --mainnav-borderBottom-width - bottom border width
  * @cssproperty --mainnav-borderBottom-color - borderBottom width color
  */
-@customElement("sgds-mainnav")
 export class SgdsMainnav extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
   constructor() {
     super();
     window.addEventListener("resize", () => {
-      const newBreakpointReachedValue = window.innerWidth < SIZES[this.expand.toString()];
+      const newBreakpointReachedValue = window.innerWidth < SIZES[this.expand];
       if (newBreakpointReachedValue !== this.breakpointReached) {
         this.requestUpdate();
       }
@@ -65,7 +64,7 @@ export class SgdsMainnav extends SgdsElement {
   private collapseId = genId("mainnav", "collapse");
 
   /** The breakpoint, below which, the Navbar will collapse. When always the Navbar will always be expanded regardless of screen size. When never, the Navbar will always be collapsed */
-  @property()
+  @property({ type: String })
   expand: MainnavExpandSize = "lg";
 
   /** @internal */
@@ -96,11 +95,15 @@ export class SgdsMainnav extends SgdsElement {
   // assigning name attribute to elements added in slot="end", to use wildcard css selector to assign styles only to *-mainnav-item
   _handleSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
-    childElements.forEach(e => e.setAttribute("name", e.tagName.toLowerCase()));
+
+    childElements.forEach(e => {
+      console.log(e);
+      e.setAttribute("name", e.tagName.toLowerCase());
+    });
   }
 
   render() {
-    this.breakpointReached = window.innerWidth < SIZES[this.expand.toString()];
+    this.breakpointReached = window.innerWidth < SIZES[this.expand];
     const collapseClass = "collapse navbar-collapse order-2";
     return html`
       <nav
