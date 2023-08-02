@@ -1,6 +1,6 @@
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
 import { defaultValue } from "../../utils/defaultvalue";
@@ -48,17 +48,24 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
   @defaultValue()
   defaultValue = "";
   @property({ type: Array }) menuList: string[] = [];
+  
+  
+  private _getFilteredMenuList(inputValue: string) {
+    return this.menuList.filter((n) => {
+      const nLowerCase = n.toLowerCase();
+      const valueLower = inputValue.toLowerCase();
+      return nLowerCase.startsWith(valueLower);
+    })
+  }
 
   private _handleInputChange(e: CustomEvent) {
-    const value = (e.target as SgdsInput).value;
-    console.log(value)
+    this.value = (e.target as SgdsInput).value;
+    // this._filterMenuList(newInputValue);
   }
   
   private _handleSelectChange(e: KeyboardEvent | MouseEvent) {
     this._handleSelectSlot(e);
-    const selectedValue = (e.target as SgdsDropdownItem).innerText;
-    console.log(selectedValue);
-    this.value = selectedValue;
+    this.value = (e.target as SgdsDropdownItem).innerText;
   }
 
   render() {
@@ -95,7 +102,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
           </svg>
         </div>
         <ul class="dropdown-menu" role="menu" part="menu">
-          ${this.menuList.map(
+          ${this._getFilteredMenuList(this.value).map(
             item => html`<sgds-dropdown-item href="#" @click=${this._handleSelectChange}>${item}</sgds-dropdown-item>`
           )}
         </ul>
