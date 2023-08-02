@@ -53,6 +53,14 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
     const value = (e.target as SgdsInput).value;
     console.log(value)
   }
+  
+  private _handleSelectChange(e: KeyboardEvent | MouseEvent) {
+    this._handleSelectSlot(e);
+    const selectedValue = (e.target as SgdsDropdownItem).innerText;
+    console.log(selectedValue);
+    this.value = selectedValue;
+  }
+
   render() {
     return html`
       <div class="sgds combobox dropdown">
@@ -88,7 +96,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
         </div>
         <ul class="dropdown-menu" role="menu" part="menu">
           ${this.menuList.map(
-            item => html`<sgds-dropdown-item href="#" @click=${this._handleSelectSlot}>${item}</sgds-dropdown-item>`
+            item => html`<sgds-dropdown-item href="#" @click=${this._handleSelectChange}>${item}</sgds-dropdown-item>`
           )}
         </ul>
       </div>
