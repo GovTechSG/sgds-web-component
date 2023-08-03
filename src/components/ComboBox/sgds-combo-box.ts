@@ -6,8 +6,10 @@ import { DropdownElement } from "../../base/dropdown-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { SgdsDropdownItem } from "../Dropdown";
 import { SgdsInput } from "../Input";
+import styles from "./sgds-combo-box.scss";
 
 export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
+  static styles = [DropdownElement.styles, styles];
   static get scopedElements() {
     return {
       "sgds-input": SgdsInput,
