@@ -48,21 +48,19 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
   @defaultValue()
   defaultValue = "";
   @property({ type: Array }) menuList: string[] = [];
-  
-  
+
   private _getFilteredMenuList(inputValue: string) {
-    return this.menuList.filter((n) => {
+    return this.menuList.filter(n => {
       const nLowerCase = n.toLowerCase();
       const valueLower = inputValue.toLowerCase();
       return nLowerCase.startsWith(valueLower);
-    })
+    });
   }
 
   private _handleInputChange(e: CustomEvent) {
     this.value = (e.target as SgdsInput).value;
-    // this._filterMenuList(newInputValue);
   }
-  
+
   private _handleSelectChange(e: KeyboardEvent | MouseEvent) {
     this._handleSelectSlot(e);
     this.value = (e.target as SgdsDropdownItem).innerText;
