@@ -8,6 +8,11 @@ import { SgdsDropdownItem } from "../Dropdown";
 import { SgdsInput } from "../Input";
 import styles from "./sgds-combo-box.scss";
 
+/**
+ * @summary ComboBox component is used for users to make one or more selections from a list.
+ *
+ * @event sgds-change - Emitted when the combo box's selected value changes.
+ */
 export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
   static styles = [DropdownElement.styles, styles];
   static get scopedElements() {
@@ -66,6 +71,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
   private _handleSelectChange(e: KeyboardEvent | MouseEvent) {
     this._handleSelectSlot(e);
     this.value = (e.target as SgdsDropdownItem).innerText;
+    this.emit("sgds-change", { detail: { value: this.value } });
   }
 
   render() {
