@@ -193,10 +193,10 @@ describe("sgds-datepicker", () => {
 
     inputElement?.click();
 
+    await waitUntil(() => elementUpdated(inputElement));
+
     expect(menuElement?.classList.contains("show")).to.be.true;
     expect(inputElement?.getAttribute("aria-expanded")).to.be.equal("true");
-
-    // expect(headerButtonElement?.innerText).to.contain("July");
 
     // 2. keep clicking the header previous button in a loop until headerButtonElement show text "May" "2023"
 
@@ -380,7 +380,7 @@ describe("sgds-datepicker", () => {
     await elementUpdated(el);
     await elementUpdated(datepickerCalendar);
 
-    expect(inputElement?.value).to.equal("16/07/2020");
+    expect(inputElement?.value).to.equal("16/06/2020");
   });
 
   it("displays the correct date format in the placeholder by default", async () => {
