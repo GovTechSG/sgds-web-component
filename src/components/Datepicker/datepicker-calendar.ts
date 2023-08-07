@@ -3,9 +3,9 @@ import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { styleMap } from "lit/directives/style-map.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-datepicker-calendar.scss";
+import styles from "./datepicker-calendar.scss";
 
-export class SgdsDatepickerCalendar extends SgdsElement {
+export class DatepickerCalendar extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
   /** @internal */
@@ -154,7 +154,7 @@ export class SgdsDatepickerCalendar extends SgdsElement {
     const month = this.displayDate.getMonth();
     const firstDay = new Date(year, month, 1);
     const startingDay = firstDay.getDay();
-    let monthLength = SgdsDatepickerCalendar.daysInMonth[month];
+    let monthLength = DatepickerCalendar.daysInMonth[month];
     if (month == 1) {
       if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
         monthLength = 29;
@@ -223,11 +223,11 @@ export class SgdsDatepickerCalendar extends SgdsElement {
 
     // monthView
 
-    const displayMonth = SgdsDatepickerCalendar.MONTHVIEW_LABELS[this.displayDate.getMonth()];
+    const displayMonth = DatepickerCalendar.MONTHVIEW_LABELS[this.displayDate.getMonth()];
 
     const monthView = html`
       <div class="sgds monthpicker">
-        ${SgdsDatepickerCalendar.MONTHVIEW_LABELS.map(
+        ${DatepickerCalendar.MONTHVIEW_LABELS.map(
           (m, idx) => html`
             <button
               class=${classMap({ active: displayMonth === m, month: true })}
@@ -269,7 +269,7 @@ export class SgdsDatepickerCalendar extends SgdsElement {
       <table class="text-center">
         <thead>
           <tr>
-            ${SgdsDatepickerCalendar.DAY_LABELS.map(
+            ${DatepickerCalendar.DAY_LABELS.map(
               (label: string, index: number) =>
                 html`
                   <td key=${index}>
@@ -305,4 +305,4 @@ export class SgdsDatepickerCalendar extends SgdsElement {
   }
 }
 
-export default SgdsDatepickerCalendar;
+export default DatepickerCalendar;

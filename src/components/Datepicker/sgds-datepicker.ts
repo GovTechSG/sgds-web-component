@@ -7,8 +7,8 @@ import { live } from "lit/directives/live.js";
 import { watch } from "../../utils/watch";
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { SgdsInput } from "../Input";
-import { SgdsDatepickerCalendar } from "./sgds-datepicker-calendar";
-import { SgdsDatepickerHeader } from "./sgds-datepicker-header";
+import { DatepickerCalendar } from "./datepicker-calendar";
+import { DatepickerHeader } from "./datepicker-header";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -31,8 +31,8 @@ export class SgdsDatepicker extends ScopedElementsMixin(DatepickerDropdownElemen
   static get scopedElements() {
     return {
       "sgds-input": SgdsInput,
-      "sgds-datepicker-calendar": SgdsDatepickerCalendar,
-      "sgds-datepicker-header": SgdsDatepickerHeader
+      "sgds-datepicker-calendar": DatepickerCalendar,
+      "sgds-datepicker-header": DatepickerHeader
     };
   }
 
@@ -41,9 +41,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DatepickerDropdownElemen
 
   /** When true, adds disabled attribute to input and button element */
   @property({ type: Boolean, reflect: true }) disabled = false;
-
-  /** When true, adds no flip even when placement does not fit */
-  @property({ type: Boolean, reflect: true, state: false }) noFlip = false;
 
   /** @internal */
   @property({ type: String })

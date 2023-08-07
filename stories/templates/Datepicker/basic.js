@@ -16,13 +16,14 @@ export const Template = ({
       ?noFlip=${noFlip}
       .initialValue=${initialValue}
       ?required=${required}
-      .minDate=${minDate}
-      .maxDate=${maxDate}
-      .dateFormat=${dateFormat}
+      minDate=${minDate}
+      maxDate=${maxDate}
+      dateFormat=${dateFormat}
       ?disabled=${disabled}
       ?menuAlignRight=${menuAlighRight}
-      .mode=${mode}
+      mode=${mode}
     >
     </sgds-datepicker>
   `;
+
 export const args = {};
