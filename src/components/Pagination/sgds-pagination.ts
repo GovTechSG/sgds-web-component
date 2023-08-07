@@ -1,0 +1,209 @@
+import { html } from "lit";
+import { property, query } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import SgdsElement from "../../base/sgds-element";
+import styles from "./sgds-pagination.scss";
+import { SgdsTable } from "../Table";
+
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+
+export type directionVariant = "icon" | "icon-text" | "text";
+export type sizeVariant = "sm" | "md" | "lg";
+
+/**
+ * @summary
+ *
+ *
+ */
+
+export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
+  static styles = [SgdsElement.styles, styles];
+
+  static get scopedElements() {
+    return {
+      // "sgds-table": SgdsTable
+    };
+  }
+
+  /** Inserts the length value from a given sets of data objects*/
+  @property({ type: Number }) dataLength: number = 50;
+
+  /** Sets the starting active page upon render*/
+  @property({ type: Number }) currentPage: number = 3;
+
+  /** Sets the amount of data objects to be displayed per page */
+  @property({ type: Number }) itemsPerPage: number = 5;
+
+  /** Sets the page limit to be displayed at any given render. e.g 3, 5, 7, 9 */
+  @property({ type: Number }) limit: number = 5;
+
+  /** Sets the page direction button to contain text and/or icon */
+  @property({ type: String }) directionVariant: directionVariant = "icon-text";
+
+  /** Sets the size of all page items. */
+  @property({ type: String }) size: sizeVariant = "sm";
+
+  /** Toggles ellipsis buttons to be able to increment/decrement pages based on the ellipsisJump value set. By default, it will be false */
+  @property({ type: Boolean }) ellipsisOn: boolean = false;
+
+  /** When ellipsisOn is true, length of decrementing/incrementing of pages can be set with a number value*/
+  @property({ type: Number }) ellipsisJump: number = 3;
+
+  connectedCallback() {
+    super.connectedCallback();
+  }
+
+  handlePageClick(event: MouseEvent) {
+    const liTarget = event.target as HTMLElement;
+    const clickedLi = liTarget.closest("li");
+
+    if (clickedLi) {
+      const clickedPage = Number(clickedLi.getAttribute("data-key"));
+      if (clickedPage !== this.currentPage) {
+        this.currentPage = clickedPage;
+      }
+    }
+  }
+
+  handleNextButton() {
+    this.currentPage = Math.min(this.currentPage + 1);
+  }
+
+  handlePrevButton() {
+    this.currentPage = Math.max(this.currentPage - 1);
+  }
+
+  // handleNextEllipsisButton() {
+  //   this.currentPage = Math.min(this.currentPage + this.ellipsisJump);
+  // }
+
+  // handlePrevEllipsisButton() {
+  //   this.currentPage = Math.max(this.currentPage - this.ellipsisJump);
+  // }
+
+  get pages() {
+    const pages = [];
+    for (let i = 1; i <= Math.ceil(this.dataLength / this.itemsPerPage); i++) {
+      pages.push(i);
+    }
+    return pages;
+  }
+
+  renderPgNumbers() {
+    const pagesToShow = [];
+    let sanitizeStartPage = 1;
+    let endPage;
+
+    if (this.limit < this.pages.length) {
+      sanitizeStartPage = this.currentPage - Math.floor(this.limit / 2);
+    }
+
+    if (this.pages.length - sanitizeStartPage < this.limit) {
+      sanitizeStartPage = this.pages.length + 1 - this.limit;
+    }
+
+    if (sanitizeStartPage <= 0) {
+      sanitizeStartPage = 1;
+    }
+
+    endPage = sanitizeStartPage + this.limit - 1;
+
+    if (endPage > this.pages.length) {
+      endPage = this.pages.length;
+    }
+
+    if (this.currentPage === this.pages.length) {
+      sanitizeStartPage = this.pages.length - this.limit + 1;
+    }
+
+    for (let i = sanitizeStartPage; i <= endPage; i++) {
+      pagesToShow.push(i);
+    }
+
+    return pagesToShow.map(
+      number => html`
+        <li data-key=${number} class="page-item ${this.currentPage === number ? "active" : ""}">
+          <span class="page-link" @click=${this.handlePageClick}>${number}</span>
+        </li>
+      `
+    );
+  }
+
+  getLeftChevronSVG() {
+    return html`
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-chevron-left"
+        viewBox="0 0 16 16"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+        />
+      </svg>
+    `;
+  }
+
+  getRightChevronSVG() {
+    return html`
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-chevron-right"
+        viewBox="0 0 16 16"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+        />
+      </svg>
+    `;
+  }
+
+  directionBtnContent(directionLabel: string, iconClass: string) {
+    if (this.directionVariant === "icon") {
+      return iconClass === "left" ? this.getLeftChevronSVG() : this.getRightChevronSVG();
+    } else if (this.directionVariant === "icon-text") {
+      if (iconClass === "left") {
+        return html` ${this.getLeftChevronSVG()} ${directionLabel} `;
+      } else if (iconClass === "right") {
+        return html` ${directionLabel} ${this.getRightChevronSVG()} `;
+      }
+    } else if (this.directionVariant === "text") {
+      return html` ${directionLabel} `;
+    } else {
+      return null;
+    }
+  }
+
+  render() {
+    return html`
+      <!-- <sgds-table
+        tableHeaders='["#", "First Names", "Last Name", "Username"]'
+        tableData='[
+        ["1", "John", "Doe", "@johndoe"],
+        ["2", "Jane", "Doe", "@janedoe"],
+        ["3", "Bob", "Smith", "@bobsmith"]
+      ]'
+      ></sgds-table> -->
+      <ul class="pagination pagination-${this.size} sgds" directionVariant=${this.directionVariant}>
+        <!-- Previous Button -->
+        <li class="page-item" @click=${this.handlePrevButton}>
+          <span class="page-link"> ${this.directionBtnContent("Previous", "left")} </span>
+        </li>
+        ${this.renderPgNumbers()}
+        <!-- Next Button -->
+        <li class="page-item" @click=${this.handleNextButton}>
+          <span class="page-link"> ${this.directionBtnContent("Next", "right")} </span>
+        </li>
+      </ul>
+    `;
+  }
+}
+
+export default SgdsPagination;
