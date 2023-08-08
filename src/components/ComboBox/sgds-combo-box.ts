@@ -1,13 +1,20 @@
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { SgdsDropdownItem } from "../Dropdown";
 import { SgdsInput } from "../Input";
+import styles from "./sgds-combo-box.scss";
 
+/**
+ * @summary ComboBox component is used for users to make one or more selections from a list.
+ *
+ * @event sgds-change - Emitted when the combo box's selected value changes.
+ */
 export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
+  static styles = [DropdownElement.styles, styles];
   static get scopedElements() {
     return {
       "sgds-input": SgdsInput,
@@ -49,10 +56,24 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
   defaultValue = "";
   @property({ type: Array }) menuList: string[] = [];
 
-  private _handleInputChange(e: CustomEvent) {
-    const value = (e.target as SgdsInput).value;
-    console.log(value)
+  private _getFilteredMenuList(inputValue: string) {
+    return this.menuList.filter(n => {
+      const nLowerCase = n.toLowerCase();
+      const valueLower = inputValue.toLowerCase();
+      return nLowerCase.startsWith(valueLower);
+    });
   }
+
+  private _handleInputChange(e: CustomEvent) {
+    this.value = (e.target as SgdsInput).value;
+  }
+
+  private _handleSelectChange(e: KeyboardEvent | MouseEvent) {
+    this._handleSelectSlot(e);
+    this.value = (e.target as SgdsDropdownItem).innerText;
+    this.emit("sgds-change", { detail: { value: this.value } });
+  }
+
   render() {
     return html`
       <div class="sgds combobox dropdown">
@@ -87,8 +108,8 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
           </svg>
         </div>
         <ul class="dropdown-menu" role="menu" part="menu">
-          ${this.menuList.map(
-            item => html`<sgds-dropdown-item href="#" @click=${this._handleSelectSlot}>${item}</sgds-dropdown-item>`
+          ${this._getFilteredMenuList(this.value).map(
+            item => html`<sgds-dropdown-item href="#" @click=${this._handleSelectChange}>${item}</sgds-dropdown-item>`
           )}
         </ul>
       </div>

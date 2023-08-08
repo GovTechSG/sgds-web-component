@@ -148,13 +148,7 @@
 
     <main>
         <div class="container">
-            <sgds-combo-box>
-                <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
-                <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
-                <sgds-dropdown-item href="#" disabled>
-                  item #3
-                </sgds-dropdown-item>
-            </sgds-combo-box>
+            <sgds-combo-box placeholder='test combo box' menuList='["one", "two"]' label="label" hintText="hint" />
             <h2>Breadcrumb</h2>
             <sgds-breadcrumb>
                 <span slot="separator"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-slash-square" viewBox="0 0 16 16">
@@ -562,11 +556,11 @@
         const tooltip = document.querySelector('sgds-tooltip');
         
 
-        const fileUpload = document.querySelector('sgds-fileupload');
+        // const fileUpload = document.querySelector('sgds-fileupload');
 
-        fileUpload.addEventListener('sgds-files-selected', (event) => {
-        console.log('File list changed!', event);
-        });
+        // fileUpload.addEventListener('sgds-files-selected', (event) => {
+        // console.log('File list changed!', event);
+        // });
 
         // grab reference to form
 
@@ -590,8 +584,13 @@
             console.log(formData.get('cb2'));
         });
 
-        
+        const comboBox = document.querySelector('sgds-combo-box');
 
+        comboBox.addEventListener('sgds-change', (event) => {
+        console.log('Selected value changed!', event.target.value);
+        });
+
+        
 
     </script>
 </body>
