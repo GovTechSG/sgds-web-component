@@ -1,10 +1,10 @@
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-datepicker-header.scss";
+import styles from "./datepicker-header.scss";
 import { styleMap } from "lit/directives/style-map.js";
 
-export const MONTH_LABELS = [
+const MONTH_LABELS = [
   "January",
   "February",
   "March",
@@ -19,7 +19,7 @@ export const MONTH_LABELS = [
   "December"
 ];
 
-export class SgdsDatepickerHeader extends SgdsElement {
+export class DatepickerHeader extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
   /** @internal */
@@ -146,4 +146,4 @@ export class SgdsDatepickerHeader extends SgdsElement {
   }
 }
 
-export default SgdsDatepickerHeader;
+export default DatepickerHeader;

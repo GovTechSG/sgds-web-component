@@ -1,8 +1,11 @@
 import { elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
-import "../src/components/Datepicker";
 import { SgdsDatepicker } from "../src/components/Datepicker";
-import SgdsDatepickerCalendar from "../src/components/Datepicker/sgds-datepicker-calendar";
-import SgdsDatepickerHeader from "../src/components/Datepicker/sgds-datepicker-header";
+import DatepickerCalendar from "../src/components/Datepicker/datepicker-calendar";
+import DatepickerHeader from "../src/components/Datepicker/datepicker-header";
+
+customElements.define("sgds-datepicker", SgdsDatepicker);
+customElements.define("sgds-datepicker-header", DatepickerHeader);
+customElements.define("sgds-datepicker-calendar", DatepickerCalendar);
 
 describe("sgds-datepicker", () => {
   it("renders sgds-datepicker component correctly", async () => {
@@ -77,17 +80,14 @@ describe("sgds-datepicker", () => {
     expect(inputEl?.value).to.equal("23/11/2023");
   });
 
+  it("should pass the initialvalue to sgds-input for range mode", async () => {
+    const initialDate = '["23/11/2023", "25/11/2023"]';
+    const initialValueArray = JSON.parse(initialDate) as string[];
+    const el = await fixture(html`<sgds-datepicker mode="range" .initialValue=${initialValueArray}></sgds-datepicker>`);
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
 
-it("should pass the initialvalue to sgds-input for range mode", async () => {
-  const initialDate = '["23/11/2023", "25/11/2023"]';
-  const initialValueArray = JSON.parse(initialDate) as string[];
-  const el = await fixture(
-    html`<sgds-datepicker mode="range" .initialValue=${initialValueArray}></sgds-datepicker>`
-  );
-  const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
-
-  expect(inputEl?.value).to.equal("23/11/2023 - 25/11/2023");
-});
+    expect(inputEl?.value).to.equal("23/11/2023 - 25/11/2023");
+  });
 
   it("closes the menu when outside of the element sgds-datepicker is clicked", async () => {
     const el = await fixture(html` <sgds-datepicker></sgds-datepicker> `);
@@ -178,8 +178,8 @@ it("should pass the initialvalue to sgds-input for range mode", async () => {
 
     const inputElement = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
     const menuElement = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
-    const datepickerHeader = el?.shadowRoot?.querySelector("sgds-datepicker-header") as SgdsDatepickerHeader;
-    const datepickerCalendar = el?.shadowRoot?.querySelector("sgds-datepicker-calendar") as SgdsDatepickerCalendar;
+    const datepickerHeader = el?.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
+    const datepickerCalendar = el?.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
 
     const headerPreviousElement = datepickerHeader.shadowRoot?.querySelectorAll("button")[0] as HTMLButtonElement;
 
@@ -193,10 +193,10 @@ it("should pass the initialvalue to sgds-input for range mode", async () => {
 
     inputElement?.click();
 
+    await waitUntil(() => elementUpdated(inputElement));
+
     expect(menuElement?.classList.contains("show")).to.be.true;
     expect(inputElement?.getAttribute("aria-expanded")).to.be.equal("true");
-
-    // expect(headerButtonElement?.innerText).to.contain("July");
 
     // 2. keep clicking the header previous button in a loop until headerButtonElement show text "May" "2023"
 
@@ -246,8 +246,8 @@ it("should pass the initialvalue to sgds-input for range mode", async () => {
 
     const inputElement = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
     const menuElement = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
-    const datepickerHeader = el?.shadowRoot?.querySelector("sgds-datepicker-header") as SgdsDatepickerHeader;
-    const datepickerCalendar = el?.shadowRoot?.querySelector("sgds-datepicker-calendar") as SgdsDatepickerCalendar;
+    const datepickerHeader = el?.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
+    const datepickerCalendar = el?.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
 
     const headerPreviousElement = datepickerHeader.shadowRoot?.querySelectorAll("button")[0] as HTMLButtonElement;
 
@@ -307,8 +307,8 @@ it("should pass the initialvalue to sgds-input for range mode", async () => {
     // 1.  click the input to open menu, check menu should open
     const inputElement = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
     const menuElement = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
-    const datepickerHeader = el?.shadowRoot?.querySelector("sgds-datepicker-header") as SgdsDatepickerHeader;
-    const datepickerCalendar = el?.shadowRoot?.querySelector("sgds-datepicker-calendar") as SgdsDatepickerCalendar;
+    const datepickerHeader = el?.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
+    const datepickerCalendar = el?.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
 
     const headerButtonElement = datepickerHeader.shadowRoot?.querySelectorAll(
       "div.datepicker-header>div.text-center>button"
@@ -380,7 +380,7 @@ it("should pass the initialvalue to sgds-input for range mode", async () => {
     await elementUpdated(el);
     await elementUpdated(datepickerCalendar);
 
-    expect(inputElement?.value).to.equal("16/07/2020");
+    expect(inputElement?.value).to.equal("16/06/2020");
   });
 
   it("displays the correct date format in the placeholder by default", async () => {

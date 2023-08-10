@@ -10,22 +10,19 @@ const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
 const ESC = "Escape";
 
-export type DropDirection = "left" | "right" | "up" | "down";
-
 /**
  * @event sgds-show - Emitted event when show instance is called
  * @event sgds-after-show - Emitted event when datepicker calendar has been made visible to the user and CSS transitions have completed
  * @event sgds-hide - Emitted event when hide instance is called
  * @event sgds-after-hide - Emitted event when datepicker calendar has hidden to the user and CSS transitions have completed
  */
-
 export class DatepickerDropdownElement extends SgdsElement {
   /** @internal */
   myDropdown: Ref<HTMLElement> = createRef();
   /** @internal */
   bsDropdown: Dropdown = null;
 
-  /** Controls auto-flipping of menu */
+  /** When true, adds no flip even when placement does not fit */
   @property({ type: Boolean })
   protected noFlip = false;
 
@@ -128,3 +125,5 @@ export class DatepickerDropdownElement extends SgdsElement {
     }
   }
 }
+
+export type DropDirection = "left" | "right" | "up" | "down";
