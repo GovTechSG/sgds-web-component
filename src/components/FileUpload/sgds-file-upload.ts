@@ -1,9 +1,11 @@
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import styles from "./sgds-file-upload.scss";
-import SgdsElement from "../../base/sgds-element";
-import { unsafeSVG } from "lit/directives/unsafe-svg.js";
+import { property } from "lit/decorators.js";
 import { createRef, ref } from "lit/directives/ref.js";
+import { unsafeSVG } from "lit/directives/unsafe-svg.js";
+import SgdsElement from "../../base/sgds-element";
+import { SgdsButton } from "../Button";
+import styles from "./sgds-file-upload.scss";
 
 export type FileUploadButtonVariant =
   | "primary"
@@ -36,10 +38,13 @@ export type FileUploadButtonVariant =
  *
  */
 
-@customElement("sgds-file-upload")
-export class SgdsFileUpload extends SgdsElement {
+export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   static styles = [SgdsElement.styles, styles];
-
+  static get scopedElements() {
+    return {
+      "sgds-button": SgdsButton
+    };
+  }
   /** The button's variant. */
   @property({ reflect: true }) variant: FileUploadButtonVariant = "primary";
 

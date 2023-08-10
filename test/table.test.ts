@@ -1,7 +1,7 @@
 import { assert, expect, fixture, html } from "@open-wc/testing";
 import { SgdsTable } from "../src/components/Table";
 import "../src/components/Table";
-
+customElements.define("sgds-table", SgdsTable);
 describe("Table", () => {
   it("should be able to sort the table data when a header is clicked", async () => {
     // Set up the table data and headers

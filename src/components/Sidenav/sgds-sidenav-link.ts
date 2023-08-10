@@ -1,5 +1,4 @@
 import LinkElement from "../../base/link-element";
-import { customElement } from "lit/decorators.js";
 import styles from "./sgds-sidenav-link.scss";
 
 /**
@@ -10,7 +9,6 @@ import styles from "./sgds-sidenav-link.scss";
  * @cssproperty --sidenav-link-padding-y - sidenav link padding top and bottom
  * @cssproperty --sidenav-link-disabled-color - sidenav link disabled color, default to `--sgds-gray-600`
  */
-@customElement("sgds-sidenav-link")
 export class SgdsSidenavLink extends LinkElement {
   static styles = styles;
 }

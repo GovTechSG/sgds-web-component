@@ -1,6 +1,8 @@
-import "../src/components/Spinner/sgds-spinner";
 import { fixture, expect } from "@open-wc/testing";
 import { html } from "lit";
+import { SgdsSpinner } from "../src/components/Spinner";
+
+customElements.define("sgds-spinner", SgdsSpinner);
 
 describe("<sgds-spinner>", () => {
   it("should have default class of 'spinner-border' if no 'type' attribute define", async () => {

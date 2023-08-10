@@ -1,17 +1,12 @@
 import { assert, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
-import "../src/components/ActionCard";
 import { SgdsActionCard } from "../src/components/ActionCard";
-import "../src/components/Checkbox";
-import "../src/components/Radio";
+import { SgdsRadioGroup } from "../src/components";
+
+customElements.define("sgds-action-card", SgdsActionCard);
 
 describe("<sgds-action-card>", () => {
   // Card test cases
-  it("is defined", () => {
-    const el = document.createElement("sgds-action-card");
-    assert.instanceOf(el, SgdsActionCard);
-  });
-
   it("should have sgds prefix on wrapper", async () => {
     const el = await fixture(html`<sgds-action-card></sgds-action-card>`);
     const slCard = el.shadowRoot?.querySelector("div");
@@ -121,6 +116,7 @@ describe("<sgds-action-card>", () => {
 
 describe("radio action card with form group behaviour", () => {
   it("in sgds-form-group, sgds-action-card type radio should behave like radio options (only one radio is checked at any point)", async () => {
+    customElements.define("sgds-radio-group", SgdsRadioGroup);
     const el = await fixture(html` <sgds-radio-group>
       <sgds-action-card type="radio" name="apple">
         <span slot="card-subtitle">Laptop</span>

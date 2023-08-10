@@ -1,3 +1,70 @@
+## v1.0.0-rc.2 (2023-07-18)
+
+### Feat
+
+- **drawer**: fix noHeader attribute
+- **drawer**: add drawer component
+- **badge**: add badgeClasses prop
+
+### Fix
+
+- *****: merge conflic
+- **drawer**: add padding and center align close btn
+- **drawer**: add export default
+- **react**: patch react lib
+
+### Refactor
+
+- **drawer, tab**: patch new components
+- **drawer**: replace close button compnent with html button
+- **close button**: remove component and replace dependencies with html button.btn-close.btn-sm
+- *****: custom element registration brought out to component.ts
+- **tab**: cleanup
+- **tab**: remove activation prop and scrolling behaviour
+- **tab**: file names to follow convention
+- **tab-group,tab**: stylings done
+- **tab**: establish stylings for the 3 kinds of tabs
+- **tab**: refactor style wip
+
+## v1.0.0-rc.1 (2023-07-04)
+
+### Feat
+
+- **stepper**: add method to retrieve slot elements
+- **toast-container**: component to position toasts
+- **toast**: add fade animation for show and hide of toast
+- **alert**: add alert-link and header component
+- **footer**: restore centeredAlignVariant
+- **tooltip**: add show method, add data-sgds-tooltip attribute for a11y purpose
+- **link, dropdown**: add target attribute for link in dropdown item
+- **stepper**: add keyboard enter for is-clickable markers
+- **stepper**: add events and reset method
+
+### Fix
+
+- **tooltip**: detect attribute changes and initialize tooltip instance
+- **toast-container**: position css token evaluation
+- **alert**: update unit tests
+- **modal**: make animation similar to react's modal
+- **test**: remove variant in mock dropdown
+- **docs**: import slots readme in slots stories
+- **mainnav**: align dropdown menu right below li
+- **dropdown**: move resetMenu to child dropdowns and fix menuIsOpen on first load feature
+
+### Refactor
+
+- **tab-group**: remove placement
+- **stepper**: remove slot and expose return component method
+- **toast**: remove arialabel prop, write static value of aria label for close button
+- **toast**: replace sl-icon with slots icon
+- **breadcrumb**: jsdocs, remove separator css content in favour of slot
+- **modal**: remove autofocus target implementation, jsdocs wip
+- **modal**: cleanup
+- **dropdown**: bring dropdownButton variant prop to child class
+- **dropdown**: remove style file
+- **dropdown**: make noFlip a state in parent class
+- **stepper**: convert step prop to array of strings
+
 ## v1.0.0-rc.0 (2023-05-31)
 
 ### Feat

@@ -1,4 +1,4 @@
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
@@ -17,7 +17,6 @@ export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "war
  *
  * @cssproperty --alert-icon-margin-right - The margin-right css of icon slot, to position the gap between icon and alert message
  */
-@customElement("sgds-alert")
 export class SgdsAlert extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 

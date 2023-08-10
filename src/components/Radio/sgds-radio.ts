@@ -1,12 +1,12 @@
 import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { watch } from "../../utils/watch";
-import styles from "./sgds-radio.scss";
-import SgdsElement from "../../base/sgds-element";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
+import SgdsElement from "../../base/sgds-element";
 import genId from "../../utils/generateId";
+import { watch } from "../../utils/watch";
+import styles from "./sgds-radio.scss";
 /**
  * @summary Radio allows the user to select one option from a set while seeing all available options.
  *
@@ -15,7 +15,6 @@ import genId from "../../utils/generateId";
  * @event sgds-focus - Emitted when the control gains focus.
  * @event sgds-blur - Emitted when the control loses focus.
  */
-@customElement("sgds-radio")
 export class SgdsRadio extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
   /**

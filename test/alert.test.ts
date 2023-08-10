@@ -2,14 +2,12 @@ import { assert, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 import { SgdsAlert, SgdsAlertHeading, SgdsAlertLink } from "../src/components/Alert";
-import "../src/components/Alert/sgds-alert";
-import { SgdsCloseButton } from "../src/components/CloseButton";
+
+customElements.define("sgds-alert", SgdsAlert);
+customElements.define("sgds-alert-heading", SgdsAlertHeading);
+customElements.define("sgds-alert-link", SgdsAlertLink);
 
 describe("<sgds-alert-heading>", () => {
-  it("is defined", () => {
-    const el = document.createElement("sgds-alert-heading");
-    assert.instanceOf(el, SgdsAlertHeading);
-  });
   it("the default tag is h4", async () => {
     const el = await fixture(html`<sgds-alert-heading></sgds-alert-heading>`);
     assert.shadowDom.equal(
@@ -37,10 +35,6 @@ describe("<sgds-alert-heading>", () => {
 });
 
 describe("<sgds-alert-link>", () => {
-  it("is defined", () => {
-    const el = document.createElement("sgds-alert-link");
-    assert.instanceOf(el, SgdsAlertLink);
-  });
   it("semantically matches the DOM", async () => {
     const el = await fixture(html`<sgds-alert-link></sgds-alert-link>`);
     assert.shadowDom.equal(
@@ -113,12 +107,12 @@ describe("<Alert>", () => {
     assert.isTrue(alert?.classList.contains("alert-primary"));
   });
 
-  it("Should emit the sgds-hide event on dismiss click of sgds-closebutton", async () => {
+  it("Should emit the sgds-hide event on dismiss click of close button", async () => {
     const el = await fixture<SgdsAlert>(html`<sgds-alert show dismissible></sgds-alert>`);
     const onCloseSpy = sinon.spy();
     el.addEventListener("sgds-hide", onCloseSpy);
 
-    const closeButton = el.shadowRoot?.querySelector("button.btn-close") as SgdsCloseButton;
+    const closeButton = el.shadowRoot?.querySelector("button.btn-close") as HTMLButtonElement;
     closeButton?.click();
     await el.updateComplete;
     expect(el.show).to.be.false;
