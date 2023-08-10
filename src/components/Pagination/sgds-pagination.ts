@@ -85,7 +85,6 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     return pages;
   }
 
-
   get sanitizeLimit() {
     return this.limit >= this.pages.length ? this.pages.length : this.limit;
   }
@@ -209,6 +208,8 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
   }
 
   render() {
+    const isLastPage = this.currentPage === this.pages.length;
+    const isFirstPage = this.currentPage === this.pages[0];
     return html`
       <!-- <sgds-table
         tableHeaders='["#", "First Names", "Last Name", "Username"]'
@@ -220,13 +221,16 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
       ></sgds-table> -->
       <ul class="pagination pagination-${this.size} sgds" directionVariant=${this.directionVariant}>
         <!-- Previous Button -->
-        <li class="page-item" @click=${this.handlePrevButton}>
+        <li
+          class="page-item ${isFirstPage ? "disabled" : ""}"
+          @click=${isFirstPage ? undefined : this.handlePrevButton}
+        >
           <span class="page-link"> ${this.directionBtnContent("Previous", "left")} </span>
         </li>
         ${this.renderPgNumbers()} ${this.renderLastEllipsis()}
         <!-- Next Button -->
-        <li class="page-item" @click=${this.handleNextButton}>
-          <span class="page-link"> ${this.directionBtnContent("Next", "right")} </span>
+        <li class="page-item ${isLastPage ? "disabled" : ""}" @click=${isLastPage ? undefined : this.handleNextButton}>
+          <span class="page-link">${this.directionBtnContent("Next", "right")}</span>
         </li>
       </ul>
     `;
