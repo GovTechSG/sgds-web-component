@@ -129,6 +129,26 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     );
   }
 
+  renderLastEllipsis() {
+    const isEvenLimit = this.limit % 2 === 0;
+    const differentialLimitCondition = isEvenLimit
+      ? this.currentPage + Math.floor(this.limit / 2) <= this.pages.length
+      : this.currentPage + Math.floor(this.limit / 2) < this.pages.length;
+
+    if (this.pages.length !== this.limit && differentialLimitCondition) {
+      return html`
+        <li class="page-item disabled">
+          <span class="page-link">
+            <span aria-hidden="true">…</span>
+            <span class="visually-hidden">Ellipsis</span>
+          </span>
+        </li>
+      `;
+    } else {
+      return null;
+    }
+  }
+
   getLeftChevronSVG() {
     return html`
       <svg
@@ -196,7 +216,7 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
         <li class="page-item" @click=${this.handlePrevButton}>
           <span class="page-link"> ${this.directionBtnContent("Previous", "left")} </span>
         </li>
-        ${this.renderPgNumbers()}
+        ${this.renderPgNumbers()} ${this.renderLastEllipsis()}
         <!-- Next Button -->
         <li class="page-item" @click=${this.handleNextButton}>
           <span class="page-link"> ${this.directionBtnContent("Next", "right")} </span>
