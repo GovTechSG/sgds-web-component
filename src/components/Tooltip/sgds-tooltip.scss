@@ -1,8 +1,8 @@
 :host {
-  --sgds-tooltip-max-width: 20rem;
+  --tooltip-max-width: 20rem;
   display: inline-block;
 }
 
 .tooltip-inner{
-  max-width: var(--sgds-tooltip-max-width);
+  max-width: var(--tooltip-max-width);
 }
