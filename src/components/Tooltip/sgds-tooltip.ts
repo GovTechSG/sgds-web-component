@@ -10,6 +10,7 @@ import * as Popper from "@popperjs/core";
  * @summary Tooltips display more information when users hover over, focus on, or interact with an element.
  * @slot default - The element to target the tooltip to.
  *
+ * @cssproperty --sgds-tooltip-max-width - Sets the tooltips max width. Default to 20rem.
  */
 @customElement("sgds-tooltip")
 export class SgdsTooltip extends SgdsElement {
@@ -61,10 +62,12 @@ export class SgdsTooltip extends SgdsElement {
     if (this.trigger === "click") {
       this.closableContainer = document.createElement("div");
       this.closableContainer.classList.add("d-flex");
-      this.closableContainer.classList.add("gap-5");
+      this.closableContainer.classList.add("gap-4");
+      this.closableContainer.classList.add("text-start");
       const closeBtn: HTMLButtonElement = document.createElement("button");
       closeBtn.classList.add("btn-close");
       closeBtn.classList.add("btn-close-white");
+      closeBtn.classList.add("mt-1");
       closeBtn.setAttribute("aria-label", "Close");
       this.closableContainer.appendChild(closeBtn);
       this.closableContainer.insertAdjacentText("afterbegin", this.content);
