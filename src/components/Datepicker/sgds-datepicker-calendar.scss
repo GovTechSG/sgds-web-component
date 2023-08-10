@@ -26,7 +26,7 @@ button.year {
   &:hover {
     cursor: pointer;
     color: var(--datepicker-theme-color);
-    background-color: var(--datepicker-hover-background-color);
+    background-color: var(--datepicker-hover-bg-color);
   }
 }
 
@@ -38,11 +38,12 @@ td {
     color: var(--sgds-gray-400);
   }
   &[data-day]{
-    &:hover:not(.disabled){
+    &:hover:not(.disabled),
+    &.active{
       color: var(--datepicker-theme-color);
-      background-color: var(--datepicker-hover-background-color);
+      background-color: var(--datepicker-hover-bg-color);
     }
-  } 
+  }
 }
 
 

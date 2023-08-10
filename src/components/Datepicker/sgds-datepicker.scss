@@ -1,12 +1,13 @@
+@use "sass:color";
 @import "./sgds-datepicker-calendar.scss";
 @import "./sgds-datepicker-header.scss";
 
 :host {
   --datepicker-theme-color: var(--sgds-primary);
-  --datepicker-hover-background-color: var(--sgds-primary-100);
-  --datepicker-background-color: white;
-  --datepicker-closebutton-background-color: var(--sgds-primary);
-  --datepicker-closebutton-hover-background-color: #491db6;
+  --datepicker-hover-bg-color:  var(--sgds-primary-100);
+  --datepicker-bg-color: white;
+  --datepicker-closebutton-bg-color: var(--datepicker-theme-color);
+  --datepicker-closebutton-hover-bg-color: var(--sgds-primary-600);
   --datepicker-closebutton-color: white;
 }
 
@@ -15,7 +16,7 @@ div {
 }
 
 .datepicker {
-  background-color: var(--datepicker-background-color);
+  background-color: var(--datepicker-bg-color);
 }
 
 sgds-input {
@@ -24,10 +25,10 @@ sgds-input {
 }
 
 button.btn {
-  background-color: var(--datepicker-closebutton-background-color);
+  background-color: var(--datepicker-closebutton-bg-color);
   color: var(--datepicker-closebutton-color);
   &:hover {
     color: var(--datepicker-closebutton-color);
-    background-color: var(--datepicker-closebutton-hover-background-color);
+    background-color: var(--datepicker-closebutton-hover-bg-color);
   }
 }

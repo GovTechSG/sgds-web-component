@@ -18,10 +18,10 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  * @event sgds-change-date - Emitted when the state of datepicker's input changes during first load, close button reset click & date click. Date values can be accessed via event.target.value
  *
  * @cssproperty --datepicker-theme-color - Datepicker's overall theme color
- * @cssproperty --datepicker-hover-background-color - Datepicker's calendar menu hover color
- * @cssproperty --datepicker-background-color - Datepicker's menu background color
- * @cssproperty --datepicker-closebutton-background-color - Datepicker's close button background color
- * @cssproperty --datepicker-closebutton-hover-background-color - Datepicker's close button hover background color
+ * @cssproperty --datepicker-hover-bg-color - Datepicker's calendar menu hover color
+ * @cssproperty --datepicker-bg-color - Datepicker's menu background color
+ * @cssproperty --datepicker-closebutton-bg-color - Datepicker's close button background color
+ * @cssproperty --datepicker-closebutton-hover-bg-color - Datepicker's close button hover background color
  * @cssproperty --datepicker-closebutton-color - Datepicker's close button color
  */
 
