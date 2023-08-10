@@ -1,8 +1,8 @@
 :host{
-    --sgds-progress-height: 1rem;
+    --progress-height: 1rem;
     display: block;
 }
 
 .progress{
-    height : var(--sgds-progress-height);
+    height : var(--progress-height);
 }

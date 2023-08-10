@@ -8,7 +8,7 @@ import { html } from "lit";
  * @summary Provide up-to-date feedback on the progress of a workflow or action with simple yet flexible progress bars.
  * @slot default - slot for progress-bar
  *
- * @cssprop --sgds-progress-height - Sets the height of the progress wrapper.
+ * @cssprop --progress-height - Sets the height of the progress wrapper.
  */
 
 export class SgdsProgress extends SgdsElement {
@@ -20,7 +20,6 @@ export class SgdsProgress extends SgdsElement {
   render() {
     return html`
       <div
-        part="base"
         class=${classMap({
           progress: true,
           [`${this.progressClasses}`]: this.progressClasses
