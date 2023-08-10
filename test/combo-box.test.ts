@@ -38,7 +38,16 @@ describe("<sgds-combo-box>", () => {
     expect(el).to.have.attribute("value", "Item #1");
   });
 
-  it("combobox should filter the right items", async () => {
+  it("should not show any items in dropdown menu when there is no match", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box .menuList=${["apple", "pear", "orange", "apricot"]}></sgds-combo-box>`);
+
+    el.value = "apples";
+    await el.updateComplete;
+    let items = el.shadowRoot?.querySelectorAll("sgds-dropdown-item");
+    expect(items?.length).to.equal(0);
+  });
+
+  it("should filter the right items", async () => {
     const el = await fixture<SgdsComboBox>(html`<sgds-combo-box .menuList=${["apple", "pear", "orange", "apricot"]}></sgds-combo-box>`);
 
     // should only have "apple", "apricot"
