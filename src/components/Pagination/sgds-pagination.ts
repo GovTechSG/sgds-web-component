@@ -7,15 +7,11 @@ import { SgdsTable } from "../Table";
 
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 
-export type directionVariant = "icon" | "icon-text" | "text";
-export type sizeVariant = "sm" | "md" | "lg";
-
 /**
  * @summary
  *
  *
  */
-
 export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
   static styles = [SgdsElement.styles, styles];
 
@@ -26,16 +22,16 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
   }
 
   /** Inserts the length value from a given sets of data objects*/
-  @property({ type: Number }) dataLength: number = 50;
+  @property({ type: Number }) dataLength = 50;
 
   /** Sets the starting active page upon render*/
-  @property({ type: Number }) currentPage: number = 3;
+  @property({ type: Number }) currentPage = 3;
 
   /** Sets the amount of data objects to be displayed per page */
-  @property({ type: Number }) itemsPerPage: number = 5;
+  @property({ type: Number }) itemsPerPage = 5;
 
   /** Sets the page limit to be displayed at any given render. e.g 3, 5, 7, 9 */
-  @property({ type: Number }) limit: number = 5;
+  @property({ type: Number }) limit = 5;
 
   /** Sets the page direction button to contain text and/or icon */
   @property({ type: String }) directionVariant: directionVariant = "icon-text";
@@ -44,10 +40,10 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
   @property({ type: String }) size: sizeVariant = "sm";
 
   /** Toggles ellipsis buttons to be able to increment/decrement pages based on the ellipsisJump value set. By default, it will be false */
-  @property({ type: Boolean }) ellipsisOn: boolean = false;
+  @property({ type: Boolean }) ellipsisOn = false;
 
   /** When ellipsisOn is true, length of decrementing/incrementing of pages can be set with a number value*/
-  @property({ type: Number }) ellipsisJump: number = 3;
+  @property({ type: Number }) ellipsisJump = 3;
 
   connectedCallback() {
     super.connectedCallback();
@@ -89,13 +85,18 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     return pages;
   }
 
+
+  get sanitizeLimit() {
+    return this.limit >= this.pages.length ? this.pages.length : this.limit;
+  }
+
   renderPgNumbers() {
     const pagesToShow = [];
     let sanitizeStartPage = 1;
     let endPage;
 
     if (this.limit < this.pages.length) {
-      sanitizeStartPage = this.currentPage - Math.floor(this.limit / 2);
+      sanitizeStartPage = this.currentPage - Math.floor(this.sanitizeLimit / 2);
     }
 
     if (this.pages.length - sanitizeStartPage < this.limit) {
@@ -106,14 +107,14 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
       sanitizeStartPage = 1;
     }
 
-    endPage = sanitizeStartPage + this.limit - 1;
+    endPage = sanitizeStartPage + this.sanitizeLimit - 1;
 
     if (endPage > this.pages.length) {
       endPage = this.pages.length;
     }
 
     if (this.currentPage === this.pages.length) {
-      sanitizeStartPage = this.pages.length - this.limit + 1;
+      sanitizeStartPage = this.pages.length - this.sanitizeLimit + 1;
     }
 
     for (let i = sanitizeStartPage; i <= endPage; i++) {
@@ -130,23 +131,29 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
   }
 
   renderLastEllipsis() {
-    const isEvenLimit = this.limit % 2 === 0;
+    const isEvenLimit = this.sanitizeLimit % 2 === 0;
     const differentialLimitCondition = isEvenLimit
-      ? this.currentPage + Math.floor(this.limit / 2) <= this.pages.length
-      : this.currentPage + Math.floor(this.limit / 2) < this.pages.length;
+      ? this.currentPage + Math.floor(this.sanitizeLimit / 2) <= this.pages.length
+      : this.currentPage + Math.floor(this.sanitizeLimit / 2) < this.pages.length;
 
-    if (this.pages.length !== this.limit && differentialLimitCondition) {
-      return html`
-        <li class="page-item disabled">
-          <span class="page-link">
-            <span aria-hidden="true">…</span>
-            <span class="visually-hidden">Ellipsis</span>
-          </span>
-        </li>
-      `;
-    } else {
+    const shouldRenderEllipsis = this.pages.length !== this.limit && differentialLimitCondition;
+
+    if (!shouldRenderEllipsis) {
       return null;
     }
+
+    const ellipsisContent = html`
+      <span aria-hidden="true">…</span>
+      <span class="visually-hidden">Ellipsis</span>
+    `;
+
+    return html`
+      <li class="page-item ${this.ellipsisOn ? "" : "disabled"}">
+        ${this.ellipsisOn
+          ? html` <a class="page-link" role="button" tabindex="0" href="#">${ellipsisContent}</a> `
+          : html` <span class="page-link disabled">${ellipsisContent}</span> `}
+      </li>
+    `;
   }
 
   getLeftChevronSVG() {
@@ -225,5 +232,9 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     `;
   }
 }
+
+export type directionVariant = "icon" | "icon-text" | "text";
+
+export type sizeVariant = "sm" | "md" | "lg";
 
 export default SgdsPagination;
