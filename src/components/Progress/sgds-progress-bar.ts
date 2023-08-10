@@ -13,7 +13,7 @@ export class SgdsProgressBar extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
   /** The background color of the progress bar */
-  @property({ type: String, reflect: true }) variant: progressbarVariant;
+  @property({ type: String, reflect: true }) variant: ProgressBarVariant;
   /**
    * The current progress as a percentage, from 0 to 100.
    */
@@ -70,6 +70,6 @@ export class SgdsProgressBar extends SgdsElement {
   }
 }
 
-export type progressbarVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
+export type ProgressBarVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
 
 export default SgdsProgressBar;
