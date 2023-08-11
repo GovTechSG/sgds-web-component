@@ -19,7 +19,7 @@ describe("<sgds-combo-box>", () => {
     const toggleHandler = sinon.spy();
     el?.addEventListener("sgds-change", toggleHandler);
 
-    const item = el.shadowRoot?.querySelector("sgds-dropdown-item") as SgdsDropdownItem
+    const item = el.shadowRoot?.querySelector("sgds-dropdown-item") as SgdsDropdownItem;
     item?.click();
 
     expect(toggleHandler).to.have.been.calledOnce;
@@ -39,22 +39,26 @@ describe("<sgds-combo-box>", () => {
   });
 
   it("should not show any items in dropdown menu when there is no match", async () => {
-    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box .menuList=${["apple", "pear", "orange", "apricot"]}></sgds-combo-box>`);
+    const el = await fixture<SgdsComboBox>(
+      html`<sgds-combo-box .menuList=${["apple", "pear", "orange", "apricot"]}></sgds-combo-box>`
+    );
 
     el.value = "apples";
     await el.updateComplete;
-    let items = el.shadowRoot?.querySelectorAll("sgds-dropdown-item");
+    const items = el.shadowRoot?.querySelectorAll("sgds-dropdown-item");
     expect(items?.length).to.equal(0);
   });
 
   it("should filter the right items", async () => {
-    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box .menuList=${["apple", "pear", "orange", "apricot"]}></sgds-combo-box>`);
+    const el = await fixture<SgdsComboBox>(
+      html`<sgds-combo-box .menuList=${["apple", "pear", "orange", "apricot"]}></sgds-combo-box>`
+    );
 
     // should only have "apple", "apricot"
     el.value = "a";
     await el.updateComplete;
     let items = el.shadowRoot?.querySelectorAll("sgds-dropdown-item");
-    items?.forEach((item) => {
+    items?.forEach(item => {
       const itemVal = (item as SgdsDropdownItem).innerText;
       expect(itemVal).to.oneOf(["apple", "apricot"]);
     });
