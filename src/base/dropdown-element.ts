@@ -20,6 +20,7 @@ export type DropDirection = "left" | "right" | "up" | "down";
  * @event sgds-after-show - Emitted event when dropdown has been made visible to the user and CSS transitions have completed
  * @event sgds-hide - Emitted event when hide instance is called
  * @event sgds-after-hide - Emitted event when dropdown has hidden to the user and CSS transitions have completed
+ * @event sgds-select - Emitted event when a slot item is selected
  */
 
 export class DropdownElement extends SgdsElement {
@@ -212,7 +213,7 @@ export class DropdownElement extends SgdsElement {
     this.nextDropdownItemNo = currentItemNo + 1;
     this.prevDropdownItemNo = currentItemNo <= 0 ? items.length - 1 : currentItemNo - 1;
 
-    /** Emitted event from SgdsDropdown element when a the slot item is */
+    /** Emitted event from SgdsDropdown element when a slot item is selected */
     const selectedItem = e.target as SgdsDropdownItem;
     if (!selectedItem.disabled) {
       this.emit("sgds-select");

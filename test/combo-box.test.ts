@@ -1,8 +1,10 @@
 import { html } from "lit";
-import { expect, fixture } from "@open-wc/testing";
+import { expect, fixture, waitUntil } from "@open-wc/testing";
 import { SgdsComboBox } from "../src/components/ComboBox";
 import sinon from "sinon";
 import { SgdsDropdownItem } from "../src/components/Dropdown";
+import { sendKeys } from "@web/test-runner-commands";
+import { SgdsInput } from "../src/components/Input";
 
 customElements.define("sgds-combo-box", SgdsComboBox);
 
@@ -13,16 +15,29 @@ describe("<sgds-combo-box>", () => {
     expect(comboBoxInput?.disabled).to.be.true;
   });
 
-  it("should emit sgds-change event when a dropdown item is selected", async () => {
+  it("should emit sgds-select event when a dropdown item is selected", async () => {
     const el = await fixture(html`<sgds-combo-box .menuList=${["Item #1", "Item #2"]}></sgds-combo-box>`);
 
-    const toggleHandler = sinon.spy();
-    el?.addEventListener("sgds-change", toggleHandler);
+    const selectHandler = sinon.spy();
+    el?.addEventListener("sgds-select", selectHandler);
 
     const item = el.shadowRoot?.querySelector("sgds-dropdown-item") as SgdsDropdownItem;
     item?.click();
 
-    expect(toggleHandler).to.have.been.calledOnce;
+    expect(selectHandler).to.have.been.calledOnce;
+  });
+
+  it("should emit sgds-input event when input value changes", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box></sgds-combo-box>`);
+    const comboBoxInput = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+
+    const inputHandler = sinon.spy();
+    el?.addEventListener("sgds-input", inputHandler);
+
+    comboBoxInput.focus();
+    await sendKeys({ press: "A" });
+    waitUntil(() => inputHandler.calledOnce);
+    expect(inputHandler).to.have.been.calledOnce;
   });
 
   it("combobox should update value of selected item", async () => {

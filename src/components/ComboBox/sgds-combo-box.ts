@@ -13,7 +13,8 @@ import styles from "./sgds-combo-box.scss";
  *
  * @slot icon - slot for form control icon to be displayed on the right of the input box.
  *
- * @event sgds-change - Emitted when the combo box's selected value changes.
+ * @event sgds-select - Emitted when the combo box's selected value changes.
+ * @event sgds-input -  Emitted when user input is received and its value changes.
  */
 export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
   static styles = [DropdownElement.styles, styles];
@@ -72,9 +73,8 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
   }
 
   private _handleSelectChange(e: KeyboardEvent | MouseEvent) {
-    this._handleSelectSlot(e);
     this.value = (e.target as SgdsDropdownItem).innerText;
-    this.emit("sgds-change", { detail: { value: this.value } });
+    this._handleSelectSlot(e);
   }
 
   render() {

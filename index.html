@@ -600,8 +600,12 @@
 
         const comboBox = document.querySelector('sgds-combo-box');
 
-        comboBox.addEventListener('sgds-change', (event) => {
+        comboBox.addEventListener('sgds-select', (event) => {
         console.log('Selected value changed!', event.target.value);
+        });
+
+        comboBox.addEventListener('sgds-input', (event) => {
+        console.log('Input value changed!', event.target.value);
         });
 
         
