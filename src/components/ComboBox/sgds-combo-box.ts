@@ -10,7 +10,7 @@ import styles from "./sgds-combo-box.scss";
 
 /**
  * @summary ComboBox component is used for users to make one or more selections from a list.
- * 
+ *
  * @slot icon - slot for form control icon to be displayed on the right of the input box.
  *
  * @event sgds-change - Emitted when the combo box's selected value changes.
@@ -56,6 +56,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
   /**Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = "";
+  /**The list of items to display in the dropdown. */
   @property({ type: Array }) menuList: string[] = [];
 
   private _getFilteredMenuList(inputValue: string) {

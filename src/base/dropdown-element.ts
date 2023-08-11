@@ -24,6 +24,7 @@ export type DropDirection = "left" | "right" | "up" | "down";
 
 export class DropdownElement extends SgdsElement {
   static styles = SgdsElement.styles;
+  /**@internal */
   @query("ul.dropdown-menu") menu: HTMLUListElement;
   /** @internal */
   myDropdown: Ref<HTMLElement> = createRef();
