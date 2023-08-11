@@ -43,7 +43,7 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
   @property({ type: Boolean }) ellipsisOn = false;
 
   /** When ellipsisOn is true, length of decrementing/incrementing of pages can be set with a number value*/
-  @property({ type: Number }) ellipsisJump = 3;
+  @property({ type: Number }) ellipsisJump = 6;
 
   connectedCallback() {
     super.connectedCallback();
@@ -54,7 +54,7 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     const clickedLi = liTarget.closest("li");
 
     if (clickedLi) {
-      const clickedPage = Number(clickedLi.getAttribute("data-key"));
+      const clickedPage = Number(clickedLi.getAttribute("key"));
       if (clickedPage !== this.currentPage) {
         this.currentPage = clickedPage;
       }
@@ -62,20 +62,22 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
   }
 
   handleNextButton() {
-    this.currentPage = Math.min(this.currentPage + 1);
+    this.currentPage = this.currentPage + 1;
   }
 
   handlePrevButton() {
-    this.currentPage = Math.max(this.currentPage - 1);
+    this.currentPage = this.currentPage - 1;
   }
 
-  // handleNextEllipsisButton() {
-  //   this.currentPage = Math.min(this.currentPage + this.ellipsisJump);
-  // }
+  handleNextEllipsisButton() {
+    this.currentPage = this.currentPage + this.ellipsisJump;
+    if (this.currentPage + this.ellipsisJump > this.pages.length) this.currentPage === this.pages.length;
+  }
 
-  // handlePrevEllipsisButton() {
-  //   this.currentPage = Math.max(this.currentPage - this.ellipsisJump);
-  // }
+  handlePrevEllipsisButton() {
+    this.currentPage = this.currentPage - this.ellipsisJump;
+    if (this.currentPage - this.ellipsisJump < 1) this.currentPage === this.pages[0];
+  }
 
   get pages() {
     const pages = [];
@@ -122,12 +124,27 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
 
     return pagesToShow.map(
       number => html`
-        <li data-key=${number} class="page-item ${this.currentPage === number ? "active" : ""}">
+        <li key=${number} class="page-item ${this.currentPage === number ? "active" : ""}">
           <span class="page-link" @click=${this.handlePageClick}>${number}</span>
         </li>
       `
     );
   }
+
+  ellipsisContent = html`
+    <span aria-hidden="true">…</span>
+    <span class="visually-hidden">Ellipsis</span>
+  `;
+
+  renderFirstEllipsis = () => {
+    if (this.pages.length !== this.sanitizeLimit && this.currentPage - Math.floor(this.sanitizeLimit / 2) > 1)
+      return html`
+        <li class="page-item" @click=${this.handlePrevEllipsisButton}>
+          <span class="page-link disabled">${this.ellipsisContent}</span>
+        </li>
+      `;
+    else return null;
+  };
 
   renderLastEllipsis() {
     const isEvenLimit = this.sanitizeLimit % 2 === 0;
@@ -141,16 +158,14 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
       return null;
     }
 
-    const ellipsisContent = html`
-      <span aria-hidden="true">…</span>
-      <span class="visually-hidden">Ellipsis</span>
-    `;
-
     return html`
-      <li class="page-item ${this.ellipsisOn ? "" : "disabled"}">
+      <li
+        class="page-item ${this.ellipsisOn ? "" : "disabled"}"
+        @click=${this.ellipsisOn ? this.handleNextEllipsisButton : null}
+      >
         ${this.ellipsisOn
-          ? html` <a class="page-link" role="button" tabindex="0" href="#">${ellipsisContent}</a> `
-          : html` <span class="page-link disabled">${ellipsisContent}</span> `}
+          ? html` <a class="page-link" role="button" tabindex="0">${this.ellipsisContent}</a> `
+          : html` <span class="page-link disabled">${this.ellipsisContent}</span> `}
       </li>
     `;
   }
@@ -227,7 +242,7 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
         >
           <span class="page-link"> ${this.directionBtnContent("Previous", "left")} </span>
         </li>
-        ${this.renderPgNumbers()} ${this.renderLastEllipsis()}
+        ${this.ellipsisOn ? this.renderFirstEllipsis() : null} ${this.renderPgNumbers()} ${this.renderLastEllipsis()}
         <!-- Next Button -->
         <li class="page-item ${isLastPage ? "disabled" : ""}" @click=${isLastPage ? undefined : this.handleNextButton}>
           <span class="page-link">${this.directionBtnContent("Next", "right")}</span>
