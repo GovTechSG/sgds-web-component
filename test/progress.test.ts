@@ -13,7 +13,7 @@ describe("<sgds-progress>", () => {
         `);
         assert.shadowDom.equal(
             el,
-            `<div part="base" class=" progress "><slot></slot></div>`
+            `<div class=" progress "><slot></slot></div>`
         )
       });
 });
