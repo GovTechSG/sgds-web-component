@@ -69,6 +69,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
   }
 
   private _handleInputChange(e: CustomEvent) {
+    this.bsDropdown.show();
     this.value = (e.target as SgdsInput).value;
   }
 
