@@ -5,10 +5,6 @@ import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-progress-bar.scss";
 import { html } from "lit";
 
-/**
- * @csspart label - Progress bar label
- */
-
 export class SgdsProgressBar extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
