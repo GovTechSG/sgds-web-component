@@ -1,0 +1,15 @@
+.datepicker-header {
+  padding: 1.5rem 1.5rem 0;
+  border: none;
+  color: var(--datepicker-theme-color);
+  button {
+    background-color: transparent;
+    color: var(--datepicker-theme-color);
+    border: none;
+    font-weight: bold;
+  }
+
+  svg {
+    font-size: 10rem;
+  }
+}
