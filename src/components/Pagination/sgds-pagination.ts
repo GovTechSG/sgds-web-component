@@ -22,16 +22,16 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
   }
 
   /** Inserts the length value from a given sets of data objects*/
-  @property({ type: Number }) dataLength = 50;
+  @property({ type: Number }) dataLength = 0;
 
   /** Sets the starting active page upon render*/
-  @property({ type: Number }) currentPage = 3;
+  @property({ type: Number }) currentPage = 1;
 
   /** Sets the amount of data objects to be displayed per page */
   @property({ type: Number }) itemsPerPage = 5;
 
   /** Sets the page limit to be displayed at any given render. e.g 3, 5, 7, 9 */
-  @property({ type: Number }) limit = 5;
+  @property({ type: Number }) limit = 3;
 
   /** Sets the page direction button to contain text and/or icon */
   @property({ type: String }) directionVariant: directionVariant = "icon-text";
@@ -43,7 +43,7 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
   @property({ type: Boolean }) ellipsisOn = false;
 
   /** When ellipsisOn is true, length of decrementing/incrementing of pages can be set with a number value*/
-  @property({ type: Number }) ellipsisJump = 6;
+  @property({ type: Number }) ellipsisJump = 3;
 
   connectedCallback() {
     super.connectedCallback();
@@ -71,12 +71,13 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
 
   handleNextEllipsisButton() {
     this.currentPage = this.currentPage + this.ellipsisJump;
-    if (this.currentPage + this.ellipsisJump > this.pages.length) this.currentPage === this.pages.length;
+    if (this.currentPage + this.ellipsisJump > this.pages.length) this.currentPage = this.pages.length;
+
   }
 
   handlePrevEllipsisButton() {
     this.currentPage = this.currentPage - this.ellipsisJump;
-    if (this.currentPage - this.ellipsisJump < 1) this.currentPage === this.pages[0];
+    if (this.currentPage - this.ellipsisJump < 1) this.currentPage = this.pages[0];
   }
 
   get pages() {
@@ -160,7 +161,7 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
 
     return html`
       <li
-        class="page-item ${this.ellipsisOn ? "" : "disabled"}"
+        class="page-item ${this.ellipsisOn ? "" : "disabled"} "
         @click=${this.ellipsisOn ? this.handleNextEllipsisButton : null}
       >
         ${this.ellipsisOn

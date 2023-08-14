@@ -200,10 +200,13 @@
         </div>
         <div class="container">
             <h2>Pagination W/ Table</h2>
-            <sgds-pagination directionVariant="icon"></sgds-pagination>
-            <sgds-pagination directionVariant="icon" limit="7" ellipsisOn></sgds-pagination>
-            <sgds-pagination directionVariant="icon-text" ellipsisOn></sgds-pagination>
-            <sgds-pagination directionVariant="text"></sgds-pagination>
+            <p>default, ellipsis off</p>
+            <sgds-pagination directionVariant="icon" dataLength="50"></sgds-pagination>
+            <p>ellipsisOn, limit 7, ellipsisJump 3</p>
+            <sgds-pagination directionVariant="icon" limit="7" ellipsisOn dataLength="50"></sgds-pagination>
+            <p>ellipsisOn, limit 3, ellipsisJump 6</p>
+            <sgds-pagination directionVariant="icon-text" limit="3" ellipsisJump="6" ellipsisOn dataLength="50"></sgds-pagination>
+            <sgds-pagination directionVariant="text" dataLength="50"></sgds-pagination>
             </div>
         <div class="container">
             <h2>Button</h2>
