@@ -2,6 +2,7 @@
     width: 100%;
     .progress-bar{
         // to match parent element's height
+        font-size: var(--sgds-progress-font-size);
         height: 100%;
         // if progressbarVariant is 'light'
         &[class*="bg-light"]{
