@@ -28,6 +28,7 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 export class SgdsDatepicker extends ScopedElementsMixin(DatepickerDropdownElement) {
   static styles = [DatepickerDropdownElement.styles, styles];
 
+  /**@internal */
   static get scopedElements() {
     return {
       "sgds-input": SgdsInput,
@@ -41,16 +42,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DatepickerDropdownElemen
 
   /** When true, adds disabled attribute to input and button element */
   @property({ type: Boolean, reflect: true }) disabled = false;
-
-  /** @internal */
-  @property({ type: String })
-  view: string;
-
-  /** @internal */
-  @property({ type: Array }) selectedDateRange: Date[] = [];
-
-  /** @internal */
-  @property({ attribute: false }) displayDate: Date = new Date();
 
   /** The initial value of DatePicker on first load for single & range mode as array of string. eg.'["22/12/2023"]' for single & '["22/12/2023","25/12/2023"]' for range respectively  */
   @property({ type: Array, reflect: true }) initialValue: string[];
@@ -68,7 +59,17 @@ export class SgdsDatepicker extends ScopedElementsMixin(DatepickerDropdownElemen
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
 
   /** @internal */
-  @state() value: string;
+  @state() private value: string;
+
+  /** @internal */
+  @state()
+  private view: string;
+
+  /** @internal */
+  @state() private selectedDateRange: Date[] = [];
+
+  /** @internal */
+  @state() private displayDate: Date = new Date();
 
   constructor() {
     super();
