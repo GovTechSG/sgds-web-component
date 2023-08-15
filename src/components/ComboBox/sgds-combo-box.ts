@@ -18,6 +18,7 @@ import styles from "./sgds-combo-box.scss";
  */
 export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
   static styles = [DropdownElement.styles, styles];
+  /**@internal */
   static get scopedElements() {
     return {
       "sgds-input": SgdsInput,
