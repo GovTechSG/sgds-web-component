@@ -103,7 +103,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
         </div>
         <ul class="dropdown-menu" part="menu">
           ${this._getFilteredMenuList(this.value).map(
-            item => html`<sgds-dropdown-item href="#" @click=${this._handleSelectChange}>${item}</sgds-dropdown-item>`
+            item => html`<sgds-dropdown-item href="javascript:void(0)" @click=${this._handleSelectChange}>${item}</sgds-dropdown-item>`
           )}
         </ul>
       </div>
