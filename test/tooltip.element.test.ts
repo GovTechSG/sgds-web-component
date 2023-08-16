@@ -49,7 +49,8 @@ describe("sgds-tooltip", () => {
     await el.updateComplete;
     await waitUntil(() => el.shadowRoot?.querySelector(".tooltip-inner"));
     expect(el.shadowRoot?.querySelector("div.tooltip-inner")).to.have.text("hello");
-    expect(el.shadowRoot?.querySelector("div.tooltip-inner>div.d-flex.gap-4>button.btn-close.btn-close-white")).not.to.be.null;
+    expect(el.shadowRoot?.querySelector("div.tooltip-inner>div.d-flex.gap-4>button.btn-close.btn-close-white")).not.to
+      .be.null;
   });
 
   it("placement props updates tooltipConfig", async () => {

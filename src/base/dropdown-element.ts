@@ -173,16 +173,13 @@ export class DropdownElement extends SgdsElement {
     });
   }
   _getMenuItems(): SgdsDropdownItem[] {
-    // for case when default slot is used e.g. dropdown, mainnavdropdown
-    if (this.shadowRoot.querySelector("slot")) {
-      return this.shadowRoot.querySelector("slot").assignedElements({ flatten: true }) as SgdsDropdownItem[];
-    }
-    // for case when there is no slot e.g. combobox
-    if (this.menu.hasChildNodes()) {
-      const menuItems = this.menu.children;
-
-      return [...menuItems] as SgdsDropdownItem[];
-    }
+    const dropdownItemsOutsideSlot = Array.from(this.shadowRoot.querySelectorAll("sgds-dropdown-item"));
+    const dropdownItemsInsideSlot = this.shadowRoot.querySelector("slot")
+        .assignedElements({ flatten: true })
+        .filter(item => item.tagName.toLowerCase() === "sgds-dropdown-item");
+    
+    // return all dropdown items
+    return dropdownItemsInsideSlot.concat(dropdownItemsOutsideSlot) as SgdsDropdownItem[];
   }
 
   _getActiveMenuItems(): SgdsDropdownItem[] {
