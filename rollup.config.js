@@ -40,12 +40,12 @@ const reactBuildPlugins = [
 const buildSgdsPackage = () => {
   const sgdsWcPackage = [
     {
-      input: ["src/index.ts","src/components.ts"],
+      input: ["src/index.ts", "src/components.ts"],
       output: {
         entryFileNames: "[name].js",
         dir: "lib",
         format: "esm",
-        sourcemap: true,
+        sourcemap: true
       },
       plugins: wcPlugins
     }
