@@ -25,14 +25,6 @@ describe("button-element", () => {
                     <ul>
                       <li><a href="#">Contact</a></li>
                       <li><a href="#">Feedback</a></li>
-                      <li>
-                        <a
-                          href="https://www.reach.gov.sg/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Reach.gov.sg</a
-                        >
-                      </li>
                     </ul>
                   </div>
                 </div>

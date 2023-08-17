@@ -1,0 +1,54 @@
+## Range-Selection DatePicker
+
+When `mode="range"`, DatePicker allows a selection of two dates, start and end.
+
+export const RangeTemplate = () => html` <sgds-datepicker mode="range"></sgds-datepicker> `;
+
+<Canvas>
+  <Story name="Range Selection" height="500px">{RangeTemplate.bind({})}</Story>
+</Canvas>
+
+## Flip
+
+By default, the Popover component of DatePicker flips top and bottom depending on the space at the current placement. Turn it off, by setting `flip="false"`
+
+export const FlipTemplate = () => html` <sgds-datepicker mode="range"></sgds-datepicker> `;
+
+<Canvas>
+  <Story name="Flip" height="500px">{FlipTemplate.bind({})}</Story>
+</Canvas>
+
+## Setting the initialValue on first load
+
+### single mode
+
+For default `mode="single"`, use the `initialValue` prop to set the initial value of input on first load. Note that by default dateFormat prop is DD/MM/YYYY. eg. `'["23/05/2023"]'` If dateFormat is passed in, change the initialValue accordingly.
+
+export const SingleModeTemplate = () => html` <sgds-datepicker initialValue='["23/05/2023"]'></sgds-datepicker> `;
+
+<Canvas>
+  <Story name="Initial Value for Single" height="500px">{SingleModeTemplate.bind({})}</Story>
+</Canvas>
+
+
+### range mode
+
+For `mode="range"`, use the same `initialValue` prop to set the initial value of startDate and endDate. Note that by default dateFormat prop is DD/MM/YYYY. eg. `'["23/05/2023", "15/12/2023" ]'` If dateFormat is passed in, change the initialValue accordingly.
+
+export const RangeModeTemplate = () => html` <sgds-datepicker mode="range" initialValue='["23/05/2023","15/12/2023"]'></sgds-datepicker> `;
+
+<Canvas>
+  <Story name="Initial Value for Range" height="500px">{RangeModeTemplate.bind({})}</Story>
+</Canvas>
+
+
+## minDate & maxDate
+
+When `minDate` is set, users can only select the specified date and dates beyond it. When `maxDate` is set. users can only select the specified date and dates before it. To pass in as ISOString format. eg. `minDate="2023-12-10T12:00:00.000Z" maxDate="2023-12-19T12:00:00.000Z"`
+
+
+export const MinMaxTemplate = () => html` <sgds-datepicker mode="range" minDate="2023-06-10T12:00:00.000Z" maxDate="2023-06-19T12:00:00.000Z"></sgds-datepicker> `;
+
+<Canvas>
+  <Story name="Min and Max Date" height="500px">{MinMaxTemplate.bind({})}</Story>
+</Canvas>

@@ -2,7 +2,7 @@
   "name": "@govtechsg/sgds-web-component",
   "version": "1.0.0-rc.2",
   "description": "",
-  "main": "lib/umd/index.js",
+  "main": "lib/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {

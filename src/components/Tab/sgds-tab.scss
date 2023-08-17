@@ -7,8 +7,7 @@
   background-color: var(--sgds-gray-200);
   color: var(--sgds-gray-400);
   border-color: var(--sgds-gray-400);
-  cursor: none;
-  //TODO: disabled state cursor to change to not-allowed
+  cursor: not-allowed;
 }
 
 li.nav-item {

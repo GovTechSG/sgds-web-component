@@ -3,7 +3,10 @@ import { queryAsync } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
 import styles from "./sgds-mainnav-dropdown.scss";
-
+/**
+ * @slot default - The menu items. Pass in sgds-dropdown-item as the menu items
+ * @slot toggler - The content of the toggler to pass in html content. `togglerText` property takes precedence over this slot when both are defined.
+ */
 export class SgdsMainnavDropdown extends DropdownElement {
   static styles = [DropdownElement.styles, styles];
 
@@ -36,7 +39,7 @@ export class SgdsMainnavDropdown extends DropdownElement {
           tabindex=${this.disabled ? "-1" : "0"}
           role="button"
         >
-          ${this.togglerText}
+          ${this.togglerText ? this.togglerText : html`<slot name="toggler"></slot>`}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
