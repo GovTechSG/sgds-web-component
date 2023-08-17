@@ -25,13 +25,14 @@ $utilities: map-merge(
 );
 
 
-:root {
+:host {
     font-family: var(--sgds-body-font-family, $font-family-sans-serif);
     font-size: var(--sgds-body-font-size, $font-size-base);
     font-weight: var(--sgds-body-font-weight, $font-weight-base);
     line-height: var(--sgds-body-line-height, $line-height-base);
     // Generates all rgb color declared in the $theme-colors from _variables.scss
     @each $color, $value in $theme-colors-rgb {
+        
         --sgds-#{$color}-rgb : #{$value};
     }
 
@@ -51,4 +52,4 @@ $utilities: map-merge(
     //shared variables with modal and drawer
     --overlay-background-color:rgba(0,0,0,0.5);
     --zindex-modal : #{$zindex-modal};
-  }
+}
