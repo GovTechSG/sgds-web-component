@@ -97,7 +97,6 @@ export class SgdsMainnav extends SgdsElement {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
 
     childElements.forEach(e => {
-      console.log(e);
       e.setAttribute("name", e.tagName.toLowerCase());
     });
   }
