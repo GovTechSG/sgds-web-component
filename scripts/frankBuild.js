@@ -13,7 +13,7 @@ async function createPackageFile() {
     ...packageOthers,
     private: false,
     typings: "./index.d.ts",
-    main: "./umd/index.js",
+    main: "./index.js",
     module: "./index.js"
   };
 

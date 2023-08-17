@@ -108,10 +108,4 @@ export class SgdsRadio extends SgdsElement {
   }
 }
 
-declare global {
-  interface HTMLElementTagNameMap {
-    "sgds-radio": SgdsRadio;
-  }
-}
-
 export default SgdsRadio;

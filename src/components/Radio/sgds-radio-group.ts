@@ -207,9 +207,5 @@ export class SgdsRadioGroup extends SgdsElement {
     `;
   }
 }
-declare global {
-  interface HTMLElementTagNameMap {
-    "sgds-radio-group": SgdsRadioGroup;
-  }
-}
+
 export default SgdsRadioGroup;

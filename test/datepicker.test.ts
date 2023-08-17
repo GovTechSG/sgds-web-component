@@ -2,6 +2,7 @@ import { elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testi
 import { SgdsDatepicker } from "../src/components/Datepicker";
 import DatepickerCalendar from "../src/components/Datepicker/datepicker-calendar";
 import DatepickerHeader from "../src/components/Datepicker/datepicker-header";
+import { SgdsInput } from "../src/components/Input";
 
 customElements.define("sgds-datepicker", SgdsDatepicker);
 customElements.define("sgds-datepicker-header", DatepickerHeader);
@@ -18,7 +19,7 @@ describe("sgds-datepicker", () => {
   it("opens the datepicker menu when sgds-input is clicked", async () => {
     const el = await fixture(html` <sgds-datepicker></sgds-datepicker> `);
 
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
     const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
 
     expect(menuEl?.classList.contains("show")).to.be.false;
@@ -33,7 +34,7 @@ describe("sgds-datepicker", () => {
   it("when menu is open, closes the datepicker menu when sgds-input is clicked", async () => {
     const el = await fixture(html` <sgds-datepicker></sgds-datepicker> `);
 
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
     const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
 
     expect(menuEl?.classList.contains("show")).to.be.false;
@@ -53,7 +54,7 @@ describe("sgds-datepicker", () => {
   it("closes the menu when sgds-button is clicked", async () => {
     const el = await fixture(html` <sgds-datepicker></sgds-datepicker> `);
 
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
     const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
     const buttonEl = el.shadowRoot?.querySelector("button") as HTMLButtonElement;
 
@@ -75,7 +76,7 @@ describe("sgds-datepicker", () => {
     const initialDate = '["23/11/2023"]';
     const initialValueArray = JSON.parse(initialDate) as string[];
     const el = await fixture(html`<sgds-datepicker .initialValue=${initialValueArray}></sgds-datepicker>`);
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
 
     expect(inputEl?.value).to.equal("23/11/2023");
   });
@@ -84,7 +85,7 @@ describe("sgds-datepicker", () => {
     const initialDate = '["23/11/2023", "25/11/2023"]';
     const initialValueArray = JSON.parse(initialDate) as string[];
     const el = await fixture(html`<sgds-datepicker mode="range" .initialValue=${initialValueArray}></sgds-datepicker>`);
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
 
     expect(inputEl?.value).to.equal("23/11/2023 - 25/11/2023");
   });
@@ -92,7 +93,7 @@ describe("sgds-datepicker", () => {
   it("closes the menu when outside of the element sgds-datepicker is clicked", async () => {
     const el = await fixture(html` <sgds-datepicker></sgds-datepicker> `);
 
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
     const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
 
     expect(menuEl?.classList.contains("show")).to.be.false;
@@ -113,7 +114,7 @@ describe("sgds-datepicker", () => {
 
   it("should be able to select and display a date in single mode and close menu", async () => {
     const el = await fixture(html`<sgds-datepicker></sgds-datepicker>`);
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
     const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLElement;
     const calendarEl = el.shadowRoot?.querySelector("ul.datepicker sgds-datepicker-calendar") as HTMLElement;
     const tdButtonOne = calendarEl.shadowRoot?.querySelector("tbody td[data-day='1']") as HTMLTableCellElement;
@@ -140,7 +141,7 @@ describe("sgds-datepicker", () => {
 
   it("should be able to select and display 2 dates in range mode and close menu only after 2 dates", async () => {
     const el = await fixture(html`<sgds-datepicker mode="range"></sgds-datepicker>`);
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
     inputEl?.click();
     const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLElement;
     const calendarEl = el.shadowRoot?.querySelector("ul.datepicker sgds-datepicker-calendar") as HTMLElement;
@@ -176,7 +177,7 @@ describe("sgds-datepicker", () => {
 
     // 1. click the input to open, check the menu has open
 
-    const inputElement = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+    const inputElement = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
     const menuElement = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
     const datepickerHeader = el?.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
     const datepickerCalendar = el?.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
@@ -244,7 +245,7 @@ describe("sgds-datepicker", () => {
 
     // 1. click the input to open, check the menu has open
 
-    const inputElement = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+    const inputElement = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
     const menuElement = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
     const datepickerHeader = el?.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
     const datepickerCalendar = el?.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
@@ -305,7 +306,7 @@ describe("sgds-datepicker", () => {
     const el = await fixture(html`<sgds-datepicker></sgds-datepicker>`);
 
     // 1.  click the input to open menu, check menu should open
-    const inputElement = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+    const inputElement = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
     const menuElement = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
     const datepickerHeader = el?.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
     const datepickerCalendar = el?.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
@@ -402,7 +403,7 @@ describe("sgds-datepicker", () => {
 
   it("disables the component when disabled property is true", async () => {
     const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker disabled></sgds-datepicker>`);
-    const input = el.shadowRoot?.querySelector("sgds-input") as HTMLInputElement;
+    const input = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
     const button = el.shadowRoot?.querySelector("button") as HTMLButtonElement;
 
     expect(input).to.have.attribute("disabled");
