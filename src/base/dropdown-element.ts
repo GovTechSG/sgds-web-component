@@ -1,7 +1,7 @@
 import type { StrictModifiers } from "@popperjs/core";
 import * as Popper from "@popperjs/core";
 import { Dropdown } from "bootstrap";
-import { property, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 import { Ref, createRef } from "lit/directives/ref.js";
 import { SgdsDropdownItem } from "../components/Dropdown/sgds-dropdown-item";
 import genId from "../utils/generateId";
@@ -26,7 +26,7 @@ export type DropDirection = "left" | "right" | "up" | "down";
 export class DropdownElement extends SgdsElement {
   static styles = SgdsElement.styles;
   /**@internal */
-  // @query("ul.dropdown-menu") menu: HTMLUListElement;
+  @query("ul.dropdown-menu") menu: HTMLUListElement;
   /** @internal */
   myDropdown: Ref<HTMLElement> = createRef();
   /** @internal */
@@ -173,14 +173,19 @@ export class DropdownElement extends SgdsElement {
     });
   }
   _getMenuItems(): SgdsDropdownItem[] {
-    const dropdownItemsOutsideSlot = Array.from(this.shadowRoot.querySelectorAll("sgds-dropdown-item"));
-    const dropdownItemsInsideSlot = this.shadowRoot
-      .querySelector("slot")
-      .assignedElements({ flatten: true })
-      .filter(item => item.tagName.toLowerCase() === "sgds-dropdown-item");
+    // for case when default slot is used e.g. dropdown, mainnavdropdown
+    if (this.shadowRoot.querySelector("slot#default")) {
+      return (this.shadowRoot.querySelector("slot#default") as HTMLSlotElement)?.assignedElements({
+        flatten: true
+      }) as SgdsDropdownItem[];
+    }
 
-    // return all dropdown items
-    return dropdownItemsInsideSlot.concat(dropdownItemsOutsideSlot) as SgdsDropdownItem[];
+    // for case when there is no slot e.g. combobox
+    if (this.menu.hasChildNodes()) {
+      const menuItems = this.menu.children;
+
+      return [...menuItems] as SgdsDropdownItem[];
+    }
   }
 
   _getActiveMenuItems(): SgdsDropdownItem[] {
