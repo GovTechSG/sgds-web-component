@@ -16,6 +16,7 @@ export * from "./components/Input";
 export * from "./components/Mainnav";
 export * from "./components/Masthead";
 export * from "./components/Modal";
+export * from "./components/Progress";
 export * from "./components/QuantityToggle";
 export * from "./components/Radio";
 export * from "./components/Sidenav";
