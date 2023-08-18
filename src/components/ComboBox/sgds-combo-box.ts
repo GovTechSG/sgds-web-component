@@ -63,16 +63,17 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
   /**The list of items to display in the dropdown. */
   @property({ type: Array }) menuList: string[] = [];
 
-  @query(".dropdown-menu")
-  // To get the dropdown menu element after render
-  private dropdownMenu: HTMLUListElement;
-
+  /**The function used to determine if a menu item should be shown in the menu list, given the user's input value. */
   @property({ type: Function })
   filterFunction: FilterFunction = (inputValue: string, menuItem: string) => {
     const itemLowerCase = menuItem.toLowerCase();
     const valueLower = inputValue.toLowerCase();
     return itemLowerCase.startsWith(valueLower);
   };
+
+  @query(".dropdown-menu")
+  // To get the dropdown menu element after render
+  private dropdownMenu: HTMLUListElement;
 
   private _getFilteredMenuList(inputValue: string) {
     return this.menuList.filter(item => this.filterFunction.call(null, inputValue, item));
