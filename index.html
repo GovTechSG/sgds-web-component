@@ -618,6 +618,7 @@ dp.addEventListener('sgds-change-date', event => {
         comboBox.addEventListener('sgds-input', (event) => {
         console.log('Input value changed!', event.target.value);
         });
+        comboBox.filterFunction = (inputValue, menuItem) => inputValue === menuItem;
     </script>
 </body>
 

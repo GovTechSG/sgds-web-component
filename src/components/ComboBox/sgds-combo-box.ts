@@ -8,6 +8,8 @@ import { SgdsDropdownItem } from "../Dropdown";
 import { SgdsInput } from "../Input";
 import styles from "./sgds-combo-box.scss";
 
+type FilterFunction = (inputValue: string, menuItem: string) => boolean;
+
 /**
  * @summary ComboBox component is used for users to make one or more selections from a list.
  *
@@ -65,12 +67,15 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
   // To get the dropdown menu element after render
   private dropdownMenu: HTMLUListElement;
 
+  @property({ type: Function })
+  filterFunction: FilterFunction = (inputValue: string, menuItem: string) => {
+    const itemLowerCase = menuItem.toLowerCase();
+    const valueLower = inputValue.toLowerCase();
+    return itemLowerCase.startsWith(valueLower);
+  };
+
   private _getFilteredMenuList(inputValue: string) {
-    return this.menuList.filter(n => {
-      const nLowerCase = n.toLowerCase();
-      const valueLower = inputValue.toLowerCase();
-      return nLowerCase.startsWith(valueLower);
-    });
+    return this.menuList.filter(item => this.filterFunction.call(null, inputValue, item));
   }
 
   private _handleInputChange(e: CustomEvent) {
