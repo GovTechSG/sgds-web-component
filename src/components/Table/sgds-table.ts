@@ -7,14 +7,14 @@ import styles from "./sgds-table.scss";
 /**
  * @summary The use of a table is to organise a collections of data into readable rows
  *
- * @cssproperty --sgds-table-bg - Table's background color
- * @cssproperty --sgds-table-accent-bg - Table's accent background color
- * @cssproperty --sgds-table-striped-color - Text color for striped table
- * @cssproperty --sgds-table-striped-bg - Background color for striped table
- * @cssproperty --sgds-table-active-color - Active text color for hovered row
- * @cssproperty --sgds-table-active-bg - Active background color for hovered row
- * @cssproperty --sgds-table-hover-color - Hovered text color for hover table
- * @cssproperty --sgds-table-hover-bg - Hovered background color for hover table
+ * @cssproperty --table-bg - Table's background color
+ * @cssproperty --table-accent-bg - Table's accent background color
+ * @cssproperty --table-striped-color - Text color for striped table
+ * @cssproperty --table-striped-bg - Background color for striped table
+ * @cssproperty --table-active-color - Active text color for hovered row
+ * @cssproperty --table-active-bg - Active background color for hovered row
+ * @cssproperty --table-hover-color - Hovered text color for hover table
+ * @cssproperty --table-hover-bg - Hovered background color for hover table
  */
 
 export class SgdsTable extends SgdsElement {
