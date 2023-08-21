@@ -16,22 +16,24 @@ export const Template = ({
   close
 }) => {
   return html`
-    <sgds-combo-box
-      label=${label}
-      hintText=${hintText}
-      name=${name}
-      placeholder=${placeholder}
-      ?autofocus=${autofocus}
-      ?disabled=${disabled}
-      ?required=${required}
-      ?readonly=${readonly}
-      value=${value}
-      .menuList=${menuList}
-      .popperOpts=${popperOpts}
-      ?menuIsOpen=${menuIsOpen}
-      close=${close}
-    >
-    </sgds-combo-box>
+    <div style="height:100px;">
+      <sgds-combo-box
+        label=${label}
+        hintText=${hintText}
+        name=${name}
+        placeholder=${placeholder}
+        ?autofocus=${autofocus}
+        ?disabled=${disabled}
+        ?required=${required}
+        ?readonly=${readonly}
+        value=${value}
+        .menuList=${menuList}
+        .popperOpts=${popperOpts}
+        ?menuIsOpen=${menuIsOpen}
+        close=${close}
+      >
+      </sgds-combo-box>
+    </div>
   `;
 };
 
