@@ -5,6 +5,8 @@ import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-progress-bar.scss";
 import { html } from "lit";
 
+export type ProgressBarVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
+
 export class SgdsProgressBar extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
@@ -65,7 +67,5 @@ export class SgdsProgressBar extends SgdsElement {
     `;
   }
 }
-
-export type ProgressBarVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
 
 export default SgdsProgressBar;
