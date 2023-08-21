@@ -94,7 +94,7 @@ describe("<sgds-combo-box>", () => {
     );
 
     // filterFunction that accepts all menuItem regardless of inputValue
-    el.filterFunction = (inputValue: string, menuItem: string) => true;
+    el.filterFunction = () => true;
 
     el.value = "test";
     await el.updateComplete;

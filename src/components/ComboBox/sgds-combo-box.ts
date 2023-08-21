@@ -1,12 +1,13 @@
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
-import { property, query } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { SgdsDropdownItem } from "../Dropdown";
 import { SgdsInput } from "../Input";
 import styles from "./sgds-combo-box.scss";
+import { watch } from "../../utils/watch";
 
 type FilterFunction = (inputValue: string, menuItem: string) => boolean;
 
@@ -71,12 +72,23 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
     return itemLowerCase.startsWith(valueLower);
   };
 
-  @query(".dropdown-menu")
-  // To get the dropdown menu element after render
-  private dropdownMenu: HTMLUListElement;
+  /**@internal */
+  @state()
+  filteredMenuList: string[] = [];
 
-  private _getFilteredMenuList(inputValue: string) {
-    return this.menuList.filter(item => this.filterFunction.call(null, inputValue, item));
+  /**@internal */
+  @watch("value")
+  handleFilterMenu() {
+    this.filteredMenuList = this.menuList.filter(item => this.filterFunction.call(null, this.value, item));
+
+    if (!this.myDropdown || !this.bsDropdown) return;
+
+    // To hide dropdown menu when filtered menuList is empty
+    if (this.filteredMenuList.length === 0) {
+      this.hideMenu();
+    } else {
+      this.showMenu();
+    }
   }
 
   private _handleInputChange(e: CustomEvent) {
@@ -90,15 +102,6 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
   }
 
   render() {
-    const filteredMenu = this._getFilteredMenuList(this.value);
-
-    // To hide dropdown menu when filtered menuList is empty
-    if (filteredMenu.length === 0) {
-      this.dropdownMenu?.classList.add("hide");
-    } else {
-      this.dropdownMenu?.classList.remove("hide");
-    }
-
     return html`
       <div class="sgds combobox dropdown">
         <sgds-input
@@ -121,7 +124,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
           <slot name="icon"></slot>
         </div>
         <ul class="dropdown-menu" part="menu">
-          ${filteredMenu.map(
+          ${this.filteredMenuList.map(
             item =>
               html`<sgds-dropdown-item href="javascript:void(0)" @click=${this._handleSelectChange}
                 >${item}</sgds-dropdown-item
