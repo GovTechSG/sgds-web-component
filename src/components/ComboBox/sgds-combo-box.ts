@@ -86,7 +86,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
     // To hide dropdown menu when filtered menuList is empty
     if (this.filteredMenuList.length === 0) {
       this.hideMenu();
-    } else {
+    } else if (this.menuIsOpen) {
       this.showMenu();
     }
   }
@@ -110,7 +110,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
           hintText=${this.hintText}
           name=${this.name}
           ${ref(this.myDropdown)}
-          @click=${() => this._onClickButton()}
+          @click=${() => (this.filteredMenuList.length > 0 ? this._onClickButton() : this.hideMenu())}
           placeholder=${this.placeholder}
           ?autofocus=${this.autofocus}
           ?disabled=${this.disabled}
