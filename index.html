@@ -57,6 +57,10 @@
             --sidenav-theme-color: green;
         }
 
+        sgds-progress + sgds-progress{
+            margin-top: 8px;
+        }
+
         sgds-masthead {
             --sgds-masthead-crest-color: white;
             --sgds-masthead-text-color: red;
@@ -122,6 +126,11 @@
             <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
             <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
           </sgds-mainnav-dropdown>
+          <sgds-mainnav-dropdown togglerText="Dropdown" slot="end" >
+            <sgds-dropdown-item href="https://google.com">Item 1</sgds-dropdown-item>
+            <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
+            <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
+          </sgds-mainnav-dropdown>
         <sgds-button slot="end">Login</sgds-button>
         <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px">
         </dev-console-widget>
@@ -152,6 +161,27 @@
 
 
     <main>
+        <div class="cotainer">
+            <h2>Progress</h2>
+            <div class="row">
+                <sgds-progress height="40">
+                    <sgds-progress-bar value="50"></sgds-progress-bar>
+                </sgds-progress>
+
+                <sgds-progress height="40">
+                    <sgds-progress-bar value="50" variant="secondary"></sgds-progress-bar>
+                </sgds-progress>
+
+                <sgds-progress height="10">
+                    <sgds-progress-bar value="50" striped animated variant="danger"></sgds-progress-bar>
+                </sgds-progress>
+
+                <sgds-progress height="40">
+                    <sgds-progress-bar value="50" striped animated variant="danger" label="hey"></sgds-progress-bar>
+                </sgds-progress>
+            </div>
+            
+        </div>
         <div class="container">
             <sgds-combo-box placeholder='test combo box' menuList='["John Smith", "Jack Adams"]' label="label" hintText="hint">
                 <!-- <svg
@@ -400,7 +430,7 @@
                 <sgds-tab slot="nav">3</sgds-tab>
                 <sgds-tab-panel name="one">hello</sgds-tab-panel>
             </sgds-tab-group>
-            <sgds-tab-group tabsClasses="mb-3 border border-primary" bodyClasses="p-3">
+            <sgds-tab-group tabsClasses="mb-3 border border-primary">
                 <sgds-tab disabled slot="nav" panel="one">hello</sgds-tab>
                 <sgds-tab slot="nav" panel="two">2</sgds-tab>
                 <sgds-tab slot="nav" panel="three">3</sgds-tab>

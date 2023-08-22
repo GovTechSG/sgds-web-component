@@ -1,6 +1,7 @@
 import { expect, fixture, oneEvent } from "@open-wc/testing";
 import { html } from "lit";
 import { SgdsFileUpload } from "../src/components/FileUpload";
+import { SgdsButton } from "../src/components/Button";
 
 customElements.define("sgds-file-upload", SgdsFileUpload);
 
@@ -29,7 +30,7 @@ describe("sgds-file-upload", () => {
     const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload disabled></sgds-file-upload>`);
 
     // simulate click on the button
-    (el.shadowRoot?.querySelector("sgds-button") as HTMLButtonElement)?.click();
+    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton)?.click();
 
     // check if the input element modal popup is not displayed
     const inputEl = el.shadowRoot?.querySelector("input") as HTMLInputElement;

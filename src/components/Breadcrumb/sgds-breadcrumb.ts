@@ -56,7 +56,6 @@ export class SgdsBreadcrumb extends SgdsElement {
       // The last breadcrumb item is the "current page"
 
       if (index === items.length - 1) {
-        console.log(items.length - 1);
         item.setAttribute("aria-current", "page");
       } else {
         item.removeAttribute("aria-current");
