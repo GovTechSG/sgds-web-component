@@ -8,6 +8,7 @@ import { SgdsDropdownItem } from "../Dropdown";
 import { SgdsInput } from "../Input";
 import styles from "./sgds-combo-box.scss";
 import { watch } from "../../utils/watch";
+import { DropdownListElement } from "../../base/dropdown-list-element";
 
 type FilterFunction = (inputValue: string, menuItem: string) => boolean;
 
@@ -19,7 +20,7 @@ type FilterFunction = (inputValue: string, menuItem: string) => boolean;
  * @event sgds-select - Emitted when the combo box's selected value changes.
  * @event sgds-input -  Emitted when user input is received and its value changes.
  */
-export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
+export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
   static styles = [DropdownElement.styles, styles];
   /**@internal */
   static get scopedElements() {
@@ -74,7 +75,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
 
   /**@internal */
   @state()
-  filteredMenuList: string[] = [];
+  private filteredMenuList: string[] = [];
 
   /**@internal */
   @watch("value")
@@ -98,7 +99,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
 
   private _handleSelectChange(e: KeyboardEvent | MouseEvent) {
     this.value = (e.target as SgdsDropdownItem).innerText;
-    this._handleSelectSlot(e);
+    this.handleSelectSlot(e);
   }
 
   render() {
@@ -110,7 +111,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownElement) {
           hintText=${this.hintText}
           name=${this.name}
           ${ref(this.myDropdown)}
-          @click=${() => (this.filteredMenuList.length > 0 ? this._onClickButton() : this.hideMenu())}
+          @click=${() => (this.filteredMenuList.length > 0 ? this.showMenu() : this.hideMenu())}
           placeholder=${this.placeholder}
           ?autofocus=${this.autofocus}
           ?disabled=${this.disabled}
