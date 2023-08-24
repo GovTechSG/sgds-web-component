@@ -1,7 +1,7 @@
 import type { StrictModifiers } from "@popperjs/core";
 import * as Popper from "@popperjs/core";
 import { Dropdown } from "bootstrap";
-import { property, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 import { Ref, createRef } from "lit/directives/ref.js";
 import { SgdsDropdownItem } from "../components/Dropdown/sgds-dropdown-item";
 import genId from "../utils/generateId";
@@ -20,11 +20,13 @@ export type DropDirection = "left" | "right" | "up" | "down";
  * @event sgds-after-show - Emitted event when dropdown has been made visible to the user and CSS transitions have completed
  * @event sgds-hide - Emitted event when hide instance is called
  * @event sgds-after-hide - Emitted event when dropdown has hidden to the user and CSS transitions have completed
+ * @event sgds-select - Emitted event when a slot item is selected
  */
 
 export class DropdownElement extends SgdsElement {
   static styles = SgdsElement.styles;
-
+  /**@internal */
+  @query("ul.dropdown-menu") menu: HTMLUListElement;
   /** @internal */
   myDropdown: Ref<HTMLElement> = createRef();
   /** @internal */
@@ -141,7 +143,8 @@ export class DropdownElement extends SgdsElement {
     this.addEventListener("keydown", this._handleKeyboardEvent);
     if (this.close !== "inside") {
       this.addEventListener("blur", e => {
-        return e.relatedTarget == null ? this.bsDropdown.hide() : e.stopPropagation();
+        // when clicking outside of the dropdown component, it becomes null, hide the dropdown
+        return e.relatedTarget === null ? this.bsDropdown.hide() : e.stopPropagation();
       });
       addEventListener("click", e => this._handleClickOutOfElement(e, this));
     }
@@ -170,7 +173,19 @@ export class DropdownElement extends SgdsElement {
     });
   }
   _getMenuItems(): SgdsDropdownItem[] {
-    return this.shadowRoot.querySelector("slot").assignedElements({ flatten: true }) as SgdsDropdownItem[];
+    // for case when default slot is used e.g. dropdown, mainnavdropdown
+    if (this.shadowRoot.querySelector("slot#default")) {
+      return (this.shadowRoot.querySelector("slot#default") as HTMLSlotElement)?.assignedElements({
+        flatten: true
+      }) as SgdsDropdownItem[];
+    }
+
+    // for case when there is no slot e.g. combobox
+    if (this.menu.hasChildNodes()) {
+      const menuItems = this.menu.children;
+
+      return [...menuItems] as SgdsDropdownItem[];
+    }
   }
 
   _getActiveMenuItems(): SgdsDropdownItem[] {
@@ -191,7 +206,7 @@ export class DropdownElement extends SgdsElement {
     // focus or blur items depending on active or not
     items.forEach(i => {
       i.setAttribute("tabindex", i === activeItem ? "0" : "-1");
-      i === activeItem ? i.focus() : i.blur();
+      i === activeItem && i.focus();
     });
   }
 
@@ -201,7 +216,7 @@ export class DropdownElement extends SgdsElement {
     this.nextDropdownItemNo = currentItemNo + 1;
     this.prevDropdownItemNo = currentItemNo <= 0 ? items.length - 1 : currentItemNo - 1;
 
-    /** Emitted event from SgdsDropdown element when a the slot item is */
+    /** Emitted event from SgdsDropdown element when a slot item is selected */
     const selectedItem = e.target as SgdsDropdownItem;
     if (!selectedItem.disabled) {
       this.emit("sgds-select");
@@ -212,6 +227,7 @@ export class DropdownElement extends SgdsElement {
     const menuItems = this._getActiveMenuItems();
     switch (e.key) {
       case ARROW_DOWN:
+        e.preventDefault();
         if (!this.menuIsOpen) return this.bsDropdown.show();
         if (this.nextDropdownItemNo === menuItems.length) {
           return this._setMenuItem(0);
@@ -219,6 +235,7 @@ export class DropdownElement extends SgdsElement {
           return this._setMenuItem(this.nextDropdownItemNo > 0 ? this.nextDropdownItemNo : 0);
         }
       case ARROW_UP:
+        e.preventDefault();
         if (!this.menuIsOpen) return this.bsDropdown.show();
         if (this.prevDropdownItemNo < 0) {
           return this._setMenuItem(menuItems.length - 1, false);

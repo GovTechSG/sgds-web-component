@@ -55,7 +55,7 @@ export class SgdsMainnavDropdown extends DropdownElement {
           </svg>
         </a>
         <ul class="dropdown-menu" role="menu" part="menu">
-          <slot @click=${this._handleSelectSlot}></slot>
+          <slot id="default" @click=${this._handleSelectSlot}></slot>
         </ul>
       </li>
     `;

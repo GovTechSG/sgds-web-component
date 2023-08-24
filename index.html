@@ -115,14 +115,13 @@
 <body class="d-flex flex-column min-vh-100"></body>
     <sgds-masthead fluid></sgds-masthead>  
     <div class="grid">
-      <sgds-scoped-button>hello`</sgds-scoped-button>
     <sgds-mainnav>
         <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
         <sgds-mainnav-item href="#">Home</sgds-mainnav-item>
         <sgds-mainnav-item href="#">About</sgds-mainnav-item>
         <sgds-mainnav-item href="#" slot="end" class="test test2">Info</sgds-mainnav-item>
         <sgds-mainnav-item href="#" slot="end">Contact Us</sgds-mainnav-item>
-        <sgds-mainnav-dropdown togglerText="Dropdown" menuIsOpen close="inside">
+        <sgds-mainnav-dropdown togglerText="Dropdown" menuIsOpen>
             <sgds-dropdown-item href="https://google.com">Item 1</sgds-dropdown-item>
             <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
             <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
@@ -184,6 +183,21 @@
             
         </div>
         <div class="container">
+            <sgds-combo-box placeholder='test combo box' menuList='["John Smith", "Jack Adams"]' label="label" hintText="hint">
+                <!-- <svg
+                    slot="icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-search"
+                    viewBox="0 0 16 16"
+                >
+                    <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                    />
+                </svg> -->
+            </sgds-combo-box>
             <h2>Datepicker</h2>
             <sgds-datepicker id="myDatepicker" initialValue='["22/06/2023"]' minDate="2023-05-15T12:00:00.000Z"></sgds-datepicker>
 
@@ -492,7 +506,7 @@
             <div class="container">
                 <h2>Dropdown</h2>
                 <div class="row">
-                    <sgds-dropdown togglerText="Dropdown" menuIsOpen close="inside">
+                    <sgds-dropdown togglerText="Dropdown" menuIsOpen>
                         <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
                         <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
                         <sgds-dropdown-item href="#" disabled>
@@ -624,11 +638,19 @@ dp.addEventListener('sgds-change-date', event => {
             console.log(formData.get('input1'));
             console.log(formData.get('cb1'));
             console.log(formData.get('cb2'));
-    alert('All fields are valid!');
-  });
-        
+            alert('All fields are valid!');
+        });
 
-
+        const comboBox = document.querySelector('sgds-combo-box');
+        comboBox.addEventListener('sgds-select', (event) => {
+        console.log('Selected value changed!', event.target.value);
+        });
+        comboBox.addEventListener('sgds-input', (event) => {
+        console.log('Input value changed!', event.target.value);
+        });
+        comboBox.filterFunction = (inputValue, menuItem) => {
+            return menuItem.includes(inputValue);
+        }
     </script>
 </body>
 
