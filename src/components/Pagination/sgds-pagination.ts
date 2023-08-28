@@ -46,7 +46,8 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     this.emit("sgds-page-change", { detail: { currentPage: this.currentPage } });
   }
 
-  handlePageClick(event: MouseEvent) {
+  /** @internal */
+  private handlePageClick(event: MouseEvent) {
     const liTarget = event.target as HTMLElement;
     const clickedLi = liTarget.closest("li");
 
@@ -58,25 +59,30 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     }
   }
 
-  handleNextButton() {
+  /** @internal */
+  private handleNextButton() {
     this.currentPage = this.currentPage + 1;
   }
 
-  handlePrevButton() {
+  /** @internal */
+  private handlePrevButton() {
     this.currentPage = this.currentPage - 1;
   }
 
-  handleNextEllipsisButton() {
+  /** @internal */
+  private handleNextEllipsisButton() {
     this.currentPage = this.currentPage + this.ellipsisJump;
     if (this.currentPage >= this.pages.length) this.currentPage = this.pages.length;
   }
 
-  handlePrevEllipsisButton() {
+  /** @internal */
+  private handlePrevEllipsisButton() {
     this.currentPage = this.currentPage - this.ellipsisJump;
     if (this.currentPage <= 1) this.currentPage = this.pages[0];
   }
 
-  get pages() {
+  /** @internal */
+  private get pages() {
     const pages = [];
     for (let i = 1; i <= Math.ceil(this.dataLength / this.itemsPerPage); i++) {
       pages.push(i);
@@ -84,11 +90,13 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     return pages;
   }
 
-  get sanitizeLimit() {
+  /** @internal */
+  private get sanitizeLimit() {
     return this.limit >= this.pages.length ? this.pages.length : this.limit;
   }
 
-  renderPgNumbers() {
+  /** @internal */
+  private renderPgNumbers() {
     const pagesToShow = [];
     let sanitizeStartPage = 1;
     let endPage;
@@ -133,7 +141,8 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     <span class="visually-hidden">Ellipsis</span>
   `;
 
-  renderFirstEllipsis = () => {
+  /** @internal */
+  private renderFirstEllipsis = () => {
     if (this.pages.length !== this.sanitizeLimit && this.currentPage - Math.floor(this.sanitizeLimit / 2) > 1)
       return html`
         <li class="page-item" @click=${this.handlePrevEllipsisButton}>
@@ -143,7 +152,8 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     else return null;
   };
 
-  renderLastEllipsis() {
+  /** @internal */
+  private renderLastEllipsis() {
     const isEvenLimit = this.sanitizeLimit % 2 === 0;
     const differentialLimitCondition = isEvenLimit
       ? this.currentPage + Math.floor(this.sanitizeLimit / 2) <= this.pages.length
@@ -167,7 +177,8 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     `;
   }
 
-  getLeftChevronSVG() {
+  /** @internal */
+  private getLeftChevronSVG() {
     return html`
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -185,7 +196,8 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     `;
   }
 
-  getRightChevronSVG() {
+  /** @internal */
+  private getRightChevronSVG() {
     return html`
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -203,7 +215,8 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     `;
   }
 
-  directionBtnContent(directionLabel: string, iconClass: string) {
+  /** @internal */
+  private directionBtnContent(directionLabel: string, iconClass: string) {
     if (this.directionVariant === "icon") {
       return iconClass === "left" ? this.getLeftChevronSVG() : this.getRightChevronSVG();
     } else if (this.directionVariant === "icon-text") {
