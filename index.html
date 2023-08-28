@@ -199,14 +199,22 @@
             </div>
         </div>
         <div class="container">
-            <h2>Pagination W/ Table</h2>
-            <p>default, ellipsis off</p>
-            <sgds-pagination directionVariant="icon" dataLength="50"></sgds-pagination>
-            <p>ellipsisOn, limit 7, ellipsisJump 3</p>
-            <sgds-pagination directionVariant="icon" limit="7" ellipsisOn dataLength="50"></sgds-pagination>
+            <h3>sample table, elipsis off</h3>
+            <sgds-table id="tablesample"></sgds-table>
+            <sgds-pagination id="samplepage" directionVariant="icon"></sgds-pagination>
+            <br><br>
+            <h3>ellipsisOn, limit 7, ellipsisJump 3</h3>
+            <sgds-table id="tablesample2"></sgds-table>
+            <sgds-pagination id="samplepage2" directionVariant="icon" limit="7" ellipsisOn></sgds-pagination>
+            <br><br><br><br><br><br>
+            <h3>Test</h3>
+            <sgds-pagination dataLength="50" limit="3" itemsPerPage="5" currentPage="1" ellipsisOn></sgds-pagination>
+
             <p>ellipsisOn, limit 3, ellipsisJump 6</p>
+            <sgds-pagination  directionVariant="icon" dataLength="3" limit="7" itemsPerPage="1" currentPage="1"></sgds-pagination>
             <sgds-pagination directionVariant="icon-text" limit="3" ellipsisJump="6" ellipsisOn dataLength="50"></sgds-pagination>
             <sgds-pagination directionVariant="text" dataLength="50"></sgds-pagination>
+            <sgds-pagination directionVariant="text" dataLength="50" ellipsisOn ellipsisJump="6" itemsPerPage="5" limit="5"></sgds-pagination>
             </div>
         <div class="container">
             <h2>Button</h2>
@@ -472,11 +480,7 @@
         <div class="container">
             <h2>Table Default</h2>
             <div class="row">
-                    <sgds-table tableHeaders='["#", "First Names", "Last Name", "Username"]' tableData='[[1, "Mark", "Otto", "@mdo"],
-                    [2, "Jacob", "12hornton", "@fat"],
-                    [3, "Larry", "@Bird", "@twitter"],
-                    [4, "Chuck", "Norris", "@asdasdasd"]
-                  ]'></sgds-table>
+                    <sgds-table></sgds-table>
             </div>
             <br>
             <h2>Table w/ Sort</h2>
@@ -540,6 +544,91 @@
                       <button onclick="tooltip.show()">click me</button>
                 </div>
     <script>
+     
+     async function fetchPosts() {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("error fetching posts:", error);
+    return;
+  }
+}
+
+fetchPosts().then(posts => {
+  const tableHeaders = ["Id", "Title", "Body"]; 
+  const tableData = posts.map(post => [
+    post.id,
+    post.title,
+    post.body
+  ]); // transform data
+
+  // fetch the initial data for page 3
+  const currentPage = 3;
+  const itemsPerPage = 5;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexofFirstItem = indexOfLastItem - itemsPerPage;
+  const displayedData = tableData.slice(indexofFirstItem, indexOfLastItem);
+
+  const tablesample = document.getElementById("tablesample");
+  if (tablesample) {
+    tablesample.tableData = displayedData;
+    tablesample.tableHeaders = tableHeaders;
+  }
+
+ 
+  const paginationEl = document.getElementById("samplepage");
+  if (paginationEl) {
+    paginationEl.dataLength = posts.length;
+    paginationEl.currentPage = currentPage;
+    paginationEl.itemsPerPage = itemsPerPage;
+
+    paginationEl.addEventListener("sgds-page-change", event => {
+      const updatedCurrentPage = event.detail.currentPage;
+
+      const indexOfLastItem = updatedCurrentPage * itemsPerPage;
+      const indexofFirstItem = indexOfLastItem - itemsPerPage;
+      const updatedDisplayedData = tableData.slice(indexofFirstItem, indexOfLastItem);
+
+      // Update the table data when the page changes
+      tablesample.tableData = updatedDisplayedData;
+    });
+  }
+
+
+  const tablesample2 = document.getElementById("tablesample2");
+  if (tablesample2) {
+    tablesample2.tableData = displayedData;
+    tablesample2.tableHeaders = tableHeaders;
+  }
+
+
+  const paginationEl2 = document.getElementById("samplepage2");
+  if (paginationEl2) {
+    paginationEl2.dataLength = posts.length;
+    paginationEl2.currentPage = currentPage;
+    paginationEl2.itemsPerPage = itemsPerPage;
+
+    paginationEl2.addEventListener("sgds-page-change", event => {
+      const updatedCurrentPage = event.detail.currentPage;
+
+      const indexOfLastItem = updatedCurrentPage * itemsPerPage;
+      const indexofFirstItem = indexOfLastItem - itemsPerPage;
+      const updatedDisplayedData = tableData.slice(indexofFirstItem, indexOfLastItem);
+
+      // Update the table data when the page changes
+      tablesample2.tableData = updatedDisplayedData;
+    });
+  }
+});
+
+
+
+
+
+
+
         const drawer = document.querySelector('.drawer-overview');
         console.log('drawer' + drawer.nextElementSibling)
         const openButton = drawer.nextElementSibling;
