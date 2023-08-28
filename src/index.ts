@@ -33,6 +33,8 @@ declare global {
     "sgds-mainnav": Components.SgdsMainnav;
     "sgds-masthead": Components.SgdsMasthead;
     "sgds-modal": Components.SgdsModal;
+    "sgds-progress": Components.SgdsProgress;
+    "sgds-progress-bar": Components.SgdsProgressBar;
     "sgds-quantity-toggle": Components.SgdsQuantityToggle;
     "sgds-radio-group": Components.SgdsRadioGroup;
     "sgds-radio": Components.SgdsRadio;
