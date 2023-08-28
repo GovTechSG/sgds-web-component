@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { property, query } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-pagination.scss";
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";

@@ -1,0 +1,6 @@
+li {
+  cursor: pointer;
+  &.disabled {
+    cursor: default;
+  }
+}

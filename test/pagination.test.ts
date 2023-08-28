@@ -1,5 +1,5 @@
 import { SgdsPagination } from "../src/components/Pagination/sgds-pagination";
-import { fixture, assert, expect, waitUntil, elementUpdated, oneEvent } from "@open-wc/testing";
+import { fixture, assert, expect,  elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 
 customElements.define("sgds-pagination", SgdsPagination);
@@ -311,7 +311,6 @@ it("renders first ellipsis when ellipsisOn = true", async () => {
   )) as SgdsPagination;
 
   const pagePrevEllipsis = el.shadowRoot?.querySelectorAll("li")[1]?.querySelector("span[aria-hidden='true']");
-  const pageNextEllipsis = el.shadowRoot?.querySelectorAll("li")[5]?.querySelector("span[aria-hidden='true']");
   expect(pagePrevEllipsis).to.not.exist;
 
   //when currentpage is 5 which is above limit, both ellipsis side should show
