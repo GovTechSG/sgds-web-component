@@ -1,28 +1,20 @@
 import { html } from "lit";
 import { property, query } from "lit/decorators.js";
-import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-pagination.scss";
-import { SgdsTable } from "../Table";
-
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { watch } from "../../utils/watch";
 
 /**
- * @summary
+ * @summary The Pagination component enables the user to select a specific page from a range of pages
  *
- *
- */
+ * @event sgds-page-change - Event is fired when handleNextButton, handlePrevButton, handleNextEllipsisButton and handlePrevtEllipsisButton was called.
+ **/
 export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
   static styles = [SgdsElement.styles, styles];
 
-  static get scopedElements() {
-    return {
-      // "sgds-table": SgdsTable
-    };
-  }
-
   /** Inserts the length value from a given sets of data objects*/
-  @property({ type: Number }) dataLength = 0;
+  @property({ type: String }) dataLength = 0;
 
   /** Sets the starting active page upon render*/
   @property({ type: Number }) currentPage = 1;
@@ -49,6 +41,11 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     super.connectedCallback();
   }
 
+  @watch("currentPage")
+  handleValueChange() {
+    this.emit("sgds-page-change", { detail: { currentPage: this.currentPage } });
+  }
+
   handlePageClick(event: MouseEvent) {
     const liTarget = event.target as HTMLElement;
     const clickedLi = liTarget.closest("li");
@@ -71,13 +68,12 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
 
   handleNextEllipsisButton() {
     this.currentPage = this.currentPage + this.ellipsisJump;
-    if (this.currentPage + this.ellipsisJump > this.pages.length) this.currentPage = this.pages.length;
-
+    if (this.currentPage >= this.pages.length) this.currentPage = this.pages.length;
   }
 
   handlePrevEllipsisButton() {
     this.currentPage = this.currentPage - this.ellipsisJump;
-    if (this.currentPage - this.ellipsisJump < 1) this.currentPage = this.pages[0];
+    if (this.currentPage <= 1) this.currentPage = this.pages[0];
   }
 
   get pages() {
@@ -155,7 +151,7 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
 
     const shouldRenderEllipsis = this.pages.length !== this.limit && differentialLimitCondition;
 
-    if (!shouldRenderEllipsis) {
+    if (!shouldRenderEllipsis || this.sanitizeLimit >= this.pages.length) {
       return null;
     }
 
@@ -227,14 +223,6 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     const isLastPage = this.currentPage === this.pages.length;
     const isFirstPage = this.currentPage === this.pages[0];
     return html`
-      <!-- <sgds-table
-        tableHeaders='["#", "First Names", "Last Name", "Username"]'
-        tableData='[
-        ["1", "John", "Doe", "@johndoe"],
-        ["2", "Jane", "Doe", "@janedoe"],
-        ["3", "Bob", "Smith", "@bobsmith"]
-      ]'
-      ></sgds-table> -->
       <ul class="pagination pagination-${this.size} sgds" directionVariant=${this.directionVariant}>
         <!-- Previous Button -->
         <li
