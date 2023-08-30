@@ -1,6 +1,6 @@
 import type { StrictModifiers } from "@popperjs/core";
 import * as Popper from "@popperjs/core";
-import { Dropdown } from "bootstrap";
+import  Dropdown  from "bootstrap/js/src/dropdown.js"
 import { property, state } from "lit/decorators.js";
 import { Ref, createRef } from "lit/directives/ref.js";
 import { SgdsDropdownItem } from "../components/Dropdown/sgds-dropdown-item";

@@ -1,4 +1,4 @@
-import { Collapse } from "bootstrap";
+import  Collapse  from "bootstrap/js/src/collapse";
 import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
