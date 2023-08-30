@@ -5,7 +5,7 @@ import litcss from "rollup-plugin-postcss-lit";
 const packageJson = require("./package.json");
 import generatePackageJson from "rollup-plugin-generate-package-json";
 import replace from "@rollup/plugin-replace";
-
+import { visualizer } from "rollup-plugin-visualizer";
 const wcPlugins = [
   resolve({
     browser: true
@@ -22,7 +22,8 @@ const wcPlugins = [
   typescript({
     tsconfig: "tsconfig.json",
     useTsconfigDeclarationDir: true
-  })
+  }),
+  visualizer()
 ];
 
 const reactBuildPlugins = [
