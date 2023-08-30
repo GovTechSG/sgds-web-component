@@ -1,5 +1,5 @@
 import * as Popper from "@popperjs/core";
-import  Tooltip  from "bootstrap/js/src/tooltip";
+import Tooltip from "bootstrap/js/src/tooltip";
 import { html } from "lit";
 import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
