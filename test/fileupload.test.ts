@@ -119,7 +119,6 @@ describe("sgds-file-upload", () => {
       expect(listItems?.length).to.equal(2);
 
       const removeBtn = listItems?.[0].querySelector(".fileupload-list-item span:last-child");
-      console.log("removeBtn", removeBtn);
       removeBtn?.dispatchEvent(new Event("click"));
       await el.updateComplete;
 

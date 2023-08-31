@@ -152,7 +152,6 @@ describe("<Alert>", () => {
   it("when show is true, alert should have show class", async () => {
     const el = await fixture(html`<sgds-alert variant="primary" show>Test alert</sgds-alert>`);
     const base = el.shadowRoot?.querySelector(".sgds.alert");
-    console.log(base);
     expect(base?.classList.contains("show")).to.be.true;
   });
 

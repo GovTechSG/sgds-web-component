@@ -71,10 +71,13 @@ const buildSgdsPackage = () => {
         input: "src/react/index.ts",
         output: [
           {
-            file: "lib/react/index.js",
+            entryFileNames: "[name].js",
+            dir: "lib",
             format: "esm",
             sourcemap: true,
-            exports: "named"
+            exports: "named",
+            preserveModules: true,
+            preserveModulesRoot: "src",
           }
         ],
         plugins: [
