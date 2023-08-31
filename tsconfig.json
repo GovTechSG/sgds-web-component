@@ -13,7 +13,11 @@
     "noImplicitAny": false,
     "importHelpers": true,
     "rootDir": "src",
-    "allowJs": true
+    "allowJs": true,
+    "typeRoots": [
+      "./src/typings",
+      "./node_modules/@types"
+  ]
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "lib", "test", "mocks", "react"]

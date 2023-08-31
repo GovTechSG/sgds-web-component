@@ -1,6 +1,8 @@
 import type { StrictModifiers } from "@popperjs/core";
 import * as Popper from "@popperjs/core";
 import Dropdown from "bootstrap/js/src/dropdown";
+import type{ Dropdown as BsDropdown } from "bootstrap"
+
 import { property, state } from "lit/decorators.js";
 import { Ref, createRef } from "lit/directives/ref.js";
 import mergeDeep from "../utils/mergeDeep";
@@ -20,7 +22,7 @@ export class DatepickerDropdownElement extends SgdsElement {
   /** @internal */
   myDropdown: Ref<HTMLElement> = createRef();
   /** @internal */
-  bsDropdown: Dropdown = null;
+  bsDropdown: BsDropdown = null;
 
   /** When true, adds no flip even when placement does not fit */
   @property({ type: Boolean })

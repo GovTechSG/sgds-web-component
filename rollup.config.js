@@ -77,7 +77,7 @@ const buildSgdsPackage = () => {
             sourcemap: true,
             exports: "named",
             preserveModules: true,
-            preserveModulesRoot: "src",
+            preserveModulesRoot: "src"
           }
         ],
         plugins: [

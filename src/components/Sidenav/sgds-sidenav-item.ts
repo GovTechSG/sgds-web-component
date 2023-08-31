@@ -1,4 +1,5 @@
 import Collapse from "bootstrap/js/src/collapse";
+import type { Collapse as BsCollapse } from "bootstrap";
 import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -27,7 +28,7 @@ export class SgdsSidenavItem extends SgdsElement {
   /** @internal */
   private myCollapse: Ref<HTMLElement> = createRef();
   /** @internal */
-  private bsCollapse: Collapse = null;
+  private bsCollapse: BsCollapse = null;
 
   /**
    *  when true, toggles the sidenav-item to open on first load and set the active stylings.

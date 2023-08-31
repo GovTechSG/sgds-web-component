@@ -1,5 +1,7 @@
 import * as Popper from "@popperjs/core";
 import Tooltip from "bootstrap/js/src/tooltip";
+import type{ Tooltip as BsTooltip } from "bootstrap"
+
 import { html } from "lit";
 import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
@@ -17,7 +19,7 @@ export class SgdsTooltip extends SgdsElement {
   /**@internal */
   myTooltip: Ref<HTMLElement> = createRef();
   /**@internal */
-  bsTooltip: Tooltip = null;
+  bsTooltip: BsTooltip = null;
 
   /** The tooltip's content. Content has to be textual */
   @property({ type: String })
@@ -35,7 +37,7 @@ export class SgdsTooltip extends SgdsElement {
   private popperConfig: Partial<Popper.Options>;
   /**@internal */
   @state()
-  private tooltipConfig: Partial<Tooltip.Options>;
+  private tooltipConfig: Partial<BsTooltip.Options>;
   /**@internal */
   @queryAssignedElements()
   private tooltipTargetElements: Array<HTMLElement>;
@@ -91,7 +93,7 @@ export class SgdsTooltip extends SgdsElement {
       html: true,
       sanitize: false, // to allow button element,
       container: this.shadowRoot.querySelector("div") // tooltip to appear inside the shadow root of sgds-tooltip instead of anywhere in the DOM, so that scoped styles can apply
-    } as Partial<Tooltip.Options>;
+    } as Partial<BsTooltip.Options>;
     this.bsTooltip = new Tooltip(this.myTooltip.value, this.tooltipConfig);
   }
   firstUpdated() {
