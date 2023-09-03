@@ -26,7 +26,9 @@ const V1_0_0_rc = [
   "Textarea",
   "Toast",
   "Tooltip",
-  "Pagination"
+  "Pagination",
+  "Datepicker",
+  "ComboBox"
 ];
 
 // const componentStories = () => {

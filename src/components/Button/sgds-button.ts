@@ -36,8 +36,7 @@ export type ButtonVariant =
 export class SgdsButton extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
-  /** @internal */
-  @query(".btn") button: HTMLButtonElement | HTMLLinkElement;
+  @query(".btn") private button: HTMLButtonElement | HTMLLinkElement;
 
   /** @internal */
   private readonly formSubmitController = new FormSubmitController(this, {

@@ -20,9 +20,9 @@ export interface IStepMetaData {
  * @event sgds-arrived - Emitted right after the activeStep has updated its state, when upcoming step has arrived. Call `getMethod()` on this event to get the current step's component.
  * @event sgds-reset - Emitted right before the step is reset to its defaultActiveStep. Event is fired when reset method is called.
  *
- * @cssproperty --sgds-stepper-default-color - Sets the theme color for default stepper marker. <br>Default value `--sgds-gray-400`
- * @cssproperty --sgds-stepper-theme-color - Sets the theme color for active, completed and clickable stepper marker. <br>Default value `--sgds-primary`
- * @cssproperty --sgds-stepper-theme-hover-color - Sets the theme hover color for clickable stepper marker. <br>Default value `--sgds-primary-600`
+ * @cssproperty --stepper-default-color - Sets the theme color for default stepper marker. <br>Default value `--sgds-gray-400`
+ * @cssproperty --stepper-theme-color - Sets the theme color for active, completed and clickable stepper marker. <br>Default value `--sgds-primary`
+ * @cssproperty --stepper-theme-hover-color - Sets the theme hover color for clickable stepper marker. <br>Default value `--sgds-primary-600`
  *
  */
 export class SgdsStepper extends SgdsElement {
