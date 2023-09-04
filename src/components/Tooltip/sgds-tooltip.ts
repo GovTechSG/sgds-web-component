@@ -1,6 +1,6 @@
 import * as Popper from "@popperjs/core";
 import Tooltip from "bootstrap/js/src/tooltip";
-import type{ Tooltip as BsTooltip } from "bootstrap"
+import type { Tooltip as BsTooltip } from "bootstrap";
 
 import { html } from "lit";
 import { property, queryAssignedElements, state } from "lit/decorators.js";

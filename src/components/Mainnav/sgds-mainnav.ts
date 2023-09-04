@@ -1,5 +1,5 @@
 import Collapse from "bootstrap/js/src/collapse";
-import type{ Collapse as BsCollapse } from "bootstrap"
+import type { Collapse as BsCollapse } from "bootstrap";
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";

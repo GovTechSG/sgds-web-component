@@ -14,11 +14,8 @@
     "importHelpers": true,
     "rootDir": "src",
     "allowJs": true,
-    "typeRoots": [
-      "./src/typings",
-      "./node_modules/@types"
-  ]
+    "typeRoots": ["./src/typings", "./node_modules/@types"]
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "typings"],
   "exclude": ["node_modules", "lib", "test", "mocks", "react"]
 }
