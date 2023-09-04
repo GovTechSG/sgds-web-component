@@ -274,6 +274,7 @@
             <sgds-table id="tablesample2"></sgds-table>
             <sgds-pagination id="samplepage2" directionVariant="icon" limit="7" ellipsisOn></sgds-pagination>
             <br><br><br><br><br><br>
+            
             <h3>Test</h3>
             <sgds-pagination dataLength="50" limit="3" itemsPerPage="5" currentPage="1" ellipsisOn></sgds-pagination>
 
@@ -502,7 +503,7 @@
             <br>
             <h2>Table w/ Sort</h2>
             <div class="row">
-                <sgds-table sort tableHeaders='["#", "Serial Number", "Last Name", "Username"]' tableData='[[1, "Mark", "Otto", "@mdo"],
+                <sgds-table tableHeaders='["#", "Serial Number", "Last Name", "Username"]' tableData='[[1, "Mark", "Otto", "@mdo"],
                 [2, "Jacob", "12hornton", "@fat"],
                 [3, "Larry", "@Bird", "@twitter"],
                 [4, "Chuck", "Norris", "@asdasdasd"]
@@ -609,7 +610,7 @@ fetchPosts().then(posts => {
       const updatedDisplayedData = tableData.slice(indexofFirstItem, indexOfLastItem);
 
       // Update the table data when the page changes
-      tablesample.tableData = updatedDisplayedData;
+      table.tableData = updatedDisplayedData;
     });
   }
 
