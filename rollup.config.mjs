@@ -48,6 +48,7 @@ const reactBuildPlugins = [
 ];
 const buildSgdsPackage = () => {
   const sgdsWcPackage = [
+    // bundled version for cdn 
     {
       input: ["src/index.ts"],
       output: {
@@ -59,6 +60,7 @@ const buildSgdsPackage = () => {
       plugins: wcPlugins,
       external
     },
+    // unbundled for local installation
     {
       input: ["src/components/index.ts"],
       output: {
@@ -82,51 +84,52 @@ const buildSgdsPackage = () => {
     }
   ];
 
-  // if (process.env.NODE_ENV === "production") {
-  //   const reactPackage = [
-  //     {
-  //       input: "src/react/index.ts",
-  //       output: [
-  //         {
-  //           entryFileNames: "[name].js",
-  //           dir: "lib",
-  //           format: "esm",
-  //           sourcemap: true,
-  //           exports: "named",
-  //           preserveModules: true,
-  //           preserveModulesRoot: "src"
-  //         }
-  //       ],
-  //       plugins: [
-  //         ...reactBuildPlugins,
-  //         generatePackageJson({
-  //           baseContents: {
-  //             name: `${packageJson.name}/react`,
-  //             private: false,
-  //             main: "./cjs/index.js",
-  //             module: "./index.js",
-  //             types: "./index.d.ts"
-  //           }
-  //         })
-  //       ],
-  //       external: ["@lit-labs/react", "react"].push(external)
-  //     },
-  //     {
-  //       input: "src/react/index.ts",
-  //       output: [
-  //         {
-  //           file: "lib/react/cjs/index.js",
-  //           format: "cjs",
-  //           sourcemap: true,
-  //           exports: "named"
-  //         }
-  //       ],
-  //       plugins: [...reactBuildPlugins],
-  //       external: ["@lit-labs/react", "react"].push(external)
-  //     }
-  //   ];
-  //   return sgdsWcPackage.concat(reactPackage);
-  // }
+  if (process.env.NODE_ENV === "production") {
+    const reactPackage = [
+      {
+        input: "src/react/index.ts",
+        output: [
+          {
+            entryFileNames: "[name].js",
+
+            dir: "lib",
+            format: "esm",
+            sourcemap: true,
+            exports: "named",
+            preserveModules: true,
+            preserveModulesRoot: "src"
+          }
+        ],
+        plugins: [
+          ...reactBuildPlugins,
+          // generatePackageJson({
+          //   baseContents: {
+          //     name: `${packageJson.name}/react`,
+          //     private: false,
+          //     main: "./cjs/index.js",
+          //     module: "./index.js",
+          //     types: "./index.d.ts"
+          //   }
+          // })
+        ],
+        external: ["@lit-labs/react", "react", ...external]
+      },
+      {
+        input: "src/react/index.ts",
+        output: [
+          {
+            file: "lib/react/cjs/index.js",
+            format: "cjs",
+            sourcemap: true,
+            exports: "named"
+          }
+        ],
+        plugins: [...reactBuildPlugins],
+        external: ["@lit-labs/react", "react", ...external]
+      }
+    ];
+    return sgdsWcPackage.concat(reactPackage);
+  }
   return sgdsWcPackage;
 };
 
