@@ -1,74 +1,81 @@
-import { html } from "lit";
+import { html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
-import SgdsElement from "../src/base/sgds-element";
 import { SgdsTable } from "../src/components/Table";
 import { SgdsPagination } from "../src/components/Pagination";
 
-interface IDetails {
+interface Post {
+  id: number | string;
+  title: string | number;
+  body: string | number;
+}
+
+interface PaginationProps {
   currentPage: number;
   itemsPerPage: number;
 }
 
 @customElement("mock-pagination")
-export class MockPagination extends SgdsElement {
-  details: IDetails = {
+export class MockPagination extends LitElement {
+  paginationProps: PaginationProps = {
     currentPage: 1,
     itemsPerPage: 5
   };
-  tableData: any[] = [];
 
-  connectedCallback() {
+  tableData: Post[] = [];
+  tableHeaders: string[] = ["Id", "Title", "Body"];
+
+  async connectedCallback() {
     super.connectedCallback();
+    await this.firstUpdated();
   }
 
-  async fetchPosts() {
+  async fetchPosts(): Promise<Post[]> {
     try {
       const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-      const data = await response.json();
+      const data: Post[] = await response.json();
       return data;
     } catch (error) {
-      console.error("error fetching posts:", error);
+      console.error("Error fetching posts:", error);
       return [];
     }
   }
 
   async firstUpdated() {
-    const posts = await this.fetchPosts();
+    const posts: Post[] = await this.fetchPosts();
 
-    const tableHeaders = ["Id", "Title", "Body"];
-    const tableData = posts.map((post: { id: number | string; title: number | string; body: number | string }) => [
-      post.id,
-      post.title,
-      post.body
-    ]);
+    this.tableData = posts.map(post => ({
+      id: post.id,
+      title: post.title,
+      body: post.body
+    }));
 
-    this.tableData = tableData;
+    this.updateTable();
+  }
 
-    const indexOfLastItem = this.details.currentPage * this.details.itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - this.details.itemsPerPage;
-    const displayedData = tableData.slice(indexOfFirstItem, indexOfLastItem);
+  _pageChange(e: CustomEvent) {
+    const updatedCurrentPage: number = e.detail.currentPage;
+    this.paginationProps.currentPage = updatedCurrentPage;
+    this.updateTable();
+  }
+
+  updateTable() {
+    const indexOfLastItem: number = this.paginationProps.currentPage * this.paginationProps.itemsPerPage;
+    const indexOfFirstItem: number = indexOfLastItem - this.paginationProps.itemsPerPage;
+    const displayedData: (string | number)[][] = this.tableData
+      .slice(indexOfFirstItem, indexOfLastItem)
+      .map(post => [post.id, post.title, post.body]);
 
     const table = this.shadowRoot?.querySelector("sgds-table") as SgdsTable;
     const pagination = this.shadowRoot?.querySelector("sgds-pagination") as SgdsPagination;
 
     if (table && pagination) {
-      table.tableHeaders = tableHeaders;
+      table.tableHeaders = this.tableHeaders;
       table.tableData = displayedData;
 
-      pagination.dataLength = posts.length;
-      pagination.currentPage = this.details.currentPage;
-      pagination.itemsPerPage = this.details.itemsPerPage;
+      pagination.dataLength = this.tableData.length;
+      pagination.currentPage = this.paginationProps.currentPage;
+      pagination.itemsPerPage = this.paginationProps.itemsPerPage;
     }
-  }
-
-  _pageChange(e: CustomEvent) {
-    const updatedCurrentPage = e.detail.currentPage;
-    const indexOfLastItem = updatedCurrentPage * this.details.itemsPerPage;
-    const indexofFirstItem = indexOfLastItem - this.details.itemsPerPage;
-    const updatedDisplayedData = this.tableData.slice(indexofFirstItem, indexOfLastItem);
-
-    const table = this.shadowRoot?.querySelector("sgds-table") as SgdsTable;
-    table.tableData = updatedDisplayedData;
   }
 
   render() {
