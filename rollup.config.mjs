@@ -60,7 +60,7 @@ const buildSgdsPackage = () => {
       external
     },
     {
-      input: ["src/components.ts"],
+      input: ["src/components/index.ts"],
       output: {
         dir: "lib",
         format: "esm",
