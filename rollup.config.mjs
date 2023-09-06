@@ -55,7 +55,9 @@ const buildSgdsPackage = () => {
         entryFileNames: "[name].js",
         dir: "lib",
         format: "esm",
-        sourcemap: true
+        sourcemap: true,
+        preserveModules: true,
+        preserveModulesRoot: "src",
       },
       plugins: wcPlugins,
       external
@@ -69,15 +71,6 @@ const buildSgdsPackage = () => {
         preserveModules: true,
         preserveModulesRoot: "src",
         sourcemap: true,
-        // entryFileNames: (chunkInfo) => {
-        //   console.log(chunkInfo)
-        //   if (chunkInfo.name.includes('node_modules')) {
-            
-        //     return chunkInfo.name.replace('node_modules', 'external') + '.js';
-        //   }
-  
-        //   return '[name].js';
-        // }
       },
       plugins: wcPlugins,
       external
@@ -134,3 +127,5 @@ const buildSgdsPackage = () => {
 };
 
 export default buildSgdsPackage;
+
+//TODO: Hanlde Subpath imports 
