@@ -1,7 +1,7 @@
 import { assert, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
-import { SgdsRadioGroup, SgdsActionCard } from "../src/components";
-import "../src/index"
+import { SgdsActionCard } from "../src/components";
+import "../src/index";
 
 describe("<sgds-action-card>", () => {
   // Card test cases

@@ -5,7 +5,6 @@ import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
 import { html } from "lit";
 
-
 describe("<sgds-modal>", () => {
   it("should be visible with the open attribute", async () => {
     const el = await fixture<SgdsModal>(html`

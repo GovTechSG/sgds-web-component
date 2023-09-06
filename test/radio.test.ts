@@ -3,7 +3,7 @@ import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
 import { SgdsButton, SgdsRadio, SgdsRadioGroup } from "../src/components";
-import "../src/index"
+import "../src/index";
 
 describe("<sgds-radio>", () => {
   afterEach(() => fixtureCleanup());

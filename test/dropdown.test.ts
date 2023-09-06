@@ -1,4 +1,3 @@
-
 import { SgdsDropdown, SgdsDropdownItem, SgdsButton } from "../src/components";
 import "../src/index";
 import { fixture, assert, expect, waitUntil } from "@open-wc/testing";

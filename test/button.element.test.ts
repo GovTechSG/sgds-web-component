@@ -4,7 +4,6 @@ import sinon from "sinon";
 import { SgdsButton } from "../src/components";
 import "../src/index";
 
-
 describe("sgds-button", () => {
   it("renders with default values", async () => {
     const el = await fixture(html`<sgds-button></sgds-button>`);

@@ -3,7 +3,6 @@ import { html } from "lit";
 import { SgdsBreadcrumb, SgdsBreadcrumbItem } from "../src/components";
 import "../src/index";
 
-
 describe("sgds-breadcrumb", () => {
   it("renders with default values", async () => {
     const el = await fixture<SgdsBreadcrumb>(html`<sgds-breadcrumb></sgds-breadcrumb>`);
