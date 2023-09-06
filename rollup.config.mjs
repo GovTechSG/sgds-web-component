@@ -48,7 +48,7 @@ const reactBuildPlugins = [
 ];
 const buildSgdsPackage = () => {
   const sgdsWcPackage = [
-    // bundled version for cdn 
+    //generate subpath entry points for individual components side effects ce file
     {
       input: ["src/index.ts"],
       output: {
@@ -61,6 +61,18 @@ const buildSgdsPackage = () => {
       },
       plugins: wcPlugins,
       external
+    },
+    // bundled form for cdn 
+    {
+      input: ["src/index.ts"],
+      output: {
+        entryFileNames: "umd/[name].js",
+        dir: "lib",
+        format: "umd",
+        sourcemap: true,
+      },
+      plugins: wcPlugins,
+      // external
     },
     // unbundled for local installation
     {

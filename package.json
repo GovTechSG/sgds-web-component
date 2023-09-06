@@ -128,13 +128,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "exports": {
-    ".": "./index.js",
-    "./components": "./components/index.js",
-    "./components/*": "./components/*",
-    "./react/*": "./react/*",
-    "./base/*": null,
-    "./utils/*": null
   }
 }
