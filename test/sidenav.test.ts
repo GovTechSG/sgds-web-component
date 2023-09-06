@@ -1,11 +1,9 @@
-import { SgdsSidenav, SgdsSidenavItem, SgdsSidenavLink } from "../src/components/Sidenav";
-
+import { SgdsSidenav, SgdsSidenavItem, SgdsSidenavLink } from "../src/components";
+import "../src/index";
 import { fixture, assert, expect, waitUntil, elementUpdated, aTimeout } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
-customElements.define("sgds-sidenav", SgdsSidenav);
-customElements.define("sgds-sidenav-item", SgdsSidenavItem);
-customElements.define("sgds-sidenav-link", SgdsSidenavLink);
+
 describe("sgds-sidenav", () => {
   it("can be semantically compare with shadowDom trees", async () => {
     const el = await fixture(html`<sgds-sidenav></sgds-sidenav>`);

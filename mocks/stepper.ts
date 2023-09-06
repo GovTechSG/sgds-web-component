@@ -1,8 +1,8 @@
 import { PropertyValueMap, html } from "lit";
 import { customElement } from "lit/decorators.js";
 import SgdsElement from "../src/base/sgds-element";
-import { SgdsInput } from "../src/components/Input";
-import { SgdsStepper } from "../src/components/Stepper";
+import { SgdsInput } from "../src/components/Input/sgds-input";
+import { SgdsStepper } from "../src/components/Stepper/sgds-stepper";
 
 interface IDetails {
   firstName: string;

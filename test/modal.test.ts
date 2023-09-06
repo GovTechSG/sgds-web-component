@@ -1,10 +1,10 @@
-import { SgdsModal } from "../src/components/Modal/sgds-modal";
+import { SgdsModal } from "../src/components";
+import "../src/index";
 import { expect, fixture, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
 import { html } from "lit";
 
-customElements.define("sgds-modal", SgdsModal);
 
 describe("<sgds-modal>", () => {
   it("should be visible with the open attribute", async () => {

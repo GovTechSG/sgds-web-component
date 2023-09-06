@@ -1,9 +1,10 @@
-import SgdsButton from "../src/components/Button/sgds-button";
 import { fixture, assert, expect, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
+import { SgdsButton } from "../src/components";
+import "../src/index";
 
-customElements.define("sgds-button", SgdsButton);
+
 describe("sgds-button", () => {
   it("renders with default values", async () => {
     const el = await fixture(html`<sgds-button></sgds-button>`);
