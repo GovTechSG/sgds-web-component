@@ -5,6 +5,7 @@ import "./components/Badge";
 import "./components/Breadcrumb";
 import "./components/Button";
 import "./components/Card";
+import "./components/ComboBox";
 import "./components/Checkbox";
 import "./components/Datepicker";
 import "./components/Drawer";
