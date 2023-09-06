@@ -1,9 +1,9 @@
 import { SgdsBreadcrumb } from "./sgds-breadcrumb";
 import { SgdsBreadcrumbItem } from "./sgds-breadcrumb-item";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsBreadcrumb, SgdsBreadcrumbItem]);
+customElements.define("sgds-breadcrumb", SgdsBreadcrumb);
+customElements.define("sgds-breadcrumb-item", SgdsBreadcrumbItem);
 
 declare global {
   interface HTMLElementTagNameMap {

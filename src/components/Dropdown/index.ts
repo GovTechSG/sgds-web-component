@@ -1,9 +1,9 @@
 import { SgdsDropdown } from "./sgds-dropdown";
 import { SgdsDropdownItem } from "./sgds-dropdown-item";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsDropdown, SgdsDropdownItem]);
+customElements.define("sgds-dropdown", SgdsDropdown);
+customElements.define("sgds-dropdown-item", SgdsDropdownItem);
 
 declare global {
   interface HTMLElementTagNameMap {

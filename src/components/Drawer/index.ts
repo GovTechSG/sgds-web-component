@@ -1,8 +1,7 @@
 import { SgdsDrawer } from "./sgds-drawer";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsDrawer]);
+customElements.define("sgds-drawer", SgdsDrawer);
 
 declare global {
   interface HTMLElementTagNameMap {

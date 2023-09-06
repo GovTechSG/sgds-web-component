@@ -1,8 +1,7 @@
 import { SgdsFooter } from "./sgds-footer";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsFooter]);
+customElements.define("sgds-footer", SgdsFooter);
 
 declare global {
   interface HTMLElementTagNameMap {

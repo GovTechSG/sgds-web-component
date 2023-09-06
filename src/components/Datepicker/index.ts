@@ -1,8 +1,7 @@
 import { SgdsDatepicker } from "./sgds-datepicker";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsDatepicker]);
+customElements.define("sgds-datepicker", SgdsDatepicker);
 
 declare global {
   interface HTMLElementTagNameMap {

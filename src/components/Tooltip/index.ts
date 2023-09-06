@@ -1,8 +1,7 @@
 import { SgdsTooltip } from "./sgds-tooltip";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsTooltip]);
+customElements.define("sgds-tooltip", SgdsTooltip);
 
 declare global {
   interface HTMLElementTagNameMap {

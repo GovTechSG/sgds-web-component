@@ -1,8 +1,7 @@
 import { SgdsTextarea } from "./sgds-textarea";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsTextarea]);
+customElements.define("sgds-textarea", SgdsTextarea);
 
 declare global {
   interface HTMLElementTagNameMap {

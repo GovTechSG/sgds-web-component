@@ -1,8 +1,7 @@
 import { SgdsCard } from "./sgds-card";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsCard]);
+customElements.define("sgds-card", SgdsCard);
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -1,10 +1,11 @@
 import { SgdsTab } from "./sgds-tab";
 import { SgdsTabGroup } from "./sgds-tab-group";
 import { SgdsTabPanel } from "./sgds-tab-panel";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsTab, SgdsTabGroup, SgdsTabPanel]);
+customElements.define("sgds-tab", SgdsTab);
+customElements.define("sgds-tab-group", SgdsTabGroup);
+customElements.define("sgds-tab-panel", SgdsTabPanel);
 
 declare global {
   interface HTMLElementTagNameMap {

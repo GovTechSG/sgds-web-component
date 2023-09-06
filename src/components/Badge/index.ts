@@ -1,8 +1,7 @@
 import { SgdsBadge } from "./sgds-badge";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsBadge]);
+customElements.define("sgds-badge", SgdsBadge);
 
 declare global {
   interface HTMLElementTagNameMap {

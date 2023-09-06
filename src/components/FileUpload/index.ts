@@ -1,8 +1,7 @@
 import { SgdsFileUpload } from "./sgds-file-upload";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsFileUpload]);
+customElements.define("sgds-file-upload", SgdsFileUpload);
 
 declare global {
   interface HTMLElementTagNameMap {

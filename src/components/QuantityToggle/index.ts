@@ -1,8 +1,7 @@
 import { SgdsQuantityToggle } from "./sgds-quantity-toggle";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsQuantityToggle]);
+customElements.define("sgds-quantity-toggle", SgdsQuantityToggle);
 
 declare global {
   interface HTMLElementTagNameMap {

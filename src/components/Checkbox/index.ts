@@ -1,8 +1,7 @@
 import { SgdsCheckbox } from "./sgds-checkbox";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsCheckbox]);
+customElements.define("sgds-checkbox", SgdsCheckbox);
 
 declare global {
   interface HTMLElementTagNameMap {

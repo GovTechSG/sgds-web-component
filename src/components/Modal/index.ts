@@ -1,8 +1,7 @@
 import { SgdsModal } from "./sgds-modal";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsModal]);
+customElements.define("sgds-modal", SgdsModal);
 
 declare global {
   interface HTMLElementTagNameMap {

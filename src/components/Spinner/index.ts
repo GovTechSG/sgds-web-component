@@ -1,8 +1,7 @@
 import { SgdsSpinner } from "./sgds-spinner";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsSpinner]);
+customElements.define("sgds-spinner", SgdsSpinner);
 declare global {
   interface HTMLElementTagNameMap {
     "sgds-spinner": SgdsSpinner;

@@ -1,8 +1,7 @@
 import { SgdsMasthead } from "./sgds-masthead";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsMasthead]);
+customElements.define("sgds-masthead", SgdsMasthead);
 
 declare global {
   interface HTMLElementTagNameMap {

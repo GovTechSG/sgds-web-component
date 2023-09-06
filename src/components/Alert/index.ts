@@ -1,10 +1,11 @@
 import { SgdsAlert } from "./sgds-alert";
 import { SgdsAlertHeading } from "./sgds-alert-heading";
 import { SgdsAlertLink } from "./sgds-alert-link";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsAlert, SgdsAlertHeading, SgdsAlertLink]);
+customElements.define("sgds-alert", SgdsAlert);
+customElements.define("sgds-alert-heading", SgdsAlertHeading);
+customElements.define("sgds-alert-link", SgdsAlertLink);
 
 declare global {
   interface HTMLElementTagNameMap {

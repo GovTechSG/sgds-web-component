@@ -1,8 +1,7 @@
 import { SgdsInput } from "./sgds-input";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsInput]);
+customElements.define("sgds-input", SgdsInput);
 
 declare global {
   interface HTMLElementTagNameMap {

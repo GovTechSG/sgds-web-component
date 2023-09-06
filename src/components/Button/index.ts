@@ -1,8 +1,7 @@
 import { SgdsButton } from "./sgds-button";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsButton]);
+customElements.define("sgds-button", SgdsButton);
 
 declare global {
   interface HTMLElementTagNameMap {

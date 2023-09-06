@@ -1,8 +1,7 @@
 import { SgdsTable } from "./sgds-table";
-import registerCustomElement from "../../utils/registerCustomElement";
 
 //sideEffect
-registerCustomElement([SgdsTable]);
+customElements.define("sgds-table", SgdsTable);
 
 declare global {
   interface HTMLElementTagNameMap {
