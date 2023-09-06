@@ -418,7 +418,7 @@ describe("sgds-dropdown", () => {
   });
   const closeValues = ["default", "outside", "inside"];
   closeValues.forEach(closeVal => {
-    it(`dropdown menu always closes regardless of prop close value = ${closeVal}`, async () => {
+    it(`dropdown menu always closes when click on button regardless of prop close value = ${closeVal}`, async () => {
       const el = await fixture<SgdsDropdown>(
         html`<sgds-dropdown menuIsOpen close=${closeVal}>
           <sgds-dropdown-item>slot 1</sgds-dropdown-item>

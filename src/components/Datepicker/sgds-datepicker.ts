@@ -1,7 +1,6 @@
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
-import { DatepickerDropdownElement } from "../../base/datepicker-dropdown-element";
 import styles from "./sgds-datepicker.scss";
 import { live } from "lit/directives/live.js";
 import { watch } from "../../utils/watch";
@@ -9,6 +8,7 @@ import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { SgdsInput } from "../Input/sgds-input";
 import { DatepickerCalendar } from "./datepicker-calendar";
 import { DatepickerHeader } from "./datepicker-header";
+import { DropdownElement } from "../../base/dropdown-element";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -25,8 +25,8 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  * @cssproperty --datepicker-closebutton-color - Datepicker's close button color
  */
 
-export class SgdsDatepicker extends ScopedElementsMixin(DatepickerDropdownElement) {
-  static styles = [DatepickerDropdownElement.styles, styles];
+export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
+  static styles = [DropdownElement.styles, styles];
 
   /**@internal */
   static get scopedElements() {
@@ -125,9 +125,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DatepickerDropdownElemen
   connectedCallback() {
     super.connectedCallback();
 
-    // Add click event listener to the document
-    document.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
-
     this.addEventListener("sgds-view", this.handleViewChanged);
     this.addEventListener("sgds-view-date", this.handleDateChanged);
     this.addEventListener("sgds-selectmonth", this.handleSelectMonth);
@@ -185,13 +182,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DatepickerDropdownElemen
       // If selectedDateRange is empty, emit sgds-change-date event with an empty string
       this.value = "";
     }
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-
-    // Remove the click event listener from the document
-    document.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
   }
 
   @watch("value")
@@ -341,7 +331,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DatepickerDropdownElemen
           placeholder="${getPlaceholder()}"
           aria-expanded="${this.menuIsOpen}"
           ${ref(this.myDropdown)}
-          @click=${() => this._onClickInput()}
+          @click=${() => this.toggleMenu()}
           readonly
           ?required=${this.required}
           ?disabled=${this.disabled}
