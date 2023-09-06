@@ -1,6 +1,5 @@
 import { SgdsMasthead } from "./sgds-masthead";
 
-//sideEffect
 customElements.define("sgds-masthead", SgdsMasthead);
 
 declare global {

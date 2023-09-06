@@ -1,6 +1,5 @@
 import { SgdsInput } from "./sgds-input";
 
-//sideEffect
 customElements.define("sgds-input", SgdsInput);
 
 declare global {

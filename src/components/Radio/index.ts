@@ -1,7 +1,6 @@
 import { SgdsRadio } from "./sgds-radio";
 import { SgdsRadioGroup } from "./sgds-radio-group";
 
-//sideEffect
 customElements.define("sgds-radio", SgdsRadio);
 customElements.define("sgds-radio-group", SgdsRadioGroup);
 

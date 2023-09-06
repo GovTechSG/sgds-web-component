@@ -6,11 +6,15 @@ Instead, our library outputs the React version of each of our web components. Yo
 
 ## Importing the library
 
+Follow instructions in `Installation` documentation section.
 Our components are exported via named exports. Import the components like so
 
 ```js
 
-import { SgdsButton } from "@govtechsg/sgds-web-component/react";
+import { SgdsButton, SgdsTooltip } from "@govtechsg/sgds-web-component/react";
+// or
+import { SgdsButton } from "@govtechsg/sgds-web-component/react/button";
+import { SgdsTooltip } from "@govtechsg/sgds-web-component/react/tooltip";
 
 ```
 
