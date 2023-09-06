@@ -603,15 +603,17 @@ fetchPosts().then(posts => {
     paginationEl.itemsPerPage = itemsPerPage;
 
     paginationEl.addEventListener("sgds-page-change", event => {
-      const updatedCurrentPage = event.detail.currentPage;
+  const updatedCurrentPage = event.detail.currentPage;
 
-      const indexOfLastItem = updatedCurrentPage * itemsPerPage;
-      const indexofFirstItem = indexOfLastItem - itemsPerPage;
-      const updatedDisplayedData = tableData.slice(indexofFirstItem, indexOfLastItem);
+  const indexOfLastItem = updatedCurrentPage * itemsPerPage;
+  const indexofFirstItem = indexOfLastItem - itemsPerPage;
+  const updatedDisplayedData = tableData.slice(indexofFirstItem, indexOfLastItem);
 
-      // Update the table data when the page changes
-      table.tableData = updatedDisplayedData;
-    });
+  // Update the table data when the page changes
+  if (tablesample) {
+    tablesample.tableData = updatedDisplayedData;
+  }
+});
   }
 
 

@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { TemplateResult, html } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-pagination.scss";
@@ -99,7 +99,7 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
   private renderPgNumbers() {
     const pagesToShow = [];
     let sanitizeStartPage = 1;
-    let endPage;
+    let endPage: number;
 
     if (this.limit < this.pages.length) {
       sanitizeStartPage = this.currentPage - Math.floor(this.sanitizeLimit / 2);
@@ -146,7 +146,7 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     if (this.pages.length !== this.sanitizeLimit && this.currentPage - Math.floor(this.sanitizeLimit / 2) > 1)
       return html`
         <li class="page-item" @click=${this.handlePrevEllipsisButton}>
-          <span class="page-link disabled">${this.ellipsisContent}</span>
+          <span class="page-link disabled" role="button">${this.ellipsisContent}</span>
         </li>
       `;
     else return null;
@@ -216,39 +216,38 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
   }
 
   /** @internal */
-  private directionBtnContent(directionLabel: string, iconClass: string) {
-    if (this.directionVariant === "icon") {
-      return iconClass === "left" ? this.getLeftChevronSVG() : this.getRightChevronSVG();
-    } else if (this.directionVariant === "icon-text") {
-      if (iconClass === "left") {
-        return html` ${this.getLeftChevronSVG()} ${directionLabel} `;
-      } else if (iconClass === "right") {
-        return html` ${directionLabel} ${this.getRightChevronSVG()} `;
-      }
-    } else if (this.directionVariant === "text") {
-      return html` ${directionLabel} `;
-    } else {
-      return null;
-    }
+  private renderDirectionButton(
+    directionLabel: string,
+    iconClass: string,
+    clickHandler: (event: MouseEvent) => void,
+    directionVariant: string
+  ): TemplateResult {
+    const isDisabled = iconClass === "left" ? this.currentPage === 1 : this.currentPage === this.pages.length;
+
+    return html`
+      <li class="page-item ${isDisabled ? "disabled" : ""}" @click=${isDisabled ? undefined : clickHandler}>
+        <span class="page-link">
+          ${directionVariant === "icon-text"
+            ? html`
+                ${iconClass === "left" ? this.getLeftChevronSVG() : ""} ${directionLabel}
+                ${iconClass === "right" ? this.getRightChevronSVG() : ""}
+              `
+            : directionVariant === "text"
+            ? html`${directionLabel}`
+            : directionVariant === "icon"
+            ? html`${iconClass === "left" ? this.getLeftChevronSVG() : this.getRightChevronSVG()}`
+            : html``}
+        </span>
+      </li>
+    `;
   }
 
   render() {
-    const isLastPage = this.currentPage === this.pages.length;
-    const isFirstPage = this.currentPage === this.pages[0];
     return html`
       <ul class="pagination pagination-${this.size} sgds" directionVariant=${this.directionVariant}>
-        <!-- Previous Button -->
-        <li
-          class="page-item ${isFirstPage ? "disabled" : ""}"
-          @click=${isFirstPage ? undefined : this.handlePrevButton}
-        >
-          <span class="page-link"> ${this.directionBtnContent("Previous", "left")} </span>
-        </li>
+        ${this.renderDirectionButton("Previous", "left", this.handlePrevButton, this.directionVariant)}
         ${this.ellipsisOn ? this.renderFirstEllipsis() : null} ${this.renderPgNumbers()} ${this.renderLastEllipsis()}
-        <!-- Next Button -->
-        <li class="page-item ${isLastPage ? "disabled" : ""}" @click=${isLastPage ? undefined : this.handleNextButton}>
-          <span class="page-link">${this.directionBtnContent("Next", "right")}</span>
-        </li>
+        ${this.renderDirectionButton("Next", "right", this.handleNextButton, this.directionVariant)}
       </ul>
     `;
   }
