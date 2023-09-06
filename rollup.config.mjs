@@ -2,18 +2,11 @@ import typescript from "rollup-plugin-typescript2";
 import resolve from "@rollup/plugin-node-resolve";
 import postcss from "rollup-plugin-postcss";
 import litcss from "rollup-plugin-postcss-lit";
-import generatePackageJson from "rollup-plugin-generate-package-json";
 import replace from "@rollup/plugin-replace";
 import { visualizer } from "rollup-plugin-visualizer";
-import { readFile } from 'fs/promises';
 
 const external = ["@lit", "lit", "lit-element", "@popperjs", /@open-wc\/.*/, "bootstrap", "tslib", /lit\/.*/,  /bootstrap\/.*/]
 
-const packageJson = JSON.parse(
-  await readFile(
-    new URL('./package.json', import.meta.url)
-  )
-);
 const wcPlugins = [
   resolve({
     browser: true,
@@ -60,7 +53,6 @@ const buildSgdsPackage = () => {
         preserveModulesRoot: "src",
       },
       plugins: wcPlugins,
-      external
     },
     // bundled form for cdn 
     {
@@ -72,7 +64,6 @@ const buildSgdsPackage = () => {
         sourcemap: true,
       },
       plugins: wcPlugins,
-      // external
     },
     // unbundled for local installation
     {
@@ -107,15 +98,6 @@ const buildSgdsPackage = () => {
         ],
         plugins: [
           ...reactBuildPlugins,
-          // generatePackageJson({
-          //   baseContents: {
-          //     name: `${packageJson.name}/react`,
-          //     private: false,
-          //     main: "./cjs/index.js",
-          //     module: "./index.js",
-          //     types: "./index.d.ts"
-          //   }
-          // })
         ],
         external: ["@lit-labs/react", "react", ...external]
       },
@@ -139,5 +121,3 @@ const buildSgdsPackage = () => {
 };
 
 export default buildSgdsPackage;
-
-//TODO: Hanlde Subpath imports 
