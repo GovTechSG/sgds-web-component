@@ -1,8 +1,7 @@
 import { html } from "lit";
 import { expect, fixture, waitUntil } from "@open-wc/testing";
-import { SgdsComboBox } from "../src/components/ComboBox";
 import sinon from "sinon";
-import { SgdsDropdownItem, SgdsInput } from "../src/components";
+import { SgdsDropdownItem, SgdsInput, SgdsComboBox } from "../src/components";
 import "../src/index";
 import { sendKeys } from "@web/test-runner-commands";
 
