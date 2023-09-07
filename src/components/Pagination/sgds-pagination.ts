@@ -8,7 +8,18 @@ import { watch } from "../../utils/watch";
 /**
  * @summary The Pagination component enables the user to select a specific page from a range of pages
  *
- * @event sgds-page-change - Event is fired when handleNextButton, handlePrevButton, handleNextEllipsisButton and handlePrevtEllipsisButton was called.
+ * @event sgds-page-change - Event is emitted when `handleNextButton`, `handlePrevButton`, `handleNextEllipsisButton` and `handlePrevEllipsisButton` was called.
+ *
+ * @cssproperty --pagination-color Sets the pagination color. <br>Default value `--sgds-cyan`
+ * @cssproperty --pagination-bg-color Sets the pagination background color. <br>Default value `--sgds-white`
+ * @cssproperty --pagination-hover-bg-color Sets the pagination hover state background color. <br>Default value `--sgds-gray-200`
+ * @cssproperty --pagination-hover-border-color Sets the pagination hover state border color. <br>Default value `--sgds-gray-300`
+ * @cssproperty --pagination-active-color Sets the pagination hover state color. <br>Default value `--sgds-white`
+ * @cssproperty --pagination-active-bg-color Sets the pagination active state background color. <br>Default value `--sgds-cyan`
+ * @cssproperty --pagination-disabled-color Sets the pagination disabled state color. <br>Default value `--sgds-gray-600`
+ * @cssproperty --pagination-disabled-bg-color Sets the pagination disabled state background color. <br>Default value `--sgds-white`
+ * 
+ *
  **/
 export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
   static styles = [SgdsElement.styles, styles];
