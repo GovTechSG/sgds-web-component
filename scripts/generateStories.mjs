@@ -44,7 +44,7 @@ for (const [key, value] of Object.entries(groupedComponents)) {
     `
 import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
 import {Template, args, parameters} from '../templates/${key}/basic.js';
-import '../../lib/index.js';
+import '../../lib/umd/index.js';
 import { html } from "lit-html";
 
 <Meta
