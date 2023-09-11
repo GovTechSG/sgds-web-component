@@ -28,8 +28,8 @@ import styles from "./sgds-modal.scss";
  * @csspart base - The component's base wrapper
  * @csspart overlay - The overlay that covers the screen behind the dialog
  * @csspart panel - The modal's dialog panel
- * @csspart header - The modal's header (h3 element) that wraps the title, titleIcon and close button
- * @csspart title - The div element wrapping title and titleIcon
+ * @csspart header - The modal's header that wraps the title, titleIcon and close button
+ * @csspart title - The h3 element wrapping title and titleIcon
  * @csspart body - The modal's body where the content lies
  * @csspart footers - The modal's footer
  *
