@@ -16,7 +16,7 @@ import styles from "./sgds-breadcrumb.scss";
 export class SgdsBreadcrumb extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
   /** The aria-label of nav element within breadcrumb component. */
-  @property({ type: String }) ariaLabel: string = 'breadcrumb';
+  @property({ type: String }) ariaLabel = "breadcrumb";
   /**@internal */
   @query("slot") defaultSlot: HTMLSlotElement;
   /**@internal */
