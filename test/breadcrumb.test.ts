@@ -12,6 +12,7 @@ describe("sgds-breadcrumb", () => {
     assert.shadowDom.equal(
       el,
       `<nav
+      aria-label="breadcrumb"
       part="base"
     >
       <ol class="breadcrumb">
