@@ -20,6 +20,8 @@ ul.pagination.sgds {
         &.page-link {
           color: var(--pagination-color);
           background-color: var(--pagination-bg-color);
+  
+
           &:hover {
             color: var(--pagination-color);
             background-color: var(--pagination-hover-bg-color);

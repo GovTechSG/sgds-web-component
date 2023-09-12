@@ -18,7 +18,7 @@ import { watch } from "../../utils/watch";
  * @cssproperty --pagination-active-bg-color Sets the pagination active state background color. <br>Default value `--sgds-cyan`
  * @cssproperty --pagination-disabled-color Sets the pagination disabled state color. <br>Default value `--sgds-gray-600`
  * @cssproperty --pagination-disabled-bg-color Sets the pagination disabled state background color. <br>Default value `--sgds-white`
- * 
+ *
  *
  **/
 export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
@@ -106,6 +106,38 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     return this.limit >= this.pages.length ? this.pages.length : this.limit;
   }
 
+
+  /**@internal */
+  private _handleKeyDown(
+    event: KeyboardEvent,
+    action: string,
+    number?: number,
+    isFirstEllipsis?: boolean,
+    isPrevButton?: boolean
+  ) {
+    if (event.key === "Enter") {
+      switch (action) {
+        case "pageNumber":
+          this.currentPage = number;
+          break;
+        case "ellipsis":
+          if (isFirstEllipsis) {
+            this.handlePrevEllipsisButton();
+          } else {
+            this.handleNextEllipsisButton();
+          }
+          break;
+        case "directionButton":
+          if (isPrevButton) {
+            this.handlePrevButton();
+          } else {
+            this.handleNextButton();
+          }
+          break;
+      }
+    }
+  }
+
   /** @internal */
   private renderPgNumbers() {
     const pagesToShow = [];
@@ -141,26 +173,44 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     return pagesToShow.map(
       number => html`
         <li key=${number} class="page-item ${this.currentPage === number ? "active" : ""}">
-          <span class="page-link" @click=${this.handlePageClick}>${number}</span>
+          <span
+            class="page-link"
+            tabindex=${this.currentPage === number ? -1 : 0}
+            @click=${this.handlePageClick}
+            @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "pageNumber", number)}
+            >${number}</span
+          >
         </li>
       `
     );
   }
 
-  ellipsisContent = html`
+  private ellipsisContent = html`
     <span aria-hidden="true">…</span>
     <span class="visually-hidden">Ellipsis</span>
   `;
 
   /** @internal */
   private renderFirstEllipsis = () => {
-    if (this.pages.length !== this.sanitizeLimit && this.currentPage - Math.floor(this.sanitizeLimit / 2) > 1)
-      return html`
-        <li class="page-item" @click=${this.handlePrevEllipsisButton}>
-          <span class="page-link disabled" role="button">${this.ellipsisContent}</span>
-        </li>
-      `;
-    else return null;
+    const isDisabled = !(
+      this.pages.length !== this.sanitizeLimit && this.currentPage - Math.floor(this.sanitizeLimit / 2) > 1
+    );
+
+    if (isDisabled) {
+      return null;
+    }
+
+    const tabIndex = isDisabled ? -1 : 0;
+
+    return html`
+      <li
+        class="page-item"
+        @click=${this.handlePrevEllipsisButton}
+        @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "ellipsis", undefined, true)}
+      >
+        <a class="page-link" role="button" tabindex=${tabIndex}>${this.ellipsisContent}</a>
+      </li>
+    `;
   };
 
   /** @internal */
@@ -171,21 +221,28 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
       : this.currentPage + Math.floor(this.sanitizeLimit / 2) < this.pages.length;
 
     const shouldRenderEllipsis = this.pages.length !== this.limit && differentialLimitCondition;
-
+    const tabIndex = shouldRenderEllipsis && this.ellipsisOn ? 0 : -1;
     if (!shouldRenderEllipsis || this.sanitizeLimit >= this.pages.length) {
       return null;
     }
 
-    return html`
-      <li
-        class="page-item ${this.ellipsisOn ? "" : "disabled"} "
-        @click=${this.ellipsisOn ? this.handleNextEllipsisButton : null}
-      >
-        ${this.ellipsisOn
-          ? html` <a class="page-link" role="button" tabindex="0">${this.ellipsisContent}</a> `
-          : html` <span class="page-link disabled">${this.ellipsisContent}</span> `}
-      </li>
-    `;
+    if (this.ellipsisOn) {
+      return html`
+        <li
+          class="page-item ${this.ellipsisOn ? "" : "disabled"} "
+          @click=${this.handleNextEllipsisButton}
+          @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "ellipsis", undefined, false)}
+        >
+          <a class="page-link" role="button" tabindex=${tabIndex}>${this.ellipsisContent}</a>
+        </li>
+      `;
+    } else {
+      return html`
+        <li class="page-item ${this.ellipsisOn ? "" : "disabled"} ">
+          <span class="page-link disabled">${this.ellipsisContent}</span>
+        </li>
+      `;
+    }
   }
 
   /** @internal */
@@ -231,13 +288,22 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     directionLabel: string,
     iconClass: string,
     clickHandler: (event: MouseEvent) => void,
+    keydownHandler: (event: KeyboardEvent) => void,
     directionVariant: string
   ): TemplateResult {
     const isDisabled = iconClass === "left" ? this.currentPage === 1 : this.currentPage === this.pages.length;
 
+    const tabIndex = isDisabled ? -1 : 0;
+
+    const keydownListener = (event: KeyboardEvent) => {
+      if (!isDisabled && event.key === "Enter") {
+        keydownHandler(event);
+      }
+    };
+
     return html`
       <li class="page-item ${isDisabled ? "disabled" : ""}" @click=${isDisabled ? undefined : clickHandler}>
-        <span class="page-link">
+        <span class="page-link" tabindex=${tabIndex} @keydown=${keydownListener}>
           ${directionVariant === "icon-text"
             ? html`
                 ${iconClass === "left" ? this.getLeftChevronSVG() : ""} ${directionLabel}
@@ -256,9 +322,23 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
   render() {
     return html`
       <ul class="pagination pagination-${this.size} sgds" directionVariant=${this.directionVariant}>
-        ${this.renderDirectionButton("Previous", "left", this.handlePrevButton, this.directionVariant)}
+        ${this.renderDirectionButton(
+          "Previous",
+          "left",
+          this.handlePrevButton,
+          (e: KeyboardEvent) =>
+            this._handleKeyDown(e, "directionButton", undefined, undefined, true),
+          this.directionVariant
+        )}
         ${this.ellipsisOn ? this.renderFirstEllipsis() : null} ${this.renderPgNumbers()} ${this.renderLastEllipsis()}
-        ${this.renderDirectionButton("Next", "right", this.handleNextButton, this.directionVariant)}
+        ${this.renderDirectionButton(
+          "Next",
+          "right",
+          this.handleNextButton,
+          (e: KeyboardEvent) =>
+            this._handleKeyDown(e, "directionButton", undefined, undefined, false),
+          this.directionVariant
+        )}
       </ul>
     `;
   }
