@@ -59,16 +59,14 @@ describe("when step", () => {
 
 describe("when step changes", () => {
   it("should change aria-label accordingly", async () => {
-    const el = await fixture<SgdsQuantityToggle>(
-      html`<sgds-quantity-toggle step="5"></sgds-quantity-toggle>`
-    );
+    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle step="5"></sgds-quantity-toggle>`);
     const minusBtn = el.shadowRoot?.querySelector("button[aria-label^='decrease by']") as HTMLButtonElement;
     const plusBtn = el.shadowRoot?.querySelector("button[aria-label^='increase by']") as HTMLButtonElement;
 
     expect(minusBtn).to.not.be.undefined;
-    expect(minusBtn.getAttribute('aria-label')).to.equal("decrease by 5");
+    expect(minusBtn.getAttribute("aria-label")).to.equal("decrease by 5");
 
-    expect(plusBtn.getAttribute('aria-label')).to.equal("increase by 5");
+    expect(plusBtn.getAttribute("aria-label")).to.equal("increase by 5");
   });
 });
 
