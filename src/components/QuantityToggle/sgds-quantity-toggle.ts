@@ -164,6 +164,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
             />
           </svg>
         </button>
+        <div id="announcer" role="region" aria-live="assertive" class="visually-hidden">${this.value}</div>
       </div>
     `;
   }
