@@ -177,8 +177,9 @@ describe("sgds-dropdown", () => {
       el,
       `  <div>
          <sgds-button
-           aria-expanded="false"
            role="button"
+           aria-expanded="false"
+           aria-haspopup="menu"
          variant="outline-secondary"
          >
          <svg
