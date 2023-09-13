@@ -178,6 +178,7 @@ describe("sgds-dropdown", () => {
       `  <div>
          <sgds-button
            aria-expanded="false"
+           role="button"
          variant="outline-secondary"
          >
          <svg
