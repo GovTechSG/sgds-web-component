@@ -120,15 +120,15 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
           .value=${this.value}
           @sgds-input=${this._handleInputChange}
           role="combobox"
-          aria-expanded="${this.menuIsOpen}"
+          aria-expanded=${this.menuIsOpen}
           aria-autocomplete="list"
-          tabIndex="0"
+          aria-controls=${this.dropdownMenuId}
         >
         </sgds-input>
         <div class="form-control-icon">
           <slot name="icon"></slot>
         </div>
-        <ul class="dropdown-menu" part="menu" tabindex="-1">
+        <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1">
           ${this.filteredMenuList.map(
             item =>
               html`<sgds-dropdown-item href="javascript:void(0)" @click=${this._handleSelectChange}
