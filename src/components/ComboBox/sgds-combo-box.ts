@@ -119,7 +119,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
           ?readonly=${this.readonly}
           .value=${this.value}
           @sgds-input=${this._handleInputChange}
-          role="listbox"
+          role="combobox"
           aria-expanded="${this.menuIsOpen}"
           aria-autocomplete="list"
           tabIndex="0"
