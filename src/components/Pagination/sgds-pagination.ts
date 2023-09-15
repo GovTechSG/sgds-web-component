@@ -106,7 +106,6 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
     return this.limit >= this.pages.length ? this.pages.length : this.limit;
   }
 
-
   /**@internal */
   private _handleKeyDown(
     event: KeyboardEvent,
@@ -175,7 +174,7 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
         <li key=${number} class="page-item ${this.currentPage === number ? "active" : ""}">
           <span
             class="page-link"
-            tabindex=${this.currentPage === number ? -1 : 0}
+            tabindex="0"
             @click=${this.handlePageClick}
             @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "pageNumber", number)}
             >${number}</span
@@ -208,7 +207,7 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
         @click=${this.handlePrevEllipsisButton}
         @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "ellipsis", undefined, true)}
       >
-        <a class="page-link" role="button" tabindex=${tabIndex}>${this.ellipsisContent}</a>
+        <span class="page-link" role="button" tabindex=${tabIndex}>${this.ellipsisContent}</span>
       </li>
     `;
   };
@@ -233,13 +232,13 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
           @click=${this.handleNextEllipsisButton}
           @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "ellipsis", undefined, false)}
         >
-          <a class="page-link" role="button" tabindex=${tabIndex}>${this.ellipsisContent}</a>
+          <span class="page-link" role="button" tabindex=${tabIndex}>${this.ellipsisContent}</span>
         </li>
       `;
     } else {
       return html`
         <li class="page-item ${this.ellipsisOn ? "" : "disabled"} ">
-          <span class="page-link disabled">${this.ellipsisContent}</span>
+          <span class="page-link disabled" tabindex=${tabIndex}>${this.ellipsisContent}</span>
         </li>
       `;
     }
@@ -326,8 +325,7 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
           "Previous",
           "left",
           this.handlePrevButton,
-          (e: KeyboardEvent) =>
-            this._handleKeyDown(e, "directionButton", undefined, undefined, true),
+          (e: KeyboardEvent) => this._handleKeyDown(e, "directionButton", undefined, undefined, true),
           this.directionVariant
         )}
         ${this.ellipsisOn ? this.renderFirstEllipsis() : null} ${this.renderPgNumbers()} ${this.renderLastEllipsis()}
@@ -335,8 +333,7 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
           "Next",
           "right",
           this.handleNextButton,
-          (e: KeyboardEvent) =>
-            this._handleKeyDown(e, "directionButton", undefined, undefined, false),
+          (e: KeyboardEvent) => this._handleKeyDown(e, "directionButton", undefined, undefined, false),
           this.directionVariant
         )}
       </ul>

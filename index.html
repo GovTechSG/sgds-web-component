@@ -56,6 +56,10 @@
         sgds-sidenav-item {
             --sidenav-theme-color: green;
         }
+        sgds-pagination {
+            --pagination-bg-color : yellow;
+            --pagination-disabled-bg-color: yellow;
+        }
 
         sgds-progress + sgds-progress{
             margin-top: 8px;
@@ -272,11 +276,11 @@
             <br><br>
             <h3>ellipsisOn, limit 7, ellipsisJump 3</h3>
             <sgds-table id="tablesample2"></sgds-table>
-            <sgds-pagination id="samplepage2" directionVariant="icon" limit="7" ellipsisOn></sgds-pagination>
+            <sgds-pagination id="samplepage2" directionVariant="icon" limit="3" currentPage="3" ellipsisOn></sgds-pagination>
             <br><br><br><br><br><br>
             
             <h3>Test</h3>
-            <sgds-pagination dataLength="50" limit="3" itemsPerPage="5" currentPage="1" ellipsisOn></sgds-pagination>
+            <sgds-pagination dataLength="15" limit="3" itemsPerPage="5" currentPage="1"></sgds-pagination>
 
             <p>ellipsisOn, limit 3, ellipsisJump 6</p>
             <sgds-pagination  directionVariant="icon" dataLength="3" limit="7" itemsPerPage="1" currentPage="1"></sgds-pagination>
