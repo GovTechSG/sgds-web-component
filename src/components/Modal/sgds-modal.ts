@@ -28,8 +28,8 @@ import styles from "./sgds-modal.scss";
  * @csspart base - The component's base wrapper
  * @csspart overlay - The overlay that covers the screen behind the dialog
  * @csspart panel - The modal's dialog panel
- * @csspart header - The modal's header (h3 element) that wraps the title, titleIcon and close button
- * @csspart title - The div element wrapping title and titleIcon
+ * @csspart header - The modal's header that wraps the title, titleIcon and close button
+ * @csspart title - The h3 element wrapping title and titleIcon
  * @csspart body - The modal's body where the content lies
  * @csspart footers - The modal's footer
  *
@@ -51,6 +51,8 @@ export class SgdsModal extends SgdsElement {
   @query(".modal-panel") panel: HTMLElement;
   /**@internal */
   @query(".modal-overlay") overlay: HTMLElement;
+  /**@internal */
+  @query(".modal-title") heading: HTMLElement;
   /**@internal */
   private readonly hasSlotController = new HasSlotController(this, "footer");
   /**@internal */
@@ -168,6 +170,9 @@ export class SgdsModal extends SgdsElement {
         ]));
 
       this.emit("sgds-after-show");
+
+      // Add focus on modal heading after opening it
+      this.heading.focus();
     } else {
       // Hide
       this.emit("sgds-hide");
@@ -221,7 +226,7 @@ export class SgdsModal extends SgdsElement {
           centered: this.centered
         })}
       >
-        <div part="overlay" class="modal-overlay" @click=${() => this.requestClose("overlay")} tabindex="-1"></div>
+        <div part="overlay" class="modal-overlay" @click=${() => this.requestClose("overlay")}></div>
 
         <div
           part="panel"
@@ -231,27 +236,28 @@ export class SgdsModal extends SgdsElement {
           aria-hidden=${this.open ? "false" : "true"}
           aria-label=${ifDefined(this.noHeader ? this.title : undefined)}
           aria-labelledby=${ifDefined(!this.noHeader ? "title" : undefined)}
-          tabindex="0"
+          tabindex="-1"
         >
           ${!this.noHeader
             ? html`
-                <h3
+                <div
                   part="header"
                   class=${classMap({
                     "modal-header": true,
                     centered: this.centeredAlignVariant
                   })}
                 >
-                  <div
+                  <h3
                     part="title"
                     class=${classMap({
                       "modal-title": true,
                       centered: this.centeredAlignVariant
                     })}
                     id="title"
+                    tabindex="-1"
                   >
                     ${this.titleIcon ? withLabelIcon : ""} ${this.title}
-                  </div>
+                  </h3>
                   <button
                     class=${classMap({
                       "modal-close": true,
@@ -262,7 +268,7 @@ export class SgdsModal extends SgdsElement {
                     @click="${() => this.requestClose("close-button")}"
                     aria-label="close modal"
                   ></button>
-                </h3>
+                </div>
               `
             : ""}
 
