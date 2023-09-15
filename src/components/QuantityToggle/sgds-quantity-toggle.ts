@@ -7,7 +7,7 @@ import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { FormSubmitController, SgdsFormControl } from "../../utils/form";
 import genId from "../../utils/generateId";
-import { ButtonVariant } from "../Button";
+import { ButtonVariant } from "../Button/sgds-button";
 import styles from "./sgds-quantity-toggle.scss";
 
 /**

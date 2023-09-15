@@ -4,7 +4,7 @@ Web components are [fully supported in Angular](https://custom-elements-everywhe
 
 ## Installation
 
-Locally install the library or use CDN by adding the script tag to entry point of the Angular application (i.e. index.html)
+Locally install the library or use CDN by adding the script tag to entry point of the Angular application (i.e. index.html). Follow instructions in `Installation` and `Imports` documentation section
 
 ## Configuration
 

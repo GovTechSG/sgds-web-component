@@ -1,10 +1,8 @@
-import { SgdsInput } from "../src/components/Input/sgds-input";
-import SgdsButton from "../src/components/Button/sgds-button";
+import { SgdsInput, SgdsButton } from "../src/components";
+import "../src/index";
 import { expect, fixture, html, oneEvent, waitUntil, assert, elementUpdated } from "@open-wc/testing";
 import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";
-customElements.define("sgds-input", SgdsInput);
-customElements.define("sgds-button", SgdsButton);
 
 describe("sgds-input", () => {
   it("renders with default values", async () => {

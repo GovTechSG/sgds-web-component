@@ -1,11 +1,8 @@
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from "@open-wc/testing";
-import { SgdsTabGroup, SgdsTabPanel, SgdsTab } from "../src/components/Tab";
+import { SgdsTabGroup, SgdsTabPanel, SgdsTab } from "../src/components";
+import "../src/index";
 import { clickOnElement } from "../src/utils/test";
 import { sendKeys } from "@web/test-runner-commands";
-
-customElements.define("sgds-tab", SgdsTab);
-customElements.define("sgds-tab-group", SgdsTabGroup);
-customElements.define("sgds-tab-panel", SgdsTabPanel);
 
 describe("<sgds-tab>", () => {
   it("passes accessibility test", async () => {

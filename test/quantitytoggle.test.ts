@@ -2,9 +2,8 @@ import { expect, fixture, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
-import { SgdsQuantityToggle } from "../src/components/QuantityToggle/sgds-quantity-toggle";
-
-customElements.define("sgds-quantity-toggle", SgdsQuantityToggle);
+import { SgdsQuantityToggle } from "../src/components";
+import "../src/index";
 
 describe("when minusBtn or plusBtn is clicked", () => {
   it("should decrease and increase the value by 1 respectively", async () => {
