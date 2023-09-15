@@ -32,12 +32,10 @@ $utilities: map-merge(
     line-height: var(--sgds-body-line-height, $line-height-base);
     // Generates all rgb color declared in the $theme-colors from _variables.scss
     @each $color, $value in $theme-colors-rgb {
-        
         --sgds-#{$color}-rgb : #{$value};
     }
 
     @each $color, $value in $theme-colors {
-        
         --sgds-#{$color} : #{$value};
     }
 
