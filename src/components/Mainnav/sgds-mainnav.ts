@@ -109,7 +109,7 @@ export class SgdsMainnav extends SgdsElement {
         class="sgds navbar navbar-light
         ${this._expandClass()}"
       >
-        <a class="navbar-brand me-auto order-first" href=${this.brandHref}>
+        <a class="navbar-brand me-auto order-first" href=${this.brandHref} aria-label="brand-link">
           <slot name="brand"></slot>
         </a>
         <slot name="non-collapsible" class="${this.breakpointReached ? "order-1" : "order-last"}"></slot>

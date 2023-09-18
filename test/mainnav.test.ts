@@ -19,6 +19,7 @@ describe("sgds-mainnav", () => {
       el,
       `<nav class="navbar navbar-expand-lg navbar-light sgds">
        <a
+         aria-label="brand-link"
          class="me-auto navbar-brand order-first"
          href=""
        >
