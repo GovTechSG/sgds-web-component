@@ -139,6 +139,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
           @input=${() => this.handleChange("sgds-input")}
           ?disabled=${this.disabled}
           id=${this.inputId}
+          aria-label="quantity"
         />
         <button
           aria-label=${`increase by ${this.step}`}
