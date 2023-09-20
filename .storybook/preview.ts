@@ -1,4 +1,3 @@
-import { setCustomElements } from "@storybook/web-components";
 import customElements from "../custom-elements.json";
 
 import { setCustomElementsManifest } from "@storybook/web-components";

@@ -4,7 +4,7 @@ Web components are [fully supported in Vue](https://custom-elements-everywhere.c
 
 ## Installation
 
-Locally install the library or use CDN by adding the script tag to entry point of the Vue application.
+Locally install the library or use CDN by adding the script tag to entry point of the Vue application. Follow instructions in `Installation` and `Imports` documentation section
 
 ## Configuration
 

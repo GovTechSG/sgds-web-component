@@ -3,7 +3,7 @@ import { html } from "lit";
 import { property, queryAsync } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
-import { SgdsButton } from "../Button";
+import { SgdsButton } from "../Button/sgds-button";
 import { DropdownListElement } from "../../base/dropdown-list-element";
 import genId from "../../utils/generateId";
 

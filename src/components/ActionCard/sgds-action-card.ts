@@ -7,8 +7,8 @@ import { html } from "lit/static-html.js";
 import { CardElement } from "../../base/card-element";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import { SgdsCheckbox } from "../Checkbox";
-import { SgdsRadio } from "../Radio";
+import { SgdsCheckbox } from "../Checkbox/sgds-checkbox";
+import { SgdsRadio } from "../Radio/sgds-radio";
 import styles from "./sgds-action-card.scss";
 
 /**
