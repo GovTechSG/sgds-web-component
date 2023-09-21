@@ -48,10 +48,6 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
   /** When ellipsisOn is true, length of decrementing/incrementing of pages can be set with a number value*/
   @property({ type: Number }) ellipsisJump = 3;
 
-  connectedCallback() {
-    super.connectedCallback();
-  }
-
   @watch("currentPage")
   handleValueChange() {
     this.emit("sgds-page-change", { detail: { currentPage: this.currentPage } });
@@ -320,23 +316,25 @@ export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
 
   render() {
     return html`
-      <ul class="pagination pagination-${this.size} sgds" directionVariant=${this.directionVariant}>
-        ${this.renderDirectionButton(
-          "Previous",
-          "left",
-          this.handlePrevButton,
-          (e: KeyboardEvent) => this._handleKeyDown(e, "directionButton", undefined, undefined, true),
-          this.directionVariant
-        )}
-        ${this.ellipsisOn ? this.renderFirstEllipsis() : null} ${this.renderPgNumbers()} ${this.renderLastEllipsis()}
-        ${this.renderDirectionButton(
-          "Next",
-          "right",
-          this.handleNextButton,
-          (e: KeyboardEvent) => this._handleKeyDown(e, "directionButton", undefined, undefined, false),
-          this.directionVariant
-        )}
-      </ul>
+      <nav aria-label="pagination">
+        <ul class="pagination pagination-${this.size} sgds" directionVariant=${this.directionVariant}>
+          ${this.renderDirectionButton(
+            "Previous",
+            "left",
+            this.handlePrevButton,
+            (e: KeyboardEvent) => this._handleKeyDown(e, "directionButton", undefined, undefined, true),
+            this.directionVariant
+          )}
+          ${this.ellipsisOn ? this.renderFirstEllipsis() : null} ${this.renderPgNumbers()} ${this.renderLastEllipsis()}
+          ${this.renderDirectionButton(
+            "Next",
+            "right",
+            this.handleNextButton,
+            (e: KeyboardEvent) => this._handleKeyDown(e, "directionButton", undefined, undefined, false),
+            this.directionVariant
+          )}
+        </ul>
+      </nav>
     `;
   }
 }
