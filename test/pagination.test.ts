@@ -1,5 +1,5 @@
 import { SgdsPagination } from "../src/components/Pagination/sgds-pagination";
-import { fixture, assert, expect, elementUpdated, waitUntil } from "@open-wc/testing";
+import { fixture, assert, expect, elementUpdated} from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";
@@ -336,12 +336,12 @@ it("clicking a page should add the active class to the respective li", async () 
 
   const pagesHandler = sinon.spy();
   el.addEventListener("sgds-page-change", pagesHandler);
-  const pageOne = el.shadowRoot?.querySelectorAll("li")[1]
-  const pageTwo = el.shadowRoot?.querySelectorAll("li")[2]
+  const pageOne = el.shadowRoot?.querySelectorAll("li")[1];
+  const pageTwo = el.shadowRoot?.querySelectorAll("li")[2];
 
   expect(pageOne?.classList.value).to.contain("active");
 
-  pageTwo?.querySelector("span")?.click()
+  pageTwo?.querySelector("span")?.click();
   await el.updateComplete;
 
   expect(pageOne?.classList.value).to.not.contain("active");
