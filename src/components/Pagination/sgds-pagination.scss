@@ -1,0 +1,41 @@
+:host {
+  --pagination-color: var(--sgds-cyan);
+  --pagination-bg-color: var(--sgds-white);
+  --pagination-hover-bg-color: var(--sgds-gray-200);
+  --pagination-hover-border-color: var(--sgds-gray-300);
+  --pagination-active-color: var(--sgds-white);
+  --pagination-active-bg-color: var(--sgds-cyan);
+  --pagination-disabled-color: var(--sgds-gray-600);
+  --pagination-disabled-bg-color: var(--sgds-white);
+}
+
+ul.pagination.sgds {
+  li {
+    cursor: pointer;
+    &.disabled {
+      cursor: default;
+    }
+    &.page-item {
+      span {
+        &.page-link {
+          color: var(--pagination-color);
+          background-color: var(--pagination-bg-color);
+
+          &:hover {
+            color: var(--pagination-color);
+            background-color: var(--pagination-hover-bg-color);
+            border-color: var(--pagination-hover-border-color);
+          }
+        }
+      }
+      &.disabled .page-link {
+        color: var(--pagination-disabled-color);
+        background-color: var(--pagination-disabled-bg-color);
+      }
+      &.active .page-link {
+        color: var(--pagination-active-color);
+        background-color: var(--pagination-active-bg-color);
+      }
+    }
+  }
+}
