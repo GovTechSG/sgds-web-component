@@ -2,7 +2,6 @@ import { TemplateResult, html } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-pagination.scss";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { watch } from "../../utils/watch";
 
 /**
@@ -21,11 +20,11 @@ import { watch } from "../../utils/watch";
  *
  *
  **/
-export class SgdsPagination extends ScopedElementsMixin(SgdsElement) {
+export class SgdsPagination extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
   /** Inserts the length value from a given sets of data objects*/
-  @property({ type: String }) dataLength = 0;
+  @property({ type: Number }) dataLength = 0;
 
   /** Sets the starting active page upon render*/
   @property({ type: Number }) currentPage = 1;

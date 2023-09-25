@@ -1,12 +1,11 @@
 import { assert, expect, fixture, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import "../src/components/Tooltip";
-import { SgdsTooltip } from "../src/components/Tooltip";
+import { SgdsTooltip, SgdsButton } from "../src/components";
+import "../src/index";
 import { sendMouse } from "@web/test-runner-commands";
-import { SgdsButton } from "../src/components/Button";
 import sinon from "sinon";
-customElements.define("sgds-tooltip", SgdsTooltip);
-customElements.define("sgds-button", SgdsButton);
+
 describe("sgds-tooltip", () => {
   it("is defined", () => {
     const el = document.createElement("sgds-tooltip");

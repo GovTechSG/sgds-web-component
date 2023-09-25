@@ -2,15 +2,14 @@ import { expect, fixture, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
-import { SgdsQuantityToggle } from "../src/components/QuantityToggle/sgds-quantity-toggle";
-
-customElements.define("sgds-quantity-toggle", SgdsQuantityToggle);
+import { SgdsQuantityToggle } from "../src/components";
+import "../src/index";
 
 describe("when minusBtn or plusBtn is clicked", () => {
   it("should decrease and increase the value by 1 respectively", async () => {
     const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="10"></sgds-quantity-toggle>`);
-    const minusBtn = el.shadowRoot?.querySelector("button[aria-label=minus-button]") as HTMLButtonElement;
-    const plusBtn = el.shadowRoot?.querySelector("button[aria-label=plus-button]") as HTMLButtonElement;
+    const minusBtn = el.shadowRoot?.querySelector("button[aria-label^='decrease by']") as HTMLButtonElement;
+    const plusBtn = el.shadowRoot?.querySelector("button[aria-label^='increase by']") as HTMLButtonElement;
 
     minusBtn.click();
     await el.updateComplete;
@@ -42,8 +41,8 @@ describe("when step", () => {
     const el = await fixture<SgdsQuantityToggle>(
       html`<sgds-quantity-toggle value="10" step="91"></sgds-quantity-toggle>`
     );
-    const minusBtn = el.shadowRoot?.querySelector("button[aria-label=minus-button]") as HTMLButtonElement;
-    const plusBtn = el.shadowRoot?.querySelector("button[aria-label=plus-button]") as HTMLButtonElement;
+    const minusBtn = el.shadowRoot?.querySelector("button[aria-label^='decrease by']") as HTMLButtonElement;
+    const plusBtn = el.shadowRoot?.querySelector("button[aria-label^='increase by']") as HTMLButtonElement;
 
     minusBtn.click();
     await el.updateComplete;
@@ -57,6 +56,19 @@ describe("when step", () => {
   });
 });
 
+describe("when step changes", () => {
+  it("should change aria-label accordingly", async () => {
+    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle step="5"></sgds-quantity-toggle>`);
+    const minusBtn = el.shadowRoot?.querySelector("button[aria-label^='decrease by']") as HTMLButtonElement;
+    const plusBtn = el.shadowRoot?.querySelector("button[aria-label^='increase by']") as HTMLButtonElement;
+
+    expect(minusBtn).to.not.be.undefined;
+    expect(minusBtn.getAttribute("aria-label")).to.equal("decrease by 5");
+
+    expect(plusBtn.getAttribute("aria-label")).to.equal("increase by 5");
+  });
+});
+
 describe("methods", () => {
   it("plus method works to increment value of quantity-toggle", async () => {
     const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="10"></sgds-quantity-toggle>`);
@@ -64,7 +76,7 @@ describe("methods", () => {
     await el.updateComplete;
     expect(el.value).to.equal(11);
   });
-  it("minus method works to increment value of quantity-toggle", async () => {
+  it("minus method works to decrement value of quantity-toggle", async () => {
     const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="10"></sgds-quantity-toggle>`);
     el.minus();
     await el.updateComplete;

@@ -1,17 +1,15 @@
 import { assert, fixture } from "@open-wc/testing";
 import { html } from "lit";
-import { SgdsBreadcrumb } from "../src/components/Breadcrumb/sgds-breadcrumb";
-import { SgdsBreadcrumbItem } from "../src/components/Breadcrumb/sgds-breadcrumb-item";
-
-customElements.define("sgds-breadcrumb", SgdsBreadcrumb);
-customElements.define("sgds-breadcrumb-item", SgdsBreadcrumbItem);
+import { SgdsBreadcrumb, SgdsBreadcrumbItem } from "../src/components";
+import "../src/index";
 
 describe("sgds-breadcrumb", () => {
   it("renders with default values", async () => {
-    const el = await fixture(html`<sgds-breadcrumb></sgds-breadcrumb>`);
+    const el = await fixture<SgdsBreadcrumb>(html`<sgds-breadcrumb></sgds-breadcrumb>`);
     assert.shadowDom.equal(
       el,
       `<nav
+      aria-label="breadcrumb"
       part="base"
     >
       <ol class="breadcrumb">

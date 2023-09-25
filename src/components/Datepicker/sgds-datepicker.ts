@@ -5,7 +5,7 @@ import styles from "./sgds-datepicker.scss";
 import { live } from "lit/directives/live.js";
 import { watch } from "../../utils/watch";
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
-import { SgdsInput } from "../Input";
+import { SgdsInput } from "../Input/sgds-input";
 import { DatepickerCalendar } from "./datepicker-calendar";
 import { DatepickerHeader } from "./datepicker-header";
 import { DropdownElement } from "../../base/dropdown-element";

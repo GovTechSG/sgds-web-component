@@ -1,7 +1,7 @@
 import { html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
-import { SgdsTable } from "../src/components/Table";
-import { SgdsPagination } from "../src/components/Pagination";
+import { SgdsTable } from "../src/components/Table/sgds-table";
+import { SgdsPagination } from "../src/components/Pagination/sgds-pagination";
 
 interface Post {
   id: number | string;

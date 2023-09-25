@@ -27,3 +27,4 @@ export const Template = ({
   `;
 
 export const args = {};
+export const parameters = {};

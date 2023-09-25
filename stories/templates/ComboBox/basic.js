@@ -248,3 +248,5 @@ export const args = {
     "Zimbabwe"
   ]
 };
+
+export const parameters = {};
