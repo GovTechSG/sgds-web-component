@@ -116,7 +116,9 @@ export class SgdsStepper extends SgdsElement {
                 "is-completed": this.activeStep > index,
                 "is-clickable": this.activeStep > index
               })}"
-              tabindex=${this.activeStep > index ? "0" : "-1"}
+              tabindex="0"
+              aria-current=${this.activeStep === index ? "step" : "false"}
+              aria-disabled=${this.activeStep <= index ? "true" : "false"}
               @click="${() => this._onStepperItemClick(index)}"
               @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, index)}
             >
