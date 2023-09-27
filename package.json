@@ -2,10 +2,8 @@
   "name": "@govtechsg/sgds-web-component",
   "version": "1.0.0-rc.3",
   "description": "",
-  "main": "lib/index.js",
-  "module": "lib/index.js",
-  "typings": "lib/index.d.ts",
   "scripts": {
+    "dev": "vite",
     "build:dev": "rm -rf lib && rollup --config rollup.config.js --environment NODE_ENV:development",
     "build:prod": "rm -rf lib && rollup --config rollup.config.js --environment NODE_ENV:production",
     "build:react": "npm run cem && node ./scripts/makeReact.mjs",
@@ -15,8 +13,6 @@
     "build:lib": "npm run build:react && npm run build:prod && npm run post:build",
     "build:watch": "npm run build:dev -- --watch",
     "post:build": "node ./scripts/frankBuild.js",
-    "dev": "npm run build:watch & npm run serve",
-    "serve": "wds --watch --open",
     "test": "rm -rf test-outdir && rollup --config rollup.test.config.js && web-test-runner",
     "test:scripts": "wtr scripts/__tests__/**/*.test.js --node-resolve",
     "storybook": "npm run build:dev && nodemon --exec \"npm run write:stories &&  STORYBOOK_ENV=development start-storybook -p 6006\" --watch stories/templates stories/getting-started -e js,mdx",
@@ -50,7 +46,8 @@
     "@open-wc/scoped-elements": "^2.2.0",
     "@webcomponents/scoped-custom-element-registry": "^0.0.9",
     "bootstrap": "^5.1.3",
-    "lit": "^2.3.1"
+    "lit": "^2.3.1",
+    "vite": "^4.4.9"
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
@@ -119,7 +116,8 @@
     "sinon": "^14.0.0",
     "storybook-addon-web-components-knobs": "^0.3.20",
     "tslib": "^2.4.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "vite-plugin-dts": "^3.6.0"
   },
   "config": {
     "commitizen": {
