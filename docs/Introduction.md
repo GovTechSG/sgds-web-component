@@ -8,6 +8,8 @@
 
 
 - Shipped with SGDS v2 styles 
-- Compatible with all frameworks 
+- Compatible with all frameworks
 - Works with CDN
 - Customisable with CSS 
+- Build with accessbility in mind
+- Open source
