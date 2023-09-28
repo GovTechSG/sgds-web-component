@@ -4,13 +4,26 @@ import postcss from "rollup-plugin-postcss";
 import litcss from "rollup-plugin-postcss-lit";
 import replace from "@rollup/plugin-replace";
 import { visualizer } from "rollup-plugin-visualizer";
+import glob from "glob";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const external = ["@lit", "lit", "lit-element", "@popperjs", /@open-wc\/.*/, "bootstrap", "tslib", /lit\/.*/,  /bootstrap\/.*/]
+const external = [
+  "@lit",
+  "lit",
+  "lit-element",
+  "@popperjs",
+  /@open-wc\/.*/,
+  "bootstrap",
+  "tslib",
+  /lit\/.*/,
+  /bootstrap\/.*/
+];
 
 const wcPlugins = [
   resolve({
     browser: true,
-    dedupe: external,
+    dedupe: external
   }),
   replace({
     "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
@@ -39,41 +52,39 @@ const reactBuildPlugins = [
     useTsconfigDeclarationDir: true
   })
 ];
+const buildUMDComponentBundles = () => {
+  const indexFilesMetadata = glob
+    .sync("src/components/**/index.ts")
+    .map(file => ({
+      name: file.split("/")[2],
+      outputPath: path.relative("src", file.slice(0, file.length - path.extname(file).length)),
+      inputPath: fileURLToPath(new URL(file, import.meta.url))
+    }))
+    .flat();
+
+  return indexFilesMetadata.map(meta => ({
+    input: meta.inputPath,
+    output: {
+      name: `${meta.name}Bundle`,
+      file: `lib/${meta.outputPath}.umd.js`,
+      format: "umd",
+      sourcemap: true
+    },
+    plugins: wcPlugins
+  }));
+};
 const buildSgdsPackage = () => {
-  const sgdsWcPackage = [
+  const esmModules = [
     //generate subpath entry points for individual components side effects ce file
     {
-      input: ["src/index.ts"],
+      input: ["src/index.ts", "src/components/index.ts"],
       output: {
         entryFileNames: "[name].js",
         dir: "lib",
         format: "esm",
         sourcemap: true,
         preserveModules: true,
-        preserveModulesRoot: "src",
-      },
-      plugins: wcPlugins,
-    },
-    // bundled form for cdn 
-    {
-      input: ["src/index.ts"],
-      output: {
-        entryFileNames: "umd/[name].js",
-        dir: "lib",
-        format: "umd",
-        sourcemap: true,
-      },
-      plugins: wcPlugins,
-    },
-    // unbundled for local installation
-    {
-      input: ["src/components/index.ts"],
-      output: {
-        dir: "lib",
-        format: "esm",
-        preserveModules: true,
-        preserveModulesRoot: "src",
-        sourcemap: true,
+        preserveModulesRoot: "src"
       },
       plugins: wcPlugins,
       external
@@ -81,13 +92,26 @@ const buildSgdsPackage = () => {
   ];
 
   if (process.env.NODE_ENV === "production") {
+    const umdBundles = [
+      // bundled form for cdn
+      {
+        input: ["src/index.ts"],
+        output: {
+          entryFileNames: "[name].umd.js",
+          dir: "lib",
+          format: "umd",
+          sourcemap: true
+        },
+        plugins: wcPlugins
+      },
+      ...buildUMDComponentBundles()
+    ];
     const reactPackage = [
       {
         input: "src/react/index.ts",
         output: [
           {
             entryFileNames: "[name].js",
-
             dir: "lib",
             format: "esm",
             sourcemap: true,
@@ -96,28 +120,29 @@ const buildSgdsPackage = () => {
             preserveModulesRoot: "src"
           }
         ],
-        plugins: [
-          ...reactBuildPlugins,
-        ],
+        plugins: [...reactBuildPlugins],
         external: ["@lit-labs/react", "react", ...external]
       },
       {
         input: "src/react/index.ts",
         output: [
           {
-            file: "lib/react/cjs/index.js",
+            entryFileNames: "[name].cjs.js",
+            dir: "lib",
             format: "cjs",
             sourcemap: true,
-            exports: "named"
+            exports: "named",
+            preserveModules: true,
+            preserveModulesRoot: "src"
           }
         ],
         plugins: [...reactBuildPlugins],
         external: ["@lit-labs/react", "react", ...external]
       }
     ];
-    return sgdsWcPackage.concat(reactPackage);
+    return [...esmModules, ...umdBundles, ...reactPackage];
   }
-  return sgdsWcPackage;
+  return esmModules;
 };
 
 export default buildSgdsPackage;
