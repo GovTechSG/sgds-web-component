@@ -13,7 +13,7 @@ export const Template = args =>
         .open=${args.open}
         .disabled=${args.disabled}
         .accordionItemClasses=${args.accordionItemClasses}
-      > 
+      >
         <p class="m-0" slot="accordion-header">This is an accordion</p>
         <span slot="accordion-content">${args.content}</span>
       </sgds-accordion-item>
@@ -32,7 +32,7 @@ export const Template = args =>
     </sgds-accordion>
   `;
 
-export const args = { 
+export const args = {
   header: "This is a solo accordion",
   content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum."
 };

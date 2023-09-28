@@ -1,5 +1,5 @@
 import SgdsPagination from "../src/components/Pagination/sgds-pagination";
-import { fixture, assert, expect, elementUpdated} from "@open-wc/testing";
+import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";
