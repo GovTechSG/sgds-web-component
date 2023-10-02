@@ -1,10 +1,9 @@
 import { elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
-import { SgdsDatepicker } from "../src/components/Datepicker";
 import DatepickerCalendar from "../src/components/Datepicker/datepicker-calendar";
 import DatepickerHeader from "../src/components/Datepicker/datepicker-header";
-import { SgdsInput } from "../src/components/Input";
+import { SgdsDatepicker, SgdsInput } from "../src/components";
+import "../src/index";
 
-customElements.define("sgds-datepicker", SgdsDatepicker);
 customElements.define("sgds-datepicker-header", DatepickerHeader);
 customElements.define("sgds-datepicker-calendar", DatepickerCalendar);
 

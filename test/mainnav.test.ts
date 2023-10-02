@@ -1,10 +1,7 @@
-import { SgdsMainnavItem, SgdsMainnav, SgdsMainnavDropdown } from "../src/components/Mainnav";
+import { SgdsMainnavItem, SgdsMainnav, SgdsMainnavDropdown } from "../src/components";
+import "../src/index";
 import { fixture, assert, expect, aTimeout, fixtureCleanup } from "@open-wc/testing";
 import { html } from "lit";
-
-customElements.define("sgds-mainnav", SgdsMainnav);
-customElements.define("sgds-mainnav-dropdown", SgdsMainnavDropdown);
-customElements.define("sgds-mainnav-item", SgdsMainnavItem);
 
 describe("sgds-mainnav", () => {
   afterEach(() => fixtureCleanup());
@@ -19,6 +16,7 @@ describe("sgds-mainnav", () => {
       el,
       `<nav class="navbar navbar-expand-lg navbar-light sgds">
        <a
+         aria-label="brand-link"
          class="me-auto navbar-brand order-first"
          href=""
        >

@@ -13,8 +13,17 @@ async function createPackageFile() {
     ...packageOthers,
     private: false,
     typings: "./index.d.ts",
-    main: "./index.js",
-    module: "./index.js"
+    main: "./index.umd.js",
+    module: "./index.js",
+    exports: {
+      ".": "./index.js",
+      "./components": "./components/index.js",
+      "./components/*": "./components/*",
+      "./react": "./react/index.js",
+      "./react/*": "./react/*",
+      "./base/*": null,
+      "./utils/*": null
+    }
   };
 
   const targetPath = resolve(distPath, "./package.json");

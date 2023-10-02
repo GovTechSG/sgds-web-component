@@ -1,9 +1,7 @@
 import { expect, fixture, oneEvent } from "@open-wc/testing";
 import { html } from "lit";
-import { SgdsFileUpload } from "../src/components/FileUpload";
-import { SgdsButton } from "../src/components/Button";
-
-customElements.define("sgds-file-upload", SgdsFileUpload);
+import { SgdsFileUpload, SgdsButton } from "../src/components";
+import "../src/index";
 
 describe("sgds-file-upload", () => {
   it("should be able to pass in content in between the slot", async () => {
@@ -119,7 +117,6 @@ describe("sgds-file-upload", () => {
       expect(listItems?.length).to.equal(2);
 
       const removeBtn = listItems?.[0].querySelector(".fileupload-list-item span:last-child");
-      console.log("removeBtn", removeBtn);
       removeBtn?.dispatchEvent(new Event("click"));
       await el.updateComplete;
 

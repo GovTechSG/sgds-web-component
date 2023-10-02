@@ -1,12 +1,9 @@
 import { html } from "lit";
 import { expect, fixture, waitUntil } from "@open-wc/testing";
-import { SgdsComboBox } from "../src/components/ComboBox";
 import sinon from "sinon";
-import { SgdsDropdownItem } from "../src/components/Dropdown";
+import { SgdsDropdownItem, SgdsInput, SgdsComboBox } from "../src/components";
+import "../src/index";
 import { sendKeys } from "@web/test-runner-commands";
-import { SgdsInput } from "../src/components/Input";
-
-customElements.define("sgds-combo-box", SgdsComboBox);
 
 describe("<sgds-combo-box>", () => {
   it("should be disabled with the disabled attribute to be true", async () => {

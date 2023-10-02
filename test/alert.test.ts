@@ -1,11 +1,8 @@
 import { assert, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
-import { SgdsAlert, SgdsAlertHeading, SgdsAlertLink } from "../src/components/Alert";
-
-customElements.define("sgds-alert", SgdsAlert);
-customElements.define("sgds-alert-heading", SgdsAlertHeading);
-customElements.define("sgds-alert-link", SgdsAlertLink);
+import { SgdsAlert } from "../src/components";
+import "../src/index";
 
 describe("<sgds-alert-heading>", () => {
   it("the default tag is h4", async () => {
@@ -152,7 +149,6 @@ describe("<Alert>", () => {
   it("when show is true, alert should have show class", async () => {
     const el = await fixture(html`<sgds-alert variant="primary" show>Test alert</sgds-alert>`);
     const base = el.shadowRoot?.querySelector(".sgds.alert");
-    console.log(base);
     expect(base?.classList.contains("show")).to.be.true;
   });
 

@@ -1,11 +1,12 @@
-import { SgdsFooter, ColumnLinks } from "../src/components/Footer";
+import { ColumnLinks } from "../src/components/Footer/sgds-footer";
 import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
+import { SgdsFooter } from "../src/components";
+import "../src/index";
 
-customElements.define("sgds-footer", SgdsFooter);
 describe("button-element", () => {
   it("renders with default values", async () => {
-    const el = await fixture(html`<sgds-footer></sgds-footer>`);
+    const el = await fixture<SgdsFooter>(html`<sgds-footer></sgds-footer>`);
     assert.shadowDom.equal(
       el,
       `

@@ -1,6 +1,7 @@
 import type { StrictModifiers } from "@popperjs/core";
 import * as Popper from "@popperjs/core";
-import { Dropdown } from "bootstrap";
+import Dropdown from "bootstrap/js/src/dropdown";
+import type { Dropdown as BsDropdown } from "bootstrap";
 import { property, state } from "lit/decorators.js";
 import { Ref, createRef } from "lit/directives/ref.js";
 import mergeDeep from "../utils/mergeDeep";
@@ -26,7 +27,7 @@ export class DropdownElement extends SgdsElement {
   /** @internal */
   protected myDropdown: Ref<HTMLElement> = createRef();
   /** @internal */
-  protected bsDropdown: Dropdown = null;
+  protected bsDropdown: BsDropdown = null;
 
   /** @internal Controls auto-flipping of menu */
   @property({ type: Boolean, state: true })

@@ -1,9 +1,11 @@
 :host {
   --alert-icon-margin-right: 0.5rem;
+ 
 }
 
 slot[name="icon"]::slotted(svg) {
   margin-right: var(--alert-icon-margin-right);
+  vertical-align: unset !important;
 }
 
 i {

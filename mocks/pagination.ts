@@ -1,0 +1,87 @@
+import { html, LitElement } from "lit";
+import { customElement } from "lit/decorators.js";
+import { SgdsTable } from "../src/components/Table/sgds-table";
+import { SgdsPagination } from "../src/components/Pagination/sgds-pagination";
+
+interface Post {
+  id: number | string;
+  title: string | number;
+  body: string | number;
+}
+
+interface PaginationProps {
+  currentPage: number;
+  itemsPerPage: number;
+}
+
+@customElement("mock-pagination")
+export class MockPagination extends LitElement {
+  paginationProps: PaginationProps = {
+    currentPage: 1,
+    itemsPerPage: 5
+  };
+
+  tableData: Post[] = [];
+  tableHeaders: string[] = ["Id", "Title", "Body"];
+
+  async connectedCallback() {
+    super.connectedCallback();
+    await this.firstUpdated();
+  }
+
+  async fetchPosts(): Promise<Post[]> {
+    try {
+      const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+      const data: Post[] = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+      return [];
+    }
+  }
+
+  async firstUpdated() {
+    const posts: Post[] = await this.fetchPosts();
+
+    this.tableData = posts.map(post => ({
+      id: post.id,
+      title: post.title,
+      body: post.body
+    }));
+
+    this.updateTable();
+  }
+
+  _pageChange(e: CustomEvent) {
+    const updatedCurrentPage: number = e.detail.currentPage;
+    this.paginationProps.currentPage = updatedCurrentPage;
+    this.updateTable();
+  }
+
+  updateTable() {
+    const indexOfLastItem: number = this.paginationProps.currentPage * this.paginationProps.itemsPerPage;
+    const indexOfFirstItem: number = indexOfLastItem - this.paginationProps.itemsPerPage;
+    const displayedData: (string | number)[][] = this.tableData
+      .slice(indexOfFirstItem, indexOfLastItem)
+      .map(post => [post.id, post.title, post.body]);
+
+    const table = this.shadowRoot?.querySelector("sgds-table") as SgdsTable;
+    const pagination = this.shadowRoot?.querySelector("sgds-pagination") as SgdsPagination;
+
+    if (table && pagination) {
+      table.tableHeaders = this.tableHeaders;
+      table.tableData = displayedData;
+
+      pagination.dataLength = this.tableData.length;
+      pagination.currentPage = this.paginationProps.currentPage;
+      pagination.itemsPerPage = this.paginationProps.itemsPerPage;
+    }
+  }
+
+  render() {
+    return html`
+      <sgds-table></sgds-table>
+      <sgds-pagination ellipsisOn @sgds-page-change=${this._pageChange}></sgds-pagination>
+    `;
+  }
+}
