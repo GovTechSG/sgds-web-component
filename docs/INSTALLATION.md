@@ -2,10 +2,7 @@
 
 You can load SGDS's web components via CDN or by installing it locally. The library depends on  [scoped custom elements registry](https://open-wc.org/docs/development/scoped-elements/) and in certain cases, it is required to import the `@webcomponents/scoped-custom-element-registry` polyfill before the web components.
 
-Common scenarios for loading the polyfill 
-- Using more than one version of a web component ScopedElementMixin
-
-Refer to (open-wc's directive on scoped-elements)[https://open-wc.org/docs/development/scoped-elements/#:~:text=(optional)%20load%20the%20polyfill%20if%20you%20need%20scoping] for more details to know when to use the polyfill.
+Refer to [open-wc's directive on scoped-elements](https://open-wc.org/docs/development/scoped-elements/#:~:text=load%20the%20polyfill%20if%20you%20need%20scoping) for more details to know when to use the polyfill.
 
 ## CDN
 
