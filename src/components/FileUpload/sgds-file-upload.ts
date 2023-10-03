@@ -4,7 +4,7 @@ import { property } from "lit/decorators.js";
 import { createRef, ref } from "lit/directives/ref.js";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import SgdsElement from "../../base/sgds-element";
-import { SgdsButton } from "../Button";
+import { SgdsButton } from "../Button/sgds-button";
 import styles from "./sgds-file-upload.scss";
 
 export type FileUploadButtonVariant =

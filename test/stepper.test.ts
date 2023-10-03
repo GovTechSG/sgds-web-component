@@ -1,11 +1,8 @@
 import { assert, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
-import { SgdsButton } from "../src/components/Button/sgds-button";
-import { SgdsStepper } from "../src/components/Stepper/sgds-stepper";
+import { SgdsButton, SgdsStepper } from "../src/components";
+import "../src/index";
 import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";
-
-customElements.define("sgds-stepper", SgdsStepper);
-customElements.define("sgds-button", SgdsButton);
 
 const stepMetaData = [
   {
@@ -106,7 +103,6 @@ describe("sgds-stepper, sgds-button interactions", () => {
       await elementUpdated(el);
       expect(stepper?.shadowRoot?.querySelectorAll(".stepper-item")[0]).to.have.class("is-completed");
       expect(stepper?.shadowRoot?.querySelectorAll(".stepper-item")[0]).to.have.class("is-clickable");
-      expect(stepper?.shadowRoot?.querySelectorAll(".stepper-item")[0]).to.have.attribute("tabindex", "0");
       expect(stepper?.shadowRoot?.querySelectorAll(".stepper-item")[0]).not.to.have.class("is-active");
     }
   });
@@ -129,7 +125,7 @@ describe("sgds-stepper, sgds-button interactions", () => {
     }
   });
 
-  it("should decrement the active step when the previousStep() method is called, showing the previous step 2 to not have is-clickable, is-completed props, tabindex -1", async () => {
+  it("should decrement the active step when the previousStep() method is called, showing the previous step 2 to not have is-clickable, is-completed props", async () => {
     const el = await fixture(html`
       <sgds-stepper .steps=${stepMetaData} id="myStepper" activeStep="1"></sgds-stepper>
       <sgds-button stepperId="myStepper" methodType="decrement" variant="primary">Next</sgds-button>
@@ -145,7 +141,6 @@ describe("sgds-stepper, sgds-button interactions", () => {
       expect(stepper?.shadowRoot?.querySelectorAll(".stepper-item")[0]).to.have.class("is-active");
       expect(stepper?.shadowRoot?.querySelectorAll(".stepper-item")[1]).not.to.have.class("is-completed");
       expect(stepper?.shadowRoot?.querySelectorAll(".stepper-item")[1]).not.to.have.class("is-clickable");
-      expect(stepper?.shadowRoot?.querySelectorAll(".stepper-item")[1]).to.have.attribute("tabindex", "-1");
     }
   });
 
@@ -264,14 +259,38 @@ describe("Stepper keyboard interactions", () => {
     el.addEventListener("sgds-arrived", arrivedHandler);
     const markers = el.shadowRoot?.querySelectorAll("div.stepper-item");
     expect(markers?.[0]).to.have.class("is-completed").and.have.class("is-clickable");
-    expect(markers?.[0]).to.have.attribute("tabindex", "0");
     expect(markers?.[1]).to.have.class("is-completed").and.have.class("is-clickable");
-    expect(markers?.[1]).to.have.attribute("tabindex", "0");
 
     await sendKeys({ press: "Tab" });
     await sendKeys({ press: "Enter" });
     await el.updateComplete;
     expect(markers?.[0]).to.have.class("is-active");
     expect(arrivedHandler).to.be.calledOnce;
+  });
+});
+
+describe("sgds-stepper accessibility", () => {
+  it("should be tab-accessible for all steps", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData} activeStep="0"></sgds-stepper> `);
+    const markers = el.shadowRoot?.querySelectorAll("div.stepper-item");
+    expect(markers?.[0]).to.have.attribute("tabindex", "0");
+    expect(markers?.[1]).to.have.attribute("tabindex", "0");
+    expect(markers?.[2]).to.have.attribute("tabindex", "0");
+  });
+
+  it("should have correct aria-current value for each step when activeStep set to 1", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData} activeStep="1"></sgds-stepper> `);
+    const markers = el.shadowRoot?.querySelectorAll("div.stepper-item");
+    expect(markers?.[0]).to.have.attribute("aria-current", "false");
+    expect(markers?.[1]).to.have.attribute("aria-current", "step");
+    expect(markers?.[2]).to.have.attribute("aria-current", "false");
+  });
+
+  it("should have correct aria-disabled value for each step when activeStep set to 1", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData} activeStep="1"></sgds-stepper> `);
+    const markers = el.shadowRoot?.querySelectorAll("div.stepper-item");
+    expect(markers?.[0]).to.have.attribute("aria-disabled", "false");
+    expect(markers?.[1]).to.have.attribute("aria-disabled", "true");
+    expect(markers?.[2]).to.have.attribute("aria-disabled", "true");
   });
 });

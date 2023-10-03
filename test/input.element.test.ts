@@ -1,10 +1,8 @@
-import { SgdsInput } from "../src/components/Input/sgds-input";
-import SgdsButton from "../src/components/Button/sgds-button";
+import { SgdsInput, SgdsButton } from "../src/components";
+import "../src/index";
 import { expect, fixture, html, oneEvent, waitUntil, assert, elementUpdated } from "@open-wc/testing";
 import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";
-customElements.define("sgds-input", SgdsInput);
-customElements.define("sgds-button", SgdsButton);
 
 describe("sgds-input", () => {
   it("renders with default values", async () => {
@@ -12,9 +10,11 @@ describe("sgds-input", () => {
     assert.shadowDom.equal(
       el,
       `
-        <label class="form-label" for="test-id">label</label>
-        <small class="form-text text-muted" id="test-idHelp">hello</small>
-        <input type="text" class="form-control " id="test-id" aria-invalid="false" placeholder="placeholder">
+        <div class="d-flex flex-column w-100">
+          <label class="form-label" for="test-id">label</label>
+          <small class="form-text text-muted" id="test-idHelp">hello</small>
+          <input type="text" class="form-control " id="test-id" aria-invalid="false" placeholder="placeholder">
+        </div>
     `,
       { ignoreAttributes: ["id", "for"] }
     );

@@ -1,14 +1,11 @@
-import { SgdsDropdown, SgdsDropdownItem } from "../src/components/Dropdown";
-import { SgdsButton } from "../src/components/Button";
+import { SgdsDropdown, SgdsDropdownItem, SgdsButton } from "../src/components";
+import "../src/index";
 import { fixture, assert, expect, waitUntil } from "@open-wc/testing";
 import sinon from "sinon";
 import { html } from "lit";
 import { sendKeys, sendMouse } from "@web/test-runner-commands";
 import { MockDropdown } from "../mocks/dropdown";
 import "../mocks/dropdown";
-
-customElements.define("sgds-dropdown", SgdsDropdown);
-customElements.define("sgds-dropdown-item", SgdsDropdownItem);
 
 describe("dropdown-element generic keyboard interactions", () => {
   // //keyboard navigation
@@ -177,7 +174,9 @@ describe("sgds-dropdown", () => {
       el,
       `  <div>
          <sgds-button
+           role="button"
            aria-expanded="false"
+           aria-haspopup="menu"
          variant="outline-secondary"
          >
          <svg
@@ -421,7 +420,7 @@ describe("sgds-dropdown", () => {
   });
   const closeValues = ["default", "outside", "inside"];
   closeValues.forEach(closeVal => {
-    it(`dropdown menu always closes regardless of prop close value = ${closeVal}`, async () => {
+    it(`dropdown menu always closes when click on button regardless of prop close value = ${closeVal}`, async () => {
       const el = await fixture<SgdsDropdown>(
         html`<sgds-dropdown menuIsOpen close=${closeVal}>
           <sgds-dropdown-item>slot 1</sgds-dropdown-item>

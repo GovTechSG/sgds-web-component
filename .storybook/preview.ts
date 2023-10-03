@@ -1,7 +1,7 @@
-import { setCustomElements } from "@storybook/web-components";
 import customElements from "../custom-elements.json";
 
 import { setCustomElementsManifest } from "@storybook/web-components";
+import "./global.css";
 
 export const setCustomElementsManifestWithOptions = (
   customElements: any,
@@ -36,7 +36,7 @@ export const parameters = {
   },
   options: {
     storySort: {
-      order: ["Getting Started", ["Installation", "Imports"], "Frameworks", "Components"]
+      order: ["Getting Started", ["Introduction", "Installation", "Imports"], "Frameworks", "Components"]
     }
   }
 };

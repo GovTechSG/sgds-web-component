@@ -7,7 +7,7 @@ import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { FormSubmitController, SgdsFormControl } from "../../utils/form";
 import genId from "../../utils/generateId";
-import { ButtonVariant } from "../Button";
+import { ButtonVariant } from "../Button/sgds-button";
 import styles from "./sgds-quantity-toggle.scss";
 
 /**
@@ -24,9 +24,9 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
   /**@internal */
   @query("input.form-control") private input: HTMLInputElement;
   /**@internal */
-  @query("button[aria-label=plus-button]") private plusBtn: HTMLButtonElement;
+  @query("button[aria-label^='increase by']") private plusBtn: HTMLButtonElement;
   /**@internal */
-  @query("button[aria-label=minus-button]") private minusBtn: HTMLButtonElement;
+  @query("button[aria-label^='decrease by']") private minusBtn: HTMLButtonElement;
 
   static styles = [SgdsElement.styles, styles];
   /**@internal */
@@ -106,7 +106,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
         size=${this.size}
       >
         <button
-          aria-label="minus-button"
+          aria-label=${`decrease by ${this.step}`}
           part="button"
           class=${classMap({
             sgds: true,
@@ -139,9 +139,10 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
           @input=${() => this.handleChange("sgds-input")}
           ?disabled=${this.disabled}
           id=${this.inputId}
+          aria-label="quantity"
         />
         <button
-          aria-label="plus-button"
+          aria-label=${`increase by ${this.step}`}
           part="button"
           class=${classMap({
             sgds: true,
@@ -164,6 +165,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
             />
           </svg>
         </button>
+        <div id="announcer" role="region" aria-live="assertive" class="visually-hidden">${this.value}</div>
       </div>
     `;
   }
