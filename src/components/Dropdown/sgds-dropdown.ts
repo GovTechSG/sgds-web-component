@@ -82,9 +82,11 @@ export class SgdsDropdown extends ScopedElementsMixin(DropdownListElement) {
     return html`
       <div>
         <sgds-button
+          role="button"
           variant="outline-${this.variant}"
           ?disabled=${this.disabled}
           aria-expanded="${this.menuIsOpen}"
+          aria-haspopup="menu"
           ${ref(this.myDropdown)}
           @click=${() => this.toggleMenu()}
           id=${this.togglerId}
