@@ -16,6 +16,7 @@ import "./components/Input";
 import "./components/Mainnav";
 import "./components/Masthead";
 import "./components/Modal";
+import "./components/Pagination";
 import "./components/QuantityToggle";
 import "./components/Radio";
 import "./components/Sidenav";

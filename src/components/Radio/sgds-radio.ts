@@ -99,6 +99,7 @@ export class SgdsRadio extends SgdsElement {
           aria-disabled=${this.disabled ? "true" : "false"}
           aria-checked=${this.checked ? "true" : "false"}
           @click=${this.handleClick}
+          tabindex="-1"
         />
         <label for="${ifDefined(this.radioId)}" aria-label=${ifDefined(this.ariaLabel)} class="form-check-label"
           ><slot></slot
