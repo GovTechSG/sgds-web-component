@@ -1,3 +1,17 @@
+## v1.0.0-rc.5 (2023-10-03)
+
+### Feat
+
+- **combobox**: add aria-controls
+- **datepicker**: add combobox role, aria-haspopup, aria-controls
+- **combobox**: add listbox role, aria-expanded, aria-autocomplete
+- **dropdown**: add aria-haspopup attribute
+
+### Fix
+
+- **combobox**: update listbox role to combobox
+- **dropdown**: fix aria-expanded not read by screen-reader
+
 ## v1.0.0-rc.4 (2023-10-03)
 
 ### Feat
