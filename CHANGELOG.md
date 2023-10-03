@@ -1,3 +1,66 @@
+## v1.0.0-rc.4 (2023-10-03)
+
+### Feat
+
+- **stepper**: update tabindex, add aria-current and aria-disabled
+- **accordion-item**: remove id to prevent duplication, replace summary props with accordion-header slot, replace content with accordion-content slot
+- **radio**: set inner <input> to be unfocusable
+- **quantitytoggle**: add aria-label to quantity input
+- **mainnav**: add aria-label to brand link
+- **pagination**: added tabbable functionality
+- **pagination**: added watch decorator for duplicated event
+- **pagination**: fix ellipsisJump beyond first page and last page and render the active class
+- **pagination**: added prop ellipsisOn functionality for prev and next ellipsis
+- **pagination**: disable click for first page on prev button and last page on next button
+- **pagination**: allows toggling of ellipsisOn prop for next ellipsis
+- **pagination**: added disabled ellipsis for default pagination
+- **pagination**: added basic pagination comp
+- **modal**: add focus to modal heading after opening
+- **quantitytoggle**: add announcer to announce count after every increment or decrement
+- **quantitytoggle**: update aria-label of buttons to include number of steps
+- **combobox**: allow user to define custom filter function via filterFunction prop
+- **combobox**: hide dropdown menu when filtered menuList has no items
+- **combobox**: add slot to allow user to configure own form control icon
+- **combobox**: emit sgds-change event when selected value changes
+- **combobox**: filter menuList according to input value
+- **combobox**: show selected item value in input box
+- **combobox**: first commit
+- **progress**: add progress component
+
+### Fix
+
+- **combobox**: menu item should not be an anchor link based on a11y comments
+- **frankBuild**: update main path to new umd entry point
+- **alert**: remove default svg vertical align stylings for alert
+- **pagination**: add nav wrapper for acc, fix tabindex rendering
+- *****: lint fixes
+- **breadcrumb**: add default value for aria-label
+- **accordionitem**: correct accordion item padding-x
+- *****: update lib endpoint in storybook
+- *****: update path to combobox in components entry point
+- **combobox**: update and fix failing test cases
+- *****: import paths after updating branch
+- **combobox**: fix bug to close menu when an item is selected
+- **dropdown-element**: update _getMenuItems() to query slot#default
+- **dropdown-element**: fix _getMenuItems() to correctly obtain dropdown items
+- **combobox**: replace dropdown-item href="#" to href that does nothing
+- **combobox**: always show dropdown when user inputs value
+- **combobox**: fix position of label and hintText to be vertically on top of input box
+- **dropdown**: keyboard bug
+- **sidenav**: remove padding left
+- **progress-bar**: remove part
+- **progress**: remove sgds prefix
+- **progress**: fixed pascal case
+- *****: declare bootstrap typings for non typed boostrap src files
+
+### Refactor
+
+- **pagination**: refactor direction button rendering
+- **pagination**: refactor mock pagination comp for sb
+- **dropdown element**: create dropdown-list-element from dropdown element
+- **combobox**: remove unused styles
+- **combobox**: conditional render dropdown menu
+
 ## v1.0.0-rc.3 (2023-08-17)
 
 ### Feat
