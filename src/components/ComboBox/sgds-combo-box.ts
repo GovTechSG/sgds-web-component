@@ -24,7 +24,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
   /**@internal */
   static get scopedElements() {
     return {
-      "sgds-input": SgdsInput,
+      "sgds-input": SgdsInput
     };
   }
   constructor() {
@@ -124,8 +124,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
         </div>
         <ul class="dropdown-menu" part="menu">
           ${this.filteredMenuList.map(
-            item =>
-              html`<button class="dropdown-item" @click=${this._handleSelectChange}>${item}</button>`
+            item => html`<button class="dropdown-item" @click=${this._handleSelectChange}>${item}</button>`
           )}
         </ul>
       </div>
