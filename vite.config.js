@@ -12,12 +12,7 @@ export default defineConfig({
       }
     ]
   },
-  build: {
-    outDir: "lib",
-    sourcemap: true,
-    lib: {
-      entry: ["src/index.ts", "src/components.ts"],
-      formats: ["es"]
-    }
+  define: {
+    "process.env.VITE_ENV": JSON.stringify(process.env.VITE_ENV)
   }
 });

@@ -111,7 +111,19 @@
     <script type="module">
         import "@webcomponents/scoped-custom-element-registry";
     </script>
-    <script src="src/index.ts" type="module"></script>
+    <script type="module">
+        let scriptTarget = document.getElementsByTagName('head')[0]
+        let moduleScript = document.createElement('script'); 
+        moduleScript.type = "module";
+        if (process.env.VITE_ENV === 'production') {
+            // preview production build
+            moduleScript.src = 'dist/index.js'
+        } else {
+            // development server
+            moduleScript.src = 'src/index.ts';
+        }
+        scriptTarget.appendChild(moduleScript)
+    </script>
     <script>
         const steps = [
   { title: 1, stepHeader: "Marker title", template: `<p>Step 1 Content</p>` },
@@ -205,7 +217,7 @@
             
         </div>
         <div class="container">
-            <sgds-combo-box placeholder='test combo box' menuList='["John Smith", "Jack Adams"]' label="label" hintText="hint">
+            <sgds-combo-box  menuList='["John Smith", "Jack Adams"]' label="label" hintText="hint">
                 <!-- <svg
                     slot="icon"
                     xmlns="http://www.w3.org/2000/svg"
