@@ -335,6 +335,9 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
           readonly
           ?required=${this.required}
           ?disabled=${this.disabled}
+          role="combobox"
+          aria-haspopup="dialog"
+          aria-controls=${this.dropdownMenuId}
         ></sgds-input>
         <button
           ?disabled=${this.disabled}
@@ -344,8 +347,9 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
           ${svgEl}
         </button>
         <ul
+          id=${this.dropdownMenuId}
           class="sgds datepicker dropdown-menu"
-          role="menu"
+          role="dialog"
           part="menu"
           @click=${(event: MouseEvent) => event.stopPropagation()}
         >

@@ -4,7 +4,6 @@ import { property, state } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
 import { defaultValue } from "../../utils/defaultvalue";
-import { SgdsDropdownItem } from "../Dropdown/sgds-dropdown-item";
 import { SgdsInput } from "../Input/sgds-input";
 import styles from "./sgds-combo-box.scss";
 import { watch } from "../../utils/watch";
@@ -25,8 +24,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
   /**@internal */
   static get scopedElements() {
     return {
-      "sgds-input": SgdsInput,
-      "sgds-dropdown-item": SgdsDropdownItem
+      "sgds-input": SgdsInput
     };
   }
   constructor() {
@@ -98,7 +96,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
   }
 
   private _handleSelectChange(e: KeyboardEvent | MouseEvent) {
-    this.value = (e.target as SgdsDropdownItem).innerText;
+    this.value = (e.target as HTMLButtonElement).innerText;
     this.handleSelectSlot(e);
   }
 
@@ -119,17 +117,18 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
           ?readonly=${this.readonly}
           .value=${this.value}
           @sgds-input=${this._handleInputChange}
+          role="combobox"
+          aria-expanded=${this.menuIsOpen}
+          aria-autocomplete="list"
+          aria-controls=${this.dropdownMenuId}
         >
         </sgds-input>
         <div class="form-control-icon">
           <slot name="icon"></slot>
         </div>
-        <ul class="dropdown-menu" part="menu">
+        <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1">
           ${this.filteredMenuList.map(
-            item =>
-              html`<sgds-dropdown-item href="javascript:void(0)" @click=${this._handleSelectChange}
-                >${item}</sgds-dropdown-item
-              >`
+            item => html`<button class="dropdown-item" @click=${this._handleSelectChange}>${item}</button>`
           )}
         </ul>
       </div>

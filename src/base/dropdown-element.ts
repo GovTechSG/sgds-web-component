@@ -6,6 +6,7 @@ import { property, state } from "lit/decorators.js";
 import { Ref, createRef } from "lit/directives/ref.js";
 import mergeDeep from "../utils/mergeDeep";
 import SgdsElement from "./sgds-element";
+import generateId from "../utils/generateId";
 
 const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
@@ -28,6 +29,9 @@ export class DropdownElement extends SgdsElement {
   protected myDropdown: Ref<HTMLElement> = createRef();
   /** @internal */
   protected bsDropdown: BsDropdown = null;
+
+  /** @internal Unique id generated for the dropdown menu */
+  protected dropdownMenuId: string = generateId("dropdown-menu", "ul");
 
   /** @internal Controls auto-flipping of menu */
   @property({ type: Boolean, state: true })
