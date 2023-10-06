@@ -6,8 +6,8 @@
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "dev": "VITE_ENV=development vite",
-    "preview": "VITE_ENV=production vite",
+    "dev": "VITE_ENV=development vite --open",
+    "preview": "VITE_ENV=production vite --open",
     "build": "npm run build:react && rm -rf lib && rollup --config rollup.config.mjs && node ./scripts/frankBuild.js",
     "build:react": "npm run cem && node ./scripts/makeReact.mjs",
     "build:readme": "gulp build-readme",
