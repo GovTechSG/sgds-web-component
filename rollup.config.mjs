@@ -91,58 +91,57 @@ const buildSgdsPackage = () => {
     }
   ];
 
-  if (process.env.NODE_ENV === "production") {
-    const umdBundles = [
-      // bundled form for cdn
-      {
-        input: ["src/index.ts"],
-        output: {
-          entryFileNames: "[name].umd.js",
+  const umdBundles = [
+    // bundled form for cdn
+    {
+      input: ["src/index.ts"],
+      output: {
+        entryFileNames: "[name].umd.js",
+        dir: "lib",
+        format: "umd",
+        sourcemap: true
+      },
+      plugins: wcPlugins
+    },
+    ...buildUMDComponentBundles()
+  ];
+  
+  const reactPackage = [
+    {
+      input: "src/react/index.ts",
+      output: [
+        {
+          entryFileNames: "[name].js",
           dir: "lib",
-          format: "umd",
-          sourcemap: true
-        },
-        plugins: wcPlugins
-      },
-      ...buildUMDComponentBundles()
-    ];
-    const reactPackage = [
-      {
-        input: "src/react/index.ts",
-        output: [
-          {
-            entryFileNames: "[name].js",
-            dir: "lib",
-            format: "esm",
-            sourcemap: true,
-            exports: "named",
-            preserveModules: true,
-            preserveModulesRoot: "src"
-          }
-        ],
-        plugins: [...reactBuildPlugins],
-        external: ["@lit-labs/react", "react", ...external]
-      },
-      {
-        input: "src/react/index.ts",
-        output: [
-          {
-            entryFileNames: "[name].cjs.js",
-            dir: "lib",
-            format: "cjs",
-            sourcemap: true,
-            exports: "named",
-            preserveModules: true,
-            preserveModulesRoot: "src"
-          }
-        ],
-        plugins: [...reactBuildPlugins],
-        external: ["@lit-labs/react", "react", ...external]
-      }
-    ];
-    return [...esmModules, ...umdBundles, ...reactPackage];
-  }
-  return esmModules;
+          format: "esm",
+          sourcemap: true,
+          exports: "named",
+          preserveModules: true,
+          preserveModulesRoot: "src"
+        }
+      ],
+      plugins: [...reactBuildPlugins],
+      external: ["@lit-labs/react", "react", ...external]
+    },
+    {
+      input: "src/react/index.ts",
+      output: [
+        {
+          entryFileNames: "[name].cjs.js",
+          dir: "lib",
+          format: "cjs",
+          sourcemap: true,
+          exports: "named",
+          preserveModules: true,
+          preserveModulesRoot: "src"
+        }
+      ],
+      plugins: [...reactBuildPlugins],
+      external: ["@lit-labs/react", "react", ...external]
+    }
+  ];
+
+  return [...esmModules, ...umdBundles, ...reactPackage];
 };
 
 export default buildSgdsPackage;
