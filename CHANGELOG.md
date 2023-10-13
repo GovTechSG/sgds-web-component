@@ -1,3 +1,5 @@
+## v1.0.0-rc.6 (2023-10-04)
+
 ## v1.0.0-rc.5 (2023-10-03)
 
 ### Feat
@@ -13,6 +15,10 @@
 - **dropdown**: fix aria-expanded not read by screen-reader
 
 ## v1.0.0-rc.4 (2023-10-03)
+
+### BREAKING CHANGE
+
+- Refactoring of dropdown element
 
 ### Feat
 

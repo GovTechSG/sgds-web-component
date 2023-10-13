@@ -2,6 +2,10 @@
 
 Web components are [fully supported in Vue](https://custom-elements-everywhere.com/#vue) and can be used directly.
 
+## Demo app 
+
+Refer to this [stackblitz demo app](https://stackblitz.com/github/clukhei/web-components-with-vue?file=README.md) on the usage example 
+
 ## Installation
 
 Locally install the library or use CDN by adding the script tag to entry point of the Vue application. Follow instructions in `Installation` and `Imports` documentation section
