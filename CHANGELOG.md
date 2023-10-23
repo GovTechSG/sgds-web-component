@@ -1,7 +1,20 @@
+## v1.0.2 (2023-10-23)
+
+### Fix
+
+- **masthead**: remove trusted website title tag
+
+## v1.0.1 (2023-10-23)
+
+## v1.0.0-rc.8 (2023-10-23)
+
+### Fix
+
+- **imports**: path to Masthead:
+
 ## v1.0.0 (2023-10-23)
 
 ## v1.0.0-rc.7 (2023-10-23)
-- **masthead**: remove extra title tag
 
 ### Fix
 
