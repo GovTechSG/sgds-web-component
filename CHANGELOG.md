@@ -1,3 +1,7 @@
+## v1.0.0-rc.7 (2023-10-23)
+
+- **masthead**: remove extra title tag
+
 ## v1.0.0-rc.6 (2023-10-04)
 
 ## v1.0.0-rc.5 (2023-10-03)
@@ -27,6 +31,9 @@
 - **radio**: set inner <input> to be unfocusable
 - **quantitytoggle**: add aria-label to quantity input
 - **mainnav**: add aria-label to brand link
+- **modal**: add focus to modal heading after opening
+- **quantitytoggle**: add announcer to announce count after every increment or decrement
+- **quantitytoggle**: update aria-label of buttons to include number of steps
 - **pagination**: added tabbable functionality
 - **pagination**: added watch decorator for duplicated event
 - **pagination**: fix ellipsisJump beyond first page and last page and render the active class
@@ -35,9 +42,6 @@
 - **pagination**: allows toggling of ellipsisOn prop for next ellipsis
 - **pagination**: added disabled ellipsis for default pagination
 - **pagination**: added basic pagination comp
-- **modal**: add focus to modal heading after opening
-- **quantitytoggle**: add announcer to announce count after every increment or decrement
-- **quantitytoggle**: update aria-label of buttons to include number of steps
 - **combobox**: allow user to define custom filter function via filterFunction prop
 - **combobox**: hide dropdown menu when filtered menuList has no items
 - **combobox**: add slot to allow user to configure own form control icon
@@ -45,21 +49,21 @@
 - **combobox**: filter menuList according to input value
 - **combobox**: show selected item value in input box
 - **combobox**: first commit
-- **progress**: add progress component
 
 ### Fix
 
 - **combobox**: menu item should not be an anchor link based on a11y comments
+- *****: lint fixes
 - **frankBuild**: update main path to new umd entry point
 - **alert**: remove default svg vertical align stylings for alert
-- **pagination**: add nav wrapper for acc, fix tabindex rendering
-- *****: lint fixes
 - **breadcrumb**: add default value for aria-label
 - **accordionitem**: correct accordion item padding-x
 - *****: update lib endpoint in storybook
 - *****: update path to combobox in components entry point
 - **combobox**: update and fix failing test cases
 - *****: import paths after updating branch
+- *****: declare bootstrap typings for non typed boostrap src files
+- **pagination**: add nav wrapper for acc, fix tabindex rendering
 - **combobox**: fix bug to close menu when an item is selected
 - **dropdown-element**: update _getMenuItems() to query slot#default
 - **dropdown-element**: fix _getMenuItems() to correctly obtain dropdown items
@@ -68,15 +72,13 @@
 - **combobox**: fix position of label and hintText to be vertically on top of input box
 - **dropdown**: keyboard bug
 - **sidenav**: remove padding left
-- **progress-bar**: remove part
-- **progress**: remove sgds prefix
-- **progress**: fixed pascal case
-- *****: declare bootstrap typings for non typed boostrap src files
 
 ### Refactor
 
+- **package.json, rollup.config.mjs**: refactor npm scripts, update rollup config
 - **pagination**: refactor direction button rendering
 - **pagination**: refactor mock pagination comp for sb
+- **stepper**: update IStepMetaData export
 - **dropdown element**: create dropdown-list-element from dropdown element
 - **combobox**: remove unused styles
 - **combobox**: conditional render dropdown menu
@@ -85,55 +87,21 @@
 
 ### Feat
 
-- **datepicker**: add reset state for closebutton
-- **badge**: add badgeClasses prop
-- **stepper**: add method to retrieve slot elements
-- **toast-container**: component to position toasts
-- **toast**: add fade animation for show and hide of toast
-- **alert**: add alert-link and header component
-- **tooltip**: add show method, add data-sgds-tooltip attribute for a11y purpose
-- **link, dropdown**: add target attribute for link in dropdown item
-- **datepicker**: added initialValueRange prop for range mode initial load
-- **datepicker**: added datepickerClasses prop
-- **datepicker**: add buttonClasses and inputClasses prop respectively
-- **datepicker**: added initialValue prop functionality and button reset
-- **datepicker**: added new datepicker comp
+- **progress**: add progress component
 
 ### Fix
 
+- **progress-bar**: remove part
+- **progress**: remove sgds prefix
+- **progress**: fixed pascal case
 - **footer**: see description
 - **mainnav**: slot end stylings to exclude mainnav-dropdown
-- **datepicker**: initialValue calendar view render
-- **tooltip**: detect attribute changes and initialize tooltip instance
-- **toast-container**: position css token evaluation
-- **alert**: update unit tests
-- **datepicker**: refactor initialValue logic
-- **datepicker**: convert initialvaluerange to initialvalue for both modes
-- **test**: remove variant in mock dropdown
-- **dropdown**: move resetMenu to child dropdowns and fix menuIsOpen on first load feature
-- **datepicker**: allows calendar menu to be hidden when clicked outside el
-- **datepicker**: initialValue and selected date highlighting with cursor pointer
-- **datepicker**: added initialValue and isCurrentDate styling
-- **datepicker**: fix initialValue views rendering
 
 ### Refactor
 
 - *****: add custom elements typings to HTMLEledmentTagNameMap for typescript users
 - **stepper, drawer, input, tab**: update css property naming to convention
 - **datepicker**: housekeeping
-- **datepicker**: allow passing of initialValue to sync with dateFormat value
-- **datepicker**: added watch decorator for value prop and emit change date event
-- **datepicker**: added sgds-change-date event emitter for onload and closebutton
-- **datepicker**: exposed sgds-change-date event with value prop
-- **datepicker**: cleanup wip
-- **datepicker**: change text-muted to disabled class
-- **stepper**: remove slot and expose return component method
-- **toast**: remove arialabel prop, write static value of aria label for close button
-- **toast**: replace sl-icon with slots icon
-- **breadcrumb**: jsdocs, remove separator css content in favour of slot
-- **dropdown**: bring dropdownButton variant prop to child class
-- **dropdown**: remove style file
-- **dropdown**: make noFlip a state in parent class
 
 ## v1.0.0-rc.2 (2023-07-18)
 
@@ -147,44 +115,82 @@
 
 - **drawer**: fix noHeader attribute
 - **drawer**: add drawer component
+- **datepicker**: add reset state for closebutton
 - **badge**: add badgeClasses prop
 - **stepper**: add method to retrieve slot elements
 - **toast-container**: component to position toasts
 - **toast**: add fade animation for show and hide of toast
 - **link, dropdown**: add target attribute for link in dropdown item
 - **alert**: add alert-link and header component
+- **tooltip**: add show method, add data-sgds-tooltip attribute for a11y purpose
+- **badge**: add badgeClasses prop
+- **stepper**: add method to retrieve slot elements
+- **toast-container**: component to position toasts
+- **toast**: add fade animation for show and hide of toast
+- **alert**: add alert-link and header component
+- **tooltip**: add show method, add data-sgds-tooltip attribute for a11y purpose
+- **link, dropdown**: add target attribute for link in dropdown item
 - **stepper**: add keyboard enter for is-clickable markers
 - **stepper**: add events and reset method
 - **footer**: restore centeredAlignVariant
-- **tooltip**: add show method, add data-sgds-tooltip attribute for a11y purpose
+- **datepicker**: added initialValueRange prop for range mode initial load
+- **datepicker**: added datepickerClasses prop
+- **datepicker**: add buttonClasses and inputClasses prop respectively
+- **datepicker**: added initialValue prop functionality and button reset
+- **datepicker**: added new datepicker comp
 
 ### Fix
 
 - **drawer**: add padding and center align close btn
 - **drawer**: add export default
 - **react**: patch react lib
+- **datepicker**: initialValue calendar view render
 - **tooltip**: detect attribute changes and initialize tooltip instance
 - **toast-container**: position css token evaluation
 - **alert**: update unit tests
 - **test**: remove variant in mock dropdown
 - **dropdown**: move resetMenu to child dropdowns and fix menuIsOpen on first load feature
+- **tooltip**: detect attribute changes and initialize tooltip instance
+- **toast-container**: position css token evaluation
+- **alert**: update unit tests
+- **datepicker**: refactor initialValue logic
+- **datepicker**: convert initialvaluerange to initialvalue for both modes
+- **test**: remove variant in mock dropdown
+- **dropdown**: move resetMenu to child dropdowns and fix menuIsOpen on first load feature
 - **modal**: make animation similar to react's modal
-- **mainnav**: align dropdown menu right below li
 - **docs**: import slots readme in slots stories
+- **mainnav**: align dropdown menu right below li
+- **datepicker**: allows calendar menu to be hidden when clicked outside el
+- **datepicker**: initialValue and selected date highlighting with cursor pointer
+- **datepicker**: added initialValue and isCurrentDate styling
+- **datepicker**: fix initialValue views rendering
 
 ### Refactor
 
 - **drawer**: replace close button compnent with html button
 - **close button**: remove component and replace dependencies with html button.btn-close.btn-sm
 - **drawer, tab**: patch new components
+- *****: custom element registration brought out to component.ts
+- **datepicker**: allow passing of initialValue to sync with dateFormat value
+- **datepicker**: added watch decorator for value prop and emit change date event
+- **datepicker**: added sgds-change-date event emitter for onload and closebutton
+- **datepicker**: exposed sgds-change-date event with value prop
+- **datepicker**: cleanup wip
 - **tab**: cleanup
 - **tab**: remove activation prop and scrolling behaviour
 - **tab**: file names to follow convention
 - **tab-group,tab**: stylings done
+- **stepper**: remove slot and expose return component method
 - **tab**: establish stylings for the 3 kinds of tabs
 - **tab**: refactor style wip
 - **tab-group**: remove placement
-- *****: custom element registration brought out to component.ts
+- **toast**: remove arialabel prop, write static value of aria label for close button
+- **toast**: replace sl-icon with slots icon
+- **breadcrumb**: jsdocs, remove separator css content in favour of slot
+- **dropdown**: bring dropdownButton variant prop to child class
+- **dropdown**: remove style file
+- **dropdown**: make noFlip a state in parent class
+- **datepicker**: change text-muted to disabled class
 - **stepper**: remove slot and expose return component method
 - **toast**: remove arialabel prop, write static value of aria label for close button
 - **toast**: replace sl-icon with slots icon

@@ -12,7 +12,10 @@ The CDN loader registers all SGDS elements up front. Depending on your usage, yo
 // load scoped custom element registry polyfill first (optional, depends on use case)
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/scoped-custom-element-registry"></script>
 
-<script type="module" src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@rc"></script>
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@rc"></script>
+
+//or load a single component e.g. Masthead
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@rc/components/Masthead/index.umd.js"></script>
 
 ```
 

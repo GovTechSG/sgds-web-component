@@ -1,26 +1,22 @@
 {
   "name": "@govtechsg/sgds-web-component",
-  "version": "1.0.0-rc.6",
+  "version": "1.0.0-rc.7",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "build:dev": "rm -rf lib && rollup --config rollup.config.mjs --environment NODE_ENV:development",
-    "build:prod": "rm -rf lib && rollup --config rollup.config.mjs --environment NODE_ENV:production",
+    "dev": "VITE_ENV=development vite --open",
+    "preview": "VITE_ENV=production vite --open",
+    "build": "npm run build:react && rm -rf lib && rollup --config rollup.config.mjs && node ./scripts/frankBuild.js",
     "build:react": "npm run cem && node ./scripts/makeReact.mjs",
     "build:readme": "gulp build-readme",
     "write:stories": "npm run cem && node ./scripts/generateStories.mjs && npm run concat:stories",
     "write:component": "plop",
-    "build:lib": "npm run build:react && npm run build:prod && npm run post:build",
-    "build:watch": "npm run build:dev -- --watch",
-    "post:build": "node ./scripts/frankBuild.js",
-    "dev": "npm run build:watch & npm run serve",
-    "serve": "wds --watch --open",
     "test": "rm -rf test-outdir && rollup --config rollup.test.config.js && web-test-runner",
     "test:scripts": "wtr scripts/__tests__/**/*.test.js --node-resolve",
-    "storybook": "npm run build:dev && nodemon --exec \"npm run write:stories &&  STORYBOOK_ENV=development start-storybook -p 6006\" --watch stories/templates stories/getting-started -e js,mdx",
-    "build-storybook": "npm run build:dev && npm run write:stories && STORYBOOK_ENV=production build-storybook",
+    "storybook": "npm run build && nodemon --exec \"npm run write:stories &&  STORYBOOK_ENV=development start-storybook -p 6006\" --watch stories/templates stories/getting-started -e js,mdx",
+    "build-storybook": "npm run build && npm run write:stories && STORYBOOK_ENV=production build-storybook",
     "prepare": "husky install",
     "concat:stories": "gulp concat-storybook-mdx",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
@@ -119,7 +115,8 @@
     "sass-loader": "^13.0.2",
     "sinon": "^14.0.0",
     "storybook-addon-web-components-knobs": "^0.3.20",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "vite": "^4.4.9"
   },
   "config": {
     "commitizen": {
