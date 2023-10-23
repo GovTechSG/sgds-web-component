@@ -22,7 +22,8 @@ async function createPackageFile() {
       "./react": "./react/index.js",
       "./react/*": "./react/*",
       "./base/*": null,
-      "./utils/*": null
+      "./utils/*": null,
+      "./Masthead/*": "./components/Masthead/*"
     }
   };
 
