@@ -43,14 +43,14 @@ async function includeFileInBuild(file, targetFolder = distPath) {
  *  <script type="module" src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component/Masthead/index.js">
  */
 async function copyMastheadCdnToRoot() {
-  await mkdir("./lib/Masthead")
-  await copy("./lib/components/Masthead/index.umd.js", "./lib/Masthead/index.js")
+  await mkdir("./lib/Masthead");
+  await copy("./lib/components/Masthead/index.umd.js", "./lib/Masthead/index.js");
 }
 async function run() {
   try {
     await createPackageFile();
     await includeFileInBuild("./README.md");
-    await copyMastheadCdnToRoot()
+    await copyMastheadCdnToRoot();
     // await includeFileInBuild('../../LICENSE');
   } catch (err) {
     console.error(err);
