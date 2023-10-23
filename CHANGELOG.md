@@ -1,6 +1,11 @@
-## v1.0.0-rc.7 (2023-10-23)
+## v1.0.0 (2023-10-23)
 
+## v1.0.0-rc.7 (2023-10-23)
 - **masthead**: remove extra title tag
+
+### Fix
+
+- **ci**: update build step command
 
 ## v1.0.0-rc.6 (2023-10-04)
 
