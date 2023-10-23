@@ -42,6 +42,6 @@
 <sgds-card stretchedLink class="col">
         <span slot="card-title">Extendable <i class="bi bi-bricks"></i></span>
         <p slot="card-text">Our components are built with LitElement and are extendable. Use them as building blocks to create your complex component. </p>
-        <a slot="card-link" href="https://lit.dev" target="_blank"></a>
+        <a slot="card-link" href="/story/getting-started-extending-the-library--page" target="_blank"></a>
     </sgds-card>
 </div>
