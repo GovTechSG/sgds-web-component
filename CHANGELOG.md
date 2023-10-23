@@ -1,3 +1,207 @@
+## v1.0.0-rc.7 (2023-10-23)
+
+- **masthead**: remove extra title tag
+
+## v1.0.0-rc.6 (2023-10-04)
+
+## v1.0.0-rc.5 (2023-10-03)
+
+### Feat
+
+- **combobox**: add aria-controls
+- **datepicker**: add combobox role, aria-haspopup, aria-controls
+- **combobox**: add listbox role, aria-expanded, aria-autocomplete
+- **dropdown**: add aria-haspopup attribute
+
+### Fix
+
+- **combobox**: update listbox role to combobox
+- **dropdown**: fix aria-expanded not read by screen-reader
+
+## v1.0.0-rc.4 (2023-10-03)
+
+### BREAKING CHANGE
+
+- Refactoring of dropdown element
+
+### Feat
+
+- **stepper**: update tabindex, add aria-current and aria-disabled
+- **accordion-item**: remove id to prevent duplication, replace summary props with accordion-header slot, replace content with accordion-content slot
+- **radio**: set inner <input> to be unfocusable
+- **quantitytoggle**: add aria-label to quantity input
+- **mainnav**: add aria-label to brand link
+- **modal**: add focus to modal heading after opening
+- **quantitytoggle**: add announcer to announce count after every increment or decrement
+- **quantitytoggle**: update aria-label of buttons to include number of steps
+- **pagination**: added tabbable functionality
+- **pagination**: added watch decorator for duplicated event
+- **pagination**: fix ellipsisJump beyond first page and last page and render the active class
+- **pagination**: added prop ellipsisOn functionality for prev and next ellipsis
+- **pagination**: disable click for first page on prev button and last page on next button
+- **pagination**: allows toggling of ellipsisOn prop for next ellipsis
+- **pagination**: added disabled ellipsis for default pagination
+- **pagination**: added basic pagination comp
+- **combobox**: allow user to define custom filter function via filterFunction prop
+- **combobox**: hide dropdown menu when filtered menuList has no items
+- **combobox**: add slot to allow user to configure own form control icon
+- **combobox**: emit sgds-change event when selected value changes
+- **combobox**: filter menuList according to input value
+- **combobox**: show selected item value in input box
+- **combobox**: first commit
+
+### Fix
+
+- **combobox**: menu item should not be an anchor link based on a11y comments
+- *****: lint fixes
+- **frankBuild**: update main path to new umd entry point
+- **alert**: remove default svg vertical align stylings for alert
+- **breadcrumb**: add default value for aria-label
+- **accordionitem**: correct accordion item padding-x
+- *****: update lib endpoint in storybook
+- *****: update path to combobox in components entry point
+- **combobox**: update and fix failing test cases
+- *****: import paths after updating branch
+- *****: declare bootstrap typings for non typed boostrap src files
+- **pagination**: add nav wrapper for acc, fix tabindex rendering
+- **combobox**: fix bug to close menu when an item is selected
+- **dropdown-element**: update _getMenuItems() to query slot#default
+- **dropdown-element**: fix _getMenuItems() to correctly obtain dropdown items
+- **combobox**: replace dropdown-item href="#" to href that does nothing
+- **combobox**: always show dropdown when user inputs value
+- **combobox**: fix position of label and hintText to be vertically on top of input box
+- **dropdown**: keyboard bug
+- **sidenav**: remove padding left
+
+### Refactor
+
+- **package.json, rollup.config.mjs**: refactor npm scripts, update rollup config
+- **pagination**: refactor direction button rendering
+- **pagination**: refactor mock pagination comp for sb
+- **stepper**: update IStepMetaData export
+- **dropdown element**: create dropdown-list-element from dropdown element
+- **combobox**: remove unused styles
+- **combobox**: conditional render dropdown menu
+
+## v1.0.0-rc.3 (2023-08-17)
+
+### Feat
+
+- **progress**: add progress component
+
+### Fix
+
+- **progress-bar**: remove part
+- **progress**: remove sgds prefix
+- **progress**: fixed pascal case
+- **footer**: see description
+- **mainnav**: slot end stylings to exclude mainnav-dropdown
+
+### Refactor
+
+- *****: add custom elements typings to HTMLEledmentTagNameMap for typescript users
+- **stepper, drawer, input, tab**: update css property naming to convention
+- **datepicker**: housekeeping
+
+## v1.0.0-rc.2 (2023-07-18)
+
+### Fix
+
+- *****: merge conflic
+
+## v1.0.0-rc.1 (2023-07-04)
+
+### Feat
+
+- **drawer**: fix noHeader attribute
+- **drawer**: add drawer component
+- **datepicker**: add reset state for closebutton
+- **badge**: add badgeClasses prop
+- **stepper**: add method to retrieve slot elements
+- **toast-container**: component to position toasts
+- **toast**: add fade animation for show and hide of toast
+- **link, dropdown**: add target attribute for link in dropdown item
+- **alert**: add alert-link and header component
+- **tooltip**: add show method, add data-sgds-tooltip attribute for a11y purpose
+- **badge**: add badgeClasses prop
+- **stepper**: add method to retrieve slot elements
+- **toast-container**: component to position toasts
+- **toast**: add fade animation for show and hide of toast
+- **alert**: add alert-link and header component
+- **tooltip**: add show method, add data-sgds-tooltip attribute for a11y purpose
+- **link, dropdown**: add target attribute for link in dropdown item
+- **stepper**: add keyboard enter for is-clickable markers
+- **stepper**: add events and reset method
+- **footer**: restore centeredAlignVariant
+- **datepicker**: added initialValueRange prop for range mode initial load
+- **datepicker**: added datepickerClasses prop
+- **datepicker**: add buttonClasses and inputClasses prop respectively
+- **datepicker**: added initialValue prop functionality and button reset
+- **datepicker**: added new datepicker comp
+
+### Fix
+
+- **drawer**: add padding and center align close btn
+- **drawer**: add export default
+- **react**: patch react lib
+- **datepicker**: initialValue calendar view render
+- **tooltip**: detect attribute changes and initialize tooltip instance
+- **toast-container**: position css token evaluation
+- **alert**: update unit tests
+- **test**: remove variant in mock dropdown
+- **dropdown**: move resetMenu to child dropdowns and fix menuIsOpen on first load feature
+- **tooltip**: detect attribute changes and initialize tooltip instance
+- **toast-container**: position css token evaluation
+- **alert**: update unit tests
+- **datepicker**: refactor initialValue logic
+- **datepicker**: convert initialvaluerange to initialvalue for both modes
+- **test**: remove variant in mock dropdown
+- **dropdown**: move resetMenu to child dropdowns and fix menuIsOpen on first load feature
+- **modal**: make animation similar to react's modal
+- **docs**: import slots readme in slots stories
+- **mainnav**: align dropdown menu right below li
+- **datepicker**: allows calendar menu to be hidden when clicked outside el
+- **datepicker**: initialValue and selected date highlighting with cursor pointer
+- **datepicker**: added initialValue and isCurrentDate styling
+- **datepicker**: fix initialValue views rendering
+
+### Refactor
+
+- **drawer**: replace close button compnent with html button
+- **close button**: remove component and replace dependencies with html button.btn-close.btn-sm
+- **drawer, tab**: patch new components
+- *****: custom element registration brought out to component.ts
+- **datepicker**: allow passing of initialValue to sync with dateFormat value
+- **datepicker**: added watch decorator for value prop and emit change date event
+- **datepicker**: added sgds-change-date event emitter for onload and closebutton
+- **datepicker**: exposed sgds-change-date event with value prop
+- **datepicker**: cleanup wip
+- **tab**: cleanup
+- **tab**: remove activation prop and scrolling behaviour
+- **tab**: file names to follow convention
+- **tab-group,tab**: stylings done
+- **stepper**: remove slot and expose return component method
+- **tab**: establish stylings for the 3 kinds of tabs
+- **tab**: refactor style wip
+- **tab-group**: remove placement
+- **toast**: remove arialabel prop, write static value of aria label for close button
+- **toast**: replace sl-icon with slots icon
+- **breadcrumb**: jsdocs, remove separator css content in favour of slot
+- **dropdown**: bring dropdownButton variant prop to child class
+- **dropdown**: remove style file
+- **dropdown**: make noFlip a state in parent class
+- **datepicker**: change text-muted to disabled class
+- **stepper**: remove slot and expose return component method
+- **toast**: remove arialabel prop, write static value of aria label for close button
+- **toast**: replace sl-icon with slots icon
+- **breadcrumb**: jsdocs, remove separator css content in favour of slot
+- **dropdown**: bring dropdownButton variant prop to child class
+- **dropdown**: remove style file
+- **dropdown**: make noFlip a state in parent class
+- **stepper**: convert step prop to array of strings
+- **modal**: remove autofocus target implementation, jsdocs wip
+- **modal**: cleanup
+
 ## v1.0.0-rc.0 (2023-05-31)
 
 ### Feat
@@ -6,11 +210,13 @@
 - **action-card**: watch disabled attri to update active state
 - **action-card**: add form functionalities and handle radio behaviours when action-card is a radio
 - **footer**: only render if description exist
-- **textarea**: handle validation when value is empty and required is false
 - **footer**: add copyrightLiner props, update default value
-- **radio**: make validation styling optional
+- **textarea**: handle validation when value is empty and required is false
 - **input**: add csspart for hitn and label
 - **input**: make feedback optional
+- **spinner**: add colors
+- **spinner**: add spinner component
+- **radio**: make validation styling optional
 
 ### Fix
 
@@ -20,55 +226,57 @@
 - **fileuploader**: change accept type to string, add correct type to props
 - *****: linting
 - **button**: storybook syntax mistake
-- **button**: fix button docs in canvas mode not rendering
 - **sgds-card-action**: remove extra slot
+- **button**: fix button docs in canvas mode not rendering
 - **scripts**: fix makeArgTypes script on storybook
 - **code-convention**: fix Lit anchor
 - **table**: add always to responsive types, remove optional operator for props
 - **accordion**: jsdocs spacing fixes aand remove optional operator for classes prop
-- **input**: icon positions stylings
 - **accordion**: remove top padding for accordion content
+- **input**: icon positions stylings
 - **dropdown-element**: add type to togglerID
 
 ### Refactor
 
 - **file-upload**: rename sgds-fileupload to sgds-file-upload
-- **sgds-element**: set default custom variable to sass variable value
 - **fileuploader**: update jsdocs
 - **fileuploader**: add custom variable, update icon
+- **sgds-element**: set default custom variable to sass variable value
 - *****: update branch from parent
 - *****: make custom is props into internals
-- **button**: change the way button has a gap between icon
 - **quantity-toggle**: add form features, fix stylings and jsdocs
+- **button**: change the way button has a gap between icon
 - **footer**: revert to filled string
+- **footer**: remove vulnarability, fix code snippets not showing the correct attribute
+- **footer**: update summary and description, add types and remove quotation marks
 - **button**: remove obselete css
 - **button**: add missing annotations in storybook, src file and add styling for icons
 - **button**: remove hasFocus
-- **input**: give placeholder a default value according to dss
+- **button**: added jsdocs
 - **accordion**: remove disabled accordion feature
 - **accordion**: modify css prop to convention and update jsdocs
+- **input**: give placeholder a default value according to dss
 - **input**: let visual props have default empty string
-- **button**: added jsdocs
-- **footer**: remove vulnarability, fix code snippets not showing the correct attribute
-- **footer**: update summary and description, add types and remove quotation marks
-- **checkbox**: add public methods focus and blur, remove cssparts, add jsdocs
 - *****: shift SgdsFormControl interface to utils folder"
-- **radio**: remove unrequired css, add jsdocs
 - **input**: remove default values from certain props
+- **input**: defaultFeedback to empty string, add jsdocs
+- **input**: add jsdocs for props
+- **input**: replace sl-icon with svg element
+- **input**: implements SgdsFormControl and remove hasFocus
+- **checkbox**: add public methods focus and blur, remove cssparts, add jsdocs
+- **radio**: remove unrequired css, add jsdocs
 
 ## v0.0.12 (2023-05-11)
 
 ### Feat
 
 - **alert**: refactor styles
-- **spinner**: add colors
-- **spinner**: add spinner component
-- **accordion-item**: add classes props, styling for stacked items
 - **fileupload**: added fileupload comp
+- **table**: added sorting and removable sort functionality
+- **accordion-item**: add classes props, styling for stacked items
 - **accordion**: refactor to accordion-item
 - **accordion**: add accordion wrapper
 - **accordion**: add accordion
-- **table**: added sorting and removable sort functionality
 - **accordion**: add accordion
 - **tooltip**: tooltip functionality done
 - **tooltip**: added closable tooltip
@@ -89,10 +297,6 @@
 
 - **sgds-mainnav**: remove offcanvas ref
 - **sgds-mainnav**: remove offcanvas mode, update flex order
-- **input**: defaultFeedback to empty string, add jsdocs
-- **input**: add jsdocs for props
-- **input**: replace sl-icon with svg element
-- **input**: implements SgdsFormControl and remove hasFocus
 - **modal**: extend styls from parent class
 - *****: spike reusing parent class styles to reduce css duplication
 - *****: component folder
@@ -103,83 +307,89 @@
 
 ### Feat
 
-- **table**: added comp with sorting functionality
-- **button**: added refId and methodType prop for alert functionality
-- **alert**: added toggleShow method for sgds-button functionality
-- **toast**: add variant prop
-- **toast**: added toast comp
-- **breadcrumb**: minor refactor
-- **alert**: added alert component
-- **alert**: added alert component
-- **breadcrumb**: add target attribute
-- **breadcrumb**: add breadcrumb component
 - **stepper**: added stepper comp with button functionality
 - **stepper**: added stepper component
 - **button**: added methodType and stepperId prop
+- **breadcrumb**: minor refactor
+- **breadcrumb**: add target attribute
+- **breadcrumb**: add breadcrumb component
+- **table**: added comp with sorting functionality
+- **toast**: add variant prop
+- **toast**: added toast comp
 - **badge**: add rounded pill variant and left/right icon slots
 - **badge**: badge component
+- **button**: added refId and methodType prop for alert functionality
+- **alert**: added toggleShow method for sgds-button functionality
+- **alert**: added alert component
+- **alert**: added alert component
 
 ### Fix
 
 - **button**: standardized prop stepperId to refId
+- **stepper**: refactor scss
 
 ## 0.0.10 (2023-02-08)
 
 ### Feat
 
-- **card**: added base card component
-- **tab**: add tab component
 - **modal**: remove centered align variant
 - **modal**: add modal component
 - **button**: added icon variant
+- **card**: added base card component
+- **tab**: add tab component
 - **radiogroup**: added more props and handleSlotChange method
 - **radiogroup**: added native validation to radiogroup
 - **quantitytoggle**: added size property
 - **quantitytoggle**: set default step to 1
-- **quantitytoggle**: add quant toggle example
-- **quantityToggle**: add quantityToggle
+- **input**: validate only after value has changed
 - **textarea**: parse int check to maxlength for wordcount
 - **textarea**: validate only after value has changed, remove form-group wrapper
-- **checkbox**: added to component valid prop and clean state validation functionality
-- **input**: validate only after value has changed
-- **quantitytog**: add quantity toggle
-- **checkbox**: added dirty/clean functionality for form submission
 - **textarea**: add resize attribute
 - **textarea**: add autocorrect and spellcheck props
 - **textarea**: update form text
-- **checkbox**: replace inputId with checkboxId
 - **textarea**: add word count, validation
-- **checkbox**: keydown enter mimick mouseclick behaviour
 - **textarea**: replace id with textareaId
-- **button**: add click event
 - **textarea**: add genId
 - **textarea**: add textarea component
+- **quantitytoggle**: add quant toggle example
+- **quantityToggle**: add quantityToggle
+- **checkbox**: added to component valid prop and clean state validation functionality
+- **checkbox**: added dirty/clean functionality for form submission
+- **checkbox**: replace inputId with checkboxId
+- **checkbox**: keydown enter mimick mouseclick behaviour
+- *****: added checkbox comp, unit test, sb documentation
 - **dropdown**: remove all value related functionalitiy
+- **sidenav**: add disabled props to sidenavlink and sidenavitem
+- **mainnav**: add sgds-mainnav-dropdown
+- **dropdown**: add toggle part
+- **dropdown**: add close functionality with tests
+- **dropdown**: rename file names and component names
+- **dropdown**: add emit event on selection of items
+- **dropdown**: arrowdown, arrowup, esc and enter keyboard handlers
+- **dropdown**: keyboard wip
+- **dropdown**: keyboard navigation wip
+- **dropdown**: get bootstrap dropdown working
+- **quantitytog**: add quantity toggle
+- **button**: add click event
 
 ### Fix
 
-- **stepper**: refactor scss
 - **checkbox**: clean/diry state
 - **docs**: updated sb checkbox doc
 - **test**: update checkbox unit tests
 - **checkbox**: added form controller to checkbox comp, refix some props
 - **input**: replace id with inputId
 - **button**: add handleBlur function
-- re-fix keydown logic, remove sl comments from comp, change id prop to inputId, sb doc updated
 
 ### Refactor
 
+- **radio**: replace inputId with radioId
+- **link**: extract common functionalities to separate class
+- **dropdown**: extract generic dropdown functionality to make it reusable
 - **input**: label should show if attribute is defined
 - **input**: add line height to label and text
-- **radio**: replace inputId with radioId
 
 ## v0.0.8 (2022-10-17)
-
-### Feat
-
-- **input**: add focus and defaultvalue
-- **util**: add defaultvalue decorator
-- **button**: added form sumbit controller
 
 ### Fix
 
@@ -189,18 +399,14 @@
 
 ### Feat
 
-- added radio/radiogroup comp, unit tests, sb documentation
-- **sidenav**: add disabled props to sidenavlink and sidenavitem
-- **mainnav**: add sgds-mainnav-dropdown
-- **dropdown**: add toggle part
-- updated sb docs, component props and unit test
 - **mainnav**: allow nav items to be added from far right and included in collapsed menu
+- **input**: add focus and defaultvalue
+- **util**: add defaultvalue decorator
+- **button**: added form sumbit controller
 - **input**: added form submission controller and custom watch decorator
 - **input**: add validations, resolves conversations
-- **dropdown**: add close functionality with tests
 - **input**: cleanups
 - **input**: add validation, types
-- **input**: add input
 
 ### Fix
 
@@ -208,21 +414,9 @@
 
 ### Refactor
 
-- **link**: extract common functionalities to separate class
-- **dropdown**: extract generic dropdown functionality to make it reusable
 - **input**: change feedback prop to invalidFeedback
 
 ## v0.0.6 (2022-10-07)
-
-## push (2022-10-07)
-
-### Feat
-
-- **dropdown**: rename file names and component names
-- **dropdown**: add emit event on selection of items
-- **dropdown**: arrowdown, arrowup, esc and enter keyboard handlers
-- **input**: add input
-- *****: added checkbox comp, unit test, sb documentation
 
 ### Fix
 
@@ -230,16 +424,8 @@
 
 ## v0.0.5 (2022-10-05)
 
-### BREAKING CHANGE
-
-- change of component class names and element name
-
 ### Feat
 
-- **dropdown**: keyboard wip
-- **button**: add icon prefix slot
-- **button**: add sizes, active state
-- **button**: add button component
 - **mainnav**: use event listener resize for positioning of non collapisbles responsively
 
 ### Fix
@@ -248,37 +434,50 @@
 
 ### Refactor
 
-- **button**: remove prefix
-- **button**: change naming convention
-- **button**: change naming convention
 - **mainnav**: update naming conventions
-- *****: update scss file name convention
-- *****: change naming convention and create extend a sgds base class
 
 ## v0.0.4 (2022-09-29)
+
+### BREAKING CHANGE
+
+- change of component class names and element name
 
 ### Feat
 
 - **mainnav**: use resize observer to detect and update component size change for responsivieness
 - **mainnav**: add slot for non-collapsible items
+- **mainnav**: add main nav and mainnav-item component
+- **input**: add input
+- **input**: add input
+- **button**: add icon prefix slot
+- **button**: add sizes, active state
+
+### Refactor
+
+- **button**: remove prefix
+- **button**: change naming convention
+- **button**: change naming convention
+- *****: update scss file name convention
+- *****: change naming convention and create extend a sgds base class
 
 ## v0.0.3 (2022-09-28)
 
 ### Feat
 
-- **mainnav**: add main nav and mainnav-item component
+- **button**: add button component
 - **button**: add button
-- **dropdown**: keyboard navigation wip
-- **dropdown**: get bootstrap dropdown working
 
 ## v0.0.2 (2022-09-22)
 
 ### Feat
 
-- **masthead**: standardise hidden/show classname
 - **sidenav**: add sidenav close open interactivity
-- **masthead**: export MastheadElement, update storybook
 - **sidenav**: wip
+- **sidenav**: wip toggling close when click on another
+- **sidenav**: allow toggled/untoggled on first load
+- **sidenav**: wip opening and closing of sidenav
+- **masthead**: standardise hidden/show classname
+- **masthead**: export MastheadElement, update storybook
 
 ### Fix
 
@@ -293,9 +492,6 @@
 ### Feat
 
 - **footer**: export FooterElement Class
-- **sidenav**: wip toggling close when click on another
-- **sidenav**: allow toggled/untoggled on first load
-- **sidenav**: wip opening and closing of sidenav
 - **masthead**: add masthead
 - **footer**: include part attribute for footer-top and -bottom for background color/styling changes
 

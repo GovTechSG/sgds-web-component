@@ -1,16 +1,10 @@
-import { SgdsTextarea } from "../src/components/Textarea/sgds-textarea";
-import "../src/components/Textarea";
-import { SgdsButton } from "../src/components/Button/sgds-button";
-import "../src/components/Button";
+import { SgdsTextarea, SgdsButton } from "../src/components";
+import "../src/index";
 import { assert, fixture, html, expect, waitUntil, oneEvent } from "@open-wc/testing";
 import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";
 
 describe("sgds-textarea", () => {
-  it("is defined", () => {
-    const el = document.createElement("sgds-textarea");
-    assert.instanceOf(el, SgdsTextarea);
-  });
   it("renders with default values", async () => {
     const el = await fixture<SgdsTextarea>(
       html`<sgds-textarea

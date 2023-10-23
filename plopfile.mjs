@@ -31,6 +31,18 @@ export default function (plop) {
         path: "test/{{kebabCase main-component-name}}.test.ts",
         templateFile: "plop-templates/test.hbs"
       },
+      {
+        type: 'modify',
+        path: 'src/components/index.ts',
+        pattern: /(\/\/ COMPONENT EXPORTS)/g,
+        template: 'export * from "./{{main-component-name}}/sgds-{{kebabCase main-component-name}}";\n$1',
+    },
+      {
+        type: 'modify',
+        path: 'src/index.ts',
+        pattern: /(\/\/ COMPONENT IMPORTS)/g,
+        template: 'import "./components/{{main-component-name}}";\n$1',
+    },
     ]
   });
 }

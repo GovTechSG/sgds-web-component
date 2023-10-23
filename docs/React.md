@@ -4,13 +4,21 @@ Web components are [not fully supported in React](https://custom-elements-everyw
 
 Instead, our library outputs the React version of each of our web components. You can choose to use either the React components or the web components. This React instruction page mainly focuses on how to use the React version.
 
+## Demo app 
+
+Refer to this [stackblitz demo app](https://stackblitz.com/edit/vitejs-vite-gebvf5) on the usage example 
+
 ## Importing the library
 
+Follow instructions in `Installation` documentation section.
 Our components are exported via named exports. Import the components like so
 
 ```js
 
-import { SgdsButton } from "@govtechsg/sgds-web-component/react";
+import { SgdsButton, SgdsTooltip } from "@govtechsg/sgds-web-component/react";
+// or
+import { SgdsButton } from "@govtechsg/sgds-web-component/react/button";
+import { SgdsTooltip } from "@govtechsg/sgds-web-component/react/tooltip";
 
 ```
 

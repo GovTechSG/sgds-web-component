@@ -1,10 +1,11 @@
-import "../src/components/Spinner/sgds-spinner";
 import { fixture, expect } from "@open-wc/testing";
 import { html } from "lit";
+import { SgdsSpinner } from "../src/components";
+import "../src/index";
 
 describe("<sgds-spinner>", () => {
   it("should have default class of 'spinner-border' if no 'type' attribute define", async () => {
-    const el = await fixture(html`<sgds-spinner></sgds-spinner>`);
+    const el = await fixture<SgdsSpinner>(html`<sgds-spinner></sgds-spinner>`);
     const base = el.shadowRoot?.querySelector<HTMLElement>('[role="status"]');
     expect(base).to.have.class("spinner-border");
   });

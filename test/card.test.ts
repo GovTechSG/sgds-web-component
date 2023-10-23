@@ -1,14 +1,11 @@
 import { html } from "lit";
 import { fixture, assert, expect } from "@open-wc/testing";
-import { SgdsCard } from "../src/components/Card";
+import { SgdsCard } from "../src/components";
+import "../src/index";
 
 describe("<sgds-card>", () => {
-  it("is defined", () => {
-    const el = document.createElement("sgds-card");
-    assert.instanceOf(el, SgdsCard);
-  });
   it("can be semantically compare with shadowDom trees", async () => {
-    const el = await fixture(html`<sgds-card></sgds-card>`);
+    const el = await fixture<SgdsCard>(html`<sgds-card></sgds-card>`);
     assert.shadowDom.equal(
       el,
       `

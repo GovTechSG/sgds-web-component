@@ -1,17 +1,15 @@
-import { customElement, property } from "lit/decorators.js";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { live } from "lit/directives/live.js";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { html } from "lit/static-html.js";
 import { CardElement } from "../../base/card-element";
-import styles from "./sgds-action-card.scss";
 import genId from "../../utils/generateId";
-import { SgdsCheckbox } from "../Checkbox";
-import { SgdsRadio } from "../Radio";
-import { ifDefined } from "lit/directives/if-defined.js";
-import { live } from "lit/directives/live.js";
 import { watch } from "../../utils/watch";
-
-export type TypeVariant = "checkbox" | "radio";
+import { SgdsCheckbox } from "../Checkbox/sgds-checkbox";
+import { SgdsRadio } from "../Radio/sgds-radio";
+import styles from "./sgds-action-card.scss";
 
 /**
  * @summary Action Card are cards with built in checkbox or radio components. The ref of input is extended to the Card's body.
@@ -29,17 +27,20 @@ export type TypeVariant = "checkbox" | "radio";
  * @csspart text - The action card text
  *
  */
-
-@customElement("sgds-action-card")
-export class SgdsActionCard extends CardElement {
+export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
   static styles = [CardElement.styles, styles];
-
+  static get scopedElements() {
+    return {
+      "sgds-checkbox": SgdsCheckbox,
+      "sgds-radio": SgdsRadio
+    };
+  }
   /** @internal */
   inputRef: Ref<SgdsCheckbox | SgdsRadio> = createRef();
   /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
   @property({ reflect: true }) name: string;
   /** Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name. */
-  @property() value: string;
+  @property({ type: String }) value: string;
   /** Disables the input (so the user can't check / uncheck it). */
   @property({ type: Boolean, reflect: true }) disabled = false;
   /** Draws the input in a checked state. */
@@ -87,7 +88,7 @@ export class SgdsActionCard extends CardElement {
       id=${this.inputId}
       @click=${this.handleInputChange}
       @keydown=${this.handleKeyDown}
-      .value=${ifDefined(this.value)}
+      .value=${live(this.value)}
       ?checked=${live(this.checked)}
       @sgds-change=${(e: CustomEvent) => (this.checked = e.detail.checked)}
     ></sgds-checkbox>`;
@@ -98,7 +99,7 @@ export class SgdsActionCard extends CardElement {
       id=${this.inputId}
       @click=${this.handleInputChange}
       @keydown=${this.handleKeyDown}
-      .value=${ifDefined(this.value)}
+      .value=${live(this.value)}
       ?checked=${live(this.checked)}
     ></sgds-radio>`;
 
@@ -133,5 +134,7 @@ export class SgdsActionCard extends CardElement {
     `;
   }
 }
+
+export type TypeVariant = "checkbox" | "radio";
 
 export default SgdsActionCard;

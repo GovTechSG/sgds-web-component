@@ -1,1 +1,9 @@
-export * from "./sgds-{{kebabCase main-component-name}}"
+import { Sgds{{main-component-name}} } from "./sgds-{{kebabCase main-component-name}}";
+
+customElements.define("sgds-{{kebabCase main-component-name}}", Sgds{{main-component-name}});
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "sgds-{{kebabCase main-component-name}}": Sgds{{main-component-name}};
+    }
+}

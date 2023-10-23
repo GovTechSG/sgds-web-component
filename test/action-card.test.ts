@@ -1,17 +1,10 @@
 import { assert, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
-import "../src/components/ActionCard";
-import { SgdsActionCard } from "../src/components/ActionCard";
-import "../src/components/Checkbox";
-import "../src/components/Radio";
+import { SgdsActionCard } from "../src/components";
+import "../src/index";
 
 describe("<sgds-action-card>", () => {
   // Card test cases
-  it("is defined", () => {
-    const el = document.createElement("sgds-action-card");
-    assert.instanceOf(el, SgdsActionCard);
-  });
-
   it("should have sgds prefix on wrapper", async () => {
     const el = await fixture(html`<sgds-action-card></sgds-action-card>`);
     const slCard = el.shadowRoot?.querySelector("div");

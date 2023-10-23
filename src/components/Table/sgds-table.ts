@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-table.scss";
@@ -7,17 +7,16 @@ import styles from "./sgds-table.scss";
 /**
  * @summary The use of a table is to organise a collections of data into readable rows
  *
- * @cssproperty --sgds-table-bg - Table's background color
- * @cssproperty --sgds-table-accent-bg - Table's accent background color
- * @cssproperty --sgds-table-striped-color - Text color for striped table
- * @cssproperty --sgds-table-striped-bg - Background color for striped table
- * @cssproperty --sgds-table-active-color - Active text color for hovered row
- * @cssproperty --sgds-table-active-bg - Active background color for hovered row
- * @cssproperty --sgds-table-hover-color - Hovered text color for hover table
- * @cssproperty --sgds-table-hover-bg - Hovered background color for hover table
+ * @cssproperty --table-bg - Table's background color
+ * @cssproperty --table-accent-bg - Table's accent background color
+ * @cssproperty --table-striped-color - Text color for striped table
+ * @cssproperty --table-striped-bg - Background color for striped table
+ * @cssproperty --table-active-color - Active text color for hovered row
+ * @cssproperty --table-active-bg - Active background color for hovered row
+ * @cssproperty --table-hover-color - Hovered text color for hover table
+ * @cssproperty --table-hover-bg - Hovered background color for hover table
  */
 
-@customElement("sgds-table")
 export class SgdsTable extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
@@ -69,12 +68,12 @@ export class SgdsTable extends SgdsElement {
   /**
    * Populate header cells using Arrays
    */
-  @property({ type: Array }) tableHeaders = [];
+  @property({ type: Array }) tableHeaders: string[] = [];
 
   /**
    * Populate data cells using Arrays
    */
-  @property({ type: Array }) tableData = [];
+  @property({ type: Array }) tableData: Array<(string | number)[]> = [];
 
   /** @internal */
   @state() sortColumn: number | null = null;
@@ -94,7 +93,7 @@ export class SgdsTable extends SgdsElement {
   @state() clickCount = 0;
 
   /** @internal */
-  @state() originalTableData: Array<string[]> = [];
+  @state() originalTableData: Array<(string | number)[]> = [];
 
   connectedCallback() {
     super.connectedCallback();

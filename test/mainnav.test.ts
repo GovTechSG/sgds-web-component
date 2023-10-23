@@ -1,5 +1,5 @@
-import { SgdsMainnavItem, SgdsMainnav, SgdsMainnavDropdown } from "../src/components/Mainnav";
-import "../src/components/Mainnav";
+import { SgdsMainnavItem, SgdsMainnav, SgdsMainnavDropdown } from "../src/components";
+import "../src/index";
 import { fixture, assert, expect, aTimeout, fixtureCleanup } from "@open-wc/testing";
 import { html } from "lit";
 
@@ -16,6 +16,7 @@ describe("sgds-mainnav", () => {
       el,
       `<nav class="navbar navbar-expand-lg navbar-light sgds">
        <a
+         aria-label="brand-link"
          class="me-auto navbar-brand order-first"
          href=""
        >
@@ -241,7 +242,7 @@ describe("sgds-mainnav-dropdown", () => {
     const el = await fixture(html`<sgds-mainnav-dropdown togglerText="test"></sgds-mainnav-dropdown>`);
     assert.shadowDom.equal(
       el,
-      ` <li class="nav-item">
+      ` <li class="nav-item dropdown">
       <a
         class="nav-link"
         aria-expanded="false"

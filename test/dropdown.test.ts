@@ -1,6 +1,5 @@
-import { SgdsDropdown, SgdsDropdownItem } from "../src/components/Dropdown";
-import { SgdsButton } from "../src/components/Button";
-import "../src/components/Dropdown";
+import { SgdsDropdown, SgdsDropdownItem, SgdsButton } from "../src/components";
+import "../src/index";
 import { fixture, assert, expect, waitUntil } from "@open-wc/testing";
 import sinon from "sinon";
 import { html } from "lit";
@@ -175,7 +174,9 @@ describe("sgds-dropdown", () => {
       el,
       `  <div>
          <sgds-button
+           role="button"
            aria-expanded="false"
+           aria-haspopup="menu"
          variant="outline-secondary"
          >
          <svg
@@ -284,9 +285,9 @@ describe("sgds-dropdown", () => {
     const hideHandler = sinon.spy();
     const hiddenHandler = sinon.spy();
     el.addEventListener("sgds-show", showHandler);
-    el.addEventListener("sgds-shown", shownHandler);
+    el.addEventListener("sgds-after-show", shownHandler);
     el.addEventListener("sgds-hide", hideHandler);
-    el.addEventListener("sgds-hidden", hiddenHandler);
+    el.addEventListener("sgds-after-hide", hiddenHandler);
 
     const button = el.shadowRoot?.querySelector("sgds-button") as SgdsButton;
     button?.click();
@@ -419,7 +420,7 @@ describe("sgds-dropdown", () => {
   });
   const closeValues = ["default", "outside", "inside"];
   closeValues.forEach(closeVal => {
-    it(`dropdown menu always closes regardless of prop close value = ${closeVal}`, async () => {
+    it(`dropdown menu always closes when click on button regardless of prop close value = ${closeVal}`, async () => {
       const el = await fixture<SgdsDropdown>(
         html`<sgds-dropdown menuIsOpen close=${closeVal}>
           <sgds-dropdown-item>slot 1</sgds-dropdown-item>
@@ -452,6 +453,8 @@ describe("sgds-dropdown-item", () => {
           aria-disabled="false"
           href=""
           tabindex="0"
+          role="menuitem"
+          target="_self"
         >
           <slot>
           </slot>

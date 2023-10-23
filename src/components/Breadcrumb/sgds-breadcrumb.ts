@@ -1,19 +1,25 @@
-import { customElement, property, query } from "lit/decorators.js";
-import { classMap } from "lit/directives/class-map.js";
+import { property, query } from "lit/decorators.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsBreadcrumbItem from "./sgds-breadcrumb-item";
 import styles from "./sgds-breadcrumb.scss";
 
-@customElement("sgds-breadcrumb")
+/**
+ * @summary Breadcrumbs help users to navigate and understand where they are on the current website or service.
+ *
+ * @slot default - The slot to pass in custom elements of `SgdsBreadcrumbItems`.
+ * @slot separator - Defines all the separator of `SgdsBreadcrumbItems`. Defaults to "/"
+ *
+ * @csspart base - The nav element wrapper of `SgdsBreadcrumb`
+ */
 export class SgdsBreadcrumb extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
-
-  @property({ type: String, reflect: true }) ariaLabel = "breadcrumb";
-
-  @property({ reflect: true }) breadcrumbClasses?: string;
-
+  /** The aria-label of nav element within breadcrumb component. */
+  @property({ type: String }) ariaLabel = "breadcrumb";
+  /**@internal */
   @query("slot") defaultSlot: HTMLSlotElement;
+  /**@internal */
   @query('slot[name="separator"]') separatorSlot: HTMLSlotElement;
 
   // Generates a clone of the separator element to use for each breadcrumb item
@@ -50,7 +56,6 @@ export class SgdsBreadcrumb extends SgdsElement {
       // The last breadcrumb item is the "current page"
 
       if (index === items.length - 1) {
-        console.log(items.length - 1);
         item.setAttribute("aria-current", "page");
       } else {
         item.removeAttribute("aria-current");
@@ -60,19 +65,14 @@ export class SgdsBreadcrumb extends SgdsElement {
 
   render() {
     return html`
-      <nav
-        class="sgds breadcrumb
-            ${classMap({
-          [`${this.breadcrumbClasses}`]: this.breadcrumbClasses
-        })}"
-        aria-label=${this.ariaLabel}
-        part="base"
-      >
-        <slot @slotchange=${this.handleSlotChange}></slot>
+      <nav aria-label=${ifDefined(this.ariaLabel)} part="base">
+        <ol class="breadcrumb">
+          <slot @slotchange=${this.handleSlotChange}></slot>
+          <slot name="separator" hidden aria-hidden="true">
+            <span>/</span>
+          </slot>
+        </ol>
       </nav>
-      <slot name="separator" hidden aria-hidden="true">
-        <span class="sgds-breadcrumb-seperator"></span>
-      </slot>
     `;
   }
 }

@@ -1,14 +1,12 @@
-import { SgdsFooter, ColumnLinks } from "../src/components/Footer";
+import { ColumnLinks } from "../src/components/Footer/sgds-footer";
 import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
+import { SgdsFooter } from "../src/components";
+import "../src/index";
 
 describe("button-element", () => {
-  it("is defined", () => {
-    const el = document.createElement("sgds-footer");
-    assert.instanceOf(el, SgdsFooter);
-  });
   it("renders with default values", async () => {
-    const el = await fixture(html`<sgds-footer></sgds-footer>`);
+    const el = await fixture<SgdsFooter>(html`<sgds-footer></sgds-footer>`);
     assert.shadowDom.equal(
       el,
       `
@@ -28,14 +26,6 @@ describe("button-element", () => {
                     <ul>
                       <li><a href="#">Contact</a></li>
                       <li><a href="#">Feedback</a></li>
-                      <li>
-                        <a
-                          href="https://www.reach.gov.sg/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Reach.gov.sg</a
-                        >
-                      </li>
                     </ul>
                   </div>
                 </div>

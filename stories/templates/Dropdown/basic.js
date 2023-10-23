@@ -9,24 +9,24 @@ export const Template = ({
   variant,
   active,
   href,
-  disabledDI,
   close,
   menuIsOpen,
-  dropdownDisabled
+  disabled,
+  target
 }) => {
   return html`
     <sgds-dropdown
-      .togglerText=${togglerText}
-      .noFlip=${noFlip}
-      .drop=${drop}
-      .menuAlignRight=${menuAlignRight}
+      togglerText=${togglerText}
+      ?noFlip=${noFlip}
+      drop=${drop}
+      ?menuAlignRight=${menuAlignRight}
       .popperOpts=${popperOpts}
-      .variant=${variant}
-      .close=${close}
-      .menuIsOpen=${menuIsOpen}
-      .disabled=${dropdownDisabled}
+      variant=${variant}
+      close=${close}
+      ?menuIsOpen=${menuIsOpen}
+      ?disabled=${disabled}
     >
-      <sgds-dropdown-item .href=${href} .active=${active} .disabled=${disabledDI}
+      <sgds-dropdown-item href=${href} ?active=${active} target=${target}
         >item #1 (argsTable controlled)</sgds-dropdown-item
       >
       <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
@@ -39,4 +39,8 @@ export const args = {
   togglerText: "Dropdown",
   variant: "secondary",
   href: "#"
+};
+
+export const parameters = {
+  layout: "centered"
 };

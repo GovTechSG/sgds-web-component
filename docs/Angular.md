@@ -2,9 +2,12 @@
 
 Web components are [fully supported in Angular](https://custom-elements-everywhere.com/#angular) and can be used directly.
 
+## Demo app 
+
+Refer to this [stackblitz demo app](https://stackblitz.com/github/clukhei/angular-stepper?file=README.md) on the usage example 
 ## Installation
 
-Locally install the library or use CDN by adding the script tag to entry point of the Angular application (i.e. index.html)
+Locally install the library or use CDN by adding the script tag to entry point of the Angular application (i.e. index.html). Follow instructions in `Installation` and `Imports` documentation section
 
 ## Configuration
 

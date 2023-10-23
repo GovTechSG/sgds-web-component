@@ -13,11 +13,11 @@ You can load SGDS's web components via CDN or by installing it locally.
 
 ## CDN
 
-The CDN loader registers all SGDS elements up front. Note that, if you're only using a handful of components. You can also cherry pick components via local imports if you want to load specific ones up front.
+The CDN loader registers all SGDS elements up front. Note that, if you're only using a handful of components.
 
 ```js
 
-<script type="module" src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@rc"></script>
 
 ```
 
@@ -27,7 +27,7 @@ You can also install SGDS web components locally with the following command
 
 ```js
 
-npm install @govtechsg/sgds-web-component
+npm install @govtechsg/sgds-web-component@rc
 
 ```
 
@@ -42,24 +42,77 @@ import "@govtechsg/sgds-web-component";
 
 # Imports
 
-## Using the custom elements 
-Once imported, the custom elements can be used throughout the project. 
+## Using the custom elements
+
+Once imported, the custom elements can be used throughout the project.
+
+```js
+import "@govtechsg/sgds-web-component";
+
+//usage
+// <sgds-button>Hello World</sgds-button>
+```
+
+## Using the component's class object
+
+When writing with Typescript, you might be required to type the components in certain cases. Import the component class like so. 
+Each component's Class is exported via named exports, prefixed with `Sgds`.
 
 ```js
 
-import "@govtechsg/sgds-web-component"
+import { SgdsButton, SgdsMainnav } from "@govtechsg/sgds-web-component/components";
 
 ```
 
-## Using the component's class
+## Scoped Elements
 
-Each component's Class is exported via named exports, prefixed with `Sgds`
+The CustomElementRegistry is a global registry that provides methods for registering custom elements. One of the limitations of working with this global registry is that multiple versions of the same element cannot co-exist. This causes bottlenecks in software delivery that should be managed by the teams and complex build systems. Scoped Custom Element Registries is a proposal that will solve the problem. Since this functionality won't be available (especially not cross browser) anytime soon, we've adopted [OpenWC's Scoped Elements](https://open-wc.org/docs/development/scoped-elements/).
 
-```js
+Whenever a sgds component uses composition (meaning it uses another sgds component inside), we apply ScopedElementsMixin to make sure it uses the right version of this internal component.
 
-import { SgdsButton, SgdsMainnav } from "@govtechsg/sgds-web-component"
+For users who are using sgds component directly for builing application, use the custom elements directly by [importing the custom elements](#using-the-custom-elements)
 
+For users who are building component libraries on top of sgds-web-component, please adopt OpenWC's scoped elements to prevent exporting our registered custom elements. 
+
+Things to note: 
+1. Import component class from `@govtechsg/sgds-web-component/components`. Here the components are not registered in the custom element registry 
+2. Define the tagName you want to assign to the component's class
+
+Example below
+
+```jsx
+import { SgdsMasthead, SgdsMainnav, SgdsMainnavDropdown, SgdsMainnavItem } from "@govtechsg/sgds-web-component/components";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+
+// Lit element
+@customElement('my-navbar')
+export class MyNavbar extends ScopedElementsMixin(LitElement) {
+  static get scopedElements() {
+    return {
+      'sgds-mainnav': SgdsMainnav,
+      'sgds-mainnav-dropdown': SgdsMainnavDropdown,
+      'sgds-mainnav-item': SgdsMainnavItem,
+      'sgds-masthead': SgdsMasthead
+    };
+  }
+    ...
+
+ render() {
+    return html`
+        <sgds-masthead fluid="false"></sgds-masthead>
+            <sgds-mainnav>
+              <img width="240" src="https://dev.assets.developer.tech.gov.sg/svg/logo.svg" slot="brand">
+                <sgds-mainnav-dropdown togglertext="Home" slot="end">
+                    <sgds-dropdown-item>Logout</sgds-dropdown-item>
+                </sgds-mainnav-dropdown>
+                <sgds-mainnav-item href="#">Content</sgds-mainnav-item>
+                <sgds-mainnav-item href="#}">Biography</sgds-mainnav-item>
+            </sgds-mainnav>
+          `
+      }
+}
 ```
+
 # Attributes and Properties
 
 ## String
@@ -157,18 +210,31 @@ There are two kinds of slots: default and named slots. In the storybook document
 
 The following css custom variable are exposed to enable users to make modifications across all web components in our library
 
-| css custom variable name | description                               |
-| ------------------------ | ----------------------------------------- |
-| --sgds-body-font-family  | Set the font family of the web components |
-| --sgds-body-font-size    | Set the font size of the web components   |
-| --sgds-body-font-weight  | Set the font weight of the web components |
-| --sgds-body-line-height  | Set the line height of the web components |
+| css custom variable name      | description                               |
+| ------------------------      | ----------------------------------------- |
+| --sgds-body-font-family       | Set the font family of the web components |
+| --sgds-body-font-size         | Set the font size of the web components   |
+| --sgds-body-font-weight       | Set the font weight of the web components |
+| --sgds-body-line-height       | Set the line height of the web components |
+| --sgds-{stateColor}-rgb       | State colors in red,green,blue value                 |
+| --sgds-{stateColor}           | State colors in hexadecimal value         |
+| --sgds-{stateColor}           | State colors in hexadecimal value         |
+| --sgds-{stateColor}-{weight} | State colors with different weightage in hexadecimal value |
+| --sgds-gray-{weight}         | Gray colors with different weightage in hexadecimal value  |
+
+> `{stateColor}` consists of `primary`,`secondary`,`success`,`warning`,`danger`,`info`,`light`,`dark`
+>
+> `{weight}` are color weightage in hundreds starting from `100` up to `900`
 
 ```css
 
 :root {
   --sgds-body-font-family: Helvetica;
   --sgds-body-font-size: 5rem;
+  --sgds-primary-rgb : 89,37,220;
+  --sgds-secondary : #1f69ff;
+  --sgds-success-500 : #3bb346;
+  --sgds-gray-500 : #667085;
 }
 
 ```

@@ -1,24 +1,26 @@
-import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/animate";
-import { classMap } from "lit/directives/class-map.js";
-import { customElement, property, query } from "lit/decorators.js";
-import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { html } from "lit";
+import { property, query } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import SgdsElement from "../../base/sgds-element";
+import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/animate";
+import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
-import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-accordion-item.scss";
 
 /**
- * @slot default - content of the accordion item
  *
  * @event sgds-show - Emitted on show.
  * @event sgds-after-show - Emitted on show after animation has completed.
  * @event sgds-hide - Emitted on hide.
  * @event sgds-after-hide - Emitted on hide after animation has completed.
  *
- * @csspart base - The accordion-item base wrapper
- * @csspart header - The accordion-item button header
- * @csspart content - The accordion-item content
+ * @csspart base - The accordion-item base wrapper.
+ * @csspart header - The accordion-item button header.
+ * @csspart content - The accordion-item content.
+ *
+ * @slot accordion-header - The accordion-item button header slot.
+ * @slot accordion-content - The accordion-item content slot.
  *
  * @cssprop --accordion-item-padding-y - The top and bottom padding for the container of accordion item's content
  * @cssprop --accordion-item-padding-x - The right and left padding for the container of accordion item's content
@@ -26,7 +28,6 @@ import styles from "./sgds-accordion-item.scss";
  * @cssprop --accordion-item-font-weight - The font weight of accordion-button when it is not collapsed
  * @cssprop --accordion-item-line-height - The line height of accordion
  */
-@customElement("sgds-accordion-item")
 export class SgdsAccordionItem extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
   /** @internal */
@@ -38,8 +39,7 @@ export class SgdsAccordionItem extends SgdsElement {
 
   /** Controls whether accordion-item is open or close */
   @property({ type: Boolean, reflect: true }) open = false;
-  /** The summary to show in the header of the accordion */
-  @property() summary = "";
+
   /** Optional for accordion item. Can be used to insert any utility classes such as `me-auto` */
   @property({ reflect: true }) accordionItemClasses: string;
 
@@ -146,12 +146,11 @@ export class SgdsAccordionItem extends SgdsElement {
         })}
       >
         <button
-          part="header"
           class=${classMap({
             "accordion-button": true,
             collapsed: !this.open
           })}
-          id="header"
+          part="header"
           role="button"
           aria-expanded=${this.open ? "true" : "false"}
           aria-controls="content"
@@ -159,10 +158,10 @@ export class SgdsAccordionItem extends SgdsElement {
           @click=${this.handleSummaryClick}
           @keydown=${this.handleSummaryKeyDown}
         >
-          ${this.summary}
+          <slot name="accordion-header"></slot>
         </button>
         <div class="accordion-body">
-          <slot part="content" id="content" class="accordion-content" role="region" aria-labelledby="header"></slot>
+          <slot name="accordion-content" class="accordion-content" role="region" aria-labelledby="header"></slot>
         </div>
       </div>
     `;

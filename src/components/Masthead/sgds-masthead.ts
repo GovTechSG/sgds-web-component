@@ -1,7 +1,7 @@
 import { html } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
-import styles from "./sgds-masthead.scss";
+import { property, state } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
+import styles from "./sgds-masthead.scss";
 
 /**
  * @summary All .gov.sg digital services shall adopt The Official Government Banner for every page in the digital service and be placed at the top of the page.
@@ -15,7 +15,6 @@ import SgdsElement from "../../base/sgds-element";
  * @cssproperty --masthead-fluid-padding-x - Sets the container-fluid padding left and right for viewport width 1024px and above
  * @cssproperty --masthead-crest-color - Sets the lion head crest color.
  */
-@customElement("sgds-masthead")
 export class SgdsMasthead extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
@@ -49,7 +48,6 @@ export class SgdsMasthead extends SgdsElement {
                   viewBox="0 0 32 32"
                   class="sg-crest"
                 >
-                  <title>sg-crest</title>
                   <path
                     d="M5.896 11.185c0 0-0.949 1.341 0.294 3.075 0 0 0.196-0.883 2.159-0.883h2.356c2.225 0 3.893-2.126 2.846-4.319 0 0 1.57 0.164 2.095-0.818 0.523-0.981-0.033-1.374-0.818-1.374h-3.959c0 0.704-1.341 0.802-1.341 0h-2.225c0 0-1.669 0-1.701 1.407 0 0 0.377-0.229 0.752-0.261v0.375c0 0-0.458 0.082-0.671 0.197-0.212 0.114-0.523 0.425-0.228 1.227 0.294 0.801 0.409 1.079 0.409 1.079s0.475-0.41 1.244-0.41h0.9c1.602 0 1.308 1.554-0.295 1.554s-1.815-0.85-1.815-0.85z"
                   ></path>

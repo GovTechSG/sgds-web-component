@@ -1,15 +1,15 @@
-import { customElement, property, query, state } from "lit/decorators.js";
-import { html } from "lit/static-html.js";
-import { ifDefined } from "lit/directives/if-defined.js";
+import { property, query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
+import { unsafeSVG } from "lit/directives/unsafe-svg.js";
+import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
+import type { SgdsFormControl } from "../../utils/form";
 import { FormSubmitController } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import type { SgdsFormControl } from "../../utils/form";
-import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 
 /**
  * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
@@ -20,7 +20,6 @@ import { unsafeSVG } from "lit/directives/unsafe-svg.js";
  * @event sgds-blur - Emitted when input is not in focus.
  *
  */
-@customElement("sgds-input")
 export class SgdsInput extends SgdsElement implements SgdsFormControl {
   static styles = SgdsElement.styles;
   /**@internal */
@@ -193,7 +192,11 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     // if label is defined
     const withLabel = html` <label for=${this.inputId} class="form-label">${this.label}</label> `;
 
-    return html` ${this.label && withLabel} ${this.hintText && withHintText} ${this.icon ? inputWithIcon : input} `;
+    return html`
+      <div class="d-flex flex-column w-100">
+        ${html`${this.label && withLabel} ${this.hintText && withHintText} ${this.icon ? inputWithIcon : input} `}
+      </div>
+    `;
   }
 }
 

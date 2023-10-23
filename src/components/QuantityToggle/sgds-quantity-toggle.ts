@@ -1,14 +1,14 @@
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import { html } from "lit/static-html.js";
-import { ButtonVariant } from "../Button";
 import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
-import genId from "../../utils/generateId";
-import styles from "./sgds-quantity-toggle.scss";
 import { FormSubmitController, SgdsFormControl } from "../../utils/form";
+import genId from "../../utils/generateId";
+import { ButtonVariant } from "../Button/sgds-button";
+import styles from "./sgds-quantity-toggle.scss";
 
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
@@ -20,14 +20,13 @@ import { FormSubmitController, SgdsFormControl } from "../../utils/form";
  * @event sgds-input - Emitted when the control receives input and its value changes.
  *
  */
-@customElement("sgds-quantity-toggle")
 export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
   /**@internal */
   @query("input.form-control") private input: HTMLInputElement;
   /**@internal */
-  @query("button[aria-label=plus-button]") private plusBtn: HTMLButtonElement;
+  @query("button[aria-label^='increase by']") private plusBtn: HTMLButtonElement;
   /**@internal */
-  @query("button[aria-label=minus-button]") private minusBtn: HTMLButtonElement;
+  @query("button[aria-label^='decrease by']") private minusBtn: HTMLButtonElement;
 
   static styles = [SgdsElement.styles, styles];
   /**@internal */
@@ -107,7 +106,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
         size=${this.size}
       >
         <button
-          aria-label="minus-button"
+          aria-label=${`decrease by ${this.step}`}
           part="button"
           class=${classMap({
             sgds: true,
@@ -135,14 +134,15 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
           step=${ifDefined(this.step)}
           min=${ifDefined(this.min)}
           max=${ifDefined(this.max)}
-          .value=${live(this.value)}
+          .value=${live(this.value.toString())}
           @change=${() => this.handleChange("sgds-change")}
           @input=${() => this.handleChange("sgds-input")}
           ?disabled=${this.disabled}
           id=${this.inputId}
+          aria-label="quantity"
         />
         <button
-          aria-label="plus-button"
+          aria-label=${`increase by ${this.step}`}
           part="button"
           class=${classMap({
             sgds: true,
@@ -165,6 +165,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
             />
           </svg>
         </button>
+        <div id="announcer" role="region" aria-live="assertive" class="visually-hidden">${this.value}</div>
       </div>
     `;
   }

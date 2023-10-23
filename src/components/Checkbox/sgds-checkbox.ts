@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
@@ -17,7 +17,6 @@ import styles from "./sgds-checkbox.scss";
  *
  * @event sgds-change - Emitted when the checked state changes.
  */
-@customElement("sgds-checkbox")
 export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
   static styles = [SgdsElement.styles, styles];
   /**@internal */

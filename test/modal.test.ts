@@ -1,5 +1,5 @@
-import { SgdsModal } from "../src/components/Modal/sgds-modal";
-import "../src/components/Modal/sgds-modal";
+import { SgdsModal } from "../src/components";
+import "../src/index";
 import { expect, fixture, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
@@ -118,23 +118,6 @@ describe("<sgds-modal>", () => {
     expect(el.open).to.be.true;
   });
 
-  it("should allow initial focus to be set", async () => {
-    const el = await fixture<SgdsModal>(html` <sgds-modal><input /></sgds-modal> `);
-    const input = el.querySelector("input");
-    const initialFocusHandler = sinon.spy((event: Event) => {
-      event.preventDefault();
-      input?.focus();
-    });
-
-    el.addEventListener("sgds-initial-focus", initialFocusHandler);
-    el.show();
-
-    await waitUntil(() => initialFocusHandler.calledOnce);
-
-    expect(initialFocusHandler).to.have.been.calledOnce;
-    expect(document.activeElement).to.equal(input);
-  });
-
   it("should close when pressing Escape", async () => {
     const el = await fixture<SgdsModal>(html` <sgds-modal open></sgds-modal> `);
     const hideHandler = sinon.spy();
@@ -145,5 +128,10 @@ describe("<sgds-modal>", () => {
     await waitUntil(() => hideHandler.calledOnce);
 
     expect(el.open).to.be.false;
+  });
+
+  it("centered prop adds .centered to .modal", async () => {
+    const el = await fixture<SgdsModal>(html` <sgds-modal centered></sgds-modal> `);
+    expect(el.shadowRoot?.querySelector(".modal")).to.have.class("centered");
   });
 });

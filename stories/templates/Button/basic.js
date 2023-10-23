@@ -22,3 +22,5 @@ export const Template = args =>
     </sgds-button>
   `;
 export const args = {};
+
+export const parameters = {};

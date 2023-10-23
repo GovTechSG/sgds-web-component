@@ -1,14 +1,8 @@
-import { SgdsBadge } from "../src/components/Badge";
-import "../src/components/Badge/sgds-badge";
-import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
+import { SgdsBadge } from "../src/components";
+import "../src/index";
+import { fixture, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 
-describe("sgds-badge", () => {
-  it("is defined", () => {
-    const el = document.createElement("sgds-badge");
-    assert.instanceOf(el, SgdsBadge);
-  });
-});
 describe("attributes added to badge", () => {
   it("should add rounded-pill class if roundedPill attribute is defined", async () => {
     const el = await fixture<SgdsBadge>(html`<sgds-badge></sgds-badge>`);

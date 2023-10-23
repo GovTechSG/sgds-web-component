@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { FormSubmitController } from "../../utils/form";
@@ -14,7 +14,6 @@ import styles from "./sgds-radio-group.scss";
  *
  * @event sgds-change - Emitted when the radio group's selected value changes.
  */
-@customElement("sgds-radio-group")
 export class SgdsRadioGroup extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
   /**@internal */
@@ -208,9 +207,5 @@ export class SgdsRadioGroup extends SgdsElement {
     `;
   }
 }
-declare global {
-  interface HTMLElementTagNameMap {
-    "sgds-radio-group": SgdsRadioGroup;
-  }
-}
+
 export default SgdsRadioGroup;

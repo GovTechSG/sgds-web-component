@@ -1,9 +1,53 @@
 
 @import "~@govtechsg/sgds/sass/sgds.scss";
 
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
+//@debug $theme-colors-rgb;
+//debug: ("primary": (89, 37, 220), "secondary": (31, 105, 255), "success": (10, 130, 23), "info": (15, 113, 187), "warning": (247, 144, 9), "danger": (215, 38, 15), "light": (247, 247, 249), "dark": (0, 0, 0))
+
+$all-colors: map-merge-multiple($primarys, $secondarys, $successs, $infos, $dangers, $warnings, $lights, $darks);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "color": map-merge(
+      map-get($utilities, "color"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "color"), "values"),
+          (
+            $all-colors
+          ),
+        ),
+      ),
+    ),
+  )
+);
+
+
 :host {
     font-family: var(--sgds-body-font-family, $font-family-sans-serif);
     font-size: var(--sgds-body-font-size, $font-size-base);
     font-weight: var(--sgds-body-font-weight, $font-weight-base);
     line-height: var(--sgds-body-line-height, $line-height-base);
+    // Generates all rgb color declared in the $theme-colors from _variables.scss
+    @each $color, $value in $theme-colors-rgb {
+        --sgds-#{$color}-rgb : #{$value};
+    }
+
+    @each $color, $value in $theme-colors {
+        --sgds-#{$color} : #{$value};
+    }
+
+    @each $weight, $value in $grays {
+        --sgds-gray-#{$weight}: #{$value};
+    }
+    // populate primary colors custom variables
+    @each $weight, $value in $all-colors {
+        --sgds-#{$weight}: #{$value};
+    }
+
+    //shared variables with modal and drawer
+    --overlay-background-color:rgba(0,0,0,0.5);
+    --zindex-modal : #{$zindex-modal};
 }

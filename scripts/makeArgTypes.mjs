@@ -10,18 +10,18 @@ export const makeArgTypes = componentProps =>
           .split('|')
           .map(opt => opt.trim());
         break;
-      case /string/.test(item.type?.text):
+      case /^string$/.test(item.type?.text):
         controlObject.control = 'text';
         // controlObject.defaultValue = item?.default?.replaceAll('"', '')
         break;
-      case /boolean/.test(item.type?.text):
+      case /^boolean$/.test(item.type?.text):
         controlObject.control = 'boolean';
         controlObject.defaultValue = (item.default === 'true')
         break;
-      case /number/.test(item.type?.text):
+      case /^number$/.test(item.type?.text):
         controlObject.control = 'number';
         break;
-      case /array/.test(item.type?.text):
+      case /^array$/.test(item.type?.text):
         controlObject.control = 'object';
         break;
       default:

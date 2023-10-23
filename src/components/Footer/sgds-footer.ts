@@ -1,15 +1,15 @@
 import { html } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import styles from "./sgds-footer.scss";
+import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
+import styles from "./sgds-footer.scss";
 
-export interface Links {
-  href: string;
-  label: string;
-}
 export interface ColumnLinks {
   title: string;
   links: Links[];
+}
+export interface Links {
+  href: string;
+  label: string;
 }
 
 /**
@@ -21,7 +21,6 @@ export interface ColumnLinks {
  * @cssproperty footer-top - The component's footer-top section container.
  * @cssproperty footer-bottom - The component's footer-bottom section container.
  */
-@customElement("sgds-footer")
 export class SgdsFooter extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
@@ -116,9 +115,6 @@ export class SgdsFooter extends SgdsElement {
                   <ul>
                     <li><a href=${this.contactHref}>Contact</a></li>
                     <li><a href=${this.feedbackHref}>Feedback</a></li>
-                    <li>
-                      <a href="https://www.reach.gov.sg/" target="_blank" rel="noopener noreferrer">Reach.gov.sg</a>
-                    </li>
                   </ul>
                 </div>
               </div>
@@ -132,8 +128,24 @@ export class SgdsFooter extends SgdsElement {
                 <ul>
                   <li>
                     <a href="https://tech.gov.sg/report_vulnerability" target="_blank" rel="noopener noreferrer"
-                      >Report Vulnerability</a
-                    >
+                      >Report Vulnerability
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-box-arrow-up-right"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+                        /></svg
+                    ></a>
                   </li>
                   <li><a href=${this.privacyHref}>Privacy Statement</a></li>
                   <li><a href=${this.termsOfUseHref}>Terms of use</a></li>

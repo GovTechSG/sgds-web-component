@@ -1,7 +1,7 @@
 import { expect, fixture, oneEvent } from "@open-wc/testing";
 import { html } from "lit";
-import "../src/components/FileUpload";
-import { SgdsFileUpload } from "../src/components/FileUpload";
+import { SgdsFileUpload, SgdsButton } from "../src/components";
+import "../src/index";
 
 describe("sgds-file-upload", () => {
   it("should be able to pass in content in between the slot", async () => {
@@ -28,7 +28,7 @@ describe("sgds-file-upload", () => {
     const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload disabled></sgds-file-upload>`);
 
     // simulate click on the button
-    (el.shadowRoot?.querySelector("sgds-button") as HTMLButtonElement)?.click();
+    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton)?.click();
 
     // check if the input element modal popup is not displayed
     const inputEl = el.shadowRoot?.querySelector("input") as HTMLInputElement;
@@ -117,7 +117,6 @@ describe("sgds-file-upload", () => {
       expect(listItems?.length).to.equal(2);
 
       const removeBtn = listItems?.[0].querySelector(".fileupload-list-item span:last-child");
-      console.log("removeBtn", removeBtn);
       removeBtn?.dispatchEvent(new Event("click"));
       await el.updateComplete;
 
