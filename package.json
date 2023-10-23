@@ -115,7 +115,8 @@
     "sass-loader": "^13.0.2",
     "sinon": "^14.0.0",
     "storybook-addon-web-components-knobs": "^0.3.20",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "vite": "^4.4.9"
   },
   "config": {
     "commitizen": {
