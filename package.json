@@ -8,8 +8,7 @@
   "scripts": {
     "dev": "VITE_ENV=development vite --open",
     "preview": "VITE_ENV=production vite --open",
-    "build": "npm run build:react && rm -rf lib && rollup --config rollup.config.mjs && node ./scripts/frankBuild.js && npm run post:build",
-    "post:build": "cp -r lib/components/Masthead ./lib/Masthead",
+    "build": "npm run build:react && rm -rf lib && rollup --config rollup.config.mjs && node ./scripts/frankBuild.js",
     "build:react": "npm run cem && node ./scripts/makeReact.mjs",
     "build:readme": "gulp build-readme",
     "write:stories": "npm run cem && node ./scripts/generateStories.mjs && npm run concat:stories",
