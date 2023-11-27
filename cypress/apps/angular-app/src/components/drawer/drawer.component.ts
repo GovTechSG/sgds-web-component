@@ -5,6 +5,7 @@ import { Component, ViewChild } from "@angular/core";
   templateUrl: "./drawer.component.html"
 })
 export class Drawer {
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   @ViewChild("drawer")
   drawer: any;
 

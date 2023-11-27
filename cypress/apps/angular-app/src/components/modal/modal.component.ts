@@ -5,7 +5,7 @@ import { Component, ViewChild } from "@angular/core";
   templateUrl: "./modal.component.html"
 })
 export class Modal {
-  @ViewChild("modal")
+  /* eslint-disable  @typescript-eslint/no-explicit-any */ @ViewChild("modal")
   modal: any;
 
   showModal() {
