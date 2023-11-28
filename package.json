@@ -22,7 +22,8 @@
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts .",
     "lint:fix": "npm run lint -- --fix",
-    "cem": "cem analyze --litelement "
+    "cem": "cem analyze --litelement ",
+    "e2e-test": "node cypress/scripts/run_all.js & cypress open"
   },
   "author": "GovTechSG",
   "contributors": [
