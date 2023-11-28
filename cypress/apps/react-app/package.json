@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@govtechsg/sgds": "^2.1.1",
     "@govtechsg/sgds-web-component": "file:../../../lib",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

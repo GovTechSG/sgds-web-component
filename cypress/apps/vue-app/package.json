@@ -10,6 +10,7 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
+    "@govtechsg/sgds": "^2.1.1",
     "@govtechsg/sgds-web-component": "file:../../../lib",
     "vue": "^3.3.4"
   },
