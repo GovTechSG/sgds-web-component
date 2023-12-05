@@ -1,18 +1,19 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
+import SgdsModal from "@govtechsg/sgds-web-component/components/Modal/sgds-modal";
 
 @Component({
   selector: "modal-component",
   templateUrl: "./modal.component.html"
 })
 export class Modal {
-  /* eslint-disable  @typescript-eslint/no-explicit-any */ @ViewChild("modal")
-  modal: any;
+  @ViewChild("modal")
+  modal?: ElementRef<SgdsModal>;
 
   showModal() {
-    this.modal.nativeElement.show();
+    this.modal?.nativeElement.show();
   }
 
   closeModal() {
-    this.modal.nativeElement.hide();
+    this.modal?.nativeElement.hide();
   }
 }
