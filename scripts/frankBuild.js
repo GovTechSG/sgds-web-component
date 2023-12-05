@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const { resolve, join, basename } = require("path");
-const { readFile, writeFile, copy } = require("fs-extra");
+const { readFile, writeFile, copy, mkdir } = require("fs-extra");
 const packagePath = process.cwd();
 const distPath = join(packagePath, "./lib");
 
@@ -22,8 +22,7 @@ async function createPackageFile() {
       "./react": "./react/index.js",
       "./react/*": "./react/*",
       "./base/*": null,
-      "./utils/*": null,
-      "./Masthead/*": "./components/Masthead/*"
+      "./utils/*": null
     }
   };
 
@@ -33,17 +32,25 @@ async function createPackageFile() {
   console.log(`Created package.json in ${targetPath}`);
 }
 
-async function includeFileInBuild(file) {
+async function includeFileInBuild(file, targetFolder = distPath) {
   const sourcePath = resolve(packagePath, file);
-  const targetPath = resolve(distPath, basename(file));
+  const targetPath = resolve(targetFolder, basename(file));
   await copy(sourcePath, targetPath);
   console.log(`Copied ${sourcePath} to ${targetPath}`);
 }
-
+/**
+ * Copying Masthead umd file to root Masthead for backward compatibility of CDN users (version <1.0.0) of Masthead
+ *  <script type="module" src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component/Masthead/index.js">
+ */
+async function copyMastheadCdnToRoot() {
+  await mkdir("./lib/Masthead");
+  await copy("./lib/components/Masthead/index.umd.js", "./lib/Masthead/index.js");
+}
 async function run() {
   try {
     await createPackageFile();
     await includeFileInBuild("./README.md");
+    await copyMastheadCdnToRoot();
     // await includeFileInBuild('../../LICENSE');
   } catch (err) {
     console.error(err);

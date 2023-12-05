@@ -4,20 +4,31 @@
 
 # sgds-web-component
 
-Project is in release candidate phase. See https://v1-0-0-rc.d1yxrtldqtp3a0.amplifyapp.com/?path=/story/getting-started-installation--page for the progress of the components 
-
 # Installation Guide
 
-You can load SGDS's web components via CDN or by installing it locally. 
-<!-- <s>If you're using a framework, make sure to check out the pages for React, Vue, and Angular for additional information.</s> -->
+You can load SGDS's web components via CDN or by installing it locally. The library depends on  [scoped custom elements registry](https://open-wc.org/docs/development/scoped-elements/) and in certain cases, it is required to import the `@webcomponents/scoped-custom-element-registry` polyfill before the web components.
+
+Refer to [open-wc's directive on scoped-elements](https://open-wc.org/docs/development/scoped-elements/#:~:text=load%20the%20polyfill%20if%20you%20need%20scoping) for more details to know when to use the polyfill.
 
 ## CDN
 
-The CDN loader registers all SGDS elements up front. Note that, if you're only using a handful of components.
+The CDN loader registers all SGDS elements up front. Depending on your usage, you may or may not need to load the polyfill.
+
+> When using CDN, it is recommended to version control. On initial usage, pick the latest version of the library. See list of available npm versions [here](https://www.npmjs.com/package/@govtechsg/sgds-web-component?activeTab=versions) 
+
+> Stick to the version that works for you and make intentional updates on your end when you need the latest library updates. Versions are immutable and thus, stable.
+
+> By not specifying the version, you are using the latest version and subjected to changes made by the library that are not tested on your end. While we do our best to ensure backward compatibility between patches and minor version updates, we cannot guarantee that we have covered all of our user's edge cases. 
+
 
 ```js
+// load scoped custom element registry polyfill first (optional, depends on use case)
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/scoped-custom-element-registry"></script>
+// it is recommended to load a particular version when using cdn e.g. https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@1.0.2
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@<version>"></script>
 
-<script type="module" src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@rc"></script>
+//or load a single component e.g. Masthead
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@<version>/components/Masthead/index.umd.js"></script>
 
 ```
 
@@ -27,14 +38,14 @@ You can also install SGDS web components locally with the following command
 
 ```js
 
-npm install @govtechsg/sgds-web-component@rc
+npm install @govtechsg/sgds-web-component @webcomponents/scoped-custom-element-registry
 
 ```
-
-and import the library once in your entry point and use it globally throughout your project
+import the polyfill and library once in you entry point and use the web components throughout your project. Note that the scoped custom element registry polyfill has to be imported before any custom element registration happens. 
 
 ```js
-
+// import polyfill first (optional, depends on use case), follow by the web components
+import "@webcomponents/scoped-custom-element-registry"
 import "@govtechsg/sgds-web-component";
 
 ```
@@ -47,7 +58,10 @@ import "@govtechsg/sgds-web-component";
 Once imported, the custom elements can be used throughout the project.
 
 ```js
+// import all custom elements at once
 import "@govtechsg/sgds-web-component";
+// or import individual custom elements 
+import "@govtechsg/sgds-web-component/components/Button";
 
 //usage
 // <sgds-button>Hello World</sgds-button>
@@ -61,58 +75,11 @@ Each component's Class is exported via named exports, prefixed with `Sgds`.
 ```js
 
 import { SgdsButton, SgdsMainnav } from "@govtechsg/sgds-web-component/components";
+// or
+import { SgdsButton } from "@govtechsg/sgds-web-component/components/Button/sgds-button";
+import { SgdsMainnav } from "@govtechsg/sgds-web-component/components/Mainnav/sgds-mainnav";
 
 ```
-
-## Scoped Elements
-
-The CustomElementRegistry is a global registry that provides methods for registering custom elements. One of the limitations of working with this global registry is that multiple versions of the same element cannot co-exist. This causes bottlenecks in software delivery that should be managed by the teams and complex build systems. Scoped Custom Element Registries is a proposal that will solve the problem. Since this functionality won't be available (especially not cross browser) anytime soon, we've adopted [OpenWC's Scoped Elements](https://open-wc.org/docs/development/scoped-elements/).
-
-Whenever a sgds component uses composition (meaning it uses another sgds component inside), we apply ScopedElementsMixin to make sure it uses the right version of this internal component.
-
-For users who are using sgds component directly for builing application, use the custom elements directly by [importing the custom elements](#using-the-custom-elements)
-
-For users who are building component libraries on top of sgds-web-component, please adopt OpenWC's scoped elements to prevent exporting our registered custom elements. 
-
-Things to note: 
-1. Import component class from `@govtechsg/sgds-web-component/components`. Here the components are not registered in the custom element registry 
-2. Define the tagName you want to assign to the component's class
-
-Example below
-
-```jsx
-import { SgdsMasthead, SgdsMainnav, SgdsMainnavDropdown, SgdsMainnavItem } from "@govtechsg/sgds-web-component/components";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
-
-// Lit element
-@customElement('my-navbar')
-export class MyNavbar extends ScopedElementsMixin(LitElement) {
-  static get scopedElements() {
-    return {
-      'sgds-mainnav': SgdsMainnav,
-      'sgds-mainnav-dropdown': SgdsMainnavDropdown,
-      'sgds-mainnav-item': SgdsMainnavItem,
-      'sgds-masthead': SgdsMasthead
-    };
-  }
-    ...
-
- render() {
-    return html`
-        <sgds-masthead fluid="false"></sgds-masthead>
-            <sgds-mainnav>
-              <img width="240" src="https://dev.assets.developer.tech.gov.sg/svg/logo.svg" slot="brand">
-                <sgds-mainnav-dropdown togglertext="Home" slot="end">
-                    <sgds-dropdown-item>Logout</sgds-dropdown-item>
-                </sgds-mainnav-dropdown>
-                <sgds-mainnav-item href="#">Content</sgds-mainnav-item>
-                <sgds-mainnav-item href="#}">Biography</sgds-mainnav-item>
-            </sgds-mainnav>
-          `
-      }
-}
-```
-
 # Attributes and Properties
 
 ## String
@@ -289,9 +256,12 @@ Any external stylings done on our web components like positioning needs to be do
 
 Web components are [fully supported in Angular](https://custom-elements-everywhere.com/#angular) and can be used directly.
 
+## Demo app 
+
+Refer to this [stackblitz demo app](https://stackblitz.com/github/clukhei/angular-stepper?file=README.md) on the usage example 
 ## Installation
 
-Locally install the library or use CDN by adding the script tag to entry point of the Angular application (i.e. index.html)
+Locally install the library or use CDN by adding the script tag to entry point of the Angular application (i.e. index.html). Follow instructions in `Installation` and `Imports` documentation section
 
 ## Configuration
 
@@ -369,13 +339,21 @@ Web components are [not fully supported in React](https://custom-elements-everyw
 
 Instead, our library outputs the React version of each of our web components. You can choose to use either the React components or the web components. This React instruction page mainly focuses on how to use the React version.
 
+## Demo app 
+
+Refer to this [stackblitz demo app](https://stackblitz.com/edit/vitejs-vite-gebvf5) on the usage example 
+
 ## Importing the library
 
+Follow instructions in `Installation` documentation section.
 Our components are exported via named exports. Import the components like so
 
 ```js
 
-import { SgdsButton } from "@govtechsg/sgds-web-component/react";
+import { SgdsButton, SgdsTooltip } from "@govtechsg/sgds-web-component/react";
+// or
+import { SgdsButton } from "@govtechsg/sgds-web-component/react/button";
+import { SgdsTooltip } from "@govtechsg/sgds-web-component/react/tooltip";
 
 ```
 
@@ -436,9 +414,13 @@ The support for NextJS and server side rendering is WIP.
 
 Web components are [fully supported in Vue](https://custom-elements-everywhere.com/#vue) and can be used directly.
 
+## Demo app 
+
+Refer to this [stackblitz demo app](https://stackblitz.com/github/clukhei/web-components-with-vue?file=README.md) on the usage example 
+
 ## Installation
 
-Locally install the library or use CDN by adding the script tag to entry point of the Vue application.
+Locally install the library or use CDN by adding the script tag to entry point of the Vue application. Follow instructions in `Installation` and `Imports` documentation section
 
 ## Configuration
 
@@ -707,3 +689,105 @@ export default {
   </sgds-sidenav-item>
 </sgds-sidenav>
 ```
+
+# Extending sgds-web-component 
+
+For users who are leveraging on sgds-web-component as a building block to build and export your own web component library with Lit, you will have to adopt the scoped elements approach to prevent any foreseeable clash of registries between sgds-web-component and your web component library in the case where your users are importing both libraries. 
+
+
+## Scoped Elements
+
+The CustomElementRegistry is a global registry that provides methods for registering custom elements. One of the limitations of working with this global registry is that multiple versions of the same element cannot co-exist. This causes bottlenecks in software delivery that should be managed by the teams and complex build systems. Scoped Custom Element Registries is a proposal that will solve the problem. Since this functionality won't be available (especially not cross browser) anytime soon, we've adopted [OpenWC's Scoped Elements](https://open-wc.org/docs/development/scoped-elements/).
+
+Whenever a sgds component uses composition (meaning it uses another sgds component inside), we apply ScopedElementsMixin to make sure it uses the right version of this internal component.
+
+For users who are using sgds component directly for builing application, use the custom elements directly by [importing the custom elements](#using-the-custom-elements)
+
+For users who are building component libraries on top of sgds-web-component, please adopt OpenWC's scoped elements to prevent exporting our registered custom elements. 
+
+Things to note: 
+1. Import component class from `@govtechsg/sgds-web-component/components`. Here the components are not registered in the custom element registry 
+2. Define the tagName you want to assign to the component's class
+
+Example below
+
+```jsx
+import { SgdsMasthead, SgdsMainnav, SgdsMainnavDropdown, SgdsMainnavItem } from "@govtechsg/sgds-web-component/components";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+
+// Lit element
+@customElement('my-navbar')
+export class MyNavbar extends ScopedElementsMixin(LitElement) {
+  static get scopedElements() {
+    return {
+      'sgds-mainnav': SgdsMainnav,
+      'sgds-mainnav-dropdown': SgdsMainnavDropdown,
+      'sgds-mainnav-item': SgdsMainnavItem,
+      'sgds-masthead': SgdsMasthead
+    };
+  }
+    ...
+
+ render() {
+    return html`
+        <sgds-masthead fluid="false"></sgds-masthead>
+            <sgds-mainnav>
+              <img width="240" src="https://dev.assets.developer.tech.gov.sg/svg/logo.svg" slot="brand">
+                <sgds-mainnav-dropdown togglertext="Home" slot="end">
+                    <sgds-dropdown-item>Logout</sgds-dropdown-item>
+                </sgds-mainnav-dropdown>
+                <sgds-mainnav-item href="#">Content</sgds-mainnav-item>
+                <sgds-mainnav-item href="#}">Biography</sgds-mainnav-item>
+            </sgds-mainnav>
+          `
+      }
+}
+```
+
+<sgds-alert show variant="success"><svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+<path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+</svg><small>we are live and stable now! Please re-read the documentation on how to import the components if you were previously using our unstable version (i.e. package version less than 1.0.0)</small></sgds-alert>
+
+# @govtechsg/sgds-web-component
+
+[![npm](https://img.shields.io/npm/dw/@govtechsg/sgds-web-component?label=npm&style=flat-square)](https://www.npmjs.com/package/@govtechsg/sgds-web-component)
+[![jsDelivr](https://data.jsdelivr.com/v1/package/npm/@govtechsg/sgds-web-component/badge)](https://www.jsdelivr.com/package/npm/@govtechsg/sgds-web-component)
+[![github](https://img.shields.io/badge/GitHub-Code-232323.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/GovTechSG/sgds-web-component)
+
+<div class="home-card-container mt-5">
+    <sgds-card stretchedLink class="col">
+        <span slot="card-title">SGDS v2+ <i class="bi bi-filetype-scss"></i></span>
+        <a slot="card-link" href="https://designsystem.tech.gov.sg/" target="_blank"></a>
+        <p slot="card-text">The components are shipped with SGDS v2 styles and can be used straight out of the box.</p>
+    </sgds-card>
+     <sgds-card stretchedLink class="col">
+        <span slot="card-title">Framework agnostic <i class="bi bi-puzzle"></i></span>
+        <a slot="card-link" href="https://custom-elements-everywhere.com/" target="_blank"></a>
+        <p slot="card-text">Compatible with all frameworks. Each web component also has its own React version for full compatibility with React.</p>
+    </sgds-card>
+     <sgds-card stretchedLink class="col">
+        <span slot="card-title">Customisable with CSS <i class="bi bi-filetype-css"></i></span>
+        <a slot="card-link" href="/story/getting-started-usage-stylings--page" target="_blank"></a>
+        <p slot="card-text">Components are customisable with cssparts, css custom variables and class-like properties.</p>
+    </sgds-card>
+     <sgds-card stretchedLink class="col">
+        <span slot="card-title">Works with CDNs <i class="bi bi-truck"></i></span>
+        <a slot="card-link" href="/story/getting-started-installation--page" target="_blank"></a>
+        <p slot="card-text">Besides whole library CDN, each component also has its own CDN.</p>
+    </sgds-card>
+<sgds-card stretchedLink class="col">
+        <span slot="card-title">Accessible <i class="bi bi-person-wheelchair"></i></span>
+        <p slot="card-text">We are working to build our components fully accessible.</p>
+    </sgds-card>
+<sgds-card stretchedLink class="col">
+        <span slot="card-title">Open Source <i class="bi bi-github"></i></span>
+        <p slot="card-text">We are open source and welcome contributions from the community!</p>
+        <a slot="card-link" href="https://github.com/GovTechSG/sgds-web-component" target="_blank"></a>
+    </sgds-card>
+<sgds-card stretchedLink class="col">
+        <span slot="card-title">Extendable <i class="bi bi-bricks"></i></span>
+        <p slot="card-text">Our components are built with LitElement and are extendable. Use them as building blocks to create your complex component. </p>
+        <a slot="card-link" href="/story/getting-started-extending-the-library--page" target="_blank"></a>
+    </sgds-card>
+</div>

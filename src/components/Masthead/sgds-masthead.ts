@@ -135,7 +135,6 @@ export class SgdsMasthead extends SgdsElement {
                           viewBox="0 0 32 32"
                           class="trusted-websites-icon"
                         >
-                          <title>Trusted websites</title>
                           <path
                             d="M18.667 4v2.667h4c0.186-0.020 0.374-0.020 0.56 0l-2.667 2.667-6.973 6.987 1.88 1.88 9.733-9.667c0.092 0.257 0.137 0.528 0.133 0.8v4h2.667v-9.333h-9.333z"
                           ></path>
