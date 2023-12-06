@@ -1,5 +1,12 @@
-import { defineConfig } from "vite";
+import { defineConfig, createLogger } from "vite";
 import postcssLit from "rollup-plugin-postcss-lit";
+
+const logger = createLogger();
+const originalWarning = logger.warn;
+logger.warn = (msg, options) => {
+  if (msg.includes("Default and named imports from CSS files are deprecated")) return;
+  originalWarning(msg, options);
+};
 
 export default defineConfig({
   plugins: [postcssLit({ include: ["**/*.scss", "**/*.scss?*"] })],
@@ -14,5 +21,6 @@ export default defineConfig({
   },
   define: {
     "process.env.VITE_ENV": JSON.stringify(process.env.VITE_ENV)
-  }
+  },
+  customLogger: logger
 });
