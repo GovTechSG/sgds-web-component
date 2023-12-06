@@ -1,0 +1,6 @@
+<sgds-button (click)="showDrawer()">Open end Drawer</sgds-button>
+<sgds-drawer label="" placement="end" #drawer>
+    This is a Drawer
+    <sgds-button (click)="closeDrawer()" slot="footer" variant="link" class="close-drawer">Close</sgds-button>
+    <sgds-button slot="footer" variant="primary" type="submit" form="formA">Submit</sgds-button>
+</sgds-drawer>
