@@ -114,7 +114,7 @@
     "rollup-plugin-postcss-lit": "^1.0.1",
     "rollup-plugin-typescript2": "^0.33.0",
     "rollup-plugin-visualizer": "^5.9.2",
-    "sass": "^1.54.4",
+    "sass": "~1.49.9",
     "sass-loader": "^13.0.2",
     "sinon": "^14.0.0",
     "storybook-addon-web-components-knobs": "^0.3.20",

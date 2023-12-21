@@ -17,6 +17,7 @@ import "./components/Mainnav";
 import "./components/Masthead";
 import "./components/Modal";
 import "./components/Pagination";
+import "./components/Progress";
 import "./components/QuantityToggle";
 import "./components/Radio";
 import "./components/Sidenav";
