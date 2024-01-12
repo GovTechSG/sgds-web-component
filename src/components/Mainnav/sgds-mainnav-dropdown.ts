@@ -5,6 +5,7 @@ import { DropdownElement } from "../../base/dropdown-element";
 import styles from "./sgds-mainnav-dropdown.scss";
 import { DropdownListElement } from "../../base/dropdown-list-element";
 import genId from "../../utils/generateId";
+import { classMap } from "lit/directives/class-map.js";
 
 /**
  * @slot default - The menu items. Pass in sgds-dropdown-item as the menu items
@@ -22,7 +23,11 @@ export class SgdsMainnavDropdown extends DropdownListElement {
 
   /** Sets the text content of Dropdown button */
   @property({ type: String })
-  private togglerText = "";
+  togglerText = "";
+
+  /** When true,  applies active styles on the dropdown button */
+  @property({ type: Boolean })
+  active = false;
 
   async firstUpdated() {
     super.firstUpdated();
@@ -34,9 +39,13 @@ export class SgdsMainnavDropdown extends DropdownListElement {
 
   render() {
     return html`
-      <li class="nav-item dropdown">
+      <li class="sgds nav-item dropdown">
         <a
-          class="nav-link"
+          class="${classMap({
+            "dropdown-toggle": true,
+            "nav-link": true,
+            active: this.active
+          })}"
           ?disabled=${this.disabled}
           aria-expanded="${this.menuIsOpen}"
           ${ref(this.myDropdown)}
