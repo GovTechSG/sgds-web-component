@@ -271,4 +271,9 @@ describe("sgds-mainnav-dropdown", () => {
       { ignoreAttributes: ["id"] }
     );
   });
+  it("when prop active=true, .active class is defined in the button", async () => {
+    const el = await fixture(html`<sgds-mainnav-dropdown active togglerText="test"></sgds-mainnav-dropdown>`);
+
+    expect(el.shadowRoot?.querySelector("a[role=button]")).to.have.class("active");
+  });
 });
