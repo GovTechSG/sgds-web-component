@@ -163,7 +163,7 @@ export class DropdownElement extends SgdsElement {
     switch (e.key) {
       case ARROW_DOWN:
         e.preventDefault();
-        console.log('first')
+        console.log("first");
         if (!this.menuIsOpen) return this.showMenu();
         break;
       case ARROW_UP:

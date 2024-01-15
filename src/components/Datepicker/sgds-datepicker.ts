@@ -66,7 +66,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   /** @internal */
   @state()
-  private view = 'day';
+  private view = "day";
 
   /** @internal */
   @state() private selectedDateRange: Date[] = [];
@@ -366,7 +366,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
             maxDate=${this.maxDate}
             .selectedDate=${this.selectedDateRange}
             tabindex="1"
-            ></sgds-datepicker-calendar>
+          ></sgds-datepicker-calendar>
         </ul>
       </div>
     `;

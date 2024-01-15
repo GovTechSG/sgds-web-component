@@ -43,18 +43,18 @@ export class DatepickerCalendar extends SgdsElement {
   @state() month: number = this.displayDate.getMonth();
 
   /** @internal */
-  @property() view
+  @property() view;
   /** @internal */
-  @property({ type: Boolean}) show : boolean 
+  @property({ type: Boolean }) show: boolean;
 
- @queryAsync("td.active") activeDay: Promise<HTMLElement>
+  @queryAsync("td.active") activeDay: Promise<HTMLElement>;
 
- @watch("show", {waitUntilFirstUpdate: true})
-  async handleShowChange (){
-    console.log(this.show, "show")
-    const activeTd= await this.activeDay
-    activeTd.setAttribute("tabindex", "0")
-    activeTd.focus()
+  @watch("show", { waitUntilFirstUpdate: true })
+  async handleShowChange() {
+    console.log(this.show, "show");
+    const activeTd = await this.activeDay;
+    activeTd.setAttribute("tabindex", "0");
+    activeTd.focus();
   }
 
   /** @internal */
@@ -153,8 +153,8 @@ export class DatepickerCalendar extends SgdsElement {
   }
 
   render() {
-    console.log('render')
-    console.log("view", this.view)
+    console.log("render");
+    console.log("view", this.view);
     const selectedDates = this.selectedDate.map(d => this.setTimeToNoon(d));
 
     const rangeSelectedDates = this.generateIncrementDays(new Date(selectedDates[0]), new Date(selectedDates[1]));
