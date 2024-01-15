@@ -1,14 +1,15 @@
-import { html } from "lit";
-import { property, query, queryAsync, state } from "lit/decorators.js";
-import { ref } from "lit/directives/ref.js";
-import styles from "./sgds-datepicker.scss";
-import { live } from "lit/directives/live.js";
-import { watch } from "../../utils/watch";
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { html } from "lit";
+import { property, state } from "lit/decorators.js";
+import { live } from "lit/directives/live.js";
+import { ref } from "lit/directives/ref.js";
+import { DropdownElement } from "../../base/dropdown-element";
+import { watch } from "../../utils/watch";
 import { SgdsInput } from "../Input/sgds-input";
 import { DatepickerCalendar } from "./datepicker-calendar";
 import { DatepickerHeader } from "./datepicker-header";
-import { DropdownElement } from "../../base/dropdown-element";
+import styles from "./sgds-datepicker.scss";
+import { ViewEnum } from "./types";
 
 const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
@@ -66,7 +67,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   /** @internal */
   @state()
-  private view = "day";
+  private view: ViewEnum = "days";
 
   /** @internal */
   @state() private selectedDateRange: Date[] = [];
@@ -255,9 +256,9 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     this.value = formattedDate;
   }
 
-  /** @internal */
+  /** @internal update latest view state from datepicker-header */
   private handleViewChanged(event: CustomEvent<string>) {
-    this.view = event.detail;
+    this.view = event.detail as ViewEnum;
   }
 
   /** @internal */
@@ -372,4 +373,5 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     `;
   }
 }
+
 export default SgdsDatepicker;

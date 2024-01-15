@@ -3,6 +3,7 @@ import { property, state } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./datepicker-header.scss";
 import { styleMap } from "lit/directives/style-map.js";
+import { ViewEnum } from "./types";
 
 const MONTH_LABELS = [
   "January",
@@ -27,13 +28,12 @@ export class DatepickerHeader extends SgdsElement {
   displayDate: Date;
 
   /** @internal */
-  @state()
-  view: string;
+  @property()
+  view: ViewEnum;
 
   connectedCallback() {
     super.connectedCallback();
     this.displayDate = new Date(); // Set the current date as the displayDate
-    this.view = "days";
   }
 
   /** @internal */

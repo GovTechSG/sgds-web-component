@@ -5,7 +5,7 @@ import { styleMap } from "lit/directives/style-map.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./datepicker-calendar.scss";
 import { watch } from "../../utils/watch";
-
+import { ViewEnum } from "./types";
 export class DatepickerCalendar extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
@@ -43,18 +43,34 @@ export class DatepickerCalendar extends SgdsElement {
   @state() month: number = this.displayDate.getMonth();
 
   /** @internal */
-  @property() view;
+  @property() view : ViewEnum;
+  
   /** @internal */
   @property({ type: Boolean }) show: boolean;
 
   @queryAsync("td.active") activeDay: Promise<HTMLElement>;
 
+    connectedCallback(): void {
+      super.connectedCallback()
+      this.addEventListener("keydown", async(e: KeyboardEvent) => {
+        const activeDay = await this.activeDay
+        const activeDateStr = activeDay.getAttribute("data-date")
+        const activeDateObj = new Date(activeDateStr)
+        console.log({activeDateObj})
+        if (e.key === "ArrowDown") {
+          const nextNavigationDate = activeDateObj.setDate(activeDateObj.getDate() + 7)
+          console.log(new Date(nextNavigationDate).toISOString())
+          const newTd = this.shadowRoot.querySelector(`td[data-date="${new Date(nextNavigationDate).toISOString()}"]`) as HTMLElement
+          newTd.setAttribute("tabindex", "0")
+          newTd.focus()
+        }
+      })
+    }
   @watch("show", { waitUntilFirstUpdate: true })
   async handleShowChange() {
-    console.log(this.show, "show");
     const activeTd = await this.activeDay;
     activeTd.setAttribute("tabindex", "0");
-    activeTd.focus();
+    activeTd.focus()
   }
 
   /** @internal */
@@ -179,15 +195,15 @@ export class DatepickerCalendar extends SgdsElement {
       for (let j = 0; j <= 6; j++) {
         if (day <= monthLength && (i > 0 || j >= startingDay)) {
           const date = new Date(year, month, day, 12, 0, 0, 0).toISOString();
-          const isCurrentDate = new Date();
+          const todaysDate = new Date();
 
           const beforeMinDate = minimumDate && Date.parse(date) < Date.parse(minimumDate.toISOString());
           const afterMinDate = maximumDate && Date.parse(date) > Date.parse(maximumDate.toISOString());
           const clickHandler = beforeMinDate || afterMinDate ? undefined : this.onClickDay;
 
-          const isCurrentMonth = isCurrentDate.getMonth() === this.displayDate.getMonth();
-          const isCurrentYear = isCurrentDate.getFullYear() === this.displayDate.getFullYear();
-          const isCurrentDay = isCurrentDate.getDate() === day;
+          const isCurrentMonth = todaysDate.getMonth() === this.displayDate.getMonth();
+          const isCurrentYear = todaysDate.getFullYear() === this.displayDate.getFullYear();
+          const isCurrentDay = todaysDate.getDate() === day;
 
           const isSelected =
             selectedDates.length > 0 &&
@@ -199,11 +215,12 @@ export class DatepickerCalendar extends SgdsElement {
           };
           const buttonStyles = {
             cursor: "pointer",
-            borderRadius: "0"
+            // borderRadius: "0"
           };
           week.push(
             html`<td
               key=${j}
+              data-date=${date}
               data-day=${day}
               class=${classMap({
                 "text-primary": isCurrentDay && isCurrentMonth && isCurrentYear,
