@@ -43,6 +43,9 @@ td {
       color: var(--datepicker-theme-color);
       background-color: var(--datepicker-hover-bg-color);
     }
+    &.active:focus{
+      color: red;
+    }
   }
 }
 

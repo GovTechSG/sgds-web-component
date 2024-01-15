@@ -1,9 +1,10 @@
 import { HTMLTemplateResult, html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property, state, queryAsync } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { styleMap } from "lit/directives/style-map.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./datepicker-calendar.scss";
+import { watch } from "../../utils/watch";
 
 export class DatepickerCalendar extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
@@ -42,10 +43,18 @@ export class DatepickerCalendar extends SgdsElement {
   @state() month: number = this.displayDate.getMonth();
 
   /** @internal */
-  @state() view = "days";
+  @property() view
+  /** @internal */
+  @property({ type: Boolean}) show : boolean 
 
-  connectedCallback() {
-    super.connectedCallback();
+ @queryAsync("td.active") activeDay: Promise<HTMLElement>
+
+ @watch("show", {waitUntilFirstUpdate: true})
+  async handleShowChange (){
+    console.log(this.show, "show")
+    const activeTd= await this.activeDay
+    activeTd.setAttribute("tabindex", "0")
+    activeTd.focus()
   }
 
   /** @internal */
@@ -144,6 +153,8 @@ export class DatepickerCalendar extends SgdsElement {
   }
 
   render() {
+    console.log('render')
+    console.log("view", this.view)
     const selectedDates = this.selectedDate.map(d => this.setTimeToNoon(d));
 
     const rangeSelectedDates = this.generateIncrementDays(new Date(selectedDates[0]), new Date(selectedDates[1]));
@@ -286,6 +297,7 @@ export class DatepickerCalendar extends SgdsElement {
     `;
 
     let viewContent: HTMLTemplateResult;
+
     switch (this.view) {
       case "days":
         viewContent = html` ${dayView} `;

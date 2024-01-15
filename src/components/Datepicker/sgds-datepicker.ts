@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property, query, queryAsync, state } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import styles from "./sgds-datepicker.scss";
 import { live } from "lit/directives/live.js";
@@ -9,6 +9,9 @@ import { SgdsInput } from "../Input/sgds-input";
 import { DatepickerCalendar } from "./datepicker-calendar";
 import { DatepickerHeader } from "./datepicker-header";
 import { DropdownElement } from "../../base/dropdown-element";
+
+const ARROW_DOWN = "ArrowDown";
+const ARROW_UP = "ArrowUp";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -63,7 +66,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   /** @internal */
   @state()
-  private view: string;
+  private view = 'day';
 
   /** @internal */
   @state() private selectedDateRange: Date[] = [];
@@ -355,13 +358,15 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
         >
           <sgds-datepicker-header .view=${this.view} .displayDate=${this.displayDate}></sgds-datepicker-header>
           <sgds-datepicker-calendar
+            .show=${this.menuIsOpen}
             .view=${this.view}
             .displayDate=${this.displayDate}
             .mode=${this.mode}
             minDate=${this.minDate}
             maxDate=${this.maxDate}
             .selectedDate=${this.selectedDateRange}
-          ></sgds-datepicker-calendar>
+            tabindex="1"
+            ></sgds-datepicker-calendar>
         </ul>
       </div>
     `;
