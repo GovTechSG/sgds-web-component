@@ -47,8 +47,7 @@ td {
     //   border-radius: 2rem;
     // }
     &:focus {
-      outline: rgba(170, 50, 220, 0.6) solid 2px;
-      border-radius: 2rem;
+      outline: var(--datepicker-theme-color) solid 2px;
     }
   }
 }

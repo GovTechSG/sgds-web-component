@@ -1,11 +1,13 @@
 import { HTMLTemplateResult, html } from "lit";
-import { property, state, queryAsync } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { styleMap } from "lit/directives/style-map.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./datepicker-calendar.scss";
 import { watch } from "../../utils/watch";
+import styles from "./datepicker-calendar.scss";
 import { ViewEnum } from "./types";
+
+const TODAY_DATE = new Date();
 export class DatepickerCalendar extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
@@ -22,7 +24,7 @@ export class DatepickerCalendar extends SgdsElement {
   @property({ type: Array }) selectedDate: Date[] = [];
 
   /** @internal */
-  @property({ attribute: false }) displayDate: Date = new Date();
+  @property({ attribute: false }) displayDate: Date = TODAY_DATE;
 
   /** @internal */
   @property({ type: String }) minDate?: string;
@@ -33,44 +35,60 @@ export class DatepickerCalendar extends SgdsElement {
   /** @internal */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
 
-  /** @internal */
-  @property({ attribute: false }) initialValue?: Date;
+  @state() focusedDate: Date = this.setTimeToNoon(this.displayDate);
 
   /** @internal */
-  @state() year: number = this.displayDate.getFullYear();
+  @property() view: ViewEnum;
 
-  /** @internal */
-  @state() month: number = this.displayDate.getMonth();
-
-  /** @internal */
-  @property() view : ViewEnum;
-  
   /** @internal */
   @property({ type: Boolean }) show: boolean;
 
-  @queryAsync("td.active") activeDay: Promise<HTMLElement>;
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener("keydown", this.handleKeyPress);
+  }
+  private handleKeyPress(event: KeyboardEvent) {
+    let nextFocusDate: Date;
+    let nextTd: HTMLElement;
+    switch (event.key) {
+      case "ArrowUp":
+        nextFocusDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() - 7)));
+        nextTd = this.shadowRoot.querySelector(`td[data-date="${nextFocusDate.toISOString()}"]`) as HTMLElement;
+        break;
 
-    connectedCallback(): void {
-      super.connectedCallback()
-      this.addEventListener("keydown", async(e: KeyboardEvent) => {
-        const activeDay = await this.activeDay
-        const activeDateStr = activeDay.getAttribute("data-date")
-        const activeDateObj = new Date(activeDateStr)
-        console.log({activeDateObj})
-        if (e.key === "ArrowDown") {
-          const nextNavigationDate = activeDateObj.setDate(activeDateObj.getDate() + 7)
-          console.log(new Date(nextNavigationDate).toISOString())
-          const newTd = this.shadowRoot.querySelector(`td[data-date="${new Date(nextNavigationDate).toISOString()}"]`) as HTMLElement
-          newTd.setAttribute("tabindex", "0")
-          newTd.focus()
-        }
-      })
+      case "ArrowDown":
+        nextFocusDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() + 7)));
+        nextTd = this.shadowRoot.querySelector(`td[data-date="${nextFocusDate.toISOString()}"]`) as HTMLElement;
+        break;
+      case "ArrowLeft":
+        nextFocusDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() - 1)));
+        nextTd = this.shadowRoot.querySelector(`td[data-date="${nextFocusDate.toISOString()}"]`) as HTMLElement;
+        break;
+      case "ArrowRight":
+        nextFocusDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() + 1)));
+        nextTd = this.shadowRoot.querySelector(`td[data-date="${nextFocusDate.toISOString()}"]`) as HTMLElement;
+        break;
+      default:
+        return;
     }
+    nextTd.setAttribute("tabindex", "0");
+    nextTd.focus();
+  }
   @watch("show", { waitUntilFirstUpdate: true })
   async handleShowChange() {
-    const activeTd = await this.activeDay;
-    activeTd.setAttribute("tabindex", "0");
-    activeTd.focus()
+    if (this.selectedDate.length === 0) {
+      const todayDayEl: HTMLElement = this.shadowRoot.querySelector(`td[data-day="${this.displayDate.getDate()}"]`);
+      todayDayEl.setAttribute("tabindex", "0");
+      todayDayEl.focus();
+      //oc this.focusedDate = this.displayDate
+    } else {
+      // range or mode will focus on the first date
+      const selectedDay = this.selectedDate[0].getDate();
+      const selectedTd: HTMLElement = this.shadowRoot.querySelector(`td[data-day="${selectedDay}"]`);
+      selectedTd.setAttribute("tabindex", "0");
+      selectedTd.focus();
+      this.focusedDate = this.selectedDate[0];
+    }
   }
 
   /** @internal */
@@ -145,10 +163,9 @@ export class DatepickerCalendar extends SgdsElement {
   // clickhandler for month view buttons
   /** @internal */
   private onClickMonth(month: number) {
-    this.month = month;
     const displayDateClone = new Date(this.displayDate);
     this.view = "days";
-    displayDateClone.setMonth(this.month);
+    displayDateClone.setMonth(month);
     this.displayDate = displayDateClone;
     this.emit("sgds-view", { detail: this.view });
     //once clicked, should change view to days, and hold value and change view
@@ -158,9 +175,8 @@ export class DatepickerCalendar extends SgdsElement {
   // clickhandler for year view buttons
   /** @internal */
   private onClickYear(year: number) {
-    this.year = year;
     const displayDateClone = new Date(this.displayDate);
-    displayDateClone.setFullYear(this.year);
+    displayDateClone.setFullYear(year);
     this.displayDate = displayDateClone;
     this.view = "months";
     this.emit("sgds-view", { detail: this.view });
@@ -214,7 +230,7 @@ export class DatepickerCalendar extends SgdsElement {
             cursor: "not-allowed"
           };
           const buttonStyles = {
-            cursor: "pointer",
+            cursor: "pointer"
             // borderRadius: "0"
           };
           week.push(

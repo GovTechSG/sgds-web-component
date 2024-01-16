@@ -100,12 +100,6 @@
         sgds-button {
             flex: 1;
         }
-
-
-        sgds-datepicker {
-            --datepicker-theme-color: orange;
-        }
-        
     </style>
         <!-- <script src="https://cdn.jsdelivr.net/npm/clk-web-components" type="module"></script> -->
     <script type="module">
@@ -233,6 +227,8 @@
                 </svg> -->
             </sgds-combo-box>
             <h2>Datepicker</h2>
+            <sgds-datepicker mindate="2020-01-01T12:00:00.000Z" maxdate="2030-12-30T12:00:00.000Z" dateformat="DD/MM/YYYY" mode="single">
+            </sgds-datepicker>
             <sgds-datepicker id="myDatepicker" initialValue='["22/06/2023"]' minDate="2023-05-15T12:00:00.000Z"></sgds-datepicker>
 
 <br><br><br><br><br><br><br><br><br>
