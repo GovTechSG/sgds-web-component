@@ -50,4 +50,7 @@ td {
       outline: var(--datepicker-theme-color) solid 2px;
     }
   }
+  &.focus {
+    outline: var(--datepicker-theme-color) solid 2px;
+  }
 }

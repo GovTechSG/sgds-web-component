@@ -3,7 +3,6 @@ import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { styleMap } from "lit/directives/style-map.js";
 import SgdsElement from "../../base/sgds-element";
-import { watch } from "../../utils/watch";
 import styles from "./datepicker-calendar.scss";
 import { ViewEnum } from "./types";
 
@@ -48,47 +47,23 @@ export class DatepickerCalendar extends SgdsElement {
     this.addEventListener("keydown", this.handleKeyPress);
   }
   private handleKeyPress(event: KeyboardEvent) {
-    let nextFocusDate: Date;
-    let nextTd: HTMLElement;
     switch (event.key) {
       case "ArrowUp":
-        nextFocusDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() - 7)));
-        nextTd = this.shadowRoot.querySelector(`td[data-date="${nextFocusDate.toISOString()}"]`) as HTMLElement;
+        this.focusedDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() - 7)));
         break;
-
       case "ArrowDown":
-        nextFocusDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() + 7)));
-        nextTd = this.shadowRoot.querySelector(`td[data-date="${nextFocusDate.toISOString()}"]`) as HTMLElement;
+        this.focusedDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() + 7)));
         break;
       case "ArrowLeft":
-        nextFocusDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() - 1)));
-        nextTd = this.shadowRoot.querySelector(`td[data-date="${nextFocusDate.toISOString()}"]`) as HTMLElement;
+        this.focusedDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() - 1)));
         break;
       case "ArrowRight":
-        nextFocusDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() + 1)));
-        nextTd = this.shadowRoot.querySelector(`td[data-date="${nextFocusDate.toISOString()}"]`) as HTMLElement;
+        this.focusedDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() + 1)));
         break;
       default:
         return;
     }
-    nextTd.setAttribute("tabindex", "0");
-    nextTd.focus();
-  }
-  @watch("show", { waitUntilFirstUpdate: true })
-  async handleShowChange() {
-    if (this.selectedDate.length === 0) {
-      const todayDayEl: HTMLElement = this.shadowRoot.querySelector(`td[data-day="${this.displayDate.getDate()}"]`);
-      todayDayEl.setAttribute("tabindex", "0");
-      todayDayEl.focus();
-      //oc this.focusedDate = this.displayDate
-    } else {
-      // range or mode will focus on the first date
-      const selectedDay = this.selectedDate[0].getDate();
-      const selectedTd: HTMLElement = this.shadowRoot.querySelector(`td[data-day="${selectedDay}"]`);
-      selectedTd.setAttribute("tabindex", "0");
-      selectedTd.focus();
-      this.focusedDate = this.selectedDate[0];
-    }
+    this._focusOnCalendarCell();
   }
 
   /** @internal */
@@ -183,10 +158,35 @@ export class DatepickerCalendar extends SgdsElement {
 
     this.emit("sgds-selectyear", { detail: this.displayDate });
   }
+  firstUpdated() {
+    if (this.selectedDate.length > 0) {
+      this.focusedDate = this.setTimeToNoon(this.selectedDate[0]);
+    }
+  }
+  updated() {
+    /** For KeyboardNavigation:
+     * Runs after render has completed and td of next month has appeared.
+     * For the case when calendar view changes to the next month
+     * */
+    this._focusOnCalendarCell();
+  }
+  /**Shifts focus from Input to Calendar */
+  public focusOnCalendar(toBlurEl: HTMLElement) {
+    toBlurEl.blur();
+    this._focusOnCalendarCell();
+  }
 
+  private _focusOnCalendarCell() {
+    const focusTd: HTMLElement = this.shadowRoot.querySelector(`td[data-date="${this.focusedDate.toISOString()}"]`);
+    if (focusTd) {
+      focusTd.focus();
+    } else {
+      /** Change month view */
+      this.emit("sgds-view-date", { detail: this.focusedDate });
+    }
+  }
   render() {
     console.log("render");
-    console.log("view", this.view);
     const selectedDates = this.selectedDate.map(d => this.setTimeToNoon(d));
 
     const rangeSelectedDates = this.generateIncrementDays(new Date(selectedDates[0]), new Date(selectedDates[1]));
@@ -242,9 +242,11 @@ export class DatepickerCalendar extends SgdsElement {
                 "text-primary": isCurrentDay && isCurrentMonth && isCurrentYear,
                 active: isSelected,
                 disabled: beforeMinDate || afterMinDate
+                // focus: this.focusedDate.toISOString() === date
               })}
               style=${styleMap(beforeMinDate || afterMinDate ? { ...buttonStyles, ...mutedButtonStyle } : buttonStyles)}
               @click=${clickHandler}
+              tabindex=${this.focusedDate === new Date(date) ? "0" : "-1"}
             >
               ${day}
             </td>`

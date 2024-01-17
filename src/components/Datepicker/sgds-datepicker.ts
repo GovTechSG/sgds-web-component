@@ -1,6 +1,6 @@
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property, queryAsync, state } from "lit/decorators.js";
 import { live } from "lit/directives/live.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
@@ -85,6 +85,22 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
         }
       }
     ];
+  }
+  /**@internal */
+  @queryAsync("sgds-input")
+  private dropdownRef: Promise<SgdsInput>;
+
+  @queryAsync("sgds-datepicker-calendar")
+  private calendar: Promise<DatepickerCalendar>;
+
+  async firstUpdated() {
+    super.firstUpdated();
+    if (this.menuIsOpen) {
+      const input = await this.dropdownRef;
+      this.showMenu();
+      const cal = await this.calendar;
+      cal.focusOnCalendar(input);
+    }
   }
 
   /** @internal */
