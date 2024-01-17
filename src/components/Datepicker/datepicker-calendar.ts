@@ -60,6 +60,9 @@ export class DatepickerCalendar extends SgdsElement {
       case "ArrowRight":
         this.focusedDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() + 1)));
         break;
+      case "Enter":
+        this.onClickDay(event);
+        break;
       default:
         return;
     }
@@ -92,10 +95,15 @@ export class DatepickerCalendar extends SgdsElement {
   }
 
   /** @internal */
-  private onClickDay(event: MouseEvent) {
-    const day = (event.currentTarget as HTMLTableCellElement).dataset.day;
+  private onClickDay(event: MouseEvent | KeyboardEvent) {
+    const { day, date } = (event.composedPath()[0] as HTMLTableCellElement).dataset;
+
     const displayDateClone = new Date(this.displayDate);
     displayDateClone.setDate(parseInt(day));
+    /** update new focused date for mouse click */
+    if (event.type === "click") {
+      this.focusedDate = this.setTimeToNoon(new Date(date));
+    }
 
     if (this.mode === "single") {
       // Single mode: Select a single date
@@ -182,6 +190,7 @@ export class DatepickerCalendar extends SgdsElement {
       focusTd.focus();
     } else {
       /** Change month view */
+      console.log("change view date in caldner");
       this.emit("sgds-view-date", { detail: this.focusedDate });
     }
   }

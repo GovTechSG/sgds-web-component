@@ -83,17 +83,18 @@ export class DatepickerHeader extends SgdsElement {
 
   /** @internal */
   private handleClickNext() {
+    console.log("hanldeclikcnexk");
     const { view, displayDate } = this;
     const newDisplayDate = new Date(displayDate);
     newDisplayDate.setDate(1);
 
-    newDisplayDate.setDate(1);
     if (view === "months") {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() + 1);
     } else if (this.view === "years") {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() + 10);
     } else {
       newDisplayDate.setMonth(newDisplayDate.getMonth() + 1);
+      console.log({ newDisplayDate });
     }
     this.displayDate = newDisplayDate; // Update the displayDate property
     //emit event to render correct view

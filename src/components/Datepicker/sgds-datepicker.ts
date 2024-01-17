@@ -279,6 +279,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   /** @internal */
   private handleDateChanged(event: CustomEvent<Date>) {
+    console.log(event.composedPath());
     this.displayDate = event.detail;
   }
 
