@@ -5,6 +5,7 @@ import { styleMap } from "lit/directives/style-map.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./datepicker-calendar.scss";
 import { ViewEnum } from "./types";
+import { watch } from "../../utils/watch";
 
 const TODAY_DATE = new Date();
 export class DatepickerCalendar extends SgdsElement {
@@ -34,7 +35,7 @@ export class DatepickerCalendar extends SgdsElement {
   /** @internal */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
 
-  @state() focusedDate: Date = this.setTimeToNoon(this.displayDate);
+  private focusedDate: Date = this.setTimeToNoon(this.displayDate);
 
   /** @internal */
   @property() view: ViewEnum;
@@ -42,22 +43,32 @@ export class DatepickerCalendar extends SgdsElement {
   /** @internal */
   @property({ type: Boolean }) show: boolean;
 
+  @watch("displayDate", { waitUntilFirstUpdate: true })
+  updateFocusedDate() {
+    console.log("displayDate changing", this.displayDate);
+    this.focusedDate = this.setTimeToNoon(this.displayDate);
+  }
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("keydown", this.handleKeyPress);
   }
   private handleKeyPress(event: KeyboardEvent) {
+    event.preventDefault();
     switch (event.key) {
       case "ArrowUp":
+        this._blurCalendarCell();
         this.focusedDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() - 7)));
         break;
       case "ArrowDown":
+        this._blurCalendarCell();
         this.focusedDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() + 7)));
         break;
       case "ArrowLeft":
+        this._blurCalendarCell();
         this.focusedDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() - 1)));
         break;
       case "ArrowRight":
+        this._blurCalendarCell();
         this.focusedDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() + 1)));
         break;
       case "Enter":
@@ -176,7 +187,10 @@ export class DatepickerCalendar extends SgdsElement {
      * Runs after render has completed and td of next month has appeared.
      * For the case when calendar view changes to the next month
      * */
-    this._focusOnCalendarCell();
+    if (this.view === "days") {
+      this._focusOnCalendarCell();
+    }
+    // this.emit("sgds-change-month", { detail: this.focusedDate });
   }
   /**Shifts focus from Input to Calendar */
   public focusOnCalendar(toBlurEl: HTMLElement) {
@@ -184,14 +198,22 @@ export class DatepickerCalendar extends SgdsElement {
     this._focusOnCalendarCell();
   }
 
-  private _focusOnCalendarCell() {
-    const focusTd: HTMLElement = this.shadowRoot.querySelector(`td[data-date="${this.focusedDate.toISOString()}"]`);
-    if (focusTd) {
-      focusTd.focus();
+  private _blurCalendarCell() {
+    const targetTd: HTMLElement = this.shadowRoot.querySelector(`td[data-date="${this.focusedDate.toISOString()}"]`);
+    targetTd.setAttribute("tabindex", "-1");
+    targetTd.blur();
+  }
+  private async _focusOnCalendarCell() {
+    const targetTd: HTMLElement = this.shadowRoot.querySelector(`td[data-date="${this.focusedDate.toISOString()}"]`);
+    if (targetTd) {
+      targetTd.setAttribute("tabindex", "0");
+      targetTd.focus();
+      // this.emit("sgds-change-month", { detail: this.focusedDate });
     } else {
       /** Change month view */
-      console.log("change view date in caldner");
-      this.emit("sgds-view-date", { detail: this.focusedDate });
+      this.emit("sgds-change-month", { detail: this.focusedDate });
+
+      // this._focusOnCalendarCell();
     }
   }
   render() {
@@ -204,8 +226,8 @@ export class DatepickerCalendar extends SgdsElement {
     const maximumDate = this.maxDate ? this.setTimeToNoon(new Date(this.maxDate)) : null;
     const year = this.displayDate.getFullYear();
     const month = this.displayDate.getMonth();
-    const firstDay = new Date(year, month, 1);
-    const startingDay = firstDay.getDay();
+    const firstDateOfMonth = new Date(year, month, 1);
+    const startingDayOfMonth = firstDateOfMonth.getDay();
     let monthLength = DatepickerCalendar.daysInMonth[month];
     if (month == 1) {
       if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
@@ -218,7 +240,7 @@ export class DatepickerCalendar extends SgdsElement {
     for (let i = 0; i < 9; i++) {
       const week = [];
       for (let j = 0; j <= 6; j++) {
-        if (day <= monthLength && (i > 0 || j >= startingDay)) {
+        if (day <= monthLength && (i > 0 || j >= startingDayOfMonth)) {
           const date = new Date(year, month, day, 12, 0, 0, 0).toISOString();
           const todaysDate = new Date();
 

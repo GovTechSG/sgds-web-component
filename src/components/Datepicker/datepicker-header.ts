@@ -31,10 +31,10 @@ export class DatepickerHeader extends SgdsElement {
   @property()
   view: ViewEnum;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.displayDate = new Date(); // Set the current date as the displayDate
-  }
+  // connectedCallback() {
+  //   super.connectedCallback();
+  //   this.displayDate = new Date(); // Set the current date as the displayDate
+  // }
 
   /** @internal */
   private changeView() {
@@ -78,15 +78,13 @@ export class DatepickerHeader extends SgdsElement {
     }
     this.displayDate = newDisplayDate; // Update the displayDate property
     // emit event to render correct view
-    this.emit("sgds-view-date", { detail: this.displayDate });
+    this.emit("sgds-change-month", { detail: this.displayDate });
   }
 
   /** @internal */
   private handleClickNext() {
-    console.log("hanldeclikcnexk");
     const { view, displayDate } = this;
     const newDisplayDate = new Date(displayDate);
-    newDisplayDate.setDate(1);
 
     if (view === "months") {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() + 1);
@@ -94,11 +92,10 @@ export class DatepickerHeader extends SgdsElement {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() + 10);
     } else {
       newDisplayDate.setMonth(newDisplayDate.getMonth() + 1);
-      console.log({ newDisplayDate });
     }
     this.displayDate = newDisplayDate; // Update the displayDate property
     //emit event to render correct view
-    this.emit("sgds-view-date", { detail: this.displayDate });
+    this.emit("sgds-change-month", { detail: this.displayDate });
   }
 
   render() {

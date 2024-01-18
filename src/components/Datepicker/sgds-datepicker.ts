@@ -74,6 +74,9 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   /** @internal */
   @state() private displayDate: Date = new Date();
+  /** @internal */
+
+  @state() private focusedDate: Date = new Date();
 
   constructor() {
     super();
@@ -144,9 +147,9 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   connectedCallback() {
     super.connectedCallback();
-
     this.addEventListener("sgds-view", this.handleViewChanged);
-    this.addEventListener("sgds-view-date", this.handleDateChanged);
+    this.addEventListener("sgds-change-month", this.handleDateChanged);
+    // this.addEventListener("sgds-update-focus", this.handleFocusDateChanged);
     this.addEventListener("sgds-selectmonth", this.handleSelectMonth);
     this.addEventListener("sgds-selectyear", this.handleSelectYear);
     this.addEventListener("sgds-selectdates", this.handleSelectDates);
@@ -245,6 +248,8 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   /** @internal */
   private handleSelectDates(event: CustomEvent<Date[]>) {
     const newSelectedDates = event.detail;
+    this.displayDate = newSelectedDates[0];
+    this.focusedDate = newSelectedDates[0];
     if (this.mode === "range") {
       // Sort the newSelectedDates array in ascending order
       newSelectedDates.sort((a: Date, b: Date) => a.getTime() - b.getTime());
@@ -279,9 +284,13 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   /** @internal */
   private handleDateChanged(event: CustomEvent<Date>) {
-    console.log(event.composedPath());
     this.displayDate = event.detail;
   }
+  // /** @internal */
+  // private handleFocusDateChanged(event: CustomEvent<Date>) {
+  //   this.focusedDate = event.detail;
+
+  // }
 
   /** @internal */
   private handleSelectMonth(event: CustomEvent<Date>) {
@@ -388,6 +397,15 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
         </ul>
       </div>
     `;
+  }
+  /** @internal */
+  private setTimeToNoon(date: Date) {
+    const newDate = new Date(date);
+    newDate.setHours(12);
+    newDate.setMinutes(0);
+    newDate.setSeconds(0);
+    newDate.setMilliseconds(0);
+    return newDate;
   }
 }
 
