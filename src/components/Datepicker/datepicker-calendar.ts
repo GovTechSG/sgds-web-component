@@ -45,7 +45,6 @@ export class DatepickerCalendar extends SgdsElement {
 
   @watch("displayDate", { waitUntilFirstUpdate: true })
   updateFocusedDate() {
-    console.log("displayDate changing", this.displayDate);
     this.focusedDate = this.setTimeToNoon(this.displayDate);
   }
   connectedCallback(): void {
@@ -77,6 +76,10 @@ export class DatepickerCalendar extends SgdsElement {
       default:
         return;
     }
+    // if(this.displayDate.getMonth() !== this.focusedDate.getMonth()){
+    //   this.emit("sgds-change-month", { detail: this.focusedDate });
+    // }
+
     this._focusOnCalendarCell();
   }
 
@@ -183,7 +186,7 @@ export class DatepickerCalendar extends SgdsElement {
     }
   }
   updated() {
-    /** For KeyboardNavigation:
+    /** For KeyboardNavigation (switching months) and ClickNavigation:
      * Runs after render has completed and td of next month has appeared.
      * For the case when calendar view changes to the next month
      * */
@@ -208,16 +211,13 @@ export class DatepickerCalendar extends SgdsElement {
     if (targetTd) {
       targetTd.setAttribute("tabindex", "0");
       targetTd.focus();
-      // this.emit("sgds-change-month", { detail: this.focusedDate });
+      this.emit("sgds-update-focus", { detail: this.focusedDate });
     } else {
       /** Change month view */
       this.emit("sgds-change-month", { detail: this.focusedDate });
-
-      // this._focusOnCalendarCell();
     }
   }
   render() {
-    console.log("render");
     const selectedDates = this.selectedDate.map(d => this.setTimeToNoon(d));
 
     const rangeSelectedDates = this.generateIncrementDays(new Date(selectedDates[0]), new Date(selectedDates[1]));

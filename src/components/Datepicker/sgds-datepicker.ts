@@ -149,7 +149,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     super.connectedCallback();
     this.addEventListener("sgds-view", this.handleViewChanged);
     this.addEventListener("sgds-change-month", this.handleDateChanged);
-    // this.addEventListener("sgds-update-focus", this.handleFocusDateChanged);
+    this.addEventListener("sgds-update-focus", this.handleFocusDateChanged);
     this.addEventListener("sgds-selectmonth", this.handleSelectMonth);
     this.addEventListener("sgds-selectyear", this.handleSelectYear);
     this.addEventListener("sgds-selectdates", this.handleSelectDates);
@@ -287,10 +287,9 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     this.displayDate = event.detail;
   }
   // /** @internal */
-  // private handleFocusDateChanged(event: CustomEvent<Date>) {
-  //   this.focusedDate = event.detail;
-
-  // }
+  private handleFocusDateChanged(event: CustomEvent<Date>) {
+    this.focusedDate = event.detail;
+  }
 
   /** @internal */
   private handleSelectMonth(event: CustomEvent<Date>) {
@@ -383,7 +382,11 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
           part="menu"
           @click=${(event: MouseEvent) => event.stopPropagation()}
         >
-          <sgds-datepicker-header .view=${this.view} .displayDate=${this.displayDate}></sgds-datepicker-header>
+          <sgds-datepicker-header
+            .view=${this.view}
+            .displayDate=${this.displayDate}
+            .focusedDate=${this.focusedDate}
+          ></sgds-datepicker-header>
           <sgds-datepicker-calendar
             .show=${this.menuIsOpen}
             .view=${this.view}

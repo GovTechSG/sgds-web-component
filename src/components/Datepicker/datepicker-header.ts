@@ -26,6 +26,9 @@ export class DatepickerHeader extends SgdsElement {
   /** @internal */
   @property({ attribute: false })
   displayDate: Date;
+  /** @internal */
+  @property({ attribute: false })
+  focusedDate: Date;
 
   /** @internal */
   @property()
@@ -66,15 +69,25 @@ export class DatepickerHeader extends SgdsElement {
 
   /** @internal */
   private handleClickPrevious() {
-    const { view, displayDate } = this;
+    const { view, displayDate, focusedDate } = this;
     const newDisplayDate = new Date(displayDate);
-    newDisplayDate.setDate(1);
     if (view === "months") {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() - 1);
     } else if (this.view === "years") {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() - 10);
     } else {
       newDisplayDate.setMonth(newDisplayDate.getMonth() - 1);
+      /** FocusedDate gets precedence over displayDate  */
+      if (focusedDate.getDate() !== displayDate.getDate()) {
+        // const daysInMonth = new Date(newDisplayDate.getFullYear(),newDisplayDate.getMonth() -1 ,0 ).getDate()
+        // if (focusedDate.getDate() >= daysInMonth){
+        //   console.log("one")
+        //   newDisplayDate.setDate(daysInMonth)
+        // } else {
+        //   console.log("2")
+        newDisplayDate.setDate(focusedDate.getDate());
+        // }
+      }
     }
     this.displayDate = newDisplayDate; // Update the displayDate property
     // emit event to render correct view
@@ -83,7 +96,7 @@ export class DatepickerHeader extends SgdsElement {
 
   /** @internal */
   private handleClickNext() {
-    const { view, displayDate } = this;
+    const { view, displayDate, focusedDate } = this;
     const newDisplayDate = new Date(displayDate);
 
     if (view === "months") {
@@ -92,8 +105,18 @@ export class DatepickerHeader extends SgdsElement {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() + 10);
     } else {
       newDisplayDate.setMonth(newDisplayDate.getMonth() + 1);
+      /** FocusedDate gets precedence over displayDate  */
+      if (focusedDate.getDate() !== displayDate.getDate()) {
+        // const daysInUpcomingMonth = new Date(newDisplayDate.getFullYear(),newDisplayDate.getMonth() + 1,0 ).getDate()
+        // if (focusedDate.getDate() >= daysInUpcomingMonth ){
+        //   newDisplayDate.setDate(daysInUpcomingMonth)
+        // } else {
+        newDisplayDate.setDate(focusedDate.getDate());
+        // }
+      }
     }
     this.displayDate = newDisplayDate; // Update the displayDate property
+
     //emit event to render correct view
     this.emit("sgds-change-month", { detail: this.displayDate });
   }
