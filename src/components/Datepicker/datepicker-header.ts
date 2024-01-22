@@ -1,8 +1,8 @@
 import { html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
+import { styleMap } from "lit/directives/style-map.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./datepicker-header.scss";
-import { styleMap } from "lit/directives/style-map.js";
 import { ViewEnum } from "./types";
 
 const MONTH_LABELS = [

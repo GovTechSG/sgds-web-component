@@ -212,6 +212,11 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     this.emit("sgds-change-date");
   }
 
+  /** get datepicker's input value */
+  public get inputValue() {
+    return this.value;
+  }
+
   /** @internal */
   private makeInputValueString = (startDate: Date, endDate: Date, dateFormat: string) => {
     if (!startDate && !endDate) return "";
@@ -400,15 +405,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
         </ul>
       </div>
     `;
-  }
-  /** @internal */
-  private setTimeToNoon(date: Date) {
-    const newDate = new Date(date);
-    newDate.setHours(12);
-    newDate.setMinutes(0);
-    newDate.setSeconds(0);
-    newDate.setMilliseconds(0);
-    return newDate;
   }
 }
 

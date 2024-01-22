@@ -2,7 +2,10 @@ import { elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testi
 import DatepickerCalendar from "../src/components/Datepicker/datepicker-calendar";
 import DatepickerHeader from "../src/components/Datepicker/datepicker-header";
 import { SgdsDatepicker, SgdsInput } from "../src/components";
+import { setTimeToNoon } from "../src/utils/time";
+import { sendKeys } from "@web/test-runner-commands";
 import "../src/index";
+import sinon from "sinon";
 
 customElements.define("sgds-datepicker-header", DatepickerHeader);
 customElements.define("sgds-datepicker-calendar", DatepickerCalendar);
@@ -414,5 +417,124 @@ describe("sgds-datepicker", () => {
     const input = el.shadowRoot?.querySelector("sgds-input");
 
     expect(input).to.have.attribute("required");
+  });
+});
+
+describe("Datepicker keyboard accesibility", () => {
+  it("when calendar is open, calendar's today's date is focused", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker menuIsOpen></sgds-datepicker>`);
+    const todayDateISO = setTimeToNoon(new Date()).toISOString();
+    const calendar = el.shadowRoot?.querySelector<DatepickerCalendar>("sgds-datepicker-calendar");
+    const tdElement = calendar?.shadowRoot?.querySelector(`td[data-date="${todayDateISO}"]`);
+
+    await waitUntil(() => calendar?.shadowRoot?.activeElement);
+
+    expect(calendar?.shadowRoot?.activeElement === tdElement).to.be.true;
+  });
+  const keys = [
+    {
+      key: "ArrowRight",
+      value: 1
+    },
+    {
+      key: "ArrowLeft",
+      value: -1
+    },
+    {
+      key: "ArrowDown",
+      value: 7
+    },
+    {
+      key: "ArrowUp",
+      value: -7
+    }
+  ];
+  keys.forEach(({ key, value }) => {
+    it(`when keypresed=${key}, focus of dates moves by ${value} days`, async () => {
+      const el = await fixture<SgdsDatepicker>(
+        html`<sgds-datepicker menuIsOpen .initialValue=${["29/06/2023"]}></sgds-datepicker>`
+      );
+      const todayDate = setTimeToNoon(new Date(2023, 5, 29));
+      const todayDateISO = todayDate.toISOString();
+
+      const calendar = el.shadowRoot?.querySelector<DatepickerCalendar>("sgds-datepicker-calendar");
+      const tdElement = calendar?.shadowRoot?.querySelector(`td[data-date="${todayDateISO}"]`);
+
+      await waitUntil(() => calendar?.shadowRoot?.activeElement);
+      expect(calendar?.shadowRoot?.activeElement === tdElement).to.be.true;
+
+      //arrow key next
+      await sendKeys({ press: key });
+      await el.updateComplete;
+
+      const tomorrowDateISO = new Date(todayDate.setDate(todayDate.getDate() + value)).toISOString();
+      const tmrTdElement = calendar?.shadowRoot?.querySelector(`td[data-date="${tomorrowDateISO}"]`);
+
+      expect(calendar?.shadowRoot?.activeElement === tdElement).to.be.false;
+      expect(calendar?.shadowRoot?.activeElement === tmrTdElement).to.be.true;
+    });
+  });
+
+  it("when focused date is entered, populates the input value", async () => {
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker menuIsOpen .initialValue=${["29/06/2023"]}></sgds-datepicker>`
+    );
+    const changeDateHandler = sinon.spy();
+
+    el.addEventListener("sgds-change-date", changeDateHandler);
+
+    const todayDate = setTimeToNoon(new Date(2023, 5, 29));
+    const todayDateISO = todayDate.toISOString();
+    const calendar = el.shadowRoot?.querySelector<DatepickerCalendar>("sgds-datepicker-calendar");
+    const tdElement = calendar?.shadowRoot?.querySelector(`td[data-date="${todayDateISO}"]`);
+
+    expect(el.inputValue).to.equal("29/06/2023");
+
+    await waitUntil(() => calendar?.shadowRoot?.activeElement);
+
+    expect(calendar?.shadowRoot?.activeElement === tdElement).to.be.true;
+
+    await sendKeys({ press: "ArrowLeft" });
+    await sendKeys({ press: "Enter" });
+    await el.updateComplete;
+
+    await waitUntil(() => changeDateHandler.calledOnce);
+    expect(el.inputValue).to.equal("28/06/2023");
+    expect(changeDateHandler).to.have.been.calledOnce;
+  });
+
+  it("when focused, tabindex=0", async () => {
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker menuIsOpen .initialValue=${["29/06/2023"]}></sgds-datepicker>`
+    );
+    const todayDate = setTimeToNoon(new Date(2023, 5, 29));
+    const todayDateISO = todayDate.toISOString();
+    const calendar = el.shadowRoot?.querySelector<DatepickerCalendar>("sgds-datepicker-calendar");
+    const tdElement = calendar?.shadowRoot?.querySelector(`td[data-date="${todayDateISO}"]`);
+
+    expect(tdElement?.getAttribute("tabindex")).to.equal("0");
+  });
+  it("when not focused, tabindex=-1", async () => {
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker menuIsOpen .initialValue=${["29/06/2023"]}></sgds-datepicker>`
+    );
+    const todayDate = setTimeToNoon(new Date(2023, 5, 29));
+    const todayDateISO = todayDate.toISOString();
+    const prevDateISO = setTimeToNoon(new Date(2023, 5, 28)).toISOString();
+    const calendar = el.shadowRoot?.querySelector<DatepickerCalendar>("sgds-datepicker-calendar");
+    const tdElement = calendar?.shadowRoot?.querySelector(`td[data-date="${todayDateISO}"]`);
+    const prevTdElement = calendar?.shadowRoot?.querySelector(`td[data-date="${prevDateISO}"]`);
+    await waitUntil(() => calendar?.shadowRoot?.activeElement);
+
+    expect(calendar?.shadowRoot?.activeElement === tdElement).to.be.true;
+    expect(tdElement?.getAttribute("tabindex")).to.equal("0");
+    expect(prevTdElement?.getAttribute("tabindex")).to.equal("-1");
+
+    await sendKeys({ press: "ArrowLeft" });
+    await waitUntil(() => calendar?.shadowRoot?.activeElement !== tdElement);
+    expect(calendar?.shadowRoot?.activeElement === tdElement).to.be.false;
+
+    expect(tdElement?.getAttribute("tabindex")).to.equal("-1");
+    expect(prevTdElement?.getAttribute("tabindex")).to.equal("0");
   });
 });

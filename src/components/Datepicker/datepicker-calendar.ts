@@ -1,12 +1,12 @@
 import { HTMLTemplateResult, html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { styleMap } from "lit/directives/style-map.js";
 import SgdsElement from "../../base/sgds-element";
+import { setTimeToNoon } from "../../utils/time";
+import { watch } from "../../utils/watch";
 import styles from "./datepicker-calendar.scss";
 import { ViewEnum } from "./types";
-import { watch } from "../../utils/watch";
-
 const TODAY_DATE = new Date();
 export class DatepickerCalendar extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
@@ -35,7 +35,7 @@ export class DatepickerCalendar extends SgdsElement {
   /** @internal */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
 
-  private focusedDate: Date = this.setTimeToNoon(this.displayDate);
+  private focusedDate: Date = setTimeToNoon(this.displayDate);
 
   /** @internal */
   @property() view: ViewEnum;
@@ -45,7 +45,7 @@ export class DatepickerCalendar extends SgdsElement {
 
   @watch("displayDate", { waitUntilFirstUpdate: true })
   updateFocusedDate() {
-    this.focusedDate = this.setTimeToNoon(this.displayDate);
+    this.focusedDate = setTimeToNoon(this.displayDate);
   }
   connectedCallback(): void {
     super.connectedCallback();
@@ -56,19 +56,19 @@ export class DatepickerCalendar extends SgdsElement {
     switch (event.key) {
       case "ArrowUp":
         this._blurCalendarCell();
-        this.focusedDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() - 7)));
+        this.focusedDate = setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() - 7)));
         break;
       case "ArrowDown":
         this._blurCalendarCell();
-        this.focusedDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() + 7)));
+        this.focusedDate = setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() + 7)));
         break;
       case "ArrowLeft":
         this._blurCalendarCell();
-        this.focusedDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() - 1)));
+        this.focusedDate = setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() - 1)));
         break;
       case "ArrowRight":
         this._blurCalendarCell();
-        this.focusedDate = this.setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() + 1)));
+        this.focusedDate = setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() + 1)));
         break;
       case "Enter":
         this.onClickDay(event);
@@ -81,16 +81,6 @@ export class DatepickerCalendar extends SgdsElement {
     // }
 
     this._focusOnCalendarCell();
-  }
-
-  /** @internal */
-  private setTimeToNoon(date: Date) {
-    const newDate = new Date(date);
-    newDate.setHours(12);
-    newDate.setMinutes(0);
-    newDate.setSeconds(0);
-    newDate.setMilliseconds(0);
-    return newDate;
   }
 
   /** @internal */
@@ -116,7 +106,7 @@ export class DatepickerCalendar extends SgdsElement {
     displayDateClone.setDate(parseInt(day));
     /** update new focused date for mouse click */
     if (event.type === "click") {
-      this.focusedDate = this.setTimeToNoon(new Date(date));
+      this.focusedDate = setTimeToNoon(new Date(date));
     }
 
     if (this.mode === "single") {
@@ -147,10 +137,10 @@ export class DatepickerCalendar extends SgdsElement {
     }
 
     // Check if the selected date is before minDate or after maxDate
-    const minimumDate = this.minDate ? this.setTimeToNoon(new Date(this.minDate)) : null;
-    const maximumDate = this.maxDate ? this.setTimeToNoon(new Date(this.maxDate)) : null;
+    const minimumDate = this.minDate ? setTimeToNoon(new Date(this.minDate)) : null;
+    const maximumDate = this.maxDate ? setTimeToNoon(new Date(this.maxDate)) : null;
 
-    const selectedDate = this.setTimeToNoon(displayDateClone);
+    const selectedDate = setTimeToNoon(displayDateClone);
     if ((minimumDate && selectedDate < minimumDate) || (maximumDate && selectedDate > maximumDate)) {
       event.stopPropagation();
       event.preventDefault();
@@ -182,7 +172,7 @@ export class DatepickerCalendar extends SgdsElement {
   }
   firstUpdated() {
     if (this.selectedDate.length > 0) {
-      this.focusedDate = this.setTimeToNoon(this.selectedDate[0]);
+      this.focusedDate = setTimeToNoon(this.selectedDate[0]);
     }
   }
   updated() {
@@ -218,12 +208,12 @@ export class DatepickerCalendar extends SgdsElement {
     }
   }
   render() {
-    const selectedDates = this.selectedDate.map(d => this.setTimeToNoon(d));
+    const selectedDates = this.selectedDate.map(d => setTimeToNoon(d));
 
     const rangeSelectedDates = this.generateIncrementDays(new Date(selectedDates[0]), new Date(selectedDates[1]));
 
-    const minimumDate = this.minDate ? this.setTimeToNoon(new Date(this.minDate)) : null;
-    const maximumDate = this.maxDate ? this.setTimeToNoon(new Date(this.maxDate)) : null;
+    const minimumDate = this.minDate ? setTimeToNoon(new Date(this.minDate)) : null;
+    const maximumDate = this.maxDate ? setTimeToNoon(new Date(this.maxDate)) : null;
     const year = this.displayDate.getFullYear();
     const month = this.displayDate.getMonth();
     const firstDateOfMonth = new Date(year, month, 1);
