@@ -4,16 +4,16 @@
   color: var(--mainnav-item-theme-color);
   border-color: var(--mainnav-item-theme-color);
 }
+
 .nav-link {
   gap: 1rem;
-}
-.nav-link.show {
-  @extend %active-shared;
+  &.show,
+  &.active{
+    @extend %active-shared;
+  }
 }
 
-.nav-link.active {
-  @extend %active-shared;
-}
+
 .dropdown-menu {
   margin-top: 0;
   border: 1px solid rgba(#000, 0.1);
