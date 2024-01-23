@@ -79,19 +79,12 @@ export class DatepickerHeader extends SgdsElement {
       newDisplayDate.setMonth(newDisplayDate.getMonth() - 1);
       /** FocusedDate gets precedence over displayDate  */
       if (focusedDate.getDate() !== displayDate.getDate()) {
-        // const daysInMonth = new Date(newDisplayDate.getFullYear(),newDisplayDate.getMonth() -1 ,0 ).getDate()
-        // if (focusedDate.getDate() >= daysInMonth){
-        //   console.log("one")
-        //   newDisplayDate.setDate(daysInMonth)
-        // } else {
-        //   console.log("2")
         newDisplayDate.setDate(focusedDate.getDate());
-        // }
       }
     }
     this.displayDate = newDisplayDate; // Update the displayDate property
     // emit event to render correct view
-    this.emit("sgds-change-month", { detail: this.displayDate });
+    this.emit("sgds-change-calendar", { detail: this.displayDate });
   }
 
   /** @internal */
@@ -118,7 +111,7 @@ export class DatepickerHeader extends SgdsElement {
     this.displayDate = newDisplayDate; // Update the displayDate property
 
     //emit event to render correct view
-    this.emit("sgds-change-month", { detail: this.displayDate });
+    this.emit("sgds-change-calendar", { detail: this.displayDate });
   }
 
   render() {

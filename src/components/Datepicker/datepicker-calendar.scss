@@ -27,6 +27,9 @@ button.year {
     color: var(--datepicker-theme-color);
     background-color: var(--datepicker-hover-bg-color);
   }
+  &:focus {
+    outline: var(--datepicker-theme-color) solid 2px;
+  }
 }
 
 td {

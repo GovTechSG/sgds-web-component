@@ -11,9 +11,6 @@ import { DatepickerHeader } from "./datepicker-header";
 import styles from "./sgds-datepicker.scss";
 import { ViewEnum } from "./types";
 
-const ARROW_DOWN = "ArrowDown";
-const ARROW_UP = "ArrowUp";
-
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
 /**
@@ -148,7 +145,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener("sgds-view", this.handleViewChanged);
-    this.addEventListener("sgds-change-month", this.handleDateChanged);
+    this.addEventListener("sgds-change-calendar", this.handleDateChanged);
     this.addEventListener("sgds-update-focus", this.handleFocusDateChanged);
     this.addEventListener("sgds-selectmonth", this.handleSelectMonth);
     this.addEventListener("sgds-selectyear", this.handleSelectYear);
