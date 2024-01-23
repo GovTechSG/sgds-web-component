@@ -242,9 +242,9 @@ describe("sgds-mainnav-dropdown", () => {
     const el = await fixture(html`<sgds-mainnav-dropdown togglerText="test"></sgds-mainnav-dropdown>`);
     assert.shadowDom.equal(
       el,
-      ` <li class="nav-item dropdown">
+      ` <li class="nav-item dropdown sgds">
       <a
-        class="nav-link"
+        class="nav-link dropdown-toggle"
         aria-expanded="false"
         tabindex="0"
         role="button"
@@ -270,5 +270,10 @@ describe("sgds-mainnav-dropdown", () => {
     </li>`,
       { ignoreAttributes: ["id"] }
     );
+  });
+  it("when prop active=true, .active class is defined in the button", async () => {
+    const el = await fixture(html`<sgds-mainnav-dropdown active togglerText="test"></sgds-mainnav-dropdown>`);
+
+    expect(el.shadowRoot?.querySelector("a[role=button]")).to.have.class("active");
   });
 });
