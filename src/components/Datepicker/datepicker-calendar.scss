@@ -42,7 +42,7 @@ td {
   &[data-day] {
     &:hover:not(.disabled),
     &.active {
-      color: var(--datepicker-theme-color);
+      // color: var(--datepicker-theme-color);
       background-color: var(--datepicker-hover-bg-color);
     }
     // &.active:focus {

@@ -29,15 +29,13 @@ export class DatepickerHeader extends SgdsElement {
   /** @internal */
   @property({ attribute: false })
   focusedDate: Date;
+  /** @internal */
+  @property({ attribute: false })
+  selectedDate: Date[] = [];
 
   /** @internal */
   @property()
   view: ViewEnum;
-
-  // connectedCallback() {
-  //   super.connectedCallback();
-  //   this.displayDate = new Date(); // Set the current date as the displayDate
-  // }
 
   /** @internal */
   private changeView() {
@@ -62,7 +60,15 @@ export class DatepickerHeader extends SgdsElement {
       return html` ${displayDate.getFullYear()} `;
     }
     if (view === "years") {
-      return html` ${displayDate.getFullYear() - 5} - ${displayDate.getFullYear() + 6} `;
+      const CURRENT_YEAR = new Date().getFullYear();
+      const displayYear = this.displayDate.getFullYear();
+      const remainder = (displayYear - CURRENT_YEAR) % 12;
+      let yearsPosition: number;
+      remainder < 0 ? (yearsPosition = 12 + remainder) : (yearsPosition = remainder);
+
+      const startLimit = displayYear - yearsPosition;
+      const endLimit = displayYear - yearsPosition + 12 - 1;
+      return html` ${startLimit} - ${endLimit} `;
     }
     return html` ${MONTH_LABELS[displayDate.getMonth()]} ${displayDate.getFullYear()} `;
   }
@@ -74,7 +80,7 @@ export class DatepickerHeader extends SgdsElement {
     if (view === "months") {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() - 1);
     } else if (this.view === "years") {
-      newDisplayDate.setFullYear(newDisplayDate.getFullYear() - 10);
+      newDisplayDate.setFullYear(newDisplayDate.getFullYear() - 12);
     } else {
       newDisplayDate.setMonth(newDisplayDate.getMonth() - 1);
       /** FocusedDate gets precedence over displayDate  */
@@ -95,7 +101,7 @@ export class DatepickerHeader extends SgdsElement {
     if (view === "months") {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() + 1);
     } else if (this.view === "years") {
-      newDisplayDate.setFullYear(newDisplayDate.getFullYear() + 10);
+      newDisplayDate.setFullYear(newDisplayDate.getFullYear() + 12);
     } else {
       newDisplayDate.setMonth(newDisplayDate.getMonth() + 1);
       /** FocusedDate gets precedence over displayDate  */
@@ -121,7 +127,7 @@ export class DatepickerHeader extends SgdsElement {
     return html`
       <div class="datepicker-header dropdown-header" role="heading">
         <div class="text-center d-flex justify-content-between align-items-center">
-          <button @click="${this.handleClickPrevious}">
+          <button @click="${this.handleClickPrevious}" tabindex="0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -136,10 +142,14 @@ export class DatepickerHeader extends SgdsElement {
               />
             </svg>
           </button>
-          <button @click=${this.changeView} style=${styleMap(this.view === "years" ? buttonYearStyle : {})}>
+          <button
+            @click=${this.changeView}
+            style=${styleMap(this.view === "years" ? buttonYearStyle : {})}
+            tabindex="0"
+          >
             ${this.renderHeader()}
           </button>
-          <button @click="${this.handleClickNext}">
+          <button @click="${this.handleClickNext}" tabindex="0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

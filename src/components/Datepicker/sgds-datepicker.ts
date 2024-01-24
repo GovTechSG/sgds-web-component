@@ -388,6 +388,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
             .view=${this.view}
             .displayDate=${this.displayDate}
             .focusedDate=${this.focusedDate}
+            .selectedDate=${this.selectedDateRange}
           ></sgds-datepicker-header>
           <sgds-datepicker-calendar
             .show=${this.menuIsOpen}
