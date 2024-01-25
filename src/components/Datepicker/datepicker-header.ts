@@ -44,7 +44,9 @@ export class DatepickerHeader extends SgdsElement {
 
   @watch("focusedTabIndex", { waitUntilFirstUpdate: true })
   handleFocusedTabIndexChange() {
-    if (this.focusedTabIndex !== 3) {
+    console.log("yop")
+    if (this.focusedTabIndex < 3) {
+      console.log("hi")
       const buttonToFocus: HTMLButtonElement = this.shadowRoot.querySelector(
         `button[tabindex="${this.focusedTabIndex}"]`
       );

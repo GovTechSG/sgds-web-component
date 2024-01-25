@@ -144,11 +144,14 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     );
   }
   private handleTab(event: KeyboardEvent) {
-    if (event.key === "Tab") {
+    const tabIndexArray = Array(4);
+    if (event.shiftKey && event.key === 'Tab') {
       event.preventDefault();
-      const tabIndexArray = Array(4);
-      this.focusedTabIndex = (this.focusedTabIndex + 1) % tabIndexArray.length;
-    }
+      this.focusedTabIndex = (this.focusedTabIndex - 1 + tabIndexArray.length) % tabIndexArray.length;
+    } else if (event.key === "Tab") {
+    event.preventDefault();
+    this.focusedTabIndex = (this.focusedTabIndex + 1 + tabIndexArray.length) % tabIndexArray.length;
+  }
   }
   connectedCallback() {
     super.connectedCallback();
