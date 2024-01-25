@@ -7,6 +7,9 @@
     color: var(--datepicker-theme-color);
     border: none;
     font-weight: bold;
+    &:focus {
+      outline: var(--datepicker-theme-color) solid 2px;
+    }
   }
 
   svg {

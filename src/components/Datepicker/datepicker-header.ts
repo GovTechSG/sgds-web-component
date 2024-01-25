@@ -4,6 +4,7 @@ import { styleMap } from "lit/directives/style-map.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./datepicker-header.scss";
 import { ViewEnum } from "./types";
+import { watch } from "../../utils/watch";
 
 const MONTH_LABELS = [
   "January",
@@ -38,6 +39,22 @@ export class DatepickerHeader extends SgdsElement {
   view: ViewEnum;
 
   /** @internal */
+  @property()
+  focusedTabIndex: number;
+
+  @watch("focusedTabIndex", { waitUntilFirstUpdate: true })
+  handleFocusedTabIndexChange() {
+    if (this.focusedTabIndex !== 3) {
+      const buttonToFocus: HTMLButtonElement = this.shadowRoot.querySelector(
+        `button[tabindex="${this.focusedTabIndex}"]`
+      );
+      buttonToFocus.focus();
+      return;
+    }
+    return;
+  }
+
+  /** @internal */
   private changeView() {
     switch (this.view) {
       case "days":
@@ -63,9 +80,7 @@ export class DatepickerHeader extends SgdsElement {
       const CURRENT_YEAR = new Date().getFullYear();
       const displayYear = this.displayDate.getFullYear();
       const remainder = (displayYear - CURRENT_YEAR) % 12;
-      let yearsPosition: number;
-      remainder < 0 ? (yearsPosition = 12 + remainder) : (yearsPosition = remainder);
-
+      const yearsPosition = remainder < 0 ? 12 + remainder : remainder;
       const startLimit = displayYear - yearsPosition;
       const endLimit = displayYear - yearsPosition + 12 - 1;
       return html` ${startLimit} - ${endLimit} `;
@@ -145,11 +160,11 @@ export class DatepickerHeader extends SgdsElement {
           <button
             @click=${this.changeView}
             style=${styleMap(this.view === "years" ? buttonYearStyle : {})}
-            tabindex="0"
+            tabindex="1"
           >
             ${this.renderHeader()}
           </button>
-          <button @click="${this.handleClickNext}" tabindex="0">
+          <button @click="${this.handleClickNext}" tabindex="2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

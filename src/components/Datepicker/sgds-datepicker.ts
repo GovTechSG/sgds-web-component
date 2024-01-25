@@ -75,6 +75,8 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   @state() private focusedDate: Date = new Date();
 
+  @state() private focusedTabIndex = 3;
+
   constructor() {
     super();
     this.modifierOpt = [
@@ -141,7 +143,13 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
         .replace("/", "\\/")
     );
   }
-
+  private handleTab(event: KeyboardEvent) {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      const tabIndexArray = Array(4);
+      this.focusedTabIndex = (this.focusedTabIndex + 1) % tabIndexArray.length;
+    }
+  }
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener("sgds-view", this.handleViewChanged);
@@ -150,6 +158,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     this.addEventListener("sgds-selectmonth", this.handleSelectMonth);
     this.addEventListener("sgds-selectyear", this.handleSelectYear);
     this.addEventListener("sgds-selectdates", this.handleSelectDates);
+    this.addEventListener("keydown", this.handleTab);
 
     if (this.initialValue && this.initialValue.length > 0) {
       // Validate initialValue against the dateFormat regex
@@ -389,6 +398,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
             .displayDate=${this.displayDate}
             .focusedDate=${this.focusedDate}
             .selectedDate=${this.selectedDateRange}
+            .focusedTabIndex=${this.focusedTabIndex}
           ></sgds-datepicker-header>
           <sgds-datepicker-calendar
             .show=${this.menuIsOpen}
@@ -398,7 +408,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
             minDate=${this.minDate}
             maxDate=${this.maxDate}
             .selectedDate=${this.selectedDateRange}
-            tabindex="1"
+            .focusedTabIndex=${this.focusedTabIndex}
           ></sgds-datepicker-calendar>
         </ul>
       </div>

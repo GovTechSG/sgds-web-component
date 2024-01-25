@@ -1,4 +1,4 @@
-const CURRENT_YEAR = new Date().getFullYear()
+const CURRENT_YEAR = new Date().getFullYear();
 export const calculateYearRange = (displayDate: Date) => {
   // keeping the year range position to be always fixed by setting current year to the first element of the calendar
   const displayYear = displayDate.getFullYear();
@@ -9,7 +9,7 @@ export const calculateYearRange = (displayDate: Date) => {
   for (let i = startLimit; i < endLimit + 1; i++) {
     yearArray.push(i);
   }
-  return {yearArray,displayYear};
+  return { yearArray, displayYear };
 };
 
 export const setTimeToNoon = (date: Date): Date => {
