@@ -44,9 +44,7 @@ export class DatepickerHeader extends SgdsElement {
 
   @watch("focusedTabIndex", { waitUntilFirstUpdate: true })
   handleFocusedTabIndexChange() {
-    console.log("yop")
     if (this.focusedTabIndex < 3) {
-      console.log("hi")
       const buttonToFocus: HTMLButtonElement = this.shadowRoot.querySelector(
         `button[tabindex="${this.focusedTabIndex}"]`
       );
@@ -74,7 +72,6 @@ export class DatepickerHeader extends SgdsElement {
   /** @internal */
   private renderHeader() {
     const { view, displayDate } = this;
-
     if (view === "months") {
       return html` ${displayDate.getFullYear()} `;
     }
@@ -100,7 +97,12 @@ export class DatepickerHeader extends SgdsElement {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() - 12);
     } else {
       newDisplayDate.setMonth(newDisplayDate.getMonth() - 1);
-      /** FocusedDate gets precedence over displayDate  */
+      /**
+       * FocusedDate gets precedence over displayDate.
+       *  This happens when the arrow keys are pressed to
+       *  change focus date and user clicks the arrow buttons to
+       * shift months
+       */
       if (focusedDate.getDate() !== displayDate.getDate()) {
         newDisplayDate.setDate(focusedDate.getDate());
       }
@@ -123,12 +125,7 @@ export class DatepickerHeader extends SgdsElement {
       newDisplayDate.setMonth(newDisplayDate.getMonth() + 1);
       /** FocusedDate gets precedence over displayDate  */
       if (focusedDate.getDate() !== displayDate.getDate()) {
-        // const daysInUpcomingMonth = new Date(newDisplayDate.getFullYear(),newDisplayDate.getMonth() + 1,0 ).getDate()
-        // if (focusedDate.getDate() >= daysInUpcomingMonth ){
-        //   newDisplayDate.setDate(daysInUpcomingMonth)
-        // } else {
         newDisplayDate.setDate(focusedDate.getDate());
-        // }
       }
     }
     this.displayDate = newDisplayDate; // Update the displayDate property

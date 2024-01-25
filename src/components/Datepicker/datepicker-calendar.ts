@@ -137,8 +137,13 @@ export class DatepickerCalendar extends SgdsElement {
   }
 
   /** @internal */
-  private generateIncrementDates() {
+  private generateIncrementDates(): Date[] {
     const start = setTimeToNoon(this.selectedDate[0]);
+
+    if (this.selectedDate.length < 2) {
+      return [start];
+    }
+
     const end = setTimeToNoon(this.selectedDate[1]);
     const arr: Date[] = [];
     if (start.getTime() < end.getTime()) {
@@ -204,10 +209,11 @@ export class DatepickerCalendar extends SgdsElement {
 
   // clickhandler for month view buttons
   /** @internal */
-  private onClickMonth(month: number) {
+  private onClickMonth(month: number, year: number = this.focusedDate.getFullYear()) {
     const displayDateClone = new Date(this.displayDate);
     this.view = "days";
     displayDateClone.setMonth(month);
+    displayDateClone.setFullYear(year);
     this.displayDate = displayDateClone;
     this.emit("sgds-view", { detail: this.view });
     //once clicked, should change view to days, and hold value and change view
@@ -248,25 +254,13 @@ export class DatepickerCalendar extends SgdsElement {
   }
   /** @internal */
   private getFocusedTarget(): HTMLElement {
-    const dataAttribute = {
-      days: {
-        key: "data-date",
-        value: this.focusedDate.toISOString(),
-        element: "td"
-      },
-      months: {
-        key: "data-month",
-        value: this.focusedDate.getMonth(),
-        element: "button"
-      },
-      years: {
-        key: "data-year",
-        value: this.focusedDate.getFullYear(),
-        element: "button"
-      }
+    const queryObj = {
+      days: `td[data-date="${this.focusedDate.toISOString()}"]`,
+      months: `button[data-month="${this.focusedDate.getMonth()}"][data-year="${this.focusedDate.getFullYear()}"]`,
+      years: `button[data-year="${this.focusedDate.getFullYear()}"]`
     };
-    const { key, value, element } = dataAttribute[this.view];
-    const targetEl: HTMLElement = this.shadowRoot.querySelector(`${element}[${key}="${value}"]`);
+    const queryString = queryObj[this.view];
+    const targetEl: HTMLElement = this.shadowRoot.querySelector(`${queryString}`);
     return targetEl;
   }
   /** @internal */
@@ -278,23 +272,13 @@ export class DatepickerCalendar extends SgdsElement {
   /** @internal */
   private _focusOnCalendarCell() {
     const targetEl = this.getFocusedTarget();
-    switch (this.view) {
-      case "months": {
-        targetEl.setAttribute("tabindex", "3");
-        targetEl.focus();
-        this.emit("sgds-update-focus", { detail: this.focusedDate });
-        break;
-      }
-      default:
-        if (targetEl) {
-          targetEl.setAttribute("tabindex", "3");
-          targetEl.focus();
-          this.emit("sgds-update-focus", { detail: this.focusedDate });
-        } else {
-          /** Change month view */
-          this.emit("sgds-change-calendar", { detail: this.focusedDate });
-        }
-        break;
+    if (targetEl) {
+      targetEl.setAttribute("tabindex", "3");
+      targetEl.focus();
+      this.emit("sgds-update-focus", { detail: this.focusedDate });
+    } else {
+      /** Change month view */
+      this.emit("sgds-change-calendar", { detail: this.focusedDate });
     }
   }
   /** @internal */
@@ -403,7 +387,7 @@ export class DatepickerCalendar extends SgdsElement {
   /** @internal */
   private generateMonths() {
     const selectedMonths = this.generateIncrementDates().map(e => e.getMonth());
-
+    const year = this.displayDate.getFullYear();
     const monthView = html`
       <div class="sgds monthpicker">
         ${DatepickerCalendar.MONTHVIEW_LABELS.map(
@@ -412,6 +396,7 @@ export class DatepickerCalendar extends SgdsElement {
               class=${classMap({ active: selectedMonths.includes(idx), month: true })}
               @click=${() => this.onClickMonth(idx)}
               data-month=${idx}
+              data-year=${year}
               tabindex="3"
             >
               ${m}
@@ -425,6 +410,7 @@ export class DatepickerCalendar extends SgdsElement {
   /** @internal */
   private generateYears() {
     const selectedYears = this.generateIncrementDates().map(e => e.getFullYear());
+    console.log({ selectedYears });
     const CURRENT_YEAR = new Date().getFullYear();
     const displayYear = this.displayDate.getFullYear();
 

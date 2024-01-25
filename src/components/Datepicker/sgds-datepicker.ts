@@ -24,6 +24,10 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  * @cssproperty --datepicker-closebutton-bg-color - Datepicker's close button background color
  * @cssproperty --datepicker-closebutton-hover-bg-color - Datepicker's close button hover background color
  * @cssproperty --datepicker-closebutton-color - Datepicker's close button color
+ *
+ * @description displayDate sets the month, year views of the calendar while focusedDate follows the focus which also directly changes
+ * displayDate on certain occasions. Example, when keyboard moves up to the next month, it updates displayDate which then affect the current
+ * date view of the calendar
  */
 
 export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
@@ -145,13 +149,13 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   }
   private handleTab(event: KeyboardEvent) {
     const tabIndexArray = Array(4);
-    if (event.shiftKey && event.key === 'Tab') {
+    if (event.shiftKey && event.key === "Tab") {
       event.preventDefault();
       this.focusedTabIndex = (this.focusedTabIndex - 1 + tabIndexArray.length) % tabIndexArray.length;
     } else if (event.key === "Tab") {
-    event.preventDefault();
-    this.focusedTabIndex = (this.focusedTabIndex + 1 + tabIndexArray.length) % tabIndexArray.length;
-  }
+      event.preventDefault();
+      this.focusedTabIndex = (this.focusedTabIndex + 1 + tabIndexArray.length) % tabIndexArray.length;
+    }
   }
   connectedCallback() {
     super.connectedCallback();

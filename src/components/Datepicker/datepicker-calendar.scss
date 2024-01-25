@@ -9,11 +9,11 @@
 .sgds.monthpicker,
 .sgds.yearpicker {
   display: grid;
-  grid-template-columns: repeat(3, 3rem);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(4, 3rem);
   justify-content: space-between;
   align-content: space-between;
-  padding: 1rem 1rem 0;
+  padding: 1rem 0 0;
 }
 
 button.month,
@@ -29,6 +29,7 @@ button.year {
   }
   &:focus {
     outline: var(--datepicker-theme-color) solid 2px;
+    z-index: 100;
   }
 }
 
