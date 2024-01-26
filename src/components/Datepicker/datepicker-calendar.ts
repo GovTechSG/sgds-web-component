@@ -386,23 +386,26 @@ export class DatepickerCalendar extends SgdsElement {
   }
   /** @internal */
   private generateMonths() {
-    const selectedMonths = this.generateIncrementDates().map(e => e.getMonth());
+    const selectedTime = this.generateIncrementDates().map(e =>
+      setTimeToNoon(new Date(e.getFullYear(), e.getMonth())).getTime()
+    );
+
     const year = this.displayDate.getFullYear();
+
     const monthView = html`
       <div class="sgds monthpicker">
-        ${DatepickerCalendar.MONTHVIEW_LABELS.map(
-          (m, idx) => html`
-            <button
-              class=${classMap({ active: selectedMonths.includes(idx), month: true })}
-              @click=${() => this.onClickMonth(idx)}
-              data-month=${idx}
-              data-year=${year}
-              tabindex="3"
-            >
-              ${m}
-            </button>
-          `
-        )}
+        ${DatepickerCalendar.MONTHVIEW_LABELS.map((m, idx) => {
+          const time = setTimeToNoon(new Date(year, idx)).getTime();
+          return html` <button
+            class=${classMap({ active: selectedTime.includes(time), month: true })}
+            @click=${() => this.onClickMonth(idx)}
+            data-month=${idx}
+            data-year=${year}
+            tabindex="3"
+          >
+            ${m}
+          </button>`;
+        })}
       </div>
     `;
     return monthView;
