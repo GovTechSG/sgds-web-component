@@ -12,16 +12,6 @@ export const calculateYearRange = (displayDate: Date) => {
   return { yearArray, displayYear };
 };
 
-interface IMonthYear {
-  month: string;
-  year: number;
-}
-const MONTHVIEW_LABELS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-export const monthsWithYear = (displayYear: number): IMonthYear[] => {
-  return MONTHVIEW_LABELS.map(m => ({ month: m, year: displayYear }));
-};
-
 export const setTimeToNoon = (date: Date): Date => {
   const newDate = new Date(date);
   newDate.setHours(12);
