@@ -16,9 +16,9 @@ Our components are exported via named exports. Import the components like so
 ```js
 
 import { SgdsButton, SgdsTooltip } from "@govtechsg/sgds-web-component/react";
-// or
-import { SgdsButton } from "@govtechsg/sgds-web-component/react/button";
-import { SgdsTooltip } from "@govtechsg/sgds-web-component/react/tooltip";
+// or default exports when importing from the subfolders
+import SgdsButton  from "@govtechsg/sgds-web-component/react/button/index.js";
+import SgdsTooltip  from "@govtechsg/sgds-web-component/react/tooltip/index.js";
 
 ```
 
@@ -73,4 +73,30 @@ export default MyComponent;
 
 ## NextJs
 
-The support for NextJS and server side rendering is WIP. 
+Web components are client components as they rely heavily on document and window API that is only present in the browser. 
+
+Use "use client" directive to indicate that the components are client side rendered. 
+
+## Example
+
+```jsx
+
+'use client';
+import  SgdsMasthead  from '@govtechsg/sgds-web-component/react/masthead/index.js';
+
+const Masthead = () => {
+  return (
+    <div>
+      <SgdsMasthead></SgdsMasthead>
+    </div>
+  );
+};
+
+export default Masthead;
+
+```
+
+## Demo 
+
+Refer to this [codesandbox demo app](https://codesandbox.io/p/devbox/github/clukhei/next-with-sgds-web-component/tree/main/
+) for the working example 
