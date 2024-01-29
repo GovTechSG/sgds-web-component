@@ -8,7 +8,7 @@ Instead, our library outputs the React version of each of our web components. Yo
 
 Refer to this [stackblitz demo app](https://stackblitz.com/edit/vitejs-vite-gebvf5) on the usage example 
 
-## Importing the library
+## Using React components - Importing the library
 
 Follow instructions in `Installation` documentation section.
 Our components are exported via named exports. Import the components like so
@@ -41,7 +41,7 @@ const ButtonWc = () => {
 export default ButtonWc;
 ```
 
-## Event Handling
+## Using React components - Event Handling
 
 We follow the React convention for events name, each custom event emitted by the web component is prefixed with a `on` and converted to camel case. Native events still applies to the components.
 
@@ -71,32 +71,26 @@ export default MyComponent;
 
 ```
 
-## NextJs
+## Using web components - Importing the library 
 
-Web components are client components as they rely heavily on document and window API that is only present in the browser. 
+Follow [import instructions](/story/getting-started-imports--page)
 
-Use "use client" directive to indicate that the components are client side rendered. 
+## Using web components - Typescript 
 
-## Example
+For React Typescript users, you will often face this error : `Property 'sgds-masthead' does not exist on type 'JSX.IntrinsicElements'.`
+
+Solution: Typed the custom elements that you are using in your directory's types.d.ts file 
 
 ```jsx
+//types.d.ts file
+import * as React from 'react'
 
-'use client';
-import  SgdsMasthead  from '@govtechsg/sgds-web-component/react/masthead/index.js';
-
-const Masthead = () => {
-  return (
-    <div>
-      <SgdsMasthead></SgdsMasthead>
-    </div>
-  );
-};
-
-export default Masthead;
-
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "sgds-masthead": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+    }
+  }
+}
 ```
 
-## Demo 
-
-Refer to this [codesandbox demo app](https://codesandbox.io/p/devbox/github/clukhei/next-with-sgds-web-component/tree/main/
-) for the working example 
