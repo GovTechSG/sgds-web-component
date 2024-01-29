@@ -6,7 +6,7 @@ Refer to <a href="/story/getting-started-usage-scoped-elements--page" target="_b
 
 ## CDN
 
-The CDN loader registers all SGDS elements up front. Depending on your usage, you may or may not need to load the polyfill.
+The CDN loader registers all SGDS elements up front. It is also required to load the polyfill.
 
 > When using CDN, it is recommended to version control. On initial usage, pick the latest version of the library. See list of available npm versions [here](https://www.npmjs.com/package/@govtechsg/sgds-web-component?activeTab=versions) 
 
@@ -16,7 +16,7 @@ The CDN loader registers all SGDS elements up front. Depending on your usage, yo
 
 
 ```js
-// load scoped custom element registry polyfill first (optional, depends on use case)
+// load scoped custom element registry polyfill first
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/scoped-custom-element-registry@0.0.9"></script>
 // it is recommended to load a particular version when using cdn e.g. https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@1.0.2
 <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@<version>"></script>
