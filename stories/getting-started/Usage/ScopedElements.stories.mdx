@@ -1,0 +1,43 @@
+import { Meta, Description } from "@storybook/addon-docs";
+import ScopedElements from "/docs/ScopedElements.md";
+import { getCustomElements } from "@storybook/web-components";
+
+<Meta title="Getting Started/Usage/Scoped Elements" />
+
+<Description markdown={ScopedElements} />
+
+## Components requiring polyfill
+
+If you are using the following components, it is required to load the polyfill
+
+export const RequirePolyfillTable = () => {
+  const components = getCustomElements()
+    .modules.map(({ declarations }) =>
+      declarations.map(d => {
+        if (d.mixins && d.mixins.length > 0) {
+          const scopedArray = d.mixins.filter(mixin => mixin.name === "ScopedElementsMixin");
+          return scopedArray.length > 0 ? d.tagName : null;
+        }
+      })
+    )
+    .flat()
+    .filter(c => c);
+  return components;
+};
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Component</th>
+    </tr>
+  </thead>
+  <tbody>
+    {RequirePolyfillTable().map((c, i) => (
+      <tr key={c}>
+        <td>{i + 1}</td>
+        <td>{c}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
