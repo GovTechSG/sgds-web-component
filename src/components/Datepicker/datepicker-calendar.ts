@@ -7,6 +7,7 @@ import { setTimeToNoon } from "../../utils/time";
 import { watch } from "../../utils/watch";
 import styles from "./datepicker-calendar.scss";
 import { ViewEnum } from "./types";
+import { range } from "lodash";
 const TODAY_DATE = new Date();
 
 const keyPressAction = {
@@ -318,9 +319,9 @@ export class DatepickerCalendar extends SgdsElement {
           const isCurrentDay = todaysDate.getDate() === day;
 
           const isSelected =
-            selectedDates.length > 0 &&
-            (rangeSelectedDates.some(d => Date.parse(date) === Date.parse(d.toISOString())) ||
-              Date.parse(date) === Date.parse(selectedDates[0].toISOString()));
+            selectedDates.length > 0 && rangeSelectedDates.some(d => Date.parse(date) === Date.parse(d.toISOString()));
+          const isFirstSelectedDate = selectedDates.length > 0 && rangeSelectedDates[0].toISOString() === date
+          const isLastSelectedDate = selectedDates.length > 1 && rangeSelectedDates[rangeSelectedDates.length -1].toISOString() === date
 
           const mutedButtonStyle = {
             cursor: "not-allowed"
@@ -335,7 +336,9 @@ export class DatepickerCalendar extends SgdsElement {
               data-date=${date}
               data-day=${day}
               class=${classMap({
-                "text-primary": isCurrentDay && isCurrentMonth && isCurrentYear,
+                "text-primary": !(isFirstSelectedDate || isLastSelectedDate) && isCurrentDay && isCurrentMonth && isCurrentYear,
+                "bg-primary-600": isFirstSelectedDate || isLastSelectedDate,
+                "text-white": isFirstSelectedDate || isLastSelectedDate,
                 active: isSelected,
                 disabled: beforeMinDate || afterMinDate
               })}

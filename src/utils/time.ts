@@ -20,3 +20,7 @@ export const setTimeToNoon = (date: Date): Date => {
   newDate.setMilliseconds(0);
   return newDate;
 };
+
+export const sortAscDates = (dates: Date[]) => {
+  return dates.sort((a, b) => a.getTime() - b.getTime())
+}

@@ -10,6 +10,7 @@ import { DatepickerCalendar } from "./datepicker-calendar";
 import { DatepickerHeader } from "./datepicker-header";
 import styles from "./sgds-datepicker.scss";
 import { ViewEnum } from "./types";
+import { sortAscDates } from "../../utils/time";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -198,7 +199,8 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
         if (startDate && endDate) {
           this.selectedDateRange = [startDate, endDate];
-          this.selectedDateRange.sort((a, b) => a.getTime() - b.getTime());
+          this.selectedDateRange = sortAscDates(this.selectedDateRange)
+          // this.selectedDateRange.sort((a, b) => a.getTime() - b.getTime());
 
           this.displayDate = startDate;
         }
@@ -321,10 +323,16 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   /** @internal */
   private handleButtonResetClick() {
-    this.displayDate = new Date();
-    this.selectedDateRange = [];
-
-    this.value = "";
+    // if (this.initialValue.length > 0) {
+    //   this.selectedDateRange = sortAscDates(this.initialValue.map(v => this.parseDateStringToDate(v)));
+    //   this.displayDate = this.selectedDateRange[0]
+    //   this.value = this.makeInputValueString(this.selectedDateRange[0], this.selectedDateRange[1], this.dateFormat)
+    // } else {
+      this.displayDate = new Date();
+      this.selectedDateRange = []
+      this.value = "";
+    // }
+    this.view = "days";
 
     this.hideMenu();
   }
@@ -389,6 +397,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
         <button
           ?disabled=${this.disabled}
           class="btn sgds rounded-0 d-flex align-items-center"
+          aria-label="reset the datepicker"
           @click=${() => this.handleButtonResetClick()}
         >
           ${svgEl}

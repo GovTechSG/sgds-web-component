@@ -841,3 +841,41 @@ describe("focus loop between header buttons and calendar days/months/years", asy
     })
   );
 });
+
+describe("datepicker reset button", async () => {
+  const MONTH_LABELS = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+
+  it("when clicked, view defaults to default days", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker menuIsOpen></sgds-datepicker>`);
+    const today = new Date();
+    //change to month view
+    const header = el.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
+    const headerBtn = header.shadowRoot?.querySelectorAll("button")?.[1] as HTMLButtonElement;
+    headerBtn.click();
+    await header.updateComplete;
+    // affirms its month view
+    expect(headerBtn.innerText).to.equal(`${today.getFullYear()}`);
+    const resetBtn = el.shadowRoot?.querySelector("button") as HTMLButtonElement;
+    resetBtn?.click();
+
+    await el.updateComplete;
+
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    inputEl.click();
+    await el.updateComplete;
+    expect(headerBtn.innerText).to.equal(`${MONTH_LABELS[today.getMonth()]} ${today.getFullYear()}`);
+  });
+});
