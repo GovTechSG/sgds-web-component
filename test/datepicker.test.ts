@@ -578,9 +578,9 @@ describe("Datepicker keyboard accesibility", () => {
 });
 
 describe("calendar month keyboard navigation", async () => {
-  const starterKit = async (initialValue: string[]) => {
+  const starterKit = async (initialValue: string[], mode: "single" | "range" = "single") => {
     const el = await fixture<SgdsDatepicker>(
-      html`<sgds-datepicker .initialValue=${initialValue} menuIsOpen></sgds-datepicker>`
+      html`<sgds-datepicker .initialValue=${initialValue} menuIsOpen mode=${mode}></sgds-datepicker>`
     );
     const header = el.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
     const [prevHeaderBtn, headerBtn, nextHeaderBtn] = header.shadowRoot?.querySelectorAll(
@@ -691,8 +691,13 @@ describe("calendar month keyboard navigation", async () => {
     expect(months?.[2].classList.contains("active")).to.be.false;
   });
   it("when there is a selectedDate range, only month of correct year gets active prop", async () => {
-    const { header, calendar, months, prevHeaderBtn, nextHeaderBtn } = await starterKit(["29/03/2024", "29/03/2025"]);
+    const { headerBtn, calendar, months, prevHeaderBtn, header, nextHeaderBtn } = await starterKit(
+      ["29/03/2024", "29/03/2025"],
+      "range"
+    );
     //2024
+    expect(headerBtn.innerText).to.equal("2024");
+    expect(months?.length).to.equal(12);
     months?.forEach((m, i) => {
       if (i < 2) {
         expect(m.classList.contains("active")).to.be.false;
@@ -700,21 +705,19 @@ describe("calendar month keyboard navigation", async () => {
         expect(m.classList.contains("active")).to.be.true;
       }
     });
-    // expect(months?.[2].classList.contains("active")).to.be.true
     //2023
     prevHeaderBtn.click();
 
     await calendar.updateComplete;
     await header.updateComplete;
     months?.forEach(m => expect(m.classList.contains("active")).to.be.false);
-
     // go to 2025
     nextHeaderBtn.click();
     nextHeaderBtn.click();
     await calendar.updateComplete;
     await header.updateComplete;
     months?.forEach((m, i) => {
-      if (i < 2) {
+      if (i < 3) {
         expect(m.classList.contains("active")).to.be.true;
       } else {
         expect(m.classList.contains("active")).to.be.false;
@@ -722,3 +725,122 @@ describe("calendar month keyboard navigation", async () => {
     });
   });
 });
+describe("calendar year keyboard navigation", async () => {
+  const starterKit = async (initialValue: string[], mode: "single" | "range" = "single") => {
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker .initialValue=${initialValue} menuIsOpen mode=${mode}></sgds-datepicker>`
+    );
+    const header = el.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
+    const [prevHeaderBtn, headerBtn, nextHeaderBtn] = header.shadowRoot?.querySelectorAll(
+      "button"
+    ) as NodeListOf<HTMLButtonElement>;
+    // configure to year view
+    headerBtn.click();
+    headerBtn.click();
+    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
+    await waitUntil(() => calendar.view === "years");
+    const years = calendar.shadowRoot?.querySelectorAll("button.year");
+    return { el, header, headerBtn, prevHeaderBtn, nextHeaderBtn, calendar, years };
+  };
+
+  it("the year will be focused and active", async () => {
+    const { header, headerBtn, calendar, years } = await starterKit(["29/01/2024"]);
+    const targetYear = years?.[0];
+    expect(calendar.shadowRoot?.activeElement === targetYear).to.be.true;
+    expect(targetYear?.classList.contains("active")).to.be.true;
+    const startYear = 2024;
+    const endYear = 2024 + 11;
+    expect(headerBtn.innerText).to.equal(`${startYear} - ${endYear}`);
+    await sendKeys({ press: "ArrowUp" });
+    await calendar.updateComplete;
+    await header.updateComplete;
+
+    expect(headerBtn.innerText).to.equal("2012 - 2023");
+    expect(calendar.shadowRoot?.activeElement === years?.[9]).to.be.true;
+    expect(years?.[9].classList.contains("active")).to.be.false;
+    expect(years?.[9].textContent).to.include(`${2024 - 3}`);
+  });
+  it("the years in range mode will be active", async () => {
+    const { header, headerBtn, calendar, years } = await starterKit(["29/03/2024", "29/03/2034"], "range");
+    const targetYear = years?.[0];
+    expect(calendar.shadowRoot?.activeElement === targetYear).to.be.true;
+    years?.forEach((y, i) => {
+      if (i < 11) {
+        expect(y.classList.contains("active")).to.be.true;
+      } else {
+        expect(y.classList.contains("active")).to.be.false;
+      }
+    });
+    // navigate to next view
+    await sendKeys({ press: "ArrowDown" });
+    await sendKeys({ press: "ArrowDown" });
+    await sendKeys({ press: "ArrowDown" });
+    await sendKeys({ press: "ArrowDown" });
+
+    await calendar.updateComplete;
+    await header.updateComplete;
+
+    expect(headerBtn.innerText).to.equal("2036 - 2047");
+    years?.forEach(y => expect(y.classList.contains("active")).to.be.false);
+  });
+});
+
+
+describe("focus loop between header buttons and calendar days/months/years", async() => {
+  const view = ["days", "months", "years"]
+  view.forEach(v => it(`focus loop works in ${v} view`, async() => {
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker menuIsOpen></sgds-datepicker>`
+    );
+    const todayDate = new Date()
+    const day = todayDate.getDate()
+    const month = todayDate.getMonth()
+    const year = todayDate.getFullYear()
+    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar
+    const header = el.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader
+    const [prevBtn, headerBtn, nextBtn] = header.shadowRoot?.querySelectorAll("button") as NodeListOf<HTMLButtonElement>
+    if (v === "months"){
+     headerBtn.click()
+    } else if (v === "years") {
+      headerBtn.click()
+      headerBtn.click()
+    }
+    await calendar.updateComplete
+    await el.updateComplete
+
+    const query ={
+      days: `td[data-day="${day}"]`,
+      months: `button[data-month="${month}"]`,
+      years: `button[data-year="${year}"]`
+    }
+    // check if calendar is the focused element initially
+    const tabbableCalendarEl = calendar?.shadowRoot?.querySelector(query[v]) as HTMLElement
+    expect(tabbableCalendarEl.getAttribute("tabindex")).to.equal("3")
+    expect(el.shadowRoot?.activeElement === calendar).to.be.true
+
+   await sendKeys({press: "Tab"})
+   await calendar.updateComplete
+   await header.updateComplete
+   await el.updateComplete
+
+  // Header is now the focused element 
+   expect(el.shadowRoot?.activeElement === calendar).to.be.false
+   expect(el.shadowRoot?.activeElement === header).to.be.true
+   expect(header.shadowRoot?.activeElement === prevBtn).to.be.true
+
+
+   await sendKeys({press: "Tab"})
+   await calendar.updateComplete
+   await header.updateComplete
+   await el.updateComplete
+   expect(header.shadowRoot?.activeElement === headerBtn).to.be.true
+
+
+   await sendKeys({press: "Tab"})
+   await calendar.updateComplete
+   await header.updateComplete
+   await el.updateComplete
+   expect(header.shadowRoot?.activeElement === nextBtn).to.be.true
+
+  }))
+})
