@@ -6,7 +6,6 @@ import { setTimeToNoon } from "../src/utils/time";
 import { sendKeys } from "@web/test-runner-commands";
 import "../src/index";
 import sinon from "sinon";
-import { getAnimation } from "../src/utils/animation-registry";
 
 customElements.define("sgds-datepicker-header", DatepickerHeader);
 customElements.define("sgds-datepicker-calendar", DatepickerCalendar);
@@ -785,62 +784,60 @@ describe("calendar year keyboard navigation", async () => {
   });
 });
 
+describe("focus loop between header buttons and calendar days/months/years", async () => {
+  const view = ["days", "months", "years"];
+  view.forEach(v =>
+    it(`focus loop works in ${v} view`, async () => {
+      const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker menuIsOpen></sgds-datepicker>`);
+      const todayDate = new Date();
+      const day = todayDate.getDate();
+      const month = todayDate.getMonth();
+      const year = todayDate.getFullYear();
+      const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
+      const header = el.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
+      const [prevBtn, headerBtn, nextBtn] = header.shadowRoot?.querySelectorAll(
+        "button"
+      ) as NodeListOf<HTMLButtonElement>;
+      if (v === "months") {
+        headerBtn.click();
+      } else if (v === "years") {
+        headerBtn.click();
+        headerBtn.click();
+      }
+      await calendar.updateComplete;
+      await el.updateComplete;
 
-describe("focus loop between header buttons and calendar days/months/years", async() => {
-  const view = ["days", "months", "years"]
-  view.forEach(v => it(`focus loop works in ${v} view`, async() => {
-    const el = await fixture<SgdsDatepicker>(
-      html`<sgds-datepicker menuIsOpen></sgds-datepicker>`
-    );
-    const todayDate = new Date()
-    const day = todayDate.getDate()
-    const month = todayDate.getMonth()
-    const year = todayDate.getFullYear()
-    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar
-    const header = el.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader
-    const [prevBtn, headerBtn, nextBtn] = header.shadowRoot?.querySelectorAll("button") as NodeListOf<HTMLButtonElement>
-    if (v === "months"){
-     headerBtn.click()
-    } else if (v === "years") {
-      headerBtn.click()
-      headerBtn.click()
-    }
-    await calendar.updateComplete
-    await el.updateComplete
+      const query = {
+        days: `td[data-day="${day}"]`,
+        months: `button[data-month="${month}"]`,
+        years: `button[data-year="${year}"]`
+      };
+      // check if calendar is the focused element initially
+      const tabbableCalendarEl = calendar?.shadowRoot?.querySelector(query[v]) as HTMLElement;
+      expect(tabbableCalendarEl.getAttribute("tabindex")).to.equal("3");
+      expect(el.shadowRoot?.activeElement === calendar).to.be.true;
 
-    const query ={
-      days: `td[data-day="${day}"]`,
-      months: `button[data-month="${month}"]`,
-      years: `button[data-year="${year}"]`
-    }
-    // check if calendar is the focused element initially
-    const tabbableCalendarEl = calendar?.shadowRoot?.querySelector(query[v]) as HTMLElement
-    expect(tabbableCalendarEl.getAttribute("tabindex")).to.equal("3")
-    expect(el.shadowRoot?.activeElement === calendar).to.be.true
+      await sendKeys({ press: "Tab" });
+      await calendar.updateComplete;
+      await header.updateComplete;
+      await el.updateComplete;
 
-   await sendKeys({press: "Tab"})
-   await calendar.updateComplete
-   await header.updateComplete
-   await el.updateComplete
+      // Header is now the focused element
+      expect(el.shadowRoot?.activeElement === calendar).to.be.false;
+      expect(el.shadowRoot?.activeElement === header).to.be.true;
+      expect(header.shadowRoot?.activeElement === prevBtn).to.be.true;
 
-  // Header is now the focused element 
-   expect(el.shadowRoot?.activeElement === calendar).to.be.false
-   expect(el.shadowRoot?.activeElement === header).to.be.true
-   expect(header.shadowRoot?.activeElement === prevBtn).to.be.true
+      await sendKeys({ press: "Tab" });
+      await calendar.updateComplete;
+      await header.updateComplete;
+      await el.updateComplete;
+      expect(header.shadowRoot?.activeElement === headerBtn).to.be.true;
 
-
-   await sendKeys({press: "Tab"})
-   await calendar.updateComplete
-   await header.updateComplete
-   await el.updateComplete
-   expect(header.shadowRoot?.activeElement === headerBtn).to.be.true
-
-
-   await sendKeys({press: "Tab"})
-   await calendar.updateComplete
-   await header.updateComplete
-   await el.updateComplete
-   expect(header.shadowRoot?.activeElement === nextBtn).to.be.true
-
-  }))
-})
+      await sendKeys({ press: "Tab" });
+      await calendar.updateComplete;
+      await header.updateComplete;
+      await el.updateComplete;
+      expect(header.shadowRoot?.activeElement === nextBtn).to.be.true;
+    })
+  );
+});
