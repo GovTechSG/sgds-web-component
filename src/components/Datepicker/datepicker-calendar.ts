@@ -409,8 +409,7 @@ export class DatepickerCalendar extends SgdsElement {
               month: true,
               "bg-primary-600":
                 (isFirstSelectedMonth && isFirstSelectedYear) || (isLastSelectedMonth && isLastSelectedYear),
-              "text-white":
-                (isFirstSelectedMonth && isFirstSelectedYear) || (isLastSelectedMonth && isLastSelectedYear)
+              "text-white": (isFirstSelectedMonth && isFirstSelectedYear) || (isLastSelectedMonth && isLastSelectedYear)
             })}
             @click=${() => this.onClickMonth(idx)}
             data-month=${idx}

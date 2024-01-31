@@ -6,7 +6,6 @@ import { setTimeToNoon } from "../src/utils/time";
 import { sendKeys } from "@web/test-runner-commands";
 import "../src/index";
 import sinon from "sinon";
-import { first } from "lodash";
 
 customElements.define("sgds-datepicker-header", DatepickerHeader);
 customElements.define("sgds-datepicker-calendar", DatepickerCalendar);
@@ -464,7 +463,7 @@ describe("Datepicker keyboard accesibility", () => {
     const calendar = el.shadowRoot?.querySelector<DatepickerCalendar>("sgds-datepicker-calendar");
     const tdElement = calendar?.shadowRoot?.querySelector(`td[data-date="${todayDateISO}"]`);
 
-    expect(el.inputValue).to.equal("29/06/2023");
+    expect(el.value).to.equal("29/06/2023");
 
     await waitUntil(() => calendar?.shadowRoot?.activeElement);
 
@@ -475,7 +474,7 @@ describe("Datepicker keyboard accesibility", () => {
     await el.updateComplete;
 
     await waitUntil(() => changeDateHandler.calledOnce);
-    expect(el.inputValue).to.equal("28/06/2023");
+    expect(el.value).to.equal("28/06/2023");
     expect(changeDateHandler).to.have.been.calledOnce;
   });
 
@@ -883,14 +882,14 @@ describe("datepicker reset button", async () => {
     const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker .initialValue=${["29/03/2020"]}></sgds-datepicker>`);
     const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
 
-    expect(el.inputValue).to.equal("29/03/2020");
-    expect(el.inputValue).to.equal(inputEl.value);
+    expect(el.value).to.equal("29/03/2020");
+    expect(el.value).to.equal(inputEl.value);
     const resetBtn = el.shadowRoot?.querySelector("button") as HTMLButtonElement;
     resetBtn?.click();
 
     await el.updateComplete;
-    expect(el.inputValue).to.equal("");
-    expect(el.inputValue).to.equal(inputEl.value);
+    expect(el.value).to.equal("");
+    expect(el.value).to.equal(inputEl.value);
   });
   it("when clicked, view changes back to today's year and month ", async () => {
     const el = await fixture<SgdsDatepicker>(
@@ -943,24 +942,23 @@ describe("datepicker stylings", () => {
     const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker menuIsOpen></sgds-datepicker>`);
     const todayDate = new Date().getDate();
     const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
     const todayDateEl = calendar.shadowRoot?.querySelector(`td[data-day="${todayDate}"]`) as HTMLElement;
     expect(todayDateEl.classList.contains("text-primary")).to.be.true;
     expect(todayDateEl.classList.contains("text-white")).to.be.false;
     expect(todayDateEl.classList.contains("bg-primary-600")).to.be.false;
 
-    todayDateEl.click()
+    todayDateEl.click();
 
-    await calendar.updateComplete 
-    await el.updateComplete
+    await calendar.updateComplete;
+    await el.updateComplete;
 
-    inputEl.click()
-    await calendar.updateComplete 
-    await el.updateComplete
+    inputEl.click();
+    await calendar.updateComplete;
+    await el.updateComplete;
 
-    expect(todayDateEl.classList.contains("text-primary")).to.be.false
-    expect(todayDateEl.classList.contains("text-white")).to.be.true
-    expect(todayDateEl.classList.contains("bg-primary-600")).to.be.true
-
+    expect(todayDateEl.classList.contains("text-primary")).to.be.false;
+    expect(todayDateEl.classList.contains("text-white")).to.be.true;
+    expect(todayDateEl.classList.contains("bg-primary-600")).to.be.true;
   });
 });

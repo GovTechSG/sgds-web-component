@@ -65,7 +65,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
 
   /** @internal */
-  @state() private value: string;
+  @state() value: string;
 
   /** @internal */
   @state()
@@ -224,11 +224,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   @watch("value")
   handleValueChange() {
     this.emit("sgds-change-date");
-  }
-
-  /** get datepicker's input value */
-  public get inputValue() {
-    return this.value;
   }
 
   /** @internal */
