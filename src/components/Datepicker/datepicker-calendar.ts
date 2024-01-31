@@ -336,10 +336,9 @@ export class DatepickerCalendar extends SgdsElement {
               data-date=${date}
               data-day=${day}
               class=${classMap({
-                "text-primary":
+                "today":
                   !(isFirstSelectedDate || isLastSelectedDate) && isCurrentDay && isCurrentMonth && isCurrentYear,
-                "bg-primary-600": isFirstSelectedDate || isLastSelectedDate,
-                "text-white": isFirstSelectedDate || isLastSelectedDate,
+                "selected-ends": isFirstSelectedDate || isLastSelectedDate,
                 active: isSelected,
                 disabled: beforeMinDate || afterMinDate
               })}
@@ -407,9 +406,8 @@ export class DatepickerCalendar extends SgdsElement {
             class=${classMap({
               active: selectedTime.includes(time),
               month: true,
-              "bg-primary-600":
-                (isFirstSelectedMonth && isFirstSelectedYear) || (isLastSelectedMonth && isLastSelectedYear),
-              "text-white": (isFirstSelectedMonth && isFirstSelectedYear) || (isLastSelectedMonth && isLastSelectedYear)
+              "selected-ends":
+                (isFirstSelectedMonth && isFirstSelectedYear) || (isLastSelectedMonth && isLastSelectedYear)
             })}
             @click=${() => this.onClickMonth(idx)}
             data-month=${idx}
@@ -451,8 +449,7 @@ export class DatepickerCalendar extends SgdsElement {
               class=${classMap({
                 active: selectedYears.includes(y),
                 year: true,
-                "bg-primary-600": isFirstSelectedYear || isLastSectedYear,
-                "text-white": isFirstSelectedYear || isLastSectedYear
+                "selected-ends": isFirstSelectedYear || isLastSectedYear
               })}
               @click=${() => this.onClickYear(y)}
               data-year=${y}

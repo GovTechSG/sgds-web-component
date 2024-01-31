@@ -921,11 +921,10 @@ describe("datepicker stylings", () => {
     const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
 
     const selectedDateEl = calendar.shadowRoot?.querySelector("td[data-day='1']") as HTMLElement;
-    expect(selectedDateEl.classList.contains("text-white")).to.be.true;
-    expect(selectedDateEl.classList.contains("bg-primary-600")).to.be.true;
+    expect(selectedDateEl.classList.contains("selected-ends")).to.be.true;
     expect(selectedDateEl.classList.contains("active")).to.be.true;
   });
-  it("selected start and end dates will have text-white and bg-primary-600", async () => {
+  it("selected start and end dates will have selected-ends", async () => {
     const el = await fixture<SgdsDatepicker>(
       html`<sgds-datepicker menuIsOpen mode="range" .initialValue=${["01/03/2020", "20/03/2020"]}></sgds-datepicker>`
     );
@@ -934,8 +933,7 @@ describe("datepicker stylings", () => {
     const firstSelectedDateEl = calendar.shadowRoot?.querySelector("td[data-day='1']") as HTMLElement;
     const lastSelectedDateEl = calendar.shadowRoot?.querySelector("td[data-day='20']") as HTMLElement;
     [firstSelectedDateEl, lastSelectedDateEl].forEach(d => {
-      expect(d.classList.contains("text-white")).to.be.true;
-      expect(d.classList.contains("bg-primary-600")).to.be.true;
+      expect(d.classList.contains("selected-ends")).to.be.true;
     });
   });
   it("if today's date is selected, selected styles takes precedence over today date styles", async () => {
@@ -944,9 +942,8 @@ describe("datepicker stylings", () => {
     const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
     const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
     const todayDateEl = calendar.shadowRoot?.querySelector(`td[data-day="${todayDate}"]`) as HTMLElement;
-    expect(todayDateEl.classList.contains("text-primary")).to.be.true;
-    expect(todayDateEl.classList.contains("text-white")).to.be.false;
-    expect(todayDateEl.classList.contains("bg-primary-600")).to.be.false;
+    expect(todayDateEl.classList.contains("today")).to.be.true;
+    expect(todayDateEl.classList.contains("selected-ends")).to.be.false;
 
     todayDateEl.click();
 
@@ -957,8 +954,7 @@ describe("datepicker stylings", () => {
     await calendar.updateComplete;
     await el.updateComplete;
 
-    expect(todayDateEl.classList.contains("text-primary")).to.be.false;
-    expect(todayDateEl.classList.contains("text-white")).to.be.true;
-    expect(todayDateEl.classList.contains("bg-primary-600")).to.be.true;
+    expect(todayDateEl.classList.contains("today")).to.be.false;
+    expect(todayDateEl.classList.contains("selected-ends")).to.be.true;
   });
 });

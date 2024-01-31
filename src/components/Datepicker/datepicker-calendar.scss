@@ -1,9 +1,15 @@
 .datepicker-body {
   padding: 0 1.5rem 1.5rem;
+}
 
-  .text-primary {
-    color: var(--datepicker-theme-color) !important;
-  }
+%selected-ends-shared {
+  background-color: var(--datepicker-selected-date-bg-color);
+  color: var(--datepicker-selected-date-text-color);
+}
+%active-shared {
+  cursor: pointer;
+  color: var(--datepicker-theme-color);
+  background-color: var(--datepicker-hover-bg-color);
 }
 
 .sgds.monthpicker,
@@ -21,11 +27,14 @@ button.year {
   padding: 0;
   border: 0;
   background-color: transparent;
-  &.active,
+  &.active {
+    @extend %active-shared;
+    &.selected-ends {
+      @extend %selected-ends-shared;
+    }
+  }
   &:hover {
-    cursor: pointer;
-    color: var(--datepicker-theme-color);
-    background-color: var(--datepicker-hover-bg-color);
+    @extend %active-shared;
   }
   &:focus {
     outline: var(--datepicker-theme-color) solid 2px;
@@ -41,12 +50,21 @@ td {
     color: var(--sgds-gray-400);
   }
   &[data-day] {
-    &:hover:not(.disabled),
+    &:hover:not(.disabled) {
+      @extend %active-shared;
+    }
     &.active {
-      background-color: var(--datepicker-hover-bg-color);
+      @extend %active-shared;
+      &.selected-ends {
+        @extend %selected-ends-shared;
+      }
     }
     &:focus {
       outline: var(--datepicker-theme-color) auto 2px;
     }
   }
+}
+
+.today {
+  color: var(--datepicker-theme-color);
 }
