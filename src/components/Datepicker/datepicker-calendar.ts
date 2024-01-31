@@ -336,8 +336,7 @@ export class DatepickerCalendar extends SgdsElement {
               data-date=${date}
               data-day=${day}
               class=${classMap({
-                "today":
-                  !(isFirstSelectedDate || isLastSelectedDate) && isCurrentDay && isCurrentMonth && isCurrentYear,
+                today: !(isFirstSelectedDate || isLastSelectedDate) && isCurrentDay && isCurrentMonth && isCurrentYear,
                 "selected-ends": isFirstSelectedDate || isLastSelectedDate,
                 active: isSelected,
                 disabled: beforeMinDate || afterMinDate
