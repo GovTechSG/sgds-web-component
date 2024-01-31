@@ -22,5 +22,5 @@ export const setTimeToNoon = (date: Date): Date => {
 };
 
 export const sortAscDates = (dates: Date[]) => {
-  return dates.sort((a, b) => a.getTime() - b.getTime())
-}
+  return dates.sort((a, b) => a.getTime() - b.getTime());
+};

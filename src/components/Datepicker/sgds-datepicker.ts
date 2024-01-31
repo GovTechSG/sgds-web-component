@@ -77,7 +77,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   /** @internal */
   @state() private displayDate: Date = new Date();
   /** @internal */
-
   @state() private focusedDate: Date = new Date();
 
   @state() private focusedTabIndex = 3;
@@ -199,7 +198,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
         if (startDate && endDate) {
           this.selectedDateRange = [startDate, endDate];
-          this.selectedDateRange = sortAscDates(this.selectedDateRange)
+          this.selectedDateRange = sortAscDates(this.selectedDateRange);
           // this.selectedDateRange.sort((a, b) => a.getTime() - b.getTime());
 
           this.displayDate = startDate;
@@ -328,9 +327,9 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     //   this.displayDate = this.selectedDateRange[0]
     //   this.value = this.makeInputValueString(this.selectedDateRange[0], this.selectedDateRange[1], this.dateFormat)
     // } else {
-      this.displayDate = new Date();
-      this.selectedDateRange = []
-      this.value = "";
+    this.displayDate = new Date();
+    this.selectedDateRange = [];
+    this.value = "";
     // }
     this.view = "days";
 

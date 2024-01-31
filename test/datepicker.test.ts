@@ -6,6 +6,7 @@ import { setTimeToNoon } from "../src/utils/time";
 import { sendKeys } from "@web/test-runner-commands";
 import "../src/index";
 import sinon from "sinon";
+import { first } from "lodash";
 
 customElements.define("sgds-datepicker-header", DatepickerHeader);
 customElements.define("sgds-datepicker-calendar", DatepickerCalendar);
@@ -877,5 +878,89 @@ describe("datepicker reset button", async () => {
     inputEl.click();
     await el.updateComplete;
     expect(headerBtn.innerText).to.equal(`${MONTH_LABELS[today.getMonth()]} ${today.getFullYear()}`);
+  });
+  it("when clicked, initialValue clears and input clears", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker .initialValue=${["29/03/2020"]}></sgds-datepicker>`);
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+
+    expect(el.inputValue).to.equal("29/03/2020");
+    expect(el.inputValue).to.equal(inputEl.value);
+    const resetBtn = el.shadowRoot?.querySelector("button") as HTMLButtonElement;
+    resetBtn?.click();
+
+    await el.updateComplete;
+    expect(el.inputValue).to.equal("");
+    expect(el.inputValue).to.equal(inputEl.value);
+  });
+  it("when clicked, view changes back to today's year and month ", async () => {
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker menuIsOpen .initialValue=${["29/03/2020"]}></sgds-datepicker>`
+    );
+    const header = el.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
+    const headerBtn = header.shadowRoot?.querySelectorAll("button")[1] as HTMLButtonElement;
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+
+    expect(headerBtn.innerText).to.equal("March 2020");
+    const resetBtn = el.shadowRoot?.querySelector("button") as HTMLButtonElement;
+    resetBtn?.click();
+
+    await el.updateComplete;
+    inputEl.click();
+    await waitUntil(() => expect(headerBtn).to.exist);
+
+    const todayMonth = MONTH_LABELS[new Date().getMonth()];
+    const todayYear = new Date().getFullYear();
+    expect(headerBtn.innerText).to.equal(`${todayMonth} ${todayYear}`);
+  });
+});
+
+describe("datepicker stylings", () => {
+  it("selected date styles", async () => {
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker menuIsOpen .initialValue=${["01/03/2020"]}></sgds-datepicker>`
+    );
+    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
+
+    const selectedDateEl = calendar.shadowRoot?.querySelector("td[data-day='1']") as HTMLElement;
+    expect(selectedDateEl.classList.contains("text-white")).to.be.true;
+    expect(selectedDateEl.classList.contains("bg-primary-600")).to.be.true;
+    expect(selectedDateEl.classList.contains("active")).to.be.true;
+  });
+  it("selected start and end dates will have text-white and bg-primary-600", async () => {
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker menuIsOpen mode="range" .initialValue=${["01/03/2020", "20/03/2020"]}></sgds-datepicker>`
+    );
+    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
+
+    const firstSelectedDateEl = calendar.shadowRoot?.querySelector("td[data-day='1']") as HTMLElement;
+    const lastSelectedDateEl = calendar.shadowRoot?.querySelector("td[data-day='20']") as HTMLElement;
+    [firstSelectedDateEl, lastSelectedDateEl].forEach(d => {
+      expect(d.classList.contains("text-white")).to.be.true;
+      expect(d.classList.contains("bg-primary-600")).to.be.true;
+    });
+  });
+  it("if today's date is selected, selected styles takes precedence over today date styles", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker menuIsOpen></sgds-datepicker>`);
+    const todayDate = new Date().getDate();
+    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput
+    const todayDateEl = calendar.shadowRoot?.querySelector(`td[data-day="${todayDate}"]`) as HTMLElement;
+    expect(todayDateEl.classList.contains("text-primary")).to.be.true;
+    expect(todayDateEl.classList.contains("text-white")).to.be.false;
+    expect(todayDateEl.classList.contains("bg-primary-600")).to.be.false;
+
+    todayDateEl.click()
+
+    await calendar.updateComplete 
+    await el.updateComplete
+
+    inputEl.click()
+    await calendar.updateComplete 
+    await el.updateComplete
+
+    expect(todayDateEl.classList.contains("text-primary")).to.be.false
+    expect(todayDateEl.classList.contains("text-white")).to.be.true
+    expect(todayDateEl.classList.contains("bg-primary-600")).to.be.true
+
   });
 });
