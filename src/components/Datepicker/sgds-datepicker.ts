@@ -25,6 +25,8 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  * @cssproperty --datepicker-closebutton-bg-color - Datepicker's close button background color
  * @cssproperty --datepicker-closebutton-hover-bg-color - Datepicker's close button hover background color
  * @cssproperty --datepicker-closebutton-color - Datepicker's close button color
+ * @cssproperty --datepicker-selected-date-bg-color - Selected date's background color
+ * @cssproperty --datepicker-selected-date-text-color - Selected date's text color
  *
  * @description displayDate sets the month, year views of the calendar while focusedDate follows the focus which also directly changes
  * displayDate on certain occasions. Example, when keyboard moves up to the next month, it updates displayDate which then affect the current
