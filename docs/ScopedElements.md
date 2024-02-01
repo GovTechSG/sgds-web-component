@@ -1,4 +1,4 @@
-## Scoped Elements
+# Scoped Elements
 
 As a global registry, the [CustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry) cannot have multiple version of the same custom element. This is the limitation of the CustomElementRegistry. [Scoped Custom Element Registries](https://github.com/w3c/webcomponents/issues/716) is a proposal that will solve the problem. Since this functionality won't be available (especially not cross browser) anytime soon, we've adopted [OpenWC's Scoped Elements](https://open-wc.org/docs/development/scoped-elements/).
 
@@ -28,6 +28,44 @@ export class SgdsDropdown extends ScopedElementsMixin(DropdownListElement) {
 
 ```
 
-Loading the polyfill is only required for components that uses the ScopeElementsMixin as shown in the code snipper above.
+## Scoped Custom Element Registry Polyfill 
 
-However, in lieu of the major changes in version 3 of `@open-wc/scoped-elements`, it is now required to load the polyfill. While our library is still on version 2, it is <strong>recommended to load the polyfill even it is technically not required to</strong>. 
+### When to load the polyfill
+
+Loading the polyfill is only required for components that uses the ScopeElementsMixin as shown in the code snippet above.
+As a rule of thumb, start by not loading the polyfill. If you encounter an error like so, it means you need to load the polyfill.
+
+
+>`Uncaught DOMException: Failed to execute 'define' on 'CustomElementRegistry': the name "sgds-<component-name>" has already been used with this registry at`
+
+
+### How to load the polyfill 
+
+#### Local installation
+
+```js
+
+npm install @webcomponents/scoped-custom-element-registry@0.0.9
+
+```
+
+```js
+
+// Polyfill has to be loaded at the top of the application before the web components
+import "@webcomponents/scoped-custom-element-registry"
+import "@govtechsg/sgds-web-component";
+
+```
+
+#### CDN usage
+
+Load the polyfill CDN before the web component CDN 
+
+```js
+
+// load scoped custom element registry polyfill first
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/scoped-custom-element-registry@0.0.9"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@<version>"></script>
+
+```
