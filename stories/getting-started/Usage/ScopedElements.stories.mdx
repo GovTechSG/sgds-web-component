@@ -8,7 +8,8 @@ import { getCustomElements } from "@storybook/web-components";
 
 ## Components requiring polyfill
 
-If you are using the following components, it is required to load the polyfill
+The following components used the ScopedElementsMixin.
+It is likely that you will encounter the console error and will need the polyfill if you are importing the following components.
 
 export const RequirePolyfillTable = () => {
   const components = getCustomElements()
