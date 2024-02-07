@@ -574,6 +574,52 @@ describe("Datepicker keyboard accesibility", () => {
     const yearButtons = calendar?.shadowRoot?.querySelectorAll("button");
     expect(yearButtons?.[0].innerText).to.equal(todayYear.toString());
   });
+
+  it("when focused on 31 Dec 2023, clicking previous button focuses to last day of november", async () => {
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker menuIsOpen .initialValue=${["31/12/2023"]}></sgds-datepicker>`
+    );
+
+    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
+    const thirtyFirstTd = calendar.shadowRoot?.querySelector("td[data-day='31']");
+
+    await waitUntil(() => calendar?.shadowRoot?.activeElement);
+    expect(calendar.shadowRoot?.activeElement === thirtyFirstTd).to.be.true;
+    const header = el.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
+    const prevBtn = header.shadowRoot?.querySelectorAll("button")[0] as HTMLButtonElement;
+
+    prevBtn.click();
+
+    await el.updateComplete;
+
+    const thirtiethTd = calendar.shadowRoot?.querySelector("td[data-day='30']");
+    await waitUntil(() => calendar?.shadowRoot?.activeElement === thirtiethTd);
+
+    expect(calendar.shadowRoot?.activeElement === thirtiethTd).to.be.true;
+  });
+
+  it("when focused on 31 Jan 2024, clicking next button focuses to last day of feb", async () => {
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker menuIsOpen .initialValue=${["31/01/2024"]}></sgds-datepicker>`
+    );
+
+    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
+    const thirtyFirstTd = calendar.shadowRoot?.querySelector("td[data-day='31']");
+
+    await waitUntil(() => calendar?.shadowRoot?.activeElement);
+    expect(calendar.shadowRoot?.activeElement === thirtyFirstTd).to.be.true;
+    const header = el.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
+    const nextBtn = header.shadowRoot?.querySelectorAll("button")[2] as HTMLButtonElement;
+
+    nextBtn.click();
+
+    await el.updateComplete;
+
+    const twentyNinthTd = calendar.shadowRoot?.querySelector("td[data-day='29']");
+    await waitUntil(() => calendar?.shadowRoot?.activeElement === twentyNinthTd);
+
+    expect(calendar.shadowRoot?.activeElement === twentyNinthTd).to.be.true;
+  });
 });
 
 describe("calendar month keyboard navigation", async () => {
@@ -936,6 +982,29 @@ describe("datepicker stylings", () => {
       expect(d.classList.contains("selected-ends")).to.be.true;
     });
   });
+  it("current month should have today stylings", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker menuIsOpen></sgds-datepicker>`);
+    const header = el.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
+    const headerBtn = header.shadowRoot?.querySelectorAll("button")[1] as HTMLButtonElement;
+    headerBtn.click();
+    await waitUntil(() => header.view === "months");
+    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar");
+    const currentMonth = new Date().getMonth();
+    expect(calendar?.shadowRoot?.querySelector(`button[data-month="${currentMonth}"]`)?.classList.contains("today")).to
+      .be.true;
+  });
+  it("current year should have today stylings", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker menuIsOpen></sgds-datepicker>`);
+    const header = el.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
+    const headerBtn = header.shadowRoot?.querySelectorAll("button")[1] as HTMLButtonElement;
+    headerBtn.click();
+    headerBtn.click();
+    await waitUntil(() => header.view === "years");
+    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar");
+    const currentYear = new Date().getFullYear();
+    expect(calendar?.shadowRoot?.querySelector(`button[data-year="${currentYear}"]`)?.classList.contains("today")).to.be
+      .true;
+  });
   it("if today's date is selected, selected styles takes precedence over today date styles", async () => {
     const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker menuIsOpen></sgds-datepicker>`);
     const todayDate = new Date().getDate();
@@ -954,7 +1023,114 @@ describe("datepicker stylings", () => {
     await calendar.updateComplete;
     await el.updateComplete;
 
-    expect(todayDateEl.classList.contains("today")).to.be.false;
+    expect(todayDateEl.classList.contains("today")).to.be.true;
     expect(todayDateEl.classList.contains("selected-ends")).to.be.true;
+  });
+});
+
+describe("sgds-datepicker close and open menu behaviours", async () => {
+  const dayViewSetup = async (initialValue: string[] = []) => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker .initialValue=${initialValue}></sgds-datepicker>`);
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    inputEl.click();
+    await el.updateComplete;
+    const header = el.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
+    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
+
+    const getCalendarActiveElement = () => calendar.shadowRoot?.activeElement;
+    await waitUntil(() => getCalendarActiveElement());
+    return { calendar, getCalendarActiveElement, inputEl, el, header };
+  };
+  const monthViewSetup = async (initialValue: string[] = []) => {
+    const { header, ...etc } = await dayViewSetup(initialValue);
+    const [prevBtn, headerBtn, nextBtn] = header.shadowRoot?.querySelectorAll(
+      "button"
+    ) as NodeListOf<HTMLButtonElement>;
+    headerBtn.click();
+
+    await waitUntil(() => header.view === "months");
+    return { ...etc, header, prevBtn, headerBtn, nextBtn };
+  };
+  const yearViewSetup = async (initialValue: string[] = []) => {
+    const { headerBtn, header, ...etc } = await monthViewSetup(initialValue);
+    headerBtn.click();
+
+    await waitUntil(() => header.view === "years");
+    return { ...etc, header, headerBtn };
+  };
+  it("in day view, when calendar is open, it should auto focus to the today calendar date", async () => {
+    const { calendar, getCalendarActiveElement } = await dayViewSetup();
+    const today = new Date().getDate();
+    const todayTdEl = calendar.shadowRoot?.querySelector(`td[data-day="${today}"]`);
+    expect(getCalendarActiveElement() === todayTdEl).to.be.true;
+  });
+  it("in month view, when calendar is open, it should auto focus to the today calendar date", async () => {
+    const { calendar, getCalendarActiveElement } = await monthViewSetup();
+    const todayMonth = new Date().getMonth();
+    const thisMonthEl = calendar.shadowRoot?.querySelector(`button[data-month="${todayMonth}"]`);
+    expect(getCalendarActiveElement() === thisMonthEl).to.be.true;
+  });
+  it("in year view, when calendar is open, it should auto focus to the today calendar date", async () => {
+    const { calendar, getCalendarActiveElement } = await yearViewSetup();
+    const todayYear = new Date().getFullYear();
+    const thisYearEl = calendar.shadowRoot?.querySelector(`button[data-year="${todayYear}"]`);
+    expect(getCalendarActiveElement() === thisYearEl).to.be.true;
+  });
+  it("in day view, when calendar focus is moved, it should auto focus to the today calendar date after close and open", async () => {
+    const { calendar, getCalendarActiveElement, inputEl, el } = await dayViewSetup(["01/02/2024"]);
+    const selectedTdEl = calendar.shadowRoot?.querySelector(`td[data-day="1"]`);
+    expect(getCalendarActiveElement() === selectedTdEl).to.be.true;
+
+    await sendKeys({ press: "ArrowDown" });
+    await calendar.updateComplete;
+
+    const focusedTdEl = calendar.shadowRoot?.querySelector(`td[data-day="8"]`);
+    expect(getCalendarActiveElement() === focusedTdEl).to.be.true;
+
+    //close and open menu
+    inputEl.click();
+    await waitUntil(() => el.menuIsOpen === false);
+    inputEl.click();
+    await waitUntil(() => el.menuIsOpen === true);
+
+    expect(getCalendarActiveElement() === selectedTdEl).to.be.true;
+  });
+  it("in month view, when calendar focus is moved, it should auto focus to the today calendar date after close and open", async () => {
+    const { calendar, getCalendarActiveElement, inputEl, el } = await monthViewSetup(["01/02/2024"]);
+    const selectedButtonEL = calendar.shadowRoot?.querySelector(`button[data-month="1"]`);
+    expect(getCalendarActiveElement() === selectedButtonEL).to.be.true;
+
+    await sendKeys({ press: "ArrowDown" });
+    await calendar.updateComplete;
+
+    const focusedButtonEl = calendar.shadowRoot?.querySelector(`button[data-month="4"]`);
+    expect(getCalendarActiveElement() === focusedButtonEl).to.be.true;
+
+    //close and open menu
+    inputEl.click();
+    await waitUntil(() => el.menuIsOpen === false);
+    inputEl.click();
+    await waitUntil(() => el.menuIsOpen === true);
+
+    expect(getCalendarActiveElement() === selectedButtonEL).to.be.true;
+  });
+  it("in year view, when calendar focus is moved, it should auto focus to the today calendar date after close and open", async () => {
+    const { calendar, getCalendarActiveElement, inputEl, el } = await yearViewSetup(["01/02/2024"]);
+    const selectedButtonEL = calendar.shadowRoot?.querySelector(`button[data-year="2024"]`);
+    expect(getCalendarActiveElement() === selectedButtonEL).to.be.true;
+
+    await sendKeys({ press: "ArrowDown" });
+    await calendar.updateComplete;
+
+    const focusedButtonEl = calendar.shadowRoot?.querySelector(`button[data-year="2027"]`);
+    expect(getCalendarActiveElement() === focusedButtonEl).to.be.true;
+
+    //close and open menu
+    inputEl.click();
+    await waitUntil(() => el.menuIsOpen === false);
+    inputEl.click();
+    await waitUntil(() => el.menuIsOpen === true);
+
+    expect(getCalendarActiveElement() === selectedButtonEL).to.be.true;
   });
 });

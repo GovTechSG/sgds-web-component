@@ -1,4 +1,4 @@
-import { setTimeToNoon } from "../../src/utils/time";
+import { sanitizedNextMonth, setTimeToNoon, sanitizedPreviousMonth } from "../../src/utils/time";
 import { expect } from "@open-wc/testing";
 
 describe("setTimeToNoon", () => {
@@ -24,5 +24,34 @@ describe("setTimeToNoon", () => {
 
     expect(noonDate.getSeconds()).not.to.equal(mockSecond);
     expect(noonDate.getSeconds()).to.equal(0);
+  });
+});
+
+describe("sanitizedNextMonth", async () => {
+  it("when the current month has 31 days and next month has less than 31 days, it should return last day of the next month", () => {
+    const testDate = new Date(2024, 0, 31);
+    const nextMonthDate = sanitizedNextMonth(testDate);
+    const expected = new Date(2024, 1, 29);
+    expect(nextMonthDate).to.deep.equal(expected);
+  });
+  it("when the current month is on last day (29) and next month has more than 29 days, it should return 29th day of  next month", () => {
+    const testDate = new Date(2024, 1, 29);
+    const nextMonthDate = sanitizedNextMonth(testDate);
+    const expected = new Date(2024, 2, 29);
+    expect(nextMonthDate).to.deep.equal(expected);
+  });
+});
+describe("sanitizedPreviousMonth", async () => {
+  it("when the current month has 31 days and prev month has less than 31 days, it should return last day of the prev month", () => {
+    const testDate = new Date(2023, 11, 31);
+    const prevMonthDate = sanitizedPreviousMonth(testDate);
+    const expected = new Date(2023, 10, 30);
+    expect(prevMonthDate).to.deep.equal(expected);
+  });
+  it("when the current month is on last day (29) and prev month has more than 29 days, it should return 29th day of  prev month", () => {
+    const testDate = new Date(2024, 1, 29);
+    const prevMonthDate = sanitizedPreviousMonth(testDate);
+    const expected = new Date(2024, 0, 29);
+    expect(prevMonthDate).to.deep.equal(expected);
   });
 });

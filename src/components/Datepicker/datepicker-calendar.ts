@@ -336,7 +336,7 @@ export class DatepickerCalendar extends SgdsElement {
               data-date=${date}
               data-day=${day}
               class=${classMap({
-                today: !(isFirstSelectedDate || isLastSelectedDate) && isCurrentDay && isCurrentMonth && isCurrentYear,
+                today: isCurrentDay && isCurrentMonth && isCurrentYear,
                 "selected-ends": isFirstSelectedDate || isLastSelectedDate,
                 active: isSelected,
                 disabled: beforeMinDate || afterMinDate
@@ -388,6 +388,7 @@ export class DatepickerCalendar extends SgdsElement {
   }
   /** @internal */
   private generateMonths() {
+    const today = new Date();
     const rangeDates = this.generateIncrementDates();
     const selectedTime = rangeDates.map(e => setTimeToNoon(new Date(e.getFullYear(), e.getMonth())).getTime());
 
@@ -396,6 +397,7 @@ export class DatepickerCalendar extends SgdsElement {
     const monthView = html`
       <div class="sgds monthpicker">
         ${DatepickerCalendar.MONTHVIEW_LABELS.map((m, idx) => {
+          const isCurrentMonth = idx === today.getMonth() && year === today.getFullYear();
           const time = setTimeToNoon(new Date(year, idx)).getTime();
           const isFirstSelectedMonth = rangeDates[0].getMonth() === idx;
           const isFirstSelectedYear = rangeDates[0].getFullYear() === year;
@@ -404,6 +406,7 @@ export class DatepickerCalendar extends SgdsElement {
           return html` <button
             class=${classMap({
               active: selectedTime.includes(time),
+              today: isCurrentMonth,
               month: true,
               "selected-ends":
                 (isFirstSelectedMonth && isFirstSelectedYear) || (isLastSelectedMonth && isLastSelectedYear)
@@ -423,7 +426,6 @@ export class DatepickerCalendar extends SgdsElement {
   /** @internal */
   private generateYears() {
     const selectedYears = this.generateIncrementDates().map(e => e.getFullYear());
-
     const CURRENT_YEAR = new Date().getFullYear();
     const displayYear = this.displayDate.getFullYear();
 
@@ -448,6 +450,7 @@ export class DatepickerCalendar extends SgdsElement {
               class=${classMap({
                 active: selectedYears.includes(y),
                 year: true,
+                today: CURRENT_YEAR === y,
                 "selected-ends": isFirstSelectedYear || isLastSectedYear
               })}
               @click=${() => this.onClickYear(y)}

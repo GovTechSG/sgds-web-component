@@ -168,6 +168,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     this.addEventListener("sgds-selectyear", this.handleSelectYear);
     this.addEventListener("sgds-selectdates", this.handleSelectDates);
     this.addEventListener("keydown", this.handleTab);
+    this.addEventListener("sgds-hide", this.handleCloseMenu);
 
     if (this.initialValue && this.initialValue.length > 0) {
       // Validate initialValue against the dateFormat regex
@@ -226,6 +227,17 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   @watch("value")
   handleValueChange() {
     this.emit("sgds-change-date");
+  }
+
+  private async handleCloseMenu() {
+    if (this.selectedDateRange.length === 0) {
+      this.displayDate = new Date();
+    } else {
+      const selectedDatesLength = this.selectedDateRange.length;
+      this.displayDate = this.selectedDateRange[selectedDatesLength - 1];
+      const calendar = await this.calendar;
+      calendar.updateFocusedDate();
+    }
   }
 
   /** @internal */

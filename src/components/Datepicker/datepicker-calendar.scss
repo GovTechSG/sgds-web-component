@@ -8,7 +8,6 @@
 }
 %active-shared {
   cursor: pointer;
-  color: var(--datepicker-theme-color);
   background-color: var(--datepicker-hover-bg-color);
 }
 
@@ -37,7 +36,7 @@ button.year {
     @extend %active-shared;
   }
   &:focus {
-    outline: var(--datepicker-theme-color) solid 2px;
+    outline: var(--datepicker-theme-color) auto 2px;
     z-index: 100;
   }
 }

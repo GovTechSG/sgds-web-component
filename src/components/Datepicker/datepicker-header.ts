@@ -5,6 +5,8 @@ import SgdsElement from "../../base/sgds-element";
 import styles from "./datepicker-header.scss";
 import { ViewEnum } from "./types";
 import { watch } from "../../utils/watch";
+import { isLastDayOfMonth, lastDayOfMonth } from "date-fns";
+import { sanitizedNextMonth, sanitizedPreviousMonth } from "../../utils/time";
 
 const MONTH_LABELS = [
   "January",
@@ -90,13 +92,12 @@ export class DatepickerHeader extends SgdsElement {
   /** @internal */
   private handleClickPrevious() {
     const { view, displayDate, focusedDate } = this;
-    const newDisplayDate = new Date(displayDate);
+    let newDisplayDate = new Date(displayDate);
     if (view === "months") {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() - 1);
     } else if (this.view === "years") {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() - 12);
     } else {
-      newDisplayDate.setMonth(newDisplayDate.getMonth() - 1);
       /**
        * FocusedDate gets precedence over displayDate.
        *  This happens when the arrow keys are pressed to
@@ -104,7 +105,9 @@ export class DatepickerHeader extends SgdsElement {
        * shift months
        */
       if (focusedDate.getDate() !== displayDate.getDate()) {
-        newDisplayDate.setDate(focusedDate.getDate());
+        newDisplayDate = sanitizedPreviousMonth(focusedDate);
+      } else {
+        newDisplayDate = sanitizedPreviousMonth(newDisplayDate);
       }
     }
     this.displayDate = newDisplayDate; // Update the displayDate property
@@ -115,17 +118,18 @@ export class DatepickerHeader extends SgdsElement {
   /** @internal */
   private handleClickNext() {
     const { view, displayDate, focusedDate } = this;
-    const newDisplayDate = new Date(displayDate);
+    let newDisplayDate = new Date(displayDate);
 
     if (view === "months") {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() + 1);
     } else if (this.view === "years") {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() + 12);
     } else {
-      newDisplayDate.setMonth(newDisplayDate.getMonth() + 1);
       /** FocusedDate gets precedence over displayDate  */
       if (focusedDate.getDate() !== displayDate.getDate()) {
-        newDisplayDate.setDate(focusedDate.getDate());
+        newDisplayDate = sanitizedNextMonth(focusedDate);
+      } else {
+        newDisplayDate = sanitizedNextMonth(newDisplayDate);
       }
     }
     this.displayDate = newDisplayDate; // Update the displayDate property

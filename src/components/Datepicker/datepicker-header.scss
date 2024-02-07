@@ -8,7 +8,7 @@
     border: none;
     font-weight: bold;
     &:focus {
-      outline: var(--datepicker-theme-color) solid 2px;
+      outline: var(--datepicker-theme-color) auto 2px;
     }
   }
 
