@@ -45,10 +45,9 @@ td {
   width: 3rem;
   height: 3rem;
   padding: 0;
-  &.disabled {
-    color: var(--sgds-gray-400);
-  }
+
   &[data-day] {
+    cursor: pointer;
     &:hover:not(.disabled) {
       @extend %active-shared;
     }
@@ -60,6 +59,10 @@ td {
     }
     &:focus {
       outline: var(--datepicker-theme-color) auto 2px;
+    }
+    &.disabled {
+      color: var(--sgds-gray-400);
+      cursor: not-allowed;
     }
   }
 }

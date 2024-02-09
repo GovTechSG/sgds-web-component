@@ -1,4 +1,4 @@
-import { sanitizedNextMonth, setTimeToNoon, sanitizedPreviousMonth } from "../../src/utils/time";
+import { sanitizedNextMonth, setTimeToNoon, sanitizedPreviousMonth, createYearViewArray } from "../../src/utils/time";
 import { expect } from "@open-wc/testing";
 
 describe("setTimeToNoon", () => {
@@ -55,3 +55,46 @@ describe("sanitizedPreviousMonth", async () => {
     expect(prevMonthDate).to.deep.equal(expected);
   });
 });
+
+describe("createYearViewArray", () => {
+  it("when displayDate is same year as currentYear, returns expected array", () => {
+     const [today, displayDate]= [new Date(), new Date()]
+
+    const currentYear = today.getFullYear()
+    let yearCount: number = currentYear
+    const expected: number[] = []
+    for(let i = 0; i < 12; i++){
+      expected.push(yearCount)
+      yearCount++
+    }
+    expect(createYearViewArray(displayDate, currentYear)).to.deep.equal(expected)
+   
+  })
+  it("when displayDate's year is < +12 of currentYear, returns expected array", () => {
+    const today = new Date()
+    const currentYear = today.getFullYear()
+    const displayDate = new Date(currentYear + 5, 3)
+    let yearCount: number = currentYear
+    const expected: number[] = []
+    for(let i = 0; i < 12; i++){
+      expected.push(yearCount)
+      yearCount++
+    }
+    expect(createYearViewArray(displayDate, currentYear)).to.deep.equal(expected)
+
+  })
+  it("when displayDate's year is >= +12 of currentYear, returns the expected array", () => {
+    const today = new Date()
+    const currentYear = today.getFullYear()
+    const displayDate = new Date(currentYear + 12, 3)
+    
+    let yearCount: number = currentYear + 12
+    const expected: number[] = []
+    for(let i = 0; i < 12; i++){
+      expected.push(yearCount)
+      yearCount++
+    }
+    expect(createYearViewArray(displayDate, currentYear)).to.deep.equal(expected)
+
+  })
+})

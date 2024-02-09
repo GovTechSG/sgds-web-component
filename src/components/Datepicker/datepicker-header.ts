@@ -1,12 +1,10 @@
 import { html } from "lit";
 import { property } from "lit/decorators.js";
-import { styleMap } from "lit/directives/style-map.js";
 import SgdsElement from "../../base/sgds-element";
+import { sanitizedNextMonth, sanitizedPreviousMonth } from "../../utils/time";
+import { watch } from "../../utils/watch";
 import styles from "./datepicker-header.scss";
 import { ViewEnum } from "./types";
-import { watch } from "../../utils/watch";
-import { isLastDayOfMonth, lastDayOfMonth } from "date-fns";
-import { sanitizedNextMonth, sanitizedPreviousMonth } from "../../utils/time";
 
 const MONTH_LABELS = [
   "January",
@@ -39,13 +37,12 @@ export class DatepickerHeader extends SgdsElement {
   /** @internal */
   @property()
   view: ViewEnum;
-
   /** @internal */
   @property()
   focusedTabIndex: number;
 
   @watch("focusedTabIndex", { waitUntilFirstUpdate: true })
-  handleFocusedTabIndexChange() {
+  _handleFocusedTabIndexChange() {
     if (this.focusedTabIndex < 3) {
       const buttonToFocus: HTMLButtonElement = this.shadowRoot.querySelector(
         `button[tabindex="${this.focusedTabIndex}"]`
@@ -56,8 +53,7 @@ export class DatepickerHeader extends SgdsElement {
     return;
   }
 
-  /** @internal */
-  private changeView() {
+  private _changeView() {
     switch (this.view) {
       case "days":
         this.view = "months";
@@ -71,8 +67,7 @@ export class DatepickerHeader extends SgdsElement {
     this.emit("sgds-view", { detail: this.view }); // emit event to render the correct view
   }
 
-  /** @internal */
-  private renderHeader() {
+  private _renderHeader() {
     const { view, displayDate } = this;
     if (view === "months") {
       return html` ${displayDate.getFullYear()} `;
@@ -116,7 +111,7 @@ export class DatepickerHeader extends SgdsElement {
   }
 
   /** @internal */
-  private handleClickNext() {
+  private _handleClickNext() {
     const { view, displayDate, focusedDate } = this;
     let newDisplayDate = new Date(displayDate);
 
@@ -139,9 +134,6 @@ export class DatepickerHeader extends SgdsElement {
   }
 
   render() {
-    const buttonYearStyle = {
-      cursor: "default"
-    };
     return html`
       <div class="datepicker-header dropdown-header" role="heading">
         <div class="text-center d-flex justify-content-between align-items-center">
@@ -161,13 +153,12 @@ export class DatepickerHeader extends SgdsElement {
             </svg>
           </button>
           <button
-            @click=${this.changeView}
-            style=${styleMap(this.view === "years" ? buttonYearStyle : {})}
+            @click=${this._changeView}
             tabindex="1"
           >
-            ${this.renderHeader()}
+            ${this._renderHeader()}
           </button>
-          <button @click="${this.handleClickNext}" tabindex="2">
+          <button @click="${this._handleClickNext}" tabindex="2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

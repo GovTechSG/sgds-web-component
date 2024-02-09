@@ -1,17 +1,25 @@
 import { getDaysInMonth, isLastDayOfMonth, lastDayOfMonth } from "date-fns";
 
-const CURRENT_YEAR = new Date().getFullYear();
-export const calculateYearRange = (displayDate: Date) => {
+/** 
+ * @description - creates calendar's year view years array with context of 
+ * datepicker's displayDate and current year
+ * Fixes current year to the start of array 
+ */
+export const createYearViewArray = (displayDate: Date, currentYear: number) => {
   // keeping the year range position to be always fixed by setting current year to the first element of the calendar
   const displayYear = displayDate.getFullYear();
-  const yearsPosition = (displayYear - CURRENT_YEAR) % 12;
+  const remainder = (displayYear - currentYear) % 12;
+  const yearsPosition = remainder < 0 ? 12 + remainder : remainder;
+
+  const yearArray = [];
   const startLimit = displayYear - yearsPosition;
   const endLimit = displayYear - yearsPosition + 12 - 1; // -1 to match the index of the years (index starts from 0)
-  const yearArray: number[] = [];
+
   for (let i = startLimit; i < endLimit + 1; i++) {
     yearArray.push(i);
   }
-  return { yearArray, displayYear };
+
+  return yearArray;
 };
 export const sanitizedNextMonth = (d: Date) => {
   const month = d.getMonth();
