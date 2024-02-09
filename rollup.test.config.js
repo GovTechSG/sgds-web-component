@@ -5,17 +5,30 @@ import litcss from "rollup-plugin-postcss-lit";
 import path from "path";
 import replace from "@rollup/plugin-replace";
 const packageJson = require("./package.json");
-const fs = require("fs");
+import * as fs from "fs";
 
-export const getFiles = (entry, extensions = [], excludeExtensions = []) => {
-  const files = fs.readdirSync(entry);
-  const filePaths = files.map(fileName => path.join(entry, fileName));
-  return filePaths;
-};
+function getFilesInDirectorySync(directoryPath) {
+  try {
+    const files = fs.readdirSync(directoryPath);
+    const result = files.map(file => {
+      const filePath = path.join(directoryPath, file);
+      const stats = fs.statSync(filePath);
+      if (stats.isFile()) {
+        return filePath;
+      }
+    });
+
+    // Filter out undefined values (directories)
+    return result.filter(filePath => filePath !== undefined);
+  } catch (error) {
+    console.error("Error reading directory:", error);
+    throw error;
+  }
+}
 
 export default [
   {
-    input: getFiles("./test"),
+    input: [...getFilesInDirectorySync("./test"), ...getFilesInDirectorySync("./test/utils")],
     output: [
       {
         dir: "test-outdir",

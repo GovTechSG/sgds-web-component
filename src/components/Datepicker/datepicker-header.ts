@@ -1,8 +1,10 @@
 import { html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
+import { sanitizedNextMonth, sanitizedPreviousMonth } from "../../utils/time";
+import { watch } from "../../utils/watch";
 import styles from "./datepicker-header.scss";
-import { styleMap } from "lit/directives/style-map.js";
+import { ViewEnum } from "./types";
 
 const MONTH_LABELS = [
   "January",
@@ -25,19 +27,33 @@ export class DatepickerHeader extends SgdsElement {
   /** @internal */
   @property({ attribute: false })
   displayDate: Date;
+  /** @internal */
+  @property({ attribute: false })
+  focusedDate: Date;
+  /** @internal */
+  @property({ attribute: false })
+  selectedDate: Date[] = [];
 
   /** @internal */
-  @state()
-  view: string;
+  @property()
+  view: ViewEnum;
+  /** @internal */
+  @property()
+  focusedTabIndex: number;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.displayDate = new Date(); // Set the current date as the displayDate
-    this.view = "days";
+  @watch("focusedTabIndex", { waitUntilFirstUpdate: true })
+  _handleFocusedTabIndexChange() {
+    if (this.focusedTabIndex < 3) {
+      const buttonToFocus: HTMLButtonElement = this.shadowRoot.querySelector(
+        `button[tabindex="${this.focusedTabIndex}"]`
+      );
+      buttonToFocus.focus();
+      return;
+    }
+    return;
   }
 
-  /** @internal */
-  private changeView() {
+  private _changeView() {
     switch (this.view) {
       case "days":
         this.view = "months";
@@ -51,63 +67,77 @@ export class DatepickerHeader extends SgdsElement {
     this.emit("sgds-view", { detail: this.view }); // emit event to render the correct view
   }
 
-  /** @internal */
-  private renderHeader() {
+  private _renderHeader() {
     const { view, displayDate } = this;
-
     if (view === "months") {
       return html` ${displayDate.getFullYear()} `;
     }
     if (view === "years") {
-      return html` ${displayDate.getFullYear() - 5} - ${displayDate.getFullYear() + 6} `;
+      const CURRENT_YEAR = new Date().getFullYear();
+      const displayYear = this.displayDate.getFullYear();
+      const remainder = (displayYear - CURRENT_YEAR) % 12;
+      const yearsPosition = remainder < 0 ? 12 + remainder : remainder;
+      const startLimit = displayYear - yearsPosition;
+      const endLimit = displayYear - yearsPosition + 12 - 1;
+      return html` ${startLimit} - ${endLimit} `;
     }
     return html` ${MONTH_LABELS[displayDate.getMonth()]} ${displayDate.getFullYear()} `;
   }
 
   /** @internal */
   private handleClickPrevious() {
-    const { view, displayDate } = this;
-    const newDisplayDate = new Date(displayDate);
-    newDisplayDate.setDate(1);
+    const { view, displayDate, focusedDate } = this;
+    let newDisplayDate = new Date(displayDate);
     if (view === "months") {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() - 1);
     } else if (this.view === "years") {
-      newDisplayDate.setFullYear(newDisplayDate.getFullYear() - 10);
+      newDisplayDate.setFullYear(newDisplayDate.getFullYear() - 12);
     } else {
-      newDisplayDate.setMonth(newDisplayDate.getMonth() - 1);
+      /**
+       * FocusedDate gets precedence over displayDate.
+       *  This happens when the arrow keys are pressed to
+       *  change focus date and user clicks the arrow buttons to
+       * shift months
+       */
+      if (focusedDate.getDate() !== displayDate.getDate()) {
+        newDisplayDate = sanitizedPreviousMonth(focusedDate);
+      } else {
+        newDisplayDate = sanitizedPreviousMonth(newDisplayDate);
+      }
     }
     this.displayDate = newDisplayDate; // Update the displayDate property
     // emit event to render correct view
-    this.emit("sgds-view-date", { detail: this.displayDate });
+    this.emit("sgds-change-calendar", { detail: this.displayDate });
   }
 
   /** @internal */
-  private handleClickNext() {
-    const { view, displayDate } = this;
-    const newDisplayDate = new Date(displayDate);
-    newDisplayDate.setDate(1);
+  private _handleClickNext() {
+    const { view, displayDate, focusedDate } = this;
+    let newDisplayDate = new Date(displayDate);
 
-    newDisplayDate.setDate(1);
     if (view === "months") {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() + 1);
     } else if (this.view === "years") {
-      newDisplayDate.setFullYear(newDisplayDate.getFullYear() + 10);
+      newDisplayDate.setFullYear(newDisplayDate.getFullYear() + 12);
     } else {
-      newDisplayDate.setMonth(newDisplayDate.getMonth() + 1);
+      /** FocusedDate gets precedence over displayDate  */
+      if (focusedDate.getDate() !== displayDate.getDate()) {
+        newDisplayDate = sanitizedNextMonth(focusedDate);
+      } else {
+        newDisplayDate = sanitizedNextMonth(newDisplayDate);
+      }
     }
     this.displayDate = newDisplayDate; // Update the displayDate property
+
     //emit event to render correct view
-    this.emit("sgds-view-date", { detail: this.displayDate });
+    this.emit("sgds-change-calendar", { detail: this.displayDate });
   }
 
   render() {
-    const buttonYearStyle = {
-      cursor: "default"
-    };
     return html`
       <div class="datepicker-header dropdown-header" role="heading">
         <div class="text-center d-flex justify-content-between align-items-center">
-          <button @click="${this.handleClickPrevious}">
+          <button @click="${this.handleClickPrevious}" tabindex="0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -122,10 +152,8 @@ export class DatepickerHeader extends SgdsElement {
               />
             </svg>
           </button>
-          <button @click=${this.changeView} style=${styleMap(this.view === "years" ? buttonYearStyle : {})}>
-            ${this.renderHeader()}
-          </button>
-          <button @click="${this.handleClickNext}">
+          <button @click=${this._changeView} tabindex="1">${this._renderHeader()}</button>
+          <button @click="${this._handleClickNext}" tabindex="2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
