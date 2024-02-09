@@ -152,12 +152,7 @@ export class DatepickerHeader extends SgdsElement {
               />
             </svg>
           </button>
-          <button
-            @click=${this._changeView}
-            tabindex="1"
-          >
-            ${this._renderHeader()}
-          </button>
+          <button @click=${this._changeView} tabindex="1">${this._renderHeader()}</button>
           <button @click="${this._handleClickNext}" tabindex="2">
             <svg
               xmlns="http://www.w3.org/2000/svg"

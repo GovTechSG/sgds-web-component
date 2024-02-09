@@ -1,9 +1,9 @@
 import { getDaysInMonth, isLastDayOfMonth, lastDayOfMonth } from "date-fns";
 
-/** 
- * @description - creates calendar's year view years array with context of 
+/**
+ * @description - creates calendar's year view years array with context of
  * datepicker's displayDate and current year
- * Fixes current year to the start of array 
+ * Fixes current year to the start of array
  */
 export const createYearViewArray = (displayDate: Date, currentYear: number) => {
   // keeping the year range position to be always fixed by setting current year to the first element of the calendar

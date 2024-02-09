@@ -89,7 +89,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   @queryAsync("sgds-datepicker-calendar")
   private calendar: Promise<DatepickerCalendar>;
-  
+
   constructor() {
     super();
     this.modifierOpt = [

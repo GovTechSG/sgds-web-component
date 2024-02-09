@@ -315,7 +315,6 @@ export class DatepickerCalendar extends SgdsElement {
           const isLastSelectedDate =
             selectedDates.length > 1 && rangeSelectedDates[rangeSelectedDates.length - 1].toISOString() === date;
 
-  
           week.push(
             html`<td
               key=${j}
