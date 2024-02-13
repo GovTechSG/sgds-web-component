@@ -214,6 +214,9 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     );
   }
   private _handleTab(event: KeyboardEvent) {
+    if (!this.menuIsOpen) {
+      return;
+    }
     const tabIndexArray = Array(4);
     if (event.shiftKey && event.key === "Tab") {
       event.preventDefault();
@@ -379,21 +382,37 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
           .value=${live(formattedDate)}
           inputClasses="rounded-0 rounded-start"
           placeholder="${getPlaceholder()}"
-          aria-expanded="${this.menuIsOpen}"
           ${ref(this.myDropdown)}
-          @click=${() => this.toggleMenu()}
           readonly
           ?required=${this.required}
           ?disabled=${this.disabled}
-          role="combobox"
-          aria-haspopup="dialog"
-          aria-controls=${this.dropdownMenuId}
         ></sgds-input>
         <button
+          class="sgds btn rounded-0 border btn-outline-dark"
+          aria-expanded="${this.menuIsOpen}"
+          aria-haspopup="dialog"
+          aria-controls=${this.dropdownMenuId}
+          @click=${() => this.toggleMenu()}
+          aria-label=${this.menuIsOpen ? "Close Calendar" : "Open Calendar"}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-calendar"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"
+            />
+          </svg>
+        </button>
+        <button
           ?disabled=${this.disabled}
-          class="btn sgds rounded-0 d-flex align-items-center"
-          aria-label="reset the datepicker"
+          class="btn sgds rounded-0 d-flex align-items-center reset-btn"
           @click=${() => this._handleButtonResetClick()}
+          aria-label="Reset Datepicker"
         >
           ${svgEl}
         </button>

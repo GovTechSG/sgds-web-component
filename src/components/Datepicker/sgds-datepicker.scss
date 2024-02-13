@@ -23,7 +23,7 @@ sgds-input {
   margin-right: 0; /* Remove the margin on the right */
 }
 
-button.btn {
+.reset-btn {
   background-color: var(--datepicker-closebutton-bg-color);
   color: var(--datepicker-closebutton-color);
   &:hover {

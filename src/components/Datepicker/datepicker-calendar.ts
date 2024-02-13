@@ -356,9 +356,9 @@ export class DatepickerCalendar extends SgdsElement {
             ${DatepickerCalendar.DAY_LABELS.map(
               (label: string, index: number) =>
                 html`
-                  <td key=${index}>
+                  <th key=${index}>
                     <small>${label}</small>
-                  </td>
+                  </th>
                 `
             )}
           </tr>
