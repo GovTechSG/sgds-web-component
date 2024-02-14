@@ -28,4 +28,5 @@ import "./components/Table";
 import "./components/Textarea";
 import "./components/Toast";
 import "./components/Tooltip";
+import "./components/TestInput";
 // COMPONENT IMPORTS
