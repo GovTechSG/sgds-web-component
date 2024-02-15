@@ -1,6 +1,6 @@
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
-import { property, queryAsync, query, state } from "lit/decorators.js";
+import { property, queryAsync, state } from "lit/decorators.js";
 import { live } from "lit/directives/live.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
@@ -12,6 +12,7 @@ import styles from "./sgds-datepicker.scss";
 import { ViewEnum } from "./types";
 import { sortAscDates } from "../../utils/time";
 import IMask, { InputMask } from "imask";
+import { isAfter, isBefore, isValid, parse } from "date-fns";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -33,7 +34,11 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  * displayDate on certain occasions. Example, when keyboard moves up to the next month, it updates displayDate which then affect the current
  * date view of the calendar
  */
-
+const DATE_PATTERNS = {
+  "DD/MM/YYYY": { imPattern: "d{/}`m{/}`Y", fnsPattern: "dd/MM/yyyy" },
+  "MM/DD/YYYY": { imPattern: "m{/}`d{/}`Y", fnsPattern: "MM/dd/yyyy" },
+  "YYYY/MM/DD": { imPattern: "Y`m{/}`d{/}}", fnsPattern: "yyyy/MM/dd" }
+};
 export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   static styles = [DropdownElement.styles, styles];
 
@@ -85,6 +90,8 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   @state() private focusedTabIndex = 3;
 
+  @state() private invalidInput = false;
+
   @queryAsync("sgds-input")
   private inputDropdownRef: Promise<SgdsInput>;
 
@@ -127,7 +134,8 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
         return;
       }
 
-      const startDate = this._parseDateStringToDate(startDateString);
+      // const startDate = this._parseDateStringToDate(startDateString);
+      const startDate = parse(startDateString, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date());
 
       if (this.mode === "single" && startDate) {
         // Single mode
@@ -143,7 +151,8 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
           return;
         }
 
-        const endDate = this._parseDateStringToDate(endDateString);
+        // const endDate = this._parseDateStringToDate(endDateString);
+        const endDate = parse(endDateString, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date());
 
         if (startDate && endDate) {
           this.selectedDateRange = [startDate, endDate];
@@ -169,16 +178,41 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
       this.value = "";
     }
   }
-  private async _applyInputMask() {
+  // private async _applyRangeInputMask(){
+
+  // }
+  private async _applyInputMask(dateFormat: string) {
     const datePatterns = {
-      "DD/MM/YYYY": "d{/}`m{/}`Y",
-      "MM/DD/YYYY": "m{/}`d{/}`Y",
-      "YYYY/MM/DD": "Y`m{/}`d{/}"
+      "DD/MM/YYYY": { imPattern: "d{/}`m{/}`Y", fnsPattern: "dd/MM/yyyy" },
+      "MM/DD/YYYY": { imPattern: "m{/}`d{/}`Y", fnsPattern: "MM/dd/yyyy" },
+      "YYYY/MM/DD": { imPattern: "Y`m{/}`d{/}}", fnsPattern: "yyyy/MM/dd" }
     };
     const shadowInput = (await this.inputDropdownRef).shadowRoot.querySelector("input");
+    const rangeMaskOptions = {
+      mask: "from - to",
+      blocks: {
+        from: {
+          mask: Date
+        },
+        to: {
+          mask: Date
+        }
+      },
+      pattern: datePatterns[this.dateFormat].imPattern,
+      format: function (date) {
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        const year = date.getFullYear();
+
+        if (day < 10) day = "0" + day;
+        if (month < 10) month = "0" + month;
+
+        return [day, month, year].join("/");
+      }
+    };
     const maskOptions = {
-      mask: Date,
-      pattern: datePatterns[this.dateFormat],
+      mask: datePatterns[dateFormat].imPattern,
+      pattern: datePatterns[dateFormat].imPattern,
       format: function (date) {
         let day = date.getDate();
         let month = date.getMonth() + 1;
@@ -191,31 +225,55 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
       },
       // define str -> date convertion
       parse: function (str) {
-        const yearMonthDay = str.split("/");
-        switch (this.dateFormat) {
-          case "DD/MM/YYYY":
-            return new Date(yearMonthDay[2], yearMonthDay[1] - 1, yearMonthDay[0]);
-          case "MM/DD/YYYY":
-            return new Date(yearMonthDay[2], yearMonthDay[0] - 1, yearMonthDay[1]);
-          case "YYYY/MM/DD":
-            return new Date(yearMonthDay[0], yearMonthDay[1] - 1, yearMonthDay[2]);
-          default:
-            return new Date(yearMonthDay[2], yearMonthDay[1] - 1, yearMonthDay[0]);
-        }
+        return parse(str, datePatterns[dateFormat].fnsPattern, new Date());
       },
       lazy: false,
       blocks: {
-        d: { mask: IMask.MaskedRange, placeholderChar: "d", from: 1, to: 31, maxLength: 2 },
-        m: { mask: IMask.MaskedRange, placeholderChar: "m", from: 1, to: 12, maxLength: 2 },
-        Y: { mask: IMask.MaskedRange, placeholderChar: "y", from: 1900, to: 2999, maxLength: 4 }
+        d: { mask: IMask.MaskedRange, placeholderChar: "d", from: 1, to: 99, maxLength: 2 },
+        m: { mask: IMask.MaskedRange, placeholderChar: "m", from: 1, to: 99, maxLength: 2 },
+        Y: { mask: IMask.MaskedRange, placeholderChar: "y", from: 0, to: 2999, maxLength: 4 }
       }
     };
-    this.mask = IMask(shadowInput, maskOptions);
+    this.mask = IMask(shadowInput, this.mode === "single" ? maskOptions : rangeMaskOptions);
+    let timeout: NodeJS.Timeout;
+    /**
+     * validation while typing
+     */
+    this.mask.on("accept", () => {
+      // cleanup any timeout at the start of the callback
+      clearTimeout(timeout);
+      const currentInputValue = this.mask.masked.value;
+      if (currentInputValue === this.dateFormat.toLowerCase()) {
+        return shadowInput.classList.remove("is-invalid");
+      } else {
+        timeout = setTimeout(() => {
+          const parsedValue = parse(currentInputValue, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date());
+          if (!isValid(parsedValue) || isBefore(parsedValue, new Date(0, 0, 1))) {
+            shadowInput.classList.add("is-invalid");
+          } else {
+            shadowInput.classList.remove("is-invalid");
+          }
+        }, 500);
+      }
+    });
+    /**
+     * Validation after date is complete
+     */
     this.mask.on("complete", async () => {
-      const inputDate = this._parseDateStringToDate(this.mask.value);
-      this.selectedDateRange = [inputDate];
-      this.displayDate = inputDate;
-      this.value = this.mask.value;
+      const sgdsInput = await this.inputDropdownRef;
+      const inputDate = parse(this.mask.value, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date());
+      if (isValid(inputDate) && isAfter(inputDate, new Date(0, 0, 1))) {
+        this.selectedDateRange = [inputDate];
+        this.displayDate = inputDate;
+        this.value = this.mask.value;
+        shadowInput.classList.remove("is-invalid");
+        //for form validation
+        sgdsInput.setCustomValidity("");
+      } else {
+        shadowInput.classList.add("is-invalid");
+        // for form validation
+        sgdsInput.setCustomValidity("Invalid Date");
+      }
     });
   }
   private _destroyInputMask() {
@@ -224,34 +282,13 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   async firstUpdated() {
     super.firstUpdated();
 
-    this._applyInputMask();
-
+    await this._applyInputMask(this.dateFormat);
     if (this.menuIsOpen) {
       const input = await this.inputDropdownRef;
       this.showMenu();
       const cal = await this.calendar;
       cal.focusOnCalendar(input);
     }
-  }
-
-  private _parseDateStringToDate(dateString: string): Date | null {
-    let year: string, month: string, day: string;
-
-    switch (this.dateFormat) {
-      case "MM/DD/YYYY":
-        [month, day, year] = dateString.split("/");
-        break;
-      case "DD/MM/YYYY":
-        [day, month, year] = dateString.split("/");
-        break;
-      case "YYYY/MM/DD":
-        [year, month, day] = dateString.split("/");
-        break;
-      default:
-        return null;
-    }
-
-    return new Date(`${year}-${month}-${day}`);
   }
 
   /** @internal */
@@ -387,13 +424,13 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     this.displayDate = event.detail;
   }
 
-  private _handleButtonResetClick() {
+  private async _handleButtonResetClick() {
     this.displayDate = new Date();
     this.selectedDateRange = [];
     this.value = "";
     this.view = "days";
     this._destroyInputMask();
-    this._applyInputMask();
+    await this._applyInputMask(this.dateFormat);
     this.hideMenu();
   }
 
@@ -419,19 +456,13 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
         />
       </svg>
     `;
-
-    const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
-    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-  </svg>
-    `;
+    const inputClasses = `rounded-0 rounded-start`;
     return html`
       <div>
-        <input id="myInput" type="text" />
         <sgds-input
           type="text"
-          icon=${svgIcon}
           .value=${live(formattedDate)}
-          inputClasses="rounded-0 rounded-start"
+          inputClasses=${inputClasses}
           ${ref(this.myDropdown)}
           ?required=${this.required}
           ?disabled=${this.disabled}

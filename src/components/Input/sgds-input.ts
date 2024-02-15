@@ -97,6 +97,9 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   public reportValidity() {
     return this.input.reportValidity();
   }
+  public setCustomValidity(err: string) {
+    return this.input.setCustomValidity(err);
+  }
   handleInvalid() {
     this.invalid = true;
   }

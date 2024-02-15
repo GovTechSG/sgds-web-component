@@ -85,6 +85,7 @@
     "@web/test-runner": "^0.17.1",
     "@web/test-runner-commands": "^0.6.5",
     "@web/test-runner-playwright": "^0.8.10",
+    "@webcomponents/scoped-custom-element-registry": "^0.0.9",
     "autoprefixer": "^10.4.8",
     "babel-loader": "^8.2.5",
     "cem-plugin-better-lit-types": "^0.2.0",
