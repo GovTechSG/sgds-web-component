@@ -183,36 +183,16 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   // }
   private async _applyInputMask(dateFormat: string) {
     const datePatterns = {
-      "DD/MM/YYYY": { imPattern: "d{/}`m{/}`Y", fnsPattern: "dd/MM/yyyy" },
-      "MM/DD/YYYY": { imPattern: "m{/}`d{/}`Y", fnsPattern: "MM/dd/yyyy" },
-      "YYYY/MM/DD": { imPattern: "Y`m{/}`d{/}}", fnsPattern: "yyyy/MM/dd" }
+      "DD/MM/YYYY": { imPattern: "`dd{/}`mm{/}`yyyy", fnsPattern: "dd/MM/yyyy" },
+      "MM/DD/YYYY": { imPattern: "mm{/}`dd{/}`yyyy", fnsPattern: "MM/dd/yyyy" },
+      "YYYY/MM/DD": { imPattern: "yyyy{/}`mm{/}`dd", fnsPattern: "yyyy/MM/dd" }
     };
     const shadowInput = (await this.inputDropdownRef).shadowRoot.querySelector("input");
-    const rangeMaskOptions = {
-      mask: "from - to",
-      blocks: {
-        from: {
-          mask: Date
-        },
-        to: {
-          mask: Date
-        }
-      },
-      pattern: datePatterns[this.dateFormat].imPattern,
-      format: function (date) {
-        let day = date.getDate();
-        let month = date.getMonth() + 1;
-        const year = date.getFullYear();
 
-        if (day < 10) day = "0" + day;
-        if (month < 10) month = "0" + month;
-
-        return [day, month, year].join("/");
-      }
-    };
     const maskOptions = {
       mask: datePatterns[dateFormat].imPattern,
       pattern: datePatterns[dateFormat].imPattern,
+      eager: true,
       format: function (date) {
         let day = date.getDate();
         let month = date.getMonth() + 1;
@@ -229,33 +209,56 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
       },
       lazy: false,
       blocks: {
-        d: { mask: IMask.MaskedRange, placeholderChar: "d", from: 1, to: 99, maxLength: 2 },
-        m: { mask: IMask.MaskedRange, placeholderChar: "m", from: 1, to: 99, maxLength: 2 },
-        Y: { mask: IMask.MaskedRange, placeholderChar: "y", from: 0, to: 2999, maxLength: 4 }
+        d: { mask: IMask.MaskedRange, placeholderChar: "d", from: 0, to: 9, maxLength: 1 },
+        m: { mask: IMask.MaskedRange, placeholderChar: "m", from: 0, to: 9, maxLength: 1 },
+        y: { mask: IMask.MaskedRange, placeholderChar: "y", from: 0, to: 9, maxLength: 1 }
       }
+    };
+    const rangeMaskOptions = {
+      mask: "from - to",
+      blocks: {
+        from: {
+          ...maskOptions
+          // eager: true,
+        },
+        to: {
+          ...maskOptions
+          // eager: true,
+        }
+      },
+      lazy: false
     };
     this.mask = IMask(shadowInput, this.mode === "single" ? maskOptions : rangeMaskOptions);
     let timeout: NodeJS.Timeout;
-    /**
-     * validation while typing
-     */
-    this.mask.on("accept", () => {
-      // cleanup any timeout at the start of the callback
+    const validateOnAccept = (inputMaskPlaceholder: string) => {
       clearTimeout(timeout);
       const currentInputValue = this.mask.masked.value;
-      if (currentInputValue === this.dateFormat.toLowerCase()) {
+      const dates = currentInputValue.split(" - ");
+      if (currentInputValue === inputMaskPlaceholder) {
         return shadowInput.classList.remove("is-invalid");
       } else {
         timeout = setTimeout(() => {
-          const parsedValue = parse(currentInputValue, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date());
-          if (!isValid(parsedValue) || isBefore(parsedValue, new Date(0, 0, 1))) {
-            shadowInput.classList.add("is-invalid");
-          } else {
-            shadowInput.classList.remove("is-invalid");
-          }
+          dates.forEach(d => {
+            const parsedValue = parse(d, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date());
+            if (!isValid(parsedValue) || isBefore(parsedValue, new Date(0, 0, 1))) {
+              shadowInput.classList.add("is-invalid");
+            } else {
+              shadowInput.classList.remove("is-invalid");
+            }
+          });
         }, 500);
       }
-    });
+    };
+    /**
+     * validation while typing `${this.dateFormat.toLowerCase()} - ${this.dateFormat.toLowerCase()}`
+     */
+    this.mask.on("accept", () =>
+      validateOnAccept(
+        this.mode === "range"
+          ? `${this.dateFormat.toLowerCase()} - ${this.dateFormat.toLowerCase()}`
+          : this.dateFormat.toLowerCase()
+      )
+    );
     /**
      * Validation after date is complete
      */
