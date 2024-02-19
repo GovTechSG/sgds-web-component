@@ -6,7 +6,6 @@ import { property, queryAsync, state } from "lit/decorators.js";
 import { live } from "lit/directives/live.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
-import { sortAscDates } from "../../utils/time";
 import { watch } from "../../utils/watch";
 import { SgdsInput } from "../Input/sgds-input";
 import { DatepickerCalendar } from "./datepicker-calendar";
@@ -15,6 +14,24 @@ import styles from "./sgds-datepicker.scss";
 import { ViewEnum } from "./types";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
+
+const DATE_PATTERNS = {
+  "DD/MM/YYYY": {
+    imPattern: "`dd{/}`mm{/}`yyyy",
+    imRangePattern: "`dd{/}`mm{/}`yyyy - `DD{/}`MM{/}`YYYY",
+    fnsPattern: "dd/MM/yyyy"
+  },
+  "MM/DD/YYYY": {
+    imPattern: "`mm{/}`dd{/}`yyyy",
+    imRangePattern: "`mm{/}`dd{/}`yyyy - `MM{/}`DD{/}`YYYY",
+    fnsPattern: "MM/dd/yyyy"
+  },
+  "YYYY/MM/DD": {
+    imPattern: "`yyyy{/}`mm{/}`dd",
+    imRangePattern: "`yyyy{/}`mm{/}`dd - `YYYY{/}`MM{/}`DD",
+    fnsPattern: "yyyy/MM/dd"
+  }
+};
 
 /**
  * @summary The `DatePicker` Component is built using `Dropdown`, `Input` and `Button` components. By default, the Calendar points to current date and input has no value. The input is a read-only and users can only pick dates using the Calendar.
@@ -34,11 +51,6 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  * displayDate on certain occasions. Example, when keyboard moves up to the next month, it updates displayDate which then affect the current
  * date view of the calendar
  */
-const DATE_PATTERNS = {
-  "DD/MM/YYYY": { imPattern: "d{/}`m{/}`Y", fnsPattern: "dd/MM/yyyy" },
-  "MM/DD/YYYY": { imPattern: "m{/}`d{/}`Y", fnsPattern: "MM/dd/yyyy" },
-  "YYYY/MM/DD": { imPattern: "Y`m{/}`d{/}}", fnsPattern: "yyyy/MM/dd" }
-};
 export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   static styles = [DropdownElement.styles, styles];
 
@@ -150,26 +162,9 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     }
   }
   private async _applyInputMask(dateFormat: string) {
-    const datePatterns = {
-      "DD/MM/YYYY": {
-        imPattern: "`dd{/}`mm{/}`yyyy",
-        imRangePattern: "`dd{/}`mm{/}`yyyy - `DD{/}`MM{/}`YYYY",
-        fnsPattern: "dd/MM/yyyy"
-      },
-      "MM/DD/YYYY": {
-        imPattern: "`mm{/}`dd{/}`yyyy",
-        imRangePattern: "`mm{/}`dd{/}`yyyy - `MM{/}`DD{/}`YYYY",
-        fnsPattern: "MM/dd/yyyy"
-      },
-      "YYYY/MM/DD": {
-        imPattern: "`yyyy{/}`mm{/}`dd",
-        imRangePattern: "`yyyy{/}`mm{/}`dd - `YYYY{/}`MM{/}`DD",
-        fnsPattern: "yyyy/MM/dd"
-      }
-    };
     const shadowInput = (await this.inputDropdownRef).shadowRoot.querySelector("input");
     const imPattern =
-      this.mode === "single" ? datePatterns[dateFormat].imPattern : datePatterns[dateFormat].imRangePattern;
+      this.mode === "single" ? DATE_PATTERNS[dateFormat].imPattern : DATE_PATTERNS[dateFormat].imRangePattern;
     const blocks = {
       d: { mask: IMask.MaskedRange, placeholderChar: "d", from: 0, to: 9, maxLength: 1 },
       m: { mask: IMask.MaskedRange, placeholderChar: "m", from: 0, to: 9, maxLength: 1 },
@@ -186,7 +181,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
       // define str -> date convertion
       parse: function (str: string) {
         const dates = str.split(" - ");
-        return dates.map(date => parse(date, datePatterns[dateFormat].fnsPattern, new Date()));
+        return dates.map(date => parse(date, DATE_PATTERNS[dateFormat].fnsPattern, new Date()));
       },
       format: function (dateArr: Date[]) {
         const dateStrings = dateArr.map(date => {
@@ -317,18 +312,17 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   }
 
   private _makeInputValueString = (startDate: Date, endDate: Date, dateFormat: string) => {
-    if (!startDate && !endDate) return "";
-    const formatDate = (date: Date) =>  format(date, DATE_PATTERNS[dateFormat].fnsPattern)
+    if (!startDate && !endDate) return this.mask.value;
+    const formatDate = (date: Date) => format(date, DATE_PATTERNS[dateFormat].fnsPattern);
     if (startDate && endDate) {
-      return `${formatDate(startDate)} - ${formatDate(endDate)}`;
+      return (this.mask.value = `${formatDate(startDate)} - ${formatDate(endDate)}`);
     }
 
     if (startDate) {
-      
-      return formatDate(startDate);
+      return this.mask.value.replace(dateFormat.toLowerCase(), formatDate(startDate));
     }
 
-    return "";
+    return this.mask.value;
   };
 
   private _handleSelectDates(event: CustomEvent<Date[]>) {
