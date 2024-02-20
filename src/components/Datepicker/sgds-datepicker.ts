@@ -122,29 +122,16 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     ];
   }
 
-  connectedCallback() {
+  async connectedCallback() {
     super.connectedCallback();
     this.addEventListener("sgds-view", this._handleViewChanged);
     this.addEventListener("sgds-change-calendar", this._handleDateChanged);
     this.addEventListener("sgds-update-focus", this._handleFocusDateChanged);
     this.addEventListener("sgds-selectmonth", this._handleSelectMonth);
     this.addEventListener("sgds-selectyear", this._handleSelectYear);
-    this.addEventListener("sgds-selectdates", this._handleSelectDates);
+    this.addEventListener("sgds-selectdates", this._handleSelectDatesAndClose);
     this.addEventListener("keydown", this._handleTab);
     this.addEventListener("sgds-hide", this._handleCloseMenu);
-  }
-
-  async firstUpdated() {
-    super.firstUpdated();
-
-    await this._applyInputMask(this.dateFormat);
-
-    if (this.menuIsOpen) {
-      const input = await this.inputDropdownRef;
-      this.showMenu();
-      const cal = await this.calendar;
-      cal.focusOnCalendar(input);
-    }
 
     if (this.initialValue && this.initialValue.length > 0) {
       // Validate initialValue against the dateFormat regex
@@ -157,9 +144,27 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
         const initialSelectedDates = this.initialValue.map(v =>
           parse(v, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date())
         );
-        return this.emit("sgds-selectdates", { detail: initialSelectedDates });
+        return this._handleSelectDates(initialSelectedDates);
       }
     }
+  }
+
+  async firstUpdated() {
+    super.firstUpdated();
+
+    if (this.menuIsOpen) {
+      const input = await this.inputDropdownRef;
+      this.showMenu();
+      const cal = await this.calendar;
+      cal.focusOnCalendar(input);
+    }
+    
+    await this._applyInputMask(this.dateFormat);
+    
+
+
+    
+
   }
   private async _applyInputMask(dateFormat: string) {
     const shadowInput = (await this.inputDropdownRef).shadowRoot.querySelector("input");
@@ -251,14 +256,14 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
       } else {
         sgdsInput.setCustomValidity("");
         shadowInput.classList.remove("is-invalid");
-        this.emit("sgds-selectdates", { detail: dateArray });
+        this._handleSelectDates(dateArray)
       }
     };
     this.mask.on("complete", validateOnComplete);
   }
 
   private _destroyInputMask() {
-    this.mask.destroy();
+    this.mask?.destroy();
   }
 
   /** @internal */
@@ -295,7 +300,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   @watch("value")
   _handleValueChange() {
     if (this.mask) {
-      this.mask.masked.value = this.value;
+      this.mask.masked.value = this.value
     }
     this.emit("sgds-change-date");
   }
@@ -312,30 +317,24 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   }
 
   private _makeInputValueString = (startDate: Date, endDate: Date, dateFormat: string) => {
-    if (!startDate && !endDate) return this.mask.value;
+    if (!startDate && !endDate) return this.value;
     const formatDate = (date: Date) => format(date, DATE_PATTERNS[dateFormat].fnsPattern);
     if (startDate && endDate) {
-      return (this.mask.value = `${formatDate(startDate)} - ${formatDate(endDate)}`);
+      return (this.value  =`${formatDate(startDate)} - ${formatDate(endDate)}`);
     }
 
     if (startDate) {
-      return this.mask.value.replace(dateFormat.toLowerCase(), formatDate(startDate));
+      return this.value  = formatDate(startDate) 
     }
 
-    return this.mask.value;
+    return this.value;
   };
-
-  private _handleSelectDates(event: CustomEvent<Date[]>) {
-    const newSelectedDates = event.detail;
+  private _handleSelectDates(newSelectedDates: Date[] ) {
+    
     newSelectedDates.sort((a: Date, b: Date) => a.getTime() - b.getTime());
     this.displayDate = newSelectedDates[0];
     this.focusedDate = newSelectedDates[0];
     this.selectedDateRange = newSelectedDates;
-    if (this.mode === "range" && this.selectedDateRange.length === 2 && this.menuIsOpen) {
-      this.hideMenu();
-    } else if (this.mode === "single" && this.menuIsOpen && this.selectedDateRange.length === 1) {
-      this.hideMenu();
-    }
 
     // Get the formattedDate value for the selected dates
     const formattedDate = this._makeInputValueString(
@@ -346,6 +345,18 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
     // Set formattedDate value as the new value for sgds-input
     this.value = formattedDate;
+   
+  }
+
+  private _handleSelectDatesAndClose(event: CustomEvent<Date[]>) {
+    this._handleSelectDates(event.detail)
+
+    if (this.mode === "range" && this.selectedDateRange.length === 2) {
+      this.hideMenu();
+    } else if (this.mode === "single" && this.selectedDateRange.length === 1) {
+      this.hideMenu();
+    }
+
   }
 
   /** update latest view state from datepicker-header */
@@ -373,12 +384,18 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     this.selectedDateRange = [];
     this.value = "";
     this.view = "days";
-    this._destroyInputMask();
-    await this._applyInputMask(this.dateFormat);
     this.hideMenu();
+
+    if (this.mask) {
+      this.mask.masked.value = ""
+      this._destroyInputMask();
+    }
+    // this._destroyInputMask();
+    await this._applyInputMask(this.dateFormat);
+ 
   }
   render() {
-    const svgEl = html`
+     const svgEl = html`
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -397,7 +414,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
       <div>
         <sgds-input
           type="text"
-          .value=${live(this.value)}
+          .value=${live(this.mask ? this.mask.masked.value : this.value)}
           inputClasses=${inputClasses}
           ${ref(this.myDropdown)}
           ?required=${this.required}
@@ -411,6 +428,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
           aria-controls=${this.dropdownMenuId}
           @click=${() => this.toggleMenu()}
           aria-label=${this.menuIsOpen ? "Close Calendar" : "Open Calendar"}
+          ?disabled=${this.disabled}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

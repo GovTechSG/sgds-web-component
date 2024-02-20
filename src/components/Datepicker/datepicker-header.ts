@@ -81,7 +81,7 @@ export class DatepickerHeader extends SgdsElement {
       const endLimit = displayYear - yearsPosition + 12 - 1;
       return html` ${startLimit} - ${endLimit} `;
     }
-    return html` ${MONTH_LABELS[displayDate.getMonth()]} ${displayDate.getFullYear()} `;
+    return html`${MONTH_LABELS[displayDate.getMonth()]} ${displayDate.getFullYear()}`;
   }
 
   /** @internal */
