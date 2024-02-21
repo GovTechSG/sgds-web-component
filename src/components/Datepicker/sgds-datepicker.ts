@@ -66,6 +66,9 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   /** Changes DatePicker to single date selection or range date selection */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
 
+  /**Feedback text for error state when date input is invalid */
+  @property({ type: String, reflect: true }) invalidFeedback = "Please enter a valid date";
+
   /** @internal */
   @state() value = "";
 
@@ -191,20 +194,29 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   private _makeInputValueString = (startDate: Date, endDate: Date, dateFormat: string) => {
     if (!startDate && !endDate) return this.value;
     const formatDate = (date: Date) => format(date, DATE_PATTERNS[dateFormat].fnsPattern);
-    if (startDate && endDate) {
-      return (this.value = `${formatDate(startDate)} - ${formatDate(endDate)}`);
+    switch(this.mode){
+      case "single": {
+        if(startDate){
+         this.value = formatDate(startDate)
+        }
+        break;
+      }
+      case "range": {
+        if (startDate && endDate) {
+           this.value = `${formatDate(startDate)} - ${formatDate(endDate)}`
+        }
+        if (startDate && !endDate){
+          this.value = `${formatDate(startDate)} - ${this.dateFormat.toLowerCase()}`
+        }
+        break;
+      }
     }
-
-    if (startDate) {
-      return (this.value = formatDate(startDate));
-    }
-
-    return this.value;
+    return this.value
   };
   private _handleSelectDatesInput(event: CustomEvent<Date[]>) {
     this._handleSelectDates(event.detail);
   }
-  private _handleSelectDates(newSelectedDates: Date[]) {
+  private async _handleSelectDates(newSelectedDates: Date[]) {
     newSelectedDates.sort((a: Date, b: Date) => a.getTime() - b.getTime());
     this.displayDate = newSelectedDates[0];
     this.focusedDate = newSelectedDates[0];
@@ -219,6 +231,9 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
     // Set formattedDate value as the new value for sgds-input
     this.value = formattedDate;
+    const input = await this.datepickerInput;
+    input.updateMaskValue();
+    
   }
 
   private _handleSelectDatesAndClose(event: CustomEvent<Date[]>) {
@@ -255,11 +270,14 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     this.displayDate = new Date();
     this.selectedDateRange = [];
     this.value = "";
+    // (await this.datepickerInput).updateMaskValue()
     this.view = "days";
     this.hideMenu();
     const input = await this.datepickerInput;
+    input.setInvalid(false)
     input.destroyInputMask();
     input.applyInputMask();
+  
   }
   render() {
     const svgEl = html`

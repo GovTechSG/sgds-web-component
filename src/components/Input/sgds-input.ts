@@ -100,9 +100,8 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   public setCustomValidity(err: string) {
     return this.input.setCustomValidity(err);
   }
-  public setInvalid(bool: boolean, errorMessage = "") {
+  public setInvalid(bool: boolean) {
     this.invalid = bool;
-    this.invalidFeedback = errorMessage;
   }
   private _handleChange(event: string) {
     this.value = this.input.value;

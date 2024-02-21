@@ -106,7 +106,9 @@ export class DatepickerInput extends SgdsInput {
      */
     this.mask.on("complete", this._validateInput);
   }
-
+  public updateMaskValue(){
+    this.mask.updateValue()
+  }
   private _validateInput = async () => {
     const dates = this.mask.value.split(" - ");
     const dateArray: Date[] | string[] = dates.map(date =>
@@ -115,7 +117,7 @@ export class DatepickerInput extends SgdsInput {
     const invalidDates = dateArray.filter(date => !isValid(date) || isBefore(date, new Date(0, 0, 1)));
     if (invalidDates.length > 0) {
       this.setCustomValidity("Invalid Date");
-      this.setInvalid(true, "Please enter a valid date");
+      this.setInvalid(true);
     } else {
       this.setCustomValidity("");
       this.setInvalid(false);
