@@ -100,14 +100,15 @@ export class DatepickerInput extends SgdsInput {
     this.mask = IMask(shadowInput, maskOptions);
     this.mask.on("accept", () => {
       this.value = this.mask.masked.value;
+      this.emit("sgds-mask-input-change", {detail: this.value})
     });
     /**
      * Validation after date is complete
      */
     this.mask.on("complete", this._validateInput);
   }
-  public updateMaskValue(){
-    this.mask.updateValue()
+  public updateMaskValue() {
+    this.mask.updateValue();
   }
   private _validateInput = async () => {
     const dates = this.mask.value.split(" - ");
@@ -130,7 +131,6 @@ export class DatepickerInput extends SgdsInput {
   }
   public applyInputMask() {
     this._applyInputMask(this.dateFormat);
-    // this.mask.updateValue()
   }
 }
 

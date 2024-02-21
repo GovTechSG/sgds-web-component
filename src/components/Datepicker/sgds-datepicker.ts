@@ -194,24 +194,24 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   private _makeInputValueString = (startDate: Date, endDate: Date, dateFormat: string) => {
     if (!startDate && !endDate) return this.value;
     const formatDate = (date: Date) => format(date, DATE_PATTERNS[dateFormat].fnsPattern);
-    switch(this.mode){
+    switch (this.mode) {
       case "single": {
-        if(startDate){
-         this.value = formatDate(startDate)
+        if (startDate) {
+          this.value = formatDate(startDate);
         }
         break;
       }
       case "range": {
         if (startDate && endDate) {
-           this.value = `${formatDate(startDate)} - ${formatDate(endDate)}`
+          this.value = `${formatDate(startDate)} - ${formatDate(endDate)}`;
         }
-        if (startDate && !endDate){
-          this.value = `${formatDate(startDate)} - ${this.dateFormat.toLowerCase()}`
+        if (startDate && !endDate) {
+          this.value = `${formatDate(startDate)} - ${this.dateFormat.toLowerCase()}`;
         }
         break;
       }
     }
-    return this.value
+    return this.value;
   };
   private _handleSelectDatesInput(event: CustomEvent<Date[]>) {
     this._handleSelectDates(event.detail);
@@ -233,7 +233,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     this.value = formattedDate;
     const input = await this.datepickerInput;
     input.updateMaskValue();
-    
   }
 
   private _handleSelectDatesAndClose(event: CustomEvent<Date[]>) {
@@ -274,10 +273,9 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     this.view = "days";
     this.hideMenu();
     const input = await this.datepickerInput;
-    input.setInvalid(false)
+    input.setInvalid(false);
     input.destroyInputMask();
     input.applyInputMask();
-  
   }
   render() {
     const svgEl = html`
@@ -305,6 +303,11 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
           ${ref(this.myDropdown)}
           mode=${this.mode}
           dateFormat=${this.dateFormat}
+          invalidFeedback=${this.invalidFeedback}
+          @sgds-mask-input-change=${(e: CustomEvent) => {
+            this.value = e.detail
+            console.log(this.value)
+            }}
         ></sgds-datepicker-input>
         <button
           class="sgds btn rounded-0 border btn-outline-dark"
