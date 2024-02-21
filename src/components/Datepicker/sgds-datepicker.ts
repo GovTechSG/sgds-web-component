@@ -1,38 +1,19 @@
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
-import { format, isBefore, isValid, parse } from "date-fns";
-import IMask, { InputMask } from "imask";
+import { format, parse } from "date-fns";
 import { html } from "lit";
-import { property, queryAsync, state, query } from "lit/decorators.js";
+import { property, queryAsync, state } from "lit/decorators.js";
 import { live } from "lit/directives/live.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
 import { watch } from "../../utils/watch";
-import { SgdsInput } from "../Input/sgds-input";
 import { DatepickerCalendar } from "./datepicker-calendar";
 import { DatepickerHeader } from "./datepicker-header";
+import DatepickerInput from "./datepicker-input";
 import styles from "./sgds-datepicker.scss";
 import { ViewEnum } from "./types";
-import DatepickerInput from "./datepicker-input";
+import { DATE_PATTERNS } from "../../utils/time";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
-
-const DATE_PATTERNS = {
-  "DD/MM/YYYY": {
-    imPattern: "`dd{/}`mm{/}`yyyy",
-    imRangePattern: "`dd{/}`mm{/}`yyyy - `DD{/}`MM{/}`YYYY",
-    fnsPattern: "dd/MM/yyyy"
-  },
-  "MM/DD/YYYY": {
-    imPattern: "`mm{/}`dd{/}`yyyy",
-    imRangePattern: "`mm{/}`dd{/}`yyyy - `MM{/}`DD{/}`YYYY",
-    fnsPattern: "MM/dd/yyyy"
-  },
-  "YYYY/MM/DD": {
-    imPattern: "`yyyy{/}`mm{/}`dd",
-    imRangePattern: "`yyyy{/}`mm{/}`dd - `YYYY{/}`MM{/}`DD",
-    fnsPattern: "yyyy/MM/dd"
-  }
-};
 
 /**
  * @summary The `DatePicker` Component is built using `Dropdown`, `Input` and `Button` components. By default, the Calendar points to current date and input has no value. The input is a read-only and users can only pick dates using the Calendar.
@@ -108,6 +89,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   @queryAsync("sgds-datepicker-input")
   datepickerInput: Promise<DatepickerInput>;
+  
   constructor() {
     super();
     this.modifierOpt = [

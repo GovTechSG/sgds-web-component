@@ -2,7 +2,7 @@ import { elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testi
 import DatepickerCalendar from "../src/components/Datepicker/datepicker-calendar";
 import DatepickerHeader from "../src/components/Datepicker/datepicker-header";
 import DatepickerInput from "../src/components/Datepicker/datepicker-input";
-import { SgdsDatepicker, SgdsInput } from "../src/components";
+import { SgdsDatepicker } from "../src/components";
 import { setTimeToNoon } from "../src/utils/time";
 import { sendKeys } from "@web/test-runner-commands";
 import "../src/index";
@@ -10,7 +10,8 @@ import sinon from "sinon";
 
 customElements.define("sgds-datepicker-header", DatepickerHeader);
 customElements.define("sgds-datepicker-calendar", DatepickerCalendar);
-customElements.define("sgds-datepicker-input", DatepickerInput)
+customElements.define("sgds-datepicker-input", DatepickerInput);
+
 describe("sgds-datepicker", () => {
   it("renders sgds-datepicker component correctly", async () => {
     const el = await fixture(html` <sgds-datepicker></sgds-datepicker> `);
@@ -19,7 +20,7 @@ describe("sgds-datepicker", () => {
     expect(el).to.be.an.instanceOf(SgdsDatepicker);
   });
 
-  it("opens the datepicker menu when sgds-input is clicked", async () => {
+  it("opens the datepicker menu when sgds-datepicker-input is clicked", async () => {
     const el = await fixture(html` <sgds-datepicker></sgds-datepicker> `);
 
     const calendarBtnEl = el.shadowRoot?.querySelector("button[aria-haspopup='dialog']") as HTMLButtonElement;
@@ -33,7 +34,7 @@ describe("sgds-datepicker", () => {
     expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("true");
   });
 
-  it("when menu is open, closes the datepicker menu when sgds-input is clicked", async () => {
+  it("when menu is open, closes the datepicker menu when sgds-datepicker-input is clicked", async () => {
     const el = await fixture<SgdsDatepicker>(html` <sgds-datepicker menuIsOpen></sgds-datepicker> `);
     // await el.updateComplete
     const calendarBtnEl = el.shadowRoot?.querySelector("button[aria-haspopup='dialog']") as HTMLButtonElement;
@@ -66,24 +67,24 @@ describe("sgds-datepicker", () => {
     expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("false");
   });
 
-  it("should pass the initialvalue to sgds-input for single mode", async () => {
+  it("should pass the initialvalue to sgds-datepicker-input for single mode", async () => {
     const initialDate = '["23/11/2023"]';
     const initialValueArray = JSON.parse(initialDate) as string[];
     const el = await fixture<SgdsDatepicker>(
       html`<sgds-datepicker .initialValue=${initialValueArray}></sgds-datepicker>`
     );
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const inputEl = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
     await el.updateComplete;
     expect(inputEl?.value).to.equal("23/11/2023");
   });
 
-  it("should pass the initialvalue to sgds-input for range mode", async () => {
+  it("should pass the initialvalue to sgds-datepicker-input for range mode", async () => {
     const initialDate = '["23/11/2023", "25/11/2023"]';
     const initialValueArray = JSON.parse(initialDate) as string[];
     const el = await fixture<SgdsDatepicker>(
       html`<sgds-datepicker mode="range" .initialValue=${initialValueArray}></sgds-datepicker>`
     );
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const inputEl = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
     await el.updateComplete;
     expect(inputEl?.value).to.equal("23/11/2023 - 25/11/2023");
   });
@@ -109,7 +110,7 @@ describe("sgds-datepicker", () => {
   it("should be able to select and display a date in single mode and close menu", async () => {
     const el = await fixture(html`<sgds-datepicker></sgds-datepicker>`);
     const calendarBtnEl = el.shadowRoot?.querySelector("button[aria-haspopup='dialog']") as HTMLButtonElement;
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const inputEl = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
     const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLElement;
     const calendarEl = el.shadowRoot?.querySelector("ul.datepicker sgds-datepicker-calendar") as HTMLElement;
     const tdButtonOne = calendarEl.shadowRoot?.querySelector("tbody td[data-day='1']") as HTMLTableCellElement;
@@ -138,7 +139,7 @@ describe("sgds-datepicker", () => {
     const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker mode="range"></sgds-datepicker>`);
     const calendarBtnEl = el.shadowRoot?.querySelector("button[aria-haspopup='dialog']") as HTMLButtonElement;
     calendarBtnEl?.click();
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const inputEl = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
     const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLElement;
     const calendarEl = el.shadowRoot?.querySelector("ul.datepicker sgds-datepicker-calendar") as HTMLElement;
     const tdButtonOne = calendarEl.shadowRoot?.querySelector("tbody td[data-day='1']") as HTMLTableCellElement;
@@ -240,7 +241,7 @@ describe("sgds-datepicker", () => {
     );
 
     // 1. click the input to open, check the menu has open
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const inputEl = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
     const calendarBtnEl = el.shadowRoot?.querySelector("button[aria-haspopup='dialog']") as HTMLButtonElement;
     const menuElement = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
     const datepickerHeader = el?.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
@@ -303,7 +304,7 @@ describe("sgds-datepicker", () => {
 
     // 1.  click the input to open menu, check menu should open
     const calendarBtnElement = el.shadowRoot?.querySelector("button[aria-haspopup='dialog']") as HTMLButtonElement;
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const inputEl = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
     const menuElement = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
     const datepickerHeader = el?.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
     const datepickerCalendar = el?.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
@@ -365,7 +366,7 @@ describe("sgds-datepicker", () => {
   //   const dateFormat = "DD/MM/YYYY";
   //   const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker dateFormat=${dateFormat}></sgds-datepicker>`);
   //   await el.updateComplete
-  //   const sgdsInput = el.shadowRoot?.querySelector("sgds-input");
+  //   const sgdsInput = el.shadowRoot?.querySelector("sgds-datepicker-input");
   //   const input = sgdsInput?.shadowRoot?.querySelector("input")
   //   const inputShadowDiv = input?.shadowRoot?.querySelectorAll("div")[1]
   //   expect(inputShadowDiv?.textContent).to.equal("dd/mm/yyyy");
@@ -374,7 +375,7 @@ describe("sgds-datepicker", () => {
   // it("updates the input value with the correct date format when dateFormat changes", async () => {
   //   const dateFormat = "MM/DD/YYYY";
   //   const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker dateFormat=${dateFormat}></sgds-datepicker>`);
-  //   const input = el.shadowRoot?.querySelector("sgds-input");
+  //   const input = el.shadowRoot?.querySelector("sgds-datepicker-input");
   //   expect(input?.value).to.equal("mm/dd/yyyy");
   //   el.dateFormat = "YYYY/MM/DD";
   //   await el.updateComplete;
@@ -383,16 +384,16 @@ describe("sgds-datepicker", () => {
 
   it("disables the component when disabled property is true", async () => {
     const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker disabled></sgds-datepicker>`);
-    const input = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const input = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
     const [calButton, resetButton] = el.shadowRoot?.querySelectorAll("button") as NodeListOf<HTMLButtonElement>;
     expect(input).to.have.attribute("disabled");
     expect(resetButton).to.have.attribute("disabled");
     expect(calButton).to.have.attribute("disabled");
   });
 
-  it("should add the required attribute to sgds-input when required is true", async () => {
+  it("should add the required attribute to sgds-datepicker-input when required is true", async () => {
     const el = await fixture(html`<sgds-datepicker required></sgds-datepicker>`);
-    const input = el.shadowRoot?.querySelector("sgds-input");
+    const input = el.shadowRoot?.querySelector("sgds-datepicker-input");
 
     expect(input).to.have.attribute("required");
   });
@@ -925,7 +926,7 @@ describe("datepicker reset button", async () => {
   });
   it("when clicked, initialValue clears and input clears", async () => {
     const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker .initialValue=${["29/03/2020"]}></sgds-datepicker>`);
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const inputEl = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
 
     expect(el.value).to.equal("29/03/2020");
     expect(el.value).to.equal(inputEl.value);
@@ -1136,43 +1137,109 @@ describe("sgds-datepicker close and open menu behaviours", async () => {
 });
 
 describe("datepicker input masking", () => {
-  it("sgds-input has an input masked", async () => {
-    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker></sgds-datepicker>`);
-    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+  it("sgds-datepicker-input has an input masked", async () => {
+    const inputEl = await fixture<DatepickerInput>(html`<sgds-datepicker-input></sgds-datepicker-input>`);
     expect(inputEl?.value).to.equal("");
 
-    inputEl.focus()
+    inputEl.focus();
 
-    await sendKeys({press: "Digit1"})
+    await sendKeys({ press: "Digit1" });
+    await inputEl.updateComplete;
+    expect(inputEl.value).to.equal("1d/mm/yyyy");
 
-    await el.updateComplete
-    expect(el.value).to.equal("1d/mm/yyyy")
-    expect(inputEl.value).to.equal("1d/mm/yyyy")
+    const dateDigits = [2, 0, 3, 2, 0, 2, 4];
 
-    const dateDigits =[2,0,3,2,0,2,4] 
-    
-    for (const d of dateDigits){
-      await sendKeys({press: `Digit${d}`})
+    for (const d of dateDigits) {
+      await sendKeys({ press: `Digit${d}` });
     }
-    await el.updateComplete
-    expect(el.value).to.equal("12/03/2024")
-    expect(inputEl.value).to.equal("12/03/2024")
+    await inputEl.updateComplete;
+    expect(inputEl.value).to.equal("12/03/2024");
   });
 
-  // it("backspacing a complete date 1|2/03/2024 at first position should give d2/03/2024", async() => {
-  //   const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker .initialValue=${["12/03/2024"]}></sgds-datepicker>`);
-  //   const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
-  //   expect(inputEl?.value).to.equal("12/03/2024");
+  it("backspacing a complete date 1|2/03/2024 at first position should give d2/03/2024", async () => {
+    const inputEl = await fixture<DatepickerInput>(
+      html`<sgds-datepicker-input value="12/03/2024"></sgds-datepicker-input>`
+    );
+    // const inputEl = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
+    expect(inputEl?.value).to.equal("12/03/2024");
 
-  //   inputEl.focus() // focused to the end 12/03/2024 |
-  //   // move cursor to 1|2/03/2024
-  //   for(let i=0; i< 10; i++){
-  //     await sendKeys({press : "ArrowLeft"})
-  //   }
-  //   await sendKeys({press: "Backspace"})
+    inputEl.focus();
+    await sendKeys({ press: "Backspace" });
 
-  //   await el.updateComplete
-  //   expect(el.value).to.equal("d2/03/2024")
-  //   expect(inputEl?.value).to.equal("d2/03/2024")
-  // })
+    await inputEl.updateComplete;
+    expect(inputEl?.value).to.equal("12/03/202y");
+
+    await sendKeys({ press: "ArrowLeft" });
+    await sendKeys({ press: "Backspace" });
+    await inputEl.updateComplete;
+    expect(inputEl?.value).to.equal("12/03/2y2y");
+
+    await sendKeys({ press: "ArrowLeft" });
+    await sendKeys({ press: "ArrowLeft" });
+    await sendKeys({ press: "ArrowLeft" });
+    await sendKeys({ press: "Backspace" });
+    await inputEl.updateComplete;
+    expect(inputEl?.value).to.equal("12/m3/2y2y");
+
+    await sendKeys({ press: "ArrowLeft" });
+    await sendKeys({ press: "Backspace" });
+    await inputEl.updateComplete;
+    expect(inputEl?.value).to.equal("d2/m3/2y2y");
+
+    await sendKeys({ press: "Digit2" });
+    await inputEl.updateComplete;
+    expect(inputEl?.value).to.equal("22/m3/2y2y");
+  });
+
+  it("validation happens on input change (triggered here by blur)", async () => {
+    const inputEl = await fixture<DatepickerInput>(
+      html`<sgds-datepicker-input value="12/03/2024"></sgds-datepicker-input>`
+    );
+    const shadowInput = inputEl?.shadowRoot?.querySelector("input");
+    expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
+    const changeHandler = sinon.spy();
+
+    inputEl.addEventListener("sgds-change", changeHandler);
+    inputEl.focus();
+    await sendKeys({ press: "Backspace" });
+    expect(inputEl.value).to.equal("12/03/202y");
+
+    expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
+
+    inputEl.blur();
+
+    await waitUntil(() => changeHandler.calledOnce);
+    expect(shadowInput?.classList.contains("is-invalid")).to.be.true;
+  });
+  it("validation doesnt happen with blur when there is no input change", async () => {
+    const inputEl = await fixture<DatepickerInput>(html`<sgds-datepicker-input></sgds-datepicker-input>`);
+    const shadowInput = inputEl?.shadowRoot?.querySelector("input");
+    expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
+
+    inputEl.focus();
+    expect(inputEl.value).to.equal("");
+
+    expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
+
+    inputEl.blur();
+
+    expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
+  });
+  it("validation happesn on completion of date mask", async () => {
+    const inputEl = await fixture<DatepickerInput>(html`<sgds-datepicker-input></sgds-datepicker-input>`);
+    const shadowInput = inputEl?.shadowRoot?.querySelector("input");
+
+    expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
+
+    inputEl.focus();
+    //invalid date 30/02/2024
+    const dateDigits = [3, 0, 0, 2, 2, 0, 2, 4];
+
+    for (const d of dateDigits) {
+      await sendKeys({ press: `Digit${d}` });
+    }
+
+    await inputEl.updateComplete
+    expect(shadowInput?.classList.contains("is-invalid")).to.be.true;
+  });
 });

@@ -1,39 +1,10 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
-import { format, isBefore, isValid, parse } from "date-fns";
+import { isBefore, isValid, parse } from "date-fns";
 import IMask, { InputMask } from "imask";
-import { html } from "lit";
-import { property, queryAsync, state, query } from "lit/decorators.js";
-import { live } from "lit/directives/live.js";
-import { ref } from "lit/directives/ref.js";
-import { DropdownElement } from "../../base/dropdown-element";
-import { watch } from "../../utils/watch";
+import { property, query, state } from "lit/decorators.js";
 import { SgdsInput } from "../Input/sgds-input";
-import { DatepickerCalendar } from "./datepicker-calendar";
-import { DatepickerHeader } from "./datepicker-header";
-import styles from "./sgds-datepicker.scss";
-import { ViewEnum } from "./types";
-import SgdsElement from "../../base/sgds-element";
+import { DATE_PATTERNS } from "../../utils/time";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
-
-const DATE_PATTERNS = {
-  "DD/MM/YYYY": {
-    imPattern: "`dd{/}`mm{/}`yyyy",
-    imRangePattern: "`dd{/}`mm{/}`yyyy - `DD{/}`MM{/}`YYYY",
-    fnsPattern: "dd/MM/yyyy"
-  },
-  "MM/DD/YYYY": {
-    imPattern: "`mm{/}`dd{/}`yyyy",
-    imRangePattern: "`mm{/}`dd{/}`yyyy - `MM{/}`DD{/}`YYYY",
-    fnsPattern: "MM/dd/yyyy"
-  },
-  "YYYY/MM/DD": {
-    imPattern: "`yyyy{/}`mm{/}`dd",
-    imRangePattern: "`yyyy{/}`mm{/}`dd - `YYYY{/}`MM{/}`DD",
-    fnsPattern: "yyyy/MM/dd"
-  }
-};
-
 /**
  * @summary The `DatePicker` Component is built using `Dropdown`, `Input` and `Button` components. By default, the Calendar points to current date and input has no value. The input is a read-only and users can only pick dates using the Calendar.
  *
@@ -74,6 +45,10 @@ export class DatepickerInput extends SgdsInput {
     this.inputClasses = `rounded-0 rounded-start`;
     this.type = "text";
   }
+  connectedCallback(): void {
+    super.connectedCallback()
+    this.addEventListener("sgds-change",this._validateInput)
+  }
 
   async firstUpdated(changes) {
     super.firstUpdated(changes);
@@ -81,7 +56,6 @@ export class DatepickerInput extends SgdsInput {
   }
   private _applyInputMask(dateFormat: string) {
     const shadowInput = this.shadowInput;
-    // const shadowInput = this.inputDropdownRef
     const imPattern =
       this.mode === "single" ? DATE_PATTERNS[dateFormat].imPattern : DATE_PATTERNS[dateFormat].imRangePattern;
     const blocks = {
@@ -122,62 +96,31 @@ export class DatepickerInput extends SgdsInput {
     };
 
     this.mask = IMask(shadowInput, maskOptions);
-
-    let timeout: NodeJS.Timeout;
-
-    const validateOnAccept = (inputMaskPlaceholder: string) => {
-      clearTimeout(timeout);
-      const currentInputValue = this.mask.masked.value;
-      const dates = currentInputValue.split(" - ");
-      if (currentInputValue === inputMaskPlaceholder) {
-        return shadowInput.classList.remove("is-invalid");
-      } else {
-        timeout = setTimeout(() => {
-          dates.forEach(d => {
-            const parsedValue = parse(d, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date());
-            if (!isValid(parsedValue) || isBefore(parsedValue, new Date(0, 0, 1))) {
-              shadowInput.classList.add("is-invalid");
-            } else {
-              shadowInput.classList.remove("is-invalid");
-            }
-          });
-        }, 500);
-      }
-    };
-    /**
-     * validation while typing date(s) in input`
-     */
     this.mask.on("accept", () => {
       this.value = this.mask.masked.value;
-
-      // this.mask.updateValue()
-      validateOnAccept(
-        this.mode === "range"
-          ? `${this.dateFormat.toLowerCase()} - ${this.dateFormat.toLowerCase()}`
-          : this.dateFormat.toLowerCase()
-      );
     });
     /**
      * Validation after date is complete
      */
-    const validateOnComplete = async () => {
-      const sgdsInput = this.shadowInput;
-      const dates = this.mask.value.split(" - ");
-      const dateArray: Date[] | string[] = dates.map(date =>
-        parse(date, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date())
-      );
-      const invalidDates = dateArray.filter(date => !isValid(date) || isBefore(date, new Date(0, 0, 1)));
-      if (invalidDates.length > 0) {
-        sgdsInput.setCustomValidity("Invalid Date");
-        return shadowInput.classList.add("is-invalid");
-      } else {
-        sgdsInput.setCustomValidity("");
-        shadowInput.classList.remove("is-invalid");
-        this.emit("sgds-selectdates-input", { detail: dateArray });
-      }
-    };
-    this.mask.on("complete", validateOnComplete);
+    this.mask.on("complete", this._validateInput);
   }
+
+  private _validateInput = async () => {
+    const shadowInput = this.shadowInput;
+    const dates = this.mask.value.split(" - ");
+    const dateArray: Date[] | string[] = dates.map(date =>
+      parse(date, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date())
+    );
+    const invalidDates = dateArray.filter(date => !isValid(date) || isBefore(date, new Date(0, 0, 1)));
+    if (invalidDates.length > 0) {
+      this.setCustomValidity("Invalid Date");
+      return shadowInput.classList.add("is-invalid");
+    } else {
+      this.setCustomValidity("");
+      shadowInput.classList.remove("is-invalid");
+      this.emit("sgds-selectdates-input", { detail: dateArray });
+    }
+  };
 
   public destroyInputMask() {
     this.mask?.destroy();
