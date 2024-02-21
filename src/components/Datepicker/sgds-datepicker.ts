@@ -89,7 +89,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   @queryAsync("sgds-datepicker-input")
   datepickerInput: Promise<DatepickerInput>;
-  
+
   constructor() {
     super();
     this.modifierOpt = [
@@ -312,7 +312,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
         </button>
         <button
           ?disabled=${this.disabled}
-          class="btn sgds rounded-0 d-flex align-items-center reset-btn"
+          class="btn sgds rounded-0 reset-btn"
           @click=${() => this._handleButtonResetClick()}
           aria-label="Reset Datepicker"
         >

@@ -1239,7 +1239,7 @@ describe("datepicker input masking", () => {
       await sendKeys({ press: `Digit${d}` });
     }
 
-    await inputEl.updateComplete
+    await inputEl.updateComplete;
     expect(shadowInput?.classList.contains("is-invalid")).to.be.true;
   });
 });

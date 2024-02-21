@@ -100,24 +100,24 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   public setCustomValidity(err: string) {
     return this.input.setCustomValidity(err);
   }
-  handleInvalid() {
-    this.invalid = true;
+  public setInvalid(bool: boolean, errorMessage = "") {
+    this.invalid = bool;
+    this.invalidFeedback = errorMessage;
   }
-
-  handleChange(event: string) {
+  private _handleChange(event: string) {
     this.value = this.input.value;
     this.emit(event);
   }
 
-  handleFocus() {
+  private _handleFocus() {
     this.emit("sgds-focus");
   }
 
-  handleBlur() {
+  private _handleBlur() {
     this.emit("sgds-blur");
   }
 
-  handleKeyDown(event: KeyboardEvent) {
+  private _handleKeyDown(event: KeyboardEvent) {
     const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
 
     // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before
@@ -133,14 +133,14 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   }
 
   @watch("disabled", { waitUntilFirstUpdate: true })
-  handleDisabledChange() {
+  _handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
     this.input.disabled = this.disabled;
     this.invalid = !this.input.checkValidity();
   }
 
   @watch("value", { waitUntilFirstUpdate: true })
-  handleValueChange() {
+  _handleValueChange() {
     this.invalid = !this.input.checkValidity();
     this.valid = this.input.checkValidity();
     // remove validation for input that is not required, is already dirty and has empty value
@@ -171,12 +171,12 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
         .value=${live(this.value)}
         minlength=${ifDefined(this.minlength)}
         maxlength=${ifDefined(this.maxlength)}
-        @input=${() => this.handleChange("sgds-input")}
-        @change=${() => this.handleChange("sgds-change")}
-        @keydown=${this.handleKeyDown}
-        @invalid=${this.handleInvalid}
-        @focus=${this.handleFocus}
-        @blur=${this.handleBlur}
+        @input=${() => this._handleChange("sgds-input")}
+        @change=${() => this._handleChange("sgds-change")}
+        @keydown=${this._handleKeyDown}
+        @invalid=${() => this.setInvalid(true)}
+        @focus=${this._handleFocus}
+        @blur=${this._handleBlur}
       />
       ${this.hasFeedback
         ? html`<div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`

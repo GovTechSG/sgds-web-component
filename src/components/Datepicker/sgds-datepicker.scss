@@ -14,6 +14,9 @@ div {
   display: flex;
 }
 
+button {
+  align-self: self-start;
+}
 .datepicker {
   background-color: var(--datepicker-bg-color);
 }
@@ -26,6 +29,7 @@ sgds-datepicker-input {
 .reset-btn {
   background-color: var(--datepicker-closebutton-bg-color);
   color: var(--datepicker-closebutton-color);
+  
   &:hover {
     color: var(--datepicker-closebutton-color);
     background-color: var(--datepicker-closebutton-hover-bg-color);

@@ -1,8 +1,8 @@
 import { isBefore, isValid, parse } from "date-fns";
 import IMask, { InputMask } from "imask";
-import { property, query, state } from "lit/decorators.js";
-import { SgdsInput } from "../Input/sgds-input";
+import { property, query } from "lit/decorators.js";
 import { DATE_PATTERNS } from "../../utils/time";
+import { SgdsInput } from "../Input/sgds-input";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 /**
@@ -44,10 +44,12 @@ export class DatepickerInput extends SgdsInput {
     super();
     this.inputClasses = `rounded-0 rounded-start`;
     this.type = "text";
+    this.hasFeedback = true;
+    this._handleValueChange = () => null;
   }
   connectedCallback(): void {
-    super.connectedCallback()
-    this.addEventListener("sgds-change",this._validateInput)
+    super.connectedCallback();
+    this.addEventListener("sgds-change", this._validateInput);
   }
 
   async firstUpdated(changes) {
@@ -106,7 +108,6 @@ export class DatepickerInput extends SgdsInput {
   }
 
   private _validateInput = async () => {
-    const shadowInput = this.shadowInput;
     const dates = this.mask.value.split(" - ");
     const dateArray: Date[] | string[] = dates.map(date =>
       parse(date, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date())
@@ -114,10 +115,10 @@ export class DatepickerInput extends SgdsInput {
     const invalidDates = dateArray.filter(date => !isValid(date) || isBefore(date, new Date(0, 0, 1)));
     if (invalidDates.length > 0) {
       this.setCustomValidity("Invalid Date");
-      return shadowInput.classList.add("is-invalid");
+      this.setInvalid(true, "Please enter a valid date");
     } else {
       this.setCustomValidity("");
-      shadowInput.classList.remove("is-invalid");
+      this.setInvalid(false);
       this.emit("sgds-selectdates-input", { detail: dateArray });
     }
   };
