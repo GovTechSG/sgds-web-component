@@ -1,6 +1,6 @@
 import { isAfter, isBefore, isValid, parse } from "date-fns";
 import IMask, { InputMask } from "imask";
-import { property, query } from "lit/decorators.js";
+import { property, query, queryAsync } from "lit/decorators.js";
 import { DATE_PATTERNS } from "../../utils/time";
 import { SgdsInput } from "../Input/sgds-input";
 import { html } from "lit";
@@ -36,8 +36,8 @@ export class DatepickerInput extends SgdsInput {
   /** Changes DatePicker to single date selection or range date selection */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
 
-  @query("input")
-  shadowInput: HTMLInputElement;
+  @queryAsync("input")
+  shadowInput: Promise<HTMLInputElement>;
 
   private mask: InputMask;
   constructor() {
@@ -56,8 +56,8 @@ export class DatepickerInput extends SgdsInput {
     super.firstUpdated(changes);
     this._applyInputMask(this.dateFormat);
   }
-  private _applyInputMask(dateFormat: string) {
-    const shadowInput = this.shadowInput;
+  private async _applyInputMask(dateFormat: string) {
+    const shadowInput = await this.shadowInput;
     const imPattern =
       this.mode === "single" ? DATE_PATTERNS[dateFormat].imPattern : DATE_PATTERNS[dateFormat].imRangePattern;
     const blocks = {
@@ -108,7 +108,7 @@ export class DatepickerInput extends SgdsInput {
     this.mask.on("complete", this._validateInput);
   }
   public updateMaskValue() {
-    this.mask.updateValue();
+    this.mask?.updateValue();
   }
   private _validateInput = async () => {
     const dates = this.mask.value.split(" - ");
@@ -136,14 +136,13 @@ export class DatepickerInput extends SgdsInput {
   public destroyInputMask() {
     this.mask?.destroy();
   }
-  public applyInputMask() {
-    this._applyInputMask(this.dateFormat);
+  public async applyInputMask() {
+    return await this._applyInputMask(this.dateFormat);
   }
 
   render() {
     return html`
-    ${this._renderLabel()}
-    ${this._renderHintText()}
+      ${this._renderLabel()} ${this._renderHintText()}
       <div class="d-flex">
         <div class="d-flex flex-column w-100">${this._renderInput()}</div>
         <slot name="calendar-btn"></slot>

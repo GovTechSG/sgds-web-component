@@ -278,13 +278,12 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     this.displayDate = new Date();
     this.selectedDateRange = [];
     this.value = "";
-    // (await this.datepickerInput).updateMaskValue()
     this.view = "days";
     this.hideMenu();
     const input = await this.datepickerInput;
     input.setInvalid(false);
     input.destroyInputMask();
-    input.applyInputMask();
+    await input.applyInputMask();
   }
   render() {
     const svgEl = html`

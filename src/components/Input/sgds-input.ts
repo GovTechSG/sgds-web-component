@@ -184,13 +184,15 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
       ? html`<div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
       : "";
   }
-  protected _renderLabel(){
+  protected _renderLabel() {
     const labelTemplate = html` <label for=${this.inputId} class="form-label">${this.label}</label> `;
-   return this.label && labelTemplate
+    return this.label && labelTemplate;
   }
-  protected _renderHintText(){
-    const hintTextTemplate = html` <small id="${this.inputId}Help" class="text-muted form-text">${this.hintText}</small> `
-    return this.hintText &&  hintTextTemplate
+  protected _renderHintText() {
+    const hintTextTemplate = html`
+      <small id="${this.inputId}Help" class="text-muted form-text">${this.hintText}</small>
+    `;
+    return this.hintText && hintTextTemplate;
   }
   render() {
     const input = html`${this._renderInput()}`;
@@ -202,7 +204,6 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
       </div>
     `;
     // if hintText is defined
- 
 
     return html`
       <div class="d-flex flex-column w-100">
