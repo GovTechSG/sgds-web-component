@@ -101,7 +101,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   @queryAsync("sgds-datepicker-input")
   datepickerInput: Promise<DatepickerInput>;
-  
+
   constructor() {
     super();
     this.modifierOpt = [
@@ -320,40 +320,44 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
           maxDate=${this.maxDate}
           label=${this.label}
           hintText=${this.hintText}
-        ></sgds-datepicker-input>
-        <button
-          class=${classMap({
-            "sgds btn rounded-0 border btn-outline-dark": true
-            // "align-self-center":
-          })}
-          aria-expanded="${this.menuIsOpen}"
-          aria-haspopup="dialog"
-          aria-controls=${this.dropdownMenuId}
-          @click=${() => this.toggleMenu()}
-          aria-label=${this.menuIsOpen ? "Close Calendar" : "Open Calendar"}
-          ?disabled=${this.disabled}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-calendar"
-            viewBox="0 0 16 16"
+          <button
+            slot="calendar-btn"
+            class=${classMap({
+              "sgds btn rounded-0 border btn-outline-dark": true
+              // "align-self-center":
+            })}
+            aria-expanded="${this.menuIsOpen}"
+            aria-haspopup="dialog"
+            aria-controls=${this.dropdownMenuId}
+            @click=${() => this.toggleMenu()}
+            aria-label=${this.menuIsOpen ? "Close Calendar" : "Open Calendar"}
+            ?disabled=${this.disabled}
           >
-            <path
-              d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"
-            />
-          </svg>
-        </button>
-        <button
-          ?disabled=${this.disabled}
-          class="btn sgds rounded-0 reset-btn"
-          @click=${() => this._handleButtonResetClick()}
-          aria-label="Reset Datepicker"
-        >
-          ${svgEl}
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-calendar"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"
+              />
+            </svg>
+          </button>
+          <button
+            slot="reset-btn"
+            ?disabled=${this.disabled}
+            class="btn sgds rounded-0 reset-btn"
+            @click=${() => this._handleButtonResetClick()}
+            aria-label="Reset Datepicker"
+          >
+            ${svgEl}
+          </button>
+        </sgds-datepicker-input>
+
         <ul
           id=${this.dropdownMenuId}
           class="sgds datepicker dropdown-menu"
