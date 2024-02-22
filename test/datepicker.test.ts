@@ -1309,3 +1309,38 @@ describe("error message", () => {
     expect(feedbackDiv?.textContent).to.equal("Error message");
   });
 });
+
+describe("datepicker calendar will not show before 1900", () => {
+  it("in day view , January 1900 header  previousButton is invisble", async () => {
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker menuIsOpen .initialValue=${["01/01/1900"]}></sgds-datepicker>`
+    );
+    const header = el.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
+    expect(header.shadowRoot?.querySelector("button.invisible")).to.exist;
+  });
+  it("in month view , 1900 header  previousButton is invisble", async () => {
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker menuIsOpen .initialValue=${["01/01/1900"]}></sgds-datepicker>`
+    );
+
+    const header = el.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
+    header.shadowRoot?.querySelectorAll("button")[1].click();
+    await el.updateComplete;
+    expect(header.shadowRoot?.querySelectorAll("button.invisible")).to.exist;
+  });
+  it("in year view , 1900 header  previousButton is invisble", async () => {
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker menuIsOpen .initialValue=${["01/01/1900"]}></sgds-datepicker>`
+    );
+
+    const header = el.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
+    header.shadowRoot?.querySelectorAll("button")[1].click();
+    header.shadowRoot?.querySelectorAll("button")[1].click();
+    await el.updateComplete;
+    expect(header.shadowRoot?.querySelectorAll("button.invisible")).to.exist;
+    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar");
+    const disabledButtons = calendar?.shadowRoot?.querySelectorAll("button.year[disabled]");
+    expect(disabledButtons?.length).to.equal(8);
+    expect(calendar?.shadowRoot?.querySelector("button.year[data-year='1900']")?.hasAttribute("disabled")).to.be.false;
+  });
+});

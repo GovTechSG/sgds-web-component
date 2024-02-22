@@ -1,9 +1,9 @@
 import { isAfter, isBefore, isValid, parse } from "date-fns";
 import IMask, { InputMask } from "imask";
-import { property, query, queryAsync } from "lit/decorators.js";
+import { html } from "lit";
+import { property, queryAsync } from "lit/decorators.js";
 import { DATE_PATTERNS } from "../../utils/time";
 import { SgdsInput } from "../Input/sgds-input";
-import { html } from "lit";
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 /**
  * @summary The `DatePicker` Component is built using `Dropdown`, `Input` and `Button` components. By default, the Calendar points to current date and input has no value. The input is a read-only and users can only pick dates using the Calendar.
