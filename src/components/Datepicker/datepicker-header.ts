@@ -50,7 +50,6 @@ export class DatepickerHeader extends SgdsElement {
         `button[tabindex="${this.focusedTabIndex}"]`
       );
       buttonToFocus.focus();
-      
     }
     return;
   }
@@ -141,12 +140,12 @@ export class DatepickerHeader extends SgdsElement {
     const displayMonthYear = new Date(displayYear, displayMonth);
 
     if (this.view === "months") {
-      return  displayYear <= 1900
+      return displayYear <= 1900;
     }
-    if(this.view === "years") {
-      return displayYear < 1904
+    if (this.view === "years") {
+      return displayYear < 1904;
     }
-    return isEqual(displayMonthYear, new Date(0, 0, 1)) || isBefore(displayMonthYear, new Date(0, 0, 1))
+    return isEqual(displayMonthYear, new Date(0, 0, 1)) || isBefore(displayMonthYear, new Date(0, 0, 1));
   }
 
   render() {

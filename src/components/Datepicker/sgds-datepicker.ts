@@ -325,7 +325,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
             slot="calendar-btn"
             class=${classMap({
               "sgds btn rounded-0 border btn-outline-dark": true
-              // "align-self-center":
             })}
             aria-expanded="${this.menuIsOpen}"
             aria-haspopup="dialog"

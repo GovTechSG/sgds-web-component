@@ -149,44 +149,51 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   }
   protected _renderInput() {
     return html`<input
-      class=${classMap({
-        "form-control": true,
-        "is-invalid": this.hasFeedback && this.invalid,
-        "is-valid": this.hasFeedback && this.valid,
-        [`${this.inputClasses}`]: this.inputClasses
-      })}
-      type=${this.type}
-      id=${this.inputId}
-      name=${ifDefined(this.name)}
-      placeholder=${ifDefined(this.placeholder)}
-      aria-invalid=${this.invalid ? "true" : "false"}
-      pattern=${ifDefined(this.pattern)}
-      ?autofocus=${this.autofocus}
-      ?disabled=${this.disabled}
-      ?readonly=${this.readonly}
-      ?required=${this.required}
-      .value=${live(this.value)}
-      minlength=${ifDefined(this.minlength)}
-      maxlength=${ifDefined(this.maxlength)}
-      @input=${() => this._handleChange("sgds-input")}
-      @change=${() => this._handleChange("sgds-change")}
-      @keydown=${this._handleKeyDown}
-      @invalid=${() => this.setInvalid(true)}
-      @focus=${this._handleFocus}
-      @blur=${this._handleBlur}
-    />
-    ${this.hasFeedback
-      ? html`<div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
-      : ""}
-    `;
+        class=${classMap({
+          "form-control": true,
+          "is-invalid": this.hasFeedback && this.invalid,
+          "is-valid": this.hasFeedback && this.valid,
+          [`${this.inputClasses}`]: this.inputClasses
+        })}
+        type=${this.type}
+        id=${this.inputId}
+        name=${ifDefined(this.name)}
+        placeholder=${ifDefined(this.placeholder)}
+        aria-invalid=${this.invalid ? "true" : "false"}
+        pattern=${ifDefined(this.pattern)}
+        ?autofocus=${this.autofocus}
+        ?disabled=${this.disabled}
+        ?readonly=${this.readonly}
+        ?required=${this.required}
+        .value=${live(this.value)}
+        minlength=${ifDefined(this.minlength)}
+        maxlength=${ifDefined(this.maxlength)}
+        @input=${() => this._handleChange("sgds-input")}
+        @change=${() => this._handleChange("sgds-change")}
+        @keydown=${this._handleKeyDown}
+        @invalid=${() => this.setInvalid(true)}
+        @focus=${this._handleFocus}
+        @blur=${this._handleBlur}
+      />
+      ${this.hasFeedback
+        ? html`<div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
+        : ""} `;
   }
   protected _renderFeedback() {
     return this.hasFeedback
       ? html`<div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
       : "";
   }
+  protected _renderLabel(){
+    const labelTemplate = html` <label for=${this.inputId} class="form-label">${this.label}</label> `;
+   return this.label && labelTemplate
+  }
+  protected _renderHintText(){
+    const hintTextTemplate = html` <small id="${this.inputId}Help" class="text-muted form-text">${this.hintText}</small> `
+    return this.hintText &&  hintTextTemplate
+  }
   render() {
-    const input = html`${this._renderInput()}`
+    const input = html`${this._renderInput()}`;
     // if iconName is defined
     const inputWithIcon = html`
       <div class="sgds form-control-group ${this.inputClasses}">
@@ -195,18 +202,14 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
       </div>
     `;
     // if hintText is defined
-    const withHintText = html` <small id="${this.inputId}Help" class="text-muted form-text">${this.hintText}</small> `;
-
-    // if label is defined
-    const withLabel = html` <label for=${this.inputId} class="form-label">${this.label}</label> `;
+ 
 
     return html`
       <div class="d-flex flex-column w-100">
-        ${html`${this.label && withLabel} ${this.hintText && withHintText} ${this.icon ? inputWithIcon : input} `}
+        ${html`${this._renderLabel()} ${this._renderHintText()} ${this.icon ? inputWithIcon : input} `}
       </div>
     `;
   }
-
 }
 
 export default SgdsInput;
