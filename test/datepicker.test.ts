@@ -1162,40 +1162,47 @@ describe("datepicker input masking", () => {
     {
       mode: "range",
       value: "12/03/2024 - 13/04/2024",
-      editValues: ["12/03/2024 - 13/04/202y", "12/03/2024 - 13/04/2y2y", "12/03/2024 - 13/m4/2y2y", "12/03/2024 - d3/m4/2y2y", "12/03/2024 - 23/m4/2y2y", "12/03/20yy - d3/m4/2y2y"]
+      editValues: [
+        "12/03/2024 - 13/04/202y",
+        "12/03/2024 - 13/04/2y2y",
+        "12/03/2024 - 13/m4/2y2y",
+        "12/03/2024 - d3/m4/2y2y",
+        "12/03/2024 - 23/m4/2y2y",
+        "12/03/20yy - d3/m4/2y2y"
+      ]
     }
   ];
-  backspacingValueMode.forEach(({mode, value, editValues}) => {
+  backspacingValueMode.forEach(({ mode, value, editValues }) => {
     it(`for mode=${mode}backspacing a complete date 1|2/03/2024 at first position should give d2/03/2024`, async () => {
       const inputEl = await fixture<DatepickerInput>(
         html`<sgds-datepicker-input value=${value} mode=${mode as "single" | "range"}></sgds-datepicker-input>`
       );
       // const inputEl = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
       expect(inputEl?.value).to.equal(value);
-  
+
       inputEl.focus();
       await sendKeys({ press: "Backspace" });
-  
+
       await inputEl.updateComplete;
       expect(inputEl?.value).to.equal(editValues?.[0]);
-  
+
       await sendKeys({ press: "ArrowLeft" });
       await sendKeys({ press: "Backspace" });
       await inputEl.updateComplete;
       expect(inputEl?.value).to.equal(editValues?.[1]);
-  
+
       await sendKeys({ press: "ArrowLeft" });
       await sendKeys({ press: "ArrowLeft" });
       await sendKeys({ press: "ArrowLeft" });
       await sendKeys({ press: "Backspace" });
       await inputEl.updateComplete;
       expect(inputEl?.value).to.equal(editValues?.[2]);
-  
+
       await sendKeys({ press: "ArrowLeft" });
       await sendKeys({ press: "Backspace" });
       await inputEl.updateComplete;
       expect(inputEl?.value).to.equal(editValues?.[3]);
-  
+
       await sendKeys({ press: "Digit2" });
       await inputEl.updateComplete;
       expect(inputEl?.value).to.equal(editValues?.[4]);
@@ -1207,7 +1214,7 @@ describe("datepicker input masking", () => {
       await inputEl.updateComplete;
       expect(inputEl?.value).to.equal(editValues?.[5]);
     });
-  })
+  });
   const validationOnChangeMode = [
     { mode: "single", value: "12/03/2024", editValue: "12/03/202y" },
     { mode: "range", value: "12/03/2024 - 13/02/2024", editValue: "12/03/2024 - 13/02/202y" }
@@ -1282,25 +1289,23 @@ describe("datepicker input masking", () => {
 });
 
 describe("error message", () => {
-  it("default error message can be override by user", async() => {
-    const el = await fixture<SgdsDatepicker>(
-      html`<sgds-datepicker></sgds-datepicker>`
-    );
-    const input = el.shadowRoot?.querySelector<DatepickerInput>("sgds-datepicker-input")
-    input?.focus()
-    await waitUntil(() => el.shadowRoot?.activeElement === input)
+  it("default error message can be override by user", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker></sgds-datepicker>`);
+    const input = el.shadowRoot?.querySelector<DatepickerInput>("sgds-datepicker-input");
+    input?.focus();
+    await waitUntil(() => el.shadowRoot?.activeElement === input);
     await sendKeys({ press: `Digit2` });
-    await el.updateComplete
-    expect(el.value).to.equal("2d/mm/yyyy")
+    await el.updateComplete;
+    expect(el.value).to.equal("2d/mm/yyyy");
 
-    input?.blur()
-    
-    const feedbackDiv = input?.shadowRoot?.querySelector( "div.invalid-feedback" );
-    expect(feedbackDiv).to.exist
-    expect(feedbackDiv?.textContent).to.equal("Please enter a valid date")
+    input?.blur();
 
-    el.invalidFeedback = "Error message"
-    await el.updateComplete
-    expect(feedbackDiv?.textContent).to.equal("Error message")
-  })
-})
+    const feedbackDiv = input?.shadowRoot?.querySelector("div.invalid-feedback");
+    expect(feedbackDiv).to.exist;
+    expect(feedbackDiv?.textContent).to.equal("Please enter a valid date");
+
+    el.invalidFeedback = "Error message";
+    await el.updateComplete;
+    expect(feedbackDiv?.textContent).to.equal("Error message");
+  });
+});

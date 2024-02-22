@@ -82,7 +82,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @state() valid = false;
 
   /**@internal */
-  private inputId: string = genId("input", this.type);
+  protected inputId: string = genId("input", this.type);
 
   /** Sets focus on the input. */
   public focus(options?: FocusOptions) {
@@ -103,20 +103,20 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   public setInvalid(bool: boolean) {
     this.invalid = bool;
   }
-  private _handleChange(event: string) {
+  protected _handleChange(event: string) {
     this.value = this.input.value;
     this.emit(event);
   }
 
-  private _handleFocus() {
+  protected _handleFocus() {
     this.emit("sgds-focus");
   }
 
-  private _handleBlur() {
+  protected _handleBlur() {
     this.emit("sgds-blur");
   }
 
-  private _handleKeyDown(event: KeyboardEvent) {
+  protected _handleKeyDown(event: KeyboardEvent) {
     const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
 
     // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before

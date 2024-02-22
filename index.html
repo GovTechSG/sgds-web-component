@@ -8,7 +8,8 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds@2.1.1/css/sgds.min.css" rel="stylesheet" crossorigin="anonymous"> -->
     <!-- <script type="module" id="dev-console-gateway"
         src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"></script> -->
-    <script src="/node_modules/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js"></script>
+    <script
+        src="/node_modules/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
     <!-- <script type="module" id="console-components-gateway"
@@ -186,7 +187,7 @@
 
     <main>
         <div class="container">
-            <datepicker-input></datepicker-input>  
+            <datepicker-input></datepicker-input>
             <h2>Progress</h2>
             <div class="row">
                 <div class="container">
@@ -235,15 +236,20 @@
                 </svg> -->
             </sgds-combo-box>
             <h2>Datepicker</h2>
-            <sgds-datepicker  initialValue='["03/29/2024"]' mindate="2020-01-01T12:00:00.000Z" maxdate="2030-12-30T12:00:00.000Z" dateformat="MM/DD/YYYY">
+            <sgds-datepicker label="Birthdate" hinttext="min date and max date"
+                initialValue='["03/29/2024"]' mindate="2024-02-02T12:00:00.000Z" maxdate="2030-12-30T12:00:00.000Z"
+                dateformat="MM/DD/YYYY">
             </sgds-datepicker>
-            <sgds-datepicker id="myDatepicker"   invalidFeedback="this is wrong"></sgds-datepicker>
+            <sgds-datepicker id="myDatepicker" invalidFeedback="this is wrong"></sgds-datepicker>
 
             <br><br><br><br><br><br><br><br><br>
-            <sgds-datepicker id="myDatepicker2"  mode="range" initialValue='["29/03/2024", "29/03/2025"]'></sgds-datepicker>
-            <sgds-datepicker id="myDatepicker2"  mode="range"></sgds-datepicker>
-            <sgds-datepicker id="myDatepicker2"  mode="range" dateformat="MM/DD/YYYY" initialValue='["03/29/2024", "03/29/2025"]'></sgds-datepicker>
-            <sgds-datepicker id="myDatepicker2"  mode="range" dateformat="YYYY/MM/DD" initialValue='["2024/03/29", "2025/03/29"]'></sgds-datepicker>
+            <sgds-datepicker id="myDatepicker2" label="Birthdate" hinttext="min date and max date" mode="range"
+                initialValue='["29/03/2024", "29/03/2025"]'></sgds-datepicker>
+            <sgds-datepicker id="myDatepicker2" mode="range"></sgds-datepicker>
+            <sgds-datepicker id="myDatepicker2" mode="range" dateformat="MM/DD/YYYY"
+                initialValue='["03/29/2024", "03/29/2025"]'></sgds-datepicker>
+            <sgds-datepicker id="myDatepicker2" mode="range" dateformat="YYYY/MM/DD"
+                initialValue='["2024/03/29", "2025/03/29"]'></sgds-datepicker>
         </div>
 
         <div class="container">
@@ -566,9 +572,9 @@
                         <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
                         <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
                         <sgds-dropdown-item href="#" disabled>
-                          item #3
+                            item #3
                         </sgds-dropdown-item>
-                      </sgds-dropdown>
+                    </sgds-dropdown>
                 </div>
             </div>
             <div class="container">

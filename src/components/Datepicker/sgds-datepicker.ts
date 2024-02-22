@@ -12,6 +12,7 @@ import DatepickerInput from "./datepicker-input";
 import styles from "./sgds-datepicker.scss";
 import { ViewEnum } from "./types";
 import { DATE_PATTERNS } from "../../utils/time";
+import { classMap } from "lit/directives/class-map.js";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -69,6 +70,14 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   /**Feedback text for error state when date input is invalid */
   @property({ type: String, reflect: true }) invalidFeedback = "Please enter a valid date";
 
+  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
+  @property({ type: Boolean, reflect: true }) hasFeedback = false;
+  /** The datepicker input's label  */
+  @property({ reflect: true }) label = "";
+
+  /** The datepicker input's hint text below the label */
+  @property({ reflect: true }) hintText = "";
+
   /** @internal */
   @state() value = "";
 
@@ -92,7 +101,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   @queryAsync("sgds-datepicker-input")
   datepickerInput: Promise<DatepickerInput>;
-
+  
   constructor() {
     super();
     this.modifierOpt = [
@@ -305,12 +314,18 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
           dateFormat=${this.dateFormat}
           invalidFeedback=${this.invalidFeedback}
           @sgds-mask-input-change=${(e: CustomEvent) => {
-            this.value = e.detail
-            console.log(this.value)
-            }}
+            this.value = e.detail;
+          }}
+          minDate=${this.minDate}
+          maxDate=${this.maxDate}
+          label=${this.label}
+          hintText=${this.hintText}
         ></sgds-datepicker-input>
         <button
-          class="sgds btn rounded-0 border btn-outline-dark"
+          class=${classMap({
+            "sgds btn rounded-0 border btn-outline-dark": true
+            // "align-self-center":
+          })}
           aria-expanded="${this.menuIsOpen}"
           aria-haspopup="dialog"
           aria-controls=${this.dropdownMenuId}

@@ -1,11 +1,11 @@
 import { HTMLTemplateResult, html } from "lit";
 import { property } from "lit/decorators.js";
-import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { createYearViewArray, setTimeToNoon } from "../../utils/time";
 import { watch } from "../../utils/watch";
 import styles from "./datepicker-calendar.scss";
 import { ViewEnum } from "./types";
+import { classMap } from "lit/directives/class-map.js";
 
 const TODAY_DATE = new Date();
 
@@ -98,6 +98,10 @@ export class DatepickerCalendar extends SgdsElement {
   @watch("displayDate", { waitUntilFirstUpdate: true })
   _updateFocusedDate() {
     this.focusedDate = setTimeToNoon(this.displayDate);
+
+    if (this.focusedDate.getFullYear() < 1900) {
+      this.focusedDate.setFullYear(1900);
+    }
   }
 
   private _setFocusedDate(shift: number) {
@@ -300,7 +304,6 @@ export class DatepickerCalendar extends SgdsElement {
       for (let j = 0; j <= 6; j++) {
         if (day <= monthLength && (i > 0 || j >= startingDayOfMonth)) {
           const date = new Date(year, month, day, 12, 0, 0, 0).toISOString();
-
           const beforeMinDate = minimumDate && Date.parse(date) < Date.parse(minimumDate.toISOString());
           const afterMinDate = maximumDate && Date.parse(date) > Date.parse(maximumDate.toISOString());
           const clickHandler = beforeMinDate || afterMinDate ? undefined : this._onClickDay;
@@ -429,6 +432,7 @@ export class DatepickerCalendar extends SgdsElement {
               @click=${() => this._onClickYear(y)}
               data-year=${y}
               tabindex="3"
+              ?disabled=${y < 1900}
             >
               ${y}
             </button>

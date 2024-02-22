@@ -1,9 +1,8 @@
-import { isBefore, isValid, parse } from "date-fns";
+import { isAfter, isBefore, isValid, parse } from "date-fns";
 import IMask, { InputMask } from "imask";
 import { property, query } from "lit/decorators.js";
 import { DATE_PATTERNS } from "../../utils/time";
 import { SgdsInput } from "../Input/sgds-input";
-
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 /**
  * @summary The `DatePicker` Component is built using `Dropdown`, `Input` and `Button` components. By default, the Calendar points to current date and input has no value. The input is a read-only and users can only pick dates using the Calendar.
@@ -100,7 +99,7 @@ export class DatepickerInput extends SgdsInput {
     this.mask = IMask(shadowInput, maskOptions);
     this.mask.on("accept", () => {
       this.value = this.mask.masked.value;
-      this.emit("sgds-mask-input-change", {detail: this.value})
+      this.emit("sgds-mask-input-change", { detail: this.value });
     });
     /**
      * Validation after date is complete
@@ -115,7 +114,14 @@ export class DatepickerInput extends SgdsInput {
     const dateArray: Date[] | string[] = dates.map(date =>
       parse(date, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date())
     );
-    const invalidDates = dateArray.filter(date => !isValid(date) || isBefore(date, new Date(0, 0, 1)));
+    const invalidDates = dateArray.filter(
+      date =>
+        !isValid(date) ||
+        isBefore(date, new Date(0, 0, 1)) ||
+        isBefore(date, new Date(this.minDate)) ||
+        isAfter(date, new Date(this.maxDate))
+    );
+
     if (invalidDates.length > 0) {
       this.setCustomValidity("Invalid Date");
       this.setInvalid(true);
