@@ -6,6 +6,7 @@ import { watch } from "../../utils/watch";
 import styles from "./datepicker-calendar.scss";
 import { ViewEnum } from "./types";
 import { classMap } from "lit/directives/class-map.js";
+import { isAfter, isEqual } from "date-fns";
 
 const TODAY_DATE = new Date();
 
@@ -105,19 +106,35 @@ export class DatepickerCalendar extends SgdsElement {
   }
 
   private _setFocusedDate(shift: number) {
+    const currentFocusedDate = this.focusedDate.getDate();
+    const currentFocusedMonth = this.focusedDate.getMonth();
+    const currentFocusedYear = this.focusedDate.getFullYear();
     switch (this.view) {
       case "days": {
-        this.focusedDate = setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() + shift)));
+        const newFocusedDate = setTimeToNoon(
+          new Date(currentFocusedYear, currentFocusedMonth, currentFocusedDate + shift)
+        );
+        if (isAfter(newFocusedDate, new Date(0, 0, 1, 12)) || isEqual(newFocusedDate, new Date(0, 0, 1, 12)))
+          this.focusedDate = newFocusedDate;
         break;
       }
       case "months": {
-        this.focusedDate = setTimeToNoon(new Date(this.focusedDate.setMonth(this.focusedDate.getMonth() + shift)));
+        const newFocusedDate = setTimeToNoon(
+          new Date(currentFocusedYear, currentFocusedMonth + shift, currentFocusedDate)
+        );
+
+        if (isAfter(newFocusedDate, new Date(0, 0, 1, 12)) || isEqual(newFocusedDate, new Date(0, 0, 1, 12))) {
+          this.focusedDate = newFocusedDate;
+        }
         break;
       }
       case "years": {
-        this.focusedDate = setTimeToNoon(
-          new Date(this.focusedDate.setFullYear(this.focusedDate.getFullYear() + shift))
+        const newFocusedDate = setTimeToNoon(
+          new Date(currentFocusedYear + shift, currentFocusedMonth, currentFocusedDate)
         );
+        if (newFocusedDate.getFullYear() >= 1900) {
+          this.focusedDate = newFocusedDate;
+        }
         break;
       }
     }
@@ -157,6 +174,7 @@ export class DatepickerCalendar extends SgdsElement {
       this._blurCalendarCell();
       const keyShiftObject = keyPressAction[event.key];
       const shiftNumber = keyShiftObject[this.view];
+
       this._setFocusedDate(shiftNumber);
 
       this._focusOnCalendarCell();
@@ -443,7 +461,6 @@ export class DatepickerCalendar extends SgdsElement {
     return yearView;
   }
   render() {
-    console.log(this.displayDate, "incalendar");
     let viewContent: HTMLTemplateResult;
 
     switch (this.view) {

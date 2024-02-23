@@ -1,4 +1,4 @@
-import { elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
+import { elementUpdated, expect, fixture, html, waitUntil, fixtureCleanup } from "@open-wc/testing";
 import DatepickerCalendar from "../src/components/Datepicker/datepicker-calendar";
 import DatepickerHeader, { MONTH_LABELS } from "../src/components/Datepicker/datepicker-header";
 import DatepickerInput from "../src/components/Datepicker/datepicker-input";
@@ -1224,8 +1224,8 @@ describe("datepicker input masking", () => {
       const inputEl = await fixture<DatepickerInput>(
         html`<sgds-datepicker-input value=${value} mode=${mode as "single" | "range"}></sgds-datepicker-input>`
       );
-      const invalidHandler = sinon.spy()
-      inputEl.addEventListener("sgds-invalid-input", invalidHandler)
+      const invalidHandler = sinon.spy();
+      inputEl.addEventListener("sgds-invalid-input", invalidHandler);
       const shadowInput = inputEl?.shadowRoot?.querySelector("input");
       expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
       const changeHandler = sinon.spy();
@@ -1236,12 +1236,12 @@ describe("datepicker input masking", () => {
       expect(inputEl.value).to.equal(editValue);
 
       expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
-      expect(invalidHandler).not.to.be.called
+      expect(invalidHandler).not.to.be.called;
       inputEl.blur();
 
       await waitUntil(() => changeHandler.calledOnce);
       expect(shadowInput?.classList.contains("is-invalid")).to.be.true;
-      expect(invalidHandler).to.be.calledOnce
+      expect(invalidHandler).to.be.calledOnce;
     });
   });
 
@@ -1296,14 +1296,14 @@ describe("error message", () => {
     const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker></sgds-datepicker>`);
     const input = el.shadowRoot?.querySelector<DatepickerInput>("sgds-datepicker-input");
     input?.focus();
-    expect(input?.reportValidity()).to.equal(true)
+    expect(input?.reportValidity()).to.equal(true);
     await waitUntil(() => el.shadowRoot?.activeElement === input);
     await sendKeys({ press: `Digit2` });
     await el.updateComplete;
     expect(el.value).to.equal("2d/mm/yyyy");
 
     input?.blur();
-    expect(input?.reportValidity()).to.equal(false)
+    expect(input?.reportValidity()).to.equal(false);
     const feedbackDiv = input?.shadowRoot?.querySelector("div.invalid-feedback");
     expect(feedbackDiv).to.exist;
     expect(feedbackDiv?.textContent).to.equal("Please enter a valid date");
@@ -1315,6 +1315,7 @@ describe("error message", () => {
 });
 
 describe("datepicker calendar will not show before 1900", () => {
+  afterEach(() => fixtureCleanup());
   it("in day view , January 1900 header  previousButton is invisble", async () => {
     const el = await fixture<SgdsDatepicker>(
       html`<sgds-datepicker menuIsOpen .initialValue=${["01/01/1900"]}></sgds-datepicker>`
@@ -1347,27 +1348,66 @@ describe("datepicker calendar will not show before 1900", () => {
     expect(disabledButtons?.length).to.equal(8);
     expect(calendar?.shadowRoot?.querySelector("button.year[data-year='1900']")?.hasAttribute("disabled")).to.be.false;
   });
+  it("in day view keypress ArrowUp and ArrowLeft when focusedDate is 01/01/1900 will not trigger change to previous year", async () => {
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker menuIsOpen .initialValue=${["01/01/1900"]}></sgds-datepicker>`
+    );
+    const changeCalendarViewHandler = sinon.spy();
+    el.addEventListener("sgds-change-calendar", changeCalendarViewHandler);
+    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar");
+    const firstTd = calendar?.shadowRoot?.querySelector("td[data-day='1']");
+    await waitUntil(() => calendar?.shadowRoot?.activeElement);
+
+    expect(calendar?.shadowRoot?.activeElement === firstTd).to.be.true;
+    await sendKeys({ press: "ArrowUp" });
+    await el.updateComplete;
+    await sendKeys({ press: "ArrowLeft" });
+    await el.updateComplete;
+    expect(changeCalendarViewHandler).not.to.be.called;
+  });
+  it("in month view keypress ArrowUp and ArrowLeft when focusedDate's month is january will not trigger change to previous year", async () => {
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker menuIsOpen .initialValue=${["01/01/1900"]}></sgds-datepicker>`
+    );
+    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar");
+    const header = () => el.shadowRoot?.querySelector("sgds-datepicker-header");
+    const headerBtn =() => header()?.shadowRoot?.querySelectorAll("button")[1];
+
+    headerBtn()?.click();
+    await el.updateComplete;
+
+    await waitUntil(() => calendar?.shadowRoot?.activeElement);
+
+    const activeMonth = calendar?.shadowRoot?.querySelector("button[data-month='0']");
+
+    expect(calendar?.shadowRoot?.activeElement === activeMonth).to.be.true;
+    await sendKeys({ press: "ArrowUp" });
+    await el.updateComplete;
+    await sendKeys({ press: "ArrowLeft" });
+    await el.updateComplete;
+    expect(headerBtn()?.textContent).to.include("1900")
+  });
 });
 
-describe("datepicker behavour on invalid input", ()=> {
-  it("datepicker resets to initial displayDate when invalid input", async() =>{
-    const el = await fixture<SgdsDatepicker>(
-      html`<sgds-datepicker .initialValue=${["23/03/2020"]}></sgds-datepicker>`
-    );
+describe("datepicker behavour on invalid input", () => {
+  it("datepicker resets to initial displayDate when invalid input", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker .initialValue=${["23/03/2020"]}></sgds-datepicker>`);
     const input = el.shadowRoot?.querySelector<DatepickerInput>("sgds-datepicker-input");
-    const header = el.shadowRoot?.querySelector<DatepickerHeader>("sgds-datepicker-header")
-    expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.equal("March 2020")
-    
+    const header = el.shadowRoot?.querySelector<DatepickerHeader>("sgds-datepicker-header");
+    expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.equal("March 2020");
+
     input?.focus();
     await waitUntil(() => el.shadowRoot?.activeElement === input);
     await sendKeys({ press: "Backspace" });
 
-      await input?.updateComplete;
-      expect(input?.value).to.equal('23/03/202y');
+    await input?.updateComplete;
+    expect(input?.value).to.equal("23/03/202y");
 
-    input?.blur()
-    expect(input?.reportValidity()).to.equal(false)
-    const initialDisplayDate = `${MONTH_LABELS[new Date().getMonth()]} ${new Date().getFullYear()}`
-    expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.equal(initialDisplayDate)
-  })
-})
+    input?.blur();
+    expect(input?.reportValidity()).to.equal(false);
+    el.showMenu();
+    await el.updateComplete;
+    const initialDisplayDate = `${MONTH_LABELS[new Date().getMonth()]} ${new Date().getFullYear()}`;
+    expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.equal(initialDisplayDate);
+  });
+});
