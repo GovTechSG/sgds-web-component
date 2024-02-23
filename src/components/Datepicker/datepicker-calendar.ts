@@ -443,6 +443,7 @@ export class DatepickerCalendar extends SgdsElement {
     return yearView;
   }
   render() {
+    console.log(this.displayDate, "incalendar");
     let viewContent: HTMLTemplateResult;
 
     switch (this.view) {

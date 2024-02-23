@@ -8,21 +8,6 @@ import { watch } from "../../utils/watch";
 import styles from "./datepicker-header.scss";
 import { ViewEnum } from "./types";
 
-const MONTH_LABELS = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
-];
-
 export class DatepickerHeader extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
@@ -194,3 +179,18 @@ export class DatepickerHeader extends SgdsElement {
 }
 
 export default DatepickerHeader;
+
+export const MONTH_LABELS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];

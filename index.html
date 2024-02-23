@@ -236,7 +236,7 @@
                 </svg> -->
             </sgds-combo-box>
             <h2>Datepicker</h2>
-            <sgds-datepicker label="Birthdate" hinttext="min date and max date"
+            <sgds-datepicker label="Birthdate" drop="up" menuAlignRight hinttext="min date and max date"
                 initialValue='["03/29/2024"]' mindate="2024-02-02T12:00:00.000Z" maxdate="2030-12-30T12:00:00.000Z"
                 dateformat="MM/DD/YYYY">
             </sgds-datepicker>
@@ -248,14 +248,14 @@
             <sgds-datepicker id="myDatepicker2" mode="range"></sgds-datepicker>
             <sgds-datepicker id="myDatepicker2" mode="range" dateformat="MM/DD/YYYY"
                 initialValue='["03/29/2024", "03/29/2025"]'></sgds-datepicker>
-            <sgds-datepicker id="myDatepicker2" mode="range" dateformat="YYYY/MM/DD"
+            <sgds-datepicker id="myDatepicker2" mode="range" noFlip dateformat="YYYY/MM/DD"
                 initialValue='["2024/03/29", "2025/03/29"]'></sgds-datepicker>
         </div>
 
         <div class="container">
             <h2>Dropdown</h2>
             <div class="row">
-                <sgds-dropdown togglerText="Dropdown">
+                <sgds-dropdown noFlip menuAlignRight togglerText="hello">
                     <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
                     <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
                     <sgds-dropdown-item href="#" disabled>

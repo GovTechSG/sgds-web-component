@@ -126,6 +126,7 @@ export class DatepickerInput extends SgdsInput {
     if (invalidDates.length > 0) {
       this.setCustomValidity("Invalid Date");
       this.setInvalid(true);
+      this.emit("sgds-invalid-input");
     } else {
       this.setCustomValidity("");
       this.setInvalid(false);

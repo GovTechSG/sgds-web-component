@@ -13,6 +13,7 @@ import styles from "./sgds-datepicker.scss";
 import { ViewEnum } from "./types";
 import { DATE_PATTERNS } from "../../utils/time";
 import { classMap } from "lit/directives/class-map.js";
+import type { DropDirection } from "../Dropdown/sgds-dropdown";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -77,6 +78,14 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   /** The datepicker input's hint text below the label */
   @property({ reflect: true }) hintText = "";
+
+  /** Controls auto-flipping of menu */
+  @property({ type: Boolean, reflect: true, state: false })
+  noFlip = false;
+
+  /** The drop position of menu relative to the toggle button */
+  @property({ type: String, reflect: true, state: false })
+  drop: DropDirection = "down";
 
   /** @internal */
   @state() value = "";
@@ -144,7 +153,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   async firstUpdated() {
     super.firstUpdated();
-
     if (this.menuIsOpen) {
       const input = await this.datepickerInput;
       this.showMenu();
@@ -273,7 +281,10 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   private _handleSelectYear(event: CustomEvent<Date>) {
     this.displayDate = event.detail;
   }
-
+  private async _handleInvalidInput() {
+    this.selectedDateRange = [];
+    this.displayDate = new Date();
+  }
   private async _handleButtonResetClick() {
     this.displayDate = new Date();
     this.selectedDateRange = [];
@@ -315,6 +326,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
           @sgds-mask-input-change=${(e: CustomEvent) => {
             this.value = e.detail;
           }}
+          @sgds-invalid-input=${this._handleInvalidInput}
           minDate=${this.minDate}
           maxDate=${this.maxDate}
           label=${this.label}

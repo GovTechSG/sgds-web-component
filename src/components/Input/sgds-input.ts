@@ -10,6 +10,8 @@ import type { SgdsFormControl } from "../../utils/form";
 import { FormSubmitController } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
+import type { Ref, RefDirective } from "lit/directives/ref";
+import { ref } from "lit/directives/ref.js";
 
 /**
  * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
