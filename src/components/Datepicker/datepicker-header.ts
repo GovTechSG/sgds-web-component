@@ -1,25 +1,12 @@
+import { isBefore, isEqual } from "date-fns";
 import { html } from "lit";
 import { property } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { sanitizedNextMonth, sanitizedPreviousMonth } from "../../utils/time";
 import { watch } from "../../utils/watch";
 import styles from "./datepicker-header.scss";
 import { ViewEnum } from "./types";
-
-const MONTH_LABELS = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
-];
 
 export class DatepickerHeader extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
@@ -48,7 +35,6 @@ export class DatepickerHeader extends SgdsElement {
         `button[tabindex="${this.focusedTabIndex}"]`
       );
       buttonToFocus.focus();
-      return;
     }
     return;
   }
@@ -81,13 +67,14 @@ export class DatepickerHeader extends SgdsElement {
       const endLimit = displayYear - yearsPosition + 12 - 1;
       return html` ${startLimit} - ${endLimit} `;
     }
-    return html` ${MONTH_LABELS[displayDate.getMonth()]} ${displayDate.getFullYear()} `;
+    return html`${MONTH_LABELS[displayDate.getMonth()]} ${displayDate.getFullYear()}`;
   }
 
   /** @internal */
   private handleClickPrevious() {
     const { view, displayDate, focusedDate } = this;
     let newDisplayDate = new Date(displayDate);
+
     if (view === "months") {
       newDisplayDate.setFullYear(newDisplayDate.getFullYear() - 1);
     } else if (this.view === "years") {
@@ -132,12 +119,29 @@ export class DatepickerHeader extends SgdsElement {
     //emit event to render correct view
     this.emit("sgds-change-calendar", { detail: this.displayDate });
   }
+  private _removeCaret(): boolean {
+    const displayYear = this.displayDate.getFullYear();
+    const displayMonth = this.displayDate.getMonth();
+    const displayMonthYear = new Date(displayYear, displayMonth);
+
+    if (this.view === "months") {
+      return displayYear <= 1900;
+    }
+    if (this.view === "years") {
+      return displayYear < 1904;
+    }
+    return isEqual(displayMonthYear, new Date(0, 0, 1)) || isBefore(displayMonthYear, new Date(0, 0, 1));
+  }
 
   render() {
     return html`
       <div class="datepicker-header dropdown-header" role="heading">
         <div class="text-center d-flex justify-content-between align-items-center">
-          <button @click="${this.handleClickPrevious}" tabindex="0">
+          <button
+            @click="${this.handleClickPrevious}"
+            tabindex="0"
+            class="${classMap({ invisible: this._removeCaret() })}"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -175,3 +179,18 @@ export class DatepickerHeader extends SgdsElement {
 }
 
 export default DatepickerHeader;
+
+export const MONTH_LABELS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];

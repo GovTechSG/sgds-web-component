@@ -1,5 +1,23 @@
 import { getDaysInMonth, isLastDayOfMonth, lastDayOfMonth } from "date-fns";
 
+export const DATE_PATTERNS = {
+  "DD/MM/YYYY": {
+    imPattern: "`dd{/}`mm{/}`yyyy",
+    imRangePattern: "`dd{/}`mm{/}`yyyy - `DD{/}`MM{/}`YYYY",
+    fnsPattern: "dd/MM/yyyy"
+  },
+  "MM/DD/YYYY": {
+    imPattern: "`mm{/}`dd{/}`yyyy",
+    imRangePattern: "`mm{/}`dd{/}`yyyy - `MM{/}`DD{/}`YYYY",
+    fnsPattern: "MM/dd/yyyy"
+  },
+  "YYYY/MM/DD": {
+    imPattern: "`yyyy{/}`mm{/}`dd",
+    imRangePattern: "`yyyy{/}`mm{/}`dd - `YYYY{/}`MM{/}`DD",
+    fnsPattern: "yyyy/MM/dd"
+  }
+};
+
 /**
  * @description - creates calendar's year view years array with context of
  * datepicker's displayDate and current year

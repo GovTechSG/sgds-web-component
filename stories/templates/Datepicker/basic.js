@@ -9,7 +9,12 @@ export const Template = ({
   dateFormat,
   disabled,
   menuAlighRight,
-  mode
+  mode,
+  invalidFeedback,
+  label,
+  hintText,
+  drop,
+  displayDate
 }) =>
   html`
     <div style="height:400px;">
@@ -23,13 +28,20 @@ export const Template = ({
         ?disabled=${disabled}
         ?menuAlignRight=${menuAlighRight}
         mode=${mode}
+        invalidFeedback=${invalidFeedback}
+        label=${label}
+        hintText=${hintText}
+        drop=${drop}
+        displayDate=${displayDate}
       >
       </sgds-datepicker>
     </div>
   `;
 
 export const args = {
-  minDate: "2020-01-01T12:00:00.000Z",
-  maxDate: "2030-12-30T12:00:00.000Z"
+  minDate: "1920-01-01T16:00:00.000Z",
+  maxDate: "2030-12-02T12:00:00.000Z",
+  label: "Birthdate",
+  hintText: "Born after 1920"
 };
 export const parameters = {};
