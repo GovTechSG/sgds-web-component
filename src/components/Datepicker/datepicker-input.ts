@@ -5,24 +5,7 @@ import { property, queryAsync } from "lit/decorators.js";
 import { DATE_PATTERNS } from "../../utils/time";
 import { SgdsInput } from "../Input/sgds-input";
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
-/**
- * @summary The `DatePicker` Component is built using `Dropdown`, `Input` and `Button` components. By default, the Calendar points to current date and input has no value. The input is a read-only and users can only pick dates using the Calendar.
- *
- * @event sgds-change-date - Emitted when the state of datepicker's input changes during first load, close button reset click & date click. Date values can be accessed via event.target.value
- *
- * @cssproperty --datepicker-theme-color - Datepicker's overall theme color
- * @cssproperty --datepicker-hover-bg-color - Datepicker's calendar menu hover color
- * @cssproperty --datepicker-bg-color - Datepicker's menu background color
- * @cssproperty --datepicker-closebutton-bg-color - Datepicker's close button background color
- * @cssproperty --datepicker-closebutton-hover-bg-color - Datepicker's close button hover background color
- * @cssproperty --datepicker-closebutton-color - Datepicker's close button color
- * @cssproperty --datepicker-selected-date-bg-color - Selected date's background color
- * @cssproperty --datepicker-selected-date-text-color - Selected date's text color
- *
- * @description displayDate sets the month, year views of the calendar while focusedDate follows the focus which also directly changes
- * displayDate on certain occasions. Example, when keyboard moves up to the next month, it updates displayDate which then affect the current
- * date view of the calendar
- */
+
 export class DatepickerInput extends SgdsInput {
   /** Date format reflected on input  */
   @property({ type: String }) dateFormat: DateFormat = "DD/MM/YYYY";

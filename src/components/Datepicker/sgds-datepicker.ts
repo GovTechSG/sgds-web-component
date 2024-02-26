@@ -59,10 +59,10 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   @property({ type: String }) dateFormat: DateFormat = "DD/MM/YYYY";
 
   /** ISO date string to set the lowest allowable date value. e.g. "2016-05-19T12:00:00.000Z" */
-  @property({ type: String }) minDate: string;
+  @property({ type: String }) minDate = "";
 
   /** ISO date string to set the highest allowable date value. e.g. "2016-05-19T12:00:00.000Z" */
-  @property({ type: String }) maxDate: string;
+  @property({ type: String }) maxDate = "";
 
   /** Changes DatePicker to single date selection or range date selection */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
@@ -70,8 +70,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   /**Feedback text for error state when date input is invalid */
   @property({ type: String, reflect: true }) invalidFeedback = "Please enter a valid date";
 
-  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
-  @property({ type: Boolean, reflect: true }) hasFeedback = false;
   /** The datepicker input's label  */
   @property({ reflect: true }) label = "";
 
@@ -86,19 +84,16 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   @property({ type: String, reflect: true, state: false })
   drop: "up" | "down" = "down";
 
+  /** Provides the date context for Calendar to present the appropriate view. Defaults to today's date */
   @property({ attribute: false }) displayDate: Date = new Date();
 
-  /** @internal */
   @state() value = "";
 
-  /** @internal */
   @state()
   private view: ViewEnum = "days";
 
-  /** @internal */
   @state() private selectedDateRange: Date[] = [];
 
-  /** @internal */
   @state() private focusedDate: Date = this.displayDate;
 
   @state() private focusedTabIndex = 3;
@@ -113,6 +108,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   constructor() {
     super();
+    /**@internal */
     this.modifierOpt = [
       {
         name: "offset",
@@ -158,7 +154,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
         return console.error("Invalid date format in initialValue:", invalidDates);
       } else {
         const initialSelectedDates = this.initialValue.map(v =>
-         setTimeToNoon(parse(v, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date()))
+          setTimeToNoon(parse(v, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date()))
         );
         return this._handleSelectDates(initialSelectedDates);
       }
