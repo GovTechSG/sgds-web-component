@@ -100,3 +100,42 @@ export const MinMaxTemplate = args => {
     {MinMaxTemplate.bind({})}
   </Story>
 </Canvas>
+
+## Form Context
+
+export const FormSubmissionTemplate = args => {
+  return html`
+    <form id="datepicker-form">
+      <sgds-datepicker
+        id="form-submission-example"
+        label="Choose a date"
+        hintText="The minimum date is 10 June 2023 and maximum date is 19 June 2023"
+        .displayDate=${args.displayDate}
+        minDate="2023-06-10T12:00:00.000Z"
+        maxDate="2023-06-19T12:00:00.000Z"
+        required
+      ></sgds-datepicker>
+      <button type="submit">Submit</button>
+    </form>
+    <script>
+      const datepicker = document.querySelector( "#form-submission-example" );
+      datepicker.displayDate = new Date( 2023, 5, 10 );
+      const form = document.querySelector( "#datepicker-form" );
+      await Promise.all( [
+          customElements.whenDefined( 'sgds-button' ),
+          customElements.whenDefined( 'sgds-datepicker' )
+      ] ).then( () => {
+          form.addEventListener( 'submit', event => {
+              event.preventDefault();
+              alert( 'All fields are valid!' );
+          } );
+      } );
+    </script>
+  `;
+};
+
+<Canvas>
+  <Story name="Form Submission" height="500px" args={{ displayDate: new Date(2023, 5, 10) }}>
+    {FormSubmissionTemplate.bind({})}
+  </Story>
+</Canvas>

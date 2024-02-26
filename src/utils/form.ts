@@ -11,7 +11,9 @@ export class FormSubmitController implements ReactiveController {
   constructor(host: ReactiveControllerHost & Element, options?: Partial<FormSubmitControllerOptions>) {
     (this.host = host).addController(this);
     this.options = {
-      form: (input: HTMLInputElement) => input.closest("form"),
+      form: (input: HTMLInputElement) => {
+        return input.closest("form");
+      },
       name: (input: HTMLInputElement) => input.name,
       value: (input: HTMLInputElement) => input.value,
       defaultValue: (input: HTMLInputElement) => input.defaultValue,
@@ -81,7 +83,7 @@ export class FormSubmitController implements ReactiveController {
   handleFormSubmit(event: Event) {
     const disabled = this.options.disabled(this.host);
     const reportValidity = this.options.reportValidity;
-
+    console.log(reportValidity(this.host), this.host);
     if (this.form && !this.form.noValidate && !disabled && !reportValidity(this.host)) {
       event.preventDefault();
       event.stopImmediatePropagation();
@@ -109,7 +111,6 @@ export class FormSubmitController implements ReactiveController {
       // This seems sloppy, but checking all elements will cover native inputs, Shoelace inputs, and other custom
       // elements that support the constraint validation API.
       const elements = this.form.querySelectorAll<HTMLInputElement>("*");
-
       for (const element of elements) {
         if (typeof element.reportValidity === "function") {
           if (!element.reportValidity()) {

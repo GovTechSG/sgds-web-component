@@ -236,11 +236,17 @@
                 </svg> -->
             </sgds-combo-box>
             <h2>Datepicker</h2>
-            <sgds-datepicker id="datepicker-test-min-max" label="Birthdate" drop="right" menuAlignRight noFlip
+            <form id="datepicker-form">
+                <sgds-input></sgds-input>
+                <sgds-datepicker required></sgds-datepicker>
+                <sgds-button type="submit">Submit</sgds-button>
+            </form>
+
+            <!-- <sgds-datepicker id="datepicker-test-min-max" label="Birthdate" drop="right" menuAlignRight noFlip
                 hinttext="min date and max date" mindate="2024-02-02T12:00:00.000Z" maxdate="2030-12-30T12:00:00.000Z"
                 dateformat="MM/DD/YYYY" initialValue='["03/29/2024"]'>
             </sgds-datepicker>
-            <sgds-datepicker menuIsOpen noFeedback></sgds-datepicker>
+            <sgds-datepicker menuIsOpen noFeedback></sgds-datepicker> -->
 
             <!--  <br><br><br><br><br><br><br><br><br>
             <sgds-datepicker id="myDatepicker2" label="Birthdate" hinttext="min date and max date" mode="range"
@@ -727,7 +733,21 @@
 
 
 
+                    const dpForm = document.getElementById( 'datepicker-form' )
 
+                    dpForm.addEventListener( 'submit', async ( event ) => {
+                        // event.preventDefault();
+                        // const form = event.currentTarget;
+                        // // console.log( await form[ 0 ].reportValidity() )
+                        // event.preventDefault();
+                        // if ( form.checkValidity() === false ) {
+                        //     event.preventDefault();
+                        //     event.stopPropagation();
+                        //     alert( 'hello' )
+                        // }
+
+
+                    } );
 
                     const dp = document.getElementById( 'myDatepicker' );
                     // let value = dp.value;
