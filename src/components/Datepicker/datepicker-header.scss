@@ -3,10 +3,14 @@
   border: none;
   color: var(--datepicker-theme-color);
   button {
+    cursor: pointer;
     background-color: transparent;
     color: var(--datepicker-theme-color);
     border: none;
     font-weight: bold;
+    &:focus {
+      outline: var(--datepicker-theme-color) auto 2px;
+    }
   }
 
   svg {

@@ -1,14 +1,16 @@
-import { html } from "lit";
-import { property, state } from "lit/decorators.js";
-import { ref } from "lit/directives/ref.js";
-import styles from "./sgds-datepicker.scss";
-import { live } from "lit/directives/live.js";
-import { watch } from "../../utils/watch";
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { html } from "lit";
+import { property, queryAsync, state } from "lit/decorators.js";
+import { live } from "lit/directives/live.js";
+import { ref } from "lit/directives/ref.js";
+import { DropdownElement } from "../../base/dropdown-element";
+import { watch } from "../../utils/watch";
 import { SgdsInput } from "../Input/sgds-input";
 import { DatepickerCalendar } from "./datepicker-calendar";
 import { DatepickerHeader } from "./datepicker-header";
-import { DropdownElement } from "../../base/dropdown-element";
+import styles from "./sgds-datepicker.scss";
+import { ViewEnum } from "./types";
+import { sortAscDates } from "../../utils/time";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -23,6 +25,12 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  * @cssproperty --datepicker-closebutton-bg-color - Datepicker's close button background color
  * @cssproperty --datepicker-closebutton-hover-bg-color - Datepicker's close button hover background color
  * @cssproperty --datepicker-closebutton-color - Datepicker's close button color
+ * @cssproperty --datepicker-selected-date-bg-color - Selected date's background color
+ * @cssproperty --datepicker-selected-date-text-color - Selected date's text color
+ *
+ * @description displayDate sets the month, year views of the calendar while focusedDate follows the focus which also directly changes
+ * displayDate on certain occasions. Example, when keyboard moves up to the next month, it updates displayDate which then affect the current
+ * date view of the calendar
  */
 
 export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
@@ -59,17 +67,28 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
 
   /** @internal */
-  @state() private value: string;
+  @state() value: string;
 
   /** @internal */
   @state()
-  private view: string;
+  private view: ViewEnum = "days";
 
   /** @internal */
   @state() private selectedDateRange: Date[] = [];
 
   /** @internal */
   @state() private displayDate: Date = new Date();
+
+  /** @internal */
+  @state() private focusedDate: Date = new Date();
+
+  @state() private focusedTabIndex = 3;
+
+  @queryAsync("sgds-input")
+  private dropdownRef: Promise<SgdsInput>;
+
+  @queryAsync("sgds-datepicker-calendar")
+  private calendar: Promise<DatepickerCalendar>;
 
   constructor() {
     super();
@@ -83,8 +102,81 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     ];
   }
 
-  /** @internal */
-  private parseDateStringToDate(dateString: string): Date | null {
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener("sgds-view", this._handleViewChanged);
+    this.addEventListener("sgds-change-calendar", this._handleDateChanged);
+    this.addEventListener("sgds-update-focus", this._handleFocusDateChanged);
+    this.addEventListener("sgds-selectmonth", this._handleSelectMonth);
+    this.addEventListener("sgds-selectyear", this._handleSelectYear);
+    this.addEventListener("sgds-selectdates", this._handleSelectDates);
+    this.addEventListener("keydown", this._handleTab);
+    this.addEventListener("sgds-hide", this._handleCloseMenu);
+
+    if (this.initialValue && this.initialValue.length > 0) {
+      // Validate initialValue against the dateFormat regex
+      const dateFormatRegex = new RegExp(this._getDateFormatRegex());
+      const startDateString = this.initialValue[0];
+
+      if (!dateFormatRegex.test(startDateString)) {
+        // Handle invalid date format in initialValue
+        console.error("Invalid date format in initialValue:", startDateString);
+        return;
+      }
+
+      const startDate = this._parseDateStringToDate(startDateString);
+
+      if (this.mode === "single" && startDate) {
+        // Single mode
+        this.selectedDateRange = [startDate];
+        this.displayDate = startDate;
+      } else if (this.mode === "range" && this.initialValue.length === 2) {
+        // Range mode
+        const endDateString = this.initialValue[1];
+
+        if (!dateFormatRegex.test(endDateString)) {
+          // Handle invalid date format in initialValue
+          console.error("Invalid date format in initialValue:", endDateString);
+          return;
+        }
+
+        const endDate = this._parseDateStringToDate(endDateString);
+
+        if (startDate && endDate) {
+          this.selectedDateRange = [startDate, endDate];
+          this.selectedDateRange = sortAscDates(this.selectedDateRange);
+          // this.selectedDateRange.sort((a, b) => a.getTime() - b.getTime());
+
+          this.displayDate = startDate;
+        }
+      }
+    }
+
+    if (this.selectedDateRange && this.selectedDateRange.length > 0) {
+      // Get the formattedDate value for the selected dates
+      const formattedDate = this._makeInputValueString(
+        this.selectedDateRange[0],
+        this.selectedDateRange[1],
+        this.dateFormat
+      );
+
+      this.value = formattedDate;
+    } else {
+      // If selectedDateRange is empty, emit sgds-change-date event with an empty string
+      this.value = "";
+    }
+  }
+  async firstUpdated() {
+    super.firstUpdated();
+    if (this.menuIsOpen) {
+      const input = await this.dropdownRef;
+      this.showMenu();
+      const cal = await this.calendar;
+      cal.focusOnCalendar(input);
+    }
+  }
+
+  private _parseDateStringToDate(dateString: string): Date | null {
     let year: string, month: string, day: string;
 
     switch (this.dateFormat) {
@@ -105,7 +197,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   }
 
   /** @internal */
-  private getDateFormatRegex(): string {
+  private _getDateFormatRegex(): string {
     // validate date strings and adhere to the specified date format
     return (
       this.dateFormat
@@ -121,76 +213,34 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
         .replace("/", "\\/")
     );
   }
-
-  connectedCallback() {
-    super.connectedCallback();
-
-    this.addEventListener("sgds-view", this.handleViewChanged);
-    this.addEventListener("sgds-view-date", this.handleDateChanged);
-    this.addEventListener("sgds-selectmonth", this.handleSelectMonth);
-    this.addEventListener("sgds-selectyear", this.handleSelectYear);
-    this.addEventListener("sgds-selectdates", this.handleSelectDates);
-
-    if (this.initialValue && this.initialValue.length > 0) {
-      // Validate initialValue against the dateFormat regex
-      const dateFormatRegex = new RegExp(this.getDateFormatRegex());
-      const startDateString = this.initialValue[0];
-
-      if (!dateFormatRegex.test(startDateString)) {
-        // Handle invalid date format in initialValue
-        console.error("Invalid date format in initialValue:", startDateString);
-        return;
-      }
-
-      const startDate = this.parseDateStringToDate(startDateString);
-
-      if (this.mode === "single" && startDate) {
-        // Single mode
-        this.selectedDateRange = [startDate];
-        this.displayDate = startDate;
-      } else if (this.mode === "range" && this.initialValue.length === 2) {
-        // Range mode
-        const endDateString = this.initialValue[1];
-
-        if (!dateFormatRegex.test(endDateString)) {
-          // Handle invalid date format in initialValue
-          console.error("Invalid date format in initialValue:", endDateString);
-          return;
-        }
-
-        const endDate = this.parseDateStringToDate(endDateString);
-
-        if (startDate && endDate) {
-          this.selectedDateRange = [startDate, endDate];
-          this.selectedDateRange.sort((a, b) => a.getTime() - b.getTime());
-
-          this.displayDate = startDate;
-        }
-      }
-    }
-
-    if (this.selectedDateRange && this.selectedDateRange.length > 0) {
-      // Get the formattedDate value for the selected dates
-      const formattedDate = this.makeInputValueString(
-        this.selectedDateRange[0],
-        this.selectedDateRange[1],
-        this.dateFormat
-      );
-
-      this.value = formattedDate;
-    } else {
-      // If selectedDateRange is empty, emit sgds-change-date event with an empty string
-      this.value = "";
+  private _handleTab(event: KeyboardEvent) {
+    const tabIndexArray = Array(4);
+    if (event.shiftKey && event.key === "Tab") {
+      event.preventDefault();
+      this.focusedTabIndex = (this.focusedTabIndex - 1 + tabIndexArray.length) % tabIndexArray.length;
+    } else if (event.key === "Tab") {
+      event.preventDefault();
+      this.focusedTabIndex = (this.focusedTabIndex + 1 + tabIndexArray.length) % tabIndexArray.length;
     }
   }
 
   @watch("value")
-  handleValueChange() {
+  _handleValueChange() {
     this.emit("sgds-change-date");
   }
 
-  /** @internal */
-  private makeInputValueString = (startDate: Date, endDate: Date, dateFormat: string) => {
+  private async _handleCloseMenu() {
+    if (this.selectedDateRange.length === 0) {
+      this.displayDate = new Date();
+    } else {
+      const selectedDatesLength = this.selectedDateRange.length;
+      this.displayDate = this.selectedDateRange[selectedDatesLength - 1];
+      const calendar = await this.calendar;
+      calendar._updateFocusedDate();
+    }
+  }
+
+  private _makeInputValueString = (startDate: Date, endDate: Date, dateFormat: string) => {
     if (!startDate && !endDate) return "";
 
     const formatDate = (date: Date) => {
@@ -222,9 +272,10 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     return "";
   };
 
-  /** @internal */
-  private handleSelectDates(event: CustomEvent<Date[]>) {
+  private _handleSelectDates(event: CustomEvent<Date[]>) {
     const newSelectedDates = event.detail;
+    this.displayDate = newSelectedDates[0];
+    this.focusedDate = newSelectedDates[0];
     if (this.mode === "range") {
       // Sort the newSelectedDates array in ascending order
       newSelectedDates.sort((a: Date, b: Date) => a.getTime() - b.getTime());
@@ -242,7 +293,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     }
 
     // Get the formattedDate value for the selected dates
-    const formattedDate = this.makeInputValueString(
+    const formattedDate = this._makeInputValueString(
       this.selectedDateRange[0],
       this.selectedDateRange[1],
       this.dateFormat
@@ -252,32 +303,31 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     this.value = formattedDate;
   }
 
-  /** @internal */
-  private handleViewChanged(event: CustomEvent<string>) {
-    this.view = event.detail;
+  /** update latest view state from datepicker-header */
+  private _handleViewChanged(event: CustomEvent<string>) {
+    this.view = event.detail as ViewEnum;
   }
 
-  /** @internal */
-  private handleDateChanged(event: CustomEvent<Date>) {
+  private _handleDateChanged(event: CustomEvent<Date>) {
+    this.displayDate = event.detail;
+  }
+  private _handleFocusDateChanged(event: CustomEvent<Date>) {
+    this.focusedDate = event.detail;
+  }
+
+  private _handleSelectMonth(event: CustomEvent<Date>) {
     this.displayDate = event.detail;
   }
 
-  /** @internal */
-  private handleSelectMonth(event: CustomEvent<Date>) {
+  private _handleSelectYear(event: CustomEvent<Date>) {
     this.displayDate = event.detail;
   }
 
-  /** @internal */
-  private handleSelectYear(event: CustomEvent<Date>) {
-    this.displayDate = event.detail;
-  }
-
-  /** @internal */
-  private handleButtonResetClick() {
+  private _handleButtonResetClick() {
     this.displayDate = new Date();
     this.selectedDateRange = [];
-
     this.value = "";
+    this.view = "days";
 
     this.hideMenu();
   }
@@ -285,9 +335,9 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   render() {
     let formattedDate = "";
     if (this.mode === "single") {
-      formattedDate = this.makeInputValueString(this.selectedDateRange[0], undefined, this.dateFormat);
+      formattedDate = this._makeInputValueString(this.selectedDateRange[0], undefined, this.dateFormat);
     } else if (this.mode === "range") {
-      formattedDate = this.makeInputValueString(this.selectedDateRange[0], this.selectedDateRange[1], this.dateFormat);
+      formattedDate = this._makeInputValueString(this.selectedDateRange[0], this.selectedDateRange[1], this.dateFormat);
     }
 
     const getPlaceholder = (): string => {
@@ -342,7 +392,8 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
         <button
           ?disabled=${this.disabled}
           class="btn sgds rounded-0 d-flex align-items-center"
-          @click=${() => this.handleButtonResetClick()}
+          aria-label="reset the datepicker"
+          @click=${() => this._handleButtonResetClick()}
         >
           ${svgEl}
         </button>
@@ -353,18 +404,27 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
           part="menu"
           @click=${(event: MouseEvent) => event.stopPropagation()}
         >
-          <sgds-datepicker-header .view=${this.view} .displayDate=${this.displayDate}></sgds-datepicker-header>
+          <sgds-datepicker-header
+            .view=${this.view}
+            .displayDate=${this.displayDate}
+            .focusedDate=${this.focusedDate}
+            .selectedDate=${this.selectedDateRange}
+            .focusedTabIndex=${this.focusedTabIndex}
+          ></sgds-datepicker-header>
           <sgds-datepicker-calendar
+            .show=${this.menuIsOpen}
             .view=${this.view}
             .displayDate=${this.displayDate}
             .mode=${this.mode}
             minDate=${this.minDate}
             maxDate=${this.maxDate}
             .selectedDate=${this.selectedDateRange}
+            .focusedTabIndex=${this.focusedTabIndex}
           ></sgds-datepicker-calendar>
         </ul>
       </div>
     `;
   }
 }
+
 export default SgdsDatepicker;

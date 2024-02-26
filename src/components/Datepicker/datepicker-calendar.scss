@@ -1,32 +1,43 @@
 .datepicker-body {
   padding: 0 1.5rem 1.5rem;
+}
 
-  .text-primary {
-    color: var(--datepicker-theme-color) !important;
-  }
+%selected-ends-shared {
+  background-color: var(--datepicker-selected-date-bg-color);
+  color: var(--datepicker-selected-date-text-color);
+}
+%active-shared {
+  cursor: pointer;
+  background-color: var(--datepicker-hover-bg-color);
 }
 
 .sgds.monthpicker,
 .sgds.yearpicker {
   display: grid;
-  grid-template-columns: repeat(3, 3rem);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(4, 3rem);
   justify-content: space-between;
   align-content: space-between;
-  padding: 1rem 1rem 0;
+  padding: 1rem 0 0;
 }
-
 
 button.month,
 button.year {
   padding: 0;
   border: 0;
   background-color: transparent;
-  &.active,
+  &.active {
+    @extend %active-shared;
+    &.selected-ends {
+      @extend %selected-ends-shared;
+    }
+  }
   &:hover {
-    cursor: pointer;
-    color: var(--datepicker-theme-color);
-    background-color: var(--datepicker-hover-bg-color);
+    @extend %active-shared;
+  }
+  &:focus {
+    outline: var(--datepicker-theme-color) auto 2px;
+    z-index: 100;
   }
 }
 
@@ -34,16 +45,28 @@ td {
   width: 3rem;
   height: 3rem;
   padding: 0;
-  &.disabled{
-    color: var(--sgds-gray-400);
-  }
-  &[data-day]{
-    &:hover:not(.disabled),
-    &.active{
-      color: var(--datepicker-theme-color);
-      background-color: var(--datepicker-hover-bg-color);
+
+  &[data-day] {
+    cursor: pointer;
+    &:hover:not(.disabled) {
+      @extend %active-shared;
+    }
+    &.active {
+      @extend %active-shared;
+      &.selected-ends {
+        @extend %selected-ends-shared;
+      }
+    }
+    &:focus {
+      outline: var(--datepicker-theme-color) auto 2px;
+    }
+    &.disabled {
+      color: var(--sgds-gray-400);
+      cursor: not-allowed;
     }
   }
 }
 
-
+.today {
+  color: var(--datepicker-theme-color);
+}

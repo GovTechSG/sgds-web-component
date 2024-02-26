@@ -1,10 +1,36 @@
 import { HTMLTemplateResult, html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { styleMap } from "lit/directives/style-map.js";
 import SgdsElement from "../../base/sgds-element";
+import { createYearViewArray, setTimeToNoon } from "../../utils/time";
+import { watch } from "../../utils/watch";
 import styles from "./datepicker-calendar.scss";
+import { ViewEnum } from "./types";
 
+const TODAY_DATE = new Date();
+
+const keyPressAction = {
+  ArrowUp: {
+    days: -7,
+    months: -3,
+    years: -3
+  },
+  ArrowDown: {
+    days: 7,
+    months: 3,
+    years: 3
+  },
+  ArrowRight: {
+    days: 1,
+    months: 1,
+    years: 1
+  },
+  ArrowLeft: {
+    days: -1,
+    months: -1,
+    years: -1
+  }
+};
 export class DatepickerCalendar extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
@@ -21,7 +47,7 @@ export class DatepickerCalendar extends SgdsElement {
   @property({ type: Array }) selectedDate: Date[] = [];
 
   /** @internal */
-  @property({ attribute: false }) displayDate: Date = new Date();
+  @property({ attribute: false }) displayDate: Date = TODAY_DATE;
 
   /** @internal */
   @property({ type: String }) minDate?: string;
@@ -32,34 +58,115 @@ export class DatepickerCalendar extends SgdsElement {
   /** @internal */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
 
-  /** @internal */
-  @property({ attribute: false }) initialValue?: Date;
+  private focusedDate: Date = setTimeToNoon(this.displayDate);
 
   /** @internal */
-  @state() year: number = this.displayDate.getFullYear();
+  @property() view: ViewEnum;
 
   /** @internal */
-  @state() month: number = this.displayDate.getMonth();
+  @property({ type: Boolean }) show: boolean;
 
-  /** @internal */
-  @state() view = "days";
+  @property()
+  focusedTabIndex: number;
 
-  connectedCallback() {
+  /**Shifts focus from Input to Calendar */
+  public focusOnCalendar(toBlurEl: HTMLElement) {
+    toBlurEl.blur();
+    this._focusOnCalendarCell();
+  }
+
+  connectedCallback(): void {
     super.connectedCallback();
+    this.addEventListener("keydown", this._handleKeyPress);
   }
 
-  /** @internal */
-  private setTimeToNoon(date: Date) {
-    const newDate = new Date(date);
-    newDate.setHours(12);
-    newDate.setMinutes(0);
-    newDate.setSeconds(0);
-    newDate.setMilliseconds(0);
-    return newDate;
+  firstUpdated() {
+    if (this.selectedDate.length > 0) {
+      this.focusedDate = setTimeToNoon(this.selectedDate[0]);
+    }
+  }
+  updated() {
+    /** For KeyboardNavigation (switching months) and ClickNavigation:
+     * Runs after render has completed and td of next month has appeared.
+     * For the case when calendar view changes to the next month
+     * */
+    if (this.focusedTabIndex === 3) {
+      this._focusOnCalendarCell();
+    }
   }
 
-  /** @internal */
-  private generateIncrementDays(start: Date, end: Date) {
+  @watch("displayDate", { waitUntilFirstUpdate: true })
+  _updateFocusedDate() {
+    this.focusedDate = setTimeToNoon(this.displayDate);
+  }
+
+  private _setFocusedDate(shift: number) {
+    switch (this.view) {
+      case "days": {
+        this.focusedDate = setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() + shift)));
+        break;
+      }
+      case "months": {
+        this.focusedDate = setTimeToNoon(new Date(this.focusedDate.setMonth(this.focusedDate.getMonth() + shift)));
+        break;
+      }
+      case "years": {
+        this.focusedDate = setTimeToNoon(
+          new Date(this.focusedDate.setFullYear(this.focusedDate.getFullYear() + shift))
+        );
+        break;
+      }
+    }
+  }
+  private _handleEnterDateKeyboard(event: KeyboardEvent) {
+    const targetElement = event.composedPath()[0] as HTMLElement;
+    if (targetElement.classList.contains("disabled")) return;
+
+    switch (this.view) {
+      case "days":
+        this._onClickDay(event);
+        break;
+      case "months": {
+        const { month } = targetElement.dataset;
+        this._onClickMonth(parseInt(month));
+        break;
+      }
+      case "years": {
+        const { year } = targetElement.dataset;
+        this._onClickYear(parseInt(year));
+      }
+    }
+  }
+  private _handleKeyPress(event: KeyboardEvent) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      this._handleEnterDateKeyboard(event);
+      return;
+    }
+    if (event.key === "Tab") {
+      const targetEl: HTMLElement = this._getFocusedTarget();
+      if (this.focusedTabIndex !== 3) targetEl.blur();
+      return;
+    }
+    if (event.key.includes("Arrow")) {
+      event.preventDefault();
+      this._blurCalendarCell();
+      const keyShiftObject = keyPressAction[event.key];
+      const shiftNumber = keyShiftObject[this.view];
+      this._setFocusedDate(shiftNumber);
+
+      this._focusOnCalendarCell();
+    }
+  }
+
+  private _generateIncrementDates(): Date[] {
+    const start = setTimeToNoon(this.selectedDate[0]);
+
+    if (this.selectedDate.length < 2) {
+      return [start];
+    }
+
+    const end = setTimeToNoon(this.selectedDate[1]);
     const arr: Date[] = [];
     if (start.getTime() < end.getTime()) {
       for (let dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
@@ -73,11 +180,15 @@ export class DatepickerCalendar extends SgdsElement {
     return arr;
   }
 
-  /** @internal */
-  private onClickDay(event: MouseEvent) {
-    const day = (event.currentTarget as HTMLTableCellElement).dataset.day;
+  private _onClickDay(event: MouseEvent | KeyboardEvent) {
+    const { day, date } = (event.composedPath()[0] as HTMLTableCellElement).dataset;
+
     const displayDateClone = new Date(this.displayDate);
     displayDateClone.setDate(parseInt(day));
+    /** update new focused date for mouse click */
+    if (event.type === "click") {
+      this.focusedDate = setTimeToNoon(new Date(date));
+    }
 
     if (this.mode === "single") {
       // Single mode: Select a single date
@@ -107,35 +218,30 @@ export class DatepickerCalendar extends SgdsElement {
     }
 
     // Check if the selected date is before minDate or after maxDate
-    const minimumDate = this.minDate ? this.setTimeToNoon(new Date(this.minDate)) : null;
-    const maximumDate = this.maxDate ? this.setTimeToNoon(new Date(this.maxDate)) : null;
+    const minimumDate = this.minDate ? setTimeToNoon(new Date(this.minDate)) : null;
+    const maximumDate = this.maxDate ? setTimeToNoon(new Date(this.maxDate)) : null;
 
-    const selectedDate = this.setTimeToNoon(displayDateClone);
+    const selectedDate = setTimeToNoon(displayDateClone);
     if ((minimumDate && selectedDate < minimumDate) || (maximumDate && selectedDate > maximumDate)) {
       event.stopPropagation();
       event.preventDefault();
     }
   }
 
-  // clickhandler for month view buttons
-  /** @internal */
-  private onClickMonth(month: number) {
-    this.month = month;
+  private _onClickMonth(month: number, year: number = this.focusedDate.getFullYear()) {
     const displayDateClone = new Date(this.displayDate);
     this.view = "days";
-    displayDateClone.setMonth(this.month);
+    displayDateClone.setMonth(month);
+    displayDateClone.setFullYear(year);
     this.displayDate = displayDateClone;
     this.emit("sgds-view", { detail: this.view });
     //once clicked, should change view to days, and hold value and change view
     this.emit("sgds-selectmonth", { detail: this.displayDate });
   }
 
-  // clickhandler for year view buttons
-  /** @internal */
-  private onClickYear(year: number) {
-    this.year = year;
+  private _onClickYear(year: number) {
     const displayDateClone = new Date(this.displayDate);
-    displayDateClone.setFullYear(this.year);
+    displayDateClone.setFullYear(year);
     this.displayDate = displayDateClone;
     this.view = "months";
     this.emit("sgds-view", { detail: this.view });
@@ -143,20 +249,46 @@ export class DatepickerCalendar extends SgdsElement {
     this.emit("sgds-selectyear", { detail: this.displayDate });
   }
 
-  render() {
-    const selectedDates = this.selectedDate.map(d => this.setTimeToNoon(d));
+  private _getFocusedTarget(): HTMLElement {
+    const queryObj = {
+      days: `td[data-date="${this.focusedDate.toISOString()}"]`,
+      months: `button[data-month="${this.focusedDate.getMonth()}"][data-year="${this.focusedDate.getFullYear()}"]`,
+      years: `button[data-year="${this.focusedDate.getFullYear()}"]`
+    };
+    const queryString = queryObj[this.view];
+    const targetEl: HTMLElement = this.shadowRoot.querySelector(`${queryString}`);
+    return targetEl;
+  }
+  private _blurCalendarCell() {
+    const targetEl = this._getFocusedTarget();
+    targetEl.setAttribute("tabindex", "-1");
+    targetEl.blur();
+  }
+  private _focusOnCalendarCell() {
+    const targetEl = this._getFocusedTarget();
+    if (targetEl) {
+      targetEl.setAttribute("tabindex", "3");
+      targetEl.focus();
+      this.emit("sgds-update-focus", { detail: this.focusedDate });
+    } else {
+      /** Change month view */
+      this.emit("sgds-change-calendar", { detail: this.focusedDate });
+    }
+  }
+  private _generateDays() {
+    const selectedDates = this.selectedDate.map(d => setTimeToNoon(d));
 
-    const rangeSelectedDates = this.generateIncrementDays(new Date(selectedDates[0]), new Date(selectedDates[1]));
+    const rangeSelectedDates = this._generateIncrementDates();
 
-    const minimumDate = this.minDate ? this.setTimeToNoon(new Date(this.minDate)) : null;
-    const maximumDate = this.maxDate ? this.setTimeToNoon(new Date(this.maxDate)) : null;
+    const minimumDate = this.minDate ? setTimeToNoon(new Date(this.minDate)) : null;
+    const maximumDate = this.maxDate ? setTimeToNoon(new Date(this.maxDate)) : null;
     const year = this.displayDate.getFullYear();
     const month = this.displayDate.getMonth();
-    const firstDay = new Date(year, month, 1);
-    const startingDay = firstDay.getDay();
+    const firstDateOfMonth = new Date(year, month, 1);
+    const startingDayOfMonth = firstDateOfMonth.getDay();
     let monthLength = DatepickerCalendar.daysInMonth[month];
-    if (month == 1) {
-      if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+    if (month === 1) {
+      if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
         monthLength = 29;
       }
     }
@@ -166,41 +298,37 @@ export class DatepickerCalendar extends SgdsElement {
     for (let i = 0; i < 9; i++) {
       const week = [];
       for (let j = 0; j <= 6; j++) {
-        if (day <= monthLength && (i > 0 || j >= startingDay)) {
+        if (day <= monthLength && (i > 0 || j >= startingDayOfMonth)) {
           const date = new Date(year, month, day, 12, 0, 0, 0).toISOString();
-          const isCurrentDate = new Date();
 
           const beforeMinDate = minimumDate && Date.parse(date) < Date.parse(minimumDate.toISOString());
           const afterMinDate = maximumDate && Date.parse(date) > Date.parse(maximumDate.toISOString());
-          const clickHandler = beforeMinDate || afterMinDate ? undefined : this.onClickDay;
+          const clickHandler = beforeMinDate || afterMinDate ? undefined : this._onClickDay;
 
-          const isCurrentMonth = isCurrentDate.getMonth() === this.displayDate.getMonth();
-          const isCurrentYear = isCurrentDate.getFullYear() === this.displayDate.getFullYear();
-          const isCurrentDay = isCurrentDate.getDate() === day;
+          const isCurrentMonth = TODAY_DATE.getMonth() === this.displayDate.getMonth();
+          const isCurrentYear = TODAY_DATE.getFullYear() === this.displayDate.getFullYear();
+          const isCurrentDay = TODAY_DATE.getDate() === day;
 
           const isSelected =
-            selectedDates.length > 0 &&
-            (rangeSelectedDates.some(d => Date.parse(date) === Date.parse(d.toISOString())) ||
-              Date.parse(date) === Date.parse(selectedDates[0].toISOString()));
+            selectedDates.length > 0 && rangeSelectedDates.some(d => Date.parse(date) === Date.parse(d.toISOString()));
+          const isFirstSelectedDate = selectedDates.length > 0 && rangeSelectedDates[0].toISOString() === date;
+          const isLastSelectedDate =
+            selectedDates.length > 1 && rangeSelectedDates[rangeSelectedDates.length - 1].toISOString() === date;
 
-          const mutedButtonStyle = {
-            cursor: "not-allowed"
-          };
-          const buttonStyles = {
-            cursor: "pointer",
-            borderRadius: "0"
-          };
           week.push(
             html`<td
               key=${j}
+              data-date=${date}
               data-day=${day}
               class=${classMap({
-                "text-primary": isCurrentDay && isCurrentMonth && isCurrentYear,
+                today: isCurrentDay && isCurrentMonth && isCurrentYear,
+                "selected-ends": isFirstSelectedDate || isLastSelectedDate,
                 active: isSelected,
                 disabled: beforeMinDate || afterMinDate
               })}
-              style=${styleMap(beforeMinDate || afterMinDate ? { ...buttonStyles, ...mutedButtonStyle } : buttonStyles)}
               @click=${clickHandler}
+              tabindex=${this.focusedDate === new Date(date) ? "3" : "-1"}
+              disabled=${beforeMinDate || afterMinDate}
             >
               ${day}
             </td>`
@@ -221,50 +349,6 @@ export class DatepickerCalendar extends SgdsElement {
       }
     }
 
-    // monthView
-
-    const displayMonth = DatepickerCalendar.MONTHVIEW_LABELS[this.displayDate.getMonth()];
-
-    const monthView = html`
-      <div class="sgds monthpicker">
-        ${DatepickerCalendar.MONTHVIEW_LABELS.map(
-          (m, idx) => html`
-            <button
-              class=${classMap({ active: displayMonth === m, month: true })}
-              @click=${() => this.onClickMonth(idx)}
-            >
-              ${m}
-            </button>
-          `
-        )}
-      </div>
-    `;
-
-    // yearView
-
-    const displayYear = this.displayDate.getFullYear();
-    const startLimit = displayYear - 5;
-    const endLimit = displayYear + 6;
-    const yearArray = [];
-
-    for (let i = startLimit; i < endLimit + 1; i++) {
-      yearArray.push(i);
-    }
-
-    const yearView = html`
-      <div class="sgds yearpicker">
-        ${yearArray.map(
-          y => html`
-            <button class=${classMap({ active: displayYear === y, year: true })} @click=${() => this.onClickYear(y)}>
-              ${y}
-            </button>
-          `
-        )}
-      </div>
-    `;
-
-    // default - dayView
-
     const dayView = html`
       <table class="text-center">
         <thead>
@@ -284,20 +368,91 @@ export class DatepickerCalendar extends SgdsElement {
         </tbody>
       </table>
     `;
+    return dayView;
+  }
 
+  private _generateMonths() {
+    const rangeDates = this._generateIncrementDates();
+    const selectedTime = rangeDates.map(e => setTimeToNoon(new Date(e.getFullYear(), e.getMonth())).getTime());
+
+    const year = this.displayDate.getFullYear();
+
+    const monthView = html`
+      <div class="sgds monthpicker">
+        ${DatepickerCalendar.MONTHVIEW_LABELS.map((m, idx) => {
+          const isCurrentMonth = idx === TODAY_DATE.getMonth() && year === TODAY_DATE.getFullYear();
+          const time = setTimeToNoon(new Date(year, idx)).getTime();
+          const isFirstSelectedMonth = rangeDates[0].getMonth() === idx;
+          const isFirstSelectedYear = rangeDates[0].getFullYear() === year;
+          const isLastSelectedMonth = rangeDates[rangeDates.length - 1].getMonth() === idx;
+          const isLastSelectedYear = rangeDates[rangeDates.length - 1].getFullYear() === year;
+          return html` <button
+            class=${classMap({
+              active: selectedTime.includes(time),
+              today: isCurrentMonth,
+              month: true,
+              "selected-ends":
+                (isFirstSelectedMonth && isFirstSelectedYear) || (isLastSelectedMonth && isLastSelectedYear)
+            })}
+            @click=${() => this._onClickMonth(idx)}
+            data-month=${idx}
+            data-year=${year}
+            tabindex="3"
+          >
+            ${m}
+          </button>`;
+        })}
+      </div>
+    `;
+    return monthView;
+  }
+
+  private _generateYears() {
+    const selectedYears = this._generateIncrementDates().map(e => e.getFullYear());
+    const CURRENT_YEAR = TODAY_DATE.getFullYear();
+
+    const yearArray = createYearViewArray(this.displayDate, CURRENT_YEAR);
+
+    const yearView = html`
+      <div class="sgds yearpicker">
+        ${yearArray.map(y => {
+          const isFirstSelectedYear = selectedYears[0] === y;
+          const isLastSectedYear = selectedYears[selectedYears.length - 1] === y;
+          return html`
+            <button
+              class=${classMap({
+                active: selectedYears.includes(y),
+                year: true,
+                today: CURRENT_YEAR === y,
+                "selected-ends": isFirstSelectedYear || isLastSectedYear
+              })}
+              @click=${() => this._onClickYear(y)}
+              data-year=${y}
+              tabindex="3"
+            >
+              ${y}
+            </button>
+          `;
+        })}
+      </div>
+    `;
+    return yearView;
+  }
+  render() {
     let viewContent: HTMLTemplateResult;
+
     switch (this.view) {
       case "days":
-        viewContent = html` ${dayView} `;
+        viewContent = html` ${this._generateDays()} `;
         break;
       case "months":
-        viewContent = html` ${monthView} `;
+        viewContent = html` ${this._generateMonths()} `;
         break;
       case "years":
-        viewContent = html` ${yearView} `;
+        viewContent = html` ${this._generateYears()} `;
         break;
       default:
-        viewContent = html` ${dayView} `; // Set a default view
+        viewContent = html` ${this._generateDays()} `; // Set a default view
         break;
     }
 
