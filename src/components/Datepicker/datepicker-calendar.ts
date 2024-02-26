@@ -48,7 +48,7 @@ export class DatepickerCalendar extends SgdsElement {
   @property({ type: Array }) selectedDate: Date[] = [];
 
   /** @internal */
-  @property({ attribute: false }) displayDate: Date = TODAY_DATE;
+  @property({ attribute: false }) displayDate: Date;
 
   /** @internal */
   @property({ type: String }) minDate?: string;
@@ -59,7 +59,7 @@ export class DatepickerCalendar extends SgdsElement {
   /** @internal */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
 
-  private focusedDate: Date = setTimeToNoon(this.displayDate);
+  private focusedDate: Date;
 
   /** @internal */
   @property() view: ViewEnum;
@@ -79,6 +79,7 @@ export class DatepickerCalendar extends SgdsElement {
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("keydown", this._handleKeyPress);
+    this.focusedDate = this.displayDate && setTimeToNoon(this.displayDate);
   }
 
   firstUpdated() {
@@ -349,7 +350,7 @@ export class DatepickerCalendar extends SgdsElement {
               })}
               @click=${clickHandler}
               tabindex=${this.focusedDate === new Date(date) ? "3" : "-1"}
-              disabled=${beforeMinDate || afterMinDate}
+              ?disabled=${beforeMinDate || afterMinDate}
             >
               ${day}
             </td>`

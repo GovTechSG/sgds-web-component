@@ -144,7 +144,7 @@
         <sgds-mainnav-item href="#">About</sgds-mainnav-item>
         <sgds-mainnav-item href="#" slot="end" class="test test2">Info</sgds-mainnav-item>
         <sgds-mainnav-item href="#" slot="end">Contact Us</sgds-mainnav-item>
-        <sgds-mainnav-dropdown togglerText="Dropdown">
+        <sgds-mainnav-dropdown togglerText="Dropdown" menuIsOpen>
             <sgds-dropdown-item href="https://google.com">Item 1</sgds-dropdown-item>
             <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
             <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
@@ -236,26 +236,26 @@
                 </svg> -->
             </sgds-combo-box>
             <h2>Datepicker</h2>
-            <sgds-datepicker label="Birthdate" drop="up" menuAlignRight hinttext="min date and max date"
-                initialValue='["03/29/2024"]' mindate="2024-02-02T12:00:00.000Z" maxdate="2030-12-30T12:00:00.000Z"
-                dateformat="MM/DD/YYYY">
+            <sgds-datepicker id="datepicker-test-min-max" label="Birthdate" drop="right" menuAlignRight noFlip
+                hinttext="min date and max date" mindate="2024-02-02T12:00:00.000Z" maxdate="2030-12-30T12:00:00.000Z"
+                dateformat="MM/DD/YYYY" initialValue='["03/29/2024"]'>
             </sgds-datepicker>
-            <sgds-datepicker id="myDatepicker" invalidFeedback="this is wrong"></sgds-datepicker>
+            <sgds-datepicker menuIsOpen initialValue='["29/06/2023"]'></sgds-datepicker>
 
-            <br><br><br><br><br><br><br><br><br>
+            <!--  <br><br><br><br><br><br><br><br><br>
             <sgds-datepicker id="myDatepicker2" label="Birthdate" hinttext="min date and max date" mode="range"
-                initialValue='["29/03/2024", "29/03/2025"]'></sgds-datepicker>
+                mindate="2024-01-02T12:00:00.000Z" maxdate="2024-01-30T12:00:00.000Z"></sgds-datepicker>
             <sgds-datepicker id="myDatepicker2" mode="range"></sgds-datepicker>
             <sgds-datepicker id="myDatepicker2" mode="range" dateformat="MM/DD/YYYY"
                 initialValue='["03/29/2024", "03/29/2025"]'></sgds-datepicker>
             <sgds-datepicker id="myDatepicker2" mode="range" noFlip dateformat="YYYY/MM/DD"
-                initialValue='["2024/03/29", "2025/03/29"]'></sgds-datepicker>
+                initialValue='["2024/03/29", "2025/03/29"]'></sgds-datepicker> -->
         </div>
 
         <div class="container">
             <h2>Dropdown</h2>
             <div class="row">
-                <sgds-dropdown noFlip menuAlignRight togglerText="hello">
+                <sgds-dropdown menuIsOpen noFlip menuAlignRight togglerText="hello">
                     <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
                     <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
                     <sgds-dropdown-item href="#" disabled>
@@ -722,6 +722,8 @@
                         }
                     } );
 
+                    const dpt = document.getElementById( 'datepicker-test-min-max' )
+                    dpt.displayDate = new Date( 2024, 5, 13 )
 
 
 

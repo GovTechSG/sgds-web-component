@@ -59,14 +59,17 @@ export const RangeModeTemplate = () =>
 
 When `minDate` is set, users can only select the specified date and dates beyond it. When `maxDate` is set. users can only select the specified date and dates before it. To pass in as ISOString format. eg. `minDate="2023-12-10T12:00:00.000Z" maxDate="2023-12-19T12:00:00.000Z"`
 
-export const MinMaxTemplate = () =>
-  html`
+export const MinMaxTemplate = () =>{
+  const displayDate = new Date(2023, 5, 10)
+  return html`
     <sgds-datepicker
       mode="range"
+      .displayDate=${displayDate}
       minDate="2023-06-10T12:00:00.000Z"
       maxDate="2023-06-19T12:00:00.000Z"
     ></sgds-datepicker>
   `;
+}
 
 <Canvas>
   <Story name="Min and Max Date" height="500px">

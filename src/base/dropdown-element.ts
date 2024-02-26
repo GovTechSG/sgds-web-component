@@ -54,7 +54,7 @@ export class DropdownElement extends SgdsElement {
   dropdownConfig: Partial<Popper.Options>;
   /** @internal */
   @state()
-  modifierOpt: StrictModifiers[] = [];
+  protected modifierOpt: StrictModifiers[] = [];
 
   /** When true, dropdown menu shows on first load */
   @property({ type: Boolean, reflect: true })

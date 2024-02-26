@@ -26,6 +26,7 @@ export type DropdownButtonVariant =
  */
 export class SgdsDropdown extends ScopedElementsMixin(DropdownListElement) {
   static styles = [DropdownElement.styles];
+  /**@internal */
   static get scopedElements() {
     return {
       "sgds-button": SgdsButton
