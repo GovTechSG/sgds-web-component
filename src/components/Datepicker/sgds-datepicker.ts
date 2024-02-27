@@ -13,7 +13,7 @@ import styles from "./sgds-datepicker.scss";
 import { ViewEnum } from "./types";
 import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
 import { classMap } from "lit/directives/class-map.js";
-import { FormSubmitController, type SgdsFormControl } from "../../utils/form";
+import { type SgdsFormControl } from "../../utils/form";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -113,27 +113,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
   @query("sgds-datepicker-input")
   private datepickerInput: DatepickerInput;
   /**@internal */
-  private formSubmitController = new FormSubmitController(this);
-
-  public reportValidity() {
-    const input = this.datepickerInput;
-    return input.reportValidity();
-  }
-  public checkValidity(): boolean {
-    return this._internals.checkValidity();
-  }
-
-  // public reportValidity(): boolean {
-  //   return this._internals.reportValidity();
-  // }
-
-  public get validity(): ValidityState {
-    return this._internals.validity;
-  }
-
-  public get validationMessage(): string {
-    return this._internals.validationMessage;
-  }
 
   constructor() {
     super();
@@ -265,7 +244,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
   };
   private _handleSelectDatesInput(event: CustomEvent<Date[]>) {
     this._handleSelectDates(event.detail);
-    // console.log(this.shadowInput.validity);
     this._internals.setValidity(this.shadowInput.validity, this.shadowInput.validationMessage, this.shadowInput);
   }
   private async _handleSelectDates(newSelectedDates: Date[]) {
@@ -319,17 +297,28 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
   private _handleSelectYear(event: CustomEvent<Date>) {
     this.displayDate = event.detail;
   }
-  private async _handleInvalidInput() {
+  private async _handleInvalidInput(e) {
+    console.log(e, this.value)
     this.selectedDateRange = [];
     this.displayDate = this.initialDisplayDate;
-    console.log("hads");
-    // this._internals.setValidity(
-    //   {
-    //     badInput: true
-    //   },
-    //   "The chosen date is invalid",
-    //   this.shadowInput
-    // );
+    if (e.target.value === this.dateFormat.toLowerCase() && this.required) {
+      this._internals.setValidity(
+        {
+          valueMissing: true
+        },
+        "Please fill in this fields",
+        this.shadowInput
+      );
+    } else {
+      this._internals.setValidity(
+        {
+          badInput: true
+        },
+        "The chosen date is invalid",
+        this.shadowInput
+      );
+    }
+  
   }
   private async _handleButtonResetClick() {
     this.displayDate = this.initialDisplayDate;

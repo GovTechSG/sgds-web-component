@@ -736,7 +736,9 @@
                     const dpForm = document.getElementById( 'datepicker-form' )
 
                     dpForm.addEventListener( 'submit', async ( event ) => {
-                        // event.preventDefault();
+
+                        event.preventDefault();
+                        event.stopPropagation();
                         // const form = event.currentTarget;
                         // // console.log( await form[ 0 ].reportValidity() )
                         // event.preventDefault();
