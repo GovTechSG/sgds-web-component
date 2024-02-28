@@ -51,7 +51,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
 
   /** When true, adds required attribute to input element */
   @property({ type: Boolean, reflect: true }) required = false;
-  /**The input's name attribute */
+  /**The datepicker input's name attribute */
   @property({ reflect: true }) name: string;
   /** When true, adds disabled attribute to input and button element */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -308,6 +308,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
   private async _handleInvalidInput() {
     this.selectedDateRange = [];
     this.displayDate = this.initialDisplayDate;
+    console.log("here");
     this._manageInternalsBadInput();
   }
   private async _handleButtonResetClick() {
