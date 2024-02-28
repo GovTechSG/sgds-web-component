@@ -79,28 +79,29 @@ export class DatepickerCalendar extends SgdsElement {
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("keydown", this._handleKeyPress);
-    this.focusedDate = this.displayDate && setTimeToNoon(this.displayDate);
   }
 
   firstUpdated() {
-    if (this.selectedDate.length > 0) {
-      this.focusedDate = setTimeToNoon(this.selectedDate[0]);
-    }
+    // if (this.selectedDate.length > 0) {
+    //   this.focusedDate = setTimeToNoon(this.selectedDate[0]);
+    // } else {
+    //   this.focusedDate = this.displayDate && setTimeToNoon(this.displayDate);
+    // }
   }
   updated() {
     /** For KeyboardNavigation (switching months) and ClickNavigation:
      * Runs after render has completed and td of next month has appeared.
      * For the case when calendar view changes to the next month
      * */
+
     if (this.focusedTabIndex === 3) {
       this._focusOnCalendarCell();
     }
   }
 
-  @watch("displayDate", { waitUntilFirstUpdate: true })
+  @watch("displayDate")
   _updateFocusedDate() {
     this.focusedDate = setTimeToNoon(this.displayDate);
-
     if (this.focusedDate.getFullYear() < 1900) {
       this.focusedDate.setFullYear(1900);
     }

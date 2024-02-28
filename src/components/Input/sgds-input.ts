@@ -25,7 +25,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   /**@internal */
   @query("input.form-control") input: HTMLInputElement;
   /**@internal */
-  private readonly formSubmitController = new FormSubmitController(this);
+  protected readonly formSubmitController = new FormSubmitController(this);
   /** The type of input which works the same as HTMLInputElement*/
   @property({ reflect: true }) type:
     | "date"

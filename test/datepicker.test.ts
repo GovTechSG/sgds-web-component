@@ -468,14 +468,14 @@ describe("Datepicker keyboard accesibility", () => {
     await elementUpdated(calendar as DatepickerCalendar);
 
     await waitUntil(() => calendar?.shadowRoot?.activeElement === tdElement());
-    await waitUntil(() => changeDateHandler.called);
+    // await waitUntil(() => changeDateHandler.called);
     await sendKeys({ press: "ArrowLeft" });
     await sendKeys({ press: "Enter" });
     await el.updateComplete;
 
-    await waitUntil(() => changeDateHandler.calledTwice);
+    await waitUntil(() => changeDateHandler.called);
     expect(el.value).to.equal("28/06/2023");
-    expect(changeDateHandler).to.have.been.calledTwice;
+    expect(changeDateHandler).to.have.been.calledOnce;
   });
 
   it("when focused, tabindex=3", async () => {
@@ -499,7 +499,8 @@ describe("Datepicker keyboard accesibility", () => {
     const todayDate = setTimeToNoon(new Date(2023, 5, 29));
     const todayDateISO = todayDate.toISOString();
     const prevDateISO = setTimeToNoon(new Date(2023, 5, 28)).toISOString();
-    const calendar = el.shadowRoot?.querySelector<DatepickerCalendar>("sgds-datepicker-calendar");
+    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
+    await elementUpdated(calendar);
     const tdElement = () => calendar?.shadowRoot?.querySelector(`td[data-date="${todayDateISO}"]`);
     const prevTdElement = () => calendar?.shadowRoot?.querySelector(`td[data-date="${prevDateISO}"]`);
     await waitUntil(() => calendar?.shadowRoot?.activeElement);
@@ -509,6 +510,7 @@ describe("Datepicker keyboard accesibility", () => {
     expect(prevTdElement()?.getAttribute("tabindex")).to.equal("-1");
 
     await sendKeys({ press: "ArrowLeft" });
+    await elementUpdated(calendar);
     await waitUntil(() => calendar?.shadowRoot?.activeElement !== tdElement());
     expect(calendar?.shadowRoot?.activeElement === tdElement()).to.be.false;
 
@@ -1317,14 +1319,16 @@ describe("error message", () => {
     const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker></sgds-datepicker>`);
     const input = el.shadowRoot?.querySelector<DatepickerInput>("sgds-datepicker-input");
     input?.focus();
-    expect(input?.reportValidity()).to.equal(true);
+    await elementUpdated(el);
+    expect(el?.reportValidity()).to.equal(true);
     await waitUntil(() => el.shadowRoot?.activeElement === input);
     await sendKeys({ press: `Digit2` });
     await el.updateComplete;
     expect(el.value).to.equal("2d/mm/yyyy");
 
     input?.blur();
-    expect(input?.reportValidity()).to.equal(false);
+    await elementUpdated(el);
+    expect(el?.reportValidity()).to.equal(false);
     const feedbackDiv = input?.shadowRoot?.querySelector("div.invalid-feedback");
     expect(feedbackDiv).to.exist;
     expect(feedbackDiv?.textContent).to.equal("Please enter a valid date");
@@ -1434,7 +1438,8 @@ describe("datepicker behavour on invalid input", () => {
     expect(input?.value).to.equal("23/03/202y");
 
     input?.blur();
-    expect(input?.reportValidity()).to.equal(false);
+    await elementUpdated(el);
+    expect(el?.reportValidity()).to.equal(false);
     el.showMenu();
     await el.updateComplete;
     const initialDisplayDate = `${MONTH_LABELS[new Date().getMonth()]} ${new Date().getFullYear()}`;
@@ -1456,7 +1461,8 @@ describe("datepicker behavour on invalid input", () => {
     expect(input?.value).to.equal("23/03/202y");
 
     input?.blur();
-    expect(input?.reportValidity()).to.equal(false);
+    await elementUpdated(el);
+    expect(el?.reportValidity()).to.equal(false);
     el.showMenu();
     await el.updateComplete;
     expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.equal("January 2025");
@@ -1474,5 +1480,54 @@ describe("datepicker behavour on invalid input", () => {
     await elementUpdated(el);
     await elementUpdated(header);
     expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.equal("January 2025");
+  });
+});
+
+describe("datepicker in form context", () => {
+  it("should be invalid when required is true and value is empty", async () => {
+    const el = await fixture<HTMLFormElement>(html`<form><sgds-datepicker required></sgds-datepicker></form>`);
+    expect(el.checkValidity()).to.be.false;
+  });
+  it("should be valid when required is false and value is empty", async () => {
+    const el = await fixture<HTMLFormElement>(html`<form><sgds-datepicker></sgds-datepicker></form>`);
+    expect(el.checkValidity()).to.be.true;
+  });
+  it("should be valid when required is true and value is valid", async () => {
+    const el = await fixture<HTMLFormElement>(
+      html`<form><sgds-datepicker required .initialValue=${["23/03/2020"]}></sgds-datepicker></form>`
+    );
+    expect(el.checkValidity()).to.be.true;
+  });
+  it("should be valid when  value is valid", async () => {
+    const el = await fixture<HTMLFormElement>(
+      html`<form><sgds-datepicker .initialValue=${["23/03/2020"]}></sgds-datepicker></form>`
+    );
+    expect(el.checkValidity()).to.be.true;
+  });
+  it("should be invalid when  value is invalid", async () => {
+    const el = await fixture<HTMLFormElement>(
+      html`<form><sgds-datepicker .initialValue=${["23/03/2020"]}></sgds-datepicker></form>`
+    );
+    const datepicker = el.querySelector("sgds-datepicker") as SgdsDatepicker;
+    const input = el
+      .querySelector("sgds-datepicker")
+      ?.shadowRoot?.querySelector("sgds-datepicker-input")
+      ?.shadowRoot?.querySelector("input");
+
+    input?.focus();
+    await sendKeys({ press: "Backspace" });
+    await waitUntil(() => input?.value === "23/03/202y");
+    input?.blur();
+    await elementUpdated(datepicker);
+    expect(datepicker?.reportValidity()).to.be.false;
+    expect(el.checkValidity()).to.be.false;
+  });
+
+  it("obtain value of datepicker via name attribute and formData", async () => {
+    const el = await fixture<HTMLFormElement>(
+      html`<form><sgds-datepicker .initialValue=${["23/03/2020"]} name="myDatepicker"></sgds-datepicker></form>`
+    );
+    const formData = new FormData(el);
+    expect(formData.get("myDatepicker")).to.equal("23/03/2020");
   });
 });

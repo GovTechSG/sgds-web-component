@@ -100,3 +100,47 @@ export const MinMaxTemplate = args => {
     {MinMaxTemplate.bind({})}
   </Story>
 </Canvas>
+
+## Form Context
+
+Constraint validation is implemented in datepicker as much as possible to mimick the behaviour of native HTML form component.
+We use `ElementInternals` API to implement the constraint validation.
+
+export const FormSubmissionTemplate = args => {
+  const submitHandler = event => {
+    const formData = new FormData(event.target);
+    alert("Date submitted :" + formData.get("myDatepicker"));
+    event.preventDefault();
+  };
+  return html`
+    <form id="datepicker-form" @submit=${submitHandler}>
+      <sgds-datepicker
+        name="myDatepicker"
+        id="form-submission-example"
+        label="Choose a date"
+        hintText="The minimum date is 10 June 2023 and maximum date is 19 June 2023"
+        .displayDate=${args.displayDate}
+        minDate="2023-06-10T12:00:00.000Z"
+        maxDate="2023-06-19T12:00:00.000Z"
+        required
+      ></sgds-datepicker>
+      <sgds-button type="submit">Submit</sgds-button>
+    </form>
+    <script>
+      const datepicker = document.querySelector("#form-submission-example");
+      datepicker.displayDate = new Date(2023, 5, 10);
+      const form = document.querySelector("#datepicker-form");
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        alert("Date submitted :" + formData.get("myDatepicker"));
+      });
+    </script>
+  `;
+};
+
+<Canvas>
+  <Story name="Form Submission" height="500px" args={{ displayDate: new Date(2023, 5, 10) }}>
+    {FormSubmissionTemplate.bind({})}
+  </Story>
+</Canvas>
