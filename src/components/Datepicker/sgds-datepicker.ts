@@ -215,6 +215,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
   @watch("value")
   _handleValueChange() {
     this.emit("sgds-change-date");
+    this._setInternalFormValue(this.value);
   }
 
   private async _handleCloseMenu() {
@@ -308,7 +309,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
   private async _handleInvalidInput() {
     this.selectedDateRange = [];
     this.displayDate = this.initialDisplayDate;
-    console.log("here");
+    console.log(this.displayDate);
     this._manageInternalsBadInput();
   }
   private async _handleButtonResetClick() {
@@ -359,6 +360,10 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
 
   private _manageInternalsDefault(inputEl: HTMLInputElement) {
     this._internals.setValidity(inputEl.validity, inputEl.validationMessage, inputEl);
+  }
+
+  private _setInternalFormValue(value: string) {
+    this._internals.setFormValue(value);
   }
   render() {
     const svgEl = html`
