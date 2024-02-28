@@ -113,6 +113,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
   @query("sgds-datepicker-input")
   private datepickerInput: DatepickerInput;
 
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
   public reportValidity(): boolean {
     return this._internals.reportValidity();
   }
@@ -163,12 +164,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
 
   async firstUpdated() {
     super.firstUpdated();
-
-    // setting initial values of props once
-
-    // this.focusedDate = this.initialValue[0] ?
-    //   parse(this.initialValue[0], DATE_PATTERNS[this.dateFormat].fnsPattern, new Date()) : this.displayDate;
-
     if (this.menuIsOpen) {
       const input = await this.datepickerInputAsync;
       this.showMenu();
@@ -253,7 +248,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
   };
   private _handleSelectDatesInput(event: CustomEvent<Date[]>) {
     this._handleSelectDates(event.detail);
-    this._manageInternalsDefault(this.shadowInput);
+    this._manageInternalsDefault(this._shadowInput);
   }
   private async _handleSelectDates(newSelectedDates: Date[]) {
     newSelectedDates.sort((a: Date, b: Date) => a.getTime() - b.getTime());
@@ -273,7 +268,8 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
     const input = await this.datepickerInputAsync;
     input.updateMaskValue();
   }
-  get shadowInput() {
+
+  private get _shadowInput() {
     return this.datepickerInput.shadowRoot.querySelector("input");
   }
   private _handleSelectDatesAndClose(event: CustomEvent<Date[]>) {
@@ -339,7 +335,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
             valueMissing: true
           },
           "Please fill in this field",
-          this.shadowInput
+          this._shadowInput
         )
       : this._internals.setValidity({});
   }
@@ -350,7 +346,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
         badInput: true
       },
       "The chosen date is invalid",
-      this.shadowInput
+      this._shadowInput
     );
   }
 
