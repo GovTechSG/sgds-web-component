@@ -112,8 +112,10 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
 
   @query("sgds-datepicker-input")
   private datepickerInput: DatepickerInput;
-  /**@internal */
 
+  public reportValidity(): boolean {
+    return this._internals.reportValidity();
+  }
   constructor() {
     super();
     this._internals = this.attachInternals();
@@ -137,6 +139,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
     this.addEventListener("sgds-selectyear", this._handleSelectYear);
     this.addEventListener("sgds-selectdates", this._handleSelectDatesAndClose);
     this.addEventListener("sgds-selectdates-input", this._handleSelectDatesInput);
+    this.addEventListener("sgds-empty-input", this._handleEmptyInput);
     this.addEventListener("keydown", this._handleTab);
     this.addEventListener("sgds-hide", this._handleCloseMenu);
     this.initialDisplayDate = this.displayDate || new Date();
@@ -174,6 +177,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
     }
 
     const shadowInput = await this.datepickerInput.shadowInput;
+    this._manageInternalsDefault(shadowInput);
     this._internals.setValidity(shadowInput.validity, shadowInput.validationMessage, shadowInput);
   }
 
@@ -248,7 +252,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
   };
   private _handleSelectDatesInput(event: CustomEvent<Date[]>) {
     this._handleSelectDates(event.detail);
-    this._internals.setValidity(this.shadowInput.validity, this.shadowInput.validationMessage, this.shadowInput);
+    this._manageInternalsDefault(this.shadowInput);
   }
   private async _handleSelectDates(newSelectedDates: Date[]) {
     newSelectedDates.sort((a: Date, b: Date) => a.getTime() - b.getTime());
@@ -279,7 +283,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
     } else if (this.mode === "single" && this.selectedDateRange.length === 1) {
       this.hideMenu();
     }
-    this._internals.setValidity(this.shadowInput.validity, this.shadowInput.validationMessage, this.shadowInput);
+    this._manageInternalsValid();
   }
 
   /** update latest view state from datepicker-header */
@@ -301,26 +305,10 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
   private _handleSelectYear(event: CustomEvent<Date>) {
     this.displayDate = event.detail;
   }
-  private async _handleInvalidInput(e) {
+  private async _handleInvalidInput() {
     this.selectedDateRange = [];
     this.displayDate = this.initialDisplayDate;
-    if (e.target.value === this.dateFormat.toLowerCase() && this.required) {
-      this._internals.setValidity(
-        {
-          valueMissing: true
-        },
-        "Please fill in this fields",
-        this.shadowInput
-      );
-    } else {
-      this._internals.setValidity(
-        {
-          badInput: true
-        },
-        "The chosen date is invalid",
-        this.shadowInput
-      );
-    }
+    this._manageInternalsBadInput();
   }
   private async _handleButtonResetClick() {
     this.displayDate = this.initialDisplayDate;
@@ -333,16 +321,44 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
     input.destroyInputMask();
     await input.applyInputMask();
 
-    this.required &&
-      this._internals.setValidity(
-        {
-          valueMissing: true
-        },
-        "Please fill in this field",
-        this.shadowInput
-      );
+    this._manageInternalsRequired();
   }
 
+  private async _handleEmptyInput() {
+    const input = await this.datepickerInputAsync;
+    input.setInvalid(false);
+    this._manageInternalsRequired();
+  }
+
+  private _manageInternalsRequired() {
+    this.required
+      ? this._internals.setValidity(
+          {
+            valueMissing: true
+          },
+          "Please fill in this field",
+          this.shadowInput
+        )
+      : this._internals.setValidity({});
+  }
+
+  private _manageInternalsBadInput() {
+    this._internals.setValidity(
+      {
+        badInput: true
+      },
+      "The chosen date is invalid",
+      this.shadowInput
+    );
+  }
+
+  private _manageInternalsValid() {
+    this._internals.setValidity({});
+  }
+
+  private _manageInternalsDefault(inputEl: HTMLInputElement) {
+    this._internals.setValidity(inputEl.validity, inputEl.validationMessage, inputEl);
+  }
   render() {
     const svgEl = html`
       <svg

@@ -1319,14 +1319,16 @@ describe("error message", () => {
     const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker></sgds-datepicker>`);
     const input = el.shadowRoot?.querySelector<DatepickerInput>("sgds-datepicker-input");
     input?.focus();
-    expect(input?.reportValidity()).to.equal(true);
+    await elementUpdated(el)
+    expect(el?.reportValidity()).to.equal(true);
     await waitUntil(() => el.shadowRoot?.activeElement === input);
     await sendKeys({ press: `Digit2` });
     await el.updateComplete;
     expect(el.value).to.equal("2d/mm/yyyy");
 
     input?.blur();
-    expect(input?.reportValidity()).to.equal(false);
+    await elementUpdated(el)
+    expect(el?.reportValidity()).to.equal(false);
     const feedbackDiv = input?.shadowRoot?.querySelector("div.invalid-feedback");
     expect(feedbackDiv).to.exist;
     expect(feedbackDiv?.textContent).to.equal("Please enter a valid date");
@@ -1436,7 +1438,8 @@ describe("datepicker behavour on invalid input", () => {
     expect(input?.value).to.equal("23/03/202y");
 
     input?.blur();
-    expect(input?.reportValidity()).to.equal(false);
+    await elementUpdated(el)
+    expect(el?.reportValidity()).to.equal(false);
     el.showMenu();
     await el.updateComplete;
     const initialDisplayDate = `${MONTH_LABELS[new Date().getMonth()]} ${new Date().getFullYear()}`;
@@ -1458,7 +1461,8 @@ describe("datepicker behavour on invalid input", () => {
     expect(input?.value).to.equal("23/03/202y");
 
     input?.blur();
-    expect(input?.reportValidity()).to.equal(false);
+    await elementUpdated(el)
+    expect(el?.reportValidity()).to.equal(false);
     el.showMenu();
     await el.updateComplete;
     expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.equal("January 2025");

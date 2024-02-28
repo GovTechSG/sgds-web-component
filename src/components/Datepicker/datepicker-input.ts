@@ -95,7 +95,8 @@ export class DatepickerInput extends SgdsInput {
   }
   private _validateInput = async () => {
     const dates = this.mask.value.split(" - ");
-    const dateArray: Date[] | string[] = dates.map(date =>
+    const noEmptyDates = dates.filter(d => d !== this.dateFormat.toLowerCase());
+    const dateArray: Date[] | string[] = noEmptyDates.map(date =>
       parse(date, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date())
     );
     const invalidDates = dateArray.filter(
@@ -107,13 +108,18 @@ export class DatepickerInput extends SgdsInput {
     );
 
     if (invalidDates.length > 0) {
-      this.setCustomValidity("Invalid Date");
+      // this.setCustomValidity("Invalid Date");
       this.setInvalid(true);
-      this.emit("sgds-invalid-input");
-    } else {
-      this.setCustomValidity("");
+      return this.emit("sgds-invalid-input");
+    }
+    if (invalidDates.length === 0 && dateArray.length > 0) {
+      // this.setCustomValidity("");
       this.setInvalid(false);
-      this.emit("sgds-selectdates-input", { detail: dateArray });
+      return this.emit("sgds-selectdates-input", { detail: dateArray });
+    }
+    if (dateArray.length === 0 && invalidDates.length === 0) {
+      this.setInvalid(false);
+      return this.emit("sgds-empty-input");
     }
   };
 
