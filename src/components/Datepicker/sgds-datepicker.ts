@@ -57,7 +57,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The initial value of DatePicker on first load for single & range mode as array of string. eg.'["22/12/2023"]' for single & '["22/12/2023","25/12/2023"]' for range respectively  */
-  @property({ type: Array, reflect: true }) initialValue: string[];
+  @property({ type: Array, reflect: true }) initialValue: string[] = [];
 
   /** Date format reflected on input  */
   @property({ type: String }) dateFormat: DateFormat = "DD/MM/YYYY";
@@ -89,7 +89,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
   drop: "up" | "down" = "down";
 
   /** Provides the date context for Calendar to present the appropriate view. Defaults to today's date */
-  @property({ attribute: false }) displayDate: Date = new Date();
+  @property({ attribute: false }) displayDate: Date;
 
   @state() value = "";
 
@@ -98,11 +98,11 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
 
   @state() private selectedDateRange: Date[] = [];
 
-  @state() private focusedDate: Date = this.displayDate;
+  @state() private focusedDate: Date;
 
   @state() private focusedTabIndex = 3;
 
-  private initialDisplayDate: Date = this.displayDate;
+  private initialDisplayDate: Date;
 
   @queryAsync("sgds-datepicker-calendar")
   private calendar: Promise<DatepickerCalendar>;
@@ -139,22 +139,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
     this.addEventListener("sgds-selectdates-input", this._handleSelectDatesInput);
     this.addEventListener("keydown", this._handleTab);
     this.addEventListener("sgds-hide", this._handleCloseMenu);
-  }
-
-  async firstUpdated() {
-    super.firstUpdated();
-
-    // setting initial values of props once
-    this.initialDisplayDate = this.displayDate;
-    this.focusedDate = this.displayDate;
-
-    if (this.menuIsOpen) {
-      const input = await this.datepickerInputAsync;
-      this.showMenu();
-      const cal = await this.calendar;
-      cal.focusOnCalendar(input);
-    }
-
+    this.initialDisplayDate = this.displayDate || new Date();
     if (this.initialValue && this.initialValue.length > 0) {
       // Validate initialValue against the dateFormat regex
       const dateFormatRegex = new RegExp(this._getDateFormatRegex());
@@ -166,9 +151,28 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
         const initialSelectedDates = this.initialValue.map(v =>
           setTimeToNoon(parse(v, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date()))
         );
-        return this._handleSelectDates(initialSelectedDates);
+        this._handleSelectDates(initialSelectedDates);
       }
+    } else {
+      this.displayDate = this.initialDisplayDate;
     }
+  }
+
+  async firstUpdated() {
+    super.firstUpdated();
+
+    // setting initial values of props once
+
+    // this.focusedDate = this.initialValue[0] ?
+    //   parse(this.initialValue[0], DATE_PATTERNS[this.dateFormat].fnsPattern, new Date()) : this.displayDate;
+
+    if (this.menuIsOpen) {
+      const input = await this.datepickerInputAsync;
+      this.showMenu();
+      const cal = await this.calendar;
+      cal.focusOnCalendar(input);
+    }
+
     const shadowInput = await this.datepickerInput.shadowInput;
     this._internals.setValidity(shadowInput.validity, shadowInput.validationMessage, shadowInput);
   }
@@ -298,7 +302,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
     this.displayDate = event.detail;
   }
   private async _handleInvalidInput(e) {
-    console.log(e, this.value)
     this.selectedDateRange = [];
     this.displayDate = this.initialDisplayDate;
     if (e.target.value === this.dateFormat.toLowerCase() && this.required) {
@@ -318,7 +321,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
         this.shadowInput
       );
     }
-  
   }
   private async _handleButtonResetClick() {
     this.displayDate = this.initialDisplayDate;

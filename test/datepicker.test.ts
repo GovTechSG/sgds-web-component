@@ -468,14 +468,14 @@ describe("Datepicker keyboard accesibility", () => {
     await elementUpdated(calendar as DatepickerCalendar);
 
     await waitUntil(() => calendar?.shadowRoot?.activeElement === tdElement());
-    await waitUntil(() => changeDateHandler.called);
+    // await waitUntil(() => changeDateHandler.called);
     await sendKeys({ press: "ArrowLeft" });
     await sendKeys({ press: "Enter" });
     await el.updateComplete;
 
-    await waitUntil(() => changeDateHandler.calledTwice);
+    await waitUntil(() => changeDateHandler.called);
     expect(el.value).to.equal("28/06/2023");
-    expect(changeDateHandler).to.have.been.calledTwice;
+    expect(changeDateHandler).to.have.been.calledOnce;
   });
 
   it("when focused, tabindex=3", async () => {
@@ -499,7 +499,8 @@ describe("Datepicker keyboard accesibility", () => {
     const todayDate = setTimeToNoon(new Date(2023, 5, 29));
     const todayDateISO = todayDate.toISOString();
     const prevDateISO = setTimeToNoon(new Date(2023, 5, 28)).toISOString();
-    const calendar = el.shadowRoot?.querySelector<DatepickerCalendar>("sgds-datepicker-calendar");
+    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
+    await elementUpdated(calendar);
     const tdElement = () => calendar?.shadowRoot?.querySelector(`td[data-date="${todayDateISO}"]`);
     const prevTdElement = () => calendar?.shadowRoot?.querySelector(`td[data-date="${prevDateISO}"]`);
     await waitUntil(() => calendar?.shadowRoot?.activeElement);
@@ -509,6 +510,7 @@ describe("Datepicker keyboard accesibility", () => {
     expect(prevTdElement()?.getAttribute("tabindex")).to.equal("-1");
 
     await sendKeys({ press: "ArrowLeft" });
+    await elementUpdated(calendar);
     await waitUntil(() => calendar?.shadowRoot?.activeElement !== tdElement());
     expect(calendar?.shadowRoot?.activeElement === tdElement()).to.be.false;
 

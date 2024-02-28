@@ -83,7 +83,6 @@ export class FormSubmitController implements ReactiveController {
   handleFormSubmit(event: Event) {
     const disabled = this.options.disabled(this.host);
     const reportValidity = this.options.reportValidity;
-    console.log(reportValidity(this.host), this.host);
     if (this.form && !this.form.noValidate && !disabled && !reportValidity(this.host)) {
       event.preventDefault();
       event.stopImmediatePropagation();
