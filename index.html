@@ -108,7 +108,7 @@
     </style>
     <!-- <script src="https://cdn.jsdelivr.net/npm/clk-web-components" type="module"></script> -->
     <script type="module">
-        // import "@webcomponents/scoped-custom-element-registry";
+        import "@webcomponents/scoped-custom-element-registry";
     </script>
     <script type="module">
         let scriptTarget = document.getElementsByTagName( 'head' )[ 0 ]
@@ -116,7 +116,7 @@
         moduleScript.type = "module";
         if ( process.env.VITE_ENV === 'production' ) {
             // preview production build
-            moduleScript.src = 'dist/index.js'
+            moduleScript.src = 'lib/index.js'
         } else {
             // development server
             moduleScript.src = 'src/index.ts';
