@@ -17,7 +17,8 @@ const external = [
   "bootstrap",
   "tslib",
   /lit\/.*/,
-  /bootstrap\/.*/
+  /bootstrap\/.*/,
+  "date-fns"
 ];
 
 const wcPlugins = [
