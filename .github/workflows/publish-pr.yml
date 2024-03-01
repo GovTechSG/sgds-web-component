@@ -21,11 +21,11 @@ jobs:
       - run: npm ci
       - run: npm run test
       - run: npm run build
-      - run: npm publish --tag alpha ./lib
+      - run: npm publish --tag alpha ./lib --access public
         if: contains(env.NPM_TAG, 'alpha')
-      - run: npm publish --tag beta ./lib
+      - run: npm publish --tag beta ./lib --access public
         if: contains(env.NPM_TAG, 'beta')
-      - run: npm publish --tag rc ./lib
+      - run: npm publish --tag rc ./lib --access public
         if: contains(env.NPM_TAG, 'rc')
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
