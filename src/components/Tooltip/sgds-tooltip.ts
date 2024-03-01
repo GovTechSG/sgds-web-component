@@ -1,4 +1,4 @@
-import * as Popper from "@popperjs/core";
+import type { Options as PopperOptions } from "@popperjs/core";
 import Tooltip from "bootstrap/js/src/tooltip";
 import type { Tooltip as BsTooltip } from "bootstrap";
 
@@ -16,10 +16,10 @@ import styles from "./sgds-tooltip.scss";
  */
 export class SgdsTooltip extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
-  /**@internal */
-  myTooltip: Ref<HTMLElement> = createRef();
-  /**@internal */
-  bsTooltip: BsTooltip = null;
+
+  private myTooltip: Ref<HTMLElement> = createRef();
+
+  private bsTooltip: BsTooltip = null;
 
   /** The tooltip's content. Content has to be textual */
   @property({ type: String })
@@ -30,13 +30,13 @@ export class SgdsTooltip extends SgdsElement {
   /** The method to invoke the tooltip. `hover focus` is the default value which allows tooltip to be triggered via mouse hover and keyboard focus. Add `tabindex=0 `for HTMLelements that are not tabbable. For `click` method, the tooltip is trigger via mouse clicking and it instantiates with a close button */
   @property({ type: String })
   trigger: "click" | "hover" | "focus" | "hover focus" = "hover focus";
-  /**@internal */
+
   private closableContainer: HTMLElement;
   /**@internal */
   @state()
-  private popperConfig: Partial<Popper.Options>;
+  private popperConfig: Partial<PopperOptions>;
   /**@internal */
-  @state()
+
   private tooltipConfig: Partial<BsTooltip.Options>;
   /**@internal */
   @queryAssignedElements()
@@ -45,13 +45,6 @@ export class SgdsTooltip extends SgdsElement {
   private _handleSlotChange(): void {
     // For a11y purpose
     this.tooltipTargetElements.forEach(el => el.setAttribute("data-sgds-tooltip", this.content));
-  }
-  attributeChangedCallback(name, oldValue, newValue) {
-    super.attributeChangedCallback(name, oldValue, newValue);
-    if (this.hasUpdated) {
-      this.bsTooltip.dispose();
-      this.initializeTooltip();
-    }
   }
   private initializeTooltip() {
     // refer to Bootstrap's Tooltip options
@@ -75,7 +68,7 @@ export class SgdsTooltip extends SgdsElement {
       this.shadowRoot.querySelector(".btn-close")?.addEventListener("click", () => this.hide());
     }
     this.tooltipConfig = {
-      popperConfig: (defaultConfig?: Partial<Popper.Options>) => {
+      popperConfig: (defaultConfig?: Partial<PopperOptions>) => {
         this.popperConfig = defaultConfig;
         const defaultModifiers = defaultConfig.modifiers;
         const newModifiers = defaultModifiers.map(mod => {

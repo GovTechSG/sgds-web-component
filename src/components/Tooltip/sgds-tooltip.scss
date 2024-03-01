@@ -6,3 +6,7 @@
 .tooltip-inner{
   max-width: var(--tooltip-max-width);
 }
+
+div {
+  max-width: fit-content;
+}
