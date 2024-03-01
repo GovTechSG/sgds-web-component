@@ -17,13 +17,15 @@ const external = [
   "bootstrap",
   "tslib",
   /lit\/.*/,
-  /bootstrap\/.*/
+  /bootstrap\/.*/,
+  "date-fns"
 ];
 
 const wcPlugins = [
   resolve({
     browser: true,
-    dedupe: external
+    dedupe: external,
+    exportConditions: ['development']
   }),
   replace({
     "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
@@ -105,7 +107,7 @@ const buildSgdsPackage = () => {
     },
     ...buildUMDComponentBundles()
   ];
-  
+
   const reactPackage = [
     {
       input: "src/react/index.ts",
