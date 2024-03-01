@@ -2,7 +2,7 @@ import { isAfter, isBefore, isValid, parse } from "date-fns";
 import IMask, { InputMask } from "imask";
 import { html } from "lit";
 import { property, queryAsync } from "lit/decorators.js";
-import { DATE_PATTERNS } from "../../utils/time";
+import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
 import { SgdsInput } from "../Input/sgds-input";
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -95,25 +95,33 @@ export class DatepickerInput extends SgdsInput {
   }
   private _validateInput = async () => {
     const dates = this.mask.value.split(" - ");
-    const dateArray: Date[] | string[] = dates.map(date =>
-      parse(date, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date())
+    const noEmptyDates = dates.filter(d => d !== this.dateFormat.toLowerCase());
+    const dateArray: Date[] | string[] = noEmptyDates.map(date =>
+      setTimeToNoon(parse(date, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date()))
     );
     const invalidDates = dateArray.filter(
       date =>
         !isValid(date) ||
         isBefore(date, new Date(0, 0, 1)) ||
-        isBefore(date, new Date(this.minDate)) ||
-        isAfter(date, new Date(this.maxDate))
+        isBefore(date, setTimeToNoon(new Date(this.minDate))) ||
+        isAfter(date, setTimeToNoon(new Date(this.maxDate)))
     );
 
     if (invalidDates.length > 0) {
-      this.setCustomValidity("Invalid Date");
       this.setInvalid(true);
-      this.emit("sgds-invalid-input");
-    } else {
-      this.setCustomValidity("");
+      return this.emit("sgds-invalid-input");
+    }
+    if (this.mode === "range" && dateArray.length === 1) {
+      this.setInvalid(true);
+      return this.emit("sgds-invalid-input");
+    }
+    if (invalidDates.length === 0 && dateArray.length > 0) {
       this.setInvalid(false);
-      this.emit("sgds-selectdates-input", { detail: dateArray });
+      return this.emit("sgds-selectdates-input", { detail: dateArray });
+    }
+    if (dateArray.length === 0 && invalidDates.length === 0) {
+      this.setInvalid(false);
+      return this.emit("sgds-empty-input");
     }
   };
 

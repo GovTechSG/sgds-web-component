@@ -1,7 +1,7 @@
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { format, parse } from "date-fns";
 import { html } from "lit";
-import { property, queryAsync, state } from "lit/decorators.js";
+import { property, query, queryAsync, state } from "lit/decorators.js";
 import { live } from "lit/directives/live.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
@@ -13,6 +13,7 @@ import styles from "./sgds-datepicker.scss";
 import { ViewEnum } from "./types";
 import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
 import { classMap } from "lit/directives/class-map.js";
+import { type SgdsFormControl } from "../../utils/form";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -34,8 +35,10 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  * displayDate on certain occasions. Example, when keyboard moves up to the next month, it updates displayDate which then affect the current
  * date view of the calendar
  */
-export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
+export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) implements SgdsFormControl {
   static styles = [DropdownElement.styles, styles];
+  static formAssociated = true;
+  private _internals: ElementInternals;
 
   /**@internal */
   static get scopedElements() {
@@ -48,12 +51,13 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   /** When true, adds required attribute to input element */
   @property({ type: Boolean, reflect: true }) required = false;
-
+  /**The datepicker input's name attribute */
+  @property({ reflect: true }) name: string;
   /** When true, adds disabled attribute to input and button element */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The initial value of DatePicker on first load for single & range mode as array of string. eg.'["22/12/2023"]' for single & '["22/12/2023","25/12/2023"]' for range respectively  */
-  @property({ type: Array, reflect: true }) initialValue: string[];
+  @property({ type: Array, reflect: true }) initialValue: string[] = [];
 
   /** Date format reflected on input  */
   @property({ type: String }) dateFormat: DateFormat = "DD/MM/YYYY";
@@ -85,7 +89,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   drop: "up" | "down" = "down";
 
   /** Provides the date context for Calendar to present the appropriate view. Defaults to today's date */
-  @property({ attribute: false }) displayDate: Date = new Date();
+  @property({ attribute: false }) displayDate: Date;
 
   @state() value = "";
 
@@ -94,20 +98,28 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
   @state() private selectedDateRange: Date[] = [];
 
-  @state() private focusedDate: Date = this.displayDate;
+  @state() private focusedDate: Date;
 
   @state() private focusedTabIndex = 3;
 
-  private initialDisplayDate: Date = this.displayDate;
+  private initialDisplayDate: Date;
 
   @queryAsync("sgds-datepicker-calendar")
   private calendar: Promise<DatepickerCalendar>;
 
   @queryAsync("sgds-datepicker-input")
-  private datepickerInput: Promise<DatepickerInput>;
+  private datepickerInputAsync: Promise<DatepickerInput>;
 
+  @query("sgds-datepicker-input")
+  private datepickerInput: DatepickerInput;
+
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  public reportValidity(): boolean {
+    return this._internals.reportValidity();
+  }
   constructor() {
     super();
+    this._internals = this.attachInternals();
     /**@internal */
     this.modifierOpt = [
       {
@@ -128,23 +140,10 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     this.addEventListener("sgds-selectyear", this._handleSelectYear);
     this.addEventListener("sgds-selectdates", this._handleSelectDatesAndClose);
     this.addEventListener("sgds-selectdates-input", this._handleSelectDatesInput);
+    this.addEventListener("sgds-empty-input", this._handleEmptyInput);
     this.addEventListener("keydown", this._handleTab);
     this.addEventListener("sgds-hide", this._handleCloseMenu);
-  }
-
-  async firstUpdated() {
-    super.firstUpdated();
-    // setting initial values of props once
-    this.initialDisplayDate = this.displayDate;
-    this.focusedDate = this.displayDate;
-
-    if (this.menuIsOpen) {
-      const input = await this.datepickerInput;
-      this.showMenu();
-      const cal = await this.calendar;
-      cal.focusOnCalendar(input);
-    }
-
+    this.initialDisplayDate = this.displayDate || new Date();
     if (this.initialValue && this.initialValue.length > 0) {
       // Validate initialValue against the dateFormat regex
       const dateFormatRegex = new RegExp(this._getDateFormatRegex());
@@ -156,9 +155,25 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
         const initialSelectedDates = this.initialValue.map(v =>
           setTimeToNoon(parse(v, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date()))
         );
-        return this._handleSelectDates(initialSelectedDates);
+        this._handleSelectDates(initialSelectedDates);
       }
+    } else {
+      this.displayDate = this.initialDisplayDate;
     }
+  }
+
+  async firstUpdated() {
+    super.firstUpdated();
+    if (this.menuIsOpen) {
+      const input = await this.datepickerInputAsync;
+      this.showMenu();
+      const cal = await this.calendar;
+      cal.focusOnCalendar(input);
+    }
+
+    const shadowInput = await this.datepickerInput.shadowInput;
+    this._manageInternalsDefault(shadowInput);
+    this._internals.setValidity(shadowInput.validity, shadowInput.validationMessage, shadowInput);
   }
 
   /** @internal */
@@ -195,6 +210,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   @watch("value")
   _handleValueChange() {
     this.emit("sgds-change-date");
+    this._setInternalFormValue(this.value);
   }
 
   private async _handleCloseMenu() {
@@ -232,6 +248,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   };
   private _handleSelectDatesInput(event: CustomEvent<Date[]>) {
     this._handleSelectDates(event.detail);
+    this._manageInternalsDefault(this._shadowInput);
   }
   private async _handleSelectDates(newSelectedDates: Date[]) {
     newSelectedDates.sort((a: Date, b: Date) => a.getTime() - b.getTime());
@@ -248,10 +265,13 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
 
     // Set formattedDate value as the new value for sgds-input
     this.value = formattedDate;
-    const input = await this.datepickerInput;
+    const input = await this.datepickerInputAsync;
     input.updateMaskValue();
   }
 
+  private get _shadowInput() {
+    return this.datepickerInput.shadowRoot.querySelector("input");
+  }
   private _handleSelectDatesAndClose(event: CustomEvent<Date[]>) {
     this._handleSelectDates(event.detail);
 
@@ -260,6 +280,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     } else if (this.mode === "single" && this.selectedDateRange.length === 1) {
       this.hideMenu();
     }
+    this._manageInternalsValid();
   }
 
   /** update latest view state from datepicker-header */
@@ -284,6 +305,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
   private async _handleInvalidInput() {
     this.selectedDateRange = [];
     this.displayDate = this.initialDisplayDate;
+    this._manageInternalsBadInput();
   }
   private async _handleButtonResetClick() {
     this.displayDate = this.initialDisplayDate;
@@ -291,10 +313,53 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
     this.value = "";
     this.view = "days";
     this.hideMenu();
-    const input = await this.datepickerInput;
+    const input = await this.datepickerInputAsync;
     input.setInvalid(false);
     input.destroyInputMask();
     await input.applyInputMask();
+
+    this._manageInternalsRequired();
+  }
+
+  private async _handleEmptyInput() {
+    this._manageInternalsRequired();
+  }
+
+  private _manageInternalsRequired() {
+    this.required
+      ? this._internals.setValidity(
+          {
+            valueMissing: true
+          },
+          "Please fill in this field",
+          this._shadowInput
+        )
+      : this._internals.setValidity({});
+  }
+  private _manageInternalsBadInput() {
+    this._internals.setValidity(
+      {
+        badInput: true
+      },
+      "The chosen date(s) are invalid",
+      this._shadowInput
+    );
+  }
+
+  private _manageInternalsValid() {
+    this._internals.setValidity({});
+  }
+
+  private _manageInternalsDefault(inputEl: HTMLInputElement) {
+    this._internals.setValidity(inputEl.validity, inputEl.validationMessage, inputEl);
+  }
+
+  private _setInternalFormValue(value: string) {
+    this._internals.setFormValue(value);
+  }
+
+  private async _handleInputMaskChange(e: CustomEvent) {
+    this.value = e.detail;
   }
   render() {
     const svgEl = html`
@@ -323,14 +388,13 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) {
           mode=${this.mode}
           dateFormat=${this.dateFormat}
           invalidFeedback=${this.invalidFeedback}
-          @sgds-mask-input-change=${(e: CustomEvent) => {
-            this.value = e.detail;
-          }}
+          @sgds-mask-input-change=${this._handleInputMaskChange}
           @sgds-invalid-input=${this._handleInvalidInput}
           minDate=${this.minDate}
           maxDate=${this.maxDate}
           label=${this.label}
           hintText=${this.hintText}
+          name=${this.name}
         >
           <button
             slot="calendar-btn"

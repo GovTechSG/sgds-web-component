@@ -18,6 +18,7 @@ const external = [
   "tslib",
   /lit\/.*/,
   /bootstrap\/.*/,
+  "imask",
   "date-fns"
 ];
 
