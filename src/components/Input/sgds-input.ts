@@ -82,7 +82,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @state() valid = false;
 
   /**@internal */
-  private inputId: string = genId("input", this.type);
+  protected inputId: string = genId("input", this.type);
 
   /** Sets focus on the input. */
   public focus(options?: FocusOptions) {
@@ -97,24 +97,26 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   public reportValidity() {
     return this.input.reportValidity();
   }
-  handleInvalid() {
-    this.invalid = true;
+  public setCustomValidity(err: string) {
+    return this.input.setCustomValidity(err);
   }
-
-  handleChange(event: string) {
+  public setInvalid(bool: boolean) {
+    this.invalid = bool;
+  }
+  protected _handleChange(event: string) {
     this.value = this.input.value;
     this.emit(event);
   }
 
-  handleFocus() {
+  protected _handleFocus() {
     this.emit("sgds-focus");
   }
 
-  handleBlur() {
+  protected _handleBlur() {
     this.emit("sgds-blur");
   }
 
-  handleKeyDown(event: KeyboardEvent) {
+  protected _handleKeyDown(event: KeyboardEvent) {
     const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
 
     // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before
@@ -130,14 +132,14 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   }
 
   @watch("disabled", { waitUntilFirstUpdate: true })
-  handleDisabledChange() {
+  _handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
     this.input.disabled = this.disabled;
     this.invalid = !this.input.checkValidity();
   }
 
   @watch("value", { waitUntilFirstUpdate: true })
-  handleValueChange() {
+  _handleValueChange() {
     this.invalid = !this.input.checkValidity();
     this.valid = this.input.checkValidity();
     // remove validation for input that is not required, is already dirty and has empty value
@@ -145,10 +147,8 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
       this.valid = false;
     }
   }
-
-  render() {
-    const input = html`
-      <input
+  protected _renderInput() {
+    return html`<input
         class=${classMap({
           "form-control": true,
           "is-invalid": this.hasFeedback && this.invalid,
@@ -168,17 +168,34 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
         .value=${live(this.value)}
         minlength=${ifDefined(this.minlength)}
         maxlength=${ifDefined(this.maxlength)}
-        @input=${() => this.handleChange("sgds-input")}
-        @change=${() => this.handleChange("sgds-change")}
-        @keydown=${this.handleKeyDown}
-        @invalid=${this.handleInvalid}
-        @focus=${this.handleFocus}
-        @blur=${this.handleBlur}
+        @input=${() => this._handleChange("sgds-input")}
+        @change=${() => this._handleChange("sgds-change")}
+        @keydown=${this._handleKeyDown}
+        @invalid=${() => this.setInvalid(true)}
+        @focus=${this._handleFocus}
+        @blur=${this._handleBlur}
       />
       ${this.hasFeedback
         ? html`<div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
-        : ""}
+        : ""} `;
+  }
+  protected _renderFeedback() {
+    return this.hasFeedback
+      ? html`<div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
+      : "";
+  }
+  protected _renderLabel() {
+    const labelTemplate = html` <label for=${this.inputId} class="form-label">${this.label}</label> `;
+    return this.label && labelTemplate;
+  }
+  protected _renderHintText() {
+    const hintTextTemplate = html`
+      <small id="${this.inputId}Help" class="text-muted form-text">${this.hintText}</small>
     `;
+    return this.hintText && hintTextTemplate;
+  }
+  render() {
+    const input = html`${this._renderInput()}`;
     // if iconName is defined
     const inputWithIcon = html`
       <div class="sgds form-control-group ${this.inputClasses}">
@@ -187,14 +204,10 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
       </div>
     `;
     // if hintText is defined
-    const withHintText = html` <small id="${this.inputId}Help" class="text-muted form-text">${this.hintText}</small> `;
-
-    // if label is defined
-    const withLabel = html` <label for=${this.inputId} class="form-label">${this.label}</label> `;
 
     return html`
       <div class="d-flex flex-column w-100">
-        ${html`${this.label && withLabel} ${this.hintText && withHintText} ${this.icon ? inputWithIcon : input} `}
+        ${html`${this._renderLabel()} ${this._renderHintText()} ${this.icon ? inputWithIcon : input} `}
       </div>
     `;
   }

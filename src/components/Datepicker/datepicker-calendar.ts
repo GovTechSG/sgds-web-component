@@ -1,11 +1,12 @@
 import { HTMLTemplateResult, html } from "lit";
 import { property } from "lit/decorators.js";
-import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { createYearViewArray, setTimeToNoon } from "../../utils/time";
 import { watch } from "../../utils/watch";
 import styles from "./datepicker-calendar.scss";
 import { ViewEnum } from "./types";
+import { classMap } from "lit/directives/class-map.js";
+import { isAfter, isEqual } from "date-fns";
 
 const TODAY_DATE = new Date();
 
@@ -47,7 +48,7 @@ export class DatepickerCalendar extends SgdsElement {
   @property({ type: Array }) selectedDate: Date[] = [];
 
   /** @internal */
-  @property({ attribute: false }) displayDate: Date = TODAY_DATE;
+  @property({ attribute: false }) displayDate: Date;
 
   /** @internal */
   @property({ type: String }) minDate?: string;
@@ -58,7 +59,7 @@ export class DatepickerCalendar extends SgdsElement {
   /** @internal */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
 
-  private focusedDate: Date = setTimeToNoon(this.displayDate);
+  private focusedDate: Date;
 
   /** @internal */
   @property() view: ViewEnum;
@@ -78,6 +79,7 @@ export class DatepickerCalendar extends SgdsElement {
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("keydown", this._handleKeyPress);
+    this.focusedDate = this.displayDate && setTimeToNoon(this.displayDate);
   }
 
   firstUpdated() {
@@ -98,22 +100,42 @@ export class DatepickerCalendar extends SgdsElement {
   @watch("displayDate", { waitUntilFirstUpdate: true })
   _updateFocusedDate() {
     this.focusedDate = setTimeToNoon(this.displayDate);
+
+    if (this.focusedDate.getFullYear() < 1900) {
+      this.focusedDate.setFullYear(1900);
+    }
   }
 
   private _setFocusedDate(shift: number) {
+    const currentFocusedDate = this.focusedDate.getDate();
+    const currentFocusedMonth = this.focusedDate.getMonth();
+    const currentFocusedYear = this.focusedDate.getFullYear();
     switch (this.view) {
       case "days": {
-        this.focusedDate = setTimeToNoon(new Date(this.focusedDate.setDate(this.focusedDate.getDate() + shift)));
+        const newFocusedDate = setTimeToNoon(
+          new Date(currentFocusedYear, currentFocusedMonth, currentFocusedDate + shift)
+        );
+        if (isAfter(newFocusedDate, new Date(0, 0, 1, 12)) || isEqual(newFocusedDate, new Date(0, 0, 1, 12)))
+          this.focusedDate = newFocusedDate;
         break;
       }
       case "months": {
-        this.focusedDate = setTimeToNoon(new Date(this.focusedDate.setMonth(this.focusedDate.getMonth() + shift)));
+        const newFocusedDate = setTimeToNoon(
+          new Date(currentFocusedYear, currentFocusedMonth + shift, currentFocusedDate)
+        );
+
+        if (isAfter(newFocusedDate, new Date(0, 0, 1, 12)) || isEqual(newFocusedDate, new Date(0, 0, 1, 12))) {
+          this.focusedDate = newFocusedDate;
+        }
         break;
       }
       case "years": {
-        this.focusedDate = setTimeToNoon(
-          new Date(this.focusedDate.setFullYear(this.focusedDate.getFullYear() + shift))
+        const newFocusedDate = setTimeToNoon(
+          new Date(currentFocusedYear + shift, currentFocusedMonth, currentFocusedDate)
         );
+        if (newFocusedDate.getFullYear() >= 1900) {
+          this.focusedDate = newFocusedDate;
+        }
         break;
       }
     }
@@ -153,6 +175,7 @@ export class DatepickerCalendar extends SgdsElement {
       this._blurCalendarCell();
       const keyShiftObject = keyPressAction[event.key];
       const shiftNumber = keyShiftObject[this.view];
+
       this._setFocusedDate(shiftNumber);
 
       this._focusOnCalendarCell();
@@ -300,7 +323,6 @@ export class DatepickerCalendar extends SgdsElement {
       for (let j = 0; j <= 6; j++) {
         if (day <= monthLength && (i > 0 || j >= startingDayOfMonth)) {
           const date = new Date(year, month, day, 12, 0, 0, 0).toISOString();
-
           const beforeMinDate = minimumDate && Date.parse(date) < Date.parse(minimumDate.toISOString());
           const afterMinDate = maximumDate && Date.parse(date) > Date.parse(maximumDate.toISOString());
           const clickHandler = beforeMinDate || afterMinDate ? undefined : this._onClickDay;
@@ -328,7 +350,7 @@ export class DatepickerCalendar extends SgdsElement {
               })}
               @click=${clickHandler}
               tabindex=${this.focusedDate === new Date(date) ? "3" : "-1"}
-              disabled=${beforeMinDate || afterMinDate}
+              ?disabled=${beforeMinDate || afterMinDate}
             >
               ${day}
             </td>`
@@ -356,9 +378,9 @@ export class DatepickerCalendar extends SgdsElement {
             ${DatepickerCalendar.DAY_LABELS.map(
               (label: string, index: number) =>
                 html`
-                  <td key=${index}>
+                  <th key=${index}>
                     <small>${label}</small>
-                  </td>
+                  </th>
                 `
             )}
           </tr>
@@ -429,6 +451,7 @@ export class DatepickerCalendar extends SgdsElement {
               @click=${() => this._onClickYear(y)}
               data-year=${y}
               tabindex="3"
+              ?disabled=${y < 1900}
             >
               ${y}
             </button>

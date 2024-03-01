@@ -8,7 +8,8 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds@2.1.1/css/sgds.min.css" rel="stylesheet" crossorigin="anonymous"> -->
     <!-- <script type="module" id="dev-console-gateway"
         src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"></script> -->
-    <!-- <script src="/node_modules/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js"></script> -->
+    <script
+        src="/node_modules/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
     <!-- <script type="module" id="console-components-gateway"
@@ -108,7 +109,7 @@
     </style>
     <!-- <script src="https://cdn.jsdelivr.net/npm/clk-web-components" type="module"></script> -->
     <script type="module">
-        import "@webcomponents/scoped-custom-element-registry";
+        // import "@webcomponents/scoped-custom-element-registry";
     </script>
     <script type="module">
         let scriptTarget = document.getElementsByTagName( 'head' )[ 0 ]
@@ -143,7 +144,7 @@
         <sgds-mainnav-item href="#">About</sgds-mainnav-item>
         <sgds-mainnav-item href="#" slot="end" class="test test2">Info</sgds-mainnav-item>
         <sgds-mainnav-item href="#" slot="end">Contact Us</sgds-mainnav-item>
-        <sgds-mainnav-dropdown togglerText="Dropdown">
+        <sgds-mainnav-dropdown togglerText="Dropdown" menuIsOpen>
             <sgds-dropdown-item href="https://google.com">Item 1</sgds-dropdown-item>
             <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
             <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
@@ -186,6 +187,7 @@
 
     <main>
         <div class="container">
+            <datepicker-input></datepicker-input>
             <h2>Progress</h2>
             <div class="row">
                 <div class="container">
@@ -234,20 +236,26 @@
                 </svg> -->
             </sgds-combo-box>
             <h2>Datepicker</h2>
-            <sgds-datepicker menuIsOpen mindate="2020-01-01T12:00:00.000Z" maxdate="2030-12-30T12:00:00.000Z"
-                dateformat="DD/MM/YYYY" mode="single">
+            <sgds-datepicker id="datepicker-test-min-max" label="Birthdate" drop="right" menuAlignRight noFlip
+                hinttext="min date and max date" mindate="2024-02-02T12:00:00.000Z" maxdate="2030-12-30T12:00:00.000Z"
+                dateformat="MM/DD/YYYY" initialValue='["03/29/2024"]'>
             </sgds-datepicker>
-            <sgds-datepicker id="myDatepicker" initialValue='[]' minDate="2023-05-15T12:00:00.000Z"></sgds-datepicker>
+            <sgds-datepicker menuIsOpen noFeedback></sgds-datepicker>
 
-            <br><br><br><br><br><br><br><br><br>
-            <sgds-datepicker id="myDatepicker2" mode="range"
-                initialValue='["29/03/2024", "29/03/2025"]'></sgds-datepicker>
+            <!--  <br><br><br><br><br><br><br><br><br>
+            <sgds-datepicker id="myDatepicker2" label="Birthdate" hinttext="min date and max date" mode="range"
+                mindate="2024-01-02T12:00:00.000Z" maxdate="2024-01-30T12:00:00.000Z"></sgds-datepicker>
+            <sgds-datepicker id="myDatepicker2" mode="range"></sgds-datepicker>
+            <sgds-datepicker id="myDatepicker2" mode="range" dateformat="MM/DD/YYYY"
+                initialValue='["03/29/2024", "03/29/2025"]'></sgds-datepicker>
+            <sgds-datepicker id="myDatepicker2" mode="range" noFlip dateformat="YYYY/MM/DD"
+                initialValue='["2024/03/29", "2025/03/29"]'></sgds-datepicker> -->
         </div>
 
         <div class="container">
             <h2>Dropdown</h2>
             <div class="row">
-                <sgds-dropdown togglerText="Dropdown">
+                <sgds-dropdown menuIsOpen noFlip menuAlignRight togglerText="hello">
                     <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
                     <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
                     <sgds-dropdown-item href="#" disabled>
@@ -596,7 +604,7 @@
                 <div class="container">
                     <h2>Dropdown</h2>
                     <div class="row">
-                        <sgds-dropdown togglerText="Dropdown" menuIsOpen>
+                        <sgds-dropdown togglerText="Dropdown">
                             <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
                             <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
                             <sgds-dropdown-item href="#" disabled>
@@ -714,6 +722,8 @@
                         }
                     } );
 
+                    const dpt = document.getElementById( 'datepicker-test-min-max' )
+                    dpt.displayDate = new Date( 2024, 5, 13 )
 
 
 
