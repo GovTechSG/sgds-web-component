@@ -1312,6 +1312,23 @@ describe("datepicker input masking", () => {
       expect(shadowInput?.classList.contains("is-invalid")).to.be.true;
     });
   });
+
+  it("for range mode, when only one date is selected and blurred, input is invalid ", async () => {
+    const dateDigits = [2, 0, 0, 2, 2, 0, 2, 4];
+    const inputEl = await fixture<DatepickerInput>(html`<sgds-datepicker-input mode="range"></sgds-datepicker-input>`);
+    const shadowInput = inputEl?.shadowRoot?.querySelector("input");
+    expect(inputEl.value).to.equal("");
+    expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
+    inputEl.focus();
+
+    for (const d of dateDigits) {
+      await sendKeys({ press: `Digit${d}` });
+    }
+    inputEl.blur();
+    await inputEl.updateComplete;
+    expect(inputEl.value).to.equal("20/02/2024 - dd/mm/yyyy");
+    expect(shadowInput?.classList.contains("is-invalid")).to.be.true;
+  });
 });
 
 describe("error message", () => {

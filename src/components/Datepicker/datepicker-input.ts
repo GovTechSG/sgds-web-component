@@ -111,6 +111,10 @@ export class DatepickerInput extends SgdsInput {
       this.setInvalid(true);
       return this.emit("sgds-invalid-input");
     }
+    if (this.mode === "range" && dateArray.length === 1) {
+      this.setInvalid(true);
+      return this.emit("sgds-invalid-input");
+    }
     if (invalidDates.length === 0 && dateArray.length > 0) {
       this.setInvalid(false);
       return this.emit("sgds-selectdates-input", { detail: dateArray });
