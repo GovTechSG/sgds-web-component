@@ -305,7 +305,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
   private async _handleInvalidInput() {
     this.selectedDateRange = [];
     this.displayDate = this.initialDisplayDate;
-    console.log(this.displayDate);
     this._manageInternalsBadInput();
   }
   private async _handleButtonResetClick() {
@@ -323,8 +322,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
   }
 
   private async _handleEmptyInput() {
-    const input = await this.datepickerInputAsync;
-    input.setInvalid(false);
     this._manageInternalsRequired();
   }
 
@@ -339,13 +336,12 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
         )
       : this._internals.setValidity({});
   }
-
   private _manageInternalsBadInput() {
     this._internals.setValidity(
       {
         badInput: true
       },
-      "The chosen date is invalid",
+      "The chosen date(s) are invalid",
       this._shadowInput
     );
   }
@@ -360,6 +356,10 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
 
   private _setInternalFormValue(value: string) {
     this._internals.setFormValue(value);
+  }
+
+  private async _handleInputMaskChange(e: CustomEvent) {
+    this.value = e.detail;
   }
   render() {
     const svgEl = html`
@@ -388,9 +388,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
           mode=${this.mode}
           dateFormat=${this.dateFormat}
           invalidFeedback=${this.invalidFeedback}
-          @sgds-mask-input-change=${(e: CustomEvent) => {
-            this.value = e.detail;
-          }}
+          @sgds-mask-input-change=${this._handleInputMaskChange}
           @sgds-invalid-input=${this._handleInvalidInput}
           minDate=${this.minDate}
           maxDate=${this.maxDate}
