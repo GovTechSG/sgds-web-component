@@ -1,8 +1,8 @@
 import { html } from "lit";
-import { property } from "lit/decorators.js";
+import { property, queryAssignedNodes } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import SgdsSidenavItem from "./sgds-sidenav-item";
-import styles from "./sgds-sidenav.scss?inline";
+import styles from "./sgds-sidenav.scss";
 
 /**
  * @summary The side navigation is used to display a list of links to move between pages within a related category.
@@ -20,22 +20,44 @@ export class SgdsSidenav extends SgdsElement {
   @property({ type: Boolean, attribute: true })
   alwaysOpen = false;
 
-  render() {
-    this.alwaysOpen
-      ? null
-      : this.addEventListener("sgds-toggle", (e: CustomEvent) => {
-          const children = this.shadowRoot.querySelector("slot").assignedElements({ flatten: true });
-          for (let i = 0; i < children.length; i++) {
-            if (e.detail.index != i) {
-              (children[i] as SgdsSidenavItem).hide();
-            }
-          }
-        });
+  /** @internal */
+  @queryAssignedNodes()
+  private defaultNodes!: NodeListOf<SgdsSidenavItem>;
 
+  /** @internal */
+  get items(): SgdsSidenavItem[] {
+    return [...(this.defaultNodes || [])].filter(
+      (node: HTMLElement) => typeof node.tagName !== "undefined"
+    ) as SgdsSidenavItem[];
+  }
+
+  async onToggle(event: Event): Promise<void> {
+    const target = event.target as SgdsSidenavItem;
+    // Let the event pass through the DOM so that it can be
+    // prevented from the outside if a user so desires.
+    if (this.alwaysOpen || event.defaultPrevented) {
+      // No toggling when `alwaysOpen` or the user prevents it.
+      return;
+    }
+    const items = [...this.items] as SgdsSidenavItem[];
+
+    if (items && !items.length) {
+      // no toggling when there aren't items.
+      return;
+    }
+    items.forEach(item => {
+      if (item !== target) {
+        // Close all the items that didn't dispatch the event.
+        item.active = false;
+      }
+    });
+  }
+
+  render() {
     return html`
       <nav class="sidenav">
         <ul>
-          <slot></slot>
+          <slot @click=${this.onToggle}></slot>
         </ul>
       </nav>
     `;

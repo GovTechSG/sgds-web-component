@@ -1,20 +1,21 @@
-// import Collapse from "bootstrap/js/src/collapse";
-// import type { Collapse as BsCollapse } from "bootstrap";
 import { html } from "lit";
 import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { Ref, createRef, ref } from "lit/directives/ref.js";
 import SgdsElement from "../../base/sgds-element";
-import genId from "../../utils/generateId";
-import styles from "./sgds-sidenav-item.scss?inline";
-import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
-import { watch } from "../../utils/watch";
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/animate";
+import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { waitForEvent } from "../../utils/event";
+import genId from "../../utils/generateId";
+import { watch } from "../../utils/watch";
+import styles from "./sgds-sidenav-item.scss";
 
 /**
  *
  * @event sgds-toggle - Emitted when the dropdown is clicked.
+ * @event sgds-show - Emitted on show.
+ * @event sgds-after-show - Emitted on show after animation has completed.
+ * @event sgds-hide - Emitted on hide.
+ * @event sgds-after-hide - Emitted on hide after animation has completed.
  *
  * @slot - default slot for SgdsSidenavLink element.
  * @slot title - title slot for the content of SgdsSidenavItem's button / anchor element.
@@ -29,13 +30,9 @@ import { waitForEvent } from "../../utils/event";
 export class SgdsSidenavItem extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
-  // /** @internal */
-  // private myCollapse: Ref<HTMLElement> = createRef();
-  // /** @internal */
-  // private bsCollapse: BsCollapse = null;
   @query(".sidenav-body") body: HTMLElement;
   /** @internal */
-  @query(".sidenav-button") header: HTMLElement;
+  @query(".sidenav-btn") header: HTMLElement;
   /**
    *  when true, toggles the sidenav-item to open on first load and set the active stylings.
    */
@@ -68,37 +65,16 @@ export class SgdsSidenavItem extends SgdsElement {
   /** @internal */
   private index = "-1";
 
-  private _onClick() {
+  private _onToggle() {
     this.emit("sgds-toggle", { detail: { index: this.index } });
   }
 
-  // private _onClickButton() {
-  //   this._onClick();
-  //   if (this.bsCollapse) {
-  //     this.bsCollapse.toggle();
-  //   }
-  // }
   private _onClickLink() {
-    this._onClick();
+    this._onToggle();
     this.active = true;
   }
 
-  // /**
-  //  * When invoked, closes the SgdsSidenavItem
-  //  */
-  // public closeItem() {
-  //   this.active = false;
-  //   if (this.bsCollapse) this.bsCollapse.hide();
-  // }
-  // /**
-  //  * When invoked, opens the SgdsSidenavItem
-  //  */
-  // public openItem() {
-  //   this.active = true;
-  //   if (this.bsCollapse) this.bsCollapse.show();
-  // }
-
-  /** Shows the accordion. */
+  /** Shows the sidenav item. */
   public async show() {
     if (this.active) {
       return;
@@ -108,7 +84,7 @@ export class SgdsSidenavItem extends SgdsElement {
     return waitForEvent(this, "sgds-after-show");
   }
 
-  /** Hide the accordion */
+  /** Hide the sidenav item */
   public async hide() {
     if (!this.active) {
       return;
@@ -117,43 +93,38 @@ export class SgdsSidenavItem extends SgdsElement {
     return waitForEvent(this, "sgds-after-hide");
   }
 
-  // firstUpdated() {
-  //   // if sidenav has menu, initialise bootstrap collapse
-  //   if (!this.href) {
-  //     this.bsCollapse = new Collapse(this.myCollapse.value, {
-  //       toggle: this.active
-  //     });
-
-  //     this.myCollapse.value.addEventListener("show.bs.collapse", () => {
-  //       this.active = true;
-  //     });
-  //     this.myCollapse.value.addEventListener("shown.bs.collapse", () => {
-  //       this.active = true;
-  //     });
-  //     this.myCollapse.value.addEventListener("hide.bs.collapse", () => {
-  //       this.active = false;
-  //     });
-  //     this.myCollapse.value.addEventListener("hidden.bs.collapse", () => {
-  //       this.active = false;
-  //     });
-  //   }
-  // }
+  /**
+   * @deprecated since 1.1. Will be removed in 2.0 and replaced by hide.
+   * When invoked, closes the SgdsSidenavItem
+   */
+  public async closeItem() {
+    return await this.hide();
+  }
+  /**
+   * @deprecated since 1.1. Will be removed in 2.0 and replaced by show.
+   * When invoked, opens the SgdsSidenavItem
+   */
+  public async openItem() {
+    return await this.show();
+  }
 
   firstUpdated() {
-    this.body.hidden = !this.active;
-    this.body.style.height = this.active ? "auto" : "0";
+    if (!this.href) {
+      this.body.hidden = !this.active;
+      this.body.style.height = this.active ? "auto" : "0";
+    }
   }
-  private handleSummaryClick() {
-    this.emit("sgds-toggle", { detail: { index: this.index } });
+  private _handleSummaryClick() {
     if (this.active) {
       this.hide();
     } else {
       this.show();
     }
 
+    this._onToggle()
     this.header.focus();
   }
-  private handleSummaryKeyDown(event: KeyboardEvent) {
+  private _handleSummaryKeyDown(event: KeyboardEvent) {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
 
@@ -177,6 +148,7 @@ export class SgdsSidenavItem extends SgdsElement {
 
   @watch("active", { waitUntilFirstUpdate: true })
   async handleOpenChange() {
+    if(this.href) return;
     if (this.active) {
       // Show
       const sgdsShow = this.emit("sgds-show", { cancelable: true });
@@ -214,9 +186,9 @@ export class SgdsSidenavItem extends SgdsElement {
 
   render() {
     const withMenuTemplate = html` <button
-        @click=${this.handleSummaryClick}
-        @keydown=${this.handleSummaryKeyDown}
-        class="sidenav-btn sidenav-button ${classMap({
+        @click=${this._handleSummaryClick}
+        @keydown=${this._handleSummaryKeyDown}
+        class="sidenav-btn ${classMap({
           disabled: this.disabled,
           active: this.active
         })} "
@@ -243,7 +215,7 @@ export class SgdsSidenavItem extends SgdsElement {
           />
         </svg>
       </button>
-      <div class=" sidenav-body" id="${this.collapseId}">
+      <div class="sidenav-body" id="${this.collapseId}">
         <ul class="sidenav-list" aria-labelledby="${this.buttonId}">
           <slot></slot>
         </ul>

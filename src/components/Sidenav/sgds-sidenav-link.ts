@@ -1,5 +1,5 @@
 import LinkElement from "../../base/link-element";
-import styles from "./sgds-sidenav-link.scss?inline";
+import styles from "./sgds-sidenav-link.scss";
 
 /**
  * @slot default - slot for label of anchor tag.

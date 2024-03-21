@@ -16,7 +16,7 @@ describe("sgds-tooltip", () => {
     const el = await fixture(html`<sgds-tooltip></sgds-tooltip>`);
     assert.shadowDom.equal(
       el,
-      `  <div data-bs-original-title="" title="">
+      `  <div>
         <slot>
         </slot>
        </div>

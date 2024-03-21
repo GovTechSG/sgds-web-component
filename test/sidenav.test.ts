@@ -24,13 +24,16 @@ describe("sgds-sidenav-item", () => {
     assert.shadowDom.equal(
       el,
       `  <li class="sidenav-item" aria-haspopup="true">
-       <button class="collapsed sidenav-btn" aria-expanded="false" aria-selected="false" aria-disabled="false">
+       <button class="sidenav-btn" aria-expanded="false" aria-selected="false" aria-disabled="false">
        <slot name="icon">
           </slot> 
        <slot name="title">
          </slot>
        </button>
-       <div class="collapse">
+       <div class="sidenav-body"
+        hidden=""
+        style="height: 0px;"
+        >
          <ul class="sidenav-list">
            <slot>
            </slot>
@@ -46,10 +49,10 @@ describe("sgds-sidenav-item", () => {
     const ul = el.shadowRoot?.querySelector("ul");
     expect(button?.getAttribute("id")).to.equal(ul?.getAttribute("aria-labelledby"));
   });
-  it("div.collapse id should equal to button's aria-controls attr", async () => {
+  it("div.sidenav-body id should equal to button's aria-controls attr", async () => {
     const el = await fixture(html`<sgds-sidenav-item></sgds-sidenav-item>`);
     const button = el.shadowRoot?.querySelector("button");
-    const collapse = el.shadowRoot?.querySelector("div.collapse");
+    const collapse = el.shadowRoot?.querySelector("div.sidenav-body");
     expect(collapse?.getAttribute("id")).to.equal(button?.getAttribute("aria-controls"));
   });
   it("with href, can be semantically compare with shadowDom trees", async () => {
@@ -163,25 +166,25 @@ describe("sgds-sidenav, -item, -link interactions", () => {
     const SgdsSidenavItemThree = el.querySelectorAll("sgds-sidenav-item")[2];
 
     expect(SgdsSidenavItemThree.shadowRoot?.querySelector("div")).to.be.null;
-    await waitUntil(() => SgdsSidenavItemOne.shadowRoot?.querySelector("div.collapse"));
-    await waitUntil(() => SgdsSidenavItemTwo.shadowRoot?.querySelector("div.collapse"));
-    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.collapse")).to.have.class("show");
-    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.collapse")).not.to.have.class("show");
+    await waitUntil(() => SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body"));
+    await waitUntil(() => SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body"));
+    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
+    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body")).to.have.attribute("hidden");
 
     //onclick SgdsSidenavItemTwo button, should remove show from first
     SgdsSidenavItemTwo?.shadowRoot?.querySelector("button")?.click();
 
-    await waitUntil(() => SgdsSidenavItemTwo.shadowRoot?.querySelector("div.collapse.show"));
-    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.collapse")).not.to.have.class("show");
-    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.collapse")).to.have.class("show");
+    await waitUntil(() => SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body[hidden]"));
+    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).to.have.attribute("hidden");
+    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
 
     // click on link should collapse the other two side navs
     SgdsSidenavItemThree?.shadowRoot?.querySelector("a")?.click();
 
     // wait sometime for collapse to take place
     await aTimeout(500);
-    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.collapse")).not.to.have.class("show");
-    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.collapse")).not.to.have.class("show");
+    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).to.have.attribute("hidden");
+    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body")).to.have.attribute("hidden");
     expect(SgdsSidenavItemThree.shadowRoot?.querySelector("a.sidenav-btn")).to.have.class("active");
   });
   it("when alwaysOpen is true, click on another item (link or button) should NOT close other opened sidenav", async () => {
@@ -209,25 +212,25 @@ describe("sgds-sidenav, -item, -link interactions", () => {
     const SgdsSidenavItemThree = el.querySelectorAll("sgds-sidenav-item")[2];
 
     expect(SgdsSidenavItemThree.shadowRoot?.querySelector("div")).to.be.null;
-    await waitUntil(() => SgdsSidenavItemOne.shadowRoot?.querySelector("div.collapse"));
-    await waitUntil(() => SgdsSidenavItemTwo.shadowRoot?.querySelector("div.collapse"));
-    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.collapse")).to.have.class("show");
-    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.collapse")).not.to.have.class("show");
+    await waitUntil(() => SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body"));
+    await waitUntil(() => SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body"));
+    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
+    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body")).to.have.attribute("hidden");
 
     //onclick SgdsSidenavItemTwo button, should NOT remove show from first
     SgdsSidenavItemTwo?.shadowRoot?.querySelector("button")?.click();
 
-    await waitUntil(() => SgdsSidenavItemTwo.shadowRoot?.querySelector("div.collapse.show"));
-    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.collapse")).to.have.class("show");
-    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.collapse")).to.have.class("show");
+    await waitUntil(() => !SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body[hidden]"));
+    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
+    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
 
     // click on link should NOT collapse the other two side navs
     SgdsSidenavItemThree?.shadowRoot?.querySelector("a")?.click();
 
     // wait sometime for collapse to take place
     await aTimeout(500);
-    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.collapse")).to.have.class("show");
-    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.collapse")).to.have.class("show");
+    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
+    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
     expect(SgdsSidenavItemThree.shadowRoot?.querySelector("a.sidenav-btn")).to.have.class("active");
   });
 });
@@ -256,7 +259,7 @@ describe("a11y - sgds-sidenav-item", () => {
     const button = el.shadowRoot?.querySelector("button");
     expect(button).to.have.attribute("aria-expanded", "false");
   });
-  it("button to have a default aria-controls pointing to id of div.collapse element", async () => {
+  it("button to have a default aria-controls pointing to id of div.sidenav-body element", async () => {
     const el = await fixture(html`
       <sgds-sidenav-item>
         <span slot="title">Title 1</span>
@@ -267,7 +270,7 @@ describe("a11y - sgds-sidenav-item", () => {
     `);
     const button = el.shadowRoot?.querySelector("button");
     const buttonAriaControlAttr = button?.getAttribute("aria-controls");
-    const collapseId = el.shadowRoot?.querySelector("div.collapse")?.getAttribute("id");
+    const collapseId = el.shadowRoot?.querySelector("div.sidenav-body")?.getAttribute("id");
     expect(collapseId).to.contain("sidenav");
     expect(collapseId).to.contain("collapse");
     expect(buttonAriaControlAttr).to.equal(collapseId);
