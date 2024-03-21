@@ -19,6 +19,10 @@
             font-family: "bootstrap-icons", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         } */
 
+        :root {
+            --sgds-primary: blue;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -137,7 +141,22 @@
 
 <body class="d-flex flex-column min-vh-100"></body>
 <sgds-masthead fluid></sgds-masthead>
+<sgds-mainnav>
+    <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
+    <sgds-mainnav-item>ArgsTable Controlled </sgds-mainnav-item>
+    <sgds-mainnav-dropdown togglertext="Dropdown" close="default">
+        <sgds-dropdown-item href="https://google.com">Item 1</sgds-dropdown-item>
+        <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
+        <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
+    </sgds-mainnav-dropdown>
+    <sgds-mainnav-item href="#">About</sgds-mainnav-item>
+    <sgds-mainnav-item href="#" slot="end">Contact Us</sgds-mainnav-item>
+    <sgds-button slot="end">Login</sgds-button>
+    <sgds-button slot="non-collapsible" iconcolor="black" iconwidth="28px" iconheight="28px">test</sgds-button>
+</sgds-mainnav>
 <div class="grid">
+
+
     <sgds-mainnav>
         <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
         <sgds-mainnav-item active href="#">Home</sgds-mainnav-item>

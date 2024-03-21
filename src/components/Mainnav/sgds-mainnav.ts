@@ -1,12 +1,13 @@
-import Collapse from "bootstrap/js/src/collapse";
-import type { Collapse as BsCollapse } from "bootstrap";
 import { html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { Ref, createRef, ref } from "lit/directives/ref.js";
 import SgdsElement from "../../base/sgds-element";
+import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/animate";
+import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { LG_BREAKPOINT, MD_BREAKPOINT, SM_BREAKPOINT, XL_BREAKPOINT, XXL_BREAKPOINT } from "../../utils/breakpoints";
+import { waitForEvent } from "../../utils/event";
 import genId from "../../utils/generateId";
+import { watch } from "../../utils/watch";
 import styles from "./sgds-mainnav.scss";
 
 export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
@@ -24,6 +25,11 @@ const SIZES = {
 /**
  * @summary This component is the primary means that your users will use to navigate through your portal. It includes horizontal navigation and branding to identify your site.
  *
+ * @event sgds-show - Emitted on show. Only for collapsed menu.
+ * @event sgds-after-show - Emitted on show after animation has completed. Only for collapsed menu.
+ * @event sgds-hide - Emitted on hide. Only for collapsed menu.
+ * @event sgds-after-hide - Emitted on hide after animation has completed. Only for collapsed menu.
+ *
  * @slot - Default slot of SgdsMainnav. Pass in SgdsMainnavItem elements here.
  * @slot end - Elements in this slot will be positioned to the right end of .navbar-nav. Elements in this slot will also be included in collapsed menu.
  * @slot brand - Brand slot of SgdsMainnav. Pass in brand logo img here
@@ -40,22 +46,21 @@ const SIZES = {
 export class SgdsMainnav extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
+  /** @internal */
+  @query(".navbar-toggler") header: HTMLElement;
+  /** @internal */
+  @query(".navbar-body") body: HTMLElement;
+
   constructor() {
     super();
     window.addEventListener("resize", () => {
       const newBreakpointReachedValue = window.innerWidth < SIZES[this.expand];
       if (newBreakpointReachedValue !== this.breakpointReached) {
+        this.body.hidden = !this.expanded;
+        this.body.style.height = this.expanded ? "auto" : "0";
         this.requestUpdate();
       }
     });
-  }
-  /** @internal */
-  private myCollapse: Ref<HTMLElement> = createRef();
-  /** @internal */
-  private bsCollapse: BsCollapse = null;
-
-  private _onClickButton() {
-    this.bsCollapse.toggle();
   }
 
   /** The href link for brand logo */
@@ -75,24 +80,88 @@ export class SgdsMainnav extends SgdsElement {
   /** @internal */
   @state()
   expanded = false;
-
   firstUpdated() {
-    this.bsCollapse = new Collapse(this.myCollapse.value, {
-      toggle: false
-    });
-    this.myCollapse.value.addEventListener("show.bs.collapse", () => {
-      this.expanded = true;
-    });
-    this.myCollapse.value.addEventListener("shown.bs.collapse", () => {
-      this.expanded = true;
-    });
-    this.myCollapse.value.addEventListener("hide.bs.collapse", () => {
-      this.expanded = false;
-    });
-    this.myCollapse.value.addEventListener("hidden.bs.collapse", () => {
-      this.expanded = false;
-    });
+    if (this.breakpointReached) {
+      this.body.hidden = !this.expanded;
+      this.body.style.height = this.expanded ? "auto" : "0";
+    } else {
+      this.body.hidden = false;
+      this.body.style.height = "";
+    }
   }
+
+  updated() {
+    // if (this.breakpointReached) {
+    //   this.body.hidden = !this.expanded;
+    //   this.body.style.height = this.expanded ? "auto" : "0";
+    // }
+  }
+
+  private handleSummaryClick() {
+    if (this.expanded) {
+      this.hide();
+    } else {
+      this.show();
+    }
+
+    this.header.focus();
+  }
+  @watch("expanded", { waitUntilFirstUpdate: true })
+  async handleOpenChange() {
+    if (this.expanded) {
+      // Show
+      const sgdsShow = this.emit("sgds-show", { cancelable: true });
+      if (sgdsShow.defaultPrevented) {
+        this.expanded = false;
+        return;
+      }
+
+      await stopAnimations(this.body);
+      this.body.hidden = false;
+
+      const { keyframes, options } = getAnimation(this, "mainnav.show");
+      await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
+      this.body.style.height = "auto";
+
+      this.emit("sgds-after-show");
+    } else {
+      // Hide
+      const slHide = this.emit("sgds-hide", { cancelable: true });
+      if (slHide.defaultPrevented) {
+        this.expanded = true;
+        return;
+      }
+
+      await stopAnimations(this.body);
+
+      const { keyframes, options } = getAnimation(this, "mainnav.hide");
+      await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
+      this.body.hidden = true;
+      this.body.style.height = "auto";
+
+      this.emit("sgds-after-hide");
+    }
+  }
+
+  /** Shows the menu. For when mainnav is in the collapsed form */
+  public async show() {
+    if (this.expanded) {
+      return;
+    }
+
+    this.expanded = true;
+    return waitForEvent(this, "sgds-after-show");
+  }
+
+  /** Hide the menu. For when mainnav is in the collapsed form */
+  public async hide() {
+    if (!this.expanded) {
+      return;
+    }
+    this.expanded = false;
+    return waitForEvent(this, "sgds-after-hide");
+  }
+
   // assigning name attribute to elements added in slot="end", to use wildcard css selector to assign styles only to *-mainnav-item
   _handleSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
@@ -104,7 +173,7 @@ export class SgdsMainnav extends SgdsElement {
 
   render() {
     this.breakpointReached = window.innerWidth < SIZES[this.expand];
-    const collapseClass = "collapse navbar-collapse order-2";
+    const collapseClass = "navbar-body navbar-collapse order-2";
     return html`
       <nav
         class="sgds navbar navbar-light
@@ -117,7 +186,7 @@ export class SgdsMainnav extends SgdsElement {
         <button
           class="navbar-toggler order-1"
           type="button"
-          @click=${() => this._onClickButton()}
+          @click=${this.handleSummaryClick}
           aria-controls="${this.collapseId}"
           aria-expanded="${this.expanded}"
           aria-label="Toggle navigation"
@@ -136,7 +205,7 @@ export class SgdsMainnav extends SgdsElement {
             />
           </svg>
         </button>
-        <div class=${collapseClass} ${ref(this.myCollapse)} id=${this.collapseId}>
+        <div class=${collapseClass} id=${this.collapseId}>
           <ul class="navbar-nav">
             <slot></slot>
             <slot
@@ -160,5 +229,20 @@ export class SgdsMainnav extends SgdsElement {
     }
   }
 }
+setDefaultAnimation("mainnav.show", {
+  keyframes: [
+    { height: "0", opacity: "0" },
+    { height: "auto", opacity: "1" }
+  ],
+  options: { duration: 200, easing: "ease-in-out" }
+});
+
+setDefaultAnimation("mainnav.hide", {
+  keyframes: [
+    { height: "auto", opacity: "1" },
+    { height: "0", opacity: "0" }
+  ],
+  options: { duration: 200, easing: "ease-in-out" }
+});
 
 export default SgdsMainnav;
