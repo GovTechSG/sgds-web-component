@@ -2,7 +2,7 @@ import { html } from "lit";
 import { property, queryAsync } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
-import styles from "./sgds-mainnav-dropdown.scss";
+import styles from "./sgds-mainnav-dropdown.scss?inline";
 import { DropdownListElement } from "../../base/dropdown-list-element";
 import genId from "../../utils/generateId";
 import { classMap } from "lit/directives/class-map.js";

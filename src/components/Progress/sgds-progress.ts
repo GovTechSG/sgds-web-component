@@ -1,7 +1,7 @@
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-progress.scss";
+import styles from "./sgds-progress.scss?inline";
 import { html } from "lit";
 
 /**

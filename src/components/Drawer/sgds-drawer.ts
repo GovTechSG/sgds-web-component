@@ -9,7 +9,7 @@ import { waitForEvent } from "../../utils/event.js";
 import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
 import { HasSlotController } from "../../utils/slot.js";
 import { watch } from "../../utils/watch.js";
-import styles from "./sgds-drawer.scss";
+import styles from "./sgds-drawer.scss?inline";
 
 /**
  * @summary Drawers slide in from a container to expose additional options and information.

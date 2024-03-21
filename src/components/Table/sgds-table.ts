@@ -2,7 +2,7 @@ import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-table.scss";
+import styles from "./sgds-table.scss?inline";
 
 /**
  * @summary The use of a table is to organise a collections of data into readable rows

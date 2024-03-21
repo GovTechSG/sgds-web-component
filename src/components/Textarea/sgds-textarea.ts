@@ -8,7 +8,7 @@ import { defaultValue } from "../../utils/defaultvalue";
 import { FormSubmitController, SgdsFormControl } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-textarea.scss";
+import styles from "./sgds-textarea.scss?inline";
 
 /**
  * @summary Text areas allow for the collection of input longer than a single line.

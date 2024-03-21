@@ -2,7 +2,7 @@ import { LitElement, html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-tab-panel.scss";
+import styles from "./sgds-tab-panel.scss?inline";
 
 let id = 0;
 

@@ -2,7 +2,7 @@ import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-badge.scss";
+import styles from "./sgds-badge.scss?inline";
 
 export type BadgeVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
 

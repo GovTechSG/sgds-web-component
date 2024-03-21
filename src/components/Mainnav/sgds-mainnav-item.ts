@@ -1,5 +1,5 @@
 import LinkElement from "../../base/link-element";
-import styles from "./sgds-mainnav-item.scss";
+import styles from "./sgds-mainnav-item.scss?inline";
 
 /**
  * @slot default - slot for SgdsMainnavItem element.

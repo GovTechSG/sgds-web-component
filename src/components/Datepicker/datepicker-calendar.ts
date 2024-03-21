@@ -3,7 +3,7 @@ import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import { createYearViewArray, setTimeToNoon } from "../../utils/time";
 import { watch } from "../../utils/watch";
-import styles from "./datepicker-calendar.scss";
+import styles from "./datepicker-calendar.scss?inline";
 import { ViewEnum } from "./types";
 import { classMap } from "lit/directives/class-map.js";
 import { isAfter, isEqual } from "date-fns";

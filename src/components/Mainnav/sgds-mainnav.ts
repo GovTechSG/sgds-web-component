@@ -8,7 +8,7 @@ import { LG_BREAKPOINT, MD_BREAKPOINT, SM_BREAKPOINT, XL_BREAKPOINT, XXL_BREAKPO
 import { waitForEvent } from "../../utils/event";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-mainnav.scss";
+import styles from "./sgds-mainnav.scss?inline";
 
 export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
 

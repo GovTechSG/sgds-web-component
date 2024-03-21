@@ -4,7 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 import { SgdsTab } from "./sgds-tab";
-import styles from "./sgds-tab-group.scss";
+import styles from "./sgds-tab-group.scss?inline";
 import { SgdsTabPanel } from "./sgds-tab-panel";
 /**
  * @summary Tab Group organizes content into a container with the syncing of tab and their corresponding panels.

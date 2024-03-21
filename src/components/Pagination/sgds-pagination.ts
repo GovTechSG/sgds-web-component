@@ -1,7 +1,7 @@
 import { TemplateResult, html, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-pagination.scss";
+import styles from "./sgds-pagination.scss?inline";
 import { watch } from "../../utils/watch";
 import { classMap } from "lit/directives/class-map.js";
 

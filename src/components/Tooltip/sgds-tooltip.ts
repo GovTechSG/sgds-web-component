@@ -6,7 +6,7 @@ import { html } from "lit";
 import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-tooltip.scss";
+import styles from "./sgds-tooltip.scss?inline";
 
 /**
  * @summary Tooltips display more information when users hover over, focus on, or interact with an element.

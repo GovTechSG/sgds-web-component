@@ -2,8 +2,8 @@ import { property } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-alert-link.scss";
 import alertLinkStyle from "./alert-link.style";
+import styles from "./sgds-alert-link.scss?inline";
 /**
  * @summary Alert link are used within the alert's message that is passed into the default slot of `<sgds-alert>`
  *
