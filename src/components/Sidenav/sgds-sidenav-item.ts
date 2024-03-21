@@ -1,12 +1,16 @@
-import Collapse from "bootstrap/js/src/collapse";
-import type { Collapse as BsCollapse } from "bootstrap";
+// import Collapse from "bootstrap/js/src/collapse";
+// import type { Collapse as BsCollapse } from "bootstrap";
 import { html } from "lit";
-import { property } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import SgdsElement from "../../base/sgds-element";
 import genId from "../../utils/generateId";
-import styles from "./sgds-sidenav-item.scss";
+import styles from "./sgds-sidenav-item.scss?inline";
+import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
+import { watch } from "../../utils/watch";
+import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/animate";
+import { waitForEvent } from "../../utils/event";
 
 /**
  *
@@ -25,11 +29,13 @@ import styles from "./sgds-sidenav-item.scss";
 export class SgdsSidenavItem extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
+  // /** @internal */
+  // private myCollapse: Ref<HTMLElement> = createRef();
+  // /** @internal */
+  // private bsCollapse: BsCollapse = null;
+  @query(".sidenav-body") body: HTMLElement;
   /** @internal */
-  private myCollapse: Ref<HTMLElement> = createRef();
-  /** @internal */
-  private bsCollapse: BsCollapse = null;
-
+  @query(".sidenav-button") header: HTMLElement;
   /**
    *  when true, toggles the sidenav-item to open on first load and set the active stylings.
    */
@@ -66,58 +72,151 @@ export class SgdsSidenavItem extends SgdsElement {
     this.emit("sgds-toggle", { detail: { index: this.index } });
   }
 
-  private _onClickButton() {
-    this._onClick();
-    if (this.bsCollapse) {
-      this.bsCollapse.toggle();
-    }
-  }
+  // private _onClickButton() {
+  //   this._onClick();
+  //   if (this.bsCollapse) {
+  //     this.bsCollapse.toggle();
+  //   }
+  // }
   private _onClickLink() {
     this._onClick();
     this.active = true;
   }
 
-  /**
-   * When invoked, closes the SgdsSidenavItem
-   */
-  public closeItem() {
-    this.active = false;
-    if (this.bsCollapse) this.bsCollapse.hide();
-  }
-  /**
-   * When invoked, opens the SgdsSidenavItem
-   */
-  public openItem() {
+  // /**
+  //  * When invoked, closes the SgdsSidenavItem
+  //  */
+  // public closeItem() {
+  //   this.active = false;
+  //   if (this.bsCollapse) this.bsCollapse.hide();
+  // }
+  // /**
+  //  * When invoked, opens the SgdsSidenavItem
+  //  */
+  // public openItem() {
+  //   this.active = true;
+  //   if (this.bsCollapse) this.bsCollapse.show();
+  // }
+
+  /** Shows the accordion. */
+  public async show() {
+    if (this.active) {
+      return;
+    }
+
     this.active = true;
-    if (this.bsCollapse) this.bsCollapse.show();
+    return waitForEvent(this, "sgds-after-show");
   }
+
+  /** Hide the accordion */
+  public async hide() {
+    if (!this.active) {
+      return;
+    }
+    this.active = false;
+    return waitForEvent(this, "sgds-after-hide");
+  }
+
+  // firstUpdated() {
+  //   // if sidenav has menu, initialise bootstrap collapse
+  //   if (!this.href) {
+  //     this.bsCollapse = new Collapse(this.myCollapse.value, {
+  //       toggle: this.active
+  //     });
+
+  //     this.myCollapse.value.addEventListener("show.bs.collapse", () => {
+  //       this.active = true;
+  //     });
+  //     this.myCollapse.value.addEventListener("shown.bs.collapse", () => {
+  //       this.active = true;
+  //     });
+  //     this.myCollapse.value.addEventListener("hide.bs.collapse", () => {
+  //       this.active = false;
+  //     });
+  //     this.myCollapse.value.addEventListener("hidden.bs.collapse", () => {
+  //       this.active = false;
+  //     });
+  //   }
+  // }
 
   firstUpdated() {
-    // if sidenav has menu, initialise bootstrap collapse
-    if (!this.href) {
-      this.bsCollapse = new Collapse(this.myCollapse.value, {
-        toggle: this.active
-      });
+    this.body.hidden = !this.active;
+    this.body.style.height = this.active ? "auto" : "0";
+  }
+  private handleSummaryClick() {
+    this.emit("sgds-toggle", { detail: { index: this.index } });
+    if (this.active) {
+      this.hide();
+    } else {
+      this.show();
+    }
 
-      this.myCollapse.value.addEventListener("show.bs.collapse", () => {
-        this.active = true;
-      });
-      this.myCollapse.value.addEventListener("shown.bs.collapse", () => {
-        this.active = true;
-      });
-      this.myCollapse.value.addEventListener("hide.bs.collapse", () => {
+    this.header.focus();
+  }
+  private handleSummaryKeyDown(event: KeyboardEvent) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+
+      if (this.active) {
+        this.hide();
+      } else {
+        this.show();
+      }
+    }
+
+    if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+      event.preventDefault();
+      this.hide();
+    }
+
+    if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+      event.preventDefault();
+      this.show();
+    }
+  }
+
+  @watch("active", { waitUntilFirstUpdate: true })
+  async handleOpenChange() {
+    if (this.active) {
+      // Show
+      const sgdsShow = this.emit("sgds-show", { cancelable: true });
+      if (sgdsShow.defaultPrevented) {
         this.active = false;
-      });
-      this.myCollapse.value.addEventListener("hidden.bs.collapse", () => {
-        this.active = false;
-      });
+        return;
+      }
+
+      await stopAnimations(this.body);
+      this.body.hidden = false;
+
+      const { keyframes, options } = getAnimation(this, "sidenav.show");
+      await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
+      this.body.style.height = "auto";
+
+      this.emit("sgds-after-show");
+    } else {
+      // Hide
+      const slHide = this.emit("sgds-hide", { cancelable: true });
+      if (slHide.defaultPrevented) {
+        this.active = true;
+        return;
+      }
+
+      await stopAnimations(this.body);
+
+      const { keyframes, options } = getAnimation(this, "sidenav.hide");
+      await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
+      this.body.hidden = true;
+      this.body.style.height = "auto";
+
+      this.emit("sgds-after-hide");
     }
   }
 
   render() {
     const withMenuTemplate = html` <button
-        @click=${() => this._onClickButton()}
-        class="collapsed sidenav-btn ${classMap({
+        @click=${this.handleSummaryClick}
+        @keydown=${this.handleSummaryKeyDown}
+        class="sidenav-btn sidenav-button ${classMap({
           disabled: this.disabled,
           active: this.active
         })} "
@@ -144,7 +243,7 @@ export class SgdsSidenavItem extends SgdsElement {
           />
         </svg>
       </button>
-      <div class="collapse" ${ref(this.myCollapse)} id="${this.collapseId}">
+      <div class=" sidenav-body" id="${this.collapseId}">
         <ul class="sidenav-list" aria-labelledby="${this.buttonId}">
           <slot></slot>
         </ul>
@@ -171,5 +270,19 @@ export class SgdsSidenavItem extends SgdsElement {
     `;
   }
 }
+setDefaultAnimation("sidenav.show", {
+  keyframes: [
+    { height: "0", opacity: "0" },
+    { height: "auto", opacity: "1" }
+  ],
+  options: { duration: 200, easing: "ease-in-out" }
+});
 
+setDefaultAnimation("sidenav.hide", {
+  keyframes: [
+    { height: "auto", opacity: "1" },
+    { height: "0", opacity: "0" }
+  ],
+  options: { duration: 200, easing: "ease-in-out" }
+});
 export default SgdsSidenavItem;

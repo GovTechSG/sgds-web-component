@@ -2,7 +2,7 @@ import { html } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import SgdsSidenavItem from "./sgds-sidenav-item";
-import styles from "./sgds-sidenav.scss";
+import styles from "./sgds-sidenav.scss?inline";
 
 /**
  * @summary The side navigation is used to display a list of links to move between pages within a related category.
@@ -27,7 +27,7 @@ export class SgdsSidenav extends SgdsElement {
           const children = this.shadowRoot.querySelector("slot").assignedElements({ flatten: true });
           for (let i = 0; i < children.length; i++) {
             if (e.detail.index != i) {
-              (children[i] as SgdsSidenavItem).closeItem();
+              (children[i] as SgdsSidenavItem).hide();
             }
           }
         });
