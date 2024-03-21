@@ -3,7 +3,7 @@ import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-tab.scss";
+import styles from "./sgds-tab.scss?inline";
 
 let id = 0;
 /**

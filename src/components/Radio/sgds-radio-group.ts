@@ -5,7 +5,7 @@ import SgdsElement from "../../base/sgds-element";
 import { FormSubmitController } from "../../utils/form";
 import { watch } from "../../utils/watch";
 import SgdsRadio from "./sgds-radio";
-import styles from "./sgds-radio-group.scss";
+import styles from "./sgds-radio-group.scss?inline";
 
 /**
  * @summary RadioGroup group multiple radios so they function as a single form control.

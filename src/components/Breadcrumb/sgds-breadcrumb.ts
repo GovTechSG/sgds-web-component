@@ -3,7 +3,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsBreadcrumbItem from "./sgds-breadcrumb-item";
-import styles from "./sgds-breadcrumb.scss";
+import styles from "./sgds-breadcrumb.scss?inline";
 
 /**
  * @summary Breadcrumbs help users to navigate and understand where they are on the current website or service.

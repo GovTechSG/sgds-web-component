@@ -13,7 +13,7 @@ import "./components/Dropdown";
 import "./components/FileUpload";
 import "./components/Footer";
 import "./components/Input";
-import "./components/Mainnav";
+// import "./components/Mainnav";
 import "./components/Masthead";
 import "./components/Modal";
 import "./components/Pagination";

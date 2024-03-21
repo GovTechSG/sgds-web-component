@@ -5,7 +5,7 @@ import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { SgdsInput } from "../Input/sgds-input";
-import styles from "./sgds-combo-box.scss";
+import styles from "./sgds-combo-box.scss?inline";
 import { watch } from "../../utils/watch";
 import { DropdownListElement } from "../../base/dropdown-list-element";
 

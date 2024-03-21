@@ -3,7 +3,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import mergeDeep from "../../utils/mergeDeep";
-import styles from "./sgds-toast-container.scss";
+import styles from "./sgds-toast-container.scss?inline";
 /**
  * @summary ToastContainer is the container component to position `sgds-toast` in screen. When there is multiple toasts in the container, the toast components are stacked vertically.
  *

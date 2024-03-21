@@ -6,7 +6,7 @@ import { animateTo } from "../../utils/animate";
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-toast.scss";
+import styles from "./sgds-toast.scss?inline";
 
 /**
  * @summary Toast allows you to convey quick messaging notifications to the user.

@@ -4,7 +4,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { html, literal } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import { FormSubmitController } from "../../utils/form";
-import styles from "./sgds-button.scss";
+import styles from "./sgds-button.scss?inline";
 
 export type ButtonVariant =
   | "primary"

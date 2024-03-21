@@ -9,7 +9,7 @@ import { watch } from "../../utils/watch";
 import { DatepickerCalendar } from "./datepicker-calendar";
 import { DatepickerHeader } from "./datepicker-header";
 import DatepickerInput from "./datepicker-input";
-import styles from "./sgds-datepicker.scss";
+import styles from "./sgds-datepicker.scss?inline";
 import { ViewEnum } from "./types";
 import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
 import { classMap } from "lit/directives/class-map.js";

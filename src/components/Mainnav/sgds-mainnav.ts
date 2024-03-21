@@ -7,7 +7,7 @@ import { Ref, createRef, ref } from "lit/directives/ref.js";
 import SgdsElement from "../../base/sgds-element";
 import { LG_BREAKPOINT, MD_BREAKPOINT, SM_BREAKPOINT, XL_BREAKPOINT, XXL_BREAKPOINT } from "../../utils/breakpoints";
 import genId from "../../utils/generateId";
-import styles from "./sgds-mainnav.scss";
+import styles from "./sgds-mainnav.scss?inline";
 
 export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
 
@@ -39,7 +39,6 @@ const SIZES = {
  */
 export class SgdsMainnav extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
-
   constructor() {
     super();
     window.addEventListener("resize", () => {

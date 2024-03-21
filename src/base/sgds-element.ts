@@ -1,5 +1,5 @@
 import { LitElement } from "lit";
-import styles from "./sgds-element.scss";
+import styles from "./sgds-element.scss?inline";
 
 /**
  * @cssprop --sgds-{stateColor} - State colors in hexadecimal value

@@ -6,7 +6,7 @@ import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-accordion-item.scss";
+import styles from "./sgds-accordion-item.scss?inline";
 
 /**
  *

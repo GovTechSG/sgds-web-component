@@ -1,7 +1,7 @@
 import { html } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-footer.scss";
+import styles from "./sgds-footer.scss?inline";
 
 export interface ColumnLinks {
   title: string;
