@@ -6,7 +6,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import SgdsElement from "../../base/sgds-element";
 import genId from "../../utils/generateId";
-import styles from "./sgds-sidenav-item.scss";
+import styles from "./sgds-sidenav-item.scss?inline";
 
 /**
  *
