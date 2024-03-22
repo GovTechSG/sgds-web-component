@@ -1,3 +1,55 @@
+## v1.1.0 (2024-03-22)
+
+### Feat
+
+- **datepicker**: incomplete range date show feedback on blur
+- **datepicker**: implement elementinternals for form submission
+- **datepicker**: in form context wip
+- **datepicker**: displayDate prop
+- **datepicker**: on invalid, reset calendar to today date
+- **datepicker**: query of shadowRoot input needs to be asynchronouse
+- **datepicker**: wip position of buttons with hinttext and label
+- **datepicker**: add invalidFeedback prop
+- **datepicker**: add validation message
+- **datepicker**: update mask value when calendar dates are clicked
+- **datepicker**: input validations, range wip
+- **datepicker**: range input mask wip
+- **datepicker**: validation on input mask during typing and after completion
+- **datepicker**: add input mask
+- **datepicker**: add open calendar button and shift toggle fn from input to button
+- **datepicker**: sync end dates navigation between months
+- **mainnav-dropdown**: add missing classes for active state and drop… (#161) [skip-cd]
+- **mainnav-dropdown**: add missing classes for active state and dropdown
+- **datepicker**: start and end colors for dates
+- **mainnav-dropdown**: add missing classes for active state and dropdown
+- **datepicker**: month range highlights
+- **datepicker**: change year when keyboard arrow pressed at edges
+- **datepicker**: implement shift tab focus trap
+- **datepicker**: complete focus trap loop with tab keypress
+- **datepicker**: month and years keyboard nav
+- **datepicker**: syncing focus with click handlers
+- **datepicker**: focus persist wip
+- **datepicker**: enter key for date view complete
+- **datepicker**: see description
+- **datepicker**: navigate within calendar day view in the month
+- **datepicker**: wip arrowdown navigate menu poc
+- **datepicker**: focusing active day when calendar shows
+
+### Fix
+
+- **tooltip**: console warnings
+- **tooltip**: console warnings
+- **test**: flaky test cases for tdEl having 2 tabindex=3
+- **progress**: fix progress module exports
+- **config files**: fix config files to exclude "cypress" and "cypress.config.ts"
+
+### Refactor
+
+- **datepicker**: rearrange hinttext and label in datepicker-input
+- **input**: create functons to render template result
+- **datepicker**: separate input mask component|
+- **datepicker**: rendering of views
+
 ## v1.0.2 (2023-10-23)
 
 ### Fix
