@@ -7,7 +7,7 @@ import { getAnimation, setDefaultAnimation } from "../../utils/animation-registr
 import { waitForEvent } from "../../utils/event";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-sidenav-item.scss";
+import styles from "./sgds-sidenav-item.scss?inline";
 
 /**
  *

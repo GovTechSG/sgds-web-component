@@ -2,8 +2,8 @@ import { html } from "lit";
 import { property, queryAssignedNodes } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import SgdsSidenavItem from "./sgds-sidenav-item";
-import styles from "./sgds-sidenav.scss";
 import { classMap } from "lit/directives/class-map.js";
+import styles from "./sgds-sidenav.scss?inline";
 
 /**
  * @summary The side navigation is used to display a list of links to move between pages within a related category.
