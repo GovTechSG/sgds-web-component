@@ -121,7 +121,7 @@ export class SgdsSidenavItem extends SgdsElement {
       this.show();
     }
 
-    this._onToggle()
+    this._onToggle();
     this.header.focus();
   }
   private _handleSummaryKeyDown(event: KeyboardEvent) {
@@ -148,7 +148,7 @@ export class SgdsSidenavItem extends SgdsElement {
 
   @watch("active", { waitUntilFirstUpdate: true })
   async handleOpenChange() {
-    if(this.href) return;
+    if (this.href) return;
     if (this.active) {
       // Show
       const sgdsShow = this.emit("sgds-show", { cancelable: true });

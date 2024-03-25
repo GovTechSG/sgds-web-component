@@ -56,9 +56,10 @@ export class SgdsMainnav extends SgdsElement {
     window.addEventListener("resize", () => {
       const newBreakpointReachedValue = window.innerWidth < SIZES[this.expand];
       if (newBreakpointReachedValue !== this.breakpointReached) {
-        this.body.hidden = !this.expanded;
-        this.body.style.height = this.expanded ? "auto" : "0";
         this.requestUpdate();
+      } else {
+        this.body ? (this.body.hidden = true) : null;
+        this.expanded = false;
       }
     });
   }
@@ -81,22 +82,11 @@ export class SgdsMainnav extends SgdsElement {
   @state()
   expanded = false;
   firstUpdated() {
-    if (this.breakpointReached) {
-      this.body.hidden = !this.expanded;
-      this.body.style.height = this.expanded ? "auto" : "0";
-    } else {
-      this.body.hidden = false;
-      this.body.style.height = "";
+    if (this.breakpointReached && this.body) {
+      this.expanded = false;
+      this.body.hidden = true;
     }
   }
-
-  updated() {
-    // if (this.breakpointReached) {
-    //   this.body.hidden = !this.expanded;
-    //   this.body.style.height = this.expanded ? "auto" : "0";
-    // }
-  }
-
   private handleSummaryClick() {
     if (this.expanded) {
       this.hide();
@@ -106,43 +96,51 @@ export class SgdsMainnav extends SgdsElement {
 
     this.header.focus();
   }
+
+  private async _animateToShow() {
+    const sgdsShow = this.emit("sgds-show", { cancelable: true });
+    if (sgdsShow.defaultPrevented) {
+      this.expanded = false;
+      return;
+    }
+
+    await stopAnimations(this.body);
+    this.body.hidden = false;
+
+    const { keyframes, options } = getAnimation(this, "mainnav.show");
+    await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
+    this.body.style.height = "auto";
+
+    this.emit("sgds-after-show");
+  }
+
+  private async _animateToHide() {
+    const slHide = this.emit("sgds-hide", { cancelable: true });
+    if (slHide.defaultPrevented) {
+      this.expanded = true;
+      return;
+    }
+
+    await stopAnimations(this.body);
+
+    const { keyframes, options } = getAnimation(this, "mainnav.hide");
+    await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
+    this.body.hidden = true;
+    this.body.style.height = "auto";
+
+    this.emit("sgds-after-hide");
+  }
+
   @watch("expanded", { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.expanded) {
       // Show
-      const sgdsShow = this.emit("sgds-show", { cancelable: true });
-      if (sgdsShow.defaultPrevented) {
-        this.expanded = false;
-        return;
-      }
-
-      await stopAnimations(this.body);
-      this.body.hidden = false;
-
-      const { keyframes, options } = getAnimation(this, "mainnav.show");
-      await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
-      this.body.style.height = "auto";
-
-      this.emit("sgds-after-show");
+      this._animateToShow();
     } else {
       // Hide
-      const slHide = this.emit("sgds-hide", { cancelable: true });
-      if (slHide.defaultPrevented) {
-        this.expanded = true;
-        return;
-      }
-
-      await stopAnimations(this.body);
-
-      const { keyframes, options } = getAnimation(this, "mainnav.hide");
-      await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
-      this.body.hidden = true;
-      this.body.style.height = "auto";
-
-      this.emit("sgds-after-hide");
+      this._animateToHide();
     }
   }
-
   /** Shows the menu. For when mainnav is in the collapsed form */
   public async show() {
     if (this.expanded) {
