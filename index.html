@@ -11,6 +11,7 @@
     <script
         src="/node_modules/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
     <!-- <script type="module" id="console-components-gateway"
   src="https://dev.assets.developer.tech.gov.sg/console-components/gateway.es5.js" nonce={nonce || undefined}></script> -->
     <style>
@@ -211,74 +212,6 @@
 
     <main>
         <div class="container">
-            <div class="sgds accordion" id="accordionExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Accordion Item #1
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                        data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the
-                            collapse
-                            plugin adds the appropriate classes that we use to style each element. These classes control
-                            the overall
-                            appearance, as well as the showing and hiding via CSS transitions. You can modify any of
-                            this with
-                            custom CSS or overriding our default variables. It's also worth noting that just about any
-                            HTML can go
-                            within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Accordion Item #2
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                        data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until
-                            the collapse
-                            plugin adds the appropriate classes that we use to style each element. These classes control
-                            the overall
-                            appearance, as well as the showing and hiding via CSS transitions. You can modify any of
-                            this with
-                            custom CSS or overriding our default variables. It's also worth noting that just about any
-                            HTML can go
-                            within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Accordion Item #3
-                        </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                        data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
-                            collapse
-                            plugin adds the appropriate classes that we use to style each element. These classes control
-                            the overall
-                            appearance, as well as the showing and hiding via CSS transitions. You can modify any of
-                            this with
-                            custom CSS or overriding our default variables. It's also worth noting that just about any
-                            HTML can go
-                            within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
-                </div>
-            </div>
             <datepicker-input></datepicker-input>
             <h2>Progress</h2>
             <div class="row">
@@ -746,7 +679,7 @@
                 <div class="container">
                     <h2>Tooltip</h2>
                     Hover me
-                    <sgds-tooltip content="This is a tooltip" placement="top" trigger="click">
+                    <sgds-tooltip content="This is a tooltip" placement="top">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-info-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -760,6 +693,12 @@
                     links='[{"title":"Application Guidelines","url":"/application-guidelines/lorem-ipsum-one/second-level-a/","links":[{"label":"<div>hello world </div>","href":"/application-guidelines/lorem-ipsum-one/second-level-a/"},{"label":"Second Level B","href":"/application-guidelines/lorem-ipsum-two/part-A/"},{"label":"Lorem Ipsum Three","href":"/application-guidelines/lorem-ipsum-three/"}]},{"title":"Legislation","url":"https://google.com","external":true,"links":[{"label":"External Link One","href":"https://en.wikipedia.org/wiki/Year","external":true},{"label":"External Link Two","href":"https://en.wikipedia.org/wiki/Spring_(season)","external":true}]},{"title":"Resources","url":"/resource_room/","links":[{"label":"All","href":"/resource_room/"},{"label":"Forms and Templates","href":"/resource_room/forms-and-templates/"},{"label":"Guides","href":"/resource_room/guides/"}]}]'></sgds-footer>
 
                 <script>
+                    const drawer = document.querySelector( 'sgds-drawer' );
+                    const openButton = drawer.nextElementSibling;
+                    const closeButton = drawer.querySelector( 'sgds-button[variant="primary"]' );
+
+                    openButton.addEventListener( 'click', () => drawer.show() );
+                    closeButton.addEventListener( 'click', () => drawer.hide() );
 
                     async function fetchPosts() {
                         try {
@@ -889,19 +828,8 @@
 
 
 
-                    const drawer = document.querySelector( '.drawer-overview' );
-                    console.log( 'drawer' + drawer.nextElementSibling )
-                    const openButton = drawer.nextElementSibling;
-                    const closeButton = drawer.querySelector( 'sgds-button[variant="primary"]' );
-
-                    openButton.addEventListener( 'click', () => drawer.show() );
-                    closeButton.addEventListener( 'click', () => drawer.hide() );
 
                     const submitButton = document.querySelector( 'sgds-quantity-toggle#heyhey' );
-                    // submitButton.addEventListener('sgds-change', (e) => {
-                    //     e.preventDefault();
-                    //     console.log(e)
-                    // });
 
                     const checkedIconSvg1 = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-all" viewBox="0 0 16 16"><path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/></svg>`
 
@@ -911,38 +839,6 @@
                         e.preventDefault();
                         console.log( e );
                     } );
-
-
-                    // const tooltip = document.querySelector('sgds-tooltip');
-
-
-                    // const fileUpload = document.querySelector('sgds-fileupload');
-
-                    // fileUpload.addEventListener('sgds-files-selected', (event) => {
-                    // console.log('File list changed!', event);
-                    // });
-
-                    // grab reference to form
-
-                    // const formElem = document.querySelector('form');
-
-                    // // submit handler
-
-                    // formElem.addEventListener('submit', (e) => {
-                    //     // on form submission, prevent default
-                    //     e.preventDefault();
-
-                    //     //   console.log(formElem.shadowRoot?.querySelector('input[name="input1"]'));
-                    //     //   console.log(formElem.shadowRoot?.querySelector('input[name="cb1"]')); 
-                    //     //   console.log(formElem.shadowRoot?.querySelector('input[name="cb2"]')); 
-
-                    //     // construct a FormData object, which fires the formdata event
-                    //     const formData = new FormData(formElem);
-                    //     // formdata gets modified by the formdata event
-                    //     console.log(formData.get('input1'));
-                    //     console.log(formData.get('cb1'));
-                    //     console.log(formData.get('cb2'));
-                    // });
 
 
                     const form = document.querySelector( '.formtest' );
