@@ -37,6 +37,7 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  */
 export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) implements SgdsFormControl {
   static styles = [DropdownElement.styles, styles];
+  /**@internal */
   static formAssociated = true;
   private _internals: ElementInternals;
 
@@ -90,7 +91,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
 
   /** Provides the date context for Calendar to present the appropriate view. Defaults to today's date */
   @property({ attribute: false }) displayDate: Date;
-
+  /**@internal */
   @state() value = "";
 
   @state()
