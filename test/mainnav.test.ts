@@ -1,7 +1,7 @@
-import { SgdsMainnavItem, SgdsMainnav, SgdsMainnavDropdown } from "../src/components";
-import "../src/index";
-import { fixture, assert, expect, aTimeout, fixtureCleanup } from "@open-wc/testing";
+import { aTimeout, assert, expect, fixture, fixtureCleanup, nextFrame } from "@open-wc/testing";
 import { html } from "lit";
+import { SgdsMainnav, SgdsMainnavDropdown, SgdsMainnavItem, type MainnavExpandSize } from "../src/components";
+import "../src/index";
 
 describe("sgds-mainnav", () => {
   afterEach(() => fixtureCleanup());
@@ -48,7 +48,8 @@ describe("sgds-mainnav", () => {
           </svg>
        </button>
        <div
-         class="collapse navbar-collapse order-2"
+         class="navbar-body navbar-collapse order-2"
+         hidden=""
        >
          <ul class="navbar-nav">
            <slot>
@@ -63,7 +64,7 @@ describe("sgds-mainnav", () => {
   });
   it("expect div.collapse's id to equal to button's aria-controls", async () => {
     const el = await fixture(html`<sgds-mainnav></sgds-mainnav>`);
-    const collapse = el.shadowRoot?.querySelector("div.collapse");
+    const collapse = el.shadowRoot?.querySelector("div.navbar-body");
     const button = el.shadowRoot?.querySelector("button");
     expect(collapse?.getAttribute("id")).to.equal(button?.getAttribute("aria-controls"));
   });
@@ -89,7 +90,7 @@ describe("sgds-mainnav", () => {
     const classList = el.shadowRoot?.querySelector("nav.sgds.navbar")?.classList.value;
     expect(/navbar-expand/.test(classList as string)).to.be.false;
   });
-  const testSizes = ["sm", "md", "lg", "xl", "xxl"];
+  const testSizes: MainnavExpandSize[] = ["sm", "md", "lg", "xl", "xxl"];
   testSizes.forEach(size => {
     it(`when expand=${size}, nav class have .navbar-expand=${size}`, async () => {
       const el = await fixture(html`<sgds-mainnav expand=${size}></sgds-mainnav>`);
@@ -99,20 +100,23 @@ describe("sgds-mainnav", () => {
     });
   });
 
-  it("in default mode (collapse menu), when .navbar-toggler is clicked .navbar-collapse has .show class and toggler has aria-expanded true", async () => {
-    const el = await fixture(html`<sgds-mainnav expand="never"></sgds-mainnav>`);
+  it("in default mode (collapse menu), when .navbar-toggler is clicked .navbar-collapse has hidden attribute removed and toggler has aria-expanded true", async () => {
+    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="never"></sgds-mainnav>`);
     const mainNavCollapse = el.shadowRoot?.querySelector(".navbar-collapse");
-    expect(mainNavCollapse).not.to.have.class("show");
+    await el.updateComplete;
+    expect(mainNavCollapse).to.have.attribute("hidden");
     const toggler = el.shadowRoot?.querySelector("button.navbar-toggler") as HTMLButtonElement;
     expect(toggler.getAttribute("aria-expanded")).to.equal("false");
     toggler?.click();
-    expect(mainNavCollapse).to.have.class("collapsing");
-    await aTimeout(500);
-    expect(mainNavCollapse).to.have.class("show");
+    await nextFrame();
+    expect(mainNavCollapse).not.to.have.attribute("hidden");
+    // await aTimeout(500);
+
     expect(toggler.getAttribute("aria-expanded")).to.equal("true");
     toggler?.click();
     await aTimeout(500);
-    expect(mainNavCollapse).not.to.have.class("show");
+    // await waitUntil(() => expect(mainNavCollapse).to.have.attribute("hidden"))
+    expect(mainNavCollapse).to.have.attribute("hidden");
     expect(toggler.getAttribute("aria-expanded")).to.equal("false");
   });
   // initial window.innerWidth = 800
@@ -120,6 +124,7 @@ describe("sgds-mainnav", () => {
   // since window.innerWidth < LG_BREAKPOINT --> expect non-collapsible slot to be .order-2 (see first test)
   it("when expand=lg and window resize event occurs to above breakpoint, it changes order of non-collapsible slot, and end slot has class .slot-end", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="lg"></sgds-mainnav>`);
+    await el.updateComplete;
     expect(el.shadowRoot?.querySelector("slot[name='non-collapsible']")).to.have.class("order-1");
     expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class("slot-end");
     Object.defineProperty(window, "innerWidth", {
