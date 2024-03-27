@@ -40,6 +40,7 @@ export type FileUploadButtonVariant =
 
 export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   static styles = [SgdsElement.styles, styles];
+  /**@internal */
   static get scopedElements() {
     return {
       "sgds-button": SgdsButton
