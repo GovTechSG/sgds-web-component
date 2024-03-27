@@ -9,7 +9,18 @@ describe("sgds-sidenav", () => {
     const el = await fixture(html`<sgds-sidenav></sgds-sidenav>`);
     assert.shadowDom.equal(
       el,
-      ` <nav class="sidenav">
+      ` <nav>
+         <ul>
+          <slot></slot>
+        </ul>
+      </nav>`
+    );
+  });
+  it("when sticky=true, adds a sticky class to nav", async () => {
+    const el = await fixture(html`<sgds-sidenav sticky></sgds-sidenav>`);
+    assert.shadowDom.equal(
+      el,
+      ` <nav class="sticky">
          <ul>
           <slot></slot>
         </ul>

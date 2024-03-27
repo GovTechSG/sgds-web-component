@@ -1,7 +1,7 @@
 import { html } from "lit-html";
-export const Template = ({ alwaysOpen, active, href, activeSNL, hrefSNL, disabledSNL, disabledSNI }) => {
+export const Template = ({ alwaysOpen, active, href, activeSNL, hrefSNL, disabledSNL, disabledSNI, sticky }) => {
   return html`
-    <sgds-sidenav ?alwaysOpen=${alwaysOpen}>
+    <sgds-sidenav ?alwaysOpen=${alwaysOpen} ?sticky=${sticky}>
       <sgds-sidenav-item ?active=${active} href=${href} ?disabled=${disabledSNI}>
         <span slot="title">SideNav Item #1 (control by Argstable) </span>
         <sgds-sidenav-link href=${hrefSNL} ?active=${activeSNL} ?disabled=${disabledSNL}
