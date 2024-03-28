@@ -395,16 +395,44 @@
                 <br><br><br><br><br><br>
 
                 <h3>Test</h3>
-                <sgds-pagination dataLength="15" limit="3" itemsPerPage="5" currentPage="1"></sgds-pagination>
+                <sgds-pagination dataLength="15" limit="5" itemsPerPage="5" currentPage="1"
+                    showFirstPage></sgds-pagination>
 
                 <p>ellipsisOn, limit 3, ellipsisJump 6</p>
-                <sgds-pagination directionVariant="icon" dataLength="3" limit="7" itemsPerPage="1"
-                    currentPage="1"></sgds-pagination>
-                <sgds-pagination directionVariant="icon-text" limit="3" ellipsisJump="6" ellipsisOn
-                    dataLength="50"></sgds-pagination>
-                <sgds-pagination directionVariant="text" dataLength="50"></sgds-pagination>
-                <sgds-pagination directionVariant="text" dataLength="50" ellipsisOn ellipsisJump="6" itemsPerPage="5"
-                    limit="5"></sgds-pagination>
+                <sgds-pagination directionVariant="icon" dataLength="3" limit="7" itemsPerPage="1" currentPage="1"
+                    showFirstPage></sgds-pagination>
+                <sgds-pagination directionVariant="icon-text" limit="3" ellipsisJump="6" ellipsisOn dataLength="50"
+                    showFirstPage ellipsisOn></sgds-pagination>
+                <sgds-pagination directionVariant="text" dataLength="50" showFirstPage></sgds-pagination>
+                <sgds-pagination directionVariant="text" dataLength="50" ellipsisJump="6" itemsPerPage="5" limit="5"
+                    showFirstPage></sgds-pagination>
+
+                <p>ellipsisOn=false</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+                <p>ellipsisOn=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"
+                    ellipsisOn></sgds-pagination>
+                <p>ellipsisOn=false, showFirstPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"
+                    showFirstPage></sgds-pagination>
+                <p>ellipsisOn=false, showFirstPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"
+                    showFirstPage></sgds-pagination>
+                <p>ellipsisOn=false, showLastPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"
+                    showLastPage></sgds-pagination>
+                <p>ellipsisOn=true, showLastPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage
+                    ellipsisOn></sgds-pagination>
+                <p>ellipsisOn=false, showLastPage=true, showFirstPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage
+                    showFirstPage></sgds-pagination>
+                <p>ellipsisOn=true, showLastPage=true, showFirstPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage showFirstPage
+                    ellipsisOn></sgds-pagination>
+                <p>ellipsisOn=false, showLastPage=true, showFirstPage=true</p>
+                <sgds-pagination dataLength="2" itemsPerPage="1" currentPage="1" showLastPage
+                    showFirstPage></sgds-pagination>
             </div>
             <div class="container">
                 <h2>Button</h2>
