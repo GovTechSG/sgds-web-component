@@ -34,7 +34,6 @@ export class SgdsSidenav extends SgdsElement {
   async onToggle(event: Event): Promise<void> {
     const target = event.target as SgdsSidenavItem;
     const isSidenavLink = target.tagName === "SGDS-SIDENAV-LINK";
-    console.log(event.composedPath());
     // Let the event pass through the DOM so that it can be
     // prevented from the outside if a user so desires.
     if (this.alwaysOpen || event.defaultPrevented || isSidenavLink) {

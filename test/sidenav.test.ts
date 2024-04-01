@@ -1,7 +1,7 @@
 import { aTimeout, assert, elementUpdated, expect, fixture, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
-import { SgdsSidenavItem } from "../src/components";
+import { SgdsSidenavItem, type SgdsSidenavLink } from "../src/components";
 import "../src/index";
 
 describe("sgds-sidenav", () => {
@@ -178,7 +178,7 @@ describe("sgds-sidenav, -item, -link interactions", () => {
     expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).to.have.attribute("hidden");
     expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
 
-    // click on link should collapse the other two side navs
+    // click on sidnavitem link should collapse the other two side navs
     SgdsSidenavItemThree?.shadowRoot?.querySelector("a")?.click();
 
     // wait sometime for collapse to take place
@@ -232,6 +232,34 @@ describe("sgds-sidenav, -item, -link interactions", () => {
     expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
     expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
     expect(SgdsSidenavItemThree.shadowRoot?.querySelector("a.sidenav-btn")).to.have.class("active");
+  });
+
+  it("when clicking on sidenav-link, active sidenav-item remains open", async () => {
+    const hideHandler = sinon.spy();
+    const el = await fixture(html`<sgds-sidenav>
+      <sgds-sidenav-item active>
+        <span slot="title">Title 1</span>
+        <sgds-sidenav-link href="#" data-test="link">1</sgds-sidenav-link>
+        <sgds-sidenav-link href="#">2</sgds-sidenav-link>
+        <sgds-sidenav-link href="#">3</sgds-sidenav-link>
+      </sgds-sidenav-item>
+      <sgds-sidenav-item>
+        <span slot="title">Title 2</span>
+        <sgds-sidenav-link href="#">4</sgds-sidenav-link>
+        <sgds-sidenav-link href="#">5</sgds-sidenav-link>
+        <sgds-sidenav-link href="#">6</sgds-sidenav-link>
+      </sgds-sidenav-item>
+      <sgds-sidenav-item href="#">
+        <span slot="title">Title 3</span>
+      </sgds-sidenav-item>
+    </sgds-sidenav>`);
+    el.addEventListener("sgds-hide", hideHandler);
+    const SgdsSidenavItemOne = el.querySelectorAll("sgds-sidenav-item")[0];
+    const sidenavLinkOne = el.querySelector<SgdsSidenavLink>("sgds-sidenav-link[data-test='link']");
+    sidenavLinkOne?.click();
+    await aTimeout(500);
+    expect(hideHandler).not.to.be.called;
+    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
   });
 });
 describe("a11y - sgds-sidenav-item", () => {

@@ -11,7 +11,7 @@ import styles from "./sgds-sidenav-item.scss";
 
 /**
  *
- * @event sgds-toggle - Emitted when the dropdown is clicked.
+ * @event sgds-toggle - Emitted when the sidenav item's button is clicked.
  * @event sgds-show - Emitted on show.
  * @event sgds-after-show - Emitted on show after animation has completed.
  * @event sgds-hide - Emitted on hide.
@@ -167,8 +167,8 @@ export class SgdsSidenavItem extends SgdsElement {
       this.emit("sgds-after-show");
     } else {
       // Hide
-      const slHide = this.emit("sgds-hide", { cancelable: true });
-      if (slHide.defaultPrevented) {
+      const sgdsHide = this.emit("sgds-hide", { cancelable: true });
+      if (sgdsHide.defaultPrevented) {
         this.active = true;
         return;
       }
