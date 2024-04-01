@@ -1,6 +1,6 @@
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { format, parse } from "date-fns";
-import { html } from "lit";
+import { html, nothing } from "lit";
 import { property, query, queryAsync, state } from "lit/decorators.js";
 import { live } from "lit/directives/live.js";
 import { ref } from "lit/directives/ref.js";
@@ -103,6 +103,8 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
 
   @state() private focusedTabIndex = 3;
 
+  @state() dialogAriaLabel: string;
+
   private initialDisplayDate: Date;
 
   @queryAsync("sgds-datepicker-calendar")
@@ -110,6 +112,9 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
 
   @queryAsync("sgds-datepicker-input")
   private datepickerInputAsync: Promise<DatepickerInput>;
+
+  @queryAsync("sgds-datepicker-header")
+  private datepickerHeaderAsync: Promise<DatepickerHeader>;
 
   @query("sgds-datepicker-input")
   private datepickerInput: DatepickerInput;
@@ -362,6 +367,20 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
   private async _handleInputMaskChange(e: CustomEvent) {
     this.value = e.detail;
   }
+
+  private _dialogAriaLabel() {
+    const view = this.view.replace("s", "");
+    // const header = await this.datepickerHeaderAsync;
+    const header = this.shadowRoot?.querySelector<DatepickerHeader>("sgds-datepicker-header");
+    if (header) {
+      const headerText = header.renderHeader().toString().replace("-", "to");
+      this.dialogAriaLabel = `Choose ${view} from ${headerText}`;
+    }
+  }
+
+  updated() {
+    this._dialogAriaLabel();
+  }
   render() {
     const svgEl = html`
       <svg
@@ -438,6 +457,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
           class="sgds datepicker dropdown-menu"
           role="dialog"
           part="menu"
+          aria-label=${this.dialogAriaLabel}
           @click=${(event: MouseEvent) => event.stopPropagation()}
         >
           <sgds-datepicker-header

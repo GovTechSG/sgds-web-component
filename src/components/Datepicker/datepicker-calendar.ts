@@ -1,4 +1,4 @@
-import { HTMLTemplateResult, html } from "lit";
+import { HTMLTemplateResult, html, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import { createYearViewArray, setTimeToNoon } from "../../utils/time";
@@ -6,7 +6,7 @@ import { watch } from "../../utils/watch";
 import styles from "./datepicker-calendar.scss";
 import { ViewEnum } from "./types";
 import { classMap } from "lit/directives/class-map.js";
-import { isAfter, isEqual } from "date-fns";
+import { isAfter, isEqual, format } from "date-fns";
 
 const TODAY_DATE = new Date();
 
@@ -303,7 +303,6 @@ export class DatepickerCalendar extends SgdsElement {
     const selectedDates = this.selectedDate.map(d => setTimeToNoon(d));
 
     const rangeSelectedDates = this._generateIncrementDates();
-
     const minimumDate = this.minDate ? setTimeToNoon(new Date(this.minDate)) : null;
     const maximumDate = this.maxDate ? setTimeToNoon(new Date(this.maxDate)) : null;
     const year = this.displayDate.getFullYear();
@@ -323,9 +322,10 @@ export class DatepickerCalendar extends SgdsElement {
       const week = [];
       for (let j = 0; j <= 6; j++) {
         if (day <= monthLength && (i > 0 || j >= startingDayOfMonth)) {
-          const date = new Date(year, month, day, 12, 0, 0, 0).toISOString();
-          const beforeMinDate = minimumDate && Date.parse(date) < Date.parse(minimumDate.toISOString());
-          const afterMinDate = maximumDate && Date.parse(date) > Date.parse(maximumDate.toISOString());
+          const dateObj = new Date(year, month, day, 12, 0, 0, 0);
+          const dateStr = dateObj.toISOString();
+          const beforeMinDate = minimumDate && Date.parse(dateStr) < Date.parse(minimumDate.toISOString());
+          const afterMinDate = maximumDate && Date.parse(dateStr) > Date.parse(maximumDate.toISOString());
           const clickHandler = beforeMinDate || afterMinDate ? undefined : this._onClickDay;
 
           const isCurrentMonth = TODAY_DATE.getMonth() === this.displayDate.getMonth();
@@ -333,16 +333,19 @@ export class DatepickerCalendar extends SgdsElement {
           const isCurrentDay = TODAY_DATE.getDate() === day;
 
           const isSelected =
-            selectedDates.length > 0 && rangeSelectedDates.some(d => Date.parse(date) === Date.parse(d.toISOString()));
-          const isFirstSelectedDate = selectedDates.length > 0 && rangeSelectedDates[0].toISOString() === date;
+            selectedDates.length > 0 &&
+            rangeSelectedDates.some(d => Date.parse(dateStr) === Date.parse(d.toISOString()));
+          const isFirstSelectedDate = selectedDates.length > 0 && rangeSelectedDates[0].toISOString() === dateStr;
           const isLastSelectedDate =
-            selectedDates.length > 1 && rangeSelectedDates[rangeSelectedDates.length - 1].toISOString() === date;
-
+            selectedDates.length > 1 && rangeSelectedDates[rangeSelectedDates.length - 1].toISOString() === dateStr;
+          const ariaLabel =
+            `${isCurrentDay && isCurrentMonth && isCurrentYear ? "Today's date, " : ""}` + format(dateObj, "PPPP");
           week.push(
             html`<td
               key=${j}
-              data-date=${date}
+              data-date=${dateStr}
               data-day=${day}
+              aria-label=${ariaLabel}
               class=${classMap({
                 today: isCurrentDay && isCurrentMonth && isCurrentYear,
                 "selected-ends": isFirstSelectedDate || isLastSelectedDate,
@@ -350,8 +353,10 @@ export class DatepickerCalendar extends SgdsElement {
                 disabled: beforeMinDate || afterMinDate
               })}
               @click=${clickHandler}
-              tabindex=${this.focusedDate === new Date(date) ? "3" : "-1"}
+              aria-selected=${isSelected}
+              tabindex=${this.focusedDate === new Date(dateStr) ? "3" : "-1"}
               ?disabled=${beforeMinDate || afterMinDate}
+              role="button"
             >
               ${day}
             </td>`
@@ -421,6 +426,7 @@ export class DatepickerCalendar extends SgdsElement {
             data-month=${idx}
             data-year=${year}
             tabindex="3"
+            aria-selected=${selectedTime.includes(time)}
           >
             ${m}
           </button>`;
@@ -453,6 +459,7 @@ export class DatepickerCalendar extends SgdsElement {
               data-year=${y}
               tabindex="3"
               ?disabled=${y < 1900}
+              aria-selected=${selectedYears.includes(y)}
             >
               ${y}
             </button>

@@ -6,7 +6,7 @@ import { SgdsDatepicker } from "../src/components";
 import { setTimeToNoon } from "../src/utils/time";
 import { sendKeys } from "@web/test-runner-commands";
 import "../src/index";
-import sinon from "sinon";
+import sinon, { type SinonFakeTimers } from "sinon";
 
 customElements.define("sgds-datepicker-header", DatepickerHeader);
 customElements.define("sgds-datepicker-calendar", DatepickerCalendar);
@@ -1445,7 +1445,7 @@ describe("datepicker behavour on invalid input", () => {
     const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker .initialValue=${["23/03/2020"]}></sgds-datepicker>`);
     const input = el.shadowRoot?.querySelector<DatepickerInput>("sgds-datepicker-input");
     const header = el.shadowRoot?.querySelector<DatepickerHeader>("sgds-datepicker-header");
-    expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.equal("March 2020");
+    expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.contain("March 2020");
 
     input?.focus();
     await waitUntil(() => el.shadowRoot?.activeElement === input);
@@ -1460,7 +1460,7 @@ describe("datepicker behavour on invalid input", () => {
     el.showMenu();
     await el.updateComplete;
     const initialDisplayDate = `${MONTH_LABELS[new Date().getMonth()]} ${new Date().getFullYear()}`;
-    expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.equal(initialDisplayDate);
+    expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.contain(initialDisplayDate);
   });
   it("datepicker resets to initial displayDate when invalid input", async () => {
     const el = await fixture<SgdsDatepicker>(
@@ -1468,7 +1468,7 @@ describe("datepicker behavour on invalid input", () => {
     );
     const input = el.shadowRoot?.querySelector<DatepickerInput>("sgds-datepicker-input");
     const header = el.shadowRoot?.querySelector<DatepickerHeader>("sgds-datepicker-header");
-    expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.equal("March 2020");
+    expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.contain("March 2020");
 
     input?.focus();
     await waitUntil(() => el.shadowRoot?.activeElement === input);
@@ -1482,21 +1482,21 @@ describe("datepicker behavour on invalid input", () => {
     expect(el?.reportValidity()).to.equal(false);
     el.showMenu();
     await el.updateComplete;
-    expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.equal("January 2025");
+    expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.contain("January 2025");
   });
   it("datepicker resets to initial specified displayDate when reset ", async () => {
     const el = await fixture<SgdsDatepicker>(
       html`<sgds-datepicker .initialValue=${["23/03/2020"]} .displayDate=${new Date("01/01/2025")}></sgds-datepicker>`
     );
     const header = el.shadowRoot?.querySelector<DatepickerHeader>("sgds-datepicker-header") as DatepickerHeader;
-    expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.equal("March 2020");
+    expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.contain("March 2020");
     const resetBtn = el.shadowRoot?.querySelector("button[slot='reset-btn']") as HTMLButtonElement;
     resetBtn?.click();
 
     el.showMenu();
     await elementUpdated(el);
     await elementUpdated(header);
-    expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.equal("January 2025");
+    expect(header?.shadowRoot?.querySelectorAll("button")[1].textContent).to.contain("January 2025");
   });
 });
 
@@ -1546,5 +1546,223 @@ describe("datepicker in form context", () => {
     );
     const formData = new FormData(el);
     expect(formData.get("myDatepicker")).to.equal("23/03/2020");
+  });
+});
+
+describe("datepicker a11y labels", () => {
+  // Faking the current time to prevent flaky test as the years past
+  let fakeNow: SinonFakeTimers;
+  beforeEach(() => {
+    fakeNow = sinon.useFakeTimers(new Date(2024, 2, 1, 12, 0, 0, 0));
+    expect(new Date()).to.deep.equal(new Date(2024, 2, 1, 12, 0, 0, 0));
+  });
+  afterEach(() => {
+    fakeNow.restore();
+  });
+  it("datepicker-header button aria-labels when view=day", async () => {
+    // 28th March 2024
+    const mockDate = new Date(2024, 2, 28);
+    const el = await fixture<DatepickerHeader>(
+      html`<sgds-datepicker-header
+        .displayDate=${mockDate}
+        .focusedDate=${mockDate}
+        view="days"
+        focusedTabIndex=${0}
+      ></sgds-datepicker-header>`
+    );
+    const [prev, header, next] = el.shadowRoot?.querySelectorAll("button") as NodeListOf<HTMLButtonElement>;
+    expect(prev.getAttribute("aria-label")).to.equal("Go to previous month, February 2024");
+    expect(header.getAttribute("aria-label")).to.equal("Current view is days, click to show months in 2024");
+    expect(next.getAttribute("aria-label")).to.equal("Go to next month, April 2024");
+  });
+  it("datepicker-header button aria-labels when view=months", async () => {
+    // 28th March 2024
+    const mockDate = new Date(2024, 2, 28);
+    const el = await fixture<DatepickerHeader>(
+      html`<sgds-datepicker-header
+        .displayDate=${mockDate}
+        .focusedDate=${mockDate}
+        view="months"
+        focusedTabIndex=${0}
+      ></sgds-datepicker-header>`
+    );
+    const [prev, header, next] = el.shadowRoot?.querySelectorAll("button") as NodeListOf<HTMLButtonElement>;
+    expect(prev.getAttribute("aria-label")).to.equal("Go to previous year, 2023");
+    expect(header.getAttribute("aria-label")).to.equal(
+      "Current view is months, click to show years between 2024 - 2035"
+    );
+    expect(next.getAttribute("aria-label")).to.equal("Go to next year, 2025");
+  });
+  it("datepicker-header button aria-labels when view=years", async () => {
+    // 28th March 2024
+    const mockDate = new Date(2024, 2, 28);
+    const el = await fixture<DatepickerHeader>(
+      html`<sgds-datepicker-header
+        .displayDate=${mockDate}
+        .focusedDate=${mockDate}
+        view="years"
+        focusedTabIndex=${0}
+      ></sgds-datepicker-header>`
+    );
+    const [prev, header, next] = el.shadowRoot?.querySelectorAll("button") as NodeListOf<HTMLButtonElement>;
+    expect(prev.getAttribute("aria-label")).to.equal("Go to previous decade, 2012 - 2023");
+    expect(header.getAttribute("aria-label")).to.equal("Current view is years");
+    expect(next.getAttribute("aria-label")).to.equal("Go to next decade, 2036 - 2047");
+
+    expect(header.classList.contains("cursor-not-allowed")).to.be.true;
+  });
+
+  it("aria-selected=true on selected dates when view=days", async () => {
+    // 28th March 2024
+    const mockDate = new Date(2024, 2, 28);
+    const mockSelectedDate = new Date(2024, 2, 14);
+    const el = await fixture<DatepickerCalendar>(
+      html`<sgds-datepicker-calendar
+        .displayDate=${mockDate}
+        .focusedDate=${mockDate}
+        view="days"
+        focusedTabIndex=${0}
+        .selectedDate=${[mockSelectedDate]}
+      ></sgds-datepicker-calendar>`
+    );
+    const selectedTd = el.shadowRoot?.querySelector("td.active");
+
+    expect(selectedTd?.getAttribute("aria-selected")).to.equal("true");
+    const unselectedTds = el.shadowRoot?.querySelectorAll("td[aria-selected='false']");
+    expect(unselectedTds?.length).to.equal(31 - 1);
+  });
+  it("aria-selected=true on selected MONTHS when view=months", async () => {
+    // 28th March 2024
+    const mockDate = new Date(2024, 2, 28);
+    const mockSelectedDate = new Date(2024, 2, 14);
+    const el = await fixture<DatepickerCalendar>(
+      html`<sgds-datepicker-calendar
+        .displayDate=${mockDate}
+        .focusedDate=${mockDate}
+        view="months"
+        focusedTabIndex=${0}
+        .selectedDate=${[mockSelectedDate]}
+      ></sgds-datepicker-calendar>`
+    );
+    const selectedBtn = el.shadowRoot?.querySelector("button.active");
+
+    expect(selectedBtn?.getAttribute("aria-selected")).to.equal("true");
+    const unselectedBtns = el.shadowRoot?.querySelectorAll("button[aria-selected='false']");
+    expect(unselectedBtns?.length).to.equal(12 - 1);
+  });
+  it("aria-selected=true on selected years when view=years", async () => {
+    // 28th March 2024
+    const mockDate = new Date(2024, 2, 28);
+    const mockSelectedDate = new Date(2024, 2, 14);
+    const el = await fixture<DatepickerCalendar>(
+      html`<sgds-datepicker-calendar
+        .displayDate=${mockDate}
+        .focusedDate=${mockDate}
+        view="years"
+        focusedTabIndex=${0}
+        .selectedDate=${[mockSelectedDate]}
+      ></sgds-datepicker-calendar>`
+    );
+    const selectedBtn = el.shadowRoot?.querySelector("button.active");
+
+    expect(selectedBtn?.getAttribute("aria-selected")).to.equal("true");
+    const unselectedBtns = el.shadowRoot?.querySelectorAll("button[aria-selected='false']");
+    expect(unselectedBtns?.length).to.equal(12 - 1);
+  });
+  it("aria-selected=true on selected dates when view=days, mode=range", async () => {
+    // 28th March 2024
+    const mockDate = new Date(2024, 2, 28);
+    const mockSelectedDate = [new Date(2024, 2, 14), new Date(2024, 2, 27)];
+    const el = await fixture<DatepickerCalendar>(
+      html`<sgds-datepicker-calendar
+        .displayDate=${mockDate}
+        .focusedDate=${mockDate}
+        view="days"
+        mode="range"
+        focusedTabIndex=${0}
+        .selectedDate=${mockSelectedDate}
+      ></sgds-datepicker-calendar>`
+    );
+    const selectedTds = el.shadowRoot?.querySelectorAll("td[aria-selected='true']");
+    const selectedCount = 27 - 14 + 1;
+    expect(selectedTds?.length).to.equal(selectedCount);
+    const unselectedTds = el.shadowRoot?.querySelectorAll("td[aria-selected='false']");
+    expect(unselectedTds?.length).to.equal(31 - selectedCount);
+  });
+  it("aria-selected=true on selected dates when view=months, mode=range", async () => {
+    // 28th March 2024
+    const mockDate = new Date(2024, 2, 28);
+    const mockSelectedDate = [new Date(2024, 2, 14), new Date(2024, 9, 27)];
+    const el = await fixture<DatepickerCalendar>(
+      html`<sgds-datepicker-calendar
+        .displayDate=${mockDate}
+        .focusedDate=${mockDate}
+        view="months"
+        mode="range"
+        focusedTabIndex=${0}
+        .selectedDate=${mockSelectedDate}
+      ></sgds-datepicker-calendar>`
+    );
+    const selectedBtns = el.shadowRoot?.querySelectorAll("button[aria-selected='true']");
+    const selectedCount = 9 - 2 + 1;
+    expect(selectedBtns?.length).to.equal(selectedCount);
+    const unselectedBtns = el.shadowRoot?.querySelectorAll("button[aria-selected='false']");
+    expect(unselectedBtns?.length).to.equal(12 - selectedCount);
+  });
+  it("aria-selected=true on selected dates when view=years, mode=range", async () => {
+    // 28th March 2024
+    const mockDate = new Date(2024, 2, 28);
+    const mockSelectedDate = [new Date(2024, 2, 14), new Date(2027, 9, 27)];
+    const el = await fixture<DatepickerCalendar>(
+      html`<sgds-datepicker-calendar
+        .displayDate=${mockDate}
+        .focusedDate=${mockDate}
+        view="years"
+        mode="range"
+        focusedTabIndex=${0}
+        .selectedDate=${mockSelectedDate}
+      ></sgds-datepicker-calendar>`
+    );
+    const selectedBtns = el.shadowRoot?.querySelectorAll("button[aria-selected='true']");
+    const selectedCount = 2027 - 2024 + 1;
+    expect(selectedBtns?.length).to.equal(selectedCount);
+    const unselectedBtns = el.shadowRoot?.querySelectorAll("button[aria-selected='false']");
+    expect(unselectedBtns?.length).to.equal(12 - selectedCount);
+  });
+
+  it(`aria-label of header button changes based on the view of datepicker`, async () => {
+    // 28th March 2024
+    const mockDate = new Date(2024, 2, 28);
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker .displayDate=${mockDate} menuIsOpen></sgds-datepicker>`
+    );
+    const dialog = () => el.shadowRoot?.querySelector("ul[role='dialog']");
+    const header = el.shadowRoot?.querySelector<DatepickerHeader>("sgds-datepicker-header");
+    const headerButton = header?.shadowRoot?.querySelectorAll("button")[1];
+    expect(dialog()?.getAttribute("aria-label")).to.equal(`Choose day from March 2024`);
+    headerButton?.click();
+    await header?.updateComplete;
+    await elementUpdated(el);
+    // await el.updateComplete;
+    expect(dialog()?.getAttribute("aria-label")).to.equal(`Choose month from 2024`);
+    headerButton?.click();
+    await header?.updateComplete;
+    await elementUpdated(el);
+    expect(dialog()?.getAttribute("aria-label")).to.equal(`Choose year from 2024 to 2035`);
+  });
+  it("aria-label of td dates in calendar", async () => {
+    const mockDate = new Date(2024, 2, 28);
+    const mockSelectedDate = [new Date(2024, 2, 14)];
+    const el = await fixture<DatepickerCalendar>(
+      html`<sgds-datepicker-calendar
+        .displayDate=${mockDate}
+        .focusedDate=${mockDate}
+        view="days"
+        focusedTabIndex=${0}
+        .selectedDate=${mockSelectedDate}
+      ></sgds-datepicker-calendar>`
+    );
+    const td = el.shadowRoot?.querySelector("td[data-day='1']");
+    expect(td?.getAttribute("aria-label")).to.equal("Friday, March 1st, 2024");
   });
 });

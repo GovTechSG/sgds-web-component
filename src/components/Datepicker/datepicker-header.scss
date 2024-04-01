@@ -11,9 +11,14 @@
     &:focus {
       outline: var(--datepicker-theme-color) auto 2px;
     }
+    &.cursor-not-allowed {
+      cursor: not-allowed;
+    }
+    
   }
 
   svg {
     font-size: 10rem;
   }
 }
+
