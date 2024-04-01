@@ -47,6 +47,7 @@ export class SgdsSidenav extends SgdsElement {
       return;
     }
     items.forEach(item => {
+      // Covers all elements within sidenav-item 
       if (!event.composedPath().includes(item)) {
         // Close all the items that didn't dispatch the event.
         item.active = false;

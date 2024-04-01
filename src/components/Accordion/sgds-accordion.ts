@@ -50,7 +50,6 @@ export class SgdsAccordion extends SgdsElement {
   }
 
   async onToggle(event: Event): Promise<void> {
-    const target = event.target as SgdsAccordionItem;
     // Let the event pass through the DOM so that it can be
     // prevented from the outside if a user so desires.
     if (this.allowMultiple || event.defaultPrevented) {
@@ -64,6 +63,7 @@ export class SgdsAccordion extends SgdsElement {
       return;
     }
     items.forEach(item => {
+      // Covers all elements within accordion-item 
       if (!event.composedPath().includes(item)) {
         // Close all the items that didn't dispatch the event.
         item.open = false;
