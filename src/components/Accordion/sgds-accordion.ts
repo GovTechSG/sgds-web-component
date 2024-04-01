@@ -64,7 +64,7 @@ export class SgdsAccordion extends SgdsElement {
       return;
     }
     items.forEach(item => {
-      if (item !== target) {
+      if (!event.composedPath().includes(item)) {
         // Close all the items that didn't dispatch the event.
         item.open = false;
       }

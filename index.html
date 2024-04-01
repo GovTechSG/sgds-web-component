@@ -145,7 +145,7 @@
     <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
     <sgds-mainnav-item>ArgsTable Controlled </sgds-mainnav-item>
     <sgds-mainnav-dropdown togglertext="Dropdown" close="default">
-        <sgds-dropdown-item href="https://google.com">Item 1</sgds-dropdown-item>
+        <sgds-dropdown-item href="#">Item 1</sgds-dropdown-item>
         <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
         <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
     </sgds-mainnav-dropdown>
@@ -161,12 +161,12 @@
     <sgds-mainnav-item href="#" slot="end" class="test test2">Info</sgds-mainnav-item>
     <sgds-mainnav-item href="#" slot="end">Contact Us</sgds-mainnav-item>
     <sgds-mainnav-dropdown togglerText="Dropdown">
-        <sgds-dropdown-item href="https://google.com">Item 1</sgds-dropdown-item>
+        <sgds-dropdown-item href="#">Item 1</sgds-dropdown-item>
         <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
         <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
     </sgds-mainnav-dropdown>
     <sgds-mainnav-dropdown togglerText="Dropdown" slot="end">
-        <sgds-dropdown-item href="https://google.com">Item 1</sgds-dropdown-item>
+        <sgds-dropdown-item href="#">Item 1</sgds-dropdown-item>
         <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
         <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
     </sgds-mainnav-dropdown>
@@ -189,20 +189,20 @@
                 </svg>
                 Title
             </span>
-            <sgds-sidenav-link href="https://google.com" active>first-test</sgds-sidenav-link>
-            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="#" active>first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
         </sgds-sidenav-item>
         <sgds-sidenav-item title="Test title 2">
             <span slot="title">
                 <sl-icon name="stack"></sl-icon> Title
             </span>
-            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
 
         </sgds-sidenav-item>
-        <sgds-sidenav-item href="https://google.com">
+        <sgds-sidenav-item href="#">
             <span slot="title">
                 <sl-icon name="stack"></sl-icon> Title 3
             </span>
@@ -311,7 +311,7 @@
             <div class="row">
                 <sgds-dropdown noFlip menuAlignRight togglerText="hello">
                     <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
-                    <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
+                    <sgds-dropdown-item href="#">item #2</sgds-dropdown-item>
                     <sgds-dropdown-item href="#" disabled>
                         item #3
                     </sgds-dropdown-item>
@@ -336,38 +336,34 @@
         <div class="container">
             <h2>Accordion</h2>
             <div class="row">
-                <sgds-accordion>
-                    <sgds-accordion-item summary="Toggle Me 1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
+
+                <sgds-accordion accordionclasses="mb-4">
+                    <sgds-accordion-item>
+                        <p class="m-0" slot="accordion-header">This is a solo accordion</p>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
                     </sgds-accordion-item>
                 </sgds-accordion>
                 <sgds-accordion>
-                    <sgds-accordion-item summary="Toggle Me 2">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
+                    <sgds-accordion-item>
+                        <p class="m-0" slot="accordion-header">This is an accordion</p>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
                     </sgds-accordion-item>
-                    <sgds-accordion-item summary="Toggle Me 3">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
+                    <sgds-accordion-item>
+                        <p class="m-0" slot="accordion-header">Accordion 1</p>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
                     </sgds-accordion-item>
-                    <sgds-accordion-item summary="Toggle Me 4">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
+                    <sgds-accordion-item open="">
+                        <p class="m-0" slot="accordion-header">Accordion 2</p>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
                     </sgds-accordion-item>
-                    <sgds-accordion-item summary="Toggle Me 5">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
+                    <sgds-accordion-item>
+                        <p class="m-0" slot="accordion-header">Accordion 3</p>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
                     </sgds-accordion-item>
                 </sgds-accordion>
                 <h2>Badge</h2>
@@ -624,7 +620,7 @@
                 <div class="row">
                     <sgds-dropdown togglerText="Dropdown">
                         <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
-                        <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
+                        <sgds-dropdown-item href="#">item #2</sgds-dropdown-item>
                         <sgds-dropdown-item href="#" disabled>
                             item #3
                         </sgds-dropdown-item>
@@ -660,7 +656,7 @@
                     <div class="row">
                         <sgds-dropdown togglerText="Dropdown">
                             <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
-                            <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
+                            <sgds-dropdown-item href="#">item #2</sgds-dropdown-item>
                             <sgds-dropdown-item href="#" disabled>
                                 item #3
                             </sgds-dropdown-item>
@@ -690,7 +686,7 @@
                     <button onclick="tooltip.show()">click me</button>
                 </div>
                 <sgds-footer
-                    links='[{"title":"Application Guidelines","url":"/application-guidelines/lorem-ipsum-one/second-level-a/","links":[{"label":"<div>hello world </div>","href":"/application-guidelines/lorem-ipsum-one/second-level-a/"},{"label":"Second Level B","href":"/application-guidelines/lorem-ipsum-two/part-A/"},{"label":"Lorem Ipsum Three","href":"/application-guidelines/lorem-ipsum-three/"}]},{"title":"Legislation","url":"https://google.com","external":true,"links":[{"label":"External Link One","href":"https://en.wikipedia.org/wiki/Year","external":true},{"label":"External Link Two","href":"https://en.wikipedia.org/wiki/Spring_(season)","external":true}]},{"title":"Resources","url":"/resource_room/","links":[{"label":"All","href":"/resource_room/"},{"label":"Forms and Templates","href":"/resource_room/forms-and-templates/"},{"label":"Guides","href":"/resource_room/guides/"}]}]'></sgds-footer>
+                    links='[{"title":"Application Guidelines","url":"/application-guidelines/lorem-ipsum-one/second-level-a/","links":[{"label":"<div>hello world </div>","href":"/application-guidelines/lorem-ipsum-one/second-level-a/"},{"label":"Second Level B","href":"/application-guidelines/lorem-ipsum-two/part-A/"},{"label":"Lorem Ipsum Three","href":"/application-guidelines/lorem-ipsum-three/"}]},{"title":"Legislation","url":"#","external":true,"links":[{"label":"External Link One","href":"https://en.wikipedia.org/wiki/Year","external":true},{"label":"External Link Two","href":"https://en.wikipedia.org/wiki/Spring_(season)","external":true}]},{"title":"Resources","url":"/resource_room/","links":[{"label":"All","href":"/resource_room/"},{"label":"Forms and Templates","href":"/resource_room/forms-and-templates/"},{"label":"Guides","href":"/resource_room/guides/"}]}]'></sgds-footer>
 
                 <script>
                     const drawer = document.querySelector( 'sgds-drawer' );
