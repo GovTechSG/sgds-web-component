@@ -40,6 +40,10 @@
             background-color: red;
         }
 
+        sgds-sidenav {
+            --sidenav-sticky-top: 1.5rem;
+        }
+
         /* sgds-sidenav-item::part(sidenav-btn) {
             color: red;
             border-left-color: red;
@@ -175,10 +179,7 @@
     </dev-console-widget>
 </sgds-mainnav>
 <div class="grid">
-
-
-
-    <sgds-sidenav class="mt-3" id="test-id">
+    <sgds-sidenav class="mt-3" id="test-id" sticky>
         <sgds-sidenav-item active>
             <span slot="title">
                 <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
