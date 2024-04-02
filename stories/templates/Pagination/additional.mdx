@@ -81,3 +81,17 @@ By default, `ellipsisJump` value is set to **3**. Set as desired to decrement/in
     `}
   </Story>
 </Canvas>
+
+## Show first and last page of pagination
+
+`showFirstPage` and `showLastPage` controls the appearance of first and last page of the component respectively. 
+
+<Canvas>
+  <Story name="Show First Page">
+    {() => html`
+       Show first page: <sgds-pagination dataLength="50" currentPage="4" showFirstPage></sgds-pagination>
+       Show last page: <sgds-pagination dataLength="50" currentPage="4" showLastPage></sgds-pagination>
+       Show first and last page<sgds-pagination dataLength="50" currentPage="4" showFirstPage showLastPage></sgds-pagination>
+    `}
+  </Story>
+</Canvas>

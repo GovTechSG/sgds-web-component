@@ -243,30 +243,24 @@
                 <sgds-button type="submit">Submit</sgds-button>
             </form> -->
 
-            <form id="datepicker-form" >
-                <sgds-datepicker
-                  name="myDatepicker"
-                  id="form-submission-example"
-                  label="Choose a date"
-                  hintText="The minimum date is 10 June 2023 and maximum date is 19 June 2023"
-                  .displayDate=${args.displayDate}
-                  minDate="2023-06-10T12:00:00.000Z"
-                  maxDate="2023-06-19T12:00:00.000Z"
-                  required
-                ></sgds-datepicker>
+            <form id="datepicker-form">
+                <sgds-datepicker name="myDatepicker" id="form-submission-example" label="Choose a date"
+                    hintText="The minimum date is 10 June 2023 and maximum date is 19 June 2023"
+                    .displayDate=${args.displayDate} minDate="2023-06-10T12:00:00.000Z"
+                    maxDate="2023-06-19T12:00:00.000Z" required></sgds-datepicker>
                 <button type="submit">Submit</button>
-              </form>
-              <script>
-                const datepicker = document.querySelector("#form-submission-example");
-                datepicker.displayDate = new Date(2023, 5, 10);
-                const testF = document.querySelector("#datepicker-form");
-                testF.addEventListener("submit", event => {
-                  console.log("stpru");
-                  event.preventDefault();
-                  const formData = new FormData(event.target);
-                  alert("Date submitted :" + formData.get("myDatepicker"));
-                });
-              </script>
+            </form>
+            <script>
+                const datepicker = document.querySelector( "#form-submission-example" );
+                datepicker.displayDate = new Date( 2023, 5, 10 );
+                const testF = document.querySelector( "#datepicker-form" );
+                testF.addEventListener( "submit", event => {
+                    console.log( "stpru" );
+                    event.preventDefault();
+                    const formData = new FormData( event.target );
+                    alert( "Date submitted :" + formData.get( "myDatepicker" ) );
+                } );
+            </script>
 
             <sgds-datepicker id="lukhei" label="Birthdate" menuIsOpen initialValue='["20/01/2024"]'
                 mindate="2024-01-02T12:00:00.000Z" maxdate="2024-01-30T12:00:00.000Z">
@@ -372,16 +366,46 @@
                 <br><br><br><br><br><br>
 
                 <h3>Test</h3>
-                <sgds-pagination dataLength="15" limit="3" itemsPerPage="5" currentPage="1"></sgds-pagination>
+                <sgds-pagination dataLength="15" limit="5" itemsPerPage="5" currentPage="1"
+                    showFirstPage></sgds-pagination>
 
                 <p>ellipsisOn, limit 3, ellipsisJump 6</p>
-                <sgds-pagination directionVariant="icon" dataLength="3" limit="7" itemsPerPage="1"
-                    currentPage="1"></sgds-pagination>
-                <sgds-pagination directionVariant="icon-text" limit="3" ellipsisJump="6" ellipsisOn
-                    dataLength="50"></sgds-pagination>
-                <sgds-pagination directionVariant="text" dataLength="50"></sgds-pagination>
-                <sgds-pagination directionVariant="text" dataLength="50" ellipsisOn ellipsisJump="6" itemsPerPage="5"
-                    limit="5"></sgds-pagination>
+                <sgds-pagination directionVariant="icon" dataLength="3" limit="7" itemsPerPage="1" currentPage="1"
+                    showFirstPage></sgds-pagination>
+                <sgds-pagination directionVariant="icon-text" limit="3" ellipsisJump="6" ellipsisOn dataLength="50"
+                    showFirstPage ellipsisOn></sgds-pagination>
+                <sgds-pagination directionVariant="text" dataLength="50" showFirstPage></sgds-pagination>
+                <sgds-pagination directionVariant="text" dataLength="50" ellipsisJump="6" itemsPerPage="5" limit="5"
+                    showFirstPage></sgds-pagination>
+
+                <p>ellipsisOn=false</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+                <p>ellipsisOn=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"
+                    ellipsisOn></sgds-pagination>
+                <p>ellipsisOn=false, showFirstPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"
+                    showFirstPage></sgds-pagination>
+                <p>ellipsisOn=false, showFirstPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"
+                    showFirstPage></sgds-pagination>
+                <p>ellipsisOn=false, showLastPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"
+                    showLastPage></sgds-pagination>
+                <p>ellipsisOn=true, showLastPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage
+                    ellipsisOn></sgds-pagination>
+                <p>ellipsisOn=false, showLastPage=true, showFirstPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage
+                    showFirstPage></sgds-pagination>
+                <p>ellipsisOn=true, showLastPage=true, showFirstPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage showFirstPage
+                    ellipsisOn></sgds-pagination>
+                <p>ellipsisOn=false, showLastPage=true, showFirstPage=true</p>
+                <sgds-pagination dataLength="2" itemsPerPage="1" currentPage="1" showLastPage
+                    showFirstPage></sgds-pagination>
+                test
+                <sgds-pagination dataLength="50" currentPage="4" showFirstPage></sgds-pagination>
             </div>
             <div class="container">
                 <h2>Button</h2>
