@@ -8,7 +8,9 @@ export const Template = ({
   directionVariant,
   size,
   ellipsisOn,
-  ellipsisJump
+  ellipsisJump,
+  showFirstPage,
+  showLastPage
 }) => {
   return html`
     <sgds-pagination
@@ -20,6 +22,8 @@ export const Template = ({
       size=${size}
       ?ellipsisOn=${ellipsisOn}
       ellipsisJump=${ellipsisJump}
+      ?showFirstPage=${showFirstPage}
+      ?showLastPage=${showLastPage}
     ></sgds-pagination>
   `;
 };

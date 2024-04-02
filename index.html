@@ -10,14 +10,18 @@
         src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"></script> -->
     <script
         src="/node_modules/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
     <!-- <script type="module" id="console-components-gateway"
   src="https://dev.assets.developer.tech.gov.sg/console-components/gateway.es5.js" nonce={nonce || undefined}></script> -->
     <style>
         /* * {
             font-family: "bootstrap-icons", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         } */
+
+        :root {
+            --sgds-primary: blue;
+        }
 
         body {
             margin: 0;
@@ -141,27 +145,40 @@
 
 <body class="d-flex flex-column min-vh-100"></body>
 <sgds-masthead fluid></sgds-masthead>
+<!-- <sgds-mainnav>
+    <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
+    <sgds-mainnav-item>ArgsTable Controlled </sgds-mainnav-item>
+    <sgds-mainnav-dropdown togglertext="Dropdown" close="default">
+        <sgds-dropdown-item href="#">Item 1</sgds-dropdown-item>
+        <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
+        <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
+    </sgds-mainnav-dropdown>
+    <sgds-mainnav-item href="#">About</sgds-mainnav-item>
+    <sgds-mainnav-item href="#" slot="end">Contact Us</sgds-mainnav-item>
+    <sgds-button slot="end">Login</sgds-button>
+    <sgds-button slot="non-collapsible" iconcolor="black" iconwidth="28px" iconheight="28px">test</sgds-button>
+</sgds-mainnav> -->
+<sgds-mainnav>
+    <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
+    <sgds-mainnav-item active href="#">Home</sgds-mainnav-item>
+    <sgds-mainnav-item href="#">About</sgds-mainnav-item>
+    <sgds-mainnav-item href="#" slot="end" class="test test2">Info</sgds-mainnav-item>
+    <sgds-mainnav-item href="#" slot="end">Contact Us</sgds-mainnav-item>
+    <sgds-mainnav-dropdown togglerText="Dropdown">
+        <sgds-dropdown-item href="#">Item 1</sgds-dropdown-item>
+        <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
+        <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
+    </sgds-mainnav-dropdown>
+    <sgds-mainnav-dropdown togglerText="Dropdown" slot="end">
+        <sgds-dropdown-item href="#">Item 1</sgds-dropdown-item>
+        <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
+        <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
+    </sgds-mainnav-dropdown>
+    <sgds-button slot="end">Login</sgds-button>
+    <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px">
+    </dev-console-widget>
+</sgds-mainnav>
 <div class="grid">
-    <sgds-mainnav>
-        <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
-        <sgds-mainnav-item active href="#">Home</sgds-mainnav-item>
-        <sgds-mainnav-item href="#">About</sgds-mainnav-item>
-        <sgds-mainnav-item href="#" slot="end" class="test test2">Info</sgds-mainnav-item>
-        <sgds-mainnav-item href="#" slot="end">Contact Us</sgds-mainnav-item>
-        <sgds-mainnav-dropdown togglerText="Dropdown" menuIsOpen>
-            <sgds-dropdown-item href="https://google.com">Item 1</sgds-dropdown-item>
-            <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
-            <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
-        </sgds-mainnav-dropdown>
-        <sgds-mainnav-dropdown togglerText="Dropdown" slot="end">
-            <sgds-dropdown-item href="https://google.com">Item 1</sgds-dropdown-item>
-            <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
-            <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
-        </sgds-mainnav-dropdown>
-        <sgds-button slot="end">Login</sgds-button>
-        <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px">
-        </dev-console-widget>
-    </sgds-mainnav>
     <sgds-sidenav class="mt-3" id="test-id" sticky>
         <sgds-sidenav-item active>
             <span slot="title">
@@ -173,18 +190,23 @@
                 </svg>
                 Title
             </span>
-            <sgds-sidenav-link href="https://google.com" active>first-test</sgds-sidenav-link>
-            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="#" active>first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
         </sgds-sidenav-item>
         <sgds-sidenav-item title="Test title 2">
             <span slot="title">
                 <sl-icon name="stack"></sl-icon> Title
             </span>
-            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
-            <sgds-sidenav-link href="https://google.com">first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
+            <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
 
+        </sgds-sidenav-item>
+        <sgds-sidenav-item href="#">
+            <span slot="title">
+                <sl-icon name="stack"></sl-icon> Title 3
+            </span>
         </sgds-sidenav-item>
     </sgds-sidenav>
 
@@ -266,7 +288,7 @@
                 } );
             </script>
 
-            <sgds-datepicker id="lukhei" label="Birthdate" menuIsOpen initialValue='["20/01/2024"]'
+            <sgds-datepicker id="lukhei" label="Birthdate" initialValue='["20/01/2024"]'
                 mindate="2024-01-02T12:00:00.000Z" maxdate="2024-01-30T12:00:00.000Z">
             </sgds-datepicker>
             <sgds-datepicker mode="range" initialValue='["20/01/2024", "22/02/2024"]' mindate="2024-01-02T12:00:00.000Z"
@@ -288,9 +310,9 @@
         <div class="container">
             <h2>Dropdown</h2>
             <div class="row">
-                <sgds-dropdown menuIsOpen noFlip menuAlignRight togglerText="hello">
+                <sgds-dropdown noFlip menuAlignRight togglerText="hello">
                     <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
-                    <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
+                    <sgds-dropdown-item href="#">item #2</sgds-dropdown-item>
                     <sgds-dropdown-item href="#" disabled>
                         item #3
                     </sgds-dropdown-item>
@@ -315,38 +337,34 @@
         <div class="container">
             <h2>Accordion</h2>
             <div class="row">
-                <sgds-accordion>
-                    <sgds-accordion-item summary="Toggle Me 1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
+
+                <sgds-accordion accordionclasses="mb-4">
+                    <sgds-accordion-item>
+                        <p class="m-0" slot="accordion-header">This is a solo accordion</p>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
                     </sgds-accordion-item>
                 </sgds-accordion>
                 <sgds-accordion>
-                    <sgds-accordion-item summary="Toggle Me 2">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
+                    <sgds-accordion-item>
+                        <p class="m-0" slot="accordion-header">This is an accordion</p>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
                     </sgds-accordion-item>
-                    <sgds-accordion-item summary="Toggle Me 3">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
+                    <sgds-accordion-item>
+                        <p class="m-0" slot="accordion-header">Accordion 1</p>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
                     </sgds-accordion-item>
-                    <sgds-accordion-item summary="Toggle Me 4">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
+                    <sgds-accordion-item open="">
+                        <p class="m-0" slot="accordion-header">Accordion 2</p>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
                     </sgds-accordion-item>
-                    <sgds-accordion-item summary="Toggle Me 5">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
+                    <sgds-accordion-item>
+                        <p class="m-0" slot="accordion-header">Accordion 3</p>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
                     </sgds-accordion-item>
                 </sgds-accordion>
                 <h2>Badge</h2>
@@ -370,16 +388,46 @@
                 <br><br><br><br><br><br>
 
                 <h3>Test</h3>
-                <sgds-pagination dataLength="15" limit="3" itemsPerPage="5" currentPage="1"></sgds-pagination>
+                <sgds-pagination dataLength="15" limit="5" itemsPerPage="5" currentPage="1"
+                    showFirstPage></sgds-pagination>
 
                 <p>ellipsisOn, limit 3, ellipsisJump 6</p>
-                <sgds-pagination directionVariant="icon" dataLength="3" limit="7" itemsPerPage="1"
-                    currentPage="1"></sgds-pagination>
-                <sgds-pagination directionVariant="icon-text" limit="3" ellipsisJump="6" ellipsisOn
-                    dataLength="50"></sgds-pagination>
-                <sgds-pagination directionVariant="text" dataLength="50"></sgds-pagination>
-                <sgds-pagination directionVariant="text" dataLength="50" ellipsisOn ellipsisJump="6" itemsPerPage="5"
-                    limit="5"></sgds-pagination>
+                <sgds-pagination directionVariant="icon" dataLength="3" limit="7" itemsPerPage="1" currentPage="1"
+                    showFirstPage></sgds-pagination>
+                <sgds-pagination directionVariant="icon-text" limit="3" ellipsisJump="6" ellipsisOn dataLength="50"
+                    showFirstPage ellipsisOn></sgds-pagination>
+                <sgds-pagination directionVariant="text" dataLength="50" showFirstPage></sgds-pagination>
+                <sgds-pagination directionVariant="text" dataLength="50" ellipsisJump="6" itemsPerPage="5" limit="5"
+                    showFirstPage></sgds-pagination>
+
+                <p>ellipsisOn=false</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+                <p>ellipsisOn=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"
+                    ellipsisOn></sgds-pagination>
+                <p>ellipsisOn=false, showFirstPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"
+                    showFirstPage></sgds-pagination>
+                <p>ellipsisOn=false, showFirstPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"
+                    showFirstPage></sgds-pagination>
+                <p>ellipsisOn=false, showLastPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"
+                    showLastPage></sgds-pagination>
+                <p>ellipsisOn=true, showLastPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage
+                    ellipsisOn></sgds-pagination>
+                <p>ellipsisOn=false, showLastPage=true, showFirstPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage
+                    showFirstPage></sgds-pagination>
+                <p>ellipsisOn=true, showLastPage=true, showFirstPage=true</p>
+                <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage showFirstPage
+                    ellipsisOn></sgds-pagination>
+                <p>ellipsisOn=false, showLastPage=true, showFirstPage=true</p>
+                <sgds-pagination dataLength="2" itemsPerPage="1" currentPage="1" showLastPage
+                    showFirstPage></sgds-pagination>
+                test
+                <sgds-pagination dataLength="50" currentPage="4" showFirstPage></sgds-pagination>
             </div>
             <div class="container">
                 <h2>Button</h2>
@@ -603,7 +651,7 @@
                 <div class="row">
                     <sgds-dropdown togglerText="Dropdown">
                         <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
-                        <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
+                        <sgds-dropdown-item href="#">item #2</sgds-dropdown-item>
                         <sgds-dropdown-item href="#" disabled>
                             item #3
                         </sgds-dropdown-item>
@@ -639,7 +687,7 @@
                     <div class="row">
                         <sgds-dropdown togglerText="Dropdown">
                             <sgds-dropdown-item>item #1 (argsTable controlled)</sgds-dropdown-item>
-                            <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
+                            <sgds-dropdown-item href="#">item #2</sgds-dropdown-item>
                             <sgds-dropdown-item href="#" disabled>
                                 item #3
                             </sgds-dropdown-item>
@@ -658,7 +706,7 @@
                 <div class="container">
                     <h2>Tooltip</h2>
                     Hover me
-                    <sgds-tooltip content="This is a tooltip" placement="top" trigger="click">
+                    <sgds-tooltip content="This is a tooltip" placement="top">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-info-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -669,9 +717,15 @@
                     <button onclick="tooltip.show()">click me</button>
                 </div>
                 <sgds-footer
-                    links='[{"title":"Application Guidelines","url":"/application-guidelines/lorem-ipsum-one/second-level-a/","links":[{"label":"<div>hello world </div>","href":"/application-guidelines/lorem-ipsum-one/second-level-a/"},{"label":"Second Level B","href":"/application-guidelines/lorem-ipsum-two/part-A/"},{"label":"Lorem Ipsum Three","href":"/application-guidelines/lorem-ipsum-three/"}]},{"title":"Legislation","url":"https://google.com","external":true,"links":[{"label":"External Link One","href":"https://en.wikipedia.org/wiki/Year","external":true},{"label":"External Link Two","href":"https://en.wikipedia.org/wiki/Spring_(season)","external":true}]},{"title":"Resources","url":"/resource_room/","links":[{"label":"All","href":"/resource_room/"},{"label":"Forms and Templates","href":"/resource_room/forms-and-templates/"},{"label":"Guides","href":"/resource_room/guides/"}]}]'></sgds-footer>
+                    links='[{"title":"Application Guidelines","url":"/application-guidelines/lorem-ipsum-one/second-level-a/","links":[{"label":"<div>hello world </div>","href":"/application-guidelines/lorem-ipsum-one/second-level-a/"},{"label":"Second Level B","href":"/application-guidelines/lorem-ipsum-two/part-A/"},{"label":"Lorem Ipsum Three","href":"/application-guidelines/lorem-ipsum-three/"}]},{"title":"Legislation","url":"#","external":true,"links":[{"label":"External Link One","href":"https://en.wikipedia.org/wiki/Year","external":true},{"label":"External Link Two","href":"https://en.wikipedia.org/wiki/Spring_(season)","external":true}]},{"title":"Resources","url":"/resource_room/","links":[{"label":"All","href":"/resource_room/"},{"label":"Forms and Templates","href":"/resource_room/forms-and-templates/"},{"label":"Guides","href":"/resource_room/guides/"}]}]'></sgds-footer>
 
                 <script>
+                    const drawer = document.querySelector( 'sgds-drawer' );
+                    const openButton = drawer.nextElementSibling;
+                    const closeButton = drawer.querySelector( 'sgds-button[variant="primary"]' );
+
+                    openButton.addEventListener( 'click', () => drawer.show() );
+                    closeButton.addEventListener( 'click', () => drawer.hide() );
 
                     async function fetchPosts() {
                         try {
@@ -801,19 +855,8 @@
 
 
 
-                    const drawer = document.querySelector( '.drawer-overview' );
-                    console.log( 'drawer' + drawer.nextElementSibling )
-                    const openButton = drawer.nextElementSibling;
-                    const closeButton = drawer.querySelector( 'sgds-button[variant="primary"]' );
-
-                    openButton.addEventListener( 'click', () => drawer.show() );
-                    closeButton.addEventListener( 'click', () => drawer.hide() );
 
                     const submitButton = document.querySelector( 'sgds-quantity-toggle#heyhey' );
-                    // submitButton.addEventListener('sgds-change', (e) => {
-                    //     e.preventDefault();
-                    //     console.log(e)
-                    // });
 
                     const checkedIconSvg1 = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-all" viewBox="0 0 16 16"><path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/></svg>`
 
@@ -823,38 +866,6 @@
                         e.preventDefault();
                         console.log( e );
                     } );
-
-
-                    // const tooltip = document.querySelector('sgds-tooltip');
-
-
-                    // const fileUpload = document.querySelector('sgds-fileupload');
-
-                    // fileUpload.addEventListener('sgds-files-selected', (event) => {
-                    // console.log('File list changed!', event);
-                    // });
-
-                    // grab reference to form
-
-                    // const formElem = document.querySelector('form');
-
-                    // // submit handler
-
-                    // formElem.addEventListener('submit', (e) => {
-                    //     // on form submission, prevent default
-                    //     e.preventDefault();
-
-                    //     //   console.log(formElem.shadowRoot?.querySelector('input[name="input1"]'));
-                    //     //   console.log(formElem.shadowRoot?.querySelector('input[name="cb1"]')); 
-                    //     //   console.log(formElem.shadowRoot?.querySelector('input[name="cb2"]')); 
-
-                    //     // construct a FormData object, which fires the formdata event
-                    //     const formData = new FormData(formElem);
-                    //     // formdata gets modified by the formdata event
-                    //     console.log(formData.get('input1'));
-                    //     console.log(formData.get('cb1'));
-                    //     console.log(formData.get('cb2'));
-                    // });
 
 
                     const form = document.querySelector( '.formtest' );
