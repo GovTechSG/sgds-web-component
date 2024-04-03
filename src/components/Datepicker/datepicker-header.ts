@@ -158,7 +158,7 @@ export class DatepickerHeader extends SgdsElement {
       months: `Current view is months, click to show years between ${this.renderHeader(this.displayDate, "years")}`,
       years: `Current view is years`
     };
-    return message[this.view];
+    return `${this.renderHeader()}. ${message[this.view]}`;
   }
   render() {
     return html`
@@ -167,7 +167,7 @@ export class DatepickerHeader extends SgdsElement {
           <button
             @click="${this.handleClickPrevious}"
             tabindex="0"
-            class="${classMap({ invisible: this._removeCaret() })}"
+            class=${classMap({ invisible: this._removeCaret() })}
             aria-label=${this._ariaLabelForPrevBtn()}
           >
             <svg
@@ -189,6 +189,7 @@ export class DatepickerHeader extends SgdsElement {
             class=${classMap({ "cursor-not-allowed": this.view === "years" })}
             tabindex="1"
             aria-label=${this._ariaLabelForHeaderBtn()}
+            aria-disabled=${this.view === "years"?  "true" : "false"}
           >
             ${this._renderHeaderTemplate()}
           </button>
@@ -233,5 +234,5 @@ export const MONTH_LABELS = [
 const AriaLabelViewState = {
   days: "month",
   months: "year",
-  years: "decade"
+  years: "12 years"
 };

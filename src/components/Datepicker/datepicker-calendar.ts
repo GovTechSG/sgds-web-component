@@ -356,6 +356,7 @@ export class DatepickerCalendar extends SgdsElement {
               aria-selected=${isSelected}
               tabindex=${this.focusedDate === new Date(dateStr) ? "3" : "-1"}
               ?disabled=${beforeMinDate || afterMinDate}
+              aria-disabled=${beforeMinDate || afterMinDate ? "true" : "false"}
               role="button"
             >
               ${day}
