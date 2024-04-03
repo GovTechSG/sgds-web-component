@@ -1,12 +1,12 @@
-import { HTMLTemplateResult, html, nothing } from "lit";
+import { format, isAfter, isEqual } from "date-fns";
+import { HTMLTemplateResult, html } from "lit";
 import { property } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { createYearViewArray, setTimeToNoon } from "../../utils/time";
 import { watch } from "../../utils/watch";
 import styles from "./datepicker-calendar.scss";
 import { ViewEnum } from "./types";
-import { classMap } from "lit/directives/class-map.js";
-import { isAfter, isEqual, format } from "date-fns";
 
 const TODAY_DATE = new Date();
 

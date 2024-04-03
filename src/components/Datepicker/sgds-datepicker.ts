@@ -1,19 +1,19 @@
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { format, parse } from "date-fns";
-import { html, nothing } from "lit";
+import { html } from "lit";
 import { property, query, queryAsync, state } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import { live } from "lit/directives/live.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
+import { type SgdsFormControl } from "../../utils/form";
+import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
 import { watch } from "../../utils/watch";
 import { DatepickerCalendar } from "./datepicker-calendar";
 import { DatepickerHeader } from "./datepicker-header";
 import DatepickerInput from "./datepicker-input";
 import styles from "./sgds-datepicker.scss";
 import { ViewEnum } from "./types";
-import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
-import { classMap } from "lit/directives/class-map.js";
-import { type SgdsFormControl } from "../../utils/form";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 

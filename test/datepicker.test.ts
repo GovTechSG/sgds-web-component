@@ -1572,8 +1572,10 @@ describe("datepicker a11y labels", () => {
     );
     const [prev, header, next] = el.shadowRoot?.querySelectorAll("button") as NodeListOf<HTMLButtonElement>;
     expect(prev.getAttribute("aria-label")).to.equal("Go to previous month, February 2024");
-    expect(header.getAttribute("aria-label")).to.equal("March 2024. Current view is days, click to show months in 2024");
-    expect(header.getAttribute("aria-disabled")).to.equal("false")
+    expect(header.getAttribute("aria-label")).to.equal(
+      "March 2024. Current view is days, click to show months in 2024"
+    );
+    expect(header.getAttribute("aria-disabled")).to.equal("false");
     expect(next.getAttribute("aria-label")).to.equal("Go to next month, April 2024");
   });
   it("datepicker-header button aria-labels when view=months, aria-disabled=false", async () => {
@@ -1592,7 +1594,7 @@ describe("datepicker a11y labels", () => {
     expect(header.getAttribute("aria-label")).to.equal(
       "2024. Current view is months, click to show years between 2024 - 2035"
     );
-    expect(header.getAttribute("aria-disabled")).to.equal("false")
+    expect(header.getAttribute("aria-disabled")).to.equal("false");
     expect(next.getAttribute("aria-label")).to.equal("Go to next year, 2025");
   });
   it("datepicker-header button aria-labels when view=years,  aria-disabled=true", async () => {
@@ -1612,7 +1614,7 @@ describe("datepicker a11y labels", () => {
     expect(next.getAttribute("aria-label")).to.equal("Go to next 12 years, 2036 - 2047");
 
     expect(header.classList.contains("cursor-not-allowed")).to.be.true;
-    expect(header.getAttribute("aria-disabled")).to.equal("true")
+    expect(header.getAttribute("aria-disabled")).to.equal("true");
   });
 
   it("aria-selected=true on selected dates when view=days", async () => {
@@ -1769,18 +1771,21 @@ describe("datepicker a11y labels", () => {
     expect(td?.getAttribute("aria-label")).to.equal("Friday, March 1st, 2024");
   });
 
-  it("dates outside of min and max range have aria-disabled=true and vice versa", async() => {
+  it("dates outside of min and max range have aria-disabled=true and vice versa", async () => {
     const mockDate = new Date(2024, 2, 28);
-    const mockMinDate = new Date(2024, 2, 20).toISOString()
-    const mockMaxDate = new Date(2024, 2, 30).toISOString()
+    const mockMinDate = new Date(2024, 2, 20).toISOString();
+    const mockMaxDate = new Date(2024, 2, 30).toISOString();
     const el = await fixture<SgdsDatepicker>(
-      html`<sgds-datepicker .displayDate=${mockDate} menuIsOpen minDate=${mockMinDate} maxDate=${mockMaxDate} ></sgds-datepicker>`
+      html`<sgds-datepicker
+        .displayDate=${mockDate}
+        menuIsOpen
+        minDate=${mockMinDate}
+        maxDate=${mockMaxDate}
+      ></sgds-datepicker>`
     );
-    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar")
-    const tds = calendar?.shadowRoot?.querySelectorAll("td[data-day]")
-    expect(tds?.[0].getAttribute("aria-disabled")).to.equal("true")
-    expect(tds?.[21].getAttribute("aria-disabled")).to.equal("false")
-
-  })
-
+    const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar");
+    const tds = calendar?.shadowRoot?.querySelectorAll("td[data-day]");
+    expect(tds?.[0].getAttribute("aria-disabled")).to.equal("true");
+    expect(tds?.[21].getAttribute("aria-disabled")).to.equal("false");
+  });
 });
