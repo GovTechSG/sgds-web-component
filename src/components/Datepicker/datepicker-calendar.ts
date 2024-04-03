@@ -81,13 +81,6 @@ export class DatepickerCalendar extends SgdsElement {
     this.addEventListener("keydown", this._handleKeyPress);
   }
 
-  firstUpdated() {
-    // if (this.selectedDate.length > 0) {
-    //   this.focusedDate = setTimeToNoon(this.selectedDate[0]);
-    // } else {
-    //   this.focusedDate = this.displayDate && setTimeToNoon(this.displayDate);
-    // }
-  }
   updated() {
     /** For KeyboardNavigation (switching months) and ClickNavigation:
      * Runs after render has completed and td of next month has appeared.
