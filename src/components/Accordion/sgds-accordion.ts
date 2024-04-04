@@ -3,14 +3,14 @@ import { property, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsAccordionItem from "./sgds-accordion-item";
-
+import accordionStyle from "./accordion.style";
 /**
  * @summary A dropdown mechanism that allow users to either show or hide related content. `SgdsAccordion` is a wrapper to manage the behaviour for multiple `SgdsAccordionItems`
  * @slot default - slot for accordion-item
  */
 
 export class SgdsAccordion extends SgdsElement {
-  static styles = [SgdsElement.styles];
+  static styles = [accordionStyle];
 
   /** Allows multiple accordion items to be opened at the same time */
   @property({ type: Boolean, reflect: true }) allowMultiple = false;
@@ -63,7 +63,7 @@ export class SgdsAccordion extends SgdsElement {
       return;
     }
     items.forEach(item => {
-      // Covers all elements within accordion-item 
+      // Covers all elements within accordion-item
       if (!event.composedPath().includes(item)) {
         // Close all the items that didn't dispatch the event.
         item.open = false;

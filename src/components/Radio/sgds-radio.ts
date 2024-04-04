@@ -7,6 +7,8 @@ import SgdsElement from "../../base/sgds-element";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import styles from "./sgds-radio.scss";
+import radioStyles from "./radio.style";
+import baseStyles from "../../base/reboot.style";
 /**
  * @summary Radio allows the user to select one option from a set while seeing all available options.
  *
@@ -16,7 +18,7 @@ import styles from "./sgds-radio.scss";
  * @event sgds-blur - Emitted when the control loses focus.
  */
 export class SgdsRadio extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [radioStyles];
   /**
    * Draws the radio in a checked state
    */

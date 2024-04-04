@@ -7,7 +7,7 @@ import { getAnimation, setDefaultAnimation } from "../../utils/animation-registr
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
 import styles from "./sgds-accordion-item.scss";
-
+import accordionStyle from "./accordion.style"
 /**
  *
  * @event sgds-show - Emitted on show.
@@ -29,7 +29,7 @@ import styles from "./sgds-accordion-item.scss";
  * @cssprop --accordion-item-line-height - The line height of accordion
  */
 export class SgdsAccordionItem extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [accordionStyle, styles];
   /** @internal */
   @query(".accordion-item") accordion: HTMLElement;
   /** @internal */

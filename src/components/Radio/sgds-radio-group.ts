@@ -6,7 +6,8 @@ import { FormSubmitController } from "../../utils/form";
 import { watch } from "../../utils/watch";
 import SgdsRadio from "./sgds-radio";
 import styles from "./sgds-radio-group.scss";
-
+import radioGroupStyles from "./radio-group.style";
+import baseStyles from "../../base/reboot.style";
 /**
  * @summary RadioGroup group multiple radios so they function as a single form control.
  *
@@ -15,7 +16,7 @@ import styles from "./sgds-radio-group.scss";
  * @event sgds-change - Emitted when the radio group's selected value changes.
  */
 export class SgdsRadioGroup extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [radioGroupStyles];
   /**@internal */
   protected readonly formSubmitController = new FormSubmitController(this, {
     defaultValue: (control: SgdsRadioGroup) => control.defaultValue

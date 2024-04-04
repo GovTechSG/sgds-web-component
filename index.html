@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="light">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link href='node_modules/@govtechsg/sgds/css/sgds.util.css' rel='stylesheet' type='text/css' /> -->
-    <!-- <link href='node_modules/@govtechsg/sgds/css/sgds.css' rel='stylesheet' type='text/css' /> -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds@2.1.1/css/sgds.min.css" rel="stylesheet" crossorigin="anonymous"> -->
-    <!-- <script type="module" id="dev-console-gateway"
-        src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"></script> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds/css/sgds.css" />
     <script
         src="/node_modules/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
@@ -113,6 +109,8 @@
 
         sgds-button {
             flex: 1;
+            margin-bottom: 10px;
+
         }
     </style>
     <!-- <script src="https://cdn.jsdelivr.net/npm/clk-web-components" type="module"></script> -->
@@ -139,7 +137,7 @@
             { title: 3, stepHeader: "Marker title", template: `<p>Step 3 Content</p>` },
         ];
     </script>
-
+    <link href='./root.css' rel='stylesheet' type='text/css' />
 </head>
 
 
@@ -217,6 +215,16 @@
             <h2>Progress</h2>
             <div class="row">
                 <div class="container">
+                    <div>
+                        <sgds-button variant="primary">Hello World</sgds-button>
+                        <sgds-button variant="secondary">Hello World</sgds-button>
+                        <sgds-button variant="warning">Hello World</sgds-button>
+                        <sgds-button variant="info">Hello World</sgds-button>
+                        <sgds-button variant="danger">Hello World</sgds-button>
+                        <sgds-button variant="light">Hello World</sgds-button>
+                        <sgds-button variant="link">Hello World</sgds-button>
+                        <sgds-button variant="dark">Hello World</sgds-button>
+                    </div>
                     <sgds-button id="modalShowButton">Open Modal</sgds-button>
                     <sgds-modal title="hello" titleicon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-amd&quot; viewBox=&quot;0 0 16 16&quot;>
                     <path d=&quot;m.334 0 4.358 4.359h7.15v7.15l4.358 4.358V0H.334ZM.2 9.72l4.487-4.488v6.281h6.28L6.48 16H.2V9.72Z&quot;/>
