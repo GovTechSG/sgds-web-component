@@ -30,7 +30,7 @@ export default css`
     margin: 1rem 0;
     opacity: 0.25;
   } */
-  /* h1,
+  /* \h1,
   h2,
   h3,
   h4,

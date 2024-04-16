@@ -148,4 +148,4 @@ export default css`
     padding-bottom: 1.5rem;
     padding-top: 0;
   }
-`
+`;
