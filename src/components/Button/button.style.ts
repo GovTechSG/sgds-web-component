@@ -1,6 +1,10 @@
 import { css } from "lit";
 
 export default css`
+  :host {
+    display: inline-block;
+  }
+  
   a {
     color: rgba(var(--sgds-link-color-rgb), var(--sgds-link-opacity, 1));
     text-decoration: underline;
@@ -120,15 +124,15 @@ export default css`
   }
   .btn-primary {
     --sgds-btn-color: #fff;
-    --sgds-btn-bg: #5942db;
+    --sgds-btn-bg:   var(--sgds-primary);//#5942db;
     --sgds-btn-border-color: #5942db;
     --sgds-btn-hover-color: #fff;
-    --sgds-btn-hover-bg: #4c38ba;
-    --sgds-btn-hover-border-color: #4735af;
+    --sgds-btn-hover-bg: color-mix(in srgb, var(--sgds-primary), black 15%); // #4c38ba; 
+    --sgds-btn-hover-border-color: var(--sgds-btn-hover-bg)//color-mix(in srgb, var(--sgds-primary), black 15%);// #4735af;
     --sgds-btn-focus-shadow-rgb: 114, 94, 224;
     --sgds-btn-active-color: #fff;
-    --sgds-btn-active-bg: #4735af;
-    --sgds-btn-active-border-color: #4332a4;
+    --sgds-btn-active-bg: color-mix(in srgb, var(--sgds-primary), black 15%);
+    --sgds-btn-active-border-color: var( --sgds-btn-active-bg)
     --sgds-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --sgds-btn-disabled-color: #fff;
     --sgds-btn-disabled-bg: #5942db;
@@ -407,7 +411,7 @@ export default css`
     --sgds-btn-font-size: 0.875rem;
     --sgds-btn-border-radius: var(--sgds-border-radius-sm);
   }
-  [data-bs-theme="dark"] .btn-primary {
+  /* [data-bs-theme="dark"] .btn-primary {
     --sgds-btn-color: var(--sgds-white);
     --sgds-btn-bg: var(--sgds-primary-bg-dark);
     --sgds-btn-border-color: var(--sgds-primary-bg-dark);
@@ -423,7 +427,7 @@ export default css`
     --sgds-btn-disabled-color: var(--sgds-body-bg);
     --sgds-btn-disabled-bg: var(--sgds-primary-bg-dark);
     --sgds-btn-disabled-border-color: var(--sgds-primary-bg-dark);
-  }
+  } */
   [data-bs-theme="dark"] .btn-outline-primary {
     --sgds-btn-color: var(--sgds-primary-text-emphasis);
     --sgds-btn-bg: var(--sgds-primary-bg-subtle);

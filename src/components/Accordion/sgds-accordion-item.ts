@@ -7,7 +7,7 @@ import { getAnimation, setDefaultAnimation } from "../../utils/animation-registr
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
 import styles from "./sgds-accordion-item.scss";
-import accordionStyle from "./accordion.style"
+import accordionStyle from "./accordion.style";
 /**
  *
  * @event sgds-show - Emitted on show.
