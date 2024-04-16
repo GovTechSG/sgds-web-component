@@ -294,7 +294,7 @@ comboBox.filterFunction = (inputValue, menuItem) => {
   <Story name="ComboBox with custom filter">
     {() => html`
         <div style="height:100px;">
-            <sgds-combo-box filterFunction=${(inputValue, menuItem) => menuItem.includes(inputValue)} placeholder="ComboBox with custom filter" menuList='[
+            <sgds-combo-box .filterFunction=${(inputValue, menuItem) => menuItem.includes(inputValue)} placeholder="ComboBox with custom filter" menuList='[
                 "Afghanistan",
                 "Albania",
                 "Algeria",
