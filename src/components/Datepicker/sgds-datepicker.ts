@@ -149,6 +149,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
     this.addEventListener("sgds-empty-input", this._handleEmptyInput);
     this.addEventListener("keydown", this._handleTab);
     this.addEventListener("sgds-hide", this._handleCloseMenu);
+    this.addEventListener("sgds-show", this._handleOpenMenu);
     this.initialDisplayDate = this.displayDate || new Date();
     if (this.initialValue && this.initialValue.length > 0) {
       // Validate initialValue against the dateFormat regex
@@ -220,6 +221,10 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
   }
 
   private async _handleCloseMenu() {
+    //return focus to input when menu closes
+    const input = await this.datepickerInputAsync;
+    input.focus();
+
     if (this.selectedDateRange.length === 0) {
       this.displayDate = this.initialDisplayDate;
     } else {
@@ -228,6 +233,11 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
       const calendar = await this.calendar;
       calendar._updateFocusedDate();
     }
+  }
+  private async _handleOpenMenu() {
+      const cal = await this.calendar;
+      const input = await this.datepickerInputAsync;
+      cal.focusOnCalendar(input);
   }
 
   private _makeInputValueString = (startDate: Date, endDate: Date, dateFormat: string) => {
@@ -368,19 +378,12 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
     this.value = e.detail;
   }
 
-  private _dialogAriaLabel() {
-    const view = this.view.replace("s", "");
-    // const header = await this.datepickerHeaderAsync;
-    const header = this.shadowRoot?.querySelector<DatepickerHeader>("sgds-datepicker-header");
-    if (header) {
-      const headerText = header.renderHeader().toString().replace("-", "to");
-      this.dialogAriaLabel = `Choose ${view} from ${headerText}`;
-    }
-  }
+  private _dialogAriaLabels = {
+    days: "Choose date",
+    months: "Choose month",
+    years: "Choose year"
+  };
 
-  updated() {
-    this._dialogAriaLabel();
-  }
   render() {
     const svgEl = html`
       <svg
@@ -457,7 +460,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
           class="sgds datepicker dropdown-menu"
           role="dialog"
           part="menu"
-          aria-label=${this.dialogAriaLabel}
+          aria-label=${this._dialogAriaLabels[this.view]}
           @click=${(event: MouseEvent) => event.stopPropagation()}
         >
           <sgds-datepicker-header

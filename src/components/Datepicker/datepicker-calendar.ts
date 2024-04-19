@@ -7,6 +7,7 @@ import { createYearViewArray, setTimeToNoon } from "../../utils/time";
 import { watch } from "../../utils/watch";
 import styles from "./datepicker-calendar.scss";
 import { ViewEnum } from "./types";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 const TODAY_DATE = new Date();
 
@@ -36,13 +37,26 @@ export class DatepickerCalendar extends SgdsElement {
   static styles = [SgdsElement.styles, styles];
 
   /** @internal */
-  static DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  static DAY_LABELS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
   /** @internal */
   static daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
   /** @internal */
-  static MONTHVIEW_LABELS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  static MONTHVIEW_LABELS = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
 
   /** @internal */
   @property({ type: Array }) selectedDate: Date[] = [];
@@ -339,6 +353,7 @@ export class DatepickerCalendar extends SgdsElement {
               data-date=${dateStr}
               data-day=${day}
               aria-label=${ariaLabel}
+              aria-current=${ifDefined(isCurrentDay && isCurrentMonth && isCurrentYear ? "date" : undefined)}
               class=${classMap({
                 today: isCurrentDay && isCurrentMonth && isCurrentYear,
                 "selected-ends": isFirstSelectedDate || isLastSelectedDate,
@@ -346,10 +361,10 @@ export class DatepickerCalendar extends SgdsElement {
                 disabled: beforeMinDate || afterMinDate
               })}
               @click=${clickHandler}
-              aria-selected=${isSelected}
+              aria-selected=${ifDefined(isSelected ? "true" : undefined)}
               tabindex=${this.focusedDate === new Date(dateStr) ? "3" : "-1"}
               ?disabled=${beforeMinDate || afterMinDate}
-              aria-disabled=${beforeMinDate || afterMinDate ? "true" : "false"}
+              aria-disabled=${ifDefined(beforeMinDate || afterMinDate ? "true" : undefined)}
               role="button"
             >
               ${day}
@@ -372,14 +387,14 @@ export class DatepickerCalendar extends SgdsElement {
     }
 
     const dayView = html`
-      <table class="text-center">
+      <table class="text-center" role="grid">
         <thead>
           <tr>
             ${DatepickerCalendar.DAY_LABELS.map(
               (label: string, index: number) =>
                 html`
-                  <th key=${index}>
-                    <small>${label}</small>
+                  <th key=${index} abbr=${label} scope="col">
+                    <small>${label.slice(0, 3)}</small>
                   </th>
                 `
             )}
@@ -408,6 +423,7 @@ export class DatepickerCalendar extends SgdsElement {
           const isFirstSelectedYear = rangeDates[0].getFullYear() === year;
           const isLastSelectedMonth = rangeDates[rangeDates.length - 1].getMonth() === idx;
           const isLastSelectedYear = rangeDates[rangeDates.length - 1].getFullYear() === year;
+          const ariaLabel = isCurrentMonth ? `Current month ${m} ${year}` : `${m} ${year}`;
           return html` <button
             class=${classMap({
               active: selectedTime.includes(time),
@@ -421,8 +437,9 @@ export class DatepickerCalendar extends SgdsElement {
             data-year=${year}
             tabindex="3"
             aria-selected=${selectedTime.includes(time)}
+            aria-label=${ariaLabel}
           >
-            ${m}
+            ${m.slice(0, 3)}
           </button>`;
         })}
       </div>
@@ -454,6 +471,7 @@ export class DatepickerCalendar extends SgdsElement {
               tabindex="3"
               ?disabled=${y < 1900}
               aria-selected=${selectedYears.includes(y)}
+              aria-label=${ifDefined(CURRENT_YEAR === y ? `Current year, ${y}` : undefined)}
             >
               ${y}
             </button>

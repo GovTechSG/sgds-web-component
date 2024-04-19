@@ -1,4 +1,4 @@
-import { isBefore, isEqual, setMonth, setYear } from "date-fns";
+import { isBefore, isEqual } from "date-fns";
 import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -137,19 +137,19 @@ export class DatepickerHeader extends SgdsElement {
 
   private _ariaLabelForNextBtn() {
     const nextBtnDate = {
-      days: setMonth(this.displayDate, this.displayDate.getMonth() + 1),
-      months: setYear(this.displayDate, this.displayDate.getFullYear() + 1),
-      years: setYear(this.displayDate, this.displayDate.getFullYear() + 12)
+      days: "Show next month",
+      months: "Show next year",
+      years: "Show next 12 years"
     };
-    return `Go to next ${AriaLabelViewState[this.view]}, ${this.renderHeader(nextBtnDate[this.view])}`;
+    return nextBtnDate[this.view];
   }
   private _ariaLabelForPrevBtn() {
     const prevBtnDate = {
-      days: setMonth(this.displayDate, this.displayDate.getMonth() - 1),
-      months: setYear(this.displayDate, this.displayDate.getFullYear() - 1),
-      years: setYear(this.displayDate, this.displayDate.getFullYear() - 12)
+      days: "Show previous month",
+      months: "Show previous year",
+      years: "Show previous 12 years"
     };
-    return `Go to previous ${AriaLabelViewState[this.view]}, ${this.renderHeader(prevBtnDate[this.view])}`;
+    return prevBtnDate[this.view];
   }
 
   private _ariaLabelForHeaderBtn() {
@@ -188,8 +188,8 @@ export class DatepickerHeader extends SgdsElement {
             @click=${this._changeView}
             class=${classMap({ "cursor-not-allowed": this.view === "years" })}
             tabindex="1"
-            aria-label=${this._ariaLabelForHeaderBtn()}
             aria-disabled=${this.view === "years" ? "true" : "false"}
+            aria-live="polite"
           >
             ${this._renderHeaderTemplate()}
           </button>

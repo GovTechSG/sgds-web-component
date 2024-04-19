@@ -1058,10 +1058,11 @@ describe("sgds-datepicker close and open menu behaviours", async () => {
     await el.updateComplete;
     const header = el.shadowRoot?.querySelector("sgds-datepicker-header") as DatepickerHeader;
     const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar") as DatepickerCalendar;
-
+    const input = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
     const getCalendarActiveElement = () => calendar.shadowRoot?.activeElement;
     await waitUntil(() => getCalendarActiveElement());
-    return { calendar, getCalendarActiveElement, calendarBtnEl, el, header };
+    const getDateInputActiveElement = () => input.shadowRoot?.activeElement;
+    return { calendar, getCalendarActiveElement, getDateInputActiveElement, calendarBtnEl, el, header, input };
   };
   const monthViewSetup = async (initialValue: string[] = []) => {
     const { header, ...etc } = await dayViewSetup(initialValue);
@@ -1098,8 +1099,10 @@ describe("sgds-datepicker close and open menu behaviours", async () => {
     const thisYearEl = calendar.shadowRoot?.querySelector(`button[data-year="${todayYear}"]`);
     expect(getCalendarActiveElement() === thisYearEl).to.be.true;
   });
-  it("in day view, when calendar focus is moved, it should auto focus to the today calendar date after close and open", async () => {
-    const { calendar, getCalendarActiveElement, calendarBtnEl, el } = await dayViewSetup(["01/02/2024"]);
+  it("in day view, when calendar focus is moved, it should auto focus to the today calendar date after close and open, when close focuses to input", async () => {
+    const { calendar, getCalendarActiveElement, calendarBtnEl, getDateInputActiveElement, input } = await dayViewSetup([
+      "01/02/2024"
+    ]);
     const selectedTdEl = calendar.shadowRoot?.querySelector(`td[data-day="1"]`);
     expect(getCalendarActiveElement() === selectedTdEl).to.be.true;
 
@@ -1111,14 +1114,18 @@ describe("sgds-datepicker close and open menu behaviours", async () => {
 
     //close and open menu
     calendarBtnEl.click();
-    await waitUntil(() => el.menuIsOpen === false);
-    calendarBtnEl.click();
-    await waitUntil(() => el.menuIsOpen === true);
+    const inputFocusedEl = input.shadowRoot?.querySelector("input");
 
+    await waitUntil(() => getDateInputActiveElement() === inputFocusedEl);
+    expect(getDateInputActiveElement() === inputFocusedEl).to.be.true;
+    calendarBtnEl.click();
+
+    await waitUntil(() => getCalendarActiveElement() === selectedTdEl);
     expect(getCalendarActiveElement() === selectedTdEl).to.be.true;
   });
-  it("in month view, when calendar focus is moved, it should auto focus to the today calendar date after close and open", async () => {
-    const { calendar, getCalendarActiveElement, calendarBtnEl, el } = await monthViewSetup(["01/02/2024"]);
+  it("in month view, when calendar focus is moved, it should auto focus to the today calendar date after close and open, when close focuses to input", async () => {
+    const { calendar, getCalendarActiveElement, calendarBtnEl, getDateInputActiveElement, input } =
+      await monthViewSetup(["01/02/2024"]);
     const selectedButtonEL = calendar.shadowRoot?.querySelector(`button[data-month="1"]`);
     expect(getCalendarActiveElement() === selectedButtonEL).to.be.true;
 
@@ -1130,14 +1137,18 @@ describe("sgds-datepicker close and open menu behaviours", async () => {
 
     //close and open menu
     calendarBtnEl.click();
-    await waitUntil(() => el.menuIsOpen === false);
+    const inputFocusedEl = input.shadowRoot?.querySelector("input");
+    await waitUntil(() => getDateInputActiveElement() === inputFocusedEl);
+
     calendarBtnEl.click();
-    await waitUntil(() => el.menuIsOpen === true);
+    await waitUntil(() => getCalendarActiveElement() === selectedButtonEL);
 
     expect(getCalendarActiveElement() === selectedButtonEL).to.be.true;
   });
-  it("in year view, when calendar focus is moved, it should auto focus to the today calendar date after close and open", async () => {
-    const { calendar, getCalendarActiveElement, calendarBtnEl, el } = await yearViewSetup(["01/02/2024"]);
+  it("in year view, when calendar focus is moved, it should auto focus to the today calendar date after close and open, when close focuses to input", async () => {
+    const { calendar, getCalendarActiveElement, calendarBtnEl, getDateInputActiveElement, input } = await yearViewSetup(
+      ["01/02/2024"]
+    );
     const selectedButtonEL = calendar.shadowRoot?.querySelector(`button[data-year="2024"]`);
     expect(getCalendarActiveElement() === selectedButtonEL).to.be.true;
 
@@ -1149,9 +1160,10 @@ describe("sgds-datepicker close and open menu behaviours", async () => {
 
     //close and open menu
     calendarBtnEl.click();
-    await waitUntil(() => el.menuIsOpen === false);
+    const inputFocusedEl = input.shadowRoot?.querySelector("input");
+    await waitUntil(() => getDateInputActiveElement() === inputFocusedEl);
     calendarBtnEl.click();
-    await waitUntil(() => el.menuIsOpen === true);
+    await waitUntil(() => getCalendarActiveElement() === selectedButtonEL);
 
     expect(getCalendarActiveElement() === selectedButtonEL).to.be.true;
   });
@@ -1571,12 +1583,9 @@ describe("datepicker a11y labels", () => {
       ></sgds-datepicker-header>`
     );
     const [prev, header, next] = el.shadowRoot?.querySelectorAll("button") as NodeListOf<HTMLButtonElement>;
-    expect(prev.getAttribute("aria-label")).to.equal("Go to previous month, February 2024");
-    expect(header.getAttribute("aria-label")).to.equal(
-      "March 2024. Current view is days, click to show months in 2024"
-    );
+    expect(prev.getAttribute("aria-label")).to.equal("Show previous month");
     expect(header.getAttribute("aria-disabled")).to.equal("false");
-    expect(next.getAttribute("aria-label")).to.equal("Go to next month, April 2024");
+    expect(next.getAttribute("aria-label")).to.equal("Show next month");
   });
   it("datepicker-header button aria-labels when view=months, aria-disabled=false", async () => {
     // 28th March 2024
@@ -1590,12 +1599,9 @@ describe("datepicker a11y labels", () => {
       ></sgds-datepicker-header>`
     );
     const [prev, header, next] = el.shadowRoot?.querySelectorAll("button") as NodeListOf<HTMLButtonElement>;
-    expect(prev.getAttribute("aria-label")).to.equal("Go to previous year, 2023");
-    expect(header.getAttribute("aria-label")).to.equal(
-      "2024. Current view is months, click to show years between 2024 - 2035"
-    );
+    expect(prev.getAttribute("aria-label")).to.equal("Show previous year");
     expect(header.getAttribute("aria-disabled")).to.equal("false");
-    expect(next.getAttribute("aria-label")).to.equal("Go to next year, 2025");
+    expect(next.getAttribute("aria-label")).to.equal("Show next year");
   });
   it("datepicker-header button aria-labels when view=years,  aria-disabled=true", async () => {
     // 28th March 2024
@@ -1609,9 +1615,8 @@ describe("datepicker a11y labels", () => {
       ></sgds-datepicker-header>`
     );
     const [prev, header, next] = el.shadowRoot?.querySelectorAll("button") as NodeListOf<HTMLButtonElement>;
-    expect(prev.getAttribute("aria-label")).to.equal("Go to previous 12 years, 2012 - 2023");
-    expect(header.getAttribute("aria-label")).to.equal("2024 - 2035. Current view is years");
-    expect(next.getAttribute("aria-label")).to.equal("Go to next 12 years, 2036 - 2047");
+    expect(prev.getAttribute("aria-label")).to.equal("Show previous 12 years");
+    expect(next.getAttribute("aria-label")).to.equal("Show next 12 years");
 
     expect(header.classList.contains("cursor-not-allowed")).to.be.true;
     expect(header.getAttribute("aria-disabled")).to.equal("true");
@@ -1633,8 +1638,6 @@ describe("datepicker a11y labels", () => {
     const selectedTd = el.shadowRoot?.querySelector("td.active");
 
     expect(selectedTd?.getAttribute("aria-selected")).to.equal("true");
-    const unselectedTds = el.shadowRoot?.querySelectorAll("td[aria-selected='false']");
-    expect(unselectedTds?.length).to.equal(31 - 1);
   });
   it("aria-selected=true on selected MONTHS when view=months", async () => {
     // 28th March 2024
@@ -1652,8 +1655,6 @@ describe("datepicker a11y labels", () => {
     const selectedBtn = el.shadowRoot?.querySelector("button.active");
 
     expect(selectedBtn?.getAttribute("aria-selected")).to.equal("true");
-    const unselectedBtns = el.shadowRoot?.querySelectorAll("button[aria-selected='false']");
-    expect(unselectedBtns?.length).to.equal(12 - 1);
   });
   it("aria-selected=true on selected years when view=years", async () => {
     // 28th March 2024
@@ -1671,8 +1672,6 @@ describe("datepicker a11y labels", () => {
     const selectedBtn = el.shadowRoot?.querySelector("button.active");
 
     expect(selectedBtn?.getAttribute("aria-selected")).to.equal("true");
-    const unselectedBtns = el.shadowRoot?.querySelectorAll("button[aria-selected='false']");
-    expect(unselectedBtns?.length).to.equal(12 - 1);
   });
   it("aria-selected=true on selected dates when view=days, mode=range", async () => {
     // 28th March 2024
@@ -1691,8 +1690,6 @@ describe("datepicker a11y labels", () => {
     const selectedTds = el.shadowRoot?.querySelectorAll("td[aria-selected='true']");
     const selectedCount = 27 - 14 + 1;
     expect(selectedTds?.length).to.equal(selectedCount);
-    const unselectedTds = el.shadowRoot?.querySelectorAll("td[aria-selected='false']");
-    expect(unselectedTds?.length).to.equal(31 - selectedCount);
   });
   it("aria-selected=true on selected dates when view=months, mode=range", async () => {
     // 28th March 2024
@@ -1711,8 +1708,6 @@ describe("datepicker a11y labels", () => {
     const selectedBtns = el.shadowRoot?.querySelectorAll("button[aria-selected='true']");
     const selectedCount = 9 - 2 + 1;
     expect(selectedBtns?.length).to.equal(selectedCount);
-    const unselectedBtns = el.shadowRoot?.querySelectorAll("button[aria-selected='false']");
-    expect(unselectedBtns?.length).to.equal(12 - selectedCount);
   });
   it("aria-selected=true on selected dates when view=years, mode=range", async () => {
     // 28th March 2024
@@ -1731,8 +1726,6 @@ describe("datepicker a11y labels", () => {
     const selectedBtns = el.shadowRoot?.querySelectorAll("button[aria-selected='true']");
     const selectedCount = 2027 - 2024 + 1;
     expect(selectedBtns?.length).to.equal(selectedCount);
-    const unselectedBtns = el.shadowRoot?.querySelectorAll("button[aria-selected='false']");
-    expect(unselectedBtns?.length).to.equal(12 - selectedCount);
   });
 
   it(`aria-label of header button changes based on the view of datepicker`, async () => {
@@ -1744,16 +1737,16 @@ describe("datepicker a11y labels", () => {
     const dialog = () => el.shadowRoot?.querySelector("ul[role='dialog']");
     const header = el.shadowRoot?.querySelector<DatepickerHeader>("sgds-datepicker-header");
     const headerButton = header?.shadowRoot?.querySelectorAll("button")[1];
-    expect(dialog()?.getAttribute("aria-label")).to.equal(`Choose day from March 2024`);
+    expect(dialog()?.getAttribute("aria-label")).to.equal(`Choose date`);
     headerButton?.click();
     await header?.updateComplete;
     await elementUpdated(el);
     // await el.updateComplete;
-    expect(dialog()?.getAttribute("aria-label")).to.equal(`Choose month from 2024`);
+    expect(dialog()?.getAttribute("aria-label")).to.equal(`Choose month`);
     headerButton?.click();
     await header?.updateComplete;
     await elementUpdated(el);
-    expect(dialog()?.getAttribute("aria-label")).to.equal(`Choose year from 2024 to 2035`);
+    expect(dialog()?.getAttribute("aria-label")).to.equal(`Choose year`);
   });
   it("aria-label of td dates in calendar", async () => {
     const mockDate = new Date(2024, 2, 28);
@@ -1786,6 +1779,53 @@ describe("datepicker a11y labels", () => {
     const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar");
     const tds = calendar?.shadowRoot?.querySelectorAll("td[data-day]");
     expect(tds?.[0].getAttribute("aria-disabled")).to.equal("true");
-    expect(tds?.[21].getAttribute("aria-disabled")).to.equal("false");
+  });
+});
+
+describe("aria-current in calendar", () => {
+  it("for day view, current date is indicated by aria-current", async () => {
+    const todayDate = new Date();
+    const date = todayDate.getDate();
+    const el = await fixture<DatepickerCalendar>(
+      html`<sgds-datepicker-calendar
+        .displayDate=${todayDate}
+        view="days"
+        focusedTabIndex=${0}
+      ></sgds-datepicker-calendar>`
+    );
+    const currentDayTd = el.shadowRoot?.querySelector(`td[data-day='${date}']`)?.getAttribute("aria-current");
+    expect(currentDayTd).to.equal("date");
+  });
+  it("for month view, current month is indicated in aria-label", async () => {
+    const todayDate = new Date();
+    const month = todayDate.getMonth();
+    const el = await fixture<DatepickerCalendar>(
+      html`<sgds-datepicker-calendar
+        .displayDate=${todayDate}
+        view="months"
+        focusedTabIndex=${0}
+      ></sgds-datepicker-calendar>`
+    );
+    const currentMonthButtonAriaLabel = el.shadowRoot
+      ?.querySelector(`button[data-month='${month}']`)
+      ?.getAttribute("aria-label");
+
+    expect(currentMonthButtonAriaLabel).to.include("Current month");
+  });
+  it("for year view, current month is indicated in aria-label", async () => {
+    const todayDate = new Date();
+    const year = todayDate.getFullYear();
+    const el = await fixture<DatepickerCalendar>(
+      html`<sgds-datepicker-calendar
+        .displayDate=${todayDate}
+        view="years"
+        focusedTabIndex=${0}
+      ></sgds-datepicker-calendar>`
+    );
+    const currentMonthButtonAriaLabel = el.shadowRoot
+      ?.querySelector(`button[data-year='${year}']`)
+      ?.getAttribute("aria-label");
+
+    expect(currentMonthButtonAriaLabel).to.include("Current year");
   });
 });

@@ -174,10 +174,9 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
         @invalid=${() => this.setInvalid(true)}
         @focus=${this._handleFocus}
         @blur=${this._handleBlur}
+        aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this.inputId}-invalid` : undefined)}
       />
-      ${this.hasFeedback
-        ? html`<div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
-        : ""} `;
+      ${this._renderFeedback()} `;
   }
   protected _renderFeedback() {
     return this.hasFeedback
