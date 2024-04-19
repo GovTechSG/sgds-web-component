@@ -230,9 +230,3 @@ export const MONTH_LABELS = [
   "November",
   "December"
 ];
-
-const AriaLabelViewState = {
-  days: "month",
-  months: "year",
-  years: "12 years"
-};
