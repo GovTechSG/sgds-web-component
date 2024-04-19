@@ -132,8 +132,8 @@ export class DatepickerInput extends SgdsInput {
     return await this._applyInputMask(this.dateFormat);
   }
   public async focus() {
-    const input = await this.shadowInput
-    return input.focus()
+    const input = await this.shadowInput;
+    return input.focus();
   }
   render() {
     return html`

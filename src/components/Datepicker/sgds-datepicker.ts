@@ -235,9 +235,9 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
     }
   }
   private async _handleOpenMenu() {
-      const cal = await this.calendar;
-      const input = await this.datepickerInputAsync;
-      cal.focusOnCalendar(input);
+    const cal = await this.calendar;
+    const input = await this.datepickerInputAsync;
+    cal.focusOnCalendar(input);
   }
 
   private _makeInputValueString = (startDate: Date, endDate: Date, dateFormat: string) => {
