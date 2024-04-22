@@ -1,6 +1,5 @@
-import { PropertyValueMap, html } from "lit";
+import { LitElement, PropertyValueMap, html } from "lit";
 import { customElement } from "lit/decorators.js";
-import SgdsElement from "../src/base/sgds-element";
 import { SgdsInput } from "../src/components/Input/sgds-input";
 import { SgdsStepper } from "../src/components/Stepper/sgds-stepper";
 
@@ -11,7 +10,7 @@ interface IDetails {
   gender: string;
 }
 @customElement("mock-stepper")
-export class MockStepper extends SgdsElement {
+export class MockStepper extends LitElement {
   details: IDetails = {
     firstName: "",
     lastName: "",
