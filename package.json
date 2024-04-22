@@ -15,7 +15,7 @@
     "write:component": "plop",
     "test": "rm -rf test-outdir && rollup --config rollup.test.config.js && web-test-runner",
     "test:scripts": "wtr scripts/__tests__/**/*.test.js --node-resolve",
-    "storybook": "nodemon --exec \"npm run write:stories &&  STORYBOOK_ENV=development start-storybook -p 6006\" --watch stories/templates stories/getting-started -e js,mdx",
+    "storybook": "npm run build && nodemon --exec \"npm run write:stories &&  STORYBOOK_ENV=development start-storybook -p 6006\" --watch stories/templates stories/getting-started -e js,mdx",
     "build-storybook": "npm run build && npm run write:stories && STORYBOOK_ENV=production build-storybook",
     "prepare": "husky install",
     "concat:stories": "gulp concat-storybook-mdx",
@@ -42,7 +42,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@govtechsg/sgds": "^2.1.1",
+    "@govtechsg/sgds": "^2.3.0-alpha.0",
     "@lit-labs/react": "^1.0.9",
     "@open-wc/scoped-elements": "^2.2.0",
     "bootstrap": "^5.1.3",
