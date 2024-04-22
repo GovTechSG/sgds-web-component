@@ -11,6 +11,12 @@
     &:focus {
       outline: var(--datepicker-theme-color) auto 2px;
     }
+    &.disabled {
+      cursor: not-allowed;
+    }
+    &:hover:not(.disabled) {
+      background-color: var(--datepicker-hover-bg-color);
+    }
   }
 
   svg {

@@ -32,7 +32,7 @@ button.year {
       @extend %selected-ends-shared;
     }
   }
-  &:hover {
+  &:hover:not(.active) {
     @extend %active-shared;
   }
   &:focus {
@@ -48,7 +48,7 @@ td {
 
   &[data-day] {
     cursor: pointer;
-    &:hover:not(.disabled) {
+    &:hover:not(.disabled):not(.selected-ends) {
       @extend %active-shared;
     }
     &.active {

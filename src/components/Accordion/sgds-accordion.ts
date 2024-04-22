@@ -63,7 +63,7 @@ export class SgdsAccordion extends SgdsElement {
       return;
     }
     items.forEach(item => {
-      // Covers all elements within accordion-item 
+      // Covers all elements within accordion-item
       if (!event.composedPath().includes(item)) {
         // Close all the items that didn't dispatch the event.
         item.open = false;

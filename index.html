@@ -268,12 +268,18 @@
                     maxdate="2024-01-30T12:00:00.000Z"></sgds-datepicker>
                 <sgds-button type="submit">Submit</sgds-button>
             </form> -->
-
-            <form id="datepicker-form">
-                <sgds-datepicker name="myDatepicker" id="form-submission-example" label="Choose a date"
-                    hintText="The minimum date is 10 June 2023 and maximum date is 19 June 2023"
-                    .displayDate=${args.displayDate} minDate="2023-06-10T12:00:00.000Z"
-                    maxDate="2023-06-19T12:00:00.000Z" required></sgds-datepicker>
+            <sgds-datepicker
+            label="Choose a date"
+          ></sgds-datepicker>
+          
+            <form id="datepicker-form" >
+                <sgds-datepicker
+                  name="myDatepicker"
+                  id="form-submission-example"
+                  label="Choose a date"
+                  hintText="The minimum date is 10 June 2023 and maximum date is 19 June 2023"
+                  required
+                ></sgds-datepicker>
                 <button type="submit">Submit</button>
             </form>
             <script>
@@ -293,6 +299,8 @@
             </sgds-datepicker>
             <sgds-datepicker mode="range" initialValue='["20/01/2024", "22/02/2024"]' mindate="2024-01-02T12:00:00.000Z"
                 maxdate="2024-01-30T12:00:00.000Z">
+            </sgds-datepicker>
+            <sgds-datepicker mode="range" initialValue='["20/01/2024", "22/02/2024"]'>
             </sgds-datepicker>
 
             <!-- <sgds-datepicker menuIsOpen noFeedback></sgds-datepicker> -->

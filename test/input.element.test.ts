@@ -30,10 +30,13 @@ describe("sgds-input", () => {
   });
 
   it("input's id attribute should contain in .invalid-feedback's id attribute", async () => {
-    const el = await fixture(html`<sgds-input hasFeedback></sgds-input>`);
+    const el = await fixture<SgdsInput>(html`<sgds-input hasFeedback></sgds-input>`);
+    el.invalid = true;
+    await elementUpdated(el);
     const input = el.shadowRoot?.querySelector("input");
     const feedback = el.shadowRoot?.querySelector(".invalid-feedback");
     expect(feedback?.getAttribute("id")).to.contain(input?.getAttribute("id"));
+    expect(input?.getAttribute("aria-describedby")).to.contain(feedback?.getAttribute("id"));
   });
 
   it("should be disabled with the disabled attribute", async () => {

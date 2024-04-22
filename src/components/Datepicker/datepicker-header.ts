@@ -53,23 +53,25 @@ export class DatepickerHeader extends SgdsElement {
     this.emit("sgds-view", { detail: this.view }); // emit event to render the correct view
   }
 
-  private _renderHeader() {
-    const { view, displayDate } = this;
+  public renderHeader(displayDate = this.displayDate, view = this.view) {
     if (view === "months") {
-      return html` ${displayDate.getFullYear()} `;
+      return displayDate.getFullYear();
     }
     if (view === "years") {
       const CURRENT_YEAR = new Date().getFullYear();
-      const displayYear = this.displayDate.getFullYear();
+      const displayYear = displayDate.getFullYear();
       const remainder = (displayYear - CURRENT_YEAR) % 12;
       const yearsPosition = remainder < 0 ? 12 + remainder : remainder;
       const startLimit = displayYear - yearsPosition;
       const endLimit = displayYear - yearsPosition + 12 - 1;
-      return html` ${startLimit} - ${endLimit} `;
+      return `${startLimit} - ${endLimit}`;
     }
-    return html`${MONTH_LABELS[displayDate.getMonth()]} ${displayDate.getFullYear()}`;
+    return `${MONTH_LABELS[displayDate.getMonth()]} ${displayDate.getFullYear()}`;
   }
 
+  private _renderHeaderTemplate() {
+    return html`${this.renderHeader()}`;
+  }
   /** @internal */
   private handleClickPrevious() {
     const { view, displayDate, focusedDate } = this;
@@ -133,6 +135,31 @@ export class DatepickerHeader extends SgdsElement {
     return isEqual(displayMonthYear, new Date(0, 0, 1)) || isBefore(displayMonthYear, new Date(0, 0, 1));
   }
 
+  private _ariaLabelForNextBtn() {
+    const nextBtnDate = {
+      days: "Show next month",
+      months: "Show next year",
+      years: "Show next 12 years"
+    };
+    return nextBtnDate[this.view];
+  }
+  private _ariaLabelForPrevBtn() {
+    const prevBtnDate = {
+      days: "Show previous month",
+      months: "Show previous year",
+      years: "Show previous 12 years"
+    };
+    return prevBtnDate[this.view];
+  }
+
+  private _ariaLabelForHeaderBtn() {
+    const message = {
+      days: `Current view is days, click to show months in ${this.displayDate.getFullYear()}`,
+      months: `Current view is months, click to show years between ${this.renderHeader(this.displayDate, "years")}`,
+      years: `Current view is years`
+    };
+    return `${this.renderHeader()}. ${message[this.view]}`;
+  }
   render() {
     return html`
       <div class="datepicker-header dropdown-header" role="heading">
@@ -140,7 +167,8 @@ export class DatepickerHeader extends SgdsElement {
           <button
             @click="${this.handleClickPrevious}"
             tabindex="0"
-            class="${classMap({ invisible: this._removeCaret() })}"
+            class=${classMap({ invisible: this._removeCaret() })}
+            aria-label=${this._ariaLabelForPrevBtn()}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -156,8 +184,16 @@ export class DatepickerHeader extends SgdsElement {
               />
             </svg>
           </button>
-          <button @click=${this._changeView} tabindex="1">${this._renderHeader()}</button>
-          <button @click="${this._handleClickNext}" tabindex="2">
+          <button
+            @click=${this._changeView}
+            class=${classMap({ disabled: this.view === "years" })}
+            tabindex="1"
+            aria-disabled=${this.view === "years" ? "true" : "false"}
+            aria-live="polite"
+          >
+            ${this._renderHeaderTemplate()}
+          </button>
+          <button @click="${this._handleClickNext}" tabindex="2" aria-label=${this._ariaLabelForNextBtn()}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
