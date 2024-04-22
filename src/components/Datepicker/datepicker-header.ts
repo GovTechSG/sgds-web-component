@@ -186,7 +186,7 @@ export class DatepickerHeader extends SgdsElement {
           </button>
           <button
             @click=${this._changeView}
-            class=${classMap({ "cursor-not-allowed": this.view === "years" })}
+            class=${classMap({ disabled: this.view === "years" })}
             tabindex="1"
             aria-disabled=${this.view === "years" ? "true" : "false"}
             aria-live="polite"

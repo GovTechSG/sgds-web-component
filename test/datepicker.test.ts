@@ -1618,7 +1618,7 @@ describe("datepicker a11y labels", () => {
     expect(prev.getAttribute("aria-label")).to.equal("Show previous 12 years");
     expect(next.getAttribute("aria-label")).to.equal("Show next 12 years");
 
-    expect(header.classList.contains("cursor-not-allowed")).to.be.true;
+    expect(header.classList.contains("disabled")).to.be.true;
     expect(header.getAttribute("aria-disabled")).to.equal("true");
   });
 
