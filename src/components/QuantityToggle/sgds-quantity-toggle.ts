@@ -65,6 +65,9 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
   private inputId: string = genId("quantity-toggle", "input");
 
   handleChange(event: string) {
+    if (parseInt(this.input.value) < this.step || this.input.value === "") {
+      this.input.value = "0";
+    }
     this.value = parseInt(this.input.value);
     this.emit(event);
   }
