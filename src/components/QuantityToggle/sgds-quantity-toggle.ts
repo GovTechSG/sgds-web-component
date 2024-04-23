@@ -68,10 +68,28 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
     this.value = parseInt(this.input.value);
     this.emit(event);
   }
+
+  handleKeyDown(event: KeyboardEvent) {
+    const allowedKeys = [
+      "Backspace",
+      "ArrowUp",
+      "ArrowDown",
+      "ArrowLeft",
+      "ArrowRight",
+      ...Array.from(Array(10).keys()).map(key => key.toString())
+    ];
+
+    // Allow keydown event only if the pressed key is in the allowedKeys array
+    if (!allowedKeys.includes(event.key)) {
+      event.preventDefault();
+    }
+  }
+
   /** Simulates a click on the plus button */
   public plus() {
     this.plusBtn.click();
   }
+
   /** Simulates a click on the minus button */
   public minus() {
     this.minusBtn.click();
@@ -137,6 +155,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
           .value=${live(this.value.toString())}
           @change=${() => this.handleChange("sgds-change")}
           @input=${() => this.handleChange("sgds-input")}
+          @keydown=${this.handleKeyDown}
           ?disabled=${this.disabled}
           id=${this.inputId}
           aria-label="quantity"
