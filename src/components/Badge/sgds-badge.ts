@@ -25,7 +25,7 @@ export class SgdsBadge extends SgdsElement {
       <span
         class="  
           ${classMap({
-          "badge": !this.isLight,
+          badge: !this.isLight,
           [`bg-${this.variant}`]: this.variant && !this.isLight,
           [`badge-outline text-bg-${this.variant}`]: this.isLight,
           "rounded-pill": this.roundedPill,

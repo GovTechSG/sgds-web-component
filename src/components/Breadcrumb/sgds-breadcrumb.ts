@@ -4,7 +4,7 @@ import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsBreadcrumbItem from "./sgds-breadcrumb-item";
 import styles from "./sgds-breadcrumb.scss?inline";
-
+import breadcrumbStyle from "./breadcrumb.style";
 /**
  * @summary Breadcrumbs help users to navigate and understand where they are on the current website or service.
  *
@@ -14,7 +14,7 @@ import styles from "./sgds-breadcrumb.scss?inline";
  * @csspart base - The nav element wrapper of `SgdsBreadcrumb`
  */
 export class SgdsBreadcrumb extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [styles, breadcrumbStyle];
   /** The aria-label of nav element within breadcrumb component. */
   @property({ type: String }) ariaLabel = "breadcrumb";
   /**@internal */
