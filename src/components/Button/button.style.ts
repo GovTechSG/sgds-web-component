@@ -3,6 +3,21 @@ import { css } from "lit";
 export default css`
   :host {
     display: inline-block;
+    --sgds-btn-padding-x: 1rem;
+    --sgds-btn-padding-y: 0.4375rem;
+    --sgds-btn-font-family: var(--sgds-font-sans-serif);
+    --sgds-btn-font-size: 1rem;
+    --sgds-btn-font-weight: 400;
+    --sgds-btn-line-height: 2;
+    --sgds-btn-color: var(--sgds-body-color);
+    --sgds-btn-bg: transparent;
+    --sgds-btn-border-width: 1px;
+    --sgds-btn-border-color: transparent;
+    --sgds-btn-border-radius: var(--sgds-border-radius);
+    --sgds-btn-hover-border-color: transparent;
+    --sgds-btn-box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
+    --sgds-btn-disabled-opacity: 0.65;
+    --sgds-btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--sgds-btn-focus-shadow-rgb), 0.5);
   }
   
   a {
@@ -52,21 +67,6 @@ export default css`
     text-decoration-line: none;
   }
   .btn {
-    --sgds-btn-padding-x: 1rem;
-    --sgds-btn-padding-y: 0.4375rem;
-    --sgds-btn-font-family: ;
-    --sgds-btn-font-size: 1rem;
-    --sgds-btn-font-weight: 400;
-    --sgds-btn-line-height: 2;
-    --sgds-btn-color: var(--sgds-body-color);
-    --sgds-btn-bg: transparent;
-    --sgds-btn-border-width: 1px;
-    --sgds-btn-border-color: transparent;
-    --sgds-btn-border-radius: var(--sgds-border-radius);
-    --sgds-btn-hover-border-color: transparent;
-    --sgds-btn-box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
-    --sgds-btn-disabled-opacity: 0.65;
-    --sgds-btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--sgds-btn-focus-shadow-rgb), 0.5);
     background-color: var(--sgds-btn-bg);
     border: var(--sgds-btn-border-width) solid var(--sgds-btn-border-color);
     border-radius: var(--sgds-btn-border-radius);
@@ -124,7 +124,7 @@ export default css`
   }
   .btn-primary {
     --sgds-btn-color: #fff;
-    --sgds-btn-bg:   var(--sgds-primary);//#5942db;
+    --sgds-btn-bg:   var(--sgds-primary-500);//#5942db;
     --sgds-btn-border-color: #5942db;
     --sgds-btn-hover-color: #fff;
     --sgds-btn-hover-bg: color-mix(in srgb, var(--sgds-primary), black 15%); // #4c38ba; 
@@ -140,7 +140,7 @@ export default css`
   }
   .btn-secondary {
     --sgds-btn-color: #fff;
-    --sgds-btn-bg: #0a6679;
+    --sgds-btn-bg: var(--sgds-secondary-500);// #0a6679;
     --sgds-btn-border-color: #0a6679;
     --sgds-btn-hover-color: #fff;
     --sgds-btn-hover-bg: #095767;

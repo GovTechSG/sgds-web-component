@@ -5,7 +5,6 @@ import { html, literal } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import { FormSubmitController } from "../../utils/form";
 import buttonStyles from "./button.style";
-
 export type ButtonVariant =
   | "primary"
   | "secondary"

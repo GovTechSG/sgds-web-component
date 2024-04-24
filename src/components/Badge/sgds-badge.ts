@@ -2,8 +2,7 @@ import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-badge.scss?inline";
-
+import badgeStyle from "./badge-style";
 export type BadgeVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
 
 /**
@@ -11,7 +10,7 @@ export type BadgeVariant = "primary" | "secondary" | "success" | "danger" | "war
  * @slot default - slot for badge
  */
 export class SgdsBadge extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [badgeStyle];
 
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` */
   @property({ reflect: true }) variant: BadgeVariant = "primary";
@@ -26,9 +25,9 @@ export class SgdsBadge extends SgdsElement {
       <span
         class="  
           ${classMap({
-          "sgds badge": true,
-          [`bg-${this.variant}`]: this.variant,
-          "badge-light": this.isLight,
+          "badge": !this.isLight,
+          [`bg-${this.variant}`]: this.variant && !this.isLight,
+          [`badge-outline text-bg-${this.variant}`]: this.isLight,
           "rounded-pill": this.roundedPill,
           [`${this.badgeClasses}`]: this.badgeClasses
         })}
