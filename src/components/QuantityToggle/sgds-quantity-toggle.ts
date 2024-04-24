@@ -33,7 +33,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
   private readonly formSubmitController = new FormSubmitController(this);
 
   /** The name of the input */
-  @property({ reflect: true }) name: string;
+  @property({ type: String, reflect: true }) name: string;
 
   /** The input's minimum value. */
   @property({ type: Number, reflect: true }) min: number;
@@ -44,18 +44,18 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
   @property() size: "sm" | "lg" = "sm";
 
   /**The input's value. Set to 0 by default */
-  @property({ reflect: true, type: Number }) value = 0;
+  @property({ type: Number, reflect: true }) value = 0;
 
   /** Disables the entire quantity toggle  */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The quantity toggle's button variants */
-  @property({ type: String, reflect: true }) buttonVariant: ButtonVariant = "primary";
+  @property({ type: String }) buttonVariant: ButtonVariant = "primary";
 
   /**
    * Controls the incremental / decremental value of the input
    */
-  @property({ type: Number, reflect: true }) step = 1;
+  @property({ type: Number }) step = 1;
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
