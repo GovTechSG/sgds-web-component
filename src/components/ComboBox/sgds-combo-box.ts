@@ -2,13 +2,14 @@ import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
-import { DropdownElement } from "../../base/dropdown-element";
-import { defaultValue } from "../../utils/defaultvalue";
-import { SgdsInput } from "../Input/sgds-input";
-import styles from "./sgds-combo-box.scss?inline";
-import { watch } from "../../utils/watch";
 import { DropdownListElement } from "../../base/dropdown-list-element";
-
+import { defaultValue } from "../../utils/defaultvalue";
+import { watch } from "../../utils/watch";
+import dropdownStyle from "../Dropdown/dropdown.style";
+import { SgdsDropdownItem } from "../Dropdown/sgds-dropdown-item";
+import { SgdsInput } from "../Input/sgds-input";
+import comboBoxStyle from "./combo-box.style";
+import styles from "./sgds-combo-box.scss?inline";
 type FilterFunction = (inputValue: string, menuItem: string) => boolean;
 
 /**
@@ -20,11 +21,12 @@ type FilterFunction = (inputValue: string, menuItem: string) => boolean;
  * @event sgds-input -  Emitted when user input is received and its value changes.
  */
 export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
-  static styles = [DropdownElement.styles, styles];
+  static styles = [comboBoxStyle, styles, dropdownStyle];
   /**@internal */
   static get scopedElements() {
     return {
-      "sgds-input": SgdsInput
+      "sgds-input": SgdsInput,
+      "sgds-dropdown-item": SgdsDropdownItem
     };
   }
   constructor() {
@@ -64,7 +66,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
   @property({ type: Array }) menuList: string[] = [];
 
   /**The function used to determine if a menu item should be shown in the menu list, given the user's input value. */
-  @property({ type: Function })
+  @property()
   filterFunction: FilterFunction = (inputValue: string, menuItem: string) => {
     const itemLowerCase = menuItem.toLowerCase();
     const valueLower = inputValue.toLowerCase();
@@ -128,7 +130,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
         </div>
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1">
           ${this.filteredMenuList.map(
-            item => html`<button class="dropdown-item" @click=${this._handleSelectChange}>${item}</button>`
+            item => html`<sgds-dropdown-item @click=${this._handleSelectChange}>${item}</sgds-dropdown-item>`
           )}
         </ul>
       </div>
