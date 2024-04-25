@@ -1,6 +1,7 @@
 import { css } from "lit";
-
+import feedbackStyle from "../../styles/feedback";
 export default css`
+  ${feedbackStyle}
   fieldset {
     border: 0;
     margin: 0;

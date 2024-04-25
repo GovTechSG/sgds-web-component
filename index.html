@@ -600,19 +600,26 @@
                 <h2>Input</h2>
                 <div class="row">
                     <div class="col-6 mb-2">
-                        <form novalidate class="formtest">
+                        <form class="formtest">
                             <sgds-input name="input1" id="input1" minlength="5" required value="hiz" hasFeedback
                                 invalidFeedback="Minimum length 5 test"></sgds-input>
                             <sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are
                                     required to check this.</span></sgds-checkbox>
-                            <sgds-checkbox name="cb2" id="cb2" value="lolol1" required>with required<span
-                                    slot="feedback">You are required to check this.</span></sgds-checkbox>
+                            <sgds-checkbox name="cb2" id="cb2" value="lolol1" required hasfeedback
+                                invalidfeedback="this is requried">with required<span slot="feedback">You are required
+                                    to check this.</span></sgds-checkbox>
                             <sgds-checkbox name="cb2" id="cb2" value="lolol1" required disabled>disabled<span
                                     slot="feedback">You are required to check this.</span></sgds-checkbox>
                             <sgds-button id="submitButton" type="submit">Submit</sgds-button>
                             <sgds-input label="Name" iconName="stack" hintText="this is a hint" required pattern="test"
                                 value="a"></sgds-input>
                             <sgds-button type="reset">Submit</sgds-button>
+                        </form>
+
+                        <form>
+                            <sgds-checkbox required="" hasfeedback="" invalidfeedback="This is required">Check
+                                me</sgds-checkbox>
+                            <sgds-button type="submit">Submit</sgds-button>
                         </form>
                     </div>
                     <!-- <div class="col-6 mb-2">

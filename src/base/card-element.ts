@@ -4,7 +4,7 @@ import TempElement from "./temp-element";
 export type CardBorderVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light";
 
 export class CardElement extends TempElement {
-  static styles = [cardStyle,  TempElement.styles];
+  static styles = [cardStyle, TempElement.styles];
 
   /** The border's variant. */
   @property()

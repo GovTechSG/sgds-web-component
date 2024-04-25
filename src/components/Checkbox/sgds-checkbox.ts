@@ -8,8 +8,7 @@ import { defaultValue } from "../../utils/defaultvalue";
 import { FormSubmitController, SgdsFormControl } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-checkbox.scss?inline";
-
+import checkboxStyle from "./checkbox.style";
 /**
  * @summary Checkbox component is used when you require users to select multiple items from a list.
  *
@@ -18,7 +17,7 @@ import styles from "./sgds-checkbox.scss?inline";
  * @event sgds-change - Emitted when the checked state changes.
  */
 export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [checkboxStyle];
   /**@internal */
   @query('input[type="checkbox"]') input: HTMLInputElement;
   /**@internal */
