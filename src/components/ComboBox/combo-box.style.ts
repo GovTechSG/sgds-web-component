@@ -42,4 +42,7 @@ export default css`
   .w-100 {
     width: 100% !important;
   }
+  .form-control-icon {
+    bottom: 0;
+  }
 `;

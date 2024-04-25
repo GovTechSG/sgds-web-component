@@ -1,11 +1,6 @@
 import { css } from "lit";
 
 export default css`
-  *,
-  :after,
-  :before {
-    box-sizing: border-box;
-  }
   @media (prefers-reduced-motion: no-preference) {
     :root {
       scroll-behavior: smooth;

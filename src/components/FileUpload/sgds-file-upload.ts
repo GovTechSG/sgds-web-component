@@ -6,7 +6,7 @@ import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import SgdsElement from "../../base/sgds-element";
 import { SgdsButton } from "../Button/sgds-button";
 import styles from "./sgds-file-upload.scss?inline";
-
+import fileUploadStyle from "./file-upload.style";
 export type FileUploadButtonVariant =
   | "primary"
   | "secondary"
@@ -39,7 +39,7 @@ export type FileUploadButtonVariant =
  */
 
 export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [fileUploadStyle, styles];
   /**@internal */
   static get scopedElements() {
     return {
@@ -188,7 +188,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
       <input
         ${ref(this.inputRef)}
         type="file"
-        class="d-none form-control"
+        class="d-none"
         @change=${this.handleInputChange}
         ?multiple=${this.multiple}
         accept=${this.accept}
