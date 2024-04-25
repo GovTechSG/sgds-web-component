@@ -1,4 +1,4 @@
-import { LitElement } from "lit";
+import { LitElement, css } from "lit";
 
 /**
  * @cssprop --sgds-{stateColor} - State colors in hexadecimal value
@@ -10,7 +10,7 @@ import { LitElement } from "lit";
  */
 
 export default class TempElement extends LitElement {
-  static styles = [];
+  static styles = css``;
   /** Emits a custom event with more convenient defaults. */
   emit(name: string, options?: CustomEventInit) {
     const event = new CustomEvent(name, {

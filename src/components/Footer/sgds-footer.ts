@@ -1,8 +1,7 @@
 import { html } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-footer.scss?inline";
-
+import footerStyle from "./footer.style";
 export interface ColumnLinks {
   title: string;
   links: Links[];
@@ -22,7 +21,7 @@ export interface Links {
  * @cssproperty footer-bottom - The component's footer-bottom section container.
  */
 export class SgdsFooter extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [footerStyle];
 
   /**
    * 	Sets title of SgdsFooter

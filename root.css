@@ -1,5 +1,6 @@
 :root,
 [data-bs-theme="light"] {
+  --sgds-gutter-x: 1.5rem;
   --sgds-gray-100-rgb: 234, 234, 234;
   --sgds-gray-200-rgb: 210, 210, 210;
   --sgds-gray-300-rgb: 178, 178, 178;
