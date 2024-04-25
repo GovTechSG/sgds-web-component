@@ -9,8 +9,7 @@ import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import { SgdsCheckbox } from "../Checkbox/sgds-checkbox";
 import { SgdsRadio } from "../Radio/sgds-radio";
-import cardStyles from "./action-card.style";
-import styles from "./sgds-action-card.scss?inline";
+import actionCardStyles from "./action-card.style";
 
 /**
  * @summary Action Card are cards with built in checkbox or radio components. The ref of input is extended to the Card's body.
@@ -29,7 +28,7 @@ import styles from "./sgds-action-card.scss?inline";
  *
  */
 export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
-  static styles = [cardStyles, styles];
+  static styles = [CardElement.styles, actionCardStyles]
   static get scopedElements() {
     return {
       "sgds-checkbox": SgdsCheckbox,

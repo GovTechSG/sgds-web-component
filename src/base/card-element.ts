@@ -1,10 +1,10 @@
 import { property } from "lit/decorators.js";
-import SgdsElement from "./sgds-element";
-
+import cardStyle from "./card.style";
+import TempElement from "./temp-element";
 export type CardBorderVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light";
 
-export class CardElement extends SgdsElement {
-  static styles = SgdsElement.styles;
+export class CardElement extends TempElement {
+  static styles = [cardStyle,  TempElement.styles];
 
   /** The border's variant. */
   @property()

@@ -1,13 +1,13 @@
-:host {
-  .sgds {
-    &.card {
-      &[variant*="card-action"] {
-        .card-body {
-          ::slotted(svg) {
-            margin-right: 1rem;
-          }
-        }
-      }
-    }
-  }
-}
+// :host {
+//   .sgds {
+//     &.card {
+//       &[variant*="card-action"] {
+//         .card-body {
+//           ::slotted(svg) {
+//             margin-right: 1rem;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
