@@ -172,7 +172,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
             [`btn-${this.buttonVariant}`]: this.buttonVariant
           })}
           @click=${this.onPlus}
-          ?disabled=${this.disabled || (this.max !== undefined && this.value >= this.max)}
+          ?disabled=${this.disabled || (this.max !== undefined && this.max && this.value >= this.max)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
