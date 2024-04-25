@@ -79,7 +79,7 @@ export class SgdsDropdown extends ScopedElementsMixin(DropdownListElement) {
     }
   }
   render() {
-    const variant: ButtonVariant = `outline-${this.variant}`
+    const variant: ButtonVariant = `outline-${this.variant}`;
     return html`
       <div>
         <sgds-button

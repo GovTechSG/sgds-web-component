@@ -9,7 +9,7 @@ import { waitForEvent } from "../../utils/event.js";
 import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
 import { HasSlotController } from "../../utils/slot.js";
 import { watch } from "../../utils/watch.js";
-import styles from "./sgds-drawer.scss?inline";
+import drawerStyles from "./drawer.style";
 
 /**
  * @summary Drawers slide in from a container to expose additional options and information.
@@ -47,7 +47,7 @@ import styles from "./sgds-drawer.scss?inline";
  * @cssproperty --sgds-drawer-button-gap - The drawer's flex gap between buttons.
  */
 export class SgdsDrawer extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [drawerStyles];
 
   /** @internal */
   private readonly hasSlotController = new HasSlotController(this, "footer");
@@ -305,7 +305,6 @@ export class SgdsDrawer extends SgdsElement {
                       part="close-button"
                       class=${classMap({
                         "drawer-close": true,
-                        "btn-sm": true,
                         "btn-close": true
                       })}
                       @click="${() => this.requestClose("close-button")}"

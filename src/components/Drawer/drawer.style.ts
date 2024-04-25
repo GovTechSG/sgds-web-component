@@ -1,4 +1,8 @@
-:host {
+import { css } from "lit";
+import closeButtonStyle from "../../styles/close-button";
+export default css`
+  ${closeButtonStyle}
+  :host {
     --drawer-padding: 1.5rem;
     --drawer-size: 35rem;
     --drawer-background-color: white;
@@ -85,7 +89,7 @@
     font: inherit;
     font-size: calc(1.275rem + 0.3vw);
     line-height: 1.33;
-    
+
     margin: 0;
   }
 
@@ -140,3 +144,4 @@
   .drawer-contained .drawer-overlay {
     display: none;
   }
+`;

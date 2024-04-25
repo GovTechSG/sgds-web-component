@@ -10,7 +10,6 @@ const ENTER = "Enter";
  * @event sgds-select - Emitted event when a slot item is selected
  */
 export class DropdownListElement extends DropdownElement {
-
   /**@internal */
   @query("ul.dropdown-menu")
   private menu: HTMLUListElement;
