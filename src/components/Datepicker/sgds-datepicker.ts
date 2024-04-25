@@ -14,6 +14,8 @@ import { ViewEnum } from "./types";
 import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
 import { classMap } from "lit/directives/class-map.js";
 import { type SgdsFormControl } from "../../utils/form";
+import dropdownStyle from "../Dropdown/dropdown.style";
+import SgdsElement from "../../base/sgds-element";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -36,7 +38,7 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  * date view of the calendar
  */
 export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) implements SgdsFormControl {
-  static styles = [DropdownElement.styles, styles];
+  static styles = [dropdownStyle, styles];
   /**@internal */
   static formAssociated = true;
   private _internals: ElementInternals;

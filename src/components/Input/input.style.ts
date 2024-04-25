@@ -1,5 +1,8 @@
 import { css } from "lit";
+import feedbackStyle from "../../styles/feedback";
+
 export default css`
+  ${feedbackStyle}
   .form-label {
     font-weight: 700;
     margin-bottom: 0.5rem;
@@ -27,7 +30,8 @@ export default css`
     line-height: 2;
     padding: 0.4375rem 1rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    width: 100%;
+    width: -webkit-fill-available;
+    width: -moz-available;
   }
   @media (prefers-reduced-motion: reduce) {
     .form-control {
