@@ -2,6 +2,9 @@ import { css } from "lit";
 import feedbackStyle from "../../styles/feedback";
 
 export default css`
+  :host {
+    --input-border-radius: var(--sgds-border-radius, 0.3215rem);
+  }
   ${feedbackStyle}
   .form-label {
     font-weight: 700;
@@ -24,7 +27,7 @@ export default css`
     background-clip: padding-box;
     background-color: var(--sgds-body-bg);
     border: 1px solid var(--sgds-border-color);
-    border-radius: var(--sgds-border-radius);
+    border-radius: var(--input-border-radius); // var(--sgds-border-radius);
     color: var(--sgds-body-color);
     font-weight: 400;
     line-height: 2;

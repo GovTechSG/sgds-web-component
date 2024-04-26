@@ -7,7 +7,7 @@ import styles from "./datepicker-calendar.scss?inline";
 import { ViewEnum } from "./types";
 import { classMap } from "lit/directives/class-map.js";
 import { isAfter, isEqual } from "date-fns";
-
+import datepickerCalendarStyle from "./datepicker-calendar.style.";
 const TODAY_DATE = new Date();
 
 const keyPressAction = {
@@ -33,7 +33,7 @@ const keyPressAction = {
   }
 };
 export class DatepickerCalendar extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [datepickerCalendarStyle, styles];
 
   /** @internal */
   static DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

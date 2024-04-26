@@ -10,7 +10,9 @@
   cursor: pointer;
   background-color: var(--datepicker-hover-bg-color);
 }
-
+table {
+  border-collapse: collapse;
+}
 .sgds.monthpicker,
 .sgds.yearpicker {
   display: grid;

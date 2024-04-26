@@ -9,7 +9,7 @@ import styles from "./datepicker-header.scss?inline";
 import { ViewEnum } from "./types";
 
 export class DatepickerHeader extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [styles];
 
   /** @internal */
   @property({ attribute: false })
@@ -135,44 +135,42 @@ export class DatepickerHeader extends SgdsElement {
 
   render() {
     return html`
-      <div class="datepicker-header dropdown-header" role="heading">
-        <div class="text-center d-flex justify-content-between align-items-center">
-          <button
-            @click="${this.handleClickPrevious}"
-            tabindex="0"
-            class="${classMap({ invisible: this._removeCaret() })}"
+      <div class="datepicker-header" role="heading">
+        <button
+          @click="${this.handleClickPrevious}"
+          tabindex="0"
+          class="${classMap({ invisible: this._removeCaret() })}"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-chevron-left"
+            viewBox="0 0 16 16"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-chevron-left"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
-              />
-            </svg>
-          </button>
-          <button @click=${this._changeView} tabindex="1">${this._renderHeader()}</button>
-          <button @click="${this._handleClickNext}" tabindex="2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-chevron-right"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-              />
-            </svg>
-          </button>
-        </div>
+            <path
+              fill-rule="evenodd"
+              d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+            />
+          </svg>
+        </button>
+        <button @click=${this._changeView} tabindex="1">${this._renderHeader()}</button>
+        <button @click="${this._handleClickNext}" tabindex="2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-chevron-right"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+            />
+          </svg>
+        </button>
       </div>
     `;
   }
