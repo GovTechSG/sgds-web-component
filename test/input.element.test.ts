@@ -16,7 +16,7 @@ describe("sgds-input", () => {
           <input type="text" class="form-control " id="test-id" aria-invalid="false" placeholder="placeholder">
         </div>
     `,
-      { ignoreAttributes: ["id", "for"] }
+      { ignoreAttributes: ["id", "for", "aria-labelledby"] }
     );
   });
 
@@ -28,6 +28,22 @@ describe("sgds-input", () => {
     expect(input?.getAttribute("id")).to.equal(label?.getAttribute("for"));
     expect(small?.getAttribute("id")).to.contain(input?.getAttribute("id"));
   });
+  it("input's aria-labelledby points to label id, hinttext id and invalid-feedback id", async() => {
+    const el = await fixture<SgdsInput>(html`<sgds-input label="label" hintText="hello" hasFeedback></sgds-input>`);
+    const input = el.shadowRoot?.querySelector("input");
+    const label = el.shadowRoot?.querySelector("label");
+    const small = el.shadowRoot?.querySelector("small");
+    const feedback = el.shadowRoot?.querySelector(".invalid-feedback")
+    expect(input?.getAttribute("aria-labelledby")).to.contain(label?.getAttribute("id"));
+    expect(input?.getAttribute("aria-labelledby")).to.contain(small?.getAttribute("id"));
+    expect(input?.getAttribute("aria-labelledby")).not.to.contain(feedback?.getAttribute("id"));
+
+    el.invalid = true;
+    await elementUpdated(el);
+    expect(input?.getAttribute("aria-labelledby")).to.contain(feedback?.getAttribute("id"));
+
+    
+  })
 
   it("input's id attribute should contain in .invalid-feedback's id attribute", async () => {
     const el = await fixture<SgdsInput>(html`<sgds-input hasFeedback></sgds-input>`);
