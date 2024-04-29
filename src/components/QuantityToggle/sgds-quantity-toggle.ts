@@ -7,9 +7,9 @@ import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { FormSubmitController, SgdsFormControl } from "../../utils/form";
 import genId from "../../utils/generateId";
-import { ButtonVariant } from "../Button/sgds-button";
-import styles from "./sgds-quantity-toggle.scss?inline";
-
+import SgdsButton, { ButtonVariant } from "../Button/sgds-button";
+import quantityToggleStyle from "./quantity-toggle.style";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
  *
@@ -20,7 +20,13 @@ import styles from "./sgds-quantity-toggle.scss?inline";
  * @event sgds-input - Emitted when the control receives input and its value changes.
  *
  */
-export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
+export class SgdsQuantityToggle extends ScopedElementsMixin(SgdsElement) implements SgdsFormControl {
+  /**@internal */
+  static get scopedElements() {
+    return {
+      "sgds-button": SgdsButton
+    };
+  }
   /**@internal */
   @query("input.form-control") private input: HTMLInputElement;
   /**@internal */
@@ -28,7 +34,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
   /**@internal */
   @query("button[aria-label^='decrease by']") private minusBtn: HTMLButtonElement;
 
-  static styles = [SgdsElement.styles, styles];
+  static styles = [quantityToggleStyle];
   /**@internal */
   private readonly formSubmitController = new FormSubmitController(this);
 
