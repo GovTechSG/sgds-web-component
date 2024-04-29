@@ -4,7 +4,7 @@ import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-pagination.scss?inline";
 import { watch } from "../../utils/watch";
 import { classMap } from "lit/directives/class-map.js";
-
+import paginationStyle from "./pagination.style";
 /**
  * @summary The Pagination component enables the user to select a specific page from a range of pages
  *
@@ -22,7 +22,7 @@ import { classMap } from "lit/directives/class-map.js";
  *
  **/
 export class SgdsPagination extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [paginationStyle, styles];
 
   /** Inserts the length value from a given sets of data objects*/
   @property({ type: Number }) dataLength = 0;
