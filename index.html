@@ -9,7 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
     <script type="module" id="console-components-gateway"
-  src="https://dev.assets.developer.tech.gov.sg/console-components/gateway.es5.js" nonce={nonce || undefined}></script>
+        src="https://dev.assets.developer.tech.gov.sg/console-components/gateway.es5.js" nonce={nonce ||
+        undefined}></script>
     <style>
         /* * {
             font-family: "bootstrap-icons", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -263,10 +264,11 @@
             </sgds-combo-box>
             <h2>Datepicker</h2>
             <form id="datepicker-form">
-                <sgds-input type="text" label="Label" hinttext="This is a hint text" name="email" inputclasses="" pattern="" invalidfeedback="" icon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-envelope&quot; viewBox=&quot;0 0 16 16&quot;>
+                <sgds-input type="text" label="Label" hinttext="This is a hint text" name="email" inputclasses=""
+                    invalidfeedback="" icon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-envelope&quot; viewBox=&quot;0 0 16 16&quot;>
                     <path d=&quot;M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z&quot;/>
                     </svg>" placeholder="Placeholder" minlength="" maxlength="">
-                        </sgds-input>
+                </sgds-input>
                 <!-- <sgds-datepicker mindate="2024-01-02T12:00:00.000Z"
                     maxdate="2024-01-30T12:00:00.000Z"></sgds-datepicker> -->
                 <sgds-button type="submit">Submit</sgds-button>
@@ -867,6 +869,12 @@
                     links='[{"title":"Application Guidelines","url":"/application-guidelines/lorem-ipsum-one/second-level-a/","links":[{"label":"<div>hello world </div>","href":"/application-guidelines/lorem-ipsum-one/second-level-a/"},{"label":"Second Level B","href":"/application-guidelines/lorem-ipsum-two/part-A/"},{"label":"Lorem Ipsum Three","href":"/application-guidelines/lorem-ipsum-three/"}]},{"title":"Legislation","url":"#","external":true,"links":[{"label":"External Link One","href":"https://en.wikipedia.org/wiki/Year","external":true},{"label":"External Link Two","href":"https://en.wikipedia.org/wiki/Spring_(season)","external":true}]},{"title":"Resources","url":"/resource_room/","links":[{"label":"All","href":"/resource_room/"},{"label":"Forms and Templates","href":"/resource_room/forms-and-templates/"},{"label":"Guides","href":"/resource_room/guides/"}]}]'></sgds-footer>
 
                 <script>
+                    const modalShowButton = document.querySelector( '#modalShowButton' );
+                    modalShowButton.addEventListener( 'click', () => {
+                        const modal = document.querySelector( "sgds-modal" );
+                        modal.show();
+                    } );
+
                     const drawer = document.querySelector( 'sgds-drawer' );
                     const openButton = drawer.nextElementSibling;
                     const closeButton = drawer.querySelector( 'sgds-button[variant="primary"]' );
@@ -1039,11 +1047,7 @@
                         return menuItem.includes( inputValue );
                     }
 
-                    const modalShowButton = document.querySelector( '#modalShowButton' );
-                    modalShowButton.addEventListener( 'click', () => {
-                        const modal = document.querySelector( "sgds-modal" );
-                        modal.show();
-                    } );
+
                 </script>
                 </body>
 
