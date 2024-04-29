@@ -17,7 +17,7 @@ export default css`
     background-color: #fff;
     box-shadow: 0 0.5rem 1rem rgba(#000, 0.15);
   }
-/** scss from mainnav-item  */
+  /** scss from mainnav-item  */
   :host {
     --mainnav-item-theme-color: #5925dc;
     --mainnav-item-color: #344054;

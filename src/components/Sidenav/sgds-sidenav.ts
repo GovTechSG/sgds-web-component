@@ -3,7 +3,7 @@ import { property, queryAssignedNodes } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import SgdsSidenavItem from "./sgds-sidenav-item";
 import { classMap } from "lit/directives/class-map.js";
-import styles from "./sgds-sidenav.scss?inline";
+import sidenavStyle from "./sidenav.style";
 
 /**
  * @summary The side navigation is used to display a list of links to move between pages within a related category.
@@ -16,7 +16,7 @@ import styles from "./sgds-sidenav.scss?inline";
  * @cssproperty --sidenav-sticky-top - set the top value of the sticky sidenav. Defaults to 0rem
  */
 export class SgdsSidenav extends SgdsElement {
-  static styles = styles;
+  static styles = sidenavStyle;
 
   /** Allow sidenav items to stay open when another item is opened */
   @property({ type: Boolean, attribute: true })

@@ -7,7 +7,7 @@ import { getAnimation, setDefaultAnimation } from "../../utils/animation-registr
 import { waitForEvent } from "../../utils/event";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-sidenav-item.scss?inline";
+import sidenavItemStyle from "./sidenav-item.style";
 
 /**
  *
@@ -28,7 +28,7 @@ import styles from "./sgds-sidenav-item.scss?inline";
  */
 
 export class SgdsSidenavItem extends SgdsElement {
-  static styles = [styles];
+  static styles = [sidenavItemStyle];
 
   @query(".sidenav-body") body: HTMLElement;
   /** @internal */
