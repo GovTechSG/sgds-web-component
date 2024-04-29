@@ -88,4 +88,44 @@ export default css`
   .rounded-0 {
     border-radius: 0 !important;
   }
+  /** scss */
+  :host {
+  --datepicker-theme-color: var(--sgds-primary-500);
+  --datepicker-hover-bg-color: var(--sgds-primary-100);
+  --datepicker-bg-color: white;
+  --datepicker-closebutton-bg-color: var(--datepicker-theme-color);
+  --datepicker-closebutton-hover-bg-color: var(--sgds-primary-600);
+  --datepicker-closebutton-color: white;
+  --datepicker-selected-date-bg-color: var(--sgds-primary-600);
+  --datepicker-selected-date-text-color: white;
+}
+
+div {
+  display: flex;
+}
+
+button
+{
+  align-self: self-start;
+}
+.datepicker {
+  background-color: var(--datepicker-bg-color);
+}
+
+sgds-datepicker-input {
+  flex: 1;
+  margin-right: 0; /* Remove the margin on the right */
+  --input-border-radius: var(--sgds-border-radius, 0.3125rem) 0 0 var(--sgds-border-radius, 0.3125rem);
+}
+
+.reset-btn {
+  background-color: var(--datepicker-closebutton-bg-color);
+  color: var(--datepicker-closebutton-color);
+
+  &:hover {
+    color: var(--datepicker-closebutton-color);
+    background-color: var(--datepicker-closebutton-hover-bg-color);
+  }
+}
+
 `;

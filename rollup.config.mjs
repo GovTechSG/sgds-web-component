@@ -26,17 +26,17 @@ const wcPlugins = [
   resolve({
     browser: true,
     dedupe: external,
-    exportConditions: ['development']
+    exportConditions: ["development"]
   }),
   replace({
     "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
     preventAssignment: true
   }),
-  postcss({
-    minimize: true,
-    inject: false
-  }),
-  litcss(),
+  // postcss({
+  //   minimize: true,
+  //   inject: false
+  // }),
+  // litcss(),
   typescript({
     tsconfig: "tsconfig.json",
     useTsconfigDeclarationDir: true
@@ -46,11 +46,11 @@ const wcPlugins = [
 
 const reactBuildPlugins = [
   resolve(),
-  postcss({
-    minimize: true,
-    inject: false
-  }),
-  litcss(),
+  // postcss({
+  //   minimize: true,
+  //   inject: false
+  // }),
+  // litcss(),
   typescript({
     useTsconfigDeclarationDir: true
   })

@@ -5,11 +5,11 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { sanitizedNextMonth, sanitizedPreviousMonth } from "../../utils/time";
 import { watch } from "../../utils/watch";
-import styles from "./datepicker-header.scss?inline";
+import datepickerHeaderStyle from "./datepicker-header.style";
 import { ViewEnum } from "./types";
 
 export class DatepickerHeader extends SgdsElement {
-  static styles = [styles];
+  static styles = [datepickerHeaderStyle];
 
   /** @internal */
   @property({ attribute: false })

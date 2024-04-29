@@ -2,7 +2,7 @@ import customElements from "../custom-elements.json";
 
 import { setCustomElementsManifest } from "@storybook/web-components";
 import "./global.css";
-
+import "../root.css";
 export const setCustomElementsManifestWithOptions = (
   customElements: any,
   options: { privateFields?: boolean }

@@ -7,7 +7,6 @@ import { getAnimation, setDefaultAnimation } from "../../utils/animation-registr
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
 import accordionStyle from "./accordion.style";
-import styles from "./sgds-accordion-item.scss?inline";
 import accordionItemStyle from "./accordion-item.style";
 
 /**

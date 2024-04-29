@@ -3,11 +3,11 @@ import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import { createYearViewArray, setTimeToNoon } from "../../utils/time";
 import { watch } from "../../utils/watch";
-import styles from "./datepicker-calendar.scss?inline";
 import { ViewEnum } from "./types";
 import { classMap } from "lit/directives/class-map.js";
 import { isAfter, isEqual } from "date-fns";
-import datepickerCalendarStyle from "./datepicker-calendar.style.";
+import datepickerCalendarStyle from "./datepicker-calendar.style."; 
+
 const TODAY_DATE = new Date();
 
 const keyPressAction = {
@@ -33,7 +33,7 @@ const keyPressAction = {
   }
 };
 export class DatepickerCalendar extends SgdsElement {
-  static styles = [datepickerCalendarStyle, styles];
+  static styles = [datepickerCalendarStyle];
 
   /** @internal */
   static DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

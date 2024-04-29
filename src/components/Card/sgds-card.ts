@@ -19,7 +19,7 @@ import cardStyle from "./card.style";
  *
  */
 export class SgdsCard extends CardElement {
-  static styles = [CardElement.styles, cardStyle];
+  static styles = [...CardElement.styles, cardStyle];
 
   /** Extends the link passed in slot[name="link"] to the entire card */
   @property({ type: Boolean }) stretchedLink = false;

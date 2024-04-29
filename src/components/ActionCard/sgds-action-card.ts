@@ -28,7 +28,7 @@ import actionCardStyles from "./action-card.style";
  *
  */
 export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
-  static styles = [CardElement.styles, actionCardStyles];
+  static styles = [...CardElement.styles, actionCardStyles];
   static get scopedElements() {
     return {
       "sgds-checkbox": SgdsCheckbox,

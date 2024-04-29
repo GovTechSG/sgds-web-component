@@ -9,14 +9,12 @@ import { watch } from "../../utils/watch";
 import { DatepickerCalendar } from "./datepicker-calendar";
 import { DatepickerHeader } from "./datepicker-header";
 import DatepickerInput from "./datepicker-input";
-import styles from "./sgds-datepicker.scss?inline";
 import { ViewEnum } from "./types";
 import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
 import { classMap } from "lit/directives/class-map.js";
 import { type SgdsFormControl } from "../../utils/form";
 import dropdownStyle from "../Dropdown/dropdown.style";
 import datepickerStyle from "./datepicker.style";
-import SgdsElement from "../../base/sgds-element";
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
 /**
@@ -38,7 +36,7 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  * date view of the calendar
  */
 export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) implements SgdsFormControl {
-  static styles = [dropdownStyle, datepickerStyle, styles];
+  static styles = [dropdownStyle, datepickerStyle];
   /**@internal */
   static formAssociated = true;
   private _internals: ElementInternals;
