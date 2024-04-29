@@ -103,56 +103,55 @@ export default css`
   }
   /** scss */
   :host {
-  --stepper-theme-color: var(--sgds-primary);
-  --stepper-theme-hover-color: var(--sgds-primary-600);
-  --stepper-default-color: var(--sgds-gray-400);
-}
+    --stepper-theme-color: var(--sgds-primary);
+    --stepper-theme-hover-color: var(--sgds-primary-600);
+    --stepper-default-color: var(--sgds-gray-400);
+  }
 
-.sgds {
-  &.stepper {
-    .stepper-item {
-      > .stepper-marker {
-        background-color: var(--stepper-default-color);
-        border-color: var(--sgds-gray-100);
-      }
-      &.is-active {
-        .stepper-marker {
-          background-color: var(--sgds-gray-100);
-          border-color: var(--stepper-theme-color);
-          color: var(--stepper-theme-color);
+  .sgds {
+    &.stepper {
+      .stepper-item {
+        > .stepper-marker {
+          background-color: var(--stepper-default-color);
+          border-color: var(--sgds-gray-100);
         }
-      }
+        &.is-active {
+          .stepper-marker {
+            background-color: var(--sgds-gray-100);
+            border-color: var(--stepper-theme-color);
+            color: var(--stepper-theme-color);
+          }
+        }
 
-      &.is-completed {
-        .stepper-marker {
-          background-color: var(--stepper-theme-color);
-          border-color: var(--stepper-theme-color);
-          color: var(--sgds-gray-100);
+        &.is-completed {
+          .stepper-marker {
+            background-color: var(--stepper-theme-color);
+            border-color: var(--stepper-theme-color);
+            color: var(--sgds-gray-100);
+          }
         }
-      }
-      // .sgds.stepper .stepper-item.is-clickable:hover .stepper-marker
-      &.is-clickable {
-        &:hover {
-          .stepper {
-            &-marker {
-              background-color: var(--stepper-theme-hover-color);
-              border-color: var(--stepper-theme-hover-color);
-            }
-            &-detail {
-              > * {
-                color: var(--stepper-theme-hover-color);
+        // .sgds.stepper .stepper-item.is-clickable:hover .stepper-marker
+        &.is-clickable {
+          &:hover {
+            .stepper {
+              &-marker {
+                background-color: var(--stepper-theme-hover-color);
+                border-color: var(--stepper-theme-hover-color);
+              }
+              &-detail {
+                > * {
+                  color: var(--stepper-theme-hover-color);
+                }
               }
             }
           }
         }
-      }
 
-      &::before {
-        background: linear-gradient(270deg, var(--stepper-default-color) 50%, var(--stepper-theme-color) 0px)
-          100% 100% / 200% 100%;
+        &::before {
+          background: linear-gradient(270deg, var(--stepper-default-color) 50%, var(--stepper-theme-color) 0px) 100%
+            100% / 200% 100%;
+        }
       }
     }
   }
-}
-
 `;

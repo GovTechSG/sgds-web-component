@@ -25,7 +25,7 @@ export default css`
       }
     }
   }
-/** end scss */
+  /** end scss */
   .form-control[type="file"] {
     overflow: hidden;
   }

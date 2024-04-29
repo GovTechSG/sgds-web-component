@@ -637,4 +637,63 @@ export default css`
       order: 6 !important;
     }
   }
+  /** scss */
+  :host {
+  --mainnav-background-color: white;
+  --mainnav-padding-x: 1rem;
+  --mainnav-padding-y: 0;
+  --mainnav-mobile-padding-x: 0.5rem;
+  --mainnav-mobile-padding-y: 0;
+  --mainnav-borderBottom-width: 1px;
+  --mainnav-borderBottom-color: #98a2b3;
+}
+
+ul {
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+
+.sgds.navbar {
+    background-color: var(--mainnav-background-color);
+    padding: var(--mainnav-padding-y) var(--mainnav-padding-x);
+    border-bottom: var(--mainnav-borderBottom-width) solid var(--mainnav-borderBottom-color);
+    @media (max-width: 768px) {
+      padding: var(--mainnav-mobile-padding-y) var(--mainnav-mobile-padding-x);
+    }
+}
+
+.navbar-nav {
+  display: flex;
+  gap: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: 100%;
+  width: 100%;
+}
+
+.navbar-toggler {
+  border: none;
+}
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+slot[name="non-collapsible"] {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.slot-end {
+  display: flex;
+  margin-left: auto;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+// there is no wildcard selector for element tag names in css :/
+.slot-end::slotted(:not([name$="-mainnav-item"]):not([name$="-mainnav-dropdown"])) {
+  align-self: center;
+}
+
 `;

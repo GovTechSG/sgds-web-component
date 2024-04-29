@@ -120,15 +120,15 @@ export default css`
   /** scss */
 
   :host {
-  --tooltip-max-width: 20rem;
-  display: inline-block;
-}
+    --tooltip-max-width: 20rem;
+    display: inline-block;
+  }
 
-.tooltip-inner{
-  max-width: var(--tooltip-max-width);
-}
+  .tooltip-inner {
+    max-width: var(--tooltip-max-width);
+  }
 
-div {
-  max-width: fit-content;
-}
+  div {
+    max-width: fit-content;
+  }
 `;

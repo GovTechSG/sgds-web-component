@@ -8,7 +8,6 @@ import { LG_BREAKPOINT, MD_BREAKPOINT, SM_BREAKPOINT, XL_BREAKPOINT, XXL_BREAKPO
 import { waitForEvent } from "../../utils/event";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-mainnav.scss?inline";
 import mainnavStyle from "./mainnav.style";
 export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
 
@@ -44,7 +43,7 @@ const SIZES = {
  * @cssproperty --mainnav-borderBottom-color - borderBottom width color
  */
 export class SgdsMainnav extends SgdsElement {
-  static styles = [mainnavStyle, styles];
+  static styles = [mainnavStyle];
 
   /** @internal */
   @query(".navbar-toggler") header: HTMLElement;

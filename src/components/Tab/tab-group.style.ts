@@ -25,9 +25,8 @@ export default css`
   }
   /** scss */
   slot[name="nav"] {
-  &[variant="tabs-basic-toggle"]::slotted(sgds-tab) {
-    margin-left: -2px;
+    &[variant="tabs-basic-toggle"]::slotted(sgds-tab) {
+      margin-left: -2px;
+    }
   }
-}
-
 `;

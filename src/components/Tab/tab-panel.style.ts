@@ -1,7 +1,7 @@
 import { css } from "lit";
 
 export default css`
-:host {
+  :host {
     --tab-panel-padding-y: 1rem;
     display: block;
   }
@@ -12,4 +12,4 @@ export default css`
   .tab-panel:not(.tab-panel--active) {
     display: none;
   }
-  `
+`;

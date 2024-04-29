@@ -84,15 +84,12 @@ export default css`
   }
   /** scss */
 
-:host{
-    .textarea-resize-none{
-        resize: none;
+  :host {
+    .textarea-resize-none {
+      resize: none;
     }
     .textarea-resize-vertical {
-        resize: vertical;
+      resize: vertical;
     }
-}
-
-
+  }
 `;
-

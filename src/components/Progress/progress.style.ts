@@ -20,13 +20,13 @@ export default css`
   }
   /** scss */
 
-  :host{
+  :host {
     --progress-height: 1rem;
-    --progress-font-size:0.75rem;
+    --progress-font-size: 0.75rem;
     display: block;
-}
+  }
 
-.progress{
-    height : var(--progress-height);
-}
+  .progress {
+    height: var(--progress-height);
+  }
 `;
