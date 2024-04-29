@@ -4,11 +4,11 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-progress-bar.scss?inline";
 import { html } from "lit";
-
+import progressBarStyle from "./progress-bar.style";
 export type ProgressBarVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
 
 export class SgdsProgressBar extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [progressBarStyle, styles];
 
   /** The background color of the progress bar */
   @property({ type: String, reflect: true }) variant: ProgressBarVariant;
