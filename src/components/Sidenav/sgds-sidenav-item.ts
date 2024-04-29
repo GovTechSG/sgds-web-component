@@ -28,7 +28,7 @@ import styles from "./sgds-sidenav-item.scss?inline";
  */
 
 export class SgdsSidenavItem extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [styles];
 
   @query(".sidenav-body") body: HTMLElement;
   /** @internal */
