@@ -6,6 +6,7 @@ import SgdsElement from "../../base/sgds-element";
 import { SgdsTab } from "./sgds-tab";
 import styles from "./sgds-tab-group.scss?inline";
 import { SgdsTabPanel } from "./sgds-tab-panel";
+import tabGroupStyle from "./tab-group.style";
 /**
  * @summary Tab Group organizes content into a container with the syncing of tab and their corresponding panels.
  * Each tab must be slotted into the nav slot and its `panel` must refer to a tab panel of the same name.
@@ -20,7 +21,7 @@ import { SgdsTabPanel } from "./sgds-tab-panel";
  * @csspart nav - The container wrapping the default slot where all `sgds-tab`s are slotted.
  */
 export class SgdsTabGroup extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [tabGroupStyle, styles];
   /**@internal */
   @query(".tab-group") tabGroup: HTMLElement;
   /**@internal */

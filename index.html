@@ -212,6 +212,53 @@
 
     <main>
         <div class="container">
+            <sgds-tab-group variant="tabs-info-toggle">
+                <sgds-tab disabled slot="nav" panel="one"><svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
+                        <path
+                            d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
+                    </svg><span slot="count">1</span><span slot="label">Apple</span>
+                </sgds-tab>
+                <sgds-tab active slot="nav"><span slot="count">12</span><span slot="label">Banana</span></sgds-tab>
+                <sgds-tab slot="nav"><sgds-badge slot="count" variant="light"
+                        badgeClasses="text-dark">100</sgds-badge><span slot="label">Carrot</span></sgds-tab>
+
+                <sgds-tab-panel name="one">hello</sgds-tab-panel>
+            </sgds-tab-group>
+            <sgds-tab-group variant="tabs-basic-toggle">
+                <sgds-tab disabled slot="nav" panel="one"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
+                        <path
+                            d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
+                    </svg>12 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-bank" viewBox="0 0 16 16">
+                        <path
+                            d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
+                    </svg></sgds-tab>
+                <sgds-tab active slot="nav">2</sgds-tab>
+                <sgds-tab slot="nav">3</sgds-tab>
+                <sgds-tab-panel name="one">hello</sgds-tab-panel>
+            </sgds-tab-group>
+            <sgds-tab-group tabsClasses="mb-3 border border-primary">
+                <sgds-tab disabled slot="nav" panel="one">hello</sgds-tab>
+                <sgds-tab slot="nav" panel="two">2</sgds-tab>
+                <sgds-tab slot="nav" panel="three">3</sgds-tab>
+                <sgds-tab-panel name="one" active>one</sgds-tab-panel>
+                <sgds-tab-panel name="two">two</sgds-tab-panel>
+                <sgds-tab-panel name="three">three</sgds-tab-panel>
+            </sgds-tab-group>
+            <h2>Stepper</h2>
+            <sgds-stepper id="myStepper" activeStep="2"
+                steps='[{"stepHeader":"Personal Details","component":"1 test"},{"stepHeader":"Address and Contact Information","component":"2 test"},{"stepHeader":"Review","component":"3 test"}]'>
+
+            </sgds-stepper>
+
+            <sgds-button refId="myStepper" methodType="increment" variant="primary">Next</sgds-button>
+            <sgds-button refId="myStepper" methodType="decrement" variant="secondary">Back</sgds-button>
+            <sgds-button refId="myStepper" methodType="last" variant="warning">Go to last page</sgds-button>
+            <sgds-button refId="myStepper" methodType="first" variant="danger">Go to first page</sgds-button>
+        </div>
+        <div class="container">
             <datepicker-input></datepicker-input>
             <h2>Progress</h2>
             <div class="row">
@@ -733,53 +780,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <sgds-tab-group variant="tabs-info-toggle">
-                    <sgds-tab disabled slot="nav" panel="one"><svg slot="icon" xmlns="http://www.w3.org/2000/svg"
-                            width="16" height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
-                            <path
-                                d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-                        </svg><span slot="count">1</span><span slot="label">Apple</span>
-                    </sgds-tab>
-                    <sgds-tab active slot="nav"><span slot="count">12</span><span slot="label">Banana</span></sgds-tab>
-                    <sgds-tab slot="nav"><sgds-badge slot="count" variant="light"
-                            badgeClasses="text-dark">100</sgds-badge><span slot="label">Carrot</span></sgds-tab>
 
-                    <sgds-tab-panel name="one">hello</sgds-tab-panel>
-                </sgds-tab-group>
-                <sgds-tab-group variant="tabs-basic-toggle">
-                    <sgds-tab disabled slot="nav" panel="one"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                            height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
-                            <path
-                                d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-                        </svg>12 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-bank" viewBox="0 0 16 16">
-                            <path
-                                d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-                        </svg></sgds-tab>
-                    <sgds-tab active slot="nav">2</sgds-tab>
-                    <sgds-tab slot="nav">3</sgds-tab>
-                    <sgds-tab-panel name="one">hello</sgds-tab-panel>
-                </sgds-tab-group>
-                <sgds-tab-group tabsClasses="mb-3 border border-primary">
-                    <sgds-tab disabled slot="nav" panel="one">hello</sgds-tab>
-                    <sgds-tab slot="nav" panel="two">2</sgds-tab>
-                    <sgds-tab slot="nav" panel="three">3</sgds-tab>
-                    <sgds-tab-panel name="one" active>one</sgds-tab-panel>
-                    <sgds-tab-panel name="two">two</sgds-tab-panel>
-                    <sgds-tab-panel name="three">three</sgds-tab-panel>
-                </sgds-tab-group>
-                <h2>Stepper</h2>
-                <sgds-stepper id="myStepper" activeStep="2"
-                    steps='[{"stepHeader":"Personal Details","component":"1 test"},{"stepHeader":"Address and Contact Information","component":"2 test"},{"stepHeader":"Review","component":"3 test"}]'>
-
-                </sgds-stepper>
-
-                <sgds-button refId="myStepper" methodType="increment" variant="primary">Next</sgds-button>
-                <sgds-button refId="myStepper" methodType="decrement" variant="secondary">Back</sgds-button>
-                <sgds-button refId="myStepper" methodType="last" variant="warning">Go to last page</sgds-button>
-                <sgds-button refId="myStepper" methodType="first" variant="danger">Go to first page</sgds-button>
-            </div>
             <div class="container">
                 <h2>File Upload</h2>
                 <div class="row">

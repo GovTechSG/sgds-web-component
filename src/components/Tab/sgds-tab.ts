@@ -4,6 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
 import styles from "./sgds-tab.scss?inline";
+import tabStyle from "./tab.style";
 
 let id = 0;
 /**
@@ -19,7 +20,7 @@ let id = 0;
  * @cssproperty  --tab-theme-color - The theme colour for tab. Defaults to `--sgds-primary`
  */
 export class SgdsTab extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [tabStyle, styles];
   /**@internal */
   @query(".nav-item") tab: HTMLElement;
   /**@internal */
