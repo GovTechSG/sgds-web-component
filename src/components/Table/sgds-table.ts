@@ -2,7 +2,6 @@ import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-table.scss?inline";
 import tableStyle from "./table.style";
 /**
  * @summary The use of a table is to organise a collections of data into readable rows
@@ -18,7 +17,7 @@ import tableStyle from "./table.style";
  */
 
 export class SgdsTable extends SgdsElement {
-  static styles = [tableStyle, styles];
+  static styles = [tableStyle];
 
   /**
    * Adds zebra-striping using striped to table row within the <tbody>

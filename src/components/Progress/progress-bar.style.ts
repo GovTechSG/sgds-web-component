@@ -2,6 +2,7 @@ import { css } from "lit";
 import bgVariants from "../../styles/bg-variants";
 export default css`
   ${bgVariants}
+
   progress {
     vertical-align: baseline;
   }
@@ -84,6 +85,23 @@ export default css`
   @keyframes progress-bar-stripes {
     0% {
       background-position-x: 1rem;
+    }
+  }
+  /**scss */
+  :host {
+    width: 100%;
+  }
+  .progress-bar {
+    // to match parent element's height
+    font-size: var(--sgds-progress-font-size);
+    height: 100%;
+    // if progressbarVariant is 'light'
+    &[class*="bg-light"] {
+      color: var(--sgds-dark);
+    }
+    // if progressbarVariant is 'dark'
+    &[class*="bg-dark"] {
+      color: var(--sgds-light);
     }
   }
 `;

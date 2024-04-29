@@ -1,5 +1,16 @@
 import { css } from "lit";
 export default css`
+  /* slot[name="separator"]::slotted(*) {
+    display: inline-block;
+    align-items: center;
+    padding-left: 0.25rem;
+    padding-right: 0.5rem;
+  } */
+
+  /* :host(:last-of-type) .breadcrumb-item__separator {
+    display: none;
+  } */
+
   .breadcrumb {
     --sgds-breadcrumb-padding-x: 0;
     --sgds-breadcrumb-padding-y: 0;

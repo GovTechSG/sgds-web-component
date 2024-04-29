@@ -1,7 +1,6 @@
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-progress.scss?inline";
 import { html } from "lit";
 import progressStyle from "./progress.style";
 /**
@@ -12,7 +11,7 @@ import progressStyle from "./progress.style";
  */
 
 export class SgdsProgress extends SgdsElement {
-  static styles = [progressStyle, styles];
+  static styles = [progressStyle];
 
   /** Forwarded to the base wrapper of sgds-progress. Can be used to insert any utility classes such as `me-auto` */
   @property({ type: String, reflect: true }) progressClasses: string;

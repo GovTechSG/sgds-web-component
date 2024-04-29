@@ -8,7 +8,6 @@ import { defaultValue } from "../../utils/defaultvalue";
 import { FormSubmitController, SgdsFormControl } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-textarea.scss?inline";
 import textareaStyle from "./textarea.style";
 /**
  * @summary Text areas allow for the collection of input longer than a single line.
@@ -19,7 +18,7 @@ import textareaStyle from "./textarea.style";
  * @event sgds-blur - Emitted when textarea loses focus.
  */
 export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
-  static styles = [textareaStyle, styles];
+  static styles = [textareaStyle];
   /**@internal */
   @query("textarea.form-control") textarea: HTMLTextAreaElement;
   /**@internal */

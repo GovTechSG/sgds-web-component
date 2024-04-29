@@ -82,4 +82,17 @@ export default css`
   .justify-content-between {
     justify-content: space-between !important;
   }
+  /** scss */
+
+:host{
+    .textarea-resize-none{
+        resize: none;
+    }
+    .textarea-resize-vertical {
+        resize: vertical;
+    }
+}
+
+
 `;
+

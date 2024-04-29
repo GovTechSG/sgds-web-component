@@ -23,4 +23,11 @@ export default css`
   .sgds.nav-tabs[variant="tabs-basic-toggle"] {
     gap: 0;
   }
+  /** scss */
+  slot[name="nav"] {
+  &[variant="tabs-basic-toggle"]::slotted(sgds-tab) {
+    margin-left: -2px;
+  }
+}
+
 `;

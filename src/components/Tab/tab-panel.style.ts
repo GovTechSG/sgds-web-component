@@ -1,3 +1,6 @@
+import { css } from "lit";
+
+export default css`
 :host {
     --tab-panel-padding-y: 1rem;
     display: block;
@@ -9,3 +12,4 @@
   .tab-panel:not(.tab-panel--active) {
     display: none;
   }
+  `

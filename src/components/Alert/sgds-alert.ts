@@ -4,7 +4,6 @@ import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
 import alertStyle from "./alert.style";
-import styles from "./sgds-alert.scss?inline";
 
 export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light";
 /**
@@ -19,7 +18,7 @@ export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "war
  * @cssproperty --alert-icon-margin-right - The margin-right css of icon slot, to position the gap between icon and alert message
  */
 export class SgdsAlert extends SgdsElement {
-  static styles = [alertStyle, styles];
+  static styles = [alertStyle];
 
   /** Controls the appearance of the alert  */
   @property({ type: Boolean, reflect: true }) show = false;

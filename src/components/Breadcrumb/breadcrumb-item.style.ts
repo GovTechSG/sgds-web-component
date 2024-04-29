@@ -3,6 +3,18 @@ import anchorStyles from "../../styles/anchor";
 
 export default css`
   ${anchorStyles}
+
+  slot[name=separator]::slotted(*) {
+    display: inline-block;
+    align-items: center;
+    padding-left: 0.25rem;
+    padding-right: 0.5rem;
+  }
+
+  :host(:last-of-type) .breadcrumb-item__separator {
+    display: none;
+  }
+
   .breadcrumb-item + .breadcrumb-item {
     padding-left: var(--sgds-breadcrumb-item-padding-x);
   }

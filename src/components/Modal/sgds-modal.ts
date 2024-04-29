@@ -11,7 +11,6 @@ import Modal from "../../utils/modal";
 import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll";
 import { HasSlotController } from "../../utils/slot";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-modal.scss?inline";
 import modalStyle from "./modal.style";
 /**
  * @summary The modal component inform users about a specific task and may contain critical information which users then have to make a decision.
@@ -43,7 +42,7 @@ import modalStyle from "./modal.style";
  * @cssproperty --modal-overlay-background-color - The overlay's background color
  */
 export class SgdsModal extends SgdsElement {
-  static styles = [modalStyle, styles];
+  static styles = [modalStyle];
 
   /**@internal */
   @query(".modal") dialog: HTMLElement;

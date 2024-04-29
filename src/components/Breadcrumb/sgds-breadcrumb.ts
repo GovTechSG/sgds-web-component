@@ -3,7 +3,6 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsBreadcrumbItem from "./sgds-breadcrumb-item";
-import styles from "./sgds-breadcrumb.scss?inline";
 import breadcrumbStyle from "./breadcrumb.style";
 /**
  * @summary Breadcrumbs help users to navigate and understand where they are on the current website or service.
@@ -14,7 +13,7 @@ import breadcrumbStyle from "./breadcrumb.style";
  * @csspart base - The nav element wrapper of `SgdsBreadcrumb`
  */
 export class SgdsBreadcrumb extends SgdsElement {
-  static styles = [styles, breadcrumbStyle];
+  static styles = [breadcrumbStyle];
   /** The aria-label of nav element within breadcrumb component. */
   @property({ type: String }) ariaLabel = "breadcrumb";
   /**@internal */

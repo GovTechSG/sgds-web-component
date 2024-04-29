@@ -57,4 +57,13 @@ export default css`
   .translate-middle-y {
     transform: translateY(-50%) !important;
   }
+  /**scss */
+  :host {
+    --toast-container-slot-elements-gap: 0.5rem;
+  }
+  slot {
+    display: flex;
+    flex-direction: column;
+    gap: var(--toast-container-slot-elements-gap);
+  }
 `;

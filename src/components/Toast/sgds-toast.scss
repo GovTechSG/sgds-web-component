@@ -1,8 +1,0 @@
-:host {
-    --toast-icon-margin-right: 0.5rem;
-  }
-
-slot[name="icon"]::slotted(svg) {
-    margin-right: var(--toast-icon-margin-right);
-  }
-  

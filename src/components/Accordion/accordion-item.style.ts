@@ -1,0 +1,44 @@
+import { css } from "lit";
+export default css`
+  :host {
+    --accordion-item-padding-y: 1rem;
+    --accordion-item-padding-x: 1.5rem;
+    --accordion-item-border-radius: 0.25rem;
+    --accordion-item-font-weight: 700;
+    --accordion-item-line-height: 2rem;
+  }
+
+  .accordion-body {
+    padding: 0;
+    line-height: var(--accordion-item-line-height);
+    overflow: hidden;
+  }
+
+  .accordion-content {
+    display: block;
+    padding: 0 var(--accordion-item-padding-x) var(--accordion-item-padding-y);
+  }
+
+  .accordion-button {
+    line-height: var(--accordion-item-line-height);
+  }
+
+  .accordion-button:not(.collapsed) {
+    font-weight: var(--accordion-item-font-weight);
+    box-shadow: none;
+  }
+
+  :host([first-of-type]) .accordion-item {
+    border-radius: var(--accordion-item-border-radius) var(--accordion-item-border-radius) 0 0;
+  }
+
+  :host([nth-of-type]) .accordion-item {
+    border-radius: 0;
+    border-top: 0;
+  }
+
+  :host([last-of-type]) .accordion-item {
+    border-radius: 0 0 var(--accordion-item-border-radius) var(--accordion-item-border-radius);
+    border-top: 0;
+  }
+`;

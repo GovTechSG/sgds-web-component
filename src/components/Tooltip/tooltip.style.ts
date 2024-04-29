@@ -117,4 +117,18 @@ export default css`
   .mt-1 {
     margin-top: 0.25rem !important;
   }
+  /** scss */
+
+  :host {
+  --tooltip-max-width: 20rem;
+  display: inline-block;
+}
+
+.tooltip-inner{
+  max-width: var(--tooltip-max-width);
+}
+
+div {
+  max-width: fit-content;
+}
 `;

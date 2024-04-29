@@ -2,13 +2,12 @@ import { property } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-progress-bar.scss?inline";
 import { html } from "lit";
 import progressBarStyle from "./progress-bar.style";
 export type ProgressBarVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
 
 export class SgdsProgressBar extends SgdsElement {
-  static styles = [progressBarStyle, styles];
+  static styles = [progressBarStyle];
 
   /** The background color of the progress bar */
   @property({ type: String, reflect: true }) variant: ProgressBarVariant;

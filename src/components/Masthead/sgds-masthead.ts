@@ -1,7 +1,6 @@
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-masthead.scss?inline";
 import mastheadStyle from "./masthead.style";
 
 /**
@@ -17,7 +16,7 @@ import mastheadStyle from "./masthead.style";
  * @cssproperty --masthead-crest-color - Sets the lion head crest color.
  */
 export class SgdsMasthead extends SgdsElement {
-  static styles = [mastheadStyle, styles];
+  static styles = [mastheadStyle];
 
   /**
    * Sets the masthead container width to 100% for all breakpoints

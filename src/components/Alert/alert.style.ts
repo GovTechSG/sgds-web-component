@@ -1,6 +1,24 @@
 import { css } from "lit";
 
 export default css`
+  :host {
+    --alert-icon-margin-right: 0.5rem;
+  }
+
+  slot[name="icon"]::slotted(svg) {
+    margin-right: var(--alert-icon-margin-right);
+    vertical-align: unset !important;
+  }
+
+  i {
+    position: relative;
+    top: 2px;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
   .btn-sm {
     --sgds-btn-padding-y: 0.25rem;
     --sgds-btn-padding-x: 0.5rem;

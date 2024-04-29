@@ -18,4 +18,15 @@ export default css`
   .mb-3 {
     margin-bottom: 1rem !important;
   }
+  /** scss */
+
+  :host{
+    --progress-height: 1rem;
+    --progress-font-size:0.75rem;
+    display: block;
+}
+
+.progress{
+    height : var(--progress-height);
+}
 `;

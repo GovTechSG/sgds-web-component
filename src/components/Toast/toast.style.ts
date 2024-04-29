@@ -177,4 +177,12 @@ export default css`
   .sgds.is-dark .toast-header {
     color: #252525;
   }
+  /** scss */
+  :host {
+    --toast-icon-margin-right: 0.5rem;
+  }
+
+  slot[name="icon"]::slotted(svg) {
+    margin-right: var(--toast-icon-margin-right);
+  }
 `;

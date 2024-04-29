@@ -6,7 +6,6 @@ import { html } from "lit";
 import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-tooltip.scss?inline";
 import tooltipStyle from "./tooltip.style";
 /**
  * @summary Tooltips display more information when users hover over, focus on, or interact with an element.
@@ -15,7 +14,7 @@ import tooltipStyle from "./tooltip.style";
  * @cssproperty --tooltip-max-width - Sets the tooltips max width. Default to 20rem.
  */
 export class SgdsTooltip extends SgdsElement {
-  static styles = [tooltipStyle, styles];
+  static styles = [tooltipStyle];
 
   private myTooltip: Ref<HTMLElement> = createRef();
 

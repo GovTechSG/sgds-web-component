@@ -4,7 +4,6 @@ import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 import { SgdsTab } from "./sgds-tab";
-import styles from "./sgds-tab-group.scss?inline";
 import { SgdsTabPanel } from "./sgds-tab-panel";
 import tabGroupStyle from "./tab-group.style";
 /**
@@ -21,7 +20,7 @@ import tabGroupStyle from "./tab-group.style";
  * @csspart nav - The container wrapping the default slot where all `sgds-tab`s are slotted.
  */
 export class SgdsTabGroup extends SgdsElement {
-  static styles = [tabGroupStyle, styles];
+  static styles = [tabGroupStyle];
   /**@internal */
   @query(".tab-group") tabGroup: HTMLElement;
   /**@internal */

@@ -8,6 +8,7 @@ import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
 import accordionStyle from "./accordion.style";
 import styles from "./sgds-accordion-item.scss?inline";
+import accordionItemStyle from "./accordion-item.style";
 
 /**
  *
@@ -30,7 +31,7 @@ import styles from "./sgds-accordion-item.scss?inline";
  * @cssprop --accordion-item-line-height - The line height of accordion
  */
 export class SgdsAccordionItem extends SgdsElement {
-  static styles = [accordionStyle, styles];
+  static styles = [accordionStyle, accordionItemStyle];
   /** @internal */
   @query(".accordion-item") accordion: HTMLElement;
   /** @internal */

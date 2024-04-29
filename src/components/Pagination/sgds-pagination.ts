@@ -1,7 +1,6 @@
 import { TemplateResult, html, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-pagination.scss?inline";
 import { watch } from "../../utils/watch";
 import { classMap } from "lit/directives/class-map.js";
 import paginationStyle from "./pagination.style";
@@ -22,7 +21,7 @@ import paginationStyle from "./pagination.style";
  *
  **/
 export class SgdsPagination extends SgdsElement {
-  static styles = [paginationStyle, styles];
+  static styles = [paginationStyle];
 
   /** Inserts the length value from a given sets of data objects*/
   @property({ type: Number }) dataLength = 0;

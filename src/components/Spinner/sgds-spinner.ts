@@ -2,13 +2,12 @@ import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-spinner.scss?inline";
 import spinnerStyle from "./spinner.style";
 /**
  * @summary Spinners notify the users that their request is being processed.
  */
 export class SgdsSpinner extends SgdsElement {
-  static styles = [spinnerStyle, styles];
+  static styles = [spinnerStyle];
   /** The type of spinner */
   @property({ type: String, reflect: true }) type: SpinnerType = "border";
   /** The color of spinner */

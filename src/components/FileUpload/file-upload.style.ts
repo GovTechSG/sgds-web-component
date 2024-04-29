@@ -2,6 +2,30 @@ import { css } from "lit";
 import svgStyle from "../../styles/svg";
 export default css`
   ${svgStyle}
+  /** scss */
+  :host {
+    --fileupload-left-icon-fill: green;
+    --fileupload-remove-icon-fill: red;
+    --fileupload-remove-icon-hover-fill: hsl(0, 100%, 40%);
+  }
+
+  .fileupload-list-item span {
+    cursor: pointer;
+    &:first-of-type {
+      svg {
+        fill: var(--fileupload-left-icon-fill);
+      }
+    }
+    &:last-of-type {
+      svg {
+        fill: var(--fileupload-remove-icon-fill);
+        &:hover {
+          fill: var(--fileupload-remove-icon-hover-fill);
+        }
+      }
+    }
+  }
+/** end scss */
   .form-control[type="file"] {
     overflow: hidden;
   }
