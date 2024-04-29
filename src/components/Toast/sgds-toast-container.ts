@@ -4,6 +4,7 @@ import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import mergeDeep from "../../utils/mergeDeep";
 import styles from "./sgds-toast-container.scss?inline";
+import toastContainerStyle from "./toast-container.style";
 /**
  * @summary ToastContainer is the container component to position `sgds-toast` in screen. When there is multiple toasts in the container, the toast components are stacked vertically.
  *
@@ -12,7 +13,7 @@ import styles from "./sgds-toast-container.scss?inline";
  * @cssproperty --toast-container-slot-elements-gap - The gap between multiple `sgds-toast` elements. Defaults to 0.5rem
  */
 export class SgdsToastContainer extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [toastContainerStyle, styles];
 
   /** Controls the position of `sgds-toast` within itself. When specified, toast container becomes position-absolute */
   @property({ type: String, reflect: true }) position: ToastPosition;
@@ -34,8 +35,7 @@ export class SgdsToastContainer extends SgdsElement {
         class=${classMap(
           mergeDeep(
             {
-              "sgds toast-container": true,
-              [`position-absolute`]: this.position
+              "sgds toast-container": true
             },
             generatePositionCssTokenObj(this.position)
           )

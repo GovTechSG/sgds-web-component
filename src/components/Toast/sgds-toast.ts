@@ -7,7 +7,7 @@ import { getAnimation, setDefaultAnimation } from "../../utils/animation-registr
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
 import styles from "./sgds-toast.scss?inline";
-
+import toastStyle from "./toast.style";
 /**
  * @summary Toast allows you to convey quick messaging notifications to the user.
  *
@@ -23,7 +23,7 @@ import styles from "./sgds-toast.scss?inline";
  * @cssproperty --toast-icon-margin-right - The margin-right between toast's icon and title in its header. Defaults to 0.5rem
  */
 export class SgdsToast extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [toastStyle, styles];
   /**@internal */
   @query("div.toast") toast: HTMLElement;
   /** Controls the appearance of toast */
