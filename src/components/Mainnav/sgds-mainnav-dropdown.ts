@@ -1,18 +1,17 @@
 import { html } from "lit";
 import { property, queryAsync } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import { ref } from "lit/directives/ref.js";
-import { DropdownElement } from "../../base/dropdown-element";
-import styles from "./sgds-mainnav-dropdown.scss?inline";
 import { DropdownListElement } from "../../base/dropdown-list-element";
 import genId from "../../utils/generateId";
-import { classMap } from "lit/directives/class-map.js";
-
+import dropdownStyle from "../Dropdown/dropdown.style";
+import styles from "./sgds-mainnav-dropdown.scss?inline";
 /**
  * @slot default - The menu items. Pass in sgds-dropdown-item as the menu items
  * @slot toggler - The content of the toggler to pass in html content. `togglerText` property takes precedence over this slot when both are defined.
  */
 export class SgdsMainnavDropdown extends DropdownListElement {
-  static styles = [DropdownElement.styles, styles];
+  static styles = [dropdownStyle, styles];
 
   /**@internal */
   @queryAsync("a")

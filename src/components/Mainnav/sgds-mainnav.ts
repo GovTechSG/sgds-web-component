@@ -9,7 +9,7 @@ import { waitForEvent } from "../../utils/event";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import styles from "./sgds-mainnav.scss?inline";
-
+import mainnavStyle from "./mainnav.style";
 export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
 
 const SIZES = {
@@ -44,7 +44,7 @@ const SIZES = {
  * @cssproperty --mainnav-borderBottom-color - borderBottom width color
  */
 export class SgdsMainnav extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [mainnavStyle, styles];
 
   /** @internal */
   @query(".navbar-toggler") header: HTMLElement;

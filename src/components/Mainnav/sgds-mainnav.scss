@@ -1,4 +1,4 @@
-:host{
+:host {
   --mainnav-background-color: white;
   --mainnav-padding-x: 1rem;
   --mainnav-padding-y: 0;
@@ -9,12 +9,17 @@
   --mainnav-borderBottom-color: #98a2b3;
 }
 
-.sgds{
-  &.navbar{
+ul {
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+
+.sgds {
+  &.navbar {
     background-color: var(--mainnav-background-color);
     padding: var(--mainnav-padding-y) var(--mainnav-padding-x);
     border-bottom: var(--mainnav-borderBottom-width) solid var(--mainnav-borderBottom-color);
-    @media (max-width: 768px) { 
+    @media (max-width: 768px) {
       padding: var(--mainnav-mobile-padding-y) var(--mainnav-mobile-padding-x);
     }
   }
@@ -43,14 +48,13 @@ slot[name="non-collapsible"] {
 }
 
 .slot-end {
-    display: flex;
-    margin-left: auto;
-    align-items: stretch;
-    gap: 1rem;
-
+  display: flex;
+  margin-left: auto;
+  align-items: stretch;
+  gap: 1rem;
 }
 
 // there is no wildcard selector for element tag names in css :/
-.slot-end::slotted(:not([name$="-mainnav-item"]):not([name$="-mainnav-dropdown"])){
+.slot-end::slotted(:not([name$="-mainnav-item"]):not([name$="-mainnav-dropdown"])) {
   align-self: center;
 }

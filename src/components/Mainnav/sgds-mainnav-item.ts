@@ -1,6 +1,6 @@
 import LinkElement from "../../base/link-element";
 import styles from "./sgds-mainnav-item.scss?inline";
-
+import mainnavItemStyle from "./mainnav-item.style";
 /**
  * @slot default - slot for SgdsMainnavItem element.
  *
@@ -9,7 +9,7 @@ import styles from "./sgds-mainnav-item.scss?inline";
  * @cssproperty --mainnav-item-borderBottom-width - border bottom width for hover and active state for nav item
  */
 export class SgdsMainnavItem extends LinkElement {
-  static styles = [LinkElement.styles, styles];
+  static styles = [mainnavItemStyle, styles];
 }
 
 export default SgdsMainnavItem;

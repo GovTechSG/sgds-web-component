@@ -1,6 +1,5 @@
-
-:host   {
-  --mainnav-item-theme-color: #5925DC;
+:host {
+  --mainnav-item-theme-color: #5925dc;
   --mainnav-item-color: #344054;
   --mainnav-item-borderBottom-width: 0.125rem;
 }
@@ -15,6 +14,7 @@ a.nav-link {
   border-bottom: var(--mainnav-item-borderBottom-width) solid transparent;
   min-height: 100%;
   align-items: center;
+  padding: 0;
 
   &.active,
   &:hover {
