@@ -2,6 +2,7 @@ import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import styles from "./sgds-masthead.scss?inline";
+import mastheadStyle from "./masthead.style";
 
 /**
  * @summary All .gov.sg digital services shall adopt The Official Government Banner for every page in the digital service and be placed at the top of the page.
@@ -16,7 +17,7 @@ import styles from "./sgds-masthead.scss?inline";
  * @cssproperty --masthead-crest-color - Sets the lion head crest color.
  */
 export class SgdsMasthead extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [mastheadStyle, styles];
 
   /**
    * Sets the masthead container width to 100% for all breakpoints
