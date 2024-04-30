@@ -1,12 +1,12 @@
 :host {
-  --pagination-color: var(--sgds-cyan);
-  --pagination-bg-color: var(--sgds-white);
-  --pagination-hover-bg-color: var(--sgds-gray-200);
-  --pagination-hover-border-color: var(--sgds-gray-300);
-  --pagination-active-color: var(--sgds-white);
-  --pagination-active-bg-color: var(--sgds-cyan);
-  --pagination-disabled-color: var(--sgds-gray-600);
-  --pagination-disabled-bg-color: var(--sgds-white);
+  --pagination-color: var(--sgds-info, #0f71bb);
+  --pagination-bg-color: var(--sgds-white, #fff);
+  --pagination-hover-bg-color: var(--sgds-gray-200, #e4e7ec);
+  --pagination-hover-border-color: var(--sgds-gray-300, #d0d5dd);
+  --pagination-active-color: var(--sgds-white, #fff);
+  --pagination-active-bg-color: var(--sgds-info, #0f71bb);
+  --pagination-disabled-color: var(--sgds-gray-600, #344054);
+  --pagination-disabled-bg-color: var(--sgds-white, #fff);
 }
 
 ul.pagination.sgds {
