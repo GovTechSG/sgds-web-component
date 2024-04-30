@@ -8,7 +8,7 @@ import { classMap } from "lit/directives/class-map.js";
  */
 
 export default class LinkElement extends SgdsElement {
-  // static styles = SgdsElement.styles;
+  static styles = SgdsElement.styles;
 
   /** when true, sets the active stylings of .nav-link */
   @property({ type: Boolean })

@@ -11,7 +11,7 @@ import mainnavDropdownStyle from "./mainnav-dropdown.style";
  * @slot toggler - The content of the toggler to pass in html content. `togglerText` property takes precedence over this slot when both are defined.
  */
 export class SgdsMainnavDropdown extends DropdownListElement {
-  static styles = [dropdownStyle, mainnavDropdownStyle];
+  static styles = [DropdownListElement.styles, dropdownStyle, mainnavDropdownStyle];
 
   /**@internal */
   @queryAsync("a")

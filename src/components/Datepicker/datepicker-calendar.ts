@@ -6,7 +6,7 @@ import { watch } from "../../utils/watch";
 import { ViewEnum } from "./types";
 import { classMap } from "lit/directives/class-map.js";
 import { isAfter, isEqual } from "date-fns";
-import datepickerCalendarStyle from "./datepicker-calendar.style."; 
+import datepickerCalendarStyle from "./datepicker-calendar.style.";
 
 const TODAY_DATE = new Date();
 

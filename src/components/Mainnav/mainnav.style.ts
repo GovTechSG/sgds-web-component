@@ -691,7 +691,7 @@ export default css`
     gap: 1rem;
   }
 
-  // there is no wildcard selector for element tag names in css :/
+  /* there is no wildcard selector for element tag names in css */
   .slot-end::slotted(:not([name$="-mainnav-item"]):not([name$="-mainnav-dropdown"])) {
     align-self: center;
   }
