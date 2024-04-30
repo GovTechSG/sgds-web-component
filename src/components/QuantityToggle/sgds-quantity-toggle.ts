@@ -33,7 +33,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
   private readonly formSubmitController = new FormSubmitController(this);
 
   /** The name of the input */
-  @property({ reflect: true }) name: string;
+  @property({ type: String, reflect: true }) name: string;
 
   /** The input's minimum value. */
   @property({ type: Number, reflect: true }) min: number;
@@ -44,18 +44,18 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
   @property() size: "sm" | "lg" = "sm";
 
   /**The input's value. Set to 0 by default */
-  @property({ reflect: true, type: Number }) value = 0;
+  @property({ type: Number, reflect: true }) value = 0;
 
   /** Disables the entire quantity toggle  */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The quantity toggle's button variants */
-  @property({ type: String, reflect: true }) buttonVariant: ButtonVariant = "primary";
+  @property({ type: String }) buttonVariant: ButtonVariant = "primary";
 
   /**
    * Controls the incremental / decremental value of the input
    */
-  @property({ type: Number, reflect: true }) step = 1;
+  @property({ type: Number }) step = 1;
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
@@ -65,13 +65,34 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
   private inputId: string = genId("quantity-toggle", "input");
 
   handleChange(event: string) {
+    if (parseInt(this.input.value) < this.step || this.input.value === "") {
+      this.input.value = "0";
+    }
     this.value = parseInt(this.input.value);
     this.emit(event);
   }
+
+  handleKeyDown(event: KeyboardEvent) {
+    const allowedKeys = [
+      "Backspace",
+      "ArrowUp",
+      "ArrowDown",
+      "ArrowLeft",
+      "ArrowRight",
+      ...Array.from(Array(10).keys()).map(key => key.toString())
+    ];
+
+    // Allow keydown event only if the pressed key is in the allowedKeys array
+    if (!allowedKeys.includes(event.key)) {
+      event.preventDefault();
+    }
+  }
+
   /** Simulates a click on the plus button */
   public plus() {
     this.plusBtn.click();
   }
+
   /** Simulates a click on the minus button */
   public minus() {
     this.minusBtn.click();
@@ -114,7 +135,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
             [`btn-${this.buttonVariant}`]: this.buttonVariant
           })}
           @click=${this.onMinus}
-          ?disabled=${this.disabled}
+          ?disabled=${this.disabled || (this.min !== undefined ? this.value <= this.min : this.value < 1)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -137,6 +158,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
           .value=${live(this.value.toString())}
           @change=${() => this.handleChange("sgds-change")}
           @input=${() => this.handleChange("sgds-input")}
+          @keydown=${this.handleKeyDown}
           ?disabled=${this.disabled}
           id=${this.inputId}
           aria-label="quantity"
@@ -150,7 +172,7 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
             [`btn-${this.buttonVariant}`]: this.buttonVariant
           })}
           @click=${this.onPlus}
-          ?disabled=${this.disabled}
+          ?disabled=${this.disabled || (this.max !== undefined && this.max && this.value >= this.max)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -165,8 +187,8 @@ export class SgdsQuantityToggle extends SgdsElement implements SgdsFormControl {
             />
           </svg>
         </button>
-        <div id="announcer" role="region" aria-live="assertive" class="visually-hidden">${this.value}</div>
       </div>
+      <div id="announcer" role="region" aria-live="assertive" class="visually-hidden">${this.value}</div>
     `;
   }
 }

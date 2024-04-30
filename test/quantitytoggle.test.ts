@@ -21,6 +21,48 @@ describe("when minusBtn or plusBtn is clicked", () => {
 
     expect(el.value).to.equal(10);
   });
+
+  it("minusBtn is disabled when reaches 0 without minimum value set", async () => {
+    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="1"></sgds-quantity-toggle>`);
+    const minusBtn = el.shadowRoot?.querySelector("button[aria-label^='decrease by']") as HTMLButtonElement;
+
+    minusBtn.click();
+    await el.updateComplete;
+
+    expect(el.value).to.equal(0);
+    expect(minusBtn.hasAttribute("disabled")).to.be.true;
+  });
+
+  it("minusBtn is disabled when reaches minimum value", async () => {
+    const el = await fixture<SgdsQuantityToggle>(
+      html`<sgds-quantity-toggle value="10" min="8"></sgds-quantity-toggle>`
+    );
+    const minusBtn = el.shadowRoot?.querySelector("button[aria-label^='decrease by']") as HTMLButtonElement;
+
+    minusBtn.click();
+    await el.updateComplete;
+
+    expect(el.value).to.equal(9);
+
+    minusBtn.click();
+    await el.updateComplete;
+
+    expect(el.value).to.equal(8);
+    expect(minusBtn.hasAttribute("disabled")).to.be.true;
+  });
+
+  it("minusBtn is disabled when reaches maximum value", async () => {
+    const el = await fixture<SgdsQuantityToggle>(
+      html`<sgds-quantity-toggle value="10" max="11"></sgds-quantity-toggle>`
+    );
+    const plusBtn = el.shadowRoot?.querySelector("button[aria-label^='increase by']") as HTMLButtonElement;
+
+    plusBtn.click();
+    await el.updateComplete;
+
+    expect(el.value).to.equal(11);
+    expect(plusBtn.hasAttribute("disabled")).to.be.true;
+  });
 });
 
 describe("when value change", () => {
@@ -33,6 +75,35 @@ describe("when value change", () => {
     await sendKeys({ press: "0" });
     waitUntil(() => inputHandler.calledOnce);
     expect(inputHandler).to.have.been.calledOnce;
+  });
+
+  it("prevent from entering special characters", async () => {
+    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="15"></sgds-quantity-toggle>`);
+    const inputEl = el.shadowRoot?.querySelector("input.form-control") as HTMLInputElement;
+    const inputHandler = sinon.spy();
+    inputEl.focus();
+    el.addEventListener("sgds-input", inputHandler);
+    await sendKeys({ press: "ArrowLeft" });
+    await sendKeys({ press: "ArrowLeft" });
+    waitUntil(() => inputHandler.calledTwice);
+    await sendKeys({ press: "Minus" });
+    waitUntil(() => inputHandler.calledOnce);
+    expect(inputEl.value).to.equal("15");
+  });
+
+  it("resets value to 0 when delete the value", async () => {
+    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="15"></sgds-quantity-toggle>`);
+    const inputEl = el.shadowRoot?.querySelector("input.form-control") as HTMLInputElement;
+    const inputHandler = sinon.spy();
+    inputEl.focus();
+    el.addEventListener("sgds-input", inputHandler);
+    await sendKeys({ press: "Backspace" });
+    waitUntil(() => inputHandler.calledOnce);
+    expect(inputEl.value).to.equal("1");
+
+    await sendKeys({ press: "Backspace" });
+    waitUntil(() => inputHandler.calledOnce);
+    expect(inputEl.value).to.equal("0");
   });
 });
 
