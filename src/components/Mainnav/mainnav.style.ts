@@ -16,7 +16,7 @@ export default css`
     --mainnav-brand-hover-color: rgba(var(--sgds-emphasis-color-rgb), 0.9);
 
     --mainnav-toggler-transition: box-shadow 0.15s ease-in-out;
-    
+
     /* --mainnav-color: rgba(var(--sgds-emphasis-color-rgb), 0.55); */
     /* --mainnav-hover-color: rgba(var(--sgds-emphasis-color-rgb), 0.7); */
     /* --mainnav-disabled-color: rgba(var(--sgds-emphasis-color-rgb), 0.3); */
