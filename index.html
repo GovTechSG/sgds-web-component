@@ -103,7 +103,7 @@
 
         sgds-mainnav-item,
         sgds-mainnav-dropdown {
-            --mainnav-item-theme-color: red;
+            /* --mainnav-item-theme-color: red; */
         }
     </style>
     <!-- <script src="https://cdn.jsdelivr.net/npm/clk-web-components" type="module"></script> -->
@@ -149,8 +149,11 @@
     <sgds-button slot="end">Login</sgds-button>
     <sgds-button slot="non-collapsible" iconcolor="black" iconwidth="28px" iconheight="28px">test</sgds-button>
 </sgds-mainnav> -->
-<sgds-mainnav>
-    <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
+
+<sgds-mainnav expand="md">
+    <span slot="brand">Design System</span>
+    <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
+
     <sgds-mainnav-item active href="#">Home</sgds-mainnav-item>
     <sgds-mainnav-item href="#">About</sgds-mainnav-item>
     <sgds-mainnav-item href="#" slot="end" class="test test2">Info</sgds-mainnav-item>
@@ -344,7 +347,7 @@
                 <!-- <sgds-datepicker mindate="2024-01-02T12:00:00.000Z"
                     maxdate="2024-01-30T12:00:00.000Z"></sgds-datepicker> -->
                 <sgds-button type="submit">Submit</sgds-button>
-            </form> 
+            </form>
             <sgds-datepicker label="Choose a date"></sgds-datepicker>
 
             <form id="datepicker-form">

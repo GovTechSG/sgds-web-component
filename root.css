@@ -329,7 +329,7 @@
     scroll-behavior: smooth;
   }
 }
-body {
+/* body {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   background-color: var(--sgds-body-bg);
@@ -340,4 +340,4 @@ body {
   line-height: var(--sgds-body-line-height);
   margin: 0;
   text-align: var(--sgds-body-text-align);
-}
+} */
