@@ -1,31 +1,33 @@
 import { css } from "lit";
 export default css`
+  :host {
+    --navbar-padding-x: 0;
+    --navbar-padding-y: 2rem;
+    --navbar-color: rgba(var(--sgds-emphasis-color-rgb), 0.55);
+    --navbar-hover-color: rgba(var(--sgds-emphasis-color-rgb), 0.7);
+    --navbar-disabled-color: rgba(var(--sgds-emphasis-color-rgb), 0.3);
+    --navbar-active-color: rgba(var(--sgds-emphasis-color-rgb), 0.9);
+    --navbar-brand-padding-y: 0.25rem;
+    --navbar-brand-margin-end: 1rem;
+    --navbar-brand-font-size: 1.25rem;
+    --navbar-brand-color: rgba(var(--sgds-emphasis-color-rgb), 0.9);
+    --navbar-brand-hover-color: rgba(var(--sgds-emphasis-color-rgb), 0.9);
+    --navbar-nav-link-padding-x: 0.5rem;
+    --navbar-toggler-padding-y: 0.25rem;
+    --navbar-toggler-padding-x: 0.75rem;
+    --navbar-toggler-font-size: 1.25rem;
+    --navbar-toggler-icon-bg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(var(--sgds-emphasis-color-rgb), 0.55)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    --navbar-toggler-border-color: rgba(0, 0, 0, 0.1);
+    --navbar-toggler-border-radius: var(--sgds-border-radius);
+    --navbar-toggler-focus-width: 0.25rem;
+    --navbar-toggler-transition: box-shadow 0.15s ease-in-out;
+  }
   .navbar {
-    --sgds-navbar-padding-x: 0;
-    --sgds-navbar-padding-y: 2rem;
-    --sgds-navbar-color: rgba(var(--sgds-emphasis-color-rgb), 0.55);
-    --sgds-navbar-hover-color: rgba(var(--sgds-emphasis-color-rgb), 0.7);
-    --sgds-navbar-disabled-color: rgba(var(--sgds-emphasis-color-rgb), 0.3);
-    --sgds-navbar-active-color: rgba(var(--sgds-emphasis-color-rgb), 0.9);
-    --sgds-navbar-brand-padding-y: 0.25rem;
-    --sgds-navbar-brand-margin-end: 1rem;
-    --sgds-navbar-brand-font-size: 1.25rem;
-    --sgds-navbar-brand-color: rgba(var(--sgds-emphasis-color-rgb), 0.9);
-    --sgds-navbar-brand-hover-color: rgba(var(--sgds-emphasis-color-rgb), 0.9);
-    --sgds-navbar-nav-link-padding-x: 0.5rem;
-    --sgds-navbar-toggler-padding-y: 0.25rem;
-    --sgds-navbar-toggler-padding-x: 0.75rem;
-    --sgds-navbar-toggler-font-size: 1.25rem;
-    --sgds-navbar-toggler-icon-bg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(var(--sgds-emphasis-color-rgb), 0.55)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-    --sgds-navbar-toggler-border-color: rgba(0, 0, 0, 0.1);
-    --sgds-navbar-toggler-border-radius: var(--sgds-border-radius);
-    --sgds-navbar-toggler-focus-width: 0.25rem;
-    --sgds-navbar-toggler-transition: box-shadow 0.15s ease-in-out;
     align-items: center;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: var(--sgds-navbar-padding-y) var(--sgds-navbar-padding-x);
+    padding: var(--navbar-padding-y) var(--navbar-padding-x);
     position: relative;
   }
   .navbar > .container,
@@ -41,25 +43,25 @@ export default css`
     justify-content: space-between;
   }
   .navbar-brand {
-    color: var(--sgds-navbar-brand-color);
-    font-size: var(--sgds-navbar-brand-font-size);
-    margin-right: var(--sgds-navbar-brand-margin-end);
-    padding-bottom: var(--sgds-navbar-brand-padding-y);
-    padding-top: var(--sgds-navbar-brand-padding-y);
+    color: var(--navbar-brand-color);
+    font-size: var(--navbar-brand-font-size);
+    margin-right: var(--navbar-brand-margin-end);
+    padding-bottom: var(--navbar-brand-padding-y);
+    padding-top: var(--navbar-brand-padding-y);
     text-decoration: none;
     white-space: nowrap;
   }
   .navbar-brand:focus,
   .navbar-brand:hover {
-    color: var(--sgds-navbar-brand-hover-color);
+    color: var(--navbar-brand-hover-color);
   }
   .navbar-nav {
     --sgds-nav-link-padding-x: 0;
     --sgds-nav-link-padding-y: 0.5rem;
     --sgds-nav-link-font-weight: ;
-    --sgds-nav-link-color: var(--sgds-navbar-color);
-    --sgds-nav-link-hover-color: var(--sgds-navbar-hover-color);
-    --sgds-nav-link-disabled-color: var(--sgds-navbar-disabled-color);
+    --sgds-nav-link-color: var(--navbar-color);
+    --sgds-nav-link-hover-color: var(--navbar-hover-color);
+    --sgds-nav-link-disabled-color: var(--navbar-disabled-color);
     display: flex;
     flex-direction: column;
     list-style: none;
@@ -68,20 +70,20 @@ export default css`
   }
   .navbar-nav .nav-link.active,
   .navbar-nav .nav-link.show {
-    color: var(--sgds-navbar-active-color);
+    color: var(--navbar-active-color);
   }
   .navbar-nav .dropdown-menu {
     position: static;
   }
   .navbar-text {
-    color: var(--sgds-navbar-color);
+    color: var(--navbar-color);
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
   }
   .navbar-text a,
   .navbar-text a:focus,
   .navbar-text a:hover {
-    color: var(--sgds-navbar-active-color);
+    color: var(--navbar-active-color);
   }
   .navbar-collapse {
     align-items: center;
@@ -90,13 +92,13 @@ export default css`
   }
   .navbar-toggler {
     background-color: transparent;
-    border: var(--sgds-border-width) solid var(--sgds-navbar-toggler-border-color);
-    border-radius: var(--sgds-navbar-toggler-border-radius);
-    color: var(--sgds-navbar-color);
-    font-size: var(--sgds-navbar-toggler-font-size);
+    border: var(--sgds-border-width) solid var(--navbar-toggler-border-color);
+    border-radius: var(--navbar-toggler-border-radius);
+    color: var(--navbar-color);
+    font-size: var(--navbar-toggler-font-size);
     line-height: 1;
-    padding: var(--sgds-navbar-toggler-padding-y) var(--sgds-navbar-toggler-padding-x);
-    transition: var(--sgds-navbar-toggler-transition);
+    padding: var(--navbar-toggler-padding-y) var(--navbar-toggler-padding-x);
+    transition: var(--navbar-toggler-transition);
   }
   @media (prefers-reduced-motion: reduce) {
     .navbar-toggler {
@@ -107,12 +109,12 @@ export default css`
     text-decoration: none;
   }
   .navbar-toggler:focus {
-    box-shadow: 0 0 0 var(--sgds-navbar-toggler-focus-width);
+    box-shadow: 0 0 0 var(--navbar-toggler-focus-width);
     outline: 0;
     text-decoration: none;
   }
   .navbar-toggler-icon {
-    background-image: var(--sgds-navbar-toggler-icon-bg);
+    background-image: var(--navbar-toggler-icon-bg);
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -137,8 +139,8 @@ export default css`
       position: absolute;
     }
     .navbar-expand-sm .navbar-nav .nav-link {
-      padding-left: var(--sgds-navbar-nav-link-padding-x);
-      padding-right: var(--sgds-navbar-nav-link-padding-x);
+      padding-left: var(--navbar-nav-link-padding-x);
+      padding-right: var(--navbar-nav-link-padding-x);
     }
     .navbar-expand-sm .navbar-nav-scroll {
       overflow: visible;
@@ -184,8 +186,8 @@ export default css`
       position: absolute;
     }
     .navbar-expand-md .navbar-nav .nav-link {
-      padding-left: var(--sgds-navbar-nav-link-padding-x);
-      padding-right: var(--sgds-navbar-nav-link-padding-x);
+      padding-left: var(--navbar-nav-link-padding-x);
+      padding-right: var(--navbar-nav-link-padding-x);
     }
     .navbar-expand-md .navbar-nav-scroll {
       overflow: visible;
@@ -231,8 +233,8 @@ export default css`
       position: absolute;
     }
     .navbar-expand-lg .navbar-nav .nav-link {
-      padding-left: var(--sgds-navbar-nav-link-padding-x);
-      padding-right: var(--sgds-navbar-nav-link-padding-x);
+      padding-left: var(--navbar-nav-link-padding-x);
+      padding-right: var(--navbar-nav-link-padding-x);
     }
     .navbar-expand-lg .navbar-nav-scroll {
       overflow: visible;
@@ -278,8 +280,8 @@ export default css`
       position: absolute;
     }
     .navbar-expand-xl .navbar-nav .nav-link {
-      padding-left: var(--sgds-navbar-nav-link-padding-x);
-      padding-right: var(--sgds-navbar-nav-link-padding-x);
+      padding-left: var(--navbar-nav-link-padding-x);
+      padding-right: var(--navbar-nav-link-padding-x);
     }
     .navbar-expand-xl .navbar-nav-scroll {
       overflow: visible;
@@ -325,8 +327,8 @@ export default css`
       position: absolute;
     }
     .navbar-expand-xxl .navbar-nav .nav-link {
-      padding-left: var(--sgds-navbar-nav-link-padding-x);
-      padding-right: var(--sgds-navbar-nav-link-padding-x);
+      padding-left: var(--navbar-nav-link-padding-x);
+      padding-right: var(--navbar-nav-link-padding-x);
     }
     .navbar-expand-xxl .navbar-nav-scroll {
       overflow: visible;
@@ -371,8 +373,8 @@ export default css`
     position: absolute;
   }
   .navbar-expand .navbar-nav .nav-link {
-    padding-left: var(--sgds-navbar-nav-link-padding-x);
-    padding-right: var(--sgds-navbar-nav-link-padding-x);
+    padding-left: var(--navbar-nav-link-padding-x);
+    padding-right: var(--navbar-nav-link-padding-x);
   }
   .navbar-expand .navbar-nav-scroll {
     overflow: visible;
@@ -407,31 +409,31 @@ export default css`
   }
   .navbar-dark,
   .navbar[data-bs-theme="dark"] {
-    --sgds-navbar-color: hsla(0, 0%, 100%, 0.55);
-    --sgds-navbar-hover-color: hsla(0, 0%, 100%, 0.75);
-    --sgds-navbar-disabled-color: hsla(0, 0%, 100%, 0.25);
-    --sgds-navbar-active-color: #fff;
-    --sgds-navbar-brand-color: #fff;
-    --sgds-navbar-brand-hover-color: #fff;
-    --sgds-navbar-toggler-border-color: hsla(0, 0%, 100%, 0.1);
+    --navbar-color: hsla(0, 0%, 100%, 0.55);
+    --navbar-hover-color: hsla(0, 0%, 100%, 0.75);
+    --navbar-disabled-color: hsla(0, 0%, 100%, 0.25);
+    --navbar-active-color: #fff;
+    --navbar-brand-color: #fff;
+    --navbar-brand-hover-color: #fff;
+    --navbar-toggler-border-color: hsla(0, 0%, 100%, 0.1);
   }
   .navbar-dark,
   .navbar[data-bs-theme="dark"],
   [data-bs-theme="dark"] .navbar-toggler-icon {
-    --sgds-navbar-toggler-icon-bg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.55)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    --navbar-toggler-icon-bg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.55)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
   }
   .sgds.navbar {
     align-items: stretch;
-    background-color: var(--sgds-navbar-bg-color);
+    background-color: var(--navbar-bg-color);
     min-height: 80px;
     padding: 0 2rem;
   }
   [data-bs-theme="dark"] .sgds.navbar {
-    --sgds-navbar-bg-color: $body-bg;
-    --sgds-navbar-color: var(--sgds-body-color);
-    --sgds-navbar-hover-color: $purple-400;
-    --sgds-navbar-disabled-color: rgba(var(--sgds-emphasis-color-rgb), 0.3);
-    --sgds-navbar-active-color: var(--sgds-primary-text-emphasis);
+    --navbar-bg-color: $body-bg;
+    --navbar-color: var(--sgds-body-color);
+    --navbar-hover-color: $purple-400;
+    --navbar-disabled-color: rgba(var(--sgds-emphasis-color-rgb), 0.3);
+    --navbar-active-color: var(--sgds-primary-text-emphasis);
   }
   @media (max-width: 991.98px) {
     .sgds.navbar {
@@ -452,14 +454,14 @@ export default css`
   .sgds.navbar .nav-item a.nav-link {
     align-items: center;
     border-bottom: 0.125rem solid transparent;
-    color: var(--sgds-navbar-color);
+    color: var(--navbar-color);
     display: flex;
     min-height: 100%;
   }
   .sgds.navbar .nav-item a.nav-link.active,
   .sgds.navbar .nav-item a.nav-link:hover {
-    border-color: var(--sgds-navbar-active-color);
-    color: var(--sgds-navbar-active-color);
+    border-color: var(--navbar-active-color);
+    color: var(--navbar-active-color);
   }
   .sgds.navbar .nav-item a.nav-link.dropdown-toggle {
     gap: 0.75rem;

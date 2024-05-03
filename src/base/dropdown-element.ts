@@ -22,7 +22,7 @@ export type DropDirection = "left" | "right" | "up" | "down";
  */
 
 export class DropdownElement extends SgdsElement {
-  static styles = SgdsElement.styles;
+  // static styles = SgdsElement.styles;
 
   /** @internal */
   protected myDropdown: Ref<HTMLElement> = createRef();

@@ -4,7 +4,7 @@ import SgdsElement from "./sgds-element";
 export type CardBorderVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light";
 
 export class CardElement extends SgdsElement {
-  static styles = [cardStyle];
+  static styles = [...SgdsElement.styles, cardStyle];
 
   /** The border's variant. */
   @property()

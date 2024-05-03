@@ -16,7 +16,7 @@ import sidenavStyle from "./sidenav.style";
  * @cssproperty --sidenav-sticky-top - set the top value of the sticky sidenav. Defaults to 0rem
  */
 export class SgdsSidenav extends SgdsElement {
-  static styles = sidenavStyle;
+  static styles = [...SgdsElement.styles, sidenavStyle];
 
   /** Allow sidenav items to stay open when another item is opened */
   @property({ type: Boolean, attribute: true })

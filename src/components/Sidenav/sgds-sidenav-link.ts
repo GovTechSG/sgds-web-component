@@ -10,7 +10,7 @@ import sidenavLinkStyle from "./sidenav-link.style";
  * @cssproperty --sidenav-link-disabled-color - sidenav link disabled color, default to `--sgds-gray-600`
  */
 export class SgdsSidenavLink extends LinkElement {
-  static styles = sidenavLinkStyle;
+  static styles = [...LinkElement.styles,sidenavLinkStyle];
 }
 
 export default SgdsSidenavLink;
