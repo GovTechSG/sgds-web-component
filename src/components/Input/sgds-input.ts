@@ -84,6 +84,8 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   /**@internal */
   protected inputId: string = genId("input", this.type);
 
+  protected labelId: string = genId("label");
+
   /** Sets focus on the input. */
   public focus(options?: FocusOptions) {
     this.input.focus(options);
@@ -174,10 +176,12 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
         @invalid=${() => this.setInvalid(true)}
         @focus=${this._handleFocus}
         @blur=${this._handleBlur}
+        aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this.inputId}-invalid` : undefined)}
+        aria-labelledby="${this.labelId} ${this.inputId}Help ${this.invalid && this.hasFeedback
+          ? `${this.inputId}-invalid`
+          : ""}"
       />
-      ${this.hasFeedback
-        ? html`<div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
-        : ""} `;
+      ${this._renderFeedback()} `;
   }
   protected _renderFeedback() {
     return this.hasFeedback
@@ -185,7 +189,9 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
       : "";
   }
   protected _renderLabel() {
-    const labelTemplate = html` <label for=${this.inputId} class="form-label">${this.label}</label> `;
+    const labelTemplate = html`
+      <label for=${this.inputId} id=${this.labelId} class="form-label">${this.label}</label>
+    `;
     return this.label && labelTemplate;
   }
   protected _renderHintText() {

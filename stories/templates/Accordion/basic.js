@@ -4,7 +4,7 @@ export const Template = args =>
   html`
     <sgds-accordion accordionClasses="mb-4">
       <sgds-accordion-item>
-        <p class="m-0" slot="accordion-header">${args.header}</p>
+        <div slot="accordion-header">${args.header}</div>
         <span slot="accordion-content">${args.content}</span>
       </sgds-accordion-item>
     </sgds-accordion>
@@ -14,19 +14,19 @@ export const Template = args =>
         .disabled=${args.disabled}
         .accordionItemClasses=${args.accordionItemClasses}
       >
-        <p class="m-0" slot="accordion-header">This is an accordion</p>
+        <div slot="accordion-header">This is an accordion</div>
         <span slot="accordion-content">${args.content}</span>
       </sgds-accordion-item>
       <sgds-accordion-item .accordionItemClasses=${args.accordionItemClasses}>
-        <p class="m-0" slot="accordion-header">Accordion 1</p>
+        <div slot="accordion-header">Accordion 1</div>
         <span slot="accordion-content">${args.content}</span>
       </sgds-accordion-item>
       <sgds-accordion-item open .accordionItemClasses=${args.accordionItemClasses}>
-        <p class="m-0" slot="accordion-header">Accordion 2</p>
+        <div slot="accordion-header">Accordion 2</div>
         <span slot="accordion-content">${args.content}</span>
       </sgds-accordion-item>
       <sgds-accordion-item .accordionItemClasses=${args.accordionItemClasses}>
-        <p class="m-0" slot="accordion-header">Accordion 3</p>
+        <div slot="accordion-header">Accordion 3</div>
         <span slot="accordion-content">${args.content}</span>
       </sgds-accordion-item>
     </sgds-accordion>

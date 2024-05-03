@@ -54,7 +54,7 @@ button {
     background-color: var(--datepicker-selected-date-bg-color);
     color: var(--datepicker-selected-date-text-color);
   }
-  button.month:hover {
+  button.month:hover:not(.active) {
     cursor: pointer;
     background-color: var(--datepicker-hover-bg-color);
   }
@@ -70,7 +70,7 @@ button {
     background-color: var(--datepicker-selected-date-bg-color);
     color: var(--datepicker-selected-date-text-color);
   }
-  button.year:hover {
+  button.year:hover:not(.active) {
     cursor: pointer;
     background-color: var(--datepicker-hover-bg-color);
   }
@@ -88,7 +88,7 @@ button {
     cursor: pointer;
   }
 
-  td[data-day]:hover:not(.disabled) {
+  td[data-day]:hover:not(.disabled):not(.selected-ends) {
     cursor: pointer;
     background-color: var(--datepicker-hover-bg-color);
   }

@@ -1,3 +1,19 @@
+## v1.2.0 (2024-04-30)
+
+### Feat
+
+- **input**: add aria-labelledby for input to point to hint, invalid text and label [skip-cd]
+- **sidenav**: add sticky [skip-cd] (#181)
+- **pagination**: showFirstPage showLastPage (#182) [skip-cd]
+
+### Fix
+
+- **pagination**: add fallback values for colours css var
+- **combobox**: custom filter example not showing [skip-cd] (#187)
+- **combobox**: custom filter example not showing
+- **stepper**: stepper example not showing [skip-cd] (#188)
+- **stepper**: stepper example not showing
+
 ## v1.1.0 (2024-03-22)
 
 ### Feat

@@ -21,6 +21,12 @@ export default css`
     button:focus {
       outline: var(--datepicker-theme-color) auto 2px;
     }
+    button.disabled {
+      cursor: not-allowed;
+    }
+    button:hover:not(.disabled) {
+      background-color: var(--datepicker-hover-bg-color);
+    }
     svg {
       font-size: 10rem;
     }
