@@ -1,7 +1,7 @@
 import { css } from "lit";
 export default css`
   :host {
-    --mainnav-background-color: white;
+    --mainnav-background-color: transparent;
     --mainnav-padding-x: 2rem;
     --mainnav-padding-y: 0;
     --mainnav-mobile-padding-x: 0.5rem;

@@ -9,6 +9,10 @@ import mainnavDropdownStyle from "./mainnav-dropdown.style";
 /**
  * @slot default - The menu items. Pass in sgds-dropdown-item as the menu items
  * @slot toggler - The content of the toggler to pass in html content. `togglerText` property takes precedence over this slot when both are defined.
+ *
+ * @cssproperty --mainnav-dropdown-theme-color - Hover and active color for mainnav dropdowns.
+ * @cssproperty --mainnav-dropdown-color - Text color of the mainnav dropdown toggler.
+ * @cssproperty --mainnav-dropdown-borderBottom-width - border bottom width for hover and active state for mainnav dropdown toggler
  */
 export class SgdsMainnavDropdown extends DropdownListElement {
   static styles = [...DropdownListElement.styles, dropdownStyle, mainnavDropdownStyle];

@@ -31,7 +31,7 @@ export default css`
     }
   }
 
-  .nav-link.disabled{
+  .nav-link.disabled {
     cursor: default;
     pointer-events: none;
     opacity: 30%;

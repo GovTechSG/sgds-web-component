@@ -41,7 +41,7 @@ const SIZES = {
  * @cssproperty --mainnav-mobile-padding-y - top and bottom padding for browser width < 768px
  * @cssproperty --mainnav-borderBottom-width - bottom border width
  * @cssproperty --mainnav-borderBottom-color - borderBottom width color
- * NEW in 2.0.0
+ * @ignore NEW in 2.0.0
  * @cssproperty --mainnav-toggler-icon-bg - the background image for the toggler icon
  * @cssproperty --mainnav-toggler-padding-y - top and bottom padding for the toggler icon
  * @cssproperty --mainnav-toggler-padding-x - left and right padding for the toggler icon
@@ -49,8 +49,8 @@ const SIZES = {
  * @cssproperty --mainnav-brand-padding-y - top and bottom padding for mainnav brand
  * @cssproperty --mainnav-brand-padding-y - top and bottom padding for mainnav brand
  * @cssproprety --mainnav-brand-margin-end - margin-right value for mainnav brand
- * @cssproperty --mainnav-brand-font-size - font size of mainnav brand 
- * @cssproperty --mainnav-brand-color - color of mainnav brand 
+ * @cssproperty --mainnav-brand-font-size - font size of mainnav brand
+ * @cssproperty --mainnav-brand-color - color of mainnav brand
  * @cssproperty --mainnav-brand-hover-color - hover color of mainnav brand
  * @cssproperty --mainnav-gutter - the gap between the all children of mainnav
  */

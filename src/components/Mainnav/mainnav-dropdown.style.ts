@@ -43,7 +43,6 @@ export default css`
     }
   }
 
-
   .nav-link.disabled {
     cursor: default;
     pointer-events: none;
