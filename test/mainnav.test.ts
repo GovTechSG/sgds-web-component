@@ -17,7 +17,7 @@ describe("sgds-mainnav", () => {
       `<nav class="navbar navbar-expand-lg navbar-light sgds">
        <a
          aria-label="brand-link"
-         class="me-auto navbar-brand order-first"
+         class="navbar-brand order-first"
          href=""
        >
          <slot name="brand">
@@ -33,25 +33,13 @@ describe("sgds-mainnav", () => {
          class="navbar-toggler order-1"
          type="button"
        >
-       <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            fill="currentColor"
-            class="bi bi-list"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-            />
-          </svg>
+       <span class="navbar-toggler-icon"></span>
        </button>
        <div
          class="navbar-body navbar-collapse order-2"
          hidden=""
        >
-         <ul class="navbar-nav">
+         <ul class="navbar-nav navbar-nav-scroll">
            <slot>
            </slot>
           <slot name="end">

@@ -43,7 +43,8 @@ export class SgdsMainnavDropdown extends DropdownListElement {
           class="${classMap({
             "dropdown-toggle": true,
             "nav-link": true,
-            active: this.active
+            active: this.active,
+            disabled: this.disabled
           })}"
           ?disabled=${this.disabled}
           aria-expanded="${this.menuIsOpen}"

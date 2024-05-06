@@ -2,18 +2,18 @@ import { css } from "lit";
 
 export default css`
   :host {
-    /* suggestions */
-    /* mainnav-item-disabled-opacity: var(--sgds-disabled-opacity) */
-
-    --mainnav-item-theme-color: #5925dc;
-    --mainnav-item-color: #344054;
+    --mainnav-item-theme-color: var(--sgds-primary);
+    --mainnav-item-color: var(--sgds-gray-600);
     --mainnav-item-borderBottom-width: 0.125rem;
+    /* SUGGESTIONS */
+    /* mainnav-item-disabled-opacity: var(--sgds-disabled-opacity) */
   }
   li {
     height: 100%;
   }
   a.nav-link {
     display: flex;
+    cursor: pointer;
     color: var(--mainnav-item-color);
     border-bottom: var(--mainnav-item-borderBottom-width) solid transparent;
     min-height: 100%;
@@ -31,9 +31,7 @@ export default css`
     }
   }
 
-  .nav-link.disabled,
-  .nav-link:disabled {
-    /* color: var(--sgds-nav-link-disabled-color); */
+  .nav-link.disabled{
     cursor: default;
     pointer-events: none;
     opacity: 30%;

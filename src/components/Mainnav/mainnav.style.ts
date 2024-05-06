@@ -1,39 +1,28 @@
 import { css } from "lit";
 export default css`
   :host {
+    --mainnav-background-color: white;
     --mainnav-padding-x: 2rem;
     --mainnav-padding-y: 0;
-
+    --mainnav-mobile-padding-x: 0.5rem;
+    --mainnav-mobile-padding-y: 0;
+    --mainnav-borderBottom-width: 1px;
+    --mainnav-borderBottom-color: #98a2b3;
+    /** NEW in 2.0.0 */
     --mainnav-toggler-icon-bg: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16" ><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" /></svg>');
     --mainnav-toggler-padding-y: 0.25rem;
     --mainnav-toggler-padding-x: 0.75rem;
     --mainnav-toggler-font-size: 1.25rem;
 
-    --mainnav-brand-padding-y: 0.125rem; //0.25rem;
+    --mainnav-brand-padding-y: 0.125rem;
     --mainnav-brand-margin-end: 1rem;
     --mainnav-brand-font-size: 1.25rem;
     --mainnav-brand-color: rgba(var(--sgds-emphasis-color-rgb), 0.9);
     --mainnav-brand-hover-color: rgba(var(--sgds-emphasis-color-rgb), 0.9);
 
-    --mainnav-toggler-transition: box-shadow 0.15s ease-in-out;
-
-    /* --mainnav-color: rgba(var(--sgds-emphasis-color-rgb), 0.55); */
-    /* --mainnav-hover-color: rgba(var(--sgds-emphasis-color-rgb), 0.7); */
-    /* --mainnav-disabled-color: rgba(var(--sgds-emphasis-color-rgb), 0.3); */
-    /* --mainnav-active-color: rgba(var(--sgds-emphasis-color-rgb), 0.9); */
-
-    /** existing */
-    --mainnav-background-color: white;
-    --mainnav-mobile-padding-x: 0.5rem;
-    --mainnav-mobile-padding-y: 0;
-    --mainnav-borderBottom-width: 1px;
-    --mainnav-borderBottom-color: #98a2b3;
-
-    /**new */
     --mainnav-gutter: 1.5rem;
   }
   .navbar {
-    color: pink;
     align-items: stretch;
     display: flex;
     flex-wrap: wrap;
@@ -52,7 +41,7 @@ export default css`
     align-items: center;
     color: var(--mainnav-brand-color);
     font-size: var(--mainnav-brand-font-size);
-    margin-right: var(--mainnav-brand-margin-end);
+    margin-right: var(--mainnav-gutter); //var(--mainnav-brand-margin-end);
     text-decoration: none;
     white-space: nowrap;
     padding-bottom: var(--mainnav-brand-padding-y);
@@ -74,7 +63,7 @@ export default css`
     flex-direction: column;
     list-style: none;
     gap: var(--mainnav-gutter);
-    padding-left: 0.5rem;
+    padding-left: 0;
     padding-right: var(--mainnav-gutter);
     height: 100%;
     width: 100%;
@@ -87,13 +76,13 @@ export default css`
     flex-grow: 1;
   }
   .navbar-toggler {
+    cursor: pointer;
     background-color: transparent;
     border: none;
     /* color: var(--mainnav-color); */
     font-size: var(--mainnav-toggler-font-size);
     line-height: 1;
     padding: var(--mainnav-toggler-padding-y) var(--mainnav-toggler-padding-x);
-    transition: var(--mainnav-toggler-transition);
   }
   @media (prefers-reduced-motion: reduce) {
     .navbar-toggler {
