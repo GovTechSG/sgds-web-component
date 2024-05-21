@@ -30,7 +30,7 @@ import accordionItemStyle from "./accordion-item.style";
  * @cssprop --accordion-item-line-height - The line height of accordion
  */
 export class SgdsAccordionItem extends SgdsElement {
-  static styles = [accordionStyle, accordionItemStyle];
+  static styles = [accordionItemStyle];
   /** @internal */
   @query(".accordion-item") accordion: HTMLElement;
   /** @internal */

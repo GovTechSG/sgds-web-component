@@ -22,5 +22,8 @@ export default defineConfig({
   define: {
     "process.env.VITE_ENV": JSON.stringify(process.env.VITE_ENV)
   },
-  customLogger: logger
+  customLogger: logger,
+  build: {
+    cssCodeSplit: false
+  }
 });
