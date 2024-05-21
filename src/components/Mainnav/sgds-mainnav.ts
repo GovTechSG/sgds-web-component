@@ -41,9 +41,21 @@ const SIZES = {
  * @cssproperty --mainnav-mobile-padding-y - top and bottom padding for browser width < 768px
  * @cssproperty --mainnav-borderBottom-width - bottom border width
  * @cssproperty --mainnav-borderBottom-color - borderBottom width color
+ * @ignore NEW in 2.0.0
+ * @cssproperty --mainnav-toggler-icon-bg - the background image for the toggler icon
+ * @cssproperty --mainnav-toggler-padding-y - top and bottom padding for the toggler icon
+ * @cssproperty --mainnav-toggler-padding-x - left and right padding for the toggler icon
+ * @cssproperty --mainnav-toggler-font-size - font size of toggler icon
+ * @cssproperty --mainnav-brand-padding-y - top and bottom padding for mainnav brand
+ * @cssproperty --mainnav-brand-padding-y - top and bottom padding for mainnav brand
+ * @cssproprety --mainnav-brand-margin-end - margin-right value for mainnav brand
+ * @cssproperty --mainnav-brand-font-size - font size of mainnav brand
+ * @cssproperty --mainnav-brand-color - color of mainnav brand
+ * @cssproperty --mainnav-brand-hover-color - hover color of mainnav brand
+ * @cssproperty --mainnav-gutter - the gap between the all children of mainnav
  */
 export class SgdsMainnav extends SgdsElement {
-  static styles = [mainnavStyle];
+  static styles = [...SgdsElement.styles, mainnavStyle];
 
   /** @internal */
   @query(".navbar-toggler") header: HTMLElement;
@@ -176,34 +188,22 @@ export class SgdsMainnav extends SgdsElement {
         class="sgds navbar navbar-light
         ${this._expandClass()}"
       >
-        <a class="navbar-brand me-auto order-first" href=${this.brandHref} aria-label="brand-link">
+        <a class="navbar-brand  order-first" href=${this.brandHref} aria-label="brand-link">
           <slot name="brand"></slot>
         </a>
         <slot name="non-collapsible" class="${this.breakpointReached ? "order-1" : "order-last"}"></slot>
         <button
-          class="navbar-toggler order-1"
+          class="navbar-toggler order-1 "
           type="button"
           @click=${this.handleSummaryClick}
           aria-controls="${this.collapseId}"
           aria-expanded="${this.expanded}"
           aria-label="Toggle navigation"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            fill="currentColor"
-            class="bi bi-list"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-            />
-          </svg>
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div class=${collapseClass} id=${this.collapseId}>
-          <ul class="navbar-nav">
+          <ul class="navbar-nav navbar-nav-scroll">
             <slot></slot>
             <slot
               name="end"

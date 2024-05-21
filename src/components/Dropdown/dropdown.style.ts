@@ -372,9 +372,7 @@ export default css`
     border-top-right-radius: 0;
     margin-top: calc(var(--sgds-nav-tabs-border-width) * -1);
   }
-  .navbar-nav .dropdown-menu {
-    position: static;
-  }
+
   @media (min-width: 576px) {
     .navbar-expand-sm .navbar-nav .dropdown-menu {
       position: absolute;
@@ -409,13 +407,6 @@ export default css`
   .sgds.navbar .nav-item a.nav-link.dropdown-toggle.show {
     border-bottom: 0.125rem solid #9182e8;
     color: #9182e8;
-  }
-  .sgds.navbar .dropdown-menu {
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 0 0 5px 5px;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    margin-top: 0;
   }
   .sgds.navbar .dropdown-menu.megamenu {
     left: 0;
