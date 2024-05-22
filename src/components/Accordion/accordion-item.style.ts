@@ -3,7 +3,7 @@ export default css`
   :host {
     --accordion-item-padding-y: 1rem;
     --accordion-item-padding-x: 1.5rem;
-    --accordion-item-border-radius: 0.25rem;
+    --accordion-item-border-radius: var(--sgds-border-radius);
     --accordion-item-font-weight: 700;
     --accordion-item-line-height: 2rem;
   }
@@ -16,7 +16,7 @@ export default css`
     display: flex;
     font-size: 1rem;
     overflow-anchor: none;
-    padding: var(--accordion-btn-padding-y) var(--accordion-btn-padding-x);
+    padding: var(--accordion-item-padding-y) var(--accordion-item-padding-x);
     position: relative;
     text-align: left;
     transition: var(--accordion-transition);
@@ -64,10 +64,10 @@ export default css`
   /* .accordion-header {
     margin-bottom: 0;
   } */
-  /* .accordion-item:last-of-type .accordion-collapse {
+  .accordion-item:last-of-type .accordion-collapse {
     border-bottom-left-radius: var(--accordion-border-radius);
     border-bottom-right-radius: var(--accordion-border-radius);
-  } */
+  }
   /* 
   .accordion-body {
     padding: var(--accordion-body-padding-y) var(--accordion-body-padding-x);
