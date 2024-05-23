@@ -1,3 +1,9 @@
+## v1.2.1 (2024-05-23)
+
+### Fix
+
+- **card**: stretchedLink not applying [skip-cd]
+
 ## v1.2.0 (2024-04-30)
 
 ### Feat
