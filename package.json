@@ -15,7 +15,7 @@
     "write:component": "plop",
     "test": "rm -rf test-outdir && rollup --config rollup.test.config.js && web-test-runner",
     "test:scripts": "wtr scripts/__tests__/**/*.test.js --node-resolve",
-    "storybook": "npm run build && nodemon --exec \"npm run write:stories &&  STORYBOOK_ENV=development start-storybook -p 6006\" --watch stories/templates stories/getting-started -e js,mdx",
+    "storybook": "nodemon --exec \"npm run write:stories &&  STORYBOOK_ENV=development start-storybook -p 6006\" --watch stories/templates stories/getting-started -e js,mdx",
     "build-storybook": "npm run build && npm run write:stories && STORYBOOK_ENV=production build-storybook",
     "prepare": "husky install",
     "concat:stories": "gulp concat-storybook-mdx",

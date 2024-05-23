@@ -1,5 +1,5 @@
 import { create } from "@storybook/theming/create";
-
+import logo from "./static/logo.png"
 export default create({
   base: "light",
   // Typography
@@ -8,7 +8,7 @@ export default create({
 
   brandTitle: "SGDS Web Component Storybook",
   brandUrl: "https://www.webcomponent.designsystem.tech.gov.sg",
-  brandImage: "https://v2dev.designsystem.tech.gov.sg/assets/img/logo-sgds.svg",
+  brandImage: logo,
   brandTarget: "_self",
 
   //
