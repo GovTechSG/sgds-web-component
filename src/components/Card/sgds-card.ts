@@ -2,6 +2,7 @@ import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
+import styles from "./sgds-card.scss";
 
 /**
  * @summary Cards can be used for headers and footers, a wide variety of content, contain contextual background colors and images.
@@ -18,7 +19,7 @@ import { CardElement } from "../../base/card-element";
  *
  */
 export class SgdsCard extends CardElement {
-  static styles = CardElement.styles;
+  static styles = [CardElement.styles, styles];
 
   /** Extends the link passed in slot[name="link"] to the entire card */
   @property({ type: Boolean }) stretchedLink = false;
