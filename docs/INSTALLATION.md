@@ -1,4 +1,4 @@
-# Step 1: Install SGDS web components
+# Install SGDS web components
 
 You can load SGDS's web components via CDN or by installing it locally. The library depends on <a href="https://open-wc.org/docs/development/scoped-elements/" target="_blank">scoped custom elements registry</a> and in <a href="/story/getting-started-usage-scoped-elements--page#components-requiring-polyfill" >certain cases</a>, it is required to import the `@webcomponents/scoped-custom-element-registry` polyfill before the web components.
 
@@ -6,7 +6,9 @@ Refer to <a href="/story/getting-started-usage-scoped-elements--page" target="_b
 
 ## Method 1: Local installation
 
-You can also install SGDS web components locally with the following command
+### Step 1: Install library
+
+Install SGDS web components locally with the following command
 
 ```js
 
@@ -25,9 +27,29 @@ import "@webcomponents/scoped-custom-element-registry";
 import "@govtechsg/sgds-web-component";
 ```
 
+### Step 2: Import components
+
+Once imported, the web components can be used throughout the project. You may import individual components or import all components at once. It is recommended to cherry pick components, rather than the entire library. Doing so pulls in only the specific components that you use, which can significantly reduce the amount of code you end up sending to the client.
+
+#### Importing individual component
+
+```js
+
+import "@govtechsg/sgds-web-component/components/Button";
+
+```
+
+#### Importing all components
+
+```js
+
+import "@govtechsg/sgds-web-component";
+
+```
+
 ## Method 2: Using CDN
 
-This method registers all SGDS elements up front in the Custom Elements Registry.. Depending on your usage, you may or may not need to load the polyfill.
+This method registers all SGDS elements up front in the Custom Elements Registry. Depending on your usage, you may or may not need to load the polyfill.
 
 > When using CDN, it is recommended to version control. On initial usage, pick the latest version of the library. See list of available npm versions [here](https://www.npmjs.com/package/@govtechsg/sgds-web-component?activeTab=versions)
 
@@ -46,24 +68,6 @@ This method registers all SGDS elements up front in the Custom Elements Registry
 
 ```
 
-# Step 2: Import components
+## Start building your application
 
-Once imported, the custom elements can be used throughout the project. You may import individual components or import all components at once. It is ideal to import individual components e.g. a button, rather than the entire library. Doing so pulls in only the specific components that you use, which can significantly reduce the amount of code you end up sending to the client.
-
-## Import individual component
-
-```js
-
-import "@govtechsg/sgds-web-component/components/Button";
-
-```
-
-## Import all components
-
-Code snippet to import the entire component library.
-
-```js
-
-import "@govtechsg/sgds-web-component";
-
-```
+You are now ready to build your own application. You may refer to the [components](/docs/components-accordion--basic) page to find out more.
