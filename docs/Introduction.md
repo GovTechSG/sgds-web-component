@@ -32,7 +32,7 @@
 <sgds-card class="col intro">
         <span slot="card-title">Open Source <i class="bi bi-github"></i></span>
         <p slot="card-text">We are open source and welcome contributions from the community!</p>
-        <a slot="card-link" href="https://github.com/GovTechSG/sgds-web-component">Learn more</a>
+        <a slot="card-link" href="https://github.com/GovTechSG/sgds-web-component" target="_blank">Learn more</a>
     </sgds-card>
 <sgds-card class="col intro">
         <span slot="card-title">Extendable <i class="bi bi-bricks"></i></span>
