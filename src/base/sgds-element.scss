@@ -1,4 +1,3 @@
-
 @import "~@govtechsg/sgds/sass/sgds.scss";
 
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
@@ -10,62 +9,56 @@ $all-colors: map-merge-multiple($primarys, $secondarys, $successs, $infos, $dang
 $utilities: map-merge(
   $utilities,
   (
-    "color": map-merge(
-      map-get($utilities, "color"),
-      (
-        values: map-merge(
-          map-get(map-get($utilities, "color"), "values"),
-          (
-            $all-colors
-          ),
-        ),
-      ),
-    ),
+    "color":
+      map-merge(
+        map-get($utilities, "color"),
+        (
+          values: map-merge(map-get(map-get($utilities, "color"), "values"), ($all-colors))
+        )
+      )
   )
 );
 
-
 :host {
-    font-family: var(--sgds-body-font-family, $font-family-sans-serif);
-    font-size: var(--sgds-body-font-size, $font-size-base);
-    font-weight: var(--sgds-body-font-weight, $font-weight-base);
-    line-height: var(--sgds-body-line-height, $line-height-base);
-    // Generates all rgb color declared in the $theme-colors from _variables.scss
-    @each $color, $value in $theme-colors-rgb {
-        --sgds-#{$color}-rgb : #{$value};
-    }
-
-    @each $color, $value in $theme-colors {
-        --sgds-#{$color} : #{$value};
-    }
-
-    @each $weight, $value in $grays {
-        --sgds-gray-#{$weight}: #{$value};
-    }
-    // populate primary colors custom variables
-    @each $weight, $value in $all-colors {
-        --sgds-#{$weight}: #{$value};
-    }
-
-    //shared variables with modal and drawer
-    --overlay-background-color:rgba(0,0,0,0.5);
-    --zindex-modal : #{$zindex-modal};
-
-
-    a[target="_blank"]::after, ::slotted(a[target="_blank"])::after{
-      background-color: currentColor;
-      display: inline-block;
-      content: "/";
-      mask-size: 73%;
-      -webkit-mask-size:  73%;
-      padding: 0 0.5em;
-      margin: 0 0.125rem;
-      -webkit-mask-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16" ><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" /><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" /></svg >');
-      mask-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16" ><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" /><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" /></svg >');
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
-      -webkit-mask-position: center;
-      mask-position: center;
-    }
-
+  font-family: var(--sgds-body-font-family, $font-family-sans-serif);
+  font-size: var(--sgds-body-font-size, $font-size-base);
+  font-weight: var(--sgds-body-font-weight, $font-weight-base);
+  line-height: var(--sgds-body-line-height, $line-height-base);
+  // Generates all rgb color declared in the $theme-colors from _variables.scss
+  @each $color, $value in $theme-colors-rgb {
+    --sgds-#{$color}-rgb: #{$value};
   }
+
+  @each $color, $value in $theme-colors {
+    --sgds-#{$color}: #{$value};
+  }
+
+  @each $weight, $value in $grays {
+    --sgds-gray-#{$weight}: #{$value};
+  }
+  // populate primary colors custom variables
+  @each $weight, $value in $all-colors {
+    --sgds-#{$weight}: #{$value};
+  }
+
+  //shared variables with modal and drawer
+  --overlay-background-color: rgba(0, 0, 0, 0.5);
+  --zindex-modal: #{$zindex-modal};
+
+  a[target="_blank"]::after,
+  ::slotted(a[target="_blank"])::after {
+    background-color: currentColor;
+    display: inline-block;
+    content: "/";
+    mask-size: 73%;
+    -webkit-mask-size: 73%;
+    padding: 0 0.45em;
+    margin: 0 0.125rem;
+    -webkit-mask-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16" ><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" /><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" /></svg >');
+    mask-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16" ><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" /><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" /></svg >');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
+}
