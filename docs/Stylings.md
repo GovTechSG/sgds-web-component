@@ -1,18 +1,18 @@
 # Stylings
 
-## Global Styles
+## Global Styles and Theming <sgds-badge variant="info">Work In Progress</sgds-badge>
 
-The following css custom variable are exposed to enable users to make modifications across all web components in our library
+<!-- The following css custom variable are exposed to enable users to make modifications across all web components in our library
 
-| css custom variable name      | description                               |
-| ------------------------      | ----------------------------------------- |
-| --sgds-body-font-family       | Set the font family of the web components |
-| --sgds-body-font-size         | Set the font size of the web components   |
-| --sgds-body-font-weight       | Set the font weight of the web components |
-| --sgds-body-line-height       | Set the line height of the web components |
-| --sgds-{stateColor}-rgb       | State colors in red,green,blue value                 |
-| --sgds-{stateColor}           | State colors in hexadecimal value         |
-| --sgds-{stateColor}           | State colors in hexadecimal value         |
+| css custom variable name     | description                                                |
+| ---------------------------- | ---------------------------------------------------------- |
+| --sgds-body-font-family      | Set the font family of the web components                  |
+| --sgds-body-font-size        | Set the font size of the web components                    |
+| --sgds-body-font-weight      | Set the font weight of the web components                  |
+| --sgds-body-line-height      | Set the line height of the web components                  |
+| --sgds-{stateColor}-rgb      | State colors in red,green,blue value                       |
+| --sgds-{stateColor}          | State colors in hexadecimal value                          |
+| --sgds-{stateColor}          | State colors in hexadecimal value                          |
 | --sgds-{stateColor}-{weight} | State colors with different weightage in hexadecimal value |
 | --sgds-gray-{weight}         | Gray colors with different weightage in hexadecimal value  |
 
@@ -21,17 +21,15 @@ The following css custom variable are exposed to enable users to make modificati
 > `{weight}` are color weightage in hundreds starting from `100` up to `900`
 
 ```css
-
 :root {
   --sgds-body-font-family: Helvetica;
   --sgds-body-font-size: 5rem;
-  --sgds-primary-rgb : 89,37,220;
-  --sgds-secondary : #1f69ff;
-  --sgds-success-500 : #3bb346;
-  --sgds-gray-500 : #667085;
+  --sgds-primary-rgb: 89, 37, 220;
+  --sgds-secondary: #1f69ff;
+  --sgds-success-500: #3bb346;
+  --sgds-gray-500: #667085;
 }
-
-```
+``` -->
 
 ## Component Styles
 
@@ -40,7 +38,7 @@ The styles of components are built in and can be modified via props, cssparts an
 
 You will require some knowledge of web components and css to do so and the information can be readily available online like mdn web docs for [web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) and [css](https://developer.mozilla.org/en-US/docs/Web/CSS)
 
-### classes prop
+### classes prop <sgds-badge variant="warning">To be deprecated in version 2.0.0</sgds-badge>
 
 Some components exposes a class-like attribute, usually named "classes" prefix with the element's name e.g. buttonClasses.
 SGDS web component library is shipped with our v2 design library, a spin-off from Bootstrap v5. As such, the css tokens are applicable to use and exposed to the shadow DOM.

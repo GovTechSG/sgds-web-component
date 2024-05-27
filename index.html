@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link href='node_modules/@govtechsg/sgds/css/sgds.util.css' rel='stylesheet' type='text/css' /> -->
     <!-- <link href='node_modules/@govtechsg/sgds/css/sgds.css' rel='stylesheet' type='text/css' /> -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds@2.1.1/css/sgds.min.css" rel="stylesheet" crossorigin="anonymous"> -->
     <!-- <script type="module" id="dev-console-gateway"
         src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"></script> -->
     <script
@@ -101,6 +100,7 @@
             padding: 1rem;
             grid-area: main;
         }
+
 
         sgds-footer {
             grid-area: footer;
@@ -213,6 +213,13 @@
 
     <main>
         <div class="container">
+            <sgds-card stretchedLink class="col">
+                <span slot="card-title">SGDS v2+ <i class="bi bi-filetype-scss"></i></span>
+                <p slot="card-text">The components are shipped with SGDS v2 styles and can be used straight out of the
+                    box.</p>
+                <a slot="card-link" target="_blank" href="https://designsystem.tech.gov.sg/"></a>
+
+            </sgds-card>
             <datepicker-input></datepicker-input>
             <h2>Progress</h2>
             <div class="row">
