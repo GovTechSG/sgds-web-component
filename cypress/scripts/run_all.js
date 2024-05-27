@@ -25,10 +25,11 @@ function runCommand(command, name) {
 const reactProcess = runCommand(`sh ${__dirname}/run_react.sh`, "React");
 const angularProcess = runCommand(`sh ${__dirname}/run_angular.sh`, "Angular");
 const vueProcess = runCommand(`sh ${__dirname}/run_vue.sh`, "Vue");
-
+const nextProcess = runCommand(`sh ${__dirname}/run_next.sh`, "Next");
 // Terminate all child processes when the main process exits
 process.on("exit", () => {
   reactProcess.kill();
   angularProcess.kill();
   vueProcess.kill();
+  nextProcess.kill();
 });
