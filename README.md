@@ -92,7 +92,9 @@ The web components uses attributes to set the properties. For example, the varia
 Boolean properties are usually false by default. To set it to true, add it as an attribute with no value on the custom element
 
 ```html
-<sgds-accordion allowMultiple> ... </sgds-accordion>
+<sgds-accordion allowMultiple>
+    ...
+</sgds-accordion>
 
 <sgds-input disabled></sgds-input>
 ```
