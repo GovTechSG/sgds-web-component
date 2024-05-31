@@ -1,12 +1,12 @@
-<img src="https://img.shields.io/badge/lit-324FFF?style=for-the-badge&logo=lit&logoColor=white" /> &nbsp; 
-<img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white" /> &nbsp; 
-<img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />&nbsp; 
+<img src="https://img.shields.io/badge/lit-324FFF?style=for-the-badge&logo=lit&logoColor=white" /> &nbsp;
+<img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white" /> &nbsp;
+<img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />&nbsp;
 
 # sgds-web-component
 
 # Installation Guide
 
-You can load SGDS's web components via CDN or by installing it locally. The library depends on  [scoped custom elements registry](https://open-wc.org/docs/development/scoped-elements/) and in certain cases, it is required to import the `@webcomponents/scoped-custom-element-registry` polyfill before the web components.
+You can load SGDS's web components via CDN or by installing it locally. The library depends on [scoped custom elements registry](https://open-wc.org/docs/development/scoped-elements/) and in certain cases, it is required to import the `@webcomponents/scoped-custom-element-registry` polyfill before the web components.
 
 Refer to [open-wc's directive on scoped-elements](https://open-wc.org/docs/development/scoped-elements/#:~:text=load%20the%20polyfill%20if%20you%20need%20scoping) for more details to know when to use the polyfill.
 
@@ -14,12 +14,11 @@ Refer to [open-wc's directive on scoped-elements](https://open-wc.org/docs/devel
 
 The CDN loader registers all SGDS elements up front. Depending on your usage, you may or may not need to load the polyfill.
 
-> When using CDN, it is recommended to version control. On initial usage, pick the latest version of the library. See list of available npm versions [here](https://www.npmjs.com/package/@govtechsg/sgds-web-component?activeTab=versions) 
+> When using CDN, it is recommended to version control. On initial usage, pick the latest version of the library. See list of available npm versions [here](https://www.npmjs.com/package/@govtechsg/sgds-web-component?activeTab=versions)
 
 > Stick to the version that works for you and make intentional updates on your end when you need the latest library updates. Versions are immutable and thus, stable.
 
-> By not specifying the version, you are using the latest version and subjected to changes made by the library that are not tested on your end. While we do our best to ensure backward compatibility between patches and minor version updates, we cannot guarantee that we have covered all of our user's edge cases. 
-
+> By not specifying the version, you are using the latest version and subjected to changes made by the library that are not tested on your end. While we do our best to ensure backward compatibility between patches and minor version updates, we cannot guarantee that we have covered all of our user's edge cases.
 
 ```js
 // load scoped custom element registry polyfill first (optional, depends on use case)
@@ -41,15 +40,14 @@ You can also install SGDS web components locally with the following command
 npm install @govtechsg/sgds-web-component @webcomponents/scoped-custom-element-registry
 
 ```
-import the polyfill and library once in you entry point and use the web components throughout your project. Note that the scoped custom element registry polyfill has to be imported before any custom element registration happens. 
+
+import the polyfill and library once in you entry point and use the web components throughout your project. Note that the scoped custom element registry polyfill has to be imported before any custom element registration happens.
 
 ```js
 // import polyfill first (optional, depends on use case), follow by the web components
-import "@webcomponents/scoped-custom-element-registry"
+import "@webcomponents/scoped-custom-element-registry";
 import "@govtechsg/sgds-web-component";
-
 ```
-
 
 # Imports
 
@@ -60,7 +58,7 @@ Once imported, the custom elements can be used throughout the project.
 ```js
 // import all custom elements at once
 import "@govtechsg/sgds-web-component";
-// or import individual custom elements 
+// or import individual custom elements
 import "@govtechsg/sgds-web-component/components/Button";
 
 //usage
@@ -69,46 +67,41 @@ import "@govtechsg/sgds-web-component/components/Button";
 
 ## Using the component's class object
 
-When writing with Typescript, you might be required to type the components in certain cases. Import the component class like so. 
+When writing with Typescript, you might be required to type the components in certain cases. Import the component class like so.
 Each component's Class is exported via named exports, prefixed with `Sgds`.
 
 ```js
-
 import { SgdsButton, SgdsMainnav } from "@govtechsg/sgds-web-component/components";
 // or
 import { SgdsButton } from "@govtechsg/sgds-web-component/components/Button/sgds-button";
 import { SgdsMainnav } from "@govtechsg/sgds-web-component/components/Mainnav/sgds-mainnav";
-
 ```
+
 # Attributes and Properties
 
 ## String
 
-The web components uses attributes to set the properties. For example, the variant attribute is used to set the variant property of the button and in turn alters its class and changes its color 
-
-```html 
-
-<sgds-button variant="secondary"></sgds-button>
-
-```
-
-## Boolean 
-
-Boolean properties are usually false by default. To set it to true, add it as an attribute with no value on the custom element 
+The web components uses attributes to set the properties. For example, the variant attribute is used to set the variant property of the button and in turn alters its class and changes its color
 
 ```html
+<sgds-button variant="secondary"></sgds-button>
+```
 
+## Boolean
+
+Boolean properties are usually false by default. To set it to true, add it as an attribute with no value on the custom element
+
+```html
 <sgds-accordion allowMultiple>
     ...
 </sgds-accordion>
 
 <sgds-input disabled></sgds-input>
-
 ```
 
 ## Objects, Arrays and Functions
 
-Functions have to be passed in via javascript. For attributes that accepts Objects or Arrays, you can pass in as a JSON string or via javascript. 
+Functions have to be passed in via javascript. For attributes that accepts Objects or Arrays, you can pass in as a JSON string or via javascript.
 
 ```html
 //via JSON string
@@ -116,44 +109,42 @@ Functions have to be passed in via javascript. For attributes that accepts Objec
 
 // via Javascript
 <script>
-  const table = document.querySelector('sgds-table');
-  table.tableHeaders = ['Name', 'Birthdate'];
+  const table = document.querySelector("sgds-table");
+  table.tableHeaders = ["Name", "Birthdate"];
 </script>
 ```
+
 # Events
 
 While you can listen for common HTML events like onclick, onmouseover etc., it is not recommended to do so. This is because the events emitted within a component's shadow root are retargeted to look like they've come from the host element rather than internal elements to the Shadow DOM. There are also [certain events](https://web.dev/shadowdom-301/#events-that-are-always-stopped) that will never cross the shadow boundary. See [DOM spec](https://dom.spec.whatwg.org/#retarget) and [Shadow Dom 301](https://web.dev/shadowdom-301/#event-model) for better illustration.
 
-Tl;Dr: This may result in, for example, multiple click handlers executing even if the user clicks just once or no events emitted for certain events. 
+Tl;Dr: This may result in, for example, multiple click handlers executing even if the user clicks just once or no events emitted for certain events.
 
 As such, we recommend you to listen for custom events emitted by SGDS web components over the native HTML events. The emitted custom events, if present, are specified for each component under API table.
 
 ```html
-
 <sgds-checkbox>Check me</sgds-checkbox>
 
 <script>
-  const checkbox = document.querySelector('sgds-checkbox');
-  checkbox.addEventListener('sgds-change', event => {
-    console.log(event.target.checked ? 'checked' : 'not checked');
+  const checkbox = document.querySelector("sgds-checkbox");
+  checkbox.addEventListener("sgds-change", event => {
+    console.log(event.target.checked ? "checked" : "not checked");
   });
 </script>
-
 ```
+
 # Slots
 
 The [HTMl slot elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot) are placeholders inside the web components that you can fill up with your own HTML markups.
 
 There are two kinds of slots: default and named slots. In the storybook documentation, slots are found under the API table with their names. If the name of a slot is <bold>default</bold>, it means that it is a default slot. For all other names, they are named slots.
 
- Handle the usage of the default slot and named slot as below
+Handle the usage of the default slot and named slot as below
 
 1. default slot : `<slot></slot>`
 
    ```html
-
    <sgds-button><span>Hello World</span></sgds-button>
-
    ```
 
    "Hello World" span element is placed in the default slot
@@ -161,12 +152,10 @@ There are two kinds of slots: default and named slots. In the storybook document
 2. named slot : `<slot name="icon"></slot>`
 
 ```html
-
 <sgds-button>
   <span>Hello World</span>
   <svg slot="icon"></svg>
 </sgds-button>
-
 ```
 
     The svg element with attribute `slot=icon` is placed in the named slot
@@ -177,15 +166,15 @@ There are two kinds of slots: default and named slots. In the storybook document
 
 The following css custom variable are exposed to enable users to make modifications across all web components in our library
 
-| css custom variable name      | description                               |
-| ------------------------      | ----------------------------------------- |
-| --sgds-body-font-family       | Set the font family of the web components |
-| --sgds-body-font-size         | Set the font size of the web components   |
-| --sgds-body-font-weight       | Set the font weight of the web components |
-| --sgds-body-line-height       | Set the line height of the web components |
-| --sgds-{stateColor}-rgb       | State colors in red,green,blue value                 |
-| --sgds-{stateColor}           | State colors in hexadecimal value         |
-| --sgds-{stateColor}           | State colors in hexadecimal value         |
+| css custom variable name     | description                                                |
+| ---------------------------- | ---------------------------------------------------------- |
+| --sgds-body-font-family      | Set the font family of the web components                  |
+| --sgds-body-font-size        | Set the font size of the web components                    |
+| --sgds-body-font-weight      | Set the font weight of the web components                  |
+| --sgds-body-line-height      | Set the line height of the web components                  |
+| --sgds-{stateColor}-rgb      | State colors in red,green,blue value                       |
+| --sgds-{stateColor}          | State colors in hexadecimal value                          |
+| --sgds-{stateColor}          | State colors in hexadecimal value                          |
 | --sgds-{stateColor}-{weight} | State colors with different weightage in hexadecimal value |
 | --sgds-gray-{weight}         | Gray colors with different weightage in hexadecimal value  |
 
@@ -194,16 +183,14 @@ The following css custom variable are exposed to enable users to make modificati
 > `{weight}` are color weightage in hundreds starting from `100` up to `900`
 
 ```css
-
 :root {
-  --sgds-body-font-family: Helvetica;
+  --sgds-body-font-family: "Inter";
   --sgds-body-font-size: 5rem;
-  --sgds-primary-rgb : 89,37,220;
-  --sgds-secondary : #1f69ff;
-  --sgds-success-500 : #3bb346;
-  --sgds-gray-500 : #667085;
+  --sgds-primary-rgb: 89, 37, 220;
+  --sgds-secondary: #1f69ff;
+  --sgds-success-500: #3bb346;
+  --sgds-gray-500: #667085;
 }
-
 ```
 
 ## Component Styles
@@ -256,9 +243,10 @@ Any external stylings done on our web components like positioning needs to be do
 
 Web components are [fully supported in Angular](https://custom-elements-everywhere.com/#angular) and can be used directly.
 
-## Demo app 
+## Demo app
 
-Refer to this [stackblitz demo app](https://stackblitz.com/github/clukhei/angular-stepper?file=README.md) on the usage example 
+Refer to this [stackblitz demo app](https://stackblitz.com/github/clukhei/angular-stepper?file=README.md) on the usage example
+
 ## Installation
 
 Locally install the library or use CDN by adding the script tag to entry point of the Angular application (i.e. index.html). Follow instructions in `Installation` and `Imports` documentation section
@@ -303,6 +291,7 @@ import "@govtechsg/sgds-web-component";
 })
 export class AppModule {}
 ```
+
 ## Referencing sgds-web-components in Angular
 
 ```typescript
@@ -339,9 +328,9 @@ Web components are [not fully supported in React](https://custom-elements-everyw
 
 Instead, our library outputs the React version of each of our web components. You can choose to use either the React components or the web components. This React instruction page mainly focuses on how to use the React version.
 
-## Demo app 
+## Demo app
 
-Refer to this [stackblitz demo app](https://stackblitz.com/edit/vitejs-vite-gebvf5) on the usage example 
+Refer to this [stackblitz demo app](https://stackblitz.com/edit/vitejs-vite-gebvf5) on the usage example
 
 ## Importing the library
 
@@ -349,12 +338,10 @@ Follow instructions in `Installation` documentation section.
 Our components are exported via named exports. Import the components like so
 
 ```js
-
 import { SgdsButton, SgdsTooltip } from "@govtechsg/sgds-web-component/react";
 // or
 import { SgdsButton } from "@govtechsg/sgds-web-component/react/button";
 import { SgdsTooltip } from "@govtechsg/sgds-web-component/react/tooltip";
-
 ```
 
 The components follow React naming convention, using pascal case as the component name. See the example table below for the web components tagname and its corresponding React name.
@@ -389,34 +376,33 @@ For example:
 | sgds-after-show | onSgdsAfterShow |
 | sgds-after-hide | onSgdsAfterHide |
 
-If you are using Typescript, note that `event.target` refers to the underlying custom element. 
+If you are using Typescript, note that `event.target` refers to the underlying custom element.
 
 ```tsx
-import { useState } from 'react';
-import { SgdsInput } from '@govtechsg/sgds-web-component/react';
-import type { SgdsInput as SgdsInputElement } from '@govtechsg/sgds-web-component';
+import { useState } from "react";
+import { SgdsInput } from "@govtechsg/sgds-web-component/react";
+import type { SgdsInput as SgdsInputElement } from "@govtechsg/sgds-web-component";
 
 function MyComponent() {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
   return <SgdsInput value={value} onSgdsInput={event => setValue((event.target as SgdsInputElement).value)} />;
 }
 
 export default MyComponent;
-
 ```
 
 ## NextJs
 
-The support for NextJS and server side rendering is WIP. 
+The support for NextJS and server side rendering is WIP.
 
 # Vue
 
 Web components are [fully supported in Vue](https://custom-elements-everywhere.com/#vue) and can be used directly.
 
-## Demo app 
+## Demo app
 
-Refer to this [stackblitz demo app](https://stackblitz.com/github/clukhei/web-components-with-vue?file=README.md) on the usage example 
+Refer to this [stackblitz demo app](https://stackblitz.com/github/clukhei/web-components-with-vue?file=README.md) on the usage example
 
 ## Installation
 
@@ -690,10 +676,9 @@ export default {
 </sgds-sidenav>
 ```
 
-# Extending sgds-web-component 
+# Extending sgds-web-component
 
-For users who are leveraging on sgds-web-component as a building block to build and export your own web component library with Lit, you will have to adopt the scoped elements approach to prevent any foreseeable clash of registries between sgds-web-component and your web component library in the case where your users are importing both libraries. 
-
+For users who are leveraging on sgds-web-component as a building block to build and export your own web component library with Lit, you will have to adopt the scoped elements approach to prevent any foreseeable clash of registries between sgds-web-component and your web component library in the case where your users are importing both libraries.
 
 ## Scoped Elements
 
@@ -703,10 +688,11 @@ Whenever a sgds component uses composition (meaning it uses another sgds compone
 
 For users who are using sgds component directly for builing application, use the custom elements directly by [importing the custom elements](#using-the-custom-elements)
 
-For users who are building component libraries on top of sgds-web-component, please adopt OpenWC's scoped elements to prevent exporting our registered custom elements. 
+For users who are building component libraries on top of sgds-web-component, please adopt OpenWC's scoped elements to prevent exporting our registered custom elements.
 
-Things to note: 
-1. Import component class from `@govtechsg/sgds-web-component/components`. Here the components are not registered in the custom element registry 
+Things to note:
+
+1. Import component class from `@govtechsg/sgds-web-component/components`. Here the components are not registered in the custom element registry
 2. Define the tagName you want to assign to the component's class
 
 Example below
