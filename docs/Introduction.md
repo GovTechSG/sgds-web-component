@@ -17,12 +17,12 @@
     </sgds-card>
      <sgds-card stretchedLink class="col intro">
         <span slot="card-title">Customisable with CSS <i class="bi bi-filetype-css"></i></span>
-        <a slot="card-link" href="/story/getting-started-usage-stylings--page">Learn more</a>
+        <a slot="card-link" href="/story/getting-started-usage-stylings--page" target="_self">Learn more</a>
         <p slot="card-text">Components are customisable with cssparts, css custom variables and class-like properties.</p>
     </sgds-card>
      <sgds-card class="col intro">
         <span slot="card-title">Works with CDNs <i class="bi bi-truck"></i></span>
-        <a slot="card-link" href="/story/getting-started-installation--page">Learn more</a>
+        <a slot="card-link" href="/story/getting-started-installation--page" target="_self">Learn more</a>
         <p slot="card-text">Besides whole library CDN, each component also has its own CDN.</p>
     </sgds-card>
 <sgds-card class="col intro">
@@ -37,6 +37,6 @@
 <sgds-card class="col intro">
         <span slot="card-title">Extendable <i class="bi bi-bricks"></i></span>
         <p slot="card-text">Our components are built with LitElement and are extendable. Use them as building blocks to create your complex component. </p>
-        <a slot="card-link" href="/story/getting-started-extending-the-library--page">Learn more</a>
+        <a slot="card-link" href="/story/getting-started-usage-extending-the-library--page" target="_self">Learn more</a>
     </sgds-card>
 </div>

@@ -1,8 +1,8 @@
 # Install SGDS web components
 
-You can load SGDS's web components via CDN or by installing it locally. The library depends on <a href="https://open-wc.org/docs/development/scoped-elements/" target="_blank">scoped custom elements registry</a> and in <a href="/story/getting-started-usage-scoped-elements--page#components-requiring-polyfill" >certain cases</a>, it is required to import the `@webcomponents/scoped-custom-element-registry` polyfill before the web components.
+You can load SGDS's web components via CDN or by installing it locally. The library depends on <a href="https://open-wc.org/docs/development/scoped-elements/" target="_blank">scoped custom elements registry</a> and in <a href="/story/getting-started-usage-scoped-elements--page#components-requiring-polyfill" target="_self">certain cases</a>, it is required to import the `@webcomponents/scoped-custom-element-registry` polyfill before the web components.
 
-Refer to <a href="/story/getting-started-usage-scoped-elements--page" target="_blank">Scoped Elements section</a> for more details of the polyfill.
+Refer to <a href="/story/getting-started-usage-scoped-elements--page" target="_self">Scoped Elements section</a> for more details of the polyfill.
 
 ## Method 1: Local installation
 
@@ -19,7 +19,7 @@ npm install @webcomponents/scoped-custom-element-registry@0.0.9
 ```
 
 import the polyfill and library once in your project's entry point and use the web components throughout your project. Note that the scoped custom element registry polyfill has to be imported before any custom element registration happens.
-Loading of polyfill is not always required, <a target="_blank" href="/story/getting-started-usage-scoped-elements--page">see when to use the polyfill </a>
+Loading of polyfill is not always required, <a target="_blank" href="/story/getting-started-usage-scoped-elements--page" target="_self">see when to use the polyfill </a>
 
 ```js
 // load scoped custom element registry polyfill first (optional, depends on use case)
@@ -70,4 +70,5 @@ This method registers all SGDS elements up front in the Custom Elements Registry
 
 ## Start building your application
 
-You are now ready to build your own application. You may refer to the [components](/docs/components-accordion--basic) page to find out more.
+You are now ready to build your own application. You may refer to the <a href="/story/components-accordion--basic" target="_self">components</a> page to find out more.
+

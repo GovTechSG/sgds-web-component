@@ -38,7 +38,7 @@ The styles of components are built in and can be modified via props, cssparts an
 
 You will require some knowledge of web components and css to do so and the information can be readily available online like mdn web docs for [web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) and [css](https://developer.mozilla.org/en-US/docs/Web/CSS)
 
-### classes prop <sgds-badge variant="warning">To be deprecated in version 2.0.0</sgds-badge>
+<!-- ### classes prop <sgds-badge variant="warning">To be deprecated in version 2.0.0</sgds-badge>
 
 Some components exposes a class-like attribute, usually named "classes" prefix with the element's name e.g. buttonClasses.
 SGDS web component library is shipped with our v2 design library, a spin-off from Bootstrap v5. As such, the css tokens are applicable to use and exposed to the shadow DOM.
@@ -49,7 +49,7 @@ For example, you can pass "btn-lg" and "me-2" to `buttonClasses` prop as another
 <sgds-button buttonClasses="btn-lg me-2">Hello world</sgds-button>
 ```
 
-**NOTE** Do not use `class` attribute to attempt to style the shadow tree of the host. We did not the forward of `class` attribute to the shadow DOM so that users are able to style the light dom with it. Use `class` attribute when you need to style the light DOM.
+**NOTE** Do not use `class` attribute to attempt to style the shadow tree of the host. We did not the forward of `class` attribute to the shadow DOM so that users are able to style the light dom with it. Use `class` attribute when you need to style the light DOM. -->
 
 ### cssparts
 
