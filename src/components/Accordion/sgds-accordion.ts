@@ -7,6 +7,12 @@ import accordionStyle from "./accordion.style";
 /**
  * @summary A dropdown mechanism that allow users to either show or hide related content. `SgdsAccordion` is a wrapper to manage the behaviour for multiple `SgdsAccordionItems`
  * @slot default - slot for accordion-item
+ *
+ * @cssprop --accordion-bg - The background colour of the accordion
+ * @cssprop --accordion-active-color - The colour of accordion when it is active
+ * @cssprop --accordion-active-bg - The active background colour of accordion when it is active
+ * @cssprop --accordion-border-color - The colour of all borders in the accordion
+ * @cssprop --accordion-border-width - The thickness of border line of the accordion
  */
 
 export class SgdsAccordion extends SgdsElement {

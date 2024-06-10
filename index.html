@@ -107,8 +107,12 @@
         }
 
         sgds-accordion-item {
-            --accordion-color: red;
-            --accordion-btn-color: red;
+            --accordion-color: green;
+            /* --accordion-btn-color: red; */
+            --accordion-active-bg: red;
+            --accordion-bg: lightblue;
+            --accordion-border-color: cyan;
+
         }
     </style>
     <!-- <script src="https://cdn.jsdelivr.net/npm/clk-web-components" type="module"></script> -->
@@ -441,6 +445,7 @@
                             soluta eaque fugit fuga distinctio? Eum.</span>
                     </sgds-accordion-item>
                 </sgds-accordion>
+                <br />
                 <sgds-accordion accordionclasses="accordion-flush">
                     <sgds-accordion-item>
                         <div slot="accordion-header">This is an accordion</div>

@@ -218,6 +218,9 @@
   --sgds-danger-filled: #b90000;
   --sgds-light-filled: #eaeaea;
   --sgds-dark-filled: #252525;
+
+  --sgds-border-radius: 0.3125rem;
+
 }
 [data-bs-theme="dark"] {
   --sgds-primary: #9288f0;
