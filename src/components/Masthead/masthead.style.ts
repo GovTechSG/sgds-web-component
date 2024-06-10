@@ -93,8 +93,8 @@ export default css`
   /**scss */
 
   :host {
-    --masthead-font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
-      "Liberation Sans", sans-serif;
+    --masthead-font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Liberation Sans",
+      sans-serif;
     --masthead-text-color: hsl(0, 0%, 28%);
     --masthead-link-color: hsl(222, 63%, 50%);
     --masthead-link-color-hover: hsl(221, 64%, 55%);

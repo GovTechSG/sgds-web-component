@@ -6,6 +6,7 @@ import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import SgdsElement from "../../base/sgds-element";
 import { SgdsButton } from "../Button/sgds-button";
 import fileUploadStyle from "./file-upload.style";
+import genId from "../../utils/generateId";
 export type FileUploadButtonVariant =
   | "primary"
   | "secondary"
@@ -38,7 +39,7 @@ export type FileUploadButtonVariant =
  */
 
 export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
-  static styles = [fileUploadStyle];
+  static styles = [...SgdsElement.styles, fileUploadStyle];
   /**@internal */
   static get scopedElements() {
     return {
@@ -135,6 +136,9 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
     this.requestUpdate();
   }
 
+  /**@internal */
+  protected inputId: string = genId("input", "file");
+
   render() {
     const getCheckedIcon = (checkedIcon: string) => {
       if (checkedIcon) {
@@ -191,9 +195,10 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
         @change=${this.handleInputChange}
         ?multiple=${this.multiple}
         accept=${this.accept}
+        id=${this.inputId}
       />
       <sgds-button size=${this.size} variant=${this.variant} ?disabled=${this.disabled} @click=${this.handleClick}>
-        <slot></slot>
+        <label for=${this.inputId} class="file-upload__label"><slot></slot></label>
       </sgds-button>
 
       <ul class="sgds fileupload-list">

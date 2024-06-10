@@ -113,7 +113,7 @@ Library publication is performed in workflow by github actions. When ready for p
     
 ##### Push git tag
 4) run `git tag` to check the newly generated git tag on local
-5) ```npm push origin <newly-created-tag> ```
+5) ```git push origin <newly-created-tag> ```
 ** this triggers gh action workflow to publish the library to npm 
 ##### Create a release
 6) Manually create a release on github 

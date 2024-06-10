@@ -25,6 +25,11 @@ export default css`
       }
     }
   }
+  .file-upload__label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
   /** end scss */
   .form-control[type="file"] {
     overflow: hidden;

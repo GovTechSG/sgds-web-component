@@ -1,3 +1,24 @@
+## v1.2.2 (2024-05-28)
+
+### Fix
+
+- *****: icon to appear programmatically with anchor tag target="blank"  (#196)
+- **sgds-element**: modify padding right to cater to safari
+- *****: set target blank icon programmatically for all components
+
+### Refactor
+
+- **card**: use ::before selector to avoid clash with target blank using after selector
+- **file-upload**: downstream change from previous commit
+- **button**: remove slot styles as it affects target blank
+- **footer, masthead**: remove hard coded svg for target blank from footer
+
+## v1.2.1 (2024-05-23)
+
+### Fix
+
+- **card**: stretchedLink not applying [skip-cd]
+
 ## v1.2.0 (2024-04-30)
 
 ### Feat

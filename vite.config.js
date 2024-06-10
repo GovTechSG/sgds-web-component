@@ -1,5 +1,6 @@
 import { defineConfig, createLogger } from "vite";
 import postcssLit from "rollup-plugin-postcss-lit";
+import replace from "@rollup/plugin-replace";
 
 const logger = createLogger();
 const originalWarning = logger.warn;
@@ -9,7 +10,13 @@ logger.warn = (msg, options) => {
 };
 
 export default defineConfig({
-  plugins: [postcssLit({ include: ["**/*.scss", "**/*.scss?*"] })],
+  plugins: [
+    replace({
+      scss: "scss?inline",
+      preventAssignment: true
+    }),
+    postcssLit({ include: ["**/*.scss", "**/*.scss?*"] })
+  ],
   resolve: {
     alias: [
       {

@@ -16,7 +16,7 @@ import mastheadStyle from "./masthead.style";
  * @cssproperty --masthead-crest-color - Sets the lion head crest color.
  */
 export class SgdsMasthead extends SgdsElement {
-  static styles = [mastheadStyle];
+  static styles = [...SgdsElement.styles, mastheadStyle];
 
   /**
    * Sets the masthead container width to 100% for all breakpoints
@@ -127,21 +127,8 @@ export class SgdsMasthead extends SgdsElement {
                         class="trusted-websites-link"
                         rel="noreferrer"
                         target="_blank"
-                        >Trusted websites<svg
-                          version="1.1"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="18"
-                          height="18"
-                          viewBox="0 0 32 32"
-                          class="trusted-websites-icon"
-                        >
-                          <path
-                            d="M18.667 4v2.667h4c0.186-0.020 0.374-0.020 0.56 0l-2.667 2.667-6.973 6.987 1.88 1.88 9.733-9.667c0.092 0.257 0.137 0.528 0.133 0.8v4h2.667v-9.333h-9.333z"
-                          ></path>
-                          <path
-                            d="M22.667 25.333h-16v-16h8v-2.667h-8c-1.473 0-2.667 1.194-2.667 2.667v16c0 1.473 1.194 2.667 2.667 2.667h16c1.473 0 2.667-1.194 2.667-2.667v-8h-2.667v8z"
-                          ></path></svg
-                      ></a>
+                        >Trusted websites</a
+                      >
                     </article>
                   </div>
                 </div>
