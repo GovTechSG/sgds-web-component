@@ -1,4 +1,5 @@
 import customElements from "../custom-elements.json";
+import { themes } from '@storybook/theming';
 
 import { setCustomElementsManifest } from "@storybook/web-components";
 import "./global.css";
@@ -28,6 +29,10 @@ setCustomElementsManifestWithOptions(customElements, { privateFields: false });
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
+  docs: {
+    //@ts-ignore
+    theme: themes.sgdsTheme 
+  },
   controls: {
     matchers: {
       color: /(background|color)$/i,
