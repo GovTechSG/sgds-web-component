@@ -1,6 +1,6 @@
 {
   "name": "@govtechsg/sgds-web-component",
-  "version": "1.2.1",
+  "version": "1.2.3",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -42,7 +42,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@govtechsg/sgds": "^2.3.1",
+    "@govtechsg/sgds": "^2.3.2",
     "@lit-labs/react": "^1.0.9",
     "@open-wc/scoped-elements": "^2.2.0",
     "bootstrap": "^5.1.3",

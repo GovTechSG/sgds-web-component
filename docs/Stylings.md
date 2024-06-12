@@ -22,7 +22,7 @@
 
 ```css
 :root {
-  --sgds-body-font-family: Helvetica;
+  --sgds-body-font-family: "Inter";
   --sgds-body-font-size: 5rem;
   --sgds-primary-rgb: 89, 37, 220;
   --sgds-secondary: #1f69ff;
