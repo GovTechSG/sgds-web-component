@@ -1,5 +1,5 @@
 import customElements from "../custom-elements.json";
-import { themes } from '@storybook/theming';
+import { themes } from "@storybook/theming";
 
 import { setCustomElementsManifest } from "@storybook/web-components";
 import "./global.css";
@@ -31,7 +31,7 @@ export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   docs: {
     //@ts-ignore
-    theme: themes.sgdsTheme 
+    theme: themes.sgdsTheme
   },
   controls: {
     matchers: {
