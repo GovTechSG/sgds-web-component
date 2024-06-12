@@ -6,7 +6,7 @@ import { live } from "lit/directives/live.js";
 import SgdsElement from "../../base/sgds-element";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import radioStyles from "./radio.style";
+import radioStyles from "./radio.css";
 /**
  * @summary Radio allows the user to select one option from a set while seeing all available options.
  *

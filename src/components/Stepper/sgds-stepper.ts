@@ -4,7 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { watch } from "../../utils/watch";
-import stepperStyle from "./stepper.style";
+import stepperStyle from "./stepper.css";
 export interface IStepMetaData {
   component: unknown;
   stepHeader: string;

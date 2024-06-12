@@ -6,8 +6,8 @@ import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
-// import accordionStyle from "./accordion.style";
-import accordionItemStyle from "./accordion-item.style";
+// import accordionStyle from "./accordion.css";
+import accordionItemStyle from "./accordion-item.css";
 
 /**
  *

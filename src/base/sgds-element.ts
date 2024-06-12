@@ -1,5 +1,5 @@
 import { LitElement, type CSSResult } from "lit";
-import style from "./sgds-element.style";
+import style from "./sgds-element.css";
 /**
  * @cssprop --sgds-{stateColor} - State colors in hexadecimal value
  * @cssprop --sgds-{stateColor}-rgb - State colors in rgb value

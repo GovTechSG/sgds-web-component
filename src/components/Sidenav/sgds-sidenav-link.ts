@@ -1,5 +1,5 @@
 import LinkElement from "../../base/link-element";
-import sidenavLinkStyle from "./sidenav-link.style";
+import sidenavLinkStyle from "./sidenav-link.css";
 
 /**
  * @slot default - slot for label of anchor tag.

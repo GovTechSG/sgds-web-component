@@ -5,7 +5,7 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { sanitizedNextMonth, sanitizedPreviousMonth } from "../../utils/time";
 import { watch } from "../../utils/watch";
-import datepickerHeaderStyle from "./datepicker-header.style";
+import datepickerHeaderStyle from "./datepicker-header.css";
 import { ViewEnum } from "./types";
 
 export class DatepickerHeader extends SgdsElement {

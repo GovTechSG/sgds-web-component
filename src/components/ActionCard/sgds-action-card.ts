@@ -9,7 +9,7 @@ import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import { SgdsCheckbox } from "../Checkbox/sgds-checkbox";
 import { SgdsRadio } from "../Radio/sgds-radio";
-import actionCardStyles from "./action-card.style";
+import actionCardStyles from "./action-card.css";
 
 /**
  * @summary Action Card are cards with built in checkbox or radio components. The ref of input is extended to the Card's body.

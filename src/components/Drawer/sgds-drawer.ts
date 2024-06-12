@@ -9,7 +9,7 @@ import { waitForEvent } from "../../utils/event.js";
 import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
 import { HasSlotController } from "../../utils/slot.js";
 import { watch } from "../../utils/watch.js";
-import drawerStyles from "./drawer.style";
+import drawerStyles from "./drawer.css";
 
 /**
  * @summary Drawers slide in from a container to expose additional options and information.

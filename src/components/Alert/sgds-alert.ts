@@ -3,7 +3,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
-import alertStyle from "./alert.style";
+import alertStyle from "./alert.css";
 
 export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light";
 /**

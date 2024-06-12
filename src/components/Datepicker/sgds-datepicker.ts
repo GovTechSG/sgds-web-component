@@ -13,8 +13,8 @@ import { DatepickerCalendar } from "./datepicker-calendar";
 import { DatepickerHeader } from "./datepicker-header";
 import DatepickerInput from "./datepicker-input";
 import { ViewEnum } from "./types";
-import dropdownStyle from "../Dropdown/dropdown.style";
-import datepickerStyle from "./datepicker.style";
+import dropdownStyle from "../Dropdown/dropdown.css";
+import datepickerStyle from "./datepicker.css";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 

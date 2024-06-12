@@ -4,7 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 // import styles from "./sgds-breadcrumb.scss?inline";
-import breadcrumbItemStyle from "./breadcrumb-item.style";
+import breadcrumbItemStyle from "./breadcrumb-item.css";
 /**
  * @summary Breadcrumb Item are navigational links used in Breadcrumb component
  *

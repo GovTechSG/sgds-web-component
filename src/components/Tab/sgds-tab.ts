@@ -3,7 +3,7 @@ import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
-import tabStyle from "./tab.style";
+import tabStyle from "./tab.css";
 
 let id = 0;
 /**

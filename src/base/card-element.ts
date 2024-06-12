@@ -1,5 +1,5 @@
 import { property } from "lit/decorators.js";
-import cardStyle from "./card.style";
+import cardStyle from "./card.css";
 import SgdsElement from "./sgds-element";
 export type CardBorderVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light";
 

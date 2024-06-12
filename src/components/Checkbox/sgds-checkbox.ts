@@ -8,7 +8,7 @@ import { defaultValue } from "../../utils/defaultvalue";
 import { FormSubmitController, SgdsFormControl } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import checkboxStyle from "./checkbox.style";
+import checkboxStyle from "./checkbox.css";
 /**
  * @summary Checkbox component is used when you require users to select multiple items from a list.
  *

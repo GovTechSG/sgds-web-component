@@ -4,8 +4,8 @@ import { classMap } from "lit/directives/class-map.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownListElement } from "../../base/dropdown-list-element";
 import genId from "../../utils/generateId";
-import dropdownStyle from "../Dropdown/dropdown.style";
-import mainnavDropdownStyle from "./mainnav-dropdown.style";
+import dropdownStyle from "../Dropdown/dropdown.css";
+import mainnavDropdownStyle from "./mainnav-dropdown.css";
 /**
  * @slot default - The menu items. Pass in sgds-dropdown-item as the menu items
  * @slot toggler - The content of the toggler to pass in html content. `togglerText` property takes precedence over this slot when both are defined.

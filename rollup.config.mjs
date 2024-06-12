@@ -32,11 +32,11 @@ const wcPlugins = [
     "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
     preventAssignment: true
   }),
-  // postcss({
-  //   minimize: true,
-  //   inject: false
-  // }),
-  // litcss(),
+  postcss({
+    minimize: true,
+    inject: false
+  }),
+  litcss(),
   typescript({
     tsconfig: "tsconfig.json",
     useTsconfigDeclarationDir: true

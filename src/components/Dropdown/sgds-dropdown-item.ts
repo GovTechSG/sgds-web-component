@@ -2,7 +2,7 @@ import { html } from "lit";
 import { query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import LinkElement from "../../base/link-element";
-import dropdownStyle from "./dropdown.style";
+import dropdownStyle from "./dropdown.css";
 /**
  * @summary `SgdsDropdownItem` are navigation links built with `HTMLAnchorElement`. It should be used in the default slot of `SgdsDropdown`
  */

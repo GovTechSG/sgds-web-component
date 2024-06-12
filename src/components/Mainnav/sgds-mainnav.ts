@@ -8,7 +8,7 @@ import { LG_BREAKPOINT, MD_BREAKPOINT, SM_BREAKPOINT, XL_BREAKPOINT, XXL_BREAKPO
 import { waitForEvent } from "../../utils/event";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import mainnavStyle from "./mainnav.style";
+import mainnavStyle from "./mainnav.css";
 export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
 
 const SIZES = {

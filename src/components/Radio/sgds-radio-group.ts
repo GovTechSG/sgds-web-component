@@ -4,7 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { FormSubmitController } from "../../utils/form";
 import { watch } from "../../utils/watch";
-import radioGroupStyles from "./radio-group.style";
+import radioGroupStyles from "./radio-group.css";
 import SgdsRadio from "./sgds-radio";
 
 /**

@@ -1,7 +1,7 @@
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
-import mastheadStyle from "./masthead.style";
+import mastheadStyle from "./masthead.css";
 
 /**
  * @summary All .gov.sg digital services shall adopt The Official Government Banner for every page in the digital service and be placed at the top of the page.

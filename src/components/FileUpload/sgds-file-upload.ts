@@ -5,7 +5,7 @@ import { createRef, ref } from "lit/directives/ref.js";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import SgdsElement from "../../base/sgds-element";
 import { SgdsButton } from "../Button/sgds-button";
-import fileUploadStyle from "./file-upload.style";
+import fileUploadStyle from "./file-upload.css";
 import genId from "../../utils/generateId";
 export type FileUploadButtonVariant =
   | "primary"

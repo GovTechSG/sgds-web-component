@@ -5,7 +5,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 import { SgdsTab } from "./sgds-tab";
 import { SgdsTabPanel } from "./sgds-tab-panel";
-import tabGroupStyle from "./tab-group.style";
+import tabGroupStyle from "./tab-group.css";
 /**
  * @summary Tab Group organizes content into a container with the syncing of tab and their corresponding panels.
  * Each tab must be slotted into the nav slot and its `panel` must refer to a tab panel of the same name.

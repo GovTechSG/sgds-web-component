@@ -2,7 +2,7 @@ import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
-import cardStyle from "./card.style";
+import cardStyle from "./card.css";
 
 /**
  * @summary Cards can be used for headers and footers, a wide variety of content, contain contextual background colors and images.

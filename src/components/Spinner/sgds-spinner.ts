@@ -2,7 +2,7 @@ import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
-import spinnerStyle from "./spinner.style";
+import spinnerStyle from "./spinner.css";
 /**
  * @summary Spinners notify the users that their request is being processed.
  */

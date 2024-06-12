@@ -2,7 +2,7 @@ import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { html } from "lit";
-import progressStyle from "./progress.style";
+import progressStyle from "./progress.css";
 /**
  * @summary Provide up-to-date feedback on the progress of a workflow or action with simple yet flexible progress bars.
  * @slot default - slot for progress-bar

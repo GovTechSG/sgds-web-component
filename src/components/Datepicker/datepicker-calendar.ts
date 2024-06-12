@@ -6,7 +6,7 @@ import SgdsElement from "../../base/sgds-element";
 import { createYearViewArray, setTimeToNoon } from "../../utils/time";
 import { watch } from "../../utils/watch";
 import { ViewEnum } from "./types";
-import datepickerCalendarStyle from "./datepicker-calendar.style.";
+import datepickerCalendarStyle from "./datepicker-calendar.css";
 import { ifDefined } from "lit/directives/if-defined.js";
 
 const TODAY_DATE = new Date();

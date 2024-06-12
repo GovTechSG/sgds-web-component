@@ -5,7 +5,7 @@ import { ref } from "lit/directives/ref.js";
 import { DropdownListElement } from "../../base/dropdown-list-element";
 import genId from "../../utils/generateId";
 import { SgdsButton, type ButtonVariant } from "../Button/sgds-button";
-import dropdownStyle from "./dropdown.style";
+import dropdownStyle from "./dropdown.css";
 export type DropDirection = "left" | "right" | "up" | "down";
 export type DropdownButtonVariant =
   | "primary"

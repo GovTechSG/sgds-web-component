@@ -6,7 +6,7 @@ import { animateTo } from "../../utils/animate";
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
-import toastStyle from "./toast.style";
+import toastStyle from "./toast.css";
 /**
  * @summary Toast allows you to convey quick messaging notifications to the user.
  *

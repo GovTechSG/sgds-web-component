@@ -1,7 +1,7 @@
 import { property } from "lit/decorators.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
-import alertHeadingStyles from "./alert-heading.style";
+import alertHeadingStyles from "./alert-heading.css";
 /**
  * @summary Alert heading is the header of the Alert component. Use it in the default slot of `sgds-alert` when required
  *

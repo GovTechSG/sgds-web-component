@@ -3,7 +3,7 @@ import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
 import { classMap } from "lit/directives/class-map.js";
-import paginationStyle from "./pagination.style";
+import paginationStyle from "./pagination.css";
 /**
  * @summary The Pagination component enables the user to select a specific page from a range of pages
  *

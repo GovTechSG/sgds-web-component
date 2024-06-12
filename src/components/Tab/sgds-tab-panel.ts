@@ -2,7 +2,7 @@ import { LitElement, html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { watch } from "../../utils/watch";
-import tabPanelStyles from "./tab-panel.style";
+import tabPanelStyles from "./tab-panel.css";
 
 let id = 0;
 

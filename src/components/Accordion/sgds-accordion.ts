@@ -3,7 +3,7 @@ import { property, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsAccordionItem from "./sgds-accordion-item";
-import accordionStyle from "./accordion.style";
+import accordionStyle from "./accordion.css";
 /**
  * @summary A dropdown mechanism that allow users to either show or hide related content. `SgdsAccordion` is a wrapper to manage the behaviour for multiple `SgdsAccordionItems`
  * @slot default - slot for accordion-item

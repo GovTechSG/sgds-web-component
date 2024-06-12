@@ -5,10 +5,10 @@ import { ref } from "lit/directives/ref.js";
 import { DropdownListElement } from "../../base/dropdown-list-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { watch } from "../../utils/watch";
-import dropdownStyle from "../Dropdown/dropdown.style";
+import dropdownStyle from "../Dropdown/dropdown.css";
 import { SgdsDropdownItem } from "../Dropdown/sgds-dropdown-item";
 import { SgdsInput } from "../Input/sgds-input";
-import comboBoxStyle from "./combo-box.style";
+import comboBoxStyle from "./combo-box.css";
 type FilterFunction = (inputValue: string, menuItem: string) => boolean;
 
 /**
