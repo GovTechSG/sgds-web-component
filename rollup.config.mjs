@@ -34,7 +34,7 @@ const wcPlugins = [
   }),
   postcss({
     minimize: true,
-    inject: false
+    inject: false,
   }),
   litcss(),
   typescript({
@@ -46,11 +46,11 @@ const wcPlugins = [
 
 const reactBuildPlugins = [
   resolve(),
-  // postcss({
-  //   minimize: true,
-  //   inject: false
-  // }),
-  // litcss(),
+  postcss({
+    minimize: true,
+    inject: false
+  }),
+  litcss(),
   typescript({
     useTsconfigDeclarationDir: true
   })

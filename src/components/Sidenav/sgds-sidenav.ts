@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { property, queryAssignedNodes } from "lit/decorators.js";
+import { property, queryAssignedElements } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import SgdsSidenavItem from "./sgds-sidenav-item";
 import { classMap } from "lit/directives/class-map.js";
@@ -27,8 +27,8 @@ export class SgdsSidenav extends SgdsElement {
   sticky = false;
 
   /** @internal */
-  @queryAssignedNodes()
-  private defaultNodes!: NodeListOf<SgdsSidenavItem>;
+  @queryAssignedElements()
+  private defaultNodes!: SgdsSidenavItem[];
 
   /** @internal */
   get items(): SgdsSidenavItem[] {

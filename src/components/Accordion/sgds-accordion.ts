@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { property, queryAssignedNodes } from "lit/decorators.js";
+import { property, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsAccordionItem from "./sgds-accordion-item";
@@ -25,8 +25,7 @@ export class SgdsAccordion extends SgdsElement {
   @property({ reflect: true }) accordionClasses: string;
 
   /** @internal */
-  @queryAssignedNodes()
-  private defaultNodes!: NodeListOf<SgdsAccordionItem>;
+  @queryAssignedElements() private defaultNodes!: SgdsAccordionItem[];
 
   /** @internal */
   get items(): SgdsAccordionItem[] {
