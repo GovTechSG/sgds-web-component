@@ -374,6 +374,8 @@ const children = this.querySelectorAll("sgds-sidenav-item");
 
 ```typescript
 const children = this.shadowRoot.querySelector('slot').assignedElements({flatten: true});
+ // or use Lit decorator queryAssignedElements
+ @queryAssignedElements()
 ```
 
 2. Boolean properties should always be `false` by default. See [reason](https://stackoverflow.com/questions/60678891/how-can-i-change-a-boolean-property-in-lit-element-to-hide-content-on-my-compone#:~:text=Answer%3A%20For%20a%20Boolean%20property%20to%20be%20configurable%20from%20markup%2C%20it%20must%20default%20to%20false.%20If%20it%20defaults%20to%20true%2C%20you%20cannot%20set%20it%20to%20false%20from%20markup%2C%20since%20the%20presence%20of%20the%20attribute%2C%20with%20or%20without%20a%20value%2C%20equates%20to%20true.%20This%20is%20the%20standard%20behavior%20for%20attributes%20in%20the%20web%20platform.)

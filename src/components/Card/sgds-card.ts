@@ -17,6 +17,19 @@ import cardStyle from "./card.css";
  * @csspart title - The card title
  * @csspart text - The card text
  *
+ * @cssprop --card-background - The background color of the card
+ * @cssprop --card-height - The height of the card. By default, height of card depends on the size of its children
+ * @cssprop --card-border-width - The border width of card
+ * @cssprop --card-border-color - The border color of card
+ * @cssprop --card-border-radius - The border radius of card
+ * @cssprop --card-box-shadow - The box-shadow of card
+ * @cssprop --card-inner-border-radius - The inner border radius of card. Useful in cases where card image is applied to prevent image border from exceeding the outer borders of the card
+ * @cssprop --card-body-color - The text color of the items in card body. This includes title, subtitle and excludes link.
+ * @cssprop --card-body-spacer-y - The y-axis spacer of card body
+ * @cssprop --card-body-spacer-x - The x-axis spacer of card body.
+ * @cssprop --card-title-color - The text color of card title
+ * @cssprop --card-title-spacer-y - The y-axis spacer of card title.
+ *
  */
 export class SgdsCard extends CardElement {
   static styles = [...CardElement.styles, cardStyle];
@@ -32,7 +45,6 @@ export class SgdsCard extends CardElement {
     if (this.stretchedLink) {
       childNodes[0].classList.add("stretched-link");
     }
-    childNodes[0].classList.add("fw-bold");
     return;
   }
 
@@ -41,7 +53,6 @@ export class SgdsCard extends CardElement {
     if (childNodes.length > 1) {
       return console.error("Multiple elements passed into SgdsCard's image slot");
     }
-    childNodes[0].classList.add("card-img-top");
   }
   render() {
     return html`

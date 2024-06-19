@@ -78,7 +78,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
 
   /**@internal */
   @watch("value")
-  handleFilterMenu() {
+  _handleFilterMenu() {
     this.filteredMenuList = this.menuList.filter(item => this.filterFunction.call(null, this.value, item));
 
     if (!this.myDropdown || !this.bsDropdown) return;

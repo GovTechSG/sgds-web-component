@@ -38,7 +38,7 @@ export class SgdsAlert extends SgdsElement {
   }
   /**@internal */
   @watch("show")
-  handleShowChange() {
+  _handleShowChange() {
     this.show ? this.emit("sgds-show") : this.emit("sgds-hide");
   }
   render() {

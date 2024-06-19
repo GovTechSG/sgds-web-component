@@ -135,12 +135,6 @@ describe("<sgds-toast-container>", () => {
       html`<sgds-toast-container position="top-start"></sgds-toast-container>`
     );
     expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("position-absolute");
-  });
-  it("when position prop is defined, it adds class position-absolute to the div.toast-container", async () => {
-    const el = await fixture<SgdsToastContainer>(
-      html`<sgds-toast-container position="top-start"></sgds-toast-container>`
-    );
-    expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("position-absolute");
     expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("top-0");
     expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("start-50");
     expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("translate-middle-x");
@@ -150,7 +144,7 @@ describe("<sgds-toast-container>", () => {
       html`<sgds-toast-container position="top-end"></sgds-toast-container>`
     );
     expect(el.shadowRoot?.querySelector("div.toast-container")?.classList.value.trim()).to.equal(
-      "sgds toast-container position-absolute top-0 end-0"
+      "sgds toast-container top-0 end-0"
     );
   });
 });

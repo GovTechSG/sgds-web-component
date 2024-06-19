@@ -10,7 +10,7 @@ export type BadgeVariant = "primary" | "secondary" | "success" | "danger" | "war
  * @slot default - slot for badge
  */
 export class SgdsBadge extends SgdsElement {
-  static styles = [badgeStyle];
+  static styles = [...SgdsElement.styles, badgeStyle];
 
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` */
   @property({ reflect: true }) variant: BadgeVariant = "primary";
@@ -26,8 +26,10 @@ export class SgdsBadge extends SgdsElement {
         class="  
           ${classMap({
           badge: !this.isLight,
-          [`bg-${this.variant}`]: this.variant && !this.isLight,
-          [`badge-outline text-bg-${this.variant}`]: this.isLight,
+          // [`badge-${this.variant}`]: this.variant && !this.isLight,
+          // [`bg-${this.variant}`]: this.variant && !this.isLight,
+          [`badge-outline`]: this.isLight,
+          // [`text-bg-${this.variant}`]: this.isLight,
           "rounded-pill": this.roundedPill,
           [`${this.badgeClasses}`]: this.badgeClasses
         })}

@@ -36,4 +36,14 @@
     -webkit-mask-position: center;
     mask-position: center;
   }
+
+  /* Globally style slotted anchor tags */
+  ::slotted(a){
+    color: var(--sgds-link-color);
+    text-decoration: var(--sgds-link-decoration);
+   
+  }
+  ::slotted(a:hover){
+    color: var(--sgds-link-hover-color);
+  }
 }

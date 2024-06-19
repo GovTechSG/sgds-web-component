@@ -28,20 +28,20 @@ import accordionItemStyle from "./accordion-item.css";
  * @cssprop --accordion-item-border-radius - The border radius of the accordion item
  * @cssprop --accordion-item-font-weight - The font weight of accordion-button when it is not collapsed
  * @cssprop --accordion-item-line-height - The line height of accordion
- * @cssprop --accordion-item-btn-color - The text colour of the button in accordion-item
- * @cssprop --accordion-item-btn-border-radius - The border radius of button in accordion-item
- * @cssprop --accordion-item-btn-bg - The background colour of the button in accordion-item
- * @cssprop --accordion-item-btn-icon - The caret icon of the button in accordion-item
- * @cssprop --accordion-item-btn-icon-width - The width of the caret icon
- * @cssprop --accordion-item-btn-icon-transform - The transform value of caret icon when accordion is toggled open and close
- * @cssprop --accordion-item-btn-icon-transition - The transition value of caret icon when accordion is toggled open and close
- * @cssprop --accordion-item-btn-focus-border-color - The border colour of accordion button on focus state
- * @cssprop --accordion-item-btn-focus-border-color - The border colour of accordion button on focus state
- * @cssprop --accordion-item-btn-focus-box-shadow - The box-shadow of accordion button on focus state
+ * @cssprop --accordion-item-button-color - The text colour of the button in accordion-item
+ * @cssprop --accordion-item-button-border-radius - The border radius of button in accordion-item
+ * @cssprop --accordion-item-button-bg - The background colour of the button in accordion-item
+ * @cssprop --accordion-item-button-icon - The caret icon of the button in accordion-item
+ * @cssprop --accordion-item-button-icon-width - The width of the caret icon
+ * @cssprop --accordion-item-button-icon-transform - The transform value of caret icon when accordion is toggled open and close
+ * @cssprop --accordion-item-button-icon-transition - The transition value of caret icon when accordion is toggled open and close
+ * @cssprop --accordion-item-button-focus-border-color - The border colour of accordion button on focus state
+ * @cssprop --accordion-item-button-focus-border-color - The border colour of accordion button on focus state
+ * @cssprop --accordion-item-button-focus-box-shadow - The box-shadow of accordion button on focus state
  * @cssprop --accordion-item-content-color - The content text colour of the accordion-item
  */
 export class SgdsAccordionItem extends SgdsElement {
-  static styles = [accordionItemStyle];
+  static styles = [...SgdsElement.styles, accordionItemStyle];
   /** @internal */
   @query(".accordion-item") accordion: HTMLElement;
   /** @internal */

@@ -11,6 +11,7 @@
     <script type="module" id="console-components-gateway"
         src="https://dev.assets.developer.tech.gov.sg/console-components/gateway.es5.js" nonce={nonce ||
         undefined}></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         /* * {
             font-family: "bootstrap-icons", system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -32,11 +33,17 @@
         }
 
         sgds-footer::part(footer-bottom) {
-            background-color: red;
+            background-color: blue;
         }
 
         sgds-sidenav {
             --sidenav-sticky-top: 1.5rem;
+        }
+        sgds-action-card , sgds-card {
+            /* --card-body-color: red;
+            --card-subtitle-color: red;
+            --card-background: pink;
+            --card-title-spacer-y: 0; */
         }
 
         /* sgds-sidenav-item::part(sidenav-btn) {
@@ -107,12 +114,14 @@
         }
 
         sgds-accordion-item {
-            --accordion-color: green;
+            --accordion-item-content-color: green;
             /* --accordion-btn-color: red; */
             --accordion-active-bg: red;
-            --accordion-bg: lightblue;
             --accordion-border-color: cyan;
+        }
 
+        sgds-accordion {
+            --accordion-bg: purple;
         }
     </style>
     <!-- <script src="https://cdn.jsdelivr.net/npm/clk-web-components" type="module"></script> -->
@@ -439,7 +448,7 @@
             <div class="row">
 
                 <sgds-accordion accordionclasses="accordion-flush">
-                    <sgds-accordion-item>
+                    <sgds-accordion-item class="custom-accordion">
                         <div slot="accordion-header">This is a solo accordion</div>
                         <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
                             soluta eaque fugit fuga distinctio? Eum.</span>
@@ -665,14 +674,15 @@
             <div class="container">
                 <h2>Selectable card</h2>
 
-                <sgds-action-card bordercolor="primary" textcolor="primary" active bgColor="warning" checked
+                <sgds-action-card  checked
                     type="checkbox" name="">
-                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                    <i class="bi bi-1-square" slot="icon"></i>
+                    <!-- <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                         class="bi bi-box" viewBox="0 0 16 16">
                         <path
                             d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z">
                         </path>
-                    </svg>
+                    </svg> -->
                     <span slot="card-subtitle">Laptop</span>
                     <span slot="card-title">Apple</span>
                     <span slot="card-text">Macbook Pro M1</span>
@@ -686,7 +696,11 @@
                     <span slot="card-title">Card</span>
                     <span slot="card-text">Some quick example text to build on the card title and make up the bulk of
                         the card's content.</span>
-                    <a slot="card-link" href="https://google.com">Go somewhere</a>
+                        
+                            <a  slot="card-link" href="https://google.com">Go somewhere</a>
+                          
+                    <!-- <a  href="https://google.com">Go somewhere</a>
+                    <a  href="https://google.com">Go somewhere</a> -->
                 </sgds-card>
             </div>
             <div class="container">
@@ -739,7 +753,7 @@
                             This is a toast notifications
                         </sgds-toast>
                         <sgds-toast show bg="warning" status="success"></sgds-toast><br>
-                        <sgds-toast-container>
+                        <sgds-toast-container position="top-start">
                             <sgds-toast show>
                                 <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">

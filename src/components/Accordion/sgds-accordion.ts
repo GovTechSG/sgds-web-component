@@ -16,7 +16,7 @@ import accordionStyle from "./accordion.css";
  */
 
 export class SgdsAccordion extends SgdsElement {
-  static styles = [accordionStyle];
+  static styles = [...SgdsElement.styles, accordionStyle];
 
   /** Allows multiple accordion items to be opened at the same time */
   @property({ type: Boolean, reflect: true }) allowMultiple = false;

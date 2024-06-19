@@ -1,30 +1,105 @@
 @import "../../styles/bg-variants.css";
+:host {
+  --badge-padding-x: 0.571em;
+  --badge-padding-y: 0.285em;
+  --badge-font-size: 0.875em;
+  --badge-font-weight: 700;
+  --badge-color: #fff;
+  --badge-border-radius: var(--sgds-border-radius);
+ 
+}
+:host([variant="primary"]) {
+  --badge-background-color: var(--sgds-primary-filled);
+  --badge-border-color: var(--sgds-primary-filled);
+}
+:host([variant="secondary"]) {
+  --badge-background-color: var(--sgds-secondary-filled);
+  --badge-border-color: var(--sgds-secondary-filled);
+}
+:host([variant="warning"]) {
+  --badge-background-color: var(--sgds-warning-filled);
+  --badge-border-color: var(--sgds-warning-filled);
+}
+:host([variant="danger"]) {
+  --badge-background-color: var(--sgds-danger-filled);
+  --badge-border-color: var(--sgds-danger-filled);
+}
+:host([variant="info"]) {
+  --badge-background-color: var(--sgds-info-filled);
+  --badge-border-color: var(--sgds-info-filled);
+}
+:host([variant="light"]) {
+  --badge-background-color: var(--sgds-light-filled);
+  --badge-border-color: var(--sgds-light-filled);
+}
+:host([variant="dark"]) {
+  --badge-background-color: var(--sgds-dark-filled);
+  --badge-border-color: var(--sgds-dark-filled);
+}
+:host([variant="primary"][islight]) {
+  --badge-color: var(--sgds-primary-text-emphasis);
+  --badge-background-color: var(--sgds-primary-bg-subtle);
+  --badge-border-color: var(--sgds-primary-border-subtle);
+
+}
+:host([variant="secondary"][islight]) {
+  --badge-color: var(--sgds-secondary-text-emphasis);
+  --badge-background-color: var(--sgds-secondary-bg-subtle);
+  --badge-border-color: var(--sgds-secondary-border-subtle);
+}
+:host([variant="warning"][islight]) {
+  --badge-color: var(--sgds-warning-text-emphasis);
+  --badge-background-color: var(--sgds-warning-bg-subtle);
+  --badge-border-color: var(--sgds-warning-border-subtle);
+}
+:host([variant="danger"][islight]) {
+  --badge-color: var(--sgds-danger-text-emphasis);
+  --badge-background-color: var(--sgds-danger-bg-subtle);
+  --badge-border-color: var(--sgds-danger-border-subtle);
+}
+:host([variant="success"][islight]) {
+  --badge-color: var(--sgds-success-text-emphasis);
+  --badge-background-color: var(--sgds-success-bg-subtle);
+  --badge-border-color: var(--sgds-success-border-subtle);
+}
+:host([variant="info"][islight]) {
+  --badge-color: var(--sgds-info-text-emphasis);
+  --badge-background-color: var(--sgds-info-bg-subtle);
+  --badge-border-color: var(--sgds-info-border-subtle);
+}
+:host([variant="light"][islight]) {
+  --badge-color: var(--sgds-light-text-emphasis);
+  --badge-background-color: var(--sgds-light-bg-subtle);
+  --badge-border-color: var(--sgds-light-border-subtle);
+}
+:host([variant="dark"][islight]) {
+  --badge-color: var(--sgds-dark-text-emphasis);
+  --badge-background-color: var(--sgds-dark-bg-subtle);
+  --badge-border-color: var(--sgds-dark-border-subtle);
+}
+
 .badge {
-  --sgds-badge-padding-x: 0.571em;
-  --sgds-badge-padding-y: 0.285em;
-  --sgds-badge-font-size: 0.875em;
-  --sgds-badge-font-weight: 700;
-  --sgds-badge-color: #fff;
-  --sgds-badge-border-radius: var(--sgds-border-radius);
-  border-radius: var(--sgds-badge-border-radius);
-  color: var(--sgds-badge-color);
+  background-color: var(--badge-background-color);
+  border: 1px solid var(--badge-border-color);
+  border-radius: var(--badge-border-radius);
+  color: var(--badge-color);
   display: inline-block;
-  font-size: var(--sgds-badge-font-size);
-  font-weight: var(--sgds-badge-font-weight);
+  font-size: var(--badge-font-size);
+  font-weight: var(--badge-font-weight);
   line-height: 1;
-  padding: var(--sgds-badge-padding-y) var(--sgds-badge-padding-x);
+  padding: var(--badge-padding-y) var(--badge-padding-x);
   text-align: center;
   vertical-align: baseline;
   white-space: nowrap;
 }
-.badge:empty {
+/* .badge:empty {
   display: none;
-}
+} */
 .btn .badge {
   position: relative;
   top: -1px;
 }
-[data-bs-theme="dark"] .badge.text-bg-primary {
+/* [data-bs-theme="dark"] .badge.text-bg-primary {
   --sgds-primary-rgb: var(--sgds-primary-500-rgb);
 }
 [data-bs-theme="dark"] .badge.text-bg-secondary {
@@ -85,15 +160,14 @@
   --sgds-dark-rgb: var(--sgds-gray-800-rgb);
   border: 1px solid var(--sgds-gray-500);
   color: var(--sgds-gray-200) !important;
-}
-.badge i.left,
-.badge-outline i.left {
+} */
+slot[name="leftIcon"]::slotted(*) {
   padding-right: 0.43em;
 }
-.badge i.right,
-.badge-outline i.right {
+slot[name="rightIcon"]::slotted(*) {
   padding-left: 0.43em;
 }
+
 .badge {
   font-size: min(0.875em, 2rem);
   line-height: 1.145;
@@ -104,18 +178,15 @@
   color: var(--sgds-gray-600) !important;
 }
 .badge-outline {
-  --sgds-badge-padding-x: 0.571em;
-  --sgds-badge-padding-y: 0.285em;
-  --sgds-badge-font-size: 0.875em;
-  --sgds-badge-font-weight: 700;
-  --sgds-badge-color: #fff;
-  --sgds-badge-border-radius: var(--sgds-border-radius);
-  border-radius: var(--sgds-badge-border-radius);
+  color: var(--badge-color);
+  background-color: var(--badge-background-color);
+  border: 1px solid var(--badge-border-color);
+  border-radius: var(--badge-border-radius);
   display: inline-block;
   font-size: min(0.875em, 2rem);
-  font-weight: var(--sgds-badge-font-weight);
+  font-weight: var(--badge-font-weight);
   line-height: 1.145;
-  padding: var(--sgds-badge-padding-y) var(--sgds-badge-padding-x);
+  padding: var(--badge-padding-y) var(--badge-padding-x);
   text-align: center;
   vertical-align: baseline;
   white-space: nowrap;

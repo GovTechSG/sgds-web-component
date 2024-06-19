@@ -11,10 +11,10 @@ describe("attributes added to badge", () => {
     expect(el.shadowRoot?.querySelector("span.badge")).to.have.class("rounded-pill");
   });
 
-  it("should add badge-light class if isLight attribute is defined", async () => {
-    const el = await fixture<SgdsBadge>(html`<sgds-badge></sgds-badge>`);
+  it("should add badge-outline and text-bg-light class if isLight attribute is defined", async () => {
+    const el = await fixture<SgdsBadge>(html`<sgds-badge variant="light"></sgds-badge>`);
     el.setAttribute("isLight", "");
     await elementUpdated(el);
-    expect(el.shadowRoot?.querySelector("span.badge")).to.have.class("badge-light");
+    expect(el.shadowRoot?.querySelector("span.badge-outline")).to.have.class("text-bg-light");
   });
 });
