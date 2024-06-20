@@ -150,7 +150,7 @@ export class SgdsAccordionItem extends SgdsElement {
       <div
         part="base"
         class=${classMap({
-          "sgds accordion-item": true,
+          "sgds accordion-item": true
         })}
       >
         <button

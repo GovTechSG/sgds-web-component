@@ -23,7 +23,7 @@ export class SgdsBadge extends SgdsElement {
 
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` */
   @property({ reflect: true }) variant: BadgeVariant = "primary";
-  /**  Visually set badge for lesser color emphasis. */
+  /**  Visually set badge for lesser color emphasis. Renamed from previous `isLight` prop */
   @property({ type: Boolean, reflect: true }) outlined = false;
   /** Visually set badge with rounded corners. */
   @property({ type: Boolean, reflect: true }) roundedPill = false;

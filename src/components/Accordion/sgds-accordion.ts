@@ -77,7 +77,7 @@ export class SgdsAccordion extends SgdsElement {
     return html`
       <div
         class=${classMap({
-          "sgds accordion": true,
+          "sgds accordion": true
         })}
       >
         <slot @click=${this.onToggle}></slot>
