@@ -8,30 +8,33 @@ export type BadgeVariant = "primary" | "secondary" | "success" | "danger" | "war
 /**
  * @summary Badges can be used to highlight important bits of information such as labels, notifications & status.
  * @slot default - slot for badge
+ *
+ * @cssprop --badge-padding-x - The x-axis padding of badge
+ * @cssprop --badge-padding-y - The y-axis padding of badge
+ * @cssprop --badge-font-size - The font size of badge
+ * @cssprop --badge-font-weight - The font weight of badge
+ * @cssprop --badge-color - The text color of badge
+ * @cssprop --badge-border-radius - The border radius of badge
+ * @cssprop --badge-line-height - The line height of badge
+ *
  */
 export class SgdsBadge extends SgdsElement {
   static styles = [...SgdsElement.styles, badgeStyle];
 
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` */
   @property({ reflect: true }) variant: BadgeVariant = "primary";
-  /** Visually set badge for lesser color emphasis. */
-  @property({ type: Boolean, reflect: true }) isLight = false;
+  /**  Visually set badge for lesser color emphasis. */
+  @property({ type: Boolean, reflect: true }) outlined = false;
   /** Visually set badge with rounded corners. */
   @property({ type: Boolean, reflect: true }) roundedPill = false;
-  /** Forwarded to the base wrapper of sgds-badge. Can be used to insert any utility classes such as `me-auto` or `text-dark` */
-  @property({ type: String, reflect: true }) badgeClasses: string;
+
   render() {
     return html`
       <span
         class="  
           ${classMap({
-          badge: !this.isLight,
-          // [`badge-${this.variant}`]: this.variant && !this.isLight,
-          // [`bg-${this.variant}`]: this.variant && !this.isLight,
-          [`badge-outline`]: this.isLight,
-          // [`text-bg-${this.variant}`]: this.isLight,
-          "rounded-pill": this.roundedPill,
-          [`${this.badgeClasses}`]: this.badgeClasses
+          badge: true,
+          "rounded-pill": this.roundedPill
         })}
             "
       >
