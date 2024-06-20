@@ -1,25 +1,23 @@
 @import "../../styles/anchor.css";
 
+:host {
+  --breadcrumb-item-padding-x: 1rem;
+  --breadcrumb-item-active-color: ;
+  --breadcrumb-item-active-font-weight: bold;
+
+  font-size: var(--breadcrumb-font-size);
+}
 slot[name="separator"]::slotted(*) {
-  display: inline-block;
-  align-items: center;
-  padding-left: 0.25rem;
-  padding-right: 0.5rem;
+  padding-left: var(--breadcrumb-item-padding-x);
+  padding-right: var(--breadcrumb-item-padding-x);
+  color: var(--breadcrumb-separator-color)
 }
 
 :host(:last-of-type) .breadcrumb-item__separator {
   display: none;
 }
 
-.breadcrumb-item + .breadcrumb-item {
-  padding-left: var(--sgds-breadcrumb-item-padding-x);
-}
-.breadcrumb-item + .breadcrumb-item:before {
-  color: var(--sgds-breadcrumb-divider-color);
-  content: var(--sgds-breadcrumb-divider, "/");
-  float: left;
-  padding-right: var(--sgds-breadcrumb-item-padding-x);
-}
 .breadcrumb-item.active {
-  color: var(--sgds-breadcrumb-item-active-color);
+  color: var(--breadcrumb-item-active-color);
+  font-weight: var(--breadcrumb-item-active-font-weight);
 }

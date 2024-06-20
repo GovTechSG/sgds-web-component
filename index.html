@@ -39,7 +39,9 @@
         sgds-sidenav {
             --sidenav-sticky-top: 1.5rem;
         }
-        sgds-action-card , sgds-card {
+
+        sgds-action-card,
+        sgds-card {
             /* --card-body-color: red;
             --card-subtitle-color: red;
             --card-background: pink;
@@ -112,16 +114,13 @@
         sgds-mainnav-dropdown {
             /* --mainnav-item-theme-color: red; */
         }
-
-        sgds-accordion-item {
-            --accordion-item-content-color: green;
-            /* --accordion-btn-color: red; */
-            --accordion-active-bg: red;
-            --accordion-border-color: cyan;
+        sgds-breadcrumb {
+            --breadcrumb-separator-color: red;
+            /* --breadcrumb-font-size: 1rem;   */
         }
-
-        sgds-accordion {
-            --accordion-bg: purple;
+        sgds-breadcrumb-item[target="_blank"] {
+            --breadcrumb-separator-color: blue; 
+           
         }
     </style>
     <!-- <script src="https://cdn.jsdelivr.net/npm/clk-web-components" type="module"></script> -->
@@ -429,14 +428,7 @@
             </div>
             <h2>Breadcrumb</h2>
             <sgds-breadcrumb>
-                <span slot="separator"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                        fill="currentColor" class="bi bi-slash-square" viewBox="0 0 16 16">
-                        <path
-                            d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                        <path d="M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z" />
-                    </svg></span>
-                <sgds-breadcrumb-item href="https://www.yahoo.com" target="_blank">Home <span
-                        slot="separator">*</span></sgds-breadcrumb-item>
+                <sgds-breadcrumb-item href="https://www.yahoo.com" target="_blank">Home</sgds-breadcrumb-item>
                 <sgds-breadcrumb-item href="https://www.google.com">Item 1</sgds-breadcrumb-item>
                 <sgds-breadcrumb-item href="https://www.google.com">Item 2</sgds-breadcrumb-item>
                 <sgds-breadcrumb-item href="https://www.google.com">Item 3</sgds-breadcrumb-item>
@@ -674,8 +666,7 @@
             <div class="container">
                 <h2>Selectable card</h2>
 
-                <sgds-action-card  checked
-                    type="checkbox" name="">
+                <sgds-action-card checked type="checkbox" name="">
                     <i class="bi bi-1-square" slot="icon"></i>
                     <!-- <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                         class="bi bi-box" viewBox="0 0 16 16">
@@ -696,9 +687,9 @@
                     <span slot="card-title">Card</span>
                     <span slot="card-text">Some quick example text to build on the card title and make up the bulk of
                         the card's content.</span>
-                        
-                            <a  slot="card-link" href="https://google.com">Go somewhere</a>
-                          
+
+                    <a slot="card-link" href="https://google.com">Go somewhere</a>
+
                     <!-- <a  href="https://google.com">Go somewhere</a>
                     <a  href="https://google.com">Go somewhere</a> -->
                 </sgds-card>

@@ -52,9 +52,6 @@ export class SgdsAccordionItem extends SgdsElement {
   /** Controls whether accordion-item is open or close */
   @property({ type: Boolean, reflect: true }) open = false;
 
-  /** Optional for accordion item. Can be used to insert any utility classes such as `me-auto` */
-  @property({ reflect: true }) accordionItemClasses: string;
-
   firstUpdated() {
     this.body.hidden = !this.open;
     this.body.style.height = this.open ? "auto" : "0";
@@ -153,8 +150,7 @@ export class SgdsAccordionItem extends SgdsElement {
       <div
         part="base"
         class=${classMap({
-          "sgds accordion-item": true,
-          [`${this.accordionItemClasses}`]: this.accordionItemClasses
+          "sgds accordion-item": true
         })}
       >
         <button

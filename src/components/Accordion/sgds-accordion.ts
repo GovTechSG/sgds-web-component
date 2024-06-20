@@ -21,9 +21,6 @@ export class SgdsAccordion extends SgdsElement {
   /** Allows multiple accordion items to be opened at the same time */
   @property({ type: Boolean, reflect: true }) allowMultiple = false;
 
-  /** Optional for accordion wrapper. Can be used to insert any utility classes such as me-auto */
-  @property({ reflect: true }) accordionClasses: string;
-
   /** @internal */
   @queryAssignedElements() private defaultNodes!: SgdsAccordionItem[];
 
@@ -80,8 +77,7 @@ export class SgdsAccordion extends SgdsElement {
     return html`
       <div
         class=${classMap({
-          "sgds accordion": true,
-          [`${this.accordionClasses}`]: this.accordionClasses
+          "sgds accordion": true
         })}
       >
         <slot @click=${this.onToggle}></slot>

@@ -13,9 +13,14 @@ import breadcrumbItemStyle from "./breadcrumb-item.css";
  *
  * @csspart base - The base wrapper of breadcrumb item which is a HTMLListElement.
  * @csspart label -The label of the breadcrumb item. It is either a span or anchor element depending on href attribute
+ *
+ * @cssprop --breadcrumb-item-padding-x - The x-axis padding of breadcrumb item
+ * @cssprop --breadcrumb-item-active-color - The text color of breadcrumb item when it is active
+ * @cssprop --breadcrumb-item-active-font-weight - The font weight of breadcrumb item when it is active
+ *
  */
 export class SgdsBreadcrumbItem extends SgdsElement {
-  static styles = [breadcrumbItemStyle];
+  static styles = [...SgdsElement.styles, breadcrumbItemStyle];
   /** Specifies the url path of the breadcrumb-item. When defined, the breadcrumb-items is a anchor element. When not defined, indicates that the breadcrumb item is active. In such cases, a span element is rendered. */
   @property({ type: String, reflect: true }) href: string;
   /** Tells the browser where to open the link. Only used when `href` is set. */

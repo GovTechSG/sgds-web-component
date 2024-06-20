@@ -11,18 +11,28 @@ import breadcrumbStyle from "./breadcrumb.css";
  * @slot separator - Defines all the separator of `SgdsBreadcrumbItems`. Defaults to "/"
  *
  * @csspart base - The nav element wrapper of `SgdsBreadcrumb`
+ *
+ * @cssprop --breadcrumb-padding-x - The x-axis padding of the breadcrumb
+ * @cssprop --breadcrumb-padding-y - The y-axis padding of the breadcrumb
+ * @cssprop --breadcrumb-margin-bottom - The margin bottom of breadcrumb
+ * @cssprop --breadcrumb-background - The background color of breadcrumb
+ * @cssprop --breadcrumb-border-radius - The border radius of breadcrumb
+ * @cssprop --breadcrumb-font-size - The font size of breadcrumb. Affects the font size of all the breadcrumb items and separators
+ * @cssprop --breadcrumb-separator-color - The color of breadcrumb's separator
+ *
  */
 export class SgdsBreadcrumb extends SgdsElement {
-  static styles = [breadcrumbStyle];
+  static styles = [...SgdsElement.styles, breadcrumbStyle];
   /** The aria-label of nav element within breadcrumb component. */
   @property({ type: String }) ariaLabel = "breadcrumb";
+
   /**@internal */
   @query("slot") defaultSlot: HTMLSlotElement;
   /**@internal */
   @query('slot[name="separator"]') separatorSlot: HTMLSlotElement;
 
   // Generates a clone of the separator element to use for each breadcrumb item
-  private getSeparator() {
+  private _getSeparator() {
     const separator = this.separatorSlot.assignedElements({ flatten: true })[0] as HTMLElement;
 
     // Clone it, remove ids, and slot it
@@ -34,7 +44,7 @@ export class SgdsBreadcrumb extends SgdsElement {
     return clone;
   }
 
-  private handleSlotChange() {
+  private _handleSlotChange() {
     const items = [...this.defaultSlot.assignedElements({ flatten: true })].filter(
       item => item.tagName.toLowerCase() === "sgds-breadcrumb-item"
     ) as SgdsBreadcrumbItem[];
@@ -44,10 +54,10 @@ export class SgdsBreadcrumb extends SgdsElement {
       const separator = item.querySelector('[slot="separator"]');
       if (separator === null) {
         // No separator exists, add one
-        item.append(this.getSeparator());
+        item.append(this._getSeparator());
       } else if (separator.hasAttribute("data-default")) {
         // A default separator exists, replace it
-        separator.replaceWith(this.getSeparator());
+        separator.replaceWith(this._getSeparator());
       } else {
         // The user provided a custom separator, leave it alone
       }
@@ -66,7 +76,7 @@ export class SgdsBreadcrumb extends SgdsElement {
     return html`
       <nav aria-label=${ifDefined(this.ariaLabel)} part="base">
         <ol class="breadcrumb">
-          <slot @slotchange=${this.handleSlotChange}></slot>
+          <slot @slotchange=${this._handleSlotChange}></slot>
           <slot name="separator" hidden aria-hidden="true">
             <span>/</span>
           </slot>
