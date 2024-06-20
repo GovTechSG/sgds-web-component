@@ -18,7 +18,7 @@ export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "war
  * @cssproperty --alert-icon-margin-right - The margin-right css of icon slot, to position the gap between icon and alert message
  */
 export class SgdsAlert extends SgdsElement {
-  static styles = [alertStyle];
+  static styles = [...SgdsElement.styles, alertStyle];
 
   /** Controls the appearance of the alert  */
   @property({ type: Boolean, reflect: true }) show = false;
