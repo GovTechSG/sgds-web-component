@@ -44,7 +44,7 @@ describe("<sgds-action-card>", () => {
           " part="base"  
           >
           <div class="card-body" part="body">
-            <h6 class="text-muted card-subtitle" part="subtitle">
+            <h6 class="card-subtitle" part="subtitle">
               <div>
               <slot name="icon"></slot>
                 <slot name="card-subtitle"></slot>

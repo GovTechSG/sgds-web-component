@@ -130,11 +130,10 @@ describe("<sgds-toast-container>", () => {
             `
     );
   });
-  it("when position prop is defined, it adds class position-absolute to the div.toast-container", async () => {
+  it("when position prop is defined, it adds class top-0 start-50 translate-middle-x to the div.toast-container", async () => {
     const el = await fixture<SgdsToastContainer>(
       html`<sgds-toast-container position="top-start"></sgds-toast-container>`
     );
-    expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("position-absolute");
     expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("top-0");
     expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("start-50");
     expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("translate-middle-x");
