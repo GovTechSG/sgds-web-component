@@ -2,11 +2,7 @@ import { html } from "lit-html";
 
 export const Template = args =>
   html`
-    <sgds-alert
-      alertClasses=${args.alertClasses}
-      ?dismissible=${args.dismissible}
-      variant=${args.variant}
-      ?show=${args.show}
+    <sgds-alert ?dismissible=${args.dismissible} variant=${args.variant} ?show=${args.show}
       ><svg
         slot="icon"
         xmlns="http://www.w3.org/2000/svg"

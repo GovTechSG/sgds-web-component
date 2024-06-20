@@ -29,9 +29,6 @@ export class SgdsAlert extends SgdsElement {
   /** The alert's theme variant. */
   @property({ type: String, reflect: true }) variant: AlertVariant = "primary";
 
-  /** Optional for alert wrapper. Can be used to insert any utility classes such as me-auto */
-  @property({ type: String, reflect: true }) alertClasses: string;
-
   /** Closes the alert  */
   public close() {
     this.show = false;
@@ -51,7 +48,6 @@ export class SgdsAlert extends SgdsElement {
           show: this.show,
           [`alert-${this.variant}`]: this.variant,
           [`alert-dismissible`]: this.dismissible,
-          [`${this.alertClasses}`]: this.alertClasses,
           "d-flex": true,
           "align-items-center": true
         })}"

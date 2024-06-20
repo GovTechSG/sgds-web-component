@@ -5,7 +5,7 @@ import SgdsAlertLink from "@govtechsg/sgds-web-component/react/alert-link/index.
 export const Alert = () => {
   return (
     <>
-      <SgdsAlert alertclasses="undefined" variant="primary" show>
+      <SgdsAlert variant="primary" show>
         <span slot="icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
