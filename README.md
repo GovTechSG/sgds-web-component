@@ -92,9 +92,7 @@ The web components uses attributes to set the properties. For example, the varia
 Boolean properties are usually false by default. To set it to true, add it as an attribute with no value on the custom element
 
 ```html
-<sgds-accordion allowMultiple>
-    ...
-</sgds-accordion>
+<sgds-accordion allowMultiple> ... </sgds-accordion>
 
 <sgds-input disabled></sgds-input>
 ```
@@ -699,7 +697,7 @@ Example below
 
 ```jsx
 import { SgdsMasthead, SgdsMainnav, SgdsMainnavDropdown, SgdsMainnavItem } from "@govtechsg/sgds-web-component/components";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
 
 // Lit element
 @customElement('my-navbar')

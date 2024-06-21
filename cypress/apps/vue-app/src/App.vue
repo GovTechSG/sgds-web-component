@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import "@webcomponents/scoped-custom-element-registry"
 import '@govtechsg/sgds/css/sgds.css';
 import "@govtechsg/sgds-web-component"
 import Accordion from './components/Accordion.vue'

@@ -1,7 +1,6 @@
-# Extending sgds-web-component 
+# Extending sgds-web-component
 
-For users who are leveraging on sgds-web-component as a building block to build and export your own web component library with Lit, you will have to adopt the scoped elements approach to prevent any foreseeable clash of registries between sgds-web-component and your web component library in the case where your users are importing both libraries. 
-
+For users who are leveraging on sgds-web-component as a building block to build and export your own web component library with Lit, you will have to adopt the scoped elements approach to prevent any foreseeable clash of registries between sgds-web-component and your web component library in the case where your users are importing both libraries.
 
 ## Scoped Elements
 
@@ -11,17 +10,18 @@ Whenever a sgds component uses composition (meaning it uses another sgds compone
 
 For users who are using sgds component directly for builing application, use the custom elements directly by [importing the custom elements](#using-the-custom-elements)
 
-For users who are building component libraries on top of sgds-web-component, please adopt OpenWC's scoped elements to prevent exporting our registered custom elements. 
+For users who are building component libraries on top of sgds-web-component, please adopt OpenWC's scoped elements to prevent exporting our registered custom elements.
 
-Things to note: 
-1. Import component class from `@govtechsg/sgds-web-component/components`. Here the components are not registered in the custom element registry 
+Things to note:
+
+1. Import component class from `@govtechsg/sgds-web-component/components`. Here the components are not registered in the custom element registry
 2. Define the tagName you want to assign to the component's class
 
 Example below
 
 ```jsx
 import { SgdsMasthead, SgdsMainnav, SgdsMainnavDropdown, SgdsMainnavItem } from "@govtechsg/sgds-web-component/components";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
 
 // Lit element
 @customElement('my-navbar')
