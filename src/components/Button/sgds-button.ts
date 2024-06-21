@@ -14,15 +14,7 @@ export type ButtonVariant =
   | "info"
   | "light"
   | "dark"
-  | "link"
-  | "outline-primary"
-  | "outline-secondary"
-  | "outline-success"
-  | "outline-danger"
-  | "outline-warning"
-  | "outline-info"
-  | "outline-light"
-  | "outline-dark";
+  | "link";
 
 /**
  * @summary Custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
@@ -80,9 +72,6 @@ export class SgdsButton extends SgdsElement {
 
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as "outline" versions (prefixed by `outline-*`) */
   @property({ type: Boolean, reflect: true }) outlined = false;
-
-  /** Optional for button. Can be used to insert any utility classes such as me-auto **/
-  @property({ reflect: true }) buttonClasses: string;
 
   /** Specifies a large or small button */
   @property({ reflect: true }) size: "sm" | "lg";
@@ -177,7 +166,6 @@ export class SgdsButton extends SgdsElement {
           disabled: this.disabled,
           active: this.active,
           [`btn-${this.size}`]: this.size,
-          [`${this.buttonClasses}`]: this.buttonClasses,
           "btn-link": this.variant === "link"
         })}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
