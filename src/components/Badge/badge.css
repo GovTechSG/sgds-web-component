@@ -1,4 +1,3 @@
-@import "../../styles/bg-variants.css";
 :host {
   /* NEW in 2.0 */
   --badge-padding-x: 0.571em;
@@ -8,8 +7,10 @@
   --badge-color: #fff;
   --badge-border-radius: var(--sgds-border-radius);
   --badge-line-height: 1.145;
- 
+  --badge-background-color: ;
+  --badge-border-color: ;
 }
+
 :host([variant="primary"]) {
   --badge-background-color: var(--sgds-primary-filled);
   --badge-border-color: var(--sgds-primary-filled);

@@ -11,7 +11,7 @@
   --card-border-radius: var(--sgds-border-radius);
   --card-box-shadow: ;
   --card-inner-border-radius: calc(var(--sgds-border-radius) - var(--sgds-border-width));
- 
+
   --card-body-color: ;
   --card-body-spacer-y: 1.5rem;
   --card-body-spacer-x: 1.5rem;
@@ -82,5 +82,5 @@ slot[name="card-image"]::slotted(img) {
 
 slot[name="card-link"]::slotted(*) {
   font-weight: 700;
-  /* color: var(--sgds-link-color) */
+  /* color: var(--sgds-link) */
 }

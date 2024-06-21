@@ -39,12 +39,13 @@
   }
 
   /* Globally style slotted anchor tags */
-  a, ::slotted(a){
-    color: var(--sgds-link-color);
+  /* a, */
+  ::slotted(a) {
+    color: var(--sgds-link);
     text-decoration: var(--sgds-link-decoration);
-   
   }
-  a:hover, ::slotted(a:hover){
+  /* a:hover, */
+  ::slotted(a:hover) {
     color: var(--sgds-link-hover-color);
-  } 
+  }
 }

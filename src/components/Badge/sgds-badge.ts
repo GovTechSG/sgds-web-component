@@ -16,6 +16,8 @@ export type BadgeVariant = "primary" | "secondary" | "success" | "danger" | "war
  * @cssprop --badge-color - The text color of badge
  * @cssprop --badge-border-radius - The border radius of badge
  * @cssprop --badge-line-height - The line height of badge
+ * @cssprop --badge-background-color - The background color of the badge. Changing `variant` and `outlined` prop updates this css property
+ * @cssprop --badge-border-color - The border color of the badge. Changing `variant` and `outlined` prop updates this css property
  *
  */
 export class SgdsBadge extends SgdsElement {

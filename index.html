@@ -114,14 +114,7 @@
         sgds-mainnav-dropdown {
             /* --mainnav-item-theme-color: red; */
         }
-        sgds-breadcrumb {
-            --breadcrumb-separator-color: red;
-            /* --breadcrumb-font-size: 1rem;   */
-        }
-        sgds-breadcrumb-item[target="_blank"] {
-            --breadcrumb-separator-color: blue; 
-           
-        }
+    
     </style>
     <!-- <script src="https://cdn.jsdelivr.net/npm/clk-web-components" type="module"></script> -->
     <script type="module">
@@ -315,11 +308,42 @@
                         <sgds-button variant="primary">Hello World</sgds-button>
                         <sgds-button variant="secondary">Hello World</sgds-button>
                         <sgds-button variant="warning">Hello World</sgds-button>
+                        <sgds-button variant="success">Hello World</sgds-button>
                         <sgds-button variant="info">Hello World</sgds-button>
                         <sgds-button variant="danger">Hello World</sgds-button>
                         <sgds-button variant="light">Hello World</sgds-button>
                         <sgds-button variant="link">Hello World</sgds-button>
                         <sgds-button variant="dark">Hello World</sgds-button>
+                        <sgds-button disabled variant="primary">Hello World</sgds-button>
+                        <sgds-button disabled variant="secondary">Hello World</sgds-button>
+                        <sgds-button disabled variant="warning">Hello World</sgds-button>
+                        <sgds-button disabled variant="success">Hello World</sgds-button>
+                        <sgds-button disabled variant="info">Hello World</sgds-button>
+                        <sgds-button disabled variant="danger">Hello World</sgds-button>
+                        <sgds-button disabled variant="light">Hello World</sgds-button>
+                        <sgds-button disabled variant="link">Hello World</sgds-button>
+                        <sgds-button disabled variant="dark">Hello World</sgds-button>
+                        <sgds-button outlined variant="primary">Hello World</sgds-button>
+                        <sgds-button outlined variant="secondary">Hello World</sgds-button>
+                        <sgds-button outlined variant="warning">Hello World</sgds-button>
+                        <sgds-button outlined variant="success">Hello World</sgds-button>
+                        <sgds-button outlined variant="info">Hello World</sgds-button>
+                        <sgds-button outlined variant="danger">Hello World</sgds-button>
+                        <sgds-button outlined variant="light">Hello World</sgds-button>
+                        <sgds-button outlined variant="link">Hello World</sgds-button>
+                        <sgds-button outlined variant="dark">Hello World</sgds-button>
+                        <sgds-button active variant="primary">Hello World</sgds-button>
+                        <sgds-button active variant="secondary">Hello World</sgds-button>
+                        <sgds-button active variant="warning">Hello World</sgds-button>
+                        <sgds-button active variant="success">Hello World</sgds-button>
+                        <sgds-button active variant="info">Hello World</sgds-button>
+                        <sgds-button active variant="danger">Hello World</sgds-button>
+                        <sgds-button active variant="light">Hello World</sgds-button>
+                        <sgds-button active variant="link">Hello World</sgds-button>
+                        <sgds-button active variant="dark">Hello World</sgds-button>
+                        <sgds-button href="#" target="_blank">Anchor</sgds-button>
+                        <sgds-button size="sm" variant="dark">Hello World</sgds-button>
+                        <sgds-button size="lg" variant="dark">Hello World</sgds-button>
                     </div>
                     <sgds-button id="modalShowButton">Open Modal</sgds-button>
                     <sgds-modal title="hello" titleicon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-amd&quot; viewBox=&quot;0 0 16 16&quot;>
@@ -428,7 +452,7 @@
             </div>
             <h2>Breadcrumb</h2>
             <sgds-breadcrumb>
-                <sgds-breadcrumb-item href="https://www.yahoo.com" target="_blank">Home</sgds-breadcrumb-item>
+                <sgds-breadcrumb-item href="https://www.yahoo.com">Home</sgds-breadcrumb-item>
                 <sgds-breadcrumb-item href="https://www.google.com">Item 1</sgds-breadcrumb-item>
                 <sgds-breadcrumb-item href="https://www.google.com">Item 2</sgds-breadcrumb-item>
                 <sgds-breadcrumb-item href="https://www.google.com">Item 3</sgds-breadcrumb-item>
@@ -638,7 +662,10 @@
                         <sgds-button variant="warning" href="#" target="_blank" disabled>
                             Link button _blank
                         </sgds-button>
-                        <sgds-button variant="danger" download="logo.svg">
+                        <sgds-button href="#" variant="danger" download="logo.svg">
+                            Link button _blank
+                        </sgds-button>
+                        <sgds-button href="#" variant="link" download="logo.svg">
                             Link button _blank
                         </sgds-button>
                     </div>

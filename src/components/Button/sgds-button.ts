@@ -31,9 +31,31 @@ export type ButtonVariant =
  *
  * @event sgds-blur - Emitted when the button is not focused.
  * @event sgds-focus - Emitted when the button is focused.
+ *
+ * @cssprop --button-padding-x - The x-axis padding of button
+ * @cssprop --button-padding-y - The y-axis padding of button
+ * @cssprop --button-font-family - The font family of text content in button
+ * @cssprop --button-font-family - The font size of text content in button
+ * @cssprop --button-font-weight - The font weight of text content in button
+ * @cssprop --button-line-height - The line height of text content in button
+ * @cssprop --button-color - The text color of button
+ * @cssprop --button-background - The background color of button
+ * @cssprop --button-border-width - The thickness of the button border
+ * @cssprop --button-border-color - The color of the button border
+ * @cssprop --button-border-radius - The border radius of button border
+ * @cssprop --button-disabled-color - The text color of a button in disabled state
+ * @cssprop --button-disabled-opacity - The opacity of a button in disabled state
+ * @cssprop --button-hover-color - The text color of a button in hover state
+ * @cssprop --button-hover-border-color - The border color of a button in hover state
+ * @cssprop --button-hover-background - The background color of a button in hover state
+ * @cssprop --button-active-color - The text color of a button in active state
+ * @cssprop --button-active-border-color - The border color of a button in active state
+ * @cssprop --button-active-background - The background color of a button in active state
+ * @cssprop --button-focus-box-shadow - The box shadow of a button in focused state
+ *
  */
 export class SgdsButton extends SgdsElement {
-  static styles = [buttonStyles];
+  static styles = [...SgdsElement.styles, buttonStyles];
 
   @query(".btn") private button: HTMLButtonElement | HTMLLinkElement;
 
@@ -55,6 +77,9 @@ export class SgdsButton extends SgdsElement {
 
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as "outline" versions (prefixed by `outline-*`) */
   @property({ reflect: true }) variant: ButtonVariant = "primary";
+
+  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as "outline" versions (prefixed by `outline-*`) */
+  @property({ type: Boolean, reflect: true }) outlined = false;
 
   /** Optional for button. Can be used to insert any utility classes such as me-auto **/
   @property({ reflect: true }) buttonClasses: string;
@@ -149,11 +174,11 @@ export class SgdsButton extends SgdsElement {
     return html`
       <${tag}
         class="sgds btn ${classMap({
-          disabled: isLink && this.disabled,
+          disabled: this.disabled,
           active: this.active,
-          [`btn-${this.variant}`]: this.variant,
           [`btn-${this.size}`]: this.size,
-          [`${this.buttonClasses}`]: this.buttonClasses
+          [`${this.buttonClasses}`]: this.buttonClasses,
+          "btn-link": this.variant === "link"
         })}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
