@@ -1,8 +1,8 @@
+import "./sgds-web-component";
 import { aTimeout, assert, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 import { SgdsToast, SgdsToastContainer } from "../src/components";
-import "../src/index";
 
 describe("<sgds-toast>", () => {
   it("semantically matches the DOM", async () => {

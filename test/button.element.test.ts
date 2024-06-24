@@ -1,8 +1,8 @@
+import "./sgds-web-component";
 import { fixture, assert, expect, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
-import { SgdsButton } from "../src/components";
-import "../src/index";
+import type { SgdsButton } from "../src/components";
 
 describe("sgds-button", () => {
   it("renders with default values", async () => {

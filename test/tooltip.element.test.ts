@@ -1,8 +1,7 @@
+import "./sgds-web-component";
 import { assert, expect, fixture, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
-import "../src/components/Tooltip";
 import { SgdsTooltip, SgdsButton } from "../src/components";
-import "../src/index";
 import { sendMouse } from "@web/test-runner-commands";
 import sinon from "sinon";
 

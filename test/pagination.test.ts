@@ -1,10 +1,10 @@
-import SgdsPagination from "../src/components/Pagination/sgds-pagination";
+import "./sgds-web-component";
+import { SgdsPagination } from "../src/components";
 import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";
 
-customElements.define("sgds-pagination", SgdsPagination);
 describe("sgds-pagination", () => {
   it("is defined", () => {
     const el = document.createElement("sgds-pagination");
