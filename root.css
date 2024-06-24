@@ -165,6 +165,7 @@
 
   --sgds-input-btn-focus-width: 0.13rem;
   --sgds-color-disabled: #939393;
+  --sgds-disabled-opacity: 0.5;
 }
 /* [data-bs-theme="dark"] {
   --sgds-body-color: #d2d2d2;

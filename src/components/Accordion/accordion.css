@@ -1,5 +1,5 @@
 :host {
-  /** NEW in 3.0.0 */
+  /** NEW in 2.0.0 */
   --accordion-bg: var(--sgds-body-bg);
   --accordion-active-color: var(--sgds-primary-text-emphasis);
   --accordion-active-bg: none;

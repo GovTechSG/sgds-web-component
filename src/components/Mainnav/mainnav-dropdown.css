@@ -1,9 +1,9 @@
 :host {
-    --mainnav-dropdown-theme-color: var(--sgds-primary);
-    --mainnav-dropdown-color: var(--sgds-gray-600);
-    --mainnav-dropdown-borderBottom-width: 0.125rem;
-    /* SUGGESTIONS */
-    /* mainnav-item-disabled-opacity: var(--sgds-disabled-opacity) */
+    /* NEW in 2.0 */
+    --mainnav-dropdown-theme-color: var(--mainnav-theme-color, var(--sgds-primary));
+    --mainnav-dropdown-color: var(--sgds-body-color);
+    --mainnav-dropdown-border-bottom-width: 0.125rem;
+    --mainnav-dropdown-disabled-opacity: var(--mainnav-disabled-opacity, 0.5)
   }
 
   .dropdown-menu {
@@ -25,7 +25,7 @@
     display: flex;
     cursor: pointer;
     color: var(--mainnav-dropdown-color);
-    border-bottom: var(--mainnav-dropdown-borderBottom-width) solid transparent;
+    border-bottom: var(--mainnav-dropdown-border-bottom-width) solid transparent;
     min-height: 100%;
     align-items: center;
     padding: 0;
@@ -44,6 +44,6 @@
   .nav-link.disabled {
     cursor: default;
     pointer-events: none;
-    opacity: 30%;
+    opacity: var(--mainnav-dropdown-disabled-opacity);
   }
 

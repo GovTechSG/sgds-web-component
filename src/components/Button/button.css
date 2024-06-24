@@ -292,7 +292,6 @@ button:focus:not(:focus-visible) {
 }
 .btn.disabled,
 .btn:disabled {
-  /* //TODO Ask LT if link need opacity */
   opacity: var(--button-disabled-opacity);
   pointer-events: none;
   color: var(--button-disabled-color);

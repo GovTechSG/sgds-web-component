@@ -1,9 +1,8 @@
 :host {
-  --mainnav-item-theme-color: var(--sgds-primary);
-  --mainnav-item-color: var(--sgds-gray-600);
-  --mainnav-item-borderBottom-width: 0.125rem;
-  /* SUGGESTIONS */
-  /* mainnav-item-disabled-opacity: var(--sgds-disabled-opacity) */
+  --mainnav-item-color: var(--mainnav-color);
+  --mainnav-item-theme-color: var(--mainnav-theme-color, var(--sgds-primary));
+  --mainnav-item-border-bottom-width: 0.125rem;
+  --mainnav-item-disabled-opacity: var(--mainnav-disabled-opacity, 0.5);
 }
 li {
   height: 100%;
@@ -12,7 +11,7 @@ a.nav-link {
   display: flex;
   cursor: pointer;
   color: var(--mainnav-item-color);
-  border-bottom: var(--mainnav-item-borderBottom-width) solid transparent;
+  border-bottom: var(--mainnav-item-border-bottom-width) solid transparent;
   min-height: 100%;
   align-items: center;
   padding: 0;
@@ -31,5 +30,5 @@ a.nav-link {
 .nav-link.disabled {
   cursor: default;
   pointer-events: none;
-  opacity: 30%;
+  opacity: var(--mainnav-item-disabled-opacity);
 }

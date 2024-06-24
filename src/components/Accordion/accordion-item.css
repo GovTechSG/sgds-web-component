@@ -4,7 +4,7 @@
     --accordion-item-border-radius: var(--sgds-border-radius, 0.3125rem);
     --accordion-item-font-weight: 700;
     --accordion-item-line-height: 2rem;
-    /** NEW in 3.0.0 */
+    /** NEW in 2.0.0 */
     --accordion-item-button-color: var(--sgds-body-color);
     --accordion-item-button-border-radius: calc(var(--sgds-border-radius) - var(--sgds-border-width));
     --accordion-item-button-bg: var(--accordion-bg);
