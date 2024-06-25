@@ -1,3 +1,4 @@
+import { nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
@@ -52,25 +53,27 @@ export class SgdsAlert extends SgdsElement {
     this.show ? this.emit("sgds-show") : this.emit("sgds-hide");
   }
   render() {
-    return html`
-      <div
-        class="${classMap({
-          sgds: true,
-          alert: true,
-          fade: true,
-          show: this.show,
-          [`alert-dismissible`]: this.dismissible
-        })}"
-        role="alert"
-        aria-hidden=${this.show ? "false" : "true"}
-      >
-        <i><slot name="icon"></slot></i>
-        <slot></slot>
-        ${this.dismissible
-          ? html`<button class="btn-close btn-sm" aria-label="close the alert" @click=${this.close}></button>`
-          : null}
-      </div>
-    `;
+    return this.show
+      ? html`
+          <div
+            class="${classMap({
+              sgds: true,
+              alert: true,
+              fade: true,
+              show: this.show,
+              [`alert-dismissible`]: this.dismissible
+            })}"
+            role="alert"
+            aria-hidden=${this.show ? "false" : "true"}
+          >
+            <i><slot name="icon"></slot></i>
+            <slot></slot>
+            ${this.dismissible
+              ? html`<button class="btn-close btn-sm" aria-label="close the alert" @click=${this.close}></button>`
+              : null}
+          </div>
+        `
+      : nothing;
   }
 }
 
