@@ -21,7 +21,7 @@ import inputStyle from "./input.css";
  *
  */
 export class SgdsInput extends SgdsElement implements SgdsFormControl {
-  static styles = [inputStyle];
+  static styles = [...SgdsElement.styles, inputStyle];
   /**@internal */
   @query("input.form-control") input: HTMLInputElement;
   /**@internal */
