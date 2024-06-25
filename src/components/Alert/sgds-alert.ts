@@ -16,6 +16,16 @@ export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "war
  * @event sgds-hide - Emitted after the alert closes.
  *
  * @cssproperty --alert-icon-margin-right - The margin-right css of icon slot, to position the gap between icon and alert message
+ * @cssproperty --alert-bg - The background color of alert
+ * @cssproperty --alert-padding-x - The x-axis padding of alert
+ * @cssproperty --alert-padding-y - The y-axis padding of alert
+ * @cssproperty --alert-margin-bottom - The bottom margin of alert
+ * @cssproperty --alert-color - The text color of alert
+ * @cssproperty --alert-border-color - The border color of alert
+ * @cssproperty --alert-border - The border of alert
+ * @cssproperty --alert-border-radius - The border radius of alert
+ * @cssproperty --alert-link-color - The link color of alert
+ *
  */
 export class SgdsAlert extends SgdsElement {
   static styles = [...SgdsElement.styles, alertStyle];
@@ -28,6 +38,9 @@ export class SgdsAlert extends SgdsElement {
 
   /** The alert's theme variant. */
   @property({ type: String, reflect: true }) variant: AlertVariant = "primary";
+
+  /** Controls the alert visual between a lighter outline and a solid darker variant. */
+  @property({ type: Boolean, reflect: true }) outlined = false;
 
   /** Closes the alert  */
   public close() {
@@ -46,10 +59,7 @@ export class SgdsAlert extends SgdsElement {
           alert: true,
           fade: true,
           show: this.show,
-          [`alert-${this.variant}`]: this.variant,
-          [`alert-dismissible`]: this.dismissible,
-          "d-flex": true,
-          "align-items-center": true
+          [`alert-dismissible`]: this.dismissible
         })}"
         role="alert"
         aria-hidden=${this.show ? "false" : "true"}

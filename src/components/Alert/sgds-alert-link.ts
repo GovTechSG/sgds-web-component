@@ -18,7 +18,7 @@ export class SgdsAlertLink extends SgdsElement {
 
   render() {
     return html`
-      <a class="alert-link" href=${ifDefined(this.href)} target=${ifDefined(this.target)}><slot></slot> </a>
+      <a class="alert-link" href=${ifDefined(this.href)} target=${ifDefined(this.target)}><slot></slot></a>
     `;
   }
 }
