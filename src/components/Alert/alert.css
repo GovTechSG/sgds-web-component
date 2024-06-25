@@ -1,7 +1,7 @@
 @import "../../styles/close-button.css";
 
 :host {
-  --alert-icon-margin-right: 0.5rem;
+  --sgds-alert-icon-margin-right: 0.5rem;
   /* NEW in 2.0 */
   --sgds-alert-bg: transparent;
   --sgds-alert-padding-x: 1rem;
