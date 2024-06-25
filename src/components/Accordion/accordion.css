@@ -1,8 +1,8 @@
 :host {
   /** NEW in 2.0.0 */
-  --accordion-bg: var(--sgds-body-bg);
-  --accordion-active-color: var(--sgds-primary-text-emphasis);
-  --accordion-active-bg: none;
-  --accordion-border-color: var(--sgds-border-color);
-  --accordion-border-width: var(--sgds-border-width);
+  --sgds-accordion-bg: var(--sgds-body-bg);
+  --sgds-accordion-active-color: var(--sgds-primary-text-emphasis);
+  --sgds-accordion-active-bg: none;
+  --sgds-accordion-border-color: var(--sgds-border-color);
+  --sgds-accordion-border-width: var(--sgds-border-width);
 }

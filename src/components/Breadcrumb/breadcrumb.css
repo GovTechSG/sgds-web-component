@@ -1,22 +1,22 @@
  :host{
   /* NEW in V2.0 */
-  --breadcrumb-padding-x: 0;
-  --breadcrumb-padding-y: 0;
-  --breadcrumb-margin-bottom: 1rem;
-  --breadcrumb-background: ;
-  --breadcrumb-border-radius: ;
-  --breadcrumb-font-size: ;
-  --breadcrumb-separator-color: ;
+  --sgds-breadcrumb-padding-x: 0;
+  --sgds-breadcrumb-padding-y: 0;
+  --sgds-breadcrumb-margin-bottom: 1rem;
+  --sgds-breadcrumb-background: ;
+  --sgds-breadcrumb-border-radius: ;
+  --sgds-breadcrumb-font-size: ;
+  --sgds-breadcrumb-separator-color: ;
 
  }
  
   .breadcrumb {
-    background-color: var(--breadcrumb-background);
-    border-radius: var(--breadcrumb-border-radius);
+    background-color: var(--sgds-breadcrumb-background);
+    border-radius: var(--sgds-breadcrumb-border-radius);
     display: flex;
     flex-wrap: wrap;
     list-style: none;
-    margin-bottom: var(--breadcrumb-margin-bottom);
-    padding: var(--breadcrumb-padding-y) var(--breadcrumb-padding-x);
+    margin-bottom: var(--sgds-breadcrumb-margin-bottom);
+    padding: var(--sgds-breadcrumb-padding-y) var(--sgds-breadcrumb-padding-x);
   }
 

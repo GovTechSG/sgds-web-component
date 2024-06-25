@@ -4,23 +4,23 @@
 
 :host {
   /* NEW in 2.0 */
-  --card-background: var(--sgds-body-bg);
-  --card-height: ;
-  --card-border-width: var(--sgds-border-width);
-  --card-border-color: var(--sgds-border-color-translucent);
-  --card-border-radius: var(--sgds-border-radius);
-  --card-box-shadow: ;
-  --card-inner-border-radius: calc(var(--sgds-border-radius) - var(--sgds-border-width));
+  --sgds-card-background: var(--sgds-body-bg);
+  --sgds-card-height: ;
+  --sgds-card-border-width: var(--sgds-border-width);
+  --sgds-card-border-color: var(--sgds-border-color-translucent);
+  --sgds-card-border-radius: var(--sgds-border-radius);
+  --sgds-card-box-shadow: ;
+  --sgds-card-inner-border-radius: calc(var(--sgds-border-radius) - var(--sgds-border-width));
 
-  --card-body-color: ;
-  --card-body-spacer-y: 1.5rem;
-  --card-body-spacer-x: 1.5rem;
+  --sgds-card-body-color: ;
+  --sgds-card-body-spacer-y: 1.5rem;
+  --sgds-card-body-spacer-x: 1.5rem;
 
-  --card-title-spacer-y: 0.5rem;
-  --card-title-color: ;
+  --sgds-card-title-spacer-y: 0.5rem;
+  --sgds-card-title-color: ;
 
   /* Currently applies to action card only */
-  --card-subtitle-color: ;
+  --sgds-card-subtitle-color: ;
 }
 
 h5,
@@ -41,30 +41,30 @@ p {
 .card {
   word-wrap: break-word;
   background-clip: border-box;
-  background-color: var(--card-background);
-  border: var(--card-border-width) solid var(--card-border-color);
-  border-radius: var(--card-border-radius);
+  background-color: var(--sgds-card-background);
+  border: var(--sgds-card-border-width) solid var(--sgds-card-border-color);
+  border-radius: var(--sgds-card-border-radius);
   color: var(--sgds-body-color);
   display: flex;
   flex-direction: column;
-  height: var(--card-height);
+  height: var(--sgds-card-height);
   min-width: 0;
   position: relative;
-  box-shadow: var(--card-box-shadow);
+  box-shadow: var(--sgds-card-box-shadow);
 }
 
 .card-body {
-  color: var(--card-body-color);
+  color: var(--sgds-card-body-color);
   flex: 1 1 auto;
-  padding: var(--card-body-spacer-y) var(--card-body-spacer-x);
+  padding: var(--sgds-card-body-spacer-y) var(--sgds-card-body-spacer-x);
 }
 .card-title {
-  color: var(--card-title-color);
-  margin-bottom: var(--card-title-spacer-y);
+  color: var(--sgds-card-title-color);
+  margin-bottom: var(--sgds-card-title-spacer-y);
 }
 /* .card-subtitle {
-  color: var(--card-subtitle-color);
-  margin-top: calc(var(--card-title-spacer-y) * -0.5);
+  color: var(--sgds-card-subtitle-color);
+  margin-top: calc(var(--sgds-card-title-spacer-y) * -0.5);
 } */
 .card-subtitle,
 .card-text:last-child {
@@ -72,12 +72,12 @@ p {
 }
 slot[name="card-link"]::slotted(*) {
   display: flex;
-  gap: var(--card-body-spacer-x);
+  gap: var(--sgds-card-body-spacer-x);
 }
 
 slot[name="card-image"]::slotted(img) {
-  border-top-left-radius: var(--card-inner-border-radius);
-  border-top-right-radius: var(--card-inner-border-radius);
+  border-top-left-radius: var(--sgds-card-inner-border-radius);
+  border-top-right-radius: var(--sgds-card-inner-border-radius);
 }
 
 slot[name="card-link"]::slotted(*) {

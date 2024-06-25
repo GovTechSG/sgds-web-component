@@ -1,7 +1,10 @@
 @import "../../styles/feedback";
 
 :host {
-  --input-border-radius: var(--sgds-border-radius, 0.3215rem);
+  --sgds-input-border-radius: var(--sgds-border-radius, 0.3215rem);
+  --sgds-input-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 2px) var(--sgds-info-300, #7FB5FF);
+
+  --sgds-invalid-feedback-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 2px) var(--sgds-danger-300, #FF9782);
 }
 .form-label {
   font-weight: 700;
@@ -24,7 +27,7 @@
   background-clip: padding-box;
   background-color: var(--sgds-body-bg);
   border: 1px solid var(--sgds-border-color);
-  border-radius: var(--input-border-radius);
+  border-radius: var(--sgds-input-border-radius);
   color: var(--sgds-body-color);
   font-weight: 400;
   line-height: 2;
@@ -47,7 +50,8 @@
 .form-control:focus {
   background-color: var(--sgds-body-bg);
   border: 1px solid var(--sgds-link, #0049DC);
-  box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 2px) var(--sgds-blue-300, #7FB5FF);  color: var(--sgds-body-color);
+  box-shadow: var(--sgds-input-focus-box-shadow);
+  color: var(--sgds-body-color);
   outline: 0;
 }
 .form-control::-webkit-date-and-time-value {
@@ -202,6 +206,7 @@
   background-size: calc(1em + 0.4375rem) calc(1em + 0.4375rem);
   border-color: var(--sgds-form-invalid-border-color);
   padding-right: calc(2em + 0.875rem);
+  box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 2px) var(--sgds-red-300, #FF9782);
 }
 .form-control.is-invalid:focus {
   border-color: var(--sgds-form-invalid-border-color);
