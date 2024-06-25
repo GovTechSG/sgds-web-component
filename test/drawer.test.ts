@@ -1,9 +1,9 @@
+import "./sgds-web-component";
 import { fixture, expect, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
 import { SgdsDrawer } from "../src/components";
-import "../src/index";
 
 describe("<sgds-drawer>", () => {
   it("should be visible with the open attribute", async () => {

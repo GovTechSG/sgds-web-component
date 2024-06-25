@@ -1,6 +1,6 @@
+import "./sgds-web-component";
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from "@open-wc/testing";
-import { SgdsTabGroup, SgdsTabPanel, SgdsTab } from "../src/components";
-import "../src/index";
+import type { SgdsTabGroup, SgdsTabPanel, SgdsTab } from "../src/components";
 import { clickOnElement } from "../src/utils/test";
 import { sendKeys } from "@web/test-runner-commands";
 

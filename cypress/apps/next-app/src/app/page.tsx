@@ -1,5 +1,5 @@
 "use client";
-// import "@webcomponents/scoped-custom-element-registry"
+import "@webcomponents/scoped-custom-element-registry"
 import Image from "next/image";
 import styles from "./page.module.css";
 import { Accordion } from "./components/Accordion";

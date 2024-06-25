@@ -1,6 +1,6 @@
+import "./sgds-web-component";
 import { assert, expect, fixture, html } from "@open-wc/testing";
-import { SgdsTable } from "../src/components";
-import "../src/index";
+import type { SgdsTable } from "../src/components";
 
 describe("Table", () => {
   it("should be able to sort the table data when a header is clicked", async () => {

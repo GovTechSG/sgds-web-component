@@ -1,7 +1,7 @@
+import "./sgds-web-component";
 import { assert, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import { SgdsBreadcrumb, SgdsBreadcrumbItem } from "../src/components";
-import "../src/index";
 
 describe("sgds-breadcrumb", () => {
   it("renders with default values", async () => {

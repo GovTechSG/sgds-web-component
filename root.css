@@ -109,7 +109,7 @@
   --sgds-dark-border-subtle: #939393;
   --sgds-white-rgb: 255, 255, 255;
   --sgds-black-rgb: 0, 0, 0;
-  --sgds-font-sans-serif: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+  --sgds-font-sans-serif: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans",
     "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --sgds-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --sgds-gradient: linear-gradient(180deg, hsla(0, 0%, 100%, 0.15), hsla(0, 0%, 100%, 0));
@@ -132,8 +132,8 @@
   --sgds-tertiary-bg: #eaeaea;
   --sgds-tertiary-bg-rgb: 234, 234, 234;
   --sgds-heading-color: ;
-  --sgds-link-color: #0049dc;
-  --sgds-link-color-rgb: 0, 73, 220;
+  --sgds-link: #0049dc;
+  --sgds-link-rgb: 0, 73, 220;
   --sgds-link-decoration: underline;
   --sgds-link-hover-color: #003ab0;
   --sgds-link-hover-color-rgb: 0, 58, 176;
@@ -162,6 +162,10 @@
   --sgds-form-valid-border-color: #006b00;
   --sgds-form-invalid-color: #b90000;
   --sgds-form-invalid-border-color: #b90000;
+
+  --sgds-input-btn-focus-width: 0.13rem;
+  --sgds-color-disabled: #939393;
+  --sgds-disabled-opacity: 0.5;
 }
 /* [data-bs-theme="dark"] {
   --sgds-body-color: #d2d2d2;
@@ -203,9 +207,9 @@
   --sgds-light-border-subtle: #757575;
   --sgds-dark-border-subtle: #757575;
   --sgds-heading-color: inherit;
-  --sgds-link-color: #5592ff;
+  --sgds-link: #5592ff;
   --sgds-link-hover-color: #7fb5ff;
-  --sgds-link-color-rgb: 85, 146, 255;
+  --sgds-link-rgb: 85, 146, 255;
   --sgds-link-hover-color-rgb: 127, 181, 255;
   --sgds-code-color: #e685b5;
   --sgds-highlight-color: #d2d2d2;

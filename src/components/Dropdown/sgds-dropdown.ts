@@ -1,10 +1,10 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 import { html } from "lit";
 import { property, queryAsync } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownListElement } from "../../base/dropdown-list-element";
 import genId from "../../utils/generateId";
-import { SgdsButton, type ButtonVariant } from "../Button/sgds-button";
+import { SgdsButton } from "../Button/sgds-button";
 import dropdownStyle from "./dropdown.css";
 export type DropDirection = "left" | "right" | "up" | "down";
 export type DropdownButtonVariant =
@@ -79,12 +79,12 @@ export class SgdsDropdown extends ScopedElementsMixin(DropdownListElement) {
     }
   }
   render() {
-    const variant: ButtonVariant = `outline-${this.variant}`;
     return html`
       <div>
         <sgds-button
+          outlined
           role="button"
-          variant=${variant}
+          variant=${this.variant}
           ?disabled=${this.disabled}
           aria-expanded="${this.menuIsOpen}"
           aria-haspopup="menu"

@@ -1,5 +1,5 @@
-import { SgdsMasthead } from "../src/components";
-import "../src/index";
+import "./sgds-web-component";
+import type { SgdsMasthead } from "../src/components";
 import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 

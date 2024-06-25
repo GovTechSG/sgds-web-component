@@ -1,4 +1,4 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 import { format, parse } from "date-fns";
 import { html } from "lit";
 import { property, query, queryAsync, state } from "lit/decorators.js";

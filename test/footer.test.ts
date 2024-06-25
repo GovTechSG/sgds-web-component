@@ -1,8 +1,8 @@
+import "./sgds-web-component";
 import { ColumnLinks } from "../src/components/Footer/sgds-footer";
 import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
-import { SgdsFooter } from "../src/components";
-import "../src/index";
+import type { SgdsFooter } from "../src/components";
 
 describe("button-element", () => {
   it("renders with default values", async () => {

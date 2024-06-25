@@ -53,6 +53,9 @@ const SIZES = {
  * @cssproperty --mainnav-brand-color - color of mainnav brand
  * @cssproperty --mainnav-brand-hover-color - hover color of mainnav brand
  * @cssproperty --mainnav-gutter - the gap between the all children of mainnav
+ * @cssproperty --mainnav-theme-color - The theme color of mainnav affecting the hover and active states of items in the mainnav. It sets the default value for --mainnav-dropdown-theme-color and --mainnav-item-theme-color
+ * @cssproperty --mainnav-color - The text color of mainnav. It sets the default value for --mainnav-dropdown-color and --mainnav-item-color
+ * @cssproperty --mainnav-disabled-opacity - The opacity of mainnav in disabled state. It sets the default value for --mainnav-dropdown-disabled-opacity and --mainnav-item-disabled-opacity
  */
 export class SgdsMainnav extends SgdsElement {
   static styles = [...SgdsElement.styles, mainnavStyle];

@@ -1,5 +1,5 @@
+import "./sgds-web-component";
 import { SgdsDropdown, SgdsDropdownItem, SgdsButton } from "../src/components";
-import "../src/index";
 import { fixture, assert, expect, waitUntil } from "@open-wc/testing";
 import sinon from "sinon";
 import { html } from "lit";
@@ -174,10 +174,11 @@ describe("sgds-dropdown", () => {
       el,
       `  <div>
          <sgds-button
+           outlined
            role="button"
            aria-expanded="false"
            aria-haspopup="menu"
-         variant="outline-secondary"
+           variant="secondary"
          >
          <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -269,9 +270,9 @@ describe("sgds-dropdown", () => {
     const el = await fixture<SgdsDropdown>(html`<sgds-dropdown togglerText="Hello World"></sgds-dropdown>`);
     expect(el.shadowRoot?.querySelector("sgds-button")?.textContent).to.contain("Hello World");
   });
-  it("variant prop is forwarded to text content of sgds-button element", async () => {
+  it("variant prop is forwarded to variant prop of sgds-button element", async () => {
     const el = await fixture<SgdsDropdown>(html`<sgds-dropdown variant="primary"></sgds-dropdown>`);
-    expect(el.shadowRoot?.querySelector("sgds-button")).to.have.attribute("variant", "outline-primary");
+    expect(el.shadowRoot?.querySelector("sgds-button")).to.have.attribute("variant", "primary");
   });
   it("menuIsOpen prop opens menu on first load", async () => {
     const el = await fixture<SgdsDropdown>(html`<sgds-dropdown menuIsOpen></sgds-dropdown>`);
@@ -418,11 +419,12 @@ describe("sgds-dropdown", () => {
     expect(el.shadowRoot?.querySelector("ul.dropdown-menu")).not.to.have.class("show");
     expect(el.menuIsOpen).to.be.false;
   });
+  type close = "default" | "outside" | "inside";
   const closeValues = ["default", "outside", "inside"];
   closeValues.forEach(closeVal => {
     it(`dropdown menu always closes when click on button regardless of prop close value = ${closeVal}`, async () => {
       const el = await fixture<SgdsDropdown>(
-        html`<sgds-dropdown menuIsOpen close=${closeVal}>
+        html`<sgds-dropdown menuIsOpen close=${closeVal as close}>
           <sgds-dropdown-item>slot 1</sgds-dropdown-item>
           <sgds-dropdown-item>slot 2</sgds-dropdown-item>
         </sgds-dropdown> `

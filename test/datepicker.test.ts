@@ -1,3 +1,4 @@
+import "./sgds-web-component";
 import { elementUpdated, expect, fixture, html, waitUntil, fixtureCleanup } from "@open-wc/testing";
 import DatepickerCalendar from "../src/components/Datepicker/datepicker-calendar";
 import DatepickerHeader, { MONTH_LABELS } from "../src/components/Datepicker/datepicker-header";
@@ -5,7 +6,6 @@ import DatepickerInput from "../src/components/Datepicker/datepicker-input";
 import { SgdsDatepicker } from "../src/components";
 import { setTimeToNoon } from "../src/utils/time";
 import { sendKeys } from "@web/test-runner-commands";
-import "../src/index";
 import sinon, { type SinonFakeTimers } from "sinon";
 
 customElements.define("sgds-datepicker-header", DatepickerHeader);

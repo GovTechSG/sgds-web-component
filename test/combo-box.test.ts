@@ -1,8 +1,8 @@
+import "./sgds-web-component";
 import { html } from "lit";
 import { expect, fixture, waitUntil } from "@open-wc/testing";
 import sinon from "sinon";
-import { SgdsDropdownItem, SgdsInput, SgdsComboBox } from "../src/components";
-import "../src/index";
+import type { SgdsDropdownItem, SgdsInput, SgdsComboBox } from "../src/components";
 import { sendKeys } from "@web/test-runner-commands";
 
 describe("<sgds-combo-box>", () => {

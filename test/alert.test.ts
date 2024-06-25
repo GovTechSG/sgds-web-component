@@ -1,8 +1,8 @@
+import "./sgds-web-component";
 import { assert, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
-import { SgdsAlert } from "../src/components";
-import "../src/index";
+import type { SgdsAlert } from "../src/components";
 
 describe("<sgds-alert-heading>", () => {
   it("the default tag is h4", async () => {

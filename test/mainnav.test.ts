@@ -1,7 +1,7 @@
+import "./sgds-web-component";
 import { aTimeout, assert, expect, fixture, fixtureCleanup, nextFrame } from "@open-wc/testing";
 import { html } from "lit";
 import { SgdsMainnav, SgdsMainnavDropdown, SgdsMainnavItem, type MainnavExpandSize } from "../src/components";
-import "../src/index";
 
 describe("sgds-mainnav", () => {
   afterEach(() => fixtureCleanup());

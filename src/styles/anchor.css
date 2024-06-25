@@ -1,5 +1,5 @@
 a {
-  color: rgba(var(--sgds-link-color-rgb), var(--sgds-link-opacity, 1));
+  color: rgba(var(--sgds-link-rgb), var(--sgds-link-opacity, 1));
   text-decoration: underline;
 }
 a {

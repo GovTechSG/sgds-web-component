@@ -46,9 +46,8 @@
 }
 .form-control:focus {
   background-color: var(--sgds-body-bg);
-  border-color: #90b5ff;
-  box-shadow: 0 0 0 0.25rem rgba(89, 66, 219, 0.25);
-  color: var(--sgds-body-color);
+  border: 1px solid var(--sgds-link, #0049DC);
+  box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 2px) var(--sgds-blue-300, #7FB5FF);  color: var(--sgds-body-color);
   outline: 0;
 }
 .form-control::-webkit-date-and-time-value {
