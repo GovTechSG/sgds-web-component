@@ -281,16 +281,19 @@ class Alert extends LitElement {
 Example with kebab case for properties with 2 or more words
 
 ```css
-  --sidenav-item-button-border-left-width;
+  --sidenav-item-btn-border-left-width;
 ```
 
 Example with element state
 
 ```css
-  --sidenav-item-button-hover-color;
-  --sidenav-item-button-active-bg;
+  --sidenav-item-btn-hover-color;
+  --sidenav-item-btn-active-bg;
 ```
 
+2. use of shortform for long words
+- background --> bg
+- button --> btn
 ---
 
 ---

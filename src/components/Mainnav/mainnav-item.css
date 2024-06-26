@@ -1,8 +1,5 @@
 :host {
-  --sgds-mainnav-item-color: var(--sgds-mainnav-color);
-  --sgds-mainnav-item-theme-color: var(--sgds-mainnav-theme-color, var(--sgds-primary));
   --sgds-mainnav-item-border-bottom-width: 0.125rem;
-  --sgds-mainnav-item-disabled-opacity: var(--sgds-mainnav-disabled-opacity, 0.5);
 }
 li {
   height: 100%;
@@ -10,7 +7,7 @@ li {
 a.nav-link {
   display: flex;
   cursor: pointer;
-  color: var(--sgds-mainnav-item-color);
+  color: var(--sgds-mainnav-color);
   border-bottom: var(--sgds-mainnav-item-border-bottom-width) solid transparent;
   min-height: 100%;
   align-items: center;
@@ -18,8 +15,8 @@ a.nav-link {
   text-decoration: none;
   &.active,
   &:hover {
-    color: var(--sgds-mainnav-item-theme-color);
-    border-color: var(--sgds-mainnav-item-theme-color);
+    color: var(--sgds-mainnav-theme-color);
+    border-color: var(--sgds-mainnav-theme-color);
   }
   &:focus-visible {
     box-shadow: 0 0 0 0.25rem rgba(89, 66, 219, 0.25);
@@ -30,5 +27,5 @@ a.nav-link {
 .nav-link.disabled {
   cursor: default;
   pointer-events: none;
-  opacity: var(--sgds-mainnav-item-disabled-opacity);
+  opacity: var(--sgds-mainnav-disabled-opacity);
 }
