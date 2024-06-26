@@ -1,3 +1,17 @@
+## v1.3.0 (2024-06-26)
+
+### Feat
+
+- **accordion**: allow accordion active color customisation through n… (#201)
+- **accordion**: allow accordion active color customisation through new cssprop
+
+### Fix
+
+- *****: fix git command instead of npm push (#198)
+- *****: fix git command instead of npm push
+
+## v1.2.3 (2024-05-31)
+
 ## v1.2.2 (2024-05-28)
 
 ### Fix
