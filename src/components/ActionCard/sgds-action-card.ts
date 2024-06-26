@@ -26,21 +26,21 @@ import actionCardStyles from "./action-card.css";
  * @csspart title - The action card title
  * @csspart text - The action card text
  *
- * @cssprop --action-card-border-active-box-shadow - The box-shadow of action card border when it is in active state
- * @cssprop --action-card-transition-duration - The transition duration to active or hover state. Defaults to 0.3s
- * @cssprop --card-background - The background color of the card
- * @cssprop --card-height - The height of the card. By default, height of card depends on the size of its children
- * @cssprop --card-border-width - The border width of card
- * @cssprop --card-border-color - The border color of card
- * @cssprop --card-border-radius - The border radius of card
- * @cssprop --card-box-shadow - The box-shadow of card
- * @cssprop --card-inner-border-radius - The inner border radius of card. Useful in cases where card image is applied to prevent image border from exceeding the outer borders of the card
- * @cssprop --card-body-color - The text color of the items in card body. This includes title, subtitle and excludes link.
- * @cssprop --card-body-spacer-y - The y-axis spacer of card body
- * @cssprop --card-body-spacer-x - The x-axis spacer of card body.
- * @cssprop --card-title-color - The text color of card title
- * @cssprop --card-title-spacer-y - The y-axis spacer of card title.
- * @cssprop --card-subtitle-color - The text color of card subtitle
+ * @cssprop --sgds-action-card-active-border-box-shadow - The box-shadow of action card border when it is in active state
+ * @cssprop --sgds-action-card-transition-duration - The transition duration to active or hover state. Defaults to 0.3s
+ * @cssprop --sgds-card-bg - The background color of the card
+ * @cssprop --sgds-card-height - The height of the card. By default, height of card depends on the size of its children
+ * @cssprop --sgds-card-border-width - The border width of card
+ * @cssprop --sgds-card-border-color - The border color of card
+ * @cssprop --sgds-card-border-radius - The border radius of card
+ * @cssprop --sgds-card-box-shadow - The box-shadow of card
+ * @cssprop --sgds-card-inner-border-radius - The inner border radius of card. Useful in cases where card image is applied to prevent image border from exceeding the outer borders of the card
+ * @cssprop --sgds-card-body-color - The text color of the items in card body. This includes title, subtitle and excludes link.
+ * @cssprop --sgds-card-body-spacer-y - The y-axis spacer of card body
+ * @cssprop --sgds-card-body-spacer-x - The x-axis spacer of card body.
+ * @cssprop --sgds-card-title-color - The text color of card title
+ * @cssprop --sgds-card-title-spacer-y - The y-axis spacer of card title.
+ * @cssprop --sgds-card-subtitle-color - The text color of card subtitle
  */
 export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
   static styles = [...CardElement.styles, actionCardStyles];

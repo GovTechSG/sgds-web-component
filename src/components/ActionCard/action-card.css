@@ -1,9 +1,9 @@
 :host {
   /* NEW in 2.0 */
-  --sgds-action-card-border-active-box-shadow: var(--sgds-box-shadow), inset 0 0 0 2.1px var(--sgds-link-hover-color);
+  --sgds-action-card-active-border-box-shadow: var(--sgds-box-shadow), inset 0 0 0 2.1px var(--sgds-link-hover-color);
   --sgds-action-card-transition-duration: 0.3s;
   /* override the default value from card */
-  --card-title-spacer-y: 0;
+  --sgds-card-title-spacer-y: 0;
 }
 
 .sgds.card[variant*="card-action"] {
@@ -23,7 +23,7 @@ slot[name="icon"]::slotted(*){
 .sgds.card[variant*="card-action"].is-active,
 .sgds.card[variant*="card-action"]:hover {
   border-color: transparent;
-  box-shadow: var(--sgds-action-card-border-active-box-shadow);
+  box-shadow: var(--sgds-action-card-active-border-box-shadow);
 }
 .sgds.card[variant*="card-action"] .card-subtitle {
   align-items: center;

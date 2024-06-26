@@ -12,13 +12,13 @@ import breadcrumbStyle from "./breadcrumb.css";
  *
  * @csspart base - The nav element wrapper of `SgdsBreadcrumb`
  *
- * @cssprop --breadcrumb-padding-x - The x-axis padding of the breadcrumb
- * @cssprop --breadcrumb-padding-y - The y-axis padding of the breadcrumb
- * @cssprop --breadcrumb-margin-bottom - The margin bottom of breadcrumb
- * @cssprop --breadcrumb-background - The background color of breadcrumb
- * @cssprop --breadcrumb-border-radius - The border radius of breadcrumb
- * @cssprop --breadcrumb-font-size - The font size of breadcrumb. Affects the font size of all the breadcrumb items and separators
- * @cssprop --breadcrumb-separator-color - The color of breadcrumb's separator
+ * @cssprop --sgds-breadcrumb-padding-x - The x-axis padding of the breadcrumb
+ * @cssprop --sgds-breadcrumb-padding-y - The y-axis padding of the breadcrumb
+ * @cssprop --sgds-breadcrumb-margin-bottom - The margin bottom of breadcrumb
+ * @cssprop --sgds-breadcrumb-bg - The background color of breadcrumb
+ * @cssprop --sgds-breadcrumb-border-radius - The border radius of breadcrumb
+ * @cssprop --sgds-breadcrumb-font-size - The font size of breadcrumb. Affects the font size of all the breadcrumb items and separators
+ * @cssprop --sgds-breadcrumb-separator-color - The color of breadcrumb's separator
  *
  */
 export class SgdsBreadcrumb extends SgdsElement {

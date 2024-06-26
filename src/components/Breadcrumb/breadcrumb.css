@@ -1,4 +1,4 @@
- :host{
+:host {
   /* NEW in V2.0 */
   --sgds-breadcrumb-padding-x: 0;
   --sgds-breadcrumb-padding-y: 0;
@@ -7,16 +7,14 @@
   --sgds-breadcrumb-border-radius: ;
   --sgds-breadcrumb-font-size: ;
   --sgds-breadcrumb-separator-color: ;
+}
 
- }
- 
-  .breadcrumb {
-    background-color: var(--sgds-breadcrumb-bg);
-    border-radius: var(--sgds-breadcrumb-border-radius);
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    margin-bottom: var(--sgds-breadcrumb-margin-bottom);
-    padding: var(--sgds-breadcrumb-padding-y) var(--sgds-breadcrumb-padding-x);
-  }
-
+.breadcrumb {
+  background-color: var(--sgds-breadcrumb-bg);
+  border-radius: var(--sgds-breadcrumb-border-radius);
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-bottom: var(--sgds-breadcrumb-margin-bottom);
+  padding: var(--sgds-breadcrumb-padding-y) var(--sgds-breadcrumb-padding-x);
+}

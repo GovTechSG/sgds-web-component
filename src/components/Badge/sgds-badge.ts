@@ -9,15 +9,15 @@ export type BadgeVariant = "primary" | "secondary" | "success" | "danger" | "war
  * @summary Badges can be used to highlight important bits of information such as labels, notifications & status.
  * @slot default - slot for badge
  *
- * @cssprop --badge-padding-x - The x-axis padding of badge
- * @cssprop --badge-padding-y - The y-axis padding of badge
- * @cssprop --badge-font-size - The font size of badge
- * @cssprop --badge-font-weight - The font weight of badge
- * @cssprop --badge-color - The text color of badge
- * @cssprop --badge-border-radius - The border radius of badge
- * @cssprop --badge-line-height - The line height of badge
- * @cssprop --badge-background-color - The background color of the badge. Changing `variant` and `outlined` prop updates this css property
- * @cssprop --badge-border-color - The border color of the badge. Changing `variant` and `outlined` prop updates this css property
+ * @cssprop --sgds-badge-padding-x - The x-axis padding of badge
+ * @cssprop --sgds-badge-padding-y - The y-axis padding of badge
+ * @cssprop --sgds-badge-font-size - The font size of badge
+ * @cssprop --sgds-badge-font-weight - The font weight of badge
+ * @cssprop --sgds-badge-color - The text color of badge
+ * @cssprop --sgds-badge-border-radius - The border radius of badge
+ * @cssprop --sgds-badge-line-height - The line height of badge
+ * @cssprop --sgds-badge-bg - The background color of the badge. Changing `variant` and `outlined` prop updates this css property
+ * @cssprop --sgds-badge-border-color - The border color of the badge. Changing `variant` and `outlined` prop updates this css property
  *
  */
 export class SgdsBadge extends SgdsElement {

@@ -14,9 +14,9 @@ import breadcrumbItemStyle from "./breadcrumb-item.css";
  * @csspart base - The base wrapper of breadcrumb item which is a HTMLListElement.
  * @csspart label -The label of the breadcrumb item. It is either a span or anchor element depending on href attribute
  *
- * @cssprop --breadcrumb-item-padding-x - The x-axis padding of breadcrumb item
- * @cssprop --breadcrumb-item-active-color - The text color of breadcrumb item when it is active
- * @cssprop --breadcrumb-item-active-font-weight - The font weight of breadcrumb item when it is active
+ * @cssprop --sgds-breadcrumb-item-padding-x - The x-axis padding of breadcrumb item
+ * @cssprop --sgds-breadcrumb-item-active-color - The text color of breadcrumb item when it is active
+ * @cssprop --sgds-breadcrumb-item-active-font-weight - The font weight of breadcrumb item when it is active
  *
  */
 export class SgdsBreadcrumbItem extends SgdsElement {

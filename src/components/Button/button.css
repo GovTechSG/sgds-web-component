@@ -20,7 +20,7 @@
   --sgds-btn-active-bg: ;
   --sgds-btn-active-border-color: ;
   --sgds-btn-focus-box-shadow-color: var(--sgds-primary-300);
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-btn-focus-box-shadow-color);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width, 0.13rem) var(--sgds-btn-focus-box-shadow-color);
 
   display: inline-block;
 }
@@ -39,7 +39,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-primary-700);
   --sgds-btn-active-border-color: var(--sgds-primary-filled);
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-primary-300);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-primary-300);
   --sgds-btn-disabled-color: var(--sgds-white);
 }
 :host([variant="secondary"]) {
@@ -49,11 +49,10 @@ button:focus:not(:focus-visible) {
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-secondary-700);
   --sgds-btn-hover-border-color: var(--sgds-secondary-filled);
-  
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-secondary-700);
   --sgds-btn-active-border-color: var(--sgds-secondary-filled);
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-secondary-300);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-secondary-300);
   --sgds-btn-disabled-color: var(--sgds-white);
 }
 :host([variant="warning"]) {
@@ -66,7 +65,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-warning-700);
   --sgds-btn-active-border-color: var(--sgds-warning-filled);
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-warning-300);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-warning-300);
   --sgds-btn-disabled-color: var(--sgds-white);
 }
 :host([variant="danger"]) {
@@ -79,7 +78,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-danger-700);
   --sgds-btn-active-border-color: var(--sgds-danger-filled);
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-danger-300);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-danger-300);
   --sgds-btn-disabled-color: var(--sgds-white);
 }
 :host([variant="success"]) {
@@ -92,7 +91,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-success-700);
   --sgds-btn-active-border-color: var(--sgds-success-filled);
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-success-300);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-success-300);
   --sgds-btn-disabled-color: var(--sgds-white);
 }
 :host([variant="info"]) {
@@ -105,7 +104,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-info-700);
   --sgds-btn-active-border-color: var(--sgds-info-filled);
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-info-300);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-info-300);
   --sgds-btn-disabled-color: var(--sgds-white);
 }
 :host([variant="light"]) {
@@ -118,7 +117,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-gray-200);
   --sgds-btn-active-border-color: var(--sgds-gray-200);
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-gray-500);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-gray-500);
   --sgds-btn-disabled-color: var(--sgds-dark);
 }
 :host([variant="dark"]), :host([variant="dark"][outlined]) {
@@ -131,7 +130,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-gray-700);
   --sgds-btn-active-border-color: var(--sgds-gray-700);
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-gray-500);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-gray-500);
   --sgds-btn-disabled-color: var(--sgds-white);
 }
 :host([variant="link"]) {
@@ -144,7 +143,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-active-color: var(--sgds-info-700);
   --sgds-btn-active-bg: transparent;
   --sgds-btn-active-border-color: transparent;
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-info-300);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-info-300);
   --sgds-btn-disabled-color: var(--sgds-color-disabled);
 }
 :host([variant="primary"][outlined]) {
@@ -157,7 +156,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-primary-filled);
   --sgds-btn-active-border-color: var(--sgds-primary-filled);
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-primary-300);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-primary-300);
   --sgds-btn-disabled-color: var(--sgds-btn-color);
 }
 :host([variant="secondary"][outlined]) {
@@ -170,7 +169,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-secondary-filled);
   --sgds-btn-active-border-color: var(--sgds-secondary-filled);
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-secondary-300);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-secondary-300);
   --sgds-btn-disabled-color: var(--sgds-btn-color);
 }
 :host([variant="warning"][outlined]) {
@@ -183,7 +182,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-warning-filled);
   --sgds-btn-active-border-color: var(--sgds-warning-filled);
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-warning-300);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-warning-300);
   --sgds-btn-disabled-color: var(--sgds-btn-color);
 }
 :host([variant="danger"][outlined]) {
@@ -196,7 +195,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-danger-filled);
   --sgds-btn-active-border-color: var(--sgds-danger-filled);
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-danger-300);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-danger-300);
   --sgds-btn-disabled-color: var(--sgds-btn-color);
 }
 :host([variant="success"][outlined]) {
@@ -209,7 +208,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-success-filled);
   --sgds-btn-active-border-color: var(--sgds-success-filled);
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-success-300);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-success-300);
   --sgds-btn-disabled-color: var(--sgds-btn-color);
 }
 :host([variant="info"][outlined]) {
@@ -222,7 +221,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-info-filled);
   --sgds-btn-active-border-color: var(--sgds-info-filled);
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-info-300);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-info-300);
   --sgds-btn-disabled-color: var(--sgds-btn-color);
 }
 :host([variant="light"][outlined]) {
@@ -235,8 +234,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-active-color: var(--sgds-light-text-emphasis);
   --sgds-btn-active-bg: var(--sgds-gray-200);
   --sgds-btn-active-border-color: var(--sgds-light-border-subtle);
-  
-  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-gray-500);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-gray-500);
   --sgds-btn-disabled-color: var(--sgds-btn-color);
 }
 

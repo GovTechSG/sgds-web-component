@@ -163,7 +163,7 @@
   --sgds-form-invalid-color: #b90000;
   --sgds-form-invalid-border-color: #b90000;
 
-  --sgds-input-btn-focus-width: 0.13rem;
+  --sgds-focus-width: 0.13rem;
   --sgds-color-disabled: #939393;
   --sgds-disabled-opacity: 0.5;
 }

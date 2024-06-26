@@ -155,7 +155,7 @@ export class SgdsAccordionItem extends SgdsElement {
       >
         <button
           class=${classMap({
-            "accordion-button": true,
+            "accordion-btn": true,
             collapsed: !this.open
           })}
           part="header"
