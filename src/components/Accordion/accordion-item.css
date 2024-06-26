@@ -6,23 +6,23 @@
     --sgds-accordion-item-font-weight: 700;
     --sgds-accordion-item-line-height: 2rem;
     /** NEW in 2.0.0 */
-    --sgds-accordion-item-button-color: var(--sgds-body-color);
-    --sgds-accordion-item-button-border-radius: calc(var(--sgds-border-radius) - var(--sgds-border-width));
-    --sgds-accordion-item-button-bg: var(--sgds-accordion-bg);
-    --sgds-accordion-item-button-icon: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='var(--sgds-body-color)'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
-    --sgds-accordion-item-button-icon-width: 1.25rem;
-    --sgds-accordion-item-button-icon-transform: rotate(-180deg);
-    --sgds-accordion-item-button-icon-transition: transform 0.2s ease-in-out;
-    --sgds-accordion-item-button-focus-border-color: #90b5ff;
-    --sgds-accordion-item-button-focus-box-shadow: 0 0 0 0.25rem rgba(90, 66, 192, 0.25);
+    --sgds-accordion-item-btn-color: var(--sgds-body-color);
+    --sgds-accordion-item-btn-border-radius: calc(var(--sgds-border-radius) - var(--sgds-border-width));
+    --sgds-accordion-item-btn-bg: var(--sgds-accordion-bg);
+    --sgds-accordion-item-btn-icon: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='var(--sgds-body-color)'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    --sgds-accordion-item-btn-icon-width: 1.25rem;
+    --sgds-accordion-item-btn-icon-transform: rotate(-180deg);
+    --sgds-accordion-item-btn-icon-transition: transform 0.2s ease-in-out;
+    --sgds-accordion-item-btn-focus-border-color: #90b5ff;
+    --sgds-accordion-item-btn-focus-box-shadow: 0 0 0 0.25rem rgba(90, 66, 192, 0.25);
     --sgds-accordion-item-content-color: var(--sgds-body-color);
   }
-  .accordion-button {
+  .accordion-btn {
     align-items: center;
-    background-color: var(--sgds-accordion-item-button-bg);
+    background-color: var(--sgds-accordion-item-btn-bg);
     border: 0;
     border-radius: 0;
-    color: var(--sgds-accordion-item-button-color);
+    color: var(--sgds-accordion-item-btn-color);
     display: flex;
     font-size: 1rem;
     overflow-anchor: none;
@@ -32,44 +32,44 @@
     transition: var(--sgds-accordion-transition);
     width: 100%;
   }
-  .accordion-button.collapsed {
-    border-radius: var(--sgds-accordion-item-button-border-radius);
+  .accordion-btn.collapsed {
+    border-radius: var(--sgds-accordion-item-btn-border-radius);
   }
   @media (prefers-reduced-motion: reduce) {
-    .accordion-button {
+    .accordion-btn {
       transition: none;
     }
   }
-  .accordion-button:not(.collapsed) {
+  .accordion-btn:not(.collapsed) {
     background-color: var(--sgds-accordion-active-bg);
     box-shadow: inset 0 calc(var(--sgds-accordion-border-width) * -1) 0 var(--sgds-accordion-border-color);
     color: var(--sgds-accordion-active-color);
   }
-  .accordion-button:not(.collapsed):after {
-    transform: var(--sgds-accordion-item-button-icon-transform);
+  .accordion-btn:not(.collapsed):after {
+    transform: var(--sgds-accordion-item-btn-icon-transform);
   }
-  .accordion-button:after {
-    background-image: var(--sgds-accordion-item-button-icon);
+  .accordion-btn:after {
+    background-image: var(--sgds-accordion-item-btn-icon);
     background-repeat: no-repeat;
-    background-size: var(--sgds-accordion-item-button-icon-width);
+    background-size: var(--sgds-accordion-item-btn-icon-width);
     content: "";
     flex-shrink: 0;
-    height: var(--sgds-accordion-item-button-icon-width);
+    height: var(--sgds-accordion-item-btn-icon-width);
     margin-left: auto;
-    transition: var(--sgds-accordion-item-button-icon-transition);
-    width: var(--sgds-accordion-item-button-icon-width);
+    transition: var(--sgds-accordion-item-btn-icon-transition);
+    width: var(--sgds-accordion-item-btn-icon-width);
   }
   @media (prefers-reduced-motion: reduce) {
-    .accordion-button:after {
+    .accordion-btn:after {
       transition: none;
     }
   }
-  .accordion-button:hover {
+  .accordion-btn:hover {
     z-index: 2;
   }
-  .accordion-button:focus {
-    border-color: var(--sgds-accordion-item-button-focus-border-color);
-    box-shadow: var(--sgds-accordion-item-button-focus-box-shadow);
+  .accordion-btn:focus {
+    border-color: var(--sgds-accordion-item-btn-focus-border-color);
+    box-shadow: var(--sgds-accordion-item-btn-focus-box-shadow);
     outline: 0;
     z-index: 3;
   }
@@ -93,13 +93,13 @@
   .accordion-flush .accordion-item:last-child {
     border-bottom: 0;
   }
-  .accordion-flush .accordion-item .accordion-button,
-  .accordion-flush .accordion-item .accordion-button.collapsed {
+  .accordion-flush .accordion-item .accordion-btn,
+  .accordion-flush .accordion-item .accordion-btn.collapsed {
     border-radius: 0;
   }
-  [data-bs-theme="dark"] .accordion-button:after {
-    --sgds-accordion-item-button-icon: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23D2D2D2'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
-    --sgds-accordion-item-button-active-icon: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23D2D2D2'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  [data-bs-theme="dark"] .accordion-btn:after {
+    --sgds-accordion-item-btn-icon: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23D2D2D2'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    --sgds-accordion-item-btn-active-icon: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23D2D2D2'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
   } */
   .accordion-item {
     background-color: var(--sgds-accordion-bg);
@@ -107,7 +107,7 @@
     color: var(--sgds-accordion-item-content-color);
     border-radius: var(--sgds-accordion-item-border-radius) var(--sgds-accordion-item-border-radius);
   }
-  /* .accordion-item:first-of-type .accordion-button {
+  /* .accordion-item:first-of-type .accordion-btn {
     border-top-left-radius: var(--sgds-accordion-item-border-radius);
     border-top-right-radius: var(--sgds-accordion-item-border-radius);
   } */
@@ -121,24 +121,24 @@
     display: block;
     padding: 0 var(--sgds-accordion-item-padding-x) var(--sgds-accordion-item-padding-y);
   }
-  .accordion-button {
+  .accordion-btn {
     line-height: var(--sgds-accordion-item-line-height);
   }
-  .accordion-button:not(.collapsed) {
+  .accordion-btn:not(.collapsed) {
     font-weight: var(--sgds-accordion-item-font-weight);
     box-shadow: none;
   }
   :host([first-of-type]) .accordion-item {
     border-radius: var(--sgds-accordion-item-border-radius) var(--sgds-accordion-item-border-radius) 0 0;
-    .accordion-button {
-      border-top-left-radius: var(--sgds-accordion-item-button-border-radius);
-      border-top-right-radius: var(--sgds-accordion-item-button-border-radius);
+    .accordion-btn {
+      border-top-left-radius: var(--sgds-accordion-item-btn-border-radius);
+      border-top-right-radius: var(--sgds-accordion-item-btn-border-radius);
     }
   }
   :host([nth-of-type]) .accordion-item {
     border-radius: 0;
     border-top: 0;
-    .accordion-button {
+    .accordion-btn {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
@@ -146,9 +146,9 @@
   :host([last-of-type]) .accordion-item {
     border-radius: 0 0 var(--sgds-accordion-item-border-radius) var(--sgds-accordion-item-border-radius);
     border-top: 0;
-    .accordion-button.collapsed {
-      border-bottom-left-radius: var(--sgds-accordion-item-button-border-radius);
-      border-bottom-right-radius: var(--sgds-accordion-item-button-border-radius);
+    .accordion-btn.collapsed {
+      border-bottom-left-radius: var(--sgds-accordion-item-btn-border-radius);
+      border-bottom-right-radius: var(--sgds-accordion-item-btn-border-radius);
     }
   }
 

@@ -1,266 +1,257 @@
+@import "../../styles/anchor.css";
 :host {
-  --sgds-button-padding-x: 1rem;
-  --sgds-button-padding-y: 0.4375rem;
-  --sgds-button-font-family: var(--sgds-font-sans-serif);
-  --sgds-button-font-size: 1rem;
-  --sgds-button-font-weight: 400;
-  --sgds-button-line-height: 2;
-  --sgds-button-color: var(--sgds-body-color);
-  --sgds-button-background: transparent;
-  --sgds-button-border-width: 1px;
-  --sgds-button-border-color: transparent;
-  --sgds-button-border-radius: var(--sgds-border-radius);
-  --sgds-button-disabled-opacity: 0.5;
-  --sgds-button-hover-color: ;
-  --sgds-button-hover-border-color: transparent;
-  --sgds-button-hover-background: ;
-  --sgds-button-active-color: ;
-  --sgds-button-active-background: ;
-  --sgds-button-active-border-color: ;
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-primary-300);
-  --sgds-button-disabled-color: var(--sgds-white);
+  --sgds-btn-padding-x: 1rem;
+  --sgds-btn-padding-y: 0.4375rem;
+  --sgds-btn-font-family: var(--sgds-font-sans-serif);
+  --sgds-btn-font-size: 1rem;
+  --sgds-btn-font-weight: 400;
+  --sgds-btn-line-height: 2;
+  --sgds-btn-color: var(--sgds-body-color);
+  --sgds-btn-bg: transparent;
+  --sgds-btn-border-width: 1px;
+  --sgds-btn-border-color: transparent;
+  --sgds-btn-border-radius: var(--sgds-border-radius);
+  --sgds-btn-disabled-color: var(--sgds-white);
+  --sgds-btn-disabled-opacity: var(--sgds-disabled-opacity);
+  --sgds-btn-hover-color: ;
+  --sgds-btn-hover-border-color: transparent;
+  --sgds-btn-hover-bg: ;
+  --sgds-btn-active-color: ;
+  --sgds-btn-active-bg: ;
+  --sgds-btn-active-border-color: ;
+  --sgds-btn-focus-box-shadow-color: var(--sgds-primary-300);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-btn-focus-box-shadow-color);
 
   display: inline-block;
 }
-button {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  margin: 0;
-  text-transform: none;
-  -webkit-appearance: button;
-}
 
-button:not(:disabled) {
-  cursor: pointer;
-}
 button:focus:not(:focus-visible) {
   outline: 0;
 }
 
 :host([variant="primary"]) {
-  --sgds-button-color: var(--sgds-white);
-  --sgds-button-background: var(--sgds-primary-filled);
-  --sgds-button-border-color: var(--sgds-primary-filled);
-  --sgds-button-hover-color: #fff;
-  --sgds-button-hover-background: var(--sgds-primary-700);
-  --sgds-button-hover-border-color: var(--sgds-primary-filled);
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-primary-700);
-  --sgds-button-active-border-color: var(--sgds-primary-filled);
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-primary-300);
-  --sgds-button-disabled-color: var(--sgds-white);
+  --sgds-btn-color: var(--sgds-white);
+  --sgds-btn-bg: var(--sgds-primary-filled);
+  --sgds-btn-border-color: var(--sgds-primary-filled);
+  --sgds-btn-hover-color: #fff;
+  --sgds-btn-hover-bg: var(--sgds-primary-700);
+  --sgds-btn-hover-border-color: var(--sgds-primary-filled);
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-primary-700);
+  --sgds-btn-active-border-color: var(--sgds-primary-filled);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-primary-300);
+  --sgds-btn-disabled-color: var(--sgds-white);
 }
 :host([variant="secondary"]) {
-  --sgds-button-color: var(--sgds-white);
-  --sgds-button-background: var(--sgds-secondary-filled);
-  --sgds-button-border-color: var(--sgds-secondary-filled);
-  --sgds-button-hover-color: #fff;
-  --sgds-button-hover-background: var(--sgds-secondary-700);
-  --sgds-button-hover-border-color: var(--sgds-secondary-filled);
+  --sgds-btn-color: var(--sgds-white);
+  --sgds-btn-bg: var(--sgds-secondary-filled);
+  --sgds-btn-border-color: var(--sgds-secondary-filled);
+  --sgds-btn-hover-color: #fff;
+  --sgds-btn-hover-bg: var(--sgds-secondary-700);
+  --sgds-btn-hover-border-color: var(--sgds-secondary-filled);
   
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-secondary-700);
-  --sgds-button-active-border-color: var(--sgds-secondary-filled);
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-secondary-300);
-  --sgds-button-disabled-color: var(--sgds-white);
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-secondary-700);
+  --sgds-btn-active-border-color: var(--sgds-secondary-filled);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-secondary-300);
+  --sgds-btn-disabled-color: var(--sgds-white);
 }
 :host([variant="warning"]) {
-  --sgds-button-color: var(--sgds-white);
-  --sgds-button-background: var(--sgds-warning-filled);
-  --sgds-button-border-color: var(--sgds-warning-filled);
-  --sgds-button-hover-color: #fff;
-  --sgds-button-hover-background: var(--sgds-warning-700);
-  --sgds-button-hover-border-color: var(--sgds-warning-filled);
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-warning-700);
-  --sgds-button-active-border-color: var(--sgds-warning-filled);
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-warning-300);
-  --sgds-button-disabled-color: var(--sgds-white);
+  --sgds-btn-color: var(--sgds-white);
+  --sgds-btn-bg: var(--sgds-warning-filled);
+  --sgds-btn-border-color: var(--sgds-warning-filled);
+  --sgds-btn-hover-color: #fff;
+  --sgds-btn-hover-bg: var(--sgds-warning-700);
+  --sgds-btn-hover-border-color: var(--sgds-warning-filled);
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-warning-700);
+  --sgds-btn-active-border-color: var(--sgds-warning-filled);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-warning-300);
+  --sgds-btn-disabled-color: var(--sgds-white);
 }
 :host([variant="danger"]) {
-  --sgds-button-color: #fff;
-  --sgds-button-background: var(--sgds-danger-filled);
-  --sgds-button-border-color: var(--sgds-danger-filled);
-  --sgds-button-hover-color: #fff;
-  --sgds-button-hover-background: var(--sgds-danger-700);
-  --sgds-button-hover-border-color: var(--sgds-danger-filled);
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-danger-700);
-  --sgds-button-active-border-color: var(--sgds-danger-filled);
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-danger-300);
-  --sgds-button-disabled-color: var(--sgds-white);
+  --sgds-btn-color: #fff;
+  --sgds-btn-bg: var(--sgds-danger-filled);
+  --sgds-btn-border-color: var(--sgds-danger-filled);
+  --sgds-btn-hover-color: #fff;
+  --sgds-btn-hover-bg: var(--sgds-danger-700);
+  --sgds-btn-hover-border-color: var(--sgds-danger-filled);
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-danger-700);
+  --sgds-btn-active-border-color: var(--sgds-danger-filled);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-danger-300);
+  --sgds-btn-disabled-color: var(--sgds-white);
 }
 :host([variant="success"]) {
-  --sgds-button-color: var(--sgds-white);
-  --sgds-button-background: var(--sgds-success-filled);
-  --sgds-button-border-color: var(--sgds-success-filled);
-  --sgds-button-hover-color: #fff;
-  --sgds-button-hover-background: var(--sgds-success-700);
-  --sgds-button-hover-border-color: var(--sgds-success-filled);
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-success-700);
-  --sgds-button-active-border-color: var(--sgds-success-filled);
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-success-300);
-  --sgds-button-disabled-color: var(--sgds-white);
+  --sgds-btn-color: var(--sgds-white);
+  --sgds-btn-bg: var(--sgds-success-filled);
+  --sgds-btn-border-color: var(--sgds-success-filled);
+  --sgds-btn-hover-color: #fff;
+  --sgds-btn-hover-bg: var(--sgds-success-700);
+  --sgds-btn-hover-border-color: var(--sgds-success-filled);
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-success-700);
+  --sgds-btn-active-border-color: var(--sgds-success-filled);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-success-300);
+  --sgds-btn-disabled-color: var(--sgds-white);
 }
 :host([variant="info"]) {
-  --sgds-button-color: var(--sgds-white);
-  --sgds-button-background: var(--sgds-info-filled);
-  --sgds-button-border-color: var(--sgds-info-filled);
-  --sgds-button-hover-color: #fff;
-  --sgds-button-hover-background: var(--sgds-info-700);
-  --sgds-button-hover-border-color: var(--sgds-info-filled);
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-info-700);
-  --sgds-button-active-border-color: var(--sgds-info-filled);
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-info-300);
-  --sgds-button-disabled-color: var(--sgds-white);
+  --sgds-btn-color: var(--sgds-white);
+  --sgds-btn-bg: var(--sgds-info-filled);
+  --sgds-btn-border-color: var(--sgds-info-filled);
+  --sgds-btn-hover-color: #fff;
+  --sgds-btn-hover-bg: var(--sgds-info-700);
+  --sgds-btn-hover-border-color: var(--sgds-info-filled);
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-info-700);
+  --sgds-btn-active-border-color: var(--sgds-info-filled);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-info-300);
+  --sgds-btn-disabled-color: var(--sgds-white);
 }
 :host([variant="light"]) {
-  --sgds-button-color: var(--sgds-dark);
-  --sgds-button-background: var(--sgds-light-filled);
-  --sgds-button-border-color: var(--sgds-light-filled);
-  --sgds-button-hover-color: #fff;
-  --sgds-button-hover-background: var(--sgds-gray-200);
-  --sgds-button-hover-border-color: var(--sgds-gray-200);
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-gray-200);
-  --sgds-button-active-border-color: var(--sgds-gray-200);
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-gray-500);
-  --sgds-button-disabled-color: var(--sgds-dark);
+  --sgds-btn-color: var(--sgds-dark);
+  --sgds-btn-bg: var(--sgds-light-filled);
+  --sgds-btn-border-color: var(--sgds-light-filled);
+  --sgds-btn-hover-color: #fff;
+  --sgds-btn-hover-bg: var(--sgds-gray-200);
+  --sgds-btn-hover-border-color: var(--sgds-gray-200);
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-gray-200);
+  --sgds-btn-active-border-color: var(--sgds-gray-200);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-gray-500);
+  --sgds-btn-disabled-color: var(--sgds-dark);
 }
 :host([variant="dark"]), :host([variant="dark"][outlined]) {
-  --sgds-button-color: var(--sgds-white);
-  --sgds-button-background: var(--sgds-dark-filled);
-  --sgds-button-border-color: var(--sgds-dark-filled);
-  --sgds-button-hover-color: #fff;
-  --sgds-button-hover-background: var(--sgds-gray-700);
-  --sgds-button-hover-border-color: var(--sgds-gray-700);
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-gray-700);
-  --sgds-button-active-border-color: var(--sgds-gray-700);
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-gray-500);
-  --sgds-button-disabled-color: var(--sgds-white);
+  --sgds-btn-color: var(--sgds-white);
+  --sgds-btn-bg: var(--sgds-dark-filled);
+  --sgds-btn-border-color: var(--sgds-dark-filled);
+  --sgds-btn-hover-color: #fff;
+  --sgds-btn-hover-bg: var(--sgds-gray-700);
+  --sgds-btn-hover-border-color: var(--sgds-gray-700);
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-gray-700);
+  --sgds-btn-active-border-color: var(--sgds-gray-700);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-gray-500);
+  --sgds-btn-disabled-color: var(--sgds-white);
 }
 :host([variant="link"]) {
-  --sgds-button-color: var(--sgds-link);
-  --sgds-button-background: transparent;
-  --sgds-button-border-color: transparent;
-  --sgds-button-hover-color: var(--sgds-info-700);
-  --sgds-button-hover-background: transparent;
-  --sgds-button-hover-border-color: transparent;
-  --sgds-button-active-color: var(--sgds-info-700);
-  --sgds-button-active-background: transparent;
-  --sgds-button-active-border-color: transparent;
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-info-300);
-  --sgds-button-disabled-color: var(--sgds-color-disabled);
+  --sgds-btn-color: var(--sgds-link);
+  --sgds-btn-bg: transparent;
+  --sgds-btn-border-color: transparent;
+  --sgds-btn-hover-color: var(--sgds-info-700);
+  --sgds-btn-hover-bg: transparent;
+  --sgds-btn-hover-border-color: transparent;
+  --sgds-btn-active-color: var(--sgds-info-700);
+  --sgds-btn-active-bg: transparent;
+  --sgds-btn-active-border-color: transparent;
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-info-300);
+  --sgds-btn-disabled-color: var(--sgds-color-disabled);
 }
 :host([variant="primary"][outlined]) {
-  --sgds-button-color: var(--sgds-primary-text-emphasis);
-  --sgds-button-background: var(--sgds-primary-bg-subtle);
-  --sgds-button-border-color: var(--sgds-primary-border-subtle);
-  --sgds-button-hover-color: #fff;
-  --sgds-button-hover-background: var(--sgds-primary-filled);
-  --sgds-button-hover-border-color: var(--sgds-primary-filled);
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-primary-filled);
-  --sgds-button-active-border-color: var(--sgds-primary-filled);
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-primary-300);
-  --sgds-button-disabled-color: var(--sgds-button-color);
+  --sgds-btn-color: var(--sgds-primary-text-emphasis);
+  --sgds-btn-bg: var(--sgds-primary-bg-subtle);
+  --sgds-btn-border-color: var(--sgds-primary-border-subtle);
+  --sgds-btn-hover-color: #fff;
+  --sgds-btn-hover-bg: var(--sgds-primary-filled);
+  --sgds-btn-hover-border-color: var(--sgds-primary-filled);
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-primary-filled);
+  --sgds-btn-active-border-color: var(--sgds-primary-filled);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-primary-300);
+  --sgds-btn-disabled-color: var(--sgds-btn-color);
 }
 :host([variant="secondary"][outlined]) {
-  --sgds-button-color: var(--sgds-secondary-text-emphasis);
-  --sgds-button-background: var(--sgds-secondary-bg-subtle);
-  --sgds-button-border-color: var(--sgds-secondary-border-subtle);
-  --sgds-button-hover-color: #fff;
-  --sgds-button-hover-background: var(--sgds-secondary-filled);
-  --sgds-button-hover-border-color: var(--sgds-secondary-filled);
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-secondary-filled);
-  --sgds-button-active-border-color: var(--sgds-secondary-filled);
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-secondary-300);
-  --sgds-button-disabled-color: var(--sgds-button-color);
+  --sgds-btn-color: var(--sgds-secondary-text-emphasis);
+  --sgds-btn-bg: var(--sgds-secondary-bg-subtle);
+  --sgds-btn-border-color: var(--sgds-secondary-border-subtle);
+  --sgds-btn-hover-color: #fff;
+  --sgds-btn-hover-bg: var(--sgds-secondary-filled);
+  --sgds-btn-hover-border-color: var(--sgds-secondary-filled);
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-secondary-filled);
+  --sgds-btn-active-border-color: var(--sgds-secondary-filled);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-secondary-300);
+  --sgds-btn-disabled-color: var(--sgds-btn-color);
 }
 :host([variant="warning"][outlined]) {
-  --sgds-button-color: var(--sgds-warning-text-emphasis);
-  --sgds-button-background: var(--sgds-warning-bg-subtle);
-  --sgds-button-border-color: var(--sgds-warning-border-subtle);
-  --sgds-button-hover-color: #fff;
-  --sgds-button-hover-background: var(--sgds-warning-filled);
-  --sgds-button-hover-border-color: var(--sgds-warning-filled);
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-warning-filled);
-  --sgds-button-active-border-color: var(--sgds-warning-filled);
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-warning-300);
-  --sgds-button-disabled-color: var(--sgds-button-color);
+  --sgds-btn-color: var(--sgds-warning-text-emphasis);
+  --sgds-btn-bg: var(--sgds-warning-bg-subtle);
+  --sgds-btn-border-color: var(--sgds-warning-border-subtle);
+  --sgds-btn-hover-color: #fff;
+  --sgds-btn-hover-bg: var(--sgds-warning-filled);
+  --sgds-btn-hover-border-color: var(--sgds-warning-filled);
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-warning-filled);
+  --sgds-btn-active-border-color: var(--sgds-warning-filled);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-warning-300);
+  --sgds-btn-disabled-color: var(--sgds-btn-color);
 }
 :host([variant="danger"][outlined]) {
-  --sgds-button-color: var(--sgds-danger-text-emphasis);
-  --sgds-button-background: var(--sgds-danger-bg-subtle);
-  --sgds-button-border-color: var(--sgds-danger-border-subtle);
-  --sgds-button-hover-color: #fff;
-  --sgds-button-hover-background: var(--sgds-danger-filled);
-  --sgds-button-hover-border-color: var(--sgds-danger-filled);
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-danger-filled);
-  --sgds-button-active-border-color: var(--sgds-danger-filled);
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-danger-300);
-  --sgds-button-disabled-color: var(--sgds-button-color);
+  --sgds-btn-color: var(--sgds-danger-text-emphasis);
+  --sgds-btn-bg: var(--sgds-danger-bg-subtle);
+  --sgds-btn-border-color: var(--sgds-danger-border-subtle);
+  --sgds-btn-hover-color: #fff;
+  --sgds-btn-hover-bg: var(--sgds-danger-filled);
+  --sgds-btn-hover-border-color: var(--sgds-danger-filled);
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-danger-filled);
+  --sgds-btn-active-border-color: var(--sgds-danger-filled);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-danger-300);
+  --sgds-btn-disabled-color: var(--sgds-btn-color);
 }
 :host([variant="success"][outlined]) {
-  --sgds-button-color: var(--sgds-success-text-emphasis);
-  --sgds-button-background: var(--sgds-success-bg-subtle);
-  --sgds-button-border-color: var(--sgds-success-border-subtle);
-  --sgds-button-hover-color: #fff;
-  --sgds-button-hover-background: var(--sgds-success-filled);
-  --sgds-button-hover-border-color: var(--sgds-success-filled);
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-success-filled);
-  --sgds-button-active-border-color: var(--sgds-success-filled);
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-success-300);
-  --sgds-button-disabled-color: var(--sgds-button-color);
+  --sgds-btn-color: var(--sgds-success-text-emphasis);
+  --sgds-btn-bg: var(--sgds-success-bg-subtle);
+  --sgds-btn-border-color: var(--sgds-success-border-subtle);
+  --sgds-btn-hover-color: #fff;
+  --sgds-btn-hover-bg: var(--sgds-success-filled);
+  --sgds-btn-hover-border-color: var(--sgds-success-filled);
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-success-filled);
+  --sgds-btn-active-border-color: var(--sgds-success-filled);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-success-300);
+  --sgds-btn-disabled-color: var(--sgds-btn-color);
 }
 :host([variant="info"][outlined]) {
-  --sgds-button-color: var(--sgds-info-text-emphasis);
-  --sgds-button-background: var(--sgds-info-bg-subtle);
-  --sgds-button-border-color: var(--sgds-info-border-subtle);
-  --sgds-button-hover-color: #fff;
-  --sgds-button-hover-background: var(--sgds-info-filled);
-  --sgds-button-hover-border-color: var(--sgds-info-filled);
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-info-filled);
-  --sgds-button-active-border-color: var(--sgds-info-filled);
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-info-300);
-  --sgds-button-disabled-color: var(--sgds-button-color);
+  --sgds-btn-color: var(--sgds-info-text-emphasis);
+  --sgds-btn-bg: var(--sgds-info-bg-subtle);
+  --sgds-btn-border-color: var(--sgds-info-border-subtle);
+  --sgds-btn-hover-color: #fff;
+  --sgds-btn-hover-bg: var(--sgds-info-filled);
+  --sgds-btn-hover-border-color: var(--sgds-info-filled);
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-info-filled);
+  --sgds-btn-active-border-color: var(--sgds-info-filled);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-info-300);
+  --sgds-btn-disabled-color: var(--sgds-btn-color);
 }
 :host([variant="light"][outlined]) {
-  --sgds-button-color: var(--sgds-light-text-emphasis);
-  --sgds-button-background: var(--sgds-light-bg-subtle);
-  --sgds-button-border-color: var(--sgds-light-border-subtle);
-  --sgds-button-hover-color: var(--sgds-light-text-emphasis);
-  --sgds-button-hover-background: var(--sgds-gray-200);
-  --sgds-button-hover-border-color: var(--sgds-gray-300);
-  --sgds-button-active-color: var(--sgds-light-text-emphasis);
-  --sgds-button-active-background: var(--sgds-gray-200);
-  --sgds-button-active-border-color: var(--sgds-light-border-subtle);
+  --sgds-btn-color: var(--sgds-light-text-emphasis);
+  --sgds-btn-bg: var(--sgds-light-bg-subtle);
+  --sgds-btn-border-color: var(--sgds-light-border-subtle);
+  --sgds-btn-hover-color: var(--sgds-light-text-emphasis);
+  --sgds-btn-hover-bg: var(--sgds-gray-200);
+  --sgds-btn-hover-border-color: var(--sgds-gray-300);
+  --sgds-btn-active-color: var(--sgds-light-text-emphasis);
+  --sgds-btn-active-bg: var(--sgds-gray-200);
+  --sgds-btn-active-border-color: var(--sgds-light-border-subtle);
   
-  --sgds-button-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-gray-500);
-  --sgds-button-disabled-color: var(--sgds-button-color);
+  --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-input-btn-focus-width, 0.13rem) var(--sgds-gray-500);
+  --sgds-btn-disabled-color: var(--sgds-btn-color);
 }
 
 .btn {
-  background-color: var(--sgds-button-background);
-  border: var(--sgds-button-border-width) solid var(--sgds-button-border-color);
-  border-radius: var(--sgds-button-border-radius);
-  color: var(--sgds-button-color);
+  background-color: var(--sgds-btn-bg);
+  border: var(--sgds-btn-border-width) solid var(--sgds-btn-border-color);
+  border-radius: var(--sgds-btn-border-radius);
+  color: var(--sgds-btn-color);
   cursor: pointer;
   display: inline-block;
-  font-family: var(--sgds-button-font-family);
-  font-size: var(--sgds-button-font-size);
-  font-weight: var(--sgds-button-font-weight);
-  line-height: var(--sgds-button-line-height);
-  padding: var(--sgds-button-padding-y) var(--sgds-button-padding-x);
+  font-family: var(--sgds-btn-font-family);
+  font-size: var(--sgds-btn-font-size);
+  font-weight: var(--sgds-btn-font-weight);
+  line-height: var(--sgds-btn-line-height);
+  padding: var(--sgds-btn-padding-y) var(--sgds-btn-padding-x);
   text-align: center;
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
@@ -274,313 +265,313 @@ button:focus:not(:focus-visible) {
   }
 }
 .btn:hover {
-  background-color: var(--sgds-button-hover-background);
-  border-color: var(--sgds-button-hover-border-color);
-  color: var(--sgds-button-hover-color);
+  background-color: var(--sgds-btn-hover-bg);
+  border-color: var(--sgds-btn-hover-border-color);
+  color: var(--sgds-btn-hover-color);
 }
 .btn:focus-visible {
-  background-color: var(--sgds-button-hover-background);
-  border-color: var(--sgds-button-hover-border-color);
-  box-shadow: var(--sgds-button-focus-box-shadow);
-  color: var(--sgds-button-hover-color);
+  background-color: var(--sgds-btn-hover-bg);
+  border-color: var(--sgds-btn-hover-border-color);
+  box-shadow: var(--sgds-btn-focus-box-shadow);
+  color: var(--sgds-btn-hover-color);
   outline: 0;
 }
 .btn.active {
-  background-color: var(--sgds-button-active-background);
-  border-color: var(--sgds-button-active-border-color);
-  color: var(--sgds-button-active-color);
+  background-color: var(--sgds-btn-active-bg);
+  border-color: var(--sgds-btn-active-border-color);
+  color: var(--sgds-btn-active-color);
 }
 .btn.disabled,
 .btn:disabled {
-  opacity: var(--sgds-button-disabled-opacity);
+  opacity: var(--sgds-btn-disabled-opacity);
   pointer-events: none;
-  color: var(--sgds-button-disabled-color);
+  color: var(--sgds-btn-disabled-color);
 }
 .btn-link {
   text-decoration: underline;
   text-underline-offset: 0.25rem;
 }
 .btn-link:hover {
-  color: var(--sgds-button-hover-color);
+  color: var(--sgds-btn-hover-color);
 }
 .btn-lg {
-  --sgds-button-padding-y: 0.5rem;
-  --sgds-button-padding-x: 1rem;
-  --sgds-button-font-size-lg-size: 1.25rem;
-  --sgds-button-border-radius: var(--sgds-border-radius-lg);
+  --sgds-btn-padding-y: 0.5rem;
+  --sgds-btn-padding-x: 1rem;
+  --sgds-btn-font-size: 1.25rem;
+  --sgds-btn-border-radius: var(--sgds-border-radius-lg);
 }
 .btn-sm {
-  --sgds-button-padding-y: 0.25rem;
-  --sgds-button-padding-x: 0.5rem;
-  --sgds-button-font-size: 0.875rem;
-  --sgds-button-border-radius: var(--sgds-border-radius-sm);
+  --sgds-btn-padding-y: 0.25rem;
+  --sgds-btn-padding-x: 0.5rem;
+  --sgds-btn-font-size: 0.875rem;
+  --sgds-btn-border-radius: var(--sgds-border-radius-sm);
 }
 /* [data-bs-theme="dark"] .btn-primary {
-    --sgds-button-color: var(--sgds-white);
-    --sgds-button-bg: var(--sgds-primary-bg-dark);
-    --sgds-button-border-color: var(--sgds-primary-bg-dark);
+    --sgds-btn-color: var(--sgds-white);
+    --sgds-btn-bg: var(--sgds-primary-bg-dark);
+    --sgds-btn-border-color: var(--sgds-primary-bg-dark);
     --sgds-btn-link-color: var(--sgds-primary-body-color);
-    --sgds-button-hover-color: var(--sgds-body-bg);
-    --sgds-button-hover-background: var(--sgds-primary-bg-hover-dark);
-   --sgds-button-hover-border-color: var(--sgds-primary-bg-hover-dark);
-    --sgds-button-focus-shadow-rgb: var(--sgds-primary-bg-dark-rgb);
-    --sgds-button-active-color: var(--sgds-body-bg);
-    --sgds-button-active-background: var(--sgds-primary-bg-hover-dark);
-    --sgds-button-active-border-color: var(--sgds-primary-bg-hover-dark);
-    --sgds-button-active-shadow: none;
-    --sgds-button-disabled-color: var(--sgds-body-bg);
-    --sgds-button-disabled-background: var(--sgds-primary-bg-dark);
-    --sgds-button-disabled-border-color: var(--sgds-primary-bg-dark);
+    --sgds-btn-hover-color: var(--sgds-body-bg);
+    --sgds-btn-hover-bg: var(--sgds-primary-bg-hover-dark);
+   --sgds-btn-hover-border-color: var(--sgds-primary-bg-hover-dark);
+    --sgds-btn-focus-shadow-rgb: var(--sgds-primary-bg-dark-rgb);
+    --sgds-btn-active-color: var(--sgds-body-bg);
+    --sgds-btn-active-bg: var(--sgds-primary-bg-hover-dark);
+    --sgds-btn-active-border-color: var(--sgds-primary-bg-hover-dark);
+    --sgds-btn-active-shadow: none;
+    --sgds-btn-disabled-color: var(--sgds-body-bg);
+    --sgds-btn-disabled-bg: var(--sgds-primary-bg-dark);
+    --sgds-btn-disabled-border-color: var(--sgds-primary-bg-dark);
   } */
 /* [data-bs-theme="dark"] .btn-outline-primary {
-  --sgds-button-color: var(--sgds-primary-text-emphasis);
-  --sgds-button-background: var(--sgds-primary-bg-subtle);
-  --sgds-button-border-color: var(--sgds-primary-border-subtle);
-  --sgds-button-hover-color: var(--sgds-body-bg);
-  --sgds-button-hover-background: var(--sgds-primary-bg-hover-dark);
-  --sgds-button-hover-border-color: var(--sgds-primary-bg-dark);
-  --sgds-button-focus-shadow-rgb: 89, 37, 220;
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-primary-outline-dark);
-  --sgds-button-active-border-color: var(--sgds-primary-outline-dark);
+  --sgds-btn-color: var(--sgds-primary-text-emphasis);
+  --sgds-btn-bg: var(--sgds-primary-bg-subtle);
+  --sgds-btn-border-color: var(--sgds-primary-border-subtle);
+  --sgds-btn-hover-color: var(--sgds-body-bg);
+  --sgds-btn-hover-bg: var(--sgds-primary-bg-hover-dark);
+  --sgds-btn-hover-border-color: var(--sgds-primary-bg-dark);
+  --sgds-btn-focus-shadow-rgb: 89, 37, 220;
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-primary-outline-dark);
+  --sgds-btn-active-border-color: var(--sgds-primary-outline-dark);
   
-  --sgds-button-disabled-color: var(--sgds-primary-outline-dark);
-  --sgds-button-disabled-background: transparent;
-  --sgds-button-disabled-border-color: var(--sgds-primary-outline-dark);
+  --sgds-btn-disabled-color: var(--sgds-primary-outline-dark);
+  --sgds-btn-disabled-bg: transparent;
+  --sgds-btn-disabled-border-color: var(--sgds-primary-outline-dark);
 }
 [data-bs-theme="dark"] .btn-secondary {
-  --sgds-button-color: var(--sgds-white);
-  --sgds-button-background: var(--sgds-secondary-bg-dark);
-  --sgds-button-border-color: var(--sgds-secondary-bg-dark);
+  --sgds-btn-color: var(--sgds-white);
+  --sgds-btn-bg: var(--sgds-secondary-bg-dark);
+  --sgds-btn-border-color: var(--sgds-secondary-bg-dark);
   --sgds-btn-link-color: var(--sgds-secondary-body-color);
-  --sgds-button-hover-color: var(--sgds-body-bg);
-  --sgds-button-hover-background: var(--sgds-secondary-bg-hover-dark);
-  --sgds-button-hover-border-color: var(--sgds-secondary-bg-hover-dark);
-  --sgds-button-focus-shadow-rgb: var(--sgds-secondary-bg-dark-rgb);
-  --sgds-button-active-color: var(--sgds-body-bg);
-  --sgds-button-active-background: var(--sgds-secondary-bg-hover-dark);
-  --sgds-button-active-border-color: var(--sgds-secondary-bg-hover-dark);
-  --sgds-button-active-shadow: none;
-  --sgds-button-disabled-color: var(--sgds-body-bg);
-  --sgds-button-disabled-background: var(--sgds-secondary-bg-dark);
-  --sgds-button-disabled-border-color: var(--sgds-secondary-bg-dark);
+  --sgds-btn-hover-color: var(--sgds-body-bg);
+  --sgds-btn-hover-bg: var(--sgds-secondary-bg-hover-dark);
+  --sgds-btn-hover-border-color: var(--sgds-secondary-bg-hover-dark);
+  --sgds-btn-focus-shadow-rgb: var(--sgds-secondary-bg-dark-rgb);
+  --sgds-btn-active-color: var(--sgds-body-bg);
+  --sgds-btn-active-bg: var(--sgds-secondary-bg-hover-dark);
+  --sgds-btn-active-border-color: var(--sgds-secondary-bg-hover-dark);
+  --sgds-btn-active-shadow: none;
+  --sgds-btn-disabled-color: var(--sgds-body-bg);
+  --sgds-btn-disabled-bg: var(--sgds-secondary-bg-dark);
+  --sgds-btn-disabled-border-color: var(--sgds-secondary-bg-dark);
 }
 [data-bs-theme="dark"] .btn-outline-secondary {
-  --sgds-button-color: var(--sgds-secondary-text-emphasis);
-  --sgds-button-background: var(--sgds-secondary-bg-subtle);
-  --sgds-button-border-color: var(--sgds-secondary-border-subtle);
-  --sgds-button-hover-color: var(--sgds-body-bg);
-  --sgds-button-hover-background: var(--sgds-secondary-bg-hover-dark);
-  --sgds-button-hover-border-color: var(--sgds-secondary-bg-dark);
-  --sgds-button-focus-shadow-rgb: 89, 37, 220;
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-secondary-outline-dark);
-  --sgds-button-active-border-color: var(--sgds-secondary-outline-dark);
+  --sgds-btn-color: var(--sgds-secondary-text-emphasis);
+  --sgds-btn-bg: var(--sgds-secondary-bg-subtle);
+  --sgds-btn-border-color: var(--sgds-secondary-border-subtle);
+  --sgds-btn-hover-color: var(--sgds-body-bg);
+  --sgds-btn-hover-bg: var(--sgds-secondary-bg-hover-dark);
+  --sgds-btn-hover-border-color: var(--sgds-secondary-bg-dark);
+  --sgds-btn-focus-shadow-rgb: 89, 37, 220;
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-secondary-outline-dark);
+  --sgds-btn-active-border-color: var(--sgds-secondary-outline-dark);
   
-  --sgds-button-disabled-color: var(--sgds-secondary-outline-dark);
-  --sgds-button-disabled-background: transparent;
-  --sgds-button-disabled-border-color: var(--sgds-secondary-outline-dark);
+  --sgds-btn-disabled-color: var(--sgds-secondary-outline-dark);
+  --sgds-btn-disabled-bg: transparent;
+  --sgds-btn-disabled-border-color: var(--sgds-secondary-outline-dark);
 }
 [data-bs-theme="dark"] .btn-success {
-  --sgds-button-color: var(--sgds-white);
-  --sgds-button-background: var(--sgds-success-bg-dark);
-  --sgds-button-border-color: var(--sgds-success-bg-dark);
+  --sgds-btn-color: var(--sgds-white);
+  --sgds-btn-bg: var(--sgds-success-bg-dark);
+  --sgds-btn-border-color: var(--sgds-success-bg-dark);
   --sgds-btn-link-color: var(--sgds-success-body-color);
-  --sgds-button-hover-color: var(--sgds-body-bg);
-  --sgds-button-hover-background: var(--sgds-success-bg-hover-dark);
-  --sgds-button-hover-border-color: var(--sgds-success-bg-hover-dark);
-  --sgds-button-focus-shadow-rgb: var(--sgds-success-bg-dark-rgb);
-  --sgds-button-active-color: var(--sgds-body-bg);
-  --sgds-button-active-background: var(--sgds-success-bg-hover-dark);
-  --sgds-button-active-border-color: var(--sgds-success-bg-hover-dark);
-  --sgds-button-active-shadow: none;
-  --sgds-button-disabled-color: var(--sgds-body-bg);
-  --sgds-button-disabled-background: var(--sgds-success-bg-dark);
-  --sgds-button-disabled-border-color: var(--sgds-success-bg-dark);
+  --sgds-btn-hover-color: var(--sgds-body-bg);
+  --sgds-btn-hover-bg: var(--sgds-success-bg-hover-dark);
+  --sgds-btn-hover-border-color: var(--sgds-success-bg-hover-dark);
+  --sgds-btn-focus-shadow-rgb: var(--sgds-success-bg-dark-rgb);
+  --sgds-btn-active-color: var(--sgds-body-bg);
+  --sgds-btn-active-bg: var(--sgds-success-bg-hover-dark);
+  --sgds-btn-active-border-color: var(--sgds-success-bg-hover-dark);
+  --sgds-btn-active-shadow: none;
+  --sgds-btn-disabled-color: var(--sgds-body-bg);
+  --sgds-btn-disabled-bg: var(--sgds-success-bg-dark);
+  --sgds-btn-disabled-border-color: var(--sgds-success-bg-dark);
 }
 [data-bs-theme="dark"] .btn-outline-success {
-  --sgds-button-color: var(--sgds-success-text-emphasis);
-  --sgds-button-background: var(--sgds-success-bg-subtle);
-  --sgds-button-border-color: var(--sgds-success-border-subtle);
-  --sgds-button-hover-color: var(--sgds-body-bg);
-  --sgds-button-hover-background: var(--sgds-success-bg-hover-dark);
-  --sgds-button-hover-border-color: var(--sgds-success-bg-dark);
-  --sgds-button-focus-shadow-rgb: 89, 37, 220;
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-success-outline-dark);
-  --sgds-button-active-border-color: var(--sgds-success-outline-dark);
+  --sgds-btn-color: var(--sgds-success-text-emphasis);
+  --sgds-btn-bg: var(--sgds-success-bg-subtle);
+  --sgds-btn-border-color: var(--sgds-success-border-subtle);
+  --sgds-btn-hover-color: var(--sgds-body-bg);
+  --sgds-btn-hover-bg: var(--sgds-success-bg-hover-dark);
+  --sgds-btn-hover-border-color: var(--sgds-success-bg-dark);
+  --sgds-btn-focus-shadow-rgb: 89, 37, 220;
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-success-outline-dark);
+  --sgds-btn-active-border-color: var(--sgds-success-outline-dark);
   
-  --sgds-button-disabled-color: var(--sgds-success-outline-dark);
-  --sgds-button-disabled-background: transparent;
-  --sgds-button-disabled-border-color: var(--sgds-success-outline-dark);
+  --sgds-btn-disabled-color: var(--sgds-success-outline-dark);
+  --sgds-btn-disabled-bg: transparent;
+  --sgds-btn-disabled-border-color: var(--sgds-success-outline-dark);
 }
 [data-bs-theme="dark"] .btn-info {
-  --sgds-button-color: var(--sgds-white);
-  --sgds-button-background: var(--sgds-info-bg-dark);
-  --sgds-button-border-color: var(--sgds-info-bg-dark);
+  --sgds-btn-color: var(--sgds-white);
+  --sgds-btn-bg: var(--sgds-info-bg-dark);
+  --sgds-btn-border-color: var(--sgds-info-bg-dark);
   --sgds-btn-link-color: var(--sgds-info-body-color);
-  --sgds-button-hover-color: var(--sgds-body-bg);
-  --sgds-button-hover-background: var(--sgds-info-bg-hover-dark);
-  --sgds-button-hover-border-color: var(--sgds-info-bg-hover-dark);
-  --sgds-button-focus-shadow-rgb: var(--sgds-info-bg-dark-rgb);
-  --sgds-button-active-color: var(--sgds-body-bg);
-  --sgds-button-active-background: var(--sgds-info-bg-hover-dark);
-  --sgds-button-active-border-color: var(--sgds-info-bg-hover-dark);
-  --sgds-button-active-shadow: none;
-  --sgds-button-disabled-color: var(--sgds-body-bg);
-  --sgds-button-disabled-background: var(--sgds-info-bg-dark);
-  --sgds-button-disabled-border-color: var(--sgds-info-bg-dark);
+  --sgds-btn-hover-color: var(--sgds-body-bg);
+  --sgds-btn-hover-bg: var(--sgds-info-bg-hover-dark);
+  --sgds-btn-hover-border-color: var(--sgds-info-bg-hover-dark);
+  --sgds-btn-focus-shadow-rgb: var(--sgds-info-bg-dark-rgb);
+  --sgds-btn-active-color: var(--sgds-body-bg);
+  --sgds-btn-active-bg: var(--sgds-info-bg-hover-dark);
+  --sgds-btn-active-border-color: var(--sgds-info-bg-hover-dark);
+  --sgds-btn-active-shadow: none;
+  --sgds-btn-disabled-color: var(--sgds-body-bg);
+  --sgds-btn-disabled-bg: var(--sgds-info-bg-dark);
+  --sgds-btn-disabled-border-color: var(--sgds-info-bg-dark);
 }
 [data-bs-theme="dark"] .btn-outline-info {
-  --sgds-button-color: var(--sgds-info-text-emphasis);
-  --sgds-button-background: var(--sgds-info-bg-subtle);
-  --sgds-button-border-color: var(--sgds-info-border-subtle);
-  --sgds-button-hover-color: var(--sgds-body-bg);
-  --sgds-button-hover-background: var(--sgds-info-bg-hover-dark);
-  --sgds-button-hover-border-color: var(--sgds-info-bg-dark);
-  --sgds-button-focus-shadow-rgb: 89, 37, 220;
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-info-outline-dark);
-  --sgds-button-active-border-color: var(--sgds-info-outline-dark);
+  --sgds-btn-color: var(--sgds-info-text-emphasis);
+  --sgds-btn-bg: var(--sgds-info-bg-subtle);
+  --sgds-btn-border-color: var(--sgds-info-border-subtle);
+  --sgds-btn-hover-color: var(--sgds-body-bg);
+  --sgds-btn-hover-bg: var(--sgds-info-bg-hover-dark);
+  --sgds-btn-hover-border-color: var(--sgds-info-bg-dark);
+  --sgds-btn-focus-shadow-rgb: 89, 37, 220;
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-info-outline-dark);
+  --sgds-btn-active-border-color: var(--sgds-info-outline-dark);
   
-  --sgds-button-disabled-color: var(--sgds-info-outline-dark);
-  --sgds-button-disabled-background: transparent;
-  --sgds-button-disabled-border-color: var(--sgds-info-outline-dark);
+  --sgds-btn-disabled-color: var(--sgds-info-outline-dark);
+  --sgds-btn-disabled-bg: transparent;
+  --sgds-btn-disabled-border-color: var(--sgds-info-outline-dark);
 }
 [data-bs-theme="dark"] .btn-warning {
-  --sgds-button-color: var(--sgds-white);
-  --sgds-button-background: var(--sgds-warning-bg-dark);
-  --sgds-button-border-color: var(--sgds-warning-bg-dark);
+  --sgds-btn-color: var(--sgds-white);
+  --sgds-btn-bg: var(--sgds-warning-bg-dark);
+  --sgds-btn-border-color: var(--sgds-warning-bg-dark);
   --sgds-btn-link-color: var(--sgds-warning-body-color);
-  --sgds-button-hover-color: var(--sgds-body-bg);
-  --sgds-button-hover-background: var(--sgds-warning-bg-hover-dark);
-  --sgds-button-hover-border-color: var(--sgds-warning-bg-hover-dark);
-  --sgds-button-focus-shadow-rgb: var(--sgds-warning-bg-dark-rgb);
-  --sgds-button-active-color: var(--sgds-body-bg);
-  --sgds-button-active-background: var(--sgds-warning-bg-hover-dark);
-  --sgds-button-active-border-color: var(--sgds-warning-bg-hover-dark);
-  --sgds-button-active-shadow: none;
-  --sgds-button-disabled-color: var(--sgds-body-bg);
-  --sgds-button-disabled-background: var(--sgds-warning-bg-dark);
-  --sgds-button-disabled-border-color: var(--sgds-warning-bg-dark);
+  --sgds-btn-hover-color: var(--sgds-body-bg);
+  --sgds-btn-hover-bg: var(--sgds-warning-bg-hover-dark);
+  --sgds-btn-hover-border-color: var(--sgds-warning-bg-hover-dark);
+  --sgds-btn-focus-shadow-rgb: var(--sgds-warning-bg-dark-rgb);
+  --sgds-btn-active-color: var(--sgds-body-bg);
+  --sgds-btn-active-bg: var(--sgds-warning-bg-hover-dark);
+  --sgds-btn-active-border-color: var(--sgds-warning-bg-hover-dark);
+  --sgds-btn-active-shadow: none;
+  --sgds-btn-disabled-color: var(--sgds-body-bg);
+  --sgds-btn-disabled-bg: var(--sgds-warning-bg-dark);
+  --sgds-btn-disabled-border-color: var(--sgds-warning-bg-dark);
 }
 [data-bs-theme="dark"] .btn-outline-warning {
-  --sgds-button-color: var(--sgds-warning-text-emphasis);
-  --sgds-button-background: var(--sgds-warning-bg-subtle);
-  --sgds-button-border-color: var(--sgds-warning-border-subtle);
-  --sgds-button-hover-color: var(--sgds-body-bg);
-  --sgds-button-hover-background: var(--sgds-warning-bg-hover-dark);
-  --sgds-button-hover-border-color: var(--sgds-warning-bg-dark);
-  --sgds-button-focus-shadow-rgb: 89, 37, 220;
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-warning-outline-dark);
-  --sgds-button-active-border-color: var(--sgds-warning-outline-dark);
+  --sgds-btn-color: var(--sgds-warning-text-emphasis);
+  --sgds-btn-bg: var(--sgds-warning-bg-subtle);
+  --sgds-btn-border-color: var(--sgds-warning-border-subtle);
+  --sgds-btn-hover-color: var(--sgds-body-bg);
+  --sgds-btn-hover-bg: var(--sgds-warning-bg-hover-dark);
+  --sgds-btn-hover-border-color: var(--sgds-warning-bg-dark);
+  --sgds-btn-focus-shadow-rgb: 89, 37, 220;
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-warning-outline-dark);
+  --sgds-btn-active-border-color: var(--sgds-warning-outline-dark);
   
-  --sgds-button-disabled-color: var(--sgds-warning-outline-dark);
-  --sgds-button-disabled-background: transparent;
-  --sgds-button-disabled-border-color: var(--sgds-warning-outline-dark);
+  --sgds-btn-disabled-color: var(--sgds-warning-outline-dark);
+  --sgds-btn-disabled-bg: transparent;
+  --sgds-btn-disabled-border-color: var(--sgds-warning-outline-dark);
 }
 [data-bs-theme="dark"] .btn-danger {
-  --sgds-button-color: var(--sgds-white);
-  --sgds-button-background: var(--sgds-danger-bg-dark);
-  --sgds-button-border-color: var(--sgds-danger-bg-dark);
+  --sgds-btn-color: var(--sgds-white);
+  --sgds-btn-bg: var(--sgds-danger-bg-dark);
+  --sgds-btn-border-color: var(--sgds-danger-bg-dark);
   --sgds-btn-link-color: var(--sgds-danger-body-color);
-  --sgds-button-hover-color: var(--sgds-body-bg);
-  --sgds-button-hover-background: var(--sgds-danger-bg-hover-dark);
-  --sgds-button-hover-border-color: var(--sgds-danger-bg-hover-dark);
-  --sgds-button-focus-shadow-rgb: var(--sgds-danger-bg-dark-rgb);
-  --sgds-button-active-color: var(--sgds-body-bg);
-  --sgds-button-active-background: var(--sgds-danger-bg-hover-dark);
-  --sgds-button-active-border-color: var(--sgds-danger-bg-hover-dark);
-  --sgds-button-active-shadow: none;
-  --sgds-button-disabled-color: var(--sgds-body-bg);
-  --sgds-button-disabled-background: var(--sgds-danger-bg-dark);
-  --sgds-button-disabled-border-color: var(--sgds-danger-bg-dark);
+  --sgds-btn-hover-color: var(--sgds-body-bg);
+  --sgds-btn-hover-bg: var(--sgds-danger-bg-hover-dark);
+  --sgds-btn-hover-border-color: var(--sgds-danger-bg-hover-dark);
+  --sgds-btn-focus-shadow-rgb: var(--sgds-danger-bg-dark-rgb);
+  --sgds-btn-active-color: var(--sgds-body-bg);
+  --sgds-btn-active-bg: var(--sgds-danger-bg-hover-dark);
+  --sgds-btn-active-border-color: var(--sgds-danger-bg-hover-dark);
+  --sgds-btn-active-shadow: none;
+  --sgds-btn-disabled-color: var(--sgds-body-bg);
+  --sgds-btn-disabled-bg: var(--sgds-danger-bg-dark);
+  --sgds-btn-disabled-border-color: var(--sgds-danger-bg-dark);
 }
 [data-bs-theme="dark"] .btn-outline-danger {
-  --sgds-button-color: var(--sgds-danger-text-emphasis);
-  --sgds-button-background: var(--sgds-danger-bg-subtle);
-  --sgds-button-border-color: var(--sgds-danger-border-subtle);
-  --sgds-button-hover-color: var(--sgds-body-bg);
-  --sgds-button-hover-background: var(--sgds-danger-bg-hover-dark);
-  --sgds-button-hover-border-color: var(--sgds-danger-bg-dark);
-  --sgds-button-focus-shadow-rgb: 89, 37, 220;
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-danger-outline-dark);
-  --sgds-button-active-border-color: var(--sgds-danger-outline-dark);
+  --sgds-btn-color: var(--sgds-danger-text-emphasis);
+  --sgds-btn-bg: var(--sgds-danger-bg-subtle);
+  --sgds-btn-border-color: var(--sgds-danger-border-subtle);
+  --sgds-btn-hover-color: var(--sgds-body-bg);
+  --sgds-btn-hover-bg: var(--sgds-danger-bg-hover-dark);
+  --sgds-btn-hover-border-color: var(--sgds-danger-bg-dark);
+  --sgds-btn-focus-shadow-rgb: 89, 37, 220;
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-danger-outline-dark);
+  --sgds-btn-active-border-color: var(--sgds-danger-outline-dark);
   
-  --sgds-button-disabled-color: var(--sgds-danger-outline-dark);
-  --sgds-button-disabled-background: transparent;
-  --sgds-button-disabled-border-color: var(--sgds-danger-outline-dark);
+  --sgds-btn-disabled-color: var(--sgds-danger-outline-dark);
+  --sgds-btn-disabled-bg: transparent;
+  --sgds-btn-disabled-border-color: var(--sgds-danger-outline-dark);
 }
 [data-bs-theme="dark"] .btn-light {
-  --sgds-button-color: var(--sgds-white);
-  --sgds-button-background: var(--sgds-light-bg-dark);
-  --sgds-button-border-color: var(--sgds-light-bg-dark);
+  --sgds-btn-color: var(--sgds-white);
+  --sgds-btn-bg: var(--sgds-light-bg-dark);
+  --sgds-btn-border-color: var(--sgds-light-bg-dark);
   --sgds-btn-link-color: var(--sgds-light-body-color);
-  --sgds-button-hover-color: var(--sgds-body-bg);
-  --sgds-button-hover-background: var(--sgds-light-bg-hover-dark);
-  --sgds-button-hover-border-color: var(--sgds-light-bg-hover-dark);
-  --sgds-button-focus-shadow-rgb: var(--sgds-light-bg-dark-rgb);
-  --sgds-button-active-color: var(--sgds-body-bg);
-  --sgds-button-active-background: var(--sgds-light-bg-hover-dark);
-  --sgds-button-active-border-color: var(--sgds-light-bg-hover-dark);
-  --sgds-button-active-shadow: none;
-  --sgds-button-disabled-color: var(--sgds-body-bg);
-  --sgds-button-disabled-background: var(--sgds-light-bg-dark);
-  --sgds-button-disabled-border-color: var(--sgds-light-bg-dark);
-  --sgds-button-background: var(--sgds-light);
+  --sgds-btn-hover-color: var(--sgds-body-bg);
+  --sgds-btn-hover-bg: var(--sgds-light-bg-hover-dark);
+  --sgds-btn-hover-border-color: var(--sgds-light-bg-hover-dark);
+  --sgds-btn-focus-shadow-rgb: var(--sgds-light-bg-dark-rgb);
+  --sgds-btn-active-color: var(--sgds-body-bg);
+  --sgds-btn-active-bg: var(--sgds-light-bg-hover-dark);
+  --sgds-btn-active-border-color: var(--sgds-light-bg-hover-dark);
+  --sgds-btn-active-shadow: none;
+  --sgds-btn-disabled-color: var(--sgds-body-bg);
+  --sgds-btn-disabled-bg: var(--sgds-light-bg-dark);
+  --sgds-btn-disabled-border-color: var(--sgds-light-bg-dark);
+  --sgds-btn-bg: var(--sgds-light);
 }
 [data-bs-theme="dark"] .btn-outline-light {
-  --sgds-button-color: var(--sgds-light-text-emphasis);
-  --sgds-button-background: var(--sgds-light-bg-subtle);
-  --sgds-button-border-color: var(--sgds-light-border-subtle);
-  --sgds-button-hover-color: var(--sgds-body-bg);
-  --sgds-button-hover-background: var(--sgds-light-bg-hover-dark);
-  --sgds-button-hover-border-color: var(--sgds-light-bg-dark);
-  --sgds-button-focus-shadow-rgb: 89, 37, 220;
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-light-outline-dark);
-  --sgds-button-active-border-color: var(--sgds-light-outline-dark);
+  --sgds-btn-color: var(--sgds-light-text-emphasis);
+  --sgds-btn-bg: var(--sgds-light-bg-subtle);
+  --sgds-btn-border-color: var(--sgds-light-border-subtle);
+  --sgds-btn-hover-color: var(--sgds-body-bg);
+  --sgds-btn-hover-bg: var(--sgds-light-bg-hover-dark);
+  --sgds-btn-hover-border-color: var(--sgds-light-bg-dark);
+  --sgds-btn-focus-shadow-rgb: 89, 37, 220;
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-light-outline-dark);
+  --sgds-btn-active-border-color: var(--sgds-light-outline-dark);
   
-  --sgds-button-disabled-color: var(--sgds-light-outline-dark);
-  --sgds-button-disabled-background: transparent;
-  --sgds-button-disabled-border-color: var(--sgds-light-outline-dark);
+  --sgds-btn-disabled-color: var(--sgds-light-outline-dark);
+  --sgds-btn-disabled-bg: transparent;
+  --sgds-btn-disabled-border-color: var(--sgds-light-outline-dark);
 }
 [data-bs-theme="dark"] .btn-dark {
-  --sgds-button-color: var(--sgds-white);
-  --sgds-button-background: var(--sgds-dark-bg-dark);
-  --sgds-button-border-color: var(--sgds-dark-bg-dark);
+  --sgds-btn-color: var(--sgds-white);
+  --sgds-btn-bg: var(--sgds-dark-bg-dark);
+  --sgds-btn-border-color: var(--sgds-dark-bg-dark);
   --sgds-btn-link-color: var(--sgds-dark-body-color);
-  --sgds-button-hover-color: var(--sgds-body-bg);
-  --sgds-button-hover-background: var(--sgds-dark-bg-hover-dark);
-  --sgds-button-hover-border-color: var(--sgds-dark-bg-hover-dark);
-  --sgds-button-focus-shadow-rgb: var(--sgds-dark-bg-dark-rgb);
-  --sgds-button-active-color: var(--sgds-body-bg);
-  --sgds-button-active-background: var(--sgds-dark-bg-hover-dark);
-  --sgds-button-active-border-color: var(--sgds-dark-bg-hover-dark);
-  --sgds-button-active-shadow: none;
-  --sgds-button-disabled-color: var(--sgds-body-bg);
-  --sgds-button-disabled-background: var(--sgds-dark-bg-dark);
-  --sgds-button-disabled-border-color: var(--sgds-dark-bg-dark);
-  --sgds-button-hover-color: var(--sgds-dark-text-emphasis);
+  --sgds-btn-hover-color: var(--sgds-body-bg);
+  --sgds-btn-hover-bg: var(--sgds-dark-bg-hover-dark);
+  --sgds-btn-hover-border-color: var(--sgds-dark-bg-hover-dark);
+  --sgds-btn-focus-shadow-rgb: var(--sgds-dark-bg-dark-rgb);
+  --sgds-btn-active-color: var(--sgds-body-bg);
+  --sgds-btn-active-bg: var(--sgds-dark-bg-hover-dark);
+  --sgds-btn-active-border-color: var(--sgds-dark-bg-hover-dark);
+  --sgds-btn-active-shadow: none;
+  --sgds-btn-disabled-color: var(--sgds-body-bg);
+  --sgds-btn-disabled-bg: var(--sgds-dark-bg-dark);
+  --sgds-btn-disabled-border-color: var(--sgds-dark-bg-dark);
+  --sgds-btn-hover-color: var(--sgds-dark-text-emphasis);
 }
 [data-bs-theme="dark"] .btn-outline-dark {
-  --sgds-button-color: var(--sgds-dark-text-emphasis);
-  --sgds-button-background: var(--sgds-dark-bg-subtle);
-  --sgds-button-border-color: var(--sgds-dark-border-subtle);
-  --sgds-button-hover-color: var(--sgds-body-bg);
-  --sgds-button-hover-background: var(--sgds-dark-bg-hover-dark);
-  --sgds-button-hover-border-color: var(--sgds-dark-bg-dark);
-  --sgds-button-focus-shadow-rgb: 89, 37, 220;
-  --sgds-button-active-color: #fff;
-  --sgds-button-active-background: var(--sgds-dark-outline-dark);
-  --sgds-button-active-border-color: var(--sgds-dark-outline-dark);
+  --sgds-btn-color: var(--sgds-dark-text-emphasis);
+  --sgds-btn-bg: var(--sgds-dark-bg-subtle);
+  --sgds-btn-border-color: var(--sgds-dark-border-subtle);
+  --sgds-btn-hover-color: var(--sgds-body-bg);
+  --sgds-btn-hover-bg: var(--sgds-dark-bg-hover-dark);
+  --sgds-btn-hover-border-color: var(--sgds-dark-bg-dark);
+  --sgds-btn-focus-shadow-rgb: 89, 37, 220;
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-dark-outline-dark);
+  --sgds-btn-active-border-color: var(--sgds-dark-outline-dark);
   
-  --sgds-button-disabled-color: var(--sgds-dark-outline-dark);
-  --sgds-button-disabled-background: transparent;
-  --sgds-button-disabled-border-color: var(--sgds-dark-outline-dark);
-  --sgds-button-hover-color: var(--sgds-dark-text-emphasis);
+  --sgds-btn-disabled-color: var(--sgds-dark-outline-dark);
+  --sgds-btn-disabled-bg: transparent;
+  --sgds-btn-disabled-border-color: var(--sgds-dark-outline-dark);
+  --sgds-btn-hover-color: var(--sgds-dark-text-emphasis);
 } */
 
 /* .btn .badge {

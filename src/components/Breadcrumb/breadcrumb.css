@@ -3,7 +3,7 @@
   --sgds-breadcrumb-padding-x: 0;
   --sgds-breadcrumb-padding-y: 0;
   --sgds-breadcrumb-margin-bottom: 1rem;
-  --sgds-breadcrumb-background: ;
+  --sgds-breadcrumb-bg: ;
   --sgds-breadcrumb-border-radius: ;
   --sgds-breadcrumb-font-size: ;
   --sgds-breadcrumb-separator-color: ;
@@ -11,7 +11,7 @@
  }
  
   .breadcrumb {
-    background-color: var(--sgds-breadcrumb-background);
+    background-color: var(--sgds-breadcrumb-bg);
     border-radius: var(--sgds-breadcrumb-border-radius);
     display: flex;
     flex-wrap: wrap;

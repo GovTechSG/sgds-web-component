@@ -24,26 +24,26 @@ export type ButtonVariant =
  * @event sgds-blur - Emitted when the button is not focused.
  * @event sgds-focus - Emitted when the button is focused.
  *
- * @cssprop --button-padding-x - The x-axis padding of button
- * @cssprop --button-padding-y - The y-axis padding of button
- * @cssprop --button-font-family - The font family of text content in button
- * @cssprop --button-font-family - The font size of text content in button
- * @cssprop --button-font-weight - The font weight of text content in button
- * @cssprop --button-line-height - The line height of text content in button
- * @cssprop --button-color - The text color of button
- * @cssprop --button-background - The background color of button
- * @cssprop --button-border-width - The thickness of the button border
- * @cssprop --button-border-color - The color of the button border
- * @cssprop --button-border-radius - The border radius of button border
- * @cssprop --button-disabled-color - The text color of a button in disabled state
- * @cssprop --button-disabled-opacity - The opacity of a button in disabled state
- * @cssprop --button-hover-color - The text color of a button in hover state
- * @cssprop --button-hover-border-color - The border color of a button in hover state
- * @cssprop --button-hover-background - The background color of a button in hover state
- * @cssprop --button-active-color - The text color of a button in active state
- * @cssprop --button-active-border-color - The border color of a button in active state
- * @cssprop --button-active-background - The background color of a button in active state
- * @cssprop --button-focus-box-shadow - The box shadow of a button in focused state
+ * @cssprop --sgds-button-padding-x - The x-axis padding of button
+ * @cssprop --sgds-button-padding-y - The y-axis padding of button
+ * @cssprop --sgds-button-font-family - The font family of text content in button
+ * @cssprop --sgds-button-font-size - The font size of text content in button
+ * @cssprop --sgds-button-font-weight - The font weight of text content in button
+ * @cssprop --sgds-button-line-height - The line height of text content in button
+ * @cssprop --sgds-button-color - The text color of button
+ * @cssprop --sgds-button-background - The background color of button
+ * @cssprop --sgds-button-border-width - The thickness of the button border
+ * @cssprop --sgds-button-border-color - The color of the button border
+ * @cssprop --sgds-button-border-radius - The border radius of button border
+ * @cssprop --sgds-button-disabled-color - The text color of a button in disabled state
+ * @cssprop --sgds-button-disabled-opacity - The opacity of a button in disabled state
+ * @cssprop --sgds-button-hover-color - The text color of a button in hover state
+ * @cssprop --sgds-button-hover-border-color - The border color of a button in hover state
+ * @cssprop --sgds-button-hover-background - The background color of a button in hover state
+ * @cssprop --sgds-button-active-color - The text color of a button in active state
+ * @cssprop --sgds-button-active-border-color - The border color of a button in active state
+ * @cssprop --sgds-button-active-background - The background color of a button in active state
+ * @cssprop --sgds-button-focus-box-shadow - The box shadow of a button in focused state
  *
  */
 export class SgdsButton extends SgdsElement {

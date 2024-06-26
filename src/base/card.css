@@ -4,7 +4,7 @@
 
 :host {
   /* NEW in 2.0 */
-  --sgds-card-background: var(--sgds-body-bg);
+  --sgds-card-bg: var(--sgds-body-bg);
   --sgds-card-height: ;
   --sgds-card-border-width: var(--sgds-border-width);
   --sgds-card-border-color: var(--sgds-border-color-translucent);
@@ -41,7 +41,7 @@ p {
 .card {
   word-wrap: break-word;
   background-clip: border-box;
-  background-color: var(--sgds-card-background);
+  background-color: var(--sgds-card-bg);
   border: var(--sgds-card-border-width) solid var(--sgds-card-border-color);
   border-radius: var(--sgds-card-border-radius);
   color: var(--sgds-body-color);

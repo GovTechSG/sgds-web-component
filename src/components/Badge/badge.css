@@ -2,96 +2,97 @@
   /* NEW in 2.0 */
   --sgds-badge-padding-x: 0.571em;
   --sgds-badge-padding-y: 0.285em;
-  --sgds-badge-font-size:  min(0.875em, 5rem);
+  --sgds-badge-font-size:  min(0.875em, 2rem);
   --sgds-badge-font-weight: 700;
   --sgds-badge-color: #fff;
   --sgds-badge-border-radius: var(--sgds-border-radius);
   --sgds-badge-line-height: 1.145;
-  --sgds-badge-background-color: ;
+  --sgds-badge-bg: ;
   --sgds-badge-border-color: ;
+  --sgds-badge-icon-gap: 0.43em;
 }
 
 :host([variant="primary"]) {
-  --sgds-badge-background-color: var(--sgds-primary-filled);
+  --sgds-badge-bg: var(--sgds-primary-filled);
   --sgds-badge-border-color: var(--sgds-primary-filled);
 }
 :host([variant="secondary"]) {
-  --sgds-badge-background-color: var(--sgds-secondary-filled);
+  --sgds-badge-bg: var(--sgds-secondary-filled);
   --sgds-badge-border-color: var(--sgds-secondary-filled);
 }
 :host([variant="warning"]) {
-  --sgds-badge-background-color: var(--sgds-warning-filled);
+  --sgds-badge-bg: var(--sgds-warning-filled);
   --sgds-badge-border-color: var(--sgds-warning-filled);
 }
 :host([variant="danger"]) {
-  --sgds-badge-background-color: var(--sgds-danger-filled);
+  --sgds-badge-bg: var(--sgds-danger-filled);
   --sgds-badge-border-color: var(--sgds-danger-filled);
 }
 :host([variant="success"]) {
-  --sgds-badge-background-color: var(--sgds-success-filled);
+  --sgds-badge-bg: var(--sgds-success-filled);
   --sgds-badge-border-color: var(--sgds-success-filled);
 }
 :host([variant="info"]) {
-  --sgds-badge-background-color: var(--sgds-info-filled);
+  --sgds-badge-bg: var(--sgds-info-filled);
   --sgds-badge-border-color: var(--sgds-info-filled);
 }
 :host([variant="light"]) {
-  --sgds-badge-background-color: var(--sgds-light-filled);
+  --sgds-badge-bg: var(--sgds-light-filled);
   --sgds-badge-border-color: var(--sgds-light-filled);
   --sgds-badge-color: var(--sgds-dark)
 }
 :host([variant="dark"]) {
-  --sgds-badge-background-color: var(--sgds-dark-filled);
+  --sgds-badge-bg: var(--sgds-dark-filled);
   --sgds-badge-border-color: var(--sgds-dark-filled);
 }
 :host([variant="primary"][outlined]) {
   --sgds-badge-color: var(--sgds-primary-text-emphasis);
-  --sgds-badge-background-color: var(--sgds-primary-bg-subtle);
+  --sgds-badge-bg: var(--sgds-primary-bg-subtle);
   --sgds-badge-border-color: var(--sgds-primary-border-subtle);
 
 }
 :host([variant="secondary"][outlined]) {
   --sgds-badge-color: var(--sgds-secondary-text-emphasis);
-  --sgds-badge-background-color: var(--sgds-secondary-bg-subtle);
+  --sgds-badge-bg: var(--sgds-secondary-bg-subtle);
   --sgds-badge-border-color: var(--sgds-secondary-border-subtle);
 }
 :host([variant="warning"][outlined]) {
   --sgds-badge-color: var(--sgds-warning-text-emphasis);
-  --sgds-badge-background-color: var(--sgds-warning-bg-subtle);
+  --sgds-badge-bg: var(--sgds-warning-bg-subtle);
   --sgds-badge-border-color: var(--sgds-warning-border-subtle);
 }
 :host([variant="danger"][outlined]) {
   --sgds-badge-color: var(--sgds-danger-text-emphasis);
-  --sgds-badge-background-color: var(--sgds-danger-bg-subtle);
+  --sgds-badge-bg: var(--sgds-danger-bg-subtle);
   --sgds-badge-border-color: var(--sgds-danger-border-subtle);
 }
 :host([variant="success"][outlined]) {
   --sgds-badge-color: var(--sgds-success-text-emphasis);
-  --sgds-badge-background-color: var(--sgds-success-bg-subtle);
+  --sgds-badge-bg: var(--sgds-success-bg-subtle);
   --sgds-badge-border-color: var(--sgds-success-border-subtle);
 }
 :host([variant="info"][outlined]) {
   --sgds-badge-color: var(--sgds-info-text-emphasis);
-  --sgds-badge-background-color: var(--sgds-info-bg-subtle);
+  --sgds-badge-bg: var(--sgds-info-bg-subtle);
   --sgds-badge-border-color: var(--sgds-info-border-subtle);
 }
 :host([variant="light"][outlined]) {
   --sgds-badge-color: var(--sgds-light-text-emphasis);
-  --sgds-badge-background-color: var(--sgds-light-bg-subtle);
+  --sgds-badge-bg: var(--sgds-light-bg-subtle);
   --sgds-badge-border-color: var(--sgds-light-border-subtle);
 }
 :host([variant="dark"][outlined]) {
   --sgds-badge-color: var(--sgds-dark-text-emphasis);
-  --sgds-badge-background-color: var(--sgds-dark-bg-subtle);
+  --sgds-badge-bg: var(--sgds-dark-bg-subtle);
   --sgds-badge-border-color: var(--sgds-dark-border-subtle);
 }
 
 .badge {
-  background-color: var(--sgds-badge-background-color);
+  background-color: var(--sgds-badge-bg);
   border: 1px solid var(--sgds-badge-border-color);
   border-radius: var(--sgds-badge-border-radius);
   color: var(--sgds-badge-color);
-  display: inline-block;
+  display: inline-flex;
   font-size: var(--sgds-badge-font-size);
   font-weight: var(--sgds-badge-font-weight);
   line-height: var(--sgds-badge-line-height);
@@ -99,13 +100,7 @@
   text-align: center;
   vertical-align: baseline;
   white-space: nowrap;
-}
-
-slot[name="leftIcon"]::slotted(*) {
-  padding-right: 0.43em;
-}
-slot[name="rightIcon"]::slotted(*) {
-  padding-left: 0.43em;
+  gap: var(--sgds-badge-icon-gap);
 }
 
 .rounded-pill {
