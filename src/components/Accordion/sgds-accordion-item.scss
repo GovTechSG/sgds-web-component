@@ -19,6 +19,9 @@
 
 .accordion-button {
   line-height: var(--accordion-item-line-height);
+  &:not(.collapsed){
+    color: var(--accordion-active-color);
+  }
 }
 
 .accordion-button:not(.collapsed) {

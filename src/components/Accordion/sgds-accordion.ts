@@ -3,14 +3,18 @@ import { property, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsAccordionItem from "./sgds-accordion-item";
+import styles from "./sgds-accordion.scss";
 
 /**
  * @summary A dropdown mechanism that allow users to either show or hide related content. `SgdsAccordion` is a wrapper to manage the behaviour for multiple `SgdsAccordionItems`
  * @slot default - slot for accordion-item
+ *
+ * @cssprop --accordion-active-color - The text color of all accordion buttons to indicate its active state
+ *
  */
 
 export class SgdsAccordion extends SgdsElement {
-  static styles = [SgdsElement.styles];
+  static styles = [SgdsElement.styles, styles];
 
   /** Allows multiple accordion items to be opened at the same time */
   @property({ type: Boolean, reflect: true }) allowMultiple = false;
