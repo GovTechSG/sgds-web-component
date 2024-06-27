@@ -2,9 +2,11 @@
 
 :host {
   --sgds-input-border-radius: var(--sgds-border-radius, 0.3215rem);
-  --sgds-input-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width, 2px) var(--sgds-info-300, #7FB5FF);
+  --sgds-input-focus-box-shadow-color:var(--sgds-info-300);
+  --sgds-input-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width, 2px) var(--sgds-input-focus-box-shadow-color);
 
-  --sgds-invalid-feedback-box-shadow: 0px 0px 0px var(--sgds-focus-width, 2px) var(--sgds-danger-300, #FF9782);
+  --sgds-invalid-feedback-box-shadow: 0px 0px 0px var(--sgds-focus-width, 2px) var(--sgds-danger-300);
+  --sgds-valid-feedback-box-shadow: 0px 0px 0px var(--sgds-focus-width, 2px) var(--sgds-success-300);
 }
 .form-label {
   font-weight: 700;
@@ -194,7 +196,7 @@
 }
 .form-control.is-valid:focus {
   border-color: var(--sgds-form-valid-border-color);
-  box-shadow: 0 0 0 0.25rem rgba(var(--sgds-success-rgb), 0.25);
+  box-shadow: var(--sgds-valid-feedback-box-shadow) ;
 }
 .form-control-color.is-valid {
   width: calc(3.875rem + 2em);
@@ -206,11 +208,12 @@
   background-size: calc(1em + 0.4375rem) calc(1em + 0.4375rem);
   border-color: var(--sgds-form-invalid-border-color);
   padding-right: calc(2em + 0.875rem);
-  box-shadow: 0px 0px 0px var(--sgds-focus-width, 2px) var(--sgds-red-300, #FF9782);
+  --sgds-input-focus-box-shadow-color: var(--sgds-danger);
 }
 .form-control.is-invalid:focus {
   border-color: var(--sgds-form-invalid-border-color);
-  box-shadow: 0 0 0 0.25rem rgba(var(--sgds-danger-rgb), 0.25);
+  --sgds-input-focus-box-shadow-color: var(--sgds-danger);
+  box-shadow: var(--sgds-invalid-feedback-box-shadow);
 }
 .form-control-color.is-invalid {
   width: calc(3.875rem + 2em);

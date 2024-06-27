@@ -1,5 +1,5 @@
   :host {
-    --sgds-mainnav-background-color: transparent;
+    --sgds-mainnav-bg: transparent;
     --sgds-mainnav-padding-x: 2rem;
     --sgds-mainnav-padding-y: 0;
     --sgds-mainnav-mobile-padding-x: 0.5rem;
@@ -7,13 +7,12 @@
     --sgds-mainnav-border-bottom-width: 1px;
     --sgds-mainnav-border-bottom-color: #98a2b3;
     /** NEW in 2.0.0 */
-    --sgds-mainnav-toggler-icon-bg: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16" ><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" /></svg>');
+    --sgds-mainnav-toggler-icon: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16" ><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" /></svg>');
     --sgds-mainnav-toggler-padding-y: 0.25rem;
     --sgds-mainnav-toggler-padding-x: 0.75rem;
     --sgds-mainnav-toggler-font-size: 1.25rem;
 
     --sgds-mainnav-brand-padding-y: 0.125rem;
-    --sgds-mainnav-brand-margin-end: 1rem;
     --sgds-mainnav-brand-font-size: 1.25rem;
     --sgds-mainnav-brand-color: rgba(var(--sgds-emphasis-color-rgb), 0.9);
     --sgds-mainnav-brand-hover-color: rgba(var(--sgds-emphasis-color-rgb), 0.9);
@@ -31,7 +30,7 @@
     padding: var(--sgds-mainnav-padding-y) var(--sgds-mainnav-padding-x);
     position: relative;
     min-height: 80px;
-    background-color: var(--sgds-mainnav-background-color);
+    background-color: var(--sgds-mainnav-bg);
     border-bottom: var(--sgds-mainnav-border-bottom-width) solid var(--sgds-mainnav-border-bottom-color);
     @media (max-width: 768px) {
       padding: var(--sgds-mainnav-mobile-padding-y) var(--sgds-mainnav-mobile-padding-x);
@@ -99,7 +98,7 @@
     text-decoration: none;
   }
   .navbar-toggler-icon {
-    background-image: var(--sgds-mainnav-toggler-icon-bg);
+    background-image: var(--sgds-mainnav-toggler-icon);
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: 100%;

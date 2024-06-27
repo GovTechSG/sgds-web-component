@@ -1,7 +1,7 @@
 @import "../../styles/anchor.css";
 :host {
-  --sgds-btn-padding-x: 1rem;
-  --sgds-btn-padding-y: 0.4375rem;
+  --sgds-btn-padding-x: var(--sgds-input-btn-padding-x);
+  --sgds-btn-padding-y: var(--sgds-input-btn-padding-y);
   --sgds-btn-font-family: var(--sgds-font-sans-serif);
   --sgds-btn-font-size: 1rem;
   --sgds-btn-font-weight: 400;
@@ -21,7 +21,7 @@
   --sgds-btn-active-border-color: ;
   --sgds-btn-focus-box-shadow-color: var(--sgds-primary-300);
   --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width, 0.13rem) var(--sgds-btn-focus-box-shadow-color);
-
+  --sgds-btn-icon-gutter: 0.5rem;
   display: inline-block;
 }
 
@@ -35,7 +35,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-border-color: var(--sgds-primary-filled);
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-primary-700);
-  --sgds-btn-hover-border-color: var(--sgds-primary-filled);
+  /* --sgds-btn-hover-border-color: var(--sgds-primary-filled); */
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-primary-700);
   --sgds-btn-active-border-color: var(--sgds-primary-filled);
@@ -48,7 +48,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-border-color: var(--sgds-secondary-filled);
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-secondary-700);
-  --sgds-btn-hover-border-color: var(--sgds-secondary-filled);
+  /* --sgds-btn-hover-border-color: var(--sgds-secondary-filled); */
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-secondary-700);
   --sgds-btn-active-border-color: var(--sgds-secondary-filled);
@@ -61,7 +61,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-border-color: var(--sgds-warning-filled);
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-warning-700);
-  --sgds-btn-hover-border-color: var(--sgds-warning-filled);
+  /* --sgds-btn-hover-border-color: var(--sgds-warning-filled); */
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-warning-700);
   --sgds-btn-active-border-color: var(--sgds-warning-filled);
@@ -74,7 +74,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-border-color: var(--sgds-danger-filled);
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-danger-700);
-  --sgds-btn-hover-border-color: var(--sgds-danger-filled);
+  /* --sgds-btn-hover-border-color: var(--sgds-danger-filled); */
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-danger-700);
   --sgds-btn-active-border-color: var(--sgds-danger-filled);
@@ -87,7 +87,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-border-color: var(--sgds-success-filled);
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-success-700);
-  --sgds-btn-hover-border-color: var(--sgds-success-filled);
+  /* --sgds-btn-hover-border-color: var(--sgds-success-filled); */
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-success-700);
   --sgds-btn-active-border-color: var(--sgds-success-filled);
@@ -100,7 +100,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-border-color: var(--sgds-info-filled);
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-info-700);
-  --sgds-btn-hover-border-color: var(--sgds-info-filled);
+  /* --sgds-btn-hover-border-color: var(--sgds-info-filled); */
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-info-700);
   --sgds-btn-active-border-color: var(--sgds-info-filled);
@@ -113,7 +113,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-border-color: var(--sgds-light-filled);
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-gray-200);
-  --sgds-btn-hover-border-color: var(--sgds-gray-200);
+  /* --sgds-btn-hover-border-color: var(--sgds-gray-200); */
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-gray-200);
   --sgds-btn-active-border-color: var(--sgds-gray-200);
@@ -126,7 +126,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-border-color: var(--sgds-dark-filled);
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-gray-700);
-  --sgds-btn-hover-border-color: var(--sgds-gray-700);
+  /* --sgds-btn-hover-border-color: var(--sgds-gray-700); */
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-gray-700);
   --sgds-btn-active-border-color: var(--sgds-gray-700);
@@ -139,7 +139,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-border-color: transparent;
   --sgds-btn-hover-color: var(--sgds-info-700);
   --sgds-btn-hover-bg: transparent;
-  --sgds-btn-hover-border-color: transparent;
+  /* --sgds-btn-hover-border-color: transparent; */
   --sgds-btn-active-color: var(--sgds-info-700);
   --sgds-btn-active-bg: transparent;
   --sgds-btn-active-border-color: transparent;
@@ -304,6 +304,14 @@ button:focus:not(:focus-visible) {
   --sgds-btn-font-size: 0.875rem;
   --sgds-btn-border-radius: var(--sgds-border-radius-sm);
 }
+
+slot[name="leftIcon"]::slotted(*) {
+  padding-right: var(--sgds-btn-icon-gutter);
+}
+slot[name="rightIcon"]::slotted(*) {
+  padding-left: var(--sgds-btn-icon-gutter);
+}
+
 /* [data-bs-theme="dark"] .btn-primary {
     --sgds-btn-color: var(--sgds-white);
     --sgds-btn-bg: var(--sgds-primary-bg-dark);
