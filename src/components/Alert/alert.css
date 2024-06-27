@@ -1,7 +1,6 @@
 @import "../../styles/close-button.css";
 
 :host {
-  --sgds-alert-icon-margin-right: 0.5rem;
   /* NEW in 2.0 */
   --sgds-alert-bg: transparent;
   --sgds-alert-padding-x: 1rem;
@@ -9,9 +8,10 @@
   --sgds-alert-margin-bottom: 1rem;
   --sgds-alert-color: var(--sgds-white);
   --sgds-alert-border-color: transparent;
-  --sgds-alert-border: var(--sgds-border-width) solid var(--sgds-alert-border-color);
+  --sgds-alert-border-width: var(--sgds-border-width);
   --sgds-alert-border-radius: var(--sgds-border-radius);
   --sgds-alert-link-color: var(--sgds-white);
+  --sgds-alert-icon-gap: 0.5em;
 }
 
 :host([variant="primary"]) {
@@ -112,11 +112,6 @@
   --sgds-alert-border-color: var(--sgds-dark-border-subtle);
 }
 
-slot[name="icon"]::slotted(svg) {
-  margin-right: var(--sgds-alert-icon-margin-right);
-  vertical-align: unset !important;
-}
-
 i {
   position: relative;
   top: 2px;
@@ -139,8 +134,9 @@ i {
 .alert {
   display: flex;
   align-items: center;
+  gap: var(--sgds-alert-icon-gap);
   background-color: var(--sgds-alert-bg);
-  border: var(--sgds-alert-border);
+  border: var(--sgds-alert-border-width) solid var(--sgds-alert-border-color);
   border-radius: var(--sgds-alert-border-radius);
   color: var(--sgds-alert-color);
   margin-bottom: var(--sgds-alert-margin-bottom);

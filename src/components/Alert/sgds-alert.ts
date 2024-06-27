@@ -16,16 +16,16 @@ export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "war
  * @event sgds-show - Emitted when the alert appears.
  * @event sgds-hide - Emitted after the alert closes.
  *
- * @cssproperty --sgds-alert-icon-margin-right - The margin-right css of icon slot, to position the gap between icon and alert message
  * @cssproperty --sgds-alert-bg - The background color of alert
  * @cssproperty --sgds-alert-padding-x - The x-axis padding of alert
  * @cssproperty --sgds-alert-padding-y - The y-axis padding of alert
  * @cssproperty --sgds-alert-margin-bottom - The bottom margin of alert
  * @cssproperty --sgds-alert-color - The text color of alert
- * @cssproperty --sgds-alert-border-color - The border color of alert
- * @cssproperty --sgds-alert-border - The border of alert
+ * @cssproperty --sgds-alert-border-color - The color of the border of alert
+ * @cssproperty --sgds-alert-border-width - The width of the border of alert
  * @cssproperty --sgds-alert-border-radius - The border radius of alert
  * @cssproperty --sgds-alert-link-color - The link color of alert
+ * @cssproperty --sgds-alert-icon-gap - The gap between the icon and alert text
  *
  */
 export class SgdsAlert extends SgdsElement {
