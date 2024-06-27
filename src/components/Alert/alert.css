@@ -3,15 +3,15 @@
 :host {
   /* NEW in 2.0 */
   --sgds-alert-bg: transparent;
-  --sgds-alert-padding-x: 1rem;
-  --sgds-alert-padding-y: 1rem;
-  --sgds-alert-margin-bottom: 1rem;
+  --sgds-alert-padding-x: var(--spacer-3);
+  --sgds-alert-padding-y: var(--spacer-3);
+  --sgds-alert-margin-bottom: var(--spacer-3);
   --sgds-alert-color: var(--sgds-white);
   --sgds-alert-border-color: transparent;
   --sgds-alert-border-width: var(--sgds-border-width);
   --sgds-alert-border-radius: var(--sgds-border-radius);
   --sgds-alert-link-color: var(--sgds-white);
-  --sgds-alert-icon-gap: 0.5em;
+  --sgds-alert-icon-gap: var(--spacer-2);
 }
 
 :host([variant="primary"]) {
