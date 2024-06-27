@@ -158,6 +158,16 @@
   --sgds-disabled-opacity: 0.5;
   --sgds-input-btn-padding-x: 1rem;
   --sgds-input-btn-padding-y: 0.4375rem;
+
+  --spacer-0: 0rem;
+  --spacer-1: 0.25rem;
+  --spacer-2: 0.5rem;
+  --spacer-3: 1rem;
+  --spacer-4: 1.5rem;
+  --spacer-5: 2rem;
+  --spacer-6: 2.5rem;
+  --spacer-7: 3rem;
+  --spacer-8: 3.5rem;
 }
 /* [data-bs-theme="dark"] {
   --sgds-body-color: #d2d2d2;
