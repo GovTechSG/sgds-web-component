@@ -4,9 +4,11 @@ import { html } from "lit";
 import { property, queryAsync } from "lit/decorators.js";
 import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
 import { SgdsInput } from "../Input/sgds-input";
+import datepickerInputStyles from "./datepicker-input.css";
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
 export class DatepickerInput extends SgdsInput {
+  static styles = [...SgdsInput.styles, datepickerInputStyles];
   /** Date format reflected on input  */
   @property({ type: String }) dateFormat: DateFormat = "DD/MM/YYYY";
 
@@ -138,10 +140,11 @@ export class DatepickerInput extends SgdsInput {
   render() {
     return html`
       ${this._renderLabel()} ${this._renderHintText()}
-      <div class="d-flex">
-        <div class="d-flex flex-column w-100">${this._renderInput()}</div>
+      <div class="input-container">
+        ${this._renderInput()}
         <slot name="calendar-btn"></slot>
         <slot name="reset-btn"></slot>
+        </div>
       </div>
     `;
   }

@@ -1,4 +1,4 @@
-import { property, query, state } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
@@ -18,7 +18,7 @@ import inputStyle from "./input.css";
  * @event sgds-input - Emitted when the control receives input and its value changes.
  * @event sgds-focus - Emitted when input is in focus.
  * @event sgds-blur - Emitted when input is not in focus.
- * 
+ *
  * @cssproperty --sgds-input-padding-x - The x-axis padding of the input
  * @cssproperty --sgds-input-padding-y - The y-axis padding of the input
  * @cssproperty --sgds-input-line-height - The line height of text in the input
@@ -27,7 +27,7 @@ import inputStyle from "./input.css";
  * @cssproperty --sgds-input-border-radius - The border radius of the input
  * @cssproperty --sgds-input-border-radius - The border radius of the input
  * @cssproperty --sgds-input-border-width - The thickness of the input's border
- * @cssproperty --sgds-input-border-color - The border color of the input 
+ * @cssproperty --sgds-input-border-color - The border color of the input
  * @cssproperty --sgds-input-focus-box-shadow-color - The color of box shadow of input at focused state
  * @cssproperty --sgds-input-focus-box-shadow - The box shadow of input at focused state
  * @cssproperty --sgds-input-color - Sets the text colors of input
@@ -43,15 +43,8 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   /**@internal */
   protected readonly formSubmitController = new FormSubmitController(this);
   /** The type of input which works the same as HTMLInputElement */
-  @property({ reflect: true }) type:
-    | "email"
-    | "number"
-    | "password"
-    | "search"
-    | "tel"
-    | "text"
-    | "time"
-    | "url" = "text";
+  @property({ reflect: true }) type: "email" | "number" | "password" | "search" | "tel" | "text" | "time" | "url" =
+    "text";
   /** The input's label  */
   @property({ reflect: true }) label = "";
   /** The input's hint text below the label */
@@ -89,10 +82,9 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @property({ type: String, reflect: true }) invalidFeedback = "";
 
   /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
-  @property({type: Boolean, reflect: true}) invalid = false;
-   /** Marks the input as invalid. Replace the pseudo :valid selector for absent in custom elements */
-  @property({type: Boolean, reflect: true}) valid = false;
-
+  @property({ type: Boolean, reflect: true }) invalid = false;
+  /** Marks the input as invalid. Replace the pseudo :valid selector for absent in custom elements */
+  @property({ type: Boolean, reflect: true }) valid = false;
 
   /**@internal */
   protected inputId: string = genId("input", this.type);
@@ -168,7 +160,6 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
           "form-control": true,
           "is-invalid": this.hasFeedback && this.invalid,
           "is-valid": this.hasFeedback && this.valid,
-          [`${this.inputClasses}`]: this.inputClasses
         })}
         type=${this.type}
         id=${this.inputId}
@@ -208,16 +199,14 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     return this.label && labelTemplate;
   }
   protected _renderHintText() {
-    const hintTextTemplate = html`
-      <small id="${this.inputId}Help" class="form-text">${this.hintText}</small>
-    `;
+    const hintTextTemplate = html` <small id="${this.inputId}Help" class="form-text">${this.hintText}</small> `;
     return this.hintText && hintTextTemplate;
   }
   render() {
     const input = html`${this._renderInput()}`;
     // if iconName is defined
     const inputWithIcon = html`
-      <div class="sgds form-control-group ${this.inputClasses}">
+      <div class="sgds form-control-group">
         <span class="form-control-icon"> ${unsafeSVG(this.icon)} </span>
         ${input}
       </div>

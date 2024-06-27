@@ -317,7 +317,7 @@
 }
 .sgds.dropdown .dropdown-toggle {
   align-items: center;
-  display: flex;
+  /* display: flex; */
   gap: 0.5rem;
   justify-content: space-between;
 }

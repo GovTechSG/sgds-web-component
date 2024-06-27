@@ -108,8 +108,8 @@
   --sgds-danger-border-subtle: var(--sgds-danger-400);
   --sgds-light-border-subtle: var(--sgds-gray-400);
   --sgds-dark-border-subtle: var(--sgds-gray-400);
-  --sgds-font-sans-serif: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans",
-    "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --sgds-font-sans-serif: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Liberation Sans",
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --sgds-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --sgds-gradient: linear-gradient(180deg, hsla(0, 0%, 100%, 0.15), hsla(0, 0%, 100%, 0));
   --sgds-body-font-family: var(--sgds-font-sans-serif);
@@ -117,6 +117,8 @@
   --sgds-body-font-weight: 400;
   --sgds-body-line-height: 2;
   --sgds-body-color: var(--sgds-dark);
+  --sgds-body-color-light: var(--sgds-gray-700);
+  --sgds-body-color-lighter: var(--sgds-gray-600);
   --sgds-body-bg: var(--sgds-white);
   /* --sgds-emphasis-color: #000;
   --sgds-secondary-color: rgba(37, 37, 37, 0.75);
@@ -148,14 +150,15 @@
   --sgds-focus-ring-width: 0.25rem;
   --sgds-focus-ring-opacity: 0.25;
   --sgds-focus-ring-color: rgba(90, 66, 192, 0.25);
-  --sgds-form-valid-color: #006b00;
-  --sgds-form-valid-border-color: #006b00;
-  --sgds-form-invalid-color: #b90000;
-  --sgds-form-invalid-border-color: #b90000;
+  --sgds-form-valid-color: var(--sgds-success);
+  --sgds-form-valid-border-color: var(--sgds-success);
+  --sgds-form-invalid-color: var(--sgds-danger);
+  --sgds-form-invalid-border-color: var(--sgds-danger);
 
   --sgds-focus-width: 0.13rem;
-  --sgds-color-disabled: var(--sgds-gray-400);
+  --sgds-disabled-color: var(--sgds-gray-400);
   --sgds-disabled-opacity: 0.5;
+  --sgds-disabled-bg: var(--sgds-gray-200);
   --sgds-input-btn-padding-x: 1rem;
   --sgds-input-btn-padding-y: 0.4375rem;
 }
