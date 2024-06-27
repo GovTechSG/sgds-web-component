@@ -16,44 +16,36 @@
 
 :host([variant="primary"]) {
   --sgds-alert-bg: var(--sgds-primary-filled);
-  --sgds-alert-border-color: var(--sgds-primary-filled);
 }
 
 :host([variant="secondary"]) {
   --sgds-alert-bg: var(--sgds-secondary-filled);
-  --sgds-alert-border-color: var(--sgds-secondary-filled);
 }
 
 :host([variant="warning"]) {
   --sgds-alert-bg: var(--sgds-warning-filled);
-  --sgds-alert-border-color: var(--sgds-warning-filled);
 }
 
 :host([variant="danger"]) {
   --sgds-alert-bg: var(--sgds-danger-filled);
-  --sgds-alert-border-color: var(--sgds-danger-filled);
 }
 
 :host([variant="success"]) {
   --sgds-alert-bg: var(--sgds-success-filled);
-  --sgds-alert-border-color: var(--sgds-success-filled);
 }
 
 :host([variant="info"]) {
   --sgds-alert-bg: var(--sgds-info-filled);
-  --sgds-alert-border-color: var(--sgds-info-filled);
 }
 
 :host([variant="light"]) {
   --sgds-alert-color: var(--sgds-dark);
   --sgds-alert-link-color: var(--sgds-dark);
   --sgds-alert-bg: var(--sgds-light-filled);
-  --sgds-alert-border-color: var(--sgds-light-filled);
 }
 
 :host([variant="dark"]) {
   --sgds-alert-bg: var(--sgds-dark-filled);
-  --sgds-alert-border-color: var(--sgds-dark-filled);
 }
 
 :host([variant="primary"][outlined]) {
