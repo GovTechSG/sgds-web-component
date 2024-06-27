@@ -18,7 +18,7 @@
   --sgds-btn-hover-bg: ;
   --sgds-btn-active-color: ;
   --sgds-btn-active-bg: ;
-  --sgds-btn-active-border-color: ;
+  --sgds-btn-active-border-color: transparent;
   --sgds-btn-focus-box-shadow-color: var(--sgds-primary-300);
   --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width, 0.13rem) var(--sgds-btn-focus-box-shadow-color);
   --sgds-btn-icon-gutter: 0.5rem;
@@ -37,7 +37,6 @@ button:focus:not(:focus-visible) {
   --sgds-btn-hover-bg: var(--sgds-primary-700);
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-primary-700);
-  --sgds-btn-active-border-color: var(--sgds-primary-filled);
   --sgds-btn-focus-box-shadow-color: var(--sgds-primary-300);
   --sgds-btn-disabled-color: var(--sgds-white);
 }
@@ -49,7 +48,6 @@ button:focus:not(:focus-visible) {
   --sgds-btn-hover-bg: var(--sgds-secondary-700);
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-secondary-700);
-  --sgds-btn-active-border-color: var(--sgds-secondary-filled);
   --sgds-btn-focus-box-shadow-color: var(--sgds-secondary-300);
   --sgds-btn-disabled-color: var(--sgds-white);
 }
@@ -61,7 +59,6 @@ button:focus:not(:focus-visible) {
   --sgds-btn-hover-bg: var(--sgds-warning-700);
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-warning-700);
-  --sgds-btn-active-border-color: var(--sgds-warning-filled);
   --sgds-btn-focus-box-shadow-color: var(--sgds-warning-300);
   --sgds-btn-disabled-color: var(--sgds-white);
 }
@@ -73,7 +70,6 @@ button:focus:not(:focus-visible) {
   --sgds-btn-hover-bg: var(--sgds-danger-700);
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-danger-700);
-  --sgds-btn-active-border-color: var(--sgds-danger-filled);
   --sgds-btn-focus-box-shadow-color: var(--sgds-danger-300);
   --sgds-btn-disabled-color: var(--sgds-white);
 }
@@ -85,7 +81,6 @@ button:focus:not(:focus-visible) {
   --sgds-btn-hover-bg: var(--sgds-success-700);
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-success-700);
-  --sgds-btn-active-border-color: var(--sgds-success-filled);
   --sgds-btn-focus-box-shadow-color: var(--sgds-success-300);
   --sgds-btn-disabled-color: var(--sgds-white);
 }
@@ -97,7 +92,6 @@ button:focus:not(:focus-visible) {
   --sgds-btn-hover-bg: var(--sgds-info-700);
   --sgds-btn-active-color: #fff;
   --sgds-btn-active-bg: var(--sgds-info-700);
-  --sgds-btn-active-border-color: var(--sgds-info-filled);
   --sgds-btn-focus-box-shadow-color: var(--sgds-info-300);
   --sgds-btn-disabled-color: var(--sgds-white);
 }
@@ -113,7 +107,8 @@ button:focus:not(:focus-visible) {
   --sgds-btn-focus-box-shadow-color: var(--sgds-gray-500);
   --sgds-btn-disabled-color: var(--sgds-dark);
 }
-:host([variant="dark"]), :host([variant="dark"][outlined]) {
+:host([variant="dark"]),
+:host([variant="dark"][outlined]) {
   --sgds-btn-color: var(--sgds-white);
   --sgds-btn-bg: var(--sgds-dark-filled);
   --sgds-btn-border-color: var(--sgds-dark-filled);
@@ -133,9 +128,8 @@ button:focus:not(:focus-visible) {
   --sgds-btn-hover-bg: transparent;
   --sgds-btn-active-color: var(--sgds-info-700);
   --sgds-btn-active-bg: transparent;
-  --sgds-btn-active-border-color: transparent;
   --sgds-btn-focus-box-shadow-color: var(--sgds-info-300);
-  --sgds-btn-disabled-color: var(--sgds-color-disabled);
+  --sgds-btn-disabled-color: var(--sgds-disabled-color);
 }
 :host([variant="primary"][outlined]) {
   --sgds-btn-color: var(--sgds-primary-text-emphasis);

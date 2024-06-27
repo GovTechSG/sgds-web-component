@@ -14,8 +14,10 @@
   display: flex;
   flex-wrap: wrap;
   position: relative;
-  width: 100%;
+  width: -webkit-fill-available;
+  width: -moz-available;
 }
+
 .sgds.combobox > .form-control {
   padding-left: 3rem;
 }
