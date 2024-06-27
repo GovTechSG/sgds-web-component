@@ -78,7 +78,7 @@
 
   --sgds-primary-filled: var(--sgds-primary);
   --sgds-secondary-filled: var(--sgds-secondary);
-  --sgds-success-filled: var(---sgds-success);
+  --sgds-success-filled: var(--sgds-success);
   --sgds-info-filled: var(--sgds-info);
   --sgds-warning-filled: var(--sgds-warning);
   --sgds-danger-filled: var(--sgds-danger);
@@ -86,7 +86,7 @@
   --sgds-dark-filled: var(--sgds-dark);
   --sgds-primary-text-emphasis: var(--sgds-primary);
   --sgds-secondary-text-emphasis: var(--sgds-secondary);
-  --sgds-success-text-emphasis: var(---sgds-success);
+  --sgds-success-text-emphasis: var(--sgds-success);
   --sgds-info-text-emphasis: var(--sgds-info);
   --sgds-warning-text-emphasis: var(--sgds-warning);
   --sgds-danger-text-emphasis: var(--sgds-danger);
