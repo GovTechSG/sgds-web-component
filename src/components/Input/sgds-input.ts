@@ -18,6 +18,22 @@ import inputStyle from "./input.css";
  * @event sgds-input - Emitted when the control receives input and its value changes.
  * @event sgds-focus - Emitted when input is in focus.
  * @event sgds-blur - Emitted when input is not in focus.
+ * 
+ * @cssproperty --sgds-input-padding-x - The x-axis padding of the input
+ * @cssproperty --sgds-input-padding-y - The y-axis padding of the input
+ * @cssproperty --sgds-input-line-height - The line height of text in the input
+ * @cssproperty --sgds-input-font-weight - Sets the font weight of hint text and text in the input
+ * @cssproperty --sgds-input-font-size - Sets the font size of hint text and text in the input
+ * @cssproperty --sgds-input-border-radius - The border radius of the input
+ * @cssproperty --sgds-input-border-radius - The border radius of the input
+ * @cssproperty --sgds-input-border-width - The thickness of the input's border
+ * @cssproperty --sgds-input-border-color - The border color of the input 
+ * @cssproperty --sgds-input-focus-box-shadow-color - The color of box shadow of input at focused state
+ * @cssproperty --sgds-input-focus-box-shadow - The box shadow of input at focused state
+ * @cssproperty --sgds-input-color - Sets the text colors of input
+ * @cssproperty --sgds-input-label-color - Sets the text color input's label
+ * @cssproperty --sgds-input-hint-text-color - Sets the text color input's hint text
+ * @cssproperty --sgds-input-placeholder-color - Sets the text color input's placeholder. Defaults to --sgds-input-color
  *
  */
 export class SgdsInput extends SgdsElement implements SgdsFormControl {
@@ -26,10 +42,8 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @query("input.form-control") input: HTMLInputElement;
   /**@internal */
   protected readonly formSubmitController = new FormSubmitController(this);
-  /** The type of input which works the same as HTMLInputElement*/
+  /** The type of input which works the same as HTMLInputElement */
   @property({ reflect: true }) type:
-    | "date"
-    | "datetime-local"
     | "email"
     | "number"
     | "password"
@@ -44,8 +58,6 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @property({ reflect: true }) hintText = "";
   /**The input's name attribute */
   @property({ reflect: true }) name: string;
-  /**Forwards classes to the native HTMLInputElement of the component. Can be used to insert any classes from bootstrap such as mt-2 */
-  @property({ reflect: true }) inputClasses: string;
   /**Optional. Pass svg html of icons in string form*/
   @property({ type: String }) icon: string;
   /**Sets the minimum length of the input */
@@ -76,10 +88,11 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback = "";
 
-  /**@internal */
-  @state() invalid = false;
-  /**@internal */
-  @state() valid = false;
+  /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
+  @property({type: Boolean, reflect: true}) invalid = false;
+   /** Marks the input as invalid. Replace the pseudo :valid selector for absent in custom elements */
+  @property({type: Boolean, reflect: true}) valid = false;
+
 
   /**@internal */
   protected inputId: string = genId("input", this.type);
@@ -196,7 +209,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   }
   protected _renderHintText() {
     const hintTextTemplate = html`
-      <small id="${this.inputId}Help" class="text-muted form-text">${this.hintText}</small>
+      <small id="${this.inputId}Help" class="form-text">${this.hintText}</small>
     `;
     return this.hintText && hintTextTemplate;
   }
@@ -212,7 +225,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     // if hintText is defined
 
     return html`
-      <div class="d-flex flex-column w-100">
+      <div class="form-control-container">
         ${html`${this._renderLabel()} ${this._renderHintText()} ${this.icon ? inputWithIcon : input} `}
       </div>
     `;
