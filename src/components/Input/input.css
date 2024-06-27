@@ -1,7 +1,12 @@
 @import "../../styles/feedback";
 
 :host {
+  --sgds-input-padding-x: var(--sgds-input-btn-padding-x);
+  --sgds-input-padding-y: var(--sgds-input-btn-padding-y);
+  --sgds-input-line-height: var(--sgds-body-line-height);
+  --sgds-input-font-weight: 400;
   --sgds-input-border-radius: var(--sgds-border-radius, 0.3215rem);
+  --sgds-input-border-width: var(--sgds-border-width);
   --sgds-input-focus-box-shadow-color:var(--sgds-info-300);
   --sgds-input-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width, 2px) var(--sgds-input-focus-box-shadow-color);
 
@@ -28,12 +33,12 @@
   appearance: none;
   background-clip: padding-box;
   background-color: var(--sgds-body-bg);
-  border: 1px solid var(--sgds-border-color);
+  border: var(--sgds-input-border-width) solid var(--sgds-border-color);
   border-radius: var(--sgds-input-border-radius);
   color: var(--sgds-body-color);
-  font-weight: 400;
-  line-height: 2;
-  padding: 0.4375rem 1rem;
+  font-weight: var(--sgds-input-font-weight);
+  line-height: var(--sgds-input-line-height);
+  padding: var(--sgds-input-padding-x) var(--sgds-input-padding-y);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   width: -webkit-fill-available;
   width: -moz-available;
