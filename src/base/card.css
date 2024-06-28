@@ -6,17 +6,17 @@
 :host {
   /* NEW in 2.0 */
   --sgds-card-bg: var(--sgds-body-bg);
-  --sgds-card-height: ;
+  --sgds-card-height: auto;
   --sgds-card-border-width: var(--sgds-border-width);
   --sgds-card-border-color: var(--sgds-border-color-translucent);
   --sgds-card-border-radius: var(--sgds-border-radius);
-  --sgds-card-box-shadow: ;
+  --sgds-card-box-shadow: none;
   --sgds-card-inner-border-radius: calc(var(--sgds-border-radius) - var(--sgds-border-width));
 
   --sgds-card-body-color: var(--sgds-body-color);
-  --sgds-card-body-padding: 1.5rem;
+  --sgds-card-body-padding: var(--sgds-spacer-4);
 
-  --sgds-card-title-margin-bottom: 0.5rem;
+  --sgds-card-title-margin-bottom: var(--sgds-spacer-2);
   --sgds-card-title-color: var(--sgds-body-color);
 
   /* Currently applies to action card only 

@@ -1,7 +1,7 @@
 @import "../../styles/anchor.css";
 
 :host {
-  --sgds-breadcrumb-item-padding-x: 1rem;
+  --sgds-breadcrumb-item-padding-x: var(--sgds-spacer-3);
   --sgds-breadcrumb-item-active-color: var(--sgds-body-color);
   --sgds-breadcrumb-item-active-font-weight: bold;
 
@@ -10,7 +10,7 @@
 slot[name="separator"]::slotted(*) {
   padding-left: var(--sgds-breadcrumb-item-padding-x);
   padding-right: var(--sgds-breadcrumb-item-padding-x);
-  color: var(--sgds-breadcrumb-separator-color)
+  color: var(--sgds-breadcrumb-separator-color);
 }
 
 :host(:last-of-type) .breadcrumb-item__separator {

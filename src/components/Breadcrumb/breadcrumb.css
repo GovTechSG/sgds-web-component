@@ -1,8 +1,8 @@
 :host {
   /* NEW in V2.0 */
-  --sgds-breadcrumb-padding-x: 0;
-  --sgds-breadcrumb-padding-y: 0;
-  --sgds-breadcrumb-margin-bottom: 1rem;
+  --sgds-breadcrumb-padding-x: var(--sgds-spacer-0);
+  --sgds-breadcrumb-padding-y: var(--sgds-spacer-0);
+  --sgds-breadcrumb-margin-bottom: var(--sgds-spacer-3);
   --sgds-breadcrumb-bg: transparent;
   --sgds-breadcrumb-border-radius: 0;
   --sgds-breadcrumb-font-size: var(--sgds-body-font-size);

@@ -162,15 +162,15 @@
   --sgds-input-btn-padding-x: 1rem;
   --sgds-input-btn-padding-y: 0.4375rem;
 
-  --spacer-0: 0rem;
-  --spacer-1: 0.25rem;
-  --spacer-2: 0.5rem;
-  --spacer-3: 1rem;
-  --spacer-4: 1.5rem;
-  --spacer-5: 2rem;
-  --spacer-6: 2.5rem;
-  --spacer-7: 3rem;
-  --spacer-8: 3.5rem;
+  --sgds-spacer-0: 0rem;
+  --sgds-spacer-1: 0.25rem;
+  --sgds-spacer-2: 0.5rem;
+  --sgds-spacer-3: 1rem;
+  --sgds-spacer-4: 1.5rem;
+  --sgds-spacer-5: 2rem;
+  --sgds-spacer-6: 2.5rem;
+  --sgds-spacer-7: 3rem;
+  --sgds-spacer-8: 3.5rem;
 }
 /* [data-bs-theme="dark"] {
   --sgds-body-color: #d2d2d2;

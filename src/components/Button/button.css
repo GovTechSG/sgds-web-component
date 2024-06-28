@@ -21,7 +21,7 @@
   --sgds-btn-active-border-color: transparent;
   --sgds-btn-focus-box-shadow-color: var(--sgds-primary-300);
   --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width, 0.13rem) var(--sgds-btn-focus-box-shadow-color);
-  --sgds-btn-icon-gutter: 0.5rem;
+  --sgds-btn-icon-gutter: var(--sgds-spacer-2);
   display: inline-block;
 }
 

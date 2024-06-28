@@ -2,7 +2,7 @@
   /* NEW in 2.0 */
   --sgds-badge-padding-x: 0.571em;
   --sgds-badge-padding-y: 0.285em;
-  --sgds-badge-font-size:  min(0.875em, 2rem);
+  --sgds-badge-font-size: min(0.875em, 2rem);
   --sgds-badge-font-weight: 700;
   --sgds-badge-color: var(--sgds-white);
   --sgds-badge-border-radius: var(--sgds-border-radius);
@@ -10,7 +10,7 @@
   --sgds-badge-line-height: 1.145;
   --sgds-badge-bg: ;
   --sgds-badge-border-color: transparent;
-  --sgds-badge-icon-gap: 0.5em;
+  --sgds-badge-icon-gap: var(--sgds-spacer-2);
 }
 
 :host([variant="primary"]) {
@@ -33,7 +33,7 @@
 }
 :host([variant="light"]) {
   --sgds-badge-bg: var(--sgds-light-filled);
-  --sgds-badge-color: var(--sgds-dark)
+  --sgds-badge-color: var(--sgds-dark);
 }
 :host([variant="dark"]) {
   --sgds-badge-bg: var(--sgds-dark-filled);
@@ -42,7 +42,6 @@
   --sgds-badge-color: var(--sgds-primary-text-emphasis);
   --sgds-badge-bg: var(--sgds-primary-bg-subtle);
   --sgds-badge-border-color: var(--sgds-primary-border-subtle);
-
 }
 :host([variant="secondary"][outlined]) {
   --sgds-badge-color: var(--sgds-secondary-text-emphasis);

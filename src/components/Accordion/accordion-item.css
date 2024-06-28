@@ -1,7 +1,7 @@
 :host {
   /* RENAME in 2.0.0 */
-  --sgds-accordion-item-padding-y: 1rem;
-  --sgds-accordion-item-padding-x: 1.5rem;
+  --sgds-accordion-item-padding-y: var(--sgds-spacer-3);
+  --sgds-accordion-item-padding-x: var(--sgds-spacer-4);
   --sgds-accordion-item-border-radius: var(--sgds-border-radius, 0.3125rem);
   --sgds-accordion-item-font-weight: 700;
   --sgds-accordion-item-line-height: var(--sgds-body-line-height);
@@ -12,7 +12,8 @@
   --sgds-accordion-item-btn-icon-transform: rotate(-180deg);
   --sgds-accordion-item-btn-icon-transition: transform 0.2s ease-in-out;
   --sgds-accordion-item-btn-focus-box-shadow-color: rgba(0, 73, 220, 0.25);
-  --sgds-accordion-item-btn-focus-box-shadow: 0 0 0 var(--sgds-focus-width) var(--sgds-accordion-item-btn-focus-box-shadow-color);
+  --sgds-accordion-item-btn-focus-box-shadow: 0 0 0 var(--sgds-focus-width)
+    var(--sgds-accordion-item-btn-focus-box-shadow-color);
   --sgds-accordion-item-content-color: var(--sgds-body-color);
 }
 .accordion-btn {
