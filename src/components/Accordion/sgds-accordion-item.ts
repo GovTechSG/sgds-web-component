@@ -6,7 +6,6 @@ import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
-// import accordionStyle from "./accordion.css";
 import accordionItemStyle from "./accordion-item.css";
 
 /**
@@ -26,26 +25,24 @@ import accordionItemStyle from "./accordion-item.css";
  * @cssprop --accordion-item-padding-y - The top and bottom padding for the container of accordion item's content
  * @cssprop --accordion-item-padding-x - The right and left padding for the container of accordion item's content
  * @cssprop --accordion-item-border-radius - The border radius of the accordion item
- * @cssprop --accordion-item-font-weight - The font weight of accordion-button when it is not collapsed
+ * @cssprop --accordion-item-font-weight - The font weight of accordion-btn when it is not collapsed
  * @cssprop --accordion-item-line-height - The line height of accordion
- * @cssprop --accordion-item-button-color - The text colour of the button in accordion-item
- * @cssprop --accordion-item-button-border-radius - The border radius of button in accordion-item
- * @cssprop --accordion-item-button-bg - The background colour of the button in accordion-item
- * @cssprop --accordion-item-button-icon - The caret icon of the button in accordion-item
- * @cssprop --accordion-item-button-icon-width - The width of the caret icon
- * @cssprop --accordion-item-button-icon-transform - The transform value of caret icon when accordion is toggled open and close
- * @cssprop --accordion-item-button-icon-transition - The transition value of caret icon when accordion is toggled open and close
- * @cssprop --accordion-item-button-focus-border-color - The border colour of accordion button on focus state
- * @cssprop --accordion-item-button-focus-border-color - The border colour of accordion button on focus state
- * @cssprop --accordion-item-button-focus-box-shadow - The box-shadow of accordion button on focus state
- * @cssprop --accordion-item-content-color - The content text colour of the accordion-item
+ * @cssprop --accordion-item-btn-color - The text color of the button in accordion-item
+ * @cssprop --accordion-item-btn-border-radius - The border radius of button in accordion-item
+ * @cssprop --accordion-item-btn-bg - The background color of the button in accordion-item
+ * @cssprop --accordion-item-btn-icon-transform - The transform value of caret icon when accordion is toggled open and close
+ * @cssprop --accordion-item-btn-icon-transition - The transition value of caret icon when accordion is toggled open and close
+ * @cssprop --accordion-item-btn-focus-border-color - The border color of accordion button on focus state
+ * @cssprop --sgds-accordion-item-btn-focus-box-shadow-color - The box shadow color of accordion button on focus state
+ * @cssprop --accordion-item-btn-focus-box-shadow - The box-shadow of accordion button on focus state
+ * @cssprop --accordion-item-content-color - The content text color of the accordion-item
  */
 export class SgdsAccordionItem extends SgdsElement {
   static styles = [...SgdsElement.styles, accordionItemStyle];
   /** @internal */
   @query(".accordion-item") accordion: HTMLElement;
   /** @internal */
-  @query(".accordion-button") header: HTMLElement;
+  @query(".accordion-btn") header: HTMLElement;
   /** @internal */
   @query(".accordion-body") body: HTMLElement;
 
@@ -167,6 +164,19 @@ export class SgdsAccordionItem extends SgdsElement {
           @keydown=${this.handleSummaryKeyDown}
         >
           <slot name="accordion-header"></slot>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-chevron-down"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+            />
+          </svg>
         </button>
         <div class="accordion-body">
           <slot name="accordion-content" class="accordion-content" role="region" aria-labelledby="header"></slot>

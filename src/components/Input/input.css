@@ -10,12 +10,19 @@
   --sgds-input-border-width: var(--sgds-border-width);
   --sgds-input-border-color: var(--sgds-border-color);
   --sgds-input-focus-box-shadow-color: var(--sgds-info-300);
-  --sgds-input-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width, 2px) var(--sgds-input-focus-box-shadow-color);
+  --sgds-input-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width) var(--sgds-input-focus-box-shadow-color);
   --sgds-input-color: var(--sgds-body-color);
   --sgds-input-label-color: var(--sgds-body-color);
   --sgds-input-hint-text-color: var(--sgds-body-color-light);
-  --sgds-input-placeholder-color: var(--sgds-input-color);
+  --sgds-input-placeholder-color: var(--sgds-gray-400);
 }
+:host([invalid]:focus){
+  --sgds-input-focus-box-shadow-color: var(--sgds-danger-300)
+}
+:host([valid]:focus){
+  --sgds-input-focus-box-shadow-color: var(--sgds-success-300)
+}
+
 .form-label {
   font-weight: 700;
   margin-bottom: 0;
@@ -185,12 +192,7 @@
   border-color: var(--sgds-form-valid-border-color);
   padding-right: calc(2em + 0.875rem);
 }
-:host([invalid]:focus){
-  --sgds-input-focus-box-shadow-color: var(--sgds-danger-300)
-}
-:host([valid]:focus){
-  --sgds-input-focus-box-shadow-color: var(--sgds-success-300)
-}
+
 .form-control.is-valid:focus {
   border-color: var(--sgds-form-valid-border-color);
 }

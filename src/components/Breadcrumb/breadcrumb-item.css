@@ -2,7 +2,7 @@
 
 :host {
   --sgds-breadcrumb-item-padding-x: 1rem;
-  --sgds-breadcrumb-item-active-color: ;
+  --sgds-breadcrumb-item-active-color: var(--sgds-body-color);
   --sgds-breadcrumb-item-active-font-weight: bold;
 
   font-size: var(--sgds-breadcrumb-font-size);

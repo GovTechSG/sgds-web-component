@@ -1,5 +1,5 @@
 a {
-  color: rgba(var(--sgds-link-rgb), var(--sgds-link-opacity, 1));
+  color: var(--sgds-link);
   text-decoration: underline;
 }
 a {
@@ -23,7 +23,7 @@ a[target="_blank"]::after {
 
 /* Globally style slotted anchor tags */
 a {
-  color: var(--sgds-link-color);
+  color: var(--sgds-link);
   text-decoration: var(--sgds-link-decoration);
  
 }

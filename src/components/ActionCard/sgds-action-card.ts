@@ -26,8 +26,8 @@ import actionCardStyles from "./action-card.css";
  * @csspart title - The action card title
  * @csspart text - The action card text
  *
- * @cssprop --sgds-action-card-active-border-box-shadow - The box-shadow of action card border when it is in active state
  * @cssprop --sgds-action-card-transition-duration - The transition duration to active or hover state. Defaults to 0.3s
+ * @cssprop --sgds-action-card-body-gap - The vertical gap between items in card body
  * @cssprop --sgds-card-bg - The background color of the card
  * @cssprop --sgds-card-height - The height of the card. By default, height of card depends on the size of its children
  * @cssprop --sgds-card-border-width - The border width of card
@@ -36,10 +36,9 @@ import actionCardStyles from "./action-card.css";
  * @cssprop --sgds-card-box-shadow - The box-shadow of card
  * @cssprop --sgds-card-inner-border-radius - The inner border radius of card. Useful in cases where card image is applied to prevent image border from exceeding the outer borders of the card
  * @cssprop --sgds-card-body-color - The text color of the items in card body. This includes title, subtitle and excludes link.
- * @cssprop --sgds-card-body-spacer-y - The y-axis spacer of card body
- * @cssprop --sgds-card-body-spacer-x - The x-axis spacer of card body.
+ * @cssprop --sgds-card-body-padding - The padding of the card body
  * @cssprop --sgds-card-title-color - The text color of card title
- * @cssprop --sgds-card-title-spacer-y - The y-axis spacer of card title.
+ * @cssprop --sgds-card-title-margin-bottom - The margin-bottom of card title
  * @cssprop --sgds-card-subtitle-color - The text color of card subtitle
  */
 export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
@@ -137,14 +136,14 @@ export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
         part="base"
       >
         <div class="card-body" part="body">
-          <h6 class="card-subtitle" part="subtitle">
+          <h6 class="card-subtitle h6" part="subtitle">
             <div>
               <slot name="icon"></slot>
               <slot name="card-subtitle"></slot>
             </div>
             <div class="card-input">${this.type === "checkbox" ? checkbox : radio}</div>
           </h6>
-          <h5 class="card-title" part="title"><slot name="card-title"></slot></h5>
+          <h5 class="card-title h5" part="title"><slot name="card-title"></slot></h5>
           <p class="card-text" part="text"><slot name="card-text"></slot></p>
         </div>
       </div>

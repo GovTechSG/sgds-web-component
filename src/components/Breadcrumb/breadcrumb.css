@@ -3,10 +3,10 @@
   --sgds-breadcrumb-padding-x: 0;
   --sgds-breadcrumb-padding-y: 0;
   --sgds-breadcrumb-margin-bottom: 1rem;
-  --sgds-breadcrumb-bg: ;
-  --sgds-breadcrumb-border-radius: ;
-  --sgds-breadcrumb-font-size: ;
-  --sgds-breadcrumb-separator-color: ;
+  --sgds-breadcrumb-bg: transparent;
+  --sgds-breadcrumb-border-radius: 0;
+  --sgds-breadcrumb-font-size: var(--sgds-body-font-size);
+  --sgds-breadcrumb-separator-color: var(--sgds-body-color);
 }
 
 .breadcrumb {
