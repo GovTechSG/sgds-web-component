@@ -6,14 +6,9 @@ import mastheadStyle from "./masthead.css";
 /**
  * @summary All .gov.sg digital services shall adopt The Official Government Banner for every page in the digital service and be placed at the top of the page.
  *
- * @cssproperty --sgds-masthead-font-family - Sets font family for masthead
- * @cssproperty --sgds-masthead-text-color - Sets overall text color
- * @cssproperty --sgds-masthead-link-color - Sets link color for `How to identify?` and `Trusted Site`
- * @cssproperty --sgds-masthead-link-color-hover - Sets link hover color for `How to identify?` and `Trusted Site`
  * @cssproperty --sgds-masthead-mobile-font-size - Sets the padding left and right for viewport width 1024px and below
  * @cssproperty --sgds-masthead-mobile-padding-x - Sets the font size for viewport width 1024px and below
  * @cssproperty --sgds-masthead-fluid-padding-x - Sets the container-fluid padding left and right for viewport width 1024px and above
- * @cssproperty --sgds-masthead-crest-color - Sets the lion head crest color.
  */
 export class SgdsMasthead extends SgdsElement {
   static styles = [...SgdsElement.styles, mastheadStyle];
