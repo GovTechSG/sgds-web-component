@@ -37,6 +37,9 @@ export type FileUploadButtonVariant =
  * @cssproperty --sgds-file-upload-remove-icon-hover-color - Remove icon hover color
  * @cssproperty --sgds-file-upload-icon-gap - The gap between the icons of file upload
  * @cssproperty --sgds-file-upload-gap - The vertical gap between elements inside the file upload
+ * @cssproperty --sgds-form-hint-text-color - The color of hint text
+ * @cssproperty --sgds-form-hint-text-font-size - The font size of hint text
+ * @cssproperty --sgds-form-hint-text-font-weight - The font weight of hint text
  */
 
 export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {

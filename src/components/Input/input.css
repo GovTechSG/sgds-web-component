@@ -1,5 +1,6 @@
 @import "../../styles/feedback";
-
+@import "../../styles/form-hint";
+@import "../../styles/form-label";
 :host {
   --sgds-input-padding-x: var(--sgds-input-btn-padding-x);
   --sgds-input-padding-y: var(--sgds-input-btn-padding-y);
@@ -12,8 +13,6 @@
   --sgds-input-focus-box-shadow-color: var(--sgds-info-300);
   --sgds-input-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width) var(--sgds-input-focus-box-shadow-color);
   --sgds-input-color: var(--sgds-body-color);
-  --sgds-input-label-color: var(--sgds-body-color);
-  --sgds-input-hint-text-color: var(--sgds-body-color-light);
   --sgds-input-placeholder-color: var(--sgds-gray-400);
 }
 :host([invalid]:focus){
@@ -23,17 +22,8 @@
   --sgds-input-focus-box-shadow-color: var(--sgds-success-300)
 }
 
-.form-label {
-  font-weight: 700;
-  margin-bottom: 0;
-  color: var(--sgds-input-label-color);
-}
-.form-text {
-  color: var(--sgds-input-hint-text-color);
-  font-weight: var(--sgds-input-font-weight);
-}
-.form-control,
-.form-text {
+
+.form-control {
   display: block;
   font-size: var(--sgds-input-font-size);
 }
