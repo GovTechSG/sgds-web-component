@@ -32,10 +32,11 @@ export type FileUploadButtonVariant =
  *
  * @event sgds-files-selected - Emitted when files are selected for uploading
  *
- * @cssproperty --fileupload-file-icon-fill - Left icon fill color
- * @cssproperty --fileupload-remove-icon-fill - Remove icon fill color
- * @cssproperty --fileupload-remove-icon-hover-fill - Remove icon mouse over fill color
- *
+ * @cssproperty --sgds-file-upload-file-icon-color - Left icon color
+ * @cssproperty --sgds-file-upload-remove-icon-color - Remove icon color
+ * @cssproperty --sgds-file-upload-remove-icon-hover-color - Remove icon hover color
+ * @cssproperty --sgds-file-upload-icon-gap - The gap between the icons of file upload
+ * @cssproperty --sgds-file-upload-gap - The vertical gap between elements inside the file upload
  */
 
 export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
@@ -73,6 +74,9 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   /** Customize the cancel icon with SVG */
   @property({ type: String })
   cancelIcon = "";
+
+  /** The input's hint text below the label */
+  @property({ reflect: true }) hintText = "This is a hint text";
 
   /** @internal */
   @property({ type: Object, state: true })
@@ -139,6 +143,11 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   /**@internal */
   protected inputId: string = genId("input", "file");
 
+  protected _renderHintText() {
+    const hintTextTemplate = html` <small id="${this.inputId}Help" class="form-text">${this.hintText}</small> `;
+    return this.hintText && hintTextTemplate;
+  }
+
   render() {
     const getCheckedIcon = (checkedIcon: string) => {
       if (checkedIcon) {
@@ -179,7 +188,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
 
     const listItems = this.selectedFiles.map(
       (file, index) => html`
-        <li key=${index} class="fileupload-list-item d-flex gap-2">
+        <li key=${index} class="fileupload-list-item">
           <span>${getCheckedIcon(this.checkedIcon)}</span>
           <span class="filename">${file.name}</span>
           <span @click=${() => this.removeFileHandler(index)}>${getCancelIcon(this.cancelIcon)}</span>
@@ -191,19 +200,20 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
       <input
         ${ref(this.inputRef)}
         type="file"
-        class="d-none"
         @change=${this.handleInputChange}
         ?multiple=${this.multiple}
         accept=${this.accept}
         id=${this.inputId}
       />
-      <sgds-button size=${this.size} variant=${this.variant} ?disabled=${this.disabled} @click=${this.handleClick}>
-        <label for=${this.inputId} class="file-upload__label"><slot></slot></label>
-      </sgds-button>
-
-      <ul class="sgds fileupload-list">
-        ${listItems}
-      </ul>
+      <div class="fileupload-container">
+        <sgds-button size=${this.size} variant=${this.variant} ?disabled=${this.disabled} @click=${this.handleClick}>
+          <label for=${this.inputId} class="file-upload-label"><slot></slot></label>
+        </sgds-button>
+        ${this._renderHintText()}
+        <ul class="sgds fileupload-list">
+          ${listItems}
+        </ul>
+      </div>
     `;
   }
 }

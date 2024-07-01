@@ -1,0 +1,11 @@
+:host {
+  --sgds-form-hint-text-color: var(--sgds-body-color-light);
+  --sgds-form-hint-text-font-weight: var(--sgds-body-font-weight);
+  --sgds-form-hint-text-font-size: var(--sgds-body-font-size);
+}
+.form-text {
+  color: var(--sgds-form-hint-text-color);
+  font-weight: var(--sgds-form-hint-text-font-weight);
+  display: block;
+  font-size: var(--sgds-body-font-size);
+}

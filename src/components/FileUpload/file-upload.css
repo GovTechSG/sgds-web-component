@@ -1,64 +1,67 @@
 @import "../../styles/svg.css";
+@import "../../styles/form-hint.css";
 /** scss */
 :host {
-  --fileupload-left-icon-fill: green;
-  --fileupload-remove-icon-fill: red;
-  --fileupload-remove-icon-hover-fill: hsl(0, 100%, 40%);
+  --sgds-file-upload-left-icon-color: var(--sgds-success);
+  --sgds-file-upload-remove-icon-color: var(--sgds-body-color-lighter);
+  --sgds-file-upload-remove-icon-hover-color: ;
+
+  --sgds-file-upload-icon-gap: var(--sgds-spacer-2);
+  --sgds-file-upload-gap: var(--sgds-spacer-3);
 }
 
-.fileupload-list-item span {
-  cursor: pointer;
-  &:first-of-type {
-    svg {
-      fill: var(--fileupload-left-icon-fill);
-    }
-  }
-  &:last-of-type {
-    svg {
-      fill: var(--fileupload-remove-icon-fill);
-      &:hover {
-        fill: var(--fileupload-remove-icon-hover-fill);
-      }
-    }
-  }
+.fileupload-list-item {
+  display: flex;
+  flex-direction: row;
+  gap: var(--sgds-file-upload-icon-gap);
 }
-.file-upload__label {
+.fileupload-list-item span:not(:first-of-type) {
+  cursor: pointer;
+}
+.fileupload-list-item span:first-of-type svg {
+  color: var(--sgds-file-upload-left-icon-color);
+}
+.fileupload-list-item span:last-of-type svg {
+  color: var(--sgds-file-upload-remove-icon-color);
+}
+.fileupload-list-item span:last-of-type svg:hover {
+  color: var(--sgds-file-upload-remove-icon-hover-color);
+}
+
+.file-upload-label {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--sgds-spacer-2);
 }
 /** end scss */
-.form-control[type="file"] {
-  overflow: hidden;
-}
-.form-control[type="file"]:not(:disabled):not([readonly]) {
-  cursor: pointer;
-}
-.sgds.fileupload-list {
-  list-style-type: none;
-  margin-top: 1rem;
+ul {
+  margin: 0;
   padding: 0;
 }
-.sgds.fileupload-list .fileupload-list-item + .fileupload-list-item {
-  margin-top: 0.5rem;
+
+.sgds.fileupload-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-file-upload-gap);
+  list-style-type: none;
 }
-.sgds.fileupload-list .fileupload-list-item i:first-child {
-  color: #09a716;
-}
-.sgds.fileupload-list .fileupload-list-item i:last-child {
-  color: #ef6447;
-}
+
 .sgds.fileupload-list .fileupload-list-item .filename {
   color: var(--sgds-link);
   text-decoration: underline;
   text-underline-offset: 0.25rem;
 }
-.d-flex {
-  display: flex !important;
+
+input {
+  display: none;
 }
-.d-none {
-  display: none !important;
+sgds-button,
+label {
+  cursor: pointer;
 }
-.gap-2 {
-  gap: 0.5rem !important;
+
+.fileupload-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-file-upload-gap);
 }
