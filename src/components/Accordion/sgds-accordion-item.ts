@@ -43,12 +43,6 @@ export class SgdsAccordionItem extends SgdsElement {
   /** Optional for accordion item. Can be used to insert any utility classes such as `me-auto` */
   @property({ reflect: true }) accordionItemClasses: string;
 
-  firstUpdated() {
-    // this.body.hidden = !this.open;
-    if (!this.open) this.body.classList.add("hidden");
-    // this.body.style.height = this.open ? "auto" : "0";
-  }
-
   private handleSummaryClick() {
     if (this.open) {
       this.hide();
@@ -92,11 +86,9 @@ export class SgdsAccordionItem extends SgdsElement {
       }
 
       await stopAnimations(this.body);
-      // this.body.hidden = false;
-      // this.body.classList.remove("hidden");
+
       const { keyframes, options } = getAnimation(this, "accordion.show");
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
-      // this.body.style.height = "auto";
 
       this.emit("sgds-after-show");
     } else {
@@ -111,10 +103,6 @@ export class SgdsAccordionItem extends SgdsElement {
   
       const { keyframes, options } = getAnimation(this, "accordion.hide");
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
-      // this.body.hidden = true;
-      
-      // this.body.style.height = "auto";
-
       this.emit("sgds-after-hide");
     }
   }
@@ -152,7 +140,6 @@ export class SgdsAccordionItem extends SgdsElement {
           class=${classMap({
             "accordion-button": true,
             collapsed: !this.open
-            // expand: this.open
           })}
           part="header"
           role="button"
@@ -163,12 +150,24 @@ export class SgdsAccordionItem extends SgdsElement {
           @keydown=${this.handleSummaryKeyDown}
         >
           <slot name="accordion-header"></slot>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-chevron-down"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+            />
+          </svg>
         </button>
         <div
           class=${classMap({
             "accordion-body": true,
             hidden: !this.open
-            // show: this.open
           })}
         >
           <slot name="accordion-content" class="accordion-content" role="region" aria-labelledby="header"></slot>
