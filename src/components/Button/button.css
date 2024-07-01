@@ -32,7 +32,6 @@ button:focus:not(:focus-visible) {
 :host([variant="primary"]) {
   --sgds-btn-color: var(--sgds-white);
   --sgds-btn-bg: var(--sgds-primary-filled);
-  --sgds-btn-border-color: var(--sgds-primary-filled);
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-primary-700);
   --sgds-btn-active-color: #fff;
@@ -43,7 +42,6 @@ button:focus:not(:focus-visible) {
 :host([variant="secondary"]) {
   --sgds-btn-color: var(--sgds-white);
   --sgds-btn-bg: var(--sgds-secondary-filled);
-  --sgds-btn-border-color: var(--sgds-secondary-filled);
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-secondary-700);
   --sgds-btn-active-color: #fff;
@@ -54,7 +52,6 @@ button:focus:not(:focus-visible) {
 :host([variant="warning"]) {
   --sgds-btn-color: var(--sgds-white);
   --sgds-btn-bg: var(--sgds-warning-filled);
-  --sgds-btn-border-color: var(--sgds-warning-filled);
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-warning-700);
   --sgds-btn-active-color: #fff;
@@ -65,7 +62,6 @@ button:focus:not(:focus-visible) {
 :host([variant="danger"]) {
   --sgds-btn-color: #fff;
   --sgds-btn-bg: var(--sgds-danger-filled);
-  --sgds-btn-border-color: var(--sgds-danger-filled);
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-danger-700);
   --sgds-btn-active-color: #fff;
@@ -76,7 +72,6 @@ button:focus:not(:focus-visible) {
 :host([variant="success"]) {
   --sgds-btn-color: var(--sgds-white);
   --sgds-btn-bg: var(--sgds-success-filled);
-  --sgds-btn-border-color: var(--sgds-success-filled);
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-success-700);
   --sgds-btn-active-color: #fff;
@@ -87,7 +82,6 @@ button:focus:not(:focus-visible) {
 :host([variant="info"]) {
   --sgds-btn-color: var(--sgds-white);
   --sgds-btn-bg: var(--sgds-info-filled);
-  --sgds-btn-border-color: var(--sgds-info-filled);
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-info-700);
   --sgds-btn-active-color: #fff;
@@ -98,7 +92,6 @@ button:focus:not(:focus-visible) {
 :host([variant="light"]) {
   --sgds-btn-color: var(--sgds-dark);
   --sgds-btn-bg: var(--sgds-light-filled);
-  --sgds-btn-border-color: var(--sgds-light-filled);
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-gray-200);
   --sgds-btn-active-color: #fff;
@@ -107,11 +100,9 @@ button:focus:not(:focus-visible) {
   --sgds-btn-focus-box-shadow-color: var(--sgds-gray-500);
   --sgds-btn-disabled-color: var(--sgds-dark);
 }
-:host([variant="dark"]),
-:host([variant="dark"][outlined]) {
+:host([variant="dark"]) {
   --sgds-btn-color: var(--sgds-white);
   --sgds-btn-bg: var(--sgds-dark-filled);
-  --sgds-btn-border-color: var(--sgds-dark-filled);
   --sgds-btn-hover-color: #fff;
   --sgds-btn-hover-bg: var(--sgds-gray-700);
   --sgds-btn-active-color: #fff;
@@ -221,6 +212,18 @@ button:focus:not(:focus-visible) {
   --sgds-btn-active-border-color: var(--sgds-light-border-subtle);
   --sgds-btn-focus-box-shadow-color: var(--sgds-gray-500);
   --sgds-btn-disabled-color: var(--sgds-btn-color);
+}
+:host([variant="dark"][outlined]) {
+  --sgds-btn-color: var(--sgds-white);
+  --sgds-btn-bg: var(--sgds-dark-filled);
+  --sgds-btn-border-color: var(--sgds-dark-filled);
+  --sgds-btn-hover-color: #fff;
+  --sgds-btn-hover-bg: var(--sgds-gray-700);
+  --sgds-btn-active-color: #fff;
+  --sgds-btn-active-bg: var(--sgds-gray-700);
+  --sgds-btn-active-border-color: var(--sgds-gray-700);
+  --sgds-btn-focus-box-shadow-color: var(--sgds-gray-500);
+  --sgds-btn-disabled-color: var(--sgds-white);
 }
 
 .btn {
