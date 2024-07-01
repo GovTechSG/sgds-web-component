@@ -93,7 +93,7 @@ export class SgdsAccordionItem extends SgdsElement {
 
       await stopAnimations(this.body);
       // this.body.hidden = false;
-      this.body.classList.remove("hidden");
+      // this.body.classList.remove("hidden");
       const { keyframes, options } = getAnimation(this, "accordion.show");
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
       // this.body.style.height = "auto";
@@ -108,11 +108,11 @@ export class SgdsAccordionItem extends SgdsElement {
       }
 
       await stopAnimations(this.body);
-
+  
       const { keyframes, options } = getAnimation(this, "accordion.hide");
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
       // this.body.hidden = true;
-      this.body.classList.add("hidden");
+      
       // this.body.style.height = "auto";
 
       this.emit("sgds-after-hide");
@@ -166,8 +166,8 @@ export class SgdsAccordionItem extends SgdsElement {
         </button>
         <div
           class=${classMap({
-            "accordion-body": true
-            // hidden: !this.open
+            "accordion-body": true,
+            hidden: !this.open
             // show: this.open
           })}
         >
