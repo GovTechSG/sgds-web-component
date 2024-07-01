@@ -1,9 +1,17 @@
 @import "../../styles/bg-variants.css";
 
+:host {
+  --sgds-progress-bar-color: #fff;
+  --sgds-progress-bar-font-size: 0.75rem;
+  --sgds-progress-bar-bg: var(--sgds-primary);
+  --sgds-progress-bar-transition: width 0.6s ease;
+  width: 100%;
+}
+
 progress {
   vertical-align: baseline;
 }
-.progress,
+/* .progress,
 .progress-stacked {
   --sgds-progress-height: 1rem;
   --sgds-progress-font-size: 0.75rem;
@@ -19,17 +27,28 @@ progress {
   font-size: var(--sgds-progress-font-size);
   height: var(--sgds-progress-height);
   overflow: hidden;
-}
+} */
 .progress-bar {
-  background-color: var(--sgds-progress-bar-bg);
-  color: var(--sgds-progress-bar-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
   text-align: center;
-  transition: var(--sgds-progress-bar-transition);
   white-space: nowrap;
+  /* to match parent element's height */
+  font-size: var(--sgds-progress-bar-font-size);
+  color: var(--sgds-progress-bar-color);
+  background-color: var(--sgds-progress-bar-bg);
+  transition: var(--sgds-progress-bar-transition);
+  height: 100%;
+  /* if progressbarVariant is 'light' */
+  &[class*="bg-light"] {
+    color: var(--sgds-dark);
+  }
+  /* if progressbarVariant is 'dark' */
+  &[class*="bg-dark"] {
+    color: var(--sgds-light);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .progress-bar {
@@ -49,12 +68,12 @@ progress {
   );
   background-size: var(--sgds-progress-height) var(--sgds-progress-height);
 }
-.progress-stacked > .progress {
+/* .progress-stacked > .progress {
   overflow: visible;
 }
 .progress-stacked > .progress > .progress-bar {
   width: 100%;
-}
+} */
 .progress-bar-animated {
   animation: progress-bar-stripes 1s linear infinite;
 }
@@ -64,40 +83,9 @@ progress {
   }
 }
 
-.progress-bar-striped {
-  background-image: linear-gradient(
-    45deg,
-    hsla(0, 0%, 100%, 0.15) 25%,
-    transparent 0,
-    transparent 50%,
-    hsla(0, 0%, 100%, 0.15) 0,
-    hsla(0, 0%, 100%, 0.15) 75%,
-    transparent 0,
-    transparent
-  );
-  background-size: 1rem 1rem;
-}
-
 /*! CSS Used keyframes */
 @keyframes progress-bar-stripes {
   0% {
     background-position-x: 1rem;
-  }
-}
-/**scss */
-:host {
-  width: 100%;
-}
-.progress-bar {
-   /* to match parent element's height */
-  font-size: var(--sgds-progress-font-size);
-  height: 100%;
-   /* if progressbarVariant is 'light' */
-  &[class*="bg-light"] {
-    color: var(--sgds-dark);
-  }
-   /* if progressbarVariant is 'dark' */
-  &[class*="bg-dark"] {
-    color: var(--sgds-light);
   }
 }
