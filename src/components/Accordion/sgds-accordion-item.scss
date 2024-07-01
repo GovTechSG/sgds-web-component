@@ -9,7 +9,7 @@
 .accordion-body {
   padding: 0;
   line-height: var(--accordion-item-line-height);
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .accordion-content {
@@ -48,3 +48,58 @@
     border-top: 0;
   }
 }
+// @keyframes expand {
+//   0% {
+//     height: 64px;
+//     opacity: 0;
+//     display: none;
+//   }
+
+//   // 1%{
+//   //   display: block;
+//   //   opacity: 0;
+//   //   height:0;
+//   // }
+//   // 25%{
+//   //   height: 10px;
+//   //   opacity: 0.25;
+//   // }
+//   50%{
+//     height: 50%;
+//     opacity: 0.5;
+//   }
+
+//   100% {
+//     height: auto;
+//     opacity: 1;
+//     // display: block;
+//   }
+// }
+.hidden{
+  display:none;
+}
+
+// .show {
+//   // animation:  linear;
+//   display: block;
+//   // overflow: hidden;
+//   // opacity: 1;
+//   animation-duration: 0.5s;
+//   animation-name: expand;
+//   animation-timing-function: linear;
+// }
+// .hide {
+//   display: none;
+//   // animation: expand 5s linear;
+//   animation-direction: reverse;
+//   animation-duration: 0.5s;
+//   animation-name: expand;
+//   animation-timing-function: linear;
+// }
+// .accordion-button.expand + .accordion-body {
+ 
+// }
+// .accordion-button.collapsed + .accordion-body {
+//   animation: expand .2s ease-in-out;
+// }
+
