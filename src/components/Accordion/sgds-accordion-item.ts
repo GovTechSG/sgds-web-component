@@ -100,7 +100,7 @@ export class SgdsAccordionItem extends SgdsElement {
       }
 
       await stopAnimations(this.body);
-  
+
       const { keyframes, options } = getAnimation(this, "accordion.hide");
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
       this.emit("sgds-after-hide");
