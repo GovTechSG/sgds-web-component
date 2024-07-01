@@ -6,7 +6,7 @@ import progressStyle from "./progress.css";
  * @summary Provide up-to-date feedback on the progress of a workflow or action with simple yet flexible progress bars.
  * @slot default - slot for progress-bar
  *
- * @cssprop --progress-height - Sets the height of the progress wrapper.
+ * @cssprop --sgds-progress-height - Sets the height of the progress wrapper.
  */
 
 export class SgdsProgress extends SgdsElement {
