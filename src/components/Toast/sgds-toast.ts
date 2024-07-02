@@ -37,8 +37,6 @@ export class SgdsToast extends SgdsElement {
   @property({ type: Number, reflect: true }) delay = 5000;
   /** The colour variant of toast */
   @property({ type: String, reflect: true }) variant: ToastVariant;
-  /** Optional for toast. Forwards to the base div wrapper of toast. Can be used to insert any utility classes such as `me-auto` */
-  @property({ type: String, reflect: true }) toastClasses: string;
   /** The toast variant. */
   @property({ type: String, reflect: true }) bg:
     | "primary"
@@ -111,8 +109,7 @@ export class SgdsToast extends SgdsElement {
         class="toast sgds show ${classMap({
           [`is-${this.variant}`]: this.variant,
           [`bg-${this.bg}`]: this.bg,
-          [`is-${this.status}`]: this.status,
-          [`${this.toastClasses}`]: this.toastClasses
+          [`is-${this.status}`]: this.status
         })}"
         role="alert"
         aria-hidden=${this.show ? "false" : "true"}
