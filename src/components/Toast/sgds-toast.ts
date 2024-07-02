@@ -22,7 +22,7 @@ import toastStyle from "./toast.css";
  * @cssproperty --toast-icon-margin-right - The margin-right between toast's icon and title in its header. Defaults to 0.5rem
  */
 export class SgdsToast extends SgdsElement {
-  static styles = [toastStyle];
+  static styles = [...SgdsElement.styles, toastStyle];
   /**@internal */
   @query("div.toast") toast: HTMLElement;
   /** Controls the appearance of toast */
