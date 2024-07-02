@@ -1,6 +1,6 @@
 :host {
-  --toast-container-slot-elements-gap: 0.5rem;
-  --toast-container-z-index: 1090;
+  --sgds-toast-container-slot-elements-gap: 0.5rem;
+  --sgds-toast-container-z-index: 1090;
 }
 
 .toast-container {
@@ -8,7 +8,7 @@
   pointer-events: none;
   position: absolute;
   width: max-content;
-  z-index: var(--toast-container-z-index);
+  z-index: var(--sgds-toast-container-z-index);
 }
 
 .top-start {
@@ -64,5 +64,5 @@
 slot {
   display: flex;
   flex-direction: column;
-  gap: var(--toast-container-slot-elements-gap);
+  gap: var(--sgds-toast-container-slot-elements-gap);
 }
