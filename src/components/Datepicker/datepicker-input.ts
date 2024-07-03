@@ -27,7 +27,6 @@ export class DatepickerInput extends SgdsInput {
   private mask: InputMask;
   constructor() {
     super();
-    this.inputClasses = `rounded-0 rounded-start`;
     this.type = "text";
     this.hasFeedback = true;
     this._handleValueChange = () => null;

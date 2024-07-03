@@ -7,11 +7,11 @@
   --sgds-accordion-item-line-height: var(--sgds-body-line-height);
   /** NEW in 2.0.0 */
   --sgds-accordion-item-btn-color: var(--sgds-body-color);
-  --sgds-accordion-item-btn-border-radius: calc(var(--sgds-border-radius) - var(--sgds-border-width));
+  --sgds-accordion-item-btn-border-radius: var(--sgds-border-radius);
   --sgds-accordion-item-btn-bg: var(--sgds-accordion-bg);
   --sgds-accordion-item-btn-icon-transform: rotate(-180deg);
   --sgds-accordion-item-btn-icon-transition: transform 0.2s ease-in-out;
-  --sgds-accordion-item-btn-focus-box-shadow-color: rgba(0, 73, 220, 0.25);
+  --sgds-accordion-item-btn-focus-box-shadow-color: var(--sgds-info-300);
   --sgds-accordion-item-btn-focus-box-shadow: 0 0 0 var(--sgds-focus-width)
     var(--sgds-accordion-item-btn-focus-box-shadow-color);
   --sgds-accordion-item-content-color: var(--sgds-body-color);
