@@ -10,9 +10,9 @@ describe("sgds-input", () => {
     assert.shadowDom.equal(
       el,
       `
-        <div class="d-flex flex-column w-100">
+        <div class="form-control-container">
           <label class="form-label" for="test-id">label</label>
-          <small class="form-text text-muted" id="test-idHelp">hello</small>
+          <small class="form-text" id="test-idHelp">hello</small>
           <input type="text" class="form-control " id="test-id" aria-invalid="false" placeholder="placeholder">
         </div>
     `,

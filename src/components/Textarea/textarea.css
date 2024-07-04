@@ -1,8 +1,27 @@
 @import "../../styles/feedback.css";
-*,
-:after,
-:before {
-  box-sizing: border-box;
+@import "../../styles/form-label";
+@import "../../styles/form-hint";
+
+:host {
+  /* NEW in V2.0 */
+  --sgds-textarea-padding-x: var(--sgds-input-btn-padding-x);
+  --sgds-textarea-padding-y: var(--sgds-input-btn-padding-y);
+  --sgds-textarea-line-height: var(--sgds-body-line-height);
+  --sgds-textarea-font-weight: var(--sgds-body-font-weight);
+  --sgds-textarea-font-size: var(--sgds-body-font-size);
+  --sgds-textarea-border-radius: var(--sgds-border-radius);
+  --sgds-textarea-border-width: var(--sgds-border-width);
+  --sgds-textarea-border-color: var(--sgds-border-color);
+  --sgds-textarea-focus-box-shadow-color: var(--sgds-info-300);
+  --sgds-textarea-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width) var(--sgds-textarea-focus-box-shadow-color);
+  --sgds-textarea-color: var(--sgds-body-color);
+  --sgds-textarea-placeholder-color: var(--sgds-gray-400);
+}
+:host([invalid]:focus){
+  --sgds-textarea-focus-box-shadow-color: var(--sgds-danger-300)
+}
+:host([valid]:focus){
+  --sgds-textarea-focus-box-shadow-color: var(--sgds-success-300)
 }
 textarea {
   font-family: inherit;
@@ -16,17 +35,18 @@ textarea {
 .form-control {
   appearance: none;
   background-clip: padding-box;
-  background-color: #fff;
-  border: 1px solid #98a2b3;
-  border-radius: 0.3125rem;
-  color: #1d2939;
+  background-color: var(--sgds-body-bg);
+  border: var(--sgds-textarea-border-width) solid var(--sgds-textarea-border-color);
+  border-radius: var( --sgds-textarea-border-radius);
+  color: var(--sgds-textarea-color);
   display: block;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 2;
-  padding: 0.4375rem 1rem;
+  font-size: var(--sgds-textarea-font-size);
+  font-weight: var(--sgds-textarea-font-weight);
+  line-height: var(--sgds-textarea-line-height);
+  padding: var(--sgds-textarea-padding-y) var( --sgds-textarea-padding-x);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   width: 100%;
+  min-height: calc(2em + 0.875rem + 2px);
 }
 @media (prefers-reduced-motion: reduce) {
   .form-control {
@@ -34,60 +54,55 @@ textarea {
   }
 }
 .form-control:focus {
-  background-color: #fff;
-  border-color: #87b8dd;
-  box-shadow: 0 0 0 0.125rem rgba(15, 113, 187, 0.25);
-  color: #1d2939;
+  background-color: var(--sgds-body-bg);
+  border: var(--sgds-textarea-border-width) solid var(--sgds-link);
+  box-shadow: var(--sgds-textarea-focus-box-shadow);
   outline: 0;
 }
 .form-control::placeholder {
-  color: #98a2b3;
+  color: var(--sgds-textarea-placeholder-color);;
   opacity: 1;
 }
 .form-control:disabled {
-  background-color: #e4e7ec;
+  background-color: var(--sgds-disabled-bg);
   opacity: 1;
-}
-textarea.form-control {
-  min-height: calc(2em + 0.875rem + 2px);
+  color: var(--sgds-disabled-color);
 }
 
-*,
-:after,
-:before {
-  box-sizing: border-box;
+.textarea-resize-none  {
+  resize: none;
 }
-label {
-  display: inline-block;
-}
-.form-label {
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-.form-label {
-  margin-bottom: 0;
-}
-.form-text {
-  color: #667085;
-  font-size: 1rem;
-  font-weight: 300;
-}
-.form-text {
-  display: block !important;
-}
-.d-flex {
-  display: flex !important;
-}
-.justify-content-between {
-  justify-content: space-between !important;
-}
-/** scss */
 
-:host {
-  .textarea-resize-none {
-    resize: none;
-  }
-  .textarea-resize-vertical {
-    resize: vertical;
-  }
+.textarea-resize-vertical  {
+  resize: vertical;
+}
+
+.textarea-resize-auto  {
+  height: auto;
+  resize: none;
+  overflow-y: hidden;
+}
+
+.text-area-label-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.form-control.is-valid {
+  background-image: var(--sgds-form-valid-icon);
+  background-position: right calc(0.5em + 0.21875rem) top var(--sgds-textarea-padding-y);
+  background-repeat: no-repeat;
+  background-size: calc(1em + 0.4375rem) calc(1em + 0.4375rem);
+  border-color: var(--sgds-form-valid-border-color);
+  padding-right: calc(2em + 0.875rem);
+}
+.form-control.is-invalid {
+  background-image: var(--sgds-form-invalid-icon);
+  background-position: right calc(0.5em + 0.21875rem) top var(--sgds-textarea-padding-y);
+  background-repeat: no-repeat;
+  background-size: calc(1em + 0.4375rem) calc(1em + 0.4375rem);
+  border-color: var(--sgds-form-invalid-border-color);
+  padding-right: calc(2em + 0.875rem);
+}
+.form-control.is-invalid:focus {
+  border-color: var(--sgds-form-invalid-border-color);
 }

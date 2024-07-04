@@ -3,7 +3,6 @@ import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
-// import styles from "./sgds-breadcrumb.scss?inline";
 import breadcrumbItemStyle from "./breadcrumb-item.css";
 /**
  * @summary Breadcrumb Item are navigational links used in Breadcrumb component
@@ -16,8 +15,8 @@ import breadcrumbItemStyle from "./breadcrumb-item.css";
  *
  * @cssprop --sgds-breadcrumb-item-padding-x - The x-axis padding of breadcrumb item
  * @cssprop --sgds-breadcrumb-item-active-color - The text color of breadcrumb item when it is active
- * @cssprop --sgds-breadcrumb-item-active-font-weight - The font weight of breadcrumb item when it is active
- *
+ * @cssprop --sgds-breadcrumb-item-font-size - The font size of breadcrumb item. Affects the font size of all the breadcrumb items and separators
+ * @cssprop --sgds-breadcrumb-item-separator-color - The color of breadcrumb item's separator
  */
 export class SgdsBreadcrumbItem extends SgdsElement {
   static styles = [...SgdsElement.styles, breadcrumbItemStyle];

@@ -136,14 +136,14 @@ export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
         part="base"
       >
         <div class="card-body" part="body">
-          <h6 class="card-subtitle h6" part="subtitle">
+          <h6 class="card-subtitle" part="subtitle">
             <div>
               <slot name="icon"></slot>
               <slot name="card-subtitle"></slot>
             </div>
             <div class="card-input">${this.type === "checkbox" ? checkbox : radio}</div>
           </h6>
-          <h5 class="card-title h5" part="title"><slot name="card-title"></slot></h5>
+          <h5 class="card-title" part="title"><slot name="card-title"></slot></h5>
           <p class="card-text" part="text"><slot name="card-text"></slot></p>
         </div>
       </div>

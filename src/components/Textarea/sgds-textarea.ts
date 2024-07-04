@@ -1,4 +1,4 @@
-import { property, query, state } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
@@ -16,9 +16,27 @@ import textareaStyle from "./textarea.css";
  * @event sgds-input - Emitted when the control receives input and its value changes.
  * @event sgds-focus - Emitted when textarea is in focus.
  * @event sgds-blur - Emitted when textarea loses focus.
+ *
+ * @cssproperty --sgds-textarea-padding-x - The x-axis padding of the textarea
+ * @cssproperty --sgds-textarea-padding-y - The y-axis padding of the textarea
+ * @cssproperty --sgds-textarea-line-height - The line height of text in the textarea
+ * @cssproperty --sgds-textarea-font-weight - Sets the font weight of text in the textarea
+ * @cssproperty --sgds-textarea-font-size - Sets the font size of text in the textarea
+ * @cssproperty --sgds-textarea-border-radius - The border radius of the textarea
+ * @cssproperty --sgds-textarea-border-width - The thickness of the textarea's border
+ * @cssproperty --sgds-textarea-border-color - The border color of the textarea
+ * @cssproperty --sgds-textarea-focus-box-shadow-color - The color of box shadow of textarea at focused state
+ * @cssproperty --sgds-textarea-focus-box-shadow - The box shadow of textarea at focused state
+ * @cssproperty --sgds-textarea-placeholder-color - Sets the text color textarea's placeholder.
+ * @cssproperty --sgds-textarea-color - Sets the text colors of textarea
+ * @cssproperty --sgds-form-label-color - Sets the text color of textarea's label
+ * @cssproperty --sgds-form-label-font-weight - Sets the font weight of textarea's label
+ * @cssproperty --sgds-form-hint-text-color - The color of hint text
+ * @cssproperty --sgds-form-hint-text-font-size - The font size of hint text
+ * @cssproperty --sgds-form-hint-text-font-weight - The font weight of hint text
  */
 export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
-  static styles = [textareaStyle];
+  static styles = [...SgdsElement.styles, textareaStyle];
   /**@internal */
   @query("textarea.form-control") textarea: HTMLTextAreaElement;
   /**@internal */
@@ -66,10 +84,10 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
 
-  /**@internal */
-  @state() invalid = false;
-  /**@internal */
-  @state() valid = false;
+  /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
+  @property({ type: Boolean, reflect: true }) invalid = false;
+  /** Marks the input as invalid. Replace the pseudo :valid selector for absent in custom elements */
+  @property({ type: Boolean, reflect: true }) valid = false;
 
   /** @internal The textarea's unique id */
   private textareaId = genId("textarea", "input");
@@ -170,7 +188,7 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
     const wordCount = html` <div class="form-text">${this.value.length}/${this.maxlength}</div> `;
 
     return html`
-      <div class="text-area-label-wrapper d-flex justify-content-between">
+      <div class="text-area-label-wrapper">
         <label for=${this.textareaId} class="form-label">${this.label}</label>
         ${this.maxlength > 0 ? wordCount : undefined}
       </div>
