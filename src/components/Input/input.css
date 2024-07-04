@@ -22,12 +22,9 @@
   --sgds-input-focus-box-shadow-color: var(--sgds-success-300)
 }
 
-
 .form-control {
   display: block;
   font-size: var(--sgds-input-font-size);
-}
-.form-control {
   appearance: none;
   background-clip: padding-box;
   background-color: var(--sgds-body-bg);
@@ -175,8 +172,7 @@
   z-index: 3;
 }
 .form-control.is-valid {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23066E0E'%3E%3Cpath d='M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z'/%3E%3C/svg%3E");
-  background-position: right calc(0.5em + 0.21875rem) center;
+  background-image: var(--sgds-form-valid-icon);  background-position: right calc(0.5em + 0.21875rem) center;
   background-repeat: no-repeat;
   background-size: calc(1em + 0.4375rem) calc(1em + 0.4375rem);
   border-color: var(--sgds-form-valid-border-color);
@@ -187,7 +183,7 @@
   border-color: var(--sgds-form-valid-border-color);
 }
 .form-control.is-invalid {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23B6220D'%3E%3Cpath d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/%3E%3Cpath d='M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z'/%3E%3C/svg%3E");
+  background-image: var(--sgds-form-invalid-icon);
   background-position: right calc(0.5em + 0.21875rem) center;
   background-repeat: no-repeat;
   background-size: calc(1em + 0.4375rem) calc(1em + 0.4375rem);

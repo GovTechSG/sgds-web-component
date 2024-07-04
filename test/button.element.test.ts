@@ -10,7 +10,9 @@ describe("sgds-button", () => {
     assert.shadowDom.equal(
       el,
       `<button class="btn sgds" type="button" aria-disabled="false" tabindex="0">
+      <slot name="leftIcon"></slot>
       <slot></slot>
+      <slot name="rightIcon"></slot>
       </button>
     `
     );

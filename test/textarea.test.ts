@@ -17,7 +17,7 @@ describe("sgds-textarea", () => {
     assert.shadowDom.equal(
       el,
       `
-      <div class="text-area-label-wrapper d-flex justify-content-between">
+      <div class="text-area-label-wrapper">
         <label class="form-label">label</label>
         <div class="form-text">0/10</div>
       </div>
