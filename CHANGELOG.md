@@ -1,3 +1,17 @@
+## v1.3.1 (2024-07-04)
+
+### Fix
+
+- **accordion**: keyboard behaviour for allowMultiple
+
+### Refactor
+
+- **accordion-item**: convert background image caret to svg
+- **accordion-item**: transfer accordion hidden to dynamic class
+- **accordion**: remove style height and add hidden class in sequence with animation
+- **accordion-item**: apply hidden class via open prop
+- **accordion**: replace hidden attribute with display none class
+
 ## v1.3.0 (2024-06-26)
 
 ### Feat
