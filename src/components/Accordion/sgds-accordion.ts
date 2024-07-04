@@ -5,6 +5,8 @@ import SgdsElement from "../../base/sgds-element";
 import type SgdsAccordionItem from "./sgds-accordion-item";
 import styles from "./sgds-accordion.scss";
 
+const VALID_KEYS = ["Enter", "ArrowUp", "ArrowLeft", "ArrowDown", "ArrowRight"];
+
 /**
  * @summary A dropdown mechanism that allow users to either show or hide related content. `SgdsAccordion` is a wrapper to manage the behaviour for multiple `SgdsAccordionItems`
  * @slot default - slot for accordion-item
@@ -53,15 +55,12 @@ export class SgdsAccordion extends SgdsElement {
     });
   }
 
-  async onToggle(event: Event): Promise<void> {
-    // Let the event pass through the DOM so that it can be
-    // prevented from the outside if a user so desires.
-    if (this.allowMultiple || event.defaultPrevented) {
+  private async _onToggle(event: Event) {
+    if (this.allowMultiple) {
       // No toggling when `allowMultiple` or the user prevents it.
       return;
     }
     const items = [...this.items] as SgdsAccordionItem[];
-
     if (items && !items.length) {
       // no toggling when there aren't items.
       return;
@@ -75,6 +74,11 @@ export class SgdsAccordion extends SgdsElement {
     });
   }
 
+  private async _onKeyboardToggle(event: KeyboardEvent) {
+    if (!VALID_KEYS.includes(event.key)) return;
+    return this._onToggle(event);
+  }
+
   render() {
     return html`
       <div
@@ -83,7 +87,7 @@ export class SgdsAccordion extends SgdsElement {
           [`${this.accordionClasses}`]: this.accordionClasses
         })}
       >
-        <slot @click=${this.onToggle}></slot>
+        <slot @click=${this._onToggle} @keydown=${this._onKeyboardToggle}></slot>
       </div>
     `;
   }

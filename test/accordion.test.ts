@@ -54,7 +54,7 @@ describe("<sgds-accordion-item>", () => {
     `);
     const body = el.shadowRoot?.querySelector<HTMLElement>(".accordion-body");
 
-    expect(body?.hidden).to.be.true;
+    expect(body?.classList.contains("hidden")).to.be.true;
   });
 
   it("should emit sgds-show and sgds-after-show when calling show()", async () => {
@@ -102,7 +102,7 @@ describe("<sgds-accordion-item>", () => {
 
     expect(hideHandler).to.have.been.calledOnce;
     expect(afterHideHandler).to.have.been.calledOnce;
-    expect(body?.hidden).to.be.true;
+    expect(body?.classList.contains("hidden")).to.be.true;
   });
 
   it("should emit sgds-show and sgds-after-show when setting open = true", async () => {
@@ -150,7 +150,7 @@ describe("<sgds-accordion-item>", () => {
 
     expect(hideHandler).to.have.been.calledOnce;
     expect(afterHideHandler).to.have.been.calledOnce;
-    expect(body?.hidden).to.be.true;
+    expect(body?.classList.contains("hidden")).to.be.true;
   });
 
   it("should not open when preventing sgds-show", async () => {
