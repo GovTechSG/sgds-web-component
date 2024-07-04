@@ -57,8 +57,7 @@ export class SgdsProgressBar extends SgdsElement {
         class=${classMap({
           "progress-bar": true,
           "progress-bar-striped": this.striped,
-          "progress-bar-animated": this.animated,
-          [`bg-${this.variant}`]: this.variant
+          "progress-bar-animated": this.animated
         })}
         role="progressbar"
         style=${styleMap({ width: `${this.value}%` })}

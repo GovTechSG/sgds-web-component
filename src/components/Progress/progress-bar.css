@@ -3,9 +3,28 @@
 :host {
   --sgds-progress-bar-color: #fff;
   --sgds-progress-bar-font-size: 0.75rem;
-  --sgds-progress-bar-bg: var(--sgds-primary);
+  --sgds-progress-bar-bg: var(--sgds-primary-filled);
   --sgds-progress-bar-transition: width 0.6s ease;
   width: 100%;
+}
+
+:host([variant="secondary"]) {
+  --sgds-progress-bar-bg: var(--sgds-secondary-filled);
+}
+:host([variant="warning"]) {
+  --sgds-progress-bar-bg: var(--sgds-warning-filled);
+}
+:host([variant="danger"]) {
+  --sgds-progress-bar-bg: var(--sgds-danger-filled);
+}
+:host([variant="success"]) {
+  --sgds-progress-bar-bg: var(--sgds-success-filled);
+}
+:host([variant="info"]) {
+  --sgds-progress-bar-bg: var(--sgds-info-filled);
+}
+:host([variant="dark"]) {
+  --sgds-progress-bar-bg: var(--sgds-dark-filled);
 }
 
 progress {
@@ -41,14 +60,6 @@ progress {
   background-color: var(--sgds-progress-bar-bg);
   transition: var(--sgds-progress-bar-transition);
   height: 100%;
-  /* if progressbarVariant is 'light' */
-  &[class*="bg-light"] {
-    color: var(--sgds-dark);
-  }
-  /* if progressbarVariant is 'dark' */
-  &[class*="bg-dark"] {
-    color: var(--sgds-light);
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   .progress-bar {
