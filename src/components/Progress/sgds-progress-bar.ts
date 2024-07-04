@@ -4,7 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { html } from "lit";
 import progressBarStyle from "./progress-bar.css";
-export type ProgressBarVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
+export type ProgressBarVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark";
 /**
  * @cssproperty --sgds-progress-bar-color - Sets the text color on the progress bar
  * @cssproperty --sgds-progress-bar-font-size - Sets the font size of the text on the progress bar
