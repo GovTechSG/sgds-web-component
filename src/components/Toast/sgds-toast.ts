@@ -51,15 +51,7 @@ export class SgdsToast extends SgdsElement {
   /** The colour variant of toast */
   @property({ type: String, reflect: true }) variant: ToastVariant;
   /** The toast variant. */
-  @property({ type: String, reflect: true }) bg:
-    | "primary"
-    | "secondary"
-    | "success"
-    | "danger"
-    | "warning"
-    | "info"
-    | "dark"
-    | "light";
+  @property({ type: String, reflect: true }) bg: "success" | "danger" | "warning" | "info";
   /**Adds CSS styling to `<Toast />` based on the defined status */
   @property({ type: String, reflect: true }) status: "success" | "warning" | "danger";
 
@@ -144,7 +136,7 @@ export class SgdsToast extends SgdsElement {
   }
 }
 
-export type ToastVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light";
+export type ToastVariant = "success" | "danger" | "warning" | "info";
 
 export default SgdsToast;
 
