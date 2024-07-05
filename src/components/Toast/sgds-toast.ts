@@ -14,12 +14,25 @@ import toastStyle from "./toast.css";
  * @slot icon - The slot to pass in icon to toast's header
  * @slot duration - When required, pass in the duration since toast appeared to this slot
  *
+ *
  * @event sgds-show - Emitted on show.
  * @event sgds-after-show - Emitted on show after animation has completed.
  * @event sgds-hide - Emitted on hide.
  * @event sgds-after-hide - Emitted on hide after animation has completed.
  *
- * @cssproperty --toast-icon-margin-right - The margin-right between toast's icon and title in its header. Defaults to 0.5rem
+ * @cssproperty --sgds-toast-bg - The background color of toast
+ * @cssproperty --sgds-toast-border-width - The width of the border of toast
+ * @cssproperty --sgds-toast-border-left-width - The width of the left border of toast
+ * @cssproperty --sgds-toast-border-color - The color of the border of toast
+ * @cssproperty --sgds-toast-font-size - The font size of toast
+ * @cssproperty --sgds-toast-color - The text color of toast
+ * @cssproperty --sgds-toast-width - The width of toast
+ * @cssproperty --sgds-toast-header-gap - The gap between the elements in the header
+ * @cssproperty --sgds-toast-header-padding - The padding of the toast header
+ * @cssproperty --sgds-toast-header-bg - The background color of the toast header
+ * @cssproperty --sgds-toast-header-color - The title color of the toast header
+ * @cssproperty --sgds-toast-header-icon-color - The icon color of the toast header
+ * @cssproperty --sgds-toast-body-padding - The padding of the toast body
  */
 export class SgdsToast extends SgdsElement {
   static styles = [...SgdsElement.styles, toastStyle];
@@ -107,8 +120,6 @@ export class SgdsToast extends SgdsElement {
     return html`
       <div
         class="toast sgds show ${classMap({
-          [`is-${this.variant}`]: this.variant,
-          [`bg-${this.bg}`]: this.bg,
           [`is-${this.status}`]: this.status
         })}"
         role="alert"
@@ -118,8 +129,8 @@ export class SgdsToast extends SgdsElement {
       >
         <div class="toast-header">
           <slot name="icon"></slot>
-          <strong class="me-auto">${this.title}</strong>
-          <small class="text-muted me-2"><slot name="duration"></slot></small>
+          <strong>${this.title}</strong>
+          <small><slot name="duration"></slot></small>
           <button
             class="btn-sm btn-close"
             aria-label="close toast"
