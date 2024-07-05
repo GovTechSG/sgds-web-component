@@ -77,12 +77,12 @@ export class SgdsMasthead extends SgdsElement {
                     width="20"
                     height="20"
                     viewBox="0 0 20 20"
-                    fill="none"
+                    fill="currentColor"
                     class="sgds-masthead-identify-icon ${!this.toggleVisibility ? null : "show"}"
                   >
                     <path
                       d="M8.65188 6.85L8.64813 6.84625L10.0031 5.49125L17.0744 12.5625L15.7194 13.9175L10.0075 8.20562L4.2875 13.9256L2.9325 12.5706L8.6525 6.85062L8.65188 6.85Z"
-                      fill="#2F60CE"
+                      fill="currentColor"
                     ></path>
                   </svg>
                 </div>
