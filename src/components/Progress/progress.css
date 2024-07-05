@@ -1,14 +1,8 @@
 :host {
   --sgds-progress-bg: var(--sgds-gray-200);
-  --sgds-progress-border-radius: 0.3125rem;
+  --sgds-progress-border-radius: var(--sgds-border-radius);
   --sgds-progress-height: 1rem;
   display: block;
-}
-
-*,
-:after,
-:before {
-  box-sizing: border-box;
 }
 
 .progress {

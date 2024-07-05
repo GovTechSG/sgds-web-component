@@ -1,7 +1,7 @@
 @import "../../styles/bg-variants.css";
 
 :host {
-  --sgds-progress-bar-color: #fff;
+  --sgds-progress-bar-color: var(--sgds-white);
   --sgds-progress-bar-font-size: 0.75rem;
   --sgds-progress-bar-bg: var(--sgds-primary-filled);
   --sgds-progress-bar-transition: width 0.6s ease;
