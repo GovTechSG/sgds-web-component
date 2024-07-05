@@ -20,8 +20,8 @@ describe("<sgds-toast>", () => {
       >
         <div class="toast-header">
           <slot name="icon"></slot>
-          <strong class="me-auto">Title</strong>
-          <small class="text-muted me-2"><slot name="duration"></slot></small>
+          <strong>Title</strong>
+          <small><slot name="duration"></slot></small>
           <button
             class="btn-sm btn-close"
             aria-label="close toast"
@@ -134,16 +134,14 @@ describe("<sgds-toast-container>", () => {
     const el = await fixture<SgdsToastContainer>(
       html`<sgds-toast-container position="top-start"></sgds-toast-container>`
     );
-    expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("top-0");
-    expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("start-50");
-    expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("translate-middle-x");
+    expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("top-start");
   });
   it("when position prop is top-end, it adds the right classes", async () => {
     const el = await fixture<SgdsToastContainer>(
       html`<sgds-toast-container position="top-end"></sgds-toast-container>`
     );
     expect(el.shadowRoot?.querySelector("div.toast-container")?.classList.value.trim()).to.equal(
-      "sgds toast-container top-0 end-0"
+      "sgds toast-container top-end"
     );
   });
 });

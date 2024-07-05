@@ -22,7 +22,7 @@ export class SgdsToastContainer extends SgdsElement {
       <div
         class=${classMap({
           "sgds toast-container": true,
-          [this.position]: true
+          [this.position]: this.position
         })}
       >
         <slot></slot>
