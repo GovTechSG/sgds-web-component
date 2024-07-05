@@ -174,7 +174,7 @@
     <sgds-button slot="non-collapsible" iconcolor="black" iconwidth="28px" iconheight="28px">test</sgds-button>
 </sgds-mainnav> -->
 
-<sgds-mainnav expand="md">
+<sgds-mainnav expand="lg">
     <span slot="brand">Design System</span>
     <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
 
@@ -317,84 +317,43 @@
             <datepicker-input></datepicker-input>
             <h2>Progress</h2>
             <div class="row">
-                <div class="container">
-                    <div>
-                        <sgds-button variant="primary">Hello World</sgds-button>
-                        <sgds-button variant="secondary">Hello World</sgds-button>
-                        <sgds-button variant="warning">Hello World</sgds-button>
-                        <sgds-button variant="success">Hello World</sgds-button>
-                        <sgds-button variant="info">Hello World</sgds-button>
-                        <sgds-button variant="danger">Hello World</sgds-button>
-                        <sgds-button variant="light">Hello World</sgds-button>
-                        <sgds-button variant="link" target="_blank" href="#">Hello World</sgds-button>
-                        <sgds-button variant="dark">Hello World</sgds-button>
-                        <sgds-button disabled variant="primary">Hello World</sgds-button>
-                        <sgds-button disabled variant="secondary">Hello World</sgds-button>
-                        <sgds-button disabled variant="warning">Hello World</sgds-button>
-                        <sgds-button disabled variant="success">Hello World</sgds-button>
-                        <sgds-button disabled variant="info">Hello World</sgds-button>
-                        <sgds-button disabled variant="danger">Hello World</sgds-button>
-                        <sgds-button disabled variant="light">Hello World</sgds-button>
-                        <sgds-button disabled variant="link" target="_blank" href="#">Hello World</sgds-button>
-                        <sgds-button disabled variant="dark">Hello World</sgds-button>
-                        <sgds-button outlined variant="primary">Hello World</sgds-button>
-                        <sgds-button outlined variant="secondary">Hello World</sgds-button>
-                        <sgds-button outlined variant="warning">Hello World</sgds-button>
-                        <sgds-button outlined variant="success">Hello World</sgds-button>
-                        <sgds-button outlined variant="info">Hello World</sgds-button>
-                        <sgds-button outlined variant="danger">Hello World</sgds-button>
-                        <sgds-button outlined variant="light">Hello World</sgds-button>
-                        <sgds-button outlined variant="link">Hello World</sgds-button>
-                        <sgds-button outlined variant="dark">Hello World</sgds-button>
-                        <sgds-button active variant="primary">Hello World</sgds-button>
-                        <sgds-button active variant="secondary">Hello World</sgds-button>
-                        <sgds-button active variant="warning">Hello World</sgds-button>
-                        <sgds-button active variant="success">Hello World</sgds-button>
-                        <sgds-button active variant="info">Hello World</sgds-button>
-                        <sgds-button active variant="danger">Hello World</sgds-button>
-                        <sgds-button active variant="light">Hello World</sgds-button>
-                        <sgds-button active variant="link">Hello World</sgds-button>
-                        <sgds-button active variant="dark">Hello World</sgds-button>
-                        <sgds-button active outlined variant="primary">Hello World</sgds-button>
-                        <sgds-button active outlined variant="secondary">Hello World</sgds-button>
-                        <sgds-button active outlined variant="warning">Hello World</sgds-button>
-                        <sgds-button active outlined variant="success">Hello World</sgds-button>
-                        <sgds-button active outlined variant="info">Hello World</sgds-button>
-                        <sgds-button active outlined variant="danger">Hello World</sgds-button>
-                        <sgds-button active outlined variant="light">Hello World</sgds-button>
-                        <sgds-button active outlined variant="link">Hello World</sgds-button>
-                        <sgds-button active outlined variant="dark">Hello World</sgds-button>
-                        <sgds-button href="#" target="_blank">Anchor</sgds-button>
-                        <sgds-button size="sm" variant="dark">Hello World</sgds-button>
-                        <sgds-button size="lg" variant="dark">Hello World</sgds-button>
-                    </div>
-                    <sgds-button id="modalShowButton">Open Modal</sgds-button>
-                    <sgds-modal title="hello" titleicon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-amd&quot; viewBox=&quot;0 0 16 16&quot;>
-                    <path d=&quot;m.334 0 4.358 4.359h7.15v7.15l4.358 4.358V0H.334ZM.2 9.72l4.487-4.488v6.281h6.28L6.48 16H.2V9.72Z&quot;/>
-                    </svg>">
-                        This is a Modal
-                        <sgds-button slot="footer" variant="link" class="close-modal">Close</sgds-button>
-                        <sgds-button slot="footer" variant="primary" type="submit" form="formA">Submit</sgds-button>
-                    </sgds-modal>
+                <div>
+                    <sgds-progress height="40">
+                        <sgds-progress-bar variant="primary" value="50" label="50%"></sgds-progress-bar>
+                    </sgds-progress>
+                    <sgds-progress height="40">
+                        <sgds-progress-bar variant="secondary" value="50" label="50%"></sgds-progress-bar>
+                    </sgds-progress>
+                    <sgds-progress height="40">
+                        <sgds-progress-bar variant="warning" value="50" label="50%"></sgds-progress-bar>
+                    </sgds-progress>
+                    <sgds-progress height="40">
+                        <sgds-progress-bar variant="danger" value="50" label="50%"></sgds-progress-bar>
+                    </sgds-progress>
+                    <sgds-progress height="40">
+                        <sgds-progress-bar variant="success" value="50" label="50%"></sgds-progress-bar>
+                    </sgds-progress>
+                    <sgds-progress height="40">
+                        <sgds-progress-bar variant="info" value="50" label="50%"></sgds-progress-bar>
+                    </sgds-progress>
+                    <sgds-progress height="40">
+                        <sgds-progress-bar variant="dark" value="50" label="50%"></sgds-progress-bar>
+                    </sgds-progress>
+    
+                    <sgds-progress height="40">
+                        <sgds-progress-bar value="50" variant="secondary" striped animated></sgds-progress-bar>
+                    </sgds-progress>
+    
+                    <sgds-progress height="10">
+                        <sgds-progress-bar value="50" striped animated variant="danger"></sgds-progress-bar>
+                    </sgds-progress>
+    
+                    <sgds-progress height="40">
+                        <sgds-progress-bar value="50" striped animated variant="danger" label="hey"></sgds-progress-bar>
+                    </sgds-progress>
                 </div>
-
-                <sgds-progress height="40">
-                    <sgds-progress-bar value="50"></sgds-progress-bar>
-                </sgds-progress>
-
-                <sgds-progress height="40">
-                    <sgds-progress-bar value="50" variant="secondary" striped animated></sgds-progress-bar>
-                </sgds-progress>
-
-                <sgds-progress height="10">
-                    <sgds-progress-bar value="50" striped animated variant="danger"></sgds-progress-bar>
-                </sgds-progress>
-
-                <sgds-progress height="40">
-                    <sgds-progress-bar value="50" striped animated variant="danger" label="hey"></sgds-progress-bar>
-                </sgds-progress>
             </div>
-
+            <br />
         </div>
         <div class="container">
             <sgds-combo-box menuList='["John Smith", "Jack Adams"]' label="label" hintText="hint">
@@ -664,6 +623,64 @@
             </div>
             <div class="container">
                 <h2>Button</h2>
+                <div>
+                    <sgds-button variant="primary">Hello World</sgds-button>
+                    <sgds-button variant="secondary">Hello World</sgds-button>
+                    <sgds-button variant="warning">Hello World</sgds-button>
+                    <sgds-button variant="success">Hello World</sgds-button>
+                    <sgds-button variant="info">Hello World</sgds-button>
+                    <sgds-button variant="danger">Hello World</sgds-button>
+                    <sgds-button variant="light">Hello World</sgds-button>
+                    <sgds-button variant="link" target="_blank" href="#">Hello World</sgds-button>
+                    <sgds-button variant="dark">Hello World</sgds-button>
+                    <sgds-button disabled variant="primary">Hello World</sgds-button>
+                    <sgds-button disabled variant="secondary">Hello World</sgds-button>
+                    <sgds-button disabled variant="warning">Hello World</sgds-button>
+                    <sgds-button disabled variant="success">Hello World</sgds-button>
+                    <sgds-button disabled variant="info">Hello World</sgds-button>
+                    <sgds-button disabled variant="danger">Hello World</sgds-button>
+                    <sgds-button disabled variant="light">Hello World</sgds-button>
+                    <sgds-button disabled variant="link" target="_blank" href="#">Hello World</sgds-button>
+                    <sgds-button disabled variant="dark">Hello World</sgds-button>
+                    <sgds-button outlined variant="primary">Hello World</sgds-button>
+                    <sgds-button outlined variant="secondary">Hello World</sgds-button>
+                    <sgds-button outlined variant="warning">Hello World</sgds-button>
+                    <sgds-button outlined variant="success">Hello World</sgds-button>
+                    <sgds-button outlined variant="info">Hello World</sgds-button>
+                    <sgds-button outlined variant="danger">Hello World</sgds-button>
+                    <sgds-button outlined variant="light">Hello World</sgds-button>
+                    <sgds-button outlined variant="link">Hello World</sgds-button>
+                    <sgds-button outlined variant="dark">Hello World</sgds-button>
+                    <sgds-button active variant="primary">Hello World</sgds-button>
+                    <sgds-button active variant="secondary">Hello World</sgds-button>
+                    <sgds-button active variant="warning">Hello World</sgds-button>
+                    <sgds-button active variant="success">Hello World</sgds-button>
+                    <sgds-button active variant="info">Hello World</sgds-button>
+                    <sgds-button active variant="danger">Hello World</sgds-button>
+                    <sgds-button active variant="light">Hello World</sgds-button>
+                    <sgds-button active variant="link">Hello World</sgds-button>
+                    <sgds-button active variant="dark">Hello World</sgds-button>
+                    <sgds-button active outlined variant="primary">Hello World</sgds-button>
+                    <sgds-button active outlined variant="secondary">Hello World</sgds-button>
+                    <sgds-button active outlined variant="warning">Hello World</sgds-button>
+                    <sgds-button active outlined variant="success">Hello World</sgds-button>
+                    <sgds-button active outlined variant="info">Hello World</sgds-button>
+                    <sgds-button active outlined variant="danger">Hello World</sgds-button>
+                    <sgds-button active outlined variant="light">Hello World</sgds-button>
+                    <sgds-button active outlined variant="link">Hello World</sgds-button>
+                    <sgds-button active outlined variant="dark">Hello World</sgds-button>
+                    <sgds-button href="#" target="_blank">Anchor</sgds-button>
+                    <sgds-button size="sm" variant="dark">Hello World</sgds-button>
+                    <sgds-button size="lg" variant="dark">Hello World</sgds-button>
+                </div>
+                <sgds-button id="modalShowButton">Open Modal</sgds-button>
+                <sgds-modal title="hello" titleicon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-amd&quot; viewBox=&quot;0 0 16 16&quot;>
+                <path d=&quot;m.334 0 4.358 4.359h7.15v7.15l4.358 4.358V0H.334ZM.2 9.72l4.487-4.488v6.281h6.28L6.48 16H.2V9.72Z&quot;/>
+                </svg>">
+                    This is a Modal
+                    <sgds-button slot="footer" variant="link" class="close-modal">Close</sgds-button>
+                    <sgds-button slot="footer" variant="primary" type="submit" form="formA">Submit</sgds-button>
+                </sgds-modal>
                 <p>Button size</p>
                 <div class="row">
                     <div class="grid">
@@ -797,10 +814,10 @@
             </div>
 
             <div class="container">
-                <h2>toast</h2>
+                <h2>Toast</h2>
                 <div class="row">
                     <div class="col is-6">
-                        <sgds-toast show="" bg="" variant="" status="" delay="5000">
+                        <sgds-toast show="" bg="" status="warning" status="" delay="5000">
                             <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
                                 <path
@@ -810,8 +827,37 @@
                             <span slot="duration">2 mins ago</span>
                             This is a toast notifications
                         </sgds-toast>
-                        <sgds-toast show bg="warning" status="success"></sgds-toast>
-                        <sgds-toast-container position="bottom-start">
+                        <sgds-toast show="" bg="" status="danger" status="" delay="5000">
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
+                                <path
+                                    d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z">
+                                </path>
+                            </svg>
+                            <span slot="duration">2 mins ago</span>
+                            This is a toast notifications
+                        </sgds-toast>
+                        <sgds-toast show="" bg="" status="success" status="" delay="5000">
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
+                                <path
+                                    d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z">
+                                </path>
+                            </svg>
+                            <span slot="duration">2 mins ago</span>
+                            This is a toast notifications
+                        </sgds-toast>
+                        <sgds-toast show="" bg="" status="info" status="" delay="5000">
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
+                                <path
+                                    d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z">
+                                </path>
+                            </svg>
+                            <span slot="duration">2 mins ago</span>
+                            This is a toast notifications
+                        </sgds-toast>
+                        <!-- <sgds-toast-container position="bottom-start">
                             <sgds-toast show>
                                 <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
@@ -825,7 +871,7 @@
                             <sgds-toast show title="hello">This is a toast <span slot="duration">just
                                     now</span></sgds-toast>
                             <sgds-toast show title="hello">This is a toast</sgds-toast>
-                        </sgds-toast-container>
+                        </sgds-toast-container> -->
                     </div>
                 </div>
             </div>
