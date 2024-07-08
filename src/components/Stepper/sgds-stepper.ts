@@ -124,9 +124,7 @@ export class SgdsStepper extends SgdsElement {
               @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, index)}
             >
               <div class="stepper-marker">${index + 1}</div>
-              <div class="stepper-detail">
-                ${step}
-              </div>
+              <div class="stepper-detail">${step}</div>
             </div>
           `;
         })}
