@@ -1,8 +1,7 @@
-import { html } from "lit";
-import { property, query, state } from "lit/decorators.js";
+import { html, nothing } from "lit";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
-import { live } from "lit/directives/live.js";
 import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { FormSubmitController, SgdsFormControl } from "../../utils/form";
@@ -15,9 +14,18 @@ import checkboxStyle from "./checkbox.css";
  * @slot default - The label of checkbox.
  *
  * @event sgds-change - Emitted when the checked state changes.
+ *
+ * @cssprop --sgds-checkbox-margin-bottom - The margin-bottom of each checkbox.
+ * @cssprop --sgds-checkbox-inline-margin-right - The margin-right of each checkbox when it is inlined
+ * @cssprop --sgds-checkbox-input-bg - The background colour of the checkbox input
+ * @cssprop --sgds-checkbox-input-border-color - The border colour of the checkbox input
+ * @cssprop --sgds-checkbox-input-border-radius - The border radius of the checkbox input
+ * @cssprop --sgds-checkbox-input-focus-box-shadow-color - The box shadow colour of a focused checkbox input
+ * @cssprop --sgds-checkbox-input-focus-box-shadow - The box shadow of a focused checkbox input
+ *
  */
 export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
-  static styles = [checkboxStyle];
+  static styles = [...SgdsElement.styles, checkboxStyle];
   /**@internal */
   @query('input[type="checkbox"]') input: HTMLInputElement;
   /**@internal */
@@ -51,15 +59,15 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback?: string;
 
+  /** Aligns the checkbox horizontally */
+  @property({ type: Boolean, reflect: true }) isInline = false;
+
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("checked")
   defaultChecked = false;
 
-  /** @internal */
-  @state() valid = false;
-
-  /** @internal */
-  @state() invalid = false;
+  /** Marks the checkbox input as invalid. Replace the pseudo :invalid selector for absent in custom elements */
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** @internal For Id/For pair of the HTML form control and label. */
   private inputId: string = genId("checkbox");
@@ -113,24 +121,27 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
   @watch("checked", { waitUntilFirstUpdate: true })
   handleStateChange() {
     this.invalid = !this.input.checkValidity();
-    if (this.required) this.valid = this.input.checkValidity();
   }
 
   render() {
     return html`
-      <div class="form-check">
+      <div
+        class=${classMap({
+          "form-check": true,
+          "form-check-inline": this.isInline
+        })}
+      >
         <input
           class=${classMap({
             "form-check-input": true,
-            "is-invalid": this.hasFeedback && this.invalid,
-            "is-valid": this.hasFeedback && this.valid
+            "is-invalid": this.hasFeedback && this.invalid
           })}
           type="checkbox"
           id=${this.inputId}
           aria-invalid=${this.invalid ? "true" : "false"}
           name=${ifDefined(this.name)}
           value=${ifDefined(this.value)}
-          .checked=${live(this.checked)}
+          ?checked=${this.checked}
           ?disabled=${this.disabled}
           ?required=${this.required}
           aria-disabled=${this.disabled ? "true" : "false"}
@@ -144,7 +155,7 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
         ></label>
         ${this.hasFeedback
           ? html`<div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
-          : ""}
+          : nothing}
       </div>
     `;
   }

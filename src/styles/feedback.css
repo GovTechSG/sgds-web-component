@@ -33,6 +33,6 @@
 .was-validated :invalid ~ .invalid-feedback {
   display: block;
 }
-.form-check-inline .form-check-input ~ .invalid-feedback {
+/* .form-check-inline .form-check-input ~ .invalid-feedback {
   margin-left: 0.5em;
-}
+} */

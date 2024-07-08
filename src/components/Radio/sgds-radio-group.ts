@@ -13,9 +13,11 @@ import SgdsRadio from "./sgds-radio";
  * @slot default - The default slot where sgds-radio are placed.
  *
  * @event sgds-change - Emitted when the radio group's selected value changes.
- * 
+ *
  * @cssprop --sgds-radio-group-gap - Sets the gap between radio group's label, sgds-radio and invalid feedback message
-
+ * @cssprop --sgds-form-label-font-weight - Sets the font weight of the radio group's label
+ * @cssprop --sgds-form-label-color - Sets the text color of the radio group's label
+ *
  */
 export class SgdsRadioGroup extends SgdsElement {
   static styles = [...SgdsElement.styles, radioGroupStyles];

@@ -9,17 +9,17 @@ import radioStyles from "./radio.css";
 /**
  * @summary Radio allows the user to select one option from a set while seeing all available options.
  *
- * @slot default - The label of the radio button
+ * @slot default - The label of the radio input
  *
  * @event sgds-focus - Emitted when the control gains focus.
  * @event sgds-blur - Emitted when the control loses focus.
  *
  * @cssprop --sgds-radio-margin-bottom - The margin-bottom of each radio. Defaults to the value of `--sgds-radio-group-gap`
  * @cssprop --sgds-radio-inline-margin-right - The margin-right of each radio when it is inlined.
- * @cssprop --sgds-radio-btn-bg - The background colour of the radio button
- * @cssprop --sgds-radio-btn-border-color - The border colour of the radio button
- * @cssprop --sgds-radio-btn-focus-box-shadow-color - The box shadow colour of a focused radio button
- * @cssprop --sgds-radio-btn-focus-box-shadow - The box shadow of a focused radio button
+ * @cssprop --sgds-radio-input-bg - The background colour of the radio input
+ * @cssprop --sgds-radio-input-border-color - The border colour of the radio input
+ * @cssprop --sgds-radio-input-focus-box-shadow-color - The box shadow colour of a focused radio input
+ * @cssprop --sgds-radio-input-focus-box-shadow - The box shadow of a focused radio input
  */
 export class SgdsRadio extends SgdsElement {
   static styles = [...SgdsElement.styles, radioStyles];
@@ -44,7 +44,7 @@ export class SgdsRadio extends SgdsElement {
   @property({ type: String, reflect: true }) invalidFeedback = "";
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
-  /**  This will be true when the control is in an invalid state. */
+  /** Marks the radio input as invalid. Replace the pseudo :invalid selector for absent in custom elements */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
   private radioId: string = genId("radio");

@@ -1,20 +1,21 @@
 :host {
   --sgds-radio-margin-bottom: var(--sgds-radio-group-gap, var(--sgds-spacer-2));
   --sgds-radio-inline-margin-right: var(--sgds-spacer-4);
-  --sgds-radio-btn-bg: var(--sgds-body-bg);
-  --sgds-radio-btn-focus-box-shadow-color: var(--sgds-info-300);
-  --sgds-radio-btn-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width) var(--sgds-radio-btn-focus-box-shadow-color);
-  --sgds-radio-btn-border-color: var(--sgds-border-color);
+  --sgds-radio-input-bg: var(--sgds-body-bg);
+  --sgds-radio-input-focus-box-shadow-color: var(--sgds-info-300);
+  --sgds-radio-input-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width)
+    var(--sgds-radio-input-focus-box-shadow-color);
+  --sgds-radio-input-border-color: var(--sgds-border-color);
 }
 :host([checked]) {
-  --sgds-radio-btn-border-color: var(--sgds-radio-btn-bg);
-  --sgds-radio-btn-bg: var(--sgds-info-filled);
+  --sgds-radio-input-border-color: var(--sgds-radio-input-bg);
+  --sgds-radio-input-bg: var(--sgds-info-filled);
 }
 :host([checked]:disabled) {
-  --sgds-radio-btn-border-color: var(--sgds-border-color);
+  --sgds-radio-input-border-color: var(--sgds-border-color);
 }
 :host([invalid]:focus) {
-  --sgds-radio-btn-focus-box-shadow-color: var(--sgds-danger-300);
+  --sgds-radio-input-focus-box-shadow-color: var(--sgds-danger-300);
 }
 :host(:focus-visible) {
   outline: none;
@@ -40,7 +41,7 @@ input {
 
 .form-check-input {
   appearance: none;
-  background-color: var(--sgds-radio-btn-bg);
+  background-color: var(--sgds-radio-input-bg);
   background-image: var(--sgds-radio-bg-image);
   background-position: 50%;
   background-repeat: no-repeat;
@@ -52,21 +53,18 @@ input {
   vertical-align: top;
   width: 1.125em;
 }
-.form-check-input[type="checkbox"] {
-  border-radius: 0.25em;
-}
 .form-check-input[type="radio"] {
   border-radius: 50%;
 }
 .form-check-input:focus {
-  border-color: var(--sgds-radio-btn-border-color);
-  box-shadow: var(--sgds-radio-btn-focus-box-shadow);
+  border-color: var(--sgds-radio-input-border-color);
+  box-shadow: var(--sgds-radio-input-focus-box-shadow);
   outline: 0;
 }
 .form-check-input:checked,
 .form-check-input[checked] {
-  background-color: var(--sgds-radio-btn-bg);
-  border-color: var(--sgds-border-color);
+  background-color: var(--sgds-radio-input-bg);
+  border-color: var(--sgds-radio-input-border-color);
 }
 
 .form-check-input:checked[type="radio"],
@@ -95,7 +93,7 @@ input {
 }
 .form-check-input.is-invalid:focus,
 .form-check-input:invalid:focus {
-  box-shadow: var(--sgds-radio-btn-focus-box-shadow);
+  box-shadow: var(--sgds-radio-input-focus-box-shadow);
 }
 .form-check-input.is-invalid ~ .form-check-label,
 .form-check-input:invalid ~ .form-check-label {
@@ -139,7 +137,6 @@ input {
   margin-left: 0;
   margin-right: -2.5em;
 } */
-
 
 /* [data-bs-theme="dark"] .form-switch .form-check-input:not(:checked):not(:focus) {
   --sgds-form-switch-bg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='rgba(255, 255, 255, 0.25)'/%3E%3C/svg%3E");

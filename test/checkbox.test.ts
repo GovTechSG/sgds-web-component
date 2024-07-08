@@ -177,23 +177,23 @@ describe("<sgds-checkbox>", () => {
     expect(el.checked).to.be.false;
   });
 
-  it("when required attr is passed in, should show valid state on first check and invalid state on unchecked by clicking", async () => {
+  it("when required attr is passed in, should show invalid state on unchecked by clicking", async () => {
     const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox required></sgds-checkbox>`);
     el.shadowRoot?.querySelector("input")?.focus();
     el.shadowRoot?.querySelector("input")?.click();
     await elementUpdated(el);
-    expect(el.valid).to.be.true;
+    expect(el.checked).to.be.true;
     el.shadowRoot?.querySelector("input")?.click();
     await elementUpdated(el);
     expect(el.invalid).to.be.true;
   });
 
-  it("when required attr is passed in, should show valid state on first check and invalid state on unchecked using enter key", async () => {
+  it("when required attr is passed in, should show invalid state on unchecked using enter key", async () => {
     const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox required></sgds-checkbox>`);
     el.shadowRoot?.querySelector("input")?.focus();
     await sendKeys({ press: "Enter" });
     await el.updateComplete;
-    expect(el.valid).to.be.true;
+    expect(el.checked).to.be.true;
 
     await sendKeys({ press: "Enter" });
     await el.updateComplete;
