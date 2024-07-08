@@ -4,6 +4,11 @@ import SgdsElement from "../../base/sgds-element";
 import spinnerStyle from "./spinner.css";
 /**
  * @summary Spinners notify the users that their request is being processed.
+ *
+ * @cssproperty --sgds-spinner-color - The color of spinner
+ * @cssproperty --sgds-spinner-size - The width and height of spinner
+ * @cssproperty --sgds-spinner-border-width - The width of the border of spinner
+ *
  */
 export class SgdsSpinner extends SgdsElement {
   static styles = [...SgdsElement.styles, spinnerStyle];
