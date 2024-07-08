@@ -7,7 +7,7 @@ import spinnerStyle from "./spinner.css";
  * @summary Spinners notify the users that their request is being processed.
  */
 export class SgdsSpinner extends SgdsElement {
-  static styles = [spinnerStyle];
+  static styles = [...SgdsElement.styles, spinnerStyle];
   /** The type of spinner */
   @property({ type: String, reflect: true }) type: SpinnerType = "border";
   /** The color of spinner */
