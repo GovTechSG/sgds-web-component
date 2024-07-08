@@ -48,12 +48,8 @@ export class SgdsToast extends SgdsElement {
   @property({ type: Boolean, reflect: true }) autohide = false;
   /** The amount of time taken for toast to disappear after its first render. It takes effect only when autohide is set to true */
   @property({ type: Number, reflect: true }) delay = 5000;
-  /** The colour variant of toast */
-  @property({ type: String, reflect: true }) variant: ToastVariant;
-  /** The toast variant. */
-  @property({ type: String, reflect: true }) bg: "success" | "danger" | "warning" | "info";
   /**Adds CSS styling to `<Toast />` based on the defined status */
-  @property({ type: String, reflect: true }) status: "success" | "warning" | "danger";
+  @property({ type: String, reflect: true }) status: "success" | "warning" | "danger" | "info";
 
   /** Shows the toast */
   public async showToast() {
@@ -135,8 +131,6 @@ export class SgdsToast extends SgdsElement {
     `;
   }
 }
-
-export type ToastVariant = "success" | "danger" | "warning" | "info";
 
 export default SgdsToast;
 
