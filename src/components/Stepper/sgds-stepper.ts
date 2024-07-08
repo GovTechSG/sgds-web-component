@@ -19,13 +19,15 @@ export interface IStepMetaData {
  * @event sgds-arrived - Emitted right after the activeStep has updated its state, when upcoming step has arrived. Call `getMethod()` on this event to get the current step's component.
  * @event sgds-reset - Emitted right before the step is reset to its defaultActiveStep. Event is fired when reset method is called.
  *
- * @cssproperty --stepper-default-color - Sets the theme color for default stepper marker. <br>Default value `--sgds-gray-400`
- * @cssproperty --stepper-theme-color - Sets the theme color for active, completed and clickable stepper marker. <br>Default value `--sgds-primary`
- * @cssproperty --stepper-theme-hover-color - Sets the theme hover color for clickable stepper marker. <br>Default value `--sgds-primary-600`
+ * @cssproperty --sgds-stepper-font-size - Sets the font size on all elements of the stepper. This includes stepper details and stepper markers.
+ * @cssproperty --sgds-stepper-detail-font-weight - The font weight of stepper detail
+ * @cssproperty --sgds-stepper-inactive-theme-color - Sets the theme color for default stepper marker. <br>Default value `--sgds-gray-400`
+ * @cssproperty --sgds-stepper-theme-color - Sets the theme color for active, completed and clickable stepper marker. <br>Default value `--sgds-primary`
+ * @cssproperty --sgds-stepper-theme-hover-color - Sets the theme hover color for clickable stepper marker. <br>Default value `--sgds-primary-600`
  *
  */
 export class SgdsStepper extends SgdsElement {
-  static styles = [stepperStyle];
+  static styles = [...SgdsElement.styles, stepperStyle];
 
   /** The metadata of stepper, type `IStepMetaData`, that consist of `stepHeader: string` and `component:unknown`. `stepHeader` is the name of the step and `component` is the content that should appear at the each step. `component` is set to `unknown` to allow users to pass in their desired component based on the framework of choice. e.g. pass in your own react/angular/vue component or it can also be a text content.
    */
@@ -123,7 +125,7 @@ export class SgdsStepper extends SgdsElement {
             >
               <div class="stepper-marker">${index + 1}</div>
               <div class="stepper-detail">
-                <p><b>${step}</b></p>
+                ${step}
               </div>
             </div>
           `;

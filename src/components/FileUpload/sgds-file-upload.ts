@@ -79,7 +79,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   cancelIcon = "";
 
   /** The input's hint text below the label */
-  @property({ reflect: true }) hintText = "This is a hint text";
+  @property({ reflect: true }) hintText = "";
 
   /** @internal */
   @property({ type: Object, state: true })
@@ -151,6 +151,9 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
     return this.hintText && hintTextTemplate;
   }
 
+  private _sanitizeVariant(variant: FileUploadButtonVariant) {
+    return variant.replace("outline-", "");
+  }
   render() {
     const getCheckedIcon = (checkedIcon: string) => {
       if (checkedIcon) {
@@ -178,7 +181,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"
-        fill="red"
+        fill="currentColor"
         class="bi bi-x-circle"
         viewBox="0 0 16 16"
       >
@@ -209,7 +212,13 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
         id=${this.inputId}
       />
       <div class="fileupload-container">
-        <sgds-button size=${this.size} variant=${this.variant} ?disabled=${this.disabled} @click=${this.handleClick}>
+        <sgds-button
+          size=${this.size}
+          variant=${this._sanitizeVariant(this.variant)}
+          ?outlined=${this.variant.includes("outline")}
+          ?disabled=${this.disabled}
+          @click=${this.handleClick}
+        >
           <label for=${this.inputId} class="file-upload-label"><slot></slot></label>
         </sgds-button>
         ${this._renderHintText()}

@@ -124,13 +124,14 @@
   font-weight: var(--sgds-accordion-item-font-weight);
   box-shadow: none;
 }
-:host([first-of-type]) .accordion-item {
+ :host([first-of-type]) .accordion-item {
   border-radius: var(--sgds-accordion-item-border-radius) var(--sgds-accordion-item-border-radius) 0 0;
   .accordion-btn {
     border-top-left-radius: var(--sgds-accordion-item-btn-border-radius);
     border-top-right-radius: var(--sgds-accordion-item-btn-border-radius);
   }
 }
+
 :host([nth-of-type]) .accordion-item {
   border-radius: 0;
   border-top: 0;
@@ -139,6 +140,7 @@
     border-top-right-radius: 0;
   }
 }
+
 :host([last-of-type]) .accordion-item {
   border-radius: 0 0 var(--sgds-accordion-item-border-radius) var(--sgds-accordion-item-border-radius);
   border-top: 0;

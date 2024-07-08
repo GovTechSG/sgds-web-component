@@ -197,7 +197,15 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   }
   protected _renderLabel() {
     const labelTemplate = html`
-      <label for=${this.inputId} id=${this.labelId} class="form-label">${this.label}</label>
+      <label
+        for=${this.inputId}
+        id=${this.labelId}
+        class=${classMap({
+          "form-label": true,
+          required: this.required
+        })}
+        >${this.label}</label
+      >
     `;
     return this.label && labelTemplate;
   }
