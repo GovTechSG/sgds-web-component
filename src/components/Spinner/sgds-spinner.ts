@@ -12,16 +12,14 @@ export class SgdsSpinner extends SgdsElement {
   @property({ type: String, reflect: true }) type: SpinnerType = "border";
   /** The color of spinner */
   @property({ type: String, reflect: true }) color: SpinnerColor = "primary";
-  /** Optional for spinner wrapper. Can be used to insert any utility classes such as me-auto */
-  @property({ type: String, reflect: true }) spinnerClasses: string;
+
   render() {
     return html`
       <div
         class="
             ${classMap({
           [`spinner-${this.type}`]: this.type,
-          [`text-${this.color}`]: this.color,
-          [`${this.spinnerClasses}`]: this.spinnerClasses
+          [`text-${this.color}`]: this.color
         })}"
         role="status"
       >
