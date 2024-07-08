@@ -7,4 +7,8 @@
     margin-bottom: 0;
     color: var(--sgds-form-label-color);
   }
-  
+
+.form-label.required:after{
+    content: "*";
+    color: var(--sgds-danger);
+}

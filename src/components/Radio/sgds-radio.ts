@@ -2,7 +2,6 @@ import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
-import { live } from "lit/directives/live.js";
 import SgdsElement from "../../base/sgds-element";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
@@ -14,9 +13,16 @@ import radioStyles from "./radio.css";
  *
  * @event sgds-focus - Emitted when the control gains focus.
  * @event sgds-blur - Emitted when the control loses focus.
+ *
+ * @cssprop --sgds-radio-margin-bottom - The margin-bottom of each radio. Defaults to the value of `--sgds-radio-group-gap`
+ * @cssprop --sgds-radio-inline-margin-right - The margin-right of each radio when it is inlined.
+ * @cssprop --sgds-radio-btn-bg - The background colour of the radio button
+ * @cssprop --sgds-radio-btn-border-color - The border colour of the radio button
+ * @cssprop --sgds-radio-btn-focus-box-shadow-color - The box shadow colour of a focused radio button
+ * @cssprop --sgds-radio-btn-focus-box-shadow - The box shadow of a focused radio button
  */
 export class SgdsRadio extends SgdsElement {
-  static styles = [radioStyles];
+  static styles = [...SgdsElement.styles, radioStyles];
   /**
    * Draws the radio in a checked state
    */
@@ -33,6 +39,13 @@ export class SgdsRadio extends SgdsElement {
 
   /** For aria-label */
   @property({ type: String, reflect: true }) ariaLabel = "";
+
+  /**Feedback text for error state when validated */
+  @property({ type: String, reflect: true }) invalidFeedback = "";
+  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
+  @property({ type: Boolean, reflect: true }) hasFeedback = false;
+  /**  This will be true when the control is in an invalid state. */
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   private radioId: string = genId("radio");
 
@@ -86,20 +99,21 @@ export class SgdsRadio extends SgdsElement {
           "form-check": true,
           "form-check-inline": this.isInline
         })}
+        tabindex="-1"
       >
         <input
           class=${classMap({
-            "form-check-input": true
+            "form-check-input": true,
+            "is-invalid": this.invalid
           })}
           type="radio"
           id=${ifDefined(this.radioId)}
           value=${ifDefined(this.value)}
-          .checked=${live(this.checked)}
+          ?checked=${this.checked}
           ?disabled=${this.disabled}
           aria-disabled=${this.disabled ? "true" : "false"}
           aria-checked=${this.checked ? "true" : "false"}
           @click=${this.handleClick}
-          tabindex="-1"
         />
         <label for="${ifDefined(this.radioId)}" aria-label=${ifDefined(this.ariaLabel)} class="form-check-label"
           ><slot></slot
