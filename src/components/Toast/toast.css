@@ -57,6 +57,9 @@
   width: 100%;
   max-width: var(--sgds-toast-max-width);
 }
+.toast[hidden] {
+  display: none;
+}
 .toast-header {
   display: flex;
   align-items: center;
