@@ -18,9 +18,14 @@ import tabGroupStyle from "./tab-group.css";
  *
  * @csspart body - The container wrapping the default slot where all `sgds-tab-panel`s are slotted.
  * @csspart nav - The container wrapping the default slot where all `sgds-tab`s are slotted.
+ *
+ * @cssproperty --sgds-tab-group-margin-bottom - The bottom margin of tab group
+ * @cssproperty --sgds-tab-group-padding-left - The left padding of tab group
+ * @cssproperty --sgds-tab-group-gap - The gap between the elements of tab group
+ *
  */
 export class SgdsTabGroup extends SgdsElement {
-  static styles = [tabGroupStyle];
+  static styles = [...SgdsElement.styles, tabGroupStyle];
   /**@internal */
   @query(".tab-group") tabGroup: HTMLElement;
   /**@internal */
