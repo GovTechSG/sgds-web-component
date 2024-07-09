@@ -39,10 +39,6 @@ export class SgdsTabGroup extends SgdsElement {
   private panels: SgdsTabPanel[] = [];
   /** The variant types of tabs. Controls the visual stylesof all `sgds-tabs` in its slot. It also dynamically changes the slots of `sgds-tab` */
   @property({ reflect: true, attribute: true }) variant: "tabs-basic-toggle" | "tabs-info-toggle";
-  /** Forwards css tokens to the container div of slot[name=nav] where all `sgds-tab` are slotted in */
-  @property({ type: String, reflect: true }) tabsClasses: string;
-  /** Forwards css tokens to the container div of slot where all `sgds-tab-panel` are slotted in */
-  @property({ type: String, reflect: true }) bodyClasses: string;
 
   connectedCallback() {
     const whenAllDefined = Promise.all([
@@ -237,14 +233,7 @@ export class SgdsTabGroup extends SgdsElement {
         @keydown=${this.handleKeyDown}
         variant=${ifDefined(this.variant)}
       >
-        <div
-          part="nav"
-          class=${classMap({
-            "tab-group__nav": true,
-            [`${this.tabsClasses}`]: this.tabsClasses
-          })}
-          role="tablist"
-        >
+        <div part="nav" class="tab-group__nav" role="tablist">
           <slot
             name="nav"
             class=${classMap({
@@ -256,12 +245,7 @@ export class SgdsTabGroup extends SgdsElement {
             @slotchange=${this.syncTabsAndPanels}
           ></slot>
         </div>
-        <div
-          part="body"
-          class=${classMap({
-            [`${this.bodyClasses}`]: this.bodyClasses
-          })}
-        >
+        <div part="body">
           <slot class="tab-group__body" @slotchange=${this.syncTabsAndPanels}></slot>
         </div>
       </div>
