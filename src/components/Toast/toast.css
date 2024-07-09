@@ -73,6 +73,7 @@
 }
 .toast-header strong {
   margin-right: auto;
+  word-break: break-all;
 }
 .toast-header small {
   flex-grow: 0;
