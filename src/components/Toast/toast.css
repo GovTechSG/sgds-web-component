@@ -55,6 +55,7 @@
   max-width: 100%;
   pointer-events: auto;
   width: 100%;
+  min-width: 320px;
   max-width: var(--sgds-toast-max-width);
 }
 .toast[hidden] {
