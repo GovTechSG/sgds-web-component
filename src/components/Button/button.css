@@ -5,7 +5,7 @@
   --sgds-btn-font-family: var(--sgds-font-sans-serif);
   --sgds-btn-font-size: 1rem;
   --sgds-btn-font-weight: 400;
-  --sgds-btn-line-height: var(--sgds-body-line-height);
+  --sgds-btn-line-height: var(--sgds-line-height-lg);
   --sgds-btn-color: var(--sgds-body-color);
   --sgds-btn-bg: transparent;
   --sgds-btn-border-width: var(--sgds-border-width);
