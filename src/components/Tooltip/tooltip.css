@@ -1,3 +1,4 @@
+//TODO: Dismissible tooltip does not need close button anymore
 @import "../../styles/close-button.css";
   .tooltip {
     --sgds-tooltip-zindex: 1080;

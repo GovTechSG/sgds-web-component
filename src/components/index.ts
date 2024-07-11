@@ -10,6 +10,7 @@ export * from "./Breadcrumb/sgds-breadcrumb-item";
 export * from "./Button/sgds-button";
 export * from "./Card/sgds-card";
 export * from "./Checkbox/sgds-checkbox";
+export * from "./CloseButton/sgds-close-button";
 export * from "./ComboBox/sgds-combo-box";
 export * from "./Datepicker/sgds-datepicker";
 export * from "./Drawer/sgds-drawer";

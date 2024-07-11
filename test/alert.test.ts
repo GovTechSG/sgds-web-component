@@ -2,7 +2,7 @@ import "./sgds-web-component";
 import { assert, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
-import type { SgdsAlert } from "../src/components";
+import type { SgdsAlert, SgdsCloseButton } from "../src/components";
 
 describe("<sgds-alert-heading>", () => {
   it("the default tag is h4", async () => {
@@ -99,7 +99,7 @@ describe("<Alert>", () => {
     const onCloseSpy = sinon.spy();
     el.addEventListener("sgds-hide", onCloseSpy);
 
-    const closeButton = el.shadowRoot?.querySelector("button.btn-close") as HTMLButtonElement;
+    const closeButton = el.shadowRoot?.querySelector("sgds-close-button") as SgdsCloseButton;
     closeButton?.click();
     await el.updateComplete;
     expect(el.show).to.be.false;

@@ -2,23 +2,14 @@
 :host {
   --sgds-checkbox-margin-bottom: var(--sgds-spacer-2);
   --sgds-checkbox-inline-margin-right: var(--sgds-spacer-4);
-  --sgds-checkbox-input-bg: var(--sgds-body-bg);
-  --sgds-checkbox-input-focus-box-shadow-color: var(--sgds-info-300);
-  --sgds-checkbox-input-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width) var(--sgds-checkbox-input-focus-box-shadow-color);
-  --sgds-checkbox-input-border-color: var(--sgds-border-color);
   --sgds-checkbox-input-border-radius: 0.25em;
 }
 
 :host([checked]) {
-  --sgds-checkbox-input-border-color: var(--sgds-checkbox-input-bg);
-  --sgds-checkbox-input-bg: var(--sgds-info-filled);
+  --sgds-form-border-color: var(--sgds-form-bg);
+  --sgds-form-bg: var(--sgds-info-filled);
 }
-:host([checked]:disabled) {
-  --sgds-checkbox-input-border-color: var(--sgds-border-color);
-}
-:host([invalid]:focus) {
-  --sgds-checkbox-input-focus-box-shadow-color: var(--sgds-danger-300);
-}
+
 :host(:focus-visible) {
   outline: none;
 }
@@ -43,12 +34,12 @@ input {
 
 .form-check-input {
   appearance: none;
-  background-color: var(--sgds-checkbox-input-bg);
+  background-color: var(--sgds-form-bg);
   background-image: var(--sgds-radio-bg-image);
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
-  border: var(--sgds-border-width) solid var(--sgds-border-color);
+  border: var(--sgds-form-border-width) solid var(--sgds-border-color);
   flex-shrink: 0;
   height: 1.125em;
   margin-top: 0.4375em;
@@ -59,14 +50,14 @@ input {
   border-radius: var(--sgds-checkbox-input-border-radius);
 }
 .form-check-input:focus {
-  border-color: var(--sgds-checkbox-input-border-color);
-  box-shadow: var(--sgds-checkbox-input-focus-box-shadow);
+  border-color: var(--sgds-form-border-color);
+  box-shadow: var(--sgds-form-focus-box-shadow);
   outline: 0;
 }
 .form-check-input:checked,
 .form-check-input[checked] {
-  background-color: var(--sgds-checkbox-input-bg);
-  border-color: var(--sgds-checkbox-input-border-color);
+  background-color: var(--sgds-form-bg);
+  border-color: var(--sgds-form-border-color);
 }
 
 .form-check-input:disabled {
@@ -75,19 +66,22 @@ input {
   border-color: var(--sgds-border-color);
   pointer-events: none;
 }
+.form-check-label{
+  color: var(--sgds-form-label-color);
+}
 .form-check-input:disabled ~ .form-check-label,
 .form-check-input[disabled] ~ .form-check-label {
   cursor: default;
   opacity: var(--sgds-disabled-opacity);
 }
 .form-check-input.is-invalid {
-  border-color: var(--sgds-form-invalid-border-color);
+  border-color: var(--sgds-form-invalid-color);
 }
 .form-check-input.is-invalid:checked {
   background-color: var(--sgds-form-invalid-color);
 }
 .form-check-input.is-invalid:focus {
-  box-shadow: var(--sgds-checkbox-input-focus-box-shadow);
+  box-shadow: var(--sgds-form-focus-invalid-box-shadow);
 }
 .form-check-input.is-invalid ~ .form-check-label {
   color: var(--sgds-form-invalid-color);

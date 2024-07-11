@@ -681,7 +681,7 @@
                     <sgds-button size="lg" variant="dark">Hello World</sgds-button>
                 </div>
                 <sgds-button id="modalShowButton">Open Modal</sgds-button>
-                <sgds-modal title="hello" titleicon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-amd&quot; viewBox=&quot;0 0 16 16&quot;>
+                <sgds-modal centeredAlignVariant title="hello" titleicon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-amd&quot; viewBox=&quot;0 0 16 16&quot;>
                 <path d=&quot;m.334 0 4.358 4.359h7.15v7.15l4.358 4.358V0H.334ZM.2 9.72l4.487-4.488v6.281h6.28L6.48 16H.2V9.72Z&quot;/>
                 </svg>">
                     This is a Modal
@@ -725,7 +725,7 @@
             <div>
                 <h2>Checkbox</h2>
                 <form id="radio-submit">
-                <sgds-checkbox id="hehe" disabled invalid hasFeedback checked invalidFeedback="test">1</sgds-checkbox>
+                <sgds-checkbox id="hehe" invalid hasFeedback checked invalidFeedback="test">1</sgds-checkbox>
                 <sgds-checkbox hasFeedback>2</sgds-checkbox>
                 <sgds-checkbox>3</sgds-checkbox>
                 <sgds-button  type="submit" >Submit</sgds-button>
@@ -742,7 +742,7 @@
                 <form id="radio-submit">
                     <sgds-radio-group required hasFeedback invalidFeedback="This is required" >
                         <span slot="label">Select an option</span>
-                        <sgds-radio isInline value="1" >Option 1</sgds-radio>
+                        <sgds-radio disabled isInline value="1" >Option 1</sgds-radio>
                         <sgds-radio isInline value="2"  >Option 2</sgds-radio>
                         <sgds-radio isInline value="3" >Option 3</sgds-radio>
                     </sgds-radio-group>

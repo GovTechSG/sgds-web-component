@@ -147,12 +147,11 @@ export class SgdsButton extends SgdsElement {
       return;
     }
 
-    this.removeEventListener("click", this.clickHandler);
-    this.addEventListener("click", this.clickHandler);
+    this.removeEventListener("click", this._clickHandler);
+    this.addEventListener("click", this._clickHandler);
   }
 
-  /** @internal */
-  clickHandler = () => {
+  private _clickHandler = () => {
     if (this.type === "submit") {
       this.formSubmitController.submit(this);
     }

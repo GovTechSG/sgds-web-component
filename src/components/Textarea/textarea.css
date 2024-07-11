@@ -10,19 +10,10 @@
   --sgds-textarea-font-weight: var(--sgds-body-font-weight);
   --sgds-textarea-font-size: var(--sgds-body-font-size);
   --sgds-textarea-border-radius: var(--sgds-border-radius);
-  --sgds-textarea-border-width: var(--sgds-border-width);
-  --sgds-textarea-border-color: var(--sgds-border-color);
-  --sgds-textarea-focus-box-shadow-color: var(--sgds-info-300);
-  --sgds-textarea-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width) var(--sgds-textarea-focus-box-shadow-color);
   --sgds-textarea-color: var(--sgds-body-color);
   --sgds-textarea-placeholder-color: var(--sgds-gray-400);
 }
-:host([invalid]:focus){
-  --sgds-textarea-focus-box-shadow-color: var(--sgds-danger-300)
-}
-:host([valid]:focus){
-  --sgds-textarea-focus-box-shadow-color: var(--sgds-success-300)
-}
+
 textarea {
   font-family: inherit;
   font-size: inherit;
@@ -36,14 +27,14 @@ textarea {
   appearance: none;
   background-clip: padding-box;
   background-color: var(--sgds-body-bg);
-  border: var(--sgds-textarea-border-width) solid var(--sgds-textarea-border-color);
-  border-radius: var( --sgds-textarea-border-radius);
+  border: var(--sgds-form-border-width) solid var(--sgds-form-border-color);
+  border-radius: var(--sgds-textarea-border-radius);
   color: var(--sgds-textarea-color);
   display: block;
   font-size: var(--sgds-textarea-font-size);
   font-weight: var(--sgds-textarea-font-weight);
   line-height: var(--sgds-textarea-line-height);
-  padding: var(--sgds-textarea-padding-y) var( --sgds-textarea-padding-x);
+  padding: var(--sgds-textarea-padding-y) var(--sgds-textarea-padding-x);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   width: 100%;
   min-height: calc(2em + 0.875rem + 2px);
@@ -56,11 +47,11 @@ textarea {
 .form-control:focus {
   background-color: var(--sgds-body-bg);
   border: var(--sgds-textarea-border-width) solid var(--sgds-link);
-  box-shadow: var(--sgds-textarea-focus-box-shadow);
+  box-shadow: var(--sgds-form-focus-box-shadow);
   outline: 0;
 }
 .form-control::placeholder {
-  color: var(--sgds-textarea-placeholder-color);;
+  color: var(--sgds-textarea-placeholder-color);
   opacity: 1;
 }
 .form-control:disabled {
@@ -69,15 +60,15 @@ textarea {
   color: var(--sgds-disabled-color);
 }
 
-.textarea-resize-none  {
+.textarea-resize-none {
   resize: none;
 }
 
-.textarea-resize-vertical  {
+.textarea-resize-vertical {
   resize: vertical;
 }
 
-.textarea-resize-auto  {
+.textarea-resize-auto {
   height: auto;
   resize: none;
   overflow-y: hidden;
@@ -92,7 +83,7 @@ textarea {
   background-position: right calc(0.5em + 0.21875rem) top var(--sgds-textarea-padding-y);
   background-repeat: no-repeat;
   background-size: calc(1em + 0.4375rem) calc(1em + 0.4375rem);
-  border-color: var(--sgds-form-valid-border-color);
+  border-color: var(--sgds-form-valid-color);
   padding-right: calc(2em + 0.875rem);
 }
 .form-control.is-invalid {
@@ -100,9 +91,12 @@ textarea {
   background-position: right calc(0.5em + 0.21875rem) top var(--sgds-textarea-padding-y);
   background-repeat: no-repeat;
   background-size: calc(1em + 0.4375rem) calc(1em + 0.4375rem);
-  border-color: var(--sgds-form-invalid-border-color);
+  border-color: var(--sgds-form-invalid-color);
   padding-right: calc(2em + 0.875rem);
 }
 .form-control.is-invalid:focus {
-  border-color: var(--sgds-form-invalid-border-color);
+  box-shadow: var(--sgds-form-focus-invalid-box-shadow);
+}
+.form-control.is-valid:focus {
+  box-shadow: var(--sgds-form-focus-valid-box-shadow);
 }
