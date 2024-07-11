@@ -1,22 +1,12 @@
 :host {
   --sgds-radio-margin-bottom: var(--sgds-radio-group-gap, var(--sgds-spacer-2));
   --sgds-radio-inline-margin-right: var(--sgds-spacer-4);
-  --sgds-radio-input-bg: var(--sgds-body-bg);
-  --sgds-radio-input-focus-box-shadow-color: var(--sgds-info-300);
-  --sgds-radio-input-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width)
-    var(--sgds-radio-input-focus-box-shadow-color);
-  --sgds-radio-input-border-color: var(--sgds-border-color);
 }
 :host([checked]) {
-  --sgds-radio-input-border-color: var(--sgds-radio-input-bg);
-  --sgds-radio-input-bg: var(--sgds-info-filled);
+  --sgds-form-bg: var(--sgds-info-filled);
+  --sgds-form-border-color: var(--sgds-form-bg);
 }
-:host([checked]:disabled) {
-  --sgds-radio-input-border-color: var(--sgds-border-color);
-}
-:host([invalid]:focus) {
-  --sgds-radio-input-focus-box-shadow-color: var(--sgds-danger-300);
-}
+
 :host(:focus-visible) {
   outline: none;
 }
@@ -41,12 +31,12 @@ input {
 
 .form-check-input {
   appearance: none;
-  background-color: var(--sgds-radio-input-bg);
+  background-color: var(--sgds-form-bg);
   background-image: var(--sgds-radio-bg-image);
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
-  border: var(--sgds-border-width) solid var(--sgds-border-color);
+  border: var(--sgds-form-border-width) solid var(--sgds-border-color);
   flex-shrink: 0;
   height: 1.125em;
   margin-top: 0.4375em;
@@ -57,14 +47,14 @@ input {
   border-radius: 50%;
 }
 .form-check-input:focus {
-  border-color: var(--sgds-radio-input-border-color);
-  box-shadow: var(--sgds-radio-input-focus-box-shadow);
+  border-color: var(--sgds-form-border-color);
+  box-shadow: var(--sgds-form-focus-box-shadow);
   outline: 0;
 }
 .form-check-input:checked,
 .form-check-input[checked] {
-  background-color: var(--sgds-radio-input-bg);
-  border-color: var(--sgds-radio-input-border-color);
+  background-color: var(--sgds-form-bg);
+  border-color: var(--sgds-form-border-color);
 }
 
 .form-check-input:checked[type="radio"],
@@ -75,8 +65,9 @@ input {
 .form-check-input:disabled {
   filter: none;
   opacity: var(--sgds-disabled-opacity);
-  border-color: var(--sgds-border-color);
+  border-color: var(--sgds-form-border-color);
   pointer-events: none;
+  cursor: not-allowed;
 }
 .form-check-input:disabled ~ .form-check-label,
 .form-check-input[disabled] ~ .form-check-label {
@@ -85,7 +76,7 @@ input {
 }
 .form-check-input.is-invalid,
 .form-check-input:invalid {
-  border-color: var(--sgds-form-invalid-border-color);
+  border-color: var(--sgds-form-invalid-color);
 }
 .form-check-input.is-invalid:checked,
 .form-check-input:invalid:checked {
@@ -93,7 +84,7 @@ input {
 }
 .form-check-input.is-invalid:focus,
 .form-check-input:invalid:focus {
-  box-shadow: var(--sgds-radio-input-focus-box-shadow);
+  box-shadow: var(--sgds-form-focus-invalid-box-shadow);
 }
 .form-check-input.is-invalid ~ .form-check-label,
 .form-check-input:invalid ~ .form-check-label {
@@ -150,7 +141,7 @@ input {
 } */
 /* .form-check-input.is-valid,
 .was-validated .form-check-input:valid {
-  border-color: var(--sgds-form-valid-border-color);
+  border-color: var(--sgds-form-valid-color);
 } */
 /* .form-check-input.is-valid:checked,
 .was-validated .form-check-input:valid:checked {

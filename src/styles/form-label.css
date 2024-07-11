@@ -1,7 +1,3 @@
-:host {
-    --sgds-form-label-font-weight: 700;
-    --sgds-form-label-color: var(--sgds-body-color)
-}
 .form-label {
     font-weight: var(--sgds-form-label-font-weight);
     margin-bottom: 0;
