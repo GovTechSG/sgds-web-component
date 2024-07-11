@@ -6,7 +6,7 @@
 .toast-container {
   max-width: 100%;
   pointer-events: none;
-  position: absolute;
+  position: fixed;
   width: max-content;
   z-index: var(--sgds-toast-container-z-index);
 }
