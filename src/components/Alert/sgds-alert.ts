@@ -5,6 +5,8 @@ import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
 import alertStyle from "./alert.css";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
+import SgdsCloseButton from "../CloseButton/sgds-close-button";
 
 export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light";
 /**
@@ -28,9 +30,14 @@ export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "war
  * @cssproperty --sgds-alert-icon-gap - The gap between the icon and alert text
  *
  */
-export class SgdsAlert extends SgdsElement {
+export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, alertStyle];
-
+  /**@internal */
+  static get scopedElements() {
+    return {
+      "sgds-close-button": SgdsCloseButton
+    };
+  }
   /** Controls the appearance of the alert  */
   @property({ type: Boolean, reflect: true }) show = false;
 
@@ -69,8 +76,8 @@ export class SgdsAlert extends SgdsElement {
             <i><slot name="icon"></slot></i>
             <slot></slot>
             ${this.dismissible
-              ? html`<button class="btn-close btn-sm" aria-label="close the alert" @click=${this.close}></button>`
-              : null}
+              ? html`<sgds-close-button aria-label="close the alert" @click=${this.close}></sgds-close-button>`
+              : nothing}
           </div>
         `
       : nothing;

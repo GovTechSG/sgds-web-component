@@ -1,6 +1,5 @@
 @import "../../styles/header-class.css";
 @import "../../styles/svg.css";
-@import "../../styles/close-button.css";
 
 :host {
   --sgds-modal-padding: var(--sgds-spacer-4);

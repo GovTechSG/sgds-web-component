@@ -10,6 +10,8 @@ import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
 import { HasSlotController } from "../../utils/slot.js";
 import { watch } from "../../utils/watch.js";
 import drawerStyles from "./drawer.css";
+import SgdsCloseButton from "../CloseButton/sgds-close-button";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 
 /**
  * @summary Drawers slide in from a container to expose additional options and information.
@@ -48,14 +50,16 @@ import drawerStyles from "./drawer.css";
  * @cssproperty --sgds-drawer-overlay-bg - The drawer's overlay background colour
  * @cssproperty --sgds-drawer-z-index - The drawer's z-index
  * @cssproperty --sgds-drawer-font-family - The font family of contents in the drawer
- * @cssproperty --sgds-close-btn-color - The color of close button
- * @cssproperty --sgds-close-btn-image - The background image of close button
- * @cssproperty --sgds-close-btn-focus-box-shadow - The box shadow of close button in focused state
  *
  */
-export class SgdsDrawer extends SgdsElement {
+export class SgdsDrawer extends ScopedElementsMixin(SgdsElement) {
   static styles = [drawerStyles];
-
+  /**@internal */
+  static get scopedElements() {
+    return {
+      "sgds-close-button": SgdsCloseButton
+    };
+  }
   /** @internal */
   private readonly hasSlotController = new HasSlotController(this, "footer");
   /** @internal */
@@ -308,14 +312,12 @@ export class SgdsDrawer extends SgdsElement {
                   </h2>
                   <div part="header-actions" class="drawer-header-actions">
                     <slot name="header-actions"></slot>
-                    <button
+                    <sgds-close-button
                       part="close-button"
-                      class=${classMap({
-                        "drawer-close": true,
-                        "btn-close": true
-                      })}
+                      class="drawer-close"
+                      aria-label="close drawer"
                       @click="${() => this.requestClose("close-button")}"
-                    ></button>
+                    ></sgds-close-button>
                   </div>
                 </header>
               `

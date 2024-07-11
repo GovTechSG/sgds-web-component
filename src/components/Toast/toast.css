@@ -1,5 +1,3 @@
-@import "../../styles/close-button.css";
-
 :host {
   --sgds-toast-max-width: 500px;
   --sgds-toast-gap: var(--sgds-spacer-2);

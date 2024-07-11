@@ -1,4 +1,5 @@
 import { property, query } from "lit/decorators.js";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
@@ -7,6 +8,7 @@ import { getAnimation, setDefaultAnimation } from "../../utils/animation-registr
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
 import toastStyle from "./toast.css";
+import SgdsCloseButton from "../CloseButton/sgds-close-button";
 /**
  * @summary Toast allows you to convey quick messaging notifications to the user.
  *
@@ -35,8 +37,15 @@ import toastStyle from "./toast.css";
  * @cssproperty --sgds-toast-header-color - The title color of the toast header
  * @cssproperty --sgds-toast-header-icon-color - The icon color of the toast header
  */
-export class SgdsToast extends SgdsElement {
+export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, toastStyle];
+  /**@internal */
+  static get scopedElements() {
+    return {
+      "sgds-close-button": SgdsCloseButton
+    };
+  }
+
   /**@internal */
   @query("div.toast") toast: HTMLElement;
   /** Controls the appearance of toast */
@@ -120,12 +129,7 @@ export class SgdsToast extends SgdsElement {
           <slot name="icon"></slot>
           <strong>${this.title}</strong>
           <small><slot name="duration"></slot></small>
-          <button
-            class="btn-sm btn-close"
-            aria-label="close toast"
-            @click=${this.handleCloseClick}
-            data-dismiss="toast"
-          ></button>
+          <sgds-close-button aria-label="close toast" @click=${this.handleCloseClick}></sgds-close-button>
         </div>
         <div class="toast-body"><slot></slot></div>
       </div>

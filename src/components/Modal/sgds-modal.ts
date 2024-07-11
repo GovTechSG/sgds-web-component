@@ -12,6 +12,8 @@ import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll";
 import { HasSlotController } from "../../utils/slot";
 import { watch } from "../../utils/watch";
 import modalStyle from "./modal.css";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
+import SgdsCloseButton from "../CloseButton/sgds-close-button";
 /**
  * @summary The modal component inform users about a specific task and may contain critical information which users then have to make a decision.
  *
@@ -32,18 +34,24 @@ import modalStyle from "./modal.css";
  * @csspart body - The modal's body where the content lies
  * @csspart footers - The modal's footer
  *
- * @cssproperty --modal-padding - The general modal padding of modal component. Applied to body, footer and header.
- * @cssproperty --modal-panel-z-index - The z-index of modal panel
- * @cssproperty --modal-panel-width - The width of modal panel.
- * @cssproperty --modal-panel-height - The height of modal panel.
- * @cssproperty --modal-panel-background-color - The background color of modal panel
- * @cssproperty --modal-panel-border-radius - The border radius of modal panel
- * @cssproperty --modal-header-bottom-border-line-width - The line width of header's bottom border
- * @cssproperty --modal-overlay-background-color - The overlay's background color
+ * @cssproperty --sgds-modal-padding - The general modal padding of modal component. Applied to body, footer and header.
+ * @cssproperty --sgds-modal-panel-z-index - The z-index of modal panel
+ * @cssproperty --sgds-modal-panel-width - The width of modal panel.
+ * @cssproperty --sgds-modal-panel-height - The height of modal panel.
+ * @cssproperty --sgds-modal-panel-bg - The background color of modal panel
+ * @cssproperty --sgds-modal-panel-border-radius - The border radius of modal panel
+ * @cssproperty --sgds-modal-header-bottom-border - The bottom border of header
+ * @cssproperty --sgds-modal-overlay-bg - The overlay's background color
+ * @cssproperty --sgds-modal-padding-top - The padding top of the modal. Sets the top start position of the modal in relation to the document
  */
-export class SgdsModal extends SgdsElement {
+export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, modalStyle];
-
+  /**@internal */
+  static get scopedElements() {
+    return {
+      "sgds-close-button": SgdsCloseButton
+    };
+  }
   /**@internal */
   @query(".modal") dialog: HTMLElement;
   /**@internal */
@@ -256,16 +264,14 @@ export class SgdsModal extends SgdsElement {
                   >
                     ${this.titleIcon ? withLabelIcon : ""} ${this.title}
                   </h3>
-                  <button
+                  <sgds-close-button
                     class=${classMap({
                       "modal-close": true,
-                      "btn-sm": true,
-                      "btn-close": true,
                       centered: this.centeredAlignVariant
                     })}
                     @click="${() => this.requestClose("close-button")}"
                     aria-label="close modal"
-                  ></button>
+                  ></sgds-close-button>
                 </div>
               `
             : ""}
