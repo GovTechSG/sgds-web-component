@@ -6,7 +6,10 @@
   --sgds-warning: #864b00;
   --sgds-danger: #b90000;
   --sgds-light: #eaeaea;
-  --sgds-dark: #252525;
+  --sgds-dark: #252525;  
+  --sgds-black: #000;
+  --sgds-white: #fff;
+  --sgds-gray: #595959;
   --sgds-primary-100: #eae8ff;
   --sgds-primary-200: #d1ceff;
   --sgds-primary-300: #b1acff;
@@ -61,11 +64,6 @@
   --sgds-danger-700: #950000;
   --sgds-danger-800: #720000;
   --sgds-danger-900: #4f0000;
-
-  --sgds-black: #000;
-  --sgds-white: #fff;
-  --sgds-gray: #595959;
-  --sgds-gray-dark: #252525;
   --sgds-gray-100: #eaeaea;
   --sgds-gray-200: #d2d2d2;
   --sgds-gray-300: #b2b2b2;
@@ -108,33 +106,33 @@
   --sgds-danger-border-subtle: var(--sgds-danger-400);
   --sgds-light-border-subtle: var(--sgds-gray-400);
   --sgds-dark-border-subtle: var(--sgds-gray-400);
-  --sgds-font-sans-serif: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Liberation Sans",
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --sgds-font-sans-serif: "Inter", system-ui, -apple-system, Roboto, Arial, "Noto Sans", "Liberation Sans",
+    sans-serif, "Apple Color Emoji", "Noto Color Emoji";
   --sgds-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --sgds-gradient: linear-gradient(180deg, hsla(0, 0%, 100%, 0.15), hsla(0, 0%, 100%, 0));
   --sgds-body-font-family: var(--sgds-font-sans-serif);
   --sgds-body-font-size: 1rem;
   --sgds-body-font-weight: 400;
-  --sgds-body-line-height: 2;
+  --sgds-line-height-sm: 1.2;
+  --sgds-line-height-md: 1.5;
+  --sgds-line-height-lg: 2;
+  --sgds-body-line-height: var(--sgds-line-height-lg);
   --sgds-body-color: var(--sgds-dark);
   --sgds-body-color-light: var(--sgds-gray-700);
   --sgds-body-color-lighter: var(--sgds-gray-600);
   --sgds-body-bg: var(--sgds-white);
-  /* --sgds-emphasis-color: #000;
-  --sgds-secondary-color: rgba(37, 37, 37, 0.75);
-  --sgds-secondary-bg: #d2d2d2;
-  --sgds-tertiary-color: rgba(37, 37, 37, 0.5);
-  --sgds-tertiary-bg: #eaeaea; */
-  --sgds-heading-color: ;
+
+
+ 
+  /* --sgds-heading-color: ; */
   --sgds-link: var(--sgds-info);
   --sgds-link-decoration: underline;
   --sgds-link-hover-color: var(--sgds-info-700);
-  --sgds-code-color: #d63384;
+  /* --sgds-code-color: #d63384;
   --sgds-highlight-color: #252525;
-  --sgds-highlight-bg: #ffe6c6;
+  --sgds-highlight-bg: #ffe6c6; */
   --sgds-border-width: 1px;
   --sgds-border-style: solid;
-  --sgds-border-color: #939393;
+  --sgds-border-color: var(--sgds-gray-400);
   --sgds-border-color-translucent: rgba(0, 0, 0, 0.175);
   --sgds-border-radius: 0.25rem;
   --sgds-border-radius-sm: 0.2rem;
@@ -157,7 +155,12 @@
   --sgds-form-valid-icon: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23006b00'%3E%3Cpath d='M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z'/%3E%3C/svg%3E");
   --sgds-form-invalid-icon: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23b90000'%3E%3Cpath d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/%3E%3Cpath d='M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z'/%3E%3C/svg%3E");
   --sgds-form-feedback-font-size: 0.875rem;
-  
+  --sgds-form-border-color: var(--sgds-gray-400);
+  --sgds-form-focus-box-shadow-color: var(--sgds-info-300);
+  --sgds-form-focus-box-shadow:  0px 0px 0px var(--sgds-focus-width)
+  var(--sgds-form-focus-box-shadow-color);
+  --sgds-form-bg: var(--sgds-body-bg);
+
   --sgds-focus-width: 0.13rem;
   --sgds-disabled-color: var(--sgds-gray-400);
   --sgds-disabled-opacity: 0.5;

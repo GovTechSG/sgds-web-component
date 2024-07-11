@@ -42,9 +42,16 @@ import drawerStyles from "./drawer.css";
  *
  * @cssproperty --sgds-drawer-size - The preferred size of the drawer. This will be applied to the drawer's width or height
  *   depending on its `placement`. Note that the drawer will shrink to accommodate smaller screens.
- * @cssproperty --sgds-drawer-padding - The amount of padding to use for the header.
- * @cssproperty --sgds-drawer-background-color - The drawer's background color.
+ * @cssproperty --sgds-drawer-padding - The amount of padding to use for the header, body and footer
+ * @cssproperty --sgds-drawer-bg - The drawer's background color.
  * @cssproperty --sgds-drawer-button-gap - The drawer's flex gap between buttons.
+ * @cssproperty --sgds-drawer-overlay-bg - The drawer's overlay background colour
+ * @cssproperty --sgds-drawer-z-index - The drawer's z-index
+ * @cssproperty --sgds-drawer-font-family - The font family of contents in the drawer
+ * @cssproperty --sgds-close-btn-color - The color of close button
+ * @cssproperty --sgds-close-btn-image - The background image of close button
+ * @cssproperty --sgds-close-btn-focus-box-shadow - The box shadow of close button in focused state
+ *
  */
 export class SgdsDrawer extends SgdsElement {
   static styles = [drawerStyles];

@@ -1,10 +1,12 @@
 @import "../../styles/close-button";
   :host {
-    --drawer-padding: 1.5rem;
-    --drawer-size: 35rem;
-    --drawer-background-color: white;
-    --drawer-button-gap: 0.5rem;
-    --drawer-overlay-background-color: var(--overlay-background-color);
+    --sgds-drawer-padding: var(--sgds-spacer-4);
+    --sgds-drawer-size: 35rem;
+    --sgds-drawer-bg: var(--sgds-white);
+    --sgds-drawer-button-gap: var(--sgds-spacer-2);
+    --sgds-drawer-overlay-bg: rgba(0,0,0,.5);
+    --sgds-drawer-z-index: 1055;
+    --sgds-drawer-font-family: var(--sgds-body-font-family);
     display: contents;
   }
 
@@ -15,12 +17,12 @@
     height: 100%;
     pointer-events: none;
     overflow: hidden;
-    font-family: var(--sgds-body-font-family);
+    font-family: var(--sgds-drawer-font-family);
   }
 
   .drawer-fixed {
     position: fixed;
-    z-index: var(--zindex-modal);
+    z-index: var(--sgds-drawer-z-index);
   }
 
   .drawer-panel {
@@ -30,7 +32,7 @@
     z-index: 2;
     max-width: 100%;
     max-height: 100%;
-    background-color: var(--drawer-background-color);
+    background-color: var(--sgds-drawer-bg);
     box-shadow: 0 2px 8px hsl(240 3.8% 46.1% / 12%);
     overflow: auto;
     pointer-events: all;
@@ -46,7 +48,7 @@
     bottom: auto;
     inset-inline-start: 0;
     width: 100%;
-    height: var(--drawer-size);
+    height: var(--sgds-drawer-size);
   }
 
   .drawer-end .drawer-panel {
@@ -54,7 +56,7 @@
     inset-inline-end: 0;
     bottom: auto;
     inset-inline-start: auto;
-    width: var(--drawer-size);
+    width: var(--sgds-drawer-size);
     height: 100%;
   }
 
@@ -64,7 +66,7 @@
     bottom: 0;
     inset-inline-start: 0;
     width: 100%;
-    height: var(--drawer-size);
+    height: var(--sgds-drawer-size);
   }
 
   .drawer-start .drawer-panel {
@@ -72,13 +74,13 @@
     inset-inline-end: auto;
     bottom: auto;
     inset-inline-start: 0;
-    width: var(--drawer-size);
+    width: var(--sgds-drawer-size);
     height: 100%;
   }
 
   .drawer-header {
     display: flex;
-    padding: var(--drawer-padding);
+    padding: var(--sgds-drawer-padding);
   }
 
   .drawer-title {
@@ -96,8 +98,8 @@
     flex-wrap: wrap;
     justify-content: end;
     cursor: pointer;
-    gap: var(--drawer-button-gap);
-    padding: 0 var(--drawer-padding);
+    gap: var(--sgds-drawer-button-gap);
+    padding: 0 var(--sgds-drawer-padding);
   }
 
   .drawer-header-actions .drawer-close {
@@ -109,18 +111,18 @@
   .drawer-body {
     flex: 1 1 auto;
     display: block;
-    padding: var(--drawer-padding);
+    padding: var(--sgds-drawer-padding);
     overflow: auto;
     -webkit-overflow-scrolling: touch;
   }
 
   .drawer-footer {
     text-align: right;
-    padding: var(--drawer-padding);
+    padding: var(--sgds-drawer-padding);
   }
 
   .drawer-footer ::slotted(sgds-button:not(:last-of-type)) {
-    margin-inline-end: var(--drawer-button-gap);
+    margin-inline-end: var(--sgds-drawer-button-gap);
   }
 
   .drawer:not(.drawer-has-footer) .drawer-footer {
@@ -134,7 +136,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: var(--drawer-overlay-background-color);
+    background-color: var(--sgds-drawer-overlay-bg);
     pointer-events: all;
   }
 
