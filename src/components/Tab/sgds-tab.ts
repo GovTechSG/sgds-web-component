@@ -16,7 +16,9 @@ let id = 0;
  * @slot label - The slot for label of tab. This is only available when variant attribute of `sgds-tab-group` is `tabs-info-toggle`
  *
  * @csspart base - The base wrapper of tab
- * @cssproperty  --tab-theme-color - The theme colour for tab. Defaults to `--sgds-primary`
+ *
+ * @cssproperty  --sgds-tab-theme-color - The theme colour for tab. Defaults to `--sgds-primary`
+ *
  */
 export class SgdsTab extends SgdsElement {
   static styles = [tabStyle];
