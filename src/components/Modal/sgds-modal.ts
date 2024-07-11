@@ -42,7 +42,7 @@ import modalStyle from "./modal.css";
  * @cssproperty --modal-overlay-background-color - The overlay's background color
  */
 export class SgdsModal extends SgdsElement {
-  static styles = [modalStyle];
+  static styles = [...SgdsElement.styles, modalStyle];
 
   /**@internal */
   @query(".modal") dialog: HTMLElement;
@@ -61,7 +61,6 @@ export class SgdsModal extends SgdsElement {
 
   /**Indicates whether or not the modal is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
-  // @property({ type: Boolean, reflect: true }) centeredAlignVariant = false;
   /**The modal's title as displayed in the header */
   @property({ reflect: true }) title = "";
   /**The modal's icon as displayed in the header. Pass in SVG format icons as string directly  */

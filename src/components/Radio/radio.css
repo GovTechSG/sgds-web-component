@@ -95,7 +95,9 @@ input {
   margin-right: var(--sgds-radio-inline-margin-right);
   margin-bottom: 0;
 }
-
+.form-check-label{
+  color: var(--sgds-form-label-color);
+}
 :host([last-of-type]) .form-check {
   margin-bottom: 0;
 }

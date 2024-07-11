@@ -66,6 +66,9 @@ input {
   border-color: var(--sgds-border-color);
   pointer-events: none;
 }
+.form-check-label{
+  color: var(--sgds-form-label-color);
+}
 .form-check-input:disabled ~ .form-check-label,
 .form-check-input[disabled] ~ .form-check-label {
   cursor: default;

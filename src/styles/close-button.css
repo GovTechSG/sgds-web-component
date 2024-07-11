@@ -45,9 +45,15 @@
   user-select: none;
 }
 
-.btn-sm {
+/* .btn-sm {
+  border-radius: var(--sgds-border-radius-sm);
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+} */
+
+/* .btn-sm {
   --sgds-btn-padding-y: 0.25rem;
   --sgds-btn-padding-x: 0.5rem;
   --sgds-btn-font-size: 0.875rem;
   --sgds-btn-border-radius: var(--sgds-border-radius-sm);
-}
+} */
