@@ -3,7 +3,7 @@ import { expect, fixture, waitUntil } from "@open-wc/testing";
 import { SgdsCloseButton } from "../src/components";
 import "../src/index";
 import * as sinon from "sinon";
-import { sendKeys } from "@web/test-runner-commands";
+// import { sendKeys } from "@web/test-runner-commands";
 
 describe("<sgds-close-button>", () => {
   it("emits click when clicked on", async () => {
