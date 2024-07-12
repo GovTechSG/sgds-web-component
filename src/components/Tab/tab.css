@@ -1,5 +1,7 @@
 :host {
-  --sgds-tab-theme-color: var(--sgds-primary);
+  --sgds-tab-theme-color: var(--sgds-primary-filled);
+  --sgds-tab-color: var(--sgds-body-color);
+  --sgds-tab-bg: var(--sgds-body-bg);
   display: inline-block;
 }
 
@@ -12,7 +14,7 @@ ul {
   list-style: none;
 }
 .nav-link {
-  color: #1d2939;
+  color: var(--sgds-tab-color);
   display: block;
   padding: 0.5rem 1rem;
   text-decoration: none;
@@ -28,7 +30,7 @@ ul {
 .nav-link.tabs-info-toggle {
   padding: 0.75rem;
   border-radius: 0.3125rem;
-  background-color: #fff;
+  background-color: var(--sgds-tab-bg);
   border: 1px solid var(--sgds-gray-400);
   min-width: 11.875rem;
 }
@@ -51,11 +53,10 @@ ul {
 }
 
 .nav-link.tabs-basic-toggle {
-  padding: initial;
   border: 1px solid var(--sgds-gray-400);
   border-radius: 0;
+  background-color: var(--sgds-tab-bg);
   padding: 0.5rem 1.5rem;
-  background-color: #fff;
 }
 
 .nav-link.tabs-basic-toggle slot {
@@ -66,7 +67,7 @@ ul {
 
 .nav-link.tabs-basic-toggle.active,
 .nav-link.tabs-basic-toggle:hover {
-  color: #fff; 
+  color: #fff;
   background-color: var(--sgds-tab-theme-color);
 }
 
