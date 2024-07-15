@@ -15,6 +15,9 @@
   :before {
     box-sizing: border-box;
   }
+  *:disabled {
+    cursor: not-allowed;
+  }
   @media (prefers-reduced-motion: no-preference) {
     :root {
       scroll-behavior: smooth;

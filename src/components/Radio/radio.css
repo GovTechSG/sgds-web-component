@@ -21,12 +21,10 @@ input {
   display: block;
   margin-bottom: var(--sgds-radio-margin-bottom);
   min-height: 2rem;
-  padding-left: 1.625em;
 }
 
 .form-check .form-check-input {
-  float: left;
-  margin-left: -1.625em;
+  margin-right: var(--sgds-form-input-margin-right);
 }
 
 .form-check-input {

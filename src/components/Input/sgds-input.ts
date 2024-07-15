@@ -72,6 +72,17 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @property({ type: Boolean, reflect: true }) required = false;
   /**Makes the input readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
+  /** The input's minimum value. Only applies number input types. */
+  @property() min: number | string;
+
+  /** The input's maximum value. Only applies number input types. */
+  @property() max: number | string;
+
+  /**
+   * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
+   * implied, allowing any numeric value. Only applies to number input types.
+   */
+  @property() step: number | 'any';
 
   /**The input's value attribute. */
   @property({ reflect: true }) value = "";
@@ -177,6 +188,9 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
         .value=${live(this.value)}
         minlength=${ifDefined(this.minlength)}
         maxlength=${ifDefined(this.maxlength)}
+        min=${ifDefined(this.min)}
+        max=${ifDefined(this.max)}
+        step=${ifDefined(this.step as number)}
         @input=${() => this._handleChange("sgds-input")}
         @change=${() => this._handleChange("sgds-change")}
         @keydown=${this._handleKeyDown}

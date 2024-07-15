@@ -168,7 +168,8 @@
   --sgds-form-bg: var(--sgds-body-bg);
   --sgds-form-border-width: 1px;
   --sgds-form-inline-margin-right: var(--sgds-spacer-4);
-
+  --sgds-form-input-margin-right: var(--sgds-spacer-2);
+  
   --sgds-focus-width: 0.13rem;
   --sgds-disabled-color: var(--sgds-gray-400);
   --sgds-disabled-opacity: 0.5;

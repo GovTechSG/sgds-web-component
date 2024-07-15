@@ -49,6 +49,13 @@
   opacity: 1;
   color: var(--sgds-disabled-color);
 }
+:host(.quantity-toggle)  input::-webkit-inner-spin-button{
+  appearance: none;
+  margin: 0;
+}
+:host(.quantity-toggle) input {
+  text-align:center;
+}
 /* .form-control::file-selector-button {
   background-color: var(--sgds-tertiary-bg);
   border: 0 solid;
