@@ -1,7 +1,8 @@
 :host {
-  --sgds-tab-theme-color: var(--sgds-primary-filled);
+  --sgds-tab-theme-color: var(--sgds-primary);
   --sgds-tab-color: var(--sgds-body-color);
   --sgds-tab-bg: var(--sgds-body-bg);
+  --sgds-tab-basic-toggle-hover-color: var(--sgds-white);
   display: inline-block;
 }
 
@@ -35,8 +36,8 @@ ul {
   min-width: 11.875rem;
 }
 
-.nav-link.tabs-info-toggle.active,
-.nav-link.tabs-info-toggle:hover {
+.nav-link:not(.disabled).tabs-info-toggle.active,
+.nav-link:not(.disabled).tabs-info-toggle:hover {
   border-color: var(--sgds-tab-theme-color);
   color: var(--sgds-tab-theme-color);
   font-weight: 700;
@@ -65,9 +66,9 @@ ul {
   gap: 1rem;
 }
 
-.nav-link.tabs-basic-toggle.active,
-.nav-link.tabs-basic-toggle:hover {
-  color: #fff;
+.nav-link:not(.disabled).tabs-basic-toggle.active,
+.nav-link:not(.disabled).tabs-basic-toggle:hover {
+  color: var(--sgds-tab-basic-toggle-hover-color);
   background-color: var(--sgds-tab-theme-color);
 }
 
@@ -87,8 +88,8 @@ ul {
   border: none;
 }
 
-.nav-link:not(.tabs-basic-toggle):not(.tabs-info-toggle).active,
-.nav-link:not(.tabs-basic-toggle):not(.tabs-info-toggle):hover {
+.nav-link:not(.disabled):not(.tabs-basic-toggle):not(.tabs-info-toggle).active,
+.nav-link:not(.disabled):not(.tabs-basic-toggle):not(.tabs-info-toggle):hover {
   border-bottom: 0.125rem solid var(--sgds-tab-theme-color);
   font-weight: 700;
   background-color: transparent;
