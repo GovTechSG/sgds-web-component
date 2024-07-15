@@ -23,21 +23,21 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  *
  * @event sgds-change-date - Emitted when the state of datepicker's input changes during first load, close button reset click & date click. Date values can be accessed via event.target.value
  *
- * @cssproperty --datepicker-theme-color - Datepicker's overall theme color
- * @cssproperty --datepicker-hover-bg-color - Datepicker's calendar menu hover color
- * @cssproperty --datepicker-bg-color - Datepicker's menu background color
- * @cssproperty --datepicker-closebutton-bg-color - Datepicker's close button background color
- * @cssproperty --datepicker-closebutton-hover-bg-color - Datepicker's close button hover background color
- * @cssproperty --datepicker-closebutton-color - Datepicker's close button color
- * @cssproperty --datepicker-selected-date-bg-color - Selected date's background color
- * @cssproperty --datepicker-selected-date-text-color - Selected date's text color
+ * @cssproperty --sgds-datepicker-theme-color - Datepicker's overall theme color
+ * @cssproperty --sgds-datepicker-hover-bg-color - Datepicker's calendar menu hover color
+ * @cssproperty --sgds-datepicker-bg-color - Datepicker's menu background color
+ * @cssproperty --sgds-datepicker-close-button-bg-color - Datepicker's close button background color
+ * @cssproperty --sgds-datepicker-close-button-hover-bg-color - Datepicker's close button hover background color
+ * @cssproperty --sgds-datepicker-close-button-color - Datepicker's close button color
+ * @cssproperty --sgds-datepicker-selected-date-bg-color - Selected date's background color
+ * @cssproperty --sgds-datepicker-selected-date-text-color - Selected date's text color
  *
  * @description displayDate sets the month, year views of the calendar while focusedDate follows the focus which also directly changes
  * displayDate on certain occasions. Example, when keyboard moves up to the next month, it updates displayDate which then affect the current
  * date view of the calendar
  */
 export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) implements SgdsFormControl {
-  static styles = [dropdownStyle, datepickerStyle];
+  static styles = [...DropdownElement.styles, dropdownStyle, datepickerStyle];
   /**@internal */
   static formAssociated = true;
   private _internals: ElementInternals;
@@ -423,7 +423,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
           <button
             slot="calendar-btn"
             class=${classMap({
-              "sgds btn rounded-0 border btn-outline-dark": true
+              "sgds btn btn-outline-dark calendar-btn": true
             })}
             aria-expanded="${this.menuIsOpen}"
             aria-haspopup="dialog"
@@ -448,7 +448,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
           <button
             slot="reset-btn"
             ?disabled=${this.disabled}
-            class="btn sgds rounded-0 reset-btn"
+            class="sgds btn reset-btn"
             @click=${() => this._handleButtonResetClick()}
             aria-label="Reset Datepicker"
           >

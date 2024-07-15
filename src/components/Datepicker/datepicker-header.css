@@ -1,32 +1,31 @@
- .datepicker-header {
-    padding: 1.5rem 1.5rem 0;
-    border: none;
-    color: var(--datepicker-theme-color);
-    display: flex;
-    text-align: center;
-    justify-content: space-between;
-    align-items: center;
-    line-height: 28px;
-
-    button {
-      cursor: pointer;
-      background-color: transparent;
-      color: var(--datepicker-theme-color);
-      border: none;
-      font-weight: bold;
-      font-size: 14px;
-    }
-    button:focus {
-      outline: var(--datepicker-theme-color) auto 2px;
-    }
-    button.disabled {
-      cursor: not-allowed;
-    }
-    button:hover:not(.disabled) {
-      background-color: var(--datepicker-hover-bg-color);
-    }
-    svg {
-      font-size: 10rem;
-    }
-  }
-
+.datepicker-header {
+  padding: 1.5rem 1.5rem 0;
+  border: none;
+  color: var(--sgds-datepicker-theme-color);
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 28px;
+}
+.datepicker-header button {
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--sgds-datepicker-theme-color);
+  border: none;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: var(--sgds-line-height-lg);
+}
+.datepicker-header button:focus {
+  outline: var(--sgds-datepicker-theme-color) auto 2px;
+}
+.datepicker-header button.disabled {
+  cursor: not-allowed;
+}
+.datepicker-header button:hover:not(.disabled) {
+  background-color: var(--sgds-datepicker-hover-bg-color);
+}
+.datepicker-header svg {
+  font-size: 10rem;
+}
