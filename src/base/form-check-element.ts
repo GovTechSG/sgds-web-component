@@ -91,16 +91,7 @@ export class FormCheckElement extends SgdsElement implements SgdsFormControl {
   }
   /** @internal For Id/For pair of the HTML form control and label. */
   protected _inputId: string;
-  //    /** @internal */
-  //   protected _size: string;
 
-  //   static properties = {
-  //     _size: {type: String}
-  //   }
-  //   constructor (){
-  //     super()
-  //     this._size = "sm"
-  //   }
   /**@internal */
   @property({ type: String }) protected _size: string;
   /** @internal */

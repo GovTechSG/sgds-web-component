@@ -11,6 +11,7 @@ export class SgdsSwitch extends FormCheckElement {
 
   constructor() {
     super();
+    /**@internal */
     this._inputId = genId("switch");
   }
 

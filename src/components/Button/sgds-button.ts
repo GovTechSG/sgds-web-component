@@ -72,7 +72,7 @@ export class SgdsButton extends SgdsElement {
   });
 
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as "outline" versions (prefixed by `outline-*`) */
-  @property({ reflect: true }) variant: ButtonVariant = "primary";
+  @property({ reflect: true }) variant: ButtonVariant;
 
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as "outline" versions (prefixed by `outline-*`) */
   @property({ type: Boolean, reflect: true }) outlined = false;
