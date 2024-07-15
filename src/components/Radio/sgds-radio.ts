@@ -16,10 +16,6 @@ import radioStyles from "./radio.css";
  *
  * @cssprop --sgds-radio-margin-bottom - The margin-bottom of each radio. Defaults to the value of `--sgds-radio-group-gap`
  * @cssprop --sgds-radio-inline-margin-right - The margin-right of each radio when it is inlined.
- * @cssprop --sgds-radio-input-bg - The background colour of the radio input
- * @cssprop --sgds-radio-input-border-color - The border colour of the radio input
- * @cssprop --sgds-radio-input-focus-box-shadow-color - The box shadow colour of a focused radio input
- * @cssprop --sgds-radio-input-focus-box-shadow - The box shadow of a focused radio input
  */
 export class SgdsRadio extends SgdsElement {
   static styles = [...SgdsElement.styles, radioStyles];

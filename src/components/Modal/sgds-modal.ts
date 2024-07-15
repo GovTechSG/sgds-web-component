@@ -34,15 +34,15 @@ import SgdsCloseButton from "../CloseButton/sgds-close-button";
  * @csspart body - The modal's body where the content lies
  * @csspart footers - The modal's footer
  *
- * @cssproperty --sgds-modal-padding - The general modal padding of modal component. Applied to body, footer and header.
+ * @cssproperty --sgds-modal-panel-padding - The general modal padding of modal component. Applied to body, footer and header.
  * @cssproperty --sgds-modal-panel-z-index - The z-index of modal panel
  * @cssproperty --sgds-modal-panel-width - The width of modal panel.
  * @cssproperty --sgds-modal-panel-height - The height of modal panel.
  * @cssproperty --sgds-modal-panel-bg - The background color of modal panel
  * @cssproperty --sgds-modal-panel-border-radius - The border radius of modal panel
- * @cssproperty --sgds-modal-header-bottom-border - The bottom border of header
+ * @cssproperty --sgds-modal-header-border-bottom - The bottom border of header
  * @cssproperty --sgds-modal-overlay-bg - The overlay's background color
- * @cssproperty --sgds-modal-padding-top - The padding top of the modal. Sets the top start position of the modal in relation to the document
+ * @cssproperty --sgds-modal-panel-margin-top - The margin top of the modal panel. Sets the top start position of the modal in relation to the document
  */
 export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, modalStyle];

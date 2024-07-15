@@ -3,6 +3,7 @@ import SgdsElement from "../../base/sgds-element";
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import closeButtonStyles from "./close-button.css";
+import { classMap } from "lit/directives/class-map.js";
 /**
  * @summary Close button for closing actions. Used in Modal, Drawer, Alert and Toast.
  *
@@ -37,7 +38,9 @@ export class SgdsCloseButton extends SgdsElement {
   render() {
     return html`
       <button
-        class="btn-close"
+        class=${classMap({
+          "btn-close": true
+        })}
         aria-label=${ifDefined(this.ariaLabel)}
         @click=${this._handleClick}
         ?disabled=${this.disabled}

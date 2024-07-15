@@ -1,11 +1,10 @@
 :host {
   --sgds-drawer-padding: var(--sgds-spacer-4);
   --sgds-drawer-size: 35rem;
-  --sgds-drawer-bg: var(--sgds-white);
+  --sgds-drawer-bg: var(--sgds-body-bg);
   --sgds-drawer-button-gap: var(--sgds-spacer-2);
   --sgds-drawer-overlay-bg: rgba(0, 0, 0, 0.5);
   --sgds-drawer-z-index: 1055;
-  --sgds-drawer-font-family: var(--sgds-body-font-family);
   display: contents;
 }
 
@@ -16,7 +15,6 @@
   height: 100%;
   pointer-events: none;
   overflow: hidden;
-  font-family: var(--sgds-drawer-font-family);
 }
 
 .drawer-fixed {

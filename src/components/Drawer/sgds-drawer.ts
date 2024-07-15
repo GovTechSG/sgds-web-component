@@ -49,11 +49,10 @@ import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
  * @cssproperty --sgds-drawer-button-gap - The drawer's flex gap between buttons.
  * @cssproperty --sgds-drawer-overlay-bg - The drawer's overlay background colour
  * @cssproperty --sgds-drawer-z-index - The drawer's z-index
- * @cssproperty --sgds-drawer-font-family - The font family of contents in the drawer
  *
  */
 export class SgdsDrawer extends ScopedElementsMixin(SgdsElement) {
-  static styles = [drawerStyles];
+  static styles = [...SgdsElement.styles, drawerStyles];
   /**@internal */
   static get scopedElements() {
     return {

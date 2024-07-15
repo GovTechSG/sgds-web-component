@@ -1,4 +1,5 @@
 @import "../../styles/feedback.css";
+@import "../../styles/form-label.css";
 :host {
   --sgds-checkbox-margin-bottom: var(--sgds-spacer-2);
   --sgds-checkbox-inline-margin-right: var(--sgds-spacer-4);
@@ -64,16 +65,9 @@ input {
   filter: none;
   opacity: var(--sgds-disabled-opacity);
   border-color: var(--sgds-border-color);
-  pointer-events: none;
+  cursor: not-allowed;
 }
-.form-check-label{
-  color: var(--sgds-form-label-color);
-}
-.form-check-input:disabled ~ .form-check-label,
-.form-check-input[disabled] ~ .form-check-label {
-  cursor: default;
-  opacity: var(--sgds-disabled-opacity);
-}
+
 .form-check-input.is-invalid {
   border-color: var(--sgds-form-invalid-color);
 }

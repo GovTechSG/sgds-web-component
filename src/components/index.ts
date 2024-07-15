@@ -43,4 +43,5 @@ export * from "./Textarea/sgds-textarea";
 export * from "./Toast/sgds-toast";
 export * from "./Toast/sgds-toast-container";
 export * from "./Tooltip/sgds-tooltip";
+export * from "./Switch/sgds-switch";
 // COMPONENT EXPORTS

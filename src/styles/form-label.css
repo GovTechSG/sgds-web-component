@@ -8,3 +8,11 @@
     content: "*";
     color: var(--sgds-danger);
 }
+.form-check-label{
+  color: var(--sgds-form-label-color);
+}
+.form-check-input:disabled ~ .form-check-label,
+.form-check-input[disabled] ~ .form-check-label {
+  opacity: var(--sgds-disabled-opacity);
+  cursor: not-allowed;
+}

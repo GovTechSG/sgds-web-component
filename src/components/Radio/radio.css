@@ -1,3 +1,4 @@
+@import "../../styles/form-label.css";
 :host {
   --sgds-radio-margin-bottom: var(--sgds-radio-group-gap, var(--sgds-spacer-2));
   --sgds-radio-inline-margin-right: var(--sgds-spacer-4);
@@ -66,14 +67,9 @@ input {
   filter: none;
   opacity: var(--sgds-disabled-opacity);
   border-color: var(--sgds-form-border-color);
-  pointer-events: none;
   cursor: not-allowed;
 }
-.form-check-input:disabled ~ .form-check-label,
-.form-check-input[disabled] ~ .form-check-label {
-  cursor: default;
-  opacity: var(--sgds-disabled-opacity);
-}
+
 .form-check-input.is-invalid,
 .form-check-input:invalid {
   border-color: var(--sgds-form-invalid-color);
@@ -95,9 +91,7 @@ input {
   margin-right: var(--sgds-radio-inline-margin-right);
   margin-bottom: 0;
 }
-.form-check-label{
-  color: var(--sgds-form-label-color);
-}
+
 :host([last-of-type]) .form-check {
   margin-bottom: 0;
 }
