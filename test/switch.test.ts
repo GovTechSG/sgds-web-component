@@ -1,6 +1,10 @@
-import { html } from "lit";
-import { expect } from "@open-wc/testing";
+import { expect, fixture, html } from "@open-wc/testing";
 import { SgdsSwitch } from "../src/components";
 import "../src/index";
 
-describe("<sgds-switch>", () => {});
+describe("<sgds-switch>", () => {
+  it("when size prop is passed in , should update class of form-check-input", async () => {
+    const el = await fixture<SgdsSwitch>(html`<sgds-switch size="md"></sgds-switch>`);
+    expect(el.shadowRoot?.querySelector(".form-check-input")?.classList.value).to.contain("md");
+  });
+});

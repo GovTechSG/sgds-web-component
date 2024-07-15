@@ -35,6 +35,7 @@ export * from "./Sidenav/sgds-sidenav-item";
 export * from "./Sidenav/sgds-sidenav-link";
 export * from "./Spinner/sgds-spinner";
 export * from "./Stepper/sgds-stepper";
+export * from "./Switch/sgds-switch";
 export * from "./Tab/sgds-tab";
 export * from "./Tab/sgds-tab-group";
 export * from "./Tab/sgds-tab-panel";
@@ -43,5 +44,4 @@ export * from "./Textarea/sgds-textarea";
 export * from "./Toast/sgds-toast";
 export * from "./Toast/sgds-toast-container";
 export * from "./Tooltip/sgds-tooltip";
-export * from "./Switch/sgds-switch";
 // COMPONENT EXPORTS
