@@ -2,7 +2,6 @@
 @import "../../styles/form-label.css";
 :host {
   --sgds-checkbox-margin-bottom: var(--sgds-spacer-2);
-  --sgds-checkbox-inline-margin-right: var(--sgds-spacer-4);
   --sgds-checkbox-input-border-radius: 0.25em;
 }
 
@@ -83,7 +82,7 @@ input {
 .form-check-inline {
   display: inline-block;
   vertical-align: text-top;
-  margin-right: var(--sgds-checkbox-inline-margin-right);
+  margin-right: var(--sgds-form-inline-margin-right);
   margin-bottom: 0;
 }
 

@@ -39,8 +39,8 @@ const SIZES = {
  * @cssproperty --sgds-mainnav-padding-y - top and bottom padding for browser width > 768px
  * @cssproperty --sgds-mainnav-mobile-padding-x - left and right padding for browser width < 768px
  * @cssproperty --sgds-mainnav-mobile-padding-y - top and bottom padding for browser width < 768px
- * @cssproperty --sgds-mainnav-borderBottom-width - bottom border width
- * @cssproperty --sgds-mainnav-borderBottom-color - borderBottom width color
+ * @cssproperty --sgds-mainnav-border-bottom-width - bottom border width
+ * @cssproperty --sgds-mainnav-border-bottom-color - border-bottom width color
  * @ignore NEW in 2.0.0
  * @cssproperty --sgds-mainnav-toggler-icon - the background image for the toggler icon
  * @cssproperty --sgds-mainnav-toggler-padding-y - top and bottom padding for the toggler icon

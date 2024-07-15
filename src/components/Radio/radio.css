@@ -1,7 +1,6 @@
 @import "../../styles/form-label.css";
 :host {
   --sgds-radio-margin-bottom: var(--sgds-radio-group-gap, var(--sgds-spacer-2));
-  --sgds-radio-inline-margin-right: var(--sgds-spacer-4);
 }
 :host([checked]) {
   --sgds-form-bg: var(--sgds-info-filled);
@@ -88,7 +87,7 @@ input {
 }
 .form-check-inline {
   display: inline-block;
-  margin-right: var(--sgds-radio-inline-margin-right);
+  margin-right: var(--sgds-form-inline-margin-right);
   margin-bottom: 0;
 }
 

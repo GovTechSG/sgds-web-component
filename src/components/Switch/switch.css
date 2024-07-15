@@ -2,7 +2,6 @@
 @import "../../styles/form-label.css";
 :host {
   --sgds-switch-margin-bottom: var(--sgds-spacer-2);
-  --sgds-switch-inline-margin-right: var(--sgds-spacer-4);
 }
 :host([checked]) {
   --sgds-form-border-color: var(--sgds-form-bg);
@@ -89,7 +88,7 @@ input {
 }
 .form-check-inline {
   display: inline-block;
-  margin-right: var(--sgds-switch-inline-margin-right);
+  margin-right: var(--sgds-form-inline-margin-right);
 }
 
 .form-check-input.is-invalid {
