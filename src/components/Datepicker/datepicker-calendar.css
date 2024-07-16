@@ -1,6 +1,3 @@
-.text-center {
-  text-align: center !important;
-}
 button {
   font-family: inherit;
   font-size: inherit;
@@ -12,6 +9,7 @@ button {
 }
 table {
   border-collapse: collapse;
+  text-align: center;
 }
 .sgds.monthpicker,
 .sgds.yearpicker {
@@ -31,15 +29,15 @@ button.year {
 }
 button.month.active {
   cursor: pointer;
-  background-color: var(--sgds-datepicker-hover-bg-color);
+  background-color: var(--sgds-datepicker-hover-bg);
 }
 button.month.active.selected-ends {
-  background-color: var(--sgds-datepicker-selected-date-bg-color);
-  color: var(--sgds-datepicker-selected-date-text-color);
+  background-color: var(--sgds-datepicker-selected-date-bg);
+  color: var(--sgds-datepicker-selected-date-color);
 }
 button.month:hover:not(.active) {
   cursor: pointer;
-  background-color: var(--sgds-datepicker-hover-bg-color);
+  background-color: var(--sgds-datepicker-hover-bg);
 }
 button.month:focus {
   outline: var(--sgds-datepicker-theme-color) auto 2px;
@@ -47,15 +45,15 @@ button.month:focus {
 }
 button.year.active {
   cursor: pointer;
-  background-color: var(--sgds-datepicker-hover-bg-color);
+  background-color: var(--sgds-datepicker-hover-bg);
 }
 button.year.active.selected-ends {
-  background-color: var(--sgds-datepicker-selected-date-bg-color);
-  color: var(--sgds-datepicker-selected-date-text-color);
+  background-color: var(--sgds-datepicker-selected-date-bg);
+  color: var(--sgds-datepicker-selected-date-color);
 }
 button.year:hover:not(.active) {
   cursor: pointer;
-  background-color: var(--sgds-datepicker-hover-bg-color);
+  background-color: var(--sgds-datepicker-hover-bg);
 }
 button.year:focus {
   outline: var(--sgds-datepicker-theme-color) auto 2px;
@@ -71,15 +69,15 @@ td[data-day] {
 }
 td[data-day]:hover:not(.disabled):not(.selected-ends) {
   cursor: pointer;
-  background-color: var(--sgds-datepicker-hover-bg-color);
+  background-color: var(--sgds-datepicker-hover-bg);
 }
 td[data-day].active {
   cursor: pointer;
-  background-color: var(--sgds-datepicker-hover-bg-color);
+  background-color: var(--sgds-datepicker-hover-bg);
 }
 td[data-day].active.selected-ends {
-  background-color: var(--sgds-datepicker-selected-date-bg-color);
-  color: var(--sgds-datepicker-selected-date-text-color);
+  background-color: var(--sgds-datepicker-selected-date-bg);
+  color: var(--sgds-datepicker-selected-date-color);
 }
 td[data-day]:focus {
   outline: var(--sgds-datepicker-theme-color) auto 2px;

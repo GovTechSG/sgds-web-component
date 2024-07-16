@@ -387,7 +387,7 @@ export class DatepickerCalendar extends SgdsElement {
     }
 
     const dayView = html`
-      <table class="text-center" role="grid">
+      <table role="grid">
         <thead>
           <tr>
             ${DatepickerCalendar.DAY_LABELS.map(
