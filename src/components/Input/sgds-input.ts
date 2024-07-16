@@ -82,7 +82,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
    * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
    * implied, allowing any numeric value. Only applies to number input types.
    */
-  @property() step: number | 'any';
+  @property() step: number | "any";
 
   /**The input's value attribute. */
   @property({ reflect: true }) value = "";
