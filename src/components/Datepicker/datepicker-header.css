@@ -24,7 +24,7 @@
   cursor: not-allowed;
 }
 .datepicker-header button:hover:not(.disabled) {
-  background-color: var(--sgds-datepicker-hover-bg-color);
+  background-color: var(--sgds-datepicker-hover-bg);
 }
 .datepicker-header svg {
   font-size: 10rem;

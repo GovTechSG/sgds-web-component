@@ -2,7 +2,6 @@ import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 import { format, parse } from "date-fns";
 import { html } from "lit";
 import { property, query, queryAsync, state } from "lit/decorators.js";
-import { classMap } from "lit/directives/class-map.js";
 import { live } from "lit/directives/live.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
@@ -12,6 +11,7 @@ import { watch } from "../../utils/watch";
 import { DatepickerCalendar } from "./datepicker-calendar";
 import { DatepickerHeader } from "./datepicker-header";
 import DatepickerInput from "./datepicker-input";
+import { SgdsButton } from "../Button/sgds-button";
 import { ViewEnum } from "./types";
 import dropdownStyle from "../Dropdown/dropdown.css";
 import datepickerStyle from "./datepicker.css";
@@ -24,13 +24,13 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  * @event sgds-change-date - Emitted when the state of datepicker's input changes during first load, close button reset click & date click. Date values can be accessed via event.target.value
  *
  * @cssproperty --sgds-datepicker-theme-color - Datepicker's overall theme color
- * @cssproperty --sgds-datepicker-hover-bg-color - Datepicker's calendar menu hover color
- * @cssproperty --sgds-datepicker-bg-color - Datepicker's menu background color
- * @cssproperty --sgds-datepicker-close-button-bg-color - Datepicker's close button background color
- * @cssproperty --sgds-datepicker-close-button-hover-bg-color - Datepicker's close button hover background color
+ * @cssproperty --sgds-datepicker-hover-bg - Datepicker's calendar menu hover color
+ * @cssproperty --sgds-datepicker-bg - Datepicker's menu background color
+ * @cssproperty --sgds-datepicker-close-button-bg - Datepicker's close button background color
+ * @cssproperty --sgds-datepicker-close-button-hover-bg - Datepicker's close button hover background color
  * @cssproperty --sgds-datepicker-close-button-color - Datepicker's close button color
- * @cssproperty --sgds-datepicker-selected-date-bg-color - Selected date's background color
- * @cssproperty --sgds-datepicker-selected-date-text-color - Selected date's text color
+ * @cssproperty --sgds-datepicker-selected-date-bg - Selected date's background color
+ * @cssproperty --sgds-datepicker-selected-date-color - Selected date's text color
  *
  * @description displayDate sets the month, year views of the calendar while focusedDate follows the focus which also directly changes
  * displayDate on certain occasions. Example, when keyboard moves up to the next month, it updates displayDate which then affect the current
@@ -47,7 +47,8 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
     return {
       "sgds-datepicker-input": DatepickerInput,
       "sgds-datepicker-calendar": DatepickerCalendar,
-      "sgds-datepicker-header": DatepickerHeader
+      "sgds-datepicker-header": DatepickerHeader,
+      "sgds-button": SgdsButton
     };
   }
 
@@ -420,11 +421,9 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
           hintText=${this.hintText}
           name=${this.name}
         >
-          <button
+          <sgds-button
             slot="calendar-btn"
-            class=${classMap({
-              "sgds btn btn-outline-dark calendar-btn": true
-            })}
+            class="calendar-btn"
             aria-expanded="${this.menuIsOpen}"
             aria-haspopup="dialog"
             aria-controls=${this.dropdownMenuId}
@@ -444,16 +443,17 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
                 d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"
               />
             </svg>
-          </button>
-          <button
+          </sgds-button>
+          <sgds-button
             slot="reset-btn"
+            variant="primary"
             ?disabled=${this.disabled}
-            class="sgds btn reset-btn"
+            class="reset-btn"
             @click=${() => this._handleButtonResetClick()}
             aria-label="Reset Datepicker"
           >
             ${svgEl}
-          </button>
+          </sgds-button>
         </sgds-datepicker-input>
 
         <ul
