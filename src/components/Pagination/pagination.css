@@ -1,12 +1,16 @@
-*,
-:after,
-:before {
-  box-sizing: border-box;
+:host {
+  --pagination-color: var(--sgds-info, #0f71bb);
+  --pagination-bg-color: var(--sgds-white, #fff);
+  --pagination-hover-bg-color: var(--sgds-gray-200, #e4e7ec);
+  --pagination-hover-border-color: var(--sgds-gray-300, #d0d5dd);
+  --pagination-active-color: var(--sgds-white, #fff);
+  --pagination-active-bg-color: var(--sgds-info, #0f71bb);
+  --pagination-disabled-color: var(--sgds-gray-600, #344054);
+  --pagination-disabled-bg-color: var(--sgds-white, #fff);
 }
+
 ul {
   padding-left: 2rem;
-}
-ul {
   margin-bottom: 1rem;
   margin-top: 0;
 }
@@ -24,6 +28,7 @@ svg {
   color: #0f71bb;
   display: block;
   position: relative;
+  padding: 0.5rem 1rem;
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
@@ -62,9 +67,6 @@ svg {
   color: #344054;
   pointer-events: none;
 }
-.page-link {
-  padding: 0.5rem 1rem;
-}
 .page-item:first-child .page-link {
   border-bottom-left-radius: 0.3125rem;
   border-top-left-radius: 0.3125rem;
@@ -97,16 +99,6 @@ svg {
   width: 1px !important;
 }
 /**scss */
-:host {
-  --pagination-color: var(--sgds-info, #0f71bb);
-  --pagination-bg-color: var(--sgds-white, #fff);
-  --pagination-hover-bg-color: var(--sgds-gray-200, #e4e7ec);
-  --pagination-hover-border-color: var(--sgds-gray-300, #d0d5dd);
-  --pagination-active-color: var(--sgds-white, #fff);
-  --pagination-active-bg-color: var(--sgds-info, #0f71bb);
-  --pagination-disabled-color: var(--sgds-gray-600, #344054);
-  --pagination-disabled-bg-color: var(--sgds-white, #fff);
-}
 
 ul.pagination.sgds {
   li {

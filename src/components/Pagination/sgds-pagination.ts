@@ -21,7 +21,7 @@ import paginationStyle from "./pagination.css";
  *
  **/
 export class SgdsPagination extends SgdsElement {
-  static styles = [paginationStyle];
+  static styles = [...SgdsElement.styles, paginationStyle];
 
   /** Inserts the length value from a given sets of data objects*/
   @property({ type: Number }) dataLength = 0;
