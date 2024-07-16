@@ -13,6 +13,7 @@
   --sgds-toast-header-gap: var(--sgds-spacer-2);
   --sgds-toast-header-color: var(--sgds-body-color);
   --sgds-toast-header-icon-color: var(--sgds-body-color);
+  background-color: transparent;
 }
 
 :host([status="warning"]) {
