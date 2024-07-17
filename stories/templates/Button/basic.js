@@ -18,7 +18,7 @@ export const Template = args =>
       ?formNoValidate=${args.formNoValidate}
       formTarget=${args.formTarget}
     >
-      ${args.variant}
+      Button
     </sgds-button>
   `;
 export const args = {};

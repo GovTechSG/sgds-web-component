@@ -1,21 +1,16 @@
 <!DOCTYPE html>
-<html data-bs-theme="light">
+<html class="sgds-night-theme">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds/css/sgds.css" /> -->
     <script
         src="/node_modules/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
     <script type="module" id="console-components-gateway"
         src="https://dev.assets.developer.tech.gov.sg/console-components/gateway.es5.js" nonce={nonce ||
         undefined}></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        /* * {
-            font-family: "bootstrap-icons", system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        } */
         .card-title-no-image{
             display: flex;
             flex-direction: row;
@@ -31,6 +26,7 @@
             display: flex;
             min-height: 100vh;
             flex-direction: column;
+            background-color: var(--sgds-body-bg);
         }
 
         .container {
@@ -46,21 +42,6 @@
             --sidenav-sticky-top: 1.5rem;
         }
 
-        sgds-action-card,
-        sgds-card {
-            /* --card-body-color: red;
-            --card-subtitle-color: red;
-            --card-background: pink;
-            --card-title-spacer-y: 0; */
-        }
-
-        /* sgds-sidenav-item::part(sidenav-btn) {
-            color: red;
-            border-left-color: red;
-        }
-        sgds-sidenav-link::part(sidenav-anchor) {
-            color: red;
-        } */
 
         .grid-preview {
             display: grid;
@@ -73,67 +54,24 @@
             width: 100%;
         }
 
-        /* sgds-tab-group::part(body) {
-            border: 1px solid blue;
-            border-radius: 2px;
-            margin-top: 100px;
-        } */
-
-        sgds-sidenav-item {
-            --sidenav-theme-color: green;
-        }
-
-        sgds-pagination {
-            --pagination-bg-color: yellow;
-            --pagination-disabled-bg-color: yellow;
-        }
-
-        sgds-progress+sgds-progress {
-            margin-top: 8px;
-        }
-
         sgds-masthead {
-            --sgds-masthead-crest-color: white;
-            --sgds-masthead-text-color: red;
+
             grid-area: masthead;
         }
-
         sgds-sidenav {
             grid-area: sidenav;
 
         }
-
         sgds-mainnav {
             grid-area: nav;
-            --sgds-mainnav-theme-color: red;
         }
 
         main {
             padding: 1rem;
             grid-area: main;
         }
-
-        sgds-footer {
-            grid-area: footer;
-        }
-        sgds-dropdown {
-            --sgds-btn-font-size: 10rem;
-        }
-        sgds-drawer {
-            --sgds-close-btn-color: red;
-        }
-
-        sgds-mainnav-item
-        {
-           --sgds-mainnav-item-theme-color: blue;
-        }
-
-        sgds-file-upload {
-            /* --sgds-form-hint-text-color: red; */
-        }
     
     </style>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/clk-web-components" type="module"></script> -->
     <script type="module">
         import "@webcomponents/scoped-custom-element-registry";
     </script>
@@ -157,26 +95,13 @@
             { title: 3, stepHeader: "Marker title", template: `<p>Step 3 Content</p>` },
         ];
     </script>
-    <link href='./root.css' rel='stylesheet' type='text/css' />
+    <link href='./src/themes/night.css' rel='stylesheet' type='text/css' />
+    <link href='./src/themes/day.css' rel='stylesheet' type='text/css' />
 </head>
 
 
 <body class="d-flex flex-column min-vh-100"></body>
 <sgds-masthead fluid></sgds-masthead>
-<!-- <sgds-mainnav>
-    <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
-    <sgds-mainnav-item>ArgsTable Controlled </sgds-mainnav-item>
-    <sgds-mainnav-dropdown togglertext="Dropdown" close="default">
-        <sgds-dropdown-item href="#">Item 1</sgds-dropdown-item>
-        <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
-        <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
-    </sgds-mainnav-dropdown>
-    <sgds-mainnav-item href="#">About</sgds-mainnav-item>
-    <sgds-mainnav-item href="#" slot="end">Contact Us</sgds-mainnav-item>
-    <sgds-button slot="end">Login</sgds-button>
-    <sgds-button slot="non-collapsible" iconcolor="black" iconwidth="28px" iconheight="28px">test</sgds-button>
-</sgds-mainnav> -->
-
 <sgds-mainnav expand="lg">
     <span slot="brand">Design System</span>
     <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
@@ -186,7 +111,7 @@
     </sgds-mainnav-item>
     <sgds-mainnav-item disabled href="#">About</sgds-mainnav-item>
     <sgds-mainnav-item href="#" slot="end" class="test test2">Info</sgds-mainnav-item>
-    <sgds-mainnav-item href="#" slot="end">Contact Us</sgds-mainnav-item>
+    <sgds-mainnav-item slot="end" id="night-theme"><i class="bi bi-moon"></i></sgds-mainnav-item>
     <sgds-mainnav-dropdown disabled>
         <strong slot="toggler">Dropdown</strong>
         <sgds-dropdown-item href="#">Item 1</sgds-dropdown-item>
@@ -1312,6 +1237,17 @@
                     links='[{"title":"Application Guidelines","url":"/application-guidelines/lorem-ipsum-one/second-level-a/","links":[{"label":"<div>hello world </div>","href":"/application-guidelines/lorem-ipsum-one/second-level-a/"},{"label":"Second Level B","href":"/application-guidelines/lorem-ipsum-two/part-A/"},{"label":"Lorem Ipsum Three","href":"/application-guidelines/lorem-ipsum-three/"}]},{"title":"Legislation","url":"#","external":true,"links":[{"label":"External Link One","href":"https://en.wikipedia.org/wiki/Year","external":true},{"label":"External Link Two","href":"https://en.wikipedia.org/wiki/Spring_(season)","external":true}]},{"title":"Resources","url":"/resource_room/","links":[{"label":"All","href":"/resource_room/"},{"label":"Forms and Templates","href":"/resource_room/forms-and-templates/"},{"label":"Guides","href":"/resource_room/guides/"}]}]'></sgds-footer>
 
                 <script>
+                    const nightBtn = document.querySelector("#night-theme")
+                    nightBtn.addEventListener("click", (e) => {
+                        e.preventDefault()
+                        const html = document.querySelector("html")
+                        if(html.classList.contains("sgds-night-theme")){
+                            html.classList.remove("sgds-night-theme")
+                        } else {
+                            html.classList.add("sgds-night-theme")
+
+                        }
+                    })
                     const modalShowButton = document.querySelector( '#modalShowButton' );
                     modalShowButton.addEventListener( 'click', () => {
                         const modal = document.querySelector( "sgds-modal" );

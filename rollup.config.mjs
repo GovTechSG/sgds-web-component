@@ -7,7 +7,7 @@ import { visualizer } from "rollup-plugin-visualizer";
 import glob from "glob";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-
+import copy from 'rollup-plugin-copy'
 const external = [
   "@lit",
   "lit",
@@ -22,6 +22,11 @@ const external = [
   "date-fns"
 ];
 
+const copyPlugin = copy({
+  targets: [
+    {src: "src/themes/**/*", dest: "lib/themes"}
+  ]
+})
 const wcPlugins = [
   resolve({
     browser: true,
@@ -89,7 +94,7 @@ const buildSgdsPackage = () => {
         preserveModules: true,
         preserveModulesRoot: "src"
       },
-      plugins: wcPlugins,
+      plugins: [...wcPlugins, copyPlugin],
       external
     }
   ];

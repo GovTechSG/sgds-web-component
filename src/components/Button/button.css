@@ -9,24 +9,22 @@
   --sgds-btn-color: var(--sgds-body-color);
   --sgds-btn-bg: transparent;
   --sgds-btn-border-width: var(--sgds-border-width);
-  --sgds-btn-border-color: var(--sgds-gray-800);
+  --sgds-btn-border-color: light-dark(var(--sgds-gray-800), var(--sgds-gray-200));
   --sgds-btn-border-radius: var(--sgds-border-radius);
   --sgds-btn-disabled-color: var(--sgds-white);
   --sgds-btn-disabled-opacity: var(--sgds-disabled-opacity);
-  --sgds-btn-hover-color: var(--sgds-white);
+  --sgds-btn-hover-color: light-dark(var(--sgds-white), var(--sgds-black));
   --sgds-btn-hover-border-color: transparent;
-  --sgds-btn-hover-bg: var(--sgds-black);
-  --sgds-btn-active-color: var(--sgds-white);
-  --sgds-btn-active-bg: var(--sgds-black);
+  --sgds-btn-hover-bg: light-dark(var(--sgds-black), var(--sgds-white));
+  --sgds-btn-active-color: light-dark(var(--sgds-white), var(--sgds-black));
+  --sgds-btn-active-bg: light-dark(var(--sgds-black), var(--sgds-white));
   --sgds-btn-active-border-color: transparent;
   --sgds-btn-focus-box-shadow-color: var(--sgds-gray-500);
   --sgds-btn-focus-box-shadow: 0px 0px 0px var(--sgds-focus-width, 0.13rem) var(--sgds-btn-focus-box-shadow-color);
   --sgds-btn-icon-gutter: var(--sgds-spacer-2);
   display: inline-block;
 }
-/*  
-//TODO: Handle dark theme default button style
-*/
+
 button:focus:not(:focus-visible) {
   outline: 0;
 }

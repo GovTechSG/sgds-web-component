@@ -50,6 +50,7 @@ async function run() {
   try {
     await createPackageFile();
     await includeFileInBuild("./README.md");
+    // await copy(resolve(packagePath, "./src/themes"), distPath)
     await copyMastheadCdnToRoot();
     // await includeFileInBuild('../../LICENSE');
   } catch (err) {

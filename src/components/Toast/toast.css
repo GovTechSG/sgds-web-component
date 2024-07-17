@@ -6,17 +6,15 @@
   --sgds-toast-border-width: var(--sgds-border-width);
   --sgds-toast-border-left-width: 5px;
   --sgds-toast-border-radius: 0 0.25rem 0.25rem 0;
-  --sgds-toast-border-color: var(--sgds-gray-800);
+  --sgds-toast-border-color: light-dark(var(--sgds-gray-800), var(--sgds-gray-200));
   --sgds-toast-box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.15);
   --sgds-toast-font-size: 1rem;
   --sgds-toast-color: var(--sgds-body-color);
   --sgds-toast-header-gap: var(--sgds-spacer-2);
-  --sgds-toast-header-color: var(--sgds-gray-800);
+  --sgds-toast-header-color: light-dark(var(--sgds-gray-800), var(--sgds-gray-200));
   --sgds-toast-header-icon-color: var(--sgds-body-color);
   background-color: transparent;
 }
-
-/* TODO: set default color in dark mode */
 
 :host([status="warning"]) {
   --sgds-toast-border-color: var(--sgds-warning-filled);

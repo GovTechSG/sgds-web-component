@@ -3,7 +3,7 @@ import { themes } from "@storybook/theming";
 import "@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js";
 import { setCustomElementsManifest } from "@storybook/web-components";
 import "./global.css";
-import "../root.css";
+import "../lib/themes/day.css";
 export const setCustomElementsManifestWithOptions = (
   customElements: any,
   options: { privateFields?: boolean }
