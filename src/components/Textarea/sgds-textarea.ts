@@ -9,6 +9,10 @@ import { FormSubmitController, SgdsFormControl } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import textareaStyle from "./textarea.css";
+import feedbackStyles from "../../styles/feedback.css";
+import formLabelStyles from "../../styles/form-label.css";
+import formHintStyles from "../../styles/form-hint.css";
+
 /**
  * @summary Text areas allow for the collection of input longer than a single line.
  *
@@ -36,7 +40,7 @@ import textareaStyle from "./textarea.css";
  * @cssproperty --sgds-form-hint-text-font-weight - The font weight of hint text
  */
 export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
-  static styles = [...SgdsElement.styles, textareaStyle];
+  static styles = [...SgdsElement.styles, feedbackStyles, formHintStyles, formLabelStyles, textareaStyle];
   /**@internal */
   @query("textarea.form-control") textarea: HTMLTextAreaElement;
   /**@internal */

@@ -6,6 +6,7 @@ import SgdsElement from "../../base/sgds-element";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import radioStyles from "./radio.css";
+import formLabelStyles from "../../styles/form-label.css";
 /**
  * @summary Radio allows the user to select one option from a set while seeing all available options.
  *
@@ -18,7 +19,7 @@ import radioStyles from "./radio.css";
  * @cssprop --sgds-radio-inline-margin-right - The margin-right of each radio when it is inlined.
  */
 export class SgdsRadio extends SgdsElement {
-  static styles = [...SgdsElement.styles, radioStyles];
+  static styles = [...SgdsElement.styles, formLabelStyles, radioStyles];
   /**
    * Draws the radio in a checked state
    */

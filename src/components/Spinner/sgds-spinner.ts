@@ -2,6 +2,7 @@ import { property } from "lit/decorators.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import spinnerStyle from "./spinner.css";
+import textStyles from "../../styles/text-variants.css";
 /**
  * @summary Spinners notify the users that their request is being processed.
  *
@@ -11,7 +12,7 @@ import spinnerStyle from "./spinner.css";
  *
  */
 export class SgdsSpinner extends SgdsElement {
-  static styles = [...SgdsElement.styles, spinnerStyle];
+  static styles = [...SgdsElement.styles, textStyles, spinnerStyle];
   /** The type of spinner */
   @property({ type: String, reflect: true }) type: SpinnerType = "border";
   /** The color of spinner */

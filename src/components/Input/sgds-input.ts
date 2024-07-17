@@ -11,6 +11,9 @@ import { FormSubmitController } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import inputStyle from "./input.css";
+import feedbackStyles from "../../styles/feedback.css";
+import formHintStyles from "../../styles/form-hint.css";
+import formLabelStyles from "../../styles/form-label.css";
 /**
  * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
  *
@@ -40,7 +43,7 @@ import inputStyle from "./input.css";
  *
  */
 export class SgdsInput extends SgdsElement implements SgdsFormControl {
-  static styles = [...SgdsElement.styles, inputStyle];
+  static styles = [...SgdsElement.styles, feedbackStyles, formHintStyles, formLabelStyles, inputStyle];
   /**@internal */
   @query("input.form-control") input: HTMLInputElement;
   /**@internal */

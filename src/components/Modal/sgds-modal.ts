@@ -14,6 +14,8 @@ import { watch } from "../../utils/watch";
 import modalStyle from "./modal.css";
 import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 import SgdsCloseButton from "../CloseButton/sgds-close-button";
+import headerStyles from "../../styles/header-class.css";
+import svgStyles from "../../styles/svg.css";
 /**
  * @summary The modal component inform users about a specific task and may contain critical information which users then have to make a decision.
  *
@@ -45,7 +47,7 @@ import SgdsCloseButton from "../CloseButton/sgds-close-button";
  * @cssproperty --sgds-modal-panel-margin-top - The margin top of the modal panel. Sets the top start position of the modal in relation to the document
  */
 export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
-  static styles = [...SgdsElement.styles, modalStyle];
+  static styles = [...SgdsElement.styles, headerStyles, svgStyles, modalStyle];
   /**@internal */
   static get scopedElements() {
     return {

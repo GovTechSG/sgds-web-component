@@ -1,5 +1,3 @@
-@import "../../styles/bg-variants.css";
-
 :host {
   --sgds-progress-bar-color: var(--sgds-white);
   --sgds-progress-bar-font-size: 0.75rem;

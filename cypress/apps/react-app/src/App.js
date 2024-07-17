@@ -1,4 +1,4 @@
-import "root";
+import "@govtechsg/sgds-web-component/themes/day.css";
 import { Accordion } from "./components/Accordion";
 import { ActionCard } from "./components/ActionCard";
 import { Alert } from "./components/Alert";

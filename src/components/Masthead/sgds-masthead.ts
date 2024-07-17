@@ -2,6 +2,8 @@ import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import mastheadStyle from "./masthead.css";
+import svgStyles from "../../styles/svg.css";
+import anchorStyles from "../../styles/anchor.css";
 
 /**
  * @summary All .gov.sg digital services shall adopt The Official Government Banner for every page in the digital service and be placed at the top of the page.
@@ -11,7 +13,7 @@ import mastheadStyle from "./masthead.css";
  * @cssproperty --sgds-masthead-fluid-padding-x - Sets the container-fluid padding left and right for viewport width 1024px and above
  */
 export class SgdsMasthead extends SgdsElement {
-  static styles = [...SgdsElement.styles, mastheadStyle];
+  static styles = [...SgdsElement.styles, svgStyles, anchorStyles, mastheadStyle];
 
   /**
    * Sets the masthead container width to 100% for all breakpoints

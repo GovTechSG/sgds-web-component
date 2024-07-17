@@ -1,5 +1,3 @@
-@import "../../styles/feedback.css";
-@import "../../styles/form-label.css";
 :host {
   --sgds-checkbox-margin-bottom: var(--sgds-spacer-2);
   --sgds-checkbox-input-border-radius: 0.25em;

@@ -1,6 +1,3 @@
-@import "../../styles/feedback";
-@import "../../styles/form-hint";
-@import "../../styles/form-label";
 :host {
   --sgds-input-padding-x: var(--sgds-input-btn-padding-x);
   --sgds-input-padding-y: var(--sgds-input-btn-padding-y);

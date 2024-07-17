@@ -3,6 +3,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import alertLinkStyle from "./alert-link.css";
+import anchorStyles from "../../styles/anchor.css";
 /**
  * @summary Alert link are used within the alert's message that is passed into the default slot of `<sgds-alert>`
  *
@@ -10,7 +11,7 @@ import alertLinkStyle from "./alert-link.css";
  * @cssproperty --alert-link-anchor-color - The margin-right css of icon slot, to position the gap between icon and alert message
  */
 export class SgdsAlertLink extends SgdsElement {
-  static styles = [alertLinkStyle];
+  static styles = [anchorStyles, alertLinkStyle];
   /** Forwards to href attribute of anchor element */
   @property({ type: String, reflect: true }) href: string;
   /** Tells the browser where to open the link */

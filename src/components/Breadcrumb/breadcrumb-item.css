@@ -1,5 +1,3 @@
-@import "../../styles/anchor.css";
-
 :host {
   /* New in 2.0 */
   --sgds-breadcrumb-item-padding-x: var(--sgds-spacer-3);

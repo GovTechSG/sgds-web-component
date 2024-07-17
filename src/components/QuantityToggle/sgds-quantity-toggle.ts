@@ -11,6 +11,7 @@ import SgdsButton, { ButtonVariant } from "../Button/sgds-button";
 import quantityToggleStyle from "./quantity-toggle.css";
 import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 import SgdsInput from "../Input/sgds-input";
+import svgStyles from "../../styles/svg.css";
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
  *
@@ -23,7 +24,7 @@ import SgdsInput from "../Input/sgds-input";
  * @cssprop --sgds-qt-border-radius - The border radius of the four ends of the quantity toggle
  */
 export class SgdsQuantityToggle extends ScopedElementsMixin(SgdsElement) implements SgdsFormControl {
-  static styles = [...SgdsElement.styles, quantityToggleStyle];
+  static styles = [...SgdsElement.styles, svgStyles, quantityToggleStyle];
   /**@internal */
   static get scopedElements() {
     return {

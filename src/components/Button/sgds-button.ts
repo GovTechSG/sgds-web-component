@@ -5,6 +5,8 @@ import { html, literal } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import { FormSubmitController } from "../../utils/form";
 import buttonStyles from "./button.css";
+import anchorStyles from "../../styles/anchor.css";
+
 export type ButtonVariant =
   | "primary"
   | "secondary"
@@ -51,7 +53,7 @@ export type ButtonVariant =
  *
  */
 export class SgdsButton extends SgdsElement {
-  static styles = [...SgdsElement.styles, buttonStyles];
+  static styles = [...SgdsElement.styles, anchorStyles, buttonStyles];
 
   @query(".btn") private button: HTMLButtonElement | HTMLLinkElement;
 

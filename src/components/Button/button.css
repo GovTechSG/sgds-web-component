@@ -1,4 +1,3 @@
-@import "../../styles/anchor.css";
 :host {
   --sgds-btn-padding-x: var(--sgds-input-btn-padding-x);
   --sgds-btn-padding-y: var(--sgds-input-btn-padding-y);

@@ -1,5 +1,3 @@
-@import "../../styles/text-variants.css";
-
 :host {
   --sgds-spinner-color: var(--sgds-primary-filled);
   --sgds-spinner-size: 2rem;

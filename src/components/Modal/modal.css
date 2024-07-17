@@ -1,6 +1,3 @@
-@import "../../styles/header-class.css";
-@import "../../styles/svg.css";
-
 :host {
   --sgds-modal-panel-padding: var(--sgds-spacer-4);
   --sgds-modal-panel-z-index: 105500;

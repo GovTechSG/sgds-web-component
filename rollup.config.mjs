@@ -19,7 +19,7 @@ const external = [
   /lit\/.*/,
   /bootstrap\/.*/,
   "imask",
-  "date-fns"
+  "date-fns",
 ];
 
 const copyPlugin = copy({

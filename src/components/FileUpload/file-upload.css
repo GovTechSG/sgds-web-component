@@ -1,6 +1,3 @@
-@import "../../styles/svg.css";
-@import "../../styles/form-hint.css";
-/** scss */
 :host {
   --sgds-file-upload-left-icon-color: var(--sgds-success);
   --sgds-file-upload-remove-icon-color: var(--sgds-body-color-lighter);

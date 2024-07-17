@@ -6,6 +6,8 @@ import { FormSubmitController } from "../../utils/form";
 import { watch } from "../../utils/watch";
 import radioGroupStyles from "./radio-group.css";
 import SgdsRadio from "./sgds-radio";
+import feedbackStyles from "../../styles/feedback.css";
+import formLabelStyles from "../../styles/form-label.css";
 
 /**
  * @summary RadioGroup group multiple radios so they function as a single form control.
@@ -20,7 +22,7 @@ import SgdsRadio from "./sgds-radio";
  *
  */
 export class SgdsRadioGroup extends SgdsElement {
-  static styles = [...SgdsElement.styles, radioGroupStyles];
+  static styles = [...SgdsElement.styles, feedbackStyles, formLabelStyles, radioGroupStyles];
   /**@internal */
   protected readonly formSubmitController = new FormSubmitController(this, {
     defaultValue: (control: SgdsRadioGroup) => control.defaultValue

@@ -1,4 +1,3 @@
-@import "../../styles/svg.css";
 :host{
   --sgds-qt-border-radius: var(--sgds-border-radius);
 }

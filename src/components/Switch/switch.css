@@ -1,5 +1,3 @@
-@import "../../styles/feedback.css";
-@import "../../styles/form-label.css";
 :host {
   --sgds-switch-margin-bottom: var(--sgds-spacer-2);
 }

@@ -7,6 +7,8 @@ import SgdsElement from "../../base/sgds-element";
 import { SgdsButton } from "../Button/sgds-button";
 import fileUploadStyle from "./file-upload.css";
 import genId from "../../utils/generateId";
+import svgStyles from "../../styles/svg.css";
+import formHintStyles from "../../styles/form-hint.css";
 export type FileUploadButtonVariant =
   | "primary"
   | "secondary"
@@ -43,7 +45,7 @@ export type FileUploadButtonVariant =
  */
 
 export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
-  static styles = [...SgdsElement.styles, fileUploadStyle];
+  static styles = [...SgdsElement.styles, svgStyles, formHintStyles, fileUploadStyle];
   /**@internal */
   static get scopedElements() {
     return {

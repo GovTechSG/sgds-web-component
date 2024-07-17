@@ -4,6 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 import breadcrumbItemStyle from "./breadcrumb-item.css";
+import anchorStyles from "../../styles/anchor.css";
 /**
  * @summary Breadcrumb Item are navigational links used in Breadcrumb component
  *
@@ -19,7 +20,7 @@ import breadcrumbItemStyle from "./breadcrumb-item.css";
  * @cssprop --sgds-breadcrumb-item-separator-color - The color of breadcrumb item's separator
  */
 export class SgdsBreadcrumbItem extends SgdsElement {
-  static styles = [...SgdsElement.styles, breadcrumbItemStyle];
+  static styles = [...SgdsElement.styles, anchorStyles, breadcrumbItemStyle];
   /** Specifies the url path of the breadcrumb-item. When defined, the breadcrumb-items is a anchor element. When not defined, indicates that the breadcrumb item is active. In such cases, a span element is rendered. */
   @property({ type: String, reflect: true }) href: string;
   /** Tells the browser where to open the link. Only used when `href` is set. */
