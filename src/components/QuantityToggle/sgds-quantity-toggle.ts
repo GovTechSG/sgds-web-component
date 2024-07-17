@@ -50,7 +50,7 @@ export class SgdsQuantityToggle extends ScopedElementsMixin(SgdsElement) impleme
   @property({ type: Number, reflect: true }) max: number;
 
   /**Controls the size of the quantity toggle */
-  @property() size: "sm" | "md" = "sm";
+  @property() size: "sm" | "md" = "md";
 
   /**The input's value. Set to 0 by default */
   @property({ type: Number, reflect: true }) value = 0;

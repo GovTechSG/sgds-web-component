@@ -17,7 +17,7 @@ import tableStyle from "./table.css";
  */
 
 export class SgdsTable extends SgdsElement {
-  static styles = [tableStyle];
+  static styles = [...SgdsElement.styles, tableStyle];
 
   /**
    * Adds zebra-striping using striped to table row within the <tbody>
