@@ -9,14 +9,15 @@ import paginationStyle from "./pagination.css";
  *
  * @event sgds-page-change - Event is emitted when `handleNextButton`, `handlePrevButton`, `handleNextEllipsisButton` and `handlePrevEllipsisButton` was called.
  *
- * @cssproperty --pagination-color Sets the pagination color. <br>Default value `--sgds-cyan`
- * @cssproperty --pagination-bg-color Sets the pagination background color. <br>Default value `--sgds-white`
- * @cssproperty --pagination-hover-bg-color Sets the pagination hover state background color. <br>Default value `--sgds-gray-200`
- * @cssproperty --pagination-hover-border-color Sets the pagination hover state border color. <br>Default value `--sgds-gray-300`
- * @cssproperty --pagination-active-color Sets the pagination hover state color. <br>Default value `--sgds-white`
- * @cssproperty --pagination-active-bg-color Sets the pagination active state background color. <br>Default value `--sgds-cyan`
- * @cssproperty --pagination-disabled-color Sets the pagination disabled state color. <br>Default value `--sgds-gray-600`
- * @cssproperty --pagination-disabled-bg-color Sets the pagination disabled state background color. <br>Default value `--sgds-white`
+ * @cssproperty --sgds-pagination-color - The text color of pagination
+ * @cssproperty --sgds-pagination-bg - The background color of pagination
+ * @cssproperty --sgds-pagination-hover-bg - The  background color of pagination in hover state
+ * @cssproperty --sgds-pagination-hover-border-color - The border color of pagination in hover state
+ * @cssproperty --sgds-pagination-active-color - The text color of pagination in active state
+ * @cssproperty --sgds-pagination-active-bg - The background color of pagination in active state
+ * @cssproperty --sgds-pagination-disabled-color - The text color of pagination in disabled state
+ * @cssproperty --sgds-pagination-disabled-bg - The background color of pagination in disabled state
+ * @cssproperty --sgds-pagination-focus-box-shadow - The box shadow of pagination in focused state
  *
  *
  **/
