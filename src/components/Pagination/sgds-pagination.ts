@@ -139,7 +139,12 @@ export class SgdsPagination extends SgdsElement {
   }
 
   private _renderFirstPage() {
-    const sanitizeStartPage = this.currentPage - Math.floor(this._sanitizeLimit / 2);
+    let sanitizeStartPage = this.currentPage - Math.floor(this._sanitizeLimit / 2);
+
+    if (this.pages.length - sanitizeStartPage < this.limit) {
+      sanitizeStartPage = this.pages.length + 1 - this.limit;
+    }
+
     if (sanitizeStartPage > 1) {
       return html`
         <li key=${1} class="page-item ${this.currentPage === 1 ? "active" : ""}">
