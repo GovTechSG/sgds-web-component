@@ -20,7 +20,7 @@ type FilterFunction = (inputValue: string, menuItem: string) => boolean;
  * @event sgds-input -  Emitted when user input is received and its value changes.
  */
 export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
-  static styles = [comboBoxStyle, dropdownStyle];
+  static styles = [...DropdownListElement.styles, comboBoxStyle, dropdownStyle];
   /**@internal */
   static get scopedElements() {
     return {
