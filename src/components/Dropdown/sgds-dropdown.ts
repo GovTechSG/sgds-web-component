@@ -37,12 +37,12 @@ export type DropdownButtonVariant =
  * @cssprop --sgds-dropdown-border-width - The border width of dropdown
  * @cssprop --sgds-dropdown-divider-bg - The background color of divider
  * @cssprop --sgds-dropdown-divider-margin-y - The top and bottom margin of divider
- * @cssprop --sgds-dropdown-link-color - The text color of dropdown item
- * @cssprop --sgds-dropdown-link-hover-color - The text color of dropdown item in hover state
- * @cssprop --sgds-dropdown-link-hover-bg - The background color of dropdown item in hover state
- * @cssprop --sgds-dropdown-link-active-color - The text color of dropdown item in active state
- * @cssprop --sgds-dropdown-link-active-bg - The background color of dropdown item in active state
- * @cssprop --sgds-dropdown-link-disabled-color - The text color of dropdown item in disabled state
+ * @cssprop --sgds-dropdown-item-color - The text color of dropdown item
+ * @cssprop --sgds-dropdown-item-hover-color - The text color of dropdown item in hover state
+ * @cssprop --sgds-dropdown-item-hover-bg - The background color of dropdown item in hover state
+ * @cssprop --sgds-dropdown-item-active-color - The text color of dropdown item in active state
+ * @cssprop --sgds-dropdown-item-active-bg - The background color of dropdown item in active state
+ * @cssprop --sgds-dropdown-item-disabled-color - The text color of dropdown item in disabled state
  * @cssprop --sgds-dropdown-item-padding-x - The left and right padding of dropdown item
  * @cssprop --sgds-dropdown-item-padding-y - The top and bottom padding of dropdown item
  * @cssprop --sgds-dropdown-header-color - The text color of dropdown header
