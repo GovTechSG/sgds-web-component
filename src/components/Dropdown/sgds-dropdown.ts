@@ -23,7 +23,7 @@ export type DropdownButtonVariant =
  *
  * @csspart menu - The dropdown's menu (ul element)
  *
- * @cssprop --sgds-dropdown-zindex - The z-index of dropdown, determining its stacking order relative to other elements.
+ * @cssprop --sgds-dropdown-z-index - The z-index of dropdown, determining its stacking order relative to other elements.
  * @cssprop --sgds-dropdown-min-width - The minimum width of dropdown
  * @cssprop --sgds-dropdown-padding-x - The left and right padding of dropdown
  * @cssprop --sgds-dropdown-padding-y - The top and bottom padding of dropdown

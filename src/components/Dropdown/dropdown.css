@@ -1,5 +1,5 @@
 :host {
-  --sgds-dropdown-zindex: 1000;
+  --sgds-dropdown-z-index: 1000;
   --sgds-dropdown-min-width: 10rem;
   --sgds-dropdown-padding-x: 0;
   --sgds-dropdown-padding-y: 0.5rem;
@@ -76,7 +76,7 @@
   padding: var(--sgds-dropdown-padding-y) var(--sgds-dropdown-padding-x);
   position: absolute;
   text-align: left;
-  z-index: var(--sgds-dropdown-zindex);
+  z-index: var(--sgds-dropdown-z-index);
 }
 .dropdown-menu[data-bs-popper] {
   left: 0;
