@@ -12,8 +12,8 @@ import sidenavStyle from "./sidenav.css";
  *
  * @slot default - Default slot for SgdsSidenavItem element.
  *
- * @cssproperty --sidenav-theme-color - overall sidenav theme color
- * @cssproperty --sidenav-sticky-top - set the top value of the sticky sidenav. Defaults to 0rem
+ * @cssproperty --sgds-sidenav-theme-color - overall sidenav theme color
+ * @cssproperty --sgds-sidenav-sticky-top - set the top value of the sticky sidenav. Defaults to 0rem
  */
 export class SgdsSidenav extends SgdsElement {
   static styles = [...SgdsElement.styles, sidenavStyle];

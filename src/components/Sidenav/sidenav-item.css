@@ -1,8 +1,13 @@
 :host {
-  --sidenav-item-button-border-left-width: 0.125rem;
-  --sidenav-item-padding-x: 1rem;
-  --sidenav-item-padding-y: 0.5rem;
-  --sidenav-item-icon-title-gap: 1rem;
+  --sgds-sidenav-item-btn-border-left-width: 0.125rem;
+  --sgds-sidenav-item-btn-padding-x: 1rem;
+  --sgds-sidenav-item-btn-padding-y: 0.5rem;
+  --sgds-sidenav-item-icon-title-gap: 1rem;
+    /* NEW in V2 */
+  --sgds-sidenav-item-btn-border-left: var(--sgds-sidenav-item-btn-border-left-width) solid transparent;
+  --sgds-sidenav-item-btn-border-radius: 0;
+  --sgds-sidenav-item-btn-line-height: var(--sgds-line-height-md);
+  --sgds-sidenav-item-list-line-height: var(--sgds-line-height-lg);
 }
 
 .sidenav-btn {
@@ -12,14 +17,14 @@
   font-size: var(--sgds-body-font-size);
   border: 0;
   background: 0;
-  padding: 0.5rem 1rem;
-  border-left: var(--sidenav-item-button-border-left-width) solid transparent;
-  border-radius: 0;
+  padding: var(--sgds-sidenav-item-btn-padding-y) var(--sgds-sidenav-item-btn-padding-x);
+  border-left: var(--sgds-sidenav-btn-border-left);
+  border-radius: var(--sgds-sidenav-btn-border-radius);
   display: flex;
-  gap: var(--sidenav-item-icon-title-gap);
+  gap: var(--sgds-sidenav-item-icon-title-gap);
   align-items: center;
 
-  svg.bi-chevron-down {
+  svg.bi-chevron-down, slot[name="caret-icon"]::slotted(*) {
     margin-left: auto;
     transition: all 0.3s ease-in-out;
     transform: rotate(180deg);
@@ -27,16 +32,16 @@
 }
 .sidenav-btn.active,
 .sidenav-btn:hover {
-  color: var(--sidenav-theme-color);
-  border-left-color: var(--sidenav-theme-color);
+  color: var(--sgds-sidenav-theme-color);
+  border-left-color: var(--sgds-sidenav-theme-color);
   font-weight: 700;
 }
 .sidenav-btn.disabled {
-  opacity: 0.65;
-  pointer-events: none;
+  opacity: var(--sgds-disabled-opacity);
+  cursor: not-allowed;
 }
 .sidenav-btn:not(.active) {
-  svg.bi-chevron-down {
+  svg.bi-chevron-down, slot[name="caret-icon"]::slotted(*) {
     transform: rotate(0deg);
   }
 }
@@ -44,20 +49,14 @@
 a.sidenav-btn {
   color: inherit;
   text-decoration: none;
-  line-height: 1.5rem;
+  line-height: var(--sgds-sidenav-item-btn-line-height);
 }
 
-.sidenav-list {
+ul.sidenav-list {
   list-style: none;
   display: flex;
   flex-direction: column;
   padding-left: 0;
   margin: 0;
-  line-height: 2rem;
-}
-
-.collapse,
-.collapse.show,
-.collapsing {
-  margin-top: 1rem;
+  line-height: var(--sgds-line-height-lg);
 }
