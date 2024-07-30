@@ -17,18 +17,19 @@ import sidenavItemStyle from "./sidenav-item.css";
  * @event sgds-hide - Emitted on hide.
  * @event sgds-after-hide - Emitted on hide after animation has completed.
  *
- * @slot - default slot for SgdsSidenavLink element.
+ * @slot default - default slot for SgdsSidenavLink element.
  * @slot title - title slot for the content of SgdsSidenavItem's button / anchor element.
  * @slot icon - icon slot for the content of SgdsSidenavItem's button / anchor element.
+ * @slot caret-icon - The slot for the caret arrow icon of SgdsSidenavItem.
  *
- * @cssproperty --sidenav-item-button-border-left-width - sidenav item left border width
- * @cssproperty --sidenav-item-padding-x - sidenav item padding left and right
- * @cssproperty --sidenav-item-padding-y - sidenav item padding top and bottom
- * @cssproperty --sidenav-item-icon-title-gap - the flex gap between sidenav item icon and title
+ * @cssproperty --sgds-sidenav-item-button-border-left-width - sidenav item left border width
+ * @cssproperty --sgds-sidenav-item-padding-x - sidenav item padding left and right
+ * @cssproperty --sgds-sidenav-item-padding-y - sidenav item padding top and bottom
+ * @cssproperty --sgds-sidenav-item-icon-title-gap - the flex gap between sidenav item icon and title
  */
 
 export class SgdsSidenavItem extends SgdsElement {
-  static styles = [sidenavItemStyle];
+  static styles = [...SgdsElement.styles, sidenavItemStyle];
 
   @query(".sidenav-body") body: HTMLElement;
   /** @internal */
@@ -201,19 +202,21 @@ export class SgdsSidenavItem extends SgdsElement {
       >
         <slot name="icon"></slot>
         <slot name="title"></slot>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-chevron-down"
-          viewBox="0 0 16 16"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
-          />
-        </svg>
+        <slot name="caret-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-chevron-down"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+            />
+          </svg>
+        </slot>
       </button>
       <div class="sidenav-body" id="${this.collapseId}">
         <ul class="sidenav-list" aria-labelledby="${this.buttonId}">

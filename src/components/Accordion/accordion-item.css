@@ -31,7 +31,7 @@
   transition: var(--sgds-accordion-transition);
   width: 100%;
 
-  svg.bi-chevron-down {
+  svg.bi-chevron-down, slot[name="accordion-caret"]::slotted(*) {
     margin-left: auto;
     transition: var(--sgds-accordion-item-btn-icon-transition);
     width: 1.3rem;
@@ -50,7 +50,7 @@
   background-color: var(--sgds-accordion-active-bg);
   color: var(--sgds-accordion-active-color);
 
-  svg.bi-chevron-down {
+  svg.bi-chevron-down, slot[name="accordion-caret"]::slotted(*) {
     transform: var(--sgds-accordion-item-btn-icon-transform);
   }
 }

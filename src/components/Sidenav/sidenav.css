@@ -1,19 +1,21 @@
 :host {
-  --sidenav-theme-color: #5925dc;
-  --sidenav-sticky-top: 0rem;
+  --sgds-sidenav-theme-color: var(--sgds-primary);
+  --sgds-sidenav-sticky-top: 0rem;
+  --sgds-sidenav-item-gap: 1rem;
 }
 
 ul {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--sgds-sidenav-item-gap);
   list-style: none;
   padding-left: 0;
+  margin: 0;
 }
 
 .sticky {
   position: sticky;
-  top: var(--sidenav-sticky-top);
-  height: calc(100vh - var(--sidenav-sticky-top));
+  top: var(--sgds-sidenav-sticky-top);
+  height: calc(100vh - var(--sgds-sidenav-sticky-top));
   overflow-y: auto;
 }
