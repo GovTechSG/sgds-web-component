@@ -20,7 +20,7 @@
 .accordion-button {
   line-height: var(--accordion-item-line-height);
   &:not(.collapsed){
-    color: var(--accordion-active-color);
+    color: var(--accordion-active-color, var(--sgds-primary));
   }
   svg.bi-chevron-down {
     margin-left: auto;

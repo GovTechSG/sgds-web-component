@@ -6,10 +6,11 @@
 <div>
 <h3> General </h3>
 
-<sgds-accordion-item >
+<sgds-accordion-item>
     <div slot="accordion-header">Uncaught DOMException: Failed to execute 'define' on 'CustomElementRegistry'</div>
     <span slot="accordion-content">If you encounter this error, it means that you need to load the Scoped Custom Element Registry polyfill. Refer to the instructions <a target="_self" href="/story/getting-started-usage-scoped-elements--page">here</a></span> 
 </sgds-accordion-item>
+
 
 <h3> React </h3>
 <sgds-accordion-item >
@@ -24,5 +25,4 @@
 <a slot="card-link" href="https://github.com/GovTechSG/sgds-web-component/issues" target="_blank">Learn more</a>
 </sgds-card>
 </div>
-
 </sgds-faq-grid>
