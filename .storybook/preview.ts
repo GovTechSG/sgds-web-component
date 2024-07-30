@@ -44,6 +44,7 @@ export const parameters = {
       order: [
         "Getting Started",
         ["Introduction", "Installation", "Imports", "Usage", "Frameworks"],
+        "Troubleshooting",
         "Components",
         "Patterns",
         "Templates"

@@ -12,3 +12,16 @@ sgds-card.intro::part(base) {
   height: 100%;
 }
 
+/* FAQ stylings */
+sgds-card.faq::part(base) {
+  border: none;
+  background-color: #f6f7fb;
+  border-radius: 24px;
+}
+sgds-faq-grid{
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  row-gap: 1rem;
+  column-gap: 2rem;
+  width: 100%;
+}
