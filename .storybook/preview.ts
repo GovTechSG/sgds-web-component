@@ -28,7 +28,6 @@ export const setCustomElementsManifestWithOptions = (
 setCustomElementsManifestWithOptions(customElements, { privateFields: false });
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
   docs: {
     //@ts-ignore
     theme: themes.sgdsTheme
@@ -45,3 +44,4 @@ export const parameters = {
     }
   }
 };
+// export const tags = ["autodocs"];
