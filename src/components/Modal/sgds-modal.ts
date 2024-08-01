@@ -75,7 +75,7 @@ export class SgdsModal extends SgdsElement {
   @property({ type: Boolean, reflect: true }) centeredAlignVariant = false;
   /** Removes the default animation when opening and closing of modal */
   @property({ type: Boolean, reflect: true }) noAnimation = false;
-  /** Removes the default animation when opening and closing of modal */
+  /** Removes the close button from modal header */
   @property({ type: Boolean, reflect: true }) noCloseButton = false;
 
   connectedCallback() {
