@@ -1,3 +1,14 @@
+## v1.4.0 (2024-08-01)
+
+### Feat
+
+- **modal**: add noCloseButton prop (#205)
+- **modal**: add noCloseButton prop
+
+### Fix
+
+- **accordion-item**: fallback value for active color of accordion
+
 ## v1.3.1 (2024-07-04)
 
 ### Fix
