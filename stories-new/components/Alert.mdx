@@ -1,0 +1,49 @@
+import { Canvas, Meta, Story, Controls } from "@storybook/blocks";
+import { Template, args, parameters } from "../templates/Alert/basic.js";
+import "../../lib/index.js";
+import { html } from "lit-html";
+import * as AlertStories from './Alert.stories';
+
+<Meta of={AlertStories} />
+
+# Alert
+
+Alert heading is the header of the Alert component. Use it in the default slot of `sgds-alert` when required<br />Alert link are used within the alert's message that is passed into the default slot of `<sgds-alert>`<br />Alerts provide short, timely, and relevant information for your users. It can be a simple text message or customised HTML content with paragraphs, headings and links.
+
+<Canvas>
+  <Story of={AlertStories.Basic} />
+</Canvas>
+
+## API
+
+### sgds-alert-heading
+
+<Controls />
+
+### sgds-alert-link
+
+<Controls />
+
+### sgds-alert
+
+<Controls />
+
+## Methods
+
+### sgds-alert
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>close()</td>
+      <td>Closes the alert</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,50 @@
+import { Canvas, Meta, Story, Controls } from "@storybook/blocks";
+import { Template, args, parameters } from "../templates/Toast/basic.js";
+import "../../lib/index.js";
+import { html } from "lit-html";
+import * as ToastStories from './Toast.stories';
+
+<Meta of={ToastStories} />
+
+# Toast
+
+ToastContainer is the container component to position `sgds-toast` in screen. When there is multiple toasts in the container, the toast components are stacked vertically.<br />Toast allows you to convey quick messaging notifications to the user.
+
+<Canvas>
+  <Story of={ToastStories.Basic} />
+</Canvas>
+
+## API
+
+### sgds-toast-container
+
+<Controls />
+
+### sgds-toast
+
+<Controls />
+
+## Methods
+
+### sgds-toast
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>showToast()</td>
+      <td>Shows the toast</td>
+    </tr>
+
+    <tr>
+      <td>hideToast()</td>
+      <td>Hide the toast</td>
+    </tr>
+  </tbody>
+</table>

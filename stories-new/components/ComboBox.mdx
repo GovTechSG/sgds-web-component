@@ -1,0 +1,21 @@
+import { Canvas, Meta, Story, Controls } from "@storybook/blocks";
+import { Template, args, parameters } from "../templates/ComboBox/basic.js";
+import "../../lib/index.js";
+import { html } from "lit-html";
+import * as ComboBoxStories from './ComboBox.stories';
+
+<Meta of={ComboBoxStories} />
+
+# ComboBox
+
+ComboBox component is used for users to make one or more selections from a list.
+
+<Canvas>
+  <Story of={ComboBoxStories.Basic} />
+</Canvas>
+
+## API
+
+### sgds-combo-box
+
+<Controls />

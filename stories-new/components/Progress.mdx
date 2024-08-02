@@ -1,0 +1,25 @@
+import { Canvas, Meta, Story, Controls } from "@storybook/blocks";
+import { Template, args, parameters } from "../templates/Progress/basic.js";
+import "../../lib/index.js";
+import { html } from "lit-html";
+import * as ProgressStories from './Progress.stories';
+
+<Meta of={ProgressStories} />
+
+# Progress
+
+Provide up-to-date feedback on the progress of a workflow or action with simple yet flexible progress bars.
+
+<Canvas>
+  <Story of={ProgressStories.Basic} />
+</Canvas>
+
+## API
+
+### sgds-progress-bar
+
+<Controls />
+
+### sgds-progress
+
+<Controls />

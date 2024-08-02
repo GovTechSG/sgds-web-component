@@ -1,0 +1,21 @@
+import { Canvas, Meta, Story, Controls } from "@storybook/blocks";
+import { Template, args, parameters } from "../templates/Badge/basic.js";
+import "../../lib/index.js";
+import { html } from "lit-html";
+import * as BadgeStories from './Badge.stories';
+
+<Meta of={BadgeStories} />
+
+# Badge
+
+Badges can be used to highlight important bits of information such as labels, notifications & status.
+
+<Canvas>
+  <Story of={BadgeStories.Basic} />
+</Canvas>
+
+## API
+
+### sgds-badge
+
+<Controls />

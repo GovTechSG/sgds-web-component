@@ -67,7 +67,7 @@
     "@rollup/plugin-replace": "^5.0.0",
     "@storybook/addon-essentials": "^8.2.6",
     "@storybook/addon-links": "^8.2.6",
-    "@storybook/blocks": "^8.2.6",
+    "@storybook/blocks": "^8.2.7",
     "@storybook/test": "^8.2.6",
     "@storybook/web-components": "^8.2.6",
     "@storybook/web-components-vite": "^8.2.6",

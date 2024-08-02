@@ -1,0 +1,46 @@
+import { Canvas, Meta, Story, Controls } from "@storybook/blocks";
+import { Template, args, parameters } from "../templates/Modal/basic.js";
+import "../../lib/index.js";
+import { html } from "lit-html";
+import * as ModalStories from './Modal.stories';
+
+<Meta of={ModalStories} />
+
+# Modal
+
+The modal component inform users about a specific task and may contain critical information which users then have to make a decision.
+
+<Canvas>
+  <Story of={ModalStories.Basic} />
+</Canvas>
+
+## API
+
+### sgds-modal
+
+<Controls />
+
+## Methods
+
+### sgds-modal
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>show()</td>
+      <td>Shows the dialog.</td>
+    </tr>
+
+    <tr>
+      <td>hide()</td>
+      <td>Hides the dialog</td>
+    </tr>
+  </tbody>
+</table>

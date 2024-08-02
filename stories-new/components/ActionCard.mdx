@@ -1,0 +1,41 @@
+import { Canvas, Meta, Story, Controls } from "@storybook/blocks";
+import { Template, args, parameters } from "../templates/ActionCard/basic.js";
+import "../../lib/index.js";
+import { html } from "lit-html";
+import * as ActionCardStories from './ActionCard.stories';
+
+<Meta of={ActionCardStories} />
+
+# ActionCard
+
+Action Card are cards with built in checkbox or radio components. The ref of input is extended to the Card's body.
+
+<Canvas>
+  <Story of={ActionCardStories.Basic} />
+</Canvas>
+
+## API
+
+### sgds-action-card
+
+<Controls />
+
+## Methods
+
+### sgds-action-card
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>click()</td>
+      <td>Simulates a click on the input control</td>
+    </tr>
+  </tbody>
+</table>

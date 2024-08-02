@@ -1,0 +1,49 @@
+import { Canvas, Meta, Story, Controls } from "@storybook/blocks";
+import { Template, args, parameters } from "../templates/Radio/basic.js";
+import "../../lib/index.js";
+import { html } from "lit-html";
+import * as RadioStories from './Radio.stories';
+
+<Meta of={RadioStories} />
+
+# Radio
+
+RadioGroup group multiple radios so they function as a single form control.<br />Radio allows the user to select one option from a set while seeing all available options.
+
+<Canvas>
+  <Story of={RadioStories.Basic} />
+</Canvas>
+
+## API
+
+### sgds-radio-group
+
+<Controls />
+
+### sgds-radio
+
+<Controls />
+
+## Methods
+
+### sgds-radio-group
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>reportValidity()</td>
+
+      <td>
+        Checks for validity and shows the browser's validation message if the
+        control is invalid.
+      </td>
+    </tr>
+  </tbody>
+</table>

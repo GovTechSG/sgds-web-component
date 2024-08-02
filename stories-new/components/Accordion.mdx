@@ -1,0 +1,52 @@
+import { Canvas, Meta, Story, Controls, ArgTypes } from "@storybook/blocks";
+import { Template, args, parameters } from "../templates/Accordion/basic.js";
+import "../../lib/index.js";
+import { html } from "lit-html";
+import * as AccordionStories from './Accordion.stories';
+
+<Meta of={AccordionStories} />
+
+# Accordion
+
+A dropdown mechanism that allow users to either show or hide related content. `SgdsAccordion` is a wrapper to manage the behaviour for multiple `SgdsAccordionItems`
+
+<Canvas>
+  <Story of={AccordionStories.Basic} />
+</Canvas>
+
+## API
+
+### sgds-accordion-item
+
+<Controls />
+
+<ArgTypes />
+
+### sgds-accordion
+
+<Controls />
+
+## Methods
+
+### sgds-accordion-item
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>show()</td>
+      <td>Shows the accordion.</td>
+    </tr>
+
+    <tr>
+      <td>hide()</td>
+      <td>Hide the accordion</td>
+    </tr>
+  </tbody>
+</table>

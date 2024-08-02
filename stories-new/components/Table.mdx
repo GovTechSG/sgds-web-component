@@ -1,0 +1,21 @@
+import { Canvas, Meta, Story, Controls } from "@storybook/blocks";
+import { Template, args, parameters } from "../templates/Table/basic.js";
+import "../../lib/index.js";
+import { html } from "lit-html";
+import * as TableStories from './Table.stories';
+
+<Meta of={TableStories} />
+
+# Table
+
+The use of a table is to organise a collections of data into readable rows
+
+<Canvas>
+  <Story of={TableStories.Basic} />
+</Canvas>
+
+## API
+
+### sgds-table
+
+<Controls />
