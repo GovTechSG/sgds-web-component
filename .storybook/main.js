@@ -3,7 +3,7 @@ import remarkGfm from 'remark-gfm';
 module.exports = {
   stories: [
     "../stories/frameworks/**/*.mdx",
-    // "../stories/getting-started/**/*.mdx",
+    "../stories/getting-started/**/*.mdx",
     // "../stories/components/*.@(mdx|stories.@(js|jsx|ts|tsx))",
   ],
   addons: [
