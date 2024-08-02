@@ -5,10 +5,10 @@ import { ref } from "lit/directives/ref.js";
 import { DropdownListElement } from "../../base/dropdown-list-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { watch } from "../../utils/watch";
-import dropdownStyle from "../Dropdown/dropdown.css";
 import { SgdsDropdownItem } from "../Dropdown/sgds-dropdown-item";
 import { SgdsInput } from "../Input/sgds-input";
 import comboBoxStyle from "./combo-box.css";
+import dropdownStyle from "../Dropdown/dropdown.css";
 type FilterFunction = (inputValue: string, menuItem: string) => boolean;
 
 /**
@@ -61,6 +61,17 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
   /**Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = "";
+
+  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
+  @property({ type: Boolean, reflect: true }) hasFeedback = false;
+  /**Feedback text for error state when validated */
+  @property({ type: String, reflect: true }) invalidFeedback = "";
+
+  /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
+  @property({ type: Boolean, reflect: true }) invalid = false;
+  /** Marks the input as invalid. Replace the pseudo :valid selector for absent in custom elements */
+  @property({ type: Boolean, reflect: true }) valid = false;
+
   /**The list of items to display in the dropdown. */
   @property({ type: Array }) menuList: string[] = [];
 
@@ -105,7 +116,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
     return html`
       <div class="sgds combobox dropdown">
         <sgds-input
-          class="dropdown-toggle w-100"
+          class="dropdown-toggle"
           label=${this.label}
           hintText=${this.hintText}
           name=${this.name}
@@ -114,8 +125,12 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
           placeholder=${this.placeholder}
           ?autofocus=${this.autofocus}
           ?disabled=${this.disabled}
-          ?required=${this.required}
+          required=${this.required}
           ?readonly=${this.readonly}
+          ?hasFeedback=${this.hasFeedback}
+          invalidfeedback=${this.invalidFeedback}
+          ?invalid=${this.invalid}
+          ?valid=${this.valid}
           .value=${this.value}
           @sgds-input=${this._handleInputChange}
           role="combobox"
