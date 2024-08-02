@@ -1,5 +1,4 @@
-.sgds.combobox .form-control-icon,
-.sgds.combobox .form-control-icon-validate {
+.sgds.combobox .form-control-icon {
   align-items: center;
   display: flex;
   font-size: 1rem;
@@ -10,36 +9,25 @@
   z-index: 4;
 }
 .sgds.combobox {
-  align-items: stretch;
   display: flex;
   flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: flex-end;
   position: relative;
   width: -webkit-fill-available;
   width: -moz-available;
 }
-
-.sgds.combobox > .form-control {
+/* .sgds.combobox > .form-control {
   padding-left: 3rem;
 }
 .sgds.combobox > .form-control:focus {
   z-index: 3;
-}
-.sgds.combobox .form-control-icon-validate {
-  left: inherit;
-  right: 0;
-}
-.sgds.combobox {
-  justify-content: flex-end;
-}
-.sgds.combobox > .form-control {
-  padding-left: 1rem;
-  padding-right: 3rem;
+} */
+.sgds.combobox .dropdown-toggle {
+  width: 100%;
 }
 .sgds.combobox > .dropdown-menu {
   min-width: 100%;
-}
-.w-100 {
-  width: 100% !important;
 }
 .form-control-icon {
   bottom: 0;
