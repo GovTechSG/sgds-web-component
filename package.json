@@ -11,7 +11,7 @@
     "build": "npm run build:react && rm -rf lib && rollup --config rollup.config.mjs && node ./scripts/frankBuild.js",
     "build:react": "npm run cem && node ./scripts/makeReact.mjs",
     "build:readme": "gulp build-readme",
-    "write:stories": "npm run cem && node ./scripts/generateStories.mjs && npm run concat:stories",
+    "write:stories": "npm run cem && node ./scripts/generateStories.mjs",
     "write:component": "plop",
     "test": "rm -rf test-outdir && rollup --config rollup.test.config.js && web-test-runner",
     "test:scripts": "wtr scripts/__tests__/**/*.test.js --node-resolve",
@@ -55,6 +55,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
+    "@babel/preset-env": "^7.25.3",
     "@babel/register": "^7.21.0",
     "@chromatic-com/storybook": "^1.6.1",
     "@commitlint/cli": "^17.1.2",

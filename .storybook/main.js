@@ -2,9 +2,9 @@ import remarkGfm from "remark-gfm";
 
 module.exports = {
   stories: [
-    "../stories-new/frameworks/**/*.mdx",
-    "../stories-new/getting-started/**/*.mdx",
-    "../stories-new/components/*.@(mdx|stories.@(js|jsx|ts|tsx))"
+    "../stories/frameworks/**/*.mdx",
+    "../stories/getting-started/**/*.mdx",
+    "../stories/components/*.@(mdx|stories.@(js|jsx|ts|tsx))"
   ],
   addons: [
     "@storybook/addon-essentials",
