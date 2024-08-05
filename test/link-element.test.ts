@@ -12,7 +12,6 @@ describe("link-element", () => {
         <a
           aria-disabled="false"
           class="nav-link"
-          href=""
           target="_self"
         >
           <slot>
