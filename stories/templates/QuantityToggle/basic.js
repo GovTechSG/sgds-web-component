@@ -7,7 +7,7 @@ export const Template = args =>
       value=${ifDefined(args.value)}
       step=${ifDefined(args.step)}
       quantityToggleClasses=${ifDefined(args.quantityToggleClasses)}
-      ?disabled=${args.disabled}
+      disabled=${ifDefined(args.disabled)}
       size=${ifDefined(args.size)}
       name=${ifDefined(args.name)}
       min=${ifDefined(args.min)}

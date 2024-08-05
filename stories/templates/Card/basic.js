@@ -1,11 +1,12 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args =>
   html` <sgds-card
-    bgColor=${args.bgColor}
-    borderColor=${args.borderColor}
-    textColor=${args.textColor}
-    ?stretchedLink=${args.stretchedLink}
+    bgColor=${ifDefined(args.bgColor)}
+    borderColor=${ifDefined(args.borderColor)}
+    textColor=${ifDefined(args.textColor)}
+    stretchedLink=${ifDefined(args.stretchedLink)}
   >
     <img
       slot="card-image"

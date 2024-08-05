@@ -105,8 +105,6 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
 
   @state() private focusedTabIndex = 3;
 
-  @state() dialogAriaLabel: string;
-
   private initialDisplayDate: Date;
 
   @queryAsync("sgds-datepicker-calendar")

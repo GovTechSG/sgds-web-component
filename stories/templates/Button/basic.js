@@ -1,22 +1,23 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args =>
   html`
     <sgds-button
-      variant=${args.variant}
-      buttonClasses=${args.buttonClasses}
-      size=${args.size}
-      ?active=${args.active}
-      ?disabled=${args.disabled}
-      href=${args.href}
-      target=${args.target}
-      download=${args.download}
-      type=${args.type}
-      form=${args.form}
-      formAction=${args.formAction}
-      formMethod=${args.formMethod}
-      ?formNoValidate=${args.formNoValidate}
-      formTarget=${args.formTarget}
+      variant=${ifDefined(args.variant)} 
+      outlined=${ifDefined(args.outlined)} 
+      size=${ifDefined(args.size)}
+      active=${ifDefined(args.active)}
+      disabled=${ifDefined(args.disabled)}
+      href=${ifDefined(args.href)}
+      target=${ifDefined(args.target)}
+      download=${ifDefined(args.download)}
+      type=${ifDefined(args.type)}
+      form=${ifDefined(args.form)}
+      formAction=${ifDefined(args.formAction)}
+      formMethod=${ifDefined(args.formMethod)}
+      formNoValidate=${ifDefined(args.formNoValidate)}
+      formTarget=${ifDefined(args.formTarget)}
     >
       Button
     </sgds-button>

@@ -1,16 +1,18 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
+
 export const Template = args =>
   html`
     <sgds-action-card
-      ?active=${args.active}
-      bgColor=${args.bgColor}
-      borderColor=${args.borderColor}
-      textColor=${args.textColor}
-      ?disabled=${args.disabled}
-      type=${args.type}
-      ?checked=${args.checked}
-      name=${args.name}
-      .value=${args.value}
+      active=${ifDefined(args.active)}
+      bgColor=${ifDefined(args.bgColor)}
+      borderColor=${ifDefined(args.borderColor)}
+      textColor=${ifDefined(args.textColor)}
+      disabled=${ifDefined(args.disabled)}
+      type=${ifDefined(args.type)}
+      checked=${ifDefined(args.checked)}
+      name=${ifDefined(args.name)}
+      value=${ifDefined(args.value)}
     >
       <svg
         slot="icon"

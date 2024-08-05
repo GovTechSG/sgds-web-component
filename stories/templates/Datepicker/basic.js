@@ -1,4 +1,5 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = ({
   noFlip,
@@ -19,20 +20,20 @@ export const Template = ({
   html`
     <div style="height:400px;">
       <sgds-datepicker
-        ?noFlip=${noFlip}
-        .initialValue=${initialValue}
-        ?required=${required}
-        minDate=${minDate}
-        maxDate=${maxDate}
-        dateFormat=${dateFormat}
-        ?disabled=${disabled}
-        ?menuAlignRight=${menuAlighRight}
-        mode=${mode}
-        invalidFeedback=${invalidFeedback}
-        label=${label}
-        hintText=${hintText}
-        drop=${drop}
-        displayDate=${displayDate}
+        noFlip=${ifDefined(noFlip)}
+        initialValue=${ifDefined(initialValue)}
+        required=${ifDefined(required)}
+        minDate=${ifDefined(minDate)}
+        maxDate=${ifDefined(maxDate)}
+        dateFormat=${ifDefined(dateFormat)}
+        disabled=${ifDefined(disabled)}
+        menuAlignRight=${ifDefined(menuAlighRight)}
+        mode=${ifDefined(mode)}
+        invalidFeedback=${ifDefined(invalidFeedback)}
+        label=${ifDefined(label)}
+        hintText=${ifDefined(hintText)}
+        drop=${ifDefined(drop)}
+        displayDate=${ifDefined(displayDate)}
       >
       </sgds-datepicker>
     </div>

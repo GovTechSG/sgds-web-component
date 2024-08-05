@@ -20,6 +20,7 @@ export class SgdsCheckbox extends FormCheckElement {
 
   constructor() {
     super();
+    /** @internal */
     this._inputId = genId("checkbox");
   }
 }

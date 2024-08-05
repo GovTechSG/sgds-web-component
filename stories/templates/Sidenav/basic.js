@@ -1,10 +1,24 @@
 import { html } from "lit-html";
-export const Template = ({ alwaysOpen, active, href, activeSNL, hrefSNL, disabledSNL, disabledSNI, sticky }) => {
+export const Template = ({
+  alwaysOpen,
+  active,
+  href,
+  activeSNL,
+  hrefSNL,
+  disabledSNL,
+  disabledSNI,
+  sticky,
+  target
+}) => {
   return html`
-    <sgds-sidenav ?alwaysOpen=${alwaysOpen} ?sticky=${sticky}>
-      <sgds-sidenav-item ?active=${active} href=${href} ?disabled=${disabledSNI}>
+    <sgds-sidenav alwaysOpen=${ifDefined(alwaysOpen)} sticky=${ifDefined(sticky)}>
+      <sgds-sidenav-item active=${ifDefined(active)} href=${ifDefined(href)} disabled=${ifDefined(disabledSNI)}>
         <span slot="title">SideNav Item #1 (control by Argstable) </span>
-        <sgds-sidenav-link href=${hrefSNL} ?active=${activeSNL} ?disabled=${disabledSNL}
+        <sgds-sidenav-link
+          href=${ifDefined(hrefSNL)}
+          active=${ifDefined(activeSNL)}
+          disabled=${ifDefined(disabledSNL)}
+          target=${ifDefined(target)}
           >sgds-sidenav-link (control by Argstable)</sgds-sidenav-link
         >
         <sgds-sidenav-link href="#" disabled>sgds-sidenav-link</sgds-sidenav-link>

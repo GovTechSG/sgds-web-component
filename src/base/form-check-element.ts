@@ -18,13 +18,13 @@ export class FormCheckElement extends SgdsElement implements SgdsFormControl {
   });
 
   /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
-  @property({ reflect: true }) name: string;
+  @property({ type: String, reflect: true }) name: string;
 
   /** For aria-label when there is no appropriate text label visible */
   @property({ type: String, reflect: true }) ariaLabel = "checkbox";
 
   /** Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name. */
-  @property() value: string;
+  @property({ type: String, reflect: true }) value: string;
 
   /** Makes the checkbox a required field. */
   @property({ type: Boolean, reflect: true }) required = false;

@@ -1,14 +1,16 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args => html`
   <sgds-file-upload
-    .size=${args.size}
-    .variant=${args.variant}
-    .disabled=${args.disabled}
-    .checkedIcon=${args.checkedIcon}
-    .cancelIcon=${args.cancelIcon}
-    .accept=${args.accept}
-    ?multiple=${args.multiple}
+    size=${ifDefined(args.size)}
+    variant=${ifDefined(args.variant)}
+    disabled=${ifDefined(args.disabled)}
+    checkedIcon=${ifDefined(args.checkedIcon)}
+    cancelIcon=${ifDefined(args.cancelIcon)}
+    accept=${ifDefined(args.accept)}
+    multiple=${ifDefined(args.multiple)}
+    hintText=${ifDefined(args.hintText)}
     ><svg
       xmlns="http://www.w3.org/2000/svg"
       width="16"
@@ -23,8 +25,7 @@ export const Template = args => html`
       <path
         d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"
       /></svg
-    >Choose a File</sgds-file-upload
-  >
+    >Choose a File</sgds-file-upload>
 `;
 
 export const args = { variant: "primary" };

@@ -1,16 +1,17 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args => {
   return html`
     <sgds-button @click=${showModal}>Open Modal</sgds-button>
     <sgds-modal
-      ?open=${args.open}
-      title=${args.title}
-      titleIcon=${args.titleIcon}
-      ?noHeader=${args.noHeader}
-      ?centered=${args.centered}
-      ?centeredAlignVariant=${args.centeredAlignVariant}
-      ?noAnimation=${args.noAnimation}
+      open=${ifDefined(args.open)}
+      title=${ifDefined(args.title)}
+      titleIcon=${ifDefined(args.titleIcon)}
+      noHeader=${ifDefined(args.noHeader)}
+      centered=${ifDefined(args.centered)}
+      centeredAlignVariant=${ifDefined(args.centeredAlignVariant)}
+      noAnimation=${ifDefined(args.noAnimation)}
     >
       This is a Modal
       <sgds-button @click=${closeModal} slot="footer" variant="link" class="close-modal">Close</sgds-button>

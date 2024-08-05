@@ -1,4 +1,5 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = ({
   label,
@@ -13,24 +14,26 @@ export const Template = ({
   menuList,
   popperOpts,
   menuIsOpen,
-  close
+  close,
+  filterFunction
 }) => {
   return html`
     <div style="height:100px;">
       <sgds-combo-box
-        label=${label}
-        hintText=${hintText}
-        name=${name}
-        placeholder=${placeholder}
-        ?autofocus=${autofocus}
-        ?disabled=${disabled}
-        ?required=${required}
-        ?readonly=${readonly}
-        value=${value}
-        .menuList=${menuList}
-        .popperOpts=${popperOpts}
-        ?menuIsOpen=${menuIsOpen}
-        close=${close}
+        label=${ifDefined(label)}
+        hintText=${ifDefined(hintText)}
+        name=${ifDefined(name)}
+        placeholder=${ifDefined(placeholder)}
+        autofocus=${ifDefined(autofocus)}
+        disabled=${ifDefined(disabled)}
+        required=${ifDefined(required)}
+        readonly=${ifDefined(readonly)}
+        value=${ifDefined(value)}
+        menuList=${ifDefined(menuList)}
+        popperOpts=${ifDefined(popperOpts)}
+        menuIsOpen=${ifDefined(menuIsOpen)}
+        close=${ifDefined(close)}
+        filterFunction=${ifDefined(filterFunction)}
       >
       </sgds-combo-box>
     </div>

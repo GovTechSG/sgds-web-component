@@ -89,35 +89,35 @@ export class SgdsButton extends SgdsElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The behavior of the button with default as `type='button', `reset` resets all the controls to their initial values and `submit` submits the form data to the server */
-  @property() type: "button" | "submit" | "reset" = "button";
+  @property({ type: String, reflect: true }) type: "button" | "submit" | "reset" = "button";
 
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
-  @property() href: string;
+  @property({ type: String, reflect: true }) href: string;
 
   /** Tells the browser where to open the link. Only used when `href` is set. */
-  @property() target: "_blank" | "_parent" | "_self" | "_top";
+  @property({ type: String, reflect: true }) target: "_blank" | "_parent" | "_self" | "_top";
 
   /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
-  @property({ reflect: true }) download: string;
+  @property({ type: String, reflect: true }) download: string;
 
   /**
    * The "form owner" to associate the button with. If omitted, the closest containing form will be used instead. The
    * value of this attribute must be an id of a form in the same document or shadow root as the button.
    */
-  @property() form: string;
+  @property({ type: String, reflect: true }) form: string;
 
   /** Used to override the form owner's `action` attribute. */
-  @property({ attribute: "formaction" }) formAction: string;
+  @property({ type: String, reflect: true, attribute: "formaction" }) formAction: string;
 
   /** Used to override the form owner's `method` attribute.  */
-  @property({ attribute: "formmethod" }) formMethod: "post" | "get";
+  @property({ type: String, reflect: true, attribute: "formmethod" }) formMethod: "post" | "get";
 
   /** Used to override the form owner's `novalidate` attribute. */
-  @property({ attribute: "formnovalidate", type: Boolean })
+  @property({ attribute: "formnovalidate", type: Boolean, reflect: true })
   formNoValidate: boolean;
 
   /** Used to override the form owner's `target` attribute. */
-  @property({ attribute: "formtarget" }) formTarget: "_self" | "_blank" | "_parent" | "_top" | string;
+  @property({ type: String, reflect: true, attribute: "formtarget" }) formTarget: "_self" | "_blank" | "_parent" | "_top" | string;
 
   /** Sets focus on the button. */
   public focus(options?: FocusOptions) {

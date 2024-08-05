@@ -1,4 +1,5 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = ({
   noFlip,
@@ -16,17 +17,17 @@ export const Template = ({
 }) => {
   return html`
     <sgds-dropdown
-      togglerText=${togglerText}
-      ?noFlip=${noFlip}
-      drop=${drop}
-      ?menuAlignRight=${menuAlignRight}
-      .popperOpts=${popperOpts}
-      variant=${variant}
-      close=${close}
-      ?menuIsOpen=${menuIsOpen}
-      ?disabled=${disabled}
+      togglerText=${ifDefined(togglerText)}
+      noFlip=${ifDefined(noFlip)}
+      drop=${ifDefined(drop)}
+      menuAlignRight=${ifDefined(menuAlignRight)}
+      popperOpts=${ifDefined(popperOpts)}
+      variant=${ifDefined(variant)}
+      close=${ifDefined(close)}
+      menuIsOpen=${ifDefined(menuIsOpen)}
+      disabled=${ifDefined(disabled)}
     >
-      <sgds-dropdown-item href=${href} ?active=${active} target=${target}
+      <sgds-dropdown-item href=${ifDefined(href)} disabled=${ifDefined(disabled)} active=${ifDefined(active)} target=${ifDefined(target)}
         >item #1 (argsTable controlled)</sgds-dropdown-item
       >
       <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
