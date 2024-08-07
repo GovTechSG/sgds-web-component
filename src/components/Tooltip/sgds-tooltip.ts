@@ -53,19 +53,30 @@ export class SgdsTooltip extends SgdsElement {
     // For a11y purpose
     this.tooltipTargetElements.forEach(el => el.setAttribute("data-sgds-tooltip", this.content));
   }
-  private initializeTooltip() {
-    // refer to Bootstrap's Tooltip options
-    // Feature: Add close button when prop trigger === 'click'
-    //useless to modify the "template" as BsTooltip "title" option will override anything that is within .tooltip-inner
-    //HTML method insertAdjacentText() is use to add the text content before close button but it requires a parent
-    // Only way is to modify BsTooltip's title with "sanitize: false" to add the close button
-    // When trigger is a "click", tooltipContainer will be created and modify BsTooltip's "title", adding a close button
 
-    // New update: Remove close button and when trigger is a "click", clicking/tapping on the body will hide the tooltip
-    if (this.trigger === "click") {
-      document.querySelector("body").addEventListener("click", () => this.hide());
-      document.querySelector("body").addEventListener("touchstart", () => this.hide());
+  private _handleClickOutOfElement(e: MouseEvent | TouchEvent, self: SgdsTooltip) {
+    if (!e.composedPath().includes(self)) {
+      this.hide();
     }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
+    if (this.trigger === "click") {
+      document.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
+      document.addEventListener("touchstart", (event: TouchEvent) => this._handleClickOutOfElement(event, this));
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+
+    document.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
+    document.removeEventListener("touchstart", (event: TouchEvent) => this._handleClickOutOfElement(event, this));
+  }
+
+  private initializeTooltip() {
     this.tooltipConfig = {
       popperConfig: (defaultConfig?: Partial<PopperOptions>) => {
         this.popperConfig = defaultConfig;
@@ -83,11 +94,11 @@ export class SgdsTooltip extends SgdsElement {
       trigger: this.trigger,
       title: this.content,
       html: true,
-      // sanitize: false, // to allow button element,
       container: this.shadowRoot.querySelector("div") // tooltip to appear inside the shadow root of sgds-tooltip instead of anywhere in the DOM, so that scoped styles can apply
     } as Partial<BsTooltip.Options>;
     this.bsTooltip = new Tooltip(this.myTooltip.value, this.tooltipConfig);
   }
+
   firstUpdated() {
     this.initializeTooltip();
     this.myTooltip.value.addEventListener("show.bs.tooltip", () => {
