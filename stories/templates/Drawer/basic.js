@@ -5,12 +5,12 @@ export const Template = args => {
   return html`
     <sgds-button @click=${showDrawer}>Open ${args.placement} Drawer</sgds-button>
     <sgds-drawer
-      open=${ifDefined(args.open)}
+      ?open=${args.open}
       label=${ifDefined(args.label)}
       placement=${ifDefined(args.placement)}
-      noHeader=${ifDefined(args.noHeader)}
+      ?noHeader=${args.noHeader}
       noAnimation=${ifDefined(args.noAnimation)}
-      contained=${ifDefined(args.contained)}
+      ?contained=${args.contained}
     >
       This is a Drawer
       <sgds-button @click=${closeDrawer} slot="footer" variant="link" class="close-drawer">Close</sgds-button>

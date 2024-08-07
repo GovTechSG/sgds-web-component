@@ -18,16 +18,20 @@ export const Template = ({
   return html`
     <sgds-dropdown
       togglerText=${ifDefined(togglerText)}
-      noFlip=${ifDefined(noFlip)}
+      ?noFlip=${noFlip}
       drop=${ifDefined(drop)}
-      menuAlignRight=${ifDefined(menuAlignRight)}
+      ?menuAlignRight=${menuAlignRight}
       popperOpts=${ifDefined(popperOpts)}
       variant=${ifDefined(variant)}
       close=${ifDefined(close)}
-      menuIsOpen=${ifDefined(menuIsOpen)}
-      disabled=${ifDefined(disabled)}
+      ?menuIsOpen=${menuIsOpen}
+      ?disabled=${disabled}
     >
-      <sgds-dropdown-item href=${ifDefined(href)} disabled=${ifDefined(disabled)} active=${ifDefined(active)} target=${ifDefined(target)}
+      <sgds-dropdown-item
+        href=${ifDefined(href)}
+        ?disabled=${disabled}
+        ?active=${active}
+        target=${ifDefined(target)}
         >item #1 (argsTable controlled)</sgds-dropdown-item
       >
       <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>

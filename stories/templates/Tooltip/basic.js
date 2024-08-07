@@ -1,9 +1,10 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = ({ content, trigger, placement }) => {
   return html`
     Hover over the icon
-    <sgds-tooltip content=${content} trigger=${trigger} placement=${placement}>
+    <sgds-tooltip content=${ifDefined(content)} trigger=${ifDefined(trigger)} placement=${ifDefined(placement)}>
       <svg
         tabindex="0"
         xmlns="http://www.w3.org/2000/svg"

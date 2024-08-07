@@ -1,4 +1,5 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args => {
   return html`
@@ -7,15 +8,15 @@ export const Template = args => {
       ?bordered=${args.bordered}
       ?borderless=${args.borderless}
       ?hover=${args.hover}
-      size=${args.size}
-      variant=${args.variant}
-      responsive=${args.responsive}
-      tableHeaders='["#", "First Names", "Last Name", "Username"]'
-      tableData='[
+      size=${ifDefined(args.size)}
+      variant=${ifDefined(args.variant)}
+      responsive=${ifDefined(args.responsive)}
+      .tableHeaders=${["#", "First Names", "Last Name", "Username"]}
+      .tableData=${[
         ["1", "John", "Doe", "@johndoe"],
         ["2", "Jane", "Doe", "@janedoe"],
         ["3", "Bob", "Smith", "@bobsmith"]
-      ]'
+      ]}
       ?sort=${args.sort}
       ?removableSort=${args.removableSort}
     >

@@ -1,4 +1,6 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
+
 export const Template = ({
   alwaysOpen,
   active,
@@ -11,13 +13,13 @@ export const Template = ({
   target
 }) => {
   return html`
-    <sgds-sidenav alwaysOpen=${ifDefined(alwaysOpen)} sticky=${ifDefined(sticky)}>
-      <sgds-sidenav-item active=${ifDefined(active)} href=${ifDefined(href)} disabled=${ifDefined(disabledSNI)}>
+    <sgds-sidenav ?alwaysOpen=${alwaysOpen} ?sticky=${sticky}>
+      <sgds-sidenav-item ?active=${active} href=${ifDefined(href)} ?disabled=${disabledSNI}>
         <span slot="title">SideNav Item #1 (control by Argstable) </span>
         <sgds-sidenav-link
           href=${ifDefined(hrefSNL)}
-          active=${ifDefined(activeSNL)}
-          disabled=${ifDefined(disabledSNL)}
+          ?active=${activeSNL}
+          ?disabled=${disabledSNL}
           target=${ifDefined(target)}
           >sgds-sidenav-link (control by Argstable)</sgds-sidenav-link
         >

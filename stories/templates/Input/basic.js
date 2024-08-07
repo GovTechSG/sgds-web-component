@@ -12,19 +12,19 @@ export const Template = args =>
       pattern=${ifDefined(args.pattern)}
       invalidFeedback=${ifDefined(args.invalidFeedback)}
       icon=${ifDefined(args.icon)}
-      disabled=${ifDefined(args.disabled)}
+      ?disabled=${args.disabled}
       placeholder=${ifDefined(args.placeholder)}
-      autofocus=${ifDefined(args.autofocus)}
-      required=${ifDefined(args.required)}
-      readonly=${ifDefined(args.readonly)}
+      ?autofocus=${args.autofocus}
+      ?required=${args.required}
+      ?readonly=${args.readonly}
       minlength=${ifDefined(args.minlength)}
       maxlength=${ifDefined(args.maxlength)}
-      hasFeedback=${ifDefined(args.hasFeedback)}
+      ?hasFeedback=${args.hasFeedback}
       min=${ifDefined(args.min)}
       max=${ifDefined(args.max)}
       step=${ifDefined(args.step)}
-      valid=${ifDefined(args.valid)}
-      invalid=${ifDefined(args.invalid)}
+      ?valid=${args.valid}
+      ?invalid=${args.invalid}
     >
     </sgds-input>
   `;

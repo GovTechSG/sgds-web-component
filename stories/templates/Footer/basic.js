@@ -11,7 +11,7 @@ export const Template = args => {
       feedbackHref=${ifDefined(args.feedbackHref)}
       privacyHref=${ifDefined(args.privacyHref)}
       termsOfUseHref=${ifDefined(args.termsOfUseHref)}
-      links=${ifDefined(args.links)}
+      .links=${args.links}
       copyrightLiner=${ifDefined(args.copyrightLiner)}
     >
     </sgds-footer>

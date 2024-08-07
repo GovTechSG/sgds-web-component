@@ -117,7 +117,12 @@ export class SgdsButton extends SgdsElement {
   formNoValidate: boolean;
 
   /** Used to override the form owner's `target` attribute. */
-  @property({ type: String, reflect: true, attribute: "formtarget" }) formTarget: "_self" | "_blank" | "_parent" | "_top" | string;
+  @property({ type: String, reflect: true, attribute: "formtarget" }) formTarget:
+    | "_self"
+    | "_blank"
+    | "_parent"
+    | "_top"
+    | string;
 
   /** Sets focus on the button. */
   public focus(options?: FocusOptions) {

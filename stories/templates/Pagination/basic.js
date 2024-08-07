@@ -21,10 +21,10 @@ export const Template = ({
       limit=${ifDefined(limit)}
       directionVariant=${ifDefined(directionVariant)}
       size=${ifDefined(size)}
-      ellipsisOn=${ifDefined(ellipsisOn)}
+      ?ellipsisOn=${ellipsisOn}
       ellipsisJump=${ifDefined(ellipsisJump)}
-      showFirstPage=${ifDefined(showFirstPage)}
-      showLastPage=${ifDefined(showLastPage)}
+      ?showFirstPage=${showFirstPage}
+      ?showLastPage=${showLastPage}
     ></sgds-pagination>
   `;
 };

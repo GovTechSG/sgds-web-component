@@ -5,15 +5,15 @@ export const Template = args => {
   return html`
     <sgds-checkbox
       name=${ifDefined(args.name)}
-      disabled=${ifDefined(args.disabled)}
+      ?disabled=${args.disabled}
       value=${ifDefined(args.value)}
-      required=${ifDefined(args.required)}
-      checked=${ifDefined(args.checked)}
-      invalid=${ifDefined(args.invalid)}
+      ?required=${args.required}
+      ?checked=${args.checked}
+      ?invalid=${args.invalid}
       invalidFeedback=${ifDefined(args.invalidFeedback)}
-      hasFeedback=${ifDefined(args.hasFeedback)}
+      ?hasFeedback=${args.hasFeedback}
       ariaLabel=${ifDefined(args.ariaLabel)}
-      isInline=${ifDefined(args.isInline)}
+      ?isInline=${args.isInline}
       >Check me</sgds-checkbox
     >
   `;

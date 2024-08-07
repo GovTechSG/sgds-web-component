@@ -5,13 +5,13 @@ export const Template = args => {
   return html`
     <sgds-button @click=${showModal}>Open Modal</sgds-button>
     <sgds-modal
-      open=${ifDefined(args.open)}
+      ?open=${args.open}
       title=${ifDefined(args.title)}
       titleIcon=${ifDefined(args.titleIcon)}
-      noHeader=${ifDefined(args.noHeader)}
-      centered=${ifDefined(args.centered)}
-      centeredAlignVariant=${ifDefined(args.centeredAlignVariant)}
-      noAnimation=${ifDefined(args.noAnimation)}
+      ?noHeader=${args.noHeader}
+      ?centered=${args.centered}
+      ?centeredAlignVariant=${args.centeredAlignVariant}
+      ?noAnimation=${args.noAnimation}
     >
       This is a Modal
       <sgds-button @click=${closeModal} slot="footer" variant="link" class="close-modal">Close</sgds-button>

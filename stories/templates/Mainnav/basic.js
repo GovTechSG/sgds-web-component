@@ -5,8 +5,19 @@ export const Template = ({ expand, brandHref, active, href, disabled, menuIsOpen
   return html`
     <sgds-mainnav expand=${ifDefined(expand)} brandHref=${ifDefined(brandHref)}>
       <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
-      <sgds-mainnav-item active=${ifDefined(active)} href=${ifDefined(href)} disabled=${ifDefined(disabled)} target=${ifDefined(target)}>ArgsTable Controlled </sgds-mainnav-item>
-      <sgds-mainnav-dropdown active=${ifDefined(active)} togglerText=${ifDefined(togglerText)} menuIsOpen=${ifDefined(menuIsOpen)} close=${ifDefined(close)}>
+      <sgds-mainnav-item
+        ?active=${active}
+        href=${ifDefined(href)}
+        ?disabled=${disabled}
+        target=${ifDefined(target)}
+        >ArgsTable Controlled
+      </sgds-mainnav-item>
+      <sgds-mainnav-dropdown
+        ?active=${active}
+        togglerText=${ifDefined(togglerText)}
+        ?menuIsOpen=${menuIsOpen}
+        close=${ifDefined(close)}
+      >
         <sgds-dropdown-item href="https://google.com">Item 1</sgds-dropdown-item>
         <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
         <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>

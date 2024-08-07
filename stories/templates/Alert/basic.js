@@ -3,7 +3,10 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args =>
   html`
-    <sgds-alert dismissible=${ifDefined(args.dismissible)} variant=${ifDefined(args.variant)} show=${ifDefined(args.show)}
+    <sgds-alert
+      ?dismissible=${args.dismissible}
+      variant=${ifDefined(args.variant)}
+      ?show=${args.show}
       ><svg
         slot="icon"
         xmlns="http://www.w3.org/2000/svg"
@@ -39,8 +42,9 @@ export const Template = args =>
         <sgds-alert-heading headerTag=${ifDefined(args.headerTag)}>Hello, nice to meet you</sgds-alert-heading>
         <p>
           Aww yeah, you successfully read this important
-          <sgds-alert-link href=${ifDefined(args.href)} target=${ifDefined(args.target)}>alert message</sgds-alert-link>. This example text is
-          going to run a bit longer so that you can see how spacing within an alert works with this kind of content.
+          <sgds-alert-link href=${ifDefined(args.href)} target=${ifDefined(args.target)}>alert message</sgds-alert-link
+          >. This example text is going to run a bit longer so that you can see how spacing within an alert works with
+          this kind of content.
         </p>
         <hr />
         <p>Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>

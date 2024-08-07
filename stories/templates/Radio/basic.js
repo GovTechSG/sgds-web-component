@@ -18,25 +18,25 @@ export const Template = ({
     <sgds-radio-group
       name=${ifDefined(name)}
       value=${ifDefined(defaultValue)}
-      required=${ifDefined(required)}
+      ?required=${required}
       invalidFeedback=${ifDefined(invalidFeedback)}
-      invalid=${ifDefined(invalid)}
-      hasFeedback=${ifDefined(hasFeedback)}
+      ?invalid=${invalid}
+      ?hasFeedback=${hasFeedback}
     >
       <span slot="label">Select an option</span>
       <sgds-radio
         value=${ifDefined(radioValue)}
-        disabled=${ifDefined(disabled)}
+        ?disabled=${disabled}
         ariaLabel=${ifDefined(ariaLabel)}
-        isInline=${ifDefined(isInline)}
-        checked=${ifDefined(checked)}
+        ?isInline=${isInline}
+        ?checked=${checked}
         invalidFeedback=${ifDefined(invalidFeedback)}
-        invalid=${ifDefined(invalid)}
-        hasFeedback=${ifDefined(hasFeedback)}
+        ?invalid=${invalid}
+        ?hasFeedback=${hasFeedback}
         >Option 1</sgds-radio
       >
-      <sgds-radio value="2" isInline=${ifDefined(isInline)}>Option 2</sgds-radio>
-      <sgds-radio value="3" isInline=${ifDefined(isInline)}>Option 3</sgds-radio>
+      <sgds-radio value="2" ?isInline=${isInline}>Option 2</sgds-radio>
+      <sgds-radio value="3" ?isInline=${isInline}>Option 3</sgds-radio>
     </sgds-radio-group>
   `;
 };

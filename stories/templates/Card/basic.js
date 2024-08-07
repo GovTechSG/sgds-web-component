@@ -6,7 +6,7 @@ export const Template = args =>
     bgColor=${ifDefined(args.bgColor)}
     borderColor=${ifDefined(args.borderColor)}
     textColor=${ifDefined(args.textColor)}
-    stretchedLink=${ifDefined(args.stretchedLink)}
+    ?stretchedLink=${args.stretchedLink}
   >
     <img
       slot="card-image"

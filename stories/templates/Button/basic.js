@@ -4,11 +4,11 @@ import { ifDefined } from "lit/directives/if-defined.js";
 export const Template = args =>
   html`
     <sgds-button
-      variant=${ifDefined(args.variant)} 
-      outlined=${ifDefined(args.outlined)} 
+      variant=${ifDefined(args.variant)}
+      ?outlined=${args.outlined}
       size=${ifDefined(args.size)}
-      active=${ifDefined(args.active)}
-      disabled=${ifDefined(args.disabled)}
+      ?active=${args.active}
+      ?disabled=${args.disabled}
       href=${ifDefined(args.href)}
       target=${ifDefined(args.target)}
       download=${ifDefined(args.download)}
@@ -16,7 +16,7 @@ export const Template = args =>
       form=${ifDefined(args.form)}
       formAction=${ifDefined(args.formAction)}
       formMethod=${ifDefined(args.formMethod)}
-      formNoValidate=${ifDefined(args.formNoValidate)}
+      ?formNoValidate=${args.formNoValidate}
       formTarget=${ifDefined(args.formTarget)}
     >
       Button

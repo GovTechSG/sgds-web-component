@@ -20,13 +20,13 @@ export const Template = ({
   html`
     <div style="height:400px;">
       <sgds-datepicker
-        noFlip=${ifDefined(noFlip)}
-        initialValue=${ifDefined(initialValue)}
-        required=${ifDefined(required)}
+        ?noFlip=${noFlip}
+        .initialValue=${initialValue}
+        ?required=${required}
         minDate=${ifDefined(minDate)}
         maxDate=${ifDefined(maxDate)}
         dateFormat=${ifDefined(dateFormat)}
-        disabled=${ifDefined(disabled)}
+        ?disabled=${disabled}
         menuAlignRight=${ifDefined(menuAlighRight)}
         mode=${ifDefined(mode)}
         invalidFeedback=${ifDefined(invalidFeedback)}

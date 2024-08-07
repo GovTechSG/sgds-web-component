@@ -4,13 +4,13 @@ import { ifDefined } from "lit/directives/if-defined.js";
 export const Template = args =>
   html`
     <sgds-action-card
-      active=${ifDefined(args.active)}
+      ?active=${args.active}
       bgColor=${ifDefined(args.bgColor)}
       borderColor=${ifDefined(args.borderColor)}
       textColor=${ifDefined(args.textColor)}
-      disabled=${ifDefined(args.disabled)}
+      ?disabled=${args.disabled}
       type=${ifDefined(args.type)}
-      checked=${ifDefined(args.checked)}
+      ?checked=${args.checked}
       name=${ifDefined(args.name)}
       value=${ifDefined(args.value)}
     >
