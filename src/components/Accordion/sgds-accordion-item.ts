@@ -51,8 +51,7 @@ export class SgdsAccordionItem extends SgdsElement {
   @property({ type: Boolean, reflect: true }) open = false;
 
   firstUpdated() {
-    this.body.hidden = !this.open;
-    this.body.style.height = this.open ? "auto" : "0";
+    if (!this.open) this.body.classList.add("hidden");
   }
 
   private handleSummaryClick() {
@@ -98,12 +97,10 @@ export class SgdsAccordionItem extends SgdsElement {
       }
 
       await stopAnimations(this.body);
-      this.body.hidden = false;
+      this.body.classList.remove("hidden");
 
       const { keyframes, options } = getAnimation(this, "accordion.show");
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
-      this.body.style.height = "auto";
-
       this.emit("sgds-after-show");
     } else {
       // Hide
@@ -116,10 +113,14 @@ export class SgdsAccordionItem extends SgdsElement {
       await stopAnimations(this.body);
 
       const { keyframes, options } = getAnimation(this, "accordion.hide");
-      await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
-      this.body.hidden = true;
-      this.body.style.height = "auto";
+      const animationDuration = options.duration as number;
+      // Workaround to fix GSIB delay after animateTo.
+      //Setting a timeout of duration slightly less than animation's duraton to prevent case where animation runs faster than .hidden class is added
+      setTimeout(() => {
+        this.body.classList.add("hidden");
+      }, animationDuration - 20);
 
+      await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
       this.emit("sgds-after-hide");
     }
   }
@@ -181,7 +182,11 @@ export class SgdsAccordionItem extends SgdsElement {
             </svg>
           </slot>
         </button>
-        <div class="accordion-body">
+        <div
+          class=${classMap({
+            "accordion-body": true
+          })}
+        >
           <slot name="accordion-content" class="accordion-content" role="region" aria-labelledby="header"></slot>
         </div>
       </div>
@@ -194,7 +199,7 @@ setDefaultAnimation("accordion.show", {
     { height: "0", opacity: "0" },
     { height: "auto", opacity: "1" }
   ],
-  options: { duration: 200, easing: "ease-in-out" }
+  options: { duration: 350, easing: "ease-in-out" }
 });
 
 setDefaultAnimation("accordion.hide", {
@@ -202,7 +207,7 @@ setDefaultAnimation("accordion.hide", {
     { height: "auto", opacity: "1" },
     { height: "0", opacity: "0" }
   ],
-  options: { duration: 200, easing: "ease-in-out" }
+  options: { duration: 350, easing: "ease-in-out" }
 });
 
 export default SgdsAccordionItem;

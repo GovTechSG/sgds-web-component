@@ -473,6 +473,21 @@ describe("sgds-pagination", () => {
     expect(ellipsises?.length).to.equal(1);
     expect(ellipsises?.[0]).to.exist;
   });
+  it("showFirstPage set to true and limit set to page.length, no duplicate first page", async () => {
+    //8 pages, at page 8
+    const el = (await fixture(
+      html`
+        <sgds-pagination dataLength="40" limit="8" itemsPerPage="5" currentPage="8" showFirstPage></sgds-pagination>
+      `
+    )) as SgdsPagination;
+    const pageOne = el.shadowRoot?.querySelectorAll("li")[1];
+    const pageTwo = el.shadowRoot?.querySelectorAll("li")[2];
+    const pageThree = el.shadowRoot?.querySelectorAll("li")[3];
+
+    expect(pageOne?.textContent).to.contain("1");
+    expect(pageTwo?.textContent).to.contain("2");
+    expect(pageThree?.textContent).to.contain("3");
+  });
   it("showLastPage set to true, last page always appears and only last ellipsis shown", async () => {
     //8 pages, at page 1
     const el = (await fixture(

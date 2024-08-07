@@ -1,3 +1,42 @@
+## v1.4.0 (2024-08-01)
+
+### Feat
+
+- **modal**: add noCloseButton prop (#205)
+- **modal**: add noCloseButton prop
+
+### Fix
+
+- **accordion-item**: fallback value for active color of accordion
+
+## v1.3.1 (2024-07-04)
+
+### Fix
+
+- **accordion**: keyboard behaviour for allowMultiple
+
+### Refactor
+
+- **accordion-item**: convert background image caret to svg
+- **accordion-item**: transfer accordion hidden to dynamic class
+- **accordion**: remove style height and add hidden class in sequence with animation
+- **accordion-item**: apply hidden class via open prop
+- **accordion**: replace hidden attribute with display none class
+
+## v1.3.0 (2024-06-26)
+
+### Feat
+
+- **accordion**: allow accordion active color customisation through n… (#201)
+- **accordion**: allow accordion active color customisation through new cssprop
+
+### Fix
+
+- *****: fix git command instead of npm push (#198)
+- *****: fix git command instead of npm push
+
+## v1.2.3 (2024-05-31)
+
 ## v1.2.2 (2024-05-28)
 
 ### Fix
