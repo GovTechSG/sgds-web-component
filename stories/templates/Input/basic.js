@@ -1,25 +1,30 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args =>
   html`
     <sgds-input
-      type=${args.type}
-      label=${args.label}
-      hintText=${args.hintText}
-      name=${args.name}
-      inputClasses=${args.inputClasses}
-      .value=${args.value}
-      pattern=${args.pattern}
-      invalidFeedback=${args.invalidFeedback}
-      icon=${args.icon}
-      placeholder=${args.placeholder}
-      ?autofocus=${args.autofocus}
+      type=${ifDefined(args.type)}
+      label=${ifDefined(args.label)}
+      hintText=${ifDefined(args.hintText)}
+      name=${ifDefined(args.name)}
+      value=${ifDefined(args.value)}
+      pattern=${ifDefined(args.pattern)}
+      invalidFeedback=${ifDefined(args.invalidFeedback)}
+      icon=${ifDefined(args.icon)}
       ?disabled=${args.disabled}
+      placeholder=${ifDefined(args.placeholder)}
+      ?autofocus=${args.autofocus}
       ?required=${args.required}
       ?readonly=${args.readonly}
-      minlength=${args.minlength}
-      maxlength=${args.maxlength}
+      minlength=${ifDefined(args.minlength)}
+      maxlength=${ifDefined(args.maxlength)}
       ?hasFeedback=${args.hasFeedback}
+      min=${ifDefined(args.min)}
+      max=${ifDefined(args.max)}
+      step=${ifDefined(args.step)}
+      ?valid=${args.valid}
+      ?invalid=${args.invalid}
     >
     </sgds-input>
   `;

@@ -4,6 +4,7 @@ import "@webcomponents/scoped-custom-element-registry/scoped-custom-element-regi
 import { setCustomElementsManifest } from "@storybook/web-components";
 import "./global.css";
 import "../lib/themes/day.css";
+import "../lib/index.js";
 export const setCustomElementsManifestWithOptions = (
   customElements: any,
   options: { privateFields?: boolean }
@@ -28,7 +29,6 @@ export const setCustomElementsManifestWithOptions = (
 setCustomElementsManifestWithOptions(customElements, { privateFields: false });
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
   docs: {
     //@ts-ignore
     theme: themes.sgdsTheme
@@ -41,7 +41,15 @@ export const parameters = {
   },
   options: {
     storySort: {
-      order: ["Getting Started", ["Introduction", "Installation", "Imports"], "Frameworks", "Components"]
+      order: [
+        "Getting Started",
+        ["Introduction", "Installation", "Imports", "Usage", "Frameworks"],
+        "Troubleshooting",
+        "Components",
+        "Patterns",
+        "Templates"
+      ]
     }
   }
 };
+export const tags = ["autodocs"];

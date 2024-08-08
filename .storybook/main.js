@@ -1,12 +1,12 @@
 module.exports = {
   stories: [
-    "../stories/frameworks/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../stories/getting-started/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../stories/components/*.stories.@(js|jsx|ts|tsx|mdx)"
+    "../stories/frameworks/**/*.mdx",
+    "../stories/getting-started/**/*.mdx",
+    "../stories/components/*.@(mdx|stories.@(js|jsx|ts|tsx))"
   ],
-  addons: ["@storybook/addon-essentials", "@storybook/preset-scss"],
-  framework: "@storybook/web-components",
-  core: {
-    builder: "@storybook/builder-webpack5"
+  addons: ["@storybook/addon-essentials", "@storybook/addon-a11y"],
+  framework: "@storybook/web-components-vite",
+  docs: {
+    autodocs: "tag"
   }
 };

@@ -4,15 +4,18 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsAccordionItem from "./sgds-accordion-item";
 import accordionStyle from "./accordion.css";
+
+const VALID_KEYS = ["Enter", "ArrowUp", "ArrowLeft", "ArrowDown", "ArrowRight"];
+
 /**
  * @summary A dropdown mechanism that allow users to either show or hide related content. `SgdsAccordion` is a wrapper to manage the behaviour for multiple `SgdsAccordionItems`
  * @slot default - slot for accordion-item
  *
- * @cssprop --accordion-bg - The background colour of the accordion
- * @cssprop --accordion-active-color - The colour of accordion when it is active
- * @cssprop --accordion-active-bg - The active background colour of accordion when it is active
- * @cssprop --accordion-border-color - The colour of all borders in the accordion
- * @cssprop --accordion-border-width - The thickness of border line of the accordion
+ * @cssprop --sgds-accordion-bg - The background colour of the accordion
+ * @cssprop --sgds-accordion-active-color - The colour of accordion when it is active
+ * @cssprop --sgds-accordion-active-bg - The active background colour of accordion when it is active
+ * @cssprop --sgds-accordion-border-color - The colour of all borders in the accordion
+ * @cssprop --sgds-accordion-border-width - The thickness of border line of the accordion
  */
 
 export class SgdsAccordion extends SgdsElement {
@@ -51,15 +54,12 @@ export class SgdsAccordion extends SgdsElement {
     });
   }
 
-  async onToggle(event: Event): Promise<void> {
-    // Let the event pass through the DOM so that it can be
-    // prevented from the outside if a user so desires.
-    if (this.allowMultiple || event.defaultPrevented) {
+  private async _onToggle(event: Event) {
+    if (this.allowMultiple) {
       // No toggling when `allowMultiple` or the user prevents it.
       return;
     }
     const items = [...this.items] as SgdsAccordionItem[];
-
     if (items && !items.length) {
       // no toggling when there aren't items.
       return;
@@ -73,6 +73,11 @@ export class SgdsAccordion extends SgdsElement {
     });
   }
 
+  private async _onKeyboardToggle(event: KeyboardEvent) {
+    if (!VALID_KEYS.includes(event.key)) return;
+    return this._onToggle(event);
+  }
+
   render() {
     return html`
       <div
@@ -80,7 +85,7 @@ export class SgdsAccordion extends SgdsElement {
           "sgds accordion": true
         })}
       >
-        <slot @click=${this.onToggle}></slot>
+        <slot @click=${this._onToggle} @keydown=${this._onKeyboardToggle}></slot>
       </div>
     `;
   }

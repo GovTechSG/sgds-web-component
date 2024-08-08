@@ -30,7 +30,7 @@ export class DropdownElement extends SgdsElement {
   protected bsDropdown: BsDropdown = null;
 
   /** @internal Unique id generated for the dropdown menu */
-  protected dropdownMenuId: string = generateId("dropdown-menu", "ul");
+  protected dropdownMenuId: string = generateId("dropdown-menu", "div");
 
   /** @internal Controls auto-flipping of menu */
   @property({ type: Boolean, state: true })
@@ -145,12 +145,12 @@ export class DropdownElement extends SgdsElement {
   }
 
   /** When invoked, opens the dropdown menu */
-  showMenu() {
+  public showMenu() {
     this.bsDropdown.show();
   }
 
   /** When invoked, hides the dropdown menu */
-  hideMenu() {
+  public hideMenu() {
     this.bsDropdown.hide();
   }
 

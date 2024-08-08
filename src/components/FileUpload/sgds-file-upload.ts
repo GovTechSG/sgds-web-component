@@ -55,8 +55,6 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   /** The button's variant. */
   @property({ reflect: true }) variant: FileUploadButtonVariant = "primary";
 
-  // /** Sets a unique id to the file input, required. */
-  // @property({ type: String }) controlId = "";
   //** Disable the fileuploader button */
   @property({ type: Boolean, reflect: true })
   disabled = false;
@@ -91,7 +89,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   @property({ type: Array })
   private selectedFiles: File[] = [];
 
-  setFileList(files: FileList) {
+  private _setFileList(files: FileList) {
     this.files = files;
     this.emit("sgds-files-selected");
     //Possible to pass in the files
@@ -121,12 +119,11 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
       this.selectedFiles = Array.from(files);
     }
     // Trigger a re-render of the component to update the list of selected files
-    this.setFileList(files);
+    this._setFileList(files);
     this.requestUpdate();
   }
 
-  /** @internal */
-  removeFileHandler(index: number) {
+  private _removeFileHandler(index: number) {
     const inputElement = this.inputRef.value;
     const attachments = inputElement.files;
 
@@ -138,7 +135,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
     // Assign buffer to file input
     inputElement.files = fileBuffer.files;
     // Re-populate selected files to the lists
-    this.setFileList(fileBuffer.files);
+    this._setFileList(fileBuffer.files);
     this.selectedFiles = Array.from(fileBuffer.files);
 
     // Trigger a re-render of the component to update the list of selected files
@@ -199,7 +196,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
         <li key=${index} class="fileupload-list-item">
           <span>${getCheckedIcon(this.checkedIcon)}</span>
           <span class="filename">${file.name}</span>
-          <span @click=${() => this.removeFileHandler(index)}>${getCancelIcon(this.cancelIcon)}</span>
+          <span @click=${() => this._removeFileHandler(index)}>${getCancelIcon(this.cancelIcon)}</span>
         </li>
       `
     );

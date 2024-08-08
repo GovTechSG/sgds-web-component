@@ -39,12 +39,12 @@ describe("sgds-mainnav", () => {
          class="navbar-body navbar-collapse order-2"
          hidden=""
        >
-         <ul class="navbar-nav navbar-nav-scroll">
+         <div class="navbar-nav navbar-nav-scroll">
            <slot>
            </slot>
           <slot name="end">
           </slot>
-         </ul>
+         </div>
        </div>
     `,
       { ignoreAttributes: ["id", "aria-controls"] }
@@ -235,7 +235,7 @@ describe("sgds-mainnav-dropdown", () => {
     const el = await fixture(html`<sgds-mainnav-dropdown togglerText="test"></sgds-mainnav-dropdown>`);
     assert.shadowDom.equal(
       el,
-      ` <li class="nav-item dropdown sgds">
+      ` <div class="nav-item dropdown sgds">
       <a
         class="nav-link dropdown-toggle"
         aria-expanded="false"
@@ -257,10 +257,10 @@ describe("sgds-mainnav-dropdown", () => {
           />
         </svg>
       </a>
-      <ul class="dropdown-menu" role="menu" part="menu">
+      <div class="dropdown-menu" role="menu" part="menu">
         <slot></slot>
-      </ul>
-    </li>`,
+      </div>
+    </div>`,
       { ignoreAttributes: ["id"] }
     );
   });

@@ -24,13 +24,13 @@ exports.default = task("build-readme", () => {
     .pipe(dest("."));
 });
 
-exports.default = task("concat-storybook-mdx", done => {
-  const components = getFolders("./src/components");
-  components.forEach(c => {
-    if (fs.existsSync(`stories/templates/${c}/additional.mdx`)) {
-      return src([`stories/components/${c}.stories.mdx`, `stories/templates/${c}/additional.mdx`])
-        .pipe(concat(`${c}.stories.mdx`))
-        .pipe(dest("stories/components"));
-    } else return done();
-  });
-});
+// exports.default = task("concat-storybook-mdx", done => {
+//   const components = getFolders("./src/components");
+//   components.forEach(c => {
+//     if (fs.existsSync(`stories/templates/${c}/additional.mdx`)) {
+//       return src([`stories/components/${c}.stories.mdx`, `stories/templates/${c}/additional.mdx`])
+//         .pipe(concat(`${c}.stories.mdx`))
+//         .pipe(dest("stories/components"));
+//     } else return done();
+//   });
+// });

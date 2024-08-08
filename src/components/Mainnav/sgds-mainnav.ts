@@ -205,14 +205,14 @@ export class SgdsMainnav extends SgdsElement {
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class=${collapseClass} id=${this.collapseId}>
-          <ul class="navbar-nav navbar-nav-scroll">
+          <div class="navbar-nav navbar-nav-scroll">
             <slot></slot>
             <slot
               name="end"
               class=${classMap({ "slot-end": !this.breakpointReached })}
               @slotchange=${this._handleSlotChange}
             ></slot>
-          </ul>
+          </div>
         </div>
       </nav>
     `;

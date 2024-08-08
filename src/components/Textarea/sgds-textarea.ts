@@ -51,8 +51,6 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   @property({ type: String, reflect: true }) label = "label";
   /**The textarea's name attribute */
   @property({ type: String, reflect: true }) name: string;
-  /**Forwarded to the HTML native textarea element. Can be used to insert any bootstrap classes such as mt-2 */
-  @property({ type: String, reflect: true }) textareaClasses?: string;
   /**The textarea's value attribute. */
   @property({ type: String, reflect: true }) value = "";
   /**Sets the minimum length of the textarea */
@@ -77,11 +75,19 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** Controls how the textarea can be resized. */
-  @property() resize: "none" | "vertical" | "auto" = "vertical";
+  @property({ type: String, reflect: true }) resize: "none" | "vertical" | "auto" = "vertical";
   /** The native textarea's inputmode attribute. It hints at the type of data that might be entered by the user while editing the element or its contents. This allows a browser to display an appropriate virtual keyboard. */
-  @property() inputmode: "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
+  @property({ type: String, reflect: true }) inputmode:
+    | "none"
+    | "text"
+    | "decimal"
+    | "numeric"
+    | "tel"
+    | "search"
+    | "email"
+    | "url";
   /** The native textarea's autocorrect attribute. */
-  @property() autocorrect: string;
+  @property({ type: String, reflect: true }) autocorrect: string;
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = "";
@@ -204,8 +210,7 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
           "is-valid": this.hasFeedback && this.valid,
           "textarea-resize-none": this.resize === "none",
           "textarea-resize-vertical": this.resize === "vertical",
-          "textarea-resize-auto": this.resize === "auto",
-          [`${this.textareaClasses}`]: this.textareaClasses
+          "textarea-resize-auto": this.resize === "auto"
         })}
         id=${this.textareaId}
         name=${ifDefined(this.name)}

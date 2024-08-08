@@ -1,18 +1,19 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args => {
   return html`
     <sgds-checkbox
-      name=${args.name}
+      name=${ifDefined(args.name)}
       ?disabled=${args.disabled}
-      value=${args.value}
+      value=${ifDefined(args.value)}
       ?required=${args.required}
-      .checked=${args.checked}
-      .invalid=${args.invalid}
-      .valid=${args.valid}
-      invalidFeedback=${args.invalidFeedback}
+      ?checked=${args.checked}
+      ?invalid=${args.invalid}
+      invalidFeedback=${ifDefined(args.invalidFeedback)}
       ?hasFeedback=${args.hasFeedback}
-      ariaLabel=${args.ariaLabel}
+      ariaLabel=${ifDefined(args.ariaLabel)}
+      ?isInline=${args.isInline}
       >Check me</sgds-checkbox
     >
   `;

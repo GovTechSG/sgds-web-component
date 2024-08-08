@@ -32,7 +32,7 @@ export class SgdsMasthead extends SgdsElement {
 
   render() {
     return html`
-      <div id="sgds-masthead" class="sgds-masthead" aria-label="A Singapore Government Agency Website">
+      <div id="sgds-masthead" class="sgds-masthead" aria-label="A Singapore Government Agency Website" role="banner">
         <div class="${this.fluid ? "container-fluid" : "container"}">
           <div class="row">
             <div class="col">

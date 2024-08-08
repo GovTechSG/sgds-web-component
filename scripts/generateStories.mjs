@@ -5,7 +5,7 @@ import path from 'path';
 import prettier from 'prettier';
 import { makeArgTypes } from './makeArgTypes.mjs';
 import { methodsTable, writeParams } from './methodsTable.mjs';
-import { getAllComponents, getSgdsComponents } from './shared.mjs';
+import { getAllComponents, getSgdsComponents, pascalToKebab } from './shared.mjs';
 
 const storiesDir = path.join('stories/components');
 
@@ -32,36 +32,30 @@ for (const [key, value] of Object.entries(groupedComponents)) {
   const methodsMeta = methodsTable(value);
   const summary = value.filter(i => i.summary).map(i => i.summary).join('<br/>')
   const args = allMembers.filter(member => member.kind === 'field');
-  const componentFile = path.join(storiesDir, `${key}.stories.mdx`);
-  const ArgsTable = value.map(
+  const mdxFilePath = path.join(storiesDir, `${key}.mdx`);
+  const ArgsType = value.map(
     component =>
       `### ${component.tagName}
-<ArgsTable of="${component.tagName}"/>\n
+<ArgTypes of="${component.tagName}"/>\n
   `
   );
 
-  const source = prettier.format(
+  const mdxSource = prettier.format(
     `
-import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
-import {Template, args, parameters} from '../templates/${key}/basic.js';
-import '../../lib/index.js';
+import { Canvas, Meta, Story, ArgTypes } from "@storybook/blocks";
 import { html } from "lit-html";
+import * as ${key}Stories from './${key}.stories';
 
-<Meta
- title="Components/${key}"
- argTypes={${JSON.stringify(makeArgTypes(args))}}
- />
+<Meta of={${key}Stories}/>
 
 # ${key}  
 ${summary ? summary +"\n" : "\n"}
 <Canvas>
-  <Story name="Basic" args={args} parameters={parameters}>
-    {Template.bind({})}
-  </Story>
+  <Story of={${key}Stories.Basic} />
 </Canvas>
 
 ## API
-${ArgsTable.join('\n')}
+${ArgsType.join('\n')}
 
 
 ${methodsMeta.map(meta => {
@@ -89,10 +83,25 @@ ${methodsMeta.map(meta => {
     `,
     { parser: 'mdx' }
   );
-  fs.writeFileSync(componentFile, source, 'utf8');
+  const csfFilePath =  path.join(storiesDir, `${key}.stories.js`);
+  const componentTagName =`sgds-${pascalToKebab(key)}`
+  const storiesSource = 
+  `
+    import { Template, args, parameters } from "../templates/${key}/basic.js";
+
+    export default {
+      title: 'Component/${key}',
+      component: '${componentTagName}',
+      argTypes: ${JSON.stringify(makeArgTypes(args))}
+    }
+
+    export const Basic = {
+    render: Template.bind({}),
+    name: "Basic",
+    args: args,
+    parameters: parameters
+    }
+  `
+  fs.writeFileSync(csfFilePath, storiesSource, 'utf8')
+  fs.writeFileSync(mdxFilePath, mdxSource, 'utf8');
 }
-
-// // Generate the index file
-// fs.writeFileSync(path.join(storiesDir, 'index.ts'), index.join('\n'), 'utf8');
-
-// console.log(chalk.cyan(`\nComponents have been wrapped for React! 📦\n`));

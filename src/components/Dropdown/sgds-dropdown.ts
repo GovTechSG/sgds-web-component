@@ -91,7 +91,7 @@ export class SgdsDropdown extends ScopedElementsMixin(DropdownListElement) {
   drop: DropDirection = "down";
 
   /** Sets color of Dropdown button */
-  @property({ type: String })
+  @property({ type: String, reflect: true })
   variant: DropdownButtonVariant = "secondary";
 
   /**@internal */
@@ -134,9 +134,9 @@ export class SgdsDropdown extends ScopedElementsMixin(DropdownListElement) {
             />
           </svg>
         </sgds-button>
-        <ul class="dropdown-menu" role="menu" part="menu">
+        <div class="dropdown-menu" role="menu" part="menu">
           <slot id="default" @click=${this.handleSelectSlot}></slot>
-        </ul>
+        </div>
       </div>
     `;
   }

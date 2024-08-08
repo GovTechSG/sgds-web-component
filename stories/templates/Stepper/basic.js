@@ -1,7 +1,8 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = ({ steps, activeStep }) => {
-  return html` <sgds-stepper .steps=${steps} .activeStep=${activeStep}> </sgds-stepper> `;
+  return html` <sgds-stepper .steps=${steps} activeStep=${ifDefined(activeStep)}> </sgds-stepper> `;
 };
 
 export const args = {

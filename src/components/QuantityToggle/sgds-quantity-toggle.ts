@@ -35,9 +35,9 @@ export class SgdsQuantityToggle extends ScopedElementsMixin(SgdsElement) impleme
   /**@internal */
   @query("sgds-input") private input: HTMLInputElement;
   /**@internal */
-  @query("sgds-button[aria-label^='increase by']") private plusBtn: HTMLButtonElement;
+  @query("sgds-button[ariaLabel^='increase by']") private plusBtn: HTMLButtonElement;
   /**@internal */
-  @query("sgds-button[aria-label^='decrease by']") private minusBtn: HTMLButtonElement;
+  @query("sgds-button[ariaLabel^='decrease by']") private minusBtn: HTMLButtonElement;
 
   /**@internal */
   private readonly formSubmitController = new FormSubmitController(this);
@@ -138,7 +138,7 @@ export class SgdsQuantityToggle extends ScopedElementsMixin(SgdsElement) impleme
       >
         <sgds-button
           variant=${this.buttonVariant}
-          aria-label=${`decrease by ${this.step}`}
+          ariaLabel=${`decrease by ${this.step}`}
           part="button"
           @click=${this._onMinus}
           ?disabled=${this.disabled || (this.min !== undefined ? this.value <= this.min : this.value < 1)}
@@ -167,11 +167,10 @@ export class SgdsQuantityToggle extends ScopedElementsMixin(SgdsElement) impleme
           @keydown=${this._handleKeyDown}
           ?disabled=${this.disabled}
           id=${this.inputId}
-          aria-label="quantity"
         ></sgds-input>
         <sgds-button
           variant=${this.buttonVariant}
-          aria-label=${`increase by ${this.step}`}
+          ariaLabel=${`increase by ${this.step}`}
           part="button"
           @click=${this._onPlus}
           ?disabled=${this.disabled || (this.max !== undefined && this.max && this.value >= this.max)}

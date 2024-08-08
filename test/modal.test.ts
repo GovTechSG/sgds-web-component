@@ -1,11 +1,71 @@
 import "./sgds-web-component";
 import type { SgdsModal } from "../src/components";
-import { expect, fixture, waitUntil } from "@open-wc/testing";
+import { expect, fixture, waitUntil, assert } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
 import { html } from "lit";
 
 describe("<sgds-modal>", () => {
+  it("renders with default values", async () => {
+    const el = await fixture<SgdsModal>(html`<sgds-modal></sgds-moadl>`);
+    assert.shadowDom.equal(
+      el,
+      `
+   <div
+       class="modal"
+       hidden=""
+       part="base"
+     >
+        <div
+          class="modal-overlay"
+          part="overlay"
+        >
+        </div>
+        <div
+          aria-hidden="true"
+          aria-labelledby="title"
+          aria-modal="true"
+          class="modal-panel"
+          part="panel"
+          role="dialog"
+          tabindex="-1"
+        >
+          <div
+            class="modal-header"
+            part="header"
+          >
+            <h3
+              class="modal-title"
+              id="title"
+              part="title"
+              tabindex="-1"
+            >
+            </h3>
+            <sgds-close-button
+              arialabel="close modal"
+              class="modal-close"
+            >
+            </sgds-close-button>
+          </div>
+          <div
+            class="modal-body"
+            part="body"
+          >
+            <slot>
+            </slot>
+          </div>
+          <footer
+            class="modal-footer"
+            part="footer"
+          >
+            <slot name="footer">
+            </slot>
+          </footer>
+        </div>
+      </div>
+    `
+    );
+  });
   it("should be visible with the open attribute", async () => {
     const el = await fixture<SgdsModal>(html`
       <sgds-modal open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-modal>
@@ -133,5 +193,10 @@ describe("<sgds-modal>", () => {
   it("centered prop adds .centered to .modal", async () => {
     const el = await fixture<SgdsModal>(html` <sgds-modal centered></sgds-modal> `);
     expect(el.shadowRoot?.querySelector(".modal")).to.have.class("centered");
+  });
+
+  it("noCloseButton prop removes button from modal", async () => {
+    const el = await fixture<SgdsModal>(html`<sgds-modal noCloseButton></sgds-modal>`);
+    expect(el.shadowRoot.querySelector("button.btn-close")).to.be.null;
   });
 });

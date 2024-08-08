@@ -1,10 +1,10 @@
-import { Meta, Description } from "@storybook/addon-docs";
-import ScopedElements from "/docs/ScopedElements.md";
+import { Meta, Markdown } from "@storybook/blocks";
+import ScopedElements from "../../../docs/ScopedElements.md?raw";
 import { getCustomElements } from "@storybook/web-components";
 
 <Meta title="Getting Started/Usage/Scoped Elements" />
 
-<Description markdown={ScopedElements} />
+<Markdown>{ScopedElements}</Markdown>
 
 ## Components requiring polyfill
 
@@ -33,12 +33,13 @@ export const RequirePolyfillTable = () => {
       <th>Component</th>
     </tr>
   </thead>
+
   <tbody>
     {RequirePolyfillTable().map((c, i) => (
-      <tr key={c}>
-        <td>{i + 1}</td>
-        <td>{c}</td>
-      </tr>
-    ))}
+          <tr key={c}>
+            <td>{i + 1}</td>
+            <td>{c}</td>
+          </tr>
+        ))}
   </tbody>
 </table>

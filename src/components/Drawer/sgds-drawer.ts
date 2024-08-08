@@ -80,10 +80,10 @@ export class SgdsDrawer extends ScopedElementsMixin(SgdsElement) {
    * The drawer's label as displayed in the header. You should always include a relevant label even when using
    * `noHeader`, as it is required for proper accessibility. If you need to display HTML, use the `label` slot instead.
    */
-  @property({ reflect: true }) label = "";
+  @property({ type: String, reflect: true }) label = "";
 
   /** The direction from which the drawer will open. */
-  @property({ reflect: true }) placement: "top" | "end" | "bottom" | "start" = "end";
+  @property({ type: String, reflect: true }) placement: "top" | "end" | "bottom" | "start" = "end";
 
   /**
    * By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of

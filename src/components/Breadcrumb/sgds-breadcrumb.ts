@@ -70,12 +70,12 @@ export class SgdsBreadcrumb extends SgdsElement {
   render() {
     return html`
       <nav aria-label=${ifDefined(this.ariaLabel)} part="base">
-        <ol class="breadcrumb">
+        <div class="breadcrumb">
           <slot @slotchange=${this._handleSlotChange}></slot>
           <slot name="separator" hidden aria-hidden="true">
             <span>/</span>
           </slot>
-        </ol>
+        </div>
       </nav>
     `;
   }
