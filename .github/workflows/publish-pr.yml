@@ -19,6 +19,7 @@ jobs:
           node-version: 18
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
+      - run: npx playwright install
       - run: npm run test
       - run: npm run build
       - run: npm publish --tag alpha ./lib

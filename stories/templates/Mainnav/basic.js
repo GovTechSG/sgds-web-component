@@ -4,7 +4,12 @@ import { ifDefined } from "lit/directives/if-defined.js";
 export const Template = ({ expand, brandHref, active, href, disabled, menuIsOpen, togglerText, close, target }) => {
   return html`
     <sgds-mainnav expand=${ifDefined(expand)} brandHref=${ifDefined(brandHref)}>
-      <img alt="sgds logo" width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
+      <img
+        alt="sgds logo"
+        width="130"
+        src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
+        slot="brand"
+      />
       <sgds-mainnav-item ?active=${active} href=${ifDefined(href)} ?disabled=${disabled} target=${ifDefined(target)}
         >ArgsTable Controlled
       </sgds-mainnav-item>

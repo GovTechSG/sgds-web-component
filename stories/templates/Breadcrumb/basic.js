@@ -13,6 +13,8 @@ export const Template = args =>
       <sgds-breadcrumb-item>Last Item</sgds-breadcrumb-item>
     </sgds-breadcrumb>
   `;
-export const args = {};
+export const args = {
+  href: "https://www.designsystem.tech.gov.sg/"
+};
 
 export const parameters = {};

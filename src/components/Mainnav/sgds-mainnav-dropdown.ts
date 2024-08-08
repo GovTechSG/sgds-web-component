@@ -74,7 +74,7 @@ export class SgdsMainnavDropdown extends DropdownListElement {
         <div class="dropdown-menu" role="menu" part="menu">
           <slot id="default" @click=${this.handleSelectSlot}></slot>
         </div>
-        </div>
+      </div>
     `;
   }
 }

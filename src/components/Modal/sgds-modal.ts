@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -83,6 +83,8 @@ export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
   @property({ type: Boolean, reflect: true }) centeredAlignVariant = false;
   /** Removes the default animation when opening and closing of modal */
   @property({ type: Boolean, reflect: true }) noAnimation = false;
+  /** Removes the close button from modal header */
+  @property({ type: Boolean, reflect: true }) noCloseButton = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -266,14 +268,16 @@ export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
                   >
                     ${this.titleIcon ? withLabelIcon : ""} ${this.title}
                   </h3>
-                  <sgds-close-button
-                    class=${classMap({
-                      "modal-close": true,
-                      centered: this.centeredAlignVariant
-                    })}
-                    @click="${() => this.requestClose("close-button")}"
-                    aria-label="close modal"
-                  ></sgds-close-button>
+                  ${this.noCloseButton
+                    ? nothing
+                    : html`<sgds-close-button
+                        class=${classMap({
+                          "modal-close": true,
+                          centered: this.centeredAlignVariant
+                        })}
+                        @click="${() => this.requestClose("close-button")}"
+                        aria-label="close modal"
+                      ></sgds-close-button>`}
                 </div>
               `
             : ""}

@@ -201,7 +201,7 @@ export class SgdsMainnav extends SgdsElement {
           aria-controls="${this.collapseId}"
           aria-expanded="${this.expanded}"
           aria-label="Toggle navigation"
-        > 
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class=${collapseClass} id=${this.collapseId}>

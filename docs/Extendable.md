@@ -8,9 +8,7 @@ The CustomElementRegistry is a global registry that provides methods for registe
 
 Whenever a sgds component uses composition (meaning it uses another sgds component inside), we apply ScopedElementsMixin to make sure it uses the right version of this internal component.
 
-For users who are using sgds component directly for builing application, use the custom elements directly by [importing the custom elements](#using-the-custom-elements)
-
-For users who are building component libraries on top of sgds-web-component, please adopt OpenWC's scoped elements to prevent exporting our registered custom elements.
+For users who are building component libraries on top of sgds-web-component, please adopt OpenWC's scoped elements to prevent exporting our registered custom elements. 
 
 Things to note:
 
@@ -45,7 +43,7 @@ export class MyNavbar extends ScopedElementsMixin(LitElement) {
                     <sgds-dropdown-item>Logout</sgds-dropdown-item>
                 </sgds-mainnav-dropdown>
                 <sgds-mainnav-item href="#">Content</sgds-mainnav-item>
-                <sgds-mainnav-item href="#}">Biography</sgds-mainnav-item>
+                <sgds-mainnav-item href="#">Biography</sgds-mainnav-item>
             </sgds-mainnav>
           `
       }

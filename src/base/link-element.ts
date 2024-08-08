@@ -28,17 +28,17 @@ export default class LinkElement extends SgdsElement {
 
   render() {
     return html`
-        <a
-          href="${ifDefined(this.href)}"
-          class="nav-link ${classMap({
-            disabled: this.disabled,
-            active: this.active
-          })} "
-          ?disabled=${this.disabled}
-          aria-disabled=${this.disabled ? "true" : "false"}
-          target=${this.target}
-          ><slot></slot
-        ></a>
+      <a
+        href="${ifDefined(this.href)}"
+        class="nav-link ${classMap({
+          disabled: this.disabled,
+          active: this.active
+        })} "
+        ?disabled=${this.disabled}
+        aria-disabled=${this.disabled ? "true" : "false"}
+        target=${this.target}
+        ><slot></slot
+      ></a>
     `;
   }
 }
