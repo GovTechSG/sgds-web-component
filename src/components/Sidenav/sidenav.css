@@ -4,7 +4,7 @@
   --sgds-sidenav-item-gap: 1rem;
 }
 
-ul {
+div {
   display: flex;
   flex-direction: column;
   gap: var(--sgds-sidenav-item-gap);

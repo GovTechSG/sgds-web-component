@@ -182,7 +182,7 @@ export class SgdsAccordionItem extends SgdsElement {
           </slot>
         </button>
         <div class="accordion-body">
-          <slot name="accordion-content" class="accordion-content" role="region" aria-labelledby="header"></slot>
+          <slot id="content" name="accordion-content" class="accordion-content" role="region" aria-labelledby="header"></slot>
         </div>
       </div>
     `;

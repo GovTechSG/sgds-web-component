@@ -10,7 +10,6 @@ export const Template = args => html`
     ?checked=${args.checked}
     ?invalid=${args.invalid}
     invalidFeedback=${ifDefined(args.invalidFeedback)}
-    ?hasFeedback=${args.hasFeedback}
     ariaLabel=${ifDefined(args.ariaLabel)}
     ?isInline=${args.isInline}
     >Switch me

@@ -28,7 +28,6 @@ export default class LinkElement extends SgdsElement {
 
   render() {
     return html`
-      <li>
         <a
           href="${ifDefined(this.href)}"
           class="nav-link ${classMap({
@@ -40,7 +39,6 @@ export default class LinkElement extends SgdsElement {
           target=${this.target}
           ><slot></slot
         ></a>
-      </li>
     `;
   }
 }

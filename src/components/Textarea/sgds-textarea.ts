@@ -77,7 +77,15 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   /** Controls how the textarea can be resized. */
   @property({ type: String, reflect: true }) resize: "none" | "vertical" | "auto" = "vertical";
   /** The native textarea's inputmode attribute. It hints at the type of data that might be entered by the user while editing the element or its contents. This allows a browser to display an appropriate virtual keyboard. */
-  @property({ type: String, reflect: true }) inputmode: "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
+  @property({ type: String, reflect: true }) inputmode:
+    | "none"
+    | "text"
+    | "decimal"
+    | "numeric"
+    | "tel"
+    | "search"
+    | "email"
+    | "url";
   /** The native textarea's autocorrect attribute. */
   @property({ type: String, reflect: true }) autocorrect: string;
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
@@ -202,7 +210,7 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
           "is-valid": this.hasFeedback && this.valid,
           "textarea-resize-none": this.resize === "none",
           "textarea-resize-vertical": this.resize === "vertical",
-          "textarea-resize-auto": this.resize === "auto",
+          "textarea-resize-auto": this.resize === "auto"
         })}
         id=${this.textareaId}
         name=${ifDefined(this.name)}

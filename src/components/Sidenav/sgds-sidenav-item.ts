@@ -195,7 +195,7 @@ export class SgdsSidenavItem extends SgdsElement {
         })} "
         aria-expanded="${this.active}"
         aria-controls="${this.collapseId}"
-        aria-selected="${this.active}"
+        aria-current="${this.active}"
         id="${this.buttonId}"
         ?disabled=${this.disabled}
         aria-disabled=${this.disabled ? "true" : "false"}
@@ -219,9 +219,9 @@ export class SgdsSidenavItem extends SgdsElement {
         </slot>
       </button>
       <div class="sidenav-body" id="${this.collapseId}">
-        <ul class="sidenav-list" aria-labelledby="${this.buttonId}">
+        <div class="sidenav-list" aria-labelledby="${this.buttonId}">
           <slot></slot>
-        </ul>
+        </div>
       </div>`;
 
     const noMenuTemplate = html`
@@ -232,7 +232,7 @@ export class SgdsSidenavItem extends SgdsElement {
           disabled: this.disabled,
           active: this.active
         })} "
-        aria-selected="${this.active}"
+        aria-current="${this.active}"
         ?disabled=${this.disabled}
         aria-disabled=${this.disabled ? "true" : "false"}
       >
@@ -241,7 +241,7 @@ export class SgdsSidenavItem extends SgdsElement {
       </a>
     `;
     return html`
-      <li class="sidenav-item" aria-haspopup="${!this.href}">${this.href ? noMenuTemplate : withMenuTemplate}</li>
+      <div class="sidenav-item" aria-haspopup="${!this.href}">${this.href ? noMenuTemplate : withMenuTemplate}</div>
     `;
   }
 }

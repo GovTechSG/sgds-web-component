@@ -27,11 +27,7 @@ export const Template = ({
       ?menuIsOpen=${menuIsOpen}
       ?disabled=${disabled}
     >
-      <sgds-dropdown-item
-        href=${ifDefined(href)}
-        ?disabled=${disabled}
-        ?active=${active}
-        target=${ifDefined(target)}
+      <sgds-dropdown-item href=${ifDefined(href)} ?disabled=${disabled} ?active=${active} target=${ifDefined(target)}
         >item #1 (argsTable controlled)</sgds-dropdown-item
       >
       <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>

@@ -3,10 +3,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args =>
   html`
-    <sgds-alert
-      ?dismissible=${args.dismissible}
-      variant=${ifDefined(args.variant)}
-      ?show=${args.show}
+    <sgds-alert ?dismissible=${args.dismissible} variant=${ifDefined(args.variant)} ?show=${args.show}
       ><svg
         slot="icon"
         xmlns="http://www.w3.org/2000/svg"

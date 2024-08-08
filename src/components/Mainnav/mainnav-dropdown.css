@@ -15,7 +15,7 @@
     color: var(--sgds-mainnav-theme-color);
   }
 
-  li {
+  .sgds.dropdown.nav-item {
     height: 100%;
   }
   a.nav-link {

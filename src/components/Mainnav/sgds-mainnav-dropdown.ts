@@ -40,7 +40,7 @@ export class SgdsMainnavDropdown extends DropdownListElement {
 
   render() {
     return html`
-      <li class="sgds nav-item dropdown">
+      <div class="sgds nav-item dropdown">
         <a
           class="${classMap({
             "dropdown-toggle": true,
@@ -71,10 +71,10 @@ export class SgdsMainnavDropdown extends DropdownListElement {
             />
           </svg>
         </a>
-        <ul class="dropdown-menu" role="menu" part="menu">
+        <div class="dropdown-menu" role="menu" part="menu">
           <slot id="default" @click=${this.handleSelectSlot}></slot>
-        </ul>
-      </li>
+        </div>
+        </div>
     `;
   }
 }

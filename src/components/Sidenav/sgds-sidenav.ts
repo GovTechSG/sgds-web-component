@@ -64,9 +64,9 @@ export class SgdsSidenav extends SgdsElement {
   render() {
     return html`
       <nav class=${classMap({ sticky: this.sticky })}>
-        <ul>
+        <div>
           <slot @click=${this.onToggle}></slot>
-        </ul>
+        </div>
       </nav>
     `;
   }

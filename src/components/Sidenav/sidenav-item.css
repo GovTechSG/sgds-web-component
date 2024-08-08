@@ -52,7 +52,7 @@ a.sidenav-btn {
   line-height: var(--sgds-sidenav-item-btn-line-height);
 }
 
-ul.sidenav-list {
+div.sidenav-list {
   list-style: none;
   display: flex;
   flex-direction: column;

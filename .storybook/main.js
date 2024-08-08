@@ -1,4 +1,3 @@
-import remarkGfm from "remark-gfm";
 
 module.exports = {
   stories: [
@@ -8,18 +7,7 @@ module.exports = {
   ],
   addons: [
     "@storybook/addon-essentials",
-    "@storybook/addon-mdx-gfm",
-    "@chromatic-com/storybook",
-    {
-      name: "@storybook/addon-docs",
-      options: {
-        mdxPluginOptions: {
-          mdxCompileOptions: {
-            remarkPlugins: [remarkGfm]
-          }
-        }
-      }
-    }
+    "@storybook/addon-a11y"
   ],
   framework: "@storybook/web-components-vite",
   docs: {

@@ -45,4 +45,6 @@ export const Template = args =>
 
 export const args = {};
 
-export const parameters = {};
+export const parameters = {
+  controls: { exclude: ["slots"] }
+};

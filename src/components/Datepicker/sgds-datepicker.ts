@@ -420,13 +420,14 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
           name=${this.name}
         >
           <sgds-button
+            role="button"
             slot="calendar-btn"
             class="calendar-btn"
             aria-expanded="${this.menuIsOpen}"
             aria-haspopup="dialog"
             aria-controls=${this.dropdownMenuId}
             @click=${() => this.toggleMenu()}
-            aria-label=${this.menuIsOpen ? "Close Calendar" : "Open Calendar"}
+            ariaLabel=${this.menuIsOpen ? "Close Calendar" : "Open Calendar"}
             ?disabled=${this.disabled}
           >
             <svg
@@ -443,12 +444,13 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
             </svg>
           </sgds-button>
           <sgds-button
+            role="button"
             slot="reset-btn"
             variant="primary"
             ?disabled=${this.disabled}
             class="reset-btn"
             @click=${() => this._handleButtonResetClick()}
-            aria-label="Reset Datepicker"
+            ariaLabel="Reset Datepicker"
           >
             ${svgEl}
           </sgds-button>

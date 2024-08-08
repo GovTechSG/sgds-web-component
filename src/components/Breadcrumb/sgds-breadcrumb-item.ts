@@ -32,7 +32,7 @@ export class SgdsBreadcrumbItem extends SgdsElement {
   render() {
     const isLink = this.href ? true : false;
     return html`
-      <li
+      <div
         part="base"
         class=${classMap({
           "breadcrumb-item": true,
@@ -51,7 +51,7 @@ export class SgdsBreadcrumbItem extends SgdsElement {
             `
           : html`<span part="label"><slot></slot></span>`}
         <slot name="separator" class="breadcrumb-item__separator" aria-hidden="true"></slot>
-      </li>
+      </div>
     `;
   }
 }

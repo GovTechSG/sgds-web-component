@@ -124,6 +124,9 @@ export class SgdsButton extends SgdsElement {
     | "_top"
     | string;
 
+  /** The aria-label attribute to passed to button element when necessary */
+  @property({ type: String }) ariaLabel: string;
+
   /** Sets focus on the button. */
   public focus(options?: FocusOptions) {
     this.button.focus(options);
@@ -190,6 +193,7 @@ export class SgdsButton extends SgdsElement {
         @click=${this.handleClick}
         @focus=${this.handleFocus}
         @blur=${this.handleBlur}
+        aria-label=${ifDefined(this.ariaLabel)}
       >
       <slot name="leftIcon"></slot>
       <slot></slot>

@@ -4,6 +4,7 @@ import "@webcomponents/scoped-custom-element-registry/scoped-custom-element-regi
 import { setCustomElementsManifest } from "@storybook/web-components";
 import "./global.css";
 import "../lib/themes/day.css";
+import "../lib/index.js";
 export const setCustomElementsManifestWithOptions = (
   customElements: any,
   options: { privateFields?: boolean }
