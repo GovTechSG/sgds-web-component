@@ -276,7 +276,7 @@ export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
                           centered: this.centeredAlignVariant
                         })}
                         @click="${() => this.requestClose("close-button")}"
-                        aria-label="close modal"
+                        ariaLabel="close modal"
                       ></sgds-close-button>`}
                 </div>
               `

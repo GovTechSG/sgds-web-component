@@ -35,9 +35,9 @@ export class SgdsQuantityToggle extends ScopedElementsMixin(SgdsElement) impleme
   /**@internal */
   @query("sgds-input") private input: HTMLInputElement;
   /**@internal */
-  @query("sgds-button[aria-label^='increase by']") private plusBtn: HTMLButtonElement;
+  @query("sgds-button[ariaLabel^='increase by']") private plusBtn: HTMLButtonElement;
   /**@internal */
-  @query("sgds-button[aria-label^='decrease by']") private minusBtn: HTMLButtonElement;
+  @query("sgds-button[ariaLabel^='decrease by']") private minusBtn: HTMLButtonElement;
 
   /**@internal */
   private readonly formSubmitController = new FormSubmitController(this);

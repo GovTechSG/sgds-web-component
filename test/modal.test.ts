@@ -41,11 +41,11 @@ describe("<sgds-modal>", () => {
               tabindex="-1"
             >
             </h3>
-            <button
-              aria-label="close modal"
-              class="btn-close btn-sm modal-close"
+            <sgds-close-button
+              arialabel="close modal"
+              class="modal-close"
             >
-            </button>
+            </sgds-close-button>
           </div>
           <div
             class="modal-body"

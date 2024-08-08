@@ -134,9 +134,9 @@ export class SgdsDropdown extends ScopedElementsMixin(DropdownListElement) {
             />
           </svg>
         </sgds-button>
-        <ul class="dropdown-menu" role="menu" part="menu">
+        <div class="dropdown-menu" role="menu" part="menu">
           <slot id="default" @click=${this.handleSelectSlot}></slot>
-        </ul>
+        </div>
       </div>
     `;
   }

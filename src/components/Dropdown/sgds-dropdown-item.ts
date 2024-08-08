@@ -24,7 +24,7 @@ export class SgdsDropdownItem extends LinkElement {
 
   render() {
     return html`
-      <li>
+      <div>
         <a
           href="${this.href}"
           class="dropdown-item ${classMap({
@@ -38,7 +38,7 @@ export class SgdsDropdownItem extends LinkElement {
           target=${this.target}
           ><slot></slot
         ></a>
-      </li>
+      </div>
     `;
   }
 }
