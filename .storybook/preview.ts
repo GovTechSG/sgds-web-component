@@ -29,9 +29,15 @@ export const setCustomElementsManifestWithOptions = (
 setCustomElementsManifestWithOptions(customElements, { privateFields: false });
 
 export const parameters = {
+  viewMode: "docs", 
   docs: {
     //@ts-ignore
-    theme: themes.sgdsTheme
+    theme: themes.sgdsTheme,
+    toc: {
+      headingSelector: 'h1, h2, h3',
+      title: 'Table of Contents',
+      disable: false,
+    }
   },
   controls: {
     matchers: {

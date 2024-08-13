@@ -21,8 +21,12 @@ module.exports = {
       }
     }
   ],
-  framework: "@storybook/web-components-vite",
-  docs: {
-    autodocs: "tag"
+  framework: {
+    name: "@storybook/web-components-vite",
+    options: {
+      builder: {
+        viteConfigPath: "./.storybook/storybookVite.config.js"
+      }
+    }
   }
 };

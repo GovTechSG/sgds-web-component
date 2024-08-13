@@ -12,7 +12,7 @@ logger.warn = (msg, options) => {
 export default defineConfig({
   plugins: [
     replace({
-      // ".css": ".css?inline",
+      ".css": ".css?inline",
       preventAssignment: true
     }),
     postcssLit({ include: ["**/*.css", "**/*.css?*"] })

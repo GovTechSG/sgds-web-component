@@ -2,31 +2,16 @@
 
 When `mode="range"`, DatePicker allows a selection of two dates, start and end.
 
-export const RangeTemplate = () => html` <sgds-datepicker mode="range"></sgds-datepicker> `;
-
 <Canvas>
-  <Story name="Range Selection" height="500px">
-    {RangeTemplate.bind({})}
-  </Story>
+  <Story of={DatepickerStories.RangeSelection} />
 </Canvas>
 
 ## Calendar placement : `noFlip` and `drop`
 
 By default, the Popover component of DatePicker flips top and bottom depending on the space at the current placement. Turn it off, by setting `noFlip="true"`
 
-export const FlipTemplate = args =>
-  html`
-    <div style="height:1000px;" class="d-flex justify-content-center align-items-center">
-      <sgds-datepicker label="Flip disabled" mode="range" noFlip></sgds-datepicker>
-      <sgds-datepicker label="Flip enabled" mode="range"></sgds-datepicker>
-      <sgds-datepicker label="Flip disabled, Drop=up" mode="range" drop="up" noFlip></sgds-datepicker>
-    </div>
-  `;
-
 <Canvas>
-  <Story name="Flip" height="500px">
-    {FlipTemplate.bind({})}
-  </Story>
+  <Story of={DatepickerStories.Flip} />
 </Canvas>
 
 ## Setting the initialValue on first load
@@ -35,40 +20,16 @@ export const FlipTemplate = args =>
 
 For default `mode="single"`, use the `initialValue` prop to set the initial value of in put on first load. Note that by default dateFormat prop is DD/MM/YYYY. eg. `'["23/05/2023"]'` If dateFormat is passed in, change the initialValue accordingly.
 
-export const SingleModeTemplate = args => {
-  return html`
-    <sgds-datepicker id="single-mode-example" .initialValue=${args.initialValue}></sgds-datepicker>
-    <script>
-      const datepicker = document.querySelector("#single-mode-example");
-      datepicker.initialValue = ["23/05/2023"];
-    </script>
-  `;
-};
-
 <Canvas>
-  <Story name="Initial Value for Single" height="500px" args={{ initialValue: ["23/05/2023"] }}>
-    {SingleModeTemplate.bind({})}
-  </Story>
+  <Story of={DatepickerStories.SingleMode} />
 </Canvas>
 
 ### range mode
 
 For `mode="range"`, use the same `initialValue` prop to set the initial value of startDate and endDate. Note that by default dateFormat prop is DD/MM/YYYY. eg. `'["23/05/2023", "15/12/2023" ]'` If dateFormat is passed in, change the initialValue accordingly.
 
-export const RangeModeTemplate = args => {
-  return html`
-    <sgds-datepicker id="range-mode-example" mode="range" .initialValue=${args.initialValue}></sgds-datepicker>
-    <script>
-      const datepicker = document.querySelector("#range-mode-example");
-      datepicker.initialValue = ["23/05/2023", "15/12/2023"];
-    </script>
-  `;
-};
-
 <Canvas>
-  <Story name="Initial Value for Range" height="500px" args={{ initialValue: ["23/05/2023", "15/12/2023"] }}>
-    {RangeModeTemplate.bind({})}
-  </Story>
+  <Story of={DatepickerStories.RangeMode} />
 </Canvas>
 
 ## minDate & maxDate
@@ -78,27 +39,8 @@ It is recommended to set the calendar's display to be within the boundaries of `
 
 For better accesibility, include a hint text to let your users know what is the range of dates that they can choose from
 
-export const MinMaxTemplate = args => {
-  return html`
-    <sgds-datepicker
-      id="min-max-example"
-      label="Choose a date"
-      hintText="The minimum date is 10 June 2023 and maximum date is 19 June 2023"
-      .displayDate=${args.displayDate}
-      minDate="2023-06-10T12:00:00.000Z"
-      maxDate="2023-06-19T12:00:00.000Z"
-    ></sgds-datepicker>
-    <script>
-      const datepicker = document.querySelector("#min-max-example");
-      datepicker.displayDate = new Date(2023, 5, 10);
-    </script>
-  `;
-};
-
 <Canvas>
-  <Story name="Min and Max Date" height="500px" args={{ displayDate: new Date(2023, 5, 10) }}>
-    {MinMaxTemplate.bind({})}
-  </Story>
+  <Story of={DatepickerStories.MinMax} />
 </Canvas>
 
 ## Form Context
@@ -106,41 +48,6 @@ export const MinMaxTemplate = args => {
 Constraint validation is implemented in datepicker as much as possible to mimick the behaviour of native HTML form component.
 We use `ElementInternals` API to implement the constraint validation.
 
-export const FormSubmissionTemplate = args => {
-  const submitHandler = event => {
-    const formData = new FormData(event.target);
-    alert("Date submitted :" + formData.get("myDatepicker"));
-    event.preventDefault();
-  };
-  return html`
-    <form id="datepicker-form" @submit=${submitHandler}>
-      <sgds-datepicker
-        name="myDatepicker"
-        id="form-submission-example"
-        label="Choose a date"
-        hintText="The minimum date is 10 June 2023 and maximum date is 19 June 2023"
-        .displayDate=${args.displayDate}
-        minDate="2023-06-10T12:00:00.000Z"
-        maxDate="2023-06-19T12:00:00.000Z"
-        required
-      ></sgds-datepicker>
-      <sgds-button type="submit">Submit</sgds-button>
-    </form>
-    <script>
-      const datepicker = document.querySelector("#form-submission-example");
-      datepicker.displayDate = new Date(2023, 5, 10);
-      const form = document.querySelector("#datepicker-form");
-      form.addEventListener("submit", event => {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        alert("Date submitted :" + formData.get("myDatepicker"));
-      });
-    </script>
-  `;
-};
-
 <Canvas>
-  <Story name="Form Submission" height="500px" args={{ displayDate: new Date(2023, 5, 10) }}>
-    {FormSubmissionTemplate.bind({})}
-  </Story>
+  <Story of={DatepickerStories.FormSubmission} />
 </Canvas>

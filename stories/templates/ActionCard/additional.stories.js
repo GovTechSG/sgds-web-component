@@ -1,6 +1,7 @@
+import { html } from "lit-html";
 const CardAsRadioTemplate = args =>
-    html`
-      <form> 
+  html`
+    <form>
       <sgds-radio-group>
         <sgds-action-card type="radio" name="apple">
           <span slot="card-subtitle">Laptop</span>
@@ -17,13 +18,13 @@ const CardAsRadioTemplate = args =>
           <span slot="card-title">Acer</span>
           <span slot="card-text">Aspire 5</span>
         </sgds-action-card>
-        </sgds-radio-group>
-        </form>
-    `;
-  
+      </sgds-radio-group>
+    </form>
+  `;
+
 export const ActionCardAsRadio = {
-    render: CardAsRadioTemplate.bind({}),
-    name: "Action Card as radio",
-    args: {},
-    parameters: {}
-}
+  render: CardAsRadioTemplate.bind({}),
+  name: "Action Card as radio",
+  args: {},
+  parameters: {}
+};
