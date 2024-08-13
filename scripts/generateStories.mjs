@@ -90,7 +90,7 @@ ${methodsMeta.map(meta => {
     import { Template, args, parameters } from "../templates/${key}/basic.js";
 
     export default {
-      title: 'Component/${key}',
+      title: 'Components/${key}',
       component: '${componentTagName}',
       argTypes: ${JSON.stringify(makeArgTypes(args))}
     }
