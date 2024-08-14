@@ -40,10 +40,8 @@ export const parameters = {
     }
   },
   controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/
-    }
+    //  disable: true,
+    expanded: true
   },
   options: {
     storySort: {
@@ -58,4 +56,4 @@ export const parameters = {
     }
   }
 };
-export const tags = ["autodocs"];
+export const tags = ["autodocs", "!dev"];

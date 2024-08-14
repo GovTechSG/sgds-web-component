@@ -99,7 +99,7 @@ ${methodsMeta.map(meta => {
     render: Template.bind({}),
     name: "Basic",
     args: args,
-    parameters: parameters
+    parameters: parameters,
     }
   `
   fs.writeFileSync(csfFilePath, storiesSource, 'utf8')
