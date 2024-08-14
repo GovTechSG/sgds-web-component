@@ -11,7 +11,7 @@ describe("sgds-button", () => {
       el,
       `<button class="btn sgds" type="button" aria-disabled="false" tabindex="0">
       <slot name="leftIcon"></slot>
-      <slot></slot>
+      <span><slot></slot></span>
       <slot name="rightIcon"></slot>
       </button>
     `
