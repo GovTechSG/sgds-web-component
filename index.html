@@ -32,6 +32,7 @@
         .container {
             display: flex;
             flex-direction: column;
+            gap: 5px;
         }
 
         sgds-footer::part(footer-bottom) {
@@ -561,57 +562,128 @@
             </div>
             <div class="container">
                 <h2>Button</h2>
-                <div>
-                    <sgds-button >Default Button</sgds-button>
-                    <sgds-button variant="primary">Hello World</sgds-button>
-                    <sgds-button variant="secondary">Hello World</sgds-button>
-                    <sgds-button variant="warning">Hello World</sgds-button>
-                    <sgds-button variant="success">Hello World</sgds-button>
-                    <sgds-button variant="info">Hello World</sgds-button>
-                    <sgds-button variant="danger">Hello World</sgds-button>
-                    <sgds-button variant="light">Hello World</sgds-button>
-                    <sgds-button variant="link" target="_blank" href="#">Hello World</sgds-button>
-                    <sgds-button variant="dark">Hello World</sgds-button>
-                    <sgds-button disabled variant="primary">Hello World</sgds-button>
-                    <sgds-button disabled variant="secondary">Hello World</sgds-button>
-                    <sgds-button disabled variant="warning">Hello World</sgds-button>
-                    <sgds-button disabled variant="success">Hello World</sgds-button>
-                    <sgds-button disabled variant="info">Hello World</sgds-button>
-                    <sgds-button disabled variant="danger">Hello World</sgds-button>
-                    <sgds-button disabled variant="light">Hello World</sgds-button>
-                    <sgds-button disabled variant="link" target="_blank" href="#">Hello World</sgds-button>
-                    <sgds-button disabled variant="dark">Hello World</sgds-button>
-                    <sgds-button outlined variant="primary">Hello World</sgds-button>
-                    <sgds-button outlined variant="secondary">Hello World</sgds-button>
-                    <sgds-button outlined variant="warning">Hello World</sgds-button>
-                    <sgds-button outlined variant="success">Hello World</sgds-button>
-                    <sgds-button outlined variant="info">Hello World</sgds-button>
-                    <sgds-button outlined variant="danger">Hello World</sgds-button>
-                    <sgds-button outlined variant="light">Hello World</sgds-button>
-                    <sgds-button outlined variant="link">Hello World</sgds-button>
-                    <sgds-button outlined variant="dark">Hello World</sgds-button>
-                    <sgds-button active variant="primary">Hello World</sgds-button>
-                    <sgds-button active variant="secondary">Hello World</sgds-button>
-                    <sgds-button active variant="warning">Hello World</sgds-button>
-                    <sgds-button active variant="success">Hello World</sgds-button>
-                    <sgds-button active variant="info">Hello World</sgds-button>
-                    <sgds-button active variant="danger">Hello World</sgds-button>
-                    <sgds-button active variant="light">Hello World</sgds-button>
-                    <sgds-button active variant="link">Hello World</sgds-button>
-                    <sgds-button active variant="dark">Hello World</sgds-button>
-                    <sgds-button active outlined variant="primary">Hello World</sgds-button>
-                    <sgds-button active outlined variant="secondary">Hello World</sgds-button>
-                    <sgds-button active outlined variant="warning">Hello World</sgds-button>
-                    <sgds-button active outlined variant="success">Hello World</sgds-button>
-                    <sgds-button active outlined variant="info">Hello World</sgds-button>
-                    <sgds-button active outlined variant="danger">Hello World</sgds-button>
-                    <sgds-button active outlined variant="light">Hello World</sgds-button>
-                    <sgds-button active outlined variant="link">Hello World</sgds-button>
-                    <sgds-button active outlined variant="dark">Hello World</sgds-button>
-                    <sgds-button href="#" target="_blank">Anchor</sgds-button>
-                    <sgds-button size="sm" variant="dark">Hello World</sgds-button>
-                    <sgds-button size="lg" variant="dark">Hello World</sgds-button>
+                <div class="row">
+                    <div class="grid">
+                        <sgds-button >Default</sgds-button>
+                        <sgds-button variant="primary">Primary button</sgds-button>
+                        <sgds-button variant="outline">Outline button</sgds-button>
+                        <sgds-button variant="ghost">Ghost button</sgds-button>
+                        <sgds-button variant="danger">Danger button</sgds-button>
+
+                        <!-- <sgds-button disabled variant="primary">Hello World</sgds-button>
+                        <sgds-button disabled variant="secondary">Hello World</sgds-button>
+                        <sgds-button disabled variant="warning">Hello World</sgds-button>
+                        <sgds-button disabled variant="success">Hello World</sgds-button>
+                        <sgds-button disabled variant="info">Hello World</sgds-button>
+                        <sgds-button disabled variant="danger">Hello World</sgds-button>
+                        <sgds-button disabled variant="light">Hello World</sgds-button>
+                        <sgds-button disabled variant="link" target="_blank" href="#">Hello World</sgds-button>
+                        <sgds-button disabled variant="dark">Hello World</sgds-button>
+                        <sgds-button outlined variant="primary">Hello World</sgds-button>
+                        <sgds-button outlined variant="secondary">Hello World</sgds-button>
+                        <sgds-button outlined variant="warning">Hello World</sgds-button>
+                        <sgds-button outlined variant="success">Hello World</sgds-button>
+                        <sgds-button outlined variant="info">Hello World</sgds-button>
+                        <sgds-button outlined variant="danger">Hello World</sgds-button>
+                        <sgds-button outlined variant="light">Hello World</sgds-button>
+                        <sgds-button outlined variant="link">Hello World</sgds-button>
+                        <sgds-button outlined variant="dark">Hello World</sgds-button>
+                        <sgds-button active variant="primary">Hello World</sgds-button>
+                        <sgds-button active variant="secondary">Hello World</sgds-button>
+                        <sgds-button active variant="warning">Hello World</sgds-button>
+                        <sgds-button active variant="success">Hello World</sgds-button>
+                        <sgds-button active variant="info">Hello World</sgds-button>
+                        <sgds-button active variant="danger">Hello World</sgds-button>
+                        <sgds-button active variant="light">Hello World</sgds-button>
+                        <sgds-button active variant="link">Hello World</sgds-button>
+                        <sgds-button active variant="dark">Hello World</sgds-button>
+                        <sgds-button active outlined variant="primary">Hello World</sgds-button>
+                        <sgds-button active outlined variant="secondary">Hello World</sgds-button>
+                        <sgds-button active outlined variant="warning">Hello World</sgds-button>
+                        <sgds-button active outlined variant="success">Hello World</sgds-button>
+                        <sgds-button active outlined variant="info">Hello World</sgds-button>
+                        <sgds-button active outlined variant="danger">Hello World</sgds-button>
+                        <sgds-button active outlined variant="light">Hello World</sgds-button>
+                        <sgds-button active outlined variant="link">Hello World</sgds-button>
+                        <sgds-button active outlined variant="dark">Hello World</sgds-button>
+                        <sgds-button href="#" target="_blank">Anchor</sgds-button>
+                        <sgds-button size="sm" variant="dark">Hello World</sgds-button>
+                        <sgds-button size="lg" variant="dark">Hello World</sgds-button> -->
+                    </div>
                 </div>
+                <h3>Button Size</h3>
+                <div class="row">
+                    <div class="grid">
+                        <sgds-button size="sm" variant="primary">Small Button</sgds-button>
+                        <sgds-button variant="primary" active>Medium Button</sgds-button>
+                        <sgds-button size="lg" variant="primary">Large Button</sgds-button>
+                    </div>
+                </div>
+                <h3>Button With Icon</h3>
+                <div class="row">
+                    <div class="grid">
+                        <sgds-button variant="primary">
+                            <i slot="leftIcon" class="bi bi-arrow-left"></i>
+                            Primary Button
+                        </sgds-button>
+                        <sgds-button variant="primary">
+                            Primary Button
+                            <i slot="rightIcon" class="bi bi-arrow-right"></i>
+                        </sgds-button>
+                        <sgds-button variant="outline">
+                            <i slot="leftIcon" class="bi bi-arrow-left"></i>
+                            Outline Button
+                        </sgds-button>
+                        <sgds-button variant="outline">
+                            Outline Button
+                            <i slot="rightIcon" class="bi bi-arrow-right"></i>
+                        </sgds-button>
+                        <sgds-button variant="ghost">
+                            <i slot="leftIcon" class="bi bi-arrow-left"></i>
+                            Ghost Button
+                        </sgds-button>
+                        <sgds-button variant="ghost">
+                            Ghost Button
+                            <i slot="rightIcon" class="bi bi-arrow-right"></i>
+                        </sgds-button>
+                        <sgds-button variant="danger">
+                            <i slot="leftIcon" class="bi bi-arrow-left"></i>
+                            Danger Button
+                        </sgds-button>
+                        <sgds-button variant="danger">
+                            Danger Button
+                            <i slot="rightIcon" class="bi bi-arrow-right"></i>
+                        </sgds-button>
+                    </div>
+                </div>
+                <h3>Button Disabled</h3>
+                <div class="row">
+                    <div class="grid">
+                        <sgds-button variant="primary" disabled>Disabled Button</sgds-button>
+                    </div>
+                </div>
+                <h3>Button Full Width</h3>
+                <div class="row">
+                    <div class="grid">
+                        <sgds-button variant="primary" fullWidth>Full Width Button</sgds-button>
+                        <sgds-button variant="primary" fullWidth>
+                            <i slot="leftIcon" class="bi bi-arrow-left"></i>
+                            Full Width Button
+                        </sgds-button>
+                        <sgds-button variant="primary" fullWidth>
+                            Full Width Button
+                            <i slot="rightIcon" class="bi bi-arrow-right"></i>
+                        </sgds-button>
+                        <sgds-button variant="primary" fullWidth>
+                            <i slot="leftIcon" class="bi bi-arrow-left"></i>
+                            Full Width Button
+                            <i slot="rightIcon" class="bi bi-arrow-right"></i>
+                        </sgds-button>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <h2>Modal</h2>
                 <sgds-button id="modalShowButton">Open Modal</sgds-button>
                 <sgds-modal centered title="hello" titleicon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-amd&quot; viewBox=&quot;0 0 16 16&quot;>
                 <path d=&quot;m.334 0 4.358 4.359h7.15v7.15l4.358 4.358V0H.334ZM.2 9.72l4.487-4.488v6.281h6.28L6.48 16H.2V9.72Z&quot;/>
@@ -620,16 +692,8 @@
                     <sgds-button slot="footer" variant="link" class="close-modal">Close</sgds-button>
                     <sgds-button slot="footer" variant="primary" type="submit" form="formA">Submit</sgds-button>
                 </sgds-modal>
-                <p>Button size</p>
-                <div class="row">
-                    <div class="grid">
-                        <sgds-button size="sm" variant="primary">Hello World</sgds-button>
-                        <sgds-button variant="primary" active>Hello World</sgds-button>
-                        <sgds-button size="lg" variant="primary">Hello World</sgds-button>
-                    </div>
-                </div>
             </div>
-            <div class="container">
+            <!-- <div class="container">
                 <p>Variant</p>
                 <div class="row">
                     <div class="grid">
@@ -652,9 +716,9 @@
                         </sgds-button>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div>
+            <div class="container">
                 <h2>Checkbox</h2>
                 <form id="radio-submit">
                 <sgds-checkbox id="hehe" isInline invalid hasFeedback invalidFeedback="test">1</sgds-checkbox>
@@ -664,7 +728,7 @@
                 <sgds-button  type="submit" >Submit</sgds-button>
             </form>
             </div>
-            <div>
+            <div class="container">
                 <h2>Checkbox</h2>
                 <sgds-checkbox isInline id="hehe">1</sgds-checkbox>
                 <sgds-checkbox isInline>2</sgds-checkbox>
