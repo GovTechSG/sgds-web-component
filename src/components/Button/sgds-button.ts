@@ -1,4 +1,4 @@
-import { property, query } from "lit/decorators.js";
+import { state, property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html, literal } from "lit/static-html.js";
@@ -7,16 +7,7 @@ import { FormSubmitController } from "../../utils/form";
 import buttonStyles from "./button.css";
 import anchorStyles from "../../styles/anchor.css";
 
-export type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info"
-  | "light"
-  | "dark"
-  | "link";
+export type ButtonVariant = "primary" | "outline" | "ghost" | "danger" | "light" | "dark";
 
 /**
  * @summary Custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
@@ -28,34 +19,28 @@ export type ButtonVariant =
  * @event sgds-blur - Emitted when the button is not focused.
  * @event sgds-focus - Emitted when the button is focused.
  *
- * @cssprop --sgds-btn-padding-x - The x-axis padding of button
- * @cssprop --sgds-btn-padding-y - The y-axis padding of button
- * @cssprop --sgds-btn-font-family - The font family of text content in button
- * @cssprop --sgds-btn-font-size - The font size of text content in button
  * @cssprop --sgds-btn-font-weight - The font weight of text content in button
- * @cssprop --sgds-btn-line-height - The line height of text content in button
- * @cssprop --sgds-btn-color - The text color of button
  * @cssprop --sgds-btn-bg - The background color of button
- * @cssprop --sgds-btn-border-width - The thickness of the button border
- * @cssprop --sgds-btn-border-color - The color of the button border
- * @cssprop --sgds-btn-border-radius - The border radius of button border
- * @cssprop --sgds-btn-disabled-color - The text color of a button in disabled state
- * @cssprop --sgds-btn-disabled-opacity - The opacity of a button in disabled state
- * @cssprop --sgds-btn-hover-color - The text color of a button in hover state
- * @cssprop --sgds-btn-hover-border-color - The border color of a button in hover state
  * @cssprop --sgds-btn-hover-bg - The background color of a button in hover state
- * @cssprop --sgds-btn-active-color - The text color of a button in active state
- * @cssprop --sgds-btn-active-border-color - The border color of a button in active state
- * @cssprop --sgds-btn-active-bg - The background color of a button in active state
- * @cssprop --sgds-btn-focus-box-shadow-color - The color of box shadow of a focused button
- * @cssprop --sgds-btn-focus-box-shadow - The box shadow of a button in focused state
- * @cssprop --sgds-btn-icon-gutter - The space between icons and the text in button
+ * @cssprop --sgds-btn-border-radius - The border radius of button border
+ * @cssprop --sgds-btn-color - The text color of button, applicable to primary, outline, and ghost variants only
+ * @cssprop --sgds-btn-icon-color - The color of icon in button, applicable to primary, outline, and ghost variants only
+ * @cssprop --sgds-btn-border-width - The thickness of the button border, applicable to outline variant only
+ * @cssprop --sgds-btn-border-color - The color of the button border, applicable to outline variant only
  *
  */
 export class SgdsButton extends SgdsElement {
   static styles = [...SgdsElement.styles, anchorStyles, buttonStyles];
 
   @query(".btn") private button: HTMLButtonElement | HTMLLinkElement;
+
+  /** @internal */
+  @state()
+  protected _hasLeftIcon = false;
+
+  /** @internal */
+  @state()
+  protected _hasRightIcon = false;
 
   /** @internal */
   private readonly formSubmitController = new FormSubmitController(this, {
@@ -75,9 +60,6 @@ export class SgdsButton extends SgdsElement {
 
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as "outline" versions (prefixed by `outline-*`) */
   @property({ reflect: true }) variant: ButtonVariant;
-
-  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as "outline" versions (prefixed by `outline-*`) */
-  @property({ type: Boolean, reflect: true }) outlined = false;
 
   /** Specifies a large or small button */
   @property({ reflect: true }) size: "sm" | "lg";
@@ -127,6 +109,9 @@ export class SgdsButton extends SgdsElement {
   /** The aria-label attribute to passed to button element when necessary */
   @property({ type: String }) ariaLabel: string;
 
+  /** When set, the button will be in full width. */
+  @property({ type: Boolean, reflect: true }) fullWidth = false;
+
   /** Sets focus on the button. */
   public focus(options?: FocusOptions) {
     this.button.focus(options);
@@ -170,6 +155,20 @@ export class SgdsButton extends SgdsElement {
     }
   };
 
+  handleLeftIconSlotchange(e: Event) {
+    const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLOrSVGImageElement>;
+    if (childNodes.length > 0) {
+      return (this._hasLeftIcon = true);
+    }
+  }
+
+  handleRightIconSlotchange(e: Event) {
+    const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLOrSVGImageElement>;
+    if (childNodes.length > 0) {
+      return (this._hasRightIcon = true);
+    }
+  }
+
   render() {
     const isLink = this.href;
     const tag = isLink ? literal`a` : literal`button`;
@@ -178,8 +177,12 @@ export class SgdsButton extends SgdsElement {
         class="sgds btn ${classMap({
           disabled: this.disabled,
           active: this.active,
-          [`btn-${this.size}`]: this.size,
-          "btn-link": this.variant === "link"
+          "full-width": this.fullWidth,
+          "has-left-icon": this._hasLeftIcon,
+          "has-right-icon": this._hasRightIcon,
+          [`btn-${this.variant}`]: this.variant,
+          [`btn-${this.size}`]: this.size
+          // "btn-link": this.variant === "link"
         })}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
@@ -195,9 +198,9 @@ export class SgdsButton extends SgdsElement {
         @blur=${this.handleBlur}
         aria-label=${ifDefined(this.ariaLabel)}
       >
-      <slot name="leftIcon"></slot>
-      <slot></slot>
-      <slot name="rightIcon"></slot>
+      <slot name="leftIcon" @slotchange=${this.handleLeftIconSlotchange}></slot>
+      <span><slot></slot></span>
+      <slot name="rightIcon" @slotchange=${this.handleRightIconSlotchange}></slot>
       </${tag}>
     `;
   }
