@@ -153,13 +153,13 @@
   --sgds-border-style: solid;
   --sgds-border-color: var(--sgds-gray-400);
   --sgds-border-color-translucent: rgba(0, 0, 0, 0.175);
-  --sgds-border-radius: 0.25rem;
+  /* --sgds-border-radius: 0.25rem;
   --sgds-border-radius-sm: 0.2rem;
   --sgds-border-radius-lg: 0.3rem;
   --sgds-border-radius-xl: 1rem;
   --sgds-border-radius-xxl: 2rem;
   --sgds-border-radius-2xl: var(--sgds-border-radius-xxl);
-  --sgds-border-radius-pill: 50rem;
+  --sgds-border-radius-pill: 50rem; */
   --sgds-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   --sgds-box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
   --sgds-box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
@@ -169,7 +169,7 @@
   --sgds-focus-ring-color: rgba(90, 66, 192, 0.25);
   --sgds-focus-width: 0.13rem;
   --sgds-disabled-color: var(--sgds-gray-400);
-  --sgds-disabled-opacity: 0.5;
+  --sgds-disabled-opacity: var(--sgds-opacity-50);
   --sgds-disabled-bg: var(--sgds-gray-200);
 
   /* Links */
@@ -197,15 +197,15 @@
   --sgds-form-inline-margin-right: var(--sgds-spacer-4);
   --sgds-form-input-margin-right: var(--sgds-spacer-2);
   /* Input, Button */
-  --sgds-input-btn-padding-x: 1rem;
-  --sgds-input-btn-padding-y: 0.4375rem;
+  --sgds-input-btn-padding-x: var(--sgds-padding-lg);
+  --sgds-input-btn-padding-y: 0rem;
 
   /* Primitive - Border Width */
-  --sgds-border-0: 0px;
-  --sgds-border-1: 1px;
-  --sgds-border-2: 2px;
-  --sgds-border-3: 3px;
-  --sgds-border-4: 4px;
+  --sgds-border-width-0: 0px;
+  --sgds-border-width-1: 1px;
+  --sgds-border-width-2: 2px;
+  --sgds-border-width-3: 3px;
+  --sgds-border-width-4: 4px;
 
   /* Primitive - Border Radius */
   --sgds-border-radius-none: 0px;
@@ -244,11 +244,11 @@
   --sgds-font-size-9: 3.5rem;
 
   /* Primitive - Icon Size */
-  --sgds-icon-size-sm: 16px;
-  --sgds-icon-size-md: 20px;
-  --sgds-icon-size-lg: 24px;
-  --sgds-icon-size-xl: 32px;
-  --sgds-icon-size-2-xl: 48px;
+  --sgds-icon-size-sm: 1rem;
+  --sgds-icon-size-md: 1.25rem;
+  --sgds-icon-size-lg: 1.5rem;
+  --sgds-icon-size-xl: 2rem;
+  --sgds-icon-size-2-xl: 3rem;
 
   /* Primitive - Letter Spacing */
   --sgds-letter-spacing-tighter: -1px;
