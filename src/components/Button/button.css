@@ -99,7 +99,7 @@ button:focus:not(:focus-visible) {
 .btn:focus-visible {
   background-color: var(--sgds-btn-hover-bg);
   border-color: transparent;
-  box-shadow: var(--sgds-dimension-0) var(--sgds-dimension-0) var(--sgds-dimension-0) var(--sgds-dimension-4) var(--sgds-info-300);
+  box-shadow: var(--sgds-dimension-0) var(--sgds-dimension-0) var(--sgds-dimension-0) var(--sgds-dimension-4) var(--sgds-blue-300);
   outline: 0;
 }
 
