@@ -72,7 +72,8 @@
 }
 
 .btn-primary,
-.btn-outline {
+.btn-outline,
+.btn-ghost {
   color: var(--sgds-btn-color);
 }
 
