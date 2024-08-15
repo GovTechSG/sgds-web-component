@@ -6,29 +6,25 @@
   display: inline-flex;
 }
 
-button:focus:not(:focus-visible) {
-  outline: 0;
-}
-
 :host([variant="primary"]) {
   --sgds-btn-bg: var(--sgds-primary-bg);
   --sgds-btn-color: var(--sgds-default-color-on-light);
-  --sgds-btn-icon-color: var(--sgds-default-color-on-light);
 }
+
 :host([variant="outline"]) {
   --sgds-btn-bg: var(--sgds-default-bg-transparent);
   --sgds-btn-hover-bg: var(--sgds-primary-bg-translucent);
   --sgds-btn-color: var(--sgds-primary-color);
-  --sgds-btn-icon-color: var(--sgds-primary-color);
   --sgds-btn-border-width: var(--sgds-border-width-1);
   --sgds-btn-border-color: var(--sgds-primary-border-color);
 }
+
 :host([variant="ghost"]) {
   --sgds-btn-bg: var(--sgds-default-bg-transparent);
   --sgds-btn-hover-bg: var(--sgds-primary-bg-translucent);
   --sgds-btn-color: var(--sgds-primary-color);
-  --sgds-btn-icon-color: var(--sgds-primary-color);
 }
+
 :host([variant="danger"]) {
   --sgds-btn-bg: var(--sgds-danger-bg);
   --sgds-btn-hover-bg: var(--sgds-danger-bg-emphasis);
@@ -75,7 +71,8 @@ button:focus:not(:focus-visible) {
   vertical-align: middle;
 }
 
-.btn:not(.btn-danger) {
+.btn-primary,
+.btn-outline {
   color: var(--sgds-btn-color);
 }
 
@@ -83,32 +80,35 @@ button:focus:not(:focus-visible) {
   border: var(--sgds-btn-border-width) solid var(--sgds-btn-border-color);
 }
 
-.btn:not(.btn-danger) slot[name="leftIcon"]::slotted(*),
-.btn:not(.btn-danger) slot[name="rightIcon"]::slotted(*) {
-  color: var(--sgds-btn-icon-color);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .btn {
     transition: none;
   }
 }
+
 .btn:hover,
 .btn.active {
   background-color: var(--sgds-btn-hover-bg);
 }
+
+button:focus:not(:focus-visible) {
+  outline: 0;
+}
+
 .btn:focus-visible {
   background-color: var(--sgds-btn-hover-bg);
   border-color: transparent;
   box-shadow: var(--sgds-dimension-0) var(--sgds-dimension-0) var(--sgds-dimension-0) var(--sgds-dimension-4) var(--sgds-info-300);
   outline: 0;
 }
+
 .btn.disabled,
 .btn:disabled {
   opacity: var(--sgds-opacity-50);
   pointer-events: none;
   color: var(--sgds-btn-color);
 }
+
 .btn-lg {
   font-size: var(--sgds-font-size-3);
   padding: 0px var(--sgds-padding-xl);
