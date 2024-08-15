@@ -1,103 +1,102 @@
 :host {
-  /* NEW in 2.0 */
-  --sgds-badge-padding-x: 0.571em;
-  --sgds-badge-padding-y: 0.285em;
-  --sgds-badge-font-size: min(0.875em, 2rem);
-  --sgds-badge-font-weight: 700;
+  
+  --sgds-badge-padding-x: var(--sgds-padding-2-xs);
+  --sgds-badge-label-padding-x: var(--sgds-padding-3-xs);
+  --sgds-badge-label-padding-x-right: var(--sgds-padding-3-xs);
+  --sgds-badge-height: var(--sgds-dimension-24);
+  --sgds-badge-min-width: var(--sgds-dimension-24);
   --sgds-badge-color: var(--sgds-white);
-  --sgds-badge-border-radius: var(--sgds-border-radius);
-  --sgds-badge-border-width: var(--sgds-border-width);
-  --sgds-badge-line-height: 1.145;
-  --sgds-badge-bg: ;
-  --sgds-badge-border-color: transparent;
+  --sgds-badge-border-radius: var(--sgds-border-radius-sm);
+  --sgds-badge-border-width: var(--sgds-border-width-1);
   --sgds-badge-icon-gap: var(--sgds-spacer-2);
+  --sgds-badge-border-color: var(--sgds-default-color-transparent);
 }
 
-:host([variant="primary"]) {
-  --sgds-badge-bg: var(--sgds-primary-filled);
+:host([status="info"]) {
+  --sgds-badge-bg: var(--sgds-primary-bg);
+  --sgds-badge-color: var(--sgds-default-color-on-light);
+  
 }
-:host([variant="secondary"]) {
-  --sgds-badge-bg: var(--sgds-secondary-filled);
-}
-:host([variant="warning"]) {
-  --sgds-badge-bg: var(--sgds-warning-filled);
-}
-:host([variant="danger"]) {
-  --sgds-badge-bg: var(--sgds-danger-filled);
-}
-:host([variant="success"]) {
-  --sgds-badge-bg: var(--sgds-success-filled);
-}
-:host([variant="info"]) {
-  --sgds-badge-bg: var(--sgds-info-filled);
-}
-:host([variant="light"]) {
-  --sgds-badge-bg: var(--sgds-light-filled);
-  --sgds-badge-color: var(--sgds-dark);
-}
-:host([variant="dark"]) {
-  --sgds-badge-bg: var(--sgds-dark-filled);
-}
-:host([variant="primary"][outlined]) {
-  --sgds-badge-color: var(--sgds-primary-text-emphasis);
+
+:host([status="info"][variant = "outlined"]) {
   --sgds-badge-bg: var(--sgds-primary-bg-subtle);
-  --sgds-badge-border-color: var(--sgds-primary-border-subtle);
+  --sgds-badge-color: var(--sgds-default-color-on-dark);
+  --sgds-badge-border-color: var(--sgds-primary-border-color-subtle);
 }
-:host([variant="secondary"][outlined]) {
-  --sgds-badge-color: var(--sgds-secondary-text-emphasis);
-  --sgds-badge-bg: var(--sgds-secondary-bg-subtle);
-  --sgds-badge-border-color: var(--sgds-secondary-border-subtle);
+
+:host([status="success"]) {
+  --sgds-badge-bg: var(--sgds-success-bg);
+  --sgds-badge-color: var(--sgds-default-color-on-light);
 }
-:host([variant="warning"][outlined]) {
-  --sgds-badge-color: var(--sgds-warning-text-emphasis);
-  --sgds-badge-bg: var(--sgds-warning-bg-subtle);
-  --sgds-badge-border-color: var(--sgds-warning-border-subtle);
-}
-:host([variant="danger"][outlined]) {
-  --sgds-badge-color: var(--sgds-danger-text-emphasis);
-  --sgds-badge-bg: var(--sgds-danger-bg-subtle);
-  --sgds-badge-border-color: var(--sgds-danger-border-subtle);
-}
-:host([variant="success"][outlined]) {
-  --sgds-badge-color: var(--sgds-success-text-emphasis);
+
+:host([status="success"][variant = "outlined"]) {
   --sgds-badge-bg: var(--sgds-success-bg-subtle);
-  --sgds-badge-border-color: var(--sgds-success-border-subtle);
+  --sgds-badge-color: var(--sgds-default-color-on-dark);
+  --sgds-badge-border-color: var(--sgds-success-border-color-subtle);
 }
-:host([variant="info"][outlined]) {
-  --sgds-badge-color: var(--sgds-info-text-emphasis);
-  --sgds-badge-bg: var(--sgds-info-bg-subtle);
-  --sgds-badge-border-color: var(--sgds-info-border-subtle);
+
+:host([status="danger"]) {
+  --sgds-badge-bg: var(--sgds-danger-bg);
+  --sgds-badge-color: var(--sgds-default-color-on-light);
 }
-:host([variant="light"][outlined]) {
-  --sgds-badge-color: var(--sgds-light-text-emphasis);
-  --sgds-badge-bg: var(--sgds-light-bg-subtle);
-  --sgds-badge-border-color: var(--sgds-light-border-subtle);
+
+:host([status="danger"][variant = "outlined"]) {
+  --sgds-badge-bg: var(--sgds-danger-bg-subtle);
+  --sgds-badge-color: var(--sgds-default-color-on-dark);
+  --sgds-badge-border-color: var(--sgds-danger-border-color-subtle);
 }
-:host([variant="dark"][outlined]) {
-  --sgds-badge-color: var(--sgds-dark-text-emphasis);
-  --sgds-badge-bg: var(--sgds-dark-bg-subtle);
-  --sgds-badge-border-color: var(--sgds-dark-border-subtle);
+
+:host([status="warning"]) {
+  --sgds-badge-bg: var(--sgds-warning-bg);
+  --sgds-badge-color: var(--sgds-default-color-on-light);
 }
+
+:host([status="warning"][variant = "outlined"]) {
+  --sgds-badge-bg: var(--sgds-danger-bg-subtle);
+  --sgds-badge-color: var(--sgds-default-color-on-dark);
+  --sgds-badge-border-color: var(--sgds-danger-border-color-subtle);
+}
+
+:host([status="neutral"]) {
+  --sgds-badge-bg: var(--sgds-neutral-bg);
+  --sgds-badge-color: var(--sgds-default-color-on-light);
+}
+
+:host([status="neutral"][variant = "outlined"]) {
+  --sgds-badge-bg: var(--sgds-neutral-bg-subtle);
+  --sgds-badge-color: var(--sgds-default-color-on-dark);
+  --sgds-badge-border-color: var(--sgds-neutral-border-color-subtle);
+}
+
+
+:host([dismissable]) {
+  --sgds-badge-label-padding-x-right: var(--sgds-padding-xs);
+}
+
+
+
+
 
 .badge {
   background-color: var(--sgds-badge-bg);
   border: var(--sgds-badge-border-width) solid var(--sgds-badge-border-color);
   border-radius: var(--sgds-badge-border-radius);
-  color: var(--sgds-badge-color);
+  line-height: var(--sgds-badge-height); 
+  padding: 0 var(--sgds-badge-padding-x);
+  min-width: var(--sgds-badge-min-width); 
   display: inline-flex;
-  font-size: var(--sgds-badge-font-size);
-  font-weight: var(--sgds-badge-font-weight);
-  line-height: var(--sgds-badge-line-height);
-  padding: var(--sgds-badge-padding-y) var(--sgds-badge-padding-x);
-  text-align: center;
-  vertical-align: baseline;
-  white-space: nowrap;
-  gap: var(--sgds-badge-icon-gap);
+  justify-content: center;
+  align-items: center;
+  padding: 0px var(--sgds-badge-padding-x);
 }
 
-.rounded-pill {
-  border-radius: var(--sgds-border-radius-pill);
+.badge-label {
+  padding-left: var(--sgds-badge-label-padding-x);
+  padding-right: var(--sgds-badge-label-padding-x-right);
 }
+
+
+
 
 /* [data-bs-theme="dark"] .badge.text-bg-primary {
   --sgds-primary-rgb: var(--sgds-primary-500-rgb);
