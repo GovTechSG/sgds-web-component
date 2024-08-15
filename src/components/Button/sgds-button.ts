@@ -7,7 +7,7 @@ import { FormSubmitController } from "../../utils/form";
 import buttonStyles from "./button.css";
 import anchorStyles from "../../styles/anchor.css";
 
-export type ButtonVariant = "primary" | "outline" | "ghost" | "danger" | "light" | "dark";
+export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
 
 /**
  * @summary Custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
