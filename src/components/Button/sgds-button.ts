@@ -7,7 +7,7 @@ import { FormSubmitController } from "../../utils/form";
 import buttonStyles from "./button.css";
 import anchorStyles from "../../styles/anchor.css";
 
-export type ButtonVariant = "primary" | "outline" | "ghost" | "danger" | "light" | "dark";
+export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
 
 /**
  * @summary Custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
@@ -62,7 +62,7 @@ export class SgdsButton extends SgdsElement {
   @property({ reflect: true }) variant: ButtonVariant;
 
   /** Specifies a large or small button */
-  @property({ reflect: true }) size: "sm" | "lg";
+  @property({ reflect: true }) size: "sm" | "md" | "lg" = "md";
 
   /** Manually set the visual state of the button to `:active` */
   @property({ type: Boolean, reflect: true }) active = false;

@@ -53,10 +53,6 @@
             width: 100%;
         }
 
-        sgds-accordion{ 
-            --sgds-accordion-item-padding-y: 2rem;
-        }
-
         sgds-masthead {
 
             grid-area: masthead;
@@ -166,7 +162,6 @@
     <main>
         <div class="container">
             <sgds-icon name="6-square"></sgds-icon>
-            <sgds-close-button></sgds-close-button>
             <sgds-textarea required label="Label" name="textarea" textareaclasses="" rows="4" invalidfeedback="test"
                 placeholder="Placeholder" minlength="" hasFeedback maxlength="100" resize="vertical" defaultvalue="">
             </sgds-textarea>
@@ -681,6 +676,13 @@
                             <i slot="rightIcon" class="bi bi-arrow-right"></i>
                         </sgds-button>
                     </div>
+                </div>
+            </div>
+            <div class="container">
+                <h2>Close Button</h2>
+                <div class="row">
+                    <sgds-close-button></sgds-close-button>
+                    <sgds-close-button size="sm"></sgds-close-button>
                 </div>
             </div>
             <div class="container">
