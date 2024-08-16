@@ -1,17 +1,22 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import badgeStyle from "./badge.css";
-export type BadgeStatus =  "success" | "danger" | "warning" | "info" | "neutral";
-export type BadgeVariant =  "filled" | "outlined" ;
+import { watch } from "../../utils/watch";
+import SgdsCloseButton from "../CloseButton/sgds-close-button";
+export type BadgeVariant = "success" | "danger" | "warning" | "info" | "neutral";
 
 /**
  * @summary Badges can be used to highlight important bits of information such as labels, notifications & status.
- * 
+ *
  * @slot default - slot for badge
- * @slot icon - The slot for icon to the left of the badge text
+ * @slot leftIcon - The slot for icon to the left of the badge text
+ * @slot rightIcon - The slot for icon to the right of the badge text
  * 
+ * @event sgds-show - Emitted when the badge appears.
+ * @event sgds-hide - Emitted after the badge closes.
+ *
  * @cssprop --sgds-badge-color - The text color of badge, only if the 'variant' prop is set to 'filled' and the background color is yellow.
  * @cssprop --sgds-badge-border-radius - The border radius of badge
  * @cssprop --sgds-badge-bg - The background color of the badge. Changing 'status' prop updates this css property
@@ -21,40 +26,63 @@ export type BadgeVariant =  "filled" | "outlined" ;
 export class SgdsBadge extends SgdsElement {
   static styles = [...SgdsElement.styles, badgeStyle];
 
-  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` */
-  @property({ reflect: true }) variant: BadgeVariant = "filled";
-  /** Visually changes the color of the badge */
-  @property({ reflect: true }) status: BadgeStatus = "info";
-  
+  /**@internal */
+  static get scopedElements() {
+    return {
+      "sgds-close-button": SgdsCloseButton
+    };
+  }
+
+  /** Controls the appearance of the alert  */
+  @property({ type: Boolean, reflect: true }) show = true;
+
+  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `info`, `success`, `danger`, `warning`, 'neutral' */
+  @property({ reflect: true }) variant: BadgeVariant = "info";
+
+ /** Manually set the outlined state to false */
+ @property({ type: Boolean, reflect: true }) outlined = false;
+
   /** Manually set the dismissable state of the button to `false` */
-  @property({ type: Boolean, reflect: true }) dismissable = false;
+  @property({ type: Boolean, reflect: true }) dismissible = false;
 
-  /** Manually set the sm state (whether or not the badge is sm) to false */
-   @property({ type: Boolean, reflect: true }) warningSm = false;
-
-
+  /** Closes the alert  */
+  public close() {
+    this.show = false;
+  }
+  /**@internal */
+  @watch("show")
+    _handleShowChange() {
+      this.show ? this.emit("sgds-show") : this.emit("sgds-hide");
+  }
 
 
   render() {
-    return html`
-      <span
+    return this.show
+     ? html`
+      <div
         class="  
           ${classMap({
-          dismissable: this.dismissable,
+          sgds: true,
+          [`badge-dismissible`]: this.dismissible,
           badge: true,
-          warningSm: this.warningSm
+          show: this.show,
+          outlined: this.outlined
         })}
             "
+        aria-hidden=${this.show ? "false" : "true"}
       >
-        <slot name="icon"></slot>
+        <slot name="leftIcon"></slot>
         <span class="badge-label">
         <slot></slot>
         </span>
-        <slot>
-        ${this.dismissable ? html`<sgds-close-button></sgds-close-button>` : ''}
-        </slot>
-      </span>
-    `;
+        <slot name="rightIcon"></slot>
+       
+        ${this.dismissible
+        ? html`<sgds-close-button size= "sm" aria-label="close the badge" @click=${this.close}></sgds-close-button>`
+        : nothing}
+        
+      </div>
+    `: nothing;
   }
 }
 

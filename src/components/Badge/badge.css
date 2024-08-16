@@ -1,98 +1,106 @@
 :host {
-  
-  --sgds-badge-padding-x: var(--sgds-padding-2-xs);
-  --sgds-badge-label-padding-x: var(--sgds-padding-3-xs);
-  --sgds-badge-label-padding-x-right: var(--sgds-padding-3-xs);
-  --sgds-badge-height: var(--sgds-dimension-24);
-  --sgds-badge-min-width: var(--sgds-dimension-24);
-  --sgds-badge-color: var(--sgds-white);
+  --sgds-badge-color: var(--sgds-default-color-on-light);
+  --sgds-badge-bg: var(--sgds-primary-bg);
   --sgds-badge-border-radius: var(--sgds-border-radius-sm);
-  --sgds-badge-border-width: var(--sgds-border-width-1);
-  --sgds-badge-icon-gap: var(--sgds-spacer-2);
-  --sgds-badge-border-color: var(--sgds-default-color-transparent);
 }
 
-:host([status="info"]) {
+:host([variant="info"]) {
   --sgds-badge-bg: var(--sgds-primary-bg);
   --sgds-badge-color: var(--sgds-default-color-on-light);
+  --sgds-badge-border-color: var(--sgds-primary-bg); 
   
 }
 
-:host([status="info"][variant = "outlined"]) {
+:host([variant="info"][outlined]) {
   --sgds-badge-bg: var(--sgds-primary-bg-subtle);
   --sgds-badge-color: var(--sgds-default-color-on-dark);
   --sgds-badge-border-color: var(--sgds-primary-border-color-subtle);
+ 
 }
 
-:host([status="success"]) {
+:host([variant="success"]) {
   --sgds-badge-bg: var(--sgds-success-bg);
   --sgds-badge-color: var(--sgds-default-color-on-light);
+  --sgds-badge-border-color: var(--sgds-success-bg);
 }
 
-:host([status="success"][variant = "outlined"]) {
+:host([variant="success"][outlined]) {
   --sgds-badge-bg: var(--sgds-success-bg-subtle);
   --sgds-badge-color: var(--sgds-default-color-on-dark);
   --sgds-badge-border-color: var(--sgds-success-border-color-subtle);
+ 
 }
 
-:host([status="danger"]) {
+:host([variant="danger"]) {
   --sgds-badge-bg: var(--sgds-danger-bg);
   --sgds-badge-color: var(--sgds-default-color-on-light);
+  --sgds-badge-border-color: var(--sgds-danger-bg);
 }
 
-:host([status="danger"][variant = "outlined"]) {
+:host([variant="danger"][outlined]) {
   --sgds-badge-bg: var(--sgds-danger-bg-subtle);
   --sgds-badge-color: var(--sgds-default-color-on-dark);
   --sgds-badge-border-color: var(--sgds-danger-border-color-subtle);
+  
 }
 
-:host([status="warning"]) {
+:host([variant="warning"]) {
   --sgds-badge-bg: var(--sgds-warning-bg);
   --sgds-badge-color: var(--sgds-default-color-on-light);
+  --sgds-badge-border-color: var(--sgds-warning-bg);
 }
 
-:host([status="warning"][variant = "outlined"]) {
+:host([variant="warning"][outlined]) {
   --sgds-badge-bg: var(--sgds-danger-bg-subtle);
   --sgds-badge-color: var(--sgds-default-color-on-dark);
   --sgds-badge-border-color: var(--sgds-danger-border-color-subtle);
+
 }
 
-:host([status="neutral"]) {
+:host([variant="neutral"]) {
   --sgds-badge-bg: var(--sgds-neutral-bg);
   --sgds-badge-color: var(--sgds-default-color-on-light);
+  --sgds-badge-border-color: var(--sgds-neutral-bg); 
 }
 
-:host([status="neutral"][variant = "outlined"]) {
+:host([variant="neutral"][outlined]) {
   --sgds-badge-bg: var(--sgds-neutral-bg-subtle);
   --sgds-badge-color: var(--sgds-default-color-on-dark);
   --sgds-badge-border-color: var(--sgds-neutral-border-color-subtle);
+
 }
-
-
-:host([dismissable]) {
-  --sgds-badge-label-padding-x-right: var(--sgds-padding-xs);
-}
-
-
-
 
 
 .badge {
   background-color: var(--sgds-badge-bg);
-  border: var(--sgds-badge-border-width) solid var(--sgds-badge-border-color);
+  color: var(--sgds-badge-color);
+  border: var(--sgds-border-width-1) solid var(--sgds-badge-border-color);
   border-radius: var(--sgds-badge-border-radius);
-  line-height: var(--sgds-badge-height); 
-  padding: 0 var(--sgds-badge-padding-x);
-  min-width: var(--sgds-badge-min-width); 
+  line-height: var(--sgds-dimension-24); 
+  padding: 0 var(--sgds-padding-2-xs);
+  min-width: var(---sgds-dimension-24); 
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 0px var(--sgds-badge-padding-x);
+  padding: 0px var(--sgds-padding-2-xs);
 }
 
 .badge-label {
-  padding-left: var(--sgds-badge-label-padding-x);
-  padding-right: var(--sgds-badge-label-padding-x-right);
+  padding-left: var(--sgds-padding-3-xs);
+  padding-right: var(--sgds-badge-label-padding-x-right, var(--sgds-padding-3-xs));
+}
+
+.badge-dismissible {
+  --sgds-badge-label-padding-x-right: var(--sgds-padding-xs);
+}
+
+.badge-dimissible sgds-close-button {
+  size: var(--sgds-icon-size-sm);
+}
+
+slot[name="leftIcon"],
+slot[name="rightIcon"] {
+  size: var(--sgds-icon-size-sm);
 }
 
 
