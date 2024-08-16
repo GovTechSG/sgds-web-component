@@ -7,26 +7,18 @@ import { classMap } from "lit/directives/class-map.js";
 /**
  * @summary Close button for closing actions. Used in Modal, Drawer, Alert and Toast.
  *
- * @cssprop --sgds-close-btn-color - The color of close button
- * @cssprop --sgds-close-btn-image - The image of close button
- * @cssprop --sgds-close-btn-focus-box-shadow - The box shadow of a focused close button
- * @cssprop --sgds-close-btn-size - Sets the height and width of close button
+ * @cssprop --sgds-close-btn-border-radius - The border radius of close button border
  *
  */
 export class SgdsCloseButton extends SgdsElement {
   static styles = [closeButtonStyles];
 
   @property({ type: String, reflect: true }) ariaLabel = "Close button";
-  /** The disabled state of the button */
-  @property({ type: Boolean, reflect: true }) disabled = false;
 
-  private _handleClick(event: MouseEvent) {
-    if (this.disabled) {
-      event.preventDefault();
-      event.stopPropagation();
-      return;
-    }
+  /** Specifies a large or small button */
+  @property({ reflect: true }) size: "sm" | "md" = "md";
 
+  private _handleClick() {
     this.removeEventListener("click", this._clickHandler);
     this.addEventListener("click", this._clickHandler);
   }
@@ -39,11 +31,11 @@ export class SgdsCloseButton extends SgdsElement {
     return html`
       <button
         class=${classMap({
-          "btn-close": true
+          "btn-close": true,
+          [`btn-close-${this.size}`]: this.size
         })}
         aria-label=${ifDefined(this.ariaLabel)}
         @click=${this._handleClick}
-        ?disabled=${this.disabled}
       ></button>
     `;
   }
