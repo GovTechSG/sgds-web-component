@@ -81,6 +81,7 @@ export class SgdsBadge extends SgdsElement {
                   size="sm"
                   aria-label="close the badge"
                   @click=${this.close}
+                  variant=${this.outlined ? "dark" : "light"}
                 ></sgds-close-button>`
               : nothing}
           </div>
