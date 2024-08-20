@@ -1,12 +1,12 @@
+import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 import { nothing } from "lit";
-import { property, queryAssignedNodes, state } from "lit/decorators.js";
+import { property, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
-import alertStyle from "./alert.css";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 import SgdsCloseButton from "../CloseButton/sgds-close-button";
+import alertStyle from "./alert.css";
 
 export type AlertVariant = "info" | "success" | "danger" | "warning" | "neutral";
 /**
