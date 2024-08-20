@@ -2,7 +2,6 @@ export * from "./Accordion/sgds-accordion";
 export * from "./Accordion/sgds-accordion-item";
 export * from "./ActionCard/sgds-action-card";
 export * from "./Alert/sgds-alert";
-export * from "./Alert/sgds-alert-heading";
 export * from "./Alert/sgds-alert-link";
 export * from "./Badge/sgds-badge";
 export * from "./Breadcrumb/sgds-breadcrumb";

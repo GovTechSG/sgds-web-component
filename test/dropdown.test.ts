@@ -180,6 +180,7 @@ describe("sgds-dropdown", () => {
            aria-haspopup="menu"
            variant="secondary"
            type="button"
+           size="md"
          >
          <svg
          xmlns="http://www.w3.org/2000/svg"

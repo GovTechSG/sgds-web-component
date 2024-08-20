@@ -44,6 +44,8 @@ describe("<sgds-modal>", () => {
             <sgds-close-button
               arialabel="close modal"
               class="modal-close"
+              size="md" 
+              variant="default"
             >
             </sgds-close-button>
           </div>
@@ -197,6 +199,6 @@ describe("<sgds-modal>", () => {
 
   it("noCloseButton prop removes button from modal", async () => {
     const el = await fixture<SgdsModal>(html`<sgds-modal noCloseButton></sgds-modal>`);
-    expect(el.shadowRoot.querySelector("button.btn-close")).to.be.null;
+    expect(el.shadowRoot?.querySelector("button.btn-close")).to.be.null;
   });
 });

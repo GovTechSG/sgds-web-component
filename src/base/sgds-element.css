@@ -5,9 +5,9 @@
   font-family: var(--sgds-font-family-brand);
   font-size: var(--sgds-font-size-2);
   font-weight: var(--sgds-font-weight-regular);
-  line-height: var(--sgds-line-height-body);
+  line-height: var(--sgds-line-height-heading);
   margin: 0;
-  
+
   *,
   :after,
   :before {

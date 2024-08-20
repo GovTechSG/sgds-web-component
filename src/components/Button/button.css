@@ -8,7 +8,7 @@
 
 :host([variant="primary"]) {
   --sgds-btn-bg: var(--sgds-primary-bg);
-  --sgds-btn-color: var(--sgds-default-color-on-light);
+  --sgds-btn-color: var(--sgds-default-color-on-dark);
 }
 
 :host([variant="outline"]) {
@@ -51,7 +51,7 @@
   background-color: var(--sgds-btn-bg);
   border: 1px solid var(--sgds-default-border-color-transparent);
   border-radius: var(--sgds-btn-border-radius);
-  color: var(--sgds-default-color-on-light);
+  color: var(--sgds-default-color-on-dark);
   cursor: pointer;
   display: inline-flex;
   align-items: center;

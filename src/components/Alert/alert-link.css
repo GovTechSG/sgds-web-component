@@ -1,8 +1,14 @@
 :host {
   display: inline-block;
+  cursor: pointer;
 }
 
 .alert-link, .alert-link:hover {
-  color: var(--alert-link-color);
-  font-weight: 700;
+  color: var(--sgds-alert-color);
+  text-decoration-line: underline;
+}
+.alert-link:focus-visible{
+  outline: 0;
+  box-shadow: var(--sgds-dimension-0) var(--sgds-dimension-0) var(--sgds-dimension-0) var(--sgds-dimension-4) var(--sgds-blue-300);
+
 }

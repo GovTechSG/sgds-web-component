@@ -16,7 +16,9 @@ export class SgdsCloseButton extends SgdsElement {
   @property({ type: String, reflect: true }) ariaLabel = "Close button";
 
   /** Specifies a large or small button */
-  @property({ reflect: true }) size: "sm" | "md" = "md";
+  @property({ type: String, reflect: true }) size: "sm" | "md" = "md";
+
+  @property({ type: String, reflect: true }) variant: "default" | "dark" | "light" = "default";
 
   private _handleClick() {
     this.removeEventListener("click", this._clickHandler);
@@ -32,7 +34,9 @@ export class SgdsCloseButton extends SgdsElement {
       <button
         class=${classMap({
           "btn-close": true,
-          [`btn-close-${this.size}`]: this.size
+          [`btn-close-${this.size}`]: this.size,
+          "btn-close-light": this.variant === "light",
+          "btn-close-dark": this.variant === "dark"
         })}
         aria-label=${ifDefined(this.ariaLabel)}
         @click=${this._handleClick}

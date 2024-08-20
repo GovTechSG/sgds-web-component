@@ -30,5 +30,3 @@ describe("SgdsBadge component", () => {
     expect(el.shadowRoot?.querySelector("sgds-close-button")).to.not.exist;
   });
 });
-
-

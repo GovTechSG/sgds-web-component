@@ -11,7 +11,7 @@ import anchorStyles from "../../styles/anchor.css";
  * @cssproperty --alert-link-anchor-color - The margin-right css of icon slot, to position the gap between icon and alert message
  */
 export class SgdsAlertLink extends SgdsElement {
-  static styles = [anchorStyles, alertLinkStyle];
+  static styles = [...SgdsElement.styles, anchorStyles, alertLinkStyle];
   /** Forwards to href attribute of anchor element */
   @property({ type: String, reflect: true }) href: string;
   /** Tells the browser where to open the link */
@@ -19,7 +19,7 @@ export class SgdsAlertLink extends SgdsElement {
 
   render() {
     return html`
-      <a class="alert-link" href=${ifDefined(this.href)} target=${ifDefined(this.target)}><slot></slot></a>
+      <a class="alert-link" href=${ifDefined(this.href)} target=${ifDefined(this.target)} tabindex="0"><slot></slot></a>
     `;
   }
 }
