@@ -128,10 +128,13 @@ export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
         <div class="toast-header">
           <slot name="icon"></slot>
           <strong>${this.title}</strong>
-          <small><slot name="duration"></slot></small>
           <sgds-close-button ariaLabel="close toast" @click=${this.handleCloseClick}></sgds-close-button>
         </div>
         <div class="toast-body"><slot></slot></div>
+          <div class="toast-action">
+         <slot name="action"></slot>
+        </div>
+
       </div>
     `;
   }
