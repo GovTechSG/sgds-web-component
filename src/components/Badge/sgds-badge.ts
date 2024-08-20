@@ -70,11 +70,12 @@ export class SgdsBadge extends SgdsElement {
             "
             aria-hidden=${this.show ? "false" : "true"}
           >
-            <slot name="leftIcon" class="left-icon"></slot>
+            ${!this.dismissible
+            ? html`<slot name="leftIcon" class="left-icon"></slot>`
+            : nothing}
             <span class="badge-label">
               <slot></slot>
             </span>
-            <slot name="rightIcon" class="right-icon"></slot>
 
             ${this.dismissible
               ? html`<sgds-close-button
