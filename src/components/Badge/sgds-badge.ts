@@ -13,7 +13,7 @@ export type BadgeVariant = "success" | "danger" | "warning" | "info" | "neutral"
  * @slot default - slot for badge
  * @slot leftIcon - The slot for icon to the left of the badge text
  * @slot rightIcon - The slot for icon to the right of the badge text
- * 
+ *
  * @event sgds-show - Emitted when the badge appears.
  * @event sgds-hide - Emitted after the badge closes.
  *
@@ -39,8 +39,8 @@ export class SgdsBadge extends SgdsElement {
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `info`, `success`, `danger`, `warning`, 'neutral' */
   @property({ reflect: true }) variant: BadgeVariant = "info";
 
- /** Manually set the outlined state to false */
- @property({ type: Boolean, reflect: true }) outlined = false;
+  /** Manually set the outlined state to false */
+  @property({ type: Boolean, reflect: true }) outlined = false;
 
   /** Manually set the dismissable state of the button to `false` */
   @property({ type: Boolean, reflect: true }) dismissible = false;
@@ -51,38 +51,41 @@ export class SgdsBadge extends SgdsElement {
   }
   /**@internal */
   @watch("show")
-    _handleShowChange() {
-      this.show ? this.emit("sgds-show") : this.emit("sgds-hide");
+  _handleShowChange() {
+    this.show ? this.emit("sgds-show") : this.emit("sgds-hide");
   }
-
 
   render() {
     return this.show
-     ? html`
-      <div
-        class="  
+      ? html`
+          <div
+            class="  
           ${classMap({
-          sgds: true,
-          [`badge-dismissible`]: this.dismissible,
-          badge: true,
-          show: this.show,
-          outlined: this.outlined
-        })}
+              sgds: true,
+              [`badge-dismissible`]: this.dismissible,
+              badge: true,
+              show: this.show,
+              outlined: this.outlined
+            })}
             "
-        aria-hidden=${this.show ? "false" : "true"}
-      >
-        <slot name="leftIcon"></slot>
-        <span class="badge-label">
-        <slot></slot>
-        </span>
-        <slot name="rightIcon"></slot>
-       
-        ${this.dismissible
-        ? html`<sgds-close-button size= "sm" aria-label="close the badge" @click=${this.close}></sgds-close-button>`
-        : nothing}
-        
-      </div>
-    `: nothing;
+            aria-hidden=${this.show ? "false" : "true"}
+          >
+            <slot name="leftIcon" class="left-icon"></slot>
+            <span class="badge-label">
+              <slot></slot>
+            </span>
+            <slot name="rightIcon" class="right-icon"></slot>
+
+            ${this.dismissible
+              ? html`<sgds-close-button
+                  size="sm"
+                  aria-label="close the badge"
+                  @click=${this.close}
+                ></sgds-close-button>`
+              : nothing}
+          </div>
+        `
+      : nothing;
   }
 }
 

@@ -86,21 +86,27 @@
 }
 
 .badge-label {
-  padding-left: var(--sgds-padding-3-xs);
-  padding-right: var(--sgds-badge-label-padding-x-right, var(--sgds-padding-3-xs));
+  padding-left: var(--sgds-padding-2-xs);
+  padding-right: var(--sgds-badge-label-padding-x-right, var(--sgds-padding-2-xs));
 }
 
 .badge-dismissible {
   --sgds-badge-label-padding-x-right: var(--sgds-padding-xs);
 }
 
+
 .badge-dimissible sgds-close-button {
   size: var(--sgds-icon-size-sm);
 }
 
-slot[name="leftIcon"],
-slot[name="rightIcon"] {
+.left-icon {
   size: var(--sgds-icon-size-sm);
+  padding-right:  var(--sgds-padding-3-xs);
+
+}
+.right-icon {
+  size: var(--sgds-icon-size-sm);
+  padding-left:  var(--sgds-padding-3-xs);
 }
 
 
