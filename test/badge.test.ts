@@ -1,6 +1,6 @@
 import "./sgds-web-component";
 import type { SgdsBadge } from "../src/components";
-import { fixture, expect, oneEvent, elementUpdated } from "@open-wc/testing";
+import { fixture, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 
 describe("SgdsBadge component", () => {
@@ -58,5 +58,3 @@ describe("SgdsBadge component", () => {
     expect(el.shadowRoot?.querySelector(".badge")).to.not.exist;
   });
 });
-
-
