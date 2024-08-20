@@ -1,63 +1,66 @@
 :host {
-  --sgds-spinner-color: var(--sgds-primary-filled);
-  --sgds-spinner-size: 2rem;
-  --sgds-spinner-border-width: 0.25em;
+  --sgds-spinner-bg: var(--sgds-primary-bg);
+  display: inline-flex;
 }
 
-:host([color="secondary"]) {
-  --sgds-spinner-color: var(--sgds-secondary-filled);
+:host([color="neutral"]) {
+  --sgds-spinner-bg: var(--sgds-neutral-color-emphasis);
 }
-:host([color="warning"]) {
-  --sgds-spinner-color: var(--sgds-warning-filled);
+
+.spinner-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sgds-gap-2-xs);
 }
-:host([color="danger"]) {
-  --sgds-spinner-color: var(--sgds-danger-filled);
-}
-:host([color="success"]) {
-  --sgds-spinner-color: var(--sgds-success-filled);
-}
-:host([color="info"]) {
-  --sgds-spinner-color: var(--sgds-info-filled);
-}
-:host([color="light"]) {
-  --sgds-spinner-color: var(--sgds-light-filled);
-}
-:host([color="dark"]) {
-  --sgds-spinner-color: var(--sgds-dark-filled);
+
+.spinner {
+  display: inline-flex;
+  border-radius: 50%;
+  width: var(--sgds-dimension-32);
+  height: var(--sgds-dimension-32);
 }
 
 .spinner-border {
   animation: spinner-border 0.75s linear infinite;
-  border: var(--sgds-spinner-border-width) solid;
-  border-radius: 50%;
-  border-right: var(--sgds-spinner-border-width) solid transparent;
-  display: inline-block;
-  vertical-align: -0.125em;
-  width: var(--sgds-spinner-size);
-  height: var(--sgds-spinner-size);
+  border: 0.25em solid var(--sgds-alternate-bg);
+  border-right: 0.25em solid var(--sgds-spinner-bg);
   color: var(--sgds-spinner-color);
 }
+
 .spinner-grow {
   animation: spinner-grow 0.75s linear infinite;
-  border-radius: 50%;
-  display: inline-block;
   opacity: 0;
-  vertical-align: -0.125em;
-  width: var(--sgds-spinner-size);
-  height: var(--sgds-spinner-size);
-  background-color: var(--sgds-spinner-color);
+  background-color: var(--sgds-spinner-bg);
 }
+
+.spinner-sm {
+  width: var(--sgds-dimension-20);
+  height: var(--sgds-dimension-20);
+}
+
+.spinner-lg {
+  width: var(--sgds-dimension-48);
+  height: var(--sgds-dimension-48);
+}
+
+slot {
+  font-size: var(--sgds-font-size-1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .spinner-border, .spinner-grow {
     animation-duration: 1.5s;
   }
 }
+
 /*! CSS Used keyframes */
 @keyframes spinner-border {
   to {
     transform: rotate(1turn);
   }
 }
+
 @keyframes spinner-grow {
   0% {
     transform: scale(0);
@@ -67,6 +70,7 @@
     transform: none;
   }
 }
+
 .sr-only {
   position: absolute;
   width: 1px;
