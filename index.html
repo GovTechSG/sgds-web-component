@@ -11,14 +11,15 @@
         undefined}></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        .card-title-no-image{
+        .card-title-no-image {
             display: flex;
             flex-direction: row;
+
             >sgds-badge {
                 margin-left: auto;
             }
         }
-        
+
         body {
             margin: 0;
             padding: 0;
@@ -57,10 +58,12 @@
 
             grid-area: masthead;
         }
+
         sgds-sidenav {
             grid-area: sidenav;
 
         }
+
         sgds-mainnav {
             grid-area: nav;
         }
@@ -69,7 +72,6 @@
             padding: 1rem;
             grid-area: main;
         }
-    
     </style>
     <script type="module">
         import "@webcomponents/scoped-custom-element-registry";
@@ -195,13 +197,14 @@
         </div>
         <div class="container">
             <sgds-tab-group variant="tabs-info-toggle">
-                <sgds-tab disabled slot="nav" panel="apple"><svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16"
-                        height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
+                <sgds-tab disabled slot="nav" panel="apple"><svg slot="icon" xmlns="http://www.w3.org/2000/svg"
+                        width="16" height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
                         <path
                             d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
                     </svg><span slot="count">1</span><span slot="label">Apple</span>
                 </sgds-tab>
-                <sgds-tab active slot="nav" panel="banana"><span slot="count">12</span><span slot="label">Banana</span></sgds-tab>
+                <sgds-tab active slot="nav" panel="banana"><span slot="count">12</span><span
+                        slot="label">Banana</span></sgds-tab>
                 <sgds-tab slot="nav" panel="carrot"><sgds-badge slot="count" variant="light"
                         badgeClasses="text-dark">100</sgds-badge><span slot="label">Carrot</span></sgds-tab>
 
@@ -270,15 +273,15 @@
                     <sgds-progress height="40">
                         <sgds-progress-bar variant="dark" value="50" label="50%"></sgds-progress-bar>
                     </sgds-progress>
-    
+
                     <sgds-progress height="40">
                         <sgds-progress-bar value="50" variant="secondary" striped animated></sgds-progress-bar>
                     </sgds-progress>
-    
+
                     <sgds-progress height="10">
                         <sgds-progress-bar value="50" striped animated variant="danger"></sgds-progress-bar>
                     </sgds-progress>
-    
+
                     <sgds-progress height="40">
                         <sgds-progress-bar value="50" striped animated variant="danger" label="hey"></sgds-progress-bar>
                     </sgds-progress>
@@ -287,7 +290,8 @@
             <br />
         </div>
         <div class="container">
-            <sgds-combo-box menuList='["John Smith", "Jack Adams"]' label="label" hintText="hint" hasFeedback="true" invalidFeedback="test">
+            <sgds-combo-box menuList='["John Smith", "Jack Adams"]' label="label" hintText="hint" hasFeedback="true"
+                invalidFeedback="test">
                 <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-search" viewBox="0 0 16 16">
                     <path
@@ -296,7 +300,7 @@
             </sgds-combo-box>
             <h2>Datepicker</h2>
             <form id="datepicker-form">
-                <sgds-input  type="date" hasFeedback required></sgds-input>
+                <sgds-input type="date" hasFeedback required></sgds-input>
                 <sgds-input type="text" label="Label" hinttext="This is a hint text" name="email" inputclasses=""
                     invalidfeedback="test" icon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-envelope&quot; viewBox=&quot;0 0 16 16&quot;>
                     <path d=&quot;M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z&quot;/>
@@ -418,7 +422,7 @@
                         <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
                             soluta eaque fugit fuga distinctio? Eum.</span>
                     </sgds-accordion-item>
-                    <sgds-accordion-item >
+                    <sgds-accordion-item>
                         <div slot="accordion-header">Accordion 2</div>
                         <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
                             soluta eaque fugit fuga distinctio? Eum.</span>
@@ -437,40 +441,56 @@
                 <h2>Badge</h2>
                 <div class="row">
                     <div>
-                        <sgds-badge variant = "info">
+                        <sgds-badge variant="info">
                             Testing
-                            
+
                         </sgds-badge>
                         <sgds-badge variant="info" outlined>
                             Testing
-                            
-                            
+
+
                         </sgds-badge>
+<<<<<<< Updated upstream
                         <sgds-badge variant = "info" dismissible >
                             Testing for icon and dismissible
+=======
+                        <sgds-badge variant="info" dismissible>
+                            Testing
+>>>>>>> Stashed changes
                             <i slot="lefticon" class="bi bi-apple"></i>
                         </sgds-badge>
-                        <sgds-badge variant="success" >
+                        <sgds-badge variant="success">
                             Testing
                             <i slot="leftIcon" class="bi bi-123"></i>
                         </sgds-badge>
-                        <sgds-badge variant="success"  outlined >
+                        <sgds-badge variant="success" outlined>
                             Testing
+<<<<<<< Updated upstream
                             <i slot="leftIcon" class="bi bi-apple"></i>
                             
+=======
+                            <i slot="rightIcon" class="bi bi-apple"></i>
+
+>>>>>>> Stashed changes
                         </sgds-badge>
-                        <sgds-badge variant="danger" >
+                        <sgds-badge variant="danger">
                             Testing
+<<<<<<< Updated upstream
                             <i slot="leftIcon" class="bi bi-apple"></i>
                            
+=======
+                            <i slot="rightIcon" class="bi bi-apple"></i>
+
+>>>>>>> Stashed changes
                         </sgds-badge>
                         <sgds-badge variant="danger" outlined>
                             Testing
-                           
+
                             <i slot="leftIcon" class="bi bi-123"></i>
                         </sgds-badge>
-                        <sgds-badge variant="warning" >
+                        <sgds-badge variant="warning">
                             Testing
+<<<<<<< Updated upstream
                             <i slot="leftIcon" class="bi bi-apple"></i>
                            
                         </sgds-badge>
@@ -478,15 +498,33 @@
                             Testing
                             <i slot="leftIcon" class="bi bi-apple"></i>
                            
+=======
+                            <i slot="rightIcon" class="bi bi-apple"></i>
+
                         </sgds-badge>
-                        <sgds-badge variant="neutral" >
+                        <sgds-badge variant="warning" outlined>
                             Testing
+                            <i slot="rightIcon" class="bi bi-apple"></i>
+
+>>>>>>> Stashed changes
+                        </sgds-badge>
+                        <sgds-badge variant="neutral">
+                            Testing
+<<<<<<< Updated upstream
                             <i slot="leftIcon" class="bi bi-apple"></i>
                             
                         </sgds-badge>
                         <sgds-badge variant="neutral" outlined dismissible>
                             Testing outlined 
                             
+=======
+                            <i slot="rightIcon" class="bi bi-apple"></i>
+
+                        </sgds-badge>
+                        <sgds-badge variant="neutral" outlined>
+                            Testing
+
+>>>>>>> Stashed changes
                             <i slot="leftIcon" class="bi bi-123"></i>
                         </sgds-badge>
                         <sgds-badge variant="success" dismissible>
@@ -496,14 +534,14 @@
                         </sgds-badge>
                         <sgds-badge variant="neutral" dismissible>
                             Testing
-                            
-                            
-                        </sgds-badge>
-                        
-                        </sgds-badge>
-                        <br/>
 
-                    
+
+                        </sgds-badge>
+
+                        </sgds-badge>
+                        <br />
+
+
                     </div>
 
                 </div>
@@ -571,7 +609,7 @@
                 <h2>Button</h2>
                 <div class="row">
                     <div class="grid">
-                        <sgds-button >Default</sgds-button>
+                        <sgds-button>Default</sgds-button>
                         <sgds-button variant="primary">Primary button</sgds-button>
                         <sgds-button variant="outline">Outline button</sgds-button>
                         <sgds-button variant="ghost">Ghost button</sgds-button>
@@ -735,12 +773,12 @@
             <div class="container">
                 <h2>Checkbox</h2>
                 <form id="radio-submit">
-                <sgds-checkbox id="hehe" isInline invalid hasFeedback invalidFeedback="test">1</sgds-checkbox>
-                <sgds-checkbox hasFeedback isInline>2</sgds-checkbox>
-                <sgds-checkbox isInline>3</sgds-checkbox>
-                <sgds-switch  invalid checked hasFeedback>test</sgds-switch>
-                <sgds-button  type="submit" >Submit</sgds-button>
-            </form>
+                    <sgds-checkbox id="hehe" isInline invalid hasFeedback invalidFeedback="test">1</sgds-checkbox>
+                    <sgds-checkbox hasFeedback isInline>2</sgds-checkbox>
+                    <sgds-checkbox isInline>3</sgds-checkbox>
+                    <sgds-switch invalid checked hasFeedback>test</sgds-switch>
+                    <sgds-button type="submit">Submit</sgds-button>
+                </form>
             </div>
             <div class="container">
                 <h2>Checkbox</h2>
@@ -751,20 +789,20 @@
             <div class="container">
                 <h2>Radiogroup</h2>
                 <form id="radio-submit">
-                    <sgds-radio-group required hasFeedback invalidFeedback="This is required" >
+                    <sgds-radio-group required hasFeedback invalidFeedback="This is required">
                         <span slot="label">Select an option</span>
-                        <sgds-radio disabled isInline value="1" >Option 1</sgds-radio>
-                        <sgds-radio isInline value="2"  >Option 2</sgds-radio>
-                        <sgds-radio isInline value="3" >Option 3</sgds-radio>
+                        <sgds-radio disabled isInline value="1">Option 1</sgds-radio>
+                        <sgds-radio isInline value="2">Option 2</sgds-radio>
+                        <sgds-radio isInline value="3">Option 3</sgds-radio>
                     </sgds-radio-group>
-                    <sgds-button  type="submit" >Submit</sgds-button>
+                    <sgds-button type="submit">Submit</sgds-button>
                 </form>
                 <script>
-                    const radioForm = document.querySelector("#radio-submit")
-                    radioForm.addEventListener("submit", (e) => {
+                    const radioForm = document.querySelector( "#radio-submit" )
+                    radioForm.addEventListener( "submit", ( e ) => {
                         e.preventDefault()
                         e.stopPropagation()
-                    })
+                    } )
                 </script>
             </div>
             <div class="container">
@@ -797,11 +835,11 @@
                     <!-- <a  href="https://google.com">Go somewhere</a>
                     <a  href="https://google.com">Go somewhere</a> -->
                 </sgds-card>
-                <sgds-card bordercolor="primary" textcolor="" >
+                <sgds-card bordercolor="primary" textcolor="">
                     <div slot="card-title" class="card-title-no-image">
                         <i slot="rightIcon" class="bi bi-apple"></i>
-                       Card
-                    <sgds-badge>test</sgds-badge>
+                        Card
+                        <sgds-badge>test</sgds-badge>
                     </div>
                     <span slot="card-text">Some quick example text to build on the card title and make up the bulk of
                         the card's content.</span>
@@ -923,101 +961,144 @@
                 <h2>Alert</h2>
                 <div class="row">
                     <div class="container col is-6">
-                        
-                        <sgds-alert variant="info" show="" dismissible>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16.5341 8.59088C16.2046 8.26137 15.6704 8.26137 15.3409 8.59088C15.3329 8.59884 15.3254 8.60726 15.3185 8.61612L11.4121 13.5938L9.05686 11.2386C8.72736 10.9091 8.19312 10.9091 7.86362 11.2386C7.53411 11.5681 7.53411 12.1024 7.86362 12.4319L10.8409 15.4091C11.1704 15.7386 11.7046 15.7386 12.0341 15.4091C12.0415 15.4018 12.0484 15.394 12.0549 15.3859L16.5461 9.77191C16.8636 9.44154 16.8596 8.91634 16.5341 8.59088Z" fill="white"/>
-                              </svg>
+
+                        <sgds-alert variant="info" show="" dismissible title="Title">
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16.5341 8.59088C16.2046 8.26137 15.6704 8.26137 15.3409 8.59088C15.3329 8.59884 15.3254 8.60726 15.3185 8.61612L11.4121 13.5938L9.05686 11.2386C8.72736 10.9091 8.19312 10.9091 7.86362 11.2386C7.53411 11.5681 7.53411 12.1024 7.86362 12.4319L10.8409 15.4091C11.1704 15.7386 11.7046 15.7386 12.0341 15.4091C12.0415 15.4018 12.0484 15.394 12.0549 15.3859L16.5461 9.77191C16.8636 9.44154 16.8596 8.91634 16.5341 8.59088Z"
+                                    fill="white" />
+                            </svg>
                             <span>
-                                This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
+                                This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it
+                                a click if you like. You may add the dismissible option
                             </span>
                         </sgds-alert>
                         <sgds-alert variant="info" show="" title="Title" dismissible>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16.5341 8.59088C16.2046 8.26137 15.6704 8.26137 15.3409 8.59088C15.3329 8.59884 15.3254 8.60726 15.3185 8.61612L11.4121 13.5938L9.05686 11.2386C8.72736 10.9091 8.19312 10.9091 7.86362 11.2386C7.53411 11.5681 7.53411 12.1024 7.86362 12.4319L10.8409 15.4091C11.1704 15.7386 11.7046 15.7386 12.0341 15.4091C12.0415 15.4018 12.0484 15.394 12.0549 15.3859L16.5461 9.77191C16.8636 9.44154 16.8596 8.91634 16.5341 8.59088Z" fill="white"/>
-                              </svg>
                             <span>
-                                This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
+                                This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it
+                                a click if you like. You may add the dismissible option
                             </span>
                         </sgds-alert>
                         <sgds-alert variant="success" show="" dismissible>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16.5341 8.59088C16.2046 8.26137 15.6704 8.26137 15.3409 8.59088C15.3329 8.59884 15.3254 8.60726 15.3185 8.61612L11.4121 13.5938L9.05686 11.2386C8.72736 10.9091 8.19312 10.9091 7.86362 11.2386C7.53411 11.5681 7.53411 12.1024 7.86362 12.4319L10.8409 15.4091C11.1704 15.7386 11.7046 15.7386 12.0341 15.4091C12.0415 15.4018 12.0484 15.394 12.0549 15.3859L16.5461 9.77191C16.8636 9.44154 16.8596 8.91634 16.5341 8.59088Z" fill="white"/>
-                              </svg>
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16.5341 8.59088C16.2046 8.26137 15.6704 8.26137 15.3409 8.59088C15.3329 8.59884 15.3254 8.60726 15.3185 8.61612L11.4121 13.5938L9.05686 11.2386C8.72736 10.9091 8.19312 10.9091 7.86362 11.2386C7.53411 11.5681 7.53411 12.1024 7.86362 12.4319L10.8409 15.4091C11.1704 15.7386 11.7046 15.7386 12.0341 15.4091C12.0415 15.4018 12.0484 15.394 12.0549 15.3859L16.5461 9.77191C16.8636 9.44154 16.8596 8.91634 16.5341 8.59088Z"
+                                    fill="white" />
+                            </svg>
                             <span>
-                                This is a info alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
+                                This is a info alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a
+                                click if you like. You may add the dismissible option
                             </span>
                         </sgds-alert>
                         <sgds-alert variant="danger" show="" dismissible>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16.5341 8.59088C16.2046 8.26137 15.6704 8.26137 15.3409 8.59088C15.3329 8.59884 15.3254 8.60726 15.3185 8.61612L11.4121 13.5938L9.05686 11.2386C8.72736 10.9091 8.19312 10.9091 7.86362 11.2386C7.53411 11.5681 7.53411 12.1024 7.86362 12.4319L10.8409 15.4091C11.1704 15.7386 11.7046 15.7386 12.0341 15.4091C12.0415 15.4018 12.0484 15.394 12.0549 15.3859L16.5461 9.77191C16.8636 9.44154 16.8596 8.91634 16.5341 8.59088Z" fill="white"/>
-                              </svg>
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16.5341 8.59088C16.2046 8.26137 15.6704 8.26137 15.3409 8.59088C15.3329 8.59884 15.3254 8.60726 15.3185 8.61612L11.4121 13.5938L9.05686 11.2386C8.72736 10.9091 8.19312 10.9091 7.86362 11.2386C7.53411 11.5681 7.53411 12.1024 7.86362 12.4319L10.8409 15.4091C11.1704 15.7386 11.7046 15.7386 12.0341 15.4091C12.0415 15.4018 12.0484 15.394 12.0549 15.3859L16.5461 9.77191C16.8636 9.44154 16.8596 8.91634 16.5341 8.59088Z"
+                                    fill="white" />
+                            </svg>
                             <span>
-                                This is an outline warning alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
+                                This is an outline warning alert with <sgds-alert-link>an example
+                                    link</sgds-alert-link>. Give it a click if you like. You may add the dismissible
+                                option
                             </span>
                         </sgds-alert>
                         <sgds-alert variant="warning" show="" dismissible>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16.5341 8.59088C16.2046 8.26137 15.6704 8.26137 15.3409 8.59088C15.3329 8.59884 15.3254 8.60726 15.3185 8.61612L11.4121 13.5938L9.05686 11.2386C8.72736 10.9091 8.19312 10.9091 7.86362 11.2386C7.53411 11.5681 7.53411 12.1024 7.86362 12.4319L10.8409 15.4091C11.1704 15.7386 11.7046 15.7386 12.0341 15.4091C12.0415 15.4018 12.0484 15.394 12.0549 15.3859L16.5461 9.77191C16.8636 9.44154 16.8596 8.91634 16.5341 8.59088Z" fill="white"/>
-                              </svg>
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16.5341 8.59088C16.2046 8.26137 15.6704 8.26137 15.3409 8.59088C15.3329 8.59884 15.3254 8.60726 15.3185 8.61612L11.4121 13.5938L9.05686 11.2386C8.72736 10.9091 8.19312 10.9091 7.86362 11.2386C7.53411 11.5681 7.53411 12.1024 7.86362 12.4319L10.8409 15.4091C11.1704 15.7386 11.7046 15.7386 12.0341 15.4091C12.0415 15.4018 12.0484 15.394 12.0549 15.3859L16.5461 9.77191C16.8636 9.44154 16.8596 8.91634 16.5341 8.59088Z"
+                                    fill="white" />
+                            </svg>
                             <span>
-                                This is an outline danger alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
+                                This is an outline danger alert with <sgds-alert-link>an example link</sgds-alert-link>.
+                                Give it a click if you like. You may add the dismissible option
                             </span>
                         </sgds-alert>
                         <sgds-alert variant="neutral" show="" dismissible>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16.5341 8.59088C16.2046 8.26137 15.6704 8.26137 15.3409 8.59088C15.3329 8.59884 15.3254 8.60726 15.3185 8.61612L11.4121 13.5938L9.05686 11.2386C8.72736 10.9091 8.19312 10.9091 7.86362 11.2386C7.53411 11.5681 7.53411 12.1024 7.86362 12.4319L10.8409 15.4091C11.1704 15.7386 11.7046 15.7386 12.0341 15.4091C12.0415 15.4018 12.0484 15.394 12.0549 15.3859L16.5461 9.77191C16.8636 9.44154 16.8596 8.91634 16.5341 8.59088Z" fill="white"/>
-                              </svg>
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16.5341 8.59088C16.2046 8.26137 15.6704 8.26137 15.3409 8.59088C15.3329 8.59884 15.3254 8.60726 15.3185 8.61612L11.4121 13.5938L9.05686 11.2386C8.72736 10.9091 8.19312 10.9091 7.86362 11.2386C7.53411 11.5681 7.53411 12.1024 7.86362 12.4319L10.8409 15.4091C11.1704 15.7386 11.7046 15.7386 12.0341 15.4091C12.0415 15.4018 12.0484 15.394 12.0549 15.3859L16.5461 9.77191C16.8636 9.44154 16.8596 8.91634 16.5341 8.59088Z"
+                                    fill="white" />
+                            </svg>
                             <span>
-                                This is an outline success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
+                                This is an outline success alert with <sgds-alert-link>an example
+                                    link</sgds-alert-link>. Give it a click if you like. You may add the dismissible
+                                option
                             </span>
                         </sgds-alert>
                         <sgds-alert variant="info" show="" outlined dismissible>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM12 7.5C11.3977 7.5 10.927 8.02007 10.9869 8.61942L11.3815 12.5653C11.4133 12.883 11.6807 13.125 12 13.125C12.3193 13.125 12.5867 12.883 12.6185 12.5653L13.0131 8.61942C13.073 8.02007 12.6023 7.5 12 7.5ZM12.0017 14.25C11.3804 14.25 10.8767 14.7537 10.8767 15.375C10.8767 15.9963 11.3804 16.5 12.0017 16.5C12.6231 16.5 13.1267 15.9963 13.1267 15.375C13.1267 14.7537 12.6231 14.25 12.0017 14.25Z" fill="#252525"/>
-                                </svg>
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM12 7.5C11.3977 7.5 10.927 8.02007 10.9869 8.61942L11.3815 12.5653C11.4133 12.883 11.6807 13.125 12 13.125C12.3193 13.125 12.5867 12.883 12.6185 12.5653L13.0131 8.61942C13.073 8.02007 12.6023 7.5 12 7.5ZM12.0017 14.25C11.3804 14.25 10.8767 14.7537 10.8767 15.375C10.8767 15.9963 11.3804 16.5 12.0017 16.5C12.6231 16.5 13.1267 15.9963 13.1267 15.375C13.1267 14.7537 12.6231 14.25 12.0017 14.25Z"
+                                    fill="#252525" />
+                            </svg>
                             <span>
-                                This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
+                                This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it
+                                a click if you like. You may add the dismissible option
                             </span>
                         </sgds-alert>
                         <sgds-alert variant="info" show="" outlined dismissible>
                             <span>
-                                This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
+                                This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it
+                                a click if you like. You may add the dismissible option
                             </span>
                         </sgds-alert>
                         <sgds-alert variant="success" show="" outlined dismissible>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM12 7.5C11.3977 7.5 10.927 8.02007 10.9869 8.61942L11.3815 12.5653C11.4133 12.883 11.6807 13.125 12 13.125C12.3193 13.125 12.5867 12.883 12.6185 12.5653L13.0131 8.61942C13.073 8.02007 12.6023 7.5 12 7.5ZM12.0017 14.25C11.3804 14.25 10.8767 14.7537 10.8767 15.375C10.8767 15.9963 11.3804 16.5 12.0017 16.5C12.6231 16.5 13.1267 15.9963 13.1267 15.375C13.1267 14.7537 12.6231 14.25 12.0017 14.25Z" fill="#252525"/>
-                                </svg>
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM12 7.5C11.3977 7.5 10.927 8.02007 10.9869 8.61942L11.3815 12.5653C11.4133 12.883 11.6807 13.125 12 13.125C12.3193 13.125 12.5867 12.883 12.6185 12.5653L13.0131 8.61942C13.073 8.02007 12.6023 7.5 12 7.5ZM12.0017 14.25C11.3804 14.25 10.8767 14.7537 10.8767 15.375C10.8767 15.9963 11.3804 16.5 12.0017 16.5C12.6231 16.5 13.1267 15.9963 13.1267 15.375C13.1267 14.7537 12.6231 14.25 12.0017 14.25Z"
+                                    fill="#252525" />
+                            </svg>
                             <span>
-                                This is a info alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
+                                This is a info alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a
+                                click if you like. You may add the dismissible option
                             </span>
                         </sgds-alert>
                         <sgds-alert variant="danger" show="" outlined dismissible>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM12 7.5C11.3977 7.5 10.927 8.02007 10.9869 8.61942L11.3815 12.5653C11.4133 12.883 11.6807 13.125 12 13.125C12.3193 13.125 12.5867 12.883 12.6185 12.5653L13.0131 8.61942C13.073 8.02007 12.6023 7.5 12 7.5ZM12.0017 14.25C11.3804 14.25 10.8767 14.7537 10.8767 15.375C10.8767 15.9963 11.3804 16.5 12.0017 16.5C12.6231 16.5 13.1267 15.9963 13.1267 15.375C13.1267 14.7537 12.6231 14.25 12.0017 14.25Z" fill="#252525"/>
-                                </svg>
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM12 7.5C11.3977 7.5 10.927 8.02007 10.9869 8.61942L11.3815 12.5653C11.4133 12.883 11.6807 13.125 12 13.125C12.3193 13.125 12.5867 12.883 12.6185 12.5653L13.0131 8.61942C13.073 8.02007 12.6023 7.5 12 7.5ZM12.0017 14.25C11.3804 14.25 10.8767 14.7537 10.8767 15.375C10.8767 15.9963 11.3804 16.5 12.0017 16.5C12.6231 16.5 13.1267 15.9963 13.1267 15.375C13.1267 14.7537 12.6231 14.25 12.0017 14.25Z"
+                                    fill="#252525" />
+                            </svg>
                             <span>
-                                This is an outline warning alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
+                                This is an outline warning alert with <sgds-alert-link>an example
+                                    link</sgds-alert-link>. Give it a click if you like. You may add the dismissible
+                                option
                             </span>
                         </sgds-alert>
                         <sgds-alert variant="warning" show="" outlined dismissible>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM12 7.5C11.3977 7.5 10.927 8.02007 10.9869 8.61942L11.3815 12.5653C11.4133 12.883 11.6807 13.125 12 13.125C12.3193 13.125 12.5867 12.883 12.6185 12.5653L13.0131 8.61942C13.073 8.02007 12.6023 7.5 12 7.5ZM12.0017 14.25C11.3804 14.25 10.8767 14.7537 10.8767 15.375C10.8767 15.9963 11.3804 16.5 12.0017 16.5C12.6231 16.5 13.1267 15.9963 13.1267 15.375C13.1267 14.7537 12.6231 14.25 12.0017 14.25Z" fill="#252525"/>
-                                </svg>
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM12 7.5C11.3977 7.5 10.927 8.02007 10.9869 8.61942L11.3815 12.5653C11.4133 12.883 11.6807 13.125 12 13.125C12.3193 13.125 12.5867 12.883 12.6185 12.5653L13.0131 8.61942C13.073 8.02007 12.6023 7.5 12 7.5ZM12.0017 14.25C11.3804 14.25 10.8767 14.7537 10.8767 15.375C10.8767 15.9963 11.3804 16.5 12.0017 16.5C12.6231 16.5 13.1267 15.9963 13.1267 15.375C13.1267 14.7537 12.6231 14.25 12.0017 14.25Z"
+                                    fill="#252525" />
+                            </svg>
                             <span>
-                                This is an outline danger alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
+                                This is an outline danger alert with <sgds-alert-link>an example link</sgds-alert-link>.
+                                Give it a click if you like. You may add the dismissible option
                             </span>
                         </sgds-alert>
                         <sgds-alert variant="neutral" show="" outlined dismissible>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM12 7.5C11.3977 7.5 10.927 8.02007 10.9869 8.61942L11.3815 12.5653C11.4133 12.883 11.6807 13.125 12 13.125C12.3193 13.125 12.5867 12.883 12.6185 12.5653L13.0131 8.61942C13.073 8.02007 12.6023 7.5 12 7.5ZM12.0017 14.25C11.3804 14.25 10.8767 14.7537 10.8767 15.375C10.8767 15.9963 11.3804 16.5 12.0017 16.5C12.6231 16.5 13.1267 15.9963 13.1267 15.375C13.1267 14.7537 12.6231 14.25 12.0017 14.25Z" fill="#252525"/>
-                                </svg>
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM12 7.5C11.3977 7.5 10.927 8.02007 10.9869 8.61942L11.3815 12.5653C11.4133 12.883 11.6807 13.125 12 13.125C12.3193 13.125 12.5867 12.883 12.6185 12.5653L13.0131 8.61942C13.073 8.02007 12.6023 7.5 12 7.5ZM12.0017 14.25C11.3804 14.25 10.8767 14.7537 10.8767 15.375C10.8767 15.9963 11.3804 16.5 12.0017 16.5C12.6231 16.5 13.1267 15.9963 13.1267 15.375C13.1267 14.7537 12.6231 14.25 12.0017 14.25Z"
+                                    fill="#252525" />
+                            </svg>
                             <span>
-                                This is an outline success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
+                                This is an outline success alert with <sgds-alert-link>an example
+                                    link</sgds-alert-link>. Give it a click if you like. You may add the dismissible
+                                option
                             </span>
                         </sgds-alert>
-                       
+
                     </div>
                 </div>
             </div>
@@ -1142,17 +1223,17 @@
                     links='[{"title":"Application Guidelines","url":"/application-guidelines/lorem-ipsum-one/second-level-a/","links":[{"label":"<div>hello world </div>","href":"/application-guidelines/lorem-ipsum-one/second-level-a/"},{"label":"Second Level B","href":"/application-guidelines/lorem-ipsum-two/part-A/"},{"label":"Lorem Ipsum Three","href":"/application-guidelines/lorem-ipsum-three/"}]},{"title":"Legislation","url":"#","external":true,"links":[{"label":"External Link One","href":"https://en.wikipedia.org/wiki/Year","external":true},{"label":"External Link Two","href":"https://en.wikipedia.org/wiki/Spring_(season)","external":true}]},{"title":"Resources","url":"/resource_room/","links":[{"label":"All","href":"/resource_room/"},{"label":"Forms and Templates","href":"/resource_room/forms-and-templates/"},{"label":"Guides","href":"/resource_room/guides/"}]}]'></sgds-footer>
 
                 <script>
-                    const nightBtn = document.querySelector("#night-theme")
-                    nightBtn.addEventListener("click", (e) => {
+                    const nightBtn = document.querySelector( "#night-theme" )
+                    nightBtn.addEventListener( "click", ( e ) => {
                         e.preventDefault()
-                        const html = document.querySelector("html")
-                        if(html.classList.contains("sgds-night-theme")){
-                            html.classList.remove("sgds-night-theme")
+                        const html = document.querySelector( "html" )
+                        if ( html.classList.contains( "sgds-night-theme" ) ) {
+                            html.classList.remove( "sgds-night-theme" )
                         } else {
-                            html.classList.add("sgds-night-theme")
+                            html.classList.add( "sgds-night-theme" )
 
                         }
-                    })
+                    } )
                     const modalShowButton = document.querySelector( '#modalShowButton' );
                     modalShowButton.addEventListener( 'click', () => {
                         const modal = document.querySelector( "sgds-modal" );

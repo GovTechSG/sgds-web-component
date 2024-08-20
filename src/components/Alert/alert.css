@@ -60,11 +60,13 @@
 
 slot[name="icon"] {
   display: flex;
-
+}
+slot[name="icon"].d-none {
+  display: none;
 }
 slot[name="icon"]::slotted(*) {
   width: var(--sgds-icon-size-lg);
-  height:  var(--sgds-icon-size-lg);
+  height: var(--sgds-icon-size-lg);
 }
 .alert {
   display: flex;

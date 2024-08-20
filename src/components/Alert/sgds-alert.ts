@@ -1,5 +1,5 @@
 import { nothing } from "lit";
-import { property } from "lit/decorators.js";
+import { property, queryAssignedNodes, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
@@ -55,6 +55,15 @@ export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
   @watch("show")
   _handleShowChange() {
     this.show ? this.emit("sgds-show") : this.emit("sgds-hide");
+  }
+
+  @queryAssignedNodes({ slot: "icon", flatten: true })
+  _iconNodes!: Array<Node>;
+
+  firstUpdated() {
+    if (this._iconNodes.length === 0) {
+      return this.shadowRoot.querySelector("slot[name='icon']")?.classList.add("d-none");
+    } else return;
   }
   render() {
     return this.show
