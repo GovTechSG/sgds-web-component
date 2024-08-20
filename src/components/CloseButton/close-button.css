@@ -34,7 +34,12 @@
   width: var(--sgds-icon-size-lg);
   height: var(--sgds-icon-size-lg);
 }
-
+.btn-close-light::before {
+  color: var(--sgds-default-color-on-dark);
+}
+.btn-close-dark::before {
+  color: var(--sgds-default-color-on-light);
+}
 .btn-close:hover {
   background-color: var(--sgds-default-bg-translucent);
 }

@@ -4,39 +4,12 @@ import { html } from "lit";
 import sinon from "sinon";
 import type { SgdsAlert, SgdsCloseButton } from "../src/components";
 
-describe("<sgds-alert-heading>", () => {
-  it("the default tag is h4", async () => {
-    const el = await fixture(html`<sgds-alert-heading></sgds-alert-heading>`);
-    assert.shadowDom.equal(
-      el,
-      `<span
-      class="h4"
-      >
-      <slot></slot>
-      </span>
-        `
-    );
-  });
-  it("span class is defined by headerTag property", async () => {
-    const el = await fixture(html`<sgds-alert-heading headerTag="h2"></sgds-alert-heading>`);
-    assert.shadowDom.equal(
-      el,
-      `<span
-      class="h2"
-      >
-      <slot></slot>
-      </span>
-        `
-    );
-  });
-});
-
 describe("<sgds-alert-link>", () => {
   it("semantically matches the DOM", async () => {
     const el = await fixture(html`<sgds-alert-link></sgds-alert-link>`);
     assert.shadowDom.equal(
       el,
-      `<a class="alert-link"><slot></slot> </a>
+      `<a class="alert-link" tabindex="0"><slot></slot> </a>
         `
     );
   });
@@ -44,7 +17,7 @@ describe("<sgds-alert-link>", () => {
     const el = await fixture(html`<sgds-alert-link href="#"></sgds-alert-link>`);
     assert.shadowDom.equal(
       el,
-      `<a class="alert-link" href="#"><slot></slot> </a>
+      `<a class="alert-link" href="#" tabindex="0"><slot></slot> </a>
         `
     );
   });
@@ -52,7 +25,7 @@ describe("<sgds-alert-link>", () => {
     const el = await fixture(html`<sgds-alert-link target="_blank"></sgds-alert-link>`);
     assert.shadowDom.equal(
       el,
-      `<a class="alert-link" target="_blank"><slot></slot> </a>
+      `<a class="alert-link" target="_blank" tabindex="0"><slot></slot> </a>
         `
     );
   });
@@ -63,9 +36,11 @@ describe("<Alert>", () => {
     assert.shadowDom.equal(
       el,
       `
-        <div class="sgds alert fade show" role="alert" aria-hidden="false">
-          <i><slot name="icon"></slot></i>
-          <slot></slot>
+        <div class="alert show" role="alert" aria-hidden="false">
+          <slot name="icon"></slot>
+          <div class="alert-content">
+           <slot></slot>
+          </div>        
         </div>
       `
     );
@@ -85,13 +60,13 @@ describe("<Alert>", () => {
   it("Should have dismissible style", async () => {
     const el = await fixture<SgdsAlert>(html` <sgds-alert show dismissible></sgds-alert> `);
 
-    const alert = el.shadowRoot?.querySelector(".sgds.alert");
+    const alert = el.shadowRoot?.querySelector(".alert");
     expect(alert?.classList.value).to.contain("alert-dismissible");
   });
-  it('Should default to variant="primary"', async () => {
+  it('Should default to variant="info"', async () => {
     const el = await fixture<SgdsAlert>(html` <sgds-alert></sgds-alert> `);
 
-    expect(el.getAttribute("variant")).to.equal("primary");
+    expect(el.getAttribute("variant")).to.equal("info");
   });
 
   it("Should emit the sgds-hide event on dismiss click of close button", async () => {
@@ -123,28 +98,22 @@ describe("<Alert>", () => {
     expect(el.getAttribute("variant")).to.equal("warning");
   });
 
-  it("should have fade class when rendered", async () => {
-    const el = await fixture(html`<sgds-alert show variant="primary">Test alert</sgds-alert>`);
-    const base = el.shadowRoot?.querySelector(".sgds.alert");
-    expect(base?.classList.contains("fade")).to.be.true;
-  });
-
   it("when show is false, should remove from shadow DOM", async () => {
-    const el = await fixture(html`<sgds-alert variant="primary">Test alert</sgds-alert>`);
-    const base = el.shadowRoot?.querySelector(".sgds.alert");
+    const el = await fixture(html`<sgds-alert>Test alert</sgds-alert>`);
+    const base = el.shadowRoot?.querySelector(".alert");
     assert.notExists(base, "Alert element not exists");
   });
 
   it("when show is true, alert should have show class", async () => {
-    const el = await fixture(html`<sgds-alert variant="primary" show>Test alert</sgds-alert>`);
-    const base = el.shadowRoot?.querySelector(".sgds.alert");
+    const el = await fixture(html`<sgds-alert show>Test alert</sgds-alert>`);
+    const base = el.shadowRoot?.querySelector(".alert");
     expect(base?.classList.contains("show")).to.be.true;
   });
 
   describe("Web Accessibility", () => {
     it("Should have alert role", async () => {
       const el = await fixture(html`<sgds-alert show></sgds-alert>`);
-      const alertEl = el.shadowRoot?.querySelector("div.sgds.alert");
+      const alertEl = el.shadowRoot?.querySelector("div.alert");
       assert.equal(alertEl?.getAttribute("role"), "alert");
     });
   });
