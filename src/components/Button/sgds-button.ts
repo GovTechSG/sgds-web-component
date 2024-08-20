@@ -61,7 +61,7 @@ export class SgdsButton extends SgdsElement {
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as "outline" versions (prefixed by `outline-*`) */
   @property({ reflect: true }) variant: ButtonVariant;
 
-  /** Specifies a large or small button */
+  /** Specifies a small, medium or large button, the size is medium by default. */
   @property({ reflect: true }) size: "sm" | "md" | "lg" = "md";
 
   /** Manually set the visual state of the button to `:active` */

@@ -350,14 +350,30 @@
         </div>
         <div class="container">
             <h2>Spinner</h2>
-            <sgds-spinner></sgds-spinner>
-            <sgds-spinner color="secondary"></sgds-spinner>
-            <sgds-spinner color="warning"></sgds-spinner>
-            <sgds-spinner color="danger"></sgds-spinner>
-            <sgds-spinner color="success"></sgds-spinner>
-            <sgds-spinner color="info"></sgds-spinner>
-            <sgds-spinner color="light"></sgds-spinner>
-            <sgds-spinner color="dark"></sgds-spinner>
+            <div>
+                <sgds-spinner></sgds-spinner>
+                <sgds-spinner color="neutral"></sgds-spinner>
+                <sgds-spinner type="grow"></sgds-spinner>
+                <sgds-spinner type="grow" color="neutral"></sgds-spinner>
+            </div>
+            <h3>With Label</h3>
+            <div class="row">
+                <div class="grid">
+                    <sgds-spinner>Loading</sgds-spinner>
+                    <sgds-spinner type="grow">Loading</sgds-spinner>
+                </div>
+            </div>
+            <h3>Spinner Size</h3>
+            <div class="row">
+                <div class="grid">
+                    <sgds-spinner size="sm"></sgds-spinner>
+                    <sgds-spinner></sgds-spinner>
+                    <sgds-spinner size="lg"></sgds-spinner>
+                    <sgds-spinner type="grow" size="sm"></sgds-spinner>
+                    <sgds-spinner type="grow"></sgds-spinner>
+                    <sgds-spinner type="grow" size="lg"></sgds-spinner>
+                </div>
+            </div>
         </div>
         <div class="container">
             <h2>Dropdown</h2>
