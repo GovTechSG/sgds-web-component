@@ -1,0 +1,44 @@
+import { __decorate } from "tslib";
+import { html } from "lit";
+import { query } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import LinkElement from "../../base/link-element";
+import dropdownStyle from "./dropdown.css";
+/**
+ * @summary `SgdsDropdownItem` are navigation links built with `HTMLAnchorElement`. It should be used in the default slot of `SgdsDropdown`
+ */
+export class SgdsDropdownItem extends LinkElement {
+    connectedCallback() {
+        super.connectedCallback();
+        this.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                this.anchor.click();
+            }
+        });
+    }
+    render() {
+        return html `
+      <div>
+        <a
+          href="${this.href}"
+          class="dropdown-item ${classMap({
+            disabled: this.disabled,
+            active: this.active
+        })}"
+          ?disabled=${this.disabled}
+          aria-disabled=${this.disabled ? "true" : "false"}
+          role="menuitem"
+          tabindex=${this.disabled ? "-1" : "0"}
+          target=${this.target}
+          ><slot></slot
+        ></a>
+      </div>
+    `;
+    }
+}
+SgdsDropdownItem.styles = [dropdownStyle];
+__decorate([
+    query("a")
+], SgdsDropdownItem.prototype, "anchor", void 0);
+export default SgdsDropdownItem;
+//# sourceMappingURL=sgds-dropdown-item.js.map

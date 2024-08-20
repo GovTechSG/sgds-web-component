@@ -1,0 +1,167 @@
+import { __decorate } from "tslib";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
+import { property } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import { live } from "lit/directives/live.js";
+import { createRef, ref } from "lit/directives/ref.js";
+import { html } from "lit/static-html.js";
+import { CardElement } from "../../base/card-element";
+import genId from "../../utils/generateId";
+import { watch } from "../../utils/watch";
+import { SgdsCheckbox } from "../Checkbox/sgds-checkbox";
+import { SgdsRadio } from "../Radio/sgds-radio";
+import actionCardStyles from "./action-card.css";
+/**
+ * @summary Action Card are cards with built in checkbox or radio components. The ref of input is extended to the Card's body.
+ * @slot icon - Icon content in the card-subtitile
+ * @slot card-subtitle - The subtitle of the card
+ * @slot card-title - The title of the card
+ * @slot card-text - The paragrapher text of the card
+ *
+ * @event sgds-change - Emitted when the checked state of card's checkbox changes or when the selected card's radio has changed
+ *
+ * @csspart base - The action card base wrapper
+ * @csspart body - The action card body
+ * @csspart subtitle - The action card subtitle
+ * @csspart title - The action card title
+ * @csspart text - The action card text
+ *
+ * @cssprop --sgds-action-card-transition-duration - The transition duration to active or hover state. Defaults to 0.3s
+ * @cssprop --sgds-action-card-body-gap - The vertical gap between items in card body
+ * @cssprop --sgds-card-bg - The background color of the card
+ * @cssprop --sgds-card-height - The height of the card. By default, height of card depends on the size of its children
+ * @cssprop --sgds-card-border-width - The border width of card
+ * @cssprop --sgds-card-border-color - The border color of card
+ * @cssprop --sgds-card-border-radius - The border radius of card
+ * @cssprop --sgds-card-box-shadow - The box-shadow of card
+ * @cssprop --sgds-card-inner-border-radius - The inner border radius of card. Useful in cases where card image is applied to prevent image border from exceeding the outer borders of the card
+ * @cssprop --sgds-card-body-color - The text color of the items in card body. This includes title, subtitle and excludes link.
+ * @cssprop --sgds-card-body-padding - The padding of the card body
+ * @cssprop --sgds-card-title-color - The text color of card title
+ * @cssprop --sgds-card-title-margin-bottom - The margin-bottom of card title
+ * @cssprop --sgds-card-subtitle-color - The text color of card subtitle
+ */
+export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
+    constructor() {
+        super(...arguments);
+        /** @internal */
+        this.inputRef = createRef();
+        /** Disables the input (so the user can't check / uncheck it). */
+        this.disabled = false;
+        /** Draws the input in a checked state. */
+        this.checked = false;
+        /** The type of input of the action card */
+        this.type = "checkbox";
+        /** Controls the active styling of the action card */
+        this.active = false;
+        /** @internal The input's id. */
+        this.inputId = genId("action-card", "input");
+    }
+    /**@internal */
+    static get scopedElements() {
+        return {
+            "sgds-checkbox": SgdsCheckbox,
+            "sgds-radio": SgdsRadio
+        };
+    }
+    /** Simulates a click on the input control*/
+    click() {
+        this.inputRef.value.click();
+    }
+    /** @internal Declare the click event listener*/
+    async handleInputChange() {
+        this.inputRef.value.click();
+        this.emit("sgds-change");
+    }
+    /** @internal */
+    async handleRadioCheckedChange() {
+        this.active = this.checked;
+    }
+    /** @internal */
+    async handleDisabledChange() {
+        this.active = !this.disabled;
+    }
+    _handleKeyDown(event) {
+        const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+        if (event.key === "Enter" && !hasModifier) {
+            this.handleInputChange();
+        }
+    }
+    render() {
+        const checkbox = html `<sgds-checkbox
+      ${ref(this.inputRef)}
+      ?disabled=${this.disabled}
+      id=${this.inputId}
+      @click=${this.handleInputChange}
+      @keydown=${this._handleKeyDown}
+      .value=${live(this.value)}
+      ?checked=${live(this.checked)}
+      @sgds-change=${(e) => (this.checked = e.detail.checked)}
+    ></sgds-checkbox>`;
+        const radio = html `<sgds-radio
+      ${ref(this.inputRef)}
+      ?disabled=${this.disabled}
+      id=${this.inputId}
+      @click=${this.handleInputChange}
+      @keydown=${this._handleKeyDown}
+      .value=${live(this.value)}
+      ?checked=${live(this.checked)}
+    ></sgds-radio>`;
+        return html `
+      <div
+        tabindex=${this.disabled ? "-1" : "0"}
+        @click=${this.handleInputChange}
+        @keydown=${this._handleKeyDown}
+        variant="card-action"
+        class="sgds card
+        ${classMap({
+            [`text-${this.textColor}`]: this.textColor,
+            [`bg-${this.bgColor}`]: this.bgColor,
+            [`border-${this.borderColor}`]: this.borderColor,
+            ["is-active"]: this.active
+        })}
+        "
+        part="base"
+      >
+        <div class="card-body" part="body">
+          <h6 class="card-subtitle" part="subtitle">
+            <div>
+              <slot name="icon"></slot>
+              <slot name="card-subtitle"></slot>
+            </div>
+            <div class="card-input">${this.type === "checkbox" ? checkbox : radio}</div>
+          </h6>
+          <h5 class="card-title" part="title"><slot name="card-title"></slot></h5>
+          <p class="card-text" part="text"><slot name="card-text"></slot></p>
+        </div>
+      </div>
+    `;
+    }
+}
+SgdsActionCard.styles = [...CardElement.styles, actionCardStyles];
+__decorate([
+    property({ reflect: true })
+], SgdsActionCard.prototype, "name", void 0);
+__decorate([
+    property({ type: String })
+], SgdsActionCard.prototype, "value", void 0);
+__decorate([
+    property({ type: Boolean, reflect: true })
+], SgdsActionCard.prototype, "disabled", void 0);
+__decorate([
+    property({ type: Boolean, reflect: true })
+], SgdsActionCard.prototype, "checked", void 0);
+__decorate([
+    property({ type: String, reflect: true })
+], SgdsActionCard.prototype, "type", void 0);
+__decorate([
+    property({ reflect: true, type: Boolean })
+], SgdsActionCard.prototype, "active", void 0);
+__decorate([
+    watch("checked")
+], SgdsActionCard.prototype, "handleRadioCheckedChange", null);
+__decorate([
+    watch("disabled")
+], SgdsActionCard.prototype, "handleDisabledChange", null);
+export default SgdsActionCard;
+//# sourceMappingURL=sgds-action-card.js.map

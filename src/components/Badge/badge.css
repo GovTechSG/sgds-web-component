@@ -15,7 +15,7 @@
   --sgds-badge-bg: var(--sgds-primary-bg-subtle);
   --sgds-badge-color: var(--sgds-default-color-on-dark);
   --sgds-badge-border-color: var(--sgds-primary-border-color-subtle);
- 
+  
 }
 
 :host([variant="success"]) {
@@ -96,7 +96,7 @@
 
 
 .badge-dimissible sgds-close-button {
-  size: var(--sgds-icon-size-sm);
+  --sgds-close-btn-border-radius: var(--sgds-border-radius-lg);
 }
 
 .left-icon {
