@@ -1,8 +1,8 @@
 :host {
-  --sgds-sidenav-item-btn-border-left-width: 0.125rem;
-  --sgds-sidenav-item-btn-padding-x: 1rem;
-  --sgds-sidenav-item-btn-padding-y: 0.5rem;
-  --sgds-sidenav-item-icon-title-gap: 1rem;
+  --sidenav-item-btn-border-left-width: 0.125rem;
+  --sidenav-item-btn-padding-x: 1rem;
+  --sidenav-item-btn-padding-y: 0.5rem;
+  --sidenav-item-icon-title-gap: 1rem;
 }
 
 .sidenav-btn {
@@ -12,11 +12,11 @@
   font-size: var(--sgds-body-font-size);
   border: 0;
   background: 0;
-  padding: var(--sgds-sidenav-item-btn-padding-y) var(--sgds-sidenav-item-btn-padding-x);
-  border-left: var(--sgds-sidenav-btn-border-left);
-  border-radius: var(--sgds-sidenav-btn-border-radius);
+  padding: var(--sidenav-item-btn-padding-y) var(--sidenav-item-btn-padding-x);
+  border-left: var(--sidenav-btn-border-left);
+  border-radius: var(--sidenav-btn-border-radius);
   display: flex;
-  gap: var(--sgds-sidenav-item-icon-title-gap);
+  gap: var(--sidenav-item-icon-title-gap);
   align-items: center;
 
   svg.bi-chevron-down, slot[name="caret-icon"]::slotted(*) {
@@ -27,8 +27,8 @@
 }
 .sidenav-btn.active,
 .sidenav-btn:hover {
-  color: var(--sgds-sidenav-theme-color);
-  border-left-color: var(--sgds-sidenav-theme-color);
+  color: var(--sidenav-theme-color);
+  border-left-color: var(--sidenav-theme-color);
   font-weight: 700;
 }
 .sidenav-btn.disabled {

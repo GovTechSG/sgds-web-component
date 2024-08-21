@@ -1,5 +1,5 @@
 :host {
-  --sgds-toast-container-slot-elements-gap: 0.5rem;
+  --toast-container-slot-elements-gap: 0.5rem;
 }
 
 .toast-container {
@@ -63,5 +63,5 @@
 slot {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-toast-container-slot-elements-gap);
+  gap: var(--toast-container-slot-elements-gap);
 }

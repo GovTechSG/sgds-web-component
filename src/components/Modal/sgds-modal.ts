@@ -36,14 +36,14 @@ import svgStyles from "../../styles/svg.css";
  * @csspart body - The modal's body where the content lies
  * @csspart footers - The modal's footer
  *
- * @cssproperty --sgds-modal-panel-padding - The general modal padding of modal component. Applied to body, footer and header.
- * @cssproperty --sgds-modal-panel-z-index - The z-index of modal panel
- * @cssproperty --sgds-modal-panel-width - The width of modal panel.
- * @cssproperty --sgds-modal-panel-height - The height of modal panel.
- * @cssproperty --sgds-modal-panel-bg - The background color of modal panel
- * @cssproperty --sgds-modal-panel-border-radius - The border radius of modal panel
- * @cssproperty --sgds-modal-header-border-bottom - The bottom border of header
- * @cssproperty --sgds-modal-overlay-bg - The overlay's background color
+ * @cssproperty --modal-panel-padding - The general modal padding of modal component. Applied to body, footer and header.
+ * @cssproperty --modal-panel-z-index - The z-index of modal panel
+ * @cssproperty --modal-panel-width - The width of modal panel.
+ * @cssproperty --modal-panel-height - The height of modal panel.
+ * @cssproperty --modal-panel-bg - The background color of modal panel
+ * @cssproperty --modal-panel-border-radius - The border radius of modal panel
+ * @cssproperty --modal-header-border-bottom - The bottom border of header
+ * @cssproperty --modal-overlay-bg - The overlay's background color
  */
 export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, headerStyles, svgStyles, modalStyle];

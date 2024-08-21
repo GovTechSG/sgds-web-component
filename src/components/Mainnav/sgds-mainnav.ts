@@ -34,14 +34,14 @@ const SIZES = {
  * @slot brand - Brand slot of SgdsMainnav. Pass in brand logo img here
  * @slot non-collapsible - Elements in this slot will not be collapsed
  *
- * @cssproperty --sgds-mainnav-bg - Navbar's background color.
- * @cssproperty --sgds-mainnav-padding-x - left and right padding for browser width > 768px
- * @cssproperty --sgds-mainnav-padding-y - top and bottom padding for browser width > 768px
- * @cssproperty --sgds-mainnav-mobile-padding-x - left and right padding for browser width < 768px
- * @cssproperty --sgds-mainnav-mobile-padding-y - top and bottom padding for browser width < 768px
- * @cssproperty --sgds-mainnav-border-bottom-width - bottom border width
- * @cssproperty --sgds-mainnav-border-bottom-color - border-bottom width color
- * @cssproperty --sgds-mainnav-theme-color - The theme color of mainnav affecting the hover and active states of items in the mainnav
+ * @cssproperty --mainnav-bg - Navbar's background color.
+ * @cssproperty --mainnav-padding-x - left and right padding for browser width > 768px
+ * @cssproperty --mainnav-padding-y - top and bottom padding for browser width > 768px
+ * @cssproperty --mainnav-mobile-padding-x - left and right padding for browser width < 768px
+ * @cssproperty --mainnav-mobile-padding-y - top and bottom padding for browser width < 768px
+ * @cssproperty --mainnav-border-bottom-width - bottom border width
+ * @cssproperty --mainnav-border-bottom-color - border-bottom width color
+ * @cssproperty --mainnav-theme-color - The theme color of mainnav affecting the hover and active states of items in the mainnav
  */
 export class SgdsMainnav extends SgdsElement {
   static styles = [...SgdsElement.styles, mainnavStyle];

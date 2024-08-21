@@ -1,41 +1,41 @@
 :host {
-  --sgds-toast-icon-margin-right: var(--sgds-spacer-2);
+  --toast-icon-margin-right: var(--sgds-spacer-2);
   background-color: transparent;
 }
 
 :host([status="warning"]) .toast{
-  --sgds-toast-border-color: var(--sgds-warning-filled);
-  --sgds-toast-header-color: var(--sgds-warning-text-emphasis);
-  --sgds-toast-header-icon-color: var(--sgds-warning-text-emphasis);
+  --toast-border-color: var(--sgds-warning-filled);
+  --toast-header-color: var(--sgds-warning-text-emphasis);
+  --toast-header-icon-color: var(--sgds-warning-text-emphasis);
 }
 :host([status="danger"]) .toast{
-  --sgds-toast-border-color: var(--sgds-danger-filled);
-  --sgds-toast-header-color: var(--sgds-danger-text-emphasis);
-  --sgds-toast-header-icon-color: var(--sgds-danger-text-emphasis);
+  --toast-border-color: var(--sgds-danger-filled);
+  --toast-header-color: var(--sgds-danger-text-emphasis);
+  --toast-header-icon-color: var(--sgds-danger-text-emphasis);
 }
 :host([status="success"]) .toast{
-  --sgds-toast-border-color: var(--sgds-success-filled);
-  --sgds-toast-header-color: var(--sgds-success-text-emphasis);
-  --sgds-toast-header-icon-color: var(--sgds-success-text-emphasis);
+  --toast-border-color: var(--sgds-success-filled);
+  --toast-header-color: var(--sgds-success-text-emphasis);
+  --toast-header-icon-color: var(--sgds-success-text-emphasis);
 }
 :host([status="info"]) .toast{
-  --sgds-toast-border-color: var(--sgds-info-filled);
-  --sgds-toast-header-color: var(--sgds-info-text-emphasis);
-  --sgds-toast-header-icon-color: var(--sgds-info-text-emphasis);
+  --toast-border-color: var(--sgds-info-filled);
+  --toast-header-color: var(--sgds-info-text-emphasis);
+  --toast-header-icon-color: var(--sgds-info-text-emphasis);
 }
 
 .toast {
-  --sgds-toast-border-color: var(--sgds-gray-800);
-  --sgds-toast-header-color: light-dark(var(--sgds-gray-800), var(--sgds-gray-200));
-  --sgds-toast-header-icon-color: var(--sgds-body-color);
+  --toast-border-color: var(--sgds-gray-800);
+  --toast-header-color: light-dark(var(--sgds-gray-800), var(--sgds-gray-200));
+  --toast-header-icon-color: var(--sgds-body-color);
   display: flex;
   flex-direction: column;
   gap: var(--sgds-spacer-2);
   padding: var(--sgds-spacer-3);
   background-clip: padding-box;
   background-color: var(--sgds-body-bg);
-  border: var(--sgds-border-width) solid var(--sgds-toast-border-color);
-  border-left: 5px solid var(--sgds-toast-border-color);
+  border: var(--sgds-border-width) solid var(--toast-border-color);
+  border-left: 5px solid var(--toast-border-color);
   border-radius: 0 0.25rem 0.25rem 0;
   box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.15);
   font-size: var(--sgds-body-font-size);
@@ -53,8 +53,8 @@
 .toast-header {
   display: flex;
   align-items: center;
-  gap: var(--sgds-toast-header-gap);
-  color: var(--sgds-toast-header-color);
+  gap: var(--toast-icon-margin-right);
+  color: var(--toast-header-color);
   background-clip: padding-box;
 }
 .toast-body {
@@ -76,5 +76,5 @@
 slot[name="icon"]::slotted(svg) {
   flex-grow: 0;
   flex-shrink: 0;
-  color: var(--sgds-toast-header-icon-color);
+  color: var(--toast-header-icon-color);
 }

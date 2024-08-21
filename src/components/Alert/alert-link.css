@@ -1,11 +1,11 @@
 :host {
   display: inline-block;
   cursor: pointer;
-  --sgds-alert-link-anchor-color: var(--sgds-gray-600);
+  --alert-link-anchor-color: var(--sgds-gray-600);
 }
 
 .alert-link, .alert-link:hover {
-  color: var(--sgds-alert-link-anchor-color);
+  color: var(--alert-link-anchor-color);
   font-weight: 700;
 }
 .alert-link:focus-visible {

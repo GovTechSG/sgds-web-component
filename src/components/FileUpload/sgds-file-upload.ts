@@ -34,9 +34,9 @@ export type FileUploadButtonVariant =
  *
  * @event sgds-files-selected - Emitted when files are selected for uploading
  *
- * @cssproperty --sgds-file-upload-file-icon-color - Left icon color
- * @cssproperty --sgds-file-upload-remove-icon-color - Remove icon color
- * @cssproperty --sgds-file-upload-remove-icon-hover-color - Remove icon hover color
+ * @cssproperty --file-upload-file-icon-color - Left icon color
+ * @cssproperty --file-upload-remove-icon-color - Remove icon color
+ * @cssproperty --file-upload-remove-icon-hover-color - Remove icon hover color
  */
 
 export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {

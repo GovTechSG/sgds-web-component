@@ -1,11 +1,9 @@
 :host {
-  /* RENAME in 2.0.0 */
-  --sgds-accordion-item-padding-y: var(--sgds-spacer-3);
-  --sgds-accordion-item-padding-x: var(--sgds-spacer-4);
-  --sgds-accordion-item-border-radius: var(--sgds-border-radius, 0.3125rem);
-  --sgds-accordion-item-font-weight: 700;
-  --sgds-accordion-item-line-height: var(--sgds-body-line-height);
-  /** NEW in 2.0.0 */
+  --accordion-item-padding-y: var(--sgds-spacer-3);
+  --accordion-item-padding-x: var(--sgds-spacer-4);
+  --accordion-item-border-radius: var(--sgds-border-radius, 0.3125rem);
+  --accordion-item-font-weight: 700;
+  --accordion-item-line-height: var(--sgds-body-line-height);
 }
 .accordion-btn {
   align-items: center;
@@ -16,15 +14,15 @@
   display: flex;
   font-size: 1rem;
   overflow-anchor: none;
-  padding: var(--sgds-accordion-item-padding-y) var(--sgds-accordion-item-padding-x);
+  padding: var(--accordion-item-padding-y) var(--accordion-item-padding-x);
   position: relative;
   text-align: left;
-  transition: var(--sgds-accordion-transition);
   width: 100%;
 
-  svg.bi-chevron-down, slot[name="accordion-caret"]::slotted(*) {
+  svg.bi-chevron-down,
+  slot[name="accordion-caret"]::slotted(*) {
     margin-left: auto;
-    transition: var(transform 0.2s ease-in-out);
+    transition: transform 0.2s ease-in-out;
     width: 1.3rem;
     height: 1.3rem;
   }
@@ -39,10 +37,11 @@
 }
 .accordion-btn:not(.collapsed) {
   background-color: none;
-  color: var(--sgds-accordion-active-color);
+  color: var(--accordion-active-color);
 
-  svg.bi-chevron-down, slot[name="accordion-caret"]::slotted(*) {
-    transform: var( rotate(-180deg));
+  svg.bi-chevron-down,
+  slot[name="accordion-caret"]::slotted(*) {
+    transform: rotate(-180deg);
   }
 }
 
@@ -55,8 +54,7 @@
   z-index: 2;
 }
 .accordion-btn:focus {
-  box-shadow: var(0 0 0 var(--sgds-focus-width)
-    var(var(--sgds-info-300)));
+  box-shadow: 0 0 0 var(--sgds-focus-width) var(var(--sgds-info-300));
   outline: 0;
   z-index: 3;
 }
@@ -64,27 +62,27 @@
   background-color: var(--sgds-body-bg);
   border: var(--sgds-border-width) solid var(--sgds-border-color);
   color: var(var(--sgds-body-color));
-  border-radius: var(--sgds-accordion-item-border-radius) var(--sgds-accordion-item-border-radius);
+  border-radius: var(--accordion-item-border-radius) var(--accordion-item-border-radius);
 }
 
 .accordion-body {
   padding: 0;
-  line-height: var(--sgds-accordion-item-line-height);
+  line-height: var(--accordion-item-line-height);
   overflow: hidden;
 }
 .accordion-content {
   display: block;
-  padding: 0 var(--sgds-accordion-item-padding-x) var(--sgds-accordion-item-padding-y);
+  padding: 0 var(--accordion-item-padding-x) var(--accordion-item-padding-y);
 }
 .accordion-btn {
-  line-height: var(--sgds-accordion-item-line-height);
+  line-height: var(--accordion-item-line-height);
 }
 .accordion-btn:not(.collapsed) {
-  font-weight: var(--sgds-accordion-item-font-weight);
+  font-weight: var(--accordion-item-font-weight);
   box-shadow: none;
 }
- :host([first-of-type]) .accordion-item {
-  border-radius: var(--sgds-accordion-item-border-radius) var(--sgds-accordion-item-border-radius) 0 0;
+:host([first-of-type]) .accordion-item {
+  border-radius: var(--accordion-item-border-radius) var(--accordion-item-border-radius) 0 0;
   .accordion-btn {
     border-top-left-radius: var(--sgds-border-radius);
     border-top-right-radius: var(--sgds-border-radius);
@@ -101,7 +99,7 @@
 }
 
 :host([last-of-type]) .accordion-item {
-  border-radius: 0 0 var(--sgds-accordion-item-border-radius) var(--sgds-accordion-item-border-radius);
+  border-radius: 0 0 var(--accordion-item-border-radius) var(--accordion-item-border-radius);
   border-top: 0;
   .accordion-btn.collapsed {
     border-bottom-left-radius: var(--sgds-border-radius);
@@ -109,6 +107,6 @@
   }
 }
 
-.hidden{
+.hidden {
   display: none;
 }

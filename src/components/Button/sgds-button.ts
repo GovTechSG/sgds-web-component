@@ -28,10 +28,10 @@ export type ButtonVariant =
  * @event sgds-blur - Emitted when the button is not focused.
  * @event sgds-focus - Emitted when the button is focused.
  *
- * @cssprop --sgds-btn-color - The text color of button
- * @cssprop --sgds-btn-bg - The background color of button
- * @cssprop --sgds-btn-border-color - The color of the button border
- * @cssprop --sgds-btn-border-radius - The border radius of button border
+ * @cssprop --btn-color - The text color of button
+ * @cssprop --btn-bg - The background color of button
+ * @cssprop --btn-border-color - The color of the button border
+ * @cssprop --btn-border-radius - The border radius of button border
  *
  */
 export class SgdsButton extends SgdsElement {

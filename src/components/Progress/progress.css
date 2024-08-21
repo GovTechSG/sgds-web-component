@@ -1,5 +1,5 @@
 :host {
-  --sgds-progress-height: 1rem;
+  --progress-height: 1rem;
   display: block;
 }
 
@@ -8,5 +8,5 @@
   overflow: hidden;
   background-color: var(--sgds-gray-200);
   border-radius: var(--sgds-border-radius);
-  height: var(--sgds-progress-height);
+  height: var(--progress-height);
 }

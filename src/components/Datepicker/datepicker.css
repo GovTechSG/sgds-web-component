@@ -1,19 +1,19 @@
 :host {
-  --sgds-datepicker-theme-color: var(--sgds-primary);
-  --sgds-datepicker-hover-bg: var(--sgds-primary-100);
-  --sgds-datepicker-bg: white;
-  --sgds-datepicker-close-button-bg: var(--sgds-datepicker-theme-color);
-  --sgds-datepicker-close-button-hover-bg: var(--sgds-primary-700);
-  --sgds-datepicker-close-button-color: white;
-  --sgds-datepicker-selected-date-bg: var(--sgds-primary);
-  --sgds-datepicker-selected-date-color: white;
+  --datepicker-theme-color: var(--sgds-primary);
+  --datepicker-hover-bg: var(--sgds-primary-100);
+  --datepicker-bg: white;
+  --datepicker-close-button-bg: var(--datepicker-theme-color);
+  --datepicker-close-button-hover-bg: var(--sgds-primary-700);
+  --datepicker-close-button-color: white;
+  --datepicker-selected-date-bg: var(--sgds-primary);
+  --datepicker-selected-date-color: white;
 }
 .datepicker {
   border-color: var(--sgds-border-color);
   font-size: 1rem;
   max-width: 24rem;
   width: 24rem;
-  background-color: var(--sgds-datepicker-bg);
+  background-color: var(--datepicker-bg);
 }
 div {
   display: flex;
@@ -31,10 +31,10 @@ sgds-datepicker-input {
   --sgds-btn-border-radius: 0;
 }
 .reset-btn {
-  --sgds-btn-bg: var(--sgds-datepicker-close-button-bg);
-  --sgds-btn-color: var(--sgds-datepicker-close-button-color);
+  --sgds-btn-bg: var(--datepicker-close-button-bg);
+  --sgds-btn-color: var(--datepicker-close-button-color);
   --sgds-btn-border-radius: 0;
 }
 .reset-btn:hover {
-  --sgds-btn-hover-bg: var(--sgds-datepicker-close-button-hover-bg);
+  --sgds-btn-hover-bg: var(--datepicker-close-button-hover-bg);
 }

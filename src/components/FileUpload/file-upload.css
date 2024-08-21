@@ -1,7 +1,7 @@
 :host {
-  --sgds-file-upload-left-icon-color: var(--sgds-success);
-  --sgds-file-upload-remove-icon-color: var(--sgds-body-color-lighter);
-  --sgds-file-upload-remove-icon-hover-color: ;
+  --file-upload-left-icon-color: var(--sgds-success);
+  --file-upload-remove-icon-color: var(--sgds-body-color-lighter);
+  --file-upload-remove-icon-hover-color: ;
 }
 
 .fileupload-list-item {
@@ -12,13 +12,13 @@
   cursor: pointer;
 }
 .fileupload-list-item span:first-of-type svg {
-  color: var(--sgds-file-upload-left-icon-color);
+  color: var(--file-upload-left-icon-color);
 }
 .fileupload-list-item span:last-of-type svg {
-  color: var(--sgds-file-upload-remove-icon-color);
+  color: var(--file-upload-remove-icon-color);
 }
 .fileupload-list-item span:last-of-type svg:hover {
-  color: var(--sgds-file-upload-remove-icon-hover-color);
+  color: var(--file-upload-remove-icon-hover-color);
 }
 
 .file-upload-label {

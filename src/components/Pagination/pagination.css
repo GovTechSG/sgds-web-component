@@ -1,12 +1,12 @@
 :host {
-  --sgds-pagination-color: var(--sgds-link);
-  --sgds-pagination-bg: var(--sgds-body-bg);
-  --sgds-pagination-hover-bg: var(--sgds-gray-200);
-  --sgds-pagination-hover-border-color: var(--sgds-gray-300);
-  --sgds-pagination-active-color: var(--sgds-white);
-  --sgds-pagination-active-bg: var(--sgds-link);
-  --sgds-pagination-disabled-color: var(--sgds-gray);
-  --sgds-pagination-disabled-bg: var(--sgds-body-bg);
+  --pagination-color: var(--sgds-link);
+  --pagination-bg: var(--sgds-body-bg);
+  --pagination-hover-bg: var(--sgds-gray-200);
+  --pagination-hover-border-color: var(--sgds-gray-300);
+  --pagination-active-color: var(--sgds-white);
+  --pagination-active-bg: var(--sgds-link);
+  --pagination-disabled-color: var(--sgds-gray);
+  --pagination-disabled-bg: var(--sgds-body-bg);
 }
 
 ul {
@@ -23,9 +23,9 @@ svg {
   padding-left: 0;
 }
 .page-link {
-  background-color: var(--sgds-pagination-bg);
+  background-color: var(--pagination-bg);
   border: 1px solid var(--sgds-border-color);
-  color: var(--sgds-pagination-color);
+  color: var(--pagination-color);
   display: block;
   position: relative;
   padding: 0.5rem 1rem;
@@ -39,14 +39,14 @@ svg {
   }
 }
 .page-link:hover {
-  color: var(--sgds-pagination-color);
-  background-color: var(--sgds-pagination-hover-bg);
-  border-color: var(--sgds-pagination-hover-border-color);
+  color: var(--pagination-color);
+  background-color: var(--pagination-hover-bg);
+  border-color: var(--pagination-hover-border-color);
   z-index: 2;
 }
 .page-link:focus {
-  color: var(--sgds-pagination-color);
-  background-color: var(--sgds-pagination-hover-bg);
+  color: var(--pagination-color);
+  background-color: var(--pagination-hover-bg);
   box-shadow: 0 0 0 0.125rem rgba(15, 113, 187, 0.25);
   outline: 0;
   z-index: 3;
@@ -62,14 +62,14 @@ svg {
 }
 .page-item.active .page-link {
   z-index: 3;
-  color: var(--sgds-pagination-active-color);
+  color: var(--pagination-active-color);
   border-color: #0f71bb;
-  background-color: var(--sgds-pagination-active-bg);
+  background-color: var(--pagination-active-bg);
 }
 .page-item.disabled .page-link {
-  background-color: var(--sgds-pagination-disabled-bg);
+  background-color: var(--pagination-disabled-bg);
   border-color: #98a2b3;
-  color: var(--sgds-pagination-disabled-color);
+  color: var(--pagination-disabled-color);
   pointer-events: none;
 }
 .page-item:first-child .page-link {

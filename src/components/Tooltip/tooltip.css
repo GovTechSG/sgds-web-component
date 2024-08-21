@@ -1,5 +1,5 @@
 :host {
-  --sgds-tooltip-max-width: 20rem;
+  --tooltip-max-width: 20rem;
   display: inline-block;
 }
 
@@ -25,7 +25,7 @@
   background-color: var(--sgds-dark);
   border-radius: var(--sgds-border-radius);
   color: var(--sgds-body-bg);
-  max-width: var(--sgds-tooltip-max-width);
+  max-width: var(--tooltip-max-width);
   padding: 0.25rem 0.5rem;
   text-align: center;
 }

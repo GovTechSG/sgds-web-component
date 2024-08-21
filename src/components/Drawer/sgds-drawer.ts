@@ -42,11 +42,11 @@ import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
  * @csspart body - The drawer's body.
  * @csspart footer - The drawer's footer.
  *
- * @cssproperty --sgds-drawer-size - The preferred size of the drawer. This will be applied to the drawer's width or height
+ * @cssproperty --drawer-size - The preferred size of the drawer. This will be applied to the drawer's width or height
  *   depending on its `placement`. Note that the drawer will shrink to accommodate smaller screens.
- * @cssproperty --sgds-drawer-padding - The amount of padding to use for the header, body and footer
- * @cssproperty --sgds-drawer-bg - The drawer's background color.
- * @cssproperty --sgds-drawer-button-gap - The drawer's flex gap between buttons.
+ * @cssproperty --drawer-padding - The amount of padding to use for the header, body and footer
+ * @cssproperty --drawer-bg - The drawer's background color.
+ * @cssproperty --drawer-button-gap - The drawer's flex gap between buttons.
  *
  */
 export class SgdsDrawer extends ScopedElementsMixin(SgdsElement) {

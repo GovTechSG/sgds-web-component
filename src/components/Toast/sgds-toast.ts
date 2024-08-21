@@ -22,7 +22,7 @@ import SgdsCloseButton from "../CloseButton/sgds-close-button";
  * @event sgds-hide - Emitted on hide.
  * @event sgds-after-hide - Emitted on hide after animation has completed.
  
- * @cssproperty --sgds-toast-icon-margin-right - The margin right between toast's icon and title in its header.
+ * @cssproperty --toast-icon-margin-right - The margin right between toast's icon and title in its header.
  */
 export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, toastStyle];

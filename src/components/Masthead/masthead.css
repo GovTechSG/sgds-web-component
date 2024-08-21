@@ -1,7 +1,7 @@
 :host {
-  --sgds-masthead-mobile-font-size: 0.6875rem;
-  --sgds-masthead-mobile-padding-x: 0.75rem;
-  --sgds-masthead-fluid-padding-x: 0.75rem;
+  --masthead-mobile-font-size: 0.6875rem;
+  --masthead-mobile-padding-x: 0.75rem;
+  --masthead-fluid-padding-x: 0.75rem;
 }
 
 b {
@@ -81,7 +81,7 @@ a {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
   color: #252525;
   @media screen and (max-width: 1023px) {
-    font-size: var(--sgds-masthead-mobile-font-size);
+    font-size: var(--masthead-mobile-font-size);
     .col,
     .row {
       padding-left: 0;
@@ -167,7 +167,7 @@ a {
     gap: 1rem;
     font-size: 1rem;
     @media screen and (max-width: 1023px) {
-      font-size: var(--sgds-masthead-mobile-font-size);
+      font-size: var(--masthead-mobile-font-size);
       gap: 0.5rem;
     }
     .content {
@@ -237,20 +237,20 @@ a.trusted-websites-link:hover {
 
 @media screen and (max-width: 1023px) {
   .sgds-masthead > .container {
-    padding-left: var(--sgds-masthead-mobile-padding-x);
-    padding-right: var(--sgds-masthead-mobile-padding-x);
+    padding-left: var(--masthead-mobile-padding-x);
+    padding-right: var(--masthead-mobile-padding-x);
   }
 }
 
 .sgds-masthead > .container-fluid {
-  padding-left: var(--sgds-masthead-fluid-padding-x);
-  padding-right: var(--sgds-masthead-fluid-padding-x);
+  padding-left: var(--masthead-fluid-padding-x);
+  padding-right: var(--masthead-fluid-padding-x);
 }
 
 @media screen and (max-width: 1023px) {
   .sgds-masthead > .container-fluid {
-    padding-left: var(--sgds-masthead-mobile-padding-x);
-    padding-right: var(--sgds-masthead-mobile-padding-x);
+    padding-left: var(--masthead-mobile-padding-x);
+    padding-right: var(--masthead-mobile-padding-x);
   }
 }
 

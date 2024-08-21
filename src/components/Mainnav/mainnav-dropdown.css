@@ -6,8 +6,8 @@
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 .nav-link.show {
-  border-color: var(--sgds-mainnav-theme-color);
-  color: var(--sgds-mainnav-theme-color);
+  border-color: var(--mainnav-theme-color);
+  color: var(--mainnav-theme-color);
 }
 
 .sgds.dropdown.nav-item {
@@ -24,8 +24,8 @@ a.nav-link {
   text-decoration: none;
   &.active,
   &:hover {
-    color: var(--sgds-mainnav-theme-color);
-    border-color: var(--sgds-mainnav-theme-color);
+    color: var(--mainnav-theme-color);
+    border-color: var(--mainnav-theme-color);
   }
   &:focus-visible {
     box-shadow: 0 0 0 0.25rem rgba(89, 66, 219, 0.25);
@@ -36,5 +36,5 @@ a.nav-link {
 .nav-link.disabled {
   cursor: default;
   pointer-events: none;
-  opacity: var(--sgds-mainnav-disabled-opacity);
+  opacity: var(--mainnav-disabled-opacity);
 }

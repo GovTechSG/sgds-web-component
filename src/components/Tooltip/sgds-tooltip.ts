@@ -11,7 +11,7 @@ import tooltipStyle from "./tooltip.css";
  * @summary Tooltips display more information when users hover over, focus on, or interact with an element.
  * @slot default - The element to target the tooltip to.
  *
- * @cssproperty --sgds-tooltip-max-width - The max width of tooltip
+ * @cssproperty --tooltip-max-width - The max width of tooltip
  *
  */
 export class SgdsTooltip extends SgdsElement {

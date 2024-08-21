@@ -9,14 +9,14 @@ import paginationStyle from "./pagination.css";
  *
  * @event sgds-page-change - Event is emitted when `handleNextButton`, `handlePrevButton`, `handleNextEllipsisButton` and `handlePrevEllipsisButton` was called.
  *
- * @cssproperty --sgds-pagination-color - The text color of pagination
- * @cssproperty --sgds-pagination-bg - The background color of pagination
- * @cssproperty --sgds-pagination-hover-bg - The  background color of pagination in hover state
- * @cssproperty --sgds-pagination-hover-border-color - The border color of pagination in hover state
- * @cssproperty --sgds-pagination-active-color - The text color of pagination in active state
- * @cssproperty --sgds-pagination-active-bg - The background color of pagination in active state
- * @cssproperty --sgds-pagination-disabled-color - The text color of pagination in disabled state
- * @cssproperty --sgds-pagination-disabled-bg - The background color of pagination in disabled state
+ * @cssproperty --pagination-color - The text color of pagination
+ * @cssproperty --pagination-bg - The background color of pagination
+ * @cssproperty --pagination-hover-bg - The  background color of pagination in hover state
+ * @cssproperty --pagination-hover-border-color - The border color of pagination in hover state
+ * @cssproperty --pagination-active-color - The text color of pagination in active state
+ * @cssproperty --pagination-active-bg - The background color of pagination in active state
+ * @cssproperty --pagination-disabled-color - The text color of pagination in disabled state
+ * @cssproperty --pagination-disabled-bg - The background color of pagination in disabled state
  *
  **/
 export class SgdsPagination extends SgdsElement {

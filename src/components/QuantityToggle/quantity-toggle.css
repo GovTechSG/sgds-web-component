@@ -2,10 +2,10 @@ sgds-input{
   --sgds-border-radius: 0;
 }
 sgds-button:first-of-type{
-  --sgds-btn-border-radius: var(--sgds-border-radius) 0 0 var(--sgds-border-radius);
+  --btn-border-radius: var(--sgds-border-radius) 0 0 var(--sgds-border-radius);
 }
 sgds-button:last-of-type{
-  --sgds-btn-border-radius: 0 var(--sgds-border-radius) var(--sgds-border-radius) 0;
+  --btn-border-radius: 0 var(--sgds-border-radius) var(--sgds-border-radius) 0;
 }
 
 .input-group {

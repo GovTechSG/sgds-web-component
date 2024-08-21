@@ -1,7 +1,7 @@
 :host {
-  --sgds-stepper-theme-color: var(--sgds-primary);
-  --sgds-stepper-theme-hover-color: var(--sgds-primary-800);
-  --sgds-stepper-inactive-theme-color: var(--sgds-gray-400);
+  --stepper-theme-color: var(--sgds-primary);
+  --stepper-theme-hover-color: var(--sgds-primary-800);
+  --stepper-inactive-theme-color: var(--sgds-gray-400);
 }
 
 .sgds.stepper {
@@ -28,16 +28,16 @@
   cursor: pointer;
 }
 .sgds.stepper .stepper-item.is-clickable:hover .stepper-marker {
-  background-color: var(--sgds-stepper-theme-hover-color);
-  border-color: var(--sgds-stepper-theme-hover-color);
+  background-color: var(--stepper-theme-hover-color);
+  border-color: var(--stepper-theme-hover-color);
 }
 .sgds.stepper .stepper-item.is-clickable:hover .stepper-detail,
 .sgds.stepper .stepper-item.is-clickable:hover .stepper-detail > * {
-  color: var(--sgds-stepper-theme-hover-color);
+  color: var(--stepper-theme-hover-color);
   transition: all 0.5s ease;
 }
 .sgds.stepper .stepper-item:before {
-  background: linear-gradient(270deg, var(--sgds-stepper-inactive-theme-color) 50%, var(--sgds-stepper-theme-color) 0);
+  background: linear-gradient(270deg, var(--stepper-inactive-theme-color) 50%, var(--stepper-theme-color) 0);
   background-position: 100% 100%;
   background-size: 200% 100%;
 }
@@ -47,22 +47,22 @@
 }
 .sgds.stepper .stepper-item.is-active .stepper-marker {
   background-color: var(--sgds-white);
-  border-color: var(--sgds-stepper-theme-color);
-  color:  var(--sgds-stepper-theme-color);
+  border-color: var(--stepper-theme-color);
+  color:  var(--stepper-theme-color);
   font-weight: 700;
 }
 .sgds.stepper .stepper-item.is-completed:before {
   background-position: 0 100%;
 }
 .sgds.stepper .stepper-item.is-completed .stepper-marker {
-  background-color: var(--sgds-stepper-theme-color);
-  border-color: var(--sgds-stepper-theme-color);
+  background-color: var(--stepper-theme-color);
+  border-color: var(--stepper-theme-color);
   color: var(--sgds-white);
   font-weight: 700;
 }
 .sgds.stepper .stepper-item > .stepper-marker {
   align-items: center;
-  background: var(--sgds-stepper-inactive-theme-color);
+  background: var(--stepper-inactive-theme-color);
   border: 0.25rem solid var(--sgds-white);
   border-radius: 50%;
   color: var(--sgds-white);

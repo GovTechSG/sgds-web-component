@@ -1,12 +1,12 @@
 :host {
-  --sgds-modal-panel-padding: var(--sgds-spacer-4);
-  --sgds-modal-panel-z-index: 105500;
-  --sgds-modal-panel-width: 35rem;
-  --sgds-modal-panel-height: auto;
-  --sgds-modal-panel-bg: var(--sgds-body-bg);
-  --sgds-modal-panel-border-radius: var(--sgds-border-radius);
-  --sgds-modal-header-border-bottom: var(--sgds-border-width) solid var(--sgds-border-color);
-  --sgds-modal-overlay-bg: rgba(0, 0, 0, 0.5);
+  --modal-panel-padding: var(--sgds-spacer-4);
+  --modal-panel-z-index: 105500;
+  --modal-panel-width: 35rem;
+  --modal-panel-height: auto;
+  --modal-panel-bg: var(--sgds-body-bg);
+  --modal-panel-border-radius: var(--sgds-border-radius);
+  --modal-header-border-bottom: var(--sgds-border-width) solid var(--sgds-border-color);
+  --modal-overlay-bg: rgba(0, 0, 0, 0.5);
   display: contents;
 }
 
@@ -19,7 +19,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: var(--sgds-modal-panel-z-index);
+  z-index: var(--modal-panel-z-index);
   font-family: var(--sgds-body-font-family);
 }
 
@@ -30,13 +30,13 @@
 .modal-panel {
   display: flex;
   flex-direction: column;
-  z-index: var(--sgds-modal-panel-z-index);
-  width: var(--sgds-modal-panel-width);
-  height: var(--sgds-modal-panel-height);
+  z-index: var(--modal-panel-z-index);
+  width: var(--modal-panel-width);
+  height: var(--modal-panel-height);
   max-width: calc(100% - 2.25rem);
   max-height: calc(100% - 2.25rem);
-  background-color: var(--sgds-modal-panel-bg);
-  border-radius: var(--sgds-modal-panel-border-radius);
+  background-color: var(--modal-panel-bg);
+  border-radius: var(--modal-panel-border-radius);
   margin-top: 1.75rem;
 }
 
@@ -65,9 +65,9 @@
   line-height: 1.33;
   font-size: calc(1.275rem + 0.3vw);
   display: flex;
-  padding: var(--sgds-modal-panel-padding);
+  padding: var(--modal-panel-padding);
   align-items: center;
-  border-bottom: var(--sgds-modal-header-border-bottom);
+  border-bottom: var(--modal-header-border-bottom);
 }
 .modal-header.centered {
   border-bottom: 0;
@@ -100,7 +100,7 @@
 
 .modal-body {
   flex: 1 1 auto;
-  padding: var(--sgds-modal-panel-padding);
+  padding: var(--modal-panel-padding);
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -111,7 +111,7 @@
 .modal-footer {
   flex: 0 0 auto;
   text-align: right;
-  padding: var(--sgds-modal-panel-padding);
+  padding: var(--modal-panel-padding);
   padding-top: 0;
 }
 
@@ -134,7 +134,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: var(--sgds-modal-overlay-bg);
+  background-color: var(--modal-overlay-bg);
 }
 
 [hidden] {
