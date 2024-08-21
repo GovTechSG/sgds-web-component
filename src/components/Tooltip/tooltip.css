@@ -1,20 +1,12 @@
 :host {
-  --sgds-tooltip-z-index: 1080;
   --sgds-tooltip-max-width: 20rem;
-  --sgds-tooltip-padding-x: 0.5rem;
-  --sgds-tooltip-padding-y: 0.25rem;
-  --sgds-tooltip-font-size: 0.875rem;
-  --sgds-tooltip-color: var(--sgds-body-bg);
-  --sgds-tooltip-bg: var(--sgds-dark);
-  --sgds-tooltip-border-radius: var(--sgds-border-radius);
-  --sgds-tooltip-opacity: 0.9;
   display: inline-block;
 }
 
 .tooltip {
   word-wrap: break-word;
   display: block;
-  font-size: var(--sgds-tooltip-font-size);
+  font-size: 0.875rem;
   line-break: auto;
   opacity: 0;
   text-align: left;
@@ -24,17 +16,17 @@
   white-space: normal;
   word-break: normal;
   word-spacing: normal;
-  z-index: var(--sgds-tooltip-z-index);
+  z-index: 1080;
 }
 .tooltip.show {
-  opacity: var(--sgds-tooltip-opacity);
+  opacity: 0.9;
 }
 .tooltip-inner {
-  background-color: var(--sgds-tooltip-bg);
-  border-radius: var(--sgds-tooltip-border-radius);
-  color: var(--sgds-tooltip-color);
+  background-color: var(--sgds-dark);
+  border-radius: var(--sgds-border-radius);
+  color: var(--sgds-body-bg);
   max-width: var(--sgds-tooltip-max-width);
-  padding: var(--sgds-tooltip-padding-y) var(--sgds-tooltip-padding-x);
+  padding: 0.25rem 0.5rem;
   text-align: center;
 }
 div {

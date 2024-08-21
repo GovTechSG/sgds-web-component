@@ -21,21 +21,8 @@ import SgdsCloseButton from "../CloseButton/sgds-close-button";
  * @event sgds-after-show - Emitted on show after animation has completed.
  * @event sgds-hide - Emitted on hide.
  * @event sgds-after-hide - Emitted on hide after animation has completed.
- *
- * @cssproperty --sgds-toast-max-width - The maximum width of toast
- * @cssproperty --sgds-toast-gap - The gap between header and body of toast
- * @cssproperty --sgds-toast-padding - The padding of toast
- * @cssproperty --sgds-toast-bg - The background color of toast
- * @cssproperty --sgds-toast-border-width - The width of the border of toast
- * @cssproperty --sgds-toast-border-left-width - The width of the left border of toast
- * @cssproperty --sgds-toast-border-radius - The border radius of toast
- * @cssproperty --sgds-toast-border-color - The color of the border of toast
- * @cssproperty --sgds-toast-box-shadow - The box shadow of toast
- * @cssproperty --sgds-toast-font-size - The font size of toast
- * @cssproperty --sgds-toast-color - The text color of toast
- * @cssproperty --sgds-toast-header-gap - The gap between the elements in the header
- * @cssproperty --sgds-toast-header-color - The title color of the toast header
- * @cssproperty --sgds-toast-header-icon-color - The icon color of the toast header
+ 
+ * @cssproperty --sgds-toast-icon-margin-right - The margin right between toast's icon and title in its header.
  */
 export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, toastStyle];

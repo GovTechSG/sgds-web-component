@@ -1,15 +1,13 @@
 :host {
-  --sgds-stepper-font-size: var(--sgds-body-font-size);
   --sgds-stepper-theme-color: var(--sgds-primary);
   --sgds-stepper-theme-hover-color: var(--sgds-primary-800);
   --sgds-stepper-inactive-theme-color: var(--sgds-gray-400);
-  --sgds-stepper-detail-font-weight: 700;
 }
 
 .sgds.stepper {
   display: flex;
   flex-wrap: wrap;
-  font-size: var(--sgds-stepper-font-size);
+  font-size: var(--sgds-body-font-size);
 }
 .sgds.stepper .stepper-item {
   flex-basis: 0;
@@ -90,6 +88,6 @@
   margin-left: 0.5rem;
   margin-right: 0.5rem;
   margin-top: 2rem;
-  font-weight: var(--sgds-stepper-detail-font-weight);
+  font-weight: 700;
   text-align: center;
 }

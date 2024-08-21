@@ -1,15 +1,3 @@
-:host {
-  /* NEW in V2.0 */
-  --sgds-textarea-padding-x: var(--sgds-input-btn-padding-x);
-  --sgds-textarea-padding-y: var(--sgds-input-btn-padding-y);
-  --sgds-textarea-line-height: var(--sgds-body-line-height);
-  --sgds-textarea-font-weight: var(--sgds-body-font-weight);
-  --sgds-textarea-font-size: var(--sgds-body-font-size);
-  --sgds-textarea-border-radius: var(--sgds-border-radius);
-  --sgds-textarea-color: var(--sgds-body-color);
-  --sgds-textarea-placeholder-color: var(--sgds-gray-400);
-}
-
 textarea {
   font-family: inherit;
   font-size: inherit;
@@ -24,13 +12,13 @@ textarea {
   background-clip: padding-box;
   background-color: var(--sgds-body-bg);
   border: var(--sgds-form-border-width) solid var(--sgds-form-border-color);
-  border-radius: var(--sgds-textarea-border-radius);
-  color: var(--sgds-textarea-color);
+  border-radius: var(--sgds-border-radius);
+  color: var(--sgds-body-color);
   display: block;
-  font-size: var(--sgds-textarea-font-size);
-  font-weight: var(--sgds-textarea-font-weight);
-  line-height: var(--sgds-textarea-line-height);
-  padding: var(--sgds-textarea-padding-y) var(--sgds-textarea-padding-x);
+  font-size: var(--sgds-body-font-size);
+  font-weight: var(--sgds-body-font-weight);
+  line-height: var(--sgds-body-line-height);
+  padding: var(--sgds-input-btn-padding-y) var(--sgds-input-btn-padding-x);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   width: 100%;
   min-height: calc(2em + 0.875rem + 2px);
@@ -47,7 +35,7 @@ textarea {
   outline: 0;
 }
 .form-control::placeholder {
-  color: var(--sgds-textarea-placeholder-color);
+  color: var(--sgds-gray-400);
   opacity: 1;
 }
 .form-control:disabled {
@@ -76,7 +64,7 @@ textarea {
 }
 .form-control.is-valid {
   background-image: var(--sgds-form-valid-icon);
-  background-position: right calc(0.5em + 0.21875rem) top var(--sgds-textarea-padding-y);
+  background-position: right calc(0.5em + 0.21875rem) top var(--sgds-input-btn-padding-y);
   background-repeat: no-repeat;
   background-size: calc(1em + 0.4375rem) calc(1em + 0.4375rem);
   border-color: var(--sgds-form-valid-color);
@@ -84,7 +72,7 @@ textarea {
 }
 .form-control.is-invalid {
   background-image: var(--sgds-form-invalid-icon);
-  background-position: right calc(0.5em + 0.21875rem) top var(--sgds-textarea-padding-y);
+  background-position: right calc(0.5em + 0.21875rem) top var(--sgds-input-btn-padding-y);
   background-repeat: no-repeat;
   background-size: calc(1em + 0.4375rem) calc(1em + 0.4375rem);
   border-color: var(--sgds-form-invalid-color);

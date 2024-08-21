@@ -11,15 +11,7 @@ import tooltipStyle from "./tooltip.css";
  * @summary Tooltips display more information when users hover over, focus on, or interact with an element.
  * @slot default - The element to target the tooltip to.
  *
- * @cssproperty --sgds-tooltip-z-index - The z-index of tooltip
  * @cssproperty --sgds-tooltip-max-width - The max width of tooltip
- * @cssproperty --sgds-tooltip-padding-x - The left and right padding of tooltip
- * @cssproperty --sgds-tooltip-padding-y - The top and bottom padding of tooltip
- * @cssproperty --sgds-tooltip-font-size - The font size of tooltip
- * @cssproperty --sgds-tooltip-color - The text color of tooltip
- * @cssproperty --sgds-tooltip-bg - The background color of tooltip
- * @cssproperty --sgds-tooltip-border-radius - The border radius of tooltip
- * @cssproperty --sgds-tooltip-opacity - The opacity of tooltip
  *
  */
 export class SgdsTooltip extends SgdsElement {

@@ -20,24 +20,6 @@ import formHintStyles from "../../styles/form-hint.css";
  * @event sgds-input - Emitted when the control receives input and its value changes.
  * @event sgds-focus - Emitted when textarea is in focus.
  * @event sgds-blur - Emitted when textarea loses focus.
- *
- * @cssproperty --sgds-textarea-padding-x - The x-axis padding of the textarea
- * @cssproperty --sgds-textarea-padding-y - The y-axis padding of the textarea
- * @cssproperty --sgds-textarea-line-height - The line height of text in the textarea
- * @cssproperty --sgds-textarea-font-weight - Sets the font weight of text in the textarea
- * @cssproperty --sgds-textarea-font-size - Sets the font size of text in the textarea
- * @cssproperty --sgds-textarea-border-radius - The border radius of the textarea
- * @cssproperty --sgds-textarea-border-width - The thickness of the textarea's border
- * @cssproperty --sgds-textarea-border-color - The border color of the textarea
- * @cssproperty --sgds-textarea-focus-box-shadow-color - The color of box shadow of textarea at focused state
- * @cssproperty --sgds-textarea-focus-box-shadow - The box shadow of textarea at focused state
- * @cssproperty --sgds-textarea-placeholder-color - Sets the text color textarea's placeholder.
- * @cssproperty --sgds-textarea-color - Sets the text colors of textarea
- * @cssproperty --sgds-form-label-color - Sets the text color of textarea's label
- * @cssproperty --sgds-form-label-font-weight - Sets the font weight of textarea's label
- * @cssproperty --sgds-form-hint-text-color - The color of hint text
- * @cssproperty --sgds-form-hint-text-font-size - The font size of hint text
- * @cssproperty --sgds-form-hint-text-font-weight - The font weight of hint text
  */
 export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   static styles = [...SgdsElement.styles, feedbackStyles, formHintStyles, formLabelStyles, textareaStyle];
