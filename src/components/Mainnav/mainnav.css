@@ -5,8 +5,7 @@
   --sgds-mainnav-mobile-padding-x: var(--sgds-spacer-2);
   --sgds-mainnav-mobile-padding-y: var(--sgds-spacer-0);
   --sgds-mainnav-border-bottom-width: 1px;
-  --sgds-mainnav-border-bottom-color: #98a2b3;
-  /** NEW in 2.0.0 */
+  --sgds-mainnav-border-bottom-color: var(--sgds-gray-400);
   --sgds-mainnav-theme-color: var(--sgds-primary);
 }
 .navbar {
@@ -40,12 +39,6 @@
   color: rgba(var(--sgds-emphasis-color-rgb), 0.9);
 }
 .navbar-nav {
-  /* --sgds-nav-link-padding-x: 0;
-    --sgds-nav-link-padding-y: 0.5rem;
-    --sgds-nav-link-font-weight: ;
-    --sgds-nav-link-color: var(--sgds-mainnav-color);
-    --sgds-nav-link-hover-color: var(--sgds-mainnav-hover-color);
-    --sgds-nav-link-disabled-color: var(--sgds-mainnav-disabled-color); */
   display: flex;
   flex-direction: column;
   list-style: none;
@@ -67,7 +60,7 @@
   background-color: transparent;
   border: none;
   /* color: var(--sgds-mainnav-color); */
-  font-size:  1.25rem;
+  font-size: 1.25rem;
   line-height: 1;
   padding: var(--sgds-spacer-1) 0.75rem;
 }

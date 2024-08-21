@@ -1,13 +1,12 @@
 :host {
   --sgds-sidenav-theme-color: var(--sgds-primary);
   --sgds-sidenav-sticky-top: 0rem;
-  --sgds-sidenav-item-gap: 1rem;
 }
 
 div {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-sidenav-item-gap);
+  gap: 1rem;
   list-style: none;
   padding-left: 0;
   margin: 0;

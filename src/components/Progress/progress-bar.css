@@ -1,27 +1,23 @@
 :host {
-  --sgds-progress-bar-color: var(--sgds-white);
-  --sgds-progress-bar-font-size: 0.75rem;
-  --sgds-progress-bar-bg: var(--sgds-primary-filled);
-  --sgds-progress-bar-transition: width 0.6s ease;
   width: 100%;
 }
 
-:host([variant="secondary"]) {
+:host([variant="secondary"]) .progress-bar {
   --sgds-progress-bar-bg: var(--sgds-secondary-filled);
 }
-:host([variant="warning"]) {
+:host([variant="warning"]) .progress-bar{
   --sgds-progress-bar-bg: var(--sgds-warning-filled);
 }
-:host([variant="danger"]) {
+:host([variant="danger"]) .progress-bar{
   --sgds-progress-bar-bg: var(--sgds-danger-filled);
 }
-:host([variant="success"]) {
+:host([variant="success"]) .progress-bar{
   --sgds-progress-bar-bg: var(--sgds-success-filled);
 }
-:host([variant="info"]) {
+:host([variant="info"]) .progress-bar{
   --sgds-progress-bar-bg: var(--sgds-info-filled);
 }
-:host([variant="dark"]) {
+:host([variant="dark"]) .progress-bar{
   --sgds-progress-bar-bg: var(--sgds-dark-filled);
 }
 
@@ -46,6 +42,10 @@ progress {
   overflow: hidden;
 } */
 .progress-bar {
+  --sgds-progress-bar-bg: var(--sgds-primary-filled);
+  --sgds-progress-bar-transition: width 0.6s ease;
+  --sgds-progress-bar-color: var(--sgds-white);
+  --sgds-progress-bar-font-size: 0.75rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

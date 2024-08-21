@@ -22,25 +22,6 @@ import formLabelStyles from "../../styles/form-label.css";
  * @event sgds-focus - Emitted when input is in focus.
  * @event sgds-blur - Emitted when input is not in focus.
  *
- * @cssproperty --sgds-input-padding-x - The x-axis padding of the input
- * @cssproperty --sgds-input-padding-y - The y-axis padding of the input
- * @cssproperty --sgds-input-line-height - The line height of text in the input
- * @cssproperty --sgds-input-font-weight - Sets the font weight of text in the input
- * @cssproperty --sgds-input-font-size - Sets the font size of text in the input
- * @cssproperty --sgds-input-border-radius - The border radius of the input
- * @cssproperty --sgds-input-border-width - The thickness of the input's border
- * @cssproperty --sgds-input-border-color - The border color of the input
- * @cssproperty --sgds-input-focus-box-shadow-color - The color of box shadow of input at focused state
- * @cssproperty --sgds-input-focus-box-shadow - The box shadow of input at focused state
- * @cssproperty --sgds-input-color - Sets the text colors of input
- * @cssproperty --sgds-input-placeholder-color - Sets the text color input's placeholder. 
- * @cssproperty --sgds-form-label-color - Sets the text color of input's label
- * @cssproperty --sgds-form-label-font-weight - Sets the font weight of input's label
- * @cssproperty --sgds-form-hint-text-color - The color of hint text
- * @cssproperty --sgds-form-hint-text-font-size - The font size of hint text
- * @cssproperty --sgds-form-hint-text-font-weight - The font weight of hint text
-
- *
  */
 export class SgdsInput extends SgdsElement implements SgdsFormControl {
   static styles = [...SgdsElement.styles, feedbackStyles, formHintStyles, formLabelStyles, inputStyle];

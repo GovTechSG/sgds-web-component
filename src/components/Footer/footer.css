@@ -23,8 +23,6 @@
     line-height: 1.33;
   }
   .container-fluid {
-    /* --sgds-gutter-x: 0.75rem;
-    --sgds-gutter-y: 0; */
     margin-left: auto;
     margin-right: auto;
     padding-left: var(--sgds-gutter-x, 1.5rem); 

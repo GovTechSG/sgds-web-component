@@ -1,5 +1,5 @@
 sgds-input{
-  --sgds-input-border-radius: 0;
+  --sgds-border-radius: 0;
 }
 sgds-button:first-of-type{
   --sgds-btn-border-radius: var(--sgds-border-radius) 0 0 var(--sgds-border-radius);

@@ -1,7 +1,3 @@
-:host {
-  --sgds-radio-group-gap: var(--sgds-spacer-2)
-}
-
 fieldset {
   border: 0;
   margin: 0;
@@ -9,7 +5,7 @@ fieldset {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-radio-group-gap)
+  gap: var(--sgds-spacer-2);
 }
 
 .radio-group-validation-input {

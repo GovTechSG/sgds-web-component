@@ -6,10 +6,6 @@ import textStyles from "../../styles/text-variants.css";
 /**
  * @summary Spinners notify the users that their request is being processed.
  *
- * @cssproperty --sgds-spinner-color - The color of spinner
- * @cssproperty --sgds-spinner-size - The width and height of spinner
- * @cssproperty --sgds-spinner-border-width - The width of the border of spinner
- *
  */
 export class SgdsSpinner extends SgdsElement {
   static styles = [...SgdsElement.styles, textStyles, spinnerStyle];
@@ -20,7 +16,7 @@ export class SgdsSpinner extends SgdsElement {
 
   render() {
     return html`
-      <div class="spinner-${this.type}" role="status">
+      <div class="spinner-${this.type} spinner" role="status">
         <span class="sr-only">Loading...</span>
       </div>
     `;

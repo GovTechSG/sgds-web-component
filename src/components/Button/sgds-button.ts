@@ -31,6 +31,7 @@ export type ButtonVariant =
  * @cssprop --sgds-btn-color - The text color of button
  * @cssprop --sgds-btn-bg - The background color of button
  * @cssprop --sgds-btn-border-color - The color of the button border
+ * @cssprop --sgds-btn-border-radius - The border radius of button border
  *
  */
 export class SgdsButton extends SgdsElement {

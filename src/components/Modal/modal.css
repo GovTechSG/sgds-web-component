@@ -7,7 +7,6 @@
   --sgds-modal-panel-border-radius: var(--sgds-border-radius);
   --sgds-modal-header-border-bottom: var(--sgds-border-width) solid var(--sgds-border-color);
   --sgds-modal-overlay-bg: rgba(0, 0, 0, 0.5);
-  --sgds-modal-panel-margin-top: 1.75rem;
   display: contents;
 }
 
@@ -38,7 +37,7 @@
   max-height: calc(100% - 2.25rem);
   background-color: var(--sgds-modal-panel-bg);
   border-radius: var(--sgds-modal-panel-border-radius);
-  margin-top: var(--sgds-modal-panel-margin-top);
+  margin-top: 1.75rem;
 }
 
 .modal-panel:focus {

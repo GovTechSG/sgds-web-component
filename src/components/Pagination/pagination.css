@@ -7,7 +7,6 @@
   --sgds-pagination-active-bg: var(--sgds-link);
   --sgds-pagination-disabled-color: var(--sgds-gray);
   --sgds-pagination-disabled-bg: var(--sgds-body-bg);
-  --sgds-pagination-focus-box-shadow: 0 0 0 0.125rem rgba(15, 113, 187, 0.25);
 }
 
 ul {
@@ -48,7 +47,7 @@ svg {
 .page-link:focus {
   color: var(--sgds-pagination-color);
   background-color: var(--sgds-pagination-hover-bg);
-  box-shadow: var(--sgds-pagination-focus-box-shadow);
+  box-shadow: 0 0 0 0.125rem rgba(15, 113, 187, 0.25);
   outline: 0;
   z-index: 3;
 }

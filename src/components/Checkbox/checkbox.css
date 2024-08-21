@@ -1,9 +1,6 @@
-:host {
-  --sgds-checkbox-margin-bottom: var(--sgds-spacer-2);
-  --sgds-checkbox-input-border-radius: 0.25em;
-}
 
-:host([checked]) {
+
+:host([checked]) .form-check {
   --sgds-form-border-color: var(--sgds-form-bg);
   --sgds-form-bg: var(--sgds-info-filled);
 }
@@ -20,16 +17,12 @@ input {
 
 .form-check {
   display: block;
-  margin-bottom: var(--sgds-checkbox-margin-bottom);
+  margin-bottom: var(--sgds-spacer-2);
   min-height: 2rem;
-  /* padding-left: 1.625em; */
 }
 
 .form-check .form-check-input {
-  /* float: left;
-  margin-left: -1.625em; */
   margin-right: var(--sgds-form-input-margin-right);
-
 }
 
 .form-check-input {
@@ -47,7 +40,7 @@ input {
   width: 1.125em;
 }
 .form-check-input[type="checkbox"] {
-  border-radius: var(--sgds-checkbox-input-border-radius);
+  border-radius: 0.25em;
 }
 .form-check-input:focus {
   border-color: var(--sgds-form-border-color);

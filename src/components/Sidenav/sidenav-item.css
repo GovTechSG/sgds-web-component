@@ -3,11 +3,6 @@
   --sgds-sidenav-item-btn-padding-x: 1rem;
   --sgds-sidenav-item-btn-padding-y: 0.5rem;
   --sgds-sidenav-item-icon-title-gap: 1rem;
-    /* NEW in V2 */
-  --sgds-sidenav-item-btn-border-left: var(--sgds-sidenav-item-btn-border-left-width) solid transparent;
-  --sgds-sidenav-item-btn-border-radius: 0;
-  --sgds-sidenav-item-btn-line-height: var(--sgds-line-height-md);
-  --sgds-sidenav-item-list-line-height: var(--sgds-line-height-lg);
 }
 
 .sidenav-btn {
@@ -49,7 +44,7 @@
 a.sidenav-btn {
   color: inherit;
   text-decoration: none;
-  line-height: var(--sgds-sidenav-item-btn-line-height);
+  line-height: var(--sgds-line-height-md);
 }
 
 div.sidenav-list {

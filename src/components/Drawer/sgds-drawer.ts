@@ -47,8 +47,6 @@ import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
  * @cssproperty --sgds-drawer-padding - The amount of padding to use for the header, body and footer
  * @cssproperty --sgds-drawer-bg - The drawer's background color.
  * @cssproperty --sgds-drawer-button-gap - The drawer's flex gap between buttons.
- * @cssproperty --sgds-drawer-overlay-bg - The drawer's overlay background colour
- * @cssproperty --sgds-drawer-z-index - The drawer's z-index
  *
  */
 export class SgdsDrawer extends ScopedElementsMixin(SgdsElement) {

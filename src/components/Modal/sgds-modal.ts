@@ -44,7 +44,6 @@ import svgStyles from "../../styles/svg.css";
  * @cssproperty --sgds-modal-panel-border-radius - The border radius of modal panel
  * @cssproperty --sgds-modal-header-border-bottom - The bottom border of header
  * @cssproperty --sgds-modal-overlay-bg - The overlay's background color
- * @cssproperty --sgds-modal-panel-margin-top - The margin top of the modal panel. Sets the top start position of the modal in relation to the document
  */
 export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, headerStyles, svgStyles, modalStyle];

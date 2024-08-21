@@ -17,8 +17,6 @@ import paginationStyle from "./pagination.css";
  * @cssproperty --sgds-pagination-active-bg - The background color of pagination in active state
  * @cssproperty --sgds-pagination-disabled-color - The text color of pagination in disabled state
  * @cssproperty --sgds-pagination-disabled-bg - The background color of pagination in disabled state
- * @cssproperty --sgds-pagination-focus-box-shadow - The box shadow of pagination in focused state
- *
  *
  **/
 export class SgdsPagination extends SgdsElement {

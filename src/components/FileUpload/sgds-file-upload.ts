@@ -4,7 +4,7 @@ import { property } from "lit/decorators.js";
 import { createRef, ref } from "lit/directives/ref.js";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import SgdsElement from "../../base/sgds-element";
-import { SgdsButton } from "../Button/sgds-button";
+import { SgdsButton, type ButtonVariant } from "../Button/sgds-button";
 import fileUploadStyle from "./file-upload.css";
 import genId from "../../utils/generateId";
 import svgStyles from "../../styles/svg.css";
@@ -37,11 +37,6 @@ export type FileUploadButtonVariant =
  * @cssproperty --sgds-file-upload-file-icon-color - Left icon color
  * @cssproperty --sgds-file-upload-remove-icon-color - Remove icon color
  * @cssproperty --sgds-file-upload-remove-icon-hover-color - Remove icon hover color
- * @cssproperty --sgds-file-upload-icon-gap - The gap between the icons of file upload
- * @cssproperty --sgds-file-upload-gap - The vertical gap between elements inside the file upload
- * @cssproperty --sgds-form-hint-text-color - The color of hint text
- * @cssproperty --sgds-form-hint-text-font-size - The font size of hint text
- * @cssproperty --sgds-form-hint-text-font-weight - The font weight of hint text
  */
 
 export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
@@ -151,7 +146,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   }
 
   private _sanitizeVariant(variant: FileUploadButtonVariant) {
-    return variant.replace("outline-", "");
+    return variant.replace("outline-", "") as ButtonVariant;
   }
   render() {
     const getCheckedIcon = (checkedIcon: string) => {

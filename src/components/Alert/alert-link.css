@@ -8,3 +8,7 @@
   color: var(--sgds-alert-link-anchor-color);
   font-weight: 700;
 }
+.alert-link:focus-visible {
+  outline: 0;
+  box-shadow: var(--sgds-focus-box-shadow);
+}

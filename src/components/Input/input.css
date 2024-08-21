@@ -1,26 +1,15 @@
-:host {
-  --sgds-input-padding-x: var(--sgds-input-btn-padding-x);
-  --sgds-input-padding-y: var(--sgds-input-btn-padding-y);
-  --sgds-input-line-height: var(--sgds-body-line-height);
-  --sgds-input-font-weight: var(--sgds-body-font-weight);
-  --sgds-input-font-size: var(--sgds-body-font-size);
-  --sgds-input-border-radius: var(--sgds-border-radius);
-  --sgds-input-color: var(--sgds-body-color);
-  --sgds-input-placeholder-color: var(--sgds-gray-400);
-}
-
 .form-control {
   display: block;
-  font-size: var(--sgds-input-font-size);
+  font-size: var(--sgds-body-font-size);
   appearance: none;
   background-clip: padding-box;
   background-color: var(--sgds-body-bg);
   border: var(--sgds-form-border-width) solid var(--sgds-form-border-color);
-  border-radius: var(--sgds-input-border-radius);
-  color: var(--sgds-input-color);
-  font-weight: var(--sgds-input-font-weight);
-  line-height: var(--sgds-input-line-height);
-  padding: var(--sgds-input-padding-y) var(--sgds-input-padding-x);
+  border-radius: var(--sgds-border-radius);
+  color: var(--sgds-body-color);
+  font-weight: var(--sgds-body-font-weight);
+  line-height: var(--sgds-body-line-height);
+  padding: var(--sgds-input-btn-padding-y) var(--sgds-input-btn-padding-x);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   width: -webkit-fill-available;
   width: -moz-available;
@@ -38,7 +27,7 @@
 }
 
 .form-control::placeholder {
-  color: var(--sgds-input-placeholder-color);
+  color: var(--sgds-gray-400);
   opacity: 1;
 }
 .form-control:disabled {

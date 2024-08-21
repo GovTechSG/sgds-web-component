@@ -1,8 +1,10 @@
 :host {
   --sgds-btn-color: var(--sgds-body-color);
   --sgds-btn-bg: transparent;
-  --sgds-btn-border-color: light-dark(var(--sgds-gray-800), var(--sgds-gray-200));
+  --sgds-btn-border-color: var(--sgds-gray-800);
+  --sgds-btn-border-radius: var(--sgds-border-radius);
   display: inline-block;
+  
 }
 
 button:focus:not(:focus-visible) {
@@ -133,7 +135,7 @@ button:focus:not(:focus-visible) {
   --sgds-btn-font-weight: 400;
   --sgds-btn-line-height: var(--sgds-line-height-lg);
   --sgds-btn-border-width: var(--sgds-border-width);
-  --sgds-btn-border-radius: var(--sgds-border-radius);
+  
 
   background-color: var(--sgds-btn-bg);
   border: var(--sgds-btn-border-width) solid var(--sgds-btn-border-color);
@@ -159,9 +161,9 @@ button:focus:not(:focus-visible) {
   }
 }
 .btn:hover {
-  --sgds-btn-hover-color: light-dark(var(--sgds-white), var(--sgds-black));
-  --sgds-btn-hover-border-color: transparent;
-  --sgds-btn-hover-bg: light-dark(var(--sgds-black), var(--sgds-white));
+  --sgds-btn-hover-color: var(--sgds-white);
+  --sgds-btn-hover-border-color: var(--sgds-dark);
+  --sgds-btn-hover-bg: var(--sgds-dark);
   background-color: var(--sgds-btn-hover-bg);
   border-color: var(--sgds-btn-hover-border-color);
   color: var(--sgds-btn-hover-color);

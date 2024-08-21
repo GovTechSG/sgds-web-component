@@ -7,11 +7,6 @@ import { classMap } from "lit/directives/class-map.js";
 /**
  * @summary Close button for closing actions. Used in Modal, Drawer, Alert and Toast.
  *
- * @cssprop --sgds-close-btn-color - The color of close button
- * @cssprop --sgds-close-btn-image - The image of close button
- * @cssprop --sgds-close-btn-focus-box-shadow - The box shadow of a focused close button
- * @cssprop --sgds-close-btn-size - Sets the height and width of close button
- *
  */
 export class SgdsCloseButton extends SgdsElement {
   static styles = [closeButtonStyles];

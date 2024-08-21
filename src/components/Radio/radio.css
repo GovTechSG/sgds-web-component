@@ -1,6 +1,4 @@
-:host {
-  --sgds-radio-margin-bottom: var(--sgds-radio-group-gap, var(--sgds-spacer-2));
-}
+
 :host([checked]) {
   --sgds-form-bg: var(--sgds-info-filled);
   --sgds-form-border-color: var(--sgds-form-bg);
@@ -18,7 +16,7 @@ input {
 
 .form-check {
   display: block;
-  margin-bottom: var(--sgds-radio-margin-bottom);
+  margin-bottom: var(--sgds-spacer-2);
   min-height: 2rem;
 }
 

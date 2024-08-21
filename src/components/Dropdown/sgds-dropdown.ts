@@ -23,32 +23,6 @@ export type DropdownButtonVariant =
  *
  * @csspart menu - The dropdown's menu (ul element)
  *
- * @cssprop --sgds-dropdown-z-index - The z-index of dropdown, determining its stacking order relative to other elements.
- * @cssprop --sgds-dropdown-min-width - The minimum width of dropdown
- * @cssprop --sgds-dropdown-padding-x - The left and right padding of dropdown
- * @cssprop --sgds-dropdown-padding-y - The top and bottom padding of dropdown
- * @cssprop --sgds-dropdown-spacer - The margin spacing of dropdown depending on the drop position
- * @cssprop --sgds-dropdown-font-size - The font size of dropdown
- * @cssprop --sgds-dropdown-color - The text color of dropdown
- * @cssprop --sgds-dropdown-bg - The background color of dropdown
- * @cssprop --sgds-dropdown-border-color - The border color of dropdown
- * @cssprop --sgds-dropdown-border-radius - The border radius of dropdown
- * @cssprop --sgds-dropdown-border-width - The border width of dropdown
- * @cssprop --sgds-dropdown-border-width - The border width of dropdown
- * @cssprop --sgds-dropdown-divider-bg - The background color of divider
- * @cssprop --sgds-dropdown-divider-margin-y - The top and bottom margin of divider
- * @cssprop --sgds-dropdown-item-color - The text color of dropdown item
- * @cssprop --sgds-dropdown-item-hover-color - The text color of dropdown item in hover state
- * @cssprop --sgds-dropdown-item-hover-bg - The background color of dropdown item in hover state
- * @cssprop --sgds-dropdown-item-active-color - The text color of dropdown item in active state
- * @cssprop --sgds-dropdown-item-active-bg - The background color of dropdown item in active state
- * @cssprop --sgds-dropdown-item-disabled-color - The text color of dropdown item in disabled state
- * @cssprop --sgds-dropdown-item-padding-x - The left and right padding of dropdown item
- * @cssprop --sgds-dropdown-item-padding-y - The top and bottom padding of dropdown item
- * @cssprop --sgds-dropdown-header-color - The text color of dropdown header
- * @cssprop --sgds-dropdown-header-padding-x - The left and right padding of dropdown header
- * @cssprop --sgds-dropdown-header-padding-y - The top and bottom padding of dropdown header
- *
  */
 export class SgdsDropdown extends ScopedElementsMixin(DropdownListElement) {
   static styles = [...DropdownListElement.styles, dropdownStyle];

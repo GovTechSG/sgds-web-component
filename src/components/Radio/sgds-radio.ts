@@ -14,9 +14,6 @@ import formLabelStyles from "../../styles/form-label.css";
  *
  * @event sgds-focus - Emitted when the control gains focus.
  * @event sgds-blur - Emitted when the control loses focus.
- *
- * @cssprop --sgds-radio-margin-bottom - The margin-bottom of each radio. Defaults to the value of `--sgds-radio-group-gap`
- * @cssprop --sgds-radio-inline-margin-right - The margin-right of each radio when it is inlined.
  */
 export class SgdsRadio extends SgdsElement {
   static styles = [...SgdsElement.styles, formLabelStyles, radioStyles];

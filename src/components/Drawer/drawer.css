@@ -3,8 +3,6 @@
   --sgds-drawer-size: 35rem;
   --sgds-drawer-bg: var(--sgds-body-bg);
   --sgds-drawer-button-gap: var(--sgds-spacer-2);
-  --sgds-drawer-overlay-bg: rgba(0, 0, 0, 0.5);
-  --sgds-drawer-z-index: 1055;
   display: contents;
 }
 
@@ -19,7 +17,7 @@
 
 .drawer-fixed {
   position: fixed;
-  z-index: var(--sgds-drawer-z-index);
+  z-index: 1055;
 }
 
 .drawer-panel {
@@ -133,7 +131,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: var(--sgds-drawer-overlay-bg);
+  background-color: rgba(0, 0, 0, 0.5);
   pointer-events: all;
 }
 
