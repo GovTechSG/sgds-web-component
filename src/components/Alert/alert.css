@@ -1,13 +1,8 @@
 :host {
   /* NEW in 2.0 */
-  --sgds-alert-bg: transparent;
-  --sgds-alert-color: var(--sgds-default-color-on-dark);
-  --sgds-alert-icon-color: var(--sgds-default-color-on-dark);
-  --sgds-alert-border-radius: var(--sgds-border-radius);
-}
-
-:host([variant="info"]) {
   --sgds-alert-bg: var(--sgds-primary-bg);
+  --sgds-alert-color: var(--sgds-default-color-on-dark);
+  --sgds-alert-border-radius: var(--sgds-border-radius-md);
 }
 
 :host([variant="success"]) {
@@ -29,31 +24,26 @@
   --sgds-alert-color: var(--sgds-default-color-on-light);
 }
 :host([variant="info"][outlined]) {
-  --sgds-alert-link-color: var(--sgds-primary-text-emphasis);
   --sgds-alert-bg: var(--sgds-primary-bg-subtle);
   --sgds-alert-border-color: var(--sgds-primary-border-color-subtle);
 }
 
 :host([variant="success"][outlined]) {
-  --sgds-alert-link-color: var(--sgds-secondary-text-emphasis);
   --sgds-alert-bg: var(--sgds-success-bg-subtle);
   --sgds-alert-border-color: var(--sgds-success-border-color-subtle);
 }
 
 :host([variant="warning"][outlined]) {
-  --sgds-alert-link-color: var(--sgds-warning-text-emphasis);
   --sgds-alert-bg: var(--sgds-warning-bg-subtle);
   --sgds-alert-border-color: var(--sgds-warning-border-color-subtle);
 }
 
 :host([variant="danger"][outlined]) {
-  --sgds-alert-link-color: var(--sgds-danger-text-emphasis);
   --sgds-alert-bg: var(--sgds-danger-bg-subtle);
   --sgds-alert-border-color: var(--sgds-danger-border-color-subtle);
 }
 
 :host([variant="neutral"][outlined]) {
-  --sgds-alert-link-color: var(--sgds-success-text-emphasis);
   --sgds-alert-bg: var(--sgds-neutral-bg-subtle);
   --sgds-alert-border-color: var(--sgds-neutral-border-color-subtle);
 }
@@ -74,7 +64,7 @@ slot[name="icon"]::slotted(*) {
   gap: var(--sgds-gap-sm);
   background-color: var(--sgds-alert-bg);
   border: var(--sgds-border-width-1) solid var(--sgds-default-border-color-transparent);
-  border-radius: var(--sgds-border-radius-md);
+  border-radius: var(--sgds-alert-border-radius);
   color: var(--sgds-alert-color);
   padding: var(--sgds-padding-lg);
 }
@@ -85,11 +75,11 @@ slot[name="icon"]::slotted(*) {
 
 .alert-content {
   display: flex;
-  padding-right: var(--sgds-alert-content-padding-right, 2rem);
+  padding-right: var(--sgds-padding-2-xl);
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: var(--sgds-alert-content-gap, 0.25rem);
+  gap: var(--sgds-gap-2-xs);
   flex: 1 0 0;
 }
 .alert-title {
