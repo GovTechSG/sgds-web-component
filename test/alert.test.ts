@@ -36,7 +36,7 @@ describe("<sgds-alert-link>", () => {
     const el = await fixture(html`<sgds-alert-link></sgds-alert-link>`);
     assert.shadowDom.equal(
       el,
-      `<a class="alert-link"><slot></slot> </a>
+      `<a class="alert-link" tabindex="0"><slot></slot> </a>
         `
     );
   });
@@ -44,7 +44,7 @@ describe("<sgds-alert-link>", () => {
     const el = await fixture(html`<sgds-alert-link href="#"></sgds-alert-link>`);
     assert.shadowDom.equal(
       el,
-      `<a class="alert-link" href="#"><slot></slot> </a>
+      `<a class="alert-link" href="#" tabindex="0"><slot></slot> </a>
         `
     );
   });
@@ -52,7 +52,7 @@ describe("<sgds-alert-link>", () => {
     const el = await fixture(html`<sgds-alert-link target="_blank"></sgds-alert-link>`);
     assert.shadowDom.equal(
       el,
-      `<a class="alert-link" target="_blank"><slot></slot> </a>
+      `<a class="alert-link" target="_blank" tabindex="0"><slot></slot> </a>
         `
     );
   });
