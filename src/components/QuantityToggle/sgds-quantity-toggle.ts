@@ -21,7 +21,6 @@ import svgStyles from "../../styles/svg.css";
  * @event sgds-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sgds-input - Emitted when the control receives input and its value changes.
  *
- * @cssprop --sgds-qt-border-radius - The border radius of the four ends of the quantity toggle
  */
 export class SgdsQuantityToggle extends ScopedElementsMixin(SgdsElement) implements SgdsFormControl {
   static styles = [...SgdsElement.styles, svgStyles, quantityToggleStyle];

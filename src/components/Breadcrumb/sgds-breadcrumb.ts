@@ -12,9 +12,6 @@ import breadcrumbStyle from "./breadcrumb.css";
  *
  * @csspart base - The nav element wrapper of `SgdsBreadcrumb`
  *
- * @cssprop --sgds-breadcrumb-padding-x - The x-axis padding of the breadcrumb
- * @cssprop --sgds-breadcrumb-padding-y - The y-axis padding of the breadcrumb
- *
  */
 export class SgdsBreadcrumb extends SgdsElement {
   static styles = [...SgdsElement.styles, breadcrumbStyle];

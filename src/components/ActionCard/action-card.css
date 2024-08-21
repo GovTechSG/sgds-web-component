@@ -1,23 +1,12 @@
-:host {
-  /* NEW in 2.0 */
-  --sgds-action-card-transition-duration: 0.3s;
-  --sgds-action-card-body-gap: var(--sgds-spacer-3);
-  /* override the default value from card */
-  --sgds-card-title-margin-bottom: 0;
-}
-:host([active]) {
-  --sgds-card-box-shadow: var(--sgds-box-shadow), inset 0 0 0 2.1px var(--sgds-link);
-}
-
 .sgds.card[variant*="card-action"] {
-  transition-duration: var(--sgds-action-card-transition-duration);
+  transition-duration:  0.3s;
   transition-property: box-shadow, border-color;
   transition-timing-function: ease-in-out;
 }
 .card-body {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-action-card-body-gap);
+  gap: var(--sgds-spacer-3);
 }
 
 slot[name="icon"]::slotted(*) {
@@ -26,10 +15,15 @@ slot[name="icon"]::slotted(*) {
 .sgds.card[variant*="card-action"].is-active,
 .sgds.card[variant*="card-action"]:hover {
   border-color: transparent;
-  box-shadow: var(--sgds-card-box-shadow);
+  box-shadow: var(--sgds-box-shadow), inset 0 0 0 2.1px var(--sgds-link);
 }
 .sgds.card[variant*="card-action"] .card-subtitle {
   align-items: center;
   display: flex;
   justify-content: space-between;
+}
+
+.sgds.card[variant*="card-action"] .card-title {
+  color: var(--sgds-body-color);
+  margin-bottom: 0;
 }

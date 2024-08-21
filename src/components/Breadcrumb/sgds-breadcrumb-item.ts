@@ -14,10 +14,6 @@ import anchorStyles from "../../styles/anchor.css";
  * @csspart base - The base wrapper of breadcrumb item which is a HTMLListElement.
  * @csspart label -The label of the breadcrumb item. It is either a span or anchor element depending on href attribute
  *
- * @cssprop --sgds-breadcrumb-item-padding-x - The x-axis padding of breadcrumb item
- * @cssprop --sgds-breadcrumb-item-active-color - The text color of breadcrumb item when it is active
- * @cssprop --sgds-breadcrumb-item-font-size - The font size of breadcrumb item. Affects the font size of all the breadcrumb items and separators
- * @cssprop --sgds-breadcrumb-item-separator-color - The color of breadcrumb item's separator
  */
 export class SgdsBreadcrumbItem extends SgdsElement {
   static styles = [...SgdsElement.styles, anchorStyles, breadcrumbItemStyle];

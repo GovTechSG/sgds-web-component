@@ -1,64 +1,36 @@
-:host {
-  /* NEW in 2.0 */
-  --sgds-card-bg: var(--sgds-body-bg);
-  --sgds-card-height: auto;
-  --sgds-card-border-width: var(--sgds-border-width);
-  --sgds-card-border-color: var(--sgds-border-color-translucent);
-  --sgds-card-border-radius: var(--sgds-border-radius);
-  --sgds-card-box-shadow: none;
-  --sgds-card-inner-border-radius: calc(var(--sgds-border-radius) - var(--sgds-border-width));
-
-  --sgds-card-body-color: var(--sgds-body-color);
-  --sgds-card-body-padding: var(--sgds-spacer-4);
-
-  --sgds-card-title-margin-bottom: var(--sgds-spacer-2);
-  --sgds-card-title-color: var(--sgds-body-color);
-
-  /* Currently applies to action card only 
-  as card is not using subtitle */
-  --sgds-card-subtitle-color: var(--sgds-body-color);
-}
-
 .card {
   word-wrap: break-word;
   background-clip: border-box;
-  background-color: var(--sgds-card-bg);
-  border: var(--sgds-card-border-width) solid var(--sgds-card-border-color);
-  border-radius: var(--sgds-card-border-radius);
+  background-color: var(--sgds-body-bg);
+  border:var(--sgds-border-width) solid var(--sgds-border-color-translucent);
+  border-radius: var(--sgds-border-radius);
   color: var(--sgds-body-color);
   display: flex;
   flex-direction: column;
-  height: var(--sgds-card-height);
+  height: auto;
   min-width: 0;
   position: relative;
-  box-shadow: var(--sgds-card-box-shadow);
+  box-shadow: none;
 }
 
 .card-body {
-  color: var(--sgds-card-body-color);
+  color: var(--sgds-body-color);
   flex: 1 1 auto;
-  padding: var(--sgds-card-body-padding);
+  padding: var(--sgds-spacer-4);
 }
 .card-title {
-  color: var(--sgds-card-title-color);
-  margin-bottom: var(--sgds-card-title-margin-bottom);
+  color: var(--sgds-body-color);
+  margin-bottom: var(--sgds-spacer-2);
 }
-/* .card-subtitle {
-  color: var(--sgds-card-subtitle-color);
-  margin-top: calc(var(--sgds-card-title-spacer-y) * -0.5);
-} */
+
 .card-subtitle,
 .card-text:last-child {
   margin-bottom: 0;
 }
-/* slot[name="card-link"]::slotted(*) {
-  display: flex;
-  gap: var(--sgds-card-body-spacer-x);
-} */
 
 slot[name="card-image"]::slotted(img) {
-  border-top-left-radius: var(--sgds-card-inner-border-radius);
-  border-top-right-radius: var(--sgds-card-inner-border-radius);
+  border-top-left-radius: calc(var(--sgds-border-radius) - var(--sgds-border-width));
+  border-top-right-radius: calc(var(--sgds-border-radius) - var(--sgds-border-width));
 }
 
 slot[name="card-link"]::slotted(*) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="sgds-night-theme">
+<html>
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,7 +97,6 @@
             { title: 3, stepHeader: "Marker title", template: `<p>Step 3 Content</p>` },
         ];
     </script>
-    <link href='./src/themes/night.css' rel='stylesheet' type='text/css' />
     <link href='./src/themes/day.css' rel='stylesheet' type='text/css' />
 </head>
 
@@ -575,45 +574,29 @@
                     <sgds-button variant="light">Hello World</sgds-button>
                     <sgds-button variant="link" target="_blank" href="#">Hello World</sgds-button>
                     <sgds-button variant="dark">Hello World</sgds-button>
-                    <sgds-button disabled variant="primary">Hello World</sgds-button>
-                    <sgds-button disabled variant="secondary">Hello World</sgds-button>
-                    <sgds-button disabled variant="warning">Hello World</sgds-button>
-                    <sgds-button disabled variant="success">Hello World</sgds-button>
-                    <sgds-button disabled variant="info">Hello World</sgds-button>
-                    <sgds-button disabled variant="danger">Hello World</sgds-button>
-                    <sgds-button disabled variant="light">Hello World</sgds-button>
-                    <sgds-button disabled variant="link" target="_blank" href="#">Hello World</sgds-button>
-                    <sgds-button disabled variant="dark">Hello World</sgds-button>
-                    <sgds-button outlined variant="primary">Hello World</sgds-button>
-                    <sgds-button outlined variant="secondary">Hello World</sgds-button>
-                    <sgds-button outlined variant="warning">Hello World</sgds-button>
-                    <sgds-button outlined variant="success">Hello World</sgds-button>
-                    <sgds-button outlined variant="info">Hello World</sgds-button>
-                    <sgds-button outlined variant="danger">Hello World</sgds-button>
-                    <sgds-button outlined variant="light">Hello World</sgds-button>
-                    <sgds-button outlined variant="link">Hello World</sgds-button>
-                    <sgds-button outlined variant="dark">Hello World</sgds-button>
-                    <sgds-button active variant="primary">Hello World</sgds-button>
-                    <sgds-button active variant="secondary">Hello World</sgds-button>
-                    <sgds-button active variant="warning">Hello World</sgds-button>
-                    <sgds-button active variant="success">Hello World</sgds-button>
-                    <sgds-button active variant="info">Hello World</sgds-button>
-                    <sgds-button active variant="danger">Hello World</sgds-button>
-                    <sgds-button active variant="light">Hello World</sgds-button>
-                    <sgds-button active variant="link">Hello World</sgds-button>
-                    <sgds-button active variant="dark">Hello World</sgds-button>
-                    <sgds-button active outlined variant="primary">Hello World</sgds-button>
-                    <sgds-button active outlined variant="secondary">Hello World</sgds-button>
-                    <sgds-button active outlined variant="warning">Hello World</sgds-button>
-                    <sgds-button active outlined variant="success">Hello World</sgds-button>
-                    <sgds-button active outlined variant="info">Hello World</sgds-button>
-                    <sgds-button active outlined variant="danger">Hello World</sgds-button>
-                    <sgds-button active outlined variant="light">Hello World</sgds-button>
-                    <sgds-button active outlined variant="link">Hello World</sgds-button>
-                    <sgds-button active outlined variant="dark">Hello World</sgds-button>
+                    <sgds-button disabled variant="primary">Disabled World</sgds-button>
+                    <sgds-button disabled variant="secondary">Disabled World</sgds-button>
+                    <sgds-button disabled variant="warning">Disabled World</sgds-button>
+                    <sgds-button disabled variant="success">Disabled World</sgds-button>
+                    <sgds-button disabled variant="info">Disabled World</sgds-button>
+                    <sgds-button disabled variant="danger">Disabled World</sgds-button>
+                    <sgds-button disabled variant="light">Disabled World</sgds-button>
+                    <sgds-button disabled variant="link" target="_blank" href="#">Disabled World</sgds-button>
+                    <sgds-button disabled variant="dark">Disabled World</sgds-button>
+                    
+                    <sgds-button active variant="primary">Active World</sgds-button>
+                    <sgds-button active variant="secondary">Active World</sgds-button>
+                    <sgds-button active variant="warning">Active World</sgds-button>
+                    <sgds-button active variant="success">Active World</sgds-button>
+                    <sgds-button active variant="info">Active World</sgds-button>
+                    <sgds-button active variant="danger">Active World</sgds-button>
+                    <sgds-button active variant="light">Active World</sgds-button>
+                    <sgds-button active variant="link">Active World</sgds-button>
+                    <sgds-button active variant="dark">Active World</sgds-button>
+
                     <sgds-button href="#" target="_blank">Anchor</sgds-button>
-                    <sgds-button size="sm" variant="dark">Hello World</sgds-button>
-                    <sgds-button size="lg" variant="dark">Hello World</sgds-button>
+                    <sgds-button size="sm" variant="dark">Sm World</sgds-button>
+                    <sgds-button size="lg" variant="dark">Lg World</sgds-button>
                 </div>
                 <sgds-button id="modalShowButton">Open Modal</sgds-button>
                 <sgds-modal centered title="hello" titleicon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-amd&quot; viewBox=&quot;0 0 16 16&quot;>
@@ -941,123 +924,7 @@
                                 This is a light alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
                             </span>
                         </sgds-alert>
-                        <sgds-alert variant="dark" show="" dismissible>
-                            <svg slot="icon"
-                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-exclamation-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
-                                <path
-                                    d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z">
-                                </path>
-                            </svg>
-                            <span>
-                                This is a dark alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
-                            </span>
-                        </sgds-alert>
-                        <sgds-alert variant="primary" show="" outlined dismissible>
-                            <svg slot="icon"
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-exclamation-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
-                                <path
-                                    d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z">
-                                </path>
-                            </svg>
-                            <span>
-                                This is an outline primary alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
-                            </span>
-                        </sgds-alert>
-                        <sgds-alert variant="secondary" show="" outlined dismissible>
-                            <svg slot="icon"
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-exclamation-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
-                                <path
-                                    d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z">
-                                </path>
-                            </svg>
-                            <span>
-                                This is an outline secondary alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
-                            </span>
-                        </sgds-alert>
-                        <sgds-alert variant="warning" show="" outlined dismissible>
-                            <svg slot="icon"
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-exclamation-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
-                                <path
-                                    d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z">
-                                </path>
-                            </svg>
-                            <span>
-                                This is an outline warning alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
-                            </span>
-                        </sgds-alert>
-                        <sgds-alert variant="danger" show="" outlined dismissible>
-                            <svg slot="icon"
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-exclamation-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
-                                <path
-                                    d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z">
-                                </path>
-                            </svg>
-                            <span>
-                                This is an outline danger alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
-                            </span>
-                        </sgds-alert>
-                        <sgds-alert variant="success" show="" outlined dismissible>
-                            <svg slot="icon"
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-exclamation-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
-                                <path
-                                    d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z">
-                                </path>
-                            </svg>
-                            <span>
-                                This is an outline success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
-                            </span>
-                        </sgds-alert>
-                        <sgds-alert variant="info" show="" outlined dismissible>
-                            <svg slot="icon"
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-exclamation-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
-                                <path
-                                    d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z">
-                                </path>
-                            </svg>
-                            <span>
-                                This is an outline info alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
-                            </span>
-                        </sgds-alert>
-                        <sgds-alert variant="light" show="" outlined dismissible>
-                            <svg slot="icon"
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-exclamation-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
-                                <path
-                                    d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z">
-                                </path>
-                            </svg>
-                            <span>
-                                This is an outline light alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
-                            </span>
-                        </sgds-alert>
-                        <sgds-alert variant="dark" show="" outlined dismissible>
-                            <svg slot="icon"
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-exclamation-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
-                                <path
-                                    d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z">
-                                </path>
-                            </svg>
-                            <span>
-                                This is an outline dark alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a click if you like. You may add the dismissible option
-                            </span>
-                        </sgds-alert>
+                        
                         <sgds-alert variant="success" show="">
                             <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">

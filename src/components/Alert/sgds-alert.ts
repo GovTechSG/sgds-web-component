@@ -47,9 +47,6 @@ export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
   /** The alert's theme variant. */
   @property({ type: String, reflect: true }) variant: AlertVariant = "primary";
 
-  /** Controls the alert visual between a lighter outline and a solid darker variant. */
-  @property({ type: Boolean, reflect: true }) outlined = false;
-
   /** Closes the alert  */
   public close() {
     this.show = false;

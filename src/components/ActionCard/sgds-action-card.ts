@@ -25,21 +25,6 @@ import actionCardStyles from "./action-card.css";
  * @csspart subtitle - The action card subtitle
  * @csspart title - The action card title
  * @csspart text - The action card text
- *
- * @cssprop --sgds-action-card-transition-duration - The transition duration to active or hover state. Defaults to 0.3s
- * @cssprop --sgds-action-card-body-gap - The vertical gap between items in card body
- * @cssprop --sgds-card-bg - The background color of the card
- * @cssprop --sgds-card-height - The height of the card. By default, height of card depends on the size of its children
- * @cssprop --sgds-card-border-width - The border width of card
- * @cssprop --sgds-card-border-color - The border color of card
- * @cssprop --sgds-card-border-radius - The border radius of card
- * @cssprop --sgds-card-box-shadow - The box-shadow of card
- * @cssprop --sgds-card-inner-border-radius - The inner border radius of card. Useful in cases where card image is applied to prevent image border from exceeding the outer borders of the card
- * @cssprop --sgds-card-body-color - The text color of the items in card body. This includes title, subtitle and excludes link.
- * @cssprop --sgds-card-body-padding - The padding of the card body
- * @cssprop --sgds-card-title-color - The text color of card title
- * @cssprop --sgds-card-title-margin-bottom - The margin-bottom of card title
- * @cssprop --sgds-card-subtitle-color - The text color of card subtitle
  */
 export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
   static styles = [...CardElement.styles, actionCardStyles];

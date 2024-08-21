@@ -28,28 +28,9 @@ export type ButtonVariant =
  * @event sgds-blur - Emitted when the button is not focused.
  * @event sgds-focus - Emitted when the button is focused.
  *
- * @cssprop --sgds-btn-padding-x - The x-axis padding of button
- * @cssprop --sgds-btn-padding-y - The y-axis padding of button
- * @cssprop --sgds-btn-font-family - The font family of text content in button
- * @cssprop --sgds-btn-font-size - The font size of text content in button
- * @cssprop --sgds-btn-font-weight - The font weight of text content in button
- * @cssprop --sgds-btn-line-height - The line height of text content in button
  * @cssprop --sgds-btn-color - The text color of button
  * @cssprop --sgds-btn-bg - The background color of button
- * @cssprop --sgds-btn-border-width - The thickness of the button border
  * @cssprop --sgds-btn-border-color - The color of the button border
- * @cssprop --sgds-btn-border-radius - The border radius of button border
- * @cssprop --sgds-btn-disabled-color - The text color of a button in disabled state
- * @cssprop --sgds-btn-disabled-opacity - The opacity of a button in disabled state
- * @cssprop --sgds-btn-hover-color - The text color of a button in hover state
- * @cssprop --sgds-btn-hover-border-color - The border color of a button in hover state
- * @cssprop --sgds-btn-hover-bg - The background color of a button in hover state
- * @cssprop --sgds-btn-active-color - The text color of a button in active state
- * @cssprop --sgds-btn-active-border-color - The border color of a button in active state
- * @cssprop --sgds-btn-active-bg - The background color of a button in active state
- * @cssprop --sgds-btn-focus-box-shadow-color - The color of box shadow of a focused button
- * @cssprop --sgds-btn-focus-box-shadow - The box shadow of a button in focused state
- * @cssprop --sgds-btn-icon-gutter - The space between icons and the text in button
  *
  */
 export class SgdsButton extends SgdsElement {

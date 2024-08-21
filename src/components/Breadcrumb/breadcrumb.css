@@ -1,13 +1,8 @@
-:host {
-  /* NEW in V2.0 */
-  --sgds-breadcrumb-padding-x: var(--sgds-spacer-0);
-  --sgds-breadcrumb-padding-y: var(--sgds-spacer-0);
-}
 
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
   margin: 0;
-  padding: var(--sgds-breadcrumb-padding-y) var(--sgds-breadcrumb-padding-x);
+  padding: var(--sgds-spacer-0) var(--sgds-spacer-0);
 }

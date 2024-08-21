@@ -7,20 +7,7 @@
   --sgds-mainnav-border-bottom-width: 1px;
   --sgds-mainnav-border-bottom-color: #98a2b3;
   /** NEW in 2.0.0 */
-  --sgds-mainnav-toggler-icon: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16" ><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" /></svg>');
-  --sgds-mainnav-toggler-padding-y: var(--sgds-spacer-1);
-  --sgds-mainnav-toggler-padding-x: 0.75rem;
-  --sgds-mainnav-toggler-font-size: 1.25rem;
-
-  --sgds-mainnav-brand-padding-y: 0.125rem;
-  --sgds-mainnav-brand-font-size: 1.25rem;
-  --sgds-mainnav-brand-color: rgba(var(--sgds-emphasis-color-rgb), 0.9);
-  --sgds-mainnav-brand-hover-color: rgba(var(--sgds-emphasis-color-rgb), 0.9);
-
-  --sgds-mainnav-gutter: var(--sgds-spacer-4);
   --sgds-mainnav-theme-color: var(--sgds-primary);
-  --sgds-mainnav-color: var(--sgds-body-color);
-  --sgds-mainnav-disabled-opacity: var(--sgds-disabled-opacity);
 }
 .navbar {
   align-items: stretch;
@@ -39,18 +26,18 @@
 .navbar-brand {
   display: flex;
   align-items: center;
-  color: var(--sgds-mainnav-brand-color);
-  font-size: var(--sgds-mainnav-brand-font-size);
-  margin-right: var(--sgds-mainnav-gutter);
+  color: rgba(var(--sgds-emphasis-color-rgb), 0.9);
+  font-size: 1.25rem;
+  margin-right: var(--sgds-spacer-4);
   text-decoration: none;
   white-space: nowrap;
-  padding-bottom: var(--sgds-mainnav-brand-padding-y);
-  padding-top: var(--sgds-mainnav-brand-padding-y);
+  padding-bottom: 0.125rem;
+  padding-top: 0.125rem;
 }
 
 .navbar-brand:focus,
 .navbar-brand:hover {
-  color: var(--sgds-mainnav-brand-hover-color);
+  color: rgba(var(--sgds-emphasis-color-rgb), 0.9);
 }
 .navbar-nav {
   /* --sgds-nav-link-padding-x: 0;
@@ -62,9 +49,9 @@
   display: flex;
   flex-direction: column;
   list-style: none;
-  gap: var(--sgds-mainnav-gutter);
+  gap: var(--sgds-spacer-4);
   padding-left: 0;
-  padding-right: var(--sgds-mainnav-gutter);
+  padding-right: var(--sgds-spacer-4);
   height: 100%;
   width: 100%;
   margin-top: 0;
@@ -80,9 +67,9 @@
   background-color: transparent;
   border: none;
   /* color: var(--sgds-mainnav-color); */
-  font-size: var(--sgds-mainnav-toggler-font-size);
+  font-size:  1.25rem;
   line-height: 1;
-  padding: var(--sgds-mainnav-toggler-padding-y) var(--sgds-mainnav-toggler-padding-x);
+  padding: var(--sgds-spacer-1) 0.75rem;
 }
 @media (prefers-reduced-motion: reduce) {
   .navbar-toggler {
@@ -98,7 +85,7 @@
   text-decoration: none;
 }
 .navbar-toggler-icon {
-  background-image: var(--sgds-mainnav-toggler-icon);
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16" ><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" /></svg>');
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -406,7 +393,7 @@
   .navbar-dark,
   .navbar[data-bs-theme="dark"],
   [data-bs-theme="dark"] .navbar-toggler-icon {
-    --sgds-mainnav-toggler-icon-bg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.55)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16" ><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" /></svg>')-bg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.55)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
   }
 
   [data-bs-theme="dark"] .sgds.navbar {
@@ -442,7 +429,7 @@
 
 slot[name="non-collapsible"] {
   display: flex;
-  gap: var(--sgds-mainnav-gutter);
+  gap: var(--sgds-spacer-4);
   align-items: center;
   margin-left: auto;
 }
@@ -451,7 +438,7 @@ slot[name="non-collapsible"] {
   display: flex;
   margin-left: auto;
   align-items: stretch;
-  gap: var(--sgds-mainnav-gutter);
+  gap: var(--sgds-spacer-4);
 }
 
 /* there is no wildcard selector for element tag names in css */
