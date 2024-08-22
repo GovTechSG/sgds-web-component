@@ -5,7 +5,7 @@ import SgdsElement from "../../base/sgds-element";
 import badgeStyle from "./badge.css";
 import { watch } from "../../utils/watch";
 import SgdsCloseButton from "../CloseButton/sgds-close-button";
-export type BadgeVariant = "success" | "danger" | "warning" | "info" | "neutral";
+export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral";
 
 /**
  * @summary Badges can be used to highlight important bits of information such as labels, notifications & status.
