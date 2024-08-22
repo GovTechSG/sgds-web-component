@@ -27,14 +27,14 @@ sgds-datepicker-input {
   --input-border-radius: var(--sgds-border-radius, 0.3125rem) 0 0 var(--sgds-border-radius, 0.3125rem);
 }
 .calendar-btn {
-  --sgds-btn-border-color: var(--sgds-border-color);
-  --sgds-btn-border-radius: 0;
+  --btn-border-color: var(--sgds-border-color);
+  --btn-border-radius: 0;
 }
 .reset-btn {
-  --sgds-btn-bg: var(--datepicker-close-button-bg);
-  --sgds-btn-color: var(--datepicker-close-button-color);
-  --sgds-btn-border-radius: 0;
+  --btn-bg: var(--datepicker-close-button-bg);
+  --btn-color: var(--datepicker-close-button-color);
+  --btn-border-radius: 0;
 }
 .reset-btn:hover {
-  --sgds-btn-hover-bg: var(--datepicker-close-button-hover-bg);
+  --btn-hover-bg: var(--datepicker-close-button-hover-bg);
 }

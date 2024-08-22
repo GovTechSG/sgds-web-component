@@ -26,22 +26,23 @@ export const ActionCardAsRadio = {
   render: CardAsRadioTemplate.bind({}),
   name: "Action Card as radio",
   args: {},
-  parameters: {}
-};
-
-const ActionCardPlaygroundTemplate = args =>
-  html`
-    <sgds-action-card type="radio" name="apple">
-      <span slot="card-subtitle">Laptop</span>
-      <span slot="card-title">Apple</span>
-      <span slot="card-text">Macbook Pro M1</span>
-    </sgds-action-card>
-  `;
-
-export const ActionCardPlayground = {
-  render: ActionCardPlaygroundTemplate.bind({}),
-  name: "Playground",
-  args: {},
   parameters: {},
-  tags: ["dev"]
+  tags: ["!dev"]
 };
+
+// const ActionCardPlaygroundTemplate = args =>
+//   html`
+//     <sgds-action-card type="radio" name="apple">
+//       <span slot="card-subtitle">Laptop</span>
+//       <span slot="card-title">Apple</span>
+//       <span slot="card-text">Macbook Pro M1</span>
+//     </sgds-action-card>
+//   `;
+
+// export const ActionCardPlayground = {
+//   render: ActionCardPlaygroundTemplate.bind({}),
+//   name: "Playground",
+//   args: {},
+//   parameters: {},
+//   tags: ["dev"]
+// };

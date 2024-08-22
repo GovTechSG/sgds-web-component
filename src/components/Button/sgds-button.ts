@@ -16,7 +16,15 @@ export type ButtonVariant =
   | "info"
   | "light"
   | "dark"
-  | "link";
+  | "link"
+  | "outline-primary"
+  | "outline-secondary"
+  | "outline-success"
+  | "outline-danger"
+  | "outline-warning"
+  | "outline-info"
+  | "outline-light"
+  | "outline-dark";
 
 /**
  * @summary Custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
@@ -27,11 +35,6 @@ export type ButtonVariant =
  *
  * @event sgds-blur - Emitted when the button is not focused.
  * @event sgds-focus - Emitted when the button is focused.
- *
- * @cssprop --btn-color - The text color of button
- * @cssprop --btn-bg - The background color of button
- * @cssprop --btn-border-color - The color of the button border
- * @cssprop --btn-border-radius - The border radius of button border
  *
  */
 export class SgdsButton extends SgdsElement {
@@ -57,9 +60,6 @@ export class SgdsButton extends SgdsElement {
 
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as "outline" versions (prefixed by `outline-*`) */
   @property({ reflect: true }) variant: ButtonVariant;
-
-  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as "outline" versions (prefixed by `outline-*`) */
-  @property({ type: Boolean, reflect: true }) outlined = false;
 
   /** Specifies a large or small button */
   @property({ reflect: true }) size: "sm" | "lg";

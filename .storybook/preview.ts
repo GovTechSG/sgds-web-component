@@ -56,4 +56,4 @@ export const parameters = {
     }
   }
 };
-export const tags = ["autodocs", "!dev"];
+export const tags = ["autodocs"];
