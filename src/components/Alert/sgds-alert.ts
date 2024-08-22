@@ -20,8 +20,8 @@ export type AlertVariant = "info" | "success" | "danger" | "warning" | "neutral"
  *
  * @cssproperty --sgds-alert-bg - The background color of alert
  * @cssproperty --sgds-alert-color - The text color of alert
- * @cssproperty --sgds-alert-border-color - The color of the border of alert
  * @cssproperty --sgds-alert-border-radius - The border radius of alert
+ * @cssproperty --sgds-alert-border-color - The color of the border of alert, only applicable when outlined prop is true
  *
  */
 export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
