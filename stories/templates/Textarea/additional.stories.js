@@ -11,7 +11,6 @@ export const Validation = {
   tags: ["!dev"]
 };
 
-
 const changeValue = e => {
   e.preventDefault();
   const textarea = document.querySelector("sgds-textarea#default-value-eg");

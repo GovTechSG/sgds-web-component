@@ -1,7 +1,7 @@
 :host {
   --stepper-theme-color: var(--sgds-primary);
   --stepper-theme-hover-color: var(--sgds-primary-800);
-  --stepper-inactive-theme-color: var(--sgds-gray-400);
+  --stepper-default-color: var(--sgds-gray-400);
 }
 
 .sgds.stepper {
@@ -37,7 +37,7 @@
   transition: all 0.5s ease;
 }
 .sgds.stepper .stepper-item:before {
-  background: linear-gradient(270deg, var(--stepper-inactive-theme-color) 50%, var(--stepper-theme-color) 0);
+  background: linear-gradient(270deg, var(--stepper-default-color) 50%, var(--stepper-theme-color) 0);
   background-position: 100% 100%;
   background-size: 200% 100%;
 }
@@ -62,7 +62,7 @@
 }
 .sgds.stepper .stepper-item > .stepper-marker {
   align-items: center;
-  background: var(--stepper-inactive-theme-color);
+  background: var(--stepper-default-color);
   border: 0.25rem solid var(--sgds-white);
   border-radius: 50%;
   color: var(--sgds-white);

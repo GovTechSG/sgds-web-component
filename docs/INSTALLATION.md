@@ -24,6 +24,7 @@ Loading of polyfill is not always required, <a target="_blank" href="/story/gett
 ```js
 // load scoped custom element registry polyfill first (optional, depends on use case)
 import "@webcomponents/scoped-custom-element-registry";
+import "@govtechsg/sgds-web-component/themes/day.css";
 import "@govtechsg/sgds-web-component";
 ```
 
@@ -34,17 +35,17 @@ Once imported, the web components can be used throughout the project. You may im
 #### Importing individual component
 
 ```js
-
+// import global css first (once)
+import "@govtechsg/sgds-web-component/themes/day.css";
+//import button only
 import "@govtechsg/sgds-web-component/components/Button";
-
 ```
 
 #### Importing all components
 
 ```js
-
+import "@govtechsg/sgds-web-component/themes/day.css";
 import "@govtechsg/sgds-web-component";
-
 ```
 
 ## Method 2: Using CDN
@@ -60,6 +61,9 @@ This method registers all SGDS elements up front in the Custom Elements Registry
 ```js
 // load scoped custom element registry polyfill first (optional, depends on use case)
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/scoped-custom-element-registry@0.0.9"></script>
+// Load global css file
+<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@<version>/themes/day.css' rel='stylesheet' type='text/css' />
+
 // it is recommended to load a particular version when using cdn e.g. https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@1.0.2
 <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@<version>"></script>
 
@@ -71,4 +75,3 @@ This method registers all SGDS elements up front in the Custom Elements Registry
 ## Start building your application
 
 You are now ready to build your own application. You may refer to the <a href="/story/components-accordion--basic" target="_self">components</a> page to find out more.
-
