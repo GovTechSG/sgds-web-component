@@ -103,6 +103,10 @@ We deleted some css properties in some components that have to maintain its styl
 | sgds-mainnav-item |  --mainnav-item-theme-color  | replaced with --mainnav-theme-color in <sgds-mainnav> |
 |                   |     --mainnav-item-color     |                                                       |
 
+#### sgds-badge: Renamed isLight to outlined 
+
+`isLight` prop is now renamed to `outlined` for better naming consistency
+
 ### New Changes
 
 #### New components introduced
