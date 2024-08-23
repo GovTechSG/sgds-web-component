@@ -5,7 +5,7 @@ import SgdsElement from "../../base/sgds-element";
 import badgeStyle from "./badge.css";
 import { watch } from "../../utils/watch";
 import SgdsCloseButton from "../CloseButton/sgds-close-button";
-export type BadgeVariant = "success" | "danger" | "warning" | "info" | "neutral";
+export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral";
 
 /**
  * @summary Badges can be used to highlight important bits of information such as labels, notifications & status.
@@ -17,10 +17,10 @@ export type BadgeVariant = "success" | "danger" | "warning" | "info" | "neutral"
  * @event sgds-show - Emitted when the badge appears.
  * @event sgds-hide - Emitted after the badge closes.
  *
- * @cssprop --sgds-badge-color - The text color of badge, only if the 'variant' prop is set to 'filled' and the background color is yellow.
+ * @cssprop --sgds-badge-bg - The background color of the badge
+ * @cssprop --sgds-badge-color - The text color of badge
  * @cssprop --sgds-badge-border-radius - The border radius of badge
- * @cssprop --sgds-badge-bg - The background color of the badge. Changing 'status' prop updates this css property
- * @cssprop --sgds-badge-border-color - The border color of the badge. Changing `variant` prop to 'outline' updates this css property
+ * @cssprop --sgds-badge-border-color - The border color of the badge, nly applicable when outlined prop is true
  *
  */
 export class SgdsBadge extends SgdsElement {

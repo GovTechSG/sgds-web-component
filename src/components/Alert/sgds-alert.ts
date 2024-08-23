@@ -1,12 +1,12 @@
+import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 import { nothing } from "lit";
-import { property } from "lit/decorators.js";
+import { property, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
-import alertStyle from "./alert.css";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 import SgdsCloseButton from "../CloseButton/sgds-close-button";
+import alertStyle from "./alert.css";
 
 export type AlertVariant = "info" | "success" | "danger" | "warning" | "neutral";
 /**
@@ -20,8 +20,8 @@ export type AlertVariant = "info" | "success" | "danger" | "warning" | "neutral"
  *
  * @cssproperty --sgds-alert-bg - The background color of alert
  * @cssproperty --sgds-alert-color - The text color of alert
- * @cssproperty --sgds-alert-border-color - The color of the border of alert
  * @cssproperty --sgds-alert-border-radius - The border radius of alert
+ * @cssproperty --sgds-alert-border-color - The color of the border of alert, only applicable when outlined prop is true
  *
  */
 export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
@@ -55,6 +55,15 @@ export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
   @watch("show")
   _handleShowChange() {
     this.show ? this.emit("sgds-show") : this.emit("sgds-hide");
+  }
+
+  @queryAssignedNodes({ slot: "icon", flatten: true })
+  _iconNodes!: Array<Node>;
+
+  firstUpdated() {
+    if (this._iconNodes.length === 0) {
+      return this.shadowRoot.querySelector("slot[name='icon']")?.classList.add("d-none");
+    } else return;
   }
   render() {
     return this.show
