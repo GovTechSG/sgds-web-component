@@ -24,7 +24,6 @@ export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
  * @cssprop --sgds-btn-hover-bg - The background color of a button in hover state
  * @cssprop --sgds-btn-border-radius - The border radius of button border
  * @cssprop --sgds-btn-color - The text color of button, applicable to primary, outline, and ghost variants only
- * @cssprop --sgds-btn-icon-color - The color of icon in button, applicable to primary, outline, and ghost variants only
  * @cssprop --sgds-btn-border-width - The thickness of the button border, applicable to outline variant only
  * @cssprop --sgds-btn-border-color - The color of the button border, applicable to outline variant only
  *
@@ -182,7 +181,6 @@ export class SgdsButton extends SgdsElement {
           "has-right-icon": this._hasRightIcon,
           [`btn-${this.variant}`]: this.variant,
           [`btn-${this.size}`]: this.size
-          // "btn-link": this.variant === "link"
         })}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}

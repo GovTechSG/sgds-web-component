@@ -13,7 +13,7 @@ import { classMap } from "lit/directives/class-map.js";
 export class SgdsCloseButton extends SgdsElement {
   static styles = [closeButtonStyles];
 
-  @property({ type: String, reflect: true }) ariaLabel = "Close button";
+  @property({ type: String }) ariaLabel = "Close button";
 
   /** Specifies a large or small button */
   @property({ type: String, reflect: true }) size: "sm" | "md" = "md";
