@@ -20,7 +20,7 @@ export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral"
  * @cssprop --sgds-badge-bg - The background color of the badge
  * @cssprop --sgds-badge-color - The text color of badge
  * @cssprop --sgds-badge-border-radius - The border radius of badge
- * @cssprop --sgds-badge-border-color - The border color of the badge, nly applicable when outlined prop is true
+ * @cssprop --sgds-badge-border-color - The border color of the badge, only applicable when outlined prop is true
  *
  */
 export class SgdsBadge extends SgdsElement {
@@ -45,7 +45,7 @@ export class SgdsBadge extends SgdsElement {
   /** Manually set the dismissable state of the button to `false` */
   @property({ type: Boolean, reflect: true }) dismissible = false;
 
-  /** Closes the alert  */
+  /** Closes the badge  */
   public close() {
     this.show = false;
   }

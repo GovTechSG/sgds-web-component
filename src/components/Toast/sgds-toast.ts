@@ -1,10 +1,9 @@
 import { property, query } from "lit/decorators.js";
 import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 import { classMap } from "lit/directives/class-map.js";
-import { html } from "lit/static-html.js";
+import { html, nothing } from "lit";
 import SgdsElement from "../../base/sgds-element";
-import { animateTo } from "../../utils/animate";
-import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
+import { setDefaultAnimation } from "../../utils/animation-registry";
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
 import toastStyle from "./toast.css";
@@ -18,24 +17,11 @@ import SgdsCloseButton from "../CloseButton/sgds-close-button";
  *
  *
  * @event sgds-show - Emitted on show.
- * @event sgds-after-show - Emitted on show after animation has completed.
  * @event sgds-hide - Emitted on hide.
- * @event sgds-after-hide - Emitted on hide after animation has completed.
+
  *
- * @cssproperty --sgds-toast-max-width - The maximum width of toast
- * @cssproperty --sgds-toast-gap - The gap between header and body of toast
- * @cssproperty --sgds-toast-padding - The padding of toast
- * @cssproperty --sgds-toast-bg - The background color of toast
- * @cssproperty --sgds-toast-border-width - The width of the border of toast
- * @cssproperty --sgds-toast-border-left-width - The width of the left border of toast
  * @cssproperty --sgds-toast-border-radius - The border radius of toast
- * @cssproperty --sgds-toast-border-color - The color of the border of toast
- * @cssproperty --sgds-toast-box-shadow - The box shadow of toast
- * @cssproperty --sgds-toast-font-size - The font size of toast
- * @cssproperty --sgds-toast-color - The text color of toast
- * @cssproperty --sgds-toast-header-gap - The gap between the elements in the header
- * @cssproperty --sgds-toast-header-color - The title color of the toast header
- * @cssproperty --sgds-toast-header-icon-color - The icon color of the toast header
+
  */
 export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, toastStyle];
@@ -52,91 +38,51 @@ export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
   @property({ type: Boolean, reflect: true }) show = false;
   /** The header title of toast. It is required to assign a title to toast */
   @property({ type: String, reflect: true }) title = "Title";
-  /** Controls whether the toast has fade animation during its appearance/disappearance */
-  @property({ type: Boolean, reflect: true }) noAnimation = false;
-  /** Controls if the toast will hide itself after the delay time. Works with delay property */
-  @property({ type: Boolean, reflect: true }) autohide = false;
-  /** The amount of time taken for toast to disappear after its first render. It takes effect only when autohide is set to true */
-  @property({ type: Number, reflect: true }) delay = 5000;
   /**Adds CSS styling to `<Toast />` based on the defined status */
-  @property({ type: String, reflect: true }) status: "success" | "warning" | "danger" | "info";
+  @property({ type: String, reflect: true }) variant: "success" | "warning" | "danger" | "info" = "info";
+  /** Controls whether or not the Toast has a link */
+  @property({ type: Boolean, reflect: true }) action = false;
+  /** Controls whether or not the Toast is dismissible */
+  @property({ type: Boolean, reflect: true }) dismissable = false;
 
-  /** Shows the toast */
-  public async showToast() {
-    if (this.show) {
-      return;
-    }
-
-    this.show = true;
-    return waitForEvent(this, "sgds-after-show");
-  }
-
-  /** Hide the toast */
-  public async hideToast() {
-    if (!this.show) {
-      return;
-    }
-    this.show = false;
-    return waitForEvent(this, "sgds-after-hide");
-  }
-
-  /** @internal */
-  handleCloseClick() {
-    this.show = false;
-    this.emit("sgds-close");
-  }
-  /**@internal */
-  @watch("show", { waitUntilFirstUpdate: true })
-  async handleShowChange() {
-    if (this.show) {
-      this.emit("sgds-show");
-      this.toast.hidden = !this.show;
-
-      const toastAnimation = getAnimation(this, "toast.show");
-      !this.noAnimation && (await animateTo(this.toast, toastAnimation.keyframes, toastAnimation.options));
-
-      this.emit("sgds-after-show");
-    } else {
-      this.emit("sgds-hide");
-      const toastAnimation = getAnimation(this, "toast.hide");
-
-      !this.noAnimation && (await animateTo(this.toast, toastAnimation.keyframes, toastAnimation.options));
-      this.emit("sgds-after-hide");
-      this.toast.hidden = !this.show;
-    }
-  }
-  protected firstUpdated(): void {
-    this.toast.hidden = !this.show;
-  }
+ /** Closes the Toast  */
+ public close() {
+  this.show = false;
+}
+/**@internal */
+@watch("show")
+_handleShowChange() {
+  this.show ? this.emit("sgds-show") : this.emit("sgds-hide");
+}
+ 
 
   render() {
-    if (this.autohide && this.show) {
-      setTimeout(() => {
-        this.show = false;
-      }, this.delay);
-    }
-    return html`
+ return this.show
+      ? html`
       <div
         class="toast sgds show ${classMap({
-          [`is-${this.status}`]: this.status
+          [`is-${this.variant}`]: this.variant
         })}"
         role="alert"
         aria-hidden=${this.show ? "false" : "true"}
         aria-live="assertive"
         aria-atomic="true"
       >
-        <div class="toast-header">
-          <slot name="icon"></slot>
-          <strong>${this.title}</strong>
-          <sgds-close-button ariaLabel="close toast" @click=${this.handleCloseClick}></sgds-close-button>
-        </div>
-        <div class="toast-body"><slot></slot></div>
-          <div class="toast-action">
-         <slot name="action"></slot>
-        </div>
-
+       <div class="toast-header">
+        <slot name="icon"></slot>
+        <strong>${this.title}</strong>
+        ${this.dismissable
+          ? html`<sgds-close-button ariaLabel="close toast" @click=${this.close}></sgds-close-button>`
+          : nothing }
       </div>
-    `;
+      <div class="toast-body"><slot></slot></div>
+      ${this.action
+        ? html`<div class="toast-action"><slot name="action"></slot></div>`
+        : nothing }
+    </div>
+      </div>
+    `
+    : nothing;
   }
 }
 

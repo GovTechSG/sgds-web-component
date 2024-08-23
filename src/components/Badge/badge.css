@@ -86,6 +86,6 @@
   --sgds-close-btn-border-radius: var(--sgds-badge-border-radius);
 }
 
-/* .left-icon {
+slot[name=leftIcon]::slotted(*){
   font-size: var(--sgds-icon-size-sm);
-} */
+} 

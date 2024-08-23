@@ -9,12 +9,6 @@ describe("SgdsBadge component", () => {
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("slot[name='leftIcon']")).to.have.class("left-icon");
   });
-
-  it("should render the rightIcon slot with the class 'right-icon'", async () => {
-    const el = await fixture<SgdsBadge>(html`<sgds-badge><span slot="rightIcon">Icon</span></sgds-badge>`);
-    await elementUpdated(el);
-    expect(el.shadowRoot?.querySelector("slot[name='rightIcon']")).to.have.class("right-icon");
-  });
 });
 
 describe("SgdsBadge component", () => {

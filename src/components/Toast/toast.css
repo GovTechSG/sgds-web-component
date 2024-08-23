@@ -20,15 +20,12 @@
 .toast {
   display: flex;
   flex-direction: column;
-  
   padding-right: var(--sgds-padding-md);
   padding-left: var(--sgds-padding-md);
   padding-top: var(--sgds-padding-md);
   padding-bottom: var(--sgds-padding-md);
   background-clip: padding-box;
-  background-color: var(--sgds-toast-bg, var(--sgds-neutral-bg-inverse));
-  border: var(--sgds-toast-border-width) solid var(--sgds-toast-border-color);
-  border-left: var(--sgds-toast-border-left-width) solid var(--sgds-toast-border-color);
+  background-color:  var(--sgds-neutral-bg-inverse);
   border-radius: var(--sgds-toast-border-radius);
   font-size: var(--sgds-toast-font-size);
   color: var(--sgds-subtitle-color);
@@ -60,7 +57,7 @@
   word-wrap: break-word;
   padding-left: var(--sgds-padding-xl);
   color: var(--sgds-primary-color);
-  padding-top: var(--sgds-padding-md);
+  padding-top: var(--sgds-padding-sm);
 
 }
 .toast-header strong {
