@@ -45,19 +45,18 @@ export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
   /** Controls whether or not the Toast is dismissible */
   @property({ type: Boolean, reflect: true }) dismissable = false;
 
- /** Closes the Toast  */
- public close() {
-  this.show = false;
-}
-/**@internal */
-@watch("show")
-_handleShowChange() {
-  this.show ? this.emit("sgds-show") : this.emit("sgds-hide");
-}
- 
+  /** Closes the Toast  */
+  public close() {
+    this.show = false;
+  }
+  /**@internal */
+  @watch("show")
+  _handleShowChange() {
+    this.show ? this.emit("sgds-show") : this.emit("sgds-hide");
+  }
 
   render() {
- return this.show
+    return this.show
       ? html`
       <div
         class="toast sgds show ${classMap({
@@ -71,18 +70,18 @@ _handleShowChange() {
        <div class="toast-header">
         <slot name="icon"></slot>
         <strong>${this.title}</strong>
-        ${this.dismissable
-          ? html`<sgds-close-button ariaLabel="close toast" @click=${this.close}></sgds-close-button>`
-          : nothing }
+        ${
+          this.dismissable
+            ? html`<sgds-close-button ariaLabel="close toast" @click=${this.close}></sgds-close-button>`
+            : nothing
+        }
       </div>
       <div class="toast-body"><slot></slot></div>
-      ${this.action
-        ? html`<div class="toast-action"><slot name="action"></slot></div>`
-        : nothing }
+      ${this.action ? html`<div class="toast-action"><slot name="action"></slot></div>` : nothing}
     </div>
       </div>
     `
-    : nothing;
+      : nothing;
   }
 }
 

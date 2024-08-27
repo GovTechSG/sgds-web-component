@@ -1,5 +1,5 @@
 import "./sgds-web-component";
-import {  expect, fixture, elementUpdated  } from "@open-wc/testing";
+import { expect, fixture, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 import type { SgdsToast } from "../src/components";
 
@@ -46,6 +46,3 @@ describe("SgdsToast component", () => {
     expect(el.shadowRoot?.querySelector(".toast")).to.not.exist;
   });
 });
-
-
-

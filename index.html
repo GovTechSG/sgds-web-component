@@ -739,9 +739,11 @@
             <div class="container">
                 <h2>Checkbox</h2>
                 <form id="radio-submit">
-                    <sgds-checkbox id="hehe" isInline invalid hasFeedback invalidFeedback="test">1</sgds-checkbox>
-                    <sgds-checkbox hasFeedback isInline>2</sgds-checkbox>
-                    <sgds-checkbox isInline>3</sgds-checkbox>
+                    <sgds-checkbox id="hehe" isInline invalid hasFeedback invalidFeedback="test" variant = "default">default</sgds-checkbox>
+                    <sgds-checkbox hasFeedback isInline variant = "invalid">invalid</sgds-checkbox>
+                    <sgds-checkbox isInline variant = "hover">hover</sgds-checkbox>
+                    <sgds-checkbox isInline variant = "focus">focus</sgds-checkbox>
+                    <sgds-checkbox isInline variant = "disabled">disabled</sgds-checkbox>
                     <sgds-switch invalid checked hasFeedback>test</sgds-switch>
                     <sgds-button type="submit">Submit</sgds-button>
                 </form>
