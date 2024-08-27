@@ -14,33 +14,37 @@ import textStyles from "../../styles/text-variants.css";
  */
 export class SgdsSpinner extends SgdsElement {
   static styles = [...SgdsElement.styles, textStyles, spinnerStyle];
-  /** The type of spinner */
-  @property({ type: String, reflect: true }) type: SpinnerType = "border";
-  /** The color of spinner */
-  @property({ type: String, reflect: true }) color: SpinnerColor = "primary";
+  /** The variant of spinner */
+  @property({ type: String, reflect: true }) variant: SpinnerVariant = "primary";
   /** Specifies a small, medium or large button, the size is medium by default. */
   @property({ reflect: true }) size: "sm" | "md" | "lg" = "md";
+
+  handleSlotChange(e: Event) {
+    const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLOrSVGImageElement>;
+    if (childNodes.length > 0) {
+      this.shadowRoot?.querySelector(".sr-only").remove();
+    }
+  }
 
   render() {
     return html`
       <div class="spinner-wrapper">
         <div
           class="spinner ${classMap({
-            [`spinner-${this.type}`]: this.type,
             [`spinner-${this.size}`]: this.size
           })}"
           role="status"
         >
           <span class="sr-only">Loading...</span>
         </div>
-        <slot></slot>
+        <span>
+          <slot @slotchange=${this.handleSlotChange}></slot>
+        </span>
       </div>
     `;
   }
 }
 
-export type SpinnerColor = "primary" | "neutral";
-
-export type SpinnerType = "border" | "grow";
+export type SpinnerVariant = "primary" | "neutral";
 
 export default SgdsSpinner;
