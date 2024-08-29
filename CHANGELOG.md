@@ -1,11 +1,4 @@
-## v2.0.0-rc.0 (2024-08-29)
-
-### Fix
-
-- **toast**: variants styles not reflecting
-See [migration guide](./docs/Migration.md)
-
-## v2.0.0-beta.0 (2024-08-29)
+## v2.0.0-rc.1 (2024-08-29)
 
 See [migration guide](./docs/Migration.md)
 
