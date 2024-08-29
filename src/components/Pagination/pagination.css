@@ -63,14 +63,12 @@ svg {
 .page-item.active .page-link {
   z-index: 3;
   color: var(--pagination-active-color);
-  border-color: #0f71bb;
+  border-color: var(--sgds-info);
   background-color: var(--pagination-active-bg);
 }
 .page-item.disabled .page-link {
-  background-color: var(--pagination-disabled-bg);
-  border-color: #98a2b3;
-  color: var(--pagination-disabled-color);
-  pointer-events: none;
+  opacity: var(--sgds-disabled-opacity);
+  border-color: var(--sgds-disabled-color);
 }
 .page-item:first-child .page-link {
   border-bottom-left-radius: 0.3125rem;

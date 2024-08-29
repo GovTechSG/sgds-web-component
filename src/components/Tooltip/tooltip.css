@@ -22,11 +22,11 @@
   opacity: 0.9;
 }
 .tooltip-inner {
-  background-color: var(--sgds-dark);
+  background-color: var(--sgds-gray-600);
   border-radius: var(--sgds-border-radius);
   color: var(--sgds-body-bg);
   max-width: var(--tooltip-max-width);
-  padding: 0.25rem 0.5rem;
+  padding: var(--sgds-spacer-1) var(--sgds-spacer-2);
   text-align: center;
 }
 div {

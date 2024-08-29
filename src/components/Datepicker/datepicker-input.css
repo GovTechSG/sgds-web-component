@@ -8,3 +8,10 @@
 .form-control {
   border-radius: var(--sgds-border-radius) 0 0 var(--sgds-border-radius);
 }
+
+.input-feedback {
+  display: flex;
+  flex-direction: column;
+  width: -webkit-fill-available;
+  width: -moz-available;
+}

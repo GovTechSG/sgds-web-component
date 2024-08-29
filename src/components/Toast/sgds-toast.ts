@@ -46,7 +46,7 @@ export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
   /** The amount of time taken for toast to disappear after its first render. It takes effect only when autohide is set to true */
   @property({ type: Number, reflect: true }) delay = 5000;
   /**Adds CSS styling to `<Toast />` based on the defined status */
-  @property({ type: String, reflect: true }) status: "success" | "warning" | "danger" | "info";
+  @property({ type: String, reflect: true }) status: "success" | "warning" | "danger" | "info" = "info";
 
   /** Shows the toast */
   public async showToast() {
@@ -105,8 +105,8 @@ export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
     return html`
       <div
         class="toast sgds show ${classMap({
-          [`is-${this.status}`]: this.status
-        })}"
+      [`is-${this.status}`]: this.status
+    })}"
         role="alert"
         aria-hidden=${this.show ? "false" : "true"}
         aria-live="assertive"

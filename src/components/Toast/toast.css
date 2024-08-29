@@ -67,7 +67,7 @@
 .toast-header small {
   flex-grow: 0;
   flex-shrink: 0;
-  color: var(--sgds-body-color-lighter);
+  color: var(--sgds-body-color);
 }
 .toast-header button {
   flex-grow: 0;

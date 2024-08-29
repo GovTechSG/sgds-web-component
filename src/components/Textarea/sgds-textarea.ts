@@ -78,8 +78,7 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
 
   /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
   @property({ type: Boolean, reflect: true }) invalid = false;
-  /** Marks the input as invalid. Replace the pseudo :valid selector for absent in custom elements */
-  @property({ type: Boolean, reflect: true }) valid = false;
+
 
   /** @internal The textarea's unique id */
   private textareaId = genId("textarea", "input");
@@ -168,11 +167,7 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   @watch("value", { waitUntilFirstUpdate: true })
   handleValueChange() {
     this.invalid = !this.textarea.checkValidity();
-    this.valid = this.textarea.checkValidity();
     this.updateComplete.then(() => this.setTextareaHeight());
-    if (!this.required && this.value === "") {
-      this.valid = false;
-    }
   }
 
   render() {
@@ -189,7 +184,6 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
         class=${classMap({
           "form-control": true,
           "is-invalid": this.hasFeedback && this.invalid,
-          "is-valid": this.hasFeedback && this.valid,
           "textarea-resize-none": this.resize === "none",
           "textarea-resize-vertical": this.resize === "vertical",
           "textarea-resize-auto": this.resize === "auto"

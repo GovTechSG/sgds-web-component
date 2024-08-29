@@ -27,7 +27,7 @@
 
 .btn-close,
 .btn-close:hover {
-  color: var(--sgds-body-color-lighter);
+  color: var(--sgds-body-color);
 }
 
 .btn-close:hover {
@@ -43,7 +43,7 @@
 
 .btn-close.disabled,
 .btn-close:disabled {
-  opacity: 0.25;
+  opacity: var(--sgds-disabled-opacity);
   pointer-events: none;
   user-select: none;
 }

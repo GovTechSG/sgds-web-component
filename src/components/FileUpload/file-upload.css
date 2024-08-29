@@ -1,6 +1,6 @@
 :host {
   --file-upload-left-icon-color: var(--sgds-success);
-  --file-upload-remove-icon-color: var(--sgds-body-color-lighter);
+  --file-upload-remove-icon-color: var(--sgds-body-color);
   --file-upload-remove-icon-hover-color: ;
 }
 

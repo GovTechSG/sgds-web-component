@@ -9,10 +9,6 @@ export type BadgeVariant = "primary" | "secondary" | "success" | "danger" | "war
  * @summary Badges can be used to highlight important bits of information such as labels, notifications & status.
  * @slot default - slot for badge
  *
- * @cssprop --badge-color - The text color of badge
- * @cssprop --badge-bg - The background color of the badge. Changing `variant` and `outlined` prop updates this css property
- * @cssprop --badge-border-color - The border color of the badge. Changing `variant` and `outlined` prop updates this css property
- *
  */
 export class SgdsBadge extends SgdsElement {
   static styles = [...SgdsElement.styles, badgeStyle];

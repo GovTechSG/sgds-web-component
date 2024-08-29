@@ -81,8 +81,6 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
 
   /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
   @property({ type: Boolean, reflect: true }) invalid = false;
-  /** Marks the input as invalid. Replace the pseudo :valid selector for absent in custom elements */
-  @property({ type: Boolean, reflect: true }) valid = false;
 
   /**@internal */
   protected inputId: string = genId("input", this.type);
@@ -146,18 +144,12 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
     this.invalid = !this.input.checkValidity();
-    this.valid = this.input.checkValidity();
-    // remove validation for input that is not required, is already dirty and has empty value
-    if (!this.required && this.value === "") {
-      this.valid = false;
-    }
   }
   protected _renderInput() {
     return html`<input
         class=${classMap({
           "form-control": true,
           "is-invalid": this.hasFeedback && this.invalid,
-          "is-valid": this.hasFeedback && this.valid
         })}
         type=${this.type}
         id=${this.inputId}

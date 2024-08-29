@@ -17,7 +17,6 @@ let id = 0;
  *
  * @csspart base - The base wrapper of tab
  *
- * @cssproperty  --tab-theme-color - The theme colour of tab. Defaults to `--sgds-primary`
  *
  */
 export class SgdsTab extends SgdsElement {

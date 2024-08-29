@@ -108,7 +108,18 @@ button:focus:not(:focus-visible) {
   --btn-focus-box-shadow-color: var(--sgds-info-300);
   --btn-disabled-color: var(--sgds-disabled-color);
 }
+:host([variant="outlined"]) .btn {
+  --btn-color: var(--sgds-primary-text-emphasis);
+  --btn-bg: var(--sgds-white);
+  --btn-border-color: var(--sgds-primary-border-subtle);
+  --btn-hover-bg: var(--sgds-primary-filled);
+  --btn-hover-color: var(--sgds-white);
+  --btn-focus-box-shadow-color: var(--sgds-primary-300);
+  --btn-active-bg: var(--sgds-primary-filled);
+  --btn-active-border-color: var(--sgds-primary-filled);
+  --btn-active-color: #fff;
 
+}
 :host([variant="outline-primary"]) .btn {
   --btn-color: var(--sgds-primary-text-emphasis);
   --btn-bg: var(--sgds-primary-bg-subtle);
@@ -214,11 +225,6 @@ button:focus:not(:focus-visible) {
   --btn-font-weight: 400;
   --btn-line-height: var(--sgds-line-height-lg);
   --btn-border-width: var(--sgds-border-width);
-
-  --btn-color: var(--sgds-body-color);
-  --btn-bg: transparent;
-  --btn-hover-bg: var(--sgds-dark);
-  --btn-border-color: var(--sgds-gray-800);
 
   background-color: var(--btn-bg);
   border: var(--btn-border-width) solid var(--btn-border-color);

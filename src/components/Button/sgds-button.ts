@@ -7,6 +7,7 @@ import { FormSubmitController } from "../../utils/form";
 import buttonStyles from "./button.css";
 import anchorStyles from "../../styles/anchor.css";
 
+
 export type ButtonVariant =
   | "primary"
   | "secondary"
@@ -17,6 +18,7 @@ export type ButtonVariant =
   | "light"
   | "dark"
   | "link"
+  | "outlined"
   | "outline-primary"
   | "outline-secondary"
   | "outline-success"
@@ -61,7 +63,7 @@ export class SgdsButton extends SgdsElement {
   });
 
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as "outline" versions (prefixed by `outline-*`) */
-  @property({ reflect: true }) variant: ButtonVariant;
+  @property({ reflect: true }) variant: ButtonVariant = "primary";
 
   /** Specifies a large or small button */
   @property({ reflect: true }) size: "sm" | "lg";

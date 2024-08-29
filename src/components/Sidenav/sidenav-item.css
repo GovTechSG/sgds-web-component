@@ -13,8 +13,7 @@
   border: 0;
   background: 0;
   padding: var(--sidenav-item-btn-padding-y) var(--sidenav-item-btn-padding-x);
-  border-left: var(--sidenav-btn-border-left);
-  border-radius: var(--sidenav-btn-border-radius);
+  border-radius: 0;
   display: flex;
   gap: var(--sidenav-item-icon-title-gap);
   align-items: center;
@@ -30,6 +29,7 @@
   color: var(--sidenav-theme-color);
   border-left-color: var(--sidenav-theme-color);
   font-weight: 700;
+  border-left: 0.125rem solid;
 }
 .sidenav-btn.disabled {
   opacity: var(--sgds-disabled-opacity);

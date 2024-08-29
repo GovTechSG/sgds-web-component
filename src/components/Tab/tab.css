@@ -1,5 +1,4 @@
 :host {
-  --tab-theme-color: var(--sgds-primary);
   display: inline-block;
 }
 
@@ -35,8 +34,8 @@ ul {
 
 .nav-link:not(.disabled).tabs-info-toggle.active,
 .nav-link:not(.disabled).tabs-info-toggle:hover {
-  border-color: var(--tab-theme-color);
-  color: var(--tab-theme-color);
+  border-color: var(--sgds-primary);
+  color: var(--sgds-primary);
   font-weight: 700;
 }
 
@@ -66,7 +65,7 @@ ul {
 .nav-link:not(.disabled).tabs-basic-toggle.active,
 .nav-link:not(.disabled).tabs-basic-toggle:hover {
   color: var(--sgds-white);
-  background-color: var(--tab-theme-color);
+  background-color: var(--sgds-info);
 }
 
 .nav-link.disabled {
@@ -87,7 +86,7 @@ ul {
 
 .nav-link:not(.disabled):not(.tabs-basic-toggle):not(.tabs-info-toggle).active,
 .nav-link:not(.disabled):not(.tabs-basic-toggle):not(.tabs-info-toggle):hover {
-  border-bottom: 0.125rem solid var(--tab-theme-color);
+  border-bottom: 0.125rem solid var(--sgds-info);
   font-weight: 700;
   background-color: transparent;
 }

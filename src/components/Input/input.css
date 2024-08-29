@@ -143,25 +143,9 @@
 .sgds.form-control-group > .form-control:focus {
   z-index: 3;
 }
-.form-control.is-valid {
-  background-image: var(--sgds-form-valid-icon);
-  background-position: right calc(0.5em + 0.21875rem) center;
-  background-repeat: no-repeat;
-  background-size: calc(1em + 0.4375rem) calc(1em + 0.4375rem);
-  border-color: var(--sgds-form-valid-color);
-  padding-right: calc(2em + 0.875rem);
-}
 
-.form-control.is-valid:focus {
-  box-shadow: var(--sgds-form-focus-valid-box-shadow);
-}
 .form-control.is-invalid {
-  background-image: var(--sgds-form-invalid-icon);
-  background-position: right calc(0.5em + 0.21875rem) center;
-  background-repeat: no-repeat;
-  background-size: calc(1em + 0.4375rem) calc(1em + 0.4375rem);
   border-color: var(--sgds-form-invalid-color);
-  padding-right: calc(2em + 0.875rem);
 }
 .form-control.is-invalid:focus {
   box-shadow: var(--sgds-form-focus-invalid-box-shadow);
