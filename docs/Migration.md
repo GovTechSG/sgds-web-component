@@ -108,9 +108,9 @@ We deleted some css properties in some components that have to maintain its styl
 
 `isLight` prop is now renamed to `outlined` for better naming consistency.
 
-#### sgds-toast: Renamed status to variant
+#### sgds-toast: Status prop removed
 
-`status` prop is now renamed to `variant` for better naming consistency. The default value of `variant` is now `info`.
+`status` prop is removed in favour of `variant` prop for better naming consistency. The default value of `variant` is now `info`.
 
 ### Deprecations
 
@@ -118,5 +118,5 @@ We deleted some css properties in some components that have to maintain its styl
 
 The following types in `variant` prop are deprecated in v2 and will be removed in v3.
 
-- All outline-\*. Instead `outlined` type button is introduced
+- All `outline-*` types. Instead `outlined` type button is introduced.
 - Success, warning, light, dark and info variants
