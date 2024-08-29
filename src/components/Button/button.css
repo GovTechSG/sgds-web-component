@@ -13,9 +13,9 @@ button:focus:not(:focus-visible) {
   --btn-border-color: var(--sgds-primary-filled);
   --btn-hover-bg: var(--sgds-primary-700);
   --btn-focus-box-shadow-color: var(--sgds-primary-300);
-  --btn-active-color: #fff;
+  --btn-active-color: var(--sgds-white);
   --btn-active-bg: var(--btn-hover-bg);
-  --btn-hover-color: #fff;
+  --btn-hover-color: var(--sgds-white);
 }
 
 :host([variant="secondary"]) .btn {
@@ -23,10 +23,10 @@ button:focus:not(:focus-visible) {
   --btn-bg: var(--sgds-secondary-filled);
   --btn-border-color: var(--sgds-secondary-filled);
   --btn-hover-bg: var(--sgds-secondary-700);
-  --btn-active-color: #fff;
+  --btn-active-color: var(--sgds-white);
   --btn-active-bg: var(--btn-hover-bg);
   --btn-focus-box-shadow-color: var(--sgds-secondary-300);
-  --btn-hover-color: #fff;
+  --btn-hover-color: var(--sgds-white);
 }
 
 :host([variant="warning"]) .btn {
@@ -34,19 +34,19 @@ button:focus:not(:focus-visible) {
   --btn-bg: var(--sgds-warning-filled);
   --btn-hover-bg: var(--sgds-warning-700);
   --btn-border-color: var(--sgds-warning-filled);
-  --btn-hover-color: #fff;
-  --btn-active-color: #fff;
+  --btn-hover-color: var(--sgds-white);
+  --btn-active-color: var(--sgds-white);
   --btn-active-bg: var(--btn-hover-bg);
   --btn-focus-box-shadow-color: var(--sgds-warning-300);
 }
 
 :host([variant="danger"]) .btn {
-  --btn-color: #fff;
+  --btn-color: var(--sgds-white);
   --btn-bg: var(--sgds-danger-filled);
   --btn-hover-bg: var(--sgds-danger-700);
   --btn-border-color: var(--sgds-danger-filled);
-  --btn-hover-color: #fff;
-  --btn-active-color: #fff;
+  --btn-hover-color: var(--sgds-white);
+  --btn-active-color: var(--sgds-white);
   --btn-active-bg: var(--btn-hover-bg);
   --btn-focus-box-shadow-color: var(--sgds-danger-300);
 }
@@ -56,8 +56,8 @@ button:focus:not(:focus-visible) {
   --btn-bg: var(--sgds-success-filled);
   --btn-hover-bg: var(--sgds-success-700);
   --btn-border-color: var(--sgds-success-filled);
-  --btn-hover-color: #fff;
-  --btn-active-color: #fff;
+  --btn-hover-color: var(--sgds-white);
+  --btn-active-color: var(--sgds-white);
   --btn-active-bg: var(--btn-hover-bg);
   --btn-focus-box-shadow-color: var(--sgds-success-300);
 }
@@ -67,8 +67,8 @@ button:focus:not(:focus-visible) {
   --btn-bg: var(--sgds-info-filled);
   --btn-hover-bg: var(--sgds-info-700);
   --btn-border-color: var(--sgds-info-filled);
-  --btn-hover-color: #fff;
-  --btn-active-color: #fff;
+  --btn-hover-color: var(--sgds-white);
+  --btn-active-color: var(--sgds-white);
   --btn-active-bg: var(--btn-hover-bg);
   --btn-focus-box-shadow-color: var(--sgds-info-300);
 }
@@ -79,7 +79,7 @@ button:focus:not(:focus-visible) {
   --btn-border-color: var(--sgds-light-filled);
   --btn-hover-bg: var(--sgds-gray-200);
   --btn-hover-color: var(--sgds-dark);
-  --btn-active-color: #fff;
+  --btn-active-color: var(--sgds-white);
   --btn-active-bg: var(--btn-hover-bg);
   --btn-active-border-color: var(--sgds-gray-200);
   --btn-focus-box-shadow-color: var(--sgds-gray-500);
@@ -90,8 +90,8 @@ button:focus:not(:focus-visible) {
   --btn-bg: var(--sgds-dark-filled);
   --btn-border-color: var(--sgds-dark-filled);
   --btn-hover-bg: var(--sgds-gray-700);
-  --btn-hover-color: #fff;
-  --btn-active-color: #fff;
+  --btn-hover-color: var(--sgds-white);
+  --btn-active-color: var(--sgds-white);
   --btn-active-bg: var(--btn-hover-bg);
   --btn-active-border-color: var(--sgds-gray-700);
   --btn-focus-box-shadow-color: var(--sgds-gray-500);
@@ -108,7 +108,7 @@ button:focus:not(:focus-visible) {
   --btn-focus-box-shadow-color: var(--sgds-info-300);
   --btn-disabled-color: var(--sgds-disabled-color);
 }
-:host([variant="outlined"]) .btn {
+:host([variant="outlined"])  {
   --btn-color: var(--sgds-primary-text-emphasis);
   --btn-bg: var(--sgds-white);
   --btn-border-color: var(--sgds-primary-border-subtle);
@@ -117,17 +117,17 @@ button:focus:not(:focus-visible) {
   --btn-focus-box-shadow-color: var(--sgds-primary-300);
   --btn-active-bg: var(--sgds-primary-filled);
   --btn-active-border-color: var(--sgds-primary-filled);
-  --btn-active-color: #fff;
-
+  --btn-active-color: var(--sgds-white);
 }
+
 :host([variant="outline-primary"]) .btn {
   --btn-color: var(--sgds-primary-text-emphasis);
   --btn-bg: var(--sgds-primary-bg-subtle);
   --btn-border-color: var(--sgds-primary-border-subtle);
-  --btn-hover-color: #fff;
+  --btn-hover-color: var(--sgds-white);
   --btn-hover-bg: var(--sgds-primary-filled);
   --btn-hover-border-color: var(--sgds-primary-filled);
-  --btn-active-color: #fff;
+  --btn-active-color: var(--sgds-white);
   --btn-active-bg: var(--sgds-primary-filled);
   --btn-active-border-color: var(--sgds-primary-filled);
   --btn-focus-box-shadow-color: var(--sgds-primary-300);
@@ -136,10 +136,10 @@ button:focus:not(:focus-visible) {
   --btn-color: var(--sgds-secondary-text-emphasis);
   --btn-bg: var(--sgds-secondary-bg-subtle);
   --btn-border-color: var(--sgds-secondary-border-subtle);
-  --btn-hover-color: #fff;
+  --btn-hover-color: var(--sgds-white);
   --btn-hover-bg: var(--sgds-secondary-filled);
   --btn-hover-border-color: var(--sgds-secondary-filled);
-  --btn-active-color: #fff;
+  --btn-active-color: var(--sgds-white);
   --btn-active-bg: var(--sgds-secondary-filled);
   --btn-active-border-color: var(--sgds-secondary-filled);
   --btn-focus-box-shadow-color: var(--sgds-secondary-300);
@@ -148,10 +148,10 @@ button:focus:not(:focus-visible) {
   --btn-color: var(--sgds-warning-text-emphasis);
   --btn-bg: var(--sgds-warning-bg-subtle);
   --btn-border-color: var(--sgds-warning-border-subtle);
-  --btn-hover-color: #fff;
+  --btn-hover-color: var(--sgds-white);
   --btn-hover-bg: var(--sgds-warning-filled);
   --btn-hover-border-color: var(--sgds-warning-filled);
-  --btn-active-color: #fff;
+  --btn-active-color: var(--sgds-white);
   --btn-active-bg: var(--sgds-warning-filled);
   --btn-active-border-color: var(--sgds-warning-filled);
   --btn-focus-box-shadow-color: var(--sgds-warning-300);
@@ -160,10 +160,10 @@ button:focus:not(:focus-visible) {
   --btn-color: var(--sgds-danger-text-emphasis);
   --btn-bg: var(--sgds-danger-bg-subtle);
   --btn-border-color: var(--sgds-danger-border-subtle);
-  --btn-hover-color: #fff;
+  --btn-hover-color: var(--sgds-white);
   --btn-hover-bg: var(--sgds-danger-filled);
   --btn-hover-border-color: var(--sgds-danger-filled);
-  --btn-active-color: #fff;
+  --btn-active-color: var(--sgds-white);
   --btn-active-bg: var(--sgds-danger-filled);
   --btn-active-border-color: var(--sgds-danger-filled);
   --btn-focus-box-shadow-color: var(--sgds-danger-300);
@@ -172,10 +172,10 @@ button:focus:not(:focus-visible) {
   --btn-color: var(--sgds-success-text-emphasis);
   --btn-bg: var(--sgds-success-bg-subtle);
   --btn-border-color: var(--sgds-success-border-subtle);
-  --btn-hover-color: #fff;
+  --btn-hover-color: var(--sgds-white);
   --btn-hover-bg: var(--sgds-success-filled);
   --btn-hover-border-color: var(--sgds-success-filled);
-  --btn-active-color: #fff;
+  --btn-active-color: var(--sgds-white);
   --btn-active-bg: var(--sgds-success-filled);
   --btn-active-border-color: var(--sgds-success-filled);
   --btn-focus-box-shadow-color: var(--sgds-success-300);
@@ -184,10 +184,10 @@ button:focus:not(:focus-visible) {
   --btn-color: var(--sgds-info-text-emphasis);
   --btn-bg: var(--sgds-info-bg-subtle);
   --btn-border-color: var(--sgds-info-border-subtle);
-  --btn-hover-color: #fff;
+  --btn-hover-color: var(--sgds-white);
   --btn-hover-bg: var(--sgds-info-filled);
   --btn-hover-border-color: var(--sgds-info-filled);
-  --btn-active-color: #fff;
+  --btn-active-color: var(--sgds-white);
   --btn-active-bg: var(--sgds-info-filled);
   --btn-active-border-color: var(--sgds-info-filled);
   --btn-focus-box-shadow-color: var(--sgds-info-300);
@@ -208,9 +208,9 @@ button:focus:not(:focus-visible) {
   --btn-color: var(--sgds-white);
   --btn-bg: var(--sgds-dark-filled);
   --btn-border-color: var(--sgds-dark-filled);
-  --btn-hover-color: #fff;
+  --btn-hover-color: var(--sgds-white);
   --btn-hover-bg: var(--sgds-gray-700);
-  --btn-active-color: #fff;
+  --btn-active-color: var(--sgds-white);
   --btn-active-bg: var(--sgds-gray-700);
   --btn-active-border-color: var(--sgds-gray-700);
   --btn-focus-box-shadow-color: var(--sgds-gray-500);

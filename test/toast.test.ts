@@ -11,7 +11,7 @@ describe("<sgds-toast>", () => {
       el,
       `
         <div
-        class="is-info toast sgds show"
+        class="is-info toast sgds"
         hidden=""
         role="alert"
         aria-hidden="true"

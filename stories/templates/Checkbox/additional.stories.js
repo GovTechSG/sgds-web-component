@@ -9,7 +9,7 @@ const ValidationTemplate = () =>
   `;
 
 export const CheckboxValidations = {
-  render: CardAsRadioTemplate.bind({}),
+  render: ValidationTemplate.bind({}),
   name: "Validation",
   args: {},
   parameters: {},

@@ -429,6 +429,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
             @click=${() => this.toggleMenu()}
             ariaLabel=${this.menuIsOpen ? "Close Calendar" : "Open Calendar"}
             ?disabled=${this.disabled}
+            variant="outlined"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

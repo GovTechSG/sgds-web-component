@@ -93,23 +93,30 @@ Here are the css properties renamed in version 2
 
 We deleted some css properties in some components that have to maintain its style.
 
-| Component         | css properties removed in v2 | notes                                                 |
-| ----------------- | :--------------------------: | ----------------------------------------------------- |
-| sgds-masthead     |    --masthead-font-family    |                                                       |
-|                   |    --masthead-text-color     |                                                       |
-|                   |    --masthead-link-color     |                                                       |
-|                   | --masthead-link-color-hover  |                                                       |
-|                   |    --masthead-crest-color    |                                                       |
-| sgds-mainnav-item |  --mainnav-item-theme-color  | replaced with --mainnav-theme-color in <sgds-mainnav> |
-|                   |     --mainnav-item-color     |                                                       |
+| Component         |  css properties removed in v2   | notes                                                 |
+| ----------------- | :-----------------------------: | ----------------------------------------------------- |
+| sgds-masthead     |     --masthead-font-family      |                                                       |
+|                   |      --masthead-text-color      |                                                       |
+|                   |      --masthead-link-color      |                                                       |
+|                   |   --masthead-link-color-hover   |                                                       |
+|                   |     --masthead-crest-color      |                                                       |
+| sgds-mainnav-item |   --mainnav-item-theme-color    | replaced with --mainnav-theme-color in <sgds-mainnav> |
+|                   |      --mainnav-item-color       |                                                       |
+| sgds-pagination   | --pagination-hover-border-color |                                                       |
 
-#### sgds-badge: Renamed isLight to outlined 
+#### sgds-badge: Renamed isLight to outlined
 
-`isLight` prop is now renamed to `outlined` for better naming consistency
+`isLight` prop is now renamed to `outlined` for better naming consistency.
 
-### New Changes
+#### sgds-toast: Renamed status to variant
 
-#### New components introduced
+`status` prop is now renamed to `variant` for better naming consistency. The default value of `variant` is now `info`.
 
-1.  Switch
-2.  Close Button
+### Deprecations
+
+#### sgds-button
+
+The following types in `variant` prop are deprecated in v2 and will be removed in v3.
+
+- All outline-\*. Instead `outlined` type button is introduced
+- Success, warning, light, dark and info variants

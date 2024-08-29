@@ -43,11 +43,6 @@
   --alert-border-color: var(--sgds-light-border-subtle);
 }
 
-i {
-  position: relative;
-  top: 2px;
-}
-
 .alert {
   display: flex;
   align-items: center;

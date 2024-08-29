@@ -12,7 +12,6 @@ import paginationStyle from "./pagination.css";
  * @cssproperty --pagination-color - The text color of pagination
  * @cssproperty --pagination-bg - The background color of pagination
  * @cssproperty --pagination-hover-bg - The  background color of pagination in hover state
- * @cssproperty --pagination-hover-border-color - The border color of pagination in hover state
  * @cssproperty --pagination-active-color - The text color of pagination in active state
  * @cssproperty --pagination-active-bg - The background color of pagination in active state
  * @cssproperty --pagination-disabled-color - The text color of pagination in disabled state
@@ -224,7 +223,7 @@ export class SgdsPagination extends SgdsElement {
 
     return html`
       <li
-        class=${classMap({ "page-item": true, disabled: !this.ellipsisOn })}
+        class=${classMap({ "page-item": true, "ellipsis-disabled": !this.ellipsisOn })}
         @click=${this.ellipsisOn && this._handlePrevEllipsisButton}
         @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "ellipsis", undefined, true)}
       >
@@ -249,7 +248,7 @@ export class SgdsPagination extends SgdsElement {
     if (this.ellipsisOn) {
       return html`
         <li
-          class="page-item ${this.ellipsisOn ? "" : "disabled"} "
+          class="page-item ${this.ellipsisOn ? "" : "ellipsis-disabled"} "
           @click=${this.ellipsisOn && this._handleNextEllipsisButton}
           @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "ellipsis", undefined, false)}
         >
@@ -258,7 +257,7 @@ export class SgdsPagination extends SgdsElement {
       `;
     } else {
       return html`
-        <li class="page-item ${this.ellipsisOn ? "" : "disabled"} ">
+        <li class="page-item ${this.ellipsisOn ? "" : "ellipsis-disabled"} ">
           <span class="page-link disabled" tabindex=${tabIndex}>${this.ellipsisContent}</span>
         </li>
       `;

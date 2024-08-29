@@ -8,7 +8,7 @@ import { getAnimation, setDefaultAnimation } from "../../utils/animation-registr
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
 import toastStyle from "./toast.css";
-import SgdsCloseButton from "../CloseButton/sgds-close-button";
+import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 /**
  * @summary Toast allows you to convey quick messaging notifications to the user.
  *
@@ -46,7 +46,7 @@ export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
   /** The amount of time taken for toast to disappear after its first render. It takes effect only when autohide is set to true */
   @property({ type: Number, reflect: true }) delay = 5000;
   /**Adds CSS styling to `<Toast />` based on the defined status */
-  @property({ type: String, reflect: true }) status: "success" | "warning" | "danger" | "info" = "info";
+  @property({ type: String, reflect: true }) variant: "success" | "warning" | "danger" | "info" = "info";
 
   /** Shows the toast */
   public async showToast() {
@@ -104,8 +104,8 @@ export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
     }
     return html`
       <div
-        class="toast sgds show ${classMap({
-          [`is-${this.status}`]: this.status
+        class="toast sgds ${classMap({
+          [`is-${this.variant}`]: this.variant
         })}"
         role="alert"
         aria-hidden=${this.show ? "false" : "true"}

@@ -10,7 +10,7 @@ import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
 import { HasSlotController } from "../../utils/slot.js";
 import { watch } from "../../utils/watch.js";
 import drawerStyles from "./drawer.css";
-import SgdsCloseButton from "../CloseButton/sgds-close-button";
+import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 
 /**

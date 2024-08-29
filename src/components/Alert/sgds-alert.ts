@@ -6,7 +6,7 @@ import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
 import alertStyle from "./alert.css";
 import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
-import SgdsCloseButton from "../CloseButton/sgds-close-button";
+import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 
 export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light";
 /**

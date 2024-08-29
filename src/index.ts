@@ -5,7 +5,6 @@ import "./components/Badge";
 import "./components/Breadcrumb";
 import "./components/Button";
 import "./components/Card";
-import "./components/CloseButton";
 import "./components/ComboBox";
 import "./components/Checkbox";
 import "./components/Datepicker";
@@ -29,5 +28,4 @@ import "./components/Table";
 import "./components/Textarea";
 import "./components/Toast";
 import "./components/Tooltip";
-import "./components/Switch";
 // COMPONENT IMPORTS

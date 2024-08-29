@@ -26,6 +26,13 @@ sgds-datepicker-input {
   margin-right: 0; /* Remove the margin on the right */
   --input-border-radius: var(--sgds-border-radius, 0.3125rem) 0 0 var(--sgds-border-radius, 0.3125rem);
 }
+sgds-button[variant="outlined"]  {
+  --btn-color: var(--sgds-dark);
+  --btn-bg: var(--sgds-white);
+  --btn-border-color: var(--sgds-dark);
+  --btn-hover-bg: var(--sgds-dark);
+  --btn-hover-color: var(--sgds-white);
+}
 .calendar-btn {
   --btn-border-color: var(--sgds-border-color);
   --btn-border-radius: 0;

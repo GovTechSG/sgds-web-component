@@ -1,8 +1,7 @@
-import "./sgds-web-component";
-import type { SgdsTextarea, SgdsButton } from "../src/components";
-import { assert, fixture, html, expect, waitUntil, oneEvent } from "@open-wc/testing";
+import { assert, expect, fixture, html, oneEvent, waitUntil } from "@open-wc/testing";
 import sinon from "sinon";
-import { sendKeys } from "@web/test-runner-commands";
+import type { SgdsButton, SgdsTextarea } from "../src/components";
+import "./sgds-web-component";
 
 describe("sgds-textarea", () => {
   it("renders with default values", async () => {

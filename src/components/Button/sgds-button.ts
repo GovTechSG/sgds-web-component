@@ -61,10 +61,7 @@ export class SgdsButton extends SgdsElement {
     }
   });
 
-  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `outlined` and `danger`.
-   * @deprecated The following variants are deprecated from v2.0 and will be removed from v3 onwards: `secondary`, `success`, `warning`, `info`, `dark`, `light`, `link`
-   * as well as those prefixed by `outline-*`
-   */
+  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `outlined` and `danger`. @deprecated The following variants are deprecated from v2.0 and will be removed from v3 onwards: `secondary`, `success`, `warning`, `info`, `dark`, `light`, `link` as well as those prefixed by `outline-*` */
   @property({ reflect: true }) variant: ButtonVariant = "primary";
 
   /** Specifies a large or small button */

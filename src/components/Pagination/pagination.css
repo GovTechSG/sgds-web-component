@@ -2,7 +2,6 @@
   --pagination-color: var(--sgds-link);
   --pagination-bg: var(--sgds-body-bg);
   --pagination-hover-bg: var(--sgds-gray-200);
-  --pagination-hover-border-color: var(--sgds-gray-300);
   --pagination-active-color: var(--sgds-white);
   --pagination-active-bg: var(--sgds-link);
   --pagination-disabled-color: var(--sgds-gray);
@@ -41,11 +40,10 @@ svg {
 .page-link:hover {
   color: var(--pagination-color);
   background-color: var(--pagination-hover-bg);
-  border-color: var(--pagination-hover-border-color);
   z-index: 2;
 }
 .page-link:focus {
-  color: var(--pagination-color);
+  color: var(--pagination-color); 
   background-color: var(--pagination-hover-bg);
   box-shadow: 0 0 0 0.125rem rgba(15, 113, 187, 0.25);
   outline: 0;
@@ -69,6 +67,12 @@ svg {
 .page-item.disabled .page-link {
   opacity: var(--sgds-disabled-opacity);
   border-color: var(--sgds-disabled-color);
+  --pagination-hover-bg: ;
+}
+.ellipsis-disabled {
+  color: var(--sgds-disabled-color);
+  cursor: not-allowed;
+  --pagination-hover-bg: ;
 }
 .page-item:first-child .page-link {
   border-bottom-left-radius: 0.3125rem;
