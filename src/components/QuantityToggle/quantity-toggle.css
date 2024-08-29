@@ -26,13 +26,6 @@ sgds-button:last-of-type{
 .input-group sgds-button:focus {
   z-index: 3;
 }
-/* .input-group-sm > .btn,
-.input-group-sm > .form-control {
-  border-radius: 0.2rem;
-  font-size: 0.875rem;
-  padding: 0.25rem 0.5rem;
-} */
-
 .visually-hidden {
   clip: rect(0, 0, 0, 0) !important;
   border: 0 !important;

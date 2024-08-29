@@ -105,8 +105,8 @@ export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
     return html`
       <div
         class="toast sgds show ${classMap({
-      [`is-${this.status}`]: this.status
-    })}"
+          [`is-${this.status}`]: this.status
+        })}"
         role="alert"
         aria-hidden=${this.show ? "false" : "true"}
         aria-live="assertive"

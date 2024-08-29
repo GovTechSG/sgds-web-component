@@ -23,7 +23,6 @@ export const Template = args =>
       min=${ifDefined(args.min)}
       max=${ifDefined(args.max)}
       step=${ifDefined(args.step)}
-      ?valid=${args.valid}
       ?invalid=${args.invalid}
     >
     </sgds-input>

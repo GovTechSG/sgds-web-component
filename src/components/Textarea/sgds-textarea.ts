@@ -79,7 +79,6 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
-
   /** @internal The textarea's unique id */
   private textareaId = genId("textarea", "input");
 

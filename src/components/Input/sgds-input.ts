@@ -149,7 +149,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     return html`<input
         class=${classMap({
           "form-control": true,
-          "is-invalid": this.hasFeedback && this.invalid,
+          "is-invalid": this.hasFeedback && this.invalid
         })}
         type=${this.type}
         id=${this.inputId}

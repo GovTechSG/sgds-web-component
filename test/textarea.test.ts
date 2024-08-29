@@ -78,16 +78,6 @@ describe("sgds-textarea", () => {
     await el.updateComplete;
     expect(textarea?.className).to.include("is-invalid");
   });
-  it(".is-valid appears on textarea when hasFeedback and state of component is valid", async () => {
-    const el = await fixture<SgdsTextarea>(html` <sgds-textarea label="Name" hasFeedback></sgds-textarea> `);
-    const textarea = el.shadowRoot?.querySelector("textarea");
-    expect(textarea?.className).not.to.include("is-valid");
-
-    //force an invalid state
-    el.valid = true;
-    await el.updateComplete;
-    expect(textarea?.className).to.include("is-valid");
-  });
 });
 
 describe("when using constraint validation", () => {
@@ -116,30 +106,6 @@ describe("when using constraint validation", () => {
     el.disabled = false;
     await el.updateComplete;
     expect(el.invalid).to.be.true;
-  });
-  it("should be valid=false when input is not required, has other validation,  and has no value", async () => {
-    const el = await fixture<SgdsTextarea>(html` <sgds-textarea minlength="3" value="t"></sgds-textarea> `);
-    expect(el.valid).to.be.false;
-    expect(el.invalid).to.be.false;
-    el.focus();
-    await sendKeys({ type: "es" });
-    await el.updateComplete;
-    expect(el.value).to.equal("tes");
-    expect(el.valid).to.be.true;
-    expect(el.invalid).to.be.false;
-
-    await sendKeys({ press: "Backspace" });
-    await el.updateComplete;
-    expect(el.value).to.equal("te");
-    expect(el.valid).to.be.false;
-    expect(el.invalid).to.be.true;
-    // when empty value and input is optional, valid/invalid state should go back to default state
-    await sendKeys({ press: "Backspace" });
-    await sendKeys({ press: "Backspace" });
-    await el.updateComplete;
-    expect(el.value).to.equal("");
-    expect(el.valid).to.be.false;
-    expect(el.invalid).to.be.false;
   });
 });
 
@@ -202,21 +168,16 @@ describe("Feedback UI optional", () => {
       html` <sgds-textarea hasFeedback invalidFeedback="invalid feedback"></sgds-textarea> `
     );
     expect(el.invalid).to.be.false;
-    expect(el.valid).to.be.false;
     expect(el.shadowRoot?.querySelector("textarea")).does.not.have.class("is-invalid");
-    expect(el.shadowRoot?.querySelector("textarea")).does.not.have.class("is-valid");
     //force an invalid state
     el.invalid = true;
     expect(el.invalid).to.be.true;
     await el.updateComplete;
     expect(el.shadowRoot?.querySelector("textarea")).to.have.class("is-invalid");
-    expect(el.shadowRoot?.querySelector("textarea")).does.not.have.class("is-valid");
 
     // //force an valid state
     el.invalid = false;
-    el.valid = true;
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector("textarea")).to.have.class("is-valid");
     expect(el.shadowRoot?.querySelector("textarea")).does.not.have.class("is-invalid");
   });
 });

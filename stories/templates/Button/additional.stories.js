@@ -1,30 +1,13 @@
 import { html } from "lit-html";
 
-// export const VariantTemplate = variantArray => {
-//   return html`${variantArray.map(v => html`<sgds-button variant=${v}> ${v} </sgds-button>`)}`;
-// };
 const VariantTemplate = args => {
-  const variants = ["primary", "secondary", "info", "success", "secondary", "warning", "danger", "dark", "light"];
+  const variants = ["primary", "outlined", "danger"];
   return html`${variants.map(v => html`<sgds-button variant=${v}>${v}</sgds-button>`)} `;
-};
-
-const OutlineTemplate = args => {
-  const variants = ["primary", "secondary", "info", "success", "secondary", "warning", "danger", "dark", "light"];
-  const outlinedVariants = variants.map(v => `outline-${v}`);
-  return html`${outlinedVariants.map(v => html`<sgds-button variant=${v}>${v}</sgds-button>`)} `;
 };
 
 export const Variants = {
   render: VariantTemplate.bind({}),
   name: "Variants",
-  args: {},
-  parameters: {},
-  tags: ["!dev"]
-};
-
-export const Outlined = {
-  render: OutlineTemplate.bind({}),
-  name: "Outlined buttons",
   args: {},
   parameters: {},
   tags: ["!dev"]

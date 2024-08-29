@@ -391,6 +391,6 @@ export class SgdsPagination extends SgdsElement {
 
 export type directionVariant = "icon" | "icon-text" | "text";
 
-export type sizeVariant = "sm" | "md" 
+export type sizeVariant = "sm" | "md";
 
 export default SgdsPagination;
