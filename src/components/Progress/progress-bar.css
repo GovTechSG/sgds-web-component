@@ -3,46 +3,30 @@
 }
 
 :host([variant="secondary"]) .progress-bar {
-  --sgds-progress-bar-bg: var(--sgds-secondary-filled);
+  --sgds-progress-bar-bg: var(--sgds-secondary);
 }
 :host([variant="warning"]) .progress-bar{
-  --sgds-progress-bar-bg: var(--sgds-warning-filled);
+  --sgds-progress-bar-bg: var(--sgds-warning);
 }
 :host([variant="danger"]) .progress-bar{
-  --sgds-progress-bar-bg: var(--sgds-danger-filled);
+  --sgds-progress-bar-bg: var(--sgds-danger);
 }
 :host([variant="success"]) .progress-bar{
-  --sgds-progress-bar-bg: var(--sgds-success-filled);
+  --sgds-progress-bar-bg: var(--sgds-success);
 }
 :host([variant="info"]) .progress-bar{
-  --sgds-progress-bar-bg: var(--sgds-info-filled);
+  --sgds-progress-bar-bg: var(--sgds-info);
 }
 :host([variant="dark"]) .progress-bar{
-  --sgds-progress-bar-bg: var(--sgds-dark-filled);
+  --sgds-progress-bar-bg: var(--sgds-dark);
 }
 
 progress {
   vertical-align: baseline;
 }
-/* .progress,
-.progress-stacked {
-  --sgds-progress-height: 1rem;
-  --sgds-progress-font-size: 0.75rem;
-  --sgds-progress-bg: var(--sgds-secondary-bg);
-  --sgds-progress-border-radius: var(--sgds-border-radius);
-  --sgds-progress-box-shadow: var(--sgds-box-shadow-inset);
-  --sgds-progress-bar-color: #fff;
-  --sgds-progress-bar-bg: #5942db;
-  --sgds-progress-bar-transition: width 0.6s ease;
-  background-color: var(--sgds-progress-bg);
-  border-radius: var(--sgds-progress-border-radius);
-  display: flex;
-  font-size: var(--sgds-progress-font-size);
-  height: var(--sgds-progress-height);
-  overflow: hidden;
-} */
+
 .progress-bar {
-  --sgds-progress-bar-bg: var(--sgds-primary-filled);
+  --sgds-progress-bar-bg: var(--sgds-primary);
   --sgds-progress-bar-transition: width 0.6s ease;
   --sgds-progress-bar-color: var(--sgds-white);
   --sgds-progress-bar-font-size: 0.75rem;
@@ -62,39 +46,5 @@ progress {
 @media (prefers-reduced-motion: reduce) {
   .progress-bar {
     transition: none;
-  }
-}
-.progress-bar-striped {
-  background-image: linear-gradient(
-    45deg,
-    hsla(0, 0%, 100%, 0.15) 25%,
-    transparent 0,
-    transparent 50%,
-    hsla(0, 0%, 100%, 0.15) 0,
-    hsla(0, 0%, 100%, 0.15) 75%,
-    transparent 0,
-    transparent
-  );
-  background-size: var(--sgds-progress-height) var(--sgds-progress-height);
-}
-/* .progress-stacked > .progress {
-  overflow: visible;
-}
-.progress-stacked > .progress > .progress-bar {
-  width: 100%;
-} */
-.progress-bar-animated {
-  animation: progress-bar-stripes 1s linear infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .progress-bar-animated {
-    animation: none;
-  }
-}
-
-/*! CSS Used keyframes */
-@keyframes progress-bar-stripes {
-  0% {
-    background-position-x: 1rem;
   }
 }

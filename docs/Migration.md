@@ -104,13 +104,17 @@ We deleted some css properties in some components that have to maintain its styl
 |                   |      --mainnav-item-color       |                                                       |
 | sgds-pagination   | --pagination-hover-border-color |                                                       |
 
-#### sgds-badge: Renamed isLight to outlined
+#### sgds-badge: Renamed isLight to outlined prop
 
 `isLight` prop is now renamed to `outlined` for better naming consistency.
 
 #### sgds-toast: Status prop removed
 
 `status` prop is removed in favour of `variant` prop for better naming consistency. The default value of `variant` is now `info`.
+
+#### sgds-progress-bar : animated and striped prop removed
+
+`animated` and `striped` prop are removed from v2.0 onwards
 
 ### Deprecations
 

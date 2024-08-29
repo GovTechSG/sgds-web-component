@@ -10,8 +10,6 @@ See all tokens in [github](https://github.com/GovTechSG/sgds-web-component/blob/
 ```css
 // yourCustomCss.css
 :root {
-  --sgds-body-font-family: "Inter";
-  --sgds-body-font-size: 5rem;
   --sgds-primary: #1f69ff;
   --sgds-success-500: #3bb346;
   --sgds-gray-500: #667085;

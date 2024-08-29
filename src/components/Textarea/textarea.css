@@ -68,6 +68,3 @@ textarea {
 .form-control.is-invalid:focus {
   box-shadow: var(--sgds-form-focus-invalid-box-shadow);
 }
-.form-control.is-valid:focus {
-  box-shadow: var(--sgds-form-focus-valid-box-shadow);
-}

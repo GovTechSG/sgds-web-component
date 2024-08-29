@@ -33,15 +33,6 @@ export class SgdsProgressBar extends SgdsElement {
    */
   @property({ type: String, reflect: true }) arialabel = "";
 
-  /** Apply a stripe over the progress bar */
-  @property({ type: Boolean, reflect: true }) striped = false;
-  /**
-   * Animated stripes over the progress bar.
-   *
-   * Use in conjunction with striped property
-   */
-  @property({ type: Boolean, reflect: true }) animated = false;
-
   /** Add label on top of progress bar */
   @property({ type: String, reflect: true }) label = "";
 
@@ -49,9 +40,7 @@ export class SgdsProgressBar extends SgdsElement {
     return html`
       <div
         class=${classMap({
-          "progress-bar": true,
-          "progress-bar-striped": this.striped,
-          "progress-bar-animated": this.animated
+          "progress-bar": true
         })}
         role="progressbar"
         style=${styleMap({ width: `${this.value}%` })}
