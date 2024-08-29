@@ -22,9 +22,9 @@ jobs:
       - run: npx playwright install
       - run: npm run test
       - run: npm run build
-      - run: npm publish --tag alpha ./lib --access public
+      - run: npm publish --tag rc ./lib --access public
         if: contains(env.NPM_TAG, 'alpha')
-      - run: npm publish --tag beta ./lib --access public
+      - run: npm publish --tag rc ./lib --access public
         if: contains(env.NPM_TAG, 'beta')
       - run: npm publish --tag rc ./lib --access public
         if: contains(env.NPM_TAG, 'rc')
