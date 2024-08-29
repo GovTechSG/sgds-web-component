@@ -2,7 +2,8 @@ import "./sgds-web-component";
 import { assert, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
-import type { SgdsAlert, SgdsCloseButton } from "../src/components";
+import type { SgdsAlert } from "../src/components";
+import type { SgdsCloseButton } from "../src/internals/CloseButton/sgds-close-button";
 
 describe("<sgds-alert-heading>", () => {
   it("the default tag is h4", async () => {
