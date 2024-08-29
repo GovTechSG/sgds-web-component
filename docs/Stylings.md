@@ -2,8 +2,8 @@
 
 ## Global Styles and Theming
 
-Customize the styles at the :root level by overriding the values of css tokens defined in file 
-`@govtechsg/sgds-web-component/themes/day.css file. 
+Customize the styles at the `:root` level by overriding the values of css tokens defined in file 
+`@govtechsg/sgds-web-component/themes/day.css` file. This file contains the primitive and semantic css tokens. For system level UI changes, we encourage you to make primitive and semantic level style changes at the `:root` rather than component specific changes. 
 
 See all tokens in [github](https://github.com/GovTechSG/sgds-web-component/blob/restructure-v2/src/themes/day.css) 
 
@@ -12,7 +12,7 @@ See all tokens in [github](https://github.com/GovTechSG/sgds-web-component/blob/
 :root {
   --sgds-body-font-family: "Inter";
   --sgds-body-font-size: 5rem;
-  --sgds-secondary: #1f69ff;
+  --sgds-primary: #1f69ff;
   --sgds-success-500: #3bb346;
   --sgds-gray-500: #667085;
 }
@@ -23,10 +23,9 @@ import "@govtechsg/sgds-web-component/themes/day.css";
 import "./yourCustomCss.css"
 ```
 
-## Component Styles
+## Component specific styles
 
-SGDS web component library is shipped with SGDS v2 stylings and does not require you to configure or install any other styling files.
-The styles of components are built in and can be modified via props, cssparts and css custom properties whenever we specify for such styling modificiations. This information will be specified under API section for each component
+The styles of components are built in and can be modified via cssparts or css custom properties whenever we specify for such styling modificiations. This information will be specified under API section for each component
 
 You will require some knowledge of web components and css to do so and the information can be readily available online like mdn web docs for [web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) and [css](https://developer.mozilla.org/en-US/docs/Web/CSS)
 
@@ -39,7 +38,6 @@ sgds-sidenav {
   --sidenav-theme-color: pink;
 }
 ```
-
 
 ### cssparts
 

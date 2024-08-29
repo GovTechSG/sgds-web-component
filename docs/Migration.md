@@ -4,7 +4,7 @@
 
 ### Architectural Changes
 
-In version 1, we loaded SGDS styles into web components. While that saved us a lot of time building the web components and reduced maintenance overload across all our SGDS repositories, it has several drawbacks like big bundle size per component which CSS cannot be purged and customisation limitations by css properties.
+In version 1, we use `@govtechsg/sgds` as a dependency to style the web components. While that saved us a lot of time building the web components and reduced maintenance overload across all our SGDS repositories, it has several drawbacks like big bundle size per component which CSS cannot be purged and customisation limitations by css properties.
 
 In version 2, we rectified the issues by changing up the architecture of the library. Each component only carries their specific styles and any common styles that are shared are kept to a minimal. We also introduced a global css file to be imported with the components. The global css file contains all the css properties tokens and values referenced by the components.
 
