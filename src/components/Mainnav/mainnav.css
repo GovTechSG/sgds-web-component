@@ -352,59 +352,6 @@
 .navbar-expand .navbar-toggler {
   display: none;
 }
-/* .navbar-expand .offcanvas {
-    background-color: transparent !important;
-    border: 0 !important;
-    flex-grow: 1;
-    height: auto !important;
-    position: static;
-    transform: none !important;
-    transition: none;
-    visibility: visible !important;
-    width: auto !important;
-    z-index: auto;
-  }
-  .navbar-expand .offcanvas .offcanvas-header {
-    display: none;
-  }
-  .navbar-expand .offcanvas .offcanvas-body {
-    display: flex;
-    flex-grow: 0;
-    overflow-y: visible;
-    padding: 0;
-  } */
-/* .navbar-dark,
-  .navbar[data-bs-theme="dark"] {
-    --mainnav-color: hsla(0, 0%, 100%, 0.55);
-    --mainnav-hover-color: hsla(0, 0%, 100%, 0.75);
-    --mainnav-disabled-color: hsla(0, 0%, 100%, 0.25);
-    --mainnav-active-color: #fff;
-    --mainnav-brand-color: #fff;
-    --mainnav-brand-hover-color: #fff;
-    --mainnav-toggler-border-color: hsla(0, 0%, 100%, 0.1);
-  }
-  .navbar-dark,
-  .navbar[data-bs-theme="dark"],
-  [data-bs-theme="dark"] .navbar-toggler-icon {
-    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16" ><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" /></svg>')-bg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.55)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-  }
-
-  [data-bs-theme="dark"] .sgds.navbar {
-    --mainnav-bg-color: $body-bg;
-    --mainnav-color: var(--sgds-body-color);
-    --mainnav-hover-color: $purple-400;
-    --mainnav-disabled-color: rgba(var(--sgds-emphasis-color-rgb), 0.3);
-    --mainnav-active-color: var(--sgds-primary-text-emphasis);
-  } */
-/* @media (max-width: 991.98px) {
-    .sgds.navbar {
-      padding: 0 1rem;
-    }
-  } */
-/* .sgds.navbar .nav-item.has-megamenu {
-    position: static;
-  } */
-
 .order-first {
   order: -1 !important;
 }
