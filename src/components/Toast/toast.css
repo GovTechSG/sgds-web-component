@@ -3,22 +3,22 @@
   background-color: transparent;
 }
 
-:host([status="warning"]) .toast{
+:host([variant="warning"]) .toast{
   --toast-border-color: var(--sgds-warning-filled);
   --toast-header-color: var(--sgds-warning-text-emphasis);
   --toast-header-icon-color: var(--sgds-warning-text-emphasis);
 }
-:host([status="danger"]) .toast{
+:host([variant="danger"]) .toast{
   --toast-border-color: var(--sgds-danger-filled);
   --toast-header-color: var(--sgds-danger-text-emphasis);
   --toast-header-icon-color: var(--sgds-danger-text-emphasis);
 }
-:host([status="success"]) .toast{
+:host([variant="success"]) .toast{
   --toast-border-color: var(--sgds-success-filled);
   --toast-header-color: var(--sgds-success-text-emphasis);
   --toast-header-icon-color: var(--sgds-success-text-emphasis);
 }
-:host([status="info"]) .toast{
+:host([variant="info"]) .toast{
   --toast-border-color: var(--sgds-info-filled);
   --toast-header-color: var(--sgds-info-text-emphasis);
   --toast-header-icon-color: var(--sgds-info-text-emphasis);

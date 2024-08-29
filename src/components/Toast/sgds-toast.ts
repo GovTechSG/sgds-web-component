@@ -1,14 +1,13 @@
-import { property, query } from "lit/decorators.js";
 import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
-import { classMap } from "lit/directives/class-map.js";
+import { property, query } from "lit/decorators.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
+import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 import { animateTo } from "../../utils/animate";
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
 import toastStyle from "./toast.css";
-import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 /**
  * @summary Toast allows you to convey quick messaging notifications to the user.
  *
@@ -104,9 +103,7 @@ export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
     }
     return html`
       <div
-        class="toast sgds ${classMap({
-          [`is-${this.variant}`]: this.variant
-        })}"
+        class="toast sgds"
         role="alert"
         aria-hidden=${this.show ? "false" : "true"}
         aria-live="assertive"
