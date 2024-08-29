@@ -1,63 +1,13 @@
-## v2.0.0-beta.0 (2024-08-29)
+## v2.0.0-rc.0 (2024-08-29)
 
-### BREAKING CHANGE
+### Fix
 
+- **toast**: variants styles not reflecting
 See [migration guide](./docs/Migration.md)
 
-- *****: remove --sgds prefix for component specific tokens
-- *****: remove excess css tokens complete
-- **tooltip**: handle click out of element to hide tooltip
-- **button**: disabled styles
-- *****: remove css @import rule and transfer to js import
-- *****: create form semantic tokens used in form components
-- **toast container**: code refactor for toast container
-- **input**: extract label and hint to separate css file
-- **input**: remove inputClasses and reduced scope of attribute type
-- *****: add variables to root
-- **button**: bring out box-shadow-color to a css variable
-- *****: rename background-color to bg and button to btn
-- **mainnav, mainnav-item, mainnav-dropdown**: add --sgds prefix to css variables
-- **accordion, accordion-item**: add --sgds prefix to all css variables
-- **mainnav, mainnavitem, mainnavdropdown**: replacement of camelCase to kebab case in cssprop
-- **button**: removed buttonClasses prop and removed outlined variants from variant prop
-- **close button**: refactor close button css to share across components
-- **alert**: remove alert link anchor color css variable
-- **accordion**: styles wip
-- **accordion**: update styles wip
-- **mainnav**: wip
-- **datepicker**: replace scss
-- **sidenav**: replace scss files
-- *****: remove scss
-- *****: wip remove scss files
-- **tooltip**: replace sgdsElement.style
-- **toast**: replace sgdsElement.styles
-- **textarea**: replace textarea
-- **table**: replace sgdsElement.style
-- **tab**: replace sgdsElement.styles
-- **spinner, stepper**: replace sgdsElement.style
-- **sidenav**: remove sgdsElement.style
-- **quantity-toggle**: replace with cs
-- **progress**: replace sgdsElement.styles
-- **pagination**: replace sgdsElement.style
-- **modal**: replace sgdsElement.styles
-- **mainnav**: replace sgdsElement.styles
-- **mainnav**: replace sgdsElement.styles
-- **datepicker**: remove sgdsElement.styles
-- **datepicker**: wip replacing css
-- **input**: reaplce css
-- **footer**: replace css
-- **fileupload**: replace css
-- **drawer**: replace css
-- **combobox, dropdown**: replace css
-- **checkbox**: replace with css
-- **card**: transfer to css
-- **badge**: replace styles
-- **badge**: replace badge styles
-- **alert**: transfer to css
-- **alert**: link and header, alert wip
-- **action-card**: styles
-- **accordion, button, radio**: add css styles
-- **button, radio, radiogroup, accordion**: styling refactor
+## v2.0.0-beta.0 (2024-08-29)
+
+See [migration guide](./docs/Migration.md)
 
 ## v1.4.0 (2024-08-01)
 
