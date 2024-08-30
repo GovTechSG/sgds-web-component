@@ -4,7 +4,6 @@ import { classMap } from "lit/directives/class-map.js";
 import { html, nothing } from "lit";
 import SgdsElement from "../../base/sgds-element";
 import { setDefaultAnimation } from "../../utils/animation-registry";
-import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
 import toastStyle from "./toast.css";
 import SgdsCloseButton from "../CloseButton/sgds-close-button";

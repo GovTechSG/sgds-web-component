@@ -1,5 +1,5 @@
 import { html, nothing } from "lit";
-import { property, queryAssignedElements, state } from "lit/decorators.js";
+import {queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import checkboxGroupStyles from "./checkbox-group.css";
@@ -24,40 +24,35 @@ export class SgdsCheckboxGroup extends SgdsElement {
 
   render() {
     return html`
-      
       <div class="label-hint-container">
         <label
           @click=${null}
           class=${classMap({
-            "form-label": true,
+            "form-label": true
           })}
         >
           <slot name="label"></slot>
         </label>
 
-       
         <div class="hint-text">
           <slot name="hint-text"></slot>
         </div>
       </div>
 
       <fieldset>
-       
         <div class="checkbox-container">
           <slot name="checkbox"></slot>
         </div>
-        
-        
+
         ${this.hasInvalidCheckbox
-            ? html`
-                <div class="error-message-container">
-                  <slot name="leftIcon" class="left-icon"></slot>
-                  <slot name="errorMessage"class="error-message"></slot>
-                </div>
-              `
-            : nothing}
+          ? html`
+              <div class="error-message-container">
+                <slot name="leftIcon" class="left-icon"></slot>
+                <slot name="errorMessage" class="error-message"></slot>
+              </div>
+            `
+          : nothing}
       </fieldset>
     `;
   }
 }
-

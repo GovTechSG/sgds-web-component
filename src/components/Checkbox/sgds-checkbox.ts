@@ -16,7 +16,7 @@ import formLabelStyle from "../../styles/form-label.css";
  *
  */
 
-  /**@internal */
+/**@internal */
 
 export class SgdsCheckbox extends FormCheckElement {
   static styles = [...FormCheckElement.styles, feedbackStyle, formLabelStyle, checkboxStyle];

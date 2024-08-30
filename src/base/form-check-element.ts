@@ -129,7 +129,7 @@ export class FormCheckElement extends SgdsElement implements SgdsFormControl {
           name=${ifDefined(this.name)}
           value=${ifDefined(this.value)}
           ?checked=${this.checked}
-          ?indeterminate =${this.indeterminate}
+          ?indeterminate=${this.indeterminate}
           ?disabled=${this.disabled}
           ?required=${this.required}
           aria-disabled=${this.disabled ? "true" : "false"}
