@@ -15,6 +15,9 @@ import formLabelStyle from "../../styles/form-label.css";
  * @cssprop --sgds-checkbox-input-border-radius - The border radius of the checkbox input
  *
  */
+
+  /**@internal */
+
 export class SgdsCheckbox extends FormCheckElement {
   static styles = [...FormCheckElement.styles, feedbackStyle, formLabelStyle, checkboxStyle];
 

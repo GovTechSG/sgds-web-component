@@ -242,6 +242,20 @@
 
             </sgds-stepper>
 
+            <sgds-checkbox-group>
+             
+                <span slot="label">Select Your Preferences</span>
+            
+                
+                <span slot="hint-text">Please choose one or more options:</span>
+                <i slot="leftIcon" class="bi bi-apple"></i>
+                <span slot="errorMessage">Please correct the invalid options above.</span>
+            
+                <sgds-checkbox slot="checkbox" value="option1" invalid>Option 1</sgds-checkbox>
+                <sgds-checkbox slot="checkbox" value="option2" indeterminate >Option 2</sgds-checkbox>
+                <sgds-checkbox slot="checkbox" value="option3" >Option 3</sgds-checkbox>
+            </sgds-checkbox-group>
+
             <sgds-button refId="myStepper" methodType="increment" variant="primary">Next</sgds-button>
             <sgds-button refId="myStepper" methodType="decrement" variant="secondary">Back</sgds-button>
             <sgds-button refId="myStepper" methodType="last" variant="warning">Go to last page</sgds-button>
@@ -447,7 +461,7 @@
                         </sgds-badge>
                         <sgds-badge variant="info" dismissible>
                             Testing
-                            <i slot="lefticon" class="bi bi-apple"></i>
+                            <i slot="leftIcon" class="bi bi-apple"></i>
                         </sgds-badge>
                         <sgds-badge variant="success">
                             Testing

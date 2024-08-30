@@ -51,6 +51,9 @@ export class FormCheckElement extends SgdsElement implements SgdsFormControl {
   /** Marks the checkbox input as invalid. Replace the pseudo :invalid selector for absent in custom elements */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /** Marks the checkbox input as indeterminate , with indeterminate logo  */
+  @property({ type: Boolean, reflect: true }) indeterminate = false;
+
   /** Simulates a click on the checkbox. */
   public click() {
     this.input.click();
@@ -126,6 +129,7 @@ export class FormCheckElement extends SgdsElement implements SgdsFormControl {
           name=${ifDefined(this.name)}
           value=${ifDefined(this.value)}
           ?checked=${this.checked}
+          ?indeterminate =${this.indeterminate}
           ?disabled=${this.disabled}
           ?required=${this.required}
           aria-disabled=${this.disabled ? "true" : "false"}
