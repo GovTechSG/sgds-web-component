@@ -8,11 +8,13 @@
   --sgds-default-bg-subtle: var(--sgds-gray-400);
   --sgds-default-bg-emphasis: var(--sgds-gray-800);
   --sgds-default-bg-translucent: oklch(from var(--sgds-gray-000) l c h / 0.1);
+  --sgds-default-bg-translucent-subtle: oklch(from var(--sgds-gray-000) l c h / 0.1);
   --sgds-default-bg-transparent: transparent;
   --sgds-default-color: var(--sgds-gray-000);
   --sgds-default-color-inverse: var(--sgds-gray-900);
   --sgds-default-color-muted: var(--sgds-gray-700);
   --sgds-default-color-subtle: var(--sgds-gray-600);
+  --sgds-default-color-emphasis: var(--sgds-gray-100);
   --sgds-default-color-on-dark: var(--sgds-gray-000);
   --sgds-default-color-on-light: var(--sgds-gray-800);
   --sgds-default-color-transparent: transparent;
@@ -20,6 +22,7 @@
   --sgds-default-border-color-inverse: var(--sgds-gray-900);
   --sgds-default-border-color-muted: var(--sgds-gray-700);
   --sgds-default-border-color-subtle: var(--sgds-gray-600);
+  --sgds-default-border-color-emphasis: var(--sgds-gray-200);
   --sgds-default-border-color-transparent: transparent;
 
   /* Semantic - Alternate Color */
