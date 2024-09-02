@@ -6,7 +6,7 @@ import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-accordion-item.scss";
+import accordionItemStyle from "./accordion-item.css";
 
 /**
  *
@@ -21,27 +21,25 @@ import styles from "./sgds-accordion-item.scss";
  *
  * @slot accordion-header - The accordion-item button header slot.
  * @slot accordion-content - The accordion-item content slot.
+ * @slot accordion-caret - The caret icon of accordion-item.
  *
  * @cssprop --accordion-item-padding-y - The top and bottom padding for the container of accordion item's content
  * @cssprop --accordion-item-padding-x - The right and left padding for the container of accordion item's content
  * @cssprop --accordion-item-border-radius - The border radius of the accordion item
- * @cssprop --accordion-item-font-weight - The font weight of accordion-button when it is not collapsed
+ * @cssprop --accordion-item-font-weight - The font weight of accordion-btn when it is not collapsed
  * @cssprop --accordion-item-line-height - The line height of accordion
  */
 export class SgdsAccordionItem extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [...SgdsElement.styles, accordionItemStyle];
   /** @internal */
   @query(".accordion-item") accordion: HTMLElement;
   /** @internal */
-  @query(".accordion-button") header: HTMLElement;
+  @query(".accordion-btn") header: HTMLElement;
   /** @internal */
   @query(".accordion-body") body: HTMLElement;
 
   /** Controls whether accordion-item is open or close */
   @property({ type: Boolean, reflect: true }) open = false;
-
-  /** Optional for accordion item. Can be used to insert any utility classes such as `me-auto` */
-  @property({ reflect: true }) accordionItemClasses: string;
 
   firstUpdated() {
     if (!this.open) this.body.classList.add("hidden");
@@ -142,14 +140,12 @@ export class SgdsAccordionItem extends SgdsElement {
       <div
         part="base"
         class=${classMap({
-          "sgds accordion-item": true,
-          [`${this.accordionItemClasses}`]: this.accordionItemClasses,
-          show: this.open
+          "sgds accordion-item": true
         })}
       >
         <button
           class=${classMap({
-            "accordion-button": true,
+            "accordion-btn": true,
             collapsed: !this.open
           })}
           part="header"
@@ -161,26 +157,30 @@ export class SgdsAccordionItem extends SgdsElement {
           @keydown=${this.handleSummaryKeyDown}
         >
           <slot name="accordion-header"></slot>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-chevron-down"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
-            />
-          </svg>
+          <slot name="accordion-caret">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-chevron-down"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+              />
+            </svg>
+          </slot>
         </button>
-        <div
-          class=${classMap({
-            "accordion-body": true
-          })}
-        >
-          <slot name="accordion-content" class="accordion-content" role="region" aria-labelledby="header"></slot>
+        <div class="accordion-body">
+          <slot
+            id="content"
+            name="accordion-content"
+            class="accordion-content"
+            role="region"
+            aria-labelledby="header"
+          ></slot>
         </div>
       </div>
     `;

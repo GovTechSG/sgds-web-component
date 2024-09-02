@@ -1,0 +1,14 @@
+:host {
+  display: inline-block;
+  cursor: pointer;
+  --alert-link-anchor-color: var(--sgds-gray-600);
+}
+
+.alert-link, .alert-link:hover {
+  color: var(--alert-link-anchor-color);
+  font-weight: 700;
+}
+.alert-link:focus-visible {
+  outline: 0;
+  box-shadow: var(--sgds-focus-box-shadow);
+}

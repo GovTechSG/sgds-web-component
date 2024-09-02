@@ -1,28 +1,25 @@
 import { TemplateResult, html, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-pagination.scss";
 import { watch } from "../../utils/watch";
 import { classMap } from "lit/directives/class-map.js";
-
+import paginationStyle from "./pagination.css";
 /**
  * @summary The Pagination component enables the user to select a specific page from a range of pages
  *
  * @event sgds-page-change - Event is emitted when `handleNextButton`, `handlePrevButton`, `handleNextEllipsisButton` and `handlePrevEllipsisButton` was called.
  *
- * @cssproperty --pagination-color Sets the pagination color. <br>Default value `--sgds-cyan`
- * @cssproperty --pagination-bg-color Sets the pagination background color. <br>Default value `--sgds-white`
- * @cssproperty --pagination-hover-bg-color Sets the pagination hover state background color. <br>Default value `--sgds-gray-200`
- * @cssproperty --pagination-hover-border-color Sets the pagination hover state border color. <br>Default value `--sgds-gray-300`
- * @cssproperty --pagination-active-color Sets the pagination hover state color. <br>Default value `--sgds-white`
- * @cssproperty --pagination-active-bg-color Sets the pagination active state background color. <br>Default value `--sgds-cyan`
- * @cssproperty --pagination-disabled-color Sets the pagination disabled state color. <br>Default value `--sgds-gray-600`
- * @cssproperty --pagination-disabled-bg-color Sets the pagination disabled state background color. <br>Default value `--sgds-white`
- *
+ * @cssproperty --pagination-color - The text color of pagination
+ * @cssproperty --pagination-bg - The background color of pagination
+ * @cssproperty --pagination-hover-bg - The  background color of pagination in hover state
+ * @cssproperty --pagination-active-color - The text color of pagination in active state
+ * @cssproperty --pagination-active-bg - The background color of pagination in active state
+ * @cssproperty --pagination-disabled-color - The text color of pagination in disabled state
+ * @cssproperty --pagination-disabled-bg - The background color of pagination in disabled state
  *
  **/
 export class SgdsPagination extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [...SgdsElement.styles, paginationStyle];
 
   /** Inserts the length value from a given sets of data objects*/
   @property({ type: Number }) dataLength = 0;
@@ -226,7 +223,7 @@ export class SgdsPagination extends SgdsElement {
 
     return html`
       <li
-        class=${classMap({ "page-item": true, disabled: !this.ellipsisOn })}
+        class=${classMap({ "page-item": true, "ellipsis-disabled": !this.ellipsisOn })}
         @click=${this.ellipsisOn && this._handlePrevEllipsisButton}
         @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "ellipsis", undefined, true)}
       >
@@ -251,7 +248,7 @@ export class SgdsPagination extends SgdsElement {
     if (this.ellipsisOn) {
       return html`
         <li
-          class="page-item ${this.ellipsisOn ? "" : "disabled"} "
+          class="page-item ${this.ellipsisOn ? "" : "ellipsis-disabled"} "
           @click=${this.ellipsisOn && this._handleNextEllipsisButton}
           @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "ellipsis", undefined, false)}
         >
@@ -260,7 +257,7 @@ export class SgdsPagination extends SgdsElement {
       `;
     } else {
       return html`
-        <li class="page-item ${this.ellipsisOn ? "" : "disabled"} ">
+        <li class="page-item ${this.ellipsisOn ? "" : "ellipsis-disabled"} ">
           <span class="page-link disabled" tabindex=${tabIndex}>${this.ellipsisContent}</span>
         </li>
       `;
@@ -393,6 +390,6 @@ export class SgdsPagination extends SgdsElement {
 
 export type directionVariant = "icon" | "icon-text" | "text";
 
-export type sizeVariant = "sm" | "md" | "lg";
+export type sizeVariant = "sm" | "md";
 
 export default SgdsPagination;

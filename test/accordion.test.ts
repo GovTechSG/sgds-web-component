@@ -1,5 +1,5 @@
+import "./sgds-web-component";
 import { SgdsAccordionItem, SgdsAccordion } from "../src/components";
-import "../src/index";
 import { fixture, expect, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";

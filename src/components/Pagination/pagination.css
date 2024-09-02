@@ -1,0 +1,107 @@
+:host {
+  --pagination-color: var(--sgds-link);
+  --pagination-bg: var(--sgds-body-bg);
+  --pagination-hover-bg: var(--sgds-gray-200);
+  --pagination-active-color: var(--sgds-white);
+  --pagination-active-bg: var(--sgds-link);
+  --pagination-disabled-color: var(--sgds-gray);
+  --pagination-disabled-bg: var(--sgds-body-bg);
+}
+
+ul {
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+svg {
+  vertical-align: middle;
+}
+.pagination {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+}
+.page-link {
+  background-color: var(--pagination-bg);
+  border: 1px solid var(--sgds-border-color);
+  color: var(--pagination-color);
+  display: block;
+  position: relative;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-link {
+    transition: none;
+  }
+}
+.page-link:hover {
+  color: var(--pagination-color);
+  background-color: var(--pagination-hover-bg);
+  z-index: 2;
+}
+.page-link:focus {
+  color: var(--pagination-color); 
+  background-color: var(--pagination-hover-bg);
+  box-shadow: 0 0 0 0.125rem rgba(15, 113, 187, 0.25);
+  outline: 0;
+  z-index: 3;
+}
+.page-item {
+  cursor: pointer;
+}
+.page-item.disabled {
+  cursor: not-allowed;
+}
+.page-item:not(:first-child) .page-link {
+  margin-left: -1px;
+}
+.page-item.active .page-link {
+  z-index: 3;
+  color: var(--pagination-active-color);
+  border-color: var(--sgds-info);
+  background-color: var(--pagination-active-bg);
+}
+.page-item.disabled .page-link {
+  opacity: var(--sgds-disabled-opacity);
+  border-color: var(--sgds-disabled-color);
+  --pagination-hover-bg: ;
+}
+.ellipsis-disabled {
+  color: var(--sgds-disabled-color);
+  cursor: not-allowed;
+  --pagination-hover-bg: ;
+}
+.page-item:first-child .page-link {
+  border-bottom-left-radius: 0.3125rem;
+  border-top-left-radius: 0.3125rem;
+}
+.page-item:last-child .page-link {
+  border-bottom-right-radius: 0.3125rem;
+  border-top-right-radius: 0.3125rem;
+}
+.pagination-sm .page-link {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+}
+.pagination-sm .page-item:first-child .page-link {
+  border-bottom-left-radius: 0.2rem;
+  border-top-left-radius: 0.2rem;
+}
+.pagination-sm .page-item:last-child .page-link {
+  border-bottom-right-radius: 0.2rem;
+  border-top-right-radius: 0.2rem;
+}
+.visually-hidden {
+  clip: rect(0, 0, 0, 0) !important;
+  border: 0 !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}

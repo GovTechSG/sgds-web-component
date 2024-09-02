@@ -11,8 +11,11 @@ import Modal from "../../utils/modal";
 import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll";
 import { HasSlotController } from "../../utils/slot";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-modal.scss";
-
+import modalStyle from "./modal.css";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
+import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import headerStyles from "../../styles/header-class.css";
+import svgStyles from "../../styles/svg.css";
 /**
  * @summary The modal component inform users about a specific task and may contain critical information which users then have to make a decision.
  *
@@ -33,18 +36,23 @@ import styles from "./sgds-modal.scss";
  * @csspart body - The modal's body where the content lies
  * @csspart footers - The modal's footer
  *
- * @cssproperty --modal-padding - The general modal padding of modal component. Applied to body, footer and header.
+ * @cssproperty --modal-panel-padding - The general modal padding of modal component. Applied to body, footer and header.
  * @cssproperty --modal-panel-z-index - The z-index of modal panel
  * @cssproperty --modal-panel-width - The width of modal panel.
  * @cssproperty --modal-panel-height - The height of modal panel.
- * @cssproperty --modal-panel-background-color - The background color of modal panel
+ * @cssproperty --modal-panel-bg - The background color of modal panel
  * @cssproperty --modal-panel-border-radius - The border radius of modal panel
- * @cssproperty --modal-header-bottom-border-line-width - The line width of header's bottom border
- * @cssproperty --modal-overlay-background-color - The overlay's background color
+ * @cssproperty --modal-header-border-bottom - The bottom border of header
+ * @cssproperty --modal-overlay-bg - The overlay's background color
  */
-export class SgdsModal extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
-
+export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
+  static styles = [...SgdsElement.styles, headerStyles, svgStyles, modalStyle];
+  /**@internal */
+  static get scopedElements() {
+    return {
+      "sgds-close-button": SgdsCloseButton
+    };
+  }
   /**@internal */
   @query(".modal") dialog: HTMLElement;
   /**@internal */
@@ -62,7 +70,6 @@ export class SgdsModal extends SgdsElement {
 
   /**Indicates whether or not the modal is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
-  // @property({ type: Boolean, reflect: true }) centeredAlignVariant = false;
   /**The modal's title as displayed in the header */
   @property({ reflect: true }) title = "";
   /**The modal's icon as displayed in the header. Pass in SVG format icons as string directly  */
@@ -262,16 +269,14 @@ export class SgdsModal extends SgdsElement {
                   </h3>
                   ${this.noCloseButton
                     ? nothing
-                    : html`<button
+                    : html`<sgds-close-button
                         class=${classMap({
                           "modal-close": true,
-                          "btn-sm": true,
-                          "btn-close": true,
                           centered: this.centeredAlignVariant
                         })}
                         @click="${() => this.requestClose("close-button")}"
-                        aria-label="close modal"
-                      ></button>`}
+                        ariaLabel="close modal"
+                      ></sgds-close-button>`}
                 </div>
               `
             : ""}

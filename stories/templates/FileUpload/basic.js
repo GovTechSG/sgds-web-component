@@ -1,14 +1,16 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args => html`
   <sgds-file-upload
-    .size=${args.size}
-    .variant=${args.variant}
-    .disabled=${args.disabled}
-    .checkedIcon=${args.checkedIcon}
-    .cancelIcon=${args.cancelIcon}
-    .accept=${args.accept}
+    size=${ifDefined(args.size)}
+    variant=${ifDefined(args.variant)}
+    ?disabled=${args.disabled}
+    checkedIcon=${ifDefined(args.checkedIcon)}
+    cancelIcon=${ifDefined(args.cancelIcon)}
+    accept=${ifDefined(args.accept)}
     ?multiple=${args.multiple}
+    hintText=${ifDefined(args.hintText)}
     ><svg
       xmlns="http://www.w3.org/2000/svg"
       width="16"

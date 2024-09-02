@@ -1,0 +1,27 @@
+.text-primary {
+  color: var(--sgds-primary-rgb) !important;
+}
+.text-secondary {
+  color: var(--sgds-secondary-rgb) !important;
+}
+.text-success {
+  color: var(--sgds-success-rgb) !important;
+}
+.text-info {
+  color: var(--sgds-info-rgb) !important;
+}
+.text-warning {
+  color: var(--sgds-warning-rgb) !important;
+}
+.text-danger {
+  color: var(--sgds-danger-rgb) !important;
+}
+.text-light {
+  color: var(--sgds-light-rgb) !important;
+}
+.text-dark {
+  color: var(--sgds-dark-rgb) !important;
+}
+.text-muted {
+  color: var(--sgds-secondary-color) !important;
+}

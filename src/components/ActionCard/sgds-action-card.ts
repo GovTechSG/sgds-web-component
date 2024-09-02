@@ -1,4 +1,4 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { live } from "lit/directives/live.js";
@@ -9,7 +9,7 @@ import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import { SgdsCheckbox } from "../Checkbox/sgds-checkbox";
 import { SgdsRadio } from "../Radio/sgds-radio";
-import styles from "./sgds-action-card.scss";
+import actionCardStyles from "./action-card.css";
 
 /**
  * @summary Action Card are cards with built in checkbox or radio components. The ref of input is extended to the Card's body.
@@ -25,10 +25,10 @@ import styles from "./sgds-action-card.scss";
  * @csspart subtitle - The action card subtitle
  * @csspart title - The action card title
  * @csspart text - The action card text
- *
  */
 export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
-  static styles = [CardElement.styles, styles];
+  static styles = [...CardElement.styles, actionCardStyles];
+  /**@internal */
   static get scopedElements() {
     return {
       "sgds-checkbox": SgdsCheckbox,
@@ -65,16 +65,18 @@ export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
   /** @internal The input's id. */
   private inputId: string = genId("action-card", "input");
 
+  /** @internal */
   @watch("checked")
   async handleRadioCheckedChange() {
     this.active = this.checked;
   }
+  /** @internal */
   @watch("disabled")
   async handleDisabledChange() {
     this.active = !this.disabled;
   }
 
-  handleKeyDown(event: KeyboardEvent) {
+  private _handleKeyDown(event: KeyboardEvent) {
     const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
     if (event.key === "Enter" && !hasModifier) {
       this.handleInputChange();
@@ -87,7 +89,7 @@ export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
       ?disabled=${this.disabled}
       id=${this.inputId}
       @click=${this.handleInputChange}
-      @keydown=${this.handleKeyDown}
+      @keydown=${this._handleKeyDown}
       .value=${live(this.value)}
       ?checked=${live(this.checked)}
       @sgds-change=${(e: CustomEvent) => (this.checked = e.detail.checked)}
@@ -98,7 +100,7 @@ export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
       ?disabled=${this.disabled}
       id=${this.inputId}
       @click=${this.handleInputChange}
-      @keydown=${this.handleKeyDown}
+      @keydown=${this._handleKeyDown}
       .value=${live(this.value)}
       ?checked=${live(this.checked)}
     ></sgds-radio>`;
@@ -107,7 +109,7 @@ export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
       <div
         tabindex=${this.disabled ? "-1" : "0"}
         @click=${this.handleInputChange}
-        @keydown=${this.handleKeyDown}
+        @keydown=${this._handleKeyDown}
         variant="card-action"
         class="sgds card
         ${classMap({
@@ -120,7 +122,7 @@ export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
         part="base"
       >
         <div class="card-body" part="body">
-          <h6 class="text-muted card-subtitle" part="subtitle">
+          <h6 class="card-subtitle" part="subtitle">
             <div>
               <slot name="icon"></slot>
               <slot name="card-subtitle"></slot>

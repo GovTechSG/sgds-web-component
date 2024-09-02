@@ -1,5 +1,5 @@
-import { SgdsModal } from "../src/components";
-import "../src/index";
+import "./sgds-web-component";
+import type { SgdsModal } from "../src/components";
 import { expect, fixture, waitUntil, assert } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
@@ -7,7 +7,7 @@ import { html } from "lit";
 
 describe("<sgds-modal>", () => {
   it("renders with default values", async () => {
-    const el = await fixture(html`<sgds-modal></sgds-moadl>`);
+    const el = await fixture<SgdsModal>(html`<sgds-modal></sgds-moadl>`);
     assert.shadowDom.equal(
       el,
       `
@@ -41,11 +41,11 @@ describe("<sgds-modal>", () => {
               tabindex="-1"
             >
             </h3>
-            <button
-              aria-label="close modal"
-              class="btn-close btn-sm modal-close"
+            <sgds-close-button
+              arialabel="close modal"
+              class="modal-close"
             >
-            </button>
+            </sgds-close-button>
           </div>
           <div
             class="modal-body"

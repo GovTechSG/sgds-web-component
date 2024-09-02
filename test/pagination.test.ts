@@ -1,10 +1,10 @@
-import SgdsPagination from "../src/components/Pagination/sgds-pagination";
+import "./sgds-web-component";
+import { SgdsPagination } from "../src/components";
 import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";
 
-customElements.define("sgds-pagination", SgdsPagination);
 describe("sgds-pagination", () => {
   it("is defined", () => {
     const el = document.createElement("sgds-pagination");
@@ -556,7 +556,7 @@ describe("sgds-pagination", () => {
       `
     )) as SgdsPagination;
 
-    const disabledEllipsis = el.shadowRoot?.querySelectorAll("li.page-item.disabled") as NodeListOf<HTMLLIElement>;
+    const disabledEllipsis = el.shadowRoot?.querySelectorAll(".ellipsis-disabled") as NodeListOf<HTMLLIElement>;
     expect(disabledEllipsis?.length).to.equal(2);
     expect(disabledEllipsis[0].onclick).to.equal(null);
     expect(disabledEllipsis[1].onclick).to.equal(null);

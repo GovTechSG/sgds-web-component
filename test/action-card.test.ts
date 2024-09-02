@@ -1,7 +1,7 @@
+import "./sgds-web-component";
 import { assert, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
-import { SgdsActionCard } from "../src/components";
-import "../src/index";
+import type { SgdsActionCard } from "../src/components";
 
 describe("<sgds-action-card>", () => {
   // Card test cases
@@ -44,7 +44,7 @@ describe("<sgds-action-card>", () => {
           " part="base"  
           >
           <div class="card-body" part="body">
-            <h6 class="text-muted card-subtitle" part="subtitle">
+            <h6 class="card-subtitle" part="subtitle">
               <div>
               <slot name="icon"></slot>
                 <slot name="card-subtitle"></slot>

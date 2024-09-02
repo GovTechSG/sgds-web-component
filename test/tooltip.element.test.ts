@@ -1,8 +1,7 @@
+import "./sgds-web-component";
 import { assert, expect, fixture, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
-import "../src/components/Tooltip";
 import { SgdsTooltip, SgdsButton } from "../src/components";
-import "../src/index";
 import { sendMouse } from "@web/test-runner-commands";
 import sinon from "sinon";
 
@@ -33,14 +32,11 @@ describe("sgds-tooltip", () => {
     await el.updateComplete;
     await waitUntil(() => el.shadowRoot?.querySelector("div.tooltip"));
     expect(el.shadowRoot?.querySelector("div.tooltip-inner")).to.have.text("hello");
-    //closableContainer not available when trigger is not click
-    expect(el.shadowRoot?.querySelector("div.tooltip-inner>div.d-flex.gap-5>button.btn-close.btn-close-white")).to.be
-      .null;
     // default placement is top
     expect(el.shadowRoot?.querySelector("div.tooltip")).to.have.attribute("data-popper-placement", "top");
   });
 
-  it("when trigger=click, content is wrapped in a closable container", async () => {
+  it("when trigger=click, clicking outside of the element will trigger it to close", async () => {
     const el = await fixture<SgdsTooltip>(
       html`<sgds-tooltip trigger="click" content="hello"><sgds-button>Hover me</sgds-button></sgds-tooltip>`
     );
@@ -48,8 +44,11 @@ describe("sgds-tooltip", () => {
     await el.updateComplete;
     await waitUntil(() => el.shadowRoot?.querySelector(".tooltip-inner"));
     expect(el.shadowRoot?.querySelector("div.tooltip-inner")).to.have.text("hello");
-    expect(el.shadowRoot?.querySelector("div.tooltip-inner>div.d-flex.gap-4>button.btn-close.btn-close-white")).not.to
-      .be.null;
+
+    await sendMouse({ type: "click", position: [0, 0] });
+    await el.updateComplete;
+    await waitUntil(() => !el.shadowRoot?.querySelector(".tooltip-inner"));
+    expect(el.shadowRoot?.querySelector(".tooltip-inner")).to.be.null;
   });
 
   it("placement props updates tooltipConfig", async () => {

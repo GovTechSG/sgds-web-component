@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import '@govtechsg/sgds/css/sgds.css';
+import "@webcomponents/scoped-custom-element-registry"
+import "@govtechsg/sgds-web-component/themes/day.css";
 import "@govtechsg/sgds-web-component"
 import Accordion from './components/Accordion.vue'
 import ActionCard from './components/ActionCard.vue'

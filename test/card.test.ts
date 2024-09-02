@@ -1,7 +1,7 @@
+import "./sgds-web-component";
 import { html } from "lit";
 import { fixture, assert, expect } from "@open-wc/testing";
-import { SgdsCard } from "../src/components";
-import "../src/index";
+import type { SgdsCard } from "../src/components";
 
 describe("<sgds-card>", () => {
   it("can be semantically compare with shadowDom trees", async () => {
@@ -25,15 +25,9 @@ describe("<sgds-card>", () => {
             `
     );
   });
-  it("when link is passed into slot[name=card-link], it has class fw-bold added", async () => {
-    const el = await fixture(html`<sgds-card><a slot="card-link" href="#">Link</a></sgds-card>`);
-
-    expect(el.querySelector("a[slot=card-link]")?.className).to.contain("fw-bold");
-  });
   it("when stretchedLink is true, adds a .stretched-link class to slot card link", async () => {
     const el = await fixture(html`<sgds-card stretchedLink><a slot="card-link" href="#">Link</a></sgds-card>`);
 
-    expect(el.querySelector("a[slot=card-link]")?.className).to.contain("fw-bold");
     expect(el.querySelector("a[slot=card-link]")?.className).to.contain("stretched-link");
   });
 });

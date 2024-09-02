@@ -1,4 +1,4 @@
-import { property, query, state } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
@@ -8,7 +8,10 @@ import { defaultValue } from "../../utils/defaultvalue";
 import { FormSubmitController, SgdsFormControl } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-textarea.scss";
+import textareaStyle from "./textarea.css";
+import feedbackStyles from "../../styles/feedback.css";
+import formLabelStyles from "../../styles/form-label.css";
+import formHintStyles from "../../styles/form-hint.css";
 
 /**
  * @summary Text areas allow for the collection of input longer than a single line.
@@ -19,7 +22,7 @@ import styles from "./sgds-textarea.scss";
  * @event sgds-blur - Emitted when textarea loses focus.
  */
 export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [...SgdsElement.styles, feedbackStyles, formHintStyles, formLabelStyles, textareaStyle];
   /**@internal */
   @query("textarea.form-control") textarea: HTMLTextAreaElement;
   /**@internal */
@@ -30,8 +33,6 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   @property({ type: String, reflect: true }) label = "label";
   /**The textarea's name attribute */
   @property({ type: String, reflect: true }) name: string;
-  /**Forwarded to the HTML native textarea element. Can be used to insert any bootstrap classes such as mt-2 */
-  @property({ type: String, reflect: true }) textareaClasses?: string;
   /**The textarea's value attribute. */
   @property({ type: String, reflect: true }) value = "";
   /**Sets the minimum length of the textarea */
@@ -56,21 +57,27 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** Controls how the textarea can be resized. */
-  @property() resize: "none" | "vertical" | "auto" = "vertical";
+  @property({ type: String, reflect: true }) resize: "none" | "vertical" | "auto" = "vertical";
   /** The native textarea's inputmode attribute. It hints at the type of data that might be entered by the user while editing the element or its contents. This allows a browser to display an appropriate virtual keyboard. */
-  @property() inputmode: "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
+  @property({ type: String, reflect: true }) inputmode:
+    | "none"
+    | "text"
+    | "decimal"
+    | "numeric"
+    | "tel"
+    | "search"
+    | "email"
+    | "url";
   /** The native textarea's autocorrect attribute. */
-  @property() autocorrect: string;
+  @property({ type: String, reflect: true }) autocorrect: string;
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = "";
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
 
-  /**@internal */
-  @state() invalid = false;
-  /**@internal */
-  @state() valid = false;
+  /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** @internal The textarea's unique id */
   private textareaId = genId("textarea", "input");
@@ -159,11 +166,7 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   @watch("value", { waitUntilFirstUpdate: true })
   handleValueChange() {
     this.invalid = !this.textarea.checkValidity();
-    this.valid = this.textarea.checkValidity();
     this.updateComplete.then(() => this.setTextareaHeight());
-    if (!this.required && this.value === "") {
-      this.valid = false;
-    }
   }
 
   render() {
@@ -171,7 +174,7 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
     const wordCount = html` <div class="form-text">${this.value.length}/${this.maxlength}</div> `;
 
     return html`
-      <div class="text-area-label-wrapper d-flex justify-content-between">
+      <div class="text-area-label-wrapper">
         <label for=${this.textareaId} class="form-label">${this.label}</label>
         ${this.maxlength > 0 ? wordCount : undefined}
       </div>
@@ -180,11 +183,9 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
         class=${classMap({
           "form-control": true,
           "is-invalid": this.hasFeedback && this.invalid,
-          "is-valid": this.hasFeedback && this.valid,
           "textarea-resize-none": this.resize === "none",
           "textarea-resize-vertical": this.resize === "vertical",
-          "textarea-resize-auto": this.resize === "auto",
-          [`${this.textareaClasses}`]: this.textareaClasses
+          "textarea-resize-auto": this.resize === "auto"
         })}
         id=${this.textareaId}
         name=${ifDefined(this.name)}

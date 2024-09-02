@@ -9,7 +9,9 @@ import { waitForEvent } from "../../utils/event.js";
 import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
 import { HasSlotController } from "../../utils/slot.js";
 import { watch } from "../../utils/watch.js";
-import styles from "./sgds-drawer.scss";
+import drawerStyles from "./drawer.css";
+import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 
 /**
  * @summary Drawers slide in from a container to expose additional options and information.
@@ -40,15 +42,21 @@ import styles from "./sgds-drawer.scss";
  * @csspart body - The drawer's body.
  * @csspart footer - The drawer's footer.
  *
- * @cssproperty --sgds-drawer-size - The preferred size of the drawer. This will be applied to the drawer's width or height
+ * @cssproperty --drawer-size - The preferred size of the drawer. This will be applied to the drawer's width or height
  *   depending on its `placement`. Note that the drawer will shrink to accommodate smaller screens.
- * @cssproperty --sgds-drawer-padding - The amount of padding to use for the header.
- * @cssproperty --sgds-drawer-background-color - The drawer's background color.
- * @cssproperty --sgds-drawer-button-gap - The drawer's flex gap between buttons.
+ * @cssproperty --drawer-padding - The amount of padding to use for the header, body and footer
+ * @cssproperty --drawer-bg - The drawer's background color.
+ * @cssproperty --drawer-button-gap - The drawer's flex gap between buttons.
+ *
  */
-export class SgdsDrawer extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
-
+export class SgdsDrawer extends ScopedElementsMixin(SgdsElement) {
+  static styles = [...SgdsElement.styles, drawerStyles];
+  /**@internal */
+  static get scopedElements() {
+    return {
+      "sgds-close-button": SgdsCloseButton
+    };
+  }
   /** @internal */
   private readonly hasSlotController = new HasSlotController(this, "footer");
   /** @internal */
@@ -70,10 +78,10 @@ export class SgdsDrawer extends SgdsElement {
    * The drawer's label as displayed in the header. You should always include a relevant label even when using
    * `noHeader`, as it is required for proper accessibility. If you need to display HTML, use the `label` slot instead.
    */
-  @property({ reflect: true }) label = "";
+  @property({ type: String, reflect: true }) label = "";
 
   /** The direction from which the drawer will open. */
-  @property({ reflect: true }) placement: "top" | "end" | "bottom" | "start" = "end";
+  @property({ type: String, reflect: true }) placement: "top" | "end" | "bottom" | "start" = "end";
 
   /**
    * By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of
@@ -301,15 +309,12 @@ export class SgdsDrawer extends SgdsElement {
                   </h2>
                   <div part="header-actions" class="drawer-header-actions">
                     <slot name="header-actions"></slot>
-                    <button
+                    <sgds-close-button
                       part="close-button"
-                      class=${classMap({
-                        "drawer-close": true,
-                        "btn-sm": true,
-                        "btn-close": true
-                      })}
+                      class="drawer-close"
+                      aria-label="close drawer"
                       @click="${() => this.requestClose("close-button")}"
-                    ></button>
+                    ></sgds-close-button>
                   </div>
                 </header>
               `

@@ -4,8 +4,8 @@ import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 import { SgdsTab } from "./sgds-tab";
-import styles from "./sgds-tab-group.scss";
 import { SgdsTabPanel } from "./sgds-tab-panel";
+import tabGroupStyle from "./tab-group.css";
 /**
  * @summary Tab Group organizes content into a container with the syncing of tab and their corresponding panels.
  * Each tab must be slotted into the nav slot and its `panel` must refer to a tab panel of the same name.
@@ -18,9 +18,10 @@ import { SgdsTabPanel } from "./sgds-tab-panel";
  *
  * @csspart body - The container wrapping the default slot where all `sgds-tab-panel`s are slotted.
  * @csspart nav - The container wrapping the default slot where all `sgds-tab`s are slotted.
+ *
  */
 export class SgdsTabGroup extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [...SgdsElement.styles, tabGroupStyle];
   /**@internal */
   @query(".tab-group") tabGroup: HTMLElement;
   /**@internal */
@@ -39,10 +40,6 @@ export class SgdsTabGroup extends SgdsElement {
   private panels: SgdsTabPanel[] = [];
   /** The variant types of tabs. Controls the visual stylesof all `sgds-tabs` in its slot. It also dynamically changes the slots of `sgds-tab` */
   @property({ reflect: true, attribute: true }) variant: "tabs-basic-toggle" | "tabs-info-toggle";
-  /** Forwards css tokens to the container div of slot[name=nav] where all `sgds-tab` are slotted in */
-  @property({ type: String, reflect: true }) tabsClasses: string;
-  /** Forwards css tokens to the container div of slot where all `sgds-tab-panel` are slotted in */
-  @property({ type: String, reflect: true }) bodyClasses: string;
 
   connectedCallback() {
     const whenAllDefined = Promise.all([
@@ -237,14 +234,7 @@ export class SgdsTabGroup extends SgdsElement {
         @keydown=${this.handleKeyDown}
         variant=${ifDefined(this.variant)}
       >
-        <div
-          part="nav"
-          class=${classMap({
-            "tab-group__nav": true,
-            [`${this.tabsClasses}`]: this.tabsClasses
-          })}
-          role="tablist"
-        >
+        <div part="nav" class="tab-group__nav" role="tablist">
           <slot
             name="nav"
             class=${classMap({
@@ -256,12 +246,7 @@ export class SgdsTabGroup extends SgdsElement {
             @slotchange=${this.syncTabsAndPanels}
           ></slot>
         </div>
-        <div
-          part="body"
-          class=${classMap({
-            [`${this.bodyClasses}`]: this.bodyClasses
-          })}
-        >
+        <div part="body">
           <slot class="tab-group__body" @slotchange=${this.syncTabsAndPanels}></slot>
         </div>
       </div>

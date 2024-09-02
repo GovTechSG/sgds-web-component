@@ -1,0 +1,218 @@
+.input-group.has-validation > .dropdown-toggle:nth-last-child(n + 4),
+.input-group.has-validation > :nth-last-child(n + 3):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),
+.input-group:not(.has-validation) > .dropdown-toggle:nth-last-child(n + 3),
+.input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating) {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.input-group
+  > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(
+    .invalid-feedback
+  ) {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  margin-left: -1px;
+}
+.dropdown,
+.dropdown-center {
+  position: relative;
+}
+.dropdown-toggle {
+  white-space: nowrap;
+}
+.dropdown-toggle:after {
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+  border-right: 0.3em solid transparent;
+  border-top: 0.3em solid;
+  content: "";
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+}
+.dropdown-toggle:empty:after {
+  margin-left: 0;
+}
+.dropdown-menu {
+  --sgds-dropdown-z-index: 1000;
+  --sgds-dropdown-min-width: 10rem;
+  --sgds-dropdown-padding-x: 0;
+  --sgds-dropdown-padding-y: 0.5rem;
+  --sgds-dropdown-font-size: 1rem;
+  --sgds-dropdown-bg: var(--sgds-body-bg);
+  --sgds-dropdown-color: var(--sgds-body-color);
+  --sgds-dropdown-border-color: var(--sgds-border-color-translucent);
+  --sgds-dropdown-border-radius: var(--sgds-border-radius);
+  --sgds-dropdown-border-width: var(--sgds-border-width);
+  background-clip: padding-box;
+  background-color: var(--sgds-dropdown-bg);
+  border: var(--sgds-dropdown-border-width) solid var(--sgds-dropdown-border-color);
+  border-radius: var(--sgds-dropdown-border-radius);
+  color: var(--sgds-dropdown-color);
+  display: none;
+  font-size: var(--sgds-dropdown-font-size);
+  list-style: none;
+  margin: 0;
+  min-width: var(--sgds-dropdown-min-width);
+  padding: var(--sgds-dropdown-padding-y) var(--sgds-dropdown-padding-x);
+  position: absolute;
+  text-align: left;
+  z-index: var(--sgds-dropdown-z-index);
+}
+.dropdown-divider {
+  --sgds-dropdown-divider-bg: var(--sgds-border-color-translucent);
+  --sgds-dropdown-divider-margin-y: 0.5rem;
+  border-top: 1px solid var(--sgds-dropdown-divider-bg);
+  height: 0;
+  margin: var(--sgds-dropdown-divider-margin-y) 0;
+  opacity: 1;
+  overflow: hidden;
+}
+.dropdown-item {
+  --sgds-dropdown-item-color: var(--sgds-body-color);
+  --sgds-dropdown-item-hover-color: var(--sgds-body-color);
+  --sgds-dropdown-item-hover-bg: var(--sgds-gray-200);
+  --sgds-dropdown-item-active-color: #fff;
+  --sgds-dropdown-item-active-bg: var(--sgds-info);
+  --sgds-dropdown-item-disabled-color: var(--sgds-gray-500);
+  --sgds-dropdown-item-padding-x: 1rem;
+  --sgds-dropdown-item-padding-y: 0.25rem;
+  background-color: transparent;
+  border: 0;
+  border-radius: var(--sgds-dropdown-item-border-radius, 0);
+  clear: both;
+  color: var(--sgds-dropdown-item-color);
+  display: block;
+  font-weight: 400;
+  padding: var(--sgds-dropdown-item-padding-y) var(--sgds-dropdown-item-padding-x);
+  text-align: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.dropdown-item:focus,
+.dropdown-item:hover {
+  background-color: var(--sgds-dropdown-item-hover-bg);
+  color: var(--sgds-dropdown-item-hover-color);
+}
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: var(--sgds-dropdown-item-active-bg);
+  color: var(--sgds-dropdown-item-active-color);
+  text-decoration: none;
+}
+.dropdown-item.disabled,
+.dropdown-item:disabled {
+  background-color: transparent;
+  color: var(--sgds-dropdown-item-disabled-color);
+  pointer-events: none;
+}
+.dropdown-menu.show {
+  display: block;
+}
+.dropdown-header {
+  --sgds-dropdown-header-color: #5d5d5d;
+  --sgds-dropdown-header-padding-x: 1rem;
+  --sgds-dropdown-header-padding-y: 0.5rem;
+  color: var(--sgds-dropdown-header-color);
+  display: block;
+  font-size: 0.875rem;
+  margin-bottom: 0;
+  padding: var(--sgds-dropdown-header-padding-y) var(--sgds-dropdown-header-padding-x);
+  white-space: nowrap;
+}
+
+.sgds.dropdown .dropdown-toggle {
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+.sgds.dropdown .dropdown-toggle:after {
+  content: none;
+}
+.sgds.dropdown-menu {
+  border: 1px solid #909090;
+  padding: 0;
+}
+.sgds.dropdown-menu li a.dropdown-item {
+  padding: 1rem;
+}
+.sgds.dropdown-menu li a.dropdown-item.active,
+.sgds.dropdown-menu li a.dropdown-item:hover {
+  background-color: #0950df;
+  color: #fff;
+}
+.btn-group > .btn.dropdown-toggle-split:first-child,
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle) {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.dropdown-toggle-split {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.dropdown-toggle-split:after {
+  margin-left: 0;
+}
+.btn-group-sm > .btn + .dropdown-toggle-split,
+.btn-sm + .dropdown-toggle-split {
+  padding-left: 0.375rem;
+  padding-right: 0.375rem;
+}
+.btn-group-lg > .btn + .dropdown-toggle-split,
+.btn-lg + .dropdown-toggle-split {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.nav-tabs .dropdown-menu {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-top: calc(var(--sgds-nav-tabs-border-width) * -1);
+}
+
+@media (min-width: 576px) {
+  .navbar-expand-sm .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+}
+@media (min-width: 768px) {
+  .navbar-expand-md .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+}
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+}
+@media (min-width: 1200px) {
+  .navbar-expand-xl .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+}
+@media (min-width: 1400px) {
+  .navbar-expand-xxl .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+}
+.navbar-expand .navbar-nav .dropdown-menu {
+  position: absolute;
+}
+.sgds.navbar .nav-item a.nav-link.dropdown-toggle {
+  gap: 0.75rem;
+}
+.sgds.navbar .nav-item a.nav-link.dropdown-toggle.show {
+  border-bottom: 0.125rem solid #9182e8;
+  color: #9182e8;
+}
+.sgds.navbar .dropdown-menu.megamenu {
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+.sgds.combobox > .dropdown-menu {
+  min-width: 100%;
+}

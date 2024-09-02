@@ -190,6 +190,8 @@ export interface SgdsFormControl extends SgdsElement {
   defaultValue?: unknown;
   defaultChecked?: boolean;
   form?: string;
+  valid?: boolean;
+  invalid?: boolean;
 
   // Constraint validation attributes
   pattern?: string;

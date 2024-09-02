@@ -7,7 +7,7 @@ import { getAnimation, setDefaultAnimation } from "../../utils/animation-registr
 import { waitForEvent } from "../../utils/event";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-sidenav-item.scss";
+import sidenavItemStyle from "./sidenav-item.css";
 
 /**
  *
@@ -17,9 +17,10 @@ import styles from "./sgds-sidenav-item.scss";
  * @event sgds-hide - Emitted on hide.
  * @event sgds-after-hide - Emitted on hide after animation has completed.
  *
- * @slot - default slot for SgdsSidenavLink element.
+ * @slot default - default slot for SgdsSidenavLink element.
  * @slot title - title slot for the content of SgdsSidenavItem's button / anchor element.
  * @slot icon - icon slot for the content of SgdsSidenavItem's button / anchor element.
+ * @slot caret-icon - The slot for the caret arrow icon of SgdsSidenavItem.
  *
  * @cssproperty --sidenav-item-button-border-left-width - sidenav item left border width
  * @cssproperty --sidenav-item-padding-x - sidenav item padding left and right
@@ -28,7 +29,7 @@ import styles from "./sgds-sidenav-item.scss";
  */
 
 export class SgdsSidenavItem extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [...SgdsElement.styles, sidenavItemStyle];
 
   @query(".sidenav-body") body: HTMLElement;
   /** @internal */
@@ -194,31 +195,33 @@ export class SgdsSidenavItem extends SgdsElement {
         })} "
         aria-expanded="${this.active}"
         aria-controls="${this.collapseId}"
-        aria-selected="${this.active}"
+        aria-current="${this.active}"
         id="${this.buttonId}"
         ?disabled=${this.disabled}
         aria-disabled=${this.disabled ? "true" : "false"}
       >
         <slot name="icon"></slot>
         <slot name="title"></slot>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-chevron-down"
-          viewBox="0 0 16 16"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
-          />
-        </svg>
+        <slot name="caret-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-chevron-down"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+            />
+          </svg>
+        </slot>
       </button>
       <div class="sidenav-body" id="${this.collapseId}">
-        <ul class="sidenav-list" aria-labelledby="${this.buttonId}">
+        <div class="sidenav-list" aria-labelledby="${this.buttonId}">
           <slot></slot>
-        </ul>
+        </div>
       </div>`;
 
     const noMenuTemplate = html`
@@ -229,7 +232,7 @@ export class SgdsSidenavItem extends SgdsElement {
           disabled: this.disabled,
           active: this.active
         })} "
-        aria-selected="${this.active}"
+        aria-current="${this.active}"
         ?disabled=${this.disabled}
         aria-disabled=${this.disabled ? "true" : "false"}
       >
@@ -238,7 +241,7 @@ export class SgdsSidenavItem extends SgdsElement {
       </a>
     `;
     return html`
-      <li class="sidenav-item" aria-haspopup="${!this.href}">${this.href ? noMenuTemplate : withMenuTemplate}</li>
+      <div class="sidenav-item" aria-haspopup="${!this.href}">${this.href ? noMenuTemplate : withMenuTemplate}</div>
     `;
   }
 }

@@ -1,4 +1,5 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = ({
   dataLength,
@@ -14,14 +15,14 @@ export const Template = ({
 }) => {
   return html`
     <sgds-pagination
-      dataLength=${dataLength}
-      currentPage=${currentPage}
-      itemsPerPage=${itemsPerPage}
-      limit=${limit}
-      directionVariant=${directionVariant}
-      size=${size}
+      dataLength=${ifDefined(dataLength)}
+      currentPage=${ifDefined(currentPage)}
+      itemsPerPage=${ifDefined(itemsPerPage)}
+      limit=${ifDefined(limit)}
+      directionVariant=${ifDefined(directionVariant)}
+      size=${ifDefined(size)}
       ?ellipsisOn=${ellipsisOn}
-      ellipsisJump=${ellipsisJump}
+      ellipsisJump=${ifDefined(ellipsisJump)}
       ?showFirstPage=${showFirstPage}
       ?showLastPage=${showLastPage}
     ></sgds-pagination>

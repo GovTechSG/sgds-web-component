@@ -8,17 +8,15 @@ describe("link-element", () => {
     const el = await fixture<MockLink>(html`<mock-link></mock-link>`);
     assert.shadowDom.equal(
       el,
-      ` <li>
+      `
         <a
           aria-disabled="false"
           class="nav-link"
-          href=""
           target="_self"
         >
           <slot>
           </slot>
       </a>
-      </li>
     `
     );
   });

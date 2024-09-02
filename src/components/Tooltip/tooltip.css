@@ -1,0 +1,34 @@
+:host {
+  --tooltip-max-width: 20rem;
+  display: inline-block;
+}
+
+.tooltip {
+  word-wrap: break-word;
+  display: block;
+  font-size: 0.875rem;
+  line-break: auto;
+  opacity: 0;
+  text-align: left;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  white-space: normal;
+  word-break: normal;
+  word-spacing: normal;
+  z-index: 1080;
+}
+.tooltip.show {
+  opacity: 0.9;
+}
+.tooltip-inner {
+  background-color: var(--sgds-gray-600);
+  border-radius: var(--sgds-border-radius);
+  color: var(--sgds-body-bg);
+  max-width: var(--tooltip-max-width);
+  padding: var(--sgds-spacer-1) var(--sgds-spacer-2);
+  text-align: center;
+}
+div {
+  max-width: fit-content;
+}

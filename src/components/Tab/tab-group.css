@@ -1,0 +1,17 @@
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+.nav-tabs {
+  border-bottom: none;
+  gap:  2rem;
+}
+.sgds.nav-tabs[variant="tabs-basic-toggle"] {
+  gap: 0;
+}
+slot[name="nav"][variant="tabs-basic-toggle"]::slotted(sgds-tab) {
+  margin-left: -2px;
+}

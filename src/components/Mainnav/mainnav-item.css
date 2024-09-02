@@ -1,0 +1,31 @@
+:host {
+  --mainnav-item-border-bottom-width: 0.125rem;
+}
+li {
+  height: 100%;
+}
+a.nav-link {
+  display: flex;
+  cursor: pointer;
+  color: var(--sgds-body-color);
+  border-bottom: var(--mainnav-item-border-bottom-width) solid transparent;
+  min-height: 100%;
+  align-items: center;
+  padding: 0;
+  text-decoration: none;
+  &.active,
+  &:hover {
+    color: var(--mainnav-theme-color);
+    border-color: var(--mainnav-theme-color);
+  }
+  &:focus-visible {
+    box-shadow: 0 0 0 0.25rem rgba(89, 66, 219, 0.25);
+    outline: 0;
+  }
+}
+
+.nav-link.disabled {
+  cursor: default;
+  pointer-events: none;
+  opacity: var(--sgds-disabled-opacity);
+}

@@ -5,6 +5,7 @@
 Once imported, the custom elements can be used throughout the project.
 
 ```js
+import "@govtechsg/sgds-web-component/themes/day.css";
 // import all custom elements at once
 import "@govtechsg/sgds-web-component";
 // or import individual custom elements 

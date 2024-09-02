@@ -1,17 +1,18 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args => {
   return html`
     <sgds-footer
-      title=${args.title}
-      description=${args.description}
-      lastUpdatedDate=${args.lastUpdatedDate}
-      contactHref=${args.contactHref}
-      feedbackHref=${args.feedbackHref}
-      privacyHref=${args.privacyHref}
-      termsOfUseHref=${args.termsOfUseHref}
+      title=${ifDefined(args.title)}
+      description=${ifDefined(args.description)}
+      lastUpdatedDate=${ifDefined(args.lastUpdatedDate)}
+      contactHref=${ifDefined(args.contactHref)}
+      feedbackHref=${ifDefined(args.feedbackHref)}
+      privacyHref=${ifDefined(args.privacyHref)}
+      termsOfUseHref=${ifDefined(args.termsOfUseHref)}
       .links=${args.links}
-      copyrightLiner=${args.copyrightLiner}
+      copyrightLiner=${ifDefined(args.copyrightLiner)}
     >
     </sgds-footer>
   `;

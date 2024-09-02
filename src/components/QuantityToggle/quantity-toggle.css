@@ -1,0 +1,39 @@
+sgds-input{
+  --sgds-border-radius: 0;
+}
+sgds-button:first-of-type{
+  --btn-border-radius: var(--sgds-border-radius) 0 0 var(--sgds-border-radius);
+}
+sgds-button:last-of-type{
+  --btn-border-radius: 0 var(--sgds-border-radius) var(--sgds-border-radius) 0;
+}
+
+.input-group {
+  align-items: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+.input-group > sgds-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  position: relative;
+}
+.input-group > sgds-input:focus {
+  z-index: 3;
+}
+
+.input-group sgds-button:focus {
+  z-index: 3;
+}
+.visually-hidden {
+  clip: rect(0, 0, 0, 0) !important;
+  border: 0 !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}

@@ -2,7 +2,7 @@ import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
-import styles from "./sgds-card.scss";
+import cardStyle from "./card.css";
 
 /**
  * @summary Cards can be used for headers and footers, a wide variety of content, contain contextual background colors and images.
@@ -19,7 +19,7 @@ import styles from "./sgds-card.scss";
  *
  */
 export class SgdsCard extends CardElement {
-  static styles = [CardElement.styles, styles];
+  static styles = [...CardElement.styles, cardStyle];
 
   /** Extends the link passed in slot[name="link"] to the entire card */
   @property({ type: Boolean }) stretchedLink = false;
@@ -32,7 +32,6 @@ export class SgdsCard extends CardElement {
     if (this.stretchedLink) {
       childNodes[0].classList.add("stretched-link");
     }
-    childNodes[0].classList.add("fw-bold");
     return;
   }
 
@@ -41,7 +40,6 @@ export class SgdsCard extends CardElement {
     if (childNodes.length > 1) {
       return console.error("Multiple elements passed into SgdsCard's image slot");
     }
-    childNodes[0].classList.add("card-img-top");
   }
   render() {
     return html`
@@ -58,7 +56,7 @@ export class SgdsCard extends CardElement {
       >
         <slot name="card-image" @slotchange=${this.handleImgSlotChange}></slot>
         <div class="card-body" part="body">
-          <h3 class="card-title" part="title"><slot name="card-title"></slot></h3>
+          <h3 class="card-title " part="title"><slot name="card-title"></slot></h3>
           <p class="card-text" part="text">
             <slot name="card-text"></slot>
           </p>

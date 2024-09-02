@@ -1,9 +1,9 @@
 import { html } from "lit";
-import { property, queryAssignedNodes } from "lit/decorators.js";
+import { property, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsAccordionItem from "./sgds-accordion-item";
-import styles from "./sgds-accordion.scss";
+import accordionStyle from "./accordion.css";
 
 const VALID_KEYS = ["Enter", "ArrowUp", "ArrowLeft", "ArrowDown", "ArrowRight"];
 
@@ -11,22 +11,17 @@ const VALID_KEYS = ["Enter", "ArrowUp", "ArrowLeft", "ArrowDown", "ArrowRight"];
  * @summary A dropdown mechanism that allow users to either show or hide related content. `SgdsAccordion` is a wrapper to manage the behaviour for multiple `SgdsAccordionItems`
  * @slot default - slot for accordion-item
  *
- * @cssprop --accordion-active-color - The text color of all accordion buttons to indicate its active state
- *
+ * @cssprop --accordion-active-color - The colour of accordion when it is active
  */
 
 export class SgdsAccordion extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [...SgdsElement.styles, accordionStyle];
 
   /** Allows multiple accordion items to be opened at the same time */
   @property({ type: Boolean, reflect: true }) allowMultiple = false;
 
-  /** Optional for accordion wrapper. Can be used to insert any utility classes such as me-auto */
-  @property({ reflect: true }) accordionClasses: string;
-
   /** @internal */
-  @queryAssignedNodes()
-  private defaultNodes!: NodeListOf<SgdsAccordionItem>;
+  @queryAssignedElements() private defaultNodes!: SgdsAccordionItem[];
 
   /** @internal */
   get items(): SgdsAccordionItem[] {
@@ -83,8 +78,7 @@ export class SgdsAccordion extends SgdsElement {
     return html`
       <div
         class=${classMap({
-          "sgds accordion": true,
-          [`${this.accordionClasses}`]: this.accordionClasses
+          "sgds accordion": true
         })}
       >
         <slot @click=${this._onToggle} @keydown=${this._onKeyboardToggle}></slot>

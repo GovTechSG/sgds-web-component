@@ -12,10 +12,10 @@ logger.warn = (msg, options) => {
 export default defineConfig({
   plugins: [
     replace({
-      scss: "scss?inline",
+      ".css": ".css?inline",
       preventAssignment: true
     }),
-    postcssLit({ include: ["**/*.scss", "**/*.scss?*"] })
+    postcssLit({ include: ["**/*.css", "**/*.css?*"] })
   ],
   resolve: {
     alias: [
@@ -29,5 +29,8 @@ export default defineConfig({
   define: {
     "process.env.VITE_ENV": JSON.stringify(process.env.VITE_ENV)
   },
-  customLogger: logger
+  customLogger: logger,
+  build: {
+    cssCodeSplit: false
+  }
 });

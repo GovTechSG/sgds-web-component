@@ -1,0 +1,47 @@
+:host {
+  --datepicker-theme-color: var(--sgds-primary);
+  --datepicker-hover-bg: var(--sgds-primary-100);
+  --datepicker-bg: white;
+  --datepicker-close-btn-bg: var(--datepicker-theme-color);
+  --datepicker-close-btn-hover-bg: var(--sgds-primary-700);
+  --datepicker-close-btn-color: white;
+  --datepicker-selected-date-bg: var(--sgds-primary);
+  --datepicker-selected-date-color: white;
+}
+.datepicker {
+  border-color: var(--sgds-border-color);
+  font-size: 1rem;
+  max-width: 24rem;
+  width: 24rem;
+  background-color: var(--datepicker-bg);
+}
+div {
+  display: flex;
+}
+button {
+  align-self: self-start;
+}
+sgds-datepicker-input {
+  flex: 1;
+  margin-right: 0; /* Remove the margin on the right */
+  --input-border-radius: var(--sgds-border-radius, 0.3125rem) 0 0 var(--sgds-border-radius, 0.3125rem);
+}
+sgds-button[variant="outlined"]  {
+  --btn-color: var(--sgds-dark);
+  --btn-bg: var(--sgds-white);
+  --btn-border-color: var(--sgds-dark);
+  --btn-hover-bg: var(--sgds-dark);
+  --btn-hover-color: var(--sgds-white);
+}
+.calendar-btn {
+  --btn-border-color: var(--sgds-border-color);
+  --btn-border-radius: 0;
+}
+.reset-btn {
+  --btn-bg: var(--datepicker-close-btn-bg);
+  --btn-color: var(--datepicker-close-btn-color);
+  --btn-border-radius: 0;
+}
+.reset-btn:hover {
+  --btn-hover-bg: var(--datepicker-close-btn-hover-bg);
+}

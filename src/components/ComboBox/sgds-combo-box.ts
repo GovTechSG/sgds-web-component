@@ -1,14 +1,14 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
-import { DropdownElement } from "../../base/dropdown-element";
-import { defaultValue } from "../../utils/defaultvalue";
-import { SgdsInput } from "../Input/sgds-input";
-import styles from "./sgds-combo-box.scss";
-import { watch } from "../../utils/watch";
 import { DropdownListElement } from "../../base/dropdown-list-element";
-
+import { defaultValue } from "../../utils/defaultvalue";
+import { watch } from "../../utils/watch";
+import { SgdsDropdownItem } from "../Dropdown/sgds-dropdown-item";
+import { SgdsInput } from "../Input/sgds-input";
+import comboBoxStyle from "./combo-box.css";
+import dropdownStyle from "../Dropdown/dropdown.css";
 type FilterFunction = (inputValue: string, menuItem: string) => boolean;
 
 /**
@@ -20,11 +20,12 @@ type FilterFunction = (inputValue: string, menuItem: string) => boolean;
  * @event sgds-input -  Emitted when user input is received and its value changes.
  */
 export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
-  static styles = [DropdownElement.styles, styles];
+  static styles = [...DropdownListElement.styles, comboBoxStyle, dropdownStyle];
   /**@internal */
   static get scopedElements() {
     return {
-      "sgds-input": SgdsInput
+      "sgds-input": SgdsInput,
+      "sgds-dropdown-item": SgdsDropdownItem
     };
   }
   constructor() {
@@ -60,11 +61,22 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
   /**Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = "";
+
+  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
+  @property({ type: Boolean, reflect: true }) hasFeedback = false;
+  /**Feedback text for error state when validated */
+  @property({ type: String, reflect: true }) invalidFeedback = "";
+
+  /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
+  @property({ type: Boolean, reflect: true }) invalid = false;
+  /** Marks the input as invalid. Replace the pseudo :valid selector for absent in custom elements */
+  @property({ type: Boolean, reflect: true }) valid = false;
+
   /**The list of items to display in the dropdown. */
   @property({ type: Array }) menuList: string[] = [];
 
   /**The function used to determine if a menu item should be shown in the menu list, given the user's input value. */
-  @property({ type: Function })
+  @property()
   filterFunction: FilterFunction = (inputValue: string, menuItem: string) => {
     const itemLowerCase = menuItem.toLowerCase();
     const valueLower = inputValue.toLowerCase();
@@ -77,7 +89,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
 
   /**@internal */
   @watch("value")
-  handleFilterMenu() {
+  _handleFilterMenu() {
     this.filteredMenuList = this.menuList.filter(item => this.filterFunction.call(null, this.value, item));
 
     if (!this.myDropdown || !this.bsDropdown) return;
@@ -104,7 +116,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
     return html`
       <div class="sgds combobox dropdown">
         <sgds-input
-          class="dropdown-toggle w-100"
+          class="dropdown-toggle"
           label=${this.label}
           hintText=${this.hintText}
           name=${this.name}
@@ -113,8 +125,12 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
           placeholder=${this.placeholder}
           ?autofocus=${this.autofocus}
           ?disabled=${this.disabled}
-          ?required=${this.required}
+          required=${this.required}
           ?readonly=${this.readonly}
+          ?hasFeedback=${this.hasFeedback}
+          invalidfeedback=${this.invalidFeedback}
+          ?invalid=${this.invalid}
+          ?valid=${this.valid}
           .value=${this.value}
           @sgds-input=${this._handleInputChange}
           role="combobox"
@@ -128,7 +144,7 @@ export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
         </div>
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1">
           ${this.filteredMenuList.map(
-            item => html`<button class="dropdown-item" @click=${this._handleSelectChange}>${item}</button>`
+            item => html`<sgds-dropdown-item @click=${this._handleSelectChange}>${item}</sgds-dropdown-item>`
           )}
         </ul>
       </div>

@@ -1,7 +1,7 @@
+import "./sgds-web-component";
 import { aTimeout, assert, expect, fixture, fixtureCleanup, nextFrame } from "@open-wc/testing";
 import { html } from "lit";
 import { SgdsMainnav, SgdsMainnavDropdown, SgdsMainnavItem, type MainnavExpandSize } from "../src/components";
-import "../src/index";
 
 describe("sgds-mainnav", () => {
   afterEach(() => fixtureCleanup());
@@ -17,7 +17,7 @@ describe("sgds-mainnav", () => {
       `<nav class="navbar navbar-expand-lg navbar-light sgds">
        <a
          aria-label="brand-link"
-         class="me-auto navbar-brand order-first"
+         class="navbar-brand order-first"
          href=""
        >
          <slot name="brand">
@@ -33,30 +33,18 @@ describe("sgds-mainnav", () => {
          class="navbar-toggler order-1"
          type="button"
        >
-       <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            fill="currentColor"
-            class="bi bi-list"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-            />
-          </svg>
+       <span class="navbar-toggler-icon"></span>
        </button>
        <div
          class="navbar-body navbar-collapse order-2"
          hidden=""
        >
-         <ul class="navbar-nav">
+         <div class="navbar-nav navbar-nav-scroll">
            <slot>
            </slot>
           <slot name="end">
           </slot>
-         </ul>
+         </div>
        </div>
     `,
       { ignoreAttributes: ["id", "aria-controls"] }
@@ -247,7 +235,7 @@ describe("sgds-mainnav-dropdown", () => {
     const el = await fixture(html`<sgds-mainnav-dropdown togglerText="test"></sgds-mainnav-dropdown>`);
     assert.shadowDom.equal(
       el,
-      ` <li class="nav-item dropdown sgds">
+      ` <div class="nav-item dropdown sgds">
       <a
         class="nav-link dropdown-toggle"
         aria-expanded="false"
@@ -269,10 +257,10 @@ describe("sgds-mainnav-dropdown", () => {
           />
         </svg>
       </a>
-      <ul class="dropdown-menu" role="menu" part="menu">
+      <div class="dropdown-menu" role="menu" part="menu">
         <slot></slot>
-      </ul>
-    </li>`,
+      </div>
+    </div>`,
       { ignoreAttributes: ["id"] }
     );
   });

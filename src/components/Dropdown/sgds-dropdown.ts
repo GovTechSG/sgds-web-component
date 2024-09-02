@@ -1,12 +1,11 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
 import { html } from "lit";
 import { property, queryAsync } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
-import { DropdownElement } from "../../base/dropdown-element";
-import { SgdsButton } from "../Button/sgds-button";
 import { DropdownListElement } from "../../base/dropdown-list-element";
 import genId from "../../utils/generateId";
-
+import { SgdsButton } from "../Button/sgds-button";
+import dropdownStyle from "./dropdown.css";
 export type DropDirection = "left" | "right" | "up" | "down";
 export type DropdownButtonVariant =
   | "primary"
@@ -23,9 +22,10 @@ export type DropdownButtonVariant =
  * @slot default - slot for sgds-dropdown-item passed into dropdown's menu
  *
  * @csspart menu - The dropdown's menu (ul element)
+ *
  */
 export class SgdsDropdown extends ScopedElementsMixin(DropdownListElement) {
-  static styles = [DropdownElement.styles];
+  static styles = [...DropdownListElement.styles, dropdownStyle];
   /**@internal */
   static get scopedElements() {
     return {
@@ -65,7 +65,7 @@ export class SgdsDropdown extends ScopedElementsMixin(DropdownListElement) {
   drop: DropDirection = "down";
 
   /** Sets color of Dropdown button */
-  @property({ type: String })
+  @property({ type: String, reflect: true })
   variant: DropdownButtonVariant = "secondary";
 
   /**@internal */
@@ -83,8 +83,9 @@ export class SgdsDropdown extends ScopedElementsMixin(DropdownListElement) {
     return html`
       <div>
         <sgds-button
+          outlined
           role="button"
-          variant="outline-${this.variant}"
+          variant=${this.variant}
           ?disabled=${this.disabled}
           aria-expanded="${this.menuIsOpen}"
           aria-haspopup="menu"
@@ -107,9 +108,9 @@ export class SgdsDropdown extends ScopedElementsMixin(DropdownListElement) {
             />
           </svg>
         </sgds-button>
-        <ul class="dropdown-menu" role="menu" part="menu">
+        <div class="dropdown-menu" role="menu" part="menu">
           <slot id="default" @click=${this.handleSelectSlot}></slot>
-        </ul>
+        </div>
       </div>
     `;
   }

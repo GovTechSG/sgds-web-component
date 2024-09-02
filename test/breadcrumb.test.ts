@@ -1,7 +1,7 @@
+import "./sgds-web-component";
 import { assert, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import { SgdsBreadcrumb, SgdsBreadcrumbItem } from "../src/components";
-import "../src/index";
 
 describe("sgds-breadcrumb", () => {
   it("renders with default values", async () => {
@@ -12,12 +12,12 @@ describe("sgds-breadcrumb", () => {
       aria-label="breadcrumb"
       part="base"
     >
-      <ol class="breadcrumb">
+      <div class="breadcrumb">
         <slot></slot>
         <slot name="separator" hidden aria-hidden="true">
          <span>/</span>
         </slot>
-      </ol>
+      </div>
     </nav>
         `
     );
@@ -33,10 +33,10 @@ describe("sgds-breadcrumb-item", () => {
     const el = await fixture(html`<sgds-breadcrumb-item></sgds-breadcrumb-item>`);
     assert.shadowDom.equal(
       el,
-      ` <li part="base" class="breadcrumb-item active">
+      ` <div part="base" class="breadcrumb-item active">
             <span part="label"><slot></slot></span>
             <slot name="separator" class="breadcrumb-item__separator" aria-hidden="true"></slot>
-          </li>
+          </div>
         `
     );
   });
@@ -45,10 +45,10 @@ describe("sgds-breadcrumb-item", () => {
     const el = await fixture(html`<sgds-breadcrumb-item href="#a"></sgds-breadcrumb-item>`);
     assert.shadowDom.equal(
       el,
-      ` <li part="base" class=" breadcrumb-item">
+      ` <div part="base" class=" breadcrumb-item">
             <a href="#a" part="label"><slot></slot></a>
             <slot name="separator" class="breadcrumb-item__separator" aria-hidden="true"></slot>
-          </li>
+          </div>
         `
     );
   });

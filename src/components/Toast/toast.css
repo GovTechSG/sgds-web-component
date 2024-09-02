@@ -1,0 +1,80 @@
+:host {
+  --toast-icon-margin-right: var(--sgds-spacer-2);
+  background-color: transparent;
+}
+
+:host([variant="warning"]) .toast{
+  --toast-border-color: var(--sgds-warning-filled);
+  --toast-header-color: var(--sgds-warning-text-emphasis);
+  --toast-header-icon-color: var(--sgds-warning-text-emphasis);
+}
+:host([variant="danger"]) .toast{
+  --toast-border-color: var(--sgds-danger-filled);
+  --toast-header-color: var(--sgds-danger-text-emphasis);
+  --toast-header-icon-color: var(--sgds-danger-text-emphasis);
+}
+:host([variant="success"]) .toast{
+  --toast-border-color: var(--sgds-success-filled);
+  --toast-header-color: var(--sgds-success-text-emphasis);
+  --toast-header-icon-color: var(--sgds-success-text-emphasis);
+}
+:host([variant="info"]) .toast{
+  --toast-border-color: var(--sgds-info-filled);
+  --toast-header-color: var(--sgds-info-text-emphasis);
+  --toast-header-icon-color: var(--sgds-info-text-emphasis);
+}
+
+.toast {
+  --toast-border-color: var(--sgds-gray-800);
+  --toast-header-color: light-dark(var(--sgds-gray-800), var(--sgds-gray-200));
+  --toast-header-icon-color: var(--sgds-body-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-spacer-2);
+  padding: var(--sgds-spacer-3);
+  background-clip: padding-box;
+  background-color: var(--sgds-body-bg);
+  border: var(--sgds-border-width) solid var(--toast-border-color);
+  border-left: 5px solid var(--toast-border-color);
+  border-radius: 0 0.25rem 0.25rem 0;
+  box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.15);
+  font-size: var(--sgds-body-font-size);
+  color: var(--sgds-body-color);
+  width: fit-content;
+  max-width: 100%;
+  pointer-events: auto;
+  width: 100%;
+  min-width: 320px;
+  max-width: 500px;
+}
+.toast[hidden] {
+  display: none;
+}
+.toast-header {
+  display: flex;
+  align-items: center;
+  gap: var(--toast-icon-margin-right);
+  color: var(--toast-header-color);
+  background-clip: padding-box;
+}
+.toast-body {
+  word-wrap: break-word;
+}
+.toast-header strong {
+  margin-right: auto;
+  word-break: break-all;
+}
+.toast-header small {
+  flex-grow: 0;
+  flex-shrink: 0;
+  color: var(--sgds-body-color);
+}
+.toast-header button {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+slot[name="icon"]::slotted(svg) {
+  flex-grow: 0;
+  flex-shrink: 0;
+  color: var(--toast-header-icon-color);
+}

@@ -3,7 +3,7 @@ import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-tab.scss";
+import tabStyle from "./tab.css";
 
 let id = 0;
 /**
@@ -16,10 +16,11 @@ let id = 0;
  * @slot label - The slot for label of tab. This is only available when variant attribute of `sgds-tab-group` is `tabs-info-toggle`
  *
  * @csspart base - The base wrapper of tab
- * @cssproperty  --tab-theme-color - The theme colour for tab. Defaults to `--sgds-primary`
+ *
+ *
  */
 export class SgdsTab extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [tabStyle];
   /**@internal */
   @query(".nav-item") tab: HTMLElement;
   /**@internal */
