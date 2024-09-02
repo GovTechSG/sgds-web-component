@@ -1,8 +1,7 @@
+import { html, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
-import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
-import { html } from "lit";
 import progressBarStyle from "./progress-bar.css";
 export type ProgressBarVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark";
 /**
@@ -39,34 +38,24 @@ export class SgdsProgressBar extends SgdsElement {
    */
   @property({ type: String, reflect: true }) arialabel = "";
 
-  /** Apply a stripe over the progress bar */
-  @property({ type: Boolean, reflect: true }) striped = false;
-  /**
-   * Animated stripes over the progress bar.
-   *
-   * Use in conjunction with striped property
-   */
-  @property({ type: Boolean, reflect: true }) animated = false;
-
   /** Add label on top of progress bar */
   @property({ type: String, reflect: true }) label = "";
 
   render() {
     return html`
-      <div
-        class=${classMap({
-          "progress-bar": true,
-          "progress-bar-striped": this.striped,
-          "progress-bar-animated": this.animated
-        })}
-        role="progressbar"
-        style=${styleMap({ width: `${this.value}%` })}
-        aria-label=${this.arialabel}
-        aria-valuenow=${this.value}
-        aria-valuemin=${this.ariamin}
-        aria-valuemax=${this.ariamax}
-      >
-        ${this.label ? html`${this.label}` : undefined}
+      <div class="progress-container">
+        <div class="progress">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            style=${styleMap({ width: `${this.value}%` })}
+            aria-label=${this.arialabel}
+            aria-valuenow=${this.value}
+            aria-valuemin=${this.ariamin}
+            aria-valuemax=${this.ariamax}
+          ></div>
+        </div>
+        <span>${this.label ? html`${this.label}` : nothing}</span>
       </div>
     `;
   }
