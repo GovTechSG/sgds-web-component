@@ -9,7 +9,7 @@ import { FormSubmitController, SgdsFormControl } from "../../utils/form";
 import genId from "../../utils/generateId";
 import SgdsButton, { ButtonVariant } from "../Button/sgds-button";
 import quantityToggleStyle from "./quantity-toggle.css";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import SgdsInput from "../Input/sgds-input";
 import svgStyles from "../../styles/svg.css";
 /**

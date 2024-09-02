@@ -1,4 +1,4 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { createRef, ref } from "lit/directives/ref.js";

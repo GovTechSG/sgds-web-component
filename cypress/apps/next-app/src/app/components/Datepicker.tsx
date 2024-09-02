@@ -6,5 +6,5 @@ const SgdsDatepicker = dynamic(
     }
   );
 export const Datepicker = () => {
-  return <SgdsDatepicker dateformat="DD/MM/YYYY" mode="single"></SgdsDatepicker>;
+  return <SgdsDatepicker dateFormat="DD/MM/YYYY" mode="single"></SgdsDatepicker>;
 };

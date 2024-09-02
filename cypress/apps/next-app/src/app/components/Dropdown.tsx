@@ -8,12 +8,12 @@ const SgdsDropdown = dynamic(
   );
 export const Dropdown = () => {
   return (
-    <SgdsDropdown togglertext="Dropdown" drop="down" variant="secondary" close="default">
+    <SgdsDropdown togglerText="Dropdown" drop="down" variant="secondary" close="default">
       <SgdsDropdownItem href="#" target="_self">
         item #1 (argsTable controlled)
       </SgdsDropdownItem>
       <SgdsDropdownItem href="https://google.com">item #2</SgdsDropdownItem>
-      <SgdsDropdownItem href="#" disabled="">
+      <SgdsDropdownItem href="#" disabled>
         item #3
       </SgdsDropdownItem>
     </SgdsDropdown>

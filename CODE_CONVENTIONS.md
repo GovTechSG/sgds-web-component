@@ -406,7 +406,7 @@ Example: In FileUpload case, SgdsButton is used within it.
 
 ```jsx
 import { SgdsButton } from "../Button";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 
 export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   static get scopedElements() {

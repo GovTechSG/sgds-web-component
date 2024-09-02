@@ -11,7 +11,7 @@ import { HasSlotController } from "../../utils/slot.js";
 import { watch } from "../../utils/watch.js";
 import drawerStyles from "./drawer.css";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 
 /**
  * @summary Drawers slide in from a container to expose additional options and information.

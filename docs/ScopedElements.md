@@ -39,6 +39,8 @@ As a rule of thumb, start by not loading the polyfill. If you encounter an error
 >`Uncaught DOMException: Failed to execute 'define' on 'CustomElementRegistry': the name "sgds-<component-name>" has already been used with this registry at`
 
 
+> Not loading the polyfill by default will also allow sites to opt out of it altogether. This means until the browser ships scoped registries, the developer can choose to fall back to the global registry, by not loading the polyfill. This will save bandwidth & complexity since it doesn't need to be loaded by the client in that case. [Source](https://open-wc.org/blog/scoped-elements-without-polyfill/)
+
 ### How to load the polyfill 
 
 #### Local installation

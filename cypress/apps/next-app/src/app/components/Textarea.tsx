@@ -5,12 +5,12 @@ export const Textarea = () => {
     <SgdsTextarea
       label="Label"
       name="textarea"
-      rows="4"
-      invalidfeedback=""
+      rows={4}
+      invalidFeedback=""
       placeholder="Placeholder"
-      maxlength="100"
+      maxlength={100}
       resize="vertical"
-      defaultvalue=""
+      defaultValue=""
     />
   );
 };

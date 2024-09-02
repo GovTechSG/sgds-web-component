@@ -12,7 +12,7 @@ import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll";
 import { HasSlotController } from "../../utils/slot";
 import { watch } from "../../utils/watch";
 import modalStyle from "./modal.css";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 import headerStyles from "../../styles/header-class.css";
 import svgStyles from "../../styles/svg.css";

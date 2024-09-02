@@ -2,7 +2,7 @@ import "./sgds-web-component";
 
 import * as Components from "../src/components";
 import { assert } from "@open-wc/testing";
-import type { LitElementConstructor } from "@open-wc/scoped-elements/lit-element.js";
+import type { LitElementConstructor } from "@open-wc/scoped-elements";
 
 const tagNameConverter = (key: string) => key.replace(/([a-z0–9])([A-Z])/g, "$1-$2").toLowerCase();
 

@@ -3,13 +3,13 @@ import SgdsPagination from "@govtechsg/sgds-web-component/react/pagination/index
 export const Pagination = () => {
   return (
     <SgdsPagination
-      datalength="50"
-      currentpage="1"
-      itemsperpage="5"
-      limit="3"
-      directionvariant="icon-text"
+      dataLength={50}
+      currentPage={1}
+      itemsPerPage={5}
+      limit={3}
+      directionVariant="icon-text"
       size="sm"
-      ellipsisjump="3"
+      ellipsisJump={3}
     />
   );
 };

@@ -1,4 +1,4 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { property, query } from "lit/decorators.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
