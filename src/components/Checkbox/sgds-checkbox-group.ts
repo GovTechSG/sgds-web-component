@@ -1,5 +1,5 @@
 import { html, nothing } from "lit";
-import {queryAssignedElements, state } from "lit/decorators.js";
+import { queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import checkboxGroupStyles from "./checkbox-group.css";
