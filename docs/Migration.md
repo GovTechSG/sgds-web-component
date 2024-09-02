@@ -15,7 +15,7 @@ We took this opportunity to upgrade our dependency packages.
 - Upgraded Lit from v2 to v3
 - Upgraded Storybook documentation from v6 to v8
 - ~~Upgraded @open-wc/scoped-elements from v2 to v3~~ 
-Our end-to-end testings with NextJS framework flagged out an error when using the scoped elements registry polyfill. We decided to remain in version 2 where loading of polyfill is optional as we have discussed with the authors of @open-wc/scoped-elements that there is no issue in staying in v2 until the major browsers shipped scoped element registries 
+Our end-to-end testings with NextJS framework flagged out an error when using the scoped elements registry polyfill. We decided to remain in version 2 where loading of polyfill is optional as [we have discussed with the authors of @open-wc/scoped-elements that there is no issue in staying in v2 until the major browsers shipped scoped element registries](https://github.com/open-wc/open-wc/pull/2733#issuecomment-1914229642)
 
 > Not loading the polyfill by default will also allow sites to opt out of it altogether. This means until the browser ships scoped registries, the developer can choose to fall back to the global registry, by not loading the polyfill. This will save bandwidth & complexity since it doesn't need to be loaded by the client in that case. [Source](https://open-wc.org/blog/scoped-elements-without-polyfill/)
 
