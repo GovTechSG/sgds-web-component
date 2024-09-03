@@ -1,4 +1,4 @@
-## v2.0.0-rc.1 (2024-08-29)
+## v2.0.0 (2024-09-03)
 
 See [migration guide](./docs/Migration.md)
 
