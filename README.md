@@ -697,7 +697,7 @@ Example below
 
 ```jsx
 import { SgdsMasthead, SgdsMainnav, SgdsMainnavDropdown, SgdsMainnavItem } from "@govtechsg/sgds-web-component/components";
-import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
+import { ScopedElementsMixin } from '@open-wc/scoped-elements';
 
 // Lit element
 @customElement('my-navbar')
