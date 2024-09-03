@@ -5,6 +5,8 @@ import { setCustomElementsManifest } from "@storybook/web-components";
 import "./global.css";
 import "../lib/themes/day.css";
 import "../lib/index.js";
+import "playground-elements/playground-ide.js";
+
 export const setCustomElementsManifestWithOptions = (
   customElements: any,
   options: { privateFields?: boolean }

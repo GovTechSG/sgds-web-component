@@ -107,6 +107,7 @@
     "husky": "^8.0.0",
     "lodash": "^4.17.21",
     "nodemon": "^2.0.22",
+    "playground-elements": "^0.19.1",
     "plop": "^3.1.2",
     "postcss": "^8.2.13",
     "prettier": "^2.8.7",

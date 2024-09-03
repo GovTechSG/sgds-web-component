@@ -73,3 +73,24 @@ export const ButtonWithIcon = {
   parameters: {},
   tags: ["!dev"]
 };
+
+export const ButtonPlayground = {
+  render: () => html`
+    <playground-ide editable-file-system line-numbers resizable>
+      <script type="sample/html" filename="index.html">
+        <!doctype html>
+        <body>
+          Hello
+          <script type="module" src="./index.js">&lt;/script>
+        </body>
+      </script>
+
+      <script type="sample/ts" filename="index.ts">
+        document.body.appendChild(document.createTextNode("World!"))
+      </script>
+    </playground-ide>
+  `,
+  name: "Playground",
+  args: {},
+  parameters: {}
+};
