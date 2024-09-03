@@ -111,7 +111,7 @@ button:focus:not(:focus-visible) {
 :host([variant="outlined"])  {
   --btn-color: var(--sgds-primary-text-emphasis);
   --btn-bg: var(--sgds-white);
-  --btn-border-color: var(--sgds-primary-border-subtle);
+  --btn-border-color: var(--sgds-primary);
   --btn-hover-bg: var(--sgds-primary-filled);
   --btn-hover-color: var(--sgds-white);
   --btn-focus-box-shadow-color: var(--sgds-primary-300);
