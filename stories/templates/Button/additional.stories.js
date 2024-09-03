@@ -79,14 +79,83 @@ export const ButtonPlayground = {
     <playground-ide editable-file-system line-numbers resizable>
       <script type="sample/html" filename="index.html">
         <!doctype html>
-        <body>
-          Hello
-          <script type="module" src="./index.js">&lt;/script>
+          <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component">&lt;/script>
+            <style>
+              sgds-button {
+                --size: "sm"
+              }
+              .red-border {
+                border: 20px solid red;
+              }
+            </style>
+
+            <form id="form1">
+              <label for="input1">Form 1 Input:</label>
+              <input type="text" id="input1" name="input1">
+            </form>
+
+            <!-- Form 2 -->
+            <form id="form2">
+              <label for="input2">Form 2 Input:</label>
+              <input type="text" id="input2" name="input2">
+            </form>
+
+
+          </head>
+          <body>
+            <sgds-button
+            id="dynamic-button"
+            variant="primary"
+            type="button"
+            size = "lg"
+            active = ""
+            class="red-border"
+            href="https://www.google.com"
+            target = "_blank"
+            download="sample-download.pdf"
+            form="form1"
+            formaction="https://httpbin.org/post"
+            formmethod="post"
+            formtarget="_blank"
+            formnovalidate>
+            Submit Form 1
+          </sgds-button>
+
+
+
         </body>
       </script>
 
-      <script type="sample/ts" filename="index.ts">
-        document.body.appendChild(document.createTextNode("World!"))
+      <script type="sample/css" filename="styles.css">
+
+        sgds-button {
+          --size: "sm"
+        }
+        .red-border {
+          border: 20px solid red;
+        }
+      </script>
+
+      <script type="sample/js" filename="button-settings.js">
+        document.addEventListener('DOMContentLoaded', () => {
+          const button = document.getElementById('dynamic-button');
+
+          if (button) {
+            button.addEventListener('sgds-blur', () => {
+              console.log('Button lost focus');
+            });
+
+
+            button.addEventListener('sgds-focus', () => {
+              console.log('Button gained focus');
+            });
+
+
+            console.log('Button label:', button.textContent.trim());
+          } else {
+            console.error('Button not found');
+          }
+        });
       </script>
     </playground-ide>
   `,
