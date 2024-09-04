@@ -1,11 +1,11 @@
+import { html } from "lit";
 import { property, query } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { defaultValue } from "../utils/defaultvalue";
 import { FormSubmitController, SgdsFormControl } from "../utils/form";
 import { watch } from "../utils/watch";
 import SgdsElement from "./sgds-element";
-import { classMap } from "lit/directives/class-map.js";
-import { html, nothing } from "lit";
-import { ifDefined } from "lit/directives/if-defined.js";
 
 export class FormCheckElement extends SgdsElement implements SgdsFormControl {
   /**@internal */
@@ -38,12 +38,6 @@ export class FormCheckElement extends SgdsElement implements SgdsFormControl {
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
 
-  /**Feedback text for error state when validated */
-  @property({ type: String, reflect: true }) invalidFeedback?: string;
-
-  /** Aligns the checkbox horizontally */
-  @property({ type: Boolean, reflect: true }) isInline = false;
-
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("checked")
   defaultChecked = false;
@@ -54,6 +48,10 @@ export class FormCheckElement extends SgdsElement implements SgdsFormControl {
   /** Marks the checkbox input as indeterminate , with indeterminate logo  */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
+  @watch("invalid", { waitUntilFirstUpdate: true })
+  _handleInvalidChange() {
+    this.emit("sgds-validity-change", { detail: { invalid: this.invalid } });
+  }
   /** Simulates a click on the checkbox. */
   public click() {
     this.input.click();
@@ -76,6 +74,10 @@ export class FormCheckElement extends SgdsElement implements SgdsFormControl {
   }
 
   protected _handleChange() {
+    if (this.indeterminate) {
+      this.indeterminate = !this.indeterminate;
+    }
+
     this.checked = !this.checked;
     this.value = this.input.value;
     this.emit("sgds-change", { detail: { checked: this.checked, value: this.value } });
@@ -113,8 +115,7 @@ export class FormCheckElement extends SgdsElement implements SgdsFormControl {
     return html`
       <div
         class=${classMap({
-          "form-check": true,
-          "form-check-inline": this.isInline
+          "form-check": true
         })}
       >
         <input
@@ -141,9 +142,6 @@ export class FormCheckElement extends SgdsElement implements SgdsFormControl {
         <label for="${this._inputId}" aria-label=${ifDefined(this.ariaLabel)} class="form-check-label"
           ><slot></slot
         ></label>
-        ${this.hasFeedback
-          ? html`<div id="${this._inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
-          : nothing}
       </div>
     `;
   }

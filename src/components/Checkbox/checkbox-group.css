@@ -8,33 +8,25 @@
     min-width: 0;
     padding: 0;
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    gap: var(--sgds-checkbox-group-gap); /* Space between elements */
+    flex-direction: column;
+    gap: var(--sgds-form-gap-md);
   }
-  
-  .checkbox-group-validation-input {
-    display: none;
-  }
-  
   .label-hint-container {
     display: flex;
-    flex-direction: column; /* Stack label and hint text vertically */
-    margin-bottom: var(--sgds-form-gap-md); /* Space below the hint text */
-  }
+    flex-direction: column;
+    gap: var(--sgds-form-gap-sm);
+  } 
   
   .label-hint-container .form-label {
     color: var(--sgds-form-color);
     font-size: var(--sgds-font-size-2);
     font-weight: var(--sgds-font-weight-regular);
-    margin-bottom: var(--sgds-form-gap-sm);
-    display: block; 
   }
 
   .label-hint-container .hint-text {
     color: var(--sgds-form-color-subtle);
     font-size: var(--sgds-font-size-1);
     font-weight: var(--sgds-font-weight-regular);
-    display: block;
   }
   
   .checkbox-container {
@@ -43,16 +35,13 @@
     gap: var(--sgds-form-gap-md); 
   }
   
- 
+  .error-message-container {
+    display: flex;
+    gap: var(--sgds-form-gap-sm);
+  }
+
   .error-message {
     color: var(--sgds-form-danger-color);
     font-size: var(--sgds-font-size-1);
     font-weight: var(--sgds-font-weight-regular);
-    margin-top: var(--sgds-form-gap-md); 
-  }
-
-  .error-message-container {
-    display: flex;
-    align-items: center;
-    gap: var(--sgds-form-gap-sm);
   }
