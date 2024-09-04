@@ -95,7 +95,7 @@
   --sgds-border-width-3: 3px;
   --sgds-border-width-4: 4px;
   --sgds-form-border-width-default: var(--sgds-border-width-1);
-  --sgds-form-border-width-thick: var(--sgds-border-width-2); 
+  --sgds-form-border-width-thick: var(--sgds-border-width-2);
 
   /* Primitive - Border Radius */
   --sgds-border-radius-none: 0px;
@@ -109,7 +109,7 @@
   --sgds-form-border-radius-xs: var(--sgds-border-radius-xs);
   --sgds-form-border-radius-sm: var(--sgds-border-radius-sm);
   --sgds-form-border-radius-md: var(--sgds-border-radius-md);
-  --sgds-form-border-radius-full: var(--sgds-border-radius-full); 
+  --sgds-form-border-radius-full: var(--sgds-border-radius-full);
 
   /* Primitive - Breakpoint */
   --sgds-breakpoint-xs: 0;
@@ -211,9 +211,16 @@
   --sgds-dimension-80: 80px;
   --sgds-dimension-96: 96px;
   --sgds-dimension-112: 112px;
+  --sgds-dimension-120: 120px;
   --sgds-dimension-128: 128px;
+  --sgds-dimension-136: 136px;
+  --sgds-dimension-144: 144px;
+  --sgds-dimension-168: 168px;
+  --sgds-dimension-192: 192px;
   --sgds-dimension-256: 256px;
+  --sgds-dimension-280: 280px;
   --sgds-dimension-320: 320px;
+  --sgds-dimension-480: 480px;
 
   /* Semantic - Spacer */
   --sgds-padding-none: var(--sgds-spacer-0);
@@ -262,7 +269,7 @@
   --sgds-form-height-3-xs: var(--sgds-dimension-12);
   --sgds-form-height-2-xs: var(--sgds-dimension-16);
   --sgds-form-height-xs: var(--sgds-dimension-20);
-  --sgds-form-height-sm: var(--sgds-dimension-24);  
+  --sgds-form-height-sm: var(--sgds-dimension-24);
   --sgds-form-height-md: var(--sgds-dimension-32);
   --sgds-form-height-lg: var(--sgds-dimension-40);
   --sgds-form-height-xl: var(--sgds-dimension-48);
@@ -284,7 +291,7 @@
   --sgds-form-icon-size-xs: var(--sgds-icon-size-xs);
   --sgds-form-icon-size-sm: var(--sgds-icon-size-sm);
   --sgds-form-icon-size-md: var(--sgds-icon-size-md);
-  --sgds-form-icon-size-lg: var(--sgds-icon-size-lg); 
+  --sgds-form-icon-size-lg: var(--sgds-icon-size-lg);
 
-
+  --sgds-form-box-shadow-focus: 0px 0px 0px 4px var(--sgds-blue-300);
 }
