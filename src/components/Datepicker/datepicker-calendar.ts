@@ -5,8 +5,8 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { createYearViewArray, setTimeToNoon } from "../../utils/time";
 import { watch } from "../../utils/watch";
-import styles from "./datepicker-calendar.scss";
 import { ViewEnum } from "./types";
+import datepickerCalendarStyle from "./datepicker-calendar.css";
 import { ifDefined } from "lit/directives/if-defined.js";
 
 const TODAY_DATE = new Date();
@@ -34,7 +34,7 @@ const keyPressAction = {
   }
 };
 export class DatepickerCalendar extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [datepickerCalendarStyle];
 
   /** @internal */
   static DAY_LABELS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -387,7 +387,7 @@ export class DatepickerCalendar extends SgdsElement {
     }
 
     const dayView = html`
-      <table class="text-center" role="grid">
+      <table role="grid">
         <thead>
           <tr>
             ${DatepickerCalendar.DAY_LABELS.map(

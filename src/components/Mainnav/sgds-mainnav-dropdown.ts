@@ -1,18 +1,17 @@
 import { html } from "lit";
 import { property, queryAsync } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import { ref } from "lit/directives/ref.js";
-import { DropdownElement } from "../../base/dropdown-element";
-import styles from "./sgds-mainnav-dropdown.scss";
 import { DropdownListElement } from "../../base/dropdown-list-element";
 import genId from "../../utils/generateId";
-import { classMap } from "lit/directives/class-map.js";
-
+import dropdownStyle from "../Dropdown/dropdown.css";
+import mainnavDropdownStyle from "./mainnav-dropdown.css";
 /**
  * @slot default - The menu items. Pass in sgds-dropdown-item as the menu items
  * @slot toggler - The content of the toggler to pass in html content. `togglerText` property takes precedence over this slot when both are defined.
  */
 export class SgdsMainnavDropdown extends DropdownListElement {
-  static styles = [DropdownElement.styles, styles];
+  static styles = [...DropdownListElement.styles, dropdownStyle, mainnavDropdownStyle];
 
   /**@internal */
   @queryAsync("a")
@@ -39,12 +38,13 @@ export class SgdsMainnavDropdown extends DropdownListElement {
 
   render() {
     return html`
-      <li class="sgds nav-item dropdown">
+      <div class="sgds nav-item dropdown">
         <a
           class="${classMap({
             "dropdown-toggle": true,
             "nav-link": true,
-            active: this.active
+            active: this.active,
+            disabled: this.disabled
           })}"
           ?disabled=${this.disabled}
           aria-expanded="${this.menuIsOpen}"
@@ -69,10 +69,10 @@ export class SgdsMainnavDropdown extends DropdownListElement {
             />
           </svg>
         </a>
-        <ul class="dropdown-menu" role="menu" part="menu">
+        <div class="dropdown-menu" role="menu" part="menu">
           <slot id="default" @click=${this.handleSelectSlot}></slot>
-        </ul>
-      </li>
+        </div>
+      </div>
     `;
   }
 }

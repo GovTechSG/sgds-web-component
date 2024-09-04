@@ -12,6 +12,7 @@
   "dependencies": {
     "@govtechsg/sgds": "^2.1.1",
     "@govtechsg/sgds-web-component": "file:../../../lib",
+    "@webcomponents/scoped-custom-element-registry": "^0.0.9",
     "vue": "^3.3.4"
   },
   "devDependencies": {

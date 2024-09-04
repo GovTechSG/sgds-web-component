@@ -1,4 +1,4 @@
-import { property, query, state } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
@@ -10,7 +10,10 @@ import type { SgdsFormControl } from "../../utils/form";
 import { FormSubmitController } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-
+import inputStyle from "./input.css";
+import feedbackStyles from "../../styles/feedback.css";
+import formHintStyles from "../../styles/form-hint.css";
+import formLabelStyles from "../../styles/form-label.css";
 /**
  * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
  *
@@ -21,31 +24,20 @@ import { watch } from "../../utils/watch";
  *
  */
 export class SgdsInput extends SgdsElement implements SgdsFormControl {
-  static styles = SgdsElement.styles;
+  static styles = [...SgdsElement.styles, feedbackStyles, formHintStyles, formLabelStyles, inputStyle];
   /**@internal */
   @query("input.form-control") input: HTMLInputElement;
   /**@internal */
   protected readonly formSubmitController = new FormSubmitController(this);
-  /** The type of input which works the same as HTMLInputElement*/
-  @property({ reflect: true }) type:
-    | "date"
-    | "datetime-local"
-    | "email"
-    | "number"
-    | "password"
-    | "search"
-    | "tel"
-    | "text"
-    | "time"
-    | "url" = "text";
+  /** The type of input which works the same as HTMLInputElement */
+  @property({ reflect: true }) type: "email" | "number" | "password" | "search" | "tel" | "text" | "time" | "url" =
+    "text";
   /** The input's label  */
   @property({ reflect: true }) label = "";
   /** The input's hint text below the label */
   @property({ reflect: true }) hintText = "";
   /**The input's name attribute */
   @property({ reflect: true }) name: string;
-  /**Forwards classes to the native HTMLInputElement of the component. Can be used to insert any classes from bootstrap such as mt-2 */
-  @property({ reflect: true }) inputClasses: string;
   /**Optional. Pass svg html of icons in string form*/
   @property({ type: String }) icon: string;
   /**Sets the minimum length of the input */
@@ -64,6 +56,17 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @property({ type: Boolean, reflect: true }) required = false;
   /**Makes the input readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
+  /** The input's minimum value. Only applies number input types. */
+  @property() min: number | string;
+
+  /** The input's maximum value. Only applies number input types. */
+  @property() max: number | string;
+
+  /**
+   * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
+   * implied, allowing any numeric value. Only applies to number input types.
+   */
+  @property() step: number | "any";
 
   /**The input's value attribute. */
   @property({ reflect: true }) value = "";
@@ -76,10 +79,8 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback = "";
 
-  /**@internal */
-  @state() invalid = false;
-  /**@internal */
-  @state() valid = false;
+  /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /**@internal */
   protected inputId: string = genId("input", this.type);
@@ -143,19 +144,12 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
     this.invalid = !this.input.checkValidity();
-    this.valid = this.input.checkValidity();
-    // remove validation for input that is not required, is already dirty and has empty value
-    if (!this.required && this.value === "") {
-      this.valid = false;
-    }
   }
   protected _renderInput() {
     return html`<input
         class=${classMap({
           "form-control": true,
-          "is-invalid": this.hasFeedback && this.invalid,
-          "is-valid": this.hasFeedback && this.valid,
-          [`${this.inputClasses}`]: this.inputClasses
+          "is-invalid": this.hasFeedback && this.invalid
         })}
         type=${this.type}
         id=${this.inputId}
@@ -170,6 +164,9 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
         .value=${live(this.value)}
         minlength=${ifDefined(this.minlength)}
         maxlength=${ifDefined(this.maxlength)}
+        min=${ifDefined(this.min)}
+        max=${ifDefined(this.max)}
+        step=${ifDefined(this.step as number)}
         @input=${() => this._handleChange("sgds-input")}
         @change=${() => this._handleChange("sgds-change")}
         @keydown=${this._handleKeyDown}
@@ -190,21 +187,27 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   }
   protected _renderLabel() {
     const labelTemplate = html`
-      <label for=${this.inputId} id=${this.labelId} class="form-label">${this.label}</label>
+      <label
+        for=${this.inputId}
+        id=${this.labelId}
+        class=${classMap({
+          "form-label": true,
+          required: this.required
+        })}
+        >${this.label}</label
+      >
     `;
     return this.label && labelTemplate;
   }
   protected _renderHintText() {
-    const hintTextTemplate = html`
-      <small id="${this.inputId}Help" class="text-muted form-text">${this.hintText}</small>
-    `;
+    const hintTextTemplate = html` <small id="${this.inputId}Help" class="form-text">${this.hintText}</small> `;
     return this.hintText && hintTextTemplate;
   }
   render() {
     const input = html`${this._renderInput()}`;
     // if iconName is defined
     const inputWithIcon = html`
-      <div class="sgds form-control-group ${this.inputClasses}">
+      <div class="sgds form-control-group">
         <span class="form-control-icon"> ${unsafeSVG(this.icon)} </span>
         ${input}
       </div>
@@ -212,7 +215,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     // if hintText is defined
 
     return html`
-      <div class="d-flex flex-column w-100">
+      <div class="form-control-container">
         ${html`${this._renderLabel()} ${this._renderHintText()} ${this.icon ? inputWithIcon : input} `}
       </div>
     `;

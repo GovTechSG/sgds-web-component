@@ -11,7 +11,6 @@ const ENTER = "Enter";
  */
 export class DropdownListElement extends DropdownElement {
   static styles = DropdownElement.styles;
-
   /**@internal */
   @query("ul.dropdown-menu")
   private menu: HTMLUListElement;

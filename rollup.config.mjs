@@ -7,7 +7,7 @@ import { visualizer } from "rollup-plugin-visualizer";
 import glob from "glob";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-
+import copy from 'rollup-plugin-copy'
 const external = [
   "@lit",
   "lit",
@@ -19,14 +19,19 @@ const external = [
   /lit\/.*/,
   /bootstrap\/.*/,
   "imask",
-  "date-fns"
+  "date-fns",
 ];
 
+const copyPlugin = copy({
+  targets: [
+    {src: "src/themes/**/*", dest: "lib/themes"}
+  ]
+})
 const wcPlugins = [
   resolve({
     browser: true,
     dedupe: external,
-    exportConditions: ['development']
+    exportConditions: ["development"]
   }),
   replace({
     "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
@@ -34,7 +39,7 @@ const wcPlugins = [
   }),
   postcss({
     minimize: true,
-    inject: false
+    inject: false,
   }),
   litcss(),
   typescript({
@@ -89,7 +94,7 @@ const buildSgdsPackage = () => {
         preserveModules: true,
         preserveModulesRoot: "src"
       },
-      plugins: wcPlugins,
+      plugins: [...wcPlugins, copyPlugin],
       external
     }
   ];

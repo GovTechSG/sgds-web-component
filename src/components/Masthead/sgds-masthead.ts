@@ -1,22 +1,19 @@
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./sgds-masthead.scss";
+import mastheadStyle from "./masthead.css";
+import svgStyles from "../../styles/svg.css";
+import anchorStyles from "../../styles/anchor.css";
 
 /**
  * @summary All .gov.sg digital services shall adopt The Official Government Banner for every page in the digital service and be placed at the top of the page.
  *
- * @cssproperty --masthead-font-family - Sets font family for masthead
- * @cssproperty --masthead-text-color - Sets overall text color
- * @cssproperty --masthead-link-color - Sets link color for `How to identify?` and `Trusted Site`
- * @cssproperty --masthead-link-color-hover - Sets link hover color for `How to identify?` and `Trusted Site`
  * @cssproperty --masthead-mobile-font-size - Sets the padding left and right for viewport width 1024px and below
  * @cssproperty --masthead-mobile-padding-x - Sets the font size for viewport width 1024px and below
  * @cssproperty --masthead-fluid-padding-x - Sets the container-fluid padding left and right for viewport width 1024px and above
- * @cssproperty --masthead-crest-color - Sets the lion head crest color.
  */
 export class SgdsMasthead extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [...SgdsElement.styles, svgStyles, anchorStyles, mastheadStyle];
 
   /**
    * Sets the masthead container width to 100% for all breakpoints
@@ -35,7 +32,7 @@ export class SgdsMasthead extends SgdsElement {
 
   render() {
     return html`
-      <div id="sgds-masthead" class="sgds-masthead" aria-label="A Singapore Government Agency Website">
+      <div id="sgds-masthead" class="sgds-masthead" aria-label="A Singapore Government Agency Website" role="banner">
         <div class="${this.fluid ? "container-fluid" : "container"}">
           <div class="row">
             <div class="col">
@@ -82,12 +79,12 @@ export class SgdsMasthead extends SgdsElement {
                     width="20"
                     height="20"
                     viewBox="0 0 20 20"
-                    fill="none"
+                    fill="currentColor"
                     class="sgds-masthead-identify-icon ${!this.toggleVisibility ? null : "show"}"
                   >
                     <path
                       d="M8.65188 6.85L8.64813 6.84625L10.0031 5.49125L17.0744 12.5625L15.7194 13.9175L10.0075 8.20562L4.2875 13.9256L2.9325 12.5706L8.6525 6.85062L8.65188 6.85Z"
-                      fill="#2F60CE"
+                      fill="currentColor"
                     ></path>
                   </svg>
                 </div>

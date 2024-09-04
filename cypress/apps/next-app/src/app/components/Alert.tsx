@@ -1,11 +1,17 @@
-import SgdsAlert from "@govtechsg/sgds-web-component/react/alert/index.js";
+import dynamic from "next/dynamic"
+const SgdsAlert = dynamic(
+  () => import("@govtechsg/sgds-web-component/react/alert/index.js"),
+  {
+    ssr: false,
+  }
+);
 import SgdsAlertHeading from "@govtechsg/sgds-web-component/react/alert-heading/index.js";
 import SgdsAlertLink from "@govtechsg/sgds-web-component/react/alert-link/index.js";
 
 export const Alert = () => {
   return (
     <>
-      <SgdsAlert alertclasses="undefined" variant="primary" show>
+      <SgdsAlert variant="primary" show>
         <span slot="icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -36,10 +42,10 @@ export const Alert = () => {
           </svg>
         </span>
         <div>
-          <SgdsAlertHeading headertag="h4">Hello, nice to meet you</SgdsAlertHeading>
+          <SgdsAlertHeading>Hello, nice to meet you</SgdsAlertHeading>
           <p>
             Aww yeah, you successfully read this important
-            <SgdsAlertLink href="#" target="undefined">
+            <SgdsAlertLink href="#">
               alert message
             </SgdsAlertLink>
             . This example text is going to run a bit longer so that you can see how spacing within an alert works with

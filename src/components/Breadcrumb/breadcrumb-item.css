@@ -1,0 +1,17 @@
+:host {
+  /* New in 2.0 */
+  font-size: var(--sgds-body-font-size);
+}
+slot[name="separator"]::slotted(*) {
+  padding-left: var(--sgds-spacer-3);
+  padding-right: var(--sgds-spacer-3);
+  color: var(--sgds-body-color);
+}
+
+:host(:last-of-type) .breadcrumb-item__separator {
+  display: none;
+}
+
+.breadcrumb-item.active {
+  color: var(--sgds-body-color);
+}

@@ -4,7 +4,8 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { html, literal } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import { FormSubmitController } from "../../utils/form";
-import styles from "./sgds-button.scss";
+import buttonStyles from "./button.css";
+import anchorStyles from "../../styles/anchor.css";
 
 export type ButtonVariant =
   | "primary"
@@ -16,6 +17,7 @@ export type ButtonVariant =
   | "light"
   | "dark"
   | "link"
+  | "outlined"
   | "outline-primary"
   | "outline-secondary"
   | "outline-success"
@@ -29,12 +31,17 @@ export type ButtonVariant =
  * @summary Custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
  *
  * @slot default - The button's label.
+ * @slot leftIcon - The slot for icon to the left of the button text
+ * @slot rightIcon - The slot for icon to the right of the button text
  *
  * @event sgds-blur - Emitted when the button is not focused.
  * @event sgds-focus - Emitted when the button is focused.
+ *
+ * @cssprop --btn-border-radius - Border radius of the button
+ *
  */
 export class SgdsButton extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [...SgdsElement.styles, anchorStyles, buttonStyles];
 
   @query(".btn") private button: HTMLButtonElement | HTMLLinkElement;
 
@@ -54,11 +61,8 @@ export class SgdsButton extends SgdsElement {
     }
   });
 
-  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as "outline" versions (prefixed by `outline-*`) */
+  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `outlined` and `danger`. @deprecated The following variants are deprecated from v2.0 and will be removed from v3 onwards: `secondary`, `success`, `warning`, `info`, `dark`, `light`, `link` as well as those prefixed by `outline-*` */
   @property({ reflect: true }) variant: ButtonVariant = "primary";
-
-  /** Optional for button. Can be used to insert any utility classes such as me-auto **/
-  @property({ reflect: true }) buttonClasses: string;
 
   /** Specifies a large or small button */
   @property({ reflect: true }) size: "sm" | "lg";
@@ -70,35 +74,43 @@ export class SgdsButton extends SgdsElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The behavior of the button with default as `type='button', `reset` resets all the controls to their initial values and `submit` submits the form data to the server */
-  @property() type: "button" | "submit" | "reset" = "button";
+  @property({ type: String, reflect: true }) type: "button" | "submit" | "reset" = "button";
 
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
-  @property() href: string;
+  @property({ type: String, reflect: true }) href: string;
 
   /** Tells the browser where to open the link. Only used when `href` is set. */
-  @property() target: "_blank" | "_parent" | "_self" | "_top";
+  @property({ type: String, reflect: true }) target: "_blank" | "_parent" | "_self" | "_top";
 
   /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
-  @property({ reflect: true }) download: string;
+  @property({ type: String, reflect: true }) download: string;
 
   /**
    * The "form owner" to associate the button with. If omitted, the closest containing form will be used instead. The
    * value of this attribute must be an id of a form in the same document or shadow root as the button.
    */
-  @property() form: string;
+  @property({ type: String, reflect: true }) form: string;
 
   /** Used to override the form owner's `action` attribute. */
-  @property({ attribute: "formaction" }) formAction: string;
+  @property({ type: String, reflect: true, attribute: "formaction" }) formAction: string;
 
   /** Used to override the form owner's `method` attribute.  */
-  @property({ attribute: "formmethod" }) formMethod: "post" | "get";
+  @property({ type: String, reflect: true, attribute: "formmethod" }) formMethod: "post" | "get";
 
   /** Used to override the form owner's `novalidate` attribute. */
-  @property({ attribute: "formnovalidate", type: Boolean })
+  @property({ attribute: "formnovalidate", type: Boolean, reflect: true })
   formNoValidate: boolean;
 
   /** Used to override the form owner's `target` attribute. */
-  @property({ attribute: "formtarget" }) formTarget: "_self" | "_blank" | "_parent" | "_top" | string;
+  @property({ type: String, reflect: true, attribute: "formtarget" }) formTarget:
+    | "_self"
+    | "_blank"
+    | "_parent"
+    | "_top"
+    | string;
+
+  /** The aria-label attribute to passed to button element when necessary */
+  @property({ type: String }) ariaLabel: string;
 
   /** Sets focus on the button. */
   public focus(options?: FocusOptions) {
@@ -130,12 +142,11 @@ export class SgdsButton extends SgdsElement {
       return;
     }
 
-    this.removeEventListener("click", this.clickHandler);
-    this.addEventListener("click", this.clickHandler);
+    this.removeEventListener("click", this._clickHandler);
+    this.addEventListener("click", this._clickHandler);
   }
 
-  /** @internal */
-  clickHandler = () => {
+  private _clickHandler = () => {
     if (this.type === "submit") {
       this.formSubmitController.submit(this);
     }
@@ -150,11 +161,10 @@ export class SgdsButton extends SgdsElement {
     return html`
       <${tag}
         class="sgds btn ${classMap({
-          disabled: isLink && this.disabled,
+          disabled: this.disabled,
           active: this.active,
-          [`btn-${this.variant}`]: this.variant,
           [`btn-${this.size}`]: this.size,
-          [`${this.buttonClasses}`]: this.buttonClasses
+          "btn-link": this.variant === "link"
         })}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
@@ -168,8 +178,11 @@ export class SgdsButton extends SgdsElement {
         @click=${this.handleClick}
         @focus=${this.handleFocus}
         @blur=${this.handleBlur}
+        aria-label=${ifDefined(this.ariaLabel)}
       >
+      <slot name="leftIcon"></slot>
       <slot></slot>
+      <slot name="rightIcon"></slot>
       </${tag}>
     `;
   }

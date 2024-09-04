@@ -1,0 +1,38 @@
+.card {
+  word-wrap: break-word;
+  background-clip: border-box;
+  background-color: var(--sgds-body-bg);
+  border:var(--sgds-border-width) solid var(--sgds-border-color-translucent);
+  border-radius: var(--sgds-border-radius);
+  color: var(--sgds-body-color);
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-width: 0;
+  position: relative;
+  box-shadow: none;
+}
+
+.card-body {
+  color: var(--sgds-body-color);
+  flex: 1 1 auto;
+  padding: var(--sgds-spacer-4);
+}
+.card-title {
+  color: var(--sgds-body-color);
+  margin-bottom: var(--sgds-spacer-2);
+}
+
+.card-subtitle,
+.card-text:last-child {
+  margin-bottom: 0;
+}
+
+slot[name="card-image"]::slotted(img) {
+  border-top-left-radius: calc(var(--sgds-border-radius) - var(--sgds-border-width));
+  border-top-right-radius: calc(var(--sgds-border-radius) - var(--sgds-border-width));
+}
+
+slot[name="card-link"]::slotted(*) {
+  font-weight: 700;
+}

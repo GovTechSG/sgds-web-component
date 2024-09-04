@@ -2,7 +2,7 @@ import { LitElement, html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-tab-panel.scss";
+import tabPanelStyles from "./tab-panel.css";
 
 let id = 0;
 
@@ -12,10 +12,11 @@ let id = 0;
  *
  * @csspart base - The component's base wrapper.
  *
- * @cssproperty --tab-panel-padding-y - The tab panel's padding.
+ * @cssproperty --tab-panel-padding-y - The y-axis padding of tab panel.
+ *
  */
 export class SgdsTabPanel extends LitElement {
-  static styles = styles;
+  static styles = tabPanelStyles;
   /**@internal */
   private readonly attrId = ++id;
   /**@internal */

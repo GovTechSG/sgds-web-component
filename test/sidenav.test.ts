@@ -1,8 +1,8 @@
+import "./sgds-web-component";
 import { aTimeout, assert, elementUpdated, expect, fixture, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 import { SgdsSidenavItem, type SgdsSidenavLink } from "../src/components";
-import "../src/index";
 
 describe("sgds-sidenav", () => {
   it("can be semantically compare with shadowDom trees", async () => {
@@ -10,9 +10,9 @@ describe("sgds-sidenav", () => {
     assert.shadowDom.equal(
       el,
       ` <nav>
-         <ul>
+         <div>
           <slot></slot>
-        </ul>
+        </div>
       </nav>`
     );
   });
@@ -21,9 +21,9 @@ describe("sgds-sidenav", () => {
     assert.shadowDom.equal(
       el,
       ` <nav class="sticky">
-         <ul>
+         <div>
           <slot></slot>
-        </ul>
+        </div>
       </nav>`
     );
   });
@@ -34,30 +34,45 @@ describe("sgds-sidenav-item", () => {
     const el = await fixture(html`<sgds-sidenav-item></sgds-sidenav-item>`);
     assert.shadowDom.equal(
       el,
-      `  <li class="sidenav-item" aria-haspopup="true">
-       <button class="sidenav-btn" aria-expanded="false" aria-selected="false" aria-disabled="false">
+      `  <div class="sidenav-item" aria-haspopup="true">
+       <button class="sidenav-btn" aria-expanded="false" aria-current="false" aria-disabled="false">
        <slot name="icon">
           </slot> 
        <slot name="title">
          </slot>
+        <slot name="caret-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-chevron-down"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+            />
+          </svg>
+        </slot>
        </button>
        <div class="sidenav-body"
         hidden=""
         style="height: 0px;"
         >
-         <ul class="sidenav-list">
+         <div class="sidenav-list">
            <slot>
            </slot>
-         </ul>
+         </div>
        </div>
-     </li>`,
+     </div>`,
       { ignoreAttributes: ["id", "aria-labelledby", "aria-controls"] }
     );
   });
   it("button id should equal to ul's aria-labelledBy attr", async () => {
     const el = await fixture(html`<sgds-sidenav-item></sgds-sidenav-item>`);
     const button = el.shadowRoot?.querySelector("button");
-    const ul = el.shadowRoot?.querySelector("ul");
+    const ul = el.shadowRoot?.querySelector(".sidenav-list");
     expect(button?.getAttribute("id")).to.equal(ul?.getAttribute("aria-labelledby"));
   });
   it("div.sidenav-body id should equal to button's aria-controls attr", async () => {
@@ -70,16 +85,18 @@ describe("sgds-sidenav-item", () => {
     const el = await fixture(html`<sgds-sidenav-item href="#"></sgds-sidenav-item>`);
     assert.shadowDom.equal(
       el,
-      `    <li class="sidenav-item" aria-haspopup="false">
+      `    <div class="sidenav-item" aria-haspopup="false">
        <a
          class="sidenav-btn"
          href="#"
-         aria-selected="false"
+         aria-current="false"
          aria-disabled="false"
        >
           <slot name="icon"></slot>
           <slot name="title"></slot>
-       </a>`
+       </a>
+       </div
+       `
     );
   });
   it("when active is true, it conveys active class to .sidenav-btn", async () => {
@@ -176,7 +193,7 @@ describe("sgds-sidenav, -item, -link interactions", () => {
     const SgdsSidenavItemTwo = el.querySelectorAll("sgds-sidenav-item")[1];
     const SgdsSidenavItemThree = el.querySelectorAll("sgds-sidenav-item")[2];
 
-    expect(SgdsSidenavItemThree.shadowRoot?.querySelector("div")).to.be.null;
+    expect(SgdsSidenavItemThree.shadowRoot?.querySelector("div.sidenav-body")).to.be.null;
     await waitUntil(() => SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body"));
     await waitUntil(() => SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body"));
     expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
@@ -222,7 +239,7 @@ describe("sgds-sidenav, -item, -link interactions", () => {
     const SgdsSidenavItemTwo = el.querySelectorAll("sgds-sidenav-item")[1];
     const SgdsSidenavItemThree = el.querySelectorAll("sgds-sidenav-item")[2];
 
-    expect(SgdsSidenavItemThree.shadowRoot?.querySelector("div")).to.be.null;
+    expect(SgdsSidenavItemThree.shadowRoot?.querySelector("div.sidenav-body")).to.be.null;
     await waitUntil(() => SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body"));
     await waitUntil(() => SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body"));
     expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
@@ -327,10 +344,10 @@ describe("a11y - sgds-sidenav-item", () => {
     const buttonId = button?.getAttribute("id");
     expect(buttonId).to.contain("button");
     expect(buttonId).to.contain("sidenav");
-    const ulSideNavListAttr = el.shadowRoot?.querySelector("ul.sidenav-list")?.getAttribute("aria-labelledby");
-    expect(buttonId).to.equal(ulSideNavListAttr);
+    const divSideNavListAttr = el.shadowRoot?.querySelector("div.sidenav-list")?.getAttribute("aria-labelledby");
+    expect(buttonId).to.equal(divSideNavListAttr);
   });
-  it("when active, button should have aria-selected=true ", async () => {
+  it("when active, button should have aria-current=true ", async () => {
     const el = await fixture(html`
       <sgds-sidenav-item active>
         <span slot="title">Title 1</span>
@@ -340,9 +357,9 @@ describe("a11y - sgds-sidenav-item", () => {
       </sgds-sidenav-item>
     `);
     const button = el.shadowRoot?.querySelector("button");
-    expect(button).to.have.attribute("aria-selected", "true");
+    expect(button).to.have.attribute("aria-current", "true");
   });
-  it("when active, anchor should have aria-selected=true ", async () => {
+  it("when active, anchor should have aria-current=true ", async () => {
     const el = await fixture(html`
       <sgds-sidenav-item href="#" active>
         <span slot="title">Title 1</span>
@@ -352,6 +369,6 @@ describe("a11y - sgds-sidenav-item", () => {
       </sgds-sidenav-item>
     `);
     const anchor = el.shadowRoot?.querySelector("a");
-    expect(anchor).to.have.attribute("aria-selected", "true");
+    expect(anchor).to.have.attribute("aria-current", "true");
   });
 });

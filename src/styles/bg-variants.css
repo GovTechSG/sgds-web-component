@@ -1,0 +1,24 @@
+.bg-primary {
+  background-color: var(--sgds-primary) !important;
+}
+.bg-secondary {
+  background-color: var(--sgds-secondary) !important;
+}
+.bg-success {
+  background-color: var(--sgds-success) !important;
+}
+.bg-info {
+  background-color: var(--sgds-info) !important;
+}
+.bg-warning {
+  background-color: var(--sgds-warning) !important;
+}
+.bg-danger {
+  background-color: var(--sgds-danger)!important;
+}
+.bg-light {
+  background-color: var(--sgds-light) !important;
+}
+.bg-dark {
+  background-color:var(--sgds-dark) !important;
+}

@@ -20,6 +20,7 @@
     "@angular/router": "^17.0.0",
     "@govtechsg/sgds": "^2.1.1",
     "@govtechsg/sgds-web-component": "file:../../../lib",
+    "@webcomponents/scoped-custom-element-registry": "^0.0.9",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"

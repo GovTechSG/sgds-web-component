@@ -1,6 +1,6 @@
+import "./sgds-web-component";
 import { assert, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
 import { SgdsButton, SgdsStepper } from "../src/components";
-import "../src/index";
 import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";
 

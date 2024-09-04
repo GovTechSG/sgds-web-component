@@ -1,9 +1,9 @@
 import { html } from "lit";
-import { property, queryAssignedNodes } from "lit/decorators.js";
+import { property, queryAssignedElements } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import SgdsSidenavItem from "./sgds-sidenav-item";
-import styles from "./sgds-sidenav.scss";
 import { classMap } from "lit/directives/class-map.js";
+import sidenavStyle from "./sidenav.css";
 
 /**
  * @summary The side navigation is used to display a list of links to move between pages within a related category.
@@ -16,7 +16,7 @@ import { classMap } from "lit/directives/class-map.js";
  * @cssproperty --sidenav-sticky-top - set the top value of the sticky sidenav. Defaults to 0rem
  */
 export class SgdsSidenav extends SgdsElement {
-  static styles = styles;
+  static styles = [...SgdsElement.styles, sidenavStyle];
 
   /** Allow sidenav items to stay open when another item is opened */
   @property({ type: Boolean, attribute: true })
@@ -27,8 +27,8 @@ export class SgdsSidenav extends SgdsElement {
   sticky = false;
 
   /** @internal */
-  @queryAssignedNodes()
-  private defaultNodes!: NodeListOf<SgdsSidenavItem>;
+  @queryAssignedElements()
+  private defaultNodes!: SgdsSidenavItem[];
 
   /** @internal */
   get items(): SgdsSidenavItem[] {
@@ -64,9 +64,9 @@ export class SgdsSidenav extends SgdsElement {
   render() {
     return html`
       <nav class=${classMap({ sticky: this.sticky })}>
-        <ul>
+        <div>
           <slot @click=${this.onToggle}></slot>
-        </ul>
+        </div>
       </nav>
     `;
   }

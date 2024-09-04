@@ -1,0 +1,24 @@
+.border-primary {
+  border-color: var(--sgds-primary) !important;
+}
+.border-secondary {
+  border-color: var(--sgds-secondary) !important;
+}
+.border-success {
+  border-color: var(--sgds-success) !important;
+}
+.border-info {
+  border-color: var(--sgds-info) !important;
+}
+.border-warning {
+  border-color: var(--sgds-warning) !important;
+}
+.border-danger {
+  border-color: var(--sgds-danger) !important;
+}
+.border-light {
+  border-color: var(--sgds-light) !important;
+}
+.border-dark {
+  border-color: var(--sgds-dark)!important;
+}

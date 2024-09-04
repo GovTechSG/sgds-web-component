@@ -8,7 +8,7 @@ export const Sidenav = () => {
       <SgdsSidenavItem href="">
         <span slot="title">SideNav Item #1 (control by Argstable) </span>
         <SgdsSidenavLink href="undefined">sgds-sidenav-link (control by Argstable)</SgdsSidenavLink>
-        <SgdsSidenavLink href="#" disabled="">
+        <SgdsSidenavLink href="#" disabled>
           sgds-sidenav-link
         </SgdsSidenavLink>
         <SgdsSidenavLink href="#">sgds-sidenav-link</SgdsSidenavLink>

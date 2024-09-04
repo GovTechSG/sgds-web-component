@@ -1,10 +1,10 @@
-import SgdsPagination from "../src/components/Pagination/sgds-pagination";
+import "./sgds-web-component";
+import { SgdsPagination } from "../src/components";
 import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";
 
-customElements.define("sgds-pagination", SgdsPagination);
 describe("sgds-pagination", () => {
   it("is defined", () => {
     const el = document.createElement("sgds-pagination");
@@ -473,6 +473,21 @@ describe("sgds-pagination", () => {
     expect(ellipsises?.length).to.equal(1);
     expect(ellipsises?.[0]).to.exist;
   });
+  it("showFirstPage set to true and limit set to page.length, no duplicate first page", async () => {
+    //8 pages, at page 8
+    const el = (await fixture(
+      html`
+        <sgds-pagination dataLength="40" limit="8" itemsPerPage="5" currentPage="8" showFirstPage></sgds-pagination>
+      `
+    )) as SgdsPagination;
+    const pageOne = el.shadowRoot?.querySelectorAll("li")[1];
+    const pageTwo = el.shadowRoot?.querySelectorAll("li")[2];
+    const pageThree = el.shadowRoot?.querySelectorAll("li")[3];
+
+    expect(pageOne?.textContent).to.contain("1");
+    expect(pageTwo?.textContent).to.contain("2");
+    expect(pageThree?.textContent).to.contain("3");
+  });
   it("showLastPage set to true, last page always appears and only last ellipsis shown", async () => {
     //8 pages, at page 1
     const el = (await fixture(
@@ -541,7 +556,7 @@ describe("sgds-pagination", () => {
       `
     )) as SgdsPagination;
 
-    const disabledEllipsis = el.shadowRoot?.querySelectorAll("li.page-item.disabled") as NodeListOf<HTMLLIElement>;
+    const disabledEllipsis = el.shadowRoot?.querySelectorAll(".ellipsis-disabled") as NodeListOf<HTMLLIElement>;
     expect(disabledEllipsis?.length).to.equal(2);
     expect(disabledEllipsis[0].onclick).to.equal(null);
     expect(disabledEllipsis[1].onclick).to.equal(null);

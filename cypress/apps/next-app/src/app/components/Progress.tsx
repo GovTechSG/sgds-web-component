@@ -7,9 +7,9 @@ export const Progress = () => {
       <SgdsProgressBar
         label="50%"
         variant="secondary"
-        aria-valuenow="50"
-        aria-minvalue="0"
-        aria-maxvalue="100"
+        value={50}
+        ariamin={0}
+        ariamax={100}
         aria-label="Loading in progress"
       ></SgdsProgressBar>
     </SgdsProgress>

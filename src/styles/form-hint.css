@@ -1,0 +1,6 @@
+.form-text {
+  color: var(--sgds-form-hint-text-color);
+  font-weight: var(--sgds-form-hint-text-font-weight);
+  display: block;
+  font-size: var(--sgds-body-font-size);
+}

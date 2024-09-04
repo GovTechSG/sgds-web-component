@@ -20,7 +20,7 @@ export const Mainnav = () => {
     <SgdsMainnav>
       <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
       <SgdsMainnavItem>ArgsTable Controlled </SgdsMainnavItem>
-      <SgdsMainnavDropdown togglertext="Dropdown" close="default">
+      <SgdsMainnavDropdown togglerText="Dropdown" close="default">
         <SgdsDropdownItem href="https://google.com">Item 1</SgdsDropdownItem>
         <SgdsDropdownItem href="#">Item 2</SgdsDropdownItem>
         <SgdsDropdownItem href="#">Item 3</SgdsDropdownItem>

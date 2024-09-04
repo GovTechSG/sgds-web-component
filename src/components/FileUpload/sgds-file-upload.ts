@@ -4,9 +4,11 @@ import { property } from "lit/decorators.js";
 import { createRef, ref } from "lit/directives/ref.js";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import SgdsElement from "../../base/sgds-element";
-import { SgdsButton } from "../Button/sgds-button";
-import styles from "./sgds-file-upload.scss";
+import { SgdsButton, type ButtonVariant } from "../Button/sgds-button";
+import fileUploadStyle from "./file-upload.css";
 import genId from "../../utils/generateId";
+import svgStyles from "../../styles/svg.css";
+import formHintStyles from "../../styles/form-hint.css";
 export type FileUploadButtonVariant =
   | "primary"
   | "secondary"
@@ -32,14 +34,13 @@ export type FileUploadButtonVariant =
  *
  * @event sgds-files-selected - Emitted when files are selected for uploading
  *
- * @cssproperty --fileupload-file-icon-fill - Left icon fill color
- * @cssproperty --fileupload-remove-icon-fill - Remove icon fill color
- * @cssproperty --fileupload-remove-icon-hover-fill - Remove icon mouse over fill color
- *
+ * @cssproperty --file-upload-file-icon-color - Left icon color
+ * @cssproperty --file-upload-remove-icon-color - Remove icon color
+ * @cssproperty --file-upload-remove-icon-hover-color - Remove icon hover color
  */
 
 export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [...SgdsElement.styles, svgStyles, formHintStyles, fileUploadStyle];
   /**@internal */
   static get scopedElements() {
     return {
@@ -49,8 +50,6 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   /** The button's variant. */
   @property({ reflect: true }) variant: FileUploadButtonVariant = "primary";
 
-  // /** Sets a unique id to the file input, required. */
-  // @property({ type: String }) controlId = "";
   //** Disable the fileuploader button */
   @property({ type: Boolean, reflect: true })
   disabled = false;
@@ -74,6 +73,9 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   @property({ type: String })
   cancelIcon = "";
 
+  /** The input's hint text below the label */
+  @property({ reflect: true }) hintText = "";
+
   /** @internal */
   @property({ type: Object, state: true })
   private files: FileList | undefined;
@@ -82,7 +84,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   @property({ type: Array })
   private selectedFiles: File[] = [];
 
-  setFileList(files: FileList) {
+  private _setFileList(files: FileList) {
     this.files = files;
     this.emit("sgds-files-selected");
     //Possible to pass in the files
@@ -112,12 +114,11 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
       this.selectedFiles = Array.from(files);
     }
     // Trigger a re-render of the component to update the list of selected files
-    this.setFileList(files);
+    this._setFileList(files);
     this.requestUpdate();
   }
 
-  /** @internal */
-  removeFileHandler(index: number) {
+  private _removeFileHandler(index: number) {
     const inputElement = this.inputRef.value;
     const attachments = inputElement.files;
 
@@ -129,7 +130,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
     // Assign buffer to file input
     inputElement.files = fileBuffer.files;
     // Re-populate selected files to the lists
-    this.setFileList(fileBuffer.files);
+    this._setFileList(fileBuffer.files);
     this.selectedFiles = Array.from(fileBuffer.files);
 
     // Trigger a re-render of the component to update the list of selected files
@@ -139,6 +140,14 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   /**@internal */
   protected inputId: string = genId("input", "file");
 
+  protected _renderHintText() {
+    const hintTextTemplate = html` <small id="${this.inputId}Help" class="form-text">${this.hintText}</small> `;
+    return this.hintText && hintTextTemplate;
+  }
+
+  private _sanitizeVariant(variant: FileUploadButtonVariant) {
+    return variant.replace("outline-", "") as ButtonVariant;
+  }
   render() {
     const getCheckedIcon = (checkedIcon: string) => {
       if (checkedIcon) {
@@ -166,7 +175,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"
-        fill="red"
+        fill="currentColor"
         class="bi bi-x-circle"
         viewBox="0 0 16 16"
       >
@@ -179,10 +188,10 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
 
     const listItems = this.selectedFiles.map(
       (file, index) => html`
-        <li key=${index} class="fileupload-list-item d-flex gap-2">
+        <li key=${index} class="fileupload-list-item">
           <span>${getCheckedIcon(this.checkedIcon)}</span>
           <span class="filename">${file.name}</span>
-          <span @click=${() => this.removeFileHandler(index)}>${getCancelIcon(this.cancelIcon)}</span>
+          <span @click=${() => this._removeFileHandler(index)}>${getCancelIcon(this.cancelIcon)}</span>
         </li>
       `
     );
@@ -191,19 +200,26 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
       <input
         ${ref(this.inputRef)}
         type="file"
-        class="d-none form-control"
         @change=${this.handleInputChange}
         ?multiple=${this.multiple}
         accept=${this.accept}
         id=${this.inputId}
       />
-      <sgds-button size=${this.size} variant=${this.variant} ?disabled=${this.disabled} @click=${this.handleClick}>
-        <label for=${this.inputId} class="file-upload__label"><slot></slot></label>
-      </sgds-button>
-
-      <ul class="sgds fileupload-list">
-        ${listItems}
-      </ul>
+      <div class="fileupload-container">
+        <sgds-button
+          size=${this.size}
+          variant=${this._sanitizeVariant(this.variant)}
+          ?outlined=${this.variant.includes("outline")}
+          ?disabled=${this.disabled}
+          @click=${this.handleClick}
+        >
+          <label for=${this.inputId} class="file-upload-label"><slot></slot></label>
+        </sgds-button>
+        ${this._renderHintText()}
+        <ul class="sgds fileupload-list">
+          ${listItems}
+        </ul>
+      </div>
     `;
   }
 }

@@ -1,0 +1,50 @@
+:host {
+  width: 100%;
+}
+
+:host([variant="secondary"]) .progress-bar {
+  --sgds-progress-bar-bg: var(--sgds-secondary);
+}
+:host([variant="warning"]) .progress-bar{
+  --sgds-progress-bar-bg: var(--sgds-warning);
+}
+:host([variant="danger"]) .progress-bar{
+  --sgds-progress-bar-bg: var(--sgds-danger);
+}
+:host([variant="success"]) .progress-bar{
+  --sgds-progress-bar-bg: var(--sgds-success);
+}
+:host([variant="info"]) .progress-bar{
+  --sgds-progress-bar-bg: var(--sgds-info);
+}
+:host([variant="dark"]) .progress-bar{
+  --sgds-progress-bar-bg: var(--sgds-dark);
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+.progress-bar {
+  --sgds-progress-bar-bg: var(--sgds-primary);
+  --sgds-progress-bar-transition: width 0.6s ease;
+  --sgds-progress-bar-color: var(--sgds-white);
+  --sgds-progress-bar-font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+  white-space: nowrap;
+  /* to match parent element's height */
+  font-size: var(--sgds-progress-bar-font-size);
+  color: var(--sgds-progress-bar-color);
+  background-color: var(--sgds-progress-bar-bg);
+  transition: var(--sgds-progress-bar-transition);
+  height: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .progress-bar {
+    transition: none;
+  }
+}

@@ -8,8 +8,7 @@ import { LG_BREAKPOINT, MD_BREAKPOINT, SM_BREAKPOINT, XL_BREAKPOINT, XXL_BREAKPO
 import { waitForEvent } from "../../utils/event";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import styles from "./sgds-mainnav.scss";
-
+import mainnavStyle from "./mainnav.css";
 export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
 
 const SIZES = {
@@ -35,16 +34,17 @@ const SIZES = {
  * @slot brand - Brand slot of SgdsMainnav. Pass in brand logo img here
  * @slot non-collapsible - Elements in this slot will not be collapsed
  *
- * @cssproperty --mainnav-background-color - Navbar's background color.
+ * @cssproperty --mainnav-bg - Navbar's background color.
  * @cssproperty --mainnav-padding-x - left and right padding for browser width > 768px
  * @cssproperty --mainnav-padding-y - top and bottom padding for browser width > 768px
  * @cssproperty --mainnav-mobile-padding-x - left and right padding for browser width < 768px
  * @cssproperty --mainnav-mobile-padding-y - top and bottom padding for browser width < 768px
- * @cssproperty --mainnav-borderBottom-width - bottom border width
- * @cssproperty --mainnav-borderBottom-color - borderBottom width color
+ * @cssproperty --mainnav-border-bottom-width - bottom border width
+ * @cssproperty --mainnav-border-bottom-color - border-bottom width color
+ * @cssproperty --mainnav-theme-color - The theme color of mainnav affecting the hover and active states of items in the mainnav
  */
 export class SgdsMainnav extends SgdsElement {
-  static styles = [SgdsElement.styles, styles];
+  static styles = [...SgdsElement.styles, mainnavStyle];
 
   /** @internal */
   @query(".navbar-toggler") header: HTMLElement;
@@ -177,41 +177,29 @@ export class SgdsMainnav extends SgdsElement {
         class="sgds navbar navbar-light
         ${this._expandClass()}"
       >
-        <a class="navbar-brand me-auto order-first" href=${this.brandHref} aria-label="brand-link">
+        <a class="navbar-brand  order-first" href=${this.brandHref} aria-label="brand-link">
           <slot name="brand"></slot>
         </a>
         <slot name="non-collapsible" class="${this.breakpointReached ? "order-1" : "order-last"}"></slot>
         <button
-          class="navbar-toggler order-1"
+          class="navbar-toggler order-1 "
           type="button"
           @click=${this.handleSummaryClick}
           aria-controls="${this.collapseId}"
           aria-expanded="${this.expanded}"
           aria-label="Toggle navigation"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            fill="currentColor"
-            class="bi bi-list"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-            />
-          </svg>
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div class=${collapseClass} id=${this.collapseId}>
-          <ul class="navbar-nav">
+          <div class="navbar-nav navbar-nav-scroll">
             <slot></slot>
             <slot
               name="end"
               class=${classMap({ "slot-end": !this.breakpointReached })}
               @slotchange=${this._handleSlotChange}
             ></slot>
-          </ul>
+          </div>
         </div>
       </nav>
     `;

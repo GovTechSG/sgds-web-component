@@ -1,10 +1,16 @@
-import SgdsToast from "@govtechsg/sgds-web-component/react/toast/index.js";
+import dynamic from "next/dynamic"
+const SgdsToast = dynamic(
+    () => import("@govtechsg/sgds-web-component/react/toast/index.js"),
+    {
+      ssr: false,
+    }
+  );
 import SgdsToastContainer from "@govtechsg/sgds-web-component/react/toast-container/index.js";
 
 export const Toast = () => {
   return (
     <SgdsToastContainer>
-      <SgdsToast show bg="undefined" variant="undefined" status="undefined" delay="5000">
+      <SgdsToast show variant="success"  delay={5000}>
         <span slot="icon">
         <svg
           xmlns="http://www.w3.org/2000/svg"

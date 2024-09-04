@@ -1,8 +1,8 @@
+import "./sgds-web-component";
 import { aTimeout, assert, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 import { SgdsToast, SgdsToastContainer } from "../src/components";
-import "../src/index";
 
 describe("<sgds-toast>", () => {
   it("semantically matches the DOM", async () => {
@@ -11,7 +11,7 @@ describe("<sgds-toast>", () => {
       el,
       `
         <div
-        class="toast sgds show"
+        class="toast sgds"
         hidden=""
         role="alert"
         aria-hidden="true"
@@ -20,13 +20,9 @@ describe("<sgds-toast>", () => {
       >
         <div class="toast-header">
           <slot name="icon"></slot>
-          <strong class="me-auto">Title</strong>
-          <small class="text-muted me-2"><slot name="duration"></slot></small>
-          <button
-            class="btn-sm btn-close"
-            aria-label="close toast"
-            data-dismiss="toast"
-          ></button>
+          <strong>Title</strong>
+          <small><slot name="duration"></slot></small>
+          <sgds-close-button ariaLabel="close toast"></sgds-close-button>
         </div>
         <div class="toast-body"><slot></slot></div>
       </div>
@@ -130,27 +126,18 @@ describe("<sgds-toast-container>", () => {
             `
     );
   });
-  it("when position prop is defined, it adds class position-absolute to the div.toast-container", async () => {
+  it("when position prop is defined, it adds class top-0 start-50 translate-middle-x to the div.toast-container", async () => {
     const el = await fixture<SgdsToastContainer>(
       html`<sgds-toast-container position="top-start"></sgds-toast-container>`
     );
-    expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("position-absolute");
-  });
-  it("when position prop is defined, it adds class position-absolute to the div.toast-container", async () => {
-    const el = await fixture<SgdsToastContainer>(
-      html`<sgds-toast-container position="top-start"></sgds-toast-container>`
-    );
-    expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("position-absolute");
-    expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("top-0");
-    expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("start-50");
-    expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("translate-middle-x");
+    expect(el.shadowRoot?.querySelector("div.toast-container")).to.have.class("top-start");
   });
   it("when position prop is top-end, it adds the right classes", async () => {
     const el = await fixture<SgdsToastContainer>(
       html`<sgds-toast-container position="top-end"></sgds-toast-container>`
     );
     expect(el.shadowRoot?.querySelector("div.toast-container")?.classList.value.trim()).to.equal(
-      "sgds toast-container position-absolute top-0 end-0"
+      "sgds toast-container top-end"
     );
   });
 });

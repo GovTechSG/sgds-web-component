@@ -1,9 +1,10 @@
 import customElements from "../custom-elements.json";
 import { themes } from "@storybook/theming";
-
+import "@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js";
 import { setCustomElementsManifest } from "@storybook/web-components";
 import "./global.css";
-
+import "../lib/themes/day.css";
+import "../lib/index.js";
 export const setCustomElementsManifestWithOptions = (
   customElements: any,
   options: { privateFields?: boolean }
@@ -28,16 +29,19 @@ export const setCustomElementsManifestWithOptions = (
 setCustomElementsManifestWithOptions(customElements, { privateFields: false });
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  viewMode: "docs",
   docs: {
     //@ts-ignore
-    theme: themes.sgdsTheme
+    theme: themes.sgdsTheme,
+    toc: {
+      headingSelector: "h1, h2, h3",
+      title: "Table of Contents",
+      disable: false
+    }
   },
   controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/
-    }
+    //  disable: true,
+    expanded: true
   },
   options: {
     storySort: {
@@ -52,3 +56,4 @@ export const parameters = {
     }
   }
 };
+export const tags = ["autodocs"];

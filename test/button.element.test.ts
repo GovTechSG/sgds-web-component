@@ -1,16 +1,18 @@
+import "./sgds-web-component";
 import { fixture, assert, expect, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
-import { SgdsButton } from "../src/components";
-import "../src/index";
+import type { SgdsButton } from "../src/components";
 
 describe("sgds-button", () => {
   it("renders with default values", async () => {
     const el = await fixture(html`<sgds-button></sgds-button>`);
     assert.shadowDom.equal(
       el,
-      `<button class="btn btn-primary sgds" type="button" aria-disabled="false" tabindex="0">
+      `<button class="btn sgds" type="button" aria-disabled="false" tabindex="0">
+      <slot name="leftIcon"></slot>
       <slot></slot>
+      <slot name="rightIcon"></slot>
       </button>
     `
     );

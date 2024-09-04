@@ -1,16 +1,15 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args =>
   html`
     <div style="height:400px;">
-      <sgds-toast-container .position=${args.position}>
+      <sgds-toast-container position=${ifDefined(args.position)}>
         <sgds-toast
           ?show=${args.show}
-          bg=${args.bg}
-          variant=${args.variant}
-          status=${args.status}
+          variant=${ifDefined(args.variant)}
           ?autohide=${args.autohide}
-          delay=${args.delay}
+          delay=${ifDefined(args.delay)}
           ?noAnimation=${args.noAnimation}
         >
           <svg

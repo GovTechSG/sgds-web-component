@@ -1,16 +1,14 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args => html` <sgds-progress>
   <sgds-progress-bar
-    label=${args.label}
-    ?striped=${args.striped}
-    ?animated=${args.animated}
-    variant=${args.variant}
-    .value=${args.value}
-    aria-valuenow=${args.value}
-    aria-minvalue=${args.ariamin}
-    aria-maxvalue=${args.ariamax}
-    aria-label=${args.arialabel}
+    label=${ifDefined(args.label)}
+    variant=${ifDefined(args.variant)}
+    value=${ifDefined(args.value)}
+    ariamin=${ifDefined(args.ariamin)}
+    ariamax=${ifDefined(args.ariamax)}
+    arialabel=${ifDefined(args.arialabel)}
   >
   </sgds-progress-bar>
 </sgds-progress>`;

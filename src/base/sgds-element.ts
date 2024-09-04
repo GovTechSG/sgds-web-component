@@ -1,6 +1,5 @@
-import { LitElement } from "lit";
-import styles from "./sgds-element.scss";
-
+import { LitElement, type CSSResult } from "lit";
+import style from "./sgds-element.css";
 /**
  * @cssprop --sgds-{stateColor} - State colors in hexadecimal value
  * @cssprop --sgds-{stateColor}-rgb - State colors in rgb value
@@ -11,7 +10,7 @@ import styles from "./sgds-element.scss";
  */
 
 export default class SgdsElement extends LitElement {
-  static styles = styles;
+  static styles: CSSResult[] = [style];
   /** Emits a custom event with more convenient defaults. */
   emit(name: string, options?: CustomEventInit) {
     const event = new CustomEvent(name, {

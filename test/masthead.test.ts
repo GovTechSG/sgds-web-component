@@ -1,5 +1,5 @@
-import { SgdsMasthead } from "../src/components";
-import "../src/index";
+import "./sgds-web-component";
+import type { SgdsMasthead } from "../src/components";
 import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 
@@ -9,7 +9,7 @@ describe("sgds-masthead", () => {
     assert.shadowDom.equal(
       el,
       ` 
-      <div id="sgds-masthead" class="sgds-masthead" aria-label="A Singapore Government Agency Website">
+      <div id="sgds-masthead" class="sgds-masthead" role="banner" aria-label="A Singapore Government Agency Website">
         <div class="container">
           <div class="row">
             <div class="col">

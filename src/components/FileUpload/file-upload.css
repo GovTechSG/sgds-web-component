@@ -1,0 +1,60 @@
+:host {
+  --file-upload-left-icon-color: var(--sgds-success);
+  --file-upload-remove-icon-color: var(--sgds-body-color);
+  --file-upload-remove-icon-hover-color: ;
+}
+
+.fileupload-list-item {
+  display: flex;
+  gap: var(--sgds-spacer-2);
+}
+.fileupload-list-item span:not(:first-of-type) {
+  cursor: pointer;
+}
+.fileupload-list-item span:first-of-type svg {
+  color: var(--file-upload-left-icon-color);
+}
+.fileupload-list-item span:last-of-type svg {
+  color: var(--file-upload-remove-icon-color);
+}
+.fileupload-list-item span:last-of-type svg:hover {
+  color: var(--file-upload-remove-icon-hover-color);
+}
+
+.file-upload-label {
+  display: flex;
+  align-items: center;
+  gap: var(--sgds-spacer-2);
+}
+/** end scss */
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.sgds.fileupload-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-spacer-3);
+  list-style-type: none;
+}
+
+.sgds.fileupload-list .fileupload-list-item .filename {
+  color: var(--sgds-link);
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+
+input {
+  display: none;
+}
+sgds-button,
+label {
+  cursor: pointer;
+}
+
+.fileupload-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-spacer-3);
+}
