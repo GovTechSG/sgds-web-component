@@ -3,7 +3,7 @@ import { property } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import SgdsElement from "../../base/sgds-element";
 import progressBarStyle from "./progress-bar.css";
-export type ProgressBarVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark";
+export type ProgressBarVariant = "primary" | "neutral";
 
 export class SgdsProgressBar extends SgdsElement {
   static styles = [progressBarStyle];
@@ -49,7 +49,7 @@ export class SgdsProgressBar extends SgdsElement {
             aria-valuemax=${this.ariamax}
           ></div>
         </div>
-        <span>${this.label ? html`${this.label}` : nothing}</span>
+        <span class="label">${this.label ? html`${this.label}` : nothing}</span>
       </div>
     `;
   }
