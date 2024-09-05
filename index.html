@@ -163,6 +163,18 @@
 
     <main>
         <div class="container">
+            <sgds-link href="https://google.com">Default</sgds-link>
+            <sgds-link href="https://google.com" disabled>Default (disabled)</sgds-link>
+            <sgds-link href="https://google.com" variant="danger">Danger</sgds-link>
+            <sgds-link href="https://google.com" variant="danger" disabled>Danger (disabled)</sgds-link>
+            <sgds-link href="https://google.com" size="lg">Large</sgds-link>
+            <sgds-link href="https://google.com" size="sm">Small</sgds-link>
+            <sgds-link href="https://google.com">
+                <i class="bi bi-arrow-left" slot="leftIcon"></i>
+                leftIcon</sgds-link>
+            <sgds-link href="https://google.com">
+                <i class="bi bi-arrow-right" slot="rightIcon"></i>
+                rightIcon</sgds-link>
             <sgds-icon name="6-square"></sgds-icon>
             <sgds-textarea required label="Label" name="textarea" textareaclasses="" rows="4" invalidfeedback="test"
                 placeholder="Placeholder" minlength="" hasFeedback maxlength="100" resize="vertical" defaultvalue="">
@@ -241,6 +253,16 @@
                 steps='[{"stepHeader":"Personal Details","component":"1 test"},{"stepHeader":"Address and Contact Information","component":"2 test"},{"stepHeader":"Review","component":"3 test"}]'>
 
             </sgds-stepper>
+        <form>
+            <sgds-checkbox-group hasFeedback invalidFeedback="Please correct the invalid options above">
+                <span slot="label">Select Your Preferences</span>
+                <span slot="hint-text">Please choose one or more options:</span>
+                <sgds-checkbox  slot="checkbox" value="option1" hasFeedback required>Option 1</sgds-checkbox>
+                <sgds-checkbox slot="checkbox" value="option2" required>Option 2 indeterminate</sgds-checkbox>
+                <sgds-checkbox disabled slot="checkbox" value="option3" required>Option 3</sgds-checkbox>
+            </sgds-checkbox-group>
+            <sgds-button type="submit">Submit</sgds-button>
+        </form>
 
             <sgds-button refId="myStepper" methodType="increment" variant="primary">Next</sgds-button>
             <sgds-button refId="myStepper" methodType="decrement" variant="secondary">Back</sgds-button>
@@ -447,7 +469,7 @@
                         </sgds-badge>
                         <sgds-badge variant="info" dismissible>
                             Testing
-                            <i slot="lefticon" class="bi bi-apple"></i>
+                            <i slot="leftIcon" class="bi bi-apple"></i>
                         </sgds-badge>
                         <sgds-badge variant="success">
                             Testing
@@ -734,9 +756,11 @@
             <div class="container">
                 <h2>Checkbox</h2>
                 <form id="radio-submit">
-                    <sgds-checkbox id="hehe" isInline invalid hasFeedback invalidFeedback="test">1</sgds-checkbox>
-                    <sgds-checkbox hasFeedback isInline>2</sgds-checkbox>
-                    <sgds-checkbox isInline>3</sgds-checkbox>
+                    <sgds-checkbox id="hehe" isInline invalid hasFeedback invalidFeedback="test" variant = "default">default</sgds-checkbox>
+                    <sgds-checkbox hasFeedback isInline variant = "invalid">invalid</sgds-checkbox>
+                    <sgds-checkbox isInline variant = "hover">hover</sgds-checkbox>
+                    <sgds-checkbox isInline variant = "focus">focus</sgds-checkbox>
+                    <sgds-checkbox isInline variant = "disabled">disabled</sgds-checkbox>
                     <sgds-switch invalid checked hasFeedback>test</sgds-switch>
                     <sgds-button type="submit">Submit</sgds-button>
                 </form>
@@ -851,24 +875,10 @@
                 <div class="row">
                     <div class="col is-6">
                         <sgds-toast show="" action dismissable>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
-                                <path
-                                    d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z">
-                                </path>
-                            </svg>
-                            <span slot="duration">2 mins ago</span>
-                            This is a toast notifications
+                            his is a toast notifications This is a toast notifications his is a toast notifications his is a toast notifications his is a toast notifications his is a toast notifications his is a toast notifications 
                         </sgds-toast>
                         <sgds-toast show="" dismissable>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
-                                <path
-                                    d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z">
-                                </path>
-                            </svg>
-                            <span slot="duration">2 mins ago</span>
-                            This is a toast notifications
+                            This is a toast notifications helklo world 
                         </sgds-toast>
                         <sgds-toast show="" >
                             <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -910,11 +920,11 @@
                             </sgds-toast>
                             <sgds-toast show bg="warning" status="success"></sgds-toast>
                         </sgds-toast-container>
-                        <sgds-toast-container position="top-center">
+                        <!-- <sgds-toast-container position="top-center">
                             <sgds-toast show title="hello">This is a toast <span slot="duration">just
                                     now</span></sgds-toast>
                             <sgds-toast show title="hello">This is a toast</sgds-toast>
-                        </sgds-toast-container>
+                        </sgds-toast-container> -->
                     </div>
                 </div>
             </div>
