@@ -1,10 +1,10 @@
-:host {
+/* :host {
   --sgds-progress-bar-bg: var(--sgds-primary-bg);
 }
 
 :host([variant="neutral"]) {
   --sgds-progress-bar-bg: var(--sgds-default-color-emphasis);
-}
+} */
 
 progress {
   vertical-align: baseline;
@@ -22,22 +22,23 @@ progress {
 }
 
 .progress-bar {
-  --sgds-progress-bar-bg: var(--sgds-primary-bg);
-  --sgds-progress-bar-transition: width 0.6s ease;
-  --sgds-progress-bar-color: var(--sgds-white);
-  --sgds-progress-bar-font-size: 0.75rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  text-align: center;
-  white-space: nowrap;
-  /* to match parent element's height */
-  font-size: var(--sgds-font-size-1);
-  color: var(--sgds-default-color);
-  background-color: var(--sgds-progress-bar-bg);
+  background-color: var(--sgds-primary-bg);
   transition: width 0.6s ease;
   height: var(--sgds-dimension-4);
+}
+
+:host([variant="neutral"]) .progress-bar {
+  background-color: var(--sgds-default-color-emphasis);
+}
+
+.label {
+  white-space: nowrap;
+  font-size: var(--sgds-font-size-1);
+  color: var(--sgds-default-color);
 }
 
 @media (prefers-reduced-motion: reduce) {
