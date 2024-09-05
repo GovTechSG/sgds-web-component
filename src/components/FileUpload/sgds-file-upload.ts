@@ -1,6 +1,7 @@
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import { createRef, ref } from "lit/directives/ref.js";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import SgdsElement from "../../base/sgds-element";
@@ -59,6 +60,9 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   @property({ type: Boolean, reflect: true })
   multiple = false;
 
+  /** Specifies the starting active page upon render*/
+  @property({ type: Number }) maxFiles: number;
+
   /** Specify the acceptable file type  */
   @property({ type: String, reflect: true })
   accept = "";
@@ -88,6 +92,10 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
     //Possible to pass in the files
   }
 
+  /**@internal */
+  @state()
+  private invalidFeedback: string;
+
   // Create a ref to the input element
   /** @internal */
   private inputRef = createRef<HTMLInputElement>();
@@ -104,16 +112,85 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   }
 
   /** @internal */
-  private handleInputChange(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    const files = inputElement.files as FileList;
+  private _handleDragOver(event: DragEvent) {
+    event.preventDefault();
+    this.shadowRoot?.querySelector("#drag-drop-area").classList.add("dragover");
+  }
 
-    if (files.length > 0) {
-      this.selectedFiles = Array.from(files);
+  /** @internal */
+  private _handleDragLeave(event: DragEvent) {
+    event.preventDefault();
+    this.shadowRoot?.querySelector("#drag-drop-area").classList.remove("dragover");
+  }
+
+  /** @internal */
+  private _handleFileList(files: FileList) {
+    if (files.length) {
+      if (files.length > 5) {
+        this.invalidFeedback = "You can upload a maximum of 5 files.";
+        this.selectedFiles = [];
+        return;
+      }
+
+      let valid = true;
+      const acceptedTypes = this.accept.split(",").map(type => type.trim());
+      for (let i = 0; i < files.length; i++) {
+        if (!this._isFileTypeAccepted(files[i], acceptedTypes)) {
+          this.invalidFeedback = `File type not accepted: ${files[i].name}`;
+          valid = false;
+          break;
+        }
+
+        if (files[i].size > 10 * 1024 * 1024) {
+          // 10MB in bytes
+          this.invalidFeedback = "File size exceeds 10MB.";
+          valid = false;
+          break;
+        }
+      }
+
+      if (valid) {
+        this.invalidFeedback = "";
+        this.selectedFiles = Array.from(files);
+      } else {
+        this.selectedFiles = [];
+      }
     }
+
     // Trigger a re-render of the component to update the list of selected files
     this.setFileList(files);
     this.requestUpdate();
+  }
+
+  /** @internal */
+  private _isFileTypeAccepted(file: File, acceptedTypes: string[]) {
+    return acceptedTypes.some(type => {
+      if (type.startsWith(".")) {
+        return file.name.endsWith(type);
+      } else if (type.endsWith("/*")) {
+        return file.type.startsWith(type.slice(0, -2));
+      } else {
+        return file.type === type;
+      }
+    });
+  }
+
+  /** @internal */
+  private _handleDropFile(event: DragEvent) {
+    event.preventDefault();
+    this.shadowRoot?.querySelector("#drag-drop-area").classList.remove("dragover");
+
+    const files = event.dataTransfer.files;
+    const inputElement = this.shadowRoot?.querySelector("input") as HTMLInputElement;
+    inputElement.files = files;
+    this._handleFileList(files);
+  }
+
+  /** @internal */
+  private handleInputChange(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const files = inputElement.files as FileList;
+    this._handleFileList(files);
   }
 
   /** @internal */
@@ -191,15 +268,26 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
       <input
         ${ref(this.inputRef)}
         type="file"
-        class="d-none form-control"
+        class="d-none form-control ${classMap({
+          "is-invalid": this.invalidFeedback
+        })}"
         @change=${this.handleInputChange}
         ?multiple=${this.multiple}
         accept=${this.accept}
         id=${this.inputId}
       />
-      <sgds-button size=${this.size} variant=${this.variant} ?disabled=${this.disabled} @click=${this.handleClick}>
-        <label for=${this.inputId} class="file-upload__label"><slot></slot></label>
-      </sgds-button>
+      <div
+        id="drag-drop-area"
+        class="drag-drop-area"
+        @click=${this.handleClick}
+        @dragover=${this._handleDragOver}
+        @dragleave=${this._handleDragLeave}
+        @drop=${this._handleDropFile}
+      >
+        <div class="icon"><slot name="icon"></slot></div>
+        <slot></slot>
+      </div>
+      <div class="invalid-feedback">${this.invalidFeedback}</div>
 
       <ul class="sgds fileupload-list">
         ${listItems}

@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 1rem;
+}
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+@media (min-width: 48rem) {
+  h2 {
+      font-size: 1.75rem;
+      line-height: 2.25rem;
+  }
+}

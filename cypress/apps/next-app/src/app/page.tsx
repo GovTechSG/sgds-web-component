@@ -1,5 +1,6 @@
 "use client";
-// import "@webcomponents/scoped-custom-element-registry"
+import "@webcomponents/scoped-custom-element-registry";
+import "@govtechsg/sgds-web-component/themes/day.css";
 import Image from "next/image";
 import styles from "./page.module.css";
 import { Accordion } from "./components/Accordion";
@@ -64,7 +65,7 @@ export default function Home() {
       <Textarea />
       <Toast />
       <Tooltip />
-      <Footer /> 
+      <Footer />
     </main>
   );
 }

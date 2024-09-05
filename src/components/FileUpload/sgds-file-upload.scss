@@ -25,3 +25,31 @@
   align-items: center;
   gap: 0.5rem;
 }
+
+.drag-drop-area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--sgds-gray-300);
+  border-radius: 4px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.drag-drop-area.dragover {
+  border-color: var(--sgds-primary);
+  background-color: var(--sgds-primary-200);
+}
+
+.icon {
+  width: 3rem;
+  height: 3rem;
+}
+
+slot[name=icon]::slotted(svg) {
+  width: 100%;
+  height: 100%;
+}

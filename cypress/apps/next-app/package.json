@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@govtechsg/sgds-web-component": "file:../../../lib",
+    "@govtechsg/sgds-web-component": "2.0.0-rc.2",
     "@webcomponents/scoped-custom-element-registry": "^0.0.9",
     "next": "14.2.3",
     "react": "^18",
