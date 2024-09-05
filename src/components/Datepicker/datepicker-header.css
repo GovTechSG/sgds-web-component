@@ -1,7 +1,7 @@
 .datepicker-header {
   padding: 1.5rem 1.5rem 0;
   border: none;
-  color: var(--sgds-datepicker-theme-color);
+  color: var(--datepicker-theme-color);
   display: flex;
   text-align: center;
   justify-content: space-between;
@@ -11,20 +11,20 @@
 .datepicker-header button {
   cursor: pointer;
   background-color: transparent;
-  color: var(--sgds-datepicker-theme-color);
+  color: var(--datepicker-theme-color);
   border: none;
   font-weight: bold;
   font-size: 14px;
   line-height: var(--sgds-line-height-lg);
 }
 .datepicker-header button:focus {
-  outline: var(--sgds-datepicker-theme-color) auto 2px;
+  outline: var(--datepicker-theme-color) auto 2px;
 }
 .datepicker-header button.disabled {
   cursor: not-allowed;
 }
 .datepicker-header button:hover:not(.disabled) {
-  background-color: var(--sgds-datepicker-hover-bg);
+  background-color: var(--datepicker-hover-bg);
 }
 .datepicker-header svg {
   font-size: 10rem;

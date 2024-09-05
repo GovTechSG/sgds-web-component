@@ -17,12 +17,6 @@
   width: -webkit-fill-available;
   width: -moz-available;
 }
-/* .sgds.combobox > .form-control {
-  padding-left: 3rem;
-}
-.sgds.combobox > .form-control:focus {
-  z-index: 3;
-} */
 .sgds.combobox .dropdown-toggle {
   width: 100%;
 }

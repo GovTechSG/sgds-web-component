@@ -1,6 +1,6 @@
 import { expect, fixture, html } from "@open-wc/testing";
-import { SgdsSwitch } from "../src/components";
-import "../src/index";
+import { SgdsSwitch } from "../src/internals/Switch/sgds-switch";
+import "../src/internals/Switch";
 
 describe("<sgds-switch>", () => {
   it("when size prop is passed in , should update class of form-check-input", async () => {

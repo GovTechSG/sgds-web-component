@@ -1,7 +1,4 @@
-:host {
-  --sgds-switch-margin-bottom: var(--sgds-spacer-2);
-}
-:host([checked]) {
+:host([checked]) .form-check {
   --sgds-form-border-color: var(--sgds-form-bg);
   --sgds-form-bg: var(--sgds-info-filled);
 }
@@ -16,7 +13,7 @@ input {
 }
 .form-check {
   display: block;
-  margin-bottom: var(--sgds-switch-margin-bottom);
+  margin-bottom: var(--sgds-spacer-2);
   min-height: 2rem;
 }
 .form-check .form-check-input {

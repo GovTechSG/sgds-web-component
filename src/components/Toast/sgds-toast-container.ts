@@ -8,8 +8,7 @@ import toastContainerStyle from "./toast-container.css";
  *
  * @slot default - The slot for `sgds-toast` elements
  *
- * @cssproperty --sgds-toast-container-slot-elements-gap - The gap between multiple `sgds-toast` elements. Defaults to 0.5rem
- * @cssproperty --sgds-toast-container-z-index - The z-index of the toast container, determining its stacking order relative to other elements.
+ * @cssproperty --toast-container-slot-elements-gap - The gap between multiple `sgds-toast` elements. Defaults to 0.5rem
  */
 export class SgdsToastContainer extends SgdsElement {
   static styles = [toastContainerStyle];

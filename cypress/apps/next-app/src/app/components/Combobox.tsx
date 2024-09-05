@@ -9,7 +9,7 @@ export const Combobox = () => {
     return (
       <SgdsCombobox 
         label="Items" 
-        hinttext="" 
+        hintText="" 
         name="undefined" 
         placeholder="ComboBox" 
         value="" 

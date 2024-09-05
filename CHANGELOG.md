@@ -1,3 +1,7 @@
+## v2.0.0 (2024-09-03)
+
+See [migration guide](./docs/Migration.md)
+
 ## v1.4.0 (2024-08-01)
 
 ### Feat

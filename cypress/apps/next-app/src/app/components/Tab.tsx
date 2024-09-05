@@ -6,11 +6,11 @@ import SgdsBadge from "@govtechsg/sgds-web-component/react/badge/index.js";
 export const Tab = () => {
   return (
     <>
-      <SgdsTabGroup tabsclasses="mb-3" bodyclasses="undefined">
+      <SgdsTabGroup>
         <SgdsTab slot="nav" panel="home">
           Home
         </SgdsTab>
-        <SgdsTab slot="nav" panel="profile" active="">
+        <SgdsTab slot="nav" panel="profile" active>
           Profile
         </SgdsTab>
         <SgdsTab slot="nav" panel="contact">
@@ -30,7 +30,7 @@ export const Tab = () => {
       </SgdsTabGroup>
       <br />
       <h5>Basic toggle</h5>
-      <SgdsTabGroup variant="tabs-basic-toggle" tabsclasses="mb-3">
+      <SgdsTabGroup variant="tabs-basic-toggle">
         <SgdsTab slot="nav" panel="home">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,7 @@ export const Tab = () => {
           </svg>
           Home
         </SgdsTab>
-        <SgdsTab active="" slot="nav" panel="profile">
+        <SgdsTab slot="nav" panel="profile">
           Profile
         </SgdsTab>
         <SgdsTab slot="nav" panel="contact">
@@ -63,7 +63,7 @@ export const Tab = () => {
         <SgdsTabPanel name="contact">Contact information</SgdsTabPanel>
         <br />
         <h5>Info toggle</h5>
-        <SgdsTabGroup variant="tabs-info-toggle" tabsclasses="mb-3">
+        <SgdsTabGroup variant="tabs-info-toggle">
           <SgdsTab slot="nav" panel="home">
             <span slot="icon">
             <svg
@@ -85,7 +85,7 @@ export const Tab = () => {
             <span slot="label">Profile</span>
           </SgdsTab>
           <SgdsTab slot="nav" panel="contact">
-            <SgdsBadge slot="count" variant="light" badgeclasses="text-dark">
+            <SgdsBadge slot="count" variant="light">
               100
             </SgdsBadge>
             <span slot="label">Contact</span>

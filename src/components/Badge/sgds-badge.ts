@@ -4,7 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import badgeStyle from "./badge.css";
 import { watch } from "../../utils/watch";
-import SgdsCloseButton from "../CloseButton/sgds-close-button";
+import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral";
 
 /**
@@ -34,7 +34,7 @@ export class SgdsBadge extends SgdsElement {
   }
 
   /** Controls the appearance of the alert  */
-  @property({ type: Boolean, reflect: true }) show = true;
+  @property({ type: Boolean, reflect: true }) show = false;
 
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `info`, `success`, `danger`, `warning`, 'neutral' */
   @property({ reflect: true }) variant: BadgeVariant = "info";
@@ -61,16 +61,14 @@ export class SgdsBadge extends SgdsElement {
           <div
             class="  
           ${classMap({
-              sgds: true,
               [`badge-dismissible`]: this.dismissible,
               badge: true,
-              show: this.show,
               outlined: this.outlined
             })}
             "
             aria-hidden=${this.show ? "false" : "true"}
           >
-            ${!this.dismissible ? html`<slot name="leftIcon" class="left-icon"></slot>` : nothing}
+            ${!this.dismissible ? html`<slot name="leftIcon"></slot>` : nothing}
             <span class="badge-label">
               <slot></slot>
             </span>

@@ -1,7 +1,7 @@
 :host {
-  --sgds-masthead-mobile-font-size: 0.6875rem;
-  --sgds-masthead-mobile-padding-x: 0.75rem;
-  --sgds-masthead-fluid-padding-x: 0.75rem;
+  --masthead-mobile-font-size: 0.6875rem;
+  --masthead-mobile-padding-x: 0.75rem;
+  --masthead-fluid-padding-x: 0.75rem;
 }
 
 b {
@@ -12,7 +12,7 @@ b {
 }
 
 a {
-  color: #0049dc;
+  color: #2f5fd0;
   text-decoration: underline;
 }
 
@@ -77,11 +77,11 @@ a {
 
 .sgds-masthead {
   font-size: 0.875rem;
-  background-color: #eaeaea;
+  background-color: #f0f0f0;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
   color: #252525;
   @media screen and (max-width: 1023px) {
-    font-size: var(--sgds-masthead-mobile-font-size);
+    font-size: var(--masthead-mobile-font-size);
     .col,
     .row {
       padding-left: 0;
@@ -123,13 +123,13 @@ a {
 
 .sgds-masthead-button {
   display: flex;
-  color: #0049dc;
+  color: #2f5fd0;
   align-items: center;
   cursor: pointer;
 }
 
 .sgds-masthead-button:hover {
-  color: #0022b9;
+  color: #4371d6;
 }
 
 .sgds-masthead-button-text {
@@ -167,7 +167,7 @@ a {
     gap: 1rem;
     font-size: 1rem;
     @media screen and (max-width: 1023px) {
-      font-size: var(--sgds-masthead-mobile-font-size);
+      font-size: var(--masthead-mobile-font-size);
       gap: 0.5rem;
     }
     .content {
@@ -221,12 +221,12 @@ a {
 a.trusted-websites-link {
   display: inline-flex;
   align-items: center;
-  color: #0049dc;
+  color: #2f5fd0;
   margin-left: 0.125rem;
 }
 
 a.trusted-websites-link:hover {
-  color: #0022b9;
+  color: #4371d6;
 }
 
 @media screen and (max-width: 1023px) {
@@ -237,20 +237,20 @@ a.trusted-websites-link:hover {
 
 @media screen and (max-width: 1023px) {
   .sgds-masthead > .container {
-    padding-left: var(--sgds-masthead-mobile-padding-x);
-    padding-right: var(--sgds-masthead-mobile-padding-x);
+    padding-left: var(--masthead-mobile-padding-x);
+    padding-right: var(--masthead-mobile-padding-x);
   }
 }
 
 .sgds-masthead > .container-fluid {
-  padding-left: var(--sgds-masthead-fluid-padding-x);
-  padding-right: var(--sgds-masthead-fluid-padding-x);
+  padding-left: var(--masthead-fluid-padding-x);
+  padding-right: var(--masthead-fluid-padding-x);
 }
 
 @media screen and (max-width: 1023px) {
   .sgds-masthead > .container-fluid {
-    padding-left: var(--sgds-masthead-mobile-padding-x);
-    padding-right: var(--sgds-masthead-mobile-padding-x);
+    padding-left: var(--masthead-mobile-padding-x);
+    padding-right: var(--masthead-mobile-padding-x);
   }
 }
 

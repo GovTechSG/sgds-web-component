@@ -22,25 +22,6 @@ import formLabelStyles from "../../styles/form-label.css";
  * @event sgds-focus - Emitted when input is in focus.
  * @event sgds-blur - Emitted when input is not in focus.
  *
- * @cssproperty --sgds-input-padding-x - The x-axis padding of the input
- * @cssproperty --sgds-input-padding-y - The y-axis padding of the input
- * @cssproperty --sgds-input-line-height - The line height of text in the input
- * @cssproperty --sgds-input-font-weight - Sets the font weight of text in the input
- * @cssproperty --sgds-input-font-size - Sets the font size of text in the input
- * @cssproperty --sgds-input-border-radius - The border radius of the input
- * @cssproperty --sgds-input-border-width - The thickness of the input's border
- * @cssproperty --sgds-input-border-color - The border color of the input
- * @cssproperty --sgds-input-focus-box-shadow-color - The color of box shadow of input at focused state
- * @cssproperty --sgds-input-focus-box-shadow - The box shadow of input at focused state
- * @cssproperty --sgds-input-color - Sets the text colors of input
- * @cssproperty --sgds-input-placeholder-color - Sets the text color input's placeholder. 
- * @cssproperty --sgds-form-label-color - Sets the text color of input's label
- * @cssproperty --sgds-form-label-font-weight - Sets the font weight of input's label
- * @cssproperty --sgds-form-hint-text-color - The color of hint text
- * @cssproperty --sgds-form-hint-text-font-size - The font size of hint text
- * @cssproperty --sgds-form-hint-text-font-weight - The font weight of hint text
-
- *
  */
 export class SgdsInput extends SgdsElement implements SgdsFormControl {
   static styles = [...SgdsElement.styles, feedbackStyles, formHintStyles, formLabelStyles, inputStyle];
@@ -100,8 +81,6 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
 
   /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
   @property({ type: Boolean, reflect: true }) invalid = false;
-  /** Marks the input as invalid. Replace the pseudo :valid selector for absent in custom elements */
-  @property({ type: Boolean, reflect: true }) valid = false;
 
   /**@internal */
   protected inputId: string = genId("input", this.type);
@@ -165,18 +144,12 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
     this.invalid = !this.input.checkValidity();
-    this.valid = this.input.checkValidity();
-    // remove validation for input that is not required, is already dirty and has empty value
-    if (!this.required && this.value === "") {
-      this.valid = false;
-    }
   }
   protected _renderInput() {
     return html`<input
         class=${classMap({
           "form-control": true,
-          "is-invalid": this.hasFeedback && this.invalid,
-          "is-valid": this.hasFeedback && this.valid
+          "is-invalid": this.hasFeedback && this.invalid
         })}
         type=${this.type}
         id=${this.inputId}

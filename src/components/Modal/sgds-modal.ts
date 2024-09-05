@@ -12,8 +12,8 @@ import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll";
 import { HasSlotController } from "../../utils/slot";
 import { watch } from "../../utils/watch";
 import modalStyle from "./modal.css";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
-import SgdsCloseButton from "../CloseButton/sgds-close-button";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 import headerStyles from "../../styles/header-class.css";
 import svgStyles from "../../styles/svg.css";
 /**
@@ -36,15 +36,14 @@ import svgStyles from "../../styles/svg.css";
  * @csspart body - The modal's body where the content lies
  * @csspart footers - The modal's footer
  *
- * @cssproperty --sgds-modal-panel-padding - The general modal padding of modal component. Applied to body, footer and header.
- * @cssproperty --sgds-modal-panel-z-index - The z-index of modal panel
- * @cssproperty --sgds-modal-panel-width - The width of modal panel.
- * @cssproperty --sgds-modal-panel-height - The height of modal panel.
- * @cssproperty --sgds-modal-panel-bg - The background color of modal panel
- * @cssproperty --sgds-modal-panel-border-radius - The border radius of modal panel
- * @cssproperty --sgds-modal-header-border-bottom - The bottom border of header
- * @cssproperty --sgds-modal-overlay-bg - The overlay's background color
- * @cssproperty --sgds-modal-panel-margin-top - The margin top of the modal panel. Sets the top start position of the modal in relation to the document
+ * @cssproperty --modal-panel-padding - The general modal padding of modal component. Applied to body, footer and header.
+ * @cssproperty --modal-panel-z-index - The z-index of modal panel
+ * @cssproperty --modal-panel-width - The width of modal panel.
+ * @cssproperty --modal-panel-height - The height of modal panel.
+ * @cssproperty --modal-panel-bg - The background color of modal panel
+ * @cssproperty --modal-panel-border-radius - The border radius of modal panel
+ * @cssproperty --modal-header-border-bottom - The bottom border of header
+ * @cssproperty --modal-overlay-bg - The overlay's background color
  */
 export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, headerStyles, svgStyles, modalStyle];

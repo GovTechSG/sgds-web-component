@@ -7,7 +7,7 @@ export const Template = args =>
       <sgds-toast-container position=${ifDefined(args.position)}>
         <sgds-toast
           ?show=${args.show}
-          status=${ifDefined(args.status)}
+          variant=${ifDefined(args.variant)}
           ?autohide=${args.autohide}
           delay=${ifDefined(args.delay)}
           ?noAnimation=${args.noAnimation}

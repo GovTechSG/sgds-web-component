@@ -1,7 +1,5 @@
 "use client";
-import "@webcomponents/scoped-custom-element-registry"
-import Image from "next/image";
-import styles from "./page.module.css";
+import "@govtechsg/sgds-web-component/themes/day.css";
 import { Accordion } from "./components/Accordion";
 import { ActionCard } from "./components/ActionCard";
 import { Alert } from "./components/Alert";
@@ -31,7 +29,6 @@ import { Table } from "./components/Table";
 import { Textarea } from "./components/Textarea";
 import { Toast } from "./components/Toast";
 import { Tooltip } from "./components/Tooltip";
-import dynamic from "next/dynamic";
 
 export default function Home() {
   return (
@@ -53,7 +50,7 @@ export default function Home() {
       <Input />
       <Modal />
       <Pagination />
-      {/* <Progress /> */}
+      <Progress />
       <QuantityToggle />
       <Radio />
       <Sidenav />

@@ -23,20 +23,11 @@ import accordionItemStyle from "./accordion-item.css";
  * @slot accordion-content - The accordion-item content slot.
  * @slot accordion-caret - The caret icon of accordion-item.
  *
- * @cssprop --sgds-accordion-item-padding-y - The top and bottom padding for the container of accordion item's content
- * @cssprop --sgds-accordion-item-padding-x - The right and left padding for the container of accordion item's content
- * @cssprop --sgds-accordion-item-border-radius - The border radius of the accordion item
- * @cssprop --sgds-accordion-item-font-weight - The font weight of accordion-btn when it is not collapsed
- * @cssprop --sgds-accordion-item-line-height - The line height of accordion
- * @cssprop --sgds-accordion-item-btn-color - The text color of the button in accordion-item
- * @cssprop --sgds-accordion-item-btn-border-radius - The border radius of button in accordion-item
- * @cssprop --sgds-accordion-item-btn-bg - The background color of the button in accordion-item
- * @cssprop --sgds-accordion-item-btn-icon-transform - The transform value of caret icon when accordion is toggled open and close
- * @cssprop --sgds-accordion-item-btn-icon-transition - The transition value of caret icon when accordion is toggled open and close
- * @cssprop --sgds-accordion-item-btn-focus-border-color - The border color of accordion button on focus state
- * @cssprop --sgds-accordion-item-btn-focus-box-shadow-color - The box shadow color of accordion button on focus state
- * @cssprop --sgds-accordion-item-btn-focus-box-shadow - The box-shadow of accordion button on focus state
- * @cssprop --sgds-accordion-item-content-color - The content text color of the accordion-item
+ * @cssprop --accordion-item-padding-y - The top and bottom padding for the container of accordion item's content
+ * @cssprop --accordion-item-padding-x - The right and left padding for the container of accordion item's content
+ * @cssprop --accordion-item-border-radius - The border radius of the accordion item
+ * @cssprop --accordion-item-font-weight - The font weight of accordion-btn when it is not collapsed
+ * @cssprop --accordion-item-line-height - The line height of accordion
  */
 export class SgdsAccordionItem extends SgdsElement {
   static styles = [...SgdsElement.styles, accordionItemStyle];

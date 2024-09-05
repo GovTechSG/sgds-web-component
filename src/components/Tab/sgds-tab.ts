@@ -17,10 +17,6 @@ let id = 0;
  *
  * @csspart base - The base wrapper of tab
  *
- * @cssproperty  --sgds-tab-theme-color - The theme colour of tab. Defaults to `--sgds-primary`
- * @cssproperty  --sgds-tab-color - The color of tab.
- * @cssproperty  --sgds-tab-bg - The background color of tab.
- * @cssproperty  --sgds-tab-basic-toggle-hover-color - The text color of basic toggle tab in hover state.
  *
  */
 export class SgdsTab extends SgdsElement {

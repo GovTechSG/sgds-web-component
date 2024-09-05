@@ -1,10 +1,10 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html, nothing } from "lit";
 import { property, query } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import { setDefaultAnimation } from "../../utils/animation-registry";
 import { watch } from "../../utils/watch";
-import SgdsCloseButton from "../CloseButton/sgds-close-button";
+import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 import toastStyle from "./toast.css";
 /**
  * @summary Toast allows you to convey quick messaging notifications to the user.

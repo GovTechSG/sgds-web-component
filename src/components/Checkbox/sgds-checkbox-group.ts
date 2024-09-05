@@ -76,3 +76,5 @@ export class SgdsCheckboxGroup extends SgdsElement {
     `;
   }
 }
+
+export default SgdsCheckboxGroup;

@@ -9,6 +9,7 @@ export const Template = args =>
       value=${ifDefined(args.value)}
       rows=${ifDefined(args.rows)}
       invalidFeedback=${ifDefined(args.invalidFeedback)}
+      ?invlaid=${ifDefined(args.invalidFeedback)}
       placeholder=${ifDefined(args.placeholder)}
       ?autofocus=${args.autofocus}
       ?disabled=${args.disabled}

@@ -30,7 +30,7 @@ export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
  */
 export class SgdsButton extends SgdsElement {
   static styles = [...SgdsElement.styles, anchorStyles, buttonStyles];
-
+  /** @internal */
   @query(".btn") private button: HTMLButtonElement | HTMLLinkElement;
 
   /** @internal */
@@ -57,8 +57,8 @@ export class SgdsButton extends SgdsElement {
     }
   });
 
-  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `dark`, `light`, `link` as well as "outline" versions (prefixed by `outline-*`) */
-  @property({ reflect: true }) variant: ButtonVariant;
+  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `danger`, `outline`, `ghost` */
+  @property({ reflect: true }) variant: ButtonVariant = "primary";
 
   /** Specifies a small, medium or large button, the size is medium by default. */
   @property({ reflect: true }) size: "sm" | "md" | "lg" = "md";
@@ -126,15 +126,15 @@ export class SgdsButton extends SgdsElement {
     this.button.blur();
   }
 
-  handleBlur() {
+  private _handleBlur() {
     this.emit("sgds-blur");
   }
 
-  handleFocus() {
+  private _handleFocus() {
     this.emit("sgds-focus");
   }
 
-  handleClick(event: MouseEvent) {
+  private _handleClick(event: MouseEvent) {
     if (this.disabled) {
       event.preventDefault();
       event.stopPropagation();
@@ -154,14 +154,14 @@ export class SgdsButton extends SgdsElement {
     }
   };
 
-  handleLeftIconSlotchange(e: Event) {
+  private _handleLeftIconSlotchange(e: Event) {
     const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLOrSVGImageElement>;
     if (childNodes.length > 0) {
       return (this._hasLeftIcon = true);
     }
   }
 
-  handleRightIconSlotchange(e: Event) {
+  private _handleRightIconSlotchange(e: Event) {
     const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLOrSVGImageElement>;
     if (childNodes.length > 0) {
       return (this._hasRightIcon = true);
@@ -173,7 +173,7 @@ export class SgdsButton extends SgdsElement {
     const tag = isLink ? literal`a` : literal`button`;
     return html`
       <${tag}
-        class="sgds btn ${classMap({
+        class="btn ${classMap({
           disabled: this.disabled,
           active: this.active,
           "full-width": this.fullWidth,
@@ -191,14 +191,14 @@ export class SgdsButton extends SgdsElement {
         role=${ifDefined(isLink ? "button" : undefined)}
         aria-disabled=${this.disabled ? "true" : "false"}
         tabindex=${this.disabled ? "-1" : "0"}
-        @click=${this.handleClick}
-        @focus=${this.handleFocus}
-        @blur=${this.handleBlur}
+        @click=${this._handleClick}
+        @focus=${this._handleFocus}
+        @blur=${this._handleBlur}
         aria-label=${ifDefined(this.ariaLabel)}
       >
-      <slot name="leftIcon" @slotchange=${this.handleLeftIconSlotchange}></slot>
+      <slot name="leftIcon" @slotchange=${this._handleLeftIconSlotchange}></slot>
       <span><slot></slot></span>
-      <slot name="rightIcon" @slotchange=${this.handleRightIconSlotchange}></slot>
+      <slot name="rightIcon" @slotchange=${this._handleRightIconSlotchange}></slot>
       </${tag}>
     `;
   }

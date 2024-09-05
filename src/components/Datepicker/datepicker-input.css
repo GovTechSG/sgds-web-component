@@ -1,10 +1,17 @@
-
-:host{
-    --sgds-input-border-radius: var(--sgds-border-radius) 0 0 var(--sgds-border-radius);
-}
 .input-container {
-    display: flex;
-    flex-direction: row;
-    width: -webkit-fill-available;
-    width: -moz-available;
+  display: flex;
+  flex-direction: row;
+  width: -webkit-fill-available;
+  width: -moz-available;
+}
+
+.form-control {
+  border-radius: var(--sgds-border-radius) 0 0 var(--sgds-border-radius);
+}
+
+.input-feedback {
+  display: flex;
+  flex-direction: column;
+  width: -webkit-fill-available;
+  width: -moz-available;
 }

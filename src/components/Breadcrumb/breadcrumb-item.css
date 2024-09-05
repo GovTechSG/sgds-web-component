@@ -1,15 +1,11 @@
 :host {
   /* New in 2.0 */
-  --sgds-breadcrumb-item-padding-x: var(--sgds-spacer-3);
-  --sgds-breadcrumb-item-active-color: var(--sgds-body-color);
-  --sgds-breadcrumb-item-separator-color: var(--sgds-body-color);
-  --sgds-breadcrumb-item-font-size: var(--sgds-body-font-size);
-  font-size: var(--sgds-breadcrumb-font-size);
+  font-size: var(--sgds-body-font-size);
 }
 slot[name="separator"]::slotted(*) {
-  padding-left: var(--sgds-breadcrumb-item-padding-x);
-  padding-right: var(--sgds-breadcrumb-item-padding-x);
-  color: var(--sgds-breadcrumb-item-separator-color);
+  padding-left: var(--sgds-spacer-3);
+  padding-right: var(--sgds-spacer-3);
+  color: var(--sgds-body-color);
 }
 
 :host(:last-of-type) .breadcrumb-item__separator {
@@ -17,5 +13,5 @@ slot[name="separator"]::slotted(*) {
 }
 
 .breadcrumb-item.active {
-  color: var(--sgds-breadcrumb-item-active-color);
+  color: var(--sgds-body-color);
 }

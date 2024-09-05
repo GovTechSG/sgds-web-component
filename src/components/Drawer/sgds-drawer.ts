@@ -10,8 +10,8 @@ import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
 import { HasSlotController } from "../../utils/slot.js";
 import { watch } from "../../utils/watch.js";
 import drawerStyles from "./drawer.css";
-import SgdsCloseButton from "../CloseButton/sgds-close-button";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
+import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 
 /**
  * @summary Drawers slide in from a container to expose additional options and information.
@@ -42,13 +42,11 @@ import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
  * @csspart body - The drawer's body.
  * @csspart footer - The drawer's footer.
  *
- * @cssproperty --sgds-drawer-size - The preferred size of the drawer. This will be applied to the drawer's width or height
+ * @cssproperty --drawer-size - The preferred size of the drawer. This will be applied to the drawer's width or height
  *   depending on its `placement`. Note that the drawer will shrink to accommodate smaller screens.
- * @cssproperty --sgds-drawer-padding - The amount of padding to use for the header, body and footer
- * @cssproperty --sgds-drawer-bg - The drawer's background color.
- * @cssproperty --sgds-drawer-button-gap - The drawer's flex gap between buttons.
- * @cssproperty --sgds-drawer-overlay-bg - The drawer's overlay background colour
- * @cssproperty --sgds-drawer-z-index - The drawer's z-index
+ * @cssproperty --drawer-padding - The amount of padding to use for the header, body and footer
+ * @cssproperty --drawer-bg - The drawer's background color.
+ * @cssproperty --drawer-button-gap - The drawer's flex gap between buttons.
  *
  */
 export class SgdsDrawer extends ScopedElementsMixin(SgdsElement) {

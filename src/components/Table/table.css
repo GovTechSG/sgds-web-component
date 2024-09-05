@@ -7,31 +7,6 @@
   --table-active-bg: rgba(0, 0, 0, 0.1);
   --table-hover-color: var(--sgds-gray-600);
   --table-hover-bg: rgba(0, 0, 0, 0.075);
-
-  --sgds-table-color-type: initial;
-  --sgds-table-bg-type: initial;
-  --sgds-table-color-state: initial;
-  --sgds-table-bg-state: initial;
-  --sgds-table-color: var(--sgds-emphasis-color);
-  --sgds-table-bg: var(--sgds-body-bg);
-  --sgds-table-border-color: var(--sgds-border-color);
-  --sgds-table-accent-bg: transparent;
-  --sgds-table-striped-color: var(--sgds-emphasis-color);
-  --sgds-table-striped-bg: rgba(var(--sgds-emphasis-color-rgb), 0.05);
-  --sgds-table-active-color: var(--sgds-emphasis-color);
-  --sgds-table-active-bg: rgba(var(--sgds-emphasis-color-rgb), 0.1);
-  --sgds-table-hover-color: var(--sgds-emphasis-color);
-  --sgds-table-hover-bg: rgba(var(--sgds-emphasis-color-rgb), 0.075);
-
-  --sgds-table-color: #000;
-  --sgds-table-bg: #b1b1b1;
-  --sgds-table-border-color: #9f9f9f;
-  --sgds-table-striped-bg: #a8a8a8;
-  --sgds-table-striped-color: #000;
-  --sgds-table-active-bg: #9f9f9f;
-  --sgds-table-active-color: #000;
-  --sgds-table-hover-bg: #a4a4a4;
-  --sgds-table-hover-color: #000;
 }
 
 tbody,
@@ -41,6 +16,9 @@ thead,
 tr {
   border: 0 solid;
   border-color: inherit;
+}
+th {
+  text-align: -webkit-match-parent;
 }
 table {
   border-collapse: collapse;
@@ -53,15 +31,15 @@ table {
   --sgds-table-color-state: initial;
   --sgds-table-bg-state: initial;
   --sgds-table-color: var(--sgds-emphasis-color);
-  --sgds-table-bg: var(--sgds-body-bg);
+  --sgds-table-bg: var(--table-bg);
   --sgds-table-border-color: var(--sgds-border-color);
-  --sgds-table-accent-bg: transparent;
-  --sgds-table-striped-color: var(--sgds-emphasis-color);
-  --sgds-table-striped-bg: rgba(var(--sgds-emphasis-color-rgb), 0.05);
-  --sgds-table-active-color: var(--sgds-emphasis-color);
-  --sgds-table-active-bg: rgba(var(--sgds-emphasis-color-rgb), 0.1);
-  --sgds-table-hover-color: var(--sgds-emphasis-color);
-  --sgds-table-hover-bg: rgba(var(--sgds-emphasis-color-rgb), 0.075);
+  --sgds-table-accent-bg: var(--table-accent-bg);
+  --sgds-table-striped-color: var(--table-striped-color);
+  --sgds-table-striped-bg: var(--table-striped-bg);
+  --sgds-table-active-color: var(--table-striped-color);
+  --sgds-table-active-bg: rgba(0, 0, 0, 0.1);
+  --sgds-table-hover-color: var(--table-striped-color);
+  --sgds-table-hover-bg: rgba(0, 0, 0, 0.075);
   border-color: var(--sgds-table-border-color);
   margin-bottom: 1rem;
   vertical-align: top;
@@ -94,6 +72,9 @@ table {
 }
 .table-borderless > :not(caption) > * > * {
   border-bottom-width: 0;
+}
+.table > :not(:first-child) {
+  border-top: 2px solid;
 }
 .table-borderless > :not(:first-child) {
   border-top-width: 0;

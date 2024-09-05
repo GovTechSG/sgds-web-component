@@ -12,7 +12,7 @@ let id = 0;
  *
  * @csspart base - The component's base wrapper.
  *
- * @cssproperty --sgds-tab-panel-padding-y - The y-axis padding of tab panel.
+ * @cssproperty --tab-panel-padding-y - The y-axis padding of tab panel.
  *
  */
 export class SgdsTabPanel extends LitElement {

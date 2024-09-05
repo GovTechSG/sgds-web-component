@@ -17,18 +17,6 @@ import cardStyle from "./card.css";
  * @csspart title - The card title
  * @csspart text - The card text
  *
- * @cssprop --sgds-card-bg - The background color of the card
- * @cssprop --sgds-card-height - The height of the card. By default, height of card depends on the size of its children
- * @cssprop --sgds-card-border-width - The border width of card
- * @cssprop --sgds-card-border-color - The border color of card
- * @cssprop --sgds-card-border-radius - The border radius of card
- * @cssprop --sgds-card-box-shadow - The box-shadow of card
- * @cssprop --sgds-card-inner-border-radius - The inner border radius of card. Useful in cases where card image is applied to prevent image border from exceeding the outer borders of the card
- * @cssprop --sgds-card-body-color - The text color of the items in card body. This includes title, subtitle and excludes link.
- * @cssprop --sgds-card-body-padding - The padding of the card body
- * @cssprop --sgds-card-title-color - The text color of card title
- * @cssprop --sgds-card-title-margin-bottom - The margin-bottom of card title
- *
  */
 export class SgdsCard extends CardElement {
   static styles = [...CardElement.styles, cardStyle];

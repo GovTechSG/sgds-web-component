@@ -17,5 +17,5 @@
     "typeRoots": ["./src/typings", "./node_modules/@types"]
   },
   "include": ["**/*.ts", "typings"],
-  "exclude": ["node_modules", "lib", "test", "mocks", "react", "cypress", "cypress.config.ts"]
+  "exclude": ["node_modules", "lib", "test", "test-outdir", "mocks", "react", "cypress", "cypress.config.ts"]
 }

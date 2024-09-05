@@ -1,4 +1,4 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { format, parse } from "date-fns";
 import { html } from "lit";
 import { property, query, queryAsync, state } from "lit/decorators.js";
@@ -23,14 +23,14 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  *
  * @event sgds-change-date - Emitted when the state of datepicker's input changes during first load, close button reset click & date click. Date values can be accessed via event.target.value
  *
- * @cssproperty --sgds-datepicker-theme-color - Datepicker's overall theme color
- * @cssproperty --sgds-datepicker-hover-bg - Datepicker's calendar menu hover color
- * @cssproperty --sgds-datepicker-bg - Datepicker's menu background color
- * @cssproperty --sgds-datepicker-close-button-bg - Datepicker's close button background color
- * @cssproperty --sgds-datepicker-close-button-hover-bg - Datepicker's close button hover background color
- * @cssproperty --sgds-datepicker-close-button-color - Datepicker's close button color
- * @cssproperty --sgds-datepicker-selected-date-bg - Selected date's background color
- * @cssproperty --sgds-datepicker-selected-date-color - Selected date's text color
+ * @cssproperty --datepicker-theme-color - Datepicker's overall theme color
+ * @cssproperty --datepicker-hover-bg - Datepicker's calendar menu hover color
+ * @cssproperty --datepicker-bg - Datepicker's menu background color
+ * @cssproperty --datepicker-close-button-bg - Datepicker's close button background color
+ * @cssproperty --datepicker-close-button-hover-bg - Datepicker's close button hover background color
+ * @cssproperty --datepicker-close-button-color - Datepicker's close button color
+ * @cssproperty --datepicker-selected-date-bg - Selected date's background color
+ * @cssproperty --datepicker-selected-date-color - Selected date's text color
  *
  * @description displayDate sets the month, year views of the calendar while focusedDate follows the focus which also directly changes
  * displayDate on certain occasions. Example, when keyboard moves up to the next month, it updates displayDate which then affect the current
@@ -429,6 +429,7 @@ export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) impleme
             @click=${() => this.toggleMenu()}
             ariaLabel=${this.menuIsOpen ? "Close Calendar" : "Open Calendar"}
             ?disabled=${this.disabled}
+            variant="outlined"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

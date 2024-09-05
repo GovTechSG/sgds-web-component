@@ -1,10 +1,8 @@
 :host {
-  --sgds-drawer-padding: var(--sgds-spacer-4);
-  --sgds-drawer-size: 35rem;
-  --sgds-drawer-bg: var(--sgds-body-bg);
-  --sgds-drawer-button-gap: var(--sgds-spacer-2);
-  --sgds-drawer-overlay-bg: rgba(0, 0, 0, 0.5);
-  --sgds-drawer-z-index: 1055;
+  --drawer-padding: var(--sgds-spacer-4);
+  --drawer-size: 35rem;
+  --drawer-bg: var(--sgds-body-bg);
+  --drawer-button-gap: var(--sgds-spacer-2);
   display: contents;
 }
 
@@ -19,7 +17,7 @@
 
 .drawer-fixed {
   position: fixed;
-  z-index: var(--sgds-drawer-z-index);
+  z-index: 1055;
 }
 
 .drawer-panel {
@@ -29,7 +27,7 @@
   z-index: 2;
   max-width: 100%;
   max-height: 100%;
-  background-color: var(--sgds-drawer-bg);
+  background-color: var(--drawer-bg);
   box-shadow: 0 2px 8px hsl(240 3.8% 46.1% / 12%);
   overflow: auto;
   pointer-events: all;
@@ -45,7 +43,7 @@
   bottom: auto;
   inset-inline-start: 0;
   width: 100%;
-  height: var(--sgds-drawer-size);
+  height: var(--drawer-size);
 }
 
 .drawer-end .drawer-panel {
@@ -53,7 +51,7 @@
   inset-inline-end: 0;
   bottom: auto;
   inset-inline-start: auto;
-  width: var(--sgds-drawer-size);
+  width: var(--drawer-size);
   height: 100%;
 }
 
@@ -63,7 +61,7 @@
   bottom: 0;
   inset-inline-start: 0;
   width: 100%;
-  height: var(--sgds-drawer-size);
+  height: var(--drawer-size);
 }
 
 .drawer-start .drawer-panel {
@@ -71,13 +69,13 @@
   inset-inline-end: auto;
   bottom: auto;
   inset-inline-start: 0;
-  width: var(--sgds-drawer-size);
+  width: var(--drawer-size);
   height: 100%;
 }
 
 .drawer-header {
   display: flex;
-  padding: var(--sgds-drawer-padding);
+  padding: var(--drawer-padding);
 }
 
 .drawer-title {
@@ -95,8 +93,8 @@
   flex-wrap: wrap;
   justify-content: end;
   cursor: pointer;
-  gap: var(--sgds-drawer-button-gap);
-  padding: 0 var(--sgds-drawer-padding);
+  gap: var(--drawer-button-gap);
+  padding: 0 var(--drawer-padding);
 }
 
 .drawer-header-actions .drawer-close {
@@ -108,18 +106,18 @@
 .drawer-body {
   flex: 1 1 auto;
   display: block;
-  padding: var(--sgds-drawer-padding);
+  padding: var(--drawer-padding);
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
 
 .drawer-footer {
   text-align: right;
-  padding: var(--sgds-drawer-padding);
+  padding: var(--drawer-padding);
 }
 
 .drawer-footer ::slotted(sgds-button:not(:last-of-type)) {
-  margin-inline-end: var(--sgds-drawer-button-gap);
+  margin-inline-end: var(--drawer-button-gap);
 }
 
 .drawer:not(.drawer-has-footer) .drawer-footer {
@@ -133,7 +131,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: var(--sgds-drawer-overlay-bg);
+  background-color: rgba(0, 0, 0, 0.5);
   pointer-events: all;
 }
 

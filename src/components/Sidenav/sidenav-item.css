@@ -1,13 +1,8 @@
 :host {
-  --sgds-sidenav-item-btn-border-left-width: 0.125rem;
-  --sgds-sidenav-item-btn-padding-x: 1rem;
-  --sgds-sidenav-item-btn-padding-y: 0.5rem;
-  --sgds-sidenav-item-icon-title-gap: 1rem;
-    /* NEW in V2 */
-  --sgds-sidenav-item-btn-border-left: var(--sgds-sidenav-item-btn-border-left-width) solid transparent;
-  --sgds-sidenav-item-btn-border-radius: 0;
-  --sgds-sidenav-item-btn-line-height: var(--sgds-line-height-md);
-  --sgds-sidenav-item-list-line-height: var(--sgds-line-height-lg);
+  --sidenav-item-btn-border-left-width: 0.125rem;
+  --sidenav-item-btn-padding-x: 1rem;
+  --sidenav-item-btn-padding-y: 0.5rem;
+  --sidenav-item-icon-title-gap: 1rem;
 }
 
 .sidenav-btn {
@@ -17,11 +12,10 @@
   font-size: var(--sgds-body-font-size);
   border: 0;
   background: 0;
-  padding: var(--sgds-sidenav-item-btn-padding-y) var(--sgds-sidenav-item-btn-padding-x);
-  border-left: var(--sgds-sidenav-btn-border-left);
-  border-radius: var(--sgds-sidenav-btn-border-radius);
+  padding: var(--sidenav-item-btn-padding-y) var(--sidenav-item-btn-padding-x);
+  border-radius: 0;
   display: flex;
-  gap: var(--sgds-sidenav-item-icon-title-gap);
+  gap: var(--sidenav-item-icon-title-gap);
   align-items: center;
 
   svg.bi-chevron-down, slot[name="caret-icon"]::slotted(*) {
@@ -32,9 +26,10 @@
 }
 .sidenav-btn.active,
 .sidenav-btn:hover {
-  color: var(--sgds-sidenav-theme-color);
-  border-left-color: var(--sgds-sidenav-theme-color);
+  color: var(--sidenav-theme-color);
+  border-left-color: var(--sidenav-theme-color);
   font-weight: 700;
+  border-left: 0.125rem solid;
 }
 .sidenav-btn.disabled {
   opacity: var(--sgds-disabled-opacity);
@@ -49,7 +44,7 @@
 a.sidenav-btn {
   color: inherit;
   text-decoration: none;
-  line-height: var(--sgds-sidenav-item-btn-line-height);
+  line-height: var(--sgds-line-height-md);
 }
 
 div.sidenav-list {

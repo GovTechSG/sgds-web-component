@@ -1,11 +1,11 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements/lit-element.js";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { nothing } from "lit";
 import { property, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
-import SgdsCloseButton from "../CloseButton/sgds-close-button";
+import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 import alertStyle from "./alert.css";
 
 export type AlertVariant = "info" | "success" | "danger" | "warning" | "neutral";
@@ -18,10 +18,9 @@ export type AlertVariant = "info" | "success" | "danger" | "warning" | "neutral"
  * @event sgds-show - Emitted when the alert appears.
  * @event sgds-hide - Emitted after the alert closes.
  *
- * @cssproperty --sgds-alert-bg - The background color of alert
- * @cssproperty --sgds-alert-color - The text color of alert
- * @cssproperty --sgds-alert-border-radius - The border radius of alert
- * @cssproperty --sgds-alert-border-color - The color of the border of alert, only applicable when outlined prop is true
+ * @cssproperty --alert-bg - The background color of alert
+ * @cssproperty --alert-border-color - The color of the border of alert
+ * @cssproperty --alert-icon-margin-right - The margin-right css of icon slot to position the gap between icon and alert message
  *
  */
 export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {

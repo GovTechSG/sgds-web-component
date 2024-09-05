@@ -7,36 +7,25 @@ export const MockPaginationTemplate = () => Object.assign(new MockPagination());
 The `<sgds-pagination>` component will include some props which is needed for the pagination to work. Users will be required to provide the data objects to be passed in as data length `dataLength`,
 a current page `currentPage` set as initial active, and set the number of data items to be rendered per page `itemsPerPage`. Listen to `sgds-page-change` event for page changes and populate back the logic to `sgds-table` component. Below is a sample of pagination with a table formatted data.
 
-<Canvas>
-  <Story name="API sample">{MockPaginationTemplate.bind({})}</Story>
+<Canvas of={PaginationStories.PaginationWithAPI}>
+  <Story of={PaginationStories.PaginationWithAPI} />
 </Canvas>
+
 
 ## Alternative Sizes
 
 By default, the size is set at `sm`. Alternatively, you could also specify `md` or `lg` to alter the sizes.
 
-<Canvas>
-  <Story name="Sizes">
-    {() => html`
-      <sgds-pagination dataLength="50"></sgds-pagination>
-      <sgds-pagination dataLength="50" size="md"></sgds-pagination>
-      <sgds-pagination dataLength="50" size="lg"></sgds-pagination>
-    `}
-  </Story>
+<Canvas of={PaginationStories.PaginationSizes}>
+  <Story of={PaginationStories.PaginationSizes} />
 </Canvas>
 
 ## Direction Variant
 
 The `directionVariant` string prop allows you to toggle between rendering text and arrow direction for the increment/decrement pages button as shown below. By default, it is set to `icon-text`, but can be also be set to just `text` or `icon`.
 
-<Canvas>
-  <Story name="Direction Variant">
-    {() => html`
-      <sgds-pagination dataLength="50"></sgds-pagination>
-      <sgds-pagination dataLength="50" directionVariant="text"></sgds-pagination>
-      <sgds-pagination dataLength="50" directionVariant="icon"></sgds-pagination>
-    `}
-  </Story>
+<Canvas of={PaginationStories.PaginationDirectionVariant}>
+  <Story of={PaginationStories.PaginationDirectionVariant} />
 </Canvas>
 
 ## Setting Limit
@@ -45,53 +34,30 @@ The `limit` prop will set the number of pages shown at any one time. It will be 
 
 To illustrate, the examples below has been set to use a dummy data `data.length` of **10** and `itemsPerPage` of **1**. So altogether, there will be a total of **10** pages in the pagination. By setting the limit to **3** or **5** or **8**, it will show the number of pages equal to the particular limit given. Do note that if `limit` is set to be of higher value than the total pages for the pagination, it will just render the total pages at one go, ignoring the `limit`.
 
-<Canvas>
-  <Story name="Limit">
-    {() => html`
-      <sgds-pagination dataLength="10" itemsPerPage="1" limit="3"></sgds-pagination>
-      <sgds-pagination dataLength="10" itemsPerPage="1" limit="5"></sgds-pagination>
-      <sgds-pagination dataLength="10" itemsPerPage="1" limit="8"></sgds-pagination>
-    `}
-  </Story>
+<Canvas of={PaginationStories.PaginationLimit}>
+  <Story of={PaginationStories.PaginationLimit} />
 </Canvas>
 
 ## Ellipsis Mode
 
 The `ellipsisOn` boolean prop allows user to skip pages using `ellipsisJump`. By default with false, it shows a disabled increment ellipsis button. Setting to true will render and allow functionality of both ellipsis direction button.
 
-<Canvas>
-  <Story name="Ellipsis Mode">
-    {() => html`
-      <sgds-pagination dataLength="50" itemsPerPage="5" limit="3"></sgds-pagination>
-      <sgds-pagination dataLength="50" itemsPerPage="5" limit="5" ellipsisOn></sgds-pagination>
-    `}
-  </Story>
+<Canvas of={PaginationStories.EllipsisOn}>
+  <Story of={PaginationStories.EllipsisOn} />
 </Canvas>
 
 ## Ellipsis Jump
 
 By default, `ellipsisJump` value is set to **3**. Set as desired to decrement/increment pages for the Ellipsis button. The `ellipsisJump` are set to be of limit **3**, **6**,**12** respectively. If the `ellipsisJump` is set to be of higher value than the total pages(`dataLength / itemsPerPage`) in pagination, it will decrement/increment to the end of the pages respectively.
 
-<Canvas>
-  <Story name="Ellipsis Jump">
-    {() => html`
-      <sgds-pagination dataLength="50" ellipsisOn currentPage="2"></sgds-pagination>
-      <sgds-pagination dataLength="50" ellipsisOn ellipsisJump="6" currentPage="2"></sgds-pagination>
-      <sgds-pagination dataLength="50" ellipsisOn ellipsisJump="12" currentPage="2"></sgds-pagination>
-    `}
-  </Story>
+<Canvas of={PaginationStories.EllipsisJump}>
+  <Story of={PaginationStories.EllipsisJump} />
 </Canvas>
 
 ## Show first and last page of pagination
 
 `showFirstPage` and `showLastPage` controls the appearance of first and last page of the component respectively. 
 
-<Canvas>
-  <Story name="Show First Page">
-    {() => html`
-       Show first page: <sgds-pagination dataLength="50" currentPage="4" showFirstPage></sgds-pagination>
-       Show last page: <sgds-pagination dataLength="50" currentPage="4" showLastPage></sgds-pagination>
-       Show first and last page<sgds-pagination dataLength="50" currentPage="4" showFirstPage showLastPage></sgds-pagination>
-    `}
-  </Story>
+<Canvas of={PaginationStories.ShowFirstPage}>
+  <Story of={PaginationStories.ShowFirstPage} />
 </Canvas>

@@ -1,10 +1,10 @@
 :host {
-  --sgds-tab-panel-padding-y: 1rem;
+  --tab-panel-padding-y: 1rem;
   display: block;
 }
 .tab-panel {
   display: block;
-  padding: var(--sgds-tab-panel-padding-y) 0;
+  padding: var(--tab-panel-padding-y) 0;
 }
 .tab-panel:not(.tab-panel--active) {
   display: none;

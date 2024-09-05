@@ -4,8 +4,6 @@ import { ifDefined } from "lit/directives/if-defined.js";
 export const Template = args => html` <sgds-progress>
   <sgds-progress-bar
     label=${ifDefined(args.label)}
-    ?striped=${args.striped}
-    ?animated=${args.animated}
     variant=${ifDefined(args.variant)}
     value=${ifDefined(args.value)}
     ariamin=${ifDefined(args.ariamin)}

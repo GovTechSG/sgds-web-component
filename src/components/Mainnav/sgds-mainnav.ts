@@ -34,27 +34,14 @@ const SIZES = {
  * @slot brand - Brand slot of SgdsMainnav. Pass in brand logo img here
  * @slot non-collapsible - Elements in this slot will not be collapsed
  *
- * @cssproperty --sgds-mainnav-bg - Navbar's background color.
- * @cssproperty --sgds-mainnav-padding-x - left and right padding for browser width > 768px
- * @cssproperty --sgds-mainnav-padding-y - top and bottom padding for browser width > 768px
- * @cssproperty --sgds-mainnav-mobile-padding-x - left and right padding for browser width < 768px
- * @cssproperty --sgds-mainnav-mobile-padding-y - top and bottom padding for browser width < 768px
- * @cssproperty --sgds-mainnav-border-bottom-width - bottom border width
- * @cssproperty --sgds-mainnav-border-bottom-color - border-bottom width color
- * @ignore NEW in 2.0.0
- * @cssproperty --sgds-mainnav-toggler-icon - the background image for the toggler icon
- * @cssproperty --sgds-mainnav-toggler-padding-y - top and bottom padding for the toggler icon
- * @cssproperty --sgds-mainnav-toggler-padding-x - left and right padding for the toggler icon
- * @cssproperty --sgds-mainnav-toggler-font-size - font size of toggler icon
- * @cssproperty --sgds-mainnav-brand-padding-y - top and bottom padding for mainnav brand
- * @cssproperty --sgds-mainnav-brand-padding-y - top and bottom padding for mainnav brand
- * @cssproperty --sgds-mainnav-brand-font-size - font size of mainnav brand
- * @cssproperty --sgds-mainnav-brand-color - color of mainnav brand
- * @cssproperty --sgds-mainnav-brand-hover-color - hover color of mainnav brand
- * @cssproperty --sgds-mainnav-gutter - the gap between the all children of mainnav
- * @cssproperty --sgds-mainnav-theme-color - The theme color of mainnav affecting the hover and active states of items in the mainnav. It sets the default value for --sgds-mainnav-dropdown-theme-color and --sgds-mainnav-item-theme-color
- * @cssproperty --sgds-mainnav-color - The text color of mainnav. It sets the default value for --sgds-mainnav-dropdown-color and --sgds-mainnav-item-color
- * @cssproperty --sgds-mainnav-disabled-opacity - The opacity of mainnav in disabled state. It sets the default value for --sgds-mainnav-dropdown-disabled-opacity and --sgds-mainnav-item-disabled-opacity
+ * @cssproperty --mainnav-bg - Navbar's background color.
+ * @cssproperty --mainnav-padding-x - left and right padding for browser width > 768px
+ * @cssproperty --mainnav-padding-y - top and bottom padding for browser width > 768px
+ * @cssproperty --mainnav-mobile-padding-x - left and right padding for browser width < 768px
+ * @cssproperty --mainnav-mobile-padding-y - top and bottom padding for browser width < 768px
+ * @cssproperty --mainnav-border-bottom-width - bottom border width
+ * @cssproperty --mainnav-border-bottom-color - border-bottom width color
+ * @cssproperty --mainnav-theme-color - The theme color of mainnav affecting the hover and active states of items in the mainnav
  */
 export class SgdsMainnav extends SgdsElement {
   static styles = [...SgdsElement.styles, mainnavStyle];

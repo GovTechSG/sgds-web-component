@@ -8,9 +8,9 @@ import anchorStyles from "../../styles/anchor.css";
 /**
  * @summary All .gov.sg digital services shall adopt The Official Government Banner for every page in the digital service and be placed at the top of the page.
  *
- * @cssproperty --sgds-masthead-mobile-font-size - Sets the padding left and right for viewport width 1024px and below
- * @cssproperty --sgds-masthead-mobile-padding-x - Sets the font size for viewport width 1024px and below
- * @cssproperty --sgds-masthead-fluid-padding-x - Sets the container-fluid padding left and right for viewport width 1024px and above
+ * @cssproperty --masthead-mobile-font-size - Sets the padding left and right for viewport width 1024px and below
+ * @cssproperty --masthead-mobile-padding-x - Sets the font size for viewport width 1024px and below
+ * @cssproperty --masthead-fluid-padding-x - Sets the container-fluid padding left and right for viewport width 1024px and above
  */
 export class SgdsMasthead extends SgdsElement {
   static styles = [...SgdsElement.styles, svgStyles, anchorStyles, mastheadStyle];

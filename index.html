@@ -96,7 +96,6 @@
             { title: 3, stepHeader: "Marker title", template: `<p>Step 3 Content</p>` },
         ];
     </script>
-    <link href='./src/themes/night.css' rel='stylesheet' type='text/css' />
     <link href='./src/themes/day.css' rel='stylesheet' type='text/css' />
 </head>
 
@@ -189,6 +188,22 @@
 [&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
 [&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
 ]" striped="" bordered="" borderless="" hover size="" variant="dark" responsive="" sort="" removablesort="">
+            </sgds-table>
+            <sgds-table
+                tableheaders="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
+                tabledata="[
+[&quot;1&quot;, &quot;John&quot;, &quot;Doe&quot;, &quot;@johndoe&quot;],
+[&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
+[&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
+]" striped="" bordered="" borderless="" hover size="" variant="light" responsive="" sort="" removablesort="">
+            </sgds-table>
+            <sgds-table
+                tableheaders="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
+                tabledata="[
+[&quot;1&quot;, &quot;John&quot;, &quot;Doe&quot;, &quot;@johndoe&quot;],
+[&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
+[&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
+]" >
             </sgds-table>
             <sgds-table
                 tableheaders="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
@@ -597,46 +612,6 @@
                         <sgds-button variant="outline">Outline button</sgds-button>
                         <sgds-button variant="ghost">Ghost button</sgds-button>
                         <sgds-button variant="danger">Danger button</sgds-button>
-
-                        <!-- <sgds-button disabled variant="primary">Hello World</sgds-button>
-                        <sgds-button disabled variant="secondary">Hello World</sgds-button>
-                        <sgds-button disabled variant="warning">Hello World</sgds-button>
-                        <sgds-button disabled variant="success">Hello World</sgds-button>
-                        <sgds-button disabled variant="info">Hello World</sgds-button>
-                        <sgds-button disabled variant="danger">Hello World</sgds-button>
-                        <sgds-button disabled variant="light">Hello World</sgds-button>
-                        <sgds-button disabled variant="link" target="_blank" href="#">Hello World</sgds-button>
-                        <sgds-button disabled variant="dark">Hello World</sgds-button>
-                        <sgds-button outlined variant="primary">Hello World</sgds-button>
-                        <sgds-button outlined variant="secondary">Hello World</sgds-button>
-                        <sgds-button outlined variant="warning">Hello World</sgds-button>
-                        <sgds-button outlined variant="success">Hello World</sgds-button>
-                        <sgds-button outlined variant="info">Hello World</sgds-button>
-                        <sgds-button outlined variant="danger">Hello World</sgds-button>
-                        <sgds-button outlined variant="light">Hello World</sgds-button>
-                        <sgds-button outlined variant="link">Hello World</sgds-button>
-                        <sgds-button outlined variant="dark">Hello World</sgds-button>
-                        <sgds-button active variant="primary">Hello World</sgds-button>
-                        <sgds-button active variant="secondary">Hello World</sgds-button>
-                        <sgds-button active variant="warning">Hello World</sgds-button>
-                        <sgds-button active variant="success">Hello World</sgds-button>
-                        <sgds-button active variant="info">Hello World</sgds-button>
-                        <sgds-button active variant="danger">Hello World</sgds-button>
-                        <sgds-button active variant="light">Hello World</sgds-button>
-                        <sgds-button active variant="link">Hello World</sgds-button>
-                        <sgds-button active variant="dark">Hello World</sgds-button>
-                        <sgds-button active outlined variant="primary">Hello World</sgds-button>
-                        <sgds-button active outlined variant="secondary">Hello World</sgds-button>
-                        <sgds-button active outlined variant="warning">Hello World</sgds-button>
-                        <sgds-button active outlined variant="success">Hello World</sgds-button>
-                        <sgds-button active outlined variant="info">Hello World</sgds-button>
-                        <sgds-button active outlined variant="danger">Hello World</sgds-button>
-                        <sgds-button active outlined variant="light">Hello World</sgds-button>
-                        <sgds-button active outlined variant="link">Hello World</sgds-button>
-                        <sgds-button active outlined variant="dark">Hello World</sgds-button>
-                        <sgds-button href="#" target="_blank">Anchor</sgds-button>
-                        <sgds-button size="sm" variant="dark">Hello World</sgds-button>
-                        <sgds-button size="lg" variant="dark">Hello World</sgds-button> -->
                     </div>
                 </div>
                 <h3>Button Size</h3>
@@ -1190,7 +1165,7 @@
                     </sgds-tooltip>
                     <button onclick="tooltip.show()">click me</button>
                 </div>
-                <sgds-footer
+                <sgds-footer description="description"
                     links='[{"title":"Application Guidelines","url":"/application-guidelines/lorem-ipsum-one/second-level-a/","links":[{"label":"<div>hello world </div>","href":"/application-guidelines/lorem-ipsum-one/second-level-a/"},{"label":"Second Level B","href":"/application-guidelines/lorem-ipsum-two/part-A/"},{"label":"Lorem Ipsum Three","href":"/application-guidelines/lorem-ipsum-three/"}]},{"title":"Legislation","url":"#","external":true,"links":[{"label":"External Link One","href":"https://en.wikipedia.org/wiki/Year","external":true},{"label":"External Link Two","href":"https://en.wikipedia.org/wiki/Spring_(season)","external":true}]},{"title":"Resources","url":"/resource_room/","links":[{"label":"All","href":"/resource_room/"},{"label":"Forms and Templates","href":"/resource_room/forms-and-templates/"},{"label":"Guides","href":"/resource_room/guides/"}]}]'></sgds-footer>
 
                 <script>

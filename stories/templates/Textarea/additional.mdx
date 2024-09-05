@@ -4,11 +4,9 @@
 
 Set `hasFeedback` to true to enable sgds validation stylings.
 
-export const ValidationTemplate = () =>
-  html` <sgds-textarea required hasFeedback invalidFeedback="This is required"></sgds-textarea> `;
 
-<Canvas>
-  <Story name="Validation">{ValidationTemplate.bind({})}</Story>
+<Canvas of={TextareaStories.Validation}>
+  <Story of={TextareaStories.Validation} />
 </Canvas>
 
 ## Default Value 
@@ -23,23 +21,10 @@ Test this out by following the instructions below
 3. Click reset button again 
     - Observe now the default value has changed 
 
-export const DefaultValueTemplate = () => html`
-  <form>
-  <sgds-textarea id="default-value-eg" value="The initial value"></sgds-textarea> 
-  <sgds-button type="reset" class="mt-5">Reset</sgds-button>
-  <sgds-button variant="warning" @click=${(e) => changeValue(e)}>Click to change the default value</sgds-button>
-  </form>
-`
-
-<Canvas>
-  <Story name="Default Value">{DefaultValueTemplate.bind({})}</Story>
+<Canvas of={TextareaStories.DefaultValue}>
+  <Story of={TextareaStories.DefaultValue} />
 </Canvas>
 
-export const changeValue = (e) => {
-  e.preventDefault()
-  const textarea = document.querySelector("sgds-textarea#default-value-eg")
-  textarea.defaultValue = "Default value has changed!"
-}
 
 ```jsx
 export const changeValue = (e) => {

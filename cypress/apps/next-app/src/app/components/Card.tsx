@@ -3,7 +3,7 @@ import Image from "next/image";
 export const Card = () => {
   return (
     <>
-      <SgdsCard bgcolor="undefined" bordercolor="undefined" textcolor="undefined">
+      <SgdsCard bgColor="primary" borderColor="primary" textColor="primary">
         <Image
           suppressHydrationWarning
           width={100}

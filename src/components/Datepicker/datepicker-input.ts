@@ -140,7 +140,9 @@ export class DatepickerInput extends SgdsInput {
     return html`
       ${this._renderLabel()} ${this._renderHintText()}
       <div class="input-container">
+      <div class="input-feedback">
         ${this._renderInput()}
+        </div>
         <slot name="calendar-btn"></slot>
         <slot name="reset-btn"></slot>
         </div>

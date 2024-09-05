@@ -1,14 +1,11 @@
-:host{
-  --sgds-qt-border-radius: var(--sgds-border-radius);
-}
 sgds-input{
-  --sgds-input-border-radius: 0;
+  --sgds-border-radius: 0;
 }
 sgds-button:first-of-type{
-  --sgds-btn-border-radius: var(--sgds-qt-border-radius) 0 0 var(--sgds-qt-border-radius);
+  --btn-border-radius: var(--sgds-border-radius) 0 0 var(--sgds-border-radius);
 }
 sgds-button:last-of-type{
-  --sgds-btn-border-radius: 0 var(--sgds-qt-border-radius) var(--sgds-qt-border-radius) 0;
+  --btn-border-radius: 0 var(--sgds-border-radius) var(--sgds-border-radius) 0;
 }
 
 .input-group {
@@ -29,13 +26,6 @@ sgds-button:last-of-type{
 .input-group sgds-button:focus {
   z-index: 3;
 }
-/* .input-group-sm > .btn,
-.input-group-sm > .form-control {
-  border-radius: 0.2rem;
-  font-size: 0.875rem;
-  padding: 0.25rem 0.5rem;
-} */
-
 .visually-hidden {
   clip: rect(0, 0, 0, 0) !important;
   border: 0 !important;

@@ -1,19 +1,13 @@
-:host {
-  --sgds-tab-group-margin-bottom: 0;
-  --sgds-tab-group-padding-left: 0;
-  --sgds-tab-group-gap: 2rem;
-}
-
 .nav {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  margin-bottom: var(--sgds-tab-group-margin-bottom);
-  padding-left: var(--sgds-tab-group-padding-left);
+  margin-bottom: 0;
+  padding-left: 0;
 }
 .nav-tabs {
   border-bottom: none;
-  gap: var(--sgds-tab-group-gap);
+  gap:  2rem;
 }
 .sgds.nav-tabs[variant="tabs-basic-toggle"] {
   gap: 0;

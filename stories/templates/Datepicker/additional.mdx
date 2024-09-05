@@ -2,7 +2,7 @@
 
 When `mode="range"`, DatePicker allows a selection of two dates, start and end.
 
-<Canvas>
+<Canvas of={DatepickerStories.RangeSelection}>
   <Story of={DatepickerStories.RangeSelection} />
 </Canvas>
 
@@ -10,7 +10,7 @@ When `mode="range"`, DatePicker allows a selection of two dates, start and end.
 
 By default, the Popover component of DatePicker flips top and bottom depending on the space at the current placement. Turn it off, by setting `noFlip="true"`
 
-<Canvas>
+<Canvas of={DatepickerStories.Flip}>
   <Story of={DatepickerStories.Flip} />
 </Canvas>
 
@@ -20,7 +20,7 @@ By default, the Popover component of DatePicker flips top and bottom depending o
 
 For default `mode="single"`, use the `initialValue` prop to set the initial value of in put on first load. Note that by default dateFormat prop is DD/MM/YYYY. eg. `'["23/05/2023"]'` If dateFormat is passed in, change the initialValue accordingly.
 
-<Canvas>
+<Canvas of={DatepickerStories.SingleMode}>
   <Story of={DatepickerStories.SingleMode} />
 </Canvas>
 
@@ -28,7 +28,7 @@ For default `mode="single"`, use the `initialValue` prop to set the initial valu
 
 For `mode="range"`, use the same `initialValue` prop to set the initial value of startDate and endDate. Note that by default dateFormat prop is DD/MM/YYYY. eg. `'["23/05/2023", "15/12/2023" ]'` If dateFormat is passed in, change the initialValue accordingly.
 
-<Canvas>
+<Canvas of={DatepickerStories.RangeMode}>
   <Story of={DatepickerStories.RangeMode} />
 </Canvas>
 
@@ -39,7 +39,7 @@ It is recommended to set the calendar's display to be within the boundaries of `
 
 For better accesibility, include a hint text to let your users know what is the range of dates that they can choose from
 
-<Canvas>
+<Canvas of={DatepickerStories.MinMax}>
   <Story of={DatepickerStories.MinMax} />
 </Canvas>
 
@@ -48,6 +48,6 @@ For better accesibility, include a hint text to let your users know what is the 
 Constraint validation is implemented in datepicker as much as possible to mimick the behaviour of native HTML form component.
 We use `ElementInternals` API to implement the constraint validation.
 
-<Canvas>
+<Canvas of={DatepickerStories.FormSubmission}>
   <Story of={DatepickerStories.FormSubmission} />
 </Canvas>

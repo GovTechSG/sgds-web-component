@@ -8,9 +8,6 @@ import checkboxStyle from "./checkbox.css";
  *
  * @event sgds-change - Emitted when the checked state changes.
  */
-
-/**@internal */
-
 export class SgdsCheckbox extends FormCheckElement {
   static styles = [...FormCheckElement.styles, checkboxStyle];
 

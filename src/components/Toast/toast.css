@@ -18,6 +18,9 @@
 }
 
 .toast {
+  --toast-border-color: var(--sgds-gray-800);
+  --toast-header-color: light-dark(var(--sgds-gray-800), var(--sgds-gray-200));
+  --toast-header-icon-color: var(--sgds-body-color);
   display: flex;
   flex-direction: row;
   align-items: flex-start;

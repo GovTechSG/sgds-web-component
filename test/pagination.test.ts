@@ -556,7 +556,7 @@ describe("sgds-pagination", () => {
       `
     )) as SgdsPagination;
 
-    const disabledEllipsis = el.shadowRoot?.querySelectorAll("li.page-item.disabled") as NodeListOf<HTMLLIElement>;
+    const disabledEllipsis = el.shadowRoot?.querySelectorAll(".ellipsis-disabled") as NodeListOf<HTMLLIElement>;
     expect(disabledEllipsis?.length).to.equal(2);
     expect(disabledEllipsis[0].onclick).to.equal(null);
     expect(disabledEllipsis[1].onclick).to.equal(null);

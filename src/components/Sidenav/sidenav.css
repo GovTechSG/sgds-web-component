@@ -1,13 +1,12 @@
 :host {
-  --sgds-sidenav-theme-color: var(--sgds-primary);
-  --sgds-sidenav-sticky-top: 0rem;
-  --sgds-sidenav-item-gap: 1rem;
+  --sidenav-theme-color: var(--sgds-primary);
+  --sidenav-sticky-top: 0rem;
 }
 
 div {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-sidenav-item-gap);
+  gap: 1rem;
   list-style: none;
   padding-left: 0;
   margin: 0;
@@ -15,7 +14,7 @@ div {
 
 .sticky {
   position: sticky;
-  top: var(--sgds-sidenav-sticky-top);
-  height: calc(100vh - var(--sgds-sidenav-sticky-top));
+  top: var(--sidenav-sticky-top);
+  height: calc(100vh - var(--sidenav-sticky-top));
   overflow-y: auto;
 }

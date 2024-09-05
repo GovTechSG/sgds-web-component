@@ -22,6 +22,10 @@ progress {
 }
 
 .progress-bar {
+  --sgds-progress-bar-bg: var(--sgds-primary-bg);
+  --sgds-progress-bar-transition: width 0.6s ease;
+  --sgds-progress-bar-color: var(--sgds-white);
+  --sgds-progress-bar-font-size: 0.75rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

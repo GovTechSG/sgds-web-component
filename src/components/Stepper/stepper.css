@@ -26,12 +26,12 @@
   cursor: pointer;
 }
 .sgds.stepper .stepper-item.is-clickable:hover .stepper-marker {
-  background-color: var(--sgds-stepper-theme-hover-color);
-  border-color: var(--sgds-stepper-theme-hover-color);
+  background-color: var(--stepper-theme-hover-color);
+  border-color: var(--stepper-theme-hover-color);
 }
 .sgds.stepper .stepper-item.is-clickable:hover .stepper-detail,
 .sgds.stepper .stepper-item.is-clickable:hover .stepper-detail > * {
-  color: var(--sgds-stepper-theme-hover-color);
+  color: var(--stepper-theme-hover-color);
   transition: all 0.5s ease;
 }
 .sgds.stepper .stepper-item:before {

@@ -22,10 +22,10 @@ import sidenavItemStyle from "./sidenav-item.css";
  * @slot icon - icon slot for the content of SgdsSidenavItem's button / anchor element.
  * @slot caret-icon - The slot for the caret arrow icon of SgdsSidenavItem.
  *
- * @cssproperty --sgds-sidenav-item-button-border-left-width - sidenav item left border width
- * @cssproperty --sgds-sidenav-item-padding-x - sidenav item padding left and right
- * @cssproperty --sgds-sidenav-item-padding-y - sidenav item padding top and bottom
- * @cssproperty --sgds-sidenav-item-icon-title-gap - the flex gap between sidenav item icon and title
+ * @cssproperty --sidenav-item-button-border-left-width - sidenav item left border width
+ * @cssproperty --sidenav-item-padding-x - sidenav item padding left and right
+ * @cssproperty --sidenav-item-padding-y - sidenav item padding top and bottom
+ * @cssproperty --sidenav-item-icon-title-gap - the flex gap between sidenav item icon and title
  */
 
 export class SgdsSidenavItem extends SgdsElement {
