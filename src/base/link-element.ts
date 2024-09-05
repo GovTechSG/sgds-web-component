@@ -6,6 +6,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 /**
  * @slot default - Default slot for SgdsMainnavItem anchor element
+ * @slot default - Default slot for SgdsMainnavItem anchor element
  */
 
 export default class LinkElement extends SgdsElement {
@@ -29,7 +30,7 @@ export default class LinkElement extends SgdsElement {
   render() {
     return html`
       <a
-        href="${ifDefined(this.href)}"
+        href=${this.disabled ? "javascript:void(0)" : ifDefined(this.href)}
         class="nav-link ${classMap({
           disabled: this.disabled,
           active: this.active
@@ -37,8 +38,9 @@ export default class LinkElement extends SgdsElement {
         ?disabled=${this.disabled}
         aria-disabled=${this.disabled ? "true" : "false"}
         target=${this.target}
-        ><slot></slot
-      ></a>
+      >
+        <slot></slot>
+      </a>
     `;
   }
 }

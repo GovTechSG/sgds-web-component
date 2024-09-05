@@ -163,6 +163,18 @@
 
     <main>
         <div class="container">
+            <sgds-link href="https://google.com">Default</sgds-link>
+            <sgds-link href="https://google.com" disabled>Default (disabled)</sgds-link>
+            <sgds-link href="https://google.com" variant="danger">Danger</sgds-link>
+            <sgds-link href="https://google.com" variant="danger" disabled>Danger (disabled)</sgds-link>
+            <sgds-link href="https://google.com" size="lg">Large</sgds-link>
+            <sgds-link href="https://google.com" size="sm">Small</sgds-link>
+            <sgds-link href="https://google.com">
+                <i class="bi bi-arrow-left" slot="leftIcon"></i>
+                leftIcon</sgds-link>
+            <sgds-link href="https://google.com">
+                <i class="bi bi-arrow-right" slot="rightIcon"></i>
+                rightIcon</sgds-link>
             <sgds-icon name="6-square"></sgds-icon>
             <sgds-textarea required label="Label" name="textarea" textareaclasses="" rows="4" invalidfeedback="test"
                 placeholder="Placeholder" minlength="" hasFeedback maxlength="100" resize="vertical" defaultvalue="">
@@ -245,7 +257,7 @@
             <sgds-checkbox-group hasFeedback invalidFeedback="Please correct the invalid options above">
                 <span slot="label">Select Your Preferences</span>
                 <span slot="hint-text">Please choose one or more options:</span>
-                <sgds-checkbox  slot="checkbox" value="option1" hasFeedback required invalid>Option 1</sgds-checkbox>
+                <sgds-checkbox  slot="checkbox" value="option1" hasFeedback required>Option 1</sgds-checkbox>
                 <sgds-checkbox slot="checkbox" value="option2" required>Option 2 indeterminate</sgds-checkbox>
                 <sgds-checkbox disabled slot="checkbox" value="option3" required>Option 3</sgds-checkbox>
             </sgds-checkbox-group>
@@ -908,11 +920,11 @@
                             </sgds-toast>
                             <sgds-toast show bg="warning" status="success"></sgds-toast>
                         </sgds-toast-container>
-                        <sgds-toast-container position="top-center">
+                        <!-- <sgds-toast-container position="top-center">
                             <sgds-toast show title="hello">This is a toast <span slot="duration">just
                                     now</span></sgds-toast>
                             <sgds-toast show title="hello">This is a toast</sgds-toast>
-                        </sgds-toast-container>
+                        </sgds-toast-container> -->
                     </div>
                 </div>
             </div>
