@@ -55,7 +55,7 @@ export class SgdsCheckboxGroup extends SgdsElement {
         <div class="checkbox-container">
           <slot name="checkbox"></slot>
         </div>
-        ${this.hasInvalidCheckbox
+        ${this.hasInvalidCheckbox && this.hasFeedback
           ? html`
               <div class="error-message-container">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

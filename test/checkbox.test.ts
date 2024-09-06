@@ -2,7 +2,7 @@ import "./sgds-web-component";
 import { elementUpdated, expect, fixture, html } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
-import type { SgdsButton, SgdsCheckbox } from "../src/components";
+import type { SgdsButton, SgdsCheckbox, SgdsCheckboxGroup } from "../src/components";
 
 describe("<sgds-checkbox>", () => {
   it("should be disabled with the disabled attribute & aria-disabled to be true", async () => {
@@ -19,12 +19,6 @@ describe("<sgds-checkbox>", () => {
     expect(input?.getAttribute("id")).to.equal(label?.getAttribute("for"));
   });
 
-  it("id attribute should contain in .invalid-feedback id attribute", async () => {
-    const el = await fixture(html`<sgds-checkbox hasFeedback></sgds-checkbox>`);
-    const input = el.shadowRoot?.querySelector("input");
-    const feedback = el.shadowRoot?.querySelector(".invalid-feedback");
-    expect(feedback?.getAttribute("id")).to.contain(input?.getAttribute("id"));
-  });
 
   it("should be able to pass in aria-label attribute", async () => {
     const el = await fixture(html`<sgds-checkbox ariaLabel="label"></sgds-checkbox>`);
@@ -34,15 +28,13 @@ describe("<sgds-checkbox>", () => {
 
   it("should have class .is-invalid when invalid state is true and hasFeedback is true", async () => {
     const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox hasFeedback></sgds-checkbox>`);
-    //force an invalid state
     el.invalid = true;
     await el.updateComplete;
     const checkbox = el.shadowRoot?.querySelector("input");
     expect(checkbox?.classList.value).to.contain("is-invalid");
   });
-  it("should not have class .is-invalid when hasFeedback is false ", async () => {
+  it("should not have class .invalid when hasFeedback is false ", async () => {
     const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox></sgds-checkbox>`);
-    //force an invalid state
     el.invalid = true;
     await el.updateComplete;
     const checkbox = el.shadowRoot?.querySelector("input");
@@ -52,17 +44,11 @@ describe("<sgds-checkbox>", () => {
   it("should render aria-invalid to true with invalid state and required attribute", async () => {
     const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox></sgds-checkbox>`);
     const checkbox = el.shadowRoot?.querySelector("input");
-    //force an invalid state
     el.invalid = true;
     await el.updateComplete;
     expect(checkbox).to.have.attribute("aria-invalid", "true");
   });
 
-  it("if class input is .is-invalid, feedback el should contain .invalid-feedback", async () => {
-    const el = await fixture(html`<sgds-checkbox hasFeedback invalidFeedback="test"></sgds-checkbox>`);
-    const checkbox = el.shadowRoot?.querySelector("div.invalid-feedback");
-    expect(checkbox?.textContent).to.equal("test");
-  });
 
   it("should emit sgds-change event when input is clicked", async () => {
     const el = await fixture(html`<sgds-checkbox></sgds-checkbox>`);
@@ -211,4 +197,137 @@ describe("<sgds-checkbox>", () => {
 
     expect(el.shadowRoot?.querySelector("input:focus")).to.be.null;
   });
+
+  it("should apply the 'is-invalid' class to a checkbox when it's invalid and hasFeedback is true", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox hasFeedback invalid></sgds-checkbox>`);
+    el.invalid = true;
+    await elementUpdated(el);
+    const checkbox = el.shadowRoot?.querySelector("input");
+    expect(checkbox?.classList.contains("is-invalid")).to.be.true;
+  });
+
+  it("should not apply the 'is-invalid' class to a checkbox when it's invalid and hasFeedback is false", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox invalid></sgds-checkbox>`);
+    el.invalid = true;
+    await elementUpdated(el);
+    const checkbox = el.shadowRoot?.querySelector("input");
+    expect(checkbox?.classList.contains("is-invalid")).to.be.false;
+  });
+
+  it("should display feedback if the group has hasFeedback and at least one checkbox is invalid", async () => {
+    const group = await fixture<SgdsCheckboxGroup>(html`
+      <sgds-checkbox-group hasFeedback invalidFeedback="Group error">
+        <sgds-checkbox slot="checkbox" required></sgds-checkbox>
+      </sgds-checkbox-group>
+    `);
+  
+    const checkbox = group.querySelector<SgdsCheckbox>("sgds-checkbox");
+    if (checkbox) {
+      checkbox.invalid = true;
+      await elementUpdated(checkbox);
+    }
+  
+    expect(group.hasInvalidCheckbox).to.be.true;
+    const feedback = group.shadowRoot?.querySelector(".error-message-container");
+    expect(feedback).to.exist;
+  });
+
+  it("should not display feedback if no child checkbox is invalid even with hasFeedback", async () => {
+    const group = await fixture<SgdsCheckboxGroup>(html`
+      <sgds-checkbox-group hasFeedback invalidFeedback="Group error">
+        <sgds-checkbox slot="checkbox" required></sgds-checkbox>
+      </sgds-checkbox-group>
+    `);
+  
+    const checkbox = group.querySelector<SgdsCheckbox>("sgds-checkbox");
+    if (checkbox) {
+      checkbox.invalid = false;
+      await elementUpdated(checkbox);
+    }
+  
+    expect(group.hasInvalidCheckbox).to.be.false;
+    const feedback = group.shadowRoot?.querySelector(".error-message-container");
+    expect(feedback).to.be.null;
+  });
+
+  it("should not display feedback if the group does not have hasFeedback and at least one checkbox is invalid", async () => {
+    const group = await fixture<SgdsCheckboxGroup>(html`
+      <sgds-checkbox-group>
+        <sgds-checkbox slot="checkbox" invalid required></sgds-checkbox>
+      </sgds-checkbox-group>
+    `);
+  
+    const checkbox = group.querySelector<SgdsCheckbox>("sgds-checkbox");
+    if (checkbox) {
+      checkbox.invalid = true; 
+      await elementUpdated(checkbox);
+    }
+    expect(group.hasInvalidCheckbox).to.be.true;
+  
+    const feedback = group.shadowRoot?.querySelector(".error-message-container");
+    expect(feedback).to.be.null;
+  });
+  
+
+  it("should mark the checkbox as invalid when required and not checked upon form submission", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox required slot="checkbox"></sgds-checkbox>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault(); // Prevent page navigation
+    });
+    
+    const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox");
+    const button = form.querySelector<SgdsButton>("sgds-button");
+  
+    if (checkbox) {
+      checkbox.checked = false; 
+      await elementUpdated(checkbox);
+      button?.click();
+      expect(checkbox.invalid).to.be.true;
+    }
+  });
+
+  it("should not mark the checkbox as invalid when not required and not checked upon form submission", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox slot="checkbox"></sgds-checkbox>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault(); // Prevent page navigation
+    });
+
+    const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox");
+    const button = form.querySelector<SgdsButton>("sgds-button");
+  
+    if (checkbox) {
+      checkbox.checked = false; 
+      await elementUpdated(checkbox);
+      button?.click();
+      expect(checkbox.invalid).to.be.false;
+    }
+  });
+
+  it("should apply the 'indeterminate' property to a checkbox when it's set", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox indeterminate></sgds-checkbox>`);
+    const checkbox = el.shadowRoot?.querySelector("input"); 
+    
+    expect(checkbox?.indeterminate).to.be.true; 
+  });
+  
+  it("should not apply the 'indeterminate' property to a checkbox when it's not set", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox></sgds-checkbox>`);
+    const checkbox = el.shadowRoot?.querySelector("input"); 
+    
+    expect(checkbox?.indeterminate).to.be.false;
+  });
 });
+
+
