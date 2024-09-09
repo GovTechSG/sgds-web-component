@@ -7,21 +7,31 @@ Use "use client" directive to indicate that the components are Client components
 ### Example - Client components
 
 ```jsx
+// masthead.ts
 "use client";
 import SgdsMasthead from "@govtechsg/sgds-web-component/react/masthead/index.js";
 
-const Masthead = () => {
-  return (
-      <SgdsMasthead></SgdsMasthead>
-  );
-};
+export default SgdsMasthead;
+```
 
-export default Masthead;
+```jsx
+// layout.ts
+import SgdsMasthead from "./masthead"
+
+export default function RootLayout() {
+  return (
+    <html lang="en">
+      <body>
+        <SgdsMasthead />
+      </body>
+    </html>
+  );
+}
 ```
 
 For certain components, you might encounter console warnings from NextJS that `ShadowRoot is not defined` or `windows is not defined`. Such components needs to be completely client side rendered. Adding "use client" is insufficient as the component is [still pre-rendered on the server and hydrated on the client](https://nextjs.org/docs/app/building-your-application/rendering/client-components). In the server, there is no concept of `windows` and `ShadowRoot`.
 
-For such cases, import the components like so
+For such cases, re-export the components like so:
 
 ```jsx
 "use client";
@@ -30,11 +40,7 @@ const SgdsActionCard = dynamic(() => import("@govtechsg/sgds-web-component/react
   ssr: false
 });
 
-const ActionCard = () => {
-  return <SgdsActionCard></SgdsActionCard>;
-};
-
-export default ActionCard;
+export default SgdsActionCard;
 ```
 
 #### Demo
