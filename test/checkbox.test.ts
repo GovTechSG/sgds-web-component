@@ -19,7 +19,6 @@ describe("<sgds-checkbox>", () => {
     expect(input?.getAttribute("id")).to.equal(label?.getAttribute("for"));
   });
 
-
   it("should be able to pass in aria-label attribute", async () => {
     const el = await fixture(html`<sgds-checkbox ariaLabel="label"></sgds-checkbox>`);
     const checkbox = el.shadowRoot?.querySelector("label");
@@ -48,7 +47,6 @@ describe("<sgds-checkbox>", () => {
     await el.updateComplete;
     expect(checkbox).to.have.attribute("aria-invalid", "true");
   });
-
 
   it("should emit sgds-change event when input is clicked", async () => {
     const el = await fixture(html`<sgds-checkbox></sgds-checkbox>`);
@@ -220,13 +218,13 @@ describe("<sgds-checkbox>", () => {
         <sgds-checkbox slot="checkbox" required></sgds-checkbox>
       </sgds-checkbox-group>
     `);
-  
+
     const checkbox = group.querySelector<SgdsCheckbox>("sgds-checkbox");
     if (checkbox) {
       checkbox.invalid = true;
       await elementUpdated(checkbox);
     }
-  
+
     expect(group.hasInvalidCheckbox).to.be.true;
     const feedback = group.shadowRoot?.querySelector(".error-message-container");
     expect(feedback).to.exist;
@@ -238,13 +236,13 @@ describe("<sgds-checkbox>", () => {
         <sgds-checkbox slot="checkbox" required></sgds-checkbox>
       </sgds-checkbox-group>
     `);
-  
+
     const checkbox = group.querySelector<SgdsCheckbox>("sgds-checkbox");
     if (checkbox) {
       checkbox.invalid = false;
       await elementUpdated(checkbox);
     }
-  
+
     expect(group.hasInvalidCheckbox).to.be.false;
     const feedback = group.shadowRoot?.querySelector(".error-message-container");
     expect(feedback).to.be.null;
@@ -256,18 +254,17 @@ describe("<sgds-checkbox>", () => {
         <sgds-checkbox slot="checkbox" invalid required></sgds-checkbox>
       </sgds-checkbox-group>
     `);
-  
+
     const checkbox = group.querySelector<SgdsCheckbox>("sgds-checkbox");
     if (checkbox) {
-      checkbox.invalid = true; 
+      checkbox.invalid = true;
       await elementUpdated(checkbox);
     }
     expect(group.hasInvalidCheckbox).to.be.true;
-  
+
     const feedback = group.shadowRoot?.querySelector(".error-message-container");
     expect(feedback).to.be.null;
   });
-  
 
   it("should mark the checkbox as invalid when required and not checked upon form submission", async () => {
     const form = await fixture<HTMLFormElement>(html`
@@ -277,15 +274,15 @@ describe("<sgds-checkbox>", () => {
       </form>
     `);
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener("submit", event => {
       event.preventDefault(); // Prevent page navigation
     });
-    
+
     const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox");
     const button = form.querySelector<SgdsButton>("sgds-button");
-  
+
     if (checkbox) {
-      checkbox.checked = false; 
+      checkbox.checked = false;
       await elementUpdated(checkbox);
       button?.click();
       expect(checkbox.invalid).to.be.true;
@@ -300,15 +297,15 @@ describe("<sgds-checkbox>", () => {
       </form>
     `);
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener("submit", event => {
       event.preventDefault(); // Prevent page navigation
     });
 
     const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox");
     const button = form.querySelector<SgdsButton>("sgds-button");
-  
+
     if (checkbox) {
-      checkbox.checked = false; 
+      checkbox.checked = false;
       await elementUpdated(checkbox);
       button?.click();
       expect(checkbox.invalid).to.be.false;
@@ -317,17 +314,15 @@ describe("<sgds-checkbox>", () => {
 
   it("should apply the 'indeterminate' property to a checkbox when it's set", async () => {
     const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox indeterminate></sgds-checkbox>`);
-    const checkbox = el.shadowRoot?.querySelector("input"); 
-    
-    expect(checkbox?.indeterminate).to.be.true; 
+    const checkbox = el.shadowRoot?.querySelector("input");
+
+    expect(checkbox?.indeterminate).to.be.true;
   });
-  
+
   it("should not apply the 'indeterminate' property to a checkbox when it's not set", async () => {
     const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox></sgds-checkbox>`);
-    const checkbox = el.shadowRoot?.querySelector("input"); 
-    
+    const checkbox = el.shadowRoot?.querySelector("input");
+
     expect(checkbox?.indeterminate).to.be.false;
   });
 });
-
-

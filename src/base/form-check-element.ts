@@ -76,7 +76,6 @@ export class FormCheckElement extends SgdsElement implements SgdsFormControl {
   protected _handleChange() {
     if (this.indeterminate) {
       this.indeterminate = !this.indeterminate;
-
     }
 
     this.checked = !this.checked;
@@ -112,7 +111,7 @@ export class FormCheckElement extends SgdsElement implements SgdsFormControl {
   handleStateChange() {
     this.invalid = !this.input.checkValidity();
   }
-  
+
   /** @internal */
   updated(changedProperties: Map<string | number | symbol, unknown>) {
     super.updated(changedProperties);
