@@ -21,10 +21,17 @@ export class SgdsLink extends LinkElement {
   @property({ type: String, reflect: true })
   variant: "primary" | "danger" = "primary";
 
+  private _handleClick(e: Event) {
+    if (this.disabled) {
+      e.preventDefault();
+    }
+  }
+
   override render() {
+    /** When removing href, link is no longer focusable */
     return html`
       <a
-        href=${this.disabled ? "javascript:void(0)" : ifDefined(this.href)}
+        href=${ifDefined(this.href && !this.disabled ? this.href : undefined)}
         class="nav-link ${classMap({
           disabled: this.disabled,
           active: this.active
@@ -32,6 +39,7 @@ export class SgdsLink extends LinkElement {
         ?disabled=${this.disabled}
         aria-disabled=${this.disabled ? "true" : "false"}
         target=${this.target}
+        @click=${this._handleClick}
       >
         <slot name="leftIcon"></slot>
         <slot></slot>

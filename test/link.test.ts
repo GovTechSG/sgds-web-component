@@ -22,10 +22,10 @@ describe("<sgds-link>", () => {
             `
     );
   });
-  it("if disabled true, href=javascript:void(0)", async () => {
+  it("if disabled true, href attribute does not exist", async () => {
     const el = await fixture<SgdsLink>(html`<sgds-link disabled href="#"></sgds-link>`);
     const anchor = el.shadowRoot?.querySelector("a.nav-link");
-    expect(anchor?.getAttribute("href")).to.equal("javascript:void(0)");
+    expect(anchor?.getAttribute("href")).to.not.exist;
   });
 });
 //
