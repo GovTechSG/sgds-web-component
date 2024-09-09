@@ -17,12 +17,6 @@ describe("<sgds-radio>", () => {
     expect(el).to.have.attribute("tabindex", "-1");
   });
 
-  it("when isInline prop is passed, radio class should have class .form-check-inline", async () => {
-    const el = await fixture(html`<sgds-radio isInline></sgds-radio>`);
-    const radio = el.shadowRoot?.querySelector("div");
-    expect(radio?.classList.value).to.contain("form-check-inline");
-  });
-
   it("input's id should be equal to label's for attribute", async () => {
     const el = await fixture(html`<sgds-radio></sgds-radio>`);
     const input = el.shadowRoot?.querySelector("input");
@@ -128,10 +122,10 @@ describe("<sgds-radio-group>", () => {
     const radioGroup = <SgdsRadioGroup>el.querySelector("sgds-radio-group");
     expect(radioGroup.invalid).to.be.true;
   });
-  it("when hasFeedback is true, feedback message is empty string", async () => {
+  it("when hasFeedback and invalid is true , feedback message is empty string", async () => {
     const el = await fixture<SgdsRadioGroup>(
       html`
-        <sgds-radio-group id="radio-group" hasFeedback>
+        <sgds-radio-group id="radio-group" hasFeedback invalid>
           <sgds-radio id="radio2" value="2">two</sgds-radio>
         </sgds-radio-group>
       `
@@ -142,7 +136,7 @@ describe("<sgds-radio-group>", () => {
   it("invalidFeedback sets the feedback message", async () => {
     const el = await fixture<SgdsRadioGroup>(
       html`
-        <sgds-radio-group id="radio-group" hasFeedback invalidFeedback="test">
+        <sgds-radio-group id="radio-group" hasFeedback invalid invalidFeedback="test">
           <sgds-radio id="radio2" value="2">two</sgds-radio>
         </sgds-radio-group>
       `

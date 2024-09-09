@@ -1,10 +1,10 @@
-.invalid-feedback {
-  color: var(--sgds-form-invalid-color);
-  display: none;
-  font-size: var(--sgds-form-feedback-font-size);
-  width: 100%;
+.invalid-feedback-container {
+  display: flex;
+  gap: var(--sgds-form-gap-sm);
 }
-.is-invalid ~ .invalid-feedback,
-.was-validated :invalid ~ .invalid-feedback {
-  display: block;
+
+.invalid-feedback {
+  color: var(--sgds-form-danger-color);
+  font-size: var(--sgds-font-size-1);
+  font-weight: var(--sgds-font-weight-regular);
 }

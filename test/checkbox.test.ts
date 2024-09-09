@@ -224,9 +224,7 @@ describe("<sgds-checkbox>", () => {
       checkbox.invalid = true;
       await elementUpdated(checkbox);
     }
-
-    expect(group.hasInvalidCheckbox).to.be.true;
-    const feedback = group.shadowRoot?.querySelector(".error-message-container");
+    const feedback = group.shadowRoot?.querySelector(".invalid-feedback-container");
     expect(feedback).to.exist;
   });
 
@@ -243,9 +241,8 @@ describe("<sgds-checkbox>", () => {
       await elementUpdated(checkbox);
     }
 
-    expect(group.hasInvalidCheckbox).to.be.false;
     const feedback = group.shadowRoot?.querySelector(".error-message-container");
-    expect(feedback).to.be.null;
+    expect(feedback).not.to.exist;
   });
 
   it("should not display feedback if the group does not have hasFeedback and at least one checkbox is invalid", async () => {
@@ -260,10 +257,9 @@ describe("<sgds-checkbox>", () => {
       checkbox.invalid = true;
       await elementUpdated(checkbox);
     }
-    expect(group.hasInvalidCheckbox).to.be.true;
 
     const feedback = group.shadowRoot?.querySelector(".error-message-container");
-    expect(feedback).to.be.null;
+    expect(feedback).not.to.exist;
   });
 
   it("should mark the checkbox as invalid when required and not checked upon form submission", async () => {

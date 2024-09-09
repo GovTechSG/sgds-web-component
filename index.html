@@ -163,6 +163,7 @@
     <main>
         <div class="container">
             <sgds-link href="https://google.com">Default</sgds-link>
+            <sgds-link href="https://google.com" target="_blank">Default</sgds-link>
             <sgds-link href="https://google.com" disabled>Default (disabled)</sgds-link>
             <sgds-link href="https://google.com" variant="danger">Danger</sgds-link>
             <sgds-link href="https://google.com" variant="danger" disabled>Danger (disabled)</sgds-link>
@@ -718,30 +719,31 @@
             <div class="container">
                 <h2>Checkbox</h2>
                 <form id="radio-submit">
-                    <sgds-checkbox id="hehe" isInline invalid hasFeedback invalidFeedback="test" variant = "default">default</sgds-checkbox>
-                    <sgds-checkbox hasFeedback isInline variant = "invalid">invalid</sgds-checkbox>
-                    <sgds-checkbox isInline variant = "hover">hover</sgds-checkbox>
-                    <sgds-checkbox isInline variant = "focus">focus</sgds-checkbox>
-                    <sgds-checkbox isInline variant = "disabled">disabled</sgds-checkbox>
+                    <sgds-checkbox id="hehe"  invalid hasFeedback invalidFeedback="test" variant = "default">default</sgds-checkbox>
+                    <sgds-checkbox hasFeedback  variant = "invalid">invalid</sgds-checkbox>
+                    <sgds-checkbox  variant = "hover">hover</sgds-checkbox>
+                    <sgds-checkbox  variant = "focus">focus</sgds-checkbox>
+                    <sgds-checkbox  variant = "disabled">disabled</sgds-checkbox>
                     <sgds-switch invalid checked hasFeedback>test</sgds-switch>
                     <sgds-button type="submit">Submit</sgds-button>
                 </form>
             </div>
             <div class="container">
                 <h2>Checkbox</h2>
-                <sgds-checkbox isInline id="hehe">1</sgds-checkbox>
-                <sgds-checkbox isInline>2</sgds-checkbox>
-                <sgds-checkbox isInline>3</sgds-checkbox>
+                <sgds-checkbox  id="hehe">1</sgds-checkbox>
+                <sgds-checkbox >2</sgds-checkbox>
+                <sgds-checkbox >3</sgds-checkbox>
             </div>
             <div class="container">
                 <h2>Radiogroup</h2>
+                <sgds-radio  value="1" invalid checked>Option 1 </sgds-radio>
                 <form id="radio-submit">
-                    <sgds-radio-group required hasFeedback invalidFeedback="This is required">
+                    <sgds-radio-group required hasFeedback invalidFeedback="wrong">
                         <span slot="label">Select an option</span>
-                        <sgds-radio disabled isInline value="1">Option 1</sgds-radio>
-                        <sgds-radio isInline value="2">Option 2</sgds-radio>
-                        <sgds-radio isInline value="3">Option 3</sgds-radio>
-                    </sgds-radio-group>
+                        <sgds-radio value="1">Option 1</sgds-radio>
+                        <sgds-radio value="2">Option 2</sgds-radio>
+                        <sgds-radio value="3">Option 3</sgds-radio>
+                      </sgds-radio-group>
                     <sgds-button type="submit">Submit</sgds-button>
                 </form>
                 <script>

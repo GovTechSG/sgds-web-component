@@ -35,7 +35,7 @@
     gap: var(--sgds-form-gap-md); 
   }
   
-  .error-message-container {
+  /* .error-message-container {
     display: flex;
     gap: var(--sgds-form-gap-sm);
   }
@@ -44,4 +44,4 @@
     color: var(--sgds-form-danger-color);
     font-size: var(--sgds-font-size-1);
     font-weight: var(--sgds-font-weight-regular);
-  }
+  } */

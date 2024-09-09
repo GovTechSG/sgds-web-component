@@ -1,7 +1,10 @@
+input {
+  margin: 0;
+}
+
 .form-check {
   display: flex;
   gap: var(--sgds-form-gap-md);
-  min-height: 2rem;
   padding: var(--sgds-form-padding-inline-sm) 0px;
   align-items: center;
 }

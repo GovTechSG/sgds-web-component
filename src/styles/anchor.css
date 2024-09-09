@@ -1,10 +1,3 @@
-a {
-  color: var(--sgds-link);
-  text-decoration: underline;
-}
-a {
-  text-underline-offset: 0.25rem;
-}
 a[target="_blank"]::after {
   background-color: currentColor;
   display: inline-block;
@@ -20,13 +13,3 @@ a[target="_blank"]::after {
   -webkit-mask-position: center;
   mask-position: center;
 }
-
-/* Globally style slotted anchor tags */
-a {
-  color: var(--sgds-link);
-  text-decoration: var(--sgds-link-decoration);
- 
-}
-a:hover {
-  color: var(--sgds-link-hover-color);
-} 

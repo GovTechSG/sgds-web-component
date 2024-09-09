@@ -4,7 +4,7 @@ import linkStyles from "./link.css";
 import { html } from "lit";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
-
+import anchorStyles from "../../styles/anchor.css";
 /**
  * @summary Link allows users to click and navigate their way from page to page
  *
@@ -13,7 +13,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
  * @slot rightIcon - Insert an icon to the right of the link text
  */
 export class SgdsLink extends LinkElement {
-  static styles = [...LinkElement.styles, linkStyles];
+  static styles = [...LinkElement.styles, anchorStyles, linkStyles];
   /** when true, sets the active stylings of .nav-link */
   @property({ type: String, reflect: true })
   size: "sm" | "md" | "lg" = "md";

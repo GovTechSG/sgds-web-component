@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -116,6 +116,7 @@ export class SgdsRadioGroup extends SgdsElement {
   private _radios!: Array<SgdsRadio>;
 
   private _handleRadioClick(event: MouseEvent) {
+    event.preventDefault();
     const target = event.target as SgdsRadio;
 
     if (target.disabled) {
@@ -124,7 +125,10 @@ export class SgdsRadioGroup extends SgdsElement {
 
     this.value = target.value;
     const radios = this._radios;
-    radios.forEach(radio => (radio.checked = radio === target));
+
+    radios.forEach(radio => {
+      return (radio.checked = radio === target);
+    });
   }
 
   private _handleKeyDown(event: KeyboardEvent) {
@@ -152,20 +156,8 @@ export class SgdsRadioGroup extends SgdsElement {
     this.value = radios[index].value;
     radios[index].checked = true;
     radios[index].tabIndex = 0;
-    radios[index].focus();
-
+    // preventDefault at the end to allow Tab
     event.preventDefault();
-  }
-
-  private _handleLabelClick() {
-    const radios = this._radios;
-    const checked = radios.find(radio => radio.checked);
-    const radioToFocus = checked || radios[0];
-
-    // Move focus to the checked radio (or the first one if none are checked) when clicking the label
-    if (radioToFocus) {
-      radioToFocus.focus();
-    }
   }
 
   private _handleSlotChange() {
@@ -197,19 +189,17 @@ export class SgdsRadioGroup extends SgdsElement {
 
   render() {
     const defaultSlot = html`
-      <div>
-        <slot
-          @click=${this._handleRadioClick}
-          @keydown=${this._handleKeyDown}
-          @slotchange=${this._handleSlotChange}
-          role="presentation"
-        ></slot>
-      </div>
+      <slot
+        class="radio-container"
+        @click=${this._handleRadioClick}
+        @keydown=${this._handleKeyDown}
+        @slotchange=${this._handleSlotChange}
+        role="presentation"
+      ></slot>
     `;
     return html`
       <fieldset name=${this.name}>
         <label
-          @click=${this._handleLabelClick}
           class=${classMap({
             "form-label": true,
             required: this.required
@@ -227,7 +217,19 @@ export class SgdsRadioGroup extends SgdsElement {
           tabindex="-1"
           @invalid=${(e: Event) => this._handleInvalid(e)}
         />
-        ${this.hasFeedback ? html`<div class="invalid-feedback">${this.invalidFeedback}</div>` : ""}
+        ${this.invalid && this.hasFeedback
+          ? html`
+              <div class="invalid-feedback-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path
+                    d="M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10ZM10 6.25C9.49805 6.25 9.10584 6.68339 9.15578 7.18285L9.48461 10.4711C9.51109 10.7359 9.7339 10.9375 10 10.9375C10.2661 10.9375 10.4889 10.7359 10.5154 10.4711L10.8442 7.18285C10.8942 6.68339 10.5019 6.25 10 6.25ZM10.0014 11.875C9.48368 11.875 9.06394 12.2947 9.06394 12.8125C9.06394 13.3303 9.48368 13.75 10.0014 13.75C10.5192 13.75 10.9389 13.3303 10.9389 12.8125C10.9389 12.2947 10.5192 11.875 10.0014 11.875Z"
+                    fill="#B90000"
+                  />
+                </svg>
+                <div id="radio-group-feedback" tabindex="0" class="invalid-feedback">${this.invalidFeedback}</div>
+              </div>
+            `
+          : nothing}
       </fieldset>
     `;
   }
