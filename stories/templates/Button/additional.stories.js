@@ -79,57 +79,30 @@ export const ButtonPlayground = {
     <playground-ide editable-file-system line-numbers resizable>
       <script type="sample/html" filename="index.html">
         <!doctype html>
+        <html lang="en">
+        <head>
+          <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@2.0.0/themes/day.css' rel='stylesheet' type='text/css' />
           <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component">&lt;/script>
-            <style>
-              sgds-button {
-                --size: "sm"
-              }
-              .red-border {
-                border: 20px solid red;
-              }
-            </style>
-
-            <form id="form1">
-              <label for="input1">Form 1 Input:</label>
-              <input type="text" id="input1" name="input1">
-            </form>
-
-            <!-- Form 2 -->
-            <form id="form2">
-              <label for="input2">Form 2 Input:</label>
-              <input type="text" id="input2" name="input2">
-            </form>
+          <script src="./button-settings.js">&lt;/script>
+          <style>
+            sgds-button {
+              --btn-border-radius: 0;
+            }
+          </style>
 
 
-          </head>
-          <body>
-            <sgds-button
-            id="dynamic-button"
-            variant="primary"
-            type="button"
-            size = "lg"
-            active = ""
-            class="red-border"
-            href="https://www.google.com"
-            target = "_blank"
-            download="sample-download.pdf"
-            form="form1"
-            formaction="https://httpbin.org/post"
-            formmethod="post"
-            formtarget="_blank"
-            formnovalidate>
+        </head>
+        <body>
+          <sgds-button id="dynamic-button">
             Submit Form 1
           </sgds-button>
-
-
-
         </body>
+        </html>
       </script>
 
       <script type="sample/css" filename="styles.css">
-
         sgds-button {
-          --size: "sm"
+          --size: "sm";
         }
         .red-border {
           border: 20px solid red;
@@ -145,11 +118,9 @@ export const ButtonPlayground = {
               console.log('Button lost focus');
             });
 
-
             button.addEventListener('sgds-focus', () => {
               console.log('Button gained focus');
             });
-
 
             console.log('Button label:', button.textContent.trim());
           } else {
@@ -158,8 +129,53 @@ export const ButtonPlayground = {
         });
       </script>
     </playground-ide>
+  <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #ddd;">
+      <h2>Welcome to the Playground IDE</h2>
+      <p>
+        In this playground, there are three different things you can do to experiment and customize the <code>sgds-button</code> component. Explore the steps below!
+      </p>
+
+      <h3>1. Edit the Custom CSS</h3>
+      <p>
+        You can edit the button's styles by modifying its custom CSS properties. These can be seen in the documentation below. For example, you can change the border radius by editing the following code inside <strong>index.html</strong>:
+      </p>
+      <pre><code>
+        sgds-button {
+          --btn-border-radius: 100px;
+        }
+      </code></pre>
+      <p>This will apply a large, rounded border to the button.</p>
+
+      <h3>2. Modify Event Handling</h3>
+      <p>
+        You can customize how the button responds to events by editing <strong>button-settings.js</strong>. For instance, you can change the action triggered by the <code>sgds-blur</code> event:
+      </p>
+      <pre><code>
+        button.addEventListener('sgds-blur', () => {
+          alert('Button lost focus');
+        });
+      </code></pre>
+      <p>In this example, the message will appear as an alert when the button loses focus.</p>
+
+      <h3>3. Change Button Attributes</h3>
+      <p>
+        You can modify the button's attributes directly within the HTML to change its appearance or behavior. Refer to the documentation below. For instance, try changing the button variant inside <strong>index.html</strong>:
+      </p>
+      <pre><code>
+         variant="success"
+      </code></pre>
+      <p>Changing the <code>variant</code> attribute to <code>success</code> will apply a new style to the button.</p>
+
+      <h3>Explore More!</h3>
+      <p>
+        Feel free to explore the playground further. Try editing the button's CSS, adjusting event handlers, or playing with its attributes using the documentation below.
+      </p>
+    </div>
   `,
-  name: "Playground",
+  name: "ButtonPlayground",
   args: {},
   parameters: {}
 };
+
+
+
