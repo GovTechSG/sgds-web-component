@@ -6,7 +6,7 @@ import progressBarStyle from "./progress-bar.css";
 export type ProgressBarVariant = "primary" | "neutral";
 
 export class SgdsProgressBar extends SgdsElement {
-  static styles = [progressBarStyle];
+  static styles = [...SgdsElement.styles, progressBarStyle];
 
   /** The background color of the progress bar */
   @property({ type: String, reflect: true }) variant: ProgressBarVariant;
@@ -49,7 +49,7 @@ export class SgdsProgressBar extends SgdsElement {
             aria-valuemax=${this.ariamax}
           ></div>
         </div>
-        <span class="label">${this.label ? html`${this.label}` : nothing}</span>
+        ${this.label ? html`<span class="label">${this.label}</span>` : nothing}
       </div>
     `;
   }
