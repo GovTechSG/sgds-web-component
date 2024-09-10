@@ -23,6 +23,7 @@ import "./components/QuantityToggle";
 import "./components/Radio";
 import "./components/Sidenav";
 import "./components/Spinner";
+import "./components/Switch";
 import "./components/Stepper";
 import "./components/Tab";
 import "./components/Table";

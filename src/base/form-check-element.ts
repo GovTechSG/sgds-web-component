@@ -112,15 +112,6 @@ export class FormCheckElement extends SgdsElement implements SgdsFormControl {
     this.invalid = !this.input.checkValidity();
   }
 
-  /** @internal */
-  updated(changedProperties: Map<string | number | symbol, unknown>) {
-    super.updated(changedProperties);
-    const checkbox = this.shadowRoot?.querySelector("input");
-    if (checkbox) {
-      checkbox.indeterminate = this.indeterminate;
-    }
-  }
-
   render() {
     return html`
       <div

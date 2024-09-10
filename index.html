@@ -284,7 +284,7 @@
                 <span slot="label">Select Your Preferences</span>
                 <span slot="hint-text">Please choose one or more options:</span>
                 <sgds-checkbox  slot="checkbox" value="option1" hasFeedback required>Option 1</sgds-checkbox>
-                <sgds-checkbox slot="checkbox" value="option2" required>Option 2 indeterminate</sgds-checkbox>
+                <sgds-checkbox indeterminate slot="checkbox" value="option2" required>Option 2 indeterminate</sgds-checkbox>
                 <sgds-checkbox disabled slot="checkbox" value="option3" required>Option 3</sgds-checkbox>
             </sgds-checkbox-group>
             <sgds-button type="submit">Submit</sgds-button>
@@ -734,7 +734,8 @@
                     <sgds-checkbox  variant = "hover">hover</sgds-checkbox>
                     <sgds-checkbox  variant = "focus">focus</sgds-checkbox>
                     <sgds-checkbox  variant = "disabled">disabled</sgds-checkbox>
-                    <sgds-switch invalid checked hasFeedback>test</sgds-switch>
+                    <sgds-switch>Switch</sgds-switch>
+                    <sgds-switch disabled>Switch</sgds-switch>
                     <sgds-button type="submit">Submit</sgds-button>
                 </form>
             </div>
