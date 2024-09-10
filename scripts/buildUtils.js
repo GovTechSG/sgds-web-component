@@ -1,5 +1,6 @@
 const fs = require("fs");
-export const getFolders = entry => {
+
+exports.getFolders = entry => {
   const dirs = fs.readdirSync(entry);
   const dirsWithoutIndex = dirs
     .filter(name => name !== "index.ts")
@@ -10,7 +11,7 @@ export const getFolders = entry => {
   return dirsWithoutIndex;
 };
 
-export const getFiles = (entry, extensions = [], excludeExtensions = []) => {
+exports.getFiles = (entry, extensions = [], excludeExtensions = []) => {
   let fileNames = [];
   const dirs = fs.readdirSync(entry);
   dirs.forEach(dir => {
