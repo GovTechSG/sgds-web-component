@@ -1,6 +1,7 @@
 :host {
   outline: 0;
 }
+
 input {
   margin: 0;
 }
@@ -25,15 +26,32 @@ input {
   border-radius: 50%;
 }
 
-.form-check-input:focus,
-.form-check-input:focus-visible {
-  box-shadow: var(--sgds-form-box-shadow-focus);
+.form-check-input:not([disabled]):not(.is-invalid):not([aria-checked="true"]):hover {
+  border: var(--sgds-form-border-width-thick) solid var(--sgds-form-border-color-emphasis);
+}
+
+.form-check-input:focus {
   outline: 0;
 }
+
+.form-check-input:focus-visible {
+  box-shadow: var(--sgds-form-box-shadow-focus);
+  border: var(--sgds-form-border-width-default) solid var(--sgds-form-border-color-emphasis);
+  outline: 0;
+}
+
 .form-check-input:checked,
 .form-check-input[checked] {
   background-color: var(--sgds-form-primary-bg);
   --sgds-radio-bg-image: url('data:image/svg+xml,<svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 4C0 1.79086 1.79086 0 4 0C6.20914 0 8 1.79086 8 4C8 6.20914 6.20914 8 4 8C1.79086 8 0 6.20914 0 4Z" fill="white"/></svg>');
+  border: var(--sgds-form-border-width-default) solid var(--sgds-default-border-color-transparent);
+}
+
+.form-check-input:not([disabled]):not(.is-invalid):checked:hover,
+.form-check-input:not([disabled]):not(.is-invalid)[checked]:hover,
+.form-check-input:not([disabled]):not(.is-invalid):checked:focus-visible,
+.form-check-input:not([disabled]):not(.is-invalid)[checked]:focus-visible {
+  background-color: var(--sgds-form-primary-bg-emphasis);
 }
 
 :host([disabled]) .form-check {
@@ -44,6 +62,7 @@ input {
 .form-check-input.is-invalid {
   border-color: var(--sgds-form-danger-border-color);
 }
+
 .form-check-input:checked.is-invalid,
 .form-check-input[checked].is-invalid {
   background-color: var(--sgds-form-danger-bg);

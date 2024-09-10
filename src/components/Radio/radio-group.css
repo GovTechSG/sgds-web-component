@@ -8,9 +8,21 @@ fieldset {
   gap: var(--sgds-form-gap-md);
 }
 
+.label-hint-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-form-gap-sm);
+}
+
+.hint-text {
+  color: var(--sgds-form-color-subtle);
+  font-size: var(--sgds-font-size-1);
+}
+
 .radio-group-validation-input {
   display: none;
 }
+
 .radio-container{
   display: flex;
   flex-direction: column;
