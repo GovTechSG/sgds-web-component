@@ -19,10 +19,6 @@ export interface IStepMetaData {
  * @event sgds-arrived - Emitted right after the activeStep has updated its state, when upcoming step has arrived. Call `getMethod()` on this event to get the current step's component.
  * @event sgds-reset - Emitted right before the step is reset to its defaultActiveStep. Event is fired when reset method is called.
  *
- * @cssproperty --stepper-default-color - Sets the theme color for default stepper marker.
- * @cssproperty --stepper-theme-color - Sets the theme color for active, completed and clickable stepper marker.
- * @cssproperty --stepper-theme-hover-color - Sets the theme hover color for clickable stepper marker.
- *
  */
 export class SgdsStepper extends SgdsElement {
   static styles = [...SgdsElement.styles, stepperStyle];
@@ -35,6 +31,12 @@ export class SgdsStepper extends SgdsElement {
   /** The current state of active step. Defaults to 0 */
   @property({ type: Number, reflect: true })
   activeStep = 0;
+
+  /** When true, the stepper will be clickable */
+  @property({ type: String, reflect: true }) orientation: StepperOrientation = "horizontal";
+
+  /** When true, the stepper will be clickable */
+  @property({ type: Boolean, reflect: true }) clickable = false;
 
   /**Gets or sets the default activeStep used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("activeStep")
@@ -106,23 +108,29 @@ export class SgdsStepper extends SgdsElement {
 
   render() {
     return html`
-      <div class="sgds stepper">
+      <div
+        class="stepper ${classMap({
+          [`${this.orientation}`]: this.orientation
+        })}"
+      >
         ${this.steps.map(({ stepHeader: step }, index) => {
           return html`
-            <div
-              class="stepper-item ${classMap({
-                "is-active": this.activeStep === index,
-                "is-completed": this.activeStep > index,
-                "is-clickable": this.activeStep > index
-              })}"
-              tabindex="0"
-              aria-current=${this.activeStep === index ? "step" : "false"}
-              aria-disabled=${this.activeStep <= index ? "true" : "false"}
-              @click="${() => this._onStepperItemClick(index)}"
-              @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, index)}
-            >
-              <div class="stepper-marker">${index + 1}</div>
-              <div class="stepper-detail">${step}</div>
+            <div class="stepper-item-container">
+              <div
+                class="stepper-item ${classMap({
+                  "is-active": this.activeStep === index,
+                  "is-completed": this.activeStep > index,
+                  "is-clickable": this.clickable && this.activeStep > index
+                })}"
+                tabindex="0"
+                aria-current=${this.activeStep === index ? "step" : "false"}
+                aria-disabled=${this.activeStep <= index ? "true" : "false"}
+                @click="${this.clickable ? () => this._onStepperItemClick(index) : null}"
+                @keydown=${this.clickable ? (e: KeyboardEvent) => this._handleKeyDown(e, index) : null}
+              >
+                <div class="stepper-marker">${index + 1}</div>
+                <div class="stepper-detail">${step}</div>
+              </div>
             </div>
           `;
         })}
@@ -130,5 +138,7 @@ export class SgdsStepper extends SgdsElement {
     `;
   }
 }
+
+export type StepperOrientation = "horizontal" | "vertical";
 
 export default SgdsStepper;

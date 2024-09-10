@@ -45,17 +45,38 @@ describe("sgds-stepper", () => {
     expect(el.shadowRoot?.children[0].querySelector(".stepper-item")?.classList.value).to.contain("is-active");
   });
 
-  it("when activeStep set to 2, should update the `is-active` to the previous step when clicked", async () => {
+  it("when activeStep set to 2 and clickable set to false, should not update the `is-active` to the previous step when clicked", async () => {
     const el = await fixture(html` <sgds-stepper .steps=${stepMetaData} activeStep="2"></sgds-stepper> `);
 
-    const stepperItemTwo = el.shadowRoot?.querySelectorAll(".stepper-item")[1] as SgdsStepper;
-    const stepperItemThree = el.shadowRoot?.querySelectorAll(".stepper-item")[2] as SgdsStepper;
+    const stepperItemTwo = el.shadowRoot
+      ?.querySelectorAll(".stepper-item-container")[1]
+      .querySelector(".stepper-item") as SgdsStepper;
+    const stepperItemThree = el.shadowRoot
+      ?.querySelectorAll(".stepper-item-container")[2]
+      .querySelector(".stepper-item") as SgdsStepper;
+
+    stepperItemTwo.click();
+    await elementUpdated(el);
+    expect(stepperItemTwo.classList.contains("is-active")).to.be.false;
+    expect(stepperItemThree.classList.contains("is-active")).to.be.true;
+  });
+
+  it("when activeStep set to 2 and clickable set to true, should update the `is-active` to the previous step when clicked", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData} activeStep="2" clickable></sgds-stepper> `);
+
+    const stepperItemTwo = el.shadowRoot
+      ?.querySelectorAll(".stepper-item-container")[1]
+      .querySelector(".stepper-item") as SgdsStepper;
+    const stepperItemThree = el.shadowRoot
+      ?.querySelectorAll(".stepper-item-container")[2]
+      .querySelector(".stepper-item") as SgdsStepper;
 
     stepperItemTwo.click();
     await elementUpdated(el);
     expect(stepperItemTwo.classList.contains("is-active")).to.be.true;
     expect(stepperItemThree.classList.contains("is-active")).to.be.false;
   });
+
   it("getComponent method returns the component of current active step by default", async () => {
     const el = await fixture<SgdsStepper>(html` <sgds-stepper .steps=${stepMetaData} activeStep="2"></sgds-stepper> `);
     expect(el.getComponent()).to.equal(stepMetaData[2].component);
@@ -63,9 +84,24 @@ describe("sgds-stepper", () => {
     await el.updateComplete;
     expect(el.getComponent()).to.equal(stepMetaData[2 - 1].component);
   });
+
   it("getComponent method returns the component of step passed in", async () => {
     const el = await fixture<SgdsStepper>(html` <sgds-stepper .steps=${stepMetaData} activeStep="2"></sgds-stepper> `);
     expect(el.getComponent(0)).to.equal(stepMetaData[0].component);
+  });
+
+  it("when orientation is not set, the orientation is horizontal by default", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData}></sgds-stepper> `);
+
+    const stepper = el.shadowRoot?.querySelector(".stepper") as SgdsStepper;
+    expect(stepper.classList.contains("horizontal")).to.be.true;
+  });
+
+  it("when orientation set to vertical, the stepper will be in vertical orientation", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData} orientation="vertical"></sgds-stepper> `);
+
+    const stepper = el.shadowRoot?.querySelector(".stepper") as SgdsStepper;
+    expect(stepper.classList.contains("vertical")).to.be.true;
   });
 });
 
@@ -254,7 +290,9 @@ describe("Stepper events", () => {
 
 describe("Stepper keyboard interactions", () => {
   it("keyboard enter will simulate a click behaviour on the markers", async () => {
-    const el = await fixture<SgdsStepper>(html` <sgds-stepper activeStep="2" .steps=${stepMetaData}></sgds-stepper> `);
+    const el = await fixture<SgdsStepper>(
+      html` <sgds-stepper activeStep="2" .steps=${stepMetaData} clickable></sgds-stepper> `
+    );
     const arrivedHandler = sinon.spy();
     el.addEventListener("sgds-arrived", arrivedHandler);
     const markers = el.shadowRoot?.querySelectorAll("div.stepper-item");

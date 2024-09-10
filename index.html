@@ -265,10 +265,20 @@
                 <sgds-tab-panel name="three">three</sgds-tab-panel>
             </sgds-tab-group>
             <h2>Stepper</h2>
-            <sgds-stepper id="myStepper" activeStep="2"
-                steps='[{"stepHeader":"Personal Details","component":"1 test"},{"stepHeader":"Address and Contact Information","component":"2 test"},{"stepHeader":"Review","component":"3 test"}]'>
-
-            </sgds-stepper>
+            <div>
+                <h3>Horizontal Stepper</h3>
+                <sgds-stepper id="myStepper" activeStep="2"
+                    steps='[{"stepHeader":"Personal Details","component":"1 test"},{"stepHeader":"Address and Contact Information","component":"2 test"},{"stepHeader":"Review","component":"3 test"}]'>
+    
+                </sgds-stepper>
+            </div>
+            <div>
+                <h3>Vertical Stepper</h3>
+                <sgds-stepper id="myStepper" activeStep="1" clickable  orientation="vertical"
+                    steps='[{"stepHeader":"Personal Details","component":"1 test"},{"stepHeader":"Address and Contact Information","component":"2 test"},{"stepHeader":"Review","component":"3 test"}]'>
+    
+                </sgds-stepper>
+            </div>
         <form>
             <sgds-checkbox-group hasFeedback invalidFeedback="Please correct the invalid options above">
                 <span slot="label">Select Your Preferences</span>
