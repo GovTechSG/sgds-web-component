@@ -49,7 +49,7 @@ button:focus:not(:focus-visible) {
 }
 
 .btn-close:focus-visible {
-  box-shadow: var(--sgds-dimension-0) var(--sgds-dimension-0) var(--sgds-dimension-0) var(--sgds-dimension-4) var(--sgds-blue-300);
+  box-shadow: var(--sgds-box-shadow-focus);
   outline: 0;
 }
 
