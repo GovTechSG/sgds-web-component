@@ -25,7 +25,6 @@ export * from "./Mainnav/sgds-mainnav-item";
 export * from "./Masthead/sgds-masthead";
 export * from "./Modal/sgds-modal";
 export * from "./Pagination/sgds-pagination";
-export * from "./Progress/sgds-progress";
 export * from "./Progress/sgds-progress-bar";
 export * from "./QuantityToggle/sgds-quantity-toggle";
 export * from "./Radio/sgds-radio";

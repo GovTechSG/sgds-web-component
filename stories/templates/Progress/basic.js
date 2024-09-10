@@ -1,7 +1,7 @@
 import { html } from "lit-html";
 import { ifDefined } from "lit/directives/if-defined.js";
 
-export const Template = args => html` <sgds-progress>
+export const Template = args => html`
   <sgds-progress-bar
     label=${ifDefined(args.label)}
     variant=${ifDefined(args.variant)}
@@ -11,7 +11,7 @@ export const Template = args => html` <sgds-progress>
     arialabel=${ifDefined(args.arialabel)}
   >
   </sgds-progress-bar>
-</sgds-progress>`;
+`;
 
 export const args = {
   label: "50%",
