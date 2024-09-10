@@ -6,7 +6,6 @@ import "./global.css";
 import "../lib/themes/day.css";
 import "../lib/index.js";
 
-
 export const setCustomElementsManifestWithOptions = (
   customElements: any,
   options: { privateFields?: boolean }
