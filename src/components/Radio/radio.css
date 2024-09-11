@@ -59,8 +59,8 @@ input {
   cursor: not-allowed;
 }
 
-.form-check-input:not([disabled]).is-invalid {
-  border-color: var(--sgds-form-danger-border-color);
+.form-check-input:not([disabled]).is-invalid{
+  border: var(--sgds-form-border-width-thick) solid var(--sgds-form-danger-border-color);
 }
 
 .form-check-input:checked.is-invalid,
