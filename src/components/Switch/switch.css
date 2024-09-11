@@ -43,7 +43,6 @@ input {
 
 :host([disabled]) .form-check {
   opacity: var(--sgds-opacity-50);
-  
   pointer-events: none;
 }
 :host([disabled]) .form-check-input{
@@ -51,16 +50,34 @@ input {
   pointer-events: auto;
 }
 
+:host([size="sm"]) .form-check-input{
+  --sgds-switch-width: var(--sgds-form-width-md);
+  --sgds-switch-height: var(--sgds-form-height-sm);
+  --sgds-switch-bg-image: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8Z" fill="white"/></svg>');
+}
+:host([size="lg"]) .form-check-input{
+  --sgds-switch-width: var(--sgds-form-width-3-xl);
+  --sgds-switch-height: var(--sgds-form-height-lg);
+  --sgds-switch-bg-image: url('data:image/svg+xml,<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 16C0 7.16344 7.16344 0 16 0C24.8366 0 32 7.16344 32 16C32 24.8366 24.8366 32 16 32C7.16344 32 0 24.8366 0 16Z" fill="white"/></svg>');
+}
 @media (prefers-reduced-motion: reduce) {
   .form-check .form-check-input {
     transition: none;
   }
 }
 
+:host([icon]) .form-check-input:checked,
+:host([icon]) .form-check-input[checked]{
+  --sgds-switch-bg-image:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24ZM19.4502 7.18543C19.4173 7.10621 19.3692 7.03425 19.3084 6.97368C19.2479 6.91295 19.1759 6.86477 19.0967 6.8319C19.0174 6.79903 18.9325 6.7821 18.8467 6.7821C18.761 6.7821 18.676 6.79903 18.5968 6.8319C18.5176 6.86477 18.4456 6.91295 18.3851 6.97368L9.71752 15.6425L5.61459 11.5383C5.49214 11.4158 5.32607 11.3471 5.15291 11.3471C4.97975 11.3471 4.81368 11.4158 4.69123 11.5383C4.56879 11.6607 4.5 11.8268 4.5 12C4.5 12.1731 4.56879 12.3392 4.69123 12.4616L9.25585 17.0263C9.31642 17.087 9.38838 17.1352 9.4676 17.168C9.54682 17.2009 9.63175 17.2178 9.71752 17.2178C9.8033 17.2178 9.88823 17.2009 9.96745 17.168C10.0467 17.1352 10.1186 17.087 10.1792 17.0263L19.3084 7.89704C19.3692 7.83646 19.4173 7.7645 19.4502 7.68528C19.4831 7.60606 19.5 7.52113 19.5 7.43536C19.5 7.34959 19.4831 7.26466 19.4502 7.18543Z" fill="white"/></svg>');
+}
+:host([icon]) .form-check-input,
+:host([icon]) .form-check-input{
+  --sgds-switch-bg-image:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24ZM7.12024 6.49518C6.95448 6.49518 6.79551 6.56103 6.6783 6.67824C6.56109 6.79545 6.49524 6.95442 6.49524 7.12018C6.49524 7.28594 6.56109 7.44491 6.6783 7.56212L11.0977 11.9815L6.6783 16.401C6.56109 16.5182 6.49524 16.6771 6.49524 16.8429C6.49524 17.0087 6.56109 17.1676 6.6783 17.2848C6.79551 17.402 6.95448 17.4679 7.12024 17.4679C7.286 17.4679 7.44497 17.402 7.56218 17.2848L11.9816 12.8654L16.401 17.2848C16.5182 17.402 16.6772 17.4679 16.843 17.4679C17.0087 17.4679 17.1677 17.402 17.2849 17.2848C17.4021 17.1676 17.468 17.0087 17.468 16.8429C17.468 16.6771 17.4021 16.5182 17.2849 16.401L12.8655 11.9815L17.2849 7.56212C17.4021 7.44491 17.468 7.28594 17.468 7.12018C17.468 6.95442 17.4021 6.79545 17.2849 6.67824C17.1677 6.56103 17.0087 6.49518 16.843 6.49518C16.6772 6.49518 16.5182 6.56103 16.401 6.67824L11.9816 11.0977L7.56218 6.67824C7.44497 6.56103 7.286 6.49518 7.12024 6.49518Z" fill="white"/></svg>');
+}
 /* .form-check-input.is-invalid {
   border-color: var(--sgds-form-invalid-color);
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23b90000'/%3E%3C/svg%3E");
-
+ 
 } */
 /* .form-check-input.is-invalid:checked {
   background-color: var(--sgds-form-invalid-color);

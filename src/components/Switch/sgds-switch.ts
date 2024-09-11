@@ -16,7 +16,9 @@ export class SgdsSwitch extends FormCheckElement {
   static styles = [...FormCheckElement.styles, feedbackStyles, formLabelStyles, switchStyle];
 
   /** The size of the switch. By default, it is small size */
-  @property({ reflect: true, type: String }) size: "sm" | "md" = "sm";
+  @property({ reflect: true, type: String }) size: "sm" | "md" | "lg" = "md";
+
+  @property({ reflect: true, type: Boolean }) icon = false;
 
   constructor() {
     super();
