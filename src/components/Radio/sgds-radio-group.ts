@@ -199,14 +199,19 @@ export class SgdsRadioGroup extends SgdsElement {
     `;
     return html`
       <fieldset name=${this.name}>
-        <label
-          class=${classMap({
-            "form-label": true,
-            required: this.required
-          })}
-        >
-          <slot name="label"></slot>
-        </label>
+        <div class="label-hint-container">
+          <label
+            class=${classMap({
+              "form-label": true,
+              required: this.required
+            })}
+          >
+            <slot name="label"></slot>
+          </label>
+          <div class="hint-text">
+            <slot name="hint-text"></slot>
+          </div>
+        </div>
         ${defaultSlot}
         <input
           type="text"

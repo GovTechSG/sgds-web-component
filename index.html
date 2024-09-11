@@ -728,7 +728,7 @@
 
             <div class="container">
                 <h2>Checkbox</h2>
-                <form id="radio-submit">
+                <form id="checkbox-submit">
                     <sgds-checkbox id="hehe"  invalid hasFeedback invalidFeedback="test" variant = "default">default</sgds-checkbox>
                     <sgds-checkbox hasFeedback  variant = "invalid">invalid</sgds-checkbox>
                     <sgds-checkbox  variant = "hover">hover</sgds-checkbox>
@@ -751,9 +751,10 @@
                 <form id="radio-submit">
                     <sgds-radio-group required hasFeedback invalidFeedback="wrong">
                         <span slot="label">Select an option</span>
+                        <span slot="hint-text">Hint text</span>
                         <sgds-radio value="1">Option 1</sgds-radio>
                         <sgds-radio value="2">Option 2</sgds-radio>
-                        <sgds-radio value="3">Option 3</sgds-radio>
+                        <sgds-radio value="3" disabled>Option 3</sgds-radio>
                       </sgds-radio-group>
                     <sgds-button type="submit">Submit</sgds-button>
                 </form>
