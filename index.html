@@ -279,7 +279,7 @@
             <h2>Stepper</h2>
             <div>
                 <h3>Horizontal Stepper</h3>
-                <sgds-stepper id="myStepper" activeStep="1"
+                <sgds-stepper activeStep="1"
                     steps='[{"stepHeader":"Personal Details","component":"1 test"},{"stepHeader":"Address and Contact Information","component":"2 test"},{"stepHeader":"Review","component":"3 test"}]'>
     
                 </sgds-stepper>
@@ -290,6 +290,10 @@
                     steps='[{"stepHeader":"Personal Details","component":"1 test"},{"stepHeader":"Address and Contact Information","component":"2 test"},{"stepHeader":"Review","component":"3 test"}]'>
     
                 </sgds-stepper>
+                <sgds-button id="stepper-btn-next">Next</sgds-button>
+                <sgds-button id="stepper-btn-back">Back</sgds-button>
+                <sgds-button id="stepper-btn-last">Go to last page</sgds-button>
+                <sgds-button id="stepper-btn-first">Go to first page</sgds-button>
             </div>
         <form>
             <sgds-checkbox-group hasFeedback invalidFeedback="Please correct the invalid options above">
@@ -302,10 +306,7 @@
             <sgds-button type="submit">Submit</sgds-button>
         </form>
 
-            <sgds-button refId="myStepper" methodType="increment" variant="primary">Next</sgds-button>
-            <sgds-button refId="myStepper" methodType="decrement" variant="secondary">Back</sgds-button>
-            <sgds-button refId="myStepper" methodType="last" variant="warning">Go to last page</sgds-button>
-            <sgds-button refId="myStepper" methodType="first" variant="danger">Go to first page</sgds-button>
+
         </div>
         <div class="container">
             <datepicker-input></datepicker-input>
@@ -1184,6 +1185,24 @@
                     links='[{"title":"Application Guidelines","url":"/application-guidelines/lorem-ipsum-one/second-level-a/","links":[{"label":"<div>hello world </div>","href":"/application-guidelines/lorem-ipsum-one/second-level-a/"},{"label":"Second Level B","href":"/application-guidelines/lorem-ipsum-two/part-A/"},{"label":"Lorem Ipsum Three","href":"/application-guidelines/lorem-ipsum-three/"}]},{"title":"Legislation","url":"#","external":true,"links":[{"label":"External Link One","href":"https://en.wikipedia.org/wiki/Year","external":true},{"label":"External Link Two","href":"https://en.wikipedia.org/wiki/Spring_(season)","external":true}]},{"title":"Resources","url":"/resource_room/","links":[{"label":"All","href":"/resource_room/"},{"label":"Forms and Templates","href":"/resource_room/forms-and-templates/"},{"label":"Guides","href":"/resource_room/guides/"}]}]'></sgds-footer>
 
                 <script>
+                    const stepper = document.querySelector("#myStepper")
+                    const stepperNextBtn = document.querySelector("#stepper-btn-next")
+                    const stepperBackBtn = document.querySelector("#stepper-btn-back")
+                    const stepperLastBtn = document.querySelector("#stepper-btn-last")
+                    const stepperFirstBtn = document.querySelector("#stepper-btn-first")
+
+                    stepperNextBtn.addEventListener("click", () => {
+                        stepper.nextStep()
+                    })
+                    stepperBackBtn.addEventListener("click", () => {
+                        stepper.previousStep()
+                    })
+                    stepperLastBtn.addEventListener("click", () => {
+                        stepper.lastStep()
+                    })
+                    stepperFirstBtn.addEventListener("click", () => {
+                        stepper.firstStep()
+                    })
                     const toastAutohide  = document.querySelector( "#toast-autohide" )
                 
                     toastAutohide.addEventListener("sgds-show", () => {
