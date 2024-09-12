@@ -1,3 +1,14 @@
+## v2.0.1 (2024-09-12)
+
+### Fix
+
+- **masthead**: remove css nestings (#215)
+- **masthead**: remove css nestings
+
+### Refactor
+
+- **sgds-element**: remove css nestings from sgds-element
+
 ## v2.0.0 (2024-09-03)
 
 See [migration guide](./docs/Migration.md)
