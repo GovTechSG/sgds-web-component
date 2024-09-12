@@ -4,10 +4,11 @@ import SgdsElement from "../../base/sgds-element";
 import feedbackStyles from "../../styles/feedback.css";
 import formLabelStyles from "../../styles/form-label.css";
 import checkboxGroupStyles from "./checkbox-group.css";
+import formHintStyles from "../../styles/form-hint.css";
 import SgdsCheckbox from "./sgds-checkbox";
 
 export class SgdsCheckboxGroup extends SgdsElement {
-  static styles = [...SgdsElement.styles, feedbackStyles, formLabelStyles, checkboxGroupStyles];
+  static styles = [...SgdsElement.styles, feedbackStyles, formLabelStyles, checkboxGroupStyles, formHintStyles];
   /**@internal */
   @queryAssignedElements({ slot: "checkbox", flatten: true }) private checkboxes!: NodeListOf<SgdsCheckbox>;
   /**@internal */
@@ -47,7 +48,7 @@ export class SgdsCheckboxGroup extends SgdsElement {
           <label class="form-label">
             <slot name="label"></slot>
           </label>
-          <div class="hint-text">
+          <div class="form-text">
             <slot name="hint-text"></slot>
           </div>
         </div>
