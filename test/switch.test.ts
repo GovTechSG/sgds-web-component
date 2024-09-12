@@ -3,7 +3,7 @@ import { SgdsSwitch } from "../src/components/Switch/sgds-switch";
 import "../src/components/Switch";
 
 describe("<sgds-switch>", () => {
-  it("semantically matches the shadowDOM", async() => {
+  it("semantically matches the shadowDOM", async () => {
     const el = await fixture<SgdsSwitch>(html`<sgds-switch></sgds-switch>`);
     assert.shadowDom.equal(
       el,
@@ -25,12 +25,12 @@ describe("<sgds-switch>", () => {
         ></label>
       </div>
             `,
-            { ignoreAttributes: ["id", "for"] }
+      { ignoreAttributes: ["id", "for"] }
     );
-  })
-  it("semantically matches the shadowDOM when leftLabel slot is present", async() => {
+  });
+  it("semantically matches the shadowDOM when leftLabel slot is present", async () => {
     const el = await fixture<SgdsSwitch>(html`<sgds-switch><span slot="leftLabel">Hello</span></sgds-switch>`);
-   const leftLabel = el.shadowRoot?.querySelector("label.left-label")
-   expect(leftLabel?.classList.value).to.not.contain("d-none")
-  })
+    const leftLabel = el.shadowRoot?.querySelector("label.left-label");
+    expect(leftLabel?.classList.value).to.not.contain("d-none");
+  });
 });

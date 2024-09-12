@@ -88,12 +88,10 @@ export class SgdsSwitch extends SgdsElement {
   render() {
     return html`
       <div class="form-check">
-        <label for="${this._inputId}" class="form-check-label left-label"
-          ><slot name="leftLabel"></slot
-        ></label>
+        <label for="${this._inputId}" class="form-check-label left-label"><slot name="leftLabel"></slot></label>
         <input
           class=${classMap({
-            "form-check-input": true,
+            "form-check-input": true
           })}
           type="checkbox"
           id=${this._inputId}
@@ -104,9 +102,7 @@ export class SgdsSwitch extends SgdsElement {
           @change=${this._handleChange}
           @keydown=${this._handleKeyDown}
         />
-        <label for="${this._inputId}" class="form-check-label"
-          ><slot></slot
-        ></label>
+        <label for="${this._inputId}" class="form-check-label"><slot></slot></label>
       </div>
     `;
   }

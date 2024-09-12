@@ -120,9 +120,7 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
 
   render() {
     return html`
-      <div
-        class="form-check"
-      >
+      <div class="form-check">
         <input
           class=${classMap({
             "form-check-input": true,
@@ -143,9 +141,7 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
           @keydown=${this._handleKeyDown}
           @invalid=${(e: Event) => this._handleInvalid(e)}
         />
-        <label for="${this._inputId}" class="form-check-label"
-          ><slot></slot
-        ></label>
+        <label for="${this._inputId}" class="form-check-label"><slot></slot></label>
       </div>
     `;
   }
