@@ -62,7 +62,7 @@ export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
   firstUpdated() {
     if (this._iconNodes.length === 0) {
       return this.shadowRoot.querySelector("slot[name='icon']")?.classList.add("d-none");
-    } else return;
+    }
   }
   render() {
     return this.show
