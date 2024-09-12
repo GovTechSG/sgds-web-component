@@ -312,13 +312,13 @@ describe("<sgds-checkbox>", () => {
     const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox indeterminate></sgds-checkbox>`);
     const checkbox = el.shadowRoot?.querySelector("input");
 
-    expect(checkbox?.indeterminate).to.be.true;
+    expect(checkbox?.getAttribute("indeterminate")).to.exist;
   });
 
   it("should not apply the 'indeterminate' property to a checkbox when it's not set", async () => {
     const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox></sgds-checkbox>`);
     const checkbox = el.shadowRoot?.querySelector("input");
 
-    expect(checkbox?.indeterminate).to.be.false;
+    expect(checkbox?.getAttribute("indeterminate")).to.not.exist;
   });
 });

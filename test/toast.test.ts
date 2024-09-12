@@ -19,11 +19,11 @@ describe("SgdsToast component", () => {
 
   it("toast is hidden by default", async () => {
     const el = await fixture<SgdsToast>(html`<sgds-toast></sgds-toast>`);
-    expect(el.shadowRoot?.querySelector("div.toast")).to.not.exist;
+    expect(el.shadowRoot?.querySelector("div.toast.d-none")).to.exist;
   });
   it("when show is true, toast is not hidden", async () => {
     const el = await fixture<SgdsToast>(html`<sgds-toast show></sgds-toast>`);
-    expect(el.shadowRoot?.querySelector("div.toast")).to.exist;
+    expect(el.shadowRoot?.querySelector("div.toast.d-none")).to.not.exist;
   });
   it("when show set is true, sgds-show and sgds-after-show events are emitted", async () => {
     const el = await fixture<SgdsToast>(html`<sgds-toast></sgds-toast>`);
@@ -63,9 +63,9 @@ describe("SgdsToast component", () => {
   it("when autohide is true, toast disappears after the specified delay of 100ms", async () => {
     const el = await fixture<SgdsToast>(html`<sgds-toast show autohide delay="100"></sgds-toast>`);
 
-    expect(el.shadowRoot?.querySelector("div.toast")).to.exist;
+    expect(el.shadowRoot?.querySelector("div.toast.d-none")).to.not.exist;
     await aTimeout(1000);
-    expect(el.shadowRoot?.querySelector("div.toast")).not.to.exist;
+    expect(el.shadowRoot?.querySelector("div.toast.d-none")).to.exist;
   }).timeout(6000);
 
   it("showToast method, shows the toast and returns after all show events are called", async () => {
@@ -91,18 +91,15 @@ describe("SgdsToast component", () => {
     expect(hideHandler).to.be.called;
     expect(hiddenHandler).to.be.called;
   });
-});
-
-describe("SgdsToast component", () => {
-  it("should render the action slot when action is true", async () => {
-    const el = await fixture<SgdsToast>(html`<sgds-toast show action><span slot="action">Action</span></sgds-toast>`);
+  it("class .d-none absent the action slot when action slot is present is true", async () => {
+    const el = await fixture<SgdsToast>(html`<sgds-toast show><span slot="action">Action</span></sgds-toast>`);
     await elementUpdated(el);
-    expect(el.shadowRoot?.querySelector(".toast-action")).to.exist;
+    expect(el.shadowRoot?.querySelector(".toast-action.d-none")).not.to.exist;
   });
 
-  it("should not render the action slot when action is false", async () => {
-    const el = await fixture<SgdsToast>(html`<sgds-toast></sgds-toast>`);
+  it("class .d-none present when the action slot when there is no action slot", async () => {
+    const el = await fixture<SgdsToast>(html`<sgds-toast show></sgds-toast>`);
     await elementUpdated(el);
-    expect(el.shadowRoot?.querySelector(".toast-action")).to.not.exist;
+    expect(el.shadowRoot?.querySelector(".toast-action.d-none")).to.exist;
   });
 });

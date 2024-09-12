@@ -34,6 +34,7 @@ export * from "./Sidenav/sgds-sidenav-item";
 export * from "./Sidenav/sgds-sidenav-link";
 export * from "./Spinner/sgds-spinner";
 export * from "./Stepper/sgds-stepper";
+export * from "./Switch/sgds-switch";
 export * from "./Tab/sgds-tab";
 export * from "./Tab/sgds-tab-group";
 export * from "./Tab/sgds-tab-panel";

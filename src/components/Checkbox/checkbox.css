@@ -43,7 +43,7 @@ input {
 }
 
 .form-check-input.is-invalid {
-  border-color: var(--sgds-form-danger-border-color);
+  border: var(--sgds-form-border-width-thick) solid var(--sgds-form-danger-border-color);
 }
 .form-check-input:checked.is-invalid,
 .form-check-input[checked].is-invalid {
