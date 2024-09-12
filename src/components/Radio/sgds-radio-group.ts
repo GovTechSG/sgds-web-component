@@ -8,6 +8,7 @@ import radioGroupStyles from "./radio-group.css";
 import SgdsRadio from "./sgds-radio";
 import feedbackStyles from "../../styles/feedback.css";
 import formLabelStyles from "../../styles/form-label.css";
+import formHintStyles from "../../styles/form-hint.css";
 
 /**
  * @summary RadioGroup group multiple radios so they function as a single form control.
@@ -19,7 +20,7 @@ import formLabelStyles from "../../styles/form-label.css";
  *
  */
 export class SgdsRadioGroup extends SgdsElement {
-  static styles = [...SgdsElement.styles, feedbackStyles, formLabelStyles, radioGroupStyles];
+  static styles = [...SgdsElement.styles, feedbackStyles, formLabelStyles, radioGroupStyles, formHintStyles];
   /**@internal */
   protected readonly formSubmitController = new FormSubmitController(this, {
     defaultValue: (control: SgdsRadioGroup) => control.defaultValue
@@ -208,7 +209,7 @@ export class SgdsRadioGroup extends SgdsElement {
           >
             <slot name="label"></slot>
           </label>
-          <div class="hint-text">
+          <div class="form-text">
             <slot name="hint-text"></slot>
           </div>
         </div>

@@ -79,6 +79,9 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /** When set, the character count will be hidden */
+  @property({ type: Boolean, reflect: true }) hideCharacterCount = false;
+
   /** @internal The textarea's unique id */
   private textareaId = genId("textarea", "input");
 
@@ -174,46 +177,60 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
     const wordCount = html` <div class="form-text">${this.value.length}/${this.maxlength}</div> `;
 
     return html`
-      <div class="text-area-label-wrapper">
-        <label for=${this.textareaId} class="form-label">${this.label}</label>
-        ${this.maxlength > 0 ? wordCount : undefined}
-      </div>
-
-      <textarea
-        class=${classMap({
-          "form-control": true,
-          "is-invalid": this.hasFeedback && this.invalid,
-          "textarea-resize-none": this.resize === "none",
-          "textarea-resize-vertical": this.resize === "vertical",
-          "textarea-resize-auto": this.resize === "auto"
-        })}
-        id=${this.textareaId}
-        name=${ifDefined(this.name)}
-        rows=${ifDefined(this.rows)}
-        placeholder=${ifDefined(this.placeholder)}
-        minlength=${ifDefined(this.minlength)}
-        maxlength=${ifDefined(this.maxlength)}
-        .value=${live(this.value)}
-        aria-invalid=${this.invalid ? "true" : "false"}
-        spellcheck=${ifDefined(this.spellcheck)}
-        ?disabled=${this.disabled}
-        ?readonly=${this.readonly}
-        ?required=${this.required}
-        ?autofocus=${this.autofocus}
-        autocorrect=${ifDefined(this.autocorrect)}
-        inputmode=${ifDefined(this.inputmode)}
-        @keyup=${this.handleValueChange}
-        @input=${() => this.handleChange("sgds-input")}
-        @change=${() => this.handleChange("sgds-change")}
-        @invalid=${(e: Event) => this.handleInvalid(e)}
-        @focus=${this.handleFocus}
-        @blur=${this.handleBlur}
+      <div
+        class="textarea-container ${classMap({
+          disabled: this.disabled
+        })}"
       >
-      </textarea>
-
-      ${this.hasFeedback
-        ? html`<div id="${this.textareaId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
-        : ""}
+        <label for=${this.textareaId} class="form-label">${this.label}</label>
+        <textarea
+          class=${classMap({
+            "form-control": true,
+            "is-invalid": this.hasFeedback && this.invalid,
+            "textarea-resize-none": this.resize === "none",
+            "textarea-resize-vertical": this.resize === "vertical",
+            "textarea-resize-auto": this.resize === "auto"
+          })}
+          id=${this.textareaId}
+          name=${ifDefined(this.name)}
+          rows=${ifDefined(this.rows)}
+          placeholder=${ifDefined(this.placeholder)}
+          minlength=${ifDefined(this.minlength)}
+          maxlength=${ifDefined(this.maxlength)}
+          .value=${live(this.value)}
+          aria-invalid=${this.invalid ? "true" : "false"}
+          spellcheck=${ifDefined(this.spellcheck)}
+          ?disabled=${this.disabled}
+          ?readonly=${this.readonly}
+          ?required=${this.required}
+          ?autofocus=${this.autofocus}
+          autocorrect=${ifDefined(this.autocorrect)}
+          inputmode=${ifDefined(this.inputmode)}
+          @keyup=${this.handleValueChange}
+          @input=${() => this.handleChange("sgds-input")}
+          @change=${() => this.handleChange("sgds-change")}
+          @invalid=${(e: Event) => this.handleInvalid(e)}
+          @focus=${this.handleFocus}
+          @blur=${this.handleBlur}
+        >
+        </textarea>
+        <div class="textarea-info-container">
+          ${this.invalid && this.hasFeedback
+            ? html`
+                <div class="invalid-feedback-container">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path
+                      d="M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10ZM10 6.25C9.49805 6.25 9.10584 6.68339 9.15578 7.18285L9.48461 10.4711C9.51109 10.7359 9.7339 10.9375 10 10.9375C10.2661 10.9375 10.4889 10.7359 10.5154 10.4711L10.8442 7.18285C10.8942 6.68339 10.5019 6.25 10 6.25ZM10.0014 11.875C9.48368 11.875 9.06394 12.2947 9.06394 12.8125C9.06394 13.3303 9.48368 13.75 10.0014 13.75C10.5192 13.75 10.9389 13.3303 10.9389 12.8125C10.9389 12.2947 10.5192 11.875 10.0014 11.875Z"
+                      fill="#B90000"
+                    />
+                  </svg>
+                  <div id="${this.textareaId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
+                </div>
+              `
+            : html`<div class="form-text"><slot name="hint-text"></slot></div>`}
+          ${this.maxlength > 0 && !this.hideCharacterCount ? wordCount : undefined}
+        </div>
+      </div>
     `;
   }
 }
