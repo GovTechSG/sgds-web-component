@@ -31,12 +31,6 @@ describe("<sgds-radio>", () => {
     expect(radio).to.have.attribute("aria-disabled", "true");
   });
 
-  it("should render aria-label attribute value", async () => {
-    const el = await fixture(html`<sgds-radio ariaLabel="label"></sgds-radio>`);
-    const radio = el.shadowRoot?.querySelector("label");
-    expect(radio).to.have.attribute("aria-label", "label");
-  });
-
   it("should be able to pass in value to value attribute", async () => {
     const el = await fixture(html`<sgds-radio value="3"></sgds-radio>`);
     const radio = el.shadowRoot?.querySelector("input");

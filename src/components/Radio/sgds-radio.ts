@@ -27,8 +27,6 @@ export class SgdsRadio extends SgdsElement {
 
   /** Disables the radio. */
   @property({ type: Boolean, reflect: true }) disabled = false;
-  /** For aria-label */
-  @property({ type: String, reflect: true }) ariaLabel = "";
 
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback = "";

@@ -16,22 +16,20 @@ import { ifDefined } from "lit/directives/if-defined.js";
  * @slot default - The label of checkbox.
  *
  * @event sgds-change - Emitted when the checked state changes.
+ * @event sgds-validity-change - Emitted when the invalid state changes. This event is used by sgds-checkbox-group to check the invalid state change of its children
  */
 export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
   static styles = [...FormCheckElement.styles, checkboxStyle];
-    /**@internal */
-    @query('input[type="checkbox"]') input: HTMLInputElement;
-    /**@internal */
-    private readonly formSubmitController = new FormSubmitController(this, {
-      value: (control: FormCheckElement) => (control.checked ? control.value : undefined),
-      defaultValue: (control: FormCheckElement) => control.defaultChecked,
-      setValue: (control: FormCheckElement, checked: boolean) => (control.checked = checked)
-    });
-     /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
+  /**@internal */
+  @query('input[type="checkbox"]') input: HTMLInputElement;
+  /**@internal */
+  private readonly formSubmitController = new FormSubmitController(this, {
+    value: (control: FormCheckElement) => (control.checked ? control.value : undefined),
+    defaultValue: (control: FormCheckElement) => control.defaultChecked,
+    setValue: (control: FormCheckElement, checked: boolean) => (control.checked = checked)
+  });
+  /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
   @property({ type: String, reflect: true }) name: string;
-
-  /** For aria-label when there is no appropriate text label visible */
-  @property({ type: String, reflect: true }) ariaLabel = "checkbox";
 
   /** Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name. */
   @property({ type: String, reflect: true }) value: string;
@@ -51,19 +49,19 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("checked")
   defaultChecked = false;
-    /** Marks the checkbox input as invalid. Replace the pseudo :invalid selector for absent in custom elements */
-    @property({ type: Boolean, reflect: true }) invalid = false;
+  /** Marks the checkbox input as invalid. Replace the pseudo :invalid selector for absent in custom elements */
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
-    /** Marks the checkbox input as indeterminate , with indeterminate logo  */
-    @property({ type: Boolean, reflect: true }) indeterminate = false;
+  /** Marks the checkbox input as indeterminate , with indeterminate logo  */
+  @property({ type: Boolean, reflect: true }) indeterminate = false;
 
-    @watch("invalid", { waitUntilFirstUpdate: true })
-    _handleInvalidChange() {
-      this.emit("sgds-validity-change", { detail: { invalid: this.invalid } });
-    }
+  @watch("invalid", { waitUntilFirstUpdate: true })
+  _handleInvalidChange() {
+    this.emit("sgds-validity-change", { detail: { invalid: this.invalid } });
+  }
 
-   /** Simulates a click on the checkbox. */
-   public click() {
+  /** Simulates a click on the checkbox. */
+  public click() {
     this.input.click();
   }
   /** Sets focus on the checkbox. */
@@ -83,7 +81,7 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
     return this.input.reportValidity();
   }
 
-  protected _handleChange() {
+  private _handleChange() {
     if (this.indeterminate) {
       this.indeterminate = !this.indeterminate;
     }
@@ -93,44 +91,42 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
     this.emit("sgds-change", { detail: { checked: this.checked, value: this.value } });
   }
 
-  protected _handleKeyDown(event: KeyboardEvent) {
+  private _handleKeyDown(event: KeyboardEvent) {
     const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
     if (event.key === "Enter" && !hasModifier) {
       this.click();
     }
   }
 
-  protected _handleInvalid(e: Event) {
+  private _handleInvalid(e: Event) {
     e.preventDefault();
     this.invalid = true;
   }
   /** @internal For Id/For pair of the HTML form control and label. */
-  protected _inputId = genId("checkbox");
+  private _inputId = genId("checkbox");
 
   /** @internal */
   @watch("disabled", { waitUntilFirstUpdate: true })
-  handleDisabledChange() {
+  _handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
     this.input.disabled = this.disabled;
     this.invalid = !this.input.checkValidity();
   }
   /** @internal */
   @watch("checked", { waitUntilFirstUpdate: true })
-  handleStateChange() {
+  _handleStateChange() {
     this.invalid = !this.input.checkValidity();
   }
 
   render() {
     return html`
       <div
-        class=${classMap({
-          "form-check": true
-        })}
+        class="form-check"
       >
         <input
           class=${classMap({
             "form-check-input": true,
-            "is-invalid": this.hasFeedback && this.invalid,
+            "is-invalid": this.hasFeedback && this.invalid
           })}
           type="checkbox"
           id=${this._inputId}
@@ -147,7 +143,7 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
           @keydown=${this._handleKeyDown}
           @invalid=${(e: Event) => this._handleInvalid(e)}
         />
-        <label for="${this._inputId}" aria-label=${ifDefined(this.ariaLabel)} class="form-check-label"
+        <label for="${this._inputId}" class="form-check-label"
           ><slot></slot
         ></label>
       </div>

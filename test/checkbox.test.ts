@@ -19,12 +19,6 @@ describe("<sgds-checkbox>", () => {
     expect(input?.getAttribute("id")).to.equal(label?.getAttribute("for"));
   });
 
-  it("should be able to pass in aria-label attribute", async () => {
-    const el = await fixture(html`<sgds-checkbox ariaLabel="label"></sgds-checkbox>`);
-    const checkbox = el.shadowRoot?.querySelector("label");
-    expect(checkbox).to.have.attribute("aria-label", "label");
-  });
-
   it("should have class .is-invalid when invalid state is true and hasFeedback is true", async () => {
     const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox hasFeedback></sgds-checkbox>`);
     el.invalid = true;
