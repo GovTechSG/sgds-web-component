@@ -35,7 +35,7 @@
   height: var(--sgds-dimension-48);
 }
 
-slot {
+.spinner-label {
   font-size: var(--sgds-font-size-1);
 }
 
