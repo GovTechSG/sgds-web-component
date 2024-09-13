@@ -1,10 +1,10 @@
-.textarea-container {
+.form-control-container {
   display: flex;
   flex-direction: column;
   gap: var(--sgds-form-gap-md);
 }
 
-.textarea-container.disabled {
+.form-control-container.disabled {
   opacity: var(--sgds-opacity-50);
 }
 

@@ -178,7 +178,7 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
 
     return html`
       <div
-        class="textarea-container ${classMap({
+        class="form-control-container ${classMap({
           disabled: this.disabled
         })}"
       >
