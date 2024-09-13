@@ -84,7 +84,7 @@ export const ButtonPlayground = {
           <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@2.0.0/themes/day.css' rel='stylesheet' type='text/css' />
           <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component">&lt;/script>
           <script src="./events.js">&lt;/script>
-
+          
           <style>
             sgds-button {
               --btn-border-radius: 0;
@@ -100,6 +100,7 @@ export const ButtonPlayground = {
         </body>
         </html>
       </script>
+
 
       <script type="sample/js" filename="events.js">
         document.addEventListener('DOMContentLoaded', () => {
@@ -122,6 +123,8 @@ export const ButtonPlayground = {
       </script>
     </playground-ide>
     <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #ddd;">
+      
+
       <h3>1. Edit the Custom CSS</h3>
       <p>
         You can edit the button's styles by modifying its custom CSS properties. These can be seen in the documentation
@@ -137,8 +140,8 @@ export const ButtonPlayground = {
 
       <h3>2. Modify Event Handling</h3>
       <p>
-        You can customize how the button responds to events by editing <strong>events.js</strong>. For instance, you can
-        change the action triggered by the <code>sgds-blur</code> event:
+        You can customize how the button responds to events by editing <strong>events.js</strong>. For
+        instance, you can change the action triggered by the <code>sgds-blur</code> event:
       </p>
       <pre><code>
         button.addEventListener('sgds-blur', () => {
@@ -156,9 +159,10 @@ export const ButtonPlayground = {
          variant="success"
       </code></pre>
       <p>Changing the <code>variant</code> attribute to <code>success</code> will apply a new style to the button.</p>
+
     </div>
   `,
-  name: "ButtonPlayground",
+  name: "Playground",
   args: {},
   parameters: {}
 };

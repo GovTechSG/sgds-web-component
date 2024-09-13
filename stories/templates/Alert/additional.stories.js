@@ -79,7 +79,7 @@ export const AlertPlayground = {
         change the action triggered by the <code>sgds-blur</code> event:
       </p>
       <pre><code>
-          amyAlert.addEventListener('sgds-show', () => {
+          myAlert.addEventListener('sgds-show', () => {
             console.log('message');
           });
         </code></pre>
@@ -97,7 +97,7 @@ export const AlertPlayground = {
       <p>Changing the <code>variant</code> attribute to <code>success</code> will apply a new style to the button.</p>
     </div>
   `,
-  name: "Alert Playground",
+  name: "Playground",
   args: {},
   parameters: {}
 };

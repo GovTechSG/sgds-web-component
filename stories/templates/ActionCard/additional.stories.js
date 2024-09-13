@@ -59,23 +59,23 @@ export const ActionCardPlayground = {
                   <script src="./events.js">&lt;/script>
 
                   <style>
-        action-card::part(base) {
+        sgds-action-card::part(base) {
           /* Add styles for the base wrapper here */
         }
 
-        action-card::part(body) {
+        sgds-action-card::part(body) {
           /* Add styles for the body here */
         }
 
-        action-card::part(subtitle) {
+        sgds-action-card::part(subtitle) {
           /* Add styles for the subtitle here */
         }
 
-        action-card::part(title) {
+        sgds-action-card::part(title) {
           /* Add styles for the title here */
         }
 
-        action-card::part(text) {
+        sgds-action-card::part(text) {
           /* Add styles for the text here */
         }
                   </style>
@@ -95,7 +95,7 @@ export const ActionCardPlayground = {
           const action = document.getElementById('action-card');
 
           if (action) {
-            button.addEventListener('sgds-change', () => {
+            action.addEventListener('sgds-change', () => {
               console.log('checked status changed');
             });
 
@@ -113,7 +113,7 @@ export const ActionCardPlayground = {
         <strong>index.html</strong>:
       </p>
       <pre><code>
-        action-card::part(body) {
+        sgds-action-card::part(body) {
  color: darkred;
 }
       </code></pre>
@@ -124,7 +124,7 @@ export const ActionCardPlayground = {
         change the action triggered by the <code>sgds-change</code> event:
       </p>
       <pre><code>
-        button.addEventListener('sgds-change', () => {
+        action.addEventListener('sgds-change', () => {
           alert('custom message');
         });
       </code></pre>
@@ -140,7 +140,7 @@ export const ActionCardPlayground = {
       </code></pre>
     </div>
   `,
-  name: "ActionCard Playground",
+  name: "Playground",
   args: {},
   parameters: {}
 };

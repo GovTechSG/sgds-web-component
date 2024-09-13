@@ -20,6 +20,7 @@ export const BreadcrumbPlayground = {
         <body>
           <sgds-breadcrumb>
               <sgds-breadcrumb-item>Item</sgds-breadcrumb-item>
+              <sgds-breadcrumb-item>Item 2</sgds-breadcrumb-item>
           </sgds-breadcrumb>
         </body>
         </html>
@@ -35,10 +36,10 @@ export const BreadcrumbPlayground = {
       </p>
       <pre><code>
           sgds-breadcrumb::part(base) {
-            background-color: darkred; 
+            margin: 20px; 
           }
         </code></pre>
-      <p>This will apply a large, rounded border to the button.</p>
+      <p>This will apply a margin.</p>
 
       <h3>2. Change Breadcrumb Attributes</h3>
       <p>
@@ -50,7 +51,7 @@ export const BreadcrumbPlayground = {
         </code></pre>
     </div>
   `,
-  name: "BreadcrumbPlayground",
+  name: "Playground",
   args: {},
   parameters: {}
 };
