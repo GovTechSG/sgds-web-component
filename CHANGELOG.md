@@ -1,3 +1,10 @@
+## v2.1.0 (2024-09-16)
+
+### Feat
+
+- **react**: add use client directives to react components [skip-cd] (#216)
+- **react**: add use client directives to react components
+
 ## v2.0.1 (2024-09-12)
 
 ### Fix
