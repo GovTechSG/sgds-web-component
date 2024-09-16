@@ -181,6 +181,7 @@ describe("sgds-dropdown", () => {
            variant="secondary"
            type="button"
            size="md"
+           target="_self"
          >
          <svg
          xmlns="http://www.w3.org/2000/svg"
