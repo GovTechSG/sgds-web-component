@@ -39,12 +39,12 @@ a.nav-link[disabled] {
 
 :host([size="lg"]) a.nav-link {
     height: var(--sgds-dimension-32);
-    font-size: 1.25rem;
+    font-size: var(--sgds-font-size-3);
 
 }
 :host([size="sm"]) a.nav-link {
     height: var(--sgds-dimension-20);
-    font-size: 0.875rem;
+    font-size: var(--sgds-font-size-1);
 }
 
 /* Check with Andy if target blank need to auto add an icon */
