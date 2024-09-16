@@ -122,7 +122,7 @@ export class SgdsStepper extends SgdsElement {
                   "is-completed": this.activeStep > index,
                   "is-clickable": this.clickable && this.activeStep > index
                 })}"
-                tabindex="0"
+                tabindex=${this.clickable && this.activeStep > index ? "0" : "-1"}
                 aria-current=${this.activeStep === index ? "step" : "false"}
                 aria-disabled=${this.activeStep <= index ? "true" : "false"}
                 @click="${this.clickable ? () => this._onStepperItemClick(index) : null}"
