@@ -59,35 +59,34 @@ export const ActionCardPlayground = {
                   <script src="./events.js">&lt;/script>
 
                   <style>
-        sgds-action-card::part(base) {
-          /* Add styles for the base wrapper here */
-        }
+                      sgds-action-card::part(base) {
+                        /* Add styles for the base wrapper here */
+                      }
 
-        sgds-action-card::part(body) {
-          /* Add styles for the body here */
-        }
+                      sgds-action-card::part(body) {
+                        /* Add styles for the body here */
+                      }
 
-        sgds-action-card::part(subtitle) {
-          /* Add styles for the subtitle here */
-        }
+                      sgds-action-card::part(subtitle) {
+                        /* Add styles for the subtitle here */
+                      }
 
-        sgds-action-card::part(title) {
-          /* Add styles for the title here */
-        }
+                      sgds-action-card::part(title) {
+                        /* Add styles for the title here */
+                      }
 
-        sgds-action-card::part(text) {
-          /* Add styles for the text here */
-        }
+                      sgds-action-card::part(text) {
+                        /* Add styles for the text here */
+                      }
+
                   </style>
-
-
                 </head>
                 <body>
-            <sgds-action-card id= "action-card">
-              <span slot="card-subtitle">Laptop</span>
-            </sgds-action-card>
+                      <sgds-action-card id= "action-card">
+                        <span slot="card-subtitle">Laptop</span>
+                      </sgds-action-card>
                 </body>
-                </html>
+              </html>
       </script>
 
       <script type="sample/js" filename="events.js">
@@ -108,32 +107,32 @@ export const ActionCardPlayground = {
     <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #ddd;">
       <h3>1. Edit the Custom CSS</h3>
       <p>
-        You can edit the alert's shadow parts css by modifying its custom CSS properties. These can be seen in the
+        You can edit the action card's shadow parts css by modifying its custom CSS properties. These can be seen in the
         documentation below. For example, you can change the background colour by editing the following code inside
         <strong>index.html</strong>:
       </p>
       <pre><code>
-        sgds-action-card::part(body) {
- color: darkred;
-}
+          sgds-action-card::part(body) {
+            color: darkred;
+          }
       </code></pre>
 
       <h3>2. Modify Event Handling</h3>
       <p>
-        You can customize how the button responds to events by editing <strong>events.js</strong>. For instance, you can
+        You can customize how the action card responds to events by editing <strong>events.js</strong>. For instance, you can
         change the action triggered by the <code>sgds-change</code> event:
       </p>
       <pre><code>
         action.addEventListener('sgds-change', () => {
-          alert('custom message');
+          console.log('custom message');
         });
       </code></pre>
-      <p>In this example, the message will appear as an alert when the button loses focus.</p>
+      <p>In this example, the message will in broswer console when checked status changes.</p>
 
       <h3>3. Change Action Card Attributes</h3>
       <p>
-        You can modify the button's attributes directly within the HTML to change its appearance or behavior. Refer to
-        the documentation below. For instance, try disabling the action cardinside <strong>index.html</strong>:
+        You can modify the action card's attributes directly within the HTML to change its appearance or behavior. Refer to
+        the documentation below. For instance, try disabling the action card inside <strong>index.html</strong>:
       </p>
       <pre><code>
          disabled = "true"

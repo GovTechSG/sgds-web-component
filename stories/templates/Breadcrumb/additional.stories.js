@@ -30,7 +30,7 @@ export const BreadcrumbPlayground = {
       <h3>1. Edit the Custom CSS</h3>
       <p>
         You can edit the breadcrumbs's custom css shadow parts styles by modifying its custom CSS properties. These can
-        be seen in the documentation below. For example, you can change the background colour by editing the following
+        be seen in the documentation below. For example, you can change the margin by editing the following
         code inside
         <strong>index.html</strong>:
       </p>

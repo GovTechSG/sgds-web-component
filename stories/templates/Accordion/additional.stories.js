@@ -11,18 +11,16 @@ export const AccordionPlayground = {
                   <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component">&lt;/script>
                   <script src="./events.js">&lt;/script>
 
-                  <style>
-        sgds-accordion-item {
+                <style>
+                    sgds-accordion-item {
 
+                    }
 
-        }
+                    sgds-accordian {
 
-        sgds-accordian {
+                    }
 
-        }
-
-                  </style>
-
+                </style>
 
                 </head>
                 <body>
@@ -60,8 +58,8 @@ export const AccordionPlayground = {
       </p>
       <pre><code>
           sgds-accordion-item {
-   --accordion-active-color: darkred;
-  }
+            --accordion-active-color: darkred;
+          }
         </code></pre>
 
       <h3>2. Modify Event Handling</h3>
@@ -71,10 +69,10 @@ export const AccordionPlayground = {
       </p>
       <pre><code>
           accordionItem.addEventListener('sgds-show', () => {
-            alert('custom message');
+            console.log('custom message');
           });
         </code></pre>
-      <p>In this example, the message will appear as an alert when the button loses focus.</p>
+      <p>In this example, the message will in browser console.</p>
 
       <h3>3. Change Accordion and Accordion Item Attributes</h3>
       <p>
@@ -83,7 +81,7 @@ export const AccordionPlayground = {
         <strong>index.html</strong>:
       </p>
       <pre><code>
-           allowMultiple
+           sgds-accordian allowMultiple
         </code></pre>
     </div>
   `,

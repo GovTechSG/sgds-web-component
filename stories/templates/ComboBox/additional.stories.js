@@ -476,3 +476,68 @@ export const ComboBoxCustomFilter = {
   parameters: {},
   tags: ["!dev"]
 };
+
+export const ComboBoxPlayground = {
+  render: () => html`
+    <playground-ide editable-file-system line-numbers resizable>
+      <script type="sample/html" filename="index.html">
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@2.0.0/themes/day.css' rel='stylesheet' type='text/css' />
+            <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component">&lt;/script>
+            <script src="./events.js">&lt;/script>
+          </head>
+          <body>
+          <sgds-combo-box id = "combo-box"label="Items" 
+            placeholder="ComboBox">
+          </sgds-combo-box>
+          </body>
+          </html>
+      </script>
+
+      <script type="sample/js" filename="events.js">
+        document.addEventListener('DOMContentLoaded', () => {
+          const combo = document.getElementById('combo-box');
+
+          if (combo ) {
+            combo.addEventListener('sgds-input', () => {
+              console.log('User input value changed');
+            });
+
+          } else {
+            console.error('Combo Box not found');
+          }
+        });
+      </script>
+    </playground-ide>
+    <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #ddd;">
+
+      <h3>1. Modify Event Handling</h3>
+      <p>
+        You can customize how the ComboBox responds to events by editing <strong>events.js</strong>. For instance, you can
+        change the action triggered by the <code>sgds-input</code> event:
+      </p>
+      <pre><code>
+          combo.addEventListener('sgds-input', () => {
+            console.log('custom message');
+          });
+        </code></pre>
+      <p>In this example, the message will appear in browser console when the user input value changes.</p>
+
+      <h3>2. Change ComboBox Attributes</h3>
+      <p>
+        You can modify the ComboBox's attributes directly within the HTML to
+        change its appearance or behavior. Refer to the documentation below. For instance, try changing the 
+        placeholder inside <strong>index.html</strong>:
+      </p>
+      <pre><code>
+           placeholder="custom"
+        </code></pre>
+      <p>Changing the <code>placeholder</code> attribute to <code>"custom"</code> will change the placeholder accordingly.</p>
+    </div>
+  `,
+  name: "Playground",
+  args: {},
+  parameters: {}
+};

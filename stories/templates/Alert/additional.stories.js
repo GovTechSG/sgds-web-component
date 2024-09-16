@@ -76,25 +76,25 @@ export const AlertPlayground = {
       <h3>2. Modify Event Handling</h3>
       <p>
         You can customize how the alert responds to events by editing <strong>events.js</strong>. For instance, you can
-        change the action triggered by the <code>sgds-blur</code> event:
+        change the action triggered by the <code>sgds-show</code> event:
       </p>
       <pre><code>
           myAlert.addEventListener('sgds-show', () => {
             console.log('message');
           });
         </code></pre>
-      <p>In this example, the message will appear as an alert when the alert loses focus.</p>
+      <p>In this example, the message will appear in browser consol.</p>
 
       <h3>3. Change Alert Attributes</h3>
       <p>
         You can modify the alert's and the alert heading's and the alert link's attributes directly within the HTML to
-        change its appearance or behavior. Refer to the documentation below. For instance, try changing the button
+        change its appearance or behavior. Refer to the documentation below. For instance, try changing the
         variant inside <strong>index.html</strong>:
       </p>
       <pre><code>
            variant="success"
         </code></pre>
-      <p>Changing the <code>variant</code> attribute to <code>success</code> will apply a new style to the button.</p>
+      <p>Changing the <code>variant</code> attribute to <code>success</code> will apply a new style to the alert.</p>
     </div>
   `,
   name: "Playground",
