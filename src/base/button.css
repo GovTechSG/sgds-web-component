@@ -72,11 +72,8 @@
   background-color: var(--sgds-btn-hover-bg);
 }
 
-button:focus:not(:focus-visible) {
-  outline: 0;
-}
-
-.btn:focus-visible, .btn:focus {
+.btn:focus,
+.btn:focus-visible {
   background-color: var(--sgds-btn-hover-bg);
   border-color: transparent;
   box-shadow: var(--sgds-box-shadow-focus);
