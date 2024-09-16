@@ -44,10 +44,7 @@
   background-color: var(--sgds-default-bg-translucent);
 }
 
-button:focus:not(:focus-visible) {
-  outline: 0;
-}
-
+.btn-close:focus,
 .btn-close:focus-visible {
   box-shadow: var(--sgds-box-shadow-focus);
   outline: 0;
