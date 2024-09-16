@@ -17,6 +17,7 @@ export * from "./Dropdown/sgds-dropdown";
 export * from "./Dropdown/sgds-dropdown-item";
 export * from "./FileUpload/sgds-file-upload";
 export * from "./Footer/sgds-footer";
+export * from "./IconButton/sgds-icon-button";
 export * from "./Input/sgds-input";
 export * from "./Link/sgds-link";
 export * from "./Mainnav/sgds-mainnav";

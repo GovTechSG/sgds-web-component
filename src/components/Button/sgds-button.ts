@@ -1,11 +1,11 @@
-import { state, property, query } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html, literal } from "lit/static-html.js";
-import SgdsElement from "../../base/sgds-element";
+import ButtonElement from "../../base/button-element";
+import anchorStyles from "../../styles/anchor.css";
 import { FormSubmitController } from "../../utils/form";
 import buttonStyles from "./button.css";
-import anchorStyles from "../../styles/anchor.css";
 
 export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
 
@@ -16,7 +16,7 @@ export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
  * @slot leftIcon - The slot for icon to the left of the button text
  * @slot rightIcon - The slot for icon to the right of the button text
  *
- * @event sgds-blur - Emitted when the button is not focused.
+ * @event sgds-blur - Emitted when the button is blurred.
  * @event sgds-focus - Emitted when the button is focused.
  *
  * @cssprop --sgds-btn-font-weight - The font weight of text content in button
@@ -28,18 +28,15 @@ export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
  * @cssprop --sgds-btn-border-color - The color of the button border, applicable to outline variant only
  *
  */
-export class SgdsButton extends SgdsElement {
-  static styles = [...SgdsElement.styles, anchorStyles, buttonStyles];
+export class SgdsButton extends ButtonElement {
+  static styles = [...ButtonElement.styles, anchorStyles, buttonStyles];
   /** @internal */
-  @query(".btn") private button: HTMLButtonElement | HTMLLinkElement;
+  @state()
+  private _hasLeftIcon = false;
 
   /** @internal */
   @state()
-  protected _hasLeftIcon = false;
-
-  /** @internal */
-  @state()
-  protected _hasRightIcon = false;
+  private _hasRightIcon = false;
 
   /** @internal */
   private readonly formSubmitController = new FormSubmitController(this, {
@@ -56,31 +53,8 @@ export class SgdsButton extends SgdsElement {
       return input.closest("form");
     }
   });
-
-  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `danger`, `outline`, `ghost` */
-  @property({ reflect: true }) variant: ButtonVariant = "primary";
-
-  /** Specifies a small, medium or large button, the size is medium by default. */
-  @property({ reflect: true }) size: "sm" | "md" | "lg" = "md";
-
-  /** Manually set the visual state of the button to `:active` */
-  @property({ type: Boolean, reflect: true }) active = false;
-
-  /** The disabled state of the button */
-  @property({ type: Boolean, reflect: true }) disabled = false;
-
   /** The behavior of the button with default as `type='button', `reset` resets all the controls to their initial values and `submit` submits the form data to the server */
   @property({ type: String, reflect: true }) type: "button" | "submit" | "reset" = "button";
-
-  /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
-  @property({ type: String, reflect: true }) href: string;
-
-  /** Tells the browser where to open the link. Only used when `href` is set. */
-  @property({ type: String, reflect: true }) target: "_blank" | "_parent" | "_self" | "_top";
-
-  /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
-  @property({ type: String, reflect: true }) download: string;
-
   /**
    * The "form owner" to associate the button with. If omitted, the closest containing form will be used instead. The
    * value of this attribute must be an id of a form in the same document or shadow root as the button.
@@ -105,36 +79,10 @@ export class SgdsButton extends SgdsElement {
     | "_top"
     | string;
 
-  /** The aria-label attribute to passed to button element when necessary */
-  @property({ type: String }) ariaLabel: string;
-
   /** When set, the button will be in full width. */
   @property({ type: Boolean, reflect: true }) fullWidth = false;
 
-  /** Sets focus on the button. */
-  public focus(options?: FocusOptions) {
-    this.button.focus(options);
-  }
-
-  /** Simulates a click on the button. */
-  public click() {
-    this.button.click();
-  }
-
-  /** Removes focus from the button. */
-  public blur() {
-    this.button.blur();
-  }
-
-  private _handleBlur() {
-    this.emit("sgds-blur");
-  }
-
-  private _handleFocus() {
-    this.emit("sgds-focus");
-  }
-
-  private _handleClick(event: MouseEvent) {
+  protected override _handleClick(event: MouseEvent) {
     if (this.disabled) {
       event.preventDefault();
       event.stopPropagation();

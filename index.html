@@ -53,7 +53,11 @@
             grid-template-columns: 240px repeat(2, 1fr);
             width: 100%;
         }
-
+        .d-flex-row {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+        }
         sgds-masthead {
 
             grid-area: masthead;
@@ -162,6 +166,36 @@
 
     <main>
         <div class="container">
+
+            <div class="d-flex-row">
+                <h2>Variants</h2>
+                <sgds-icon-button></sgds-icon-button>
+                <sgds-icon-button variant="ghost"></sgds-icon-button>
+                <sgds-icon-button variant="outline"></sgds-icon-button>
+                <sgds-icon-button variant="danger"></sgds-icon-button>
+            </div>
+            <div class="d-flex-row">
+                <h2>Active</h2>
+                <sgds-icon-button active></sgds-icon-button>
+                <sgds-icon-button active variant="ghost"></sgds-icon-button>
+                <sgds-icon-button active variant="outline"></sgds-icon-button>
+                <sgds-icon-button active variant="danger"></sgds-icon-button>
+            </div>
+            <div class="d-flex-row">
+                <h2>Disabled</h2>
+                <sgds-icon-button  disabled></sgds-icon-button>
+                <sgds-icon-button  disabled variant="ghost"></sgds-icon-button>
+                <sgds-icon-button  disabled variant="outline"></sgds-icon-button>
+                <sgds-icon-button  disabled variant="danger"></sgds-icon-button>
+            </div>
+            <div class="d-flex-row">
+                <h2>Size</h2>
+                <sgds-icon-button>icon</sgds-icon-button>
+                <sgds-icon-button size="sm"></sgds-icon-button>
+                <sgds-icon-button size="lg"></sgds-icon-button>
+            </div>
+        </div>
+        <div class="container">
             <h2>Link</h2>
             <sgds-link href="https://google.com">Default</sgds-link>
             <sgds-link href="https://google.com" target="_blank">Default</sgds-link>
@@ -176,6 +210,9 @@
                 leftIcon</sgds-link>
             <sgds-link href="https://google.com">
                 <i class="bi bi-arrow-right" slot="rightIcon"></i>
+                rightIcon</sgds-link>
+            <sgds-link href="https://google.com" target="_blank">
+                <i class="bi bi-arrow-right" slot="rightIcon"></i>  
                 rightIcon</sgds-link>
             <sgds-icon name="6-square"></sgds-icon>
         </div>
@@ -680,6 +717,9 @@
                 <div class="row">
                     <div class="grid">
                         <sgds-button variant="primary" disabled>Disabled Button</sgds-button>
+                        <sgds-button variant="ghost" disabled>Disabled Button</sgds-button>
+                        <sgds-button variant="outline" disabled>Disabled Button</sgds-button>
+                        <sgds-button variant="danger" disabled>Disabled Button</sgds-button>
                     </div>
                 </div>
                 <h3>Button Full Width</h3>

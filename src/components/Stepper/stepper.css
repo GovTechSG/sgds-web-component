@@ -103,7 +103,7 @@
 }
 
 .stepper .stepper-item:not(.is-active):not(.is-completed) .stepper-detail {
-  color: var(--sgds-default-color);
+  color: var(--sgds-default-color-subtle);
 }
 
 .stepper .stepper-item.is-clickable:hover .stepper-marker {
