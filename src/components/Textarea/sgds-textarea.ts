@@ -87,10 +87,10 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
 
   connectedCallback() {
     super.connectedCallback();
-    this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());
+    this.resizeObserver = new ResizeObserver(() => this._setTextareaHeight());
 
     this.updateComplete.then(() => {
-      this.setTextareaHeight();
+      this._setTextareaHeight();
       this.resizeObserver.observe(this.textarea);
     });
   }
@@ -113,44 +113,31 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   public select() {
     this.textarea.select();
   }
-  handleInvalid(e: Event) {
+  private _handleInvalid(e: Event) {
     e.preventDefault();
     this.invalid = true;
   }
 
-  handleChange(event: string) {
+  private _handleChange(event: string) {
     this.value = this.textarea.value;
     this.emit(event);
   }
 
-  handleFocus() {
+  private _handleFocus() {
     this.emit("sgds-focus");
   }
 
-  handleBlur() {
+  private handleBlur() {
     this.emit("sgds-blur");
   }
 
-  handleKeyDown(event: KeyboardEvent) {
-    const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
-
-    // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before
-    // submitting to allow users to cancel the keydown event if they need to
-    if (event.key === "Enter" && !hasModifier) {
-      setTimeout(() => {
-        if (!event.defaultPrevented) {
-          this.formSubmitController.submit();
-        }
-      });
-    }
-  }
-
+  /** @internal */
   @watch("rows", { waitUntilFirstUpdate: true })
-  handleRowsChange() {
-    this.setTextareaHeight();
+  _handleRowsChange() {
+    this._setTextareaHeight();
   }
 
-  setTextareaHeight() {
+  private _setTextareaHeight() {
     if (this.resize === "auto") {
       this.textarea.style.height = "auto";
       this.textarea.style.height = `${this.textarea.scrollHeight}px`;
@@ -159,17 +146,19 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
     }
   }
 
+  /** @internal */
   @watch("disabled", { waitUntilFirstUpdate: true })
-  handleDisabledChange() {
+  _handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
     this.textarea.disabled = this.disabled;
     this.invalid = !this.textarea.checkValidity();
   }
 
+  /** @internal */
   @watch("value", { waitUntilFirstUpdate: true })
-  handleValueChange() {
+  _handleValueChange() {
     this.invalid = !this.textarea.checkValidity();
-    this.updateComplete.then(() => this.setTextareaHeight());
+    this.updateComplete.then(() => this._setTextareaHeight());
   }
 
   render() {
@@ -206,11 +195,10 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
           ?autofocus=${this.autofocus}
           autocorrect=${ifDefined(this.autocorrect)}
           inputmode=${ifDefined(this.inputmode)}
-          @keyup=${this.handleValueChange}
-          @input=${() => this.handleChange("sgds-input")}
-          @change=${() => this.handleChange("sgds-change")}
-          @invalid=${(e: Event) => this.handleInvalid(e)}
-          @focus=${this.handleFocus}
+          @input=${() => this._handleChange("sgds-input")}
+          @change=${() => this._handleChange("sgds-change")}
+          @invalid=${(e: Event) => this._handleInvalid(e)}
+          @focus=${this._handleFocus}
           @blur=${this.handleBlur}
         >
         </textarea>
