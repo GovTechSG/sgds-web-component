@@ -1,10 +1,10 @@
-.textarea-container {
+.form-control-container {
   display: flex;
   flex-direction: column;
   gap: var(--sgds-form-gap-md);
 }
 
-.textarea-container.disabled {
+.form-control-container.disabled {
   opacity: var(--sgds-opacity-50);
 }
 
@@ -46,10 +46,7 @@ textarea {
   border: var(--sgds-form-border-width-thick) solid var(--sgds-form-border-color-emphasis);
 }
 
-.form-control:focus {
-  outline: 0;
-}
-
+.form-control:not([readonly]):not([disabled]):not(.is-invalid):focus,
 .form-control:not([readonly]):not([disabled]):not(.is-invalid):focus-visible {
   border: var(--sgds-form-border-width-thick) solid var(--sgds-form-border-color-emphasis);
   box-shadow: var(--sgds-form-box-shadow-focus);

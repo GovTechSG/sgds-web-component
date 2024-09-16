@@ -30,10 +30,7 @@ input {
   border: var(--sgds-form-border-width-thick) solid var(--sgds-form-border-color-emphasis);
 }
 
-.form-check-input:focus {
-  outline: 0;
-}
-
+.form-check-input:focus,
 .form-check-input:focus-visible {
   box-shadow: var(--sgds-form-box-shadow-focus);
   border: var(--sgds-form-border-width-default) solid var(--sgds-form-border-color-emphasis);

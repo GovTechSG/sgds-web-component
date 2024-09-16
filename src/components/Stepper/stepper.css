@@ -34,13 +34,14 @@
   align-items: flex-start;
 }
 
-.stepper .stepper-item:focus:not(:focus-visible) {
+.stepper .stepper-item:focus,
+.stepper .stepper-item:focus-visible {
   outline: 0;
 }
 
-.stepper .stepper-item:focus-visible {
+.stepper .stepper-item.is-clickable:focus,
+.stepper .stepper-item.is-clickable:focus-visible {
   box-shadow: var(--sgds-box-shadow-focus);
-  outline: 0;
 }
 
 .stepper.horizontal .stepper-item-container:not(:first-child) .stepper-item:before {
