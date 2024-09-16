@@ -162,10 +162,12 @@
 
     <main>
         <div class="container">
+            <h2>Link</h2>
             <sgds-link href="https://google.com">Default</sgds-link>
             <sgds-link href="https://google.com" target="_blank">Default</sgds-link>
             <sgds-link href="https://google.com" disabled>Default (disabled)</sgds-link>
             <sgds-link href="https://google.com" variant="danger">Danger</sgds-link>
+            <sgds-link href="https://google.com" variant="danger" target="_blank">Danger</sgds-link>
             <sgds-link href="https://google.com" variant="danger" disabled>Danger (disabled)</sgds-link>
             <sgds-link href="https://google.com" size="lg">Large</sgds-link>
             <sgds-link href="https://google.com" size="sm">Small</sgds-link>
@@ -176,6 +178,9 @@
                 <i class="bi bi-arrow-right" slot="rightIcon"></i>
                 rightIcon</sgds-link>
             <sgds-icon name="6-square"></sgds-icon>
+        </div>
+        <div class="container">
+            <h2>Textarea</h2>
             <sgds-textarea required label="Label" name="textarea" textareaclasses="" rows="4" invalidfeedback="test" hideCharacterCount
                 placeholder="Placeholder" minlength="" hasFeedback maxlength="100" resize="vertical" defaultvalue="">
             </sgds-textarea>
@@ -193,7 +198,7 @@
             </sgds-textarea>
         </div>
         <div class="container">
-
+            <h2>Table</h2>
             <sgds-table
                 tableheaders="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
                 tabledata="[
@@ -236,6 +241,7 @@
             </sgds-table>
         </div>
         <div class="container">
+            <h2>Tab</h2>
             <sgds-tab-group variant="tabs-info-toggle">
                 <sgds-tab disabled slot="nav" panel="apple"><svg slot="icon" xmlns="http://www.w3.org/2000/svg"
                         width="16" height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
