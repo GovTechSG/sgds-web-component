@@ -123,12 +123,12 @@ const buildSgdsPackage = () => {
       output: [
         {
           entryFileNames: "[name].js",
-          dir: "lib",
+          dir: "lib/react",
           format: "esm",
           sourcemap: true,
           exports: "named",
           preserveModules: true,
-          preserveModulesRoot: "src",
+          preserveModulesRoot: "src/react",
           banner: `'use client';`,
         }
       ],
@@ -140,12 +140,12 @@ const buildSgdsPackage = () => {
       output: [
         {
           entryFileNames: "[name].cjs.js",
-          dir: "lib",
+          dir: "lib/react",
           format: "cjs",
           sourcemap: true,
           exports: "named",
           preserveModules: true,
-          preserveModulesRoot: "src",
+          preserveModulesRoot: "src/react",
           banner: `'use client';`,
         }
       ],
@@ -154,7 +154,7 @@ const buildSgdsPackage = () => {
     }
   ];
 
-  return [...esmModules, ...umdBundles, ...reactPackage];
+  return [...reactPackage, ...esmModules, ...umdBundles ];
 };
 
 export default buildSgdsPackage;
