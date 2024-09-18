@@ -33,6 +33,10 @@ export class SgdsRadioGroup extends SgdsElement {
   @state() defaultValue = "";
   /**@internal */
   @state() private customErrorMessage = "";
+
+  /** The radio group's label  */
+  @property({ reflect: true }) label = "";
+
   /**  This will be true when the control is in an invalid state. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
@@ -47,8 +51,12 @@ export class SgdsRadioGroup extends SgdsElement {
 
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback = "";
+
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
+
+  /** The radio group's hint text */
+  @property({ reflect: true }) hintText = "";
 
   @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
@@ -188,6 +196,11 @@ export class SgdsRadioGroup extends SgdsElement {
     this._radios.forEach(radio => (radio.invalid = this.invalid));
   }
 
+  protected _renderHintText() {
+    const hintTextTemplate = html` <div class="form-text">${this.hintText}</div> `;
+    return this.hintText && hintTextTemplate;
+  }
+
   render() {
     const defaultSlot = html`
       <slot
@@ -207,11 +220,9 @@ export class SgdsRadioGroup extends SgdsElement {
               required: this.required
             })}
           >
-            <slot name="label"></slot>
+            ${this.label}
           </label>
-          <div class="form-text">
-            <slot name="hint-text"></slot>
-          </div>
+          ${this._renderHintText()}
         </div>
         ${defaultSlot}
         <input
