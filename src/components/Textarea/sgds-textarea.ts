@@ -161,6 +161,11 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
     this.updateComplete.then(() => this._setTextareaHeight());
   }
 
+  protected _renderHintText() {
+    const hintTextTemplate = html` <div id="${this.textareaId}Help" class="form-text">${this.hintText}</div> `;
+    return this.hintText && hintTextTemplate;
+  }
+
   render() {
     // if maxlength is defined
     const wordCount = html`
@@ -228,11 +233,6 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
         </div>
       </div>
     `;
-  }
-
-  protected _renderHintText() {
-    const hintTextTemplate = html` <div id="${this.textareaId}Help" class="form-text">${this.hintText}</div> `;
-    return this.hintText && hintTextTemplate;
   }
 }
 
