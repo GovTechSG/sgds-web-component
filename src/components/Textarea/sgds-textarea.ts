@@ -22,7 +22,7 @@ import formHintStyles from "../../styles/form-hint.css";
  * @event sgds-blur - Emitted when textarea loses focus.
  */
 export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
-  static styles = [...SgdsElement.styles, feedbackStyles, formHintStyles, formLabelStyles, textareaStyle];
+  static styles = [...SgdsElement.styles, formHintStyles, formLabelStyles, feedbackStyles, textareaStyle];
   /**@internal */
   @query("textarea.form-control") textarea: HTMLTextAreaElement;
   /**@internal */
@@ -79,8 +79,8 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
-  /** When set, the character count will be hidden */
-  @property({ type: Boolean, reflect: true }) hideCharacterCount = false;
+  /** The textarea's hint text */
+  @property({ reflect: true }) hintText = "";
 
   /** @internal The textarea's unique id */
   private textareaId = genId("textarea", "input");
@@ -163,7 +163,15 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
 
   render() {
     // if maxlength is defined
-    const wordCount = html` <div class="form-text">${this.value.length}/${this.maxlength}</div> `;
+    const wordCount = html`
+      <div
+        class="form-text word-count ${classMap({
+          "invalid-feedback": this.invalid && this.hasFeedback
+        })}"
+      >
+        ${this.value.length}/${this.maxlength}
+      </div>
+    `;
 
     return html`
       <div
@@ -215,11 +223,16 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
                   <div id="${this.textareaId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
                 </div>
               `
-            : html`<div class="form-text"><slot name="hint-text"></slot></div>`}
-          ${this.maxlength > 0 && !this.hideCharacterCount ? wordCount : undefined}
+            : html`${this._renderHintText()}`}
+          ${this.maxlength > 0 ? wordCount : undefined}
         </div>
       </div>
     `;
+  }
+
+  protected _renderHintText() {
+    const hintTextTemplate = html` <div id="${this.textareaId}Help" class="form-text">${this.hintText}</div> `;
+    return this.hintText && hintTextTemplate;
   }
 }
 
