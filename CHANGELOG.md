@@ -1,3 +1,9 @@
+## v2.1.1 (2024-09-18)
+
+### Fix
+
+- **build**: restrict use client to react components only
+
 ## v2.1.0 (2024-09-16)
 
 ### Feat
