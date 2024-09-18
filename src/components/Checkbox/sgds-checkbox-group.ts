@@ -14,11 +14,17 @@ export class SgdsCheckboxGroup extends SgdsElement {
   /**@internal */
   @state() private hasInvalidCheckbox = false;
 
+  /** The checkbox group's label  */
+  @property({ reflect: true }) label = "";
+
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback = "";
 
   /** Allows invalidFeedback, invalid styles to be visible. When SgdsCheckboxGroup is used, it overrides the value of hasFeedback on SgdsCheckbox with its own value. */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
+
+  /** The checkbox group's hint text */
+  @property({ reflect: true }) hintText = "";
 
   constructor() {
     super();
@@ -35,6 +41,11 @@ export class SgdsCheckboxGroup extends SgdsElement {
     Array.from(this.checkboxes).forEach(checkbox => (checkbox.hasFeedback = this.hasFeedback));
   }
 
+  protected _renderHintText() {
+    const hintTextTemplate = html` <div class="form-text">${this.hintText}</div> `;
+    return this.hintText && hintTextTemplate;
+  }
+
   firstUpdated() {
     this._forwardHasFeedback();
   }
@@ -45,12 +56,8 @@ export class SgdsCheckboxGroup extends SgdsElement {
     return html`
       <fieldset>
         <div class="label-hint-container">
-          <label class="form-label">
-            <slot name="label"></slot>
-          </label>
-          <div class="form-text">
-            <slot name="hint-text"></slot>
-          </div>
+          <label class="form-label">${this.label}</label>
+          ${this._renderHintText()}
         </div>
         <div class="checkbox-container">
           <slot name="checkbox"></slot>

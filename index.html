@@ -329,18 +329,6 @@
                 <sgds-button id="stepper-btn-last">Go to last page</sgds-button>
                 <sgds-button id="stepper-btn-first">Go to first page</sgds-button>
             </div>
-        <form>
-            <sgds-checkbox-group hasFeedback invalidFeedback="Please correct the invalid options above">
-                <span slot="label">Select Your Preferences</span>
-                <span slot="hint-text">Please choose one or more options:</span>
-                <sgds-checkbox  slot="checkbox" value="option1" hasFeedback required>Option 1</sgds-checkbox>
-                <sgds-checkbox indeterminate slot="checkbox" value="option2" required>Option 2 indeterminate</sgds-checkbox>
-                <sgds-checkbox disabled slot="checkbox" value="option3" required>Option 3</sgds-checkbox>
-            </sgds-checkbox-group>
-            <sgds-button type="submit">Submit</sgds-button>
-        </form>
-
-
         </div>
         <div class="container">
             <datepicker-input></datepicker-input>
@@ -777,13 +765,8 @@
             </div> -->
 
             <div class="container">
-                <h2>Checkbox</h2>
+                <h2>Switch</h2>
                 <form id="checkbox-submit">
-                    <sgds-checkbox id="hehe"  invalid hasFeedback invalidFeedback="test" variant = "default">default</sgds-checkbox>
-                    <sgds-checkbox hasFeedback  variant = "invalid">invalid</sgds-checkbox>
-                    <sgds-checkbox  variant = "hover">hover</sgds-checkbox>
-                    <sgds-checkbox  variant = "focus">focus</sgds-checkbox>
-                    <sgds-checkbox  variant = "disabled">disabled</sgds-checkbox>
                     <sgds-switch>Switch</sgds-switch>
                     <sgds-switch icon>Switch with icon</sgds-switch>
                     <sgds-switch icon size="sm">Switch with icon</sgds-switch>
@@ -800,9 +783,25 @@
                 <sgds-checkbox  id="hehe">1</sgds-checkbox>
                 <sgds-checkbox >2</sgds-checkbox>
                 <sgds-checkbox >3</sgds-checkbox>
+                <sgds-checkbox id="hehe"  invalid hasFeedback invalidFeedback="test" variant = "default">default</sgds-checkbox>
+                <sgds-checkbox hasFeedback  variant = "invalid">invalid</sgds-checkbox>
+                <sgds-checkbox  variant = "hover">hover</sgds-checkbox>
+                <sgds-checkbox  variant = "focus">focus</sgds-checkbox>
+                <sgds-checkbox  variant = "disabled">disabled</sgds-checkbox>
             </div>
             <div class="container">
-                <h2>Radiogroup</h2>
+                <h2>Checkbox Group</h2>
+                <form>
+                    <sgds-checkbox-group hasFeedback invalidFeedback="Please correct the invalid options above" label="Select Your Preferences" hintText="Please choose one or more options:">
+                        <sgds-checkbox  slot="checkbox" value="option1" hasFeedback required>Option 1</sgds-checkbox>
+                        <sgds-checkbox indeterminate slot="checkbox" value="option2" required>Option 2 indeterminate</sgds-checkbox>
+                        <sgds-checkbox disabled slot="checkbox" value="option3" required>Option 3</sgds-checkbox>
+                    </sgds-checkbox-group>
+                    <sgds-button type="submit">Submit</sgds-button>
+                </form>
+            </div>
+            <div class="container">
+                <h2>Radio Group</h2>
                 <sgds-radio  value="1" invalid checked>Option 1 </sgds-radio>
                 <form id="radio-submit">
                     <sgds-radio-group required hasFeedback invalidFeedback="wrong" label="Select an option" hintText="Hint text">
