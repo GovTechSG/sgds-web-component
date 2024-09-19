@@ -6,6 +6,7 @@ import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
+import formLabelStyles from "../../styles/form-label.css";
 import switchStyle from "./switch.css";
 
 /**
@@ -18,7 +19,7 @@ import switchStyle from "./switch.css";
  *
  */
 export class SgdsSwitch extends SgdsElement {
-  static styles = [...FormCheckElement.styles, switchStyle];
+  static styles = [...FormCheckElement.styles, formLabelStyles, switchStyle];
 
   /** The size of the switch. By default, it is small size */
   @property({ reflect: true, type: String }) size: "sm" | "md" | "lg" = "md";
