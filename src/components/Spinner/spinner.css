@@ -26,8 +26,8 @@
 }
 
 .spinner-sm {
-  width: var(--sgds-dimension-20);
-  height: var(--sgds-dimension-20);
+  width: var(--sgds-dimension-24);
+  height: var(--sgds-dimension-24);
 }
 
 .spinner-lg {
