@@ -112,8 +112,9 @@
   color: var(--sgds-default-color-on-dark);
 }
 
-.stepper .stepper-item.is-clickable .stepper-detail {
-  color: var(--sgds-primary-color-emphasis);
+.stepper .stepper-item.is-clickable .stepper-detail,
+.stepper.clickable .stepper-item.is-active .stepper-detail {
+  color: var(--sgds-primary-color);
 }
 
 .stepper .stepper-item.is-active .stepper-marker {

@@ -110,7 +110,8 @@ export class SgdsStepper extends SgdsElement {
     return html`
       <div
         class="stepper ${classMap({
-          [`${this.orientation}`]: this.orientation
+          [`${this.orientation}`]: this.orientation,
+          clickable: this.clickable
         })}"
       >
         ${this.steps.map(({ stepHeader: step }, index) => {
