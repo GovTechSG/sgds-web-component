@@ -196,7 +196,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
         class="form-control-group ${classMap({
           disabled: this.disabled,
           readonly: this.readonly,
-          "is-invalid": this.hasFeedback && this.invalid
+          "is-invalid": this.invalid && this.hasFeedback
         })}"
         @click=${this._handleClick}
       >
@@ -284,7 +284,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
           disabled: this.disabled
         })}"
       >
-        ${html`${this._renderLabel()} ${input}`} ${this._renderFeedback()}
+        ${this._renderLabel()} ${this._renderInput()} ${this._renderFeedback()}
       </div>
     `;
   }

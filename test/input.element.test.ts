@@ -12,34 +12,35 @@ describe("sgds-input", () => {
       `
         <div class="form-control-container">
           <label class="form-label" for="test-id">label</label>
-          <small class="form-text" id="test-idHelp">hello</small>
-          <input type="text" class="form-control " id="test-id" aria-invalid="false" placeholder="placeholder">
+          <div class="form-control-group">
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+          </div>
+          <div class="form-text" id="test-idHelp">hello</div>
         </div>
     `,
       { ignoreAttributes: ["id", "for", "aria-labelledby"] }
     );
   });
 
-  it("input's id attribute should equal to label's for attribute and contain in small's id attribute", async () => {
+  it("input's id attribute should equal to label's for attribute and contain in hint text id attribute", async () => {
     const el = await fixture(html`<sgds-input label="label" hintText="hello"></sgds-input>`);
     const input = el.shadowRoot?.querySelector("input");
     const label = el.shadowRoot?.querySelector("label");
-    const small = el.shadowRoot?.querySelector("small");
+    const hintText = el.shadowRoot?.querySelector("div.form-text");
     expect(input?.getAttribute("id")).to.equal(label?.getAttribute("for"));
-    expect(small?.getAttribute("id")).to.contain(input?.getAttribute("id"));
+    expect(hintText?.getAttribute("id")).to.contain(input?.getAttribute("id"));
   });
-  it("input's aria-labelledby points to label id, hinttext id and invalid-feedback id", async () => {
+  it("input's aria-labelledby points to label id, hint text id and invalid-feedback id", async () => {
     const el = await fixture<SgdsInput>(html`<sgds-input label="label" hintText="hello" hasFeedback></sgds-input>`);
     const input = el.shadowRoot?.querySelector("input");
     const label = el.shadowRoot?.querySelector("label");
-    const small = el.shadowRoot?.querySelector("small");
-    const feedback = el.shadowRoot?.querySelector(".invalid-feedback");
+    const hintText = el.shadowRoot?.querySelector("div.form-text");
     expect(input?.getAttribute("aria-labelledby")).to.contain(label?.getAttribute("id"));
-    expect(input?.getAttribute("aria-labelledby")).to.contain(small?.getAttribute("id"));
-    expect(input?.getAttribute("aria-labelledby")).not.to.contain(feedback?.getAttribute("id"));
+    expect(input?.getAttribute("aria-labelledby")).to.contain(hintText?.getAttribute("id"));
 
     el.invalid = true;
     await elementUpdated(el);
+    const feedback = el.shadowRoot?.querySelector(".invalid-feedback");
     expect(input?.getAttribute("aria-labelledby")).to.contain(feedback?.getAttribute("id"));
   });
 
@@ -86,8 +87,7 @@ describe("sgds-input", () => {
     <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
   </svg>'
     ></sgds-input>`);
-    expect(el.shadowRoot?.querySelector("div.form-control-group.sgds")).to.exist;
-    expect(el.shadowRoot?.querySelector("div.form-control-group.sgds>span.form-control-icon>svg")).to.exist;
+    expect(el.shadowRoot?.querySelector("div.form-control-group>span.form-control-icon>svg")).to.exist;
   });
   //Name
   it("updates the name attribute value to 'Hello'", async () => {
@@ -125,9 +125,9 @@ describe("sgds-input", () => {
   });
 });
 describe("Feedback UI optional", () => {
-  it("when hasFeedback is true, div.invalid-feedback appears in shadowDOM", async () => {
+  it("when hasFeedback and invalid is true, div.invalid-feedback appears in shadowDOM", async () => {
     const el = await fixture<SgdsInput>(
-      html` <sgds-input hasFeedback invalidFeedback="invalid feedback"></sgds-input> `
+      html` <sgds-input invalid hasFeedback invalidFeedback="invalid feedback"></sgds-input> `
     );
     expect(el.shadowRoot?.querySelector("div.invalid-feedback")).not.to.be.null;
     expect(el.shadowRoot?.querySelector("div.invalid-feedback")?.textContent).to.equal("invalid feedback");
@@ -137,17 +137,17 @@ describe("Feedback UI optional", () => {
       html` <sgds-input hasFeedback invalidFeedback="invalid feedback"></sgds-input> `
     );
     expect(el.invalid).to.be.false;
-    expect(el.shadowRoot?.querySelector("input")).does.not.have.class("is-invalid");
+    expect(el.shadowRoot?.querySelector(".form-control-group")).does.not.have.class("is-invalid");
     //force an invalid state
     el.invalid = true;
     expect(el.invalid).to.be.true;
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector("input")).to.have.class("is-invalid");
+    expect(el.shadowRoot?.querySelector(".form-control-group")).to.have.class("is-invalid");
 
     //force an valid state
     el.invalid = false;
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector("input")).does.not.have.class("is-invalid");
+    expect(el.shadowRoot?.querySelector(".form-control-group")).does.not.have.class("is-invalid");
   });
 });
 describe("when using constraint validation", () => {
