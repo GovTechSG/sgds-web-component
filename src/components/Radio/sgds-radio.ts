@@ -89,23 +89,25 @@ export class SgdsRadio extends SgdsElement {
   render() {
     return html`
       <div class="form-check">
-        <input
-          class=${classMap({
-            "form-check-input": true,
-            "is-invalid": this.invalid
-          })}
-          type="radio"
-          id=${ifDefined(this.radioId)}
-          value=${ifDefined(this.value)}
-          ?checked=${this.checked}
-          ?disabled=${this.disabled}
-          aria-disabled=${this.disabled ? "true" : "false"}
-          aria-checked=${this.checked ? "true" : "false"}
-          @click=${this.handleClick}
-        />
-        <label for="${ifDefined(this.radioId)}" aria-label=${ifDefined(this.ariaLabel)} class="form-check-label"
-          ><slot></slot
-        ></label>
+        <div class="form-check-input-container">
+          <input
+            class=${classMap({
+              "form-check-input": true,
+              "is-invalid": this.invalid
+            })}
+            type="radio"
+            id=${ifDefined(this.radioId)}
+            value=${ifDefined(this.value)}
+            ?checked=${this.checked}
+            ?disabled=${this.disabled}
+            aria-disabled=${this.disabled ? "true" : "false"}
+            aria-checked=${this.checked ? "true" : "false"}
+            @click=${this.handleClick}
+          />
+        </div>
+        <label for="${ifDefined(this.radioId)}" aria-label=${ifDefined(this.ariaLabel)} class="form-check-label">
+          <slot></slot>
+        </label>
       </div>
     `;
   }

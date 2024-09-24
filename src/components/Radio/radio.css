@@ -13,6 +13,11 @@ input {
   align-items: center;
 }
 
+.form-check-input-container {
+  width: var(--sgds-form-width-xs);
+  height: var(--sgds-form-height-sm);
+}
+
 .form-check-input {
   appearance: none;
   background-color: var(--sgds-form-bg);
