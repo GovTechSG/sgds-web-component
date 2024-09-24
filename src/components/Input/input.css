@@ -1,47 +1,84 @@
-.form-control {
-  display: block;
-  font-size: var(--sgds-body-font-size);
-  appearance: none;
-  background-clip: padding-box;
-  background-color: var(--sgds-body-bg);
-  border: var(--sgds-form-border-width) solid var(--sgds-form-border-color);
-  border-radius: var(--sgds-border-radius);
-  color: var(--sgds-body-color);
-  font-weight: var(--sgds-body-font-weight);
-  line-height: var(--sgds-body-line-height);
-  padding: var(--sgds-input-btn-padding-y) var(--sgds-input-btn-padding-x);
+.form-control-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-form-gap-md);
+}
+
+.form-control-container.disabled {
+  opacity: var(--sgds-opacity-50);
+}
+
+.form-control-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sgds-form-gap-md);
+  background-color: var(--sgds-form-bg);
+  border: var(--sgds-form-border-width-default) solid var(--sgds-form-border-color);
+  border-radius: var(--sgds-form-border-radius-md);
+  padding: 0px var(--sgds-form-padding-x);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  height: var(--sgds-dimension-48);
+  min-width: var(--sgds-dimension-256);
   width: -webkit-fill-available;
   width: -moz-available;
 }
+
+.form-control {
+  display: block;
+  appearance: none;
+  background-clip: padding-box;
+  border: none;
+  background: none;
+  outline: none;
+  padding: 0;
+  flex-grow: 1;
+  color: var(--sgds-form-color);
+  font-size: var(--sgds-font-size-2);
+}
+
+.form-control-group > .form-control:focus {
+  z-index: 3;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .form-control {
+  .form-control-group {
     transition: none;
   }
 }
-.form-control:focus {
-  background-color: var(--sgds-body-bg);
-  border: var(--sgds-form-border-width) solid var(--sgds-link);
-  box-shadow: var(--sgds-form-focus-box-shadow);
+
+.form-control-group.readonly {
+  border-color: var(--sgds-form-border-color-muted);
+}
+
+.form-control-group:not(.disabled):not(.is-invalid):hover {
+  border: var(--sgds-form-border-width-thick) solid var(--sgds-form-border-color-emphasis);
+}
+
+.form-control-group:not(.disabled):not(.is-invalid):focus,
+.form-control-group:not(.disabled):not(.is-invalid):focus-within {
+  border: var(--sgds-form-border-width-thick) solid var(--sgds-form-border-color-emphasis);
+  box-shadow: var(--sgds-form-box-shadow-focus);
   outline: 0;
 }
 
-.form-control::placeholder {
-  color: var(--sgds-gray-400);
-  opacity: 1;
+.form-control-group.is-invalid {
+  border: var(--sgds-form-border-width-thick) solid var(--sgds-form-danger-border-color);
 }
-.form-control:disabled {
-  background-color: var(--sgds-disabled-bg);
-  opacity: 1;
-  color: var(--sgds-disabled-color);
+
+.form-control-group.disabled {
+  background-color: var(--sgds-form-bg-muted);
 }
-:host(.quantity-toggle)  input::-webkit-inner-spin-button{
+
+:host(.quantity-toggle) input::-webkit-inner-spin-button {
   appearance: none;
   margin: 0;
 }
+
 :host(.quantity-toggle) input {
   text-align:center;
 }
+
 /* .form-control::file-selector-button {
   background-color: var(--sgds-tertiary-bg);
   border: 0 solid;
@@ -127,30 +164,16 @@
 .form-control-color.form-control-lg {
   height: calc(2em + 1rem + 2px);
 } */
-.sgds.form-control-group .form-control-icon {
-  align-items: center;
+
+.form-control-icon {
   display: flex;
-  font-size: 1rem;
-  height: 3rem;
+  align-items: center;
   justify-content: center;
-  position: absolute;
-  width: 3rem;
-  z-index: 4;
-}
-.sgds.form-control-group > .form-control {
-  padding-left: 3rem;
-}
-.sgds.form-control-group > .form-control:focus {
-  z-index: 3;
+  width: var(--sgds-form-icon-size-lg);
+  height: var(--sgds-form-icon-size-lg);
 }
 
-.form-control.is-invalid {
-  border-color: var(--sgds-form-invalid-color);
-}
-.form-control.is-invalid:focus {
-  box-shadow: var(--sgds-form-focus-invalid-box-shadow);
-}
-.form-control-container {
-  display: flex;
-  flex-direction: column;
+.form-control-prefix,
+.form-control-suffix {
+  color: var(--sgds-form-color-subtle);
 }
