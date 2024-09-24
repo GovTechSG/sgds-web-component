@@ -1,0 +1,5 @@
+.form-control::placeholder {
+  color: var(--sgds-form-color-subtle);
+  font-family: var(--sgds-font-family-brand);
+  font-weight: var(--sgds-font-weight-light);
+}

@@ -57,10 +57,6 @@ textarea {
   border: var(--sgds-form-border-width-thick) solid var(--sgds-form-danger-border-color);
 }
 
-.form-control::placeholder {
-  color: var(--sgds-form-color-subtle);
-}
-
 .form-control:disabled {
   background-color: var(--sgds-form-bg-muted);
 }

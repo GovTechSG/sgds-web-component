@@ -12,6 +12,7 @@ import textareaStyle from "./textarea.css";
 import feedbackStyles from "../../styles/feedback.css";
 import formLabelStyles from "../../styles/form-label.css";
 import formHintStyles from "../../styles/form-hint.css";
+import fromPlaceholderStyles from "../../styles/form-placeholder.css";
 
 /**
  * @summary Text areas allow for the collection of input longer than a single line.
@@ -22,7 +23,14 @@ import formHintStyles from "../../styles/form-hint.css";
  * @event sgds-blur - Emitted when textarea loses focus.
  */
 export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
-  static styles = [...SgdsElement.styles, formHintStyles, formLabelStyles, feedbackStyles, textareaStyle];
+  static styles = [
+    ...SgdsElement.styles,
+    formHintStyles,
+    formLabelStyles,
+    feedbackStyles,
+    fromPlaceholderStyles,
+    textareaStyle
+  ];
   /**@internal */
   @query("textarea.form-control") textarea: HTMLTextAreaElement;
   /**@internal */
