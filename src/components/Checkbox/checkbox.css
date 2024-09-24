@@ -9,6 +9,11 @@ input {
   align-items: center;
 }
 
+.form-check-input-container {
+  width: var(--sgds-form-width-xs);
+  height: var(--sgds-form-height-sm);
+}
+
 .form-check-input {
   appearance: none;
   background-color: var(--sgds-form-bg);
@@ -17,9 +22,9 @@ input {
   background-repeat: no-repeat;
   background-size: auto;
   border: var(--sgds-form-border-width-default) solid var(--sgds-form-border-color);
-  height: var(--sgds-form-height-sm);
-  width: var(--sgds-form-width-xs);
   border-radius: var(--sgds-form-border-radius-md);
+  width: var(--sgds-form-width-xs);
+  height: var(--sgds-form-height-sm);
 }
 
 .form-check-input:focus, .form-check-input:focus-visible {

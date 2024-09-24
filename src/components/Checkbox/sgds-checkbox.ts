@@ -121,26 +121,28 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
   render() {
     return html`
       <div class="form-check">
-        <input
-          class=${classMap({
-            "form-check-input": true,
-            "is-invalid": this.hasFeedback && this.invalid
-          })}
-          type="checkbox"
-          id=${this._inputId}
-          aria-invalid=${this.invalid ? "true" : "false"}
-          name=${ifDefined(this.name)}
-          value=${ifDefined(this.value)}
-          ?checked=${this.checked}
-          ?indeterminate=${this.indeterminate}
-          ?disabled=${this.disabled}
-          ?required=${this.required}
-          aria-disabled=${this.disabled ? "true" : "false"}
-          aria-checked=${this.checked ? "true" : "false"}
-          @change=${this._handleChange}
-          @keydown=${this._handleKeyDown}
-          @invalid=${(e: Event) => this._handleInvalid(e)}
-        />
+        <div class="form-check-input-container">
+          <input
+            class=${classMap({
+              "form-check-input": true,
+              "is-invalid": this.hasFeedback && this.invalid
+            })}
+            type="checkbox"
+            id=${this._inputId}
+            aria-invalid=${this.invalid ? "true" : "false"}
+            name=${ifDefined(this.name)}
+            value=${ifDefined(this.value)}
+            ?checked=${this.checked}
+            ?indeterminate=${this.indeterminate}
+            ?disabled=${this.disabled}
+            ?required=${this.required}
+            aria-disabled=${this.disabled ? "true" : "false"}
+            aria-checked=${this.checked ? "true" : "false"}
+            @change=${this._handleChange}
+            @keydown=${this._handleKeyDown}
+            @invalid=${(e: Event) => this._handleInvalid(e)}
+          />
+        </div>
         <label for="${this._inputId}" class="form-check-label"><slot></slot></label>
       </div>
     `;
