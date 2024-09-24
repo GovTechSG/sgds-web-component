@@ -1262,7 +1262,7 @@ describe("datepicker input masking", () => {
       );
       const invalidHandler = sinon.spy();
       inputEl.addEventListener("sgds-invalid-input", invalidHandler);
-      const shadowInput = inputEl?.shadowRoot?.querySelector("input");
+      const shadowInput = inputEl?.shadowRoot?.querySelector(".form-control-group");
       expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
       const changeHandler = sinon.spy();
 
@@ -1283,9 +1283,9 @@ describe("datepicker input masking", () => {
 
   const mode: Array<"single" | "range"> = ["single", "range"];
   mode.forEach(m => {
-    it(`For mode=${m}, validation doesnt happen with blur when there is no input change `, async () => {
+    it(`For mode=${m}, validation does not happen with blur when there is no input change `, async () => {
       const inputEl = await fixture<DatepickerInput>(html`<sgds-datepicker-input mode=${m}></sgds-datepicker-input>`);
-      const shadowInput = inputEl?.shadowRoot?.querySelector("input");
+      const shadowInput = inputEl?.shadowRoot?.querySelector(".form-control-group");
       expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
 
       inputEl.focus();
@@ -1306,11 +1306,11 @@ describe("datepicker input masking", () => {
     { mode: "range", dateDigits: [2, 0, 0, 2, 2, 0, 2, 4, 3, 9, 0, 2, 2, 0, 2, 4], value: "20/02/2024 - 39/02/2024" }
   ];
   modesAndDigits.forEach(({ mode, dateDigits, value }) => {
-    it(`for mode=${mode}, validation happesn on completion of date mask`, async () => {
+    it(`for mode=${mode}, validation happens on completion of date mask`, async () => {
       const inputEl = await fixture<DatepickerInput>(
         html`<sgds-datepicker-input mode=${mode as "single" | "range"}></sgds-datepicker-input>`
       );
-      const shadowInput = inputEl?.shadowRoot?.querySelector("input");
+      const shadowInput = inputEl?.shadowRoot?.querySelector(".form-control-group");
       expect(inputEl.value).to.equal("");
       expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
 
@@ -1329,7 +1329,7 @@ describe("datepicker input masking", () => {
   it("for range mode, when only one date is selected and blurred, input is invalid ", async () => {
     const dateDigits = [2, 0, 0, 2, 2, 0, 2, 4];
     const inputEl = await fixture<DatepickerInput>(html`<sgds-datepicker-input mode="range"></sgds-datepicker-input>`);
-    const shadowInput = inputEl?.shadowRoot?.querySelector("input");
+    const shadowInput = inputEl?.shadowRoot?.querySelector(".form-control-group");
     expect(inputEl.value).to.equal("");
     expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
     inputEl.focus();
