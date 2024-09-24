@@ -308,12 +308,36 @@ describe("Stepper keyboard interactions", () => {
 });
 
 describe("sgds-stepper accessibility", () => {
-  it("should be tab-accessible for all steps", async () => {
-    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData} activeStep="0"></sgds-stepper> `);
+  it("when orientation=horizontal, stepper should be displayed in horizontal orientation", async () => {
+    const el = await fixture(
+      html` <sgds-stepper orientation="horizontal" .steps=${stepMetaData} activeStep="1"></sgds-stepper> `
+    );
+    const stepper = el.shadowRoot?.querySelector(".stepper");
+    expect(stepper).to.have.class("horizontal");
+  });
+
+  it("when orientation=vertical, stepper should be displayed in horizontal orientation", async () => {
+    const el = await fixture(
+      html` <sgds-stepper orientation="horizontal" .steps=${stepMetaData} activeStep="1"></sgds-stepper> `
+    );
+    const stepper = el.shadowRoot?.querySelector(".stepper");
+    expect(stepper).to.have.class("horizontal");
+  });
+
+  it("when clickable=false, should not be tab-accessible for all steps", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData} activeStep="1"></sgds-stepper> `);
+    const markers = el.shadowRoot?.querySelectorAll("div.stepper-item");
+    expect(markers?.[0]).to.have.attribute("tabindex", "-1");
+    expect(markers?.[1]).to.have.attribute("tabindex", "-1");
+    expect(markers?.[2]).to.have.attribute("tabindex", "-1");
+  });
+
+  it("when clickable=true, the steps before activeStep should be tab-accessible", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData} clickable activeStep="1"></sgds-stepper> `);
     const markers = el.shadowRoot?.querySelectorAll("div.stepper-item");
     expect(markers?.[0]).to.have.attribute("tabindex", "0");
-    expect(markers?.[1]).to.have.attribute("tabindex", "0");
-    expect(markers?.[2]).to.have.attribute("tabindex", "0");
+    expect(markers?.[1]).to.have.attribute("tabindex", "-1");
+    expect(markers?.[2]).to.have.attribute("tabindex", "-1");
   });
 
   it("should have correct aria-current value for each step when activeStep set to 1", async () => {
