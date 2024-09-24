@@ -16,11 +16,13 @@ describe("sgds-textarea", () => {
     assert.shadowDom.equal(
       el,
       `
-      <div class="text-area-label-wrapper">
+      <div class="form-control-container">
         <label class="form-label">label</label>
-        <div class="form-text">0/10</div>
+        <textarea class=" form-control textarea-resize-vertical "  rows="4" placeholder="Placeholder" maxlength="10" aria-invalid="false" spellcheck="false" required=""></textarea>
+        <div class="textarea-info-container">
+          <div class="form-text word-count">0/10</div>
+        </div>
       </div>
-      <textarea class=" form-control textarea-resize-vertical "  rows="4" placeholder="Placeholder" maxlength="10" aria-invalid="false" spellcheck="false" required=""></textarea>
     `,
       { ignoreAttributes: ["id", "for"] }
     );
