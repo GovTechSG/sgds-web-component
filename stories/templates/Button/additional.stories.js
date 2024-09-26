@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+//import { html } from "lit-html";
 
 const VariantTemplate = args => {
   const variants = ["primary", "outlined", "danger"];
@@ -74,7 +74,9 @@ export const ButtonWithIcon = {
   tags: ["!dev"]
 };
 
-export const ButtonPlayground = {
+import { html } from "lit-html";
+
+export const SgdsButtonPlayground = {
   render: () => html`
     <playground-ide editable-file-system line-numbers resizable>
       <script type="sample/html" filename="index.html">
@@ -83,82 +85,77 @@ export const ButtonPlayground = {
         <head>
           <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@2.0.0/themes/day.css' rel='stylesheet' type='text/css' />
           <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component">&lt;/script>
-          <script src="./events.js">&lt;/script>
-
-          <style>
-            sgds-button {
-              --btn-border-radius: 0;
-            }
-          </style>
 
 
+            <script src="./events.js">&lt;/script>
+
+
+            <style>
+                 sgds-button {
+                   --btn-border-radius
+                 }
+               </style>
         </head>
         <body>
-          <sgds-button id="dynamic-button">
-            Submit Form 1
+          <sgds-button id="comp">
+            <!-- Add component-specific content here -->
           </sgds-button>
         </body>
         </html>
       </script>
 
       <script type="sample/js" filename="events.js">
-        document.addEventListener('DOMContentLoaded', () => {
-          const button = document.getElementById('dynamic-button');
+              document.addEventListener('DOMContentLoaded', () => {
+                const componentElement = document.getElementById('comp');
+                if (componentElement) {
 
-          if (button) {
-            button.addEventListener('sgds-blur', () => {
-              console.log('Button lost focus');
-            });
-
-            button.addEventListener('sgds-focus', () => {
-              console.log('Button gained focus');
-            });
-
-            console.log('Button label:', button.textContent.trim());
-          } else {
-            console.error('Button not found');
-          }
+        componentElement.addEventListener('sgds-blur', () => {
+          console.log('sgds-blur event triggered');
         });
+
+                }
+              });
       </script>
     </playground-ide>
+
     <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #ddd;">
       <h3>1. Edit the Custom CSS</h3>
       <p>
-        You can edit the button's styles by modifying its custom CSS properties. These can be seen in the documentation
-        below. For example, you can change the border radius by editing the following code inside
-        <strong>index.html</strong>:
+        You can edit the SgdsButton's styles by modifying its custom CSS
+        properties. For example:
       </p>
       <pre><code>
         sgds-button {
-          --btn-border-radius: 100px;
+          ----btn-border-radius: value;
         }
       </code></pre>
-      <p>This will apply a large, rounded border to the button.</p>
-
       <h3>2. Modify Event Handling</h3>
       <p>
-        You can customize how the button responds to events by editing <strong>events.js</strong>. For instance, you can
-        change the action triggered by the <code>sgds-blur</code> event:
+        You can customize how the SgdsButton responds to events. For example:
       </p>
       <pre><code>
-        button.addEventListener('sgds-blur', () => {
-          console.log('Custom Message');
+        componentElement.addEventListener('insert component event'}', () => {
+          console.log( event triggered');
         });
       </code></pre>
-      <p>In this example, the message will appear as an alert when the button loses focus.</p>
-
-      <h3>3. Change Button Attributes</h3>
+      <h3>3. Change SgdsButton Attributes</h3>
       <p>
-        You can modify the button's attributes directly within the HTML to change its appearance or behavior. Refer to
-        the documentation below. For instance, try changing the button variant inside <strong>index.html</strong>:
+        You can modify the SgdsButton's attributes directly within the HTML. For
+        example:
       </p>
       <pre><code>
-         variant="success"
+        sgds-button some-attribute="value" 
       </code></pre>
-      <p>Changing the <code>variant</code> attribute to <code>success</code> will apply a new style to the button.</p>
     </div>
   `,
   name: "Playground",
   args: {},
-  parameters: {}
+  parameters: {},
 };
+
+
+
+
+
+
+

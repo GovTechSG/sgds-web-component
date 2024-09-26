@@ -11,7 +11,7 @@
     "build": "npm run build:react && rm -rf lib && rollup --config rollup.config.mjs && node ./scripts/frankBuild.js",
     "build:react": "npm run cem && node ./scripts/makeReact.mjs",
     "build:readme": "gulp build-readme",
-    "write:stories": "npm run cem && node ./scripts/generateStories.mjs && npm run concat:stories",
+    "write:stories": "npm run cem && node ./scripts/generatePlaygroundDocs.mjs && node ./scripts/generateStories.mjs  && npm run concat:stories ",
     "write:component": "plop",
     "test": "rm -rf test-outdir && rollup --config rollup.test.config.js && web-test-runner",
     "test:scripts": "wtr scripts/__tests__/**/*.test.js --node-resolve",
@@ -22,7 +22,7 @@
     "lint:fix": "npm run lint -- --fix",
     "cem": "cem analyze --litelement ",
     "e2e-test": "node cypress/scripts/run_all.js & cypress open",
-    "storybook": "nodemon --exec \"npm run write:stories &&  STORYBOOK_ENV=development storybook dev -p 6006\" --watch stories/templates stories/getting-started -e js,mdx",
+    "storybook": "nodemon --exec \"npm run write:stories &&  STORYBOOK_ENV=development storybook dev -p 6006\" --watch  stories/getting-started -e js,mdx",
     "build-storybook": "npm run build && npm run write:stories && STORYBOOK_ENV=production storybook build",
     "trial-sb": "storybook dev",
     "trial-sb-build": "storybook build"

@@ -51,42 +51,42 @@ export const ActionCardPlayground = {
   render: () => html`
     <playground-ide editable-file-system line-numbers resizable>
       <script type="sample/html" filename="index.html">
-                <!doctype html>
-                <html lang="en">
-                <head>
-                  <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@2.0.0/themes/day.css' rel='stylesheet' type='text/css' />
-                  <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component">&lt;/script>
-                  <script src="./events.js">&lt;/script>
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@2.0.0/themes/day.css' rel='stylesheet' type='text/css' />
+            <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component">&lt;/script>
+            <script src="./events.js">&lt;/script>
 
-                  <style>
-                      sgds-action-card::part(base) {
-                        /* Add styles for the base wrapper here */
-                      }
+            <style>
+                sgds-action-card::part(base) {
+                  /* Add styles for the base wrapper here */
+                }
 
-                      sgds-action-card::part(body) {
-                        /* Add styles for the body here */
-                      }
+                sgds-action-card::part(body) {
+                  /* Add styles for the body here */
+                }
 
-                      sgds-action-card::part(subtitle) {
-                        /* Add styles for the subtitle here */
-                      }
+                sgds-action-card::part(subtitle) {
+                  /* Add styles for the subtitle here */
+                }
 
-                      sgds-action-card::part(title) {
-                        /* Add styles for the title here */
-                      }
+                sgds-action-card::part(title) {
+                  /* Add styles for the title here */
+                }
 
-                      sgds-action-card::part(text) {
-                        /* Add styles for the text here */
-                      }
+                sgds-action-card::part(text) {
+                  /* Add styles for the text here */
+                }
 
-                  </style>
-                </head>
-                <body>
-                      <sgds-action-card id= "action-card">
-                        <span slot="card-subtitle">Laptop</span>
-                      </sgds-action-card>
-                </body>
-              </html>
+            </style>
+          </head>
+          <body>
+                <sgds-action-card id= "action-card">
+                  <span slot="card-subtitle">Laptop</span>
+                </sgds-action-card>
+          </body>
+        </html>
       </script>
 
       <script type="sample/js" filename="events.js">
@@ -119,8 +119,8 @@ export const ActionCardPlayground = {
 
       <h3>2. Modify Event Handling</h3>
       <p>
-        You can customize how the action card responds to events by editing <strong>events.js</strong>. For instance, you can
-        change the action triggered by the <code>sgds-change</code> event:
+        You can customize how the action card responds to events by editing <strong>events.js</strong>. For instance,
+        you can change the action triggered by the <code>sgds-change</code> event:
       </p>
       <pre><code>
         action.addEventListener('sgds-change', () => {
@@ -131,8 +131,8 @@ export const ActionCardPlayground = {
 
       <h3>3. Change Action Card Attributes</h3>
       <p>
-        You can modify the action card's attributes directly within the HTML to change its appearance or behavior. Refer to
-        the documentation below. For instance, try disabling the action card inside <strong>index.html</strong>:
+        You can modify the action card's attributes directly within the HTML to change its appearance or behavior. Refer
+        to the documentation below. For instance, try disabling the action card inside <strong>index.html</strong>:
       </p>
       <pre><code>
          disabled = "true"
