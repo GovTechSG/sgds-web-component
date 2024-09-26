@@ -1,6 +1,4 @@
 import { html } from "lit-html";
-import {stringTemplate } from "./basic.js";
-
 
 export const SgdsAccordionPlayground = {
   render: () => html`
@@ -23,7 +21,7 @@ export const SgdsAccordionPlayground = {
                </style>
         </head>
         <body>
-          ${stringTemplate}
+          ${Template(args).strings}
         </body>
         </html>
       </script>
