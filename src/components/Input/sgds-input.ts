@@ -140,9 +140,11 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   public reportValidity() {
     return this.input.reportValidity();
   }
+  /** Sets a custom validation message. Pass an empty string to restore validity */
   public setCustomValidity(err: string) {
     return this.input.setCustomValidity(err);
   }
+  /** Programatically sets the invalid state of the input. Pass in boolean value in the argument */
   public setInvalid(bool: boolean) {
     this.invalid = bool;
   }
@@ -276,8 +278,6 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     return this.hintText && hintTextTemplate;
   }
   render() {
-    const input = html`${this._renderInput()}`;
-
     return html`
       <div
         class="form-control-container ${classMap({

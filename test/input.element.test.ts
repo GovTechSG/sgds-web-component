@@ -21,6 +21,58 @@ describe("sgds-input", () => {
       { ignoreAttributes: ["id", "for", "aria-labelledby"] }
     );
   });
+  it("renders with suffix defined", async () => {
+    const el = await fixture(html`<sgds-input inputId="test-id" suffix="test"></sgds-input>`);
+    assert.shadowDom.equal(
+      el,
+      `
+        <div class="form-control-container">
+          <div class="form-control-group">
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+             <span class="form-control-suffix">
+           test
+         </span>
+          </div>
+        </div>
+    `,
+      { ignoreAttributes: ["id", "for", "aria-labelledby"] }
+    );
+  });
+  it("renders with prefix defined", async () => {
+    const el = await fixture(html`<sgds-input inputId="test-id" prefix="test"></sgds-input>`);
+    assert.shadowDom.equal(
+      el,
+      `
+        <div class="form-control-container">
+          <div class="form-control-group">
+           <span class="form-control-prefix">
+            test
+          </span>
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+          </div>
+        </div>
+    `,
+      { ignoreAttributes: ["id", "for", "aria-labelledby"] }
+    );
+  });
+  it("renders with spinner when loading=true", async () => {
+    const el = await fixture(html`<sgds-input inputId="test-id" loading></sgds-input>`);
+    assert.shadowDom.equal(
+      el,
+      `
+        <div class="form-control-container">
+          <div class="form-control-group">
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+            <sgds-spinner
+            size="sm"
+            variant="primary">
+          </sgds-spinner>
+            </div>
+        </div>
+    `,
+      { ignoreAttributes: ["id", "for", "aria-labelledby"] }
+    );
+  });
 
   it("input's id attribute should equal to label's for attribute and contain in hint text id attribute", async () => {
     const el = await fixture(html`<sgds-input label="label" hintText="hello"></sgds-input>`);
