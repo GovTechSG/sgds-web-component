@@ -1,6 +1,5 @@
 .invalid-feedback {
   color: var(--sgds-form-invalid-color);
-  display: none;
   font-size: var(--sgds-form-feedback-font-size);
   width: 100%;
 }

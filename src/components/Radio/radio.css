@@ -15,9 +15,10 @@ input {
 }
 
 .form-check {
-  display: block;
+  display: flex;
   margin-bottom: var(--sgds-spacer-2);
   min-height: 2rem;
+  flex-direction: row;
 }
 
 .form-check .form-check-input {
