@@ -20,7 +20,7 @@ describe("<sgds-checkbox>", () => {
   });
 
   it("id attribute should contain in .invalid-feedback id attribute", async () => {
-    const el = await fixture(html`<sgds-checkbox hasFeedback></sgds-checkbox>`);
+    const el = await fixture(html`<sgds-checkbox hasFeedback invalid></sgds-checkbox>`);
     const input = el.shadowRoot?.querySelector("input");
     const feedback = el.shadowRoot?.querySelector(".invalid-feedback");
     expect(feedback?.getAttribute("id")).to.contain(input?.getAttribute("id"));
@@ -59,7 +59,7 @@ describe("<sgds-checkbox>", () => {
   });
 
   it("if class input is .is-invalid, feedback el should contain .invalid-feedback", async () => {
-    const el = await fixture(html`<sgds-checkbox hasFeedback invalidFeedback="test"></sgds-checkbox>`);
+    const el = await fixture(html`<sgds-checkbox hasFeedback invalidFeedback="test" invalid></sgds-checkbox>`);
     const checkbox = el.shadowRoot?.querySelector("div.invalid-feedback");
     expect(checkbox?.textContent).to.equal("test");
   });
