@@ -211,7 +211,7 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
       >
       </textarea>
 
-      ${this.hasFeedback
+      ${this.hasFeedback && this.invalid
         ? html`<div id="${this.textareaId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
         : ""}
     `;

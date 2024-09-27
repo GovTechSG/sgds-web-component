@@ -181,7 +181,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
       ${this._renderFeedback()} `;
   }
   protected _renderFeedback() {
-    return this.hasFeedback
+    return this.hasFeedback && this.invalid
       ? html`<div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
       : "";
   }
