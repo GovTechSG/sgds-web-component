@@ -1,6 +1,6 @@
 import { html } from "lit-html";
 
-export const SgdsDatepickerPlayground = {
+export const SgdsSidenavPlayground = {
   render: () => html`
     <playground-ide editable-file-system line-numbers resizable>
       <script type="sample/html" filename="index.html">
@@ -15,15 +15,9 @@ export const SgdsDatepickerPlayground = {
 
 
                       <style>
-                           sgds-datepicker {
-                             --datepicker-theme-color
-        --datepicker-hover-bg
-        --datepicker-bg
-        --datepicker-close-button-bg
-        --datepicker-close-button-hover-bg
-        --datepicker-close-button-color
-        --datepicker-selected-date-bg
-        --datepicker-selected-date-color
+                           sgds-sidenav {
+                             --sidenav-theme-color
+        --sidenav-sticky-top
                            }
                          </style>
                   </head>
@@ -32,49 +26,35 @@ export const SgdsDatepickerPlayground = {
                   </body>
                   </html>
       </script>
-
-      <script type="sample/js" filename="events.js">
-              document.addEventListener('DOMContentLoaded', () => {
-                const componentElement = document.getElementById('comp');
-                if (componentElement) {
-
-        componentElement.addEventListener('sgds-change-date', () => {
-          console.log('sgds-change-date event triggered');
-        });
-
-                }
-              });
-      </script>
     </playground-ide>
 
     <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #ddd;">
       <h3>1. Edit the Custom CSS</h3>
       <p>
-        You can edit the SgdsDatepicker's styles by modifying its custom CSS
+        You can edit the SgdsSidenav's styles by modifying its custom CSS
         properties. For example:
       </p>
       <pre><code>
-        sgds-datepicker {
-          ----datepicker-theme-color: value;
+        sgds-sidenav {
+          ----sidenav-theme-color: value;
         }
       </code></pre>
       <h3>2. Modify Event Handling</h3>
       <p>
-        You can customize how the SgdsDatepicker responds to events. For
-        example:
+        You can customize how the SgdsSidenav responds to events. For example:
       </p>
       <pre><code>
         componentElement.addEventListener('insert component event'}', () => {
           console.log( event triggered');
         });
       </code></pre>
-      <h3>3. Change SgdsDatepicker Attributes</h3>
+      <h3>3. Change SgdsSidenav Attributes</h3>
       <p>
-        You can modify the SgdsDatepicker's attributes directly within the HTML.
+        You can modify the SgdsSidenav's attributes directly within the HTML.
         For example:
       </p>
       <pre><code>
-        sgds-datepicker some-attribute="value" 
+        sgds-sidenav some-attribute="value" 
       </code></pre>
     </div>
   `,

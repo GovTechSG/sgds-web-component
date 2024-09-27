@@ -1,6 +1,6 @@
 import { html } from "lit-html";
 
-export const SgdsDatepickerPlayground = {
+export const SgdsFileUploadPlayground = {
   render: () => html`
     <playground-ide editable-file-system line-numbers resizable>
       <script type="sample/html" filename="index.html">
@@ -15,15 +15,10 @@ export const SgdsDatepickerPlayground = {
 
 
                       <style>
-                           sgds-datepicker {
-                             --datepicker-theme-color
-        --datepicker-hover-bg
-        --datepicker-bg
-        --datepicker-close-button-bg
-        --datepicker-close-button-hover-bg
-        --datepicker-close-button-color
-        --datepicker-selected-date-bg
-        --datepicker-selected-date-color
+                           sgds-file-upload {
+                             --file-upload-file-icon-color
+        --file-upload-remove-icon-color
+        --file-upload-remove-icon-hover-color
                            }
                          </style>
                   </head>
@@ -38,8 +33,8 @@ export const SgdsDatepickerPlayground = {
                 const componentElement = document.getElementById('comp');
                 if (componentElement) {
 
-        componentElement.addEventListener('sgds-change-date', () => {
-          console.log('sgds-change-date event triggered');
+        componentElement.addEventListener('sgds-files-selected', () => {
+          console.log('sgds-files-selected event triggered');
         });
 
                 }
@@ -50,17 +45,17 @@ export const SgdsDatepickerPlayground = {
     <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #ddd;">
       <h3>1. Edit the Custom CSS</h3>
       <p>
-        You can edit the SgdsDatepicker's styles by modifying its custom CSS
+        You can edit the SgdsFileUpload's styles by modifying its custom CSS
         properties. For example:
       </p>
       <pre><code>
-        sgds-datepicker {
-          ----datepicker-theme-color: value;
+        sgds-file-upload {
+          ----file-upload-file-icon-color: value;
         }
       </code></pre>
       <h3>2. Modify Event Handling</h3>
       <p>
-        You can customize how the SgdsDatepicker responds to events. For
+        You can customize how the SgdsFileUpload responds to events. For
         example:
       </p>
       <pre><code>
@@ -68,13 +63,13 @@ export const SgdsDatepickerPlayground = {
           console.log( event triggered');
         });
       </code></pre>
-      <h3>3. Change SgdsDatepicker Attributes</h3>
+      <h3>3. Change SgdsFileUpload Attributes</h3>
       <p>
-        You can modify the SgdsDatepicker's attributes directly within the HTML.
+        You can modify the SgdsFileUpload's attributes directly within the HTML.
         For example:
       </p>
       <pre><code>
-        sgds-datepicker some-attribute="value" 
+        sgds-file-upload some-attribute="value" 
       </code></pre>
     </div>
   `,

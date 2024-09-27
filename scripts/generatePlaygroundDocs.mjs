@@ -65,7 +65,7 @@ function generatePlaygroundHtml(componentTagName, component) {
                 : ''}
           </head>
           <body>
-            
+          \${Template(args).strings}
           </body>
           </html>
         </script>

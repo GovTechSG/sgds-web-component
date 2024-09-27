@@ -1,6 +1,6 @@
 import { html } from "lit-html";
 
-export const SgdsDatepickerPlayground = {
+export const SgdsMastheadPlayground = {
   render: () => html`
     <playground-ide editable-file-system line-numbers resizable>
       <script type="sample/html" filename="index.html">
@@ -15,15 +15,10 @@ export const SgdsDatepickerPlayground = {
 
 
                       <style>
-                           sgds-datepicker {
-                             --datepicker-theme-color
-        --datepicker-hover-bg
-        --datepicker-bg
-        --datepicker-close-button-bg
-        --datepicker-close-button-hover-bg
-        --datepicker-close-button-color
-        --datepicker-selected-date-bg
-        --datepicker-selected-date-color
+                           sgds-masthead {
+                             --masthead-mobile-font-size
+        --masthead-mobile-padding-x
+        --masthead-fluid-padding-x
                            }
                          </style>
                   </head>
@@ -32,49 +27,35 @@ export const SgdsDatepickerPlayground = {
                   </body>
                   </html>
       </script>
-
-      <script type="sample/js" filename="events.js">
-              document.addEventListener('DOMContentLoaded', () => {
-                const componentElement = document.getElementById('comp');
-                if (componentElement) {
-
-        componentElement.addEventListener('sgds-change-date', () => {
-          console.log('sgds-change-date event triggered');
-        });
-
-                }
-              });
-      </script>
     </playground-ide>
 
     <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #ddd;">
       <h3>1. Edit the Custom CSS</h3>
       <p>
-        You can edit the SgdsDatepicker's styles by modifying its custom CSS
+        You can edit the SgdsMasthead's styles by modifying its custom CSS
         properties. For example:
       </p>
       <pre><code>
-        sgds-datepicker {
-          ----datepicker-theme-color: value;
+        sgds-masthead {
+          ----masthead-mobile-font-size: value;
         }
       </code></pre>
       <h3>2. Modify Event Handling</h3>
       <p>
-        You can customize how the SgdsDatepicker responds to events. For
-        example:
+        You can customize how the SgdsMasthead responds to events. For example:
       </p>
       <pre><code>
         componentElement.addEventListener('insert component event'}', () => {
           console.log( event triggered');
         });
       </code></pre>
-      <h3>3. Change SgdsDatepicker Attributes</h3>
+      <h3>3. Change SgdsMasthead Attributes</h3>
       <p>
-        You can modify the SgdsDatepicker's attributes directly within the HTML.
+        You can modify the SgdsMasthead's attributes directly within the HTML.
         For example:
       </p>
       <pre><code>
-        sgds-datepicker some-attribute="value" 
+        sgds-masthead some-attribute="value" 
       </code></pre>
     </div>
   `,

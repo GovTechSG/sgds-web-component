@@ -1,6 +1,6 @@
 import { html } from "lit-html";
 
-export const SgdsCheckboxPlayground = {
+export const SgdsSpinnerPlayground = {
   render: () => html`
     <playground-ide editable-file-system line-numbers resizable>
       <script type="sample/html" filename="index.html">
@@ -21,48 +21,35 @@ export const SgdsCheckboxPlayground = {
         </body>
         </html>
       </script>
-
-      <script type="sample/js" filename="events.js">
-              document.addEventListener('DOMContentLoaded', () => {
-                const componentElement = document.getElementById('comp');
-                if (componentElement) {
-
-        componentElement.addEventListener('sgds-change', () => {
-          console.log('sgds-change event triggered');
-        });
-
-                }
-              });
-      </script>
     </playground-ide>
 
     <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #ddd;">
       <h3>1. Edit the Custom CSS</h3>
       <p>
-        You can edit the SgdsCheckbox's styles by modifying its custom CSS
+        You can edit the SgdsSpinner's styles by modifying its custom CSS
         properties. For example:
       </p>
       <pre><code>
-        sgds-checkbox {
+        sgds-spinner {
           --custom-css-property: value;
         }
       </code></pre>
       <h3>2. Modify Event Handling</h3>
       <p>
-        You can customize how the SgdsCheckbox responds to events. For example:
+        You can customize how the SgdsSpinner responds to events. For example:
       </p>
       <pre><code>
         componentElement.addEventListener('insert component event'}', () => {
           console.log( event triggered');
         });
       </code></pre>
-      <h3>3. Change SgdsCheckbox Attributes</h3>
+      <h3>3. Change SgdsSpinner Attributes</h3>
       <p>
-        You can modify the SgdsCheckbox's attributes directly within the HTML.
+        You can modify the SgdsSpinner's attributes directly within the HTML.
         For example:
       </p>
       <pre><code>
-        sgds-checkbox some-attribute="value" 
+        sgds-spinner some-attribute="value" 
       </code></pre>
     </div>
   `,

@@ -21,7 +21,7 @@ export const SgdsAccordionPlayground = {
                </style>
         </head>
         <body>
-          ${Template(args).strings}
+        ${Template(args).strings}
         </body>
         </html>
       </script>
@@ -61,3 +61,4 @@ export const SgdsAccordionPlayground = {
   args: {},
   parameters: {},
 };
+

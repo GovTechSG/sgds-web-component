@@ -1,4 +1,4 @@
-//import { html } from "lit-html";
+import { html } from "lit-html";
 
 const VariantTemplate = args => {
   const variants = ["primary", "outlined", "danger"];
@@ -74,7 +74,6 @@ export const ButtonWithIcon = {
   tags: ["!dev"]
 };
 
-import { html } from "lit-html";
 
 export const SgdsButtonPlayground = {
   render: () => html`

@@ -33,7 +33,7 @@ export const BadgePlayground = {
       <p>Changing the <code>variant</code> attribute to <code>success</code> will apply a new style to the badge.</p>
     </div>
   `,
-  name: "Badge Playground",
+  name: "Playground",
   args: {},
   parameters: {}
 };
