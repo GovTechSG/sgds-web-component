@@ -33,13 +33,13 @@ describe("sgds-input", () => {
     const input = el.shadowRoot?.querySelector("input");
     const label = el.shadowRoot?.querySelector("label");
     const small = el.shadowRoot?.querySelector("small");
-    const feedback = el.shadowRoot?.querySelector(".invalid-feedback");
+    expect(input?.getAttribute("aria-labelledby")).not.to.contain("-invalid");
     expect(input?.getAttribute("aria-labelledby")).to.contain(label?.getAttribute("id"));
     expect(input?.getAttribute("aria-labelledby")).to.contain(small?.getAttribute("id"));
-    expect(input?.getAttribute("aria-labelledby")).not.to.contain(feedback?.getAttribute("id"));
 
     el.invalid = true;
     await elementUpdated(el);
+    const feedback = el.shadowRoot?.querySelector(".invalid-feedback");
     expect(input?.getAttribute("aria-labelledby")).to.contain(feedback?.getAttribute("id"));
   });
 
@@ -127,7 +127,7 @@ describe("sgds-input", () => {
 describe("Feedback UI optional", () => {
   it("when hasFeedback is true, div.invalid-feedback appears in shadowDOM", async () => {
     const el = await fixture<SgdsInput>(
-      html` <sgds-input hasFeedback invalidFeedback="invalid feedback"></sgds-input> `
+      html` <sgds-input hasFeedback invalidFeedback="invalid feedback" invalid></sgds-input> `
     );
     expect(el.shadowRoot?.querySelector("div.invalid-feedback")).not.to.be.null;
     expect(el.shadowRoot?.querySelector("div.invalid-feedback")?.textContent).to.equal("invalid feedback");

@@ -16,7 +16,7 @@ input {
 }
 
 .form-check {
-  display: block;
+  display: flex;
   margin-bottom: var(--sgds-spacer-2);
   min-height: 2rem;
 }
@@ -24,7 +24,6 @@ input {
 .form-check .form-check-input {
   margin-right: var(--sgds-form-input-margin-right);
 }
-
 .form-check-input {
   appearance: none;
   background-color: var(--sgds-form-bg);
@@ -69,11 +68,11 @@ input {
 .form-check-input.is-invalid:focus {
   box-shadow: var(--sgds-form-focus-invalid-box-shadow);
 }
-.form-check-input.is-invalid ~ .form-check-label {
+.form-check-input.is-invalid ~ .form-check-label-container > .form-check-label {
   color: var(--sgds-form-invalid-color);
 }
 .form-check-inline {
-  display: inline-block;
+  display: inline-flex;
   vertical-align: text-top;
   margin-right: var(--sgds-form-inline-margin-right);
   margin-bottom: 0;

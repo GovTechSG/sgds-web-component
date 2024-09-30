@@ -134,12 +134,14 @@ export class FormCheckElement extends SgdsElement implements SgdsFormControl {
           @keydown=${this._handleKeyDown}
           @invalid=${(e: Event) => this._handleInvalid(e)}
         />
-        <label for="${this._inputId}" aria-label=${ifDefined(this.ariaLabel)} class="form-check-label"
-          ><slot></slot
-        ></label>
-        ${this.hasFeedback
-          ? html`<div id="${this._inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
-          : nothing}
+        <div class="form-check-label-container">
+          <label for="${this._inputId}" aria-label=${ifDefined(this.ariaLabel)} class="form-check-label"
+            ><slot></slot
+          ></label>
+          ${this.hasFeedback && this.invalid
+            ? html`<div id="${this._inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
+            : nothing}
+        </div>
       </div>
     `;
   }

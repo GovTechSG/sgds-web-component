@@ -136,13 +136,15 @@ describe("<sgds-radio-group>", () => {
         </sgds-radio-group>
       `
     );
+    el.invalid = true;
+    await el.updateComplete;
     const invalidFeedback = el.shadowRoot?.querySelector("div.invalid-feedback");
     expect(invalidFeedback?.textContent).to.equal("");
   });
   it("invalidFeedback sets the feedback message", async () => {
     const el = await fixture<SgdsRadioGroup>(
       html`
-        <sgds-radio-group id="radio-group" hasFeedback invalidFeedback="test">
+        <sgds-radio-group id="radio-group" hasFeedback invalidFeedback="test" invalid>
           <sgds-radio id="radio2" value="2">two</sgds-radio>
         </sgds-radio-group>
       `

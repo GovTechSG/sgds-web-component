@@ -227,7 +227,7 @@ export class SgdsRadioGroup extends SgdsElement {
           tabindex="-1"
           @invalid=${(e: Event) => this._handleInvalid(e)}
         />
-        ${this.hasFeedback ? html`<div class="invalid-feedback">${this.invalidFeedback}</div>` : ""}
+        ${this.hasFeedback && this.invalid ? html`<div class="invalid-feedback">${this.invalidFeedback}</div>` : ""}
       </fieldset>
     `;
   }
