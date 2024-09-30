@@ -76,6 +76,16 @@
             padding: 1rem;
             grid-area: main;
         }
+        .skeleton-child{
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+        }
+        /* sgds-skeleton{
+            --height: 100px;
+            --width: 500px;
+            --border-radius: 5px;
+        } */
     </style>
     <script type="module">
         import "@webcomponents/scoped-custom-element-registry";
@@ -167,6 +177,43 @@
 
     <main>
         <div class="container">
+            <h2>Skeleton Shapes</h2>
+            <div class="d-flex-row">
+            <sgds-skeleton width="96px" height="96px" borderRadius="50%"></sgds-skeleton>
+            <sgds-skeleton width="96px" height="96px" borderRadius="4px"></sgds-skeleton>
+            <sgds-skeleton width="128px" height="64px" borderRadius="4px"></sgds-skeleton>
+            </div>
+            <h2>Skeleton Text</h2>
+            <div class="d-flex-row">
+                <div class="d-flex-col">
+                    <h3>Paragraph Skeleton defined by rows</h3>
+                    <sgds-skeleton width="250px" height="240px" borderRadius="4px" rows="3"></sgds-skeleton>
+                </div>
+                <div class="d-flex-col">
+                    <h3>Paragraph Skeleton with variant=body</h3>
+                    <sgds-skeleton width="250px" height="240px" borderRadius="4px" rows="3"></sgds-skeleton>
+                </div>
+                <div class="d-flex-col">
+                    <h3>Paragraph Skeleton with variant=heading</h3>
+                    <sgds-skeleton width="250px" height="240px" borderRadius="4px" rows="3" variant="heading"></sgds-skeleton>
+                </div>
+
+            </div>
+            <div class="d-flex-row">
+                <div class="d-flex-col">
+                    <h3>Paragraph Skeleton with autoSizeRows</h3>
+                    <sgds-skeleton width="250px" height="240px" borderRadius="4px" rows="3" autoSizeRows></sgds-skeleton>
+                </div>
+                <div class="d-flex-col">
+                    <h3>AutosizeRows takes precedence over variant</h3>
+                    <sgds-skeleton width="250px" height="240px" borderRadius="4px" rows="5" variant="heading"  autoSizeRows></sgds-skeleton>
+                </div>
+                <div class="d-flex-col">
+                    <h3>AutosizeRows depends on height. Keeps a fixed gap of 8px</h3>
+                    <sgds-skeleton width="250px" height="100px" borderRadius="4px" rows="5" variant="heading"  autoSizeRows></sgds-skeleton>
+                </div>
+
+            </div>
             <h2>Icon Button</h2>
             <div class="d-flex-row">
                 <h3>Variants</h3>

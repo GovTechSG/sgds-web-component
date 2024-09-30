@@ -1,0 +1,23 @@
+.skeleton {
+  background-color: var(--sgds-default-bg-translucent);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-gap-xs);
+}
+.skeleton.skeleton-paragraph {
+  background-color: transparent;
+}
+
+.skeleton.skeleton-paragraph > div[class^="skeleton-row"] {
+  background-color: var(--sgds-default-bg-translucent);
+  height: 20px;
+}
+
+.skeleton.skeleton-paragraph.skeleton-paragraph-heading > div[class^="skeleton-row"] {
+  height: 40px;
+}
+
+.skeleton.skeleton-paragraph.auto-size-rows > div[class^="skeleton-row"],
+.skeleton.skeleton-paragraph.skeleton-paragraph-heading > div[class^="skeleton-row"] {
+  height: -webkit-fill-available;
+}
