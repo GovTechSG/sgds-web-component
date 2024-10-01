@@ -31,4 +31,5 @@ import "./components/Textarea";
 import "./components/Toast";
 import "./components/Tooltip";
 import "./components/IconButton";
+import "./components/Skeleton";
 // COMPONENT IMPORTS
