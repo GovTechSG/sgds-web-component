@@ -32,4 +32,5 @@ import "./components/Toast";
 import "./components/Tooltip";
 import "./components/IconButton";
 import "./components/Skeleton";
+import "./components/Divider";
 // COMPONENT IMPORTS
