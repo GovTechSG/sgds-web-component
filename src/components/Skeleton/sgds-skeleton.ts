@@ -1,28 +1,31 @@
 import { html, nothing } from "lit";
-import { property, query, queryAssignedElements } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import skeletonStyles from "./skeleton.css";
-
+/**
+ * @summary A skeleton is a low-fidelity visual placeholder that represents the loading of interface elements
+ * before they have displayed on the page.
+ */
 export class SgdsSkeleton extends SgdsElement {
   static styles = [skeletonStyles];
-  @queryAssignedElements()
-  private childElement: Array<HTMLElement>;
 
-  @query(".skeleton") skeleton: HTMLDivElement;
+  @query(".skeleton") private skeleton: HTMLDivElement;
 
   /** Sets the width of skeleton. Pass value in pixels */
   @property({ type: String, reflect: true }) width = "";
   /** Sets the height of skeleton. Pass value in pixels */
   @property({ type: String, reflect: true }) height = "";
-  /** Sets the border radius of skeleton. Pass value in as percentage or pixels */
+  /** Sets the border radius of skeleton. Pass value in as percentage or pixels.
+   * When `row` is defined, the borderRadius is forwarded down to the border radius of each skeleton row */
   @property({ type: String, reflect: true }) borderRadius = "";
-  /** Sets the border radius of skeleton. Pass value in as percentage or pixels */
+  /**Sets the number of rows within the given height of the skeleton.
+   * By default, the height of each row is auto-sized by taking the height of the skeleton divided by the number of rows and
+   * taking into account that there is a gap set by root css variable `--sgds-gap-xs` between each rows
+   */
   @property({ type: Number, reflect: true }) rows: number;
-  /** Sets the border radius of skeleton. Pass value in as percentage or pixels */
-  @property({ type: Boolean, reflect: true }) autoSizeRows = false;
-  /** Sets the border radius of skeleton. Pass value in as percentage or pixels */
-  @property({ type: String, reflect: true }) variant: "body" | "heading" = "body";
+  /** Adds a sheening animated effect to the skeleton  */
+  @property({ type: Boolean, reflect: true }) sheen = false;
 
   protected firstUpdated(): void {
     this.width ? (this.skeleton.style.width = this.width) : null;
@@ -32,11 +35,6 @@ export class SgdsSkeleton extends SgdsElement {
     if (this.rows > 0) {
       const skeletonRows = Array.from(this.skeleton.children) as HTMLElement[];
       skeletonRows.forEach(row => (row.style.borderRadius = this.borderRadius));
-
-      // if (this.autoSizeRows) {
-      //     const calculatedHeight = this.height - (8 * (this.rows -1))
-      //     skeletonRows.forEach(row => row.style.height = )
-      // }
     }
   }
 
@@ -46,14 +44,23 @@ export class SgdsSkeleton extends SgdsElement {
         class=${classMap({
           skeleton: true,
           "skeleton-paragraph": this.rows > 0,
-          "skeleton-paragraph-heading": this.variant === "heading" && this.rows > 0,
-          "auto-size-rows": this.rows > 0 && this.autoSizeRows
+          "auto-size-rows": this.rows > 0,
+          sheen: this.sheen && !this.rows
         })}
       >
-        ${this.rows > 0 ? [...Array(this.rows).keys()].map(n => html`<div class="skeleton-row-${n}"></div>`) : nothing}
+        ${this.rows > 0
+          ? [...Array(this.rows).keys()].map(n => {
+              const classes = { [`skeleton-row-${n}`]: true, sheen: this.sheen };
+              return html`<div class=${classMap(classes)}></div>`;
+            })
+          : nothing}
       </div>
     `;
   }
 }
 
 export default SgdsSkeleton;
+
+// Accessibility to add to Documentation:
+// When user use a template of sgds-skeletons, add one visually hidden span to indicate Loading...
+// Loading labels must be unique thats why its not advisible to handle the aria labelling for users inside sgds-skeleton
