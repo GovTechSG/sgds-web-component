@@ -38,29 +38,21 @@ export const SgdsTextareaPlayground = {
 
     <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #ddd;">
       <h3>1. Edit the Custom CSS</h3>
-      <p>
-        You can edit the SgdsTextarea's styles by modifying its custom CSS
-        properties. For example:
-      </p>
+      <p>You can edit the SgdsTextarea's styles by modifying its custom CSS properties. For example:</p>
       <pre><code>
         sgds-textarea {
           --custom-css-property: value;
         }
       </code></pre>
       <h3>2. Modify Event Handling</h3>
-      <p>
-        You can customize how the SgdsTextarea responds to events. For example:
-      </p>
+      <p>You can customize how the SgdsTextarea responds to events. For example:</p>
       <pre><code>
         componentElement.addEventListener('insert component event'}', () => {
           console.log( event triggered');
         });
       </code></pre>
       <h3>3. Change SgdsTextarea Attributes</h3>
-      <p>
-        You can modify the SgdsTextarea's attributes directly within the HTML.
-        For example:
-      </p>
+      <p>You can modify the SgdsTextarea's attributes directly within the HTML. For example:</p>
       <pre><code>
         sgds-textarea some-attribute="value" 
       </code></pre>
@@ -68,9 +60,8 @@ export const SgdsTextareaPlayground = {
   `,
   name: "Playground",
   args: {},
-  parameters: {},
+  parameters: {}
 };
-
 
 const ValidationTemplate = () =>
   html` <sgds-textarea required hasFeedback invalidFeedback="This is required"></sgds-textarea> `;

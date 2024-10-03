@@ -43,9 +43,8 @@ export const Template = args =>
     </sgds-accordion>
   `;
 
-export const args = {
-};
+export const args = {};
 
 export const parameters = {
-  controls: { exclude: ["slots"] },
+  controls: { exclude: ["slots"] }
 };

@@ -32,5 +32,5 @@ export default defineConfig({
   customLogger: logger,
   build: {
     cssCodeSplit: false
-  },
+  }
 });

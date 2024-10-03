@@ -46,10 +46,7 @@ export const SgdsCardPlayground = {
 
     <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #ddd;">
       <h3>1. Edit the Custom CSS</h3>
-      <p>
-        You can edit the SgdsCard's styles by modifying its custom CSS
-        properties. For example:
-      </p>
+      <p>You can edit the SgdsCard's styles by modifying its custom CSS properties. For example:</p>
       <pre><code>
         sgds-card {
           --custom-css-property: value;
@@ -63,10 +60,7 @@ export const SgdsCardPlayground = {
         });
       </code></pre>
       <h3>3. Change SgdsCard Attributes</h3>
-      <p>
-        You can modify the SgdsCard's attributes directly within the HTML. For
-        example:
-      </p>
+      <p>You can modify the SgdsCard's attributes directly within the HTML. For example:</p>
       <pre><code>
         sgds-card some-attribute="value" 
       </code></pre>
@@ -74,6 +68,5 @@ export const SgdsCardPlayground = {
   `,
   name: "Playground",
   args: {},
-  parameters: {},
+  parameters: {}
 };
-
