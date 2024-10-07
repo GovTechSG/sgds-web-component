@@ -2,6 +2,7 @@ import { query, state } from "lit/decorators.js";
 import { DropdownElement } from "./dropdown-element";
 import { SgdsDropdownItem } from "../components";
 
+const TAB = "Tab";
 const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
 const ENTER = "Enter";
@@ -80,6 +81,21 @@ export class DropdownListElement extends DropdownElement {
         } else {
           return this._setMenuItem(this.prevDropdownItemNo, false);
         }
+      case TAB:
+        e.preventDefault();
+        if (e.shiftKey) {
+          if (this.prevDropdownItemNo < 0) {
+            return this._setMenuItem(menuItems.length - 1, false);
+          } else {
+            return this._setMenuItem(this.prevDropdownItemNo, false);
+          }
+        }
+
+        if (this.nextDropdownItemNo === menuItems.length) {
+          return this._setMenuItem(0);
+        } else {
+          return this._setMenuItem(this.nextDropdownItemNo > 0 ? this.nextDropdownItemNo : 0);
+        }
       case ENTER:
         if (menuItems.includes(e.target as SgdsDropdownItem)) {
           return this.handleSelectSlot(e);
@@ -121,9 +137,10 @@ export class DropdownListElement extends DropdownElement {
     } else activeItem = item;
 
     // focus or blur items depending on active or not
-    items.forEach(i => {
-      i.setAttribute("tabindex", i === activeItem ? "0" : "-1");
-      i === activeItem && i.focus();
+    items.forEach(item => {
+      const dropdownItem = item.shadowRoot.querySelector(".dropdown-item") as HTMLAnchorElement;
+      dropdownItem.setAttribute("tabindex", item === activeItem ? "0" : "-1");
+      item === activeItem && dropdownItem.focus();
     });
   }
 }
