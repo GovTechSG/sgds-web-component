@@ -9,6 +9,7 @@ import { SgdsDropdownItem } from "../Dropdown/sgds-dropdown-item";
 import { SgdsInput } from "../Input/sgds-input";
 import comboBoxStyle from "./combo-box.css";
 import dropdownStyle from "../Dropdown/dropdown.css";
+import dropdownMenuStyle from "../Dropdown/dropdown-menu.css";
 type FilterFunction = (inputValue: string, menuItem: string) => boolean;
 
 /**
@@ -20,7 +21,7 @@ type FilterFunction = (inputValue: string, menuItem: string) => boolean;
  * @event sgds-input -  Emitted when user input is received and its value changes.
  */
 export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
-  static styles = [...DropdownListElement.styles, comboBoxStyle, dropdownStyle];
+  static styles = [...DropdownListElement.styles, comboBoxStyle, dropdownStyle, dropdownMenuStyle];
   /**@internal */
   static get scopedElements() {
     return {

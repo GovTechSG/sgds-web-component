@@ -5,13 +5,14 @@ import { ref } from "lit/directives/ref.js";
 import { DropdownListElement } from "../../base/dropdown-list-element";
 import genId from "../../utils/generateId";
 import dropdownStyle from "../Dropdown/dropdown.css";
+import dropdownMenuStyle from "../Dropdown/dropdown-menu.css";
 import mainnavDropdownStyle from "./mainnav-dropdown.css";
 /**
  * @slot default - The menu items. Pass in sgds-dropdown-item as the menu items
  * @slot toggler - The content of the toggler to pass in html content. `togglerText` property takes precedence over this slot when both are defined.
  */
 export class SgdsMainnavDropdown extends DropdownListElement {
-  static styles = [...DropdownListElement.styles, dropdownStyle, mainnavDropdownStyle];
+  static styles = [...DropdownListElement.styles, dropdownStyle, dropdownMenuStyle, mainnavDropdownStyle];
 
   /**@internal */
   @queryAsync("a")

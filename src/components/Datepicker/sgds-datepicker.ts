@@ -14,6 +14,7 @@ import DatepickerInput from "./datepicker-input";
 import { SgdsButton } from "../Button/sgds-button";
 import { ViewEnum } from "./types";
 import dropdownStyle from "../Dropdown/dropdown.css";
+import dropdownMenuStyle from "../Dropdown/dropdown-menu.css";
 import datepickerStyle from "./datepicker.css";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
@@ -37,7 +38,7 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  * date view of the calendar
  */
 export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) implements SgdsFormControl {
-  static styles = [...DropdownElement.styles, dropdownStyle, datepickerStyle];
+  static styles = [...DropdownElement.styles, dropdownStyle, dropdownMenuStyle, datepickerStyle];
   /**@internal */
   static formAssociated = true;
   private _internals: ElementInternals;
