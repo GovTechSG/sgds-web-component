@@ -12,11 +12,11 @@ export class SgdsSkeleton extends SgdsElement {
 
   @query(".skeleton") private skeleton: HTMLDivElement;
 
-  /** Sets the width of skeleton. Pass value in pixels */
+  /** Sets the width of skeleton. Pass value in string with length units like pixels or percentage. */
   @property({ type: String, reflect: true }) width = "";
-  /** Sets the height of skeleton. Pass value in pixels */
+  /** Sets the height of skeleton. Pass value in string with length units like pixels or percentage. */
   @property({ type: String, reflect: true }) height = "";
-  /** Sets the border radius of skeleton. Pass value in as percentage or pixels.
+  /** Sets the border radius of skeleton. Pass value in string with length units like pixels and percentage
    * When `row` is defined, the borderRadius is forwarded down to the border radius of each skeleton row */
   @property({ type: String, reflect: true }) borderRadius = "";
   /**Sets the number of rows within the given height of the skeleton.
