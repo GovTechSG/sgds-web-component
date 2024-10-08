@@ -62,22 +62,40 @@ describe("dropdown-element generic keyboard interactions", () => {
     await el.updateComplete;
     expect(el.nextDropdownItemNo).to.equal(1);
     expect(el.prevDropdownItemNo).to.equal(1);
-    expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute("tabindex", "0");
-    expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute("tabindex", "-1");
+    expect(el.querySelectorAll("sgds-dropdown-item")[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "0"
+    );
+    expect(el.querySelectorAll("sgds-dropdown-item")[1].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "-1"
+    );
     await sendKeys({ press: "ArrowDown" });
     //currentItem = 1
     await el.updateComplete;
     expect(el.nextDropdownItemNo).to.equal(2);
     expect(el.prevDropdownItemNo).to.equal(0);
-    expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute("tabindex", "-1");
-    expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute("tabindex", "0");
+    expect(el.querySelectorAll("sgds-dropdown-item")[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "-1"
+    );
+    expect(el.querySelectorAll("sgds-dropdown-item")[1].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "0"
+    );
     await sendKeys({ press: "ArrowDown" });
     //currentItem = 0
     await el.updateComplete;
     expect(el.nextDropdownItemNo).to.equal(1);
     expect(el.prevDropdownItemNo).to.equal(1);
-    expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute("tabindex", "0");
-    expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute("tabindex", "-1");
+    expect(el.querySelectorAll("sgds-dropdown-item")[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "0"
+    );
+    expect(el.querySelectorAll("sgds-dropdown-item")[1].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "-1"
+    );
   }).retries(1);
   it("for a newly opened menu with no focus on any items, ArrowUp key will navigate to the last dropdown-item on the menu and continue looping once it reaches the last menu item", async () => {
     const el = await fixture<MockDropdown>(
@@ -94,22 +112,40 @@ describe("dropdown-element generic keyboard interactions", () => {
     await el.updateComplete;
     expect(el.nextDropdownItemNo).to.equal(2);
     expect(el.prevDropdownItemNo).to.equal(0);
-    expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute("tabindex", "-1");
-    expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute("tabindex", "0");
+    expect(el.querySelectorAll("sgds-dropdown-item")[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "-1"
+    );
+    expect(el.querySelectorAll("sgds-dropdown-item")[1].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "0"
+    );
     await sendKeys({ press: "ArrowUp" });
     //currentItem = 0
     await el.updateComplete;
     expect(el.nextDropdownItemNo).to.equal(1);
     expect(el.prevDropdownItemNo).to.equal(1);
-    expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute("tabindex", "0");
-    expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute("tabindex", "-1");
+    expect(el.querySelectorAll("sgds-dropdown-item")[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "0"
+    );
+    expect(el.querySelectorAll("sgds-dropdown-item")[1].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "-1"
+    );
     await sendKeys({ press: "ArrowUp" });
     //currentItem = 1
     await el.updateComplete;
     expect(el.nextDropdownItemNo).to.equal(2);
     expect(el.prevDropdownItemNo).to.equal(0);
-    expect(el.querySelectorAll("sgds-dropdown-item")[0]).to.have.attribute("tabindex", "-1");
-    expect(el.querySelectorAll("sgds-dropdown-item")[1]).to.have.attribute("tabindex", "0");
+    expect(el.querySelectorAll("sgds-dropdown-item")[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "-1"
+    );
+    expect(el.querySelectorAll("sgds-dropdown-item")[1].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "0"
+    );
 
     //closing the menu resets the states nextDropdownItemNo and prevDropdownItemNo
     await sendKeys({ press: "Escape" });
@@ -117,8 +153,12 @@ describe("dropdown-element generic keyboard interactions", () => {
     expect(el.menuIsOpen).to.be.false;
     expect(el.nextDropdownItemNo).to.equal(0);
     expect(el.prevDropdownItemNo).to.equal(-1);
-    expect(el.querySelectorAll("sgds-dropdown-item")[0]).not.to.have.attribute("tabindex");
-    expect(el.querySelectorAll("sgds-dropdown-item")[1]).not.to.have.attribute("tabindex");
+    expect(
+      el.querySelectorAll("sgds-dropdown-item")[0].shadowRoot?.querySelector(".dropdown-item")
+    ).not.to.have.attribute("tabindex");
+    expect(
+      el.querySelectorAll("sgds-dropdown-item")[1].shadowRoot?.querySelector(".dropdown-item")
+    ).not.to.have.attribute("tabindex");
   }).retries(1);
   it("keyboard navigation skips disabled items", async () => {
     const el = await fixture<MockDropdown>(
@@ -131,12 +171,24 @@ describe("dropdown-element generic keyboard interactions", () => {
     );
     el.shadowRoot?.querySelector("button")?.focus();
     await sendKeys({ press: "ArrowDown" });
-    expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(el.querySelectorAll("sgds-dropdown-item")[1]);
+    expect(el.querySelectorAll("sgds-dropdown-item")[1].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "0"
+    );
     await sendKeys({ press: "ArrowDown" });
-    expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(el.querySelectorAll("sgds-dropdown-item")[2]);
+    expect(el.querySelectorAll("sgds-dropdown-item")[2].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "0"
+    );
     await sendKeys({ press: "ArrowDown" });
-    expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(el.querySelectorAll("sgds-dropdown-item")[1]);
-    expect(el.querySelector("sgds-dropdown-item:focus")).not.to.equal(el.querySelectorAll("sgds-dropdown-item")[3]);
+    expect(el.querySelectorAll("sgds-dropdown-item")[1].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "0"
+    );
+    expect(el.querySelectorAll("sgds-dropdown-item")[3].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "-1"
+    );
   }).retries(1);
   // test case: when close="outside" and user mouse clicks on menu and then change to keyboard navigation
   it("transition from mouse click to keyboard navigation should be seamless", async () => {
@@ -151,14 +203,26 @@ describe("dropdown-element generic keyboard interactions", () => {
     const itemOne = el.querySelectorAll("sgds-dropdown-item")[0] as SgdsDropdownItem;
     itemOne.click();
     await sendKeys({ press: "ArrowDown" });
-    expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(el.querySelectorAll("sgds-dropdown-item")[2]);
+    expect(el.querySelectorAll("sgds-dropdown-item")[2].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "0"
+    );
     await sendKeys({ press: "ArrowDown" });
-    expect(el.querySelector("sgds-dropdown-item:focus")).not.to.equal(el.querySelectorAll("sgds-dropdown-item")[2]);
-    expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(el.querySelectorAll("sgds-dropdown-item")[3]);
+    expect(el.querySelectorAll("sgds-dropdown-item")[2].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "-1"
+    );
+    expect(el.querySelectorAll("sgds-dropdown-item")[3].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "0"
+    );
 
     itemOne.click();
     await sendKeys({ press: "ArrowUp" });
-    expect(el.querySelector("sgds-dropdown-item:focus")).to.equal(el.querySelectorAll("sgds-dropdown-item")[3]);
+    expect(el.querySelectorAll("sgds-dropdown-item")[3].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+      "tabindex",
+      "0"
+    );
   }).retries(1);
 });
 
@@ -172,40 +236,40 @@ describe("sgds-dropdown", () => {
     const el = await fixture(html`<sgds-dropdown></sgds-dropdown>`);
     assert.shadowDom.equal(
       el,
-      `  <div>
-         <sgds-button
-           outlined
-           role="button"
-           aria-expanded="false"
-           aria-haspopup="menu"
-           variant="secondary"
-           type="button"
-           size="md"
-           target="_self"
-         >
-         <svg
-         xmlns="http://www.w3.org/2000/svg"
-         width="16"
-         height="16"
-         fill="currentColor"
-         class="bi bi-chevron-down"
-         viewBox="0 0 16 16"
-       >
-         <path
-           fill-rule="evenodd"
-           d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
-         />
-       </svg>
-         </sgds-button>
-       <div
-         class="dropdown-menu"
-         part="menu"
-         role="menu"
-         >
-        <slot>
-        </slot>
+      `<div>
+        <sgds-button
+          outlined
+          role="button"
+          aria-expanded="false"
+          aria-haspopup="menu"
+          variant="secondary"
+          type="button"
+          size="md"
+          target="_self"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-chevron-down"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+            />
+          </svg>
+        </sgds-button>
+        <div
+          class="dropdown-menu"
+          part="menu"
+          role="menu"
+        >
+          <slot>
+          </slot>
+        </div>
       </div>
-       </div>
     `,
       { ignoreAttributes: ["id"] }
     );
@@ -461,8 +525,10 @@ describe("sgds-dropdown-item", () => {
           role="menuitem"
           target="_self"
         >
-          <slot>
-          </slot>
+          <div class="dropdown-item-label">
+            <slot>
+            </slot>
+          </div>
         </a>
       </div>`
     );
