@@ -15,7 +15,7 @@ import inputStyle from "./input.css";
 import feedbackStyles from "../../styles/feedback.css";
 import formHintStyles from "../../styles/form-hint.css";
 import formLabelStyles from "../../styles/form-label.css";
-import fromPlaceholderStyles from "../../styles/form-placeholder.css";
+import formPlaceholderStyles from "../../styles/form-placeholder.css";
 import { nothing } from "lit";
 /**
  * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
@@ -32,7 +32,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     feedbackStyles,
     formHintStyles,
     formLabelStyles,
-    fromPlaceholderStyles,
+    formPlaceholderStyles,
     inputStyle
   ];
   /**@internal */
