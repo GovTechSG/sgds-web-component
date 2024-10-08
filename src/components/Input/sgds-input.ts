@@ -150,7 +150,7 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   }
 
   protected _handleClick() {
-    this.shadowRoot.querySelector("input")?.focus();
+    this.focus();
   }
 
   protected _handleChange(event: string) {
