@@ -11,13 +11,10 @@ export const SgdsCheckboxPlayground = {
           <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component">&lt;/script>
 
 
-            <script src="./events.js">&lt;/script>
-
-
 
         </head>
         <body>
-        ${Template(args).strings}
+          <sgds-checkbox name="check-me" value="check-me">Check me</sgds-checkbox>
         </body>
         </html>
       </script>
@@ -61,4 +58,20 @@ export const SgdsCheckboxPlayground = {
   name: "Playground",
   args: {},
   parameters: {}
+};
+
+const ValidationTemplate = () =>
+  html`
+    <form>
+      <sgds-checkbox required hasFeedback invalidFeedback="This is required">Check me</sgds-checkbox>
+      <sgds-button type="submit">Submit</sgds-button>
+    </form>
+  `;
+
+export const CheckboxValidations = {
+  render: ValidationTemplate.bind({}),
+  name: "Validation",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
 };

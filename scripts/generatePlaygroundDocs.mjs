@@ -6,14 +6,16 @@ import { getAllComponents, getSgdsComponents, pascalToKebab } from './shared.mjs
 const playgroundDir = path.join('stories/templates');
 
 // Fetch component metadata
-const metadata = JSON.parse(fs.readFileSync(path.join('./', 'custom-elements.json'), 'utf8'));
+const metadata = JSON.parse(
+  fs.readFileSync(path.join('./', 'custom-elements.json'), 'utf8')
+);
 
 // Get and group components
 const components = getSgdsComponents(getAllComponents(metadata));
 
 for (const component of components) {
   const componentName = component.name;
-  const strippedName = componentName.replace("Sgds", "");
+  const strippedName = componentName.replace('Sgds', '');
   console.log(strippedName);
   const componentTagName = `sgds-${pascalToKebab(strippedName)}`;
 
@@ -36,7 +38,6 @@ for (const component of components) {
 function generatePlaygroundHtml(componentTagName, component) {
   return `
   import { html } from "lit-html";
-  
 
   export const ${component.name}Playground = {
     render: () => html\`
@@ -45,41 +46,50 @@ function generatePlaygroundHtml(componentTagName, component) {
           <!doctype html>
           <html lang="en">
           <head>
-            <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@2.0.0/themes/day.css' rel='stylesheet' type='text/css' />
+            <link
+              href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@2.0.0/themes/day.css'
+              rel='stylesheet'
+              type='text/css'
+            />
             <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component">&lt;/script>
-            
-           
-              <script src="./events.js">&lt;/script>
-            
-            ${generateCssParts(component.cssParts, componentTagName) ? 
-              `<style>
-                 ${generateCssParts(component.cssParts, componentTagName)}
-               </style>` 
-              : ''}
-              ${generateCssProperties(component.cssProperties) ? 
-                `<style>
+
+            <script src="./events.js">&lt;/script>
+
+            ${
+              generateCssParts(component.cssParts, componentTagName)
+                ? `<style>
+                   ${generateCssParts(component.cssParts, componentTagName)}
+                  </style>`
+                : ''
+            }
+            ${
+              generateCssProperties(component.cssProperties)
+                ? `<style>
                    ${componentTagName} {
                      ${generateCssProperties(component.cssProperties)}
                    }
-                 </style>` 
-                : ''}
+                  </style>`
+                : ''
+            }
           </head>
           <body>
-          \${Template(args).strings}
+                  \${Template(args).strings}
           </body>
           </html>
         </script>
 
-        ${generateEventScript(component) ? 
-          `<script type="sample/js" filename="events.js">
+        ${
+          generateEventScript(component)
+            ? `<script type="sample/js" filename="events.js">
             document.addEventListener('DOMContentLoaded', () => {
               const componentElement = document.getElementById('comp');
               if (componentElement) {
                 ${generateEventScript(component)}
               }
             });
-          </script>` 
-          : ''}
+          </script>`
+            : ''
+        }
       </playground-ide>
 
       ${generateDocsSection(component)}
@@ -91,19 +101,22 @@ function generatePlaygroundHtml(componentTagName, component) {
   `;
 }
 
-
 // Helper function to generate custom CSS based on cssParts
 function generateCssParts(cssParts, componentTagName) {
-  return cssParts?.map(part => `
+  return cssParts
+    ?.map(
+      (part) => `
     ${componentTagName}::part(${part.name}) {
       /* Your CSS here */
     }
-  `).join('\n');
+  `
+    )
+    .join('\n');
 }
 
 function generateCssProperties(cssProperties) {
-    return cssProperties?.map(prop => `${prop.name}`).join('\n');
-  }
+  return cssProperties?.map((prop) => `${prop.name}`).join('\n');
+}
 
 // Helper function to generate event handling script
 function generateEventScript(component) {
@@ -120,7 +133,9 @@ function generateEventScript(component) {
 
 // Helper function to generate documentation section
 function generateDocsSection(component) {
-  const cssProperties = component.cssProperties?.length > 0 ? component.cssProperties[0].name : 'custom-css-property';
+  const cssProperties = component.cssProperties?.length > 0
+    ? component.cssProperties[0].name
+    : 'custom-css-property';
   return `
     <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #ddd;">
       <h3>1. Edit the Custom CSS</h3>
@@ -140,7 +155,7 @@ function generateDocsSection(component) {
       <h3>3. Change ${component.name} Attributes</h3>
       <p>You can modify the ${component.name}'s attributes directly within the HTML. For example:</p>
       <pre><code>
-        ${component.tagName} some-attribute="value" 
+        ${component.tagName} some-attribute="value"
       </code></pre>
     </div>
   `;
@@ -149,8 +164,8 @@ function generateDocsSection(component) {
 // Helper function to inject generated playground into the target file
 function injectPlaygroundIntoFile(filePath, content, componentName) {
   const fileContent = fs.readFileSync(filePath, 'utf8');
-  console.log("file content is", content);
- 
+  console.log('file content is', content);
+
   // Inject the generated content into the appropriate place in the file
   const injectionMarker = `// Playground Injection Point`;
   const newContent = fileContent.replace(injectionMarker, content);
@@ -158,4 +173,5 @@ function injectPlaygroundIntoFile(filePath, content, componentName) {
   fs.writeFileSync(filePath, newContent, 'utf8');
   console.log(`Injected playground for ${componentName} into ${filePath}`);
 }
+
 

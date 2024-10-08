@@ -87,16 +87,16 @@ export const SgdsButtonPlayground = {
 
             <script src="./events.js">&lt;/script>
 
-
             <style>
                  sgds-button {
                    --btn-border-radius
                  }
-               </style>
-        </head>
+            </style>
+
+         </head>
         <body>
           <sgds-button id="comp">
-            <!-- Add component-specific content here -->
+            Button
           </sgds-button>
         </body>
         </html>
