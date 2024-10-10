@@ -1,0 +1,10 @@
+slot {
+display: flex;
+flex-direction: column;
+gap: var(--sgds-gap-xs);
+}
+slot::slotted(*){
+display: flex;
+gap: var(--sgds-gap-xs);
+align-items: center;
+}
