@@ -1,0 +1,18 @@
+slot {
+display: flex;
+flex-direction: column;
+gap: var(--sgds-gap-xs);
+}
+
+slot::slotted(*){
+display: flex;
+gap: var(--sgds-gap-xs);
+align-items: center;
+}
+
+.sm {
+    font-size: var(--sgds-font-size-1);
+}
+.lg {
+    font-size : var(--sgds-font-size-3)
+}
