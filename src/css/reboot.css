@@ -1,0 +1,33 @@
+body,
+label {
+  font-size: var(--sgds-font-size-2);
+  font-weight: var(--sgds-font-weight-regular);
+  line-height: var(--sgds-line-height-body);
+  letter-spacing: var(--sgds-letter-spacing-normal);
+}
+
+ol,
+ul {
+  font-family: var(--sgds-font-family-brand);
+  font-size: var(--sgds-font-size-2);
+  font-weight: var(--sgds-font-weight-regular);
+  line-height: var(--sgds-line-height-heading);
+  list-style-position: outside;
+  padding-left: var(--sgds-padding-2-xl);
+  margin-top: var(--sgds-padding-xs);
+}
+
+li {
+  font-family: var(--sgds-font-family-brand);
+  font-size: var(--sgds-font-size-2);
+  font-weight: var(--sgds-font-weight-regular);
+  line-height: var(--sgds-line-height-heading);
+  list-style-position: outside;
+  margin-top: var(--sgds-padding-xs);
+}
+li > ol {
+  list-style-type: lower-alpha;
+}
+li > ul {
+    list-style-type: disc;
+}
