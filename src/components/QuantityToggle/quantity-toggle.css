@@ -1,11 +1,7 @@
-sgds-input{
-  --sgds-border-radius: 0;
-}
-sgds-button:first-of-type{
-  --btn-border-radius: var(--sgds-border-radius) 0 0 var(--sgds-border-radius);
-}
-sgds-button:last-of-type{
-  --btn-border-radius: 0 var(--sgds-border-radius) var(--sgds-border-radius) 0;
+.form-control-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-form-gap-md);
 }
 
 .input-group {
@@ -13,6 +9,7 @@ sgds-button:last-of-type{
   display: flex;
   flex-wrap: wrap;
   position: relative;
+  gap: var(--sgds-form-gap-lg);
 }
 .input-group > sgds-input {
   flex: 1 1 auto;

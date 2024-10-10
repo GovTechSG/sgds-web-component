@@ -1213,10 +1213,13 @@
             </div>
             <div class="container">
                 <h2>Quantity Toggle</h2>
-                <sgds-quantity-toggle step="1" buttonvariant="primary" defaultvalue="0"></sgds-quantity-toggle>
+                <form>
+                    <sgds-quantity-toggle label="Label" hintText="Hint Text" hasFeedback invalidFeedback="Invalid number" step="1" buttonvariant="primary" defaultvalue="0"></sgds-quantity-toggle>
+                    <sgds-button type="submit">Submit</sgds-button>
+                </form>
 
                 <div class="row">
-                    <sgds-quantity-toggle max="undefined" step="1" quantitytoggleclasses="" size="sm" name=""
+                    <sgds-quantity-toggle label="Label" hintText="Hint Text" max="undefined" step="1" quantitytoggleclasses="" size="sm" name=""
                         buttonvariant="primary" defaultvalue="0"></sgds-quantity-toggle>
                 </div>
             </div>

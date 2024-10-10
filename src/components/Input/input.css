@@ -92,3 +92,7 @@
 .form-control-suffix {
   color: var(--sgds-form-color-subtle);
 }
+
+.form-control-group.quantity-toggle {
+  padding: 0;
+}

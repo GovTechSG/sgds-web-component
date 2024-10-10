@@ -4,7 +4,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import { html } from "lit/static-html.js";
-import SgdsElement from "../../base/sgds-element";
+import FormControlElement from "../../base/form-control-element";
 import { SgdsSpinner } from "../Spinner/sgds-spinner";
 import { defaultValue } from "../../utils/defaultvalue";
 import type { SgdsFormControl } from "../../utils/form";
@@ -12,10 +12,6 @@ import { FormSubmitController } from "../../utils/form";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import inputStyle from "./input.css";
-import feedbackStyles from "../../styles/feedback.css";
-import formHintStyles from "../../styles/form-hint.css";
-import formLabelStyles from "../../styles/form-label.css";
-import formPlaceholderStyles from "../../styles/form-placeholder.css";
 import { nothing } from "lit";
 /**
  * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
@@ -26,15 +22,8 @@ import { nothing } from "lit";
  * @event sgds-blur - Emitted when input is not in focus.
  *
  */
-export class SgdsInput extends SgdsElement implements SgdsFormControl {
-  static styles = [
-    ...SgdsElement.styles,
-    feedbackStyles,
-    formHintStyles,
-    formLabelStyles,
-    formPlaceholderStyles,
-    inputStyle
-  ];
+export class SgdsInput extends FormControlElement implements SgdsFormControl {
+  static styles = [...FormControlElement.styles, inputStyle];
   /**@internal */
   static get scopedElements() {
     return {
@@ -48,14 +37,6 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   /** The type of input which works the same as HTMLInputElement */
   @property({ reflect: true }) type: "email" | "number" | "password" | "search" | "tel" | "text" | "time" | "url" =
     "text";
-  /** The input's label  */
-  @property({ reflect: true }) label = "";
-
-  /** The input's hint text */
-  @property({ reflect: true }) hintText = "";
-
-  /** The input's name attribute */
-  @property({ reflect: true }) name: string;
 
   /** The prefix of the input */
   @property({ type: String }) prefix: string;
@@ -81,20 +62,8 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   /** Autofocus the input */
   @property({ type: Boolean, reflect: true }) autofocus = false;
 
-  /** Disables the input. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
-
-  /** Makes the input a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
-
   /** Makes the input readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
-
-  /** The input's minimum value. Only applies number input types. */
-  @property() min: number | string;
-
-  /** The input's maximum value. Only applies number input types. */
-  @property() max: number | string;
 
   /**
    * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
@@ -108,24 +77,14 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   @defaultValue()
   defaultValue = "";
 
-  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
-  @property({ type: Boolean, reflect: true }) hasFeedback = false;
-  /**Feedback text for error state when validated */
-  @property({ type: String, reflect: true }) invalidFeedback = "";
-
   /** Marks the component as valid. */
   @property({ type: Boolean, reflect: true }) valid = false;
-
-  /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
-  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** Marks the component as loading. */
   @property({ type: Boolean, reflect: true }) loading = false;
 
   /**@internal */
   protected inputId: string = genId("input", this.type);
-
-  protected labelId: string = genId("label");
 
   /** Sets focus on the input. */
   public focus(options?: FocusOptions) {
@@ -198,7 +157,8 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
         class="form-control-group ${classMap({
           disabled: this.disabled,
           readonly: this.readonly,
-          "is-invalid": this.invalid && this.hasFeedback
+          "is-invalid": this.invalid && this.hasFeedback,
+          "quantity-toggle": this.classList.contains("quantity-toggle")
         })}"
         @click=${this._handleClick}
       >
