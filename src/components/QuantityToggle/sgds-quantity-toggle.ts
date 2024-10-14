@@ -1,4 +1,4 @@
-import { property, query } from "lit/decorators.js";
+import { property, query, queryAsync } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
@@ -11,6 +11,7 @@ import SgdsIconButton from "../IconButton/sgds-icon-button";
 import quantityToggleStyle from "./quantity-toggle.css";
 import SgdsInput from "../Input/sgds-input";
 import svgStyles from "../../styles/svg.css";
+import { PropertyValues } from "lit";
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
  *
@@ -30,21 +31,21 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
       "sgds-icon-button": SgdsIconButton
     };
   }
-  /** @internal */
-  @query("sgds-input") private input: HTMLInputElement;
+  // /** @internal */
+  // @query("sgds-input") private input: SgdsInput;
   /** @internal */
   @query("sgds-icon-button[ariaLabel^='increase by']") private plusBtn: HTMLButtonElement;
   /** @internal */
   @query("sgds-icon-button[ariaLabel^='decrease by']") private minusBtn: HTMLButtonElement;
 
-  /** @internal */
-  private readonly formSubmitController = new FormSubmitController(this);
+  // /** @internal */
+  // private formSubmitController = new FormSubmitController(this);
 
   /** Controls the size of the quantity toggle */
   @property() size: "sm" | "md" = "md";
 
   /** The input's value. Set to 0 by default */
-  @property({ type: Number, reflect: true }) value = 0;
+  @property({ type: Number, reflect: true }) value;
 
   /** Disables the entire quantity toggle  */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -99,7 +100,7 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
   private _onPlus(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
-    this.value = parseInt(this.input.value) + parseInt(this.input.step);
+    this.value = parseInt(this.input.value) + parseInt(this.input.step.toString());
   }
 
   private _onMinus(event: MouseEvent) {
@@ -108,7 +109,7 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
     if (this.value < this.step) {
       this.value = 0;
     } else {
-      this.value = parseInt(this.input.value) - parseInt(this.input.step);
+      this.value = parseInt(this.input.value) - parseInt(this.input.step.toString());
     }
   }
 
@@ -143,7 +144,13 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
     const hintTextTemplate = html` <div id="${this.inputId}Help" class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }
-
+  // public reportValidity() {
+  //   return this.input.reportValidity();
+  // }
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  public reportValidity(): boolean {
+    return this._internals.reportValidity();
+  }
   render() {
     return html`
       <div class="form-control-container">
@@ -167,18 +174,19 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
           ></sgds-icon-button>
           <sgds-input
             type="number"
-            class="quantity-toggle"
+            class="quantity-toggle test-input"
             name=${ifDefined(this.name)}
             step=${ifDefined(this.step)}
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
-            .value=${live(this.value.toString())}
+            value=${ifDefined(this.value)}
             @sgds-change=${() => this._handleChange()}
             @sgds-input=${() => this._handleChange()}
             @keydown=${this._handleKeyDown}
             ?disabled=${this.disabled}
-            ?invalid=${this.invalid}
+            ?required=${this.required}
             id=${this.inputId}
+            ?hasFeedback=${this.hasFeedback}
           ></sgds-input>
           <sgds-icon-button
             variant=${this.iconButtonVariant}

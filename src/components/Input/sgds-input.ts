@@ -30,10 +30,10 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
       "sgds-spinner": SgdsSpinner
     };
   }
-  /**@internal */
-  @query("input.form-control") input: HTMLInputElement;
-  /**@internal */
-  protected readonly formSubmitController = new FormSubmitController(this);
+  // /**@internal */
+  // @query("input.form-control") input: HTMLInputElement;
+  // /**@internal */
+  // protected readonly formSubmitController = new FormSubmitController(this);
   /** The type of input which works the same as HTMLInputElement */
   @property({ reflect: true }) type: "email" | "number" | "password" | "search" | "tel" | "text" | "time" | "url" =
     "text";
@@ -83,8 +83,8 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
   /** Marks the component as loading. */
   @property({ type: Boolean, reflect: true }) loading = false;
 
-  /**@internal */
-  protected inputId: string = genId("input", this.type);
+  // /**@internal */
+  // protected inputId: string = genId("input", this.type);
 
   /** Sets focus on the input. */
   public focus(options?: FocusOptions) {
@@ -95,10 +95,10 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
     this.input.blur();
   }
 
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  public reportValidity() {
-    return this.input.reportValidity();
-  }
+  // /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  // public reportValidity() {
+  //   return this.input.reportValidity();
+  // }
   /** Sets a custom validation message. Pass an empty string to restore validity */
   public setCustomValidity(err: string) {
     return this.input.setCustomValidity(err);
@@ -112,9 +112,17 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
     this.focus();
   }
 
-  protected _handleChange(event: string) {
+  protected _handleChange() {
     this.value = this.input.value;
-    this.emit(event);
+    this.emit("sgds-change");
+    // set the element’s validity whenever the value of the  <input> changes. Visually does nothing
+    this._validateInput();
+  }
+  protected _handleInputChange() {
+    this.value = this.input.value;
+    this.emit("sgds-input");
+    // set the element’s validity whenever the value of the  <input> changes. Visually does nothing
+    this._validateInput();
   }
 
   protected _handleFocus() {
@@ -134,7 +142,7 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
       setTimeout(() => {
         // Prevent submission when enter is click on a submission in an Input Method Editor with isComposing
         if (!event.defaultPrevented && !event.isComposing) {
-          this.formSubmitController.submit();
+          // this.formSubmitController.submit();
         }
       });
     }
@@ -165,7 +173,7 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
         ${this.icon ? html`<span class="form-control-icon">${unsafeSVG(this.icon)}</span>` : nothing}
         ${this.prefix ? html`<span class="form-control-prefix">${this.prefix}</span>` : nothing}
         <input
-          class="form-control"
+          class="form-control test-input"
           type=${this.type}
           id=${this.inputId}
           name=${ifDefined(this.name)}
@@ -182,8 +190,8 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
           min=${ifDefined(this.min)}
           max=${ifDefined(this.max)}
           step=${ifDefined(this.step as number)}
-          @input=${() => this._handleChange("sgds-input")}
-          @change=${() => this._handleChange("sgds-change")}
+          @input=${() => this._handleInputChange()}
+          @change=${() => this._handleChange()}
           @keydown=${this._handleKeyDown}
           @invalid=${() => this.setInvalid(true)}
           @focus=${this._handleFocus}
@@ -215,7 +223,8 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
               fill="#B90000"
             />
           </svg>
-          <div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
+          <!-- <div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div> -->
+          <div id="${this.inputId}-invalid" class="invalid-feedback">${this.input.validationMessage}</div>
         </div>`
       : html`${this._renderHintText()}`;
   }
