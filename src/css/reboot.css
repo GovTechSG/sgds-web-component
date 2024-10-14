@@ -1,11 +1,18 @@
-body,
+/* BODY */
+body {
+  font-size: var(--sgds-font-size-2);
+  font-weight: var(--sgds-font-weight-regular);
+  line-height: var(--sgds-line-height-body);
+  letter-spacing: var(--sgds-letter-spacing-normal);
+}
+/* LABEL */
 label {
   font-size: var(--sgds-font-size-2);
   font-weight: var(--sgds-font-weight-regular);
   line-height: var(--sgds-line-height-body);
   letter-spacing: var(--sgds-letter-spacing-normal);
 }
-
+/* LIST */
 ol,
 ul {
   font-family: var(--sgds-font-family-brand);
@@ -29,5 +36,74 @@ li > ol {
   list-style-type: lower-alpha;
 }
 li > ul {
-    list-style-type: disc;
+  list-style-type: disc;
 }
+
+/* HEADINGS */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--sgds-font-family-brand);
+  color: #000;
+  font-style: normal;
+}
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: var(--sgds-letter-spacing-tight);
+  font-weight: var(--sgds-font-weight-bold);
+}
+h5,
+h6 {
+  letter-spacing: var(--sgds-letter-spacing-normal);
+  font-weight: var(--sgds-font-weight-semibold);
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  line-height: 1.2;
+}
+h6 {
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: var(--sgds-font-size-7);
+  margin-bottom: var(--sgds-margin-xs);
+}
+h2 {
+  font-size: var(--sgds-font-size-6);
+  margin-bottom: var(--sgds-margin-2-xs);
+}
+h3 {
+  font-size: var(---sgds-font-size-5);
+  margin-bottom: var(--sgds-margin-2-xs);
+}
+h4 {
+  font-size: var(--sgds-font-size-4);
+  /* margin-bottom  ask andy*/
+}
+h5 {
+  font-size: var(--sgds-font-size-3);
+  /* margin-bottom ask andy*/
+}
+h6 {
+  font-size: var(--sgds-font-size-2);
+  margin-bottom: var(--sgds-margin-3-xs);
+}
+/* CAPTION */
+caption {
+  font-size: var(--sgds-font-size-1);
+  font-weight: var(--sgds-font-weight-regular);
+  line-height: var(--sgds-line-height-body);
+  letter-spacing: var(--sgds-letter-spacing-normal);
+  margin-bottom: var(--sgds-paragraph-spacing-md);
+}
+
+/* PARAGRAPH */
