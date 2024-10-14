@@ -5,6 +5,9 @@ import SgdsElement from "../../base/sgds-element";
 import type SgdsAccordionItem from "./sgds-accordion-item";
 import accordionStyle from "./accordion.css";
 
+export type AccordionVariant = "default" | "border";
+export type AccordionDensity = "default" | "compact";
+
 const VALID_KEYS = ["Enter", "ArrowUp", "ArrowLeft", "ArrowDown", "ArrowRight"];
 
 /**
@@ -19,6 +22,12 @@ export class SgdsAccordion extends SgdsElement {
 
   /** Allows multiple accordion items to be opened at the same time */
   @property({ type: Boolean, reflect: true }) allowMultiple = false;
+
+  /** The variant of accordion */
+  @property({ type: String, reflect: true }) variant: AccordionVariant = "default";
+
+  /** The density of accordion */
+  @property({ type: String, reflect: true }) density: AccordionDensity = "default";
 
   /** @internal */
   @queryAssignedElements() private defaultNodes!: SgdsAccordionItem[];
@@ -47,6 +56,9 @@ export class SgdsAccordion extends SgdsElement {
             item.setAttribute("nth-of-type", "");
         }
       }
+
+      item.setAttribute("variant", this.variant);
+      item.setAttribute("density", this.density);
     });
   }
 
