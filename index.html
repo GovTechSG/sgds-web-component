@@ -608,21 +608,26 @@
         <div class="container">
             <h2>Accordion</h2>
             <div class="row">
-
+                <h3>Variant: default & Density: default</h3>
                 <sgds-accordion>
-                    <sgds-accordion-item class="custom-accordion">
-                        <div slot="accordion-header">This is a solo accordion</div>
+                    <sgds-accordion-item>
+                        <div slot="accordion-header">Accordion 1</div>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
+                    </sgds-accordion-item>
+                    <sgds-accordion-item disabled>
+                        <div slot="accordion-header">Accordion 2</div>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
+                    </sgds-accordion-item>
+                    <sgds-accordion-item open>
+                        <div slot="accordion-header">Accordion 3</div>
                         <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
                             soluta eaque fugit fuga distinctio? Eum.</span>
                     </sgds-accordion-item>
                 </sgds-accordion>
-                <br />
-                <sgds-accordion>
-                    <sgds-accordion-item>
-                        <div slot="accordion-header">This is an accordion</div>
-                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-                            soluta eaque fugit fuga distinctio? Eum.</span>
-                    </sgds-accordion-item>
+                <h3>Variant: default & Density: compact</h3>
+                <sgds-accordion density="compact">
                     <sgds-accordion-item>
                         <div slot="accordion-header">Accordion 1</div>
                         <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
@@ -638,8 +643,57 @@
                         <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
                             soluta eaque fugit fuga distinctio? Eum.</span>
                     </sgds-accordion-item>
+                </sgds-accordion>
+                <h3>Variant: border & Density: default</h3>
+                <sgds-accordion variant="border">
                     <sgds-accordion-item>
-                        <div class="m-0" slot="accordion-header">Accordion 3</div>
+                        <div slot="accordion-header">Accordion 1</div>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
+                    </sgds-accordion-item>
+                    <sgds-accordion-item>
+                        <div slot="accordion-header">Accordion 2</div>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
+                    </sgds-accordion-item>
+                    <sgds-accordion-item open>
+                        <div slot="accordion-header">Accordion 3</div>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
+                    </sgds-accordion-item>
+                </sgds-accordion>
+                <h3>Variant: border & Density: compact</h3>
+                <sgds-accordion variant="border" density="compact">
+                    <sgds-accordion-item>
+                        <div slot="accordion-header">Accordion 1</div>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
+                    </sgds-accordion-item>
+                    <sgds-accordion-item>
+                        <div slot="accordion-header">Accordion 2</div>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
+                    </sgds-accordion-item>
+                    <sgds-accordion-item open>
+                        <div slot="accordion-header">Accordion 3</div>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
+                    </sgds-accordion-item>
+                </sgds-accordion>
+                <h3>Allow multiple</h3>
+                <sgds-accordion allowMultiple density="compact">
+                    <sgds-accordion-item>
+                        <div slot="accordion-header">Accordion 1</div>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
+                    </sgds-accordion-item>
+                    <sgds-accordion-item open>
+                        <div slot="accordion-header">Accordion 2</div>
+                        <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                            soluta eaque fugit fuga distinctio? Eum.</span>
+                    </sgds-accordion-item>
+                    <sgds-accordion-item open>
+                        <div slot="accordion-header">Accordion 3</div>
                         <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
                             soluta eaque fugit fuga distinctio? Eum.</span>
                     </sgds-accordion-item>
