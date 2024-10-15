@@ -9,16 +9,13 @@ export const SgdsCheckboxPlayground = {
         <head>
           <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@2.0.0/themes/day.css' rel='stylesheet' type='text/css' />
           <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component">&lt;/script>
-
-
-
+          <script src="./events.js">&lt;/script>
         </head>
         <body>
-          <sgds-checkbox name="check-me" value="check-me">Check me</sgds-checkbox>
+          <sgds-checkbox id = "comp" value="check-me">Check me</sgds-checkbox>
         </body>
         </html>
       </script>
-
       <script type="sample/js" filename="events.js">
               document.addEventListener('DOMContentLoaded', () => {
                 const componentElement = document.getElementById('comp');
@@ -27,7 +24,6 @@ export const SgdsCheckboxPlayground = {
         componentElement.addEventListener('sgds-change', () => {
           console.log('sgds-change event triggered');
         });
-
                 }
               });
       </script>

@@ -127,9 +127,7 @@ export const SgdsPaginationPlayground = {
 
     <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #ddd;">
       <h3>1. Edit the Custom CSS</h3>
-      <p>
-        You can edit the SgdsPagination's styles by modifying its custom CSS properties. For example:
-      </p>
+      <p>You can edit the SgdsPagination's styles by modifying its custom CSS properties. For example:</p>
       <pre><code>
         sgds-pagination {
           --pagination-color: value;
@@ -143,9 +141,7 @@ export const SgdsPaginationPlayground = {
         });
       </code></pre>
       <h3>3. Change SgdsPagination Attributes</h3>
-      <p>
-        You can modify the SgdsPagination's attributes directly within the HTML. For example:
-      </p>
+      <p>You can modify the SgdsPagination's attributes directly within the HTML. For example:</p>
       <pre><code>
         sgds-pagination some-attribute="value";
       </code></pre>
@@ -155,4 +151,3 @@ export const SgdsPaginationPlayground = {
   args: {},
   parameters: {}
 };
-

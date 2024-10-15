@@ -55,22 +55,20 @@ function generatePlaygroundHtml(componentTagName, component) {
 
             <script src="./events.js">&lt;/script>
 
-            ${
-              generateCssParts(component.cssParts, componentTagName)
-                ? `<style>
+            ${generateCssParts(component.cssParts, componentTagName)
+      ? `<style>
                    ${generateCssParts(component.cssParts, componentTagName)}
                   </style>`
-                : ''
-            }
-            ${
-              generateCssProperties(component.cssProperties)
-                ? `<style>
+      : ''
+    }
+            ${generateCssProperties(component.cssProperties)
+      ? `<style>
                    ${componentTagName} {
                      ${generateCssProperties(component.cssProperties)}
                    }
                   </style>`
-                : ''
-            }
+      : ''
+    }
           </head>
           <body>
                   \${Template(args).strings}
@@ -78,9 +76,8 @@ function generatePlaygroundHtml(componentTagName, component) {
           </html>
         </script>
 
-        ${
-          generateEventScript(component)
-            ? `<script type="sample/js" filename="events.js">
+        ${generateEventScript(component)
+      ? `<script type="sample/js" filename="events.js">
             document.addEventListener('DOMContentLoaded', () => {
               const componentElement = document.getElementById('comp');
               if (componentElement) {
@@ -88,8 +85,8 @@ function generatePlaygroundHtml(componentTagName, component) {
               }
             });
           </script>`
-            : ''
-        }
+      : ''
+    }
       </playground-ide>
 
       ${generateDocsSection(component)}
@@ -146,7 +143,7 @@ function generateDocsSection(component) {
         }
       </code></pre>
       <h3>2. Modify Event Handling</h3>
-      <p>You can customize how the ${component.name} responds to events. For example:</p>
+      <p> If there are events declared, you can customize how the ${component.name} responds to events. For example:</p>
       <pre><code>
         componentElement.addEventListener('insert component event'}', () => {
           console.log( event triggered');
@@ -164,14 +161,12 @@ function generateDocsSection(component) {
 // Helper function to inject generated playground into the target file
 function injectPlaygroundIntoFile(filePath, content, componentName) {
   const fileContent = fs.readFileSync(filePath, 'utf8');
-  console.log('file content is', content);
 
   // Inject the generated content into the appropriate place in the file
   const injectionMarker = `// Playground Injection Point`;
   const newContent = fileContent.replace(injectionMarker, content);
 
   fs.writeFileSync(filePath, newContent, 'utf8');
-  console.log(`Injected playground for ${componentName} into ${filePath}`);
 }
 
 

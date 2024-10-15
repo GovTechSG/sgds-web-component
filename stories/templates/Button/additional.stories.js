@@ -83,16 +83,12 @@ export const SgdsButtonPlayground = {
         <head>
           <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@2.0.0/themes/day.css' rel='stylesheet' type='text/css' />
           <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component">&lt;/script>
-
-
             <script src="./events.js">&lt;/script>
-
             <style>
                  sgds-button {
-                   --btn-border-radius
+                   --btn-border-radius;
                  }
             </style>
-
          </head>
         <body>
           <sgds-button id="comp">

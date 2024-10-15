@@ -60,23 +60,23 @@ export const ActionCardPlayground = {
 
             <style>
                 sgds-action-card::part(base) {
-                  /* Add styles for the base wrapper here */
+                  
                 }
 
                 sgds-action-card::part(body) {
-                  /* Add styles for the body here */
+                  
                 }
 
                 sgds-action-card::part(subtitle) {
-                  /* Add styles for the subtitle here */
+                  
                 }
 
                 sgds-action-card::part(title) {
-                  /* Add styles for the title here */
+                  
                 }
 
                 sgds-action-card::part(text) {
-                  /* Add styles for the text here */
+                 
                 }
 
             </style>

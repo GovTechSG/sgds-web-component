@@ -13,8 +13,6 @@ export const SgdsTablePlayground = {
               type="text/css"
             />
             <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component">&lt;/script>
-            <script src="./events.js">&lt;/script>
-
             <style>
               sgds-table {
                 --table-bg;
@@ -29,7 +27,14 @@ export const SgdsTablePlayground = {
             </style>
           </head>
           <body>
-            <sgds-table></sgds-table>
+          <sgds-table
+            tableHeaders='${JSON.stringify(["#", "First Names", "Last Name", "Username"])}'
+            tableData='${JSON.stringify([
+    ["1", "John", "Doe", "@johndoe"],
+    ["2", "Jane", "Doe", "@janedoe"],
+    ["3", "Bob", "Smith", "@bobsmith"]
+  ])}'
+          ></sgds-table>
           </body>
         </html>
       </script>
@@ -37,29 +42,14 @@ export const SgdsTablePlayground = {
 
     <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #ddd;">
       <h3>1. Edit the Custom CSS</h3>
-      <p>
-        You can edit the SgdsTable's styles by modifying its custom CSS
-        properties. For example:
-      </p>
+      <p>You can edit the SgdsTable's styles by modifying its custom CSS properties. For example:</p>
       <pre><code>
         sgds-table {
           --table-bg: value;
         }
       </code></pre>
-      <h3>2. Modify Event Handling</h3>
-      <p>
-        You can customize how the SgdsTable responds to events. For example:
-      </p>
-      <pre><code>
-        componentElement.addEventListener("insert component event", () => {
-          console.log("event triggered");
-        });
-      </code></pre>
-      <h3>3. Change SgdsTable Attributes</h3>
-      <p>
-        You can modify the SgdsTable's attributes directly within the HTML. For
-        example:
-      </p>
+      <h3>2. Change SgdsTable Attributes</h3>
+      <p>You can modify the SgdsTable's attributes directly within the HTML. For example:</p>
       <pre><code>
         sgds-table some-attribute="value";
       </code></pre>
@@ -67,9 +57,8 @@ export const SgdsTablePlayground = {
   `,
   name: "Playground",
   args: {},
-  parameters: {},
+  parameters: {}
 };
-
 
 export const SortingTable = {
   render: Template.bind({}),

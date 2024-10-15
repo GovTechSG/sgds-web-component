@@ -16,19 +16,19 @@ export const SgdsCardPlayground = {
 
             <style>
               sgds-card::part(base) {
-                /* Your CSS here */
+               
               }
 
               sgds-card::part(body) {
-                /* Your CSS here */
+                
               }
 
               sgds-card::part(title) {
-                /* Your CSS here */
+                
               }
 
               sgds-card::part(text) {
-                /* Your CSS here */
+               
               }
             </style>
           </head>
@@ -54,14 +54,7 @@ export const SgdsCardPlayground = {
           --custom-css-property: value;
         }
       </code></pre>
-      <h3>2. Modify Event Handling</h3>
-      <p>You can customize how the SgdsCard responds to events. For example:</p>
-      <pre><code>
-        componentElement.addEventListener('insert component event', () => {
-          console.log('event triggered');
-        });
-      </code></pre>
-      <h3>3. Change SgdsCard Attributes</h3>
+      <h3>2. Change SgdsCard Attributes</h3>
       <p>You can modify the SgdsCard's attributes directly within the HTML. For example:</p>
       <pre><code>
         sgds-card some-attribute="value";
@@ -72,4 +65,3 @@ export const SgdsCardPlayground = {
   args: {},
   parameters: {}
 };
-

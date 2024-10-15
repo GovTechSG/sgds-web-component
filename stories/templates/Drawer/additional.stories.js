@@ -17,39 +17,31 @@ export const SgdsDrawerPlayground = {
 
             <style>
               sgds-drawer::part(base) {
-                /* Your CSS here */
+                
               }
-
               sgds-drawer::part(overlay) {
-                /* Your CSS here */
+                
               }
-
               sgds-drawer::part(panel) {
-                /* Your CSS here */
+                
               }
-
               sgds-drawer::part(header) {
-                /* Your CSS here */
+                
               }
-
               sgds-drawer::part(header-actions) {
-                /* Your CSS here */
+               
               }
-
               sgds-drawer::part(title) {
-                /* Your CSS here */
+               
               }
-
               sgds-drawer::part(close-button) {
-                /* Your CSS here */
+                
               }
-
               sgds-drawer::part(body) {
-                /* Your CSS here */
+                
               }
-
               sgds-drawer::part(footer) {
-                /* Your CSS here */
+                
               }
             </style>
 
@@ -117,27 +109,21 @@ export const SgdsDrawerPlayground = {
 
     <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #ddd;">
       <h3>1. Edit the Custom CSS</h3>
-      <p>
-        You can edit the SgdsDrawer's styles by modifying its custom CSS properties. For example:
-      </p>
+      <p>You can edit the SgdsDrawer's styles by modifying its custom CSS properties. For example:</p>
       <pre><code>
         sgds-drawer {
           --drawer-size: value;
         }
       </code></pre>
       <h3>2. Modify Event Handling</h3>
-      <p>
-        You can customize how the SgdsDrawer responds to events. For example:
-      </p>
+      <p>You can customize how the SgdsDrawer responds to events. For example:</p>
       <pre><code>
         componentElement.addEventListener("insert component event", () => {
           console.log("event triggered");
         });
       </code></pre>
       <h3>3. Change SgdsDrawer Attributes</h3>
-      <p>
-        You can modify the SgdsDrawer's attributes directly within the HTML. For example:
-      </p>
+      <p>You can modify the SgdsDrawer's attributes directly within the HTML. For example:</p>
       <pre><code>
         sgds-drawer some-attribute="value";
       </code></pre>
@@ -145,10 +131,5 @@ export const SgdsDrawerPlayground = {
   `,
   name: "Playground",
   args: {},
-  parameters: {},
+  parameters: {}
 };
-
-
-
-
-
