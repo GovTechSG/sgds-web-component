@@ -1,0 +1,7 @@
+caption.semibold{
+    font-size: var(--sgds-font-size-1);
+    font-weight: var(--sgds-font-weight-semibold);
+    line-height: var(--sgds-line-height-body);
+    letter-spacing: var(--sgds-letter-spacing-normal);
+    margin-bottom: var(--sgds-paragraph-spacing-md);
+}
