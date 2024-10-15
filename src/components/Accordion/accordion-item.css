@@ -9,7 +9,7 @@
 }
 
 :host([density="compact"]) .accordion-content {
-  padding: 0 var(--sgds-padding-sm) var(--sgds-padding-sm);
+  padding: var(--sgds-padding-xs) var(--sgds-padding-sm) var(--sgds-padding-sm);
 }
 
 :host([density="compact"]) slot[name="accordion-caret"]::slotted(*),
@@ -88,7 +88,7 @@ slot[name="accordion-caret"] svg {
 
 .accordion-content {
   display: block;
-  padding: 0 var(--sgds-padding-lg) var(--sgds-padding-lg);
+  padding: var(--sgds-padding-xs) var(--sgds-padding-lg) var(--sgds-padding-lg);
 }
 
 .hidden {
