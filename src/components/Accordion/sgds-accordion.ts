@@ -5,8 +5,8 @@ import SgdsElement from "../../base/sgds-element";
 import type SgdsAccordionItem from "./sgds-accordion-item";
 import accordionStyle from "./accordion.css";
 
-export type AccordionVariant = "default" | "border";
 export type AccordionDensity = "default" | "compact";
+export type AccordionVariant = "default" | "border";
 
 const VALID_KEYS = ["Enter", "ArrowUp", "ArrowLeft", "ArrowDown", "ArrowRight"];
 
