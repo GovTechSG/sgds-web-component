@@ -1,44 +1,46 @@
 import { ReactiveController, ReactiveControllerHost } from "lit";
 import { SgdsFormControl } from "./form";
+import { SgdsInput } from "../components";
 
 export class InputValidationController implements ReactiveController {
   host: ReactiveControllerHost & HTMLElement;
   _internals: ElementInternals;
   validationError: keyof ValidityState;
-  options: InputValidationControllerOptions
-  
+  options: InputValidationControllerOptions;
+
   constructor(host: ReactiveControllerHost & HTMLElement, options?: Partial<InputValidationControllerOptions>) {
     (this.host = host).addController(this);
     this._internals = this.host.attachInternals();
     this.options = {
-        setInvalid: (host: SgdsFormControl, value: boolean) => {
+      setInvalid: (host: SgdsFormControl, value: boolean) => {
         host.invalid = value;
-        },
-        ...options
-    }
+      },
+      ...options
+    };
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   hostConnected(): void {
-    this.host.addEventListener("invalid", (e) => this.handleInvalid(e))
+    this.host.addEventListener("invalid", e => this.handleInvalid(e));
   }
 
   hostDisconnected(): void {
-    this.host.removeEventListener("invalid", (e) => this.handleInvalid(e))
+    this.host.removeEventListener("invalid", e => this.handleInvalid(e));
   }
 
   handleInvalid(e: Event) {
-    e.preventDefault()
-    this.options.setInvalid(this.host, true)
+    e.preventDefault();
+    this.options.setInvalid(this.host, true);
   }
 
   handleInput() {
-    this.options.setInvalid(this.host, false)
+    this.options.setInvalid(this.host, false);
   }
-  handleChange(e: Event){
-    const input = e.target as HTMLInputElement
+  handleChange(e: Event) {
+    const input = e.target as HTMLInputElement;
     this.validateInput(input);
     // this.invalid = !input.checkValidity();
-    this.options.setInvalid(this.host, !input.checkValidity())
+    this.options.setInvalid(this.host, !input.checkValidity());
   }
   get form() {
     return this._internals.form;
@@ -62,9 +64,8 @@ export class InputValidationController implements ReactiveController {
   reportValidity() {
     return this._internals.reportValidity();
   }
-  
 
-   validateInput(input: HTMLInputElement) {
+  validateInput(input) {
     // get the validity of the internal <input>
     const validState = input.validity;
 
@@ -72,7 +73,6 @@ export class InputValidationController implements ReactiveController {
     if (!validState.valid) {
       // loop through the error reasons
       for (const state in validState) {
-
         // if there is an error and corresponding attribute holding
         // the message
         if (validState[state]) {
@@ -87,10 +87,19 @@ export class InputValidationController implements ReactiveController {
       this._internals.setValidity({});
     }
   }
-  
+
+  handleFormSubmit(event: Event) {
+    // const disabled = this.options.disabled(this.host);
+    const reportValidity = this.reportValidity;
+    console.log(reportValidity);
+    if (!reportValidity) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  }
 }
 
 export interface InputValidationControllerOptions {
-    /** A function that sets the value of host invalid reactive prop */
-    setInvalid: (host:  ReactiveControllerHost & HTMLElement, value: boolean) => void;
-  }
+  /** A function that sets the value of host invalid reactive prop */
+  setInvalid: (host: ReactiveControllerHost & HTMLElement, value: boolean) => void;
+}

@@ -12,6 +12,7 @@ import quantityToggleStyle from "./quantity-toggle.css";
 import SgdsInput from "../Input/sgds-input";
 import svgStyles from "../../styles/svg.css";
 import { PropertyValues } from "lit";
+import { InputValidationController } from "../../utils/inputValidationController";
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
  *
@@ -24,6 +25,9 @@ import { PropertyValues } from "lit";
  */
 export class SgdsQuantityToggle extends FormControlElement implements SgdsFormControl {
   static styles = [...FormControlElement.styles, svgStyles, quantityToggleStyle];
+  static formAssociated = true;
+  protected inputValidationController = new InputValidationController(this);
+
   /** @internal */
   static get scopedElements() {
     return {
@@ -45,7 +49,7 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
   @property() size: "sm" | "md" = "md";
 
   /** The input's value. Set to 0 by default */
-  @property({ type: Number, reflect: true }) value;
+  @property({ type: Number, reflect: true }) value = 0;
 
   /** Disables the entire quantity toggle  */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -60,14 +64,28 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
   @defaultValue()
   defaultValue = 0;
 
+  inputEl: SgdsInput;
   // /** @internal The id forwarded to input element */
-  // private inputId: string = genId("quantity-toggle", "input");
+  private inputId: string = genId("quantity-toggle", "input");
+  protected labelId: string = genId("label");
 
-  protected override _handleChange() {
+  protected _handleChange(e: Event) {
     if (parseInt(this.inputEl.value) < this.step || this.inputEl.value === "") {
       this.inputEl.value = "0";
     }
     this.value = parseInt(this.inputEl.value);
+    this.inputValidationController.handleChange(e);
+  }
+
+  firstUpdated() {
+    this.inputEl = this.shadowRoot.querySelector("sgds-input");
+    this.addEventListener("focus", () => this.inputEl.focus());
+
+    if (!this.hasAttribute("tabindex")) {
+      this.setAttribute("tabindex", "0");
+    }
+    // validate input on first load
+    this.inputValidationController.validateInput(this.inputEl);
   }
 
   private _handleKeyDown(event: KeyboardEvent) {
@@ -144,9 +162,9 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
     const hintTextTemplate = html` <div id="${this.inputId}Help" class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }
-  // public reportValidity() {
-  //   return this.input.reportValidity();
-  // }
+  public reportValidity() {
+    return this.inputEl.reportValidity();
+  }
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   // public reportValidity(): boolean {
   //   return this._internals.reportValidity();
@@ -180,8 +198,8 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
             value=${ifDefined(this.value)}
-            @sgds-change=${() => this._handleChange()}
-            @sgds-input=${() => this._handleChange()}
+            @sgds-change=${e => this._handleChange(e)}
+            @sgds-input=${e => this._handleChange(e)}
             @keydown=${this._handleKeyDown}
             ?disabled=${this.disabled}
             ?required=${this.required}

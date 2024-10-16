@@ -1,6 +1,7 @@
 import type SgdsButton from "../components/Button/sgds-button";
 import type { ReactiveController, ReactiveControllerHost } from "lit";
 import SgdsElement from "../base/sgds-element";
+import { SgdsInput } from "../components";
 const reportValidityOverloads: WeakMap<HTMLFormElement, () => boolean> = new WeakMap();
 
 export class FormSubmitController implements ReactiveController {
@@ -35,7 +36,6 @@ export class FormSubmitController implements ReactiveController {
 
   hostConnected() {
     this.form = this.options.form(this.host);
-    console.log(this.host);
 
     if (this.form) {
       this.form.addEventListener("formdata", this.handleFormData);
@@ -204,5 +204,5 @@ export interface SgdsFormControl extends SgdsElement {
   minlength?: number;
   maxlength?: number;
 
-  inputEl?: HTMLInputElement;
+  inputEl?: HTMLInputElement | SgdsInput;
 }

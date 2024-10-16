@@ -29,15 +29,15 @@ export class DatepickerInput extends SgdsInput {
     super();
     this.type = "text";
     this.hasFeedback = true;
-    this._handleValueChange = () => null;
+    this._handleChange = () => null;
   }
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("sgds-change", this._validateInput);
   }
 
-  async firstUpdated(changes) {
-    super.firstUpdated(changes);
+  async firstUpdated() {
+    super.firstUpdated();
     this._applyInputMask(this.dateFormat);
   }
   private async _applyInputMask(dateFormat: string) {

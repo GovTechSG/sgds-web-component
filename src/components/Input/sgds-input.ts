@@ -1,18 +1,18 @@
-import { property, query } from "lit/decorators.js";
+import { nothing } from "lit";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import { html } from "lit/static-html.js";
 import FormControlElement from "../../base/form-control-element";
-import { SgdsSpinner } from "../Spinner/sgds-spinner";
 import { defaultValue } from "../../utils/defaultvalue";
 import type { SgdsFormControl } from "../../utils/form";
-import { FormSubmitController } from "../../utils/form";
 import genId from "../../utils/generateId";
+import { InputValidationController } from "../../utils/inputValidationController";
 import { watch } from "../../utils/watch";
+import { SgdsSpinner } from "../Spinner/sgds-spinner";
 import inputStyle from "./input.css";
-import { nothing } from "lit";
 /**
  * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
  *
@@ -24,6 +24,8 @@ import { nothing } from "lit";
  */
 export class SgdsInput extends FormControlElement implements SgdsFormControl {
   static styles = [...FormControlElement.styles, inputStyle];
+  static formAssociated = true;
+  protected inputValidationController = new InputValidationController(this);
   /**@internal */
   static get scopedElements() {
     return {
@@ -66,7 +68,6 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
    */
   @property() step: number | "any";
 
-  
   /**Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = "";
@@ -76,6 +77,91 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
 
   /** Marks the component as loading. */
   @property({ type: Boolean, reflect: true }) loading = false;
+
+  /**The input's value attribute. */
+  @property({ reflect: true }) value = "";
+
+  @state() protected _isTouched = false;
+
+  protected labelId: string = genId("label");
+
+  protected inputId = genId("input", "input");
+
+  inputEl: HTMLInputElement;
+
+  // get form() {
+  //   return this._internals.form;
+  // }
+
+  get validity() {
+    return this.inputValidationController.validity;
+  }
+
+  get validationMessage() {
+    return this.inputValidationController.validationMessage;
+  }
+
+  // get willValidate() {
+  //   return this._internals.willValidate;
+  // }
+
+  checkValidity() {
+    return this.inputValidationController.checkValidity();
+  }
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  reportValidity() {
+    return this.inputValidationController.reportValidity();
+  }
+
+  protected _handleFocus() {
+    this.emit("sgds-focus");
+  }
+
+  protected _handleBlur() {
+    this._isTouched = true;
+    this.emit("sgds-blur");
+  }
+  protected _handleClick() {
+    this.focus();
+  }
+
+  protected _handleChange(e: Event) {
+    this.value = this.inputEl.value;
+    this.emit("sgds-change");
+    // set the element’s validity whenever the value of the  <input> changes. Visually does nothing
+    this.inputValidationController.handleChange(e);
+  }
+  protected _handleInputChange() {
+    this.value = this.inputEl.value;
+    this.emit("sgds-input");
+    // set the element’s validity whenever the value of the  <input> changes. Visually does nothing
+    this.inputValidationController.handleInput();
+  }
+
+  firstUpdated() {
+    this.inputEl = this.shadowRoot.querySelector("input");
+    this.addEventListener("focus", () => this.inputEl.focus());
+
+    if (!this.hasAttribute("tabindex")) {
+      this.setAttribute("tabindex", "0");
+    }
+    // validate input on first load
+    this.inputValidationController.validateInput(this.inputEl);
+    console.log(this.invalid);
+  }
+
+  @watch("_isTouched", { waitUntilFirstUpdate: true })
+  _handleIsTouched() {
+    if (this._isTouched && this.required && this.value === "") {
+      this.invalid = true;
+    }
+  }
+  @watch("disabled", { waitUntilFirstUpdate: true })
+  _handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    this.inputEl.disabled = this.disabled;
+    this.invalid = !this.inputEl.checkValidity();
+  }
 
   /** Sets focus on the input. */
   public focus(options?: FocusOptions) {
@@ -105,7 +191,6 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
       });
     }
   }
-
 
   protected _renderInput() {
     return html`
@@ -138,12 +223,10 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
           min=${ifDefined(this.min)}
           max=${ifDefined(this.max)}
           step=${ifDefined(this.step as number)}
-          @input=${(e) => this._handleInputChange(e)}
-          @change=${(e) => this._handleChange(e)}
+          @input=${() => this._handleInputChange()}
+          @change=${(e: Event) => this._handleChange(e)}
           @keydown=${this._handleKeyDown}
-          @invalid=${(e) => {
-            this.setInvalid(true)
-            }}
+          @invalid=${() => this.setInvalid(true)}
           @focus=${this._handleFocus}
           @blur=${this._handleBlur}
           aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this.inputId}-invalid` : undefined)}
@@ -173,7 +256,9 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
               fill="#B90000"
             />
           </svg>
-          <div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback ? this.invalidFeedback : this.inputEl.validationMessage}</div>
+          <div id="${this.inputId}-invalid" class="invalid-feedback">
+            ${this.invalidFeedback ? this.invalidFeedback : this.inputEl.validationMessage}
+          </div>
         </div>`
       : html`${this._renderHintText()}`;
   }
