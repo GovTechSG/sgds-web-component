@@ -36,7 +36,6 @@ export class FormSubmitController implements ReactiveController {
 
   hostConnected() {
     this.form = this.options.form(this.host);
-
     if (this.form) {
       this.form.addEventListener("formdata", this.handleFormData);
       this.form.addEventListener("submit", this.handleFormSubmit);
@@ -204,5 +203,5 @@ export interface SgdsFormControl extends SgdsElement {
   minlength?: number;
   maxlength?: number;
 
-  sgdsInput?: HTMLInputElement | SgdsInput;
+  // sgdsInput?: HTMLInputElement | SgdsInput;
 }

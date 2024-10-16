@@ -1,18 +1,17 @@
 import { property, query, queryAsync } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
-import { live } from "lit/directives/live.js";
 import { html } from "lit/static-html.js";
 import FormControlElement from "../../base/form-control-element";
-import { defaultValue } from "../../utils/defaultvalue";
-import { FormSubmitController, SgdsFormControl } from "../../utils/form";
-import genId from "../../utils/generateId";
-import SgdsIconButton from "../IconButton/sgds-icon-button";
-import quantityToggleStyle from "./quantity-toggle.css";
-import SgdsInput from "../Input/sgds-input";
 import svgStyles from "../../styles/svg.css";
-import { PropertyValues } from "lit";
+import { defaultValue } from "../../utils/defaultvalue";
+import { SgdsFormControl } from "../../utils/form";
+import genId from "../../utils/generateId";
 import { InputValidationController } from "../../utils/inputValidationController";
+import SgdsIconButton from "../IconButton/sgds-icon-button";
+import SgdsInput from "../Input/sgds-input";
+import quantityToggleStyle from "./quantity-toggle.css";
+import { watch } from "../../utils/watch";
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
  *
@@ -35,15 +34,10 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
       "sgds-icon-button": SgdsIconButton
     };
   }
-  // /** @internal */
-  // @query("sgds-input") private input: SgdsInput;
   /** @internal */
   @query("sgds-icon-button[ariaLabel^='increase by']") private plusBtn: HTMLButtonElement;
   /** @internal */
   @query("sgds-icon-button[ariaLabel^='decrease by']") private minusBtn: HTMLButtonElement;
-
-  // /** @internal */
-  // private formSubmitController = new FormSubmitController(this);
 
   /** Controls the size of the quantity toggle */
   @property() size: "sm" | "md" = "md";
@@ -78,6 +72,7 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
       sgdsInput.value = "0";
     }
     this.value = parseInt(sgdsInput.value);
+    this.inputValidationController.validateInput(sgdsInput.sgdsInput);
   }
   protected async _handleInputChange() {
     const sgdsInput = await this.sgdsInput;
@@ -87,17 +82,18 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
     }
     this.value = parseInt(sgdsInput.value);
     this.inputValidationController.handleInput();
+    this.inputValidationController.validateInput(sgdsInput.sgdsInput);
   }
   async firstUpdated() {
     const sgdsInput = await this.sgdsInput;
-    // this.inputEl = this.shadowRoot.querySelector("sgds-input");
     this.addEventListener("focus", () => sgdsInput.focus());
 
     if (!this.hasAttribute("tabindex")) {
       this.setAttribute("tabindex", "0");
     }
     // validate input on first load
-    console.log(sgdsInput.willValidate);
+    this.inputValidationController.validateInput(sgdsInput.sgdsInput);
+    // (await this.sgdsInput).checkValidity()
   }
 
   checkValidity() {
@@ -156,6 +152,12 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
       this.value = parseInt(sgdsInput.value) - parseInt(sgdsInput.step.toString());
     }
   }
+  // @watch("invalid")
+  // async _testInvalid() {
+  // console.log('is this invalid')
+  // const sgdsInput = await this.sgdsInput
+  // sgdsInput.invalid = true
+  // }
 
   protected _renderFeedback() {
     return this.invalid && this.hasFeedback
@@ -230,7 +232,6 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
             @keydown=${this._handleKeyDown}
             ?disabled=${this.disabled}
             id=${this.inputId}
-            ?hasFeedback=${this.hasFeedback}
           ></sgds-input>
           <sgds-icon-button
             variant=${this.iconButtonVariant}

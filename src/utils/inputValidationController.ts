@@ -1,6 +1,5 @@
 import { ReactiveController, ReactiveControllerHost } from "lit";
 import { SgdsFormControl } from "./form";
-import { SgdsInput } from "../components";
 
 export class InputValidationController implements ReactiveController {
   host: ReactiveControllerHost & HTMLElement;
@@ -17,7 +16,7 @@ export class InputValidationController implements ReactiveController {
       },
       ...options
     };
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    // this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   hostConnected(): void {

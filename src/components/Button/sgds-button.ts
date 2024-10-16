@@ -6,6 +6,7 @@ import ButtonElement from "../../base/button-element";
 import anchorStyles from "../../styles/anchor.css";
 import { FormSubmitController } from "../../utils/form";
 import buttonStyles from "./button.css";
+import { InputValidationController } from "../../utils/inputValidationController";
 
 export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
 
@@ -37,6 +38,8 @@ export class SgdsButton extends ButtonElement {
   /** @internal */
   @state()
   private _hasRightIcon = false;
+
+  private readonly inputValidationController = new InputValidationController(this);
 
   /** @internal */
   private readonly formSubmitController = new FormSubmitController(this, {
@@ -95,6 +98,7 @@ export class SgdsButton extends ButtonElement {
 
   private _clickHandler = () => {
     if (this.type === "submit") {
+      // this.inputValidationController.form.submit()
       this.formSubmitController.submit(this);
     }
     if (this.type === "reset") {

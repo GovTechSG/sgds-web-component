@@ -207,7 +207,7 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
         class="form-control-group ${classMap({
           disabled: this.disabled,
           readonly: this.readonly,
-          "is-invalid": this.invalid && this.hasFeedback,
+          "is-invalid": this.invalid,
           "quantity-toggle": this.classList.contains("quantity-toggle")
         })}"
         @click=${this._handleClick}
