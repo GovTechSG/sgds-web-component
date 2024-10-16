@@ -11,9 +11,12 @@
   padding: var(--sgds-padding-xs) 0;
   position: absolute;
   text-align: left;
-  max-height: var(--sgds-dimension-192);
   overflow-y: scroll;
   z-index: 1000;
+}
+
+.dropdown .dropdown-menu {
+  max-height: var(--sgds-dimension-192);
 }
 
 .dropdown-menu.show {
