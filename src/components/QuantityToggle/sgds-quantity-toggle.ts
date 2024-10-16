@@ -60,14 +60,14 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
   @defaultValue()
   defaultValue = 0;
 
-  /** @internal The id forwarded to input element */
-  private inputId: string = genId("quantity-toggle", "input");
+  // /** @internal The id forwarded to input element */
+  // private inputId: string = genId("quantity-toggle", "input");
 
-  private _handleChange() {
-    if (parseInt(this.input.value) < this.step || this.input.value === "") {
-      this.input.value = "0";
+  protected override _handleChange() {
+    if (parseInt(this.inputEl.value) < this.step || this.inputEl.value === "") {
+      this.inputEl.value = "0";
     }
-    this.value = parseInt(this.input.value);
+    this.value = parseInt(this.inputEl.value);
   }
 
   private _handleKeyDown(event: KeyboardEvent) {
@@ -100,7 +100,7 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
   private _onPlus(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
-    this.value = parseInt(this.input.value) + parseInt(this.input.step.toString());
+    this.value = parseInt(this.inputEl.value) + parseInt(this.inputEl.step.toString());
   }
 
   private _onMinus(event: MouseEvent) {
@@ -109,7 +109,7 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
     if (this.value < this.step) {
       this.value = 0;
     } else {
-      this.value = parseInt(this.input.value) - parseInt(this.input.step.toString());
+      this.value = parseInt(this.inputEl.value) - parseInt(this.inputEl.step.toString());
     }
   }
 
@@ -148,9 +148,9 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
   //   return this.input.reportValidity();
   // }
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  public reportValidity(): boolean {
-    return this._internals.reportValidity();
-  }
+  // public reportValidity(): boolean {
+  //   return this._internals.reportValidity();
+  // }
   render() {
     return html`
       <div class="form-control-container">

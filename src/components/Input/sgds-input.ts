@@ -30,11 +30,6 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
       "sgds-spinner": SgdsSpinner
     };
   }
-  // /**@internal */
-  // @query("input.form-control") input: HTMLInputElement;
-  // /**@internal */
-  // protected readonly formSubmitController = new FormSubmitController(this);
-  /** The type of input which works the same as HTMLInputElement */
   @property({ reflect: true }) type: "email" | "number" | "password" | "search" | "tel" | "text" | "time" | "url" =
     "text";
 
@@ -71,8 +66,7 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
    */
   @property() step: number | "any";
 
-  /**The input's value attribute. */
-  @property({ reflect: true }) value = "";
+  
   /**Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = "";
@@ -83,54 +77,18 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
   /** Marks the component as loading. */
   @property({ type: Boolean, reflect: true }) loading = false;
 
-  // /**@internal */
-  // protected inputId: string = genId("input", this.type);
-
   /** Sets focus on the input. */
   public focus(options?: FocusOptions) {
-    this.input.focus(options);
+    this.inputEl.focus(options);
   }
   /** Sets blur on the input. */
   public blur() {
-    this.input.blur();
+    this.inputEl.blur();
   }
 
-  // /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  // public reportValidity() {
-  //   return this.input.reportValidity();
-  // }
-  /** Sets a custom validation message. Pass an empty string to restore validity */
-  public setCustomValidity(err: string) {
-    return this.input.setCustomValidity(err);
-  }
   /** Programatically sets the invalid state of the input. Pass in boolean value in the argument */
   public setInvalid(bool: boolean) {
     this.invalid = bool;
-  }
-
-  protected _handleClick() {
-    this.focus();
-  }
-
-  protected _handleChange() {
-    this.value = this.input.value;
-    this.emit("sgds-change");
-    // set the element’s validity whenever the value of the  <input> changes. Visually does nothing
-    this._validateInput();
-  }
-  protected _handleInputChange() {
-    this.value = this.input.value;
-    this.emit("sgds-input");
-    // set the element’s validity whenever the value of the  <input> changes. Visually does nothing
-    this._validateInput();
-  }
-
-  protected _handleFocus() {
-    this.emit("sgds-focus");
-  }
-
-  protected _handleBlur() {
-    this.emit("sgds-blur");
   }
 
   protected _handleKeyDown(event: KeyboardEvent) {
@@ -148,17 +106,7 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
     }
   }
 
-  @watch("disabled", { waitUntilFirstUpdate: true })
-  _handleDisabledChange() {
-    // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.input.disabled = this.disabled;
-    this.invalid = !this.input.checkValidity();
-  }
 
-  @watch("value", { waitUntilFirstUpdate: true })
-  _handleValueChange() {
-    this.invalid = !this.input.checkValidity();
-  }
   protected _renderInput() {
     return html`
       <div
@@ -190,10 +138,12 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
           min=${ifDefined(this.min)}
           max=${ifDefined(this.max)}
           step=${ifDefined(this.step as number)}
-          @input=${() => this._handleInputChange()}
-          @change=${() => this._handleChange()}
+          @input=${(e) => this._handleInputChange(e)}
+          @change=${(e) => this._handleChange(e)}
           @keydown=${this._handleKeyDown}
-          @invalid=${() => this.setInvalid(true)}
+          @invalid=${(e) => {
+            this.setInvalid(true)
+            }}
           @focus=${this._handleFocus}
           @blur=${this._handleBlur}
           aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this.inputId}-invalid` : undefined)}
@@ -223,8 +173,7 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
               fill="#B90000"
             />
           </svg>
-          <!-- <div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div> -->
-          <div id="${this.inputId}-invalid" class="invalid-feedback">${this.input.validationMessage}</div>
+          <div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback ? this.invalidFeedback : this.inputEl.validationMessage}</div>
         </div>`
       : html`${this._renderHintText()}`;
   }
