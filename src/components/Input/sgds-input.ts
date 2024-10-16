@@ -61,6 +61,8 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
 
   /** Makes the input readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
+  /** Makes the input a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /**
    * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
@@ -87,7 +89,7 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
 
   protected inputId = genId("input", "input");
 
-  inputEl: HTMLInputElement;
+  sgdsInput: HTMLInputElement;
 
   // get form() {
   //   return this._internals.form;
@@ -101,9 +103,9 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
     return this.inputValidationController.validationMessage;
   }
 
-  // get willValidate() {
-  //   return this._internals.willValidate;
-  // }
+  get willValidate() {
+    return this.inputValidationController.willValidate;
+  }
 
   checkValidity() {
     return this.inputValidationController.checkValidity();
@@ -126,28 +128,27 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
   }
 
   protected _handleChange(e: Event) {
-    this.value = this.inputEl.value;
+    this.value = this.sgdsInput.value;
     this.emit("sgds-change");
     // set the element’s validity whenever the value of the  <input> changes. Visually does nothing
     this.inputValidationController.handleChange(e);
   }
   protected _handleInputChange() {
-    this.value = this.inputEl.value;
+    this.value = this.sgdsInput.value;
     this.emit("sgds-input");
     // set the element’s validity whenever the value of the  <input> changes. Visually does nothing
     this.inputValidationController.handleInput();
   }
 
   firstUpdated() {
-    this.inputEl = this.shadowRoot.querySelector("input");
-    this.addEventListener("focus", () => this.inputEl.focus());
+    this.sgdsInput = this.shadowRoot.querySelector("input");
+    this.addEventListener("focus", () => this.sgdsInput.focus());
 
     if (!this.hasAttribute("tabindex")) {
       this.setAttribute("tabindex", "0");
     }
     // validate input on first load
-    this.inputValidationController.validateInput(this.inputEl);
-    console.log(this.invalid);
+    this.inputValidationController.validateInput(this.sgdsInput);
   }
 
   @watch("_isTouched", { waitUntilFirstUpdate: true })
@@ -159,17 +160,25 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
   @watch("disabled", { waitUntilFirstUpdate: true })
   _handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.inputEl.disabled = this.disabled;
-    this.invalid = !this.inputEl.checkValidity();
+    this.sgdsInput.disabled = this.disabled;
+    this.invalid = !this.sgdsInput.checkValidity();
+  }
+
+  @watch("invalid")
+  _handleInvalidChange() {
+    if (this.invalid) {
+      console.log("invalid!!!!");
+      this.emit("sgds-invalid");
+    }
   }
 
   /** Sets focus on the input. */
   public focus(options?: FocusOptions) {
-    this.inputEl.focus(options);
+    this.sgdsInput.focus(options);
   }
   /** Sets blur on the input. */
   public blur() {
-    this.inputEl.blur();
+    this.sgdsInput.blur();
   }
 
   /** Programatically sets the invalid state of the input. Pass in boolean value in the argument */
@@ -257,7 +266,7 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
             />
           </svg>
           <div id="${this.inputId}-invalid" class="invalid-feedback">
-            ${this.invalidFeedback ? this.invalidFeedback : this.inputEl.validationMessage}
+            ${this.invalidFeedback ? this.invalidFeedback : this.sgdsInput.validationMessage}
           </div>
         </div>`
       : html`${this._renderHintText()}`;

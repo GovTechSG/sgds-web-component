@@ -64,28 +64,48 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
   @defaultValue()
   defaultValue = 0;
 
-  inputEl: SgdsInput;
+  @queryAsync("sgds-input") sgdsInput: Promise<SgdsInput>;
+
+  @query("sgds-input") inputEl: SgdsInput;
+
   // /** @internal The id forwarded to input element */
   private inputId: string = genId("quantity-toggle", "input");
   protected labelId: string = genId("label");
 
-  protected _handleChange(e: Event) {
-    if (parseInt(this.inputEl.value) < this.step || this.inputEl.value === "") {
-      this.inputEl.value = "0";
+  protected async _handleChange(e: Event) {
+    const sgdsInput = await this.sgdsInput;
+    if (parseInt(sgdsInput.value) < this.step || sgdsInput.value === "") {
+      sgdsInput.value = "0";
     }
-    this.value = parseInt(this.inputEl.value);
-    this.inputValidationController.handleChange(e);
+    this.value = parseInt(sgdsInput.value);
   }
+  protected async _handleInputChange() {
+    const sgdsInput = await this.sgdsInput;
 
-  firstUpdated() {
-    this.inputEl = this.shadowRoot.querySelector("sgds-input");
-    this.addEventListener("focus", () => this.inputEl.focus());
+    if (parseInt(sgdsInput.value) < this.step || sgdsInput.value === "") {
+      sgdsInput.value = "0";
+    }
+    this.value = parseInt(sgdsInput.value);
+    this.inputValidationController.handleInput();
+  }
+  async firstUpdated() {
+    const sgdsInput = await this.sgdsInput;
+    // this.inputEl = this.shadowRoot.querySelector("sgds-input");
+    this.addEventListener("focus", () => sgdsInput.focus());
 
     if (!this.hasAttribute("tabindex")) {
       this.setAttribute("tabindex", "0");
     }
     // validate input on first load
-    this.inputValidationController.validateInput(this.inputEl);
+    console.log(sgdsInput.willValidate);
+  }
+
+  checkValidity() {
+    return this.inputValidationController.checkValidity();
+  }
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  reportValidity() {
+    return this.inputValidationController.reportValidity();
   }
 
   private _handleKeyDown(event: KeyboardEvent) {
@@ -105,6 +125,10 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
     }
   }
 
+  private _handleInvalidChange() {
+    this.invalid = true;
+  }
+
   /** Simulates a click on the plus button */
   public plus() {
     this.plusBtn.click();
@@ -115,19 +139,21 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
     this.minusBtn.click();
   }
 
-  private _onPlus(event: MouseEvent) {
+  private async _onPlus(event: MouseEvent) {
+    const sgdsInput = await this.sgdsInput;
     event.preventDefault();
     event.stopPropagation();
-    this.value = parseInt(this.inputEl.value) + parseInt(this.inputEl.step.toString());
+    this.value = parseInt(sgdsInput.value) + parseInt(sgdsInput.step.toString());
   }
 
-  private _onMinus(event: MouseEvent) {
+  private async _onMinus(event: MouseEvent) {
+    const sgdsInput = await this.sgdsInput;
     event.preventDefault();
     event.stopPropagation();
     if (this.value < this.step) {
       this.value = 0;
     } else {
-      this.value = parseInt(this.inputEl.value) - parseInt(this.inputEl.step.toString());
+      this.value = parseInt(sgdsInput.value) - parseInt(sgdsInput.step.toString());
     }
   }
 
@@ -140,7 +166,9 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
               fill="#B90000"
             />
           </svg>
-          <div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
+          <div id="${this.inputId}-invalid" class="invalid-feedback">
+            ${this.invalidFeedback ? this.invalidFeedback : this.inputEl.validationMessage}
+          </div>
         </div>`
       : html`${this._renderHintText()}`;
   }
@@ -162,9 +190,7 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
     const hintTextTemplate = html` <div id="${this.inputId}Help" class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }
-  public reportValidity() {
-    return this.inputEl.reportValidity();
-  }
+
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   // public reportValidity(): boolean {
   //   return this._internals.reportValidity();
@@ -199,10 +225,10 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
             max=${ifDefined(this.max)}
             value=${ifDefined(this.value)}
             @sgds-change=${e => this._handleChange(e)}
-            @sgds-input=${e => this._handleChange(e)}
+            @sgds-input=${this._handleInputChange}
+            @sgds-invalid=${this._handleInvalidChange}
             @keydown=${this._handleKeyDown}
             ?disabled=${this.disabled}
-            ?required=${this.required}
             id=${this.inputId}
             ?hasFeedback=${this.hasFeedback}
           ></sgds-input>
