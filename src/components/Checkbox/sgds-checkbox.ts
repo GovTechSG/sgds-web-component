@@ -1,15 +1,15 @@
-import FormCheckElement from "../../base/form-check-element";
-import genId from "../../utils/generateId";
-import checkboxStyle from "./checkbox.css";
-import { FormSubmitController, SgdsFormControl } from "../../utils/form";
-import SgdsElement from "../../base/sgds-element";
-import { property, query } from "lit/decorators.js";
-import { defaultValue } from "../../utils/defaultvalue";
-import { watch } from "../../utils/watch";
 import { html } from "lit";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
+import FormCheckElement from "../../base/form-check-element";
+import SgdsElement from "../../base/sgds-element";
+import { defaultValue } from "../../utils/defaultvalue";
+import { SgdsFormControl } from "../../utils/form";
+import genId from "../../utils/generateId";
 import { InputValidationController } from "../../utils/inputValidationController";
+import { watch } from "../../utils/watch";
+import checkboxStyle from "./checkbox.css";
 
 /**
  * @summary Checkbox component is used when you require users to select multiple items from a list.

@@ -2,13 +2,13 @@ import { html, nothing } from "lit";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
-import { FormSubmitController } from "../../utils/form";
+import feedbackStyles from "../../styles/feedback.css";
+import formHintStyles from "../../styles/form-hint.css";
+import formLabelStyles from "../../styles/form-label.css";
+import { InputValidationController } from "../../utils/inputValidationController";
 import { watch } from "../../utils/watch";
 import radioGroupStyles from "./radio-group.css";
 import SgdsRadio from "./sgds-radio";
-import feedbackStyles from "../../styles/feedback.css";
-import formLabelStyles from "../../styles/form-label.css";
-import formHintStyles from "../../styles/form-hint.css";
 
 /**
  * @summary RadioGroup group multiple radios so they function as a single form control.
@@ -21,18 +21,14 @@ import formHintStyles from "../../styles/form-hint.css";
  */
 export class SgdsRadioGroup extends SgdsElement {
   static styles = [...SgdsElement.styles, feedbackStyles, formLabelStyles, radioGroupStyles, formHintStyles];
-  /**@internal */
-  protected readonly formSubmitController = new FormSubmitController(this, {
-    defaultValue: (control: SgdsRadioGroup) => control.defaultValue
-  });
+  static formAssociated = true;
+  protected inputValidationController = new InputValidationController(this);
   /**@internal */
   @query("slot:not([name])") defaultSlot: HTMLSlotElement;
   /**@internal */
-  @query(".radio-group-validation-input") input: HTMLInputElement;
+  @query("input") input: HTMLInputElement;
   /**@internal */
   @state() defaultValue = "";
-  /**@internal */
-  @state() private customErrorMessage = "";
 
   /** The radio group's label  */
   @property({ reflect: true }) label = "";
@@ -44,7 +40,7 @@ export class SgdsRadioGroup extends SgdsElement {
   @property({ reflect: true }) value = "";
 
   /** The name assigned to the radio controls. */
-  @property({ reflect: true }) name = "option";
+  @property({ reflect: true }) name: string;
 
   /** Ensures a child radio is checked before allowing the containing form to submit. */
   @property({ type: Boolean, reflect: true }) required = false;
@@ -62,6 +58,10 @@ export class SgdsRadioGroup extends SgdsElement {
   _handleValueChange() {
     this.emit("sgds-change", { detail: { value: this.value } });
     this._updateCheckedRadio();
+  }
+  @watch("invalid", { waitUntilFirstUpdate: true })
+  _handleInvalidChange() {
+    this._radios.forEach(r => (r.invalid = this.invalid));
   }
 
   connectedCallback() {
@@ -87,40 +87,10 @@ export class SgdsRadioGroup extends SgdsElement {
         }
       }
     });
+
+    this.inputValidationController.validateInput(this.input);
   }
 
-  /** Gets and return the ValidityState object.  */
-  get validity(): ValidityState {
-    const hasMissingData = !((this.value && this.required) || !this.required);
-    const hasCustomError = this.customErrorMessage !== "";
-    return {
-      badInput: false,
-      customError: hasCustomError,
-      patternMismatch: false,
-      rangeOverflow: false,
-      rangeUnderflow: false,
-      stepMismatch: false,
-      tooLong: false,
-      tooShort: false,
-      typeMismatch: false,
-      valid: hasMissingData ? false : true,
-      valueMissing: !hasMissingData
-    };
-  }
-
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  public reportValidity(): boolean {
-    const validity = this.validity;
-
-    this.invalid = !validity.valid;
-
-    if (!validity.valid) {
-      this._showNativeErrorMessage();
-    }
-
-    return !this.invalid;
-  }
-  /**@internal */
   @queryAssignedElements()
   private _radios!: Array<SgdsRadio>;
 
@@ -133,6 +103,11 @@ export class SgdsRadioGroup extends SgdsElement {
     }
 
     this.value = target.value;
+    // when input value is set programatically, need to manually dispatch a change event
+    // In order to prevent race conditions and ensure sequence of events, set input's value here instead of binding to value prop of input
+    this.input.value = this.value;
+    this.input.dispatchEvent(new InputEvent("change"));
+
     const radios = this._radios;
 
     radios.forEach(radio => {
@@ -185,15 +160,9 @@ export class SgdsRadioGroup extends SgdsElement {
     this._radios.forEach(radio => (radio.invalid = true));
   }
 
-  private _showNativeErrorMessage() {
-    this.input.reportValidity();
-  }
-
   private _updateCheckedRadio() {
     const radios = this._radios;
     radios.forEach(radio => (radio.checked = radio.value === this.value));
-    this.invalid = !this.validity.valid;
-    this._radios.forEach(radio => (radio.invalid = this.invalid));
   }
 
   protected _renderHintText() {
@@ -232,7 +201,9 @@ export class SgdsRadioGroup extends SgdsElement {
           })}"
           ?required=${this.required}
           tabindex="-1"
-          @invalid=${(e: Event) => this._handleInvalid(e)}
+          @change=${(e: Event) => {
+            this.inputValidationController.handleChange(e);
+          }}
         />
         ${this.invalid && this.hasFeedback
           ? html`
@@ -243,7 +214,9 @@ export class SgdsRadioGroup extends SgdsElement {
                     fill="#B90000"
                   />
                 </svg>
-                <div id="radio-group-feedback" tabindex="0" class="invalid-feedback">${this.invalidFeedback}</div>
+                <div id="radio-group-feedback" tabindex="0" class="invalid-feedback">
+                  ${this.invalidFeedback ? this.invalidFeedback : this.inputValidationController.validationMessage}
+                </div>
               </div>
             `
           : nothing}

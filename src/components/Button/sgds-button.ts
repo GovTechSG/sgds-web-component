@@ -98,7 +98,6 @@ export class SgdsButton extends ButtonElement {
 
   private _clickHandler = () => {
     if (this.type === "submit") {
-      // this.inputValidationController.form.submit()
       this.formSubmitController.submit(this);
     }
     if (this.type === "reset") {

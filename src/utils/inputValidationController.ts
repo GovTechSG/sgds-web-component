@@ -43,7 +43,6 @@ export class InputValidationController implements ReactiveController {
     const input = e.target as HTMLInputElement;
     this.setFormValue();
     this.validateInput(input);
-    // this.invalid = !input.checkValidity();
     this.options.setInvalid(this.host, !input.checkValidity());
   }
   get form() {
