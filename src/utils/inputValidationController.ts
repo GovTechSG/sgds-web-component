@@ -21,7 +21,6 @@ export class InputValidationController implements ReactiveController {
       input: (host: SgdsFormControl) => host.input,
       ...options
     };
-    // this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   hostConnected(): void {
@@ -106,15 +105,13 @@ export class InputValidationController implements ReactiveController {
     }
   }
 
-  handleFormSubmit(event: Event) {
-    // const disabled = this.options.disabled(this.host);
-    const reportValidity = this.reportValidity;
-    console.log(reportValidity);
-    if (!reportValidity) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-    }
-  }
+  // handleFormSubmit(event: Event) {
+  //   const reportValidity = this.reportValidity;
+  //   if (!reportValidity) {
+  //     event.preventDefault();
+  //     event.stopImmediatePropagation();
+  //   }
+  // }
 }
 
 export interface InputValidationControllerOptions {

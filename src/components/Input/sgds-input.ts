@@ -9,11 +9,10 @@ import FormControlElement from "../../base/form-control-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import type { SgdsFormControl } from "../../utils/form";
 import genId from "../../utils/generateId";
-import { InputValidationController } from "../../utils/inputValidationController";
+import { SgdsFormValidatorMixin } from "../../utils/validator";
 import { watch } from "../../utils/watch";
 import { SgdsSpinner } from "../Spinner/sgds-spinner";
 import inputStyle from "./input.css";
-import { SgdsFormValidatorMixin } from "../../utils/validator";
 /**
  * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
  *
@@ -25,14 +24,7 @@ import { SgdsFormValidatorMixin } from "../../utils/validator";
  */
 export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
   static styles = [...FormControlElement.styles, inputStyle];
-  // static formAssociated = true
-  // protected inputValidationController
 
-  constructor() {
-    super();
-    // SgdsInput.formAssociated = true
-    // this.inputValidationController = new InputValidationController(this);
-  }
   /**@internal */
   static get scopedElements() {
     return {
@@ -96,8 +88,6 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
 
   protected inputId = genId("input", "input");
 
-  // sgdsInput: HTMLInputElement;
-
   // get form() {
   //   return this._internals.form;
   // }
@@ -141,27 +131,12 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
     this.value = this.input.value;
     this.emit("sgds-change");
     super.handleChange(e);
-    // set the element’s validity whenever the value of the  <input> changes. Visually does nothing
-    // this.inputValidationController.handleChange(e);
   }
   protected _handleInputChange(e: Event) {
     this.value = this.input.value;
     this.emit("sgds-input");
     super.handleInputChange(e);
-    // set the element’s validity whenever the value of the  <input> changes. Visually does nothing
-    // this.inputValidationController.handleInput();
   }
-
-  // firstUpdated() {
-  //   // this.sgdsInput = this.shadowRoot.querySelector("input");
-  //   // this.addEventListener("focus", () => this.sgdsInput.focus());
-
-  //   // if (!this.hasAttribute("tabindex")) {
-  //   //   this.setAttribute("tabindex", "0");
-  //   // }
-  //   // validate input on first load
-  //   // this.inputValidationController.validateInput(this.sgdsInput);
-  // }
 
   @watch("_isTouched", { waitUntilFirstUpdate: true })
   _handleIsTouched() {

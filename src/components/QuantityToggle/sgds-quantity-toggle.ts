@@ -1,19 +1,17 @@
 import { property, query, queryAsync } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { live } from "lit/directives/live.js";
 import { html } from "lit/static-html.js";
 import FormControlElement from "../../base/form-control-element";
 import svgStyles from "../../styles/svg.css";
 import { defaultValue } from "../../utils/defaultvalue";
 import { SgdsFormControl } from "../../utils/form";
 import genId from "../../utils/generateId";
-import { InputValidationController } from "../../utils/inputValidationController";
+import { SgdsFormValidatorMixin } from "../../utils/validator";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import SgdsInput from "../Input/sgds-input";
 import quantityToggleStyle from "./quantity-toggle.css";
-import { watch } from "../../utils/watch";
-import { live } from "lit/directives/live.js";
-import { SgdsFormValidatorMixin } from "../../utils/validator";
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
  *

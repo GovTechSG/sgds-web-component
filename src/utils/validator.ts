@@ -1,21 +1,24 @@
 import { LitElement } from "lit";
-import { queryAsync, state } from "lit/decorators.js";
+import { queryAsync } from "lit/decorators.js";
 import { property } from "lit/decorators/property.js";
 import { SgdsInput } from "../components";
 import { InputValidationController } from "./inputValidationController";
 
 type Constructor<T> = new (...args: any[]) => T;
 
+/**
+ * @summary When noValidation is false, applies the SGDS Form validation behaviour on the superClass
+ * @param superClass
+ * @returns
+ */
 export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superClass: T) => {
   class ToBeValidatedElement extends superClass {
     static formAssociated = true;
     inputValidationController;
     input: HTMLInputElement | SgdsInput;
-    // sgdsInput: SgdsInput
+
     /** When true, disables SGDS default form validation behaviour */
     @property({ type: Boolean }) noValidation = false;
-
-    @state() validationMessage: string;
 
     @queryAsync("sgds-input") sgdsInput: Promise<SgdsInput>;
 
@@ -28,11 +31,11 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
     async firstUpdated(changedProperties) {
       super.firstUpdated(changedProperties);
       if (!this.noValidation) {
-        this.input = this.shadowRoot.querySelector("input");
+        // this.input = this.shadowRoot.querySelector("input");
 
         /* Either input or sgds-input. For example, quantity-toggle uses sgds-input */
         this.input = this.shadowRoot.querySelector("input") || (await this.sgdsInput);
-
+        console.log(this.input);
         this.inputValidationController.validateInput(this.input);
       }
     }

@@ -5,7 +5,7 @@ import SgdsElement from "../../base/sgds-element";
 import feedbackStyles from "../../styles/feedback.css";
 import formHintStyles from "../../styles/form-hint.css";
 import formLabelStyles from "../../styles/form-label.css";
-import { InputValidationController } from "../../utils/inputValidationController";
+import { SgdsFormValidatorMixin } from "../../utils/validator";
 import { watch } from "../../utils/watch";
 import radioGroupStyles from "./radio-group.css";
 import SgdsRadio from "./sgds-radio";
@@ -19,14 +19,12 @@ import SgdsRadio from "./sgds-radio";
  *
  *
  */
-export class SgdsRadioGroup extends SgdsElement {
+export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, feedbackStyles, formLabelStyles, radioGroupStyles, formHintStyles];
-  static formAssociated = true;
-  protected inputValidationController = new InputValidationController(this);
+
   /**@internal */
   @query("slot:not([name])") defaultSlot: HTMLSlotElement;
-  /**@internal */
-  @query("input") input: HTMLInputElement;
+
   /**@internal */
   @state() defaultValue = "";
 
@@ -69,7 +67,8 @@ export class SgdsRadioGroup extends SgdsElement {
     this.defaultValue = this.value;
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
     const radios = this._radios;
     radios.forEach((item, index) => {
       if (radios.length > 1) {
@@ -87,8 +86,6 @@ export class SgdsRadioGroup extends SgdsElement {
         }
       }
     });
-
-    this.inputValidationController.validateInput(this.input);
   }
 
   @queryAssignedElements()
@@ -103,16 +100,22 @@ export class SgdsRadioGroup extends SgdsElement {
     }
 
     this.value = target.value;
-    // when input value is set programatically, need to manually dispatch a change event
-    // In order to prevent race conditions and ensure sequence of events, set input's value here instead of binding to value prop of input
-    this.input.value = this.value;
-    this.input.dispatchEvent(new InputEvent("change"));
+
+    this._updateInputValue();
 
     const radios = this._radios;
 
     radios.forEach(radio => {
       return (radio.checked = radio === target);
     });
+  }
+  /**
+   * when input value is set programatically, need to manually dispatch a change event
+   * In order to prevent race conditions and ensure sequence of events, set input's value here instead of binding to value prop of input
+   */
+  private _updateInputValue() {
+    this.input.value = this.value;
+    this.input.dispatchEvent(new InputEvent("change"));
   }
 
   private _handleKeyDown(event: KeyboardEvent) {
@@ -138,6 +141,7 @@ export class SgdsRadioGroup extends SgdsElement {
     });
 
     this.value = radios[index].value;
+    this._updateInputValue();
     radios[index].checked = true;
     radios[index].tabIndex = 0;
     // preventDefault at the end to allow Tab
@@ -201,9 +205,7 @@ export class SgdsRadioGroup extends SgdsElement {
           })}"
           ?required=${this.required}
           tabindex="-1"
-          @change=${(e: Event) => {
-            this.inputValidationController.handleChange(e);
-          }}
+          @change=${(e: Event) => super.handleChange(e)}
         />
         ${this.invalid && this.hasFeedback
           ? html`
@@ -215,7 +217,7 @@ export class SgdsRadioGroup extends SgdsElement {
                   />
                 </svg>
                 <div id="radio-group-feedback" tabindex="0" class="invalid-feedback">
-                  ${this.invalidFeedback ? this.invalidFeedback : this.inputValidationController.validationMessage}
+                  ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
                 </div>
               </div>
             `
