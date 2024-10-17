@@ -1,11 +1,8 @@
-import { property, state } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import feedbackStyles from "../styles/feedback.css";
 import formHintStyles from "../styles/form-hint.css";
 import formLabelStyles from "../styles/form-label.css";
 import formPlaceholderStyles from "../styles/form-placeholder.css";
-import genId from "../utils/generateId";
-import { InputValidationController } from "../utils/inputValidationController";
-import { watch } from "../utils/watch";
 import SgdsElement from "./sgds-element";
 
 export default class FormControlElement extends SgdsElement {

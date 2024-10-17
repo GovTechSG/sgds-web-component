@@ -1,5 +1,6 @@
 import { ReactiveController, ReactiveControllerHost } from "lit";
 import { SgdsFormControl } from "./form";
+import { SgdsInput } from "../components";
 
 export class InputValidationController implements ReactiveController {
   host: ReactiveControllerHost & HTMLElement;
@@ -17,6 +18,7 @@ export class InputValidationController implements ReactiveController {
       value: (host: SgdsFormControl) => {
         return host.value;
       },
+      input: (host: SgdsFormControl) => host.input,
       ...options
     };
     // this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -35,15 +37,20 @@ export class InputValidationController implements ReactiveController {
     this.options.setInvalid(this.host, true);
   }
 
-  handleInput() {
+  handleInput(e: Event) {
+    const input = e.target as HTMLInputElement;
     this.setFormValue();
     this.options.setInvalid(this.host, false);
+    this.validateInput(input);
   }
   handleChange(e: Event) {
     const input = e.target as HTMLInputElement;
     this.setFormValue();
     this.validateInput(input);
     this.options.setInvalid(this.host, !input.checkValidity());
+  }
+  getInput() {
+    return this.options.input(this.host);
   }
   get form() {
     return this._internals.form;
@@ -114,4 +121,5 @@ export interface InputValidationControllerOptions {
   /** A function that sets the value of host invalid reactive prop */
   setInvalid: (host: ReactiveControllerHost & HTMLElement, value: boolean) => void;
   value: (host: ReactiveControllerHost & HTMLElement) => unknown;
+  input: (host: ReactiveController & HTMLElement) => HTMLInputElement | SgdsInput;
 }

@@ -203,5 +203,5 @@ export interface SgdsFormControl extends SgdsElement {
   minlength?: number;
   maxlength?: number;
 
-  // sgdsInput?: HTMLInputElement | SgdsInput;
+  input?: HTMLInputElement | SgdsInput;
 }

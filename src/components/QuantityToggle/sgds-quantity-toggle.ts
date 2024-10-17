@@ -13,6 +13,7 @@ import SgdsInput from "../Input/sgds-input";
 import quantityToggleStyle from "./quantity-toggle.css";
 import { watch } from "../../utils/watch";
 import { live } from "lit/directives/live.js";
+import { SgdsFormValidatorMixin } from "../../utils/validator";
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
  *
@@ -23,10 +24,10 @@ import { live } from "lit/directives/live.js";
  * @event sgds-input - Emitted when the control receives input and its value changes.
  *
  */
-export class SgdsQuantityToggle extends FormControlElement implements SgdsFormControl {
+export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
   static styles = [...FormControlElement.styles, svgStyles, quantityToggleStyle];
-  static formAssociated = true;
-  protected inputValidationController = new InputValidationController(this);
+  // static formAssociated = true;
+  // protected inputValidationController = new InputValidationController(this);
 
   /** @internal */
   static get scopedElements() {
@@ -73,28 +74,31 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
       sgdsInput.value = "0";
     }
     this.value = parseInt(sgdsInput.value);
-    this.inputValidationController.validateInput(sgdsInput.sgdsInput);
+    // this.inputValidationController.handleChange(e)
+    super.handleChange(e);
   }
-  protected async _handleInputChange() {
+  protected async _handleInputChange(e: Event) {
     const sgdsInput = await this.sgdsInput;
 
     if (parseInt(sgdsInput.value) < this.step || sgdsInput.value === "") {
       sgdsInput.value = "0";
     }
     this.value = parseInt(sgdsInput.value);
-    this.inputValidationController.handleInput();
-    this.inputValidationController.validateInput(sgdsInput.sgdsInput);
+    super.handleInputChange(e);
+    // this.inputValidationController.handleInput();
+    this.inputValidationController.validateInput(sgdsInput.input);
   }
-  async firstUpdated() {
-    const sgdsInput = await this.sgdsInput;
-    this.addEventListener("focus", () => sgdsInput.focus());
+  // async firstUpdated() {
+  //   const sgdsInput = await this.sgdsInput;
+  //   this.addEventListener("focus", () => sgdsInput.focus());
 
-    if (!this.hasAttribute("tabindex")) {
-      this.setAttribute("tabindex", "0");
-    }
-    // validate input on first load
-    this.inputValidationController.validateInput(sgdsInput);
-  }
+  //   if (!this.hasAttribute("tabindex")) {
+  //     this.setAttribute("tabindex", "0");
+  //   }
+  //   // validate input on first load
+  //   // console.log(this.inputEl)
+  //   this.inputValidationController.validateInput(sgdsInput.input);
+  // }
   get validity() {
     return this.inputValidationController.validity;
   }
@@ -225,8 +229,8 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
             value=${live(this.value)}
-            @sgds-change=${e => this._handleChange(e)}
-            @sgds-input=${this._handleInputChange}
+            @sgds-change=${(e: Event) => this._handleChange(e)}
+            @sgds-input=${(e: Event) => this._handleInputChange(e)}
             @sgds-invalid=${this._handleInvalidChange}
             @keydown=${this._handleKeyDown}
             ?disabled=${this.disabled}
