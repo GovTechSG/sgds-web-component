@@ -12,6 +12,7 @@ import SgdsIconButton from "../IconButton/sgds-icon-button";
 import SgdsInput from "../Input/sgds-input";
 import quantityToggleStyle from "./quantity-toggle.css";
 import { watch } from "../../utils/watch";
+import { live } from "lit/directives/live.js";
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
  *
@@ -60,7 +61,7 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
 
   @queryAsync("sgds-input") sgdsInput: Promise<SgdsInput>;
 
-  @query("sgds-input") inputEl: SgdsInput;
+  @query("sgds-input") inputEl: HTMLInputElement;
 
   // /** @internal The id forwarded to input element */
   private inputId: string = genId("quantity-toggle", "input");
@@ -92,10 +93,18 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
       this.setAttribute("tabindex", "0");
     }
     // validate input on first load
-    this.inputValidationController.validateInput(sgdsInput.sgdsInput);
-    // (await this.sgdsInput).checkValidity()
+    this.inputValidationController.validateInput(sgdsInput);
+  }
+  get validity() {
+    return this.inputValidationController.validity;
+  }
+  get validationMessage() {
+    return this.inputValidationController.validationMessage;
   }
 
+  get willValidate() {
+    return this.inputValidationController.willValidate;
+  }
   checkValidity() {
     return this.inputValidationController.checkValidity();
   }
@@ -121,8 +130,9 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
     }
   }
 
-  private _handleInvalidChange() {
+  private  _handleInvalidChange() {
     this.invalid = true;
+  
   }
 
   /** Simulates a click on the plus button */
@@ -152,12 +162,6 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
       this.value = parseInt(sgdsInput.value) - parseInt(sgdsInput.step.toString());
     }
   }
-  // @watch("invalid")
-  // async _testInvalid() {
-  // console.log('is this invalid')
-  // const sgdsInput = await this.sgdsInput
-  // sgdsInput.invalid = true
-  // }
 
   protected _renderFeedback() {
     return this.invalid && this.hasFeedback
@@ -193,10 +197,6 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
     return this.hintText && hintTextTemplate;
   }
 
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  // public reportValidity(): boolean {
-  //   return this._internals.reportValidity();
-  // }
   render() {
     return html`
       <div class="form-control-container">
@@ -225,13 +225,14 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
             step=${ifDefined(this.step)}
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
-            value=${ifDefined(this.value)}
+            value=${live(this.value)}
             @sgds-change=${e => this._handleChange(e)}
             @sgds-input=${this._handleInputChange}
             @sgds-invalid=${this._handleInvalidChange}
             @keydown=${this._handleKeyDown}
             ?disabled=${this.disabled}
             id=${this.inputId}
+            ?invalid=${this.invalid}
           ></sgds-input>
           <sgds-icon-button
             variant=${this.iconButtonVariant}

@@ -115,6 +115,9 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
     return this.inputValidationController.reportValidity();
   }
 
+  validateInput(){
+    return this.inputValidationController.validateInput(this.sgdsInput)
+  }
   protected _handleFocus() {
     this.emit("sgds-focus");
   }
@@ -127,7 +130,7 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
     this.focus();
   }
 
-  protected _handleChange(e: Event) {
+   _handleChange(e: Event) {
     this.value = this.sgdsInput.value;
     this.emit("sgds-change");
     // set the element’s validity whenever the value of the  <input> changes. Visually does nothing
@@ -149,7 +152,8 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
     }
     // validate input on first load
     this.inputValidationController.validateInput(this.sgdsInput);
-  }
+    console.log(this.inputValidationController.validity)
+    }
 
   @watch("_isTouched", { waitUntilFirstUpdate: true })
   _handleIsTouched() {
