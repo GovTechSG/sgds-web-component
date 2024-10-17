@@ -130,9 +130,8 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
     }
   }
 
-  private  _handleInvalidChange() {
+  private _handleInvalidChange() {
     this.invalid = true;
-  
   }
 
   /** Simulates a click on the plus button */

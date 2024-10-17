@@ -14,6 +14,9 @@ export class InputValidationController implements ReactiveController {
       setInvalid: (host: SgdsFormControl, value: boolean) => {
         host.invalid = value;
       },
+      value: (host: SgdsFormControl) => {
+        return host.value;
+      },
       ...options
     };
     // this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -33,10 +36,12 @@ export class InputValidationController implements ReactiveController {
   }
 
   handleInput() {
+    this.setFormValue();
     this.options.setInvalid(this.host, false);
   }
   handleChange(e: Event) {
     const input = e.target as HTMLInputElement;
+    this.setFormValue();
     this.validateInput(input);
     // this.invalid = !input.checkValidity();
     this.options.setInvalid(this.host, !input.checkValidity());
@@ -63,7 +68,15 @@ export class InputValidationController implements ReactiveController {
   reportValidity() {
     return this._internals.reportValidity();
   }
-
+  /**
+   *
+   * Sets the form control value into FormData,
+   * making the value of control accessible via FormData
+   */
+  setFormValue() {
+    const value = this.options.value(this.host) as string | FormData | File;
+    this._internals.setFormValue(value);
+  }
   validateInput(input) {
     // get the validity of the internal <input>
     const validState = input.validity;
@@ -101,4 +114,5 @@ export class InputValidationController implements ReactiveController {
 export interface InputValidationControllerOptions {
   /** A function that sets the value of host invalid reactive prop */
   setInvalid: (host: ReactiveControllerHost & HTMLElement, value: boolean) => void;
+  value: (host: ReactiveControllerHost & HTMLElement) => unknown;
 }

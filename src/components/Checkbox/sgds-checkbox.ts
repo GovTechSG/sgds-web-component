@@ -9,6 +9,7 @@ import { watch } from "../../utils/watch";
 import { html } from "lit";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { InputValidationController } from "../../utils/inputValidationController";
 
 /**
  * @summary Checkbox component is used when you require users to select multiple items from a list.
@@ -23,11 +24,8 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
   /**@internal */
   @query('input[type="checkbox"]') input: HTMLInputElement;
   /**@internal */
-  private readonly formSubmitController = new FormSubmitController(this, {
-    value: (control: FormCheckElement) => (control.checked ? control.value : undefined),
-    defaultValue: (control: FormCheckElement) => control.defaultChecked,
-    setValue: (control: FormCheckElement, checked: boolean) => (control.checked = checked)
-  });
+  static formAssociated = true;
+  protected inputValidationController = new InputValidationController(this);
   /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
   @property({ type: String, reflect: true }) name: string;
 
@@ -57,7 +55,9 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
 
   @watch("invalid", { waitUntilFirstUpdate: true })
   _handleInvalidChange() {
-    this.emit("sgds-validity-change", { detail: { invalid: this.invalid } });
+    this.emit("sgds-validity-change", {
+      detail: { invalid: this.invalid, validationMessage: this.inputValidationController.validationMessage }
+    });
   }
 
   /** Simulates a click on the checkbox. */
@@ -73,21 +73,15 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
   public blur() {
     this.input.blur();
   }
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  public reportValidity() {
-    if (!this.input.reportValidity()) {
-      this.invalid = !this.input.checkValidity();
-    }
-    return this.input.reportValidity();
-  }
 
-  private _handleChange() {
+  private _handleChange(e: Event) {
     if (this.indeterminate) {
       this.indeterminate = !this.indeterminate;
     }
 
     this.checked = !this.checked;
     this.value = this.input.value;
+    this.inputValidationController.handleChange(e);
     this.emit("sgds-change", { detail: { checked: this.checked, value: this.value } });
   }
 
@@ -112,12 +106,17 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
     this.input.disabled = this.disabled;
     this.invalid = !this.input.checkValidity();
   }
-  /** @internal */
-  @watch("checked", { waitUntilFirstUpdate: true })
-  _handleStateChange() {
-    this.invalid = !this.input.checkValidity();
-  }
 
+  firstUpdated() {
+    // this.input = this.shadowRoot.querySelector("input");
+    this.addEventListener("focus", () => this.input.focus());
+
+    if (!this.hasAttribute("tabindex")) {
+      this.setAttribute("tabindex", "0");
+    }
+    // validate input on first load
+    this.inputValidationController.validateInput(this.input);
+  }
   render() {
     return html`
       <div class="form-check">
@@ -138,7 +137,7 @@ export class SgdsCheckbox extends SgdsElement implements SgdsFormControl {
             ?required=${this.required}
             aria-disabled=${this.disabled ? "true" : "false"}
             aria-checked=${this.checked ? "true" : "false"}
-            @change=${this._handleChange}
+            @change=${(e: Event) => this._handleChange(e)}
             @keydown=${this._handleKeyDown}
             @invalid=${(e: Event) => this._handleInvalid(e)}
           />

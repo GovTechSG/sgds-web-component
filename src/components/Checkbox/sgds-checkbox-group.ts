@@ -13,6 +13,7 @@ export class SgdsCheckboxGroup extends SgdsElement {
   @queryAssignedElements({ slot: "checkbox", flatten: true }) private checkboxes!: NodeListOf<SgdsCheckbox>;
   /**@internal */
   @state() private hasInvalidCheckbox = false;
+  @state() private validationMessage: string;
 
   /** The checkbox group's label  */
   @property({ reflect: true }) label = "";
@@ -30,6 +31,7 @@ export class SgdsCheckboxGroup extends SgdsElement {
     super();
     this.addEventListener("sgds-validity-change", (e: CustomEvent) => {
       this.hasInvalidCheckbox = e.detail.invalid;
+      this.validationMessage = e.detail.validationMessage;
     });
   }
 
@@ -71,7 +73,9 @@ export class SgdsCheckboxGroup extends SgdsElement {
                     fill="#B90000"
                   />
                 </svg>
-                <div id="checkbox-feedback" tabindex="0" class="invalid-feedback">${this.invalidFeedback}</div>
+                <div id="checkbox-feedback" tabindex="0" class="invalid-feedback">
+                  ${this.invalidFeedback ? this.invalidFeedback : this.validationMessage}
+                </div>
               </div>
             `
           : nothing}

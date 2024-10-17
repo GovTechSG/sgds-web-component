@@ -120,13 +120,20 @@
   <body class="d-flex flex-column min-vh-100">
 
     <form id="datepicker-form">
-        <input pattern="hello"  />
-        <!-- <sgds-input type="number" label="Label" hinttext="type hello" name="email"  min="3"
+        <input pattern="hello" name="test"  />
+       <sgds-input label="Label" hinttext="type hello" name="email"  required
             icon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-envelope&quot; viewBox=&quot;0 0 16 16&quot;>
             <path d=&quot;M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z&quot;/>
-            </svg>" placeholder="Placeholder" pattern="hello" hasFeedback>
-        </sgds-input> -->
-        <sgds-quantity-toggle min="3"  hasFeedback  hinttext="type hello"></sgds-quantity-toggle>
+            </svg>" placeholder="Placeholder" hasFeedback>
+        </sgds-input>
+          <!--<sgds-quantity-toggle min="3"  hasFeedback  hinttext="type hello"></sgds-quantity-toggle> -->
+        <sgds-checkbox-group hasFeedback hintText="hint for checkbox" >
+        <sgds-checkbox slot="checkbox" name="he" value="checkboxhello" required>he</sgds-checkbox>
+      </sgds-checkbox-group>
+        <sgds-radio-group required hasFeedback>
+          <sgds-radio value="1">1</sgds-radio>
+          <sgds-radio value="2">2 </sgds-radio>
+        </sgds-radio-group>
         <sgds-button type="submit">Submit</sgds-button>
         <!-- <button type="submit">Submit</button> -->
     </form>
@@ -137,6 +144,7 @@
             console.log( "stpru" );
             // event.preventDefault();
             const formData = new FormData( event.target );
+            console.log(formData.get("he"))
         } );
         const sgdsInput = document.querySelector("sgds-input")
         console.log(sgdsInput)
