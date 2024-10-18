@@ -1,6 +1,6 @@
 import { ReactiveController, ReactiveControllerHost } from "lit";
 import { SgdsFormControl } from "./form";
-import { SgdsInput } from "../components";
+import { SgdsCheckbox, SgdsInput } from "../components";
 
 export class InputValidationController implements ReactiveController {
   host: ReactiveControllerHost & HTMLElement;
@@ -18,7 +18,16 @@ export class InputValidationController implements ReactiveController {
       value: (host: SgdsFormControl) => {
         return host.value;
       },
+      defaultValue: (host: SgdsFormControl) => {
+        return host.defaultValue;
+      },
+      defaultChecked: (host: SgdsFormControl) => {
+        return host.defaultChecked;
+      },
       input: (host: SgdsFormControl) => host.input,
+      setValue: (input: HTMLInputElement, value: string) => {
+        input.value = value;
+      },
       ...options
     };
   }
@@ -38,15 +47,14 @@ export class InputValidationController implements ReactiveController {
 
   handleInput(e: Event) {
     const input = e.target as HTMLInputElement;
-    this.setFormValue();
     this.options.setInvalid(this.host, false);
     this.validateInput(input);
   }
   handleChange(e: Event) {
+    console.log("this is running", e);
     const input = e.target as HTMLInputElement;
-    this.setFormValue();
     this.validateInput(input);
-    this.options.setInvalid(this.host, !input.checkValidity());
+    this.options.setInvalid(this.host, !this.checkValidity());
   }
   getInput() {
     return this.options.input(this.host);
@@ -66,7 +74,12 @@ export class InputValidationController implements ReactiveController {
   get willValidate() {
     return this._internals.willValidate;
   }
-
+  updateInvalidState() {
+    this.options.setInvalid(this.host, !this.checkValidity());
+  }
+  resetValidity() {
+    return this._internals.setValidity({});
+  }
   checkValidity() {
     return this._internals.checkValidity();
   }
@@ -81,6 +94,32 @@ export class InputValidationController implements ReactiveController {
   setFormValue() {
     const value = this.options.value(this.host) as string | FormData | File;
     this._internals.setFormValue(value);
+  }
+  /**
+   * Resets form when type="reset" button is click. Invoked in SgdsFormValidator
+   */
+  resetForm() {
+    // this.options.setValue(this.host, this.options.defaultValue(this.host));
+    const input = this.options.input(this.host);
+    const defaultValue = this.options.defaultValue(this.host);
+    const defaultChecked = this.options.defaultChecked(this.host);
+    // if (defaultChecked === undefined) {
+    input.value = defaultValue as string;
+    // }
+    // if( defaultChecked === false){
+    //   const checkboxInput = input as SgdsCheckbox
+    //   checkboxInput.checked = defaultChecked
+    //   checkboxInput.dispatchEvent(new Event("change"))
+    // }
+    // if(defaultChecked === true) {
+    //   const checkboxInput = input as SgdsCheckbox
+    //   checkboxInput.checked = defaultChecked
+    //   // checkboxInput.dispatchEvent(new Event("change"))
+    //   console.log('here')
+    // }
+    this._internals.setValidity({});
+    this.options.setInvalid(this.host, !this.checkValidity());
+    // this.setFormValue()
   }
   validateInput(input) {
     // get the validity of the internal <input>
@@ -118,5 +157,10 @@ export interface InputValidationControllerOptions {
   /** A function that sets the value of host invalid reactive prop */
   setInvalid: (host: ReactiveControllerHost & HTMLElement, value: boolean) => void;
   value: (host: ReactiveControllerHost & HTMLElement) => unknown;
-  input: (host: ReactiveController & HTMLElement) => HTMLInputElement | SgdsInput;
+  input: (host: ReactiveController & HTMLElement) => HTMLInputElement | SgdsInput | SgdsCheckbox;
+  /** A function that returns the form control's default value. */
+  defaultValue: (input: unknown) => unknown | unknown[];
+  defaultChecked: (host: ReactiveController & HTMLElement) => boolean;
+  /** A function that sets the form control's value */
+  setValue: (input: unknown, value: unknown) => void;
 }

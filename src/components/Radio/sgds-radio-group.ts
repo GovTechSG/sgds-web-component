@@ -62,6 +62,16 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
     this._radios.forEach(r => (r.invalid = this.invalid));
   }
 
+  /**
+   * radio requries a custom resetFormControl as the update of input value
+   * requires to fire a reset event manually
+   * */
+  resetFormControl() {
+    this.value = this.input.value = this.defaultValue;
+    this._updateInputValue("reset");
+    this.resetValidity(this.input);
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.defaultValue = this.value;
@@ -113,9 +123,9 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
    * when input value is set programatically, need to manually dispatch a change event
    * In order to prevent race conditions and ensure sequence of events, set input's value here instead of binding to value prop of input
    */
-  private _updateInputValue() {
+  private _updateInputValue(eventName = "change") {
     this.input.value = this.value;
-    this.input.dispatchEvent(new InputEvent("change"));
+    this.input.dispatchEvent(new InputEvent(eventName));
   }
 
   private _handleKeyDown(event: KeyboardEvent) {

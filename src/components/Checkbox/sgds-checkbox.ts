@@ -10,6 +10,8 @@ import genId from "../../utils/generateId";
 import { SgdsFormValidatorMixin } from "../../utils/validator";
 import { watch } from "../../utils/watch";
 import checkboxStyle from "./checkbox.css";
+import { InputValidationController } from "../../utils/inputValidationController";
+import { live } from "lit/directives/live.js";
 
 /**
  * @summary Checkbox component is used when you require users to select multiple items from a list.
@@ -102,6 +104,14 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements
     this.invalid = !this.input.checkValidity();
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    // this.inputValidationController = new InputValidationController(this, {
+    //   value: (control: FormCheckElement) => (control.checked ? control.value : undefined),
+    // defaultValue: (control: FormCheckElement) => control.defaultChecked,
+    // // setValue: (control: FormCheckElement, checked: boolean) => (control.checked = checked)
+    // })
+  }
   render() {
     return html`
       <div class="form-check">
@@ -115,8 +125,6 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements
             id=${this._inputId}
             aria-invalid=${this.invalid ? "true" : "false"}
             name=${ifDefined(this.name)}
-            value=${ifDefined(this.value)}
-            ?checked=${this.checked}
             ?indeterminate=${this.indeterminate}
             ?disabled=${this.disabled}
             ?required=${this.required}
@@ -125,6 +133,8 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements
             @change=${(e: Event) => this._handleChange(e)}
             @keydown=${this._handleKeyDown}
             @invalid=${(e: Event) => this._handleInvalid(e)}
+            .checked=${live(this.checked)}
+            value=${ifDefined(this.value)}
           />
         </div>
         <label for="${this._inputId}" class="form-check-label"><slot></slot></label>

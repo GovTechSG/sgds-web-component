@@ -115,6 +115,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   validateInput() {
     return this.inputValidationController.validateInput(this.input);
   }
+
   protected _handleFocus() {
     this.emit("sgds-focus");
   }
@@ -128,6 +129,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   }
 
   protected _handleChange(e: Event) {
+    console.log("input handlechange");
     this.value = this.input.value;
     this.emit("sgds-change");
     super.handleChange(e);

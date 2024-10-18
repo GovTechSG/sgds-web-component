@@ -24,31 +24,62 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
 
     connectedCallback(): void {
       super.connectedCallback();
-      if (!this.noValidation) {
-        this.inputValidationController = new InputValidationController(this);
-      }
+      this.inputValidationController = new InputValidationController(this);
     }
     async firstUpdated(changedProperties) {
       super.firstUpdated(changedProperties);
-      if (!this.noValidation) {
-        // this.input = this.shadowRoot.querySelector("input");
 
-        /* Either input or sgds-input. For example, quantity-toggle uses sgds-input */
-        this.input = this.shadowRoot.querySelector("input") || (await this.sgdsInput);
-        console.log(this.input);
+      /* Either input or sgds-input. For example, quantity-toggle uses sgds-input */
+      this.input = this.shadowRoot.querySelector("input") || (await this.sgdsInput);
+      if (!this.noValidation) {
         this.inputValidationController.validateInput(this.input);
       }
     }
     handleChange(e: Event): void {
+      this.inputValidationController.setFormValue();
       if (!this.noValidation) {
         this.inputValidationController.handleChange(e);
       }
     }
     handleInputChange(e: Event): void {
+      this.inputValidationController.setFormValue();
       if (!this.noValidation) {
         this.inputValidationController.handleInput(e);
       }
     }
+
+    // formStateRestoreCallback(state, _mode) {
+    //   // const [date, view] = state.split("#");
+    //   // this.view = view;
+    //   // this.setValue(date);
+    //   console.log(state)
+    // }
+
+    formResetCallback() {
+      if (this.resetFormControl) {
+        this.resetFormControl();
+      } else {
+        this.value = this.defaultValue;
+        this.resetValidity(this.input);
+      }
+    }
+
+    resetValidity(input: HTMLInputElement | SgdsInput) {
+      this.inputValidationController.resetValidity();
+      this.inputValidationController.updateInvalidState();
+      this.inputValidationController.validateInput(input);
+      this._isTouched ? (this._isTouched = false) : null;
+    }
+    /** DECLARED INSTANCE METHODS AND PROPERTIES*/
+
+    /**
+     * Resets a form control to its initial state
+     */
+    declare resetFormControl: () => void;
+    declare value: string;
+    declare defaultValue: string;
+    declare defaultChecked: boolean;
+    declare _isTouched: boolean;
   }
 
   return ToBeValidatedElement as Constructor<ToBeValidatedElementInterface> & T;
@@ -60,4 +91,5 @@ export declare class ToBeValidatedElementInterface {
   input: HTMLInputElement;
   handleChange(e: Event): void;
   handleInputChange(e: Event): void;
+  resetValidity(input: HTMLInputElement | SgdsInput): void;
 }
