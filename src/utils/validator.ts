@@ -17,9 +17,6 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
     inputValidationController;
     input: HTMLInputElement | SgdsInput;
 
-    /** When true, disables SGDS default form validation behaviour */
-    @property({ type: Boolean }) noValidation = false;
-
     @queryAsync("sgds-input") sgdsInput: Promise<SgdsInput>;
 
     connectedCallback(): void {
@@ -31,21 +28,15 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
 
       /* Either input or sgds-input. For example, quantity-toggle uses sgds-input */
       this.input = this.shadowRoot.querySelector("input") || (await this.sgdsInput);
-      if (!this.noValidation) {
-        this.inputValidationController.validateInput(this.input);
-      }
+      this.inputValidationController.validateInput(this.input);
     }
     handleChange(e: Event): void {
       this.inputValidationController.setFormValue();
-      if (!this.noValidation) {
-        this.inputValidationController.handleChange(e);
-      }
+      this.inputValidationController.handleChange(e);
     }
     handleInputChange(e: Event): void {
       this.inputValidationController.setFormValue();
-      if (!this.noValidation) {
-        this.inputValidationController.handleInput(e);
-      }
+      this.inputValidationController.handleInput(e);
     }
 
     formResetCallback() {
@@ -80,7 +71,6 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
 };
 
 export declare class ToBeValidatedElementInterface {
-  noValidation: boolean;
   inputValidationController: any;
   input: HTMLInputElement;
   handleChange(e: Event): void;

@@ -80,6 +80,10 @@
   text-align:center;
 }
 
+:host(.quantity-toggle[invalid]) .form-control-group {
+  border: var(--sgds-form-border-width-thick) solid var(--sgds-form-danger-border-color);
+}
+
 .form-control-icon {
   display: flex;
   align-items: center;

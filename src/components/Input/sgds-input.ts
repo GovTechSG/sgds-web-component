@@ -194,7 +194,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
         class="form-control-group ${classMap({
           disabled: this.disabled,
           readonly: this.readonly,
-          "is-invalid": this.invalid,
+          "is-invalid": this.invalid && this.hasFeedback,
           "quantity-toggle": this.classList.contains("quantity-toggle")
         })}"
         @click=${this._handleClick}

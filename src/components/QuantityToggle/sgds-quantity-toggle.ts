@@ -81,7 +81,6 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
     }
     this.value = parseInt(sgdsInput.value);
     super.handleInputChange(e);
-    // this.inputValidationController.handleInput();
     this.inputValidationController.validateInput(sgdsInput.input);
   }
   get validity() {
