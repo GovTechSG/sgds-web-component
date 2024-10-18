@@ -9,6 +9,7 @@ import { SgdsFormValidatorMixin } from "../../utils/validator";
 import { watch } from "../../utils/watch";
 import radioGroupStyles from "./radio-group.css";
 import SgdsRadio from "./sgds-radio";
+import { live } from "lit/directives/live.js";
 
 /**
  * @summary RadioGroup group multiple radios so they function as a single form control.
@@ -96,6 +97,9 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
         }
       }
     });
+    if (this.value) {
+      this._updateInputValue("change");
+    }
   }
 
   @queryAssignedElements()
@@ -216,6 +220,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
           ?required=${this.required}
           tabindex="-1"
           @change=${(e: Event) => super.handleChange(e)}
+          .value=${live(this.value)}
         />
         ${this.invalid && this.hasFeedback
           ? html`

@@ -32,6 +32,7 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
       /* Either input or sgds-input. For example, quantity-toggle uses sgds-input */
       this.input = this.shadowRoot.querySelector("input") || (await this.sgdsInput);
       if (!this.noValidation) {
+        console.log(this.input);
         this.inputValidationController.validateInput(this.input);
       }
     }
@@ -48,13 +49,6 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
       }
     }
 
-    // formStateRestoreCallback(state, _mode) {
-    //   // const [date, view] = state.split("#");
-    //   // this.view = view;
-    //   // this.setValue(date);
-    //   console.log(state)
-    // }
-
     formResetCallback() {
       if (this.resetFormControl) {
         this.resetFormControl();
@@ -62,6 +56,7 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
         this.value = this.defaultValue;
         this.resetValidity(this.input);
       }
+      this.inputValidationController.setFormValue();
     }
 
     resetValidity(input: HTMLInputElement | SgdsInput) {

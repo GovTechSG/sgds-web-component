@@ -104,14 +104,12 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements
     this.invalid = !this.input.checkValidity();
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-    // this.inputValidationController = new InputValidationController(this, {
-    //   value: (control: FormCheckElement) => (control.checked ? control.value : undefined),
-    // defaultValue: (control: FormCheckElement) => control.defaultChecked,
-    // // setValue: (control: FormCheckElement, checked: boolean) => (control.checked = checked)
-    // })
+  resetFormControl() {
+    this.checked = this.input.checked = this.defaultChecked;
+    this.input.dispatchEvent(new InputEvent("reset"));
+    this.resetValidity(this.input);
   }
+
   render() {
     return html`
       <div class="form-check">
