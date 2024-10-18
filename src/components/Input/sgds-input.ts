@@ -129,7 +129,6 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   }
 
   protected _handleChange(e: Event) {
-    console.log("input handlechange");
     this.value = this.input.value;
     this.emit("sgds-change");
     super.handleChange(e);

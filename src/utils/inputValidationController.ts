@@ -51,7 +51,6 @@ export class InputValidationController implements ReactiveController {
     this.validateInput(input);
   }
   handleChange(e: Event) {
-    console.log("this is running", e);
     const input = e.target as HTMLInputElement;
     this.validateInput(input);
     this.options.setInvalid(this.host, !this.checkValidity());

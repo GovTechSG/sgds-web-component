@@ -13,7 +13,6 @@ export class FormSubmitController implements ReactiveController {
     (this.host = host).addController(this);
     this.options = {
       form: (input: HTMLInputElement) => {
-        console.log(input.closest("form"));
         return input.closest("form");
       },
       name: (input: HTMLInputElement) => input.name,

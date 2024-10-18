@@ -1,4 +1,4 @@
-import { property, query, queryAsync } from "lit/decorators.js";
+import { property, query, queryAsync, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
@@ -24,8 +24,6 @@ import quantityToggleStyle from "./quantity-toggle.css";
  */
 export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
   static styles = [...FormControlElement.styles, svgStyles, quantityToggleStyle];
-  // static formAssociated = true;
-  // protected inputValidationController = new InputValidationController(this);
 
   /** @internal */
   static get scopedElements() {
@@ -86,17 +84,6 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
     // this.inputValidationController.handleInput();
     this.inputValidationController.validateInput(sgdsInput.input);
   }
-  // async firstUpdated() {
-  //   const sgdsInput = await this.sgdsInput;
-  //   this.addEventListener("focus", () => sgdsInput.focus());
-
-  //   if (!this.hasAttribute("tabindex")) {
-  //     this.setAttribute("tabindex", "0");
-  //   }
-  //   // validate input on first load
-  //   // console.log(this.inputEl)
-  //   this.inputValidationController.validateInput(sgdsInput.input);
-  // }
   get validity() {
     return this.inputValidationController.validity;
   }
@@ -113,6 +100,13 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
     return this.inputValidationController.reportValidity();
+  }
+
+  async resetFormControl() {
+    const sgdsInput = await this.sgdsInput;
+    this.value = this.defaultValue;
+    sgdsInput.input.value = this.value.toString();
+    this.resetValidity(sgdsInput.input);
   }
 
   private _handleKeyDown(event: KeyboardEvent) {
@@ -174,7 +168,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
             />
           </svg>
           <div id="${this.inputId}-invalid" class="invalid-feedback">
-            ${this.invalidFeedback ? this.invalidFeedback : this.inputEl.validationMessage}
+            ${this.invalidFeedback ? this.invalidFeedback : this.validationMessage}
           </div>
         </div>`
       : html`${this._renderHintText()}`;
@@ -226,7 +220,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
             step=${ifDefined(this.step)}
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
-            value=${live(this.value)}
+            .value=${live(this.value.toString())}
             @sgds-change=${(e: Event) => this._handleChange(e)}
             @sgds-input=${(e: Event) => this._handleInputChange(e)}
             @sgds-invalid=${this._handleInvalidChange}

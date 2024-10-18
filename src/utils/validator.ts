@@ -32,7 +32,6 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
       /* Either input or sgds-input. For example, quantity-toggle uses sgds-input */
       this.input = this.shadowRoot.querySelector("input") || (await this.sgdsInput);
       if (!this.noValidation) {
-        console.log(this.input);
         this.inputValidationController.validateInput(this.input);
       }
     }
