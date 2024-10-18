@@ -27,7 +27,7 @@ export default class FormControlElement extends SgdsElement {
   @property() max: number;
 
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
-  @property({ type: Boolean, reflect: true }) hasFeedback = false;
+  @property({ type: String, reflect: true }) hasFeedback: "style" | "text" | "both";
 
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback: string;

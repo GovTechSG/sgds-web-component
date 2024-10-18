@@ -189,12 +189,13 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   }
 
   protected _renderInput() {
+    const wantFeedbackStyle = this.hasFeedback === "both" || this.hasFeedback === "style";
     return html`
       <div
         class="form-control-group ${classMap({
           disabled: this.disabled,
           readonly: this.readonly,
-          "is-invalid": this.invalid && this.hasFeedback,
+          "is-invalid": this.invalid && wantFeedbackStyle,
           "quantity-toggle": this.classList.contains("quantity-toggle")
         })}"
         @click=${this._handleClick}
@@ -244,7 +245,8 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
     `;
   }
   protected _renderFeedback() {
-    return this.invalid && this.hasFeedback
+    const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
+    return this.invalid && wantFeedbackText
       ? html` <div class="invalid-feedback-container">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path

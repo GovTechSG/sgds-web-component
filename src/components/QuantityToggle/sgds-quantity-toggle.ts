@@ -158,7 +158,9 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
   }
 
   protected _renderFeedback() {
-    return this.invalid && this.hasFeedback
+    const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
+    console.log({ wantFeedbackText });
+    return this.invalid && wantFeedbackText
       ? html` <div class="invalid-feedback-container">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path
@@ -227,6 +229,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
             ?disabled=${this.disabled}
             id=${this.inputId}
             ?invalid=${this.invalid}
+            hasFeedback=${ifDefined(this.hasFeedback !== "text" ? "style" : undefined)}
           ></sgds-input>
           <sgds-icon-button
             variant=${this.iconButtonVariant}
