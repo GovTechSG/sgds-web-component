@@ -144,6 +144,8 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
     event.preventDefault();
     event.stopPropagation();
     this.value = parseInt(sgdsInput.value) + parseInt(sgdsInput.step.toString());
+
+    this._validateOnClick(sgdsInput.input);
   }
 
   private async _onMinus(event: MouseEvent) {
@@ -155,6 +157,20 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
     } else {
       this.value = parseInt(sgdsInput.value) - parseInt(sgdsInput.step.toString());
     }
+
+    this._validateOnClick(sgdsInput.input);
+  }
+
+  /**
+   * Validates the input on button clicks of the toggle.
+   * Input is validated every time the button is click to update the invalid state
+   * to indiciate the validity of quantity toggle
+   * @param input native HTMLInputElement
+   */
+  private async _validateOnClick(input: HTMLInputElement) {
+    this.inputValidationController.setFormValue();
+    this.inputValidationController.validateInput(input);
+    this.invalid = !this.inputValidationController.checkValidity();
   }
 
   protected _renderFeedback() {
