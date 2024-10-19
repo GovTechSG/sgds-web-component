@@ -13,6 +13,7 @@ import { SgdsFormValidatorMixin } from "../../utils/validator";
 import { watch } from "../../utils/watch";
 import { SgdsSpinner } from "../Spinner/sgds-spinner";
 import inputStyle from "./input.css";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 /**
  * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
  *
@@ -22,7 +23,10 @@ import inputStyle from "./input.css";
  * @event sgds-blur - Emitted when input is not in focus.
  *
  */
-export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
+export class SgdsInput
+  extends SgdsFormValidatorMixin(ScopedElementsMixin(FormControlElement))
+  implements SgdsFormControl
+{
   static styles = [...FormControlElement.styles, inputStyle];
 
   /**@internal */
@@ -82,58 +86,52 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   /**The input's value attribute. */
   @property({ reflect: true }) value = "";
 
-  @state() protected _isTouched = false;
+  @state() private _isTouched = false;
 
-  protected labelId: string = genId("label");
+  private labelId: string = genId("label");
 
-  protected inputId = genId("input", "input");
+  private inputId = genId("input", "input");
 
-  // get form() {
-  //   return this._internals.form;
-  // }
+  /** Sets focus on the input. */
+  public focus(options?: FocusOptions) {
+    this.input.focus(options);
+  }
+  /** Sets blur on the input. */
+  public blur() {
+    this.input.blur();
+  }
 
-  get validity() {
+  /** Programatically sets the invalid state of the input. Pass in boolean value in the argument */
+  public setInvalid(bool: boolean) {
+    this.invalid = bool;
+  }
+
+  private get validity() {
     return this.inputValidationController.validity;
   }
 
-  get validationMessage() {
+  private get validationMessage() {
     return this.inputValidationController.validationMessage;
   }
 
-  get willValidate() {
-    return this.inputValidationController.willValidate;
-  }
-
-  checkValidity() {
-    return this.inputValidationController.checkValidity();
-  }
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  reportValidity() {
-    return this.inputValidationController.reportValidity();
-  }
-
-  validateInput() {
-    return this.inputValidationController.validateInput(this.input);
-  }
-
-  protected _handleFocus() {
+  private _handleFocus() {
     this.emit("sgds-focus");
   }
 
-  protected _handleBlur() {
+  private _handleBlur() {
     this._isTouched = true;
     this.emit("sgds-blur");
   }
-  protected _handleClick() {
+  private _handleClick() {
     this.focus();
   }
 
-  protected _handleChange(e: Event) {
+  private _handleChange(e: Event) {
     this.value = this.input.value;
     this.emit("sgds-change");
     super.handleChange(e);
   }
-  protected _handleInputChange(e: Event) {
+  private _handleInputChange(e: Event) {
     this.value = this.input.value;
     this.emit("sgds-input");
     super.handleInputChange(e);
@@ -159,36 +157,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
     }
   }
 
-  /** Sets focus on the input. */
-  public focus(options?: FocusOptions) {
-    this.input.focus(options);
-  }
-  /** Sets blur on the input. */
-  public blur() {
-    this.input.blur();
-  }
-
-  /** Programatically sets the invalid state of the input. Pass in boolean value in the argument */
-  public setInvalid(bool: boolean) {
-    this.invalid = bool;
-  }
-
-  protected _handleKeyDown(event: KeyboardEvent) {
-    const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
-
-    // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before
-    // submitting to allow users to cancel the keydown event if they need to
-    if (event.key === "Enter" && !hasModifier) {
-      setTimeout(() => {
-        // Prevent submission when enter is click on a submission in an Input Method Editor with isComposing
-        if (!event.defaultPrevented && !event.isComposing) {
-          // this.formSubmitController.submit();
-        }
-      });
-    }
-  }
-
-  protected _renderInput() {
+  private _renderInput() {
     const wantFeedbackStyle = this.hasFeedback === "both" || this.hasFeedback === "style";
     return html`
       <div
@@ -222,7 +191,6 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
           step=${ifDefined(this.step as number)}
           @input=${(e: Event) => this._handleInputChange(e)}
           @change=${(e: Event) => this._handleChange(e)}
-          @keydown=${this._handleKeyDown}
           @invalid=${() => this.setInvalid(true)}
           @focus=${this._handleFocus}
           @blur=${this._handleBlur}
@@ -244,7 +212,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
       </div>
     `;
   }
-  protected _renderFeedback() {
+  private _renderFeedback() {
     const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
     return this.invalid && wantFeedbackText
       ? html` <div class="invalid-feedback-container">
@@ -260,7 +228,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
         </div>`
       : html`${this._renderHintText()}`;
   }
-  protected _renderLabel() {
+  private _renderLabel() {
     const labelTemplate = html`
       <label
         for=${this.inputId}
@@ -274,7 +242,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
     `;
     return this.label && labelTemplate;
   }
-  protected _renderHintText() {
+  private _renderHintText() {
     const hintTextTemplate = html` <div id="${this.inputId}Help" class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }

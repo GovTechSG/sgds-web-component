@@ -12,6 +12,7 @@ import { SgdsFormValidatorMixin } from "../../utils/validator";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import SgdsInput from "../Input/sgds-input";
 import quantityToggleStyle from "./quantity-toggle.css";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
  *
@@ -22,7 +23,10 @@ import quantityToggleStyle from "./quantity-toggle.css";
  * @event sgds-input - Emitted when the control receives input and its value changes.
  *
  */
-export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
+export class SgdsQuantityToggle
+  extends SgdsFormValidatorMixin(ScopedElementsMixin(FormControlElement))
+  implements SgdsFormControl
+{
   static styles = [...FormControlElement.styles, svgStyles, quantityToggleStyle];
 
   /** @internal */
@@ -58,9 +62,6 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
 
   @queryAsync("sgds-input") sgdsInput: Promise<SgdsInput>;
 
-  @query("sgds-input") inputEl: HTMLInputElement;
-
-  // /** @internal The id forwarded to input element */
   private inputId: string = genId("quantity-toggle", "input");
   protected labelId: string = genId("label");
 
@@ -70,7 +71,6 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
       sgdsInput.value = "0";
     }
     this.value = parseInt(sgdsInput.value);
-    // this.inputValidationController.handleChange(e)
     super.handleChange(e);
   }
   protected async _handleInputChange(e: Event) {
@@ -83,25 +83,14 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
     super.handleInputChange(e);
     this.inputValidationController.validateInput(sgdsInput.input);
   }
-  get validity() {
+  private get validity() {
     return this.inputValidationController.validity;
   }
-  get validationMessage() {
+  private get validationMessage() {
     return this.inputValidationController.validationMessage;
   }
 
-  get willValidate() {
-    return this.inputValidationController.willValidate;
-  }
-  checkValidity() {
-    return this.inputValidationController.checkValidity();
-  }
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  reportValidity() {
-    return this.inputValidationController.reportValidity();
-  }
-
-  async resetFormControl() {
+  private async resetFormControl() {
     const sgdsInput = await this.sgdsInput;
     this.value = this.defaultValue;
     sgdsInput.input.value = this.value.toString();

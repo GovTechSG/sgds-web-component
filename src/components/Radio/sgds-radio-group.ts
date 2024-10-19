@@ -67,7 +67,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
    * radio requries a custom resetFormControl as the update of input value
    * requires to fire a reset event manually
    * */
-  resetFormControl() {
+  private resetFormControl() {
     this.value = this.input.value = this.defaultValue;
     this._updateInputValue("reset");
     this.resetValidity(this.input);
@@ -172,18 +172,12 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
     }
   }
 
-  private _handleInvalid(e: Event) {
-    e.preventDefault();
-    this.invalid = true;
-    this._radios.forEach(radio => (radio.invalid = true));
-  }
-
   private _updateCheckedRadio() {
     const radios = this._radios;
     radios.forEach(radio => (radio.checked = radio.value === this.value));
   }
 
-  protected _renderHintText() {
+  private _renderHintText() {
     const hintTextTemplate = html` <div class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }
