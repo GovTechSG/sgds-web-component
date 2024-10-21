@@ -1,0 +1,60 @@
+## Filled variants
+
+The default variant is `info`. Modify the `variant` prop to the intended value.
+
+- Use `info` alert to provide additional information to users that is related to their completion of current action or task. Info variant is using primary brand color.
+- Use `success` alert to communicate that an action has been successfully completed.
+- Use `danger` alert to alert users of a critical error or failure. Users may be prevented to proceed unitl the issue is rectified.
+- Use `warning` alert to alert users that are engaging in less desirable actions that may have unexpected results.
+- Use `neutral` alert to provide additional information to users that is not related to their completion of current action or task	
+
+Filled alerts are best for getting a user's attention. When in doubt, used outlined alert (shown in next section).
+
+<Canvas of={AlertStories.Variants}>
+  <Story of={AlertStories.Variants} />
+</Canvas>
+
+## Outlined variants
+
+Every variants have an outlined version of it. Outlined alerts are visually less disruptive for users.
+Use `outlined` prop to enable the outlined style  
+
+<Canvas of={AlertStories.OutlinedVariants}>
+  <Story of={AlertStories.OutlinedVariants} />
+</Canvas>
+
+## Dismissable 
+
+The dismissible prop adds a close button to the alert to allow the component to be removed from the DOM when no longer needed
+When the close button is clicked, it updates the `show` state of alert to false. 
+
+
+<Canvas of={AlertStories.Dismissable}>
+  <Story of={AlertStories.Dismissable} />
+</Canvas>
+
+## Icon 
+
+The leading icon with title is added via `slot="icon"`. 
+Adding of icons are optional. 
+
+<Canvas of={AlertStories.WithIcon}>
+  <Story of={AlertStories.WithIcon} />
+</Canvas>
+
+
+## Title 
+
+Title is added via `title` prop. Adding of title is optional.
+
+<Canvas of={AlertStories.WithTitle}>
+  <Story of={AlertStories.WithTitle} />
+</Canvas>
+
+## Alert link
+
+Use `<sgds-alert-link>` for links within the alert 
+
+<Canvas of={AlertStories.WithLink}>
+  <Story of={AlertStories.WithLink} />
+</Canvas>

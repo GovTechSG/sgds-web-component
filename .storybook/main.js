@@ -3,7 +3,11 @@ module.exports = {
   stories: [
     "../stories/frameworks/**/*.mdx",
     "../stories/getting-started/**/*.mdx",
-    "../stories/components/*.@(mdx|stories.@(js|jsx|ts|tsx))",
+    // "../stories/components/*.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/components/Button.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/components/Accordion.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/components/Alert.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/components/Stepper.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/*.mdx"
   ],
   addons: [

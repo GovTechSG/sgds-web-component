@@ -5,6 +5,7 @@ import SgdsElement from "../../base/sgds-element";
 import badgeStyle from "./badge.css";
 import { watch } from "../../utils/watch";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral";
 
 /**
@@ -23,7 +24,7 @@ export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral"
  * @cssprop --sgds-badge-border-color - The border color of the badge, only applicable when outlined prop is true
  *
  */
-export class SgdsBadge extends SgdsElement {
+export class SgdsBadge extends ScopedElementsMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, badgeStyle];
 
   /**@internal */
