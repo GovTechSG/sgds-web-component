@@ -1,4 +1,5 @@
 import { html, nothing } from "lit";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -23,7 +24,7 @@ export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral"
  * @cssprop --sgds-badge-border-color - The border color of the badge, only applicable when outlined prop is true
  *
  */
-export class SgdsBadge extends SgdsElement {
+export class SgdsBadge extends ScopedElementsMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, badgeStyle];
 
   /**@internal */
