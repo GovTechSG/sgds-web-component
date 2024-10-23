@@ -8,8 +8,8 @@ import type { SgdsInput, SgdsQuantityToggle } from "../src/components";
 describe("when minusBtn or plusBtn is clicked", () => {
   it("should decrease and increase the value by 1 respectively", async () => {
     const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="10"></sgds-quantity-toggle>`);
-    const minusBtn = el.shadowRoot?.querySelector("sgds-button[arialabel^='decrease by']") as HTMLButtonElement;
-    const plusBtn = el.shadowRoot?.querySelector("sgds-button[arialabel^='increase by']") as HTMLButtonElement;
+    const minusBtn = el.shadowRoot?.querySelector("sgds-icon-button[arialabel^='decrease by']") as HTMLButtonElement;
+    const plusBtn = el.shadowRoot?.querySelector("sgds-icon-button[arialabel^='increase by']") as HTMLButtonElement;
 
     minusBtn.click();
     await el.updateComplete;
@@ -24,7 +24,7 @@ describe("when minusBtn or plusBtn is clicked", () => {
 
   it("minusBtn is disabled when reaches 0 without minimum value set", async () => {
     const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="1"></sgds-quantity-toggle>`);
-    const minusBtn = el.shadowRoot?.querySelector("sgds-button[arialabel^='decrease by']") as HTMLButtonElement;
+    const minusBtn = el.shadowRoot?.querySelector("sgds-icon-button[arialabel^='decrease by']") as HTMLButtonElement;
 
     minusBtn.click();
     await el.updateComplete;
@@ -37,7 +37,7 @@ describe("when minusBtn or plusBtn is clicked", () => {
     const el = await fixture<SgdsQuantityToggle>(
       html`<sgds-quantity-toggle value="10" min="8"></sgds-quantity-toggle>`
     );
-    const minusBtn = el.shadowRoot?.querySelector("sgds-button[arialabel^='decrease by']") as HTMLButtonElement;
+    const minusBtn = el.shadowRoot?.querySelector("sgds-icon-button[arialabel^='decrease by']") as HTMLButtonElement;
 
     minusBtn.click();
     await el.updateComplete;
@@ -55,7 +55,7 @@ describe("when minusBtn or plusBtn is clicked", () => {
     const el = await fixture<SgdsQuantityToggle>(
       html`<sgds-quantity-toggle value="10" max="11"></sgds-quantity-toggle>`
     );
-    const plusBtn = el.shadowRoot?.querySelector("sgds-button[arialabel^='increase by']") as HTMLButtonElement;
+    const plusBtn = el.shadowRoot?.querySelector("sgds-icon-button[arialabel^='increase by']") as HTMLButtonElement;
 
     plusBtn.click();
     await el.updateComplete;
@@ -112,8 +112,8 @@ describe("when step", () => {
     const el = await fixture<SgdsQuantityToggle>(
       html`<sgds-quantity-toggle value="10" step="91"></sgds-quantity-toggle>`
     );
-    const minusBtn = el.shadowRoot?.querySelector("sgds-button[arialabel^='decrease by']") as HTMLButtonElement;
-    const plusBtn = el.shadowRoot?.querySelector("sgds-button[arialabel^='increase by']") as HTMLButtonElement;
+    const minusBtn = el.shadowRoot?.querySelector("sgds-icon-button[arialabel^='decrease by']") as HTMLButtonElement;
+    const plusBtn = el.shadowRoot?.querySelector("sgds-icon-button[arialabel^='increase by']") as HTMLButtonElement;
 
     minusBtn.click();
     await el.updateComplete;
@@ -130,8 +130,8 @@ describe("when step", () => {
 describe("when step changes", () => {
   it("should change arialabel accordingly", async () => {
     const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle step="5"></sgds-quantity-toggle>`);
-    const minusBtn = el.shadowRoot?.querySelector("sgds-button[arialabel^='decrease by']") as HTMLButtonElement;
-    const plusBtn = el.shadowRoot?.querySelector("sgds-button[arialabel^='increase by']") as HTMLButtonElement;
+    const minusBtn = el.shadowRoot?.querySelector("sgds-icon-button[arialabel^='decrease by']") as HTMLButtonElement;
+    const plusBtn = el.shadowRoot?.querySelector("sgds-icon-button[arialabel^='increase by']") as HTMLButtonElement;
 
     expect(minusBtn).to.not.be.undefined;
     expect(minusBtn.getAttribute("arialabel")).to.equal("decrease by 5");
@@ -156,7 +156,7 @@ describe("methods", () => {
 });
 
 describe("in form context", () => {
-  it("resets to defaultValue when reset sgds-button is clicked", async () => {
+  it("resets to defaultValue when reset sgds-icon-button is clicked", async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
         <sgds-quantity-toggle name="a" value="5"></sgds-quantity-toggle>
