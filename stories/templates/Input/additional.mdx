@@ -1,9 +1,60 @@
-## Validation
+## Disabled 
 
-`SgdsInput` runs native HTMLInputElement methods to check on the [constraint validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation) of the input and applies our own validation stylings
+Add `disabled` prop to disabled the input
 
-Set `hasFeedback` to true to enable sgds validation stylings.
-
-<Canvas of={InputStories.InputValidation}>
-  <Story of={InputStories.InputValidation} />
+<Canvas of={InputStories.DisabledInput}>
+  <Story of={InputStories.DisabledInput} />
 </Canvas>
+
+## Invalid 
+
+Add `hasFeedback` and `invalid` prop to visually enable invalid style of input. 
+Set invalid message with `invalidFeedback` prop
+
+<Canvas of={InputStories.InvalidInput}>
+  <Story of={InputStories.InvalidInput} />
+</Canvas>
+
+## Valid 
+
+Add `hasFeedback` and `valid` prop to visually enable valid style of input
+
+<Canvas of={InputStories.ValidInput}>
+  <Story of={InputStories.ValidInput} />
+</Canvas>
+
+## Loading  
+
+Add `loading` prop to visually enable loading icon in input
+
+<Canvas of={InputStories.LoadingInput}>
+  <Story of={InputStories.LoadingInput} />
+</Canvas>
+
+## Read only  
+
+Add `readonly` prop for a readonly input
+
+<Canvas of={InputStories.ReadonlyInput}>
+  <Story of={InputStories.ReadonlyInput} />
+</Canvas>
+
+## Prefix and suffix 
+
+Use the string type `prefix` or `suffix` prop to add more indication and meaning to the input value
+
+<Canvas of={InputStories.PrefixInput}>
+  <Story of={InputStories.PrefixInput} />
+</Canvas>
+
+<Canvas of={InputStories.SuffixInput}>
+  <Story of={InputStories.SuffixInput} />
+</Canvas>
+
+## Leading Icon <sgds-badge show> work in progress </sgds-badge>
+
+
+## Validation  <sgds-badge show> work in progress </sgds-badge>
+
+
+

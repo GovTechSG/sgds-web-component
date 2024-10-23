@@ -8,6 +8,7 @@ module.exports = {
     "../stories/components/Accordion.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Alert.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Stepper.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/components/Input.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/*.mdx"
   ],
   addons: [
