@@ -12,8 +12,12 @@ b {
 }
 
 a {
-  color: #2f5fd0;
-  text-decoration: underline;
+  color: #0049dc;
+  
+}
+
+a:hover {
+  color: #0022b9;
 }
 
 .sgds-masthead {
@@ -75,13 +79,13 @@ a {
 .sgds-masthead-button {
   display: flex;
   gap: 4px;
-  color: light-dark(#5A42C0, #9288F0);
+  color: light-dark(#0049dc, #7fb5ff);
   align-items: center;
   cursor: pointer;
 }
 
 .sgds-masthead-button:hover {
-  color: #4371d6;
+  color: light-dark(#0022b9, #5592ff);
 }
 
 .panel {
@@ -138,12 +142,13 @@ a {
 }
 
 a.trusted-websites-link {
-  color: #2f5fd0;
+  color: light-dark(#0049dc, #7fb5ff);
   width: fit-content;
+  text-decoration: underline;
 }
 
 a.trusted-websites-link:hover {
-  color: #4371d6;
+  color: light-dark(#0022b9, #5592ff);
 }
 
 @media screen and (max-width: 768px) {
