@@ -1,5 +1,13 @@
 import { MockStepper } from "../../mocks/stepper.ts";
 
+export const Orientation = {
+  render: Template.bind({}),
+  name: "Orientation",
+  args: { ...args, orientation: "vertical" },
+  parameters: {},
+  tags: ["!dev"]
+};
+
 const MockStepperTemplate = () => Object.assign(new MockStepper());
 
 export const StepperExample = {

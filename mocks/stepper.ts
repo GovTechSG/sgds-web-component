@@ -155,7 +155,7 @@ export class MockStepper extends LitElement {
 
   render() {
     return html`
-      <div style="background:#FAFAFA;padding:30px;">
+      <div style="padding:30px;">
         <h2>Stepper</h2>
         <sgds-stepper
           id="myStepper"
