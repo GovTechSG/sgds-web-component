@@ -6,7 +6,7 @@ import prettier from 'prettier';
 import { makeArgTypes } from './makeArgTypes.mjs';
 import { methodsTable, writeParams } from './methodsTable.mjs';
 import { getAllComponents, getSgdsComponents, pascalToKebab } from './shared.mjs';
-
+import packageJson from "../package.json" assert {type: 'json'}
 const storiesDir = path.join('stories/components');
 
 // Clear build directory
@@ -42,7 +42,7 @@ for (const [key, value] of Object.entries(groupedComponents)) {
 
   const mdxSource = prettier.format(
     `
-import { Canvas, Meta, Story, ArgTypes } from "@storybook/blocks";
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
 import { html } from "lit-html";
 import * as ${key}Stories from './${key}.stories';
 
@@ -54,7 +54,28 @@ ${summary ? summary +"\n" : "\n"}
   <Story of={${key}Stories.Basic} />
 </Canvas>
 
+## Import
+
+### React
+
+\`\`\` jsx
+import Sgds${key}  from "@govtechsg/sgds-web-component/react/${key.toLowerCase()}/index.js";
+\`\`\`
+
+### Others (Vue, Angular, plain HTML etc.)
+
+\`\`\`js
+import "@govtechsg/sgds-web-component/components/${key}";
+\`\`\`
+
+### CDN 
+
+\`\`\`html
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@${packageJson.version}/components/${key}/index.umd.js"></script>
+\`\`\`
+
 ## API
+
 ${ArgsType.join('\n')}
 
 
