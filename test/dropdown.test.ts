@@ -236,7 +236,7 @@ describe("sgds-dropdown", () => {
     const el = await fixture(html`<sgds-dropdown></sgds-dropdown>`);
     assert.shadowDom.equal(
       el,
-      `<div>
+      `<div class="dropdown">
         <sgds-button
           outlined
           role="button"
