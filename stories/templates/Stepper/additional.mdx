@@ -24,6 +24,16 @@ By default, stepper is of `horizontal` orientation. Set stepper to vertical with
 
 ## Clickable steps
 
+By default steps indicator are non-interactive. To enable steps to be clickable, add `clickable` prop. 
+
+    Note that the steps are only backwards clickable. 
+    To allow users to go back and forth, please create the action buttons with the methods from the methods table above.
+
+
+<Canvas of={StepperStories.Clickable}>
+  <Story of={StepperStories.Clickable} />
+</Canvas>
+
 ## Stepper in a form context
 
 The example below is build with Lit library. As each frontend library has their own lifecycle hooks and unique syntax for props and event handling, 
@@ -31,11 +41,11 @@ you will need to manage the rendering of components on your end. Here is a gener
 Reference the API table and methods table carefully when creating the Stepper component.
 
 1. Build your child components. The stepper example has three steps and each step has its own component.
-  These three components will be the direct child of your StepperComponent
+  These three components will be the direct child of your StepperComponent : 
 
-  Step 1: Personal Details 
-  Step 2: Address and Contact details 
-  Step 3: Review  
+  - Step 1: Personal Details 
+  - Step 2: Address and Contact details 
+  - Step 3: Review  
 
 2. Create the parent component. This is where all the state of `steps` and `activeStep` will be managed and should persist. 
   This component should capture and store any user input. This component should handle the dynamic rendering of child components depending on the current `activeStep`.
@@ -47,7 +57,7 @@ Reference the API table and methods table carefully when creating the Stepper co
   <Story of={StepperStories.StepperExample} />
 </Canvas>
 
-## Working Example in different frameworks
+## Working Examples
 
 ### Angular
 
@@ -58,7 +68,9 @@ Please see a <a target="_blank" href="https://stackblitz.com/github/clukhei/angu
 Please see a <a target="_blank" href="https://stackblitz.com/github/tonghauhive/sgds-vue-stepper?file=src%2Fcomponents%2FStepper.vue">working example of stepper on an Vue app</a>
 
 
-## Contributions from the community
+## Contributions
 
 We accept contributions from the community! 
-If you have an SgdsStepper to showcase from a different framework please raise a PR or raise an issue with your stackblitz example on our <a href="https://github.com/GovTechSG/sgds-web-component" target="_blank">github page</a>
+If you have an SgdsStepper to showcase from a different framework or a better example to showcase
+please raise a PR or raise an issue with your stackblitz example on our <a href="https://github.com/GovTechSG/sgds-web-component" target="_blank">github page</a>.
+If the examples above are not working, please also  notify us by raising a github issue. 

@@ -38,7 +38,7 @@ export class SgdsStepper extends SgdsElement {
   /** When true, the stepper's steps will be clickable */
   @property({ type: Boolean, reflect: true }) clickable = false;
 
-  /**Gets or sets the default activeStep used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  /** @internal Gets or sets the default activeStep used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("activeStep")
   defaultActiveStep = 0;
 
