@@ -126,7 +126,7 @@ export class SgdsMasthead extends SgdsElement {
                     class="trusted-websites-link"
                     rel="noreferrer"
                     target="_blank"
-                    >Trusted</a
+                    >Trusted websites</a
                   >
                 </div>
               </div>
