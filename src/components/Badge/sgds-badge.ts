@@ -6,7 +6,6 @@ import SgdsElement from "../../base/sgds-element";
 import badgeStyle from "./badge.css";
 import { watch } from "../../utils/watch";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral";
 
 /**

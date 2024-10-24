@@ -24,7 +24,8 @@ module.exports = {
           }
         }
       }
-    }
+    },
+    "@storybook/addon-themes",
   ],
   framework: {
     name: "@storybook/web-components-vite",

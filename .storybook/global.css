@@ -31,3 +31,7 @@ sgds-faq-grid {
   flex-direction: column;
   gap: var(--sgds-gap-2-xs);
 }
+
+.docs-story{
+  background: var(--sgds-default-bg);
+}
