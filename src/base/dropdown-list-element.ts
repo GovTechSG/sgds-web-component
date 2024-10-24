@@ -83,6 +83,10 @@ export class DropdownListElement extends DropdownElement {
           return this._setMenuItem(this.prevDropdownItemNo, false);
         }
       case TAB:
+        if (!this.menuIsOpen) {
+          return;
+        }
+
         e.preventDefault();
         if (e.shiftKey) {
           if (this.prevDropdownItemNo < 0) {

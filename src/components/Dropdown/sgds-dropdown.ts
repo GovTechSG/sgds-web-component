@@ -74,6 +74,20 @@ export class SgdsDropdown extends ScopedElementsMixin(DropdownListElement) {
   @queryAsync("sgds-button")
   private dropdownRef: Promise<SgdsButton>;
 
+  private async _handleCloseMenu() {
+    const button = await this.dropdownRef;
+    button.focus();
+  }
+
+  async connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener("sgds-hide", this._handleCloseMenu);
+  }
+
+  async disconnectedCallback() {
+    this.removeEventListener("sgds-hide", this._handleCloseMenu);
+  }
+
   async firstUpdated() {
     super.firstUpdated();
     if (this.menuIsOpen) {
@@ -83,7 +97,7 @@ export class SgdsDropdown extends ScopedElementsMixin(DropdownListElement) {
   }
   render() {
     return html`
-      <div>
+      <div class="dropdown">
         <sgds-button
           outlined
           role="button"

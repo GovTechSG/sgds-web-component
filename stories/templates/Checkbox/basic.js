@@ -16,6 +16,10 @@ export const Template = args => {
       ?isInline=${args.isInline}
       >Check me</sgds-checkbox
     >
+    <sgds-checkbox
+      >Lorem ipsum dolor sit amet. Et itaque natus sit laborum voluptatem aut rerum ducimus eum tenetur molestias quo
+      reiciendis ratione aut eaque voluptates est</sgds-checkbox
+    >
   `;
 };
 export const args = {
