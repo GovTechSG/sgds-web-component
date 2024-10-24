@@ -124,6 +124,8 @@ describe("<sgds-radio-group>", () => {
         </sgds-radio-group>
       `
     );
+    el.invalid = true;
+    await el.updateComplete;
     const invalidFeedback = el.shadowRoot?.querySelector("div.invalid-feedback");
     expect(invalidFeedback?.textContent).to.equal("");
   });

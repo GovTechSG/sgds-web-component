@@ -1,3 +1,4 @@
+"use client"
 import SgdsButton from "@govtechsg/sgds-web-component/react/button/index.js";
 import dynamic from "next/dynamic";
 import { useState } from "react";
