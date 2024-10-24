@@ -1,4 +1,4 @@
-import { withThemeByClassName } from '@storybook/addon-themes';
+import { withThemeByClassName } from "@storybook/addon-themes";
 import { setCustomElementsManifest } from "@storybook/web-components";
 import "@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js";
 import customElements from "../custom-elements.json";
@@ -7,7 +7,7 @@ import "../lib/themes/day.css";
 import "../lib/themes/night.css";
 import "./global.css";
 import sgdsTheme from "./sgdsTheme";
-  
+
 export const setCustomElementsManifestWithOptions = (
   customElements: any,
   options: { privateFields?: boolean }
@@ -40,7 +40,7 @@ export const parameters = {
       headingSelector: "h1, h2, h3",
       title: "Table of Contents",
       disable: false
-    },
+    }
   },
   controls: {
     //  disable: true,
@@ -64,9 +64,9 @@ export const tags = ["autodocs"];
 export const decorators = [
   withThemeByClassName({
     themes: {
-      day: '',
-      night: 'sgds-night-theme',
+      day: "",
+      night: "sgds-night-theme"
     },
-    defaultTheme: 'day',
-  }),
-]
+    defaultTheme: "day"
+  })
+];
