@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { state } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import mastheadStyle from "./masthead.css";
 import svgStyles from "../../styles/svg.css";
@@ -8,7 +8,8 @@ import anchorStyles from "../../styles/anchor.css";
 /**
  * @summary All .gov.sg digital services shall adopt The Official Government Banner for every page in the digital service and be placed at the top of the page.
  *
- * @cssproperty --sgds-masthead-padding-x - Sets the container padding left and right
+ * @cssproperty --masthead-max-width - Sets the maximum width of the masthead container
+ * @cssproperty --masthead-padding-x - Sets the container padding left and right
  *
  */
 export class SgdsMasthead extends SgdsElement {
@@ -126,7 +127,7 @@ export class SgdsMasthead extends SgdsElement {
                     class="trusted-websites-link"
                     rel="noreferrer"
                     target="_blank"
-                    >Trusted</a
+                    >Trusted websites</a
                   >
                 </div>
               </div>
