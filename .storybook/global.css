@@ -29,7 +29,7 @@ sgds-faq-grid {
 .d-flex-column {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-gap-2-xs);
+  gap: var(--sgds-gap-sm);
 }
 
 .docs-story{
