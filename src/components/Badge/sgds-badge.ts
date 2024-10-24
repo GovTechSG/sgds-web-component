@@ -57,7 +57,7 @@ export class SgdsBadge extends ScopedElementsMixin(SgdsElement) {
   }
 
   render() {
-    return this.show
+    return (this.dismissible && this.show) || !this.dismissible
       ? html`
           <div
             class="  
