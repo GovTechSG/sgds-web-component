@@ -1,3 +1,33 @@
+## v2.1.2 (2024-09-30)
+
+### Fix
+
+- **checkbox, radio**: layout of label against input
+
+## v2.1.1 (2024-09-18)
+
+### Fix
+
+- **build**: restrict use client to react components only
+
+## v2.1.0 (2024-09-16)
+
+### Feat
+
+- **react**: add use client directives to react components [skip-cd] (#216)
+- **react**: add use client directives to react components
+
+## v2.0.1 (2024-09-12)
+
+### Fix
+
+- **masthead**: remove css nestings (#215)
+- **masthead**: remove css nestings
+
+### Refactor
+
+- **sgds-element**: remove css nestings from sgds-element
+
 ## v2.0.0 (2024-09-03)
 
 See [migration guide](./docs/Migration.md)

@@ -2,39 +2,39 @@
 
 Web components are client components as they rely heavily on document and window API that is only present in the browser.
 
-Use "use client" directive to indicate that the components are Client components.
 
-### Example - Client components
+  >From version 2.1.0, the React-wrapped web components will be exported with the "use client" directives following 
+  ><a target="_blank" href="https://github.com/reactjs/rfcs/blob/main/text/0227-server-module-conventions.md#basic-example">NextJS 13 directives</a> .
+  ><strong>Users importing our react-wrapped web components no longer need to add the "use client" directive.</strong>
+
+
+ ### Usage example 
 
 ```jsx
-"use client";
-import SgdsMasthead from "@govtechsg/sgds-web-component/react/masthead/index.js";
+// layout.ts
+import SgdsMasthead from "@govtechsg/sgds-web-component/react/masthead/index.js"
 
-const Masthead = () => {
+export default function RootLayout() {
   return (
-      <SgdsMasthead></SgdsMasthead>
+    <html lang="en">
+      <body>
+        <SgdsMasthead />
+      </body>
+    </html>
   );
-};
-
-export default Masthead;
+}
 ```
+For certain components, you might encounter console warnings from NextJS that `ShadowRoot is not defined` or `windows is not defined`. Such components needs to be completely client side rendered. The "use client" directive is insufficient as the component is [still pre-rendered on the server and hydrated on the client](https://nextjs.org/docs/app/building-your-application/rendering/client-components). In the server, there is no concept of `windows` and `ShadowRoot`.
 
-For certain components, you might encounter console warnings from NextJS that `ShadowRoot is not defined` or `windows is not defined`. Such components needs to be completely client side rendered. Adding "use client" is insufficient as the component is [still pre-rendered on the server and hydrated on the client](https://nextjs.org/docs/app/building-your-application/rendering/client-components). In the server, there is no concept of `windows` and `ShadowRoot`.
-
-For such cases, import the components like so
+For such cases, re-export the components like so:
 
 ```jsx
-"use client";
 import dynamic from "next/dynamic";
 const SgdsActionCard = dynamic(() => import("@govtechsg/sgds-web-component/react/action-card/index.js"), {
   ssr: false
 });
 
-const ActionCard = () => {
-  return <SgdsActionCard></SgdsActionCard>;
-};
-
-export default ActionCard;
+export default SgdsActionCard;
 ```
 
 #### Demo
