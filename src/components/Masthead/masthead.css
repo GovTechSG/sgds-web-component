@@ -1,6 +1,6 @@
 :host {
-  --sgds-masthead-max-width: 1440px;
-  --sgds-masthead-padding-x: 2rem;
+  --masthead-max-width: 1440px;
+  --masthead-padding-x: 2rem;
 }
 
 b {
@@ -33,10 +33,10 @@ a:hover {
 
 .container {
   width: 100%;
-  max-width: var(--sgds-masthead-max-width);
+  max-width: var(--masthead-max-width);
   margin-left: auto;
   margin-right: auto;
-  padding: 0.25rem var(--sgds-masthead-padding-x);
+  padding: 0.25rem var(--masthead-padding-x);
 }
 
 .sg-crest {
@@ -153,7 +153,7 @@ a.trusted-websites-link:hover {
 
 @media screen and (max-width: 768px) {
   .container {
-    --sgds-masthead-padding-x: 1rem;
+    --masthead-padding-x: 1rem;
   }
 
   .sgds-masthead-content .content-grid {

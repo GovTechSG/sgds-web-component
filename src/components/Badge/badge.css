@@ -89,3 +89,8 @@
 slot[name=leftIcon]::slotted(*){
   font-size: var(--sgds-icon-size-sm);
 } 
+
+slot::slotted(*){
+font-weight: normal;
+font-size: 14px;
+}

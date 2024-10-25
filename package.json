@@ -63,6 +63,7 @@
     "@commitlint/config-conventional": "^17.1.0",
     "@custom-elements-manifest/analyzer": "^0.6.4",
     "@esm-bundle/chai": "^4.3.4-fix.0",
+    "@etchteam/storybook-addon-css-variables-theme": "^3.0.0",
     "@open-wc/testing": "^3.0.0-next.5",
     "@playwright/test": "^1.45.1",
     "@rollup/plugin-node-resolve": "^11.2.1",
@@ -70,6 +71,7 @@
     "@storybook/addon-essentials": "^8.2.6",
     "@storybook/addon-links": "^8.2.6",
     "@storybook/addon-mdx-gfm": "^8.2.8",
+    "@storybook/addon-themes": "^8.3.6",
     "@storybook/blocks": "^8.2.7",
     "@storybook/test": "^8.2.6",
     "@storybook/web-components": "^8.2.6",
@@ -123,6 +125,7 @@
     "sass-loader": "^13.0.2",
     "sinon": "^14.0.0",
     "storybook": "^8.2.6",
+    "style-loader": "^4.0.0",
     "typescript": "^5.0.4",
     "vite": "^4.4.9"
   },

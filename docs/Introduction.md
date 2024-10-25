@@ -6,9 +6,14 @@
 
 <div class="home-card-container mt-5">
     <sgds-card class="col intro">
-        <span slot="card-title">SGDS v2+ <i class="bi bi-filetype-scss"></i></span>
+        <span slot="card-title">SGDS v3 <i class="bi bi-filetype-scss"></i></span>
         <a slot="card-link" href="https://designsystem.tech.gov.sg/" target="_blank">Learn more</a>
         <p slot="card-text">The components are shipped with SGDS v2 styles and can be used straight out of the box.</p>
+    </sgds-card>
+     <sgds-card class="col intro">
+        <span slot="card-title">About web components <i class="bi bi-puzzle"></i></span>
+        <a slot="card-link" href="https://custom-elements-everywhere.com/" target="_blank">Learn more</a>
+        <p slot="card-text">Unfamiliar with web components? Find out more about web components.</p>
     </sgds-card>
      <sgds-card class="col intro">
         <span slot="card-title">Framework agnostic <i class="bi bi-puzzle"></i></span>

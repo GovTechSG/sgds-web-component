@@ -1,6 +1,37 @@
-## Validation
+## Labels
 
-`SgdsRadioGroup` runs native HTMLInputElement methods to check on the [constraint validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation) of the input and applies our own validation stylings
+It is always important to label your form components. 
+
+Use `label` prop in `sgds-radio-group` to provide a context for the entire radio group.
+Add labels to individual `sgds-radio` through its default slot 
+
+<Canvas of={RadioStories.Basic}>
+  <Story of={RadioStories.Basic} />
+</Canvas>
+
+## Invalid 
+
+Radio button's invalid styles are controlled by the radio group.
+To enable SGDS form validation styles set `hasFeedback` to true. 
+Add your custom invalid feedback message via `invalidFeedback` and control the stylings of the radio group with `invalid` boolean prop.
+
+`sgds-radio-group` controls and updates the `invalid` prop in its child `sgds-radio` buttons.
+
+<Canvas of={RadioStories.Invalid}>
+  <Story of={RadioStories.Invalid} />
+</Canvas>
+
+## Disabled 
+
+Disabled individual `sgds-radio` using the `disabled` prop.
+
+<Canvas of={RadioStories.Disabled}>
+  <Story of={RadioStories.Disabled} />
+</Canvas>
+
+## Validation <sgds-badge show> work in progress </sgds-badge>
+
+{/* `SgdsRadioGroup` runs native HTMLInputElement methods to check on the [constraint validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation) of the input and applies our own validation stylings
 
 Set `hasFeedback` to true to enable sgds validation stylings.
 
@@ -9,4 +40,4 @@ Try submitting the required form below without clicking on any radio buttons to 
 
 <Canvas of={RadioStories.Validation}>
   <Story of={RadioStories.Validation} />
-</Canvas>
+</Canvas> */}

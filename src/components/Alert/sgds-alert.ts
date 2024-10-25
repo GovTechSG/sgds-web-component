@@ -57,7 +57,7 @@ export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
   }
 
   @queryAssignedNodes({ slot: "icon", flatten: true })
-  _iconNodes!: Array<Node>;
+  private _iconNodes!: Array<Node>;
 
   firstUpdated() {
     if (this._iconNodes.length === 0) {

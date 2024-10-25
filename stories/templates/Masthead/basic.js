@@ -4,4 +4,6 @@ export const Template = ({ fluid }) => html` <sgds-masthead ?fluid=${fluid}></sg
 
 export const args = {};
 
-export const parameters = {};
+export const parameters = {
+  layout: "fullscreen"
+};
