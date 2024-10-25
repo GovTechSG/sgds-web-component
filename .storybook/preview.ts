@@ -53,6 +53,7 @@ export const parameters = {
         ["Introduction", "Installation", "Imports"],
         "Usage",
         "Frameworks",
+        "Style",
         "Troubleshooting",
         "Components",
         "Patterns",
