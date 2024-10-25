@@ -1,0 +1,18 @@
+name: Sync to Gist
+on:
+  push:
+    branches:
+      - '3.0.0-alpha' 
+      - 'lab'
+jobs:
+  Root-Gist:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+        - name: Gist Repo Sync
+          uses: pentatonicfunk/action-gist-repo-sync@v1.8
+          with:
+            gist_token: ${{ secrets.GIST_TOKEN }}
+            gist_id: 425e29332ec837d9ea4bbe90ff8d4a37
+            source_path: ./src/themes/root.css

@@ -28,7 +28,6 @@ const groupedComponents = groupBy(components, (k, v) => {
 
 for (const [key, value] of Object.entries(groupedComponents)) {
   const allMembers = value.map(i => i.members).flat().filter(member => !(member.privacy && member.privacy === 'private'))
-  if (key==="Radio")console.log(value)
   const methodsMeta = methodsTable(value);
   const summary = value.filter(i => i.summary).map(i => i.summary).join('<br/>')
   const args = allMembers.filter(member => member.kind === 'field');

@@ -40,12 +40,11 @@ We are monitoring and evaluating these libraries to help recommend a solution fo
 
 Read more about the <a href="https://web.dev/articles/declarative-shadow-dom" target="_blank">declarative shadow dom </a>.     
 
-#### Search Engine Optimisation
+### Search Engine Optimisation
 
-Its a myth in 2024 that search engine crawlers like Google and Bing cannot unravel a javascript application. They can , and this means client side rendering does not mean poor SEO! That said, one may argue that it is faster for search engine crawlers to index a pre-rendered HTML page from the SSR apps without running javascript.
+Its a myth in 2024 that search engine crawlers like Google and Bing cannot unravel a javascript application. They can , and this means client side rendering does not mean poor SEO! 
 
-As such while constructing our web components, we keep it in mind to make SEO critical information to be part of the light DOM. SEO critical information are usually the textual content you would want to appear in the search engine searches.
-
+While constructing our web components, we keep it in mind to make SEO critical information to be part of the light DOM. SEO critical information are usually the textual content or links you would want to be crawled.
 
 We do it by first separating our SEO critical components from non-SEO critical components (because why would one need a progress bar or a spinner or a datepicker to be crawled?)
 
@@ -78,7 +77,9 @@ HTML content rendered from the light DOM are available in the HTML that is pre-r
 As a developer user, it is also important to be mindful of using the right HTML tags for SEO.  
 For example, using an anchor tag for links, header tags for header contents. 
 
-<img href="./static/seo.png" />
+<img src="/poor-seo.svg" alt="poorly optimised for seo" />
+<br/>
+<img src="/good-seo.svg" alt="better optimised for seo" />
 
 Readings 
 - https://dev.to/stuffbreaker/seo-and-web-components-2023-edition-3l6i

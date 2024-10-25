@@ -40,5 +40,6 @@ module.exports = {
         viteConfigPath: "./.storybook/storybookVite.config.js"
       }
     }
-  }
+  },
+  staticDirs: ["./static"]
 };
