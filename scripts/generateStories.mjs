@@ -28,11 +28,19 @@ const groupedComponents = groupBy(components, (k, v) => {
 
 for (const [key, value] of Object.entries(groupedComponents)) {
   const allMembers = value.map(i => i.members).flat().filter(member => !(member.privacy && member.privacy === 'private'))
-
+  if (key==="Radio")console.log(value)
   const methodsMeta = methodsTable(value);
   const summary = value.filter(i => i.summary).map(i => i.summary).join('<br/>')
   const args = allMembers.filter(member => member.kind === 'field');
   const mdxFilePath = path.join(storiesDir, `${key}.mdx`);
+  const reactComponentPaths = value.map(v => {
+    const folderName = v.tagName.replace("sgds-", "")
+    return `
+    \`\`\` jsx
+    import ${v.name}  from "@govtechsg/sgds-web-component/react/${folderName}/index.js";
+    \`\`\`
+    `
+  }).join('')
   const ArgsType = value.map(
     component =>
       `### ${component.tagName}
@@ -58,9 +66,7 @@ ${summary ? summary +"\n" : "\n"}
 
 ### React
 
-\`\`\` jsx
-import Sgds${key}  from "@govtechsg/sgds-web-component/react/${key.toLowerCase()}/index.js";
-\`\`\`
+${reactComponentPaths}
 
 ### Others (Vue, Angular, plain HTML etc.)
 

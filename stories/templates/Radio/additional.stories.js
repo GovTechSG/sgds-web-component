@@ -20,3 +20,19 @@ export const Validation = {
   parameters: {},
   tags: ["!dev"]
 };
+
+export const Invalid = {
+  render: Template.bind({}),
+  name: "Invalid styles",
+  args: { ...args, hasFeedback: true, invalidFeedback: "Feedback", invalid: true },
+  parameters: {},
+  tags: ["!dev"]
+};
+
+export const Disabled = {
+  render: Template.bind({}),
+  name: "Disabled",
+  args: { ...args, disabled: true },
+  parameters: {},
+  tags: ["!dev"]
+};

@@ -29,16 +29,13 @@ export class SgdsSwitch extends SgdsElement {
   /**@internal */
   @query('input[type="checkbox"]') input: HTMLInputElement;
 
-  // /** For aria-label when there is no appropriate text label visible */
-  // @property({ type: String, reflect: true }) ariaLabel: string;
-
   /** Draws the switch in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
 
   /** Disables the switch (so the user can't check / uncheck it). */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  /** @internal Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("checked")
   defaultChecked = false;
 
