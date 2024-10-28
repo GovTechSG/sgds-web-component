@@ -156,6 +156,7 @@
   /* Primitive - Line Height */
   --sgds-line-height-body: 1.2;
   --sgds-line-height-heading: 1.5;
+  --sgds-line-height-min: 0.2;
 
   /* Primitive - Opacity */
   --sgds-opacity-0: 0;
