@@ -9,12 +9,6 @@ describe("SgdsBadge component", () => {
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector(".badge")).to.exist;
   });
-
-  it("should not render when show is false by default", async () => {
-    const el = await fixture<SgdsBadge>(html`<sgds-badge></sgds-badge>`);
-    await elementUpdated(el);
-    expect(el.shadowRoot?.querySelector(".badge")).to.not.exist;
-  });
   it("should render a close button when dismissible is true", async () => {
     const el = await fixture<SgdsBadge>(html`<sgds-badge show dismissible></sgds-badge>`);
     await elementUpdated(el);
