@@ -6,13 +6,13 @@
 
 <div class="home-card-container mt-5">
     <sgds-card class="col intro">
-        <span slot="card-title">SGDS v3 <i class="bi bi-filetype-scss"></i></span>
+        <span slot="card-title">SGDS v3</span>
         <a slot="card-link" href="https://designsystem.tech.gov.sg/" target="_blank">Learn more</a>
-        <p slot="card-text">The components are shipped with SGDS v2 styles and can be used straight out of the box.</p>
+        <p slot="card-text">The component library for SGDS v3. New skins and dark theme introduced</p>
     </sgds-card>
      <sgds-card class="col intro">
         <span slot="card-title">About web components <i class="bi bi-puzzle"></i></span>
-        <a slot="card-link" href="https://custom-elements-everywhere.com/" target="_blank">Learn more</a>
+        <a slot="card-link" href="/docs/getting-started-about-sgds-web-components--docs" target="_blank">Learn more</a>
         <p slot="card-text">Unfamiliar with web components? Find out more about web components.</p>
     </sgds-card>
      <sgds-card class="col intro">
@@ -22,12 +22,12 @@
     </sgds-card>
      <sgds-card stretchedLink class="col intro">
         <span slot="card-title">Customisable with CSS <i class="bi bi-filetype-css"></i></span>
-        <a slot="card-link" href="/story/getting-started-usage-stylings--page" target="_self">Learn more</a>
-        <p slot="card-text">Components are customisable with cssparts, css custom variables and class-like properties.</p>
+        <a slot="card-link" href="/docs/style-theming--docs" target="_self">Learn more</a>
+        <p slot="card-text">Change up the default theme via CSS variables</p>
     </sgds-card>
      <sgds-card class="col intro">
         <span slot="card-title">Works with CDNs <i class="bi bi-truck"></i></span>
-        <a slot="card-link" href="/story/getting-started-installation--page" target="_self">Learn more</a>
+        <a slot="card-link" href="/docs/getting-started-installation--docs" target="_self">Learn more</a>
         <p slot="card-text">Besides whole library CDN, each component also has its own CDN.</p>
     </sgds-card>
 <sgds-card class="col intro">
@@ -42,6 +42,6 @@
 <sgds-card class="col intro">
         <span slot="card-title">Extendable <i class="bi bi-bricks"></i></span>
         <p slot="card-text">Our components are built with LitElement and are extendable. Use them as building blocks to create your complex component. </p>
-        <a slot="card-link" href="/story/getting-started-usage-extending-the-library--page" target="_self">Learn more</a>
+        <a slot="card-link" href="/docs/usage-extending-the-library--docs" target="_self">Learn more</a>
     </sgds-card>
 </div>

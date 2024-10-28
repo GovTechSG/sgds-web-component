@@ -1,8 +1,11 @@
 import remarkGfm from "remark-gfm";
 module.exports = {
   stories: [
-    "../stories/frameworks/**/*.mdx",
-    "../stories/getting-started/**/*.mdx",
+    "../stories/style/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/usage/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/migration/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/frameworks/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/getting-started/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     // "../stories/components/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Accordion.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Alert.@(mdx|stories.@(js|jsx|ts|tsx))",

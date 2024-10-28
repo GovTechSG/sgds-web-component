@@ -5,6 +5,7 @@ import customElements from "../custom-elements.json";
 import "../lib/index.js";
 import "../lib/themes/day.css";
 import "../lib/themes/night.css";
+import "../lib/css/sgds.css";
 import "./global.css";
 import sgdsTheme from "./sgdsTheme";
 
@@ -54,6 +55,7 @@ export const parameters = {
         "Migration",
         "Usage",
         "Frameworks",
+        ["Angular", "Vue", "React", "NextJS"],
         "Style",
         "Troubleshooting",
         "Components",

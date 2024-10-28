@@ -59,6 +59,7 @@ h6 {
   color: var(--sgds-header-color);
   font-family: var(--sgds-font-family-brand);
   font-style: normal;
+  margin-top: var(--sgds-margin-none);
 }
 h1,
 h2,
@@ -92,7 +93,7 @@ h2 {
   margin-bottom: var(--sgds-margin-2-xs);
 }
 h3 {
-  font-size: var(---sgds-font-size-5);
+  font-size: var(--sgds-font-size-5);
   margin-bottom: var(--sgds-margin-2-xs);
 }
 h4 {
@@ -126,6 +127,7 @@ p {
   font-family: var(--sgds-font-family-brand); 
   line-height: var(--sgds-line-height-body);
   letter-spacing: var(--sgds-letter-spacing-normal);
+  margin-top: var(--sgds-margin-none);
 }
 
 /* ANCHOR */

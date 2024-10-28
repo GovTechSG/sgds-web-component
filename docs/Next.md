@@ -1,5 +1,7 @@
 # NextJs
 
+Pre-requisite: please read <a href="/docs/frameworks-react--docs" target="_self">documentation on React</a> prior to this.
+
 Web components are client components as they rely heavily on document and window API that is only present in the browser.
 
 

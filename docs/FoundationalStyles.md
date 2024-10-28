@@ -41,7 +41,7 @@ import "@govtechsg/sgds-web-component/css/sgds.css"
 @import "@govtechsg/sgds-web-component/css/sgds.css";
 ```
 
-### Cherry pick the styles
+<!-- ### Cherry pick the styles
 
 `css/sgds.css` contains all the stylings found in the folder `css`. You can also choose to cherry pick the styles you required. For example, `label.css`
 
@@ -51,9 +51,9 @@ import "@govtechsg/sgds-web-component/css/sgds.css"
 import "@govtechsg/sgds-web-component/themes/day.css"
 //optional: if you are doing night mode 
 import "@govtechsg/sgds-web-component/themes/night.css"
-import "@govtechsg/sgds-web-component/css/label.css"
+import "@govtechsg/sgds-web-component/css/label.css" -->
 
-```
+<!-- ```
 
 <strong>CSS imports</strong>
 
@@ -62,12 +62,4 @@ import "@govtechsg/sgds-web-component/css/label.css"
 /** optional: if you are doing night mode */
 @import "@govtechsg/sgds-web-component/themes/night.css";
 @import "@govtechsg/sgds-web-component/css/label.css";
-```
-
-## Source files
-
-<iframe
-  src='https://gist.github.com/clukhei/a31bfc0ea0c2b87d950b125f92835a76.pibb'
-  style="width: 100%; height: 1000px; border: 0;"
->
-</iframe>
+``` -->
