@@ -17,12 +17,6 @@ export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral"
  *
  * @event sgds-show - Emitted when the badge appears.
  * @event sgds-hide - Emitted after the badge closes.
- *
- * @cssprop --sgds-badge-bg - The background color of the badge
- * @cssprop --sgds-badge-color - The text color of badge
- * @cssprop --sgds-badge-border-radius - The border radius of badge
- * @cssprop --sgds-badge-border-color - The border color of the badge, only applicable when outlined prop is true
- *
  */
 export class SgdsBadge extends ScopedElementsMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, badgeStyle];

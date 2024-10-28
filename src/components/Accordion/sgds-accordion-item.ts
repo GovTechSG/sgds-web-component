@@ -23,11 +23,6 @@ import accordionItemStyle from "./accordion-item.css";
  * @slot accordion-content - The accordion-item content slot.
  * @slot accordion-caret - The caret icon of accordion-item.
  *
- * @cssprop --accordion-item-padding-y - The top and bottom padding for the container of accordion item's content
- * @cssprop --accordion-item-padding-x - The right and left padding for the container of accordion item's content
- * @cssprop --accordion-item-border-radius - The border radius of the accordion item
- * @cssprop --accordion-item-font-weight - The font weight of accordion-btn when it is not collapsed
- * @cssprop --accordion-item-line-height - The line height of accordion
  */
 export class SgdsAccordionItem extends SgdsElement {
   static styles = [...SgdsElement.styles, accordionItemStyle];

@@ -18,10 +18,6 @@ export type AlertVariant = "info" | "success" | "danger" | "warning" | "neutral"
  * @event sgds-show - Emitted when the alert appears.
  * @event sgds-hide - Emitted after the alert closes.
  *
- * @cssproperty --alert-bg - The background color of alert
- * @cssproperty --alert-border-color - The color of the border of alert
- * @cssproperty --alert-icon-margin-right - The margin-right css of icon slot to position the gap between icon and alert message
- *
  */
 export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, alertStyle];

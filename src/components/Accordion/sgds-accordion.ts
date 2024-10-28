@@ -14,7 +14,6 @@ const VALID_KEYS = ["Enter", "ArrowUp", "ArrowLeft", "ArrowDown", "ArrowRight"];
  * @summary A dropdown mechanism that allow users to either show or hide related content. `SgdsAccordion` is a wrapper to manage the behaviour for multiple `SgdsAccordionItems`
  * @slot default - slot for accordion-item
  *
- * @cssprop --accordion-active-color - The colour of accordion when it is active
  */
 
 export class SgdsAccordion extends SgdsElement {
