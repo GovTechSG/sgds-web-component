@@ -1,3 +1,9 @@
+html {
+  line-height: var(--sgds-line-height-body);
+  -webkit-text-size-adjust: 100%;
+  font-family: var(--sgds-font-family-brand);
+}
+
 /* BODY */
 body {
   color: var(--sgds-body-color);
@@ -6,6 +12,7 @@ body {
   font-weight: var(--sgds-font-weight-regular);
   line-height: var(--sgds-line-height-body);
   letter-spacing: var(--sgds-letter-spacing-normal);
+  margin: var(--sgds-margin-none);
 }
 /* LABEL */
 label {
@@ -70,10 +77,10 @@ h2,
 h3,
 h4,
 h5 {
-  line-height: 1.2;
+  line-height: var(--sgds-line-height-heading);
 }
 h6 {
-  line-height: 1.5;
+  line-height: var(--sgds-line-height-min);
 }
 
 h1 {
@@ -90,11 +97,11 @@ h3 {
 }
 h4 {
   font-size: var(--sgds-font-size-4);
-  /* margin-bottom  ask andy*/
+  margin-bottom: var(--sgds-margin-2-xs);
 }
 h5 {
   font-size: var(--sgds-font-size-3);
-  /* margin-bottom ask andy*/
+  margin-bottom: var(--sgds-margin-3-xs);
 }
 h6 {
   font-size: var(--sgds-font-size-2);
@@ -111,3 +118,27 @@ caption {
 }
 
 /* PARAGRAPH */
+
+p {
+  font-size: var(--sgds-font-size-2);
+  font-weight: var(--sgds-font-weight-regular);
+  margin-bottom: var(--sgds-paragraph-spacing-xl);
+  font-family: var(--sgds-font-family-brand); 
+  line-height: var(--sgds-line-height-body);
+  letter-spacing: var(--sgds-letter-spacing-normal);
+}
+
+/* ANCHOR */
+
+a {
+  font-size: var(--sgds-font-size-2);
+  font-weight: var(--sgds-font-weight-regular);
+  line-height: var(--sgds-line-height-body);
+  letter-spacing: var(--sgds-letter-spacing-normal);
+  text-decoration: underline;
+  color: var(--sgds-link-color);
+}
+
+a:hover, a:focus-visible, a:focus {
+  color: var(--sgds-link-color-emphasis);
+}
