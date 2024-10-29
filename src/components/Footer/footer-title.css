@@ -1,0 +1,19 @@
+.footer-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-gap-xs);
+  margin: var(--sgds-margin-3-xs) 0;
+}
+
+.title {
+  color: var(--sgds-default-color-inverse);
+  font-size: var(--sgds-font-size-5);
+  font-weight: var(--sgds-font-weight-bold);
+  line-height: var(--sgds-line-height-body);
+  letter-spacing: var(--sgds-letter-spacing-tight);
+}
+
+.description {
+  color: var(--sgds-default-color-muted);
+  font-size: var(--sgds-font-size-3);
+}
