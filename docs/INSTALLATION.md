@@ -12,7 +12,7 @@ Install SGDS web components locally with the following command
 
 ```js
 
-npm install @govtechsg/sgds-web-component
+npm install @govtechsg/sgds-web-component<version>
 // Loading the polyfill is not always required
 npm install @webcomponents/scoped-custom-element-registry@0.0.9
 

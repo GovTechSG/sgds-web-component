@@ -8,9 +8,15 @@ Customize the styles at the `:root` level by overriding the values of css tokens
 ```css
 // yourCustomCss.css
 :root {
-  --sgds-primary: #1f69ff;
-  --sgds-success-500: #3bb346;
-  --sgds-gray-500: #667085;
+  --sgds-brand-100: #F5B6DA;
+  --sgds-brand-200: #F186C0;
+  --sgds-brand-300: #EE4FA6;
+  --sgds-brand-400: #EE0290;
+  --sgds-brand-500: #EF0078;
+  --sgds-brand-600: #DD0074;
+  --sgds-brand-700: #C6006E;
+  --sgds-brand-800: #B0006A;
+  --sgds-brand-900: #880061;
 }
 ``` 
 ``` jsx
