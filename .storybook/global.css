@@ -35,3 +35,6 @@ sgds-faq-grid {
 .docs-story{
   background: var(--sgds-default-bg);
 }
+ul.toc-list > * {
+  font-size: var(--sgds-font-size-1);
+}
