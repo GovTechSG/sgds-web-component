@@ -47,7 +47,6 @@
 .stepper.horizontal .stepper-item-container:not(:first-child) .stepper-item:before {
   content: " ";
   position: absolute;
-  z-index: -1;
   top: 15px;
   bottom: 0;
   left: calc(-50% + 16px);
@@ -59,7 +58,6 @@
 .stepper.vertical .stepper-item-container:not(:last-child) .stepper-item:after {
   content: " ";
   position: absolute;
-  z-index: -1;
   top: 32px;
   bottom: 0;
   left: 15px;
