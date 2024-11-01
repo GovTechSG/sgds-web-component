@@ -1,9 +1,7 @@
-import SgdsProgress from "@govtechsg/sgds-web-component/react/progress";
 import SgdsProgressBar from "@govtechsg/sgds-web-component/react/progress-bar";
 
 export const Progress = () => {
     return (
-        <SgdsProgress>
             <SgdsProgressBar
                 label="50%"
                 variant="secondary"
@@ -12,6 +10,5 @@ export const Progress = () => {
                 aria-maxvalue="100"
                 aria-label="Loading in progress">
             </SgdsProgressBar>
-        </SgdsProgress>
     )
 }
