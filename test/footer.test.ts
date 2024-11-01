@@ -16,6 +16,12 @@ describe("footer", () => {
             <slot name="footer-link"></slot>
           </section>
           <section class="footer-bottom" part="footer-bottom">
+            <ul
+              class="social-media"
+              style="display: none;"
+            >
+              <slot name="footer-social-media"></slot>
+            </ul>
             <div class="footer-mandatory-links">
               <ul>
                 <li><a href="#">Contact</a></li>
