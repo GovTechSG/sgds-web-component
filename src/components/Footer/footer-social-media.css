@@ -1,0 +1,17 @@
+a ::slotted(svg) {
+  display: block;
+  width: var(--sgds-icon-size-lg);
+  height: var(--sgds-icon-size-lg);
+  fill: light-dark(#ffffff, #0e0e0e);
+}
+
+a:focus,
+a:focus-visible {
+  outline: 0;
+}
+
+a:focus ::slotted(svg),
+a:focus-visible ::slotted(svg) {
+  outline: 0;
+  box-shadow: var(--sgds-box-shadow-focus);
+}

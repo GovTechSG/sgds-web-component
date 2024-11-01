@@ -31,15 +31,8 @@
   color: var(--sgds-default-color-inverse);
 }
 
-ul.social-media li a:focus,
-ul.social-media li a:focus-visible {
-  outline: 0;
-}
-
 .footer-mandatory-links ul li a:focus,
-.footer-mandatory-links ul li a:focus-visible,
-ul.social-media li a:focus svg,
-ul.social-media li a:focus-visible svg {
+.footer-mandatory-links ul li a:focus-visible {
   outline: 0;
   box-shadow: var(--sgds-box-shadow-focus);
 }
@@ -55,16 +48,6 @@ ul.social-media li a:focus-visible svg {
 ul.social-media {
   display: flex;
   gap: var(--sgds-gap-sm);
-}
-
-ul.social-media svg {
-  display: block;
-  width: var(--sgds-icon-size-lg);
-  height: var(--sgds-icon-size-lg);
-}
-
-.social-media svg path {
-  fill: light-dark(#ffffff, #0e0e0e);
 }
 
 .footer-mandatory-links {
