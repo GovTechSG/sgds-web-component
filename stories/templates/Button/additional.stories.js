@@ -134,6 +134,9 @@ export const SgdsButtonPlayground = {
         componentElement.addEventListener('sgds-blur', () => {
         console.log('sgds-blur event triggered, check the console');
         });
+        componentElement.addEventListener('sgds-focus', () => {
+        console.log('sgds-focus event triggered, check the console');
+        });
         /* playground-hide */
         });
         /* playground-hide-end */

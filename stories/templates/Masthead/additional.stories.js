@@ -8,16 +8,15 @@ export const SgdsMastheadPlayground = {
         <html lang="en">
           <head>
             <link
-              href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@2.0.0/themes/day.css"
+              href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@rc/themes/day.css"
               rel="stylesheet"
               type="text/css"
             />
-            <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component">&lt;/script>
+            <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@rc">&lt;/script>
             <style>
               sgds-masthead {
-                --masthead-mobile-font-size;
-                --masthead-mobile-padding-x;
-                --masthead-fluid-padding-x;
+                --masthead-max-width:;
+                --masthead-padding-x:;
               }
             </style>
           </head>
@@ -33,7 +32,8 @@ export const SgdsMastheadPlayground = {
       <p>You can edit the SgdsMasthead's styles by modifying its custom CSS properties. For example:</p>
       <pre><code>
         sgds-masthead {
-          --masthead-mobile-font-size: value;
+          --masthead-max-width: value;
+          --masthead-padding-x: value;
         }
       </code></pre>
       <h3>2. Change SgdsMasthead Attributes</h3>
