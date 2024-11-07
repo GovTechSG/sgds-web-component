@@ -31,7 +31,7 @@ export const Label = {
   args: { label: "Label" },
   parameters: {},
   tags: ["!dev"]
-}
+};
 export const SgdsSpinnerPlayground = {
   render: () => html`
     <playground-ide editable-file-system line-numbers resizable>

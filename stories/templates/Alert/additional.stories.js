@@ -140,7 +140,7 @@ export const WithLink = {
   args: {},
   parameters: {},
   tags: ["!dev"]
-}
+};
 
 export const SgdsAlertPlayground = {
   render: () => html`
@@ -191,23 +191,23 @@ export const SgdsAlertPlayground = {
         </html>
       </script>
 
-<script type="sample/js" filename="events.js">
-       document.addEventListener("DOMContentLoaded", () => {
+      <script type="sample/js" filename="events.js">
+           document.addEventListener("DOMContentLoaded", () => {
 
-       const alertElement = document.getElementById("comp");
-       const closeButton = document.getElementById("closeButton");
+           const alertElement = document.getElementById("comp");
+           const closeButton = document.getElementById("closeButton");
 
-       if (alertElement && closeButton) {
-        alertElement.addEventListener("sgds-hide", () => {
-          console.log("sgds-hide event triggered");
+           if (alertElement && closeButton) {
+            alertElement.addEventListener("sgds-hide", () => {
+              console.log("sgds-hide event triggered");
+            });
+
+            closeButton.addEventListener("click", () => {
+                alertElement.close();
+
+            });
+          }
         });
-        
-        closeButton.addEventListener("click", () => {
-            alertElement.close(); 
-          
-        });
-      }
-    });
       </script>
     </playground-ide>
 

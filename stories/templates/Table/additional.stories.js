@@ -30,10 +30,10 @@ export const SgdsTablePlayground = {
           <sgds-table
             tableHeaders='${JSON.stringify(["#", "First Names", "Last Name", "Username"])}'
             tableData='${JSON.stringify([
-    ["1", "John", "Doe", "@johndoe"],
-    ["2", "Jane", "Doe", "@janedoe"],
-    ["3", "Bob", "Smith", "@bobsmith"]
-  ])}'
+          ["1", "John", "Doe", "@johndoe"],
+          ["2", "Jane", "Doe", "@janedoe"],
+          ["3", "Bob", "Smith", "@bobsmith"]
+        ])}'
           ></sgds-table>
           </body>
         </html>

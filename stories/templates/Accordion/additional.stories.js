@@ -28,7 +28,7 @@ export const Disabled = {
   args: { disabled: true },
   parameters: {},
   tags: ["!dev"]
-}
+};
 import { html } from "lit-html";
 
 export const SgdsAccordionPlayground = {

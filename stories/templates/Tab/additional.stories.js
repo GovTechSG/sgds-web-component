@@ -17,7 +17,7 @@ export const SgdsTabPlayground = {
 
             <style>
               sgds-tab::part(base) {
-                
+
               }
             </style>
           </head>

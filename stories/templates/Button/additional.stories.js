@@ -126,17 +126,17 @@ export const SgdsButtonPlayground = {
       </script>
 
       <script type="sample/js" filename="events.js">
-      /* playground-hide */
-      document.addEventListener('DOMContentLoaded', () => {
-      /* playground-hide-end */
-      const componentElement = document.getElementById('comp');
+        /* playground-hide */
+        document.addEventListener('DOMContentLoaded', () => {
+        /* playground-hide-end */
+        const componentElement = document.getElementById('comp');
 
-      componentElement.addEventListener('sgds-blur', () => {
-      console.log('sgds-blur event triggered, check the console');
-      });
-      /* playground-hide */
-      });
-      /* playground-hide-end */
+        componentElement.addEventListener('sgds-blur', () => {
+        console.log('sgds-blur event triggered, check the console');
+        });
+        /* playground-hide */
+        });
+        /* playground-hide-end */
       </script>
     </playground-ide>
 

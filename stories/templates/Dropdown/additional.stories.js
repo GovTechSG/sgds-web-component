@@ -16,7 +16,7 @@ export const SgdsDropdownPlayground = {
           <script src="./events.js">&lt;/script>
           <style>
             sgds-dropdown::part(menu) {
-             
+
             }
           </style>
         </head>

@@ -31,7 +31,7 @@ export const Label = {
   args: {},
   parameters: {},
   tags: ["!dev"]
-}
+};
 export const SgdsProgressPlayground = {
   render: () => html`
     <playground-ide editable-file-system line-numbers resizable>

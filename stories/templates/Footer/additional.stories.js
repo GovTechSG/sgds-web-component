@@ -17,10 +17,10 @@ export const SgdsFooterPlayground = {
 
             <style>
               sgds-footer::part(footer-top) {
-                
+
               }
               sgds-footer::part(footer-bottom) {
-                
+
               }
             </style>
           </head>

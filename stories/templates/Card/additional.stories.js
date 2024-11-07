@@ -16,19 +16,19 @@ export const SgdsCardPlayground = {
 
             <style>
               sgds-card::part(base) {
-               
+
               }
 
               sgds-card::part(body) {
-                
+
               }
 
               sgds-card::part(title) {
-                
+
               }
 
               sgds-card::part(text) {
-               
+
               }
             </style>
           </head>

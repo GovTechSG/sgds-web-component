@@ -17,10 +17,10 @@ export const SgdsQuantityTogglePlayground = {
 
             <style>
               sgds-quantity-toggle::part(base) {
-                
+
               }
               sgds-quantity-toggle::part(button) {
-               
+
               }
             </style>
           </head>

@@ -17,31 +17,31 @@ export const SgdsDrawerPlayground = {
 
             <style>
               sgds-drawer::part(base) {
-                
+
               }
               sgds-drawer::part(overlay) {
-                
+
               }
               sgds-drawer::part(panel) {
-                
+
               }
               sgds-drawer::part(header) {
-                
+
               }
               sgds-drawer::part(header-actions) {
-               
+
               }
               sgds-drawer::part(title) {
-               
+
               }
               sgds-drawer::part(close-button) {
-                
+
               }
               sgds-drawer::part(body) {
-                
+
               }
               sgds-drawer::part(footer) {
-                
+
               }
             </style>
 

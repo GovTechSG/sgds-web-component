@@ -30,8 +30,7 @@ export const Clickable = {
   args,
   parameters: {},
   tags: ["!dev"]
-}
-
+};
 
 const MockStepperTemplate = () => Object.assign(new MockStepper());
 
@@ -73,25 +72,25 @@ export const SgdsStepperPlayground = {
       </script>
 
       <script type="sample/js" filename="events.js">
-       document.addEventListener("DOMContentLoaded", () => {
+           document.addEventListener("DOMContentLoaded", () => {
 
-       const stepperElement = document.getElementById("comp");
-       const nextButton = document.getElementById("nextButton");
+           const stepperElement = document.getElementById("comp");
+           const nextButton = document.getElementById("nextButton");
 
-       if (stepperElement && nextButton) {
-        stepperElement.addEventListener("sgds-next-step", () => {
-          console.log("sgds-next-step event triggered");
-        });
-        
-        nextButton.addEventListener("click", () => {
-          if (stepperElement.nextStep) {
-            stepperElement.nextStep(); 
-          } else {
-            console.error("nextStep function not found on stepper element.");
+           if (stepperElement && nextButton) {
+            stepperElement.addEventListener("sgds-next-step", () => {
+              console.log("sgds-next-step event triggered");
+            });
+
+            nextButton.addEventListener("click", () => {
+              if (stepperElement.nextStep) {
+                stepperElement.nextStep();
+              } else {
+                console.error("nextStep function not found on stepper element.");
+              }
+            });
           }
         });
-      }
-    });
       </script>
     </playground-ide>
 
