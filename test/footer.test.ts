@@ -4,60 +4,41 @@ import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 import type { SgdsFooter } from "../src/components";
 
-describe("button-element", () => {
+describe("footer", () => {
   it("renders with default values", async () => {
     const el = await fixture<SgdsFooter>(html`<sgds-footer></sgds-footer>`);
     assert.shadowDom.equal(
       el,
       `
-          <footer class="sgds footer">
+          <footer class="footer">
           <section class="footer-top" part="footer-top">
-            <div class="container-fluid">
-              <div class="row footer-header">
-                <div class="col col-lg-6 col-md-12">
-                  <div class="title">Footer title</div>
-                </div>
-              </div>
-              <div class="row footer-items">
-              </div>
-              <div class="row footer-contact-links">
-                <div class="col">
-                  <div class="d-flex justify-content-lg-end">
-                    <ul>
-                      <li><a href="#">Contact</a></li>
-                      <li><a href="#">Feedback</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <slot name="footer-title"></slot>
+            <slot name="footer-link"></slot>
           </section>
           <section class="footer-bottom" part="footer-bottom">
-            <div class="container-fluid">
-              <div class="row footer-mandatory-links">
-                <div class="col">
-                  <ul>
-                    <li>
-                      <a
-                        href="https://tech.gov.sg/report_vulnerability"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        >Report Vulnerability</a
-                      >
-                    </li>
-                    <li><a href="#">Privacy Statement</a></li>
-                    <li><a href="#">Terms of use</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="row footer-copyrights">
-                <div class="col">
-                  <div class="d-flex justify-content-lg-end text-end">
-                    © ${new Date().getFullYear()} Government of Singapore<br />
-                    Last Updated
-                  </div>
-                </div>
-              </div>
+            <ul
+              class="social-media"
+              style="display: none;"
+            >
+              <slot name="footer-social-media"></slot>
+            </ul>
+            <div class="footer-mandatory-links">
+              <ul>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Feedback</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li>
+                  <a
+                    href="https://tech.gov.sg/report_vulnerability"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Report Vulnerability</a
+                  >
+                </li>
+                <li><a href="#">Privacy Statement</a></li>
+                <li><a href="#">Terms of use</a></li>
+              </ul>
+              <div class="footer-copyrights">© ${new Date().getFullYear()}, Government of Singapore</div>
             </div>
           </section>
         </footer>
@@ -66,17 +47,19 @@ describe("button-element", () => {
   });
 
   it("description prop forward to .description class", async () => {
-    const el = await fixture(html`<sgds-footer description="test description"></sgds-footer>`);
+    const el = await fixture(
+      html`<sgds-footer-title slot="footer-title" description="test description"></sgds-footer-title>`
+    );
     expect(el.shadowRoot?.querySelector(".description")?.textContent).to.equal("test description");
   });
 
   it("title prop forward to approriate .title class", async () => {
-    const el = await fixture(html`<sgds-footer title="test title"></sgds-footer>`);
+    const el = await fixture(html`<sgds-footer-title title="test title"></sgds-footer-title>`);
     expect(el.shadowRoot?.querySelector(".title")?.textContent).to.equal("test title");
   });
 
   it("description should render when description attribute exist", async () => {
-    const el = await fixture(html`<sgds-footer></sgds-footer>`);
+    const el = await fixture(html`<sgds-footer-title></sgds-footer-title>`);
     expect(el.shadowRoot?.querySelector(".description")?.textContent).to.be.undefined;
 
     el.setAttribute("description", "test description");
@@ -86,12 +69,7 @@ describe("button-element", () => {
 
   it("copyrightLiner prop forward to approriate div el", async () => {
     const el = await fixture(html`<sgds-footer copyrightLiner="copyright liner"></sgds-footer>`);
-    expect(el.shadowRoot?.querySelector(".footer-copyrights>div.col>div")?.textContent).to.contain("copyright liner");
-  });
-
-  it("lastUpdatedDate prop forward to approriate div el", async () => {
-    const el = await fixture(html`<sgds-footer lastUpdatedDate="08 Feb 2022"></sgds-footer>`);
-    expect(el.shadowRoot?.querySelector(".footer-copyrights>div.col>div")?.textContent).to.contain("08 Feb 2022");
+    expect(el.shadowRoot?.querySelector(".footer-copyrights")?.textContent).to.contain("copyright liner");
   });
 
   it("contactHref prop forward to contact's href attr", async () => {
@@ -129,7 +107,7 @@ describe("button-element", () => {
         ]
       }
     ];
-    const el = await fixture(html`<sgds-footer .links=${linkArray}></sgds-footer>`);
+    const el = await fixture(html`<sgds-footer-link .links=${linkArray}></sgds-footer-link>`);
 
     expect(el.shadowRoot?.querySelectorAll(".footer-items>div").length).to.equal(2);
     expect(el.shadowRoot?.querySelectorAll(".footer-items>div")[0].textContent).to.contain("test-1");

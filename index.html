@@ -35,9 +35,9 @@
             gap: 5px;
         }
 
-        sgds-footer::part(footer-bottom) {
+        /* sgds-footer::part(footer-bottom) {
             background-color: blue;
-        }
+        } */
 
         sgds-sidenav {
             --sidenav-sticky-top: 1.5rem;
@@ -140,7 +140,7 @@
         <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
         <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
     </sgds-mainnav-dropdown>
-    <sgds-button slot="end">Login</sgds-button>
+    <sgds-button slot="end" size="lg">Login</sgds-button>
     <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px">
     </dev-console-widget>
 </sgds-mainnav>
@@ -1466,8 +1466,10 @@
                     </sgds-tooltip>
                     <button onclick="tooltip.show()">click me</button>
                 </div>
-                <sgds-footer description="description"
-                    links='[{"title":"Application Guidelines","url":"/application-guidelines/lorem-ipsum-one/second-level-a/","links":[{"label":"<div>hello world </div>","href":"/application-guidelines/lorem-ipsum-one/second-level-a/"},{"label":"Second Level B","href":"/application-guidelines/lorem-ipsum-two/part-A/"},{"label":"Lorem Ipsum Three","href":"/application-guidelines/lorem-ipsum-three/"}]},{"title":"Legislation","url":"#","external":true,"links":[{"label":"External Link One","href":"https://en.wikipedia.org/wiki/Year","external":true},{"label":"External Link Two","href":"https://en.wikipedia.org/wiki/Spring_(season)","external":true}]},{"title":"Resources","url":"/resource_room/","links":[{"label":"All","href":"/resource_room/"},{"label":"Forms and Templates","href":"/resource_room/forms-and-templates/"},{"label":"Guides","href":"/resource_room/guides/"}]}]'></sgds-footer>
+                <sgds-footer facebookHref="https://www.facebook.com" instagramHref="https://www.instagram.com" linkedInHref="https://www.linkedin.com" twitterHref="https://www.x.com" youtubeHref="https://www.youtube.com">
+                    <sgds-footer-title slot="footer-title" title="Name of portal/digital service" description="Description of portal/digital service"></sgds-footer-title>
+                    <sgds-footer-link slot="footer-link" links='[{"title":"Application Guidelines","url":"/application-guidelines/lorem-ipsum-one/second-level-a/","links":[{"label":"<div>hello world </div>","href":"/application-guidelines/lorem-ipsum-one/second-level-a/"},{"label":"Second Level B","href":"/application-guidelines/lorem-ipsum-two/part-A/"},{"label":"Lorem Ipsum Three","href":"/application-guidelines/lorem-ipsum-three/"}]},{"title":"Legislation","url":"#","external":true,"links":[{"label":"External Link One","href":"https://en.wikipedia.org/wiki/Year","external":true},{"label":"External Link Two","href":"https://en.wikipedia.org/wiki/Spring_(season)","external":true}]},{"title":"Resources","url":"/resource_room/","links":[{"label":"All","href":"/resource_room/"},{"label":"Forms and Templates","href":"/resource_room/forms-and-templates/"},{"label":"Guides","href":"/resource_room/guides/"}]},{"title":"Resources","url":"/resource_room/","links":[{"label":"All","href":"/resource_room/"},{"label":"Forms and Templates","href":"/resource_room/forms-and-templates/"},{"label":"Guides","href":"/resource_room/guides/"}]}, {"title":"Resources","url":"/resource_room/","links":[{"label":"All","href":"/resource_room/"},{"label":"Forms and Templates","href":"/resource_room/forms-and-templates/"},{"label":"Guides","href":"/resource_room/guides/"}]},{"title":"Resources","url":"/resource_room/","links":[{"label":"All","href":"/resource_room/"},{"label":"Forms and Templates","href":"/resource_room/forms-and-templates/"},{"label":"Guides","href":"/resource_room/guides/"}]},{"title":"Resources","url":"/resource_room/","links":[{"label":"All","href":"/resource_room/"},{"label":"Forms and Templates","href":"/resource_room/forms-and-templates/"},{"label":"Guides","href":"/resource_room/guides/"}]}]'></sgds-footer-link>
+                </sgds-footer>
 
                 <script>
                     const stepper = document.querySelector("#myStepper")

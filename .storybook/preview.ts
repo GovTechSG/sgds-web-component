@@ -1,11 +1,11 @@
 import { withThemeByClassName } from "@storybook/addon-themes";
 import { setCustomElementsManifest } from "@storybook/web-components";
-import "@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js";
+// import "@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js";
 import customElements from "../custom-elements.json";
+import "../lib/css/sgds.css";
 import "../lib/index.js";
 import "../lib/themes/day.css";
 import "../lib/themes/night.css";
-import "../lib/css/sgds.css";
 import "./global.css";
 import sgdsTheme from "./sgdsTheme";
 

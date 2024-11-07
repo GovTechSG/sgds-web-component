@@ -11,7 +11,7 @@
     "build": "npm run build:react && rm -rf lib && rollup --config rollup.config.mjs && node ./scripts/frankBuild.js",
     "build:react": "npm run cem && node ./scripts/makeReact.mjs",
     "build:readme": "gulp build-readme",
-    "write:stories": "npm run cem && node ./scripts/generateStories.mjs && npm run concat:stories && npm run update:version",
+    "write:stories": "npm run cem && node ./scripts/generatePlaygroundDocs.mjs && node ./scripts/generateStories.mjs  && npm run concat:stories && npm run update:version",
     "write:component": "plop",
     "test": "rm -rf test-outdir && rollup --config rollup.test.config.js && web-test-runner",
     "test:scripts": "wtr scripts/__tests__/**/*.test.js --node-resolve",
@@ -23,7 +23,7 @@
     "lint:fix": "npm run lint -- --fix",
     "cem": "cem analyze --litelement ",
     "e2e-test": "node cypress/scripts/run_all.js & cypress open",
-    "storybook": "nodemon --exec \"npm run write:stories &&  STORYBOOK_ENV=development storybook dev -p 6006\" --watch stories/templates stories/getting-started -e js,mdx",
+    "storybook": "nodemon --exec \"npm run write:stories &&  STORYBOOK_ENV=development storybook dev -p 6006\" --watch  stories/getting-started -e js,mdx",
     "build-storybook": "npm run build && npm run write:stories && STORYBOOK_ENV=production storybook build",
     "trial-sb": "storybook dev",
     "trial-sb-build": "storybook build"
@@ -46,13 +46,16 @@
   "license": "MIT",
   "dependencies": {
     "@govtechsg/sgds": "^2.3.2",
+    "@govtechsg/sgds-web-component": "^2.0.0",
     "@lit-labs/react": "^1.0.9",
     "@open-wc/scoped-elements": "2.2.0",
+    "@open-wc/testing-helpers": "^3.0.1",
     "@storybook/addon-a11y": "^8.2.8",
     "bootstrap": "^5.1.3",
     "date-fns": "^3.3.1",
     "imask": "^7.4.0",
     "lit": "^3.1.4",
+    "lit-element": "^4.1.0",
     "tslib": "^2.6.2"
   },
   "devDependencies": {
@@ -111,6 +114,7 @@
     "husky": "^8.0.0",
     "lodash": "^4.17.21",
     "nodemon": "^2.0.22",
+    "playground-elements": "^0.19.1",
     "plop": "^3.1.2",
     "postcss": "^8.2.13",
     "prettier": "^2.8.7",
