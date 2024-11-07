@@ -144,21 +144,14 @@ export const SgdsButtonPlayground = {
     </playground-ide>
 
     <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #ddd;">
-      <h3>1. Edit the Custom CSS</h3>
-      <p>You can edit the SgdsButton's styles by modifying its custom CSS properties. For example:</p>
-      <pre><code>
-        sgds-button {
-          ----btn-border-radius: value;
-        }
-      </code></pre>
-      <h3>2. Modify Event Handling</h3>
-      <p>You can customize how the SgdsButton responds to events. For example:</p>
+      <h3>1. Modify Event Handling</h3>
+      <p>You can customize how the SgdsButton responds to events. See event.js. For example:</p>
       <pre><code>
         componentElement.addEventListener('insert component event'}', () => {
           console.log( event triggered');
         });
       </code></pre>
-      <h3>3. Change SgdsButton Attributes</h3>
+      <h3>2. Change SgdsButton Attributes</h3>
       <p>You can modify the SgdsButton's attributes directly within the HTML. For example:</p>
       <pre><code>
         sgds-button some-attribute="value" 
