@@ -87,4 +87,4 @@ This method registers all SGDS elements up front in the Custom Elements Registry
 
 ## Start building your application
 
-You are now ready to build your own application. You may refer to the <a href="/docs/components-accordion--docs" target="_self">components</a> page to find out more.
+You are now ready to build your own application. You may refer to the <a href="/docs/components-accordion--docs" target="_self">components</a> page to find out more

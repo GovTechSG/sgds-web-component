@@ -44,11 +44,3 @@ Write your text description in `additional.mdx` and the respective CSF story in 
 ## Table of Contents in Docs mode
 
 - TOC is enabled, so be mindful of the h1, h2, h3 used as those will go into the TOC
-
-## Setting up Google Playground Elements IDE for a component
-
-- Create the following file if not present : `stories/templates/ComponentName/additional.stories.js`
-
-- If `import { html } from "lit-html";` and `export const SgdsComponentPlayground` are present in the file, remove them
-
-- Add `// Playground Injection Point` to the top of the file
