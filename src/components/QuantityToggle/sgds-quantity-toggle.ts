@@ -164,7 +164,6 @@ export class SgdsQuantityToggle
 
   protected _renderFeedback() {
     const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
-    console.log({ wantFeedbackText });
     return this.invalid && wantFeedbackText
       ? html` <div class="invalid-feedback-container">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -221,7 +220,7 @@ export class SgdsQuantityToggle
           ></sgds-icon-button>
           <sgds-input
             type="number"
-            class="quantity-toggle test-input"
+            class="quantity-toggle"
             name=${ifDefined(this.name)}
             step=${ifDefined(this.step)}
             min=${ifDefined(this.min)}

@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
@@ -18,6 +18,7 @@ import checkboxStyle from "./checkbox.css";
  * @slot default - The label of checkbox.
  *
  * @event sgds-change - Emitted when the checked state changes.
+ * @event sgds-blur - Emitted when input is not in focus.
  * @event sgds-validity-change - Emitted when the invalid state changes. This event is used by sgds-checkbox-group to check the invalid state change of its children
  */
 export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements SgdsFormControl {
@@ -48,6 +49,8 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements
 
   /** Marks the checkbox input as indeterminate , with indeterminate logo  */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
+
+  @state() private _isTouched = false;
 
   @watch("invalid", { waitUntilFirstUpdate: true })
   _handleInvalidChange() {
@@ -87,7 +90,10 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements
       this.click();
     }
   }
-
+  private _handleBlur() {
+    this._isTouched = true;
+    this.emit("sgds-blur");
+  }
   private _handleInvalid(e: Event) {
     e.preventDefault();
     this.invalid = true;
@@ -103,10 +109,34 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements
     this.invalid = !this.input.checkValidity();
   }
 
+  @watch("_isTouched", { waitUntilFirstUpdate: true })
+  _handleIsTouched() {
+    if (this._isTouched && this.required && !this.checked) {
+      this.invalid = true;
+    }
+  }
   private resetFormControl() {
+    this._isTouched = false;
     this.checked = this.input.checked = this.defaultChecked;
     this.input.dispatchEvent(new InputEvent("reset"));
     this.resetValidity(this.input);
+  }
+  /**
+   * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
+   * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
+   */
+  public reportValidity(): boolean {
+    return this.inputValidationController.reportValidity();
+  }
+  public checkValidity(): boolean {
+    return this.inputValidationController.checkValidity();
+  }
+
+  public get validity(): ValidityState {
+    return this.inputValidationController.validity;
+  }
+  public get validationMessage(): string {
+    return this.inputValidationController.validationMessage;
   }
 
   render() {
@@ -123,7 +153,6 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements
             aria-invalid=${this.invalid ? "true" : "false"}
             name=${ifDefined(this.name)}
             ?indeterminate=${this.indeterminate}
-            ?disabled=${this.disabled}
             ?required=${this.required}
             aria-disabled=${this.disabled ? "true" : "false"}
             aria-checked=${this.checked ? "true" : "false"}
@@ -131,7 +160,9 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements
             @keydown=${this._handleKeyDown}
             @invalid=${(e: Event) => this._handleInvalid(e)}
             .checked=${live(this.checked)}
-            value=${ifDefined(this.value)}
+            .disabled=${this.disabled}
+            .required=${this.required}
+            @blur=${this._handleBlur}
           />
         </div>
         <label for="${this._inputId}" class="form-check-label"><slot></slot></label>

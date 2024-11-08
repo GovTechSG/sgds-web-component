@@ -105,16 +105,31 @@ export class SgdsInput
   public setInvalid(bool: boolean) {
     this.invalid = bool;
   }
+  /**
+   * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
+   * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
+   */
+  public reportValidity(): boolean {
+    return this.inputValidationController.reportValidity();
+  }
 
-  private get validity() {
+  public get validity(): ValidityState {
     return this.inputValidationController.validity;
   }
 
-  private get validationMessage() {
+  public get validationMessage(): string {
     return this.inputValidationController.validationMessage;
   }
 
-  private _handleFocus() {
+  // private get validity() {
+  //   return this.inputValidationController.validity;
+  // }
+
+  // private get validationMessage() {
+  //   return this.inputValidationController.validationMessage;
+  // }
+
+  protected _handleFocus() {
     this.emit("sgds-focus");
   }
 
@@ -126,7 +141,7 @@ export class SgdsInput
     this.focus();
   }
 
-  private _handleChange(e: Event) {
+  protected _handleChange(e: Event) {
     this.value = this.input.value;
     this.emit("sgds-change");
     super.handleChange(e);
@@ -157,7 +172,7 @@ export class SgdsInput
     }
   }
 
-  private _renderInput() {
+  protected _renderInput() {
     const wantFeedbackStyle = this.hasFeedback === "both" || this.hasFeedback === "style";
     return html`
       <div
@@ -172,7 +187,7 @@ export class SgdsInput
         ${this.icon ? html`<span class="form-control-icon">${unsafeSVG(this.icon)}</span>` : nothing}
         ${this.prefix ? html`<span class="form-control-prefix">${this.prefix}</span>` : nothing}
         <input
-          class="form-control test-input"
+          class="form-control"
           type=${this.type}
           id=${this.inputId}
           name=${ifDefined(this.name)}
@@ -212,7 +227,7 @@ export class SgdsInput
       </div>
     `;
   }
-  private _renderFeedback() {
+  protected _renderFeedback() {
     const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
     return this.invalid && wantFeedbackText
       ? html` <div class="invalid-feedback-container">
@@ -228,7 +243,7 @@ export class SgdsInput
         </div>`
       : html`${this._renderHintText()}`;
   }
-  private _renderLabel() {
+  protected _renderLabel() {
     const labelTemplate = html`
       <label
         for=${this.inputId}
@@ -242,7 +257,7 @@ export class SgdsInput
     `;
     return this.label && labelTemplate;
   }
-  private _renderHintText() {
+  protected _renderHintText() {
     const hintTextTemplate = html` <div id="${this.inputId}Help" class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }

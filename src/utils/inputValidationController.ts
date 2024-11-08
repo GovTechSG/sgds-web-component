@@ -121,9 +121,12 @@ export class InputValidationController implements ReactiveController {
   //   // this.setFormValue()
   // }
   validateInput(input) {
+    /** When the form control is disabled, its always valid */
+    if (this.options.input(this.host).disabled) {
+      return this._internals.setValidity({});
+    }
     // get the validity of the internal <input>
     const validState = input.validity;
-
     // if the input is invalid, show the correct error
     if (!validState.valid) {
       // loop through the error reasons
@@ -135,7 +138,7 @@ export class InputValidationController implements ReactiveController {
 
           // set the validity error reason and the corresponding
           // message
-          this._internals.setValidity({ [this.validationError]: true }, input.validationMessage);
+          this._internals.setValidity({ [this.validationError]: true }, input.validationMessage, input);
         }
       }
     } else {

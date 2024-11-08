@@ -28,7 +28,7 @@ export class DatepickerInput extends SgdsInput {
   constructor() {
     super();
     this.type = "text";
-    this.hasFeedback = true;
+    this.hasFeedback = "both";
     this._handleChange = () => null;
   }
   connectedCallback(): void {
@@ -36,8 +36,8 @@ export class DatepickerInput extends SgdsInput {
     this.addEventListener("sgds-change", this._validateInput);
   }
 
-  async firstUpdated() {
-    super.firstUpdated();
+  async firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
     this._applyInputMask(this.dateFormat);
   }
   private async _applyInputMask(dateFormat: string) {
