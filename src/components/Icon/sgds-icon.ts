@@ -29,6 +29,10 @@ export class SgdsIcon extends SgdsElement {
     }
   }
 
+  updated() {
+    this.style.display = this._svgContent ? "flex" : "none";
+  }
+
   async loadSvg(name: string) {
     if (name) {
       // Dynamically import the SVG if not cached
