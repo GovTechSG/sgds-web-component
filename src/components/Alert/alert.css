@@ -20,9 +20,11 @@
 :host([variant="neutral"]) {
   --sgds-alert-bg: var(--sgds-neutral-bg);
 }
+
 :host([outlined]) {
   --sgds-alert-color: var(--sgds-default-color-on-light);
 }
+
 :host([variant="info"][outlined]) {
   --sgds-alert-bg: var(--sgds-primary-bg-subtle);
   --sgds-alert-border-color: var(--sgds-primary-border-color-subtle);
@@ -48,16 +50,10 @@
   --sgds-alert-border-color: var(--sgds-neutral-border-color-subtle);
 }
 
-slot[name="icon"] {
-  display: flex;
+sgds-icon {
+  color: var(--sgds-alert-color);
 }
-slot[name="icon"].d-none {
-  display: none;
-}
-slot[name="icon"]::slotted(*) {
-  width: var(--sgds-icon-size-lg);
-  height: var(--sgds-icon-size-lg);
-}
+
 .alert {
   display: flex;
   flex-direction: row;
@@ -75,13 +71,14 @@ slot[name="icon"]::slotted(*) {
 
 .alert-content {
   display: flex;
-  padding-right: var(--sgds-padding-2-xl);
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   gap: var(--sgds-gap-2-xs);
   flex: 1 0 0;
+  padding-right: var(--sgds-padding-2-xl);
 }
+
 .alert-title {
   font-weight: var(--sgds-font-weight-semibold);
 }
