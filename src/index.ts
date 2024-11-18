@@ -13,6 +13,7 @@ import "./components/Drawer";
 import "./components/Dropdown";
 import "./components/FileUpload";
 import "./components/Footer";
+import "./components/Icon";
 import "./components/IconButton";
 import "./components/IconList";
 import "./components/Input";

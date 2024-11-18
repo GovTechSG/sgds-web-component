@@ -1,0 +1,14 @@
+:host([size="sm"]) svg {
+  width: var(--sgds-dimension-16);
+  height: var(--sgds-dimension-16);
+}
+:host([size="lg"]) svg {
+  width: var(--sgds-dimension-32);
+  height: var(--sgds-dimension-32);
+}
+
+svg {
+  display: block;
+  width: var(--sgds-dimension-24);
+  height: var(--sgds-dimension-24);
+}
