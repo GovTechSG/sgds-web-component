@@ -49,7 +49,7 @@ export class SgdsCloseButton extends ScopedElementsMixin(SgdsElement) {
         aria-label=${ifDefined(this.ariaLabel)}
         @click=${this._handleClick}
       >
-        <sgds-icon name="cross"></sgds-icon>
+        <sgds-icon name="cross" size=${this.size}></sgds-icon>
       </button>
     `;
   }

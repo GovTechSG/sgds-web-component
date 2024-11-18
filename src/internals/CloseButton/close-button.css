@@ -38,11 +38,6 @@ sgds-icon {
 }
 
 .btn-close-sm {
-  width: var(--sgds-dimension-16);
-  height: var(--sgds-dimension-16);
-}
-
-.btn-close.btn-close-sm sgds-icon {
-  width: var(--sgds-icon-size-sm);
-  height: var(--sgds-icon-size-sm);
+  width: var(--sgds-dimension-24);
+  height: var(--sgds-dimension-24);
 }
