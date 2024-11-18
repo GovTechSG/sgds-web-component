@@ -12,6 +12,41 @@
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-default-border-color);
 }
 
+.footer-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-gap-xs);
+  margin: var(--sgds-margin-3-xs) 0;
+}
+
+slot[name="footer-title"]::slotted(*) {
+  --sgds-header-color: var(--sgds-default-color-inverse);
+  --sgds-font-size-6: var(--sgds-font-size-5);
+  --sgds-margin-2-xs: var(--sgds-margin-none);
+  --sgds-line-height-heading: var(--sgds-line-height-body);
+  color: var(--sgds-header-color, --sgds-default-color-inverse);
+  font-size: var(--sgds-font-size-6, --sgds-font-size-5);
+  font-weight: var(--sgds-font-weight-bold);
+  line-height: var(--sgds-line-height-heading, --sgds-line-height-body);
+  letter-spacing: var(--sgds-letter-spacing-tight);
+  margin-top: var(--sgds-margin-none);
+  margin-bottom: var(--sgds-margin-2-xs, --sgds-margin-none);
+}
+
+slot[name="footer-description"]::slotted(*) {
+  --sgds-font-size-2: var(--sgds-font-size-3);
+  --sgds-paragraph-spacing-xl: var(--sgds-margin-none);
+  color: var(--sgds-default-color-muted);
+  font-size: var(--sgds-font-size-2, --sgds-font-size-3);
+  margin-bottom: var(--sgds-paragraph-spacing-xl, --sgds-margin-none);
+}
+
+.footer-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--sgds-gap-md) var(--sgds-gap-lg);
+}
+
 .footer ul {
   margin: 0;
   padding: 0;
@@ -45,9 +80,27 @@
   padding: var(--sgds-padding-xl) var(--sgds-padding-2-xl);
 }
 
-ul.social-media {
+.social-media {
   display: flex;
   gap: var(--sgds-gap-sm);
+}
+
+slot[name="footer-social-media"]::slotted(a) {
+  --sgds-link-color: light-dark(var(--sgds-gray-000), var(--sgds-gray-900));
+  color: var(--sgds-link-color);
+}
+
+slot[name="footer-social-media"]::slotted(a:hover) {
+  --sgds-link-color-emphasis: light-dark(var(--sgds-gray-000), var(--sgds-gray-900));
+  color: var(--sgds-link-color-emphasis);
+}
+
+slot[name="footer-social-media"]::slotted(a:focus),
+slot[name="footer-social-media"]::slotted(a:focus-visible) {
+  --sgds-link-color-emphasis: light-dark(var(--sgds-gray-000), var(--sgds-gray-900));
+  outline: 0;
+  box-shadow: var(--sgds-box-shadow-focus);
+  color: var(--sgds-link-color-emphasis);
 }
 
 .footer-mandatory-links {

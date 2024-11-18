@@ -1,0 +1,43 @@
+.footer-item {
+  margin-bottom: var(--sgds-margin-3-xs);
+}
+
+.footer-item,
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-gap-xs);
+}
+
+slot[name="footer-item-title"]::slotted(*) {
+  --sgds-paragraph-spacing-xl: var(--sgds-margin-none);
+  --sgds-font-weight-regular: var(--sgds-font-weight-semibold);
+  color: var(--sgds-default-color-inverse);
+  font-weight: var(--sgds-font-weight-regular, --sgds-font-weight-semibold);
+  margin: var(--sgds-paragraph-spacing-xl, --sgds-margin-none); 
+}
+
+.links {
+  margin: 0;
+  padding: 0;
+}
+
+.links slot::slotted(a) {
+  --sgds-link-color: var(--sgds-default-color-muted);
+  color: var(--sgds-link-color, --sgds-default-color-muted);
+  text-decoration: none !important;
+  width: fit-content;
+}
+
+slot::slotted(a:hover),
+.links slot::slotted(a:focus),
+.links slot::slotted(a:focus-visible) {
+  --sgds-link-color-emphasis: var(--sgds-default-color-inverse);
+  color: var(--sgds-link-color-emphasis, --sgds-default-color-inverse);
+}
+
+.links slot::slotted(a:focus),
+.links slot::slotted(a:focus-visible) {
+  outline: 0;
+  box-shadow: var(--sgds-box-shadow-focus);
+}

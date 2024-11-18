@@ -1,5 +1,4 @@
 import "./sgds-web-component";
-import { ColumnLinks } from "../src/components/Footer/sgds-footer";
 import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 import type { SgdsFooter } from "../src/components";
@@ -12,16 +11,21 @@ describe("footer", () => {
       `
           <footer class="footer">
           <section class="footer-top" part="footer-top">
-            <slot name="footer-title"></slot>
-            <slot name="footer-link"></slot>
+            <div class="footer-header" style="display: none;">
+              <slot name="footer-title"></slot>
+              <slot name="footer-description"></slot>
+            </div>
+            <div class="footer-items">
+              <slot name="footer-item"></slot>
+            </div>
           </section>
           <section class="footer-bottom" part="footer-bottom">
-            <ul
+            <div
               class="social-media"
               style="display: none;"
             >
               <slot name="footer-social-media"></slot>
-            </ul>
+            </div>
             <div class="footer-mandatory-links">
               <ul>
                 <li><a href="#">Contact</a></li>
@@ -46,25 +50,22 @@ describe("footer", () => {
     );
   });
 
-  it("description prop forward to .description class", async () => {
+  it("content should be slotted into footer-title", async () => {
     const el = await fixture(
-      html`<sgds-footer-title slot="footer-title" description="test description"></sgds-footer-title>`
+      html`<sgds-footer>
+        <h2 slot="footer-title">test title</h2>
+      </sgds-footer>`
     );
-    expect(el.shadowRoot?.querySelector(".description")?.textContent).to.equal("test description");
+    expect(el.querySelector("[slot='footer-title']")?.textContent).to.equal("test title");
   });
 
-  it("title prop forward to approriate .title class", async () => {
-    const el = await fixture(html`<sgds-footer-title title="test title"></sgds-footer-title>`);
-    expect(el.shadowRoot?.querySelector(".title")?.textContent).to.equal("test title");
-  });
-
-  it("description should render when description attribute exist", async () => {
-    const el = await fixture(html`<sgds-footer-title></sgds-footer-title>`);
-    expect(el.shadowRoot?.querySelector(".description")?.textContent).to.be.undefined;
-
-    el.setAttribute("description", "test description");
-    await elementUpdated(el);
-    expect(el.shadowRoot?.querySelector(".description")?.textContent).to.equal("test description");
+  it("content should be slotted into footer-description", async () => {
+    const el = await fixture(
+      html`<sgds-footer>
+        <h2 slot="footer-description">test description</h2>
+      </sgds-footer>`
+    );
+    expect(el.querySelector("[slot='footer-description']")?.textContent).to.equal("test description");
   });
 
   it("copyrightLiner prop forward to approriate div el", async () => {
@@ -90,32 +91,16 @@ describe("footer", () => {
     expect(el.shadowRoot?.querySelector("a[href='test']")?.textContent).to.contain("Terms of use");
   });
 
-  it("links prop accepts an array", async () => {
-    const linkArray: ColumnLinks[] = [
-      {
-        title: "test-1",
-        links: [
-          { href: "test-href-1", label: "test-label-1" },
-          { href: "test-href-2", label: "test-label-2" }
-        ]
-      },
-      {
-        title: "test-2",
-        links: [
-          { href: "test-href-1", label: "test-label-1" },
-          { href: "test-href-2", label: "test-label-2" }
-        ]
-      }
-    ];
-    const el = await fixture(html`<sgds-footer-link .links=${linkArray}></sgds-footer-link>`);
+  // it("links prop accepts an array", async () => {
+  //   const el = await fixture(html`<sgds-footer-link .links=${linkArray}></sgds-footer-link>`);
 
-    expect(el.shadowRoot?.querySelectorAll(".footer-items>div").length).to.equal(2);
-    expect(el.shadowRoot?.querySelectorAll(".footer-items>div")[0].textContent).to.contain("test-1");
-    expect(el.shadowRoot?.querySelectorAll(".footer-items>div")[1].textContent).to.contain("test-2");
-    expect(el.shadowRoot?.querySelectorAll("ul.links>li>a").length).to.equal(4);
-    expect(el.shadowRoot?.querySelectorAll('li>a[href="test-href-1"]').length).to.equal(2);
-    expect(el.shadowRoot?.querySelectorAll('li>a[href="test-href-1"]')[0].textContent).to.equal("test-label-1");
-    expect(el.shadowRoot?.querySelectorAll('li>a[href="test-href-2"]').length).to.equal(2);
-    expect(el.shadowRoot?.querySelectorAll('li>a[href="test-href-2"]')[0].textContent).to.equal("test-label-2");
-  });
+  //   expect(el.shadowRoot?.querySelectorAll(".footer-items>div").length).to.equal(2);
+  //   expect(el.shadowRoot?.querySelectorAll(".footer-items>div")[0].textContent).to.contain("test-1");
+  //   expect(el.shadowRoot?.querySelectorAll(".footer-items>div")[1].textContent).to.contain("test-2");
+  //   expect(el.shadowRoot?.querySelectorAll("ul.links>li>a").length).to.equal(4);
+  //   expect(el.shadowRoot?.querySelectorAll('li>a[href="test-href-1"]').length).to.equal(2);
+  //   expect(el.shadowRoot?.querySelectorAll('li>a[href="test-href-1"]')[0].textContent).to.equal("test-label-1");
+  //   expect(el.shadowRoot?.querySelectorAll('li>a[href="test-href-2"]').length).to.equal(2);
+  //   expect(el.shadowRoot?.querySelectorAll('li>a[href="test-href-2"]')[0].textContent).to.equal("test-label-2");
+  // });
 });
