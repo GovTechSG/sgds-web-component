@@ -47,11 +47,6 @@ export class SgdsIcon extends SgdsElement {
     }
   }
 
-  // renderSvg(svgContent: string) {
-  //   this._svgContent = svgContent; // Store the content for rendering
-  //   this.requestUpdate(); // Trigger re-render
-  // }
-
   render() {
     return html`${unsafeSVG(this._svgContent)}`;
   }
