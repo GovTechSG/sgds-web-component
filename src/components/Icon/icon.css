@@ -1,14 +1,14 @@
 :host([size="sm"]) svg {
-  width: var(--sgds-dimension-16);
-  height: var(--sgds-dimension-16);
+  width: var(--sgds-icon-size-sm);
+  height: var(--sgds-icon-size-sm);
 }
 :host([size="lg"]) svg {
-  width: var(--sgds-dimension-32);
-  height: var(--sgds-dimension-32);
+  width: var(--sgds-icon-size-lg);
+  height: var(--sgds-icon-size-lg);
 }
 
 svg {
   display: block;
-  width: var(--sgds-dimension-24);
-  height: var(--sgds-dimension-24);
+  width: var(--sgds-icon-size-md);
+  height: var(--sgds-icon-size-md);
 }
