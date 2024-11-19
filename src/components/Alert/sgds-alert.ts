@@ -44,12 +44,6 @@ export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
   /** The title of the alert. Only text is allowed */
   @property({ type: String, reflect: true }) title: string;
 
-  /** The name of the icon in the alert */
-  @property({ type: String, reflect: true }) iconName: string;
-
-  /** The size of the icon in the alert */
-  @property({ type: String, reflect: true }) iconSize: "sm" | "md" | "lg" = "md";
-
   /** Closes the alert  */
   public close() {
     this.show = false;
@@ -73,7 +67,7 @@ export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
             role="alert"
             aria-hidden=${this.show ? "false" : "true"}
           >
-            <sgds-icon name=${this.iconName} size=${this.iconSize}></sgds-icon>
+            <slot name="icon"></slot>
             <div class="alert-content">
               ${this.title ? html`<div class="alert-title">${this.title}</div>` : nothing}
               <slot></slot>

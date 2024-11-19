@@ -50,7 +50,7 @@
   --sgds-alert-border-color: var(--sgds-neutral-border-color-subtle);
 }
 
-sgds-icon {
+slot[name="icon"]::slotted(*) {
   color: var(--sgds-alert-color);
 }
 
