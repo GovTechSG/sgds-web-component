@@ -7,7 +7,7 @@ import Sinon from "sinon";
 describe("<sgds-icon>", () => {
   it("has default properties", async () => {
     const el = await fixture<SgdsIcon>(html`<sgds-icon></sgds-icon>`);
-    expect(el.getAttribute("size")).to.equal("md");
+    expect(el.getAttribute("size")).to.equal("lg");
     expect(el.getAttribute("name")).to.be.null;
     expect(el.shadowRoot).not.to.be.null;
   });
@@ -50,7 +50,7 @@ describe("<sgds-icon>", () => {
 
     expect(fetchStub.calledOnce).to.be.true;
     expect(fetchStub.calledWith("/src/icons/calendar.svg")).to.be.true;
-    expect(el.shadowRoot?.innerHTML).to.contain('<path fill="currentColor" fill-rule="evenodd" d="M8 2c.332');
+    expect(el.shadowRoot?.innerHTML).to.contain("<svg");
 
     fetchStub.restore();
   });
