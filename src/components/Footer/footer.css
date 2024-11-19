@@ -39,6 +39,7 @@ slot[name="footer-description"]::slotted(*) {
   color: var(--sgds-default-color-muted);
   font-size: var(--sgds-font-size-2, --sgds-font-size-3);
   margin-bottom: var(--sgds-paragraph-spacing-xl, --sgds-margin-none);
+  margin-top: var(--sgds-margin-none);
 }
 
 .footer-items {

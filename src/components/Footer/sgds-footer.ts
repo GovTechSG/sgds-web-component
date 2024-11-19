@@ -3,6 +3,10 @@ import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import footerStyle from "./footer.css";
 
+// TODO: remove csspart and its jsdocs to prevent user from modifying footer style
+// TODO: add jsdocs description for the all the slots
+// TODO: slots can be renamed to remove footer- prefix.
+
 /**
  * @summary The footer contains supporting information for your service at the bottom of your website. All .gov.sg digital services shall contain a Global Footer Bar across all pages. The Global Footer Bar should include the name of the digital service, contact information, a privacy statement and the terms of use.
  *
