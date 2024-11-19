@@ -12,8 +12,7 @@ export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral"
  * @summary Badges can be used to highlight important bits of information such as labels, notifications & status.
  *
  * @slot default - slot for badge
- * @slot leftIcon - The slot for icon to the left of the badge text
- * @slot rightIcon - The slot for icon to the right of the badge text
+ * @slot leadingIcon - The slot for icon to the left of the badge text
  *
  * @event sgds-show - Emitted when the badge appears.
  * @event sgds-hide - Emitted after the badge closes.
@@ -63,7 +62,7 @@ export class SgdsBadge extends ScopedElementsMixin(SgdsElement) {
             "
             aria-hidden=${this.show ? "false" : "true"}
           >
-            ${!this.dismissible ? html`<slot name="leftIcon"></slot>` : nothing}
+            ${!this.dismissible ? html`<slot name="leadingIcon"></slot>` : nothing}
             <span class="badge-label">
               <slot></slot>
             </span>
