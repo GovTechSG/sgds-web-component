@@ -103,6 +103,7 @@ export class SgdsInput
 
   /** Programatically sets the invalid state of the input. Pass in boolean value in the argument */
   public setInvalid(bool: boolean) {
+    this.emit("sgds-invalid");
     this.invalid = bool;
   }
   /**
@@ -154,8 +155,8 @@ export class SgdsInput
 
   @watch("_isTouched", { waitUntilFirstUpdate: true })
   _handleIsTouched() {
-    if (this._isTouched && this.required && this.value === "") {
-      this.invalid = true;
+    if (this._isTouched) {
+      this.invalid = !this.input.checkValidity();
     }
   }
   @watch("disabled", { waitUntilFirstUpdate: true })
@@ -163,13 +164,6 @@ export class SgdsInput
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
     this.input.disabled = this.disabled;
     this.invalid = !this.input.checkValidity();
-  }
-
-  @watch("invalid")
-  _handleInvalidChange() {
-    if (this.invalid) {
-      this.emit("sgds-invalid");
-    }
   }
 
   protected _renderInput() {

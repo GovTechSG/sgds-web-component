@@ -13,6 +13,7 @@ import SgdsIconButton from "../IconButton/sgds-icon-button";
 import SgdsInput from "../Input/sgds-input";
 import quantityToggleStyle from "./quantity-toggle.css";
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { PropertyValues } from "lit";
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
  *
@@ -71,16 +72,18 @@ export class SgdsQuantityToggle
       sgdsInput.value = "0";
     }
     this.value = parseInt(sgdsInput.value);
-    super.handleChange(e);
+    this.inputValidationController.setFormValue();
+    this.inputValidationController.validateInput(sgdsInput.input);
+    this.invalid = !this.inputValidationController.checkValidity();
   }
   protected async _handleInputChange(e: Event) {
     const sgdsInput = await this.sgdsInput;
-
+    this.invalid = false;
     if (parseInt(sgdsInput.value) < this.step || sgdsInput.value === "") {
       sgdsInput.value = "0";
     }
     this.value = parseInt(sgdsInput.value);
-    super.handleInputChange(e);
+    this.inputValidationController.setFormValue();
     this.inputValidationController.validateInput(sgdsInput.input);
   }
   private get validity() {
@@ -133,10 +136,8 @@ export class SgdsQuantityToggle
     event.preventDefault();
     event.stopPropagation();
     this.value = parseInt(sgdsInput.value) + parseInt(sgdsInput.step.toString());
-
     this._validateOnClick(sgdsInput.input);
   }
-
   private async _onMinus(event: MouseEvent) {
     const sgdsInput = await this.sgdsInput;
     event.preventDefault();
@@ -157,6 +158,8 @@ export class SgdsQuantityToggle
    * @param input native HTMLInputElement
    */
   private async _validateOnClick(input: HTMLInputElement) {
+    const sgdsInput = await this.sgdsInput;
+    await sgdsInput.updateComplete;
     this.inputValidationController.setFormValue();
     this.inputValidationController.validateInput(input);
     this.invalid = !this.inputValidationController.checkValidity();
