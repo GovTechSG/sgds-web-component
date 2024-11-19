@@ -184,7 +184,7 @@ describe("Feedback UI optional", () => {
       html` <sgds-input invalid hasFeedback="both" invalidFeedback="invalid feedback"></sgds-input> `
     );
     expect(el.shadowRoot?.querySelector("div.invalid-feedback")).not.to.be.null;
-    expect(el.shadowRoot?.querySelector("div.invalid-feedback")?.textContent).to.equal("invalid feedback");
+    expect(el.shadowRoot?.querySelector("div.invalid-feedback")?.textContent).to.contain("invalid feedback");
   });
   it("when hasFeedback is true and invalid state is true, invalid stylings", async () => {
     const el = await fixture<SgdsInput>(

@@ -3,7 +3,7 @@ import { expect, fixture, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
-import type { SgdsInput, SgdsQuantityToggle } from "../src/components";
+import type { SgdsIconButton, SgdsInput, SgdsQuantityToggle } from "../src/components";
 
 describe("when minusBtn or plusBtn is clicked", () => {
   it("should decrease and increase the value by 1 respectively", async () => {
@@ -172,4 +172,31 @@ describe("in form context", () => {
 
     expect(qtyToggle?.value).to.equal(5);
   });
+  it("input typing validation happens on change", async() => {
+    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle hasFeedback="both" min="3"></sgds-quantity-toggle>`);
+    const input = el.shadowRoot?.querySelector<SgdsInput>("sgds-input")
+    input?.focus()
+    expect(el.shadowRoot?.querySelector(".invalid-feedback")).to.be.null
+    await sendKeys({ press: "2"})
+    input?.blur()
+
+    await waitUntil(() => el.shadowRoot?.querySelector(".invalid-feedback"))
+    expect(el.shadowRoot?.querySelector(".invalid-feedback")).to.exist
+  })
+  it("validation happens as user clicks button", async() => {
+    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle hasFeedback="both"  min="2"></sgds-quantity-toggle>`);
+    const plusBtn = el.shadowRoot?.querySelectorAll("sgds-icon-button")[1] as SgdsIconButton
+    expect(el.value).to.equal(0)
+    expect(el.shadowRoot?.querySelector(".invalid-feedback")).to.be.null
+    plusBtn?.click()
+    await waitUntil(() => el.shadowRoot?.querySelector(".invalid-feedback"))
+    expect(el.shadowRoot?.querySelector(".invalid-feedback")).to.exist
+    expect(el.value).to.equal(1)
+    plusBtn?.click()
+    await el.updateComplete
+    await waitUntil(() => !el.shadowRoot?.querySelector(".invalid-feedback"))
+
+    expect(el.value).to.equal(2)
+    expect(el.shadowRoot?.querySelector(".invalid-feedback")).to.be.null
+  })
 });
