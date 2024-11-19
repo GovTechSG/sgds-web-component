@@ -9,7 +9,7 @@
   gap: var(--sgds-gap-xs);
 }
 
-slot[name="footer-item-title"]::slotted(*) {
+slot[name="title"]::slotted(*) {
   --sgds-paragraph-spacing-xl: var(--sgds-margin-none);
   --sgds-font-weight-regular: var(--sgds-font-weight-semibold);
   color: var(--sgds-default-color-inverse);

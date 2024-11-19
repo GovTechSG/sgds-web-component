@@ -6,8 +6,10 @@ import footerStyle from "./footer.css";
 /**
  * @summary The footer contains supporting information for your service at the bottom of your website. All .gov.sg digital services shall contain a Global Footer Bar across all pages. The Global Footer Bar should include the name of the digital service, contact information, a privacy statement and the terms of use.
  *
- * @csspart footer-top - The component's footer-top section container.
- * @csspart footer-bottom - The component's footer-bottom section container.
+ * @slot title - The slot for title
+ * @slot description - The slot for description
+ * @slot items - The slot for the list of footer items
+ * @slot social-media - The slot for the list of social media with icons
  *
  */
 export class SgdsFooter extends SgdsElement {
@@ -50,12 +52,14 @@ export class SgdsFooter extends SgdsElement {
   termsOfUseHref = "#";
 
   firstUpdated() {
-    const socialMediaSlot = this.shadowRoot.querySelector("slot[name='footer-social-media']") as HTMLSlotElement;
-    const footerTitleSlot = this.shadowRoot.querySelector("slot[name='footer-title']") as HTMLSlotElement;
-    const footerDescriptionSlot = this.shadowRoot.querySelector("slot[name='footer-description']") as HTMLSlotElement;
+    const socialMediaSlot = this.shadowRoot.querySelector("slot[name='social-media']") as HTMLSlotElement;
+    const footerTitleSlot = this.shadowRoot.querySelector("slot[name='title']") as HTMLSlotElement;
+    const footerDescriptionSlot = this.shadowRoot.querySelector("slot[name='description']") as HTMLSlotElement;
+    const footerItemsSlot = this.shadowRoot.querySelector("slot[name='items']") as HTMLSlotElement;
     const socialMediaChildNodes = socialMediaSlot.assignedNodes({ flatten: true });
     const footerTitleChildNodes = footerTitleSlot.assignedNodes({ flatten: true });
     const footerDescriptionChildNodes = footerDescriptionSlot.assignedNodes({ flatten: true });
+    const footerItemsChildNodes = footerItemsSlot.assignedNodes({ flatten: true });
     if (socialMediaChildNodes.length === 0) {
       const socialMediaContainer = this.shadowRoot.querySelector(".social-media") as HTMLDivElement;
       socialMediaContainer.style.display = "none";
@@ -65,23 +69,37 @@ export class SgdsFooter extends SgdsElement {
       const footerHeaderContainer = this.shadowRoot.querySelector(".footer-header") as HTMLDivElement;
       footerHeaderContainer.style.display = "none";
     }
+
+    if (footerItemsChildNodes.length === 0) {
+      const footerItemsContainer = this.shadowRoot.querySelector(".footer-items") as HTMLDivElement;
+      footerItemsContainer.style.display = "none";
+    }
+
+    if (
+      footerTitleChildNodes.length === 0 &&
+      footerDescriptionChildNodes.length === 0 &&
+      footerItemsChildNodes.length === 0
+    ) {
+      const footerTopContainer = this.shadowRoot.querySelector(".footer-top") as HTMLDivElement;
+      footerTopContainer.style.display = "none";
+    }
   }
 
   render() {
     return html`
       <footer class="footer">
-        <section class="footer-top" part="footer-top">
+        <section class="footer-top">
           <div class="footer-header">
-            <slot name="footer-title"></slot>
-            <slot name="footer-description"></slot>
+            <slot name="title"></slot>
+            <slot name="description"></slot>
           </div>
           <div class="footer-items">
-            <slot name="footer-item"></slot>
+            <slot name="items"></slot>
           </div>
         </section>
-        <section class="footer-bottom" part="footer-bottom">
+        <section class="footer-bottom">
           <div class="social-media">
-            <slot name="footer-social-media"></slot>
+            <slot name="social-media"></slot>
           </div>
           <div class="footer-mandatory-links">
             <ul>
