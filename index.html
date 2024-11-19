@@ -733,79 +733,53 @@
                     </sgds-accordion-item>
                 </sgds-accordion>
                 <h2>Badge</h2>
-                <div class="row">
-                    <div>
-                        <sgds-badge variant="info">
-                            <h2>
-                                Testing
-                            </h2>
-                        
-                        </sgds-badge>
-                        <sgds-badge variant="info" outlined>
-                            Testing
-
-
-                        </sgds-badge>
-                        <sgds-badge variant="info" dismissible>
-                            Testing
-                            <i slot="leftIcon" class="bi bi-apple"></i>
-                        </sgds-badge>
-                        <sgds-badge variant="success">
-                            Testing
-                            <i slot="leftIcon" class="bi bi-123"></i>
-                        </sgds-badge>
-                        <sgds-badge variant="success" outlined>
-                            Testing
-                            <i slot="rightIcon" class="bi bi-apple"></i>
-
-                        </sgds-badge>
-                        <sgds-badge variant="danger">
-                            Testingi
-                           
-
-                        </sgds-badge>
-                        <sgds-badge variant="danger" outlined>
-                            Testing
-
-                            <i slot="leftIcon" class="bi bi-123"></i>
-                        </sgds-badge>
-                        <sgds-badge variant="warning">
-                            Testing
-                            <i slot="rightIcon" class="bi bi-apple"></i>
-
-                        </sgds-badge>
-                        <sgds-badge variant="warning" outlined>
-                            Testing
-                            <i slot="rightIcon" class="bi bi-apple"></i>
-
-                        </sgds-badge>
-                        <sgds-badge variant="neutral">
-                            Testing
-                            <i slot="rightIcon" class="bi bi-apple"></i>
-
-                        </sgds-badge>
-                        <sgds-badge variant="neutral" outlined>
-                            Testing
-
-                            <i slot="leftIcon" class="bi bi-123"></i>
-                        </sgds-badge>
-                        <sgds-badge variant="success" dismissible>
-                            TESZI
-                            <i slot="leftIcon" class="bi bi-123"></i>
-
-                        </sgds-badge>
-                        <sgds-badge variant="neutral" dismissible>
-                            Testing
-
-
-                        </sgds-badge>
-
-                        </sgds-badge>
-                        <br />
-
-
-                    </div>
-
+                <div class="d-flex-row">
+                    <sgds-badge variant="info" outlined>
+                        <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+                        Testing
+                    </sgds-badge>
+                    <sgds-badge variant="info" show dismissible>
+                        Testing
+                    </sgds-badge>
+                    <sgds-badge variant="success">
+                        <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+                        Testing
+                    </sgds-badge>
+                    <sgds-badge variant="success" outlined>
+                        <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+                        Testing
+                    </sgds-badge>
+                    <sgds-badge variant="danger">
+                        Testingi
+                    </sgds-badge>
+                    <sgds-badge variant="danger" outlined>
+                        <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+                        Testing
+                    </sgds-badge>
+                    <sgds-badge variant="warning">
+                        <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+                        Testing
+                    </sgds-badge>
+                    <sgds-badge variant="warning" outlined>
+                        <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+                        Testing
+                    </sgds-badge>
+                    <sgds-badge variant="neutral">
+                        <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+                        Testing
+                    </sgds-badge>
+                    <sgds-badge variant="neutral" outlined>
+                        <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+                        Testing
+                    </sgds-badge>
+                    <sgds-badge variant="success" outlined show dismissible>
+                        <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+                        TESZI
+                    </sgds-badge>
+                    <sgds-badge variant="neutral" show dismissible>
+                        Testing
+                    </sgds-badge>
+                    <br />
                 </div>
             </div>
             <div class="container">
@@ -1241,7 +1215,8 @@
                 <div class="row">
                     <div class="container col is-6">
 
-                        <sgds-alert variant="info" show dismissible title="Title" iconName="check-circle-fill" iconSize="lg">
+                        <sgds-alert variant="info" show dismissible title="Title">
+                            <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
                             <span>
                                 This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it
                                 a click if you like. You may add the dismissible option
@@ -1253,33 +1228,38 @@
                                 a click if you like. You may add the dismissible option
                             </span>
                         </sgds-alert>
-                        <sgds-alert variant="success" show dismissible iconName="check-circle-fill" iconSize="lg">
+                        <sgds-alert variant="success" show dismissible>
+                            <sgds-icon slot="icon" name="check-circle-fill"></sgds-icon>
                             <span>
                                 This is a info alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a
                                 click if you like. You may add the dismissible option
                             </span>
                         </sgds-alert>
-                        <sgds-alert variant="danger" show dismissible iconName="check-circle-fill" iconSize="lg">
+                        <sgds-alert variant="danger" show dismissible>
+                            <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
                             <span>
                                 This is an outline warning alert with <sgds-alert-link>an example
                                     link</sgds-alert-link>. Give it a click if you like. You may add the dismissible
                                 option
                             </span>
                         </sgds-alert>
-                        <sgds-alert variant="warning" show dismissible iconName="check-circle-fill" iconSize="lg">
+                        <sgds-alert variant="warning" show dismissible>
+                            <sgds-icon slot="icon" name="exclamation-triangle-fill"></sgds-icon>
                             <span>
                                 This is an outline danger alert with <sgds-alert-link>an example link</sgds-alert-link>.
                                 Give it a click if you like. You may add the dismissible option
                             </span>
                         </sgds-alert>
-                        <sgds-alert variant="neutral" show dismissible iconName="check-circle-fill" iconSize="lg">
+                        <sgds-alert variant="neutral" show dismissible>
+                            <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
                             <span>
                                 This is an outline success alert with <sgds-alert-link>an example
                                     link</sgds-alert-link>. Give it a click if you like. You may add the dismissible
                                 option
                             </span>
                         </sgds-alert>
-                        <sgds-alert variant="info" show outlined dismissible iconName="exclamation-circle-fill" iconSize="lg">
+                        <sgds-alert variant="info" show outlined dismissible>
+                            <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
                             <span>
                                 This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it
                                 a click if you like. You may add the dismissible option
@@ -1291,26 +1271,30 @@
                                 a click if you like. You may add the dismissible option
                             </span>
                         </sgds-alert>
-                        <sgds-alert variant="success" show outlined dismissible iconName="exclamation-circle-fill" iconSize="lg">
+                        <sgds-alert variant="success" show outlined dismissible>
+                            <sgds-icon slot="icon" name="check-circle-fill"></sgds-icon>
                             <span>
                                 This is a info alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a
                                 click if you like. You may add the dismissible option
                             </span>
                         </sgds-alert>
-                        <sgds-alert variant="danger" show outlined dismissible iconName="exclamation-circle-fill" iconSize="lg">
+                        <sgds-alert variant="danger" show outlined dismissible>
+                            <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
                             <span>
                                 This is an outline warning alert with <sgds-alert-link>an example
                                     link</sgds-alert-link>. Give it a click if you like. You may add the dismissible
                                 option
                             </span>
                         </sgds-alert>
-                        <sgds-alert variant="warning" show outlined dismissible iconName="exclamation-circle-fill" iconSize="lg">
+                        <sgds-alert variant="warning" show outlined dismissible>
+                            <sgds-icon slot="icon" name="exclamation-triangle-fill"></sgds-icon>
                             <span>
                                 This is an outline danger alert with <sgds-alert-link>an example link</sgds-alert-link>.
                                 Give it a click if you like. You may add the dismissible option
                             </span>
                         </sgds-alert>
-                        <sgds-alert variant="neutral" show outlined dismissible iconName="exclamation-circle-fill" iconSize="lg">
+                        <sgds-alert variant="neutral" show outlined dismissible>
+                            <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
                             <span>
                                 This is an outline success alert with <sgds-alert-link>an example
                                     link</sgds-alert-link>. Give it a click if you like. You may add the dismissible

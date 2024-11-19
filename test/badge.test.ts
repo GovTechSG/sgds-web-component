@@ -15,7 +15,7 @@ describe("SgdsBadge component", () => {
     expect(el.shadowRoot?.querySelector("sgds-close-button")).to.exist;
   });
   it("should render the leadingIcon slot", async () => {
-    const el = await fixture<SgdsBadge>(html`<sgds-badge show><span slot="leadingIcon">Icon</span></sgds-badge>`);
+    const el = await fixture<SgdsBadge>(html`<sgds-badge show><span slot="icon">Icon</span></sgds-badge>`);
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("slot[name='leadingIcon']")).to.exist;
   });

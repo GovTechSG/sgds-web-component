@@ -86,7 +86,7 @@
   --sgds-close-btn-border-radius: var(--sgds-badge-border-radius);
 }
 
-slot[name=leadingIcon]::slotted(*){
+slot[name="icon"]::slotted(*){
   color: var(--sgds-badge-color);
 } 
 
