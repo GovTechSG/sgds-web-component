@@ -3,6 +3,10 @@
   color: var(--sgds-form-color);
 }
 
+.form-label.disabled {
+  opacity: var(--sgds-opacity-50);
+}
+
 .form-check-label{
   color: var(--sgds-form-color);
 }
