@@ -1,17 +1,24 @@
-.nav {
+/* Default Horizontal Orientation */
+.tab-group__nav {
   display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin-bottom: 0;
-  padding-left: 0;
-}
-.nav-tabs {
-  border-bottom: none;
-  gap:  2rem;
-}
-.sgds.nav-tabs[variant="tabs-basic-toggle"] {
+  flex-direction: row;
+  /* Arrange tabs in a row */
   gap: 0;
+  /* Adjust gap as needed */
 }
-slot[name="nav"][variant="tabs-basic-toggle"]::slotted(sgds-tab) {
-  margin-left: -2px;
+
+/* Vertical Orientation */
+:host([orientation="vertical"]) .tab-group__nav {
+  flex-direction: column;
+  /* Arrange tabs in a column */
+  gap: 0;
+  width: 100%;
+  align-items: stretch;
+  /* Adjust gap as needed */
+}
+
+:host([variant="solid"]) .tab-group__nav {
+  gap: 8px;
+
+
 }

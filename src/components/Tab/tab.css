@@ -2,15 +2,225 @@
   display: inline-block;
 }
 
-ul {
-  padding-left: 0;
-  margin-bottom: 1rem;
-  margin-top: 0;
+/* Remove bullet points from ul and li within the host */
+:host ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-.list-unstyled {
+
+:host li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  gap: var(--sgds-tabs-gap, var(--sgds-spacer-3, 0.5rem));
+
+}
+
+:host([variant="solid"][density="compact"][orientation="horizontal"]) sgds-badge,
+:host([variant="solid"][density="compact"][orientation="vertical"]) sgds-badge,
+:host([variant="solid"][density="compact"][orientation="horizontal"][active]) sgds-badge,
+:host([variant="solid"][density="compact"][orientation="vertical"][active]) sgds-badge {
+  padding: var(--sgds-tabs-compact-padding-y, var(--sgds-spacer-3, 0.5rem)) var(--sgds-tabs-compact-padding-x, var(--sgds-spacer-5, 1rem));
+  font-size: var(--sgds-font-size-1, 0.875rem);
+  font-weight: var(--sgds-font-weight-regular, 400);
+}
+
+:host([variant="solid"][orientation="horizontal"]) sgds-badge {
+  background-color: var(--sgds-tabs-solid-bg, var(--sgds-gray-100));
+  --sgds-badge-bg: var(--sgds-tabs-solid-bg, var(--sgds-gray-100));
+  --sgds-badge-color: var(--sgds-black);
+  padding: var(--sgds-tabs-default-padding-y, var(--sgds-spacer-4, 0.75rem)) var(--sgds-tabs-default-padding-x, var(--sgds-spacer-5, 1rem));
+  border-radius: var(--sgds-tabs-border-radius, var(--sgds-border-radius-md, 0.5rem));
+  font-size: var(--sgds-font-size-2, 1rem);
+  font-weight: var(--sgds-font-weight-regular, 400);
+  cursor: pointer;
+}
+
+:host([variant="solid"][orientation="horizontal"][active]) sgds-badge {
+  --sgds-badge-bg: var(--sgds-primary-color);
+  background-color: var(--sgds-primary-color);
+  --sgds-badge-color: var(--sgds-white, white);
+  padding: var(--sgds-tabs-default-padding-y, var(--sgds-spacer-4, 0.75rem)) var(--sgds-tabs-default-padding-x, var(--sgds-spacer-5, 1rem));
+  border-radius: var(--sgds-tabs-border-radius, 8px);
+  font-size: var(--sgds-font-size-2, 1rem);
+  font-weight: var(--sgds-font-weight-regular, 400);
+  cursor: pointer;
+}
+
+:host([variant="solid"]:not([active]):not([disabled])) .tab-item:hover sgds-badge {
+  --sgds-badge-bg: var(--sgds-tabs-solid-hover-bg, var(--sgds-gray-300));
+  background-color: var(--sgds-tabs-solid-hover-bg, var(--sgds-gray-300));
+  cursor: pointer;
+}
+
+:host([variant="solid"]) .tab-item:focus sgds-badge {
+  border-color: transparent;
+  box-shadow: var(--sgds-box-shadow-focus);
+  outline: 0;
+
+}
+
+:host([variant="underlined"][disabled]) .tab-item {
+  color: red;
+}
+
+
+
+:host([variant="solid"][orientation="vertical"][active]) sgds-badge {
+  display: flex;
+  width: 100%;
+  align-items: left;
+  justify-content: left;
+  background-color: var(--sgds-primary-color);
+  padding: var(--sgds-tabs-default-padding-y, var(--sgds-spacer-4, 0.75rem)) var(--sgds-tabs-default-padding-x, var(--sgds-spacer-5, 1rem));
+  border-radius: var(--sgds-tabs-border-radius, 8px);
+  font-size: var(--sgds-font-size-2, 1rem);
+  font-weight: var(--sgds-font-weight-regular, 400);
+  cursor: pointer;
+}
+
+:host([variant="solid"][orientation="vertical"]:not([active])) sgds-badge {
+  display: flex;
+  width: 100%;
+  align-items: left;
+  justify-content: left;
+  background-color: var(--sgds-tabs-solid-bg, var(--sgds-gray-100));
+  --sgds-badge-bg: var(--sgds-tabs-solid-bg, var(--sgds-gray-100));
+  --sgds-badge-color: black;
+  padding: var(--sgds-tabs-default-padding-y, var(--sgds-spacer-4, 0.75rem)) var(--sgds-tabs-default-padding-x, var(--sgds-spacer-5, 1rem));
+  border-radius: var(--sgds-tabs-border-radius, 8px);
+  font-size: var(--sgds-font-size-2, 1rem);
+  font-weight: var(--sgds-font-weight-regular, 400);
+  cursor: pointer;
+}
+
+:host([variant="underlined"][active][orientation="vertical"]) ul {
+
+  display: flex;
+  flex-direction: column;
+  border-right: var(--sgds-border-width-1, 1px) solid var(--sgds-tabs-underlined-hover-bg, var(--sgds-gray-500));
+  ;
   list-style: none;
 }
-.nav-link {
+
+/* Active state for vertical orientation */
+:host([variant="underlined"][active][orientation="vertical"]) ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  position: relative;
+}
+
+/* Add the colored line on the side */
+:host([variant="underlined"][active][orientation="vertical"]) ul::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  /* Positions the line on the left side */
+  width: 5px;
+  /* Thickness of the line */
+  height: 100%;
+  /* Full height of the container */
+  background-color: var(--sgds-primary-color);
+
+}
+
+:host([variant="underlined"][orientation="vertical"]:not([active]):not([disabled])) .tab-item:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  /* Adjust this value as needed */
+  right: 0px;
+  width: 6px;
+  height: 100%;
+  /* Thickness of the underline */
+  background-color: var(--sgds-gray-400);
+}
+
+/* Container with a continuous underline */
+:host([variant="underlined"][orientation="horizontal"]) ul {
+  display: flex;
+  border-bottom: var(--sgds-border-width-1, 1px) solid var(--sgds-tabs-underlined-hover-bg, var(--sgds-gray-500));
+  list-style: none;
+  /* Light gray line across all tabs */
+}
+
+:host([variant="underlined"][orientation="horizontal"]) .tab-item:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  /* Adjust this value as needed */
+  left: 0;
+  width: 100%;
+  height: 5px;
+  /* Thickness of the underline */
+  background-color: var(--sgds-gray-400);
+}
+
+:host([variant="underlined"][active][orientation="horizontal"]) ul {
+
+  display: flex;
+  list-style: none;
+  margin-bottom: 0px;
+  position: relative;
+
+}
+
+:host([variant="underlined"][active][orientation="horizontal"]) ul::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  /* Thickness of the underline */
+  background-color: var(--sgds-primary-color);
+  list-style: none;
+}
+
+/* Basic styling for each tab item */
+:host([variant="underlined"]) .tab-item {
+  padding: var(--sgds-tabs-default-padding-y, var(--sgds-spacer-4, 0.75rem)) var(--sgds-tabs-default-padding-x, var(--sgds-spacer-5, 1rem));
+  font-size: var(--sgds-font-size-2, 1rem);
+  font-weight: var(--sgds-font-weight-regular, 400);
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+  list-style: none;
+}
+
+:host([variant="underlined"][density="compact"]) .tab-item {
+  padding: var(--sgds-tabs-default-padding-y, var(--sgds-spacer-3, 0.55rem)) var(--sgds-tabs-default-padding-x, var(--sgds-spacer-5, 1rem));
+  font-size: var(--sgds-font-size-1, 0.75rem);
+  font-weight: var(--sgds-font-weight-regular, 400);
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+  list-style: none;
+}
+
+
+
+/* Active tab styling with purple text and thicker underline */
+
+:host([variant="underlined"][active]) .tab-item {
+  color: var(--sgds-primary-color);
+  list-style: none;
+  /* Primary color for active text */
+
+}
+
+
+
+/* .nav-link {
   color: var(--sgds-body-color);
   display: block;
   padding: 0.5rem 1rem;
@@ -18,6 +228,7 @@ ul {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
   cursor: pointer;
 }
+
 @media (prefers-reduced-motion: reduce) {
   .nav-link {
     transition: none;
@@ -97,4 +308,4 @@ ul {
   border-color: var(--sgds-gray-400);
   cursor: not-allowed;
   background-color: transparent;
-}
+} */
