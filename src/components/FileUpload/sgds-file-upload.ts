@@ -1,32 +1,16 @@
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
 import { property } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import { createRef, ref } from "lit/directives/ref.js";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import SgdsElement from "../../base/sgds-element";
-import { SgdsButton, type ButtonVariant } from "../Button/sgds-button";
+import { SgdsButton } from "../Button/sgds-button";
+import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 import fileUploadStyle from "./file-upload.css";
 import genId from "../../utils/generateId";
 import svgStyles from "../../styles/svg.css";
 import formHintStyles from "../../styles/form-hint.css";
-export type FileUploadButtonVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info"
-  | "light"
-  | "dark"
-  | "link"
-  | "outline-primary"
-  | "outline-secondary"
-  | "outline-success"
-  | "outline-danger"
-  | "outline-warning"
-  | "outline-info"
-  | "outline-light"
-  | "outline-dark";
 
 /**
  * @summary Allows users to upload files of various sizes and formats
@@ -44,36 +28,27 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   /**@internal */
   static get scopedElements() {
     return {
-      "sgds-button": SgdsButton
+      "sgds-button": SgdsButton,
+      "sgds-close-button": SgdsCloseButton
     };
   }
-  /** The button's variant. */
-  @property({ reflect: true }) variant: FileUploadButtonVariant = "primary";
 
   //** Disable the fileuploader button */
-  @property({ type: Boolean, reflect: true })
-  disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Allows multiple files to be listed for uploading */
-  @property({ type: Boolean, reflect: true })
-  multiple = false;
+  @property({ type: Boolean, reflect: true }) multiple = false;
 
   /** Specify the acceptable file type  */
-  @property({ type: String, reflect: true })
-  accept = "";
-
-  /** Specifies a large or small button */
-  @property({ reflect: true }) size: "sm" | "lg";
+  @property({ type: String, reflect: true }) accept = "";
 
   /** Customize the check icon with SVG */
-  @property({ type: String })
-  checkedIcon = "";
+  @property({ type: String }) checkedIcon = "";
 
-  /** Customize the cancel icon with SVG */
-  @property({ type: String })
-  cancelIcon = "";
+  /** The file upload's label */
+  @property({ reflect: true }) label = "";
 
-  /** The input's hint text below the label */
+  /** The file upload's hint text */
   @property({ reflect: true }) hintText = "";
 
   /** @internal */
@@ -140,14 +115,28 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   /**@internal */
   protected inputId: string = genId("input", "file");
 
+  protected labelId: string = genId("label");
+
+  protected _renderLabel() {
+    const labelTemplate = html`
+      <label
+        for=${this.inputId}
+        id=${this.labelId}
+        class=${classMap({
+          "form-label": true
+        })}
+      >
+        ${this.label}
+      </label>
+    `;
+    return this.label && labelTemplate;
+  }
+
   protected _renderHintText() {
     const hintTextTemplate = html` <small id="${this.inputId}Help" class="form-text">${this.hintText}</small> `;
     return this.hintText && hintTextTemplate;
   }
 
-  private _sanitizeVariant(variant: FileUploadButtonVariant) {
-    return variant.replace("outline-", "") as ButtonVariant;
-  }
   render() {
     const getCheckedIcon = (checkedIcon: string) => {
       if (checkedIcon) {
@@ -167,56 +156,54 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
       </svg>`;
     };
 
-    const getCancelIcon = (cancelIcon: string) => {
-      if (cancelIcon) {
-        return html`${unsafeSVG(cancelIcon)}`;
-      }
-      return html`<svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-x-circle"
-        viewBox="0 0 16 16"
-      >
-        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        <path
-          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-        />
-      </svg>`;
-    };
-
     const listItems = this.selectedFiles.map(
       (file, index) => html`
-        <li key=${index} class="fileupload-list-item">
+        <li key=${index} class="file-upload-list-item">
           <span>${getCheckedIcon(this.checkedIcon)}</span>
           <span class="filename">${file.name}</span>
-          <span @click=${() => this._removeFileHandler(index)}>${getCancelIcon(this.cancelIcon)}</span>
+          <sgds-close-button
+            aria-label="remove the file"
+            @click=${() => this._removeFileHandler(index)}
+          ></sgds-close-button>
         </li>
       `
     );
 
     return html`
-      <input
-        ${ref(this.inputRef)}
-        type="file"
-        @change=${this.handleInputChange}
-        ?multiple=${this.multiple}
-        accept=${this.accept}
-        id=${this.inputId}
-      />
-      <div class="fileupload-container">
-        <sgds-button
-          size=${this.size}
-          variant=${this._sanitizeVariant(this.variant)}
-          ?outlined=${this.variant.includes("outline")}
-          ?disabled=${this.disabled}
-          @click=${this.handleClick}
-        >
-          <label for=${this.inputId} class="file-upload-label"><slot></slot></label>
-        </sgds-button>
-        ${this._renderHintText()}
-        <ul class="sgds fileupload-list">
+      <div class="file-upload">
+        <input
+          ${ref(this.inputRef)}
+          type="file"
+          @change=${this.handleInputChange}
+          ?multiple=${this.multiple}
+          accept=${this.accept}
+          id=${this.inputId}
+        />
+        <div class="file-upload-container">
+          ${this._renderLabel()}
+          <sgds-button variant="outline" ?disabled=${this.disabled} @click=${this.handleClick}>
+            <label for=${this.inputId}><slot></slot></label>
+            <svg
+              slot="rightIcon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M3.5625 14.1943C3.71168 14.1943 3.85476 14.2535 3.96025 14.359C4.06574 14.4645 4.125 14.6076 4.125 14.7568V17.5693C4.125 17.8677 4.24353 18.1538 4.4545 18.3648C4.66548 18.5758 4.95163 18.6943 5.25 18.6943H18.75C19.0484 18.6943 19.3345 18.5758 19.5455 18.3648C19.7565 18.1538 19.875 17.8677 19.875 17.5693V14.7568C19.875 14.6076 19.9343 14.4645 20.0398 14.359C20.1452 14.2535 20.2883 14.1943 20.4375 14.1943C20.5867 14.1943 20.7298 14.2535 20.8352 14.359C20.9407 14.4645 21 14.6076 21 14.7568V17.5693C21 18.166 20.7629 18.7383 20.341 19.1603C19.919 19.5822 19.3467 19.8193 18.75 19.8193H5.25C4.65326 19.8193 4.08097 19.5822 3.65901 19.1603C3.23705 18.7383 3 18.166 3 17.5693V14.7568C3 14.6076 3.05926 14.4645 3.16475 14.359C3.27024 14.2535 3.41332 14.1943 3.5625 14.1943Z"
+                fill="currentColor"
+              />
+              <path
+                d="M11.6018 4.34604C11.654 4.29366 11.7161 4.2521 11.7844 4.22374C11.8528 4.19538 11.926 4.18079 12 4.18079C12.074 4.18079 12.1473 4.19538 12.2156 4.22374C12.2839 4.2521 12.346 4.29366 12.3983 4.34604L15.7733 7.72104C15.8789 7.82666 15.9382 7.96992 15.9382 8.11929C15.9382 8.26866 15.8789 8.41192 15.7733 8.51754C15.6676 8.62316 15.5244 8.6825 15.375 8.6825C15.2256 8.6825 15.0824 8.62316 14.9768 8.51754L12.5625 6.10217V15.9943C12.5625 16.1435 12.5032 16.2866 12.3978 16.392C12.2923 16.4975 12.1492 16.5568 12 16.5568C11.8508 16.5568 11.7077 16.4975 11.6023 16.392C11.4968 16.2866 11.4375 16.1435 11.4375 15.9943V6.10217L9.02326 8.51754C8.97096 8.56984 8.90887 8.61133 8.84054 8.63963C8.77221 8.66793 8.69897 8.6825 8.62501 8.6825C8.55105 8.6825 8.47781 8.66793 8.40948 8.63963C8.34114 8.61133 8.27906 8.56984 8.22676 8.51754C8.17446 8.46524 8.13297 8.40316 8.10467 8.33482C8.07636 8.26649 8.0618 8.19325 8.0618 8.11929C8.0618 8.04533 8.07636 7.97209 8.10467 7.90376C8.13297 7.83543 8.17446 7.77334 8.22676 7.72104L11.6018 4.34604Z"
+                fill="currentColor"
+              />
+            </svg>
+          </sgds-button>
+          ${this._renderHintText()}
+        </div>
+        <ul class="file-upload-list">
           ${listItems}
         </ul>
       </div>

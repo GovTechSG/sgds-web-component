@@ -183,6 +183,8 @@ describe("Feedback UI optional", () => {
     const el = await fixture<SgdsInput>(
       html` <sgds-input invalid hasFeedback="both" invalidFeedback="invalid feedback"></sgds-input> `
     );
+    el.invalid = true;
+    await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("div.invalid-feedback")).not.to.be.null;
     expect(el.shadowRoot?.querySelector("div.invalid-feedback")?.textContent).to.contain("invalid feedback");
   });

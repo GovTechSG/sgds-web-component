@@ -28,10 +28,6 @@ export class SgdsRadio extends SgdsElement {
   /** Disables the radio. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /**Feedback text for error state when validated */
-  @property({ type: String, reflect: true }) invalidFeedback = "";
-  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
-  @property({ type: Boolean, reflect: true }) hasFeedback = false;
   /** Marks the radio input as invalid. Replace the pseudo :invalid selector for absent in custom elements */
   @property({ type: Boolean, reflect: true }) invalid = false;
 

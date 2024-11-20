@@ -46,10 +46,13 @@ export class SgdsQuantityToggle
   @property() size: "sm" | "md" = "md";
 
   /** The input's value. Set to 0 by default */
-  @property({ type: Number, reflect: true }) value = 0;
+  @property({ type: Number, reflect: true }) value;
 
   /** Disables the entire quantity toggle  */
   @property({ type: Boolean, reflect: true }) disabled = false;
+
+  /** Makes the input a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /** The quantity toggle's button variants */
   @property({ type: String }) iconButtonVariant = "ghost";
@@ -196,15 +199,27 @@ export class SgdsQuantityToggle
         for=${this.inputId}
         id=${this.labelId}
         class=${classMap({
-          "form-label": true
+          "form-label": true,
+          required: this.required,
+          disabled: this.disabled
         })}
         >${this.label}</label
       >
     `;
     return this.label && labelTemplate;
   }
+
   protected _renderHintText() {
-    const hintTextTemplate = html` <div id="${this.inputId}Help" class="form-text">${this.hintText}</div> `;
+    const hintTextTemplate = html`
+      <div
+        id="${this.inputId}Help"
+        class="form-text ${classMap({
+          disabled: this.disabled
+        })}"
+      >
+        ${this.hintText}
+      </div>
+    `;
     return this.hintText && hintTextTemplate;
   }
 
@@ -212,16 +227,7 @@ export class SgdsQuantityToggle
     return html`
       <div class="form-control-container">
         ${this._renderLabel()}
-        <div
-          part="base"
-          class="${classMap({
-            disabled: this.disabled,
-            "input-group": true,
-            [`input-group-${this.size}`]: this.size
-          })}"
-          variant="quantity-toggle"
-          size=${this.size}
-        >
+        <div part="base" class="input-group" variant="quantity-toggle">
           <sgds-icon-button
             variant=${this.iconButtonVariant}
             ariaLabel=${`decrease by ${this.step}`}
@@ -236,7 +242,7 @@ export class SgdsQuantityToggle
             step=${ifDefined(this.step)}
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
-            .value=${live(this.value.toString())}
+            .value=${live(this.value)}
             @sgds-change=${(e: Event) => this._handleChange(e)}
             @sgds-input=${(e: Event) => this._handleInputChange(e)}
             @sgds-invalid=${this._handleInvalidChange}

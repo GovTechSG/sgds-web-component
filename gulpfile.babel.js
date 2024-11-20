@@ -3,6 +3,8 @@ const { src, dest, task } = require("gulp");
 const { getFolders } = require("./scripts/buildUtils.js");
 const fs = require("fs");
 const order = require("gulp-order");
+const replace = require("gulp-replace");
+const { version } = require("./package.json");
 
 exports.default = task("build-readme", () => {
   return src("docs/*.md")
@@ -44,4 +46,10 @@ exports.default = task("concat-storybook-mdx", done => {
         .pipe(dest("stories/components"));
     } else return done();
   });
+});
+
+exports.default = task("replace-version", () => {
+  return src("docs/INSTALLATION.md")
+    .pipe(replace(/<version>/g, version))
+    .pipe(dest("./docs"));
 });

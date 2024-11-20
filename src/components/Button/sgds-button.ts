@@ -19,13 +19,6 @@ export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
  * @event sgds-blur - Emitted when the button is blurred.
  * @event sgds-focus - Emitted when the button is focused.
  *
- * @cssprop --sgds-btn-font-weight - The font weight of text content in button
- * @cssprop --sgds-btn-bg - The background color of button
- * @cssprop --sgds-btn-hover-bg - The background color of a button in hover state
- * @cssprop --sgds-btn-border-radius - The border radius of button border
- * @cssprop --sgds-btn-color - The text color of button, applicable to primary, outline, and ghost variants only
- * @cssprop --sgds-btn-border-width - The thickness of the button border, applicable to outline variant only
- * @cssprop --sgds-btn-border-color - The color of the button border, applicable to outline variant only
  *
  */
 export class SgdsButton extends ButtonElement {

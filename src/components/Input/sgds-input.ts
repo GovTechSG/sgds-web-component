@@ -62,10 +62,11 @@ export class SgdsInput
   /** Autofocus the input */
   @property({ type: Boolean, reflect: true }) autofocus = false;
 
-  /** Makes the input readonly. */
-  @property({ type: Boolean, reflect: true }) readonly = false;
   /** Makes the input a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
+
+  /** Makes the input readonly. */
+  @property({ type: Boolean, reflect: true }) readonly = false;
 
   /**
    * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is

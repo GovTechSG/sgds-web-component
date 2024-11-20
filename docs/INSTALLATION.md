@@ -62,13 +62,13 @@ This method registers all SGDS elements up front in the Custom Elements Registry
 // load scoped custom element registry polyfill first (optional, depends on use case)
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/scoped-custom-element-registry@0.0.9"></script>
 // Load global css file
-<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@<version>/themes/day.css' rel='stylesheet' type='text/css' />
+<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.0.0-rc.0/themes/day.css' rel='stylesheet' type='text/css' />
 
 // it is recommended to load a particular version when using cdn e.g. https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@1.0.2
-<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@<version>"></script>
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.0.0-rc.0"></script>
 
 //or load a single component e.g. Masthead
-<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@<version>/components/Masthead/index.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.0.0-rc.0/components/Masthead/index.umd.js"></script>
 
 ```
 

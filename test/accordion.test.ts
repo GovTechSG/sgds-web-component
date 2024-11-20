@@ -190,4 +190,49 @@ describe("<sgds-accordion-item>", () => {
     expect(hideHandler).to.have.been.calledOnce;
     expect(el.open).to.be.true;
   });
+
+  it("variant prop is forwarded to variant prop of sgds-accordion-item element", async () => {
+    const el = await fixture<SgdsAccordion>(html`<sgds-accordion variant="border">
+      <sgds-accordion-item>
+        <div slot="accordion-header">Accordion 1</div>
+        <span slot="accordion-content"
+          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio?
+          Eum.</span
+        >
+      </sgds-accordion-item>
+    </sgds-accordion>`);
+    expect(el.querySelectorAll("sgds-accordion-item")[0]).to.have.attribute("variant", "border");
+  });
+
+  it("density prop is forwarded to density prop of sgds-accordion-item element", async () => {
+    const el = await fixture<SgdsAccordion>(html`<sgds-accordion density="compact">
+      <sgds-accordion-item>
+        <div slot="accordion-header">Accordion 1</div>
+        <span slot="accordion-content"
+          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio?
+          Eum.</span
+        >
+      </sgds-accordion-item>
+    </sgds-accordion>`);
+    expect(el.querySelectorAll("sgds-accordion-item")[0]).to.have.attribute("density", "compact");
+  });
+
+  it("should be disabled when disabled = true", async () => {
+    const el = await fixture<SgdsAccordionItem>(html`
+      <sgds-accordion-item disabled>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.
+      </sgds-accordion-item>
+    `);
+    const button = el.shadowRoot?.querySelector(".accordion-btn") as HTMLButtonElement;
+
+    expect(button?.classList.contains("disabled")).to.be.true;
+
+    button.click();
+    await el.updateComplete;
+
+    const accordionBody = el.shadowRoot?.querySelector(".accordion-body") as HTMLButtonElement;
+    expect(accordionBody?.classList.contains("hidden")).to.be.true;
+  });
 });

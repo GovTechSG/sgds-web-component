@@ -3,55 +3,26 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args =>
   html`
-    <sgds-alert ?dismissible=${args.dismissible} variant=${ifDefined(args.variant)} ?show=${args.show}
-      ><svg
-        slot="icon"
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-exclamation-circle"
-        viewBox="0 0 16 16"
-      >
-        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+    <sgds-alert
+      title=${ifDefined(args.title)}
+      ?dismissible=${args.dismissible}
+      variant=${ifDefined(args.variant)}
+      ?show=${args.show}
+      ><svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
         <path
-          d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"
+          d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16.5341 8.59088C16.2046 8.26137 15.6704 8.26137 15.3409 8.59088C15.3329 8.59884 15.3254 8.60726 15.3185 8.61612L11.4121 13.5938L9.05686 11.2386C8.72736 10.9091 8.19312 10.9091 7.86362 11.2386C7.53411 11.5681 7.53411 12.1024 7.86362 12.4319L10.8409 15.4091C11.1704 15.7386 11.7046 15.7386 12.0341 15.4091C12.0415 15.4018 12.0484 15.394 12.0549 15.3859L16.5461 9.77191C16.8636 9.44154 16.8596 8.91634 16.5341 8.59088Z"
+          fill="white"
         />
       </svg>
-      This is an Alert component. You may add the dismissible option</sgds-alert
-    >
-    <sgds-alert variant="success" show>
-      <svg
-        slot="icon"
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-info-circle"
-        viewBox="0 0 16 16"
-      >
-        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        <path
-          d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
-        />
-      </svg>
-      <div>
-        <sgds-alert-heading headerTag=${ifDefined(args.headerTag)}>Hello, nice to meet you</sgds-alert-heading>
-        <p>
-          Aww yeah, you successfully read this important
-          <sgds-alert-link href=${ifDefined(args.href)} target=${ifDefined(args.target)}>alert message</sgds-alert-link
-          >. This example text is going to run a bit longer so that you can see how spacing within an alert works with
-          this kind of content.
-        </p>
-        <hr />
-        <p>Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-      </div>
+      <div>Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
     </sgds-alert>
   `;
 export const args = {
   href: "#",
   show: true,
-  variant: "primary"
+  variant: "info",
+  title: "Title",
+  dismissible: true
 };
 
 export const parameters = {};

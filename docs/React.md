@@ -70,27 +70,3 @@ function MyComponent() {
 export default MyComponent;
 
 ```
-
-## Using web components - Importing the library 
-
-Follow [import instructions](/story/getting-started-imports--page)
-
-## Using web components - Typescript 
-
-For React Typescript users, you will often face this error : `Property 'sgds-masthead' does not exist on type 'JSX.IntrinsicElements'.`
-
-Solution: Typed the custom elements that you are using in your directory's types.d.ts file 
-
-```jsx
-//types.d.ts file
-import * as React from 'react'
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      "sgds-masthead": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-    }
-  }
-}
-```
-

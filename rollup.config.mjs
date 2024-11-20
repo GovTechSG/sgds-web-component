@@ -8,6 +8,8 @@ import glob from "glob";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import copy from 'rollup-plugin-copy'
+import preserveDirectives from "rollup-plugin-preserve-directives";
+
 const external = [
   "@lit",
   "lit",
@@ -59,7 +61,8 @@ const reactBuildPlugins = [
   litcss(),
   typescript({
     useTsconfigDeclarationDir: true
-  })
+  }),
+  preserveDirectives()
 ];
 const buildUMDComponentBundles = () => {
   const indexFilesMetadata = glob
@@ -121,12 +124,13 @@ const buildSgdsPackage = () => {
       output: [
         {
           entryFileNames: "[name].js",
-          dir: "lib",
+          dir: "lib/react",
           format: "esm",
           sourcemap: true,
           exports: "named",
           preserveModules: true,
-          preserveModulesRoot: "src"
+          preserveModulesRoot: "src/react",
+          banner: `'use client';`,
         }
       ],
       plugins: [...reactBuildPlugins],
@@ -137,12 +141,13 @@ const buildSgdsPackage = () => {
       output: [
         {
           entryFileNames: "[name].cjs.js",
-          dir: "lib",
+          dir: "lib/react",
           format: "cjs",
           sourcemap: true,
           exports: "named",
           preserveModules: true,
-          preserveModulesRoot: "src"
+          preserveModulesRoot: "src/react",
+          banner: `'use client';`,
         }
       ],
       plugins: [...reactBuildPlugins],
@@ -150,7 +155,7 @@ const buildSgdsPackage = () => {
     }
   ];
 
-  return [...esmModules, ...umdBundles, ...reactPackage];
+  return [...reactPackage, ...esmModules, ...umdBundles ];
 };
 
 export default buildSgdsPackage;

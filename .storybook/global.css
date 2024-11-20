@@ -18,10 +18,20 @@ sgds-card.faq::part(base) {
   background-color: #f6f7fb;
   border-radius: 24px;
 }
-sgds-faq-grid{
+sgds-faq-grid {
   display: grid;
   grid-template-columns: 3fr 1fr;
   row-gap: 1rem;
   column-gap: 2rem;
   width: 100%;
+}
+
+.d-flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-gap-sm);
+}
+
+.docs-story{
+  background: var(--sgds-default-bg);
 }

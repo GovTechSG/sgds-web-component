@@ -1,6 +1,11 @@
 ## Variants
 
-Use any of the available button style types to quickly create a styled button. Modify the `variant` prop to the intended value.
+The default variant is `primary`. Modify the `variant` prop to the intended value.
+
+- Use `primary` buttons to show the key action on a page or view. Most pages should only have one primary action.
+- Use `outlined` buttons next to primary buttons to indicate alternative or less pronounced actions.
+- Use `ghost` button for supplementary action as they are subtle in their appearance 
+- Use `danger` buttons  to remove things or for irreversible actions. 
 
 <Canvas of={ButtonStories.Variants}>
   <Story of={ButtonStories.Variants} />
@@ -8,32 +13,37 @@ Use any of the available button style types to quickly create a styled button. M
 
 ## Sizes
 
-Fancy larger or smaller buttons? Add size="lg", size="sm" for additional sizes.
+The default button size is medium. Add `size="lg"`,` size="sm"` for additional sizes.
+
+- Large buttons are used sparingly across the UI. They may be used for page components that demand attention, such as on the homepage banner.
+- The medium (default) button is the standard size for buttons everywhere.
+- Small button should be used sparingly and only in places where the UI is very dense.   
 
 <Canvas of={ButtonStories.Sizes}>
   <Story of={ButtonStories.Sizes} />
 </Canvas>
 
-## Active state
+## Hover / Active state
 
-To set a button's active state simply set the component's `active` prop.
+To set a button's active state, set the component's `active` prop.
 
 <Canvas of={ButtonStories.Active}>
   <Story of={ButtonStories.Active} />
 </Canvas>
 
-
 ## Disabled state
 
-Make buttons look inactive by adding the `disabled` prop to.
+The disabled state indicates that an action can’t be taken until a previous action is completed.
+Add `disabled` prop to the button to apply the disabled state
 
 <Canvas of={ButtonStories.Disabled}>
   <Story of={ButtonStories.Disabled} />
 </Canvas>
 
-## Icon
+## With Icon
 
-Use SVG element to add icon to the slot.
+Leading icons can visually represent a button's action to lessen the cognitive load for users. Use `slot="rightIcon"` to add a leading icon to the button 
+Trailing icons should be used in specific use cases as a nod to the interaction. Use `slot="leftIcon"` to add a trailing icon to the button
 
 <Canvas of={ButtonStories.ButtonWithIcon}>
   <Story of={ButtonStories.ButtonWithIcon} />

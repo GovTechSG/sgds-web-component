@@ -1,4 +1,3 @@
-"use client";
 import "@govtechsg/sgds-web-component/themes/day.css";
 import { Accordion } from "./components/Accordion";
 import { ActionCard } from "./components/ActionCard";

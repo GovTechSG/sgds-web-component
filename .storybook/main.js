@@ -1,8 +1,11 @@
 import remarkGfm from "remark-gfm";
 module.exports = {
   stories: [
-    "../stories/frameworks/**/*.mdx",
-    "../stories/getting-started/**/*.mdx",
+    "../stories/style/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/usage/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/migration/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/frameworks/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/getting-started/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/*.mdx"
   ],
@@ -19,7 +22,8 @@ module.exports = {
           }
         }
       }
-    }
+    },
+    "@storybook/addon-themes"
   ],
   framework: {
     name: "@storybook/web-components-vite",
@@ -28,5 +32,6 @@ module.exports = {
         viteConfigPath: "./.storybook/storybookVite.config.js"
       }
     }
-  }
+  },
+  staticDirs: ["./static"]
 };

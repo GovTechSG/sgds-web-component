@@ -1,11 +1,76 @@
+## Pass IStepsMetadata to steps prop 
+
+`steps` prop is an array of object defined by interface `IStepMetaData`
+
+```tsx
+export interface IStepMetaData {
+  component: unknown;
+  stepHeader: string;
+}
+```
+
+- `component` refers to the component to render for each step. The type of component set to unknown as it depends on which frontend library you are using. 
+For example, it could be a vue component / react component / angular component depending on your frontend library of choice
+- `stepHeader` refers to the header title per step.
+- The step number is defined by the object's index of the array
+
+## Vertical stepper
+
+By default, stepper is of `horizontal` orientation. Set stepper to vertical with `orientation="vertical"`
+
+<Canvas of={StepperStories.Orientation}>
+  <Story of={StepperStories.Orientation} />
+</Canvas>
+
+## Clickable steps
+
+By default steps indicator are non-interactive. To enable steps to be clickable, add `clickable` prop. 
+
+    Note that the steps are only backwards clickable. 
+    To allow users to go back and forth, please create the action buttons with the methods from the methods table above.
+
+
+<Canvas of={StepperStories.Clickable}>
+  <Story of={StepperStories.Clickable} />
+</Canvas>
+
 ## Stepper in a form context
+
+The example below is build with Lit library. As each frontend library has their own lifecycle hooks and unique syntax for props and event handling, 
+you will need to manage the rendering of components on your end. Here is a general guide to building a form stepper like the one below. 
+Reference the API table and methods table carefully when creating the Stepper component.
+
+1. Build your child components. The stepper example has three steps and each step has its own component.
+  These three components will be the direct child of your StepperComponent : 
+
+  - Step 1: Personal Details 
+  - Step 2: Address and Contact details 
+  - Step 3: Review  
+
+2. Create the parent component. This is where all the state of `steps` and `activeStep` will be managed and should persist. 
+  This component should capture and store any user input. This component should handle the dynamic rendering of child components depending on the current `activeStep`.
+  Use SgdsStepper's  `getComponent` public method to obtain current component.
+  Make use of the SgdsStepper's public methods to create button actions for next/previous/last/first step or reset. 
+
 
 <Canvas of={StepperStories.StepperExample}>
   <Story of={StepperStories.StepperExample} />
 </Canvas>
 
-## Working Example
+## Working Examples
 
 ### Angular
 
-Please see a [working example of stepper on an Angular app](https://stackblitz.com/github/clukhei/angular-stepper)
+Please see a <a target="_blank" href="https://stackblitz.com/github/clukhei/angular-stepper">working example of stepper on an Angular app</a>
+
+### Vue 
+
+Please see a <a target="_blank" href="https://stackblitz.com/github/tonghauhive/sgds-vue-stepper?file=src%2Fcomponents%2FStepper.vue">working example of stepper on an Vue app</a>
+
+
+## Contributions
+
+We accept contributions from the community! 
+If you have an SgdsStepper to showcase from a different framework or a better example to showcase
+please raise a PR or raise an issue with your stackblitz example on our <a href="https://github.com/GovTechSG/sgds-web-component" target="_blank">github page</a>.
+If the examples above are not working, please also  notify us by raising a github issue. 

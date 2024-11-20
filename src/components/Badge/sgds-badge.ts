@@ -1,4 +1,5 @@
 import { html, nothing } from "lit";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -11,19 +12,12 @@ export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral"
  * @summary Badges can be used to highlight important bits of information such as labels, notifications & status.
  *
  * @slot default - slot for badge
- * @slot leftIcon - The slot for icon to the left of the badge text
- * @slot rightIcon - The slot for icon to the right of the badge text
+ * @slot icon - The slot for icon to the left of the badge text
  *
  * @event sgds-show - Emitted when the badge appears.
  * @event sgds-hide - Emitted after the badge closes.
- *
- * @cssprop --sgds-badge-bg - The background color of the badge
- * @cssprop --sgds-badge-color - The text color of badge
- * @cssprop --sgds-badge-border-radius - The border radius of badge
- * @cssprop --sgds-badge-border-color - The border color of the badge, only applicable when outlined prop is true
- *
  */
-export class SgdsBadge extends SgdsElement {
+export class SgdsBadge extends ScopedElementsMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, badgeStyle];
 
   /**@internal */
@@ -56,7 +50,7 @@ export class SgdsBadge extends SgdsElement {
   }
 
   render() {
-    return this.show
+    return (this.dismissible && this.show) || !this.dismissible
       ? html`
           <div
             class="  
@@ -68,7 +62,7 @@ export class SgdsBadge extends SgdsElement {
             "
             aria-hidden=${this.show ? "false" : "true"}
           >
-            ${!this.dismissible ? html`<slot name="leftIcon"></slot>` : nothing}
+            ${!this.dismissible ? html`<slot name="icon"></slot>` : nothing}
             <span class="badge-label">
               <slot></slot>
             </span>

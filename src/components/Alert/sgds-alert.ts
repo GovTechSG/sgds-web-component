@@ -1,11 +1,12 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { nothing } from "lit";
-import { property, queryAssignedNodes } from "lit/decorators.js";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import SgdsIcon from "../Icon/sgds-icon";
 import alertStyle from "./alert.css";
 
 export type AlertVariant = "info" | "success" | "danger" | "warning" | "neutral";
@@ -18,17 +19,14 @@ export type AlertVariant = "info" | "success" | "danger" | "warning" | "neutral"
  * @event sgds-show - Emitted when the alert appears.
  * @event sgds-hide - Emitted after the alert closes.
  *
- * @cssproperty --alert-bg - The background color of alert
- * @cssproperty --alert-border-color - The color of the border of alert
- * @cssproperty --alert-icon-margin-right - The margin-right css of icon slot to position the gap between icon and alert message
- *
  */
 export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
   static styles = [...SgdsElement.styles, alertStyle];
   /**@internal */
   static get scopedElements() {
     return {
-      "sgds-close-button": SgdsCloseButton
+      "sgds-close-button": SgdsCloseButton,
+      "sgds-icon": SgdsIcon
     };
   }
   /** Controls the appearance of the alert  */
@@ -56,16 +54,8 @@ export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
     this.show ? this.emit("sgds-show") : this.emit("sgds-hide");
   }
 
-  @queryAssignedNodes({ slot: "icon", flatten: true })
-  _iconNodes!: Array<Node>;
-
-  firstUpdated() {
-    if (this._iconNodes.length === 0) {
-      return this.shadowRoot.querySelector("slot[name='icon']")?.classList.add("d-none");
-    }
-  }
   render() {
-    return this.show
+    return (this.dismissible && this.show) || !this.dismissible
       ? html`
           <div
             class="${classMap({

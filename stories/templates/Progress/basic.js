@@ -14,10 +14,9 @@ export const Template = args => html`
 `;
 
 export const args = {
-  label: "50%",
-  value: 50,
+  label: "40%",
+  value: 40,
   arialabel: `Loading in progress`,
-  variant: "secondary",
   ariamin: 0,
   ariamax: 100
 };

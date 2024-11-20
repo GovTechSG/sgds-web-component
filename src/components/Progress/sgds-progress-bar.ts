@@ -4,12 +4,14 @@ import { styleMap } from "lit/directives/style-map.js";
 import SgdsElement from "../../base/sgds-element";
 import progressBarStyle from "./progress-bar.css";
 export type ProgressBarVariant = "primary" | "neutral";
-
+/**
+ * @summary Provide up-to-date feedback on the progress of a workflow or action with simple yet flexible progress bars.
+ */
 export class SgdsProgressBar extends SgdsElement {
   static styles = [...SgdsElement.styles, progressBarStyle];
 
   /** The background color of the progress bar */
-  @property({ type: String, reflect: true }) variant: ProgressBarVariant;
+  @property({ type: String, reflect: true }) variant: ProgressBarVariant = "primary";
   /**
    * The current progress as a percentage, from 0 to 100.
    */
