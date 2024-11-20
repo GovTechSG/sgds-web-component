@@ -181,6 +181,14 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
     const hintTextTemplate = html` <div class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }
+     /**
+   * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
+   * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
+   */
+     public reportValidity(): boolean {
+      return this.inputValidationController.reportValidity();
+    }
+    
 
   render() {
     const defaultSlot = html`

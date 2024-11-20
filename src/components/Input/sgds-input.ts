@@ -120,15 +120,7 @@ export class SgdsInput
 
   public get validationMessage(): string {
     return this.inputValidationController.validationMessage;
-  }
-
-  // private get validity() {
-  //   return this.inputValidationController.validity;
-  // }
-
-  // private get validationMessage() {
-  //   return this.inputValidationController.validationMessage;
-  // }
+  } 
 
   protected _handleFocus() {
     this.emit("sgds-focus");
