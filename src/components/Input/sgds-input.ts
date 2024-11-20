@@ -62,6 +62,9 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
   /** Autofocus the input */
   @property({ type: Boolean, reflect: true }) autofocus = false;
 
+  /** Makes the input a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
+
   /** Makes the input readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
 
@@ -102,10 +105,6 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
   /** Sets a custom validation message. Pass an empty string to restore validity */
   public setCustomValidity(err: string) {
     return this.input.setCustomValidity(err);
-  }
-  /** Programatically sets the invalid state of the input. Pass in boolean value in the argument */
-  public setInvalid(bool: boolean) {
-    this.invalid = bool;
   }
 
   protected _handleClick() {

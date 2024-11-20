@@ -1,4 +1,4 @@
-import { property, query } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import genId from "../utils/generateId";
 import feedbackStyles from "../styles/feedback.css";
 import formHintStyles from "../styles/form-hint.css";
@@ -8,6 +8,9 @@ import SgdsElement from "./sgds-element";
 
 export default class FormControlElement extends SgdsElement {
   static styles = [...SgdsElement.styles, feedbackStyles, formHintStyles, formLabelStyles, formPlaceholderStyles];
+
+  /**@internal */
+  @state() invalid = false;
 
   /** The input's label  */
   @property({ reflect: true }) label = "";
@@ -34,10 +37,15 @@ export default class FormControlElement extends SgdsElement {
   @property({ type: String, reflect: true }) invalidFeedback = "";
 
   /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
-  @property({ type: Boolean, reflect: true }) invalid = false;
+  // @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** Makes the input a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
   protected labelId: string = genId("label");
+
+  /** Programatically sets the invalid state of the input. Pass in boolean value in the argument */
+  public setInvalid(bool: boolean) {
+    this.invalid = bool;
+  }
 }

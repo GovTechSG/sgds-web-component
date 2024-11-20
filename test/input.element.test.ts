@@ -179,8 +179,10 @@ describe("sgds-input", () => {
 describe("Feedback UI optional", () => {
   it("when hasFeedback and invalid is true, div.invalid-feedback appears in shadowDOM", async () => {
     const el = await fixture<SgdsInput>(
-      html` <sgds-input invalid hasFeedback invalidFeedback="invalid feedback"></sgds-input> `
+      html` <sgds-input hasFeedback invalidFeedback="invalid feedback"></sgds-input> `
     );
+    el.invalid = true;
+    await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("div.invalid-feedback")).not.to.be.null;
     expect(el.shadowRoot?.querySelector("div.invalid-feedback")?.textContent).to.equal("invalid feedback");
   });
