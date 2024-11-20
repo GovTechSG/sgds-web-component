@@ -29,7 +29,7 @@ export class DatepickerInput extends SgdsInput {
     super();
     this.type = "text";
     this.hasFeedback = "both";
-    this._handleChange = () => null;
+    // this._handleChange = () => null;
   }
   connectedCallback(): void {
     super.connectedCallback();

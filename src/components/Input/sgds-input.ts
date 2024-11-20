@@ -120,7 +120,7 @@ export class SgdsInput
 
   public get validationMessage(): string {
     return this.inputValidationController.validationMessage;
-  } 
+  }
 
   protected _handleFocus() {
     this.emit("sgds-focus");
