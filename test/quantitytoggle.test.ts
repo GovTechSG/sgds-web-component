@@ -88,7 +88,7 @@ describe("when value change", () => {
     waitUntil(() => inputHandler.calledTwice);
     await sendKeys({ press: "Minus" });
     waitUntil(() => inputHandler.calledOnce);
-    expect(inputEl.value).to.equal("15");
+    expect(inputEl.value).to.equal(15);
   });
 
   it("resets value to 0 when delete the value", async () => {
@@ -99,11 +99,11 @@ describe("when value change", () => {
     el.addEventListener("sgds-input", inputHandler);
     await sendKeys({ press: "Backspace" });
     waitUntil(() => inputHandler.calledOnce);
-    expect(inputEl.value).to.equal("1");
+    expect(inputEl.value).to.equal(1);
 
     await sendKeys({ press: "Backspace" });
     waitUntil(() => inputHandler.calledOnce);
-    expect(inputEl.value).to.equal("0");
+    expect(inputEl.value).to.equal(0);
   });
 });
 
