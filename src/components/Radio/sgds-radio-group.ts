@@ -63,6 +63,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
     this._radios.forEach(r => (r.invalid = this.invalid));
   }
 
+  @state() private _isTouched = false;
   /**
    * radio requries a custom resetFormControl as the update of input value
    * requires to fire a reset event manually
@@ -76,6 +77,9 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
   connectedCallback() {
     super.connectedCallback();
     this.defaultValue = this.value;
+    this.addEventListener("sgds-blur", () => {
+      this._isTouched = true;
+    });
   }
 
   firstUpdated(changedProperties) {
@@ -187,6 +191,13 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
    */
   public reportValidity(): boolean {
     return this.inputValidationController.reportValidity();
+  }
+
+  @watch("_isTouched", { waitUntilFirstUpdate: true })
+  _handleIsTouched() {
+    if (this._isTouched) {
+      this.invalid = !this.input.checkValidity();
+    }
   }
 
   render() {

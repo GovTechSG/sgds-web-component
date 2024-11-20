@@ -1,5 +1,5 @@
 import "./sgds-web-component";
-import { assert, elementUpdated, expect, fixture, fixtureCleanup, triggerFocusFor } from "@open-wc/testing";
+import { assert, elementUpdated, expect, fixture, fixtureCleanup, triggerFocusFor, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
@@ -116,6 +116,21 @@ describe("<sgds-radio-group>", () => {
     const radioGroup = <SgdsRadioGroup>el.querySelector("sgds-radio-group");
     expect(radioGroup.invalid).to.be.true;
     expect(el.reportValidity()).to.be.false;
+  });
+  it("required radio group should be validated when radios are touched", async () => {
+    const el = await fixture<SgdsRadioGroup>(
+      html`
+        <sgds-radio-group id="radio-group" required hasFeedback>
+          <sgds-radio id="radio2" value="2">two</sgds-radio>
+        </sgds-radio-group>
+        <sgds-button type="submit">Submit</sgds-button>
+      `
+    );
+    const radio = el.querySelector("sgds-radio");
+    radio?.focus();
+    radio?.blur();
+    await waitUntil(() => el?.invalid);
+    expect(el?.shadowRoot?.querySelector("div.invalid-feedback")).to.exist;
   });
   it("invalidFeedback sets the feedback message", async () => {
     const el = await fixture<SgdsRadioGroup>(

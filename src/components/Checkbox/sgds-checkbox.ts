@@ -111,8 +111,8 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements
 
   @watch("_isTouched", { waitUntilFirstUpdate: true })
   _handleIsTouched() {
-    if (this._isTouched && this.required && !this.checked) {
-      this.invalid = true;
+    if (this._isTouched) {
+      this.invalid = !this.input.checkValidity();
     }
   }
   private resetFormControl() {

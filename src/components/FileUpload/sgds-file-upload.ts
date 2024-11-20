@@ -5,12 +5,15 @@ import { classMap } from "lit/directives/class-map.js";
 import { createRef, ref } from "lit/directives/ref.js";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import SgdsElement from "../../base/sgds-element";
-import { SgdsButton } from "../Button/sgds-button";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
-import fileUploadStyle from "./file-upload.css";
-import genId from "../../utils/generateId";
-import svgStyles from "../../styles/svg.css";
+import feedbackStyles from "../../styles/feedback.css";
 import formHintStyles from "../../styles/form-hint.css";
+import formLabelStyles from "../../styles/form-label.css";
+import fileUploadStyles from "./file-upload.css";
+import genId from "../../utils/generateId";
+import { SgdsButton } from "../Button/sgds-button";
+
+import { SgdsFormValidatorMixin } from "../../utils/validator";
 
 /**
  * @summary Allows users to upload files of various sizes and formats
@@ -23,8 +26,8 @@ import formHintStyles from "../../styles/form-hint.css";
  * @cssproperty --file-upload-remove-icon-hover-color - Remove icon hover color
  */
 
-export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
-  static styles = [...SgdsElement.styles, svgStyles, formHintStyles, fileUploadStyle];
+export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(SgdsElement)) {
+  static styles = [...SgdsElement.styles, feedbackStyles, formHintStyles, formLabelStyles, fileUploadStyles];
   /**@internal */
   static get scopedElements() {
     return {
@@ -50,6 +53,17 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
 
   /** The file upload's hint text */
   @property({ reflect: true }) hintText = "";
+
+  /** Makes the input a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
+
+  /**Feedback text for error state when validated */
+  @property({ type: String, reflect: true }) invalidFeedback = "";
+
+  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
+  @property({ type: Boolean, reflect: true }) hasFeedback = false;
+  /**  This will be true when the control is in an invalid state. */
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** @internal */
   @property({ type: Object, state: true })
@@ -81,7 +95,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   }
 
   /** @internal */
-  private handleInputChange(event: Event) {
+  private _handleChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const files = inputElement.files as FileList;
 
@@ -91,6 +105,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
     // Trigger a re-render of the component to update the list of selected files
     this._setFileList(files);
     this.requestUpdate();
+    super.handleChange(event);
   }
 
   private _removeFileHandler(index: number) {
@@ -137,6 +152,22 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
     return this.hintText && hintTextTemplate;
   }
 
+  protected _renderFeedback() {
+    return html`
+      <div class="invalid-feedback-container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path
+            d="M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10ZM10 6.25C9.49805 6.25 9.10584 6.68339 9.15578 7.18285L9.48461 10.4711C9.51109 10.7359 9.7339 10.9375 10 10.9375C10.2661 10.9375 10.4889 10.7359 10.5154 10.4711L10.8442 7.18285C10.8942 6.68339 10.5019 6.25 10 6.25ZM10.0014 11.875C9.48368 11.875 9.06394 12.2947 9.06394 12.8125C9.06394 13.3303 9.48368 13.75 10.0014 13.75C10.5192 13.75 10.9389 13.3303 10.9389 12.8125C10.9389 12.2947 10.5192 11.875 10.0014 11.875Z"
+            fill="#B90000"
+          />
+        </svg>
+        <div id="${this.inputId}-invalid" class="invalid-feedback">
+          ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
+        </div>
+      </div>
+    `;
+  }
+
   render() {
     const getCheckedIcon = (checkedIcon: string) => {
       if (checkedIcon) {
@@ -174,10 +205,11 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
         <input
           ${ref(this.inputRef)}
           type="file"
-          @change=${this.handleInputChange}
+          @change=${this._handleChange}
           ?multiple=${this.multiple}
           accept=${this.accept}
           id=${this.inputId}
+          ?required=${this.required}
         />
         <div class="file-upload-container">
           ${this._renderLabel()}
@@ -201,7 +233,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
               />
             </svg>
           </sgds-button>
-          ${this._renderHintText()}
+          ${this.hasFeedback && this.invalid ? this._renderFeedback() : this._renderHintText()}
         </div>
         <ul class="file-upload-list">
           ${listItems}
