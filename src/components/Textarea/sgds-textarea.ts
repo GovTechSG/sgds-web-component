@@ -1,3 +1,4 @@
+import { nothing } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -5,11 +6,10 @@ import { live } from "lit/directives/live.js";
 import { html } from "lit/static-html.js";
 import FormControlElement from "../../base/form-control-element";
 import { defaultValue } from "../../utils/defaultvalue";
-import { FormSubmitController, SgdsFormControl } from "../../utils/form";
+import { SgdsFormControl } from "../../utils/form";
+import { SgdsFormValidatorMixin } from "../../utils/validator";
 import { watch } from "../../utils/watch";
 import textareaStyle from "./textarea.css";
-import { SgdsFormValidatorMixin } from "../../utils/validator";
-import { nothing, PropertyValues } from "lit";
 
 /**
  * @summary Text areas allow for the collection of input longer than a single line.

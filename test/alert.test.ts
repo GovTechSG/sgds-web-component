@@ -1,9 +1,9 @@
-import "./sgds-web-component";
-import { assert, expect, fixture, waitUntil } from "@open-wc/testing";
+import { assert, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
-import { SgdsAlert, SgdsIcon } from "../src/components";
+import { SgdsAlert } from "../src/components";
 import type { SgdsCloseButton } from "../src/internals/CloseButton/sgds-close-button";
+import "./sgds-web-component";
 
 describe("<sgds-alert-link>", () => {
   it("semantically matches the DOM", async () => {

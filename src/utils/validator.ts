@@ -3,6 +3,7 @@ import { queryAsync } from "lit/decorators.js";
 import { SgdsInput } from "../components";
 import { InputValidationController } from "./inputValidationController";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Constructor<T> = new (...args: any[]) => T;
 
 /**
@@ -97,7 +98,7 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
 };
 
 export declare class ToBeValidatedElementInterface {
-  inputValidationController: any;
+  inputValidationController: InputValidationController;
   input: HTMLInputElement;
   _mixinHandleChange(e: Event): void;
   _mixinHandleInputChange(e: Event): void;

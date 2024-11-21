@@ -42,16 +42,15 @@ export class DatepickerInput extends SgdsInput {
     this.value = this.input.value;
     this.emit("sgds-change");
     super._mixinHandleChange(e);
-    await this._validateInput()
-
+    await this._validateInput();
   }
-   /** @internal */
-   @watch("_isTouched", { waitUntilFirstUpdate: true })
-   override _handleIsTouched() {
-     if (this._isTouched && this.required) {
-       this.invalid = true
-     }
-   }
+  /** @internal */
+  @watch("_isTouched", { waitUntilFirstUpdate: true })
+  override _handleIsTouched() {
+    if (this._isTouched && this.required) {
+      this.invalid = true;
+    }
+  }
   async firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     this._applyInputMask(this.dateFormat);
@@ -111,7 +110,7 @@ export class DatepickerInput extends SgdsInput {
     this.mask?.updateValue();
   }
   private _validateInput = async () => {
-    console.log('validateInput')
+    console.log("validateInput");
     const dates = this.mask.value.split(" - ");
     const noEmptyDates = dates.filter(d => d !== this.dateFormat.toLowerCase());
     const dateArray: Date[] | string[] = noEmptyDates.map(date =>
@@ -126,9 +125,9 @@ export class DatepickerInput extends SgdsInput {
     );
 
     if (invalidDates.length > 0) {
-      console.log(this.invalid)
+      console.log(this.invalid);
       this.setInvalid(true);
-      console.log(this.invalid)
+      console.log(this.invalid);
       return this.emit("sgds-invalid-input");
     }
     if (this.mode === "range" && dateArray.length === 1) {

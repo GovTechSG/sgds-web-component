@@ -1,8 +1,8 @@
-import "./sgds-web-component";
-import { elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
+import { elementUpdated, expect, fixture, html } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
 import type { SgdsButton, SgdsCheckbox, SgdsCheckboxGroup } from "../src/components";
+import "./sgds-web-component";
 
 describe("<sgds-checkbox>", () => {
   it("should be disabled with the disabled attribute & aria-disabled to be true", async () => {

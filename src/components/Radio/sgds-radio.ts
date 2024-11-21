@@ -1,12 +1,12 @@
 import { html } from "lit";
-import { property, query, state } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
+import formLabelStyles from "../../styles/form-label.css";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import radioStyles from "./radio.css";
-import formLabelStyles from "../../styles/form-label.css";
 /**
  * @summary Radio allows the user to select one option from a set while seeing all available options.
  *

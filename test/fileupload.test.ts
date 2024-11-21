@@ -153,8 +153,8 @@ describe("Fileupload validation", () => {
     `);
     const fileupload = form.querySelector<SgdsFileUpload>("sgds-file-upload");
     const input = fileupload?.shadowRoot?.querySelector("input");
-    if (input) {
-      const promise = oneEvent(fileupload!, "sgds-files-selected"); // add event listener to the component
+    if (input && fileupload) {
+      const promise = oneEvent(fileupload, "sgds-files-selected"); // add event listener to the component
       input.files = dt.files;
       const changeEvent = new Event("change");
       input.dispatchEvent(changeEvent);
@@ -185,8 +185,8 @@ describe("Fileupload validation", () => {
     expect(form.reportValidity()).to.be.false;
     const fileupload = form.querySelector<SgdsFileUpload>("sgds-file-upload");
     const input = fileupload?.shadowRoot?.querySelector("input");
-    if (input) {
-      const promise = oneEvent(fileupload!, "sgds-files-selected"); // add event listener to the component
+    if (input && fileupload) {
+      const promise = oneEvent(fileupload, "sgds-files-selected"); // add event listener to the component
       input.files = dt.files;
       const changeEvent = new Event("change");
       input.dispatchEvent(changeEvent);
