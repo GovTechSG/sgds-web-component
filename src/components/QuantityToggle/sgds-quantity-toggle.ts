@@ -1,4 +1,5 @@
-import { property, query, queryAsync, state } from "lit/decorators.js";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { property, query, queryAsync } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
@@ -12,8 +13,6 @@ import { SgdsFormValidatorMixin } from "../../utils/validator";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import SgdsInput from "../Input/sgds-input";
 import quantityToggleStyle from "./quantity-toggle.css";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
-import { PropertyValues } from "lit";
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
  *
@@ -46,7 +45,7 @@ export class SgdsQuantityToggle
   @property() size: "sm" | "md" = "md";
 
   /** The input's value. Set to 0 by default */
-  @property({ type: Number, reflect: true }) value;
+  @property({ type: Number, reflect: true }) value = 0;
 
   /** Disables the entire quantity toggle  */
   @property({ type: Boolean, reflect: true }) disabled = false;

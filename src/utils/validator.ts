@@ -14,7 +14,7 @@ type Constructor<T> = new (...args: any[]) => T;
 export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superClass: T) => {
   class ToBeValidatedElement extends superClass {
     static formAssociated = true;
-    inputValidationController;
+    inputValidationController: InputValidationController;
     input: HTMLInputElement | SgdsInput;
 
     @queryAsync("sgds-input") sgdsInput: Promise<SgdsInput>;
@@ -28,7 +28,7 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
 
       /* Either input or sgds-input. For example, quantity-toggle uses sgds-input */
       this.input = this.shadowRoot.querySelector("input") || (await this.sgdsInput);
-      this.inputValidationController.validateInput(this.input);
+      this._validate(this.input);
     }
     handleChange(e: Event): void {
       this.inputValidationController.setFormValue();
@@ -55,6 +55,10 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
       this.inputValidationController.validateInput(input);
       this._isTouched ? (this._isTouched = false) : null;
     }
+
+    _validate(input: HTMLInputElement | SgdsInput) {
+      this.inputValidationController.validateInput(input);
+    }
     /** DECLARED INSTANCE METHODS AND PROPERTIES*/
 
     /**
@@ -76,4 +80,5 @@ export declare class ToBeValidatedElementInterface {
   handleChange(e: Event): void;
   handleInputChange(e: Event): void;
   resetValidity(input: HTMLInputElement | SgdsInput): void;
+  _validate(input: HTMLInputElement | SgdsInput): void;
 }

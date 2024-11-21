@@ -1,6 +1,6 @@
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { createRef, ref } from "lit/directives/ref.js";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
@@ -65,26 +65,18 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(S
   /**  This will be true when the control is in an invalid state. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
-  /** @internal */
-  @property({ type: Object, state: true })
-  private files: FileList | undefined;
-
-  /** @internal */
-  @property({ type: Array })
+  @state()
   private selectedFiles: File[] = [];
 
   private _setFileList(files: FileList) {
-    this.files = files;
-    this.emit("sgds-files-selected");
+    this.emit("sgds-files-selected", { detail: files });
     //Possible to pass in the files
   }
 
   // Create a ref to the input element
-  /** @internal */
   private inputRef = createRef<HTMLInputElement>();
 
-  /** @internal */
-  private handleClick(event: Event) {
+  private _handleClick(event: Event) {
     event.preventDefault();
     if (!this.disabled) {
       // Get a reference to the input element using the inputRef
@@ -94,7 +86,6 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(S
     }
   }
 
-  /** @internal */
   private _handleChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const files = inputElement.files as FileList;
@@ -125,6 +116,15 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(S
 
     // Trigger a re-render of the component to update the list of selected files
     this.requestUpdate();
+    this._validate(this.input);
+  }
+
+  private _clearAllFiles() {
+    const inputElement = this.inputRef.value;
+    const fileBuffer = new DataTransfer();
+    inputElement.files = fileBuffer.files;
+    this._setFileList(fileBuffer.files);
+    this.selectedFiles = Array.from(fileBuffer.files);
   }
 
   /**@internal */
@@ -168,6 +168,21 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(S
     `;
   }
 
+  /**
+   * fileupload requries a custom resetFormControl for clearing files
+   */
+  private resetFormControl() {
+    this._clearAllFiles();
+    this.resetValidity(this.input);
+  }
+
+  /**
+   * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
+   * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
+   */
+  public reportValidity(): boolean {
+    return this.inputValidationController.reportValidity();
+  }
   render() {
     const getCheckedIcon = (checkedIcon: string) => {
       if (checkedIcon) {
@@ -213,7 +228,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(S
         />
         <div class="file-upload-container">
           ${this._renderLabel()}
-          <sgds-button variant="outline" ?disabled=${this.disabled} @click=${this.handleClick}>
+          <sgds-button variant="outline" ?disabled=${this.disabled} @click=${this._handleClick}>
             <label for=${this.inputId}><slot></slot></label>
             <svg
               slot="rightIcon"

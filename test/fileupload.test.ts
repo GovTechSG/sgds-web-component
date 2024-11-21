@@ -1,7 +1,8 @@
 import "./sgds-web-component";
-import { expect, fixture, oneEvent } from "@open-wc/testing";
+import { expect, fixture, oneEvent, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import type { SgdsFileUpload, SgdsButton } from "../src/components";
+import SgdsCloseButton from "../src/internals/CloseButton/sgds-close-button";
 
 describe("sgds-file-upload", () => {
   it("should be able to pass in content in between the slot", async () => {
@@ -121,6 +122,83 @@ describe("sgds-file-upload", () => {
 
       listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
       expect(listItems?.length).to.equal(1);
+    }
+  });
+});
+
+describe("Fileupload validation", () => {
+  it("has constraint validation for required prop", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-file-upload required hasFeedback></sgds-file-upload>
+      </form>
+    `);
+    const upload = form.querySelector("sgds-file-upload");
+    expect(form.reportValidity()).to.be.false;
+    await waitUntil(() => upload?.invalid);
+
+    expect(upload?.shadowRoot?.querySelector("div.invalid-feedback")).to.exist;
+  });
+  it("form resets remove any selectedFiles", async () => {
+    const fileList = [new File(["file1"], "file1.txt"), new File(["file2"], "file2.txt")];
+    const dt = new DataTransfer();
+    fileList.forEach(file => {
+      dt.items.add(file);
+    });
+
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-file-upload required hasFeedback></sgds-file-upload>
+      </form>
+    `);
+    const fileupload = form.querySelector<SgdsFileUpload>("sgds-file-upload");
+    const input = fileupload?.shadowRoot?.querySelector("input");
+    if (input) {
+      const promise = oneEvent(fileupload!, "sgds-files-selected"); // add event listener to the component
+      input.files = dt.files;
+      const changeEvent = new Event("change");
+      input.dispatchEvent(changeEvent);
+      await promise;
+      const listItems = fileupload?.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(2);
+      expect(form.reportValidity()).to.be.true;
+    }
+
+    form.reset();
+
+    await waitUntil(() => fileupload?.shadowRoot?.querySelectorAll(".file-upload-list-item").length === 0);
+    expect(fileupload?.shadowRoot?.querySelectorAll(".file-upload-list-item").length).to.equal(0);
+    expect(form.reportValidity()).to.be.false;
+  });
+  it("when files are cleared, it resets the validity of the component", async () => {
+    const fileList = [new File(["file1"], "file1.txt")];
+    const dt = new DataTransfer();
+    fileList.forEach(file => {
+      dt.items.add(file);
+    });
+
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-file-upload required hasFeedback></sgds-file-upload>
+      </form>
+    `);
+    expect(form.reportValidity()).to.be.false;
+    const fileupload = form.querySelector<SgdsFileUpload>("sgds-file-upload");
+    const input = fileupload?.shadowRoot?.querySelector("input");
+    if (input) {
+      const promise = oneEvent(fileupload!, "sgds-files-selected"); // add event listener to the component
+      input.files = dt.files;
+      const changeEvent = new Event("change");
+      input.dispatchEvent(changeEvent);
+      await promise;
+      const listItems = fileupload?.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(1);
+      expect(form.reportValidity()).to.be.true;
+
+      const cancelButtonOnListItems = fileupload?.shadowRoot?.querySelector<SgdsCloseButton>("sgds-close-button");
+      cancelButtonOnListItems?.click();
+      await fileupload?.updateComplete;
+      expect(form.reportValidity()).to.be.false;
     }
   });
 });
