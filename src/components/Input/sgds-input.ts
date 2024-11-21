@@ -96,7 +96,7 @@ export class SgdsInput
   /**The input's value attribute. */
   @property({ reflect: true }) value = "";
 
-  @state() private _isTouched = false;
+  @state() protected _isTouched = false;
 
   /** Sets focus on the input. */
   public focus(options?: FocusOptions) {
@@ -150,7 +150,7 @@ export class SgdsInput
     this.emit("sgds-change");
     super._mixinHandleChange(e);
   }
-  private _handleInputChange(e: Event) {
+  protected _handleInputChange(e: Event) {
     this.value = this.input.value;
     this.emit("sgds-input");
     super._mixinHandleInputChange(e);

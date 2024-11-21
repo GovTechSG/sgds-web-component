@@ -5,6 +5,7 @@ import { property, queryAsync } from "lit/decorators.js";
 import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
 import { SgdsInput } from "../Input/sgds-input";
 import datepickerInputStyles from "./datepicker-input.css";
+import { watch } from "../../utils/watch";
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
 export class DatepickerInput extends SgdsInput {
@@ -30,12 +31,27 @@ export class DatepickerInput extends SgdsInput {
     this.type = "text";
     this.hasFeedback = "both";
     // this._handleChange = () => null;
+    // this._handleInputChange = () => null
   }
-  connectedCallback(): void {
-    super.connectedCallback();
-    this.addEventListener("sgds-change", this._validateInput);
-  }
+  // connectedCallback(): void {
+  //   super.connectedCallback();
+  //   this.addEventListener("sgds-change", this._validateInput);
+  // }
 
+  protected override async _handleChange(e: Event) {
+    this.value = this.input.value;
+    this.emit("sgds-change");
+    super._mixinHandleChange(e);
+    await this._validateInput()
+
+  }
+   /** @internal */
+   @watch("_isTouched", { waitUntilFirstUpdate: true })
+   override _handleIsTouched() {
+     if (this._isTouched && this.required) {
+       this.invalid = true
+     }
+   }
   async firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     this._applyInputMask(this.dateFormat);
@@ -95,6 +111,7 @@ export class DatepickerInput extends SgdsInput {
     this.mask?.updateValue();
   }
   private _validateInput = async () => {
+    console.log('validateInput')
     const dates = this.mask.value.split(" - ");
     const noEmptyDates = dates.filter(d => d !== this.dateFormat.toLowerCase());
     const dateArray: Date[] | string[] = noEmptyDates.map(date =>
@@ -109,7 +126,9 @@ export class DatepickerInput extends SgdsInput {
     );
 
     if (invalidDates.length > 0) {
+      console.log(this.invalid)
       this.setInvalid(true);
+      console.log(this.invalid)
       return this.emit("sgds-invalid-input");
     }
     if (this.mode === "range" && dateArray.length === 1) {
