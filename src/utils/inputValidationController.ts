@@ -76,7 +76,7 @@ export class InputValidationController implements ReactiveController {
   updateInvalidState() {
     this.options.setInvalid(this.host, !this.checkValidity());
   }
-  resetValidity() {
+  _mixinResetValidity() {
     return this._internals.setValidity({});
   }
   checkValidity() {
@@ -94,32 +94,7 @@ export class InputValidationController implements ReactiveController {
     const value = this.options.value(this.host) as string | FormData | File;
     this._internals.setFormValue(value);
   }
-  /**
-   * Resets form when type="reset" button is click. Invoked in SgdsFormValidator
-   */
-  // resetForm() {
-  //   // this.options.setValue(this.host, this.options.defaultValue(this.host));
-  //   const input = this.options.input(this.host);
-  //   const defaultValue = this.options.defaultValue(this.host);
-  //   const defaultChecked = this.options.defaultChecked(this.host);
-  //   // if (defaultChecked === undefined) {
-  //   input.value = defaultValue as string;
-  //   // }
-  //   // if( defaultChecked === false){
-  //   //   const checkboxInput = input as SgdsCheckbox
-  //   //   checkboxInput.checked = defaultChecked
-  //   //   checkboxInput.dispatchEvent(new Event("change"))
-  //   // }
-  //   // if(defaultChecked === true) {
-  //   //   const checkboxInput = input as SgdsCheckbox
-  //   //   checkboxInput.checked = defaultChecked
-  //   //   // checkboxInput.dispatchEvent(new Event("change"))
-  //   //   console.log('here')
-  //   // }
-  //   this._internals.setValidity({});
-  //   this.options.setInvalid(this.host, !this.checkValidity());
-  //   // this.setFormValue()
-  // }
+
   validateInput(input) {
     /** When the form control is disabled, its always valid */
     if (this.options.input(this.host).disabled) {
@@ -145,14 +120,6 @@ export class InputValidationController implements ReactiveController {
       this._internals.setValidity({});
     }
   }
-
-  // handleFormSubmit(event: Event) {
-  //   const reportValidity = this.reportValidity;
-  //   if (!reportValidity) {
-  //     event.preventDefault();
-  //     event.stopImmediatePropagation();
-  //   }
-  // }
 }
 
 export interface InputValidationControllerOptions {

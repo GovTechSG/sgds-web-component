@@ -17,7 +17,7 @@ describe("sgds-textarea", () => {
       el,
       `
       <div class="form-control-container">
-        <label class="form-label">label</label>
+        <label class="form-label"></label>
         <textarea class=" form-control textarea-resize-vertical "  rows="4" placeholder="Placeholder" maxlength="10" aria-invalid="false" spellcheck="false" required=""></textarea>
         <div class="textarea-info-container">
           <div class="form-text word-count">0/10</div>

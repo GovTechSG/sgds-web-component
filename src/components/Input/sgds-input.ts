@@ -1,3 +1,4 @@
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -6,14 +7,13 @@ import { live } from "lit/directives/live.js";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import { html } from "lit/static-html.js";
 import FormControlElement from "../../base/form-control-element";
+import formPlaceholderStyles from "../../styles/form-placeholder.css";
 import { defaultValue } from "../../utils/defaultvalue";
 import type { SgdsFormControl } from "../../utils/form";
-import genId from "../../utils/generateId";
 import { SgdsFormValidatorMixin } from "../../utils/validator";
 import { watch } from "../../utils/watch";
 import { SgdsSpinner } from "../Spinner/sgds-spinner";
 import inputStyle from "./input.css";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 /**
  * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
  *
@@ -27,7 +27,7 @@ export class SgdsInput
   extends SgdsFormValidatorMixin(ScopedElementsMixin(FormControlElement))
   implements SgdsFormControl
 {
-  static styles = [...FormControlElement.styles, inputStyle];
+  static styles = [...FormControlElement.styles, formPlaceholderStyles, inputStyle];
 
   /**@internal */
   static get scopedElements() {
@@ -53,6 +53,12 @@ export class SgdsInput
   /** Sets the maximum length of the input */
   @property({ type: Number, reflect: true }) maxlength: number;
 
+  /** The input's minimum value. Only applies number input types. */
+  @property() min: number;
+
+  /** The input's maximum value. Only applies number input types. */
+  @property() max: number;
+
   /** The input's placeholder text. */
   @property({ type: String, reflect: true }) placeholder = "placeholder";
 
@@ -62,9 +68,6 @@ export class SgdsInput
   /** Autofocus the input */
   @property({ type: Boolean, reflect: true }) autofocus = false;
 
-  /** Makes the input a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
-
   /** Makes the input readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
 
@@ -73,6 +76,12 @@ export class SgdsInput
    * implied, allowing any numeric value. Only applies to number input types.
    */
   @property() step: number | "any";
+
+  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
+  @property({ type: String, reflect: true }) hasFeedback: "style" | "text" | "both";
+
+  /**Feedback text for error state when validated */
+  @property({ type: String, reflect: true }) invalidFeedback: string;
 
   /**Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
@@ -88,10 +97,6 @@ export class SgdsInput
   @property({ reflect: true }) value = "";
 
   @state() private _isTouched = false;
-
-  private labelId: string = genId("label");
-
-  private inputId = genId("input", "input");
 
   /** Sets focus on the input. */
   public focus(options?: FocusOptions) {
@@ -112,15 +117,20 @@ export class SgdsInput
    * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
    */
   public reportValidity(): boolean {
-    return this.inputValidationController.reportValidity();
+    return this._mixinReportValidity();
   }
 
+  /**
+   * Returns the ValidityState object
+   */
   public get validity(): ValidityState {
-    return this.inputValidationController.validity;
+    return this._mixinGetValidity();
   }
-
-  public get validationMessage(): string {
-    return this.inputValidationController.validationMessage;
+  /**
+   * Returns the validation message based on the ValidityState
+   */
+  public get validationMessage() {
+    return this._mixinGetValidationMessage();
   }
 
   protected _handleFocus() {
@@ -138,14 +148,14 @@ export class SgdsInput
   protected _handleChange(e: Event) {
     this.value = this.input.value;
     this.emit("sgds-change");
-    super.handleChange(e);
+    super._mixinHandleChange(e);
   }
   private _handleInputChange(e: Event) {
     this.value = this.input.value;
     this.emit("sgds-input");
-    super.handleInputChange(e);
+    super._mixinHandleInputChange(e);
   }
-
+  /** @internal */
   @watch("_isTouched", { waitUntilFirstUpdate: true })
   _handleIsTouched() {
     if (this._isTouched) {
@@ -176,7 +186,7 @@ export class SgdsInput
         <input
           class="form-control"
           type=${this.type}
-          id=${this.inputId}
+          id=${this._controlId}
           name=${ifDefined(this.name)}
           placeholder=${ifDefined(this.placeholder)}
           aria-invalid=${this.invalid ? "true" : "false"}
@@ -196,9 +206,9 @@ export class SgdsInput
           @invalid=${() => this.setInvalid(true)}
           @focus=${this._handleFocus}
           @blur=${this._handleBlur}
-          aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this.inputId}-invalid` : undefined)}
-          aria-labelledby="${this.labelId} ${this.inputId}Help ${this.invalid && this.hasFeedback
-            ? `${this.inputId}-invalid`
+          aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this._controlId}-invalid` : undefined)}
+          aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
+            ? `${this._controlId}-invalid`
             : ""}"
         />
         ${this.loading ? html`<sgds-spinner size="sm"></sgds-spinner>` : nothing}
@@ -224,7 +234,7 @@ export class SgdsInput
               fill="#B90000"
             />
           </svg>
-          <div id="${this.inputId}-invalid" class="invalid-feedback">
+          <div id="${this._controlId}-invalid" class="invalid-feedback">
             ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
           </div>
         </div>`
@@ -233,8 +243,8 @@ export class SgdsInput
   protected _renderLabel() {
     const labelTemplate = html`
       <label
-        for=${this.inputId}
-        id=${this.labelId}
+        for=${this._controlId}
+        id=${this._labelId}
         class=${classMap({
           "form-label": true,
           required: this.required
@@ -245,7 +255,7 @@ export class SgdsInput
     return this.label && labelTemplate;
   }
   protected _renderHintText() {
-    const hintTextTemplate = html` <div id="${this.inputId}Help" class="form-text">${this.hintText}</div> `;
+    const hintTextTemplate = html` <div id="${this._controlId}Help" class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }
   render() {

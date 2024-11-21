@@ -3,11 +3,9 @@ import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
-import FormCheckElement from "../../base/form-check-element";
-import SgdsElement from "../../base/sgds-element";
+import FormControlElement from "../../base/form-control-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { SgdsFormControl } from "../../utils/form";
-import genId from "../../utils/generateId";
 import { SgdsFormValidatorMixin } from "../../utils/validator";
 import { watch } from "../../utils/watch";
 import checkboxStyle from "./checkbox.css";
@@ -19,24 +17,17 @@ import checkboxStyle from "./checkbox.css";
  *
  * @event sgds-change - Emitted when the checked state changes.
  * @event sgds-blur - Emitted when input is not in focus.
+ * @event sgds-focus - Emitted when input is in focus.
  * @event sgds-validity-change - Emitted when the invalid state changes. This event is used by sgds-checkbox-group to check the invalid state change of its children
  */
-export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements SgdsFormControl {
-  static styles = [...FormCheckElement.styles, checkboxStyle];
-  /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
-  @property({ type: String, reflect: true }) name: string;
+export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
+  static styles = [...FormControlElement.styles, checkboxStyle];
 
   /** Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name. */
   @property({ type: String, reflect: true }) value: string;
 
-  /** Makes the checkbox a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
-
   /** Draws the checkbox in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
-
-  /** Disables the checkbox (so the user can't check / uncheck it). */
-  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
@@ -44,8 +35,6 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("checked")
   defaultChecked = false;
-  /** Marks the checkbox input as invalid. Replace the pseudo :invalid selector for absent in custom elements */
-  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** Marks the checkbox input as indeterminate , with indeterminate logo  */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
@@ -80,7 +69,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements
 
     this.checked = !this.checked;
     this.value = this.input.value;
-    super.handleChange(e);
+    super._mixinHandleChange(e);
     this.emit("sgds-change", { detail: { checked: this.checked, value: this.value } });
   }
 
@@ -90,16 +79,20 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements
       this.click();
     }
   }
+
   private _handleBlur() {
     this._isTouched = true;
     this.emit("sgds-blur");
   }
+
+  private _handleFocus() {
+    this.emit("sgds-focus");
+  }
+
   private _handleInvalid(e: Event) {
     e.preventDefault();
     this.invalid = true;
   }
-  /** @internal For Id/For pair of the HTML form control and label. */
-  private _inputId = genId("checkbox");
 
   /** @internal */
   @watch("disabled", { waitUntilFirstUpdate: true })
@@ -115,28 +108,30 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements
       this.invalid = !this.input.checkValidity();
     }
   }
-  private resetFormControl() {
+  private _mixinResetFormControl() {
     this._isTouched = false;
     this.checked = this.input.checked = this.defaultChecked;
     this.input.dispatchEvent(new InputEvent("reset"));
-    this.resetValidity(this.input);
+    this._mixinResetValidity(this.input);
   }
   /**
    * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
    * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
    */
   public reportValidity(): boolean {
-    return this.inputValidationController.reportValidity();
+    return this._mixinReportValidity();
   }
-  public checkValidity(): boolean {
-    return this.inputValidationController.checkValidity();
-  }
-
+  /**
+   * Returns the ValidityState object
+   */
   public get validity(): ValidityState {
-    return this.inputValidationController.validity;
+    return this._mixinGetValidity();
   }
-  public get validationMessage(): string {
-    return this.inputValidationController.validationMessage;
+  /**
+   * Returns the validation message based on the ValidityState
+   */
+  public get validationMessage() {
+    return this._mixinGetValidationMessage();
   }
 
   render() {
@@ -149,7 +144,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements
               "is-invalid": this.hasFeedback && this.invalid
             })}
             type="checkbox"
-            id=${this._inputId}
+            id=${this._controlId}
             aria-invalid=${this.invalid ? "true" : "false"}
             name=${ifDefined(this.name)}
             ?indeterminate=${this.indeterminate}
@@ -163,9 +158,10 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(SgdsElement) implements
             .disabled=${this.disabled}
             .required=${this.required}
             @blur=${this._handleBlur}
+            @focus=${this._handleFocus}
           />
         </div>
-        <label for="${this._inputId}" class="form-check-label"><slot></slot></label>
+        <label for="${this._controlId}" class="form-check-label" id="${this._labelId}"><slot></slot></label>
       </div>
     `;
   }

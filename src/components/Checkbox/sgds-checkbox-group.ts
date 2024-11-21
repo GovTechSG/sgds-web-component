@@ -11,7 +11,6 @@ export class SgdsCheckboxGroup extends SgdsElement {
   static styles = [...SgdsElement.styles, feedbackStyles, formLabelStyles, checkboxGroupStyles, formHintStyles];
   /**@internal */
   @queryAssignedElements({ slot: "checkbox", flatten: true }) private checkboxes!: NodeListOf<SgdsCheckbox>;
-  /**@internal */
   @state() private hasInvalidCheckbox = false;
   @state() private validationMessage: string;
 

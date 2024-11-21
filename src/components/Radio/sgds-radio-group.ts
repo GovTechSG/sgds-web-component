@@ -1,15 +1,12 @@
 import { html, nothing } from "lit";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import SgdsElement from "../../base/sgds-element";
-import feedbackStyles from "../../styles/feedback.css";
-import formHintStyles from "../../styles/form-hint.css";
-import formLabelStyles from "../../styles/form-label.css";
+import { live } from "lit/directives/live.js";
+import FormControlElement from "../../base/form-control-element";
 import { SgdsFormValidatorMixin } from "../../utils/validator";
 import { watch } from "../../utils/watch";
 import radioGroupStyles from "./radio-group.css";
 import SgdsRadio from "./sgds-radio";
-import { live } from "lit/directives/live.js";
 
 /**
  * @summary RadioGroup group multiple radios so they function as a single form control.
@@ -20,8 +17,8 @@ import { live } from "lit/directives/live.js";
  *
  *
  */
-export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
-  static styles = [...SgdsElement.styles, feedbackStyles, formLabelStyles, radioGroupStyles, formHintStyles];
+export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
+  static styles = [...FormControlElement.styles, radioGroupStyles];
 
   /**@internal */
   @query("slot:not([name])") defaultSlot: HTMLSlotElement;
@@ -29,29 +26,14 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
   /**@internal */
   @state() defaultValue = "";
 
-  /** The radio group's label  */
-  @property({ reflect: true }) label = "";
-
-  /**  This will be true when the control is in an invalid state. */
-  @property({ type: Boolean, reflect: true }) invalid = false;
-
   /** The selected value of the control. */
   @property({ reflect: true }) value = "";
-
-  /** The name assigned to the radio controls. */
-  @property({ reflect: true }) name: string;
-
-  /** Ensures a child radio is checked before allowing the containing form to submit. */
-  @property({ type: Boolean, reflect: true }) required = false;
 
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback = "";
 
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
-
-  /** The radio group's hint text */
-  @property({ reflect: true }) hintText = "";
 
   @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
@@ -65,13 +47,13 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
 
   @state() private _isTouched = false;
   /**
-   * radio requries a custom resetFormControl as the update of input value
+   * radio requries a custom _mixinResetFormControl as the update of input value
    * requires to fire a reset event manually
    * */
-  private resetFormControl() {
+  private _mixinResetFormControl() {
     this.value = this.input.value = this.defaultValue;
     this._updateInputValue("reset");
-    this.resetValidity(this.input);
+    this._mixinResetValidity(this.input);
   }
 
   connectedCallback() {
@@ -181,8 +163,8 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
     radios.forEach(radio => (radio.checked = radio.value === this.value));
   }
 
-  private _renderHintText() {
-    const hintTextTemplate = html` <div class="form-text">${this.hintText}</div> `;
+  protected _renderHintText() {
+    const hintTextTemplate = html` <div id="${this._controlId}Help" class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }
   /**
@@ -190,7 +172,20 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
    * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
    */
   public reportValidity(): boolean {
-    return this.inputValidationController.reportValidity();
+    return this._mixinReportValidity();
+  }
+
+  /**
+   * Returns the ValidityState object
+   */
+  public get validity(): ValidityState {
+    return this._mixinGetValidity();
+  }
+  /**
+   * Returns the validation message based on the ValidityState
+   */
+  public get validationMessage() {
+    return this._mixinGetValidationMessage();
   }
 
   @watch("_isTouched", { waitUntilFirstUpdate: true })
@@ -231,7 +226,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(SgdsElement) {
           })}"
           ?required=${this.required}
           tabindex="-1"
-          @change=${(e: Event) => super.handleChange(e)}
+          @change=${(e: Event) => super._mixinHandleChange(e)}
           .value=${live(this.value)}
         />
         ${this.invalid && this.hasFeedback

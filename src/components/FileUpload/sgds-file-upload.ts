@@ -4,30 +4,26 @@ import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { createRef, ref } from "lit/directives/ref.js";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
-import SgdsElement from "../../base/sgds-element";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
-import feedbackStyles from "../../styles/feedback.css";
-import formHintStyles from "../../styles/form-hint.css";
-import formLabelStyles from "../../styles/form-label.css";
-import fileUploadStyles from "./file-upload.css";
-import genId from "../../utils/generateId";
 import { SgdsButton } from "../Button/sgds-button";
+import fileUploadStyles from "./file-upload.css";
 
+import FormControlElement from "../../base/form-control-element";
 import { SgdsFormValidatorMixin } from "../../utils/validator";
 
 /**
  * @summary Allows users to upload files of various sizes and formats
  * @slot default - Label for file upload button
  *
- * @event sgds-files-selected - Emitted when files are selected for uploading
+ * @event sgds-files-selected - Emitted when files are selected for uploading. Access the selected files with event.target.detail
  *
  * @cssproperty --file-upload-file-icon-color - Left icon color
  * @cssproperty --file-upload-remove-icon-color - Remove icon color
  * @cssproperty --file-upload-remove-icon-hover-color - Remove icon hover color
  */
 
-export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(SgdsElement)) {
-  static styles = [...SgdsElement.styles, feedbackStyles, formHintStyles, formLabelStyles, fileUploadStyles];
+export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(FormControlElement)) {
+  static styles = [...FormControlElement.styles, fileUploadStyles];
   /**@internal */
   static get scopedElements() {
     return {
@@ -35,9 +31,6 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(S
       "sgds-close-button": SgdsCloseButton
     };
   }
-
-  //** Disable the fileuploader button */
-  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Allows multiple files to be listed for uploading */
   @property({ type: Boolean, reflect: true }) multiple = false;
@@ -48,32 +41,39 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(S
   /** Customize the check icon with SVG */
   @property({ type: String }) checkedIcon = "";
 
-  /** The file upload's label */
-  @property({ reflect: true }) label = "";
-
-  /** The file upload's hint text */
-  @property({ reflect: true }) hintText = "";
-
-  /** Makes the input a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
-
-  /**Feedback text for error state when validated */
-  @property({ type: String, reflect: true }) invalidFeedback = "";
-
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
-  /**  This will be true when the control is in an invalid state. */
-  @property({ type: Boolean, reflect: true }) invalid = false;
+
+  /**Feedback text for error state when validated */
+  @property({ type: String, reflect: true }) invalidFeedback: string;
 
   @state()
   private selectedFiles: File[] = [];
 
-  private _setFileList(files: FileList) {
-    this.emit("sgds-files-selected", { detail: files });
-    //Possible to pass in the files
+  /**
+   * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
+   * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
+   */
+  public reportValidity(): boolean {
+    return this._mixinReportValidity();
+  }
+  /**
+   * Returns the ValidityState object
+   */
+  public get validity(): ValidityState {
+    return this._mixinGetValidity();
+  }
+  /**
+   * Returns the validation message based on the ValidityState
+   */
+  public get validationMessage() {
+    return this._mixinGetValidationMessage();
   }
 
-  // Create a ref to the input element
+  private _setFileList(files: FileList) {
+    this.emit("sgds-files-selected", { detail: files });
+  }
+
   private inputRef = createRef<HTMLInputElement>();
 
   private _handleClick(event: Event) {
@@ -96,7 +96,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(S
     // Trigger a re-render of the component to update the list of selected files
     this._setFileList(files);
     this.requestUpdate();
-    super.handleChange(event);
+    super._mixinHandleChange(event);
   }
 
   private _removeFileHandler(index: number) {
@@ -116,7 +116,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(S
 
     // Trigger a re-render of the component to update the list of selected files
     this.requestUpdate();
-    this._validate(this.input);
+    this._mixinValidate(this.input);
   }
 
   private _clearAllFiles() {
@@ -127,28 +127,22 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(S
     this.selectedFiles = Array.from(fileBuffer.files);
   }
 
-  /**@internal */
-  protected inputId: string = genId("input", "file");
-
-  protected labelId: string = genId("label");
-
+  /**
+   * fileupload requries a custom _mixinResetFormControl for clearing files
+   */
+  private _mixinResetFormControl() {
+    this._clearAllFiles();
+    this._mixinResetValidity(this.input);
+  }
   protected _renderLabel() {
     const labelTemplate = html`
-      <label
-        for=${this.inputId}
-        id=${this.labelId}
-        class=${classMap({
-          "form-label": true
-        })}
-      >
-        ${this.label}
-      </label>
+      <label for=${this._controlId} id=${this._labelId} class="form-label"> ${this.label} </label>
     `;
     return this.label && labelTemplate;
   }
 
   protected _renderHintText() {
-    const hintTextTemplate = html` <small id="${this.inputId}Help" class="form-text">${this.hintText}</small> `;
+    const hintTextTemplate = html` <div id="${this._controlId}Help" class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }
 
@@ -161,27 +155,11 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(S
             fill="#B90000"
           />
         </svg>
-        <div id="${this.inputId}-invalid" class="invalid-feedback">
+        <div id="${this._controlId}-invalid" class="invalid-feedback">
           ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
         </div>
       </div>
     `;
-  }
-
-  /**
-   * fileupload requries a custom resetFormControl for clearing files
-   */
-  private resetFormControl() {
-    this._clearAllFiles();
-    this.resetValidity(this.input);
-  }
-
-  /**
-   * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
-   * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
-   */
-  public reportValidity(): boolean {
-    return this.inputValidationController.reportValidity();
   }
   render() {
     const getCheckedIcon = (checkedIcon: string) => {
@@ -223,13 +201,13 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(S
           @change=${this._handleChange}
           ?multiple=${this.multiple}
           accept=${this.accept}
-          id=${this.inputId}
+          id=${this._controlId}
           ?required=${this.required}
         />
         <div class="file-upload-container">
           ${this._renderLabel()}
           <sgds-button variant="outline" ?disabled=${this.disabled} @click=${this._handleClick}>
-            <label for=${this.inputId}><slot></slot></label>
+            <label for=${this._controlId}><slot></slot></label>
             <svg
               slot="rightIcon"
               xmlns="http://www.w3.org/2000/svg"
