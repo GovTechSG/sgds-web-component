@@ -9,6 +9,7 @@ import { FormSubmitController, SgdsFormControl } from "../../utils/form";
 import { watch } from "../../utils/watch";
 import textareaStyle from "./textarea.css";
 import { SgdsFormValidatorMixin } from "../../utils/validator";
+import { nothing, PropertyValues } from "lit";
 
 /**
  * @summary Text areas allow for the collection of input longer than a single line.
@@ -70,21 +71,6 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
 
   @state() private _isTouched = false;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.resizeObserver = new ResizeObserver(() => this._setTextareaHeight());
-
-    this.updateComplete.then(() => {
-      this._setTextareaHeight();
-      this.resizeObserver.observe(this.textarea);
-    });
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.resizeObserver.unobserve(this.textarea);
-  }
-
   /** Sets focus on the textarea. */
   public focus(options?: FocusOptions) {
     this.textarea.focus(options);
@@ -135,11 +121,11 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
   }
 
   private _handleFocus() {
-    this._isTouched = true;
     this.emit("sgds-focus");
   }
 
   private _handleBlur() {
+    this._isTouched = true;
     this.emit("sgds-blur");
   }
 
@@ -176,7 +162,6 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
   /** @internal */
   @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
-    // this.invalid = !this.textarea.checkValidity();
     this.updateComplete.then(() => this._setTextareaHeight());
   }
 
@@ -185,9 +170,8 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
     return this.hintText && hintTextTemplate;
   }
 
-  render() {
-    // if maxlength is defined
-    const wordCount = html`
+  private _wordCount() {
+    return html`
       <div
         class="form-text word-count ${classMap({
           "invalid-feedback": this.invalid && this.hasFeedback
@@ -196,7 +180,8 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
         ${this.value.length}/${this.maxlength}
       </div>
     `;
-
+  }
+  render() {
     return html`
       <div
         class="form-control-container ${classMap({
@@ -250,7 +235,7 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
                 </div>
               `
             : html`${this._renderHintText()}`}
-          ${this.maxlength > 0 ? wordCount : undefined}
+          ${this.maxlength > 0 ? this._wordCount() : nothing}
         </div>
       </div>
     `;

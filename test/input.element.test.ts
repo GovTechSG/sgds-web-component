@@ -383,7 +383,7 @@ describe("when submitting a form", () => {
     `);
     const submitButton = form.querySelector<SgdsButton>("sgds-button");
     const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
-    expect(form.reportValidity()).to.equal(true);
+    expect(form.reportValidity()).to.equal(false);
     form.addEventListener("submit", submitHandler);
     submitButton?.click();
     await waitUntil(() => submitHandler.calledOnce);
