@@ -5,8 +5,8 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import FormControlElement from "../../base/form-control-element";
 import { defaultValue } from "../../utils/defaultvalue";
-import { SgdsFormControl } from "../../utils/form";
-import { SgdsFormValidatorMixin } from "../../utils/validator";
+import { SgdsFormControl } from "../../utils/formSubmitController";
+import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
 import checkboxStyle from "./checkbox.css";
 

@@ -8,7 +8,7 @@ import { SgdsButton } from "../Button/sgds-button";
 import fileUploadStyles from "./file-upload.css";
 
 import FormControlElement from "../../base/form-control-element";
-import { SgdsFormValidatorMixin } from "../../utils/validator";
+import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
 
 /**

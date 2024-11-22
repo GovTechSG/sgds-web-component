@@ -7,7 +7,7 @@ import { InputValidationController } from "./inputValidationController";
 type Constructor<T> = new (...args: any[]) => T;
 
 /**
- * @summary When noValidation is false, applies the SGDS Form validation behaviour on the superClass
+ * @summary The FormValidationMixin used by the form components
  * @param superClass
  * @returns
  */

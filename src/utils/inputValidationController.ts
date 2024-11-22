@@ -1,7 +1,10 @@
 import { ReactiveController, ReactiveControllerHost } from "lit";
-import { SgdsFormControl } from "./form";
+import { SgdsFormControl } from "./formSubmitController";
 import { SgdsCheckbox, SgdsInput } from "../components";
 
+/**
+ * SGDS custom form validation methods and behaviours
+ */
 export class InputValidationController implements ReactiveController {
   host: ReactiveControllerHost & HTMLElement;
   _internals: ElementInternals;

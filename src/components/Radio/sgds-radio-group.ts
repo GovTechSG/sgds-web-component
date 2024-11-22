@@ -3,7 +3,7 @@ import { property, query, queryAssignedElements, state } from "lit/decorators.js
 import { classMap } from "lit/directives/class-map.js";
 import { live } from "lit/directives/live.js";
 import FormControlElement from "../../base/form-control-element";
-import { SgdsFormValidatorMixin } from "../../utils/validator";
+import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
 import radioGroupStyles from "./radio-group.css";
 import SgdsRadio from "./sgds-radio";

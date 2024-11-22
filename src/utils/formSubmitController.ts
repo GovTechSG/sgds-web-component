@@ -3,6 +3,9 @@ import type { ReactiveController, ReactiveControllerHost } from "lit";
 import SgdsElement from "../base/sgds-element";
 import { SgdsInput } from "../components";
 
+/**
+ * A controller to help with form submission
+ */
 export class FormSubmitController implements ReactiveController {
   host?: ReactiveControllerHost & Element;
   form?: HTMLFormElement | null;
@@ -27,7 +30,10 @@ export class FormSubmitController implements ReactiveController {
       this.form = undefined;
     }
   }
-
+  /**
+   * Creates a temporary native HTML button that can participate in form and invoke form submits and reset
+   * Button is removed once action is performed
+   */
   doAction(type: "submit" | "reset", invoker?: HTMLInputElement | SgdsButton) {
     if (this.form) {
       const button = document.createElement("button");
