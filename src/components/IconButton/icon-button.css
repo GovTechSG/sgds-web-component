@@ -21,7 +21,3 @@
   height: var(--sgds-dimension-40);
   width: var(--sgds-dimension-40);
 }
-
-slot::slotted(*) {
-  color: var(--sgds-btn-color);
-}
