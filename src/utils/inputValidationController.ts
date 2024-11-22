@@ -18,16 +18,7 @@ export class InputValidationController implements ReactiveController {
       value: (host: SgdsFormControl) => {
         return host.value;
       },
-      defaultValue: (host: SgdsFormControl) => {
-        return host.defaultValue;
-      },
-      defaultChecked: (host: SgdsFormControl) => {
-        return host.defaultChecked;
-      },
       input: (host: SgdsFormControl) => host.input,
-      setValue: (input: HTMLInputElement, value: string) => {
-        input.value = value;
-      },
       ...options
     };
   }
@@ -39,25 +30,38 @@ export class InputValidationController implements ReactiveController {
   hostDisconnected(): void {
     this.host.removeEventListener("invalid", e => this.handleInvalid(e));
   }
-
+  /**
+   * Prevents the native browser error message pop up when reportValidity() called by
+   * associated form or the component's reportValidity during constraint validation
+   * Sets invalid reactive prop to true
+   */
   handleInvalid(e: Event) {
     e.preventDefault();
     this.options.setInvalid(this.host, true);
   }
 
+  /**
+   * Sets invalid to false when invoked and
+   * Updates the ValidityState based on new value, but
+   * does not update invalid reactive prop
+   * @param e
+   */
   handleInput(e: Event) {
     const input = e.target as HTMLInputElement;
     this.options.setInvalid(this.host, false);
     this.validateInput(input);
   }
+  /**
+   * Validate the input's new value after onChange and
+   * update invalid reactive prop
+   * @param e
+   */
   handleChange(e: Event) {
     const input = e.target as HTMLInputElement;
     this.validateInput(input);
     this.options.setInvalid(this.host, !this.checkValidity());
   }
-  getInput() {
-    return this.options.input(this.host);
-  }
+
   get form() {
     return this._internals.form;
   }
@@ -73,20 +77,31 @@ export class InputValidationController implements ReactiveController {
   get willValidate() {
     return this._internals.willValidate;
   }
+  /**
+   * Checks the validity and updates the invalid reactive prop of form components
+   */
   updateInvalidState() {
     this.options.setInvalid(this.host, !this.checkValidity());
   }
-  _mixinResetValidity() {
+  /**
+   * Resets the ValidityState of the control
+   */
+  resetValidity() {
     return this._internals.setValidity({});
   }
-  checkValidity() {
+  /**
+   * Reports the validity
+   */
+  checkValidity(): boolean {
     return this._internals.checkValidity();
   }
-  reportValidity() {
+  /**
+   * Reports the validity with a error popup message
+   */
+  reportValidity(): boolean {
     return this._internals.reportValidity();
   }
   /**
-   *
    * Sets the form control value into FormData,
    * making the value of control accessible via FormData
    */
@@ -94,7 +109,9 @@ export class InputValidationController implements ReactiveController {
     const value = this.options.value(this.host) as string | FormData | File;
     this._internals.setFormValue(value);
   }
-
+  /**
+   * Updates the ValidityState of the input in form component at current state
+   */
   validateInput(input) {
     /** When the form control is disabled, its always valid */
     if (this.options.input(this.host).disabled) {
@@ -125,11 +142,8 @@ export class InputValidationController implements ReactiveController {
 export interface InputValidationControllerOptions {
   /** A function that sets the value of host invalid reactive prop */
   setInvalid: (host: ReactiveControllerHost & HTMLElement, value: boolean) => void;
+  /** A function that gets the value of host value reactive prop */
   value: (host: ReactiveControllerHost & HTMLElement) => unknown;
+  /** A function that gets the input control of host value reactive prop */
   input: (host: ReactiveController & HTMLElement) => HTMLInputElement | SgdsInput | SgdsCheckbox;
-  /** A function that returns the form control's default value. */
-  defaultValue: (input: unknown) => unknown | unknown[];
-  defaultChecked: (host: ReactiveController & HTMLElement) => boolean;
-  /** A function that sets the form control's value */
-  setValue: (input: unknown, value: unknown) => void;
 }

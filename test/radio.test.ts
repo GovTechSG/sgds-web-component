@@ -264,6 +264,33 @@ describe("<sgds-radio-group>", () => {
     expect(radio1).to.have.attribute("aria-checked", "true");
     expect(el).to.have.attribute("value", "1");
   });
+  it("when disabled, invalid state is removed", async () => {
+    const el = await fixture<SgdsRadioGroup>(html`<sgds-radio-group invalid></sgds-radio-group>`);
+    expect(el.invalid).to.be.true;
+    el.disabled = true;
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+    el.disabled = false;
+    expect(el.invalid).to.be.false;
+  });
+  it("when disabled on first load, all child are disabled", async () => {
+    const el = await fixture<SgdsRadioGroup>(html` <sgds-radio-group disabled>
+      <sgds-radio>one</sgds-radio>
+      <sgds-radio>two</sgds-radio>
+    </sgds-radio-group>`);
+    const radios = el.querySelectorAll("sgds-radio");
+    radios.forEach(r => expect(r.disabled).to.be.true);
+  });
+  it("subsequent disable, all child are disabled", async () => {
+    const el = await fixture<SgdsRadioGroup>(html` <sgds-radio-group>
+      <sgds-radio>one</sgds-radio>
+      <sgds-radio>two</sgds-radio>
+    </sgds-radio-group>`);
+    el.disabled = true;
+    await el.updateComplete;
+    const radios = el.querySelectorAll("sgds-radio");
+    radios.forEach(r => expect(r.disabled).to.be.true);
+  });
 });
 
 // Keyboard interactions (arrowdown, arrowup) --> to keep check on the handleKeyDown() you wrote --> and that it updates the sgds-radio-group

@@ -110,7 +110,6 @@ export class DatepickerInput extends SgdsInput {
     this.mask?.updateValue();
   }
   private _validateInput = async () => {
-    console.log("validateInput");
     const dates = this.mask.value.split(" - ");
     const noEmptyDates = dates.filter(d => d !== this.dateFormat.toLowerCase());
     const dateArray: Date[] | string[] = noEmptyDates.map(date =>
@@ -125,9 +124,7 @@ export class DatepickerInput extends SgdsInput {
     );
 
     if (invalidDates.length > 0) {
-      console.log(this.invalid);
       this.setInvalid(true);
-      console.log(this.invalid);
       return this.emit("sgds-invalid-input");
     }
     if (this.mode === "range" && dateArray.length === 1) {

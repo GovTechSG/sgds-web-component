@@ -78,6 +78,13 @@ export class SgdsQuantityToggle
     return this._mixinReportValidity();
   }
   /**
+   * Checks for validity without any native error popup message
+   */
+  public checkValidity(): boolean {
+    return this._mixinCheckValidity();
+  }
+
+  /**
    * Returns the ValidityState object
    */
   public get validity(): ValidityState {
@@ -98,7 +105,7 @@ export class SgdsQuantityToggle
     this.value = parseInt(sgdsInput.value);
     this._mixinSetFormValue();
     this._mixinValidate(sgdsInput.input);
-    this.invalid = !this._mixinCheckValidity();
+    this.invalid = !this._mixinReportValidity();
   }
   private async _handleInputChange() {
     const sgdsInput = await this._sgdsInput;
@@ -135,8 +142,11 @@ export class SgdsQuantityToggle
     }
   }
 
-  private _handleInvalidChange() {
+  private _handleInvalid() {
     this.invalid = true;
+  }
+  private _handleValid() {
+    this.invalid = false;
   }
 
   /** Simulates a click on the plus button */
@@ -180,7 +190,7 @@ export class SgdsQuantityToggle
     await sgdsInput.updateComplete;
     this._mixinSetFormValue();
     this._mixinValidate(input);
-    this.invalid = !this._mixinCheckValidity();
+    this.invalid = !this._mixinReportValidity();
   }
 
   protected _renderFeedback() {
@@ -243,7 +253,8 @@ export class SgdsQuantityToggle
             .value=${live(this.value)}
             @sgds-change=${this._handleChange}
             @sgds-input=${this._handleInputChange}
-            @sgds-invalid=${this._handleInvalidChange}
+            @sgds-invalid=${this._handleInvalid}
+            @sgds-valid=${this._handleValid}
             @keydown=${this._handleKeyDown}
             ?disabled=${this.disabled}
             id=${this._controlId}

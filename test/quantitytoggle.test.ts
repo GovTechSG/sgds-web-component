@@ -263,4 +263,15 @@ describe("in form context", () => {
     expect(el.shadowRoot?.querySelector(".invalid-feedback")).to.be.null;
     expect(el.shadowRoot?.querySelector<SgdsInput>("sgds-input")?.getAttribute("hasfeedback")).to.equal("style");
   });
+  it("when disabled, invalid state is removed", async () => {
+    const el = await fixture<SgdsInput>(
+      html` <sgds-quantity-toggle invalid invalidFeedback="" hasFeedback></sgds-quantity-toggle> `
+    );
+    expect(el.invalid).to.be.true;
+    el.disabled = true;
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+    el.disabled = false;
+    expect(el.invalid).to.be.false;
+  });
 });

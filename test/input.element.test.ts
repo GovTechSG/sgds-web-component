@@ -210,7 +210,7 @@ describe("when using constraint validation", () => {
   it("by default, invalid should be false", async () => {
     const el = await fixture<SgdsInput>(html` <sgds-input></sgds-input> `);
     expect(el.invalid).to.be.false;
-    expect(el.reportValidity()).to.be.true;
+    expect(el.checkValidity()).to.be.true;
   });
   it("invalid is true for a required input when it is touched ", async () => {
     const el = await fixture<SgdsInput>(html` <sgds-input required></sgds-input> `);
@@ -220,7 +220,7 @@ describe("when using constraint validation", () => {
     el.blur();
     await el.updateComplete;
     expect(el.invalid).to.be.true;
-    expect(el.reportValidity()).to.be.false;
+    expect(el.checkValidity()).to.be.false;
   });
   it("for non requried fields invalid is always false even after touching", async () => {
     const el = await fixture<SgdsInput>(html` <sgds-input></sgds-input> `);
@@ -242,7 +242,7 @@ describe("when using constraint validation", () => {
 
     expect(el.value).to.equal("s");
     expect(el.invalid).to.be.false;
-    expect(el.reportValidity()).to.be.true;
+    expect(el.checkValidity()).to.be.true;
     el.focus();
     await sendKeys({ press: "Backspace" });
     el.blur();
@@ -250,7 +250,7 @@ describe("when using constraint validation", () => {
     expect(el.value).to.equal("");
 
     expect(el.invalid).to.be.true;
-    expect(el.reportValidity()).to.be.false;
+    expect(el.checkValidity()).to.be.false;
   });
 
   it("for an invalid field,  invalid is set to false (reset) when user is typing", async () => {
@@ -264,35 +264,38 @@ describe("when using constraint validation", () => {
   it("should be invalid when the pattern does not match", async () => {
     const el = await fixture<SgdsInput>(html` <sgds-input pattern="failtest" value="fail"></sgds-input> `);
     expect(el.invalid).to.be.false;
-    expect(el.reportValidity()).to.be.false;
+    expect(el.checkValidity()).to.be.false;
     el.focus();
     await sendKeys({ type: "tes" });
     el.blur();
     await el.updateComplete;
     expect(el.value).to.equal("failtes");
     expect(el.invalid).to.be.true;
-    expect(el.reportValidity()).to.be.false;
+    expect(el.checkValidity()).to.be.false;
     el.focus();
     await sendKeys({ type: "t" });
     el.blur();
     await el.updateComplete;
     expect(el.value).to.equal("failtest");
     expect(el.invalid).to.be.false;
-    expect(el.reportValidity()).to.be.true;
+    expect(el.checkValidity()).to.be.true;
     el.focus();
     await sendKeys({ press: "Backspace" });
     el.blur();
     await el.updateComplete;
     expect(el.value).to.equal("failtes");
     expect(el.invalid).to.be.true;
-    expect(el.reportValidity()).to.be.false;
+    expect(el.checkValidity()).to.be.false;
   });
 
-  it("should be invalid when required and disabled is removed", async () => {
-    const el = await fixture<SgdsInput>(html` <sgds-input disabled required></sgds-input> `);
-    el.disabled = false;
-    await el.updateComplete;
+  it("when disabled, invalid state is removed", async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input invalid invalidFeedback="" hasFeedback></sgds-input> `);
     expect(el.invalid).to.be.true;
+    el.disabled = true;
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+    el.disabled = false;
+    expect(el.invalid).to.be.false;
   });
 });
 

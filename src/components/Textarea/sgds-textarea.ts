@@ -88,6 +88,12 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
     return this._mixinReportValidity();
   }
   /**
+   * Checks for validity without any native error popup message
+   */
+  public checkValidity(): boolean {
+    return this._mixinCheckValidity();
+  }
+  /**
    * Returns the ValidityState object
    */
   public get validity(): ValidityState {
@@ -155,8 +161,7 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
   @watch("disabled", { waitUntilFirstUpdate: true })
   _handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.textarea.disabled = this.disabled;
-    this.invalid = !this.textarea.checkValidity();
+    this.setInvalid(false);
   }
 
   /** @internal */

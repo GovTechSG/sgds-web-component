@@ -21,6 +21,8 @@ import inputStyle from "./input.css";
  * @event sgds-input - Emitted when the control receives input and its value changes.
  * @event sgds-focus - Emitted when input is in focus.
  * @event sgds-blur - Emitted when input is not in focus.
+ * @event sgds-invalid - Emitted when input is invalid
+ * @event sgds-valid - Emitted when input is valid
  *
  */
 export class SgdsInput
@@ -109,8 +111,12 @@ export class SgdsInput
 
   /** Programatically sets the invalid state of the input. Pass in boolean value in the argument */
   public setInvalid(bool: boolean) {
-    this.emit("sgds-invalid");
     this.invalid = bool;
+    if (bool) {
+      this.emit("sgds-invalid");
+    } else {
+      this.emit("sgds-valid");
+    }
   }
   /**
    * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
@@ -118,6 +124,12 @@ export class SgdsInput
    */
   public reportValidity(): boolean {
     return this._mixinReportValidity();
+  }
+  /**
+   * Checks for validity without any native error popup message
+   */
+  public checkValidity(): boolean {
+    return this._mixinCheckValidity();
   }
 
   /**
@@ -159,14 +171,13 @@ export class SgdsInput
   @watch("_isTouched", { waitUntilFirstUpdate: true })
   _handleIsTouched() {
     if (this._isTouched) {
-      this.invalid = !this.input.checkValidity();
+      this.setInvalid(!this._mixinCheckValidity());
     }
   }
   @watch("disabled", { waitUntilFirstUpdate: true })
   _handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.input.disabled = this.disabled;
-    this.invalid = !this.input.checkValidity();
+    this.setInvalid(false);
   }
 
   protected _renderInput() {
@@ -176,8 +187,7 @@ export class SgdsInput
         class="form-control-group ${classMap({
           disabled: this.disabled,
           readonly: this.readonly,
-          "is-invalid": this.invalid && wantFeedbackStyle,
-          "quantity-toggle": this.classList.contains("quantity-toggle")
+          "is-invalid": this.invalid && wantFeedbackStyle
         })}"
         @click=${this._handleClick}
       >

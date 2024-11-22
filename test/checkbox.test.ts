@@ -12,6 +12,15 @@ describe("<sgds-checkbox>", () => {
     expect(checkbox).to.have.attribute("aria-disabled", "true");
   });
 
+  it("when disabled, invalid state is removed", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox invalid></sgds-checkbox>`);
+    expect(el.invalid).to.be.true;
+    el.disabled = true;
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+    el.disabled = false;
+    expect(el.invalid).to.be.false;
+  });
   it("id attribute should equal to label for attribute", async () => {
     const el = await fixture(html`<sgds-checkbox></sgds-checkbox>`);
     const input = el.shadowRoot?.querySelector("input");

@@ -9,6 +9,7 @@ import fileUploadStyles from "./file-upload.css";
 
 import FormControlElement from "../../base/form-control-element";
 import { SgdsFormValidatorMixin } from "../../utils/validator";
+import { watch } from "../../utils/watch";
 
 /**
  * @summary Allows users to upload files of various sizes and formats
@@ -55,6 +56,12 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(F
    */
   public reportValidity(): boolean {
     return this._mixinReportValidity();
+  }
+  /**
+   * Checks for validity without any native error popup message
+   */
+  public checkValidity(): boolean {
+    return this._mixinCheckValidity();
   }
   /**
    * Returns the ValidityState object
@@ -133,6 +140,11 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(F
     this._clearAllFiles();
     this._mixinResetValidity(this.input);
   }
+  @watch("disabled", { waitUntilFirstUpdate: true })
+  _handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    this.setInvalid(false);
+  }
   protected _renderLabel() {
     const labelTemplate = html`
       <label for=${this._controlId} id=${this._labelId} class="form-label"> ${this.label} </label>
@@ -202,6 +214,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(F
           accept=${this.accept}
           id=${this._controlId}
           ?required=${this.required}
+          ?disabled=${this.disabled}
         />
         <div class="file-upload-container">
           ${this._renderLabel()}

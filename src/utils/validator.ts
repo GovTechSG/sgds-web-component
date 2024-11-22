@@ -49,16 +49,34 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
      * Methods use by classes using this mixin
      */
 
+    /**
+     * OnChange of form component
+     * 1. Make value of control accessible via FormData
+     * 2. Run change handler
+     */
     _mixinHandleChange(e: Event): void {
       this._mixinSetFormValue();
       this.inputValidationController.handleChange(e);
     }
+    /**
+     * OnChange of form component
+     * 1. Make value of control accessible via FormData
+     * 2. Run input handler
+     */
     _mixinHandleInputChange(e: Event): void {
       this._mixinSetFormValue();
       this.inputValidationController.handleInput(e);
     }
+    /**
+     * During form resetting,
+     * 1. ValidityState is reset
+     * 2. invalid reactive prop is updated after the reset
+     * 3. Revalidates the ValidityState (but do not update invalid prop)
+     * to prepare for the next validity check
+     * 4. Reset touched state to false for a pristine form
+     */
     _mixinResetValidity(input: HTMLInputElement | SgdsInput | HTMLTextAreaElement) {
-      this.inputValidationController._mixinResetValidity();
+      this.inputValidationController.resetValidity();
       this.inputValidationController.updateInvalidState();
       this.inputValidationController.validateInput(input);
       this._isTouched ? (this._isTouched = false) : null;

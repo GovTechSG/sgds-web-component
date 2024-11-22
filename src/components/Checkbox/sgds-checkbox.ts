@@ -98,8 +98,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
   @watch("disabled", { waitUntilFirstUpdate: true })
   _handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.input.disabled = this.disabled;
-    this.invalid = !this.input.checkValidity();
+    this.setInvalid(false);
   }
 
   @watch("_isTouched", { waitUntilFirstUpdate: true })
@@ -120,6 +119,12 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
    */
   public reportValidity(): boolean {
     return this._mixinReportValidity();
+  }
+  /**
+   * Checks for validity without any native error popup message
+   */
+  public checkValidity(): boolean {
+    return this._mixinCheckValidity();
   }
   /**
    * Returns the ValidityState object

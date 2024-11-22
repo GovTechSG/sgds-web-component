@@ -91,20 +91,16 @@ describe("when using constraint validation", () => {
     expect(el.invalid).to.be.false;
   });
 
-  it("should be invalid when required and after removing disabled ", async () => {
-    const el = await fixture<SgdsTextarea>(html` <sgds-textarea disabled required></sgds-textarea> `);
-
-    el.disabled = false;
-    await el.updateComplete;
-
+  it("when disabled, invalid state is removed", async () => {
+    const el = await fixture<SgdsTextarea>(
+      html` <sgds-textarea invalid invalidFeedback="test" hasFeedback required></sgds-textarea> `
+    );
     expect(el.invalid).to.be.true;
-  });
-
-  it("should be invalid when required and disabled is removed", async () => {
-    const el = await fixture<SgdsTextarea>(html` <sgds-textarea disabled required></sgds-textarea> `);
-    el.disabled = false;
+    el.disabled = true;
     await el.updateComplete;
-    expect(el.invalid).to.be.true;
+    expect(el.invalid).to.be.false;
+    el.disabled = false;
+    expect(el.invalid).to.be.false;
   });
 });
 

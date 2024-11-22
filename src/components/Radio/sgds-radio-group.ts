@@ -152,7 +152,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
     const radios = this._radios;
 
     radios.forEach(radio => (radio.checked = radio.value === this.value));
-
+    this._disabledChildRadios();
     if (!radios.some(radio => radio.checked)) {
       if (radios[0]) radios[0].tabIndex = 0;
     }
@@ -174,6 +174,12 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
   public reportValidity(): boolean {
     return this._mixinReportValidity();
   }
+  /**
+   * Checks for validity without any native error popup message
+   */
+  public checkValidity(): boolean {
+    return this._mixinCheckValidity();
+  }
 
   /**
    * Returns the ValidityState object
@@ -192,6 +198,20 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
   _handleIsTouched() {
     if (this._isTouched) {
       this.invalid = !this.input.checkValidity();
+    }
+  }
+
+  @watch("disabled", { waitUntilFirstUpdate: true })
+  _handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    this.setInvalid(false);
+    this._disabledChildRadios();
+  }
+
+  private _disabledChildRadios() {
+    if (this.disabled) {
+      const radios = this._radios;
+      radios.forEach(radio => (radio.disabled = this.disabled));
     }
   }
 

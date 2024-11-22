@@ -29,4 +29,14 @@ export default class FormControlElement extends SgdsElement {
 
   protected _controlId = generateId("input");
   protected _labelId = generateId("label");
+
+  /** Programatically sets the invalid state of the input. Pass in boolean value in the argument */
+  public setInvalid(bool: boolean) {
+    this.invalid = bool;
+    if (bool) {
+      this.emit("sgds-invalid");
+    } else {
+      this.emit("sgds-valid");
+    }
+  }
 }
