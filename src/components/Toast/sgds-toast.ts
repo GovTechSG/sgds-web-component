@@ -47,7 +47,7 @@ export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
   /**The variant styles of toast */
   @property({ type: String, reflect: true }) variant: "success" | "warning" | "danger" | "info" = "info";
   /** Controls whether or not the Toast is dismissible */
-  @property({ type: Boolean, reflect: true }) dismissable = false;
+  @property({ type: Boolean, reflect: true }) dismissible = false;
 
   /** Shows the toast */
   public async showToast() {
@@ -134,7 +134,7 @@ export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
           </div>
           <slot class="toast-action" name="action"></slot>
         </div>
-        ${this.dismissable
+        ${this.dismissible
           ? html`<sgds-close-button
               class="close-btn"
               ariaLabel="close toast"

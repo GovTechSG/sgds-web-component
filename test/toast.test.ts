@@ -6,13 +6,13 @@ import type { SgdsToast } from "../src/components";
 import sinon from "sinon";
 
 describe("SgdsToast component", () => {
-  it("should render the close button when dismissable is true", async () => {
-    const el = await fixture<SgdsToast>(html`<sgds-toast show dismissable></sgds-toast>`);
-    el.dismissable = true;
+  it("should render the close button when dismissible is true", async () => {
+    const el = await fixture<SgdsToast>(html`<sgds-toast show dismissible></sgds-toast>`);
+    el.dismissible = true;
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("sgds-close-button")).to.exist;
   });
-  it("should not render the close button when dismissable is false", async () => {
+  it("should not render the close button when dismissible is false", async () => {
     const el = await fixture<SgdsToast>(html`<sgds-toast></sgds-toast>`);
     expect(el.shadowRoot?.querySelector("sgds-close-button")).to.not.exist;
   });
