@@ -226,7 +226,7 @@ describe("<sgds-checkbox>", () => {
   it("should display feedback if the group has hasFeedback and at least one checkbox is invalid", async () => {
     const group = await fixture<SgdsCheckboxGroup>(html`
       <sgds-checkbox-group hasFeedback invalidFeedback="Group error">
-        <sgds-checkbox slot="checkbox" required></sgds-checkbox>
+        <sgds-checkbox required></sgds-checkbox>
       </sgds-checkbox-group>
     `);
 
@@ -242,7 +242,7 @@ describe("<sgds-checkbox>", () => {
   it("should not display feedback if no child checkbox is invalid even with hasFeedback", async () => {
     const group = await fixture<SgdsCheckboxGroup>(html`
       <sgds-checkbox-group hasFeedback invalidFeedback="Group error">
-        <sgds-checkbox slot="checkbox" required></sgds-checkbox>
+        <sgds-checkbox required></sgds-checkbox>
       </sgds-checkbox-group>
     `);
 
@@ -259,7 +259,7 @@ describe("<sgds-checkbox>", () => {
   it("should not display feedback if the group does not have hasFeedback and at least one checkbox is invalid", async () => {
     const group = await fixture<SgdsCheckboxGroup>(html`
       <sgds-checkbox-group>
-        <sgds-checkbox slot="checkbox" invalid required></sgds-checkbox>
+        <sgds-checkbox invalid required></sgds-checkbox>
       </sgds-checkbox-group>
     `);
 
@@ -276,7 +276,7 @@ describe("<sgds-checkbox>", () => {
   it("should mark the checkbox as invalid when required and not checked upon form submission", async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
-        <sgds-checkbox required slot="checkbox"></sgds-checkbox>
+        <sgds-checkbox required></sgds-checkbox>
         <sgds-button type="submit"></sgds-button>
       </form>
     `);
@@ -299,7 +299,7 @@ describe("<sgds-checkbox>", () => {
   it("should not mark the checkbox as invalid when not required and not checked upon form submission", async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
-        <sgds-checkbox slot="checkbox"></sgds-checkbox>
+        <sgds-checkbox></sgds-checkbox>
         <sgds-button type="submit"></sgds-button>
       </form>
     `);
@@ -321,7 +321,7 @@ describe("<sgds-checkbox>", () => {
   it("form submission success when checkbox is required and checked", async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
-        <sgds-checkbox slot="checkbox" required checked></sgds-checkbox>
+        <sgds-checkbox required checked></sgds-checkbox>
         <sgds-button type="submit"></sgds-button>
       </form>
     `);

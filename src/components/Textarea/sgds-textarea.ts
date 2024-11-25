@@ -225,10 +225,7 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
           @invalid=${(e: Event) => this._handleInvalid(e)}
           @focus=${this._handleFocus}
           @blur=${this._handleBlur}
-        >
-        <!-- ${this.value} -->
-        </textarea
-        >
+        ></textarea>
         <div class="textarea-info-container">
           ${this.invalid && this.hasFeedback
             ? html`
