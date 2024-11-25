@@ -7,7 +7,7 @@
   --sgds-default-bg-muted: var(--sgds-gray-700);
   --sgds-default-bg-subtle: var(--sgds-gray-500);
   --sgds-default-bg-emphasis: var(--sgds-gray-200);
-  --sgds-default-bg-overlay: oklch(from var(--sgds-gray-000) l c h / 0.4);
+  --sgds-default-bg-overlay: oklch(from var(--sgds-gray-900) l c h / 0.4);
   --sgds-default-bg-translucent: oklch(from var(--sgds-gray-000) l c h / 0.1);
   --sgds-default-bg-translucent-subtle: oklch(from var(--sgds-gray-000) l c h / 0.1);
   --sgds-default-bg-transparent: transparent;

@@ -171,7 +171,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(F
     `;
   }
   render() {
-    const getCheckedIcon = (checkedIcon?: string) => {
+    const getCheckedIcon = () => {
       // if (checkedIcon) {
       //   return html`${unsafeSVG(checkedIcon)}`;
       // }

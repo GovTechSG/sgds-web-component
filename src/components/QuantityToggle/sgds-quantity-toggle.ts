@@ -13,11 +13,9 @@ import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import SgdsInput from "../Input/sgds-input";
 import quantityToggleStyle from "./quantity-toggle.css";
+import SgdsIcon from "../Icon/sgds-icon";
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
- *
- * @csspart base - The base wrapper of the quantity toggle component.
- * @csspart button - The plus and minus button of quantity toggle
  *
  * @event sgds-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sgds-input - Emitted when the control receives input and its value changes.
@@ -33,7 +31,8 @@ export class SgdsQuantityToggle
   static get scopedElements() {
     return {
       "sgds-input": SgdsInput,
-      "sgds-icon-button": SgdsIconButton
+      "sgds-icon-button": SgdsIconButton,
+      "sgds-icon": SgdsIcon
     };
   }
   /** @internal */
@@ -234,14 +233,15 @@ export class SgdsQuantityToggle
     return html`
       <div class="form-control-container">
         ${this._renderLabel()}
-        <div part="base" class="input-group" variant="quantity-toggle">
+        <div class="input-group">
           <sgds-icon-button
             variant="ghost"
             ariaLabel=${`decrease by ${this.step}`}
-            part="button"
             ?disabled=${this.disabled || (this.min !== undefined ? this.value <= this.min : this.value < 1)}
             @click=${this._onMinus}
-          ></sgds-icon-button>
+          >
+            <sgds-icon name="dash"></sgds-icon>
+          </sgds-icon-button>
           <sgds-input
             type="number"
             class="quantity-toggle"
@@ -263,10 +263,10 @@ export class SgdsQuantityToggle
           <sgds-icon-button
             variant="ghost"
             ariaLabel=${`increase by ${this.step}`}
-            part="button"
             @click=${this._onPlus}
             ?disabled=${this.disabled || (this.max !== undefined && this.max && this.value >= this.max)}
-          ></sgds-icon-button>
+            ><sgds-icon name="plus"></sgds-icon>
+          </sgds-icon-button>
         </div>
         <div id="announcer" role="region" aria-live="assertive" class="visually-hidden">${this.value}</div>
         ${this._renderFeedback()}

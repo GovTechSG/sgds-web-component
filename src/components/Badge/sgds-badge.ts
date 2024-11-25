@@ -36,7 +36,7 @@ export class SgdsBadge extends ScopedElementsMixin(SgdsElement) {
   /** Manually set the outlined state to false */
   @property({ type: Boolean, reflect: true }) outlined = false;
 
-  /** Manually set the dismissable state of the button to `false` */
+  /** Manually set the dismissible state of the button to `false` */
   @property({ type: Boolean, reflect: true }) dismissible = false;
 
   /** Closes the badge  */
