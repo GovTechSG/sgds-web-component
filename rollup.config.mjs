@@ -27,7 +27,8 @@ const external = [
 const copyPlugin = copy({
   targets: [
     {src: "src/themes/**/*", dest: "lib/themes"},
-    {src: "src/css/**/*", dest: "lib/css"}
+    {src: "src/css/**/*", dest: "lib/css"},
+    {src: "src/icons/**/*", dest: "lib/icons"},
   ]
 })
 const wcPlugins = [
