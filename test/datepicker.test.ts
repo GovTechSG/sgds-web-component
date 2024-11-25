@@ -1361,11 +1361,11 @@ describe("error message", () => {
     expect(el?.reportValidity()).to.equal(false);
     const feedbackDiv = input?.shadowRoot?.querySelector("div.invalid-feedback");
     expect(feedbackDiv).to.exist;
-    expect(feedbackDiv?.textContent).to.equal("Please enter a valid date");
+    expect(feedbackDiv?.textContent).to.contain("Please enter a valid date");
 
     el.invalidFeedback = "Error message";
     await el.updateComplete;
-    expect(feedbackDiv?.textContent).to.equal("Error message");
+    expect(feedbackDiv?.textContent).to.contain("Error message");
   });
 });
 

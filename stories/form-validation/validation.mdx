@@ -1,0 +1,44 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Form/Validation" />
+
+# Form Validation
+
+SGDS form web components have HTML constraint validation and sgds's own validation behaviour built into it with the [ElementInternals API](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals)
+
+
+{/* 
+| Component      | Status                                     | Constraint validations | SGDS validation behaviour                                                                               | Additional SGDS Custom Validation |
+| -------------- | ------------------------------------------ | ---------------------- | ------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| Checkbox       | Implemented                                | Required               | Validation after input is touched                                                                       |                                   |
+|                |                                            |                        | Validation happens on form submit, blocks submission                                                    |                                   |
+|                |                                            |                        | Validation resets when form resets                                                                      |                                   |
+|                |                                            |                        | When disabled, validation is disabled                                                                   |                                   |
+| Input          | Implemented                                | Required               | Validation shows onChange and after input is touched                                                    |                                   |
+|                |                                            | Pattern                | Validation happens on form submit, blocks submission                                                    |                                   |
+|                |                                            | Min                    | After its invalid, when user types again the validity is cleared and revalidated only at onChange again |                                   |
+|                |                                            | Max                    | Validation resets when form resets                                                                      |                                   |
+|                |                                            | MinLength              | When disabled, validation is disabled                                                                   |                                   |
+|                |                                            | MaxLength              |                                                                                                         |                                   |
+| QuantityToggle | Implemented                                | Min                    | Validation happens onChange and after input is touched                                                  |                                   |
+|                |                                            | Max                    | Validation happens on form submit, blocks submission                                                    |                                   |
+|                |                                            |                        | Validation resets when form resets                                                                      |                                   |
+|                |                                            |                        | When disabled, validation is disabled                                                                   |                                   |
+| Radio          | Implemented                                | Required               | Validation after input is touched                                                                       |                                   |
+|                |                                            |                        | Validation happens on form submit, blocks submission                                                    |                                   |
+|                |                                            |                        | Validation resets when form resets                                                                      |                                   |
+|                |                                            |                        | When disabled, validation is disabled                                                                   |                                   |
+| Textarea       | Implemented                                | Required               | Validation shows onChange and after input is touched                                                    |                                   |
+|                |                                            | MinLength              | Validation happens on form submit, blocks submission                                                    |                                   |
+|                |                                            | MaxLength              | Validation resets when form resets                                                                      |                                   |
+|                |                                            |                        | When disabled, validation is disabled                                                                   |                                   |
+| FileUpload     | Partially implemented, file size limit wip | Required               | Validation happens on submission (?? if input is touched)                                               | File size limit                   |
+|                |                                            |                        | Validation resets when form resets                                                                      |                                   |
+|                |                                            |                        | Validation resets when form resets                                                                      |                                   |
+|                |                                            |                        | When disabled, validation is disabled                                                                   |                                   |
+| ActionCard     | WIP                                        |                        |                                                                                                         |                                   |
+| Combobox       | WIP                                        |                        |                                                                                                         |                                   |
+| Datepicker     | WIP                                        | Required               | Validation happens onChange and after input is touched                                                  |                                   |
+|                |                                            | Min                    | Validation happens on form submit, blocks submission                                                    |                                   |
+|                |                                            | Max                    | Validation resets when form resets                                                                      |                                   |
+|                |                                            |                        | When disabled, validation is disabled                                                                   |                                   | */}

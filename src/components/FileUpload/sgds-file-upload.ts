@@ -1,30 +1,24 @@
 import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
-import { property } from "lit/decorators.js";
-import { classMap } from "lit/directives/class-map.js";
+import { property, state } from "lit/decorators.js";
 import { createRef, ref } from "lit/directives/ref.js";
-import { unsafeSVG } from "lit/directives/unsafe-svg.js";
-import SgdsElement from "../../base/sgds-element";
-import { SgdsButton } from "../Button/sgds-button";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
-import fileUploadStyle from "./file-upload.css";
-import genId from "../../utils/generateId";
-import svgStyles from "../../styles/svg.css";
-import formHintStyles from "../../styles/form-hint.css";
+import { SgdsButton } from "../Button/sgds-button";
+import fileUploadStyles from "./file-upload.css";
+
+import FormControlElement from "../../base/form-control-element";
+import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
+import { watch } from "../../utils/watch";
 
 /**
  * @summary Allows users to upload files of various sizes and formats
  * @slot default - Label for file upload button
  *
- * @event sgds-files-selected - Emitted when files are selected for uploading
- *
- * @cssproperty --file-upload-file-icon-color - Left icon color
- * @cssproperty --file-upload-remove-icon-color - Remove icon color
- * @cssproperty --file-upload-remove-icon-hover-color - Remove icon hover color
+ * @event sgds-files-selected - Emitted when files are selected for uploading. Access the selected files with event.target.detail
  */
 
-export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
-  static styles = [...SgdsElement.styles, svgStyles, formHintStyles, fileUploadStyle];
+export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(FormControlElement)) {
+  static styles = [...FormControlElement.styles, fileUploadStyles];
   /**@internal */
   static get scopedElements() {
     return {
@@ -33,44 +27,60 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
     };
   }
 
-  //** Disable the fileuploader button */
-  @property({ type: Boolean, reflect: true }) disabled = false;
-
   /** Allows multiple files to be listed for uploading */
   @property({ type: Boolean, reflect: true }) multiple = false;
 
   /** Specify the acceptable file type  */
   @property({ type: String, reflect: true }) accept = "";
 
-  /** Customize the check icon with SVG */
-  @property({ type: String }) checkedIcon = "";
+  // /** Customize the check icon with SVG */
+  // @property({ type: String }) checkedIcon = "";
 
-  /** The file upload's label */
-  @property({ reflect: true }) label = "";
+  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
+  @property({ type: Boolean, reflect: true }) hasFeedback = false;
 
-  /** The file upload's hint text */
-  @property({ reflect: true }) hintText = "";
+  /**Feedback text for error state when validated */
+  @property({ type: String, reflect: true }) invalidFeedback: string;
 
-  /** @internal */
-  @property({ type: Object, state: true })
-  private files: FileList | undefined;
+  /** Makes the input as a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
 
-  /** @internal */
-  @property({ type: Array })
+  @state()
   private selectedFiles: File[] = [];
 
-  private _setFileList(files: FileList) {
-    this.files = files;
-    this.emit("sgds-files-selected");
-    //Possible to pass in the files
+  /**
+   * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
+   * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
+   */
+  public reportValidity(): boolean {
+    return this._mixinReportValidity();
+  }
+  /**
+   * Checks for validity without any native error popup message
+   */
+  public checkValidity(): boolean {
+    return this._mixinCheckValidity();
+  }
+  /**
+   * Returns the ValidityState object
+   */
+  public get validity(): ValidityState {
+    return this._mixinGetValidity();
+  }
+  /**
+   * Returns the validation message based on the ValidityState
+   */
+  public get validationMessage(): string {
+    return this._mixinGetValidationMessage();
   }
 
-  // Create a ref to the input element
-  /** @internal */
+  private _setFileList(files: FileList) {
+    this.emit("sgds-files-selected", { detail: files });
+  }
+
   private inputRef = createRef<HTMLInputElement>();
 
-  /** @internal */
-  private handleClick(event: Event) {
+  private _handleClick(event: Event) {
     event.preventDefault();
     if (!this.disabled) {
       // Get a reference to the input element using the inputRef
@@ -80,8 +90,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
     }
   }
 
-  /** @internal */
-  private handleInputChange(event: Event) {
+  private _handleChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const files = inputElement.files as FileList;
 
@@ -91,6 +100,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
     // Trigger a re-render of the component to update the list of selected files
     this._setFileList(files);
     this.requestUpdate();
+    super._mixinHandleChange(event);
   }
 
   private _removeFileHandler(index: number) {
@@ -110,38 +120,61 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
 
     // Trigger a re-render of the component to update the list of selected files
     this.requestUpdate();
+    this._mixinValidate(this.input);
   }
 
-  /**@internal */
-  protected inputId: string = genId("input", "file");
+  private _clearAllFiles() {
+    const inputElement = this.inputRef.value;
+    const fileBuffer = new DataTransfer();
+    inputElement.files = fileBuffer.files;
+    this._setFileList(fileBuffer.files);
+    this.selectedFiles = Array.from(fileBuffer.files);
+  }
 
-  protected labelId: string = genId("label");
-
+  /**
+   * fileupload requries a custom _mixinResetFormControl for clearing files
+   */
+  private _mixinResetFormControl() {
+    this._clearAllFiles();
+    this._mixinResetValidity(this.input);
+  }
+  @watch("disabled", { waitUntilFirstUpdate: true })
+  _handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    this.setInvalid(false);
+  }
   protected _renderLabel() {
     const labelTemplate = html`
-      <label
-        for=${this.inputId}
-        id=${this.labelId}
-        class=${classMap({
-          "form-label": true
-        })}
-      >
-        ${this.label}
-      </label>
+      <label for=${this._controlId} id=${this._labelId} class="form-label"> ${this.label} </label>
     `;
     return this.label && labelTemplate;
   }
 
   protected _renderHintText() {
-    const hintTextTemplate = html` <small id="${this.inputId}Help" class="form-text">${this.hintText}</small> `;
+    const hintTextTemplate = html` <div id="${this._controlId}Help" class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }
 
+  protected _renderFeedback() {
+    return html`
+      <div class="invalid-feedback-container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path
+            d="M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10ZM10 6.25C9.49805 6.25 9.10584 6.68339 9.15578 7.18285L9.48461 10.4711C9.51109 10.7359 9.7339 10.9375 10 10.9375C10.2661 10.9375 10.4889 10.7359 10.5154 10.4711L10.8442 7.18285C10.8942 6.68339 10.5019 6.25 10 6.25ZM10.0014 11.875C9.48368 11.875 9.06394 12.2947 9.06394 12.8125C9.06394 13.3303 9.48368 13.75 10.0014 13.75C10.5192 13.75 10.9389 13.3303 10.9389 12.8125C10.9389 12.2947 10.5192 11.875 10.0014 11.875Z"
+            fill="#B90000"
+          />
+        </svg>
+        <div id="${this._controlId}-invalid" class="invalid-feedback">
+          ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
+        </div>
+      </div>
+    `;
+  }
   render() {
-    const getCheckedIcon = (checkedIcon: string) => {
-      if (checkedIcon) {
-        return html`${unsafeSVG(checkedIcon)}`;
-      }
+    const getCheckedIcon = () => {
+      // if (checkedIcon) {
+      //   return html`${unsafeSVG(checkedIcon)}`;
+      // }
       return html` <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -159,7 +192,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
     const listItems = this.selectedFiles.map(
       (file, index) => html`
         <li key=${index} class="file-upload-list-item">
-          <span>${getCheckedIcon(this.checkedIcon)}</span>
+          <span>${getCheckedIcon()}</span>
           <span class="filename">${file.name}</span>
           <sgds-close-button
             aria-label="remove the file"
@@ -174,15 +207,17 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
         <input
           ${ref(this.inputRef)}
           type="file"
-          @change=${this.handleInputChange}
+          @change=${this._handleChange}
           ?multiple=${this.multiple}
           accept=${this.accept}
-          id=${this.inputId}
+          id=${this._controlId}
+          ?required=${this.required}
+          ?disabled=${this.disabled}
         />
         <div class="file-upload-container">
           ${this._renderLabel()}
-          <sgds-button variant="outline" ?disabled=${this.disabled} @click=${this.handleClick}>
-            <label for=${this.inputId}><slot></slot></label>
+          <sgds-button variant="outline" ?disabled=${this.disabled} @click=${this._handleClick}>
+            <label for=${this._controlId}><slot></slot></label>
             <svg
               slot="rightIcon"
               xmlns="http://www.w3.org/2000/svg"
@@ -201,7 +236,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
               />
             </svg>
           </sgds-button>
-          ${this._renderHintText()}
+          ${this.hasFeedback && this.invalid ? this._renderFeedback() : this._renderHintText()}
         </div>
         <ul class="file-upload-list">
           ${listItems}

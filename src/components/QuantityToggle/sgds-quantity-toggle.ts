@@ -1,81 +1,127 @@
-import { property, query } from "lit/decorators.js";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { property, query, queryAsync } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import { html } from "lit/static-html.js";
 import FormControlElement from "../../base/form-control-element";
-import { defaultValue } from "../../utils/defaultvalue";
-import { FormSubmitController, SgdsFormControl } from "../../utils/form";
-import genId from "../../utils/generateId";
-import SgdsIconButton from "../IconButton/sgds-icon-button";
-import quantityToggleStyle from "./quantity-toggle.css";
-import SgdsInput from "../Input/sgds-input";
+import formPlaceholderStyles from "../../styles/form-placeholder.css";
 import svgStyles from "../../styles/svg.css";
+import { defaultValue } from "../../utils/defaultvalue";
+import { SgdsFormControl } from "../../utils/formSubmitController";
+import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
+import SgdsIconButton from "../IconButton/sgds-icon-button";
+import SgdsInput from "../Input/sgds-input";
+import quantityToggleStyle from "./quantity-toggle.css";
+import SgdsIcon from "../Icon/sgds-icon";
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
- *
- * @csspart base - The base wrapper of the quantity toggle component.
- * @csspart button - The plus and minus button of quantity toggle
  *
  * @event sgds-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sgds-input - Emitted when the control receives input and its value changes.
  *
  */
-export class SgdsQuantityToggle extends FormControlElement implements SgdsFormControl {
-  static styles = [...FormControlElement.styles, svgStyles, quantityToggleStyle];
+export class SgdsQuantityToggle
+  extends SgdsFormValidatorMixin(ScopedElementsMixin(FormControlElement))
+  implements SgdsFormControl
+{
+  static styles = [...FormControlElement.styles, formPlaceholderStyles, svgStyles, quantityToggleStyle];
+
   /** @internal */
   static get scopedElements() {
     return {
       "sgds-input": SgdsInput,
-      "sgds-icon-button": SgdsIconButton
+      "sgds-icon-button": SgdsIconButton,
+      "sgds-icon": SgdsIcon
     };
   }
-  /** @internal */
-  @query("sgds-input") private input: HTMLInputElement;
   /** @internal */
   @query("sgds-icon-button[ariaLabel^='increase by']") private plusBtn: HTMLButtonElement;
   /** @internal */
   @query("sgds-icon-button[ariaLabel^='decrease by']") private minusBtn: HTMLButtonElement;
 
-  /** @internal */
-  private readonly formSubmitController = new FormSubmitController(this);
+  /** Controls the size of the quantity toggle */
+  @property() size: "sm" | "md" = "md";
 
   /** The input's value. Set to 0 by default */
-  @property({ type: Number, reflect: true }) value;
+  @property({ type: Number, reflect: true }) value = 0;
 
-  /** Disables the entire quantity toggle  */
-  @property({ type: Boolean, reflect: true }) disabled = false;
-
-  /** Makes the input a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
-
-  /** The quantity toggle's button variants */
-  @property({ type: String }) iconButtonVariant = "ghost";
+  // /** The quantity toggle's button variants */
+  // @property({ type: String }) iconButtonVariant = "ghost";
 
   /**  Controls the incremental / decremental value of the input */
   @property({ type: Number }) step = 1;
+
+  /** The input's minimum value. Only applies number input types. */
+  @property() min: number;
+
+  /** The input's maximum value. Only applies number input types. */
+  @property() max: number;
+  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
+  @property({ type: String, reflect: true }) hasFeedback: "style" | "text" | "both";
+
+  /**Feedback text for error state when validated */
+  @property({ type: String, reflect: true }) invalidFeedback: string;
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = 0;
 
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  public reportValidity() {
-    return this.input.reportValidity();
+  @queryAsync("sgds-input") private _sgdsInput: Promise<SgdsInput>;
+
+  /**
+   * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
+   * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
+   */
+  public reportValidity(): boolean {
+    return this._mixinReportValidity();
   }
-  /** Sets a custom validation message. Pass an empty string to restore validity */
-  public setCustomValidity(err: string) {
-    return this.input.setCustomValidity(err);
+  /**
+   * Checks for validity without any native error popup message
+   */
+  public checkValidity(): boolean {
+    return this._mixinCheckValidity();
   }
 
-  /** @internal The id forwarded to input element */
-  private inputId: string = genId("quantity-toggle", "input");
+  /**
+   * Returns the ValidityState object
+   */
+  public get validity(): ValidityState {
+    return this._mixinGetValidity();
+  }
+  /**
+   * Returns the validation message based on the ValidityState
+   */
+  public get validationMessage() {
+    return this._mixinGetValidationMessage();
+  }
 
-  private _handleChange() {
-    if (parseInt(this.input.value) < this.step || this.input.value === "") {
-      this.input.value = "0";
+  private async _handleChange() {
+    const sgdsInput = await this._sgdsInput;
+    if (parseInt(sgdsInput.value) < this.step || sgdsInput.value === "") {
+      sgdsInput.value = "0";
     }
-    this.value = parseInt(this.input.value);
+    this.value = parseInt(sgdsInput.value);
+    this._mixinSetFormValue();
+    this._mixinValidate(sgdsInput.input);
+    this.invalid = !this._mixinReportValidity();
+  }
+  private async _handleInputChange() {
+    const sgdsInput = await this._sgdsInput;
+    this.invalid = false;
+    if (parseInt(sgdsInput.value) < this.step || sgdsInput.value === "") {
+      sgdsInput.value = "0";
+    }
+    this.value = parseInt(sgdsInput.value);
+    this._mixinSetFormValue();
+    this._mixinValidate(sgdsInput.input);
+  }
+
+  private async _mixinResetFormControl() {
+    const sgdsInput = await this._sgdsInput;
+    this.value = this.defaultValue;
+    sgdsInput.input.value = this.value.toString();
+    this._mixinResetValidity(sgdsInput.input);
   }
 
   private _handleKeyDown(event: KeyboardEvent) {
@@ -95,6 +141,13 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
     }
   }
 
+  private _handleInvalid() {
+    this.invalid = true;
+  }
+  private _handleValid() {
+    this.invalid = false;
+  }
+
   /** Simulates a click on the plus button */
   public plus() {
     this.plusBtn.click();
@@ -105,24 +158,43 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
     this.minusBtn.click();
   }
 
-  private _onPlus(event: MouseEvent) {
+  private async _onPlus(event: MouseEvent) {
+    const sgdsInput = await this._sgdsInput;
     event.preventDefault();
     event.stopPropagation();
-    this.value = parseInt(this.input.value) + parseInt(this.input.step);
+    this.value = parseInt(sgdsInput.value) + parseInt(sgdsInput.step.toString());
+    this._validateOnClick(sgdsInput.input);
   }
-
-  private _onMinus(event: MouseEvent) {
+  private async _onMinus(event: MouseEvent) {
+    const sgdsInput = await this._sgdsInput;
     event.preventDefault();
     event.stopPropagation();
     if (this.value < this.step) {
       this.value = 0;
     } else {
-      this.value = parseInt(this.input.value) - parseInt(this.input.step);
+      this.value = parseInt(sgdsInput.value) - parseInt(sgdsInput.step.toString());
     }
+
+    this._validateOnClick(sgdsInput.input);
+  }
+
+  /**
+   * Validates the input on button clicks of the toggle.
+   * Input is validated every time the button is click to update the invalid state
+   * to indiciate the validity of quantity toggle
+   * @param input native HTMLInputElement
+   */
+  private async _validateOnClick(input: HTMLInputElement) {
+    const sgdsInput = await this._sgdsInput;
+    await sgdsInput.updateComplete;
+    this._mixinSetFormValue();
+    this._mixinValidate(input);
+    this.invalid = !this._mixinReportValidity();
   }
 
   protected _renderFeedback() {
-    return this.invalid && this.hasFeedback
+    const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
+    return this.invalid && wantFeedbackText
       ? html` <div class="invalid-feedback-container">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path
@@ -130,7 +202,9 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
               fill="#B90000"
             />
           </svg>
-          <div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
+          <div id="${this._controlId}-invalid" class="invalid-feedback">
+            ${this.invalidFeedback ? this.invalidFeedback : this.validationMessage}
+          </div>
         </div>`
       : html`${this._renderHintText()}`;
   }
@@ -138,11 +212,10 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
   protected _renderLabel() {
     const labelTemplate = html`
       <label
-        for=${this.inputId}
-        id=${this.labelId}
+        for=${this._controlId}
+        id=${this._labelId}
         class=${classMap({
           "form-label": true,
-          required: this.required,
           disabled: this.disabled
         })}
         >${this.label}</label
@@ -152,16 +225,7 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
   }
 
   protected _renderHintText() {
-    const hintTextTemplate = html`
-      <div
-        id="${this.inputId}Help"
-        class="form-text ${classMap({
-          disabled: this.disabled
-        })}"
-      >
-        ${this.hintText}
-      </div>
-    `;
+    const hintTextTemplate = html` <div id="${this._controlId}Help" class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }
 
@@ -169,14 +233,15 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
     return html`
       <div class="form-control-container">
         ${this._renderLabel()}
-        <div part="base" class="input-group" variant="quantity-toggle">
+        <div class="input-group">
           <sgds-icon-button
-            variant=${this.iconButtonVariant}
+            variant="ghost"
             ariaLabel=${`decrease by ${this.step}`}
-            part="button"
             ?disabled=${this.disabled || (this.min !== undefined ? this.value <= this.min : this.value < 1)}
             @click=${this._onMinus}
-          ></sgds-icon-button>
+          >
+            <sgds-icon name="dash"></sgds-icon>
+          </sgds-icon-button>
           <sgds-input
             type="number"
             class="quantity-toggle"
@@ -185,21 +250,23 @@ export class SgdsQuantityToggle extends FormControlElement implements SgdsFormCo
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
             .value=${live(this.value)}
-            @sgds-change=${() => this._handleChange()}
-            @sgds-input=${() => this._handleChange()}
+            @sgds-change=${this._handleChange}
+            @sgds-input=${this._handleInputChange}
+            @sgds-invalid=${this._handleInvalid}
+            @sgds-valid=${this._handleValid}
             @keydown=${this._handleKeyDown}
             ?disabled=${this.disabled}
+            id=${this._controlId}
             ?invalid=${this.invalid}
-            ?required=${this.required}
-            id=${this.inputId}
+            hasFeedback=${ifDefined(this.hasFeedback !== "text" ? "style" : undefined)}
           ></sgds-input>
           <sgds-icon-button
-            variant=${this.iconButtonVariant}
+            variant="ghost"
             ariaLabel=${`increase by ${this.step}`}
-            part="button"
             @click=${this._onPlus}
             ?disabled=${this.disabled || (this.max !== undefined && this.max && this.value >= this.max)}
-          ></sgds-icon-button>
+            ><sgds-icon name="plus"></sgds-icon>
+          </sgds-icon-button>
         </div>
         <div id="announcer" role="region" aria-live="assertive" class="visually-hidden">${this.value}</div>
         ${this._renderFeedback()}

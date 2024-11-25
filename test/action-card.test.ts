@@ -50,7 +50,7 @@ describe("<sgds-action-card>", () => {
                 <slot name="card-subtitle"></slot>
                 </div>
               <div class="card-input">
-             <sgds-checkbox></sgds-checkbox>
+             <sgds-checkbox hinttext="" label=""></sgds-checkbox>
             </div>
             </h6>
             <h5 class="card-title" part="title"><slot name="card-title"></slot></h5>

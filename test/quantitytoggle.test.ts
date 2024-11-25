@@ -3,7 +3,7 @@ import { expect, fixture, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
-import type { SgdsInput, SgdsQuantityToggle } from "../src/components";
+import { SgdsIconButton, SgdsInput, SgdsQuantityToggle } from "../src/components";
 
 describe("when minusBtn or plusBtn is clicked", () => {
   it("should decrease and increase the value by 1 respectively", async () => {
@@ -12,13 +12,11 @@ describe("when minusBtn or plusBtn is clicked", () => {
     const plusBtn = el.shadowRoot?.querySelector("sgds-icon-button[arialabel^='increase by']") as HTMLButtonElement;
 
     minusBtn.click();
-    await el.updateComplete;
-
+    await waitUntil(() => el.value === 9);
     expect(el.value).to.equal(9);
 
     plusBtn.click();
-    await el.updateComplete;
-
+    await waitUntil(() => el.value === 10);
     expect(el.value).to.equal(10);
   });
 
@@ -27,7 +25,7 @@ describe("when minusBtn or plusBtn is clicked", () => {
     const minusBtn = el.shadowRoot?.querySelector("sgds-icon-button[arialabel^='decrease by']") as HTMLButtonElement;
 
     minusBtn.click();
-    await el.updateComplete;
+    await waitUntil(() => el.value === 0);
 
     expect(el.value).to.equal(0);
     expect(minusBtn.hasAttribute("disabled")).to.be.true;
@@ -40,12 +38,12 @@ describe("when minusBtn or plusBtn is clicked", () => {
     const minusBtn = el.shadowRoot?.querySelector("sgds-icon-button[arialabel^='decrease by']") as HTMLButtonElement;
 
     minusBtn.click();
-    await el.updateComplete;
+    await waitUntil(() => el.value === 9);
 
     expect(el.value).to.equal(9);
 
     minusBtn.click();
-    await el.updateComplete;
+    await waitUntil(() => el.value === 8);
 
     expect(el.value).to.equal(8);
     expect(minusBtn.hasAttribute("disabled")).to.be.true;
@@ -58,7 +56,7 @@ describe("when minusBtn or plusBtn is clicked", () => {
     const plusBtn = el.shadowRoot?.querySelector("sgds-icon-button[arialabel^='increase by']") as HTMLButtonElement;
 
     plusBtn.click();
-    await el.updateComplete;
+    await waitUntil(() => el.value === 11);
 
     expect(el.value).to.equal(11);
     expect(plusBtn.hasAttribute("disabled")).to.be.true;
@@ -116,12 +114,12 @@ describe("when step", () => {
     const plusBtn = el.shadowRoot?.querySelector("sgds-icon-button[arialabel^='increase by']") as HTMLButtonElement;
 
     minusBtn.click();
-    await el.updateComplete;
+    await waitUntil(() => el.value === 0);
 
     expect(el.value).to.equal(0);
 
     plusBtn.click();
-    await el.updateComplete;
+    await waitUntil(() => el.value === 91);
 
     expect(el.value).to.equal(91);
   });
@@ -144,13 +142,13 @@ describe("methods", () => {
   it("plus method works to increment value of quantity-toggle", async () => {
     const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="10"></sgds-quantity-toggle>`);
     el.plus();
-    await el.updateComplete;
+    await waitUntil(() => el.value === 11);
     expect(el.value).to.equal(11);
   });
   it("minus method works to decrement value of quantity-toggle", async () => {
     const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="10"></sgds-quantity-toggle>`);
     el.minus();
-    await el.updateComplete;
+    await waitUntil(() => el.value === 9);
     expect(el.value).to.equal(9);
   });
 });
@@ -170,8 +168,110 @@ describe("in form context", () => {
     await qtyToggle?.updateComplete;
     expect(qtyToggle?.defaultValue).to.equal(5);
     form.reset();
-    await qtyToggle?.updateComplete;
+    await waitUntil(() => qtyToggle?.value === 5);
 
     expect(qtyToggle?.value).to.equal(5);
+  });
+  it("valid when quantity toggle has no contraints", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-quantity-toggle name="a" value="5"></sgds-quantity-toggle>
+      </form>
+    `);
+    expect(form.reportValidity()).to.be.true;
+  });
+  it("valid when passes min max validation", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-quantity-toggle name="a" max="6" min="3" value="5"></sgds-quantity-toggle>
+      </form>
+    `);
+    expect(form.reportValidity()).to.be.true;
+  });
+  it("invalid when fails min max validation", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-quantity-toggle name="a" max="6" min="3" value="7"></sgds-quantity-toggle>
+      </form>
+    `);
+    expect(form.reportValidity()).to.be.false;
+  });
+  it("input typing validation happens on change", async () => {
+    const el = await fixture<SgdsQuantityToggle>(
+      html`<sgds-quantity-toggle hasFeedback="both" min="3"></sgds-quantity-toggle>`
+    );
+    const input = el.shadowRoot?.querySelector<SgdsInput>("sgds-input");
+    input?.focus();
+    expect(el.shadowRoot?.querySelector(".invalid-feedback")).to.be.null;
+    await sendKeys({ press: "2" });
+    expect(el.shadowRoot?.querySelector(".invalid-feedback")).to.be.null;
+    input?.blur();
+    await waitUntil(() => el.shadowRoot?.querySelector(".invalid-feedback"));
+    expect(el.shadowRoot?.querySelector(".invalid-feedback")).to.exist;
+  });
+  it("validation happens as user clicks button", async () => {
+    const el = await fixture<SgdsQuantityToggle>(
+      html`<sgds-quantity-toggle hasFeedback="both" min="2"></sgds-quantity-toggle>`
+    );
+    const plusBtn = el.shadowRoot?.querySelectorAll("sgds-icon-button")[1] as SgdsIconButton;
+    expect(el.value).to.equal(0);
+    expect(el.shadowRoot?.querySelector(".invalid-feedback")).to.be.null;
+    plusBtn?.click();
+    await waitUntil(() => el.shadowRoot?.querySelector(".invalid-feedback"));
+    expect(el.shadowRoot?.querySelector(".invalid-feedback")).to.exist;
+    expect(el.value).to.equal(1);
+    plusBtn?.click();
+    await el.updateComplete;
+    await waitUntil(() => !el.shadowRoot?.querySelector(".invalid-feedback"));
+
+    expect(el.value).to.equal(2);
+    expect(el.shadowRoot?.querySelector(".invalid-feedback")).to.be.null;
+  });
+
+  it("validation happens on touch by sgds-input", async () => {
+    const el = await fixture<SgdsQuantityToggle>(
+      html`<sgds-quantity-toggle hasFeedback="both" min="2" value="1"></sgds-quantity-toggle>`
+    );
+    expect(el.invalid).to.equal(false);
+    const input = el.shadowRoot?.querySelector<SgdsInput>("sgds-input");
+    input?.focus();
+    input?.blur();
+    await input?.updateComplete;
+    expect(el.invalid).to.equal(true);
+  });
+  it("hasFeedback=both provides error message and sgds-input hasFeedback will be set as style", async () => {
+    const el = await fixture<SgdsQuantityToggle>(
+      html`<sgds-quantity-toggle hasFeedback="both" invalid invalidFeedback="test"></sgds-quantity-toggle>`
+    );
+
+    expect(el.shadowRoot?.querySelector(".invalid-feedback")?.textContent).to.contain("test");
+    expect(el.shadowRoot?.querySelector<SgdsInput>("sgds-input")?.hasFeedback).to.equal("style");
+  });
+  it("hasFeedback=text provides error message and sgds-input hasFeedback will be set as style", async () => {
+    const el = await fixture<SgdsQuantityToggle>(
+      html`<sgds-quantity-toggle hasFeedback="text" invalid invalidFeedback="test"></sgds-quantity-toggle>`
+    );
+
+    expect(el.shadowRoot?.querySelector(".invalid-feedback")?.textContent).to.contain("test");
+    expect(el.shadowRoot?.querySelector<SgdsInput>("sgds-input")?.getAttribute("hasfeedback")).to.be.null;
+  });
+  it("hasFeedback=style provides error message and sgds-input hasFeedback will be set as style", async () => {
+    const el = await fixture<SgdsQuantityToggle>(
+      html`<sgds-quantity-toggle hasFeedback="style" invalid invalidFeedback="test"></sgds-quantity-toggle>`
+    );
+
+    expect(el.shadowRoot?.querySelector(".invalid-feedback")).to.be.null;
+    expect(el.shadowRoot?.querySelector<SgdsInput>("sgds-input")?.getAttribute("hasfeedback")).to.equal("style");
+  });
+  it("when disabled, invalid state is removed", async () => {
+    const el = await fixture<SgdsInput>(
+      html` <sgds-quantity-toggle invalid invalidFeedback="" hasFeedback></sgds-quantity-toggle> `
+    );
+    expect(el.invalid).to.be.true;
+    el.disabled = true;
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+    el.disabled = false;
+    expect(el.invalid).to.be.false;
   });
 });
