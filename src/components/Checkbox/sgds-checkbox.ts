@@ -39,6 +39,9 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
   /** Marks the checkbox input as indeterminate , with indeterminate logo  */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
+  /** Makes the checkbox a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
+
   @state() private _isTouched = false;
 
   @watch("invalid", { waitUntilFirstUpdate: true })

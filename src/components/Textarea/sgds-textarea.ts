@@ -31,7 +31,7 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
   @property({ type: String, reflect: true }) value = "";
   /**Sets the minimum length of the textarea */
   @property({ type: Number, reflect: true }) minlength: number;
-  /**Sets the maximum length of the textarea */
+  /**Sets the maximum length of the textarea. When maxlength is defined, a word count appears on bottom right of the input*/
   @property({ type: Number, reflect: true }) maxlength: number;
   /**Enables spell checking on the textarea */
   @property({ type: Boolean, reflect: true }) spellcheck = false;
@@ -39,7 +39,7 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
   @property({ type: Number }) rows = 4;
   /**The textarea's placeholder text. */
   @property({ type: String, reflect: true }) placeholder = "Placeholder";
-  /**Feedback text for error state when validated */
+  /** Custom feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback = "";
   /**Autofocus the textarea */
   @property({ type: Boolean, reflect: true }) autofocus = false;
@@ -65,6 +65,9 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
   defaultValue = "";
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
+
+  /** Makes the textarea as a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /** The textarea's hint text */
   @property({ reflect: true }) hintText = "";
@@ -223,7 +226,9 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
           @focus=${this._handleFocus}
           @blur=${this._handleBlur}
         >
-        </textarea>
+        <!-- ${this.value} -->
+        </textarea
+        >
         <div class="textarea-info-container">
           ${this.invalid && this.hasFeedback
             ? html`

@@ -6,11 +6,16 @@ import formLabelStyles from "../../styles/form-label.css";
 import checkboxGroupStyles from "./checkbox-group.css";
 import formHintStyles from "../../styles/form-hint.css";
 import SgdsCheckbox from "./sgds-checkbox";
-
+/**
+ * @summary CheckboxGroup is the container that group multiple checkboxes under a single question field.
+ * It handles the display of validation feedback of its checkboxes children.
+ *
+ * @slot default - Pass in `sgds-checkbox` into the default slot
+ */
 export class SgdsCheckboxGroup extends SgdsElement {
   static styles = [...SgdsElement.styles, feedbackStyles, formLabelStyles, checkboxGroupStyles, formHintStyles];
   /**@internal */
-  @queryAssignedElements({ slot: "checkbox", flatten: true }) private checkboxes!: NodeListOf<SgdsCheckbox>;
+  @queryAssignedElements({ flatten: true }) private checkboxes!: NodeListOf<SgdsCheckbox>;
   @state() private hasInvalidCheckbox = false;
   @state() private validationMessage: string;
 
@@ -61,7 +66,7 @@ export class SgdsCheckboxGroup extends SgdsElement {
           ${this._renderHintText()}
         </div>
         <div class="checkbox-container">
-          <slot name="checkbox"></slot>
+          <slot></slot>
         </div>
         ${this.hasInvalidCheckbox && this.hasFeedback
           ? html`

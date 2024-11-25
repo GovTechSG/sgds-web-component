@@ -47,8 +47,8 @@ export class SgdsQuantityToggle
   /** The input's value. Set to 0 by default */
   @property({ type: Number, reflect: true }) value = 0;
 
-  /** The quantity toggle's button variants */
-  @property({ type: String }) iconButtonVariant = "ghost";
+  // /** The quantity toggle's button variants */
+  // @property({ type: String }) iconButtonVariant = "ghost";
 
   /**  Controls the incremental / decremental value of the input */
   @property({ type: Number }) step = 1;
@@ -217,7 +217,6 @@ export class SgdsQuantityToggle
         id=${this._labelId}
         class=${classMap({
           "form-label": true,
-          required: this.required,
           disabled: this.disabled
         })}
         >${this.label}</label
@@ -237,7 +236,7 @@ export class SgdsQuantityToggle
         ${this._renderLabel()}
         <div part="base" class="input-group" variant="quantity-toggle">
           <sgds-icon-button
-            variant=${this.iconButtonVariant}
+            variant="ghost"
             ariaLabel=${`decrease by ${this.step}`}
             part="button"
             ?disabled=${this.disabled || (this.min !== undefined ? this.value <= this.min : this.value < 1)}
@@ -262,7 +261,7 @@ export class SgdsQuantityToggle
             hasFeedback=${ifDefined(this.hasFeedback !== "text" ? "style" : undefined)}
           ></sgds-input>
           <sgds-icon-button
-            variant=${this.iconButtonVariant}
+            variant="ghost"
             ariaLabel=${`increase by ${this.step}`}
             part="button"
             @click=${this._onPlus}

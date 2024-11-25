@@ -1,7 +1,7 @@
 import { html } from "lit-html";
 import { ifDefined } from "lit/directives/if-defined.js";
 
-export const ValidationTemplate = args =>
+const ValidationTemplate = args =>
   html`
     <form>
       <sgds-input
@@ -98,7 +98,7 @@ export const InputValidation = {
 
 export const OverrideInvalidFeedback = {
   render: ValidationTemplate.bind({}),
-  name: "Validation",
+  name: "Override default invalid feedback",
   args: { invalidFeedback: "Custom error message" },
   parameters: {},
   tags: ["!dev"]

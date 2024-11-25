@@ -24,9 +24,6 @@ export default class FormControlElement extends SgdsElement {
   /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
-  /** Makes the checkbox a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
-
   protected _controlId = generateId("input");
   protected _labelId = generateId("label");
 

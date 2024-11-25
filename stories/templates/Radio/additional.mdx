@@ -29,15 +29,24 @@ Disabled individual `sgds-radio` using the `disabled` prop.
   <Story of={RadioStories.Disabled} />
 </Canvas>
 
-## Validation <sgds-badge show> work in progress </sgds-badge>
+## Validation 
 
-{/* `SgdsRadioGroup` runs native HTMLInputElement methods to check on the [constraint validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation) of the input and applies our own validation stylings
+HTML form constraint validation is built-in. By default, there is no need to control the `invalid` prop to enable constraint validations. 
 
-Set `hasFeedback` to true to enable sgds validation stylings.
+- To enable invalid styles and feedback message, set `hasFeedback` to true on `sgds-radio-group`.
 
-Try submitting the required form below without clicking on any radio buttons to trigger the error message
-
+In this example, press submit to show constraint validation behaviour for `required` on the radio group. 
+Form reset reset's the validity and the value of the input to its initial default value.
 
 <Canvas of={RadioStories.Validation}>
   <Story of={RadioStories.Validation} />
-</Canvas> */}
+</Canvas>
+
+### Overriding the invalid feedback message 
+
+By default, the invalid feedback reflected is based on the browser's native error message based on the ValidityState.  To override the default message, 
+use `invalidFeedback` prop. 
+
+<Canvas of={RadioStories.OverrideInvalidFeedback}>
+  <Story of={RadioStories.OverrideInvalidFeedback} />
+</Canvas>

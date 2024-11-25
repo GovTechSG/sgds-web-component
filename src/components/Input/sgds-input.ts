@@ -95,6 +95,9 @@ export class SgdsInput
   /** Marks the component as loading. */
   @property({ type: Boolean, reflect: true }) loading = false;
 
+  /** Makes the input a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
+
   /**The input's value attribute. */
   @property({ reflect: true }) value = "";
 

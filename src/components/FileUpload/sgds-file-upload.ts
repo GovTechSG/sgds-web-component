@@ -2,7 +2,6 @@ import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { createRef, ref } from "lit/directives/ref.js";
-import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 import { SgdsButton } from "../Button/sgds-button";
 import fileUploadStyles from "./file-upload.css";
@@ -16,10 +15,6 @@ import { watch } from "../../utils/watch";
  * @slot default - Label for file upload button
  *
  * @event sgds-files-selected - Emitted when files are selected for uploading. Access the selected files with event.target.detail
- *
- * @cssproperty --file-upload-file-icon-color - Left icon color
- * @cssproperty --file-upload-remove-icon-color - Remove icon color
- * @cssproperty --file-upload-remove-icon-hover-color - Remove icon hover color
  */
 
 export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(FormControlElement)) {
@@ -38,14 +33,17 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(F
   /** Specify the acceptable file type  */
   @property({ type: String, reflect: true }) accept = "";
 
-  /** Customize the check icon with SVG */
-  @property({ type: String }) checkedIcon = "";
+  // /** Customize the check icon with SVG */
+  // @property({ type: String }) checkedIcon = "";
 
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
 
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback: string;
+
+  /** Makes the input as a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
 
   @state()
   private selectedFiles: File[] = [];
@@ -72,7 +70,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(F
   /**
    * Returns the validation message based on the ValidityState
    */
-  public get validationMessage() {
+  public get validationMessage(): string {
     return this._mixinGetValidationMessage();
   }
 
@@ -173,10 +171,10 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(F
     `;
   }
   render() {
-    const getCheckedIcon = (checkedIcon: string) => {
-      if (checkedIcon) {
-        return html`${unsafeSVG(checkedIcon)}`;
-      }
+    const getCheckedIcon = (checkedIcon?: string) => {
+      // if (checkedIcon) {
+      //   return html`${unsafeSVG(checkedIcon)}`;
+      // }
       return html` <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -194,7 +192,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(F
     const listItems = this.selectedFiles.map(
       (file, index) => html`
         <li key=${index} class="file-upload-list-item">
-          <span>${getCheckedIcon(this.checkedIcon)}</span>
+          <span>${getCheckedIcon()}</span>
           <span class="filename">${file.name}</span>
           <sgds-close-button
             aria-label="remove the file"

@@ -7,6 +7,7 @@ module.exports = {
     "../stories/frameworks/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/getting-started/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/*.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/form-validation/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/*.mdx"
   ],
   addons: [

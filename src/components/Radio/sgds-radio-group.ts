@@ -35,6 +35,9 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
 
+  /** Makes the input as a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
+
   @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
     this.emit("sgds-change", { detail: { value: this.value } });

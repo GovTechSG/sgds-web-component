@@ -118,31 +118,49 @@
   </head>
 
   <body class="d-flex flex-column min-vh-100">
-
     <form id="datepicker-form">
-        <!-- <input  required name="fileuptest"/> -->
-        <sgds-file-upload  invalidFeedback="test" required multiple hinttext="test" name="fileuploadtest" hasFeedback>File upload</sgds-file-upload>
+      <!-- <input  required name="fileuptest"/> -->
+      <!-- <sgds-file-upload invalidFeedback="test" required multiple hinttext="test" name="fileuploadtest" hasFeedback
+        >File upload</sgds-file-upload
+      > -->
       <!-- <sgds-datepicker required></sgds-datepicker> -->
-        <!-- <input name="test" checked type="checkbox" indeterminate />-->
-        <sgds-input label="Label" hinttext="type hello" name="email" required  pattern="hello"  hasFeedback="both" 
-            icon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-envelope&quot; viewBox=&quot;0 0 16 16&quot;>
-            <path d=&quot;M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z&quot;/>
-            </svg>" placeholder="Placeholder">
-        </sgds-input> 
-         <sgds-quantity-toggle  name="quant" min="1" max="2"  value="4"   hinttext="type hello" hasFeedback="both" ></sgds-quantity-toggle>
-        <sgds-checkbox-group hasFeedback hintText="hint for checkbox" label="checkbox"> 
-        <sgds-checkbox  slot="checkbox" name="checkbox" value="checkboxhello" required invalid>he</sgds-checkbox>
+      <!-- <input name="test" checked type="checkbox" indeterminate />-->
+      <!-- <sgds-input
+        label="Label"
+        hinttext="type hello"
+        name="email"
+        required
+        hasFeedback="both"
+        icon='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+            </svg>'
+        placeholder="Placeholder"
+        minlength="3"
+      >
+      </sgds-input>
+      <sgds-quantity-toggle
+        name="quant"
+        min="1"
+        max="2"
+        value="4"
+        hinttext="type hello"
+        hasFeedback="both"
+      ></sgds-quantity-toggle>
+      <sgds-checkbox-group hasFeedback hintText="hint for checkbox" label="checkbox">
+        <sgds-checkbox name="checkbox" value="checkboxhello" required indeterminate invalid>he</sgds-checkbox>
+        <sgds-checkbox name="checkbox" value="checkboxhello" required>he</sgds-checkbox>
       </sgds-checkbox-group>
 
-        <sgds-radio-group hasFeedback name="radio" required>
-          <sgds-radio value="1" disabled >1</sgds-radio>
-          <sgds-radio value="2" >2 </sgds-radio>
-        </sgds-radio-group>
-         <sgds-textarea required invalid hasFeedback invalidFeedback='test' resize="auto"></sgds-textarea>
-         <sgds-button type="submit" id="submit">Submit</sgds-button>
-        <sgds-button type="reset" id="submit">Reset</sgds-button>
-        <sgds-button type="button" id="disableT">Disabled toggle</sgds-button>
-        <sgds-button type="button" id="enabltT">Enable toggle</sgds-button>
+      <sgds-radio-group hasFeedback name="radio" required>
+        <sgds-radio value="1" disab led>1</sgds-radio>
+        <sgds-radio value="2">2 </sgds-radio>
+      </sgds-radio-group> -->
+      <textarea minlength="3" required></textarea>
+      <sgds-textarea minlength="3" required hasFeedback resize="auto"></sgds-textarea>
+      <sgds-button type="submit" id="submit">Submit</sgds-button>
+      <sgds-button type="reset" id="submit">Reset</sgds-button>
+      <sgds-button type="button" id="disableT">Disabled toggle</sgds-button>
+      <sgds-button type="button" id="enabltT">Enable toggle</sgds-button>
     </form>
     <sgds-switch label="switch"> label</sgds-switch>
     <form>
@@ -151,45 +169,44 @@
       <button type="reset">Reset</button>
     </form>
     <script>
-          const disableT = document.querySelector("#disableT")
-          const enabltT = document.querySelector("#enabltT")
-          disableT.addEventListener("click", () => {
-            const qT = document.querySelector("sgds-checkbox")
-            qT.disabled = true;
-            // qT.disabled = false;
-          })
-          enabltT.addEventListener("click", () => {
-            const qT = document.querySelector("sgds-textarea")
-            qT.disabled = false;
-            // qT.disabled = false;
-          })
-        const testF = document.querySelector( "#datepicker-form" );
-  
-        testF.addEventListener( "submit", event => {
-            console.log( "submitting" );
-            // event.preventDefault(); 
-            const formData = new FormData( event.target );
-            console.log(formData.get("quant"), "qaunt value")
-            console.log('form report', event.target.reportValidity())
-        } );
-        const button = document.querySelector("#submit")
-        button.addEventListener('click', (e) => {
-          console.log('form report', testF.checkValidity())
-        })
-        testF.addEventListener("reset", event => {
-          console.log('reset click')
+      const disableT = document.querySelector("#disableT");
+      const enabltT = document.querySelector("#enabltT");
+      disableT.addEventListener("click", () => {
+        const qT = document.querySelector("sgds-checkbox");
+        qT.disabled = true;
+        // qT.disabled = false;
+      });
+      enabltT.addEventListener("click", () => {
+        const qT = document.querySelector("sgds-textarea");
+        qT.disabled = false;
+        // qT.disabled = false;
+      });
+      const testF = document.querySelector("#datepicker-form");
 
-          const formData = new FormData( event.target );
-            console.log(formData.get("email"), 'reseting')
-        })
-        const sgdsInput = document.querySelector("sgds-input")
-        console.log(sgdsInput)
-        sgdsInput.addEventListener('sgds-change', () => {
-          // sgdsInput.invalid = false
-          // sgdsInput.setCustomValidity('')
+      testF.addEventListener("submit", event => {
+        console.log("submitting");
+        // event.preventDefault();
+        const formData = new FormData(event.target);
+        console.log(formData.get("quant"), "qaunt value");
+        console.log("form report", event.target.reportValidity());
+      });
+      const button = document.querySelector("#submit");
+      button.addEventListener("click", e => {
+        console.log("form report", testF.checkValidity());
+      });
+      testF.addEventListener("reset", event => {
+        console.log("reset click");
 
-            // console.log(sgdsInput.invalid)
-        })
+        const formData = new FormData(event.target);
+        console.log(formData.get("email"), "reseting");
+      });
+      const sgdsInput = document.querySelector("sgds-input");
+      console.log(sgdsInput);
+      sgdsInput.addEventListener("sgds-change", () => {
+        // sgdsInput.invalid = false
+        // sgdsInput.setCustomValidity('')
+        // console.log(sgdsInput.invalid)
+      });
     </script>
   </body>
 </html>
