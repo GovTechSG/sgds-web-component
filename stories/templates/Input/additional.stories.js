@@ -1,16 +1,24 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
-// export const ValidationTemplate = () =>
-//   html` <sgds-input
-//     name="input1"
-//     id="input1"
-//     minlength="5"
-//     hasFeedback="true"
-//     invalidFeedback="Minimum length 5"
-//     hintText="At least 5 characters"
-//     label="Name"
-//   >
-//   </sgds-input>`;
+export const ValidationTemplate = args =>
+  html`
+    <form>
+      <sgds-input
+        name="input1"
+        id="input1"
+        minlength="5"
+        hasFeedback="both"
+        hintText="At least 5 characters"
+        label="Name"
+        required
+        invalidFeedback=${ifDefined(args.invalidFeedback)}
+      >
+      </sgds-input>
+      <sgds-button type="submit">Submit</sgds-button>
+      <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+    </form>
+  `;
 
 export const DisabledInput = {
   render: Template.bind({}),
@@ -80,10 +88,18 @@ export const LeadingIcon = {
   tags: ["!dev"]
 };
 
-// export const InputValidation = {
-//   render: ValidationTemplate.bind({}),
-//   name: "Validation",
-//   args: {},
-//   parameters: {},
-//   tags: ["!dev"]
-// };
+export const InputValidation = {
+  render: ValidationTemplate.bind({}),
+  name: "Validation",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
+
+export const OverrideInvalidFeedback = {
+  render: ValidationTemplate.bind({}),
+  name: "Validation",
+  args: { invalidFeedback: "Custom error message" },
+  parameters: {},
+  tags: ["!dev"]
+};
