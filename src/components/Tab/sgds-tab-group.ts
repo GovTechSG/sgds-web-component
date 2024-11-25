@@ -39,9 +39,9 @@ export class SgdsTabGroup extends SgdsElement {
   /**@internal */
   private panels: SgdsTabPanel[] = [];
   /** The variant types of tabs. Controls the visual stylesof all `sgds-tabs` in its slot. It also dynamically changes the slots of `sgds-tab` */
-  @property({ reflect: true, attribute: true }) variant: 'underlined' | 'solid' = 'underlined';
-  @property({ type: String, reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
-  @property({ type: String, reflect: true }) density: 'compact' | 'default' = 'default';
+  @property({ reflect: true, attribute: true }) variant: "underlined" | "solid" = "underlined";
+  @property({ type: String, reflect: true }) orientation: "horizontal" | "vertical" = "horizontal";
+  @property({ type: String, reflect: true }) density: "compact" | "default" = "default";
 
   connectedCallback() {
     const whenAllDefined = Promise.all([
@@ -191,7 +191,7 @@ export class SgdsTabGroup extends SgdsElement {
       ...options
     };
 
-    if (tab !== this.activeTab && !(tab.disabled)) {
+    if (tab !== this.activeTab && !tab.disabled) {
       const previousTab = this.activeTab;
       this.activeTab = tab;
 
@@ -241,10 +241,10 @@ export class SgdsTabGroup extends SgdsElement {
 
     // Iterate over each tab and set the variant and orientation
     tabs.forEach(tab => {
-      if (tab.tagName.toLowerCase() === 'sgds-tab') {
-        tab.setAttribute('variant', this.variant);
-        tab.setAttribute('orientation', this.orientation);
-        tab.setAttribute('density', this.density);
+      if (tab.tagName.toLowerCase() === "sgds-tab") {
+        tab.setAttribute("variant", this.variant);
+        tab.setAttribute("orientation", this.orientation);
+        tab.setAttribute("density", this.density);
       }
     });
   }
@@ -253,7 +253,6 @@ export class SgdsTabGroup extends SgdsElement {
     this.updateTabsAttributes();
     this.syncTabsAndPanels();
   }
-
 
   render() {
     return html`
@@ -269,17 +268,17 @@ export class SgdsTabGroup extends SgdsElement {
           <slot
             name="nav"
             class=${classMap({
-      sgds: true,
-      "nav-tabs": true,
-      nav: true
-    })}     
+              sgds: true,
+              "nav-tabs": true,
+              nav: true
+            })}
             orientation=${ifDefined(this.orientation)}
             variant=${ifDefined(this.variant)}
             density=${ifDefined(this.density)}
             @slotchange=${this.handleSlotChange}
           ></slot>
         </div>
-        <div part="body"> 
+        <div part="body">
           <slot class="tab-group__body" @slotchange=${this.syncTabsAndPanels}></slot>
         </div>
       </div>

@@ -22,91 +22,98 @@
 
 }
 
-:host([variant="solid"][density="compact"][orientation="horizontal"]) sgds-badge,
-:host([variant="solid"][density="compact"][orientation="vertical"]) sgds-badge,
-:host([variant="solid"][density="compact"][orientation="horizontal"][active]) sgds-badge,
-:host([variant="solid"][density="compact"][orientation="vertical"][active]) sgds-badge {
-  padding: var(--sgds-tabs-compact-padding-y, var(--sgds-spacer-3, 0.5rem)) var(--sgds-tabs-compact-padding-x, var(--sgds-spacer-5, 1rem));
-  font-size: var(--sgds-font-size-1, 0.875rem);
-  font-weight: var(--sgds-font-weight-regular, 400);
+:host([variant="solid"][density="compact"][orientation="horizontal"]) .tab,
+:host([variant="solid"][density="compact"][orientation="vertical"]) .tab,
+:host([variant="solid"][density="compact"][orientation="horizontal"][active]) .tab,
+:host([variant="solid"][density="compact"][orientation="vertical"][active]) .tab {
+  padding: var(--sgds-spacer-3) var(--sgds-spacer-5, 1rem);
+  font-size: var(--sgds-font-size-1);
+  font-weight: var(--sgds-font-weight-regular);
 }
 
-:host([variant="solid"][orientation="horizontal"]) sgds-badge {
-  background-color: var(--sgds-tabs-solid-bg, var(--sgds-gray-100));
-  --sgds-badge-bg: var(--sgds-tabs-solid-bg, var(--sgds-gray-100));
-  --sgds-badge-color: var(--sgds-black);
-  padding: var(--sgds-tabs-default-padding-y, var(--sgds-spacer-4, 0.75rem)) var(--sgds-tabs-default-padding-x, var(--sgds-spacer-5, 1rem));
-  border-radius: var(--sgds-tabs-border-radius, var(--sgds-border-radius-md, 0.5rem));
-  font-size: var(--sgds-font-size-2, 1rem);
-  font-weight: var(--sgds-font-weight-regular, 400);
-  cursor: pointer;
+:host([variant="solid"][orientation="horizontal"]) .tab {
+  background-color: var(--sgds-gray-100);
+  color: var(--sgds-black);
+  border: var(--sgds-border-width-1) solid var(--sgds-default-border-color-transparent);
+  border-radius: var(--sgds-border-radius-md);
+  font-size: var(--sgds-font-size-2);
+  padding: var(--sgds-spacer-4, 0.75rem) var(--sgds-spacer-5, 1rem);
+  display: inline-flex;
+  align-items: center;
+  font-weight: var(--sgds-font-weight-regular);
+  height: var(--sgds-dimension-24);
+  min-width: var(--sgds-dimension-24);
+  gap: var(--sgds-spacer-3)
 }
 
-:host([variant="solid"][orientation="horizontal"][active]) sgds-badge {
-  --sgds-badge-bg: var(--sgds-primary-color);
+:host([variant="solid"][orientation="horizontal"][active]) .tab {
   background-color: var(--sgds-primary-color);
-  --sgds-badge-color: var(--sgds-white, white);
-  padding: var(--sgds-tabs-default-padding-y, var(--sgds-spacer-4, 0.75rem)) var(--sgds-tabs-default-padding-x, var(--sgds-spacer-5, 1rem));
-  border-radius: var(--sgds-tabs-border-radius, 8px);
-  font-size: var(--sgds-font-size-2, 1rem);
-  font-weight: var(--sgds-font-weight-regular, 400);
+  color: var(--sgds-white, white);
+  padding: var(--sgds-spacer-4) var(--sgds-spacer-5);
+  border-radius: var(--sgds-border-radius-md);
+  font-size: var(--sgds-font-size-2);
+  font-weight: var(--sgds-font-weight-regular);
+  gap: var(--sgds-spacer-3)
+}
+
+:host([variant="solid"]:not([active]):not([disabled])) .tab-item:hover .tab {
+  background-color: var(--sgds-gray-300);
   cursor: pointer;
 }
 
-:host([variant="solid"]:not([active]):not([disabled])) .tab-item:hover sgds-badge {
-  --sgds-badge-bg: var(--sgds-tabs-solid-hover-bg, var(--sgds-gray-300));
-  background-color: var(--sgds-tabs-solid-hover-bg, var(--sgds-gray-300));
-  cursor: pointer;
-}
-
-:host([variant="solid"]) .tab-item:focus sgds-badge {
-  border-color: transparent;
-  box-shadow: var(--sgds-box-shadow-focus);
-  outline: 0;
-
-}
 
 :host([variant="underlined"][disabled]) .tab-item {
-  color: red;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+:host([variant="solid"][disabled]) .tab-item {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 
-
-:host([variant="solid"][orientation="vertical"][active]) sgds-badge {
+:host([variant="solid"][orientation="vertical"][active]) .tab {
   display: flex;
   width: 100%;
   align-items: left;
   justify-content: left;
+  color: var(--sgds-white, white);
   background-color: var(--sgds-primary-color);
-  padding: var(--sgds-tabs-default-padding-y, var(--sgds-spacer-4, 0.75rem)) var(--sgds-tabs-default-padding-x, var(--sgds-spacer-5, 1rem));
-  border-radius: var(--sgds-tabs-border-radius, 8px);
-  font-size: var(--sgds-font-size-2, 1rem);
-  font-weight: var(--sgds-font-weight-regular, 400);
+  padding: var(--sgds-spacer-4) var(--sgds-spacer-5);
+  border-radius: var(--sgds-border-radius-md);
+  font-size: var(--sgds-font-size-2);
+  font-weight: var(--sgds-font-weight-regular);
   cursor: pointer;
+  gap: var(--sgds-spacer-3)
 }
 
-:host([variant="solid"][orientation="vertical"]:not([active])) sgds-badge {
+:host([variant="solid"][orientation="vertical"]:not([active])) .tab {
   display: flex;
   width: 100%;
   align-items: left;
   justify-content: left;
-  background-color: var(--sgds-tabs-solid-bg, var(--sgds-gray-100));
-  --sgds-badge-bg: var(--sgds-tabs-solid-bg, var(--sgds-gray-100));
-  --sgds-badge-color: black;
-  padding: var(--sgds-tabs-default-padding-y, var(--sgds-spacer-4, 0.75rem)) var(--sgds-tabs-default-padding-x, var(--sgds-spacer-5, 1rem));
-  border-radius: var(--sgds-tabs-border-radius, 8px);
-  font-size: var(--sgds-font-size-2, 1rem);
-  font-weight: var(--sgds-font-weight-regular, 400);
+  background-color: var(--sgds-gray-100);
+  padding: var(--sgds-spacer-4) var(--sgds-spacer-5);
+  border-radius: var(--sgds-border-radius-md);
+  font-size: var(--sgds-font-size-2);
+  font-weight: var(--sgds-font-weight-regular);
   cursor: pointer;
+  gap: var(--sgds-spacer-3)
 }
 
-:host([variant="underlined"][active][orientation="vertical"]) ul {
+/* :host([variant="underlined"][active][orientation="vertical"]) ul {
 
   display: flex;
   flex-direction: column;
-  border-right: var(--sgds-border-width-1, 1px) solid var(--sgds-tabs-underlined-hover-bg, var(--sgds-gray-500));
-  ;
-  list-style: none;
+  border-right: var(--sgds-border-width-1, 1px) solid var(--sgds-default-border-color-muted, #D2D2D2);
+} */
+
+
+:host([variant="underlined"][orientation="vertical"]:not([active])) ul {
+  display: flex;
+  flex-direction: column;
+  border-right: var(--sgds-border-width-1) solid var(--sgds-default-border-color-muted);
 }
 
 /* Active state for vertical orientation */
@@ -123,74 +130,65 @@
   position: absolute;
   top: 0;
   right: 0;
-  /* Positions the line on the left side */
-  width: 5px;
-  /* Thickness of the line */
+  width: 0.3125rem;
   height: 100%;
-  /* Full height of the container */
   background-color: var(--sgds-primary-color);
+}
 
+
+
+/* Container with a continuous underline */
+:host([variant="underlined"][orientation="horizontal"]:not([active])) ul {
+  display: flex;
+  border-bottom: var(--sgds-border-width-1) solid var(--sgds-default-border-color-muted);
+  list-style: none;
+}
+
+:host([variant="underlined"][active][orientation="horizontal"]) ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  position: relative;
+  /* Necessary for positioning the ::after pseudo-element */
+}
+
+/* Add the colored line at the bottom */
+:host([variant="underlined"][active][orientation="horizontal"]) ul::after {
+  content: '';
+  position: absolute;
+  bottom: -0.0625rem;
+  left: 0;
+  width: 100%;
+  height: 0.3125rem;
+  background-color: var(--sgds-primary-color);
 }
 
 :host([variant="underlined"][orientation="vertical"]:not([active]):not([disabled])) .tab-item:hover::after {
   content: '';
   position: absolute;
   top: 0;
-  right: 0;
-  /* Adjust this value as needed */
-  right: 0px;
-  width: 6px;
+  right: -0.0625rem;
+  width: 0.3125rem;
   height: 100%;
-  /* Thickness of the underline */
-  background-color: var(--sgds-gray-400);
+  background-color: var(--sgds-default-border-color);
 }
 
-/* Container with a continuous underline */
-:host([variant="underlined"][orientation="horizontal"]) ul {
-  display: flex;
-  border-bottom: var(--sgds-border-width-1, 1px) solid var(--sgds-tabs-underlined-hover-bg, var(--sgds-gray-500));
-  list-style: none;
-  /* Light gray line across all tabs */
-}
-
-:host([variant="underlined"][orientation="horizontal"]) .tab-item:hover::after {
+:host([variant="underlined"][orientation="horizontal"]:not([active]):not([disabled])) .tab-item:hover::after {
   content: '';
   position: absolute;
-  bottom: -2px;
-  /* Adjust this value as needed */
+  bottom: -0.0625rem;
   left: 0;
   width: 100%;
-  height: 5px;
-  /* Thickness of the underline */
-  background-color: var(--sgds-gray-400);
+  height: 0.3125rem;
+  background-color: var(--sgds-default-border-color);
 }
 
-:host([variant="underlined"][active][orientation="horizontal"]) ul {
-
-  display: flex;
-  list-style: none;
-  margin-bottom: 0px;
-  position: relative;
-
-}
-
-:host([variant="underlined"][active][orientation="horizontal"]) ul::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  /* Thickness of the underline */
-  background-color: var(--sgds-primary-color);
-  list-style: none;
-}
 
 /* Basic styling for each tab item */
 :host([variant="underlined"]) .tab-item {
-  padding: var(--sgds-tabs-default-padding-y, var(--sgds-spacer-4, 0.75rem)) var(--sgds-tabs-default-padding-x, var(--sgds-spacer-5, 1rem));
-  font-size: var(--sgds-font-size-2, 1rem);
-  font-weight: var(--sgds-font-weight-regular, 400);
+  padding: var(--sgds-spacer-4) var(--sgds-spacer-5, 1rem);
+  font-size: var(--sgds-font-size-2);
+  font-weight: var(--sgds-font-weight-regular);
   position: relative;
   cursor: pointer;
   text-align: center;
@@ -198,11 +196,10 @@
 }
 
 :host([variant="underlined"][density="compact"]) .tab-item {
-  padding: var(--sgds-tabs-default-padding-y, var(--sgds-spacer-3, 0.55rem)) var(--sgds-tabs-default-padding-x, var(--sgds-spacer-5, 1rem));
-  font-size: var(--sgds-font-size-1, 0.75rem);
-  font-weight: var(--sgds-font-weight-regular, 400);
+  padding: var(--sgds-spacer-3, 0.55rem) var(--sgds-spacer-5, 1rem);
+  font-size: var(--sgds-font-size-1);
+  font-weight: var(--sgds-font-weight-regular);
   position: relative;
-  cursor: pointer;
   text-align: center;
   list-style: none;
 }

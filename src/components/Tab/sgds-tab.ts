@@ -36,8 +36,6 @@ export class SgdsTab extends SgdsElement {
   @property({ reflect: true, attribute: true }) variant: 'underlined' | 'solid';
   @property({ type: String, reflect: true }) orientation: 'horizontal' | 'vertical';
 
-
-
   @property({ type: String, reflect: true }) density: 'default' | 'compact' = 'default';
 
   connectedCallback() {
@@ -67,12 +65,16 @@ export class SgdsTab extends SgdsElement {
       <div class="tabs-info-label">
           <div class = "icon-container">
           ${this.variant === 'solid'
-        ? html`         <sgds-badge>
-              <slot name="icon" slot="leftIcon"></slot>
-              <slot name="label"></slot>
-            </sgds-badge>`
-        : html`<slot name="icon"></slot><slot name="label"></slot>`
-      }
+        ? html`
+                <div class="tab">
+                  <slot name="icon"></slot>
+                  <slot name="label"></slot>
+                </div>
+              `
+        : html`
+                <slot name="icon"></slot>
+                <slot name="label"></slot>
+              `}
         </div>
       </div>
     `;
