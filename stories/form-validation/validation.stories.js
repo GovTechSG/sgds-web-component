@@ -101,7 +101,13 @@ const FormDataTemplate = args => {
         label="Comments"
         hintText="Required to fill with minimum length of 3"
       ></sgds-textarea>
-      <sgds-file-upload required label="Supporting documents" multiple name="documents" hasFeedback
+      <sgds-file-upload
+        id="file-upload-form-data"
+        required
+        label="Supporting documents"
+        multiple
+        name="documents"
+        hasFeedback
         >File upload</sgds-file-upload
       >
       <div class="d-flex-row">
@@ -129,7 +135,15 @@ const FormDataTemplate = args => {
         data.gender = formData.get("gender");
         data.comments = formData.get("comments");
 
+        const fileInput = document.getElementById("file-upload-form-data");
+        for (let i = 0; i < fileInput.selectedFiles.length; i++) {
+          const fileName = "file" + i;
+          formData.append(fileName, fileInput.selectedFiles[i]);
+          data[fileName] = fileInput.selectedFiles[i];
+        }
+
         alert(JSON.stringify(data));
+        // submit FormData
       });
     </script>
   `;
