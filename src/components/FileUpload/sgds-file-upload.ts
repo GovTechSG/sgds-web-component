@@ -77,7 +77,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(F
    * Returns files selected for upload
    */
   public get files(): File[] {
-    return this.selectedFiles
+    return this.selectedFiles;
   }
 
   private _setFileList(files: FileList) {

@@ -124,7 +124,7 @@ describe("sgds-file-upload", () => {
       expect(listItems?.length).to.equal(1);
     }
   });
-  it("get files() method returns the selectedFiles", async() => {
+  it("get files() method returns the selectedFiles", async () => {
     const fileList = [new File(["file1"], "file1.txt"), new File(["file2"], "file2.txt")];
     const dt = new DataTransfer();
     fileList.forEach(file => {
@@ -139,9 +139,9 @@ describe("sgds-file-upload", () => {
       input.dispatchEvent(changeEvent);
       await el.updateComplete;
 
-      expect(el.files).to.deep.equal(fileList)
+      expect(el.files).to.deep.equal(fileList);
     }
-  })
+  });
 });
 
 describe("Fileupload validation", () => {
