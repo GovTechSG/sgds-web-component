@@ -4,7 +4,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { html, literal } from "lit/static-html.js";
 import ButtonElement from "../../base/button-element";
 import anchorStyles from "../../styles/anchor.css";
-import { FormSubmitController } from "../../utils/form";
+import { FormSubmitController } from "../../utils/formSubmitController";
 import buttonStyles from "./button.css";
 
 export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";

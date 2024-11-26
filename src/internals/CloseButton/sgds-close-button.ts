@@ -11,7 +11,7 @@ import { classMap } from "lit/directives/class-map.js";
  *
  */
 export class SgdsCloseButton extends SgdsElement {
-  static styles = [closeButtonStyles];
+  static styles = [...SgdsElement.styles, closeButtonStyles];
 
   @property({ type: String }) ariaLabel = "Close button";
 

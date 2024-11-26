@@ -19,9 +19,9 @@ export const setCustomElementsManifestWithOptions = (
       module?.declarations?.forEach(declaration => {
         Object.keys(declaration).forEach(key => {
           if (Array.isArray(declaration[key])) {
-            declaration[key] = declaration[key].filter(
-              (member: { privacy: string | string[] }) => !member.privacy?.includes("private")
-            );
+            declaration[key] = declaration[key]
+              .filter((member: { privacy: string | string[] }) => !member.privacy?.includes("private"))
+              .filter((member: { privacy: string | string[] }) => !member.privacy?.includes("protected"));
           }
         });
       });
@@ -57,6 +57,7 @@ export const parameters = {
         "Frameworks",
         ["Angular", "Vue", "React", "NextJS"],
         "Style",
+        "Form",
         "Troubleshooting",
         "Components",
         "Patterns",

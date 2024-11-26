@@ -8,9 +8,8 @@
 
 <sgds-accordion-item>
     <div slot="accordion-header">Uncaught DOMException: Failed to execute 'define' on 'CustomElementRegistry'</div>
-    <span slot="accordion-content">If you encounter this error, it means that you need to load the Scoped Custom Element Registry polyfill. Refer to the instructions <a target="_self" href="/docs/getting-started-usage-scoped-elements--page">here</a></span> 
+    <span slot="accordion-content">If you encounter this error, it means that you need to load the Scoped Custom Element Registry polyfill. Refer to the instructions <a target="_self" href="/docs/usage-scoped-elements--docs">here</a></span> 
 </sgds-accordion-item>
-
 
 <h3> React </h3>
 <sgds-accordion-item >

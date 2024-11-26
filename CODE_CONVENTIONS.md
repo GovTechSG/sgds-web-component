@@ -10,10 +10,12 @@
     - [Naming Methods](#naming-methods)
     - [Naming Events](#naming-events)
     - [Naming CSS custom variables](#naming-css-custom-variables)
+    - [Naming slots](#naming-slots)
   - [Typescript](#typescript)
   - [Jsdocs](#jsdoc)
   - [Lit](#lit)
   - [Scoped Elements](#scoped-elements)
+  - [Icons](#icons)
 
 ---
 
@@ -226,6 +228,36 @@ const isEnabled = false;
 
 ### Naming Methods
 
+- Use modifiers private, protected, public appropriately. 
+- All public methods must be labelled with jsdocs description 
+
+:x: Bad:
+
+```typescript
+close() {}
+```
+
+:white_check_mark: Good:
+
+```typescript
+/** Closes the component */
+public close();
+```
+
+- All internal methods, private and protected, must be prefixed with a underscore _ to differentiate from Lit native lifecycle methods and the public methods 
+
+:x: Bad:
+
+```typescript
+handleChange() {}
+```
+
+:white_check_mark: Good:
+
+```typescript
+private _handleChange() {};
+```
+
 - Keep it simple. If the action can be understood with the least amount of words. If the method has many action and needs to be described in multiple words, then you should refactor the method to have a single responsibility
 
 :x: Bad:
@@ -297,6 +329,27 @@ Example with element state
 ---
 
 ---
+
+### Naming slots 
+
+Slots name should be concise and straight to the point. No need to add component prefix name. 
+
+:white_check_mark: Good:
+
+```html
+<sgds-footer>
+<h2 slot="title"></h2>
+</sgds-footer>
+```
+
+
+:x: Bad: 
+
+```html
+<sgds-footer>
+<h2 slot="footer-title"></h2>
+</sgds-footer>
+```
 
 ## Typescript
 
@@ -416,3 +469,29 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
   }
 }
 ```
+
+### Icons
+
+In order to minimise the usage of ScopedElementsMixin dependency we try to use slots as much as possible. 
+
+The general rule of thumb of when to use svg directly in code or sgds-icon
+
+Use sgds-icon when: 
+
+- Icons are prone to be changed, user can customise the type of icon to pass in 
+- In that case, create a slot="icon" for user to pass in 
+
+e.g. 
+
+```html
+<sgds-alert>
+  <sgds-icon slot="icon" ...></sgds-icon>
+</sgds-alert>
+```
+
+Use hard coded svg when: 
+
+- Icons are super fixed. Example, accordion's caret, combobox caret, 
+- If ever such icons are requested to be customised, should first try to create a slot for user to pass in 
+
+Last resort is to introduce sgds-icon as an internal dependency, to avoid usage of the ScopedElementMixin as much as possible 

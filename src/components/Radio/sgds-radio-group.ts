@@ -1,14 +1,12 @@
 import { html, nothing } from "lit";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import SgdsElement from "../../base/sgds-element";
-import { FormSubmitController } from "../../utils/form";
+import { live } from "lit/directives/live.js";
+import FormControlElement from "../../base/form-control-element";
+import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
 import radioGroupStyles from "./radio-group.css";
 import SgdsRadio from "./sgds-radio";
-import feedbackStyles from "../../styles/feedback.css";
-import formLabelStyles from "../../styles/form-label.css";
-import formHintStyles from "../../styles/form-hint.css";
 
 /**
  * @summary RadioGroup group multiple radios so they function as a single form control.
@@ -19,35 +17,17 @@ import formHintStyles from "../../styles/form-hint.css";
  *
  *
  */
-export class SgdsRadioGroup extends SgdsElement {
-  static styles = [...SgdsElement.styles, feedbackStyles, formLabelStyles, radioGroupStyles, formHintStyles];
-  /**@internal */
-  protected readonly formSubmitController = new FormSubmitController(this, {
-    defaultValue: (control: SgdsRadioGroup) => control.defaultValue
-  });
+export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
+  static styles = [...FormControlElement.styles, radioGroupStyles];
+
   /**@internal */
   @query("slot:not([name])") defaultSlot: HTMLSlotElement;
-  /**@internal */
-  @query(".radio-group-validation-input") input: HTMLInputElement;
+
   /**@internal */
   @state() defaultValue = "";
-  /**@internal */
-  @state() private customErrorMessage = "";
-
-  /** The radio group's label  */
-  @property({ reflect: true }) label = "";
-
-  /**  This will be true when the control is in an invalid state. */
-  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** The selected value of the control. */
   @property({ reflect: true }) value = "";
-
-  /** The name assigned to the radio controls. */
-  @property({ reflect: true }) name = "option";
-
-  /** Ensures a child radio is checked before allowing the containing form to submit. */
-  @property({ type: Boolean, reflect: true }) required = false;
 
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback = "";
@@ -55,21 +35,40 @@ export class SgdsRadioGroup extends SgdsElement {
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
 
-  /** The radio group's hint text */
-  @property({ reflect: true }) hintText = "";
+  /** Makes the input as a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
 
   @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
     this.emit("sgds-change", { detail: { value: this.value } });
     this._updateCheckedRadio();
   }
+  @watch("invalid", { waitUntilFirstUpdate: true })
+  _handleInvalidChange() {
+    this._radios.forEach(r => (r.invalid = this.invalid));
+  }
+
+  @state() private _isTouched = false;
+  /**
+   * radio requries a custom _mixinResetFormControl as the update of input value
+   * requires to fire a reset event manually
+   * */
+  private _mixinResetFormControl() {
+    this.value = this.input.value = this.defaultValue;
+    this._updateInputValue("reset");
+    this._mixinResetValidity(this.input);
+  }
 
   connectedCallback() {
     super.connectedCallback();
     this.defaultValue = this.value;
+    this.addEventListener("sgds-blur", () => {
+      this._isTouched = true;
+    });
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
     const radios = this._radios;
     radios.forEach((item, index) => {
       if (radios.length > 1) {
@@ -87,40 +86,11 @@ export class SgdsRadioGroup extends SgdsElement {
         }
       }
     });
-  }
-
-  /** Gets and return the ValidityState object.  */
-  get validity(): ValidityState {
-    const hasMissingData = !((this.value && this.required) || !this.required);
-    const hasCustomError = this.customErrorMessage !== "";
-    return {
-      badInput: false,
-      customError: hasCustomError,
-      patternMismatch: false,
-      rangeOverflow: false,
-      rangeUnderflow: false,
-      stepMismatch: false,
-      tooLong: false,
-      tooShort: false,
-      typeMismatch: false,
-      valid: hasMissingData ? false : true,
-      valueMissing: !hasMissingData
-    };
-  }
-
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  public reportValidity(): boolean {
-    const validity = this.validity;
-
-    this.invalid = !validity.valid;
-
-    if (!validity.valid) {
-      this._showNativeErrorMessage();
+    if (this.value) {
+      this._updateInputValue("change");
     }
-
-    return !this.invalid;
   }
-  /**@internal */
+
   @queryAssignedElements()
   private _radios!: Array<SgdsRadio>;
 
@@ -133,11 +103,22 @@ export class SgdsRadioGroup extends SgdsElement {
     }
 
     this.value = target.value;
+
+    this._updateInputValue();
+
     const radios = this._radios;
 
     radios.forEach(radio => {
       return (radio.checked = radio === target);
     });
+  }
+  /**
+   * when input value is set programatically, need to manually dispatch a change event
+   * In order to prevent race conditions and ensure sequence of events, set input's value here instead of binding to value prop of input
+   */
+  private _updateInputValue(eventName = "change") {
+    this.input.value = this.value;
+    this.input.dispatchEvent(new InputEvent(eventName));
   }
 
   private _handleKeyDown(event: KeyboardEvent) {
@@ -163,6 +144,7 @@ export class SgdsRadioGroup extends SgdsElement {
     });
 
     this.value = radios[index].value;
+    this._updateInputValue();
     radios[index].checked = true;
     radios[index].tabIndex = 0;
     // preventDefault at the end to allow Tab
@@ -173,32 +155,67 @@ export class SgdsRadioGroup extends SgdsElement {
     const radios = this._radios;
 
     radios.forEach(radio => (radio.checked = radio.value === this.value));
-
+    this._disabledChildRadios();
     if (!radios.some(radio => radio.checked)) {
       if (radios[0]) radios[0].tabIndex = 0;
     }
   }
 
-  private _handleInvalid(e: Event) {
-    e.preventDefault();
-    this.invalid = true;
-    this._radios.forEach(radio => (radio.invalid = true));
-  }
-
-  private _showNativeErrorMessage() {
-    this.input.reportValidity();
-  }
-
   private _updateCheckedRadio() {
     const radios = this._radios;
     radios.forEach(radio => (radio.checked = radio.value === this.value));
-    this.invalid = !this.validity.valid;
-    this._radios.forEach(radio => (radio.invalid = this.invalid));
   }
 
   protected _renderHintText() {
-    const hintTextTemplate = html` <div class="form-text">${this.hintText}</div> `;
+    const hintTextTemplate = html` <div id="${this._controlId}Help" class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
+  }
+  /**
+   * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
+   * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
+   */
+  public reportValidity(): boolean {
+    return this._mixinReportValidity();
+  }
+  /**
+   * Checks for validity without any native error popup message
+   */
+  public checkValidity(): boolean {
+    return this._mixinCheckValidity();
+  }
+
+  /**
+   * Returns the ValidityState object
+   */
+  public get validity(): ValidityState {
+    return this._mixinGetValidity();
+  }
+  /**
+   * Returns the validation message based on the ValidityState
+   */
+  public get validationMessage() {
+    return this._mixinGetValidationMessage();
+  }
+
+  @watch("_isTouched", { waitUntilFirstUpdate: true })
+  _handleIsTouched() {
+    if (this._isTouched) {
+      this.invalid = !this.input.checkValidity();
+    }
+  }
+
+  @watch("disabled", { waitUntilFirstUpdate: true })
+  _handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    this.setInvalid(false);
+    this._disabledChildRadios();
+  }
+
+  private _disabledChildRadios() {
+    if (this.disabled) {
+      const radios = this._radios;
+      radios.forEach(radio => (radio.disabled = this.disabled));
+    }
   }
 
   render() {
@@ -232,7 +249,8 @@ export class SgdsRadioGroup extends SgdsElement {
           })}"
           ?required=${this.required}
           tabindex="-1"
-          @invalid=${(e: Event) => this._handleInvalid(e)}
+          @change=${(e: Event) => super._mixinHandleChange(e)}
+          .value=${live(this.value)}
         />
         ${this.invalid && this.hasFeedback
           ? html`
@@ -243,7 +261,9 @@ export class SgdsRadioGroup extends SgdsElement {
                     fill="#B90000"
                   />
                 </svg>
-                <div id="radio-group-feedback" tabindex="0" class="invalid-feedback">${this.invalidFeedback}</div>
+                <div id="radio-group-feedback" tabindex="0" class="invalid-feedback">
+                  ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
+                </div>
               </div>
             `
           : nothing}

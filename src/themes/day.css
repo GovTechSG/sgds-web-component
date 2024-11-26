@@ -13,7 +13,7 @@
   --sgds-default-color: var(--sgds-gray-900);
   --sgds-default-color-inverse: var(--sgds-gray-000);
   --sgds-default-color-muted: var(--sgds-gray-200);
-  --sgds-default-color-subtle: var(--sgds-gray-400);
+  --sgds-default-color-subtle: var(--sgds-gray-500);
   --sgds-default-color-emphasis: var(--sgds-gray-800);
   --sgds-default-color-on-dark: var(--sgds-gray-000);
   --sgds-default-color-on-light: var(--sgds-gray-800);

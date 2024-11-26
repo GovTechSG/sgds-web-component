@@ -1,18 +1,15 @@
-import { property, query } from "lit/decorators.js";
+import { nothing } from "lit";
+import { property, query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import { html } from "lit/static-html.js";
-import SgdsElement from "../../base/sgds-element";
+import FormControlElement from "../../base/form-control-element";
 import { defaultValue } from "../../utils/defaultvalue";
-import { FormSubmitController, SgdsFormControl } from "../../utils/form";
-import genId from "../../utils/generateId";
+import { SgdsFormControl } from "../../utils/formSubmitController";
+import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
 import textareaStyle from "./textarea.css";
-import feedbackStyles from "../../styles/feedback.css";
-import formLabelStyles from "../../styles/form-label.css";
-import formHintStyles from "../../styles/form-hint.css";
-import fromPlaceholderStyles from "../../styles/form-placeholder.css";
 
 /**
  * @summary Text areas allow for the collection of input longer than a single line.
@@ -22,30 +19,19 @@ import fromPlaceholderStyles from "../../styles/form-placeholder.css";
  * @event sgds-focus - Emitted when textarea is in focus.
  * @event sgds-blur - Emitted when textarea loses focus.
  */
-export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
-  static styles = [
-    ...SgdsElement.styles,
-    formHintStyles,
-    formLabelStyles,
-    feedbackStyles,
-    fromPlaceholderStyles,
-    textareaStyle
-  ];
+export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
+  static styles = [...FormControlElement.styles, textareaStyle];
   /**@internal */
   @query("textarea.form-control") textarea: HTMLTextAreaElement;
   /**@internal */
-  private readonly formSubmitController = new FormSubmitController(this);
-  /**@internal */
   private resizeObserver: ResizeObserver;
-  /**The textarea's label */
-  @property({ type: String, reflect: true }) label = "label";
   /**The textarea's name attribute */
   @property({ type: String, reflect: true }) name: string;
   /**The textarea's value attribute. */
   @property({ type: String, reflect: true }) value = "";
   /**Sets the minimum length of the textarea */
   @property({ type: Number, reflect: true }) minlength: number;
-  /**Sets the maximum length of the textarea */
+  /**Sets the maximum length of the textarea. When maxlength is defined, a word count appears on bottom right of the input*/
   @property({ type: Number, reflect: true }) maxlength: number;
   /**Enables spell checking on the textarea */
   @property({ type: Boolean, reflect: true }) spellcheck = false;
@@ -53,14 +39,10 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   @property({ type: Number }) rows = 4;
   /**The textarea's placeholder text. */
   @property({ type: String, reflect: true }) placeholder = "Placeholder";
-  /**Feedback text for error state when validated */
+  /** Custom feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback = "";
   /**Autofocus the textarea */
   @property({ type: Boolean, reflect: true }) autofocus = false;
-  /**Disables the textarea. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
-  /**Makes the textarea a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
   /** Makes the textarea readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
 
@@ -84,39 +66,49 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
 
-  /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
-  @property({ type: Boolean, reflect: true }) invalid = false;
+  /** Makes the textarea as a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /** The textarea's hint text */
   @property({ reflect: true }) hintText = "";
 
-  /** @internal The textarea's unique id */
-  private textareaId = genId("textarea", "input");
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.resizeObserver = new ResizeObserver(() => this._setTextareaHeight());
-
-    this.updateComplete.then(() => {
-      this._setTextareaHeight();
-      this.resizeObserver.observe(this.textarea);
-    });
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.resizeObserver.unobserve(this.textarea);
-  }
+  @state() private _isTouched = false;
 
   /** Sets focus on the textarea. */
   public focus(options?: FocusOptions) {
     this.textarea.focus(options);
   }
-
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  public reportValidity() {
-    return this.textarea.reportValidity();
+  /** Sets blur on the textarea. */
+  public blur() {
+    this.textarea.blur();
   }
+
+  /**
+   * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
+   * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
+   */
+  public reportValidity(): boolean {
+    return this._mixinReportValidity();
+  }
+  /**
+   * Checks for validity without any native error popup message
+   */
+  public checkValidity(): boolean {
+    return this._mixinCheckValidity();
+  }
+  /**
+   * Returns the ValidityState object
+   */
+  public get validity(): ValidityState {
+    return this._mixinGetValidity();
+  }
+  /**
+   * Returns the validation message based on the ValidityState
+   */
+  public get validationMessage() {
+    return this._mixinGetValidationMessage();
+  }
+
   /** Selects all the text in the textarea. */
   public select() {
     this.textarea.select();
@@ -126,16 +118,23 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
     this.invalid = true;
   }
 
-  private _handleChange(event: string) {
-    this.value = this.textarea.value;
-    this.emit(event);
+  protected _handleChange(e: Event) {
+    this.value = this.input.value;
+    this.emit("sgds-change");
+    super._mixinHandleChange(e);
+  }
+  private _handleInputChange(e: Event) {
+    this.value = this.input.value;
+    this.emit("sgds-input");
+    super._mixinHandleInputChange(e);
   }
 
   private _handleFocus() {
     this.emit("sgds-focus");
   }
 
-  private handleBlur() {
+  private _handleBlur() {
+    this._isTouched = true;
     this.emit("sgds-blur");
   }
 
@@ -153,30 +152,34 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
       (this.textarea.style.height as string | undefined) = undefined;
     }
   }
+  /** @internal */
+  @watch("_isTouched", { waitUntilFirstUpdate: true })
+  _handleIsTouched() {
+    if (this._isTouched) {
+      this.invalid = !this.textarea.checkValidity();
+    }
+  }
 
   /** @internal */
   @watch("disabled", { waitUntilFirstUpdate: true })
   _handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.textarea.disabled = this.disabled;
-    this.invalid = !this.textarea.checkValidity();
+    this.setInvalid(false);
   }
 
   /** @internal */
   @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
-    this.invalid = !this.textarea.checkValidity();
     this.updateComplete.then(() => this._setTextareaHeight());
   }
 
   protected _renderHintText() {
-    const hintTextTemplate = html` <div id="${this.textareaId}Help" class="form-text">${this.hintText}</div> `;
+    const hintTextTemplate = html` <div id="${this._controlId}Help" class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }
 
-  render() {
-    // if maxlength is defined
-    const wordCount = html`
+  private _wordCount() {
+    return html`
       <div
         class="form-text word-count ${classMap({
           "invalid-feedback": this.invalid && this.hasFeedback
@@ -185,14 +188,15 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
         ${this.value.length}/${this.maxlength}
       </div>
     `;
-
+  }
+  render() {
     return html`
       <div
         class="form-control-container ${classMap({
           disabled: this.disabled
         })}"
       >
-        <label for=${this.textareaId} class="form-label">${this.label}</label>
+        <label for=${this._controlId} class="form-label">${this.label}</label>
         <textarea
           class=${classMap({
             "form-control": true,
@@ -201,7 +205,7 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
             "textarea-resize-vertical": this.resize === "vertical",
             "textarea-resize-auto": this.resize === "auto"
           })}
-          id=${this.textareaId}
+          id=${this._controlId}
           name=${ifDefined(this.name)}
           rows=${ifDefined(this.rows)}
           placeholder=${ifDefined(this.placeholder)}
@@ -216,13 +220,12 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
           ?autofocus=${this.autofocus}
           autocorrect=${ifDefined(this.autocorrect)}
           inputmode=${ifDefined(this.inputmode)}
-          @input=${() => this._handleChange("sgds-input")}
-          @change=${() => this._handleChange("sgds-change")}
+          @input=${(e: Event) => this._handleInputChange(e)}
+          @change=${(e: Event) => this._handleChange(e)}
           @invalid=${(e: Event) => this._handleInvalid(e)}
           @focus=${this._handleFocus}
-          @blur=${this.handleBlur}
-        >
-        </textarea>
+          @blur=${this._handleBlur}
+        ></textarea>
         <div class="textarea-info-container">
           ${this.invalid && this.hasFeedback
             ? html`
@@ -233,11 +236,13 @@ export class SgdsTextarea extends SgdsElement implements SgdsFormControl {
                       fill="#B90000"
                     />
                   </svg>
-                  <div id="${this.textareaId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
+                  <div id="${this._controlId}-invalid" class="invalid-feedback">
+                    ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
+                  </div>
                 </div>
               `
             : html`${this._renderHintText()}`}
-          ${this.maxlength > 0 ? wordCount : undefined}
+          ${this.maxlength > 0 ? this._wordCount() : nothing}
         </div>
       </div>
     `;

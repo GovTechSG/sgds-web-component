@@ -32,6 +32,7 @@ import { Tooltip } from "./components/Tooltip";
 export default function Home() {
   return (
     <main>
+      <div>hello world</div>
       <Masthead />
       <Mainnav />
       <Accordion />

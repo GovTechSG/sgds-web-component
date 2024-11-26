@@ -1,9 +1,9 @@
-import "./sgds-web-component";
 import { assert, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
-import type { SgdsAlert } from "../src/components";
+import { SgdsAlert } from "../src/components";
 import type { SgdsCloseButton } from "../src/internals/CloseButton/sgds-close-button";
+import "./sgds-web-component";
 
 describe("<sgds-alert-link>", () => {
   it("semantically matches the DOM", async () => {
@@ -38,7 +38,7 @@ describe("<Alert>", () => {
       el,
       `
         <div class="alert show" role="alert" aria-hidden="false">
-        <slot name="icon" class="d-none"></slot>  
+        <slot name="icon"></slot>
         <div class="alert-content">
            <slot></slot>
           </div>        
@@ -133,8 +133,8 @@ describe("<Alert>", () => {
     expect(el.getAttribute("variant")).to.equal("warning");
   });
 
-  it("when show is false, should remove from shadow DOM", async () => {
-    const el = await fixture<SgdsAlert>(html`<sgds-alert>Test alert</sgds-alert>`);
+  it("when show is false and dismissible, should remove from shadow DOM", async () => {
+    const el = await fixture<SgdsAlert>(html`<sgds-alert dismissible>Test alert</sgds-alert>`);
     const base = el.shadowRoot?.querySelector(".alert");
     assert.notExists(base, "Alert element not exists");
   });

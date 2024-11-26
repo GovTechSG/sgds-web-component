@@ -2,60 +2,24 @@ import { html } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import footerStyle from "./footer.css";
-export interface ColumnLinks {
-  title: string;
-  links: Links[];
-}
-export interface Links {
-  href: string;
-  label: string;
-}
 
 /**
  * @summary The footer contains supporting information for your service at the bottom of your website. All .gov.sg digital services shall contain a Global Footer Bar across all pages. The Global Footer Bar should include the name of the digital service, contact information, a privacy statement and the terms of use.
  *
- * @csspart footer-top - The component's footer-top section container.
- * @csspart footer-bottom - The component's footer-bottom section container.
+ * @slot title - The slot for title
+ * @slot description - The slot for description
+ * @slot items - The slot for the list of footer items
+ * @slot social-media - The slot for the list of social media with icons
  *
- * @cssproperty footer-top - The component's footer-top section container.
- * @cssproperty footer-bottom - The component's footer-bottom section container.
  */
 export class SgdsFooter extends SgdsElement {
   static styles = [...SgdsElement.styles, footerStyle];
-
-  /**
-   * 	Sets title of SgdsFooter
-   */
-  @property({ type: String })
-  title = "";
-
-  /**
-   * 	Sets description of SgdsFooter
-   */
-  @property({ type: String })
-  description = "";
 
   /**
    * 	Sets copyrightLiner of SgdsFooter
    */
   @property({ type: String })
   copyrightLiner = "Government of Singapore";
-
-  /**
-   * Array of type
-   *
-   * `interface ColumnLinks { title: string; links : Links[] } interface Links { href: string; label: string; }`
-   */
-  @property({
-    type: Array
-  })
-  links: ColumnLinks[] = [];
-
-  /**
-   * String date for last updated date
-   */
-  @property({ type: String })
-  lastUpdatedDate = "";
 
   /**
    * 	href link for contacts
@@ -70,6 +34,12 @@ export class SgdsFooter extends SgdsElement {
   feedbackHref = "#";
 
   /**
+   * 	href link for faq
+   */
+  @property({ type: String })
+  faqHref = "#";
+
+  /**
    * 	href link for privacy statement
    */
   @property({ type: String })
@@ -81,68 +51,70 @@ export class SgdsFooter extends SgdsElement {
   @property({ type: String })
   termsOfUseHref = "#";
 
-  render() {
-    // if description is defined
-    const hasDescription = html` <div class="description">${this.description}</div>`;
+  firstUpdated() {
+    const socialMediaSlot = this.shadowRoot.querySelector("slot[name='social-media']") as HTMLSlotElement;
+    const footerTitleSlot = this.shadowRoot.querySelector("slot[name='title']") as HTMLSlotElement;
+    const footerDescriptionSlot = this.shadowRoot.querySelector("slot[name='description']") as HTMLSlotElement;
+    const footerItemsSlot = this.shadowRoot.querySelector("slot[name='items']") as HTMLSlotElement;
+    const socialMediaChildNodes = socialMediaSlot.assignedNodes({ flatten: true });
+    const footerTitleChildNodes = footerTitleSlot.assignedNodes({ flatten: true });
+    const footerDescriptionChildNodes = footerDescriptionSlot.assignedNodes({ flatten: true });
+    const footerItemsChildNodes = footerItemsSlot.assignedNodes({ flatten: true });
+    if (socialMediaChildNodes.length === 0) {
+      const socialMediaContainer = this.shadowRoot.querySelector(".social-media") as HTMLDivElement;
+      socialMediaContainer.style.display = "none";
+    }
 
+    if (footerTitleChildNodes.length === 0 && footerDescriptionChildNodes.length === 0) {
+      const footerHeaderContainer = this.shadowRoot.querySelector(".footer-header") as HTMLDivElement;
+      footerHeaderContainer.style.display = "none";
+    }
+
+    if (footerItemsChildNodes.length === 0) {
+      const footerItemsContainer = this.shadowRoot.querySelector(".footer-items") as HTMLDivElement;
+      footerItemsContainer.style.display = "none";
+    }
+
+    if (
+      footerTitleChildNodes.length === 0 &&
+      footerDescriptionChildNodes.length === 0 &&
+      footerItemsChildNodes.length === 0
+    ) {
+      const footerTopContainer = this.shadowRoot.querySelector(".footer-top") as HTMLDivElement;
+      footerTopContainer.style.display = "none";
+    }
+  }
+
+  render() {
     return html`
-      <footer class="sgds footer">
-        <section class="footer-top" part="footer-top">
-          <div class="container-fluid">
-            <div class="row footer-header">
-              <div class="col col-lg-6 col-md-12">
-                <div class="title">${this.title ? this.title : "Footer title"}</div>
-                ${this.description ? hasDescription : undefined}
-              </div>
-            </div>
-            <div class="row footer-items">
-              ${this.links.map(
-                (item: ColumnLinks) =>
-                  html`
-                    <div class="col-xxl-2 col-md-4 mb-3">
-                      <div class="title">${item.title}</div>
-                      <ul class="links">
-                        ${item.links.map((link: Links) => html` <li><a href=${link.href}>${link.label}</a></li> `)}
-                      </ul>
-                    </div>
-                  `
-              )}
-            </div>
-            <div class="row footer-contact-links">
-              <div class="col">
-                <div class="d-flex justify-content-lg-end">
-                  <ul>
-                    <li><a href=${this.contactHref}>Contact</a></li>
-                    <li><a href=${this.feedbackHref}>Feedback</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+      <footer class="footer">
+        <section class="footer-top">
+          <div class="footer-header">
+            <slot name="title"></slot>
+            <slot name="description"></slot>
+          </div>
+          <div class="footer-items">
+            <slot name="items"></slot>
           </div>
         </section>
-        <section class="footer-bottom" part="footer-bottom">
-          <div class="container-fluid">
-            <div class="row footer-mandatory-links">
-              <div class="col">
-                <ul>
-                  <li>
-                    <a href="https://tech.gov.sg/report_vulnerability" target="_blank" rel="noopener noreferrer"
-                      >Report Vulnerability</a
-                    >
-                  </li>
-                  <li><a href=${this.privacyHref}>Privacy Statement</a></li>
-                  <li><a href=${this.termsOfUseHref}>Terms of use</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="row footer-copyrights">
-              <div class="col">
-                <div class="d-flex justify-content-lg-end text-end">
-                  © ${new Date().getFullYear()} ${this.copyrightLiner}<br />
-                  Last Updated ${this.lastUpdatedDate}
-                </div>
-              </div>
-            </div>
+        <section class="footer-bottom">
+          <div class="social-media">
+            <slot name="social-media"></slot>
+          </div>
+          <div class="footer-mandatory-links">
+            <ul>
+              <li><a href=${this.contactHref}>Contact</a></li>
+              <li><a href=${this.feedbackHref}>Feedback</a></li>
+              <li><a href=${this.faqHref}>FAQ</a></li>
+              <li>
+                <a href="https://tech.gov.sg/report_vulnerability" target="_blank" rel="noopener noreferrer">
+                  Report Vulnerability
+                </a>
+              </li>
+              <li><a href=${this.privacyHref}>Privacy Statement</a></li>
+              <li><a href=${this.termsOfUseHref}>Terms of use</a></li>
+            </ul>
+            <div class="footer-copyrights">© ${new Date().getFullYear()}, ${this.copyrightLiner}</div>
           </div>
         </section>
       </footer>

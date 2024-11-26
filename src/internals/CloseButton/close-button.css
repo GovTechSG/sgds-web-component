@@ -31,8 +31,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: var(--sgds-border-radius);
-  width: var(--sgds-icon-size-lg);
-  height: var(--sgds-icon-size-lg);
+  width: var(--sgds-icon-size-md);
+  height: var(--sgds-icon-size-md);
 }
 .btn-close-light::before {
   color: var(--sgds-default-color-on-dark);
@@ -46,8 +46,9 @@
 
 .btn-close:focus,
 .btn-close:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
   outline: 0;
+  box-shadow: var(--sgds-box-shadow-focus);
+  background-color: var(--sgds-default-bg-translucent);
 }
 
 .btn-close-sm {

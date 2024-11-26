@@ -26,7 +26,6 @@ Loading of polyfill is not always required, <a target="_blank" href="/docs/usage
 import "@webcomponents/scoped-custom-element-registry";
 import "@govtechsg/sgds-web-component/themes/day.css";
 import "@govtechsg/sgds-web-component";
-
 ```
 
 ### Step 2: Framework specific setup 

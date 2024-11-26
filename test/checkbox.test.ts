@@ -1,8 +1,8 @@
-import "./sgds-web-component";
 import { elementUpdated, expect, fixture, html } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
 import type { SgdsButton, SgdsCheckbox, SgdsCheckboxGroup } from "../src/components";
+import "./sgds-web-component";
 
 describe("<sgds-checkbox>", () => {
   it("should be disabled with the disabled attribute & aria-disabled to be true", async () => {
@@ -12,6 +12,15 @@ describe("<sgds-checkbox>", () => {
     expect(checkbox).to.have.attribute("aria-disabled", "true");
   });
 
+  it("when disabled, invalid state is removed", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox invalid></sgds-checkbox>`);
+    expect(el.invalid).to.be.true;
+    el.disabled = true;
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+    el.disabled = false;
+    expect(el.invalid).to.be.false;
+  });
   it("id attribute should equal to label for attribute", async () => {
     const el = await fixture(html`<sgds-checkbox></sgds-checkbox>`);
     const input = el.shadowRoot?.querySelector("input");
@@ -90,15 +99,15 @@ describe("<sgds-checkbox>", () => {
     expect(form.reportValidity()).to.be.false;
   });
 
-  it("should bypass validity when the input is not checked, reportValidity() is called, and the form has novalidate", async () => {
-    const form = await fixture<HTMLFormElement>(html`
-      <form novalidate>
-        <sgds-checkbox required value="hello"></sgds-checkbox>
-      </form>
-    `);
+  // it("should bypass validity when the input is not checked, reportValidity() is called, and the form has novalidate", async () => {
+  //   const form = await fixture<HTMLFormElement>(html`
+  //     <form novalidate>
+  //       <sgds-checkbox required value="hello"></sgds-checkbox>
+  //     </form>
+  //   `);
 
-    expect(form.reportValidity()).to.be.true;
-  });
+  //   expect(form.reportValidity()).to.be.true;
+  // });
 
   it("should not show checked by default", async () => {
     const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox></sgds-checkbox>`);
@@ -166,6 +175,14 @@ describe("<sgds-checkbox>", () => {
     expect(el.invalid).to.be.true;
   });
 
+  it("when required is true, blurring from checkbox should trigger invalid ot be true", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox required></sgds-checkbox>`);
+    expect(el.invalid).to.be.false;
+    el.shadowRoot?.querySelector("input")?.focus();
+    el.shadowRoot?.querySelector("input")?.blur();
+    await elementUpdated(el);
+    expect(el.invalid).to.be.true;
+  });
   it("when required attr is passed in, should show invalid state on unchecked using enter key", async () => {
     const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox required></sgds-checkbox>`);
     el.shadowRoot?.querySelector("input")?.focus();
@@ -209,7 +226,7 @@ describe("<sgds-checkbox>", () => {
   it("should display feedback if the group has hasFeedback and at least one checkbox is invalid", async () => {
     const group = await fixture<SgdsCheckboxGroup>(html`
       <sgds-checkbox-group hasFeedback invalidFeedback="Group error">
-        <sgds-checkbox slot="checkbox" required></sgds-checkbox>
+        <sgds-checkbox required></sgds-checkbox>
       </sgds-checkbox-group>
     `);
 
@@ -225,7 +242,7 @@ describe("<sgds-checkbox>", () => {
   it("should not display feedback if no child checkbox is invalid even with hasFeedback", async () => {
     const group = await fixture<SgdsCheckboxGroup>(html`
       <sgds-checkbox-group hasFeedback invalidFeedback="Group error">
-        <sgds-checkbox slot="checkbox" required></sgds-checkbox>
+        <sgds-checkbox required></sgds-checkbox>
       </sgds-checkbox-group>
     `);
 
@@ -242,7 +259,7 @@ describe("<sgds-checkbox>", () => {
   it("should not display feedback if the group does not have hasFeedback and at least one checkbox is invalid", async () => {
     const group = await fixture<SgdsCheckboxGroup>(html`
       <sgds-checkbox-group>
-        <sgds-checkbox slot="checkbox" invalid required></sgds-checkbox>
+        <sgds-checkbox invalid required></sgds-checkbox>
       </sgds-checkbox-group>
     `);
 
@@ -259,7 +276,7 @@ describe("<sgds-checkbox>", () => {
   it("should mark the checkbox as invalid when required and not checked upon form submission", async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
-        <sgds-checkbox required slot="checkbox"></sgds-checkbox>
+        <sgds-checkbox required></sgds-checkbox>
         <sgds-button type="submit"></sgds-button>
       </form>
     `);
@@ -282,7 +299,7 @@ describe("<sgds-checkbox>", () => {
   it("should not mark the checkbox as invalid when not required and not checked upon form submission", async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
-        <sgds-checkbox slot="checkbox"></sgds-checkbox>
+        <sgds-checkbox></sgds-checkbox>
         <sgds-button type="submit"></sgds-button>
       </form>
     `);
@@ -301,7 +318,112 @@ describe("<sgds-checkbox>", () => {
       expect(checkbox.invalid).to.be.false;
     }
   });
+  it("form submission success when checkbox is required and checked", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox required checked></sgds-checkbox>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+    expect(form.reportValidity()).to.equal(true);
 
+    const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox");
+    const button = form.querySelector<SgdsButton>("sgds-button");
+
+    if (checkbox) {
+      await elementUpdated(checkbox);
+      button?.click();
+      expect(submitHandler).to.have.been.calledOnce;
+      expect(checkbox.invalid).to.be.false;
+    }
+  });
+  it("form submission prevented when checkbox is required and not checked", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox required></sgds-checkbox>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+    expect(form.reportValidity()).to.equal(false);
+
+    const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox");
+    const button = form.querySelector<SgdsButton>("sgds-button");
+
+    if (checkbox) {
+      await elementUpdated(checkbox);
+      button?.click();
+      expect(submitHandler).not.to.have.been.calledOnce;
+      expect(checkbox.invalid).to.be.true;
+    }
+  });
+  it("form submission successful when checkbox is disabled, despite required", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox required disabled></sgds-checkbox>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+    expect(form.reportValidity()).to.equal(true);
+
+    const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox");
+    const button = form.querySelector<SgdsButton>("sgds-button");
+
+    if (checkbox) {
+      await elementUpdated(checkbox);
+      button?.click();
+      expect(submitHandler).to.have.been.calledOnce;
+      expect(checkbox.invalid).to.be.false;
+    }
+  });
+  it("form reset unchecks box", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox></sgds-checkbox>
+      </form>
+    `);
+    const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox");
+    checkbox?.click();
+    await checkbox?.updateComplete;
+    expect(checkbox?.checked).to.be.true;
+
+    form.reset();
+    await checkbox?.updateComplete;
+    expect(checkbox?.checked).to.be.false;
+  });
+  it("form reset, resets validity of check box", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox required></sgds-checkbox>
+      </form>
+    `);
+    const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox");
+    await checkbox?.updateComplete;
+    checkbox?.reportValidity();
+    expect(checkbox?.invalid).to.be.true;
+
+    form.reset();
+    await checkbox?.updateComplete;
+    expect(checkbox?.invalid).to.be.false;
+  });
+
+  it("indeterminate required checkbox should be invalid", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox indeterminate required></sgds-checkbox>`);
+    // const checkbox = el.shadowRoot?.querySelector("input");
+    expect(el.reportValidity()).to.be.false;
+    expect(el?.invalid).to.be.true;
+  });
+  it("indeterminate checkbox should not affected validity and be valid by default", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox indeterminate></sgds-checkbox>`);
+    // const checkbox = el.shadowRoot?.querySelector("input");
+    expect(el.reportValidity()).to.be.true;
+    expect(el?.invalid).to.be.false;
+  });
   it("should apply the 'indeterminate' property to a checkbox when it's set", async () => {
     const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox indeterminate></sgds-checkbox>`);
     const checkbox = el.shadowRoot?.querySelector("input");

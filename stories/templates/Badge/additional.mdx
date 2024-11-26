@@ -1,0 +1,50 @@
+## Filled variants
+
+The default variant is `info`. Modify the `variant` prop to the intended value.
+
+- Use `info` badge to  additional information or context that might be helpful to the user but doesn’t require immediate attention. Commonly used for non-urgent updates, background details, or status labels.
+- Use `success` badge to indicates successful completion or positive status, often associated with actions like saving, submitting, or completing tasks. This badge typically uses green and reassures users that the intended action was successful.
+- Use `danger` badge to alert users of a critical error or failure. Users may be prevented to proceed until the issue is rectified. This badge is typically styled in red to signify urgency or caution.
+- Use `warning` badge to indicate a potential issue or risk that users should be aware of but might not require immediate action. It serves as a cautionary signal, commonly styled in yellow or orange.
+- Use `neutral` badge to provide general information or categorization that doesn’t require immediate attention or imply any urgency. It typically has a muted or gray color to avoid drawing too much focus.
+
+Filled badges are typically more visually prominent and are suitable for urgent, high-priority, or primary information.
+
+<Canvas of={BadgeStories.Variants}>
+  <Story of={BadgeStories.Variants} />
+</Canvas>
+
+ ## Outlined variants
+
+Outlined badges have a lighter appearance, making them more subtle, which is suitable for informative tags or less critical content.
+
+<Canvas of={BadgeStories.OutlinedVariants}>
+  <Story of={BadgeStories.OutlinedVariants} />
+</Canvas>
+
+
+## Dismissible 
+
+A dismissible badge is used to display temporary information or alerts that users can remove once they've acknowledged or no longer need. It helps keep the interface clean and gives users control over what content remains visible.
+
+When using `dismissible` is true, `show` prop is used to control the appearance of the badge. Mark `show` as true when using dismissible badges.
+When the close button on badge is clicked to closed, the badge component sets `show` to false.
+
+<Canvas of={BadgeStories.Dismissible}>
+  <Story of={BadgeStories.Dismissible} />
+</Canvas>
+
+
+## Icon 
+
+A badge with a leading icon is used to quickly convey the purpose or status of the badge through a visual symbol, enhancing recognition and clarity. 
+It is ideal for status indicators, categorisation, or alert messages, and helps users instantly understand the badge's meaning.
+
+The leading icon is added via `slot="icon"`.
+
+**NOTE**: Dismissible badges cannot have leading icon to prevent confusion with the clickable close button
+
+
+<Canvas of={BadgeStories.WithIcon}>
+  <Story of={BadgeStories.WithIcon} />
+</Canvas>

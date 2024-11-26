@@ -14,10 +14,12 @@ describe("SgdsBadge component", () => {
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("sgds-close-button")).to.exist;
   });
-  it("should render the leftIcon slot", async () => {
-    const el = await fixture<SgdsBadge>(html`<sgds-badge show><span slot="leftIcon">Icon</span></sgds-badge>`);
+  it("should render the icon slot", async () => {
+    const el = await fixture<SgdsBadge>(
+      html`<sgds-badge show><sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>Badge</sgds-badge>`
+    );
     await elementUpdated(el);
-    expect(el.shadowRoot?.querySelector("slot[name='leftIcon']")).to.exist;
+    expect(el.shadowRoot?.querySelector("slot[name='icon']")).to.exist;
   });
   it("should not render a close button when dismissible is false", async () => {
     const el = await fixture<SgdsBadge>(html`<sgds-badge show></sgds-badge>`);

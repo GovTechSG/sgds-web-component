@@ -46,7 +46,7 @@
 :host([variant="warning"][outlined]) {
   --sgds-badge-bg: var(--sgds-danger-bg-subtle);
   --sgds-badge-color: var(--sgds-default-color-on-light);
-  --sgds-badge-border-color: var(--sgds-danger-border-color-subtle);
+  --sgds-badge-border-color: var(--sgds-warning-border-color-subtle);
 }
 
 :host([variant="neutral"][outlined]) {
@@ -86,8 +86,8 @@
   --sgds-close-btn-border-radius: var(--sgds-badge-border-radius);
 }
 
-slot[name=leftIcon]::slotted(*){
-  font-size: var(--sgds-icon-size-sm);
+slot[name="icon"]::slotted(*){
+  color: var(--sgds-badge-color);
 } 
 
 slot::slotted(*){
