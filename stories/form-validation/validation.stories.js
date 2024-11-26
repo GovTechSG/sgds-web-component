@@ -17,14 +17,14 @@ const ConstraintValidationTemplate = args => {
         pattern="Sarah"
       >
       </sgds-input>
-      <sgds-quantity-toggle
+      <!-- <sgds-quantity-toggle
         label="Number of dependents"
         name="dependentCount"
         min="1"
         max="10"
         hinttext="Input number 1 to 10 only"
         hasFeedback="both"
-      ></sgds-quantity-toggle>
+      ></sgds-quantity-toggle> -->
       <sgds-checkbox-group hasFeedback hintText="hint for checkbox" label="Agreements">
         <sgds-checkbox name="consentA" value="consentA" required>I consent to ...</sgds-checkbox>
       </sgds-checkbox-group>
@@ -75,14 +75,14 @@ const FormDataTemplate = args => {
         pattern="Sarah"
       >
       </sgds-input>
-      <sgds-quantity-toggle
+      <!-- <sgds-quantity-toggle
         label="Number of dependents"
         name="dependentCount"
         min="1"
         max="10"
         hinttext="Input number 1 to 10 only"
         hasFeedback="both"
-      ></sgds-quantity-toggle>
+      ></sgds-quantity-toggle> -->
       <sgds-checkbox-group hasFeedback hintText="hint for checkbox" label="Agreements">
         <sgds-checkbox name="consentA" value="consentA" required>I consent to ...</sgds-checkbox>
       </sgds-checkbox-group>
@@ -122,7 +122,7 @@ const FormDataTemplate = args => {
       form.addEventListener("submit", event => {
         let data = {
           firstName: "",
-          dependentCount: 0,
+          //dependentCount: 0,
           consentA: false,
           gender: "",
           comments: ""
@@ -130,7 +130,7 @@ const FormDataTemplate = args => {
         event.preventDefault();
         const formData = new FormData(event.target);
         data.firstName = formData.get("firstName");
-        data.dependentCount = formData.get("dependentCount");
+        //data.dependentCount = formData.get("dependentCount");
         data.consentA = formData.get("consentA") === "on";
         data.gender = formData.get("gender");
         data.comments = formData.get("comments");
