@@ -141,7 +141,6 @@ const FormDataTemplate = args => {
           formData.append(fileName, fileInput.selectedFiles[i]);
           data[fileName] = fileInput.selectedFiles[i];
         }
-
         alert(JSON.stringify(data));
         // submit FormData
       });

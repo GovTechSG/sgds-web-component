@@ -45,8 +45,8 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(F
   /** Makes the input as a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
-  @property()
-  selectedFiles: File[] = [];
+  @state()
+  private selectedFiles: File[] = [];
 
   /**
    * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
@@ -72,6 +72,12 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(F
    */
   public get validationMessage(): string {
     return this._mixinGetValidationMessage();
+  }
+  /**
+   * Returns files selected for upload
+   */
+  public get files(): File[] {
+    return this.selectedFiles
   }
 
   private _setFileList(files: FileList) {
