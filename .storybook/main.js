@@ -23,6 +23,7 @@ module.exports = {
     "../stories/components/Stepper.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Switch.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Textarea.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/components/Tooltip.@(mdx|stories.@(js|jsx|ts|tsx))",
     // "../stories/components/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/form-validation/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/*.mdx"
