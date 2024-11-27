@@ -9,6 +9,7 @@ import { Button } from "./components/Button";
 import { Card } from "./components/Card";
 import { Combobox } from "./components/Combobox";
 import { Datepicker } from "./components/Datepicker";
+import { Divider } from "./components/Divider";
 import { Drawer } from "./components/Drawer";
 import { Dropdown } from "./components/Dropdown";
 import { FileUpload } from "./components/FileUpload";
@@ -23,6 +24,7 @@ import { QuantityToggle } from "./components/QuantityToggle";
 import { Radio } from "./components/Radio";
 import { Sidenav } from "./components/Sidenav";
 import { Spinner } from "./components/Spinner";
+import { Skeleton } from "./components/Skeleton";
 import { Stepper } from "./components/Stepper";
 import { Tab } from "./components/Tab";
 import { Table } from "./components/Table";
@@ -45,6 +47,7 @@ function App() {
       <Combobox />
       <Datepicker />
       <Drawer />
+      <Divider />
       <Dropdown />
       <FileUpload />
       <Input />
@@ -55,6 +58,7 @@ function App() {
       <Radio />
       <Sidenav />
       <Spinner />
+      <Skeleton />
       <Stepper />
       <Tab />
       <Table />

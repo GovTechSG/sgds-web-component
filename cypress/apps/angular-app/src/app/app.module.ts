@@ -14,6 +14,7 @@ import { Card } from "../components/card/card.component";
 import { Checkbox } from "../components/checkbox/checkbox.component";
 import { Combobox } from "../components/combobox/combobox.component";
 import { Datepicker } from "../components/datepicker/datepicker.component";
+import { Divider } from "../components/divider/divider.component";
 import { Drawer } from "../components/drawer/drawer.component";
 import { Dropdown } from "../components/dropdown/dropdown.component";
 import { FileUpload } from "../components/fileupload/fileupload.component";
@@ -28,6 +29,7 @@ import { QuantityToggle } from "../components/quantitytoggle/quantitytoggle.comp
 import { Radio } from "../components/radio/radio.component";
 import { Sidenav } from "../components/sidenav/sidenav.component";
 import { Spinner } from "../components/spinner/spinner.component";
+import { Skeleton } from "../components/skeleton/skeleton.component";
 import { Stepper } from "../components/stepper/stepper.component";
 import { Tab } from "../components/tab/tab.component";
 import { Table } from "../components/table/table.component";
@@ -48,6 +50,7 @@ import { Tooltip } from "../components/tooltip/tooltip.component";
     Checkbox,
     Combobox,
     Datepicker,
+    Divider,
     Drawer,
     Dropdown,
     FileUpload,
@@ -62,6 +65,7 @@ import { Tooltip } from "../components/tooltip/tooltip.component";
     Radio,
     Sidenav,
     Spinner,
+    Skeleton,
     Stepper,
     Tab,
     Table,
