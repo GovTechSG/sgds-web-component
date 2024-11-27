@@ -15,13 +15,9 @@ import accordionItemStyle from "./accordion-item.css";
  * @event sgds-hide - Emitted on hide.
  * @event sgds-after-hide - Emitted on hide after animation has completed.
  *
- * @csspart base - The accordion-item base wrapper.
- * @csspart header - The accordion-item button header.
- * @csspart content - The accordion-item content.
- *
- * @slot accordion-header - The accordion-item button header slot.
- * @slot accordion-content - The accordion-item content slot.
- * @slot accordion-caret - The caret icon of accordion-item.
+ * @slot header - The accordion-item button header slot.
+ * @slot content - The accordion-item content slot.
+ * @slot caret - The caret icon of accordion-item.
  *
  */
 export class SgdsAccordionItem extends SgdsElement {
@@ -136,7 +132,6 @@ export class SgdsAccordionItem extends SgdsElement {
   render() {
     return html`
       <div
-        part="base"
         class=${classMap({
           "accordion-item": true
         })}
@@ -148,7 +143,6 @@ export class SgdsAccordionItem extends SgdsElement {
             collapsed: !this.open
           })}
           ?disabled=${this.disabled}
-          part="header"
           role="button"
           aria-expanded=${this.open ? "true" : "false"}
           aria-disabled=${this.disabled ? "true" : "false"}
@@ -157,8 +151,8 @@ export class SgdsAccordionItem extends SgdsElement {
           @click=${this.handleSummaryClick}
           @keydown=${this.handleSummaryKeyDown}
         >
-          <slot name="accordion-header"></slot>
-          <slot name="accordion-caret">
+          <slot name="header"></slot>
+          <slot name="caret">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
                 fill-rule="evenodd"
@@ -170,13 +164,7 @@ export class SgdsAccordionItem extends SgdsElement {
           </slot>
         </button>
         <div class="accordion-body">
-          <slot
-            id="content"
-            name="accordion-content"
-            class="accordion-content"
-            role="region"
-            aria-labelledby="header"
-          ></slot>
+          <slot id="content" name="content" class="content" role="region" aria-labelledby="header"></slot>
         </div>
       </div>
     `;

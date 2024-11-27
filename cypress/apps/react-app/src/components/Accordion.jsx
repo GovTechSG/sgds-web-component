@@ -6,26 +6,26 @@ export const Accordion = () => {
         <>
             <SgdsAccordion accordionclasses="mb-4">
                 <SgdsAccordionItem>
-                    <div  slot="accordion-header">This is a solo accordion</div>
-                    <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</span>
+                    <div  slot="header">This is a solo accordion</div>
+                    <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</span>
                 </SgdsAccordionItem>
             </SgdsAccordion>
             <SgdsAccordion>
                 <SgdsAccordionItem>
-                    <div  slot="accordion-header">This is an accordion</div>
-                    <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</span>
+                    <div  slot="header">This is an accordion</div>
+                    <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</span>
                 </SgdsAccordionItem>
                 <SgdsAccordionItem>
-                    <div  slot="accordion-header">Accordion 1</div>
-                    <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</span>
+                    <div  slot="header">Accordion 1</div>
+                    <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</span>
                 </SgdsAccordionItem>
                 <SgdsAccordionItem open="">
-                    <div slot="accordion-header">Accordion 2</div>
-                    <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</span>
+                    <div slot="header">Accordion 2</div>
+                    <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</span>
                 </SgdsAccordionItem>
                 <SgdsAccordionItem>
-                    <div  slot="accordion-header">Accordion 3</div>
-                    <span slot="accordion-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</span>
+                    <div  slot="header">Accordion 3</div>
+                    <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</span>
                 </SgdsAccordionItem>
             </SgdsAccordion>
         </>
