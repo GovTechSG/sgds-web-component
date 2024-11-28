@@ -21,7 +21,7 @@ let id = 0;
 export class SgdsTab extends SgdsElement {
   static styles = [tabStyle];
   /**@internal */
-  @query(".nav-item") tab: HTMLElement;
+  @query(".tab") tab: HTMLElement;
   /**@internal */
   private readonly attrId = ++id;
   /**@internal */
@@ -33,18 +33,18 @@ export class SgdsTab extends SgdsElement {
   /** Draws the tab in an active state. When used with tab group, this state is already managed. Use it to set the initial active tab on first load of page */
   @property({ type: Boolean, reflect: true }) active = false;
   @property({ type: Boolean, reflect: true }) disabled = false;
-  @property({ reflect: true, attribute: true }) variant: 'underlined' | 'solid';
-  @property({ type: String, reflect: true }) orientation: 'horizontal' | 'vertical';
+  @property({ reflect: true, attribute: true }) variant: "underlined" | "solid";
+  @property({ type: String, reflect: true }) orientation: "horizontal" | "vertical";
 
-  @property({ type: String, reflect: true }) density: 'default' | 'compact' = 'default';
+  @property({ type: String, reflect: true }) density: "default" | "compact" = "default";
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute("role", "tab");
+
   }
   /** Sets focus to the tab. */
   public focus(options?: FocusOptions) {
-    this.tab.focus(options);
+    (this.shadowRoot?.querySelector('.tab') as HTMLElement)?.focus(options);
   }
 
   /** Removes focus from the tab. */
@@ -52,51 +52,31 @@ export class SgdsTab extends SgdsElement {
     this.tab.blur();
   }
 
-
-
-
-
   render() {
     // If the user didn't provide an ID, we'll set one so we can link tabs and tab panels with aria labels
     this.id = this.id.length > 0 ? this.id : this.componentId;
     //const parentVariantAttr = this.closest("sgds-tab-group").getAttribute("variant");
     //const parentOrientationAttr = this.closest("sgds-tab-group").getAttribute("orientation");
-    const tabsInfo = html`
-      <div class="tabs-info-label">
-          <div class = "icon-container">
-          ${this.variant === 'solid'
-        ? html`
-                <div class="tab">
-                  <slot name="icon"></slot>
-                  <slot name="label"></slot>
-                </div>
-              `
-        : html`
-                <slot name="icon"></slot>
-                <slot name="label"></slot>
-              `}
-        </div>
-      </div>
-    `;
+
     return html`
-      <ul class="list-unstyled">
-        <li part="base" class="nav-item" tabindex=${this.disabled ? "-1" : "0"}>
-          <div
-          aria-selected=${this.active ? " true" : "false"}
-            class="${classMap({
-      "tab-item": true,
+      <div
+        role="tab"
+        data-testid="inner-tab"
+        tabindex=${this.disabled ? "-1" : "0"}
+        aria-selected=${this.active ? "true" : "false"}
+        aria-disabled= ${this.disabled ? "true" : "false"}
+        class="${classMap({
+      "tab": true,
       active: this.active,
       disabled: this.disabled,
       variant: this.variant,
       orientation: this.orientation,
       density: this.density
-
     })}"
-          >
-          ${tabsInfo}
-          </div>
-        </li>
-      </ul>
+      >
+        <slot name="icon"></slot>
+        <slot name="label"></slot>
+      </div>
     `;
   }
 }

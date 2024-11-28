@@ -1,221 +1,81 @@
-:host {
-  display: inline-block;
-}
-
-/* Remove bullet points from ul and li within the host */
-:host ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-:host li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.icon-container {
-  display: flex;
-  align-items: center;
-  gap: var(--sgds-tabs-gap, var(--sgds-spacer-3, 0.5rem));
-
-}
-
-:host([variant="solid"][density="compact"][orientation="horizontal"]) .tab,
-:host([variant="solid"][density="compact"][orientation="vertical"]) .tab,
-:host([variant="solid"][density="compact"][orientation="horizontal"][active]) .tab,
-:host([variant="solid"][density="compact"][orientation="vertical"][active]) .tab {
-  padding: var(--sgds-spacer-3) var(--sgds-spacer-5, 1rem);
+:host([density="compact"]) .tab {
+  padding: var(--sgds-spacer-3) var(--sgds-spacer-5);
   font-size: var(--sgds-font-size-1);
-  font-weight: var(--sgds-font-weight-regular);
 }
 
-:host([variant="solid"][orientation="horizontal"]) .tab {
-  background-color: var(--sgds-gray-100);
-  color: var(--sgds-black);
-  border: var(--sgds-border-width-1) solid var(--sgds-default-border-color-transparent);
+:host(:not([active])) .tab {
+  cursor: pointer;
+}
+
+:host([variant="solid"]) .tab {
+  background-color: var(--sgds-default-bg-translucent-subtle);
   border-radius: var(--sgds-border-radius-md);
-  font-size: var(--sgds-font-size-2);
-  padding: var(--sgds-spacer-4, 0.75rem) var(--sgds-spacer-5, 1rem);
-  display: inline-flex;
-  align-items: center;
-  font-weight: var(--sgds-font-weight-regular);
-  height: var(--sgds-dimension-24);
-  min-width: var(--sgds-dimension-24);
-  gap: var(--sgds-spacer-3)
 }
 
-:host([variant="solid"][orientation="horizontal"][active]) .tab {
+:host([variant="solid"][active]) .tab {
   background-color: var(--sgds-primary-color);
-  color: var(--sgds-white, white);
-  padding: var(--sgds-spacer-4) var(--sgds-spacer-5);
-  border-radius: var(--sgds-border-radius-md);
-  font-size: var(--sgds-font-size-2);
-  font-weight: var(--sgds-font-weight-regular);
-  gap: var(--sgds-spacer-3)
+  color: var(--sgds-default-color-on-dark);
 }
 
-:host([variant="solid"]:not([active]):not([disabled])) .tab-item:hover .tab {
+:host([variant="solid"]:not([active]):not([disabled])) .tab:hover {
   background-color: var(--sgds-gray-300);
-  cursor: pointer;
 }
 
-
-:host([variant="underlined"][disabled]) .tab-item {
+:host([disabled]) .tab {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-:host([variant="solid"][disabled]) .tab-item {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-
-:host([variant="solid"][orientation="vertical"][active]) .tab {
-  display: flex;
-  width: 100%;
-  align-items: left;
-  justify-content: left;
-  color: var(--sgds-white, white);
-  background-color: var(--sgds-primary-color);
-  padding: var(--sgds-spacer-4) var(--sgds-spacer-5);
-  border-radius: var(--sgds-border-radius-md);
-  font-size: var(--sgds-font-size-2);
-  font-weight: var(--sgds-font-weight-regular);
-  cursor: pointer;
-  gap: var(--sgds-spacer-3)
-}
-
-:host([variant="solid"][orientation="vertical"]:not([active])) .tab {
-  display: flex;
-  width: 100%;
-  align-items: left;
-  justify-content: left;
-  background-color: var(--sgds-gray-100);
-  padding: var(--sgds-spacer-4) var(--sgds-spacer-5);
-  border-radius: var(--sgds-border-radius-md);
-  font-size: var(--sgds-font-size-2);
-  font-weight: var(--sgds-font-weight-regular);
-  cursor: pointer;
-  gap: var(--sgds-spacer-3)
-}
-
-/* :host([variant="underlined"][active][orientation="vertical"]) ul {
-
-  display: flex;
-  flex-direction: column;
-  border-right: var(--sgds-border-width-1, 1px) solid var(--sgds-default-border-color-muted, #D2D2D2);
-} */
-
-
-:host([variant="underlined"][orientation="vertical"]:not([active])) ul {
-  display: flex;
-  flex-direction: column;
+:host([variant="underlined"][orientation="vertical"]) .tab {
   border-right: var(--sgds-border-width-1) solid var(--sgds-default-border-color-muted);
 }
 
-/* Active state for vertical orientation */
-:host([variant="underlined"][active][orientation="vertical"]) ul {
-  display: flex;
-  flex-direction: column;
-  list-style: none;
-  position: relative;
-}
-
-/* Add the colored line on the side */
-:host([variant="underlined"][active][orientation="vertical"]) ul::after {
+:host([variant="underlined"][orientation="vertical"][active]) .tab::after,
+:host([variant="underlined"][orientation="vertical"]:not([disabled])) .tab:hover::after {
   content: '';
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 0.3125rem;
+  bottom: 0;
+  right: -1px;
+  width: var(--sgds-border-width-4);
   height: 100%;
   background-color: var(--sgds-primary-color);
 }
 
-
-
-/* Container with a continuous underline */
-:host([variant="underlined"][orientation="horizontal"]:not([active])) ul {
-  display: flex;
+:host([variant="underlined"][orientation="horizontal"]) .tab {
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-default-border-color-muted);
-  list-style: none;
 }
 
-:host([variant="underlined"][active][orientation="horizontal"]) ul {
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-  position: relative;
-  /* Necessary for positioning the ::after pseudo-element */
-}
-
-/* Add the colored line at the bottom */
-:host([variant="underlined"][active][orientation="horizontal"]) ul::after {
+:host([variant="underlined"][orientation="horizontal"][active]) .tab::after,
+:host([variant="underlined"][orientation="horizontal"]:not([disabled])) .tab:hover::after {
   content: '';
   position: absolute;
-  bottom: -0.0625rem;
+  bottom: -1px;
   left: 0;
+  height: var(--sgds-border-width-4);
   width: 100%;
-  height: 0.3125rem;
   background-color: var(--sgds-primary-color);
 }
 
-:host([variant="underlined"][orientation="vertical"]:not([active]):not([disabled])) .tab-item:hover::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: -0.0625rem;
-  width: 0.3125rem;
-  height: 100%;
-  background-color: var(--sgds-default-border-color);
+:host([variant="underlined"][orientation="vertical"]:not([active]):not([disabled])) .tab:hover::after,
+:host([variant="underlined"][orientation="horizontal"]:not([active]):not([disabled])) .tab:hover::after {
+  background-color: var(--sgds-default-bg-subtle);
 }
 
-:host([variant="underlined"][orientation="horizontal"]:not([active]):not([disabled])) .tab-item:hover::after {
-  content: '';
-  position: absolute;
-  bottom: -0.0625rem;
-  left: 0;
-  width: 100%;
-  height: 0.3125rem;
-  background-color: var(--sgds-default-border-color);
-}
-
-
-/* Basic styling for each tab item */
-:host([variant="underlined"]) .tab-item {
-  padding: var(--sgds-spacer-4) var(--sgds-spacer-5, 1rem);
-  font-size: var(--sgds-font-size-2);
-  font-weight: var(--sgds-font-weight-regular);
+.tab {
+  display: flex;
+  align-items: center;
+  gap: var(--sgds-spacer-3);
+  padding: var(--sgds-spacer-4) var(--sgds-spacer-5);
+  color: var(--sgds-default-color-emphasis);
   position: relative;
-  cursor: pointer;
-  text-align: center;
-  list-style: none;
 }
 
-:host([variant="underlined"][density="compact"]) .tab-item {
-  padding: var(--sgds-spacer-3, 0.55rem) var(--sgds-spacer-5, 1rem);
-  font-size: var(--sgds-font-size-1);
-  font-weight: var(--sgds-font-weight-regular);
-  position: relative;
-  text-align: center;
-  list-style: none;
+.tab:focus,
+.tab:focus-visible {
+  background-color: var(--sgds-btn-hover-bg);
+  box-shadow: var(--sgds-box-shadow-focus);
+  outline: 0;
 }
-
-
-
-/* Active tab styling with purple text and thicker underline */
-
-:host([variant="underlined"][active]) .tab-item {
-  color: var(--sgds-primary-color);
-  list-style: none;
-  /* Primary color for active text */
-
-}
-
-
 
 /* .nav-link {
   color: var(--sgds-body-color);
