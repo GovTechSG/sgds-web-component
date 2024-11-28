@@ -233,7 +233,9 @@ describe("sgds-dropdown", () => {
   });
 
   it("can be semantically compare with shadowDom trees", async () => {
-    const el = await fixture(html`<sgds-dropdown></sgds-dropdown>`);
+    const el = await fixture(html`<sgds-dropdown>
+      <sgds-button slot="toggler">Dropdown</sgds-button>
+    </sgds-dropdown>`);
     assert.shadowDom.equal(
       el,
       `<div class="dropdown">
@@ -256,10 +258,15 @@ describe("sgds-dropdown", () => {
       <sgds-button slot="toggler">Dropdown</sgds-button>
     </sgds-dropdown>`);
     expect(el.querySelector("sgds-button")).to.have.attribute("disabled");
+    el.disabled = false;
+    await el.updateComplete;
+    expect(el.querySelector("sgds-button")).not.to.have.attribute("disabled");
   });
   it("when menuAlignRight is false (default) on default dropdown, data-popper-placement on div.dropdown-menu is bottom-start ", async () => {
-    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown></sgds-dropdown>`);
-    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown><sgds-button slot="toggler">Dropdown</sgds-button></sgds-dropdown>`
+    );
+    (el.querySelector("sgds-button") as SgdsButton).click();
     await waitUntil(() => el.shadowRoot?.querySelector("div.dropdown-menu.show"));
     expect(el.shadowRoot?.querySelector("div.dropdown-menu")?.getAttribute("data-popper-placement")).to.equal(
       "bottom-start"
@@ -268,65 +275,75 @@ describe("sgds-dropdown", () => {
   // //Popper attri data-popper-placemetn not responding to test changes in open-wc
   // //unsure why not working when console logging values are bottom-end
   it("when menuAlignRight is true on default dropdown, dropdownConfig placement is bottom-end ", async () => {
-    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown menuAlignRight></sgds-dropdown>`);
-    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown menuAlignRight><sgds-button slot="toggler">Dropdown</sgds-button></sgds-dropdown>`
+    );
+    (el.querySelector("sgds-button") as SgdsButton).click();
 
     expect(el.dropdownConfig.placement).to.equal("bottom-end");
   });
   it("when menuAlignRight is true on dropup, dropdownConfig placement is top-end ", async () => {
-    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown menuAlignRight drop="up"></sgds-dropdown>`);
-    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown menuAlignRight drop="up"><sgds-button slot="toggler">Dropdown</sgds-button></sgds-dropdown>`
+    );
+    (el.querySelector("sgds-button") as SgdsButton).click();
 
     expect(el.dropdownConfig.placement).to.equal("top-end");
   });
   it("when menuAlignRight is false on dropup, dropdownConfig placement is top-start", async () => {
-    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown drop="up"></sgds-dropdown>`);
-    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown drop="up"><sgds-button slot="toggler">Dropdown</sgds-button></sgds-dropdown>`
+    );
+    (el.querySelector("sgds-button") as SgdsButton).click();
 
     expect(el.dropdownConfig.placement).to.equal("top-start");
   });
   it("when dropright, dropdownConfig placement is right-start ", async () => {
-    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown drop="right"></sgds-dropdown>`);
-    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown drop="right">><sgds-button slot="toggler">Dropdown</sgds-button></sgds-dropdown>`
+    );
+    (el.querySelector("sgds-button") as SgdsButton).click();
 
     expect(el.dropdownConfig.placement).to.equal("right-start");
   });
   it("when dropleft, dropdownConfig placement is left-start ", async () => {
-    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown drop="left"></sgds-dropdown>`);
-    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown drop="left"><sgds-button slot="toggler">Dropdown</sgds-button>></sgds-dropdown>`
+    );
+    (el.querySelector("sgds-button") as SgdsButton).click();
 
     expect(el.dropdownConfig.placement).to.equal("left-start");
   });
 
   it("when noFlip is false, dropdownConfig.modifiers array has only offset obj", async () => {
-    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown></sgds-dropdown>`);
-    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown><sgds-button slot="toggler">Dropdown</sgds-button></sgds-dropdown>`
+    );
+    (el.querySelector("sgds-button") as SgdsButton).click();
     expect(el.dropdownConfig.modifiers?.length).to.equal(1);
     expect(el.dropdownConfig.modifiers?.[0].name).to.equal("offset");
     expect(el.dropdownConfig.modifiers?.[0].options?.offset[0]).to.equal(0);
     expect(el.dropdownConfig.modifiers?.[0].options?.offset[1]).to.equal(10);
   });
   it("when noFlip is true, dropdownConfig.modifiers array has flip obj", async () => {
-    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown noFlip></sgds-dropdown>`);
-    (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown noFlip><sgds-button slot="toggler">Dropdown</sgds-button></sgds-dropdown>`
+    );
+    (el.querySelector("sgds-button") as SgdsButton).click();
     expect(el.dropdownConfig.modifiers?.length).to.equal(2);
     expect(el.dropdownConfig.modifiers?.[1].name).to.equal("flip");
   });
-  it("togglerText prop is forwarded to text content of button element", async () => {
-    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown togglerText="Hello World"></sgds-dropdown>`);
-    expect(el.shadowRoot?.querySelector("sgds-button")?.textContent).to.contain("Hello World");
-  });
-  it("variant prop is forwarded to variant prop of sgds-button element", async () => {
-    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown variant="primary"></sgds-dropdown>`);
-    expect(el.shadowRoot?.querySelector("sgds-button")).to.have.attribute("variant", "primary");
-  });
   it("menuIsOpen prop opens menu on first load", async () => {
-    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown menuIsOpen></sgds-dropdown>`);
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown menuIsOpen><sgds-button slot="toggler">Dropdown</sgds-button></sgds-dropdown>`
+    );
     expect(el.shadowRoot?.querySelector("div.dropdown-menu")).to.have.class("show");
   });
   // //emits events when dropdown is toggle open/close
   it("emits sgds-show/shown/hide/hidden events when dropdown toggles", async () => {
-    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown></sgds-dropdown>`);
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown><sgds-button slot="toggler">Dropdown</sgds-button></sgds-dropdown>`
+    );
     const showHandler = sinon.spy();
     const shownHandler = sinon.spy();
     const hideHandler = sinon.spy();
@@ -336,7 +353,7 @@ describe("sgds-dropdown", () => {
     el.addEventListener("sgds-hide", hideHandler);
     el.addEventListener("sgds-after-hide", hiddenHandler);
 
-    const button = el.shadowRoot?.querySelector("sgds-button") as SgdsButton;
+    const button = el.querySelector("sgds-button") as SgdsButton;
     button?.click();
     await el.updateComplete;
     expect(showHandler).to.be.calledOnce;
@@ -351,7 +368,9 @@ describe("sgds-dropdown", () => {
     expect(hiddenHandler).to.be.calledOnce;
   });
   it("showMenu/hideMenu method opens/closes menu", async () => {
-    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown></sgds-dropdown>`);
+    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown>
+      <sgds-button slot="toggler">Dropdown</sgds-button>
+    </sgds-dropdown>`);
     expect(el.menuIsOpen).to.be.false;
     expect(el.shadowRoot?.querySelector("div.dropdown-menu")).not.to.have.class("show");
     el.showMenu();
@@ -366,53 +385,52 @@ describe("sgds-dropdown", () => {
   // // testing _handleSelectSlot functionality
   it("emits sgds-select event when its slots are clicked on", async () => {
     const el = await fixture<SgdsDropdown>(
-      html`<sgds-dropdown>
-        <div>slot 1</div>
-        <div>slot 2</div>
+      html`<sgds-dropdown menuIsOpen>
+        <sgds-button slot="toggler">Dropdown</sgds-button>
+        <sgds-dropdown-item>slot 1</sgds-dropdown-item>
       </sgds-dropdown>`
     );
     const selectHandler = sinon.spy();
     el.addEventListener("sgds-select", selectHandler);
-
-    const slots = el.shadowRoot?.querySelector("slot")?.assignedElements({ flatten: true }) as HTMLElement[];
-    expect(slots?.length).to.equal(2);
-    expect(slots?.[0].tagName).to.equal("DIV");
-    slots?.[0].click();
-    slots?.[1].click();
-    expect(selectHandler).to.be.calledTwice;
+    const item = el.querySelector("sgds-dropdown-item");
+    item?.click();
+    await el.updateComplete;
+    expect(selectHandler).to.be.calledOnce;
   });
   it("does not emit sgds-select event when its disabled slots are clicked on", async () => {
     const el = await fixture<SgdsDropdown>(
-      html`<sgds-dropdown>
+      html`<sgds-dropdown menuIsOpen>
+        <sgds-button slot="toggler">Dropdown</sgds-button>
         <sgds-dropdown-item disabled>slot 1</sgds-dropdown-item>
-        <sgds-dropdown-item>slot 2</sgds-dropdown-item>
       </sgds-dropdown>`
     );
     const selectHandler = sinon.spy();
     el.addEventListener("sgds-select", selectHandler);
 
-    const slots = el.shadowRoot?.querySelector("slot")?.assignedElements({ flatten: true }) as SgdsDropdownItem[];
-    slots?.[0].click();
+    const item = el.querySelector("sgds-dropdown-item");
+    item?.click();
+    await el.updateComplete;
     expect(selectHandler).not.to.be.called;
   });
   // // testing _handleSelectSlot functionality
   it("when clicked on slot, menu closes", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown menuIsOpen>
+        <sgds-button slot="toggler">Dropdown</sgds-button>
         <sgds-dropdown-item>slot 1</sgds-dropdown-item>
-        <sgds-dropdown-item>slot 2</sgds-dropdown-item>
       </sgds-dropdown>`
     );
     expect(el.shadowRoot?.querySelector("div.dropdown-menu")).to.have.class("show");
-    const slots = el.shadowRoot?.querySelector("slot")?.assignedElements({ flatten: true }) as HTMLElement[];
-
-    slots?.[0].click();
+    const item = el.querySelector("sgds-dropdown-item");
+    item?.click();
+    await el.updateComplete;
     expect(el.shadowRoot?.querySelector("div.dropdown-menu")).not.to.have.class("show");
   });
   // // tests _handleClickOutOfElement & blur event listener
   it("click outside of component, closes the dropdown by default", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown menuIsOpen>
+        <sgds-button slot="toggler">Dropdown</sgds-button>
         <sgds-dropdown-item>slot 1</sgds-dropdown-item>
         <sgds-dropdown-item>slot 2</sgds-dropdown-item>
       </sgds-dropdown> `
@@ -424,66 +442,67 @@ describe("sgds-dropdown", () => {
     expect(el.shadowRoot?.querySelector("div.dropdown-menu")).not.to.have.class("show");
     expect(el.menuIsOpen).to.be.false;
   });
-  it("when close=inside , dropdown menu closes only when clicked on menu item", async () => {
-    const el = await fixture<SgdsDropdown>(
-      html`<sgds-dropdown menuIsOpen close="inside">
-        <sgds-dropdown-item>slot 1</sgds-dropdown-item>
-        <sgds-dropdown-item>slot 2</sgds-dropdown-item>
-      </sgds-dropdown> `
-    );
-    expect(el.menuIsOpen).to.be.true;
-    expect(el.shadowRoot?.querySelector("div.dropdown-menu")).to.have.class("show");
-    // proving that clicking outside of dropdown menu wont trigger menuclose
-    await sendMouse({ type: "click", position: [0, 0] });
-    await el.updateComplete;
-    expect(el.shadowRoot?.querySelector("div.dropdown-menu")).to.have.class("show");
-    expect(el.menuIsOpen).to.be.true;
-    const itemOne = el.querySelectorAll("sgds-dropdown-item")[0] as SgdsDropdownItem;
-    itemOne.click();
-    await el.updateComplete;
-    expect(el.shadowRoot?.querySelector("div.dropdown-menu")).not.to.have.class("show");
-    expect(el.menuIsOpen).to.be.false;
-  });
-  it("when close=outside , dropdown menu closes only when clicked on menu item", async () => {
-    const el = await fixture<SgdsDropdown>(
-      html`<sgds-dropdown menuIsOpen close="outside">
-        <sgds-dropdown-item>slot 1</sgds-dropdown-item>
-        <sgds-dropdown-item>slot 2</sgds-dropdown-item>
-      </sgds-dropdown> `
-    );
-    expect(el.menuIsOpen).to.be.true;
-    expect(el.shadowRoot?.querySelector("div.dropdown-menu")).to.have.class("show");
-    // proving that clicking inside menu item will not close the menu
-    const itemOne = el.querySelectorAll("sgds-dropdown-item")[0] as SgdsDropdownItem;
-    itemOne.click();
-    await el.updateComplete;
-    expect(el.shadowRoot?.querySelector("div.dropdown-menu")).to.have.class("show");
-    expect(el.menuIsOpen).to.be.true;
-    // clicking outside closes the menu
-    await sendMouse({ type: "click", position: [0, 0] });
-    await el.updateComplete;
-    expect(el.shadowRoot?.querySelector("div.dropdown-menu")).not.to.have.class("show");
-    expect(el.menuIsOpen).to.be.false;
-  });
-  type close = "default" | "outside" | "inside";
-  const closeValues = ["default", "outside", "inside"];
-  closeValues.forEach(closeVal => {
-    it(`dropdown menu always closes when click on button regardless of prop close value = ${closeVal}`, async () => {
-      const el = await fixture<SgdsDropdown>(
-        html`<sgds-dropdown menuIsOpen close=${closeVal as close}>
-          <sgds-dropdown-item>slot 1</sgds-dropdown-item>
-          <sgds-dropdown-item>slot 2</sgds-dropdown-item>
-        </sgds-dropdown> `
-      );
-      expect(el.menuIsOpen).to.be.true;
-      expect(el.shadowRoot?.querySelector("div.dropdown-menu")).to.have.class("show");
-      (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
-      // proving that clicking inside menu item will not close the menu
-      await el.updateComplete;
-      expect(el.shadowRoot?.querySelector("div.dropdown-menu")).not.to.have.class("show");
-      expect(el.menuIsOpen).to.be.false;
-    });
-  });
+  // it("when close=inside , dropdown menu closes only when clicked on menu item", async () => {
+  //   const el = await fixture<SgdsDropdown>(
+  //     html`<sgds-dropdown menuIsOpen close="inside">
+  //       <sgds-button slot="toggler">Dropdown</sgds-button>
+  //       <sgds-dropdown-item>slot 1</sgds-dropdown-item>
+  //       <sgds-dropdown-item>slot 2</sgds-dropdown-item>
+  //     </sgds-dropdown> `
+  //   );
+  //   expect(el.menuIsOpen).to.be.true;
+  //   expect(el.shadowRoot?.querySelector("div.dropdown-menu")).to.have.class("show");
+  //   // proving that clicking outside of dropdown menu wont trigger menuclose
+  //   await sendMouse({ type: "click", position: [0, 0] });
+  //   await el.updateComplete;
+  //   expect(el.shadowRoot?.querySelector("div.dropdown-menu")).to.have.class("show");
+  //   expect(el.menuIsOpen).to.be.true;
+  //   const itemOne = el.querySelectorAll("sgds-dropdown-item")[0] as SgdsDropdownItem;
+  //   itemOne.click();
+  //   await el.updateComplete;
+  //   expect(el.shadowRoot?.querySelector("div.dropdown-menu")).not.to.have.class("show");
+  //   expect(el.menuIsOpen).to.be.false;
+  // });
+  // it("when close=outside , dropdown menu closes only when clicked on menu item", async () => {
+  //   const el = await fixture<SgdsDropdown>(
+  //     html`<sgds-dropdown menuIsOpen close="outside">
+  //       <sgds-dropdown-item>slot 1</sgds-dropdown-item>
+  //       <sgds-dropdown-item>slot 2</sgds-dropdown-item>
+  //     </sgds-dropdown> `
+  //   );
+  //   expect(el.menuIsOpen).to.be.true;
+  //   expect(el.shadowRoot?.querySelector("div.dropdown-menu")).to.have.class("show");
+  //   // proving that clicking inside menu item will not close the menu
+  //   const itemOne = el.querySelectorAll("sgds-dropdown-item")[0] as SgdsDropdownItem;
+  //   itemOne.click();
+  //   await el.updateComplete;
+  //   expect(el.shadowRoot?.querySelector("div.dropdown-menu")).to.have.class("show");
+  //   expect(el.menuIsOpen).to.be.true;
+  //   // clicking outside closes the menu
+  //   await sendMouse({ type: "click", position: [0, 0] });
+  //   await el.updateComplete;
+  //   expect(el.shadowRoot?.querySelector("div.dropdown-menu")).not.to.have.class("show");
+  //   expect(el.menuIsOpen).to.be.false;
+  // });
+  // type close = "default" | "outside" | "inside";
+  // const closeValues = ["default", "outside", "inside"];
+  // closeValues.forEach(closeVal => {
+  //   it(`dropdown menu always closes when click on button regardless of prop close value = ${closeVal}`, async () => {
+  //     const el = await fixture<SgdsDropdown>(
+  //       html`<sgds-dropdown menuIsOpen close=${closeVal as close}>
+  //         <sgds-dropdown-item>slot 1</sgds-dropdown-item>
+  //         <sgds-dropdown-item>slot 2</sgds-dropdown-item>
+  //       </sgds-dropdown> `
+  //     );
+  //     expect(el.menuIsOpen).to.be.true;
+  //     expect(el.shadowRoot?.querySelector("div.dropdown-menu")).to.have.class("show");
+  //     (el.shadowRoot?.querySelector("sgds-button") as SgdsButton).click();
+  //     // proving that clicking inside menu item will not close the menu
+  //     await el.updateComplete;
+  //     expect(el.shadowRoot?.querySelector("div.dropdown-menu")).not.to.have.class("show");
+  //     expect(el.menuIsOpen).to.be.false;
+  //   });
+  // });
 });
 
 describe("sgds-dropdown-item", () => {

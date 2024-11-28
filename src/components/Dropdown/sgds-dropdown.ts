@@ -2,10 +2,9 @@ import { html } from "lit";
 import { property, queryAssignedElements } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownListElement } from "../../base/dropdown-list-element";
-import genId from "../../utils/generateId";
+import { watch } from "../../utils/watch";
 import dropdownMenuStyle from "./dropdown-menu.css";
 import dropdownStyle from "./dropdown.css";
-import { watch } from "../../utils/watch";
 export type DropDirection = "left" | "right" | "up" | "down";
 export type DropdownButtonVariant =
   | "primary"
@@ -49,10 +48,6 @@ export class SgdsDropdown extends DropdownListElement {
   /** The drop position of menu relative to the toggle button */
   @property({ type: String, reflect: true, state: false })
   drop: DropDirection = "down";
-
-  /** Sets color of Dropdown button */
-  @property({ type: String, reflect: true })
-  variant: DropdownButtonVariant = "primary";
 
   @queryAssignedElements({ slot: "toggler", flatten: true })
   private _toggler: Array<HTMLElement>;
