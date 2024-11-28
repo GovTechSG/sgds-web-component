@@ -237,46 +237,25 @@ describe("sgds-dropdown", () => {
     assert.shadowDom.equal(
       el,
       `<div class="dropdown">
-        <sgds-button
-          outlined
-          role="button"
+        <div
+          class="toggler-container"
           aria-expanded="false"
           aria-haspopup="menu"
-          variant="secondary"
-          type="button"
-          size="md"
-          target="_self"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-chevron-down"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
-            />
-          </svg>
-        </sgds-button>
-        <div
-          class="dropdown-menu"
-          part="menu"
-          role="menu"
-        >
-          <slot>
-          </slot>
+          <slot name="toggler"></slot>
+        </div>
+        <div class="dropdown-menu" role="menu">
+          <slot id="default"></slot>
         </div>
       </div>
-    `,
-      { ignoreAttributes: ["id"] }
+    `
     );
   });
   it("when disabled is true, toggle is disabled ", async () => {
-    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown disabled></sgds-dropdown>`);
-    expect(el.shadowRoot?.querySelector("sgds-button")).to.have.attribute("disabled");
+    const el = await fixture<SgdsDropdown>(html` <sgds-dropdown disabled>
+      <sgds-button slot="toggler">Dropdown</sgds-button>
+    </sgds-dropdown>`);
+    expect(el.querySelector("sgds-button")).to.have.attribute("disabled");
   });
   it("when menuAlignRight is false (default) on default dropdown, data-popper-placement on div.dropdown-menu is bottom-start ", async () => {
     const el = await fixture<SgdsDropdown>(html`<sgds-dropdown></sgds-dropdown>`);
