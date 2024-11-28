@@ -2,3 +2,7 @@
   color: var(--sgds-form-color-subtle);
   font-size: var(--sgds-font-size-1);
 }
+
+.form-text.disabled {
+  opacity: var(--sgds-opacity-50);
+}

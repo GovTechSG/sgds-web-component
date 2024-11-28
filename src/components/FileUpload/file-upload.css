@@ -4,57 +4,65 @@
   --file-upload-remove-icon-hover-color: ;
 }
 
-.fileupload-list-item {
+.file-upload {
   display: flex;
-  gap: var(--sgds-spacer-2);
+  flex-direction: column;
+  gap: var(--sgds-form-gap-2-xl);
 }
-.fileupload-list-item span:not(:first-of-type) {
+
+.file-upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-form-gap-md);
+}
+
+.file-upload-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-form-gap-xl);
+  list-style-type: none;
+}
+
+.file-upload-list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sgds-form-gap-lg);
+  padding: var(--sgds-form-padding-y) var(--sgds-form-padding-x);
+  background-color: var(--sgds-form-bg);
+  border: var(--sgds-form-border-width-default) solid var(--sgds-form-border-color-muted);
+  border-radius: var(--sgds-form-border-radius-md);
+}
+
+.file-upload-list-item span:not(:first-of-type) {
   cursor: pointer;
 }
-.fileupload-list-item span:first-of-type svg {
+
+.file-upload-list-item span:first-of-type svg {
   color: var(--file-upload-left-icon-color);
 }
-.fileupload-list-item span:last-of-type svg {
+
+.file-upload-list-item span:last-of-type svg {
   color: var(--file-upload-remove-icon-color);
 }
-.fileupload-list-item span:last-of-type svg:hover {
+
+.file-upload-list-item span:last-of-type svg:hover {
   color: var(--file-upload-remove-icon-hover-color);
 }
 
-.file-upload-label {
-  display: flex;
-  align-items: center;
-  gap: var(--sgds-spacer-2);
-}
-/** end scss */
 ul {
   margin: 0;
   padding: 0;
 }
 
-.sgds.fileupload-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sgds-spacer-3);
-  list-style-type: none;
-}
-
-.sgds.fileupload-list .fileupload-list-item .filename {
-  color: var(--sgds-link);
-  text-decoration: underline;
-  text-underline-offset: 0.25rem;
-}
-
 input {
   display: none;
 }
+
 sgds-button,
 label {
   cursor: pointer;
 }
 
-.fileupload-container {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sgds-spacer-3);
+sgds-close-button {
+  margin-left: auto;
 }

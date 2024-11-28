@@ -1,18 +1,19 @@
-import { property, query } from "lit/decorators.js";
+import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { nothing } from "lit";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import { html } from "lit/static-html.js";
 import FormControlElement from "../../base/form-control-element";
-import { SgdsSpinner } from "../Spinner/sgds-spinner";
+import formPlaceholderStyles from "../../styles/form-placeholder.css";
 import { defaultValue } from "../../utils/defaultvalue";
-import type { SgdsFormControl } from "../../utils/form";
-import { FormSubmitController } from "../../utils/form";
-import genId from "../../utils/generateId";
+import type { SgdsFormControl } from "../../utils/formSubmitController";
+import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
+import { SgdsSpinner } from "../Spinner/sgds-spinner";
 import inputStyle from "./input.css";
-import { nothing } from "lit";
 /**
  * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
  *
@@ -20,21 +21,22 @@ import { nothing } from "lit";
  * @event sgds-input - Emitted when the control receives input and its value changes.
  * @event sgds-focus - Emitted when input is in focus.
  * @event sgds-blur - Emitted when input is not in focus.
+ * @event sgds-invalid - Emitted when input is invalid
+ * @event sgds-valid - Emitted when input is valid
  *
  */
-export class SgdsInput extends FormControlElement implements SgdsFormControl {
-  static styles = [...FormControlElement.styles, inputStyle];
+export class SgdsInput
+  extends SgdsFormValidatorMixin(ScopedElementsMixin(FormControlElement))
+  implements SgdsFormControl
+{
+  static styles = [...FormControlElement.styles, formPlaceholderStyles, inputStyle];
+
   /**@internal */
   static get scopedElements() {
     return {
       "sgds-spinner": SgdsSpinner
     };
   }
-  /**@internal */
-  @query("input.form-control") input: HTMLInputElement;
-  /**@internal */
-  protected readonly formSubmitController = new FormSubmitController(this);
-  /** The type of input which works the same as HTMLInputElement */
   @property({ reflect: true }) type: "email" | "number" | "password" | "search" | "tel" | "text" | "time" | "url" =
     "text";
 
@@ -52,6 +54,12 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
 
   /** Sets the maximum length of the input */
   @property({ type: Number, reflect: true }) maxlength: number;
+
+  /** The input's minimum value. Only applies number input types. */
+  @property() min: number;
+
+  /** The input's maximum value. Only applies number input types. */
+  @property() max: number;
 
   /** The input's placeholder text. */
   @property({ type: String, reflect: true }) placeholder = "placeholder";
@@ -71,8 +79,12 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
    */
   @property() step: number | "any";
 
-  /**The input's value attribute. */
-  @property({ reflect: true }) value = "";
+  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
+  @property({ type: String, reflect: true }) hasFeedback: "style" | "text" | "both";
+
+  /**Feedback text for error state when validated */
+  @property({ type: String, reflect: true }) invalidFeedback: string;
+
   /**Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = "";
@@ -83,8 +95,13 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
   /** Marks the component as loading. */
   @property({ type: Boolean, reflect: true }) loading = false;
 
-  /**@internal */
-  protected inputId: string = genId("input", this.type);
+  /** Makes the input a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
+
+  /**The input's value attribute. */
+  @property({ reflect: true }) value = "";
+
+  @state() protected _isTouched = false;
 
   /** Sets focus on the input. */
   public focus(options?: FocusOptions) {
@@ -95,70 +112,85 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
     this.input.blur();
   }
 
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  public reportValidity() {
-    return this.input.reportValidity();
-  }
-  /** Sets a custom validation message. Pass an empty string to restore validity */
-  public setCustomValidity(err: string) {
-    return this.input.setCustomValidity(err);
-  }
   /** Programatically sets the invalid state of the input. Pass in boolean value in the argument */
   public setInvalid(bool: boolean) {
     this.invalid = bool;
+    if (bool) {
+      this.emit("sgds-invalid");
+    } else {
+      this.emit("sgds-valid");
+    }
+  }
+  /**
+   * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
+   * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
+   */
+  public reportValidity(): boolean {
+    return this._mixinReportValidity();
+  }
+  /**
+   * Checks for validity without any native error popup message
+   */
+  public checkValidity(): boolean {
+    return this._mixinCheckValidity();
   }
 
-  protected _handleClick() {
-    this.focus();
+  /**
+   * Returns the ValidityState object
+   */
+  public get validity(): ValidityState {
+    return this._mixinGetValidity();
   }
-
-  protected _handleChange(event: string) {
-    this.value = this.input.value;
-    this.emit(event);
+  /**
+   * Returns the validation message based on the ValidityState
+   */
+  public get validationMessage() {
+    return this._mixinGetValidationMessage();
   }
 
   protected _handleFocus() {
     this.emit("sgds-focus");
   }
 
-  protected _handleBlur() {
+  private _handleBlur() {
+    this._isTouched = true;
     this.emit("sgds-blur");
   }
-
-  protected _handleKeyDown(event: KeyboardEvent) {
-    const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
-
-    // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before
-    // submitting to allow users to cancel the keydown event if they need to
-    if (event.key === "Enter" && !hasModifier) {
-      setTimeout(() => {
-        // Prevent submission when enter is click on a submission in an Input Method Editor with isComposing
-        if (!event.defaultPrevented && !event.isComposing) {
-          this.formSubmitController.submit();
-        }
-      });
-    }
+  private _handleClick() {
+    this.focus();
   }
 
+  protected _handleChange(e: Event) {
+    this.value = this.input.value;
+    this.emit("sgds-change");
+    super._mixinHandleChange(e);
+  }
+  protected _handleInputChange(e: Event) {
+    this.value = this.input.value;
+    this.emit("sgds-input");
+    super._mixinHandleInputChange(e);
+  }
+  /** @internal */
+  @watch("_isTouched", { waitUntilFirstUpdate: true })
+  _handleIsTouched() {
+    if (this._isTouched) {
+      this.setInvalid(!this._mixinCheckValidity());
+    }
+  }
   @watch("disabled", { waitUntilFirstUpdate: true })
   _handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.input.disabled = this.disabled;
-    this.invalid = !this.input.checkValidity();
+    this.setInvalid(false);
   }
 
-  @watch("value", { waitUntilFirstUpdate: true })
-  _handleValueChange() {
-    this.invalid = !this.input.checkValidity();
-  }
   protected _renderInput() {
+    const wantFeedbackStyle = this.hasFeedback === "both" || this.hasFeedback === "style";
     return html`
       <div
         class="form-control-group ${classMap({
           disabled: this.disabled,
           readonly: this.readonly,
-          "is-invalid": this.invalid && this.hasFeedback,
-          "quantity-toggle": this.classList.contains("quantity-toggle")
+          "is-invalid": this.invalid && wantFeedbackStyle
         })}"
         @click=${this._handleClick}
       >
@@ -167,7 +199,7 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
         <input
           class="form-control"
           type=${this.type}
-          id=${this.inputId}
+          id=${this._controlId}
           name=${ifDefined(this.name)}
           placeholder=${ifDefined(this.placeholder)}
           aria-invalid=${this.invalid ? "true" : "false"}
@@ -182,15 +214,14 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
           min=${ifDefined(this.min)}
           max=${ifDefined(this.max)}
           step=${ifDefined(this.step as number)}
-          @input=${() => this._handleChange("sgds-input")}
-          @change=${() => this._handleChange("sgds-change")}
-          @keydown=${this._handleKeyDown}
+          @input=${(e: Event) => this._handleInputChange(e)}
+          @change=${(e: Event) => this._handleChange(e)}
           @invalid=${() => this.setInvalid(true)}
           @focus=${this._handleFocus}
           @blur=${this._handleBlur}
-          aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this.inputId}-invalid` : undefined)}
-          aria-labelledby="${this.labelId} ${this.inputId}Help ${this.invalid && this.hasFeedback
-            ? `${this.inputId}-invalid`
+          aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this._controlId}-invalid` : undefined)}
+          aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
+            ? `${this._controlId}-invalid`
             : ""}"
         />
         ${this.loading ? html`<sgds-spinner size="sm"></sgds-spinner>` : nothing}
@@ -207,7 +238,8 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
     `;
   }
   protected _renderFeedback() {
-    return this.invalid && this.hasFeedback
+    const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
+    return this.invalid && wantFeedbackText
       ? html` <div class="invalid-feedback-container">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path
@@ -215,15 +247,17 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
               fill="#B90000"
             />
           </svg>
-          <div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>
+          <div id="${this._controlId}-invalid" class="invalid-feedback">
+            ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
+          </div>
         </div>`
       : html`${this._renderHintText()}`;
   }
   protected _renderLabel() {
     const labelTemplate = html`
       <label
-        for=${this.inputId}
-        id=${this.labelId}
+        for=${this._controlId}
+        id=${this._labelId}
         class=${classMap({
           "form-label": true,
           required: this.required
@@ -234,7 +268,7 @@ export class SgdsInput extends FormControlElement implements SgdsFormControl {
     return this.label && labelTemplate;
   }
   protected _renderHintText() {
-    const hintTextTemplate = html` <div id="${this.inputId}Help" class="form-text">${this.hintText}</div> `;
+    const hintTextTemplate = html` <div id="${this._controlId}Help" class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }
   render() {

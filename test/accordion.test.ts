@@ -194,8 +194,8 @@ describe("<sgds-accordion-item>", () => {
   it("variant prop is forwarded to variant prop of sgds-accordion-item element", async () => {
     const el = await fixture<SgdsAccordion>(html`<sgds-accordion variant="border">
       <sgds-accordion-item>
-        <div slot="accordion-header">Accordion 1</div>
-        <span slot="accordion-content"
+        <div slot="header">Accordion 1</div>
+        <span slot="content"
           >Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio?
           Eum.</span
         >
@@ -207,8 +207,8 @@ describe("<sgds-accordion-item>", () => {
   it("density prop is forwarded to density prop of sgds-accordion-item element", async () => {
     const el = await fixture<SgdsAccordion>(html`<sgds-accordion density="compact">
       <sgds-accordion-item>
-        <div slot="accordion-header">Accordion 1</div>
-        <span slot="accordion-content"
+        <div slot="header">Accordion 1</div>
+        <span slot="content"
           >Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio?
           Eum.</span
         >

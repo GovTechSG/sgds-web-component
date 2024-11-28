@@ -53,14 +53,17 @@
   user-select: none;
   vertical-align: middle;
 }
+
 .btn-primary,
 .btn-outline,
 .btn-ghost {
   color: var(--sgds-btn-color);
 }
+
 .btn-outline {
   border: var(--sgds-btn-border-width) solid var(--sgds-btn-border-color);
 }
+
 @media (prefers-reduced-motion: reduce) {
   .btn {
     transition: none;
@@ -99,4 +102,8 @@
   padding: 0px var(--sgds-padding-md);
   min-width: var(--sgds-dimension-80);
   height: var(--sgds-dimension-40);
+}
+
+.btn slot::slotted(*) {
+  color: var(--sgds-btn-color);
 }

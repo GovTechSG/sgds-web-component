@@ -12,8 +12,7 @@ export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral"
  * @summary Badges can be used to highlight important bits of information such as labels, notifications & status.
  *
  * @slot default - slot for badge
- * @slot leftIcon - The slot for icon to the left of the badge text
- * @slot rightIcon - The slot for icon to the right of the badge text
+ * @slot icon - The slot for icon to the left of the badge text
  *
  * @event sgds-show - Emitted when the badge appears.
  * @event sgds-hide - Emitted after the badge closes.
@@ -28,16 +27,16 @@ export class SgdsBadge extends ScopedElementsMixin(SgdsElement) {
     };
   }
 
-  /** Controls the appearance of the alert  */
+  /** Controls the appearance of the dismissible badge. This prop only applies when dismissible is true  */
   @property({ type: Boolean, reflect: true }) show = false;
 
-  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `info`, `success`, `danger`, `warning`, 'neutral' */
+  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `info`, `success`, `danger`, `warning`, 'neutral' */
   @property({ reflect: true }) variant: BadgeVariant = "info";
 
   /** Manually set the outlined state to false */
   @property({ type: Boolean, reflect: true }) outlined = false;
 
-  /** Manually set the dismissable state of the button to `false` */
+  /** Manually set the dismissible state of the button to `false` */
   @property({ type: Boolean, reflect: true }) dismissible = false;
 
   /** Closes the badge  */
@@ -63,7 +62,7 @@ export class SgdsBadge extends ScopedElementsMixin(SgdsElement) {
             "
             aria-hidden=${this.show ? "false" : "true"}
           >
-            ${!this.dismissible ? html`<slot name="leftIcon"></slot>` : nothing}
+            ${!this.dismissible ? html`<slot name="icon"></slot>` : nothing}
             <span class="badge-label">
               <slot></slot>
             </span>

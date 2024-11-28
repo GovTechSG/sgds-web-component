@@ -204,10 +204,7 @@ const waitForHeaderToBeActive = async (container: HTMLElement, headerTestId: str
   }
 };
 
-const expectCustomTabToBeActiveAfter = async (
-  tabGroup: SgdsTabGroup,
-  action: () => Promise<void>
-): Promise<void> => {
+const expectCustomTabToBeActiveAfter = async (tabGroup: SgdsTabGroup, action: () => Promise<void>): Promise<void> => {
   const generalHeader = await waitForHeaderToBeActive(tabGroup, "general-header");
   generalHeader.focus();
 
@@ -223,17 +220,12 @@ const expectCustomTabToBeActiveAfter = async (
   await tabGroup.updateComplete;
 
   // Alternatively, wait until customHeader has the 'active' attribute
-  await waitUntil(
-    () => customHeader?.hasAttribute("active"),
-    "customHeader did not become active after the action"
-  );
+  await waitUntil(() => customHeader?.hasAttribute("active"), "customHeader did not become active after the action");
 
   expect(customHeader).to.have.attribute("active");
   await expectPromiseToHaveName(showEventPromise, "custom");
   await expectOnlyOneTabPanelToBeActive(tabGroup, "custom-tab-content");
 };
-
-
 
 const expectGeneralTabToBeStillActiveAfter = async (
   tabGroup: SgdsTabGroup,

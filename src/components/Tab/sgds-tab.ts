@@ -40,11 +40,10 @@ export class SgdsTab extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
-
   }
   /** Sets focus to the tab. */
   public focus(options?: FocusOptions) {
-    (this.shadowRoot?.querySelector('.tab') as HTMLElement)?.focus(options);
+    (this.shadowRoot?.querySelector(".tab") as HTMLElement)?.focus(options);
   }
 
   /** Removes focus from the tab. */
@@ -64,15 +63,15 @@ export class SgdsTab extends SgdsElement {
         data-testid="inner-tab"
         tabindex=${this.disabled ? "-1" : "0"}
         aria-selected=${this.active ? "true" : "false"}
-        aria-disabled= ${this.disabled ? "true" : "false"}
+        aria-disabled=${this.disabled ? "true" : "false"}
         class="${classMap({
-      "tab": true,
-      active: this.active,
-      disabled: this.disabled,
-      variant: this.variant,
-      orientation: this.orientation,
-      density: this.density
-    })}"
+          tab: true,
+          active: this.active,
+          disabled: this.disabled,
+          variant: this.variant,
+          orientation: this.orientation,
+          density: this.density
+        })}"
       >
         <slot name="icon"></slot>
         <slot name="label"></slot>

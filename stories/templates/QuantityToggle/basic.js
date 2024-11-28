@@ -12,8 +12,10 @@ export const Template = args =>
       name=${ifDefined(args.name)}
       min=${ifDefined(args.min)}
       max=${ifDefined(args.max)}
-      buttonVariant=${ifDefined(args.buttonVariant)}
-      defaultValue=${ifDefined(args.defaultValue)}
+      invalidFeedback=${ifDefined(args.invalidFeedback)}
+      ?invalid=${args.invalid}
+      label=${ifDefined(args.label)}
+      hintText=${ifDefined(args.hintText)}
     ></sgds-quantity-toggle>
   `;
 

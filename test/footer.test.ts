@@ -1,8 +1,7 @@
 import "./sgds-web-component";
-import { ColumnLinks } from "../src/components/Footer/sgds-footer";
-import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
+import { fixture, assert, expect } from "@open-wc/testing";
 import { html } from "lit";
-import type { SgdsFooter } from "../src/components";
+import { SgdsFooter } from "../src/components";
 
 describe("footer", () => {
   it("renders with default values", async () => {
@@ -11,17 +10,22 @@ describe("footer", () => {
       el,
       `
           <footer class="footer">
-          <section class="footer-top" part="footer-top">
-            <slot name="footer-title"></slot>
-            <slot name="footer-link"></slot>
+          <section class="footer-top" style="display: none;">
+            <div class="footer-header" style="display: none;">
+              <slot name="title"></slot>
+              <slot name="description"></slot>
+            </div>
+            <div class="footer-items" style="display: none;">
+              <slot name="items"></slot>
+            </div>
           </section>
-          <section class="footer-bottom" part="footer-bottom">
-            <ul
+          <section class="footer-bottom">
+            <div
               class="social-media"
               style="display: none;"
             >
-              <slot name="footer-social-media"></slot>
-            </ul>
+              <slot name="social-media"></slot>
+            </div>
             <div class="footer-mandatory-links">
               <ul>
                 <li><a href="#">Contact</a></li>
@@ -46,25 +50,22 @@ describe("footer", () => {
     );
   });
 
-  it("description prop forward to .description class", async () => {
+  it("content should be slotted into title", async () => {
     const el = await fixture(
-      html`<sgds-footer-title slot="footer-title" description="test description"></sgds-footer-title>`
+      html`<sgds-footer>
+        <h2 slot="title">test title</h2>
+      </sgds-footer>`
     );
-    expect(el.shadowRoot?.querySelector(".description")?.textContent).to.equal("test description");
+    expect(el.querySelector("[slot='title']")?.textContent).to.equal("test title");
   });
 
-  it("title prop forward to approriate .title class", async () => {
-    const el = await fixture(html`<sgds-footer-title title="test title"></sgds-footer-title>`);
-    expect(el.shadowRoot?.querySelector(".title")?.textContent).to.equal("test title");
-  });
-
-  it("description should render when description attribute exist", async () => {
-    const el = await fixture(html`<sgds-footer-title></sgds-footer-title>`);
-    expect(el.shadowRoot?.querySelector(".description")?.textContent).to.be.undefined;
-
-    el.setAttribute("description", "test description");
-    await elementUpdated(el);
-    expect(el.shadowRoot?.querySelector(".description")?.textContent).to.equal("test description");
+  it("content should be slotted into description", async () => {
+    const el = await fixture(
+      html`<sgds-footer>
+        <h2 slot="description">test description</h2>
+      </sgds-footer>`
+    );
+    expect(el.querySelector("[slot='description']")?.textContent).to.equal("test description");
   });
 
   it("copyrightLiner prop forward to approriate div el", async () => {
@@ -89,33 +90,20 @@ describe("footer", () => {
     const el = await fixture(html`<sgds-footer termsOfUseHref="test"></sgds-footer>`);
     expect(el.shadowRoot?.querySelector("a[href='test']")?.textContent).to.contain("Terms of use");
   });
+});
 
-  it("links prop accepts an array", async () => {
-    const linkArray: ColumnLinks[] = [
-      {
-        title: "test-1",
-        links: [
-          { href: "test-href-1", label: "test-label-1" },
-          { href: "test-href-2", label: "test-label-2" }
-        ]
-      },
-      {
-        title: "test-2",
-        links: [
-          { href: "test-href-1", label: "test-label-1" },
-          { href: "test-href-2", label: "test-label-2" }
-        ]
-      }
-    ];
-    const el = await fixture(html`<sgds-footer-link .links=${linkArray}></sgds-footer-link>`);
+describe("SgdsFooterItem", () => {
+  it("renders with default structure", async () => {
+    const el = await fixture<SgdsFooter>(html` <sgds-footer-item>
+      <div slot="title">Application Guidelines</div>
+      <a href="/application-guidelines/lorem-ipsum-one/second-level-a/">hello world</a>
+      <a href="/application-guidelines/lorem-ipsum-one/part-A/">Second Level B</a>
+      <a href="/application-guidelines/lorem-ipsum-three/">Lorem Ipsum Three</a>
+    </sgds-footer-item>`);
+    const titleSlot = el.shadowRoot?.querySelector('slot[name="title"]');
+    const defaultSlot = el.shadowRoot?.querySelector("slot:not([name])");
 
-    expect(el.shadowRoot?.querySelectorAll(".footer-items>div").length).to.equal(2);
-    expect(el.shadowRoot?.querySelectorAll(".footer-items>div")[0].textContent).to.contain("test-1");
-    expect(el.shadowRoot?.querySelectorAll(".footer-items>div")[1].textContent).to.contain("test-2");
-    expect(el.shadowRoot?.querySelectorAll("ul.links>li>a").length).to.equal(4);
-    expect(el.shadowRoot?.querySelectorAll('li>a[href="test-href-1"]').length).to.equal(2);
-    expect(el.shadowRoot?.querySelectorAll('li>a[href="test-href-1"]')[0].textContent).to.equal("test-label-1");
-    expect(el.shadowRoot?.querySelectorAll('li>a[href="test-href-2"]').length).to.equal(2);
-    expect(el.shadowRoot?.querySelectorAll('li>a[href="test-href-2"]')[0].textContent).to.equal("test-label-2");
+    expect(titleSlot).to.exist;
+    expect(defaultSlot).to.exist;
   });
 });

@@ -5,7 +5,7 @@ import { property, query, queryAsync, state } from "lit/decorators.js";
 import { live } from "lit/directives/live.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownElement } from "../../base/dropdown-element";
-import { type SgdsFormControl } from "../../utils/form";
+import { type SgdsFormControl } from "../../utils/formSubmitController";
 import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
 import { watch } from "../../utils/watch";
 import { DatepickerCalendar } from "./datepicker-calendar";

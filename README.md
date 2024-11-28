@@ -751,13 +751,13 @@ export class MyNavbar extends ScopedElementsMixin(LitElement) {
         <p slot="card-text">Compatible with all frameworks. Each web component also has its own React version for full compatibility with React.</p>
     </sgds-card>
      <sgds-card stretchedLink class="col">
-        <span slot="card-title">Customisable with CSS <i class="bi bi-filetype-css"></i></span>
-        <a slot="card-link" href="/story/getting-started-usage-stylings--page" target="_blank"></a>
-        <p slot="card-text">Components are customisable with cssparts, css custom variables and class-like properties.</p>
+        <span slot="card-title">Theming with CSS variables <i class="bi bi-filetype-css"></i></span>
+        <a slot="card-link" href="/docs/style-theming--docs" target="_blank"></a>
+        <p slot="card-text">Change the theme with CSS Variables </p>
     </sgds-card>
      <sgds-card stretchedLink class="col">
         <span slot="card-title">Works with CDNs <i class="bi bi-truck"></i></span>
-        <a slot="card-link" href="/story/getting-started-installation--page" target="_blank"></a>
+        <a slot="card-link" href="/docs/getting-started-installation--docs#method-2-using-cdn" target="_self"></a>
         <p slot="card-text">Besides whole library CDN, each component also has its own CDN.</p>
     </sgds-card>
 <sgds-card stretchedLink class="col">
@@ -772,6 +772,6 @@ export class MyNavbar extends ScopedElementsMixin(LitElement) {
 <sgds-card stretchedLink class="col">
         <span slot="card-title">Extendable <i class="bi bi-bricks"></i></span>
         <p slot="card-text">Our components are built with LitElement and are extendable. Use them as building blocks to create your complex component. </p>
-        <a slot="card-link" href="/story/getting-started-extending-the-library--page" target="_blank"></a>
+        <a slot="card-link" href="/docs/usage-extending-the-library--docs" target="_blank"></a>
     </sgds-card>
 </div>

@@ -30,7 +30,7 @@ const OutlinedVariantTemplate = args => {
     </div>
   `;
 };
-const DismissableTemplate = args => {
+const DismissibleTemplate = args => {
   return html`
     <div class="d-flex-column">
       <sgds-alert show title="Title" dismissible>
@@ -40,7 +40,7 @@ const DismissableTemplate = args => {
             fill="white"
           />
         </svg>
-        <div>A dismissable alert</div>
+        <div>A dismissible alert</div>
       </sgds-alert>
       <sgds-alert show title="Title" outlined dismissible>
         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -49,7 +49,7 @@ const DismissableTemplate = args => {
             fill="black"
           />
         </svg>
-        <div>A non-dismissable alert</div>
+        <div>A non-dismissible alert</div>
       </sgds-alert>
     </div>
   `;
@@ -110,9 +110,9 @@ export const OutlinedVariants = {
   tags: ["!dev"]
 };
 
-export const Dismissable = {
-  render: DismissableTemplate.bind({}),
-  name: "Dismissable",
+export const Dismissible = {
+  render: DismissibleTemplate.bind({}),
+  name: "Dismissible",
   args: {},
   parameters: {},
   tags: ["!dev"]

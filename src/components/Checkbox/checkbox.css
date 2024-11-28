@@ -25,7 +25,8 @@ input {
   height: var(--sgds-form-height-sm);
 }
 
-.form-check-input:focus, .form-check-input:focus-visible {
+.form-check-input:focus,
+.form-check-input:focus-visible {
   box-shadow: var(--sgds-form-box-shadow-focus);
   outline: 0;
 }
@@ -50,5 +51,9 @@ input {
 }
 .form-check-input:checked.is-invalid,
 .form-check-input[checked].is-invalid {
+  background-color: var(--sgds-form-danger-bg);
+}
+.form-check-input:indeterminate.is-invalid,
+.form-check-input[indeterminate].is-invalid {
   background-color: var(--sgds-form-danger-bg);
 }
