@@ -323,7 +323,7 @@ describe("sgds-dropdown", () => {
     expect(el.dropdownConfig.modifiers?.length).to.equal(1);
     expect(el.dropdownConfig.modifiers?.[0].name).to.equal("offset");
     expect(el.dropdownConfig.modifiers?.[0].options?.offset[0]).to.equal(0);
-    expect(el.dropdownConfig.modifiers?.[0].options?.offset[1]).to.equal(10);
+    expect(el.dropdownConfig.modifiers?.[0].options?.offset[1]).to.equal(8);
   });
   it("when noFlip is true, dropdownConfig.modifiers array has flip obj", async () => {
     const el = await fixture<SgdsDropdown>(

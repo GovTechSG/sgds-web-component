@@ -1,3 +1,6 @@
+:host {
+  color: inherit;
+}
 :host([size="sm"]) svg {
   width: var(--sgds-icon-size-sm);
   height: var(--sgds-icon-size-sm);
