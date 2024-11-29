@@ -15,70 +15,58 @@ describe("<sgds-tab>", () => {
   });
 
   it("should render default tab", async () => {
-    const el = await fixture(html`<sgds-tab-group><sgds-tab>Test</sgds-tab></sgds-tab-group>`);
-    const sgdsTab = el.querySelector("sgds-tab") as SgdsTab;
-    const shadowTab = sgdsTab?.shadowRoot?.querySelector('[data-testid="inner-tab"]') as HTMLElement | null;
+    const el = await fixture<SgdsTab>(html`<sgds-tab>Test</sgds-tab>`);
+    const shadowTab = el?.shadowRoot?.querySelector('[data-testid="inner-tab"]') as HTMLElement | null;
 
     expect(shadowTab).not.to.be.null;
-    expect(shadowTab?.getAttribute("role")).to.equal("tab");
-    expect(shadowTab?.getAttribute("aria-disabled")).to.equal("false");
-    expect(shadowTab?.getAttribute("aria-selected")).to.equal("false");
+    expect(el?.getAttribute("role")).to.equal("tab");
+    expect(el?.getAttribute("aria-disabled")).to.equal("false");
+    expect(el?.getAttribute("aria-selected")).to.equal("false");
     expect(shadowTab?.getAttribute("tabindex")).to.equal("0");
     expect(shadowTab?.classList.contains("tab")).to.be.true;
-    expect(shadowTab?.classList.contains("density")).to.be.true;
-    expect(sgdsTab?.active).to.equal(false);
-    expect(sgdsTab?.disabled).to.equal(false);
+    expect(el?.active).to.equal(false);
+    expect(el?.disabled).to.equal(false);
   });
 
   it("should disable tab by attribute", async () => {
-    const el = await fixture(html`
-      <sgds-tab-group>
-        <sgds-tab disabled>Test</sgds-tab>
-      </sgds-tab-group>
-    `);
-    const sgdsTab = el.querySelector("sgds-tab") as SgdsTab;
-    const shadowTabDiv = sgdsTab?.shadowRoot?.querySelector('[data-testid="inner-tab"]') as HTMLElement | null;
+    const el = await fixture<SgdsTab>(html` <sgds-tab disabled>Test</sgds-tab> `);
+    const shadowTabDiv = el?.shadowRoot?.querySelector('[data-testid="inner-tab"]') as HTMLElement | null;
 
-    expect(sgdsTab.disabled).to.equal(true);
+    expect(el.disabled).to.equal(true);
     expect(shadowTabDiv).to.exist;
     expect(shadowTabDiv?.getAttribute("tabindex")).to.equal("-1");
-    expect(shadowTabDiv?.getAttribute("aria-selected")).to.equal("false");
-    expect(shadowTabDiv?.getAttribute("aria-disabled")).to.equal("true");
+    expect(el?.getAttribute("aria-selected")).to.equal("false");
+    expect(el?.getAttribute("aria-disabled")).to.equal("true");
     expect(shadowTabDiv?.classList.contains("tab")).to.be.true;
-    expect(shadowTabDiv?.classList.contains("disabled")).to.be.true;
-    expect(shadowTabDiv?.classList.contains("active")).to.be.false;
   });
 });
 
 describe("focus", () => {
   it("should focus inner tab", async () => {
-    const el = await fixture(html`<sgds-tab-group><sgds-tab>Test</sgds-tab></sgds-tab-group>`);
-    const sgdsTab = el.querySelector("sgds-tab") as SgdsTab;
+    const el = await fixture<SgdsTab>(html`<sgds-tab>Test</sgds-tab>`);
 
-    const shadowTabDiv = sgdsTab?.shadowRoot?.querySelector('[data-testid="inner-tab"]');
+    const shadowTabDiv = el?.shadowRoot?.querySelector('[data-testid="inner-tab"]');
 
-    sgdsTab.focus();
-    await sgdsTab.updateComplete;
+    el.focus();
+    await el.updateComplete;
 
-    expect(sgdsTab.shadowRoot?.activeElement).to.equal(shadowTabDiv);
+    expect(el.shadowRoot?.activeElement).to.equal(shadowTabDiv);
   });
 });
 
 describe("blur", () => {
   it("should blur inner tab", async () => {
-    const el = await fixture(html`<sgds-tab-group><sgds-tab>Test</sgds-tab></sgds-tab-group>`);
-    const sgdsTab = el.querySelector("sgds-tab") as SgdsTab;
+    const el = await fixture<SgdsTab>(html`<sgds-tab>Test</sgds-tab>`);
+    const shadowTabDiv = el?.shadowRoot?.querySelector('[data-testid="inner-tab"]');
 
-    const shadowTabDiv = sgdsTab?.shadowRoot?.querySelector('[data-testid="inner-tab"]');
+    el.focus();
+    await el.updateComplete;
+    expect(el.shadowRoot?.activeElement).to.equal(shadowTabDiv);
 
-    sgdsTab.focus();
-    await sgdsTab.updateComplete;
-    expect(sgdsTab.shadowRoot?.activeElement).to.equal(shadowTabDiv);
+    el.blur();
+    await el.updateComplete;
 
-    sgdsTab.blur();
-    await sgdsTab.updateComplete;
-
-    expect(sgdsTab.shadowRoot?.activeElement).to.equal(null);
+    expect(el.shadowRoot?.activeElement).to.equal(null);
   });
 });
 
@@ -169,6 +157,30 @@ describe("<sgds-tab-group>", () => {
 
     await expectOnlyOneTabPanelToBeActive(tabGroup, "general-tab-content");
   });
+  const propsToForwardToChild = [
+    { name: "variant", defaultValue: "underlined", changedValue: "solid" },
+    { name: "density", defaultValue: "default", changedValue: "compact" },
+    { name: "orientation", defaultValue: "horizontal", changedValue: "vertical" }
+  ];
+  propsToForwardToChild.forEach(({ name, defaultValue, changedValue }) => {
+    it(`change of ${name} prop updates its sgds-tab children`, async () => {
+      const tabGroup = await fixture<SgdsTabGroup>(html`
+        <sgds-tab-group>
+          <sgds-tab slot="nav" panel="general">General</sgds-tab>
+          <sgds-tab slot="nav" panel="custom">Custom</sgds-tab>
+          <sgds-tab-panel name="general" data-testid="general-tab-content"
+            >This is the general tab panel.</sgds-tab-panel
+          >
+          <sgds-tab-panel name="custom">This is the custom tab panel.</sgds-tab-panel>
+        </sgds-tab-group>
+      `);
+      const tabs = tabGroup.querySelectorAll("sgds-tab") as NodeListOf<SgdsTab>;
+      tabs.forEach(tab => expect(tab.getAttribute(name)).to.equal(defaultValue));
+      tabGroup[name] = changedValue;
+      await tabGroup.updateComplete;
+      tabs.forEach(tab => expect(tab.getAttribute(name)).to.equal(changedValue));
+    });
+  });
 });
 
 const expectHeaderToBeVisible = (container: HTMLElement, dataTestId: string): void => {
@@ -256,7 +268,6 @@ describe("tab selection", () => {
 
     // Inspect the shadow DOM
     const shadowTab = sgdsTab?.shadowRoot?.querySelector('[data-testid="inner-tab"]');
-    console.log("Shadow DOM content:", sgdsTab.shadowRoot?.innerHTML);
 
     // Ensure the shadow DOM has the expected structure
     expect(shadowTab).not.to.be.null;

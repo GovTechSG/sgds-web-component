@@ -10,16 +10,10 @@ let id = 0;
  * @summary Tab panels are used inside tab groups to display tabbed content.
  * @slot - The tab panel's content.
  *
- * @csspart base - The component's base wrapper.
- *
- * @cssproperty --tab-panel-padding-y - The y-axis padding of tab panel.
- *
  */
 export class SgdsTabPanel extends LitElement {
   static styles = tabPanelStyles;
-  /**@internal */
   private readonly attrId = ++id;
-  /**@internal */
   private readonly componentId = `sgds-tab-panel-${this.attrId}`;
   /** The tab panel's name. */
   @property({ reflect: true }) name = "";
@@ -34,14 +28,13 @@ export class SgdsTabPanel extends LitElement {
   }
 
   @watch("active")
-  handleActiveChange() {
+  _handleActiveChange() {
     this.setAttribute("aria-hidden", this.active ? "false" : "true");
   }
 
   render() {
     return html`
       <slot
-        part="base"
         class=${classMap({
           "tab-panel": true,
           "tab-panel--active": this.active

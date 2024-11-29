@@ -496,91 +496,62 @@
     </div>
     <div class="container">
 
-
-      <sgds-tab-group variant="tabs-info-toggle">
-        <sgds-tab slot="nav" panel="apple"><svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-            fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
-            <path
-              d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-          </svg><span slot="count">1</span><span slot="label">Apple</span>
-        </sgds-tab>
-        <sgds-tab active slot="nav" panel="banana"><span slot="count">12</span><span
-            slot="label">Banana</span></sgds-tab>
-        <sgds-tab slot="nav" panel="carrot"><sgds-badge slot="count" badgeClasses="text-dark">100</sgds-badge><span
-            slot="label">Carrot</span></sgds-tab>
-
-        <sgds-tab-panel name="apple">Apple</sgds-tab-panel>
-        <sgds-tab-panel name="banana">Banana</sgds-tab-panel>
-        <sgds-tab-panel name="carrot">Carrot</sgds-tab-panel>
-      </sgds-tab-group>
-      <sgds-tab-group variant="tabs-basic-toggle">
-        <sgds-tab slot="nav" panel="12"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-            fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
-            <path
-              d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-          </svg>12 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bank"
-            viewBox="0 0 16 16">
-            <path
-              d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-          </svg></sgds-tab>
-        <sgds-tab active slot="nav" panel="2">2</sgds-tab>
-        <sgds-tab slot="nav" panel="3">3</sgds-tab>
-        <sgds-tab-panel name="12">12</sgds-tab-panel>
-        <sgds-tab-panel name="2">2</sgds-tab-panel>
-        <sgds-tab-panel name="3">3</sgds-tab-panel>
-      </sgds-tab-group>
-      <sgds-tab-group variant="underlined" orientation="horizontal">
+      <sgds-tab-group orientation="horizontal">
         <sgds-tab slot="nav" state="active" panel="one">
-          <span slot="label">hellotab</span>
+          hellotab
         </sgds-tab>
         <sgds-tab slot="nav" panel="two">
-          <span slot="label">two</span>
+          two
         </sgds-tab>
         <sgds-tab slot="nav" state="active" panel="three">
-          <span slot="label">three</span>
+          three
         </sgds-tab>
-
+        <sgds-tab-panel name="one">one</sgds-tab-panel>
+        <sgds-tab-panel name="two">two</sgds-tab-panel>
+        <sgds-tab-panel name="three">three</sgds-tab-panel>
+      </sgds-tab-group>
+      <sgds-tab-group orientation="horizontal" density="compact">
+        <sgds-tab slot="nav" state="active" panel="one">
+          hellotab
+        </sgds-tab>
+        <sgds-tab slot="nav" panel="two">
+          two
+        </sgds-tab>
+        <sgds-tab slot="nav" state="active" panel="three">
+          three
+        </sgds-tab>
         <sgds-tab-panel name="one">one</sgds-tab-panel>
         <sgds-tab-panel name="two">two</sgds-tab-panel>
         <sgds-tab-panel name="three">three</sgds-tab-panel>
       </sgds-tab-group>
 
       <!-- Vertical Tab Group -->
-      <sgds-tab-group variant="underlined" orientation="vertical">
+      <sgds-tab-group id="tabs-lukhei-test" orientation="horizontal">
         <sgds-tab slot="nav" panel="one">
-          <span slot="label">hellotabvert</span>
+          lukhei testing
         </sgds-tab>
-        <sgds-tab slot="nav" disabled panel="two">
-          <span slot="label">disabled</span>
+        <sgds-tab slot="nav" panel="two">
+          disabled
         </sgds-tab>
         <sgds-tab slot="nav" panel="three">
-          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-bank" viewBox="0 0 16 16">
-            <path
-              d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-          </svg>
-          <span slot="label">three</span>
+          <sgds-icon slot="icon"  name="placeholder"></sgds-icon>
+          three
         </sgds-tab>
-
+     
         <sgds-tab-panel name="one">one</sgds-tab-panel>
         <sgds-tab-panel name="two">two</sgds-tab-panel>
         <sgds-tab-panel name="three">three</sgds-tab-panel>
       </sgds-tab-group>
-
       <sgds-tab-group variant="underlined" orientation="vertical" density="compact">
-        <sgds-tab slot="nav" panel="one">
-          <span slot="label">hellotabvertcompact </span>
+        <sgds-tab slot="nav" panel="one" variant="solid">
+          lukhei test 
         </sgds-tab>
         <sgds-tab slot="nav" disabled panel="two">
-          <span slot="label">cdisabled </span>
+          cdisabled 
         </sgds-tab>
         <sgds-tab slot="nav" panel="three">
-          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-bank" viewBox="0 0 16 16">
-            <path
-              d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-          </svg>
-          <span slot="label">three</span>
+          <sgds-icon slot="icon" name="placeholder"></sgds-icon>
+          three
         </sgds-tab>
       </sgds-tab-group>
 
@@ -591,18 +562,14 @@
 
       <sgds-tab-group variant="solid">
         <sgds-tab slot="nav" active panel="one">
-          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-bank" viewBox="0 0 16 16">
-            <path
-              d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-          </svg>
-          <span slot="label">hellotabsolid</span>
+          <sgds-icon slot="icon" name="placeholder"></sgds-icon>
+          hellotabsolid
         </sgds-tab>
         <sgds-tab slot="nav" disabled panel="two">
-          <span slot="label">disabled</span>
+          disabled
         </sgds-tab>
         <sgds-tab slot="nav" panel="three">
-          <span slot="label">three</span>
+          three
         </sgds-tab>
 
         <sgds-tab-panel name="one">one</sgds-tab-panel>
@@ -612,18 +579,14 @@
 
       <sgds-tab-group variant="solid" density="compact">
         <sgds-tab slot="nav" active panel="one">
-          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-bank" viewBox="0 0 16 16">
-            <path
-              d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-          </svg>
-          <span slot="label">hellotabsolidcomp</span>
+          <sgds-icon slot="icon" name="placeholder"></sgds-icon>
+          hellotabsolidcomp
         </sgds-tab>
         <sgds-tab slot="nav" disabled panel="two">
-          <span slot="label">disabledcomp</span>
+          disabledcomp
         </sgds-tab>
         <sgds-tab slot="nav" panel="three">
-          <span slot="label">three</span>
+          three
         </sgds-tab>
 
         <sgds-tab-panel name="one">one</sgds-tab-panel>
@@ -631,16 +594,15 @@
         <sgds-tab-panel name="three">three</sgds-tab-panel>
       </sgds-tab-group>
 
-      <div class="tabs-container">
         <sgds-tab-group variant="solid" orientation="vertical">
           <sgds-tab slot="nav" panel="one">
-            <span slot="label">hellotabsolid</span>
+            hellotabsolid
           </sgds-tab>
           <sgds-tab slot="nav" disabled panel="two">
-            <span slot="label">disabled</span>
+            disabled
           </sgds-tab>
           <sgds-tab slot="nav" panel="three">
-            <span slot="label">three</span>
+            three
           </sgds-tab>
 
           <sgds-tab-panel name="one">one</sgds-tab-panel>
@@ -650,20 +612,19 @@
 
         <sgds-tab-group variant="solid" orientation="vertical" density="compact">
           <sgds-tab slot="nav" panel="one">
-            <span slot="label">compact</span>
+            compact
           </sgds-tab>
           <sgds-tab slot="nav" disabled panel="two">
-            <span slot="label">disabledcompact</span>
+            disabledcompact
           </sgds-tab>
           <sgds-tab slot="nav" panel="three">
-            <span slot="label">threecompact</span>
+            threecompact
           </sgds-tab>
 
           <sgds-tab-panel name="one">one</sgds-tab-panel>
           <sgds-tab-panel name="two">two</sgds-tab-panel>
           <sgds-tab-panel name="three">three</sgds-tab-panel>
         </sgds-tab-group>
-      </div>
       <h2>Stepper</h2>
       <div>
         <h3>Horizontal Stepper</h3>

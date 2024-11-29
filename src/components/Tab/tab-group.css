@@ -2,23 +2,13 @@
 .tab-group__nav {
   display: flex;
   flex-direction: row;
-  /* Arrange tabs in a row */
-  gap: 0;
-  /* Adjust gap as needed */
 }
 
 /* Vertical Orientation */
 :host([orientation="vertical"]) .tab-group__nav {
   flex-direction: column;
-  /* Arrange tabs in a column */
-  gap: 0;
-  width: 100%;
-  align-items: stretch;
-  /* Adjust gap as needed */
 }
 
 :host([variant="solid"]) .tab-group__nav {
-  gap: 8px;
-
-
+  gap: var(--sgds-spacer-3);
 }
