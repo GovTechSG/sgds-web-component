@@ -1,7 +1,6 @@
 import { html } from "lit";
 import { property, query, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import FormCheckElement from "../../base/form-check-element";
 import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import genId from "../../utils/generateId";
@@ -19,7 +18,7 @@ import switchStyle from "./switch.css";
  *
  */
 export class SgdsSwitch extends SgdsElement {
-  static styles = [...FormCheckElement.styles, formLabelStyles, switchStyle];
+  static styles = [...SgdsElement.styles, formLabelStyles, switchStyle];
 
   /** The size of the switch. By default, it is small size */
   @property({ reflect: true, type: String }) size: "sm" | "md" | "lg" = "md";

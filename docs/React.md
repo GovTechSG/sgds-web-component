@@ -8,7 +8,7 @@ Instead, our library outputs the React version of each of our web components. Yo
 
 Refer to this [stackblitz demo app](https://stackblitz.com/edit/vitejs-vite-gebvf5) on the usage example 
 
-## Using React components - Importing the library
+## Importing the library
 
 Follow instructions in `Installation` documentation section.
 Our components are exported via named exports. Import the components like so
@@ -41,7 +41,7 @@ const ButtonWc = () => {
 export default ButtonWc;
 ```
 
-## Using React components - Event Handling
+## Event Handling
 
 We follow the React convention for events name, each custom event emitted by the web component is prefixed with a `on` and converted to camel case. Native events still applies to the components.
 
@@ -69,4 +69,30 @@ function MyComponent() {
 
 export default MyComponent;
 
+```
+
+## Accessing methods in React
+
+Each web components are build from class objects and some have public methods exposed. To access the component's method in react, you would required to get the reference of the component using React 's `useRef()` hook. See individual component API documentation for the available methods. 
+
+For example, SgdsStepper exposes public methods like `getComponent()`
+
+```tsx
+import { useRef } from 'react';
+import type { SgdsStepper as SStep } from '@govtechsg/sgds-web-component/components';
+import SgdsStepper  from "@govtechsg/sgds-web-component/react/stepper/index.js";
+
+function StepperComponent() {
+  ...
+ const stepperRef = useRef<SStep>(null)
+ const ChildComponent = () : ReactNode => {
+   const stepper = stepperRef.current 
+    const childComponent =  stepper?.getComponent(1) as ReactNode
+    return childComponent
+ }
+ return <>
+ <SgdsStepper steps={step} ref={stepperRef} activeStep={stepNo}></SgdsStepper>
+ <ChildComponent/>
+ </>
+}
 ```

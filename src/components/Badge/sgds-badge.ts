@@ -27,10 +27,10 @@ export class SgdsBadge extends ScopedElementsMixin(SgdsElement) {
     };
   }
 
-  /** Controls the appearance of the alert  */
+  /** Controls the appearance of the dismissible badge. This prop only applies when dismissible is true  */
   @property({ type: Boolean, reflect: true }) show = false;
 
-  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `info`, `success`, `danger`, `warning`, 'neutral' */
+  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `info`, `success`, `danger`, `warning`, 'neutral' */
   @property({ reflect: true }) variant: BadgeVariant = "info";
 
   /** Manually set the outlined state to false */

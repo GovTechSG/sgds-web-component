@@ -10,6 +10,7 @@ describe("custom element registration is correct", () => {
     const customElementTag = tagNameConverter(key);
     it("is defined", () => {
       const el = document.createElement(customElementTag);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       assert.instanceOf(el, value as any);
     });
   }

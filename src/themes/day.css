@@ -5,9 +5,8 @@
   /* Semantic - Default Colors */
   --sgds-default-bg: var(--sgds-gray-000);
   --sgds-default-bg-muted: var(--sgds-gray-200);
-  --sgds-default-bg-subtle: var(--sgds-gray-500);
+  --sgds-default-bg-subtle: var(--sgds-gray-600);
   --sgds-default-bg-emphasis: var(--sgds-gray-800);
-  --sgds-default-bg-overlay: oklch(from var(--sgds-gray-900) l c h / 0.4);
   --sgds-default-bg-translucent: oklch(from var(--sgds-gray-900) l c h / 0.1);
   --sgds-default-bg-translucent-subtle: oklch(from var(--sgds-gray-900) l c h / 0.05);
   --sgds-default-bg-transparent: transparent;
@@ -24,7 +23,6 @@
   --sgds-default-border-color-muted: var(--sgds-gray-200);
   --sgds-default-border-color-subtle: var(--sgds-gray-300);
   --sgds-default-border-color-emphasis: var(--sgds-gray-800);
-  --sgds-default-border-color-translucent: oklch(from var(--sgds-gray-900) l c h / 0.05);
   --sgds-default-border-color-transparent: transparent;
 
   /* Semantic - Alternate Color */
@@ -113,31 +111,31 @@
 
   /* Semantic - Form Color */
   --sgds-form-bg: var(--sgds-gray-000);
-  --sgds-form-bg-inverse: var(--sgds-gray-900);
-  --sgds-form-bg-muted: var(--sgds-gray-100);
-  --sgds-form-bg-subtle: var(--sgds-gray-400);
-  --sgds-form-bg-emphasis: var(--sgds-gray-700);
-  --sgds-form-bg-translucent: oklch(from var(--sgds-gray-900) l c h / 0.05);
-  --sgds-form-bg-transparent: transparent;
-  --sgds-form-bg-on-dark: var(--sgds-gray-000);
-  --sgds-form-bg-on-light: var(--sgds-gray-800);
-  --sgds-form-color: var(--sgds-gray-800);
-  --sgds-form-color-inverse: var(--sgds-gray-000);
-  --sgds-form-color-muted: var(--sgds-gray-200);
-  --sgds-form-color-subtle: var(--sgds-gray-500);
-  --sgds-form-color-on-dark: var(--sgds-gray-000);
-  --sgds-form-color-on-light: var(--sgds-gray-800);
-  --sgds-form-border-color: var(--sgds-gray-500);
-  --sgds-form-border-color-muted: var(--sgds-gray-200);
-  --sgds-form-border-color-emphasis: var(--sgds-gray-800);
-  --sgds-form-primary-bg: var(--sgds-purple-600);
-  --sgds-form-primary-bg-emphasis: var(--sgds-purple-700);
-  --sgds-form-primary-bg-translucent: oklch(from var(--sgds-purple-600) l c h / 0.1);
-  --sgds-form-primary-active-color: var(--sgds-purple-600);
-  --sgds-form-success-bg: var(--sgds-green-600);
-  --sgds-form-success-color: var(--sgds-green-600);
-  --sgds-form-success-border-color: var(--sgds-green-600);
-  --sgds-form-danger-bg: var(--sgds-red-600);
-  --sgds-form-danger-color: var(--sgds-red-600);
-  --sgds-form-danger-border-color: var(--sgds-red-600);
+--sgds-form-bg-inverse: var(--sgds-gray-900);
+--sgds-form-bg-muted: var(--sgds-gray-100);
+--sgds-form-bg-subtle: var(--sgds-gray-400);
+--sgds-form-bg-emphasis: var(--sgds-gray-700);
+--sgds-form-bg-translucent: #0E0E0E0C;
+--sgds-form-bg-transparent: #FFFFFF00;
+--sgds-form-bg-on-dark: var(--sgds-gray-000);
+--sgds-form-bg-on-light: var(--sgds-gray-800);
+--sgds-form-color: var(--sgds-gray-800);
+--sgds-form-color-inverse: var(--sgds-gray-000);
+--sgds-form-color-muted: var(--sgds-gray-200);
+--sgds-form-color-subtle: var(--sgds-gray-500);
+--sgds-form-color-on-dark: var(--sgds-gray-000);
+--sgds-form-color-on-light: var(--sgds-gray-800);
+--sgds-form-primary-bg: var(--sgds-purple-600);
+--sgds-form-primary-bg-emphasis: var(--sgds-purple-700);
+--sgds-form-border-color: var(--sgds-gray-500);
+--sgds-form-border-color-muted: var(--sgds-gray-200);
+--sgds-form-border-color-emphasis: var(--sgds-gray-800);
+--sgds-form-success-bg: var(--sgds-green-600);
+--sgds-form-success-color: var(--sgds-green-600);
+--sgds-form-success-border-color: var(--sgds-green-600);
+--sgds-form-danger-bg: var(--sgds-red-600);
+--sgds-form-danger-color: var(--sgds-red-600);
+--sgds-form-danger-border-color: var(--sgds-red-600);
+
+
 }

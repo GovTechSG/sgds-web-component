@@ -49,7 +49,7 @@ exports.default = task("concat-storybook-mdx", done => {
 });
 
 exports.default = task("replace-version", () => {
-  return src("docs/INSTALLATION.md")
+  return src("docs/templates/INSTALLATION.md")
     .pipe(replace(/<version>/g, version))
     .pipe(dest("./docs"));
 });

@@ -1,0 +1,51 @@
+import { Meta, Markdown, Canvas, Story } from "@storybook/blocks";
+import * as ValidationStories from "./validation.stories.js";
+
+<Meta title="Form/Validation" />
+
+# Form Validation
+
+SGDS form web components have HTML constraint validation and sgds's own validation behaviour built into it with the [ElementInternals API](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals)
+
+## Sample form
+
+<Canvas of={ValidationStories.ConstraintValidation}>
+  <Story of={ValidationStories.ConstraintValidation} />
+</Canvas>
+
+## Constraint validation
+
+The above sample form shows the [constraint validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation) built into the components.
+
+Click submit button on an empty form to observe the error message and invalid state changes.
+
+Click reset button to reset the form's validity and the control's value.
+
+## SGDS validation behavour
+
+Sgds form components are validated onchange, after the input is blurred. If the input's value do not meet the constraint validation, it will be flagged as invalid.
+During input, validation state gets reset and re-validated again upon onchange (when the input is out of focus again).
+
+Finally, a final validation check is fired upon clicking the submit button, during onsubmit, before the form gets submitted to the server.
+
+Try focusing and blurring on the controls without inputting any value to observe SGDS onchange validation behaviour.
+
+## Obtain form value via FormData 
+
+<Canvas of={ValidationStories.FormData}>
+  <Story of={ValidationStories.FormData} />
+</Canvas>
+
+## Summary of component's validation behaviour
+
+| **Component**      | **Status**                                  | **Constraint Validations**                                                                   | **SGDS Validation Behaviour**                                                                                                                                                                                               | **Additional SGDS Custom Validation** |
+| ------------------ | ------------------------------------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| **Checkbox**       | Implemented                                 | 1. Required                                                                                  | 1. Validation after input is touched. <br/> 2. Validation happens on form submit, blocks submission. <br/> 3. Validation resets when form resets. <br/> 4. When disabled, validation is disabled.                           |                                       |
+| **Input**          | Implemented                                 | 1. Required <br/> 2. Pattern <br/> 3. Min <br/> 4. Max <br/> 5. MinLength <br/> 6. MaxLength | 1. Validation shows on `onChange` and after input is touched. <br/> 2. Validation happens on form submit, blocks submission. <br/> 3. Validation resets when form resets. <br/> 4. When disabled, validation is disabled.   |                                       |
+| **QuantityToggle** | Implemented                                 | 1. Min <br/> 2. Max                                                                          | 1. Validation occurs on `onChange` and after input is touched. <br/> 2. Validation happens on form submit, blocks submission. <br/> 3. Validation resets when form resets. <br/> 4. When disabled, validation is disabled.  |                                       |
+| **Radio**          | Implemented                                 | 1. Required                                                                                  | 1. Validation occurs after input is touched. <br/> 2. Validation happens on form submit, blocks submission. <br/> 3. Validation resets when form resets. <br/> 4. When disabled, validation is disabled.                    |                                       |
+| **Textarea**       | Implemented                                 | 1. Required <br/> 2. MinLength <br/> 3. MaxLength                                            | 1. Validation shows on `onChange` and after input is touched. <br/> 2. Validation happens on form submit, blocks submission. <br/> 3. Validation resets when form resets. <br/> 4. When disabled, validation is disabled.   |                                       |
+| **FileUpload**     | Partially implemented (file size limit WIP) | 1. Required                                                                                  | 1. Validation happens on submission <br/> 2. Validation resets when form resets. <br/> 3. When disabled, validation is disabled.                                                                     | File size limit validation (WIP)      |
+| **ActionCard**     | WIP                                         |                                                                                              |                                                                                                                                                                                                                             |                                       |
+| **Combobox**       | WIP                                         |                                                                                              |                                                                                                                                                                                                                             |                                       |
+| **Datepicker**     | WIP                                         | 1. Required <br/> 2. Min <br/> 3. Max                                                        | 1. Validation happens on `onChange` and after input is touched. <br/> 2. Validation happens on form submit, blocks submission. <br/> 3. Validation resets when form resets. <br/> 4. When disabled, validation is disabled. |                                       |

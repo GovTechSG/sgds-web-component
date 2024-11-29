@@ -5,7 +5,7 @@ import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import iconStyles from "./icon.css";
 
 /**
- * @summary An icon button is a user interface element that combines an icon and a button, serving as a clickable or tabbable component.
+ * @summary Icons offer a form of visual shorthand that we are all familiar with. They can label, inform and aid navigation quickly and effectively in minimal space. Icons must first and foremost communicate meaning. By default, the icon component renders icons form SgdsIcon library set
  *
  * @event sgds-blur - Emitted when the button is blurred.
  * @event sgds-focus - Emitted when the button is focused.
@@ -37,6 +37,7 @@ export class SgdsIcon extends SgdsElement {
     if (name) {
       // Dynamically import the SVG if not cached
       try {
+        //TODO: This path is too specific to our repo, it won't work for users
         const response = await fetch(`/src/icons/${name}.svg`);
 
         if (response.ok) {

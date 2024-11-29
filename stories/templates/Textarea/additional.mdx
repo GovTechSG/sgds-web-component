@@ -1,12 +1,23 @@
 ## Validation
 
-`SgdsTextarea` runs native HTMLInputElement methods to check on the [constraint validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation) of the input and applies our own validation stylings
+HTML form constraint validation is built-in. By default, there is no need to control the `invalid` prop to enable constraint validations. 
 
-Set `hasFeedback` to true to enable sgds validation stylings.
+- To enable invalid styles and feedback message set `hasFeedback` to true
 
+Press submit to show constraint validation behaviour for `required` and `minlength=5`. 
+Resetting the form, reset's the validity and the value of the input to its initial default value.
 
 <Canvas of={TextareaStories.Validation}>
   <Story of={TextareaStories.Validation} />
+</Canvas>
+
+### Overriding the invalid feedback message 
+
+By default, the invalid feedback reflected is based on the browser's native error message based on the ValidityState.  To override the default message, 
+use `invalidFeedback` prop. 
+
+<Canvas of={TextareaStories.OverrideInvalidFeedback}>
+  <Story of={TextareaStories.OverrideInvalidFeedback} />
 </Canvas>
 
 ## Default Value 

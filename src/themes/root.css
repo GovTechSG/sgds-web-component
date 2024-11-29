@@ -157,11 +157,10 @@
   /* Primitive - Line Height */
   --sgds-line-height-body: 1.2;
   --sgds-line-height-heading: 1.5;
-  --sgds-line-height-min: 20px;
+  --sgds-line-height-min: 0.2;
 
   /* Primitive - Opacity */
   --sgds-opacity-0: 0;
-  --sgds-opacity-5: 0.05;
   --sgds-opacity-10: 0.1;
   --sgds-opacity-20: 0.2;
   --sgds-opacity-30: 0.3;
@@ -220,12 +219,10 @@
   --sgds-dimension-144: 144px;
   --sgds-dimension-168: 168px;
   --sgds-dimension-192: 192px;
-  --sgds-dimension-224: 224px;
   --sgds-dimension-256: 256px;
   --sgds-dimension-280: 280px;
   --sgds-dimension-320: 320px;
   --sgds-dimension-480: 480px;
-  --sgds-dimension-688: 688px;
 
   /* Semantic - Spacer */
   --sgds-padding-none: var(--sgds-spacer-0);
@@ -292,6 +289,8 @@
   --sgds-form-width-4-xl: var(--sgds-dimension-80);
 
   /* Semantic - Image Size */
+
+  --sgds-form-icon-size-xs: var(--sgds-icon-size-xs);
   --sgds-form-icon-size-sm: var(--sgds-icon-size-sm);
   --sgds-form-icon-size-md: var(--sgds-icon-size-md);
   --sgds-form-icon-size-lg: var(--sgds-icon-size-lg);

@@ -8,12 +8,12 @@
   line-height: var(--sgds-line-height-heading);
 }
 
-:host([density="compact"]) .accordion-content {
+:host([density="compact"]) .content {
   padding: var(--sgds-padding-xs) var(--sgds-padding-sm) var(--sgds-padding-sm);
 }
 
-:host([density="compact"]) slot[name="accordion-caret"]::slotted(*),
-:host([density="compact"]) slot[name="accordion-caret"] svg {
+:host([density="compact"]) slot[name="caret"]::slotted(*),
+:host([density="compact"]) slot[name="caret"] svg {
   width: var(--sgds-icon-size-md);
   height: var(--sgds-icon-size-md);
 }
@@ -67,8 +67,8 @@
   cursor: not-allowed;
 }
 
-slot[name="accordion-caret"]::slotted(*),
-slot[name="accordion-caret"] svg {
+slot[name="caret"]::slotted(*),
+slot[name="caret"] svg {
   margin-left: auto;
   transition: transform 0.2s ease-in-out;
   width: var(--sgds-icon-size-lg);
@@ -76,8 +76,8 @@ slot[name="accordion-caret"] svg {
   color: var(--sgds-default-color-subtle);
 }
 
-.accordion-btn:not(.collapsed) slot[name="accordion-caret"]::slotted(*),
-.accordion-btn:not(.collapsed) slot[name="accordion-caret"] svg {
+.accordion-btn:not(.collapsed) slot[name="caret"]::slotted(*),
+.accordion-btn:not(.collapsed) slot[name="caret"] svg {
   transform: rotate(-180deg);
 }
 
@@ -86,7 +86,7 @@ slot[name="accordion-caret"] svg {
   overflow: hidden;
 }
 
-.accordion-content {
+.content {
   display: block;
   padding: var(--sgds-padding-xs) var(--sgds-padding-lg) var(--sgds-padding-lg);
 }

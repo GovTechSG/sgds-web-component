@@ -31,7 +31,15 @@ sgds-faq-grid {
   flex-direction: column;
   gap: var(--sgds-gap-sm);
 }
+.d-flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--sgds-gap-sm);
+}
 
 .docs-story{
   background: var(--sgds-default-bg);
+}
+ul.toc-list > * {
+  font-size: var(--sgds-font-size-1);
 }

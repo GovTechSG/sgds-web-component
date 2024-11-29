@@ -39,7 +39,9 @@ export class SgdsTabGroup extends SgdsElement {
   /**@internal */
   private panels: SgdsTabPanel[] = [];
   /** The variant types of tabs. Controls the visual stylesof all `sgds-tabs` in its slot. It also dynamically changes the slots of `sgds-tab` */
-  @property({ reflect: true, attribute: true }) variant: "tabs-basic-toggle" | "tabs-info-toggle";
+  @property({ reflect: true, attribute: true }) variant: "underlined" | "solid" = "underlined";
+  @property({ type: String, reflect: true }) orientation: "horizontal" | "vertical" = "horizontal";
+  @property({ type: String, reflect: true }) density: "compact" | "default" = "default";
 
   connectedCallback() {
     const whenAllDefined = Promise.all([
@@ -194,7 +196,10 @@ export class SgdsTabGroup extends SgdsElement {
       this.activeTab = tab;
 
       // Sync active tab and panel
-      this.tabs.map(el => (el.active = el === this.activeTab));
+      this.tabs.forEach(el => {
+        el.active = el === this.activeTab ? true : false;
+      });
+
       this.panels.map(el => (el.active = el.name === this.activeTab?.panel));
 
       // Emit events
@@ -226,6 +231,29 @@ export class SgdsTabGroup extends SgdsElement {
     this.panels = this.getAllPanels();
   }
 
+  updateTabsAttributes() {
+    // Select the 'nav' slot
+    const navSlot = this.shadowRoot?.querySelector('slot[name="nav"]') as HTMLSlotElement | null;
+    if (!navSlot) return;
+
+    // Get assigned elements (slotted sgds-tab elements)
+    const tabs = navSlot.assignedElements({ flatten: true }) as HTMLElement[];
+
+    // Iterate over each tab and set the variant and orientation
+    tabs.forEach(tab => {
+      if (tab.tagName.toLowerCase() === "sgds-tab") {
+        tab.setAttribute("variant", this.variant);
+        tab.setAttribute("orientation", this.orientation);
+        tab.setAttribute("density", this.density);
+      }
+    });
+  }
+
+  handleSlotChange() {
+    this.updateTabsAttributes();
+    this.syncTabsAndPanels();
+  }
+
   render() {
     return html`
       <div
@@ -233,6 +261,8 @@ export class SgdsTabGroup extends SgdsElement {
         @click=${this.handleClick}
         @keydown=${this.handleKeyDown}
         variant=${ifDefined(this.variant)}
+        orientation=${ifDefined(this.orientation)}
+        density=${ifDefined(this.density)}
       >
         <div part="nav" class="tab-group__nav" role="tablist">
           <slot
@@ -242,8 +272,10 @@ export class SgdsTabGroup extends SgdsElement {
               "nav-tabs": true,
               nav: true
             })}
+            orientation=${ifDefined(this.orientation)}
             variant=${ifDefined(this.variant)}
-            @slotchange=${this.syncTabsAndPanels}
+            density=${ifDefined(this.density)}
+            @slotchange=${this.handleSlotChange}
           ></slot>
         </div>
         <div part="body">

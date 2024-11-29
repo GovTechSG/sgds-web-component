@@ -16,6 +16,7 @@ import Drawer from './components/Drawer.vue'
 import Dropdown from './components/Dropdown.vue'
 import FileUpload from './components/FileUpload.vue'
 import Footer from './components/Footer.vue'
+import Icon from './components/Icon.vue'
 import Input from './components/Input.vue'
 import Mainnav from './components/Mainnav.vue'
 import Masthead from './components/Masthead.vue'
@@ -55,6 +56,7 @@ import Trigger from './components/Trigger.vue'
           <Drawer />
           <Dropdown />
           <FileUpload />
+          <Icon />
           <Input />
           <Modal />
           <Pagination />

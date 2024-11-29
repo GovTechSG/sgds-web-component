@@ -5,6 +5,7 @@ import { property, queryAsync } from "lit/decorators.js";
 import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
 import { SgdsInput } from "../Input/sgds-input";
 import datepickerInputStyles from "./datepicker-input.css";
+import { watch } from "../../utils/watch";
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
 export class DatepickerInput extends SgdsInput {
@@ -28,16 +29,30 @@ export class DatepickerInput extends SgdsInput {
   constructor() {
     super();
     this.type = "text";
-    this.hasFeedback = true;
-    this._handleValueChange = () => null;
+    this.hasFeedback = "both";
+    // this._handleChange = () => null;
+    // this._handleInputChange = () => null
   }
-  connectedCallback(): void {
-    super.connectedCallback();
-    this.addEventListener("sgds-change", this._validateInput);
-  }
+  // connectedCallback(): void {
+  //   super.connectedCallback();
+  //   this.addEventListener("sgds-change", this._validateInput);
+  // }
 
-  async firstUpdated(changes) {
-    super.firstUpdated(changes);
+  protected override async _handleChange(e: Event) {
+    this.value = this.input.value;
+    this.emit("sgds-change");
+    super._mixinHandleChange(e);
+    await this._validateInput();
+  }
+  /** @internal */
+  @watch("_isTouched", { waitUntilFirstUpdate: true })
+  override _handleIsTouched() {
+    if (this._isTouched && this.required) {
+      this.invalid = true;
+    }
+  }
+  async firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
     this._applyInputMask(this.dateFormat);
   }
   private async _applyInputMask(dateFormat: string) {
