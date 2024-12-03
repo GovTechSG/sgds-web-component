@@ -488,11 +488,10 @@
 
 
       <sgds-tab-group variant="tabs-info-toggle">
-        <sgds-tab slot="nav" panel="apple"><svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-            fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
-            <path
-              d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-          </svg><span slot="count">1</span><span slot="label">Apple</span>
+        <sgds-tab slot="nav" panel="apple">
+					<sgds-icon slot="icon" name="map"></sgds-icon>
+					<span slot="count">1</span>
+					<span slot="label">Apple</span>
         </sgds-tab>
         <sgds-tab active slot="nav" panel="banana"><span slot="count">12</span><span
             slot="label">Banana</span></sgds-tab>
@@ -504,23 +503,25 @@
         <sgds-tab-panel name="carrot">Carrot</sgds-tab-panel>
       </sgds-tab-group>
       <sgds-tab-group variant="tabs-basic-toggle">
-        <sgds-tab slot="nav" panel="12"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-            fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
-            <path
-              d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-          </svg>12 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bank"
-            viewBox="0 0 16 16">
-            <path
-              d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-          </svg></sgds-tab>
-        <sgds-tab active slot="nav" panel="2">2</sgds-tab>
-        <sgds-tab slot="nav" panel="3">3</sgds-tab>
+        <sgds-tab slot="nav" panel="12">
+					<sgds-icon slot="icon" name="map"></sgds-icon>
+					<span slot="label">12</span>
+				</sgds-tab>
+        <sgds-tab active slot="nav" panel="2">
+					<sgds-icon slot="icon" name="map"></sgds-icon>
+					<span slot="label">2</span>
+				</sgds-tab>
+        <sgds-tab slot="nav" panel="3">
+					<sgds-icon slot="icon" name="map"></sgds-icon>
+					<span slot="label">3</span>
+				</sgds-tab>
         <sgds-tab-panel name="12">12</sgds-tab-panel>
         <sgds-tab-panel name="2">2</sgds-tab-panel>
         <sgds-tab-panel name="3">3</sgds-tab-panel>
       </sgds-tab-group>
       <sgds-tab-group variant="underlined" orientation="horizontal">
         <sgds-tab slot="nav" state="active" panel="one">
+					<sgds-icon slot="icon" name="map"></sgds-icon>
           <span slot="label">hellotab</span>
         </sgds-tab>
         <sgds-tab slot="nav" panel="two">
@@ -785,6 +786,7 @@
 				<sgds-accordion>
 					<sgds-accordion-item>
 						<div slot="header">Accordion 1</div>
+						<sgds-icon slot="caret" name="arrow-down"></sgds-icon>
 						<span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
 							soluta eaque fugit fuga distinctio? Eum.</span>
 					</sgds-accordion-item>
@@ -926,24 +928,35 @@
 		<div class="container">
 			<h2>Form Validation</h2>
 			<form id="validation-form">
-				<sgds-file-upload required multiple hinttext="test" name="fileuploadtest" hasFeedback>File
-					upload</sgds-file-upload>
+				<sgds-file-upload required multiple hinttext="test" name="fileuploadtest" hasFeedback>
+					File upload
+					<sgds-icon slot="icon" size="md" name="placeholder"></sgds-icon>
+					<sgds-icon slot="validIcon" size="md" name="placeholder"></sgds-icon>
+					<sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
+				</sgds-file-upload>
 				<sgds-input label="Label" hinttext="type hello" name="email" required hasFeedback="both" icon='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
 												<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-												</svg>' placeholder="Placeholder" minlength="3">
+												</svg>' placeholder="Placeholder" minlength="3" valid>
+												<sgds-icon slot="validIcon" size="md" name="placeholder"></sgds-icon>
+												<sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
 				</sgds-input>
-				<sgds-quantity-toggle name="quant" min="1" max="2" value="4" hinttext="type hello"
-					hasFeedback="both"></sgds-quantity-toggle>
+				<sgds-quantity-toggle name="quant" min="1" max="2" value="4" hinttext="type hello" hasFeedback="both">
+					<sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
+				</sgds-quantity-toggle>
 				<sgds-checkbox-group hasFeedback hintText="hint for checkbox" label="checkbox">
 					<sgds-checkbox name="checkbox" value="checkboxhello" required>she</sgds-checkbox>
 					<sgds-checkbox name="checkbox" value="checkboxhello" required>he</sgds-checkbox>
+					<sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
 				</sgds-checkbox-group>
 
 				<sgds-radio-group hasFeedback name="radio" required>
 					<sgds-radio value="1" disab led>1</sgds-radio>
 					<sgds-radio value="2">2 </sgds-radio>
+					<sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
 				</sgds-radio-group>
-				<sgds-textarea minlength="3" required hasFeedback resize="auto"></sgds-textarea>
+				<sgds-textarea minlength="3" required hasFeedback resize="auto">
+					<sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
+				</sgds-textarea>
 				<sgds-button type="submit" id="submit">Submit</sgds-button>
 				<sgds-button type="reset" id="submit">Reset</sgds-button>
 				<sgds-button type="button" id="disableT">Disabled toggle</sgds-button>
@@ -1518,23 +1531,17 @@
       </div>
       <h2>Dropdown</h2>
       <div class="row">
-        <sgds-dropdown menuVariant="default" drop="up" disabled>
+        <sgds-dropdown menuVariant="default" drop="down">
           <sgds-button slot="toggler" role="button">
             Dropdown
             <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
           </sgds-button>
-          <sgds-dropdown-item active><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-              class="bi bi-upload" viewBox="0 0 16 16">
-              <path
-                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-              <path
-                d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
-            </svg>Option label</sgds-dropdown-item>
-          <sgds-dropdown-item disabled>Option label</sgds-dropdown-item>
-          <sgds-dropdown-item>Option label</sgds-dropdown-item>
-          <sgds-dropdown-item>Option label</sgds-dropdown-item>
-          <sgds-dropdown-item>Option label</sgds-dropdown-item>
-          <sgds-dropdown-item>Option label</sgds-dropdown-item>
+          <sgds-dropdown-item active><sgds-icon name="placeholder"></sgds-icon>Option label</sgds-dropdown-item>
+          <sgds-dropdown-item disabled><sgds-icon name="placeholder"></sgds-icon>Option label</sgds-dropdown-item>
+          <sgds-dropdown-item><sgds-icon name="placeholder"></sgds-icon>Option label</sgds-dropdown-item>
+          <sgds-dropdown-item><sgds-icon name="placeholder"></sgds-icon>Option label</sgds-dropdown-item>
+          <sgds-dropdown-item><sgds-icon name="placeholder"></sgds-icon>Option label</sgds-dropdown-item>
+          <sgds-dropdown-item><sgds-icon name="placeholder"></sgds-icon>Option label</sgds-dropdown-item>
         </sgds-dropdown>
 
       </div>
