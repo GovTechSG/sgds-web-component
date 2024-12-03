@@ -35,7 +35,7 @@
   flex-grow: 1;
   color: var(--sgds-form-color);
   font-size: var(--sgds-font-size-2);
-  line-height: var(--sgds-line-height-heading);
+  line-height: var(--sgds-line-height-body);
 }
 
 .form-control-group > .form-control:focus {

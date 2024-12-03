@@ -42,7 +42,7 @@
   gap: var(--sgds-gap-2-xs);
   font-size: var(--sgds-font-size-2);
   font-weight: var(--sgds-btn-font-weight);
-  line-height: var(--sgds-line-height-md);
+  line-height: var(--sgds-line-height-body);
   padding: 0px var(--sgds-padding-lg);
   min-width: var(--sgds-dimension-96);
   height: var(--sgds-dimension-48);
