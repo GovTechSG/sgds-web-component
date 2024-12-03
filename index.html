@@ -416,22 +416,32 @@
         </sgds-icon-button>
       </div>
       <a href="#">light dom anchor</a>
-      <sgds-link href="https://google.com">Default</sgds-link>
-      <sgds-link href="https://google.com" target="_blank">Default</sgds-link>
-      <sgds-link href="https://google.com" disabled>Default (disabled)</sgds-link>
-      <sgds-link href="https://google.com" variant="danger">Danger</sgds-link>
-      <sgds-link href="https://google.com" variant="danger" disabled>Danger (disabled)</sgds-link>
-      <sgds-link href="https://google.com" size="lg">Large</sgds-link>
-      <sgds-link href="https://google.com" size="sm">Small</sgds-link>
-      <sgds-link href="https://google.com">
-        <i class="bi bi-arrow-left" slot="leftIcon"></i>
-        leftIcon</sgds-link>
-      <sgds-link href="https://google.com">
-        <i class="bi bi-arrow-right" slot="rightIcon"></i>
-        rightIcon</sgds-link>
-      <sgds-link href="https://google.com" target="_blank">
-        <i class="bi bi-arrow-right" slot="rightIcon"></i>
-        rightIcon</sgds-link>
+      <a href="#" disabled>disabled light dom anchor</a>
+      <sgds-link>
+        <a href="#"><sgds-icon name="placeholder"></sgds-icon> light dom anchor</a>
+      </sgds-link>
+      <sgds-link>
+        <a href="#">light dom anchor <sgds-icon name="placeholder"></sgds-icon></a>
+      </sgds-link>
+      <sgds-link >
+        <a disabled>disabled light dom anchor <sgds-icon name="placeholder"></sgds-icon></a>
+      </sgds-link>
+      <sgds-link variant="danger">
+        <a href="#">Danger light dom anchor <sgds-icon name="placeholder"></sgds-icon></a>
+      </sgds-link>
+      <sgds-link variant="danger">
+        <a href="#" disabled>Danger light dom anchor <sgds-icon name="placeholder"></sgds-icon></a>
+      </sgds-link>
+      <sgds-link size="lg">
+        <a href="#"> LG light dom anchor <sgds-icon name="placeholder"></sgds-icon></a>
+      </sgds-link>
+      <sgds-link size="sm">
+        <a href="#">SM light dom anchor <sgds-icon name="placeholder"></sgds-icon></a>
+      </sgds-link>
+      <sgds-link>
+        <a href="#" target="_blank">SM light dom anchor <sgds-icon name="placeholder"></sgds-icon></a>
+      </sgds-link>
+
       <sgds-textarea required label="Label" name="textarea" rows="4" invalidfeedback="test" placeholder="Placeholder"
         minlength="" hasFeedback maxlength="100" resize="vertical" defaultvalue="">
       </sgds-textarea>
@@ -485,19 +495,20 @@
       </sgds-table>
     </div>
     <div class="container">
-
-
       <sgds-tab-group variant="tabs-info-toggle">
         <sgds-tab slot="nav" panel="apple">
 					<sgds-icon slot="icon" name="map"></sgds-icon>
 					<span slot="count">1</span>
-					<span slot="label">Apple</span>
+					<span>Apple</span>
         </sgds-tab>
-        <sgds-tab active slot="nav" panel="banana"><span slot="count">12</span><span
-            slot="label">Banana</span></sgds-tab>
-        <sgds-tab slot="nav" panel="carrot"><sgds-badge slot="count" badgeClasses="text-dark">100</sgds-badge><span
-            slot="label">Carrot</span></sgds-tab>
-
+        <sgds-tab active slot="nav" panel="banana">
+					<span slot="count">12</span>
+					<span>Banana</span>
+				</sgds-tab>
+        <sgds-tab slot="nav" panel="carrot">
+					<sgds-badge slot="count" badgeClasses="text-dark">100</sgds-badge>
+					<span>Carrot</span>
+				</sgds-tab>
         <sgds-tab-panel name="apple">Apple</sgds-tab-panel>
         <sgds-tab-panel name="banana">Banana</sgds-tab-panel>
         <sgds-tab-panel name="carrot">Carrot</sgds-tab-panel>
@@ -505,15 +516,15 @@
       <sgds-tab-group variant="tabs-basic-toggle">
         <sgds-tab slot="nav" panel="12">
 					<sgds-icon slot="icon" name="map"></sgds-icon>
-					<span slot="label">12</span>
+					<span>12</span>
 				</sgds-tab>
         <sgds-tab active slot="nav" panel="2">
 					<sgds-icon slot="icon" name="map"></sgds-icon>
-					<span slot="label">2</span>
+					<span>2</span>
 				</sgds-tab>
         <sgds-tab slot="nav" panel="3">
 					<sgds-icon slot="icon" name="map"></sgds-icon>
-					<span slot="label">3</span>
+					<span>3</span>
 				</sgds-tab>
         <sgds-tab-panel name="12">12</sgds-tab-panel>
         <sgds-tab-panel name="2">2</sgds-tab-panel>
@@ -522,56 +533,60 @@
       <sgds-tab-group variant="underlined" orientation="horizontal">
         <sgds-tab slot="nav" state="active" panel="one">
 					<sgds-icon slot="icon" name="map"></sgds-icon>
-          <span slot="label">hellotab</span>
+          <span>hellotab</span>
         </sgds-tab>
         <sgds-tab slot="nav" panel="two">
-          <span slot="label">two</span>
+          two
         </sgds-tab>
         <sgds-tab slot="nav" state="active" panel="three">
-          <span slot="label">three</span>
+          three
         </sgds-tab>
-
+        <sgds-tab-panel name="one">one</sgds-tab-panel>
+        <sgds-tab-panel name="two">two</sgds-tab-panel>
+        <sgds-tab-panel name="three">three</sgds-tab-panel>
+      </sgds-tab-group>
+      <sgds-tab-group orientation="horizontal" density="compact">
+        <sgds-tab slot="nav" state="active" panel="one">
+          hellotab
+        </sgds-tab>
+        <sgds-tab slot="nav" panel="two">
+          two
+        </sgds-tab>
+        <sgds-tab slot="nav" state="active" panel="three">
+          three
+        </sgds-tab>
         <sgds-tab-panel name="one">one</sgds-tab-panel>
         <sgds-tab-panel name="two">two</sgds-tab-panel>
         <sgds-tab-panel name="three">three</sgds-tab-panel>
       </sgds-tab-group>
 
       <!-- Vertical Tab Group -->
-      <sgds-tab-group variant="underlined" orientation="vertical">
+      <sgds-tab-group id="tabs-lukhei-test" orientation="horizontal">
         <sgds-tab slot="nav" panel="one">
-          <span slot="label">hellotabvert</span>
+          lukhei testing
         </sgds-tab>
-        <sgds-tab slot="nav" disabled panel="two">
-          <span slot="label">disabled</span>
+        <sgds-tab slot="nav" panel="two">
+          disabled
         </sgds-tab>
         <sgds-tab slot="nav" panel="three">
-          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-bank" viewBox="0 0 16 16">
-            <path
-              d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-          </svg>
-          <span slot="label">three</span>
+          <sgds-icon slot="icon"  name="placeholder"></sgds-icon>
+          three
         </sgds-tab>
-
+     
         <sgds-tab-panel name="one">one</sgds-tab-panel>
         <sgds-tab-panel name="two">two</sgds-tab-panel>
         <sgds-tab-panel name="three">three</sgds-tab-panel>
       </sgds-tab-group>
-
       <sgds-tab-group variant="underlined" orientation="vertical" density="compact">
-        <sgds-tab slot="nav" panel="one">
-          <span slot="label">hellotabvertcompact </span>
+        <sgds-tab slot="nav" panel="one" variant="solid">
+          lukhei test 
         </sgds-tab>
         <sgds-tab slot="nav" disabled panel="two">
-          <span slot="label">cdisabled </span>
+          cdisabled 
         </sgds-tab>
         <sgds-tab slot="nav" panel="three">
-          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-bank" viewBox="0 0 16 16">
-            <path
-              d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-          </svg>
-          <span slot="label">three</span>
+          <sgds-icon slot="icon" name="placeholder"></sgds-icon>
+          three
         </sgds-tab>
       </sgds-tab-group>
 
@@ -582,18 +597,14 @@
 
       <sgds-tab-group variant="solid">
         <sgds-tab slot="nav" active panel="one">
-          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-bank" viewBox="0 0 16 16">
-            <path
-              d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-          </svg>
-          <span slot="label">hellotabsolid</span>
+          <sgds-icon slot="icon" name="placeholder"></sgds-icon>
+          hellotabsolid
         </sgds-tab>
         <sgds-tab slot="nav" disabled panel="two">
-          <span slot="label">disabled</span>
+          disabled
         </sgds-tab>
         <sgds-tab slot="nav" panel="three">
-          <span slot="label">three</span>
+          three
         </sgds-tab>
 
         <sgds-tab-panel name="one">one</sgds-tab-panel>
@@ -603,18 +614,14 @@
 
       <sgds-tab-group variant="solid" density="compact">
         <sgds-tab slot="nav" active panel="one">
-          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-bank" viewBox="0 0 16 16">
-            <path
-              d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-          </svg>
-          <span slot="label">hellotabsolidcomp</span>
+          <sgds-icon slot="icon" name="placeholder"></sgds-icon>
+          hellotabsolidcomp
         </sgds-tab>
         <sgds-tab slot="nav" disabled panel="two">
-          <span slot="label">disabledcomp</span>
+          disabledcomp
         </sgds-tab>
         <sgds-tab slot="nav" panel="three">
-          <span slot="label">three</span>
+          three
         </sgds-tab>
 
         <sgds-tab-panel name="one">one</sgds-tab-panel>
@@ -622,16 +629,15 @@
         <sgds-tab-panel name="three">three</sgds-tab-panel>
       </sgds-tab-group>
 
-      <div class="tabs-container">
         <sgds-tab-group variant="solid" orientation="vertical">
           <sgds-tab slot="nav" panel="one">
-            <span slot="label">hellotabsolid</span>
+            hellotabsolid
           </sgds-tab>
           <sgds-tab slot="nav" disabled panel="two">
-            <span slot="label">disabled</span>
+            disabled
           </sgds-tab>
           <sgds-tab slot="nav" panel="three">
-            <span slot="label">three</span>
+            three
           </sgds-tab>
 
           <sgds-tab-panel name="one">one</sgds-tab-panel>
@@ -641,20 +647,19 @@
 
         <sgds-tab-group variant="solid" orientation="vertical" density="compact">
           <sgds-tab slot="nav" panel="one">
-            <span slot="label">compact</span>
+            compact
           </sgds-tab>
           <sgds-tab slot="nav" disabled panel="two">
-            <span slot="label">disabledcompact</span>
+            disabledcompact
           </sgds-tab>
           <sgds-tab slot="nav" panel="three">
-            <span slot="label">threecompact</span>
+            threecompact
           </sgds-tab>
 
           <sgds-tab-panel name="one">one</sgds-tab-panel>
           <sgds-tab-panel name="two">two</sgds-tab-panel>
           <sgds-tab-panel name="three">three</sgds-tab-panel>
         </sgds-tab-group>
-      </div>
       <h2>Stepper</h2>
       <div>
         <h3>Horizontal Stepper</h3>

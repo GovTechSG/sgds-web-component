@@ -22,7 +22,7 @@
 }
 
 :host([disabled]) .tab {
-  opacity: 0.5;
+  opacity: var(--sgds-opacity-5);
   cursor: not-allowed;
 }
 
@@ -76,93 +76,3 @@
   box-shadow: var(--sgds-box-shadow-focus);
   outline: 0;
 }
-
-/* .nav-link {
-  color: var(--sgds-body-color);
-  display: block;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-  cursor: pointer;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .nav-link {
-    transition: none;
-  }
-}
-
-.nav-link.tabs-info-toggle {
-  padding: 0.75rem;
-  border-radius: 0.3125rem;
-  background-color: var(--sgds-body-bg);
-  border: 1px solid var(--sgds-gray-400);
-  min-width: 11.875rem;
-}
-
-.nav-link:not(.disabled).tabs-info-toggle.active,
-.nav-link:not(.disabled).tabs-info-toggle:hover {
-  border-color: var(--sgds-primary);
-  color: var(--sgds-primary);
-  font-weight: 700;
-}
-
-.nav-link.tabs-info-toggle .tabs-info-label {
-  display: flex;
-  text-align: right;
-  justify-content: space-between;
-}
-
-.nav-link.tabs-info-toggle .tabs-info-count {
-  text-align: right;
-}
-
-.nav-link.tabs-basic-toggle {
-  border: 1px solid var(--sgds-gray-400);
-  border-radius: 0;
-  background-color: var(--sgds-body-bg);
-  padding: 0.5rem 1.5rem;
-}
-
-.nav-link.tabs-basic-toggle slot {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.nav-link:not(.disabled).tabs-basic-toggle.active,
-.nav-link:not(.disabled).tabs-basic-toggle:hover {
-  color: var(--sgds-white);
-  background-color: var(--sgds-info);
-}
-
-.nav-link.disabled {
-  background-color: var(--sgds-gray-200);
-  color: var(--sgds-gray-400);
-  border-color: var(--sgds-gray-400);
-  cursor: not-allowed;
-}
-
-.nav-link:not(.tabs-basic-toggle):not(.tabs-info-toggle) {
-  padding-top: 0;
-  padding-left: 0;
-  padding-right: 0;
-  background-color: transparent;
-  border-color: transparent;
-  border: none;
-}
-
-.nav-link:not(.disabled):not(.tabs-basic-toggle):not(.tabs-info-toggle).active,
-.nav-link:not(.disabled):not(.tabs-basic-toggle):not(.tabs-info-toggle):hover {
-  border-bottom: 0.125rem solid var(--sgds-info);
-  font-weight: 700;
-  background-color: transparent;
-}
-
-.nav-link:not(.tabs-basic-toggle):not(.tabs-info-toggle).disabled {
-  background-color: var(--sgds-gray-200);
-  color: var(--sgds-gray-400);
-  border-color: var(--sgds-gray-400);
-  cursor: not-allowed;
-  background-color: transparent;
-} */

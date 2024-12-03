@@ -10,8 +10,6 @@ import { ifDefined } from "lit/directives/if-defined.js";
  */
 
 export default class LinkElement extends SgdsElement {
-  // static styles = [...SgdsElement.styles];
-
   /** when true, sets the active stylings of .nav-link */
   @property({ type: Boolean })
   active = false;
