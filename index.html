@@ -942,6 +942,7 @@
 				<sgds-input label="Label" hinttext="type hello" name="email" required hasFeedback="both" icon='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
 												<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
 												</svg>' placeholder="Placeholder" minlength="3" valid>
+												<sgds-icon slot="icon" name="placeholder"></sgds-icon>
 												<sgds-icon slot="validIcon" size="md" name="placeholder"></sgds-icon>
 												<sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
 				</sgds-input>
@@ -1247,19 +1248,13 @@
 						<sgds-input name="input2" label="Label" hintText="Hint text" prefix="Prefix" id="input2" minlength="5"
 							required value="" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
 						<sgds-input name="input3" label="Label" hintText="Hint text" id="input3" minlength="5" required value=""
-							hasFeedback invalidFeedback="Minimum length 5 test" icon='<svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-																	fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
-																	<path
-																			d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z">
-																	</path>
-															</svg>'></sgds-input>
+							hasFeedback invalidFeedback="Minimum length 5 test">
+							<sgds-icon slot="icon" name="placeholder"></sgds-icon>
+						</sgds-input>
 						<sgds-input name="input4" label="Label" hintText="Hint text" prefix="Prefix" id="input4" minlength="5"
-							required value="" hasFeedback invalidFeedback="Minimum length 5 test" icon='<svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-																	fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
-																	<path
-																			d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z">
-																	</path>
-															</svg>'></sgds-input>
+							required value="" hasFeedback invalidFeedback="Minimum length 5 test">
+							<sgds-icon slot="icon" name="placeholder"></sgds-icon>
+						</sgds-input>
 						<sgds-input name="input5" label="Label" hintText="Hint text" suffix="Suffix" id="input5" minlength="5"
 							required value="hiz" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
 						<sgds-input name="input6" label="Label" hintText="Hint text" loading id="input6" minlength="5" required
@@ -1271,19 +1266,13 @@
 						<sgds-input name="input9" label="Label" hintText="Hint text" valid suffix="Suffix" id="input9" minlength="5"
 							required value="" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
 						<sgds-input name="input10" label="Label" hintText="Hint text" loading prefix="Prefix" suffix="Suffix"
-							id="input10" minlength="5" required value="" hasFeedback invalidFeedback="Minimum length 5 test" icon='<svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-																	fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
-																	<path
-																			d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z">
-																	</path>
-															</svg>'></sgds-input>
+							id="input10" minlength="5" required value="" hasFeedback invalidFeedback="Minimum length 5 test">
+							<sgds-icon slot="icon" name="placeholder"></sgds-icon>
+						</sgds-input>
 						<sgds-input name="input10" label="Label" hintText="Hint text" valid prefix="Prefix" suffix="Suffix"
-							id="input10" minlength="5" required value="" hasFeedback invalidFeedback="Minimum length 5 test" icon='<svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-																	fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
-																	<path
-																			d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z">
-																	</path>
-															</svg>'></sgds-input>
+							id="input10" minlength="5" required value="" hasFeedback invalidFeedback="Minimum length 5 test">
+							<sgds-icon slot="icon" name="placeholder"></sgds-icon>
+						</sgds-input>
 						<sgds-input placeholder="invalid" label="label" hintText="hint" invalid hasFeedback></sgds-input>
 						<sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are
 								required to check this.</span></sgds-checkbox>

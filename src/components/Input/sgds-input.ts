@@ -4,7 +4,6 @@ import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
-import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import { html } from "lit/static-html.js";
 import FormControlElement from "../../base/form-control-element";
 import formPlaceholderStyles from "../../styles/form-placeholder.css";
@@ -17,6 +16,7 @@ import inputStyle from "./input.css";
 /**
  * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
  *
+ * @slot icon - The slot for leading icon of text input
  * @slot validIcon - The slot for valid icon
  * @slot invalidIcon - The slot for invalid icon
  *
@@ -48,9 +48,6 @@ export class SgdsInput
 
   /** The suffix of the input */
   @property({ type: String }) suffix: string;
-
-  /** Optional. Pass svg html of icons in string form*/
-  @property({ type: String }) icon: string;
 
   /** Sets the minimum length of the input */
   @property({ type: Number, reflect: true }) minlength: number;
@@ -197,7 +194,7 @@ export class SgdsInput
         })}"
         @click=${this._handleClick}
       >
-        ${this.icon ? html`<span class="form-control-icon">${unsafeSVG(this.icon)}</span>` : nothing}
+        <slot name="icon"></slot>
         ${this.prefix ? html`<span class="form-control-prefix">${this.prefix}</span>` : nothing}
         <input
           class="form-control"
