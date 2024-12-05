@@ -1,17 +1,21 @@
-:host {
-  /* New in 2.0 */
-  font-size: var(--sgds-body-font-size);
+:host([active]) .nav-link::slotted(*) {
+  --sgds-link-color: var(--sgds-default-color);
+ color: var(--sgds-link-color, --sgds-default-color);
+ pointer-events: none;
 }
+
+:host([active]) .nav-link::slotted(*:hover),
+:host([active]) .nav-link::slotted(*:focus),
+:host([active]) .nav-link::slotted(*:focus-visible){
+  --sgds-link-color-emphasis: var(--sgds-default-color);
+  color: var(--sgds-link-color-emphasis, --sgds-default-color);
+}
+
 slot[name="separator"]::slotted(*) {
   padding-left: var(--sgds-spacer-3);
   padding-right: var(--sgds-spacer-3);
-  color: var(--sgds-body-color);
 }
 
 :host(:last-of-type) .breadcrumb-item__separator {
   display: none;
-}
-
-.breadcrumb-item.active {
-  color: var(--sgds-body-color);
 }

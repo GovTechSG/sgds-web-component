@@ -1,8 +1,1 @@
 
-.breadcrumb {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 0;
-  padding: var(--sgds-spacer-0) var(--sgds-spacer-0);
-}
