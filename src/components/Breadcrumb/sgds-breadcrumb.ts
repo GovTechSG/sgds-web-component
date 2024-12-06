@@ -9,7 +9,7 @@ import type SgdsBreadcrumbItem from "./sgds-breadcrumb-item";
  * @summary Breadcrumbs help users to navigate and understand where they are on the current website or service.
  *
  * @slot default - The slot to pass in custom elements of `SgdsBreadcrumbItems`.
- * 
+ *
  */
 export class SgdsBreadcrumb extends SgdsElement {
   static styles = [...SgdsElement.styles, breadcrumbStyle];
@@ -29,7 +29,7 @@ export class SgdsBreadcrumb extends SgdsElement {
    *            <sgds-dropdown>
    *              <sgds-icon-button slot="toggler">
    *                <sgds-icon>
-   *              </sgds-icon-button> 
+   *              </sgds-icon-button>
    *              <sgds-dropdown-item></sgds-dropdown-item>
    *               ...
    *            </sgds-dropdown>
@@ -50,9 +50,9 @@ export class SgdsBreadcrumb extends SgdsElement {
     const mapItems = items.filter((item, index) => {
       if (index > 0 && index < items.length - 2) {
         const clonedAnchor = item.querySelector("a");
-        const clonedAnchorNode = clonedAnchor.cloneNode(true)
+        const clonedAnchorNode = clonedAnchor.cloneNode(true);
         const dropdownItem = document.createElement("sgds-dropdown-item");
-        dropdownItem.appendChild(clonedAnchorNode)
+        dropdownItem.appendChild(clonedAnchorNode);
         dropdown.appendChild(dropdownItem);
         return;
       } else {

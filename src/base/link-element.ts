@@ -23,8 +23,8 @@ export default class LinkElement extends SgdsElement {
   disabled = false;
 
   @watch("disabled")
-  _handleDisabled(){
-    this.setAttribute("aria-disabled", `${this.disabled}`)
+  _handleDisabled() {
+    this.setAttribute("aria-disabled", `${this.disabled}`);
   }
 
   render() {

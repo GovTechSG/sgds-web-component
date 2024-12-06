@@ -30,6 +30,7 @@ export class SgdsDropdownItem extends LinkElement {
           disabled: this.disabled,
           active: this.active
         })}"
+        tabindex=${this.disabled ? "-1": "0"}
       >
         <slot></slot>
         ${this.active

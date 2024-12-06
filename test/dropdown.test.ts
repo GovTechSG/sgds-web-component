@@ -514,35 +514,22 @@ describe("sgds-dropdown-item", () => {
     const el = await fixture<SgdsDropdownItem>(html`<sgds-dropdown-item></sgds-dropdown-item>`);
     assert.shadowDom.equal(
       el,
-      `  <div>
-        <a
-          class="dropdown-item"
-          aria-disabled="false"
-          href=""
-          tabindex="0"
-          role="menuitem"
-          target="_self"
-        >
-          <div class="dropdown-item-label">
-            <slot>
-            </slot>
-          </div>
-        </a>
+      `   <div
+        class="dropdown-item"
+        tabindex="0"
+      >
+        <slot></slot>
       </div>`
     );
   });
-  it("href prop is forwarded to a tag href attr", async () => {
-    const el = await fixture(html`<sgds-dropdown-item href="#">test</sgds-dropdown-item>`);
-    expect(el.shadowRoot?.querySelector("a")).to.have.attribute("href", "#");
-  });
-  it("active prop is forwarded to <a> class", async () => {
+  it("active prop is forwarded to .dropdown-item", async () => {
     const el = await fixture(html`<sgds-dropdown-item active>test</sgds-dropdown-item>`);
-    expect(el.shadowRoot?.querySelector("a")).to.have.class("active");
+    expect(el.shadowRoot?.querySelector("div.dropdown-item")).to.have.class("active");
   });
   it("disabled prop is forwarded to <a> class", async () => {
     const el = await fixture(html`<sgds-dropdown-item disabled>test</sgds-dropdown-item>`);
-    expect(el.shadowRoot?.querySelector("a")).to.have.class("disabled");
-    expect(el.shadowRoot?.querySelector("a")).to.have.attribute("aria-disabled", "true");
-    expect(el.shadowRoot?.querySelector("a")).to.have.attribute("tabindex", "-1");
+    expect(el.shadowRoot?.querySelector("div.dropdown-item")).to.have.class("disabled");
+    expect(el.shadowRoot?.querySelector("div.dropdown-item")).to.have.attribute("tabindex", "-1");
+    expect(el.getAttribute("aria-disabled")).to.equal("true")
   });
 });

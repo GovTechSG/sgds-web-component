@@ -16,9 +16,8 @@
   color: var(--sgds-link-color-emphasis, --sgds-default-color);
 }
 
-slot[name="separator"]::slotted(*) {
-  padding-left: var(--sgds-spacer-3);
-  padding-right: var(--sgds-spacer-3);
+.breadcrumb-item__separator svg  {
+ vertical-align: middle;
 }
 
 :host(:last-of-type) .breadcrumb-item__separator {
