@@ -6,6 +6,7 @@ import dropdownStyle from "./dropdown.css";
 import dropdownItemStyle from "./dropdown-item.css";
 /**
  * @summary `SgdsDropdownItem` are navigation links built with `HTMLAnchorElement`. It should be used in the default slot of `SgdsDropdown`
+ * @slot default - The default slot for SgdsDropdownItem. Pass in anchor tags directly for navigation items.
  */
 export class SgdsDropdownItem extends LinkElement {
   static styles = [dropdownStyle, dropdownItemStyle];
@@ -30,7 +31,7 @@ export class SgdsDropdownItem extends LinkElement {
           disabled: this.disabled,
           active: this.active
         })}"
-        tabindex=${this.disabled ? "-1": "0"}
+        tabindex=${this.disabled ? "-1" : "0"}
       >
         <slot></slot>
         ${this.active

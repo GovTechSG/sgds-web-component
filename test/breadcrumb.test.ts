@@ -22,7 +22,7 @@ describe("sgds-breadcrumb", () => {
       <sgds-breadcrumb-item><a href="#">About</a></sgds-breadcrumb-item>
       <sgds-breadcrumb-item><a href="https://www.google.com/">Contacts</a></sgds-breadcrumb-item>
       <sgds-breadcrumb-item><a href="https://www.google.com/">Info</a></sgds-breadcrumb-item>
-  </sgds-breadcrumb>`);
+    </sgds-breadcrumb>`);
     assert.shadowDom.equal(
       el,
       ` <div aria-label="breadcrumb">
@@ -40,7 +40,7 @@ describe("sgds-breadcrumb", () => {
       <sgds-breadcrumb-item><a href="https://www.google.com/">Contacts</a></sgds-breadcrumb-item>
       <sgds-breadcrumb-item><a href="https://www.google.com/">Info</a></sgds-breadcrumb-item>
       <sgds-breadcrumb-item><a href="https://www.google.com/">Last</a></sgds-breadcrumb-item>
-  </sgds-breadcrumb>`);
+    </sgds-breadcrumb>`);
     assert.shadowDom.equal(
       el,
       ` <div aria-label="breadcrumb">
@@ -114,16 +114,16 @@ describe("sgds-breadcrumb", () => {
         `
     );
   });
-  it("the last breadcrumb-item in breadcrumb gets active true auto assigned", async() => {
+  it("the last breadcrumb-item in breadcrumb gets active true auto assigned", async () => {
     const el = await fixture<SgdsBreadcrumb>(html`<sgds-breadcrumb>
-      	<sgds-breadcrumb-item><a href="#">Home</a></sgds-breadcrumb-item>
-				<sgds-breadcrumb-item><a href="#">About</a></sgds-breadcrumb-item>
-				<sgds-breadcrumb-item><a href="https://www.google.com/">Contacts</a></sgds-breadcrumb-item>
+      <sgds-breadcrumb-item><a href="#">Home</a></sgds-breadcrumb-item>
+      <sgds-breadcrumb-item><a href="#">About</a></sgds-breadcrumb-item>
+      <sgds-breadcrumb-item><a href="https://www.google.com/">Contacts</a></sgds-breadcrumb-item>
     </sgds-breadcrumb>`);
 
-    const lastItem = el.querySelectorAll("sgds-breadcrumb-item")[2]
-    expect(lastItem.active).to.equal(true)
-  })
+    const lastItem = el.querySelectorAll("sgds-breadcrumb-item")[2];
+    expect(lastItem.active).to.equal(true);
+  });
 });
 
 describe("sgds-breadcrumb-item", () => {
