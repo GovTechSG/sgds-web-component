@@ -1,18 +1,15 @@
-import { property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
-import type SgdsBreadcrumbItem from "./sgds-breadcrumb-item";
-import breadcrumbStyle from "./breadcrumb.css";
 import { warnUnregisteredElements } from "../../utils/ce-registry";
+import breadcrumbStyle from "./breadcrumb.css";
+import type SgdsBreadcrumbItem from "./sgds-breadcrumb-item";
 /**
  * @summary Breadcrumbs help users to navigate and understand where they are on the current website or service.
  *
  * @slot default - The slot to pass in custom elements of `SgdsBreadcrumbItems`.
- * @slot separator - Defines all the separator of `SgdsBreadcrumbItems`. Defaults to "/"
- *
- * @csspart base - The nav element wrapper of `SgdsBreadcrumb`
- *
+ * 
  */
 export class SgdsBreadcrumb extends SgdsElement {
   static styles = [...SgdsElement.styles, breadcrumbStyle];
@@ -27,6 +24,17 @@ export class SgdsBreadcrumb extends SgdsElement {
     warnUnregisteredElements("sgds-icon-button");
     warnUnregisteredElements("sgds-icon");
   }
+  /**
+   * creates `<sgds-breadcrumb-item>
+   *            <sgds-dropdown>
+   *              <sgds-icon-button slot="toggler">
+   *                <sgds-icon>
+   *              </sgds-icon-button> 
+   *              <sgds-dropdown-item></sgds-dropdown-item>
+   *               ...
+   *            </sgds-dropdown>
+   *          <sgds-breadcrumb-item>`
+   */
   private _replaceExcessItemsWithDropdown(items: SgdsBreadcrumbItem[]) {
     const breadcrumbItem = document.createElement("sgds-breadcrumb-item");
     const dropdown = document.createElement("sgds-dropdown");
@@ -41,18 +49,10 @@ export class SgdsBreadcrumb extends SgdsElement {
     dropdown.appendChild(overflowButton);
     const mapItems = items.filter((item, index) => {
       if (index > 0 && index < items.length - 2) {
-        //  const clonedItem = item.cloneNode(true)
-        //  const clonedLabel = clonedItem.textContent.trim()
         const clonedAnchor = item.querySelector("a");
-        const clonedLabel = clonedAnchor.textContent.trim();
-        //  const cloned = clonedAnchor.cloneNode(true)
-        const anchorAttributes = clonedAnchor.getAttributeNames();
+        const clonedAnchorNode = clonedAnchor.cloneNode(true)
         const dropdownItem = document.createElement("sgds-dropdown-item");
-        anchorAttributes.forEach(attribute => {
-          const attributeValue = clonedAnchor.getAttribute(attribute);
-          dropdownItem.setAttribute(attribute, attributeValue);
-        });
-        dropdownItem.innerText = clonedLabel;
+        dropdownItem.appendChild(clonedAnchorNode)
         dropdown.appendChild(dropdownItem);
         return;
       } else {
