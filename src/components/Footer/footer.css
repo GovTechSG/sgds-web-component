@@ -23,11 +23,10 @@ slot[name="title"]::slotted(*) {
   --sgds-header-color: var(--sgds-default-color-inverse);
   --sgds-font-size-6: var(--sgds-font-size-5);
   --sgds-margin-2-xs: var(--sgds-margin-none);
-  --sgds-line-height-heading: var(--sgds-line-height-body);
   color: var(--sgds-header-color, --sgds-default-color-inverse);
   font-size: var(--sgds-font-size-6, --sgds-font-size-5);
   font-weight: var(--sgds-font-weight-bold);
-  line-height: var(--sgds-line-height-heading, --sgds-line-height-body);
+  line-height: var(--sgds-line-height-heading);
   letter-spacing: var(--sgds-letter-spacing-tight);
   margin-top: var(--sgds-margin-none);
   margin-bottom: var(--sgds-margin-2-xs, --sgds-margin-none);

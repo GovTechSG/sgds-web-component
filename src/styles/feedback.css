@@ -3,8 +3,14 @@
   gap: var(--sgds-form-gap-sm);
 }
 
+.invalid-feedback-container slot::slotted(*),
+.invalid-feedback-container svg {
+  color: var(--sgds-form-danger-color);
+}
+
 .invalid-feedback {
   color: var(--sgds-form-danger-color);
   font-size: var(--sgds-font-size-1);
   font-weight: var(--sgds-font-weight-regular);
+  line-height: var(--sgds-line-height-min);
 }

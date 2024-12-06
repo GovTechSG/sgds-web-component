@@ -1,9 +1,3 @@
-:host {
-  --file-upload-left-icon-color: var(--sgds-success);
-  --file-upload-remove-icon-color: var(--sgds-body-color);
-  --file-upload-remove-icon-hover-color: ;
-}
-
 .file-upload {
   display: flex;
   flex-direction: column;
@@ -37,18 +31,6 @@
   cursor: pointer;
 }
 
-.file-upload-list-item span:first-of-type svg {
-  color: var(--file-upload-left-icon-color);
-}
-
-.file-upload-list-item span:last-of-type svg {
-  color: var(--file-upload-remove-icon-color);
-}
-
-.file-upload-list-item span:last-of-type svg:hover {
-  color: var(--file-upload-remove-icon-hover-color);
-}
-
 ul {
   margin: 0;
   padding: 0;
@@ -65,4 +47,9 @@ label {
 
 sgds-close-button {
   margin-left: auto;
+}
+
+slot[name="validIcon"]::slotted(*),
+slot[name="validIcon"] svg {
+  color: var(--sgds-form-success-color);
 }
