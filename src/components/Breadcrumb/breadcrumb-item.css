@@ -1,3 +1,8 @@
+:host{
+  display: flex;
+  gap: var(--sgds-gap-xs);
+  align-items: center;
+}
 :host([active]) .nav-link::slotted(*) {
   --sgds-link-color: var(--sgds-default-color);
  color: var(--sgds-link-color, --sgds-default-color);

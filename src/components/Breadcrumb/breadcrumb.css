@@ -1,1 +1,4 @@
-
+.breadcrumb{
+  display: flex;
+  gap: var(--sgds-gap-xs);
+}

@@ -1,9 +1,10 @@
-import { property, query } from "lit/decorators.js";
+import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsBreadcrumbItem from "./sgds-breadcrumb-item";
 import breadcrumbStyle from "./breadcrumb.css";
+import { warnUnregisteredElements } from "../../utils/ce-registry";
 /**
  * @summary Breadcrumbs help users to navigate and understand where they are on the current website or service.
  *
@@ -20,48 +21,66 @@ export class SgdsBreadcrumb extends SgdsElement {
 
   /**@internal */
   @query("slot") defaultSlot: HTMLSlotElement;
-  /**@internal */
-  @query('slot[name="separator"]') separatorSlot: HTMLSlotElement;
 
-  // Generates a clone of the separator element to use for each breadcrumb item
-  private _getSeparator() {
-    const separator = this.separatorSlot.assignedElements({ flatten: true })[0] as HTMLElement;
-
-    // Clone it, remove ids, and slot it
-    const clone = separator.cloneNode(true) as HTMLElement;
-    [clone, ...clone.querySelectorAll("[id]")].forEach(el => el.removeAttribute("id"));
-    clone.setAttribute("data-default", "");
-    clone.slot = "separator";
-
-    return clone;
+  private _checkDependencies() {
+    warnUnregisteredElements("sgds-dropdown");
+    warnUnregisteredElements("sgds-icon-button");
+    warnUnregisteredElements("sgds-icon");
   }
-
-  private _handleSlotChange() {
-    const items = [...this.defaultSlot.assignedElements({ flatten: true })].filter(
-      item => item.tagName.toLowerCase() === "sgds-breadcrumb-item"
-    ) as SgdsBreadcrumbItem[];
-
-    items.forEach((item, index) => {
-      // Append separators to each item if they don't already have one
-      const separator = item.querySelector('[slot="separator"]');
-      if (separator === null) {
-        // No separator exists, add one
-        item.append(this._getSeparator());
-      } else if (separator.hasAttribute("data-default")) {
-        // A default separator exists, replace it
-        separator.replaceWith(this._getSeparator());
+  private _replaceExcessItemsWithDropdown(items: SgdsBreadcrumbItem[]) {
+    const breadcrumbItem = document.createElement("sgds-breadcrumb-item");
+    const dropdown = document.createElement("sgds-dropdown");
+    const overflowButton = document.createElement("sgds-icon-button");
+    const icon = document.createElement("sgds-icon");
+    icon.setAttribute("name", "three-dots");
+    overflowButton.setAttribute("slot", "toggler");
+    overflowButton.setAttribute("variant", "ghost");
+    overflowButton.setAttribute("role", "button");
+    overflowButton.setAttribute("aria-haspopup", "menu");
+    overflowButton.appendChild(icon);
+    dropdown.appendChild(overflowButton);
+    const mapItems = items.filter((item, index) => {
+      if (index > 0 && index < items.length - 2) {
+        //  const clonedItem = item.cloneNode(true)
+        //  const clonedLabel = clonedItem.textContent.trim()
+        const clonedAnchor = item.querySelector("a");
+        const clonedLabel = clonedAnchor.textContent.trim();
+        //  const cloned = clonedAnchor.cloneNode(true)
+        const anchorAttributes = clonedAnchor.getAttributeNames();
+        const dropdownItem = document.createElement("sgds-dropdown-item");
+        anchorAttributes.forEach(attribute => {
+          const attributeValue = clonedAnchor.getAttribute(attribute);
+          dropdownItem.setAttribute(attribute, attributeValue);
+        });
+        dropdownItem.innerText = clonedLabel;
+        dropdown.appendChild(dropdownItem);
+        return;
       } else {
-        // The user provided a custom separator, leave it alone
+        return item;
       }
+    });
+    breadcrumbItem.appendChild(dropdown);
+    mapItems.splice(1, 0, breadcrumbItem);
 
-      // The last breadcrumb item is the "current page"
-
+    this.defaultSlot.replaceWith(...mapItems);
+  }
+  private _handleSlotChange(e) {
+    const items = e.target
+      .assignedElements({ flatten: true })
+      .filter(item => item.tagName.toLowerCase() === "sgds-breadcrumb-item") as SgdsBreadcrumbItem[];
+    items.forEach((item, index) => {
       if (index === items.length - 1) {
         item.setAttribute("aria-current", "page");
+        item.active = true;
       } else {
         item.removeAttribute("aria-current");
       }
     });
+
+    if (items.length >= 5) {
+      this._checkDependencies();
+      this._replaceExcessItemsWithDropdown(items);
+    }
   }
 
   render() {
@@ -69,16 +88,6 @@ export class SgdsBreadcrumb extends SgdsElement {
       <div aria-label=${ifDefined(this.ariaLabel)}>
         <div class="breadcrumb">
           <slot @slotchange=${this._handleSlotChange}></slot>
-          <slot name="separator" hidden aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M4.90438 2.13558C4.94724 2.0926 4.99817 2.0585 5.05424 2.03524C5.1103 2.01198 5.17041 2 5.23111 2C5.29181 2 5.35191 2.01198 5.40798 2.03524C5.46405 2.0585 5.51497 2.0926 5.55784 2.13558L11.0957 7.67339C11.1386 7.71626 11.1727 7.76718 11.196 7.82325C11.2193 7.87932 11.2312 7.93942 11.2312 8.00012C11.2312 8.06082 11.2193 8.12093 11.196 8.17699C11.1727 8.23306 11.1386 8.28398 11.0957 8.32685L5.55784 13.8647C5.47118 13.9513 5.35366 14 5.23111 14C5.10856 14 4.99103 13.9513 4.90438 13.8647C4.81772 13.778 4.76904 13.6605 4.76904 13.5379C4.76904 13.4154 4.81772 13.2979 4.90438 13.2112L10.1164 8.00012L4.90438 2.78904C4.8614 2.74617 4.8273 2.69525 4.80404 2.63918C4.78077 2.58312 4.7688 2.52301 4.7688 2.46231C4.7688 2.40161 4.78077 2.3415 4.80404 2.28544C4.8273 2.22937 4.8614 2.17845 4.90438 2.13558Z"
-                fill="#757575"
-              />
-            </svg>
-          </slot>
         </div>
       </div>
     `;
