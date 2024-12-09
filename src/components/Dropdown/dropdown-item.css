@@ -3,14 +3,17 @@
     --sgds-dropdown-item-active-bg: var(--sgds-info);
     --sgds-dropdown-item-disabled-color: var(--sgds-gray-500);
     background-color: var(--sgds-default-bg-transparent);
-    padding: var(--sgds-padding-xs) var(--sgds-padding-lg);
+    padding: var(--sgds-padding-sm) var(--sgds-padding-lg);
     clear: both;
-    display: block;
+    display: flex;
+    gap: var(--sgds-gap-sm);
+    align-items: center;
     color: var(--sgds-default-color);
     text-align: inherit;
-    text-decoration: none;
     white-space: nowrap;
+    cursor: pointer;
   }
+
   .dropdown-item:hover {
     background-color: var(--sgds-default-bg-translucent-subtle);
   }
@@ -34,14 +37,14 @@
     opacity: var(--sgds-opacity-50);
     pointer-events: none;
   }
-  
-  .dropdown-item-label {
-    display: flex;
-    align-items: center;
-    gap: var(--sgds-gap-sm);
-    padding: var(--sgds-padding-2-xs) 0;
-  }
 
   .active-icon {
     margin-left: auto;
+  }
+
+  ::slotted(*){
+    display: flex;
+    gap: var(--sgds-gap-sm);
+    text-decoration: none !important; 
+    color: inherit !important;
   }

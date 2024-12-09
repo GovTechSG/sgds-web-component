@@ -777,11 +777,28 @@
 		<div class="container">
 			<h2>Breadcrumb</h2>
 			<sgds-breadcrumb>
-				<sgds-breadcrumb-item href="https://www.yahoo.com">Home</sgds-breadcrumb-item>
-				<sgds-breadcrumb-item href="https://www.google.com">Item 1</sgds-breadcrumb-item>
-				<sgds-breadcrumb-item href="https://www.google.com">Item 2</sgds-breadcrumb-item>
-				<sgds-breadcrumb-item href="https://www.google.com">Item 3</sgds-breadcrumb-item>
-				<sgds-breadcrumb-item>Last Item</sgds-breadcrumb-item>
+				<sgds-breadcrumb-item><a href="#">Home</a></sgds-breadcrumb-item>
+				<sgds-breadcrumb-item>
+            <a href="#">About</a>
+        </sgds-breadcrumb-item>
+				<sgds-breadcrumb-item active>
+            <a href="https://www.google.com/">Contacts</a>
+        </sgds-breadcrumb-item>
+		
+			</sgds-breadcrumb>
+			<sgds-breadcrumb>
+				<sgds-breadcrumb-item>
+          <a href="#">Home</a>
+        </sgds-breadcrumb-item>
+				<sgds-breadcrumb-item>
+          <a href="#">About</a>
+        </sgds-breadcrumb-item>
+				<sgds-breadcrumb-item><a href="https://www.google.com">Contact</a></sgds-breadcrumb-item>
+				<sgds-breadcrumb-item><a href="#">Info</a></sgds-breadcrumb-item>
+				<sgds-breadcrumb-item><a href="#">More</a></sgds-breadcrumb-item>
+				<sgds-breadcrumb-item><a href="#">More</a></sgds-breadcrumb-item>
+				<sgds-breadcrumb-item><a href="#">More</a></sgds-breadcrumb-item>
+				<sgds-breadcrumb-item><a href="#">Last</a></sgds-breadcrumb-item>
 			</sgds-breadcrumb>
 		</div>
 		<div class="container">
@@ -1505,8 +1522,7 @@
       <div class="row">
         <h2>Overflow</h2>
         <sgds-dropdown menuVariant="default">
-          <sgds-icon-button slot="toggler" variant="ghost" size="sm" role="button" variant=${this.variant}
-            ?disabled=${this.disabled} aria-expanded="${this.menuIsOpen}" aria-haspopup="menu">
+          <sgds-icon-button slot="toggler" variant="ghost" size="sm" role="button" aria-haspopup="menu">
             <sgds-icon name="three-dots"></sgds-icon>
           </sgds-icon-button>
           <sgds-dropdown-item active><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -1517,7 +1533,7 @@
                 d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
             </svg>Option label</sgds-dropdown-item>
           <sgds-dropdown-item disabled>Option label</sgds-dropdown-item>
-          <sgds-dropdown-item>Option label</sgds-dropdown-item>
+          <sgds-dropdown-item href="https://www.google.com">Google</sgds-dropdown-item>
           <sgds-dropdown-item>Option label</sgds-dropdown-item>
           <sgds-dropdown-item>Option label</sgds-dropdown-item>
           <sgds-dropdown-item>Option label</sgds-dropdown-item>
@@ -1530,7 +1546,21 @@
             Dropdown
             <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
           </sgds-button>
-          <sgds-dropdown-item active><sgds-icon name="placeholder"></sgds-icon>Option label</sgds-dropdown-item>
+          <sgds-dropdown-item active>
+           sdfjhskfjhs ksljdhfskljdfh sdkljfhasdasdasdasdsadasdasd sdf 
+          </sgds-dropdown-item>
+          <sgds-dropdown-item>
+            <div href="#">Home</div>
+          </sgds-dropdown-item>
+          <sgds-dropdown-item active>
+            <a href="https://google.com" target="_blank"><sgds-icon name="placeholder"></sgds-icon>Option target blank</a>
+          </sgds-dropdown-item>
+          <sgds-dropdown-item disabled>
+            <a href="#"><sgds-icon name="placeholder"></sgds-icon>Option disabled</a>
+          </sgds-dropdown-item>
+          <sgds-dropdown-item >
+            <a href="#"><sgds-icon name="placeholder"></sgds-icon>Option label</a>
+          </sgds-dropdown-item>
           <sgds-dropdown-item disabled><sgds-icon name="placeholder"></sgds-icon>Option label</sgds-dropdown-item>
           <sgds-dropdown-item><sgds-icon name="placeholder"></sgds-icon>Option label</sgds-dropdown-item>
           <sgds-dropdown-item><sgds-icon name="placeholder"></sgds-icon>Option label</sgds-dropdown-item>
