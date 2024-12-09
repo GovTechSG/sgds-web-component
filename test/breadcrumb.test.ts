@@ -2,6 +2,7 @@ import "./sgds-web-component";
 import { assert, fixture, expect } from "@open-wc/testing";
 import { html } from "lit";
 import { SgdsBreadcrumb, SgdsBreadcrumbItem } from "../src/components";
+import Sinon from "sinon";
 
 describe("sgds-breadcrumb", () => {
   it("renders with default values", async () => {
@@ -34,6 +35,11 @@ describe("sgds-breadcrumb", () => {
     );
   });
   it("when items are more than 4 , matches shadowDOM semantically ", async () => {
+    // Mock fetch to prevent network requests
+    const fetchStub = Sinon.stub(window, "fetch").resolves(
+      new Response("<svg></svg>", { status: 200, headers: { "Content-Type": "image/svg+xml" } })
+    );
+
     const el = await fixture<SgdsBreadcrumb>(html`<sgds-breadcrumb>
       <sgds-breadcrumb-item><a href="#">Home</a></sgds-breadcrumb-item>
       <sgds-breadcrumb-item><a href="#">About</a></sgds-breadcrumb-item>
@@ -113,6 +119,9 @@ describe("sgds-breadcrumb", () => {
       </div>
         `
     );
+
+    // Restore the stubbed fetch method
+    fetchStub.restore();
   });
   it("the last breadcrumb-item in breadcrumb gets active true auto assigned", async () => {
     const el = await fixture<SgdsBreadcrumb>(html`<sgds-breadcrumb>
