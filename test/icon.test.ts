@@ -20,13 +20,14 @@ describe("<sgds-icon>", () => {
 
   it("handles invalid icon name gracefully", async () => {
     const fetchStub = Sinon.stub(window, "fetch").resolves(new Response(null, { status: 404 }));
+    const iconPath = new URL("/src/icons/invalid-icon.svg", import.meta.url).href;
 
     const el = await fixture<SgdsIcon>(html`<sgds-icon name="invalid-icon"></sgds-icon>`);
     await el.updateComplete;
     await new Promise(resolve => setTimeout(resolve, 0));
 
     expect(fetchStub.calledOnce).to.be.true;
-    expect(fetchStub.calledWith("/src/icons/invalid-icon.svg")).to.be.true;
+    expect(fetchStub.calledWith(iconPath)).to.be.true;
     expect(el.shadowRoot?.innerHTML).not.to.contain("<svg");
 
     fetchStub.restore();
@@ -44,12 +45,13 @@ describe("<sgds-icon>", () => {
         }
       )
     );
+    const iconPath = new URL("/src/icons/calendar.svg", import.meta.url).href;
     const el = await fixture<SgdsIcon>(html`<sgds-icon name="calendar"></sgds-icon>`);
     await el.updateComplete;
     await new Promise(resolve => setTimeout(resolve, 0));
 
     expect(fetchStub.calledOnce).to.be.true;
-    expect(fetchStub.calledWith("/src/icons/calendar.svg")).to.be.true;
+    expect(fetchStub.calledWith(iconPath)).to.be.true;
     expect(el.shadowRoot?.innerHTML).to.contain("<svg");
 
     fetchStub.restore();
