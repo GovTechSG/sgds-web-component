@@ -37,7 +37,7 @@ export class SgdsIcon extends SgdsElement {
     if (name) {
       // Dynamically import the SVG if not cached
       try {
-        const iconPath = new URL(`../../icons/${name}.svg`, import.meta.url).href;
+        const iconPath = new URL(`/src/icons/${name}.svg`, import.meta.url).href;
         const response = await fetch(iconPath);
 
         if (response.ok) {
