@@ -1,7 +1,6 @@
 import { html } from "lit";
 import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
 import { animateTo, stopAnimations } from "../../utils/animate";
@@ -30,14 +29,12 @@ import svgStyles from "../../styles/svg.css";
  * @event sgds-after-hide - Emitted after modal closes and the animations has completed
  *
  */
-export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
+export class SgdsModal extends SgdsElement {
   static styles = [...SgdsElement.styles, headerStyles, svgStyles, modalStyle];
   /**@internal */
-  static get scopedElements() {
-    return {
-      "sgds-close-button": SgdsCloseButton
-    };
-  }
+  static dependencies = {
+    "sgds-close-button": SgdsCloseButton
+  };
   /**@internal */
   @query(".modal") dialog: HTMLElement;
   /**@internal */

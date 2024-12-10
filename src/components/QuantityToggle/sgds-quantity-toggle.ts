@@ -1,4 +1,3 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { property, query, queryAsync } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -23,20 +22,15 @@ import SgdsIcon from "../Icon/sgds-icon";
  * @event sgds-input - Emitted when the control receives input and its value changes.
  *
  */
-export class SgdsQuantityToggle
-  extends SgdsFormValidatorMixin(ScopedElementsMixin(FormControlElement))
-  implements SgdsFormControl
-{
+export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
   static styles = [...FormControlElement.styles, formPlaceholderStyles, svgStyles, quantityToggleStyle];
 
   /** @internal */
-  static get scopedElements() {
-    return {
-      "sgds-input": SgdsInput,
-      "sgds-icon-button": SgdsIconButton,
-      "sgds-icon": SgdsIcon
-    };
-  }
+  static dependencies = {
+    "sgds-input": SgdsInput,
+    "sgds-icon-button": SgdsIconButton,
+    "sgds-icon": SgdsIcon
+  };
   /** @internal */
   @query("sgds-icon-button[ariaLabel^='increase by']") private plusBtn: HTMLButtonElement;
   /** @internal */

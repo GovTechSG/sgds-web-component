@@ -1,8 +1,9 @@
 import { SgdsBreadcrumb } from "./sgds-breadcrumb";
 import { SgdsBreadcrumbItem } from "./sgds-breadcrumb-item";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-breadcrumb", SgdsBreadcrumb);
-customElements.define("sgds-breadcrumb-item", SgdsBreadcrumbItem);
+register("sgds-breadcrumb", SgdsBreadcrumb);
+register("sgds-breadcrumb-item", SgdsBreadcrumbItem);
 
 declare global {
   interface HTMLElementTagNameMap {

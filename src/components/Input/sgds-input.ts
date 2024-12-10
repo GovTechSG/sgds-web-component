@@ -1,4 +1,3 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -28,18 +27,11 @@ import inputStyle from "./input.css";
  * @event sgds-valid - Emitted when input is valid
  *
  */
-export class SgdsInput
-  extends SgdsFormValidatorMixin(ScopedElementsMixin(FormControlElement))
-  implements SgdsFormControl
-{
+export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
   static styles = [...FormControlElement.styles, formPlaceholderStyles, inputStyle];
 
-  /**@internal */
-  static get scopedElements() {
-    return {
-      "sgds-spinner": SgdsSpinner
-    };
-  }
+  static dependencies = { "sgds-spinner": SgdsSpinner };
+
   @property({ reflect: true }) type: "email" | "number" | "password" | "search" | "tel" | "text" | "time" | "url" =
     "text";
 

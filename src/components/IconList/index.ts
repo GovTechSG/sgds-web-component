@@ -1,6 +1,7 @@
 import { SgdsIconList } from "./sgds-icon-list";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-icon-list", SgdsIconList);
+register("sgds-icon-list", SgdsIconList);
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -1,4 +1,3 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { createRef, ref } from "lit/directives/ref.js";
@@ -21,15 +20,13 @@ import { watch } from "../../utils/watch";
  * @event sgds-files-selected - Emitted when files are selected for uploading. Access the selected files with event.target.detail
  */
 
-export class SgdsFileUpload extends SgdsFormValidatorMixin(ScopedElementsMixin(FormControlElement)) {
+export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   static styles = [...FormControlElement.styles, fileUploadStyles];
   /**@internal */
-  static get scopedElements() {
-    return {
-      "sgds-button": SgdsButton,
-      "sgds-close-button": SgdsCloseButton
-    };
-  }
+  static dependencies = {
+    "sgds-button": SgdsButton,
+    "sgds-close-button": SgdsCloseButton
+  };
 
   /** Allows multiple files to be listed for uploading */
   @property({ type: Boolean, reflect: true }) multiple = false;

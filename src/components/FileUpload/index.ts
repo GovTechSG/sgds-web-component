@@ -1,6 +1,7 @@
 import { SgdsFileUpload } from "./sgds-file-upload";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-file-upload", SgdsFileUpload);
+register("sgds-file-upload", SgdsFileUpload);
 
 declare global {
   interface HTMLElementTagNameMap {

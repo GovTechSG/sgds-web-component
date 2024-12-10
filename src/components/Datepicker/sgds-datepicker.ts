@@ -1,4 +1,3 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { format, parse } from "date-fns";
 import { html } from "lit";
 import { property, query, queryAsync, state } from "lit/decorators.js";
@@ -8,14 +7,14 @@ import { DropdownElement } from "../../base/dropdown-element";
 import { type SgdsFormControl } from "../../utils/formSubmitController";
 import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
 import { watch } from "../../utils/watch";
+import { SgdsButton } from "../Button/sgds-button";
+import dropdownMenuStyle from "../Dropdown/dropdown-menu.css";
+import dropdownStyle from "../Dropdown/dropdown.css";
 import { DatepickerCalendar } from "./datepicker-calendar";
 import { DatepickerHeader } from "./datepicker-header";
 import DatepickerInput from "./datepicker-input";
-import { SgdsButton } from "../Button/sgds-button";
-import { ViewEnum } from "./types";
-import dropdownStyle from "../Dropdown/dropdown.css";
-import dropdownMenuStyle from "../Dropdown/dropdown-menu.css";
 import datepickerStyle from "./datepicker.css";
+import { ViewEnum } from "./types";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -37,21 +36,19 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  * displayDate on certain occasions. Example, when keyboard moves up to the next month, it updates displayDate which then affect the current
  * date view of the calendar
  */
-export class SgdsDatepicker extends ScopedElementsMixin(DropdownElement) implements SgdsFormControl {
+export class SgdsDatepicker extends DropdownElement implements SgdsFormControl {
   static styles = [...DropdownElement.styles, dropdownStyle, dropdownMenuStyle, datepickerStyle];
   /**@internal */
   static formAssociated = true;
   private _internals: ElementInternals;
 
   /**@internal */
-  static get scopedElements() {
-    return {
-      "sgds-datepicker-input": DatepickerInput,
-      "sgds-datepicker-calendar": DatepickerCalendar,
-      "sgds-datepicker-header": DatepickerHeader,
-      "sgds-button": SgdsButton
-    };
-  }
+  static dependencies = {
+    "sgds-datepicker-input": DatepickerInput,
+    "sgds-datepicker-calendar": DatepickerCalendar,
+    "sgds-datepicker-header": DatepickerHeader,
+    "sgds-button": SgdsButton
+  };
 
   /** When true, adds required attribute to input element */
   @property({ type: Boolean, reflect: true }) required = false;

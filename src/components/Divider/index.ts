@@ -1,6 +1,7 @@
 import { SgdsDivider } from "./sgds-divider";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-divider", SgdsDivider);
+register("sgds-divider", SgdsDivider);
 
 declare global {
   interface HTMLElementTagNameMap {
