@@ -423,7 +423,7 @@
       <sgds-link>
         <a href="#">light dom anchor <sgds-icon name="placeholder"></sgds-icon></a>
       </sgds-link>
-      <sgds-link >
+      <sgds-link>
         <a disabled>disabled light dom anchor <sgds-icon name="placeholder"></sgds-icon></a>
       </sgds-link>
       <sgds-link variant="danger">
@@ -534,20 +534,20 @@
           disabled
         </sgds-tab>
         <sgds-tab slot="nav" panel="three">
-          <sgds-icon slot="icon"  name="placeholder"></sgds-icon>
+          <sgds-icon slot="icon" name="placeholder"></sgds-icon>
           three
         </sgds-tab>
-     
+
         <sgds-tab-panel name="one">one</sgds-tab-panel>
         <sgds-tab-panel name="two">two</sgds-tab-panel>
         <sgds-tab-panel name="three">three</sgds-tab-panel>
       </sgds-tab-group>
       <sgds-tab-group variant="underlined" orientation="vertical" density="compact">
         <sgds-tab slot="nav" panel="one" variant="solid">
-          lukhei test 
+          lukhei test
         </sgds-tab>
         <sgds-tab slot="nav" disabled panel="two">
-          cdisabled 
+          cdisabled
         </sgds-tab>
         <sgds-tab slot="nav" panel="three">
           <sgds-icon slot="icon" name="placeholder"></sgds-icon>
@@ -594,37 +594,98 @@
         <sgds-tab-panel name="three">three</sgds-tab-panel>
       </sgds-tab-group>
 
-        <sgds-tab-group variant="solid" orientation="vertical">
-          <sgds-tab slot="nav" panel="one">
-            hellotabsolid
-          </sgds-tab>
-          <sgds-tab slot="nav" disabled panel="two">
-            disabled
-          </sgds-tab>
-          <sgds-tab slot="nav" panel="three">
-            three
-          </sgds-tab>
+      <sgds-tab-group variant="solid" orientation="vertical">
+        <sgds-tab slot="nav" panel="one">
+          hellotabsolid
+        </sgds-tab>
+        <sgds-tab slot="nav" disabled panel="two">
+          disabled
+        </sgds-tab>
+        <sgds-tab slot="nav" panel="three">
+          three
+        </sgds-tab>
 
-          <sgds-tab-panel name="one">one</sgds-tab-panel>
-          <sgds-tab-panel name="two">two</sgds-tab-panel>
-          <sgds-tab-panel name="three">three</sgds-tab-panel>
-        </sgds-tab-group>
+        <sgds-tab-panel name="one">one</sgds-tab-panel>
+        <sgds-tab-panel name="two">two</sgds-tab-panel>
+        <sgds-tab-panel name="three">three</sgds-tab-panel>
+      </sgds-tab-group>
 
-        <sgds-tab-group variant="solid" orientation="vertical" density="compact">
-          <sgds-tab slot="nav" panel="one">
-            compact
-          </sgds-tab>
-          <sgds-tab slot="nav" disabled panel="two">
-            disabledcompact
-          </sgds-tab>
-          <sgds-tab slot="nav" panel="three">
-            threecompact
-          </sgds-tab>
+      <sgds-tab-group variant="solid" orientation="vertical" density="compact">
+        <sgds-tab slot="nav" panel="one">
+          compact
+        </sgds-tab>
+        <sgds-tab slot="nav" disabled panel="two">
+          disabledcompact
+        </sgds-tab>
+        <sgds-tab slot="nav" panel="three">
+          threecompact
+        </sgds-tab>
 
-          <sgds-tab-panel name="one">one</sgds-tab-panel>
-          <sgds-tab-panel name="two">two</sgds-tab-panel>
-          <sgds-tab-panel name="three">three</sgds-tab-panel>
-        </sgds-tab-group>
+        <sgds-tab-panel name="one">one</sgds-tab-panel>
+        <sgds-tab-panel name="two">two</sgds-tab-panel>
+        <sgds-tab-panel name="three">three</sgds-tab-panel>
+      </sgds-tab-group>
+
+      <sgds-description-list-group>
+        <span slot="title">Title</span>
+        <span slot="subtitle">Description</span>
+
+        <sgds-description-list>
+          Label 1
+          <span slot="data">Value Text Description List 1</span>
+        </sgds-description-list>
+
+        <sgds-description-list>
+          Label 2
+          <span slot="data">Value Text Description List 2</span>
+        </sgds-description-list>
+      </sgds-description-list-group>
+
+      <sgds-description-list-group stacked>
+        <span slot="title"> Title</span>
+        <span slot="subtitle">Description</span>
+
+        <sgds-description-list>
+          Label Stacked 1
+          <span slot="data">Value Text Description List 1</span>
+        </sgds-description-list>
+
+        <sgds-description-list>
+          Label Stacked 2
+          <span slot="data">Value Text Description List 2</span>
+        </sgds-description-list>
+      </sgds-description-list-group>
+
+      <sgds-description-list-group stacked border>
+        <span slot="title"> Title Border</span>
+        <span slot="subtitle">Description</span>
+
+        <sgds-description-list>
+          Label Stacked 1
+          <span slot="data">Value Text Description List 1</span>
+        </sgds-description-list>
+
+        <sgds-description-list>
+          Label Stacked 2
+          <span slot="data">Value Text Description List 2</span>
+        </sgds-description-list>
+      </sgds-description-list-group>
+
+      <sgds-description-list-group border>
+        <span slot="title"> Title Border</span>
+        <span slot="subtitle">Description</span>
+
+        <sgds-description-list>
+          Label 1
+          <span slot="data">Value Text Description List 1</span>
+        </sgds-description-list>
+
+        <sgds-description-list>
+          Label 2
+          <span slot="data">Value Text Description List 2</span>
+        </sgds-description-list>
+      </sgds-description-list-group>
+
       <h2>Stepper</h2>
       <div>
         <h3>Horizontal Stepper</h3>
@@ -674,41 +735,41 @@
       </div>
       <br />
     </div>
-		<div class="container">
-			<sgds-combo-box menuList='["John Smith", "Jack Adams"]' label="label" hintText="hint" hasFeedback="true"
-				invalidFeedback="test">
-				<svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-					viewBox="0 0 16 16">
-					<path
-						d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-				</svg>
-			</sgds-combo-box>
-			<h2>Datepicker</h2>
-			<form id="datepicker-form">
-				<sgds-input type="date" hasFeedback required></sgds-input>
-				<sgds-input type="text" label="Label" hinttext="This is a hint text" name="email" inputclasses=""
-					invalidfeedback="test" icon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-envelope&quot; viewBox=&quot;0 0 16 16&quot;>
+    <div class="container">
+      <sgds-combo-box menuList='["John Smith", "Jack Adams"]' label="label" hintText="hint" hasFeedback="true"
+        invalidFeedback="test">
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+          class="bi bi-search" viewBox="0 0 16 16">
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+        </svg>
+      </sgds-combo-box>
+      <h2>Datepicker</h2>
+      <form id="datepicker-form">
+        <sgds-input type="date" hasFeedback required></sgds-input>
+        <sgds-input type="text" label="Label" hinttext="This is a hint text" name="email" inputclasses=""
+          invalidfeedback="test" icon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-envelope&quot; viewBox=&quot;0 0 16 16&quot;>
 												<path d=&quot;M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z&quot;/>
 												</svg>" placeholder="Placeholder" required hasFeedback>
-				</sgds-input>
-				<!-- <sgds-datepicker mindate="2024-01-02T12:00:00.000Z"
+        </sgds-input>
+        <!-- <sgds-datepicker mindate="2024-01-02T12:00:00.000Z"
 												maxdate="2024-01-30T12:00:00.000Z"></sgds-datepicker> -->
-				<sgds-button type="submit">Submit</sgds-button>
-			</form>
-			<sgds-datepicker label="Choose a date"></sgds-datepicker>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+      <sgds-datepicker label="Choose a date"></sgds-datepicker>
 
-			<sgds-datepicker id="lukhei" label="Birthdate" initialValue='["20/01/2024"]' mindate="2024-01-02T12:00:00.000Z"
-				maxdate="2024-01-30T12:00:00.000Z">
-			</sgds-datepicker>
-			<sgds-datepicker mode="range" initialValue='["20/01/2024", "22/02/2024"]' mindate="2024-01-02T12:00:00.000Z"
-				maxdate="2024-01-30T12:00:00.000Z">
-			</sgds-datepicker>
-			<sgds-datepicker mode="range" initialValue='["20/01/2024", "22/02/2024"]'>
-			</sgds-datepicker>
+      <sgds-datepicker id="lukhei" label="Birthdate" initialValue='["20/01/2024"]' mindate="2024-01-02T12:00:00.000Z"
+        maxdate="2024-01-30T12:00:00.000Z">
+      </sgds-datepicker>
+      <sgds-datepicker mode="range" initialValue='["20/01/2024", "22/02/2024"]' mindate="2024-01-02T12:00:00.000Z"
+        maxdate="2024-01-30T12:00:00.000Z">
+      </sgds-datepicker>
+      <sgds-datepicker mode="range" initialValue='["20/01/2024", "22/02/2024"]'>
+      </sgds-datepicker>
 
-			<!-- <sgds-datepicker menuIsOpen noFeedback></sgds-datepicker> -->
+      <!-- <sgds-datepicker menuIsOpen noFeedback></sgds-datepicker> -->
 
-			<!--  <br><br><br><br><br><br><br><br><br>
+      <!--  <br><br><br><br><br><br><br><br><br>
 								<sgds-datepicker id="myDatepicker2" label="Birthdate" hinttext="min date and max date" mode="range"
 										mindate="2024-01-02T12:00:00.000Z" maxdate="2024-01-30T12:00:00.000Z"></sgds-datepicker>
 								<sgds-datepicker id="myDatepicker2" mode="range"></sgds-datepicker>
@@ -716,353 +777,348 @@
 										initialValue='["03/29/2024", "03/29/2025"]'></sgds-datepicker>
 								<sgds-datepicker id="myDatepicker2" mode="range" noFlip dateformat="YYYY/MM/DD"
 										initialValue='["2024/03/29", "2025/03/29"]'></sgds-datepicker> -->
-		</div>
-		<div class="container">
-			<h2>Spinner</h2>
-			<div>
-				<sgds-spinner></sgds-spinner>
-				<sgds-spinner variant="neutral"></sgds-spinner>
-			</div>
-			<h3>With Label</h3>
-			<div class="row">
-				<div class="grid">
-					<sgds-spinner label="Loading"></sgds-spinner>
-					<sgds-spinner variant="neutral" label="Loading"></sgds-spinner>
-				</div>
-			</div>
-			<h3>Spinner Size</h3>
-			<div class="row">
-				<div class="grid">
-					<sgds-spinner size="sm"></sgds-spinner>
-					<sgds-spinner></sgds-spinner>
-					<sgds-spinner size="lg"></sgds-spinner>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<h2>Breadcrumb</h2>
-			<sgds-breadcrumb>
-				<sgds-breadcrumb-item href="https://www.yahoo.com">Home</sgds-breadcrumb-item>
-				<sgds-breadcrumb-item href="https://www.google.com">Item 1</sgds-breadcrumb-item>
-				<sgds-breadcrumb-item href="https://www.google.com">Item 2</sgds-breadcrumb-item>
-				<sgds-breadcrumb-item href="https://www.google.com">Item 3</sgds-breadcrumb-item>
-				<sgds-breadcrumb-item>Last Item</sgds-breadcrumb-item>
-			</sgds-breadcrumb>
-		</div>
-		<div class="container">
-  		<h2>Accordion</h2>
-  			<div class="row">
-    		<h3>Variant: default & Density: default</h3>
-				<sgds-accordion>
-					<sgds-accordion-item>
-						<div slot="header">Accordion 1</div>
-						<span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-							soluta eaque fugit fuga distinctio? Eum.</span>
-					</sgds-accordion-item>
-					<sgds-accordion-item disabled>
-						<div slot="header">Accordion 2</div>
-						<span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-							soluta eaque fugit fuga distinctio? Eum.</span>
-					</sgds-accordion-item>
-					<sgds-accordion-item open>
-						<div slot="header">Accordion 3</div>
-						<span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-							soluta eaque fugit fuga distinctio? Eum.</span>
-					</sgds-accordion-item>
-				</sgds-accordion>
-				<h3>Variant: default & Density: compact</h3>
-				<sgds-accordion density="compact">
-					<sgds-accordion-item>
-						<div slot="header">Accordion 1</div>
-						<span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-							soluta eaque fugit fuga distinctio? Eum.</span>
-					</sgds-accordion-item>
-					<sgds-accordion-item>
-						<div slot="header">Accordion 2</div>
-						<span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-							soluta eaque fugit fuga distinctio? Eum.</span>
-					</sgds-accordion-item>
-					<sgds-accordion-item open>
-						<div slot="header">Accordion 3</div>
-						<span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-							soluta eaque fugit fuga distinctio? Eum.</span>
-					</sgds-accordion-item>
-				</sgds-accordion>
-				<h3>Variant: border & Density: default</h3>
-				<sgds-accordion variant="border">
-					<sgds-accordion-item>
-						<div slot="header">Accordion 1</div>
-						<span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-							soluta eaque fugit fuga distinctio? Eum.</span>
-					</sgds-accordion-item>
-					<sgds-accordion-item>
-						<div slot="header">Accordion 2</div>
-						<span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-							soluta eaque fugit fuga distinctio? Eum.</span>
-					</sgds-accordion-item>
-					<sgds-accordion-item open>
-						<div slot="header">Accordion 3</div>
-						<span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-							soluta eaque fugit fuga distinctio? Eum.</span>
-					</sgds-accordion-item>
-				</sgds-accordion>
-				<h3>Variant: border & Density: compact</h3>
-				<sgds-accordion variant="border" density="compact">
-					<sgds-accordion-item>
-						<div slot="header">Accordion 1</div>
-						<span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-							soluta eaque fugit fuga distinctio? Eum.</span>
-					</sgds-accordion-item>
-					<sgds-accordion-item>
-						<div slot="header">Accordion 2</div>
-						<span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-							soluta eaque fugit fuga distinctio? Eum.</span>
-					</sgds-accordion-item>
-					<sgds-accordion-item open>
-						<div slot="header">Accordion 3</div>
-						<span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-							soluta eaque fugit fuga distinctio? Eum.</span>
-					</sgds-accordion-item>
-				</sgds-accordion>
-				<h3>Allow multiple</h3>
-				<sgds-accordion allowMultiple density="compact">
-					<sgds-accordion-item>
-						<div slot="header">Accordion 1</div>
-						<span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-							soluta eaque fugit fuga distinctio? Eum.</span>
-					</sgds-accordion-item>
-					<sgds-accordion-item open>
-						<div slot="header">Accordion 2</div>
-						<span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-							soluta eaque fugit fuga distinctio? Eum.</span>
-					</sgds-accordion-item>
-					<sgds-accordion-item open>
-						<div slot="header">Accordion 3</div>
-						<span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-							soluta eaque fugit fuga distinctio? Eum.</span>
-					</sgds-accordion-item>
-				</sgds-accordion>
-			</div>
-			<h2>Badge</h2>
-			<div class="d-flex-row">
-				<sgds-badge variant="info" outlined>
-					<sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
-					Testing
-				</sgds-badge>
-				<sgds-badge variant="info" show dismissible>
-					Testing
-				</sgds-badge>
-				<sgds-badge variant="success">
-					<sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
-					Testing
-				</sgds-badge>
-				<sgds-badge variant="success" outlined>
-					<sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
-					Testing
-				</sgds-badge>
-				<sgds-badge variant="danger">
-					Testingi
-				</sgds-badge>
-				<sgds-badge variant="danger" outlined>
-					<sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
-					Testing
-				</sgds-badge>
-				<sgds-badge variant="warning">
-					<sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
-					Testing
-				</sgds-badge>
-				<sgds-badge variant="warning" outlined>
-					<sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
-					Testing
-				</sgds-badge>
-				<sgds-badge variant="neutral">
-					<sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
-					Testing
-				</sgds-badge>
-				<sgds-badge variant="neutral" outlined>
-					<sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
-					Testing
-				</sgds-badge>
-				<sgds-badge variant="success" outlined show dismissible>
-					<sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
-					TESZI
-				</sgds-badge>
-				<sgds-badge variant="neutral" show dismissible>
-					Testing
-				</sgds-badge>
-				<br />
-			</div>
-  	</div>
+    </div>
+    <div class="container">
+      <h2>Spinner</h2>
+      <div>
+        <sgds-spinner></sgds-spinner>
+        <sgds-spinner variant="neutral"></sgds-spinner>
+      </div>
+      <h3>With Label</h3>
+      <div class="row">
+        <div class="grid">
+          <sgds-spinner label="Loading"></sgds-spinner>
+          <sgds-spinner variant="neutral" label="Loading"></sgds-spinner>
+        </div>
+      </div>
+      <h3>Spinner Size</h3>
+      <div class="row">
+        <div class="grid">
+          <sgds-spinner size="sm"></sgds-spinner>
+          <sgds-spinner></sgds-spinner>
+          <sgds-spinner size="lg"></sgds-spinner>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h2>Breadcrumb</h2>
+      <sgds-breadcrumb>
+        <sgds-breadcrumb-item href="https://www.yahoo.com">Home</sgds-breadcrumb-item>
+        <sgds-breadcrumb-item href="https://www.google.com">Item 1</sgds-breadcrumb-item>
+        <sgds-breadcrumb-item href="https://www.google.com">Item 2</sgds-breadcrumb-item>
+        <sgds-breadcrumb-item href="https://www.google.com">Item 3</sgds-breadcrumb-item>
+        <sgds-breadcrumb-item>Last Item</sgds-breadcrumb-item>
+      </sgds-breadcrumb>
+    </div>
+    <div class="container">
+      <h2>Accordion</h2>
+      <div class="row">
+        <h3>Variant: default & Density: default</h3>
+        <sgds-accordion>
+          <sgds-accordion-item>
+            <div slot="header">Accordion 1</div>
+            <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+              soluta eaque fugit fuga distinctio? Eum.</span>
+          </sgds-accordion-item>
+          <sgds-accordion-item disabled>
+            <div slot="header">Accordion 2</div>
+            <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+              soluta eaque fugit fuga distinctio? Eum.</span>
+          </sgds-accordion-item>
+          <sgds-accordion-item open>
+            <div slot="header">Accordion 3</div>
+            <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+              soluta eaque fugit fuga distinctio? Eum.</span>
+          </sgds-accordion-item>
+        </sgds-accordion>
+        <h3>Variant: default & Density: compact</h3>
+        <sgds-accordion density="compact">
+          <sgds-accordion-item>
+            <div slot="header">Accordion 1</div>
+            <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+              soluta eaque fugit fuga distinctio? Eum.</span>
+          </sgds-accordion-item>
+          <sgds-accordion-item>
+            <div slot="header">Accordion 2</div>
+            <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+              soluta eaque fugit fuga distinctio? Eum.</span>
+          </sgds-accordion-item>
+          <sgds-accordion-item open>
+            <div slot="header">Accordion 3</div>
+            <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+              soluta eaque fugit fuga distinctio? Eum.</span>
+          </sgds-accordion-item>
+        </sgds-accordion>
+        <h3>Variant: border & Density: default</h3>
+        <sgds-accordion variant="border">
+          <sgds-accordion-item>
+            <div slot="header">Accordion 1</div>
+            <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+              soluta eaque fugit fuga distinctio? Eum.</span>
+          </sgds-accordion-item>
+          <sgds-accordion-item>
+            <div slot="header">Accordion 2</div>
+            <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+              soluta eaque fugit fuga distinctio? Eum.</span>
+          </sgds-accordion-item>
+          <sgds-accordion-item open>
+            <div slot="header">Accordion 3</div>
+            <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+              soluta eaque fugit fuga distinctio? Eum.</span>
+          </sgds-accordion-item>
+        </sgds-accordion>
+        <h3>Variant: border & Density: compact</h3>
+        <sgds-accordion variant="border" density="compact">
+          <sgds-accordion-item>
+            <div slot="header">Accordion 1</div>
+            <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+              soluta eaque fugit fuga distinctio? Eum.</span>
+          </sgds-accordion-item>
+          <sgds-accordion-item>
+            <div slot="header">Accordion 2</div>
+            <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+              soluta eaque fugit fuga distinctio? Eum.</span>
+          </sgds-accordion-item>
+          <sgds-accordion-item open>
+            <div slot="header">Accordion 3</div>
+            <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+              soluta eaque fugit fuga distinctio? Eum.</span>
+          </sgds-accordion-item>
+        </sgds-accordion>
+        <h3>Allow multiple</h3>
+        <sgds-accordion allowMultiple density="compact">
+          <sgds-accordion-item>
+            <div slot="header">Accordion 1</div>
+            <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+              soluta eaque fugit fuga distinctio? Eum.</span>
+          </sgds-accordion-item>
+          <sgds-accordion-item open>
+            <div slot="header">Accordion 2</div>
+            <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+              soluta eaque fugit fuga distinctio? Eum.</span>
+          </sgds-accordion-item>
+          <sgds-accordion-item open>
+            <div slot="header">Accordion 3</div>
+            <span slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+              soluta eaque fugit fuga distinctio? Eum.</span>
+          </sgds-accordion-item>
+        </sgds-accordion>
+      </div>
+      <h2>Badge</h2>
+      <div class="d-flex-row">
+        <sgds-badge variant="info" outlined>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          Testing
+        </sgds-badge>
+        <sgds-badge variant="info" show dismissible>
+          Testing
+        </sgds-badge>
+        <sgds-badge variant="success">
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          Testing
+        </sgds-badge>
+        <sgds-badge variant="success" outlined>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          Testing
+        </sgds-badge>
+        <sgds-badge variant="danger">
+          Testingi
+        </sgds-badge>
+        <sgds-badge variant="danger" outlined>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          Testing
+        </sgds-badge>
+        <sgds-badge variant="warning">
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          Testing
+        </sgds-badge>
+        <sgds-badge variant="warning" outlined>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          Testing
+        </sgds-badge>
+        <sgds-badge variant="neutral">
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          Testing
+        </sgds-badge>
+        <sgds-badge variant="neutral" outlined>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          Testing
+        </sgds-badge>
+        <sgds-badge variant="success" outlined show dismissible>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          TESZI
+        </sgds-badge>
+        <sgds-badge variant="neutral" show dismissible>
+          Testing
+        </sgds-badge>
+        <br />
+      </div>
+    </div>
 
-		<div class="container">
-			<h2>Form Validation</h2>
-			<form id="validation-form">
-				<sgds-file-upload required multiple hinttext="test" name="fileuploadtest" hasFeedback>File
-					upload</sgds-file-upload>
-				<sgds-input label="Label" hinttext="type hello" name="email" required hasFeedback="both" icon='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+    <div class="container">
+      <h2>Form Validation</h2>
+      <form id="validation-form">
+        <sgds-file-upload required multiple hinttext="test" name="fileuploadtest" hasFeedback>File
+          upload</sgds-file-upload>
+        <sgds-input label="Label" hinttext="type hello" name="email" required hasFeedback="both" icon='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
 												<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
 												</svg>' placeholder="Placeholder" minlength="3">
-				</sgds-input>
-				<sgds-quantity-toggle name="quant" min="1" max="2" value="4" hinttext="type hello"
-					hasFeedback="both"></sgds-quantity-toggle>
-				<sgds-checkbox-group hasFeedback hintText="hint for checkbox" label="checkbox">
-					<sgds-checkbox name="checkbox" value="checkboxhello" required>she</sgds-checkbox>
-					<sgds-checkbox name="checkbox" value="checkboxhello" required>he</sgds-checkbox>
-				</sgds-checkbox-group>
+        </sgds-input>
+        <sgds-quantity-toggle name="quant" min="1" max="2" value="4" hinttext="type hello"
+          hasFeedback="both"></sgds-quantity-toggle>
+        <sgds-checkbox-group hasFeedback hintText="hint for checkbox" label="checkbox">
+          <sgds-checkbox name="checkbox" value="checkboxhello" required>she</sgds-checkbox>
+          <sgds-checkbox name="checkbox" value="checkboxhello" required>he</sgds-checkbox>
+        </sgds-checkbox-group>
 
-				<sgds-radio-group hasFeedback name="radio" required>
-					<sgds-radio value="1" disab led>1</sgds-radio>
-					<sgds-radio value="2">2 </sgds-radio>
-				</sgds-radio-group>
-				<sgds-textarea minlength="3" required hasFeedback resize="auto"></sgds-textarea>
-				<sgds-button type="submit" id="submit">Submit</sgds-button>
-				<sgds-button type="reset" id="submit">Reset</sgds-button>
-				<sgds-button type="button" id="disableT">Disabled toggle</sgds-button>
-				<sgds-button type="button" id="enabltT">Enable toggle</sgds-button>
-			</form>
-		</div>
-		<div class="container">
-			<h3>sample table, elipsis off</h3>
-			<sgds-table id="tablesample"></sgds-table>
-			<sgds-pagination id="samplepage" directionVariant="icon"></sgds-pagination>
-			<br><br>
-			<h3>ellipsisOn, limit 7, ellipsisJump 3</h3>
-			<sgds-table id="tablesample2"></sgds-table>
-			<sgds-pagination id="samplepage2" directionVariant="icon" limit="3" currentPage="3" ellipsisOn></sgds-pagination>
+        <sgds-radio-group hasFeedback name="radio" required>
+          <sgds-radio value="1" disab led>1</sgds-radio>
+          <sgds-radio value="2">2 </sgds-radio>
+        </sgds-radio-group>
+        <sgds-textarea minlength="3" required hasFeedback resize="auto"></sgds-textarea>
+        <sgds-button type="submit" id="submit">Submit</sgds-button>
+        <sgds-button type="reset" id="submit">Reset</sgds-button>
+        <sgds-button type="button" id="disableT">Disabled toggle</sgds-button>
+        <sgds-button type="button" id="enabltT">Enable toggle</sgds-button>
+      </form>
+    </div>
+    <div class="container">
+      <h3>sample table, elipsis off</h3>
+      <sgds-table id="tablesample"></sgds-table>
+      <sgds-pagination id="samplepage" directionVariant="icon"></sgds-pagination>
+      <br><br>
+      <h3>ellipsisOn, limit 7, ellipsisJump 3</h3>
+      <sgds-table id="tablesample2"></sgds-table>
+      <sgds-pagination id="samplepage2" directionVariant="icon" limit="3" currentPage="3" ellipsisOn></sgds-pagination>
 
-			<p>ellipsisOn=false</p>
-			<sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
-			<p>ellipsisOn=true</p>
-			<sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"
-					ellipsisOn></sgds-pagination>
-			<p>ellipsisOn=false, showFirstPage=true</p>
-			<sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"
-					showFirstPage></sgds-pagination>
-			<p>ellipsisOn=false, showFirstPage=true</p>
-			<sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"
-					showFirstPage></sgds-pagination>
-			<p>ellipsisOn=false, showLastPage=true</p>
-			<sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"
-					showLastPage></sgds-pagination>
-			<p>ellipsisOn=true, showLastPage=true</p>
-			<sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage
-					ellipsisOn></sgds-pagination>
-			<p>ellipsisOn=false, showLastPage=true, showFirstPage=true</p>
-			<sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage
-					showFirstPage></sgds-pagination>
-			<p>ellipsisOn=true, showLastPage=true, showFirstPage=true</p>
-			<sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage showFirstPage
-					ellipsisOn></sgds-pagination>
-			<p>ellipsisOn=false, showLastPage=true, showFirstPage=true</p>
-			<sgds-pagination dataLength="2" itemsPerPage="1" currentPage="1" showLastPage
-					showFirstPage></sgds-pagination>
-			test
-			<sgds-pagination dataLength="50" currentPage="4" showFirstPage></sgds-pagination>
-		</div>
-		<div class="container">
-				<h2>Button</h2>
-				<div class="row">
-						<div class="grid">
-								<sgds-button>Default</sgds-button>
-								<sgds-button variant="primary">Primary button</sgds-button>
-								<sgds-button variant="outline">Outline button</sgds-button>
-								<sgds-button variant="ghost">Ghost button</sgds-button>
-								<sgds-button variant="danger">Danger button</sgds-button>
-						</div>
-				</div>
-				<h3>Button Size</h3>
-				<div class="row">
-						<div class="grid">
-								<sgds-button size="sm" variant="primary">Small Button</sgds-button>
-								<sgds-button variant="primary" active>Medium Button</sgds-button>
-								<sgds-button size="lg" variant="primary">Large Button</sgds-button>
-						</div>
-				</div>
-				<h3>Button With Icon</h3>
-				<div class="row">
-						<div class="grid">
-								<sgds-button variant="primary">
-										<sgds-icon slot="leftIcon" name="placeholder"></sgds-icon>
-										Primary Button
-								</sgds-button>
-								<sgds-button variant="primary">
-										Primary Button
-										<sgds-icon slot="rightIcon" name="placeholder"></sgds-icon>
-								</sgds-button>
-								<sgds-button variant="outline">
-										<sgds-icon slot="leftIcon" name="placeholder"></sgds-icon>
-										Outline Button
-								</sgds-button>
-								<sgds-button variant="outline">
-										Outline Button
-										<sgds-icon slot="rightIcon" name="placeholder"></sgds-icon>
-								</sgds-button>
-								<sgds-button variant="ghost">
-										<sgds-icon slot="leftIcon" name="placeholder"></sgds-icon>
-										Ghost Button
-								</sgds-button>
-								<sgds-button variant="ghost">
-										Ghost Button
-										<sgds-icon slot="rightIcon" name="placeholder"></sgds-icon>
-								</sgds-button>
-								<sgds-button variant="danger">
-										<sgds-icon slot="leftIcon" name="placeholder"></sgds-icon>
-										Danger Button
-								</sgds-button>
-								<sgds-button variant="danger">
-										Danger Button
-										<sgds-icon slot="rightIcon" name="placeholder"></sgds-icon>
-								</sgds-button>
-						</div>
-				</div>
-				<h3>Button Disabled</h3>
-				<div class="row">
-						<div class="grid">
-								<sgds-button variant="primary" disabled>Disabled Button</sgds-button>
-								<sgds-button variant="ghost" disabled>Disabled Button</sgds-button>
-								<sgds-button variant="outline" disabled>Disabled Button</sgds-button>
-								<sgds-button variant="danger" disabled>Disabled Button</sgds-button>
-						</div>
-				</div>
-				<h3>Button Full Width</h3>
-				<div class="row">
-						<div class="grid">
-								<sgds-button variant="primary" fullWidth>Full Width Button</sgds-button>
-								<sgds-button variant="primary" fullWidth>
-										<sgds-icon slot="leftIcon" name="placeholder"></sgds-icon>
-										Full Width Button
-								</sgds-button>
-								<sgds-button variant="primary" fullWidth>
-										Full Width Button
-										<sgds-icon slot="rightIcon" name="placeholder"></sgds-icon>
-								</sgds-button>
-								<sgds-button variant="primary" fullWidth>
-										<sgds-icon slot="leftIcon" name="placeholder"></sgds-icon>
-										Full Width Button
-										<sgds-icon slot="rightIcon" name="placeholder"></sgds-icon>
-								</sgds-button>
-						</div>
-				</div>
-		</div>
-		<div class="container">
-				<h2>Close Button</h2>
-				<div class="row">
-						<sgds-close-button></sgds-close-button>
-						<sgds-close-button size="sm"></sgds-close-button>
-				</div>
-		</div>
-		<div class="container">
-				<h2>Modal</h2>
-				<sgds-button id="modalShowButton">Open Modal</sgds-button>
-				<sgds-modal>
-						<h2 slot="title">Modal title</h2>
-						<p slot="description">Modal description</p>
-						<p>This is a Modal</p>
-						<sgds-button slot="footer" variant="link" class="close-modal">Close</sgds-button>
-						<sgds-button slot="footer" variant="primary" type="submit" form="formA">Submit</sgds-button>
-				</sgds-modal>
-		</div>
-		<!-- <div class="container">
+      <p>ellipsisOn=false</p>
+      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <p>ellipsisOn=true</p>
+      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" ellipsisOn></sgds-pagination>
+      <p>ellipsisOn=false, showFirstPage=true</p>
+      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showFirstPage></sgds-pagination>
+      <p>ellipsisOn=false, showFirstPage=true</p>
+      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showFirstPage></sgds-pagination>
+      <p>ellipsisOn=false, showLastPage=true</p>
+      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage></sgds-pagination>
+      <p>ellipsisOn=true, showLastPage=true</p>
+      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage
+        ellipsisOn></sgds-pagination>
+      <p>ellipsisOn=false, showLastPage=true, showFirstPage=true</p>
+      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage
+        showFirstPage></sgds-pagination>
+      <p>ellipsisOn=true, showLastPage=true, showFirstPage=true</p>
+      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage showFirstPage
+        ellipsisOn></sgds-pagination>
+      <p>ellipsisOn=false, showLastPage=true, showFirstPage=true</p>
+      <sgds-pagination dataLength="2" itemsPerPage="1" currentPage="1" showLastPage showFirstPage></sgds-pagination>
+      test
+      <sgds-pagination dataLength="50" currentPage="4" showFirstPage></sgds-pagination>
+    </div>
+    <div class="container">
+      <h2>Button</h2>
+      <div class="row">
+        <div class="grid">
+          <sgds-button>Default</sgds-button>
+          <sgds-button variant="primary">Primary button</sgds-button>
+          <sgds-button variant="outline">Outline button</sgds-button>
+          <sgds-button variant="ghost">Ghost button</sgds-button>
+          <sgds-button variant="danger">Danger button</sgds-button>
+        </div>
+      </div>
+      <h3>Button Size</h3>
+      <div class="row">
+        <div class="grid">
+          <sgds-button size="sm" variant="primary">Small Button</sgds-button>
+          <sgds-button variant="primary" active>Medium Button</sgds-button>
+          <sgds-button size="lg" variant="primary">Large Button</sgds-button>
+        </div>
+      </div>
+      <h3>Button With Icon</h3>
+      <div class="row">
+        <div class="grid">
+          <sgds-button variant="primary">
+            <sgds-icon slot="leftIcon" name="placeholder"></sgds-icon>
+            Primary Button
+          </sgds-button>
+          <sgds-button variant="primary">
+            Primary Button
+            <sgds-icon slot="rightIcon" name="placeholder"></sgds-icon>
+          </sgds-button>
+          <sgds-button variant="outline">
+            <sgds-icon slot="leftIcon" name="placeholder"></sgds-icon>
+            Outline Button
+          </sgds-button>
+          <sgds-button variant="outline">
+            Outline Button
+            <sgds-icon slot="rightIcon" name="placeholder"></sgds-icon>
+          </sgds-button>
+          <sgds-button variant="ghost">
+            <sgds-icon slot="leftIcon" name="placeholder"></sgds-icon>
+            Ghost Button
+          </sgds-button>
+          <sgds-button variant="ghost">
+            Ghost Button
+            <sgds-icon slot="rightIcon" name="placeholder"></sgds-icon>
+          </sgds-button>
+          <sgds-button variant="danger">
+            <sgds-icon slot="leftIcon" name="placeholder"></sgds-icon>
+            Danger Button
+          </sgds-button>
+          <sgds-button variant="danger">
+            Danger Button
+            <sgds-icon slot="rightIcon" name="placeholder"></sgds-icon>
+          </sgds-button>
+        </div>
+      </div>
+      <h3>Button Disabled</h3>
+      <div class="row">
+        <div class="grid">
+          <sgds-button variant="primary" disabled>Disabled Button</sgds-button>
+          <sgds-button variant="ghost" disabled>Disabled Button</sgds-button>
+          <sgds-button variant="outline" disabled>Disabled Button</sgds-button>
+          <sgds-button variant="danger" disabled>Disabled Button</sgds-button>
+        </div>
+      </div>
+      <h3>Button Full Width</h3>
+      <div class="row">
+        <div class="grid">
+          <sgds-button variant="primary" fullWidth>Full Width Button</sgds-button>
+          <sgds-button variant="primary" fullWidth>
+            <sgds-icon slot="leftIcon" name="placeholder"></sgds-icon>
+            Full Width Button
+          </sgds-button>
+          <sgds-button variant="primary" fullWidth>
+            Full Width Button
+            <sgds-icon slot="rightIcon" name="placeholder"></sgds-icon>
+          </sgds-button>
+          <sgds-button variant="primary" fullWidth>
+            <sgds-icon slot="leftIcon" name="placeholder"></sgds-icon>
+            Full Width Button
+            <sgds-icon slot="rightIcon" name="placeholder"></sgds-icon>
+          </sgds-button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h2>Close Button</h2>
+      <div class="row">
+        <sgds-close-button></sgds-close-button>
+        <sgds-close-button size="sm"></sgds-close-button>
+      </div>
+    </div>
+    <div class="container">
+      <h2>Modal</h2>
+      <sgds-button id="modalShowButton">Open Modal</sgds-button>
+      <sgds-modal>
+        <h2 slot="title">Modal title</h2>
+        <p slot="description">Modal description</p>
+        <p>This is a Modal</p>
+        <sgds-button slot="footer" variant="link" class="close-modal">Close</sgds-button>
+        <sgds-button slot="footer" variant="primary" type="submit" form="formA">Submit</sgds-button>
+      </sgds-modal>
+    </div>
+    <!-- <div class="container">
 				<p>Variant</p>
 				<div class="row">
 						<div class="grid">
@@ -1087,384 +1143,385 @@
 				</div>
 		</div> -->
 
-		<div class="container">
-			<h2>Switch</h2>
-			<form id="checkbox-submit">
-				<sgds-switch>Switch</sgds-switch>
-				<sgds-switch icon>Switch with icon</sgds-switch>
-				<sgds-switch icon size="sm">Switch with icon</sgds-switch>
-				<sgds-switch icon size="lg">Switch with icon</sgds-switch>
-				<sgds-switch disabled>Switch</sgds-switch>
-				<sgds-switch size="sm">Switch</sgds-switch>
-				<sgds-switch size="lg">Switch</sgds-switch>
-				<sgds-switch size="lg"><span slot="leftLabel">Switch</span></sgds-switch>
-				<sgds-button type="submit">Submit</sgds-button>
-			</form>
-		</div>
-		<div class="container">
-			<h2>Checkbox</h2>
-			<sgds-checkbox id="hehe">1</sgds-checkbox>
-			<sgds-checkbox>2</sgds-checkbox>
-			<sgds-checkbox>3</sgds-checkbox>
-			<sgds-checkbox id="hehe" invalid hasFeedback invalidFeedback="test" variant="default">default</sgds-checkbox>
-			<sgds-checkbox hasFeedback variant="invalid">invalid</sgds-checkbox>
-			<sgds-checkbox variant="hover">hover</sgds-checkbox>
-			<sgds-checkbox variant="focus">focus</sgds-checkbox>
-			<sgds-checkbox variant="disabled">disabled</sgds-checkbox>
-		</div>
-		<div class="container">
-			<h2>Checkbox Group</h2>
-			<form>
-				<sgds-checkbox-group hasFeedback invalidFeedback="Please correct the invalid options above"
-					label="Select Your Preferences" hintText="Please choose one or more options:">
-					<sgds-checkbox slot="checkbox" value="option1" hasFeedback required>Option 1</sgds-checkbox>
-					<sgds-checkbox indeterminate slot="checkbox" value="option2" required>Option 2 indeterminate</sgds-checkbox>
-					<sgds-checkbox disabled slot="checkbox" value="option3" required>Option 3</sgds-checkbox>
-				</sgds-checkbox-group>
-				<sgds-button type="submit">Submit</sgds-button>
-			</form>
-		</div>
-		<div class="container">
-			<h2>Radio Group</h2>
-			<sgds-radio value="1" invalid checked>Option 1</sgds-radio>
-			<form id="radio-submit">
-				<sgds-radio-group required hasFeedback invalidFeedback="wrong" label="Select an option" hintText="Hint text">
-					<sgds-radio value="1">Option 1</sgds-radio>
-					<sgds-radio value="2">Option 2</sgds-radio>
-					<sgds-radio value="3" disabled>Option 3</sgds-radio>
-				</sgds-radio-group>
-				<sgds-button type="submit">Submit</sgds-button>
-			</form>
-			<script>
-				const radioForm = document.querySelector("#radio-submit")
-				radioForm.addEventListener("submit", (e) => {
-					e.preventDefault()
-					e.stopPropagation()
-				})
-			</script>
-		</div>
-		<div class="container">
-			<h2>Selectable card</h2>
+    <div class="container">
+      <h2>Switch</h2>
+      <form id="checkbox-submit">
+        <sgds-switch>Switch</sgds-switch>
+        <sgds-switch icon>Switch with icon</sgds-switch>
+        <sgds-switch icon size="sm">Switch with icon</sgds-switch>
+        <sgds-switch icon size="lg">Switch with icon</sgds-switch>
+        <sgds-switch disabled>Switch</sgds-switch>
+        <sgds-switch size="sm">Switch</sgds-switch>
+        <sgds-switch size="lg">Switch</sgds-switch>
+        <sgds-switch size="lg"><span slot="leftLabel">Switch</span></sgds-switch>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    </div>
+    <div class="container">
+      <h2>Checkbox</h2>
+      <sgds-checkbox id="hehe">1</sgds-checkbox>
+      <sgds-checkbox>2</sgds-checkbox>
+      <sgds-checkbox>3</sgds-checkbox>
+      <sgds-checkbox id="hehe" invalid hasFeedback invalidFeedback="test" variant="default">default</sgds-checkbox>
+      <sgds-checkbox hasFeedback variant="invalid">invalid</sgds-checkbox>
+      <sgds-checkbox variant="hover">hover</sgds-checkbox>
+      <sgds-checkbox variant="focus">focus</sgds-checkbox>
+      <sgds-checkbox variant="disabled">disabled</sgds-checkbox>
+    </div>
+    <div class="container">
+      <h2>Checkbox Group</h2>
+      <form>
+        <sgds-checkbox-group hasFeedback invalidFeedback="Please correct the invalid options above"
+          label="Select Your Preferences" hintText="Please choose one or more options:">
+          <sgds-checkbox slot="checkbox" value="option1" hasFeedback required>Option 1</sgds-checkbox>
+          <sgds-checkbox indeterminate slot="checkbox" value="option2" required>Option 2 indeterminate</sgds-checkbox>
+          <sgds-checkbox disabled slot="checkbox" value="option3" required>Option 3</sgds-checkbox>
+        </sgds-checkbox-group>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    </div>
+    <div class="container">
+      <h2>Radio Group</h2>
+      <sgds-radio value="1" invalid checked>Option 1</sgds-radio>
+      <form id="radio-submit">
+        <sgds-radio-group required hasFeedback invalidFeedback="wrong" label="Select an option" hintText="Hint text">
+          <sgds-radio value="1">Option 1</sgds-radio>
+          <sgds-radio value="2">Option 2</sgds-radio>
+          <sgds-radio value="3" disabled>Option 3</sgds-radio>
+        </sgds-radio-group>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+      <script>
+        const radioForm = document.querySelector("#radio-submit")
+        radioForm.addEventListener("submit", (e) => {
+          e.preventDefault()
+          e.stopPropagation()
+        })
+      </script>
+    </div>
+    <div class="container">
+      <h2>Selectable card</h2>
 
-			<sgds-action-card checked type="checkbox" name="">
-				<i class="bi bi-1-square" slot="icon"></i>
-				<!-- <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+      <sgds-action-card checked type="checkbox" name="">
+        <i class="bi bi-1-square" slot="icon"></i>
+        <!-- <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
 													class="bi bi-box" viewBox="0 0 16 16">
 													<path
 															d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z">
 													</path>
 											</svg> -->
-				<span slot="card-subtitle">Laptop</span>
-				<span slot="card-title">Apple</span>
-				<span slot="card-text">Macbook Pro M1</span>
-			</sgds-action-card>
-		</div>
-		<div class="container">
-			<h2>Card</h2>
-			<sgds-card bordercolor="primary" textcolor="">
-				<img slot="card-image" alt="img alternate text goes here"
-					src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-				<h3 slot="card-title">Card</h3>
-				<span slot="card-text">Some quick example text to build on the card title and make up the bulk of
-					the card's content.</span>
+        <span slot="card-subtitle">Laptop</span>
+        <span slot="card-title">Apple</span>
+        <span slot="card-text">Macbook Pro M1</span>
+      </sgds-action-card>
+    </div>
+    <div class="container">
+      <h2>Card</h2>
+      <sgds-card bordercolor="primary" textcolor="">
+        <img slot="card-image" alt="img alternate text goes here"
+          src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
+        <h3 slot="card-title">Card</h3>
+        <span slot="card-text">Some quick example text to build on the card title and make up the bulk of
+          the card's content.</span>
 
-				<a slot="card-link" href="https://google.com">Go somewhere</a>
+        <a slot="card-link" href="https://google.com">Go somewhere</a>
 
-			</sgds-card>
-			<sgds-card bordercolor="primary" textcolor="">
-				<div slot="card-title" class="card-title-no-image">
-					<i slot="rightIcon" class="bi bi-apple"></i>
-					Card
-					<sgds-badge>test</sgds-badge>
-				</div>
-				<span slot="card-text">Some quick example text to build on the card title and make up the bulk of
-					the card's content.</span>
+      </sgds-card>
+      <sgds-card bordercolor="primary" textcolor="">
+        <div slot="card-title" class="card-title-no-image">
+          <i slot="rightIcon" class="bi bi-apple"></i>
+          Card
+          <sgds-badge>test</sgds-badge>
+        </div>
+        <span slot="card-text">Some quick example text to build on the card title and make up the bulk of
+          the card's content.</span>
 
-				<a slot="card-link" href="https://google.com">Go somewhere</a>
+        <a slot="card-link" href="https://google.com">Go somewhere</a>
 
-				<!-- <a  href="https://google.com">Go somewhere</a>
+        <!-- <a  href="https://google.com">Go somewhere</a>
 											<a  href="https://google.com">Go somewhere</a> -->
-			</sgds-card>
-		</div>
-		<div class="container">
-			<h2>Input</h2>
-			<div class="row">
-				<div class="col-6 mb-2">
-					<form class="formtest">
-						<sgds-input name="input1" label="Label" hintText="Hint text" disabled id="input1" minlength="5" required
-							value="Disabled" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
-						<sgds-input name="input1" label="Label" hintText="Hint text" readonly id="input1" minlength="5" required
-							value="Read only" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
-						<sgds-input name="input1" label="Label" hintText="Hint text" id="input1" minlength="5" required value=""
-							hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
-						<sgds-input name="input2" label="Label" hintText="Hint text" prefix="Prefix" id="input2" minlength="5"
-							required value="" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
-						<sgds-input name="input3" label="Label" hintText="Hint text" id="input3" minlength="5" required value=""
-							hasFeedback invalidFeedback="Minimum length 5 test" icon='<svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+      </sgds-card>
+    </div>
+    <div class="container">
+      <h2>Input</h2>
+      <div class="row">
+        <div class="col-6 mb-2">
+          <form class="formtest">
+            <sgds-input name="input1" label="Label" hintText="Hint text" disabled id="input1" minlength="5" required
+              value="Disabled" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
+            <sgds-input name="input1" label="Label" hintText="Hint text" readonly id="input1" minlength="5" required
+              value="Read only" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
+            <sgds-input name="input1" label="Label" hintText="Hint text" id="input1" minlength="5" required value=""
+              hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
+            <sgds-input name="input2" label="Label" hintText="Hint text" prefix="Prefix" id="input2" minlength="5"
+              required value="" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
+            <sgds-input name="input3" label="Label" hintText="Hint text" id="input3" minlength="5" required value=""
+              hasFeedback invalidFeedback="Minimum length 5 test" icon='<svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 																	fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
 																	<path
 																			d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z">
 																	</path>
 															</svg>'></sgds-input>
-						<sgds-input name="input4" label="Label" hintText="Hint text" prefix="Prefix" id="input4" minlength="5"
-							required value="" hasFeedback invalidFeedback="Minimum length 5 test" icon='<svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+            <sgds-input name="input4" label="Label" hintText="Hint text" prefix="Prefix" id="input4" minlength="5"
+              required value="" hasFeedback invalidFeedback="Minimum length 5 test" icon='<svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 																	fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
 																	<path
 																			d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z">
 																	</path>
 															</svg>'></sgds-input>
-						<sgds-input name="input5" label="Label" hintText="Hint text" suffix="Suffix" id="input5" minlength="5"
-							required value="hiz" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
-						<sgds-input name="input6" label="Label" hintText="Hint text" loading id="input6" minlength="5" required
-							value="" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
-						<sgds-input name="input7" label="Label" hintText="Hint text" valid id="input7" minlength="5" required value=""
-							hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
-						<sgds-input name="input8" label="Label" hintText="Hint text" loading suffix="Suffix" id="input8" minlength="5"
-							required value="" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
-						<sgds-input name="input9" label="Label" hintText="Hint text" valid suffix="Suffix" id="input9" minlength="5"
-							required value="" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
-						<sgds-input name="input10" label="Label" hintText="Hint text" loading prefix="Prefix" suffix="Suffix"
-							id="input10" minlength="5" required value="" hasFeedback invalidFeedback="Minimum length 5 test" icon='<svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+            <sgds-input name="input5" label="Label" hintText="Hint text" suffix="Suffix" id="input5" minlength="5"
+              required value="hiz" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
+            <sgds-input name="input6" label="Label" hintText="Hint text" loading id="input6" minlength="5" required
+              value="" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
+            <sgds-input name="input7" label="Label" hintText="Hint text" valid id="input7" minlength="5" required
+              value="" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
+            <sgds-input name="input8" label="Label" hintText="Hint text" loading suffix="Suffix" id="input8"
+              minlength="5" required value="" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
+            <sgds-input name="input9" label="Label" hintText="Hint text" valid suffix="Suffix" id="input9" minlength="5"
+              required value="" hasFeedback invalidFeedback="Minimum length 5 test"></sgds-input>
+            <sgds-input name="input10" label="Label" hintText="Hint text" loading prefix="Prefix" suffix="Suffix"
+              id="input10" minlength="5" required value="" hasFeedback invalidFeedback="Minimum length 5 test" icon='<svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 																	fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
 																	<path
 																			d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z">
 																	</path>
 															</svg>'></sgds-input>
-						<sgds-input name="input10" label="Label" hintText="Hint text" valid prefix="Prefix" suffix="Suffix"
-							id="input10" minlength="5" required value="" hasFeedback invalidFeedback="Minimum length 5 test" icon='<svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+            <sgds-input name="input10" label="Label" hintText="Hint text" valid prefix="Prefix" suffix="Suffix"
+              id="input10" minlength="5" required value="" hasFeedback invalidFeedback="Minimum length 5 test" icon='<svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 																	fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
 																	<path
 																			d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z">
 																	</path>
 															</svg>'></sgds-input>
-						<sgds-input placeholder="invalid" label="label" hintText="hint" invalid hasFeedback></sgds-input>
-						<sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are
-								required to check this.</span></sgds-checkbox>
-						<sgds-checkbox name="cb2" id="cb2" value="lolol1" required hasfeedback invalidfeedback="this is requried">with
-							required<span slot="feedback">You are required
-								to check this.</span></sgds-checkbox>
-						<sgds-checkbox name="cb2" id="cb2" value="lolol1" required disabled>disabled<span slot="feedback">You are
-								required to check this.</span></sgds-checkbox>
-						<sgds-button id="submitButton" type="submit">Submit</sgds-button>
-						<sgds-input label="Name" iconName="stack" hintText="this is a hint" required pattern="test"
-							value="a"></sgds-input>
-						<sgds-button type="reset">Reset</sgds-button>
-					</form>
-					<form>
-						<sgds-input placeholder="default" label="Country Code with hasFeedback" hintText="3 letter country code"
-							pattern="[A-Za-z]{3}" hasFeedback></sgds-input>
-						<sgds-button type="submit">Submit</sgds-button>
-					</form>
-					<form>
-						<sgds-input placeholder="default" label="Country Code with no hasFeedback" hintText="3 letter country code"
-							pattern="[A-Za-z]{3}"></sgds-input>
-						<sgds-button type="submit">Submit</sgds-button>
-					</form>
-					<form>
-						<sgds-checkbox required="" hasfeedback="" invalidfeedback="This is required">Check
-							me</sgds-checkbox>
-						<sgds-button type="submit">Submit</sgds-button>
-					</form>
-				</div>
-			</div>
-		</div>
+            <sgds-input placeholder="invalid" label="label" hintText="hint" invalid hasFeedback></sgds-input>
+            <sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are
+                required to check this.</span></sgds-checkbox>
+            <sgds-checkbox name="cb2" id="cb2" value="lolol1" required hasfeedback
+              invalidfeedback="this is requried">with
+              required<span slot="feedback">You are required
+                to check this.</span></sgds-checkbox>
+            <sgds-checkbox name="cb2" id="cb2" value="lolol1" required disabled>disabled<span slot="feedback">You are
+                required to check this.</span></sgds-checkbox>
+            <sgds-button id="submitButton" type="submit">Submit</sgds-button>
+            <sgds-input label="Name" iconName="stack" hintText="this is a hint" required pattern="test"
+              value="a"></sgds-input>
+            <sgds-button type="reset">Reset</sgds-button>
+          </form>
+          <form>
+            <sgds-input placeholder="default" label="Country Code with hasFeedback" hintText="3 letter country code"
+              pattern="[A-Za-z]{3}" hasFeedback></sgds-input>
+            <sgds-button type="submit">Submit</sgds-button>
+          </form>
+          <form>
+            <sgds-input placeholder="default" label="Country Code with no hasFeedback" hintText="3 letter country code"
+              pattern="[A-Za-z]{3}"></sgds-input>
+            <sgds-button type="submit">Submit</sgds-button>
+          </form>
+          <form>
+            <sgds-checkbox required="" hasfeedback="" invalidfeedback="This is required">Check
+              me</sgds-checkbox>
+            <sgds-button type="submit">Submit</sgds-button>
+          </form>
+        </div>
+      </div>
+    </div>
 
-		<div class="container">
-			<h2>Toast</h2>
-			<div class="row">
-				<div class="col is-6">
-					<sgds-toast dismissible>
-						<sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
-						This is a toast notifications This is a toast notifications his is a toast notifications his is a toast
-						notifications his is a toast notifications his is a toast notifications his is a toast notifications
-					</sgds-toast>
-					<sgds-button id="show-toast-btn">show toast</sgds-button>
-					<sgds-toast autohide id="toast-autohide">
-						<sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
-						autohide
-					</sgds-toast>
-					<sgds-toast show dismissible>
-						<sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
-						This is a toast notifications helklo world
-					</sgds-toast>
-					<sgds-toast show variant="success">
-						<sgds-icon slot="icon" name="check-circle-fill"></sgds-icon>
-						<span slot="duration">2 mins ago</span>
-						This is a toast notifications
-					</sgds-toast>
-					<sgds-toast show variant="danger">
-						<sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
-						<sgds-link slot="action" href="#" target="_blank">Action</sgds-link>
-						This is a toast notifications
-					</sgds-toast>
-					<sgds-toast show dismissible variant="warning">
-						<sgds-icon slot="icon" name="exclamation-triangle-fill"></sgds-icon>
-						<span slot="action">Action</span>
-						This is a toast notifications
-					</sgds-toast>
-					<sgds-toast show dismissible variant="neutral">
-						<sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
-						<span slot="action">Action</span>
-						This is a toast notifications
-					</sgds-toast>
-					<sgds-toast-container position="bottom-start">
-						<sgds-toast show dismissible>
-							<sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
-							<sgds-link slot="action" href="#" target="_blank">Action</sgds-link>
-							This is a toast notifications
-						</sgds-toast>
-						<sgds-toast show dismissible variant="warning">
-							<sgds-icon slot="icon" name="exclamation-triangle-fill"></sgds-icon>
-							<sgds-link slot="action" href="#" target="_blank">Action</sgds-link>
-							This is a toast notifications
-						</sgds-toast>
-					</sgds-toast-container>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<h2>Alert</h2>
-			<div class="row">
-				<div class="container col is-6">
+    <div class="container">
+      <h2>Toast</h2>
+      <div class="row">
+        <div class="col is-6">
+          <sgds-toast dismissible>
+            <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+            This is a toast notifications This is a toast notifications his is a toast notifications his is a toast
+            notifications his is a toast notifications his is a toast notifications his is a toast notifications
+          </sgds-toast>
+          <sgds-button id="show-toast-btn">show toast</sgds-button>
+          <sgds-toast autohide id="toast-autohide">
+            <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+            autohide
+          </sgds-toast>
+          <sgds-toast show dismissible>
+            <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+            This is a toast notifications helklo world
+          </sgds-toast>
+          <sgds-toast show variant="success">
+            <sgds-icon slot="icon" name="check-circle-fill"></sgds-icon>
+            <span slot="duration">2 mins ago</span>
+            This is a toast notifications
+          </sgds-toast>
+          <sgds-toast show variant="danger">
+            <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
+            <sgds-link slot="action" href="#" target="_blank">Action</sgds-link>
+            This is a toast notifications
+          </sgds-toast>
+          <sgds-toast show dismissible variant="warning">
+            <sgds-icon slot="icon" name="exclamation-triangle-fill"></sgds-icon>
+            <span slot="action">Action</span>
+            This is a toast notifications
+          </sgds-toast>
+          <sgds-toast show dismissible variant="neutral">
+            <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+            <span slot="action">Action</span>
+            This is a toast notifications
+          </sgds-toast>
+          <sgds-toast-container position="bottom-start">
+            <sgds-toast show dismissible>
+              <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+              <sgds-link slot="action" href="#" target="_blank">Action</sgds-link>
+              This is a toast notifications
+            </sgds-toast>
+            <sgds-toast show dismissible variant="warning">
+              <sgds-icon slot="icon" name="exclamation-triangle-fill"></sgds-icon>
+              <sgds-link slot="action" href="#" target="_blank">Action</sgds-link>
+              This is a toast notifications
+            </sgds-toast>
+          </sgds-toast-container>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h2>Alert</h2>
+      <div class="row">
+        <div class="container col is-6">
 
-					<sgds-alert variant="info" show dismissible title="Title">
-						<sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
-						<span>
-							This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it
-							a click if you like. You may add the dismissible option
-						</span>
-					</sgds-alert>
-					<sgds-alert variant="info" show title="Title" dismissible>
-						<span>
-							This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it
-							a click if you like. You may add the dismissible option
-						</span>
-					</sgds-alert>
-					<sgds-alert variant="success" show dismissible>
-						<sgds-icon slot="icon" name="check-circle-fill"></sgds-icon>
-						<span>
-							This is a info alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a
-							click if you like. You may add the dismissible option
-						</span>
-					</sgds-alert>
-					<sgds-alert variant="danger" show dismissible>
-						<sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
-						<span>
-							This is an outline warning alert with <sgds-alert-link>an example
-								link</sgds-alert-link>. Give it a click if you like. You may add the dismissible
-							option
-						</span>
-					</sgds-alert>
-					<sgds-alert variant="warning" show dismissible>
-						<sgds-icon slot="icon" name="exclamation-triangle-fill"></sgds-icon>
-						<span>
-							This is an outline danger alert with <sgds-alert-link>an example link</sgds-alert-link>.
-							Give it a click if you like. You may add the dismissible option
-						</span>
-					</sgds-alert>
-					<sgds-alert variant="neutral" show dismissible>
-						<sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
-						<span>
-							This is an outline success alert with <sgds-alert-link>an example
-								link</sgds-alert-link>. Give it a click if you like. You may add the dismissible
-							option
-						</span>
-					</sgds-alert>
-					<sgds-alert variant="info" show outlined dismissible>
-						<sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
-						<span>
-							This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it
-							a click if you like. You may add the dismissible option
-						</span>
-					</sgds-alert>
-					<sgds-alert variant="info" show outlined dismissible>
-						<span>
-							This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it
-							a click if you like. You may add the dismissible option
-						</span>
-					</sgds-alert>
-					<sgds-alert variant="success" show outlined dismissible>
-						<sgds-icon slot="icon" name="check-circle-fill"></sgds-icon>
-						<span>
-							This is a info alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a
-							click if you like. You may add the dismissible option
-						</span>
-					</sgds-alert>
-					<sgds-alert variant="danger" show outlined dismissible>
-						<sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
-						<span>
-							This is an outline warning alert with <sgds-alert-link>an example
-								link</sgds-alert-link>. Give it a click if you like. You may add the dismissible
-							option
-						</span>
-					</sgds-alert>
-					<sgds-alert variant="warning" show outlined dismissible>
-						<sgds-icon slot="icon" name="exclamation-triangle-fill"></sgds-icon>
-						<span>
-							This is an outline danger alert with <sgds-alert-link>an example link</sgds-alert-link>.
-							Give it a click if you like. You may add the dismissible option
-						</span>
-					</sgds-alert>
-					<sgds-alert variant="neutral" show outlined dismissible>
-						<sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
-						<span>
-							This is an outline success alert with <sgds-alert-link>an example
-								link</sgds-alert-link>. Give it a click if you like. You may add the dismissible
-							option
-						</span>
-					</sgds-alert>
+          <sgds-alert variant="info" show dismissible title="Title">
+            <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
+            <span>
+              This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it
+              a click if you like. You may add the dismissible option
+            </span>
+          </sgds-alert>
+          <sgds-alert variant="info" show title="Title" dismissible>
+            <span>
+              This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it
+              a click if you like. You may add the dismissible option
+            </span>
+          </sgds-alert>
+          <sgds-alert variant="success" show dismissible>
+            <sgds-icon slot="icon" name="check-circle-fill"></sgds-icon>
+            <span>
+              This is a info alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a
+              click if you like. You may add the dismissible option
+            </span>
+          </sgds-alert>
+          <sgds-alert variant="danger" show dismissible>
+            <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
+            <span>
+              This is an outline warning alert with <sgds-alert-link>an example
+                link</sgds-alert-link>. Give it a click if you like. You may add the dismissible
+              option
+            </span>
+          </sgds-alert>
+          <sgds-alert variant="warning" show dismissible>
+            <sgds-icon slot="icon" name="exclamation-triangle-fill"></sgds-icon>
+            <span>
+              This is an outline danger alert with <sgds-alert-link>an example link</sgds-alert-link>.
+              Give it a click if you like. You may add the dismissible option
+            </span>
+          </sgds-alert>
+          <sgds-alert variant="neutral" show dismissible>
+            <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
+            <span>
+              This is an outline success alert with <sgds-alert-link>an example
+                link</sgds-alert-link>. Give it a click if you like. You may add the dismissible
+              option
+            </span>
+          </sgds-alert>
+          <sgds-alert variant="info" show outlined dismissible>
+            <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
+            <span>
+              This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it
+              a click if you like. You may add the dismissible option
+            </span>
+          </sgds-alert>
+          <sgds-alert variant="info" show outlined dismissible>
+            <span>
+              This is a success alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it
+              a click if you like. You may add the dismissible option
+            </span>
+          </sgds-alert>
+          <sgds-alert variant="success" show outlined dismissible>
+            <sgds-icon slot="icon" name="check-circle-fill"></sgds-icon>
+            <span>
+              This is a info alert with <sgds-alert-link>an example link</sgds-alert-link>. Give it a
+              click if you like. You may add the dismissible option
+            </span>
+          </sgds-alert>
+          <sgds-alert variant="danger" show outlined dismissible>
+            <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
+            <span>
+              This is an outline warning alert with <sgds-alert-link>an example
+                link</sgds-alert-link>. Give it a click if you like. You may add the dismissible
+              option
+            </span>
+          </sgds-alert>
+          <sgds-alert variant="warning" show outlined dismissible>
+            <sgds-icon slot="icon" name="exclamation-triangle-fill"></sgds-icon>
+            <span>
+              This is an outline danger alert with <sgds-alert-link>an example link</sgds-alert-link>.
+              Give it a click if you like. You may add the dismissible option
+            </span>
+          </sgds-alert>
+          <sgds-alert variant="neutral" show outlined dismissible>
+            <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
+            <span>
+              This is an outline success alert with <sgds-alert-link>an example
+                link</sgds-alert-link>. Give it a click if you like. You may add the dismissible
+              option
+            </span>
+          </sgds-alert>
 
-				</div>
-			</div>
-		</div>
+        </div>
+      </div>
+    </div>
 
-		<div class="container">
-			<h2>File Upload</h2>
-			<div class="row">
-				<div class="col is-6">
-					<sgds-file-upload multiple id="my-fileupload" variant="outline-secondary" />
-					Choose a File
-					</sgds-file-upload>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<h2>Quantity Toggle</h2>
-			<form>
-				<sgds-quantity-toggle label="Label" hintText="Hint Text" hasFeedback invalidFeedback="Invalid number" step="1"
-					buttonvariant="primary" defaultvalue="0"></sgds-quantity-toggle>
-				<sgds-button type="submit">Submit</sgds-button>
-			</form>
+    <div class="container">
+      <h2>File Upload</h2>
+      <div class="row">
+        <div class="col is-6">
+          <sgds-file-upload multiple id="my-fileupload" variant="outline-secondary" />
+          Choose a File
+          </sgds-file-upload>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h2>Quantity Toggle</h2>
+      <form>
+        <sgds-quantity-toggle label="Label" hintText="Hint Text" hasFeedback invalidFeedback="Invalid number" step="1"
+          buttonvariant="primary" defaultvalue="0"></sgds-quantity-toggle>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
 
-			<div class="row">
-				<sgds-quantity-toggle label="Label" hintText="Hint Text" max="undefined" step="1" quantitytoggleclasses=""
-					size="sm" name="" buttonvariant="primary" defaultvalue="0"></sgds-quantity-toggle>
-			</div>
-		</div>
-  	<div class="container">
-			<h2>Table Default</h2>
-			<div class="row">
-				<sgds-table></sgds-table>
-			</div>
-			<br>
-			<h2>Table w/ Sort</h2>
-			<div class="row">
-				<sgds-table tableHeaders='["#", "Serial Number", "Last Name", "Username"]' tableData='[[1, "Mark", "Otto", "@mdo"],
+      <div class="row">
+        <sgds-quantity-toggle label="Label" hintText="Hint Text" max="undefined" step="1" quantitytoggleclasses=""
+          size="sm" name="" buttonvariant="primary" defaultvalue="0"></sgds-quantity-toggle>
+      </div>
+    </div>
+    <div class="container">
+      <h2>Table Default</h2>
+      <div class="row">
+        <sgds-table></sgds-table>
+      </div>
+      <br>
+      <h2>Table w/ Sort</h2>
+      <div class="row">
+        <sgds-table tableHeaders='["#", "Serial Number", "Last Name", "Username"]' tableData='[[1, "Mark", "Otto", "@mdo"],
 									[2, "Jacob", "12hornton", "@fat"],
 									[3, "Larry", "@Bird", "@twitter"],
 									[4, "Chuck", "Norris", "@asdasdasd"]
 								]'></sgds-table>
-			</div>
-			<br>
-			<h2>Table w/ RemovableSort</h2>
-			<div class="row">
-				<sgds-table removableSort sort tableHeaders='["#", "Serial Number", "Last Name", "Username"]' tableData='[[1, "Mark", "Otto", "@mdo"],
+      </div>
+      <br>
+      <h2>Table w/ RemovableSort</h2>
+      <div class="row">
+        <sgds-table removableSort sort tableHeaders='["#", "Serial Number", "Last Name", "Username"]' tableData='[[1, "Mark", "Otto", "@mdo"],
 									[2, "Jacob", "12hornton", "@fat"],
 									[3, "Larry", "@Bird", "@twitter"],
 									[4, "Chuck", "Norris", "@asdasdasd"]
 								]'></sgds-table>
-			</div>
-		</div>
+      </div>
+    </div>
     <div class="container">
       <div class="row">
         <h2>Overflow</h2>

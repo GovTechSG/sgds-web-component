@@ -257,7 +257,7 @@ export class SgdsTabGroup extends SgdsElement {
         <div class="tab-group__nav" role="tablist">
           <slot name="nav" @slotchange=${this._handleSlotChange}></slot>
         </div>
-        <div>
+        <div class="tab-group__content">
           <slot class="tab-group__body" @slotchange=${this._syncTabsAndPanels}></slot>
         </div>
       </div>
