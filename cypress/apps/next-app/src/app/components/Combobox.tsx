@@ -1,10 +1,5 @@
-import dynamic from "next/dynamic"
-const SgdsCombobox = dynamic(
-    () => import("@govtechsg/sgds-web-component/react/combo-box/index.js"),
-    {
-      ssr: false,
-    }
-  );
+import SgdsCombobox from "@govtechsg/sgds-web-component/react/combo-box/index.js";
+
 export const Combobox = () => {
     return (
       <SgdsCombobox 

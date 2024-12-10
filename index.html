@@ -3,8 +3,6 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script
-    src="/node_modules/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
   <script type="module" id="console-components-gateway"
     src="https://dev.assets.developer.tech.gov.sg/console-components/gateway.es5.js" nonce="{nonce" ||
@@ -115,9 +113,6 @@
         } */
   </style>
   <script type="module">
-    import "@webcomponents/scoped-custom-element-registry";
-  </script>
-  <script type="module">
     let scriptTarget = document.getElementsByTagName("head")[0];
     let moduleScript = document.createElement("script");
     moduleScript.type = "module";
@@ -130,7 +125,7 @@
     }
     scriptTarget.appendChild(moduleScript);
   </script>
-    <script type="module" src="src/components/Input/index.ts"></script>
+    <script type="module" src="src/index.ts"></script>
 
     <script type="module" src="src/components/Spinner/index.ts"></script>
 

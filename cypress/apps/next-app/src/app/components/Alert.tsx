@@ -1,10 +1,4 @@
-import dynamic from "next/dynamic"
-const SgdsAlert = dynamic(
-  () => import("@govtechsg/sgds-web-component/react/alert/index.js"),
-  {
-    ssr: false,
-  }
-);
+import SgdsAlert from "@govtechsg/sgds-web-component/react/alert/index.js";
 import SgdsAlertHeading from "@govtechsg/sgds-web-component/react/alert-heading/index.js";
 import SgdsAlertLink from "@govtechsg/sgds-web-component/react/alert-link/index.js";
 

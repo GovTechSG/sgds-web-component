@@ -1,12 +1,7 @@
 "use client"
 import SgdsButton from "@govtechsg/sgds-web-component/react/button/index.js";
-import dynamic from "next/dynamic";
-const SgdsModal = dynamic(
-  () => import("@govtechsg/sgds-web-component/react/modal/index.js"),
-  {
-    ssr: false,
-  }
-);
+import SgdsModal from "@govtechsg/sgds-web-component/react/modal/index.js";
+
 
 import { useState } from "react";
 export const Modal = () => {

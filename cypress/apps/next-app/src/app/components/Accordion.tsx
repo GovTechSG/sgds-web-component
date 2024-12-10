@@ -1,6 +1,5 @@
 import SgdsAccordion from "@govtechsg/sgds-web-component/react/accordion/index.js";
 import SgdsAccordionItem from "@govtechsg/sgds-web-component/react/accordion-item/index.js";
-// import "@webcomponents/scoped-custom-element-registry"
 
 export const Accordion = () => {
   return (

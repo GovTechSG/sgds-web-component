@@ -452,24 +452,21 @@ const children = this.shadowRoot.querySelector('slot').assignedElements({flatten
 
 2. Boolean properties should always be `false` by default. See [reason](https://stackoverflow.com/questions/60678891/how-can-i-change-a-boolean-property-in-lit-element-to-hide-content-on-my-compone#:~:text=Answer%3A%20For%20a%20Boolean%20property%20to%20be%20configurable%20from%20markup%2C%20it%20must%20default%20to%20false.%20If%20it%20defaults%20to%20true%2C%20you%20cannot%20set%20it%20to%20false%20from%20markup%2C%20since%20the%20presence%20of%20the%20attribute%2C%20with%20or%20without%20a%20value%2C%20equates%20to%20true.%20This%20is%20the%20standard%20behavior%20for%20attributes%20in%20the%20web%20platform.)
 
-### Scoped Elements
+### Dependencies
 
-Use scoped elements mixin when the component has a dependency on another component.
+Register the dependencies when the component has a dependency on another component.
 Example: In FileUpload case, SgdsButton is used within it.
 
 ```jsx
 import { SgdsButton } from "../Button";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 
-export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
-  static get scopedElements() {
-    return {
+export class SgdsFileUpload extends SgdsElement {
+  static dependencies = {
       "sgds-button": SgdsButton
-    };
   }
 }
 ```
-
+<!-- 
 ### Icons
 
 In order to minimise the usage of ScopedElementsMixin dependency we try to use slots as much as possible. 
@@ -494,4 +491,4 @@ Use hard coded svg when:
 - Icons are super fixed. Example, accordion's caret, combobox caret, 
 - If ever such icons are requested to be customised, should first try to create a slot for user to pass in 
 
-Last resort is to introduce sgds-icon as an internal dependency, to avoid usage of the ScopedElementMixin as much as possible 
+Last resort is to introduce sgds-icon as an internal dependency, to avoid usage of the ScopedElementMixin as much as possible  -->
