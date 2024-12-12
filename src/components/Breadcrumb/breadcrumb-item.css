@@ -16,8 +16,8 @@
   color: var(--sgds-link-color-emphasis, --sgds-default-color);
 }
 
-.separator svg  {
- vertical-align: middle;
+.separator svg {
+  display: block;
 }
 
 :host(:last-of-type) .separator {
