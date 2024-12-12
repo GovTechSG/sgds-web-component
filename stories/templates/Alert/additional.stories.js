@@ -1,13 +1,20 @@
 import { html } from "lit-html";
 
 const VariantTemplate = args => {
-  const variants = ["Info", "Success", "Danger", "Warning", "Neutral"];
+  const variants = [
+    { variant: "Info", icon: "info-circle-fill" },
+    { variant: "Success", icon: "check-circle-fill" },
+    { variant: "Danger", icon: "exclamation-circle-fill" },
+    { variant: "Warning", icon: "exclamation-triangle-fill" },
+    { variant: "Neutral", icon: "info-circle-fill" }
+  ];
   return html`
     <div class="d-flex-column">
       ${variants.map(
         v => html`
-        <sgds-alert variant=${v.toLowerCase()} show title="${v} alert">
-            <div> Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+        <sgds-alert variant=${v.variant.toLowerCase()} show title="${v.variant} alert">
+          <sgds-icon slot="icon" name=${v.icon}></sgds-icon>
+          <div> Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
         </sgds-alert>
     </div>    
         `
@@ -16,13 +23,20 @@ const VariantTemplate = args => {
   `;
 };
 const OutlinedVariantTemplate = args => {
-  const variants = ["Info", "Success", "Danger", "Warning", "Neutral"];
+  const variants = [
+    { variant: "Info", icon: "info-circle-fill" },
+    { variant: "Success", icon: "check-circle-fill" },
+    { variant: "Danger", icon: "exclamation-circle-fill" },
+    { variant: "Warning", icon: "exclamation-triangle-fill" },
+    { variant: "Neutral", icon: "info-circle-fill" }
+  ];
   return html`
     <div class="d-flex-column">
       ${variants.map(
         v => html`
-        <sgds-alert variant=${v.toLowerCase()} show title="${v} alert" outlined>
-            <div> Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+        <sgds-alert variant=${v.variant.toLowerCase()} show title="${v.variant} alert" outlined>
+          <sgds-icon slot="icon" name=${v.icon}></sgds-icon>
+          <div> Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
         </sgds-alert>
     </div>    
         `
@@ -34,21 +48,11 @@ const DismissibleTemplate = args => {
   return html`
     <div class="d-flex-column">
       <sgds-alert show title="Title" dismissible>
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16.5341 8.59088C16.2046 8.26137 15.6704 8.26137 15.3409 8.59088C15.3329 8.59884 15.3254 8.60726 15.3185 8.61612L11.4121 13.5938L9.05686 11.2386C8.72736 10.9091 8.19312 10.9091 7.86362 11.2386C7.53411 11.5681 7.53411 12.1024 7.86362 12.4319L10.8409 15.4091C11.1704 15.7386 11.7046 15.7386 12.0341 15.4091C12.0415 15.4018 12.0484 15.394 12.0549 15.3859L16.5461 9.77191C16.8636 9.44154 16.8596 8.91634 16.5341 8.59088Z"
-            fill="white"
-          />
-        </svg>
+        <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
         <div>A dismissible alert</div>
       </sgds-alert>
       <sgds-alert show title="Title" outlined dismissible>
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16.5341 8.59088C16.2046 8.26137 15.6704 8.26137 15.3409 8.59088C15.3329 8.59884 15.3254 8.60726 15.3185 8.61612L11.4121 13.5938L9.05686 11.2386C8.72736 10.9091 8.19312 10.9091 7.86362 11.2386C7.53411 11.5681 7.53411 12.1024 7.86362 12.4319L10.8409 15.4091C11.1704 15.7386 11.7046 15.7386 12.0341 15.4091C12.0415 15.4018 12.0484 15.394 12.0549 15.3859L16.5461 9.77191C16.8636 9.44154 16.8596 8.91634 16.5341 8.59088Z"
-            fill="black"
-          />
-        </svg>
+        <<sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
         <div>A non-dismissible alert</div>
       </sgds-alert>
     </div>
@@ -61,12 +65,7 @@ const IconTemplate = args => {
         <div>Alert with no leading icon</div>
       </sgds-alert>
       <sgds-alert show title="Title">
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM16.5341 8.59088C16.2046 8.26137 15.6704 8.26137 15.3409 8.59088C15.3329 8.59884 15.3254 8.60726 15.3185 8.61612L11.4121 13.5938L9.05686 11.2386C8.72736 10.9091 8.19312 10.9091 7.86362 11.2386C7.53411 11.5681 7.53411 12.1024 7.86362 12.4319L10.8409 15.4091C11.1704 15.7386 11.7046 15.7386 12.0341 15.4091C12.0415 15.4018 12.0484 15.394 12.0549 15.3859L16.5461 9.77191C16.8636 9.44154 16.8596 8.91634 16.5341 8.59088Z"
-            fill="white"
-          />
-        </svg>
+        <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
         <div>Alert with leading icon</div>
       </sgds-alert>
     </div>
