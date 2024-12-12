@@ -1,4 +1,3 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { live } from "lit/directives/live.js";
@@ -26,15 +25,12 @@ import actionCardStyles from "./action-card.css";
  * @csspart title - The action card title
  * @csspart text - The action card text
  */
-export class SgdsActionCard extends ScopedElementsMixin(CardElement) {
+export class SgdsActionCard extends CardElement {
   static styles = [...CardElement.styles, actionCardStyles];
-  /**@internal */
-  static get scopedElements() {
-    return {
-      "sgds-checkbox": SgdsCheckbox,
-      "sgds-radio": SgdsRadio
-    };
-  }
+  static dependencies = {
+    "sgds-checkbox": SgdsCheckbox,
+    "sgds-radio": SgdsRadio
+  };
   /** @internal */
   inputRef: Ref<SgdsCheckbox | SgdsRadio> = createRef();
   /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */

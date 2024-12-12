@@ -1,6 +1,7 @@
-import { LitElement, html } from "lit";
+import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
 import tabPanelStyles from "./tab-panel.css";
 
@@ -11,8 +12,8 @@ let id = 0;
  * @slot - The tab panel's content.
  *
  */
-export class SgdsTabPanel extends LitElement {
-  static styles = tabPanelStyles;
+export class SgdsTabPanel extends SgdsElement {
+  static styles = [...SgdsElement.styles, tabPanelStyles];
   private readonly attrId = ++id;
   private readonly componentId = `sgds-tab-panel-${this.attrId}`;
   /** The tab panel's name. */

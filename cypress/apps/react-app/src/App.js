@@ -31,12 +31,14 @@ import { Table } from "./components/Table";
 import { Textarea } from "./components/Textarea";
 import { Toast } from "./components/Toast";
 import { Tooltip } from "./components/Tooltip";
+import { IconButton } from "./components/IconButton";
 
 function App() {
   return (
     <>
       <Masthead />
       <Mainnav />
+      <IconButton />
       <Accordion />
       <ActionCard />
       <Alert />

@@ -1,6 +1,7 @@
 import { SgdsComboBox } from "./sgds-combo-box";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-combo-box", SgdsComboBox);
+register("sgds-combo-box", SgdsComboBox);
 
 declare global {
   interface HTMLElementTagNameMap {

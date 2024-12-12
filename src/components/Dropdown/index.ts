@@ -1,8 +1,9 @@
 import { SgdsDropdown } from "./sgds-dropdown";
 import { SgdsDropdownItem } from "./sgds-dropdown-item";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-dropdown", SgdsDropdown);
-customElements.define("sgds-dropdown-item", SgdsDropdownItem);
+register("sgds-dropdown", SgdsDropdown);
+register("sgds-dropdown-item", SgdsDropdownItem);
 
 declare global {
   interface HTMLElementTagNameMap {

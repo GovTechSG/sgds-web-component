@@ -7,8 +7,8 @@
 <h3> General </h3>
 
 <sgds-accordion-item>
-    <div slot="header">Uncaught DOMException: Failed to execute 'define' on 'CustomElementRegistry'</div>
-    <span slot="content">If you encounter this error, it means that you need to load the Scoped Custom Element Registry polyfill. Refer to the instructions <a target="_self" href="/docs/usage-scoped-elements--docs">here</a></span> 
+    <div slot="header">Uncaught DOMException: Failed to execute 'define' on 'CustomElementRegistry': Uncaught DOMException: Failed to execute 'define' on 'CustomElementRegistry'</div>
+    <span slot="content">If you encounter this error, it means that you have imported a component of the same custom element tag name more than once. This may happen when you have installed multiple version of this library. It is not advisable to have more than one version of the component existing in the same application</span> 
 </sgds-accordion-item>
 
 <h3> React </h3>

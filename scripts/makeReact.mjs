@@ -35,8 +35,9 @@ components.map(component => {
       import * as React from 'react';
       import { createComponent } from '@lit-labs/react';
       import Component from '../../components/${importPath}';
+      import { register } from "../../utils/ce-registry";
 
-      customElements.define("${component.tagName}", Component)
+      register("${component.tagName}", Component)
 
       export default createComponent({
         react: React,

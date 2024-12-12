@@ -1,10 +1,7 @@
 import dynamic from "next/dynamic"
-const SgdsToast = dynamic(
-    () => import("@govtechsg/sgds-web-component/react/toast/index.js"),
-    {
-      ssr: false,
-    }
-  );
+
+import SgdsToast from "@govtechsg/sgds-web-component/react/toast/index.js";
+
 import SgdsToastContainer from "@govtechsg/sgds-web-component/react/toast-container/index.js";
 
 export const Toast = () => {

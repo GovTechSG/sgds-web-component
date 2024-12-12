@@ -1,10 +1,4 @@
-import dynamic from "next/dynamic"
-const SgdsFileUpload = dynamic(
-    () => import("@govtechsg/sgds-web-component/react/file-upload/index.js"),
-    {
-      ssr: false,
-    }
-  );
+import SgdsFileUpload from "@govtechsg/sgds-web-component/react/file-upload/index.js";
 
   export const FileUpload = () => {
   return (

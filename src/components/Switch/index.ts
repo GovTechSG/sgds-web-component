@@ -1,6 +1,7 @@
 import { SgdsSwitch } from "./sgds-switch";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-switch", SgdsSwitch);
+register("sgds-switch", SgdsSwitch);
 
 declare global {
   interface HTMLElementTagNameMap {

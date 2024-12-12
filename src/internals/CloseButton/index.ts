@@ -1,6 +1,7 @@
 import { SgdsCloseButton } from "./sgds-close-button";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-close-button", SgdsCloseButton);
+register("sgds-close-button", SgdsCloseButton);
 
 declare global {
   interface HTMLElementTagNameMap {

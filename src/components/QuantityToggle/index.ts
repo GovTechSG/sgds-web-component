@@ -1,6 +1,7 @@
 import { SgdsQuantityToggle } from "./sgds-quantity-toggle";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-quantity-toggle", SgdsQuantityToggle);
+register("sgds-quantity-toggle", SgdsQuantityToggle);
 
 declare global {
   interface HTMLElementTagNameMap {
