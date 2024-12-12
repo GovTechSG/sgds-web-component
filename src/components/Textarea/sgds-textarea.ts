@@ -47,7 +47,6 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
   @property({ type: Boolean, reflect: true }) autofocus = false;
   /** Makes the textarea readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
-
   /** Controls how the textarea can be resized. */
   @property({ type: String, reflect: true }) resize: "none" | "vertical" | "auto" = "vertical";
   /** The native textarea's inputmode attribute. It hints at the type of data that might be entered by the user while editing the element or its contents. This allows a browser to display an appropriate virtual keyboard. */
@@ -62,7 +61,7 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
     | "url";
   /** The native textarea's autocorrect attribute. */
   @property({ type: String, reflect: true }) autocorrect: string;
-  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  /** @internal Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = "";
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */

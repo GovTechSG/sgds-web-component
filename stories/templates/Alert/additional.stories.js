@@ -52,7 +52,7 @@ const DismissibleTemplate = args => {
         <div>A dismissible alert</div>
       </sgds-alert>
       <sgds-alert show title="Title" outlined dismissible>
-        <<sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+        <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
         <div>A non-dismissible alert</div>
       </sgds-alert>
     </div>

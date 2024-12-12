@@ -1,9 +1,9 @@
-import { property } from "lit/decorators.js";
-import SgdsElement from "../../base/sgds-element";
 import { html } from "lit";
-import { ifDefined } from "lit/directives/if-defined.js";
-import closeButtonStyles from "./close-button.css";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
+import SgdsElement from "../../base/sgds-element";
+import closeButtonStyles from "./close-button.css";
 /**
  * @summary Close button for closing actions. Used in Modal, Drawer, Alert and Toast.
  *
