@@ -66,7 +66,7 @@ export const ButtonWithIcon = {
   render: () => html`
     <sgds-button><sgds-icon name="placeholder" slot="leftIcon"></sgds-icon>Leading icon</sgds-button>
     <sgds-button>
-    <sgds-icon name="placeholder" slot="rightIcon"></sgds-icon>
+      <sgds-icon name="placeholder" slot="rightIcon"></sgds-icon>
       Trailing icon
     </sgds-button>
   `,

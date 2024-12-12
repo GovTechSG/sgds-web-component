@@ -5,9 +5,11 @@ import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { watch } from "../../utils/watch";
 import stepperStyle from "./stepper.css";
+import SgdsIcon from "../Icon/sgds-icon";
 export interface IStepMetaData {
   component: unknown;
   stepHeader: string;
+  iconName?: string;
 }
 /**
  * @summary Steppers are used to inform users which step they are at in a form or a process
@@ -22,9 +24,9 @@ export interface IStepMetaData {
  */
 export class SgdsStepper extends SgdsElement {
   static styles = [...SgdsElement.styles, stepperStyle];
-
-  /** The metadata of stepper, type `IStepMetaData`, that consist of `stepHeader: string` and `component:unknown`. `stepHeader` is the name of the step and `component` is the content that should appear at the each step. `component` is set to `unknown` to allow users to pass in their desired component based on the framework of choice. e.g. pass in your own react/angular/vue component or it can also be a text content.
-   * It is required to populate this array to properly render the stepper.
+  static dependencies = { "sgds-icon": SgdsIcon };
+  /** The metadata of stepper, type `IStepMetaData`, that consist of `stepHeader: string`, `component:unknown`, `iconName:string`. `stepHeader` is the name of the step and `component` is the content that should appear at the each step. `component` is set to `unknown` to allow users to pass in their desired component based on the framework of choice. e.g. pass in your own react/angular/vue component or it can also be a text content.
+   * It is required to populate this array to properly render the stepper. By default, stepper markers will render numbers. For icon stepper markers, pass the name of sgds icon via `iconName` key. `iconName` is optional.
    */
   @property({ type: Array })
   steps: IStepMetaData[] = [];
@@ -115,7 +117,7 @@ export class SgdsStepper extends SgdsElement {
           clickable: this.clickable
         })}"
       >
-        ${this.steps.map(({ stepHeader: step }, index) => {
+        ${this.steps.map(({ stepHeader: step, iconName }, index) => {
           return html`
             <div class="stepper-item-container">
               <div
@@ -130,7 +132,9 @@ export class SgdsStepper extends SgdsElement {
                 @click="${this.clickable ? () => this._onStepperItemClick(index) : null}"
                 @keydown=${this.clickable ? (e: KeyboardEvent) => this._handleKeyDown(e, index) : null}
               >
-                <div class="stepper-marker">${index + 1}</div>
+                <div class="stepper-marker">
+                  ${iconName ? html`<sgds-icon name=${iconName} size="md"></sgds-icon>` : index + 1}
+                </div>
                 <div class="stepper-detail">${step}</div>
               </div>
             </div>

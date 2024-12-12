@@ -1,8 +1,8 @@
-import "./sgds-web-component";
 import { assert, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
-import { SgdsButton, SgdsStepper } from "../src/components";
-import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";
+import sinon from "sinon";
+import { SgdsButton, SgdsStepper } from "../src/components";
+import "./sgds-web-component";
 
 const stepMetaData = [
   {
@@ -16,6 +16,23 @@ const stepMetaData = [
   {
     stepHeader: "Review",
     component: "3 test"
+  }
+];
+const iconStepMetaData = [
+  {
+    stepHeader: "Personal Details",
+    component: "1 test",
+    iconName: "placeholder"
+  },
+  {
+    stepHeader: "Address and Contact Information",
+    component: "2 test",
+    iconName: "placeholder"
+  },
+  {
+    stepHeader: "Review",
+    component: "3 test",
+    iconName: "placeholder"
   }
 ];
 describe("sgds-stepper", () => {
@@ -63,7 +80,6 @@ describe("sgds-stepper", () => {
 
   it("when activeStep set to 2 and clickable set to true, should update the `is-active` to the previous step when clicked", async () => {
     const el = await fixture(html` <sgds-stepper .steps=${stepMetaData} activeStep="2" clickable></sgds-stepper> `);
-
     const stepperItemTwo = el.shadowRoot
       ?.querySelectorAll(".stepper-item-container")[1]
       .querySelector(".stepper-item") as SgdsStepper;
@@ -102,6 +118,11 @@ describe("sgds-stepper", () => {
 
     const stepper = el.shadowRoot?.querySelector(".stepper") as SgdsStepper;
     expect(stepper.classList.contains("vertical")).to.be.true;
+  });
+  it("when iconName is included in stepsMetadata, sgds-icon is rendered in steps marker", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${iconStepMetaData}></sgds-stepper> `);
+    const markers = el.shadowRoot?.querySelectorAll(".stepper-marker > sgds-icon[name='placeholder']");
+    expect(markers?.length).to.equal(3);
   });
 });
 
