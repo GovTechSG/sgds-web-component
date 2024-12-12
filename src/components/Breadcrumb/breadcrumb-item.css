@@ -16,10 +16,10 @@
   color: var(--sgds-link-color-emphasis, --sgds-default-color);
 }
 
-.breadcrumb-item__separator svg  {
+.separator svg  {
  vertical-align: middle;
 }
 
-:host(:last-of-type) .breadcrumb-item__separator {
+:host(:last-of-type) .separator {
   display: none;
 }

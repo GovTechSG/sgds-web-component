@@ -145,7 +145,7 @@ describe("sgds-breadcrumb-item", () => {
     assert.shadowDom.equal(
       el,
       `<slot class="nav-link"></slot>
-      <div class="breadcrumb-item__separator">
+      <div class="separator">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path
             fill-rule="evenodd"
