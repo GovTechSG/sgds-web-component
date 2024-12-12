@@ -1,14 +1,17 @@
-/* Default Horizontal Orientation */
-.tab-group__nav {
+.tab-group {
   display: flex;
+  flex-direction: column;
+
+}
+
+.tab-group__content {
+  flex: 1;
+}
+
+:host([orientation="vertical"]) .tab-group {
   flex-direction: row;
 }
 
-/* Vertical Orientation */
-:host([orientation="vertical"]) .tab-group__nav {
-  flex-direction: column;
-}
-
-:host([variant="solid"]) .tab-group__nav {
-  gap: var(--sgds-spacer-3);
+:host([orientation="vertical"]) .tab-group__content {
+  flex: 1;
 }
