@@ -1,6 +1,12 @@
 import SgdsDropdownItem from "@govtechsg/sgds-web-component/react/dropdown-item/index.js";
-import  SgdsDropdown from "@govtechsg/sgds-web-component/react/dropdown/index.js"
-import  SgdsButton from "@govtechsg/sgds-web-component/react/button/index.js"
+import dynamic from "next/dynamic"
+const SgdsDropdown = dynamic(
+    () => import("@govtechsg/sgds-web-component/react/dropdown/index.js"),
+    {
+      ssr: false,
+    }
+  );
+  import SgdsButton from "@govtechsg/sgds-web-component/react/button/index.js"
 
 
 export const Dropdown = () => {
