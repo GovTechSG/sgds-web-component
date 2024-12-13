@@ -89,7 +89,3 @@
   padding: 0;
 }
 
-slot[name="validIcon"]::slotted(*),
-slot[name="validIcon"] svg {
-  color: var(--sgds-form-success-color);
-}

@@ -1,7 +1,9 @@
-import ButtonElement from "../../base/button-element";
-import { literal, html } from "lit/static-html.js";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { html, literal } from "lit/static-html.js";
+import ButtonElement from "../../base/button-element";
+import SgdsIcon from "../Icon/sgds-icon";
 import iconButtonStyles from "./icon-button.css";
 
 /**
@@ -14,6 +16,18 @@ import iconButtonStyles from "./icon-button.css";
  */
 export class SgdsIconButton extends ButtonElement {
   static styles = [...ButtonElement.styles, iconButtonStyles];
+  static dependencies = {
+    "sgds-icon": SgdsIcon
+  };
+
+  /** The name of the icon from sgds icon library */
+  @property({ type: String, reflect: true }) name: string;
+
+  private _assignIconSize(buttonSize: "sm" | "md" | "lg") {
+    if (buttonSize === "sm") return "md";
+    if (buttonSize === "md") return "lg";
+    if (buttonSize === "lg") return "xl";
+  }
 
   render() {
     const isLink = this.href;
@@ -40,7 +54,7 @@ export class SgdsIconButton extends ButtonElement {
             @blur=${this._handleBlur}
             aria-label=${ifDefined(this.ariaLabel)}
           >
-            <slot></slot>
+            <sgds-icon name=${ifDefined(this.name)} size=${ifDefined(this._assignIconSize(this.size))}></sgds-icon>
           </${tag}>
         `;
   }
