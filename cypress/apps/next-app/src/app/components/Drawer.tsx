@@ -1,13 +1,8 @@
 "use client"
 import SgdsButton from "@govtechsg/sgds-web-component/react/button/index.js";
-import dynamic from "next/dynamic";
 import { useState } from "react";
-const SgdsDrawer = dynamic(
-  () => import("@govtechsg/sgds-web-component/react/drawer/index.js"),
-  {
-    ssr: false,
-  }
-)
+import  SgdsDrawer from "@govtechsg/sgds-web-component/react/drawer/index.js"
+  
 export const Drawer = () => {
   const [open, setOpen] = useState(false)
   const toggleDrawer = () => {

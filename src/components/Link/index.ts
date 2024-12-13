@@ -1,6 +1,7 @@
 import { SgdsLink } from "./sgds-link";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-link", SgdsLink);
+register("sgds-link", SgdsLink);
 
 declare global {
   interface HTMLElementTagNameMap {

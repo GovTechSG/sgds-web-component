@@ -1,6 +1,7 @@
 import { SgdsInput } from "./sgds-input";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-input", SgdsInput);
+register("sgds-input", SgdsInput);
 
 declare global {
   interface HTMLElementTagNameMap {

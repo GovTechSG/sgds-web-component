@@ -1,5 +1,4 @@
 import { html, nothing } from "lit";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -17,15 +16,13 @@ export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral"
  * @event sgds-show - Emitted when the badge appears.
  * @event sgds-hide - Emitted after the badge closes.
  */
-export class SgdsBadge extends ScopedElementsMixin(SgdsElement) {
+export class SgdsBadge extends SgdsElement {
   static styles = [...SgdsElement.styles, badgeStyle];
 
   /**@internal */
-  static get scopedElements() {
-    return {
-      "sgds-close-button": SgdsCloseButton
-    };
-  }
+  static dependencies = {
+    "sgds-close-button": SgdsCloseButton
+  };
 
   /** Controls the appearance of the dismissible badge. This prop only applies when dismissible is true  */
   @property({ type: Boolean, reflect: true }) show = false;

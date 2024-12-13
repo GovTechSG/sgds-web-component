@@ -1,0 +1,50 @@
+.dropdown-item {
+    --sgds-dropdown-item-active-color: #fff;
+    --sgds-dropdown-item-active-bg: var(--sgds-info);
+    --sgds-dropdown-item-disabled-color: var(--sgds-gray-500);
+    background-color: var(--sgds-default-bg-transparent);
+    padding: var(--sgds-padding-sm) var(--sgds-padding-lg);
+    clear: both;
+    display: flex;
+    gap: var(--sgds-gap-sm);
+    align-items: center;
+    color: var(--sgds-default-color);
+    text-align: inherit;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .dropdown-item:hover {
+    background-color: var(--sgds-default-bg-translucent-subtle);
+  }
+  
+  .dropdown-item:focus,
+  .dropdown-item:focus-visible {
+    outline: 0;
+    box-shadow: inset var(--sgds-form-box-shadow-focus);
+    background-color: var(--sgds-default-bg-translucent-subtle);
+  }
+  
+  .dropdown-item.active,
+  .dropdown-item:active {
+    background-color: var(--sgds-primary-bg-translucent);
+    color: var(--sgds-primary-color);
+    text-decoration: none;
+  }
+  
+  .dropdown-item.disabled,
+  .dropdown-item:disabled {
+    opacity: var(--sgds-opacity-50);
+    pointer-events: none;
+  }
+
+  .active-icon {
+    margin-left: auto;
+  }
+
+  ::slotted(*){
+    display: flex;
+    gap: var(--sgds-gap-sm);
+    text-decoration: none !important; 
+    color: inherit !important;
+  }

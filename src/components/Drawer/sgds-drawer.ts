@@ -11,7 +11,6 @@ import { HasSlotController } from "../../utils/slot.js";
 import { watch } from "../../utils/watch.js";
 import drawerStyles from "./drawer.css";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 
 /**
  * @summary Drawers slide in from a container to expose additional options and information.
@@ -49,14 +48,12 @@ import { ScopedElementsMixin } from "@open-wc/scoped-elements";
  * @cssproperty --drawer-button-gap - The drawer's flex gap between buttons.
  *
  */
-export class SgdsDrawer extends ScopedElementsMixin(SgdsElement) {
+export class SgdsDrawer extends SgdsElement {
   static styles = [...SgdsElement.styles, drawerStyles];
   /**@internal */
-  static get scopedElements() {
-    return {
-      "sgds-close-button": SgdsCloseButton
-    };
-  }
+  static dependencies = {
+    "sgds-close-button": SgdsCloseButton
+  };
   /** @internal */
   private readonly hasSlotController = new HasSlotController(this, "footer");
   /** @internal */

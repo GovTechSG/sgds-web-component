@@ -1,10 +1,6 @@
-import dynamic from "next/dynamic"
-const SgdsTooltip = dynamic(
-  () => import("@govtechsg/sgds-web-component/react/tooltip/index.js"),
-  {
-    ssr: false,
-  }
-);export const Tooltip = () => {
+import SgdsTooltip from "@govtechsg/sgds-web-component/react/tooltip/index.js"
+
+export const Tooltip = () => {
   return (
     <>
       Hover over the icon

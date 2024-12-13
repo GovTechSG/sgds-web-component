@@ -1,8 +1,9 @@
 import { SgdsFooter } from "./sgds-footer";
 import { SgdsFooterItem } from "./sgds-footer-item";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-footer", SgdsFooter);
-customElements.define("sgds-footer-item", SgdsFooterItem);
+register("sgds-footer", SgdsFooter);
+register("sgds-footer-item", SgdsFooterItem);
 
 declare global {
   interface HTMLElementTagNameMap {

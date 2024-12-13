@@ -1,6 +1,7 @@
 import { SgdsButton } from "./sgds-button";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-button", SgdsButton);
+register("sgds-button", SgdsButton);
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -1,6 +1,7 @@
 import { SgdsProgressBar } from "./sgds-progress-bar";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-progress-bar", SgdsProgressBar);
+register("sgds-progress-bar", SgdsProgressBar);
 declare global {
   interface HTMLElementTagNameMap {
     "sgds-progress-bar": SgdsProgressBar;

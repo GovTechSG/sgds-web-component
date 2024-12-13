@@ -1,6 +1,7 @@
 import { SgdsTextarea } from "./sgds-textarea";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-textarea", SgdsTextarea);
+register("sgds-textarea", SgdsTextarea);
 
 declare global {
   interface HTMLElementTagNameMap {

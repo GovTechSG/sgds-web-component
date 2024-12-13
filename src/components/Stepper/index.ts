@@ -1,6 +1,7 @@
 import { SgdsStepper } from "./sgds-stepper";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-stepper", SgdsStepper);
+register("sgds-stepper", SgdsStepper);
 declare global {
   interface HTMLElementTagNameMap {
     "sgds-stepper": SgdsStepper;

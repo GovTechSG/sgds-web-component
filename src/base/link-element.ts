@@ -3,6 +3,7 @@ import SgdsElement from "./sgds-element";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { watch } from "../utils/watch";
 
 /**
  * @slot default - Default slot for SgdsMainnavItem anchor element
@@ -10,8 +11,6 @@ import { ifDefined } from "lit/directives/if-defined.js";
  */
 
 export default class LinkElement extends SgdsElement {
-  // static styles = [...SgdsElement.styles];
-
   /** when true, sets the active stylings of .nav-link */
   @property({ type: Boolean })
   active = false;
@@ -23,9 +22,10 @@ export default class LinkElement extends SgdsElement {
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
-  /** Where to display the linked URL, as the name for a browsing context. Forwards to the HTMLAnchor target attribute */
-  @property({ type: String, reflect: true })
-  target: "_blank" | "_parent" | "_self" | "_top" = "_self";
+  @watch("disabled")
+  _handleDisabled() {
+    this.setAttribute("aria-disabled", `${this.disabled}`);
+  }
 
   render() {
     return html`
@@ -37,7 +37,6 @@ export default class LinkElement extends SgdsElement {
         })} "
         ?disabled=${this.disabled}
         aria-disabled=${this.disabled ? "true" : "false"}
-        target=${this.target}
       >
         <slot></slot>
       </a>

@@ -1,4 +1,3 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html, nothing } from "lit";
 import { property, query, queryAssignedNodes } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
@@ -23,15 +22,12 @@ import toastStyle from "./toast.css";
  
  * @cssproperty --toast-icon-margin-right - The margin right between toast's icon and title in its header.
  */
-export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
+export class SgdsToast extends SgdsElement {
   static styles = [...SgdsElement.styles, toastStyle];
   /**@internal */
-  static get scopedElements() {
-    return {
-      "sgds-close-button": SgdsCloseButton
-    };
-  }
-
+  static dependencies = {
+    "sgds-close-button": SgdsCloseButton
+  };
   /**@internal */
   @query("div.toast") toast: HTMLElement;
   /** Controls the appearance of toast */

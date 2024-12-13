@@ -35,7 +35,7 @@
   flex-grow: 1;
   color: var(--sgds-form-color);
   font-size: var(--sgds-font-size-2);
-  line-height: var(--sgds-line-height-heading);
+  line-height: var(--sgds-line-height-body);
 }
 
 .form-control-group > .form-control:focus {
@@ -80,14 +80,6 @@
   text-align:center;
 }
 
-.form-control-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--sgds-form-icon-size-lg);
-  height: var(--sgds-form-icon-size-lg);
-}
-
 .form-control-prefix,
 .form-control-suffix {
   color: var(--sgds-form-color-subtle);
@@ -96,3 +88,4 @@
 .form-control-group.quantity-toggle {
   padding: 0;
 }
+

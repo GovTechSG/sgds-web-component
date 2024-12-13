@@ -1,6 +1,7 @@
 import { SgdsMasthead } from "./sgds-masthead";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-masthead", SgdsMasthead);
+register("sgds-masthead", SgdsMasthead);
 
 declare global {
   interface HTMLElementTagNameMap {

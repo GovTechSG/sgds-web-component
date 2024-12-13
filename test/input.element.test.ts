@@ -13,6 +13,7 @@ describe("sgds-input", () => {
         <div class="form-control-container">
           <label class="form-label" for="test-id">label</label>
           <div class="form-control-group">
+            <slot name="icon"></slot>
             <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
           </div>
           <div class="form-text" id="test-idHelp">hello</div>
@@ -28,6 +29,7 @@ describe("sgds-input", () => {
       `
         <div class="form-control-container">
           <div class="form-control-group">
+            <slot name="icon"></slot>
             <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
              <span class="form-control-suffix">
            test
@@ -45,9 +47,10 @@ describe("sgds-input", () => {
       `
         <div class="form-control-container">
           <div class="form-control-group">
-           <span class="form-control-prefix">
-            test
-          </span>
+            <slot name="icon"></slot>
+            <span class="form-control-prefix">
+              test
+            </span>
             <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
           </div>
         </div>
@@ -62,6 +65,7 @@ describe("sgds-input", () => {
       `
         <div class="form-control-container">
           <div class="form-control-group">
+            <slot name="icon"></slot>
             <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
             <sgds-spinner
             size="sm"
@@ -134,15 +138,6 @@ describe("sgds-input", () => {
     expect(hintText).to.exist;
   });
 
-  // Icon
-  it("should render with form-control-group if icon attribute is defined", async () => {
-    const el = await fixture(html`<sgds-input
-      icon='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-  </svg>'
-    ></sgds-input>`);
-    expect(el.shadowRoot?.querySelector("div.form-control-group>span.form-control-icon>svg")).to.exist;
-  });
   //Name
   it("updates the name attribute value to 'Hello'", async () => {
     const el = await fixture(html`<sgds-input></sgds-input>`);

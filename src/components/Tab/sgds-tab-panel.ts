@@ -1,6 +1,7 @@
-import { LitElement, html } from "lit";
+import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
 import tabPanelStyles from "./tab-panel.css";
 
@@ -10,16 +11,10 @@ let id = 0;
  * @summary Tab panels are used inside tab groups to display tabbed content.
  * @slot - The tab panel's content.
  *
- * @csspart base - The component's base wrapper.
- *
- * @cssproperty --tab-panel-padding-y - The y-axis padding of tab panel.
- *
  */
-export class SgdsTabPanel extends LitElement {
-  static styles = tabPanelStyles;
-  /**@internal */
+export class SgdsTabPanel extends SgdsElement {
+  static styles = [...SgdsElement.styles, tabPanelStyles];
   private readonly attrId = ++id;
-  /**@internal */
   private readonly componentId = `sgds-tab-panel-${this.attrId}`;
   /** The tab panel's name. */
   @property({ reflect: true }) name = "";
@@ -34,14 +29,13 @@ export class SgdsTabPanel extends LitElement {
   }
 
   @watch("active")
-  handleActiveChange() {
+  _handleActiveChange() {
     this.setAttribute("aria-hidden", this.active ? "false" : "true");
   }
 
   render() {
     return html`
       <slot
-        part="base"
         class=${classMap({
           "tab-panel": true,
           "tab-panel--active": this.active

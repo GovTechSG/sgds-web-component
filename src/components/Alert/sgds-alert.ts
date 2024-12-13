@@ -1,5 +1,4 @@
 import { nothing } from "lit";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
@@ -20,15 +19,13 @@ export type AlertVariant = "info" | "success" | "danger" | "warning" | "neutral"
  * @event sgds-hide - Emitted after the alert closes.
  *
  */
-export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
+export class SgdsAlert extends SgdsElement {
   static styles = [...SgdsElement.styles, alertStyle];
   /**@internal */
-  static get scopedElements() {
-    return {
-      "sgds-close-button": SgdsCloseButton,
-      "sgds-icon": SgdsIcon
-    };
-  }
+  static dependencies = {
+    "sgds-close-button": SgdsCloseButton,
+    "sgds-icon": SgdsIcon
+  };
   /** Controls the appearance of the alert  */
   @property({ type: Boolean, reflect: true }) show = false;
 

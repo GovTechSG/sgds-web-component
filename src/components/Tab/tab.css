@@ -1,100 +1,78 @@
-:host {
-  display: inline-block;
+:host([density="compact"]) .tab {
+  padding: var(--sgds-spacer-3) var(--sgds-spacer-5);
+  font-size: var(--sgds-font-size-1);
 }
 
-ul {
-  padding-left: 0;
-  margin-bottom: 1rem;
-  margin-top: 0;
-}
-.list-unstyled {
-  list-style: none;
-}
-.nav-link {
-  color: var(--sgds-body-color);
-  display: block;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+:host(:not([active])) .tab {
   cursor: pointer;
 }
-@media (prefers-reduced-motion: reduce) {
-  .nav-link {
-    transition: none;
-  }
+
+:host([variant="solid"]) .tab {
+  background-color: var(--sgds-default-bg-translucent-subtle);
+  border-radius: var(--sgds-border-radius-md);
 }
 
-.nav-link.tabs-info-toggle {
-  padding: 0.75rem;
-  border-radius: 0.3125rem;
-  background-color: var(--sgds-body-bg);
-  border: 1px solid var(--sgds-gray-400);
-  min-width: 11.875rem;
+:host([variant="solid"][active]) .tab {
+  background-color: var(--sgds-primary-color);
+  color: var(--sgds-default-color-on-dark);
 }
 
-.nav-link:not(.disabled).tabs-info-toggle.active,
-.nav-link:not(.disabled).tabs-info-toggle:hover {
-  border-color: var(--sgds-primary);
-  color: var(--sgds-primary);
-  font-weight: 700;
+:host([variant="solid"]:not([active]):not([disabled])) .tab:hover {
+  background-color: var(--sgds-gray-300);
 }
 
-.nav-link.tabs-info-toggle .tabs-info-label {
-  display: flex;
-  text-align: right;
-  justify-content: space-between;
+:host([disabled]) .tab {
+  opacity: var(--sgds-opacity-50);
+  cursor: not-allowed;
 }
 
-.nav-link.tabs-info-toggle .tabs-info-count {
-  text-align: right;
+:host([variant="underlined"][orientation="vertical"]) .tab {
+  border-right: var(--sgds-border-width-1) solid var(--sgds-default-border-color-muted);
 }
 
-.nav-link.tabs-basic-toggle {
-  border: 1px solid var(--sgds-gray-400);
-  border-radius: 0;
-  background-color: var(--sgds-body-bg);
-  padding: 0.5rem 1.5rem;
+:host([variant="underlined"][orientation="vertical"][active]) .tab::after,
+:host([variant="underlined"][orientation="vertical"]:not([disabled])) .tab:hover::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: -1px;
+  width: var(--sgds-border-width-4);
+  height: 100%;
+  background-color: var(--sgds-primary-color);
 }
 
-.nav-link.tabs-basic-toggle slot {
+:host([variant="underlined"][orientation="horizontal"]) .tab {
+  border-bottom: var(--sgds-border-width-1) solid var(--sgds-default-border-color-muted);
+}
+
+:host([variant="underlined"][orientation="horizontal"][active]) .tab::after,
+:host([variant="underlined"][orientation="horizontal"]:not([disabled])) .tab:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: var(--sgds-border-width-4);
+  width: 100%;
+  background-color: var(--sgds-primary-color);
+}
+
+:host([variant="underlined"][orientation="vertical"]:not([active]):not([disabled])) .tab:hover::after,
+:host([variant="underlined"][orientation="horizontal"]:not([active]):not([disabled])) .tab:hover::after {
+  background-color: var(--sgds-default-bg-subtle);
+}
+
+.tab {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--sgds-spacer-3);
+  padding: var(--sgds-spacer-4) var(--sgds-spacer-5);
+  color: var(--sgds-default-color-emphasis);
+  position: relative;
 }
 
-.nav-link:not(.disabled).tabs-basic-toggle.active,
-.nav-link:not(.disabled).tabs-basic-toggle:hover {
-  color: var(--sgds-white);
-  background-color: var(--sgds-info);
-}
-
-.nav-link.disabled {
-  background-color: var(--sgds-gray-200);
-  color: var(--sgds-gray-400);
-  border-color: var(--sgds-gray-400);
-  cursor: not-allowed;
-}
-
-.nav-link:not(.tabs-basic-toggle):not(.tabs-info-toggle) {
-  padding-top: 0;
-  padding-left: 0;
-  padding-right: 0;
-  background-color: transparent;
-  border-color: transparent;
-  border: none;
-}
-
-.nav-link:not(.disabled):not(.tabs-basic-toggle):not(.tabs-info-toggle).active,
-.nav-link:not(.disabled):not(.tabs-basic-toggle):not(.tabs-info-toggle):hover {
-  border-bottom: 0.125rem solid var(--sgds-info);
-  font-weight: 700;
-  background-color: transparent;
-}
-
-.nav-link:not(.tabs-basic-toggle):not(.tabs-info-toggle).disabled {
-  background-color: var(--sgds-gray-200);
-  color: var(--sgds-gray-400);
-  border-color: var(--sgds-gray-400);
-  cursor: not-allowed;
-  background-color: transparent;
+.tab:focus,
+.tab:focus-visible {
+  background-color: var(--sgds-btn-hover-bg);
+  box-shadow: var(--sgds-box-shadow-focus);
+  outline: 0;
 }

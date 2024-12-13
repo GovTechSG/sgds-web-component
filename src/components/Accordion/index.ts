@@ -1,8 +1,9 @@
 import { SgdsAccordion } from "./sgds-accordion";
 import { SgdsAccordionItem } from "./sgds-accordion-item";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-accordion", SgdsAccordion);
-customElements.define("sgds-accordion-item", SgdsAccordionItem);
+register("sgds-accordion", SgdsAccordion);
+register("sgds-accordion-item", SgdsAccordionItem);
 
 declare global {
   interface HTMLElementTagNameMap {

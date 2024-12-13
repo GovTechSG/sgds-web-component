@@ -1,10 +1,5 @@
-import dynamic from "next/dynamic"
-const SgdsActionCard = dynamic(
-    () => import("@govtechsg/sgds-web-component/react/action-card/index.js"),
-    {
-      ssr: false,
-    }
-  );
+import SgdsActionCard from "@govtechsg/sgds-web-component/react/action-card/index.js";
+
 export const ActionCard = () => {
     return (
         <SgdsActionCard  type="checkbox" >

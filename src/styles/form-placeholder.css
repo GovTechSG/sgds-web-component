@@ -2,5 +2,5 @@
   color: var(--sgds-form-color-subtle);
   font-family: var(--sgds-font-family-brand);
   font-weight: var(--sgds-font-weight-light);
-  line-height: var(--sgds-line-height-heading);
+  line-height: var(--sgds-line-height-body);
 }

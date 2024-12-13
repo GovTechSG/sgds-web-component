@@ -28,7 +28,7 @@ ul {
   font-family: var(--sgds-font-family-brand);
   font-size: var(--sgds-font-size-2);
   font-weight: var(--sgds-font-weight-regular);
-  line-height: var(--sgds-line-height-heading);
+  line-height: var(--sgds-line-height-body);
   list-style-position: outside;
   padding-left: var(--sgds-padding-2-xl);
   margin-top: var(--sgds-padding-xs);
@@ -38,7 +38,7 @@ li {
   font-family: var(--sgds-font-family-brand);
   font-size: var(--sgds-font-size-2);
   font-weight: var(--sgds-font-weight-regular);
-  line-height: var(--sgds-line-height-heading);
+  line-height: var(--sgds-line-height-body);
   list-style-position: outside;
   margin-top: var(--sgds-padding-xs);
 }
@@ -124,7 +124,7 @@ p {
   font-size: var(--sgds-font-size-2);
   font-weight: var(--sgds-font-weight-regular);
   margin-bottom: var(--sgds-paragraph-spacing-xl);
-  font-family: var(--sgds-font-family-brand); 
+  font-family: var(--sgds-font-family-brand);
   line-height: var(--sgds-line-height-body);
   letter-spacing: var(--sgds-letter-spacing-normal);
   margin-top: var(--sgds-margin-none);

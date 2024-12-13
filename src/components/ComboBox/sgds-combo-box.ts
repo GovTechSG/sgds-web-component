@@ -1,4 +1,3 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
@@ -20,15 +19,13 @@ type FilterFunction = (inputValue: string, menuItem: string) => boolean;
  * @event sgds-select - Emitted when the combo box's selected value changes.
  * @event sgds-input -  Emitted when user input is received and its value changes.
  */
-export class SgdsComboBox extends ScopedElementsMixin(DropdownListElement) {
+export class SgdsComboBox extends DropdownListElement {
   static styles = [...DropdownListElement.styles, comboBoxStyle, dropdownStyle, dropdownMenuStyle];
   /**@internal */
-  static get scopedElements() {
-    return {
-      "sgds-input": SgdsInput,
-      "sgds-dropdown-item": SgdsDropdownItem
-    };
-  }
+  static dependencies = {
+    "sgds-input": SgdsInput,
+    "sgds-dropdown-item": SgdsDropdownItem
+  };
   constructor() {
     super();
     /**@internal */

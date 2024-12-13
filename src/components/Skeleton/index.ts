@@ -1,6 +1,7 @@
 import { SgdsSkeleton } from "./sgds-skeleton";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-skeleton", SgdsSkeleton);
+register("sgds-skeleton", SgdsSkeleton);
 
 declare global {
   interface HTMLElementTagNameMap {

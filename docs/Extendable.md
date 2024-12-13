@@ -6,9 +6,9 @@ For users who are leveraging on sgds-web-component as a building block to build 
 
 The CustomElementRegistry is a global registry that provides methods for registering custom elements. One of the limitations of working with this global registry is that multiple versions of the same element cannot co-exist. This causes bottlenecks in software delivery that should be managed by the teams and complex build systems. Scoped Custom Element Registries is a proposal that will solve the problem. Since this functionality won't be available (especially not cross browser) anytime soon, we've adopted [OpenWC's Scoped Elements](https://open-wc.org/docs/development/scoped-elements/).
 
-Whenever a sgds component uses composition (meaning it uses another sgds component inside), we apply ScopedElementsMixin to make sure it uses the right version of this internal component.
+From version 3.0.0 onwards, our library has stopped the use of Scoped Elements mixin to dedupe our component registration when reusing components.
 
-For users who are building component libraries on top of sgds-web-component, please adopt OpenWC's scoped elements to prevent exporting our registered custom elements. 
+For users who are building component libraries on top of sgds-web-component and facing clashing registration issues, you can adopt [OpenWC's scoped elements](https://open-wc.org/docs/development/scoped-elements/) to prevent exporting our registered custom elements. Please read up about OpenWC's scoped elements for more updated information. 
 
 Things to note:
 

@@ -1,17 +1,17 @@
-.nav {
+.tab-group {
   display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin-bottom: 0;
-  padding-left: 0;
+  flex-direction: column;
+
 }
-.nav-tabs {
-  border-bottom: none;
-  gap:  2rem;
+
+.tab-group__content {
+  flex: 1;
 }
-.sgds.nav-tabs[variant="tabs-basic-toggle"] {
-  gap: 0;
+
+:host([orientation="vertical"]) .tab-group {
+  flex-direction: row;
 }
-slot[name="nav"][variant="tabs-basic-toggle"]::slotted(sgds-tab) {
-  margin-left: -2px;
+
+:host([orientation="vertical"]) .tab-group__content {
+  flex: 1;
 }

@@ -1,10 +1,17 @@
 .invalid-feedback-container {
   display: flex;
   gap: var(--sgds-form-gap-sm);
+  color: var(--sgds-form-danger-color);
+
 }
 
 .invalid-feedback {
   color: var(--sgds-form-danger-color);
   font-size: var(--sgds-font-size-1);
   font-weight: var(--sgds-font-weight-regular);
+  line-height: var(--sgds-line-height-min);
+}
+
+.valid-icon{
+  color: var(--sgds-form-success-color);
 }
