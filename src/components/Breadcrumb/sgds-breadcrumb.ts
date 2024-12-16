@@ -33,6 +33,7 @@ export class SgdsBreadcrumb extends SgdsElement {
     const breadcrumbItem = document.createElement("sgds-breadcrumb-item");
     const overflowMenu = document.createElement("sgds-overflow-menu");
     overflowMenu.setAttribute("aria-haspopup", "menu");
+    overflowMenu.setAttribute("size", "sm");
     const mapItems = items.filter((item, index) => {
       if (index > 0 && index < items.length - 2) {
         const clonedAnchor = item.querySelector("a");
