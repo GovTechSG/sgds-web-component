@@ -1,23 +1,28 @@
+:host([size="sm"]) .overflow-btn{
+	width: var(--sgds-dimension-24);
+	height: var(--sgds-dimension-24);
+}
+
 .overflow-btn {
-    width: var(--sgds-dimension-32);
-    height: var(--sgds-dimension-32);
-    background-color: var(--sgds-default-bg-transparent);
-    border-radius:  var(--sgds-border-radius-sm);
-    border: 0;
-    padding: 0;
-    position: relative;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	width: var(--sgds-dimension-32);
+	height: var(--sgds-dimension-32);
+	background-color: var(--sgds-default-bg-transparent);
+	border-radius:  var(--sgds-border-radius-sm);
+	border: 0;
+	padding: 0;
+	position: relative;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .overflow-btn:hover {
-    background-color: var(--sgds-default-bg-translucent);
-  }
+	background-color: var(--sgds-default-bg-translucent);
+}
 
 .overflow-btn:focus,
 .overflow-btn:focus-visible {
-    outline: 0;
-    box-shadow: var(--sgds-box-shadow-focus);
-    background-color: var(--sgds-default-bg-translucent);
+	outline: 0;
+	box-shadow: var(--sgds-box-shadow-focus);
+	background-color: var(--sgds-default-bg-translucent);
 }
