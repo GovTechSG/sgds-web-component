@@ -170,7 +170,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   }
   render() {
     const getCheckedIcon = () => {
-      return html`<sgds-icon name="check-fill-circle"></sgds-icon>`;
+      return html`<sgds-icon name="check-circle-fill"></sgds-icon>`;
     };
 
     const listItems = this.selectedFiles.map(
