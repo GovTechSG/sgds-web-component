@@ -9,6 +9,9 @@ import { SgdsInput } from "../Input/sgds-input";
 import comboBoxStyle from "./combo-box.css";
 import dropdownStyle from "../Dropdown/dropdown.css";
 import dropdownMenuStyle from "../Dropdown/dropdown-menu.css";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
+import SgdsIcon from "../Icon/sgds-icon";
+
 type FilterFunction = (inputValue: string, menuItem: string) => boolean;
 
 /**
@@ -20,11 +23,12 @@ type FilterFunction = (inputValue: string, menuItem: string) => boolean;
  * @event sgds-input -  Emitted when user input is received and its value changes.
  */
 export class SgdsComboBox extends DropdownListElement {
-  static styles = [...DropdownListElement.styles, comboBoxStyle, dropdownStyle, dropdownMenuStyle];
+  static styles = [...DropdownListElement.styles, dropdownStyle, dropdownMenuStyle, comboBoxStyle];
   /**@internal */
   static dependencies = {
     "sgds-input": SgdsInput,
-    "sgds-dropdown-item": SgdsDropdownItem
+    "sgds-dropdown-item": SgdsDropdownItem,
+    "sgds-icon": SgdsIcon
   };
   constructor() {
     super();
@@ -135,11 +139,9 @@ export class SgdsComboBox extends DropdownListElement {
           aria-expanded=${this.menuIsOpen}
           aria-autocomplete="list"
           aria-controls=${this.dropdownMenuId}
+          suffix=${html`<sgds-icon name="chevron-down" size="md"></sgds-icon>`}
         >
         </sgds-input>
-        <div class="form-control-icon">
-          <slot name="icon"></slot>
-        </div>
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1">
           ${this.filteredMenuList.map(
             item => html`<sgds-dropdown-item @click=${this._handleSelectChange}>${item}</sgds-dropdown-item>`

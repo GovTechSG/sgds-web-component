@@ -26,3 +26,6 @@
 .form-control-icon {
   bottom: 0;
 }
+.combobox-caret {
+  color: var(--sgds-form-color-default);
+}
