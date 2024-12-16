@@ -2,7 +2,7 @@ import { property, query } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
-import { warnUnregisteredElements } from "../../utils/ce-registry";
+import SgdsOverflowMenu from "../../internals/OverflowMenu/sgds-overflow-menu";
 import breadcrumbStyle from "./breadcrumb.css";
 import type SgdsBreadcrumbItem from "./sgds-breadcrumb-item";
 /**
@@ -13,53 +13,39 @@ import type SgdsBreadcrumbItem from "./sgds-breadcrumb-item";
  */
 export class SgdsBreadcrumb extends SgdsElement {
   static styles = [...SgdsElement.styles, breadcrumbStyle];
+  static dependencies = {
+    "sgds-overflow-menu": SgdsOverflowMenu
+  };
   /** The aria-label of nav element within breadcrumb component. */
   @property({ type: String }) ariaLabel = "breadcrumb";
 
   /**@internal */
   @query("slot") defaultSlot: HTMLSlotElement;
-
-  private _checkDependencies() {
-    warnUnregisteredElements("sgds-dropdown");
-    warnUnregisteredElements("sgds-icon-button");
-    warnUnregisteredElements("sgds-icon");
-  }
   /**
    * creates `<sgds-breadcrumb-item>
-   *            <sgds-dropdown>
-   *              <sgds-icon-button slot="toggler">
-   *                <sgds-icon>
-   *              </sgds-icon-button>
+   *            <sgds-overflow-menu>
    *              <sgds-dropdown-item></sgds-dropdown-item>
    *               ...
-   *            </sgds-dropdown>
+   *            </sgds-overflow-menu>
    *          <sgds-breadcrumb-item>`
    */
   private _replaceExcessItemsWithDropdown(items: SgdsBreadcrumbItem[]) {
     const breadcrumbItem = document.createElement("sgds-breadcrumb-item");
-    const dropdown = document.createElement("sgds-dropdown");
-    const overflowButton = document.createElement("sgds-icon-button");
-    const icon = document.createElement("sgds-icon");
-    icon.setAttribute("name", "three-dots");
-    overflowButton.setAttribute("slot", "toggler");
-    overflowButton.setAttribute("variant", "ghost");
-    overflowButton.setAttribute("role", "button");
-    overflowButton.setAttribute("aria-haspopup", "menu");
-    overflowButton.appendChild(icon);
-    dropdown.appendChild(overflowButton);
+    const overflowMenu = document.createElement("sgds-overflow-menu");
+    overflowMenu.setAttribute("aria-haspopup", "menu");
     const mapItems = items.filter((item, index) => {
       if (index > 0 && index < items.length - 2) {
         const clonedAnchor = item.querySelector("a");
         const clonedAnchorNode = clonedAnchor.cloneNode(true);
         const dropdownItem = document.createElement("sgds-dropdown-item");
         dropdownItem.appendChild(clonedAnchorNode);
-        dropdown.appendChild(dropdownItem);
+        overflowMenu.appendChild(dropdownItem);
         return;
       } else {
         return item;
       }
     });
-    breadcrumbItem.appendChild(dropdown);
+    breadcrumbItem.appendChild(overflowMenu);
     mapItems.splice(1, 0, breadcrumbItem);
 
     this.defaultSlot.replaceWith(...mapItems);
@@ -78,7 +64,6 @@ export class SgdsBreadcrumb extends SgdsElement {
     });
 
     if (items.length >= 5) {
-      this._checkDependencies();
       this._replaceExcessItemsWithDropdown(items);
     }
   }
