@@ -4,10 +4,10 @@
 }
 
 
-:host([border]) .description-list-group {
+:host([bordered]) .description-list-group {
     border: var(--sgds-border-width-1) solid var(--sgds-default-border-color-muted);
     border-radius: var(--sgds-border-radius-md);
-    padding: var(--sgds-padding-md);
+    
 }
 
 .description-list-group__title {
@@ -29,11 +29,11 @@
     display: flex;
     flex-direction: column;
     gap: var(--sgds-gap-xs);
-    padding-bottom: var(--sgds-padding-lg);
+    padding: var(--sgds-padding-lg) var(--sgds-padding-xl);
     border-bottom: var(--sgds-border-width-1) solid var(--sgds-default-border-color-muted);
 }
 
 
-:host([border]) .description-list:last-child {
+:host([bordered]) .description-list:last-child {
     border-bottom: none;
 }

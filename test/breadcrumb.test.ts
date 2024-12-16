@@ -63,7 +63,7 @@ describe("sgds-breadcrumb", () => {
            size="md"
            variant="primary"
          >
-           <sgds-overflow-menu aria-haspopup="menu" size="md">
+           <sgds-overflow-menu aria-haspopup="menu" size="sm">
              <sgds-dropdown-item
                aria-disabled="false"
                role="menuitem"
