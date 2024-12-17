@@ -1,7 +1,12 @@
 .tab-group {
   display: flex;
   flex-direction: column;
+  gap: var(--sgds-gap-xl);
+}
 
+.tab-group__nav {
+  display: flex;
+  flex-direction: row;
 }
 
 .tab-group__content {
@@ -12,6 +17,10 @@
   flex-direction: row;
 }
 
-:host([orientation="vertical"]) .tab-group__content {
-  flex: 1;
+:host([orientation="vertical"]) .tab-group__nav {
+  flex-direction: column;
+}
+
+:host([variant="solid"]) .tab-group__nav {
+  gap: var(--sgds-gap-xs);
 }
