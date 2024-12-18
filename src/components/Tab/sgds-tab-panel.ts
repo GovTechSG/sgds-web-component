@@ -37,9 +37,9 @@ export class SgdsTabPanel extends SgdsElement {
     return html`
       <slot
         class=${classMap({
-          "tab-panel": true,
-          "tab-panel--active": this.active
-        })}
+      "tab-panel": true,
+      "tab-panel--active": this.active
+    })}
       ></slot>
     `;
   }
