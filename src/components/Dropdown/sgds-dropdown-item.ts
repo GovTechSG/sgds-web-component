@@ -38,7 +38,7 @@ export class SgdsDropdownItem extends LinkElement {
       >
         <slot></slot>
 
-<!-- //TODO: Remove active icon for dropdown as navigational dropdowns do not need active icon. Active icon is specific to combobox only.
+        <!-- //TODO: Remove active icon for dropdown as navigational dropdowns do not need active icon. Active icon is specific to combobox only.
 // When working on combobox please refactor to segregate combobox item from dropdown item -->
         ${this.active
           ? html`<div class="active-icon">
@@ -51,4 +51,3 @@ export class SgdsDropdownItem extends LinkElement {
 }
 
 export default SgdsDropdownItem;
-
