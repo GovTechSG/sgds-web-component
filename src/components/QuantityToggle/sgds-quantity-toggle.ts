@@ -28,8 +28,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
   /** @internal */
   static dependencies = {
     "sgds-input": SgdsInput,
-    "sgds-icon-button": SgdsIconButton,
-    "sgds-icon": SgdsIcon
+    "sgds-icon-button": SgdsIconButton
   };
   /** @internal */
   @query("sgds-icon-button[ariaLabel^='increase by']") private plusBtn: HTMLButtonElement;
@@ -237,8 +236,8 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
             ariaLabel=${`decrease by ${this.step}`}
             ?disabled=${this.disabled || (this.min !== undefined ? this.value <= this.min : this.value < 1)}
             @click=${this._onMinus}
+            name="dash"
           >
-            <sgds-icon name="dash"></sgds-icon>
           </sgds-icon-button>
           <sgds-input
             type="number"
@@ -263,7 +262,8 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
             ariaLabel=${`increase by ${this.step}`}
             @click=${this._onPlus}
             ?disabled=${this.disabled || (this.max !== undefined && this.max && this.value >= this.max)}
-            ><sgds-icon name="plus"></sgds-icon>
+            name="plus"
+          >
           </sgds-icon-button>
         </div>
         <div id="announcer" role="region" aria-live="assertive" class="visually-hidden">${this.value}</div>

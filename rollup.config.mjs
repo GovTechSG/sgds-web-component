@@ -81,7 +81,8 @@ const buildUMDComponentBundles = () => {
       name: `${meta.name}Bundle`,
       file: `lib/${meta.outputPath}.umd.js`,
       format: "umd",
-      sourcemap: true
+      sourcemap: true,
+      inlineDynamicImports: true
     },
     plugins: wcPlugins
   }));
@@ -112,7 +113,8 @@ const buildSgdsPackage = () => {
         entryFileNames: "[name].umd.js",
         dir: "lib",
         format: "umd",
-        sourcemap: true
+        sourcemap: true,
+        inlineDynamicImports: true
       },
       plugins: wcPlugins
     },

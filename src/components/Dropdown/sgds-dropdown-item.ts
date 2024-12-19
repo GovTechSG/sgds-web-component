@@ -17,13 +17,13 @@ export class SgdsDropdownItem extends SgdsElement {
 
   @queryAssignedElements({ flatten: true }) anchor: HTMLAnchorElement[];
 
-    /** when true, sets the active stylings of .nav-link */
-    @property({ type: Boolean })
-    active = false;
-  
-    /** Disables the SgdsMainnavItem */
-    @property({ type: Boolean, reflect: true })
-    disabled = false;
+  /** when true, sets the active stylings of .nav-link */
+  @property({ type: Boolean })
+  active = false;
+
+  /** Disables the SgdsMainnavItem */
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -33,6 +33,7 @@ export class SgdsDropdownItem extends SgdsElement {
       }
     });
     this.setAttribute("role", "menuitem");
+    this.setAttribute("aria-disabled", `${this.disabled}`);
   }
 
   render() {
