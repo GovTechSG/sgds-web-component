@@ -1,7 +1,7 @@
 import { html, nothing } from "lit";
-import { query, queryAssignedElements } from "lit/decorators.js";
+import { property, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import LinkElement from "../../base/link-element";
+import SgdsElement from "../../base/sgds-element";
 import SgdsIcon from "../Icon/sgds-icon";
 import dropdownItemStyle from "./dropdown-item.css";
 import dropdownStyle from "./dropdown.css";
@@ -9,13 +9,21 @@ import dropdownStyle from "./dropdown.css";
  * @summary `SgdsDropdownItem` are navigation links built with `HTMLAnchorElement`. It should be used in the default slot of `SgdsDropdown`
  * @slot default - The default slot for SgdsDropdownItem. Pass in a single anchor tag per dropdown item directly for navigation items.
  */
-export class SgdsDropdownItem extends LinkElement {
+export class SgdsDropdownItem extends SgdsElement {
   static styles = [dropdownStyle, dropdownItemStyle];
   static dependencies = {
     "sgds-icon": SgdsIcon
   };
 
   @queryAssignedElements({ flatten: true }) anchor: HTMLAnchorElement[];
+
+    /** when true, sets the active stylings of .nav-link */
+    @property({ type: Boolean })
+    active = false;
+  
+    /** Disables the SgdsMainnavItem */
+    @property({ type: Boolean, reflect: true })
+    disabled = false;
 
   connectedCallback(): void {
     super.connectedCallback();
