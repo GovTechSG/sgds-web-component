@@ -12,7 +12,6 @@ import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import SgdsInput from "../Input/sgds-input";
 import quantityToggleStyle from "./quantity-toggle.css";
-import SgdsIcon from "../Icon/sgds-icon";
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
  *

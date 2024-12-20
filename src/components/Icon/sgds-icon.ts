@@ -5,10 +5,7 @@ import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import iconStyles from "./icon.css";
 
 /**
- * @summary Icons offer a form of visual shorthand that we are all familiar with. They can label, inform and aid navigation quickly and effectively in minimal space. Icons must first and foremost communicate meaning. By default, the icon component renders icons form SgdsIcon library set
- *
- * @event sgds-blur - Emitted when the button is blurred.
- * @event sgds-focus - Emitted when the button is focused.
+ * @summary Icons offer a form of visual shorthand that we are all familiar with. They can label, inform and aid navigation quickly and effectively in minimal space. Icons must first and foremost communicate meaning. By default, the icon component renders icons from `SgdsIcon` library set
  */
 export class SgdsIcon extends SgdsElement {
   static styles = [...SgdsElement.styles, iconStyles];
@@ -25,14 +22,12 @@ export class SgdsIcon extends SgdsElement {
 
   async updated(changedProperties: Map<string, any>) {
     if (changedProperties.has("name")) {
-      await this.loadSvg(this.name);
+      await this._loadSvg(this.name);
     }
-    this.style.display = this._svgContent ? "" : "none";
   }
 
-  async loadSvg(name: string): Promise<void> {
+  private async _loadSvg(name: string): Promise<void> {
     if (name) {
-      // Dynamically import the SVG if not cached
       const pascalName = name
         .split("-")
         .map(name => String(name).charAt(0).toUpperCase() + String(name).slice(1))
@@ -43,7 +38,7 @@ export class SgdsIcon extends SgdsElement {
         if (svg) {
           this._svgContent = svg;
         } else {
-          throw new Error("Icon `name` is undefined");
+          throw new Error("icon `name` not found");
         }
       } catch (error) {
         console.error(`Unable to load icon: ${name}.`, error);

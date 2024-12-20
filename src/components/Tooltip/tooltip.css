@@ -1,3 +1,9 @@
+:host {
+  display: contents;
+}
+.tooltip-placeholder{
+  display: inline-block;
+}
 .tooltip {
   word-wrap: break-word;
   display: block;

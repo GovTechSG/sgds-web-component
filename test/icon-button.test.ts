@@ -12,6 +12,7 @@ describe("<sgds-icon-button>", () => {
     );
 
     const el = await fixture<SgdsIconButton>(html`<sgds-icon-button name="placeholder"></sgds-icon-button>`);
+    await el.updateComplete;
     assert.shadowDom.equal(
       el,
       `
@@ -20,7 +21,7 @@ describe("<sgds-icon-button>", () => {
       class="btn btn-icon btn-primary btn-md"
       tabindex="0"
       type="button">
-        <sgds-icon name="placeholder" style="display: none;" size="lg"></sgds-icon>
+        <sgds-icon name="placeholder" size="lg"></sgds-icon>
       </button>
       `
     );

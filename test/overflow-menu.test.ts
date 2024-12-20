@@ -10,7 +10,7 @@ describe("<sgds-overflow-menu>", () => {
       `
       <sgds-dropdown drop="down">
             <button slot="toggler" class="overflow-btn">
-                <sgds-icon name="three-dots" size="md" style="display: none;"></sgds-icon>
+                <sgds-icon name="three-dots" size="md"></sgds-icon>
             </button>
             <slot></slot>
         </sgds-dropdown>
