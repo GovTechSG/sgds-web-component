@@ -35,12 +35,11 @@
   width: 100%;
   max-width: 640px;
   border-radius: var(--sgds-border-radius-md);
-  margin: var(--sgds-spacer-9) auto;
+  margin: var(--sgds-spacer-9) var(--sgds-spacer-6);
   position: relative;
-  display:flex;
+  display: flex;
   flex-direction: column;
-  max-height: calc(100% - var(--sgds-spacer-9) - var(--sgds-spacer-9))
-
+  max-height: calc(100% - var(--sgds-spacer-9) - var(--sgds-spacer-9));
 }
 
 .modal-panel:focus {
@@ -50,7 +49,7 @@
 /* Ensure there's enough vertical padding for phones that don't update vh when chrome appears (e.g. iPhone) */
 @media screen and (max-width: 420px) {
   .modal-panel {
-    margin: var(--sgds-spacer-8) auto;
+    margin: var(--sgds-spacer-8) var(--sgds-spacer-6);
     max-height: calc(100% - var(--sgds-spacer-8) - var(--sgds-spacer-8));
   }
 }
@@ -68,7 +67,7 @@
   padding: var(--sgds-padding-xl);
 }
 .modal-header__title-description {
-  display: flex; 
+  display: flex;
   flex-direction: column;
   gap: var(--sgds-gap-xs);
 }

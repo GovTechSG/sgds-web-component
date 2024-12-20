@@ -52,16 +52,12 @@ describe("sgds-breadcrumb", () => {
       ` <div aria-label="breadcrumb">
         <div class="breadcrumb">
               <sgds-breadcrumb-item
-            size="md"
-            variant="primary"
           >
             <a href="#">
               Home
             </a>
           </sgds-breadcrumb-item>
          <sgds-breadcrumb-item
-           size="md"
-           variant="primary"
          >
            <sgds-overflow-menu aria-haspopup="menu" size="sm">
              <sgds-dropdown-item
@@ -83,8 +79,6 @@ describe("sgds-breadcrumb", () => {
            </sgds-overflow-menu>
          </sgds-breadcrumb-item>
          <sgds-breadcrumb-item
-           size="md"
-           variant="primary"
          >
            <a href="https://www.google.com/">
              Info
@@ -93,8 +87,6 @@ describe("sgds-breadcrumb", () => {
          <sgds-breadcrumb-item
            active=""
            aria-current="page"
-           size="md"
-           variant="primary"
          >
            <a href="https://www.google.com/">
              Last

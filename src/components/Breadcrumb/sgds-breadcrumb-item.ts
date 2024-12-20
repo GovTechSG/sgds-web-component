@@ -2,14 +2,15 @@ import { html } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsLink from "../Link/sgds-link";
 import breadcrumbItemStyle from "./breadcrumb-item.css";
+import SgdsElement from "../../base/sgds-element";
 /**
  * @summary Breadcrumb Item are navigational links used in Breadcrumb component
  *
- * @slot default - The title of the item
+ * @slot default - The link of the item. Pass in anchor tags into this slot
  */
-export class SgdsBreadcrumbItem extends SgdsLink {
+export class SgdsBreadcrumbItem extends SgdsElement {
   static styles = [...SgdsLink.styles, breadcrumbItemStyle];
-  /** Specifies the url path of the breadcrumb-item. When defined, the breadcrumb-items is a anchor element. When not defined, indicates that the breadcrumb item is active. In such cases, a span element is rendered. */
+  /** Indicates the link matches the current location of the page. Programmatically handled by SgdsBreadcrumb to set this prop to true for the last breadcrumb item  */
   @property({ type: Boolean, reflect: true }) active = false;
 
   render() {

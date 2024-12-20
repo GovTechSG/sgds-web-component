@@ -9,8 +9,6 @@ import iconButtonStyles from "./icon-button.css";
 /**
  * @summary An icon button is a user interface element that combines an icon and a button, serving as a clickable or tabbable component.
  *
- * @slot default - The slot for sgds-icon
- *
  * @event sgds-blur - Emitted when the button is blurred.
  * @event sgds-focus - Emitted when the button is focused.
  */
