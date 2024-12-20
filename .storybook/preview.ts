@@ -21,6 +21,7 @@ export const setCustomElementsManifestWithOptions = (
           if (Array.isArray(declaration[key])) {
             declaration[key] = declaration[key]
               .filter((member: { privacy: string | string[] }) => !member.privacy?.includes("private"))
+              .filter((member: { static: boolean }) => !member.static)
               .filter((member: { privacy: string | string[] }) => !member.privacy?.includes("protected"));
           }
         });
