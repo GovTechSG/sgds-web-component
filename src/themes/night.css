@@ -4,6 +4,7 @@
 
   /* Semantic - Default Colors */
   --sgds-default-bg: var(--sgds-gray-900);
+  --sgds-default-bg-surface: var(--sgds-gray-800);
   --sgds-default-bg-muted: var(--sgds-gray-700);
   --sgds-default-bg-subtle: var(--sgds-gray-500);
   --sgds-default-bg-emphasis: var(--sgds-gray-200);
@@ -121,7 +122,7 @@
   --sgds-form-bg-transparent: transparent;
   --sgds-form-bg-on-dark: var(--sgds-gray-000);
   --sgds-form-bg-on-light: var(--sgds-gray-800);
-  --sgds-form-color: var(--sgds-gray-000);
+  --sgds-form-color-default: var(--sgds-gray-000);
   --sgds-form-color-inverse: var(--sgds-gray-800);
   --sgds-form-color-muted: var(--sgds-gray-600);
   --sgds-form-color-subtle: var(--sgds-gray-300);

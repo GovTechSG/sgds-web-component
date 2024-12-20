@@ -25,7 +25,7 @@ textarea {
   background-color: var(--sgds-form-bg);
   border: var(--sgds-form-border-width-default) solid var(--sgds-form-border-color);
   border-radius: var(--sgds-form-border-radius-md);
-  color: var(--sgds-form-color);
+  color: var(--sgds-form-color-default);
   padding: var(--sgds-form-padding-y) var(--sgds-form-padding-x);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   width: 100%;

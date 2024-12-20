@@ -112,7 +112,7 @@ export class SgdsTooltip extends SgdsElement {
 
   render() {
     return html`
-      <div ${ref(this._myTooltip)}>
+      <div ${ref(this._myTooltip)} class="tooltip-placeholder">
         <slot @slotchange=${this._handleSlotChange}></slot>
       </div>
     `;

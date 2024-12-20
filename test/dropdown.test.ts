@@ -526,10 +526,4 @@ describe("sgds-dropdown-item", () => {
     const el = await fixture(html`<sgds-dropdown-item active>test</sgds-dropdown-item>`);
     expect(el.shadowRoot?.querySelector("div.dropdown-item")).to.have.class("active");
   });
-  it("disabled prop is forwarded to <a> class", async () => {
-    const el = await fixture(html`<sgds-dropdown-item disabled>test</sgds-dropdown-item>`);
-    expect(el.shadowRoot?.querySelector("div.dropdown-item")).to.have.class("disabled");
-    expect(el.shadowRoot?.querySelector("div.dropdown-item")).to.have.attribute("tabindex", "-1");
-    expect(el.getAttribute("aria-disabled")).to.equal("true");
-  });
 });

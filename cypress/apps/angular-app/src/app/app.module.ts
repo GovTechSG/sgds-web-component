@@ -1,4 +1,3 @@
-import "@webcomponents/scoped-custom-element-registry";
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "./app.component";
@@ -19,6 +18,7 @@ import { Drawer } from "../components/drawer/drawer.component";
 import { Dropdown } from "../components/dropdown/dropdown.component";
 import { FileUpload } from "../components/fileupload/fileupload.component";
 import { Footer } from "../components/footer/footer.component";
+import { Icon } from "../components/icon/icon.component";
 import { Input } from "../components/input/input.component";
 import { Mainnav } from "../components/mainnav/mainnav.component";
 import { Masthead } from "../components/masthead/masthead.component";
@@ -56,6 +56,7 @@ import { Tooltip } from "../components/tooltip/tooltip.component";
     FileUpload,
     Footer,
     Input,
+    Icon,
     Mainnav,
     Masthead,
     Modal,

@@ -13,7 +13,7 @@ export * from "./Checkbox/sgds-checkbox-group";
 export * from "./ComboBox/sgds-combo-box";
 export * from "./Datepicker/sgds-datepicker";
 export * from "./DescriptionList/sgds-description-list";
-export * from "./DescriptionListGroup/sgds-description-list-group";
+export * from "./DescriptionList/sgds-description-list-group";
 export * from "./Divider/sgds-divider";
 export * from "./Drawer/sgds-drawer";
 export * from "./Dropdown/sgds-dropdown";

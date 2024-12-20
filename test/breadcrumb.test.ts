@@ -63,22 +63,7 @@ describe("sgds-breadcrumb", () => {
            size="md"
            variant="primary"
          >
-           <sgds-dropdown drop="down">
-             <sgds-icon-button
-               aria-haspopup="menu"
-               role="button"
-               size="md"
-               slot="toggler"
-               target="_self"
-               variant="ghost"
-             >
-               <sgds-icon
-                 name="three-dots"
-                 size="lg"
-                 style="display: none;"
-               >
-               </sgds-icon>
-             </sgds-icon-button>
+           <sgds-overflow-menu aria-haspopup="menu" size="sm">
              <sgds-dropdown-item
                aria-disabled="false"
                role="menuitem"
@@ -95,7 +80,7 @@ describe("sgds-breadcrumb", () => {
                  Contacts
                </a>
              </sgds-dropdown-item>
-           </sgds-dropdown>
+           </sgds-overflow-menu>
          </sgds-breadcrumb-item>
          <sgds-breadcrumb-item
            size="md"
@@ -145,7 +130,7 @@ describe("sgds-breadcrumb-item", () => {
     assert.shadowDom.equal(
       el,
       `<slot class="nav-link"></slot>
-      <div class="breadcrumb-item__separator">
+      <div class="separator">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path
             fill-rule="evenodd"

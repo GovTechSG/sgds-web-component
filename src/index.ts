@@ -9,7 +9,6 @@ import "./components/ComboBox";
 import "./components/Checkbox";
 import "./components/Datepicker";
 import "./components/DescriptionList";
-import "./components/DescriptionListGroup";
 import "./components/Divider";
 import "./components/Drawer";
 import "./components/Dropdown";

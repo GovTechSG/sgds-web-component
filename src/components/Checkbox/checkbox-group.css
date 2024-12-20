@@ -1,7 +1,7 @@
 :host {
   --sgds-checkbox-group-gap: var(--sgds-spacer-2);
 }
-  
+
 fieldset {
   border: 0;
   margin: 0;
@@ -15,18 +15,18 @@ fieldset {
   display: flex;
   flex-direction: column;
   gap: var(--sgds-form-gap-sm);
-} 
+}
 
 .label-hint-container .form-label {
-  color: var(--sgds-form-color);
+  color: var(--sgds-form-color-default);
   font-size: var(--sgds-font-size-2);
   font-weight: var(--sgds-font-weight-regular);
 }
 
 .checkbox-container {
   display: flex;
-  flex-direction: column; 
-  gap: var(--sgds-form-gap-md); 
+  flex-direction: column;
+  gap: var(--sgds-form-gap-md);
 }
 
 /* .error-message-container {

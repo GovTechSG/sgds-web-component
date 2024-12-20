@@ -12,7 +12,6 @@ describe("<sgds-icon-list>", () => {
       <div class="md">
       <sgds-icon
           size="lg"
-          style="display: none;"
         >
         </sgds-icon>
         <slot></slot>

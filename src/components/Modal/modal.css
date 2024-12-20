@@ -20,8 +20,8 @@
 
 .modal {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: start;
   position: fixed;
   top: 0;
   right: 0;
@@ -35,8 +35,12 @@
   width: 100%;
   max-width: 640px;
   border-radius: var(--sgds-border-radius-md);
-  margin: var(--sgds-spacer-9) var(--sgds-spacer-6);
+  margin: var(--sgds-spacer-9) auto;
   position: relative;
+  display:flex;
+  flex-direction: column;
+  max-height: calc(100% - var(--sgds-spacer-9) - var(--sgds-spacer-9))
+
 }
 
 .modal-panel:focus {
@@ -46,7 +50,8 @@
 /* Ensure there's enough vertical padding for phones that don't update vh when chrome appears (e.g. iPhone) */
 @media screen and (max-width: 420px) {
   .modal-panel {
-    max-height: 80vh;
+    margin: var(--sgds-spacer-8) auto;
+    max-height: calc(100% - var(--sgds-spacer-8) - var(--sgds-spacer-8));
   }
 }
 
@@ -56,10 +61,16 @@
 }
 
 .modal-header {
+  flex: 0 0 auto;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: var(--sgds-padding-xl);
+}
+.modal-header__title-description {
+  display: flex; 
   flex-direction: column;
   gap: var(--sgds-gap-xs);
-  padding: var(--sgds-padding-xl);
 }
 
 slot[name="title"]::slotted(*) {
@@ -82,12 +93,6 @@ slot[name="description"]::slotted(*) {
   line-height: var(--sgds-line-height-body);
 }
 
-.modal-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-}
-
 .modal-body {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -100,6 +105,7 @@ slot[name="description"]::slotted(*) {
 }
 
 .modal-footer {
+  flex: 0 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;

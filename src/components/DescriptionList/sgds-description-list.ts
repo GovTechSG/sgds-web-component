@@ -1,7 +1,7 @@
-import SgdsElement from "../../base/sgds-element";
 import { html } from "lit";
-import { property, query } from "lit/decorators.js";
-import descriptionListStyle from "./descrption-list.css";
+import { property } from "lit/decorators.js";
+import SgdsElement from "../../base/sgds-element";
+import descriptionListStyle from "./description-list.css";
 
 let id = 0;
 
@@ -14,8 +14,7 @@ let id = 0;
  */
 
 export class SgdsDescriptionList extends SgdsElement {
-  static styles = [descriptionListStyle];
-  @query(".description-list") private descriptionList: HTMLElement;
+  static styles = [...SgdsElement.styles, descriptionListStyle];
   private readonly attrId = ++id;
   private readonly componentId = `sgds-description-list-${this.attrId}`;
 
@@ -23,14 +22,14 @@ export class SgdsDescriptionList extends SgdsElement {
   @property({ type: Boolean, reflect: true }) stacked = false;
 
   /** Changes the border bottom styles for bordered description list group */
-  @property({ type: Boolean, reflect: true }) border = false;
+  @property({ type: Boolean, reflect: true }) bordered = false;
 
   connectedCallback() {
     super.connectedCallback();
     // If the user didn't provide an ID, we'll set one so we can link tabs and tab panels with aria labels
 
     this.id = this.id.length > 0 ? this.id : this.componentId;
-    this.setAttribute("role", "description-list");
+    this.setAttribute("role", "listitem");
   }
 
   render() {

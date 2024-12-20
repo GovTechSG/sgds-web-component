@@ -14,6 +14,7 @@ module.exports = {
     "../stories/components/Checkbox.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Divider.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Footer.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/components/Icon.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Input.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Radio.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Masthead.@(mdx|stories.@(js|jsx|ts|tsx))",

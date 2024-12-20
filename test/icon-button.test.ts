@@ -12,6 +12,7 @@ describe("<sgds-icon-button>", () => {
     );
 
     const el = await fixture<SgdsIconButton>(html`<sgds-icon-button name="placeholder"></sgds-icon-button>`);
+    await el.updateComplete;
     assert.shadowDom.equal(
       el,
       `
@@ -20,7 +21,7 @@ describe("<sgds-icon-button>", () => {
       class="btn btn-icon btn-primary btn-md"
       tabindex="0"
       type="button">
-        <sgds-icon name="placeholder" style="display: none;" size="lg"></sgds-icon>
+        <sgds-icon name="placeholder" size="lg"></sgds-icon>
       </button>
       `
     );
@@ -42,10 +43,6 @@ describe("<sgds-icon-button>", () => {
       expect(icon.size).to.equal(iconSize);
     });
   });
-  it("sizes of button are mapped correctly to the sizes of icon", async () => {
-    const el = await fixture<SgdsIconButton>(html`<sgds-icon-button size="sm" name="placeholder"></sgds-icon-button>`);
-  });
-
   it("renders an anchor tag when href is provided", async () => {
     // Mock fetch to prevent network requests
     const fetchStub = Sinon.stub(window, "fetch").resolves(

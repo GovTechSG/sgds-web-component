@@ -46,7 +46,7 @@
   "license": "MIT",
   "dependencies": {
     "@govtechsg/sgds": "^2.3.2",
-    "@lit-labs/react": "^1.0.9",
+    "@lit/react": "^1.0.6",
     "@open-wc/scoped-elements": "2.2.0",
     "@storybook/addon-a11y": "^8.2.8",
     "bootstrap": "^5.1.3",

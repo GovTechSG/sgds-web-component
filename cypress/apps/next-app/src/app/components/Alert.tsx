@@ -1,5 +1,4 @@
 import SgdsAlert from "@govtechsg/sgds-web-component/react/alert/index.js";
-import SgdsAlertHeading from "@govtechsg/sgds-web-component/react/alert-heading/index.js";
 import SgdsAlertLink from "@govtechsg/sgds-web-component/react/alert-link/index.js";
 
 export const Alert = () => {
@@ -36,7 +35,6 @@ export const Alert = () => {
           </svg>
         </span>
         <div>
-          <SgdsAlertHeading>Hello, nice to meet you</SgdsAlertHeading>
           <p>
             Aww yeah, you successfully read this important
             <SgdsAlertLink href="#">
