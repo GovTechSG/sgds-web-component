@@ -7,7 +7,7 @@ import { visualizer } from "rollup-plugin-visualizer";
 import glob from "glob";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import copy from 'rollup-plugin-copy'
+import copy from "rollup-plugin-copy";
 import preserveDirectives from "rollup-plugin-preserve-directives";
 
 const external = [
@@ -21,16 +21,16 @@ const external = [
   /lit\/.*/,
   /bootstrap\/.*/,
   "imask",
-  "date-fns",
+  "date-fns"
 ];
 
 const copyPlugin = copy({
   targets: [
-    {src: "src/themes/**/*", dest: "lib/themes"},
-    {src: "src/css/**/*", dest: "lib/css"},
-    {src: "src/icons/**/*", dest: "lib/icons"},
+    { src: "src/themes/**/*", dest: "lib/themes" },
+    { src: "src/css/**/*", dest: "lib/css" },
+    { src: "src/icons/**/*", dest: "lib/icons" }
   ]
-})
+});
 const wcPlugins = [
   resolve({
     browser: true,
@@ -43,7 +43,7 @@ const wcPlugins = [
   }),
   postcss({
     minimize: true,
-    inject: false,
+    inject: false
   }),
   litcss(),
   typescript({
@@ -133,11 +133,11 @@ const buildSgdsPackage = () => {
           exports: "named",
           preserveModules: true,
           preserveModulesRoot: "src/react",
-          banner: `'use client';`,
+          banner: `'use client';`
         }
       ],
       plugins: [...reactBuildPlugins],
-      external: ["@lit-labs/react", "react", ...external]
+      external: ["@lit/react", "react", ...external]
     },
     {
       input: "src/react/index.ts",
@@ -150,15 +150,15 @@ const buildSgdsPackage = () => {
           exports: "named",
           preserveModules: true,
           preserveModulesRoot: "src/react",
-          banner: `'use client';`,
+          banner: `'use client';`
         }
       ],
       plugins: [...reactBuildPlugins],
-      external: ["@lit-labs/react", "react", ...external]
+      external: ["@lit/react", "react", ...external]
     }
   ];
 
-  return [...reactPackage, ...esmModules, ...umdBundles ];
+  return [...reactPackage, ...esmModules, ...umdBundles];
 };
 
 export default buildSgdsPackage;

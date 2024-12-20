@@ -23,14 +23,11 @@ export class SgdsIcon extends SgdsElement {
   @state()
   private _svgContent: string | null = null;
 
-  async firstUpdated() {
-    if (this.name) {
+  async updated(changedProperties: Map<string, any>) {
+    if (changedProperties.has("name")) {
       await this.loadSvg(this.name);
     }
-  }
-
-  updated() {
-    this.style.display = this._svgContent ? "flex" : "none";
+    this.style.display = this._svgContent ? "" : "none";
   }
 
   async loadSvg(name: string): Promise<void> {
@@ -46,10 +43,10 @@ export class SgdsIcon extends SgdsElement {
         if (svg) {
           this._svgContent = svg;
         } else {
-          throw new Error("icon `name` is undefined");
+          throw new Error("Icon `name` is undefined");
         }
       } catch (error) {
-        console.error(`Error loading SVG: ${name}`, error);
+        console.error(`Unable to load icon: ${name}.`, error);
       }
     }
   }

@@ -145,17 +145,16 @@
 <body class="d-flex flex-column min-vh-100"></body>
 <sgds-masthead></sgds-masthead>
 <sgds-mainnav expand="lg">
-  <span slot="brand">Design System</span>
   <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
 
   <sgds-mainnav-item active href="#">
-    <strong>Home</strong>
+    Home
   </sgds-mainnav-item>
   <sgds-mainnav-item disabled href="#">About</sgds-mainnav-item>
   <sgds-mainnav-item href="#" slot="end" class="test test2">Info</sgds-mainnav-item>
-  <sgds-mainnav-item slot="end" id="night-theme"><i class="bi bi-moon"></i></sgds-mainnav-item>
+  <sgds-mainnav-item href="#" slot="end" id="night-theme"><i class="bi bi-moon"></i></sgds-mainnav-item>
   <sgds-mainnav-dropdown disabled>
-    <strong slot="toggler">Dropdown</strong>
+    <span slot="toggler">Dropdown</span>
     <sgds-dropdown-item href="#">Item 1</sgds-dropdown-item>
     <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
     <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
@@ -1966,7 +1965,7 @@
         // qT.disabled = false;
       });
       enabltT.addEventListener("click", () => {
-        const qT = document.querySelector("sgds-textarea");
+        const qT = document.querySelector("sgds-checkbox");
         qT.disabled = false;
         // qT.disabled = false;
       });
