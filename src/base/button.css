@@ -86,7 +86,7 @@
 .btn.disabled,
 .btn:disabled {
   opacity: var(--sgds-opacity-50);
-  pointer-events: none;
+  cursor: not-allowed;
   color: var(--sgds-btn-color);
 }
 
