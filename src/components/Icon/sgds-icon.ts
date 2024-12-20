@@ -25,7 +25,7 @@ export class SgdsIcon extends SgdsElement {
 
   async firstUpdated() {
     if (this.name) {
-      this.loadSvg(this.name);
+      await this.loadSvg(this.name);
     }
   }
 
@@ -33,18 +33,20 @@ export class SgdsIcon extends SgdsElement {
     this.style.display = this._svgContent ? "flex" : "none";
   }
 
-  async loadSvg(name: string) {
+  async loadSvg(name: string): Promise<void> {
     if (name) {
       // Dynamically import the SVG if not cached
+      const pascalName = name
+        .split("-")
+        .map(name => String(name).charAt(0).toUpperCase() + String(name).slice(1))
+        .join("");
       try {
-        const iconPath = new URL(`../../icons/${name}.svg`, import.meta.url).href;
-        const response = await fetch(iconPath);
-
-        if (response.ok) {
-          const svgContent = await response.text();
-          // Render the SVG
-          // this.renderSvg(svgContent);
-          this._svgContent = svgContent;
+        const iconRegistry = await import("./icon-registry");
+        const svg = iconRegistry[pascalName];
+        if (svg) {
+          this._svgContent = svg;
+        } else {
+          throw new Error("icon `name` is undefined");
         }
       } catch (error) {
         console.error(`Error loading SVG: ${name}`, error);

@@ -1,11 +1,7 @@
-:host {
-  --tab-panel-padding-y: 1rem;
-  display: block;
-}
 .tab-panel {
   display: block;
-  padding: var(--tab-panel-padding-y) 0;
 }
+
 .tab-panel:not(.tab-panel--active) {
   display: none;
 }

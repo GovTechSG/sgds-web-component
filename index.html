@@ -127,7 +127,7 @@
   </script>
   <script type="module" src="src/index.ts"></script>
 
-  <script type="module" src="src/components/Spinner/index.ts"></script>
+  <script type="module" src="src/internals/OverflowMenu/index.ts"></script>
 
   <script>
     const steps = [
@@ -233,6 +233,9 @@
         <sgds-icon name="twitter-x"></sgds-icon>
         <sgds-icon name="youtube"></sgds-icon>
         <sgds-icon name="google"></sgds-icon>
+        <sgds-icon name="dash"></sgds-icon>
+        <sgds-icon name="plus"></sgds-icon>
+        <sgds-icon name="plusdfsdfs"></sgds-icon>
       </div>
       <br />
     </div>
@@ -635,7 +638,6 @@
       </sgds-tab-group>
 
       <sgds-description-list-group>
-        <span slot="title">Title</span>
         <span slot="subtitle">Description</span>
 
         <sgds-description-list>
@@ -664,7 +666,7 @@
         </sgds-description-list>
       </sgds-description-list-group>
 
-      <sgds-description-list-group stacked border>
+      <sgds-description-list-group stacked bordered>
         <span slot="title"> Title Border</span>
         <span slot="subtitle">Description</span>
 
@@ -679,7 +681,7 @@
         </sgds-description-list>
       </sgds-description-list-group>
 
-      <sgds-description-list-group border>
+      <sgds-description-list-group bordered>
         <span slot="title"> Title Border</span>
         <span slot="subtitle">Description</span>
 
@@ -751,6 +753,7 @@
       <br />
     </div>
     <div class="container">
+      <h2>ComboBox</h2>
       <sgds-combo-box menuList='["John Smith", "Jack Adams"]' label="label" hintText="hint" hasFeedback="true"
         invalidFeedback="test">
         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -1005,7 +1008,6 @@
           <sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
         </sgds-input>
         <sgds-quantity-toggle name="quant" min="1" max="2" value="4" hinttext="type hello" hasFeedback="both">
-          <sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
         </sgds-quantity-toggle>
         <sgds-checkbox-group hasFeedback hintText="hint for checkbox" label="checkbox">
           <sgds-checkbox name="checkbox" value="checkboxhello" required>she</sgds-checkbox>
@@ -1155,10 +1157,26 @@
     <div class="container">
       <h2>Modal</h2>
       <sgds-button id="modalShowButton">Open Modal</sgds-button>
-      <sgds-modal>
+      <sgds-modal size="fullscreen">
         <h2 slot="title">Modal title</h2>
         <p slot="description">Modal description</p>
-        <p>This is a Modal</p>
+        <p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dictum est vitae erat molestie blandit. Pellentesque at nunc at mi auctor imperdiet eu at leo. Integer aliquam, turpis vel ultricies ornare, sem massa commodo velit, pretium dictum quam nibh et ex. Suspendisse eu dignissim libero. Donec aliquam, lacus eu pellentesque interdum, arcu nisl blandit turpis, at tincidunt purus orci ut dolor. Morbi malesuada faucibus lorem, ornare accumsan sapien lacinia vel. In enim justo, hendrerit eu mi vitae, viverra fringilla nunc. Proin semper nunc a mollis faucibus. Nam at arcu non justo congue tincidunt. Donec vehicula felis risus, et lobortis lacus fringilla eu. Proin faucibus, nisi non semper elementum, sapien nisi viverra urna, id tempus augue felis ac nibh. Nullam pulvinar magna eros. Vestibulum at orci elit. Sed convallis fermentum gravida.
+
+          Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida, congue sapien eu, rhoncus ante. Quisque velit est, sodales vitae turpis vitae, hendrerit facilisis nulla. Suspendisse potenti. Nulla hendrerit enim sed leo rutrum auctor. Praesent volutpat rutrum purus in volutpat. Vivamus at facilisis ipsum, eu consequat ex. Integer ante ligula, mollis at diam in, tincidunt tincidunt orci. Mauris eu rutrum purus, eget consectetur massa. Pellentesque sed euismod dolor, vel ornare orci. Proin tincidunt gravida lorem. Duis vehicula, turpis quis placerat pharetra, lacus tortor fermentum tortor, a tincidunt mi arcu quis risus. Duis id ultrices urna, non placerat ex.
+          
+          Sed efficitur rhoncus condimentum. Aliquam eu convallis massa, ac suscipit dolor. Morbi bibendum lacus a justo consectetur gravida. Nullam porttitor ullamcorper eros, at hendrerit est semper venenatis. Donec non dolor metus. Aenean sit amet massa arcu. Quisque rhoncus orci pretium, venenatis orci quis, tincidunt ex. Duis efficitur lacus dolor, a interdum sapien imperdiet nec. Sed lobortis erat justo. Nam nec metus eget est blandit consequat non at sapien. Curabitur arcu eros, ultricies eu magna non, vulputate imperdiet erat. Duis nec sapien quam. In sapien elit, bibendum nec porttitor ac, vulputate pulvinar lacus. Maecenas venenatis lorem eget consequat molestie. Nulla hendrerit interdum sem, et efficitur ligula porttitor eget.
+          
+          Vivamus nibh risus, sodales condimentum orci sit amet, aliquam bibendum nunc. Etiam a elit et mi interdum faucibus vitae sed risus. Aenean eu posuere mi. Aenean lectus turpis, mollis eget ornare sit amet, placerat ac orci. Suspendisse tincidunt accumsan dolor, vitae pellentesque ipsum hendrerit quis. Duis luctus, ipsum a tempor rutrum, neque urna tincidunt dolor, ut placerat neque augue at ante. Curabitur id bibendum sem. Pellentesque vel tellus congue, condimentum purus quis, pulvinar massa.
+          
+          Suspendisse ac vulputate urna. Curabitur elementum consectetur blandit. Nulla tristique nec elit non placerat. Vestibulum porttitor mi nec quam dignissim suscipit. Aenean eu dui a felis interdum eleifend ut non nibh. Proin at molestie ante. Etiam vel ipsum vitae nunc porta fermentum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dictum est vitae erat molestie blandit. Pellentesque at nunc at mi auctor imperdiet eu at leo. Integer aliquam, turpis vel ultricies ornare, sem massa commodo velit, pretium dictum quam nibh et ex. Suspendisse eu dignissim libero. Donec aliquam, lacus eu pellentesque interdum, arcu nisl blandit turpis, at tincidunt purus orci ut dolor. Morbi malesuada faucibus lorem, ornare accumsan sapien lacinia vel. In enim justo, hendrerit eu mi vitae, viverra fringilla nunc. Proin semper nunc a mollis faucibus. Nam at arcu non justo congue tincidunt. Donec vehicula felis risus, et lobortis lacus fringilla eu. Proin faucibus, nisi non semper elementum, sapien nisi viverra urna, id tempus augue felis ac nibh. Nullam pulvinar magna eros. Vestibulum at orci elit. Sed convallis fermentum gravida.
+
+          Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida, congue sapien eu, rhoncus ante. Quisque velit est, sodales vitae turpis vitae, hendrerit facilisis nulla. Suspendisse potenti. Nulla hendrerit enim sed leo rutrum auctor. Praesent volutpat rutrum purus in volutpat. Vivamus at facilisis ipsum, eu consequat ex. Integer ante ligula, mollis at diam in, tincidunt tincidunt orci. Mauris eu rutrum purus, eget consectetur massa. Pellentesque sed euismod dolor, vel ornare orci. Proin tincidunt gravida lorem. Duis vehicula, turpis quis placerat pharetra, lacus tortor fermentum tortor, a tincidunt mi arcu quis risus. Duis id ultrices urna, non placerat ex.
+          
+          Sed efficitur rhoncus condimentum. Aliquam eu convallis massa, ac suscipit dolor. Morbi bibendum lacus a justo consectetur gravida. Nullam porttitor ullamcorper eros, at hendrerit est semper venenatis. Donec non dolor metus. Aenean sit amet massa arcu. Quisque rhoncus orci pretium, venenatis orci quis, tincidunt ex. Duis efficitur lacus dolor, a interdum sapien imperdiet nec. Sed lobortis erat justo. Nam nec metus eget est blandit consequat non at sapien. Curabitur arcu eros, ultricies eu magna non, vulputate imperdiet erat. Duis nec sapien quam. In sapien elit, bibendum nec porttitor ac, vulputate pulvinar lacus. Maecenas venenatis lorem eget consequat molestie. Nulla hendrerit interdum sem, et efficitur ligula porttitor eget.
+          
+          Vivamus nibh risus, sodales condimentum orci sit amet, aliquam bibendum nunc. Etiam a elit et mi interdum faucibus vitae sed risus. Aenean eu posuere mi. Aenean lectus turpis, mollis eget ornare sit amet, placerat ac orci. Suspendisse tincidunt accumsan dolor, vitae pellentesque ipsum hendrerit quis. Duis luctus, ipsum a tempor rutrum, neque urna tincidunt dolor, ut placerat neque augue at ante. Curabitur id bibendum sem. Pellentesque vel tellus congue, condimentum purus quis, pulvinar massa.
+          
+          Suspendisse ac vulputate urna. Curabitur elementum consectetur blandit. Nulla tristique nec elit non placerat. Vestibulum porttitor mi nec quam dignissim suscipit. Aenean eu dui a felis interdum eleifend ut non nibh. Proin at molestie ante. Etiam vel ipsum vitae nunc porta fermentum.</p></p>
         <sgds-button slot="footer" variant="link" class="close-modal">Close</sgds-button>
         <sgds-button slot="footer" variant="primary" type="submit" form="formA">Submit</sgds-button>
       </sgds-modal>
@@ -1567,28 +1585,11 @@
               d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
           </svg>Option label</sgds-dropdown-item>
         <sgds-dropdown-item disabled>Option label</sgds-dropdown-item>
-        <sgds-dropdown-item href="https://www.google.com">Google</sgds-dropdown-item>
+        <sgds-dropdown-item ><a href="https://www.google.com">Google</a></sgds-dropdown-item>
         <sgds-dropdown-item>Option label</sgds-dropdown-item>
         <sgds-dropdown-item>Option label</sgds-dropdown-item>
         <sgds-dropdown-item>Option label</sgds-dropdown-item>
         </sgds-overflow-menu>
-
-        <sgds-dropdown menuVariant="default">
-          <sgds-icon-button slot="toggler" name="three-dots" variant="ghost" size="sm" role="button" aria-haspopup="menu">
-          </sgds-icon-button>
-          <sgds-dropdown-item active><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-              class="bi bi-upload" viewBox="0 0 16 16">
-              <path
-                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-              <path
-                d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
-            </svg>Option label</sgds-dropdown-item>
-          <sgds-dropdown-item disabled>Option label</sgds-dropdown-item>
-          <sgds-dropdown-item href="https://www.google.com">Google</sgds-dropdown-item>
-          <sgds-dropdown-item>Option label</sgds-dropdown-item>
-          <sgds-dropdown-item>Option label</sgds-dropdown-item>
-          <sgds-dropdown-item>Option label</sgds-dropdown-item>
-        </sgds-dropdown>
       </div>
       <h2>Dropdown</h2>
       <div class="row">

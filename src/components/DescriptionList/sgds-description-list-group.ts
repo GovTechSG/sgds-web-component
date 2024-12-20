@@ -1,7 +1,8 @@
-import { html, PropertyValues } from "lit";
+import { html, nothing, PropertyValues } from "lit";
 import { property, queryAssignedElements } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import descriptionListGroupStyle from "./description-list-group.css";
+import { HasSlotController } from "../../utils/slot";
 
 /**
  * @summary Description List Group organizes multiple description lists.
@@ -15,16 +16,20 @@ export class SgdsDescriptionListGroup extends SgdsElement {
   static styles = [...SgdsElement.styles, descriptionListGroupStyle];
 
   /** When true, adds a border around the entire group. */
-  @property({ type: Boolean, reflect: true }) border = false;
+  @property({ type: Boolean, reflect: true }) bordered = false;
 
   /** When true, the description lists are displayed in a stacked layout. */
   @property({ type: Boolean, reflect: true }) stacked = false;
 
-  @queryAssignedElements({ slot: "", flatten: true })
+  @queryAssignedElements({ flatten: true })
   private _descriptionLists!: HTMLElement[];
+
+  /** @internal */
+  private readonly hasSlotController = new HasSlotController(this, "title", "subtitle");
 
   connectedCallback() {
     super.connectedCallback();
+    this.setAttribute("role", "list");
     this.updateComplete.then(() => {
       this._updateDescriptionLists();
     });
@@ -38,10 +43,10 @@ export class SgdsDescriptionListGroup extends SgdsElement {
       } else {
         descriptionList.removeAttribute("stacked");
       }
-      if (this.border) {
-        descriptionList.setAttribute("border", "");
+      if (this.bordered) {
+        descriptionList.setAttribute("bordered", "");
       } else {
-        descriptionList.removeAttribute("border");
+        descriptionList.removeAttribute("bordered");
       }
     });
   }
@@ -50,26 +55,34 @@ export class SgdsDescriptionListGroup extends SgdsElement {
     if (_changedProperties.has("stacked")) {
       this._updateDescriptionLists();
     }
-    if (_changedProperties.has("border")) {
+    if (_changedProperties.has("bordered")) {
       this._updateDescriptionLists();
     }
   }
 
   render() {
+    const hasTitleSlot = this.hasSlotController.test("title");
+    const hasSubtitleSlot = this.hasSlotController.test("subtitle");
     return html`
       <div class="description-list-group" part="base">
-        ${this.querySelector('[slot="title"]') || this.querySelector('[slot="subtitle"]')
+        ${hasTitleSlot || hasSubtitleSlot
           ? html`
               <div class="description-list-group__header">
-                <div class="description-list-group__title">
-                  <slot name="title"></slot>
-                </div>
-                <div class="description-list-group__subtitle">
-                  <slot name="subtitle"></slot>
-                </div>
+                ${hasTitleSlot
+                  ? html` <div class="description-list-group__title">
+                      <slot name="title"></slot>
+                    </div>`
+                  : nothing}
+                ${hasSubtitleSlot
+                  ? html`
+                      <div class="description-list-group__subtitle">
+                        <slot name="subtitle"></slot>
+                      </div>
+                    `
+                  : nothing}
               </div>
             `
-          : ""}
+          : nothing}
         <div class="description-list-group__content">
           <slot></slot>
         </div>

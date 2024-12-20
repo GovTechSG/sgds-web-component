@@ -1,14 +1,14 @@
 .form-label {
   margin-bottom: 0;
-  color: var(--sgds-form-color);
+  color: var(--sgds-form-color-default);
 }
 
 .form-label.disabled {
   opacity: var(--sgds-opacity-50);
 }
 
-.form-check-label{
-  color: var(--sgds-form-color);
+.form-check-label {
+  color: var(--sgds-form-color-default);
 }
 .form-check-input:disabled ~ .form-check-label,
 .form-check-input[disabled] ~ .form-check-label {

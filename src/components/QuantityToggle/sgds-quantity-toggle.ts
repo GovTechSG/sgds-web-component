@@ -28,8 +28,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
   /** @internal */
   static dependencies = {
     "sgds-input": SgdsInput,
-    "sgds-icon-button": SgdsIconButton,
-    "sgds-icon": SgdsIcon
+    "sgds-icon-button": SgdsIconButton
   };
   /** @internal */
   @query("sgds-icon-button[ariaLabel^='increase by']") private plusBtn: HTMLButtonElement;
