@@ -10,7 +10,7 @@ import SgdsElement from "../../base/sgds-element";
  */
 export class SgdsBreadcrumbItem extends SgdsElement {
   static styles = [...SgdsLink.styles, breadcrumbItemStyle];
-  /** Specifies the url path of the breadcrumb-item. When defined, the breadcrumb-items is a anchor element. When not defined, indicates that the breadcrumb item is active. In such cases, a span element is rendered. */
+  /** Indicates the link matches the current location of the page. Programmatically handled by SgdsBreadcrumb to set this prop to true for the last breadcrumb item  */
   @property({ type: Boolean, reflect: true }) active = false;
 
   render() {
