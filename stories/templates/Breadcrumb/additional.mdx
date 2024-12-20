@@ -1,0 +1,13 @@
+## Pass in anchor tags in default slot of `sgds-breadcrumb-item`
+
+For better SEO, anchor tags are to be passed by the user in the light dom or the slot of `sgds-breadcrumb-item`. 
+Every `sgds-breadcrumb-item` requires an anchor element. 
+
+## Overflow menu 
+
+Breadcrumb should show up to 4 breadcrumb items. Beyond that, the breadcrumb component will be re-grouped the excess items and render in a overflow dropdown menu automatically, displaying only the first , second last and last links 
+
+
+<Canvas of={BreadcrumbStories.Overflow}>
+  <Story of={BreadcrumbStories.Overflow} />
+</Canvas>

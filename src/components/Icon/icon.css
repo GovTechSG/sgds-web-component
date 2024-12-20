@@ -1,6 +1,6 @@
 :host {
   color: inherit;
-  display: inline-block;
+  display: inline-flex;
 }
 :host([size="sm"]) svg {
   width: var(--sgds-icon-size-sm);
