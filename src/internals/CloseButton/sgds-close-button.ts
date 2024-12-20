@@ -4,6 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 import closeButtonStyles from "./close-button.css";
+import { warnUnregisteredElements } from "../../utils/ce-registry";
 /**
  * @summary Close button for closing actions. Used in Modal, Drawer, Alert and Toast.
  *
@@ -29,6 +30,10 @@ export class SgdsCloseButton extends SgdsElement {
     return;
   };
 
+  firstUpdated() {
+    /** Cannot register sgds-icon as dependency due to some circular dependencies, so we check and warn instead */
+    warnUnregisteredElements("sgds-icon");
+  }
   render() {
     return html`
       <button
@@ -40,7 +45,9 @@ export class SgdsCloseButton extends SgdsElement {
         })}
         aria-label=${ifDefined(this.ariaLabel)}
         @click=${this._handleClick}
-      ></button>
+      >
+        <sgds-icon name="cross" size=${this.size}></sgds-icon>
+      </button>
     `;
   }
 }
