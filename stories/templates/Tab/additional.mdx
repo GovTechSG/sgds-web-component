@@ -1,0 +1,51 @@
+## Variants
+
+The variants of tab is controlled by `SgdsTabGroup`
+The default tab variant is `underlined`. Modify the `variant` prop to achieve solid tabs 
+
+### Underlined tabs (default)
+
+<Canvas of={TabStories.Basic}>
+  <Story of={TabStories.Basic} />
+</Canvas>
+
+### Solid tabs
+
+<Canvas of={TabStories.SolidVariant}>
+  <Story of={TabStories.SolidVariant} />
+</Canvas>
+
+## Density 
+
+The density of tabs is controlled by `SgdsTabGroup`. For a more compact tabs, modify `density` prop to `compact`
+
+
+### Compact underlined tabs
+
+<Canvas of={TabStories.UnderlinedDensityCompact}>
+  <Story of={TabStories.UnderlinedDensityCompact} />
+</Canvas>
+
+### Compact solid tabs
+
+<Canvas of={TabStories.SolidDensityCompact}>
+  <Story of={TabStories.SolidDensityCompact} />
+</Canvas>
+
+## Orientation
+
+Tabs can also be of horizontal or vertical orientation. 
+The orientation of tabs is controlled by `SgdsTabGroup`. 
+By default, tabs are presented horizontally. Set `orientation` to `vertical` for vertical tabs
+
+### Vertical underlined tabs
+
+<Canvas of={TabStories.OrientationUnderlined}>
+  <Story of={TabStories.OrientationUnderlined} />
+</Canvas>
+
+### Vertical solid tabs
+
+<Canvas of={TabStories.OrientationSolid}>
+  <Story of={TabStories.OrientationSolid} />
+</Canvas>

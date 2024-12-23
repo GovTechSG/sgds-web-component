@@ -86,7 +86,7 @@ ${ArgsType.join('\n')}
 
 ${methodsMeta.map(meta => {
   if (meta.methods.length > 0){
-    return `## Methods \n### ${meta.tagName}\n<table>
+    return `## Methods \n ### ${meta.tagName}\n<table>
         <thead>
           <tr>
             <th>Name</th>
