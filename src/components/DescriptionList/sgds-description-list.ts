@@ -7,7 +7,7 @@ let id = 0;
 
 /**
  *
- * @summary Description Lists are used with description list group as list components
+ * @summary Description Lists are used with description list group as list components. A description list (often referred to as a “definition list”) is a type of list used in web design and documentation to pair terms with their corresponding descriptions or values.
  *
  * @slot default - The slot for the label
  * @slot data - The slot for the data
