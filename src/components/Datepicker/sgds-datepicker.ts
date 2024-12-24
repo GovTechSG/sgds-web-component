@@ -15,6 +15,7 @@ import { DatepickerHeader } from "./datepicker-header";
 import DatepickerInput from "./datepicker-input";
 import datepickerStyle from "./datepicker.css";
 import { ViewEnum } from "./types";
+import SgdsIconButton from "../IconButton/sgds-icon-button";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -47,7 +48,8 @@ export class SgdsDatepicker extends DropdownElement implements SgdsFormControl {
     "sgds-datepicker-input": DatepickerInput,
     "sgds-datepicker-calendar": DatepickerCalendar,
     "sgds-datepicker-header": DatepickerHeader,
-    "sgds-button": SgdsButton
+    "sgds-button": SgdsButton,
+    "sgds-icon-button": SgdsIconButton
   };
 
   /** When true, adds required attribute to input element */
@@ -60,8 +62,7 @@ export class SgdsDatepicker extends DropdownElement implements SgdsFormControl {
   /** The initial value of DatePicker on first load for single & range mode as array of string. eg.'["22/12/2023"]' for single & '["22/12/2023","25/12/2023"]' for range respectively  */
   @property({ type: Array, reflect: true }) initialValue: string[] = [];
 
-  /** Date format reflected on input  */
-  @property({ type: String }) dateFormat: DateFormat = "DD/MM/YYYY";
+  private dateFormat = "DD/MM/YYYY";
 
   /** ISO date string to set the lowest allowable date value. e.g. "2016-05-19T12:00:00.000Z" */
   @property({ type: String }) minDate = "";
@@ -321,19 +322,19 @@ export class SgdsDatepicker extends DropdownElement implements SgdsFormControl {
     this.displayDate = this.initialDisplayDate;
     this._manageInternalsBadInput();
   }
-  private async _handleButtonResetClick() {
-    this.displayDate = this.initialDisplayDate;
-    this.selectedDateRange = [];
-    this.value = "";
-    this.view = "days";
-    this.hideMenu();
-    const input = await this.datepickerInputAsync;
-    input.setInvalid(false);
-    input.destroyInputMask();
-    await input.applyInputMask();
+  // private async _handleButtonResetClick() {
+  //   this.displayDate = this.initialDisplayDate;
+  //   this.selectedDateRange = [];
+  //   this.value = "";
+  //   this.view = "days";
+  //   this.hideMenu();
+  //   const input = await this.datepickerInputAsync;
+  //   input.setInvalid(false);
+  //   input.destroyInputMask();
+  //   await input.applyInputMask();
 
-    this._manageInternalsRequired();
-  }
+  //   this._manageInternalsRequired();
+  // }
 
   private async _handleEmptyInput() {
     this._manageInternalsRequired();
@@ -383,21 +384,6 @@ export class SgdsDatepicker extends DropdownElement implements SgdsFormControl {
   };
 
   render() {
-    const svgEl = html`
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-x"
-        viewBox="0 0 16 16"
-      >
-        <path
-          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-        />
-      </svg>
-    `;
-
     return html`
       <div>
         <sgds-datepicker-input
@@ -407,7 +393,6 @@ export class SgdsDatepicker extends DropdownElement implements SgdsFormControl {
           placeholder=""
           ${ref(this.myDropdown)}
           mode=${this.mode}
-          dateFormat=${this.dateFormat}
           invalidFeedback=${this.invalidFeedback}
           @sgds-mask-input-change=${this._handleInputMaskChange}
           @sgds-invalid-input=${this._handleInvalidInput}
@@ -417,7 +402,7 @@ export class SgdsDatepicker extends DropdownElement implements SgdsFormControl {
           hintText=${this.hintText}
           name=${this.name}
         >
-          <sgds-button
+          <sgds-icon-button
             role="button"
             slot="calendar-btn"
             class="calendar-btn"
@@ -427,39 +412,16 @@ export class SgdsDatepicker extends DropdownElement implements SgdsFormControl {
             @click=${() => this.toggleMenu()}
             ariaLabel=${this.menuIsOpen ? "Close Calendar" : "Open Calendar"}
             ?disabled=${this.disabled}
-            variant="outlined"
+            variant="outline"
+            name="calendar"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-calendar"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"
-              />
-            </svg>
-          </sgds-button>
-          <sgds-button
-            role="button"
-            slot="reset-btn"
-            variant="primary"
-            ?disabled=${this.disabled}
-            class="reset-btn"
-            @click=${() => this._handleButtonResetClick()}
-            ariaLabel="Reset Datepicker"
-          >
-            ${svgEl}
-          </sgds-button>
+          </sgds-icon-button>
         </sgds-datepicker-input>
 
         <ul
           id=${this.dropdownMenuId}
           class="sgds datepicker dropdown-menu"
           role="dialog"
-          part="menu"
           aria-label=${this._dialogAriaLabels[this.view]}
           @click=${(event: MouseEvent) => event.stopPropagation()}
         >

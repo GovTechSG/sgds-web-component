@@ -11,7 +11,7 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 export class DatepickerInput extends SgdsInput {
   static styles = [...SgdsInput.styles, datepickerInputStyles];
   /** Date format reflected on input  */
-  @property({ type: String }) dateFormat: DateFormat = "DD/MM/YYYY";
+  private dateFormat = "DD/MM/YYYY";
 
   /** ISO date string to set the lowest allowable date value. e.g. "2016-05-19T12:00:00.000Z" */
   @property({ type: String }) minDate: string;
@@ -160,7 +160,6 @@ export class DatepickerInput extends SgdsInput {
         ${this._renderFeedback()}
         </div>
         <slot name="calendar-btn"></slot>
-        <slot name="reset-btn"></slot>
         </div>
       </div>
     `;

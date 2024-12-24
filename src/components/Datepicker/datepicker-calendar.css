@@ -1,12 +1,7 @@
-button {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  margin: 0;
+.datepicker-body{
+  color: var(--sgds-form-color-default);
 }
-.datepicker-body {
-  padding: 0 1.5rem 1.5rem;
-}
+
 table {
   border-collapse: collapse;
   text-align: center;
@@ -29,15 +24,15 @@ button.year {
 }
 button.month.active {
   cursor: pointer;
-  background-color: var(--datepicker-hover-bg);
+  background-color: var(--sgds-form-primary-bg-translucent);
 }
 button.month.active.selected-ends {
-  background-color: var(--datepicker-selected-date-bg);
-  color: var(--datepicker-selected-date-color);
+  background-color: var(--sgds-form-primary-bg-default);
+  color: var(--sgds-form-color-on-dark);
 }
 button.month:hover:not(.active) {
   cursor: pointer;
-  background-color: var(--datepicker-hover-bg);
+  background-color: var(--sgds-form-bg-translucent);
 }
 button.month:focus {
   outline: var(--datepicker-theme-color) auto 2px;
@@ -45,47 +40,66 @@ button.month:focus {
 }
 button.year.active {
   cursor: pointer;
-  background-color: var(--datepicker-hover-bg);
+  background-color: var(--sgds-form-primary-bg-translucent);
 }
 button.year.active.selected-ends {
-  background-color: var(--datepicker-selected-date-bg);
-  color: var(--datepicker-selected-date-color);
+  background-color: var(--sgds-form-primary-bg-default);
+  color: var(--sgds-form-color-on-dark);
 }
 button.year:hover:not(.active) {
   cursor: pointer;
-  background-color: var(--datepicker-hover-bg);
+  background-color: var(--sgds-form-bg-translucent);
 }
 button.year:focus {
   outline: var(--datepicker-theme-color) auto 2px;
   z-index: 100;
 }
-td {
-  width: 3rem;
-  height: 3rem;
+td, th {
+  width: var(--sgds-form-width-md, 40px);
+  height: var(--sgds-form-height-lg, 40px);
   padding: 0;
+  border-radius: var(--sgds-form-border-radius-sm);
 }
 td[data-day] {
   cursor: pointer;
 }
 td[data-day]:hover:not(.disabled):not(.selected-ends) {
   cursor: pointer;
-  background-color: var(--datepicker-hover-bg);
+  background-color: var(--sgds-form-bg-translucent);
 }
 td[data-day].active {
   cursor: pointer;
-  background-color: var(--datepicker-hover-bg);
+  background-color: var(--sgds-form-primary-bg-translucent);
 }
 td[data-day].active.selected-ends {
-  background-color: var(--datepicker-selected-date-bg);
-  color: var(--datepicker-selected-date-color);
+  background-color: var(--sgds-form-primary-bg);
+  color: var(--sgds-form-color-on-dark);
 }
 td[data-day]:focus {
-  outline: var(--datepicker-theme-color) auto 2px;
+  box-shadow: var(--sgds-box-shadow-focus);
+  outline: unset;
 }
 td[data-day].disabled {
   color: var(--sgds-gray-400);
   cursor: not-allowed;
 }
-.today {
-  color: var(--datepicker-theme-color);
+.today{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.today::after{
+  background-color: var(--sgds-form-primary-bg);
+  content: ".";
+  line-height: 4px;
+  /* mask-size: 73%;
+  -webkit-mask-size: 73%; */
+  /* padding: 0 0.45em;
+  margin: 0 0.125rem; */
+  -webkit-mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none"><circle cx="2" cy="2" r="2" fill="%235A42C0"/></svg>');
+  mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none"><circle cx="2" cy="2" r="2" fill="%235A42C0"/></svg>');
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
 }

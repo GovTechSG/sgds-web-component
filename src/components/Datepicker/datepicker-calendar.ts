@@ -394,7 +394,7 @@ export class DatepickerCalendar extends SgdsElement {
               (label: string, index: number) =>
                 html`
                   <th key=${index} abbr=${label} scope="col">
-                    <small>${label.slice(0, 3)}</small>
+                    ${label.slice(0, 3)}
                   </th>
                 `
             )}
