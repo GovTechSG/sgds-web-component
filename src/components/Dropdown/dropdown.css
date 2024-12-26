@@ -1,3 +1,4 @@
-.dropdown{
+.dropdown {
   display:flex;
+  height: 100%;
 }
