@@ -125,19 +125,22 @@ export class SgdsDatepicker extends DropdownElement implements SgdsFormControl {
   constructor() {
     super();
     this._internals = this.attachInternals();
-    /**@internal */
-    this.modifierOpt = [
-      {
-        name: "offset",
-        options: {
-          offset: [0, 10]
-        }
-      }
-    ];
   }
 
   async connectedCallback() {
     super.connectedCallback();
+    let offset;
+    this.hintText ? (offset = [0, -20]) : (offset = [0, 8]);
+
+    this.modifierOpt = [
+      {
+        name: "offset",
+        options: {
+          offset
+        }
+      }
+    ];
+
     this.addEventListener("sgds-view", this._handleViewChanged);
     this.addEventListener("sgds-change-calendar", this._handleDateChanged);
     this.addEventListener("sgds-update-focus", this._handleFocusDateChanged);

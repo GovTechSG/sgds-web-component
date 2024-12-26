@@ -17,7 +17,7 @@ export class DatepickerHeader extends SgdsElement {
   static dependencies = {
     "sgds-icon": SgdsIcon,
     "sgds-icon-button": SgdsIconButton
-  }
+  };
 
   /** @internal */
   @property({ attribute: false })
@@ -38,21 +38,21 @@ export class DatepickerHeader extends SgdsElement {
 
   @watch("focusedTabIndex", { waitUntilFirstUpdate: true })
   _handleFocusedTabIndexChange() {
-    let buttonToFocus: SgdsButton | SgdsIconButton
-    switch(this.focusedTabIndex){
-      case 0: 
-        buttonToFocus = this.shadowRoot.querySelector("sgds-icon-button[name='arrow-left']")
+    let buttonToFocus: SgdsButton | SgdsIconButton;
+    switch (this.focusedTabIndex) {
+      case 0:
+        buttonToFocus = this.shadowRoot.querySelector("sgds-icon-button[name='arrow-left']");
         break;
-      case 1: 
-        buttonToFocus = this.shadowRoot.querySelector("sgds-button")
+      case 1:
+        buttonToFocus = this.shadowRoot.querySelector("sgds-button");
         break;
-      case 2: 
-        buttonToFocus = this.shadowRoot.querySelector("sgds-icon-button[name='arrow-right']")
+      case 2:
+        buttonToFocus = this.shadowRoot.querySelector("sgds-icon-button[name='arrow-right']");
         break;
-      default: 
+      default:
         return;
     }
-      buttonToFocus.focus();
+    buttonToFocus.focus();
   }
 
   private _changeView() {
@@ -189,9 +189,9 @@ export class DatepickerHeader extends SgdsElement {
         >
         </sgds-icon-button>
         <sgds-button
-         fullWidth
-         variant="ghost"
-         size="sm"
+          fullWidth
+          variant="ghost"
+          size="sm"
           @click=${this._changeView}
           class=${classMap({ disabled: this.view === "years" })}
           aria-disabled=${this.view === "years" ? "true" : "false"}

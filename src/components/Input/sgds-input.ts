@@ -146,7 +146,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
     this.emit("sgds-focus");
   }
 
-  private _handleBlur() {
+  protected _handleBlur() {
     this._isTouched = true;
     this.emit("sgds-blur");
   }

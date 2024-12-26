@@ -1,11 +1,12 @@
 import { isAfter, isBefore, isValid, parse } from "date-fns";
 import IMask, { InputMask } from "imask";
-import { html } from "lit";
+import { html, PropertyValues } from "lit";
 import { property, queryAsync } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
+import { watch } from "../../utils/watch";
 import { SgdsInput } from "../Input/sgds-input";
 import datepickerInputStyles from "./datepicker-input.css";
-import { watch } from "../../utils/watch";
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
 export class DatepickerInput extends SgdsInput {
@@ -37,7 +38,9 @@ export class DatepickerInput extends SgdsInput {
   //   super.connectedCallback();
   //   this.addEventListener("sgds-change", this._validateInput);
   // }
-
+  protected override _handleBlur() {
+    this.emit("sgds-blur");
+  }
   protected override async _handleChange(e: Event) {
     this.value = this.input.value;
     this.emit("sgds-change");
@@ -153,14 +156,17 @@ export class DatepickerInput extends SgdsInput {
   }
   render() {
     return html`
-      ${this._renderLabel()} ${this._renderHintText()}
-      <div class="input-container">
-      <div class="input-feedback">
-        ${this._renderInput()}
+      <div
+        class="form-control-container ${classMap({
+          disabled: this.disabled
+        })}"
+      >
+        ${this._renderLabel()}
+        <div class="input-container">
+          ${this._renderInput()}
+          <slot name="calendar-btn"></slot>
+        </div>
         ${this._renderFeedback()}
-        </div>
-        <slot name="calendar-btn"></slot>
-        </div>
       </div>
     `;
   }
