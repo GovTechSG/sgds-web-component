@@ -19,7 +19,7 @@ import { Mainnav } from "./components/Mainnav";
 import { Masthead } from "./components/Masthead";
 import { Modal } from "./components/Modal";
 import { Pagination } from "./components/Pagination";
-import { Progress } from "./components/Progress";
+import { ProgressBar } from "./components/ProgressBar";
 import { QuantityToggle } from "./components/QuantityToggle";
 import { Radio } from "./components/Radio";
 import { Sidenav } from "./components/Sidenav";
@@ -55,7 +55,7 @@ function App() {
       <Input />
       <Modal />
       <Pagination />
-      <Progress />
+      <ProgressBar />
       <QuantityToggle />
       <Radio />
       <Sidenav />
