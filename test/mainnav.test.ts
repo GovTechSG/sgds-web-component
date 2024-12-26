@@ -14,38 +14,40 @@ describe("sgds-mainnav", () => {
     const el = await fixture(html`<sgds-mainnav></sgds-mainnav>`);
     assert.shadowDom.equal(
       el,
-      `<nav class="navbar navbar-expand-lg navbar-light sgds">
-       <a
-         aria-label="brand-link"
-         class="navbar-brand order-first"
-         href=""
-       >
-         <slot name="brand">
-       </a>
-       <slot
-         class="order-1"
-         name="non-collapsible"
-       >
-       </slot>
-       <button
-         aria-expanded="false"
-         aria-label="Toggle navigation"
-         class="navbar-toggler order-1"
-         type="button"
-       >
-       <span class="navbar-toggler-icon"></span>
-       </button>
-       <div
-         class="navbar-body navbar-collapse order-2"
-         hidden=""
-       >
-         <div class="navbar-nav navbar-nav-scroll">
-           <slot>
-           </slot>
-          <slot name="end">
-          </slot>
-         </div>
+      `<nav>
+        <div class="navbar navbar-expand-lg">
+          <a
+            aria-label="brand-link"
+            class="navbar-brand"
+            href=""
+          >
+            <slot name="brand"></slot>
+          </a>
+          <slot name="non-collapsible"></slot>
+          <sgds-icon-button
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            class="navbar-toggler"
+            name="menu"
+            size="sm"
+            target="_self"
+            variant="ghost"
+          >
+          </sgds-icon-button>
+        </div>
+        <div
+          class="navbar-body navbar-collapse"
+          hidden=""
+        >
+          <div class="navbar-nav navbar-nav-scroll">
+            <slot>
+            </slot>
+            <slot name="end">
+            </slot>
+          </div>
+        </div>
        </div>
+      </nav>
     `,
       { ignoreAttributes: ["id", "aria-controls"] }
     );
@@ -53,7 +55,7 @@ describe("sgds-mainnav", () => {
   it("expect div.collapse's id to equal to button's aria-controls", async () => {
     const el = await fixture(html`<sgds-mainnav></sgds-mainnav>`);
     const collapse = el.shadowRoot?.querySelector("div.navbar-body");
-    const button = el.shadowRoot?.querySelector("button");
+    const button = el.shadowRoot?.querySelector("sgds-icon-button");
     expect(collapse?.getAttribute("id")).to.equal(button?.getAttribute("aria-controls"));
   });
   it("brandHref props forwards to a.navbar-brand  href attribute", async () => {
@@ -67,22 +69,22 @@ describe("sgds-mainnav", () => {
   //   expect(el.shadowRoot?.querySelector(".collapse.navbar-collapse.order-4")).not.to.exist;
   // });
 
-  it("when expand=always, nav class has .navbar-expand", async () => {
+  it("when expand=always, navbar class has .navbar-expand", async () => {
     const el = await fixture(html`<sgds-mainnav expand="always"></sgds-mainnav>`);
-    expect(el.shadowRoot?.querySelector("nav.sgds.navbar")).to.have.class("navbar-expand");
-    const classList = el.shadowRoot?.querySelector("nav.sgds.navbar")?.classList.value;
+    expect(el.shadowRoot?.querySelector(".navbar")).to.have.class("navbar-expand");
+    const classList = el.shadowRoot?.querySelector(".navbar")?.classList.value;
     expect(/navbar-expand/.test(classList as string)).to.be.true;
   });
-  it("when expand=never, nav class does not have .navbar-expand", async () => {
+  it("when expand=never, navbar class does not have .navbar-expand", async () => {
     const el = await fixture(html`<sgds-mainnav expand="never"></sgds-mainnav>`);
-    const classList = el.shadowRoot?.querySelector("nav.sgds.navbar")?.classList.value;
+    const classList = el.shadowRoot?.querySelector(".navbar")?.classList.value;
     expect(/navbar-expand/.test(classList as string)).to.be.false;
   });
   const testSizes: MainnavExpandSize[] = ["sm", "md", "lg", "xl", "xxl"];
   testSizes.forEach(size => {
-    it(`when expand=${size}, nav class have .navbar-expand=${size}`, async () => {
+    it(`when expand=${size}, navbar class have .navbar-expand=${size}`, async () => {
       const el = await fixture(html`<sgds-mainnav expand=${size}></sgds-mainnav>`);
-      const classList = el.shadowRoot?.querySelector("nav.sgds.navbar")?.classList.value;
+      const classList = el.shadowRoot?.querySelector(".navbar")?.classList.value;
       expect(/navbar-expand/.test(classList as string)).to.be.true;
       expect(classList).to.contain(`navbar-expand-${size}`);
     });
@@ -93,7 +95,7 @@ describe("sgds-mainnav", () => {
     const mainNavCollapse = el.shadowRoot?.querySelector(".navbar-collapse");
     await el.updateComplete;
     expect(mainNavCollapse).to.have.attribute("hidden");
-    const toggler = el.shadowRoot?.querySelector("button.navbar-toggler") as HTMLButtonElement;
+    const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler") as HTMLButtonElement;
     expect(toggler.getAttribute("aria-expanded")).to.equal("false");
     toggler?.click();
     await nextFrame();
@@ -110,10 +112,11 @@ describe("sgds-mainnav", () => {
   // initial window.innerWidth = 800
   // LG_BREAKPOINT = 992
   // since window.innerWidth < LG_BREAKPOINT --> expect non-collapsible slot to be .order-2 (see first test)
-  it("when expand=lg and window resize event occurs to above breakpoint, it changes order of non-collapsible slot, and end slot has class .slot-end", async () => {
+  it("when expand=lg and window resize event occurs to above breakpoint, it inserts .navbar-body before non-collapsible slot, and end slot has class .slot-end", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="lg"></sgds-mainnav>`);
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector("slot[name='non-collapsible']")).to.have.class("order-1");
+    expect(el.shadowRoot?.querySelector("nav > .navbar-body")).to.exist;
+    expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).not.to.exist;
     expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class("slot-end");
     Object.defineProperty(window, "innerWidth", {
       writable: true,
@@ -122,14 +125,16 @@ describe("sgds-mainnav", () => {
     });
     window.dispatchEvent(new Event("resize"));
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector('slot[name="non-collapsible"]')).to.have.class("order-last");
+    expect(el.shadowRoot?.querySelector("nav > .navbar-body")).not.to.exist;
+    expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).to.exist;
     expect(el.shadowRoot?.querySelector("slot[name='end']")).to.have.class("slot-end");
   });
   //SM_BREAKPOINT = 576
   // now window.innerWidth = 1000
-  it("when expand=sm and window resize event occurs to above breakpoint, it changes order of non-collapsible slot and end slot has class slot-end ", async () => {
+  it("when expand=sm and window resize event occurs to above breakpoint, it inserts .navbar-body before non-collapsible slot, and end slot has class slot-end ", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="sm"></sgds-mainnav>`);
-    expect(el.shadowRoot?.querySelector("slot[name='non-collapsible']")).to.have.class("order-last");
+    expect(el.shadowRoot?.querySelector("nav > .navbar-body")).not.to.exist;
+    expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).to.exist;
     expect(el.shadowRoot?.querySelector("slot[name='end']")).to.have.class("slot-end");
     Object.defineProperty(window, "innerWidth", {
       writable: true,
@@ -138,13 +143,15 @@ describe("sgds-mainnav", () => {
     });
     window.dispatchEvent(new Event("resize"));
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector('slot[name="non-collapsible"]')).to.have.class("order-1");
+    expect(el.shadowRoot?.querySelector("nav > .navbar-body")).to.exist;
+    expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).not.to.exist;
     expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class("slot-end");
   });
   // now window.innerWidth = 575
-  it("when expand=always and window resize event occurs, it NEVER changes order of non-collapsible slot and end slot ALWAYS have slot-end ", async () => {
+  it("when expand=always and window resize event occurs, it NEVER changes the position of .navbar-body, and end slot ALWAYS have slot-end ", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="always"></sgds-mainnav>`);
-    expect(el.shadowRoot?.querySelector("slot[name='non-collapsible']")).to.have.class("order-last");
+    expect(el.shadowRoot?.querySelector("nav > .navbar-body")).not.to.exist;
+    expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).to.exist;
     expect(el.shadowRoot?.querySelector("slot[name='end']")).to.have.class("slot-end");
 
     Object.defineProperty(window, "innerWidth", {
@@ -154,7 +161,8 @@ describe("sgds-mainnav", () => {
     });
     window.dispatchEvent(new Event("resize"));
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector('slot[name="non-collapsible"]')).to.have.class("order-last");
+    expect(el.shadowRoot?.querySelector("nav > .navbar-body")).not.to.exist;
+    expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).to.exist;
     expect(el.shadowRoot?.querySelector("slot[name='end']")).to.have.class("slot-end");
 
     Object.defineProperty(window, "innerWidth", {
@@ -164,11 +172,13 @@ describe("sgds-mainnav", () => {
     });
     window.dispatchEvent(new Event("resize"));
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector('slot[name="non-collapsible"]')).to.have.class("order-last");
+    expect(el.shadowRoot?.querySelector("nav > .navbar-body")).not.to.exist;
+    expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).to.exist;
   });
-  it("when expand=never and window resize event occurs, it NEVER changes order of non-collapsible slot,  and end slot NEVER has class slot-end", async () => {
+  it("when expand=never and window resize event occurs, it NEVER changes the position of .navbar-body,  and end slot NEVER has class slot-end", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="never"></sgds-mainnav>`);
-    expect(el.shadowRoot?.querySelector("slot[name='non-collapsible']")).to.have.class("order-1");
+    expect(el.shadowRoot?.querySelector("nav > .navbar-body")).to.exist;
+    expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).not.to.exist;
     expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class("slot-end");
 
     Object.defineProperty(window, "innerWidth", {
@@ -178,7 +188,8 @@ describe("sgds-mainnav", () => {
     });
     window.dispatchEvent(new Event("resize"));
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector('slot[name="non-collapsible"]')).to.have.class("order-1");
+    expect(el.shadowRoot?.querySelector("nav > .navbar-body")).to.exist;
+    expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).not.to.exist;
     expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class("slot-end");
 
     Object.defineProperty(window, "innerWidth", {
@@ -188,7 +199,8 @@ describe("sgds-mainnav", () => {
     });
     window.dispatchEvent(new Event("resize"));
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector('slot[name="non-collapsible"]')).to.have.class("order-1");
+    expect(el.shadowRoot?.querySelector("nav > .navbar-body")).to.exist;
+    expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).not.to.exist;
     expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class("slot-end");
   });
 
@@ -235,32 +247,29 @@ describe("sgds-mainnav-dropdown", () => {
     const el = await fixture(html`<sgds-mainnav-dropdown togglerText="test"></sgds-mainnav-dropdown>`);
     assert.shadowDom.equal(
       el,
-      ` <div class="nav-item dropdown sgds">
-      <a
-        class="nav-link dropdown-toggle"
-        aria-expanded="false"
-        tabindex="0"
-        role="button"
+      `
+      <sgds-dropdown
+        drop="down"
+        modifieropt="[object Object]"
+      >
+        <a
+          aria-disabled="false"
+          class="nav-link"
+          role="button"
+          slot="toggler"
+          tabindex="0"
         >
-        test
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"    
-          height="16"
-          fill="currentColor"
-          class="bi bi-chevron-down"
-          viewBox="0 0 16 16"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
-          />
-        </svg>
-      </a>
-      <div class="dropdown-menu" role="menu" part="menu">
-        <slot></slot>
-      </div>
-    </div>`,
+          test
+          <sgds-icon
+            name="chevron-down"
+            size="lg"
+          >
+          </sgds-icon>  
+        </a>
+        <slot>
+        </slot>
+      </sgds-dropdown>
+      `,
       { ignoreAttributes: ["id"] }
     );
   });
