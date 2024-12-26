@@ -299,4 +299,9 @@
 
   --sgds-box-shadow-focus: 0px 0px 0px 4px var(--sgds-blue-400);
   --sgds-form-box-shadow-focus: var(--sgds-box-shadow-focus);
+
+  /* Masthead and Mainnav Max Width and Padding */
+  --sgds-mainnav-max-width: 1440px;
+  --sgds-mainnav-padding-x: 2rem;
+  --sgds-mainnav-mobile-padding-x: 1.25rem;
 }

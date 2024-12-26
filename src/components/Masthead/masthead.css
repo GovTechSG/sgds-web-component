@@ -33,10 +33,10 @@ a:hover {
 
 .container {
   width: 100%;
-  max-width: var(--masthead-max-width);
+  max-width: var(--sgds-mainnav-max-width);
   margin-left: auto;
   margin-right: auto;
-  padding: 0.25rem var(--masthead-padding-x);
+  padding: 0.25rem var(--sgds-mainnav-padding-x);
 }
 
 .sg-crest {
@@ -152,7 +152,7 @@ a.trusted-websites-link:hover {
 
 @media screen and (max-width: 768px) {
   .container {
-    --masthead-padding-x: 1rem;
+    padding: 0.25rem var(--sgds-mainnav-mobile-padding-x);
   }
 
   .sgds-masthead-content .content-grid {
