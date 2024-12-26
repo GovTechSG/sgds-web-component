@@ -37,8 +37,13 @@
   min-height: 100%;
   align-items: center;
   text-decoration: none;
-  padding: var(--sgds-padding-sm) var(--mainnav-padding-x);
-  
+  padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
+}
+
+@media screen and (max-width: 768px) {
+  .nav-link {
+    padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
+  }
 }
 
 .nav-link:not(.disabled).active,
