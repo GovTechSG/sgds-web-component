@@ -89,6 +89,7 @@ export class DropdownElement extends SgdsElement {
         //working
         this.dropdownConfig = {
           placement: "bottom-start",
+          strategy: "fixed",
           modifiers: !this.noFlip
             ? this.modifierOpt
             : [
