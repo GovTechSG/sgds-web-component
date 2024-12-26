@@ -10,7 +10,9 @@ describe("<sgds-close-button>", () => {
     assert.shadowDom.equal(
       el,
       `
-      <button class="btn-close btn-close-md" aria-label="Close button"></button>
+      <button class="btn-close btn-close-md" aria-label="Close button">
+        <sgds-icon name="cross" size="md"></sgds-icon>
+      </button>
       `
     );
   });

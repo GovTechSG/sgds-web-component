@@ -10,11 +10,6 @@ describe("<sgds-icon-list>", () => {
       el,
       `
       <div class="md">
-      <sgds-icon
-          size="lg"
-          style="display: none;"
-        >
-        </sgds-icon>
         <slot></slot>
         </div>`
     );

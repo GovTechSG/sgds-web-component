@@ -62,7 +62,7 @@ export default class SgdsElement extends LitElement {
     //   `Attempted to register <${name}>${newVersion}, but <${name}>${existingVersion} has already been registered.`
     // );
   }
-
+  /** @internal */
   static dependencies: Record<string, typeof SgdsElement> = {};
 
   constructor() {

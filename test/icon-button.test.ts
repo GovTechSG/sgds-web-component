@@ -12,6 +12,7 @@ describe("<sgds-icon-button>", () => {
     );
 
     const el = await fixture<SgdsIconButton>(html`<sgds-icon-button name="placeholder"></sgds-icon-button>`);
+    await el.updateComplete;
     assert.shadowDom.equal(
       el,
       `
