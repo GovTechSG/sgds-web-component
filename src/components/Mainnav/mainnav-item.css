@@ -1,4 +1,4 @@
-@media (min-width: 576px) {
+@media screen and (min-width: 576px) {
   :host([expand="sm"]) .nav-link {
     padding: 0px var(--sgds-padding-md);
   }
@@ -9,7 +9,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   :host([expand="md"]) .nav-link {
     padding: 0px var(--sgds-padding-md);
   }
@@ -20,7 +20,7 @@
   }
 }
 
-@media (min-width: 992px) {
+@media screen and (min-width: 992px) {
   :host([expand="lg"]) .nav-link {
     padding: 0px var(--sgds-padding-md);
   }
@@ -31,7 +31,7 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media screen and (min-width: 1200px) {
   :host([expand="xl"]) .nav-link {
     padding: 0px var(--sgds-padding-md);
   }
@@ -42,7 +42,7 @@
   }
 }
 
-@media (min-width: 1400px) {
+@media screen and (min-width: 1400px) {
   :host([expand="xxl"]) .nav-link {
     padding: 0px var(--sgds-padding-md);
   }
@@ -53,31 +53,31 @@
   }
 }
 
-@media (max-width: 576px) {
+@media screen and (max-width: 576px) {
   :host([expand="sm"]) .nav-link:not(.disabled).active {
     background-color: var(--sgds-default-bg-translucent-subtle);
   }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   :host([expand="md"]) .nav-link:not(.disabled).active {
     background-color: var(--sgds-default-bg-translucent-subtle);
   }
 }
 
-@media (max-width: 992px) {
+@media screen and (max-width: 992px) {
   :host([expand="lg"]) .nav-link:not(.disabled).active {
     background-color: var(--sgds-default-bg-translucent-subtle);
   }
 }
 
-@media (max-width: 1200px) {
+@media screen and (max-width: 1200px) {
   :host([expand="xl"]) .nav-link:not(.disabled).active {
     background-color: var(--sgds-default-bg-translucent-subtle);
   }
 }
 
-@media (max-width: 1200px) {
+@media screen and (max-width: 1200px) {
   :host([expand="xxl"]) .nav-link:not(.disabled).active {
     background-color: var(--sgds-default-bg-translucent-subtle);
   }
@@ -91,7 +91,13 @@
   align-items: center;
   text-decoration: none;
   color: var(--sgds-default-color);
-  padding: var(--sgds-padding-sm) var(--mainnav-padding-x);
+  padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
+}
+
+@media screen and (max-width: 768px) {
+  .nav-link {
+    padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
+  }
 }
 
 .nav-link:not(.disabled).active {
