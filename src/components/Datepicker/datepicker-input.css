@@ -6,7 +6,7 @@
 }
 
 .form-control-group {
-  /* border-radius: var(--sgds-form-border-radius-md) 0 0 var(--sgds-form-border-radius-md); */
+border-right: 0;
 }
 
 .input-feedback {
