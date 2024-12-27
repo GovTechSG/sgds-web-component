@@ -70,11 +70,8 @@ td[data-day].disabled {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-.today > span {
   margin-top: 4px;
 }
-
 .today::after{
   background-color: var(--sgds-form-primary-bg);
   content: ".";

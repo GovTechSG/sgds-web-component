@@ -273,7 +273,6 @@ export class SgdsDatepicker extends DropdownElement implements SgdsFormControl {
     this.displayDate = newSelectedDates[0];
     this.focusedDate = newSelectedDates[0];
     this.selectedDateRange = newSelectedDates;
-
     // Get the formattedDate value for the selected dates
     const formattedDate = this._makeInputValueString(
       this.selectedDateRange[0],
@@ -325,19 +324,18 @@ export class SgdsDatepicker extends DropdownElement implements SgdsFormControl {
     this.displayDate = this.initialDisplayDate;
     this._manageInternalsBadInput();
   }
-  // private async _handleButtonResetClick() {
-  //   this.displayDate = this.initialDisplayDate;
-  //   this.selectedDateRange = [];
-  //   this.value = "";
-  //   this.view = "days";
-  //   this.hideMenu();
-  //   const input = await this.datepickerInputAsync;
-  //   input.setInvalid(false);
-  //   input.destroyInputMask();
-  //   await input.applyInputMask();
+  private async _handleButtonResetClick() {
+    this.displayDate = this.initialDisplayDate;
+    this.selectedDateRange = [];
+    this.value = "";
+    this.view = "days";
+    const input = await this.datepickerInputAsync;
+    input.setInvalid(false);
+    input.destroyInputMask();
+    await input.applyInputMask();
 
-  //   this._manageInternalsRequired();
-  // }
+    this._manageInternalsRequired();
+  }
 
   private async _handleEmptyInput() {
     this._manageInternalsRequired();
@@ -378,6 +376,10 @@ export class SgdsDatepicker extends DropdownElement implements SgdsFormControl {
 
   private async _handleInputMaskChange(e: CustomEvent) {
     this.value = e.detail;
+
+    if (this.value === "dd/mm/yyyy" || this.value === "dd/mm/yyyy - dd/mm/yyyy") {
+      this._handleButtonResetClick();
+    }
   }
 
   private _dialogAriaLabels = {

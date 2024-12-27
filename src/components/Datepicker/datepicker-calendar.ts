@@ -213,7 +213,7 @@ export class DatepickerCalendar extends SgdsElement {
 
   private _onClickDay(event: MouseEvent | KeyboardEvent) {
     const { day, date } = (event.composedPath()[0] as HTMLTableCellElement).dataset;
-
+    console.log(event);
     const displayDateClone = new Date(this.displayDate);
     displayDateClone.setDate(parseInt(day));
     /** update new focused date for mouse click */
@@ -367,7 +367,7 @@ export class DatepickerCalendar extends SgdsElement {
               aria-disabled=${ifDefined(beforeMinDate || afterMinDate ? "true" : undefined)}
               role="button"
             >
-              <span>${day}</span>
+              ${day}
             </td>`
           );
           day++;
@@ -435,7 +435,7 @@ export class DatepickerCalendar extends SgdsElement {
             aria-selected=${selectedTime.includes(time)}
             aria-label=${ariaLabel}
           >
-            <span> ${m.slice(0, 3)} </span>
+            ${m.slice(0, 3)}
           </button>`;
         })}
       </div>
@@ -469,7 +469,7 @@ export class DatepickerCalendar extends SgdsElement {
               aria-selected=${selectedYears.includes(y)}
               aria-label=${ifDefined(CURRENT_YEAR === y ? `Current year, ${y}` : undefined)}
             >
-              <span> ${y} </span>
+              ${y}
             </button>
           `;
         })}
@@ -500,10 +500,3 @@ export class DatepickerCalendar extends SgdsElement {
 }
 
 export default DatepickerCalendar;
-
-//TODO: add disabled for months and year calendars
-//TODO: when input is cleared , reset the calendar back to day view and unselected
-//TODO: Add a suffix css token to pass button into suffix but modify the color
-//TODO: handle calendar position with hint text.
-//TODO: bug in date selection
-//TODO: bug in first load opening calendar, ddmmyyyy disappears in input
