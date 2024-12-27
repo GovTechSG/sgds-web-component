@@ -1,7 +1,3 @@
-:host {
-  --sgds-toast-border-radius: var(--sgds-border-radius-md)
-}
-
 :host([variant="info"]) slot[name="icon"]::slotted(*) {
   color: var(--sgds-primary-color);
 }
