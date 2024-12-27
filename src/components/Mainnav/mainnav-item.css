@@ -1,3 +1,7 @@
+:host([expand="always"]) .nav-link {
+  padding: 0px var(--sgds-padding-md);
+}
+
 @media screen and (min-width: 576px) {
   :host([expand="sm"]) .nav-link {
     padding: 0px var(--sgds-padding-md);
