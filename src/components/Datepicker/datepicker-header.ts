@@ -16,7 +16,8 @@ export class DatepickerHeader extends SgdsElement {
 
   static dependencies = {
     "sgds-icon": SgdsIcon,
-    "sgds-icon-button": SgdsIconButton
+    "sgds-icon-button": SgdsIconButton,
+    "sgds-button": SgdsButton
   };
 
   /** @internal */
