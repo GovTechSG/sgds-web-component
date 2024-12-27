@@ -24,7 +24,7 @@ import { Mainnav } from "../components/mainnav/mainnav.component";
 import { Masthead } from "../components/masthead/masthead.component";
 import { Modal } from "../components/modal/modal.component";
 import { Pagination } from "../components/pagination/pagination.component";
-import { Progress } from "../components/progress/progress.component";
+import { ProgressBar } from "../components/progressbar/progressbar.component";
 import { QuantityToggle } from "../components/quantitytoggle/quantitytoggle.component";
 import { Radio } from "../components/radio/radio.component";
 import { Sidenav } from "../components/sidenav/sidenav.component";
@@ -61,7 +61,7 @@ import { Tooltip } from "../components/tooltip/tooltip.component";
     Masthead,
     Modal,
     Pagination,
-    Progress,
+    ProgressBar,
     QuantityToggle,
     Radio,
     Sidenav,

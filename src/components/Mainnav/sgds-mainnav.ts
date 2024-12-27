@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { property, query, state } from "lit/decorators.js";
+import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/animate";
@@ -8,7 +8,10 @@ import { LG_BREAKPOINT, MD_BREAKPOINT, SM_BREAKPOINT, XL_BREAKPOINT, XXL_BREAKPO
 import { waitForEvent } from "../../utils/event";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
+import SgdsMainnavItem from "./sgds-mainnav-item";
 import mainnavStyle from "./mainnav.css";
+import SgdsMainnavDropdown from "./sgds-mainnav-dropdown";
+import SgdsIcon from "../Icon/sgds-icon";
 export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
 
 const SIZES = {
@@ -29,27 +32,28 @@ const SIZES = {
  * @event sgds-hide - Emitted on hide. Only for collapsed menu.
  * @event sgds-after-hide - Emitted on hide after animation has completed. Only for collapsed menu.
  *
- * @slot - Default slot of SgdsMainnav. Pass in SgdsMainnavItem elements here.
+ * @slot default - Default slot of SgdsMainnav. Pass in SgdsMainnavItem elements here.
  * @slot end - Elements in this slot will be positioned to the right end of .navbar-nav. Elements in this slot will also be included in collapsed menu.
  * @slot brand - Brand slot of SgdsMainnav. Pass in brand logo img here
  * @slot non-collapsible - Elements in this slot will not be collapsed
  *
- * @cssproperty --mainnav-bg - Navbar's background color.
- * @cssproperty --mainnav-padding-x - left and right padding for browser width > 768px
- * @cssproperty --mainnav-padding-y - top and bottom padding for browser width > 768px
- * @cssproperty --mainnav-mobile-padding-x - left and right padding for browser width < 768px
- * @cssproperty --mainnav-mobile-padding-y - top and bottom padding for browser width < 768px
- * @cssproperty --mainnav-border-bottom-width - bottom border width
- * @cssproperty --mainnav-border-bottom-color - border-bottom width color
- * @cssproperty --mainnav-theme-color - The theme color of mainnav affecting the hover and active states of items in the mainnav
  */
 export class SgdsMainnav extends SgdsElement {
   static styles = [...SgdsElement.styles, mainnavStyle];
+  static dependencies = {
+    "sgds-icon": SgdsIcon
+  };
 
+  /** @internal */
+  @query("nav") nav: HTMLElement;
+  /** @internal */
+  @query(".navbar") navbar: HTMLElement;
   /** @internal */
   @query(".navbar-toggler") header: HTMLElement;
   /** @internal */
   @query(".navbar-body") body: HTMLElement;
+  /** @internal */
+  @query("slot[name='non-collapsible']") nonCollapsibleSlot: HTMLSlotElement;
 
   constructor() {
     super();
@@ -60,6 +64,12 @@ export class SgdsMainnav extends SgdsElement {
       } else {
         this.body ? (this.body.hidden = true) : null;
         this.expanded = false;
+      }
+
+      if (newBreakpointReachedValue) {
+        this._handleMobileNav();
+      } else {
+        this._handleDesktopNav();
       }
     });
   }
@@ -81,12 +91,41 @@ export class SgdsMainnav extends SgdsElement {
   /** @internal */
   @state()
   expanded = false;
+
+  /** @internal */
+  @queryAssignedElements() private defaultNodes!: SgdsMainnavItem[] | SgdsMainnavDropdown[];
+
+  /** @internal */
+  @queryAssignedElements({ slot: "end" }) private endNodes!: SgdsMainnavItem[] | SgdsMainnavDropdown[];
+
+  /** @internal */
+  get defaultSlotitems(): SgdsMainnavItem[] | SgdsMainnavDropdown[] {
+    return [...(this.defaultNodes || [])].filter((node: HTMLElement) => typeof node.tagName !== "undefined") as
+      | SgdsMainnavItem[]
+      | SgdsMainnavDropdown[];
+  }
+
+  /** @internal */
+  get endSlotItems(): SgdsMainnavItem[] | SgdsMainnavDropdown[] {
+    return [...(this.endNodes || [])].filter((node: HTMLElement) => typeof node.tagName !== "undefined") as
+      | SgdsMainnavItem[]
+      | SgdsMainnavDropdown[];
+  }
+
   firstUpdated() {
     if (this.breakpointReached && this.body) {
       this.expanded = false;
       this.body.hidden = true;
+      this._handleMobileNav();
     }
+
+    const items = [...this.defaultSlotitems, ...this.endSlotItems] as SgdsMainnavItem[] | SgdsMainnavDropdown[];
+
+    items.forEach((item: SgdsMainnavItem | SgdsMainnavDropdown) => {
+      item.setAttribute("expand", this.expand);
+    });
   }
+
   private handleSummaryClick() {
     if (this.expanded) {
       this.hide();
@@ -95,6 +134,14 @@ export class SgdsMainnav extends SgdsElement {
     }
 
     this.header.focus();
+  }
+
+  private _handleMobileNav() {
+    this.nav?.appendChild(this.body);
+  }
+
+  private _handleDesktopNav() {
+    this.navbar?.insertBefore(this.body, this.nonCollapsibleSlot);
   }
 
   private async _animateToShow() {
@@ -171,35 +218,34 @@ export class SgdsMainnav extends SgdsElement {
 
   render() {
     this.breakpointReached = window.innerWidth < SIZES[this.expand];
-    const collapseClass = "navbar-body navbar-collapse order-2";
+
     return html`
-      <nav
-        class="sgds navbar navbar-light
-        ${this._expandClass()}"
-      >
-        <a class="navbar-brand  order-first" href=${this.brandHref} aria-label="brand-link">
-          <slot name="brand"></slot>
-        </a>
-        <slot name="non-collapsible" class="${this.breakpointReached ? "order-1" : "order-last"}"></slot>
-        <button
-          class="navbar-toggler order-1 "
-          type="button"
-          @click=${this.handleSummaryClick}
-          aria-controls="${this.collapseId}"
-          aria-expanded="${this.expanded}"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class=${collapseClass} id=${this.collapseId}>
-          <div class="navbar-nav navbar-nav-scroll">
-            <slot></slot>
-            <slot
-              name="end"
-              class=${classMap({ "slot-end": !this.breakpointReached })}
-              @slotchange=${this._handleSlotChange}
-            ></slot>
+      <nav>
+        <div class="navbar ${this._expandClass()}">
+          <a class="navbar-brand" href=${this.brandHref} aria-label="brand-link">
+            <slot name="brand"></slot>
+          </a>
+          <div class="navbar-body navbar-collapse" id=${this.collapseId}>
+            <div class="navbar-nav navbar-nav-scroll">
+              <slot></slot>
+              <slot
+                name="end"
+                class=${classMap({ "slot-end": !this.breakpointReached })}
+                @slotchange=${this._handleSlotChange}
+              ></slot>
+            </div>
           </div>
+          <slot name="non-collapsible"></slot>
+          <sgds-icon-button
+            name="menu"
+            variant="ghost"
+            size="sm"
+            class="navbar-toggler"
+            @click=${this.handleSummaryClick}
+            aria-controls="${this.collapseId}"
+            aria-expanded="${this.expanded}"
+            aria-label="Toggle navigation"
+          ></sgds-icon-button>
         </div>
       </nav>
     `;
