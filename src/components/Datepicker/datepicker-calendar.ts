@@ -213,7 +213,6 @@ export class DatepickerCalendar extends SgdsElement {
 
   private _onClickDay(event: MouseEvent | KeyboardEvent) {
     const { day, date } = (event.composedPath()[0] as HTMLTableCellElement).dataset;
-    console.log(event);
     const displayDateClone = new Date(this.displayDate);
     displayDateClone.setDate(parseInt(day));
     /** update new focused date for mouse click */

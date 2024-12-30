@@ -128,6 +128,12 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   public checkValidity(): boolean {
     return this._mixinCheckValidity();
   }
+  /**
+   * Checks for validity without any native error popup message
+   */
+  public setValidity(flags?: ValidityStateFlags, message?: string, anchor?: HTMLElement): void {
+    return this._mixinSetValidity(flags, message, anchor);
+  }
 
   /**
    * Returns the ValidityState object
