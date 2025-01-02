@@ -117,7 +117,7 @@ describe("sgds-datepicker", () => {
     calendarBtnEl?.click();
 
     tdButtonOne?.click();
-    await elementUpdated(el);
+    await waitUntil(() => !menuEl?.classList.contains("show"))
     expect(inputEl?.value).to.contain("01");
 
     expect(menuEl?.classList.contains("show")).to.be.false;
@@ -126,7 +126,7 @@ describe("sgds-datepicker", () => {
     calendarBtnEl?.click();
 
     tdButtonTwo?.click();
-    await elementUpdated(el);
+    await waitUntil(() => !menuEl?.classList.contains("show"))
     expect(inputEl?.value).to.contain("02");
 
     expect(menuEl?.classList.contains("show")).to.be.false;
@@ -812,25 +812,30 @@ describe("calendar year keyboard navigation", async () => {
     return { el, header, headerBtn, prevHeaderBtn, nextHeaderBtn, calendar, years };
   };
 
-  it("the year will be focused and active", async () => {
-    const { header, headerBtn, calendar, years } = await starterKit(["29/01/2024"]);
+  it("this year will be focused and active", async () => {
+    const thisYear = new Date().getFullYear()
+    const { header, headerBtn, calendar, years } = await starterKit([`29/01/${thisYear}`]);
     const targetYear = years?.[0];
     expect(calendar.shadowRoot?.activeElement === targetYear).to.be.true;
     expect(targetYear?.classList.contains("active")).to.be.true;
-    const startYear = 2024;
-    const endYear = 2024 + 11;
+    const startYear = thisYear;
+    const endYear = startYear + 11;
     expect(headerBtn.innerText).to.equal(`${startYear} - ${endYear}`);
     await sendKeys({ press: "ArrowUp" });
     await calendar.updateComplete;
     await header.updateComplete;
 
-    expect(headerBtn.innerText).to.equal("2012 - 2023");
+    const prevTwelveYearsStart = thisYear - 12
+    const prevTwelveYearsEnd = thisYear - 1
+    expect(headerBtn.innerText).to.equal(`${prevTwelveYearsStart} - ${prevTwelveYearsEnd}`);
     expect(calendar.shadowRoot?.activeElement === years?.[9]).to.be.true;
     expect(years?.[9].classList.contains("active")).to.be.false;
-    expect(years?.[9].textContent).to.include(`${2024 - 3}`);
+    expect(years?.[9].textContent).to.include(`${thisYear - 3}`);
   });
   it("the years in range mode will be active", async () => {
-    const { header, headerBtn, calendar, years } = await starterKit(["29/03/2024", "29/03/2034"], "range");
+    const thisYear = new Date().getFullYear()
+    const tenYearsLater = thisYear + 10
+    const { header, headerBtn, calendar, years } = await starterKit([`29/03/${thisYear}`, `29/03/${tenYearsLater}`], "range");
     const targetYear = years?.[0];
     expect(calendar.shadowRoot?.activeElement === targetYear).to.be.true;
     years?.forEach((y, i) => {
@@ -848,8 +853,9 @@ describe("calendar year keyboard navigation", async () => {
 
     await calendar.updateComplete;
     await header.updateComplete;
-
-    expect(headerBtn.innerText).to.equal("2036 - 2047");
+    const nextTwelveYearsStart = thisYear + 12
+    const nextTwelveYearsEnd = nextTwelveYearsStart + 11
+    expect(headerBtn.innerText).to.equal(`${nextTwelveYearsStart} - ${nextTwelveYearsEnd}`);
     years?.forEach(y => expect(y.classList.contains("active")).to.be.false);
   });
 });
@@ -1185,7 +1191,7 @@ describe("datepicker input masking", () => {
 
     await sendKeys({ press: "Digit1" });
     await inputEl.updateComplete;
-    expect(inputEl.value).to.equal("1d/mm/yyyy");
+    expect(inputEl.value).to.equal("1D/MM/YYYY");
 
     const dateDigits = [2, 0, 3, 2, 0, 2, 4];
 
@@ -1199,18 +1205,18 @@ describe("datepicker input masking", () => {
     {
       mode: "single",
       value: "12/03/2024",
-      editValues: ["12/03/202y", "12/03/2y2y", "12/m3/2y2y", "d2/m3/2y2y", "22/m3/2y2y", "d2/m3/2y2y"]
+      editValues: ["12/03/202Y", "12/03/2Y2Y", "12/M3/2Y2Y", "D2/M3/2Y2Y", "22/M3/2Y2Y", "D2/M3/2Y2Y"]
     },
     {
       mode: "range",
       value: "12/03/2024 - 13/04/2024",
       editValues: [
-        "12/03/2024 - 13/04/202y",
-        "12/03/2024 - 13/04/2y2y",
-        "12/03/2024 - 13/m4/2y2y",
-        "12/03/2024 - d3/m4/2y2y",
-        "12/03/2024 - 23/m4/2y2y",
-        "12/03/20yy - d3/m4/2y2y"
+        "12/03/2024 - 13/04/202Y",
+        "12/03/2024 - 13/04/2Y2Y",
+        "12/03/2024 - 13/M4/2Y2Y",
+        "12/03/2024 - D3/M4/2Y2Y",
+        "12/03/2024 - 23/M4/2Y2Y",
+        "12/03/20YY - D3/M4/2Y2Y"
       ]
     }
   ];
@@ -1258,8 +1264,8 @@ describe("datepicker input masking", () => {
     });
   });
   const validationOnChangeMode = [
-    { mode: "single", value: "12/03/2024", editValue: "12/03/202y" },
-    { mode: "range", value: "12/03/2024 - 13/02/2024", editValue: "12/03/2024 - 13/02/202y" }
+    { mode: "single", value: "12/03/2024", editValue: "12/03/202Y" },
+    { mode: "range", value: "12/03/2024 - 13/02/2024", editValue: "12/03/2024 - 13/02/202Y" }
   ];
   validationOnChangeMode.forEach(({ mode, value, editValue }) => {
     it(`for mode=${mode} validation happens on input change (triggered here by blur)`, async () => {
@@ -1345,7 +1351,7 @@ describe("datepicker input masking", () => {
     }
     inputEl.blur();
     await inputEl.updateComplete;
-    expect(inputEl.value).to.equal("20/02/2024 - dd/mm/yyyy");
+    expect(inputEl.value).to.equal("20/02/2024 - DD/MM/YYYY");
     expect(shadowInput?.classList.contains("is-invalid")).to.be.true;
   });
 });
@@ -1360,14 +1366,14 @@ describe("error message", () => {
     await waitUntil(() => el.shadowRoot?.activeElement === input);
     await sendKeys({ press: `Digit2` });
     await el.updateComplete;
-    expect(el.value).to.equal("2d/mm/yyyy");
+    expect(el.value).to.equal("2D/MM/YYYY");
 
     input?.blur();
     await elementUpdated(el);
     expect(el?.reportValidity()).to.equal(false);
     const feedbackDiv = input?.shadowRoot?.querySelector("div.invalid-feedback");
     expect(feedbackDiv).to.exist;
-    expect(feedbackDiv?.textContent).to.contain("Please enter a valid date");
+    expect(feedbackDiv?.textContent).to.contain("Invalid date input");
 
     el.invalidFeedback = "Error message";
     await el.updateComplete;
@@ -1411,7 +1417,7 @@ describe("datepicker calendar will not show before 1900", () => {
     expect(header.shadowRoot?.querySelectorAll("sgds-icon-button.invisible")).to.exist;
     const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar");
     const disabledButtons = calendar?.shadowRoot?.querySelectorAll("button.year[disabled]");
-    expect(disabledButtons?.length).to.equal(8);
+    expect(disabledButtons?.length).to.equal(7);
     expect(calendar?.shadowRoot?.querySelector("button.year[data-year='1900']")?.hasAttribute("disabled")).to.be.false;
   });
   it("in day view keypress ArrowUp and ArrowLeft when focusedDate is 01/01/1900 will not trigger change to previous year", async () => {
@@ -1471,7 +1477,7 @@ describe("datepicker behavour on invalid input", () => {
     await sendKeys({ press: "Backspace" });
 
     await input?.updateComplete;
-    expect(input?.value).to.equal("23/03/202y");
+    expect(input?.value).to.equal("23/03/202Y");
 
     input?.blur();
     await elementUpdated(el);
@@ -1494,7 +1500,7 @@ describe("datepicker behavour on invalid input", () => {
     await sendKeys({ press: "Backspace" });
 
     await input?.updateComplete;
-    expect(input?.value).to.equal("23/03/202y");
+    expect(input?.value).to.equal("23/03/202Y");
 
     input?.blur();
     await elementUpdated(el);
@@ -1552,7 +1558,7 @@ describe("datepicker in form context", () => {
 
     input?.focus();
     await sendKeys({ press: "Backspace" });
-    await waitUntil(() => input?.value === "23/03/202y");
+    await waitUntil(() => input?.value === "23/03/202Y");
     input?.blur();
     await elementUpdated(datepicker);
     expect(datepicker?.reportValidity()).to.be.false;
@@ -1722,7 +1728,7 @@ describe("datepicker a11y labels", () => {
   it("aria-selected=true on selected dates when view=years, mode=range", async () => {
     // 28th March 2024
     const mockDate = new Date(2024, 2, 28);
-    const mockSelectedDate = [new Date(2024, 2, 14), new Date(2027, 9, 27)];
+    const mockSelectedDate = [new Date(2024-3, 2, 14), new Date(2024, 9, 27)];
     const el = await fixture<DatepickerCalendar>(
       html`<sgds-datepicker-calendar
         .displayDate=${mockDate}
@@ -1734,7 +1740,7 @@ describe("datepicker a11y labels", () => {
       ></sgds-datepicker-calendar>`
     );
     const selectedBtns = el.shadowRoot?.querySelectorAll("button[aria-selected='true']");
-    const selectedCount = 2027 - 2024 + 1;
+    const selectedCount = 4;
     expect(selectedBtns?.length).to.equal(selectedCount);
   });
 

@@ -26,15 +26,6 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  *
  * @event sgds-change-date - Emitted when the state of datepicker's input changes during first load, close button reset click & date click. Date values can be accessed via event.target.value
  *
- * @cssproperty --datepicker-theme-color - Datepicker's overall theme color
- * @cssproperty --datepicker-hover-bg - Datepicker's calendar menu hover color
- * @cssproperty --datepicker-bg - Datepicker's menu background color
- * @cssproperty --datepicker-close-button-bg - Datepicker's close button background color
- * @cssproperty --datepicker-close-button-hover-bg - Datepicker's close button hover background color
- * @cssproperty --datepicker-close-button-color - Datepicker's close button color
- * @cssproperty --datepicker-selected-date-bg - Selected date's background color
- * @cssproperty --datepicker-selected-date-color - Selected date's text color
- *
  * @description displayDate sets the month, year views of the calendar while focusedDate follows the focus which also directly changes
  * displayDate on certain occasions. Example, when keyboard moves up to the next month, it updates displayDate which then affect the current
  * date view of the calendar
@@ -110,7 +101,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
 
   @state() private _isTouched = false;
 
-  private initialDisplayDate: Date;
+  private initialDisplayDate: Date = new Date()
 
   @queryAsync("sgds-datepicker-calendar")
   private calendar: Promise<DatepickerCalendar>;
@@ -164,7 +155,6 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
         }
       }
     ];
-
     this.addEventListener("sgds-view", this._handleViewChanged);
     this.addEventListener("sgds-change-calendar", this._handleDateChanged);
     this.addEventListener("sgds-update-focus", this._handleFocusDateChanged);
@@ -293,7 +283,6 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
   };
   private _handleSelectDatesInput(event: CustomEvent<Date[]>) {
     this._handleSelectDates(event.detail);
-    this._manageInternalsValid();
   }
   private async _handleSelectDates(newSelectedDates: Date[]) {
     newSelectedDates.sort((a: Date, b: Date) => a.getTime() - b.getTime());
@@ -311,6 +300,8 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     this.value = formattedDate;
     const input = await this.datepickerInputAsync;
     input.updateMaskValue();
+    this._manageInternalsValid();
+
   }
 
   private get _shadowInput() {
@@ -324,7 +315,6 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     } else if (this.mode === "single" && this.selectedDateRange.length === 1) {
       this.hideMenu();
     }
-    this._manageInternalsValid();
   }
 
   /** update latest view state from datepicker-header */
@@ -348,6 +338,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
   }
   private async _handleInvalidInput() {
     this.selectedDateRange = [];
+    console.log(this.initialDisplayDate)
     this.displayDate = this.initialDisplayDate;
 
     this._manageInternalsBadInput();

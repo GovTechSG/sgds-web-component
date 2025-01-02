@@ -1025,8 +1025,7 @@
           <sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
         </sgds-textarea> -->
         <!-- <sgds-datepicker required name="datepicker-hi"></sgds-datepicker> -->
-         <sgds-datepicker required mindate="2024-01-02T12:00:00.000Z" displayDate="2024-01-02T12:00:00.000Z"
-        maxdate="2024-12-30T12:00:00.000Z" name="datepicker-hi"></sgds-datepicker>
+         <sgds-datepicker id="test-date" required name="datepicker-hi" mode="range" initialValue='["20/01/2025", "20/01/2027"]'></sgds-datepicker>
         <!--<sgds-datepicker required mode="range"></sgds-datepicker>
         <sgds-datepicker required mode="range" mindate="2024-01-02T12:00:00.000Z"
         maxdate="2024-12-30T12:00:00.000Z"></sgds-datepicker> -->
@@ -1969,6 +1968,8 @@
         qT.disabled = false;
         // qT.disabled = false;
       });
+      const daticker = document.querySelector("#test-date")
+      daticker.initialValue = ["02/01/2024"]
       const testF = document.querySelector("#validation-form");
 
       testF.addEventListener("submit", event => {
