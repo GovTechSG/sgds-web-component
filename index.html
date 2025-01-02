@@ -994,7 +994,7 @@
     <div class="container">
       <h2>Form Validation</h2>
       <form id="validation-form">
-        <input type="date"  min="2018-01-01" max="2018-08-29"/>
+        <!-- <input type="date"  min="2018-01-01" max="2018-08-29"/>
         <sgds-file-upload required multiple hinttext="test" name="fileuploadtest" hasFeedback>
           File upload
           <sgds-icon slot="icon" size="md" name="placeholder"></sgds-icon>
@@ -1023,13 +1023,13 @@
         </sgds-radio-group>
         <sgds-textarea minlength="3" required hasFeedback resize="auto">
           <sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
-        </sgds-textarea>
-        <sgds-datepicker required></sgds-datepicker>
-        <sgds-datepicker required mindate="2024-01-02T12:00:00.000Z"
-        maxdate="2024-12-30T12:00:00.000Z"></sgds-datepicker>
-        <sgds-datepicker required mode="range"></sgds-datepicker>
+        </sgds-textarea> -->
+        <!-- <sgds-datepicker required name="datepicker-hi"></sgds-datepicker> -->
+         <sgds-datepicker required mindate="2024-01-02T12:00:00.000Z" displayDate="2024-01-02T12:00:00.000Z"
+        maxdate="2024-12-30T12:00:00.000Z" name="datepicker-hi"></sgds-datepicker>
+        <!--<sgds-datepicker required mode="range"></sgds-datepicker>
         <sgds-datepicker required mode="range" mindate="2024-01-02T12:00:00.000Z"
-        maxdate="2024-12-30T12:00:00.000Z"></sgds-datepicker>
+        maxdate="2024-12-30T12:00:00.000Z"></sgds-datepicker> -->
         <sgds-button type="submit" id="submit">Submit</sgds-button>
         <sgds-button type="reset" id="submit">Reset</sgds-button>
         <sgds-button type="button" id="disableT">Disabled toggle</sgds-button>
@@ -1613,6 +1613,9 @@
           <sgds-dropdown-item>
             <div href="#">Home</div>
           </sgds-dropdown-item>
+          <sgds-dropdown-item>
+            <sgds-checkbox>Hello</sgds-checkbox>
+          </sgds-dropdown-item>
           <sgds-dropdown-item active>
             <a href="https://google.com" target="_blank"><sgds-icon name="placeholder"></sgds-icon>Option target
               blank</a>
@@ -1970,9 +1973,9 @@
 
       testF.addEventListener("submit", event => {
         console.log("submitting");
-        // event.preventDefault();
+        event.preventDefault();
         const formData = new FormData(event.target);
-        console.log(formData.get("quant"), "qaunt value");
+        console.log(formData.get("datepicker-hi"), "datepicker value");
         console.log("form report", event.target.reportValidity());
       });
       const button = document.querySelector("#submit");

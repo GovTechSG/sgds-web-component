@@ -172,10 +172,10 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     this.addEventListener("sgds-selectyear", this._handleSelectYear);
     this.addEventListener("sgds-selectdates", this._handleSelectDatesAndClose);
     this.addEventListener("sgds-selectdates-input", this._handleSelectDatesInput);
-    // this.addEventListener("sgds-empty-input", this._handleEmptyInput);
     this.addEventListener("keydown", this._handleTab);
     this.addEventListener("sgds-hide", this._handleCloseMenu);
     this.addEventListener("sgds-show", this._handleOpenMenu);
+    this.addEventListener("blur", () => (this._isTouched = true));
     this.initialDisplayDate = this.displayDate || new Date();
     if (this.initialValue && this.initialValue.length > 0) {
       // Validate initialValue against the dateFormat regex
@@ -203,10 +203,6 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
       const cal = await this.calendar;
       cal.focusOnCalendar(input);
     }
-
-    // const shadowInput = await this.datepickerInput.shadowInput;
-    // this._manageInternalsDefault(shadowInput);
-    // this.datepickerInput.setValidity(shadowInput.validity, shadowInput.validationMessage, shadowInput);
   }
 
   /** @internal */
@@ -243,7 +239,14 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
   @watch("value")
   _handleValueChange() {
     this.emit("sgds-change-date");
-    // this._setInternalFormValue(this.value);
+  }
+
+  /** @internal */
+  @watch("_isTouched", { waitUntilFirstUpdate: true })
+  _handleIsTouched() {
+    if (this._isTouched && this.required && this.value === "") {
+      this.invalid = true;
+    }
   }
 
   private async _handleCloseMenu() {
@@ -281,7 +284,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
           this.value = `${formatDate(startDate)} - ${formatDate(endDate)}`;
         }
         if (startDate && !endDate) {
-          this.value = `${formatDate(startDate)} - ${this.dateFormat.toLowerCase()}`;
+          this.value = `${formatDate(startDate)} - ${this.dateFormat}`;
         }
         break;
       }
@@ -313,8 +316,8 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
   private get _shadowInput() {
     return this.datepickerInput.shadowRoot.querySelector("input");
   }
-  private _handleSelectDatesAndClose(event: CustomEvent<Date[]>) {
-    this._handleSelectDates(event.detail);
+  private async _handleSelectDatesAndClose(event: CustomEvent<Date[]>) {
+    await this._handleSelectDates(event.detail);
 
     if (this.mode === "range" && this.selectedDateRange.length === 2) {
       this.hideMenu();
@@ -347,10 +350,9 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     this.selectedDateRange = [];
     this.displayDate = this.initialDisplayDate;
 
-    // this._mixinValidate(this.datepickerInput)
     this._manageInternalsBadInput();
   }
-  private async _handleButtonResetClick() {
+  private async _resetDatepicker() {
     this.displayDate = this.initialDisplayDate;
     this.selectedDateRange = [];
     this.value = "";
@@ -361,27 +363,8 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     await input.applyInputMask();
 
     this._mixinResetValidity(input);
-    // this._manageInternalsRequired();
   }
 
-  // private async _handleEmptyInput() {
-  //   // this._manageInternalsRequired();
-  // }
-
-  // private _manageInternalsRequired() {
-  //   this.required
-  //     ? this.datepickerInput.setValidity(
-  //         {
-  //           valueMissing: true
-  //         },
-  //         "Please fill in this field",
-  //         this._shadowInput
-  //       )
-  //     : this.datepickerInput.setValidity({});
-
-  //     // this.invalidFeedback = "Please fill in this field"
-  //     // this.datepickerInput.invalid = true
-  // }
   private _manageInternalsBadInput() {
     this._mixinSetValidity(
       {
@@ -392,28 +375,29 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     );
   }
 
+  /**
+   * Called when a valid date is entered via input or selected by calendar
+   * 1. sets validity state to valid
+   * 2. updates invalid prop
+   * 3. sets the form value of datepicker
+   */
   private _manageInternalsValid() {
-    this._mixinResetValidity(this.datepickerInput);
+    this._mixinSetValidity({});
     this.invalid = this.datepickerInput.invalid = false;
+    this._mixinSetFormValue();
   }
 
-  private _manageInternalsDefault(inputEl: HTMLInputElement) {
-    // this.datepickerInput._mixinValidate(inputEl)
-    // this._mixinValidate(inputEl)
-    // this._mixinCheckValidity()
-    // console.log(inputEl.validationMessage)
-    // this.datepickerInput.setValidity(inputEl.validity, inputEl.validationMessage, inputEl);
+  /**
+   * Handles the form "reset" event
+   */
+  private async _mixinResetFormControl() {
+    this._resetDatepicker();
   }
-
-  // private _setInternalFormValue(value: string) {
-  //   this._internals.setFormValue(value);
-  // }
-
   private async _handleInputMaskChange(e: CustomEvent) {
     this.value = e.detail;
 
-    if (this.value === "dd/mm/yyyy" || this.value === "dd/mm/yyyy - dd/mm/yyyy") {
-      this._handleButtonResetClick();
+    if (this.value === "DD/MM/YYYY" || this.value === "DD/MM/YYYY - DD/MM/YYYY") {
+      this._resetDatepicker();
     }
   }
 
@@ -424,20 +408,18 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
   };
 
   render() {
-    console.log("render  ");
     return html`
       <div>
         <sgds-datepicker-input
           .value=${live(this.value)}
           ?required=${this.required}
           ?disabled=${this.disabled}
-          placeholder=""
+          placeholder=${this.mode === "single" ? "DD/MM/YYYY" : "DD/MM/YYYY - DD/MM/YYYY"}
           ${ref(this.myDropdown)}
           mode=${this.mode}
           invalidFeedback=${ifDefined(this.invalidFeedback ? this.invalidFeedback : this._mixinGetValidationMessage())}
           @sgds-mask-input-change=${this._handleInputMaskChange}
           @sgds-invalid-input=${this._handleInvalidInput}
-          @sgds-blur=${() => (this._isTouched = true)}
           minDate=${this.minDate}
           maxDate=${this.maxDate}
           label=${this.label}

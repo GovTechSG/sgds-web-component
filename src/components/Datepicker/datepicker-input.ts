@@ -34,10 +34,11 @@ export class DatepickerInput extends SgdsInput {
     // this._handleChange = () => null;
     // this._handleInputChange = () => null
   }
-  // connectedCallback(): void {
-  //   super.connectedCallback();
-  //   this.addEventListener("sgds-change", this._validateInput);
-  // }
+  connectedCallback(): void {
+    super.connectedCallback();
+    /** Stop blur event from bubbling from input, as we want blur to happen for entire datepicker */
+    this.addEventListener("blur", e => e.stopPropagation());
+  }
   protected override _handleBlur() {
     this.emit("sgds-blur");
   }
@@ -47,13 +48,7 @@ export class DatepickerInput extends SgdsInput {
     super._mixinHandleChange(e);
     await this._validateInput();
   }
-  /** @internal */
-  @watch("_isTouched", { waitUntilFirstUpdate: true })
-  override _handleIsTouched() {
-    if (this._isTouched && this.required) {
-      this.invalid = true;
-    }
-  }
+
   async firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     this._applyInputMask(this.dateFormat);
@@ -63,12 +58,12 @@ export class DatepickerInput extends SgdsInput {
     const imPattern =
       this.mode === "single" ? DATE_PATTERNS[dateFormat].imPattern : DATE_PATTERNS[dateFormat].imRangePattern;
     const blocks = {
-      d: { mask: IMask.MaskedRange, placeholderChar: "d", from: 0, to: 9, maxLength: 1 },
-      m: { mask: IMask.MaskedRange, placeholderChar: "m", from: 0, to: 9, maxLength: 1 },
-      y: { mask: IMask.MaskedRange, placeholderChar: "y", from: 0, to: 9, maxLength: 1 },
-      D: { mask: IMask.MaskedRange, placeholderChar: "d", from: 0, to: 9, maxLength: 1 },
-      M: { mask: IMask.MaskedRange, placeholderChar: "m", from: 0, to: 9, maxLength: 1 },
-      Y: { mask: IMask.MaskedRange, placeholderChar: "y", from: 0, to: 9, maxLength: 1 }
+      d: { mask: IMask.MaskedRange, placeholderChar: "D", from: 0, to: 9, maxLength: 1 },
+      m: { mask: IMask.MaskedRange, placeholderChar: "M", from: 0, to: 9, maxLength: 1 },
+      y: { mask: IMask.MaskedRange, placeholderChar: "Y", from: 0, to: 9, maxLength: 1 },
+      D: { mask: IMask.MaskedRange, placeholderChar: "D", from: 0, to: 9, maxLength: 1 },
+      M: { mask: IMask.MaskedRange, placeholderChar: "M", from: 0, to: 9, maxLength: 1 },
+      Y: { mask: IMask.MaskedRange, placeholderChar: "Y", from: 0, to: 9, maxLength: 1 }
     };
     const maskOptions = {
       mask: imPattern,
@@ -114,7 +109,7 @@ export class DatepickerInput extends SgdsInput {
   }
   private _validateInput = async () => {
     const dates = this.mask.value.split(" - ");
-    const noEmptyDates = dates.filter(d => d !== this.dateFormat.toLowerCase());
+    const noEmptyDates = dates.filter(d => d !== this.dateFormat);
     const dateArray: Date[] | string[] = noEmptyDates.map(date =>
       setTimeToNoon(parse(date, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date()))
     );
