@@ -18,6 +18,7 @@ import { ViewEnum } from "./types";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { classMap } from "lit/directives/class-map.js";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -144,14 +145,11 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
 
   async connectedCallback() {
     super.connectedCallback();
-    let offset;
-    this.hintText ? (offset = [0, -20]) : (offset = [0, 8]);
-
     this.modifierOpt = [
       {
         name: "offset",
         options: {
-          offset
+          offset: [0, 8]
         }
       }
     ];
@@ -400,13 +398,12 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
 
   render() {
     return html`
-      <div>
+      <div class="datepicker-container">
         <sgds-datepicker-input
           .value=${live(this.value)}
           ?required=${this.required}
           ?disabled=${this.disabled}
           placeholder=${this.mode === "single" ? "DD/MM/YYYY" : "DD/MM/YYYY - DD/MM/YYYY"}
-          ${ref(this.myDropdown)}
           mode=${this.mode}
           invalidFeedback=${ifDefined(this.invalidFeedback ? this.invalidFeedback : this._mixinGetValidationMessage())}
           @sgds-mask-input-change=${this._handleInputMaskChange}
@@ -418,10 +415,15 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
           name=${this.name}
           ?invalid=${this.invalid}
         >
+        </sgds-datepicker-input>
           <sgds-icon-button
+          ${ref(this.myDropdown)}
             role="button"
-            slot="calendar-btn"
-            class="calendar-btn"
+            class=${classMap({
+              "calendar-btn": true, 
+              "with-hint-text": this.hintText || this.invalid,
+              "with-label": this.label,
+            })}
             aria-expanded="${this.menuIsOpen}"
             aria-haspopup="dialog"
             aria-controls=${this.dropdownMenuId}
@@ -432,8 +434,6 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
             name="calendar"
           >
           </sgds-icon-button>
-        </sgds-datepicker-input>
-
         <ul
           id=${this.dropdownMenuId}
           class="sgds datepicker dropdown-menu"

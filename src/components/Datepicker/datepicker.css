@@ -28,3 +28,21 @@ sgds-icon-button{
   --btn-border-radius: 0 var(--sgds-form-border-radius-md) var(--sgds-form-border-radius-md) 0;
 }
 
+.datepicker-container {
+  display: flex;
+}
+
+.calendar-btn:not(.with-hint-text) {
+  align-self: center;
+}
+
+.calendar-btn:not(.with-hint-text).with-label {
+ align-self: end;
+ margin-top: calc(var(--sgds-font-size-2) * var(--sgds-line-height-body) - var(--sgds-line-height-min))
+}
+
+.calendar-btn.with-hint-text.with-label {
+  align-self: center;
+  /* line height of label minus line height of hinttext/feedback */
+  margin-top: calc(var(--sgds-font-size-2) * var(--sgds-line-height-body) - var(--sgds-line-height-min))
+}
