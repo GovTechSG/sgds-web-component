@@ -19,10 +19,10 @@
 </div>
 
 <div>
-<sgds-card class="faq">
-<span slot="card-title">Github Issues</span>
-<p slot="card-text">Head to GitHub to view or open a new issue</p>    
-<a slot="card-link" href="https://github.com/GovTechSG/sgds-web-component/issues" target="_blank">Learn more</a>
-</sgds-card>
+    <sgds-card class="faq">
+        <span slot="title">Github Issues</span>
+        <p slot="description">Head to GitHub to view or open a new issue</p>    
+        <a slot="link" href="https://github.com/GovTechSG/sgds-web-component/issues" target="_blank">Learn more</a>
+    </sgds-card>
 </div>
 </sgds-faq-grid>

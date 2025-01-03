@@ -1,10 +1,45 @@
+:host([orientation="horizontal"]) .card {
+  flex-direction: row;
+}
+
+:host(:not([hideBorder])) .card {
+  border: var(--sgds-border-width-1) solid var(--sgds-default-border-color-muted);
+}
+
+:host([tinted]) .card {
+  background-color: var(--sgds-default-bg-translucent-subtle);
+  border: none;
+}
+
+:host([orientation="horizontal"]) .card-image {
+  width: 40%;
+}
+
+:host([orientation="horizontal"][imagePosition="after"]) .card-image {
+  order: 1;
+}
+
+:host([orientation="vertical"][imageAdjustment="padding around"]) .card-image {
+  padding: var(--sgds-padding-xl) var(--sgds-padding-xl) 0px;
+}
+
+:host([orientation="vertical"][imageAdjustment="padding around"]) slot[name="image"]::slotted(img) {
+  border-radius: calc(var(--sgds-border-radius-md) - var(--sgds-border-width-1));
+}
+
+:host([orientation="vertical"]:not([imageAdjustment="aspect ratio"])) slot[name="image"]::slotted(img) {
+  height: auto;
+}
+
+:host([orientation="vertical"][imageAdjustment="aspect ratio"]) slot[name="image"]::slotted(img) {
+  object-fit: cover;
+}
+
 .card {
   word-wrap: break-word;
   background-clip: border-box;
-  background-color: var(--sgds-body-bg);
-  border:var(--sgds-border-width) solid var(--sgds-border-color-translucent);
-  border-radius: var(--sgds-border-radius);
-  color: var(--sgds-body-color);
+  background-color: var(--sgds-default-bg-surface);
+  border-radius: var(--sgds-border-radius-md);
   display: flex;
   flex-direction: column;
   height: auto;
@@ -13,26 +48,52 @@
   box-shadow: none;
 }
 
-.card-body {
-  color: var(--sgds-body-color);
-  flex: 1 1 auto;
-  padding: var(--sgds-spacer-4);
+.card-image {
+  flex: 1;
 }
-.card-title {
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-gap-lg);
+  flex: 1;
   color: var(--sgds-body-color);
-  margin-bottom: var(--sgds-spacer-2);
+  padding: var(--sgds-padding-xl);
+}
+
+.card-title {
+  --sgds-font-size-5: var(--sgds-font-size-4);
+  --sgds-font-size-6: var(--sgds-font-size-4);
+  --sgds-margin-2-xs: var(--sgds-margin-none);
+  --sgds-font-weight-bold: var(--sgds-font-weight-semibold);
+  color: var(--sgds-body-color);
+  font-size: var(--sgds-font-size-4);
+  font-weight: var(--sgds-font-weight-semibold);
+  margin-bottom: var(--sgds-margin-none);
 }
 
 .card-subtitle,
-.card-text:last-child {
-  margin-bottom: 0;
+.card-text {
+  margin-bottom: var(--sgds-margin-none);
 }
 
-slot[name="card-image"]::slotted(img) {
-  border-top-left-radius: calc(var(--sgds-border-radius) - var(--sgds-border-width));
-  border-top-right-radius: calc(var(--sgds-border-radius) - var(--sgds-border-width));
+slot[name="description"]::slotted(*) {
+  color: var(--sgds-default-color-subtle);
 }
 
-slot[name="card-link"]::slotted(*) {
+slot[name="image"]::slotted(img) {
+  width: 100%;
+  border-top-left-radius: calc(var(--sgds-border-radius-md) - var(--sgds-border-width-1));
+  border-top-right-radius: calc(var(--sgds-border-radius-md) - var(--sgds-border-width-1));
+}
+
+:host([orientation="horizontal"]) slot[name="image"]::slotted(img) {
+  height: 100%;
+  object-fit: cover;
+  border-top-right-radius: var(--sgds-border-radius-none);
+}
+
+slot[name="link"]::slotted(*) {
+  padding-top: var(--sgds-padding-sm);
   font-weight: 700;
 }

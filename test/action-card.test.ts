@@ -11,22 +11,6 @@ describe("<sgds-action-card>", () => {
     expect(slCard?.classList.value).to.contain("sgds");
   });
 
-  it("accepts a bg prop", async () => {
-    const el = await fixture(html`<sgds-action-card></sgds-action-card>`);
-    el?.setAttribute("bgColor", "primary");
-    await elementUpdated(el);
-    const bgColor = el.shadowRoot?.querySelector("div");
-    expect(bgColor?.classList.value).to.contain("bg-primary");
-  });
-
-  it("accepts a text prop", async () => {
-    const el = await fixture(html`<sgds-action-card></sgds-action-card>`);
-    el?.setAttribute("borderColor", "primary");
-    await elementUpdated(el);
-    const borderColor = el.shadowRoot?.querySelector("div");
-    expect(borderColor?.classList.value).to.contain("border-primary");
-  });
-
   it("accepts a border prop", async () => {
     const el = await fixture(html`<sgds-action-card></sgds-action-card>`);
     el?.setAttribute("textColor", "primary");

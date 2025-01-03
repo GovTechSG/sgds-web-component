@@ -110,8 +110,6 @@ export class SgdsActionCard extends CardElement {
         class="sgds card
         ${classMap({
           [`text-${this.textColor}`]: this.textColor,
-          [`bg-${this.bgColor}`]: this.bgColor,
-          [`border-${this.borderColor}`]: this.borderColor,
           ["is-active"]: this.active
         })}
         "
