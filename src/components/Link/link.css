@@ -4,7 +4,7 @@
   height: var(--sgds-dimension-24);
   justify-content: center;
   align-items: center;
-  gap: var(--sgds-gap-xs);
+  gap: var(--sgds-gap-2-xs);
   flex-shrink: 0;
   /* If clash of styles happens from other light dom css on anchor tag, will need to add !important here */
   color: var(--sgds-link-color, --sgds-primary-color); 
