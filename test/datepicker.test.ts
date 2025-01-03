@@ -117,7 +117,7 @@ describe("sgds-datepicker", () => {
     calendarBtnEl?.click();
 
     tdButtonOne?.click();
-    await waitUntil(() => !menuEl?.classList.contains("show"))
+    await waitUntil(() => !menuEl?.classList.contains("show"));
     expect(inputEl?.value).to.contain("01");
 
     expect(menuEl?.classList.contains("show")).to.be.false;
@@ -126,7 +126,7 @@ describe("sgds-datepicker", () => {
     calendarBtnEl?.click();
 
     tdButtonTwo?.click();
-    await waitUntil(() => !menuEl?.classList.contains("show"))
+    await waitUntil(() => !menuEl?.classList.contains("show"));
     expect(inputEl?.value).to.contain("02");
 
     expect(menuEl?.classList.contains("show")).to.be.false;
@@ -813,7 +813,7 @@ describe("calendar year keyboard navigation", async () => {
   };
 
   it("this year will be focused and active", async () => {
-    const thisYear = new Date().getFullYear()
+    const thisYear = new Date().getFullYear();
     const { header, headerBtn, calendar, years } = await starterKit([`29/01/${thisYear}`]);
     const targetYear = years?.[0];
     expect(calendar.shadowRoot?.activeElement === targetYear).to.be.true;
@@ -825,17 +825,20 @@ describe("calendar year keyboard navigation", async () => {
     await calendar.updateComplete;
     await header.updateComplete;
 
-    const prevTwelveYearsStart = thisYear - 12
-    const prevTwelveYearsEnd = thisYear - 1
+    const prevTwelveYearsStart = thisYear - 12;
+    const prevTwelveYearsEnd = thisYear - 1;
     expect(headerBtn.innerText).to.equal(`${prevTwelveYearsStart} - ${prevTwelveYearsEnd}`);
     expect(calendar.shadowRoot?.activeElement === years?.[9]).to.be.true;
     expect(years?.[9].classList.contains("active")).to.be.false;
     expect(years?.[9].textContent).to.include(`${thisYear - 3}`);
   });
   it("the years in range mode will be active", async () => {
-    const thisYear = new Date().getFullYear()
-    const tenYearsLater = thisYear + 10
-    const { header, headerBtn, calendar, years } = await starterKit([`29/03/${thisYear}`, `29/03/${tenYearsLater}`], "range");
+    const thisYear = new Date().getFullYear();
+    const tenYearsLater = thisYear + 10;
+    const { header, headerBtn, calendar, years } = await starterKit(
+      [`29/03/${thisYear}`, `29/03/${tenYearsLater}`],
+      "range"
+    );
     const targetYear = years?.[0];
     expect(calendar.shadowRoot?.activeElement === targetYear).to.be.true;
     years?.forEach((y, i) => {
@@ -853,8 +856,8 @@ describe("calendar year keyboard navigation", async () => {
 
     await calendar.updateComplete;
     await header.updateComplete;
-    const nextTwelveYearsStart = thisYear + 12
-    const nextTwelveYearsEnd = nextTwelveYearsStart + 11
+    const nextTwelveYearsStart = thisYear + 12;
+    const nextTwelveYearsEnd = nextTwelveYearsStart + 11;
     expect(headerBtn.innerText).to.equal(`${nextTwelveYearsStart} - ${nextTwelveYearsEnd}`);
     years?.forEach(y => expect(y.classList.contains("active")).to.be.false);
   });
@@ -1572,6 +1575,37 @@ describe("datepicker in form context", () => {
     const formData = new FormData(el);
     expect(formData.get("myDatepicker")).to.equal("23/03/2020");
   });
+  it("For required, should be invalid when touched and blurred but empty", async () => {
+    const el = await fixture<HTMLFormElement>(
+      html`<form><sgds-datepicker name="myDatepicker" required></sgds-datepicker></form>`
+    );
+    const datepicker = el.querySelector("sgds-datepicker") as SgdsDatepicker;
+    const input = datepicker?.shadowRoot?.querySelector("sgds-datepicker-input")?.shadowRoot?.querySelector("input");
+    expect(datepicker.invalid).to.be.false;
+    input?.focus();
+    input?.blur();
+    await elementUpdated(datepicker);
+    expect(datepicker.invalid).to.be.true;
+  });
+  it("For required, should be invalid when input is emptied and blurred away", async () => {
+    const el = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-datepicker name="myDatepicker" .initialValue=${["23/03/2020"]} required></sgds-datepicker>
+      </form>`
+    );
+    const datepicker = el.querySelector("sgds-datepicker") as SgdsDatepicker;
+    const input = datepicker?.shadowRoot?.querySelector("sgds-datepicker-input")?.shadowRoot?.querySelector("input");
+    expect(datepicker.invalid).to.be.false;
+
+    input?.focus();
+    for (let i = 0; i < 8; i++) {
+      await sendKeys({ press: "Backspace" });
+    }
+    await waitUntil(() => input?.value === "DD/MM/YYYY");
+    input?.blur();
+    await elementUpdated(datepicker);
+    expect(datepicker.invalid).to.be.true;
+  });
 });
 
 describe("datepicker a11y labels", () => {
@@ -1728,7 +1762,7 @@ describe("datepicker a11y labels", () => {
   it("aria-selected=true on selected dates when view=years, mode=range", async () => {
     // 28th March 2024
     const mockDate = new Date(2024, 2, 28);
-    const mockSelectedDate = [new Date(2024-3, 2, 14), new Date(2024, 9, 27)];
+    const mockSelectedDate = [new Date(2024 - 3, 2, 14), new Date(2024, 9, 27)];
     const el = await fixture<DatepickerCalendar>(
       html`<sgds-datepicker-calendar
         .displayDate=${mockDate}

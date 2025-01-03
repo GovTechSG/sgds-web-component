@@ -93,8 +93,6 @@ export class DatepickerCalendar extends SgdsElement {
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("keydown", this._handleKeyPress);
-    /** Stop blur event from bubbling from calendar, as we want blur to happen for entire datepicker */
-    this.addEventListener("blur", e => e.stopPropagation());
   }
 
   updated() {

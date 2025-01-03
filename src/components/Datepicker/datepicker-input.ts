@@ -1,10 +1,9 @@
 import { isAfter, isBefore, isValid, parse } from "date-fns";
 import IMask, { InputMask } from "imask";
-import { html, PropertyValues } from "lit";
+import { html } from "lit";
 import { property, queryAsync } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
-import { watch } from "../../utils/watch";
 import { SgdsInput } from "../Input/sgds-input";
 import datepickerInputStyles from "./datepicker-input.css";
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
@@ -31,17 +30,11 @@ export class DatepickerInput extends SgdsInput {
     super();
     this.type = "text";
     this.hasFeedback = "both";
-    // this._handleChange = () => null;
-    // this._handleInputChange = () => null
+    this._handleBlur = () => null;
   }
-  connectedCallback(): void {
-    super.connectedCallback();
-    /** Stop blur event from bubbling from input, as we want blur to happen for entire datepicker */
-    this.addEventListener("blur", e => e.stopPropagation());
-  }
-  protected override _handleBlur() {
-    this.emit("sgds-blur");
-  }
+  // protected override _handleBlur() {
+  //   this.emit("sgds-blur");
+  // }
   protected override async _handleChange(e: Event) {
     this.value = this.input.value;
     this.emit("sgds-change");

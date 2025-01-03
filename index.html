@@ -994,7 +994,7 @@
     <div class="container">
       <h2>Form Validation</h2>
       <form id="validation-form">
-        <!-- <input type="date"  min="2018-01-01" max="2018-08-29"/>
+        
         <sgds-file-upload required multiple hinttext="test" name="fileuploadtest" hasFeedback>
           File upload
           <sgds-icon slot="icon" size="md" name="placeholder"></sgds-icon>
@@ -1023,9 +1023,10 @@
         </sgds-radio-group>
         <sgds-textarea minlength="3" required hasFeedback resize="auto">
           <sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
-        </sgds-textarea> -->
+        </sgds-textarea>
         <!-- <sgds-datepicker required name="datepicker-hi"></sgds-datepicker> -->
-         <sgds-datepicker id="test-date" required name="datepicker-hi" mode="range" initialValue='["20/01/2025", "20/01/2027"]'></sgds-datepicker>
+         <sgds-datepicker id="test-date" required name="datepicker-hi"  mindate="2024-01-02T12:00:00.000Z"
+         maxdate="2024-12-30T12:00:00.000Z"></sgds-datepicker>
         <!--<sgds-datepicker required mode="range"></sgds-datepicker>
         <sgds-datepicker required mode="range" mindate="2024-01-02T12:00:00.000Z"
         maxdate="2024-12-30T12:00:00.000Z"></sgds-datepicker> -->
