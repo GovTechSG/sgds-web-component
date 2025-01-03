@@ -22,6 +22,14 @@
     }
   }
 
+  a[target="_blank"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--sgds-gap-2-xs);
+  }
+
+  a[target="_blank"]::after,
   ::slotted(a[target="_blank"])::after {
     background-color: currentColor;
     display: inline-block;
