@@ -1,8 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "./app.component";
-import "@govtechsg/sgds-web-component/themes/day.css";
-import "@govtechsg/sgds-web-component";
+// import "@govtechsg/sgds-web-component/themes/day.css";
+// import "@govtechsg/sgds-web-component";
 import { Accordion } from "../components/accordion/accordion.component";
 import { ActionCard } from "../components/actioncard/actioncard.component";
 import { Alert } from "../components/alert/alert.component";

@@ -1,5 +1,5 @@
 @import "./root.css";
-:root.sgds-night-theme {
+:root.sgds-night-theme, .sgds-night-theme {
   color-scheme: only dark;
 
   /* Semantic - Default Colors */
