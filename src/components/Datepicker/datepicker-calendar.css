@@ -28,6 +28,7 @@ button.year.active:not(.selected-ends)
   background-color: var(--sgds-form-primary-bg-translucent);
   border-radius: 0;
 }
+
 td[data-day]:hover:not(.disabled):not(.selected-ends):not(.active),
 button.month:hover:not(.active),
 button.year:hover:not(.active)  {
@@ -37,8 +38,12 @@ button.year:hover:not(.active)  {
 td[data-day]:focus,
 button.month:focus,
 button.year:focus  {
-  box-shadow: var(--sgds-box-shadow-focus);
-  outline: unset;
+  outline: var(--sgds-form-border-radius-sm) solid var(--sgds-blue-400);
+}
+td[data-day].active:not(.selected-ends):focus,
+button.month.active:not(.selected-ends):focus,
+button.year.active:not(.selected-ends):focus {
+  border-radius:  var(--sgds-form-border-radius-sm);
 }
 button.year.active {
   cursor: pointer;
@@ -61,6 +66,7 @@ button.year.active.selected-ends  {
   background-color: var(--sgds-form-primary-bg);
   color: var(--sgds-form-color-on-dark);
 }
+
 td[data-day].disabled {
   opacity: var(--sgds-opacity-50);
   cursor: not-allowed;

@@ -320,7 +320,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
   private async _handleInvalidInput() {
     this.selectedDateRange = [];
     this.displayDate = this.initialDisplayDate;
-    this.invalid = true
+    this.invalid = true;
     this._manageInternalsBadInput();
   }
   private async _handleEmptyInput() {

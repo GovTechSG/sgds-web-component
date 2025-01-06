@@ -93,6 +93,8 @@ export class DatepickerCalendar extends SgdsElement {
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("keydown", this._handleKeyPress);
+    /** Prevent validation from happening when navigating the calendar */
+    this.addEventListener("blur", e => e.stopPropagation());
   }
 
   updated() {
