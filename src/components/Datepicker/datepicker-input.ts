@@ -2,16 +2,16 @@ import { isAfter, isBefore, isValid, parse } from "date-fns";
 import IMask, { InputMask } from "imask";
 import { html } from "lit";
 import { property, queryAsync } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
 import { SgdsInput } from "../Input/sgds-input";
 import datepickerInputStyles from "./datepicker-input.css";
-import { watch } from "../../utils/watch";
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
 export class DatepickerInput extends SgdsInput {
   static styles = [...SgdsInput.styles, datepickerInputStyles];
   /** Date format reflected on input  */
-  @property({ type: String }) dateFormat: DateFormat = "DD/MM/YYYY";
+  private dateFormat = "DD/MM/YYYY";
 
   /** ISO date string to set the lowest allowable date value. e.g. "2016-05-19T12:00:00.000Z" */
   @property({ type: String }) minDate: string;
@@ -30,27 +30,18 @@ export class DatepickerInput extends SgdsInput {
     super();
     this.type = "text";
     this.hasFeedback = "both";
-    // this._handleChange = () => null;
-    // this._handleInputChange = () => null
+    this._handleBlur = () => null;
   }
-  // connectedCallback(): void {
-  //   super.connectedCallback();
-  //   this.addEventListener("sgds-change", this._validateInput);
+  // protected override _handleBlur() {
+  //   this.emit("sgds-blur");
   // }
-
   protected override async _handleChange(e: Event) {
     this.value = this.input.value;
     this.emit("sgds-change");
     super._mixinHandleChange(e);
     await this._validateInput();
   }
-  /** @internal */
-  @watch("_isTouched", { waitUntilFirstUpdate: true })
-  override _handleIsTouched() {
-    if (this._isTouched && this.required) {
-      this.invalid = true;
-    }
-  }
+
   async firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     this._applyInputMask(this.dateFormat);
@@ -60,12 +51,12 @@ export class DatepickerInput extends SgdsInput {
     const imPattern =
       this.mode === "single" ? DATE_PATTERNS[dateFormat].imPattern : DATE_PATTERNS[dateFormat].imRangePattern;
     const blocks = {
-      d: { mask: IMask.MaskedRange, placeholderChar: "d", from: 0, to: 9, maxLength: 1 },
-      m: { mask: IMask.MaskedRange, placeholderChar: "m", from: 0, to: 9, maxLength: 1 },
-      y: { mask: IMask.MaskedRange, placeholderChar: "y", from: 0, to: 9, maxLength: 1 },
-      D: { mask: IMask.MaskedRange, placeholderChar: "d", from: 0, to: 9, maxLength: 1 },
-      M: { mask: IMask.MaskedRange, placeholderChar: "m", from: 0, to: 9, maxLength: 1 },
-      Y: { mask: IMask.MaskedRange, placeholderChar: "y", from: 0, to: 9, maxLength: 1 }
+      d: { mask: IMask.MaskedRange, placeholderChar: "D", from: 0, to: 9, maxLength: 1 },
+      m: { mask: IMask.MaskedRange, placeholderChar: "M", from: 0, to: 9, maxLength: 1 },
+      y: { mask: IMask.MaskedRange, placeholderChar: "Y", from: 0, to: 9, maxLength: 1 },
+      D: { mask: IMask.MaskedRange, placeholderChar: "D", from: 0, to: 9, maxLength: 1 },
+      M: { mask: IMask.MaskedRange, placeholderChar: "M", from: 0, to: 9, maxLength: 1 },
+      Y: { mask: IMask.MaskedRange, placeholderChar: "Y", from: 0, to: 9, maxLength: 1 }
     };
     const maskOptions = {
       mask: imPattern,
@@ -111,7 +102,7 @@ export class DatepickerInput extends SgdsInput {
   }
   private _validateInput = async () => {
     const dates = this.mask.value.split(" - ");
-    const noEmptyDates = dates.filter(d => d !== this.dateFormat.toLowerCase());
+    const noEmptyDates = dates.filter(d => d !== this.dateFormat);
     const dateArray: Date[] | string[] = noEmptyDates.map(date =>
       setTimeToNoon(parse(date, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date()))
     );
@@ -153,15 +144,17 @@ export class DatepickerInput extends SgdsInput {
   }
   render() {
     return html`
-      ${this._renderLabel()} ${this._renderHintText()}
-      <div class="input-container">
-      <div class="input-feedback">
-        ${this._renderInput()}
+      <div
+        class="form-control-container ${classMap({
+          disabled: this.disabled
+        })}"
+      >
+        ${this._renderLabel()}
+        <div class="input-container">
+          ${this._renderInput()}
+          <slot name="calendar-btn"></slot>
+        </div>
         ${this._renderFeedback()}
-        </div>
-        <slot name="calendar-btn"></slot>
-        <slot name="reset-btn"></slot>
-        </div>
       </div>
     `;
   }

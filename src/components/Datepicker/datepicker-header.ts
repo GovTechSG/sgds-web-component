@@ -5,11 +5,20 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { sanitizedNextMonth, sanitizedPreviousMonth } from "../../utils/time";
 import { watch } from "../../utils/watch";
+import SgdsButton from "../Button/sgds-button";
+import SgdsIconButton from "../IconButton/sgds-icon-button";
 import datepickerHeaderStyle from "./datepicker-header.css";
 import { ViewEnum } from "./types";
+import SgdsIcon from "../Icon/sgds-icon";
 
 export class DatepickerHeader extends SgdsElement {
   static styles = [datepickerHeaderStyle];
+
+  static dependencies = {
+    "sgds-icon": SgdsIcon,
+    "sgds-icon-button": SgdsIconButton,
+    "sgds-button": SgdsButton
+  };
 
   /** @internal */
   @property({ attribute: false })
@@ -30,13 +39,21 @@ export class DatepickerHeader extends SgdsElement {
 
   @watch("focusedTabIndex", { waitUntilFirstUpdate: true })
   _handleFocusedTabIndexChange() {
-    if (this.focusedTabIndex < 3) {
-      const buttonToFocus: HTMLButtonElement = this.shadowRoot.querySelector(
-        `button[tabindex="${this.focusedTabIndex}"]`
-      );
-      buttonToFocus.focus();
+    let buttonToFocus: SgdsButton | SgdsIconButton;
+    switch (this.focusedTabIndex) {
+      case 0:
+        buttonToFocus = this.shadowRoot.querySelector("sgds-icon-button[name='arrow-left']");
+        break;
+      case 1:
+        buttonToFocus = this.shadowRoot.querySelector("sgds-button");
+        break;
+      case 2:
+        buttonToFocus = this.shadowRoot.querySelector("sgds-icon-button[name='arrow-right']");
+        break;
+      default:
+        return;
     }
-    return;
+    buttonToFocus.focus();
   }
 
   private _changeView() {
@@ -163,50 +180,34 @@ export class DatepickerHeader extends SgdsElement {
   render() {
     return html`
       <div class="datepicker-header dropdown-header" role="heading">
-        <button
+        <sgds-icon-button
+          name="arrow-left"
+          size="sm"
+          variant="ghost"
           @click="${this.handleClickPrevious}"
-          tabindex="0"
           class=${classMap({ invisible: this._removeCaret() })}
           aria-label=${this._ariaLabelForPrevBtn()}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-chevron-left"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
-            />
-          </svg>
-        </button>
-        <button
+        </sgds-icon-button>
+        <sgds-button
+          fullWidth
+          variant="ghost"
+          size="sm"
           @click=${this._changeView}
           class=${classMap({ disabled: this.view === "years" })}
-          tabindex="1"
           aria-disabled=${this.view === "years" ? "true" : "false"}
           aria-live="polite"
         >
           ${this._renderHeaderTemplate()}
-        </button>
-        <button @click="${this._handleClickNext}" tabindex="2" aria-label=${this._ariaLabelForNextBtn()}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-chevron-right"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-            />
-          </svg>
-        </button>
+        </sgds-button>
+        <sgds-icon-button
+          name="arrow-right"
+          size="sm"
+          variant="ghost"
+          @click="${this._handleClickNext}"
+          aria-label=${this._ariaLabelForNextBtn()}
+        >
+        </sgds-icon-button>
       </div>
     `;
   }

@@ -1,6 +1,7 @@
 .form-text {
   color: var(--sgds-form-color-subtle);
   font-size: var(--sgds-font-size-1);
+  line-height: var(--sgds-line-height-min);
 }
 
 .form-text.disabled {

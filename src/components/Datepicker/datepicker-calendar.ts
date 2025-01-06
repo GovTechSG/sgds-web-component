@@ -213,7 +213,6 @@ export class DatepickerCalendar extends SgdsElement {
 
   private _onClickDay(event: MouseEvent | KeyboardEvent) {
     const { day, date } = (event.composedPath()[0] as HTMLTableCellElement).dataset;
-
     const displayDateClone = new Date(this.displayDate);
     displayDateClone.setDate(parseInt(day));
     /** update new focused date for mouse click */
@@ -392,11 +391,7 @@ export class DatepickerCalendar extends SgdsElement {
           <tr>
             ${DatepickerCalendar.DAY_LABELS.map(
               (label: string, index: number) =>
-                html`
-                  <th key=${index} abbr=${label} scope="col">
-                    <small>${label.slice(0, 3)}</small>
-                  </th>
-                `
+                html` <th key=${index} abbr=${label} scope="col">${label.slice(0, 3)}</th> `
             )}
           </tr>
         </thead>

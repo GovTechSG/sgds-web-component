@@ -2,6 +2,7 @@
   display: flex;
   gap: var(--sgds-form-gap-sm);
   color: var(--sgds-form-danger-color);
+  line-height: var(--sgds-line-height-min);
 
 }
 

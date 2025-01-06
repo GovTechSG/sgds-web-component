@@ -1,3 +1,6 @@
+:host{
+  --input-border-radius: var(--sgds-form-border-radius-md);
+}
 .form-control-container {
   display: flex;
   flex-direction: column;
@@ -15,7 +18,7 @@
   gap: var(--sgds-form-gap-md);
   background-color: var(--sgds-form-bg);
   border: var(--sgds-form-border-width-default) solid var(--sgds-form-border-color);
-  border-radius: var(--sgds-form-border-radius-md);
+  border-radius: var(--input-border-radius);
   padding: 0px var(--sgds-form-padding-x);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   height: var(--sgds-dimension-48);

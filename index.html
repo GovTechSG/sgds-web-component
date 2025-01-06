@@ -755,16 +755,16 @@
       <h2>Datepicker</h2>
       <form id="datepicker-form">
         <sgds-input type="date" hasFeedback required></sgds-input>
-        <sgds-input type="text" label="Label" hinttext="This is a hint text" name="email" inputclasses=""
+        <sgds-input required type="text" label="Label" hinttext="This is a hint text" name="email" inputclasses=""
           invalidfeedback="test" icon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-envelope&quot; viewBox=&quot;0 0 16 16&quot;>
 												<path d=&quot;M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z&quot;/>
 												</svg>" placeholder="Placeholder" required hasFeedback>
         </sgds-input>
-        <!-- <sgds-datepicker mindate="2024-01-02T12:00:00.000Z"
-												maxdate="2024-01-30T12:00:00.000Z"></sgds-datepicker> -->
-        <sgds-button type="submit">Submit</sgds-button>
+        <sgds-datepicker required mindate="2024-01-02T12:00:00.000Z"
+												maxdate="2024-01-30T12:00:00.000Z"></sgds-datepicker>
+        <sgds-button type="submit">Submit TEST DATEPICKER</sgds-button>
       </form>
-      <sgds-datepicker label="Choose a date"></sgds-datepicker>
+      <sgds-datepicker label="Choose a date" hintText="hint text"></sgds-datepicker>
 
       <sgds-datepicker id="lukhei" label="Birthdate" initialValue='["20/01/2024"]' mindate="2024-01-02T12:00:00.000Z"
         maxdate="2024-01-30T12:00:00.000Z">
@@ -984,6 +984,7 @@
     <div class="container">
       <h2>Form Validation</h2>
       <form id="validation-form">
+        
         <sgds-file-upload required multiple hinttext="test" name="fileuploadtest" hasFeedback>
           File upload
           <sgds-icon slot="icon" size="md" name="placeholder"></sgds-icon>
@@ -1013,6 +1014,12 @@
         <sgds-textarea minlength="3" required hasFeedback resize="auto">
           <sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
         </sgds-textarea>
+        <!-- <sgds-datepicker required name="datepicker-hi"></sgds-datepicker> -->
+         <sgds-datepicker id="test-date" required name="datepicker-hi"  mindate="2024-01-02T12:00:00.000Z"
+         maxdate="2024-12-30T12:00:00.000Z"></sgds-datepicker>
+        <!--<sgds-datepicker required mode="range"></sgds-datepicker>
+        <sgds-datepicker required mode="range" mindate="2024-01-02T12:00:00.000Z"
+        maxdate="2024-12-30T12:00:00.000Z"></sgds-datepicker> -->
         <sgds-button type="submit" id="submit">Submit</sgds-button>
         <sgds-button type="reset" id="submit">Reset</sgds-button>
         <sgds-button type="button" id="disableT">Disabled toggle</sgds-button>
@@ -1718,6 +1725,9 @@
           <sgds-dropdown-item>
             <div href="#">Home</div>
           </sgds-dropdown-item>
+          <sgds-dropdown-item>
+            <sgds-checkbox>Hello</sgds-checkbox>
+          </sgds-dropdown-item>
           <sgds-dropdown-item active>
             <a href="https://google.com" target="_blank"><sgds-icon name="placeholder"></sgds-icon>Option target
               blank</a>
@@ -2071,13 +2081,15 @@
         qT.disabled = false;
         // qT.disabled = false;
       });
+      const daticker = document.querySelector("#test-date")
+      daticker.initialValue = ["02/01/2024"]
       const testF = document.querySelector("#validation-form");
 
       testF.addEventListener("submit", event => {
         console.log("submitting");
-        // event.preventDefault();
+        event.preventDefault();
         const formData = new FormData(event.target);
-        console.log(formData.get("quant"), "qaunt value");
+        console.log(formData.get("datepicker-hi"), "datepicker value");
         console.log("form report", event.target.reportValidity());
       });
       const button = document.querySelector("#submit");
