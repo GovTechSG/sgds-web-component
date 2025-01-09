@@ -13,7 +13,7 @@
   gap: var(--sgds-gap-xs);
 }
 
-slot[name="metadata"]::slotted(*) {
+slot[name="subtitle"]::slotted(*) {
   --sgds-margin-2-xs: var(--sgds-margin-none);
   --sgds-margin-xs: var(--sgds-margin-none);
   --sgds-font-size-4: var(--sgds-font-size-1);
