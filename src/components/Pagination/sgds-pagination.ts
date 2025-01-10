@@ -4,6 +4,12 @@ import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
 import { classMap } from "lit/directives/class-map.js";
 import paginationStyle from "./pagination.css";
+import SgdsIconButton from "../IconButton/sgds-icon-button";
+import SgdsButton from "../Button/sgds-button";
+import SgdsIcon from "../Icon/sgds-icon";
+
+export type Navigation = "button" | "icon-button";
+
 /**
  * @summary The Pagination component enables the user to select a specific page from a range of pages
  *
@@ -21,6 +27,12 @@ import paginationStyle from "./pagination.css";
 export class SgdsPagination extends SgdsElement {
   static styles = [...SgdsElement.styles, paginationStyle];
 
+  static dependencies = {
+    "sgds-icon-button": SgdsIconButton,
+    "sgds-button": SgdsButton,
+    "sgds-icon": SgdsIcon
+  };
+
   /** Inserts the length value from a given sets of data objects*/
   @property({ type: Number }) dataLength = 0;
 
@@ -33,11 +45,13 @@ export class SgdsPagination extends SgdsElement {
   /** Sets the page limit to be displayed at any given render. e.g 3, 5, 7, 9 */
   @property({ type: Number }) limit = 3;
 
+  @property({ type: String }) variant: "default" | "number" | "input" | "button" | "description" = "default";
+
   /** Sets the page direction button to contain text and/or icon */
-  @property({ type: String }) directionVariant: directionVariant = "icon-text";
+  @property({ type: String }) navigation: Navigation = "icon-button";
 
   /** Sets the size of all page items. */
-  @property({ type: String }) size: sizeVariant = "sm";
+  @property({ type: String }) size: SizeVariant = "md";
 
   /** Toggles ellipsis buttons to be able to increment/decrement pages based on the ellipsisJump value set. By default, it will be false */
   @property({ type: Boolean }) ellipsisOn = false;
@@ -288,108 +302,123 @@ export class SgdsPagination extends SgdsElement {
   }
 
   /** @internal */
-  private _getLeftChevronSVG() {
-    return html`
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-chevron-left"
-        viewBox="0 0 16 16"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
-        />
-      </svg>
-    `;
-  }
-
-  /** @internal */
-  private _getRightChevronSVG() {
-    return html`
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-chevron-right"
-        viewBox="0 0 16 16"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-        />
-      </svg>
-    `;
-  }
-
-  /** @internal */
   private _renderDirectionButton(
-    directionLabel: string,
-    iconClass: string,
+    directionLabel: "Previous" | "Next",
     clickHandler: (event: MouseEvent) => void,
-    keydownHandler: (event: KeyboardEvent) => void,
-    directionVariant: string
+    keydownHandler: (event: KeyboardEvent) => void
   ): TemplateResult {
-    const isDisabled = iconClass === "left" ? this.currentPage === 1 : this.currentPage === this.pages.length;
-
-    const tabIndex = isDisabled ? -1 : 0;
+    const isDisabled = directionLabel === "Previous" ? this.currentPage === 1 : this.currentPage === this.pages.length;
 
     const keydownListener = (event: KeyboardEvent) => {
       if (!isDisabled && event.key === "Enter") {
         keydownHandler(event);
       }
     };
+    const getNavButton = (direction: "Previous" | "Next") => {
+      const icon = html`<sgds-icon size=${this.size}
+        name=${direction === "Previous" ? "arrow-left" : "arrow-right"}
+        slot=${direction === "Previous" ? "leftIcon" : "rightIcon"}
+      ></sgds-icon>`;
+      return html`
+        <sgds-button
+          size=${this.size}
+          @click=${isDisabled ? undefined : clickHandler}
+          ?disabled=${isDisabled}
+          @keydown=${keydownListener}
+          variant="ghost"
+          >${icon}${direction}</sgds-button
+        >
+      `;
+    };
+    if (this.navigation === "button") {
+      return html`${getNavButton(directionLabel)}`;
+    }
+    if (this.navigation === "icon-button") {
+      return html`${this._getIconButton(directionLabel, clickHandler, isDisabled, keydownListener)}`;
+    }
 
+    return html`${nothing}`;
+  }
+  private _getIconButton(
+    direction: "Previous" | "Next",
+    clickHandler: (e: MouseEvent) => void,
+    isDisabled: boolean,
+    keydownListener: (event: KeyboardEvent) => void
+  ) {
     return html`
-      <li class="page-item ${isDisabled ? "disabled" : ""}" @click=${isDisabled ? undefined : clickHandler}>
-        <span class="page-link" tabindex=${tabIndex} @keydown=${keydownListener}>
-          ${directionVariant === "icon-text"
-            ? html`
-                ${iconClass === "left" ? this._getLeftChevronSVG() : ""} ${directionLabel}
-                ${iconClass === "right" ? this._getRightChevronSVG() : ""}
-              `
-            : directionVariant === "text"
-            ? html`${directionLabel}`
-            : directionVariant === "icon"
-            ? html`${iconClass === "left" ? this._getLeftChevronSVG() : this._getRightChevronSVG()}`
-            : html``}
-        </span>
-      </li>
+      <sgds-icon-button
+        size=${this.size}
+        @click=${isDisabled ? undefined : clickHandler}
+        ?disabled=${isDisabled}
+        @keydown=${keydownListener}
+        variant="ghost"
+        name=${direction === "Previous" ? "arrow-left" : "arrow-right"}
+      ></sgds-icon-button>
+    `;
+  }
+  private _renderDescriptionPagination() {
+    return html`
+      ${this._getIconButton("Previous", this._handlePrevButton, this.currentPage === 1, (e: KeyboardEvent) =>
+        this._handleKeyDown(e, "directionButton", undefined, undefined, true)
+      )}
+      <div class="pagination-description">Page ${this.currentPage} of ${this.pages.length}</div>
+      ${this._getIconButton(
+        "Next",
+        this._handleNextButton,
+        this.currentPage === this.pages.length,
+        (e: KeyboardEvent) => this._handleKeyDown(e, "directionButton", undefined, undefined, true)
+      )}
     `;
   }
 
+  private _renderDefaultPagination() {
+    return html`
+      ${this._renderDirectionButton("Previous", this._handlePrevButton, (e: KeyboardEvent) =>
+        this._handleKeyDown(e, "directionButton", undefined, undefined, true)
+      )}
+      ${this.showFirstPage ? this._renderFirstPage() : nothing}
+      ${this.showFirstPage || this.ellipsisOn ? this._renderFirstEllipsis() : nothing} ${this._renderPgNumbers()}
+      ${this._renderLastEllipsis()} ${this.showLastPage ? this._renderLastPage() : nothing}
+      ${this._renderDirectionButton("Next", this._handleNextButton, (e: KeyboardEvent) =>
+        this._handleKeyDown(e, "directionButton", undefined, undefined, false)
+      )}
+    `;
+  }
+
+  private _renderNumberPagination(){
+    return html`
+    ${this.showFirstPage ? this._renderFirstPage() : nothing}
+    ${this.showFirstPage || this.ellipsisOn ? this._renderFirstEllipsis() : nothing} ${this._renderPgNumbers()}
+    ${this._renderLastEllipsis()} ${this.showLastPage ? this._renderLastPage() : nothing}
+    `
+  }
+
+  private _renderButtonPagination(){
+    return html`
+    ${this._getIconButton("Previous", this._handlePrevButton, this.currentPage === 1, (e: KeyboardEvent) =>
+      this._handleKeyDown(e, "directionButton", undefined, undefined, true)
+    )}
+    ${this._getIconButton(
+      "Next",
+      this._handleNextButton,
+      this.currentPage === this.pages.length,
+      (e: KeyboardEvent) => this._handleKeyDown(e, "directionButton", undefined, undefined, true)
+    )}
+  `;
+  }
   render() {
     return html`
       <nav aria-label="pagination" role="navigation">
-        <ul class="pagination pagination-${this.size} sgds" directionVariant=${this.directionVariant}>
-          ${this._renderDirectionButton(
-            "Previous",
-            "left",
-            this._handlePrevButton,
-            (e: KeyboardEvent) => this._handleKeyDown(e, "directionButton", undefined, undefined, true),
-            this.directionVariant
-          )}
-          ${this.showFirstPage ? this._renderFirstPage() : nothing}
-          ${this.showFirstPage || this.ellipsisOn ? this._renderFirstEllipsis() : nothing} ${this._renderPgNumbers()}
-          ${this._renderLastEllipsis()} ${this.showLastPage ? this._renderLastPage() : nothing}
-          ${this._renderDirectionButton(
-            "Next",
-            "right",
-            this._handleNextButton,
-            (e: KeyboardEvent) => this._handleKeyDown(e, "directionButton", undefined, undefined, false),
-            this.directionVariant
-          )}
+        <ul class="pagination pagination-${this.size} sgds">
+          ${this.variant === "description" ? this._renderDescriptionPagination() : nothing}
+          ${this.variant === "default" ? this._renderDefaultPagination() : nothing}
+          ${this.variant === "number" ? this._renderNumberPagination() : nothing}
+          ${this.variant === "button" ? this._renderButtonPagination() : nothing}
         </ul>
       </nav>
     `;
   }
 }
-
-export type directionVariant = "icon" | "icon-text" | "text";
-
-export type sizeVariant = "sm" | "md";
+export type SizeVariant = "sm" | "md";
 
 export default SgdsPagination;
