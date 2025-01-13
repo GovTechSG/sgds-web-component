@@ -42,7 +42,7 @@ svg {
     transition: none;
   }
 }
-.page-link:hover, .page-link:focus{
+.page-link:not(.ellipsis):hover, .page-link:focus{
   color: var(--sgds-primary-color);
   background-color: var(--sgds-primary-bg-translucent);
   z-index: 2;
@@ -52,15 +52,10 @@ svg {
   outline: 0;
   z-index: 3;
 }
-.page-item {
+.page-item > .page-link:not(.ellipsis) {
   cursor: pointer;
 }
-.page-item.disabled {
-  cursor: not-allowed;
-}
-.page-item:not(:first-child) .page-link {
-  margin-left: -1px;
-}
+
 .page-item.active .page-link {
   z-index: 3;
   color: var(--sgds-default-color-on-dark);

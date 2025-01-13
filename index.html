@@ -1027,21 +1027,32 @@
       </form>
     </div>
     <div class="container">
-      <h3>sample table, elipsis off</h3>
+      <sgds-pagination dataLength="1"></sgds-pagination>
+      <sgds-pagination dataLength="20" itemsPerPage="10" currentPage="1"></sgds-pagination>     
+      <sgds-pagination dataLength="20" itemsPerPage="8" currentPage="1"></sgds-pagination>     
+      <sgds-pagination dataLength="20" itemsPerPage="5" currentPage="4"></sgds-pagination>     
+      <sgds-pagination dataLength="20" itemsPerPage="4" currentPage="4"></sgds-pagination>     
+      <sgds-pagination dataLength="18" itemsPerPage="3" currentPage="4"></sgds-pagination>     
+      <sgds-pagination dataLength="20" itemsPerPage="3" currentPage="4"></sgds-pagination>     
+      <sgds-pagination dataLength="16" itemsPerPage="2"></sgds-pagination>     
+      <sgds-pagination dataLength="18" itemsPerPage="2"></sgds-pagination>     
+      <sgds-pagination dataLength="20" itemsPerPage="2"></sgds-pagination>     
+       <h3>sample table, elipsis off</h3>
       <sgds-table id="tablesample"></sgds-table>
       <sgds-pagination id="samplepage" directionVariant="icon"></sgds-pagination>
       <br><br>
       <h3>ellipsisOn, limit 7, ellipsisJump 3</h3>
       <sgds-table id="tablesample2"></sgds-table>
-      <sgds-pagination id="samplepage2" directionVariant="icon" limit="3" currentPage="3" ellipsisOn></sgds-pagination>
+      <sgds-pagination id="samplepage2" directionVariant="icon" currentPage="3" ellipsisOn></sgds-pagination>
       <h2>Pagination</h2>
       <p>size=sm,variant=default</p>
       <sgds-pagination size="sm" variant="default" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
       <p>size=sm,variant=number</p>
       <sgds-pagination size="sm" variant="number" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
       <p>size=sm,variant=description</p>
-      <sgds-pagination size="sm" variant="description" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <sgds-pagination size="sm" dataLength="10" itemsPerPage="5" variant="description"></sgds-pagination>
       <p>size=sm,variant=button</p>
+      <sgds-pagination size="sm" variant="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
       <sgds-pagination size="sm" variant="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
       <p>size=sm,variant=default</p>
       <sgds-pagination size="sm" variant="default" navigation="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
@@ -1058,30 +1069,6 @@
       <sgds-pagination navigation="icon-button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
       <p>navigation=button</p>
       <sgds-pagination navigation="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
-
-      <p>ellipsisOn=false</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
-      <p>ellipsisOn=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" ellipsisOn></sgds-pagination>
-      <p>ellipsisOn=false, showFirstPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showFirstPage></sgds-pagination>
-      <p>ellipsisOn=false, showFirstPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showFirstPage></sgds-pagination>
-      <p>ellipsisOn=false, showLastPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage></sgds-pagination>
-      <p>ellipsisOn=true, showLastPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage
-        ellipsisOn></sgds-pagination>
-      <p>ellipsisOn=false, showLastPage=true, showFirstPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage
-        showFirstPage></sgds-pagination>
-      <p>ellipsisOn=true, showLastPage=true, showFirstPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage showFirstPage
-        ellipsisOn></sgds-pagination>
-      <p>ellipsisOn=false, showLastPage=true, showFirstPage=true</p>
-      <sgds-pagination dataLength="2" itemsPerPage="1" currentPage="1" showLastPage showFirstPage></sgds-pagination>
-      test
-      <sgds-pagination dataLength="50" currentPage="4" showFirstPage></sgds-pagination>
     </div>
     <div class="container">
       <h2>Button</h2>
