@@ -9,7 +9,10 @@ describe("<sgds-card>", () => {
     assert.shadowDom.equal(
       el,
       `
-        <div class="card">
+        <div
+          class="card"
+          tabindex="-1"
+        >
           <div class="card-image" style="display: none;">
             <slot name="image"></slot>
           </div>
@@ -18,7 +21,7 @@ describe("<sgds-card>", () => {
           </div>
           <div class="card-body">
             <div class="card-header">
-              <slot name="metadata"></slot>
+              <slot name="subtitle"></slot>
               <h3 class="card-title"><slot name="title"></slot></h3>
             </div>
             <p class="card-text">

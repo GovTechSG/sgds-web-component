@@ -46,6 +46,35 @@
   min-width: 0;
   position: relative;
   box-shadow: none;
+  transition: box-shadow 0.3s ease;
+}
+
+a.card {
+  text-decoration: none;
+  color: initial;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}
+
+.card.disabled {
+  opacity: var(--sgds-opacity-50);
+  cursor: not-allowed;
+}
+
+.card:not(.disabled):hover {
+  box-shadow: 0px 0px 1px 0px rgba(14, 14, 14, 0.12), 0px 8px 16px 0px rgba(14, 14, 14, 0.12);
+}
+
+a.card:focus {
+  outline: 0;
+}
+
+a.card:not(.disabled):focus-visible {
+  box-shadow: var(--sgds-box-shadow-focus);
 }
 
 .card-image {
@@ -77,12 +106,23 @@
   margin-bottom: var(--sgds-margin-none);
 }
 
+slot[name="title"]::slotted(a) {
+  --sgds-link-color: var(--sgds-primary-color);
+  --sgds-font-size-2: var(--sgds-font-size-4);
+  --sgds-font-weight-regular: var(--sgds-font-weight-semibold);
+  color: var(--sgds-link-color);
+  font-size: var(--sgds-font-size-4);
+  font-weight: var(--sgds-font-weight-semibold);
+  text-decoration: none !important;
+}
+
 slot[name="description"]::slotted(*) {
   color: var(--sgds-default-color-subtle);
 }
 
 slot[name="image"]::slotted(img) {
   width: 100%;
+  display: block;
   border-top-left-radius: calc(var(--sgds-border-radius-md) - var(--sgds-border-width-1));
   border-top-right-radius: calc(var(--sgds-border-radius-md) - var(--sgds-border-width-1));
 }
@@ -94,6 +134,32 @@ slot[name="image"]::slotted(img) {
 }
 
 slot[name="link"]::slotted(*) {
-  padding-top: var(--sgds-padding-sm);
+  margin-top: var(--sgds-padding-sm);
   font-weight: 700;
+}
+
+slot[name="link"]::slotted(a) {
+  --sgds-link-color: var(--sgds-primary-color);
+  display: inline-flex;
+  gap: var(--sgds-gap-2-xs);
+  color: var(--sgds-link-color);
+  text-decoration: none !important;
+}
+
+slot[name="title"]::slotted(a:hover),
+slot[name="title"]::slotted(a:focus),
+slot[name="link"]::slotted(a:hover),
+slot[name="link"]::slotted(a:focus) {
+  --sgds-link-color-emphasis: var(--sgds-primary-color-emphasis);
+  color: var(--sgds-link-color-emphasis);
+}
+
+slot[name="title"]::slotted(a:focus),
+slot[name="link"]::slotted(a:focus) {
+  outline: 0;
+}
+
+slot[name="title"]::slotted(a:focus-visible),
+slot[name="link"]::slotted(a:focus-visible) {
+  box-shadow: var(--sgds-box-shadow-focus);
 }

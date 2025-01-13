@@ -1291,11 +1291,11 @@
     <div class="container">
       <h2>Card</h2>
       <div class="d-grid">
-        <sgds-card>
+        <sgds-card disabled>
           <img slot="image" alt="img alternate text goes here" width="467" height="312"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
-          <h3 slot="title">Vertical Image Card</h3>
+          <span slot="subtitle">SUBTITLE</span>
+          <span slot="title">Vertical Image Card</span>
           <span slot="description">default vertical card</span>
           <sgds-link slot="link">
             <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
@@ -1304,17 +1304,17 @@
         <sgds-card imageAdjustment="padding around">
           <img slot="image" alt="img alternate text goes here" width="467" height="312"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
-          <h3 slot="title">Vertical Image Card</h3>
+          <span slot="subtitle">SUBTITLE</span>
+          <a href="#" slot="title"><span>Vertical Image Card</span></a>
           <span slot="description">vertical card with image adjustment prop set to padding around</span>
-          <sgds-link slot="link">
-            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
-          </sgds-link>
+          <!-- <sgds-link slot="link"> -->
+            <a href="#" slot="link">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          <!-- </sgds-link> -->
         </sgds-card>
-        <sgds-card imageAdjustment="aspect ratio">
+        <sgds-card imageAdjustment="aspect ratio" stretchedLink>
           <img slot="image" alt="img alternate text goes here" width="467" height="300"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Vertical Image Card</h3>
           <span slot="description">vertical card with image adjustment prop set to aspect ratio</span>
           <sgds-link slot="link">
@@ -1324,17 +1324,17 @@
         <sgds-card orientation="horizontal">
           <img slot="image" alt="img alternate text goes here" width="467" height="312"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Horizontal Image Card</h3>
           <span slot="description">horizontal card with card orientation set to horizontal</span>
-          <sgds-link slot="link">
-            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
-          </sgds-link>
+          <!-- <sgds-link slot="link"> -->
+            <a href="#" slot="link">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          <!-- </sgds-link> -->
         </sgds-card>
         <sgds-card orientation="horizontal" imagePosition="after">
           <img slot="image" alt="img alternate text goes here" width="467" height="312"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Horizontal Image Card</h3>
           <span slot="description">horizontal card with image position set to after</span>
           <sgds-link slot="link">
@@ -1344,7 +1344,7 @@
         <sgds-card hideBorder>
           <img slot="image" alt="img alternate text goes here" width="467" height="312"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Vertical Image Card</h3>
           <span slot="description">vertical card with no border</span>
           <sgds-link slot="link">
@@ -1354,17 +1354,17 @@
         <sgds-card orientation="horizontal" hideBorder>
           <img slot="image" alt="img alternate text goes here" width="467" height="312"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Horizontal Image Card</h3>
           <span slot="description">horizontal card with no border</span>
           <sgds-link slot="link">
             <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
           </sgds-link>
         </sgds-card>
-        <sgds-card tinted>
+        <sgds-card tinted stretchedLink>
           <img slot="image" alt="img alternate text goes here" width="467" height="312"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Vertical Image Card</h3>
           <span slot="description">vertical card with tinted background</span>
           <sgds-link slot="link">
@@ -1374,7 +1374,7 @@
         <sgds-card orientation="horizontal" tinted>
           <img slot="image" alt="img alternate text goes here" width="467" height="312"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Horizontal Image Card</h3>
           <span slot="description">horizontal card with tinted background</span>
           <sgds-link slot="link">
@@ -1383,7 +1383,7 @@
         </sgds-card>
         <sgds-card>
           <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Vertical Icon Card</h3>
           <span slot="description">default vertical card</span>
           <sgds-link slot="link">
@@ -1392,7 +1392,7 @@
         </sgds-card>
         <sgds-card orientation="horizontal">
           <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Horizontal Icon Card</h3>
           <span slot="description">horizontal card with card orientation set to horizontal</span>
           <sgds-link slot="link">
@@ -1401,7 +1401,7 @@
         </sgds-card>
         <sgds-card hideBorder>
           <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Vertical Icon Card</h3>
           <span slot="description">vertical card with no border</span>
           <sgds-link slot="link">
@@ -1410,7 +1410,7 @@
         </sgds-card>
         <sgds-card orientation="horizontal" hideBorder>
           <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Horizontal Icon Card</h3>
           <span slot="description">horizontal card with no border</span>
           <sgds-link slot="link">
@@ -1419,7 +1419,7 @@
         </sgds-card>
         <sgds-card tinted>
           <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Vertical Icon Card</h3>
           <span slot="description">vertical card with tinted background</span>
           <sgds-link slot="link">
@@ -1428,7 +1428,7 @@
         </sgds-card>
         <sgds-card orientation="horizontal" tinted>
           <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Horizontal Icon Card</h3>
           <span slot="description">horizontal card with tinted background</span>
           <sgds-link slot="link">
