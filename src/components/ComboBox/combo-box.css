@@ -8,6 +8,7 @@
   width: 3rem;
   z-index: 4;
 }
+
 .sgds.combobox {
   display: flex;
   flex-wrap: wrap;
@@ -17,15 +18,15 @@
   width: -webkit-fill-available;
   width: -moz-available;
 }
+
 .sgds.combobox .dropdown-toggle {
   width: 100%;
 }
-.sgds.combobox > .dropdown-menu {
-  min-width: 100%;
-}
+
 .form-control-icon {
   bottom: 0;
 }
+
 .combobox-caret {
   color: var(--sgds-form-color-default);
 }
