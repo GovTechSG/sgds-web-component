@@ -14,14 +14,6 @@ export type Navigation = "button" | "icon-button";
  *
  * @event sgds-page-change - Event is emitted when `handleNextButton`, `handlePrevButton`, `handleNextEllipsisButton` and `handlePrevEllipsisButton` was called.
  *
- * @cssproperty --pagination-color - The text color of pagination
- * @cssproperty --pagination-bg - The background color of pagination
- * @cssproperty --pagination-hover-bg - The  background color of pagination in hover state
- * @cssproperty --pagination-active-color - The text color of pagination in active state
- * @cssproperty --pagination-active-bg - The background color of pagination in active state
- * @cssproperty --pagination-disabled-color - The text color of pagination in disabled state
- * @cssproperty --pagination-disabled-bg - The background color of pagination in disabled state
- *
  **/
 export class SgdsPagination extends SgdsElement {
   static styles = [...SgdsElement.styles, paginationStyle];
@@ -209,7 +201,7 @@ export class SgdsPagination extends SgdsElement {
 
   private ellipsisContent = html`
     <span aria-hidden="true">…</span>
-    <span class="visually-hidden">Ellipsis</span>
+    <span class="sr-only" role="text">Ellipsis</span>
   `;
 
   private _renderFirstEllipsis = () => {
