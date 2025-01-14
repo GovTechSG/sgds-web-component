@@ -1,6 +1,8 @@
 import { assert, fixture, expect } from "@open-wc/testing";
 import { html } from "lit";
 import { SgdsIconButton, SgdsPagination } from "../src/components";
+import sinon from "sinon";
+import { sendKeys } from "@web/test-runner-commands";
 import "./sgds-web-component";
 
 describe("variant=default sgds-pagination", () => {
@@ -16,9 +18,9 @@ describe("variant=default sgds-pagination", () => {
       `
       <nav aria-label="pagination" role="navigation">
       <ul class="pagination pagination-md">
-      <sgds-icon-button ariaLabel="Prev" variant="ghost" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
+      <sgds-icon-button ariaLabel="Previous" variant="ghost" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
       <li key="1" class="page-item active">
-          <span class="page-link" tabindex="0">1</span>
+          <span class="page-link"  role="button" aria-current="true" aria-label="Current Page, Page 1" tabindex="0">1</span>
         </li>
       <sgds-icon-button ariaLabel="Next" variant="ghost" size="md" disabled="" name="arrow-right" target="_self"></sgds-icon-button>
       </ul>
@@ -33,12 +35,12 @@ describe("variant=default sgds-pagination", () => {
       `
       <nav aria-label="pagination" role="navigation">
       <ul class="pagination pagination-md">
-      <sgds-icon-button ariaLabel="Prev" variant="ghost" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
+      <sgds-icon-button ariaLabel="Previous" variant="ghost" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
       <li key="1" class="page-item active">
-          <span class="page-link" tabindex="0">1</span>
+          <span class="page-link" tabindex="0" aria-current="true" aria-label="Current Page, Page 1" role="button">1</span>
         </li>
       <li key="2" class="page-item">
-          <span class="page-link" tabindex="0">2</span>
+          <span class="page-link" tabindex="0" aria-current="false" aria-label="Go to Page 2" role="button">2</span>
         </li>
       <sgds-icon-button ariaLabel="Next" variant="ghost" size="md" name="arrow-right" target="_self"></sgds-icon-button>
       </ul>
@@ -55,12 +57,12 @@ describe("variant=default sgds-pagination", () => {
       `
       <nav aria-label="pagination" role="navigation">
       <ul class="pagination pagination-md">
-      <sgds-icon-button ariaLabel="Prev" variant="ghost" size="md"  name="arrow-left" target="_self"></sgds-icon-button>
+      <sgds-icon-button ariaLabel="Previous" variant="ghost" size="md"  name="arrow-left" target="_self"></sgds-icon-button>
       <li key="1" class="page-item">
-          <span class="page-link" tabindex="0">1</span>
+          <span class="page-link" tabindex="0" aria-current="false" aria-label="Go to Page 1" role="button">1</span>
         </li>
       <li key="2" class="page-item active">
-          <span class="page-link" tabindex="0">2</span>
+          <span class="page-link" tabindex="0" aria-current="true" aria-label="Current Page, Page 2" role="button">2</span>
         </li>
       <sgds-icon-button ariaLabel="Next" variant="ghost" size="md" disabled="" name="arrow-right" target="_self"></sgds-icon-button>
       </ul>
@@ -212,6 +214,30 @@ describe("variant=default sgds-pagination", () => {
       expect(el.shadowRoot?.querySelectorAll(".page-link.ellipsis").length).to.equal(1);
     });
   });
+  it("when navigation=button, pagination direction button changes to sgds-button", async () => {
+    const el = await fixture(
+      html` <sgds-pagination dataLength="1"  navigation="button"></sgds-pagination>`
+    );
+    assert.shadowDom.equal(
+      el,
+      `
+      <nav aria-label="pagination" role="navigation">
+      <ul class="pagination pagination-md">
+      <sgds-button ariaLabel="Previous" variant="ghost" size="md" disabled="" target="_self" type="button">
+      <sgds-icon name="arrow-left" size="md" slot="leftIcon"></sgds-icon>Prev
+      </sgds-button>
+      <li key="1" class="page-item active">
+          <span class="page-link" tabindex="0" aria-current="true" aria-label="Current Page, Page 1" role="button">1</span>
+        </li>
+        <sgds-button ariaLabel="Next" variant="ghost" size="md" disabled="" target="_self" type="button">
+      <sgds-icon name="arrow-right" size="md" slot="rightIcon"></sgds-icon>Next
+      </sgds-button>
+      </ul>
+      </nav>
+      `
+    );
+
+  });
 });
 
 describe("variant=number sgds-pagination", () => {
@@ -226,10 +252,10 @@ describe("variant=number sgds-pagination", () => {
       <nav aria-label="pagination" role="navigation">
       <ul class="pagination pagination-md">
       <li key="1" class="page-item active">
-          <span class="page-link" tabindex="0">1</span>
+          <span class="page-link" tabindex="0" aria-current="true" aria-label="Current Page, Page 1" role="button">1</span>
         </li>
       <li key="2" class="page-item">
-          <span class="page-link" tabindex="0">2</span>
+          <span class="page-link" tabindex="0" aria-current="false" aria-label="Go to Page 2" role="button">2</span>
         </li>
       </ul>
       </nav>
@@ -247,25 +273,27 @@ describe("variant=number sgds-pagination", () => {
       <nav aria-label="pagination" role="navigation">
       <ul class="pagination pagination-md">
       <li key="1" class="page-item active">
-          <span class="page-link" tabindex="0">1</span>
+          <span class="page-link" tabindex="0"  aria-label="Current Page, Page 1" aria-current="true" role="button">1</span>
         </li>
       <li key="2" class="page-item">
-          <span class="page-link" tabindex="0">2</span>
+          <span class="page-link" tabindex="0" aria-label="Go to Page 2" aria-current="false" role="button">2</span>
         </li>
       <li key="3" class="page-item">
-          <span class="page-link" tabindex="0">3</span>
+          <span class="page-link" tabindex="0" aria-label="Go to Page 3" aria-current="false" role="button">3</span>
         </li>
       <li key="4" class="page-item">
-          <span class="page-link" tabindex="0">4</span>
+          <span class="page-link" tabindex="0" aria-label="Go to Page 4" aria-current="false" role="button">4</span>
         </li>
       <li key="5" class="page-item">
-          <span class="page-link" tabindex="0">5</span>
+          <span class="page-link" tabindex="0" aria-label="Go to Page 5" aria-current="false" role="button">5</span>
         </li>
       </ul>
       </nav>
       `
     );
   });
+
+
 });
 
 describe("variant=button sgds-pagination", () => {
@@ -279,7 +307,7 @@ describe("variant=button sgds-pagination", () => {
       `
       <nav aria-label="pagination" role="navigation">
       <ul class="pagination pagination-md">
-      <sgds-icon-button ariaLabel="Prev" variant="ghost" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
+      <sgds-icon-button ariaLabel="Previous" variant="ghost" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
       <sgds-icon-button ariaLabel="Next" variant="ghost" size="md" name="arrow-right" target="_self"></sgds-icon-button>
       </ul>
       </nav>
@@ -293,7 +321,7 @@ describe("variant=button sgds-pagination", () => {
     );
 
     const nextButton = el.shadowRoot?.querySelector("sgds-icon-button[ariaLabel='Next']");
-    const prevButton = el.shadowRoot?.querySelector("sgds-icon-button[ariaLabel='Prev']");
+    const prevButton = el.shadowRoot?.querySelector("sgds-icon-button[ariaLabel='Previous']");
     expect(nextButton).to.have.attribute("disabled");
     expect(prevButton).not.to.have.attribute("disabled");
   });
@@ -309,7 +337,7 @@ describe("variant=description sgds-pagination", () => {
       `
       <nav aria-label="pagination" role="navigation">
       <ul class="pagination pagination-md">
-      <sgds-icon-button ariaLabel="Prev" variant="ghost" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
+      <sgds-icon-button ariaLabel="Previous" variant="ghost" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
       <div class="pagination-description">Page 1 of 5</div>
       <sgds-icon-button ariaLabel="Next" variant="ghost" size="md" name="arrow-right" target="_self"></sgds-icon-button>
       </ul>
@@ -324,7 +352,7 @@ describe("variant=description sgds-pagination", () => {
     );
 
     const nextButton = el.shadowRoot?.querySelector("sgds-icon-button[ariaLabel='Next']") as SgdsIconButton;
-    const prevButton = el.shadowRoot?.querySelector("sgds-icon-button[ariaLabel='Prev']") as SgdsIconButton;
+    const prevButton = el.shadowRoot?.querySelector("sgds-icon-button[ariaLabel='Previous']") as SgdsIconButton;
     nextButton.click();
     nextButton.click();
 
@@ -334,5 +362,78 @@ describe("variant=description sgds-pagination", () => {
     prevButton.click();
     await el.updateComplete;
     expect(el.shadowRoot?.querySelector(".pagination-description")?.textContent).to.contain("Page 2 of 5");
+  });
+
+  it("keyboard enter will simulate a click behaviour on the pages", async () => {
+    const el = (await fixture(
+      html`<sgds-pagination dataLength="40" limit="3" itemsPerPage="5" currentPage="1"></sgds-pagination> `
+    )) as SgdsPagination;
+
+    const pagesHandler = sinon.spy();
+    el.addEventListener("sgds-page-change", pagesHandler);
+
+    const pageOne = el.shadowRoot?.querySelectorAll("li")[0];
+    const pageOneLink = el.shadowRoot?.querySelectorAll("li")[0].querySelector("span");
+    const pageTwo = el.shadowRoot?.querySelectorAll("li")[1];
+    const pageTwoLink = el.shadowRoot?.querySelectorAll("li")[1].querySelector("span");
+
+    expect(pageOne?.classList.value).to.contain("active");
+    expect(pageTwo?.classList.value).to.not.contain("active");
+    expect(pageOneLink?.getAttribute("tabindex")).to.equal("0"); //pages li will maintain tab index 0 regardless of active
+    expect(pageTwoLink?.getAttribute("tabindex")).to.equal("0");
+
+    await sendKeys({ press: "Tab" });
+    await sendKeys({ press: "Tab" });
+    await sendKeys({ press: "Enter" });
+
+    await el.updateComplete;
+
+    expect(el.shadowRoot?.querySelectorAll("li")[2]?.classList.value).to.not.contain("active");
+    expect(el.shadowRoot?.querySelectorAll("li")[1]?.classList.value).to.contain("active");
+
+    expect(pagesHandler).to.be.calledOnce;
+  });
+  it("keyboard enter on direction buttons will simulate a click behaviour on the pages", async () => {
+    const el = (await fixture(
+      html`<sgds-pagination dataLength="40" itemsPerPage="5" currentPage="1"></sgds-pagination> `
+    )) as SgdsPagination;
+
+    const pagesHandler = sinon.spy();
+    el.addEventListener("sgds-page-change", pagesHandler);
+
+    const nextBtn = el.shadowRoot?.querySelectorAll("sgds-icon-button")[1];
+    nextBtn?.focus()
+    await sendKeys({ press: "Enter" });
+
+    await el.updateComplete
+    expect(el.shadowRoot?.querySelector(".page-item.active")?.textContent?.trim()).to.equal("2")
+    
+    const prevBtn = el.shadowRoot?.querySelectorAll("sgds-icon-button")[0];
+    prevBtn?.focus()
+    await sendKeys({ press: "Enter" });
+
+    await el.updateComplete
+    expect(el.shadowRoot?.querySelector(".page-item.active")?.textContent?.trim()).to.equal("1")
+
+  });
+  it("clicking a page should add the active class to the respective li", async () => {
+    const el = (await fixture(
+      html` <sgds-pagination limit="3" itemsPerPage="1" dataLength="40" currentPage="1"></sgds-pagination> `
+    )) as SgdsPagination;
+
+    const pagesHandler = sinon.spy();
+    el.addEventListener("sgds-page-change", pagesHandler);
+    const pageOne = el.shadowRoot?.querySelectorAll("li")[0];
+    const pageTwo = el.shadowRoot?.querySelectorAll("li")[1];
+
+    expect(pageOne?.classList.value).to.contain("active");
+
+    pageTwo?.querySelector("span")?.click();
+    await el.updateComplete;
+
+    expect(pageOne?.classList.value).to.not.contain("active");
+    expect(pageTwo?.classList.value).to.contain("active");
+
+    expect(pagesHandler).to.be.calledOnce;
   });
 });

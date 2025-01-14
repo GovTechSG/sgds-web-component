@@ -134,7 +134,10 @@ export class SgdsPagination extends SgdsElement {
     return html`
       <li key=${1} class="page-item ${this.currentPage === 1 ? "active" : ""}">
         <span
+          role="button"
           class="page-link"
+          aria-label=${this.currentPage === 1 ? `Current Page, Page 1` : "Go to Page 1"}
+          aria-current="${this.currentPage === 1}"
           tabindex="0"
           @click=${this._handlePageClick}
           @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "pageNumber", 1)}
@@ -191,8 +194,11 @@ export class SgdsPagination extends SgdsElement {
       number => html`
         <li key=${number} class="page-item ${this.currentPage === number ? "active" : ""}">
           <span
+            role="button"
             class="page-link"
             tabindex="0"
+            aria-label=${this.currentPage === number ? `Current Page, Page ${number}` : `Go to Page ${number}`}
+            aria-current="${this.currentPage === number}"
             @click=${this._handlePageClick}
             @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "pageNumber", number)}
             >${number}</span
@@ -245,7 +251,12 @@ export class SgdsPagination extends SgdsElement {
     return html`
       <li key=${this.pages.length} class="page-item ${this.currentPage === this.pages.length ? "active" : ""}">
         <span
+          role="button"
           class="page-link"
+          aria-label=${this.currentPage === this.pages.length
+            ? `Current Page, Page ${this.pages.length}`
+            : `Go to Page ${this.pages.length}`}
+          aria-current="${this.currentPage === this.pages.length}"
           tabindex="0"
           @click=${this._handlePageClick}
           @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "pageNumber", this.pages.length)}
@@ -257,16 +268,10 @@ export class SgdsPagination extends SgdsElement {
 
   private _renderDirectionButton(
     directionLabel: "Prev" | "Next",
-    clickHandler: (event: MouseEvent) => void,
-    keydownHandler: (event: KeyboardEvent) => void
+    clickHandler: (event: MouseEvent) => void
   ): TemplateResult {
     const isDisabled = directionLabel === "Prev" ? this.currentPage === 1 : this.currentPage === this.pages.length;
 
-    const keydownListener = (event: KeyboardEvent) => {
-      if (!isDisabled && event.key === "Enter") {
-        keydownHandler(event);
-      }
-    };
     const getNavButton = (direction: "Prev" | "Next") => {
       const icon = html`<sgds-icon
         size=${this.size}
@@ -275,10 +280,10 @@ export class SgdsPagination extends SgdsElement {
       ></sgds-icon>`;
       return html`
         <sgds-button
+          ariaLabel=${direction === "Prev" ? "Previous" : "Next"}
           size=${this.size}
           @click=${isDisabled ? undefined : clickHandler}
           ?disabled=${isDisabled}
-          @keydown=${keydownListener}
           variant="ghost"
           >${icon}${direction}</sgds-button
         >
@@ -288,24 +293,18 @@ export class SgdsPagination extends SgdsElement {
       return html`${getNavButton(directionLabel)}`;
     }
     if (this.navigation === "icon-button") {
-      return html`${this._getIconButton(directionLabel, clickHandler, isDisabled, keydownListener)}`;
+      return html`${this._getIconButton(directionLabel, clickHandler, isDisabled)}`;
     }
 
     return html`${nothing}`;
   }
-  private _getIconButton(
-    direction: "Prev" | "Next",
-    clickHandler: (e: MouseEvent) => void,
-    isDisabled: boolean,
-    keydownListener: (event: KeyboardEvent) => void
-  ) {
+  private _getIconButton(direction: "Prev" | "Next", clickHandler: (e: MouseEvent) => void, isDisabled: boolean) {
     return html`
       <sgds-icon-button
-        ariaLabel=${direction}
+        ariaLabel=${direction === "Prev" ? "Previous" : "Next"}
         size=${this.size}
         @click=${isDisabled ? undefined : clickHandler}
         ?disabled=${isDisabled}
-        @keydown=${keydownListener}
         variant="ghost"
         name=${direction === "Prev" ? "arrow-left" : "arrow-right"}
       ></sgds-icon-button>
@@ -313,29 +312,18 @@ export class SgdsPagination extends SgdsElement {
   }
   private _renderDescriptionPagination() {
     return html`
-      ${this._getIconButton("Prev", this._handlePrevButton, this.currentPage === 1, (e: KeyboardEvent) =>
-        this._handleKeyDown(e, "directionButton", undefined, true)
-      )}
+      ${this._getIconButton("Prev", this._handlePrevButton, this.currentPage === 1)}
       <div class="pagination-description">Page ${this.currentPage} of ${this.pages.length}</div>
-      ${this._getIconButton(
-        "Next",
-        this._handleNextButton,
-        this.currentPage === this.pages.length,
-        (e: KeyboardEvent) => this._handleKeyDown(e, "directionButton", undefined, false)
-      )}
+      ${this._getIconButton("Next", this._handleNextButton, this.currentPage === this.pages.length)}
     `;
   }
 
   private _renderDefaultPagination() {
     return html`
-      ${this._renderDirectionButton("Prev", this._handlePrevButton, (e: KeyboardEvent) =>
-        this._handleKeyDown(e, "directionButton", undefined, true)
-      )}
-      ${this._renderFirstPage()} ${this._renderFirstEllipsis()} ${this._renderPgNumbers(this._getPageNumbers())}
-      ${this._renderLastEllipsis()} ${this.pages.length <= 1 ? nothing : this._renderLastPage()}
-      ${this._renderDirectionButton("Next", this._handleNextButton, (e: KeyboardEvent) =>
-        this._handleKeyDown(e, "directionButton", undefined, false)
-      )}
+      ${this._renderDirectionButton("Prev", this._handlePrevButton)} ${this._renderFirstPage()}
+      ${this._renderFirstEllipsis()} ${this._renderPgNumbers(this._getPageNumbers())} ${this._renderLastEllipsis()}
+      ${this.pages.length <= 1 ? nothing : this._renderLastPage()}
+      ${this._renderDirectionButton("Next", this._handleNextButton)}
     `;
   }
 
@@ -345,15 +333,8 @@ export class SgdsPagination extends SgdsElement {
 
   private _renderButtonPagination() {
     return html`
-      ${this._getIconButton("Prev", this._handlePrevButton, this.currentPage === 1, (e: KeyboardEvent) =>
-        this._handleKeyDown(e, "directionButton", undefined, true)
-      )}
-      ${this._getIconButton(
-        "Next",
-        this._handleNextButton,
-        this.currentPage === this.pages.length,
-        (e: KeyboardEvent) => this._handleKeyDown(e, "directionButton", undefined, false)
-      )}
+      ${this._getIconButton("Prev", this._handlePrevButton, this.currentPage === 1)}
+      ${this._getIconButton("Next", this._handleNextButton, this.currentPage === this.pages.length)}
     `;
   }
   render() {
