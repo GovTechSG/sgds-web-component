@@ -1,13 +1,16 @@
-.datepicker-body{
+.datepicker-body {
   color: var(--sgds-form-color-default);
+  display: flex;
+  justify-content: center;
 }
 
 table {
   border-collapse: collapse;
   text-align: center;
 }
-.sgds.monthpicker,
-.sgds.yearpicker {
+
+.monthpicker,
+.yearpicker {
   display: grid;
   grid-template-columns: repeat(3, 6rem);
   grid-template-rows: repeat(4, 2.5rem);
@@ -17,9 +20,12 @@ button.month,
 button.year {
   padding: 0;
   border: 0;
+  line-height: var(--sgds-line-height-min);
   background-color: transparent;
   border-radius: var(--sgds-form-border-radius-sm);
+  position: relative;
 }
+
 td[data-day].active:not(.selected-ends),
 button.month.active:not(.selected-ends),
 button.year.active:not(.selected-ends)
@@ -31,20 +37,29 @@ button.year.active:not(.selected-ends)
 
 td[data-day]:hover:not(.disabled):not(.selected-ends):not(.active),
 button.month:hover:not(.active),
-button.year:hover:not(.active)  {
+button.year:hover:not(.active) {
   cursor: pointer;
   background-color: var(--sgds-form-bg-translucent);
 }
+
+td[data-day]:focus:not(.disabled):not(.selected-ends):not(.active),
+button.month:focus:not(.active),
+button.year:focus:not(.active) {
+  background-color: var(--sgds-form-bg-translucent);
+}
+
 td[data-day]:focus,
 button.month:focus,
 button.year:focus  {
   outline: var(--sgds-form-border-radius-sm) solid var(--sgds-blue-400);
 }
+
 td[data-day].active:not(.selected-ends):focus,
 button.month.active:not(.selected-ends):focus,
 button.year.active:not(.selected-ends):focus {
   border-radius:  var(--sgds-form-border-radius-sm);
 }
+
 button.year.active {
   cursor: pointer;
   background-color: var(--sgds-form-primary-bg-translucent);
@@ -54,39 +69,62 @@ td, th {
   width: var(--sgds-form-width-md);
   height: var(--sgds-form-height-lg);
   padding: 0;
+  line-height: var(--sgds-line-height-min);
   border-radius: var(--sgds-form-border-radius-sm);
+  position: relative;
 }
+
+th {
+  font-weight: var(--sgds-font-weight-semibold);
+}
+
 td[data-day] {
   cursor: pointer;
 }
 
 td[data-day].active.selected-ends,
-button.month.active.selected-ends ,
+button.month.active.selected-ends,
 button.year.active.selected-ends  {
   background-color: var(--sgds-form-primary-bg);
   color: var(--sgds-form-color-on-dark);
+}
+
+td[data-day].active.selected-ends:hover,
+button.month.active.selected-ends:hover,
+button.year.active.selected-ends:hover,
+td[data-day].active.selected-ends:focus,
+button.month.active.selected-ends:focus,
+button.year.active.selected-ends:focus  {
+  background-color: var(--sgds-form-primary-bg-emphasis);
 }
 
 td[data-day].disabled {
   opacity: var(--sgds-opacity-50);
   cursor: not-allowed;
 }
-.today{
+
+.today {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 4px;
 }
-.today::after{
+
+.today::after {
   background-color: var(--sgds-form-primary-bg);
   content: ".";
   line-height: 4px;
+  width: 4px;
   -webkit-mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none"><circle cx="2" cy="2" r="2" fill="%235A42C0"/></svg>');
   mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none"><circle cx="2" cy="2" r="2" fill="%235A42C0"/></svg>');
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
   mask-position: center;
-  
+  position: absolute;
+  bottom: 6px;
+}
+
+.today.active.selected-ends::after {
+  background-color: var(--sgds-form-color-inverse);
 }
