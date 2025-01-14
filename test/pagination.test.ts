@@ -215,9 +215,7 @@ describe("variant=default sgds-pagination", () => {
     });
   });
   it("when navigation=button, pagination direction button changes to sgds-button", async () => {
-    const el = await fixture(
-      html` <sgds-pagination dataLength="1"  navigation="button"></sgds-pagination>`
-    );
+    const el = await fixture(html` <sgds-pagination dataLength="1" navigation="button"></sgds-pagination>`);
     assert.shadowDom.equal(
       el,
       `
@@ -236,7 +234,6 @@ describe("variant=default sgds-pagination", () => {
       </nav>
       `
     );
-
   });
 });
 
@@ -292,8 +289,6 @@ describe("variant=number sgds-pagination", () => {
       `
     );
   });
-
-
 });
 
 describe("variant=button sgds-pagination", () => {
@@ -402,19 +397,18 @@ describe("variant=description sgds-pagination", () => {
     el.addEventListener("sgds-page-change", pagesHandler);
 
     const nextBtn = el.shadowRoot?.querySelectorAll("sgds-icon-button")[1];
-    nextBtn?.focus()
+    nextBtn?.focus();
     await sendKeys({ press: "Enter" });
 
-    await el.updateComplete
-    expect(el.shadowRoot?.querySelector(".page-item.active")?.textContent?.trim()).to.equal("2")
-    
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector(".page-item.active")?.textContent?.trim()).to.equal("2");
+
     const prevBtn = el.shadowRoot?.querySelectorAll("sgds-icon-button")[0];
-    prevBtn?.focus()
+    prevBtn?.focus();
     await sendKeys({ press: "Enter" });
 
-    await el.updateComplete
-    expect(el.shadowRoot?.querySelector(".page-item.active")?.textContent?.trim()).to.equal("1")
-
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector(".page-item.active")?.textContent?.trim()).to.equal("1");
   });
   it("clicking a page should add the active class to the respective li", async () => {
     const el = (await fixture(
