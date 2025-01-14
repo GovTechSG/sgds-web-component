@@ -138,7 +138,7 @@ export class SgdsButton extends ButtonElement {
         aria-label=${ifDefined(this.ariaLabel)}
       >
       <slot name="leftIcon" @slotchange=${this._handleLeftIconSlotchange}></slot>
-      <slot></slot>
+      <span><slot></slot></span>
       <slot name="rightIcon" @slotchange=${this._handleRightIconSlotchange}></slot>
       </${tag}>
     `;
