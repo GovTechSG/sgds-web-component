@@ -32,14 +32,8 @@ interface SgdsComboBoxItemData {
  * @event sgds-input -  Emitted when user input is received and its value changes.
  */
 
-
 export class SgdsComboBox extends DropdownListElement {
-  static styles = [
-    ...DropdownListElement.styles,
-    dropdownStyle,
-    dropdownMenuStyle,
-    comboBoxStyle
-  ];
+  static styles = [...DropdownListElement.styles, dropdownStyle, dropdownMenuStyle, comboBoxStyle];
 
   /** @internal */
   static dependencies = {
@@ -87,13 +81,12 @@ export class SgdsComboBox extends DropdownListElement {
   @property({ type: Boolean, reflect: true }) readonly = false;
 
   /**
-   * IMPORTANT: 
-   * We still expose `.value` externally, but this is now the underlying ID or data 
-   * (e.g. 1, 2, 'abc', ...), not the label that appears in the input box. 
+   * IMPORTANT:
+   * We still expose `.value` externally, but this is now the underlying ID or data
+   * (e.g. 1, 2, 'abc', ...), not the label that appears in the input box.
    */
   @property({ reflect: true })
   value: string | number | string[] = ""; // can also store array if multi-select
-
 
   @state()
   private displayValue = "";
@@ -122,10 +115,7 @@ export class SgdsComboBox extends DropdownListElement {
 
   /** The function used to filter the menu list, given the user's input value. */
   @property()
-  filterFunction: (inputValue: string, item: SgdsComboBoxItemData) => boolean = (
-    inputValue,
-    item
-  ) => {
+  filterFunction: (inputValue: string, item: SgdsComboBoxItemData) => boolean = (inputValue, item) => {
     return item.label.toLowerCase().startsWith(inputValue.toLowerCase());
   };
 
@@ -141,9 +131,7 @@ export class SgdsComboBox extends DropdownListElement {
   @watch("displayValue")
   private _filterMenu() {
     // Filter items based on the typed input
-    this.filteredMenuList = this.menuList.filter(item =>
-      this.filterFunction(this.displayValue, item)
-    );
+    this.filteredMenuList = this.menuList.filter(item => this.filterFunction(this.displayValue, item));
 
     // If using bootstrap's dropdown logic
     if (!this.myDropdown || !this.bsDropdown) return;
@@ -178,9 +166,10 @@ export class SgdsComboBox extends DropdownListElement {
 
     // Now find the actual object in the filtered list
     // fallback to a new object if not found
-    const foundItem =
-      this.filteredMenuList.find(i => i.value.toString() === itemValueAttr)
-      || { label: itemLabel, value: itemValueAttr };
+    const foundItem = this.filteredMenuList.find(i => i.value.toString() === itemValueAttr) || {
+      label: itemLabel,
+      value: itemValueAttr
+    };
 
     if (this.multiSelect) {
       if (isActive) {
@@ -190,9 +179,7 @@ export class SgdsComboBox extends DropdownListElement {
         }
       } else {
         // Remove
-        this.selectedItems = this.selectedItems.filter(
-          i => i.value !== foundItem.value
-        );
+        this.selectedItems = this.selectedItems.filter(i => i.value !== foundItem.value);
       }
       // For multi-select, `this.value` is an array of IDs
       this.value = this.selectedItems.map(i => i.value);
@@ -201,7 +188,7 @@ export class SgdsComboBox extends DropdownListElement {
       if (isActive) {
         this.selectedItems = [foundItem];
 
-        this.value = foundItem.value;        // the underlying ID
+        this.value = foundItem.value; // the underlying ID
       } else {
         // Toggling off empties everything
         this.selectedItems = [];
@@ -216,15 +203,13 @@ export class SgdsComboBox extends DropdownListElement {
 
   private _handleBadgeDismissed(item: SgdsComboBoxItemData) {
     // 1) Remove this item from selectedItems
-    this.selectedItems = this.selectedItems.filter(
-      i => i.value !== item.value
-    );
+    this.selectedItems = this.selectedItems.filter(i => i.value !== item.value);
 
     // 2) Update .value to reflect the new set
     this.value = this.selectedItems.map(i => i.value);
 
-    // 3) (Optional) If you want the dropdown items to reflect that 
-    //    this is no longer active, just ensure your render logic does 
+    // 3) (Optional) If you want the dropdown items to reflect that
+    //    this is no longer active, just ensure your render logic does
     //    `isActive = this.selectedItems.includes(item)` etc.
   }
   private _handleKeyDown(e: KeyboardEvent) {
@@ -244,11 +229,9 @@ export class SgdsComboBox extends DropdownListElement {
     }
   }
 
-
   render() {
     return html`
-      <div class="sgds combobox dropdown" @keydown=${this._handleKeyDown} >
-      
+      <div class="combobox" @keydown=${this._handleKeyDown}>
         <!-- The input -->
         <sgds-input
           class="dropdown-toggle"
@@ -276,7 +259,10 @@ export class SgdsComboBox extends DropdownListElement {
           .prefix=${this.multiSelect
         ? html`
                 ${this.selectedItems.map(
-          item => html`<sgds-badge show dismissible @sgds-hide=${() => this._handleBadgeDismissed(item)}>${item.label}</sgds-badge>`
+          item =>
+            html`<sgds-badge show dismissible @sgds-hide=${() => this._handleBadgeDismissed(item)}
+                      >${item.label}</sgds-badge
+                    >`
         )}
               `
         : null}
@@ -284,12 +270,7 @@ export class SgdsComboBox extends DropdownListElement {
         </sgds-input>
 
         <!-- The dropdown list -->
-        <ul
-          id=${this.dropdownMenuId}
-          class="dropdown-menu"
-          part="menu"
-          tabindex="-1"
-        >
+        <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1">
           ${this.filteredMenuList.map(item => {
           // For both multi-select and single-select, we rely on selectedItems array
           const isActive = this.selectedItems.includes(item);
@@ -311,4 +292,3 @@ export class SgdsComboBox extends DropdownListElement {
 }
 
 export default SgdsComboBox;
-

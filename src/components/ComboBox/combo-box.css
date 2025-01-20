@@ -17,6 +17,15 @@
   position: relative;
   width: -webkit-fill-available;
   width: -moz-available;
+
+}
+
+
+.sgds.combobox .dropdown-menu {
+
+  width: 100%;
+
+
 }
 
 .sgds.combobox .dropdown-toggle {

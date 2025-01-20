@@ -3,14 +3,18 @@ import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import SgdsIcon from "../Icon/sgds-icon";
-import SgdsCheckbox from "../Checkbox/sgds-checkbox"; // <== import your checkbox if needed
+import SgdsCheckbox from "../Checkbox/sgds-checkbox";
+import comboBoxItemStyles from './sgds-combo-box-item.css'; // <== import your checkbox if needed
 
 export class SgdsComboBoxItem extends SgdsElement {
   static dependencies = {
     "sgds-icon": SgdsIcon,
-    "sgds-checkbox": SgdsCheckbox, // <== make sure it's actually declared
+    "sgds-checkbox": SgdsCheckbox // <== make sure it's actually declared
   };
 
+  static styles = [
+    comboBoxItemStyles
+  ];
   /** when true, sets the active stylings */
   @property({ type: Boolean }) active = false;
 
@@ -32,11 +36,13 @@ export class SgdsComboBoxItem extends SgdsElement {
       // Mark it active if desired
       this.active = true;
       // Dispatch the same event name as the checkbox scenario
-      this.dispatchEvent(new CustomEvent("sgds-combo-box-item-select", {
-        detail: { active: this.active },
-        bubbles: true,
-        composed: true
-      }));
+      this.dispatchEvent(
+        new CustomEvent("sgds-combo-box-item-select", {
+          detail: { active: this.active },
+          bubbles: true,
+          composed: true
+        })
+      );
     }
   }
 
@@ -45,14 +51,16 @@ export class SgdsComboBoxItem extends SgdsElement {
     const checkbox = e.target as HTMLInputElement;
     // Update `active` based on the checkbox's checked state
     this.active = checkbox.checked;
-    console.log('checkbox changed');
+    console.log("checkbox changed");
 
     // Optionally, dispatch an event to the parent, so the parent knows this item is selected
-    this.dispatchEvent(new CustomEvent("sgds-combo-box-item-select", {
-      detail: { active: this.active },
-      bubbles: true,
-      composed: true
-    }));
+    this.dispatchEvent(
+      new CustomEvent("sgds-combo-box-item-select", {
+        detail: { active: this.active },
+        bubbles: true,
+        composed: true
+      })
+    );
   }
 
   render() {
@@ -61,7 +69,6 @@ export class SgdsComboBoxItem extends SgdsElement {
       disabled: this.disabled,
       active: this.active,
       checkbox: this.checkbox
-
     };
 
     return html`
@@ -83,6 +90,7 @@ export class SgdsComboBoxItem extends SgdsElement {
               </sgds-checkbox>
             `
         : html`
+            <div class="normal-item-content">
               <!-- Render the normal non-checkbox item -->
               <slot></slot>
               <!-- If active, show the "check" icon -->
@@ -93,6 +101,7 @@ export class SgdsComboBoxItem extends SgdsElement {
                     </div>
                   `
             : nothing}
+            </div>
             `}
       </div>
     `;

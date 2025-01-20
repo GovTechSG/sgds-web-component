@@ -1,0 +1,11 @@
+:host([active]) .dropdown-item {
+    background-color: var(--sgds-form-primary-bg-translucent, rgba(90, 66, 192, 0.1));
+}
+
+.dropdown-item .normal-item-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* push text to left, icon to right */
+    width: 100%;
+}
