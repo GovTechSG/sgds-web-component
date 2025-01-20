@@ -9,10 +9,10 @@ a.nav-link {
   display: block;
   color: inherit;
   font-size: var(--sidenav-link-font-size);
-  padding-top: var(--sidenav-link-padding-y);
-  padding-bottom: var(--sidenav-link-padding-y);
-  padding-left: calc(var(--sidenav-link-padding-y) * 4 + var(--sidenav-item-btn-border-left-width));
-  padding-right: 0;
+  padding-top: var(--sgds-padding-sm);
+  padding-bottom: var(--sgds-padding-sm);
+  /* padding-left: calc(var(--sidenav-link-padding-y) * 4 + var(--sidenav-item-btn-border-left-width));
+  padding-right: 0; */
   text-decoration: none;
 }
 a.nav-link.active,

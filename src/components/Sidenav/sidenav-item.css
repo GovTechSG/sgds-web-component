@@ -5,6 +5,9 @@
   --sidenav-item-icon-title-gap: 1rem;
 }
 
+slot.default::slotted(*) {
+  padding-left: var(--sgds-padding-3-xl);
+}
 .sidenav-btn {
   width: 100%;
   text-align: initial;
@@ -12,10 +15,13 @@
   font-size: var(--sgds-body-font-size);
   border: 0;
   background: 0;
-  padding: var(--sidenav-item-btn-padding-y) var(--sidenav-item-btn-padding-x);
-  border-radius: 0;
+  padding-top: var(--sgds-padding-sm);
+  padding-bottom: var(--sgds-padding-sm);
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: var(--sgds-border-radius-md);
   display: flex;
-  gap: var(--sidenav-item-icon-title-gap);
+  gap: var(--sgds-gap-xs);
   align-items: center;
 
   svg.bi-chevron-down, slot[name="caret-icon"]::slotted(*) {
@@ -27,9 +33,7 @@
 .sidenav-btn.active,
 .sidenav-btn:hover {
   color: var(--sidenav-theme-color);
-  border-left-color: var(--sidenav-theme-color);
   font-weight: 700;
-  border-left: 0.125rem solid;
 }
 .sidenav-btn.disabled {
   opacity: var(--sgds-disabled-opacity);
