@@ -1,7 +1,7 @@
 import "./sgds-web-component";
 import { html } from "lit";
 import { fixture, assert } from "@open-wc/testing";
-import type { SgdsProgressBar } from "../src/components/ProgressBar/sgds-progress-bar";
+import type { SgdsProgressBar } from "../src/components";
 
 describe("<sgds-progress-bar>", () => {
   it("renders with default values", async () => {
