@@ -17,7 +17,7 @@
   flex-direction: column;
   gap: var(--sgds-form-gap-sm);
   overflow: unset;
-
+  width: var(--sgds-dimension-320);
 }
 sgds-datepicker-input {
   flex: 1;

@@ -220,7 +220,7 @@ export class SgdsSidenavItem extends SgdsElement {
       </button>
       <div class="sidenav-body" id="${this.collapseId}">
         <div class="sidenav-list" aria-labelledby="${this.buttonId}">
-          <slot></slot>
+          <slot class="default"></slot>
         </div>
       </div>`;
 

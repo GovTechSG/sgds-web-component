@@ -412,7 +412,7 @@ export class DatepickerCalendar extends SgdsElement {
     const year = this.displayDate.getFullYear();
 
     const monthView = html`
-      <div class="sgds monthpicker">
+      <div class="monthpicker">
         ${DatepickerCalendar.MONTHVIEW_LABELS.map((m, idx) => {
           const isCurrentMonth = idx === TODAY_DATE.getMonth() && year === TODAY_DATE.getFullYear();
           const time = setTimeToNoon(new Date(year, idx)).getTime();

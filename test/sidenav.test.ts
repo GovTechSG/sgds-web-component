@@ -61,7 +61,7 @@ describe("sgds-sidenav-item", () => {
         style="height: 0px;"
         >
          <div class="sidenav-list">
-           <slot>
+           <slot class="default">
            </slot>
          </div>
        </div>

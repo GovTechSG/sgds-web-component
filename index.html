@@ -162,17 +162,20 @@
   <sgds-sidenav class="mt-3" id="test-id">
     <sgds-sidenav-item active>
       <span slot="title">
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-          class="bi bi-0-circle" viewBox="0 0 16 16">
-          <path
-            d="M7.988 12.158c-1.851 0-2.941-1.57-2.941-3.99V7.84c0-2.408 1.101-3.996 2.965-3.996 1.857 0 2.935 1.57 2.935 3.996v.328c0 2.408-1.101 3.99-2.959 3.99ZM8 4.951c-1.008 0-1.629 1.09-1.629 2.895v.31c0 1.81.627 2.895 1.629 2.895s1.623-1.09 1.623-2.895v-.31c0-1.8-.621-2.895-1.623-2.895Z" />
-          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Z" />
-        </svg>
         Title
       </span>
       <sgds-sidenav-link href="#" active>first-test</sgds-sidenav-link>
       <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
       <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
+      <sgds-sidenav-item title="Test title 2">
+        <span slot="title">
+          <sl-icon name="stack"></sl-icon> Title
+        </span>
+        <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
+        <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
+        <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
+  
+      </sgds-sidenav-item>
     </sgds-sidenav-item>
     <sgds-sidenav-item title="Test title 2" disabled>
       <span slot="title">
@@ -1040,37 +1043,48 @@
       </form>
     </div>
     <div class="container">
-      <h3>sample table, elipsis off</h3>
+      <sgds-pagination dataLength="1"></sgds-pagination>
+      <sgds-pagination dataLength="20" itemsPerPage="10" currentPage="1"></sgds-pagination>     
+      <sgds-pagination dataLength="20" itemsPerPage="8" currentPage="1"></sgds-pagination>     
+      <sgds-pagination dataLength="20" itemsPerPage="5" currentPage="4"></sgds-pagination>     
+      <sgds-pagination dataLength="20" itemsPerPage="4" currentPage="4"></sgds-pagination>     
+      <sgds-pagination dataLength="18" itemsPerPage="3" currentPage="4"></sgds-pagination>     
+      <sgds-pagination dataLength="20" itemsPerPage="3" currentPage="4"></sgds-pagination>     
+      <sgds-pagination dataLength="16" itemsPerPage="2"></sgds-pagination>     
+      <sgds-pagination dataLength="18" itemsPerPage="2"></sgds-pagination>     
+      <sgds-pagination dataLength="20" itemsPerPage="2"></sgds-pagination>     
+       <h3>sample table, elipsis off</h3>
       <sgds-table id="tablesample"></sgds-table>
       <sgds-pagination id="samplepage" directionVariant="icon"></sgds-pagination>
       <br><br>
       <h3>ellipsisOn, limit 7, ellipsisJump 3</h3>
       <sgds-table id="tablesample2"></sgds-table>
-      <sgds-pagination id="samplepage2" directionVariant="icon" limit="3" currentPage="3" ellipsisOn></sgds-pagination>
+      <sgds-pagination id="samplepage2" directionVariant="icon" currentPage="3" ellipsisOn></sgds-pagination>
+      <h2>Pagination</h2>
+      <p>size=sm,variant=default</p>
+      <sgds-pagination size="sm" variant="default" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <p>size=sm,variant=number</p>
+      <sgds-pagination size="sm" variant="number" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <p>size=sm,variant=description</p>
+      <sgds-pagination size="sm" dataLength="10" itemsPerPage="5" variant="description"></sgds-pagination>
+      <p>size=sm,variant=button</p>
+      <sgds-pagination size="sm" variant="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <sgds-pagination size="sm" variant="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <p>size=sm,variant=default</p>
+      <sgds-pagination size="sm" variant="default" navigation="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
 
-      <p>ellipsisOn=false</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
-      <p>ellipsisOn=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" ellipsisOn></sgds-pagination>
-      <p>ellipsisOn=false, showFirstPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showFirstPage></sgds-pagination>
-      <p>ellipsisOn=false, showFirstPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showFirstPage></sgds-pagination>
-      <p>ellipsisOn=false, showLastPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage></sgds-pagination>
-      <p>ellipsisOn=true, showLastPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage
-        ellipsisOn></sgds-pagination>
-      <p>ellipsisOn=false, showLastPage=true, showFirstPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage
-        showFirstPage></sgds-pagination>
-      <p>ellipsisOn=true, showLastPage=true, showFirstPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage showFirstPage
-        ellipsisOn></sgds-pagination>
-      <p>ellipsisOn=false, showLastPage=true, showFirstPage=true</p>
-      <sgds-pagination dataLength="2" itemsPerPage="1" currentPage="1" showLastPage showFirstPage></sgds-pagination>
-      test
-      <sgds-pagination dataLength="50" currentPage="4" showFirstPage></sgds-pagination>
+      <p>variant=number</p>
+      <sgds-pagination variant="number" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <p>variant=default</p>
+      <sgds-pagination variant="default" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <p>variant=description</p>
+      <sgds-pagination variant="description" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <p>variant=button</p>
+      <sgds-pagination variant="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <p>navigation=icon-button</p>
+      <sgds-pagination navigation="icon-button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <p>navigation=button</p>
+      <sgds-pagination navigation="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
     </div>
     <div class="container">
       <h2>Button</h2>
@@ -1348,11 +1362,11 @@
     <div class="container">
       <h2>Card</h2>
       <div class="d-grid">
-        <sgds-card>
+        <sgds-card disabled>
           <img slot="image" alt="img alternate text goes here" width="467" height="312"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
-          <h3 slot="title">Vertical Image Card</h3>
+          <span slot="subtitle">SUBTITLE</span>
+          <span slot="title">Vertical Image Card</span>
           <span slot="description">default vertical card</span>
           <sgds-link slot="link">
             <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
@@ -1361,17 +1375,17 @@
         <sgds-card imageAdjustment="padding around">
           <img slot="image" alt="img alternate text goes here" width="467" height="312"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
-          <h3 slot="title">Vertical Image Card</h3>
+          <span slot="subtitle">SUBTITLE</span>
+          <a href="#" slot="title"><span>Vertical Image Card</span></a>
           <span slot="description">vertical card with image adjustment prop set to padding around</span>
-          <sgds-link slot="link">
-            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
-          </sgds-link>
+          <!-- <sgds-link slot="link"> -->
+            <a href="#" slot="link">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          <!-- </sgds-link> -->
         </sgds-card>
-        <sgds-card imageAdjustment="aspect ratio">
+        <sgds-card imageAdjustment="aspect ratio" stretchedLink>
           <img slot="image" alt="img alternate text goes here" width="467" height="300"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Vertical Image Card</h3>
           <span slot="description">vertical card with image adjustment prop set to aspect ratio</span>
           <sgds-link slot="link">
@@ -1381,17 +1395,17 @@
         <sgds-card orientation="horizontal">
           <img slot="image" alt="img alternate text goes here" width="467" height="312"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Horizontal Image Card</h3>
           <span slot="description">horizontal card with card orientation set to horizontal</span>
-          <sgds-link slot="link">
-            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
-          </sgds-link>
+          <!-- <sgds-link slot="link"> -->
+            <a href="#" slot="link">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          <!-- </sgds-link> -->
         </sgds-card>
         <sgds-card orientation="horizontal" imagePosition="after">
           <img slot="image" alt="img alternate text goes here" width="467" height="312"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Horizontal Image Card</h3>
           <span slot="description">horizontal card with image position set to after</span>
           <sgds-link slot="link">
@@ -1401,7 +1415,7 @@
         <sgds-card hideBorder>
           <img slot="image" alt="img alternate text goes here" width="467" height="312"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Vertical Image Card</h3>
           <span slot="description">vertical card with no border</span>
           <sgds-link slot="link">
@@ -1411,17 +1425,17 @@
         <sgds-card orientation="horizontal" hideBorder>
           <img slot="image" alt="img alternate text goes here" width="467" height="312"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Horizontal Image Card</h3>
           <span slot="description">horizontal card with no border</span>
           <sgds-link slot="link">
             <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
           </sgds-link>
         </sgds-card>
-        <sgds-card tinted>
+        <sgds-card tinted stretchedLink>
           <img slot="image" alt="img alternate text goes here" width="467" height="312"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Vertical Image Card</h3>
           <span slot="description">vertical card with tinted background</span>
           <sgds-link slot="link">
@@ -1431,7 +1445,7 @@
         <sgds-card orientation="horizontal" tinted>
           <img slot="image" alt="img alternate text goes here" width="467" height="312"
             src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Horizontal Image Card</h3>
           <span slot="description">horizontal card with tinted background</span>
           <sgds-link slot="link">
@@ -1440,7 +1454,7 @@
         </sgds-card>
         <sgds-card>
           <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Vertical Icon Card</h3>
           <span slot="description">default vertical card</span>
           <sgds-link slot="link">
@@ -1449,7 +1463,7 @@
         </sgds-card>
         <sgds-card orientation="horizontal">
           <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Horizontal Icon Card</h3>
           <span slot="description">horizontal card with card orientation set to horizontal</span>
           <sgds-link slot="link">
@@ -1458,7 +1472,7 @@
         </sgds-card>
         <sgds-card hideBorder>
           <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Vertical Icon Card</h3>
           <span slot="description">vertical card with no border</span>
           <sgds-link slot="link">
@@ -1467,7 +1481,7 @@
         </sgds-card>
         <sgds-card orientation="horizontal" hideBorder>
           <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Horizontal Icon Card</h3>
           <span slot="description">horizontal card with no border</span>
           <sgds-link slot="link">
@@ -1476,7 +1490,7 @@
         </sgds-card>
         <sgds-card tinted>
           <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Vertical Icon Card</h3>
           <span slot="description">vertical card with tinted background</span>
           <sgds-link slot="link">
@@ -1485,7 +1499,7 @@
         </sgds-card>
         <sgds-card orientation="horizontal" tinted>
           <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
-          <span slot="metadata">METADATA</span>
+          <span slot="subtitle">SUBTITLE</span>
           <h3 slot="title">Horizontal Icon Card</h3>
           <span slot="description">horizontal card with tinted background</span>
           <sgds-link slot="link">
