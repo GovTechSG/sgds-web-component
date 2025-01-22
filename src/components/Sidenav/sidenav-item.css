@@ -8,6 +8,10 @@
 slot.default::slotted(*) {
   padding-left: var(--sgds-padding-3-xl);
 }
+
+slot.default::slotted(sgds-sidenav-item){
+  padding-left: var(--sgds-padding-md);
+}
 .sidenav-btn {
   width: 100%;
   text-align: initial;
@@ -15,23 +19,22 @@ slot.default::slotted(*) {
   font-size: var(--sgds-body-font-size);
   border: 0;
   background: 0;
-  padding-top: var(--sgds-padding-sm);
-  padding-bottom: var(--sgds-padding-sm);
-  padding-left: 0;
-  padding-right: 0;
+  padding: var(--sgds-padding-sm);
   border-radius: var(--sgds-border-radius-md);
   display: flex;
   gap: var(--sgds-gap-xs);
   align-items: center;
 
-  svg.bi-chevron-down, slot[name="caret-icon"]::slotted(*) {
+  .caret-icon, slot[name="caret-icon"]::slotted(*) {
     margin-left: auto;
     transition: all 0.3s ease-in-out;
     transform: rotate(180deg);
   }
 }
-.sidenav-btn.active,
 .sidenav-btn:hover {
+  background-color: var(--sgds-default-bg-translucent-subtle);
+}
+.sidenav-btn.active {
   color: var(--sidenav-theme-color);
   font-weight: 700;
 }
@@ -40,7 +43,7 @@ slot.default::slotted(*) {
   cursor: not-allowed;
 }
 .sidenav-btn:not(.active) {
-  svg.bi-chevron-down, slot[name="caret-icon"]::slotted(*) {
+  .caret-icon, slot[name="caret-icon"]::slotted(*) {
     transform: rotate(0deg);
   }
 }

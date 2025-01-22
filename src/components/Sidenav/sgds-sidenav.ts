@@ -52,13 +52,13 @@ export class SgdsSidenav extends SgdsElement {
       // no toggling when there aren't items.
       return;
     }
-    items.forEach(item => {
-      // Covers all elements within sidenav-item
-      if (!event.composedPath().includes(item)) {
-        // Close all the items that didn't dispatch the event.
-        item.active = false;
-      }
-    });
+    // items.forEach(item => {
+    //   // Covers all elements within sidenav-item
+    //   if (!event.composedPath().includes(item)) {
+    //     // Close all the items that didn't dispatch the event.
+    //     item.active = false;
+    //   }
+    // });
   }
 
   render() {

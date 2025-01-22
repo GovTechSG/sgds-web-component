@@ -8,6 +8,7 @@ import { waitForEvent } from "../../utils/event";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import sidenavItemStyle from "./sidenav-item.css";
+import SgdsIcon from "../Icon/sgds-icon";
 
 /**
  *
@@ -30,6 +31,9 @@ import sidenavItemStyle from "./sidenav-item.css";
 
 export class SgdsSidenavItem extends SgdsElement {
   static styles = [...SgdsElement.styles, sidenavItemStyle];
+  static dependencies = {
+    "sgds-icon": SgdsIcon
+  };
 
   @query(".sidenav-body") body: HTMLElement;
   /** @internal */
@@ -203,19 +207,7 @@ export class SgdsSidenavItem extends SgdsElement {
         <slot name="icon"></slot>
         <slot name="title"></slot>
         <slot name="caret-icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-chevron-down"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
-            />
-          </svg>
+          <sgds-icon name="chevron-down" size="lg" class="caret-icon"></sgds-icon>
         </slot>
       </button>
       <div class="sidenav-body" id="${this.collapseId}">
