@@ -804,25 +804,33 @@ describe("calendar year keyboard navigation", async () => {
     return { el, header, headerBtn, prevHeaderBtn, nextHeaderBtn, calendar, years };
   };
 
-  it("the year will be focused and active", async () => {
-    const { header, headerBtn, calendar, years } = await starterKit(["29/01/2024"]);
+  it("this year will be focused and active", async () => {
+    const thisYear = new Date().getFullYear();
+    const { header, headerBtn, calendar, years } = await starterKit([`29/01/${thisYear}`]);
     const targetYear = years?.[0];
     expect(calendar.shadowRoot?.activeElement === targetYear).to.be.true;
     expect(targetYear?.classList.contains("active")).to.be.true;
-    const startYear = 2024;
-    const endYear = 2024 + 11;
+    const startYear = thisYear;
+    const endYear = startYear + 11;
     expect(headerBtn.innerText).to.equal(`${startYear} - ${endYear}`);
     await sendKeys({ press: "ArrowUp" });
     await calendar.updateComplete;
     await header.updateComplete;
 
-    expect(headerBtn.innerText).to.equal("2012 - 2023");
+    const prevTwelveYearsStart = thisYear - 12;
+    const prevTwelveYearsEnd = thisYear - 1;
+    expect(headerBtn.innerText).to.equal(`${prevTwelveYearsStart} - ${prevTwelveYearsEnd}`);
     expect(calendar.shadowRoot?.activeElement === years?.[9]).to.be.true;
     expect(years?.[9].classList.contains("active")).to.be.false;
-    expect(years?.[9].textContent).to.include(`${2024 - 3}`);
+    expect(years?.[9].textContent).to.include(`${thisYear - 3}`);
   });
   it("the years in range mode will be active", async () => {
-    const { header, headerBtn, calendar, years } = await starterKit(["29/03/2024", "29/03/2034"], "range");
+    const thisYear = new Date().getFullYear();
+    const tenYearsLater = thisYear + 10;
+    const { header, headerBtn, calendar, years } = await starterKit(
+      [`29/03/${thisYear}`, `29/03/${tenYearsLater}`],
+      "range"
+    );
     const targetYear = years?.[0];
     expect(calendar.shadowRoot?.activeElement === targetYear).to.be.true;
     years?.forEach((y, i) => {
@@ -840,8 +848,9 @@ describe("calendar year keyboard navigation", async () => {
 
     await calendar.updateComplete;
     await header.updateComplete;
-
-    expect(headerBtn.innerText).to.equal("2036 - 2047");
+    const nextTwelveYearsStart = thisYear + 12;
+    const nextTwelveYearsEnd = nextTwelveYearsStart + 11;
+    expect(headerBtn.innerText).to.equal(`${nextTwelveYearsStart} - ${nextTwelveYearsEnd}`);
     years?.forEach(y => expect(y.classList.contains("active")).to.be.false);
   });
 });
@@ -1405,7 +1414,7 @@ describe("datepicker calendar will not show before 1900", () => {
     expect(header.shadowRoot?.querySelectorAll("button.invisible")).to.exist;
     const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar");
     const disabledButtons = calendar?.shadowRoot?.querySelectorAll("button.year[disabled]");
-    expect(disabledButtons?.length).to.equal(8);
+    expect(disabledButtons?.length).to.equal(7);
     expect(calendar?.shadowRoot?.querySelector("button.year[data-year='1900']")?.hasAttribute("disabled")).to.be.false;
   });
   it("in day view keypress ArrowUp and ArrowLeft when focusedDate is 01/01/1900 will not trigger change to previous year", async () => {
@@ -1713,7 +1722,7 @@ describe("datepicker a11y labels", () => {
   it("aria-selected=true on selected dates when view=years, mode=range", async () => {
     // 28th March 2024
     const mockDate = new Date(2024, 2, 28);
-    const mockSelectedDate = [new Date(2024, 2, 14), new Date(2027, 9, 27)];
+    const mockSelectedDate = [new Date(2024 - 3, 2, 14), new Date(2024, 9, 27)];
     const el = await fixture<DatepickerCalendar>(
       html`<sgds-datepicker-calendar
         .displayDate=${mockDate}
@@ -1725,7 +1734,7 @@ describe("datepicker a11y labels", () => {
       ></sgds-datepicker-calendar>`
     );
     const selectedBtns = el.shadowRoot?.querySelectorAll("button[aria-selected='true']");
-    const selectedCount = 2027 - 2024 + 1;
+    const selectedCount = 4;
     expect(selectedBtns?.length).to.equal(selectedCount);
   });
 

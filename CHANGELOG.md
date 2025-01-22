@@ -1,3 +1,9 @@
+## v2.1.2 (2024-09-30)
+
+### Fix
+
+- **checkbox, radio**: layout of label against input
+
 ## v2.1.1 (2024-09-18)
 
 ### Fix
