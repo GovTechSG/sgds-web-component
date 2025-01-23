@@ -8,19 +8,13 @@ import sidenavStyle from "./sidenav.css";
 /**
  * @summary The side navigation is used to display a list of links to move between pages within a related category.
  * It is used as a secondary form of navigation where the primary navigation is located hierachically above the page frame.
- * Maximum two levels of navigations are allowed.
+ * Maximum three levels of navigations are allowed.
  *
  * @slot default - Default slot for SgdsSidenavItem element.
- *
- * @cssproperty --sidenav-theme-color - overall sidenav theme color
  * @cssproperty --sidenav-sticky-top - set the top value of the sticky sidenav. Defaults to 0rem
  */
 export class SgdsSidenav extends SgdsElement {
   static styles = [...SgdsElement.styles, sidenavStyle];
-
-  /** Allow sidenav items to stay open when another item is opened */
-  @property({ type: Boolean, attribute: true })
-  alwaysOpen = false;
 
   /** Apply position sticky to the sidenav */
   @property({ type: Boolean, attribute: true })
@@ -42,8 +36,8 @@ export class SgdsSidenav extends SgdsElement {
     const isSidenavLink = target.tagName === "SGDS-SIDENAV-LINK";
     // Let the event pass through the DOM so that it can be
     // prevented from the outside if a user so desires.
-    if (this.alwaysOpen || event.defaultPrevented || isSidenavLink) {
-      // No toggling when `alwaysOpen` or the user prevents it.
+    if (event.defaultPrevented || isSidenavLink) {
+      // No toggling when the user prevents it.
       return;
     }
     const items = [...this.items] as SgdsSidenavItem[];
@@ -52,13 +46,6 @@ export class SgdsSidenav extends SgdsElement {
       // no toggling when there aren't items.
       return;
     }
-    // items.forEach(item => {
-    //   // Covers all elements within sidenav-item
-    //   if (!event.composedPath().includes(item)) {
-    //     // Close all the items that didn't dispatch the event.
-    //     item.active = false;
-    //   }
-    // });
   }
 
   render() {

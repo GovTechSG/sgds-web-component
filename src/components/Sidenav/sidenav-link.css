@@ -1,27 +1,47 @@
-:host {
-  --sidenav-link-font-size: var(--sgds-body-font-size);
-  --sidenav-link-padding-x: 1rem;
-  --sidenav-link-padding-y: 0.5rem;
-  --sidenav-link-disabled-color: var(--sgds-disabled-color);
+
+:host([class^="third-level"]) ::slotted(a) {
+  padding-left: calc(var(--sgds-padding-xl) + var(--sgds-padding-3-xl));
 }
 
-a.nav-link {
+::slotted(a) {
   display: block;
-  color: inherit;
-  font-size: var(--sidenav-link-font-size);
+  color: inherit !important;
   padding-top: var(--sgds-padding-sm);
   padding-bottom: var(--sgds-padding-sm);
-  /* padding-left: calc(var(--sidenav-link-padding-y) * 4 + var(--sidenav-item-btn-border-left-width));
-  padding-right: 0; */
-  text-decoration: none;
+  padding-left: var(--sgds-padding-3-xl);
+  padding-right: var(--sgds-padding-sm);
+  border-radius: var(--sgds-border-radius-md);
+  text-decoration: none !important;
 }
-a.nav-link.active,
-a.nav-link:hover {
-  color: var(--sidenav-theme-color);
+:host([active]) ::slotted(a) {
+  color: var(--sgds-primary-color);
+  background-color: var(--sgds-primary-bg-translucent);
 }
 
-a.nav-link.disabled {
-  color: var(--sidenav-link-disabled-color);
+::slotted(a:hover) {
+  background-color: var(--sgds-default-bg-translucent-subtle);
+}
+
+:host([disabled]) ::slotted(a) {
+  opacity: var(--sgds-opacity-50);
   pointer-events: none;
   cursor: not-allowed;
+}
+:host([disabled]) ::slotted(a:focus),
+:host([disabled]) ::slotted(a:focus-visible){
+  outline: 0;
+  box-shadow: none;
+}
+
+ ::slotted(a:focus),
+ ::slotted(a:focus-visible){
+  outline: 0;
+  box-shadow: var(--sgds-box-shadow-focus);
+  background-color: var(--sgds-default-bg-translucent-subtle);
+}
+
+:host([active]) ::slotted(a:focus),
+:host([active]) ::slotted(a:focus-visible) {
+  color: var(--sgds-primary-color);
+  background-color: var(--sgds-primary-bg-translucent);
 }
