@@ -1,5 +1,11 @@
-import SgdsBreadcrumb from "@govtechsg/sgds-web-component/react/breadcrumb/index.js";
 import SgdsBreadcrumbItem from "@govtechsg/sgds-web-component/react/breadcrumb-item/index.js";
+import dynamic from "next/dynamic"
+const SgdsBreadcrumb = dynamic(
+  () => import("@govtechsg/sgds-web-component/react/breadcrumb/index.js"),
+  {
+    ssr: false,
+  }
+) 
 
 export const Breadcrumb = () => {
     return (

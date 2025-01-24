@@ -1,6 +1,5 @@
 import "@govtechsg/sgds-web-component/themes/day.css";
 import { Accordion } from "./components/Accordion";
-import { ActionCard } from "./components/ActionCard";
 import { Alert } from "./components/Alert";
 import { Badge } from "./components/Badge";
 import { Breadcrumb } from "./components/Breadcrumb";
@@ -38,7 +37,6 @@ export default function Home() {
       <Masthead />
       <Mainnav />
       <Accordion />
-      <ActionCard />
       <Alert />
       <Badge />
       <Breadcrumb />
