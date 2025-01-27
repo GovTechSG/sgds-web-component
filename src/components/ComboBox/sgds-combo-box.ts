@@ -12,8 +12,6 @@ import dropdownStyle from "../Dropdown/dropdown.css";
 import dropdownMenuStyle from "../Dropdown/dropdown-menu.css";
 import SgdsIcon from "../Icon/sgds-icon";
 
-type FilterFunction = (inputValue: string, menuItem: SgdsComboBoxItemData) => boolean;
-
 /**
  * Each item in the ComboBox has a label to display
  * and a value (the actual data / ID).
@@ -86,7 +84,7 @@ export class SgdsComboBox extends DropdownListElement {
    * (e.g. 1, 2, 'abc', ...), not the label that appears in the input box.
    */
   @property({ reflect: true })
-  value: string | number | string[] = ""; // can also store array if multi-select
+  value: string | number | (string | number)[] = "";
 
   @state()
   private displayValue = "";
@@ -129,7 +127,7 @@ export class SgdsComboBox extends DropdownListElement {
 
   /** Watch the input's value to dynamically filter items in the dropdown. */
   @watch("displayValue")
-  private _filterMenu() {
+  _filterMenu() {
     // Filter items based on the typed input
     this.filteredMenuList = this.menuList.filter(item => this.filterFunction(this.displayValue, item));
 
@@ -157,15 +155,8 @@ export class SgdsComboBox extends DropdownListElement {
     const itemEl = e.target as SgdsComboBoxItem;
     const isActive = e.detail.active;
 
-    // We'll read the label from textContent or you might store it in a property.
     const itemLabel = itemEl.textContent?.trim() ?? "";
-
-    // You can store the itemValue in an attribute, or find it from your filtered list:
-    // e.g. itemEl.getAttribute('value') or a custom property
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
-
-    // Now find the actual object in the filtered list
-    // fallback to a new object if not found
     const foundItem = this.filteredMenuList.find(i => i.value.toString() === itemValueAttr) || {
       label: itemLabel,
       value: itemValueAttr
@@ -173,7 +164,6 @@ export class SgdsComboBox extends DropdownListElement {
 
     if (this.multiSelect) {
       if (isActive) {
-        // Add if not present
         if (!this.selectedItems.some(i => i.value === foundItem.value)) {
           this.selectedItems = [...this.selectedItems, foundItem];
         }
@@ -181,16 +171,15 @@ export class SgdsComboBox extends DropdownListElement {
         // Remove
         this.selectedItems = this.selectedItems.filter(i => i.value !== foundItem.value);
       }
-      // For multi-select, `this.value` is an array of IDs
+
       this.value = this.selectedItems.map(i => i.value);
     } else {
       // Single-select
       if (isActive) {
         this.selectedItems = [foundItem];
 
-        this.value = foundItem.value; // the underlying ID
+        this.value = foundItem.value;
       } else {
-        // Toggling off empties everything
         this.selectedItems = [];
         this.displayValue = "";
         this.value = "";
@@ -202,29 +191,18 @@ export class SgdsComboBox extends DropdownListElement {
   }
 
   private _handleBadgeDismissed(item: SgdsComboBoxItemData) {
-    // 1) Remove this item from selectedItems
     this.selectedItems = this.selectedItems.filter(i => i.value !== item.value);
 
-    // 2) Update .value to reflect the new set
     this.value = this.selectedItems.map(i => i.value);
-
-    // 3) (Optional) If you want the dropdown items to reflect that
-    //    this is no longer active, just ensure your render logic does
-    //    `isActive = this.selectedItems.includes(item)` etc.
   }
   private _handleKeyDown(e: KeyboardEvent) {
     // Only do this in multi-select mode
     if (!this.multiSelect) return;
 
-    // Check for Backspace
     if (e.key === "Backspace") {
-      // If displayValue is empty and there's a badge to remove
       if (this.displayValue.trim() === "" && this.selectedItems.length > 0) {
-        // Remove the last item
         this.selectedItems = this.selectedItems.slice(0, -1);
-        // Update .value
         this.value = this.selectedItems.map(i => i.value);
-        // Optionally: e.preventDefault();
       }
     }
   }
@@ -260,7 +238,12 @@ export class SgdsComboBox extends DropdownListElement {
         ? html`
                 ${this.selectedItems.map(
           item =>
-            html`<sgds-badge show dismissible @sgds-hide=${() => this._handleBadgeDismissed(item)}
+            html`<sgds-badge
+                      outlined
+                      variant="neutral"
+                      show
+                      dismissible
+                      @sgds-hide=${() => this._handleBadgeDismissed(item)}
                       >${item.label}</sgds-badge
                     >`
         )}
@@ -269,10 +252,8 @@ export class SgdsComboBox extends DropdownListElement {
         >
         </sgds-input>
 
-        <!-- The dropdown list -->
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1">
           ${this.filteredMenuList.map(item => {
-          // For both multi-select and single-select, we rely on selectedItems array
           const isActive = this.selectedItems.includes(item);
           return html`
               <sgds-combo-box-item

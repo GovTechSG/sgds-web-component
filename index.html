@@ -174,7 +174,7 @@
         <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
         <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
         <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
-  
+
       </sgds-sidenav-item>
     </sgds-sidenav-item>
     <sgds-sidenav-item title="Test title 2" disabled>
@@ -749,7 +749,13 @@
       <h2>ComboBox</h2>
       <sgds-combo-box menuList='[
       { "label": "John Smith", "value": 1 },
-      { "label": "Jack Adams", "value": 2 }
+      { "label": "Jack Adams", "value": 2 },
+      { "label": "John Smith", "value": 3 },
+      { "label": "Jack Adams", "value": 4 },
+      { "label": "John Smith", "value": 5 },
+      { "label": "Jack Adams", "value": 6 },
+      { "label": "John Smith", "value": 7 },
+      { "label": "Jack Adams", "value": 8 }
     ]' label="label" hintText="hint" hasFeedback="true" invalidFeedback="test">
         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
           class="bi bi-search" viewBox="0 0 16 16">
@@ -761,7 +767,7 @@
       <sgds-combo-box menuList='[
       { "label": "John Smith", "value": 1 },
       { "label": "Jack Adams", "value": 2 }
-    ]' multiSelect label="label" hintText="multiple" hasFeedback="true" invalidFeedback="test">
+    ]' multiSelect label="label" hintText="multiple" invalid hasFeedback="true" invalidFeedback="test">
         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
           class="bi bi-search" viewBox="0 0 16 16">
           <path
@@ -1044,16 +1050,16 @@
     </div>
     <div class="container">
       <sgds-pagination dataLength="1"></sgds-pagination>
-      <sgds-pagination dataLength="20" itemsPerPage="10" currentPage="1"></sgds-pagination>     
-      <sgds-pagination dataLength="20" itemsPerPage="8" currentPage="1"></sgds-pagination>     
-      <sgds-pagination dataLength="20" itemsPerPage="5" currentPage="4"></sgds-pagination>     
-      <sgds-pagination dataLength="20" itemsPerPage="4" currentPage="4"></sgds-pagination>     
-      <sgds-pagination dataLength="18" itemsPerPage="3" currentPage="4"></sgds-pagination>     
-      <sgds-pagination dataLength="20" itemsPerPage="3" currentPage="4"></sgds-pagination>     
-      <sgds-pagination dataLength="16" itemsPerPage="2"></sgds-pagination>     
-      <sgds-pagination dataLength="18" itemsPerPage="2"></sgds-pagination>     
-      <sgds-pagination dataLength="20" itemsPerPage="2"></sgds-pagination>     
-       <h3>sample table, elipsis off</h3>
+      <sgds-pagination dataLength="20" itemsPerPage="10" currentPage="1"></sgds-pagination>
+      <sgds-pagination dataLength="20" itemsPerPage="8" currentPage="1"></sgds-pagination>
+      <sgds-pagination dataLength="20" itemsPerPage="5" currentPage="4"></sgds-pagination>
+      <sgds-pagination dataLength="20" itemsPerPage="4" currentPage="4"></sgds-pagination>
+      <sgds-pagination dataLength="18" itemsPerPage="3" currentPage="4"></sgds-pagination>
+      <sgds-pagination dataLength="20" itemsPerPage="3" currentPage="4"></sgds-pagination>
+      <sgds-pagination dataLength="16" itemsPerPage="2"></sgds-pagination>
+      <sgds-pagination dataLength="18" itemsPerPage="2"></sgds-pagination>
+      <sgds-pagination dataLength="20" itemsPerPage="2"></sgds-pagination>
+      <h3>sample table, elipsis off</h3>
       <sgds-table id="tablesample"></sgds-table>
       <sgds-pagination id="samplepage" directionVariant="icon"></sgds-pagination>
       <br><br>
@@ -1062,27 +1068,34 @@
       <sgds-pagination id="samplepage2" directionVariant="icon" currentPage="3" ellipsisOn></sgds-pagination>
       <h2>Pagination</h2>
       <p>size=sm,variant=default</p>
-      <sgds-pagination size="sm" variant="default" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <sgds-pagination size="sm" variant="default" dataLength="15" limit="3" itemsPerPage="1"
+        currentPage="6"></sgds-pagination>
       <p>size=sm,variant=number</p>
-      <sgds-pagination size="sm" variant="number" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <sgds-pagination size="sm" variant="number" dataLength="15" limit="3" itemsPerPage="1"
+        currentPage="6"></sgds-pagination>
       <p>size=sm,variant=description</p>
       <sgds-pagination size="sm" dataLength="10" itemsPerPage="5" variant="description"></sgds-pagination>
       <p>size=sm,variant=button</p>
-      <sgds-pagination size="sm" variant="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
-      <sgds-pagination size="sm" variant="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <sgds-pagination size="sm" variant="button" dataLength="15" limit="3" itemsPerPage="1"
+        currentPage="6"></sgds-pagination>
+      <sgds-pagination size="sm" variant="button" dataLength="15" limit="3" itemsPerPage="1"
+        currentPage="6"></sgds-pagination>
       <p>size=sm,variant=default</p>
-      <sgds-pagination size="sm" variant="default" navigation="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <sgds-pagination size="sm" variant="default" navigation="button" dataLength="15" limit="3" itemsPerPage="1"
+        currentPage="6"></sgds-pagination>
 
       <p>variant=number</p>
       <sgds-pagination variant="number" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
       <p>variant=default</p>
       <sgds-pagination variant="default" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
       <p>variant=description</p>
-      <sgds-pagination variant="description" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <sgds-pagination variant="description" dataLength="15" limit="3" itemsPerPage="1"
+        currentPage="6"></sgds-pagination>
       <p>variant=button</p>
       <sgds-pagination variant="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
       <p>navigation=icon-button</p>
-      <sgds-pagination navigation="icon-button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <sgds-pagination navigation="icon-button" dataLength="15" limit="3" itemsPerPage="1"
+        currentPage="6"></sgds-pagination>
       <p>navigation=button</p>
       <sgds-pagination navigation="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
     </div>
@@ -1379,7 +1392,7 @@
           <a href="#" slot="title"><span>Vertical Image Card</span></a>
           <span slot="description">vertical card with image adjustment prop set to padding around</span>
           <!-- <sgds-link slot="link"> -->
-            <a href="#" slot="link">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="#" slot="link">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
           <!-- </sgds-link> -->
         </sgds-card>
         <sgds-card imageAdjustment="aspect ratio" stretchedLink>
@@ -1399,7 +1412,7 @@
           <h3 slot="title">Horizontal Image Card</h3>
           <span slot="description">horizontal card with card orientation set to horizontal</span>
           <!-- <sgds-link slot="link"> -->
-            <a href="#" slot="link">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="#" slot="link">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
           <!-- </sgds-link> -->
         </sgds-card>
         <sgds-card orientation="horizontal" imagePosition="after">
@@ -1547,7 +1560,7 @@
               id="input10" minlength="5" required value="" hasFeedback invalidFeedback="Minimum length 5 test">
               <sgds-icon slot="icon" name="placeholder"></sgds-icon>
             </sgds-input>
-            <sgds-input placeholder="invalid" label="label" hintText="hint" invalid hasFeedback></sgds-input>
+            <sgds-input placeholder="invalid" label="labe" hintText="hint" required hasFeedback="both"></sgds-input>
             <sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are
                 required to check this.</span></sgds-checkbox>
             <sgds-checkbox name="cb2" id="cb2" value="lolol1" required hasfeedback
