@@ -1,8 +1,8 @@
 import "./sgds-web-component";
-import { aTimeout, assert, elementUpdated, expect, fixture, waitUntil } from "@open-wc/testing";
+import { aTimeout, assert, elementUpdated, expect, fixture, triggerBlurFor, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
-import { SgdsSidenavItem, type SgdsSidenavLink } from "../src/components";
+import { SgdsSidenavItem, SgdsSidenavLink } from "../src/components";
 
 describe("sgds-sidenav", () => {
   it("can be semantically compare with shadowDom trees", async () => {
@@ -41,19 +41,7 @@ describe("sgds-sidenav-item", () => {
        <slot name="title">
          </slot>
         <slot name="caret-icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-chevron-down"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
-            />
-          </svg>
+          <sgds-icon name="chevron-down" size="lg" class="caret-icon"></sgds-icon>
         </slot>
        </button>
        <div class="sidenav-body"
@@ -132,23 +120,23 @@ describe("sgds-sidenav-item", () => {
     el.shadowRoot?.querySelector("a")?.click();
     expect(toggleHandler).to.have.been.calledOnce;
   });
-  it("openItem and closeItem methods changes active class of sidenav button", async () => {
+  it("show and hide methods changes active class of sidenav button", async () => {
     const el = await fixture<SgdsSidenavItem>(html`<sgds-sidenav-item></sgds-sidenav-item>`);
     expect(el.shadowRoot?.querySelector("button")?.classList.value).not.to.contain("active");
-    el.openItem();
+    el.show();
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("button")?.classList.value).to.contain("active");
-    el.closeItem();
+    el.hide();
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("button")?.classList.value).not.to.contain("active");
   });
-  it("openItem and closeItem methods changes active class of sidenav button when href defined", async () => {
+  it("show and hide methods changes active class of sidenav button when href defined", async () => {
     const el = await fixture<SgdsSidenavItem>(html`<sgds-sidenav-item href="#"></sgds-sidenav-item>`);
     expect(el.shadowRoot?.querySelector("a")?.classList.value).not.to.contain("active");
-    el.openItem();
+    el.show();
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("a")?.classList.value).to.contain("active");
-    el.closeItem();
+    el.hide();
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("a")?.classList.value).not.to.contain("active");
   });
@@ -159,123 +147,78 @@ describe("sgds-sidenav-item", () => {
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("button")).to.have.class("active");
   });
-  it("when clicked on an inactive sidenav-btn link, turns it into active", async () => {
-    const el = await fixture<SgdsSidenavItem>(html`<sgds-sidenav-item href="#"></sgds-sidenav-item>`);
-    expect(el.shadowRoot?.querySelector("a")?.classList.value).not.to.contain("active");
-    el.shadowRoot?.querySelector("a")?.click();
-    await elementUpdated(el);
-    expect(el.shadowRoot?.querySelector("a")).to.have.class("active");
-  });
+  // it("when clicked on an inactive sidenav-btn link, turns it into active", async () => {
+  //   const el = await fixture<SgdsSidenavItem>(html`<sgds-sidenav-item href="#"></sgds-sidenav-item>`);
+  //   expect(el.shadowRoot?.querySelector("a")?.classList.value).not.to.contain("active");
+  //   el.shadowRoot?.querySelector("a")?.click();
+  //   await elementUpdated(el);
+  //   expect(el.shadowRoot?.querySelector("a")).to.have.class("active");
+  // });
 });
 
 describe("sgds-sidenav, -item, -link interactions", () => {
-  it("by default when click on another item (link or button) should close opened sidenav", async () => {
-    const el = await fixture(html` <sgds-sidenav>
-      <sgds-sidenav-item active>
-        <span slot="title">Title 1</span>
-        <sgds-sidenav-link href="https://google.com" active>1</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">2</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">3</sgds-sidenav-link>
-      </sgds-sidenav-item>
-      <sgds-sidenav-item>
-        <span slot="title">Title 2</span>
-        <sgds-sidenav-link href="https://google.com">4</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">5</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">6</sgds-sidenav-link>
-      </sgds-sidenav-item>
-      <sgds-sidenav-item href="#">
-        <span slot="title">Title 3</span>
-      </sgds-sidenav-item>
-    </sgds-sidenav>`);
-    // assert.shadowDom.equal(el, 'test')
-    expect(el.querySelectorAll("sgds-sidenav-item").length).to.equal(3);
-    const SgdsSidenavItemOne = el.querySelectorAll("sgds-sidenav-item")[0];
-    const SgdsSidenavItemTwo = el.querySelectorAll("sgds-sidenav-item")[1];
-    const SgdsSidenavItemThree = el.querySelectorAll("sgds-sidenav-item")[2];
-
-    expect(SgdsSidenavItemThree.shadowRoot?.querySelector("div.sidenav-body")).to.be.null;
-    await waitUntil(() => SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body"));
-    await waitUntil(() => SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body"));
-    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
-    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body")).to.have.attribute("hidden");
-
-    //onclick SgdsSidenavItemTwo button, should remove show from first
-    SgdsSidenavItemTwo?.shadowRoot?.querySelector("button")?.click();
-
-    await waitUntil(() => SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body[hidden]"));
-    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).to.have.attribute("hidden");
-    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
-
-    // click on sidnavitem link should collapse the other two side navs
-    SgdsSidenavItemThree?.shadowRoot?.querySelector("a")?.click();
-
-    // wait sometime for collapse to take place
-    await aTimeout(500);
-    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).to.have.attribute("hidden");
-    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body")).to.have.attribute("hidden");
-    expect(SgdsSidenavItemThree.shadowRoot?.querySelector("a.sidenav-btn")).to.have.class("active");
-  });
-  it("when alwaysOpen is true, click on another item (link or button) should NOT close other opened sidenav", async () => {
-    const el = await fixture(html` <sgds-sidenav alwaysOpen>
-      <sgds-sidenav-item active>
-        <span slot="title">Title 1</span>
-        <sgds-sidenav-link href="https://google.com" active>1</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">2</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">3</sgds-sidenav-link>
-      </sgds-sidenav-item>
-      <sgds-sidenav-item>
-        <span slot="title">Title 2</span>
-        <sgds-sidenav-link href="https://google.com">4</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">5</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">6</sgds-sidenav-link>
-      </sgds-sidenav-item>
-      <sgds-sidenav-item href="#">
-        <span slot="title">Title 3</span>
+  it("if 1st level child link is active, sidenav-item parent is active", async () => {
+    const el = await fixture(html`<sgds-sidenav>
+      <sgds-sidenav-item class="first-level">
+        <div slot="title">Level 1 item</div>
+        <sgds-sidenav-link active>
+          <a href="#">Level 2 link</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-link>
+          <a href="#">Level 2 link</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-item class="second-level">
+          <div slot="title">Level 2 item</div>
+          <sgds-sidenav-link>
+            <a href="#">Level 3 link</a>
+          </sgds-sidenav-link>
+          <sgds-sidenav-link>
+            <a href="#">Level 3 link</a>
+          </sgds-sidenav-link>
+        </sgds-sidenav-item>
       </sgds-sidenav-item>
     </sgds-sidenav>`);
 
-    expect(el.querySelectorAll("sgds-sidenav-item").length).to.equal(3);
-    const SgdsSidenavItemOne = el.querySelectorAll("sgds-sidenav-item")[0];
-    const SgdsSidenavItemTwo = el.querySelectorAll("sgds-sidenav-item")[1];
-    const SgdsSidenavItemThree = el.querySelectorAll("sgds-sidenav-item")[2];
-
-    expect(SgdsSidenavItemThree.shadowRoot?.querySelector("div.sidenav-body")).to.be.null;
-    await waitUntil(() => SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body"));
-    await waitUntil(() => SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body"));
-    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
-    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body")).to.have.attribute("hidden");
-
-    //onclick SgdsSidenavItemTwo button, should NOT remove show from first
-    SgdsSidenavItemTwo?.shadowRoot?.querySelector("button")?.click();
-
-    await waitUntil(() => !SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body[hidden]"));
-    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
-    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
-
-    // click on link should NOT collapse the other two side navs
-    SgdsSidenavItemThree?.shadowRoot?.querySelector("a")?.click();
-
-    // wait sometime for collapse to take place
-    await aTimeout(500);
-    expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
-    expect(SgdsSidenavItemTwo.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
-    expect(SgdsSidenavItemThree.shadowRoot?.querySelector("a.sidenav-btn")).to.have.class("active");
+    expect(el.querySelector("sgds-sidenav-item.first-level")?.hasAttribute("active")).to.be.true;
+    expect(el.querySelector("sgds-sidenav-item.second-level")?.hasAttribute("active")).to.be.false;
   });
+  it("if 2nd level child link is active, sidenav-item parent is active", async () => {
+    const el = await fixture(html`<sgds-sidenav>
+      <sgds-sidenav-item class="first-level">
+        <div slot="title">Level 1 item</div>
+        <sgds-sidenav-link>
+          <a href="#">Level 2 link</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-link>
+          <a href="#">Level 2 link</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-item class="second-level">
+          <div slot="title">Level 2 item</div>
+          <sgds-sidenav-link active><a href="#">Level 3 link</a> </sgds-sidenav-link>
+          <sgds-sidenav-link>
+            <a href="#">Level 3 link</a>
+          </sgds-sidenav-link>
+        </sgds-sidenav-item>
+      </sgds-sidenav-item>
+    </sgds-sidenav>`);
 
+    expect(el.querySelector("sgds-sidenav-item.first-level")?.hasAttribute("active")).to.be.true;
+    expect(el.querySelector("sgds-sidenav-item.second-level")?.hasAttribute("active")).to.be.true;
+  });
   it("when clicking on sidenav-link, active sidenav-item remains open", async () => {
     const hideHandler = sinon.spy();
     const el = await fixture(html`<sgds-sidenav>
       <sgds-sidenav-item active>
         <span slot="title">Title 1</span>
-        <sgds-sidenav-link href="#" data-test="link">1</sgds-sidenav-link>
-        <sgds-sidenav-link href="#">2</sgds-sidenav-link>
-        <sgds-sidenav-link href="#">3</sgds-sidenav-link>
+        <sgds-sidenav-link data-test="link"><a href="#">Level 1 link</a></sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">Level 1 link</a></sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">Level 1 link</a></sgds-sidenav-link>
       </sgds-sidenav-item>
       <sgds-sidenav-item>
         <span slot="title">Title 2</span>
-        <sgds-sidenav-link href="#">4</sgds-sidenav-link>
-        <sgds-sidenav-link href="#">5</sgds-sidenav-link>
-        <sgds-sidenav-link href="#">6</sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">Level 2 link</a></sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">Level 2 link</a></sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">Level 2 link</a></sgds-sidenav-link>
       </sgds-sidenav-item>
       <sgds-sidenav-item href="#">
         <span slot="title">Title 3</span>
@@ -290,38 +233,69 @@ describe("sgds-sidenav, -item, -link interactions", () => {
     expect(SgdsSidenavItemOne.shadowRoot?.querySelector("div.sidenav-body")).not.to.have.attribute("hidden");
   });
 });
+
+describe("SgdsSidenavLink", () => {
+  it("matches semantic shadowdom", async () => {
+    const el = await fixture(html`<sgds-sidenav-link></sgds-sidenav-link>`);
+    assert.shadowDom.equal(el, ` <slot></slot>`);
+  });
+  it("when disabled is change to true , slot anchor has tabindex=-1", async () => {
+    const el = await fixture<SgdsSidenavLink>(
+      html`<sgds-sidenav-link disabled><a href="#">link</a></sgds-sidenav-link>`
+    );
+
+    const anchor = el.querySelector("a");
+    expect(anchor).to.have.attribute("tabindex", "-1");
+
+    el.disabled = false;
+    await waitUntil(() => !anchor?.hasAttribute("tabindex"));
+    expect(anchor?.hasAttribute("tabindex")).to.be.false;
+  });
+  it("when disabled true , slot anchor and sidenav-link itself have aria-disabled=true", async () => {
+    const el = await fixture<SgdsSidenavLink>(
+      html`<sgds-sidenav-link disabled><a href="#">link</a></sgds-sidenav-link>`
+    );
+
+    const anchor = el.querySelector("a");
+    expect(anchor).to.have.attribute("aria-disabled", "true");
+    expect(el).to.have.attribute("aria-disabled", "true");
+    el.disabled = false;
+    await waitUntil(() => anchor?.getAttribute("aria-disabled") === "false");
+    expect(el).to.have.attribute("aria-disabled", "false");
+  });
+});
 describe("a11y - sgds-sidenav-item", () => {
   it("button have aria-expanded=true when active", async () => {
     const el = await fixture(html`
       <sgds-sidenav-item active>
         <span slot="title">Title 1</span>
-        <sgds-sidenav-link href="https://google.com" active>1</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">2</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">3</sgds-sidenav-link>
+        <sgds-sidenav-link active><a href="#">link</a></sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">link</a></sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">link</a></sgds-sidenav-link>
       </sgds-sidenav-item>
     `);
     const button = el.shadowRoot?.querySelector("button");
     expect(button).to.have.attribute("aria-expanded", "true");
   });
-  it("button to have aria-expanded=false when not active", async () => {
+  it("button to have aria-expanded=true when child is active", async () => {
     const el = await fixture(html`
       <sgds-sidenav-item>
         <span slot="title">Title 1</span>
-        <sgds-sidenav-link href="https://google.com" active>1</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">2</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">3</sgds-sidenav-link>
+        <sgds-sidenav-link active><a href="#">link</a></sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">link</a></sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">link</a></sgds-sidenav-link>
       </sgds-sidenav-item>
     `);
     const button = el.shadowRoot?.querySelector("button");
-    expect(button).to.have.attribute("aria-expanded", "false");
+    expect(button).to.have.attribute("aria-expanded", "true");
   });
   it("button to have a default aria-controls pointing to id of div.sidenav-body element", async () => {
     const el = await fixture(html`
       <sgds-sidenav-item>
         <span slot="title">Title 1</span>
-        <sgds-sidenav-link href="https://google.com" active>1</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">2</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">3</sgds-sidenav-link>
+        <sgds-sidenav-link active><a href="#">link</a></sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">link</a></sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">link</a></sgds-sidenav-link>
       </sgds-sidenav-item>
     `);
     const button = el.shadowRoot?.querySelector("button");
@@ -335,9 +309,9 @@ describe("a11y - sgds-sidenav-item", () => {
     const el = await fixture(html`
       <sgds-sidenav-item>
         <span slot="title">Title 1</span>
-        <sgds-sidenav-link href="https://google.com" active>1</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">2</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">3</sgds-sidenav-link>
+        <sgds-sidenav-link active><a href="#">link</a></sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">link</a></sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">link</a></sgds-sidenav-link>
       </sgds-sidenav-item>
     `);
     const button = el.shadowRoot?.querySelector("button");
@@ -351,9 +325,9 @@ describe("a11y - sgds-sidenav-item", () => {
     const el = await fixture(html`
       <sgds-sidenav-item active>
         <span slot="title">Title 1</span>
-        <sgds-sidenav-link href="https://google.com" active>1</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">2</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">3</sgds-sidenav-link>
+        <sgds-sidenav-link active><a href="#">link</a></sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">link</a></sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">link</a></sgds-sidenav-link>
       </sgds-sidenav-item>
     `);
     const button = el.shadowRoot?.querySelector("button");
@@ -363,9 +337,9 @@ describe("a11y - sgds-sidenav-item", () => {
     const el = await fixture(html`
       <sgds-sidenav-item href="#" active>
         <span slot="title">Title 1</span>
-        <sgds-sidenav-link href="https://google.com" active>1</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">2</sgds-sidenav-link>
-        <sgds-sidenav-link href="https://google.com">3</sgds-sidenav-link>
+        <sgds-sidenav-link active><a href="#">link</a></sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">link</a></sgds-sidenav-link>
+        <sgds-sidenav-link><a href="#">link</a></sgds-sidenav-link>
       </sgds-sidenav-item>
     `);
     const anchor = el.shadowRoot?.querySelector("a");

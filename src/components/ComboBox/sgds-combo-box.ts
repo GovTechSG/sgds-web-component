@@ -235,10 +235,10 @@ export class SgdsComboBox extends DropdownListElement {
           aria-controls=${this.dropdownMenuId}
           suffix=${html`<sgds-icon name="chevron-down" size="md"></sgds-icon>`}
           .prefix=${this.multiSelect
-        ? html`
+            ? html`
                 ${this.selectedItems.map(
-          item =>
-            html`<sgds-badge
+                  item =>
+                    html`<sgds-badge
                       outlined
                       variant="neutral"
                       show
@@ -246,16 +246,16 @@ export class SgdsComboBox extends DropdownListElement {
                       @sgds-hide=${() => this._handleBadgeDismissed(item)}
                       >${item.label}</sgds-badge
                     >`
-        )}
+                )}
               `
-        : null}
+            : null}
         >
         </sgds-input>
 
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1">
           ${this.filteredMenuList.map(item => {
-          const isActive = this.selectedItems.includes(item);
-          return html`
+            const isActive = this.selectedItems.includes(item);
+            return html`
               <sgds-combo-box-item
                 ?active=${isActive}
                 ?checkbox=${this.multiSelect}
@@ -265,7 +265,7 @@ export class SgdsComboBox extends DropdownListElement {
                 ${item.label}
               </sgds-combo-box-item>
             `;
-        })}
+          })}
         </ul>
       </div>
     `;

@@ -11,9 +11,9 @@ describe("sgds-combo-box ", () => {
         <sgds-combo-box
           multiSelect
           .menuList=${[
-          { label: "Option 1", value: "option1" },
-          { label: "Option 2", value: "option2" }
-        ]}
+            { label: "Option 1", value: "option1" },
+            { label: "Option 2", value: "option2" }
+          ]}
         ></sgds-combo-box>
       `
     );
