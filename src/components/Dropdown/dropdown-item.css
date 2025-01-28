@@ -1,7 +1,4 @@
 .dropdown-item {
-    --sgds-dropdown-item-active-color: #fff;
-    --sgds-dropdown-item-active-bg: var(--sgds-info);
-    --sgds-dropdown-item-disabled-color: var(--sgds-gray-500);
     background-color: var(--sgds-default-bg-transparent);
     padding: var(--sgds-padding-sm) var(--sgds-padding-lg);
     clear: both;

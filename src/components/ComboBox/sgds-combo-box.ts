@@ -83,8 +83,8 @@ export class SgdsComboBox extends DropdownListElement {
    * We still expose `.value` externally, but this is now the underlying ID or data
    * (e.g. 1, 2, 'abc', ...), not the label that appears in the input box.
    */
-  @property({ reflect: true })
-  value: string | number | (string | number)[] = "";
+  @property({ type: String, reflect: true })
+  value = "";
 
   @state()
   private displayValue = "";
@@ -149,7 +149,7 @@ export class SgdsComboBox extends DropdownListElement {
   }
 
   /**
-   * Called whenever an <sgds-combo-box-item> dispatches "sgds-combo-box-item-select"
+   * Called whenever an <sgds-combo-box-item> dispatches "sgds-selected"
    */
   private _handleItemSelected(e: CustomEvent) {
     const itemEl = e.target as SgdsComboBoxItem;
@@ -172,13 +172,15 @@ export class SgdsComboBox extends DropdownListElement {
         this.selectedItems = this.selectedItems.filter(i => i.value !== foundItem.value);
       }
 
-      this.value = this.selectedItems.map(i => i.value);
+      this.value = this.selectedItems.map(i => i.value).join(";");
     } else {
       // Single-select
       if (isActive) {
         this.selectedItems = [foundItem];
 
-        this.value = foundItem.value;
+        this.value = foundItem.value.toString();
+        this.displayValue = this.selectedItems[0].label;
+        this.hideMenu();
       } else {
         this.selectedItems = [];
         this.displayValue = "";
@@ -193,7 +195,7 @@ export class SgdsComboBox extends DropdownListElement {
   private _handleBadgeDismissed(item: SgdsComboBoxItemData) {
     this.selectedItems = this.selectedItems.filter(i => i.value !== item.value);
 
-    this.value = this.selectedItems.map(i => i.value);
+    this.value = this.selectedItems.map(i => i.value).join(";");
   }
   private _handleKeyDown(e: KeyboardEvent) {
     // Only do this in multi-select mode
@@ -202,7 +204,7 @@ export class SgdsComboBox extends DropdownListElement {
     if (e.key === "Backspace") {
       if (this.displayValue.trim() === "" && this.selectedItems.length > 0) {
         this.selectedItems = this.selectedItems.slice(0, -1);
-        this.value = this.selectedItems.map(i => i.value);
+        this.value = this.selectedItems.map(i => i.value).join(";");
       }
     }
   }
@@ -260,7 +262,7 @@ export class SgdsComboBox extends DropdownListElement {
                 ?active=${isActive}
                 ?checkbox=${this.multiSelect}
                 value=${item.value}
-                @sgds-combo-box-item-select=${this._handleItemSelected}
+                @sgds-selected=${this._handleItemSelected}
               >
                 ${item.label}
               </sgds-combo-box-item>

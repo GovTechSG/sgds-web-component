@@ -1,6 +1,17 @@
 :host([active]) .dropdown-item {
-    background-color: var(--sgds-form-primary-bg-translucent, rgba(90, 66, 192, 0.1));
+    background-color: var(--sgds-form-primary-bg-translucent);
 }
+
+.dropdown-item {
+    background-color: var(--sgds-default-bg-transparent);
+    padding: var(--sgds-padding-sm) var(--sgds-padding-lg);
+    clear: both;
+    color: var(--sgds-default-color);
+    text-align: inherit;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
 
 .dropdown-item .normal-item-content {
     display: flex;
@@ -18,7 +29,7 @@
     fill: var(--sgds-primary-bg);
 }
 
-.dropdown-item {
-    padding: var(--sgds-dropdown-item-padding-y, 0.5rem) var(--sgds-dropdown-item-padding-x, 1rem);
-
+.dropdown-item:focus, .dropdown-item:focus-visible{
+    outline: 0;
+    box-shadow: inset var(--sgds-form-box-shadow-focus);
 }

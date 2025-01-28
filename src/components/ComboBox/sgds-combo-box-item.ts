@@ -2,8 +2,8 @@ import { html, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
-import SgdsIcon from "../Icon/sgds-icon";
 import SgdsCheckbox from "../Checkbox/sgds-checkbox";
+import SgdsIcon from "../Icon/sgds-icon";
 import comboBoxItemStyles from "./sgds-combo-box-item.css";
 
 export class SgdsComboBoxItem extends SgdsElement {
@@ -26,32 +26,28 @@ export class SgdsComboBoxItem extends SgdsElement {
     super.connectedCallback();
     this.setAttribute("role", "menuitem");
     this.setAttribute("aria-disabled", `${this.disabled}`);
+    this.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        this.checkbox ? this._handleCheckboxClick() : this._handleNonCheckboxClick();
+      }
+    });
   }
 
   private _handleNonCheckboxClick() {
     if (!this.checkbox) {
       this.active = true;
-      this.dispatchEvent(
-        new CustomEvent("sgds-combo-box-item-select", {
-          detail: { active: this.active },
-          bubbles: true,
-          composed: true
-        })
-      );
+      this.emit("sgds-selected", { detail: { active: this.active } });
     }
+  }
+  private _handleCheckboxClick() {
+    this.shadowRoot.querySelector("sgds-checkbox").click();
   }
 
   private _handleCheckboxChange(e: Event) {
     const checkbox = e.target as HTMLInputElement;
     this.active = checkbox.checked;
 
-    this.dispatchEvent(
-      new CustomEvent("sgds-combo-box-item-select", {
-        detail: { active: this.active },
-        bubbles: true,
-        composed: true
-      })
-    );
+    this.emit("sgds-selected", { detail: { active: this.active } });
   }
 
   render() {
@@ -62,11 +58,7 @@ export class SgdsComboBoxItem extends SgdsElement {
     };
 
     return html`
-      <div
-        class="dropdown-item ${classMap(classes)}"
-        tabindex=${this.disabled ? "-1" : "0"}
-        @click=${!this.checkbox ? this._handleNonCheckboxClick : null}
-      >
+      <div class="dropdown-item ${classMap(classes)}" tabindex=${this.disabled ? "-1" : "0"}>
         ${this.checkbox
           ? html`
               <sgds-checkbox
@@ -78,15 +70,9 @@ export class SgdsComboBoxItem extends SgdsElement {
               </sgds-checkbox>
             `
           : html`
-              <div class="normal-item-content">
+              <div class="normal-item-content" @click=${this._handleNonCheckboxClick}>
                 <slot></slot>
-                ${this.active
-                  ? html`
-                      <div>
-                        <sgds-icon name="check"></sgds-icon>
-                      </div>
-                    `
-                  : nothing}
+                ${this.active ? html` <sgds-icon name="check"></sgds-icon> ` : nothing}
               </div>
             `}
       </div>
