@@ -29,7 +29,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
   };
 
   @consume({ context: MainnavContext, subscribe: true })
-  private _breakpointReached: Boolean;
+  private _breakpointReached: boolean;
 
   /** @internal */
   @query(".nav-link") navLink: HTMLElement;
