@@ -1,4 +1,5 @@
 import { html } from "lit";
+import { provide } from "@lit/context";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -12,6 +13,7 @@ import SgdsMainnavItem from "./sgds-mainnav-item";
 import mainnavStyle from "./mainnav.css";
 import SgdsMainnavDropdown from "./sgds-mainnav-dropdown";
 import SgdsIcon from "../Icon/sgds-icon";
+import { MainnavContext } from "./mainnav-context";
 export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
 
 const SIZES = {
@@ -44,6 +46,10 @@ export class SgdsMainnav extends SgdsElement {
     "sgds-icon": SgdsIcon
   };
 
+  @provide({ context: MainnavContext })
+  @state()
+  private _breakpointReached = false;
+
   /** @internal */
   @query("nav") nav: HTMLElement;
   /** @internal */
@@ -52,6 +58,8 @@ export class SgdsMainnav extends SgdsElement {
   @query(".navbar-toggler") header: HTMLElement;
   /** @internal */
   @query(".navbar-body") body: HTMLElement;
+  /** @internal */
+  @query(".navbar-nav-scroll") navScroll: HTMLElement;
   /** @internal */
   @query("slot[name='non-collapsible']") nonCollapsibleSlot: HTMLSlotElement;
 
@@ -68,8 +76,13 @@ export class SgdsMainnav extends SgdsElement {
 
       if (newBreakpointReachedValue) {
         this._handleMobileNav();
+
+        if (!this._breakpointReached) {
+          this._breakpointReached = true;
+        }
       } else {
         this._handleDesktopNav();
+        this._breakpointReached = false;
       }
     });
   }
@@ -99,7 +112,7 @@ export class SgdsMainnav extends SgdsElement {
   @queryAssignedElements({ slot: "end" }) private endNodes!: SgdsMainnavItem[] | SgdsMainnavDropdown[];
 
   /** @internal */
-  get defaultSlotitems(): SgdsMainnavItem[] | SgdsMainnavDropdown[] {
+  get defaultSlotItems(): SgdsMainnavItem[] | SgdsMainnavDropdown[] {
     return [...(this.defaultNodes || [])].filter((node: HTMLElement) => typeof node.tagName !== "undefined") as
       | SgdsMainnavItem[]
       | SgdsMainnavDropdown[];
@@ -112,32 +125,57 @@ export class SgdsMainnav extends SgdsElement {
       | SgdsMainnavDropdown[];
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+
+    document.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+
+    document.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
+  }
+
   firstUpdated() {
     if (this.breakpointReached && this.body) {
       this.expanded = false;
       this.body.hidden = true;
       this._handleMobileNav();
+      this._breakpointReached = true;
     }
 
-    const items = [...this.defaultSlotitems, ...this.endSlotItems] as SgdsMainnavItem[] | SgdsMainnavDropdown[];
-
+    const items = [...this.defaultSlotItems, ...this.endSlotItems] as SgdsMainnavItem[] | SgdsMainnavDropdown[];
     items.forEach((item: SgdsMainnavItem | SgdsMainnavDropdown) => {
       item.setAttribute("expand", this.expand);
     });
+  }
+
+  private _handleClickOutOfElement(e: MouseEvent, self: HTMLElement) {
+    if (!e.composedPath().includes(self) && !e.composedPath().includes(this.header)) {
+      this.hide();
+    }
   }
 
   private handleSummaryClick() {
     if (this.expanded) {
       this.hide();
     } else {
+      document.querySelector("body").style.overflow = "hidden";
       this.show();
     }
 
     this.header.focus();
   }
 
-  private _handleMobileNav() {
+  private async _handleMobileNav() {
     this.nav?.appendChild(this.body);
+    await customElements.whenDefined("sgds-masthead");
+    const mastheadHeight = document.querySelector("sgds-masthead")?.clientHeight | 0;
+    const navHeight = this.nav.clientHeight;
+    const mainNavHeight = mastheadHeight + navHeight;
+    this.body.style.top = `${mainNavHeight}px`;
+    this.navScroll.style.maxHeight = `calc(100dvh - ${mainNavHeight}px)`;
   }
 
   private _handleDesktopNav() {
@@ -203,7 +241,11 @@ export class SgdsMainnav extends SgdsElement {
     if (!this.expanded) {
       return;
     }
+
     this.expanded = false;
+    document.querySelector("body").style.removeProperty("overflow");
+    this.emit("close-dropdown-menu");
+
     return waitForEvent(this, "sgds-after-hide");
   }
 

@@ -1,3 +1,7 @@
+:host {
+  position: relative;
+}
+
 .dropdown {
   display:flex;
   height: 100%;

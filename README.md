@@ -717,7 +717,8 @@ export class MyNavbar extends ScopedElementsMixin(LitElement) {
         <sgds-masthead fluid="false"></sgds-masthead>
             <sgds-mainnav>
               <img width="240" src="https://dev.assets.developer.tech.gov.sg/svg/logo.svg" slot="brand">
-                <sgds-mainnav-dropdown togglertext="Home" slot="end">
+                <sgds-mainnav-dropdown slot="end">
+                    <span slot="toggler">Home</span>
                     <sgds-dropdown-item>Logout</sgds-dropdown-item>
                 </sgds-mainnav-dropdown>
                 <sgds-mainnav-item href="#">Content</sgds-mainnav-item>

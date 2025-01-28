@@ -49,7 +49,7 @@ describe("sgds-mainnav", () => {
        </div>
       </nav>
     `,
-      { ignoreAttributes: ["id", "aria-controls"] }
+      { ignoreAttributes: ["id", "aria-controls", "style"] }
     );
   });
   it("expect div.collapse's id to equal to button's aria-controls", async () => {
@@ -244,7 +244,7 @@ describe("sgds-mainnav-dropdown", () => {
     assert.instanceOf(el, SgdsMainnavDropdown);
   });
   it("can be semantically compare with shadowDom trees", async () => {
-    const el = await fixture(html`<sgds-mainnav-dropdown togglerText="test"></sgds-mainnav-dropdown>`);
+    const el = await fixture(html`<sgds-mainnav-dropdown></sgds-mainnav-dropdown>`);
     assert.shadowDom.equal(
       el,
       `
@@ -259,7 +259,8 @@ describe("sgds-mainnav-dropdown", () => {
           slot="toggler"
           tabindex="0"
         >
-          test
+          <slot name="toggler">
+          </slot>
           <sgds-icon
             name="chevron-down"
             size="lg"
@@ -274,7 +275,7 @@ describe("sgds-mainnav-dropdown", () => {
     );
   });
   it("when prop active=true, .active class is defined in the button", async () => {
-    const el = await fixture(html`<sgds-mainnav-dropdown active togglerText="test"></sgds-mainnav-dropdown>`);
+    const el = await fixture(html`<sgds-mainnav-dropdown active></sgds-mainnav-dropdown>`);
 
     expect(el.shadowRoot?.querySelector("a[role=button]")).to.have.class("active");
   });

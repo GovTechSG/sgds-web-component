@@ -6,7 +6,6 @@ export const Template = ({
   menuAlignRight,
   drop,
   popperOpts,
-  togglerText,
   variant,
   active,
   href,
@@ -17,7 +16,6 @@ export const Template = ({
 }) => {
   return html`
     <sgds-dropdown
-      togglerText=${ifDefined(togglerText)}
       ?noFlip=${noFlip}
       drop=${ifDefined(drop)}
       ?menuAlignRight=${menuAlignRight}
@@ -27,6 +25,7 @@ export const Template = ({
       ?menuIsOpen=${menuIsOpen}
       ?disabled=${disabled}
     >
+      <span slot="toggler">Dropdown</span>
       <sgds-dropdown-item href=${ifDefined(href)} ?disabled=${disabled} ?active=${active} target=${ifDefined(target)}
         >item #1 (argsTable controlled)</sgds-dropdown-item
       >
@@ -37,7 +36,6 @@ export const Template = ({
 };
 
 export const args = {
-  togglerText: "Dropdown",
   variant: "secondary",
   href: "#"
 };
