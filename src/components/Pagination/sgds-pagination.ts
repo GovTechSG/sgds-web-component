@@ -33,6 +33,7 @@ export class SgdsPagination extends SgdsElement {
   /** Sets the amount of data objects to be displayed per page */
   @property({ type: Number }) itemsPerPage = 5;
 
+  /** Sets the variant of the pagination. */
   @property({ type: String }) variant: "default" | "number" | "input" | "button" | "description" = "default";
 
   /** Sets the page direction button to contain text and/or icon */
@@ -40,9 +41,6 @@ export class SgdsPagination extends SgdsElement {
 
   /** Sets the size of all page items. */
   @property({ type: String }) size: SizeVariant = "md";
-
-  /** When ellipsisOn is true, length of decrementing/incrementing of pages can be set with a number value*/
-  @property({ type: Number }) ellipsisJump = 3;
 
   /**
    * The number of pages to show besides first and last page. First and last page always appears

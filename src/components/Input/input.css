@@ -1,6 +1,7 @@
-:host{
+:host {
   --input-border-radius: var(--sgds-form-border-radius-md);
 }
+
 .form-control-container {
   display: flex;
   flex-direction: column;
@@ -41,7 +42,7 @@
   line-height: var(--sgds-line-height-body);
 }
 
-.form-control-group > .form-control:focus {
+.form-control-group>.form-control:focus {
   z-index: 3;
 }
 
@@ -86,6 +87,8 @@
 .form-control-prefix,
 .form-control-suffix {
   color: var(--sgds-form-color-subtle);
+  display: flex;
+  gap: var(--sgds-gap-xs);
 }
 
 .form-control-group.quantity-toggle {

@@ -1,5 +1,5 @@
-import { html } from "lit";
-import { property, query } from "lit/decorators.js";
+import { html, PropertyValues } from "lit";
+import { property, query, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/animate";
@@ -8,6 +8,8 @@ import { waitForEvent } from "../../utils/event";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import sidenavItemStyle from "./sidenav-item.css";
+import SgdsIcon from "../Icon/sgds-icon";
+import SgdsSidenavLink from "./sgds-sidenav-link";
 
 /**
  *
@@ -17,19 +19,17 @@ import sidenavItemStyle from "./sidenav-item.css";
  * @event sgds-hide - Emitted on hide.
  * @event sgds-after-hide - Emitted on hide after animation has completed.
  *
- * @slot default - default slot for SgdsSidenavLink element.
+ * @slot default - default slot for SgdsSidenavLink and second level SgdsSidenavItem.
  * @slot title - title slot for the content of SgdsSidenavItem's button / anchor element.
  * @slot icon - icon slot for the content of SgdsSidenavItem's button / anchor element.
  * @slot caret-icon - The slot for the caret arrow icon of SgdsSidenavItem.
- *
- * @cssproperty --sidenav-item-button-border-left-width - sidenav item left border width
- * @cssproperty --sidenav-item-padding-x - sidenav item padding left and right
- * @cssproperty --sidenav-item-padding-y - sidenav item padding top and bottom
- * @cssproperty --sidenav-item-icon-title-gap - the flex gap between sidenav item icon and title
  */
 
 export class SgdsSidenavItem extends SgdsElement {
   static styles = [...SgdsElement.styles, sidenavItemStyle];
+  static dependencies = {
+    "sgds-icon": SgdsIcon
+  };
 
   @query(".sidenav-body") body: HTMLElement;
   /** @internal */
@@ -37,7 +37,7 @@ export class SgdsSidenavItem extends SgdsElement {
   /**
    *  when true, toggles the sidenav-item to open on first load and set the active stylings.
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   active = false;
 
   /**
@@ -56,12 +56,17 @@ export class SgdsSidenavItem extends SgdsElement {
    * @internal Forwards to id attribute of div.collapse and aria-controls attribute of button in SgdsSidenavItem. By default, SgdsSidenavItem auto-generates a unique id. Override the default id by specifiying your own
    */
 
-  private collapseId: string = genId("sidenav", "collapse");
+  private _collapseId: string = genId("sidenav", "collapse");
 
   /**
    * @internal Forwards to id attribute of button and aria-labelledby attribute of ul.sidenav-list in SgdsSidenavItem. By default, SgdsSidenavItem auto-generates a unique id. Override the default id by specifiying your own
    */
-  private buttonId: string = genId("sidenav", "button");
+  private _buttonId: string = genId("sidenav", "button");
+
+  private _levelId = genId("sidenav", "this");
+  private _firstLevelId = "first-level-" + this._levelId;
+  private _secondLevelId = "second-level-" + this._levelId;
+  private _thirdLevelId = "third-level-" + this._levelId;
 
   /** @internal */
   private index = "-1";
@@ -72,7 +77,6 @@ export class SgdsSidenavItem extends SgdsElement {
 
   private _onClickLink() {
     this._onToggle();
-    this.active = true;
   }
 
   /** Shows the sidenav item. */
@@ -94,25 +98,27 @@ export class SgdsSidenavItem extends SgdsElement {
     return waitForEvent(this, "sgds-after-hide");
   }
 
-  /**
-   * @deprecated since 1.1. Will be removed in 2.0 and replaced by hide.
-   * When invoked, closes the SgdsSidenavItem
-   */
-  public async closeItem() {
-    return await this.hide();
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.classList.add(this._firstLevelId);
   }
-  /**
-   * @deprecated since 1.1. Will be removed in 2.0 and replaced by show.
-   * When invoked, opens the SgdsSidenavItem
-   */
-  public async openItem() {
-    return await this.show();
-  }
-
   firstUpdated() {
     if (!this.href) {
       this.body.hidden = !this.active;
       this.body.style.height = this.active ? "auto" : "0";
+    }
+
+    this._handleOpenMenu();
+  }
+
+  /**
+   * Sets active to true to open menu ,
+   * evaluating based on whether any of the child in any level is active
+   * If at least 1 child is active, parent item should be active
+   */
+  private _handleOpenMenu() {
+    if (!this.active) {
+      this.active = this._items.some((i: SgdsSidenavItem | SgdsSidenavLink) => i.active);
     }
   }
   private _handleSummaryClick() {
@@ -148,7 +154,7 @@ export class SgdsSidenavItem extends SgdsElement {
   }
 
   @watch("active", { waitUntilFirstUpdate: true })
-  async handleOpenChange() {
+  async _handleOpenChange() {
     if (this.href) return;
     if (this.active) {
       // Show
@@ -184,6 +190,24 @@ export class SgdsSidenavItem extends SgdsElement {
       this.emit("sgds-after-hide");
     }
   }
+  @queryAssignedElements() private _items;
+  private _handleSlotChange(e: Event) {
+    const sideNavItems = (e.target as HTMLSlotElement)
+      .assignedElements({ flatten: true })
+      .filter(item => item.tagName.toLowerCase() === "sgds-sidenav-item");
+
+    /** All sgds-sidenav-item in this slot is a 2nd level item */
+    sideNavItems.forEach(i => {
+      const firstLevelId = Array.from(i.classList).filter(c => c.startsWith("first-level"))[0];
+      i.classList.replace(firstLevelId, this._secondLevelId);
+    });
+    /** All second level sgds-sidenav-item should only have third level sgds-sidenav-links */
+    if (Array.from(this.classList).some(c => c.startsWith("second-level"))) {
+      this._items.forEach((i: SgdsSidenavLink) => i.classList.add(this._thirdLevelId));
+    }
+
+    this._handleOpenMenu();
+  }
 
   render() {
     const withMenuTemplate = html` <button
@@ -194,33 +218,21 @@ export class SgdsSidenavItem extends SgdsElement {
           active: this.active
         })} "
         aria-expanded="${this.active}"
-        aria-controls="${this.collapseId}"
+        aria-controls="${this._collapseId}"
         aria-current="${this.active}"
-        id="${this.buttonId}"
+        id="${this._buttonId}"
         ?disabled=${this.disabled}
         aria-disabled=${this.disabled ? "true" : "false"}
       >
         <slot name="icon"></slot>
         <slot name="title"></slot>
         <slot name="caret-icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-chevron-down"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
-            />
-          </svg>
+          <sgds-icon name="chevron-down" size="lg" class="caret-icon"></sgds-icon>
         </slot>
       </button>
-      <div class="sidenav-body" id="${this.collapseId}">
-        <div class="sidenav-list" aria-labelledby="${this.buttonId}">
-          <slot></slot>
+      <div class="sidenav-body" id="${this._collapseId}">
+        <div class="sidenav-list" aria-labelledby="${this._buttonId}">
+          <slot class="default" @slotchange=${this._handleSlotChange}></slot>
         </div>
       </div>`;
 

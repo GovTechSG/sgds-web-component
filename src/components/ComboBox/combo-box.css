@@ -1,13 +1,18 @@
+.combobox .dropdown-menu {
+  min-width: 100%;
+}
+
 .sgds.combobox .form-control-icon {
   align-items: center;
-  display: flex;
+  /* display: flex;
   font-size: 1rem;
   height: 3rem;
   justify-content: center;
   position: absolute;
   width: 3rem;
-  z-index: 4;
+  z-index: 4; */
 }
+
 .sgds.combobox {
   display: flex;
   flex-wrap: wrap;
@@ -16,16 +21,25 @@
   position: relative;
   width: -webkit-fill-available;
   width: -moz-available;
+
 }
-.sgds.combobox .dropdown-toggle {
+
+
+.dropdown-menu {
+  max-height: 10rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* .sgds.combobox .dropdown-toggle {
   width: 100%;
-}
-.sgds.combobox > .dropdown-menu {
-  min-width: 100%;
-}
+} */
+
 .form-control-icon {
   bottom: 0;
 }
+
 .combobox-caret {
   color: var(--sgds-form-color-default);
 }

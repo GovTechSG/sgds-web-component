@@ -11,6 +11,7 @@ export * from "./Card/sgds-card";
 export * from "./Checkbox/sgds-checkbox";
 export * from "./Checkbox/sgds-checkbox-group";
 export * from "./ComboBox/sgds-combo-box";
+export * from "./ComboBox/sgds-combo-box-item";
 export * from "./Datepicker/sgds-datepicker";
 export * from "./DescriptionList/sgds-description-list";
 export * from "./DescriptionList/sgds-description-list-group";
