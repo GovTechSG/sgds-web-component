@@ -143,16 +143,17 @@
   <sgds-mainnav-item disabled href="#">About</sgds-mainnav-item>
   <sgds-mainnav-item href="#" slot="end" class="test test2">Info</sgds-mainnav-item>
   <sgds-mainnav-item href="#" slot="end" id="night-theme"><i class="bi bi-moon"></i></sgds-mainnav-item>
-  <sgds-mainnav-dropdown disabled>
+  <sgds-mainnav-dropdown>
     <span slot="toggler">Dropdown</span>
-    <sgds-dropdown-item href="#">Item 1</sgds-dropdown-item>
-    <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
-    <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
+    <sgds-dropdown-item disabled><a href="#">Item 1</a></sgds-dropdown-item>
+    <sgds-dropdown-item ><a href="https://www.google.com/">Item 2</a></sgds-dropdown-item>
+    <sgds-dropdown-item active><a href="#">Item 3</a></sgds-dropdown-item>
   </sgds-mainnav-dropdown>
-  <sgds-mainnav-dropdown togglerText="Dropdown" slot="end">
-    <sgds-dropdown-item href="#">Item 1</sgds-dropdown-item>
-    <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
-    <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
+  <sgds-mainnav-dropdown slot="end">
+    <span slot="toggler">Dropdown</span>
+    <sgds-dropdown-item>Item 1</sgds-dropdown-item>
+    <sgds-dropdown-item>Item 2</sgds-dropdown-item>
+    <sgds-dropdown-item>Item 3</sgds-dropdown-item>
   </sgds-mainnav-dropdown>
   <sgds-button slot="end">Login</sgds-button>
   <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px">

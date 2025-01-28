@@ -11,37 +11,65 @@
     cursor: pointer;
   }
 
-  .dropdown-item:hover {
-    background-color: var(--sgds-default-bg-translucent-subtle);
-  }
-  
-  .dropdown-item:focus,
-  .dropdown-item:focus-visible {
-    outline: 0;
-    box-shadow: inset var(--sgds-form-box-shadow-focus);
-    background-color: var(--sgds-default-bg-translucent-subtle);
-  }
-  
-  .dropdown-item.active,
-  .dropdown-item:active {
-    background-color: var(--sgds-primary-bg-translucent);
-    color: var(--sgds-primary-color);
-    text-decoration: none;
-  }
-  
-  .dropdown-item.disabled,
-  .dropdown-item:disabled {
-    opacity: var(--sgds-opacity-50);
-    pointer-events: none;
-  }
+.dropdown-item:not(.nav-link):hover {
+  background-color: var(--sgds-default-bg-translucent-subtle);
+}
 
-  .active-icon {
-    margin-left: auto;
-  }
+.dropdown-item:not(.nav-link):focus,
+.dropdown-item:not(.nav-link):focus-visible {
+  outline: 0;
+  box-shadow: inset var(--sgds-form-box-shadow-focus);
+  background-color: var(--sgds-default-bg-translucent-subtle);
+}
 
-  ::slotted(*){
-    display: flex;
-    gap: var(--sgds-gap-sm);
-    text-decoration: none !important; 
-    color: inherit !important;
-  }
+.dropdown-item:not(.nav-link).active,
+.dropdown-item:not(.nav-link):active {
+  background-color: var(--sgds-primary-bg-translucent);
+  color: var(--sgds-primary-color);
+  text-decoration: none;
+}
+
+.dropdown-item.disabled,
+.dropdown-item:disabled {
+  opacity: var(--sgds-opacity-50);
+  pointer-events: none;
+}
+
+.active-icon {
+  margin-left: auto;
+}
+
+::slotted(*){
+  display: flex;
+  gap: var(--sgds-gap-sm);
+  text-decoration: none !important; 
+  color: inherit !important;
+}
+
+.nav-link {
+  gap: var(--sgds-gap-xs);
+  padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
+}
+
+.nav-link:hover {
+  color: var(--sgds-primary-color);
+}
+
+.nav-link:focus,
+.nav-link:focus-visible {
+  outline: 0;
+}
+
+.nav-link:focus-visible {
+  box-shadow: var(--sgds-box-shadow-focus) inset;
+  color: var(--sgds-primary-color);
+}
+
+.nav-link.active {
+  color: var(--sgds-primary-color);
+  background-color: var(--sgds-default-bg-translucent-subtle);
+}
+
+.nav-link.active .active-icon {
+  display: none;
+}
