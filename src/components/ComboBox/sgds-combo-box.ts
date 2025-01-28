@@ -140,8 +140,12 @@ export class SgdsComboBox extends DropdownListElement {
     } else if (this.menuIsOpen) {
       this.showMenu();
     }
+    // reset menu list when displayValue
+    if (this.displayValue === "" && !this.multiSelect) {
+      this.selectedItems = [];
+      this.value = this.selectedItems.join(";");
+    }
   }
-
   // Called each time the user types in the <sgds-input>, we set .value and show the menu
   private _handleInputChange(e: CustomEvent) {
     this.showMenu();
@@ -166,6 +170,7 @@ export class SgdsComboBox extends DropdownListElement {
       if (isActive) {
         if (!this.selectedItems.some(i => i.value === foundItem.value)) {
           this.selectedItems = [...this.selectedItems, foundItem];
+          this.displayValue = "";
         }
       } else {
         // Remove
@@ -199,9 +204,11 @@ export class SgdsComboBox extends DropdownListElement {
   }
   private _handleKeyDown(e: KeyboardEvent) {
     // Only do this in multi-select mode
-    if (!this.multiSelect) return;
+    if (!this.multiSelect) {
+      return;
+    }
 
-    if (e.key === "Backspace") {
+    if (e.key === "Backspace" && this.multiSelect) {
       if (this.displayValue.trim() === "" && this.selectedItems.length > 0) {
         this.selectedItems = this.selectedItems.slice(0, -1);
         this.value = this.selectedItems.map(i => i.value).join(";");
