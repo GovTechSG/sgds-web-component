@@ -1,0 +1,24 @@
+:host([active]) .dropdown-item {
+    background-color: var(--sgds-form-primary-bg-translucent, rgba(90, 66, 192, 0.1));
+}
+
+.dropdown-item .normal-item-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+:host([active]) .dropdown-item .normal-item-content {
+    color: var(--sgds-primary-bg);
+}
+
+:host([active]) .dropdown-item .normal-item-content sgds-icon {
+    color: var(--sgds-primary-bg);
+    fill: var(--sgds-primary-bg);
+}
+
+.dropdown-item {
+    padding: var(--sgds-dropdown-item-padding-y, 0.5rem) var(--sgds-dropdown-item-padding-x, 1rem);
+
+}

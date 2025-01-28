@@ -4,15 +4,22 @@ import { ref } from "lit/directives/ref.js";
 import { DropdownListElement } from "../../base/dropdown-list-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { watch } from "../../utils/watch";
-import { SgdsDropdownItem } from "../Dropdown/sgds-dropdown-item";
+import { SgdsComboBoxItem } from "./sgds-combo-box-item";
 import { SgdsInput } from "../Input/sgds-input";
+import { SgdsBadge } from "../Badge/sgds-badge";
 import comboBoxStyle from "./combo-box.css";
 import dropdownStyle from "../Dropdown/dropdown.css";
 import dropdownMenuStyle from "../Dropdown/dropdown-menu.css";
-import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import SgdsIcon from "../Icon/sgds-icon";
 
-type FilterFunction = (inputValue: string, menuItem: string) => boolean;
+/**
+ * Each item in the ComboBox has a label to display
+ * and a value (the actual data / ID).
+ */
+interface SgdsComboBoxItemData {
+  label: string;
+  value: string | number;
+}
 
 /**
  * @summary ComboBox component is used for users to make one or more selections from a list.
@@ -22,17 +29,21 @@ type FilterFunction = (inputValue: string, menuItem: string) => boolean;
  * @event sgds-select - Emitted when the combo box's selected value changes.
  * @event sgds-input -  Emitted when user input is received and its value changes.
  */
+
 export class SgdsComboBox extends DropdownListElement {
   static styles = [...DropdownListElement.styles, dropdownStyle, dropdownMenuStyle, comboBoxStyle];
-  /**@internal */
+
+  /** @internal */
   static dependencies = {
     "sgds-input": SgdsInput,
-    "sgds-dropdown-item": SgdsDropdownItem,
-    "sgds-icon": SgdsIcon
+    "sgds-combo-box-item": SgdsComboBoxItem,
+    "sgds-icon": SgdsIcon,
+    "sgds-badge": SgdsBadge
   };
+
   constructor() {
     super();
-    /**@internal */
+    /** @internal */
     this.modifierOpt = [
       {
         name: "offset",
@@ -42,61 +53,88 @@ export class SgdsComboBox extends DropdownListElement {
       }
     ];
   }
+
   /** The input's label  */
   @property({ reflect: true }) label = "";
+
   /** The input's hint text below the label */
   @property({ reflect: true }) hintText = "";
-  /**The input's name attribute */
+
+  /** The input's name attribute */
   @property({ reflect: true }) name: string;
-  /**The input's placeholder text. */
+
+  /** The input's placeholder text. */
   @property({ type: String, reflect: true }) placeholder = "placeholder";
-  /**Autofocus the input */
+
+  /** Autofocus the input */
   @property({ type: Boolean, reflect: true }) autofocus = false;
-  /**Disables the input. */
+
+  /** Disables the input. */
   @property({ type: Boolean, reflect: true }) disabled = false;
-  /**Makes the input a required field. */
+
+  /** Makes the input a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
-  /**Makes the input readonly. */
+
+  /** Makes the input readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
-  /**The input's value attribute. */
-  @property({ reflect: true }) value = "";
-  /**Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+
+  /**
+   * IMPORTANT:
+   * We still expose `.value` externally, but this is now the underlying ID or data
+   * (e.g. 1, 2, 'abc', ...), not the label that appears in the input box.
+   */
+  @property({ reflect: true })
+  value: string | number | (string | number)[] = "";
+
+  @state()
+  private displayValue = "";
+
+  /** Gets or sets the default value used to reset this element. */
   @defaultValue()
   defaultValue = "";
 
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
-  /**Feedback text for error state when validated */
+
+  /** Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback = "";
 
-  /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
+  /** Marks the component as invalid. Replace the pseudo :invalid selector. */
   @property({ type: Boolean, reflect: true }) invalid = false;
-  /** Marks the input as invalid. Replace the pseudo :valid selector for absent in custom elements */
+
+  /** Marks the input as valid. Replace the pseudo :valid selector. */
   @property({ type: Boolean, reflect: true }) valid = false;
 
-  /**The list of items to display in the dropdown. */
-  @property({ type: Array }) menuList: string[] = [];
+  /** The list of items to display in the dropdown. */
+  @property({ type: Array }) menuList: SgdsComboBoxItemData[] = [];
 
-  /**The function used to determine if a menu item should be shown in the menu list, given the user's input value. */
+  /** If true, renders multiple checkbox selection items. If false, single-select. */
+  @property({ type: Boolean, reflect: true }) multiSelect = false;
+
+  /** The function used to filter the menu list, given the user's input value. */
   @property()
-  filterFunction: FilterFunction = (inputValue: string, menuItem: string) => {
-    const itemLowerCase = menuItem.toLowerCase();
-    const valueLower = inputValue.toLowerCase();
-    return itemLowerCase.startsWith(valueLower);
+  filterFunction: (inputValue: string, item: SgdsComboBoxItemData) => boolean = (inputValue, item) => {
+    return item.label.toLowerCase().startsWith(inputValue.toLowerCase());
   };
 
-  /**@internal */
+  /** @internal */
   @state()
-  private filteredMenuList: string[] = [];
+  private filteredMenuList: SgdsComboBoxItemData[] = [];
 
-  /**@internal */
-  @watch("value")
-  _handleFilterMenu() {
-    this.filteredMenuList = this.menuList.filter(item => this.filterFunction.call(null, this.value, item));
+  /** Track selected items (even for single-select, but it will have at most one). */
+  @state()
+  private selectedItems: SgdsComboBoxItemData[] = [];
 
+  /** Watch the input's value to dynamically filter items in the dropdown. */
+  @watch("displayValue")
+  _filterMenu() {
+    // Filter items based on the typed input
+    this.filteredMenuList = this.menuList.filter(item => this.filterFunction(this.displayValue, item));
+
+    // If using bootstrap's dropdown logic
     if (!this.myDropdown || !this.bsDropdown) return;
 
-    // To hide dropdown menu when filtered menuList is empty
+    // Hide dropdown menu if there are no items
     if (this.filteredMenuList.length === 0) {
       this.hideMenu();
     } else if (this.menuIsOpen) {
@@ -104,19 +142,75 @@ export class SgdsComboBox extends DropdownListElement {
     }
   }
 
+  // Called each time the user types in the <sgds-input>, we set .value and show the menu
   private _handleInputChange(e: CustomEvent) {
     this.showMenu();
-    this.value = (e.target as SgdsInput).value;
+    this.displayValue = (e.target as SgdsInput).value;
   }
 
-  private _handleSelectChange(e: KeyboardEvent | MouseEvent) {
-    this.value = (e.target as HTMLButtonElement).innerText;
-    this.handleSelectSlot(e);
+  /**
+   * Called whenever an <sgds-combo-box-item> dispatches "sgds-combo-box-item-select"
+   */
+  private _handleItemSelected(e: CustomEvent) {
+    const itemEl = e.target as SgdsComboBoxItem;
+    const isActive = e.detail.active;
+
+    const itemLabel = itemEl.textContent?.trim() ?? "";
+    const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
+    const foundItem = this.filteredMenuList.find(i => i.value.toString() === itemValueAttr) || {
+      label: itemLabel,
+      value: itemValueAttr
+    };
+
+    if (this.multiSelect) {
+      if (isActive) {
+        if (!this.selectedItems.some(i => i.value === foundItem.value)) {
+          this.selectedItems = [...this.selectedItems, foundItem];
+        }
+      } else {
+        // Remove
+        this.selectedItems = this.selectedItems.filter(i => i.value !== foundItem.value);
+      }
+
+      this.value = this.selectedItems.map(i => i.value);
+    } else {
+      // Single-select
+      if (isActive) {
+        this.selectedItems = [foundItem];
+
+        this.value = foundItem.value;
+      } else {
+        this.selectedItems = [];
+        this.displayValue = "";
+        this.value = "";
+      }
+    }
+
+    console.log("selectedItems:", this.selectedItems);
+    console.log("value:", this.value);
+  }
+
+  private _handleBadgeDismissed(item: SgdsComboBoxItemData) {
+    this.selectedItems = this.selectedItems.filter(i => i.value !== item.value);
+
+    this.value = this.selectedItems.map(i => i.value);
+  }
+  private _handleKeyDown(e: KeyboardEvent) {
+    // Only do this in multi-select mode
+    if (!this.multiSelect) return;
+
+    if (e.key === "Backspace") {
+      if (this.displayValue.trim() === "" && this.selectedItems.length > 0) {
+        this.selectedItems = this.selectedItems.slice(0, -1);
+        this.value = this.selectedItems.map(i => i.value);
+      }
+    }
   }
 
   render() {
     return html`
-      <div class="sgds combobox dropdown">
+      <div class="combobox" @keydown=${this._handleKeyDown}>
+        <!-- The input -->
         <sgds-input
           class="dropdown-toggle"
           label=${this.label}
@@ -133,19 +227,45 @@ export class SgdsComboBox extends DropdownListElement {
           invalidfeedback=${this.invalidFeedback}
           ?invalid=${this.invalid}
           ?valid=${this.valid}
-          .value=${this.value}
+          .value=${this.displayValue}
           @sgds-input=${this._handleInputChange}
           role="combobox"
           aria-expanded=${this.menuIsOpen}
           aria-autocomplete="list"
           aria-controls=${this.dropdownMenuId}
           suffix=${html`<sgds-icon name="chevron-down" size="md"></sgds-icon>`}
+          .prefix=${this.multiSelect
+            ? html`
+                ${this.selectedItems.map(
+                  item =>
+                    html`<sgds-badge
+                      outlined
+                      variant="neutral"
+                      show
+                      dismissible
+                      @sgds-hide=${() => this._handleBadgeDismissed(item)}
+                      >${item.label}</sgds-badge
+                    >`
+                )}
+              `
+            : null}
         >
         </sgds-input>
+
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1">
-          ${this.filteredMenuList.map(
-            item => html`<sgds-dropdown-item @click=${this._handleSelectChange}>${item}</sgds-dropdown-item>`
-          )}
+          ${this.filteredMenuList.map(item => {
+            const isActive = this.selectedItems.includes(item);
+            return html`
+              <sgds-combo-box-item
+                ?active=${isActive}
+                ?checkbox=${this.multiSelect}
+                value=${item.value}
+                @sgds-combo-box-item-select=${this._handleItemSelected}
+              >
+                ${item.label}
+              </sgds-combo-box-item>
+            `;
+          })}
         </ul>
       </div>
     `;
