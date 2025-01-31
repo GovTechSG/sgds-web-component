@@ -1,4 +1,4 @@
-import { assert, elementUpdated, expect, fixture, waitUntil } from "@open-wc/testing";
+import { assert, expect, fixture, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
@@ -336,6 +336,26 @@ describe("single select combobox", () => {
     await waitUntil(() => el.shadowRoot?.querySelector("sgds-input")?.value === "Apple");
     expect(el.value).to.equal("option1");
   });
+
+  it("Keyboard arrowDown and enter populates the input with badge", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`<sgds-combo-box
+        .menuList=${[
+          { label: "Apple", value: "option1" },
+          { label: "Apricot", value: "option2" },
+          { label: "Dur", value: "option3" }
+        ]}
+      ></sgds-combo-box>`
+    );
+
+    const input = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    input.focus();
+    await sendKeys({ press: "ArrowDown" });
+    await sendKeys({ press: "Enter" });
+    await el.updateComplete;
+    expect(el.value).to.equal("option1");
+    expect(el.shadowRoot?.querySelector("sgds-input")?.value).to.equal("Apple");
+  });
 });
 
 describe("multi select combobox", () => {
@@ -463,21 +483,44 @@ describe("multi select combobox", () => {
     const durItem = el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']") as SgdsComboBoxItem;
     expect(durItem.active).to.be.false;
   });
+  it("Keyboard arrowDown and enter populates the input with badge", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`<sgds-combo-box
+        multiSelect
+        .menuList=${[
+          { label: "Apple", value: "option1" },
+          { label: "Apricot", value: "option2" },
+          { label: "Dur", value: "option3" }
+        ]}
+      ></sgds-combo-box>`
+    );
+
+    const input = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    input.focus();
+    await sendKeys({ press: "ArrowDown" });
+    await sendKeys({ press: "Enter" });
+    await el.updateComplete;
+    expect(el.value).to.equal("option1");
+    const badge = input.shadowRoot?.querySelector("sgds-badge") as SgdsBadge;
+    expect(badge.innerText).to.equal("Apple");
+  });
 });
 
 // UT scenarios
 // Single Select
 // 1. when initial value is specified, input is populated, item is active (DONE)
 // 2. When invalid displayValue is written, it should clear the input after losing focus (DONE)
-// 3. When input value matches an item, item menu is shown and focused . On enter populates the input
+// 3. When input value matches an item, item menu is shown and focused . On enter populates the input (??? clarify with andy)
 // 4. When input is cleared, the active item is no longer active (DONE)
 // 5. When a selection is made and input is blurred. The value of input or displayValue will sync with the menu selected item regardless of the value (DONE)
 // 6. If a purposeful selection is not made through enter or click, input is blurred. the displayValue clears regardless if value match anot (DONE)
+// 7. Keyboard ArrowDown and Enter populates the input with value (DONE)
 
 // UT scenarios
 // Multi Select
 // 1. when initial value is specified, input is populated, item is checked and active, badge is in input (DONE)
 // 2. When invalid displayValue is written, it should clear the input after losing focus (DONE)
-// 3. When input value matches an item, item menu is shown and focused . On enter populates the input
+// 3. When input value matches an item, item menu is shown and focused . On enter populates the input (??? clarify with andy)
 // 4. If a purposeful selection is not made through enter or click, input is blurred. the displayValue clears regardless if value match anot (DONE)
 // 5. When a badge is cancelled, it syncs with the removal actie item in the menu (DONE)
+// 6. Keyboard arrowdown and enter populates the input with badge (DONE)
