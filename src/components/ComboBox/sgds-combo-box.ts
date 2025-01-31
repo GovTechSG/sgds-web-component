@@ -18,7 +18,7 @@ import SgdsIcon from "../Icon/sgds-icon";
  */
 interface SgdsComboBoxItemData {
   label: string;
-  value: string | number;
+  value: string;
 }
 
 /**
@@ -48,7 +48,7 @@ export class SgdsComboBox extends DropdownListElement {
       {
         name: "offset",
         options: {
-          offset: [0, 10]
+          offset: [0, 8]
         }
       }
     ];
@@ -125,6 +125,30 @@ export class SgdsComboBox extends DropdownListElement {
   @state()
   private selectedItems: SgdsComboBoxItemData[] = [];
 
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener("blur", this._handleInputBlur);
+  }
+  firstUpdated(): void {
+    super.firstUpdated();
+    if (this.value) {
+      const valueArray = this.value.split(";");
+      const initialSelectedItem = this.menuList.filter(({ value }) => valueArray.includes(value));
+      this.selectedItems = [...initialSelectedItem, ...this.selectedItems];
+
+      if (!this.multiSelect) {
+        this.displayValue = initialSelectedItem[0].label;
+      }
+    }
+  }
+
+  @watch("value", { waitUntilFirstUpdate: true })
+  _handleValueChange() {
+    if (this.value) {
+      this.emit("sgds-select");
+    }
+  }
+
   /** Watch the input's value to dynamically filter items in the dropdown. */
   @watch("displayValue")
   _filterMenu() {
@@ -153,7 +177,7 @@ export class SgdsComboBox extends DropdownListElement {
   }
 
   /**
-   * Called whenever an <sgds-combo-box-item> dispatches "sgds-selected"
+   * Called whenever an <sgds-combo-box-item> dispatches sgds-select"
    */
   private _handleItemSelected(e: CustomEvent) {
     const itemEl = e.target as SgdsComboBoxItem;
@@ -170,7 +194,7 @@ export class SgdsComboBox extends DropdownListElement {
       if (isActive) {
         if (!this.selectedItems.some(i => i.value === foundItem.value)) {
           this.selectedItems = [...this.selectedItems, foundItem];
-          this.displayValue = "";
+          setTimeout(() => (this.displayValue = ""));
         }
       } else {
         // Remove
@@ -212,6 +236,22 @@ export class SgdsComboBox extends DropdownListElement {
       if (this.displayValue.trim() === "" && this.selectedItems.length > 0) {
         this.selectedItems = this.selectedItems.slice(0, -1);
         this.value = this.selectedItems.map(i => i.value).join(";");
+      }
+    }
+  }
+  private _handleInputBlur() {
+    if (this.multiSelect) {
+      const displayValueMatchedSelectedItems = this.selectedItems.filter(({ label }) => this.displayValue === label);
+      if (displayValueMatchedSelectedItems.length <= 0) {
+        this.displayValue = "";
+      }
+    } else {
+      // Single select
+      //When a seleection is made, input is blurred.
+      if (this.selectedItems.length > 0) {
+        this.displayValue = this.selectedItems[0].label;
+      } else {
+        this.displayValue = "";
       }
     }
   }
@@ -269,7 +309,7 @@ export class SgdsComboBox extends DropdownListElement {
                 ?active=${isActive}
                 ?checkbox=${this.multiSelect}
                 value=${item.value}
-                @sgds-selected=${this._handleItemSelected}
+                @sgds-select=${this._handleItemSelected}
               >
                 ${item.label}
               </sgds-combo-box-item>

@@ -36,7 +36,7 @@ export class SgdsComboBoxItem extends SgdsElement {
   private _handleNonCheckboxClick() {
     if (!this.checkbox) {
       this.active = true;
-      this.emit("sgds-selected", { detail: { active: this.active } });
+      this.emit("sgds-select", { detail: { active: this.active } });
     }
   }
   private _handleCheckboxClick() {
@@ -47,7 +47,7 @@ export class SgdsComboBoxItem extends SgdsElement {
     const checkbox = e.target as HTMLInputElement;
     this.active = checkbox.checked;
 
-    this.emit("sgds-selected", { detail: { active: this.active } });
+    this.emit("sgds-select", { detail: { active: this.active } });
   }
 
   render() {

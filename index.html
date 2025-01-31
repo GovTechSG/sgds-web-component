@@ -767,32 +767,29 @@
     </div>
     <div class="container">
       <h2>ComboBox</h2>
-      <sgds-combo-box menuList='[
-      { "label": "John Smith", "value": 1 },
-      { "label": "Jack Adams", "value": 2 },
-      { "label": "Regina Bride", "value": 3 },
-      { "label": "Christian Dior", "value": 4 },
-      { "label": "Prada Low", "value": 5 },
-      { "label": "Chloe Delight", "value": 6 },
-      { "label": "Jade Apheremal", "value": 7 },
-      { "label": "Louis Vuitton", "value": 8 }
+      
+      <sgds-combo-box value="1" menuList='[
+      { "label": "John Smith", "value": "1" },
+      { "label": "Jack Adams", "value": "2" },
+      { "label": "Regina Bride", "value": "3" },
+      { "label": "Christian Dior", "value": "4" },
+      { "label": "Prada Low", "value": "5" },
+      { "label": "Chloe Delight", "value": "6" },
+      { "label": "Jade Apheremal", "value": "7" },
+      { "label": "Louis Vuitton", "value": "8" }
     ]' label="label" hintText="hint" hasFeedback="true" invalidFeedback="test">
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-          class="bi bi-search" viewBox="0 0 16 16">
-          <path
-            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-        </svg>
       </sgds-combo-box>
 
       <sgds-combo-box menuList='[
-      { "label": "John Smith", "value": 1 },
-      { "label": "Jack Adams", "value": 2 }
-    ]' multiSelect label="label" hintText="multiple" invalid hasFeedback="true" invalidFeedback="test">
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-          class="bi bi-search" viewBox="0 0 16 16">
-          <path
-            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-        </svg>
+      { "label": "John Smith", "value": "1" },
+      { "label": "Jack Adams", "value": "2" },
+      { "label": "Regina Bride", "value": "3" },
+      { "label": "Christian Dior", "value": "4" },
+      { "label": "Prada Low", "value": "5" },
+      { "label": "Chloe Delight", "value": "6" },
+      { "label": "Jade Apheremal", "value": "7" },
+      { "label": "Louis Vuitton", "value": "8" }
+    ]'  multiSelect label="label" hintText="multiple" invalid hasFeedback="true" invalidFeedback="test">
       </sgds-combo-box>
       <h2>Datepicker</h2>
       <form id="datepicker-form">
