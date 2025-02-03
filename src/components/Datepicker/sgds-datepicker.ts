@@ -336,7 +336,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     await input.applyInputMask();
 
     this._mixinResetValidity(input);
-    if (this.isValueEmpty()) {
+    if (this.isValueEmpty() && this.required) {
       this._handleEmptyInput();
     }
   }

@@ -135,14 +135,13 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
 
   connectedCallback(): void {
     super.connectedCallback();
-    this.addEventListener("blur", async() => {
-      const sgdsInput = await this._sgdsInput
-      this.invalid = sgdsInput.invalid  = !this._mixinReportValidity();
+    this.addEventListener("blur", async () => {
+      const sgdsInput = await this._sgdsInput;
+      this.invalid = sgdsInput.invalid = !this._mixinReportValidity();
     });
-
   }
 
-  firstUpdated(): void {
+  async firstUpdated() {
     super.firstUpdated();
     if (this.value) {
       const valueArray = this.value.split(";");
@@ -152,6 +151,14 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
       if (!this.multiSelect) {
         this.displayValue = initialSelectedItem[0].label;
       }
+    }
+
+    if (this.multiSelect) {
+      const input = await this._multiSelectInput;
+      this._mixinValidate(input);
+    } else {
+      const sgdsInput = await this._sgdsInput;
+      this._mixinValidate(sgdsInput.input);
     }
   }
 
@@ -164,16 +171,16 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
       this.emit("sgds-select");
     }
     const sgdsInput = await this._sgdsInput;
-    this._mixinSetFormValue();   
+    this._mixinSetFormValue();
 
-      if (this.multiSelect) {
-        this._mixinValidate(this.input)
-      } else {
-        this._mixinValidate(sgdsInput.input);
-      }
-      if(!this._isTouched && this.value === "") return
+    if (this.multiSelect) {
+      this._mixinValidate(this.input);
+    } else {
+      this._mixinValidate(sgdsInput.input);
+    }
+    if (!this._isTouched && this.value === "") return;
 
-      this.invalid = sgdsInput.invalid  = !this._mixinReportValidity();
+    this.invalid = sgdsInput.invalid = !this._mixinReportValidity();
   }
 
   /** Watch the input's value to dynamically filter items in the dropdown. */
@@ -199,6 +206,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
   }
   // Called each time the user types in the <sgds-input>, we set .value and show the menu
   private _handleInputChange(e: CustomEvent) {
+    this.invalid = false;
     this.showMenu();
     this.displayValue = (e.target as SgdsInput).value;
   }
@@ -236,7 +244,6 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
         this.value = foundItem.value.toString();
         this.displayValue = this.selectedItems[0].label;
         this.hideMenu();
-
       } else {
         this.selectedItems = [];
         this.displayValue = "";
@@ -264,6 +271,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
     }
   }
   private async _handleInputBlur(e: Event) {
+    console.log("input blur");
     e.preventDefault();
     if (this.multiSelect) {
       const displayValueMatchedSelectedItems = this.selectedItems.filter(({ label }) => this.displayValue === label);
@@ -279,7 +287,6 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
         this.displayValue = "";
       }
     }
-  
   }
 
   /**
@@ -345,19 +352,18 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
       await (
         await this._sgdsInput
       ).updateComplete;
-      this._mixinResetValidity(await this._sgdsInput)
+      this._mixinResetValidity((await this._sgdsInput).input);
     } else {
       const valueArray = this.value.split(";");
       const initialItem = this.menuList.filter(({ value }) => valueArray.includes(value));
       this.selectedItems = initialItem;
-      this._mixinResetValidity(await this._sgdsInput)
-      this._mixinResetValidity(await this._multiSelectInput)
+      // this._mixinResetValidity((await this._sgdsInput).input);
+      this._mixinResetValidity(await this._multiSelectInput);
     }
-
   }
   render() {
     return html`
-      <div class="combobox" @keydown=${this._handleKeyDown} >
+      <div class="combobox" @keydown=${this._handleKeyDown}>
         <!-- The input -->
         <sgds-input
           class="dropdown-toggle"
@@ -368,7 +374,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
           placeholder=${this.placeholder}
           ?autofocus=${this.autofocus}
           ?disabled=${this.disabled}
-          required=${this.required}
+          ?required=${this.required}
           ?readonly=${this.readonly}
           hasFeedback=${ifDefined(this.hasFeedback ? "style" : undefined)}
           invalidfeedback=${this.invalidFeedback}
@@ -376,6 +382,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
           .value=${this.displayValue}
           @sgds-input=${this._handleInputChange}
           @sgds-blur=${this._handleInputBlur}
+          @sgds-change=${e => e.preventDefault()}
           role="combobox"
           aria-expanded=${this.menuIsOpen}
           aria-autocomplete="list"
@@ -421,7 +428,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
             .value=${live(this.value)}
             id="multi-select-input-tracker"
             class="visually-hidden"
-            required=${this.required}
+            ?required=${this.required}
           />`
         : nothing}
     `;

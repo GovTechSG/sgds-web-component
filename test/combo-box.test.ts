@@ -4,7 +4,7 @@ import { html } from "lit";
 import sinon from "sinon";
 import "./sgds-web-component";
 
-import type { SgdsBadge, SgdsComboBox, SgdsComboBoxItem, SgdsInput } from "../src/components";
+import type { SgdsBadge, SgdsButton, SgdsComboBox, SgdsComboBoxItem, SgdsInput } from "../src/components";
 
 describe("sgds-combo-box ", () => {
   it("matches shadowDom semantically", async () => {
@@ -29,7 +29,6 @@ describe("sgds-combo-box ", () => {
           label=""
           name=""
           placeholder="placeholder"
-          required=""
           role="combobox"
           suffix="[object Object]"
           type="text"
@@ -506,6 +505,367 @@ describe("multi select combobox", () => {
   });
 });
 
+describe("single select >> when submitting a form", () => {
+  it("when required=true should block submission of form when there is no value", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-combo-box
+          required
+          .menuList=${[
+            { label: "Apple", value: "option1" },
+            { label: "Apricot", value: "option2" },
+            { label: "Dur", value: "option3" }
+          ]}
+        ></sgds-combo-box>
+        <sgds-button type="submit"></sgds-button>
+      </form>`
+    );
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    expect(form.reportValidity()).to.equal(false);
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    expect(submitHandler).not.to.have.been.calledOnce;
+  });
+  it("when required=true and value is true , form can be submitted", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-combo-box
+          required
+          .menuList=${[
+            { label: "Apple", value: "option1" },
+            { label: "Apricot", value: "option2" },
+            { label: "Dur", value: "option3" }
+          ]}
+          value="option3"
+        ></sgds-combo-box>
+        <sgds-button type="submit"></sgds-button>
+      </form>`
+    );
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    expect(form.reportValidity()).to.equal(true);
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+  it("when disabled, form is always able to submit even if there is no value", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-combo-box
+          required
+          disabled
+          .menuList=${[
+            { label: "Apple", value: "option1" },
+            { label: "Apricot", value: "option2" },
+            { label: "Dur", value: "option3" }
+          ]}
+        ></sgds-combo-box>
+        <sgds-button type="submit"></sgds-button>
+      </form>`
+    );
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    expect(form.reportValidity()).to.equal(true);
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+  it("when reset, values are reset to defaultValue", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-combo-box
+          required
+          .menuList=${[
+            { label: "Apple", value: "option1" },
+            { label: "Apricot", value: "option2" },
+            { label: "Dur", value: "option3" }
+          ]}
+          value="option3"
+        ></sgds-combo-box>
+        <sgds-button type="submit"></sgds-button>
+        <sgds-button type="reset"></sgds-button>
+      </form>`
+    );
+    const input = () => form.querySelector("sgds-combo-box")?.shadowRoot?.querySelector("sgds-input");
+    const comboBox = () => form.querySelector("sgds-combo-box");
+    expect(input()?.value).to.equal("Dur");
+    // Clear input
+    input()?.focus();
+    await sendKeys({ press: "Backspace" });
+    await sendKeys({ press: "Backspace" });
+    await sendKeys({ press: "Backspace" });
+    await waitUntil(() => input()?.value === "");
+
+    const submitButton = form.querySelector<SgdsButton>("sgds-button[type='submit']");
+    submitButton?.click();
+    //submitting empty combobox value triggers invalid
+    await waitUntil(() => comboBox()?.invalid);
+    expect(comboBox()?.invalid).to.be.true;
+
+    const resetButton = form.querySelector<SgdsButton>("sgds-button[type='reset']");
+    resetButton?.click();
+    // resets value to the defaultValue and removes the invalid state
+    await waitUntil(() => !comboBox()?.invalid);
+    expect(comboBox()?.invalid).to.be.false;
+    expect(input()?.value).to.equal("Dur");
+  });
+  it("when touched and blurred and value is empty, error is shown", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`
+        <sgds-combo-box
+          hasFeedback
+          required
+          .menuList=${[
+            { label: "Apple", value: "option1" },
+            { label: "Apricot", value: "option2" },
+            { label: "Dur", value: "option3" }
+          ]}
+        ></sgds-combo-box>
+      `
+    );
+    const input = el.shadowRoot?.querySelector("sgds-input");
+    input?.focus();
+    el.blur();
+    await el.updateComplete;
+    await waitUntil(() => el.shadowRoot?.querySelector("sgds-input")?.shadowRoot?.querySelector("input:invalid"));
+  });
+  it("when invalid, typing in the input sets invalid to false", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`
+        <sgds-combo-box
+          hasFeedback
+          required
+          .menuList=${[
+            { label: "Apple", value: "option1" },
+            { label: "Apricot", value: "option2" },
+            { label: "Dur", value: "option3" }
+          ]}
+        ></sgds-combo-box>
+      `
+    );
+    const input = el.shadowRoot?.querySelector("sgds-input");
+    input?.focus();
+    el.blur();
+
+    await el.updateComplete;
+    await waitUntil(() => el.shadowRoot?.querySelector("sgds-input")?.shadowRoot?.querySelector("input:invalid"));
+    input?.focus();
+    await sendKeys({ type: "Abcd" });
+    await waitUntil(() => el.shadowRoot?.querySelector("sgds-input")?.value === "Abcd");
+    expect(el.invalid).to.be.false;
+  });
+
+  it("when traversing menu, no error should be shown", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`
+        <sgds-combo-box
+          hasFeedback
+          required
+          .menuList=${[
+            { label: "Apple", value: "option1" },
+            { label: "Apricot", value: "option2" },
+            { label: "Dur", value: "option3" }
+          ]}
+        ></sgds-combo-box>
+      `
+    );
+    const input = el.shadowRoot?.querySelector("sgds-input");
+    input?.focus();
+    await sendKeys({ press: "ArrowDown" });
+    await waitUntil(() => {
+      const comboItem1 = el.shadowRoot?.querySelectorAll("sgds-combo-box-item")[0];
+      return el.shadowRoot?.activeElement === comboItem1;
+    });
+    expect(el.invalid).to.be.false;
+  });
+});
+describe("multi select >> when submitting a form", () => {
+  it("when required=true should block submission of form when there is no value", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-combo-box
+          required
+          multiSelect
+          .menuList=${[
+            { label: "Apple", value: "option1" },
+            { label: "Apricot", value: "option2" },
+            { label: "Dur", value: "option3" }
+          ]}
+        ></sgds-combo-box>
+        <sgds-button type="submit"></sgds-button>
+      </form>`
+    );
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    expect(form.reportValidity()).to.equal(false);
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    expect(submitHandler).not.to.have.been.calledOnce;
+  });
+  it("when required=true and value is true , form can be submitted", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-combo-box
+          required
+          multiSelect
+          .menuList=${[
+            { label: "Apple", value: "option1" },
+            { label: "Apricot", value: "option2" },
+            { label: "Dur", value: "option3" }
+          ]}
+          value="option3"
+        ></sgds-combo-box>
+        <sgds-button type="submit"></sgds-button>
+      </form>`
+    );
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    expect(form.reportValidity()).to.equal(true);
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+  it("when disabled, form is always able to submit even if there is no value", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-combo-box
+          required
+          disabled
+          multiSelect
+          .menuList=${[
+            { label: "Apple", value: "option1" },
+            { label: "Apricot", value: "option2" },
+            { label: "Dur", value: "option3" }
+          ]}
+        ></sgds-combo-box>
+        <sgds-button type="submit"></sgds-button>
+      </form>`
+    );
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    expect(form.reportValidity()).to.equal(true);
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+  it("when reset, values are reset to defaultValue", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-combo-box
+          required
+          multiSelect
+          .menuList=${[
+            { label: "Apple", value: "option1" },
+            { label: "Apricot", value: "option2" },
+            { label: "Dur", value: "option3" }
+          ]}
+          value="option3"
+        ></sgds-combo-box>
+        <sgds-button type="submit"></sgds-button>
+        <sgds-button type="reset"></sgds-button>
+      </form>`
+    );
+    const input = () => form.querySelector("sgds-combo-box")?.shadowRoot?.querySelector("sgds-input");
+    const badge = () => input()?.shadowRoot?.querySelector("sgds-badge");
+    const comboBox = () => form.querySelector("sgds-combo-box");
+    expect(badge()?.textContent).to.equal("Dur");
+    // Clear input
+    input()?.focus();
+    await sendKeys({ press: "Backspace" });
+    await waitUntil(() => !badge());
+
+    const submitButton = form.querySelector<SgdsButton>("sgds-button[type='submit']");
+    submitButton?.click();
+    //submitting empty combobox value triggers invalid
+    await waitUntil(() => comboBox()?.invalid);
+    expect(comboBox()?.invalid).to.be.true;
+
+    const resetButton = form.querySelector<SgdsButton>("sgds-button[type='reset']");
+    resetButton?.click();
+    // resets value to the defaultValue and removes the invalid state
+    await waitUntil(() => !comboBox()?.invalid);
+    expect(comboBox()?.invalid).to.be.false;
+    expect(badge()?.textContent).to.equal("Dur");
+  });
+  it("when touched and blurred and value is empty, error is shown", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`
+        <sgds-combo-box
+          hasFeedback
+          multiSelect
+          required
+          .menuList=${[
+            { label: "Apple", value: "option1" },
+            { label: "Apricot", value: "option2" },
+            { label: "Dur", value: "option3" }
+          ]}
+        ></sgds-combo-box>
+      `
+    );
+    const input = el.shadowRoot?.querySelector("sgds-input");
+    input?.focus();
+    el.blur();
+    await el.updateComplete;
+    await waitUntil(() => el.shadowRoot?.querySelector("sgds-input")?.shadowRoot?.querySelector("input:invalid"));
+  });
+  it("when invalid, typing in the input sets invalid to false", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`
+        <sgds-combo-box
+          hasFeedback
+          required
+          multiSelect
+          .menuList=${[
+            { label: "Apple", value: "option1" },
+            { label: "Apricot", value: "option2" },
+            { label: "Dur", value: "option3" }
+          ]}
+        ></sgds-combo-box>
+      `
+    );
+    const input = el.shadowRoot?.querySelector("sgds-input");
+    input?.focus();
+    el.blur();
+
+    await el.updateComplete;
+    await waitUntil(() => el.shadowRoot?.querySelector("sgds-input")?.shadowRoot?.querySelector("input:invalid"));
+    input?.focus();
+    await sendKeys({ type: "Abcd" });
+    await waitUntil(() => el.shadowRoot?.querySelector("sgds-input")?.value === "Abcd");
+    expect(el.invalid).to.be.false;
+  });
+
+  it("when traversing menu, no error should be shown", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`
+        <sgds-combo-box
+          hasFeedback
+          multiSelect
+          required
+          .menuList=${[
+            { label: "Apple", value: "option1" },
+            { label: "Apricot", value: "option2" },
+            { label: "Dur", value: "option3" }
+          ]}
+        ></sgds-combo-box>
+      `
+    );
+    const input = el.shadowRoot?.querySelector("sgds-input");
+    input?.focus();
+    await sendKeys({ press: "ArrowDown" });
+    await waitUntil(() => {
+      const comboItem1 = el.shadowRoot?.querySelectorAll("sgds-combo-box-item")[0];
+      return el.shadowRoot?.activeElement === comboItem1;
+    });
+    expect(el.invalid).to.be.false;
+  });
+});
+
 // UT scenarios
 // Single Select
 // 1. when initial value is specified, input is populated, item is active (DONE)
@@ -516,12 +876,12 @@ describe("multi select combobox", () => {
 // 6. If a purposeful selection is not made through enter or click, input is blurred. the displayValue clears regardless if value match anot (DONE)
 // 7. Keyboard ArrowDown and Enter populates the input with value (DONE)
 
-// Required VALIDATION 
-// 8. When first submitted untouched, throw error
-// 9. When touched and blurred, throw error
-// 10. When typing, error should be gone 
-// 11. when traversing menu, no error to show 
-// 12. When reset, no error , values revert to defaultValue
+// Required VALIDATION
+// 8. When first submitted untouched, throw error (DONE)
+// 9. When touched and blurred, throw error (DONE)
+// 10. When typing, error should be gone (DONE)
+// 11. when traversing menu, no error to show (DONE)
+// 12. When reset, no error , values revert to defaultValue (DONE)
 
 // UT scenarios
 // Multi Select
