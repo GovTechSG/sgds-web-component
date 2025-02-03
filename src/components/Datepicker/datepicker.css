@@ -10,6 +10,11 @@
 
   font-size: var(--sgds-font-size-1);
 }
+.dropdown {
+  display: flex;
+  height: 100%;
+}
+
 .datepicker.dropdown-menu.show {
   background-color: var(--sgds-default-bg-surface);
   padding: var(--sgds-form-padding-y) var(--sgds-form-padding-x);

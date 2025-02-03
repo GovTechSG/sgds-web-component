@@ -516,6 +516,13 @@ describe("multi select combobox", () => {
 // 6. If a purposeful selection is not made through enter or click, input is blurred. the displayValue clears regardless if value match anot (DONE)
 // 7. Keyboard ArrowDown and Enter populates the input with value (DONE)
 
+// Required VALIDATION 
+// 8. When first submitted untouched, throw error
+// 9. When touched and blurred, throw error
+// 10. When typing, error should be gone 
+// 11. when traversing menu, no error to show 
+// 12. When reset, no error , values revert to defaultValue
+
 // UT scenarios
 // Multi Select
 // 1. when initial value is specified, input is populated, item is checked and active, badge is in input (DONE)

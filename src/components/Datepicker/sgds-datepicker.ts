@@ -9,7 +9,6 @@ import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
 import { watch } from "../../utils/watch";
 import { SgdsButton } from "../Button/sgds-button";
 import dropdownMenuStyle from "../Dropdown/dropdown-menu.css";
-import dropdownStyle from "../Dropdown/dropdown.css";
 import { DatepickerCalendar } from "./datepicker-calendar";
 import { DatepickerHeader } from "./datepicker-header";
 import DatepickerInput from "./datepicker-input";
@@ -32,7 +31,7 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  * date view of the calendar
  */
 export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) implements SgdsFormControl {
-  static styles = [...DropdownElement.styles, dropdownStyle, dropdownMenuStyle, datepickerStyle];
+  static styles = [...DropdownElement.styles, dropdownMenuStyle, datepickerStyle];
   /**@internal */
   static dependencies = {
     "sgds-datepicker-input": DatepickerInput,

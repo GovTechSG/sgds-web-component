@@ -1,16 +1,22 @@
-import { html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { html, nothing } from "lit";
+import { property, queryAsync, state } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownListElement } from "../../base/dropdown-list-element";
 import { defaultValue } from "../../utils/defaultvalue";
+import { SgdsFormControl } from "../../utils/formSubmitController";
+import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
-import { SgdsComboBoxItem } from "./sgds-combo-box-item";
-import { SgdsInput } from "../Input/sgds-input";
 import { SgdsBadge } from "../Badge/sgds-badge";
-import comboBoxStyle from "./combo-box.css";
-import dropdownStyle from "../Dropdown/dropdown.css";
 import dropdownMenuStyle from "../Dropdown/dropdown-menu.css";
 import SgdsIcon from "../Icon/sgds-icon";
+import { SgdsInput } from "../Input/sgds-input";
+import comboBoxStyle from "./combo-box.css";
+import { SgdsComboBoxItem } from "./sgds-combo-box-item";
+import generateId from "../../utils/generateId";
+import { ifDefined } from "lit/directives/if-defined.js";
+import hintTextStyles from "../../styles/form-hint.css";
+import feedbackStyles from "../../styles/feedback.css";
+import { live } from "lit/directives/live.js";
 
 /**
  * Each item in the ComboBox has a label to display
@@ -30,8 +36,8 @@ interface SgdsComboBoxItemData {
  * @event sgds-input -  Emitted when user input is received and its value changes.
  */
 
-export class SgdsComboBox extends DropdownListElement {
-  static styles = [...DropdownListElement.styles, dropdownStyle, dropdownMenuStyle, comboBoxStyle];
+export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) implements SgdsFormControl {
+  static styles = [...DropdownListElement.styles, dropdownMenuStyle, hintTextStyles, feedbackStyles, comboBoxStyle];
 
   /** @internal */
   static dependencies = {
@@ -125,10 +131,17 @@ export class SgdsComboBox extends DropdownListElement {
   @state()
   private selectedItems: SgdsComboBoxItemData[] = [];
 
+  private _isTouched = false;
+
   connectedCallback(): void {
     super.connectedCallback();
-    this.addEventListener("blur", this._handleInputBlur);
+    this.addEventListener("blur", async() => {
+      const sgdsInput = await this._sgdsInput
+      this.invalid = sgdsInput.invalid  = !this._mixinReportValidity();
+    });
+
   }
+
   firstUpdated(): void {
     super.firstUpdated();
     if (this.value) {
@@ -142,11 +155,25 @@ export class SgdsComboBox extends DropdownListElement {
     }
   }
 
+  @queryAsync("sgds-input") private _sgdsInput: Promise<SgdsInput>;
+  @queryAsync("input#multi-select-input-tracker") private _multiSelectInput: Promise<HTMLInputElement>;
+
   @watch("value", { waitUntilFirstUpdate: true })
-  _handleValueChange() {
+  async _handleValueChange() {
     if (this.value) {
       this.emit("sgds-select");
     }
+    const sgdsInput = await this._sgdsInput;
+    this._mixinSetFormValue();   
+
+      if (this.multiSelect) {
+        this._mixinValidate(this.input)
+      } else {
+        this._mixinValidate(sgdsInput.input);
+      }
+      if(!this._isTouched && this.value === "") return
+
+      this.invalid = sgdsInput.invalid  = !this._mixinReportValidity();
   }
 
   /** Watch the input's value to dynamically filter items in the dropdown. */
@@ -179,7 +206,7 @@ export class SgdsComboBox extends DropdownListElement {
   /**
    * Called whenever an <sgds-combo-box-item> dispatches sgds-select"
    */
-  private _handleItemSelected(e: CustomEvent) {
+  private async _handleItemSelected(e: CustomEvent) {
     const itemEl = e.target as SgdsComboBoxItem;
     const isActive = e.detail.active;
 
@@ -200,7 +227,6 @@ export class SgdsComboBox extends DropdownListElement {
         // Remove
         this.selectedItems = this.selectedItems.filter(i => i.value !== foundItem.value);
       }
-
       this.value = this.selectedItems.map(i => i.value).join(";");
     } else {
       // Single-select
@@ -210,15 +236,13 @@ export class SgdsComboBox extends DropdownListElement {
         this.value = foundItem.value.toString();
         this.displayValue = this.selectedItems[0].label;
         this.hideMenu();
+
       } else {
         this.selectedItems = [];
         this.displayValue = "";
         this.value = "";
       }
     }
-
-    console.log("selectedItems:", this.selectedItems);
-    console.log("value:", this.value);
   }
 
   private _handleBadgeDismissed(item: SgdsComboBoxItemData) {
@@ -239,7 +263,8 @@ export class SgdsComboBox extends DropdownListElement {
       }
     }
   }
-  private _handleInputBlur() {
+  private async _handleInputBlur(e: Event) {
+    e.preventDefault();
     if (this.multiSelect) {
       const displayValueMatchedSelectedItems = this.selectedItems.filter(({ label }) => this.displayValue === label);
       if (displayValueMatchedSelectedItems.length <= 0) {
@@ -254,16 +279,89 @@ export class SgdsComboBox extends DropdownListElement {
         this.displayValue = "";
       }
     }
+  
   }
 
+  /**
+   * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
+   * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
+   */
+  public reportValidity(): boolean {
+    return this._mixinReportValidity();
+  }
+  /**
+   * Checks for validity without any native error popup message
+   */
+  public checkValidity(): boolean {
+    return this._mixinCheckValidity();
+  }
+
+  /**
+   * Returns the ValidityState object
+   */
+  public get validity(): ValidityState {
+    return this._mixinGetValidity();
+  }
+  /**
+   * Returns the validation message based on the ValidityState
+   */
+  public get validationMessage() {
+    return this._mixinGetValidationMessage();
+  }
+  protected _controlId = generateId("input");
+  protected _renderFeedback() {
+    // const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
+    return this.invalid && this.hasFeedback
+      ? html` <div class="invalid-feedback-container">
+          <slot name="invalidIcon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path
+                d="M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10ZM10 6.25C9.49805 6.25 9.10584 6.68339 9.15578 7.18285L9.48461 10.4711C9.51109 10.7359 9.7339 10.9375 10 10.9375C10.2661 10.9375 10.4889 10.7359 10.5154 10.4711L10.8442 7.18285C10.8942 6.68339 10.5019 6.25 10 6.25ZM10.0014 11.875C9.48368 11.875 9.06394 12.2947 9.06394 12.8125C9.06394 13.3303 9.48368 13.75 10.0014 13.75C10.5192 13.75 10.9389 13.3303 10.9389 12.8125C10.9389 12.2947 10.5192 11.875 10.0014 11.875Z"
+                fill="currentColor"
+              />
+            </svg>
+          </slot>
+          <div id="${this._controlId}-invalid" class="invalid-feedback">
+            ${this.invalidFeedback ? this.invalidFeedback : this.validationMessage}
+          </div>
+        </div>`
+      : html`${this._renderHintText()}`;
+  }
+
+  protected _renderHintText() {
+    const hintTextTemplate = html` <div id="${this._controlId}Help" class="form-text">${this.hintText}</div> `;
+    return this.hintText && hintTextTemplate;
+  }
+
+  private async _mixinResetFormControl() {
+    this.value = this.defaultValue;
+    if (!this.multiSelect) {
+      const initialItem = this.menuList.filter(({ value }) => value === this.value);
+      if (initialItem.length <= 0) {
+        this.displayValue = "";
+      } else {
+        this.displayValue = initialItem[0].label;
+      }
+      await (
+        await this._sgdsInput
+      ).updateComplete;
+      this._mixinResetValidity(await this._sgdsInput)
+    } else {
+      const valueArray = this.value.split(";");
+      const initialItem = this.menuList.filter(({ value }) => valueArray.includes(value));
+      this.selectedItems = initialItem;
+      this._mixinResetValidity(await this._sgdsInput)
+      this._mixinResetValidity(await this._multiSelectInput)
+    }
+
+  }
   render() {
     return html`
-      <div class="combobox" @keydown=${this._handleKeyDown}>
+      <div class="combobox" @keydown=${this._handleKeyDown} >
         <!-- The input -->
         <sgds-input
           class="dropdown-toggle"
           label=${this.label}
-          hintText=${this.hintText}
           name=${this.name}
           ${ref(this.myDropdown)}
           @click=${() => (this.filteredMenuList.length > 0 ? this.showMenu() : this.hideMenu())}
@@ -272,12 +370,12 @@ export class SgdsComboBox extends DropdownListElement {
           ?disabled=${this.disabled}
           required=${this.required}
           ?readonly=${this.readonly}
-          ?hasFeedback=${this.hasFeedback}
+          hasFeedback=${ifDefined(this.hasFeedback ? "style" : undefined)}
           invalidfeedback=${this.invalidFeedback}
           ?invalid=${this.invalid}
-          ?valid=${this.valid}
           .value=${this.displayValue}
           @sgds-input=${this._handleInputChange}
+          @sgds-blur=${this._handleInputBlur}
           role="combobox"
           aria-expanded=${this.menuIsOpen}
           aria-autocomplete="list"
@@ -300,7 +398,7 @@ export class SgdsComboBox extends DropdownListElement {
             : null}
         >
         </sgds-input>
-
+        ${this._renderFeedback()}
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1">
           ${this.filteredMenuList.map(item => {
             const isActive = this.selectedItems.includes(item);
@@ -317,6 +415,15 @@ export class SgdsComboBox extends DropdownListElement {
           })}
         </ul>
       </div>
+      ${this.multiSelect
+        ? html`<input
+            @invalid=${() => console.log("invld")}
+            .value=${live(this.value)}
+            id="multi-select-input-tracker"
+            class="visually-hidden"
+            required=${this.required}
+          />`
+        : nothing}
     `;
   }
 }
