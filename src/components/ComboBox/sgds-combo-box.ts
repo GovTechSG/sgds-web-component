@@ -123,10 +123,12 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
     return item.label.toLowerCase().startsWith(inputValue.toLowerCase());
   };
 
-  /** @internal */
+  /** @internal Managed filtered menu on the fly with input change*/
   @state()
   private filteredMenuList: SgdsComboBoxItemData[] = [];
-
+  /** @internal Managed menu to render depending on the activity. On input change, show filteredMenu, on selections and initial state show full menu list. */
+  @state()
+  private _renderedMenu: SgdsComboBoxItemData[] = [];
   /** Track selected items (even for single-select, but it will have at most one). */
   @state()
   private selectedItems: SgdsComboBoxItemData[] = [];
@@ -139,10 +141,16 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
       const sgdsInput = await this._sgdsInput;
       this.invalid = sgdsInput.invalid = !this._mixinReportValidity();
     });
+    this.addEventListener("sgds-hide", async () => {
+      const sgdsInput = await this._sgdsInput;
+      sgdsInput.focus();
+      this._renderedMenu = this.menuList;
+    });
   }
 
   async firstUpdated() {
     super.firstUpdated();
+    this._renderedMenu = this.menuList;
     if (this.value) {
       const valueArray = this.value.split(";");
       const initialSelectedItem = this.menuList.filter(({ value }) => valueArray.includes(value));
@@ -183,41 +191,36 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
     this.invalid = sgdsInput.invalid = !this._mixinReportValidity();
   }
 
-  /** Watch the input's value to dynamically filter items in the dropdown. */
-  @watch("displayValue")
-  _filterMenu() {
-    // Filter items based on the typed input
+  // Called each time the user types in the <sgds-input>, we set .value and show the menu
+  private async _handleInputChange(e: CustomEvent) {
+    const input = e.target as SgdsInput;
+    this.displayValue = input.value;
     this.filteredMenuList = this.menuList.filter(item => this.filterFunction(this.displayValue, item));
 
-    // If using bootstrap's dropdown logic
-    if (!this.myDropdown || !this.bsDropdown) return;
-
-    // Hide dropdown menu if there are no items
-    if (this.filteredMenuList.length === 0) {
-      this.hideMenu();
-    } else if (this.menuIsOpen) {
-      this.showMenu();
-    }
     // reset menu list when displayValue
     if (this.displayValue === "" && !this.multiSelect) {
       this.selectedItems = [];
       this.value = this.selectedItems.join(";");
     }
-  }
-  // Called each time the user types in the <sgds-input>, we set .value and show the menu
-  private _handleInputChange(e: CustomEvent) {
+
     this.invalid = false;
     this.showMenu();
+
     this.displayValue = (e.target as SgdsInput).value;
+    this._renderedMenu = this.filteredMenuList;
+
+    if (this.displayValue === "") {
+      this._renderedMenu = this.menuList;
+      await this.updateComplete;
+    }
   }
 
+  @state() activeComboBoxItem: SgdsComboBoxItem;
   /**
    * Called whenever an <sgds-combo-box-item> dispatches sgds-select"
    */
   private async _handleItemSelected(e: CustomEvent) {
     const itemEl = e.target as SgdsComboBoxItem;
-    const isActive = e.detail.active;
-
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
     const foundItem = this.filteredMenuList.find(i => i.value.toString() === itemValueAttr) || {
@@ -226,30 +229,34 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
     };
 
     if (this.multiSelect) {
-      if (isActive) {
-        if (!this.selectedItems.some(i => i.value === foundItem.value)) {
-          this.selectedItems = [...this.selectedItems, foundItem];
-          setTimeout(() => (this.displayValue = ""));
-        }
-      } else {
-        // Remove
-        this.selectedItems = this.selectedItems.filter(i => i.value !== foundItem.value);
+      if (!this.selectedItems.some(i => i.value === foundItem.value)) {
+        this.selectedItems = [...this.selectedItems, foundItem];
+        setTimeout(() => (this.displayValue = ""));
       }
+      this.hideMenu();
       this.value = this.selectedItems.map(i => i.value).join(";");
     } else {
       // Single-select
-      if (isActive) {
-        this.selectedItems = [foundItem];
-
-        this.value = foundItem.value.toString();
-        this.displayValue = this.selectedItems[0].label;
-        this.hideMenu();
-      } else {
-        this.selectedItems = [];
-        this.displayValue = "";
-        this.value = "";
-      }
+      this.selectedItems = [foundItem];
+      this.value = foundItem.value.toString();
+      this.displayValue = this.selectedItems[0].label;
+      this.hideMenu();
     }
+  }
+
+  private _handleItemUnselect(e: CustomEvent) {
+    const itemEl = e.target as SgdsComboBoxItem;
+    // const isActive = e.detail.active;
+
+    const itemLabel = itemEl.textContent?.trim() ?? "";
+    const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
+    const foundItem = this.filteredMenuList.find(i => i.value.toString() === itemValueAttr) || {
+      label: itemLabel,
+      value: itemValueAttr
+    };
+
+    this.selectedItems = this.selectedItems.filter(i => i.value !== foundItem.value);
+    this.value = this.selectedItems.map(i => i.value).join(";");
   }
 
   private _handleBadgeDismissed(item: SgdsComboBoxItemData) {
@@ -271,7 +278,6 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
     }
   }
   private async _handleInputBlur(e: Event) {
-    console.log("input blur");
     e.preventDefault();
     if (this.multiSelect) {
       const displayValueMatchedSelectedItems = this.selectedItems.filter(({ label }) => this.displayValue === label);
@@ -361,6 +367,32 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
       this._mixinResetValidity(await this._multiSelectInput);
     }
   }
+
+  private _menu() {
+    const menu = this._renderedMenu.map(item => {
+      const isActive = this.multiSelect ? this.selectedItems.includes(item) : item.value === this.value;
+      return html`
+        <sgds-combo-box-item
+          ?active=${isActive}
+          ?checkbox=${this.multiSelect}
+          value=${item.value}
+          @sgds-select=${this._handleItemSelected}
+          @sgds-unselect=${this._handleItemUnselect}
+        >
+          ${item.label}
+        </sgds-combo-box-item>
+      `;
+    });
+    return menu;
+  }
+
+  private _handleClick() {
+    if (!this.menuIsOpen) {
+      this.showMenu();
+    } else {
+      this.hideMenu();
+    }
+  }
   render() {
     return html`
       <div class="combobox" @keydown=${this._handleKeyDown}>
@@ -370,7 +402,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
           label=${this.label}
           name=${this.name}
           ${ref(this.myDropdown)}
-          @click=${() => (this.filteredMenuList.length > 0 ? this.showMenu() : this.hideMenu())}
+          @click=${this._handleClick}
           placeholder=${this.placeholder}
           ?autofocus=${this.autofocus}
           ?disabled=${this.disabled}
@@ -407,24 +439,11 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
         </sgds-input>
         ${this._renderFeedback()}
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1">
-          ${this.filteredMenuList.map(item => {
-            const isActive = this.selectedItems.includes(item);
-            return html`
-              <sgds-combo-box-item
-                ?active=${isActive}
-                ?checkbox=${this.multiSelect}
-                value=${item.value}
-                @sgds-select=${this._handleItemSelected}
-              >
-                ${item.label}
-              </sgds-combo-box-item>
-            `;
-          })}
+          ${this._menu()}
         </ul>
       </div>
       ${this.multiSelect
         ? html`<input
-            @invalid=${() => console.log("invld")}
             .value=${live(this.value)}
             id="multi-select-input-tracker"
             class="visually-hidden"

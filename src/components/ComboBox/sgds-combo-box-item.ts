@@ -14,7 +14,7 @@ export class SgdsComboBoxItem extends SgdsElement {
 
   static styles = [comboBoxItemStyles];
   /** when true, sets the active stylings */
-  @property({ type: Boolean }) active = false;
+  @property({ type: Boolean, reflect: true }) active = false;
 
   /** Disables the Item */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -35,8 +35,9 @@ export class SgdsComboBoxItem extends SgdsElement {
 
   private _handleNonCheckboxClick() {
     if (!this.checkbox) {
-      this.active = true;
-      this.emit("sgds-select", { detail: { active: this.active } });
+      // console.log('kjdsfhds')
+      // this.active = true;
+      this.emit("sgds-select");
     }
   }
   private _handleCheckboxClick() {
@@ -46,8 +47,7 @@ export class SgdsComboBoxItem extends SgdsElement {
   private _handleCheckboxChange(e: Event) {
     const checkbox = e.target as HTMLInputElement;
     this.active = checkbox.checked;
-
-    this.emit("sgds-select", { detail: { active: this.active } });
+    this.active ? this.emit("sgds-select") : this.emit("sgds-unselect");
   }
 
   render() {
