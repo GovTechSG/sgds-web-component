@@ -1,7 +1,7 @@
-import "./sgds-web-component";
+import { assert, fixture } from "@open-wc/testing";
 import { html } from "lit";
-import { fixture, assert, expect } from "@open-wc/testing";
 import type { SgdsCard } from "../src/components";
+import "./sgds-web-component";
 
 describe("<sgds-card>", () => {
   it("can be semantically compare with shadowDom trees", async () => {

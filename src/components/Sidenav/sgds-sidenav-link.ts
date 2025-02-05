@@ -1,8 +1,8 @@
+import { html } from "lit";
 import { property, queryAssignedElements } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
-import sidenavLinkStyle from "./sidenav-link.css";
-import { html, PropertyValues } from "lit";
 import { watch } from "../../utils/watch";
+import sidenavLinkStyle from "./sidenav-link.css";
 
 /**
  * @slot default - slot for label of anchor tag.

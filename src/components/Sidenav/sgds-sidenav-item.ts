@@ -1,4 +1,4 @@
-import { html, PropertyValues } from "lit";
+import { html } from "lit";
 import { property, query, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -7,9 +7,9 @@ import { getAnimation, setDefaultAnimation } from "../../utils/animation-registr
 import { waitForEvent } from "../../utils/event";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import sidenavItemStyle from "./sidenav-item.css";
 import SgdsIcon from "../Icon/sgds-icon";
 import SgdsSidenavLink from "./sgds-sidenav-link";
+import sidenavItemStyle from "./sidenav-item.css";
 
 /**
  *

@@ -1,8 +1,8 @@
-import "./sgds-web-component";
-import { aTimeout, assert, elementUpdated, expect, fixture, triggerBlurFor, waitUntil } from "@open-wc/testing";
+import { aTimeout, assert, elementUpdated, expect, fixture, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 import { SgdsSidenavItem, SgdsSidenavLink } from "../src/components";
+import "./sgds-web-component";
 
 describe("sgds-sidenav", () => {
   it("can be semantically compare with shadowDom trees", async () => {
