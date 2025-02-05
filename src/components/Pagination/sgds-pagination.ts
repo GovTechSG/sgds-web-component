@@ -34,7 +34,7 @@ export class SgdsPagination extends SgdsElement {
   @property({ type: Number }) itemsPerPage = 5;
 
   /** Sets the variant of the pagination. */
-  @property({ type: String }) variant: "default" | "number" | "input" | "button" | "description" = "default";
+  @property({ type: String }) variant: "default" | "number" | "button" | "description" = "default";
 
   /** Sets the page direction button to contain text and/or icon */
   @property({ type: String }) navigation: Navigation = "icon-button";
@@ -261,25 +261,8 @@ export class SgdsPagination extends SgdsElement {
   ): TemplateResult {
     const isDisabled = directionLabel === "Prev" ? this.currentPage === 1 : this.currentPage === this.pages.length;
 
-    const getNavButton = (direction: "Prev" | "Next") => {
-      const icon = html`<sgds-icon
-        size=${this.size}
-        name=${direction === "Prev" ? "arrow-left" : "arrow-right"}
-        slot=${direction === "Prev" ? "leftIcon" : "rightIcon"}
-      ></sgds-icon>`;
-      return html`
-        <sgds-button
-          ariaLabel=${direction === "Prev" ? "Previous" : "Next"}
-          size=${this.size}
-          @click=${isDisabled ? undefined : clickHandler}
-          ?disabled=${isDisabled}
-          variant="ghost"
-          >${icon}${direction}</sgds-button
-        >
-      `;
-    };
     if (this.navigation === "button") {
-      return html`${getNavButton(directionLabel)}`;
+      return html`${this._getNavButton(directionLabel, clickHandler, isDisabled)}`;
     }
     if (this.navigation === "icon-button") {
       return html`${this._getIconButton(directionLabel, clickHandler, isDisabled)}`;
@@ -287,6 +270,25 @@ export class SgdsPagination extends SgdsElement {
 
     return html`${nothing}`;
   }
+
+  private _getNavButton = (direction: "Prev" | "Next", clickHandler: (e: MouseEvent) => void, isDisabled: boolean) => {
+    const icon = html`<sgds-icon
+      size=${this.size}
+      name=${direction === "Prev" ? "arrow-left" : "arrow-right"}
+      slot=${direction === "Prev" ? "leftIcon" : "rightIcon"}
+    ></sgds-icon>`;
+    return html`
+      <sgds-button
+        ariaLabel=${direction === "Prev" ? "Previous" : "Next"}
+        size=${this.size}
+        @click=${isDisabled ? undefined : clickHandler}
+        ?disabled=${isDisabled}
+        variant="ghost"
+        >${icon}${direction}</sgds-button
+      >
+    `;
+  };
+
   private _getIconButton(direction: "Prev" | "Next", clickHandler: (e: MouseEvent) => void, isDisabled: boolean) {
     return html`
       <sgds-icon-button
@@ -301,9 +303,9 @@ export class SgdsPagination extends SgdsElement {
   }
   private _renderDescriptionPagination() {
     return html`
-      ${this._getIconButton("Prev", this._handlePrevButton, this.currentPage === 1)}
+      ${this._renderDirectionButton("Prev", this._handlePrevButton)}
       <div class="pagination-description">Page ${this.currentPage} of ${this.pages.length}</div>
-      ${this._getIconButton("Next", this._handleNextButton, this.currentPage === this.pages.length)}
+      ${this._renderDirectionButton("Next", this._handleNextButton)}
     `;
   }
 
@@ -322,8 +324,8 @@ export class SgdsPagination extends SgdsElement {
 
   private _renderButtonPagination() {
     return html`
-      ${this._getIconButton("Prev", this._handlePrevButton, this.currentPage === 1)}
-      ${this._getIconButton("Next", this._handleNextButton, this.currentPage === this.pages.length)}
+      ${this._renderDirectionButton("Prev", this._handlePrevButton)}
+      ${this._renderDirectionButton("Next", this._handleNextButton)}
     `;
   }
   render() {
