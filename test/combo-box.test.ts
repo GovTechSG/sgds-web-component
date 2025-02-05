@@ -355,6 +355,63 @@ describe("single select combobox", () => {
     expect(el.value).to.equal("option1");
     expect(el.shadowRoot?.querySelector("sgds-input")?.value).to.equal("Apple");
   });
+  it(" Menu filters while typing, but when reopen should show the full menu again", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`<sgds-combo-box
+        .menuList=${[
+          { label: "Apple", value: "option1" },
+          { label: "Apricot", value: "option2" },
+          { label: "Dur", value: "option3" }
+        ]}
+      ></sgds-combo-box>`
+    );
+    const input = () => el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    input().focus();
+    await sendKeys({ type: "D" });
+    await el.updateComplete;
+
+    expect(el.shadowRoot?.querySelectorAll("sgds-combo-box-item").length).to.equal(1);
+    expect(el.shadowRoot?.querySelectorAll("sgds-combo-box-item")[0].textContent?.trim()).to.equal("Dur");
+
+    const item = el.shadowRoot
+      ?.querySelectorAll("sgds-combo-box-item")[0]
+      .shadowRoot?.querySelector(".normal-item-content") as HTMLElement;
+    item.click();
+
+    await el.updateComplete;
+    await waitUntil(() => !el.shadowRoot?.querySelector(".dropdown-menu.show"));
+    expect(input().value).to.equal("Dur");
+
+    input().click();
+
+    await waitUntil(() => el.shadowRoot?.querySelector(".dropdown-menu.show"));
+    expect(el.shadowRoot?.querySelectorAll("sgds-combo-box-item").length).to.equal(3);
+    expect(el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']")).to.have.attribute("active");
+  });
+
+  it("when menu is close, focused is brought back to input", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`<sgds-combo-box
+        .menuList=${[
+          { label: "Apple", value: "option1" },
+          { label: "Apricot", value: "option2" },
+          { label: "Dur", value: "option3" }
+        ]}
+      ></sgds-combo-box>`
+    );
+    const input = () => el.shadowRoot?.querySelector("sgds-input");
+
+    input()?.focus();
+    await sendKeys({ press: "ArrowDown" });
+
+    await waitUntil(() => {
+      const comboItem1 = el.shadowRoot?.querySelectorAll("sgds-combo-box-item")[0];
+      return el.shadowRoot?.activeElement === comboItem1;
+    });
+
+    await sendKeys({ press: "Escape" });
+    await waitUntil(() => el.shadowRoot?.activeElement === input());
+  });
 });
 
 describe("multi select combobox", () => {
@@ -502,6 +559,62 @@ describe("multi select combobox", () => {
     expect(el.value).to.equal("option1");
     const badge = input.shadowRoot?.querySelector("sgds-badge") as SgdsBadge;
     expect(badge.innerText).to.equal("Apple");
+  });
+  it(" Menu filters while typing, but when reopen should show the full menu again", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`<sgds-combo-box
+        multiSelect
+        .menuList=${[
+          { label: "Apple", value: "option1" },
+          { label: "Apricot", value: "option2" },
+          { label: "Dur", value: "option3" }
+        ]}
+      ></sgds-combo-box>`
+    );
+    const input = () => el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    input().focus();
+    await sendKeys({ type: "D" });
+    await el.updateComplete;
+
+    expect(el.shadowRoot?.querySelectorAll("sgds-combo-box-item").length).to.equal(1);
+    expect(el.shadowRoot?.querySelectorAll("sgds-combo-box-item")[0].textContent?.trim()).to.equal("Dur");
+
+    el.shadowRoot?.querySelectorAll("sgds-combo-box-item")[0].shadowRoot?.querySelector("sgds-checkbox")?.click();
+
+    await el.updateComplete;
+    await waitUntil(() => !el.shadowRoot?.querySelector(".dropdown-menu.show"));
+    expect(input().shadowRoot?.querySelector("sgds-badge")?.textContent?.trim()).to.equal("Dur");
+
+    input().click();
+
+    await waitUntil(() => el.shadowRoot?.querySelector(".dropdown-menu.show"));
+    expect(el.shadowRoot?.querySelectorAll("sgds-combo-box-item").length).to.equal(3);
+    expect(el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']")).to.have.attribute("active");
+  });
+
+  it("when menu is close, focused is brought back to input", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`<sgds-combo-box
+        multiSelect
+        .menuList=${[
+          { label: "Apple", value: "option1" },
+          { label: "Apricot", value: "option2" },
+          { label: "Dur", value: "option3" }
+        ]}
+      ></sgds-combo-box>`
+    );
+    const input = () => el.shadowRoot?.querySelector("sgds-input");
+
+    input()?.focus();
+    await sendKeys({ press: "ArrowDown" });
+
+    await waitUntil(() => {
+      const comboItem1 = el.shadowRoot?.querySelectorAll("sgds-combo-box-item")[0];
+      return el.shadowRoot?.activeElement === comboItem1;
+    });
+
+    await sendKeys({ press: "Escape" });
+    await waitUntil(() => el.shadowRoot?.activeElement === input());
   });
 });
 
@@ -875,7 +988,8 @@ describe("multi select >> when submitting a form", () => {
 // 5. When a selection is made and input is blurred. The value of input or displayValue will sync with the menu selected item regardless of the value (DONE)
 // 6. If a purposeful selection is not made through enter or click, input is blurred. the displayValue clears regardless if value match anot (DONE)
 // 7. Keyboard ArrowDown and Enter populates the input with value (DONE)
-
+// 8. Menu filters while typing, but when reopen should show the full menu again
+//9. When menu is close, focus is brought back to input
 // Required VALIDATION
 // 8. When first submitted untouched, throw error (DONE)
 // 9. When touched and blurred, throw error (DONE)
@@ -891,3 +1005,4 @@ describe("multi select >> when submitting a form", () => {
 // 4. If a purposeful selection is not made through enter or click, input is blurred. the displayValue clears regardless if value match anot (DONE)
 // 5. When a badge is cancelled, it syncs with the removal actie item in the menu (DONE)
 // 6. Keyboard arrowdown and enter populates the input with badge (DONE)
+// 8. Menu filters while typing, but when reopen should show the full menu again

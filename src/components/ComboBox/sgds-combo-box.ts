@@ -108,9 +108,6 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
   /** Marks the component as invalid. Replace the pseudo :invalid selector. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
-  /** Marks the input as valid. Replace the pseudo :valid selector. */
-  @property({ type: Boolean, reflect: true }) valid = false;
-
   /** The list of items to display in the dropdown. */
   @property({ type: Array }) menuList: SgdsComboBoxItemData[] = [];
 
@@ -134,6 +131,9 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
   private selectedItems: SgdsComboBoxItemData[] = [];
 
   private _isTouched = false;
+
+  @queryAsync("sgds-input") private _sgdsInput: Promise<SgdsInput>;
+  @queryAsync("input#multi-select-input-tracker") private _multiSelectInput: Promise<HTMLInputElement>;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -169,9 +169,6 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
       this._mixinValidate(sgdsInput.input);
     }
   }
-
-  @queryAsync("sgds-input") private _sgdsInput: Promise<SgdsInput>;
-  @queryAsync("input#multi-select-input-tracker") private _multiSelectInput: Promise<HTMLInputElement>;
 
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
@@ -246,7 +243,6 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
 
   private _handleItemUnselect(e: CustomEvent) {
     const itemEl = e.target as SgdsComboBoxItem;
-    // const isActive = e.detail.active;
 
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
@@ -264,7 +260,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
 
     this.value = this.selectedItems.map(i => i.value).join(";");
   }
-  private _handleKeyDown(e: KeyboardEvent) {
+  private _handleMultiSelectKeyDown(e: KeyboardEvent) {
     // Only do this in multi-select mode
     if (!this.multiSelect) {
       return;
@@ -286,7 +282,6 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
       }
     } else {
       // Single select
-      //When a seleection is made, input is blurred.
       if (this.selectedItems.length > 0) {
         this.displayValue = this.selectedItems[0].label;
       } else {
@@ -323,7 +318,6 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
   }
   protected _controlId = generateId("input");
   protected _renderFeedback() {
-    // const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
     return this.invalid && this.hasFeedback
       ? html` <div class="invalid-feedback-container">
           <slot name="invalidIcon">
@@ -345,7 +339,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
     const hintTextTemplate = html` <div id="${this._controlId}Help" class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }
-
+  /** For form reset  */
   private async _mixinResetFormControl() {
     this.value = this.defaultValue;
     if (!this.multiSelect) {
@@ -363,7 +357,6 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
       const valueArray = this.value.split(";");
       const initialItem = this.menuList.filter(({ value }) => valueArray.includes(value));
       this.selectedItems = initialItem;
-      // this._mixinResetValidity((await this._sgdsInput).input);
       this._mixinResetValidity(await this._multiSelectInput);
     }
   }
@@ -395,7 +388,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
   }
   render() {
     return html`
-      <div class="combobox" @keydown=${this._handleKeyDown}>
+      <div class="combobox" @keydown=${this._handleMultiSelectKeyDown}>
         <!-- The input -->
         <sgds-input
           class="dropdown-toggle"
@@ -442,6 +435,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
           ${this._menu()}
         </ul>
       </div>
+      <!-- Required an input element for constraint validation -->
       ${this.multiSelect
         ? html`<input
             .value=${live(this.value)}

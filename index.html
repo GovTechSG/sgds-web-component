@@ -1056,7 +1056,7 @@
         <!-- <sgds-datepicker required name="datepicker-hi"></sgds-datepicker> -->
         <!-- <sgds-datepicker required initialValue='["20/01/2024"]' id="test-date" name="datepicker-hi" mindate="2024-01-02T12:00:00.000Z"
           maxdate="2024-12-30T12:00:00.000Z" hasFeedback></sgds-datepicker> -->
-          <sgds-combo-box  value="1" required menuList='[
+          <sgds-combo-box  value="1" id="combobox-test" required menuList='[
       { "label": "John Smith", "value": "1" },
       { "label": "Jack Adams", "value": "2" },
       { "label": "Regina Bride", "value": "3" },
@@ -1067,7 +1067,7 @@
       { "label": "Louis Vuitton", "value": "8" }
     ]' label="label" hintText="hint" hasFeedback>
       </sgds-combo-box>
-          <sgds-combo-box multiSelect  required hasFeedback menuList='[
+          <sgds-combo-box multiSelect value="1"  required hasFeedback menuList='[
       { "label": "John Smith", "value": "1" },
       { "label": "Jack Adams", "value": "2" },
       { "label": "Regina Bride", "value": "3" },
@@ -1078,6 +1078,7 @@
       { "label": "Louis Vuitton", "value": "8" }
     ]' label="label" hintText="hint">
       </sgds-combo-box>
+
         <!--<sgds-datepicker required mode="range"></sgds-datepicker>
         <sgds-datepicker required mode="range" mindate="2024-01-02T12:00:00.000Z"
         maxdate="2024-12-30T12:00:00.000Z"></sgds-datepicker> -->
@@ -1137,6 +1138,7 @@
         currentPage="6"></sgds-pagination>
       <p>navigation=button</p>
       <sgds-pagination navigation="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <sgds-pagination navigation="button" variant="description"  dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
     </div>
     <div class="container">
       <h2>Button</h2>

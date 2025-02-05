@@ -35,8 +35,6 @@ export class SgdsComboBoxItem extends SgdsElement {
 
   private _handleNonCheckboxClick() {
     if (!this.checkbox) {
-      // console.log('kjdsfhds')
-      // this.active = true;
       this.emit("sgds-select");
     }
   }
