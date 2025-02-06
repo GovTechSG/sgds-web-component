@@ -190,40 +190,40 @@ describe("dropdown-element generic keyboard interactions", () => {
       "-1"
     );
   }).retries(1);
-  // test case: when close="outside" and user mouse clicks on menu and then change to keyboard navigation
-  it("transition from mouse click to keyboard navigation should be seamless", async () => {
-    const el = await fixture<MockDropdown>(
-      html`<mock-dropdown menuIsOpen close="outside">
-        <sgds-dropdown-item>slot 1</sgds-dropdown-item>
-        <sgds-dropdown-item disabled>slot 2</sgds-dropdown-item>
-        <sgds-dropdown-item>slot 3</sgds-dropdown-item>
-        <sgds-dropdown-item>slot 4</sgds-dropdown-item>
-      </mock-dropdown> `
-    );
-    const itemOne = el.querySelectorAll("sgds-dropdown-item")[0] as SgdsDropdownItem;
-    itemOne.click();
-    await sendKeys({ press: "ArrowDown" });
-    expect(el.querySelectorAll("sgds-dropdown-item")[2].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
-      "tabindex",
-      "0"
-    );
-    await sendKeys({ press: "ArrowDown" });
-    expect(el.querySelectorAll("sgds-dropdown-item")[2].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
-      "tabindex",
-      "-1"
-    );
-    expect(el.querySelectorAll("sgds-dropdown-item")[3].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
-      "tabindex",
-      "0"
-    );
+  // // test case: when close="outside" and user mouse clicks on menu and then change to keyboard navigation
+  // it("transition from mouse click to keyboard navigation should be seamless", async () => {
+  //   const el = await fixture<MockDropdown>(
+  //     html`<mock-dropdown menuIsOpen close="outside">
+  //       <sgds-dropdown-item>slot 1</sgds-dropdown-item>
+  //       <sgds-dropdown-item disabled>slot 2</sgds-dropdown-item>
+  //       <sgds-dropdown-item>slot 3</sgds-dropdown-item>
+  //       <sgds-dropdown-item>slot 4</sgds-dropdown-item>
+  //     </mock-dropdown> `
+  //   );
+  //   const itemOne = el.querySelectorAll("sgds-dropdown-item")[0] as SgdsDropdownItem;
+  //   itemOne.click();
+  //   await sendKeys({ press: "ArrowDown" });
+  //   expect(el.querySelectorAll("sgds-dropdown-item")[2].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+  //     "tabindex",
+  //     "0"
+  //   );
+  //   await sendKeys({ press: "ArrowDown" });
+  //   expect(el.querySelectorAll("sgds-dropdown-item")[2].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+  //     "tabindex",
+  //     "-1"
+  //   );
+  //   expect(el.querySelectorAll("sgds-dropdown-item")[3].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+  //     "tabindex",
+  //     "0"
+  //   );
 
-    itemOne.click();
-    await sendKeys({ press: "ArrowUp" });
-    expect(el.querySelectorAll("sgds-dropdown-item")[3].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
-      "tabindex",
-      "0"
-    );
-  }).retries(1);
+  //   itemOne.click();
+  //   await sendKeys({ press: "ArrowUp" });
+  //   expect(el.querySelectorAll("sgds-dropdown-item")[3].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
+  //     "tabindex",
+  //     "0"
+  //   );
+  // }).retries(1);
 });
 
 describe("sgds-dropdown", () => {

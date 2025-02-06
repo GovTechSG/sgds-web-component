@@ -11,7 +11,7 @@ import dropdownMenuStyle from "../Dropdown/dropdown-menu.css";
 import SgdsIcon from "../Icon/sgds-icon";
 import { SgdsInput } from "../Input/sgds-input";
 import comboBoxStyle from "./combo-box.css";
-import { SgdsComboBoxItem } from "./sgds-combo-box-item";
+import { ComboBoxItem } from "./combo-box-item";
 import generateId from "../../utils/generateId";
 import { ifDefined } from "lit/directives/if-defined.js";
 import hintTextStyles from "../../styles/form-hint.css";
@@ -42,7 +42,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
   /** @internal */
   static dependencies = {
     "sgds-input": SgdsInput,
-    "sgds-combo-box-item": SgdsComboBoxItem,
+    "sgds-combo-box-item": ComboBoxItem,
     "sgds-icon": SgdsIcon,
     "sgds-badge": SgdsBadge
   };
@@ -70,7 +70,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
   @property({ reflect: true }) name: string;
 
   /** The input's placeholder text. */
-  @property({ type: String, reflect: true }) placeholder = "placeholder";
+  @property({ type: String, reflect: true }) placeholder: string;
 
   /** Autofocus the input */
   @property({ type: Boolean, reflect: true }) autofocus = false;
@@ -95,7 +95,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
   @state()
   private displayValue = "";
 
-  /** Gets or sets the default value used to reset this element. */
+  /** @internal Gets or sets the default value used to reset this element. */
   @defaultValue()
   defaultValue = "";
 
@@ -146,6 +146,11 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
       sgdsInput.focus();
       this._renderedMenu = this.menuList;
     });
+    /** @internal */
+    if (this.readonly) {
+      this._handleKeyboardMenuEvent = null;
+      this._handleKeyboardMenuItemsEvent = null;
+    }
   }
 
   async firstUpdated() {
@@ -167,6 +172,10 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
     } else {
       const sgdsInput = await this._sgdsInput;
       this._mixinValidate(sgdsInput.input);
+    }
+
+    if (this.menuIsOpen && !this.readonly) {
+      this.showMenu();
     }
   }
 
@@ -212,12 +221,11 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
     }
   }
 
-  @state() activeComboBoxItem: SgdsComboBoxItem;
   /**
    * Called whenever an <sgds-combo-box-item> dispatches sgds-select"
    */
   private async _handleItemSelected(e: CustomEvent) {
-    const itemEl = e.target as SgdsComboBoxItem;
+    const itemEl = e.target as ComboBoxItem;
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
     const foundItem = this.filteredMenuList.find(i => i.value.toString() === itemValueAttr) || {
@@ -242,7 +250,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
   }
 
   private _handleItemUnselect(e: CustomEvent) {
-    const itemEl = e.target as SgdsComboBoxItem;
+    const itemEl = e.target as ComboBoxItem;
 
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
@@ -255,12 +263,11 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
     this.value = this.selectedItems.map(i => i.value).join(";");
   }
 
-  private _handleBadgeDismissed(item: SgdsComboBoxItemData) {
+  private async _handleBadgeDismissed(item: SgdsComboBoxItemData) {
     this.selectedItems = this.selectedItems.filter(i => i.value !== item.value);
-
     this.value = this.selectedItems.map(i => i.value).join(";");
   }
-  private _handleMultiSelectKeyDown(e: KeyboardEvent) {
+  private async _handleMultiSelectKeyDown(e: KeyboardEvent) {
     // Only do this in multi-select mode
     if (!this.multiSelect) {
       return;
@@ -313,7 +320,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
   /**
    * Returns the validation message based on the ValidityState
    */
-  public get validationMessage() {
+  public get validationMessage(): string {
     return this._mixinGetValidationMessage();
   }
   protected _controlId = generateId("input");
@@ -363,7 +370,13 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
 
   private _menu() {
     const menu = this._renderedMenu.map(item => {
-      const isActive = this.multiSelect ? this.selectedItems.includes(item) : item.value === this.value;
+      let isActive = false;
+      if (this.multiSelect) {
+        const selectedItemValueArray = this.selectedItems.map(i => i.value);
+        isActive = selectedItemValueArray.includes(item.value);
+      } else {
+        isActive = item.value === this.value;
+      }
       return html`
         <sgds-combo-box-item
           ?active=${isActive}
@@ -380,6 +393,10 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
   }
 
   private _handleClick() {
+    if (this.readonly) {
+      return null;
+    }
+
     if (!this.menuIsOpen) {
       this.showMenu();
     } else {

@@ -4,9 +4,9 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import SgdsCheckbox from "../Checkbox/sgds-checkbox";
 import SgdsIcon from "../Icon/sgds-icon";
-import comboBoxItemStyles from "./sgds-combo-box-item.css";
+import comboBoxItemStyles from "./combo-box-item.css";
 
-export class SgdsComboBoxItem extends SgdsElement {
+export class ComboBoxItem extends SgdsElement {
   static dependencies = {
     "sgds-icon": SgdsIcon,
     "sgds-checkbox": SgdsCheckbox
@@ -78,4 +78,4 @@ export class SgdsComboBoxItem extends SgdsElement {
   }
 }
 
-export default SgdsComboBoxItem;
+export default ComboBoxItem;
