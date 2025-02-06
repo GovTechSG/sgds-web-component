@@ -19,22 +19,20 @@ describe("sgds-combo-box ", () => {
       el,
       `
       <div class="combobox">
-        <sgds-input
-          aria-autocomplete="list"
-          aria-controls="id-7895-sgds-dropdown-menu-div"
-          aria-expanded="false"
-          class="dropdown-toggle"
-          hinttext=""
-          invalidfeedback=""
-          label=""
-          name=""
-          placeholder=""
-          role="combobox"
-          suffix="[object Object]"
-          type="text"
-          value=""
+        <div class="form-control-group">
+          <div class="combobox-input-container">
+            <input
+              aria-invalid="false"
+                class="form-control"
+              type="text"
+            >
+          </div>
+          <sgds-icon
+            name="chevron-down"
+            size="md"
           >
-        </sgds-input>
+          </sgds-icon>
+          </div>
         <ul
           class="dropdown-menu"
           id="id-7895-sgds-dropdown-menu-div"
@@ -57,17 +55,17 @@ describe("sgds-combo-box ", () => {
           </sgds-combo-box-item>
         </ul>
           `,
-      { ignoreAttributes: ["id", "aria-controls"] }
+      { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
     );
   });
   it("should be disabled with the disabled attribute to be true", async () => {
     const el = await fixture(html`<sgds-combo-box disabled></sgds-combo-box>`);
-    const comboBoxInput = el.shadowRoot?.querySelector("sgds-input")?.shadowRoot?.querySelector("input");
+    const comboBoxInput = el.shadowRoot?.querySelector("input");
     expect(comboBoxInput?.disabled).to.be.true;
   });
   it("when readonly is true, menu cannot open ", async () => {
     const el = await fixture<SgdsComboBox>(html`<sgds-combo-box readonly></sgds-combo-box>`);
-    const input = el.shadowRoot?.querySelector("sgds-input");
+    const input = el.shadowRoot?.querySelector("input");
     input?.click();
     await el.updateComplete;
     expect(el.shadowRoot?.querySelector(".dropdown-menu.show")).to.be.null;
@@ -99,12 +97,12 @@ describe("sgds-combo-box ", () => {
 
   it("should emit sgds-input event when input value changes", async () => {
     const el = await fixture<SgdsComboBox>(html`<sgds-combo-box></sgds-combo-box>`);
-    const comboBoxInput = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const comboBoxInput = el.shadowRoot?.querySelector("input");
 
     const inputHandler = sinon.spy();
     el?.addEventListener("sgds-input", inputHandler);
 
-    comboBoxInput.focus();
+    comboBoxInput?.focus();
     await sendKeys({ press: "A" });
     waitUntil(() => inputHandler.calledOnce);
     expect(inputHandler).to.have.been.calledOnce;
@@ -120,7 +118,7 @@ describe("sgds-combo-box ", () => {
       ></sgds-combo-box>`
     );
 
-    const input = el.shadowRoot?.querySelector("sgds-input");
+    const input = el.shadowRoot?.querySelector("input");
     input?.click();
     await waitUntil(() => el.shadowRoot?.querySelector(".dropdown-menu.show"));
 
@@ -159,7 +157,7 @@ describe("sgds-combo-box ", () => {
         ]}
       ></sgds-combo-box>`
     );
-    const input = el.shadowRoot?.querySelector("sgds-input");
+    const input = el.shadowRoot?.querySelector("input");
     input?.focus();
     await sendKeys({ type: "a" });
 
@@ -194,7 +192,7 @@ describe("sgds-combo-box ", () => {
     // filterFunction that accepts all menuItem regardless of inputValue
     el.filterFunction = () => true;
 
-    const input = el.shadowRoot?.querySelector("sgds-input");
+    const input = el.shadowRoot?.querySelector("input");
     input?.focus();
     await sendKeys({ type: "test" });
     await el.updateComplete;
@@ -216,8 +214,8 @@ describe("sgds-combo-box ", () => {
     );
 
     // Open dropdown
-    const comboBoxInput = el.shadowRoot?.querySelector("sgds-input") as HTMLElement;
-    expect(comboBoxInput, "sgds-input not found").to.exist;
+    const comboBoxInput = el.shadowRoot?.querySelector("input") as HTMLElement;
+    expect(comboBoxInput, "input not found").to.exist;
     comboBoxInput.click();
     await el.updateComplete;
 
@@ -230,6 +228,24 @@ describe("sgds-combo-box ", () => {
       const checkboxEl = item.shadowRoot?.querySelector("sgds-checkbox") as HTMLElement;
       expect(checkboxEl, "sgds-checkbox found").to.exist;
     });
+  });
+  it("empty menu appears when no search options found", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`
+        <sgds-combo-box
+          .menuList=${[
+            { label: "Option 1", value: "option1" },
+            { label: "Option 2", value: "option2" }
+          ]}
+        ></sgds-combo-box>
+      `
+    );
+    const comboBoxInput = el.shadowRoot?.querySelector("input") as HTMLElement;
+    comboBoxInput.focus();
+    await sendKeys({ type: "abcd" });
+
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector(".empty-menu")).to.exist;
   });
 });
 
@@ -245,7 +261,7 @@ describe("single select combobox", () => {
         value="option3"
       ></sgds-combo-box>`
     );
-    const input = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     const durianItem = el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']") as ComboBoxItem;
     // const appleItem = el.shadowRoot?.querySelector("sgds-combo-box-item[value='option1']") as SgdsComboBoxItem;
     // const apricotItem = el.shadowRoot?.querySelector("sgds-combo-box-item[value='option2']") as SgdsComboBoxItem;
@@ -267,7 +283,7 @@ describe("single select combobox", () => {
         ]}
       ></sgds-combo-box>`
     );
-    const input = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     input.focus();
 
     await sendKeys({ type: "asdfs" });
@@ -294,7 +310,7 @@ describe("single select combobox", () => {
     const durianItem = el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']") as ComboBoxItem;
     expect(durianItem.active).to.be.true;
 
-    const input = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     input.focus();
     await sendKeys({ press: "Backspace" });
     await sendKeys({ press: "Backspace" });
@@ -315,7 +331,7 @@ describe("single select combobox", () => {
       ></sgds-combo-box>`
     );
 
-    const input = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     input.focus();
     await sendKeys({ type: "Dur" });
 
@@ -339,14 +355,14 @@ describe("single select combobox", () => {
     );
     expect(el.value).to.equal("option1");
 
-    const input = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     input.focus();
     await sendKeys({ type: "rubbish" });
-    await waitUntil(() => el.shadowRoot?.querySelector("sgds-input")?.value === "Applerubbish");
+    await waitUntil(() => el.shadowRoot?.querySelector("input")?.value === "Applerubbish");
     expect(el.value).to.equal("option1");
 
     input.blur();
-    await waitUntil(() => el.shadowRoot?.querySelector("sgds-input")?.value === "Apple");
+    await waitUntil(() => el.shadowRoot?.querySelector("input")?.value === "Apple");
     expect(el.value).to.equal("option1");
   });
 
@@ -361,13 +377,13 @@ describe("single select combobox", () => {
       ></sgds-combo-box>`
     );
 
-    const input = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     input.focus();
     await sendKeys({ press: "ArrowDown" });
     await sendKeys({ press: "Enter" });
     await el.updateComplete;
     expect(el.value).to.equal("option1");
-    expect(el.shadowRoot?.querySelector("sgds-input")?.value).to.equal("Apple");
+    expect(el.shadowRoot?.querySelector("input")?.value).to.equal("Apple");
   });
   it(" Menu filters while typing, but when reopen should show the full menu again", async () => {
     const el = await fixture<SgdsComboBox>(
@@ -379,7 +395,7 @@ describe("single select combobox", () => {
         ]}
       ></sgds-combo-box>`
     );
-    const input = () => el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const input = () => el.shadowRoot?.querySelector("input") as HTMLInputElement;
     input().focus();
     await sendKeys({ type: "D" });
     await el.updateComplete;
@@ -413,7 +429,7 @@ describe("single select combobox", () => {
         ]}
       ></sgds-combo-box>`
     );
-    const input = () => el.shadowRoot?.querySelector("sgds-input");
+    const input = () => el.shadowRoot?.querySelector("input");
 
     input()?.focus();
     await sendKeys({ press: "ArrowDown" });
@@ -442,7 +458,7 @@ describe("multi select combobox", () => {
       ></sgds-combo-box>`
     );
     expect(el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']")).to.have.attribute("active");
-    const input = () => el.shadowRoot?.querySelector("sgds-input");
+    const input = () => el.shadowRoot?.querySelector("input");
     input()?.focus();
 
     await sendKeys({ press: "Backspace" });
@@ -461,8 +477,8 @@ describe("multi select combobox", () => {
         value="option3"
       ></sgds-combo-box>`
     );
-    const input = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
-    const badges = input.shadowRoot?.querySelectorAll("sgds-badge") as NodeListOf<SgdsBadge>;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    const badges = el.shadowRoot?.querySelectorAll("sgds-badge") as NodeListOf<SgdsBadge>;
     const durianItem = el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']") as ComboBoxItem;
 
     expect(durianItem.active).to.be.true;
@@ -483,8 +499,8 @@ describe("multi select combobox", () => {
         value="option1;option3"
       ></sgds-combo-box>`
     );
-    const input = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
-    const badges = input.shadowRoot?.querySelectorAll("sgds-badge") as NodeListOf<SgdsBadge>;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    const badges = el.shadowRoot?.querySelectorAll("sgds-badge") as NodeListOf<SgdsBadge>;
     const durianItem = el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']") as ComboBoxItem;
     const appleItem = el.shadowRoot?.querySelector("sgds-combo-box-item[value='option1']") as ComboBoxItem;
     const apricotItem = el.shadowRoot?.querySelector("sgds-combo-box-item[value='option2']") as ComboBoxItem;
@@ -509,7 +525,7 @@ describe("multi select combobox", () => {
         ]}
       ></sgds-combo-box>`
     );
-    const input = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     input.focus();
 
     await sendKeys({ type: "asdfs" });
@@ -537,8 +553,8 @@ describe("multi select combobox", () => {
     const durianItem = el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']") as ComboBoxItem;
     expect(durianItem.active).to.be.true;
 
-    const input = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
-    const badge = input.shadowRoot?.querySelector("sgds-badge") as SgdsBadge;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    const badge = el.shadowRoot?.querySelector("sgds-badge") as SgdsBadge;
     expect(badge).to.exist;
     expect(badge.innerText).to.equal("Dur");
     input.focus();
@@ -547,7 +563,7 @@ describe("multi select combobox", () => {
     const updatedDurianItem = el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']") as ComboBoxItem;
     expect(updatedDurianItem.active).to.be.false;
 
-    const updatedBadge = input.shadowRoot?.querySelector("sgds-badge") as SgdsBadge;
+    const updatedBadge = el.shadowRoot?.querySelector("sgds-badge") as SgdsBadge;
     expect(updatedBadge).not.to.exist;
   });
   it("When no purposeful selection is made through clicking or keyboard, input clears when blur", async () => {
@@ -562,7 +578,7 @@ describe("multi select combobox", () => {
       ></sgds-combo-box>`
     );
 
-    const input = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     input.focus();
     await sendKeys({ type: "Dur" });
 
@@ -585,13 +601,13 @@ describe("multi select combobox", () => {
       ></sgds-combo-box>`
     );
 
-    const input = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     input.focus();
     await sendKeys({ press: "ArrowDown" });
     await sendKeys({ press: "Enter" });
     await el.updateComplete;
     expect(el.value).to.equal("option1");
-    const badge = input.shadowRoot?.querySelector("sgds-badge") as SgdsBadge;
+    const badge = el.shadowRoot?.querySelector("sgds-badge") as SgdsBadge;
     expect(badge.innerText).to.equal("Apple");
   });
   it(" Menu filters while typing, but when reopen should show the full menu again", async () => {
@@ -605,7 +621,7 @@ describe("multi select combobox", () => {
         ]}
       ></sgds-combo-box>`
     );
-    const input = () => el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    const input = () => el.shadowRoot?.querySelector("input") as HTMLInputElement;
     input().focus();
     await sendKeys({ type: "D" });
     await el.updateComplete;
@@ -617,7 +633,7 @@ describe("multi select combobox", () => {
 
     await el.updateComplete;
     await waitUntil(() => !el.shadowRoot?.querySelector(".dropdown-menu.show"));
-    expect(input().shadowRoot?.querySelector("sgds-badge")?.textContent?.trim()).to.equal("Dur");
+    expect(el.shadowRoot?.querySelector("sgds-badge")?.textContent?.trim()).to.equal("Dur");
 
     input().click();
 
@@ -637,7 +653,7 @@ describe("multi select combobox", () => {
         ]}
       ></sgds-combo-box>`
     );
-    const input = () => el.shadowRoot?.querySelector("sgds-input");
+    const input = () => el.shadowRoot?.querySelector("input");
 
     input()?.focus();
     await sendKeys({ press: "ArrowDown" });
@@ -736,7 +752,7 @@ describe("single select >> when submitting a form", () => {
         <sgds-button type="reset"></sgds-button>
       </form>`
     );
-    const input = () => form.querySelector("sgds-combo-box")?.shadowRoot?.querySelector("sgds-input");
+    const input = () => form.querySelector("sgds-combo-box")?.shadowRoot?.querySelector("input");
     const comboBox = () => form.querySelector("sgds-combo-box");
     expect(input()?.value).to.equal("Dur");
     // Clear input
@@ -773,11 +789,11 @@ describe("single select >> when submitting a form", () => {
         ></sgds-combo-box>
       `
     );
-    const input = el.shadowRoot?.querySelector("sgds-input");
+    const input = el.shadowRoot?.querySelector("input");
     input?.focus();
     el.blur();
     await el.updateComplete;
-    await waitUntil(() => el.shadowRoot?.querySelector("sgds-input")?.shadowRoot?.querySelector("input:invalid"));
+    await waitUntil(() => el.shadowRoot?.querySelector("input:invalid"));
   });
   it("when invalid, typing in the input sets invalid to false", async () => {
     const el = await fixture<SgdsComboBox>(
@@ -793,15 +809,15 @@ describe("single select >> when submitting a form", () => {
         ></sgds-combo-box>
       `
     );
-    const input = el.shadowRoot?.querySelector("sgds-input");
+    const input = el.shadowRoot?.querySelector("input");
     input?.focus();
     el.blur();
 
     await el.updateComplete;
-    await waitUntil(() => el.shadowRoot?.querySelector("sgds-input")?.shadowRoot?.querySelector("input:invalid"));
+    await waitUntil(() => el.shadowRoot?.querySelector("input:invalid"));
     input?.focus();
     await sendKeys({ type: "Abcd" });
-    await waitUntil(() => el.shadowRoot?.querySelector("sgds-input")?.value === "Abcd");
+    await waitUntil(() => el.shadowRoot?.querySelector("input")?.value === "Abcd");
     expect(el.invalid).to.be.false;
   });
 
@@ -819,7 +835,7 @@ describe("single select >> when submitting a form", () => {
         ></sgds-combo-box>
       `
     );
-    const input = el.shadowRoot?.querySelector("sgds-input");
+    const input = el.shadowRoot?.querySelector("input");
     input?.focus();
     await sendKeys({ press: "ArrowDown" });
     await waitUntil(() => {
@@ -917,9 +933,10 @@ describe("multi select >> when submitting a form", () => {
         <sgds-button type="reset"></sgds-button>
       </form>`
     );
-    const input = () => form.querySelector("sgds-combo-box")?.shadowRoot?.querySelector("sgds-input");
-    const badge = () => input()?.shadowRoot?.querySelector("sgds-badge");
+    const input = () => form.querySelector("sgds-combo-box")?.shadowRoot?.querySelector("input");
     const comboBox = () => form.querySelector("sgds-combo-box");
+    const badge = () => comboBox()?.shadowRoot?.querySelector("sgds-badge");
+
     expect(badge()?.textContent).to.equal("Dur");
     // Clear input
     input()?.focus();
@@ -954,11 +971,11 @@ describe("multi select >> when submitting a form", () => {
         ></sgds-combo-box>
       `
     );
-    const input = el.shadowRoot?.querySelector("sgds-input");
+    const input = el.shadowRoot?.querySelector("input");
     input?.focus();
     el.blur();
     await el.updateComplete;
-    await waitUntil(() => el.shadowRoot?.querySelector("sgds-input")?.shadowRoot?.querySelector("input:invalid"));
+    await waitUntil(() => el.shadowRoot?.querySelector("input:invalid"));
   });
   it("when invalid, typing in the input sets invalid to false", async () => {
     const el = await fixture<SgdsComboBox>(
@@ -975,15 +992,15 @@ describe("multi select >> when submitting a form", () => {
         ></sgds-combo-box>
       `
     );
-    const input = el.shadowRoot?.querySelector("sgds-input");
+    const input = el.shadowRoot?.querySelector("input");
     input?.focus();
     el.blur();
 
     await el.updateComplete;
-    await waitUntil(() => el.shadowRoot?.querySelector("sgds-input")?.shadowRoot?.querySelector("input:invalid"));
+    await waitUntil(() => el.shadowRoot?.querySelector("input:invalid"));
     input?.focus();
     await sendKeys({ type: "Abcd" });
-    await waitUntil(() => el.shadowRoot?.querySelector("sgds-input")?.value === "Abcd");
+    await waitUntil(() => el.shadowRoot?.querySelector("input")?.value === "Abcd");
     expect(el.invalid).to.be.false;
   });
 
@@ -1002,7 +1019,7 @@ describe("multi select >> when submitting a form", () => {
         ></sgds-combo-box>
       `
     );
-    const input = el.shadowRoot?.querySelector("sgds-input");
+    const input = el.shadowRoot?.querySelector("input");
     input?.focus();
     await sendKeys({ press: "ArrowDown" });
     await waitUntil(() => {
