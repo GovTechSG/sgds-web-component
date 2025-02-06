@@ -4,7 +4,7 @@ import { html } from "lit";
 import sinon from "sinon";
 import "./sgds-web-component";
 
-import type { SgdsBadge, SgdsButton, SgdsComboBox, SgdsInput } from "../src/components";
+import type { SgdsBadge, SgdsButton, SgdsComboBox } from "../src/components";
 import type ComboBoxItem from "../src/components/ComboBox/combo-box-item";
 describe("sgds-combo-box ", () => {
   it("matches shadowDom semantically", async () => {

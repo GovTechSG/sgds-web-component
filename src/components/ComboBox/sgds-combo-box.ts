@@ -153,7 +153,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
 
   async firstUpdated() {
     super.firstUpdated();
-  
+
     this._renderedMenu = this.menuList;
     if (this.value) {
       const valueArray = this.value.split(";");
@@ -164,13 +164,12 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
         this.displayValue = initialSelectedItem[0].label;
       }
     }
-    this.multiSelect ? this.input = await this._multiSelectInput : this.input = await this._sgdsInput
-    this._mixinValidate(this.input)
+    this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._sgdsInput);
+    this._mixinValidate(this.input);
 
     if (this.menuIsOpen && !this.readonly) {
       this.showMenu();
     }
- 
   }
 
   @watch("value", { waitUntilFirstUpdate: true })
@@ -194,7 +193,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
 
   // Called each time the user types in the <sgds-input>, we set .value and show the menu
   private async _handleInputChange(e: CustomEvent) {
-    this.emit("sgds-input")
+    this.emit("sgds-input");
     const input = e.target as HTMLInputElement;
     this.displayValue = input.value;
     this.filteredMenuList = this.menuList.filter(item => this.filterFunction(this.displayValue, item));
@@ -352,7 +351,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
       } else {
         this.displayValue = initialItem[0].label;
       }
-      this._mixinResetValidity((await this._sgdsInput));
+      this._mixinResetValidity(await this._sgdsInput);
     } else {
       const valueArray = this.value.split(";");
       const initialItem = this.menuList.filter(({ value }) => valueArray.includes(value));
@@ -362,9 +361,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
   }
 
   private _menu() {
-    const emptyMenu = html`
-    <div class="empty-menu">No options</div>
-    `
+    const emptyMenu = html` <div class="empty-menu">No options</div> `;
     const menu = this._renderedMenu.map(item => {
       let isActive = false;
       if (this.multiSelect) {
@@ -400,26 +397,26 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
     }
   }
   protected _labelId = generateId("label");
-    protected _renderLabel() {
-      const labelTemplate = html`
-        <label
-          for=${this._controlId}
-          id=${this._labelId}
-          class=${classMap({
-            "form-label": true,
-            required: this.required
-          })}
-          >${this.label}</label
-        >
-      `;
-      return this.label && labelTemplate;
-    }
+  protected _renderLabel() {
+    const labelTemplate = html`
+      <label
+        for=${this._controlId}
+        id=${this._labelId}
+        class=${classMap({
+          "form-label": true,
+          required: this.required
+        })}
+        >${this.label}</label
+      >
+    `;
+    return this.label && labelTemplate;
+  }
 
   protected _renderInput() {
     const wantFeedbackStyle = this.hasFeedback;
     return html`
       <div
-      ${ref(this.myDropdown)}
+        ${ref(this.myDropdown)}
         class="form-control-group ${classMap({
           disabled: this.disabled,
           readonly: this.readonly,
@@ -427,9 +424,9 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
         })}"
         @click=${this._handleClick}
       >
-      <div class="combobox-input-container">
-        ${this.multiSelect
-          ? html`
+        <div class="combobox-input-container">
+          ${this.multiSelect
+            ? html`
                 ${this.selectedItems.map(
                   item =>
                     html`<sgds-badge
@@ -441,28 +438,28 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
                       >${item.label}</sgds-badge
                     >`
                 )}
-            `
-          : nothing}
-        <input
-          class="form-control"
-          type="text"
-          id=${this._controlId}
-          name=${ifDefined(this.name)}
-          placeholder=${ifDefined(this.placeholder)}
-          aria-invalid=${this.invalid ? "true" : "false"}
-          ?autofocus=${this.autofocus}
-          ?disabled=${this.disabled}
-          ?readonly=${this.readonly}
-          ?required=${this.required}
-          .value=${this.displayValue}
-          @input=${this._handleInputChange}
-          @blur=${this._handleInputBlur}
-          aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this._controlId}-invalid` : undefined)}
-          aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
-            ? `${this._controlId}-invalid`
-            : ""}"
-        />
-          </div>
+              `
+            : nothing}
+          <input
+            class="form-control"
+            type="text"
+            id=${this._controlId}
+            name=${ifDefined(this.name)}
+            placeholder=${ifDefined(this.placeholder)}
+            aria-invalid=${this.invalid ? "true" : "false"}
+            ?autofocus=${this.autofocus}
+            ?disabled=${this.disabled}
+            ?readonly=${this.readonly}
+            ?required=${this.required}
+            .value=${this.displayValue}
+            @input=${this._handleInputChange}
+            @blur=${this._handleInputBlur}
+            aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this._controlId}-invalid` : undefined)}
+            aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
+              ? `${this._controlId}-invalid`
+              : ""}"
+          />
+        </div>
         <sgds-icon name="chevron-down" size="md"></sgds-icon>
       </div>
     `;
@@ -471,9 +468,8 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
     return html`
       <div class="combobox" @keydown=${this._handleMultiSelectKeyDown}>
         ${this._renderLabel()}
-      <!-- The input -->
-       ${this._renderInput()}
-        ${this._renderFeedback()}
+        <!-- The input -->
+        ${this._renderInput()} ${this._renderFeedback()}
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1">
           ${this._menu()}
         </ul>
