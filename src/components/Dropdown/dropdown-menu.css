@@ -11,7 +11,7 @@
   padding: var(--sgds-padding-xs) 0;
   position: absolute;
   text-align: left;
-  overflow-y: scroll;
+  overflow-y: auto;
   z-index: 1000;
 }
 

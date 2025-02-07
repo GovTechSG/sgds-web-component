@@ -127,14 +127,13 @@ export class SgdsMainnav extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
-
-    document.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
+    this.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
 
-    document.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
+    this.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
   }
 
   firstUpdated() {
@@ -157,7 +156,7 @@ export class SgdsMainnav extends SgdsElement {
     }
   }
 
-  private handleSummaryClick() {
+  private _handleSummaryClick() {
     if (this.expanded) {
       this.hide();
     } else {
@@ -279,11 +278,11 @@ export class SgdsMainnav extends SgdsElement {
           </div>
           <slot name="non-collapsible"></slot>
           <sgds-icon-button
-            name="menu"
+            name=${this.expanded ? "cross" : "menu"}
             variant="ghost"
             size="sm"
             class="navbar-toggler"
-            @click=${this.handleSummaryClick}
+            @click=${this._handleSummaryClick}
             aria-controls="${this.collapseId}"
             aria-expanded="${this.expanded}"
             aria-label="Toggle navigation"

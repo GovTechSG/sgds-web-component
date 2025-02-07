@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
   <script type="module" id="console-components-gateway"
     src="https://dev.assets.developer.tech.gov.sg/console-components/gateway.es5.js" nonce="{nonce" ||
@@ -132,11 +132,14 @@
 </head>
 
 
-<body class="d-flex flex-column min-vh-100"></body>
+<body class="d-flex flex-column min-vh-100">
 <sgds-masthead></sgds-masthead>
 <sgds-mainnav expand="lg">
   <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
 
+  <sgds-mainnav-item active href="#">
+    Home
+  </sgds-mainnav-item>
   <sgds-mainnav-item active href="#">
     Home
   </sgds-mainnav-item>
@@ -1983,6 +1986,7 @@
         <sgds-icon name="youtube"></sgds-icon>
       </a>
     </sgds-footer>
+  </body>
 
     <script>
       const stepper = document.querySelector("#myStepper")
@@ -2250,6 +2254,5 @@
       sgdsInput.addEventListener("sgds-change", () => {
       });
     </script>
-    </body>
 
 </html>

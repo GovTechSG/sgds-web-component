@@ -1,4 +1,4 @@
-import { html, nothing } from "lit";
+import { html } from "lit";
 import { property, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -46,14 +46,6 @@ export class SgdsDropdownItem extends SgdsElement {
         tabindex=${this.disabled ? "-1" : "0"}
       >
         <slot></slot>
-
-        <!-- //TODO: Remove active icon for dropdown as navigational dropdowns do not need active icon. Active icon is specific to combobox only.
-// When working on combobox please refactor to segregate combobox item from dropdown item -->
-        ${this.active
-          ? html`<div class="active-icon">
-              <sgds-icon name="check"></sgds-icon>
-            </div>`
-          : nothing}
       </div>
     `;
   }
