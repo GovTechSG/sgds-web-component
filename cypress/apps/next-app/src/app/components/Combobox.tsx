@@ -1,4 +1,6 @@
 import dynamic from "next/dynamic"
+// import SgdsCombobox from "@govtechsg/sgds-web-component/react/combo-box/index.js";
+
 const SgdsCombobox = dynamic(
     () => import("@govtechsg/sgds-web-component/react/combo-box/index.js"),
     {
@@ -7,14 +9,22 @@ const SgdsCombobox = dynamic(
   );
 export const Combobox = () => {
     return (
+      <div>
       <SgdsCombobox 
-        label="Items" 
-        hintText="" 
-        name="undefined" 
+        label="Fruits" 
+        hintText="single select" 
+        name="combobox" 
         placeholder="ComboBox" 
-        value="" 
-        close="default"
-        menuList={["apple", "orange", "pear"]}>
+        menuList={[{label: "apple", value: "apple"}, {label: "orange", value: "orange"}, {label: "pear", value: "pear"}]}>
       </SgdsCombobox>
+      <SgdsCombobox 
+        multiSelect
+        label="Fruits" 
+        hintText="single select" 
+        name="combobox" 
+        placeholder="ComboBox" 
+        menuList={[{label: "apple", value: "apple"}, {label: "orange", value: "orange"}, {label: "pear", value: "pear"}]}>
+      </SgdsCombobox>
+      </div>
     )
 }

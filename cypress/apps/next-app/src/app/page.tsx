@@ -1,4 +1,3 @@
-import "@govtechsg/sgds-web-component/themes/day.css";
 import { Accordion } from "./components/Accordion";
 import { Alert } from "./components/Alert";
 import { Badge } from "./components/Badge";

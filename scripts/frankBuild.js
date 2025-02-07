@@ -18,6 +18,7 @@ async function createPackageFile() {
     exports: {
       ".": "./index.js",
       "./themes/*": "./themes/*",
+      "./css/*": "./css/*",
       "./components": "./components/index.js",
       "./components/*": "./components/*",
       "./react": "./react/index.js",
