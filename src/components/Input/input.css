@@ -22,7 +22,7 @@
   border-radius: var(--input-border-radius);
   padding: 0px var(--sgds-form-padding-x);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  min-height: var(--sgds-dimension-48);
+  height: var(--sgds-dimension-48);
   min-width: var(--sgds-dimension-256);
   width: -webkit-fill-available;
   width: -moz-available;
