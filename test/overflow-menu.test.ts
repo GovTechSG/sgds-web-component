@@ -9,11 +9,11 @@ describe("<sgds-overflow-menu>", () => {
       el,
       `
       <sgds-dropdown drop="down">
-            <button slot="toggler" class="overflow-btn">
-                <sgds-icon name="three-dots" size="md"></sgds-icon>
-            </button>
-            <slot></slot>
-        </sgds-dropdown>
+        <button slot="toggler" class="overflow-btn">
+            <sgds-icon name="three-dots" size="md"></sgds-icon>
+        </button>
+        <slot></slot>
+      </sgds-dropdown>
       `
     );
   });

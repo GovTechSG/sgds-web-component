@@ -18,6 +18,7 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
     input: HTMLInputElement | SgdsInput | HTMLTextAreaElement;
     private _isTouched = false;
     @queryAsync("sgds-input") sgdsInput: Promise<SgdsInput>;
+    @queryAsync("sgds-datepicker-input") sgdsDatepickerInput: Promise<SgdsInput>;
 
     connectedCallback(): void {
       super.connectedCallback();
@@ -28,7 +29,10 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
 
       /* Either input or sgds-input. For example, quantity-toggle uses sgds-input */
       this.input =
-        this.shadowRoot.querySelector("input") || (await this.sgdsInput) || this.shadowRoot.querySelector("textarea");
+        this.shadowRoot.querySelector("input") ||
+        (await this.sgdsInput) ||
+        this.shadowRoot.querySelector("textarea") ||
+        (await this.sgdsDatepickerInput);
       this._mixinValidate(this.input);
     }
 
@@ -100,6 +104,9 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
     _mixinGetValidationMessage(): string {
       return this.inputValidationController.validationMessage;
     }
+    _mixinSetValidity(flags?: ValidityStateFlags, message?: string, anchor?: HTMLElement): void {
+      return this.inputValidationController.setValidity(flags, message, anchor);
+    }
 
     /** DECLARED INSTANCE METHODS AND PROPERTIES*/
 
@@ -125,6 +132,7 @@ export declare class ToBeValidatedElementInterface {
   _mixinSetFormValue(): void;
   _mixinCheckValidity(): boolean;
   _mixinReportValidity(): boolean;
+  _mixinSetValidity(flags?: ValidityStateFlags, message?: string, anchor?: HTMLElement): void;
   _mixinGetValidity(): ValidityState;
   _mixinGetValidationMessage(): string;
 }

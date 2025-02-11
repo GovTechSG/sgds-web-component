@@ -7,41 +7,47 @@
   --datepicker-close-btn-color: white;
   --datepicker-selected-date-bg: var(--sgds-primary);
   --datepicker-selected-date-color: white;
+
+  font-size: var(--sgds-font-size-1);
 }
-.datepicker {
-  border-color: var(--sgds-border-color);
-  font-size: 1rem;
-  max-width: 24rem;
-  width: 24rem;
-  background-color: var(--datepicker-bg);
-}
-div {
+.dropdown {
   display: flex;
+  height: 100%;
 }
-button {
-  align-self: self-start;
+
+.datepicker.dropdown-menu.show {
+  background-color: var(--sgds-default-bg-surface);
+  padding: var(--sgds-form-padding-y) var(--sgds-form-padding-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-form-gap-sm);
+  overflow: unset;
+  width: var(--sgds-dimension-320);
 }
 sgds-datepicker-input {
   flex: 1;
   margin-right: 0; /* Remove the margin on the right */
-  --input-border-radius: var(--sgds-border-radius, 0.3125rem) 0 0 var(--sgds-border-radius, 0.3125rem);
+  --input-border-radius: var(--sgds-form-border-radius-md) 0 0 var(--sgds-form-border-radius-md);
 }
-sgds-button[variant="outlined"]  {
-  --btn-color: var(--sgds-dark);
-  --btn-bg: var(--sgds-white);
-  --btn-border-color: var(--sgds-dark);
-  --btn-hover-bg: var(--sgds-dark);
-  --btn-hover-color: var(--sgds-white);
+sgds-icon-button{
+  --btn-border-radius: 0 var(--sgds-form-border-radius-md) var(--sgds-form-border-radius-md) 0;
 }
-.calendar-btn {
-  --btn-border-color: var(--sgds-border-color);
-  --btn-border-radius: 0;
+
+.datepicker-container {
+  display: flex;
 }
-.reset-btn {
-  --btn-bg: var(--datepicker-close-btn-bg);
-  --btn-color: var(--datepicker-close-btn-color);
-  --btn-border-radius: 0;
+
+.calendar-btn:not(.with-hint-text) {
+  align-self: center;
 }
-.reset-btn:hover {
-  --btn-hover-bg: var(--datepicker-close-btn-hover-bg);
+
+.calendar-btn:not(.with-hint-text).with-label {
+ align-self: end;
+ margin-top: calc(var(--sgds-font-size-2) * var(--sgds-line-height-body) - var(--sgds-line-height-min))
+}
+
+.calendar-btn.with-hint-text.with-label {
+  align-self: center;
+  /* line height of label minus line height of hinttext/feedback */
+  margin-top: calc(var(--sgds-font-size-2) * var(--sgds-line-height-body) - var(--sgds-line-height-min))
 }

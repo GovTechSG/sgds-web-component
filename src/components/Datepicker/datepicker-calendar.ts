@@ -93,6 +93,8 @@ export class DatepickerCalendar extends SgdsElement {
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("keydown", this._handleKeyPress);
+    /** Prevent validation from happening when navigating the calendar */
+    this.addEventListener("blur", e => e.stopPropagation());
   }
 
   updated() {
@@ -213,7 +215,6 @@ export class DatepickerCalendar extends SgdsElement {
 
   private _onClickDay(event: MouseEvent | KeyboardEvent) {
     const { day, date } = (event.composedPath()[0] as HTMLTableCellElement).dataset;
-
     const displayDateClone = new Date(this.displayDate);
     displayDateClone.setDate(parseInt(day));
     /** update new focused date for mouse click */
@@ -392,11 +393,7 @@ export class DatepickerCalendar extends SgdsElement {
           <tr>
             ${DatepickerCalendar.DAY_LABELS.map(
               (label: string, index: number) =>
-                html`
-                  <th key=${index} abbr=${label} scope="col">
-                    <small>${label.slice(0, 3)}</small>
-                  </th>
-                `
+                html` <th key=${index} abbr=${label} scope="col">${label.slice(0, 3)}</th> `
             )}
           </tr>
         </thead>
@@ -415,7 +412,7 @@ export class DatepickerCalendar extends SgdsElement {
     const year = this.displayDate.getFullYear();
 
     const monthView = html`
-      <div class="sgds monthpicker">
+      <div class="monthpicker">
         ${DatepickerCalendar.MONTHVIEW_LABELS.map((m, idx) => {
           const isCurrentMonth = idx === TODAY_DATE.getMonth() && year === TODAY_DATE.getFullYear();
           const time = setTimeToNoon(new Date(year, idx)).getTime();

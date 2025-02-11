@@ -65,7 +65,7 @@ export class DropdownListElement extends DropdownElement {
     });
   }
 
-  private _handleKeyboardMenuItemsEvent(e: KeyboardEvent) {
+  protected _handleKeyboardMenuItemsEvent(e: KeyboardEvent) {
     const menuItems = this._getActiveMenuItems();
     switch (e.key) {
       case ARROW_DOWN:

@@ -57,3 +57,7 @@ input {
 .form-check-input[indeterminate].is-invalid {
   background-color: var(--sgds-form-danger-bg);
 }
+
+.form-check-label {
+  width: 100%;
+}

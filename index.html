@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
   <script type="module" id="console-components-gateway"
     src="https://dev.assets.developer.tech.gov.sg/console-components/gateway.es5.js" nonce="{nonce" ||
@@ -57,23 +57,13 @@
       width: 100%;
     }
 
-    .d-flex-row {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-
-    .grid-preview {
+    .d-grid {
       display: grid;
-      grid-template-areas:
-        "masthead masthead masthead "
-        "nav nav nav "
-        "sidenav main main "
-        "footer footer footer ";
-      grid-template-columns: 240px repeat(2, 1fr);
-      width: 100%;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-auto-flow: row;
+      justify-content: center;
+      align-content: center;
+      gap: 1rem;
     }
 
     .d-flex-row {
@@ -142,7 +132,7 @@
 </head>
 
 
-<body class="d-flex flex-column min-vh-100"></body>
+<body class="d-flex flex-column min-vh-100">
 <sgds-masthead></sgds-masthead>
 <sgds-mainnav expand="lg">
   <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
@@ -150,50 +140,76 @@
   <sgds-mainnav-item active href="#">
     Home
   </sgds-mainnav-item>
+  <sgds-mainnav-item active href="#">
+    Home
+  </sgds-mainnav-item>
   <sgds-mainnav-item disabled href="#">About</sgds-mainnav-item>
   <sgds-mainnav-item href="#" slot="end" class="test test2">Info</sgds-mainnav-item>
   <sgds-mainnav-item href="#" slot="end" id="night-theme"><i class="bi bi-moon"></i></sgds-mainnav-item>
-  <sgds-mainnav-dropdown disabled>
+  <sgds-mainnav-dropdown>
     <span slot="toggler">Dropdown</span>
-    <sgds-dropdown-item href="#">Item 1</sgds-dropdown-item>
-    <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
-    <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
+    <sgds-dropdown-item disabled><a href="#">Item 1</a></sgds-dropdown-item>
+    <sgds-dropdown-item ><a href="https://www.google.com/">Item 2</a></sgds-dropdown-item>
+    <sgds-dropdown-item active><a href="#">Item 3</a></sgds-dropdown-item>
   </sgds-mainnav-dropdown>
-  <sgds-mainnav-dropdown togglerText="Dropdown" slot="end">
-    <sgds-dropdown-item href="#">Item 1</sgds-dropdown-item>
-    <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
-    <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
+  <sgds-mainnav-dropdown slot="end">
+    <span slot="toggler">Dropdown</span>
+    <sgds-dropdown-item>Item 1</sgds-dropdown-item>
+    <sgds-dropdown-item>Item 2</sgds-dropdown-item>
+    <sgds-dropdown-item>Item 3</sgds-dropdown-item>
   </sgds-mainnav-dropdown>
   <sgds-button slot="end">Login</sgds-button>
   <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px">
   </dev-console-widget>
 </sgds-mainnav>
 <div class="grid-preview">
+  <sgds-sidenav-item active>
+    <div slot="title">standalone</div>
+  </sgds-sidenav-item>
   <sgds-sidenav class="mt-3" id="test-id">
-    <sgds-sidenav-item active>
+    <sgds-sidenav-item>
       <span slot="title">
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-          class="bi bi-0-circle" viewBox="0 0 16 16">
-          <path
-            d="M7.988 12.158c-1.851 0-2.941-1.57-2.941-3.99V7.84c0-2.408 1.101-3.996 2.965-3.996 1.857 0 2.935 1.57 2.935 3.996v.328c0 2.408-1.101 3.99-2.959 3.99ZM8 4.951c-1.008 0-1.629 1.09-1.629 2.895v.31c0 1.81.627 2.895 1.629 2.895s1.623-1.09 1.623-2.895v-.31c0-1.8-.621-2.895-1.623-2.895Z" />
-          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Z" />
-        </svg>
         Title
       </span>
-      <sgds-sidenav-link href="#" active>first-test</sgds-sidenav-link>
-      <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
-      <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
+      <sgds-sidenav-link disabled>
+        <a href="#"> disbaED-test</a>
+      </sgds-sidenav-link>
+      <sgds-sidenav-link>
+        <a href="#"> first-test</a>
+      </sgds-sidenav-link>
+      <sgds-sidenav-item title="Test title 2">
+        <sgds-icon name="placeholder" slot="icon"></sgds-icon>
+        <span slot="title">
+          Title level 2 very long so just wrap
+        </span>
+        <sgds-sidenav-link active>
+          <a href="#"> first-test</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-link>
+          <a href="#"> first-test</a>
+        </sgds-sidenav-link>
+
+      </sgds-sidenav-item>
     </sgds-sidenav-item>
-    <sgds-sidenav-item title="Test title 2" disabled>
+    <sgds-sidenav-item title="Test title 2">
+      <sgds-icon slot="icon" name="placeholder"></sgds-icon>
       <span slot="title">
-        <sl-icon name="stack"></sl-icon> Title
+        Title
       </span>
-      <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
-      <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
-      <sgds-sidenav-link href="#">first-test</sgds-sidenav-link>
+      <sgds-sidenav-link>
+        <a href="#"> first-test</a>
+      </sgds-sidenav-link>
+      <sgds-sidenav-link>
+        <a href="#"> first-test</a>
+      </sgds-sidenav-link>
 
     </sgds-sidenav-item>
     <sgds-sidenav-item href="#">
+      <span slot="title">
+        <sl-icon name="stack"></sl-icon> Title 3
+      </span>
+    </sgds-sidenav-item>
+    <sgds-sidenav-item href="#" disabled>
       <span slot="title">
         <sl-icon name="stack"></sl-icon> Title 3
       </span>
@@ -365,7 +381,7 @@
         </sgds-icon-button>
         <sgds-icon-button variant="ghost" name="placeholder">
         </sgds-icon-button>
-        <sgds-icon-button variant="outline" name="placeholder"> 
+        <sgds-icon-button variant="outline" name="placeholder">
         </sgds-icon-button>
         <sgds-icon-button variant="danger" name="placeholder">
         </sgds-icon-button>
@@ -754,27 +770,44 @@
     </div>
     <div class="container">
       <h2>ComboBox</h2>
-      <sgds-combo-box menuList='["John Smith", "Jack Adams"]' label="label" hintText="hint" hasFeedback="true"
-        invalidFeedback="test">
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-          class="bi bi-search" viewBox="0 0 16 16">
-          <path
-            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-        </svg>
+      
+      <sgds-combo-box value="1" menuList='[
+      { "label": "John Smith", "value": "1" },
+      { "label": "Jack Adams", "value": "2" },
+      { "label": "Regina Bride", "value": "3" },
+      { "label": "Christian Dior", "value": "4" },
+      { "label": "Prada Low", "value": "5" },
+      { "label": "Chloe Delight", "value": "6" },
+      { "label": "Jade Apheremal", "value": "7" },
+      { "label": "Louis Vuitton", "value": "8" }
+    ]' label="label" hintText="hint" hasFeedback="true" invalidFeedback="test">
       </sgds-combo-box>
+
+      <sgds-combo-box value="1;2;3;4;5;6;7;8" menuList='[
+      { "label": "John Smith", "value": "1" },
+      { "label": "Jack Adams", "value": "2" },
+      { "label": "Regina Bride", "value": "3" },
+      { "label": "Christian Dior", "value": "4" },
+      { "label": "Prada Low", "value": "5" },
+      { "label": "Chloe Delight", "value": "6" },
+      { "label": "Jade Apheremal", "value": "7" },
+      { "label": "Louis Vuitton", "value": "8" }
+    ]'  multiSelect label="label" hintText="multiple" hasFeedback="true" invalidFeedback="test">
+      </sgds-combo-box>
+      <input readonly value="hello" />
       <h2>Datepicker</h2>
       <form id="datepicker-form">
-        <sgds-input type="date" hasFeedback required></sgds-input>
-        <sgds-input type="text" label="Label" hinttext="This is a hint text" name="email" inputclasses=""
+        <sgds-input type="date" hasFeedback required ></sgds-input>
+        <sgds-input required readonly value="hello" type="text" label="Label" hinttext="This is a hint text" name="email" inputclasses=""
           invalidfeedback="test" icon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-envelope&quot; viewBox=&quot;0 0 16 16&quot;>
 												<path d=&quot;M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z&quot;/>
 												</svg>" placeholder="Placeholder" required hasFeedback>
         </sgds-input>
-        <!-- <sgds-datepicker mindate="2024-01-02T12:00:00.000Z"
-												maxdate="2024-01-30T12:00:00.000Z"></sgds-datepicker> -->
-        <sgds-button type="submit">Submit</sgds-button>
+        <sgds-datepicker noFlip required mindate="2024-01-02T12:00:00.000Z"
+          maxdate="2024-01-30T12:00:00.000Z"></sgds-datepicker>
+        <sgds-button type="submit">Submit TEST DATEPICKER</sgds-button>
       </form>
-      <sgds-datepicker label="Choose a date"></sgds-datepicker>
+      <sgds-datepicker label="Choose a date" hintText="hint text"></sgds-datepicker>
 
       <sgds-datepicker id="lukhei" label="Birthdate" initialValue='["20/01/2024"]' mindate="2024-01-02T12:00:00.000Z"
         maxdate="2024-01-30T12:00:00.000Z">
@@ -994,13 +1027,14 @@
     <div class="container">
       <h2>Form Validation</h2>
       <form id="validation-form">
+<!-- 
         <sgds-file-upload required multiple hinttext="test" name="fileuploadtest" hasFeedback>
           File upload
           <sgds-icon slot="icon" size="md" name="placeholder"></sgds-icon>
           <sgds-icon slot="validIcon" size="md" name="placeholder"></sgds-icon>
           <sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
-        </sgds-file-upload>
-        <sgds-input label="Label" hinttext="type hello" name="email" required hasFeedback="both" icon='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+        </sgds-file-upload> -->
+       <sgds-input pattern="hello" label="Label" hinttext="type hello" name="email" required hasFeedback="both" icon='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
 												<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
 												</svg>' placeholder="Placeholder" minlength="3" valid>
           <sgds-icon slot="icon" name="placeholder"></sgds-icon>
@@ -1013,16 +1047,48 @@
           <sgds-checkbox name="checkbox" value="checkboxhello" required>she</sgds-checkbox>
           <sgds-checkbox name="checkbox" value="checkboxhello" required>he</sgds-checkbox>
           <sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
-        </sgds-checkbox-group>
+        </sgds-checkbox-group> 
 
         <sgds-radio-group hasFeedback name="radio" required>
           <sgds-radio value="1" disab led>1</sgds-radio>
           <sgds-radio value="2">2 </sgds-radio>
           <sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
         </sgds-radio-group>
-        <sgds-textarea minlength="3" required hasFeedback resize="auto">
+        <sgds-textarea minlength="3" hasFeedback resize="auto">
           <sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
-        </sgds-textarea>
+        </sgds-textarea> 
+        <!-- <sgds-datepicker required name="datepicker-hi"></sgds-datepicker> -->
+        <!-- <sgds-datepicker required initialValue='["20/01/2024"]' id="test-date" name="datepicker-hi" mindate="2024-01-02T12:00:00.000Z"
+          maxdate="2024-12-30T12:00:00.000Z" hasFeedback></sgds-datepicker> -->
+          <sgds-combo-box id="combobox-test" value="1"  label="readonly combobox" required menuList='[
+      { "label": "John Smith", "value": "1" },
+      { "label": "Jack Adams", "value": "2" },
+      { "label": "Regina Bride", "value": "3" },
+      { "label": "Christian Dior", "value": "4" },
+      { "label": "Prada Low", "value": "5" },
+      { "label": "Chloe Delight", "value": "6" },
+      { "label": "Jade Apheremal", "value": "7" },
+      { "label": "Louis Vuitton", "value": "8" }
+    ]' label="label" hintText="hint" hasFeedback>
+      </sgds-combo-box>
+      <div></div>
+          <sgds-combo-box multiSelect  required hasFeedback menuList='[
+      { "label": "John Smith", "value": "1" },
+      { "label": "Jack Adams", "value": "2" },
+      { "label": "Regina Bride", "value": "3" },
+      { "label": "Christian Dior", "value": "4" },
+      { "label": "Prada Low", "value": "5" },
+      { "label": "Chloe Delight", "value": "6" },
+      { "label": "Jade Apheremal", "value": "7" },
+      { "label": "Louis Vuitton", "value": "8" }
+    ]' label="label" hintText="hint">
+      </sgds-combo-box>
+      <sgds-input></sgds-input>
+    </div>
+
+        <!--<sgds-datepicker required mode="range"></sgds-datepicker>
+        <sgds-datepicker required mode="range" mindate="2024-01-02T12:00:00.000Z"
+        maxdate="2024-12-30T12:00:00.000Z"></sgds-datepicker> -->
         <sgds-button type="submit" id="submit">Submit</sgds-button>
         <sgds-button type="reset" id="submit">Reset</sgds-button>
         <sgds-button type="button" id="disableT">Disabled toggle</sgds-button>
@@ -1030,37 +1096,60 @@
       </form>
     </div>
     <div class="container">
+      <sgds-pagination dataLength="1"></sgds-pagination>
+      <sgds-pagination dataLength="20" itemsPerPage="10" currentPage="1"></sgds-pagination>
+      <sgds-pagination dataLength="20" itemsPerPage="8" currentPage="1"></sgds-pagination>
+      <sgds-pagination dataLength="20" itemsPerPage="5" currentPage="4"></sgds-pagination>
+      <sgds-pagination dataLength="20" itemsPerPage="4" currentPage="4"></sgds-pagination>
+      <sgds-pagination dataLength="18" itemsPerPage="3" currentPage="4"></sgds-pagination>
+      <sgds-pagination dataLength="20" itemsPerPage="3" currentPage="4"></sgds-pagination>
+      <sgds-pagination dataLength="16" itemsPerPage="2"></sgds-pagination>
+      <sgds-pagination dataLength="18" itemsPerPage="2"></sgds-pagination>
+      <sgds-pagination dataLength="20" itemsPerPage="2"></sgds-pagination>
       <h3>sample table, elipsis off</h3>
       <sgds-table id="tablesample"></sgds-table>
       <sgds-pagination id="samplepage" directionVariant="icon"></sgds-pagination>
       <br><br>
       <h3>ellipsisOn, limit 7, ellipsisJump 3</h3>
       <sgds-table id="tablesample2"></sgds-table>
-      <sgds-pagination id="samplepage2" directionVariant="icon" limit="3" currentPage="3" ellipsisOn></sgds-pagination>
+      <sgds-pagination id="samplepage2" directionVariant="icon" currentPage="3" ellipsisOn></sgds-pagination>
+      <h2>Pagination</h2>
+      <p>size=sm,variant=default</p>
+      <sgds-pagination size="sm" variant="default" dataLength="15" limit="3" itemsPerPage="1"
+        currentPage="6"></sgds-pagination>
+      <p>size=sm,variant=number</p>
+      <sgds-pagination size="sm" variant="number" dataLength="15" limit="3" itemsPerPage="1"
+        currentPage="6"></sgds-pagination>
+      <p>size=sm,variant=description</p>
+      <sgds-pagination size="sm" dataLength="10" itemsPerPage="5" variant="description"></sgds-pagination>
+      <p>size=sm,variant=button</p>
+      <sgds-pagination size="sm" variant="button" dataLength="15" limit="3" itemsPerPage="1"
+        currentPage="6"></sgds-pagination>
+      <sgds-pagination size="sm" variant="button" dataLength="15" limit="3" itemsPerPage="1"
+        currentPage="6"></sgds-pagination>
+      <p>size=sm,variant=default</p>
+      <sgds-pagination size="sm" variant="default" navigation="button" dataLength="15" limit="3" itemsPerPage="1"
+        currentPage="6"></sgds-pagination>
 
-      <p>ellipsisOn=false</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
-      <p>ellipsisOn=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" ellipsisOn></sgds-pagination>
-      <p>ellipsisOn=false, showFirstPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showFirstPage></sgds-pagination>
-      <p>ellipsisOn=false, showFirstPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showFirstPage></sgds-pagination>
-      <p>ellipsisOn=false, showLastPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage></sgds-pagination>
-      <p>ellipsisOn=true, showLastPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage
-        ellipsisOn></sgds-pagination>
-      <p>ellipsisOn=false, showLastPage=true, showFirstPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage
-        showFirstPage></sgds-pagination>
-      <p>ellipsisOn=true, showLastPage=true, showFirstPage=true</p>
-      <sgds-pagination dataLength="15" limit="3" itemsPerPage="1" currentPage="6" showLastPage showFirstPage
-        ellipsisOn></sgds-pagination>
-      <p>ellipsisOn=false, showLastPage=true, showFirstPage=true</p>
-      <sgds-pagination dataLength="2" itemsPerPage="1" currentPage="1" showLastPage showFirstPage></sgds-pagination>
-      test
-      <sgds-pagination dataLength="50" currentPage="4" showFirstPage></sgds-pagination>
+      <p>variant=number</p>
+      <sgds-pagination variant="number" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <p>variant=default</p>
+      <sgds-pagination variant="default" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <p>variant=description</p>
+      <sgds-pagination variant="description" dataLength="15" limit="3" itemsPerPage="1"
+        currentPage="6"></sgds-pagination>
+      <p>variant=button</p>
+      <sgds-pagination variant="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <p>navigation=icon-button</p>
+      <sgds-pagination navigation="icon-button" dataLength="15" limit="3" itemsPerPage="1"
+        currentPage="6"></sgds-pagination>
+      <p>navigation=button</p>
+      <sgds-pagination navigation="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
+      <p>navigation=button, variant=description</p>
+      <sgds-pagination variant="description" navigation="button" dataLength="15" limit="3" itemsPerPage="1"
+        currentPage="6"></sgds-pagination>
+      <p>navigation=button, variant=button</p>
+      <sgds-pagination variant="button" navigation="button" dataLength="15" limit="3" itemsPerPage="1" currentPage="6"></sgds-pagination>
     </div>
     <div class="container">
       <h2>Button</h2>
@@ -1162,23 +1251,78 @@
       <sgds-modal>
         <h2 slot="title">Modal title</h2>
         <p slot="description">Modal description</p>
-        <p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dictum est vitae erat molestie blandit. Pellentesque at nunc at mi auctor imperdiet eu at leo. Integer aliquam, turpis vel ultricies ornare, sem massa commodo velit, pretium dictum quam nibh et ex. Suspendisse eu dignissim libero. Donec aliquam, lacus eu pellentesque interdum, arcu nisl blandit turpis, at tincidunt purus orci ut dolor. Morbi malesuada faucibus lorem, ornare accumsan sapien lacinia vel. In enim justo, hendrerit eu mi vitae, viverra fringilla nunc. Proin semper nunc a mollis faucibus. Nam at arcu non justo congue tincidunt. Donec vehicula felis risus, et lobortis lacus fringilla eu. Proin faucibus, nisi non semper elementum, sapien nisi viverra urna, id tempus augue felis ac nibh. Nullam pulvinar magna eros. Vestibulum at orci elit. Sed convallis fermentum gravida.
+        <p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dictum est vitae erat molestie blandit.
+          Pellentesque at nunc at mi auctor imperdiet eu at leo. Integer aliquam, turpis vel ultricies ornare, sem massa
+          commodo velit, pretium dictum quam nibh et ex. Suspendisse eu dignissim libero. Donec aliquam, lacus eu
+          pellentesque interdum, arcu nisl blandit turpis, at tincidunt purus orci ut dolor. Morbi malesuada faucibus
+          lorem, ornare accumsan sapien lacinia vel. In enim justo, hendrerit eu mi vitae, viverra fringilla nunc. Proin
+          semper nunc a mollis faucibus. Nam at arcu non justo congue tincidunt. Donec vehicula felis risus, et lobortis
+          lacus fringilla eu. Proin faucibus, nisi non semper elementum, sapien nisi viverra urna, id tempus augue felis
+          ac nibh. Nullam pulvinar magna eros. Vestibulum at orci elit. Sed convallis fermentum gravida.
 
-          Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida, congue sapien eu, rhoncus ante. Quisque velit est, sodales vitae turpis vitae, hendrerit facilisis nulla. Suspendisse potenti. Nulla hendrerit enim sed leo rutrum auctor. Praesent volutpat rutrum purus in volutpat. Vivamus at facilisis ipsum, eu consequat ex. Integer ante ligula, mollis at diam in, tincidunt tincidunt orci. Mauris eu rutrum purus, eget consectetur massa. Pellentesque sed euismod dolor, vel ornare orci. Proin tincidunt gravida lorem. Duis vehicula, turpis quis placerat pharetra, lacus tortor fermentum tortor, a tincidunt mi arcu quis risus. Duis id ultrices urna, non placerat ex.
-          
-          Sed efficitur rhoncus condimentum. Aliquam eu convallis massa, ac suscipit dolor. Morbi bibendum lacus a justo consectetur gravida. Nullam porttitor ullamcorper eros, at hendrerit est semper venenatis. Donec non dolor metus. Aenean sit amet massa arcu. Quisque rhoncus orci pretium, venenatis orci quis, tincidunt ex. Duis efficitur lacus dolor, a interdum sapien imperdiet nec. Sed lobortis erat justo. Nam nec metus eget est blandit consequat non at sapien. Curabitur arcu eros, ultricies eu magna non, vulputate imperdiet erat. Duis nec sapien quam. In sapien elit, bibendum nec porttitor ac, vulputate pulvinar lacus. Maecenas venenatis lorem eget consequat molestie. Nulla hendrerit interdum sem, et efficitur ligula porttitor eget.
-          
-          Vivamus nibh risus, sodales condimentum orci sit amet, aliquam bibendum nunc. Etiam a elit et mi interdum faucibus vitae sed risus. Aenean eu posuere mi. Aenean lectus turpis, mollis eget ornare sit amet, placerat ac orci. Suspendisse tincidunt accumsan dolor, vitae pellentesque ipsum hendrerit quis. Duis luctus, ipsum a tempor rutrum, neque urna tincidunt dolor, ut placerat neque augue at ante. Curabitur id bibendum sem. Pellentesque vel tellus congue, condimentum purus quis, pulvinar massa.
-          
-          Suspendisse ac vulputate urna. Curabitur elementum consectetur blandit. Nulla tristique nec elit non placerat. Vestibulum porttitor mi nec quam dignissim suscipit. Aenean eu dui a felis interdum eleifend ut non nibh. Proin at molestie ante. Etiam vel ipsum vitae nunc porta fermentum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dictum est vitae erat molestie blandit. Pellentesque at nunc at mi auctor imperdiet eu at leo. Integer aliquam, turpis vel ultricies ornare, sem massa commodo velit, pretium dictum quam nibh et ex. Suspendisse eu dignissim libero. Donec aliquam, lacus eu pellentesque interdum, arcu nisl blandit turpis, at tincidunt purus orci ut dolor. Morbi malesuada faucibus lorem, ornare accumsan sapien lacinia vel. In enim justo, hendrerit eu mi vitae, viverra fringilla nunc. Proin semper nunc a mollis faucibus. Nam at arcu non justo congue tincidunt. Donec vehicula felis risus, et lobortis lacus fringilla eu. Proin faucibus, nisi non semper elementum, sapien nisi viverra urna, id tempus augue felis ac nibh. Nullam pulvinar magna eros. Vestibulum at orci elit. Sed convallis fermentum gravida.
+          Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus
+          ac facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo
+          gravida, congue sapien eu, rhoncus ante. Quisque velit est, sodales vitae turpis vitae, hendrerit facilisis
+          nulla. Suspendisse potenti. Nulla hendrerit enim sed leo rutrum auctor. Praesent volutpat rutrum purus in
+          volutpat. Vivamus at facilisis ipsum, eu consequat ex. Integer ante ligula, mollis at diam in, tincidunt
+          tincidunt orci. Mauris eu rutrum purus, eget consectetur massa. Pellentesque sed euismod dolor, vel ornare
+          orci. Proin tincidunt gravida lorem. Duis vehicula, turpis quis placerat pharetra, lacus tortor fermentum
+          tortor, a tincidunt mi arcu quis risus. Duis id ultrices urna, non placerat ex.
 
-          Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida, congue sapien eu, rhoncus ante. Quisque velit est, sodales vitae turpis vitae, hendrerit facilisis nulla. Suspendisse potenti. Nulla hendrerit enim sed leo rutrum auctor. Praesent volutpat rutrum purus in volutpat. Vivamus at facilisis ipsum, eu consequat ex. Integer ante ligula, mollis at diam in, tincidunt tincidunt orci. Mauris eu rutrum purus, eget consectetur massa. Pellentesque sed euismod dolor, vel ornare orci. Proin tincidunt gravida lorem. Duis vehicula, turpis quis placerat pharetra, lacus tortor fermentum tortor, a tincidunt mi arcu quis risus. Duis id ultrices urna, non placerat ex.
-          
-          Sed efficitur rhoncus condimentum. Aliquam eu convallis massa, ac suscipit dolor. Morbi bibendum lacus a justo consectetur gravida. Nullam porttitor ullamcorper eros, at hendrerit est semper venenatis. Donec non dolor metus. Aenean sit amet massa arcu. Quisque rhoncus orci pretium, venenatis orci quis, tincidunt ex. Duis efficitur lacus dolor, a interdum sapien imperdiet nec. Sed lobortis erat justo. Nam nec metus eget est blandit consequat non at sapien. Curabitur arcu eros, ultricies eu magna non, vulputate imperdiet erat. Duis nec sapien quam. In sapien elit, bibendum nec porttitor ac, vulputate pulvinar lacus. Maecenas venenatis lorem eget consequat molestie. Nulla hendrerit interdum sem, et efficitur ligula porttitor eget.
-          
-          Vivamus nibh risus, sodales condimentum orci sit amet, aliquam bibendum nunc. Etiam a elit et mi interdum faucibus vitae sed risus. Aenean eu posuere mi. Aenean lectus turpis, mollis eget ornare sit amet, placerat ac orci. Suspendisse tincidunt accumsan dolor, vitae pellentesque ipsum hendrerit quis. Duis luctus, ipsum a tempor rutrum, neque urna tincidunt dolor, ut placerat neque augue at ante. Curabitur id bibendum sem. Pellentesque vel tellus congue, condimentum purus quis, pulvinar massa.
-          
-          Suspendisse ac vulputate urna. Curabitur elementum consectetur blandit. Nulla tristique nec elit non placerat. Vestibulum porttitor mi nec quam dignissim suscipit. Aenean eu dui a felis interdum eleifend ut non nibh. Proin at molestie ante. Etiam vel ipsum vitae nunc porta fermentum.</p></p>
+          Sed efficitur rhoncus condimentum. Aliquam eu convallis massa, ac suscipit dolor. Morbi bibendum lacus a justo
+          consectetur gravida. Nullam porttitor ullamcorper eros, at hendrerit est semper venenatis. Donec non dolor
+          metus. Aenean sit amet massa arcu. Quisque rhoncus orci pretium, venenatis orci quis, tincidunt ex. Duis
+          efficitur lacus dolor, a interdum sapien imperdiet nec. Sed lobortis erat justo. Nam nec metus eget est
+          blandit consequat non at sapien. Curabitur arcu eros, ultricies eu magna non, vulputate imperdiet erat. Duis
+          nec sapien quam. In sapien elit, bibendum nec porttitor ac, vulputate pulvinar lacus. Maecenas venenatis lorem
+          eget consequat molestie. Nulla hendrerit interdum sem, et efficitur ligula porttitor eget.
+
+          Vivamus nibh risus, sodales condimentum orci sit amet, aliquam bibendum nunc. Etiam a elit et mi interdum
+          faucibus vitae sed risus. Aenean eu posuere mi. Aenean lectus turpis, mollis eget ornare sit amet, placerat ac
+          orci. Suspendisse tincidunt accumsan dolor, vitae pellentesque ipsum hendrerit quis. Duis luctus, ipsum a
+          tempor rutrum, neque urna tincidunt dolor, ut placerat neque augue at ante. Curabitur id bibendum sem.
+          Pellentesque vel tellus congue, condimentum purus quis, pulvinar massa.
+
+          Suspendisse ac vulputate urna. Curabitur elementum consectetur blandit. Nulla tristique nec elit non placerat.
+          Vestibulum porttitor mi nec quam dignissim suscipit. Aenean eu dui a felis interdum eleifend ut non nibh.
+          Proin at molestie ante. Etiam vel ipsum vitae nunc porta fermentum.Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Etiam dictum est vitae erat molestie blandit. Pellentesque at nunc at mi auctor imperdiet eu
+          at leo. Integer aliquam, turpis vel ultricies ornare, sem massa commodo velit, pretium dictum quam nibh et ex.
+          Suspendisse eu dignissim libero. Donec aliquam, lacus eu pellentesque interdum, arcu nisl blandit turpis, at
+          tincidunt purus orci ut dolor. Morbi malesuada faucibus lorem, ornare accumsan sapien lacinia vel. In enim
+          justo, hendrerit eu mi vitae, viverra fringilla nunc. Proin semper nunc a mollis faucibus. Nam at arcu non
+          justo congue tincidunt. Donec vehicula felis risus, et lobortis lacus fringilla eu. Proin faucibus, nisi non
+          semper elementum, sapien nisi viverra urna, id tempus augue felis ac nibh. Nullam pulvinar magna eros.
+          Vestibulum at orci elit. Sed convallis fermentum gravida.
+
+          Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus
+          ac facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo
+          gravida, congue sapien eu, rhoncus ante. Quisque velit est, sodales vitae turpis vitae, hendrerit facilisis
+          nulla. Suspendisse potenti. Nulla hendrerit enim sed leo rutrum auctor. Praesent volutpat rutrum purus in
+          volutpat. Vivamus at facilisis ipsum, eu consequat ex. Integer ante ligula, mollis at diam in, tincidunt
+          tincidunt orci. Mauris eu rutrum purus, eget consectetur massa. Pellentesque sed euismod dolor, vel ornare
+          orci. Proin tincidunt gravida lorem. Duis vehicula, turpis quis placerat pharetra, lacus tortor fermentum
+          tortor, a tincidunt mi arcu quis risus. Duis id ultrices urna, non placerat ex.
+
+          Sed efficitur rhoncus condimentum. Aliquam eu convallis massa, ac suscipit dolor. Morbi bibendum lacus a justo
+          consectetur gravida. Nullam porttitor ullamcorper eros, at hendrerit est semper venenatis. Donec non dolor
+          metus. Aenean sit amet massa arcu. Quisque rhoncus orci pretium, venenatis orci quis, tincidunt ex. Duis
+          efficitur lacus dolor, a interdum sapien imperdiet nec. Sed lobortis erat justo. Nam nec metus eget est
+          blandit consequat non at sapien. Curabitur arcu eros, ultricies eu magna non, vulputate imperdiet erat. Duis
+          nec sapien quam. In sapien elit, bibendum nec porttitor ac, vulputate pulvinar lacus. Maecenas venenatis lorem
+          eget consequat molestie. Nulla hendrerit interdum sem, et efficitur ligula porttitor eget.
+
+          Vivamus nibh risus, sodales condimentum orci sit amet, aliquam bibendum nunc. Etiam a elit et mi interdum
+          faucibus vitae sed risus. Aenean eu posuere mi. Aenean lectus turpis, mollis eget ornare sit amet, placerat ac
+          orci. Suspendisse tincidunt accumsan dolor, vitae pellentesque ipsum hendrerit quis. Duis luctus, ipsum a
+          tempor rutrum, neque urna tincidunt dolor, ut placerat neque augue at ante. Curabitur id bibendum sem.
+          Pellentesque vel tellus congue, condimentum purus quis, pulvinar massa.
+
+          Suspendisse ac vulputate urna. Curabitur elementum consectetur blandit. Nulla tristique nec elit non placerat.
+          Vestibulum porttitor mi nec quam dignissim suscipit. Aenean eu dui a felis interdum eleifend ut non nibh.
+          Proin at molestie ante. Etiam vel ipsum vitae nunc porta fermentum.</p>
+        </p>
         <sgds-button slot="footer" variant="link" class="close-modal">Close</sgds-button>
         <sgds-button slot="footer" variant="primary" type="submit" form="formA">Submit</sgds-button>
       </sgds-modal>
@@ -1282,30 +1426,152 @@
     </div>
     <div class="container">
       <h2>Card</h2>
-      <sgds-card bordercolor="primary" textcolor="">
-        <img slot="card-image" alt="img alternate text goes here"
-          src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
-        <h3 slot="card-title">Card</h3>
-        <span slot="card-text">Some quick example text to build on the card title and make up the bulk of
-          the card's content.</span>
-
-        <a slot="card-link" href="https://google.com">Go somewhere</a>
-
-      </sgds-card>
-      <sgds-card bordercolor="primary" textcolor="">
-        <div slot="card-title" class="card-title-no-image">
-          <i slot="rightIcon" class="bi bi-apple"></i>
-          Card
-          <sgds-badge>test</sgds-badge>
-        </div>
-        <span slot="card-text">Some quick example text to build on the card title and make up the bulk of
-          the card's content.</span>
-
-        <a slot="card-link" href="https://google.com">Go somewhere</a>
-
-        <!-- <a  href="https://google.com">Go somewhere</a>
-											<a  href="https://google.com">Go somewhere</a> -->
-      </sgds-card>
+      <div class="d-grid">
+        <sgds-card disabled>
+          <img slot="image" alt="img alternate text goes here" width="467" height="312"
+            src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
+          <span slot="subtitle">SUBTITLE</span>
+          <span slot="title">Vertical Image Card</span>
+          <span slot="description">default vertical card</span>
+          <sgds-link slot="link">
+            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          </sgds-link>
+        </sgds-card>
+        <sgds-card imageAdjustment="padding around">
+          <img slot="image" alt="img alternate text goes here" width="467" height="312"
+            src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
+          <span slot="subtitle">SUBTITLE</span>
+          <a href="#" slot="title"><span>Vertical Image Card</span></a>
+          <span slot="description">vertical card with image adjustment prop set to padding around</span>
+          <!-- <sgds-link slot="link"> -->
+          <a href="#" slot="link">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          <!-- </sgds-link> -->
+        </sgds-card>
+        <sgds-card imageAdjustment="aspect ratio" stretchedLink>
+          <img slot="image" alt="img alternate text goes here" width="467" height="300"
+            src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
+          <span slot="subtitle">SUBTITLE</span>
+          <h3 slot="title">Vertical Image Card</h3>
+          <span slot="description">vertical card with image adjustment prop set to aspect ratio</span>
+          <sgds-link slot="link">
+            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          </sgds-link>
+        </sgds-card>
+        <sgds-card orientation="horizontal">
+          <img slot="image" alt="img alternate text goes here" width="467" height="312"
+            src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
+          <span slot="subtitle">SUBTITLE</span>
+          <h3 slot="title">Horizontal Image Card</h3>
+          <span slot="description">horizontal card with card orientation set to horizontal</span>
+          <!-- <sgds-link slot="link"> -->
+          <a href="#" slot="link">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          <!-- </sgds-link> -->
+        </sgds-card>
+        <sgds-card orientation="horizontal" imagePosition="after">
+          <img slot="image" alt="img alternate text goes here" width="467" height="312"
+            src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
+          <span slot="subtitle">SUBTITLE</span>
+          <h3 slot="title">Horizontal Image Card</h3>
+          <span slot="description">horizontal card with image position set to after</span>
+          <sgds-link slot="link">
+            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          </sgds-link>
+        </sgds-card>
+        <sgds-card hideBorder>
+          <img slot="image" alt="img alternate text goes here" width="467" height="312"
+            src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
+          <span slot="subtitle">SUBTITLE</span>
+          <h3 slot="title">Vertical Image Card</h3>
+          <span slot="description">vertical card with no border</span>
+          <sgds-link slot="link">
+            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          </sgds-link>
+        </sgds-card>
+        <sgds-card orientation="horizontal" hideBorder>
+          <img slot="image" alt="img alternate text goes here" width="467" height="312"
+            src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
+          <span slot="subtitle">SUBTITLE</span>
+          <h3 slot="title">Horizontal Image Card</h3>
+          <span slot="description">horizontal card with no border</span>
+          <sgds-link slot="link">
+            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          </sgds-link>
+        </sgds-card>
+        <sgds-card tinted stretchedLink>
+          <img slot="image" alt="img alternate text goes here" width="467" height="312"
+            src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
+          <span slot="subtitle">SUBTITLE</span>
+          <h3 slot="title">Vertical Image Card</h3>
+          <span slot="description">vertical card with tinted background</span>
+          <sgds-link slot="link">
+            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          </sgds-link>
+        </sgds-card>
+        <sgds-card orientation="horizontal" tinted>
+          <img slot="image" alt="img alternate text goes here" width="467" height="312"
+            src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80">
+          <span slot="subtitle">SUBTITLE</span>
+          <h3 slot="title">Horizontal Image Card</h3>
+          <span slot="description">horizontal card with tinted background</span>
+          <sgds-link slot="link">
+            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          </sgds-link>
+        </sgds-card>
+        <sgds-card>
+          <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
+          <span slot="subtitle">SUBTITLE</span>
+          <h3 slot="title">Vertical Icon Card</h3>
+          <span slot="description">default vertical card</span>
+          <sgds-link slot="link">
+            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          </sgds-link>
+        </sgds-card>
+        <sgds-card orientation="horizontal">
+          <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
+          <span slot="subtitle">SUBTITLE</span>
+          <h3 slot="title">Horizontal Icon Card</h3>
+          <span slot="description">horizontal card with card orientation set to horizontal</span>
+          <sgds-link slot="link">
+            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          </sgds-link>
+        </sgds-card>
+        <sgds-card hideBorder>
+          <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
+          <span slot="subtitle">SUBTITLE</span>
+          <h3 slot="title">Vertical Icon Card</h3>
+          <span slot="description">vertical card with no border</span>
+          <sgds-link slot="link">
+            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          </sgds-link>
+        </sgds-card>
+        <sgds-card orientation="horizontal" hideBorder>
+          <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
+          <span slot="subtitle">SUBTITLE</span>
+          <h3 slot="title">Horizontal Icon Card</h3>
+          <span slot="description">horizontal card with no border</span>
+          <sgds-link slot="link">
+            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          </sgds-link>
+        </sgds-card>
+        <sgds-card tinted>
+          <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
+          <span slot="subtitle">SUBTITLE</span>
+          <h3 slot="title">Vertical Icon Card</h3>
+          <span slot="description">vertical card with tinted background</span>
+          <sgds-link slot="link">
+            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          </sgds-link>
+        </sgds-card>
+        <sgds-card orientation="horizontal" tinted>
+          <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
+          <span slot="subtitle">SUBTITLE</span>
+          <h3 slot="title">Horizontal Icon Card</h3>
+          <span slot="description">horizontal card with tinted background</span>
+          <sgds-link slot="link">
+            <a href="#">SM light dom anchor <sgds-icon name="arrow-right"></sgds-icon></a>
+          </sgds-link>
+        </sgds-card>
+      </div>
     </div>
     <div class="container">
       <h2>Input</h2>
@@ -1346,7 +1612,7 @@
               id="input10" minlength="5" required value="" hasFeedback invalidFeedback="Minimum length 5 test">
               <sgds-icon slot="icon" name="placeholder"></sgds-icon>
             </sgds-input>
-            <sgds-input placeholder="invalid" label="label" hintText="hint" invalid hasFeedback></sgds-input>
+            <sgds-input placeholder="invalid" label="labe" hintText="hint" required hasFeedback="both"></sgds-input>
             <sgds-checkbox name="cb1" id="cb1" value="lolol">no required<span slot="feedback">You are
                 required to check this.</span></sgds-checkbox>
             <sgds-checkbox name="cb2" id="cb2" value="lolol1" required hasfeedback
@@ -1580,17 +1846,17 @@
         <h2>Overflow</h2>
         <sgds-overflow-menu>
           <sgds-dropdown-item active><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-upload" viewBox="0 0 16 16">
-            <path
-              d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-            <path
-              d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
-          </svg>Option label</sgds-dropdown-item>
-        <sgds-dropdown-item disabled>Option label</sgds-dropdown-item>
-        <sgds-dropdown-item ><a href="https://www.google.com">Google</a></sgds-dropdown-item>
-        <sgds-dropdown-item>Option label</sgds-dropdown-item>
-        <sgds-dropdown-item>Option label</sgds-dropdown-item>
-        <sgds-dropdown-item>Option label</sgds-dropdown-item>
+              class="bi bi-upload" viewBox="0 0 16 16">
+              <path
+                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+              <path
+                d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+            </svg>Option label</sgds-dropdown-item>
+          <sgds-dropdown-item disabled>Option label</sgds-dropdown-item>
+          <sgds-dropdown-item><a href="https://www.google.com">Google</a></sgds-dropdown-item>
+          <sgds-dropdown-item>Option label</sgds-dropdown-item>
+          <sgds-dropdown-item>Option label</sgds-dropdown-item>
+          <sgds-dropdown-item>Option label</sgds-dropdown-item>
         </sgds-overflow-menu>
       </div>
       <h2>Dropdown</h2>
@@ -1605,6 +1871,9 @@
           </sgds-dropdown-item>
           <sgds-dropdown-item>
             <div href="#">Home</div>
+          </sgds-dropdown-item>
+          <sgds-dropdown-item>
+            <sgds-checkbox>Hello</sgds-checkbox>
           </sgds-dropdown-item>
           <sgds-dropdown-item active>
             <a href="https://google.com" target="_blank"><sgds-icon name="placeholder"></sgds-icon>Option target
@@ -1639,7 +1908,7 @@
       Hover me
       <sgds-tooltip content="This is a tooltip" placement="top" trigger="hover">
         <sgds-icon name="plus"></sgds-icon>
-      </sgds-tooltip> 
+      </sgds-tooltip>
       <sgds-tooltip content="This is a tooltip" placement="right" trigger="hover">
         <sgds-icon name="plus"></sgds-icon>
       </sgds-tooltip>
@@ -1717,6 +1986,7 @@
         <sgds-icon name="youtube"></sgds-icon>
       </a>
     </sgds-footer>
+  </body>
 
     <script>
       const stepper = document.querySelector("#myStepper")
@@ -1959,13 +2229,15 @@
         qT.disabled = false;
         // qT.disabled = false;
       });
+      const daticker = document.querySelector("#test-date")
+      daticker.initialValue = ["02/01/2024"]
       const testF = document.querySelector("#validation-form");
 
       testF.addEventListener("submit", event => {
         console.log("submitting");
         // event.preventDefault();
         const formData = new FormData(event.target);
-        console.log(formData.get("quant"), "qaunt value");
+        console.log(formData.get("datepicker-hi"), "datepicker value");
         console.log("form report", event.target.reportValidity());
       });
       const button = document.querySelector("#submit");
@@ -1982,6 +2254,5 @@
       sgdsInput.addEventListener("sgds-change", () => {
       });
     </script>
-    </body>
 
 </html>

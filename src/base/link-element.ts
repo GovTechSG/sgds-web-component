@@ -37,6 +37,7 @@ export default class LinkElement extends SgdsElement {
         })} "
         ?disabled=${this.disabled}
         aria-disabled=${this.disabled ? "true" : "false"}
+        tabindex=${this.disabled ? "-1" : "0"}
       >
         <slot></slot>
       </a>

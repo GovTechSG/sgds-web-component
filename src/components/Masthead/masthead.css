@@ -1,8 +1,3 @@
-:host {
-  --masthead-max-width: 1440px;
-  --masthead-padding-x: 2rem;
-}
-
 b {
   font-weight: bolder;
 }
@@ -13,7 +8,6 @@ b {
 
 a {
   color: #0049dc;
-  
 }
 
 a:hover {
@@ -33,10 +27,10 @@ a:hover {
 
 .container {
   width: 100%;
-  max-width: var(--masthead-max-width);
+  max-width: var(--sgds-mainnav-max-width);
   margin-left: auto;
   margin-right: auto;
-  padding: 0.25rem var(--masthead-padding-x);
+  padding: 0.25rem var(--sgds-mainnav-padding-x);
 }
 
 .sg-crest {
@@ -78,13 +72,13 @@ a:hover {
 .sgds-masthead-button {
   display: flex;
   gap: 4px;
-  color: light-dark(#0049dc, #7fb5ff);
+  color: light-dark(#5a42c0, #9288f0);
   align-items: center;
   cursor: pointer;
 }
 
 .sgds-masthead-button:hover {
-  color: light-dark(#0022b9, #5592ff);
+  color: light-dark(#42209f, #7562e2);
 }
 
 .panel {
@@ -141,18 +135,18 @@ a:hover {
 }
 
 a.trusted-websites-link {
-  color: light-dark(#0049dc, #7fb5ff);
+  color: light-dark(#5a42c0, #9288f0);
   width: fit-content;
   text-decoration: underline;
 }
 
 a.trusted-websites-link:hover {
-  color: light-dark(#0022b9, #5592ff);
+  color: light-dark(#42209f, #7562e2);
 }
 
 @media screen and (max-width: 768px) {
   .container {
-    --masthead-padding-x: 1rem;
+    padding: 0.25rem var(--sgds-mainnav-mobile-padding-x);
   }
 
   .sgds-masthead-content .content-grid {

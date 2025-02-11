@@ -1,6 +1,4 @@
-import "@govtechsg/sgds-web-component/themes/day.css";
 import { Accordion } from "./components/Accordion";
-import { ActionCard } from "./components/ActionCard";
 import { Alert } from "./components/Alert";
 import { Badge } from "./components/Badge";
 import { Breadcrumb } from "./components/Breadcrumb";
@@ -18,7 +16,7 @@ import { Mainnav } from "./components/Mainnav";
 import { Masthead } from "./components/Masthead";
 import { Modal } from "./components/Modal";
 import { Pagination } from "./components/Pagination";
-import { Progress } from "./components/Progress";
+import { ProgressBar } from "./components/ProgressBar";
 import { QuantityToggle } from "./components/QuantityToggle";
 import { Radio } from "./components/Radio";
 import { Sidenav } from "./components/Sidenav";
@@ -38,7 +36,6 @@ export default function Home() {
       <Masthead />
       <Mainnav />
       <Accordion />
-      <ActionCard />
       <Alert />
       <Badge />
       <Breadcrumb />
@@ -53,7 +50,7 @@ export default function Home() {
       <Input />
       <Modal />
       <Pagination />
-      <Progress />
+      <ProgressBar />
       <QuantityToggle />
       <Radio />
       <Sidenav />
@@ -65,7 +62,7 @@ export default function Home() {
       <Textarea />
       <Toast />
       <Tooltip />
-      <Footer /> 
+      <Footer />
     </main>
   );
 }

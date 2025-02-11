@@ -57,6 +57,14 @@ export class SgdsDropdown extends DropdownListElement {
     button.focus();
   }
 
+  private _handleClick() {
+    if (this.disabled) {
+      return;
+    }
+
+    this.toggleMenu();
+  }
+
   async connectedCallback() {
     super.connectedCallback();
     this.addEventListener("sgds-hide", this._handleCloseMenu);
@@ -90,7 +98,7 @@ export class SgdsDropdown extends DropdownListElement {
         <div
           class="toggler-container"
           ${ref(this.myDropdown)}
-          @click=${() => this.toggleMenu()}
+          @click=${this._handleClick}
           aria-expanded="${this.menuIsOpen}"
           aria-haspopup="menu"
         >

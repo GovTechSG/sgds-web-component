@@ -8,7 +8,7 @@ The CustomElementRegistry is a global registry that provides methods for registe
 
 From version 3.0.0 onwards, our library has stopped the use of Scoped Elements mixin to dedupe our component registration when reusing components.
 
-For users who are building component libraries on top of sgds-web-component and facing clashing registration issues, you can adopt [OpenWC's scoped elements](https://open-wc.org/docs/development/scoped-elements/) to prevent exporting our registered custom elements. Please read up about OpenWC's scoped elements for more updated information. 
+For users who are building component libraries on top of sgds-web-component and facing clashing registration issues, you can adopt [OpenWC's scoped elements](https://open-wc.org/docs/development/scoped-elements/) to prevent exporting our registered custom elements. Please read up about OpenWC's scoped elements for more updated information.
 
 Things to note:
 
@@ -39,8 +39,9 @@ export class MyNavbar extends ScopedElementsMixin(LitElement) {
         <sgds-masthead fluid="false"></sgds-masthead>
             <sgds-mainnav>
               <img width="240" src="https://dev.assets.developer.tech.gov.sg/svg/logo.svg" slot="brand">
-                <sgds-mainnav-dropdown togglertext="Home" slot="end">
-                    <sgds-dropdown-item>Logout</sgds-dropdown-item>
+                <sgds-mainnav-dropdown slot="end">
+                  <span slot="toggler">Home</span>
+                  <sgds-dropdown-item>Logout</sgds-dropdown-item>
                 </sgds-mainnav-dropdown>
                 <sgds-mainnav-item href="#">Content</sgds-mainnav-item>
                 <sgds-mainnav-item href="#">Biography</sgds-mainnav-item>

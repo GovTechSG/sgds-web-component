@@ -1,65 +1,48 @@
 :host {
-  --sgds-badge-bg: var(--sgds-primary-bg);
-  --sgds-badge-color: var(--sgds-default-color-on-dark);
-  --sgds-badge-border-radius: var(--sgds-border-radius-sm);
   display: inline-flex;
 }
 
-:host([variant="success"]) {
-  --sgds-badge-bg: var(--sgds-success-bg);
-  --sgds-badge-color: var(--sgds-default-color-on-dark);
+:host([variant="success"]) .badge {
+  background-color: var(--sgds-success-bg);
 }
 
-:host([variant="danger"]) {
-  --sgds-badge-bg: var(--sgds-danger-bg);
-  --sgds-badge-color: var(--sgds-default-color-on-dark);
+:host([variant="danger"]) .badge {
+  background-color: var(--sgds-danger-bg);
 }
 
-:host([variant="warning"]) {
-  --sgds-badge-bg: var(--sgds-warning-bg);
-  --sgds-badge-color: var(--sgds-default-color-on-dark);
+:host([variant="warning"]) .badge {
+  background-color: var(--sgds-warning-bg);
 }
 
-:host([variant="neutral"]) {
-  --sgds-badge-bg: var(--sgds-neutral-bg);
-  --sgds-badge-color: var(--sgds-default-color-on-dark);
+:host([variant="neutral"]) .badge {
+  background-color: var(--sgds-neutral-bg);
 }
 
-:host([variant="info"][outlined]) {
-  --sgds-badge-bg: var(--sgds-primary-bg-subtle);
-  --sgds-badge-color: var(--sgds-default-color-on-light);
-  --sgds-badge-border-color: var(--sgds-primary-border-color-subtle);
+:host([variant="success"][outlined]) .badge {
+  background-color: var(--sgds-success-bg-subtle);
+  border: var(--sgds-border-width-1) solid var(--sgds-success-border-color-subtle);
 }
 
-:host([variant="success"][outlined]) {
-  --sgds-badge-bg: var(--sgds-success-bg-subtle);
-  --sgds-badge-color: var(--sgds-default-color-on-light);
-  --sgds-badge-border-color: var(--sgds-success-border-color-subtle);
+:host([variant="danger"][outlined]) .badge {
+  background-color: var(--sgds-danger-bg-subtle);
+  border: var(--sgds-border-width-1) solid var(--sgds-danger-border-color-subtle);
 }
 
-:host([variant="danger"][outlined]) {
-  --sgds-badge-bg: var(--sgds-danger-bg-subtle);
-  --sgds-badge-color: var(--sgds-default-color-on-light);
-  --sgds-badge-border-color: var(--sgds-danger-border-color-subtle);
+:host([variant="warning"][outlined]) .badge {
+  background-color: var(--sgds-warning-bg-subtle);
+  border: var(--sgds-border-width-1) solid var(--sgds-warning-border-color-subtle);
 }
 
-:host([variant="warning"][outlined]) {
-  --sgds-badge-bg: var(--sgds-danger-bg-subtle);
-  --sgds-badge-color: var(--sgds-default-color-on-light);
-  --sgds-badge-border-color: var(--sgds-warning-border-color-subtle);
-}
-
-:host([variant="neutral"][outlined]) {
-  --sgds-badge-bg: var(--sgds-neutral-bg-subtle);
-  --sgds-badge-color: var(--sgds-default-color-on-light);
-  --sgds-badge-border-color: var(--sgds-neutral-border-color-subtle);
+:host([variant="neutral"][outlined]) .badge {
+  background-color: var(--sgds-neutral-bg-subtle);
+  border: var(--sgds-border-width-1) solid var(--sgds-neutral-border-color-subtle);
 }
 
 .badge {
-  background-color: var(--sgds-badge-bg);
-  color: var(--sgds-badge-color);
+  background-color: var(--sgds-primary-bg);
+  color: var(--sgds-default-color-on-dark);
   border: var(--sgds-border-width-1) solid var(--sgds-default-border-color-transparent);
-  border-radius: var(--sgds-badge-border-radius);
+  border-radius: var(--sgds-border-radius-sm);
   font-size: var(--sgds-font-size-1);
   padding: 0 var(--sgds-padding-2-xs);
   height: var(--sgds-dimension-24);
@@ -71,7 +54,9 @@
 }
 
 .badge.outlined {
-  border: var(--sgds-border-width-1) solid var(--sgds-badge-border-color);
+  color: var(--sgds-default-color-on-light);
+  background-color: var(--sgds-primary-bg-subtle);
+  border: var(--sgds-border-width-1) solid var(--sgds-primary-border-color-subtle);
 }
 
 .badge-label {
@@ -83,14 +68,10 @@
 }
 
 .badge-dimissible sgds-close-button {
-  --sgds-close-btn-border-radius: var(--sgds-badge-border-radius);
+  --sgds-close-btn-border-radius: var(--sgds-border-radius-sm);
 }
 
-slot[name="icon"]::slotted(*){
-  color: var(--sgds-badge-color);
-} 
-
 slot::slotted(*){
-font-weight: normal;
-font-size: 14px;
+  font-weight: normal;
+  font-size: 14px;
 }

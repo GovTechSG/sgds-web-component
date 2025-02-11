@@ -22,7 +22,7 @@ import Mainnav from './components/Mainnav.vue'
 import Masthead from './components/Masthead.vue'
 import Modal from './components/Modal.vue'
 import Pagination from './components/Pagination.vue'
-import Progress from './components/Progress.vue'
+import ProgressBar from './components/ProgressBar.vue'
 import QuantityToggle from './components/QuantityToggle.vue'
 import Radio from './components/Radio.vue'
 import Sidenav from './components/Sidenav.vue'
@@ -60,7 +60,7 @@ import Trigger from './components/Trigger.vue'
           <Input />
           <Modal />
           <Pagination />
-          <Progress />
+          <ProgressBar />
           <QuantityToggle />
           <Radio />
           <Sidenav />

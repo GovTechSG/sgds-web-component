@@ -128,6 +128,12 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   public checkValidity(): boolean {
     return this._mixinCheckValidity();
   }
+  /**
+   * Checks for validity without any native error popup message
+   */
+  public setValidity(flags?: ValidityStateFlags, message?: string, anchor?: HTMLElement): void {
+    return this._mixinSetValidity(flags, message, anchor);
+  }
 
   /**
    * Returns the ValidityState object
@@ -146,9 +152,12 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
     this.emit("sgds-focus");
   }
 
-  private _handleBlur() {
+  protected _handleBlur() {
+    const sgdsBlur = this.emit("sgds-blur", { cancelable: true });
+
+    if (sgdsBlur.defaultPrevented) return;
+
     this._isTouched = true;
-    this.emit("sgds-blur");
   }
   private _handleClick() {
     this.focus();
@@ -156,12 +165,16 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
 
   protected _handleChange(e: Event) {
     this.value = this.input.value;
-    this.emit("sgds-change");
+    const sgdsChange = this.emit("sgds-change", { cancelable: true });
+    if (sgdsChange.defaultPrevented) return;
+
     super._mixinHandleChange(e);
   }
   protected _handleInputChange(e: Event) {
     this.value = this.input.value;
-    this.emit("sgds-input");
+    const sgdsInput = this.emit("sgds-input", { cancelable: true });
+
+    if (sgdsInput.defaultPrevented) return;
     super._mixinHandleInputChange(e);
   }
   /** @internal */

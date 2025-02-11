@@ -104,6 +104,9 @@ export class InputValidationController implements ReactiveController {
   reportValidity(): boolean {
     return this._internals.reportValidity();
   }
+  setValidity(flags?: ValidityStateFlags, message?: string, anchor?: HTMLElement): void {
+    return this._internals.setValidity(flags, message, anchor);
+  }
   /**
    * Sets the form control value into FormData,
    * making the value of control accessible via FormData
@@ -130,7 +133,6 @@ export class InputValidationController implements ReactiveController {
         // the message
         if (validState[state]) {
           this.validationError = state.toString() as keyof ValidityState;
-
           // set the validity error reason and the corresponding
           // message
           this._internals.setValidity({ [this.validationError]: true }, input.validationMessage, input);

@@ -10,17 +10,15 @@ import toastStyle from "./toast.css";
 /**
  * @summary Toast allows you to convey quick messaging notifications to the user.
  *
- * @slot default - The content to pass into toast's body 
- * @slot action - The content to pass into toast's action  
+ * @slot default - The content to pass into toast's body
+ * @slot action - The content to pass into toast's action
  * @slot icon - The icon in toast
- * 
  *
  * @event sgds-show - Emitted on show.
  * @event sgds-after-show - Emitted on show after animation has completed.
  * @event sgds-hide - Emitted on hide.
  * @event sgds-after-hide - Emitted on hide after animation has completed.
- 
- * @cssproperty --toast-icon-margin-right - The margin right between toast's icon and title in its header.
+ *
  */
 export class SgdsToast extends SgdsElement {
   static styles = [...SgdsElement.styles, toastStyle];

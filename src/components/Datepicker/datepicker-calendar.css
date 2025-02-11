@@ -1,91 +1,130 @@
-button {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  margin: 0;
-}
 .datepicker-body {
-  padding: 0 1.5rem 1.5rem;
+  color: var(--sgds-form-color-default);
+  display: flex;
+  justify-content: center;
 }
+
 table {
   border-collapse: collapse;
   text-align: center;
 }
-.sgds.monthpicker,
-.sgds.yearpicker {
+
+.monthpicker,
+.yearpicker {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4, 3rem);
-  justify-content: space-between;
-  align-content: space-between;
-  padding: 1rem 0 0;
+  grid-template-columns: repeat(3, 6rem);
+  grid-template-rows: repeat(4, 2.5rem);
 }
 
 button.month,
 button.year {
   padding: 0;
   border: 0;
+  line-height: var(--sgds-line-height-min);
   background-color: transparent;
+  border-radius: var(--sgds-form-border-radius-sm);
+  position: relative;
 }
-button.month.active {
+
+td[data-day].active:not(.selected-ends),
+button.month.active:not(.selected-ends),
+button.year.active:not(.selected-ends)
+ {
   cursor: pointer;
-  background-color: var(--datepicker-hover-bg);
+  background-color: var(--sgds-form-primary-bg-translucent);
+  border-radius: 0;
 }
-button.month.active.selected-ends {
-  background-color: var(--datepicker-selected-date-bg);
-  color: var(--datepicker-selected-date-color);
-}
-button.month:hover:not(.active) {
-  cursor: pointer;
-  background-color: var(--datepicker-hover-bg);
-}
-button.month:focus {
-  outline: var(--datepicker-theme-color) auto 2px;
-  z-index: 100;
-}
-button.year.active {
-  cursor: pointer;
-  background-color: var(--datepicker-hover-bg);
-}
-button.year.active.selected-ends {
-  background-color: var(--datepicker-selected-date-bg);
-  color: var(--datepicker-selected-date-color);
-}
+
+td[data-day]:hover:not(.disabled):not(.selected-ends):not(.active),
+button.month:hover:not(.active),
 button.year:hover:not(.active) {
   cursor: pointer;
-  background-color: var(--datepicker-hover-bg);
+  background-color: var(--sgds-form-bg-translucent);
 }
-button.year:focus {
-  outline: var(--datepicker-theme-color) auto 2px;
-  z-index: 100;
+
+td[data-day]:focus:not(.disabled):not(.selected-ends):not(.active),
+button.month:focus:not(.active),
+button.year:focus:not(.active) {
+  background-color: var(--sgds-form-bg-translucent);
 }
-td {
-  width: 3rem;
-  height: 3rem;
+
+td[data-day]:focus,
+button.month:focus,
+button.year:focus  {
+  outline: var(--sgds-form-border-radius-sm) solid var(--sgds-blue-400);
+}
+
+td[data-day].active:not(.selected-ends):focus,
+button.month.active:not(.selected-ends):focus,
+button.year.active:not(.selected-ends):focus {
+  border-radius:  var(--sgds-form-border-radius-sm);
+}
+
+button.year.active {
+  cursor: pointer;
+  background-color: var(--sgds-form-primary-bg-translucent);
+}
+
+td, th {
+  width: var(--sgds-form-width-md);
+  height: var(--sgds-form-height-lg);
   padding: 0;
+  line-height: var(--sgds-line-height-min);
+  border-radius: var(--sgds-form-border-radius-sm);
+  position: relative;
 }
+
+th {
+  font-weight: var(--sgds-font-weight-semibold);
+}
+
 td[data-day] {
   cursor: pointer;
 }
-td[data-day]:hover:not(.disabled):not(.selected-ends) {
-  cursor: pointer;
-  background-color: var(--datepicker-hover-bg);
+
+td[data-day].active.selected-ends,
+button.month.active.selected-ends,
+button.year.active.selected-ends  {
+  background-color: var(--sgds-form-primary-bg);
+  color: var(--sgds-form-color-on-dark);
 }
-td[data-day].active {
-  cursor: pointer;
-  background-color: var(--datepicker-hover-bg);
+
+td[data-day].active.selected-ends:hover,
+button.month.active.selected-ends:hover,
+button.year.active.selected-ends:hover,
+td[data-day].active.selected-ends:focus,
+button.month.active.selected-ends:focus,
+button.year.active.selected-ends:focus  {
+  background-color: var(--sgds-form-primary-bg-emphasis);
 }
-td[data-day].active.selected-ends {
-  background-color: var(--datepicker-selected-date-bg);
-  color: var(--datepicker-selected-date-color);
-}
-td[data-day]:focus {
-  outline: var(--datepicker-theme-color) auto 2px;
-}
+
 td[data-day].disabled {
-  color: var(--sgds-gray-400);
+  opacity: var(--sgds-opacity-50);
   cursor: not-allowed;
 }
+
 .today {
-  color: var(--datepicker-theme-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.today::after {
+  background-color: var(--sgds-form-primary-bg);
+  content: ".";
+  line-height: 4px;
+  width: 4px;
+  -webkit-mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none"><circle cx="2" cy="2" r="2" fill="%235A42C0"/></svg>');
+  mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none"><circle cx="2" cy="2" r="2" fill="%235A42C0"/></svg>');
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  position: absolute;
+  bottom: 6px;
+}
+
+.today.active.selected-ends::after {
+  background-color: var(--sgds-form-color-inverse);
 }

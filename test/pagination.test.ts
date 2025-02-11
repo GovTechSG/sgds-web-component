@@ -1,354 +1,362 @@
-import "./sgds-web-component";
-import { SgdsPagination } from "../src/components";
-import { fixture, assert, expect, elementUpdated } from "@open-wc/testing";
+import { assert, fixture, expect } from "@open-wc/testing";
 import { html } from "lit";
+import { SgdsIconButton, SgdsPagination } from "../src/components";
 import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";
+import "./sgds-web-component";
 
-describe("sgds-pagination", () => {
+describe("variant=default sgds-pagination", () => {
   it("is defined", () => {
     const el = document.createElement("sgds-pagination");
     assert.instanceOf(el, SgdsPagination);
   });
 
-  it("renders 1 page numbers as dataLength = 1", async () => {
-    const el = await fixture(html` <sgds-pagination dataLength="1"></sgds-pagination> `);
-    const pageOne = el.shadowRoot?.querySelectorAll("li")[1];
-    const pageNull = el.shadowRoot?.querySelectorAll("li")[2];
-    await elementUpdated(el);
-    expect(pageOne?.textContent).to.contain("1");
-    expect(pageNull?.textContent).to.not.contain("2");
-  });
-
-  it("renders 3 page numbers as dataLength = 20", async () => {
-    const el = await fixture(html` <sgds-pagination dataLength="20" limit="3"></sgds-pagination> `);
-    const pageOne = el.shadowRoot?.querySelectorAll("li")[1];
-    const pageTwo = el.shadowRoot?.querySelectorAll("li")[2];
-    const pageThree = el.shadowRoot?.querySelectorAll("li")[3];
-    const pageNull = el.shadowRoot?.querySelectorAll("li")[4];
-    await elementUpdated(el);
-    expect(pageOne?.textContent).to.contain("1");
-    expect(pageTwo?.textContent).to.contain("2");
-    expect(pageThree?.textContent).to.contain("3");
-    expect(pageNull?.textContent).to.not.contain("4");
-  });
-
-  it("limit >= pages.length, all page number should show and remain fix throughout navigation", async () => {
-    const el = await fixture(
-      html` <sgds-pagination dataLength="3" limit="4" itemsPerPage="1" currentPage="1"></sgds-pagination> `
-    );
-    const pageOne = el.shadowRoot?.querySelectorAll("li")[1];
-    const pageTwo = el.shadowRoot?.querySelectorAll("li")[2];
-    const pageThree = el.shadowRoot?.querySelectorAll("li")[3];
-    const pageNull = el.shadowRoot?.querySelectorAll("li")[4];
-
-    expect(pageOne?.textContent).to.contain("1");
-    expect(pageTwo?.textContent).to.contain("2");
-    expect(pageThree?.textContent).to.contain("3");
-    expect(pageNull?.textContent).to.not.contain("4");
-    expect(pageNull?.textContent).to.not.contain("…");
-
-    const el2 = await fixture(
-      html` <sgds-pagination dataLength="3" limit="4" itemsPerPage="1" currentPage="2"></sgds-pagination> `
-    );
-    const pageOneEl2 = el2.shadowRoot?.querySelectorAll("li")[1];
-    const pageTwoEl2 = el2.shadowRoot?.querySelectorAll("li")[2];
-    const pageThreeEl2 = el2.shadowRoot?.querySelectorAll("li")[3];
-    const pageNullEl2 = el2.shadowRoot?.querySelectorAll("li")[4];
-
-    expect(pageOneEl2?.textContent).to.contain("1");
-    expect(pageTwoEl2?.textContent).to.contain("2");
-    expect(pageThreeEl2?.textContent).to.contain("3");
-    expect(pageNullEl2?.textContent).to.not.contain("4");
-    expect(pageNullEl2?.textContent).to.not.contain("…");
-
-    const el3 = await fixture(
-      html` <sgds-pagination dataLength="3" limit="4" itemsPerPage="1" currentPage="3"></sgds-pagination> `
-    );
-    const pageOneEl3 = el3.shadowRoot?.querySelectorAll("li")[1];
-    const pageTwoEl3 = el3.shadowRoot?.querySelectorAll("li")[2];
-    const pageThreeEl3 = el3.shadowRoot?.querySelectorAll("li")[3];
-    const pageNullEl3 = el3.shadowRoot?.querySelectorAll("li")[4];
-
-    expect(pageOneEl3?.textContent).to.contain("1");
-    expect(pageTwoEl3?.textContent).to.contain("2");
-    expect(pageThreeEl3?.textContent).to.contain("3");
-    expect(pageNullEl3?.textContent).to.not.contain("4");
-    expect(pageNullEl3?.textContent).to.not.contain("…");
-  });
-
-  it("when limit(even) < page.length, page number shows should be same count as limit throughout navigation", async () => {
-    const el = await fixture(
-      html` <sgds-pagination dataLength="5" limit="4" itemsPerPage="1" currentPage="1" ellipsisOn></sgds-pagination> `
-    );
-
-    const pageOne = el.shadowRoot?.querySelectorAll("li")[1];
-    const pageTwo = el.shadowRoot?.querySelectorAll("li")[2];
-    const pageThree = el.shadowRoot?.querySelectorAll("li")[3];
-    const pageFour = el.shadowRoot?.querySelectorAll("li")[4];
-    const pageEllipsisSpan = el.shadowRoot?.querySelectorAll("li")[5]?.querySelector("span[aria-hidden='true']");
-
-    expect(pageOne?.textContent).to.contain("1");
-    expect(pageTwo?.textContent).to.contain("2");
-    expect(pageThree?.textContent).to.contain("3");
-    expect(pageFour?.textContent).to.contain("4");
-    expect(pageEllipsisSpan?.textContent).to.contain("…");
-
-    const el2 = await fixture(
-      html` <sgds-pagination dataLength="5" limit="4" itemsPerPage="1" currentPage="2" ellipsisOn></sgds-pagination> `
-    );
-
-    const pageOneEl2 = el2.shadowRoot?.querySelectorAll("li")[1];
-    const pageTwoEl2 = el2.shadowRoot?.querySelectorAll("li")[2];
-    const pageThreeEl2 = el2.shadowRoot?.querySelectorAll("li")[3];
-    const pageFourEl2 = el2.shadowRoot?.querySelectorAll("li")[4];
-    const pageEllipsisSpanEl2 = el2.shadowRoot?.querySelectorAll("li")[5]?.querySelector("span[aria-hidden='true']");
-
-    expect(pageOneEl2?.textContent).to.contain("1");
-    expect(pageTwoEl2?.textContent).to.contain("2");
-    expect(pageThreeEl2?.textContent).to.contain("3");
-    expect(pageFourEl2?.textContent).to.contain("4");
-    expect(pageEllipsisSpanEl2?.textContent).to.contain("…");
-
-    const el3 = await fixture(
-      html` <sgds-pagination dataLength="5" limit="4" itemsPerPage="1" currentPage="3" ellipsisOn></sgds-pagination> `
-    );
-
-    const pageOneEl3 = el3.shadowRoot?.querySelectorAll("li")[1];
-    const pageTwoEl3 = el3.shadowRoot?.querySelectorAll("li")[2];
-    const pageThreeEl3 = el3.shadowRoot?.querySelectorAll("li")[3];
-    const pageFourEl3 = el3.shadowRoot?.querySelectorAll("li")[4];
-    const pageEllipsisSpanEl3 = el3.shadowRoot?.querySelectorAll("li")[5]?.querySelector("span[aria-hidden='true']");
-
-    expect(pageOneEl3?.textContent).to.contain("1");
-    expect(pageTwoEl3?.textContent).to.contain("2");
-    expect(pageThreeEl3?.textContent).to.contain("3");
-    expect(pageFourEl3?.textContent).to.contain("4");
-    expect(pageEllipsisSpanEl3?.textContent).to.contain("…");
-
-    const el4 = await fixture(
-      html` <sgds-pagination dataLength="5" limit="4" itemsPerPage="1" currentPage="4" ellipsisOn></sgds-pagination> `
-    );
-
-    const pageEllipsisSpanEl4 = el4.shadowRoot?.querySelectorAll("li")[1]?.querySelector("span[aria-hidden='true']");
-    const pageTwoEl4 = el4.shadowRoot?.querySelectorAll("li")[2];
-    const pageThreeEl4 = el4.shadowRoot?.querySelectorAll("li")[3];
-    const pageFourEl4 = el4.shadowRoot?.querySelectorAll("li")[4];
-    const pageFiveEl4 = el4.shadowRoot?.querySelectorAll("li")[5];
-
-    expect(pageEllipsisSpanEl4?.textContent).to.contain("…");
-    expect(pageTwoEl4?.textContent).to.contain("2");
-    expect(pageThreeEl4?.textContent).to.contain("3");
-    expect(pageFourEl4?.textContent).to.contain("4");
-    expect(pageFiveEl4?.textContent).to.contain("5");
-
-    const el5 = await fixture(
-      html` <sgds-pagination dataLength="5" limit="4" itemsPerPage="1" currentPage="4" ellipsisOn></sgds-pagination> `
-    );
-
-    const pageEllipsisSpanEl5 = el5.shadowRoot?.querySelectorAll("li")[1]?.querySelector("span[aria-hidden='true']");
-    const pageTwoEl5 = el5.shadowRoot?.querySelectorAll("li")[2];
-    const pageThreeEl5 = el5.shadowRoot?.querySelectorAll("li")[3];
-    const pageFourEl5 = el5.shadowRoot?.querySelectorAll("li")[4];
-    const pageFiveEl5 = el5.shadowRoot?.querySelectorAll("li")[5];
-
-    expect(pageEllipsisSpanEl5?.textContent).to.contain("…");
-    expect(pageTwoEl5?.textContent).to.contain("2");
-    expect(pageThreeEl5?.textContent).to.contain("3");
-    expect(pageFourEl5?.textContent).to.contain("4");
-    expect(pageFiveEl5?.textContent).to.contain("5");
-  });
-
-  it("when limit(odd) < page.length, page number shows should be same count as limit throughout navigation", async () => {
-    const el = await fixture(
-      html` <sgds-pagination dataLength="5" limit="3" itemsPerPage="1" currentPage="1" ellipsisOn></sgds-pagination> `
-    );
-    const pageOne = el.shadowRoot?.querySelectorAll("li")[1];
-    const pageTwo = el.shadowRoot?.querySelectorAll("li")[2];
-    const pageThree = el.shadowRoot?.querySelectorAll("li")[3];
-    const pageEllipsis = el.shadowRoot?.querySelectorAll("li")[4]?.querySelector("span[aria-hidden='true']");
-
-    expect(pageOne?.textContent).to.contain("1");
-    expect(pageTwo?.textContent).to.contain("2");
-    expect(pageThree?.textContent).to.contain("3");
-    expect(pageEllipsis?.textContent).to.contain("…");
-
-    const el2 = await fixture(
-      html` <sgds-pagination dataLength="5" limit="3" itemsPerPage="1" currentPage="2" ellipsisOn></sgds-pagination> `
-    );
-
-    const pageOneEl2 = el2.shadowRoot?.querySelectorAll("li")[1];
-    const pageTwoEl2 = el2.shadowRoot?.querySelectorAll("li")[2];
-    const pageThreeEl2 = el2.shadowRoot?.querySelectorAll("li")[3];
-    const pageEllipsisEl2 = el2.shadowRoot?.querySelectorAll("li")[4]?.querySelector("span[aria-hidden='true']");
-
-    expect(pageOneEl2?.textContent).to.contain("1");
-    expect(pageTwoEl2?.textContent).to.contain("2");
-    expect(pageThreeEl2?.textContent).to.contain("3");
-    expect(pageEllipsisEl2?.textContent).to.contain("…");
-
-    const el3 = await fixture(
-      html` <sgds-pagination dataLength="5" limit="3" itemsPerPage="1" currentPage="3" ellipsisOn></sgds-pagination> `
-    );
-
-    const pagePrevEllipsisEl3 = el3.shadowRoot?.querySelectorAll("li")[1]?.querySelector("span[aria-hidden='true']");
-    const pageTwoEl3 = el3.shadowRoot?.querySelectorAll("li")[2];
-    const pageThreeEl3 = el3.shadowRoot?.querySelectorAll("li")[3];
-    const pageFourEl3 = el3.shadowRoot?.querySelectorAll("li")[4];
-    const pageNextEllipsisEl3 = el3.shadowRoot?.querySelectorAll("li")[5]?.querySelector("span[aria-hidden='true']");
-    3;
-    expect(pagePrevEllipsisEl3?.textContent).to.contain("…");
-    expect(pageTwoEl3?.textContent).to.contain("2");
-    expect(pageThreeEl3?.textContent).to.contain("3");
-    expect(pageFourEl3?.textContent).to.contain("4");
-    expect(pageNextEllipsisEl3?.textContent).to.contain("…");
-
-    const el4 = await fixture(
-      html` <sgds-pagination dataLength="5" limit="4" itemsPerPage="1" currentPage="4" ellipsisOn></sgds-pagination> `
-    );
-
-    const pagePrevEllipsisEl4 = el4.shadowRoot?.querySelectorAll("li")[1]?.querySelector("span[aria-hidden='true']");
-    const pageTwoEl4 = el4.shadowRoot?.querySelectorAll("li")[2];
-    const pageThreeEl4 = el4.shadowRoot?.querySelectorAll("li")[3];
-    const pageFourEl4 = el4.shadowRoot?.querySelectorAll("li")[4];
-    const pageFiveEl4 = el4.shadowRoot?.querySelectorAll("li")[5];
-
-    expect(pagePrevEllipsisEl4?.textContent).to.contain("…");
-    expect(pageTwoEl4?.textContent).to.contain("2");
-    expect(pageThreeEl4?.textContent).to.contain("3");
-    expect(pageFourEl4?.textContent).to.contain("4");
-    expect(pageFiveEl4?.textContent).to.contain("5");
-  });
-
-  it("when no data pass in pagination has no ellipsis", async () => {
-    const el = await fixture(
-      html`
-        <sgds-pagination
-          directionVariant="text"
-          dataLength="0"
-          limit="3"
-          itemsPerPage="1"
-          currentPage="1"
-          ellipsisOn
-        ></sgds-pagination>
+  it("can be semantically compared with shadowDom trees for just 1 page", async () => {
+    const el = await fixture(html` <sgds-pagination dataLength="1"></sgds-pagination>`);
+    assert.shadowDom.equal(
+      el,
+      `
+      <nav aria-label="pagination" role="navigation">
+      <ul class="pagination pagination-md">
+      <sgds-icon-button ariaLabel="Previous" variant="ghost" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
+      <li key="1" class="page-item active">
+          <span class="page-link"  role="button" aria-current="true" aria-label="Current Page, Page 1" tabindex="0">1</span>
+        </li>
+      <sgds-icon-button ariaLabel="Next" variant="ghost" size="md" disabled="" name="arrow-right" target="_self"></sgds-icon-button>
+      </ul>
+      </nav>
       `
     );
-    const prevButton = el.shadowRoot?.querySelectorAll("li")[0];
-    const nextButton = el.shadowRoot?.querySelectorAll("li")[1];
+  });
+  it("can be semantically compared with shadowDom trees for 2 pages", async () => {
+    const el = await fixture(html` <sgds-pagination dataLength="10" itemsPerPage="5"></sgds-pagination>`);
+    assert.shadowDom.equal(
+      el,
+      `
+      <nav aria-label="pagination" role="navigation">
+      <ul class="pagination pagination-md">
+      <sgds-icon-button ariaLabel="Previous" variant="ghost" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
+      <li key="1" class="page-item active">
+          <span class="page-link" tabindex="0" aria-current="true" aria-label="Current Page, Page 1" role="button">1</span>
+        </li>
+      <li key="2" class="page-item">
+          <span class="page-link" tabindex="0" aria-current="false" aria-label="Go to Page 2" role="button">2</span>
+        </li>
+      <sgds-icon-button ariaLabel="Next" variant="ghost" size="md" name="arrow-right" target="_self"></sgds-icon-button>
+      </ul>
+      </nav>
+      `
+    );
+  });
+  it("can be semantically compared with shadowDom trees when currentPage=2 for 2 pages", async () => {
+    const el = await fixture(
+      html` <sgds-pagination dataLength="10" itemsPerPage="5" currentPage="2"></sgds-pagination>`
+    );
+    assert.shadowDom.equal(
+      el,
+      `
+      <nav aria-label="pagination" role="navigation">
+      <ul class="pagination pagination-md">
+      <sgds-icon-button ariaLabel="Previous" variant="ghost" size="md"  name="arrow-left" target="_self"></sgds-icon-button>
+      <li key="1" class="page-item">
+          <span class="page-link" tabindex="0" aria-current="false" aria-label="Go to Page 1" role="button">1</span>
+        </li>
+      <li key="2" class="page-item active">
+          <span class="page-link" tabindex="0" aria-current="true" aria-label="Current Page, Page 2" role="button">2</span>
+        </li>
+      <sgds-icon-button ariaLabel="Next" variant="ghost" size="md" disabled="" name="arrow-right" target="_self"></sgds-icon-button>
+      </ul>
+      </nav>
+      `
+    );
+  });
+  const pagesLengthsOneToSeven = [
+    { dataLength: 20, itemsPerPage: 20, expectedEllipsis: 0, expectedPages: 1 }, // 1 page
+    { dataLength: 20, itemsPerPage: 10, expectedEllipsis: 0, expectedPages: 2 }, //2 pages
+    { dataLength: 20, itemsPerPage: 8, expectedEllipsis: 0, expectedPages: 3 }, //3 pages
+    { dataLength: 20, itemsPerPage: 5, expectedEllipsis: 0, expectedPages: 4 }, //4 pages
+    { dataLength: 20, itemsPerPage: 4, expectedEllipsis: 0, expectedPages: 5 }, //5 pages
+    { dataLength: 18, itemsPerPage: 3, expectedEllipsis: 0, expectedPages: 6 }, //6 pages
+    { dataLength: 20, itemsPerPage: 3, expectedEllipsis: 0, expectedPages: 7 } //7 pages
+  ];
+  pagesLengthsOneToSeven.map(p => {
+    it(`when total page length is ${p}, ${p} page(s) appear with no ellipsis`, async () => {
+      const el = await fixture(
+        html`<sgds-pagination dataLength=${p.dataLength} itemsPerPage=${p.itemsPerPage}></sgds-pagination>`
+      );
 
-    expect(prevButton?.textContent).to.contain("Previous");
-    expect(nextButton?.textContent).to.contain("Next");
+      const totalNumberOfPageLinks = el.shadowRoot?.querySelectorAll("span.page-link:not(.ellipsis)");
+      expect(totalNumberOfPageLinks?.length).to.equal(p.expectedPages);
+
+      const totalNumberOfEllipsis = el.shadowRoot?.querySelectorAll(".page-link.ellipsis");
+      expect(totalNumberOfEllipsis?.length).to.equal(p.expectedEllipsis);
+    });
+  });
+  const pagesAboveSeven = [
+    {
+      dataLength: 16,
+      itemsPerPage: 2,
+      expectedPages: 6,
+      expectedEllipsis: 1,
+      expectedFirstPage: 1,
+      expectedLastPage: 8
+    }, //8 pages
+    {
+      dataLength: 18,
+      itemsPerPage: 2,
+      expectedPages: 6,
+      expectedEllipsis: 1,
+      expectedFirstPage: 1,
+      expectedLastPage: 9
+    }, //9 pages
+    {
+      dataLength: 20,
+      itemsPerPage: 2,
+      expectedPages: 6,
+      expectedEllipsis: 1,
+      expectedFirstPage: 1,
+      expectedLastPage: 10
+    } //10 pages
+  ];
+  pagesAboveSeven.map(p => {
+    it(`when total page length is ${p}, ${p} page(s) appear with 1 ellipsis, when currentPage is default`, async () => {
+      const el = await fixture(
+        html`<sgds-pagination dataLength=${p.dataLength} itemsPerPage=${p.itemsPerPage}></sgds-pagination>`
+      );
+
+      const pageLinks = el.shadowRoot?.querySelectorAll("span.page-link:not(.ellipsis)");
+      expect(pageLinks?.length).to.equal(p.expectedPages);
+
+      const ellipsises = el.shadowRoot?.querySelectorAll(".page-link.ellipsis");
+      expect(ellipsises?.length).to.equal(p.expectedEllipsis);
+
+      // 1st page is always visible
+      const firstPageNumber = pageLinks?.[0];
+      expect(firstPageNumber?.textContent?.trim()).to.equal(p.expectedFirstPage.toString());
+      // last page is always visible
+      const lastPageNumber = pageLinks?.[pageLinks.length - 1];
+      expect(lastPageNumber?.textContent?.trim()).to.equal(p.expectedLastPage.toString());
+    });
   });
 
-  it("last ellipsis should appear when page > 3", async () => {
-    // // 20 / 5 = 4 page
+  pagesAboveSeven.map(p => {
+    it(`For above seven pages, up until page navigated to page 4, should only show 1 ellipsis`, async () => {
+      const el = await fixture<SgdsPagination>(
+        html`<sgds-pagination dataLength=${p.dataLength} itemsPerPage=${p.itemsPerPage}></sgds-pagination>`
+      );
+
+      const nextButton = el.shadowRoot?.querySelector("sgds-icon-button[ariaLabel='Next']") as SgdsIconButton;
+      nextButton.click(); // go to 2
+      await el.updateComplete;
+      expect(el.shadowRoot?.querySelectorAll(".page-link.ellipsis").length).to.equal(p.expectedEllipsis);
+      nextButton.click(); // go to 3
+      await el.updateComplete;
+      expect(el.shadowRoot?.querySelectorAll(".page-link.ellipsis").length).to.equal(p.expectedEllipsis);
+      nextButton.click(); // go to 4
+      await el.updateComplete;
+      expect(el.shadowRoot?.querySelectorAll(".page-link.ellipsis").length).to.equal(p.expectedEllipsis);
+    });
+  });
+
+  const pagesAboveSevenAtCurrentPage5 = [
+    {
+      dataLength: 16,
+      currentPage: 5,
+      itemsPerPage: 2,
+      expectedPages: 6,
+      expectedEllipsis: 1,
+      expectedFirstPage: 1,
+      expectedLastPage: 8
+    }, //8 pages
+    {
+      dataLength: 18,
+      currentPage: 5,
+      itemsPerPage: 2,
+      expectedPages: 6,
+      expectedEllipsis: 2,
+      expectedFirstPage: 1,
+      expectedLastPage: 9
+    }, //9 pages
+    {
+      dataLength: 20,
+      currentPage: 5,
+      itemsPerPage: 2,
+      expectedPages: 6,
+      expectedEllipsis: 2,
+      expectedFirstPage: 1,
+      expectedLastPage: 10
+    } //10 pages
+  ];
+
+  pagesAboveSevenAtCurrentPage5.map(p => {
+    it(`For above seven pages, currentPage=5, should only show ${p.expectedEllipsis} ellipsis`, async () => {
+      const el = await fixture<SgdsPagination>(
+        html`<sgds-pagination
+          currentPage=${p.currentPage}
+          dataLength=${p.dataLength}
+          itemsPerPage=${p.itemsPerPage}
+        ></sgds-pagination>`
+      );
+
+      expect(el.shadowRoot?.querySelectorAll(".page-link.ellipsis").length).to.equal(p.expectedEllipsis);
+
+      const nextButton = el.shadowRoot?.querySelector("sgds-icon-button[ariaLabel='Next']") as SgdsIconButton;
+      nextButton.click(); // go to 6
+      await el.updateComplete;
+      if (p.expectedLastPage === 10) {
+        expect(el.shadowRoot?.querySelectorAll(".page-link.ellipsis").length).to.equal(2);
+      } else {
+        expect(el.shadowRoot?.querySelectorAll(".page-link.ellipsis").length).to.equal(1);
+      }
+
+      nextButton.click(); // go to 7
+      await el.updateComplete;
+      expect(el.shadowRoot?.querySelectorAll(".page-link.ellipsis").length).to.equal(1);
+    });
+  });
+  it("when navigation=button, pagination direction button changes to sgds-button", async () => {
+    const el = await fixture(html` <sgds-pagination dataLength="1" navigation="button"></sgds-pagination>`);
+    assert.shadowDom.equal(
+      el,
+      `
+      <nav aria-label="pagination" role="navigation">
+      <ul class="pagination pagination-md">
+      <sgds-button ariaLabel="Previous" variant="ghost" size="md" disabled="" target="_self" type="button">
+      <sgds-icon name="arrow-left" size="md" slot="leftIcon"></sgds-icon>Prev
+      </sgds-button>
+      <li key="1" class="page-item active">
+          <span class="page-link" tabindex="0" aria-current="true" aria-label="Current Page, Page 1" role="button">1</span>
+        </li>
+        <sgds-button ariaLabel="Next" variant="ghost" size="md" disabled="" target="_self" type="button">
+      <sgds-icon name="arrow-right" size="md" slot="rightIcon"></sgds-icon>Next
+      </sgds-button>
+      </ul>
+      </nav>
+      `
+    );
+  });
+});
+
+describe("variant=number sgds-pagination", () => {
+  it("can be semantically matched with the DOM", async () => {
+    // 2 pages
     const el = await fixture(
-      html` <sgds-pagination dataLength="20" limit="3" itemsPerPage="5" currentPage="1"></sgds-pagination> `
+      html` <sgds-pagination dataLength="10" itemsPerPage="5" variant="number"></sgds-pagination>`
+    );
+    assert.shadowDom.equal(
+      el,
+      `
+      <nav aria-label="pagination" role="navigation">
+      <ul class="pagination pagination-md">
+      <li key="1" class="page-item active">
+          <span class="page-link" tabindex="0" aria-current="true" aria-label="Current Page, Page 1" role="button">1</span>
+        </li>
+      <li key="2" class="page-item">
+          <span class="page-link" tabindex="0" aria-current="false" aria-label="Go to Page 2" role="button">2</span>
+        </li>
+      </ul>
+      </nav>
+      `
+    );
+  });
+  it("can be semantically matched with the DOM", async () => {
+    // 5 pages
+    const el = await fixture(
+      html` <sgds-pagination dataLength="10" itemsPerPage="2" variant="number"></sgds-pagination>`
+    );
+    assert.shadowDom.equal(
+      el,
+      `
+      <nav aria-label="pagination" role="navigation">
+      <ul class="pagination pagination-md">
+      <li key="1" class="page-item active">
+          <span class="page-link" tabindex="0"  aria-label="Current Page, Page 1" aria-current="true" role="button">1</span>
+        </li>
+      <li key="2" class="page-item">
+          <span class="page-link" tabindex="0" aria-label="Go to Page 2" aria-current="false" role="button">2</span>
+        </li>
+      <li key="3" class="page-item">
+          <span class="page-link" tabindex="0" aria-label="Go to Page 3" aria-current="false" role="button">3</span>
+        </li>
+      <li key="4" class="page-item">
+          <span class="page-link" tabindex="0" aria-label="Go to Page 4" aria-current="false" role="button">4</span>
+        </li>
+      <li key="5" class="page-item">
+          <span class="page-link" tabindex="0" aria-label="Go to Page 5" aria-current="false" role="button">5</span>
+        </li>
+      </ul>
+      </nav>
+      `
+    );
+  });
+});
+
+describe("variant=button sgds-pagination", () => {
+  it("can be semantically matched with the DOM", async () => {
+    // 2 pages
+    const el = await fixture(
+      html` <sgds-pagination dataLength="10" itemsPerPage="5" variant="button"></sgds-pagination>`
+    );
+    assert.shadowDom.equal(
+      el,
+      `
+      <nav aria-label="pagination" role="navigation">
+      <ul class="pagination pagination-md">
+      <sgds-icon-button ariaLabel="Previous" variant="ghost" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
+      <sgds-icon-button ariaLabel="Next" variant="ghost" size="md" name="arrow-right" target="_self"></sgds-icon-button>
+      </ul>
+      </nav>
+      `
+    );
+  });
+
+  it("when currentPage reaches the last page, the next arrow is disabled", async () => {
+    const el = await fixture(
+      html` <sgds-pagination dataLength="10" itemsPerPage="5" variant="button" currentPage="2"></sgds-pagination>`
     );
 
-    const pageOne = el.shadowRoot?.querySelectorAll("li")[1];
-    const pageTwo = el.shadowRoot?.querySelectorAll("li")[2];
-    const pageThree = el.shadowRoot?.querySelectorAll("li")[3];
-    const pageNextEllipsis = el.shadowRoot?.querySelectorAll("li")[4]?.querySelector("span[aria-hidden='true']");
-
-    expect(pageOne?.textContent).to.contain("1");
-    expect(pageTwo?.textContent).to.contain("2");
-    expect(pageThree?.textContent).to.contain("3");
-    expect(pageNextEllipsis?.textContent).to.contain("…");
+    const nextButton = el.shadowRoot?.querySelector("sgds-icon-button[ariaLabel='Next']");
+    const prevButton = el.shadowRoot?.querySelector("sgds-icon-button[ariaLabel='Previous']");
+    expect(nextButton).to.have.attribute("disabled");
+    expect(prevButton).not.to.have.attribute("disabled");
+  });
+});
+describe("variant=description sgds-pagination", () => {
+  it("can be semantically matched with the DOM", async () => {
+    // 5 pages
+    const el = await fixture(
+      html` <sgds-pagination dataLength="10" itemsPerPage="2" variant="description"></sgds-pagination>`
+    );
+    assert.shadowDom.equal(
+      el,
+      `
+      <nav aria-label="pagination" role="navigation">
+      <ul class="pagination pagination-md">
+      <sgds-icon-button ariaLabel="Previous" variant="ghost" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
+      <div class="pagination-description">Page 1 of 5</div>
+      <sgds-icon-button ariaLabel="Next" variant="ghost" size="md" name="arrow-right" target="_self"></sgds-icon-button>
+      </ul>
+      </nav>
+      `
+    );
   });
 
-  it("last ellipsis should not appear when page < 3", async () => {
-    // 15 / 5 = 3 page
-    const el = (await fixture(
-      html` <sgds-pagination dataLength="15" limit="3" itemsPerPage="5" currentPage="1"></sgds-pagination> `
-    )) as SgdsPagination;
+  it("navigation clicks updates the description accordingly ", async () => {
+    const el = await fixture<SgdsPagination>(
+      html` <sgds-pagination dataLength="10" itemsPerPage="2" variant="description"></sgds-pagination>`
+    );
 
-    const pageOne = el.shadowRoot?.querySelectorAll("li")[1];
-    const pageTwo = el.shadowRoot?.querySelectorAll("li")[2];
-    const pageThree = el.shadowRoot?.querySelectorAll("li")[3];
-    const pageNextEllipsis = el.shadowRoot?.querySelectorAll("li")[4]?.querySelector("span[aria-hidden='true']");
+    const nextButton = el.shadowRoot?.querySelector("sgds-icon-button[ariaLabel='Next']") as SgdsIconButton;
+    const prevButton = el.shadowRoot?.querySelector("sgds-icon-button[ariaLabel='Previous']") as SgdsIconButton;
+    nextButton.click();
+    nextButton.click();
 
-    expect(pageOne?.textContent).to.contain("1");
-    expect(pageTwo?.textContent).to.contain("2");
-    expect(pageThree?.textContent).to.contain("3");
-    expect(pageNextEllipsis).to.not.exist;
-
-    // 10 / 5 = 2 page
-    el.dataLength = 10;
-    await elementUpdated(el);
-
-    const pageNextEllipsis2 = el.shadowRoot?.querySelectorAll("li")[3]?.querySelector("span[aria-hidden='true']");
-
-    expect(pageNextEllipsis2).to.not.exist;
-    // 5 / 5 = 1 page
-
-    el.dataLength = 5;
-    await elementUpdated(el);
-
-    const pageNextEllipsis1 = el.shadowRoot?.querySelectorAll("li")[2]?.querySelector("span[aria-hidden='true']");
-
-    expect(pageNextEllipsis1).to.not.exist;
-  });
-
-  it("renders first ellipsis when ellipsisOn = true", async () => {
-    // no first ellipsis
-    const el = (await fixture(
-      html` <sgds-pagination dataLength="50" limit="3" itemsPerPage="5" currentPage="1" ellipsisOn></sgds-pagination> `
-    )) as SgdsPagination;
-
-    const pagePrevEllipsis = el.shadowRoot?.querySelectorAll("li")[1]?.querySelector("span[aria-hidden='true']");
-    expect(pagePrevEllipsis).to.not.exist;
-
-    //when currentpage is 5 which is above limit, both ellipsis side should show
-    const el2 = (await fixture(
-      html` <sgds-pagination dataLength="50" limit="3" itemsPerPage="5" currentPage="5" ellipsisOn></sgds-pagination> `
-    )) as SgdsPagination;
-
-    const pagePrevEllipsisEl2 = el2.shadowRoot?.querySelectorAll("li")[1]?.querySelector("span[aria-hidden='true']");
-    const pageNextEllipsisEl2 = el2.shadowRoot?.querySelectorAll("li")[5]?.querySelector("span[aria-hidden='true']");
-    expect(pagePrevEllipsisEl2).to.exist;
-    expect(pageNextEllipsisEl2).to.exist;
-
-    // when currentpage is 9 and at last page , the last ellipsis should disappear
-    const el3 = (await fixture(
-      html` <sgds-pagination dataLength="50" limit="3" itemsPerPage="5" currentPage="9" ellipsisOn></sgds-pagination> `
-    )) as SgdsPagination;
-
-    const pagePrevEllipsisEl3 = el3.shadowRoot?.querySelectorAll("li")[1]?.querySelector("span[aria-hidden='true']");
-    const pageNextEllipsisEl3 = el3.shadowRoot?.querySelectorAll("li")[5]?.querySelector("span[aria-hidden='true']");
-    expect(pagePrevEllipsisEl3).to.exist;
-    expect(pageNextEllipsisEl3).to.not.exist;
-
-    // el.currentPage = 10;
-    const el4 = (await fixture(
-      html` <sgds-pagination dataLength="50" limit="3" itemsPerPage="5" currentPage="10" ellipsisOn></sgds-pagination> `
-    )) as SgdsPagination;
-
-    const pagePrevEllipsisEl4 = el4.shadowRoot?.querySelectorAll("li")[1]?.querySelector("span[aria-hidden='true']");
-    const pageNextEllipsisEl4 = el4.shadowRoot?.querySelectorAll("li")[5]?.querySelector("span[aria-hidden='true']");
-    expect(pagePrevEllipsisEl4).to.exist;
-    expect(pageNextEllipsisEl4).to.not.exist;
-  });
-
-  it("clicking a page should add the active class to the respective li", async () => {
-    const el = (await fixture(
-      html` <sgds-pagination limit="3" itemsPerPage="1" dataLength="40" currentPage="1"></sgds-pagination> `
-    )) as SgdsPagination;
-
-    const pagesHandler = sinon.spy();
-    el.addEventListener("sgds-page-change", pagesHandler);
-    const pageOne = el.shadowRoot?.querySelectorAll("li")[1];
-    const pageTwo = el.shadowRoot?.querySelectorAll("li")[2];
-
-    expect(pageOne?.classList.value).to.contain("active");
-
-    pageTwo?.querySelector("span")?.click();
     await el.updateComplete;
+    expect(el.shadowRoot?.querySelector(".pagination-description")?.textContent).to.contain("Page 3 of 5");
 
-    expect(pageOne?.classList.value).to.not.contain("active");
-    expect(pageTwo?.classList.value).to.contain("active");
-
-    expect(pagesHandler).to.be.calledOnce;
+    prevButton.click();
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector(".pagination-description")?.textContent).to.contain("Page 2 of 5");
   });
 
   it("keyboard enter will simulate a click behaviour on the pages", async () => {
@@ -359,10 +367,10 @@ describe("sgds-pagination", () => {
     const pagesHandler = sinon.spy();
     el.addEventListener("sgds-page-change", pagesHandler);
 
-    const pageOne = el.shadowRoot?.querySelectorAll("li")[1];
-    const pageOneLink = el.shadowRoot?.querySelectorAll("li")[1].querySelector("span");
-    const pageTwo = el.shadowRoot?.querySelectorAll("li")[2];
-    const pageTwoLink = el.shadowRoot?.querySelectorAll("li")[2].querySelector("span");
+    const pageOne = el.shadowRoot?.querySelectorAll("li")[0];
+    const pageOneLink = el.shadowRoot?.querySelectorAll("li")[0].querySelector("span");
+    const pageTwo = el.shadowRoot?.querySelectorAll("li")[1];
+    const pageTwoLink = el.shadowRoot?.querySelectorAll("li")[1].querySelector("span");
 
     expect(pageOne?.classList.value).to.contain("active");
     expect(pageTwo?.classList.value).to.not.contain("active");
@@ -375,219 +383,51 @@ describe("sgds-pagination", () => {
 
     await el.updateComplete;
 
-    expect(el.shadowRoot?.querySelectorAll("li")[1]?.classList.value).to.not.contain("active");
-    expect(el.shadowRoot?.querySelectorAll("li")[2]?.classList.value).to.contain("active");
+    expect(el.shadowRoot?.querySelectorAll("li")[2]?.classList.value).to.not.contain("active");
+    expect(el.shadowRoot?.querySelectorAll("li")[1]?.classList.value).to.contain("active");
 
     expect(pagesHandler).to.be.calledOnce;
   });
-  it("if ellipsisOn is false, only the next ellipsis is rendered in disabled mode and not tabbable", async () => {
+  it("keyboard enter on direction buttons will simulate a click behaviour on the pages", async () => {
     const el = (await fixture(
-      html`<sgds-pagination dataLength="40" limit="3" itemsPerPage="5" currentPage="1"></sgds-pagination> `
+      html`<sgds-pagination dataLength="40" itemsPerPage="5" currentPage="1"></sgds-pagination> `
     )) as SgdsPagination;
 
-    const firstEllipsis = el.shadowRoot?.querySelectorAll("li")[1].querySelector("span");
+    const pagesHandler = sinon.spy();
+    el.addEventListener("sgds-page-change", pagesHandler);
 
-    const nextEllipsis = el.shadowRoot?.querySelectorAll("li")[4];
-    const nextEllipsisLink = el.shadowRoot?.querySelectorAll("li")[4]?.querySelector("span");
+    const nextBtn = el.shadowRoot?.querySelectorAll("sgds-icon-button")[1];
+    nextBtn?.focus();
+    await sendKeys({ press: "Enter" });
 
     await el.updateComplete;
+    expect(el.shadowRoot?.querySelector(".page-item.active")?.textContent?.trim()).to.equal("2");
 
-    expect(firstEllipsis?.textContent).to.contain("1"); // shows no first ellipsis on index 1 but page 1
+    const prevBtn = el.shadowRoot?.querySelectorAll("sgds-icon-button")[0];
+    prevBtn?.focus();
+    await sendKeys({ press: "Enter" });
 
-    expect(nextEllipsisLink)?.to.have.attribute("tabindex", "-1");
-    expect(nextEllipsis?.classList.value).to.contain("disabled");
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector(".page-item.active")?.textContent?.trim()).to.equal("1");
   });
-
-  it("if ellipsisOn is true and if active page is smaller than limit, no prev ellipsis exist, only the next ellipsis is rendered and tabbable", async () => {
+  it("clicking a page should add the active class to the respective li", async () => {
     const el = (await fixture(
-      html` <sgds-pagination dataLength="40" limit="3" itemsPerPage="5" currentPage="2" ellipsisOn></sgds-pagination> `
-    )) as SgdsPagination; // current page 2, limit 3
+      html` <sgds-pagination limit="3" itemsPerPage="1" dataLength="40" currentPage="1"></sgds-pagination> `
+    )) as SgdsPagination;
 
-    const prevEllipsis = el.shadowRoot?.querySelectorAll("li")[1]?.querySelector("span[aria-hidden='true']"); // should be page 1, instead of ellipsis
-    const pageTwo = el.shadowRoot?.querySelectorAll("li")[2];
+    const pagesHandler = sinon.spy();
+    el.addEventListener("sgds-page-change", pagesHandler);
+    const pageOne = el.shadowRoot?.querySelectorAll("li")[0];
+    const pageTwo = el.shadowRoot?.querySelectorAll("li")[1];
 
-    const nextEllipsis = el.shadowRoot?.querySelectorAll("li")[4]?.querySelector("span");
+    expect(pageOne?.classList.value).to.contain("active");
 
-    expect(prevEllipsis).to.not.exist;
+    pageTwo?.querySelector("span")?.click();
+    await el.updateComplete;
+
+    expect(pageOne?.classList.value).to.not.contain("active");
     expect(pageTwo?.classList.value).to.contain("active");
 
-    expect(nextEllipsis?.classList.value).to.not.contain("disabled");
-    expect(el.shadowRoot?.querySelectorAll("li")[4]?.querySelector("span[aria-hidden='true']")?.textContent).to.contain(
-      "…"
-    );
-    expect(nextEllipsis?.getAttribute("tabindex")).to.equal("0");
-  });
-
-  it("if ellipsisOn is true and if active page >= than limit, both prev/next ellipsis is rendered  and tabbable", async () => {
-    const el = (await fixture(
-      html` <sgds-pagination dataLength="40" limit="3" itemsPerPage="5" currentPage="4" ellipsisOn></sgds-pagination> `
-    )) as SgdsPagination;
-
-    const totalDisplayedLi = el.shadowRoot?.querySelectorAll("li").length;
-    const prevEllipsisContent = el.shadowRoot?.querySelectorAll("li")[1].querySelector("span[aria-hidden='true']");
-    const prevEllipsis = el.shadowRoot?.querySelectorAll("li")[1].querySelector("span.page-link");
-    const nextEllipsisContent = el.shadowRoot?.querySelectorAll("li")[5]?.querySelector("span[aria-hidden='true']");
-    const nextEllipsis = el.shadowRoot?.querySelectorAll("li")[5]?.querySelector("span.page-link");
-
-    expect(totalDisplayedLi).to.be.equal(7);
-    expect(prevEllipsis?.getAttribute("tabindex")).to.equal("0");
-    expect(nextEllipsis?.getAttribute("tabindex")).to.equal("0");
-
-    expect(prevEllipsisContent?.textContent).to.contain("…");
-    expect(nextEllipsisContent?.textContent).to.contain("…");
-  });
-
-  it("if currentpage equals to 1, prevbutton is non tabbable and disabled", async () => {
-    const el = (await fixture(
-      html` <sgds-pagination dataLength="40" limit="3" itemsPerPage="5" currentPage="1"></sgds-pagination> `
-    )) as SgdsPagination;
-
-    const prevButton = el.shadowRoot?.querySelectorAll("li")[0];
-    const prevButtonLink = el.shadowRoot?.querySelectorAll("li")[0]?.querySelector("span");
-
-    expect(prevButton?.classList.value).to.contain("disabled");
-    expect(prevButtonLink)?.to.have.attribute("tabindex", "-1");
-  });
-
-  it("if currentPage equals to pages length, nextbutton is non tabbable and disabled", async () => {
-    const el = (await fixture(
-      html` <sgds-pagination dataLength="40" limit="3" itemsPerPage="5" currentPage="8"></sgds-pagination> `
-    )) as SgdsPagination;
-
-    const nextButton = el.shadowRoot?.querySelectorAll("li")[4];
-    const nextButtonLink = el.shadowRoot?.querySelectorAll("li")[4].querySelector("span");
-
-    expect(nextButtonLink)?.to.have.attribute("tabindex", "-1");
-    expect(nextButton?.classList.value).to.contain("disabled");
-  });
-  it("showFirstPage set to true, first page and first ellipsis always appears ", async () => {
-    //8 pages, at page 8
-    const el = (await fixture(
-      html`
-        <sgds-pagination dataLength="40" limit="3" itemsPerPage="5" currentPage="8" showFirstPage></sgds-pagination>
-      `
-    )) as SgdsPagination;
-    const firstPage = el.shadowRoot?.querySelector("li[key='1']");
-    const ellipsises = el.shadowRoot?.querySelectorAll("span.visually-hidden");
-    expect(firstPage).to.exist;
-    expect(ellipsises?.length).to.equal(1);
-    expect(ellipsises?.[0]).to.exist;
-  });
-  it("showFirstPage set to true and limit set to page.length, no duplicate first page", async () => {
-    //8 pages, at page 8
-    const el = (await fixture(
-      html`
-        <sgds-pagination dataLength="40" limit="8" itemsPerPage="5" currentPage="8" showFirstPage></sgds-pagination>
-      `
-    )) as SgdsPagination;
-    const pageOne = el.shadowRoot?.querySelectorAll("li")[1];
-    const pageTwo = el.shadowRoot?.querySelectorAll("li")[2];
-    const pageThree = el.shadowRoot?.querySelectorAll("li")[3];
-
-    expect(pageOne?.textContent).to.contain("1");
-    expect(pageTwo?.textContent).to.contain("2");
-    expect(pageThree?.textContent).to.contain("3");
-  });
-  it("showLastPage set to true, last page always appears and only last ellipsis shown", async () => {
-    //8 pages, at page 1
-    const el = (await fixture(
-      html`
-        <sgds-pagination dataLength="40" limit="3" itemsPerPage="5" currentPage="1" showLastPage></sgds-pagination>
-      `
-    )) as SgdsPagination;
-    const lastPage = el.shadowRoot?.querySelector("li[key='8']");
-    const ellipsises = el.shadowRoot?.querySelectorAll("span.visually-hidden");
-    expect(lastPage).to.exist;
-    expect(ellipsises?.length).to.equal(1);
-    expect(ellipsises?.[0]).to.exist;
-  });
-  it("showLastPage and showFirstPage set to true, first and last page always appears and two ellipsis shown", async () => {
-    //8 pages, at page 4
-    const el = (await fixture(
-      html`
-        <sgds-pagination
-          dataLength="40"
-          limit="3"
-          itemsPerPage="5"
-          currentPage="4"
-          showLastPage
-          showFirstPage
-        ></sgds-pagination>
-      `
-    )) as SgdsPagination;
-    const firstPage = el.shadowRoot?.querySelector("li[key='1']");
-    const lastPage = el.shadowRoot?.querySelector("li[key='8']");
-    const ellipsises = el.shadowRoot?.querySelectorAll("span.visually-hidden");
-    expect(firstPage).to.exist;
-    expect(lastPage).to.exist;
-    expect(ellipsises?.length).to.equal(2);
-  });
-  it("showLastPage and showFirstPage set to true and there are only 2 pages and no ellipsis", async () => {
-    //8 pages, at page 4
-    const el = (await fixture(
-      html`
-        <sgds-pagination
-          dataLength="40"
-          limit="3"
-          itemsPerPage="20"
-          currentPage="1"
-          showLastPage
-          showFirstPage
-        ></sgds-pagination>
-      `
-    )) as SgdsPagination;
-    const numberedPages = el.shadowRoot?.querySelectorAll("li[key]");
-    const ellipsises = el.shadowRoot?.querySelectorAll("span.visually-hidden");
-    expect(numberedPages?.length).to.equal(2);
-    expect(ellipsises?.length).to.equal(0);
-  });
-  it("when ellipsisOn= false showLastPage and showFirstPage set to true, the ellipsis appear but cannot be clicked", async () => {
-    //8 pages, at page 4
-    const el = (await fixture(
-      html`
-        <sgds-pagination
-          dataLength="40"
-          limit="3"
-          itemsPerPage="5"
-          currentPage="4"
-          showLastPage
-          showFirstPage
-        ></sgds-pagination>
-      `
-    )) as SgdsPagination;
-
-    const disabledEllipsis = el.shadowRoot?.querySelectorAll(".ellipsis-disabled") as NodeListOf<HTMLLIElement>;
-    expect(disabledEllipsis?.length).to.equal(2);
-    expect(disabledEllipsis[0].onclick).to.equal(null);
-    expect(disabledEllipsis[1].onclick).to.equal(null);
-  });
-  it("when ellipsisOn=true showLastPage and showFirstPage set to true, the ellipsis appear but cannot be clicked", async () => {
-    //8 pages, at page 4
-    const el = await fixture<SgdsPagination>(
-      html`
-        <sgds-pagination
-          dataLength="40"
-          limit="3"
-          itemsPerPage="5"
-          currentPage="4"
-          showLastPage
-          showFirstPage
-          ellipsisOn
-        ></sgds-pagination>
-      `
-    );
-    const pageHandler = sinon.spy();
-    el.addEventListener("sgds-page-change", pageHandler);
-    const ellipsises = el.shadowRoot?.querySelectorAll(
-      "li.page-item>span.page-link>span.visually-hidden"
-    ) as NodeListOf<HTMLLIElement>;
-    expect(ellipsises?.length).to.equal(2);
-
-    ellipsises?.[0].click();
-    await el.updateComplete;
-    expect(pageHandler).to.be.called;
-    ellipsises?.[1].click();
-    await el.updateComplete;
-    expect(pageHandler).to.be.calledTwice;
+    expect(pagesHandler).to.be.calledOnce;
   });
 });
