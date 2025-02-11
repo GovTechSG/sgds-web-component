@@ -17,7 +17,7 @@ export type Navigation = "button" | "icon-button";
  **/
 export class SgdsPagination extends SgdsElement {
   static styles = [...SgdsElement.styles, paginationStyle];
-
+  /**@internal */
   static dependencies = {
     "sgds-icon-button": SgdsIconButton,
     "sgds-button": SgdsButton,
@@ -40,7 +40,7 @@ export class SgdsPagination extends SgdsElement {
   @property({ type: String }) navigation: Navigation = "icon-button";
 
   /** Sets the size of all page items. */
-  @property({ type: String }) size: SizeVariant = "md";
+  @property({ type: String }) size: "sm" | "md" = "md";
 
   /**
    * The number of pages to show besides first and last page. First and last page always appears
@@ -341,6 +341,5 @@ export class SgdsPagination extends SgdsElement {
     `;
   }
 }
-export type SizeVariant = "sm" | "md";
 
 export default SgdsPagination;
