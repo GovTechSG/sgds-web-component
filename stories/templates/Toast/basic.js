@@ -11,10 +11,12 @@ export const Template = args =>
           ?autohide=${args.autohide}
           delay=${ifDefined(args.delay)}
           ?noAnimation=${args.noAnimation}
+          ?dismissable=${args.dismissable}
+          title=${ifDefined(args.title)}
         >
           <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
-          <span slot="duration">2 mins ago</span>
           This is a toast notifications
+          <sgds-link slot="action"><a href="#" target="_blank">Action</a></sgds-link>
         </sgds-toast>
       </sgds-toast-container>
     </div>
@@ -25,5 +27,5 @@ export const args = {
 };
 
 export const parameters = {
-  docs: { iframeHeight: 400 }
+  docs: {}
 };
