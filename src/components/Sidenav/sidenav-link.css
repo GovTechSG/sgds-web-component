@@ -5,7 +5,8 @@
 
 ::slotted(a) {
   display: block;
-  color: inherit !important;
+  --sgds-link-color: var(--sgds-default-color);
+  color: var(--sgds-default-color, var(--sgds-link-color));
   padding-top: var(--sgds-padding-sm);
   padding-bottom: var(--sgds-padding-sm);
   padding-left: var(--sgds-padding-3-xl);
@@ -13,22 +14,37 @@
   border-radius: var(--sgds-border-radius-md);
   text-decoration: none !important;
 }
+
 :host([active]) ::slotted(a) {
-  color: var(--sgds-primary-color);
+  --sgds-link-color: var(--sgds-primary-color-emphasis);
+  color: var(--sgds-primary-color-emphasis, var(--sgds-link-color));
   background-color: var(--sgds-primary-bg-translucent);
 }
 
-::slotted(a:hover) {
+:host(:not([disabled]):not([active])) ::slotted(a:hover) {
   background-color: var(--sgds-default-bg-translucent-subtle);
+}
+
+::slotted(a:hover),
+::slotted(a:focus),
+::slotted(a:focus-visible) {
+  --sgds-link-color-emphasis: var(--sgds-default-color);
+  color: var(--sgds-default-color, var(--sgds-link-color-emphasis));
+}
+
+:host([active]) ::slotted(a:hover),
+:host([active]) ::slotted(a:focus),
+:host([active]) ::slotted(a:focus-visible) {
+  --sgds-link-color-emphasis: var(--sgds-primary-color-emphasis);
+  color: var(--sgds-primary-color-emphasis, var(--sgds-link-color-emphasis));
 }
 
 :host([disabled]) ::slotted(a) {
   opacity: var(--sgds-opacity-50);
-  pointer-events: none;
   cursor: not-allowed;
 }
 :host([disabled]) ::slotted(a:focus),
-:host([disabled]) ::slotted(a:focus-visible){
+:host([disabled]) ::slotted(a:focus-visible) {
   outline: 0;
   box-shadow: none;
 }
@@ -42,6 +58,5 @@
 
 :host([active]) ::slotted(a:focus),
 :host([active]) ::slotted(a:focus-visible) {
-  color: var(--sgds-primary-color);
   background-color: var(--sgds-primary-bg-translucent);
 }

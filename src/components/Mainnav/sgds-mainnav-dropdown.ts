@@ -115,6 +115,8 @@ export class SgdsMainnavDropdown extends SgdsElement {
       this._adjustDropdownItem();
       this._resetDropdownMenu();
       this._hideDropdownMenuItems();
+    } else {
+      this._resetDropdownItem();
     }
   }
 
@@ -125,6 +127,10 @@ export class SgdsMainnavDropdown extends SgdsElement {
   }
 
   private _handleKeyboardMenuItemsEvent(e: KeyboardEvent) {
+    if (!this._breakpointReached) {
+      return;
+    }
+
     const slottedItems = this.defaultSlotItems.filter(item => !item.hasAttribute("disabled"));
     const items = [this.menuHeaderButton, ...slottedItems];
     const itemLength = items.length;
@@ -172,6 +178,13 @@ export class SgdsMainnavDropdown extends SgdsElement {
     this.defaultSlotItems.forEach(item => {
       const dropdownItem = item.shadowRoot.querySelector(".dropdown-item") as HTMLElement;
       dropdownItem.classList.add("nav-link");
+    });
+  }
+
+  private _resetDropdownItem() {
+    this.defaultSlotItems.forEach(item => {
+      const dropdownItem = item.shadowRoot.querySelector(".dropdown-item") as HTMLElement;
+      dropdownItem.classList.remove("nav-link");
     });
   }
 
