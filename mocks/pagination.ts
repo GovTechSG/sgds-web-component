@@ -81,7 +81,7 @@ export class MockPagination extends LitElement {
   render() {
     return html`
       <sgds-table></sgds-table>
-      <sgds-pagination ellipsisOn @sgds-page-change=${this._pageChange}></sgds-pagination>
+      <sgds-pagination @sgds-page-change=${this._pageChange}></sgds-pagination>
     `;
   }
 }

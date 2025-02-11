@@ -41,6 +41,8 @@ export class SgdsSidenavLink extends SgdsElement {
     /** If link is disabled, set tabindex of anchor to -1 */
     if (this.disabled) {
       this._anchor[0].setAttribute("tabindex", "-1");
+      this._anchor[0].removeAttribute("href");
+      this._anchor[0].setAttribute("role", "link");
     }
   }
   render() {

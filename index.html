@@ -168,6 +168,7 @@
   </sgds-sidenav-item>
   <sgds-sidenav class="mt-3" id="test-id">
     <sgds-sidenav-item>
+      <sgds-icon name="placeholder" slot="icon"></sgds-icon>
       <span slot="title">
         Title
       </span>
@@ -177,8 +178,7 @@
       <sgds-sidenav-link>
         <a href="#"> first-test</a>
       </sgds-sidenav-link>
-      <sgds-sidenav-item title="Test title 2">
-        <sgds-icon name="placeholder" slot="icon"></sgds-icon>
+      <sgds-sidenav-item>
         <span slot="title">
           Title level 2 very long so just wrap
         </span>
@@ -191,7 +191,7 @@
 
       </sgds-sidenav-item>
     </sgds-sidenav-item>
-    <sgds-sidenav-item title="Test title 2">
+    <sgds-sidenav-item>
       <sgds-icon slot="icon" name="placeholder"></sgds-icon>
       <span slot="title">
         Title
@@ -1057,7 +1057,7 @@
         <sgds-textarea minlength="3" hasFeedback resize="auto">
           <sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
         </sgds-textarea> 
-        <!-- <sgds-datepicker required name="datepicker-hi"></sgds-datepicker> -->
+        <sgds-datepicker required name="datepicker-hi" hasFeedback></sgds-datepicker>
         <!-- <sgds-datepicker required initialValue='["20/01/2024"]' id="test-date" name="datepicker-hi" mindate="2024-01-02T12:00:00.000Z"
           maxdate="2024-12-30T12:00:00.000Z" hasFeedback></sgds-datepicker> -->
           <sgds-combo-box id="combobox-test" value="1"  label="readonly combobox" required menuList='[
@@ -1072,20 +1072,24 @@
     ]' label="label" hintText="hint" hasFeedback>
       </sgds-combo-box>
       <div></div>
-          <sgds-combo-box multiSelect  required hasFeedback menuList='[
-      { "label": "John Smith", "value": "1" },
-      { "label": "Jack Adams", "value": "2" },
-      { "label": "Regina Bride", "value": "3" },
-      { "label": "Christian Dior", "value": "4" },
-      { "label": "Prada Low", "value": "5" },
-      { "label": "Chloe Delight", "value": "6" },
-      { "label": "Jade Apheremal", "value": "7" },
-      { "label": "Louis Vuitton", "value": "8" }
-    ]' label="label" hintText="hint">
-      </sgds-combo-box>
-      <sgds-input></sgds-input>
-    </div>
-
+        <sgds-combo-box
+          multiSelect
+          required
+          hasFeedback
+          menuList='[
+              { "label": "John Smith", "value": "1" },
+              { "label": "Jack Adams", "value": "2" },
+              { "label": "Regina Bride", "value": "3" },
+              { "label": "Christian Dior", "value": "4" },
+              { "label": "Prada Low", "value": "5" },
+              { "label": "Chloe Delight", "value": "6" },
+              { "label": "Jade Apheremal", "value": "7" },
+              { "label": "Louis Vuitton", "value": "8" }
+            ]'
+          label="label"
+          hintText="hint">
+        </sgds-combo-box>
+        <sgds-input></sgds-input>
         <!--<sgds-datepicker required mode="range"></sgds-datepicker>
         <sgds-datepicker required mode="range" mindate="2024-01-02T12:00:00.000Z"
         maxdate="2024-12-30T12:00:00.000Z"></sgds-datepicker> -->
@@ -1095,6 +1099,7 @@
         <sgds-button type="button" id="enabltT">Enable toggle</sgds-button>
       </form>
     </div>
+
     <div class="container">
       <sgds-pagination dataLength="1"></sgds-pagination>
       <sgds-pagination dataLength="20" itemsPerPage="10" currentPage="1"></sgds-pagination>
