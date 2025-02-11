@@ -33,6 +33,7 @@ module.exports = {
     "../stories/components/Switch.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Tab.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Textarea.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/components/Toast.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Tooltip.@(mdx|stories.@(js|jsx|ts|tsx))",
     // "../stories/components/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/form-validation/*.@(mdx|stories.@(js|jsx|ts|tsx))",
