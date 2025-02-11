@@ -104,7 +104,7 @@ export class SgdsToast extends SgdsElement {
   }
 
   @queryAssignedNodes({ slot: "action", flatten: true })
-  _actionNodes!: Array<Node>;
+  private _actionNodes!: Array<Node>;
 
   render() {
     if (this.autohide && this.show) {
