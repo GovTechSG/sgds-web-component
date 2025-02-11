@@ -13,6 +13,8 @@ module.exports = {
     "../stories/components/Breadcrumb.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Button.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Checkbox.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/components/ComboBox.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/components/Datepicker.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/DescriptionList.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Divider.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Footer.@(mdx|stories.@(js|jsx|ts|tsx))",
