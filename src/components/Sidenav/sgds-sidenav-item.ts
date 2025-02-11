@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 import { property, query, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -190,7 +190,7 @@ export class SgdsSidenavItem extends SgdsElement {
       this.emit("sgds-after-hide");
     }
   }
-  @queryAssignedElements() private _items;
+  @queryAssignedElements() private _items: SgdsSidenavLink[];
   private _handleSlotChange(e: Event) {
     const sideNavItems = (e.target as HTMLSlotElement)
       .assignedElements({ flatten: true })
@@ -210,17 +210,18 @@ export class SgdsSidenavItem extends SgdsElement {
   }
 
   render() {
-    const withMenuTemplate = html` <button
+    const withMenuTemplate = html`
+      <button
         @click=${this._handleSummaryClick}
         @keydown=${this._handleSummaryKeyDown}
         class="sidenav-btn ${classMap({
           disabled: this.disabled,
           active: this.active
-        })} "
-        aria-expanded="${this.active}"
-        aria-controls="${this._collapseId}"
-        aria-current="${this.active}"
-        id="${this._buttonId}"
+        })}"
+        aria-expanded=${this.active}
+        aria-controls=${this._collapseId}
+        aria-current=${this.active}
+        id=${this._buttonId}
         ?disabled=${this.disabled}
         aria-disabled=${this.disabled ? "true" : "false"}
       >
@@ -234,11 +235,13 @@ export class SgdsSidenavItem extends SgdsElement {
         <div class="sidenav-list" aria-labelledby="${this._buttonId}">
           <slot class="default" @slotchange=${this._handleSlotChange}></slot>
         </div>
-      </div>`;
+      </div>
+    `;
 
     const noMenuTemplate = html`
       <a
-        href=${this.href}
+        href=${!this.disabled ? this.href : nothing}
+        role=${this.disabled ? "link" : nothing}
         @click=${() => this._onClickLink()}
         class="sidenav-btn ${classMap({
           disabled: this.disabled,
