@@ -24,6 +24,7 @@ export interface IStepMetaData {
  */
 export class SgdsStepper extends SgdsElement {
   static styles = [...SgdsElement.styles, stepperStyle];
+  /** @internal */
   static dependencies = { "sgds-icon": SgdsIcon };
   /** The metadata of stepper, type `IStepMetaData`, that consist of `stepHeader: string`, `component:unknown`, `iconName:string`. `stepHeader` is the name of the step and `component` is the content that should appear at the each step. `component` is set to `unknown` to allow users to pass in their desired component based on the framework of choice. e.g. pass in your own react/angular/vue component or it can also be a text content.
    * It is required to populate this array to properly render the stepper. By default, stepper markers will render numbers. For icon stepper markers, pass the name of sgds icon via `iconName` key. `iconName` is optional.

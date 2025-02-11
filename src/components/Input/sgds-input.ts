@@ -28,7 +28,7 @@ import SgdsIcon from "../Icon/sgds-icon";
  */
 export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
   static styles = [...FormControlElement.styles, formPlaceholderStyles, inputStyle];
-
+  /** @internal */
   static dependencies = {
     "sgds-spinner": SgdsSpinner,
     "sgds-icon": SgdsIcon

@@ -13,7 +13,7 @@ import SgdsIcon from "../Icon/sgds-icon";
 
 export class DatepickerHeader extends SgdsElement {
   static styles = [datepickerHeaderStyle];
-
+  /** @internal */
   static dependencies = {
     "sgds-icon": SgdsIcon,
     "sgds-icon-button": SgdsIconButton,

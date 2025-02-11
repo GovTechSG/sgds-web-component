@@ -17,14 +17,32 @@ const ConstraintValidationTemplate = args => {
         pattern="Sarah"
       >
       </sgds-input>
-      <!-- <sgds-quantity-toggle
+      <sgds-datepicker required hasFeedback name="appointmentDate" label="Appointment date"></sgds-datepicker>
+      <sgds-combo-box
+        required
+        hasFeedback
+        name="countryOfBirth"
+        label="Country of birth"
+        menuList='[
+      { "label": "Singapore", "value": "1" },
+      { "label": "Thailand", "value": "2" },
+      { "label": "Malaysia", "value": "3" },
+      { "label": "Philippines", "value": "4" },
+      { "label": "Japan", "value": "5" },
+      { "label": "Laos", "value": "6" },
+      { "label": "Vietnam", "value": "7" },
+      { "label": "China", "value": "8" }
+    ]'
+        placeholder="Choose a country"
+      ></sgds-combo-box>
+      <sgds-quantity-toggle
         label="Number of dependents"
         name="dependentCount"
         min="1"
         max="10"
         hinttext="Input number 1 to 10 only"
         hasFeedback="both"
-      ></sgds-quantity-toggle> -->
+      ></sgds-quantity-toggle>
       <sgds-checkbox-group hasFeedback hintText="hint for checkbox" label="Agreements">
         <sgds-checkbox name="consentA" value="consentA" required>I consent to ...</sgds-checkbox>
       </sgds-checkbox-group>
@@ -75,14 +93,32 @@ const FormDataTemplate = args => {
         pattern="Sarah"
       >
       </sgds-input>
-      <!-- <sgds-quantity-toggle
+      <sgds-quantity-toggle
         label="Number of dependents"
         name="dependentCount"
         min="1"
         max="10"
         hinttext="Input number 1 to 10 only"
         hasFeedback="both"
-      ></sgds-quantity-toggle> -->
+      ></sgds-quantity-toggle>
+      <sgds-datepicker required hasFeedback name="appointmentDate" label="Appointment date"></sgds-datepicker>
+      <sgds-combo-box
+        required
+        hasFeedback
+        name="countryOfBirth"
+        label="Country of birth"
+        menuList='[
+      { "label": "Singapore", "value": "1" },
+      { "label": "Thailand", "value": "2" },
+      { "label": "Malaysia", "value": "3" },
+      { "label": "Philippines", "value": "4" },
+      { "label": "Japan", "value": "5" },
+      { "label": "Laos", "value": "6" },
+      { "label": "Vietnam", "value": "7" },
+      { "label": "China", "value": "8" }
+    ]'
+        placeholder="Choose a country"
+      ></sgds-combo-box>
       <sgds-checkbox-group hasFeedback hintText="hint for checkbox" label="Agreements">
         <sgds-checkbox name="consentA" value="consentA" required>I consent to ...</sgds-checkbox>
       </sgds-checkbox-group>
@@ -122,7 +158,9 @@ const FormDataTemplate = args => {
       form.addEventListener("submit", event => {
         let data = {
           firstName: "",
-          //dependentCount: 0,
+          dependentCount: 0,
+          appointmentDate: "",
+          countryOfBirth: "",
           consentA: false,
           gender: "",
           comments: ""
@@ -130,7 +168,9 @@ const FormDataTemplate = args => {
         event.preventDefault();
         const formData = new FormData(event.target);
         data.firstName = formData.get("firstName");
-        //data.dependentCount = formData.get("dependentCount");
+        data.dependentCount = formData.get("dependentCount");
+        data.appointmentDate = formData.get("appointmentDate");
+        data.countryOfBirth = formData.get("countryOfBirth");
         data.consentA = formData.get("consentA") === "on";
         data.gender = formData.get("gender");
         data.comments = formData.get("comments");
@@ -138,8 +178,9 @@ const FormDataTemplate = args => {
         const fileInput = document.getElementById("file-upload-form-data");
         for (let i = 0; i < fileInput.selectedFiles.length; i++) {
           const fileName = "file" + i;
+          console.log(fileInput.selectedFiles[i]);
           formData.append(fileName, fileInput.selectedFiles[i]);
-          data[fileName] = fileInput.selectedFiles[i];
+          data[fileName] = JSON.stringify(fileInput.selectedFiles[i].name);
         }
         alert(JSON.stringify(data));
         // submit FormData

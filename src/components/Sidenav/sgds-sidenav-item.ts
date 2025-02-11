@@ -27,6 +27,7 @@ import sidenavItemStyle from "./sidenav-item.css";
 
 export class SgdsSidenavItem extends SgdsElement {
   static styles = [...SgdsElement.styles, sidenavItemStyle];
+  /** @internal */
   static dependencies = {
     "sgds-icon": SgdsIcon
   };

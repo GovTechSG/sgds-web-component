@@ -65,6 +65,9 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
   /**Feedback text for error state when date input is invalid */
   @property({ type: String, reflect: true }) invalidFeedback: string;
 
+  /** Allows invalidFeedback and invalid styles to be visible with the input */
+  @property({ type: Boolean, reflect: true }) hasFeedback = false;
+
   /** The datepicker input's label  */
   @property({ reflect: true }) label = "";
 
@@ -415,6 +418,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
           hintText=${this.hintText}
           name=${this.name}
           ?invalid=${this.invalid}
+          hasFeedback=${ifDefined(this.hasFeedback ? "both" : undefined)}
         >
         </sgds-datepicker-input>
         <sgds-icon-button

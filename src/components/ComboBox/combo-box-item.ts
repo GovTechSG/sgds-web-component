@@ -7,6 +7,7 @@ import SgdsIcon from "../Icon/sgds-icon";
 import comboBoxItemStyles from "./combo-box-item.css";
 
 export class ComboBoxItem extends SgdsElement {
+  /** @internal */
   static dependencies = {
     "sgds-icon": SgdsIcon,
     "sgds-checkbox": SgdsCheckbox
