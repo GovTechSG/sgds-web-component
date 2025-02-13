@@ -27,6 +27,7 @@ module.exports = {
     "../stories/components/Modal.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Pagination.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/ProgressBar.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/components/Sidenav.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Skeleton.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Spinner.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/components/Stepper.@(mdx|stories.@(js|jsx|ts|tsx))",
