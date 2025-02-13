@@ -41,7 +41,7 @@
 
 :host([disabled]) ::slotted(a) {
   opacity: var(--sgds-opacity-50);
-  cursor: not-allowed;
+  pointer-events: none;
 }
 :host([disabled]) ::slotted(a:focus),
 :host([disabled]) ::slotted(a:focus-visible) {
