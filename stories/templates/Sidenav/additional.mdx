@@ -1,0 +1,73 @@
+## SgdsSidenavItem as a link
+
+SidenavItem can be configured as a link by passing in a single anchor tag element into the default slot
+
+<Canvas of={SidenavStories.SidenavItemAsLink}>
+  <Story of={SidenavStories.SidenavItemAsLink} />
+</Canvas>
+
+## SgdsSidenavItem as a menu 
+
+SidenavItem can be configured as a menu by passing in a SgdsSidenavLink into the default slot
+
+<Canvas of={SidenavStories.SidenavItemAsMenu}>
+  <Story of={SidenavStories.SidenavItemAsMenu} />
+</Canvas>
+
+## Embedded second level menu in SgdsSidenavItem
+
+SidenavItem accepts another SidenavItem as its children in the default slot. This results in a second level menu in the SidenavItem
+
+<Canvas of={SidenavStories.EmbeddedMenu}>
+  <Story of={SidenavStories.EmbeddedMenu} />
+</Canvas>
+
+## Icons 
+
+Icons show a visual indication of what the item category is about. Only add icons prefixed to the label at the first level 
+
+<Canvas of={SidenavStories.IconsOnFirstLevel}>
+  <Story of={SidenavStories.IconsOnFirstLevel} />
+</Canvas>
+
+## Active state 
+
+Both SgdsSidenavItem and SgdsSidenavLink have `active` state. 
+
+As a menu type, SgdsSidenavItem will be automatically assigned `active` to true when one of its SgdsSidenavLink children is active. When this happens, SgdsSidenavItem menu will be open on first load
+
+As a link type, add `active` prop to SgdsSidenavItem to achieve the active styles 
+
+
+### Active SgdsSidenavLink
+
+<Canvas of={SidenavStories.ActiveLinkState}>
+  <Story of={SidenavStories.ActiveLinkState} />
+</Canvas>
+
+### Active SgdsSidenavItem as link type
+
+<Canvas of={SidenavStories.ActiveaSidenavItemAsLinkState}>
+  <Story of={SidenavStories.ActiveaSidenavItemAsLinkState} />
+</Canvas>
+
+### Active SgdsSidenavItem as menu type
+
+<Canvas of={SidenavStories.ActiveaSidenavItemAsMenu}>
+  <Story of={SidenavStories.ActiveaSidenavItemAsMenu} />
+</Canvas>
+
+
+## Disabled state
+
+### Disabled SgdsSidenavItem
+
+<Canvas of={SidenavStories.DisabledItem}>
+  <Story of={SidenavStories.DisabledItem} />
+</Canvas>
+
+### Disabled SgdsSidenavLink
+
+<Canvas of={SidenavStories.DisabledLink}>
+  <Story of={SidenavStories.DisabledLink} />
+</Canvas>

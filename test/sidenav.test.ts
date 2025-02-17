@@ -70,30 +70,19 @@ describe("sgds-sidenav-item", () => {
     expect(collapse?.getAttribute("id")).to.equal(button?.getAttribute("aria-controls"));
   });
   it("with href, can be semantically compare with shadowDom trees", async () => {
-    const el = await fixture(html`<sgds-sidenav-item href="#"></sgds-sidenav-item>`);
+    const el = await fixture(html`<sgds-sidenav-item>
+      <a href="#">anchor</a>
+    </sgds-sidenav-item>`);
     assert.shadowDom.equal(
       el,
       `    <div class="sidenav-item" aria-haspopup="false">
-       <a
-         class="sidenav-btn"
-         href="#"
-         aria-current="false"
-         aria-disabled="false"
-       >
-          <slot name="icon"></slot>
-          <slot name="title"></slot>
-       </a>
-       </div
+       <slot class="no-menu-default"></slot>
+       </div>
        `
     );
   });
   it("when active is true, it conveys active class to .sidenav-btn", async () => {
     const el = await fixture(html`<sgds-sidenav-item active></sgds-sidenav-item>`);
-    const sideNavBtn = el.shadowRoot?.querySelector(".sidenav-btn");
-    expect(sideNavBtn?.classList.value).to.contain("active");
-  });
-  it("when active is true, with href defined, it conveys active class to .sidenav-btn", async () => {
-    const el = await fixture(html`<sgds-sidenav-item active href="#"></sgds-sidenav-item>`);
     const sideNavBtn = el.shadowRoot?.querySelector(".sidenav-btn");
     expect(sideNavBtn?.classList.value).to.contain("active");
   });
@@ -111,15 +100,6 @@ describe("sgds-sidenav-item", () => {
     el.shadowRoot?.querySelector("button")?.click();
     expect(toggleHandler).to.have.been.calledOnce;
   });
-  it("as a link (href defined), should emit sgds-toggle event when button is clicked", async () => {
-    const el = await fixture<SgdsSidenavItem>(html`<sgds-sidenav-item href="#"></sgds-sidenav-item>`);
-
-    const toggleHandler = sinon.spy();
-    el.addEventListener("sgds-toggle", toggleHandler);
-
-    el.shadowRoot?.querySelector("a")?.click();
-    expect(toggleHandler).to.have.been.calledOnce;
-  });
   it("show and hide methods changes active class of sidenav button", async () => {
     const el = await fixture<SgdsSidenavItem>(html`<sgds-sidenav-item></sgds-sidenav-item>`);
     expect(el.shadowRoot?.querySelector("button")?.classList.value).not.to.contain("active");
@@ -129,16 +109,6 @@ describe("sgds-sidenav-item", () => {
     el.hide();
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("button")?.classList.value).not.to.contain("active");
-  });
-  it("show and hide methods changes active class of sidenav button when href defined", async () => {
-    const el = await fixture<SgdsSidenavItem>(html`<sgds-sidenav-item href="#"></sgds-sidenav-item>`);
-    expect(el.shadowRoot?.querySelector("a")?.classList.value).not.to.contain("active");
-    el.show();
-    await elementUpdated(el);
-    expect(el.shadowRoot?.querySelector("a")?.classList.value).to.contain("active");
-    el.hide();
-    await elementUpdated(el);
-    expect(el.shadowRoot?.querySelector("a")?.classList.value).not.to.contain("active");
   });
   it("when clicked on an inactive sidenav-btn, turns it into active", async () => {
     const el = await fixture<SgdsSidenavItem>(html`<sgds-sidenav-item></sgds-sidenav-item>`);
@@ -220,8 +190,8 @@ describe("sgds-sidenav, -item, -link interactions", () => {
         <sgds-sidenav-link><a href="#">Level 2 link</a></sgds-sidenav-link>
         <sgds-sidenav-link><a href="#">Level 2 link</a></sgds-sidenav-link>
       </sgds-sidenav-item>
-      <sgds-sidenav-item href="#">
-        <span slot="title">Title 3</span>
+      <sgds-sidenav-item>
+        <a href="#">Level 1 item</a>
       </sgds-sidenav-item>
     </sgds-sidenav>`);
     el.addEventListener("sgds-hide", hideHandler);
@@ -335,14 +305,24 @@ describe("a11y - sgds-sidenav-item", () => {
   });
   it("when active, anchor should have aria-current=true ", async () => {
     const el = await fixture(html`
-      <sgds-sidenav-item href="#" active>
-        <span slot="title">Title 1</span>
-        <sgds-sidenav-link active><a href="#">link</a></sgds-sidenav-link>
-        <sgds-sidenav-link><a href="#">link</a></sgds-sidenav-link>
-        <sgds-sidenav-link><a href="#">link</a></sgds-sidenav-link>
+      <sgds-sidenav-item active>
+        <a href="#">link</a>
       </sgds-sidenav-item>
     `);
-    const anchor = el.shadowRoot?.querySelector("a");
+    const anchor = el.querySelector("a");
     expect(anchor).to.have.attribute("aria-current", "true");
+  });
+  it("when more than 1 anchor item is passed, should return console error", async () => {
+    const consoleStub = sinon.stub(console, "error");
+    await fixture(html`
+      <sgds-sidenav-item active>
+        <a href="#">link</a>
+        <a href="#">link</a>
+      </sgds-sidenav-item>
+    `);
+    await waitUntil(() => consoleStub.calledOnce);
+    expect(consoleStub.calledOnce).to.be.true;
+
+    consoleStub.restore();
   });
 });
