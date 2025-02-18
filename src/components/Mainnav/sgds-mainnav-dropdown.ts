@@ -1,6 +1,6 @@
 import { html } from "lit";
 import { consume } from "@lit/context";
-import { property, query, queryAssignedElements } from "lit/decorators.js";
+import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import genId from "../../utils/generateId";
 import dropdownStyle from "../Dropdown/dropdown.css";
@@ -29,6 +29,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
   };
 
   @consume({ context: MainnavContext, subscribe: true })
+  @state()
   private _breakpointReached: boolean;
 
   /** @internal */
@@ -96,33 +97,36 @@ export class SgdsMainnavDropdown extends SgdsElement {
     }
   }
 
-  firstUpdated() {
-    this.defaultSlotItems.forEach(item => {
+  updated() {
+    if (this._breakpointReached) {
+      this._copyTextToMenu();
+      this._resetDropdownMenu();
+      this._hideDropdownMenuItems();
+    }
+  }
+
+  private _handleSlotChange(e: Event) {
+    const items = (e.target as HTMLSlotElement).assignedElements({ flatten: true }) as SgdsDropdownItem[];
+    items.forEach(item => {
+      item.addEventListener("keydown", this._handleKeyboardMenuItemsEvent.bind(this));
+
+      const dropdownItem = item.shadowRoot.querySelector(".dropdown-item") as HTMLElement;
+      dropdownItem.classList.add("nav-link");
+
       const slottedItem = (item.shadowRoot.querySelector(".dropdown-item slot") as HTMLSlotElement).assignedElements({
         flatten: true
       });
-
       slottedItem.forEach(item => {
         (item as HTMLElement).tabIndex = -1;
       });
     });
   }
 
-  updated() {
-    if (this._breakpointReached) {
-      this._adjustNavLink();
-      this._copyTextToMenu();
-      this._adjustDropdownItem();
-      this._resetDropdownMenu();
-      this._hideDropdownMenuItems();
-    } else {
-      this._resetDropdownItem();
-    }
-  }
-
-  private _handleSlotChange() {
-    this.defaultSlotItems.forEach(item => {
-      item.addEventListener("keydown", this._handleKeyboardMenuItemsEvent.bind(this));
+  private _handleDesktopSlotChange(e: Event) {
+    const items = (e.target as HTMLSlotElement).assignedElements({ flatten: true }) as SgdsDropdownItem[];
+    items.forEach(item => {
+      const dropdownItem = item.shadowRoot.querySelector(".dropdown-item") as HTMLElement;
+      dropdownItem.classList.remove("nav-link");
     });
   }
 
@@ -139,7 +143,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
     }
 
     const firstItem = items[0];
-    const lastItem = items[itemLength - 1].shadowRoot.querySelector(".nav-link") as HTMLElement;
+    const lastItem = items[itemLength - 1].shadowRoot.querySelector(".dropdown-item") as HTMLElement;
     let activeElement = document.activeElement as HTMLElement;
     if (activeElement === this) {
       activeElement = this.shadowRoot.activeElement as HTMLElement;
@@ -156,7 +160,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
           }
         } else {
           const activeShadowElement = activeElement.shadowRoot
-            ? activeElement.shadowRoot.querySelector(".nav-link")
+            ? activeElement.shadowRoot.querySelector(".dropdown-item")
             : null;
           if (activeShadowElement && activeShadowElement === lastItem) {
             e.preventDefault();
@@ -168,24 +172,6 @@ export class SgdsMainnavDropdown extends SgdsElement {
       default:
         break;
     }
-  }
-
-  private _adjustNavLink() {
-    this.navLink.style.minHeight = "auto";
-  }
-
-  private _adjustDropdownItem() {
-    this.defaultSlotItems.forEach(item => {
-      const dropdownItem = item.shadowRoot.querySelector(".dropdown-item") as HTMLElement;
-      dropdownItem.classList.add("nav-link");
-    });
-  }
-
-  private _resetDropdownItem() {
-    this.defaultSlotItems.forEach(item => {
-      const dropdownItem = item.shadowRoot.querySelector(".dropdown-item") as HTMLElement;
-      dropdownItem.classList.remove("nav-link");
-    });
   }
 
   private _copyTextToMenu() {
@@ -318,7 +304,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
         <slot name="toggler"></slot>
         <sgds-icon name="chevron-down"></sgds-icon>
       </a>
-      <slot></slot>
+      <slot @slotchange=${this._handleDesktopSlotChange}></slot>
     </sgds-dropdown>`;
 
     return this._breakpointReached ? mobileView : desktopView;

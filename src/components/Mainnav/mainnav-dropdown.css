@@ -1,10 +1,12 @@
 :host([expand="always"]) .nav-link {
+  min-height: 100%;
   padding: 0px var(--sgds-padding-md);
   border-bottom: var(--sgds-border-width-4) solid transparent;
 }
 
 @media (min-width: 576px) {
   :host([expand="sm"]) .nav-link {
+    min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
@@ -16,6 +18,7 @@
 
 @media (min-width: 768px) {
   :host([expand="md"]) .nav-link {
+    min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
@@ -26,7 +29,9 @@
 }
 
 @media (min-width: 992px) {
+  :host(:not([expand])) .nav-link,
   :host([expand="lg"]) .nav-link {
+    min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
@@ -38,6 +43,7 @@
 
 @media (min-width: 1200px) {
   :host([expand="xl"]) .nav-link {
+    min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
@@ -49,6 +55,7 @@
 
 @media (min-width: 1400px) {
   :host([expand="xxl"]) .nav-link {
+    min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
@@ -62,7 +69,6 @@
   display: flex;
   gap: var(--sgds-gap-xs);
   cursor: pointer;
-  min-height: 100%;
   align-items: center;
   text-decoration: none;
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
@@ -76,12 +82,12 @@
 
 .nav-link:not(.disabled).active,
 .nav-link.show {
-  color: var(--sgds-primary-color);
-  border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color);
+  color: var(--sgds-primary-color-default);
+  border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
 }
 
 .nav-link:not(.disabled):hover {
-  color: var(--sgds-primary-color);
+  color: var(--sgds-primary-color-default);
 }
 
 .nav-link:not(.disabled):focus,
@@ -91,7 +97,7 @@
 
 .nav-link:not(.disabled):focus-visible {
   box-shadow: var(--sgds-box-shadow-focus) inset;
-  color: var(--sgds-primary-color);
+  color: var(--sgds-primary-color-default);
 }
 
 .nav-link.disabled {
@@ -106,7 +112,7 @@
   width: 100%;
   height: 100%;
   padding: var(--sgds-padding-md) 0px;
-  background-color: var(--sgds-default-bg-surface);
+  background-color: var(--sgds-surface-default);
 }
 
 .dropdown-items a {
@@ -115,12 +121,12 @@
   align-items: center;
   cursor: pointer;
   text-decoration: none;
-  color: var(--sgds-default-color);
+  color: var(--sgds-color-default);
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
 }
 
 .dropdown-items a:hover {
-  color: var(--sgds-primary-color);
+  color: var(--sgds-primary-color-default);
 }
 
 .dropdown-items a:focus,
@@ -130,7 +136,7 @@
 
 .dropdown-items a:focus-visible {
   box-shadow: var(--sgds-box-shadow-focus) inset;
-  color: var(--sgds-primary-color);
+  color: var(--sgds-primary-color-default);
 }
 
 slot[name="toggler"]::slotted(*) {

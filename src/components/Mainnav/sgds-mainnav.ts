@@ -170,11 +170,11 @@ export class SgdsMainnav extends SgdsElement {
   private async _handleMobileNav() {
     this.nav?.appendChild(this.body);
     await customElements.whenDefined("sgds-masthead");
-    const mastheadHeight = document.querySelector("sgds-masthead")?.clientHeight | 0;
+    const offsetTop = this.nav.offsetTop;
     const navHeight = this.nav.clientHeight;
-    const mainNavHeight = mastheadHeight + navHeight;
-    this.body.style.top = `${mainNavHeight}px`;
-    this.navScroll.style.maxHeight = `calc(100dvh - ${mainNavHeight}px)`;
+    const mainNavPosition = offsetTop + navHeight;
+    this.body.style.top = `${mainNavPosition}px`;
+    this.navScroll.style.maxHeight = `calc(100dvh - ${mainNavPosition}px)`;
   }
 
   private _handleDesktopNav() {
