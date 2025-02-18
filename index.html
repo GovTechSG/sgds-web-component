@@ -1045,7 +1045,7 @@
         </sgds-quantity-toggle>
         <sgds-checkbox-group hasFeedback hintText="hint for checkbox" label="checkbox">
           <sgds-checkbox name="checkbox" value="checkboxhello" required>she</sgds-checkbox>
-          <sgds-checkbox name="checkbox" value="checkboxhello" required>he</sgds-checkbox>
+          <sgds-checkbox name="checkbox" value="checkboxhello" required disabled>he</sgds-checkbox>
           <sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
         </sgds-checkbox-group> 
 
@@ -1387,9 +1387,9 @@
       <form>
         <sgds-checkbox-group hasFeedback invalidFeedback="Please correct the invalid options above"
           label="Select Your Preferences" hintText="Please choose one or more options:">
-          <sgds-checkbox slot="checkbox" value="option1" hasFeedback required>Option 1</sgds-checkbox>
-          <sgds-checkbox indeterminate slot="checkbox" value="option2" required>Option 2 indeterminate</sgds-checkbox>
-          <sgds-checkbox disabled slot="checkbox" value="option3" required>Option 3</sgds-checkbox>
+          <sgds-checkbox value="option1" hasFeedback required>Option 1</sgds-checkbox>
+          <sgds-checkbox indeterminate value="option2" required>Option 2 indeterminate</sgds-checkbox>
+          <sgds-checkbox disabled value="option3" required>Option 3</sgds-checkbox>
         </sgds-checkbox-group>
         <sgds-button type="submit">Submit</sgds-button>
       </form>

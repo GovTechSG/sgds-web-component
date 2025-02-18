@@ -1,40 +1,40 @@
 :host {
   --btn-font-weight: var(--sgds-font-weight-regular);
-  --btn-bg: var(--sgds-primary-bg);
-  --btn-hover-bg: var(--sgds-primary-bg-emphasis);
+  --btn-bg: var(--sgds-primary-surface-default);
+  --btn-hover-bg: var(--sgds-primary-surface-emphasis);
   --btn-border-radius: var(--sgds-border-radius-md);
 }
 
 :host([variant="primary"]) {
-  --btn-bg: var(--sgds-primary-bg);
-  --btn-color: var(--sgds-default-color-on-dark);
+  --btn-bg: var(--sgds-primary-surface-default);
+  --btn-color: var(--sgds-color-fixed-light);
 }
 
 :host([variant="outline"]) {
-  --btn-bg: var(--sgds-default-bg-transparent);
-  --btn-hover-bg: var(--sgds-primary-bg-translucent);
-  --btn-color: var(--sgds-primary-color);
+  --btn-bg: var(--sgds-bg-transparent);
+  --btn-hover-bg: var(--sgds-primary-surface-translucent);
+  --btn-color: var(--sgds-primary-color-default);
   --btn-border-width: var(--sgds-border-width-1);
-  --btn-border-color: var(--sgds-primary-border-color);
+  --btn-border-color: var(--sgds-primary-border-color-default);
 }
 
 :host([variant="ghost"]) {
-  --btn-bg: var(--sgds-default-bg-transparent);
-  --btn-hover-bg: var(--sgds-primary-bg-translucent);
-  --btn-color: var(--sgds-primary-color);
+  --btn-bg: var(--sgds-bg-transparent);
+  --btn-hover-bg: var(--sgds-primary-surface-translucent);
+  --btn-color: var(--sgds-primary-color-default);
 }
 
 :host([variant="danger"]) {
-  --btn-bg: var(--sgds-danger-bg);
-  --btn-hover-bg: var(--sgds-danger-bg-emphasis);
-  --btn-color: var(--sgds-default-color-on-dark);
+  --btn-bg: var(--sgds-danger-surface-default);
+  --btn-hover-bg: var(--sgds-danger-surface-emphasis);
+  --btn-color: var(--sgds-color-fixed-light);
 }
 
 .btn {
   background-color: var(--btn-bg);
-  border: 1px solid var(--sgds-default-border-color-transparent);
+  border: 1px solid var(--sgds-border-color-transparent);
   border-radius: var(--btn-border-radius);
-  color: var(--sgds-default-color-on-dark);
+  color: var(--sgds-color-fixed-light);
   cursor: pointer;
   display: inline-flex;
   align-items: center;

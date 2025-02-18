@@ -24,10 +24,10 @@
   }
 }
 .sidenav-btn:hover:not(.disabled) {
-  background-color: var(--sgds-default-bg-translucent-subtle);
+  background-color: var(--sgds-bg-translucent-subtle);
 }
 .sidenav-btn.active {
-  color: var(--sgds-default-color);
+  color: var(--sgds-color-default);
 }
 .sidenav-btn.disabled {
   opacity: var(--sgds-opacity-50);
@@ -41,7 +41,7 @@
 .sidenav-btn:focus:not(.disabled), .sidenav-btn:focus-visible:not(.disabled) {
   outline: 0;
   box-shadow: var(--sgds-box-shadow-focus);
-  background-color: var(--sgds-default-bg-translucent-subtle);
+  background-color: var(--sgds-bg-translucent-subtle);
 }
 a.sidenav-btn {
   color: inherit;
@@ -49,6 +49,6 @@ a.sidenav-btn {
 }
 
 :host([class^="first-level"]) a.sidenav-btn.active {
-  color: var(--sgds-primary-color);
+  color: var(--sgds-primary-color-default);
   background-color: var(--sgds-primary-bg-translucent);
 }

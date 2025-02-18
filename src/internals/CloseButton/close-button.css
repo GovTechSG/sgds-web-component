@@ -10,28 +10,28 @@
   padding: 0;
   width: var(--sgds-dimension-32);
   height: var(--sgds-dimension-32);
-  border: var(--sgds-border-width-1) solid var(--sgds-default-border-color-transparent);
+  border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
   border-radius: var(--sgds-close-btn-border-radius);
-  background-color: var(--sgds-default-bg-transparent);
+  background-color: var(--sgds-bg-transparent);
   display:flex;
   justify-content: center;
   align-items: center;
 }
 .btn-close-light {
-  color: var(--sgds-default-color-on-dark);
+  color: var(--sgds-color-fixed-light);
 }
 .btn-close-dark {
-  color: var(--sgds-default-color-on-light);
+  color: var(--sgds-color-fixed-dark);
 }
 .btn-close:hover {
-  background-color: var(--sgds-default-bg-translucent);
+  background-color: var(--sgds-bg-translucent);
 }
 
 .btn-close:focus,
 .btn-close:focus-visible {
   outline: 0;
   box-shadow: var(--sgds-box-shadow-focus);
-  background-color: var(--sgds-default-bg-translucent);
+  background-color: var(--sgds-bg-translucent);
 }
 
 .btn-close-sm {

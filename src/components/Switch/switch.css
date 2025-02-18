@@ -13,12 +13,12 @@ input {
   --sgds-switch-height: var(--sgds-form-height-md);
   --sgds-switch-bg-image: url('data:image/svg+xml,<svg viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 12C0.5 5.37258 5.87258 0 12.5 0C19.1274 0 24.5 5.37258 24.5 12C24.5 18.6274 19.1274 24 12.5 24C5.87258 24 0.5 18.6274 0.5 12Z" fill="white"/></svg>');
   appearance: none;
-  background-color: var(--sgds-form-bg-subtle);
+  background-color: var(--sgds-form-surface-subtle);
   background-image: var(--sgds-switch-bg-image);
   background-position: left var(--sgds-form-padding-inline-sm) center;
   background-repeat: no-repeat;
   background-size: var(--sgds-form-width-xs) var(--sgds-form-height-sm);
-  border: var(--sgds-form-border-width-default) solid var(--sgds-default-border-color-transparent);
+  border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-transparent);
   width: var(--sgds-switch-width);
   height: var(--sgds-switch-height);
   border-radius: var(--sgds-form-border-radius-full);
@@ -30,16 +30,16 @@ input {
 .form-check-input:focus-visible {
   box-shadow: var(--sgds-form-box-shadow-focus);
   outline: 0;
-  background-color: var(--sgds-form-bg-emphasis);
+  background-color: var(--sgds-form-surface-emphasis);
 }
 
 .form-check-input:not([disabled]):hover {
-  background-color: var(--sgds-form-bg-emphasis);
+  background-color: var(--sgds-form-surface-emphasis);
 }
 
 .form-check-input:checked,
 .form-check-input[checked] {
-  background-color: var(--sgds-form-primary-bg);
+  background-color: var(--sgds-form-primary-surface-default);
   background-position: right var(--sgds-form-padding-inline-sm) center;
 }
 
@@ -47,7 +47,7 @@ input {
 .form-check-input:not([disabled])[checked]:hover,
 .form-check-input:not([disabled]):checked:focus,
 .form-check-input:not([disabled])[checked]:focus-visible {
-  background-color: var(--sgds-form-primary-bg-emphasis);
+  background-color: var(--sgds-form-primary-surface-emphasis);
 }
 
 :host([disabled]) .form-check {

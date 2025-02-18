@@ -166,7 +166,7 @@ export class MockStepper extends LitElement {
         </sgds-stepper>
         <section
           class="container p-3"
-          style="background: var(--sgds-default-bg);padding: 30px 32px 30px 32px;border-radius: 5px;box-shadow: 0px 0px 25px 0px #161A1D12;box-shadow: 0px 8px 16px 0px #161A1D08;"
+          style="background: var(--sgds-bg-default);padding: 30px 32px 30px 32px;border-radius: 5px;box-shadow: 0px 0px 25px 0px #161A1D12;box-shadow: 0px 8px 16px 0px #161A1D08;"
         >
           ${this.component ? this.component : ""}
           <div style="display:flex;justify-content:space-between;margin-top:1rem;">

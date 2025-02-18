@@ -8,13 +8,13 @@
 }
 
 :host([variant="solid"]) .tab {
-  background-color: var(--sgds-default-bg-translucent-subtle);
+  background-color: var(--sgds-bg-translucent-subtle);
   border-radius: var(--sgds-border-radius-md);
 }
 
 :host([variant="solid"][active]) .tab {
-  background-color: var(--sgds-primary-color);
-  color: var(--sgds-default-color-on-dark);
+  background-color: var(--sgds-primary-color-default);
+  color: var(--sgds-color-fixed-light);
 }
 
 :host([variant="solid"]:not([active]):not([disabled])) .tab:hover {
@@ -27,38 +27,35 @@
 }
 
 :host([variant="underlined"][orientation="vertical"]) .tab {
-  border-right: var(--sgds-border-width-1) solid var(--sgds-default-border-color-muted);
+  border-right: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }
 
-:host([variant="underlined"][orientation="vertical"][active]) .tab::after,
-:host([variant="underlined"][orientation="vertical"]:not([disabled])) .tab:hover::after {
+:host([variant="underlined"][orientation="vertical"][active]) .tab::after {
   content: '';
   position: absolute;
   bottom: 0;
   right: -1px;
   width: var(--sgds-border-width-4);
   height: 100%;
-  background-color: var(--sgds-primary-color);
+  background-color: var(--sgds-primary-color-default);
 }
 
 :host([variant="underlined"][orientation="horizontal"]) .tab {
-  border-bottom: var(--sgds-border-width-1) solid var(--sgds-default-border-color-muted);
+  border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }
 
-:host([variant="underlined"][orientation="horizontal"][active]) .tab::after,
-:host([variant="underlined"][orientation="horizontal"]:not([disabled])) .tab:hover::after {
+:host([variant="underlined"][orientation="horizontal"][active]) .tab::after {
   content: '';
   position: absolute;
   bottom: -1px;
   left: 0;
   height: var(--sgds-border-width-4);
   width: 100%;
-  background-color: var(--sgds-primary-color);
+  background-color: var(--sgds-primary-color-default);
 }
 
-:host([variant="underlined"][orientation="vertical"]:not([active]):not([disabled])) .tab:hover::after,
-:host([variant="underlined"][orientation="horizontal"]:not([active]):not([disabled])) .tab:hover::after {
-  background-color: var(--sgds-default-bg-subtle);
+:host([variant="underlined"]:not([active]):not([disabled])) .tab:hover {
+  background-color: var(--sgds-bg-translucent-subtle);
 }
 
 .tab {
@@ -66,7 +63,7 @@
   align-items: center;
   gap: var(--sgds-spacer-3);
   padding: var(--sgds-spacer-4) var(--sgds-spacer-5);
-  color: var(--sgds-default-color-emphasis);
+  color: var(--sgds-color-default);
   position: relative;
 }
 

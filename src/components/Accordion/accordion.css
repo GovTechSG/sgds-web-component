@@ -1,4 +1,4 @@
 :host([variant="border"]) .accordion {
-  border: var(--sgds-border-width-1) solid var(--sgds-default-border-color-muted);
+  border: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
   border-radius: var(--sgds-border-radius-md);
 }

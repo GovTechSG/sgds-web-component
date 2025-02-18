@@ -4,7 +4,7 @@
     align-items: flex-start;
     gap: var(--sgds-gap-xs);
     padding: var(--sgds-padding-lg) var(--sgds-padding-xl);
-    border-bottom: 1px solid var(--sgds-default-border-color-muted);
+    border-bottom: 1px solid var(--sgds-border-color-muted);
 }
 
 :host([stacked]) .description-list {
@@ -26,7 +26,7 @@
 }
 
 .label {
-    color: var(--sgds-label-color);
+    color: var(--sgds-label-color-default);
     font-weight: var(--sgds-font-weight-semibold);
     font-size: var(--sgds-font-size-2);
 }

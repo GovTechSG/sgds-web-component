@@ -6,7 +6,7 @@ html {
 
 /* BODY */
 body {
-  color: var(--sgds-body-color);
+  color: var(--sgds-body-color-default);
   font-family: var(--sgds-font-family-brand);
   font-size: var(--sgds-font-size-2);
   font-weight: var(--sgds-font-weight-regular);
@@ -16,7 +16,7 @@ body {
 }
 /* LABEL */
 label {
-  color: var(--sgds-label-color);
+  color: var(--sgds-label-color-default);
   font-size: var(--sgds-font-size-2);
   font-weight: var(--sgds-font-weight-regular);
   line-height: var(--sgds-line-height-body);
@@ -56,7 +56,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--sgds-header-color);
+  color: var(--sgds-header-color-default);
   font-family: var(--sgds-font-family-brand);
   font-style: normal;
   margin-top: var(--sgds-margin-none);
@@ -110,7 +110,7 @@ h6 {
 }
 /* CAPTION */
 caption {
-  color: var(--sgds-caption-color);
+  color: var(--sgds-label-color-subtle);
   font-size: var(--sgds-font-size-1);
   font-weight: var(--sgds-font-weight-regular);
   line-height: var(--sgds-line-height-body);
@@ -138,7 +138,7 @@ a {
   line-height: var(--sgds-line-height-body);
   letter-spacing: var(--sgds-letter-spacing-normal);
   text-decoration: underline;
-  color: var(--sgds-link-color);
+  color: var(--sgds-link-color-default);
   height: 100%;
 }
 

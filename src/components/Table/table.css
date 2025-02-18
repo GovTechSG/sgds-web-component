@@ -32,7 +32,7 @@ table {
   --sgds-table-bg-state: initial;
   --sgds-table-color: var(--sgds-emphasis-color);
   --sgds-table-bg: var(--table-bg);
-  --sgds-table-border-color: var(--sgds-border-color);
+  --sgds-table-border-color: var(--sgds-border-color-default);
   --sgds-table-accent-bg: var(--table-accent-bg);
   --sgds-table-striped-color: var(--table-striped-color);
   --sgds-table-striped-bg: var(--table-striped-bg);

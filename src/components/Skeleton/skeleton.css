@@ -1,5 +1,5 @@
 .skeleton {
-  --bg: var(--sgds-default-bg-translucent);
+  --bg: var(--sgds-bg-translucent);
   background-color: var(--bg);
   display: flex;
   flex-direction: column;
@@ -12,12 +12,12 @@
 
 .skeleton.skeleton-paragraph.auto-size-rows > div[class*="skeleton-row"] {
   height: -webkit-fill-available;
-  background-color: var(--sgds-default-bg-translucent);
+  background-color: var(--sgds-bg-translucent);
   border-radius: var(--sgds-border-radius-sm);
 }
 
 .sheen {
-  --sheen-color: var(--sgds-default-bg-translucent-subtle);
+  --sheen-color: var(--sgds-bg-translucent-subtle);
   background: linear-gradient(270deg, var(--sheen-color) 0%, var(--bg) 33.33%, var(--bg) 66.67%, var(--sheen-color) 100%);
   background-size: 400% 100%;
   animation: sheen 8s ease-in-out infinite;

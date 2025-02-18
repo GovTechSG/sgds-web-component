@@ -10,8 +10,8 @@
   }
 
   :host([expand="sm"]) .nav-link:not(.disabled).active {
-    color: var(--sgds-primary-color);
-    border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color);
+    color: var(--sgds-primary-color-default);
+    border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
   }
 
   :host([expand="sm"]) .nav-link:focus-visible {
@@ -26,8 +26,8 @@
   }
 
   :host([expand="md"]) .nav-link:not(.disabled).active {
-    color: var(--sgds-primary-color);
-    border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color);
+    color: var(--sgds-primary-color-default);
+    border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
   }
 
   :host([expand="md"]) .nav-link:focus-visible {
@@ -42,8 +42,8 @@
   }
 
   :host([expand="lg"]) .nav-link:not(.disabled).active {
-    color: var(--sgds-primary-color);
-    border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color);
+    color: var(--sgds-primary-color-default);
+    border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
   }
   
   :host([expand="lg"]) .nav-link:focus-visible {
@@ -58,8 +58,8 @@
   }
 
   :host([expand="xl"]) .nav-link:not(.disabled).active {
-    color: var(--sgds-primary-color);
-    border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color);
+    color: var(--sgds-primary-color-default);
+    border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
   }
 
   :host([expand="xl"]) .nav-link:focus-visible {
@@ -74,8 +74,8 @@
   }
 
   :host([expand="xxl"]) .nav-link:not(.disabled).active {
-    color: var(--sgds-primary-color);
-    border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color);
+    color: var(--sgds-primary-color-default);
+    border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
   }
 
   :host([expand="xxl"]) .nav-link:focus-visible {
@@ -85,31 +85,31 @@
 
 @media screen and (max-width: 576px) {
   :host([expand="sm"]) .nav-link:not(.disabled).active {
-    background-color: var(--sgds-default-bg-translucent-subtle);
+    background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
 @media screen and (max-width: 768px) {
   :host([expand="md"]) .nav-link:not(.disabled).active {
-    background-color: var(--sgds-default-bg-translucent-subtle);
+    background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
 @media screen and (max-width: 992px) {
   :host([expand="lg"]) .nav-link:not(.disabled).active {
-    background-color: var(--sgds-default-bg-translucent-subtle);
+    background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
 @media screen and (max-width: 1200px) {
   :host([expand="xl"]) .nav-link:not(.disabled).active {
-    background-color: var(--sgds-default-bg-translucent-subtle);
+    background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
 @media screen and (max-width: 1400px) {
   :host([expand="xxl"]) .nav-link:not(.disabled).active {
-    background-color: var(--sgds-default-bg-translucent-subtle);
+    background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
@@ -119,7 +119,7 @@
   min-height: 100%;
   align-items: center;
   text-decoration: none;
-  color: var(--sgds-default-color);
+  color: var(--sgds-color-default);
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
 }
 
@@ -130,11 +130,11 @@
 }
 
 .nav-link:not(.disabled).active {
-  color: var(--sgds-primary-color);
+  color: var(--sgds-primary-color-default);
 }
 
 .nav-link:not(.disabled):hover {
-  color: var(--sgds-primary-color);
+  color: var(--sgds-primary-color-default);
 }
 
 .nav-link:focus,
@@ -144,7 +144,7 @@
 
 .nav-link:focus-visible {
   box-shadow: var(--sgds-box-shadow-focus) inset;
-  color: var(--sgds-primary-color);
+  color: var(--sgds-primary-color-default);
 }
 
 .nav-link.disabled {

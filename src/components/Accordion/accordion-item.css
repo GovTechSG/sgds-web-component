@@ -13,7 +13,7 @@
 }
 
 .accordion-item {
-  border-bottom: var(--sgds-border-width-1) solid var(--sgds-default-border-color-muted);
+  border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }
 
 .accordion-btn {
@@ -22,10 +22,10 @@
   align-items: center;
   gap: var(--sgds-gap-sm);
   padding: var(--sgds-padding-lg) var(--sgds-padding-lg);
-  background-color: var(--sgds-default-bg-transparent);
+  background-color: var(--sgds-bg-transparent);
   text-align: left;
   border: 0;
-  color: var(--sgds-default-color);
+  color: var(--sgds-color-default);
   line-height: var(--sgds-line-height-heading);
   font-size: var(--sgds-font-size-3);
   overflow-anchor: none;
@@ -44,7 +44,7 @@
 
 .accordion-btn:hover {
   z-index: 2;
-  background-color: var(--sgds-default-bg-translucent);
+  background-color: var(--sgds-bg-translucent);
 }
 
 .accordion-btn:focus,
@@ -52,7 +52,7 @@
   z-index: 3;
   outline: 0;
   box-shadow: var(--sgds-box-shadow-focus);
-  background-color: var(--sgds-default-bg-translucent);
+  background-color: var(--sgds-bg-translucent);
 }
 
 .accordion-btn.disabled,
@@ -65,7 +65,7 @@ slot[name="caret"]::slotted(*),
 slot[name="caret"] sgds-icon {
   margin-left: auto;
   transition: transform 0.2s ease-in-out;
-  color: var(--sgds-default-color-subtle);
+  color: var(--sgds-color-subtle);
 }
 
 .accordion-btn:not(.collapsed) slot[name="caret"]::slotted(*),

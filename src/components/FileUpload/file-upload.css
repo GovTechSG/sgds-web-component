@@ -22,8 +22,8 @@
   align-items: center;
   gap: var(--sgds-form-gap-lg);
   padding: var(--sgds-form-padding-y) var(--sgds-form-padding-x);
-  background-color: var(--sgds-form-bg);
-  border: var(--sgds-form-border-width-default) solid var(--sgds-form-border-color-muted);
+  background-color: var(--sgds-form-surface-default);
+  border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-muted);
   border-radius: var(--sgds-form-border-radius-md);
 }
 
@@ -51,5 +51,5 @@ sgds-close-button {
 
 slot[name="validIcon"]::slotted(*),
 slot[name="validIcon"] svg {
-  color: var(--sgds-form-success-color);
+  color: var(--sgds-form-success-color-default);
 }

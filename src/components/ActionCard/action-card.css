@@ -24,6 +24,6 @@ slot[name="icon"]::slotted(*) {
 }
 
 .sgds.card[variant*="card-action"] .card-title {
-  color: var(--sgds-body-color);
+  color: var(--sgds-body-color-default);
   margin-bottom: 0;
 }

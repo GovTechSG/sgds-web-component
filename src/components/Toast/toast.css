@@ -1,17 +1,17 @@
 :host([variant="info"]) slot[name="icon"]::slotted(*) {
-  color: var(--sgds-primary-color);
+  color: var(--sgds-primary-color-default);
 }
 
 :host([variant="success"]) slot[name="icon"]::slotted(*) {
-  color: var(--sgds-success-color);
+  color: var(--sgds-success-color-default);
 }
 
 :host([variant="danger"]) slot[name="icon"]::slotted(*) {
-  color: var(--sgds-danger-color);
+  color: var(--sgds-danger-color-default);
 }
 
 :host([variant="warning"]) slot[name="icon"]::slotted(*) {
-  color: var(--sgds-warning-color);
+  color: var(--sgds-warning-color-default);
 }
 
 .toast {
@@ -21,7 +21,7 @@
   gap: var(--sgds-gap-xs);
   padding: var(--sgds-padding-md);
   background-clip: padding-box;
-  background-color:  var(--sgds-neutral-bg-inverse);
+  background-color:  var(--sgds-surface-default);
   border-radius: var(--sgds-border-radius-md);
   pointer-events: auto;
   width: 320px;
@@ -47,12 +47,12 @@
 }
 
 .toast-body span {
-  color: var(--sgds-default-color-subtle);
+  color: var(--sgds-color-subtle);
 }
 
 .toast-action {
   word-wrap: break-word;
-  color: var(--sgds-primary-color);
+  color: var(--sgds-primary-color-default);
 }
 
 .toast-header strong {

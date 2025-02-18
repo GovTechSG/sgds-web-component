@@ -7,9 +7,9 @@
   display: flex;
   flex-direction: column;
   gap: var(--sgds-gap-md);
-  background-color: var(--sgds-default-bg-emphasis);
+  background-color: var(--sgds-bg-fixed-dark);
   padding: var(--sgds-padding-xl) var(--sgds-padding-2-xl);
-  border-bottom: var(--sgds-border-width-1) solid var(--sgds-default-border-color);
+  border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-default);
 }
 
 .footer-header {
@@ -20,10 +20,10 @@
 }
 
 slot[name="title"]::slotted(*) {
-  --sgds-header-color: var(--sgds-default-color-inverse);
+  --sgds-header-color-default: var(--sgds-color-inverse);
   --sgds-font-size-6: var(--sgds-font-size-5);
   --sgds-margin-2-xs: var(--sgds-margin-none);
-  color: var(--sgds-header-color, --sgds-default-color-inverse);
+  color: var(--sgds-header-color-default, --sgds-color-inverse);
   font-size: var(--sgds-font-size-6, --sgds-font-size-5);
   font-weight: var(--sgds-font-weight-bold);
   line-height: var(--sgds-line-height-heading);
@@ -35,7 +35,7 @@ slot[name="title"]::slotted(*) {
 slot[name="description"]::slotted(*) {
   --sgds-font-size-2: var(--sgds-font-size-3);
   --sgds-paragraph-spacing-xl: var(--sgds-margin-none);
-  color: var(--sgds-default-color-muted);
+  color: var(--sgds-color-muted);
   font-size: var(--sgds-font-size-2, --sgds-font-size-3);
   margin-bottom: var(--sgds-paragraph-spacing-xl, --sgds-margin-none);
   margin-top: var(--sgds-margin-none);
@@ -57,13 +57,13 @@ slot[name="description"]::slotted(*) {
 }
 
 .footer-mandatory-links ul li a {
-  color: var(--sgds-default-color-muted);
+  color: var(--sgds-color-muted);
   text-decoration: none;
 }
 
 .footer-mandatory-links ul li a:hover,
 .footer-mandatory-links ul li a:focus {
-  color: var(--sgds-default-color-inverse);
+  color: var(--sgds-color-inverse);
 }
 
 .footer-mandatory-links ul li a:focus,
@@ -76,7 +76,7 @@ slot[name="description"]::slotted(*) {
   display: flex;
   flex-direction: column;
   gap: var(--sgds-gap-md);
-  background-color: var(--sgds-default-bg-emphasis);
+  background-color: var(--sgds-bg-fixed-dark);
   padding: var(--sgds-padding-xl) var(--sgds-padding-2-xl);
 }
 
@@ -86,9 +86,9 @@ slot[name="description"]::slotted(*) {
 }
 
 slot[name="social-media"]::slotted(a) {
-  --sgds-link-color: light-dark(var(--sgds-gray-000), var(--sgds-gray-900));
-  --sgds-body-color: light-dark(var(--sgds-gray-000), var(--sgds-gray-900));
-  color: var(--sgds-body-color, --sgds-link-color);
+  --sgds-link-color-default: light-dark(var(--sgds-gray-000), var(--sgds-gray-900));
+  --sgds-body-color-default: light-dark(var(--sgds-gray-000), var(--sgds-gray-900));
+  color: var(--sgds-body-color-default, --sgds-link-color-default);
   display: inline-flex;
 }
 
@@ -119,7 +119,7 @@ slot[name="social-media"]::slotted(a:focus-visible) {
 }
 
 .footer-copyrights {
-  color: var(--sgds-default-color-muted);
+  color: var(--sgds-color-muted);
 }
 
 @container footer (max-width: 711px) {

@@ -12,7 +12,7 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   background-color: var(--sgds-body-bg);
-  color: var(--sgds-body-color);
+  color: var(--sgds-body-color-default);
   font-family: var(--sgds-body-font-family);
   font-size: var(--sgds-body-font-size);
   font-weight: var(--sgds-body-font-weight);

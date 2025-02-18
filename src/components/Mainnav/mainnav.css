@@ -1,5 +1,5 @@
 nav {
-  background-color: var(--sgds-neutral-bg-inverse);
+  background-color: var(--sgds-surface-default);
   box-shadow: 0px 2px 2px 0px rgba(14, 14, 14, 0.08);
 }
 
@@ -51,9 +51,9 @@ nav > .navbar-body {
   bottom: 0;
   z-index: 2000;
   width: 100%;
-  background-color: var(--sgds-default-bg-surface);
+  background-color: var(--sgds-surface-default);
   padding: var(--sgds-padding-md) 0px;
-  border-top: var(--sgds-border-width-1) solid var(--sgds-default-border-color-translucent);
+  border-top: var(--sgds-border-width-1) solid var(--sgds-border-color-translucent);
   box-shadow: 0px 2px 2px 0px rgba(14, 14, 14, 0.08);
   transition: transform 0.2s ease-in-out;
 }

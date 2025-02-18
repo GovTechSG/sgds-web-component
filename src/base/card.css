@@ -3,11 +3,11 @@
 }
 
 :host(:not([hideBorder])) .card {
-  border: var(--sgds-border-width-1) solid var(--sgds-default-border-color-muted);
+  border: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }
 
 :host([tinted]) .card {
-  background-color: var(--sgds-default-bg-translucent-subtle);
+  background-color: var(--sgds-bg-translucent-subtle);
   border: none;
 }
 
@@ -38,7 +38,7 @@
 .card {
   word-wrap: break-word;
   background-clip: border-box;
-  background-color: var(--sgds-default-bg-surface);
+  background-color: var(--sgds-surface-default);
   border-radius: var(--sgds-border-radius-md);
   display: flex;
   flex-direction: column;
@@ -86,7 +86,7 @@ a.card:not(.disabled):focus-visible {
   flex-direction: column;
   gap: var(--sgds-gap-lg);
   flex: 1;
-  color: var(--sgds-body-color);
+  color: var(--sgds-body-color-default);
   padding: var(--sgds-padding-xl);
 }
 
@@ -95,7 +95,7 @@ a.card:not(.disabled):focus-visible {
   --sgds-font-size-6: var(--sgds-font-size-4);
   --sgds-margin-2-xs: var(--sgds-margin-none);
   --sgds-font-weight-bold: var(--sgds-font-weight-semibold);
-  color: var(--sgds-body-color);
+  color: var(--sgds-body-color-default);
   font-size: var(--sgds-font-size-4);
   font-weight: var(--sgds-font-weight-semibold);
   margin-bottom: var(--sgds-margin-none);
@@ -107,17 +107,17 @@ a.card:not(.disabled):focus-visible {
 }
 
 slot[name="title"]::slotted(a) {
-  --sgds-link-color: var(--sgds-primary-color);
+  --sgds-link-color-default: var(--sgds-primary-color-default);
   --sgds-font-size-2: var(--sgds-font-size-4);
   --sgds-font-weight-regular: var(--sgds-font-weight-semibold);
-  color: var(--sgds-link-color);
+  color: var(--sgds-link-color-default);
   font-size: var(--sgds-font-size-4);
   font-weight: var(--sgds-font-weight-semibold);
   text-decoration: none !important;
 }
 
 slot[name="description"]::slotted(*) {
-  color: var(--sgds-default-color-subtle);
+  color: var(--sgds-color-subtle);
 }
 
 slot[name="image"]::slotted(img) {
@@ -139,10 +139,10 @@ slot[name="link"]::slotted(*) {
 }
 
 slot[name="link"]::slotted(a) {
-  --sgds-link-color: var(--sgds-primary-color);
+  --sgds-link-color-default: var(--sgds-primary-color-default);
   display: inline-flex;
   gap: var(--sgds-gap-2-xs);
-  color: var(--sgds-link-color);
+  color: var(--sgds-link-color-default);
   text-decoration: none !important;
 }
 

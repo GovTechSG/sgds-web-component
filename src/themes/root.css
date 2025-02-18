@@ -1,92 +1,94 @@
 :root {
-  /* Primitive - Primary Color */
-  --sgds-purple-100: #eae8ff;
-  --sgds-purple-200: #d1ceff;
-  --sgds-purple-300: #b1acff;
-  --sgds-purple-400: #9288f0;
-  --sgds-purple-500: #7562e2;
-  --sgds-purple-600: #5a42c0;
-  --sgds-purple-700: #42209f;
-  --sgds-purple-800: #2d007e;
-  --sgds-purple-900: #1c005e;
+  /* Primitive - Product Primary Color */
+  --sgds-product-primary-100: #f4f2fe;
+  --sgds-product-primary-200: #e1dbfb;
+  --sgds-product-primary-300: #c8bdf7;
+  --sgds-product-primary-400: #a999f3;
+  --sgds-product-primary-500: #8a72ef;
+  --sgds-product-primary-600: #6b4feb;
+  --sgds-product-primary-700: #523abc;
+  --sgds-product-primary-800: #3c2b8a;
+  --sgds-product-primary-900: #2a1e61;
 
-  /* Primitive - Secondary Color */
-  --sgds-cyan-100: #c8f1f9;
-  --sgds-cyan-200: #abd9e2;
-  --sgds-cyan-300: #85bbc5;
-  --sgds-cyan-400: #5b9da9;
-  --sgds-cyan-500: #228190;
-  --sgds-cyan-600: #006472;
-  --sgds-cyan-700: #004755;
-  --sgds-cyan-800: #002c3a;
-  --sgds-cyan-900: #001321;
+  /* Primitive - Purple Color */
+  --sgds-purple-100: #fbf0fe;
+  --sgds-purple-200: #f2d6fc;
+  --sgds-purple-300: #e6adf9;
+  --sgds-purple-400: #d983f6;
+  --sgds-purple-500: #c94cf2;
+  --sgds-purple-600: #ac1cdb;
+  --sgds-purple-700: #8516a9;
+  --sgds-purple-800: #641180;
+  --sgds-purple-900: #460c5a;
 
-  /* Primitive - Success Color */
-  --sgds-green-100: #c2f5bf;
-  --sgds-green-200: #a5dfa1;
-  --sgds-green-300: #7ec17a;
-  --sgds-green-400: #53a450;
-  --sgds-green-500: #088912;
-  --sgds-green-600: #006b00;
-  --sgds-green-700: #004d00;
-  --sgds-green-800: #003100;
-  --sgds-green-900: #001600;
+  /* Primitive - Cyan Color */
+  --sgds-cyan-100: #DBf9fd;
+  --sgds-cyan-200: #94edfa;
+  --sgds-cyan-300: #24d5ee;
+  --sgds-cyan-400: #1fb5ca;
+  --sgds-cyan-500: #1993a4;
+  --sgds-cyan-600: #147583;
+  --sgds-cyan-700: #0f5a65;
+  --sgds-cyan-800: #0b434b;
+  --sgds-cyan-900: #082e34;
 
-  /* Primitive - Info Color */
-  --sgds-blue-100: #c5f0ff;
-  --sgds-blue-200: #a7d6ff;
-  --sgds-blue-300: #7fb5ff;
-  --sgds-blue-400: #5592ff;
-  --sgds-blue-500: #216bff;
-  --sgds-blue-600: #0049dc;
-  --sgds-blue-700: #0022b9;
-  --sgds-blue-800: #000097;
-  --sgds-blue-900: #130075;
+  /* Primitive - Green Color */
+  --sgds-green-100: #e3f9ed;
+  --sgds-green-200: #b1edcb;
+  --sgds-green-300: #62db96;
+  --sgds-green-400: #16bd5e;
+  --sgds-green-500: #129a4d;
+  --sgds-green-600: #0e7c3d;
+  --sgds-green-700: #0b5e2f;
+  --sgds-green-800: #084523;
+  --sgds-green-900: #063119;
 
-  /* Primitive - Warning Color */
-  --sgds-yellow-100: #ffe6c6;
-  --sgds-yellow-200: #f3cda8;
-  --sgds-yellow-300: #d7ab81;
-  --sgds-yellow-400: #bc8a57;
-  --sgds-yellow-500: #a5681f;
-  --sgds-yellow-600: #864b00;
-  --sgds-yellow-700: #672f00;
-  --sgds-yellow-800: #491200;
-  --sgds-yellow-900: #2d0000;
+  /* Primitive - Blue Color */
+  --sgds-blue-100: #ecf5fe;
+  --sgds-blue-200: #c8e2fb;
+  --sgds-blue-300: #96c7f7;
+  --sgds-blue-400: #60aaf4;
+  --sgds-blue-500: #1e87ef;
+  --sgds-blue-600: #0269d0;
+  --sgds-blue-700: #0151a0;
+  --sgds-blue-800: #013c77;
+  --sgds-blue-900: #012a54;
 
-  /* Primitive - Danger Color */
-  --sgds-red-100: #ffdac8;
-  --sgds-red-200: #ffbdaa;
-  --sgds-red-300: #ff9782;
-  --sgds-red-400: #f06e57;
-  --sgds-red-500: #dd361c;
-  --sgds-red-600: #b90000;
-  --sgds-red-700: #950000;
-  --sgds-red-800: #720000;
-  --sgds-red-900: #4f0000;
+  /* Primitive - Yellow Color */
+  --sgds-yellow-100: #fef4cb;
+  --sgds-yellow-200: #fcde63;
+  --sgds-yellow-300: #e5bf29;
+  --sgds-yellow-400: #c2a223;
+  --sgds-yellow-500: #9d841c;
+  --sgds-yellow-600: #7e6917;
+  --sgds-yellow-700: #605111;
+  --sgds-yellow-800: #483c0d;
+  --sgds-yellow-900: #322909;
+
+  /* Primitive - Red Color */
+  --sgds-red-100: #fcf1f1;
+  --sgds-red-200: #f8d7d7;
+  --sgds-red-300: #f1b2b2;
+  --sgds-red-400: #e98b8b;
+  --sgds-red-500: #e05959;
+  --sgds-red-600: #cf2323;
+  --sgds-red-700: #a11b1b;
+  --sgds-red-800: #791414;
+  --sgds-red-900: #550e0e;
 
   /* Primitive - Gray Color */
   --sgds-gray-000: #ffffff;
-  --sgds-gray-100: #eaeaea;
-  --sgds-gray-200: #d2d2d2;
-  --sgds-gray-300: #b2b2b2;
-  --sgds-gray-400: #939393;
-  --sgds-gray-500: #757575;
-  --sgds-gray-600: #595959;
-  --sgds-gray-700: #3e3e3e;
-  --sgds-gray-800: #252525;
-  --sgds-gray-900: #0e0e0e;
-
-  /* Primitive - Brand Color */
-  --sgds-brand-100: var(--sgds-purple-100);
-  --sgds-brand-200: var(--sgds-purple-200);
-  --sgds-brand-300: var(--sgds-purple-300);
-  --sgds-brand-400: var(--sgds-purple-400);
-  --sgds-brand-500: var(--sgds-purple-500);
-  --sgds-brand-600: var(--sgds-purple-600);
-  --sgds-brand-700: var(--sgds-purple-700);
-  --sgds-brand-800: var(--sgds-purple-800);
-  --sgds-brand-900: var(--sgds-purple-900);
+  --sgds-gray-100: #f3f3f3;
+  --sgds-gray-200: #dfdfdf;
+  --sgds-gray-300: #c6c6c6;
+  --sgds-gray-400: #a5a5a5;
+  --sgds-gray-500: #868686;
+  --sgds-gray-600: #6b6b6b;
+  --sgds-gray-700: #525252;
+  --sgds-gray-800: #3b3b3b;
+  --sgds-gray-900: #2a2a2a;
+  --sgds-gray-1000: #1a1a1a;
+  --sgds-gray-1100: #0e0e0e;
 
   /* Primitive - Border Width */
   --sgds-border-width-0: 0px;
@@ -102,8 +104,9 @@
   --sgds-border-radius-xs: 2px;
   --sgds-border-radius-sm: 4px;
   --sgds-border-radius-md: 8px;
-  --sgds-border-radius-lg: 16px;
-  --sgds-border-radius-xl: 24px;
+  --sgds-border-radius-lg: 12px;
+  --sgds-border-radius-xl: 16px;
+  --sgds-border-radius-2-xl: 24px;
   --sgds-border-radius-full: 999px;
   --sgds-form-border-radius-none: var(--sgds-border-radius-none);
   --sgds-form-border-radius-xs: var(--sgds-border-radius-xs);
@@ -209,6 +212,7 @@
   --sgds-dimension-40: 40px;
   --sgds-dimension-48: 48px;
   --sgds-dimension-56: 56px;
+  --sgds-dimension-60: 60px;
   --sgds-dimension-64: 64px;
   --sgds-dimension-72: 72px;
   --sgds-dimension-80: 80px;
@@ -223,11 +227,13 @@
   --sgds-dimension-224: 224px;
   --sgds-dimension-256: 256px;
   --sgds-dimension-280: 280px;
+  --sgds-dimension-288: 288px;
   --sgds-dimension-320: 320px;
+  --sgds-dimension-384: 384px;
   --sgds-dimension-480: 480px;
   --sgds-dimension-688: 688px;
 
-  /* Semantic - Spacer */
+  /* Semantic - Padding */
   --sgds-padding-none: var(--sgds-spacer-0);
   --sgds-padding-3-xs: var(--sgds-spacer-1);
   --sgds-padding-2-xs: var(--sgds-spacer-2);
@@ -238,6 +244,7 @@
   --sgds-padding-xl: var(--sgds-spacer-7);
   --sgds-padding-2-xl: var(--sgds-spacer-8);
   --sgds-padding-3-xl: var(--sgds-spacer-9);
+  --sgds-padding-4-xl: var(--sgds-spacer-10);
   --sgds-form-padding-x: var(--sgds-padding-md);
   --sgds-form-padding-y: var(--sgds-padding-sm);
   --sgds-form-padding-inline-xs: var(--sgds-padding-3-xs);
@@ -291,8 +298,7 @@
   --sgds-form-width-3-xl: var(--sgds-dimension-72);
   --sgds-form-width-4-xl: var(--sgds-dimension-80);
 
-  /* Semantic - Image Size */
-  --sgds-form-icon-size-xs: var(--sgds-icon-size-xs);
+  /* Semantic - Form Icon Size */
   --sgds-form-icon-size-sm: var(--sgds-icon-size-sm);
   --sgds-form-icon-size-md: var(--sgds-icon-size-md);
   --sgds-form-icon-size-lg: var(--sgds-icon-size-lg);

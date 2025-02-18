@@ -1,10 +1,10 @@
 :host {
-  --sgds-spinner-bg: var(--sgds-primary-bg);
+  --sgds-spinner-bg: var(--sgds-primary-surface-default);
   display: inline-flex;
 }
 
 :host([variant="neutral"]) {
-  --sgds-spinner-bg: var(--sgds-neutral-color-emphasis);
+  --sgds-spinner-bg: var(--sgds-neutral-surface-default);
 }
 
 .spinner-wrapper {
@@ -20,7 +20,7 @@
   width: var(--sgds-dimension-32);
   height: var(--sgds-dimension-32);
   animation: spinner 0.75s linear infinite;
-  border: 0.25em solid var(--sgds-alternate-bg);
+  border: 0.25em solid var(--sgds-bg-translucent);
   border-right: 0.25em solid var(--sgds-spinner-bg);
   color: var(--sgds-spinner-color);
 }

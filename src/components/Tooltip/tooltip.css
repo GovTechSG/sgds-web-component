@@ -24,9 +24,9 @@
 }
 
 .tooltip-inner {
-  background-color: var(--sgds-neutral-bg);
+  background-color: var(--sgds-neutral-bg-default);
   border-radius: var(--sgds-border-radius-md);
-  color: var(--sgds-default-color-on-dark);
+  color: var(--sgds-color-fixed-light);
   font-size: var(--sgds-font-size-1);
   max-width: var(--sgds-dimension-320);
   padding: var(--sgds-padding-xs) var(--sgds-padding-sm);

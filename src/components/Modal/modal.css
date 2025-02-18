@@ -11,11 +11,11 @@
 }
 
 :host(:not([size="fullscreen"])) .modal-panel {
-  background-color: var(--sgds-neutral-bg-inverse);
+  background-color: var(--sgds-surface-default);
 }
 
 :host([size="fullscreen"]) .modal-overlay {
-  background-color: var(--sgds-neutral-bg-inverse);
+  background-color: var(--sgds-surface-default);
 }
 
 .modal {
@@ -88,7 +88,7 @@ slot[name="title"]::slotted(*) {
 slot[name="description"]::slotted(*) {
   --sgds-paragraph-spacing-xl: var(--sgds-margin-none);
   margin: var(--sgds-margin-none, --sgds-paragraph-spacing-xl);
-  color: var(--sgds-default-color-subtle);
+  color: var(--sgds-color-subtle);
   line-height: var(--sgds-line-height-body);
 }
 
@@ -122,7 +122,7 @@ slot[name="description"]::slotted(*) {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: var(--sgds-default-bg-overlay);
+  background-color: var(--sgds-bg-overlay);
 }
 
 [hidden] {

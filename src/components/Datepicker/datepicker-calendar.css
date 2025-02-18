@@ -31,7 +31,7 @@ button.month.active:not(.selected-ends),
 button.year.active:not(.selected-ends)
  {
   cursor: pointer;
-  background-color: var(--sgds-form-primary-bg-translucent);
+  background-color: var(--sgds-primary-surface-translucent);
   border-radius: 0;
 }
 
@@ -39,13 +39,13 @@ td[data-day]:hover:not(.disabled):not(.selected-ends):not(.active),
 button.month:hover:not(.active),
 button.year:hover:not(.active) {
   cursor: pointer;
-  background-color: var(--sgds-form-bg-translucent);
+  background-color: var(--sgds-bg-translucent-subtle);
 }
 
 td[data-day]:focus:not(.disabled):not(.selected-ends):not(.active),
 button.month:focus:not(.active),
 button.year:focus:not(.active) {
-  background-color: var(--sgds-form-bg-translucent);
+  background-color: var(--sgds-bg-translucent-subtle);
 }
 
 td[data-day]:focus,
@@ -62,7 +62,7 @@ button.year.active:not(.selected-ends):focus {
 
 button.year.active {
   cursor: pointer;
-  background-color: var(--sgds-form-primary-bg-translucent);
+  background-color: var(--sgds-primary-surface-translucent);
 }
 
 td, th {
@@ -85,8 +85,8 @@ td[data-day] {
 td[data-day].active.selected-ends,
 button.month.active.selected-ends,
 button.year.active.selected-ends  {
-  background-color: var(--sgds-form-primary-bg);
-  color: var(--sgds-form-color-on-dark);
+  background-color: var(--sgds-form-primary-surface-default);
+  color: var(--sgds-form-color-fixed-light);
 }
 
 td[data-day].active.selected-ends:hover,
@@ -95,7 +95,7 @@ button.year.active.selected-ends:hover,
 td[data-day].active.selected-ends:focus,
 button.month.active.selected-ends:focus,
 button.year.active.selected-ends:focus  {
-  background-color: var(--sgds-form-primary-bg-emphasis);
+  background-color: var(--sgds-form-primary-surface-emphasis);
 }
 
 td[data-day].disabled {
@@ -111,7 +111,7 @@ td[data-day].disabled {
 }
 
 .today::after {
-  background-color: var(--sgds-form-primary-bg);
+  background-color: var(--sgds-form-primary-surface-default);
   content: ".";
   line-height: 4px;
   width: 4px;

@@ -3,45 +3,45 @@
 }
 
 :host([variant="success"]) .badge {
-  background-color: var(--sgds-success-bg);
+  background-color: var(--sgds-success-surface-default);
 }
 
 :host([variant="danger"]) .badge {
-  background-color: var(--sgds-danger-bg);
+  background-color: var(--sgds-danger-surface-default);
 }
 
 :host([variant="warning"]) .badge {
-  background-color: var(--sgds-warning-bg);
+  background-color: var(--sgds-warning-surface-default);
 }
 
 :host([variant="neutral"]) .badge {
-  background-color: var(--sgds-neutral-bg);
+  background-color: var(--sgds-neutral-surface-default);
 }
 
 :host([variant="success"][outlined]) .badge {
-  background-color: var(--sgds-success-bg-subtle);
-  border: var(--sgds-border-width-1) solid var(--sgds-success-border-color-subtle);
+  background-color: var(--sgds-success-surface-muted);
+  border: var(--sgds-border-width-1) solid var(--sgds-success-border-color-default);
 }
 
 :host([variant="danger"][outlined]) .badge {
-  background-color: var(--sgds-danger-bg-subtle);
-  border: var(--sgds-border-width-1) solid var(--sgds-danger-border-color-subtle);
+  background-color: var(--sgds-danger-surface-muted);
+  border: var(--sgds-border-width-1) solid var(--sgds-danger-border-color-default);
 }
 
 :host([variant="warning"][outlined]) .badge {
-  background-color: var(--sgds-warning-bg-subtle);
-  border: var(--sgds-border-width-1) solid var(--sgds-warning-border-color-subtle);
+  background-color: var(--sgds-warning-surface-muted);
+  border: var(--sgds-border-width-1) solid var(--sgds-warning-border-color-default);
 }
 
 :host([variant="neutral"][outlined]) .badge {
-  background-color: var(--sgds-neutral-bg-subtle);
-  border: var(--sgds-border-width-1) solid var(--sgds-neutral-border-color-subtle);
+  background-color: var(--sgds-neutral-surface-muted);
+  border: var(--sgds-border-width-1) solid var(--sgds-neutral-border-color-default);
 }
 
 .badge {
-  background-color: var(--sgds-primary-bg);
-  color: var(--sgds-default-color-on-dark);
-  border: var(--sgds-border-width-1) solid var(--sgds-default-border-color-transparent);
+  background-color: var(--sgds-primary-surface-default);
+  color: var(--sgds-color-fixed-light);
+  border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
   border-radius: var(--sgds-border-radius-sm);
   font-size: var(--sgds-font-size-1);
   padding: 0 var(--sgds-padding-2-xs);
@@ -54,9 +54,9 @@
 }
 
 .badge.outlined {
-  color: var(--sgds-default-color-on-light);
-  background-color: var(--sgds-primary-bg-subtle);
-  border: var(--sgds-border-width-1) solid var(--sgds-primary-border-color-subtle);
+  color: var(--sgds-color-fixed-dark);
+  background-color: var(--sgds-primary-surface-muted);
+  border: var(--sgds-border-width-1) solid var(--sgds-primary-border-color-default);
 }
 
 .badge-label {

@@ -16,7 +16,7 @@
 }
 
 .datepicker.dropdown-menu.show {
-  background-color: var(--sgds-default-bg-surface);
+  background-color: var(--sgds-form-surface-default);
   padding: var(--sgds-form-padding-y) var(--sgds-form-padding-x);
   display: flex;
   flex-direction: column;

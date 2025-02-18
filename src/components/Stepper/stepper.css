@@ -52,7 +52,7 @@
   left: calc(-50% + 16px);
   width: calc(100% - var(--sgds-dimension-32));
   height: var(--sgds-dimension-2);
-  background: var(--sgds-default-bg-translucent);
+  background: var(--sgds-bg-translucent);
 }
 
 .stepper.vertical .stepper-item-container:not(:last-child) .stepper-item:after {
@@ -63,14 +63,14 @@
   left: 15px;
   width: var(--sgds-dimension-2);
   height: calc(100% - var(--sgds-dimension-32));
-  background: var(--sgds-default-bg-translucent);
+  background: var(--sgds-bg-translucent);
 }
 
 .stepper.horizontal .stepper-item-container .stepper-item.is-active:before,
 .stepper.horizontal .stepper-item-container .stepper-item.is-completed:before,
 .stepper.vertical .stepper-item-container .stepper-item.is-completed:after,
 .stepper.vertical .stepper-item-container .stepper-item.is-completed:after {
-  background: var(--sgds-primary-bg);
+  background: var(--sgds-primary-bg-default);
 }
 
 .stepper .stepper-item.is-clickable {
@@ -81,11 +81,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--sgds-default-bg-translucent);
-  border: var(--sgds-border-width-2) solid var(--sgds-default-border-color-transparent);
+  background: var(--sgds-bg-translucent);
+  border: var(--sgds-border-width-2) solid var(--sgds-border-color-transparent);
   border-radius: 50%;
   z-index: 1;
-  color: var(--sgds-default-color);
+  color: var(--sgds-color-default);
   height: var(--sgds-dimension-32);
   width: var(--sgds-dimension-32);
 }
@@ -101,27 +101,27 @@
 }
 
 .stepper .stepper-item:not(.is-active):not(.is-completed) .stepper-detail {
-  color: var(--sgds-default-color-subtle);
+  color: var(--sgds-color-subtle);
 }
 
 .stepper .stepper-item.is-clickable:hover .stepper-marker {
-  background-color: var(--sgds-primary-bg-emphasis);
-  border-color: var(--sgds-default-border-color-transparent);
-  color: var(--sgds-default-color-on-dark);
+  background-color: var(--sgds-primary-surface-emphasis);
+  border-color: var(--sgds-border-color-transparent);
+  color: var(--sgds-color-fixed-light);
 }
 
 .stepper .stepper-item.is-clickable .stepper-detail,
 .stepper.clickable .stepper-item.is-active .stepper-detail {
-  color: var(--sgds-primary-color);
+  color: var(--sgds-primary-color-default);
 }
 
 .stepper .stepper-item.is-active .stepper-marker {
-  background-color: var(--sgds-primary-bg);
-  color:  var(--sgds-default-color-on-dark);
+  background-color: var(--sgds-primary-bg-default);
+  color:  var(--sgds-color-fixed-light);
 }
 
 .stepper .stepper-item.is-completed .stepper-marker {
-  background-color: var(--sgds-default-bg);
-  border: var(--sgds-border-width-2) solid var(--sgds-primary-border-color);
-  color: var(--sgds-primary-color);
+  background-color: var(--sgds-bg-default);
+  border: var(--sgds-border-width-2) solid var(--sgds-primary-border-color-default);
+  color: var(--sgds-primary-color-default);
 }

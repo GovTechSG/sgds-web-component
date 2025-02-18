@@ -1,9 +1,9 @@
 .dropdown-menu {
   background-clip: padding-box;
-  background-color: var(--sgds-neutral-bg-inverse);
+  background-color: var(--sgds-surface-default);
   border-radius: var(--sgds-border-radius-md);
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 4px 8px 0px rgba(0, 0, 0, 0.14);
-  color: var(--sgds-default-color);
+  color: var(--sgds-color-default);
   display: none;
   list-style: none;
   margin: 0;

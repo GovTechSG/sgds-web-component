@@ -1,9 +1,9 @@
 /* :host {
-  --sgds-progress-bar-bg: var(--sgds-primary-bg);
+  --sgds-progress-bar-bg: var(--sgds-primary-surface-default);
 }
 
 :host([variant="neutral"]) {
-  --sgds-progress-bar-bg: var(--sgds-default-color-emphasis);
+  --sgds-progress-bar-bg: var(--sgds-neutral-surface-default);
 } */
 
 progress {
@@ -18,7 +18,7 @@ progress {
 }
 
 .progress {
-  background-color: var(--sgds-default-bg-translucent);
+  background-color: var(--sgds-bg-translucent);
 }
 
 .progress-bar {
@@ -30,19 +30,19 @@ progress {
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  background-color: var(--sgds-primary-bg);
+  background-color: var(--sgds-primary-surface-default);
   transition: width 0.6s ease;
   height: var(--sgds-dimension-4);
 }
 
 :host([variant="neutral"]) .progress-bar {
-  background-color: var(--sgds-default-color-emphasis);
+  background-color: var(--sgds-neutral-surface-default);
 }
 
 .label {
   white-space: nowrap;
   font-size: var(--sgds-font-size-1);
-  color: var(--sgds-default-color);
+  color: var(--sgds-color-default);
 }
 
 @media (prefers-reduced-motion: reduce) {

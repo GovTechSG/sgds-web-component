@@ -16,7 +16,7 @@ svg {
   width: var(--sgds-dimension-48);
   height: var(--sgds-dimension-48);
   background-color: var(--sgds-bg-transparent);
-  border: 1px solid var(--sgds-border-color);
+  border: 1px solid var(--sgds-border-color-default);
   border-radius: var(--sgds-border-radius-md);
   display: flex;
   justify-content: center;
@@ -29,7 +29,7 @@ svg {
   }
 }
 .page-link:not(.ellipsis):hover, .page-link:focus{
-  color: var(--sgds-primary-color);
+  color: var(--sgds-primary-color-default);
   background-color: var(--sgds-primary-bg-translucent);
   z-index: 2;
 }
@@ -44,9 +44,9 @@ svg {
 
 .page-item.active .page-link {
   z-index: 3;
-  color: var(--sgds-default-color-on-dark);
+  color: var(--sgds-color-fixed-light);
   border-color: var(--sgds-info);
-  background-color: var(--sgds-primary-bg);
+  background-color: var(--sgds-primary-bg-default);
 }
 .page-item.disabled .page-link {
   opacity: var(--sgds-opacity-50);
