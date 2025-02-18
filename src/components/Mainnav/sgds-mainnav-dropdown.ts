@@ -22,6 +22,7 @@ const SPACE = " ";
  */
 export class SgdsMainnavDropdown extends SgdsElement {
   static styles = [...SgdsElement.styles, dropdownStyle, dropdownMenuStyle, mainnavDropdownStyle];
+  /** @internal */
   static dependencies = {
     "sgds-dropdown": SgdsDropdown,
     "sgds-dropdown-item": SgdsDropdownItem,

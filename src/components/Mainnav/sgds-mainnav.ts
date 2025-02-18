@@ -42,6 +42,7 @@ const SIZES = {
  */
 export class SgdsMainnav extends SgdsElement {
   static styles = [...SgdsElement.styles, mainnavStyle];
+  /** @internal */
   static dependencies = {
     "sgds-icon": SgdsIcon
   };

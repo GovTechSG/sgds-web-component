@@ -29,12 +29,8 @@ export class DatepickerInput extends SgdsInput {
   constructor() {
     super();
     this.type = "text";
-    this.hasFeedback = "both";
     this._handleBlur = () => null;
   }
-  // protected override _handleBlur() {
-  //   this.emit("sgds-blur");
-  // }
   protected override async _handleChange(e: Event) {
     this.value = this.input.value;
     this.emit("sgds-change");

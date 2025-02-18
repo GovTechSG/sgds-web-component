@@ -1273,7 +1273,11 @@ describe("datepicker input masking", () => {
   validationOnChangeMode.forEach(({ mode, value, editValue }) => {
     it(`for mode=${mode} validation happens on input change (triggered here by blur)`, async () => {
       const inputEl = await fixture<DatepickerInput>(
-        html`<sgds-datepicker-input value=${value} mode=${mode as "single" | "range"}></sgds-datepicker-input>`
+        html`<sgds-datepicker-input
+          value=${value}
+          mode=${mode as "single" | "range"}
+          hasFeedback="both"
+        ></sgds-datepicker-input>`
       );
       const invalidHandler = sinon.spy();
       inputEl.addEventListener("sgds-invalid-input", invalidHandler);
@@ -1323,7 +1327,7 @@ describe("datepicker input masking", () => {
   modesAndDigits.forEach(({ mode, dateDigits, value }) => {
     it(`for mode=${mode}, validation happens on completion of date mask`, async () => {
       const inputEl = await fixture<DatepickerInput>(
-        html`<sgds-datepicker-input mode=${mode as "single" | "range"}></sgds-datepicker-input>`
+        html`<sgds-datepicker-input mode=${mode as "single" | "range"} hasFeedback="both"></sgds-datepicker-input>`
       );
       const shadowInput = inputEl?.shadowRoot?.querySelector(".form-control-group");
       expect(inputEl.value).to.equal("");
@@ -1343,7 +1347,9 @@ describe("datepicker input masking", () => {
 
   it("for range mode, when only one date is selected and blurred, input is invalid ", async () => {
     const dateDigits = [2, 0, 0, 2, 2, 0, 2, 4];
-    const inputEl = await fixture<DatepickerInput>(html`<sgds-datepicker-input mode="range"></sgds-datepicker-input>`);
+    const inputEl = await fixture<DatepickerInput>(
+      html`<sgds-datepicker-input mode="range" hasFeedback="both"></sgds-datepicker-input>`
+    );
     const shadowInput = inputEl?.shadowRoot?.querySelector(".form-control-group");
     expect(inputEl.value).to.equal("");
     expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
@@ -1361,7 +1367,7 @@ describe("datepicker input masking", () => {
 
 describe("error message", () => {
   it("default error message can be override by user", async () => {
-    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker></sgds-datepicker>`);
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker hasFeedback></sgds-datepicker>`);
     const input = el.shadowRoot?.querySelector<DatepickerInput>("sgds-datepicker-input");
     input?.focus();
     await elementUpdated(el);

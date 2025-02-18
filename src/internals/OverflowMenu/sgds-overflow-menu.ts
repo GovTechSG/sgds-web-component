@@ -11,6 +11,7 @@ import { SgdsIcon } from "../../components/Icon/sgds-icon";
  */
 export class SgdsOverflowMenu extends SgdsElement {
   static styles = [...SgdsElement.styles, overflowMenuStyles];
+  /** @internal */
   static dependencies = {
     "sgds-dropdown": SgdsDropdown,
     "sgds-dropdown-item": SgdsDropdownItem,

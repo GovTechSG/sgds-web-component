@@ -1,10 +1,9 @@
 import { html } from "lit-html";
 
 const VariantTemplate = args => {
-  const variants = ["primary", "outlined", "danger", "ghost"];
   return html`
     <sgds-button variant="primary">Primary button</sgds-button>
-    <sgds-button variant="outlined">Outlined button</sgds-button>
+    <sgds-button variant="outline">Outline button</sgds-button>
     <sgds-button variant="danger">Danger button</sgds-button>
     <sgds-button variant="ghost">Ghost button</sgds-button>
   `;
@@ -35,7 +34,7 @@ export const Sizes = {
 const ActiveTemplate = () => {
   return html`
     <sgds-button variant="primary" active> Hover / Active </sgds-button>
-    <sgds-button variant="outlined" active> Hover / Active </sgds-button>
+    <sgds-button variant="outline" active> Hover / Active </sgds-button>
     <sgds-button variant="danger" active> Hover / Active </sgds-button>
     <sgds-button variant="ghost" active> Hover / Active </sgds-button>
   `;
@@ -52,7 +51,7 @@ export const Active = {
 export const Disabled = {
   render: () => html`
     <sgds-button variant="primary" disabled> Disabled </sgds-button>
-    <sgds-button variant="outlined" disabled> Disabled </sgds-button>
+    <sgds-button variant="outline" disabled> Disabled </sgds-button>
     <sgds-button variant="ghost" disabled> Disabled </sgds-button>
     <sgds-button variant="danger" disabled> Disabled </sgds-button>
   `,

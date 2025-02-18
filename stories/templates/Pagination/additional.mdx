@@ -12,52 +12,32 @@ a current page `currentPage` set as initial active, and set the number of data i
 </Canvas>
 
 
-## Alternative Sizes
+## Sizes
 
-By default, the size is set at `sm`. Alternatively, you could also specify `md` or `lg` to alter the sizes.
+Pagination sizes can be `sm` or `md`. By default, the size is set at `md`
 
 <Canvas of={PaginationStories.PaginationSizes}>
   <Story of={PaginationStories.PaginationSizes} />
 </Canvas>
 
-## Direction Variant
+## Variant
 
-The `directionVariant` string prop allows you to toggle between rendering text and arrow direction for the increment/decrement pages button as shown below. By default, it is set to `icon-text`, but can be also be set to just `text` or `icon`.
+There are different variants of pagination offered: `default`, `number`, `button` and `description`
 
-<Canvas of={PaginationStories.PaginationDirectionVariant}>
-  <Story of={PaginationStories.PaginationDirectionVariant} />
+- The `default` pagination includes navigation buttons and page number buttons 
+- The `number` pagination only has page number buttons 
+- The `button` pagination only has navigation buttons, typically used for mobile. 
+- The `description` pagination has navigation buttons with a description text to tell users the current page and the total pages
+
+<Canvas of={PaginationStories.PaginationVariants}>
+  <Story of={PaginationStories.PaginationVariants} />
 </Canvas>
 
-## Setting Limit
+## Navigation
 
-The `limit` prop will set the number of pages shown at any one time. It will be based on the `data.length` and `itemsPerPage` provided by user. By default, `limit` is set to **3** and `itemsperPage` is set to **5**.
+There are two types of navigation buttons to choose from `navigation="icon-button"` or `navigation="button"`
 
-To illustrate, the examples below has been set to use a dummy data `data.length` of **10** and `itemsPerPage` of **1**. So altogether, there will be a total of **10** pages in the pagination. By setting the limit to **3** or **5** or **8**, it will show the number of pages equal to the particular limit given. Do note that if `limit` is set to be of higher value than the total pages for the pagination, it will just render the total pages at one go, ignoring the `limit`.
-
-<Canvas of={PaginationStories.PaginationLimit}>
-  <Story of={PaginationStories.PaginationLimit} />
+<Canvas of={PaginationStories.Navigation}>
+  <Story of={PaginationStories.Navigation} />
 </Canvas>
 
-## Ellipsis Mode
-
-The `ellipsisOn` boolean prop allows user to skip pages using `ellipsisJump`. By default with false, it shows a disabled increment ellipsis button. Setting to true will render and allow functionality of both ellipsis direction button.
-
-<Canvas of={PaginationStories.EllipsisOn}>
-  <Story of={PaginationStories.EllipsisOn} />
-</Canvas>
-
-## Ellipsis Jump
-
-By default, `ellipsisJump` value is set to **3**. Set as desired to decrement/increment pages for the Ellipsis button. The `ellipsisJump` are set to be of limit **3**, **6**,**12** respectively. If the `ellipsisJump` is set to be of higher value than the total pages(`dataLength / itemsPerPage`) in pagination, it will decrement/increment to the end of the pages respectively.
-
-<Canvas of={PaginationStories.EllipsisJump}>
-  <Story of={PaginationStories.EllipsisJump} />
-</Canvas>
-
-## Show first and last page of pagination
-
-`showFirstPage` and `showLastPage` controls the appearance of first and last page of the component respectively. 
-
-<Canvas of={PaginationStories.ShowFirstPage}>
-  <Story of={PaginationStories.ShowFirstPage} />
-</Canvas>

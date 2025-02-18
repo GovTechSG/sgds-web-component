@@ -1,9 +1,11 @@
 :host([class^="second-level"]) .sidenav-btn {
   padding-left: var(--sgds-padding-3-xl);
   font-weight: var(--sgds-font-weight-regular);
-
 }
 
+button {
+  all: unset;
+}
 .sidenav-btn {
   width: 100%;
   text-align: initial;
@@ -11,13 +13,15 @@
   font-size: var(--sgds-font-size-2);
   border: 0;
   background: 0;
-  padding: var(--sgds-padding-sm) var(--sgds-padding-sm) var(--sgds-padding-sm) calc(var(--sgds-padding-sm) + var(--sgds-padding-2-xs));
+  padding: var(--sgds-padding-sm) var(--sgds-padding-sm) var(--sgds-padding-sm)
+    calc(var(--sgds-padding-sm) + var(--sgds-padding-2-xs));
   border-radius: var(--sgds-border-radius-md);
   display: flex;
   gap: var(--sgds-gap-xs);
   font-weight: var(--sgds-font-weight-semibold);
 
-  .caret-icon, slot[name="caret-icon"]::slotted(*) {
+  .caret-icon,
+  slot[name="caret-icon"]::slotted(*) {
     margin-left: auto;
     transition: all 0.3s ease-in-out;
     transform: rotate(180deg);
@@ -31,24 +35,55 @@
 }
 .sidenav-btn.disabled {
   opacity: var(--sgds-opacity-50);
-  cursor: not-allowed;
+  pointer-events: none;
 }
 .sidenav-btn:not(.active) {
-  .caret-icon, slot[name="caret-icon"]::slotted(*) {
+  .caret-icon,
+  slot[name="caret-icon"]::slotted(*) {
     transform: rotate(0deg);
   }
 }
-.sidenav-btn:focus:not(.disabled), .sidenav-btn:focus-visible:not(.disabled) {
+.sidenav-btn:focus:not(.disabled),
+.sidenav-btn:focus-visible:not(.disabled) {
   outline: 0;
   box-shadow: var(--sgds-box-shadow-focus);
   background-color: var(--sgds-bg-translucent-subtle);
 }
-a.sidenav-btn {
-  color: inherit;
-  text-decoration: none;
+
+.no-menu-default:focus,
+.no-menu-default:focus-visible {
+  box-shadow: var(--sgds-box-shadow-focus);
+  background-color: var(--sgds-default-bg-translucent-subtle);
+}
+.no-menu-default::slotted(a) {
+  text-decoration: none !important;
+  color: inherit !important;
+  line-height: var(--sgds-line-height-body) !important;
+  line-height: var(--sgds-line-height-body);
+  font-size: var(--sgds-font-size-2);
+  border: 0;
+  background: 0;
+  padding: var(--sgds-padding-sm) var(--sgds-padding-sm) var(--sgds-padding-sm)
+    calc(var(--sgds-padding-sm) + var(--sgds-padding-2-xs));
+  border-radius: var(--sgds-border-radius-md);
+  display: flex;
+  gap: var(--sgds-gap-xs);
+  font-weight: var(--sgds-font-weight-semibold) !important;
 }
 
-:host([class^="first-level"]) a.sidenav-btn.active {
-  color: var(--sgds-primary-color-default);
-  background-color: var(--sgds-primary-bg-translucent);
+.no-menu-default::slotted(a:focus),
+.no-menu-default::slotted(a:focus-visible) {
+  outline: 0 !important;
+  box-shadow: var(--sgds-box-shadow-focus);
+  background-color: var(--sgds-bg-translucent-subtle);
+}
+
+:host([class^="first-level"][active]) .no-menu-default::slotted(a) {
+  color: var(--sgds-primary-color-default) !important;
+  background-color: var(--sgds-primary-surface-translucent);
+}
+
+:host([class^="first-level"][disabled]) .no-menu-default::slotted(a) {
+  opacity: var(--sgds-opacity-50);
+  pointer-events: none;
 }

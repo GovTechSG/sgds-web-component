@@ -107,7 +107,12 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
   /** Marks the component as invalid. Replace the pseudo :invalid selector. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
-  /** The list of items to display in the dropdown. */
+  /** The list of items to display in the dropdown.
+   * `interface SgdsComboBoxItemData {
+   * label: string;
+   * value: string;
+   * }`
+   */
   @property({ type: Array }) menuList: SgdsComboBoxItemData[] = [];
 
   /** If true, renders multiple checkbox selection items. If false, single-select. */

@@ -14,6 +14,7 @@ import iconButtonStyles from "./icon-button.css";
  */
 export class SgdsIconButton extends ButtonElement {
   static styles = [...ButtonElement.styles, iconButtonStyles];
+  /** @internal */
   static dependencies = {
     "sgds-icon": SgdsIcon
   };
