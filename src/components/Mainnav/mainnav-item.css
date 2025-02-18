@@ -1,153 +1,164 @@
-:host([expand="always"]) .nav-link {
+:host([expand="always"]) ::slotted(a) {
+  min-height: 100%;
   padding: 0px var(--sgds-padding-md);
   border-bottom: var(--sgds-border-width-4) solid transparent;
 }
 
 @media screen and (min-width: 576px) {
-  :host([expand="sm"]) .nav-link {
+  :host([expand="sm"]) ::slotted(a) {
+    min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
 
-  :host([expand="sm"]) .nav-link:not(.disabled).active {
-    color: var(--sgds-primary-color-default);
+  :host(:not([disabled])[active][expand="sm"]) ::slotted(a) {
     border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
   }
 
-  :host([expand="sm"]) .nav-link:focus-visible {
+  :host([expand="sm"]) ::slotted(a:focus-visible) {
     box-shadow: var(--sgds-box-shadow-focus);
   }
 }
 
 @media screen and (min-width: 768px) {
-  :host([expand="md"]) .nav-link {
+  :host([expand="md"]) ::slotted(a) {
+    min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
 
-  :host([expand="md"]) .nav-link:not(.disabled).active {
-    color: var(--sgds-primary-color-default);
+  :host(:not([disabled])[active][expand="md"]) ::slotted(a) {
     border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
   }
 
-  :host([expand="md"]) .nav-link:focus-visible {
+  :host([expand="md"]) ::slotted(a:focus-visible) {
     box-shadow: var(--sgds-box-shadow-focus);
   }
 }
 
 @media screen and (min-width: 992px) {
-  :host([expand="lg"]) .nav-link {
+  :host([expand="lg"]) ::slotted(a) {
+    min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
 
-  :host([expand="lg"]) .nav-link:not(.disabled).active {
-    color: var(--sgds-primary-color-default);
+  :host(:not([disabled])[active][expand="lg"]) ::slotted(a) {
     border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
   }
   
-  :host([expand="lg"]) .nav-link:focus-visible {
+  :host([expand="lg"]) ::slotted(a:focus-visible) {
     box-shadow: var(--sgds-box-shadow-focus);
   }
 }
 
 @media screen and (min-width: 1200px) {
-  :host([expand="xl"]) .nav-link {
+  :host([expand="xl"]) ::slotted(a) {
+    min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
 
-  :host([expand="xl"]) .nav-link:not(.disabled).active {
-    color: var(--sgds-primary-color-default);
+  :host(:not([disabled])[active][expand="xl"]) ::slotted(a) {
     border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
   }
 
-  :host([expand="xl"]) .nav-link:focus-visible {
+  :host([expand="xl"]) ::slotted(a:focus-visible) {
     box-shadow: var(--sgds-box-shadow-focus);
   }
 }
 
 @media screen and (min-width: 1400px) {
-  :host([expand="xxl"]) .nav-link {
+  :host([expand="xxl"]) ::slotted(a) {
+    min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
 
-  :host([expand="xxl"]) .nav-link:not(.disabled).active {
-    color: var(--sgds-primary-color-default);
+  :host(:not([disabled])[active][expand="xxl"]) ::slotted(a) {
     border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
   }
 
-  :host([expand="xxl"]) .nav-link:focus-visible {
+  :host([expand="xxl"]) ::slotted(a:focus-visible) {
     box-shadow: var(--sgds-box-shadow-focus);
   }
 }
 
 @media screen and (max-width: 576px) {
-  :host([expand="sm"]) .nav-link:not(.disabled).active {
+  :host(:not([disabled])[active][expand="sm"]) ::slotted(a) {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
 @media screen and (max-width: 768px) {
-  :host([expand="md"]) .nav-link:not(.disabled).active {
+  :host(:not([disabled])[active][expand="md"]) ::slotted(a) {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
 @media screen and (max-width: 992px) {
-  :host([expand="lg"]) .nav-link:not(.disabled).active {
+  :host(:not([disabled])[active][expand="lg"]) ::slotted(a) {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
 @media screen and (max-width: 1200px) {
-  :host([expand="xl"]) .nav-link:not(.disabled).active {
+  :host(:not([disabled])[active][expand="xl"]) ::slotted(a) {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
 @media screen and (max-width: 1400px) {
-  :host([expand="xxl"]) .nav-link:not(.disabled).active {
+  :host(:not([disabled])[active][expand="xxl"]) ::slotted(a) {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
-.nav-link {
+::slotted(a) {
+  --sgds-link-color-default: var(--sgds-color-default);
   display: flex;
   cursor: pointer;
-  min-height: 100%;
+  height: auto !important;
+  text-decoration: none !important;
   align-items: center;
   text-decoration: none;
-  color: var(--sgds-color-default);
+  color: var(--sgds-link-color-default, var(--sgds-color-default));
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
 }
 
 @media screen and (max-width: 768px) {
-  .nav-link {
+  ::slotted(a) {
     padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
   }
 }
 
-.nav-link:not(.disabled).active {
-  color: var(--sgds-primary-color-default);
+:host(:not([disabled])[active]) ::slotted(a) {
+  --sgds-link-color-default: var(--sgds-primary-color-default);
+  color: var(--sgds-link-color-default, var(--sgds-primary-color-default));
 }
 
-.nav-link:not(.disabled):hover {
-  color: var(--sgds-primary-color-default);
+:host([disabled]) ::slotted(a:hover) {
+  --sgds-link-color-emphasis: var(--sgds-color-default);
+  color: var(--sgds-link-color-emphasis, var(--sgds-color-default));
 }
 
-.nav-link:focus,
-.nav-link:focus-visible {
+:host(:not([disabled])) ::slotted(a:hover) {
+  --sgds-link-color-emphasis: var(--sgds-primary-color-default);
+  color: var(--sgds-link-color-emphasis, var(--sgds-primary-color-default));
+}
+
+::slotted(a:focus),
+::slotted(a:focus-visible) {
   outline: 0;
 }
 
-.nav-link:focus-visible {
+::slotted(a:focus-visible) {
+  --sgds-link-color-emphasis: var(--sgds-primary-color-default);
+  color: var(--sgds-link-color-emphasis, var(--sgds-primary-color-default));
   box-shadow: var(--sgds-box-shadow-focus) inset;
-  color: var(--sgds-primary-color-default);
 }
 
-.nav-link.disabled {
+:host([disabled]) ::slotted(a) {
   opacity: var(--sgds-opacity-50);
   cursor: not-allowed;
 }
