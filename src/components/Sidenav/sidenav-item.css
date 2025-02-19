@@ -23,6 +23,7 @@ button {
   .caret-icon,
   slot[name="caret-icon"]::slotted(*) {
     margin-left: auto;
+    margin-bottom: auto;
     transition: all 0.3s ease-in-out;
     transform: rotate(180deg);
   }
