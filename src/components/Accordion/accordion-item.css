@@ -42,17 +42,20 @@
   font-weight: var(--sgds-font-weight-semibold);
 }
 
-.accordion-btn:hover {
+.accordion-btn:not(.disabled):hover,
+.accordion-btn:not(:disabled):hover {
   z-index: 2;
-  background-color: var(--sgds-bg-translucent);
+  background-color: var(--sgds-bg-translucent-subtle);
 }
 
-.accordion-btn:focus,
-.accordion-btn:focus-visible {
+.accordion-btn:not(.disabled):focus,
+.accordion-btn:not(.disabled):focus-visible,
+.accordion-btn:not(:disabled):focus,
+.accordion-btn:not(:disabled):focus-visible {
   z-index: 3;
   outline: 0;
   box-shadow: var(--sgds-box-shadow-focus);
-  background-color: var(--sgds-bg-translucent);
+  background-color: var(--sgds-bg-translucent-subtle);
 }
 
 .accordion-btn.disabled,
