@@ -3,6 +3,7 @@
 }
 
 :host([variant="warning"]) .alert {
+  --sgds-alert-color: var(--sgds-color-fixed-dark);
   background-color: var(--sgds-warning-surface-default);
 }
 
