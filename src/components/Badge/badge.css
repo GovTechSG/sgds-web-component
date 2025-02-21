@@ -11,6 +11,7 @@
 }
 
 :host([variant="warning"]) .badge {
+  color: var(--sgds-color-fixed-dark);
   background-color: var(--sgds-warning-surface-default);
 }
 
@@ -44,13 +45,12 @@
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
   border-radius: var(--sgds-border-radius-sm);
   font-size: var(--sgds-font-size-1);
-  padding: 0 var(--sgds-padding-2-xs);
   height: var(--sgds-dimension-24);
-  min-width: var(---sgds-dimension-24);
+  min-width: var(--sgds-dimension-24);
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 0px var(--sgds-padding-2-xs);
+  padding: var(--sgds-padding-none) var(--sgds-padding-2-xs);
 }
 
 .badge.outlined {
@@ -60,7 +60,8 @@
 }
 
 .badge-label {
-  padding: 0px var(--sgds-padding-2-xs);
+  padding: var(--sgds-padding-none) var(--sgds-padding-2-xs);
+  line-height: var(--sgds-line-height-min);
 }
 
 .badge-dismissible {
