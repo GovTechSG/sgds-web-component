@@ -140,15 +140,8 @@ a {
   text-decoration: underline;
   color: var(--sgds-link-color-default);
   height: 100%;
-  width: fit-content;
 }
 
 a:hover, a:focus-visible, a:focus {
   color: var(--sgds-link-color-emphasis);
-}
-
-a:focus,
-a:focus-visible {
-  outline: 0;
-  box-shadow: var(--sgds-box-shadow-focus);
 }
