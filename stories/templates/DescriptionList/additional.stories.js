@@ -1,7 +1,7 @@
 export const OptionalTitleDescription = {
   render: Template.bind({}),
-  name: "Optional title and subtitle",
-  args: { title: true, subtitle: true },
+  name: "Optional title and description",
+  args: { title: true, description: true },
   parameters: {},
   tags: ["!dev"]
 };

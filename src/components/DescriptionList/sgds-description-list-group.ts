@@ -9,7 +9,7 @@ import { HasSlotController } from "../../utils/slot";
  *
  * @slot default - The slot for `description-list` components
  * @slot title - Slot for the title content
- * @slot subtitle - Slot for the subtitle content
+ * @slot description - Slot for the description content
  *
  */
 export class SgdsDescriptionListGroup extends SgdsElement {
@@ -25,7 +25,7 @@ export class SgdsDescriptionListGroup extends SgdsElement {
   private _descriptionLists!: HTMLElement[];
 
   /** @internal */
-  private readonly hasSlotController = new HasSlotController(this, "title", "subtitle");
+  private readonly hasSlotController = new HasSlotController(this, "title", "description");
 
   connectedCallback() {
     super.connectedCallback();
@@ -62,28 +62,28 @@ export class SgdsDescriptionListGroup extends SgdsElement {
 
   render() {
     const hasTitleSlot = this.hasSlotController.test("title");
-    const hasSubtitleSlot = this.hasSlotController.test("subtitle");
+    const hasDescriptionSlot = this.hasSlotController.test("description");
     return html`
-      <div class="description-list-group" part="base">
-        ${hasTitleSlot || hasSubtitleSlot
+      <div class="container" part="base">
+        ${hasTitleSlot || hasDescriptionSlot
           ? html`
-              <div class="description-list-group__header">
+              <div class="header">
                 ${hasTitleSlot
-                  ? html` <div class="description-list-group__title">
+                  ? html` <div class="title">
                       <slot name="title"></slot>
                     </div>`
                   : nothing}
-                ${hasSubtitleSlot
+                ${hasDescriptionSlot
                   ? html`
-                      <div class="description-list-group__subtitle">
-                        <slot name="subtitle"></slot>
+                      <div class="description">
+                        <slot name="description"></slot>
                       </div>
                     `
                   : nothing}
               </div>
             `
           : nothing}
-        <div class="description-list-group__content">
+        <div>
           <slot></slot>
         </div>
       </div>

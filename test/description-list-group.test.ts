@@ -11,7 +11,7 @@ describe("<sgds-description-list-group>", () => {
       </sgds-description-list-group>
     `);
     await elementUpdated(el);
-    const titleElement = el.shadowRoot?.querySelector(".description-list-group__title");
+    const titleElement = el.shadowRoot?.querySelector(".title");
     expect(titleElement).to.exist;
   });
 
@@ -20,27 +20,27 @@ describe("<sgds-description-list-group>", () => {
       <sgds-description-list-group></sgds-description-list-group>
     `);
     await elementUpdated(el);
-    const titleElement = el.shadowRoot?.querySelector(".description-list-group__title");
+    const titleElement = el.shadowRoot?.querySelector(".title");
     expect(titleElement).to.not.exist;
   });
 
-  it("should render subtitle element when subtitle is provided", async () => {
+  it("should render description element when description is provided", async () => {
     const el = await fixture<SgdsDescriptionListGroup>(html`
       <sgds-description-list-group>
-        <div slot="subtitle">Subtitle Text</div>
+        <div slot="description">Description</div>
       </sgds-description-list-group>
     `);
     await elementUpdated(el);
-    const subtitleElement = el.shadowRoot?.querySelector(".description-list-group__subtitle");
-    expect(subtitleElement).to.exist;
+    const descriptionElement = el.shadowRoot?.querySelector(".description");
+    expect(descriptionElement).to.exist;
   });
 
-  it("should not render subtitle element when subtitle is not provided", async () => {
+  it("should not render description element when description is not provided", async () => {
     const el = await fixture<SgdsDescriptionListGroup>(html`
       <sgds-description-list-group></sgds-description-list-group>
     `);
     await elementUpdated(el);
-    const subtitleElement = el.shadowRoot?.querySelector(".description-list-group__subtitle");
-    expect(subtitleElement).to.not.exist;
+    const descriptionElement = el.shadowRoot?.querySelector(".description");
+    expect(descriptionElement).to.not.exist;
   });
 });
