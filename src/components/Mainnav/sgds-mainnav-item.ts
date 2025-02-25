@@ -33,8 +33,11 @@ export class SgdsMainnavItem extends SgdsElement {
       return console.error("More than one anchor tag is added to sgds-sidenav-item");
     } else if (anchorItems.length === 1) {
       const anchor = anchorItems[0] as HTMLAnchorElement;
-      this.disabled && anchor.setAttribute("tabindex", "-1");
       this.active && anchor.setAttribute("aria-current", "true");
+      if (this.disabled) {
+        anchor.setAttribute("href", "javascript:void(0)");
+        anchor.setAttribute("tabindex", "-1");
+      }
     }
   }
 
