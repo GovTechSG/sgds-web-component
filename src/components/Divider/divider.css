@@ -1,19 +1,19 @@
 :host{
-  --container-size: 8px;
+  --container-size: 8px;  
 }
 
 :host([orientation="horizontal"]) {
   width: 100%;
   display: block;
   margin: calc((var(--container-size) - var(--border-width)) / 2) 0;
-  border-top: var(--border-width) solid var(--sgds-color-muted);
+  border-top: var(--border-width) solid var(--sgds-border-color-muted);
 }
 
 :host([orientation="vertical"]) {
   height: 100%;
   display: inline-block;
   margin: 0 calc((var(--container-size) - var(--border-width)) / 2);
-  border-left: var(--border-width) solid var(--sgds-color-muted);
+  border-left: var(--border-width) solid var(--sgds-border-color-muted);
 }
 
 :host([thickness="thin"]) {
