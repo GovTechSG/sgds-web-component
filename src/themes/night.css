@@ -38,7 +38,7 @@
   --sgds-primary-surface-default: var(--sgds-product-primary-600);
   --sgds-primary-surface-emphasis: var(--sgds-product-primary-700);
   --sgds-primary-surface-muted: var(--sgds-product-primary-200);
-  --sgds-primary-bg-translucent: oklch(from var(--sgds-product-primary-100) l c h / 0.1);
+  --sgds-primary-surface-translucent: oklch(from var(--sgds-product-primary-100) l c h / 0.1);
   --sgds-primary-color-default: var(--sgds-product-primary-400);
   --sgds-primary-color-emphasis: var(--sgds-product-primary-300);
   --sgds-primary-color-fixed-light: var(--sgds-product-primary-400);
