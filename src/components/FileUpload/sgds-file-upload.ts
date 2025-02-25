@@ -170,13 +170,13 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   }
   render() {
     const getCheckedIcon = () => {
-      return html`<sgds-icon name="check-circle-fill"></sgds-icon>`;
+      return html`<sgds-icon name="check-circle-fill" class="${this.invalid ? "invalid" : "valid"}"></sgds-icon>`;
     };
 
     const listItems = this.selectedFiles.map(
       (file, index) => html`
         <li key=${index} class="file-upload-list-item">
-          <span>${getCheckedIcon()}</span>
+          ${getCheckedIcon()}
           <span class="filename">${file.name}</span>
           <sgds-close-button
             aria-label="remove the file"

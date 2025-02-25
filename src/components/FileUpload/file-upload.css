@@ -49,7 +49,10 @@ sgds-close-button {
   margin-left: auto;
 }
 
-slot[name="validIcon"]::slotted(*),
-slot[name="validIcon"] svg {
+sgds-icon.valid {
   color: var(--sgds-form-success-color-default);
+}
+
+sgds-icon.invalid {
+  color: var(--sgds-color-muted);
 }
