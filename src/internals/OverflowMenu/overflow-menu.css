@@ -16,13 +16,14 @@
 	justify-content: center;
 	align-items: center;
 }
+
 .overflow-btn:hover {
-	background-color: var(--sgds-bg-translucent);
+	background-color: var(--sgds-bg-translucent-subtle);
 }
 
 .overflow-btn:focus,
 .overflow-btn:focus-visible {
 	outline: 0;
 	box-shadow: var(--sgds-box-shadow-focus);
-	background-color: var(--sgds-bg-translucent);
+	background-color: var(--sgds-bg-translucent-subtle);
 }
