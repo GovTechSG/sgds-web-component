@@ -15,14 +15,13 @@ a:hover {
 }
 
 .sgds-masthead {
-  color: light-dark(#252525, #eaeaea);
   line-height: 1.25rem;
   font-size: 0.875rem;
   font-family: "Inter", system-ui, sans-serif;
 }
 
 .banner {
-  background-color: light-dark(#eaeaea, #252525);
+  background-color: light-dark(#f3f3f3, #1a1a1a);
 }
 
 .container {
@@ -72,17 +71,17 @@ a:hover {
 .sgds-masthead-button {
   display: flex;
   gap: 4px;
-  color: light-dark(#5a42c0, #9288f0);
+  color: light-dark(#6b4feb, #a999f3);
   align-items: center;
   cursor: pointer;
 }
 
 .sgds-masthead-button:hover {
-  color: light-dark(#42209f, #7562e2);
+  color: light-dark(#523abc, #c8bdf7);
 }
 
 .panel {
-  background-color: light-dark(rgba(14, 14, 14, 0.05), rgba(255, 255, 255, 0.10));
+  background-color: light-dark(oklch(from #0e0e0e l c h / 0.1), oklch(from #ffffff l c h / 0.1));
 }
 
 .sgds-masthead .sgds-masthead-content {
@@ -121,7 +120,7 @@ a:hover {
 }
 
 .content article {
-  color: light-dark(#595959, #b2b2b2);
+  color: light-dark(#525252, #a5a5a5);
 }
 
 .banner-icon, .banner-icon-inline {
@@ -131,17 +130,17 @@ a:hover {
 
 .banner-icon path,
 .banner-icon-inline path {
-  fill: light-dark(#0e0e0e, #ffffff);
+  fill: light-dark(#1a1a1a, #f3f3f3);
 }
 
 a.trusted-websites-link {
-  color: light-dark(#5a42c0, #9288f0);
+  color: light-dark(#6b4feb, #a999f3);
   width: fit-content;
   text-decoration: underline;
 }
 
 a.trusted-websites-link:hover {
-  color: light-dark(#42209f, #7562e2);
+  color: light-dark(#523abc, #c8bdf7);
 }
 
 @media screen and (max-width: 768px) {
