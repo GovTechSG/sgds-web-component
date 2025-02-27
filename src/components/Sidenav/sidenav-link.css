@@ -18,7 +18,7 @@
 :host([active]) ::slotted(a) {
   --sgds-link-color-default: var(--sgds-primary-color-emphasis);
   color: var(--sgds-primary-color-emphasis, var(--sgds-link-color-default));
-  background-color: var(--sgds-primary-bg-translucent);
+  background-color: var(--sgds-primary-surface-translucent);
 }
 
 :host(:not([disabled]):not([active])) ::slotted(a:hover) {
