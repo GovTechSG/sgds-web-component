@@ -22,10 +22,10 @@ progress {
 }
 
 .progress-bar {
-  --sgds-progress-bar-bg: var(--sgds-primary);
+  /* --sgds-progress-bar-bg: var(--sgds-primary-surface-default);
   --sgds-progress-bar-transition: width 0.6s ease;
   --sgds-progress-bar-color: var(--sgds-white);
-  --sgds-progress-bar-font-size: 0.75rem;
+  --sgds-progress-bar-font-size: 0.75rem; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,7 +42,7 @@ progress {
 .label {
   white-space: nowrap;
   font-size: var(--sgds-font-size-1);
-  color: var(--sgds-color-default);
+  color: var(--sgds-color-subtle);
 }
 
 @media (prefers-reduced-motion: reduce) {
