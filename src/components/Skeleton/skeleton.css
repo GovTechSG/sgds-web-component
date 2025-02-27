@@ -1,5 +1,5 @@
 .skeleton {
-  --bg: var(--sgds-bg-translucent);
+  --bg: var(--sgds-bg-translucent-subtle);
   background-color: var(--bg);
   display: flex;
   flex-direction: column;
@@ -17,8 +17,8 @@
 }
 
 .sheen {
-  --sheen-color: var(--sgds-bg-translucent-subtle);
-  background: linear-gradient(270deg, var(--sheen-color) 0%, var(--bg) 33.33%, var(--bg) 66.67%, var(--sheen-color) 100%);
+  --sheen-color: var(--sgds-bg-translucent);
+  background: linear-gradient(270deg, var(--bg) 0%, var(--sheen-color) 33.33%, var(--sheen-color) 66.67%, var(--bg) 100%);
   background-size: 400% 100%;
   animation: sheen 8s ease-in-out infinite;
 }
