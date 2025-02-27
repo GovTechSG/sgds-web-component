@@ -80,7 +80,7 @@ button {
 }
 
 :host([class^="first-level"][active]) .no-menu-default::slotted(a) {
-  color: var(--sgds-primary-color-default) !important;
+  color: var(--sgds-primary-color-emphasis) !important;
   background-color: var(--sgds-primary-surface-translucent);
 }
 
