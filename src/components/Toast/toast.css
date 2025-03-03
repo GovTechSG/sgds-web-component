@@ -11,7 +11,7 @@
 }
 
 :host([variant="warning"]) slot[name="icon"]::slotted(*) {
-  color: var(--sgds-warning-color-default);
+  color: var(--sgds-warning-color-fixed-light);
 }
 
 .toast {
