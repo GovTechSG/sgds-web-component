@@ -24,7 +24,7 @@
 }
 
 .tooltip-inner {
-  background-color: var(--sgds-neutral-bg-default);
+  background-color: var(--sgds-surface-fixed-dark);
   border-radius: var(--sgds-border-radius-md);
   color: var(--sgds-color-fixed-light);
   font-size: var(--sgds-font-size-1);
