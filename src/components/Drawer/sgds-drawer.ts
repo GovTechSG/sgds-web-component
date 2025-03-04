@@ -1,13 +1,11 @@
-import { html, nothing } from "lit";
+import { html } from "lit";
 import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 import { animateTo, stopAnimations } from "../../utils/animate.js";
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry.js";
 import { waitForEvent } from "../../utils/event.js";
 import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
-import { HasSlotController } from "../../utils/slot.js";
 import { watch } from "../../utils/watch.js";
 import drawerStyles from "./drawer.css";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
@@ -15,10 +13,9 @@ import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 /**
  * @summary Drawers slide in from a container to expose additional options and information.
  *
- * @slot - The drawer's main content.
- * @slot label - The drawer's label. Alternatively, you can use the `label` attribute.
- * @slot header-actions - Optional actions to add to the header.
- * @slot footer - The drawer's footer, usually one or more buttons representing various options.
+ * @slot default - The drawer's main content
+ * @slot title - The title of the drawer
+ * @slot description - The description of the drawer
  *
  * @event sgds-show - Emitted when the drawer opens.
  * @event sgds-after-show - Emitted after the drawer opens and all animations are complete.
@@ -31,22 +28,6 @@ import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
  *   `event.preventDefault()` will keep the drawer open. Avoid using this unless closing the drawer will result in
  *   destructive behavior such as data loss.
  *
- * @csspart base - The component's base wrapper.
- * @csspart overlay - The overlay that covers the screen behind the drawer.
- * @csspart panel - The drawer's panel (where the drawer and its content are rendered).
- * @csspart header - The drawer's header. This element wraps the title and header actions.
- * @csspart header-actions - Optional actions to add to the header.
- * @csspart title - The drawer's title.
- * @csspart close-button - The close button.
- * @csspart body - The drawer's body.
- * @csspart footer - The drawer's footer.
- *
- * @cssproperty --drawer-size - The preferred size of the drawer. This will be applied to the drawer's width or height
- *   depending on its `placement`. Note that the drawer will shrink to accommodate smaller screens.
- * @cssproperty --drawer-padding - The amount of padding to use for the header, body and footer
- * @cssproperty --drawer-bg - The drawer's background color.
- * @cssproperty --drawer-button-gap - The drawer's flex gap between buttons.
- *
  */
 export class SgdsDrawer extends SgdsElement {
   static styles = [...SgdsElement.styles, drawerStyles];
@@ -54,8 +35,7 @@ export class SgdsDrawer extends SgdsElement {
   static dependencies = {
     "sgds-close-button": SgdsCloseButton
   };
-  /** @internal */
-  private readonly hasSlotController = new HasSlotController(this, "footer");
+
   /** @internal */
   private originalTrigger: HTMLElement | null;
   /** @internal */
@@ -71,12 +51,6 @@ export class SgdsDrawer extends SgdsElement {
    */
   @property({ type: Boolean, reflect: true }) open = false;
 
-  /**
-   * The drawer's label as displayed in the header. You should always include a relevant label even when using
-   * `noHeader`, as it is required for proper accessibility. If you need to display HTML, use the `label` slot instead.
-   */
-  @property({ type: String, reflect: true }) label = "";
-
   /** The direction from which the drawer will open. */
   @property({ type: String, reflect: true }) placement: "top" | "end" | "bottom" | "start" = "end";
 
@@ -85,12 +59,6 @@ export class SgdsDrawer extends SgdsElement {
    * its parent element, set this attribute and add `position: relative` to the parent.
    */
   @property({ type: Boolean, reflect: true }) contained = false;
-
-  /**
-   * Removes the header. This will also remove the default close button, so please ensure you provide an easy,
-   * accessible way for users to dismiss the drawer.
-   */
-  @property({ type: Boolean, reflect: true }) noHeader = false;
 
   firstUpdated() {
     this.drawer.hidden = !this.open;
@@ -272,7 +240,6 @@ export class SgdsDrawer extends SgdsElement {
   render() {
     return html`
       <div
-        part="base"
         class=${classMap({
           drawer: true,
           "drawer-open": this.open,
@@ -281,47 +248,28 @@ export class SgdsDrawer extends SgdsElement {
           "drawer-bottom": this.placement === "bottom",
           "drawer-start": this.placement === "start",
           "drawer-contained": this.contained,
-          "drawer-fixed": !this.contained,
-          "drawer-has-footer": this.hasSlotController.test("footer")
+          "drawer-fixed": !this.contained
         })}
       >
-        <div part="overlay" class="drawer-overlay" @click=${() => this.requestClose("overlay")} tabindex="-1"></div>
+        <div class="drawer-overlay" @click=${() => this.requestClose("overlay")} tabindex="-1"></div>
 
         <div
-          part="panel"
           class="drawer-panel"
           role="dialog"
           aria-modal="true"
           aria-hidden=${this.open ? "false" : "true"}
-          aria-label=${ifDefined(this.noHeader ? this.label : undefined)}
-          aria-labelledby=${ifDefined(!this.noHeader ? "title" : undefined)}
           tabindex="0"
         >
-          ${!this.noHeader
-            ? html`
-                <header part="header" class="drawer-header">
-                  <h2 part="title" class="drawer-title" id="title">
-                    <!-- If there's no label, use an invisible character to prevent the header from collapsing -->
-                    <slot name="label"> ${this.label.length > 0 ? this.label : String.fromCharCode(65279)} </slot>
-                  </h2>
-                  <div part="header-actions" class="drawer-header-actions">
-                    <slot name="header-actions"></slot>
-                    <sgds-close-button
-                      part="close-button"
-                      class="drawer-close"
-                      aria-label="close drawer"
-                      @click="${() => this.requestClose("close-button")}"
-                    ></sgds-close-button>
-                  </div>
-                </header>
-              `
-            : nothing}
-
-          <slot part="body" class="drawer-body"></slot>
-
-          <footer part="footer" class="drawer-footer">
-            <slot name="footer"></slot>
-          </footer>
+          <header class="drawer-header">
+            <slot name="title"></slot>
+            <slot name="description"></slot>
+            <sgds-close-button
+              class="drawer-close"
+              aria-label="close drawer"
+              @click="${() => this.requestClose("close-button")}"
+            ></sgds-close-button>
+          </header>
+          <slot class="drawer-body"></slot>
         </div>
       </div>
     `;

@@ -1,8 +1,4 @@
 :host {
-  --drawer-padding: var(--sgds-spacer-4);
-  --drawer-size: 35rem;
-  --drawer-bg: var(--sgds-body-bg);
-  --drawer-button-gap: var(--sgds-spacer-2);
   display: contents;
 }
 
@@ -17,18 +13,19 @@
 
 .drawer-fixed {
   position: fixed;
-  z-index: 1055;
+  z-index: 1100;
 }
 
 .drawer-panel {
-  position: absolute;
   display: flex;
   flex-direction: column;
+  gap: var(--sgds-gap-2-xl);
+  position: absolute;
   z-index: 2;
   max-width: 100%;
   max-height: 100%;
-  background-color: var(--drawer-bg);
-  box-shadow: 0 2px 8px hsl(240 3.8% 46.1% / 12%);
+  padding: var(--sgds-padding-4-xl) var(--sgds-padding-3-xl);
+  background-color: var(--sgds-surface-default);
   overflow: auto;
   pointer-events: all;
 }
@@ -43,7 +40,7 @@
   bottom: auto;
   inset-inline-start: 0;
   width: 100%;
-  height: var(--drawer-size);
+  height: 512px;
 }
 
 .drawer-end .drawer-panel {
@@ -51,7 +48,7 @@
   inset-inline-end: 0;
   bottom: auto;
   inset-inline-start: auto;
-  width: var(--drawer-size);
+  width: 512px;
   height: 100%;
 }
 
@@ -61,7 +58,7 @@
   bottom: 0;
   inset-inline-start: 0;
   width: 100%;
-  height: var(--drawer-size);
+  height: 512px;
 }
 
 .drawer-start .drawer-panel {
@@ -69,59 +66,41 @@
   inset-inline-end: auto;
   bottom: auto;
   inset-inline-start: 0;
-  width: var(--drawer-size);
+  width: 512px;
   height: 100%;
 }
 
 .drawer-header {
   display: flex;
-  padding: var(--drawer-padding);
+  flex-direction: column;
+  gap: var(--sgds-gap-sm);
 }
 
-.drawer-title {
-  flex: 1 1 auto;
-  font: inherit;
-  font-size: calc(1.275rem + 0.3vw);
-  line-height: 1.33;
-
-  margin: 0;
+slot[name="title"]::slotted(*) {
+  --sgds-margin-2-xs: var(--sgds-margin-none);
+  --sgds-font-size-6: var(--sgds-font-size-4);
+  margin-bottom: var(--sgds-margin-2-xs, var(--sgds-margin-none));
+  font-size: var(--sgds-font-size-6, var(--sgds-font-size-4));
+  color: var(--sgds-color-default) !important;
 }
 
-.drawer-header-actions {
-  flex-shrink: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: end;
-  cursor: pointer;
-  gap: var(--drawer-button-gap);
-  padding: 0 var(--drawer-padding);
+slot[name="description"]::slotted(*) {
+  --sgds-paragraph-spacing-xl: var(--sgds-margin-none);
+  margin-bottom: var(--sgds-paragraph-spacing-xl, var(--sgds-margin-none));
+  color: var(--sgds-color-subtle);
 }
 
-.drawer-header-actions .drawer-close {
-  flex: 0 0 auto;
-  display: flex;
-  align-self: center;
+sgds-close-button {
+  position: absolute;
+  top: 32px;
+  right: 32px;
 }
 
 .drawer-body {
   flex: 1 1 auto;
   display: block;
-  padding: var(--drawer-padding);
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-}
-
-.drawer-footer {
-  text-align: right;
-  padding: var(--drawer-padding);
-}
-
-.drawer-footer ::slotted(sgds-button:not(:last-of-type)) {
-  margin-inline-end: var(--drawer-button-gap);
-}
-
-.drawer:not(.drawer-has-footer) .drawer-footer {
-  display: none;
 }
 
 .drawer-overlay {
@@ -131,10 +110,21 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--sgds-bg-overlay);
   pointer-events: all;
 }
 
 .drawer-contained .drawer-overlay {
   display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .drawer-panel {
+    padding: var(--sgds-padding-3-xl) var(--sgds-padding-lg);
+  }
+
+  sgds-close-button {
+    top: 20px;
+    right: 20px;
+  }
 }
