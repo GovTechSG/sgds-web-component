@@ -37,6 +37,7 @@
 
 .spinner-label {
   font-size: var(--sgds-font-size-1);
+  color: var(--sgds-neutral-color-default);
 }
 
 @media (prefers-reduced-motion: reduce) {
