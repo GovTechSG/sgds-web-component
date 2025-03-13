@@ -31,7 +31,7 @@ ul {
   line-height: var(--sgds-line-height-body);
   list-style-position: outside;
   padding-left: var(--sgds-padding-2-xl);
-  margin-top: var(--sgds-padding-xs);
+  margin-top: var(--sgds-margin-3-xs);
 }
 
 li {
@@ -40,7 +40,7 @@ li {
   font-weight: var(--sgds-font-weight-regular);
   line-height: var(--sgds-line-height-body);
   list-style-position: outside;
-  margin-top: var(--sgds-padding-xs);
+  margin-top: var(--sgds-margin-3-xs);
 }
 li > ol {
   list-style-type: lower-alpha;
