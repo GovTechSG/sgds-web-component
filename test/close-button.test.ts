@@ -1,6 +1,7 @@
 import { html } from "lit";
 import { expect, fixture, waitUntil, assert } from "@open-wc/testing";
 import { SgdsCloseButton } from "../src/internals/CloseButton/sgds-close-button";
+import "../src/components/Icon";
 import "../src/internals/CloseButton";
 import * as sinon from "sinon";
 
