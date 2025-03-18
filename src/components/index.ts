@@ -46,6 +46,7 @@ export * from "./Tab/sgds-tab";
 export * from "./Tab/sgds-tab-group";
 export * from "./Tab/sgds-tab-panel";
 export * from "./Table/sgds-table";
+export * from "./TableOfContents/sgds-table-of-contents";
 export * from "./Textarea/sgds-textarea";
 export * from "./Toast/sgds-toast";
 export * from "./Toast/sgds-toast-container";
