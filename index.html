@@ -546,70 +546,6 @@
       </sgds-textarea>
     </div>
     <div class="container">
-
-      <sgds-table rowheader="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
-        tabledata="[
-[&quot;1&quot;, &quot;John&quot;, &quot;Doe&quot;, &quot;@johndoe&quot;],
-[&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
-[&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
-]" striped="" bordered="" borderless="" hover size="" variant="dark" responsive="" sort="" removablesort="">
-        <tbody>
-          <tr>
-            <td>Row 1, Column 1</td>
-            <td>Row 1, Column 2</td>
-          </tr>
-        </tbody>
-      </sgds-table>
-      <sgds-table rowheader="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
-        tabledata="[
-[&quot;1&quot;, &quot;John&quot;, &quot;Doe&quot;, &quot;@johndoe&quot;],
-[&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
-[&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
-]" striped="" bordered="" borderless="" hover size="" variant="light" responsive="" sort="" removablesort="">
-      </sgds-table>
-      <sgds-table rowheader="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
-        tabledata="[
-[&quot;1&quot;, &quot;John&quot;, &quot;Doe&quot;, &quot;@johndoe&quot;],
-[&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
-[&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
-]">
-      </sgds-table>
-      <sgds-table headerPosition="vertical" columnheader="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
-        tabledata="[
-[&quot;1&quot;, &quot;John&quot;, &quot;Doe&quot;, &quot;@johndoe&quot;],
-[&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
-[&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
-]">
-      </sgds-table>
-      <sgds-table headerPosition="both" 
-        rowHeader="[&quot;8-12&quot;, &quot;12-16&quot;, &quot;16-20&quot;, &quot;20-24&quot;]"
-        columnheader="[&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;]"
-        tabledata="[
-[&quot;20&quot;, &quot;100&quot;, &quot;240&quot;, &quot;8&quot;],
-[&quot;35&quot;, &quot;148&quot;, &quot;325&quot;, &quot;17&quot;],
-[&quot;16&quot;, &quot;78&quot;, &quot;153&quot;, &quot;12&quot;],
-[&quot;43&quot;, &quot;82&quot;, &quot;96&quot;, &quot;35&quot;],
-[&quot;36&quot;, &quot;174&quot;, &quot;453&quot;, &quot;82&quot;],
-[&quot;149&quot;, &quot;336&quot;, &quot;792&quot;, &quot;129&quot;],
-[&quot;133&quot;, &quot;302&quot;, &quot;508&quot;, &quot;66&quot;]
-]">
-      </sgds-table>
-      <sgds-table rowheader="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
-        tabledata="[
-[&quot;1&quot;, &quot;John&quot;, &quot;Doe&quot;, &quot;@johndoe&quot;],
-[&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
-[&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
-]" striped="" bordered="" borderless="" hover="" size="sm" responsive="sm" sort="" removablesort="">
-      </sgds-table>
-      <sgds-table rowheader="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
-        tabledata="[
-[&quot;1&quot;, &quot;John&quot;, &quot;Doe&quot;, &quot;@johndoe&quot;],
-[&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
-[&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
-]" striped="" bordered="" borderless="" hover="" size="sm" responsive="md" sort="" removablesort="">
-      </sgds-table>
-    </div>
-    <div class="container">
       <sgds-tab-group>
         <sgds-tab slot="nav" panel="apple">
           <sgds-icon slot="icon" name="map"></sgds-icon>
@@ -1947,27 +1883,72 @@
     </div>
     <div class="container">
       <h2>Table Default</h2>
-      <div class="row">
-        <sgds-table></sgds-table>
-      </div>
-      <br>
-      <h2>Table w/ Sort</h2>
-      <div class="row">
-        <sgds-table rowheader='["#", "Serial Number", "Last Name", "Username"]' tableData='[[1, "Mark", "Otto", "@mdo"],
-									[2, "Jacob", "12hornton", "@fat"],
-									[3, "Larry", "@Bird", "@twitter"],
-									[4, "Chuck", "Norris", "@asdasdasd"]
-								]'></sgds-table>
-      </div>
-      <br>
-      <h2>Table w/ RemovableSort</h2>
-      <div class="row">
-        <sgds-table removableSort sort rowheader='["#", "Serial Number", "Last Name", "Username"]' tableData='[[1, "Mark", "Otto", "@mdo"],
-									[2, "Jacob", "12hornton", "@fat"],
-									[3, "Larry", "@Bird", "@twitter"],
-									[4, "Chuck", "Norris", "@asdasdasd"]
-								]'></sgds-table>
-      </div>
+      <sgds-table rowheader="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
+        tabledata="[
+        [&quot;1&quot;, &quot;John&quot;, &quot;Doe&quot;, &quot;@johndoe&quot;],
+        [&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
+        [&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
+        ]"
+      >
+        <tr>
+          <td>Row 1, Column 1</td>
+          <td>Row 1, Column 2</td>
+        </tr>
+      </sgds-table>
+      <sgds-table rowheader="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
+        tabledata="[
+        [&quot;1&quot;, &quot;John&quot;, &quot;Doe&quot;, &quot;@johndoe&quot;],
+        [&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
+        [&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
+        ]"
+      >
+      </sgds-table>
+      <sgds-table rowheader="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
+        tabledata="[
+        [&quot;1&quot;, &quot;John&quot;, &quot;Doe&quot;, &quot;@johndoe&quot;],
+        [&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
+        [&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
+        ]"
+      >
+      </sgds-table>
+      <sgds-table headerPosition="vertical" columnheader="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
+        tabledata="[
+        [&quot;1&quot;, &quot;John&quot;, &quot;Doe&quot;, &quot;@johndoe&quot;],
+        [&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
+        [&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
+        ]"
+      >
+      </sgds-table>
+      <sgds-table headerPosition="both" 
+        rowHeader="[&quot;8-12&quot;, &quot;12-16&quot;, &quot;16-20&quot;, &quot;20-24&quot;]"
+        columnheader="[&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;]"
+        tabledata="[
+        [&quot;20&quot;, &quot;100&quot;, &quot;240&quot;, &quot;8&quot;],
+        [&quot;35&quot;, &quot;148&quot;, &quot;325&quot;, &quot;17&quot;],
+        [&quot;16&quot;, &quot;78&quot;, &quot;153&quot;, &quot;12&quot;],
+        [&quot;43&quot;, &quot;82&quot;, &quot;96&quot;, &quot;35&quot;],
+        [&quot;36&quot;, &quot;174&quot;, &quot;453&quot;, &quot;82&quot;],
+        [&quot;149&quot;, &quot;336&quot;, &quot;792&quot;, &quot;129&quot;],
+        [&quot;133&quot;, &quot;302&quot;, &quot;508&quot;, &quot;66&quot;]
+        ]"
+      >
+      </sgds-table>
+      <sgds-table rowheader="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
+        tabledata="[
+        [&quot;1&quot;, &quot;John&quot;, &quot;Doe&quot;, &quot;@johndoe&quot;],
+        [&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
+        [&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
+        ]" responsive="sm"
+      >
+      </sgds-table>
+      <sgds-table rowheader="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
+        tabledata="[
+        [&quot;1&quot;, &quot;John&quot;, &quot;Doe&quot;, &quot;@johndoe&quot;],
+        [&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
+        [&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
+        ]" responsive="md"
+      >
+      </sgds-table>
     </div>
     <div class="container">
       <div class="row">

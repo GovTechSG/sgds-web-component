@@ -11,7 +11,7 @@ export const Template = args => {
       size=${ifDefined(args.size)}
       variant=${ifDefined(args.variant)}
       responsive=${ifDefined(args.responsive)}
-      .tableHeaders=${["#", "First Names", "Last Name", "Username"]}
+      .rowHeader=${["#", "First Names", "Last Name", "Username"]}
       .tableData=${[
         ["1", "John", "Doe", "@johndoe"],
         ["2", "Jane", "Doe", "@janedoe"],

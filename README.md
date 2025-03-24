@@ -103,12 +103,12 @@ Functions have to be passed in via javascript. For attributes that accepts Objec
 
 ```html
 //via JSON string
-<sgds-table tableHeaders='["Name", "BirthDate"]'></sgds-table>
+<sgds-table rowHeader='["Name", "BirthDate"]'></sgds-table>
 
 // via Javascript
 <script>
   const table = document.querySelector("sgds-table");
-  table.tableHeaders = ["Name", "Birthdate"];
+  table.rowHeader = ["Name", "Birthdate"];
 </script>
 ```
 
