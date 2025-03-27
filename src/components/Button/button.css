@@ -4,7 +4,6 @@
 
 :host([fullWidth]), .btn.full-width {
   width: 100%;
-  max-width: var(--sgds-dimension-320);
 }
 
 .btn.full-width.has-left-icon {
