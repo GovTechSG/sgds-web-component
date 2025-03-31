@@ -4,7 +4,6 @@ import { AppComponent } from "./app.component";
 import "@govtechsg/sgds-web-component/themes/day.css";
 import "@govtechsg/sgds-web-component";
 import { Accordion } from "../components/accordion/accordion.component";
-import { ActionCard } from "../components/actioncard/actioncard.component";
 import { Alert } from "../components/alert/alert.component";
 import { Badge } from "../components/badge/badge.component";
 import { Breadcrumb } from "../components/breadcrumb/breadcrumb.component";
@@ -41,7 +40,6 @@ import { Tooltip } from "../components/tooltip/tooltip.component";
   declarations: [
     AppComponent,
     Accordion,
-    ActionCard,
     Alert,
     Badge,
     Breadcrumb,

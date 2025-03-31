@@ -1,7 +1,6 @@
 import "@govtechsg/sgds-web-component/themes/day.css";
 import "./index.css";
 import { Accordion } from "./components/Accordion";
-import { ActionCard } from "./components/ActionCard";
 import { Alert } from "./components/Alert";
 import { Badge } from "./components/Badge";
 import { Breadcrumb } from "./components/Breadcrumb";
@@ -40,7 +39,6 @@ function App() {
       <Mainnav />
       <IconButton />
       <Accordion />
-      <ActionCard />
       <Alert />
       <Badge />
       <Breadcrumb />

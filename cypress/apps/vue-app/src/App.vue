@@ -3,7 +3,6 @@ import "@webcomponents/scoped-custom-element-registry"
 import "@govtechsg/sgds-web-component/themes/day.css";
 import "@govtechsg/sgds-web-component"
 import Accordion from './components/Accordion.vue'
-import ActionCard from './components/ActionCard.vue'
 import Alert from './components/Alert.vue'
 import Badge from './components/Badge.vue'
 import Breadcrumb from './components/Breadcrumb.vue'
@@ -44,7 +43,6 @@ import Trigger from './components/Trigger.vue'
       <sgds-content-area>
         <sgds-content-body>
           <Accordion />
-          <ActionCard />
           <Alert />
           <Badge />
           <Breadcrumb />
