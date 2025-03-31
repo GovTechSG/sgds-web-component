@@ -12,7 +12,7 @@
   }
 
   :host(:not([disabled])[active][expand="sm"]) ::slotted(a) {
-    border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
+    border-color: var(--sgds-primary-border-color-default);
   }
 
   :host([expand="sm"]) ::slotted(a:focus-visible) {
@@ -28,7 +28,7 @@
   }
 
   :host(:not([disabled])[active][expand="md"]) ::slotted(a) {
-    border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
+    border-color: var(--sgds-primary-border-color-default);
   }
 
   :host([expand="md"]) ::slotted(a:focus-visible) {
@@ -44,7 +44,7 @@
   }
 
   :host(:not([disabled])[active][expand="lg"]) ::slotted(a) {
-    border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
+    border-color: var(--sgds-primary-border-color-default);
   }
   
   :host([expand="lg"]) ::slotted(a:focus-visible) {
@@ -60,7 +60,7 @@
   }
 
   :host(:not([disabled])[active][expand="xl"]) ::slotted(a) {
-    border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
+    border-color: var(--sgds-primary-border-color-default);
   }
 
   :host([expand="xl"]) ::slotted(a:focus-visible) {
@@ -76,7 +76,7 @@
   }
 
   :host(:not([disabled])[active][expand="xxl"]) ::slotted(a) {
-    border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
+    border-color: var(--sgds-primary-border-color-default);
   }
 
   :host([expand="xxl"]) ::slotted(a:focus-visible) {
@@ -124,6 +124,7 @@
   text-decoration: none;
   color: var(--sgds-link-color-default, var(--sgds-color-default));
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: 768px) {

@@ -83,7 +83,7 @@
 .nav-link:not(.disabled).active,
 .nav-link.show {
   color: var(--sgds-primary-color-default);
-  border-color: var(--sgds-border-width-4) solid var(--sgds-primary-border-color-default);
+  border-color: var(--sgds-primary-border-color-default);
 }
 
 .nav-link:not(.disabled):hover {
