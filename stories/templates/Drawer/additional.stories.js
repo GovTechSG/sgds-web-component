@@ -1,10 +1,12 @@
 import { html } from "lit-html";
-import { ifDefined } from "lit/directives/if-defined.js";
 
-export const Template = args => {
+const PlacementTemplate = () => {
   return html`
-    <sgds-button @click=${showDrawer}>Open ${args.placement} Drawer</sgds-button>
-    <sgds-drawer ?open=${args.open} placement=${ifDefined(args.placement)} ?contained=${args.contained}>
+    <sgds-button @click=${() => showDrawer("start")}>Open Start Drawer</sgds-button>
+    <sgds-button @click=${() => showDrawer("end")}>Open End Drawer</sgds-button>
+    <sgds-button @click=${() => showDrawer("top")}>Open Top Drawer</sgds-button>
+    <sgds-button @click=${() => showDrawer("bottom")}>Open Bottom Drawer</sgds-button>
+    <sgds-drawer id="drawer_placement">
       <h2 slot="title">Title</h2>
       <p slot="description">Description</p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dictum est vitae erat molestie blandit.
@@ -27,21 +29,22 @@ export const Template = args => {
   `;
 };
 
-export const showDrawer = () => {
-  const drawer = document.querySelector("sgds-drawer");
+const showDrawer = placement => {
+  const drawer = document.querySelector("#drawer_placement");
+  drawer.setAttribute("placement", placement);
   drawer.show();
 };
-export const closeDrawer = () => {
-  const drawer = document.querySelector("sgds-drawer");
-  drawer.hide();
-};
 
-export const args = {};
-
-export const parameters = {
-  docs: {
-    story: {
-      height: "500px"
+export const Placement = {
+  render: PlacementTemplate.bind({}),
+  name: "Placement",
+  args: {},
+  parameters: {
+    docs: {
+      story: {
+        height: "500px"
+      }
     }
-  }
+  },
+  tags: ["!dev"]
 };
