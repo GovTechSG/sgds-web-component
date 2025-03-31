@@ -17,6 +17,18 @@ export const Variants = {
   tags: ["!dev"]
 };
 
+const FullWidthTemplate = () => {
+  return html`<sgds-button fullWidth>Full width button</sgds-button>`;
+};
+
+export const FullWidth = {
+  render: FullWidthTemplate.bind({}),
+  name: "Full Width",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
+
 const SizeTemplate = () => {
   return html`<sgds-button size="sm"> small button </sgds-button>
     <sgds-button> medium button </sgds-button>
