@@ -16,19 +16,4 @@ export class CardElement extends SgdsElement {
 
   /** When true, applies a tinted background color to the card. */
   @property({ type: Boolean, reflect: true }) tinted = false;
-
-  /** The text's variant. */
-  @property() textColor: CardTextVariant;
 }
-
-export type CardTextVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info"
-  | "dark"
-  | "light"
-  | "white"
-  | "muted";
