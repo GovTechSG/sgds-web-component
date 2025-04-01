@@ -38,13 +38,13 @@ export class SgdsCard extends CardElement {
   /** Disables the card  */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** Sets the orientation of the card */
+  /** Sets the orientation of the card. Available options: `vertical`, `horizontal` */
   @property({ type: String, reflect: true }) orientation: CardOrientation = "vertical";
 
-  /** Sets the orientation of the card */
+  /** Sets the image position of the card. Available options: `before`, `after` */
   @property({ type: String, reflect: true }) imagePosition: CardImagePosition = "before";
 
-  /** Sets the orientation of the card */
+  /** Sets the orientation of the card. Available options: `default`, `padding around`, `aspect ratio` */
   @property({ type: String, reflect: true }) imageAdjustment: CardImageAdjustment = "default";
 
   protected firstUpdated() {

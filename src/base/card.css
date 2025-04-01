@@ -15,8 +15,20 @@
   width: 40%;
 }
 
-:host([orientation="horizontal"][imagePosition="after"]) .card-image {
+:host([imagePosition="after"]) .card-image {
   order: 1;
+}
+
+:host([orientation="vertical"][imagePosition="after"]) slot[name="image"]::slotted(img) {
+  border-radius: calc(var(--sgds-border-radius-md) - var(--sgds-border-width-1));
+  border-top-right-radius: var(--sgds-border-radius-none);
+  border-top-left-radius: var(--sgds-border-radius-none);
+}
+
+:host([orientation="horizontal"][imagePosition="after"]) slot[name="image"]::slotted(img) {
+  border-radius: calc(var(--sgds-border-radius-md) - var(--sgds-border-width-1));
+  border-top-left-radius: var(--sgds-border-radius-none);
+  border-bottom-left-radius: var(--sgds-border-radius-none);
 }
 
 :host([orientation="vertical"][imageAdjustment="padding around"]) .card-image {
@@ -131,6 +143,7 @@ slot[name="image"]::slotted(img) {
   height: 100%;
   object-fit: cover;
   border-top-right-radius: var(--sgds-border-radius-none);
+  border-bottom-left-radius: calc(var(--sgds-border-radius-md) - var(--sgds-border-width-1));
 }
 
 slot[name="link"]::slotted(*) {
