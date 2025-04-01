@@ -15,7 +15,8 @@ export class SgdsDropdownItem extends SgdsElement {
     "sgds-icon": SgdsIcon
   };
 
-  @queryAssignedElements({ flatten: true }) anchor: HTMLAnchorElement[];
+  /** @internal */
+  @queryAssignedElements({ flatten: true }) private anchor: HTMLAnchorElement[];
 
   /** when true, sets the active stylings of .nav-link */
   @property({ type: Boolean })
