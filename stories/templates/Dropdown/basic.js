@@ -41,5 +41,9 @@ export const args = {
 };
 
 export const parameters = {
-  layout: "centered"
+  docs: {
+    story: {
+      height: "300px"
+    }
+  }
 };
