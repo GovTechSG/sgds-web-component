@@ -34,9 +34,6 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
   /** @internal */
   @query("sgds-icon-button[ariaLabel^='decrease by']") private minusBtn: HTMLButtonElement;
 
-  /** Controls the size of the quantity toggle */
-  @property() size: "sm" | "md" = "md";
-
   /** The input's value. Set to 0 by default */
   @property({ type: Number, reflect: true }) value = 0;
 
