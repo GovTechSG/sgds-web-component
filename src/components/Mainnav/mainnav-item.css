@@ -1,17 +1,17 @@
-:host([expand="always"]) ::slotted(a) {
+:host([expand="always"]) ::slotted(*) {
   min-height: 100%;
   padding: 0px var(--sgds-padding-md);
   border-bottom: var(--sgds-border-width-4) solid transparent;
 }
 
 @media screen and (min-width: 576px) {
-  :host([expand="sm"]) ::slotted(a) {
+  :host([expand="sm"]) ::slotted(*) {
     min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
 
-  :host(:not([disabled])[active][expand="sm"]) ::slotted(a) {
+  :host(:not([disabled])[active][expand="sm"]) ::slotted(*) {
     border-color: var(--sgds-primary-border-color-default);
   }
 
@@ -21,13 +21,13 @@
 }
 
 @media screen and (min-width: 768px) {
-  :host([expand="md"]) ::slotted(a) {
+  :host([expand="md"]) ::slotted(*) {
     min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
 
-  :host(:not([disabled])[active][expand="md"]) ::slotted(a) {
+  :host(:not([disabled])[active][expand="md"]) ::slotted(*) {
     border-color: var(--sgds-primary-border-color-default);
   }
 
@@ -37,13 +37,13 @@
 }
 
 @media screen and (min-width: 992px) {
-  :host([expand="lg"]) ::slotted(a) {
+  :host([expand="lg"]) ::slotted(*) {
     min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
 
-  :host(:not([disabled])[active][expand="lg"]) ::slotted(a) {
+  :host(:not([disabled])[active][expand="lg"]) ::slotted(*) {
     border-color: var(--sgds-primary-border-color-default);
   }
   
@@ -53,13 +53,13 @@
 }
 
 @media screen and (min-width: 1200px) {
-  :host([expand="xl"]) ::slotted(a) {
+  :host([expand="xl"]) ::slotted(*) {
     min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
 
-  :host(:not([disabled])[active][expand="xl"]) ::slotted(a) {
+  :host(:not([disabled])[active][expand="xl"]) ::slotted(*) {
     border-color: var(--sgds-primary-border-color-default);
   }
 
@@ -69,13 +69,13 @@
 }
 
 @media screen and (min-width: 1400px) {
-  :host([expand="xxl"]) ::slotted(a) {
+  :host([expand="xxl"]) ::slotted(*) {
     min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
 
-  :host(:not([disabled])[active][expand="xxl"]) ::slotted(a) {
+  :host(:not([disabled])[active][expand="xxl"]) ::slotted(*) {
     border-color: var(--sgds-primary-border-color-default);
   }
 
@@ -85,36 +85,36 @@
 }
 
 @media screen and (max-width: 576px) {
-  :host(:not([disabled])[active][expand="sm"]) ::slotted(a) {
+  :host(:not([disabled])[active][expand="sm"]) ::slotted(*) {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
 @media screen and (max-width: 768px) {
-  :host(:not([disabled])[active][expand="md"]) ::slotted(a) {
+  :host(:not([disabled])[active][expand="md"]) ::slotted(*) {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
 @media screen and (max-width: 992px) {
-  :host(:not([disabled])[active][expand="lg"]) ::slotted(a) {
+  :host(:not([disabled])[active][expand="lg"]) ::slotted(*) {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
 @media screen and (max-width: 1200px) {
-  :host(:not([disabled])[active][expand="xl"]) ::slotted(a) {
+  :host(:not([disabled])[active][expand="xl"]) ::slotted(*) {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
 @media screen and (max-width: 1400px) {
-  :host(:not([disabled])[active][expand="xxl"]) ::slotted(a) {
+  :host(:not([disabled])[active][expand="xxl"]) ::slotted(*) {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
-::slotted(a) {
+::slotted(*) {
   --sgds-link-color-default: var(--sgds-color-default);
   display: flex;
   cursor: pointer;
@@ -128,12 +128,12 @@
 }
 
 @media screen and (max-width: 768px) {
-  ::slotted(a) {
+  ::slotted(*) {
     padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
   }
 }
 
-:host(:not([disabled])[active]) ::slotted(a) {
+:host(:not([disabled])[active]) ::slotted(*) {
   --sgds-link-color-default: var(--sgds-primary-color-default);
   color: var(--sgds-link-color-default, var(--sgds-primary-color-default));
 }
@@ -159,7 +159,7 @@
   box-shadow: var(--sgds-box-shadow-focus) inset;
 }
 
-:host([disabled]) ::slotted(a) {
+:host([disabled]) ::slotted(*) {
   opacity: var(--sgds-opacity-50);
   cursor: not-allowed;
 }

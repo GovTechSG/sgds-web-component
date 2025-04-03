@@ -25,15 +25,35 @@ export class SgdsMainnavItem extends SgdsElement {
   }
 
   private _handleSlotChange(e: Event) {
-    const anchorItems = (e.target as HTMLSlotElement)
-      .assignedElements({ flatten: true })
-      .filter(item => item.tagName.toLowerCase() === "a");
+    const slot = e.target as HTMLSlotElement;
+    const assignedElements = slot.assignedElements({ flatten: true });
+    const anchorItems = assignedElements.filter(
+      item => item.tagName.toLowerCase() === "a" || item.tagName.toLowerCase() === "sgds-link"
+    );
 
     if (anchorItems.length > 1) {
-      return console.error("More than one anchor tag is added to sgds-sidenav-item");
-    } else if (anchorItems.length === 1) {
+      console.error("More than one anchor tag is added to sgds-mainnav-item");
+      return;
+    }
+
+    if (anchorItems.length === 0) {
+      const nodes = slot.assignedNodes({ flatten: true });
+      nodes.forEach(node => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const hyperlink = document.createElement("a");
+          hyperlink.textContent = node.textContent;
+          node.parentNode.replaceChild(hyperlink, node);
+        }
+      });
+    }
+
+    if (anchorItems.length === 1) {
       const anchor = anchorItems[0] as HTMLAnchorElement;
-      this.active && anchor.setAttribute("aria-current", "true");
+
+      if (this.active) {
+        anchor.setAttribute("aria-current", "true");
+      }
+
       if (this.disabled) {
         anchor.setAttribute("href", "javascript:void(0)");
         anchor.setAttribute("tabindex", "-1");
