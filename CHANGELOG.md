@@ -1,3 +1,131 @@
+## v3.0.0 (2025-04-04)
+
+### BREAKING CHANGE
+
+- removal of css props, csspart and slot name upate
+
+### Feat
+
+- **table**: update v3 simple table
+- **toc**: add new component
+- **grid**: implement grid system
+- **drawer**: remove css props, csspart and update slot name
+
+## v3.0.0-rc.6 (2025-02-13)
+
+## v3.0.0-rc.5 (2025-02-11)
+
+## v3.0.0-rc.4 (2024-12-20)
+
+## v3.0.0-rc.3 (2024-12-13)
+
+## v3.0.0-rc.2 (2024-11-27)
+
+### BREAKING CHANGE
+
+- Removal of icon prop and render the icon with slot, users who previously use this
+prop will find that the icon no longer appears
+
+### Feat
+
+- **combobox**: show empty menu when no filtering matches
+- **pagination**: allow button and description variant to have button navigation
+- **combobox**: show whole menu list with active items when not actively fitlering
+- **combobox**: form validation
+- **mainnav**: update v3 mainnav
+- **combobox**: add styling
+- **combobox**: add more functionality
+- **sidenav**: sidenav oopen behaviour
+- **datepicker**: associate datepicker with form
+- **datepicker**: reset calendar when input is cleared:
+- **datepicker**: stylings wip
+- **datepicker**: stylings wip
+- **card**: update v3 component styling
+- **mainnav**: update mainnav
+- **Breadcrumb**: implement logic for more than 4 breadcrumb items
+- **breadcrumb**: stylings
+- **accordion**: update naming convention for accordion slots
+- **fileupload**: add files getter
+- **validation**: reset validation during disabled
+- **quantity-toggle**: validation on click of buttons
+- **quantity-toggle**: implement reset form
+- **checkbox**: implement reset validity and form
+- **input, radio-group**: implement reset form and validity
+- **validation**: encapsulate controller with mixin to hook on lifecycle
+- **radio**: implement validation with element internals
+- **checkbox**: implement validation by new elementintenrals
+- **validation**: implement validation controller on input
+- **form**: elementInternals wip
+- clean up playground ide for all components
+- clean up playground ide
+- finish playground script and add injection point
+- write playground generating script, with bug
+- **card, checkbox, combobox**: finish playground set up
+- **action card, accordion, alert, badge, breadcrumb**: playground ide
+- **button**: create button playground with docs
+- add playground ide for card and button without bugs, breadcrumb and badge with bugs
+
+### Fix
+
+- **datepicker**: bug due to isTouched in input handleBlur
+- **tabs**: fix padding between tab group and tab panel
+- **datepicker**: failing test
+- fixed bugs in playground set up
+
+### Refactor
+
+- **ComboBox**: reset combobox when displayValue is empty in single select
+- **combobox**: review combo box part 1
+- **pagination**: remove following prop as they are made fixed now
+- **datepicker**: update invalid state immediately upon invalid detected
+- **datepicker**: using validtor mixin on datepicker
+- **close-button**: use sgds-icon
+- **icon**: retrieve icons through dynamic import
+- **dropdown-item**: change parent clsas to SgdsElement
+- **modal**: handle modal when content gets too large
+- **dropdown-item**: change to sgds-icon
+- **description-list**: reviewed and update changes
+- **overflow-menu**: bring out as internal component and refactor breadcrumb
+- **icon-button**: review
+- *****: remove scoped elements mixin and implement dependency registration
+- **dropdown-item**: let users pass in anchor as slots
+- **text input**: removal of icon prop
+- **tab, tabgroup**: review commit
+- **link**: bring anchor to slot
+- **dropdown**: bring out toggler as slot
+- **validtormixin**: use mixin methods and encapsulate controller
+- **quantity-toggle, input**: hasFeedback attribute
+- **qty-toggle**: how invalid sgds-input will be styled in qty-toggle
+- **radio, checkbox**: remove controller and implement mixin
+
+## v3.0.0-rc.1 (2024-11-01)
+
+### Feat
+
+- **sgds**: migrate to 3.0 besides tests and focus
+- **tabs**: change tabs to new version
+- **modal**: update component
+- **icon button**: update icon button
+- **quantity toggle**: update styling
+- **file upload**: update styling
+- **icon**: add new icon component for dynamic svg rendering
+- **footer**: change social media as a slot
+- **footer**: update footer styling
+- **css**: only expose tag styles
+
+### Fix
+
+- **footer**: remove unnecessary component to use slot
+
+## v3.0.0-rc.0 (2024-10-28)
+
+### Feat
+
+- **progress**: sb docs added
+- **progress**: assign default variant to primary value
+- **spinner, masthead**: add sb
+- **masthead**: remove --sgds prefix from componetn specific tokens
+
 ## v2.1.2 (2024-09-30)
 
 ### Fix
@@ -15,9 +143,12 @@
 ### Feat
 
 - **react**: add use client directives to react components [skip-cd] (#216)
-- **react**: add use client directives to react components
 
 ## v2.0.1 (2024-09-12)
+
+### Feat
+
+- **react**: add use client directives to react components
 
 ### Fix
 
@@ -30,7 +161,100 @@
 
 ## v2.0.0 (2024-09-03)
 
-See [migration guide](./docs/Migration.md)
+## v2.0.0-rc.3 (2024-09-03)
+
+### Refactor
+
+- **button**: outlined variant border color be primary
+
+## v2.0.0-rc.2 (2024-09-02)
+
+### Refactor
+
+- *****: revert @open-wc/scoped-elements to v2
+
+## v2.0.0-rc.1 (2024-08-29)
+
+## v2.0.0-rc.0 (2024-08-29)
+
+### Fix
+
+- **toast**: variants styles not reflecting
+
+## v2.0.0-beta.0 (2024-08-29)
+
+### BREAKING CHANGE
+
+- Users who previously use the css variables will find that it no longer applies and
+will have styling breaks
+- Removeal of variants in progress bar
+- Users who previously use the props will find that it no longer applies and will
+have styling breaks.
+- removed <sgds-alert-heading>
+- Users who previously use any of the colors will find that it no longer applies
+
+### Feat
+
+- **masthead**: update masthead styling
+- **reboot, caption**: add more light dom css
+- **accordion**: update accordion styling
+- **css**: add light dom fundamental css
+- **IconList**: add size prop
+- **IconList**: new component sgds-icon-list
+- **quantity toggle**: update quantity toggle styling in progress
+- **dropdown**: fix dropdown keyboard accessibility
+- **dropdown menu**: add dropdown menu styles
+- **divider**: initial implementation
+- **skeleton**: add sheen effect and ut
+- **skeleton**: first implementation of skeleton
+- **input**: update input styles
+- **icon-button**: completed styles and refactored button
+- **stepper**: update detail color
+- **textarea**: update textarea styling
+- **switch**: icon and sizes
+- **radio**: add hint text and states for radio button
+- **switch**: add switch wip
+- **stepper**: removal of css variables
+- **link**: remove href when disabled is true
+- **progress bar**: removal of variant options
+- **link**: new link component
+- **checkbox**: updates validation of checkbox group in a form submission context
+- **toast**: change close button and title padding
+- **checkbox**: add checkbox group, logic and container
+- **toast and checkbox**: edit toast test and revert checkbox changes
+- **progress bar**: update progress bar
+- **stepper**: update stepper css
+- **spinner**: removal of spinner type prop and rename color prop to variant
+- **toast**: update toast css, ts file, test file and docs
+- **toast**: add action to toast and style layout
+- **badge**: remove right icon and have no icon if dismissible
+- **badge**: added light/dark modes for close button and changed dark to light, vice versa
+- **alert**: update alert to figma v3
+- **spinner**: remove color options
+- further edits on badge
+- continue updating badge
+- **close button**: add size prop and update customisable variable
+- update badge to 3.0
+- **button**: update customisable css variables and button variants
+
+### Fix
+
+- **dropdown list**: handle tab event only when menu is open
+- **pagination**: duplicate first page button (#207)
+- **pagination**: duplicate first page button
+
+### Refactor
+
+- *****: remove --sgds prefix for component specific tokens
+- *****: remove excess css tokens complete
+- **spinner**: use label prop over slot to simplify rendering process
+- **stepper**: label color during default state and remove max width from vertical stepper
+- **switch**: remove form features in switch
+- **switch, checkbox**: no longer sharing code
+- **toast**: handle ease in and out animation of toast
+- **radio**: styling changes
+- **toast**: styles
+- **alert**: add display none when icon slot is empty
 
 ## v1.4.0 (2024-08-01)
 
@@ -59,15 +283,132 @@ See [migration guide](./docs/Migration.md)
 
 ## v1.3.0 (2024-06-26)
 
+### BREAKING CHANGE
+
+- Users who previously use the css variables will find that the css they passed in no
+longer applies and will have styling breaks
+- Users who previously use the css variables will find that the css they passed in no
+longer applies and will have styling breaks
+- size prop
+- Users who previously use this css variable will find that the css they passed in no
+longer applies and will have styling breaks
+- Users who previously use this variable will find that the css they passed in no
+longer applies and will have styling breaks
+- Users who previously use this css variable will find that the css they passed in no
+longer applies and will have styling breaks
+- added --sgds prefix to existing tokens and rename to follow convention strictly
+- --sgds prefix added to existing css props and certain namings are replaced to
+follow convention strictly
+- Users who previously use this props will find that the css tokens they passed in no
+longer applies and will have styling breaks
+- Users who previously use this prop will find that the css tokens they passed in no
+longer applies and will have styling breaks
+- Users who previously use this props will find that the values they passed in no
+longer applies and will have styling breaks
+- added --sgds prefix to existing cssprops , renamed --stepper-default-theme-color to
+--sgds-stepper-inactive-theme-color
+- Users who previously use this variant will have styling breaks
+- Users who previously use the variables will find that the css they passed in no
+longer applies and will have styling breaks
+- Users who previously use this prop will find that the css tokens they passed in no
+longer applies and will have styling breaks
+- prefixed with --sgds and rename fileupload to file-upload to follow convention
+- Users who previously use this variable will find that the css they passed in no
+longer applies and will have styling breaks
+- Users who previously use this prop will find that the css tokens they passed in no
+longer applies and will have styling breaks
+- Users who previously use this css variables will find that it no longer applies and
+will have styling breaks
+- Users who previously use the css variables will find that the css they passed in no
+longer applies and will have styling breaks
+- Users using inputClasses prop and type="date" or type="datetime-local" will find
+that the stylings will not be applied or supported
+- existing css variables in v1 has to have --sgds prefix
+- css properties will require a prefix of --sgds
+- Users who previously use this css variable will find that it no longer applies and
+will have styling breaks
+- --mainnav-borderBottom-width is replaced with --mainnav-border-bottom width for
+example.
+- Users who used buttonClasses prop will find that css tokens they passed in no
+longer applies , breaking the styles. Users who passed in outlined variants to the variant prop will
+be affected
+- Users who previously use this css variable will have styling breaks as the variable
+is no longer be used
+- Users who previously use this props will find that the css tokens they passed in no
+longer applies and will have styling breaks
+- Users who previously use this prop will find that the css tokens they passed in no
+longer applies and will have styling breaks
+
 ### Feat
 
 - **accordion**: allow accordion active color customisation through n… (#201)
 - **accordion**: allow accordion active color customisation through new cssprop
+- **root**: update new css variables
+- **tooltip**: add css variables and update click event
+- **combobox**: add form validation props and pass to input
+- **theme**: configure day and night theme
+- **tab**: new css prop introduced
+- **quantity-toggle**: new cssprop introduced, refactor the internals to reuse components,
+- **Switch**: new component Switch
+- **spinner**: add grow spinner type styling
+- **tab**: new css props introduced
+- **close-button**: componentise close button
+- **modal**: new css props introduced and renamed existing
+- **drawer**: new css props introduced and old ones renamed
+- **tab group**: new css props introduced
+- **tab group**: remove classes props
+- **spinner**: new css props introduced
+- **spinner**: remove classes prop
+- **toast**: update and add new css props
+- **toast**: remove variant and bg props
+- **stepper**: added new css props, renamed existing ones
+- **radio, radio-group**: new css props
+- **toast**: new css added
+- **progress**: remove light variant
+- **textarea**: new css variables
+- **toast**: remove classes prop
+- **file-upload**: rename existing css variables and introduced new ones
+- **progress**: new css properties added
+- **progress**: remove classes prop
+- **input**: new css properties added
+- **button**: new css props added
+- **alert**: new css props introduced and renamed isLight prop to outlined
+- **breadcrumb, breadcrumb-item**: add new css prop
+- **accordion, accordionitem**: remove classes prop
+- **alert**: remove classes prop
+- **badge**: new css props added
+- **card, action-card**: new css props introduced
 
 ### Fix
 
+- *****: accessibiliyt based on storybook accesibility addon
+- **mainnav**: fix dropdown menu border and box shadow rgba value
+- **pagination**: duplicate first page button
+- **toast**: background of toast is visible when dismissing
+- **datepicker header**: align chevron icons in the middle vertically
+- **toast**: fix dismissible toast not dismissing
+- **alert**: remove alert instead of hiding it when dismissed
 - *****: fix git command instead of npm push (#198)
 - *****: fix git command instead of npm push
+
+### Refactor
+
+- **tooltip**: handle click out of element to hide tooltip
+- **button**: disabled styles
+- *****: remove css @import rule and transfer to js import
+- *****: create form semantic tokens used in form components
+- **toast container**: code refactor for toast container
+- **input**: extract label and hint to separate css file
+- **input**: remove inputClasses and reduced scope of attribute type
+- *****: add variables to root
+- **button**: bring out box-shadow-color to a css variable
+- *****: rename background-color to bg and button to btn
+- **mainnav, mainnav-item, mainnav-dropdown**: add --sgds prefix to css variables
+- **accordion, accordion-item**: add --sgds prefix to all css variables
+- **mainnav, mainnavitem, mainnavdropdown**: replacement of camelCase to kebab case in cssprop
+- **button**: removed buttonClasses prop and removed outlined variants from variant prop
+- **close button**: refactor close button css to share across components
+- **alert**: remove alert link anchor color css variable
 
 ## v1.2.3 (2024-05-31)
 
@@ -88,9 +429,19 @@ See [migration guide](./docs/Migration.md)
 
 ## v1.2.1 (2024-05-23)
 
+### Feat
+
+- **accordion, accordion-item**: style customisation
+- **mainnav**: open up customisation (#192)
+
 ### Fix
 
 - **card**: stretchedLink not applying [skip-cd]
+
+### Refactor
+
+- **accordion**: styles wip
+- **accordion**: update styles wip
 
 ## v1.2.0 (2024-04-30)
 
@@ -107,6 +458,43 @@ See [migration guide](./docs/Migration.md)
 - **combobox**: custom filter example not showing
 - **stepper**: stepper example not showing [skip-cd] (#188)
 - **stepper**: stepper example not showing
+
+### Refactor
+
+- **mainnav**: wip
+- **datepicker**: replace scss
+- **sidenav**: replace scss files
+- *****: remove scss
+- *****: wip remove scss files
+- **tooltip**: replace sgdsElement.style
+- **toast**: replace sgdsElement.styles
+- **textarea**: replace textarea
+- **table**: replace sgdsElement.style
+- **tab**: replace sgdsElement.styles
+- **spinner, stepper**: replace sgdsElement.style
+- **sidenav**: remove sgdsElement.style
+- **quantity-toggle**: replace with cs
+- **progress**: replace sgdsElement.styles
+- **pagination**: replace sgdsElement.style
+- **modal**: replace sgdsElement.styles
+- **mainnav**: replace sgdsElement.styles
+- **mainnav**: replace sgdsElement.styles
+- **datepicker**: remove sgdsElement.styles
+- **datepicker**: wip replacing css
+- **input**: reaplce css
+- **footer**: replace css
+- **fileupload**: replace css
+- **drawer**: replace css
+- **combobox, dropdown**: replace css
+- **checkbox**: replace with css
+- **card**: transfer to css
+- **badge**: replace styles
+- **badge**: replace badge styles
+- **alert**: transfer to css
+- **alert**: link and header, alert wip
+- **action-card**: styles
+- **accordion, button, radio**: add css styles
+- **button, radio, radiogroup, accordion**: styling refactor
 
 ## v1.1.0 (2024-03-22)
 
