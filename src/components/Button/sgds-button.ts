@@ -1,31 +1,13 @@
-import { property, query } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html, literal } from "lit/static-html.js";
-import SgdsElement from "../../base/sgds-element";
-import { FormSubmitController } from "../../utils/form";
-import buttonStyles from "./button.css";
+import ButtonElement from "../../base/button-element";
 import anchorStyles from "../../styles/anchor.css";
+import { FormSubmitController } from "../../utils/formSubmitController";
+import buttonStyles from "./button.css";
 
-export type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info"
-  | "light"
-  | "dark"
-  | "link"
-  | "outlined"
-  | "outline-primary"
-  | "outline-secondary"
-  | "outline-success"
-  | "outline-danger"
-  | "outline-warning"
-  | "outline-info"
-  | "outline-light"
-  | "outline-dark";
+export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
 
 /**
  * @summary Custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
@@ -34,16 +16,20 @@ export type ButtonVariant =
  * @slot leftIcon - The slot for icon to the left of the button text
  * @slot rightIcon - The slot for icon to the right of the button text
  *
- * @event sgds-blur - Emitted when the button is not focused.
+ * @event sgds-blur - Emitted when the button is blurred.
  * @event sgds-focus - Emitted when the button is focused.
  *
- * @cssprop --btn-border-radius - Border radius of the button
  *
  */
-export class SgdsButton extends SgdsElement {
-  static styles = [...SgdsElement.styles, anchorStyles, buttonStyles];
+export class SgdsButton extends ButtonElement {
+  static styles = [...ButtonElement.styles, anchorStyles, buttonStyles];
+  /** @internal */
+  @state()
+  private _hasLeftIcon = false;
 
-  @query(".btn") private button: HTMLButtonElement | HTMLLinkElement;
+  /** @internal */
+  @state()
+  private _hasRightIcon = false;
 
   /** @internal */
   private readonly formSubmitController = new FormSubmitController(this, {
@@ -60,31 +46,8 @@ export class SgdsButton extends SgdsElement {
       return input.closest("form");
     }
   });
-
-  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `outlined` and `danger`. @deprecated The following variants are deprecated from v2.0 and will be removed from v3 onwards: `secondary`, `success`, `warning`, `info`, `dark`, `light`, `link` as well as those prefixed by `outline-*` */
-  @property({ reflect: true }) variant: ButtonVariant = "primary";
-
-  /** Specifies a large or small button */
-  @property({ reflect: true }) size: "sm" | "lg";
-
-  /** Manually set the visual state of the button to `:active` */
-  @property({ type: Boolean, reflect: true }) active = false;
-
-  /** The disabled state of the button */
-  @property({ type: Boolean, reflect: true }) disabled = false;
-
   /** The behavior of the button with default as `type='button', `reset` resets all the controls to their initial values and `submit` submits the form data to the server */
   @property({ type: String, reflect: true }) type: "button" | "submit" | "reset" = "button";
-
-  /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
-  @property({ type: String, reflect: true }) href: string;
-
-  /** Tells the browser where to open the link. Only used when `href` is set. */
-  @property({ type: String, reflect: true }) target: "_blank" | "_parent" | "_self" | "_top";
-
-  /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
-  @property({ type: String, reflect: true }) download: string;
-
   /**
    * The "form owner" to associate the button with. If omitted, the closest containing form will be used instead. The
    * value of this attribute must be an id of a form in the same document or shadow root as the button.
@@ -109,33 +72,10 @@ export class SgdsButton extends SgdsElement {
     | "_top"
     | string;
 
-  /** The aria-label attribute to passed to button element when necessary */
-  @property({ type: String }) ariaLabel: string;
+  /** When set, the button will be in full width. */
+  @property({ type: Boolean, reflect: true }) fullWidth = false;
 
-  /** Sets focus on the button. */
-  public focus(options?: FocusOptions) {
-    this.button.focus(options);
-  }
-
-  /** Simulates a click on the button. */
-  public click() {
-    this.button.click();
-  }
-
-  /** Removes focus from the button. */
-  public blur() {
-    this.button.blur();
-  }
-
-  handleBlur() {
-    this.emit("sgds-blur");
-  }
-
-  handleFocus() {
-    this.emit("sgds-focus");
-  }
-
-  handleClick(event: MouseEvent) {
+  protected override _handleClick(event: MouseEvent) {
     if (this.disabled) {
       event.preventDefault();
       event.stopPropagation();
@@ -155,16 +95,33 @@ export class SgdsButton extends SgdsElement {
     }
   };
 
+  private _handleLeftIconSlotchange(e: Event) {
+    const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLOrSVGImageElement>;
+    if (childNodes.length > 0) {
+      return (this._hasLeftIcon = true);
+    }
+  }
+
+  private _handleRightIconSlotchange(e: Event) {
+    const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLOrSVGImageElement>;
+    if (childNodes.length > 0) {
+      return (this._hasRightIcon = true);
+    }
+  }
+
   render() {
     const isLink = this.href;
     const tag = isLink ? literal`a` : literal`button`;
     return html`
       <${tag}
-        class="sgds btn ${classMap({
+        class="btn ${classMap({
           disabled: this.disabled,
           active: this.active,
-          [`btn-${this.size}`]: this.size,
-          "btn-link": this.variant === "link"
+          "full-width": this.fullWidth,
+          "has-left-icon": this._hasLeftIcon,
+          "has-right-icon": this._hasRightIcon,
+          [`btn-${this.variant}`]: this.variant,
+          [`btn-${this.size}`]: this.size
         })}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
@@ -175,14 +132,14 @@ export class SgdsButton extends SgdsElement {
         role=${ifDefined(isLink ? "button" : undefined)}
         aria-disabled=${this.disabled ? "true" : "false"}
         tabindex=${this.disabled ? "-1" : "0"}
-        @click=${this.handleClick}
-        @focus=${this.handleFocus}
-        @blur=${this.handleBlur}
+        @click=${this._handleClick}
+        @focus=${this._handleFocus}
+        @blur=${this._handleBlur}
         aria-label=${ifDefined(this.ariaLabel)}
       >
-      <slot name="leftIcon"></slot>
-      <slot></slot>
-      <slot name="rightIcon"></slot>
+      <slot name="leftIcon" @slotchange=${this._handleLeftIconSlotchange}></slot>
+      <span><slot></slot></span>
+      <slot name="rightIcon" @slotchange=${this._handleRightIconSlotchange}></slot>
       </${tag}>
     `;
   }

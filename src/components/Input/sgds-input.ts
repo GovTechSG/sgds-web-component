@@ -1,66 +1,71 @@
-import { property, query } from "lit/decorators.js";
+import { nothing } from "lit";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
-import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import { html } from "lit/static-html.js";
-import SgdsElement from "../../base/sgds-element";
+import FormControlElement from "../../base/form-control-element";
+import formPlaceholderStyles from "../../styles/form-placeholder.css";
 import { defaultValue } from "../../utils/defaultvalue";
-import type { SgdsFormControl } from "../../utils/form";
-import { FormSubmitController } from "../../utils/form";
-import genId from "../../utils/generateId";
+import type { SgdsFormControl } from "../../utils/formSubmitController";
+import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
+import { SgdsSpinner } from "../Spinner/sgds-spinner";
 import inputStyle from "./input.css";
-import feedbackStyles from "../../styles/feedback.css";
-import formHintStyles from "../../styles/form-hint.css";
-import formLabelStyles from "../../styles/form-label.css";
+import SgdsIcon from "../Icon/sgds-icon";
 /**
  * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
+ *
+ * @slot icon - The slot for leading icon of text input
  *
  * @event sgds-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sgds-input - Emitted when the control receives input and its value changes.
  * @event sgds-focus - Emitted when input is in focus.
  * @event sgds-blur - Emitted when input is not in focus.
+ * @event sgds-invalid - Emitted when input is invalid
+ * @event sgds-valid - Emitted when input is valid
  *
  */
-export class SgdsInput extends SgdsElement implements SgdsFormControl {
-  static styles = [...SgdsElement.styles, feedbackStyles, formHintStyles, formLabelStyles, inputStyle];
-  /**@internal */
-  @query("input.form-control") input: HTMLInputElement;
-  /**@internal */
-  protected readonly formSubmitController = new FormSubmitController(this);
-  /** The type of input which works the same as HTMLInputElement */
+export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
+  static styles = [...FormControlElement.styles, formPlaceholderStyles, inputStyle];
+  /** @internal */
+  static dependencies = {
+    "sgds-spinner": SgdsSpinner,
+    "sgds-icon": SgdsIcon
+  };
+
   @property({ reflect: true }) type: "email" | "number" | "password" | "search" | "tel" | "text" | "time" | "url" =
     "text";
-  /** The input's label  */
-  @property({ reflect: true }) label = "";
-  /** The input's hint text below the label */
-  @property({ reflect: true }) hintText = "";
-  /**The input's name attribute */
-  @property({ reflect: true }) name: string;
-  /**Optional. Pass svg html of icons in string form*/
-  @property({ type: String }) icon: string;
-  /**Sets the minimum length of the input */
+
+  /** The prefix of the input */
+  @property({ type: String }) prefix: string;
+
+  /** The suffix of the input */
+  @property({ type: String }) suffix: string;
+
+  /** Sets the minimum length of the input */
   @property({ type: Number, reflect: true }) minlength: number;
-  /**Sets the maximum length of the input */
+
+  /** Sets the maximum length of the input */
   @property({ type: Number, reflect: true }) maxlength: number;
-  /**The input's placeholder text. */
-  @property({ type: String, reflect: true }) placeholder = "placeholder";
-  /**A pattern to validate input against. */
-  @property({ type: String }) pattern: string;
-  /**Autofocus the input */
-  @property({ type: Boolean, reflect: true }) autofocus = false;
-  /**Disables the input. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
-  /**Makes the input a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
-  /**Makes the input readonly. */
-  @property({ type: Boolean, reflect: true }) readonly = false;
+
   /** The input's minimum value. Only applies number input types. */
-  @property() min: number | string;
+  @property() min: number;
 
   /** The input's maximum value. Only applies number input types. */
-  @property() max: number | string;
+  @property() max: number;
+
+  /** The input's placeholder text. */
+  @property({ type: String, reflect: true }) placeholder = "placeholder";
+
+  /** A pattern to validate input against. */
+  @property({ type: String }) pattern: string;
+
+  /** Autofocus the input */
+  @property({ type: Boolean, reflect: true }) autofocus = false;
+
+  /** Makes the input readonly. */
+  @property({ type: Boolean, reflect: true }) readonly = false;
 
   /**
    * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
@@ -68,24 +73,29 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
    */
   @property() step: number | "any";
 
-  /**The input's value attribute. */
-  @property({ reflect: true }) value = "";
+  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
+  @property({ type: String, reflect: true }) hasFeedback: "style" | "text" | "both";
+
+  /**Feedback text for error state when validated */
+  @property({ type: String, reflect: true }) invalidFeedback: string;
+
   /**Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = "";
 
-  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
-  @property({ type: Boolean, reflect: true }) hasFeedback = false;
-  /**Feedback text for error state when validated */
-  @property({ type: String, reflect: true }) invalidFeedback = "";
+  /** Marks the component as valid. */
+  @property({ type: Boolean, reflect: true }) valid = false;
 
-  /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
-  @property({ type: Boolean, reflect: true }) invalid = false;
+  /** Marks the component as loading. */
+  @property({ type: Boolean, reflect: true }) loading = false;
 
-  /**@internal */
-  protected inputId: string = genId("input", this.type);
+  /** Makes the input a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
 
-  protected labelId: string = genId("label");
+  /**The input's value attribute. */
+  @property({ reflect: true }) value = "";
+
+  @state() protected _isTouched = false;
 
   /** Sets focus on the input. */
   public focus(options?: FocusOptions) {
@@ -96,19 +106,46 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     this.input.blur();
   }
 
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  public reportValidity() {
-    return this.input.reportValidity();
-  }
-  public setCustomValidity(err: string) {
-    return this.input.setCustomValidity(err);
-  }
+  /** Programatically sets the invalid state of the input. Pass in boolean value in the argument */
   public setInvalid(bool: boolean) {
     this.invalid = bool;
+    if (bool) {
+      this.emit("sgds-invalid");
+    } else {
+      this.emit("sgds-valid");
+    }
   }
-  protected _handleChange(event: string) {
-    this.value = this.input.value;
-    this.emit(event);
+  /**
+   * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
+   * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
+   */
+  public reportValidity(): boolean {
+    return this._mixinReportValidity();
+  }
+  /**
+   * Checks for validity without any native error popup message
+   */
+  public checkValidity(): boolean {
+    return this._mixinCheckValidity();
+  }
+  /**
+   * Checks for validity without any native error popup message
+   */
+  public setValidity(flags?: ValidityStateFlags, message?: string, anchor?: HTMLElement): void {
+    return this._mixinSetValidity(flags, message, anchor);
+  }
+
+  /**
+   * Returns the ValidityState object
+   */
+  public get validity(): ValidityState {
+    return this._mixinGetValidity();
+  }
+  /**
+   * Returns the validation message based on the ValidityState
+   */
+  public get validationMessage() {
+    return this._mixinGetValidationMessage();
   }
 
   protected _handleFocus() {
@@ -116,80 +153,106 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
   }
 
   protected _handleBlur() {
-    this.emit("sgds-blur");
+    const sgdsBlur = this.emit("sgds-blur", { cancelable: true });
+
+    if (sgdsBlur.defaultPrevented) return;
+
+    this._isTouched = true;
+  }
+  private _handleClick() {
+    this.focus();
   }
 
-  protected _handleKeyDown(event: KeyboardEvent) {
-    const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+  protected _handleChange(e: Event) {
+    this.value = this.input.value;
+    const sgdsChange = this.emit("sgds-change", { cancelable: true });
+    if (sgdsChange.defaultPrevented) return;
 
-    // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before
-    // submitting to allow users to cancel the keydown event if they need to
-    if (event.key === "Enter" && !hasModifier) {
-      setTimeout(() => {
-        // Prevent submission when enter is click on a submission in an Input Method Editor with isComposing
-        if (!event.defaultPrevented && !event.isComposing) {
-          this.formSubmitController.submit();
-        }
-      });
+    super._mixinHandleChange(e);
+  }
+  protected _handleInputChange(e: Event) {
+    this.value = this.input.value;
+    const sgdsInput = this.emit("sgds-input", { cancelable: true });
+
+    if (sgdsInput.defaultPrevented) return;
+    super._mixinHandleInputChange(e);
+  }
+  /** @internal */
+  @watch("_isTouched", { waitUntilFirstUpdate: true })
+  _handleIsTouched() {
+    if (this._isTouched) {
+      this.setInvalid(!this._mixinCheckValidity());
     }
   }
-
   @watch("disabled", { waitUntilFirstUpdate: true })
   _handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.input.disabled = this.disabled;
-    this.invalid = !this.input.checkValidity();
+    this.setInvalid(false);
   }
 
-  @watch("value", { waitUntilFirstUpdate: true })
-  _handleValueChange() {
-    this.invalid = !this.input.checkValidity();
-  }
   protected _renderInput() {
-    return html`<input
-        class=${classMap({
-          "form-control": true,
-          "is-invalid": this.hasFeedback && this.invalid
-        })}
-        type=${this.type}
-        id=${this.inputId}
-        name=${ifDefined(this.name)}
-        placeholder=${ifDefined(this.placeholder)}
-        aria-invalid=${this.invalid ? "true" : "false"}
-        pattern=${ifDefined(this.pattern)}
-        ?autofocus=${this.autofocus}
-        ?disabled=${this.disabled}
-        ?readonly=${this.readonly}
-        ?required=${this.required}
-        .value=${live(this.value)}
-        minlength=${ifDefined(this.minlength)}
-        maxlength=${ifDefined(this.maxlength)}
-        min=${ifDefined(this.min)}
-        max=${ifDefined(this.max)}
-        step=${ifDefined(this.step as number)}
-        @input=${() => this._handleChange("sgds-input")}
-        @change=${() => this._handleChange("sgds-change")}
-        @keydown=${this._handleKeyDown}
-        @invalid=${() => this.setInvalid(true)}
-        @focus=${this._handleFocus}
-        @blur=${this._handleBlur}
-        aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this.inputId}-invalid` : undefined)}
-        aria-labelledby="${this.labelId} ${this.inputId}Help ${this.invalid && this.hasFeedback
-          ? `${this.inputId}-invalid`
-          : ""}"
-      />
-      ${this._renderFeedback()} `;
+    const wantFeedbackStyle = this.hasFeedback === "both" || this.hasFeedback === "style";
+    return html`
+      <div
+        class="form-control-group ${classMap({
+          disabled: this.disabled,
+          readonly: this.readonly,
+          "is-invalid": this.invalid && wantFeedbackStyle
+        })}"
+        @click=${this._handleClick}
+      >
+        <slot name="icon"></slot>
+        ${this.prefix ? html`<span class="form-control-prefix">${this.prefix}</span>` : nothing}
+        <input
+          class="form-control"
+          type=${this.type}
+          id=${this._controlId}
+          name=${ifDefined(this.name)}
+          placeholder=${ifDefined(this.placeholder)}
+          aria-invalid=${this.invalid ? "true" : "false"}
+          pattern=${ifDefined(this.pattern)}
+          ?autofocus=${this.autofocus}
+          ?disabled=${this.disabled}
+          ?readonly=${this.readonly}
+          ?required=${this.required}
+          .value=${live(this.value)}
+          minlength=${ifDefined(this.minlength)}
+          maxlength=${ifDefined(this.maxlength)}
+          min=${ifDefined(this.min)}
+          max=${ifDefined(this.max)}
+          step=${ifDefined(this.step as number)}
+          @input=${(e: Event) => this._handleInputChange(e)}
+          @change=${(e: Event) => this._handleChange(e)}
+          @invalid=${() => this.setInvalid(true)}
+          @focus=${this._handleFocus}
+          @blur=${this._handleBlur}
+          aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this._controlId}-invalid` : undefined)}
+          aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
+            ? `${this._controlId}-invalid`
+            : ""}"
+        />
+        ${this.loading ? html`<sgds-spinner size="sm"></sgds-spinner>` : nothing}
+        ${this.valid ? html`<sgds-icon name="check-circle-fill" class="valid-icon"></sgds-icon>` : nothing}
+        ${this.suffix ? html`<span class="form-control-suffix">${this.suffix}</span>` : nothing}
+      </div>
+    `;
   }
   protected _renderFeedback() {
-    return this.hasFeedback && this.invalid
-      ? html`<div id="${this.inputId}-invalid" class="invalid-feedback">${this.invalidFeedback}</div>`
-      : "";
+    const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
+    return this.invalid && wantFeedbackText
+      ? html` <div class="invalid-feedback-container">
+          <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
+          <div id="${this._controlId}-invalid" class="invalid-feedback">
+            ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
+          </div>
+        </div>`
+      : html`${this._renderHintText()}`;
   }
   protected _renderLabel() {
     const labelTemplate = html`
       <label
-        for=${this.inputId}
-        id=${this.labelId}
+        for=${this._controlId}
+        id=${this._labelId}
         class=${classMap({
           "form-label": true,
           required: this.required
@@ -200,23 +263,17 @@ export class SgdsInput extends SgdsElement implements SgdsFormControl {
     return this.label && labelTemplate;
   }
   protected _renderHintText() {
-    const hintTextTemplate = html` <small id="${this.inputId}Help" class="form-text">${this.hintText}</small> `;
+    const hintTextTemplate = html` <div id="${this._controlId}Help" class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }
   render() {
-    const input = html`${this._renderInput()}`;
-    // if iconName is defined
-    const inputWithIcon = html`
-      <div class="sgds form-control-group">
-        <span class="form-control-icon"> ${unsafeSVG(this.icon)} </span>
-        ${input}
-      </div>
-    `;
-    // if hintText is defined
-
     return html`
-      <div class="form-control-container">
-        ${html`${this._renderLabel()} ${this._renderHintText()} ${this.icon ? inputWithIcon : input} `}
+      <div
+        class="form-control-container ${classMap({
+          disabled: this.disabled
+        })}"
+      >
+        ${this._renderLabel()} ${this._renderInput()} ${this._renderFeedback()}
       </div>
     `;
   }

@@ -6,7 +6,7 @@ import prettier from 'prettier';
 import { makeArgTypes } from './makeArgTypes.mjs';
 import { methodsTable, writeParams } from './methodsTable.mjs';
 import { getAllComponents, getSgdsComponents, pascalToKebab } from './shared.mjs';
-
+import packageJson from "../package.json" assert {type: 'json'}
 const storiesDir = path.join('stories/components');
 
 // Clear build directory
@@ -28,11 +28,18 @@ const groupedComponents = groupBy(components, (k, v) => {
 
 for (const [key, value] of Object.entries(groupedComponents)) {
   const allMembers = value.map(i => i.members).flat().filter(member => !(member.privacy && member.privacy === 'private'))
-
   const methodsMeta = methodsTable(value);
   const summary = value.filter(i => i.summary).map(i => i.summary).join('<br/>')
   const args = allMembers.filter(member => member.kind === 'field');
   const mdxFilePath = path.join(storiesDir, `${key}.mdx`);
+  const reactComponentPaths = value.map(v => {
+    const folderName = v.tagName.replace("sgds-", "")
+    return `
+    \`\`\` jsx
+    import ${v.name}  from "@govtechsg/sgds-web-component/react/${folderName}/index.js";
+    \`\`\`
+    `
+  }).join('')
   const ArgsType = value.map(
     component =>
       `### ${component.tagName}
@@ -42,7 +49,7 @@ for (const [key, value] of Object.entries(groupedComponents)) {
 
   const mdxSource = prettier.format(
     `
-import { Canvas, Meta, Story, ArgTypes } from "@storybook/blocks";
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
 import { html } from "lit-html";
 import * as ${key}Stories from './${key}.stories';
 
@@ -54,13 +61,32 @@ ${summary ? summary +"\n" : "\n"}
   <Story of={${key}Stories.Basic} />
 </Canvas>
 
+## Import
+
+### React
+
+${reactComponentPaths}
+
+### Others (Vue, Angular, plain HTML etc.)
+
+\`\`\`js
+import "@govtechsg/sgds-web-component/components/${key}";
+\`\`\`
+
+### CDN 
+
+\`\`\`html
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@${packageJson.version}/components/${key}/index.umd.js"></script>
+\`\`\`
+
 ## API
+
 ${ArgsType.join('\n')}
 
 
 ${methodsMeta.map(meta => {
   if (meta.methods.length > 0){
-    return `## Methods \n### ${meta.tagName}\n<table>
+    return `## Methods \n ### ${meta.tagName}\n<table>
         <thead>
           <tr>
             <th>Name</th>

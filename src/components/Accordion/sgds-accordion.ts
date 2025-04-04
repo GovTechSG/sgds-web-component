@@ -1,9 +1,11 @@
 import { html } from "lit";
 import { property, queryAssignedElements } from "lit/decorators.js";
-import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsAccordionItem from "./sgds-accordion-item";
 import accordionStyle from "./accordion.css";
+
+export type AccordionDensity = "default" | "compact";
+export type AccordionVariant = "default" | "border";
 
 const VALID_KEYS = ["Enter", "ArrowUp", "ArrowLeft", "ArrowDown", "ArrowRight"];
 
@@ -11,7 +13,6 @@ const VALID_KEYS = ["Enter", "ArrowUp", "ArrowLeft", "ArrowDown", "ArrowRight"];
  * @summary A dropdown mechanism that allow users to either show or hide related content. `SgdsAccordion` is a wrapper to manage the behaviour for multiple `SgdsAccordionItems`
  * @slot default - slot for accordion-item
  *
- * @cssprop --accordion-active-color - The colour of accordion when it is active
  */
 
 export class SgdsAccordion extends SgdsElement {
@@ -19,6 +20,12 @@ export class SgdsAccordion extends SgdsElement {
 
   /** Allows multiple accordion items to be opened at the same time */
   @property({ type: Boolean, reflect: true }) allowMultiple = false;
+
+  /** The variant of accordion */
+  @property({ type: String, reflect: true }) variant: AccordionVariant = "default";
+
+  /** The density of accordion */
+  @property({ type: String, reflect: true }) density: AccordionDensity = "default";
 
   /** @internal */
   @queryAssignedElements() private defaultNodes!: SgdsAccordionItem[];
@@ -47,6 +54,9 @@ export class SgdsAccordion extends SgdsElement {
             item.setAttribute("nth-of-type", "");
         }
       }
+
+      item.setAttribute("variant", this.variant);
+      item.setAttribute("density", this.density);
     });
   }
 
@@ -76,11 +86,7 @@ export class SgdsAccordion extends SgdsElement {
 
   render() {
     return html`
-      <div
-        class=${classMap({
-          "sgds accordion": true
-        })}
-      >
+      <div class="accordion">
         <slot @click=${this._onToggle} @keydown=${this._onKeyboardToggle}></slot>
       </div>
     `;

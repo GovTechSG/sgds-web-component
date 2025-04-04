@@ -12,30 +12,89 @@ describe("sgds-input", () => {
       `
         <div class="form-control-container">
           <label class="form-label" for="test-id">label</label>
-          <small class="form-text" id="test-idHelp">hello</small>
-          <input type="text" class="form-control " id="test-id" aria-invalid="false" placeholder="placeholder">
+          <div class="form-control-group">
+            <slot name="icon"></slot>
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+          </div>
+          <div class="form-text" id="test-idHelp">hello</div>
+        </div>
+    `,
+      { ignoreAttributes: ["id", "for", "aria-labelledby"] }
+    );
+  });
+  it("renders with suffix defined", async () => {
+    const el = await fixture(html`<sgds-input inputId="test-id" suffix="test"></sgds-input>`);
+    assert.shadowDom.equal(
+      el,
+      `
+        <div class="form-control-container">
+          <div class="form-control-group">
+            <slot name="icon"></slot>
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+             <span class="form-control-suffix">
+           test
+         </span>
+          </div>
+        </div>
+    `,
+      { ignoreAttributes: ["id", "for", "aria-labelledby"] }
+    );
+  });
+  it("renders with prefix defined", async () => {
+    const el = await fixture(html`<sgds-input inputId="test-id" prefix="test"></sgds-input>`);
+    assert.shadowDom.equal(
+      el,
+      `
+        <div class="form-control-container">
+          <div class="form-control-group">
+            <slot name="icon"></slot>
+            <span class="form-control-prefix">
+              test
+            </span>
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+          </div>
+        </div>
+    `,
+      { ignoreAttributes: ["id", "for", "aria-labelledby"] }
+    );
+  });
+  it("renders with spinner when loading=true", async () => {
+    const el = await fixture(html`<sgds-input inputId="test-id" loading></sgds-input>`);
+    assert.shadowDom.equal(
+      el,
+      `
+        <div class="form-control-container">
+          <div class="form-control-group">
+            <slot name="icon"></slot>
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+            <sgds-spinner
+            size="sm"
+            variant="primary">
+          </sgds-spinner>
+            </div>
         </div>
     `,
       { ignoreAttributes: ["id", "for", "aria-labelledby"] }
     );
   });
 
-  it("input's id attribute should equal to label's for attribute and contain in small's id attribute", async () => {
+  it("input's id attribute should equal to label's for attribute and contain in hint text id attribute", async () => {
     const el = await fixture(html`<sgds-input label="label" hintText="hello"></sgds-input>`);
     const input = el.shadowRoot?.querySelector("input");
     const label = el.shadowRoot?.querySelector("label");
-    const small = el.shadowRoot?.querySelector("small");
+    const hintText = el.shadowRoot?.querySelector("div.form-text");
     expect(input?.getAttribute("id")).to.equal(label?.getAttribute("for"));
-    expect(small?.getAttribute("id")).to.contain(input?.getAttribute("id"));
+    expect(hintText?.getAttribute("id")).to.contain(input?.getAttribute("id"));
   });
-  it("input's aria-labelledby points to label id, hinttext id and invalid-feedback id", async () => {
-    const el = await fixture<SgdsInput>(html`<sgds-input label="label" hintText="hello" hasFeedback></sgds-input>`);
+  it("input's aria-labelledby points to label id, hint text id and invalid-feedback id", async () => {
+    const el = await fixture<SgdsInput>(
+      html`<sgds-input label="label" hintText="hello" hasFeedback="both"></sgds-input>`
+    );
     const input = el.shadowRoot?.querySelector("input");
     const label = el.shadowRoot?.querySelector("label");
-    const small = el.shadowRoot?.querySelector("small");
-    expect(input?.getAttribute("aria-labelledby")).not.to.contain("-invalid");
+    const hintText = el.shadowRoot?.querySelector("div.form-text");
     expect(input?.getAttribute("aria-labelledby")).to.contain(label?.getAttribute("id"));
-    expect(input?.getAttribute("aria-labelledby")).to.contain(small?.getAttribute("id"));
+    expect(input?.getAttribute("aria-labelledby")).to.contain(hintText?.getAttribute("id"));
 
     el.invalid = true;
     await elementUpdated(el);
@@ -44,7 +103,7 @@ describe("sgds-input", () => {
   });
 
   it("input's id attribute should contain in .invalid-feedback's id attribute", async () => {
-    const el = await fixture<SgdsInput>(html`<sgds-input hasFeedback></sgds-input>`);
+    const el = await fixture<SgdsInput>(html`<sgds-input hasFeedback="both"></sgds-input>`);
     el.invalid = true;
     await elementUpdated(el);
     const input = el.shadowRoot?.querySelector("input");
@@ -79,16 +138,6 @@ describe("sgds-input", () => {
     expect(hintText).to.exist;
   });
 
-  // Icon
-  it("should render with form-control-group if icon attribute is defined", async () => {
-    const el = await fixture(html`<sgds-input
-      icon='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-  </svg>'
-    ></sgds-input>`);
-    expect(el.shadowRoot?.querySelector("div.form-control-group.sgds")).to.exist;
-    expect(el.shadowRoot?.querySelector("div.form-control-group.sgds>span.form-control-icon>svg")).to.exist;
-  });
   //Name
   it("updates the name attribute value to 'Hello'", async () => {
     const el = await fixture(html`<sgds-input></sgds-input>`);
@@ -125,90 +174,136 @@ describe("sgds-input", () => {
   });
 });
 describe("Feedback UI optional", () => {
-  it("when hasFeedback is true, div.invalid-feedback appears in shadowDOM", async () => {
+  it("when hasFeedback and invalid is true, div.invalid-feedback appears in shadowDOM", async () => {
     const el = await fixture<SgdsInput>(
-      html` <sgds-input hasFeedback invalidFeedback="invalid feedback" invalid></sgds-input> `
+      html` <sgds-input invalid hasFeedback="both" invalidFeedback="invalid feedback"></sgds-input> `
     );
+    el.invalid = true;
+    await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("div.invalid-feedback")).not.to.be.null;
-    expect(el.shadowRoot?.querySelector("div.invalid-feedback")?.textContent).to.equal("invalid feedback");
+    expect(el.shadowRoot?.querySelector("div.invalid-feedback")?.textContent).to.contain("invalid feedback");
   });
   it("when hasFeedback is true and invalid state is true, invalid stylings", async () => {
     const el = await fixture<SgdsInput>(
-      html` <sgds-input hasFeedback invalidFeedback="invalid feedback"></sgds-input> `
+      html` <sgds-input hasFeedback="both" invalidFeedback="invalid feedback"></sgds-input> `
     );
     expect(el.invalid).to.be.false;
-    expect(el.shadowRoot?.querySelector("input")).does.not.have.class("is-invalid");
+    expect(el.shadowRoot?.querySelector(".form-control-group")).does.not.have.class("is-invalid");
     //force an invalid state
     el.invalid = true;
     expect(el.invalid).to.be.true;
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector("input")).to.have.class("is-invalid");
+    expect(el.shadowRoot?.querySelector(".form-control-group")).to.have.class("is-invalid");
 
     //force an valid state
     el.invalid = false;
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector("input")).does.not.have.class("is-invalid");
+    expect(el.shadowRoot?.querySelector(".form-control-group")).does.not.have.class("is-invalid");
   });
 });
 describe("when using constraint validation", () => {
   it("by default, invalid should be false", async () => {
     const el = await fixture<SgdsInput>(html` <sgds-input></sgds-input> `);
     expect(el.invalid).to.be.false;
-    expect(el.reportValidity()).to.be.true;
+    expect(el.checkValidity()).to.be.true;
   });
-  it("when required, validation occurs upon typing ", async () => {
+  it("invalid is true for a required input when it is touched ", async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input required></sgds-input> `);
+    expect(el.invalid).to.be.false;
+
+    el.focus();
+    el.blur();
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+    expect(el.checkValidity()).to.be.false;
+  });
+  it("for non requried fields invalid is always false even after touching", async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input></sgds-input> `);
+    expect(el.invalid).to.be.false;
+
+    el.focus();
+    el.blur();
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+  });
+  it("when required, validation occurs upon onChange ", async () => {
     const el = await fixture<SgdsInput>(html` <sgds-input required></sgds-input> `);
     expect(el.invalid).to.be.false;
 
     el.focus();
     await sendKeys({ type: "s" });
+    el.blur();
     await el.updateComplete;
 
     expect(el.value).to.equal("s");
     expect(el.invalid).to.be.false;
-    expect(el.reportValidity()).to.be.true;
-
+    expect(el.checkValidity()).to.be.true;
+    el.focus();
     await sendKeys({ press: "Backspace" });
+    el.blur();
     await el.updateComplete;
     expect(el.value).to.equal("");
 
     expect(el.invalid).to.be.true;
-    expect(el.reportValidity()).to.be.false;
+    expect(el.checkValidity()).to.be.false;
   });
 
+  it("for an invalid field,  invalid is set to false (reset) when user is typing", async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input invalid></sgds-input> `);
+    expect(el.invalid).to.be.true;
+    el.focus();
+    await sendKeys({ type: "s" });
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+  });
   it("should be invalid when the pattern does not match", async () => {
     const el = await fixture<SgdsInput>(html` <sgds-input pattern="failtest" value="fail"></sgds-input> `);
     expect(el.invalid).to.be.false;
-    expect(el.reportValidity()).to.be.false;
-
+    expect(el.checkValidity()).to.be.false;
+    el.focus();
     await sendKeys({ type: "tes" });
+    el.blur();
     await el.updateComplete;
     expect(el.value).to.equal("failtes");
     expect(el.invalid).to.be.true;
-    expect(el.reportValidity()).to.be.false;
-
+    expect(el.checkValidity()).to.be.false;
+    el.focus();
     await sendKeys({ type: "t" });
+    el.blur();
     await el.updateComplete;
     expect(el.value).to.equal("failtest");
     expect(el.invalid).to.be.false;
-    expect(el.reportValidity()).to.be.true;
-
+    expect(el.checkValidity()).to.be.true;
+    el.focus();
     await sendKeys({ press: "Backspace" });
+    el.blur();
     await el.updateComplete;
     expect(el.value).to.equal("failtes");
     expect(el.invalid).to.be.true;
-    expect(el.reportValidity()).to.be.false;
+    expect(el.checkValidity()).to.be.false;
   });
 
-  it("should be invalid when required and disabled is removed", async () => {
-    const el = await fixture<SgdsInput>(html` <sgds-input disabled required></sgds-input> `);
-    el.disabled = false;
-    await el.updateComplete;
+  it("when disabled, invalid state is removed", async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input invalid invalidFeedback="" hasFeedback></sgds-input> `);
     expect(el.invalid).to.be.true;
+    el.disabled = true;
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+    el.disabled = false;
+    expect(el.invalid).to.be.false;
   });
 });
 
 describe("when calling HTMLFormElement.reportValidity()", () => {
+  it("should be valid when the input is empty and form.reportValidity() is called", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input required value="test"></sgds-input>
+      </form>
+    `);
+
+    expect(form.reportValidity()).to.be.true;
+  });
   it("should be invalid when the input is empty and form.reportValidity() is called", async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
@@ -217,16 +312,6 @@ describe("when calling HTMLFormElement.reportValidity()", () => {
     `);
 
     expect(form.reportValidity()).to.be.false;
-  });
-
-  it("should be valid when the input is empty, reportValidity() is called, and the form has novalidate", async () => {
-    const form = await fixture<HTMLFormElement>(html`
-      <form novalidate>
-        <sgds-input required value=""></sgds-input>
-      </form>
-    `);
-
-    expect(form.reportValidity()).to.be.true;
   });
 
   it("fires sgds-input event when value is entered", async () => {
@@ -241,19 +326,6 @@ describe("when calling HTMLFormElement.reportValidity()", () => {
 });
 
 describe("when submitting a form", () => {
-  it("should submit the form when pressing enter in a form without a submit button", async () => {
-    const form = await fixture<HTMLFormElement>(html` <form><sgds-input></sgds-input></form> `);
-    const input = form.querySelector<SgdsInput>("sgds-input");
-    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
-
-    form.addEventListener("submit", submitHandler);
-    input?.focus();
-    await sendKeys({ press: "Enter" });
-    await waitUntil(() => submitHandler.calledOnce);
-
-    expect(submitHandler).to.have.been.calledOnce;
-  });
-
   it("should submit the form when pressing enter in a form with a submit button", async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
@@ -270,24 +342,50 @@ describe("when submitting a form", () => {
     expect(submitHandler).to.have.been.calledOnce;
   });
 
-  it("should prevent submission when pressing enter in an input and canceling the keydown event", async () => {
-    const form = await fixture<HTMLFormElement>(html` <form><sgds-input></sgds-input></form> `);
-    const input = form.querySelector<SgdsInput>("sgds-input");
+  it("when disabled is true in SgdsInput, form can be submitted even if input is required", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input required disabled></sgds-input>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
     const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
-    const keydownHandler = sinon.spy((event: KeyboardEvent) => {
-      if (event.key === "Enter") {
-        event.preventDefault();
-      }
-    });
-
+    expect(form.reportValidity()).to.equal(true);
     form.addEventListener("submit", submitHandler);
-    input?.addEventListener("keydown", keydownHandler);
-    input?.focus();
-    await sendKeys({ press: "Enter" });
-    await waitUntil(() => keydownHandler.calledOnce);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
 
-    expect(keydownHandler).to.have.been.calledOnce;
-    expect(submitHandler).to.not.have.been.called;
+  it("form submission is blocked when input is required", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input required></sgds-input>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    expect(form.reportValidity()).to.equal(false);
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    expect(submitHandler).not.to.have.been.calledOnce;
+  });
+  it("when form has novalidate, form submission is proceeds even when input is required", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-input required></sgds-input>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    expect(form.reportValidity()).to.equal(false);
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
   });
 });
 
@@ -321,5 +419,22 @@ describe("when resetting a form", () => {
     await input?.updateComplete;
 
     expect(input?.value).to.equal("");
+  });
+  it("form validity gets reset", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input invalid></sgds-input>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    const input = form.querySelector<SgdsInput>("sgds-input");
+    expect(input?.invalid).to.equal(true);
+
+    setTimeout(() => button?.click());
+    await oneEvent(form, "reset");
+    await input?.updateComplete;
+
+    expect(input?.invalid).to.equal(false);
   });
 });

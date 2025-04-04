@@ -5,8 +5,8 @@
   width: -moz-available;
 }
 
-.form-control {
-  border-radius: var(--sgds-border-radius) 0 0 var(--sgds-border-radius);
+.form-control-group {
+border-right: 0;
 }
 
 .input-feedback {
@@ -14,4 +14,9 @@
   flex-direction: column;
   width: -webkit-fill-available;
   width: -moz-available;
+}
+
+.calendar-btn {
+  all: unset;
+  
 }

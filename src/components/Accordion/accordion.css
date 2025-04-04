@@ -1,5 +1,4 @@
-:host {
-  --accordion-active-color: var(--sgds-primary);
+:host([variant="border"]) .accordion {
+  border: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+  border-radius: var(--sgds-border-radius-md);
 }
- 
-

@@ -1,25 +1,25 @@
-import { html, nothing } from "lit";
+import { html } from "lit";
 import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { ifDefined } from "lit/directives/if-defined.js";
-import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import SgdsElement from "../../base/sgds-element";
+import { watch } from "../../utils/watch";
 import { animateTo, stopAnimations } from "../../utils/animate";
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { waitForEvent } from "../../utils/event";
 import Modal from "../../utils/modal";
-import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll";
 import { HasSlotController } from "../../utils/slot";
-import { watch } from "../../utils/watch";
-import modalStyle from "./modal.css";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
+import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll";
+import SgdsButton from "../Button/sgds-button";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import modalStyle from "./modal.css";
 import headerStyles from "../../styles/header-class.css";
 import svgStyles from "../../styles/svg.css";
 /**
  * @summary The modal component inform users about a specific task and may contain critical information which users then have to make a decision.
  *
  * @slot default - The content of the Modal's body.
+ * @slot title - The title of the Modal.
+ * @slot description - The description of the Modal.
  * @slot footer - The content of the Modal's footer, typically used to pass in buttons for call to action.
  *
  * @event sgds-close - Emitted when the modal is called to close via mouseclick of close button, overlay or via keyboard esc key
@@ -28,31 +28,13 @@ import svgStyles from "../../styles/svg.css";
  * @event sgds-after-show - Emitted after modal opens and the animations has completed
  * @event sgds-after-hide - Emitted after modal closes and the animations has completed
  *
- * @csspart base - The component's base wrapper
- * @csspart overlay - The overlay that covers the screen behind the dialog
- * @csspart panel - The modal's dialog panel
- * @csspart header - The modal's header that wraps the title, titleIcon and close button
- * @csspart title - The h3 element wrapping title and titleIcon
- * @csspart body - The modal's body where the content lies
- * @csspart footers - The modal's footer
- *
- * @cssproperty --modal-panel-padding - The general modal padding of modal component. Applied to body, footer and header.
- * @cssproperty --modal-panel-z-index - The z-index of modal panel
- * @cssproperty --modal-panel-width - The width of modal panel.
- * @cssproperty --modal-panel-height - The height of modal panel.
- * @cssproperty --modal-panel-bg - The background color of modal panel
- * @cssproperty --modal-panel-border-radius - The border radius of modal panel
- * @cssproperty --modal-header-border-bottom - The bottom border of header
- * @cssproperty --modal-overlay-bg - The overlay's background color
  */
-export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
+export class SgdsModal extends SgdsElement {
   static styles = [...SgdsElement.styles, headerStyles, svgStyles, modalStyle];
   /**@internal */
-  static get scopedElements() {
-    return {
-      "sgds-close-button": SgdsCloseButton
-    };
-  }
+  static dependencies = {
+    "sgds-close-button": SgdsCloseButton
+  };
   /**@internal */
   @query(".modal") dialog: HTMLElement;
   /**@internal */
@@ -67,31 +49,24 @@ export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
   private modal: Modal;
   /**@internal */
   private originalTrigger: HTMLElement | null;
+  private _resizeHandler: () => void;
 
   /**Indicates whether or not the modal is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
-  /**The modal's title as displayed in the header */
-  @property({ reflect: true }) title = "";
-  /**The modal's icon as displayed in the header. Pass in SVG format icons as string directly  */
-  @property({ reflect: true }) titleIcon = "";
-  /** Disables the header. This will also remove the default close button */
-  @property({ type: Boolean, reflect: true }) noHeader = false;
-  /** Centers the modal vertically in page */
-  @property({ type: Boolean, reflect: true }) centered = false;
-  /** Centers the contents inside the modal */
-  @property({ type: Boolean, reflect: true }) centeredAlignVariant = false;
   /** Removes the default animation when opening and closing of modal */
   @property({ type: Boolean, reflect: true }) noAnimation = false;
-  /** Removes the close button from modal header */
-  @property({ type: Boolean, reflect: true }) noCloseButton = false;
+  /** Specifies a small, medium, large or fullscreen modal, the size is medium by default. */
+  @property({ reflect: true }) size: "sm" | "md" | "lg" | "fullscreen" = "md";
 
   connectedCallback() {
     super.connectedCallback();
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.modal = new Modal(this);
+    this._resizeHandler = this._debounce(this._onWindowResize.bind(this), 200);
   }
 
   firstUpdated() {
+    this._onWindowResize();
     this.dialog.hidden = !this.open;
 
     if (this.open) {
@@ -103,7 +78,49 @@ export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
 
   disconnectedCallback() {
     super.disconnectedCallback();
+    this._removeResizeListener();
     unlockBodyScrolling(this);
+  }
+
+  private _debounce(func: (...args: any[]) => void, wait: number) {
+    let timeout: number;
+    return (...args: any[]) => {
+      clearTimeout(timeout);
+      timeout = window.setTimeout(() => func(...args), wait);
+    };
+  }
+
+  /** Handle the window resize event. */
+  private _onWindowResize() {
+    const panel = this.panel.getBoundingClientRect();
+    const panelWidth = panel.width;
+    const buttonElements = this.querySelectorAll("sgds-button[slot='footer']");
+
+    if (!this.panel) return;
+
+    if (buttonElements.length <= 1) return;
+
+    if (panelWidth <= 360) {
+      buttonElements.forEach(buttonElement => {
+        const button = buttonElement as SgdsButton;
+        button.fullWidth = true;
+      });
+    } else {
+      buttonElements.forEach(buttonElement => {
+        const button = buttonElement as SgdsButton;
+        button.fullWidth = false;
+      });
+    }
+  }
+
+  /**  Add the resize event listener. */
+  private _addResizeListener() {
+    window.addEventListener("resize", this._resizeHandler);
+  }
+
+  /** Remove the resize event listener. */
+  private _removeResizeListener() {
+    window.removeEventListener("resize", this._resizeHandler);
   }
 
   /** Shows the dialog. */
@@ -156,6 +173,14 @@ export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
     }
   }
 
+  private _overlayClickHandler() {
+    if (this.size === "fullscreen") {
+      return;
+    }
+
+    this.requestClose("overlay");
+  }
+
   @watch("open", { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.open) {
@@ -182,6 +207,9 @@ export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
 
       // Add focus on modal heading after opening it
       this.heading.focus();
+
+      // Add resize listener only when the modal is shown
+      this._addResizeListener();
     } else {
       // Hide
       this.emit("sgds-hide");
@@ -220,86 +248,48 @@ export class SgdsModal extends ScopedElementsMixin(SgdsElement) {
       }
 
       this.emit("sgds-after-hide");
+
+      // Remove resize listener when the modal is hidden
+      this._removeResizeListener();
     }
   }
 
   render() {
-    const withLabelIcon = html`${unsafeSVG(this.titleIcon)}`;
     return html`
       <div
-        part="base"
         class=${classMap({
           modal: true,
-          "modal--open": this.open,
-          "modal--has-footer": this.hasSlotController.test("footer"),
-          centered: this.centered
+          show: this.open,
+          "has-footer": this.hasSlotController.test("footer")
         })}
       >
-        <div part="overlay" class="modal-overlay" @click=${() => this.requestClose("overlay")}></div>
+        <div class="modal-overlay" @click=${this._overlayClickHandler}></div>
 
         <div
-          part="panel"
           class="modal-panel"
           role="dialog"
           aria-modal="true"
           aria-hidden=${this.open ? "false" : "true"}
-          aria-label=${ifDefined(this.noHeader ? this.title : undefined)}
-          aria-labelledby=${ifDefined(!this.noHeader ? "title" : undefined)}
+          aria-labelledby="title"
           tabindex="-1"
         >
-          ${!this.noHeader
-            ? html`
-                <div
-                  part="header"
-                  class=${classMap({
-                    "modal-header": true,
-                    centered: this.centeredAlignVariant
-                  })}
-                >
-                  <h3
-                    part="title"
-                    class=${classMap({
-                      "modal-title": true,
-                      centered: this.centeredAlignVariant
-                    })}
-                    id="title"
-                    tabindex="-1"
-                  >
-                    ${this.titleIcon ? withLabelIcon : ""} ${this.title}
-                  </h3>
-                  ${this.noCloseButton
-                    ? nothing
-                    : html`<sgds-close-button
-                        class=${classMap({
-                          "modal-close": true,
-                          centered: this.centeredAlignVariant
-                        })}
-                        @click="${() => this.requestClose("close-button")}"
-                        ariaLabel="close modal"
-                      ></sgds-close-button>`}
-                </div>
-              `
-            : ""}
-
-          <div
-            part="body"
-            class=${classMap({
-              "modal-body": true,
-              centered: this.centeredAlignVariant
-            })}
-          >
+          <div class="modal-header">
+            <div class="modal-header__title-description">
+              <slot class="modal-title" id="title" name="title"></slot>
+              <slot name="description"></slot>
+            </div>
+            <sgds-close-button
+              class="modal-header__close"
+              @click="${() => this.requestClose("close-button")}"
+              ariaLabel="close modal"
+            ></sgds-close-button>
+          </div>
+          <div class="modal-body">
             <slot></slot>
           </div>
-
-          <footer
-            part="footer"
-            class=${classMap({
-              "modal-footer": true,
-              centered: this.centeredAlignVariant
-            })}
-          >
+          <div class="modal-footer">
             <slot name="footer"></slot>
-          </footer>
+          </div>
         </div>
       </div>
     `;

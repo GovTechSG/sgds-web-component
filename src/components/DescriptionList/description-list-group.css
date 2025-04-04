@@ -1,0 +1,32 @@
+:host([bordered]) .container {
+  border: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+  border-radius: var(--sgds-border-radius-md);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  color: var(--sgds-header-color-default);
+  font-weight: var(--sgds-font-weight-semibold);
+  letter-spacing: var(--sgds-letter-spacing-tight);
+  font-size: var(--sgds-font-size-4);
+  line-height: var(--sgds-line-height-heading);
+}
+
+.description {
+  font-weight: var(--sgds-font-weight-regular);
+  color: var(--sgds-color-subtle);
+  font-size: var(--sgds-font-size-2);
+  line-height: var(--sgds-line-height-body);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-gap-xs);
+  padding: var(--sgds-padding-lg) var(--sgds-padding-xl);
+  border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+}

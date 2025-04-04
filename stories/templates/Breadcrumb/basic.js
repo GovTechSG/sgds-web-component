@@ -3,18 +3,12 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args =>
   html`
-    <sgds-breadcrumb ariaLabel=${ifDefined(args.ariaLabel)}>
-      <sgds-breadcrumb-item rel=${ifDefined(args.rel)} href=${ifDefined(args.href)} target=${ifDefined(args.target)}
-        >Home</sgds-breadcrumb-item
-      >
-      <sgds-breadcrumb-item href="https://www.google.com">Item 1</sgds-breadcrumb-item>
-      <sgds-breadcrumb-item href="https://www.google.com">Item 2</sgds-breadcrumb-item>
-      <sgds-breadcrumb-item href="https://www.google.com">Item 3</sgds-breadcrumb-item>
-      <sgds-breadcrumb-item>Last Item</sgds-breadcrumb-item>
+    <sgds-breadcrumb>
+      <sgds-breadcrumb-item><a href="#">Home</a></sgds-breadcrumb-item>
+      <sgds-breadcrumb-item><a href="#">About</a></sgds-breadcrumb-item>
+      <sgds-breadcrumb-item active><a href="https://www.google.com/">Contacts</a></sgds-breadcrumb-item>
     </sgds-breadcrumb>
   `;
-export const args = {
-  href: "https://www.designsystem.tech.gov.sg/"
-};
+export const args = {};
 
 export const parameters = {};

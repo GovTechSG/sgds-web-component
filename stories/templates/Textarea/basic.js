@@ -5,11 +5,12 @@ export const Template = args =>
   html`
     <sgds-textarea
       label=${ifDefined(args.label)}
+      hintText=${ifDefined(args.hintText)}
       name=${ifDefined(args.name)}
       value=${ifDefined(args.value)}
       rows=${ifDefined(args.rows)}
       invalidFeedback=${ifDefined(args.invalidFeedback)}
-      ?invlaid=${ifDefined(args.invalidFeedback)}
+      ?invalid=${ifDefined(args.invalid)}
       placeholder=${ifDefined(args.placeholder)}
       ?autofocus=${args.autofocus}
       ?disabled=${args.disabled}

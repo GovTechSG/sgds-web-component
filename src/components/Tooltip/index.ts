@@ -1,6 +1,7 @@
 import { SgdsTooltip } from "./sgds-tooltip";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-tooltip", SgdsTooltip);
+register("sgds-tooltip", SgdsTooltip);
 
 declare global {
   interface HTMLElementTagNameMap {

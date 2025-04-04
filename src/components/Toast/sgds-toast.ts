@@ -1,6 +1,5 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
-import { property, query } from "lit/decorators.js";
-import { html } from "lit/static-html.js";
+import { html, nothing } from "lit";
+import { property, query, queryAssignedNodes } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 import { animateTo } from "../../utils/animate";
@@ -12,26 +11,21 @@ import toastStyle from "./toast.css";
  * @summary Toast allows you to convey quick messaging notifications to the user.
  *
  * @slot default - The content to pass into toast's body
- * @slot icon - The slot to pass in icon to toast's header
- * @slot duration - When required, pass in the duration since toast appeared to this slot
- *
+ * @slot action - The content to pass into toast's action
+ * @slot icon - The icon in toast
  *
  * @event sgds-show - Emitted on show.
  * @event sgds-after-show - Emitted on show after animation has completed.
  * @event sgds-hide - Emitted on hide.
  * @event sgds-after-hide - Emitted on hide after animation has completed.
- 
- * @cssproperty --toast-icon-margin-right - The margin right between toast's icon and title in its header.
+ *
  */
-export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
+export class SgdsToast extends SgdsElement {
   static styles = [...SgdsElement.styles, toastStyle];
   /**@internal */
-  static get scopedElements() {
-    return {
-      "sgds-close-button": SgdsCloseButton
-    };
-  }
-
+  static dependencies = {
+    "sgds-close-button": SgdsCloseButton
+  };
   /**@internal */
   @query("div.toast") toast: HTMLElement;
   /** Controls the appearance of toast */
@@ -42,10 +36,12 @@ export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
   @property({ type: Boolean, reflect: true }) noAnimation = false;
   /** Controls if the toast will hide itself after the delay time. Works with delay property */
   @property({ type: Boolean, reflect: true }) autohide = false;
-  /** The amount of time taken for toast to disappear after its first render. It takes effect only when autohide is set to true */
+  /** The amount of time taken in miliseconds for toast to disappear after its first render. It takes effect only when autohide is set to true. Defaults to 5000ms */
   @property({ type: Number, reflect: true }) delay = 5000;
-  /**Adds CSS styling to `<Toast />` based on the defined status */
+  /**The variant styles of toast */
   @property({ type: String, reflect: true }) variant: "success" | "warning" | "danger" | "info" = "info";
+  /** Controls whether or not the Toast is dismissible */
+  @property({ type: Boolean, reflect: true }) dismissible = false;
 
   /** Shows the toast */
   public async showToast() {
@@ -76,24 +72,39 @@ export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
   async handleShowChange() {
     if (this.show) {
       this.emit("sgds-show");
-      this.toast.hidden = !this.show;
-
+      this.toast.classList.remove("d-none");
       const toastAnimation = getAnimation(this, "toast.show");
-      !this.noAnimation && (await animateTo(this.toast, toastAnimation.keyframes, toastAnimation.options));
+
+      if (!this.noAnimation) {
+        await animateTo(this.toast, toastAnimation.keyframes, toastAnimation.options);
+      }
 
       this.emit("sgds-after-show");
     } else {
       this.emit("sgds-hide");
-      const toastAnimation = getAnimation(this, "toast.hide");
 
-      !this.noAnimation && (await animateTo(this.toast, toastAnimation.keyframes, toastAnimation.options));
+      const toastAnimation = getAnimation(this, "toast.hide");
+      if (!this.noAnimation) {
+        await animateTo(this.toast, toastAnimation.keyframes, toastAnimation.options);
+      }
+      this.toast.classList.add("d-none");
+
       this.emit("sgds-after-hide");
-      this.toast.hidden = !this.show;
     }
   }
+
   protected firstUpdated(): void {
-    this.toast.hidden = !this.show;
+    if (!this.show) {
+      this.toast.classList.add("d-none");
+    }
+
+    if (this._actionNodes.length === 0) {
+      return this.shadowRoot.querySelector("slot[name='action']")?.classList.add("d-none");
+    }
   }
+
+  @queryAssignedNodes({ slot: "action", flatten: true })
+  private _actionNodes!: Array<Node>;
 
   render() {
     if (this.autohide && this.show) {
@@ -103,19 +114,27 @@ export class SgdsToast extends ScopedElementsMixin(SgdsElement) {
     }
     return html`
       <div
-        class="toast sgds"
+        class="toast"
         role="alert"
         aria-hidden=${this.show ? "false" : "true"}
         aria-live="assertive"
         aria-atomic="true"
       >
-        <div class="toast-header">
-          <slot name="icon"></slot>
-          <strong>${this.title}</strong>
-          <small><slot name="duration"></slot></small>
-          <sgds-close-button ariaLabel="close toast" @click=${this.handleCloseClick}></sgds-close-button>
+        <slot name="icon"></slot>
+        <div class="toast-content">
+          <div class="toast-body">
+            <strong>${this.title}</strong>
+            <span><slot></slot></span>
+          </div>
+          <slot class="toast-action" name="action"></slot>
         </div>
-        <div class="toast-body"><slot></slot></div>
+        ${this.dismissible
+          ? html`<sgds-close-button
+              class="close-btn"
+              ariaLabel="close toast"
+              @click=${this.handleCloseClick}
+            ></sgds-close-button>`
+          : nothing}
       </div>
     `;
   }

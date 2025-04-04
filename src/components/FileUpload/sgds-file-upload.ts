@@ -1,101 +1,89 @@
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import { html } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { createRef, ref } from "lit/directives/ref.js";
-import { unsafeSVG } from "lit/directives/unsafe-svg.js";
-import SgdsElement from "../../base/sgds-element";
-import { SgdsButton, type ButtonVariant } from "../Button/sgds-button";
-import fileUploadStyle from "./file-upload.css";
-import genId from "../../utils/generateId";
-import svgStyles from "../../styles/svg.css";
-import formHintStyles from "../../styles/form-hint.css";
-export type FileUploadButtonVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info"
-  | "light"
-  | "dark"
-  | "link"
-  | "outline-primary"
-  | "outline-secondary"
-  | "outline-success"
-  | "outline-danger"
-  | "outline-warning"
-  | "outline-info"
-  | "outline-light"
-  | "outline-dark";
+import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import { SgdsButton } from "../Button/sgds-button";
+import fileUploadStyles from "./file-upload.css";
+
+import FormControlElement from "../../base/form-control-element";
+import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
+import { watch } from "../../utils/watch";
+import SgdsIcon from "../Icon/sgds-icon";
 
 /**
  * @summary Allows users to upload files of various sizes and formats
+ *
  * @slot default - Label for file upload button
  *
- * @event sgds-files-selected - Emitted when files are selected for uploading
- *
- * @cssproperty --file-upload-file-icon-color - Left icon color
- * @cssproperty --file-upload-remove-icon-color - Remove icon color
- * @cssproperty --file-upload-remove-icon-hover-color - Remove icon hover color
+ * @event sgds-files-selected - Emitted when files are selected for uploading. Access the selected files with event.target.detail
  */
 
-export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
-  static styles = [...SgdsElement.styles, svgStyles, formHintStyles, fileUploadStyle];
+export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
+  static styles = [...FormControlElement.styles, fileUploadStyles];
   /**@internal */
-  static get scopedElements() {
-    return {
-      "sgds-button": SgdsButton
-    };
-  }
-  /** The button's variant. */
-  @property({ reflect: true }) variant: FileUploadButtonVariant = "primary";
-
-  //** Disable the fileuploader button */
-  @property({ type: Boolean, reflect: true })
-  disabled = false;
+  static dependencies = {
+    "sgds-button": SgdsButton,
+    "sgds-close-button": SgdsCloseButton,
+    "sgds-icon": SgdsIcon
+  };
 
   /** Allows multiple files to be listed for uploading */
-  @property({ type: Boolean, reflect: true })
-  multiple = false;
+  @property({ type: Boolean, reflect: true }) multiple = false;
 
   /** Specify the acceptable file type  */
-  @property({ type: String, reflect: true })
-  accept = "";
+  @property({ type: String, reflect: true }) accept = "";
 
-  /** Specifies a large or small button */
-  @property({ reflect: true }) size: "sm" | "lg";
+  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
+  @property({ type: Boolean, reflect: true }) hasFeedback = false;
 
-  /** Customize the check icon with SVG */
-  @property({ type: String })
-  checkedIcon = "";
+  /**Feedback text for error state when validated */
+  @property({ type: String, reflect: true }) invalidFeedback: string;
 
-  /** Customize the cancel icon with SVG */
-  @property({ type: String })
-  cancelIcon = "";
+  /** Makes the input as a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
 
-  /** The input's hint text below the label */
-  @property({ reflect: true }) hintText = "";
-
-  /** @internal */
-  @property({ type: Object, state: true })
-  private files: FileList | undefined;
-
-  /** @internal */
-  @property({ type: Array })
+  @state()
   private selectedFiles: File[] = [];
 
-  private _setFileList(files: FileList) {
-    this.files = files;
-    this.emit("sgds-files-selected");
-    //Possible to pass in the files
+  /**
+   * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
+   * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
+   */
+  public reportValidity(): boolean {
+    return this._mixinReportValidity();
+  }
+  /**
+   * Checks for validity without any native error popup message
+   */
+  public checkValidity(): boolean {
+    return this._mixinCheckValidity();
+  }
+  /**
+   * Returns the ValidityState object
+   */
+  public get validity(): ValidityState {
+    return this._mixinGetValidity();
+  }
+  /**
+   * Returns the validation message based on the ValidityState
+   */
+  public get validationMessage(): string {
+    return this._mixinGetValidationMessage();
+  }
+  /**
+   * Returns files selected for upload
+   */
+  public get files(): File[] {
+    return this.selectedFiles;
   }
 
-  // Create a ref to the input element
-  /** @internal */
+  private _setFileList(files: FileList) {
+    this.emit("sgds-files-selected", { detail: files });
+  }
+
   private inputRef = createRef<HTMLInputElement>();
 
-  /** @internal */
-  private handleClick(event: Event) {
+  private _handleClick(event: Event) {
     event.preventDefault();
     if (!this.disabled) {
       // Get a reference to the input element using the inputRef
@@ -105,8 +93,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
     }
   }
 
-  /** @internal */
-  private handleInputChange(event: Event) {
+  private _handleChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const files = inputElement.files as FileList;
 
@@ -116,6 +103,7 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
     // Trigger a re-render of the component to update the list of selected files
     this._setFileList(files);
     this.requestUpdate();
+    super._mixinHandleChange(event);
   }
 
   private _removeFileHandler(index: number) {
@@ -135,88 +123,90 @@ export class SgdsFileUpload extends ScopedElementsMixin(SgdsElement) {
 
     // Trigger a re-render of the component to update the list of selected files
     this.requestUpdate();
+    this._mixinValidate(this.input);
   }
 
-  /**@internal */
-  protected inputId: string = genId("input", "file");
+  private _clearAllFiles() {
+    const inputElement = this.inputRef.value;
+    const fileBuffer = new DataTransfer();
+    inputElement.files = fileBuffer.files;
+    this._setFileList(fileBuffer.files);
+    this.selectedFiles = Array.from(fileBuffer.files);
+  }
+
+  /**
+   * fileupload requries a custom _mixinResetFormControl for clearing files
+   */
+  private _mixinResetFormControl() {
+    this._clearAllFiles();
+    this._mixinResetValidity(this.input);
+  }
+  @watch("disabled", { waitUntilFirstUpdate: true })
+  _handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    this.setInvalid(false);
+  }
+  protected _renderLabel() {
+    const labelTemplate = html`
+      <label for=${this._controlId} id=${this._labelId} class="form-label"> ${this.label} </label>
+    `;
+    return this.label && labelTemplate;
+  }
 
   protected _renderHintText() {
-    const hintTextTemplate = html` <small id="${this.inputId}Help" class="form-text">${this.hintText}</small> `;
+    const hintTextTemplate = html` <div id="${this._controlId}Help" class="form-text">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }
 
-  private _sanitizeVariant(variant: FileUploadButtonVariant) {
-    return variant.replace("outline-", "") as ButtonVariant;
+  protected _renderFeedback() {
+    return html`
+      <div class="invalid-feedback-container">
+        <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
+        <div id="${this._controlId}-invalid" class="invalid-feedback">
+          ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
+        </div>
+      </div>
+    `;
   }
   render() {
-    const getCheckedIcon = (checkedIcon: string) => {
-      if (checkedIcon) {
-        return html`${unsafeSVG(checkedIcon)}`;
-      }
-      return html` <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-check-lg"
-        viewBox="0 0 16 16"
-      >
-        <path
-          d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
-        />
-      </svg>`;
-    };
-
-    const getCancelIcon = (cancelIcon: string) => {
-      if (cancelIcon) {
-        return html`${unsafeSVG(cancelIcon)}`;
-      }
-      return html`<svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-x-circle"
-        viewBox="0 0 16 16"
-      >
-        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        <path
-          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-        />
-      </svg>`;
+    const getCheckedIcon = () => {
+      return html`<sgds-icon name="check-circle-fill" class="${this.invalid ? "invalid" : "valid"}"></sgds-icon>`;
     };
 
     const listItems = this.selectedFiles.map(
       (file, index) => html`
-        <li key=${index} class="fileupload-list-item">
-          <span>${getCheckedIcon(this.checkedIcon)}</span>
+        <li key=${index} class="file-upload-list-item">
+          ${getCheckedIcon()}
           <span class="filename">${file.name}</span>
-          <span @click=${() => this._removeFileHandler(index)}>${getCancelIcon(this.cancelIcon)}</span>
+          <sgds-close-button
+            aria-label="remove the file"
+            @click=${() => this._removeFileHandler(index)}
+          ></sgds-close-button>
         </li>
       `
     );
 
     return html`
-      <input
-        ${ref(this.inputRef)}
-        type="file"
-        @change=${this.handleInputChange}
-        ?multiple=${this.multiple}
-        accept=${this.accept}
-        id=${this.inputId}
-      />
-      <div class="fileupload-container">
-        <sgds-button
-          size=${this.size}
-          variant=${this._sanitizeVariant(this.variant)}
-          ?outlined=${this.variant.includes("outline")}
+      <div class="file-upload">
+        <input
+          ${ref(this.inputRef)}
+          type="file"
+          @change=${this._handleChange}
+          ?multiple=${this.multiple}
+          accept=${this.accept}
+          id=${this._controlId}
+          ?required=${this.required}
           ?disabled=${this.disabled}
-          @click=${this.handleClick}
-        >
-          <label for=${this.inputId} class="file-upload-label"><slot></slot></label>
-        </sgds-button>
-        ${this._renderHintText()}
-        <ul class="sgds fileupload-list">
+        />
+        <div class="file-upload-container">
+          ${this._renderLabel()}
+          <sgds-button variant="outline" ?disabled=${this.disabled} @click=${this._handleClick}>
+            <label for=${this._controlId}><slot></slot></label>
+            <sgds-icon slot="rightIcon" name="upload"></sgds-icon>
+          </sgds-button>
+          ${this.hasFeedback && this.invalid ? this._renderFeedback() : this._renderHintText()}
+        </div>
+        <ul class="file-upload-list">
           ${listItems}
         </ul>
       </div>

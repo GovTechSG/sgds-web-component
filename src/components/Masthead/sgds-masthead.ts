@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { state } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import mastheadStyle from "./masthead.css";
 import svgStyles from "../../styles/svg.css";
@@ -7,19 +7,9 @@ import anchorStyles from "../../styles/anchor.css";
 
 /**
  * @summary All .gov.sg digital services shall adopt The Official Government Banner for every page in the digital service and be placed at the top of the page.
- *
- * @cssproperty --masthead-mobile-font-size - Sets the padding left and right for viewport width 1024px and below
- * @cssproperty --masthead-mobile-padding-x - Sets the font size for viewport width 1024px and below
- * @cssproperty --masthead-fluid-padding-x - Sets the container-fluid padding left and right for viewport width 1024px and above
  */
 export class SgdsMasthead extends SgdsElement {
   static styles = [...SgdsElement.styles, svgStyles, anchorStyles, mastheadStyle];
-
-  /**
-   * Sets the masthead container width to 100% for all breakpoints
-   */
-  @property({ type: Boolean, reflect: true })
-  fluid = false;
 
   /** @internal */
   @state()
@@ -33,36 +23,43 @@ export class SgdsMasthead extends SgdsElement {
   render() {
     return html`
       <div id="sgds-masthead" class="sgds-masthead" aria-label="A Singapore Government Agency Website" role="banner">
-        <div class="${this.fluid ? "container-fluid" : "container"}">
-          <div class="row">
-            <div class="col">
-              <div class="masthead-layout">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M5.17419 8.41308C5.17419 8.41308 4.54237 9.33755 5.36993 10.533C5.36993 10.533 5.50042 9.92422 6.80735 9.92422H8.37592C9.85727 9.92422 10.9678 8.45858 10.2707 6.94674C10.2707 6.94674 11.316 7.0598 11.6655 6.38282C12.0137 5.70652 11.6436 5.43559 11.1209 5.43559H8.48511C8.48511 5.92092 7.5923 5.98848 7.5923 5.43559H6.11094C6.11094 5.43559 4.99976 5.43559 4.97845 6.40557C4.97845 6.40557 5.22945 6.2477 5.47912 6.22564V6.48416C5.47912 6.48416 5.17419 6.54069 5.03238 6.61997C4.89124 6.69856 4.68418 6.91296 4.88058 7.46585C5.07632 8.01805 5.15289 8.20971 5.15289 8.20971C5.15289 8.20971 5.46913 7.92705 5.98112 7.92705H6.58032C7.64689 7.92705 7.45115 8.99837 6.38391 8.99837C5.31667 8.99837 5.17552 8.41239 5.17552 8.41239L5.17419 8.41308Z"
-                    fill="#DB0000"
-                  />
-                  <path
-                    d="M10.7394 7.29696C10.7394 7.29696 11.0989 7.31971 11.3599 7.08325C11.3599 7.08325 13.7234 8.98942 10.2168 12.8231C6.70947 16.6575 9.42118 19.1393 9.42118 19.1393C9.42118 19.1393 8.79002 19.7701 9.14888 21C9.14888 21 7.69016 20.1472 6.57432 18.6988C4.9618 16.6058 3.97645 13.4036 8.40454 10.8494C8.40454 10.8494 11.3273 9.32722 10.7394 7.29696Z"
-                    fill="#DB0000"
-                  />
-                  <path
-                    d="M7.12702 5.07507C7.12702 5.07507 7.59906 4.20299 8.69493 4.20299C9.55911 4.20299 9.75618 3.74385 9.75618 3.74385C9.75618 3.74385 10.133 3 12.0358 3C13.7795 3 14.9546 3.60184 15.9053 4.40567C15.9053 4.40567 13.3421 2.7594 10.8154 5.07507H7.12702Z"
-                    fill="#DB0000"
-                  />
-                  <path
-                    d="M17.7861 10.5936C17.7135 7.87188 15.6803 4.95507 11.3094 5.12052C15.5791 1.37644 22.9852 9.736 16.8853 14.1281C16.8853 14.1281 17.906 12.6204 17.7861 10.5936Z"
-                    fill="#DB0000"
-                  />
-                  <path
-                    d="M11.9632 5.42114C17.2927 5.25568 19.1955 11.8718 15.7534 14.8493L12.2974 16.5789C12.2974 16.5789 11.8473 15.0754 13.5178 13.3154C15.1882 11.5567 16.7994 8.2635 12.1822 6.09812C12.1822 6.09812 12.2694 5.64726 11.9645 5.42182L11.9632 5.42114Z"
-                    fill="#DB0000"
-                  />
-                  <path
-                    d="M11.6869 6.90954C11.6869 6.90954 11.9485 6.65377 12.0358 6.44351C15.9998 8.15734 15.376 11.0604 13.0085 13.496C11.5564 15.0444 12.0065 16.7141 12.0065 16.7141C12.0065 16.7141 10.2355 17.8564 9.62498 18.8491C9.62498 18.8491 7.0604 16.5879 10.6123 12.8349C14.0977 9.15075 11.6869 6.90954 11.6869 6.90954Z"
-                    fill="#DB0000"
-                  />
-                </svg>
+        <div class="banner">
+          <div class="container">
+            <div class="masthead-layout">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                class="sg-crest"
+                viewBox="0 0 20 20"
+                fill="none"
+              >
+                <path
+                  d="M4.31179 7.0109C4.31179 7.0109 3.78527 7.78129 4.4749 8.77746C4.4749 8.77746 4.58365 8.27018 5.67275 8.27018H6.97989C8.21435 8.27018 9.13979 7.04881 8.55889 5.78895C8.55889 5.78895 9.42995 5.88317 9.72123 5.31901C10.0114 4.75544 9.70292 4.52966 9.26739 4.52966H7.07088C7.07088 4.9341 6.32687 4.9904 6.32687 4.52966H5.09241C5.09241 4.52966 4.16643 4.52966 4.14867 5.33797C4.14867 5.33797 4.35784 5.20641 4.56589 5.18803V5.40346C4.56589 5.40346 4.31179 5.45057 4.19361 5.51664C4.07599 5.58213 3.90344 5.7608 4.06711 6.22154C4.23023 6.68171 4.29403 6.84142 4.29403 6.84142C4.29403 6.84142 4.55757 6.60588 4.98422 6.60588H5.48356C6.37237 6.60588 6.20925 7.49864 5.31989 7.49864C4.43052 7.49864 4.3129 7.01032 4.3129 7.01032L4.31179 7.0109Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M8.94948 6.0808C8.94948 6.0808 9.24908 6.09976 9.46657 5.90271C9.46657 5.90271 11.4362 7.49118 8.51395 10.6859C5.59118 13.8813 7.85094 15.9494 7.85094 15.9494C7.85094 15.9494 7.32498 16.4751 7.62402 17.5C7.62402 17.5 6.40843 16.7894 5.47856 15.5823C4.13479 13.8382 3.31367 11.1697 7.00374 9.04116C7.00374 9.04116 9.43938 7.77268 8.94948 6.0808Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M5.93914 4.22922C5.93914 4.22922 6.33251 3.50249 7.24573 3.50249C7.96588 3.50249 8.13011 3.11988 8.13011 3.11988C8.13011 3.11988 8.44413 2.5 10.0298 2.5C11.4829 2.5 12.4621 3.00153 13.2544 3.67139C13.2544 3.67139 11.1183 2.2995 9.01282 4.22922H5.93914Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M14.8217 8.828C14.7612 6.5599 13.0668 4.12922 9.42448 4.2671C12.9825 1.14703 19.1543 8.11333 14.0711 11.7734C14.0711 11.7734 14.9216 10.517 14.8217 8.828Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M9.96927 4.51761C14.4106 4.37973 15.9962 9.89315 13.1278 12.3744L10.2478 13.8158C10.2478 13.8158 9.87273 12.5628 11.2648 11.0961C12.6568 9.6306 13.9994 6.88625 10.1518 5.08177C10.1518 5.08177 10.2245 4.70605 9.97038 4.51819L9.96927 4.51761Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M9.73904 5.75795C9.73904 5.75795 9.95708 5.54481 10.0298 5.36959C13.3331 6.79778 12.8133 9.21697 10.8403 11.2467C9.63029 12.537 10.0053 13.9284 10.0053 13.9284C10.0053 13.9284 8.52954 14.8803 8.02078 15.7076C8.02078 15.7076 5.88363 13.8233 8.84357 10.6957C11.748 7.62563 9.73904 5.75795 9.73904 5.75795Z"
+                  fill="currentColor"
+                />
+              </svg>
+              <div class="masthead-text-layout">
                 <span>A Singapore Government Agency Website</span>
                 <div
                   class="sgds-masthead-button"
@@ -72,7 +69,7 @@ export class SgdsMasthead extends SgdsElement {
                   aria-controls="sgds-masthead-content"
                   @click=${() => this._toggleVisibility()}
                 >
-                  <span class="sgds-masthead-button-text">How to identify</span>
+                  <span>How to identify</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -82,9 +79,11 @@ export class SgdsMasthead extends SgdsElement {
                     class="sgds-masthead-identify-icon ${!this.toggleVisibility ? null : "show"}"
                   >
                     <path
-                      d="M8.65188 6.85L8.64813 6.84625L10.0031 5.49125L17.0744 12.5625L15.7194 13.9175L10.0075 8.20562L4.2875 13.9256L2.9325 12.5706L8.6525 6.85062L8.65188 6.85Z"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M9.64645 7.14645C9.84171 6.95118 10.1583 6.95118 10.3536 7.14645L15.3536 12.1464C15.5488 12.3417 15.5488 12.6583 15.3536 12.8536C15.1583 13.0488 14.8417 13.0488 14.6464 12.8536L10 8.20711L5.35355 12.8536C5.15829 13.0488 4.84171 13.0488 4.64645 12.8536C4.45118 12.6583 4.45118 12.3417 4.64645 12.1464L9.64645 7.14645Z"
                       fill="currentColor"
-                    ></path>
+                    />
                   </svg>
                 </div>
               </div>
@@ -92,77 +91,80 @@ export class SgdsMasthead extends SgdsElement {
           </div>
         </div>
 
-        <div
-          id="sgds-masthead-content"
-          class="container sgds-masthead-content ${this.toggleVisibility ? "show" : null}"
-        >
-          <div class="row">
-            <div class="col">
-              <div class="content-grid">
-                <div class="wrapper">
-                  <div class="icon">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="17"
-                      height="17"
-                      viewBox="0 0 17 17"
-                      fill="none"
-                      class="banner-icon"
-                    >
-                      <path
-                        d="M0.166016 5.6665V9.00067H0.999349V13.9998H0.166016V16.4998H0.999349H3.49935H5.16602H7.66601H9.33268H11.8327H13.4993L15.9993 16.5007V16.4998H16.8327V13.9998H15.9993V9.00067H16.8327V5.6665L8.49935 0.666504L0.166016 5.6665ZM3.49935 13.9998V9.00067H5.16602V13.9998H3.49935ZM7.66601 13.9998V9.00067H9.33268V13.9998H7.66601ZM13.4993 13.9998H11.8327V9.00067H13.4993V13.9998ZM10.166 5.6665C10.166 6.58651 9.41935 7.33317 8.49935 7.33317C7.57935 7.33317 6.83268 6.58651 6.83268 5.6665C6.83268 4.7465 7.57935 3.99984 8.49935 3.99984C9.41935 3.99984 10.166 4.7465 10.166 5.6665Z"
-                        fill="#242425"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div class="content">
-                    <div class="title">Official website links end with .gov.sg</div>
-                    <article>
-                      Government agencies communicate via .gov.sg websites (e.g. go.gov.sg/open).<a
-                        href="https://www.gov.sg/trusted-sites#govsites"
-                        class="trusted-websites-link"
-                        rel="noreferrer"
-                        target="_blank"
-                        >Trusted websites</a
-                      >
-                    </article>
-                  </div>
+        <div class="panel">
+          <div
+            id="sgds-masthead-content"
+            class="container sgds-masthead-content ${this.toggleVisibility ? "show" : null}"
+          >
+            <div class="content-grid">
+              <div class="wrapper">
+                <div class="icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    class="banner-icon"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M2.5 7.31409C2.5 7.01647 2.65873 6.74143 2.91644 6.59254L9.5831 2.74069C9.84105 2.59165 10.1589 2.59165 10.4169 2.74069L17.0836 6.59254C17.3413 6.74143 17.5 7.01647 17.5 7.31409V8.33314C17.5 8.79338 17.1269 9.16648 16.6667 9.16648H15.8333V14.9998H16.6667C17.1269 14.9998 17.5 15.3729 17.5 15.8331V16.6665C17.5 17.1267 17.1269 17.4998 16.6667 17.4998H3.33333C2.8731 17.4998 2.5 17.1267 2.5 16.6665V15.8331C2.5 15.3729 2.8731 14.9998 3.33333 14.9998H4.16667V9.16648H3.33333C2.8731 9.16648 2.5 8.79338 2.5 8.33314V7.31409ZM6.66667 9.16648V14.9998H8.75V9.16648H6.66667ZM11.25 9.16648V14.9998H13.3333V9.16648H11.25ZM11.25 6.24981C11.25 6.94017 10.6904 7.49981 10 7.49981C9.30964 7.49981 8.75 6.94017 8.75 6.24981C8.75 5.55945 9.30964 4.99981 10 4.99981C10.6904 4.99981 11.25 5.55945 11.25 6.24981Z"
+                      fill="currentColor"
+                    />
+                  </svg>
                 </div>
-                <div class="wrapper">
-                  <div class="icon">
-                    <svg
+                <div class="content">
+                  <div class="title">Official website links end with .gov.sg</div>
+                  <article>Government agencies communicate via .gov.sg websites (e.g. go.gov.sg/open).</article>
+                  <a
+                    href="https://www.gov.sg/trusted-sites#govsites"
+                    class="trusted-websites-link"
+                    rel="noreferrer"
+                    target="_blank"
+                    >Trusted websites</a
+                  >
+                </div>
+              </div>
+              <div class="wrapper">
+                <div class="icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    class="banner-icon"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M5.83334 8.33317H5.41668C4.26608 8.33317 3.33334 9.26591 3.33334 10.4165V16.2498C3.33334 17.4004 4.26608 18.3332 5.41668 18.3332H14.5833C15.7339 18.3332 16.6667 17.4004 16.6667 16.2498V10.4165C16.6667 9.26591 15.7339 8.33317 14.5833 8.33317H14.1667V5.83317C14.1667 3.53198 12.3012 1.6665 10 1.6665C7.69882 1.6665 5.83334 3.53198 5.83334 5.83317V8.33317ZM7.50001 8.33317H12.5V5.83317C12.5 4.45246 11.3807 3.33317 10 3.33317C8.6193 3.33317 7.50001 4.45246 7.50001 5.83317V8.33317Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+                <div class="content">
+                  <div class="title">Secure websites use HTTPS</div>
+                  <article>
+                    Look for a lock (<svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="15"
-                      height="18"
-                      viewBox="0 0 15 18"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
                       fill="none"
-                      class="banner-icon"
+                      class="banner-icon-inline"
                     >
                       <path
-                        d="M14.1663 9.00008C14.1663 8.08091 13.4188 7.33342 12.4997 7.33342H11.6663V4.83342C11.6663 2.53591 9.79717 0.666748 7.49967 0.666748C5.20217 0.666748 3.33301 2.53591 3.33301 4.83342V7.33342H2.49967C1.58051 7.33342 0.833008 8.08091 0.833008 9.00008V15.6667C0.833008 16.5859 1.58051 17.3334 2.49967 17.3334H12.4997C13.4188 17.3334 14.1663 16.5859 14.1663 15.6667V9.00008ZM4.99967 4.83342C4.99967 3.45508 6.12134 2.33341 7.49967 2.33341C8.87801 2.33341 9.99967 3.45508 9.99967 4.83342V7.33342H4.99967V4.83342Z"
-                        fill="#242425"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div class="content">
-                    <div class="title">Secure websites use HTTPS</div>
-                    <article>
-                      Look for a<b> lock </b>(<svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="15"
-                        height="18"
-                        viewBox="0 0 15 18"
-                        fill="none"
-                        class="banner-icon-inline"
-                      >
-                        <path
-                          d="M14.1663 9.00008C14.1663 8.08091 13.4188 7.33342 12.4997 7.33342H11.6663V4.83342C11.6663 2.53591 9.79717 0.666748 7.49967 0.666748C5.20217 0.666748 3.33301 2.53591 3.33301 4.83342V7.33342H2.49967C1.58051 7.33342 0.833008 8.08091 0.833008 9.00008V15.6667C0.833008 16.5859 1.58051 17.3334 2.49967 17.3334H12.4997C13.4188 17.3334 14.1663 16.5859 14.1663 15.6667V9.00008ZM4.99967 4.83342C4.99967 3.45508 6.12134 2.33341 7.49967 2.33341C8.87801 2.33341 9.99967 3.45508 9.99967 4.83342V7.33342H4.99967V4.83342Z"
-                          fill="#242425"
-                        ></path></svg
-                      >) or https:// as an added precaution. Share sensitive information only on official, secure
-                      websites.
-                    </article>
-                  </div>
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M5.83331 8.33317H5.41665C4.26605 8.33317 3.33331 9.26591 3.33331 10.4165V16.2498C3.33331 17.4004 4.26605 18.3332 5.41665 18.3332H14.5833C15.7339 18.3332 16.6666 17.4004 16.6666 16.2498V10.4165C16.6666 9.26591 15.7339 8.33317 14.5833 8.33317H14.1666V5.83317C14.1666 3.53198 12.3012 1.6665 9.99998 1.6665C7.69879 1.6665 5.83331 3.53198 5.83331 5.83317V8.33317ZM7.49998 8.33317H12.5V5.83317C12.5 4.45246 11.3807 3.33317 9.99998 3.33317C8.61927 3.33317 7.49998 4.45246 7.49998 5.83317V8.33317Z"
+                        fill="currentColor"
+                      /></svg
+                    >) or https:// as an added precaution. Share sensitive information only on official, secure
+                    websites.
+                  </article>
                 </div>
               </div>
             </div>

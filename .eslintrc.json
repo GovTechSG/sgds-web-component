@@ -23,5 +23,5 @@
     "sort-exports/sort-exports": ["error", { "sortDir": "asc" }]
     // "jsx-quotes": [2, "prefer-single"],
   },
-  "ignorePatterns": ["**/*.js", "mocks", "**/*.mjs", "cypress", "cypress.config.ts"]
+  "ignorePatterns": ["**/*.js", "mocks", "**/*.mjs", "cypress", "cypress.config.ts", "**/*/icon-registry.ts"]
 }

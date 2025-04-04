@@ -1,10 +1,14 @@
-import customElements from "../custom-elements.json";
-import { themes } from "@storybook/theming";
-import "@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js";
+import { withThemeByClassName } from "@storybook/addon-themes";
 import { setCustomElementsManifest } from "@storybook/web-components";
-import "./global.css";
-import "../lib/themes/day.css";
+import "@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js";
+import customElements from "../custom-elements.json";
 import "../lib/index.js";
+import "../lib/themes/day.css";
+import "../lib/themes/night.css";
+import "../lib/css/sgds.css";
+import "./global.css";
+import sgdsTheme from "./sgdsTheme";
+
 export const setCustomElementsManifestWithOptions = (
   customElements: any,
   options: { privateFields?: boolean }
@@ -15,9 +19,10 @@ export const setCustomElementsManifestWithOptions = (
       module?.declarations?.forEach(declaration => {
         Object.keys(declaration).forEach(key => {
           if (Array.isArray(declaration[key])) {
-            declaration[key] = declaration[key].filter(
-              (member: { privacy: string | string[] }) => !member.privacy?.includes("private")
-            );
+            declaration[key] = declaration[key]
+              .filter((member: { privacy: string | string[] }) => !member.privacy?.includes("private"))
+              .filter((member: { static: boolean }) => !member.static)
+              .filter((member: { privacy: string | string[] }) => !member.privacy?.includes("protected"));
           }
         });
       });
@@ -32,7 +37,7 @@ export const parameters = {
   viewMode: "docs",
   docs: {
     //@ts-ignore
-    theme: themes.sgdsTheme,
+    theme: sgdsTheme,
     toc: {
       headingSelector: "h1, h2, h3",
       title: "Table of Contents",
@@ -47,7 +52,13 @@ export const parameters = {
     storySort: {
       order: [
         "Getting Started",
-        ["Introduction", "Installation", "Imports", "Usage", "Frameworks"],
+        ["Introduction", "Installation", "Imports"],
+        "Migration",
+        "Usage",
+        "Frameworks",
+        ["Angular", "Vue", "React", "NextJS"],
+        "Style",
+        "Form",
         "Troubleshooting",
         "Components",
         "Patterns",
@@ -57,3 +68,13 @@ export const parameters = {
   }
 };
 export const tags = ["autodocs"];
+
+export const decorators = [
+  withThemeByClassName({
+    themes: {
+      day: "",
+      night: "sgds-night-theme"
+    },
+    defaultTheme: "day"
+  })
+];

@@ -1,0 +1,27 @@
+:host {
+  display: inline-block;
+}
+
+.btn.btn-icon {
+  display: flex;
+  width: var(--sgds-dimension-48, 56px);
+  height: var(--sgds-dimension-48, 56px);
+  min-width: unset;
+  padding: 0;
+}
+
+.btn.btn-icon.btn-lg {
+  font-size: var(--sgds-font-size-3);
+  padding: 0;
+  min-width: unset;
+  height: var(--sgds-dimension-56);
+  width: var(--sgds-dimension-56);
+}
+
+.btn.btn-icon.btn-sm {
+  font-size: var(--sgds-font-size-1);
+  padding: 0;
+  min-width: unset;
+  height: var(--sgds-dimension-40);
+  width: var(--sgds-dimension-40);
+}

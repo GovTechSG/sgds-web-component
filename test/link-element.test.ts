@@ -12,7 +12,7 @@ describe("link-element", () => {
         <a
           aria-disabled="false"
           class="nav-link"
-          target="_self"
+          tabindex="0"
         >
           <slot>
           </slot>

@@ -1,12 +1,12 @@
 :host {
-  --tooltip-max-width: 20rem;
+  display: contents;
+}
+.tooltip-placeholder{
   display: inline-block;
 }
-
 .tooltip {
   word-wrap: break-word;
   display: block;
-  font-size: 0.875rem;
   line-break: auto;
   opacity: 0;
   text-align: left;
@@ -18,17 +18,21 @@
   word-spacing: normal;
   z-index: 1080;
 }
+
 .tooltip.show {
-  opacity: 0.9;
+  opacity: 1;
 }
+
 .tooltip-inner {
-  background-color: var(--sgds-gray-600);
-  border-radius: var(--sgds-border-radius);
-  color: var(--sgds-body-bg);
-  max-width: var(--tooltip-max-width);
-  padding: var(--sgds-spacer-1) var(--sgds-spacer-2);
-  text-align: center;
+  background-color: var(--sgds-surface-fixed-dark);
+  border-radius: var(--sgds-border-radius-md);
+  color: var(--sgds-color-fixed-light);
+  font-size: var(--sgds-font-size-1);
+  max-width: var(--sgds-dimension-320);
+  padding: var(--sgds-padding-xs) var(--sgds-padding-sm);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 8px 16px 0px rgba(0, 0, 0, 0.14);
 }
+
 div {
   max-width: fit-content;
 }

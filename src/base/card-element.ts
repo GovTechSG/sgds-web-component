@@ -7,30 +7,13 @@ import headerStyles from "../styles/header-class.css";
 import paragraphStyles from "../styles/paragraph.css";
 
 import SgdsElement from "./sgds-element";
-export type CardBorderVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "dark" | "light";
 
 export class CardElement extends SgdsElement {
   static styles = [...SgdsElement.styles, textStyles, bgStyles, borderStyles, headerStyles, paragraphStyles, cardStyle];
 
-  /** The border's variant. */
-  @property()
-  borderColor: CardBorderVariant;
+  /** When true, hides the default border of the card. */
+  @property({ type: Boolean, reflect: true }) hideBorder = false;
 
-  /** The bg's variant. */
-  @property() bgColor: CardBorderVariant;
-
-  /** The text's variant. */
-  @property() textColor: CardTextVariant;
+  /** When true, applies a tinted background color to the card. */
+  @property({ type: Boolean, reflect: true }) tinted = false;
 }
-
-export type CardTextVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info"
-  | "dark"
-  | "light"
-  | "white"
-  | "muted";

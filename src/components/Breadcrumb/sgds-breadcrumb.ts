@@ -2,78 +2,83 @@ import { property, query } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
-import type SgdsBreadcrumbItem from "./sgds-breadcrumb-item";
+import SgdsOverflowMenu from "../../internals/OverflowMenu/sgds-overflow-menu";
 import breadcrumbStyle from "./breadcrumb.css";
+import type SgdsBreadcrumbItem from "./sgds-breadcrumb-item";
 /**
  * @summary Breadcrumbs help users to navigate and understand where they are on the current website or service.
  *
  * @slot default - The slot to pass in custom elements of `SgdsBreadcrumbItems`.
- * @slot separator - Defines all the separator of `SgdsBreadcrumbItems`. Defaults to "/"
- *
- * @csspart base - The nav element wrapper of `SgdsBreadcrumb`
  *
  */
 export class SgdsBreadcrumb extends SgdsElement {
   static styles = [...SgdsElement.styles, breadcrumbStyle];
+  static dependencies = {
+    "sgds-overflow-menu": SgdsOverflowMenu
+  };
   /** The aria-label of nav element within breadcrumb component. */
   @property({ type: String }) ariaLabel = "breadcrumb";
 
   /**@internal */
   @query("slot") defaultSlot: HTMLSlotElement;
-  /**@internal */
-  @query('slot[name="separator"]') separatorSlot: HTMLSlotElement;
+  /**
+   * creates `<sgds-breadcrumb-item>
+   *            <sgds-overflow-menu>
+   *              <sgds-dropdown-item></sgds-dropdown-item>
+   *               ...
+   *            </sgds-overflow-menu>
+   *          <sgds-breadcrumb-item>`
+   */
+  private _replaceExcessItemsWithDropdown(items: SgdsBreadcrumbItem[]) {
+    const breadcrumbItem = document.createElement("sgds-breadcrumb-item");
+    const overflowMenu = document.createElement("sgds-overflow-menu");
+    overflowMenu.setAttribute("aria-haspopup", "menu");
+    overflowMenu.setAttribute("size", "sm");
+    const mapItems = items.filter((item, index) => {
+      if (index > 0 && index < items.length - 2) {
+        const clonedAnchor = item.querySelector("a");
+        const clonedAnchorNode = clonedAnchor.cloneNode(true);
+        const dropdownItem = document.createElement("sgds-dropdown-item");
+        dropdownItem.appendChild(clonedAnchorNode);
+        overflowMenu.appendChild(dropdownItem);
+        return;
+      } else {
+        return item;
+      }
+    });
+    breadcrumbItem.appendChild(overflowMenu);
+    mapItems.splice(1, 0, breadcrumbItem);
 
-  // Generates a clone of the separator element to use for each breadcrumb item
-  private _getSeparator() {
-    const separator = this.separatorSlot.assignedElements({ flatten: true })[0] as HTMLElement;
-
-    // Clone it, remove ids, and slot it
-    const clone = separator.cloneNode(true) as HTMLElement;
-    [clone, ...clone.querySelectorAll("[id]")].forEach(el => el.removeAttribute("id"));
-    clone.setAttribute("data-default", "");
-    clone.slot = "separator";
-
-    return clone;
+    this.defaultSlot.replaceWith(...mapItems);
   }
 
-  private _handleSlotChange() {
-    const items = [...this.defaultSlot.assignedElements({ flatten: true })].filter(
-      item => item.tagName.toLowerCase() === "sgds-breadcrumb-item"
-    ) as SgdsBreadcrumbItem[];
-
+  private _handleSlotChange(e: Event) {
+    const items = (e.target as HTMLSlotElement)
+      .assignedElements({ flatten: true })
+      .filter(
+        (item: SgdsBreadcrumbItem) => item.tagName.toLowerCase() === "sgds-breadcrumb-item"
+      ) as SgdsBreadcrumbItem[];
     items.forEach((item, index) => {
-      // Append separators to each item if they don't already have one
-      const separator = item.querySelector('[slot="separator"]');
-      if (separator === null) {
-        // No separator exists, add one
-        item.append(this._getSeparator());
-      } else if (separator.hasAttribute("data-default")) {
-        // A default separator exists, replace it
-        separator.replaceWith(this._getSeparator());
-      } else {
-        // The user provided a custom separator, leave it alone
-      }
-
-      // The last breadcrumb item is the "current page"
-
       if (index === items.length - 1) {
         item.setAttribute("aria-current", "page");
+        item.active = true;
       } else {
         item.removeAttribute("aria-current");
       }
     });
+
+    if (items.length >= 5) {
+      this._replaceExcessItemsWithDropdown(items);
+    }
   }
 
   render() {
     return html`
-      <nav aria-label=${ifDefined(this.ariaLabel)} part="base">
+      <div aria-label=${ifDefined(this.ariaLabel)}>
         <div class="breadcrumb">
           <slot @slotchange=${this._handleSlotChange}></slot>
-          <slot name="separator" hidden aria-hidden="true">
-            <span>/</span>
-          </slot>
         </div>
-      </nav>
+      </div>
     `;
   }
 }

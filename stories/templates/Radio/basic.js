@@ -5,14 +5,14 @@ export const Template = ({
   name,
   defaultValue,
   disabled,
-  isInline,
   radioValue,
-  ariaLabel,
   required,
   invalidFeedback,
   checked,
   invalid,
-  hasFeedback
+  hasFeedback,
+  hintText,
+  label
 }) => {
   return html`
     <sgds-radio-group
@@ -22,25 +22,21 @@ export const Template = ({
       invalidFeedback=${ifDefined(invalidFeedback)}
       ?invalid=${invalid}
       ?hasFeedback=${hasFeedback}
+      hintText=${ifDefined(hintText)}
+      label=${ifDefined(label)}
     >
-      <span slot="label">Select an option</span>
-      <sgds-radio
-        value=${ifDefined(radioValue)}
-        ?disabled=${disabled}
-        ariaLabel=${ifDefined(ariaLabel)}
-        ?isInline=${isInline}
-        ?checked=${checked}
-        invalidFeedback=${ifDefined(invalidFeedback)}
-        ?invalid=${invalid}
-        ?hasFeedback=${hasFeedback}
+      <sgds-radio value=${ifDefined(radioValue)} ?disabled=${disabled} ?checked=${checked} ?invalid=${invalid}
         >Option 1</sgds-radio
       >
-      <sgds-radio value="2" ?isInline=${isInline}>Option 2</sgds-radio>
-      <sgds-radio value="3" ?isInline=${isInline}>Option 3</sgds-radio>
+      <sgds-radio value="2">Option 2</sgds-radio>
+      <sgds-radio value="3">Option 3</sgds-radio>
     </sgds-radio-group>
   `;
 };
 
-export const args = {};
+export const args = {
+  hintText: "hint",
+  label: "Label"
+};
 
 export const parameters = {};

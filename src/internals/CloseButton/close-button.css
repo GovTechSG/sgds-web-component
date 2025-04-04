@@ -1,49 +1,45 @@
 :host {
+  --sgds-close-btn-border-radius: var(--sgds-border-radius-sm);
   display: inline-flex;
 }
 
-:host(:focus) {
-  box-shadow: var(--sgds-focus-box-shadow);
-}
 .btn-close {
-  --sgds-close-btn-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='currentColor'%3E%3Cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3E%3C/svg%3E");
-  --sgds-close-btn-size: 1rem;
-  background-color: currentColor;
-  -webkit-mask-image: var(--sgds-close-btn-image);
-  mask-image: var(--sgds-close-btn-image);
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  border: 0;
-  border-radius: var(--sgds-border-radius);
-  box-sizing: content-box;
-  height: var(--sgds-close-btn-size);
-  opacity: 1;
-  padding: 0;
-  width: var(--sgds-close-btn-size);
+  position: relative;
   cursor: pointer;
+  border: 0;
+  padding: 0;
+  width: var(--sgds-dimension-32);
+  height: var(--sgds-dimension-32);
+  border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
+  border-radius: var(--sgds-close-btn-border-radius);
+  background-color: var(--sgds-bg-transparent);
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.btn-close,
+.btn-close-light {
+  color: var(--sgds-color-fixed-light);
+}
+.btn-close-dark {
+  color: var(--sgds-color-fixed-dark);
+}
 .btn-close:hover {
-  color: var(--sgds-body-color);
+  background-color: var(--sgds-bg-translucent);
 }
 
-.btn-close:hover {
-  opacity: 0.75;
-  text-decoration: none;
-}
-
-.btn-close:focus {
-  box-shadow: var(--sgds-focus-box-shadow);
-  opacity: 1;
+.btn-close:focus,
+.btn-close:focus-visible {
   outline: 0;
+  box-shadow: var(--sgds-box-shadow-focus);
+  background-color: var(--sgds-bg-translucent);
 }
 
-.btn-close.disabled,
-.btn-close:disabled {
-  opacity: var(--sgds-disabled-opacity);
-  pointer-events: none;
-  user-select: none;
+.btn-close-sm {
+  width: var(--sgds-dimension-24);
+  height: var(--sgds-dimension-24);
+}
+
+.btn-close.btn-close-sm {
+  width: var(--sgds-icon-size-sm);
+  height: var(--sgds-icon-size-sm);
 }

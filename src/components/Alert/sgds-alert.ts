@@ -4,11 +4,11 @@ import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
-import alertStyle from "./alert.css";
-import { ScopedElementsMixin } from "@open-wc/scoped-elements";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import SgdsIcon from "../Icon/sgds-icon";
+import alertStyle from "./alert.css";
 
-export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light";
+export type AlertVariant = "info" | "success" | "danger" | "warning" | "neutral";
 /**
  * @summary Alerts provide short, timely, and relevant information for your users. It can be a simple text message or customised HTML content with paragraphs, headings and links.
  *
@@ -18,19 +18,14 @@ export type AlertVariant = "primary" | "secondary" | "success" | "danger" | "war
  * @event sgds-show - Emitted when the alert appears.
  * @event sgds-hide - Emitted after the alert closes.
  *
- * @cssproperty --alert-bg - The background color of alert
- * @cssproperty --alert-border-color - The color of the border of alert
- * @cssproperty --alert-icon-margin-right - The margin-right css of icon slot to position the gap between icon and alert message
- *
  */
-export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
+export class SgdsAlert extends SgdsElement {
   static styles = [...SgdsElement.styles, alertStyle];
   /**@internal */
-  static get scopedElements() {
-    return {
-      "sgds-close-button": SgdsCloseButton
-    };
-  }
+  static dependencies = {
+    "sgds-close-button": SgdsCloseButton,
+    "sgds-icon": SgdsIcon
+  };
   /** Controls the appearance of the alert  */
   @property({ type: Boolean, reflect: true }) show = false;
 
@@ -38,7 +33,13 @@ export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
   @property({ type: Boolean, reflect: true }) dismissible = false;
 
   /** The alert's theme variant. */
-  @property({ type: String, reflect: true }) variant: AlertVariant = "primary";
+  @property({ type: String, reflect: true }) variant: AlertVariant = "info";
+
+  /** Controls the alert visual between a lighter outline and a solid darker variant. */
+  @property({ type: Boolean, reflect: true }) outlined = false;
+
+  /** The title of the alert. Only text is allowed */
+  @property({ type: String, reflect: true }) title: string;
 
   /** Closes the alert  */
   public close() {
@@ -49,24 +50,31 @@ export class SgdsAlert extends ScopedElementsMixin(SgdsElement) {
   _handleShowChange() {
     this.show ? this.emit("sgds-show") : this.emit("sgds-hide");
   }
+
   render() {
-    return this.show
+    return (this.dismissible && this.show) || !this.dismissible
       ? html`
           <div
             class="${classMap({
-              sgds: true,
               alert: true,
-              fade: true,
               show: this.show,
-              [`alert-dismissible`]: this.dismissible
+              [`alert-dismissible`]: this.dismissible,
+              outlined: this.outlined
             })}"
             role="alert"
             aria-hidden=${this.show ? "false" : "true"}
           >
-            <i><slot name="icon"></slot></i>
-            <slot></slot>
+            <slot name="icon"></slot>
+            <div class="alert-content">
+              ${this.title ? html`<div class="alert-title">${this.title}</div>` : nothing}
+              <slot></slot>
+            </div>
             ${this.dismissible
-              ? html`<sgds-close-button aria-label="close the alert" @click=${this.close}></sgds-close-button>`
+              ? html`<sgds-close-button
+                  aria-label="close the alert"
+                  @click=${this.close}
+                  variant=${this.outlined ? "dark" : "light"}
+                ></sgds-close-button>`
               : nothing}
           </div>
         `

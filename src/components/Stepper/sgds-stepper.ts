@@ -5,9 +5,11 @@ import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import { watch } from "../../utils/watch";
 import stepperStyle from "./stepper.css";
+import SgdsIcon from "../Icon/sgds-icon";
 export interface IStepMetaData {
   component: unknown;
   stepHeader: string;
+  iconName?: string;
 }
 /**
  * @summary Steppers are used to inform users which step they are at in a form or a process
@@ -19,15 +21,13 @@ export interface IStepMetaData {
  * @event sgds-arrived - Emitted right after the activeStep has updated its state, when upcoming step has arrived. Call `getMethod()` on this event to get the current step's component.
  * @event sgds-reset - Emitted right before the step is reset to its defaultActiveStep. Event is fired when reset method is called.
  *
- * @cssproperty --stepper-default-color - Sets the theme color for default stepper marker.
- * @cssproperty --stepper-theme-color - Sets the theme color for active, completed and clickable stepper marker.
- * @cssproperty --stepper-theme-hover-color - Sets the theme hover color for clickable stepper marker.
- *
  */
 export class SgdsStepper extends SgdsElement {
   static styles = [...SgdsElement.styles, stepperStyle];
-
-  /** The metadata of stepper, type `IStepMetaData`, that consist of `stepHeader: string` and `component:unknown`. `stepHeader` is the name of the step and `component` is the content that should appear at the each step. `component` is set to `unknown` to allow users to pass in their desired component based on the framework of choice. e.g. pass in your own react/angular/vue component or it can also be a text content.
+  /** @internal */
+  static dependencies = { "sgds-icon": SgdsIcon };
+  /** The metadata of stepper, type `IStepMetaData`, that consist of `stepHeader: string`, `component:unknown`, `iconName:string`. `stepHeader` is the name of the step and `component` is the content that should appear at the each step. `component` is set to `unknown` to allow users to pass in their desired component based on the framework of choice. e.g. pass in your own react/angular/vue component or it can also be a text content.
+   * It is required to populate this array to properly render the stepper. By default, stepper markers will render numbers. For icon stepper markers, pass the name of sgds icon via `iconName` key. `iconName` is optional.
    */
   @property({ type: Array })
   steps: IStepMetaData[] = [];
@@ -36,7 +36,13 @@ export class SgdsStepper extends SgdsElement {
   @property({ type: Number, reflect: true })
   activeStep = 0;
 
-  /**Gets or sets the default activeStep used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  /** The orientation of stepper. By default, the stepper is of horizontal orientation */
+  @property({ type: String, reflect: true }) orientation: StepperOrientation = "horizontal";
+
+  /** When true, the stepper's steps will be clickable */
+  @property({ type: Boolean, reflect: true }) clickable = false;
+
+  /** @internal Gets or sets the default activeStep used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("activeStep")
   defaultActiveStep = 0;
 
@@ -106,23 +112,32 @@ export class SgdsStepper extends SgdsElement {
 
   render() {
     return html`
-      <div class="sgds stepper">
-        ${this.steps.map(({ stepHeader: step }, index) => {
+      <div
+        class="stepper ${classMap({
+          [`${this.orientation}`]: this.orientation,
+          clickable: this.clickable
+        })}"
+      >
+        ${this.steps.map(({ stepHeader: step, iconName }, index) => {
           return html`
-            <div
-              class="stepper-item ${classMap({
-                "is-active": this.activeStep === index,
-                "is-completed": this.activeStep > index,
-                "is-clickable": this.activeStep > index
-              })}"
-              tabindex="0"
-              aria-current=${this.activeStep === index ? "step" : "false"}
-              aria-disabled=${this.activeStep <= index ? "true" : "false"}
-              @click="${() => this._onStepperItemClick(index)}"
-              @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, index)}
-            >
-              <div class="stepper-marker">${index + 1}</div>
-              <div class="stepper-detail">${step}</div>
+            <div class="stepper-item-container">
+              <div
+                class="stepper-item ${classMap({
+                  "is-active": this.activeStep === index,
+                  "is-completed": this.activeStep > index,
+                  "is-clickable": this.clickable && this.activeStep > index
+                })}"
+                tabindex=${this.clickable && this.activeStep > index ? "0" : "-1"}
+                aria-current=${this.activeStep === index ? "step" : "false"}
+                aria-disabled=${this.activeStep <= index ? "true" : "false"}
+                @click="${this.clickable ? () => this._onStepperItemClick(index) : null}"
+                @keydown=${this.clickable ? (e: KeyboardEvent) => this._handleKeyDown(e, index) : null}
+              >
+                <div class="stepper-marker">
+                  ${iconName ? html`<sgds-icon name=${iconName} size="md"></sgds-icon>` : index + 1}
+                </div>
+                <div class="stepper-detail">${step}</div>
+              </div>
             </div>
           `;
         })}
@@ -130,5 +145,7 @@ export class SgdsStepper extends SgdsElement {
     `;
   }
 }
+
+export type StepperOrientation = "horizontal" | "vertical";
 
 export default SgdsStepper;

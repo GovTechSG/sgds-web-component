@@ -1,27 +1,62 @@
-:host {
-  --sidenav-link-font-size: var(--sgds-body-font-size);
-  --sidenav-link-padding-x: 1rem;
-  --sidenav-link-padding-y: 0.5rem;
-  --sidenav-link-disabled-color: var(--sgds-disabled-color);
+
+:host([class^="third-level"]) ::slotted(a) {
+  padding-left: calc(var(--sgds-padding-xl) + var(--sgds-padding-3-xl));
 }
 
-a.nav-link {
+::slotted(a) {
   display: block;
-  color: inherit;
-  font-size: var(--sidenav-link-font-size);
-  padding-top: var(--sidenav-link-padding-y);
-  padding-bottom: var(--sidenav-link-padding-y);
-  padding-left: calc(var(--sidenav-link-padding-y) * 4 + var(--sidenav-item-btn-border-left-width));
-  padding-right: 0;
-  text-decoration: none;
-}
-a.nav-link.active,
-a.nav-link:hover {
-  color: var(--sidenav-theme-color);
+  --sgds-link-color-default: var(--sgds-color-default);
+  color: var(--sgds-color-default, var(--sgds-link-color-default));
+  padding-top: var(--sgds-padding-sm);
+  padding-bottom: var(--sgds-padding-sm);
+  padding-left: var(--sgds-padding-3-xl);
+  padding-right: var(--sgds-padding-sm);
+  border-radius: var(--sgds-border-radius-md);
+  text-decoration: none !important;
 }
 
-a.nav-link.disabled {
-  color: var(--sidenav-link-disabled-color);
+:host([active]) ::slotted(a) {
+  --sgds-link-color-default: var(--sgds-primary-color-emphasis);
+  color: var(--sgds-primary-color-emphasis, var(--sgds-link-color-default));
+  background-color: var(--sgds-primary-surface-translucent);
+}
+
+:host(:not([disabled]):not([active])) ::slotted(a:hover) {
+  background-color: var(--sgds-bg-translucent-subtle);
+}
+
+::slotted(a:hover),
+::slotted(a:focus),
+::slotted(a:focus-visible) {
+  --sgds-link-color-emphasis: var(--sgds-color-default);
+  color: var(--sgds-color-default, var(--sgds-link-color-emphasis));
+}
+
+:host([active]) ::slotted(a:hover),
+:host([active]) ::slotted(a:focus),
+:host([active]) ::slotted(a:focus-visible) {
+  --sgds-link-color-emphasis: var(--sgds-primary-color-emphasis);
+  color: var(--sgds-primary-color-emphasis, var(--sgds-link-color-emphasis));
+}
+
+:host([disabled]) ::slotted(a) {
+  opacity: var(--sgds-opacity-50);
   pointer-events: none;
-  cursor: not-allowed;
+}
+:host([disabled]) ::slotted(a:focus),
+:host([disabled]) ::slotted(a:focus-visible) {
+  outline: 0;
+  box-shadow: none;
+}
+
+ ::slotted(a:focus),
+ ::slotted(a:focus-visible){
+  outline: 0;
+  box-shadow: var(--sgds-box-shadow-focus);
+  background-color: var(--sgds-bg-translucent-subtle);
+}
+
+:host([active]) ::slotted(a:focus),
+:host([active]) ::slotted(a:focus-visible) {
+  background-color: var(--sgds-primary-bg-translucent);
 }

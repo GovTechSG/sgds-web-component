@@ -1,0 +1,52 @@
+/* :host {
+  --sgds-progress-bar-bg: var(--sgds-primary-surface-default);
+}
+
+:host([variant="neutral"]) {
+  --sgds-progress-bar-bg: var(--sgds-neutral-surface-default);
+} */
+
+progress {
+  vertical-align: baseline;
+}
+
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-gap-2-xs);
+  overflow: hidden;
+}
+
+.progress {
+  background-color: var(--sgds-bg-translucent);
+}
+
+.progress-bar {
+  /* --sgds-progress-bar-bg: var(--sgds-primary-surface-default);
+  --sgds-progress-bar-transition: width 0.6s ease;
+  --sgds-progress-bar-color: var(--sgds-white);
+  --sgds-progress-bar-font-size: 0.75rem; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--sgds-primary-surface-default);
+  transition: width 0.6s ease;
+  height: var(--sgds-dimension-4);
+}
+
+:host([variant="neutral"]) .progress-bar {
+  background-color: var(--sgds-neutral-surface-default);
+}
+
+.label {
+  white-space: nowrap;
+  font-size: var(--sgds-font-size-1);
+  color: var(--sgds-color-subtle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-bar {
+    transition: none;
+  }
+}

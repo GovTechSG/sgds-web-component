@@ -1,44 +1,30 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args =>
   html`
-    <sgds-accordion>
-      <sgds-accordion-item>
-        <div slot="accordion-header">This is a solo accordion</div>
-        <span slot="accordion-content"
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio?
-          Eum.</span
-        >
-      </sgds-accordion-item>
-    </sgds-accordion>
-    <sgds-accordion ?allowMultiple=${args.allowMultiple}>
-      <sgds-accordion-item ?open=${args.open}>
-        <div slot="accordion-header">This is an accordion</div>
-        <span slot="accordion-content"
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio?
-          Eum.</span
-        >
+    <sgds-accordion
+      ?allowMultiple=${args.allowMultiple}
+      variant=${ifDefined(args.variant)}
+      density=${ifDefined(args.density)}
+    >
+      <sgds-accordion-item ?open=${args.open} ?disabled=${args.disabled}>
+        <div slot="header">Accordion title #1</div>
+        <div slot="content">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
+        </div>
       </sgds-accordion-item>
       <sgds-accordion-item>
-        <div slot="accordion-header">Accordion 1</div>
-        <span slot="accordion-content"
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio?
-          Eum.</span
-        >
+        <div slot="header">Accordion title #2</div>
+        <div slot="content">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
+        </div>
       </sgds-accordion-item>
       <sgds-accordion-item open>
-        <div slot="accordion-header">Accordion 2</div>
-        <span slot="accordion-content"
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio?
-          Eum.</span
-        >
-      </sgds-accordion-item>
-      <sgds-accordion-item>
-        <div slot="accordion-header">Accordion 3</div>
-        <span slot="accordion-content"
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio?
-          Eum.</span
-        >
+        <div slot="header">Accordion title #3</div>
+        <div slot="content">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
+        </div>
       </sgds-accordion-item>
     </sgds-accordion>
   `;

@@ -1,91 +1,70 @@
-
-:host([checked]) {
-  --sgds-form-bg: var(--sgds-info-filled);
-  --sgds-form-border-color: var(--sgds-form-bg);
+:host {
+  outline: 0;
 }
 
-:host(:focus-visible) {
-  outline: none;
-}
 input {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
   margin: 0;
 }
 
 .form-check {
   display: flex;
-  margin-bottom: var(--sgds-spacer-2);
-  min-height: 2rem;
+  gap: var(--sgds-form-gap-md);
+  padding: var(--sgds-form-padding-inline-sm) 0px;
 }
 
-.form-check .form-check-input {
-  margin-right: var(--sgds-form-input-margin-right);
+.form-check-input-container {
+  width: var(--sgds-form-width-xs);
+  height: var(--sgds-form-height-sm);
 }
 
 .form-check-input {
   appearance: none;
-  background-color: var(--sgds-form-bg);
+  background-color: var(--sgds-form-surface-default);
   background-image: var(--sgds-radio-bg-image);
   background-position: 50%;
   background-repeat: no-repeat;
-  background-size: contain;
-  border: var(--sgds-form-border-width) solid var(--sgds-border-color);
-  flex-shrink: 0;
-  height: 1.125em;
-  margin-top: 0.4375em;
-  vertical-align: top;
-  width: 1.125em;
-}
-.form-check-input[type="radio"] {
+  background-size: auto;
+  border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-default);
+  width: var(--sgds-form-height-sm);
+  height: var(--sgds-form-height-sm);
   border-radius: 50%;
 }
-.form-check-input:focus {
-  border-color: var(--sgds-form-border-color);
-  box-shadow: var(--sgds-form-focus-box-shadow);
+
+.form-check-input:not([disabled]):not(.is-invalid):not([aria-checked="true"]):hover {
+  border: var(--sgds-form-border-width-thick) solid var(--sgds-border-color-emphasis);
+}
+
+.form-check-input:focus,
+.form-check-input:focus-visible {
+  box-shadow: var(--sgds-form-box-shadow-focus);
+  border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-emphasis);
   outline: 0;
 }
+
 .form-check-input:checked,
 .form-check-input[checked] {
-  background-color: var(--sgds-form-bg);
-  border-color: var(--sgds-form-border-color);
+  background-color: var(--sgds-form-primary-surface-default);
+  --sgds-radio-bg-image: url('data:image/svg+xml,<svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 4C0 1.79086 1.79086 0 4 0C6.20914 0 8 1.79086 8 4C8 6.20914 6.20914 8 4 8C1.79086 8 0 6.20914 0 4Z" fill="white"/></svg>');
+  border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-transparent);
 }
 
-.form-check-input:checked[type="radio"],
-.form-check-input[checked][type="radio"] {
-  --sgds-radio-bg-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='2' fill='%23fff'/%3E%3C/svg%3E");
+.form-check-input:not([disabled]):not(.is-invalid):checked:hover,
+.form-check-input:not([disabled]):not(.is-invalid)[checked]:hover,
+.form-check-input:not([disabled]):not(.is-invalid):checked:focus-visible,
+.form-check-input:not([disabled]):not(.is-invalid)[checked]:focus-visible {
+  background-color: var(--sgds-form-primary-surface-emphasis);
 }
 
-.form-check-input:disabled {
-  filter: none;
-  opacity: var(--sgds-disabled-opacity);
-  border-color: var(--sgds-form-border-color);
+:host([disabled]) .form-check {
+  opacity: var(--sgds-opacity-50);
   cursor: not-allowed;
 }
 
-.form-check-input.is-invalid,
-.form-check-input:invalid {
-  border-color: var(--sgds-form-invalid-color);
-}
-.form-check-input.is-invalid:checked,
-.form-check-input:invalid:checked {
-  background-color: var(--sgds-form-invalid-color);
-}
-.form-check-input.is-invalid:focus,
-.form-check-input:invalid:focus {
-  box-shadow: var(--sgds-form-focus-invalid-box-shadow);
-}
-.form-check-input.is-invalid ~ .form-check-label,
-.form-check-input:invalid ~ .form-check-label {
-  color: var(--sgds-form-invalid-color);
-}
-.form-check-inline {
-  display: inline-block;
-  margin-right: var(--sgds-form-inline-margin-right);
-  margin-bottom: 0;
+.form-check-input:not([disabled]).is-invalid{
+  border: var(--sgds-form-border-width-thick) solid var(--sgds-form-danger-border-color-default);
 }
 
-:host([last-of-type]) .form-check {
-  margin-bottom: 0;
+.form-check-input:checked.is-invalid,
+.form-check-input[checked].is-invalid {
+  background-color: var(--sgds-form-danger-surface-default);
 }

@@ -5,7 +5,6 @@ export const Template = args =>
   html`
     <sgds-button
       variant=${ifDefined(args.variant)}
-      ?outlined=${args.outlined}
       size=${ifDefined(args.size)}
       ?active=${args.active}
       ?disabled=${args.disabled}

@@ -1,0 +1,34 @@
+:host {
+  color: inherit;
+  display: inline-flex;
+}
+:host([size="sm"]) svg {
+  width: var(--sgds-icon-size-sm);
+  height: var(--sgds-icon-size-sm);
+}
+
+:host([size="md"]) svg {
+  width: var(--sgds-icon-size-md);
+  height: var(--sgds-icon-size-md);
+}
+
+:host([size="xl"]) svg {
+  width: var(--sgds-icon-size-xl);
+  height: var(--sgds-icon-size-xl);
+}
+
+:host([size="2-xl"]) svg {
+  width: var(--sgds-icon-size-2-xl);
+  height: var(--sgds-icon-size-2-xl);
+}
+
+:host([size="3-xl"]) svg {
+  width: var(--sgds-icon-size-3-xl);
+  height: var(--sgds-icon-size-3-xl);
+}
+
+svg {
+  display: inline-block;
+  width: var(--sgds-icon-size-lg);
+  height: var(--sgds-icon-size-lg);
+}

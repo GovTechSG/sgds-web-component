@@ -1,0 +1,10 @@
+<template>
+  <sgds-icon-button name="placeholder">
+  </sgds-icon-button>
+  <sgds-icon-button variant="ghost" name="placeholder">
+  </sgds-icon-button>
+  <sgds-icon-button variant="outline" name="placeholder">
+  </sgds-icon-button>
+  <sgds-icon-button variant="danger" name="placeholder">
+  </sgds-icon-button>
+</template>

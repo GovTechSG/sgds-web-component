@@ -52,7 +52,7 @@ export class DropdownElement extends SgdsElement {
   @state()
   dropdownConfig: Partial<Popper.Options>;
   /** @internal */
-  @state()
+  @property()
   protected modifierOpt: StrictModifiers[] = [];
 
   /** When true, dropdown menu shows on first load */
@@ -60,8 +60,7 @@ export class DropdownElement extends SgdsElement {
   menuIsOpen = false;
 
   /** Controls the close behaviour of dropdown menu. By default menu auto-closes when SgdsDropdownItem or area outside dropdown is clicked */
-  @property({ type: String })
-  close: "outside" | "default" | "inside" = "default";
+  protected close: "outside" | "default" | "inside" = "default";
 
   /** Disables the dropdown toggle */
   @property({ type: Boolean, reflect: true })
@@ -77,7 +76,6 @@ export class DropdownElement extends SgdsElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-
     document.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
   }
 
@@ -158,7 +156,7 @@ export class DropdownElement extends SgdsElement {
     this.bsDropdown.toggle();
   }
 
-  private _handleKeyboardMenuEvent(e: KeyboardEvent) {
+  protected _handleKeyboardMenuEvent(e: KeyboardEvent) {
     switch (e.key) {
       case ARROW_DOWN:
         e.preventDefault();

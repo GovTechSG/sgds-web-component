@@ -1,8 +1,8 @@
-import "./sgds-web-component";
 import { assert, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
-import { SgdsButton, SgdsStepper } from "../src/components";
-import sinon from "sinon";
 import { sendKeys } from "@web/test-runner-commands";
+import sinon from "sinon";
+import { SgdsButton, SgdsStepper } from "../src/components";
+import "./sgds-web-component";
 
 const stepMetaData = [
   {
@@ -16,6 +16,23 @@ const stepMetaData = [
   {
     stepHeader: "Review",
     component: "3 test"
+  }
+];
+const iconStepMetaData = [
+  {
+    stepHeader: "Personal Details",
+    component: "1 test",
+    iconName: "placeholder"
+  },
+  {
+    stepHeader: "Address and Contact Information",
+    component: "2 test",
+    iconName: "placeholder"
+  },
+  {
+    stepHeader: "Review",
+    component: "3 test",
+    iconName: "placeholder"
   }
 ];
 describe("sgds-stepper", () => {
@@ -45,17 +62,37 @@ describe("sgds-stepper", () => {
     expect(el.shadowRoot?.children[0].querySelector(".stepper-item")?.classList.value).to.contain("is-active");
   });
 
-  it("when activeStep set to 2, should update the `is-active` to the previous step when clicked", async () => {
+  it("when activeStep set to 2 and clickable set to false, should not update the `is-active` to the previous step when clicked", async () => {
     const el = await fixture(html` <sgds-stepper .steps=${stepMetaData} activeStep="2"></sgds-stepper> `);
 
-    const stepperItemTwo = el.shadowRoot?.querySelectorAll(".stepper-item")[1] as SgdsStepper;
-    const stepperItemThree = el.shadowRoot?.querySelectorAll(".stepper-item")[2] as SgdsStepper;
+    const stepperItemTwo = el.shadowRoot
+      ?.querySelectorAll(".stepper-item-container")[1]
+      .querySelector(".stepper-item") as SgdsStepper;
+    const stepperItemThree = el.shadowRoot
+      ?.querySelectorAll(".stepper-item-container")[2]
+      .querySelector(".stepper-item") as SgdsStepper;
+
+    stepperItemTwo.click();
+    await elementUpdated(el);
+    expect(stepperItemTwo.classList.contains("is-active")).to.be.false;
+    expect(stepperItemThree.classList.contains("is-active")).to.be.true;
+  });
+
+  it("when activeStep set to 2 and clickable set to true, should update the `is-active` to the previous step when clicked", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData} activeStep="2" clickable></sgds-stepper> `);
+    const stepperItemTwo = el.shadowRoot
+      ?.querySelectorAll(".stepper-item-container")[1]
+      .querySelector(".stepper-item") as SgdsStepper;
+    const stepperItemThree = el.shadowRoot
+      ?.querySelectorAll(".stepper-item-container")[2]
+      .querySelector(".stepper-item") as SgdsStepper;
 
     stepperItemTwo.click();
     await elementUpdated(el);
     expect(stepperItemTwo.classList.contains("is-active")).to.be.true;
     expect(stepperItemThree.classList.contains("is-active")).to.be.false;
   });
+
   it("getComponent method returns the component of current active step by default", async () => {
     const el = await fixture<SgdsStepper>(html` <sgds-stepper .steps=${stepMetaData} activeStep="2"></sgds-stepper> `);
     expect(el.getComponent()).to.equal(stepMetaData[2].component);
@@ -63,9 +100,29 @@ describe("sgds-stepper", () => {
     await el.updateComplete;
     expect(el.getComponent()).to.equal(stepMetaData[2 - 1].component);
   });
+
   it("getComponent method returns the component of step passed in", async () => {
     const el = await fixture<SgdsStepper>(html` <sgds-stepper .steps=${stepMetaData} activeStep="2"></sgds-stepper> `);
     expect(el.getComponent(0)).to.equal(stepMetaData[0].component);
+  });
+
+  it("when orientation is not set, the orientation is horizontal by default", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData}></sgds-stepper> `);
+
+    const stepper = el.shadowRoot?.querySelector(".stepper") as SgdsStepper;
+    expect(stepper.classList.contains("horizontal")).to.be.true;
+  });
+
+  it("when orientation set to vertical, the stepper will be in vertical orientation", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData} orientation="vertical"></sgds-stepper> `);
+
+    const stepper = el.shadowRoot?.querySelector(".stepper") as SgdsStepper;
+    expect(stepper.classList.contains("vertical")).to.be.true;
+  });
+  it("when iconName is included in stepsMetadata, sgds-icon is rendered in steps marker", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${iconStepMetaData}></sgds-stepper> `);
+    const markers = el.shadowRoot?.querySelectorAll(".stepper-marker > sgds-icon[name='placeholder']");
+    expect(markers?.length).to.equal(3);
   });
 });
 
@@ -254,7 +311,9 @@ describe("Stepper events", () => {
 
 describe("Stepper keyboard interactions", () => {
   it("keyboard enter will simulate a click behaviour on the markers", async () => {
-    const el = await fixture<SgdsStepper>(html` <sgds-stepper activeStep="2" .steps=${stepMetaData}></sgds-stepper> `);
+    const el = await fixture<SgdsStepper>(
+      html` <sgds-stepper activeStep="2" .steps=${stepMetaData} clickable></sgds-stepper> `
+    );
     const arrivedHandler = sinon.spy();
     el.addEventListener("sgds-arrived", arrivedHandler);
     const markers = el.shadowRoot?.querySelectorAll("div.stepper-item");
@@ -270,12 +329,36 @@ describe("Stepper keyboard interactions", () => {
 });
 
 describe("sgds-stepper accessibility", () => {
-  it("should be tab-accessible for all steps", async () => {
-    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData} activeStep="0"></sgds-stepper> `);
+  it("when orientation=horizontal, stepper should be displayed in horizontal orientation", async () => {
+    const el = await fixture(
+      html` <sgds-stepper orientation="horizontal" .steps=${stepMetaData} activeStep="1"></sgds-stepper> `
+    );
+    const stepper = el.shadowRoot?.querySelector(".stepper");
+    expect(stepper).to.have.class("horizontal");
+  });
+
+  it("when orientation=vertical, stepper should be displayed in horizontal orientation", async () => {
+    const el = await fixture(
+      html` <sgds-stepper orientation="horizontal" .steps=${stepMetaData} activeStep="1"></sgds-stepper> `
+    );
+    const stepper = el.shadowRoot?.querySelector(".stepper");
+    expect(stepper).to.have.class("horizontal");
+  });
+
+  it("when clickable=false, should not be tab-accessible for all steps", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData} activeStep="1"></sgds-stepper> `);
+    const markers = el.shadowRoot?.querySelectorAll("div.stepper-item");
+    expect(markers?.[0]).to.have.attribute("tabindex", "-1");
+    expect(markers?.[1]).to.have.attribute("tabindex", "-1");
+    expect(markers?.[2]).to.have.attribute("tabindex", "-1");
+  });
+
+  it("when clickable=true, the steps before activeStep should be tab-accessible", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData} clickable activeStep="1"></sgds-stepper> `);
     const markers = el.shadowRoot?.querySelectorAll("div.stepper-item");
     expect(markers?.[0]).to.have.attribute("tabindex", "0");
-    expect(markers?.[1]).to.have.attribute("tabindex", "0");
-    expect(markers?.[2]).to.have.attribute("tabindex", "0");
+    expect(markers?.[1]).to.have.attribute("tabindex", "-1");
+    expect(markers?.[2]).to.have.attribute("tabindex", "-1");
   });
 
   it("should have correct aria-current value for each step when activeStep set to 1", async () => {

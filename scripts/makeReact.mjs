@@ -33,10 +33,11 @@ components.map(component => {
   const source = prettier.format(
     `
       import * as React from 'react';
-      import { createComponent } from '@lit-labs/react';
+      import { createComponent } from '@lit/react';
       import Component from '../../components/${importPath}';
+      import { register } from "../../utils/ce-registry";
 
-      customElements.define("${component.tagName}", Component)
+      register("${component.tagName}", Component)
 
       export default createComponent({
         react: React,

@@ -1,0 +1,44 @@
+## Disabled 
+
+Add `disabled` prop to disabled the quantity input
+
+<Canvas of={QuantityToggleStories.DisabledQT}>
+  <Story of={QuantityToggleStories.DisabledQT} />
+</Canvas>
+
+## Invalid 
+
+Add `hasFeedback` and `invalid` prop to visually enable invalid style of quantity input. 
+Set invalid message with `invalidFeedback` prop
+
+<Canvas of={QuantityToggleStories.InvalidQT}>
+  <Story of={QuantityToggleStories.InvalidQT} />
+</Canvas>
+
+## Validation 
+
+HTML form constraint validation is built-in. By default, there is no need to control the `invalid` prop to enable constraint validations. 
+
+- To enable invalid styles and feedback message set `hasFeedback="both"`
+- To enable invalid styles only, set `hasFeedback="style"`
+- To enable feedback message only, set `hasFeedback="text"`
+
+In this example, `hasFeedback` is set to `both`. 
+
+By default, QuantityInput always have a default value of 0, `required` constraint validation is not applicable. There is no `required` prop. 
+Instead, apply `min` and `max` constraint validation when needed. 
+
+Resetting the form, reset's the validity and the value of the input to its initial default value.
+
+<Canvas of={QuantityToggleStories.QTValidation}>
+  <Story of={QuantityToggleStories.QTValidation} />
+</Canvas>
+
+### Overriding the invalid feedback message 
+
+By default, the invalid feedback reflected is based on the browser's native error message based on the ValidityState.  To override the default message, 
+use `invalidFeedback` prop. 
+
+<Canvas of={QuantityToggleStories.OverrideInvalidFeedback}>
+  <Story of={QuantityToggleStories.OverrideInvalidFeedback} />
+</Canvas>

@@ -103,12 +103,12 @@ Functions have to be passed in via javascript. For attributes that accepts Objec
 
 ```html
 //via JSON string
-<sgds-table tableHeaders='["Name", "BirthDate"]'></sgds-table>
+<sgds-table rowHeader='["Name", "BirthDate"]'></sgds-table>
 
 // via Javascript
 <script>
   const table = document.querySelector("sgds-table");
-  table.tableHeaders = ["Name", "Birthdate"];
+  table.rowHeader = ["Name", "Birthdate"];
 </script>
 ```
 
@@ -717,7 +717,8 @@ export class MyNavbar extends ScopedElementsMixin(LitElement) {
         <sgds-masthead fluid="false"></sgds-masthead>
             <sgds-mainnav>
               <img width="240" src="https://dev.assets.developer.tech.gov.sg/svg/logo.svg" slot="brand">
-                <sgds-mainnav-dropdown togglertext="Home" slot="end">
+                <sgds-mainnav-dropdown slot="end">
+                    <span slot="toggler">Home</span>
                     <sgds-dropdown-item>Logout</sgds-dropdown-item>
                 </sgds-mainnav-dropdown>
                 <sgds-mainnav-item href="#">Content</sgds-mainnav-item>
@@ -740,38 +741,38 @@ export class MyNavbar extends ScopedElementsMixin(LitElement) {
 [![github](https://img.shields.io/badge/GitHub-Code-232323.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/GovTechSG/sgds-web-component)
 
 <div class="home-card-container mt-5">
-    <sgds-card stretchedLink class="col">
-        <span slot="card-title">SGDS v2+ <i class="bi bi-filetype-scss"></i></span>
-        <a slot="card-link" href="https://designsystem.tech.gov.sg/" target="_blank"></a>
-        <p slot="card-text">The components are shipped with SGDS v2 styles and can be used straight out of the box.</p>
+    <sgds-card class="col">
+        <span slot="title">SGDS v2+ <i class="bi bi-filetype-scss"></i></span>
+        <a slot="link" href="https://designsystem.tech.gov.sg/" target="_blank"></a>
+        <p slot="description">The components are shipped with SGDS v2 styles and can be used straight out of the box.</p>
     </sgds-card>
-     <sgds-card stretchedLink class="col">
-        <span slot="card-title">Framework agnostic <i class="bi bi-puzzle"></i></span>
-        <a slot="card-link" href="https://custom-elements-everywhere.com/" target="_blank"></a>
-        <p slot="card-text">Compatible with all frameworks. Each web component also has its own React version for full compatibility with React.</p>
+     <sgds-card class="col">
+        <span slot="title">Framework agnostic <i class="bi bi-puzzle"></i></span>
+        <a slot="link" href="https://custom-elements-everywhere.com/" target="_blank"></a>
+        <p slot="description">Compatible with all frameworks. Each web component also has its own React version for full compatibility with React.</p>
     </sgds-card>
-     <sgds-card stretchedLink class="col">
-        <span slot="card-title">Customisable with CSS <i class="bi bi-filetype-css"></i></span>
-        <a slot="card-link" href="/story/getting-started-usage-stylings--page" target="_blank"></a>
-        <p slot="card-text">Components are customisable with cssparts, css custom variables and class-like properties.</p>
+     <sgds-card class="col">
+        <span slot="title">Theming with CSS variables <i class="bi bi-filetype-css"></i></span>
+        <a slot="link" href="/docs/style-theming--docs" target="_blank"></a>
+        <p slot="description">Change the theme with CSS Variables </p>
     </sgds-card>
-     <sgds-card stretchedLink class="col">
-        <span slot="card-title">Works with CDNs <i class="bi bi-truck"></i></span>
-        <a slot="card-link" href="/story/getting-started-installation--page" target="_blank"></a>
-        <p slot="card-text">Besides whole library CDN, each component also has its own CDN.</p>
+     <sgds-card class="col">
+        <span slot="title">Works with CDNs <i class="bi bi-truck"></i></span>
+        <a slot="link" href="/docs/getting-started-installation--docs#method-2-using-cdn" target="_self"></a>
+        <p slot="description">Besides whole library CDN, each component also has its own CDN.</p>
     </sgds-card>
-<sgds-card stretchedLink class="col">
-        <span slot="card-title">Accessible <i class="bi bi-person-wheelchair"></i></span>
-        <p slot="card-text">We are working to build our components fully accessible.</p>
+    <sgds-card class="col">
+        <span slot="title">Accessible <i class="bi bi-person-wheelchair"></i></span>
+        <p slot="description">We are working to build our components fully accessible.</p>
     </sgds-card>
-<sgds-card stretchedLink class="col">
-        <span slot="card-title">Open Source <i class="bi bi-github"></i></span>
-        <p slot="card-text">We are open source and welcome contributions from the community!</p>
-        <a slot="card-link" href="https://github.com/GovTechSG/sgds-web-component" target="_blank"></a>
+    <sgds-card class="col">
+        <span slot="title">Open Source <i class="bi bi-github"></i></span>
+        <p slot="description">We are open source and welcome contributions from the community!</p>
+        <a slot="link" href="https://github.com/GovTechSG/sgds-web-component" target="_blank"></a>
     </sgds-card>
-<sgds-card stretchedLink class="col">
-        <span slot="card-title">Extendable <i class="bi bi-bricks"></i></span>
-        <p slot="card-text">Our components are built with LitElement and are extendable. Use them as building blocks to create your complex component. </p>
-        <a slot="card-link" href="/story/getting-started-extending-the-library--page" target="_blank"></a>
+    <sgds-card class="col">
+        <span slot="title">Extendable <i class="bi bi-bricks"></i></span>
+        <p slot="description">Our components are built with LitElement and are extendable. Use them as building blocks to create your complex component. </p>
+        <a slot="link" href="/docs/usage-extending-the-library--docs" target="_blank"></a>
     </sgds-card>
 </div>

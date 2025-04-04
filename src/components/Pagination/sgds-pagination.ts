@@ -1,25 +1,28 @@
 import { TemplateResult, html, nothing } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
-import { classMap } from "lit/directives/class-map.js";
+import SgdsButton from "../Button/sgds-button";
+import SgdsIcon from "../Icon/sgds-icon";
+import SgdsIconButton from "../IconButton/sgds-icon-button";
 import paginationStyle from "./pagination.css";
+
+export type Navigation = "button" | "icon-button";
+
 /**
  * @summary The Pagination component enables the user to select a specific page from a range of pages
  *
  * @event sgds-page-change - Event is emitted when `handleNextButton`, `handlePrevButton`, `handleNextEllipsisButton` and `handlePrevEllipsisButton` was called.
  *
- * @cssproperty --pagination-color - The text color of pagination
- * @cssproperty --pagination-bg - The background color of pagination
- * @cssproperty --pagination-hover-bg - The  background color of pagination in hover state
- * @cssproperty --pagination-active-color - The text color of pagination in active state
- * @cssproperty --pagination-active-bg - The background color of pagination in active state
- * @cssproperty --pagination-disabled-color - The text color of pagination in disabled state
- * @cssproperty --pagination-disabled-bg - The background color of pagination in disabled state
- *
  **/
 export class SgdsPagination extends SgdsElement {
   static styles = [...SgdsElement.styles, paginationStyle];
+  /**@internal */
+  static dependencies = {
+    "sgds-icon-button": SgdsIconButton,
+    "sgds-button": SgdsButton,
+    "sgds-icon": SgdsIcon
+  };
 
   /** Inserts the length value from a given sets of data objects*/
   @property({ type: Number }) dataLength = 0;
@@ -30,32 +33,47 @@ export class SgdsPagination extends SgdsElement {
   /** Sets the amount of data objects to be displayed per page */
   @property({ type: Number }) itemsPerPage = 5;
 
-  /** Sets the page limit to be displayed at any given render. e.g 3, 5, 7, 9 */
-  @property({ type: Number }) limit = 3;
+  /** Sets the variant of the pagination. */
+  @property({ type: String }) variant: "default" | "number" | "button" | "description" = "default";
 
   /** Sets the page direction button to contain text and/or icon */
-  @property({ type: String }) directionVariant: directionVariant = "icon-text";
+  @property({ type: String }) navigation: Navigation = "icon-button";
 
   /** Sets the size of all page items. */
-  @property({ type: String }) size: sizeVariant = "sm";
+  @property({ type: String }) size: "sm" | "md" = "md";
 
-  /** Toggles ellipsis buttons to be able to increment/decrement pages based on the ellipsisJump value set. By default, it will be false */
-  @property({ type: Boolean }) ellipsisOn = false;
-
-  /** When ellipsisOn is true, length of decrementing/incrementing of pages can be set with a number value*/
-  @property({ type: Number }) ellipsisJump = 3;
-  /** Enables rendering of the first-page button on the pagination, allowing users to jump to the initial page. By default, it will be false. When true, the first ellipsis will always be rendered */
-  @property({ type: Boolean }) showFirstPage = false;
-  /** Enables rendering of the last-page button on the pagination, allowing users to jump to the last page. By default, it will be false */
-  @property({ type: Boolean }) showLastPage = false;
+  /**
+   * The number of pages to show besides first and last page. First and last page always appears
+   */
+  @state() private _limit: 3 | 4 | 5 = 4;
 
   /**@internal */
-  @watch("currentPage")
+  @watch("currentPage", { waitUntilFirstUpdate: false })
   _handleValueChange() {
     this.emit("sgds-page-change", { detail: { currentPage: this.currentPage } });
+    /**
+     * Always showing 7 li at a time.
+     * The case when both ellipsis is not needed
+     */
+    if (this.pages.length <= 7) {
+      return (this._limit = 5);
+    }
+    /**
+     * The case when currentPage is reaching the endPage
+     */
+    if (this.pages.length - this.currentPage <= 3) {
+      return (this._limit = 4);
+    }
+    /**
+     * The case when currentPage is after 4
+     */
+    if (this.currentPage > 4) {
+      return (this._limit = 3);
+    } else {
+      return (this._limit = 4);
+    }
   }
 
-  /** @internal */
   private _handlePageClick(event: MouseEvent) {
     const liTarget = event.target as HTMLElement;
     const clickedLi = liTarget.closest("li");
@@ -68,29 +86,14 @@ export class SgdsPagination extends SgdsElement {
     }
   }
 
-  /** @internal */
   private _handleNextButton() {
     this.currentPage = this.currentPage + 1;
   }
 
-  /** @internal */
   private _handlePrevButton() {
     this.currentPage = this.currentPage - 1;
   }
 
-  /** @internal */
-  private _handleNextEllipsisButton() {
-    this.currentPage = this.currentPage + this.ellipsisJump;
-    if (this.currentPage >= this.pages.length) this.currentPage = this.pages.length;
-  }
-
-  /** @internal */
-  private _handlePrevEllipsisButton() {
-    this.currentPage = this.currentPage - this.ellipsisJump;
-    if (this.currentPage <= 1) this.currentPage = this.pages[0];
-  }
-
-  /** @internal */
   private get pages() {
     const pages = [];
     for (let i = 1; i <= Math.ceil(this.dataLength / this.itemsPerPage); i++) {
@@ -99,30 +102,11 @@ export class SgdsPagination extends SgdsElement {
     return pages;
   }
 
-  /** @internal */
-  private get _sanitizeLimit() {
-    return this.limit >= this.pages.length ? this.pages.length : this.limit;
-  }
-
-  /**@internal */
-  private _handleKeyDown(
-    event: KeyboardEvent,
-    action: string,
-    number?: number,
-    isFirstEllipsis?: boolean,
-    isPrevButton?: boolean
-  ) {
+  private _handleKeyDown(event: KeyboardEvent, action: string, number?: number, isPrevButton?: boolean) {
     if (event.key === "Enter") {
       switch (action) {
         case "pageNumber":
           this.currentPage = number;
-          break;
-        case "ellipsis":
-          if (isFirstEllipsis) {
-            this._handlePrevEllipsisButton();
-          } else {
-            this._handleNextEllipsisButton();
-          }
           break;
         case "directionButton":
           if (isPrevButton) {
@@ -136,65 +120,74 @@ export class SgdsPagination extends SgdsElement {
   }
 
   private _renderFirstPage() {
-    let sanitizeStartPage = this.currentPage - Math.floor(this._sanitizeLimit / 2);
-
-    if (this.pages.length - sanitizeStartPage < this.limit) {
-      sanitizeStartPage = this.pages.length + 1 - this.limit;
-    }
-
-    if (sanitizeStartPage > 1) {
-      return html`
-        <li key=${1} class="page-item ${this.currentPage === 1 ? "active" : ""}">
-          <span
-            class="page-link"
-            tabindex="0"
-            @click=${this._handlePageClick}
-            @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "pageNumber", 1)}
-            >1</span
-          >
-        </li>
-      `;
-    } else {
-      return null;
-    }
+    return html`
+      <li key=${1} class="page-item ${this.currentPage === 1 ? "active" : ""}">
+        <span
+          role="button"
+          class="page-link"
+          aria-label=${this.currentPage === 1 ? `Current Page, Page 1` : "Go to Page 1"}
+          aria-current="${this.currentPage === 1}"
+          tabindex="0"
+          @click=${this._handlePageClick}
+          @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "pageNumber", 1)}
+          >1</span
+        >
+      </li>
+    `;
   }
-  /** @internal */
-  private _renderPgNumbers() {
+
+  private _getAllPageNumbers(): number[] {
     const pagesToShow = [];
-    let sanitizeStartPage = 1;
+
+    for (let i = 1; i <= this.pages.length; i++) {
+      pagesToShow.push(i);
+    }
+
+    return pagesToShow;
+  }
+
+  private _getPageNumbers(): number[] {
+    const pagesToShow = [];
+    let sanitizeStartPage = 2;
     let endPage: number;
 
-    if (this.limit < this.pages.length) {
-      sanitizeStartPage = this.currentPage - Math.floor(this._sanitizeLimit / 2);
+    if (this._limit === 3) {
+      sanitizeStartPage = this.currentPage - Math.floor(this._limit / 2);
     }
 
-    if (this.pages.length - sanitizeStartPage < this.limit) {
-      sanitizeStartPage = this.pages.length + 1 - this.limit;
+    if (this._limit === 4) {
+      sanitizeStartPage = this.currentPage - Math.floor(this._limit / 2);
+      if (this.currentPage + this._limit > this.pages.length) {
+        sanitizeStartPage = this.pages.length - this._limit;
+      }
     }
 
-    if (sanitizeStartPage <= 0) {
-      sanitizeStartPage = 1;
+    if (sanitizeStartPage <= 1) {
+      sanitizeStartPage = 2;
     }
 
-    endPage = sanitizeStartPage + this._sanitizeLimit - 1;
+    endPage = sanitizeStartPage + this._limit - 1;
 
-    if (endPage > this.pages.length) {
-      endPage = this.pages.length;
-    }
-
-    if (this.currentPage === this.pages.length) {
-      sanitizeStartPage = this.pages.length - this._sanitizeLimit + 1;
+    if (endPage >= this.pages.length) {
+      endPage = this.pages.length - 1;
     }
 
     for (let i = sanitizeStartPage; i <= endPage; i++) {
       pagesToShow.push(i);
     }
+    return pagesToShow;
+  }
+
+  private _renderPgNumbers(pagesToShow: number[]) {
     return pagesToShow.map(
       number => html`
         <li key=${number} class="page-item ${this.currentPage === number ? "active" : ""}">
           <span
+            role="button"
             class="page-link"
             tabindex="0"
+            aria-label=${this.currentPage === number ? `Current Page, Page ${number}` : `Go to Page ${number}`}
+            aria-current="${this.currentPage === number}"
             @click=${this._handlePageClick}
             @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "pageNumber", number)}
             >${number}</span
@@ -206,190 +199,147 @@ export class SgdsPagination extends SgdsElement {
 
   private ellipsisContent = html`
     <span aria-hidden="true">…</span>
-    <span class="visually-hidden">Ellipsis</span>
+    <span class="sr-only" role="text">Ellipsis</span>
   `;
 
-  /** @internal */
   private _renderFirstEllipsis = () => {
-    const isHidden = !(
-      this.pages.length !== this._sanitizeLimit && this.currentPage - Math.floor(this._sanitizeLimit / 2) > 1
-    );
+    const pagesLengthWithinTotalLimit = this.pages.length <= 7;
 
+    const isHidden = pagesLengthWithinTotalLimit || !(this.pages.length !== this._limit && this.currentPage > 4);
     if (isHidden) {
       return null;
     }
 
-    const tabIndex = isHidden ? -1 : 0;
-
     return html`
-      <li
-        class=${classMap({ "page-item": true, "ellipsis-disabled": !this.ellipsisOn })}
-        @click=${this.ellipsisOn && this._handlePrevEllipsisButton}
-        @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "ellipsis", undefined, true)}
-      >
-        <span class="page-link" role="button" tabindex=${tabIndex}>${this.ellipsisContent}</span>
+      <li class="page-item ">
+        <span class="page-link ellipsis">${this.ellipsisContent}</span>
       </li>
     `;
   };
 
-  /** @internal */
   private _renderLastEllipsis() {
-    const isEvenLimit = this._sanitizeLimit % 2 === 0;
-    const differentialLimitCondition = isEvenLimit
-      ? this.currentPage + Math.floor(this._sanitizeLimit / 2) <= this.pages.length
-      : this.currentPage + Math.floor(this._sanitizeLimit / 2) < this.pages.length;
-
-    const shouldRenderEllipsis = this.pages.length !== this.limit && differentialLimitCondition;
-    const tabIndex = shouldRenderEllipsis && this.ellipsisOn ? 0 : -1;
-    if (!shouldRenderEllipsis || this._sanitizeLimit >= this.pages.length) {
+    const shouldRenderEllipsis = this.pages.length !== this._limit;
+    if (this.pages.length <= 7) {
       return null;
     }
-
-    if (this.ellipsisOn) {
-      return html`
-        <li
-          class="page-item ${this.ellipsisOn ? "" : "ellipsis-disabled"} "
-          @click=${this.ellipsisOn && this._handleNextEllipsisButton}
-          @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "ellipsis", undefined, false)}
-        >
-          <span class="page-link" role="button" tabindex=${tabIndex}>${this.ellipsisContent}</span>
-        </li>
-      `;
-    } else {
-      return html`
-        <li class="page-item ${this.ellipsisOn ? "" : "ellipsis-disabled"} ">
-          <span class="page-link disabled" tabindex=${tabIndex}>${this.ellipsisContent}</span>
-        </li>
-      `;
-    }
-  }
-
-  private _renderLastPage() {
-    const isEvenLimit = this._sanitizeLimit % 2 === 0;
-    const differentialLimitCondition = isEvenLimit
-      ? this.currentPage + Math.floor(this._sanitizeLimit / 2) <= this.pages.length
-      : this.currentPage + Math.floor(this._sanitizeLimit / 2) < this.pages.length;
-
-    if (this.pages.length !== this._sanitizeLimit && differentialLimitCondition) {
-      return html`
-        <li key=${this.pages.length} class="page-item ${this.currentPage === this.pages.length ? "active" : ""}">
-          <span
-            class="page-link"
-            tabindex="0"
-            @click=${this._handlePageClick}
-            @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "pageNumber", this.pages.length)}
-            >${this.pages.length}</span
-          >
-        </li>
-      `;
-    } else {
+    if (
+      !shouldRenderEllipsis ||
+      this._limit >= this.pages.length ||
+      this.pages.length - this.currentPage < this._limit
+    ) {
       return null;
     }
-  }
-
-  /** @internal */
-  private _getLeftChevronSVG() {
     return html`
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-chevron-left"
-        viewBox="0 0 16 16"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
-        />
-      </svg>
-    `;
-  }
-
-  /** @internal */
-  private _getRightChevronSVG() {
-    return html`
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-chevron-right"
-        viewBox="0 0 16 16"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-        />
-      </svg>
-    `;
-  }
-
-  /** @internal */
-  private _renderDirectionButton(
-    directionLabel: string,
-    iconClass: string,
-    clickHandler: (event: MouseEvent) => void,
-    keydownHandler: (event: KeyboardEvent) => void,
-    directionVariant: string
-  ): TemplateResult {
-    const isDisabled = iconClass === "left" ? this.currentPage === 1 : this.currentPage === this.pages.length;
-
-    const tabIndex = isDisabled ? -1 : 0;
-
-    const keydownListener = (event: KeyboardEvent) => {
-      if (!isDisabled && event.key === "Enter") {
-        keydownHandler(event);
-      }
-    };
-
-    return html`
-      <li class="page-item ${isDisabled ? "disabled" : ""}" @click=${isDisabled ? undefined : clickHandler}>
-        <span class="page-link" tabindex=${tabIndex} @keydown=${keydownListener}>
-          ${directionVariant === "icon-text"
-            ? html`
-                ${iconClass === "left" ? this._getLeftChevronSVG() : ""} ${directionLabel}
-                ${iconClass === "right" ? this._getRightChevronSVG() : ""}
-              `
-            : directionVariant === "text"
-            ? html`${directionLabel}`
-            : directionVariant === "icon"
-            ? html`${iconClass === "left" ? this._getLeftChevronSVG() : this._getRightChevronSVG()}`
-            : html``}
-        </span>
+      <li class="page-item">
+        <span class="page-link ellipsis ">${this.ellipsisContent}</span>
       </li>
     `;
   }
 
+  private _renderLastPage() {
+    return html`
+      <li key=${this.pages.length} class="page-item ${this.currentPage === this.pages.length ? "active" : ""}">
+        <span
+          role="button"
+          class="page-link"
+          aria-label=${this.currentPage === this.pages.length
+            ? `Current Page, Page ${this.pages.length}`
+            : `Go to Page ${this.pages.length}`}
+          aria-current="${this.currentPage === this.pages.length}"
+          tabindex="0"
+          @click=${this._handlePageClick}
+          @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "pageNumber", this.pages.length)}
+          >${this.pages.length}</span
+        >
+      </li>
+    `;
+  }
+
+  private _renderDirectionButton(
+    directionLabel: "Prev" | "Next",
+    clickHandler: (event: MouseEvent) => void
+  ): TemplateResult {
+    const isDisabled = directionLabel === "Prev" ? this.currentPage === 1 : this.currentPage === this.pages.length;
+
+    if (this.navigation === "button") {
+      return html`${this._getNavButton(directionLabel, clickHandler, isDisabled)}`;
+    }
+    if (this.navigation === "icon-button") {
+      return html`${this._getIconButton(directionLabel, clickHandler, isDisabled)}`;
+    }
+
+    return html`${nothing}`;
+  }
+
+  private _getNavButton = (direction: "Prev" | "Next", clickHandler: (e: MouseEvent) => void, isDisabled: boolean) => {
+    const icon = html`<sgds-icon
+      size=${this.size}
+      name=${direction === "Prev" ? "arrow-left" : "arrow-right"}
+      slot=${direction === "Prev" ? "leftIcon" : "rightIcon"}
+    ></sgds-icon>`;
+    return html`
+      <sgds-button
+        ariaLabel=${direction === "Prev" ? "Previous" : "Next"}
+        size=${this.size}
+        @click=${isDisabled ? undefined : clickHandler}
+        ?disabled=${isDisabled}
+        variant="ghost"
+        >${icon}${direction}</sgds-button
+      >
+    `;
+  };
+
+  private _getIconButton(direction: "Prev" | "Next", clickHandler: (e: MouseEvent) => void, isDisabled: boolean) {
+    return html`
+      <sgds-icon-button
+        ariaLabel=${direction === "Prev" ? "Previous" : "Next"}
+        size=${this.size}
+        @click=${isDisabled ? undefined : clickHandler}
+        ?disabled=${isDisabled}
+        variant="ghost"
+        name=${direction === "Prev" ? "arrow-left" : "arrow-right"}
+      ></sgds-icon-button>
+    `;
+  }
+  private _renderDescriptionPagination() {
+    return html`
+      ${this._renderDirectionButton("Prev", this._handlePrevButton)}
+      <div class="pagination-description">Page ${this.currentPage} of ${this.pages.length}</div>
+      ${this._renderDirectionButton("Next", this._handleNextButton)}
+    `;
+  }
+
+  private _renderDefaultPagination() {
+    return html`
+      ${this._renderDirectionButton("Prev", this._handlePrevButton)} ${this._renderFirstPage()}
+      ${this._renderFirstEllipsis()} ${this._renderPgNumbers(this._getPageNumbers())} ${this._renderLastEllipsis()}
+      ${this.pages.length <= 1 ? nothing : this._renderLastPage()}
+      ${this._renderDirectionButton("Next", this._handleNextButton)}
+    `;
+  }
+
+  private _renderNumberPagination() {
+    return html` ${this._renderPgNumbers(this._getAllPageNumbers())} `;
+  }
+
+  private _renderButtonPagination() {
+    return html`
+      ${this._renderDirectionButton("Prev", this._handlePrevButton)}
+      ${this._renderDirectionButton("Next", this._handleNextButton)}
+    `;
+  }
   render() {
     return html`
       <nav aria-label="pagination" role="navigation">
-        <ul class="pagination pagination-${this.size} sgds" directionVariant=${this.directionVariant}>
-          ${this._renderDirectionButton(
-            "Previous",
-            "left",
-            this._handlePrevButton,
-            (e: KeyboardEvent) => this._handleKeyDown(e, "directionButton", undefined, undefined, true),
-            this.directionVariant
-          )}
-          ${this.showFirstPage ? this._renderFirstPage() : nothing}
-          ${this.showFirstPage || this.ellipsisOn ? this._renderFirstEllipsis() : nothing} ${this._renderPgNumbers()}
-          ${this._renderLastEllipsis()} ${this.showLastPage ? this._renderLastPage() : nothing}
-          ${this._renderDirectionButton(
-            "Next",
-            "right",
-            this._handleNextButton,
-            (e: KeyboardEvent) => this._handleKeyDown(e, "directionButton", undefined, undefined, false),
-            this.directionVariant
-          )}
+        <ul class="pagination pagination-${this.size}">
+          ${this.variant === "description" ? this._renderDescriptionPagination() : nothing}
+          ${this.variant === "default" ? this._renderDefaultPagination() : nothing}
+          ${this.variant === "number" ? this._renderNumberPagination() : nothing}
+          ${this.variant === "button" ? this._renderButtonPagination() : nothing}
         </ul>
       </nav>
     `;
   }
 }
-
-export type directionVariant = "icon" | "icon-text" | "text";
-
-export type sizeVariant = "sm" | "md";
 
 export default SgdsPagination;

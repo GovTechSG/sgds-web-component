@@ -1,70 +1,58 @@
-.spinner {
-  --sgds-spinner-color: var(--sgds-primary-filled);
-  color: var(--sgds-spinner-color);
-}
-:host([color="secondary"]) .spinner {
-  --sgds-spinner-color: var(--sgds-secondary-filled);
-}
-:host([color="warning"]) .spinner {
-  --sgds-spinner-color: var(--sgds-warning-filled);
-}
-:host([color="danger"]) .spinner{
-  --sgds-spinner-color: var(--sgds-danger-filled);
-}
-:host([color="success"]) .spinner {
-  --sgds-spinner-color: var(--sgds-success-filled);
-}
-:host([color="info"]) .spinner{
-  --sgds-spinner-color: var(--sgds-info-filled);
-}
-:host([color="light"]) .spinner{
-  --sgds-spinner-color: var(--sgds-light-filled);
-}
-:host([color="dark"]) .spinner{
-  --sgds-spinner-color: var(--sgds-dark-filled);
+:host {
+  --sgds-spinner-bg: var(--sgds-primary-surface-default);
+  display: inline-flex;
 }
 
-.spinner-border {
-  animation: spinner-border 0.75s linear infinite;
-  border: 0.25em solid;
+:host([variant="neutral"]) {
+  --sgds-spinner-bg: var(--sgds-neutral-surface-default);
+}
+
+.spinner-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sgds-gap-2-xs);
+}
+
+.spinner {
+  display: inline-flex;
   border-radius: 50%;
-  border-right: 0.25em solid transparent;
-  display: inline-block;
-  vertical-align: -0.125em;
-  width: 2rem;
-  height: 2rem;
+  width: var(--sgds-dimension-32);
+  height: var(--sgds-dimension-32);
+  animation: spinner 0.75s linear infinite;
+  border: 0.25em solid var(--sgds-bg-translucent);
+  border-right: 0.25em solid var(--sgds-spinner-bg);
   color: var(--sgds-spinner-color);
 }
-.spinner-grow {
-  animation: spinner-grow 0.75s linear infinite;
-  border-radius: 50%;
-  display: inline-block;
-  opacity: 0;
-  vertical-align: -0.125em;
-  width: 2rem;
-  height: 2rem;
-  background-color: var(--sgds-spinner-color);
+
+.spinner-sm {
+  width: var(--sgds-dimension-24);
+  height: var(--sgds-dimension-24);
 }
+
+.spinner-lg {
+  width: var(--sgds-dimension-48);
+  height: var(--sgds-dimension-48);
+}
+
+.spinner-label {
+  font-size: var(--sgds-font-size-1);
+  color: var(--sgds-neutral-color-default);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .spinner-border, .spinner-grow {
+  .spinner {
     animation-duration: 1.5s;
   }
 }
+
 /*! CSS Used keyframes */
-@keyframes spinner-border {
+@keyframes spinner {
   to {
     transform: rotate(1turn);
   }
 }
-@keyframes spinner-grow {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    opacity: 1;
-    transform: none;
-  }
-}
+
 .sr-only {
   position: absolute;
   width: 1px;

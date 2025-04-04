@@ -1,6 +1,7 @@
 import { SgdsModal } from "./sgds-modal";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-modal", SgdsModal);
+register("sgds-modal", SgdsModal);
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -1,6 +1,7 @@
 import { SgdsTable } from "./sgds-table";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-table", SgdsTable);
+register("sgds-table", SgdsTable);
 
 declare global {
   interface HTMLElementTagNameMap {

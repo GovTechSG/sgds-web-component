@@ -1,7 +1,16 @@
+## MultiSelect ComboBox
+
+Set `multiSelect` to true for a multi-select combo box. 
+
+<Canvas of={ComboBoxStories.ComboBoxMultiSelect}>
+  <Story of={ComboBoxStories.ComboBoxMultiSelect} />
+</Canvas>
+
+
 ## Customising the Filter Function
 
 
-`SgdsComboBox` contains the `filterFunction` prop that is called on each item in the `menuList` whenever the input value changes, to determine whether an item should be displayed in the dropdown menu based on the input value.
+`SgdsComboBox` contains the `filterFunction` prop that is called on each item's label in the `menuList` whenever the input value changes, to determine whether an item should be displayed in the dropdown menu based on the input value.
 
 
 ### filterFunction
@@ -22,7 +31,7 @@
     </tr>
     <tr>
       <td>menuItem</td>
-      <td>string</td>
+      <td>`{label: string, value: string}`</td>
       <td>An item in the menuList</td>
     </tr>
   </tbody>
@@ -41,7 +50,7 @@ A filter that displays items that contain a prefix that matches the input value:
 **JavaScript Code**
 ```
 (inputValue, menuItem) => {
-    const itemLowerCase = menuItem.toLowerCase();
+    const itemLowerCase = menuItem.label.toLowerCase();
     const valueLower = inputValue.toLowerCase();
     return itemLowerCase.startsWith(valueLower);
 }
@@ -60,7 +69,7 @@ A filter displays items that contain input value as substring.
 ```
 const comboBox = document.querySelector('sgds-combo-box');
 comboBox.filterFunction = (inputValue, menuItem) => {
-    return menuItem.includes(inputValue);
+    return  menuItem.label.toLowerCase().includes(inputValue)
 }
 ```
 

@@ -1,60 +1,58 @@
-:host {
-  --file-upload-left-icon-color: var(--sgds-success);
-  --file-upload-remove-icon-color: var(--sgds-body-color);
-  --file-upload-remove-icon-hover-color: ;
-}
-
-.fileupload-list-item {
+.file-upload {
   display: flex;
-  gap: var(--sgds-spacer-2);
-}
-.fileupload-list-item span:not(:first-of-type) {
-  cursor: pointer;
-}
-.fileupload-list-item span:first-of-type svg {
-  color: var(--file-upload-left-icon-color);
-}
-.fileupload-list-item span:last-of-type svg {
-  color: var(--file-upload-remove-icon-color);
-}
-.fileupload-list-item span:last-of-type svg:hover {
-  color: var(--file-upload-remove-icon-hover-color);
+  flex-direction: column;
+  gap: var(--sgds-form-gap-2-xl);
 }
 
-.file-upload-label {
+.file-upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-form-gap-md);
+}
+
+.file-upload-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-form-gap-xl);
+  list-style-type: none;
+}
+
+.file-upload-list-item {
   display: flex;
   align-items: center;
-  gap: var(--sgds-spacer-2);
+  gap: var(--sgds-form-gap-lg);
+  padding: var(--sgds-form-padding-y) var(--sgds-form-padding-x);
+  background-color: var(--sgds-form-surface-default);
+  border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-muted);
+  border-radius: var(--sgds-form-border-radius-md);
 }
-/** end scss */
+
+.file-upload-list-item span:not(:first-of-type) {
+  cursor: pointer;
+}
+
 ul {
   margin: 0;
   padding: 0;
 }
 
-.sgds.fileupload-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sgds-spacer-3);
-  list-style-type: none;
-}
-
-.sgds.fileupload-list .fileupload-list-item .filename {
-  color: var(--sgds-link);
-  text-decoration: underline;
-  text-underline-offset: 0.25rem;
-}
-
 input {
   display: none;
 }
+
 sgds-button,
 label {
   cursor: pointer;
 }
 
-.fileupload-container {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sgds-spacer-3);
+sgds-close-button {
+  margin-left: auto;
+}
+
+sgds-icon.valid {
+  color: var(--sgds-form-success-color-default);
+}
+
+sgds-icon.invalid {
+  color: var(--sgds-color-muted);
 }

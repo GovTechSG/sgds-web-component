@@ -14,53 +14,36 @@ describe("<sgds-modal>", () => {
    <div
        class="modal"
        hidden=""
-       part="base"
      >
+        <div class="modal-overlay"></div>
         <div
-          class="modal-overlay"
-          part="overlay"
-        >
-        </div>
-        <div
+          class="modal-panel"
+          role="dialog"
+          aria-modal="true"
           aria-hidden="true"
           aria-labelledby="title"
-          aria-modal="true"
-          class="modal-panel"
-          part="panel"
-          role="dialog"
           tabindex="-1"
         >
-          <div
-            class="modal-header"
-            part="header"
-          >
-            <h3
-              class="modal-title"
-              id="title"
-              part="title"
-              tabindex="-1"
-            >
-            </h3>
+         <div class="modal-header">
+            <div class="modal-header__title-description">
+              <slot class="modal-title" id="title" name="title"></slot>
+              <slot name="description"></slot>
+            </div>
             <sgds-close-button
-              arialabel="close modal"
-              class="modal-close"
-            >
-            </sgds-close-button>
+            class="modal-header__close"
+            ariaLabel="close modal"
+            size="md" 
+            variant="default"
+          ></sgds-close-button>
           </div>
-          <div
-            class="modal-body"
-            part="body"
-          >
+          <div class="modal-body">
             <slot>
             </slot>
           </div>
-          <footer
-            class="modal-footer"
-            part="footer"
-          >
+          <div class="modal-footer">
             <slot name="footer">
             </slot>
-          </footer>
+          </div>
         </div>
       </div>
     `
@@ -70,7 +53,7 @@ describe("<sgds-modal>", () => {
     const el = await fixture<SgdsModal>(html`
       <sgds-modal open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-modal>
     `);
-    const base = el.shadowRoot?.querySelector<HTMLElement>('[part="base"]');
+    const base = el.shadowRoot?.querySelector<HTMLElement>(".modal");
 
     expect(base?.hidden).to.be.false;
   });
@@ -79,7 +62,7 @@ describe("<sgds-modal>", () => {
     const el = await fixture<SgdsModal>(
       html` <sgds-modal>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-modal> `
     );
-    const base = el.shadowRoot?.querySelector<HTMLElement>('[part="base"]');
+    const base = el.shadowRoot?.querySelector<HTMLElement>(".modal");
 
     expect(base?.hidden).to.be.true;
   });
@@ -88,7 +71,7 @@ describe("<sgds-modal>", () => {
     const el = await fixture<SgdsModal>(html`
       <sgds-modal>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-modal>
     `);
-    const base = el.shadowRoot?.querySelector<HTMLElement>('[part="base"]');
+    const base = el.shadowRoot?.querySelector<HTMLElement>(".modal");
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -108,7 +91,7 @@ describe("<sgds-modal>", () => {
     const el = await fixture<SgdsModal>(html`
       <sgds-modal open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-modal>
     `);
-    const base = el.shadowRoot?.querySelector<HTMLElement>('[part="base"]');
+    const base = el.shadowRoot?.querySelector<HTMLElement>(".modal");
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -128,7 +111,7 @@ describe("<sgds-modal>", () => {
     const el = await fixture<SgdsModal>(html`
       <sgds-modal>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-modal>
     `);
-    const base = el.shadowRoot?.querySelector<HTMLElement>('[part="base"]');
+    const base = el.shadowRoot?.querySelector<HTMLElement>(".modal");
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -148,7 +131,7 @@ describe("<sgds-modal>", () => {
     const el = await fixture<SgdsModal>(html`
       <sgds-modal open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-modal>
     `);
-    const base = el.shadowRoot?.querySelector<HTMLElement>('[part="base"]');
+    const base = el.shadowRoot?.querySelector<HTMLElement>(".modal");
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -168,7 +151,7 @@ describe("<sgds-modal>", () => {
     const el = await fixture<SgdsModal>(html`
       <sgds-modal open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sgds-modal>
     `);
-    const overlay = el.shadowRoot?.querySelector<HTMLElement>('[part="overlay"]');
+    const overlay = el.shadowRoot?.querySelector<HTMLElement>(".modal-overlay");
 
     el.addEventListener("sgds-close", event => {
       event.preventDefault();
@@ -190,13 +173,8 @@ describe("<sgds-modal>", () => {
     expect(el.open).to.be.false;
   });
 
-  it("centered prop adds .centered to .modal", async () => {
-    const el = await fixture<SgdsModal>(html` <sgds-modal centered></sgds-modal> `);
-    expect(el.shadowRoot?.querySelector(".modal")).to.have.class("centered");
-  });
-
   it("noCloseButton prop removes button from modal", async () => {
     const el = await fixture<SgdsModal>(html`<sgds-modal noCloseButton></sgds-modal>`);
-    expect(el.shadowRoot.querySelector("button.btn-close")).to.be.null;
+    expect(el.shadowRoot?.querySelector("button.btn-close")).to.be.null;
   });
 });

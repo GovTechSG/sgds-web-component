@@ -22,7 +22,7 @@ export class MockPagination extends LitElement {
   };
 
   tableData: Post[] = [];
-  tableHeaders: string[] = ["Id", "Title", "Body"];
+  rowHeader: string[] = ["Id", "Title", "Body"];
 
   async connectedCallback() {
     super.connectedCallback();
@@ -69,7 +69,7 @@ export class MockPagination extends LitElement {
     const pagination = this.shadowRoot?.querySelector("sgds-pagination") as SgdsPagination;
 
     if (table && pagination) {
-      table.tableHeaders = this.tableHeaders;
+      table.rowHeader = this.rowHeader;
       table.tableData = displayedData;
 
       pagination.dataLength = this.tableData.length;
@@ -81,7 +81,7 @@ export class MockPagination extends LitElement {
   render() {
     return html`
       <sgds-table></sgds-table>
-      <sgds-pagination ellipsisOn @sgds-page-change=${this._pageChange}></sgds-pagination>
+      <sgds-pagination @sgds-page-change=${this._pageChange}></sgds-pagination>
     `;
   }
 }
