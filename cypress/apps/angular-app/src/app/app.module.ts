@@ -12,13 +12,17 @@ import { Card } from "../components/card/card.component";
 import { Checkbox } from "../components/checkbox/checkbox.component";
 import { Combobox } from "../components/combobox/combobox.component";
 import { Datepicker } from "../components/datepicker/datepicker.component";
+import { DescriptionList } from "../components/descriptionlist/descriptionlist.component";
 import { Divider } from "../components/divider/divider.component";
 import { Drawer } from "../components/drawer/drawer.component";
 import { Dropdown } from "../components/dropdown/dropdown.component";
 import { FileUpload } from "../components/fileupload/fileupload.component";
 import { Footer } from "../components/footer/footer.component";
 import { Icon } from "../components/icon/icon.component";
+import { IconButton } from "../components/iconbutton/iconbutton.component";
+import { IconList } from "../components/iconlist/iconlist.component";
 import { Input } from "../components/input/input.component";
+import { Link } from "../components/link/link.component";
 import { Mainnav } from "../components/mainnav/mainnav.component";
 import { Masthead } from "../components/masthead/masthead.component";
 import { Modal } from "../components/modal/modal.component";
@@ -30,8 +34,10 @@ import { Sidenav } from "../components/sidenav/sidenav.component";
 import { Spinner } from "../components/spinner/spinner.component";
 import { Skeleton } from "../components/skeleton/skeleton.component";
 import { Stepper } from "../components/stepper/stepper.component";
+import { Switch } from "../components/switch/switch.component";
 import { Tab } from "../components/tab/tab.component";
 import { Table } from "../components/table/table.component";
+import { TableOfContents } from "../components/tableofcontents/tableofcontents.component";
 import { Textarea } from "../components/textarea/textarea.component";
 import { Toast } from "../components/toast/toast.component";
 import { Tooltip } from "../components/tooltip/tooltip.component";
@@ -48,6 +54,7 @@ import { Tooltip } from "../components/tooltip/tooltip.component";
     Checkbox,
     Combobox,
     Datepicker,
+    DescriptionList,
     Divider,
     Drawer,
     Dropdown,
@@ -55,6 +62,9 @@ import { Tooltip } from "../components/tooltip/tooltip.component";
     Footer,
     Input,
     Icon,
+    IconButton,
+    IconList,
+    Link,
     Mainnav,
     Masthead,
     Modal,
@@ -66,8 +76,10 @@ import { Tooltip } from "../components/tooltip/tooltip.component";
     Spinner,
     Skeleton,
     Stepper,
+    Switch,
     Tab,
     Table,
+    TableOfContents,
     Textarea,
     Toast,
     Tooltip

@@ -1,8 +1,34 @@
 <template>
-    <sgds-dropdown drop="down" variant="secondary" close="default">
-        <span slot="toggler">Dropdown</span>
-        <sgds-dropdown-item href="#" target="_self">item #1 (argsTable controlled)</sgds-dropdown-item>
-        <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
-        <sgds-dropdown-item href="#" disabled="">item #3</sgds-dropdown-item>
-    </sgds-dropdown>
+    <div>
+        <sgds-dropdown menuVariant="default" drop="down">
+            <sgds-button slot="toggler" role="button">
+            Dropdown
+            <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
+            </sgds-button>
+            <sgds-dropdown-item active>
+            sdfjhskfjhs ksljdhfskljdfh sdkljfhasdasdasdasdsadasdasd sdf
+            </sgds-dropdown-item>
+            <sgds-dropdown-item>
+            <div href="#">Home</div>
+            </sgds-dropdown-item>
+            <sgds-dropdown-item>
+            <sgds-checkbox>Hello</sgds-checkbox>
+            </sgds-dropdown-item>
+            <sgds-dropdown-item active>
+            <a href="https://google.com" target="_blank"><sgds-icon name="placeholder"></sgds-icon>Option target
+                blank</a>
+            </sgds-dropdown-item>
+            <sgds-dropdown-item disabled>
+            <a href="#"><sgds-icon name="placeholder"></sgds-icon>Option disabled</a>
+            </sgds-dropdown-item>
+            <sgds-dropdown-item>
+            <a href="#"><sgds-icon name="placeholder"></sgds-icon>Option label</a>
+            </sgds-dropdown-item>
+            <sgds-dropdown-item disabled><sgds-icon name="placeholder"></sgds-icon>Option label</sgds-dropdown-item>
+            <sgds-dropdown-item><sgds-icon name="placeholder"></sgds-icon>Option label</sgds-dropdown-item>
+            <sgds-dropdown-item><sgds-icon name="placeholder"></sgds-icon>Option label</sgds-dropdown-item>
+            <sgds-dropdown-item><sgds-icon name="placeholder"></sgds-icon>Option label</sgds-dropdown-item>
+            <sgds-dropdown-item><sgds-icon name="placeholder"></sgds-icon>Option label</sgds-dropdown-item>
+        </sgds-dropdown>
+    </div>
 </template>

@@ -1,5 +1,4 @@
 <template>
-    <sgds-quantity-toggle step="1" quantitytoggleclasses="undefined" size="sm" name="undefined" min="undefined"
-        max="undefined" buttonvariant="primary" defaultvalue="0">
-    </sgds-quantity-toggle>
+    <sgds-quantity-toggle label="Label" hintText="Hint Text" max="undefined" step="1" quantitytoggleclasses=""
+    size="sm" name="" buttonvariant="primary" defaultvalue="0"></sgds-quantity-toggle>
 </template>
