@@ -123,8 +123,8 @@
   --sgds-caption-color: var(--sgds-gray-600);
 
   /* Semantic - Link Color */
-  --sgds-link-color-default: var(--sgds-product-primary-600);
-  --sgds-link-color-emphasis: var(--sgds-product-primary-700);
+  --sgds-link-color-default: var(--sgds-blue-600);
+  --sgds-link-color-emphasis: var(--sgds-blue-700);
 
   /* Semantic - Form Color */
   --sgds-form-surface-default: var(--sgds-gray-000);

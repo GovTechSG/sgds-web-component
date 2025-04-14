@@ -1,5 +1,4 @@
 .nav-link::slotted(a) {
-  --sgds-link-color-default: var(--sgds-primary-color-default);
   display: inline-flex;
   height: var(--sgds-dimension-24);
   justify-content: center;
@@ -7,7 +6,7 @@
   gap: var(--sgds-gap-2-xs);
   flex-shrink: 0;
   /* If clash of styles happens from other light dom css on anchor tag, will need to add !important here */
-  color: var(--sgds-link-color-default, --sgds-primary-color-default); 
+  color: var(--sgds-link-color-default);
   cursor: pointer;
   text-decoration: none !important;
 }
@@ -16,8 +15,7 @@
 .nav-link::slotted(a[active]),
 .nav-link::slotted(a:focus),
 .nav-link::slotted(a:focus-visible) {
-  --sgds-link-color-emphasis: var(--sgds-primary-color-emphasis);
-  color: var( --sgds-link-color-emphasis, --sgds-primary-color-emphasis);
+  color: var( --sgds-link-color-emphasis);
 }
 
 .nav-link::slotted(a:focus),

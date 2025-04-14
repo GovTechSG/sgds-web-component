@@ -71,13 +71,13 @@ a:hover {
 .sgds-masthead-button {
   display: flex;
   gap: 4px;
-  color: light-dark(#6b4feb, #a999f3);
+  color: light-dark(#0269d0, #60aaf4);
   align-items: center;
   cursor: pointer;
 }
 
 .sgds-masthead-button:hover {
-  color: light-dark(#523abc, #c8bdf7);
+  color: light-dark(#0151a0, #96c7f7);
 }
 
 .panel {
@@ -134,13 +134,13 @@ a:hover {
 }
 
 a.trusted-websites-link {
-  color: light-dark(#6b4feb, #a999f3);
+  color: light-dark(#0269d0, #60aaf4);
   width: fit-content;
   text-decoration: underline;
 }
 
 a.trusted-websites-link:hover {
-  color: light-dark(#523abc, #c8bdf7);
+  color: light-dark(#0151a0, #96c7f7);
 }
 
 @media screen and (max-width: 768px) {
