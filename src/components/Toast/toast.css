@@ -52,7 +52,7 @@
 
 .toast-action {
   word-wrap: break-word;
-  color: var(--sgds-primary-color-default);
+  color: var(--sgds-link-color-default);
 }
 
 .toast-header strong {

@@ -119,7 +119,6 @@ a.card:not(.disabled):focus-visible {
 }
 
 slot[name="title"]::slotted(a) {
-  --sgds-link-color-default: var(--sgds-primary-color-default);
   --sgds-font-size-2: var(--sgds-font-size-4);
   --sgds-font-weight-regular: var(--sgds-font-weight-semibold);
   color: var(--sgds-link-color-default);
@@ -152,7 +151,6 @@ slot[name="link"]::slotted(*) {
 }
 
 slot[name="link"]::slotted(a) {
-  --sgds-link-color-default: var(--sgds-primary-color-default);
   display: inline-flex;
   gap: var(--sgds-gap-2-xs);
   color: var(--sgds-link-color-default);
@@ -163,7 +161,6 @@ slot[name="title"]::slotted(a:hover),
 slot[name="title"]::slotted(a:focus),
 slot[name="link"]::slotted(a:hover),
 slot[name="link"]::slotted(a:focus) {
-  --sgds-link-color-emphasis: var(--sgds-primary-color-emphasis);
   color: var(--sgds-link-color-emphasis);
 }
 
