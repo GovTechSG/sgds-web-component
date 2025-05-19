@@ -34,7 +34,7 @@ export class SgdsIcon extends SgdsElement {
         .join("");
       try {
         const iconRegistry = await import("./icon-registry");
-        const svg = iconRegistry["IconRegistry"][pascalName];
+        const svg = iconRegistry[pascalName];
         if (svg) {
           this._svgContent = svg;
         } else {
