@@ -11,6 +11,7 @@ export type CardOrientation = "vertical" | "horizontal";
 /**
  * @summary Cards can be used for headers and footers, a wide variety of content, contain contextual background colors and images.
  * @slot image - Accepts an image or svg element of the card. Only a single element is allowed to be passed in.
+ * @slot icon - Accepts an icon element to visually represent the card. Only a single element is allowed to be passed in.
  * @slot subtitle - The subtitle of the card
  * @slot title - The title of the card
  * @slot description - The paragrapher text of the card
