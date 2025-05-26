@@ -1,4 +1,4 @@
-:host([bordered]) .container:last-child {
+:host([bordered][islastchild]) .container:last-child {
   border-bottom: none;
 }
 

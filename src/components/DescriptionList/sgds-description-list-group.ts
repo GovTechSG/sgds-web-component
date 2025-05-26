@@ -37,7 +37,7 @@ export class SgdsDescriptionListGroup extends SgdsElement {
 
   private _updateDescriptionLists() {
     if (!this._descriptionLists) return;
-    this._descriptionLists.forEach(descriptionList => {
+    this._descriptionLists.forEach((descriptionList, index) => {
       if (this.stacked) {
         descriptionList.setAttribute("stacked", "");
       } else {
@@ -47,6 +47,10 @@ export class SgdsDescriptionListGroup extends SgdsElement {
         descriptionList.setAttribute("bordered", "");
       } else {
         descriptionList.removeAttribute("bordered");
+      }
+
+      if (index === this._descriptionLists.length - 1) {
+        descriptionList.setAttribute("isLastChild", "");
       }
     });
   }
