@@ -1,9 +1,9 @@
 import { html } from "lit-html";
-import { IconRegistry } from "../../../src/components/Icon/icon-registry";
+import * as icons from "../../../src/components/Icon/icon-registry";
 import { pascalToKebab } from "../../../scripts/shared.mjs";
 
 export const Template = args => {
-  const iconNames = Object.keys(IconRegistry).map(i => pascalToKebab(i));
+  const iconNames = Object.keys(icons).map(i => pascalToKebab(i));
   return html` <div>
     ${iconNames.map(
       i => html`
