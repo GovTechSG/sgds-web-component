@@ -1,4 +1,5 @@
-import { html } from "lit";
+import { html, TemplateResult } from "lit";
+
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -9,6 +10,21 @@ export type HeaderPosition = "horizontal" | "vertical" | "both";
 /**
  * @summary The use of a table is to organise a collections of data into readable rows
  */
+
+interface IGeneric {
+  [key: string]: string;
+}
+interface IRender {
+  id: string;
+  type: "link" | "button" | "icon-button" | "badge";
+  props: IGeneric;
+  click?: unknown;
+}
+interface IRowHeader {
+  key: string;
+  value: string;
+  render?: IRender[] | IRender;
+}
 
 export class SgdsTable extends SgdsElement {
   static styles = [...SgdsElement.styles, tableStyle];
@@ -21,7 +37,7 @@ export class SgdsTable extends SgdsElement {
   /**
    * Populate row header cells using Arrays
    */
-  @property({ type: Array }) rowHeader: string[] = [];
+  @property({ type: Array }) rowHeader: IRowHeader[] = [];
 
   /**
    * Populate column header cells using Arrays only when <code>headerPosition="vertical"</code> or <code>headerPosition="both"</code>
@@ -31,7 +47,7 @@ export class SgdsTable extends SgdsElement {
   /**
    * Populate data cells using Arrays
    */
-  @property({ type: Array }) tableData: Array<(string | number)[]> = [];
+  @property({ type: Array }) tableData: IGeneric[] = [];
 
   /**
    * Defines the placement of headers in the table (horizontal, vertical, or both)
@@ -39,68 +55,120 @@ export class SgdsTable extends SgdsElement {
   @property({ type: String, reflect: true }) headerPosition: HeaderPosition = "horizontal";
 
   /** @internal */
-  @state() originalTableData: Array<(string | number)[]> = [];
+  @state() originalTableData: IGeneric[] = [];
 
   connectedCallback() {
     super.connectedCallback();
     this.originalTableData = [...this.tableData];
   }
 
+  private _handleClick(e: Event, row: IGeneric, render: IRender) {
+    const eventName = `sgds-table-click-${render.id ?? render.type}`;
+    const customClickEvent = this.emit(eventName, { detail: row, cancelable: true });
+
+    if (customClickEvent.defaultPrevented) return;
+    e.preventDefault();
+  }
+
+  private _mapElementType(row: IGeneric, key: string, render: IRender) {
+    const val = html`${row[key]}`;
+    let ele: TemplateResult = val;
+    const props: IGeneric = render?.props ?? {};
+
+    switch (render?.type) {
+      case "link":
+        ele = html`
+          <sgds-link slot="link" id="${render.id}">
+            <a href="${props.url ?? "#"}" @click=${e => this._handleClick(e, row, render)}>${val}</a>
+          </sgds-link>
+        `;
+        break;
+
+      case "button":
+        ele = html`
+          <sgds-button
+            id="${render.id}"
+            variant=${props.variant}
+            color=${props.color}
+            size=${props.size ?? "sm"}
+            @click=${e => this._handleClick(e, row, render)}
+          >
+            ${val}
+          </sgds-button>
+        `;
+        break;
+
+      case "icon-button":
+        ele = html`
+          <sgds-icon-button
+            id="${render.id}"
+            name=${props.name}
+            variant=${props.variant}
+            color=${props.color}
+            size=${props.size ?? "sm"}
+            @click=${e => this._handleClick(e, row, render)}
+          >
+          </sgds-icon-button>
+        `;
+        break;
+
+      case "badge":
+        ele = html`
+        <sgds-badge  
+          id="${render.id}"
+          variant=${props.variant}
+          outlined=${props.outlined}
+        >
+          ${val}
+        </sgds-button>
+      `;
+        break;
+    }
+
+    return ele;
+  }
+
+  private _renderRowData(row) {
+    return this.rowHeader.map((header: IRowHeader) => {
+      const multipleItems = Array.isArray(header.render);
+      const ele = multipleItems
+        ? html`
+            <div class="row">
+              ${(header.render as IRender[]).map(ren => this._mapElementType(row, header.key, ren))}
+            </div>
+          `
+        : this._mapElementType(row, header.key, header.render as IRender);
+
+      return html`<td>${ele}</td>`;
+    });
+  }
+
+  private _renderHeader() {
+    return this.rowHeader.map(({ value }: IRowHeader) => {
+      return html` <th>${value}</th> `;
+    });
+  }
+
   private _renderTable() {
-    if (this.headerPosition === "horizontal") {
-      return html`
-        <thead>
-          <tr>
-            ${this.rowHeader.map((header: string, index: number) => html` <th>${header}</th> `)}
-          </tr>
-        </thead>
-        <tbody>
-          ${this.tableData.map(
-            row => html`
-              <tr>
-                ${row.map((cell: string) => html`<td>${cell}</td>`)}
-              </tr>
-            `
-          )}
-        </tbody>
-      `;
-    }
-
-    if (this.headerPosition === "both") {
-      return html`
-        <thead>
-          <tr>
-            <th></th>
-            ${this.rowHeader.map((header: string, index: number) => html` <th>${header}</th> `)}
-          </tr>
-        </thead>
-        <tbody>
-          ${this.tableData.map(
-            (row, index) => html`
-              <tr>
-                <th>${this.columnHeader[index]}</th>
-                ${row.map((cell: string) => html`<td>${cell}</td>`)}
-              </tr>
-            `
-          )}
-        </tbody>
-      `;
-    }
-
-    if (this.headerPosition === "vertical") {
-      const flippedTableData = this.tableData[0].map((_, colIndex) => this.tableData.map(row => row[colIndex]));
-
-      return html`
-        ${flippedTableData.map(
+    return html`
+      ${this.headerPosition != "vertical"
+        ? html`<thead>
+            <tr>
+              ${this.headerPosition === "both" ? html`<th></th>` : ""} ${this._renderHeader()}
+            </tr>
+          </thead> `
+        : ""}
+      <tbody>
+        ${this.tableData.map(
           (row, index) => html`
             <tr>
-              <th>${this.columnHeader[index]}</th>
-              ${row.map((cell: string) => html`<td>${cell}</td>`)}
+              ${this.headerPosition !== "horizontal" ? html`<th>${this.columnHeader[index]}</th>` : ""}
+              ${this._renderRowData(row)}
             </tr>
           `
         )}
-      `;
-    }
+      </tbody>
+    `;
   }
 
   render() {
