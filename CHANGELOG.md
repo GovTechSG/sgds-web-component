@@ -1,3 +1,11 @@
+## v3.0.5 (2025-06-02)
+
+### Fix
+
+- **card**: update image adjustment prop description
+- **card**: guard against undefined childNodes in stretchedLink
+- **masthead**: enable keyboard interaction for toggle visibility
+
 ## v3.0.4 (2025-05-26)
 
 ### Fix
