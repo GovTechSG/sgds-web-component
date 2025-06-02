@@ -45,7 +45,7 @@ export class SgdsCard extends CardElement {
   /** Sets the image position of the card. Available options: `before`, `after` */
   @property({ type: String, reflect: true }) imagePosition: CardImagePosition = "before";
 
-  /** Sets the orientation of the card. Available options: `default`, `padding around`, `aspect ratio` */
+  /** Controls how the image is sized and aligned within the card. Available options: `default`, `padding around`, `aspect ratio` */
   @property({ type: String, reflect: true }) imageAdjustment: CardImageAdjustment = "default";
 
   protected firstUpdated() {
