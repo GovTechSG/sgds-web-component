@@ -52,6 +52,7 @@ describe("sgds-masthead", () => {
                   class="sgds-masthead-button"
                   id="sgds-masthead-identify"
                   role="button"
+                  tabindex="0"
                   aria-expanded="false"
                   aria-controls="sgds-masthead-content"
                 >
@@ -167,5 +168,27 @@ describe("sgds-masthead", () => {
     el.shadowRoot?.getElementById("sgds-masthead-identify")?.click();
     await elementUpdated(el);
     expect(el.shadowRoot?.getElementById("sgds-masthead-content")).to.have.class("show");
+  });
+
+  it("toggles panel with keyboard (Enter)", async () => {
+    const el = await fixture<SgdsMasthead>(html`<sgds-masthead></sgds-masthead>`);
+    const button = el.shadowRoot!.querySelector(".sgds-masthead-button")!;
+
+    button.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+    await el.updateComplete;
+    expect(el.toggleVisibility).to.be.true;
+
+    button.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+    await el.updateComplete;
+    expect(el.toggleVisibility).to.be.false;
+  });
+
+  it("toggles panel with keyboard (Space)", async () => {
+    const el = await fixture<SgdsMasthead>(html`<sgds-masthead></sgds-masthead>`);
+    const button = el.shadowRoot!.querySelector(".sgds-masthead-button")!;
+
+    button.dispatchEvent(new KeyboardEvent("keydown", { key: " ", bubbles: true }));
+    await el.updateComplete;
+    expect(el.toggleVisibility).to.be.true;
   });
 });
