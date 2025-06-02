@@ -16,6 +16,14 @@ export class SgdsMasthead extends SgdsElement {
   toggleVisibility = false;
 
   /** @internal */
+  private _handleKeydown(event: KeyboardEvent) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      this._toggleVisibility();
+    }
+  }
+
+  /** @internal */
   private _toggleVisibility() {
     this.toggleVisibility = !this.toggleVisibility;
   }
@@ -65,9 +73,11 @@ export class SgdsMasthead extends SgdsElement {
                   class="sgds-masthead-button"
                   id="sgds-masthead-identify"
                   role="button"
+                  tabindex="0"
                   aria-expanded="${this.toggleVisibility}"
                   aria-controls="sgds-masthead-content"
-                  @click=${() => this._toggleVisibility()}
+                  @keydown=${this._handleKeydown}
+                  @click=${this._toggleVisibility}
                 >
                   <span>How to identify</span>
                   <svg
