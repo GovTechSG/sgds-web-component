@@ -54,6 +54,8 @@ export class SgdsTable extends SgdsElement {
    */
   @property({ type: String, reflect: true }) headerPosition: HeaderPosition = "horizontal";
 
+  @property() onClick;
+
   /** @internal */
   @state() originalTableData: IGeneric[] = [];
 
@@ -74,6 +76,7 @@ export class SgdsTable extends SgdsElement {
     const val = html`${row[key]}`;
     let ele: TemplateResult = val;
     const props: IGeneric = render?.props ?? {};
+    const variant = props.variant_key ? row[props.variant_key] : props.variant;
 
     switch (render?.type) {
       case "link":
@@ -88,7 +91,7 @@ export class SgdsTable extends SgdsElement {
         ele = html`
           <sgds-button
             id="${render.id}"
-            variant=${props.variant}
+            variant=${variant}
             color=${props.color}
             size=${props.size ?? "sm"}
             @click=${e => this._handleClick(e, row, render)}
@@ -103,7 +106,7 @@ export class SgdsTable extends SgdsElement {
           <sgds-icon-button
             id="${render.id}"
             name=${props.name}
-            variant=${props.variant}
+            variant=${variant}
             color=${props.color}
             size=${props.size ?? "sm"}
             @click=${e => this._handleClick(e, row, render)}
@@ -116,7 +119,7 @@ export class SgdsTable extends SgdsElement {
         ele = html`
         <sgds-badge  
           id="${render.id}"
-          variant=${props.variant}
+          variant=${variant}
           outlined=${props.outlined}
         >
           ${val}
