@@ -11,16 +11,16 @@ export type HeaderPosition = "horizontal" | "vertical" | "both";
  * @summary The use of a table is to organise a collections of data into readable rows
  */
 
-interface IGeneric {
+export interface IGeneric {
   [key: string]: string;
 }
-interface IRender {
+export interface IRender {
   id: string;
   type: "link" | "button" | "icon-button" | "badge";
   props: IGeneric;
   click?: unknown;
 }
-interface IRowHeader {
+export interface IRowHeader {
   key: string;
   value: string;
   render?: IRender[] | IRender;
@@ -47,7 +47,7 @@ export class SgdsTable extends SgdsElement {
   /**
    * Populate data cells using Arrays
    */
-  @property({ type: Array }) tableData: IGeneric[] = [];
+  @property({ type: Array }) tableData: unknown[] = [];
 
   /**
    * Defines the placement of headers in the table (horizontal, vertical, or both)
@@ -57,7 +57,7 @@ export class SgdsTable extends SgdsElement {
   @property() onClick;
 
   /** @internal */
-  @state() originalTableData: IGeneric[] = [];
+  @state() originalTableData: unknown[] = [];
 
   connectedCallback() {
     super.connectedCallback();
@@ -82,7 +82,7 @@ export class SgdsTable extends SgdsElement {
       case "link":
         ele = html`
           <sgds-link slot="link" id="${render.id}">
-            <a href="${props.url ?? "#"}" @click=${e => this._handleClick(e, row, render)}>${val}</a>
+            <a href="${props.url ?? "#"}" @click=${(e: Event) => this._handleClick(e, row, render)}>${val}</a>
           </sgds-link>
         `;
         break;
@@ -94,7 +94,7 @@ export class SgdsTable extends SgdsElement {
             variant=${variant}
             color=${props.color}
             size=${props.size ?? "sm"}
-            @click=${e => this._handleClick(e, row, render)}
+            @click=${(e: Event) => this._handleClick(e, row, render)}
           >
             ${val}
           </sgds-button>
@@ -109,7 +109,7 @@ export class SgdsTable extends SgdsElement {
             variant=${variant}
             color=${props.color}
             size=${props.size ?? "sm"}
-            @click=${e => this._handleClick(e, row, render)}
+            @click=${(e: Event) => this._handleClick(e, row, render)}
           >
           </sgds-icon-button>
         `;
