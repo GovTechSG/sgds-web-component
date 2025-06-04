@@ -1,3 +1,16 @@
+## Unreleased
+
+### Feat
+
+- **table**: extending feature to allow custom input of different elements
+
+## v3.0.4 (2025-05-26)
+
+### Fix
+
+- **grid**: correct responsive column visibility override issue (#240)
+- **grid**: correct responsive column visibility override issue
+
 ## v3.0.3 (2025-05-19)
 
 ## v3.0.2 (2025-05-02)
