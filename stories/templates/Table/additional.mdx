@@ -17,3 +17,30 @@ Use `responsive="sm"`, `responsive="md"` , `responsive="lg"`, or `responsive="xl
 <Canvas of={TableStories.Responsive}>
   <Story of={TableStories.Responsive} />
 </Canvas>
+
+## Dynamic Cell Content
+
+Use `ICellItem` in your TableData in order to render different item in the table.
+Refer to [button](?path=/docs/components-button--docs), [link](?path=/docs/components-link--docs), [badge](?path=/docs/components-badge--docs) and [icon-button](?path=/docs/components-iconbutton--docs) for more information on each property.
+
+```
+export type ICellItem = {
+  id: string;
+  type: "button" | "link" | "badge" | "icon-button";
+  value: string;
+  fullWidth?: boolean;
+  variant?: string;
+  size?: string;
+  active?: boolean;
+  disabled?: boolean;
+  href?: string;
+  target?: string;
+  download?: string;
+  ariaLabel?: string;
+  outlined?: boolean;
+};
+```
+
+<Canvas of={TableStories.DynamicCellData}>
+  <Story of={TableStories.DynamicCellData} />
+</Canvas>

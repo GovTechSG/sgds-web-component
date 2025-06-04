@@ -1,32 +1,223 @@
 <template>
-    <sgds-table rowheader="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
-        tabledata="[
-            [&quot;1&quot;, &quot;John&quot;, &quot;Doe&quot;, &quot;@johndoe&quot;],
-            [&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
-            [&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
-        ]"
-    >
-    </sgds-table>
-    <sgds-table headerposition="vertical" columnheader="[&quot;#&quot;, &quot;First Names&quot;, &quot;Last Name&quot;, &quot;Username&quot;]"
-        tabledata="[
-            [&quot;1&quot;, &quot;John&quot;, &quot;Doe&quot;, &quot;@johndoe&quot;],
-            [&quot;2&quot;, &quot;Jane&quot;, &quot;Doe&quot;, &quot;@janedoe&quot;],
-            [&quot;3&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;@bobsmith&quot;]
-        ]"
-        >
-    </sgds-table>
-    <sgds-table headerposition="both" 
-        rowheader="[&quot;8-12&quot;, &quot;12-16&quot;, &quot;16-20&quot;, &quot;20-24&quot;]"
-        columnheader="[&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;]"
-        tabledata="[
-        [&quot;20&quot;, &quot;100&quot;, &quot;240&quot;, &quot;8&quot;],
-        [&quot;35&quot;, &quot;148&quot;, &quot;325&quot;, &quot;17&quot;],
-        [&quot;16&quot;, &quot;78&quot;, &quot;153&quot;, &quot;12&quot;],
-        [&quot;43&quot;, &quot;82&quot;, &quot;96&quot;, &quot;35&quot;],
-        [&quot;36&quot;, &quot;174&quot;, &quot;453&quot;, &quot;82&quot;],
-        [&quot;149&quot;, &quot;336&quot;, &quot;792&quot;, &quot;129&quot;],
-        [&quot;133&quot;, &quot;302&quot;, &quot;508&quot;, &quot;66&quot;]
-        ]"
-      >
-      </sgds-table>
+  <h2>Table</h2>
+  <sgds-table
+    rowheader='[{
+              "key": "first-name",
+              "value": "First Name"
+            },
+            {
+              "key": "last-name",
+              "value": "Last Name"
+            },
+            {
+              "key": "email",
+              "value": "Email"
+            },
+            {
+              "key": "button",
+              "value": "Button"
+            },
+            {
+              "key": "action",
+              "value": "Actions"
+            }]'
+    tabledata='[
+            {
+              "email": "@alicedoe",
+              "first-name": "John", 
+              "last-name": "Doe",
+              "button":  {
+                "id": "email_button",
+                "type": "button",
+                "fullWidth": true,
+                "value": "@alicedoe"
+              },
+              "action": [{
+                "id": "edit_btn",
+                "type": "icon-button",
+                "value": "edit",
+                "variant": "outline"
+              },
+              {
+                "id": "add_btn",
+                "type": "icon-button",
+                "value": "plus",
+                "variant": "outline"
+              }]
+            },{
+              "email": "@alicedoe",
+              "first-name": "John", 
+              "last-name": "Doe",
+              "button":  {
+                "id": "email_button",
+                "type": "link",
+                "value": "@alicedoe",
+                "variant": "outline"
+              },
+              "action": [
+              {
+                "id": "add_btn",
+                "type": "icon-button",
+                "value": "three-dots-vertical",
+                "variant": "ghost"
+              },
+              {
+                "id": "add_btn",
+                "type": "icon-button",
+                "value": "trash"
+              }]
+            }
+        ]'
+  >
+  </sgds-table>
+
+  <sgds-table
+    headerPosition="both"
+    columnheader='["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]'
+    rowheader='[
+            {
+              "key": "",
+              "value": "Day"
+            },{
+              "key": "first-name",
+              "value": "First Name"
+            },
+            {
+              "key": "last-name",
+              "value": "Last Name"
+            },
+            {
+              "key": "email",
+              "value": "Email"
+            },
+            {
+              "key": "button",
+              "value": "Button"
+            },
+            {
+              "key": "action",
+              "value": "Actions"
+            }]'
+    tabledata='[
+            {
+              "email": "@alicedoe",
+              "first-name": "John", 
+              "last-name": "Doe",
+              "button":  {
+                "id": "email_button",
+                "type": "button",
+                "fullWidth": true,
+                "value": "@alicedoe"
+              },
+              "action": [{
+                "id": "edit_btn",
+                "type": "icon-button",
+                "value": "edit",
+                "variant": "outline"
+              },
+              {
+                "id": "add_btn",
+                "type": "icon-button",
+                "value": "plus",
+                "variant": "outline"
+              }]
+            },{
+              "email": "@alicedoe",
+              "first-name": "John", 
+              "last-name": "Doe",
+              "button":  {
+                "id": "email_button",
+                "type": "link",
+                "value": "@alicedoe",
+                "variant": "outline"
+              },
+              "action": [
+              {
+                "id": "add_btn",
+                "type": "icon-button",
+                "value": "three-dots-vertical",
+                "variant": "ghost"
+              },
+              {
+                "id": "add_btn",
+                "type": "icon-button",
+                "value": "trash"
+              }]
+            }
+        ]'
+  >
+  </sgds-table>
+
+  <sgds-table
+    headerPosition="horizontal"
+    columnheader='["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]'
+    rowheader='[{
+              "key": "first-name",
+              "value": "First Name"
+            },
+            {
+              "key": "last-name",
+              "value": "Last Name"
+            },
+            {
+              "key": "email",
+              "value": "Email"
+            },
+            {
+              "key": "button",
+              "value": "Button"
+            },
+            {
+              "key": "action",
+              "value": "Actions"
+            }]'
+    tabledata='[
+            {
+              "email": "@alicedoe",
+              "first-name": "John", 
+              "last-name": "Doe",
+              "button":  {
+                "id": "email_button",
+                "type": "button",
+                "fullWidth": true,
+                "value": "@alicedoe"
+              },
+              "action": [{
+                "id": "edit_btn",
+                "type": "icon-button",
+                "value": "edit",
+                "variant": "outline"
+              },
+              {
+                "id": "add_btn",
+                "type": "icon-button",
+                "value": "plus",
+                "variant": "outline"
+              }]
+            },{
+              "email": "@alicedoe",
+              "first-name": "John", 
+              "last-name": "Doe",
+              "button":  {
+                "id": "email_button",
+                "type": "link",
+                "value": "@alicedoe",
+                "variant": "outline"
+              },
+              "action": [
+              {
+                "id": "add_btn",
+                "type": "icon-button",
+                "value": "three-dots-vertical",
+                "variant": "ghost"
+              },
+              {
+                "id": "add_btn",
+                "type": "icon-button",
+                "value": "trash"
+              }]
+            }
+        ]'
+  >
+  </sgds-table>
 </template>
