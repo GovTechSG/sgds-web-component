@@ -9,11 +9,19 @@ const mockRowHeader = [
   },
   {
     key: "last-name",
-    value: "Last Name",
-    render: {
-      id: "id-of-link",
-      type: "link"
-    }
+    value: "Last Name"
+  },
+  {
+    key: "email",
+    value: "Email"
+  },
+  {
+    key: "button",
+    value: "Button"
+  },
+  {
+    key: "action",
+    value: "Actions"
   }
 ];
 
@@ -22,12 +30,50 @@ const mockTableData = [
     email: "@alicedoe",
     "first-name": "Alice",
     "last-name": "Doe",
-    status_color: "warning"
+    button: {
+      id: "email_button",
+      type: "button",
+      value: "@alicedoe",
+      variant: "outline"
+    },
+    action: [
+      {
+        id: "edit_btn",
+        type: "icon-button",
+        value: "edit",
+        variant: "outline"
+      },
+      {
+        id: "add_btn",
+        type: "icon-button",
+        value: "plus",
+        variant: "outline"
+      }
+    ]
   },
   {
     email: "@johndoe",
     "first-name": "John",
-    "last-name": "Doe"
+    "last-name": "Doe",
+    button: {
+      id: "badge",
+      type: "badge",
+      value: "@johndoe",
+      variant: "outline"
+    },
+    action: [
+      {
+        id: "add_btn",
+        type: "icon-button",
+        value: "three-dots-vertical",
+        variant: "ghost"
+      },
+      {
+        id: "add_btn",
+        type: "icon-button",
+        value: "trash"
+      }
+    ]
   }
 ];
 

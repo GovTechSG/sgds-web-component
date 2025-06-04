@@ -1,295 +1,309 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script
+      type="module"
+      id="console-components-gateway"
+      src="https://dev.assets.developer.tech.gov.sg/console-components/gateway.es5.js"
+      nonce="{nonce"
+      ||undefined}
+    ></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        background-color: var(--sgds-body-bg);
+        padding: 1rem;
+      }
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
-  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-  <script type="module" id="console-components-gateway"
-    src="https://dev.assets.developer.tech.gov.sg/console-components/gateway.es5.js" nonce="{nonce"
-    ||undefined}></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      min-height: 100vh;
-      flex-direction: column;
-      background-color: var(--sgds-body-bg);
-      padding: 1rem;
-    }
+      .container {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+      }
+    </style>
+    <script type="module">
+      let scriptTarget = document.getElementsByTagName("head")[0];
+      let moduleScript = document.createElement("script");
+      moduleScript.type = "module";
+      if (process.env.VITE_ENV === "production") {
+        // preview production build
+        moduleScript.src = "lib/index.js";
+      } else {
+        // development server
+        moduleScript.src = "src/index.ts";
+      }
+      scriptTarget.appendChild(moduleScript);
+    </script>
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-    }
-  </style>
-  <script type="module">
-    let scriptTarget = document.getElementsByTagName("head")[0];
-    let moduleScript = document.createElement("script");
-    moduleScript.type = "module";
-    if (process.env.VITE_ENV === "production") {
-      // preview production build
-      moduleScript.src = "lib/index.js";
-    } else {
-      // development server
-      moduleScript.src = "src/index.ts";
-    }
-    scriptTarget.appendChild(moduleScript);
-  </script>
+    <script>
+      function test(ele) {
+        console.log("chicken", ele);
+        return "<div>hello</div>";
+      }
 
-  <script>
-    function test(ele) {
-      console.log("chicken", ele);
-      return 'ello'
-    }
+      function test2(ele) {
+        console.log("banana", ele.value);
+      }
 
-    function test2(ele) {
-      console.log("banana", ele.value);
-    }
+      document.addEventListener("sgds-table-click", event => console.log("sgds-id-of-link", event));
+    </script>
 
-    document.addEventListener("sgds-table-click-id-of-link", event => console.log("sgds-id-of-link", event));
-  </script>
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+  </head>
 
-  <script type="module" src="../src/index.ts"></script>
-  <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
-  <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
-  <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
-</head>
-
-<body>
-  <main>
-    <div class="container">
-      <h2>Table Default</h2>
-      <sgds-table id="table-test" rowHeader='[
+  <body>
+    <main>
+      <div class="container">
+        <h2>Table Default</h2>
+        <sgds-table
+          id="table-test"
+          rowHeader='[
             {
               "key": "first-name",
               "value": "First Name"
             },
             {
               "key": "last-name",
-              "value": "Last Name",
-              "render": {
-                "id": "id-of-link",
-                "type": "link"
-              }
+              "value": "Last Name"
             },
             {
               "key": "email",
-              "value": "Email",
-              "render": {
-                "id": "id-of-badge",
-                "type": "badge",
-                "props": {
-                  "variant": "success",
-                  "variant_key": "status_color"
-                }
-              }
+              "value": "Email"
             },
             {
-              "key": "buttons",
-              "value": "Button",
-              "render": {
-                "id": "id-of-button",
-                "type": "button",
-                "props": {
-                  "variant": "outline",
-                  "type": "reset"
-                }
-              }
+              "key": "button",
+              "value": "Button"
             },
             {
               "key": "action",
-              "value": "icon-button",
-              "render": [{
-                "id": "id-of-icon-button-1",
+              "value": "Actions"
+            }
+          ]'
+          tableData='[
+            {
+              "email": "@alicedoe",
+              "first-name": "John", 
+              "last-name": "Doe",
+              "button":  {
+                "id": "email_button",
+                "type": "button",
+                "fullWidth": true,
+                "value": "@alicedoe"
+              },
+              "action": [{
+                "id": "edit_btn",
                 "type": "icon-button",
-                "props": {
-                  "variant": "outline",
-                  "name": "plus"
-                }
+                "value": "edit",
+                "variant": "outline"
               },
               {
-                "id": "id-of-icon-button-2",
+                "id": "add_btn",
                 "type": "icon-button",
-                "props": {
-                  "variant": "outline",
-                  "name": "plus"
-                }
+                "value": "plus",
+                "variant": "outline"
+              }]
+            },{
+              "email": "@alicedoe",
+              "first-name": "John", 
+              "last-name": "Doe",
+              "button":  {
+                "id": "email_button",
+                "type": "link",
+                "value": "@alicedoe",
+                "variant": "outline"
+              },
+              "action": [
+              {
+                "id": "add_btn",
+                "type": "icon-button",
+                "value": "three-dots-vertical",
+                "variant": "ghost"
+              },
+              {
+                "id": "add_btn",
+                "type": "icon-button",
+                "value": "trash"
               }]
             }
-          ]' tableData='[
-            {
-              "email": "@johndoe",
-              "first-name": "John", 
-              "last-name": "Doe",
-              "buttons": "click",
-              "status_color": "warning"
-            },
-            {
-              "email": "@johndoe",
-              "first-name": "John", 
-              "last-name": "Doe",
-              "buttons": "click"
-            }
-          ]'></sgds-table>
-    </div>
+          ]'
+        ></sgds-table>
+      </div>
 
-    <div class="container">
-      <h2>Table Default Both</h2>
-      <sgds-table id="sgds-1" headerPosition="both"
-        columnheader='["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]' rowHeader='[
+      <div class="container">
+        <h2>Table Default Both</h2>
+
+        <sgds-table
+          id="table-test"
+          headerPosition="both"
+          columnheader='["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]'
+          rowHeader='[
+            {
+              "key": "",
+              "value": "Day"
+            },
             {
               "key": "first-name",
               "value": "First Name"
             },
             {
               "key": "last-name",
-              "value": "Last Name",
-              "render": {
-                "id": "id-of-link",
-                "type": "link"
-              }
+              "value": "Last Name"
             },
             {
               "key": "email",
-              "value": "Email",
-              "render": {
-                "id": "id-of-badge",
-                "type": "badge",
-                "props": {
-                  "variant": "success"
-                }
-              }
+              "value": "Email"
             },
             {
-              "key": "buttons",
-              "value": "Button",
-              "render": {
-                "id": "id-of-button",
-                "type": "button",
-                "props": {
-                  "variant": "outline",
-                  "type": "reset"
-                }
-              }
+              "key": "button",
+              "value": "Button"
             },
             {
               "key": "action",
-              "value": "icon-button",
-              "render": [{
-                "id": "id-of-icon-button-1",
+              "value": "Actions"
+            }
+          ]'
+          tableData='[
+            {
+              "email": "@alicedoe",
+              "first-name": "John", 
+              "last-name": "Doe",
+              "button":  {
+                "id": "email_button",
+                "type": "button",
+                "value": "@alicedoe",
+                "variant": "outline"
+              },
+              "action": [{
+                "id": "edit_btn",
                 "type": "icon-button",
-                "props": {
-                  "variant": "outline",
-                  "name": "plus"
-                }
+                "value": "edit",
+                "variant": "outline"
               },
               {
-                "id": "id-of-icon-button-2",
+                "id": "add_btn",
                 "type": "icon-button",
-                "props": {
-                  "variant": "outline",
-                  "name": "plus"
-                }
+                "value": "plus",
+                "variant": "outline"
+              }]
+            },{
+              "email": "@alicedoe",
+              "first-name": "John", 
+              "last-name": "Doe",
+              "button":  {
+                "id": "email_button",
+                "type": "link",
+                "value": "@alicedoe",
+                "variant": "outline"
+              },
+              "action": [
+              {
+                "id": "add_btn",
+                "type": "icon-button",
+                "value": "three-dots-vertical",
+                "variant": "ghost"
+              },
+              {
+                "id": "add_btn",
+                "type": "icon-button",
+                "value": "trash"
               }]
             }
-          ]' tableData='[
-            {
-              "email": "@johndoe",
-              "first-name": "John", 
-              "last-name": "Doe",
-              "buttons": "click"
-            },
-            {
-              "email": "@johndoe",
-              "first-name": "John", 
-              "last-name": "Doe",
-              "buttons": "click"
-            }
-          ]'>
-        <sgds-link>
-          <a href="#" onclick="test">hi</a>
-        </sgds-link>
-      </sgds-table>
-    </div>
+          ]'
+        ></sgds-table>
+      </div>
 
-    <div class="container">
-      <h2>Table Default Vertical</h2>
-      <sgds-table headerPosition="vertical"
-        columnheader='["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]' rowHeader='[
+      <div class="container">
+        <h2>Table Default Vertical</h2>
+        <sgds-table
+          headerPosition="vertical"
+          columnheader='["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]'
+          rowHeader='[
             {
               "key": "first-name",
               "value": "First Name"
             },
             {
               "key": "last-name",
-              "value": "Last Name",
-              "render": {
-                "id": "id-of-link",
-                "type": "link"
-              }
+              "value": "Last Name"
             },
             {
               "key": "email",
-              "value": "Email",
-              "render": {
-                "id": "id-of-badge",
-                "type": "badge",
-                "variant": "success"
-              }
+              "value": "Email"
             },
             {
-              "key": "buttons",
-              "value": "Button",
-              "render": {
-                "id": "id-of-button",
-                "type": "button",
-                "props": {
-                  "variant": "outline",
-                  "id":"stepper-btn-next",
-                  "type": "reset"
-                }
-              }
+              "key": "button",
+              "value": "Button"
             },
             {
               "key": "action",
-              "value": "icon-button",
-              "render": [{
+              "value": "Actions"
+            }
+          ]'
+          tableData='[
+            {
+              "email": "@alicedoe",
+              "first-name": "John", 
+              "last-name": {
+                "id": "email_button",
+                "type": "badge",
+                "value": "Doe",
+                "variant": "warning"
+              },
+              "button":  {
+                "id": "email_button",
+                "type": "button",
+                "value": "@alicedoe",
+                "variant": "outline"
+              },
+              "action": [{
+                "id": "edit_btn",
                 "type": "icon-button",
-                "props": {
-                  "variant": "outline",
-                  "id":"stepper-btn-next",
-                  "name": "plus"
-                }
+                "value": "edit",
+                "variant": "outline"
               },
               {
+                "id": "add_btn",
                 "type": "icon-button",
-                "props": {
-                  "variant": "outline",
-                  "id":"stepper-btn-next",
-                  "name": "plus"
-                }
+                "value": "plus",
+                "variant": "outline"
+              }]
+            },{
+              "email": "@alicedoe",
+              "first-name": "John", 
+              "last-name": "Doe",
+              "button":  {
+                "id": "email_button",
+                "type": "link",
+                "value": "@alicedoe",
+                "variant": "outline"
+              },
+              "action": [
+              {
+                "id": "add_btn",
+                "type": "icon-button",
+                "value": "three-dots-vertical",
+                "variant": "ghost"
+              },
+              {
+                "id": "add_btn",
+                "type": "icon-button",
+                "value": "trash"
               }]
             }
-          ]' tableData='[
-            {
-              "email": "@johndoe",
-              "first-name": "John", 
-              "last-name": "Doe",
-              "buttons": "click"
-            },
-            {
-              "email": "@johndoe",
-              "first-name": "John", 
-              "last-name": "Doe",
-              "buttons": "click"
-            }
-          ]'>
-      </sgds-table>
-    </div>
-  </main>
-</body>
-
+          ]'
+        >
+        </sgds-table>
+      </div>
+    </main>
+  </body>
 </html>

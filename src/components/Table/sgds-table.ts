@@ -7,25 +7,36 @@ import tableStyle from "./table.css";
 
 export type HeaderPosition = "horizontal" | "vertical" | "both";
 
-/**
- * @summary The use of a table is to organise a collections of data into readable rows
- */
-
-export interface IGeneric {
-  [key: string]: string;
-}
-export interface IRender {
+export type ICellItem = {
   id: string;
-  type: "link" | "button" | "icon-button" | "badge";
-  props: IGeneric;
-  click?: unknown;
-}
-export interface IRowHeader {
+  type: "button" | "link" | "badge" | "icon-button";
+  value: string;
+  fullWidth?: boolean;
+  variant?: string;
+  size?: string;
+  active?: boolean;
+  disabled?: boolean;
+  href?: string;
+  target?: string;
+  download?: string;
+  ariaLabel?: string;
+  outlined?: boolean;
+};
+
+export type IGeneric = {
+  [key: string]: ICellItem | string | number;
+};
+
+export type IRowHeader = {
   key: string;
   value: string;
-  render?: IRender[] | IRender;
-}
+};
 
+/**
+ * @summary The use of a table is to organise a collections of data into readable rows
+ *
+ * @event sgds-table-click - Emitted when a button is clicked in the table cell. Passes a CustomeEvent <code>{target: ICellItem, row: IGeneric}</code>
+ */
 export class SgdsTable extends SgdsElement {
   static styles = [...SgdsElement.styles, tableStyle];
 
@@ -45,16 +56,14 @@ export class SgdsTable extends SgdsElement {
   @property({ type: Array }) columnHeader: string[] = [];
 
   /**
-   * Populate data cells using Arrays
+   * Populate data cells using Arrays. For custom rendering of cell use <code>ICellItem</code>.
    */
-  @property({ type: Array }) tableData: unknown[] = [];
+  @property({ type: Array }) tableData: IGeneric[] = [];
 
   /**
    * Defines the placement of headers in the table (horizontal, vertical, or both)
    */
   @property({ type: String, reflect: true }) headerPosition: HeaderPosition = "horizontal";
-
-  @property() onClick;
 
   /** @internal */
   @state() originalTableData: unknown[] = [];
@@ -64,25 +73,29 @@ export class SgdsTable extends SgdsElement {
     this.originalTableData = [...this.tableData];
   }
 
-  private _handleClick(e: Event, row: IGeneric, render: IRender) {
-    const eventName = `sgds-table-click-${render.id ?? render.type}`;
-    const customClickEvent = this.emit(eventName, { detail: row, cancelable: true });
+  private _handleClick(e: Event, cell: ICellItem, row: IGeneric) {
+    const eventName = `sgds-table-click`;
+    const customClickEvent = this.emit(eventName, {
+      detail: {
+        target: cell,
+        row
+      },
+      cancelable: true
+    });
 
     if (customClickEvent.defaultPrevented) return;
     e.preventDefault();
   }
 
-  private _mapElementType(row: IGeneric, key: string, render: IRender) {
-    const val = html`${row[key]}`;
+  private _mapElementType(cell: ICellItem, row: IGeneric) {
+    const val = html`${cell?.value}`;
     let ele: TemplateResult = val;
-    const props: IGeneric = render?.props ?? {};
-    const variant = props.variant_key ? row[props.variant_key] : props.variant;
-
-    switch (render?.type) {
+    console.log(cell);
+    switch (cell?.type) {
       case "link":
         ele = html`
-          <sgds-link slot="link" id="${render.id}">
-            <a href="${props.url ?? "#"}" @click=${(e: Event) => this._handleClick(e, row, render)}>${val}</a>
+          <sgds-link slot="link" id="${cell.id}">
+            <a href="${cell.href ?? "#"}" @click=${(e: Event) => this._handleClick(e, cell, row)}>${val}</a>
           </sgds-link>
         `;
         break;
@@ -90,11 +103,17 @@ export class SgdsTable extends SgdsElement {
       case "button":
         ele = html`
           <sgds-button
-            id="${render.id}"
-            variant=${variant}
-            color=${props.color}
-            size=${props.size ?? "sm"}
-            @click=${(e: Event) => this._handleClick(e, row, render)}
+            id="${cell.id}"
+            .fullWidth=${cell.fullWidth}
+            variant=${cell.variant}
+            size=${cell.size ?? "sm"}
+            .active=${cell.active}
+            .disabled=${cell.disabled}
+            href=${cell.href}
+            target=${cell.target}
+            download=${cell.download}
+            ariaLabel=${cell.ariaLabel}
+            @click=${(e: Event) => this._handleClick(e, cell, row)}
           >
             ${val}
           </sgds-button>
@@ -104,12 +123,11 @@ export class SgdsTable extends SgdsElement {
       case "icon-button":
         ele = html`
           <sgds-icon-button
-            id="${render.id}"
-            name=${props.name}
-            variant=${variant}
-            color=${props.color}
-            size=${props.size ?? "sm"}
-            @click=${(e: Event) => this._handleClick(e, row, render)}
+            id="${cell.id}"
+            name=${cell.value}
+            variant=${cell.variant}
+            outlined=${cell.outlined}
+            @click=${(e: Event) => this._handleClick(e, cell, row)}
           >
           </sgds-icon-button>
         `;
@@ -118,9 +136,9 @@ export class SgdsTable extends SgdsElement {
       case "badge":
         ele = html`
         <sgds-badge  
-          id="${render.id}"
-          variant=${variant}
-          outlined=${props.outlined}
+          id="${cell.id}"
+          variant=${cell.variant}
+          outlined=${cell.outlined}
         >
           ${val}
         </sgds-button>
@@ -133,16 +151,20 @@ export class SgdsTable extends SgdsElement {
 
   private _renderRowData(row) {
     return this.rowHeader.map((header: IRowHeader) => {
-      const multipleItems = Array.isArray(header.render);
-      const ele = multipleItems
-        ? html`
-            <div class="row">
-              ${(header.render as IRender[]).map(ren => this._mapElementType(row, header.key, ren))}
-            </div>
-          `
-        : this._mapElementType(row, header.key, header.render as IRender);
+      const cellValue = row[header.key];
+      let ele = html`${cellValue}`;
 
-      return html`<td>${ele}</td>`;
+      if (typeof cellValue !== "string" && typeof cellValue !== "number") {
+        if (Array.isArray(cellValue)) {
+          // when there is multiple items
+          ele = html`<div class='row'>${cellValue.map(item => this._mapElementType(item, row))}</dive>`;
+        } else {
+          // If provided is object
+          ele = html`${this._mapElementType(cellValue, row)}`;
+        }
+      }
+
+      return header.key ? html`<td>${ele}</td>` : "";
     });
   }
 
@@ -157,7 +179,7 @@ export class SgdsTable extends SgdsElement {
       ${this.headerPosition != "vertical"
         ? html`<thead>
             <tr>
-              ${this.headerPosition === "both" ? html`<th></th>` : ""} ${this._renderHeader()}
+              ${this._renderHeader()}
             </tr>
           </thead> `
         : ""}
