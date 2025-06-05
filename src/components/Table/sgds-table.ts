@@ -4,6 +4,7 @@ import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import tableStyle from "./table.css";
+import { isEmpty } from "lodash";
 
 export type HeaderPosition = "horizontal" | "vertical" | "both";
 
@@ -88,9 +89,8 @@ export class SgdsTable extends SgdsElement {
   }
 
   private _mapElementType(cell: ICellItem, row: IGeneric) {
-    const val = html`${cell?.value}`;
-    let ele: TemplateResult = val;
-    
+    const val = cell?.value;
+
     switch (cell?.type) {
       case "link":
         return html`
@@ -119,7 +119,7 @@ export class SgdsTable extends SgdsElement {
         `;
 
       case "icon-button":
-        return  html`
+        return html`
           <sgds-icon-button
             id="${cell.id}"
             name=${cell.value}
@@ -131,7 +131,7 @@ export class SgdsTable extends SgdsElement {
         `;
 
       case "badge":
-        return  html`
+        return html`
         <sgds-badge  
           id="${cell.id}"
           variant=${cell.variant}
@@ -140,16 +140,16 @@ export class SgdsTable extends SgdsElement {
           ${val}
         </sgds-button>
       `;
-        
+
       default:
-        return val
+        return val;
     }
   }
 
   private _renderRowData(row) {
     return this.rowHeader.map((header: IRowHeader) => {
       const cellValue = row[header.key];
-      let ele = html`${cellValue}`;
+      let ele = cellValue;
 
       if (typeof cellValue !== "string" && typeof cellValue !== "number") {
         if (Array.isArray(cellValue)) {
@@ -161,7 +161,7 @@ export class SgdsTable extends SgdsElement {
         }
       }
 
-      return header.key ? html`<td>${ele}</td>` : "";
+      return header.key ? html`<td>${isEmpty(ele) ? "-" : ele}</td>` : "";
     });
   }
 
