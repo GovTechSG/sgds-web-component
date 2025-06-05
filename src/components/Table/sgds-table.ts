@@ -90,18 +90,17 @@ export class SgdsTable extends SgdsElement {
   private _mapElementType(cell: ICellItem, row: IGeneric) {
     const val = html`${cell?.value}`;
     let ele: TemplateResult = val;
-    console.log(cell);
+    
     switch (cell?.type) {
       case "link":
-        ele = html`
+        return html`
           <sgds-link slot="link" id="${cell.id}">
             <a href="${cell.href ?? "#"}" @click=${(e: Event) => this._handleClick(e, cell, row)}>${val}</a>
           </sgds-link>
         `;
-        break;
 
       case "button":
-        ele = html`
+        return html`
           <sgds-button
             id="${cell.id}"
             .fullWidth=${cell.fullWidth}
@@ -118,10 +117,9 @@ export class SgdsTable extends SgdsElement {
             ${val}
           </sgds-button>
         `;
-        break;
 
       case "icon-button":
-        ele = html`
+        return  html`
           <sgds-icon-button
             id="${cell.id}"
             name=${cell.value}
@@ -131,10 +129,9 @@ export class SgdsTable extends SgdsElement {
           >
           </sgds-icon-button>
         `;
-        break;
 
       case "badge":
-        ele = html`
+        return  html`
         <sgds-badge  
           id="${cell.id}"
           variant=${cell.variant}
@@ -143,10 +140,10 @@ export class SgdsTable extends SgdsElement {
           ${val}
         </sgds-button>
       `;
-        break;
+        
+      default:
+        return val
     }
-
-    return ele;
   }
 
   private _renderRowData(row) {
