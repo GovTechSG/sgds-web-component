@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script
+      type="module"
+      id="console-components-gateway"
+      src="https://dev.assets.developer.tech.gov.sg/console-components/gateway.es5.js"
+      nonce="{nonce"
+      ||undefined}
+    ></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        background-color: var(--sgds-body-bg);
+        padding: 1rem;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+      }
+    </style>
+    <script type="module">
+      let scriptTarget = document.getElementsByTagName("head")[0];
+      let moduleScript = document.createElement("script");
+      moduleScript.type = "module";
+      if (process.env.VITE_ENV === "production") {
+        // preview production build
+        moduleScript.src = "lib/index.js";
+      } else {
+        // development server
+        moduleScript.src = "src/index.ts";
+      }
+      scriptTarget.appendChild(moduleScript);
+    </script>
+
+    <script>
+      function test(ele) {
+        console.log("chice", ele.value);
+      }
+
+      function test2(ele) {
+        console.log("buton", ele.value);
+      }
+
+      document.addEventListener("sgds-click-id-of-link", event => console.log("sgds-id-of-link", event));
+    </script>
+
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <main>
+      <div class="container">
+        <h2>Table of Contents</h2>
+        <ol>
+          <li slot="contents">
+            <sgds-link>
+              <a href="table.html">Table</a>
+            </sgds-link>
+          </li>
+        </ol>
+      </div>
+    </main>
+  </body>
+</html>
