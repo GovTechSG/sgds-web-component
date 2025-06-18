@@ -53,6 +53,11 @@ table {
   overflow-x: auto;
 }
 
+td > .row {
+  display: flex;
+  gap: var(--sgds-font-size-1)
+}
+
 @media (max-width: 575.98px) {
   .table-responsive-sm {
     -webkit-overflow-scrolling: touch;

@@ -1,6 +1,6 @@
 import { html } from "lit";
 import { assert, expect, fixture } from "@open-wc/testing";
-import { SgdsTableOfContents } from "../src/components";
+
 import "../src/index";
 
 describe("<sgds-table-of-contents>", () => {

@@ -1,6 +1,6 @@
 import { html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
-import { SgdsTable } from "../src/components/Table/sgds-table";
+import { IRowHeader, SgdsTable } from "../src/components/Table/sgds-table";
 import { SgdsPagination } from "../src/components/Pagination/sgds-pagination";
 
 interface Post {
@@ -22,7 +22,16 @@ export class MockPagination extends LitElement {
   };
 
   tableData: Post[] = [];
-  rowHeader: string[] = ["Id", "Title", "Body"];
+  rowHeader: IRowHeader[] = [
+    {
+      key: "first-name",
+      value: "First Name"
+    },
+    {
+      key: "last-name",
+      value: "Last Name"
+    }
+  ];
 
   async connectedCallback() {
     super.connectedCallback();
@@ -61,9 +70,7 @@ export class MockPagination extends LitElement {
   updateTable() {
     const indexOfLastItem: number = this.paginationProps.currentPage * this.paginationProps.itemsPerPage;
     const indexOfFirstItem: number = indexOfLastItem - this.paginationProps.itemsPerPage;
-    const displayedData: (string | number)[][] = this.tableData
-      .slice(indexOfFirstItem, indexOfLastItem)
-      .map(post => [post.id, post.title, post.body]);
+    const displayedData: Post[] = this.tableData.slice(indexOfFirstItem, indexOfLastItem);
 
     const table = this.shadowRoot?.querySelector("sgds-table") as SgdsTable;
     const pagination = this.shadowRoot?.querySelector("sgds-pagination") as SgdsPagination;
