@@ -1,6 +1,6 @@
 import { html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
-import { IGeneric, IRender, IRowHeader, SgdsTable } from "../src/components/Table/sgds-table";
+import { IRowHeader, SgdsTable } from "../src/components/Table/sgds-table";
 import { SgdsPagination } from "../src/components/Pagination/sgds-pagination";
 
 interface Post {
@@ -29,11 +29,7 @@ export class MockPagination extends LitElement {
     },
     {
       key: "last-name",
-      value: "Last Name",
-      render: {
-        id: "id-of-link",
-        type: "link"
-      } as IRender
+      value: "Last Name"
     }
   ];
 
