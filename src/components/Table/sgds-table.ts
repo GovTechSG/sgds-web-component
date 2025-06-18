@@ -4,7 +4,6 @@ import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import tableStyle from "./table.css";
-import { isEmpty } from "lodash";
 
 export type HeaderPosition = "horizontal" | "vertical" | "both";
 
@@ -22,10 +21,6 @@ export type ICellItem = {
   download?: string;
   ariaLabel?: string;
   outlined?: boolean;
-};
-
-export type IGeneric = {
-  [key: string]: ICellItem | string | number;
 };
 
 export type IRowHeader = {
@@ -59,7 +54,7 @@ export class SgdsTable extends SgdsElement {
   /**
    * Populate data cells using Arrays. For custom rendering of cell use <code>ICellItem</code>.
    */
-  @property({ type: Array }) tableData: IGeneric[] = [];
+  @property({ type: Array }) tableData: unknown[] = [];
 
   /**
    * Defines the placement of headers in the table (horizontal, vertical, or both)
@@ -74,7 +69,7 @@ export class SgdsTable extends SgdsElement {
     this.originalTableData = [...this.tableData];
   }
 
-  private _handleClick(e: Event, cell: ICellItem, row: IGeneric) {
+  private _handleClick(e: Event, cell: ICellItem, row: unknown) {
     const eventName = `sgds-table-click`;
     const customClickEvent = this.emit(eventName, {
       detail: {
@@ -88,7 +83,7 @@ export class SgdsTable extends SgdsElement {
     e.preventDefault();
   }
 
-  private _mapElementType(cell: ICellItem, row: IGeneric) {
+  private _mapElementType(cell: ICellItem, row: unknown) {
     const val = cell?.value;
 
     switch (cell?.type) {
@@ -161,7 +156,7 @@ export class SgdsTable extends SgdsElement {
         }
       }
 
-      return header.key ? html`<td>${isEmpty(ele) ? "-" : ele}</td>` : "";
+      return header.key ? html`<td>${ele === "" || !ele ? "-" : ele}</td>` : "";
     });
   }
 
