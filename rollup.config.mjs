@@ -11,7 +11,7 @@ import copy from "rollup-plugin-copy";
 import preserveDirectives from "rollup-plugin-preserve-directives";
 
 const external = [
-  "@lit",
+  /^lit/, 
   "lit",
   "lit-element",
   "@popperjs",
