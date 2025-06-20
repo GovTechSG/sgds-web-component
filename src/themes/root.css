@@ -246,6 +246,7 @@
   --sgds-padding-2-xl: var(--sgds-spacer-8);
   --sgds-padding-3-xl: var(--sgds-spacer-9);
   --sgds-padding-4-xl: var(--sgds-spacer-10);
+  --sgds-padding-4-xl: var(--sgds-spacer-11);
   --sgds-form-padding-x: var(--sgds-padding-md);
   --sgds-form-padding-y: var(--sgds-padding-sm);
   --sgds-form-padding-inline-xs: var(--sgds-padding-3-xs);
