@@ -248,11 +248,11 @@ describe("when using constraint validation", () => {
     expect(el.checkValidity()).to.be.false;
   });
 
-  it("when required, blurring out an empty and touched field should cause input to be invalid", async() => {
+  it("when required, blurring out an empty and touched field should cause input to be invalid", async () => {
     const el = await fixture<SgdsInput>(html` <sgds-input required></sgds-input> `);
     expect(el.invalid).to.be.false;
 
-     el.focus();
+    el.focus();
     await sendKeys({ type: "ssd" });
     el.blur();
     await el.updateComplete;
@@ -268,15 +268,44 @@ describe("when using constraint validation", () => {
     expect(el.invalid).to.be.true;
     expect(el.checkValidity()).to.be.false;
 
-      el.focus();
+    el.focus();
     await sendKeys({ type: "ssd" });
     await sendKeys({ press: "Backspace" });
     await sendKeys({ press: "Backspace" });
     await sendKeys({ press: "Backspace" });
     await sendMouse({ type: "click", position: [0, 0] });
-     expect(el.invalid).to.be.true;
+    expect(el.invalid).to.be.true;
     expect(el.checkValidity()).to.be.false;
-  })
+  });
+  it("when NOT required, blurring out an empty and touched field should NOT cause input to be invalid", async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input></sgds-input> `);
+    expect(el.invalid).to.be.false;
+
+    el.focus();
+    await sendKeys({ type: "ssd" });
+    el.blur();
+    await el.updateComplete;
+    expect(el.value).to.equal("ssd");
+    expect(el.invalid).to.be.false;
+
+    el.focus();
+    await sendKeys({ press: "Backspace" });
+    await sendKeys({ press: "Backspace" });
+    await sendKeys({ press: "Backspace" });
+    await sendMouse({ type: "click", position: [0, 0] });
+
+    expect(el.invalid).to.be.false;
+    expect(el.checkValidity()).to.be.true;
+
+    el.focus();
+    await sendKeys({ type: "ssd" });
+    await sendKeys({ press: "Backspace" });
+    await sendKeys({ press: "Backspace" });
+    await sendKeys({ press: "Backspace" });
+    await sendMouse({ type: "click", position: [0, 0] });
+    expect(el.invalid).to.be.false;
+    expect(el.checkValidity()).to.be.true;
+  });
 
   it("for an invalid field,  invalid is set to false (reset) when user is typing", async () => {
     const el = await fixture<SgdsInput>(html` <sgds-input invalid></sgds-input> `);

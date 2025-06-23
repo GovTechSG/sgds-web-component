@@ -154,7 +154,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
 
   protected _handleBlur() {
     const sgdsBlur = this.emit("sgds-blur", { cancelable: true });
-
+    this.setInvalid(!this._mixinCheckValidity());
     if (sgdsBlur.defaultPrevented) return;
 
     this._isTouched = true;
