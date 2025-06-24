@@ -106,15 +106,6 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
     this.input.blur();
   }
 
-  /** Programatically sets the invalid state of the input. Pass in boolean value in the argument */
-  public setInvalid(bool: boolean) {
-    this.invalid = bool;
-    if (bool) {
-      this.emit("sgds-invalid");
-    } else {
-      this.emit("sgds-valid");
-    }
-  }
   /**
    * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
    * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
@@ -154,7 +145,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
 
   protected _handleBlur() {
     const sgdsBlur = this.emit("sgds-blur", { cancelable: true });
-
+    this.setInvalid(!this._mixinCheckValidity());
     if (sgdsBlur.defaultPrevented) return;
 
     this._isTouched = true;
