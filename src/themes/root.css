@@ -115,12 +115,12 @@
   --sgds-form-border-radius-full: var(--sgds-border-radius-full);
 
   /* Primitive - Breakpoint */
-  --sgds-breakpoint-xs: 0;
-  --sgds-breakpoint-sm: 576px;
-  --sgds-breakpoint-md: 768px;
-  --sgds-breakpoint-lg: 992px;
-  --sgds-breakpoint-xl: 1200px;
-  --sgds-breakpoint-2-xl: 1400px;
+  --sgds-breakpoint-xs: var(--sgds-dimension-320);
+  --sgds-breakpoint-sm: var(--sgds-dimension-512);
+  --sgds-breakpoint-md: var(--sgds-dimension-768);
+  --sgds-breakpoint-lg: var(--sgds-dimension-1024);
+  --sgds-breakpoint-xl: var(--sgds-dimension-1280);
+  --sgds-breakpoint-2-xl: var(--sgds-dimension-1440);
 
   /* Primitive - Font Family */
   --sgds-font-family-brand: "Inter", system-ui, sans-serif;
@@ -211,15 +211,19 @@
   --sgds-dimension-32: 32px;
   --sgds-dimension-40: 40px;
   --sgds-dimension-48: 48px;
+  --sgds-dimension-52: 52px;
   --sgds-dimension-56: 56px;
   --sgds-dimension-60: 60px;
   --sgds-dimension-64: 64px;
   --sgds-dimension-72: 72px;
+  --sgds-dimension-76: 76px;
   --sgds-dimension-80: 80px;
+  --sgds-dimension-88: 88px;
   --sgds-dimension-96: 96px;
   --sgds-dimension-112: 112px;
   --sgds-dimension-120: 120px;
   --sgds-dimension-128: 128px;
+  --sgds-dimension-132: 132px;
   --sgds-dimension-136: 136px;
   --sgds-dimension-144: 144px;
   --sgds-dimension-168: 168px;
@@ -229,10 +233,16 @@
   --sgds-dimension-280: 280px;
   --sgds-dimension-288: 288px;
   --sgds-dimension-320: 320px;
+  --sgds-dimension-328: 328px;
+  --sgds-dimension-340: 340px;
   --sgds-dimension-384: 384px;
   --sgds-dimension-480: 480px;
   --sgds-dimension-512: 512px;
   --sgds-dimension-688: 688px;
+  --sgds-dimension-768: 768px;
+  --sgds-dimension-1024: 1024px;
+  --sgds-dimension-1280: 1280px;
+  --sgds-dimension-1440: 1440px;
 
   /* Semantic - Padding */
   --sgds-padding-none: var(--sgds-spacer-0);
@@ -246,6 +256,7 @@
   --sgds-padding-2-xl: var(--sgds-spacer-8);
   --sgds-padding-3-xl: var(--sgds-spacer-9);
   --sgds-padding-4-xl: var(--sgds-spacer-10);
+  --sgds-padding-5-xl: var(--sgds-spacer-11);
   --sgds-form-padding-x: var(--sgds-padding-md);
   --sgds-form-padding-y: var(--sgds-padding-sm);
   --sgds-form-padding-inline-xs: var(--sgds-padding-3-xs);
