@@ -38,6 +38,19 @@ const HiddenColumns = () => html`
   </div>
 `;
 
+/** 👀 Center Column Example */
+const CenterColumn = () => html`
+  <div class="sgds-container">
+    <div class="sgds-grid">
+      <div
+        class="sgds-col-center-2 sgds-col-sm-center-4 sgds-col-md-center-4 sgds-col-lg-center-6 sgds-col-xl-center-6 sgds-col-2-xl-center-6 grid-item"
+      >
+        Center
+      </div>
+    </div>
+  </div>
+`;
+
 export const Basic = {
   render: BasicGrid.bind({}),
   name: "Basic Grid",
@@ -56,6 +69,14 @@ export const Responsive = {
 
 export const HiddenCol = {
   render: HiddenColumns.bind({}),
+  name: "Hidden Columns",
+  args: {},
+  parameters: {},
+  tags: ["!dev", "!autodocs"]
+};
+
+export const CenterCol = {
+  render: CenterColumn.bind({}),
   name: "Hidden Columns",
   args: {},
   parameters: {},
