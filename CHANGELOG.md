@@ -1,3 +1,18 @@
+## Unreleased
+
+## v3.0.6 (2025-06-27)
+
+### Feat
+
+- **grid**: add new breakpoint and utilities to center grid items (#250)
+- **grid**: add new breakpoint and utilities to center grid items
+- **css**: update new css variable name
+- **css**: add new padding variable to design tokens
+
+### Fix
+
+- **input**: to check validation at the blurring event , only works when required is true
+
 ## v3.0.5 (2025-06-02)
 
 ### Fix
