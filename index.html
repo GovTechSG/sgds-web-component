@@ -1105,11 +1105,13 @@
         </sgds-input>
         <sgds-quantity-toggle name="quant" min="1" max="2" value="4" hinttext="type hello" hasFeedback="both">
         </sgds-quantity-toggle>
-        <sgds-checkbox-group hasFeedback hintText="hint for checkbox" label="checkbox">
-          <sgds-checkbox name="checkbox" value="checkboxhello" required>she</sgds-checkbox>
-          <sgds-checkbox name="checkbox" value="checkboxhello" required disabled>he</sgds-checkbox>
+        <sgds-checkbox-group required hasFeedback hintText="hint for checkbox" label="checkbox">
+          <sgds-checkbox name="checkbox" value="she">she</sgds-checkbox>
+          <sgds-checkbox name="checkbox" value="he">he</sgds-checkbox>
+          <sgds-checkbox name="checkbox" value="they">they</sgds-checkbox>
+          <sgds-checkbox name="checkbox" value="them">them</sgds-checkbox>
           <sgds-icon slot="invalidIcon" size="md" name="placeholder"></sgds-icon>
-        </sgds-checkbox-group> 
+        </sgds-checkbox-group>
 
         <sgds-radio-group hasFeedback name="radio" required>
           <sgds-radio value="1" disab led>1</sgds-radio>
