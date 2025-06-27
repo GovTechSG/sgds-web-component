@@ -34,7 +34,7 @@ export class SgdsCheckboxGroup extends SgdsElement {
   /** The checkbox group's hint text */
   @property({ reflect: true }) hintText = "";
 
-  /** The checkbox group's hint text */
+  /** Makes the checkbox group a required field */
   @property({ type: Boolean, reflect: true }) required = false;
 
   constructor() {
@@ -45,7 +45,7 @@ export class SgdsCheckboxGroup extends SgdsElement {
     });
 
     this.addEventListener("sgds-change", () => {
-      this._updateCheckboxInvalidStates();
+      this._validateRequiredCheckGroup();
     });
 
     this.addEventListener("sgds-blur", () => {
@@ -59,7 +59,7 @@ export class SgdsCheckboxGroup extends SgdsElement {
     this.hasInvalidCheckbox = Array.from(this.checkboxes).some(checkbox => checkbox.invalid);
   }
 
-  private _updateCheckboxInvalidStates() {
+  private _validateRequiredCheckGroup() {
     if (!this.required) return;
 
     const isValid = Array.from(this.checkboxes).some(checkbox => checkbox.checked);
@@ -90,7 +90,7 @@ export class SgdsCheckboxGroup extends SgdsElement {
   }
   updated() {
     this._checkInvalidState();
-    this._updateCheckboxInvalidStates();
+    this._validateRequiredCheckGroup();
   }
   render() {
     return html`
