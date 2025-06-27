@@ -20,6 +20,7 @@ export class SgdsCheckboxGroup extends SgdsElement {
   @queryAssignedElements({ flatten: true }) private checkboxes!: NodeListOf<SgdsCheckbox>;
   @state() private hasInvalidCheckbox = false;
   @state() private validationMessage: string;
+  @state() private _touched = false;
 
   /** The checkbox group's label  */
   @property({ reflect: true }) label = "";
@@ -33,17 +34,47 @@ export class SgdsCheckboxGroup extends SgdsElement {
   /** The checkbox group's hint text */
   @property({ reflect: true }) hintText = "";
 
+  /** The checkbox group's hint text */
+  @property({ type: Boolean, reflect: true }) required = false;
+
   constructor() {
     super();
     this.addEventListener("sgds-validity-change", (e: CustomEvent) => {
       this.hasInvalidCheckbox = e.detail.invalid;
       this.validationMessage = e.detail.validationMessage;
     });
+
+    this.addEventListener("sgds-change", () => {
+      this._updateCheckboxInvalidStates();
+    });
+
+    this.addEventListener("sgds-blur", () => {
+      if (!this._touched) {
+        this._touched = true;
+      }
+    });
   }
 
   private _checkInvalidState() {
     this.hasInvalidCheckbox = Array.from(this.checkboxes).some(checkbox => checkbox.invalid);
   }
+
+  private _updateCheckboxInvalidStates() {
+    if (!this.required) return;
+
+    const isValid = Array.from(this.checkboxes).some(checkbox => checkbox.checked);
+
+    const shouldShowInvalid = !isValid && this._touched;
+
+    Array.from(this.checkboxes).forEach(checkbox => {
+      checkbox.invalid = shouldShowInvalid;
+    });
+
+    if (shouldShowInvalid) {
+      this.validationMessage = this.invalidFeedback || "Please select at least one option.";
+    }
+  }
+
   /** Overrides hasFeedback from individual SgdsCheckbox  */
   private _forwardHasFeedback() {
     Array.from(this.checkboxes).forEach(checkbox => (checkbox.hasFeedback = this.hasFeedback));
@@ -59,6 +90,7 @@ export class SgdsCheckboxGroup extends SgdsElement {
   }
   updated() {
     this._checkInvalidState();
+    this._updateCheckboxInvalidStates();
   }
   render() {
     return html`
@@ -74,12 +106,7 @@ export class SgdsCheckboxGroup extends SgdsElement {
           ? html`
               <div class="invalid-feedback-container">
                 <slot name="invalidIcon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path
-                      d="M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10ZM10 6.25C9.49805 6.25 9.10584 6.68339 9.15578 7.18285L9.48461 10.4711C9.51109 10.7359 9.7339 10.9375 10 10.9375C10.2661 10.9375 10.4889 10.7359 10.5154 10.4711L10.8442 7.18285C10.8942 6.68339 10.5019 6.25 10 6.25ZM10.0014 11.875C9.48368 11.875 9.06394 12.2947 9.06394 12.8125C9.06394 13.3303 9.48368 13.75 10.0014 13.75C10.5192 13.75 10.9389 13.3303 10.9389 12.8125C10.9389 12.2947 10.5192 11.875 10.0014 11.875Z"
-                      fill="currentColor"
-                    />
-                  </svg>
+                  <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
                 </slot>
                 <div id="checkbox-feedback" tabindex="0" class="invalid-feedback">
                   ${this.invalidFeedback ? this.invalidFeedback : this.validationMessage}
