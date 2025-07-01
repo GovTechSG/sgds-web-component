@@ -1,10 +1,78 @@
-import { elementUpdated, expect, fixture, html } from "@open-wc/testing";
+import { assert, elementUpdated, expect, fixture, html } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
 import type { SgdsButton, SgdsCheckbox, SgdsCheckboxGroup } from "../src/components";
 import "./sgds-web-component";
 
 describe("<sgds-checkbox>", () => {
+  it("can be semantically compare with shadowDom trees (default)", async () => {
+    const el = await fixture<SgdsCheckbox>(
+      html`<sgds-checkbox name="testname" value="testvalue">label</sgds-checkbox>`
+    );
+    assert.shadowDom.equal(
+      el,
+      `
+           <div class="form-check">
+                  <div class="form-check-input-container">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      aria-invalid= "false"
+                      aria-disabled="false"
+                      aria-checked="false"
+                      name="testname"
+                    />
+                  </div>
+                  <label class="form-check-label"><slot></slot></label>
+                </div>
+          `,
+      { ignoreAttributes: ["id", "for"] }
+    );
+  });
+  it("can be semantically compare with shadowDom trees with error message", async () => {
+    const el = await fixture<SgdsCheckbox>(
+      html`<sgds-checkbox invalid hasFeedback invalidFeedback="test" value="testvalue">label</sgds-checkbox>`
+    );
+    assert.shadowDom.equal(
+      el,
+      `
+           <div class="form-check">
+                  <div class="form-check-input-container">
+                    <input
+                      class="form-check-input is-invalid"
+                      type="checkbox"
+                      aria-invalid= "true"
+                      aria-disabled="false"
+                      aria-checked="false"
+                    />
+                  </div>
+                  <label class="form-check-label"><slot></slot></label>
+                </div>
+                      <div class="invalid-feedback-container">
+                        <slot name="invalidIcon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path
+                              d="M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10ZM10 6.25C9.49805 6.25 9.10584 6.68339 9.15578 7.18285L9.48461 10.4711C9.51109 10.7359 9.7339 10.9375 10 10.9375C10.2661 10.9375 10.4889 10.7359 10.5154 10.4711L10.8442 7.18285C10.8942 6.68339 10.5019 6.25 10 6.25ZM10.0014 11.875C9.48368 11.875 9.06394 12.2947 9.06394 12.8125C9.06394 13.3303 9.48368 13.75 10.0014 13.75C10.5192 13.75 10.9389 13.3303 10.9389 12.8125C10.9389 12.2947 10.5192 11.875 10.0014 11.875Z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </slot>
+                        <div id="checkbox-feedback" tabindex="0" class="invalid-feedback">
+                          test
+                        </div>
+                      </div>
+          `,
+      { ignoreAttributes: ["id", "for"] }
+    );
+  });
+  it("value remains the same when clicked", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox value="testvalue">Test</sgds-checkbox>`);
+    expect(el.checked).to.be.false;
+    expect(el.value).to.equal("testvalue");
+    el.click();
+    expect(el.checked).to.be.true;
+    expect(el.value).to.equal("testvalue");
+  });
   it("should be disabled with the disabled attribute & aria-disabled to be true", async () => {
     const el = await fixture(html`<sgds-checkbox disabled></sgds-checkbox>`);
     const checkbox = el.shadowRoot?.querySelector("input");
@@ -208,7 +276,9 @@ describe("<sgds-checkbox>", () => {
   });
 
   it("should apply the 'is-invalid' class to a checkbox when it's invalid and hasFeedback is true", async () => {
-    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox hasFeedback invalid></sgds-checkbox>`);
+    const el = await fixture<SgdsCheckbox>(
+      html`<sgds-checkbox hasFeedback invalid invalidFeedback="invalid feedback"></sgds-checkbox>`
+    );
     el.invalid = true;
     await elementUpdated(el);
     const checkbox = el.shadowRoot?.querySelector("input");
