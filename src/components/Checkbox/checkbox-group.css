@@ -29,6 +29,10 @@ fieldset {
   gap: var(--sgds-form-gap-md);
 }
 
+.checkbox-group-validation-input {
+  display: none;
+}
+
 /* .error-message-container {
   display: flex;
   gap: var(--sgds-form-gap-sm);

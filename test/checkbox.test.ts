@@ -1,8 +1,9 @@
-import { assert, elementUpdated, expect, fixture, html } from "@open-wc/testing";
+import { assert, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
-import type { SgdsButton, SgdsCheckbox, SgdsCheckboxGroup } from "../src/components";
+import { SgdsButton, SgdsCheckbox, SgdsCheckboxGroup } from "../src/components";
 import "./sgds-web-component";
+import Sinon from "sinon";
 
 describe("<sgds-checkbox>", () => {
   it("can be semantically compare with shadowDom trees (default)", async () => {
@@ -507,4 +508,116 @@ describe("<sgds-checkbox>", () => {
 
     expect(checkbox?.getAttribute("indeterminate")).to.not.exist;
   });
+});
+
+describe("sgds-checkbox-group", () => {
+  // it("shadowDOm matches semantically", async() => {
+  //   const el = await fixture<SgdsCheckboxGroup>(html`
+  //     <sgds-checkbox-group>
+  //     </sgds-checkbox-group>
+  //     `)
+  //     assert(el, `
+
+  //       `)
+  // })
+
+  // it("shadowDom matches semantically for invalid state", async() => {
+
+  // })
+
+  // it("when required and hasFeedback is true")
+  it("on initial render, if any checkboxes are checked, value is saved in checkboxgroup", async () => {
+    const el = await fixture<SgdsCheckboxGroup>(html`
+      <sgds-checkbox-group>
+        <sgds-checkbox value="he" checked>he</sgds-checkbox>
+        <sgds-checkbox value="him" checked>him</sgds-checkbox>
+      </sgds-checkbox-group>
+    `);
+    await elementUpdated(el);
+    expect(el.value).to.equal("he;him");
+  });
+
+  it("on initial render, if disabled is true, all children are disabled", async () => {
+    const el = await fixture<SgdsCheckboxGroup>(html`
+      <sgds-checkbox-group disabled>
+        <sgds-checkbox value="he">he</sgds-checkbox>
+        <sgds-checkbox value="him">him</sgds-checkbox>
+      </sgds-checkbox-group>
+    `);
+    const checkboxes = el.querySelectorAll("sgds-checkbox");
+    checkboxes.forEach(c => expect(c.disabled).to.be.true);
+  });
+  it("on initial render, if a child has required set to true, delete the checkbox and send console error", async () => {
+    const consoleStub = Sinon.stub(console, "error");
+    const el = await fixture<SgdsCheckboxGroup>(html`
+      <sgds-checkbox-group>
+        <sgds-checkbox value="he" required>he</sgds-checkbox>
+        <sgds-checkbox value="him">him</sgds-checkbox>
+      </sgds-checkbox-group>
+    `);
+    await el.updateComplete;
+    await waitUntil(() => consoleStub.calledOnce);
+    expect(consoleStub.calledOnce).to.be.true;
+    expect(el.querySelectorAll("sgds-checkbox").length).to.equal(1);
+  });
+  it("programatically setting value checkboxgroup will be reflected on the checkboxes child", async () => {
+    const el = await fixture<SgdsCheckboxGroup>(html`
+      <sgds-checkbox-group>
+        <sgds-checkbox value="he">he</sgds-checkbox>
+        <sgds-checkbox value="him">him</sgds-checkbox>
+      </sgds-checkbox-group>
+    `);
+
+    el.value = "he";
+    await el.updateComplete;
+    const heCheckbox = el.querySelector<SgdsCheckbox>("sgds-checkbox[value='he']");
+    expect(heCheckbox?.checked).to.be.true;
+  });
+  it("value prop should properly reflect checked children in initial render", async () => {
+    const el = await fixture<SgdsCheckboxGroup>(html`
+      <sgds-checkbox-group value="he;him;">
+        <sgds-checkbox value="he">he</sgds-checkbox>
+        <sgds-checkbox value="him">him</sgds-checkbox>
+        <sgds-checkbox value="she">she</sgds-checkbox>
+      </sgds-checkbox-group>
+    `);
+    await el.updateComplete;
+    const [one, two, three] = el.querySelectorAll<SgdsCheckbox>("sgds-checkbox") as NodeListOf<SgdsCheckbox>;
+    expect(one.checked).to.be.true;
+    expect(two.checked).to.be.true;
+    expect(three.checked).to.be.false;
+  });
+  it("when checked and unchecked, checkboxgroup value should be updated", async () => {
+    const el = await fixture<SgdsCheckboxGroup>(html`
+      <sgds-checkbox-group>
+        <sgds-checkbox value="he">he</sgds-checkbox>
+        <sgds-checkbox value="him">him</sgds-checkbox>
+        <sgds-checkbox value="she">she</sgds-checkbox>
+      </sgds-checkbox-group>
+    `);
+    expect(el.value).to.equal('');
+    const [one, two, three] = el.querySelectorAll<SgdsCheckbox>("sgds-checkbox") as NodeListOf<SgdsCheckbox>;
+    //checking
+    one.click();
+    await elementUpdated(el);
+    expect(el.value).to.equal("he");
+    two.click();
+    await elementUpdated(el);
+    expect(el.value).to.equal("he;him");
+    //unchecking
+    two.click();
+    await elementUpdated(el);
+    expect(el.value).to.equal("he");
+  });
+  it("at initial render, checked children will be reflected on checkbox group value", async() => {
+       const el = await fixture<SgdsCheckboxGroup>(html`
+      <sgds-checkbox-group>
+        <sgds-checkbox value="he" checked>he</sgds-checkbox>
+        <sgds-checkbox value="him" checked >him</sgds-checkbox>
+        <sgds-checkbox value="she">she</sgds-checkbox>
+      </sgds-checkbox-group>
+    `);
+    expect(el.value).to.equal("he;him")
+  })
+  //form testings
 });

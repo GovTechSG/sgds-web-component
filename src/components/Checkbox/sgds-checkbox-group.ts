@@ -1,11 +1,17 @@
-import { html, nothing } from "lit";
-import { queryAssignedElements, state, property } from "lit/decorators.js";
+import { html, nothing, PropertyValues } from "lit";
+import { queryAssignedElements, state, property, query } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import feedbackStyles from "../../styles/feedback.css";
 import formLabelStyles from "../../styles/form-label.css";
 import checkboxGroupStyles from "./checkbox-group.css";
 import formHintStyles from "../../styles/form-hint.css";
 import SgdsCheckbox from "./sgds-checkbox";
+import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
+import FormControlElement from "../../base/form-control-element";
+import { SgdsFormControl } from "../../utils/formSubmitController";
+import { classMap } from "lit/directives/class-map.js";
+import { live } from "lit/directives/live.js";
+import { watch } from "../../utils/watch";
 /**
  * @summary CheckboxGroup is the container that group multiple checkboxes under a single question field.
  * It handles the display of validation feedback of its checkboxes children.
@@ -14,12 +20,11 @@ import SgdsCheckbox from "./sgds-checkbox";
  * @slot invalidIcon - The slot for invalid icon
  *
  */
-export class SgdsCheckboxGroup extends SgdsElement {
+export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
   static styles = [...SgdsElement.styles, feedbackStyles, formLabelStyles, checkboxGroupStyles, formHintStyles];
   /**@internal */
   @queryAssignedElements({ flatten: true }) private checkboxes!: NodeListOf<SgdsCheckbox>;
-  @state() private hasInvalidCheckbox = false;
-  @state() private validationMessage: string;
+  // @state() private hasInvalidCheckbox = false;
 
   /** The checkbox group's label  */
   @property({ reflect: true }) label = "";
@@ -33,20 +38,31 @@ export class SgdsCheckboxGroup extends SgdsElement {
   /** The checkbox group's hint text */
   @property({ reflect: true }) hintText = "";
 
-  constructor() {
-    super();
-    this.addEventListener("sgds-validity-change", (e: CustomEvent) => {
-      this.hasInvalidCheckbox = e.detail.invalid;
-      this.validationMessage = e.detail.validationMessage;
-    });
-  }
+  /** Makes the checkbox group a required field. Only available for when multiselect is true */
+  @property({ type: Boolean, reflect: true }) required = false;
 
-  private _checkInvalidState() {
-    this.hasInvalidCheckbox = Array.from(this.checkboxes).some(checkbox => checkbox.invalid);
-  }
-  /** Overrides hasFeedback from individual SgdsCheckbox  */
-  private _forwardHasFeedback() {
-    Array.from(this.checkboxes).forEach(checkbox => (checkbox.hasFeedback = this.hasFeedback));
+  /** Consolidates the values of its child checked checkboxes into a single string with semi-colon delimiter. Only available when required is true  */
+  @property({ type: String, reflect: true }) value = "";
+
+  @state() private _isTouched = false;
+
+  /**@internal */
+  @state() defaultValue = "";
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.defaultValue = this.value;
+    this.addEventListener("sgds-check", (e: CustomEvent) => {
+      const { value } = e.detail;
+      !this.value.includes(value) && this._addValue(value);
+    });
+    this.addEventListener("sgds-uncheck", (e: CustomEvent) => {
+      const { value } = e.detail;
+      this._removeValue(value);
+    });
+    this.addEventListener("sgds-blur", () => {
+      this._isTouched = true;
+    });
   }
 
   protected _renderHintText() {
@@ -54,12 +70,112 @@ export class SgdsCheckboxGroup extends SgdsElement {
     return this.hintText && hintTextTemplate;
   }
 
-  firstUpdated() {
-    this._forwardHasFeedback();
+  @queryAssignedElements()
+  private _checkboxes!: Array<SgdsCheckbox>;
+
+  private _addValue(newValue: string) {
+    const valueArray = this.value ? this.value.split(";") : [];
+    valueArray.push(newValue);
+    this.value = valueArray.join(";");
   }
-  updated() {
-    this._checkInvalidState();
+  private _removeValue(oldValue: string) {
+    const valueArray = this.value ? this.value.split(";") : [];
+    const newValueArray = valueArray.filter(v => v !== oldValue);
+    this.value = newValueArray.join(";");
   }
+
+  private _sanitizeSlot() {
+    const checkboxes = this._checkboxes;
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = this.value.includes(checkbox.value);
+      checkbox.hasFeedback = this.hasFeedback ? "style" : null
+      if (checkbox.required) {
+        console.error("Checkboxes in a group cannot have required or hasFeedback prop set to true");
+        checkbox.remove();
+      }
+    });
+    this._disabledChildCheckboxes();
+  }
+
+  private _disabledChildCheckboxes() {
+    if (this.disabled) {
+      const checkboxes = this._checkboxes;
+      checkboxes.forEach(checkbox => (checkbox.disabled = this.disabled));
+    }
+  }
+
+  @watch("value", { waitUntilFirstUpdate: true })
+  _handleValueChange() {
+    const checkboxes = this._checkboxes;
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = this.value.includes(checkbox.value);
+    });
+    this._updateInputValue();
+  }
+
+  @watch("_isTouched", { waitUntilFirstUpdate: true })
+  _handleIsTouched() {
+    if (this._isTouched) {
+      this.invalid = !this.input.checkValidity();
+    }
+  }
+  @watch("invalid", { waitUntilFirstUpdate: true })
+  _handleInvalid() {
+    console.log(this.invalid, 'invalid')
+    const checkboxes = this._checkboxes
+    // checkboxes.forEach(c => (c.invalid = this.invalid))
+  }
+
+  /**
+   * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
+   * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
+   */
+  public reportValidity(): boolean {
+    return this._mixinReportValidity();
+  }
+  /**
+   * Checks for validity without any native error popup message
+   */
+  public checkValidity(): boolean {
+    return this._mixinCheckValidity();
+  }
+
+  /**
+   * Returns the ValidityState object
+   */
+  public get validity(): ValidityState {
+    return this._mixinGetValidity();
+  }
+  /**
+   * Returns the validation message based on the ValidityState
+   */
+  public get validationMessage() {
+    return this._mixinGetValidationMessage();
+  }
+  /**
+   * radio requries a custom _mixinResetFormControl as the update of input value
+   * requires to fire a reset event manually
+   * */
+  private _mixinResetFormControl() {
+    this.value = this.input.value = this.defaultValue;
+    this._updateInputValue("reset");
+    this._mixinResetValidity(this.input);
+  }
+  /**
+   * when input value is set programatically, need to manually dispatch a change event
+   * In order to prevent race conditions and ensure sequence of events, set input's value here instead of binding to value prop of input
+   */
+  private _updateInputValue(eventName = "change") {
+    this.input.value = this.value;
+    this.input.dispatchEvent(new InputEvent(eventName));
+  }
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+    if (this.value) {
+      this._updateInputValue();
+    }
+  }
+
   render() {
     return html`
       <fieldset>
@@ -68,9 +184,19 @@ export class SgdsCheckboxGroup extends SgdsElement {
           ${this._renderHintText()}
         </div>
         <div class="checkbox-container">
-          <slot></slot>
+          <slot @slotchange=${this._sanitizeSlot}></slot>
         </div>
-        ${this.hasInvalidCheckbox && this.hasFeedback
+        <input
+          type="text"
+          class="checkbox-group-validation-input ${classMap({
+            "is-invalid": this.hasFeedback && this.invalid
+          })}"
+          ?required=${this.required}
+          tabindex="-1"
+          @change=${(e: Event) => super._mixinHandleChange(e)}
+          .value=${live(this.value)}
+        />
+        ${this.invalid && this.hasFeedback
           ? html`
               <div class="invalid-feedback-container">
                 <slot name="invalidIcon">
@@ -93,3 +219,5 @@ export class SgdsCheckboxGroup extends SgdsElement {
 }
 
 export default SgdsCheckboxGroup;
+
+type CheckedMode = "click" | "key";

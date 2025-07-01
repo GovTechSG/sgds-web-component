@@ -29,8 +29,9 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
   /** Draws the checkbox in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
 
+
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
-  @property({ type: Boolean, reflect: true }) hasFeedback = false;
+  @property({ type: String, reflect: true }) hasFeedback: "style" | "text" | "both";
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("checked")
@@ -112,6 +113,14 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
       this.invalid = !this.input.checkValidity();
     }
   }
+
+  @watch("checked", {waitUntilFirstUpdate: true})
+  _handleChecked() {
+    this.checked
+      ? this.emit("sgds-check", { detail: { value: this.value } })
+      : this.emit("sgds-uncheck", { detail: { value: this.value } });
+  }
+
   private _mixinResetFormControl() {
     this._isTouched = false;
     this.checked = this.input.checked = this.defaultChecked;
@@ -144,14 +153,21 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
     return this._mixinGetValidationMessage();
   }
 
+  firstUpdated(_changedProperties){
+    super.firstUpdated(_changedProperties)
+    this.checked &&  this.emit("sgds-check", { detail: { value: this.value } })
+  }
   render() {
+  const wantFeedbackStyle = this.hasFeedback === "both" || this.hasFeedback === "style";
+    const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
+
     return html`
       <div class="form-check">
         <div class="form-check-input-container">
           <input
             class=${classMap({
               "form-check-input": true,
-              "is-invalid": this.hasFeedback && this.invalid
+              "is-invalid": wantFeedbackStyle && this.invalid
             })}
             type="checkbox"
             id=${this._controlId}
@@ -173,7 +189,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
         </div>
         <label for="${this._controlId}" class="form-check-label" id="${this._labelId}"><slot></slot></label>
       </div>
-      ${this.hasFeedback && this.invalid
+      ${wantFeedbackText && this.invalid
         ? html`
             <div class="invalid-feedback-container">
               <slot name="invalidIcon">
