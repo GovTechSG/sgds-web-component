@@ -1,5 +1,5 @@
 import { html, nothing, PropertyValues } from "lit";
-import { queryAssignedElements, state, property, query } from "lit/decorators.js";
+import { queryAssignedElements, state, property, query, queryAsync } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import feedbackStyles from "../../styles/feedback.css";
 import formLabelStyles from "../../styles/form-label.css";
@@ -25,6 +25,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
   /**@internal */
   @queryAssignedElements({ flatten: true }) private checkboxes!: NodeListOf<SgdsCheckbox>;
   // @state() private hasInvalidCheckbox = false;
+  @queryAsync("slot") private checkboxesAsync!: Promise<HTMLSlotElement>;
 
   /** The checkbox group's label  */
   @property({ reflect: true }) label = "";
@@ -88,7 +89,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
     const checkboxes = this._checkboxes;
     checkboxes.forEach(checkbox => {
       checkbox.checked = this.value.includes(checkbox.value);
-      checkbox.hasFeedback = this.hasFeedback ? "style" : null
+      checkbox.hasFeedback = this.hasFeedback ? "style" : null;
       if (checkbox.required) {
         console.error("Checkboxes in a group cannot have required or hasFeedback prop set to true");
         checkbox.remove();
@@ -111,19 +112,20 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
       checkbox.checked = this.value.includes(checkbox.value);
     });
     this._updateInputValue();
+    this._updateInvalid();
   }
 
   @watch("_isTouched", { waitUntilFirstUpdate: true })
   _handleIsTouched() {
     if (this._isTouched) {
       this.invalid = !this.input.checkValidity();
+      this._updateInvalid();
     }
   }
   @watch("invalid", { waitUntilFirstUpdate: true })
-  _handleInvalid() {
-    console.log(this.invalid, 'invalid')
-    const checkboxes = this._checkboxes
-    // checkboxes.forEach(c => (c.invalid = this.invalid))
+  _updateInvalid() {
+    const checkboxes = this._checkboxes;
+    checkboxes.forEach(ch => (ch.invalid = this.invalid));
   }
 
   /**
@@ -193,7 +195,9 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
           })}"
           ?required=${this.required}
           tabindex="-1"
-          @change=${(e: Event) => super._mixinHandleChange(e)}
+          @change=${(e: Event) => {
+            super._mixinHandleChange(e);
+          }}
           .value=${live(this.value)}
         />
         ${this.invalid && this.hasFeedback

@@ -29,7 +29,6 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
   /** Draws the checkbox in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
 
-
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: String, reflect: true }) hasFeedback: "style" | "text" | "both";
 
@@ -114,7 +113,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
     }
   }
 
-  @watch("checked", {waitUntilFirstUpdate: true})
+  @watch("checked", { waitUntilFirstUpdate: true })
   _handleChecked() {
     this.checked
       ? this.emit("sgds-check", { detail: { value: this.value } })
@@ -153,12 +152,12 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
     return this._mixinGetValidationMessage();
   }
 
-  firstUpdated(_changedProperties){
-    super.firstUpdated(_changedProperties)
-    this.checked &&  this.emit("sgds-check", { detail: { value: this.value } })
+  firstUpdated(_changedProperties) {
+    super.firstUpdated(_changedProperties);
+    this.checked && this.emit("sgds-check", { detail: { value: this.value } });
   }
   render() {
-  const wantFeedbackStyle = this.hasFeedback === "both" || this.hasFeedback === "style";
+    const wantFeedbackStyle = this.hasFeedback === "both" || this.hasFeedback === "style";
     const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
 
     return html`
