@@ -107,6 +107,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
 
   @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
+    this.emit("sgds-change")
     const checkboxes = this._checkboxes;
     checkboxes.forEach(checkbox => {
       checkbox.checked = this.value.includes(checkbox.value);
