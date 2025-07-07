@@ -39,7 +39,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
   @property({ type: Boolean, reflect: true }) required = false;
 
   /** Consolidates the values of its child checked checkboxes into a single string with semi-colon delimiter. Only available when required is true  */
-  @property({ type: String, reflect: true }) value = "";
+  @property({ reflect: true }) value = "";
 
   @state() private _isTouched = false;
 
@@ -60,6 +60,15 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
     this.addEventListener("sgds-blur", () => {
       this._isTouched = true;
     });
+  }
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+    if (this.value) {
+      this._updateInputValue();
+    }
+    console.log(this.input, "adding this to check checkbox group input");
+    console.log(this.input.validity, "adding this to check checkbox group input");
+    console.log(this.inputValidationController, "inputValidtionController");
   }
 
   protected _renderHintText() {
@@ -167,13 +176,6 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
   private _updateInputValue(eventName = "change") {
     this.input.value = this.value;
     this.input.dispatchEvent(new InputEvent(eventName));
-  }
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-    if (this.value) {
-      this._updateInputValue();
-    }
-    console.log(this.input, "adding this to check checkbox group input");
   }
 
   render() {
