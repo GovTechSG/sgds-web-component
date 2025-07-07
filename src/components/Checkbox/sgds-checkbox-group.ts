@@ -1,17 +1,17 @@
-import { html, nothing, PropertyValues } from "lit";
-import { queryAssignedElements, state, property, query, queryAsync } from "lit/decorators.js";
-import SgdsElement from "../../base/sgds-element";
-import feedbackStyles from "../../styles/feedback.css";
-import formLabelStyles from "../../styles/form-label.css";
-import checkboxGroupStyles from "./checkbox-group.css";
-import formHintStyles from "../../styles/form-hint.css";
-import SgdsCheckbox from "./sgds-checkbox";
-import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
-import FormControlElement from "../../base/form-control-element";
-import { SgdsFormControl } from "../../utils/formSubmitController";
+import { html, nothing } from "lit";
+import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { live } from "lit/directives/live.js";
+import FormControlElement from "../../base/form-control-element";
+import SgdsElement from "../../base/sgds-element";
+import feedbackStyles from "../../styles/feedback.css";
+import formHintStyles from "../../styles/form-hint.css";
+import formLabelStyles from "../../styles/form-label.css";
+import { SgdsFormControl } from "../../utils/formSubmitController";
+import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
+import checkboxGroupStyles from "./checkbox-group.css";
+import SgdsCheckbox from "./sgds-checkbox";
 /**
  * @summary CheckboxGroup is the container that group multiple checkboxes under a single question field.
  * It handles the display of validation feedback of its checkboxes children.
@@ -22,10 +22,6 @@ import { watch } from "../../utils/watch";
  */
 export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
   static styles = [...SgdsElement.styles, feedbackStyles, formLabelStyles, checkboxGroupStyles, formHintStyles];
-  /**@internal */
-  @queryAssignedElements({ flatten: true }) private checkboxes!: NodeListOf<SgdsCheckbox>;
-  // @state() private hasInvalidCheckbox = false;
-  @queryAsync("slot") private checkboxesAsync!: Promise<HTMLSlotElement>;
 
   /** The checkbox group's label  */
   @property({ reflect: true }) label = "";
@@ -177,6 +173,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
     if (this.value) {
       this._updateInputValue();
     }
+    console.log(this.input, "adding this to check checkbox group input");
   }
 
   render() {
@@ -191,9 +188,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
         </div>
         <input
           type="text"
-          class="checkbox-group-validation-input ${classMap({
-            "is-invalid": this.hasFeedback && this.invalid
-          })}"
+          class="checkbox-group-validation-input"
           ?required=${this.required}
           tabindex="-1"
           @change=${(e: Event) => {
@@ -213,7 +208,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
                   </svg>
                 </slot>
                 <div id="checkbox-feedback" tabindex="0" class="invalid-feedback">
-                  ${this.invalidFeedback ? this.invalidFeedback : this.validationMessage}
+                  ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
                 </div>
               </div>
             `
