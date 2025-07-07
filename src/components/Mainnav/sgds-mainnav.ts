@@ -12,8 +12,8 @@ import { watch } from "../../utils/watch";
 import SgdsMainnavItem from "./sgds-mainnav-item";
 import mainnavStyle from "./mainnav.css";
 import SgdsMainnavDropdown from "./sgds-mainnav-dropdown";
-import SgdsIcon from "../Icon/sgds-icon";
 import { MainnavContext } from "./mainnav-context";
+import SgdsIconButton from "../IconButton/sgds-icon-button";
 export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
 
 const SIZES = {
@@ -44,7 +44,7 @@ export class SgdsMainnav extends SgdsElement {
   static styles = [...SgdsElement.styles, mainnavStyle];
   /** @internal */
   static dependencies = {
-    "sgds-icon": SgdsIcon
+    "sgds-icon-button": SgdsIconButton
   };
 
   @provide({ context: MainnavContext })
