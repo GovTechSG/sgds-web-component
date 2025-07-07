@@ -20,7 +20,7 @@ import SgdsCheckbox from "./sgds-checkbox";
  * @slot invalidIcon - The slot for invalid icon
  *
  */
-export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
+export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement) {
   static styles = [...SgdsElement.styles, feedbackStyles, formLabelStyles, checkboxGroupStyles, formHintStyles];
 
   /** The checkbox group's label  */
