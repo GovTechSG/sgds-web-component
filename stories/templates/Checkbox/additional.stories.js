@@ -4,9 +4,11 @@ import { ifDefined } from "lit/directives/if-defined.js";
 const ValidationTemplate = args =>
   html`
     <form>
-      <sgds-checkbox-group hasFeedback label="CheckboxGroup label" invalidFeedback=${ifDefined(args.invalidFeedback)}>
-        <sgds-checkbox required>Check me</sgds-checkbox>
+      <sgds-checkbox-group required hasFeedback id="sameid">
+        <sgds-checkbox value="he">he</sgds-checkbox>
+        <sgds-checkbox value="him">him</sgds-checkbox>
       </sgds-checkbox-group>
+
       <sgds-button type="submit">Submit</sgds-button>
       <sgds-button type="reset" variant="ghost">Reset</sgds-button>
     </form>

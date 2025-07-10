@@ -178,7 +178,6 @@ const FormDataTemplate = args => {
         const fileInput = document.getElementById("file-upload-form-data");
         for (let i = 0; i < fileInput.selectedFiles.length; i++) {
           const fileName = "file" + i;
-          console.log(fileInput.selectedFiles[i]);
           formData.append(fileName, fileInput.selectedFiles[i]);
           data[fileName] = JSON.stringify(fileInput.selectedFiles[i].name);
         }
