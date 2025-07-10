@@ -66,9 +66,6 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
     if (this.value) {
       this._updateInputValue();
     }
-    console.log(this.input, "adding this to check checkbox group input");
-    console.log(this.input.validity, "adding this to check checkbox group input");
-    console.log(this.inputValidationController, "inputValidtionController");
   }
 
   protected _renderHintText() {
