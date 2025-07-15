@@ -52,6 +52,6 @@ export function unlockBodyScrolling(lockingEl: HTMLElement) {
   locks.delete(lockingEl);
 
   if (locks.size === 0) {
-    document.body.style.overflow = "visible";
+    document.body.style.overflow = "";
   }
 }
