@@ -1,10 +1,11 @@
 import { html } from "lit";
-import { property, query, queryAssignedNodes } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { defaultValue } from "../../utils/defaultvalue";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
+import { HasSlotController } from "../../utils/slot";
 import formLabelStyles from "../../styles/form-label.css";
 import switchStyle from "./switch.css";
 
@@ -22,11 +23,9 @@ export class SgdsSwitch extends SgdsElement {
 
   /** The size of the switch. By default, it is small size */
   @property({ reflect: true, type: String }) size: "sm" | "md" | "lg" = "md";
+
   /** When enabled, icon appears in the switch */
   @property({ reflect: true, type: Boolean }) icon = false;
-
-  /**@internal */
-  @query('input[type="checkbox"]') input: HTMLInputElement;
 
   /** Draws the switch in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
@@ -37,6 +36,12 @@ export class SgdsSwitch extends SgdsElement {
   /** @internal Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("checked")
   defaultChecked = false;
+
+  /**@internal */
+  @query('input[type="checkbox"]') input: HTMLInputElement;
+
+  /** @internal */
+  private readonly hasSlotController = new HasSlotController(this, "[default]", "leftLabel");
 
   /** Simulates a click on the switch. */
   public click() {
@@ -73,19 +78,24 @@ export class SgdsSwitch extends SgdsElement {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
     this.input.disabled = this.disabled;
   }
-  @queryAssignedNodes({ slot: "leftLabel", flatten: true })
-  private _leftIconNodes!: Array<Node>;
-
-  firstUpdated() {
-    if (this._leftIconNodes.length === 0) {
-      return this.shadowRoot.querySelector(".form-check-label.left-label")?.classList.add("d-none");
-    }
-  }
 
   render() {
+    const hasDefaultSlot = this.hasSlotController.test("[default]");
+    const hasLeftLabelSlot = this.hasSlotController.test("leftLabel");
+    const noLabelSlot = !hasDefaultSlot && !hasLeftLabelSlot;
+
     return html`
       <div class="form-check">
-        <label for="${this._inputId}" class="form-check-label left-label"><slot name="leftLabel"></slot></label>
+        <label
+          for="${this._inputId}"
+          class=${classMap({
+            "form-check-label": true,
+            "left-label": true,
+            "d-none": hasDefaultSlot || noLabelSlot
+          })}
+        >
+          <slot name="leftLabel"></slot>
+        </label>
         <input
           class=${classMap({
             "form-check-input": true
@@ -99,7 +109,15 @@ export class SgdsSwitch extends SgdsElement {
           @change=${this._handleChange}
           @keydown=${this._handleKeyDown}
         />
-        <label for="${this._inputId}" class="form-check-label"><slot></slot></label>
+        <label
+          for="${this._inputId}"
+          class=${classMap({
+            "form-check-label": true,
+            "d-none": hasLeftLabelSlot || noLabelSlot
+          })}
+        >
+          <slot></slot>
+        </label>
       </div>
     `;
   }

@@ -6,6 +6,7 @@ input {
   display: flex;
   gap: var(--sgds-form-gap-md);
   padding: var(--sgds-form-padding-inline-sm) 0px;
+  margin-bottom: var(--sgds-margin-3-xs);
 }
 
 .form-check-input-container {

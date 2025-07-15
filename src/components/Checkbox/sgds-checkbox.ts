@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -18,7 +18,8 @@ import checkboxStyle from "./checkbox.css";
  * @event sgds-change - Emitted when the checked state changes.
  * @event sgds-blur - Emitted when input is not in focus.
  * @event sgds-focus - Emitted when input is in focus.
- * @event sgds-validity-change - Emitted when the invalid state changes. This event is used by sgds-checkbox-group to check the invalid state change of its children
+ * @event sgds-check - Emitted when checkbox is checked
+ * @event sgds-uncheck - Emitted when checkbox is unchecked
  */
 export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
   static styles = [...FormControlElement.styles, checkboxStyle];
@@ -30,7 +31,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
   @property({ type: Boolean, reflect: true }) checked = false;
 
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
-  @property({ type: Boolean, reflect: true }) hasFeedback = false;
+  @property({ type: String, reflect: true }) hasFeedback: "style" | "text" | "both";
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("checked")
@@ -42,14 +43,10 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
   /** Makes the checkbox a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
-  @state() private _isTouched = false;
+  /**Feedback text for error state when validated */
+  @property({ type: String, reflect: true }) invalidFeedback = "";
 
-  @watch("invalid", { waitUntilFirstUpdate: true })
-  _handleInvalidChange() {
-    this.emit("sgds-validity-change", {
-      detail: { invalid: this.invalid, validationMessage: this.input.validationMessage }
-    });
-  }
+  @state() private _isTouched = false;
 
   /** Simulates a click on the checkbox. */
   public click() {
@@ -71,9 +68,12 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
     }
 
     this.checked = !this.checked;
-    this.value = this.input.value;
     super._mixinHandleChange(e);
     this.emit("sgds-change", { detail: { checked: this.checked, value: this.value } });
+
+    this.checked
+      ? this.emit("sgds-check", { detail: { value: this.value } })
+      : this.emit("sgds-uncheck", { detail: { value: this.value } });
   }
 
   private _handleKeyDown(event: KeyboardEvent) {
@@ -110,6 +110,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
       this.invalid = !this.input.checkValidity();
     }
   }
+
   private _mixinResetFormControl() {
     this._isTouched = false;
     this.checked = this.input.checked = this.defaultChecked;
@@ -142,14 +143,21 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
     return this._mixinGetValidationMessage();
   }
 
+  firstUpdated(_changedProperties) {
+    super.firstUpdated(_changedProperties);
+    this.checked && this.emit("sgds-check", { detail: { value: this.value } });
+  }
   render() {
+    const wantFeedbackStyle = this.hasFeedback === "both" || this.hasFeedback === "style";
+    const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
+
     return html`
       <div class="form-check">
         <div class="form-check-input-container">
           <input
             class=${classMap({
               "form-check-input": true,
-              "is-invalid": this.hasFeedback && this.invalid
+              "is-invalid": wantFeedbackStyle && this.invalid
             })}
             type="checkbox"
             id=${this._controlId}
@@ -171,6 +179,23 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
         </div>
         <label for="${this._controlId}" class="form-check-label" id="${this._labelId}"><slot></slot></label>
       </div>
+      ${wantFeedbackText && this.invalid
+        ? html`
+            <div class="invalid-feedback-container">
+              <slot name="invalidIcon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path
+                    d="M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10ZM10 6.25C9.49805 6.25 9.10584 6.68339 9.15578 7.18285L9.48461 10.4711C9.51109 10.7359 9.7339 10.9375 10 10.9375C10.2661 10.9375 10.4889 10.7359 10.5154 10.4711L10.8442 7.18285C10.8942 6.68339 10.5019 6.25 10 6.25ZM10.0014 11.875C9.48368 11.875 9.06394 12.2947 9.06394 12.8125C9.06394 13.3303 9.48368 13.75 10.0014 13.75C10.5192 13.75 10.9389 13.3303 10.9389 12.8125C10.9389 12.2947 10.5192 11.875 10.0014 11.875Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </slot>
+              <div id="checkbox-feedback" tabindex="0" class="invalid-feedback">
+                ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
+              </div>
+            </div>
+          `
+        : nothing}
     `;
   }
 }

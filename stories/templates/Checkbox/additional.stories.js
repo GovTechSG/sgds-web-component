@@ -1,12 +1,24 @@
 import { html } from "lit-html";
 import { ifDefined } from "lit/directives/if-defined.js";
 
-const ValidationTemplate = args =>
+const ValidationTemplateGroup = args =>
   html`
     <form>
-      <sgds-checkbox-group hasFeedback label="CheckboxGroup label" invalidFeedback=${ifDefined(args.invalidFeedback)}>
-        <sgds-checkbox required>Check me</sgds-checkbox>
+      <sgds-checkbox-group required hasFeedback id="sameid">
+        <sgds-checkbox value="he">he</sgds-checkbox>
+        <sgds-checkbox value="him">him</sgds-checkbox>
       </sgds-checkbox-group>
+
+      <sgds-button type="submit">Submit</sgds-button>
+      <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+    </form>
+  `;
+
+const ValidationTemplateSingle = args =>
+  html`
+    <form>
+      <sgds-checkbox value="marketing" required hasFeedback="both">I acknowledge to receive marketing...</sgds-checkbox>
+      <sgds-checkbox value="subcribe" hasFeedback="both">I agree to subscribe to...</sgds-checkbox>
       <sgds-button type="submit">Submit</sgds-button>
       <sgds-button type="reset" variant="ghost">Reset</sgds-button>
     </form>
@@ -58,7 +70,15 @@ export const InvalidGroup = {
   tags: ["!dev"]
 };
 export const Validation = {
-  render: ValidationTemplate.bind({}),
+  render: ValidationTemplateGroup.bind({}),
+  name: "Validation",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
+
+export const ValidationSingle = {
+  render: ValidationTemplateSingle.bind({}),
   name: "Validation",
   args: {},
   parameters: {},
@@ -66,7 +86,7 @@ export const Validation = {
 };
 
 export const OverrideInvalidFeedback = {
-  render: ValidationTemplate.bind({}),
+  render: ValidationTemplateGroup.bind({}),
   name: "Override default invalid feedback",
   args: { invalidFeedback: "Custom error message" },
   parameters: {},

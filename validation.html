@@ -1,0 +1,68 @@
+
+
+<script type="module" src="../src/index.ts"></script>
+<script type="module" src="./mocks/scoped-element-test.ts"></script>
+  <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+  <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+  <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<form id="validation-form_constraint-validation" class="d-flex-column">
+      <request-form></request-form>
+
+<sgds-checkbox-group required hasFeedback id="sameid">
+        <sgds-checkbox value="he">he</sgds-checkbox>
+        <sgds-checkbox value="him" >him</sgds-checkbox>
+      </sgds-checkbox-group>
+
+    
+      <!-- <sgds-input id="sameid" label="First Name" hinttext="type Sarah" name="firstName" hasfeedback="both" placeholder="Placeholder" pattern="yes" >
+      </sgds-input>
+      <sgds-datepicker required="" hasfeedback="" name="appointmentDate" label="Appointment date"></sgds-datepicker>
+      <sgds-combo-box multiSelect required="" hasfeedback="" name="countryOfBirth" label="Country of birth" menulist="[
+      { &quot;label&quot;: &quot;Singapore&quot;, &quot;value&quot;: &quot;1&quot; },
+      { &quot;label&quot;: &quot;Thailand&quot;, &quot;value&quot;: &quot;2&quot; },
+      { &quot;label&quot;: &quot;Malaysia&quot;, &quot;value&quot;: &quot;3&quot; },
+      { &quot;label&quot;: &quot;Philippines&quot;, &quot;value&quot;: &quot;4&quot; },
+      { &quot;label&quot;: &quot;Japan&quot;, &quot;value&quot;: &quot;5&quot; },
+      { &quot;label&quot;: &quot;Laos&quot;, &quot;value&quot;: &quot;6&quot; },
+      { &quot;label&quot;: &quot;Vietnam&quot;, &quot;value&quot;: &quot;7&quot; },
+      { &quot;label&quot;: &quot;China&quot;, &quot;value&quot;: &quot;8&quot; }
+    ]" placeholder="Choose a country"></sgds-combo-box>
+      <sgds-quantity-toggle label="Number of dependents" name="dependentCount" min="1" max="10" hinttext="Input number 1 to 10 only" hasfeedback="both"></sgds-quantity-toggle>
+      <sgds-checkbox-group hasfeedback="" hinttext="hint for checkbox" label="Agreements">
+        <sgds-checkbox name="consentA" value="consentA">I consent to ...</sgds-checkbox>
+      </sgds-checkbox-group>
+
+      <sgds-radio-group hasfeedback="" name="gender" required="" label="Gender">
+        <sgds-radio value="female">Female</sgds-radio>
+        <sgds-radio value="male">Male</sgds-radio>
+      </sgds-radio-group>
+
+      <sgds-textarea name="comments" minlength="3" required="" hasfeedback="" resize="auto" label="Comments" hinttext="Required to fill with minimum length of 3"></sgds-textarea>
+      <sgds-file-upload required="" label="Supporting documents" multiple="" name="documents" hasfeedback="">File upload</sgds-file-upload> -->
+      <div class="d-flex-row">
+        <sgds-button type="submit" id="submit">Submit</sgds-button>
+        <sgds-button type="click" id="trial">Trial</sgds-button>
+        <sgds-button type="reset" id="reset" variant="ghost">Reset</sgds-button>
+      </div>
+    </form>
+
+    <script>
+
+      const trial = document.querySelector("#trial")
+      trial.addEventListener("click", () => {
+        const checkboxgroup = document.querySelector("sgds-checkbox-group")
+        checkboxgroup.value = "he;him"
+      })
+
+      const form = document.querySelector('#validation-form_constraint-validation');
+      form.addEventListener('submit', event => {
+
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        // formdata gets modified by the formdata event
+        console.log(formData.get('gender'));
+        alert('All fields are valid!');
+      });
+
+    </script>

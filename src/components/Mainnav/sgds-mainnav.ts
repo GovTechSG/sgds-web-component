@@ -1,5 +1,5 @@
-import { html } from "lit";
 import { provide } from "@lit/context";
+import { html } from "lit";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -9,11 +9,11 @@ import { LG_BREAKPOINT, MD_BREAKPOINT, SM_BREAKPOINT, XL_BREAKPOINT, XXL_BREAKPO
 import { waitForEvent } from "../../utils/event";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
-import SgdsMainnavItem from "./sgds-mainnav-item";
+import SgdsIconButton from "../IconButton/sgds-icon-button";
+import { MainnavContext } from "./mainnav-context";
 import mainnavStyle from "./mainnav.css";
 import SgdsMainnavDropdown from "./sgds-mainnav-dropdown";
-import SgdsIcon from "../Icon/sgds-icon";
-import { MainnavContext } from "./mainnav-context";
+import SgdsMainnavItem from "./sgds-mainnav-item";
 export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
 
 const SIZES = {
@@ -44,7 +44,7 @@ export class SgdsMainnav extends SgdsElement {
   static styles = [...SgdsElement.styles, mainnavStyle];
   /** @internal */
   static dependencies = {
-    "sgds-icon": SgdsIcon
+    "sgds-icon-button": SgdsIconButton
   };
 
   @provide({ context: MainnavContext })
