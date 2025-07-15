@@ -43,8 +43,16 @@ const ConstraintValidationTemplate = args => {
         hinttext="Input number 1 to 10 only"
         hasFeedback="both"
       ></sgds-quantity-toggle>
-      <sgds-checkbox-group hasFeedback hintText="hint for checkbox" label="Agreements">
-        <sgds-checkbox name="consentA" value="consentA" required>I consent to ...</sgds-checkbox>
+      <sgds-checkbox-group
+        hasFeedback
+        hintText="Please checked at least one option"
+        required
+        label="Food preference"
+        name="food"
+      >
+        <sgds-checkbox value="vegetarian">vegetarian</sgds-checkbox>
+        <sgds-checkbox value="halal">halal</sgds-checkbox>
+        <sgds-checkbox value="na">no preference</sgds-checkbox>
       </sgds-checkbox-group>
 
       <sgds-radio-group hasFeedback name="gender" required label="Gender">
@@ -64,6 +72,7 @@ const ConstraintValidationTemplate = args => {
       <sgds-file-upload required label="Supporting documents" multiple name="documents" hasFeedback
         >File upload</sgds-file-upload
       >
+      <sgds-checkbox name="consentA" value="consentA" required hasFeedback="both">I consent to ...</sgds-checkbox>
       <div class="d-flex-row">
         <sgds-button type="submit" id="submit">Submit</sgds-button>
         <sgds-button type="reset" id="reset" variant="ghost">Reset</sgds-button>
@@ -119,8 +128,16 @@ const FormDataTemplate = args => {
     ]'
         placeholder="Choose a country"
       ></sgds-combo-box>
-      <sgds-checkbox-group hasFeedback hintText="hint for checkbox" label="Agreements">
-        <sgds-checkbox name="consentA" value="consentA" required>I consent to ...</sgds-checkbox>
+      <sgds-checkbox-group
+        hasFeedback
+        hintText="Please checked at least one option"
+        required
+        label="Food preference"
+        name="food"
+      >
+        <sgds-checkbox value="vegetarian">vegetarian</sgds-checkbox>
+        <sgds-checkbox value="halal">halal</sgds-checkbox>
+        <sgds-checkbox value="na">no preference</sgds-checkbox>
       </sgds-checkbox-group>
 
       <sgds-radio-group hasFeedback name="gender" required label="Gender">
@@ -146,6 +163,8 @@ const FormDataTemplate = args => {
         hasFeedback
         >File upload</sgds-file-upload
       >
+      <sgds-checkbox name="consentA" value="consentA" required hasFeedback="both">I consent to ...</sgds-checkbox>
+
       <div class="d-flex-row">
         <sgds-button type="submit" id="submit">Submit</sgds-button>
         <sgds-button type="reset" id="reset" variant="ghost">Reset</sgds-button>
@@ -163,7 +182,8 @@ const FormDataTemplate = args => {
           countryOfBirth: "",
           consentA: false,
           gender: "",
-          comments: ""
+          comments: "",
+          food: ""
         };
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -174,7 +194,7 @@ const FormDataTemplate = args => {
         data.consentA = formData.get("consentA") === "on";
         data.gender = formData.get("gender");
         data.comments = formData.get("comments");
-
+        data.food = formData.get("food");
         const fileInput = document.getElementById("file-upload-form-data");
         for (let i = 0; i < fileInput.selectedFiles.length; i++) {
           const fileName = "file" + i;
