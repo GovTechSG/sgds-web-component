@@ -1,5 +1,5 @@
 import { html, nothing } from "lit";
-import { property, queryAssignedElements, state } from "lit/decorators.js";
+import { property, queryAssignedElements, queryAsync, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { live } from "lit/directives/live.js";
 import FormControlElement from "../../base/form-control-element";
@@ -13,8 +13,9 @@ import { watch } from "../../utils/watch";
 import checkboxGroupStyles from "./checkbox-group.css";
 import SgdsCheckbox from "./sgds-checkbox";
 /**
- * @summary CheckboxGroup is the container that group multiple checkboxes under a single question field.
- * It handles the display of validation feedback of its checkboxes children.
+ * @summary CheckboxGroup is a form component for multiselection of checkboxes.
+ *
+ * @event sgds-change - Emitted when the value of the CheckboxGroup changes. This happens when checkboxes are checked or unchecked.
  *
  * @slot default - Pass in `sgds-checkbox` into the default slot
  * @slot invalidIcon - The slot for invalid icon
@@ -27,7 +28,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
   @property({ reflect: true }) label = "";
 
   /**Feedback text for error state when validated */
-  @property({ type: String, reflect: true }) invalidFeedback = "";
+  @property({ type: String, reflect: true }) invalidFeedback = "Please tick at least one box if you want to proceed";
 
   /** Allows invalidFeedback, invalid styles to be visible. When SgdsCheckboxGroup is used, it overrides the value of hasFeedback on SgdsCheckbox with its own value. */
   @property({ type: Boolean, reflect: true }) hasFeedback = false;
@@ -46,19 +47,30 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
   /**@internal */
   @state() defaultValue = "";
 
+  @state()
+  private _blurredCheckboxes = new Set<SgdsCheckbox>();
+
   connectedCallback() {
     super.connectedCallback();
     this.defaultValue = this.value;
     this.addEventListener("sgds-check", (e: CustomEvent) => {
       const { value } = e.detail;
       !this.value.includes(value) && this._addValue(value);
+      this.input && this._updateInputValue();
     });
     this.addEventListener("sgds-uncheck", (e: CustomEvent) => {
       const { value } = e.detail;
       this._removeValue(value);
+      this._updateInputValue();
     });
-    this.addEventListener("sgds-blur", () => {
-      this._isTouched = true;
+    /** Blurring when all checkboxes are blurred */
+    this.addEventListener("sgds-blur", e => {
+      const checkbox = e.target as SgdsCheckbox;
+      this._blurredCheckboxes.add(checkbox);
+      if (Array.from(this._blurredCheckboxes).length === this._checkboxes.length) {
+        this._isTouched = true;
+        this._blurredCheckboxes.clear();
+      }
     });
   }
   firstUpdated(changedProperties) {
@@ -114,7 +126,6 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
     checkboxes.forEach(checkbox => {
       checkbox.checked = this.value.includes(checkbox.value);
     });
-    this._updateInputValue();
     this._updateInvalid();
   }
 
@@ -170,7 +181,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
    * when input value is set programatically, need to manually dispatch a change event
    * In order to prevent race conditions and ensure sequence of events, set input's value here instead of binding to value prop of input
    */
-  private _updateInputValue(eventName = "change") {
+  private async _updateInputValue(eventName = "change") {
     this.input.value = this.value;
     this.input.dispatchEvent(new InputEvent(eventName));
   }
@@ -178,7 +189,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
   render() {
     return html`
       <fieldset>
-        <div class="label-hint-container">
+        <div class="label-hint-container" @blur=${() => console.log("blur")}>
           <label class="form-label">${this.label}</label>
           ${this._renderHintText()}
         </div>

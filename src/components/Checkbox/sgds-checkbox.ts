@@ -18,7 +18,8 @@ import checkboxStyle from "./checkbox.css";
  * @event sgds-change - Emitted when the checked state changes.
  * @event sgds-blur - Emitted when input is not in focus.
  * @event sgds-focus - Emitted when input is in focus.
- * @event sgds-validity-change - Emitted when the invalid state changes. This event is used by sgds-checkbox-group to check the invalid state change of its children
+ * @event sgds-check - Emitted when checkbox is checked
+ * @event sgds-uncheck - Emitted when checkbox is unchecked
  */
 export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
   static styles = [...FormControlElement.styles, checkboxStyle];
@@ -47,13 +48,6 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
 
   @state() private _isTouched = false;
 
-  @watch("invalid", { waitUntilFirstUpdate: true })
-  _handleInvalidChange() {
-    this.emit("sgds-validity-change", {
-      detail: { invalid: this.invalid, validationMessage: this.input.validationMessage }
-    });
-  }
-
   /** Simulates a click on the checkbox. */
   public click() {
     this.input.click();
@@ -76,6 +70,10 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
     this.checked = !this.checked;
     super._mixinHandleChange(e);
     this.emit("sgds-change", { detail: { checked: this.checked, value: this.value } });
+
+    this.checked
+      ? this.emit("sgds-check", { detail: { value: this.value } })
+      : this.emit("sgds-uncheck", { detail: { value: this.value } });
   }
 
   private _handleKeyDown(event: KeyboardEvent) {
@@ -111,13 +109,6 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
     if (this._isTouched) {
       this.invalid = !this.input.checkValidity();
     }
-  }
-
-  @watch("checked", { waitUntilFirstUpdate: true })
-  _handleChecked() {
-    this.checked
-      ? this.emit("sgds-check", { detail: { value: this.value } })
-      : this.emit("sgds-uncheck", { detail: { value: this.value } });
   }
 
   private _mixinResetFormControl() {

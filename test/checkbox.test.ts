@@ -1,4 +1,4 @@
-import { assert, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
+import { assert, aTimeout, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
 import { SgdsButton, SgdsCheckbox, SgdsCheckboxGroup } from "../src/components";
@@ -512,21 +512,6 @@ describe("<sgds-checkbox>", () => {
 });
 
 describe("sgds-checkbox-group", () => {
-  // it("shadowDOm matches semantically", async() => {
-  //   const el = await fixture<SgdsCheckboxGroup>(html`
-  //     <sgds-checkbox-group>
-  //     </sgds-checkbox-group>
-  //     `)
-  //     assert(el, `
-
-  //       `)
-  // })
-
-  // it("shadowDom matches semantically for invalid state", async() => {
-
-  // })
-
-  // it("when required and hasFeedback is true")
   it("on initial render, if any checkboxes are checked, value is saved in checkboxgroup", async () => {
     const el = await fixture<SgdsCheckboxGroup>(html`
       <sgds-checkbox-group>
@@ -534,7 +519,10 @@ describe("sgds-checkbox-group", () => {
         <sgds-checkbox value="him" checked>him</sgds-checkbox>
       </sgds-checkbox-group>
     `);
+    const checkboxes = el.querySelectorAll<SgdsCheckbox>("sgds-checkbox");
     await elementUpdated(el);
+    checkboxes.forEach(async c => await elementUpdated(c));
+
     expect(el.value).to.equal("he;him");
   });
 
@@ -728,6 +716,7 @@ describe("sgds-checkbox-group", () => {
   it("When unchecking checkboxes to be emmpty value, should show error", triggerErrorFromUnchecking);
   it("when setting reset should remove validation errors and restore checked boxes to default state", async () => {
     const { form, checkbox, checkboxGroup, resetButton } = await triggerErrorFromUnchecking();
+
     resetButton?.click();
     await waitUntil(() => !checkboxGroup?.invalid);
     Array.from(checkbox).map(c => expect(c.invalid).to.be.false);
@@ -735,9 +724,34 @@ describe("sgds-checkbox-group", () => {
     checkbox[1].click();
     expect(checkbox[1].checked).to.be.true;
     resetButton?.click();
-    await waitUntil(() => !checkbox[1].checked);
-    expect(checkbox[1].checked).to.be.false;
-    //TODO: fix this failing test to be production ready
-    // expect(checkboxGroup?.invalid).to.be.false; // failing
+    await waitUntil(() => checkboxGroup?.value === "");
+    expect(checkboxGroup?.invalid).to.be.false; // failing
+  });
+  // KEYBOARD
+  it("when tabbing in and out a required checkbox group, it should turn invalid", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox-group required hasFeedback>
+          <sgds-checkbox value="he">he</sgds-checkbox>
+          <sgds-checkbox value="him">him</sgds-checkbox>
+          <sgds-checkbox value="she">she</sgds-checkbox>
+        </sgds-checkbox-group>
+        <sgds-button type="submit">Submit</sgds-button>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const group = form.querySelector<SgdsCheckboxGroup>("sgds-checkbox-group");
+    const [one, two, three] = form.querySelectorAll("sgds-checkbox");
+    one.focus();
+    await waitUntil(() => one.shadowRoot?.activeElement === one.shadowRoot?.querySelector("input"));
+    await sendKeys({ press: "Tab" });
+    await waitUntil(() => two.shadowRoot?.activeElement === two.shadowRoot?.querySelector("input"));
+    await sendKeys({ press: "Tab" });
+    expect(group?.invalid).to.be.false;
+    await waitUntil(() => three.shadowRoot?.activeElement === three.shadowRoot?.querySelector("input"));
+    await sendKeys({ press: "Tab" });
+    await waitUntil(() => group?.invalid);
+    // await elementUpdated(group!);
+    expect(group?.invalid).to.be.true;
   });
 });
