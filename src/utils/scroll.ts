@@ -8,7 +8,7 @@ const locks = new Set();
  */
 export function lockBodyScrolling(lockingEl: HTMLElement) {
   locks.add(lockingEl);
-  document.body.classList.add("sl-scroll-lock");
+  document.body.style.overflow = "hidden";
 }
 
 /**
@@ -52,6 +52,6 @@ export function unlockBodyScrolling(lockingEl: HTMLElement) {
   locks.delete(lockingEl);
 
   if (locks.size === 0) {
-    document.body.classList.remove("sl-scroll-lock");
+    document.body.style.overflow = "visible";
   }
 }
