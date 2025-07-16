@@ -117,11 +117,8 @@ export class SgdsButton extends ButtonElement {
         class="btn ${classMap({
           disabled: this.disabled,
           active: this.active,
-          "full-width": this.fullWidth,
           "has-left-icon": this._hasLeftIcon,
-          "has-right-icon": this._hasRightIcon,
-          [`btn-${this.variant}`]: this.variant,
-          [`btn-${this.size}`]: this.size
+          "has-right-icon": this._hasRightIcon
         })}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
