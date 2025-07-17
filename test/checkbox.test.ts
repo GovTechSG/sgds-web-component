@@ -749,6 +749,36 @@ describe("sgds-checkbox-group", () => {
     expect(group.checkValidity()).to.be.true;
     expect(form.checkValidity()).to.be.true;
   });
+  it("resets to default value", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox-group required hasFeedback value="he">
+          <sgds-checkbox value="he">he</sgds-checkbox>
+          <sgds-checkbox value="him">him</sgds-checkbox>
+          <sgds-checkbox value="she">she</sgds-checkbox>
+        </sgds-checkbox-group>
+        <sgds-button type="submit">Submit</sgds-button>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+
+    const group = form.querySelector<SgdsCheckboxGroup>("sgds-checkbox-group") as SgdsCheckboxGroup;
+    const checkboxes = form.querySelectorAll("sgds-checkbox") as NodeListOf<SgdsCheckbox>;
+    group!.value = "he;him";
+    await elementUpdated(group);
+
+    expect(checkboxes[0].checked).to.be.true;
+    expect(checkboxes[1].checked).to.be.true;
+    expect(checkboxes[2].checked).to.be.false;
+
+    const reset = form.querySelector("sgds-button[type='reset']") as SgdsButton;
+    reset.click();
+
+    await waitUntil(() => group!.value === "he");
+    expect(checkboxes[0].checked).to.be.true;
+    expect(checkboxes[1].checked).to.be.false;
+    expect(checkboxes[2].checked).to.be.false;
+  });
   // KEYBOARD
   it("when tabbing in and out a required checkbox group, it should turn invalid", async () => {
     const form = await fixture<HTMLFormElement>(html`
