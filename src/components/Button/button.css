@@ -2,19 +2,20 @@
   display: inline-block;
 }
 
-:host([fullWidth]), .btn.full-width {
+:host([fullWidth]),
+:host([fullWidth]) .btn {
   width: 100%;
 }
 
-.btn.full-width.has-left-icon {
+:host([fullWidth]) .btn.has-left-icon {
   justify-content: flex-start;
 }
 
-.btn.full-width.has-right-icon {
+:host([fullWidth]) .btn.has-right-icon {
   justify-content: space-between;
 }
 
-.btn.full-width.has-left-icon.has-right-icon {
+:host([fullWidth]) .btn.has-left-icon.has-right-icon {
   justify-content: center;
 }
 
