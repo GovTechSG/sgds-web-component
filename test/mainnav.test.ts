@@ -110,7 +110,7 @@ describe("sgds-mainnav", () => {
     expect(toggler.getAttribute("aria-expanded")).to.equal("false");
   });
   // initial window.innerWidth = 800
-  // LG_BREAKPOINT = 992
+  // LG_BREAKPOINT = 1024
   // since window.innerWidth < LG_BREAKPOINT --> expect non-collapsible slot to be .order-2 (see first test)
   it("when expand=lg and window resize event occurs to above breakpoint, it inserts .navbar-body before non-collapsible slot, and end slot has class .slot-end", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="lg"></sgds-mainnav>`);
@@ -121,7 +121,7 @@ describe("sgds-mainnav", () => {
     Object.defineProperty(window, "innerWidth", {
       writable: true,
       configurable: true,
-      value: 1000 // value above LG_BREAKPOINT
+      value: 1030 // value above LG_BREAKPOINT
     });
     window.dispatchEvent(new Event("resize"));
     await el.updateComplete;
@@ -129,8 +129,8 @@ describe("sgds-mainnav", () => {
     expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).to.exist;
     expect(el.shadowRoot?.querySelector("slot[name='end']")).to.have.class("slot-end");
   });
-  //SM_BREAKPOINT = 576
-  // now window.innerWidth = 1000
+  //SM_BREAKPOINT = 512
+  // now window.innerWidth = 1030
   it("when expand=sm and window resize event occurs to above breakpoint, it inserts .navbar-body before non-collapsible slot, and end slot has class slot-end ", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="sm"></sgds-mainnav>`);
     expect(el.shadowRoot?.querySelector("nav > .navbar-body")).not.to.exist;
@@ -139,7 +139,7 @@ describe("sgds-mainnav", () => {
     Object.defineProperty(window, "innerWidth", {
       writable: true,
       configurable: true,
-      value: 576 - 1 // value below SM_BREAKPOINT
+      value: 512 - 1 // value below SM_BREAKPOINT
     });
     window.dispatchEvent(new Event("resize"));
     await el.updateComplete;
@@ -147,7 +147,7 @@ describe("sgds-mainnav", () => {
     expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).not.to.exist;
     expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class("slot-end");
   });
-  // now window.innerWidth = 575
+  // now window.innerWidth = 511
   it("when expand=always and window resize event occurs, it NEVER changes the position of .navbar-body, and end slot ALWAYS have slot-end ", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="always"></sgds-mainnav>`);
     expect(el.shadowRoot?.querySelector("nav > .navbar-body")).not.to.exist;
