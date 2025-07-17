@@ -4,7 +4,7 @@
   border-bottom: var(--sgds-border-width-4) solid transparent;
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 512px) {
   :host([expand="sm"]) ::slotted(*) {
     min-height: 100%;
     padding: 0px var(--sgds-padding-md);
@@ -36,7 +36,7 @@
   }
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1024px) {
   :host([expand="lg"]) ::slotted(*) {
     min-height: 100%;
     padding: 0px var(--sgds-padding-md);
@@ -52,7 +52,7 @@
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1280px) {
   :host([expand="xl"]) ::slotted(*) {
     min-height: 100%;
     padding: 0px var(--sgds-padding-md);
@@ -68,7 +68,7 @@
   }
 }
 
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1440px) {
   :host([expand="xxl"]) ::slotted(*) {
     min-height: 100%;
     padding: 0px var(--sgds-padding-md);
@@ -84,31 +84,31 @@
   }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 511px) {
   :host(:not([disabled])[active][expand="sm"]) ::slotted(*) {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   :host(:not([disabled])[active][expand="md"]) ::slotted(*) {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1023px) {
   :host(:not([disabled])[active][expand="lg"]) ::slotted(*) {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1279px) {
   :host(:not([disabled])[active][expand="xl"]) ::slotted(*) {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1439px) {
   :host(:not([disabled])[active][expand="xxl"]) ::slotted(*) {
     background-color: var(--sgds-bg-translucent-subtle);
   }
@@ -127,7 +127,7 @@
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   ::slotted(*) {
     padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
   }
