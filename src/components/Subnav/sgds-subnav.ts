@@ -32,29 +32,27 @@ export class SgdsSubnav extends SgdsElement {
     "sgds-icon": SgdsIcon
   };
 
-  /** @internal */
-  @query("nav") nav: HTMLElement;
+  @query("nav")
+  private nav: HTMLElement;
 
-  /** @internal */
-  @query(".subnav") subnav: HTMLElement;
+  @query(".subnav")
+  private subnav: HTMLElement;
 
-  /** @internal */
-  @query(".subnav-nav-mobile") mobileNav: HTMLElement;
+  @query(".subnav-nav-mobile")
+  private mobileNav: HTMLElement;
 
-  /** @internal */
-  @query(".subnav-toggler") toggler: HTMLElement;
+  @query(".subnav-toggler")
+  private toggler: HTMLElement;
 
-  /** @internal */
-  @query(".subnav-dropdown") body: HTMLElement;
+  @query(".subnav-dropdown")
+  private body: HTMLElement;
 
-  /** @internal */
-  @query(".subnav-actions-mobile") mobileActions: HTMLElement;
+  @query(".subnav-actions-mobile")
+  private mobileActions: HTMLElement;
 
-  /** @internal */
   @state()
   private isCollapsed = false;
 
-  /** @internal */
   @state()
   private isMenuOpen = false;
 
