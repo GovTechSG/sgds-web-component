@@ -75,9 +75,6 @@ slot[name="header"]::slotted(*) {
 
 .subnav-dropdown {
   width: 100%;
-  position: absolute;
-  left: 0;
-  z-index: 1500;
   background-color: var(--sgds-surface-default);
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }
