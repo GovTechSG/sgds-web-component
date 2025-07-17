@@ -727,6 +727,28 @@ describe("sgds-checkbox-group", () => {
     await waitUntil(() => checkboxGroup?.value === "");
     expect(checkboxGroup?.invalid).to.be.false; // failing
   });
+  it("programmatically setting the checkboxgroup value should make a it pass form validtion", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox-group required hasFeedback>
+          <sgds-checkbox value="he">he</sgds-checkbox>
+          <sgds-checkbox value="him">him</sgds-checkbox>
+          <sgds-checkbox value="she">she</sgds-checkbox>
+        </sgds-checkbox-group>
+        <sgds-button type="submit">Submit</sgds-button>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+
+    const group = form.querySelector<SgdsCheckboxGroup>("sgds-checkbox-group") as SgdsCheckboxGroup;
+    expect(group.checkValidity()).to.be.false;
+    expect(form.checkValidity()).to.be.false;
+
+    group!.value = "he;him";
+    await elementUpdated(group);
+    expect(group.checkValidity()).to.be.true;
+    expect(form.checkValidity()).to.be.true;
+  });
   // KEYBOARD
   it("when tabbing in and out a required checkbox group, it should turn invalid", async () => {
     const form = await fixture<HTMLFormElement>(html`
