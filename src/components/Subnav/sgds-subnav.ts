@@ -14,6 +14,11 @@ import gridStyle from "../../css/grid.css";
 /**
  * @summary This component provides secondary navigation within a specific section or page. It typically appears below the main navigation and offers context-specific links or actions to help users explore related content.
  *
+ * @event sgds-show - Emitted on show. Only for collapsed menu.
+ * @event sgds-after-show - Emitted on show after animation has completed. Only for collapsed menu.
+ * @event sgds-hide - Emitted on hide. Only for collapsed menu.
+ * @event sgds-after-hide - Emitted on hide after animation has completed. Only for collapsed menu.
+ *
  * @slot default - Default slot of SgdsSubnav. Pass in SgdsSubnavItem elements here.
  * @slot header - Slot for rendering the sub-navigation header or section title.
  * @slot actions - Slot for inserting contextual action elements such as buttons, filters, or other controls aligned with the sub-navigation.
