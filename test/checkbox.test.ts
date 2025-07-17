@@ -1,9 +1,8 @@
-import { assert, aTimeout, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
+import { assert, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
-import sinon from "sinon";
+import { default as sinon, default as Sinon } from "sinon";
 import { SgdsButton, SgdsCheckbox, SgdsCheckboxGroup } from "../src/components";
 import "./sgds-web-component";
-import Sinon from "sinon";
 
 describe("<sgds-checkbox>", () => {
   it("can be semantically compare with shadowDom trees (default)", async () => {

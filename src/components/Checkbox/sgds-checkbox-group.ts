@@ -21,7 +21,7 @@ import { defaultValue } from "../../utils/defaultvalue";
  *
  */
 export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement) {
-  static styles = [...SgdsElement.styles, feedbackStyles, formLabelStyles, checkboxGroupStyles, formHintStyles];
+  static styles = [...FormControlElement.styles, checkboxGroupStyles];
 
   /** The checkbox group's label  */
   @property({ reflect: true }) label = "";
