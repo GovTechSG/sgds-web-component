@@ -14,6 +14,11 @@ import gridStyle from "../../css/grid.css";
 /**
  * @summary This component provides secondary navigation within a specific section or page. It typically appears below the main navigation and offers context-specific links or actions to help users explore related content.
  *
+ * @event sgds-show - Emitted on show. Only for collapsed menu.
+ * @event sgds-after-show - Emitted on show after animation has completed. Only for collapsed menu.
+ * @event sgds-hide - Emitted on hide. Only for collapsed menu.
+ * @event sgds-after-hide - Emitted on hide after animation has completed. Only for collapsed menu.
+ *
  * @slot default - Default slot of SgdsSubnav. Pass in SgdsSubnavItem elements here.
  * @slot header - Slot for rendering the sub-navigation header or section title.
  * @slot actions - Slot for inserting contextual action elements such as buttons, filters, or other controls aligned with the sub-navigation.
@@ -27,29 +32,27 @@ export class SgdsSubnav extends SgdsElement {
     "sgds-icon": SgdsIcon
   };
 
-  /** @internal */
-  @query("nav") nav: HTMLElement;
+  @query("nav")
+  private nav: HTMLElement;
 
-  /** @internal */
-  @query(".subnav") subnav: HTMLElement;
+  @query(".subnav")
+  private subnav: HTMLElement;
 
-  /** @internal */
-  @query(".subnav-nav-mobile") mobileNav: HTMLElement;
+  @query(".subnav-nav-mobile")
+  private mobileNav: HTMLElement;
 
-  /** @internal */
-  @query(".subnav-toggler") toggler: HTMLElement;
+  @query(".subnav-toggler")
+  private toggler: HTMLElement;
 
-  /** @internal */
-  @query(".subnav-dropdown") body: HTMLElement;
+  @query(".subnav-dropdown")
+  private body: HTMLElement;
 
-  /** @internal */
-  @query(".subnav-actions-mobile") mobileActions: HTMLElement;
+  @query(".subnav-actions-mobile")
+  private mobileActions: HTMLElement;
 
-  /** @internal */
   @state()
   private isCollapsed = false;
 
-  /** @internal */
   @state()
   private isMenuOpen = false;
 
