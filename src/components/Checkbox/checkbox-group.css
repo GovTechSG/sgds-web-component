@@ -32,14 +32,3 @@ fieldset {
 .checkbox-group-validation-input {
   display: none;
 }
-
-/* .error-message-container {
-  display: flex;
-  gap: var(--sgds-form-gap-sm);
-}
-
-.error-message {
-  color: var(--sgds-form-danger-color-default);
-  font-size: var(--sgds-font-size-1);
-  font-weight: var(--sgds-font-weight-regular);
-} */

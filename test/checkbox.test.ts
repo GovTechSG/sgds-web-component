@@ -1,9 +1,8 @@
-import { assert, aTimeout, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
+import { assert, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
-import sinon from "sinon";
+import Sinon from "sinon";
 import { SgdsButton, SgdsCheckbox, SgdsCheckboxGroup } from "../src/components";
 import "./sgds-web-component";
-import Sinon from "sinon";
 
 describe("<sgds-checkbox>", () => {
   it("can be semantically compare with shadowDom trees (default)", async () => {
@@ -122,7 +121,7 @@ describe("<sgds-checkbox>", () => {
 
   it("should emit sgds-change event when input is clicked", async () => {
     const el = await fixture(html`<sgds-checkbox></sgds-checkbox>`);
-    const toggleHandler = sinon.spy();
+    const toggleHandler = Sinon.spy();
     el.addEventListener("sgds-change", toggleHandler);
     el.shadowRoot?.querySelector("input")?.click();
     expect(toggleHandler).to.have.been.calledOnce;
@@ -130,7 +129,7 @@ describe("<sgds-checkbox>", () => {
 
   it("should emit sgds-change event when label is clicked", async () => {
     const el = await fixture(html`<sgds-checkbox></sgds-checkbox>`);
-    const toggleHandler = sinon.spy();
+    const toggleHandler = Sinon.spy();
     el.addEventListener("sgds-change", toggleHandler);
     el.shadowRoot?.querySelector("label")?.click();
     expect(toggleHandler).to.have.been.calledOnce;
@@ -146,7 +145,7 @@ describe("<sgds-checkbox>", () => {
   it("should show aria-checked to be true when checked is true", async () => {
     const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox></sgds-checkbox>`);
     const checkbox = el.shadowRoot?.querySelector("input");
-    const clickSpy = sinon.spy();
+    const clickSpy = Sinon.spy();
 
     checkbox?.addEventListener("click", clickSpy, { once: true });
 
@@ -186,7 +185,7 @@ describe("<sgds-checkbox>", () => {
   it("should show checked to be true when click", async () => {
     const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox></sgds-checkbox>`);
     const checkbox = el.shadowRoot?.querySelector("input");
-    const clickSpy = sinon.spy();
+    const clickSpy = Sinon.spy();
 
     checkbox?.addEventListener("click", clickSpy, { once: true });
 
@@ -214,7 +213,7 @@ describe("<sgds-checkbox>", () => {
     const button = form.querySelector<SgdsButton>("sgds-button");
     const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox");
 
-    const clickSpy = sinon.spy();
+    const clickSpy = Sinon.spy();
 
     button?.addEventListener("click", clickSpy, { once: true });
     if (checkbox) await elementUpdated(checkbox);
@@ -293,23 +292,6 @@ describe("<sgds-checkbox>", () => {
     const checkbox = el.shadowRoot?.querySelector("input");
     expect(checkbox?.classList.contains("is-invalid")).to.be.false;
   });
-  //NA
-  // it("should display feedback if the group has hasFeedback and at least one checkbox is invalid", async () => {
-  //   const group = await fixture<SgdsCheckboxGroup>(html`
-  //     <sgds-checkbox-group hasFeedback invalidFeedback="Group error">
-  //       <sgds-checkbox required></sgds-checkbox>
-  //     </sgds-checkbox-group>
-  //   `);
-
-  //   const checkbox = group.querySelector<SgdsCheckbox>("sgds-checkbox");
-  //   if (checkbox) {
-  //     checkbox.invalid = true;
-  //     await elementUpdated(checkbox);
-  //     await elementUpdated(group)
-  //   }
-  //   const feedback = group.shadowRoot?.querySelector(".invalid-feedback-container");
-  //   expect(feedback).to.exist;
-  // });
 
   it("should not display feedback if no child checkbox is invalid even with hasFeedback", async () => {
     const group = await fixture<SgdsCheckboxGroup>(html`
@@ -397,7 +379,7 @@ describe("<sgds-checkbox>", () => {
         <sgds-button type="submit"></sgds-button>
       </form>
     `);
-    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    const submitHandler = Sinon.spy((event: SubmitEvent) => event.preventDefault());
     form.addEventListener("submit", submitHandler);
     expect(form.reportValidity()).to.equal(true);
 
@@ -418,7 +400,7 @@ describe("<sgds-checkbox>", () => {
         <sgds-button type="submit"></sgds-button>
       </form>
     `);
-    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    const submitHandler = Sinon.spy((event: SubmitEvent) => event.preventDefault());
     form.addEventListener("submit", submitHandler);
     expect(form.reportValidity()).to.equal(false);
 
@@ -439,7 +421,7 @@ describe("<sgds-checkbox>", () => {
         <sgds-button type="submit"></sgds-button>
       </form>
     `);
-    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    const submitHandler = Sinon.spy((event: SubmitEvent) => event.preventDefault());
     form.addEventListener("submit", submitHandler);
     expect(form.reportValidity()).to.equal(true);
 
@@ -549,6 +531,18 @@ describe("sgds-checkbox-group", () => {
     expect(consoleStub.calledOnce).to.be.true;
     expect(el.querySelectorAll("sgds-checkbox").length).to.equal(1);
   });
+  it("on initial render, if invalid prop is set to true, should reflect checkboxes child invalid state", async () => {
+    const el = await fixture<SgdsCheckboxGroup>(html`
+      <sgds-checkbox-group invalid hasFeedback>
+        <sgds-checkbox value="he" required>he</sgds-checkbox>
+        <sgds-checkbox value="him">him</sgds-checkbox>
+      </sgds-checkbox-group>
+    `);
+    const checkboxes = el.querySelectorAll("sgds-checkbox") as NodeListOf<SgdsCheckbox>;
+    checkboxes.forEach(c => expect(c.invalid).to.be.true);
+
+    expect(el.shadowRoot?.querySelector(".invalid-feedback-container")).to.exist;
+  });
   it("programatically setting value checkboxgroup will be reflected on the checkboxes child", async () => {
     const el = await fixture<SgdsCheckboxGroup>(html`
       <sgds-checkbox-group>
@@ -621,7 +615,7 @@ describe("sgds-checkbox-group", () => {
         <sgds-button type="reset">Reset</sgds-button>
       </form>
     `);
-    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    const submitHandler = Sinon.spy((event: SubmitEvent) => event.preventDefault());
     const submitButton = form.querySelector<SgdsButton>("sgds-button[type='submit']");
     const resetButton = form.querySelector<SgdsButton>("sgds-button[type='reset']");
 
@@ -655,7 +649,7 @@ describe("sgds-checkbox-group", () => {
         <sgds-button type="submit">Submit</sgds-button>
       </form>
     `);
-    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    const submitHandler = Sinon.spy((event: SubmitEvent) => event.preventDefault());
     const submitButton = form.querySelector<SgdsButton>("sgds-button");
     form.addEventListener("submit", submitHandler);
     submitButton?.click();
@@ -726,6 +720,58 @@ describe("sgds-checkbox-group", () => {
     resetButton?.click();
     await waitUntil(() => checkboxGroup?.value === "");
     expect(checkboxGroup?.invalid).to.be.false; // failing
+  });
+  it("programmatically setting the checkboxgroup value should make a it pass form validtion", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox-group required hasFeedback>
+          <sgds-checkbox value="he">he</sgds-checkbox>
+          <sgds-checkbox value="him">him</sgds-checkbox>
+          <sgds-checkbox value="she">she</sgds-checkbox>
+        </sgds-checkbox-group>
+        <sgds-button type="submit">Submit</sgds-button>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+
+    const group = form.querySelector<SgdsCheckboxGroup>("sgds-checkbox-group") as SgdsCheckboxGroup;
+    expect(group.checkValidity()).to.be.false;
+    expect(form.checkValidity()).to.be.false;
+
+    group!.value = "he;him";
+    await elementUpdated(group);
+    expect(group.checkValidity()).to.be.true;
+    expect(form.checkValidity()).to.be.true;
+  });
+  it("resets to default value", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox-group required hasFeedback value="he">
+          <sgds-checkbox value="he">he</sgds-checkbox>
+          <sgds-checkbox value="him">him</sgds-checkbox>
+          <sgds-checkbox value="she">she</sgds-checkbox>
+        </sgds-checkbox-group>
+        <sgds-button type="submit">Submit</sgds-button>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+
+    const group = form.querySelector<SgdsCheckboxGroup>("sgds-checkbox-group") as SgdsCheckboxGroup;
+    const checkboxes = form.querySelectorAll("sgds-checkbox") as NodeListOf<SgdsCheckbox>;
+    group!.value = "he;him";
+    await elementUpdated(group);
+
+    expect(checkboxes[0].checked).to.be.true;
+    expect(checkboxes[1].checked).to.be.true;
+    expect(checkboxes[2].checked).to.be.false;
+
+    const reset = form.querySelector("sgds-button[type='reset']") as SgdsButton;
+    reset.click();
+
+    await waitUntil(() => group!.value === "he");
+    expect(checkboxes[0].checked).to.be.true;
+    expect(checkboxes[1].checked).to.be.false;
+    expect(checkboxes[2].checked).to.be.false;
   });
   // KEYBOARD
   it("when tabbing in and out a required checkbox group, it should turn invalid", async () => {

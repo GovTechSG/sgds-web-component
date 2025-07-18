@@ -26,17 +26,39 @@ const ValidationTemplateSingle = args =>
 
 const InvalidTemplate = () =>
   html`
-    <sgds-checkbox invalid hasFeedback>Invalid</sgds-checkbox>
-    <sgds-checkbox invalid checked hasFeedback>Invalid and checked</sgds-checkbox>
-    <sgds-checkbox invalid indeterminate hasFeedback>Invalid and indeterminate</sgds-checkbox>
+    <div class="sgds-grid">
+      <sgds-checkbox
+        class="sgds-col-4 sgds-col-sm-4"
+        invalid
+        hasFeedback="both"
+        invalidFeedback="custom feedback message"
+        >Invalid</sgds-checkbox
+      >
+      <sgds-checkbox
+        class="sgds-col-4 sgds-col-sm-4"
+        invalid
+        checked
+        hasFeedback="both"
+        invalidFeedback="custom feedback message"
+        >Invalid and checked</sgds-checkbox
+      >
+      <sgds-checkbox
+        class="sgds-col-4 sgds-col-sm-4"
+        invalid
+        indeterminate
+        hasFeedback="both"
+        invalidFeedback="custom feedback message"
+        >Invalid and indeterminate</sgds-checkbox
+      >
+    </div>
   `;
 
 const InvalidGroupTemplate = () =>
   html`
-    <sgds-checkbox-group hasFeedback label="CheckboxGroup label" invalidFeedback="custom feedback message">
-      <sgds-checkbox invalid>Invalid</sgds-checkbox>
-      <sgds-checkbox invalid checked>Invalid and checked</sgds-checkbox>
-      <sgds-checkbox invalid indeterminate>Invalid and indeterminate</sgds-checkbox>
+    <sgds-checkbox-group invalid hasFeedback label="CheckboxGroup label" invalidFeedback="custom feedback message">
+      <sgds-checkbox>Invalid</sgds-checkbox>
+      <sgds-checkbox checked>Invalid and checked</sgds-checkbox>
+      <sgds-checkbox indeterminate>Invalid and indeterminate</sgds-checkbox>
     </sgds-checkbox-group>
   `;
 

@@ -1,13 +1,8 @@
 import { html, nothing } from "lit";
-import { property, queryAssignedElements, queryAsync, state } from "lit/decorators.js";
-import { classMap } from "lit/directives/class-map.js";
+import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { live } from "lit/directives/live.js";
 import FormControlElement from "../../base/form-control-element";
-import SgdsElement from "../../base/sgds-element";
-import feedbackStyles from "../../styles/feedback.css";
-import formHintStyles from "../../styles/form-hint.css";
-import formLabelStyles from "../../styles/form-label.css";
-import { SgdsFormControl } from "../../utils/formSubmitController";
+import { defaultValue } from "../../utils/defaultvalue";
 import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
 import checkboxGroupStyles from "./checkbox-group.css";
@@ -22,7 +17,7 @@ import SgdsCheckbox from "./sgds-checkbox";
  *
  */
 export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement) {
-  static styles = [...SgdsElement.styles, feedbackStyles, formLabelStyles, checkboxGroupStyles, formHintStyles];
+  static styles = [...FormControlElement.styles, checkboxGroupStyles];
 
   /** The checkbox group's label  */
   @property({ reflect: true }) label = "";
@@ -44,24 +39,24 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
 
   @state() private _isTouched = false;
 
-  /**@internal */
-  @state() defaultValue = "";
+  @defaultValue()
+  defaultValue = "";
 
   @state()
   private _blurredCheckboxes = new Set<SgdsCheckbox>();
 
+  @state()
+  private formEvent: FormEvent;
+
   connectedCallback() {
     super.connectedCallback();
-    this.defaultValue = this.value;
     this.addEventListener("sgds-check", (e: CustomEvent) => {
       const { value } = e.detail;
       !this.value.includes(value) && this._addValue(value);
-      this.input && this._updateInputValue();
     });
     this.addEventListener("sgds-uncheck", (e: CustomEvent) => {
       const { value } = e.detail;
       this._removeValue(value);
-      this._updateInputValue();
     });
     /** Blurring when all checkboxes are blurred */
     this.addEventListener("sgds-blur", e => {
@@ -77,6 +72,10 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
     super.firstUpdated(changedProperties);
     if (this.value) {
       this._updateInputValue();
+    }
+
+    if (this.invalid) {
+      this._updateInvalid();
     }
   }
 
@@ -102,7 +101,8 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
   private _sanitizeSlot() {
     const checkboxes = this._checkboxes;
     checkboxes.forEach(checkbox => {
-      checkbox.checked = this.value.includes(checkbox.value);
+      checkbox.checked = checkbox.defaultChecked = this.value.includes(checkbox.value);
+
       checkbox.hasFeedback = this.hasFeedback ? "style" : null;
       if (checkbox.required) {
         console.error("Checkboxes in a group cannot have required or hasFeedback prop set to true");
@@ -121,11 +121,17 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
 
   @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
+    if (this.formEvent === "reset" && this.value === this.defaultValue) {
+      this.formEvent = null;
+      return;
+    }
+
     this.emit("sgds-change");
     const checkboxes = this._checkboxes;
     checkboxes.forEach(checkbox => {
       checkbox.checked = this.value.includes(checkbox.value);
     });
+    this._updateInputValue();
     this._updateInvalid();
   }
 
@@ -169,7 +175,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
     return this._mixinGetValidationMessage();
   }
   /**
-   * radio requries a custom _mixinResetFormControl as the update of input value
+   * checkbox requries a custom _mixinResetFormControl as the update of input value
    * requires to fire a reset event manually
    * */
   private _mixinResetFormControl() {
@@ -181,15 +187,17 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
    * when input value is set programatically, need to manually dispatch a change event
    * In order to prevent race conditions and ensure sequence of events, set input's value here instead of binding to value prop of input
    */
-  private async _updateInputValue(eventName = "change") {
+  private async _updateInputValue(eventName: FormEvent = "change") {
     this.input.value = this.value;
+
     this.input.dispatchEvent(new InputEvent(eventName));
+    this.formEvent = eventName;
   }
 
   render() {
     return html`
       <fieldset>
-        <div class="label-hint-container" @blur=${() => console.log("blur")}>
+        <div class="label-hint-container">
           <label class="form-label">${this.label}</label>
           ${this._renderHintText()}
         </div>
@@ -230,4 +238,4 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
 
 export default SgdsCheckboxGroup;
 
-type CheckedMode = "click" | "key";
+type FormEvent = "reset" | "change" | null;
