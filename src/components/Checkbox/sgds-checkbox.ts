@@ -148,8 +148,8 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
     this.checked && this.emit("sgds-check", { detail: { value: this.value } });
   }
   render() {
-    const wantFeedbackStyle = this.hasFeedback === "both" || this.hasFeedback === "style";
-    const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
+    const displayFeedbackStyle = this.hasFeedback === "both" || this.hasFeedback === "style";
+    const displayFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
 
     return html`
       <div class="form-check">
@@ -157,7 +157,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
           <input
             class=${classMap({
               "form-check-input": true,
-              "is-invalid": wantFeedbackStyle && this.invalid
+              "is-invalid": displayFeedbackStyle && this.invalid
             })}
             type="checkbox"
             id=${this._controlId}
@@ -179,7 +179,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
         </div>
         <label for="${this._controlId}" class="form-check-label" id="${this._labelId}"><slot></slot></label>
       </div>
-      ${wantFeedbackText && this.invalid
+      ${displayFeedbackText && this.invalid
         ? html`
             <div class="invalid-feedback-container">
               <slot name="invalidIcon">

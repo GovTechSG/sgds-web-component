@@ -77,6 +77,10 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
     if (this.value) {
       this._updateInputValue();
     }
+
+    if (this.invalid) {
+      this._updateInvalid();
+    }
   }
 
   protected _renderHintText() {
