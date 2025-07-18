@@ -2,15 +2,11 @@ import { html, nothing } from "lit";
 import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { live } from "lit/directives/live.js";
 import FormControlElement from "../../base/form-control-element";
-import SgdsElement from "../../base/sgds-element";
-import feedbackStyles from "../../styles/feedback.css";
-import formHintStyles from "../../styles/form-hint.css";
-import formLabelStyles from "../../styles/form-label.css";
+import { defaultValue } from "../../utils/defaultvalue";
 import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
 import checkboxGroupStyles from "./checkbox-group.css";
 import SgdsCheckbox from "./sgds-checkbox";
-import { defaultValue } from "../../utils/defaultvalue";
 /**
  * @summary CheckboxGroup is a form component for multiselection of checkboxes.
  *
