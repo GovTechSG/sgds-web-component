@@ -7,7 +7,7 @@
 }
 
 :host([size="fullscreen"]) .modal-panel {
-  max-width: 1128px;
+  max-width: 1320px;
 }
 
 :host(:not([size="fullscreen"])) .modal-panel {
@@ -16,6 +16,18 @@
 
 :host([size="fullscreen"]) .modal-overlay {
   background-color: var(--sgds-surface-default);
+}
+
+:host([size="fullscreen"]) .modal-header {
+  padding: var(--sgds-padding-none) var(--sgds-padding-none) var(--sgds-padding-xl);
+}
+
+:host([size="fullscreen"]) .modal-body {
+  padding: var(--sgds-padding-none);
+}
+
+:host([size="fullscreen"]) .modal-footer {
+  padding: var(--sgds-padding-xl) var(--sgds-padding-none) var(--sgds-padding-none);
 }
 
 .modal {
@@ -35,11 +47,11 @@
   width: 100%;
   max-width: 640px;
   border-radius: var(--sgds-border-radius-md);
-  margin: var(--sgds-spacer-9) var(--sgds-spacer-6);
+  margin: var(--sgds-margin-lg) var(--sgds-margin-xs);
   position: relative;
   display: flex;
   flex-direction: column;
-  max-height: calc(100% - var(--sgds-spacer-9) - var(--sgds-spacer-9));
+  max-height: calc(100% - var(--sgds-margin-lg) - var(--sgds-margin-lg));
 }
 
 .modal-panel:focus {
@@ -49,8 +61,8 @@
 /* Ensure there's enough vertical padding for phones that don't update vh when chrome appears (e.g. iPhone) */
 @media screen and (max-width: 420px) {
   .modal-panel {
-    margin: var(--sgds-spacer-8) var(--sgds-spacer-6);
-    max-height: calc(100% - var(--sgds-spacer-8) - var(--sgds-spacer-8));
+    margin: var(--sgds-margin-md) var(--sgds-margin-xs);
+    max-height: calc(100% - var(--sgds-margin-md) - var(--sgds-margin-md));
   }
 }
 

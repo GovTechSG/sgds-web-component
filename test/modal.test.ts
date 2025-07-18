@@ -177,4 +177,18 @@ describe("<sgds-modal>", () => {
     const el = await fixture<SgdsModal>(html`<sgds-modal noCloseButton></sgds-modal>`);
     expect(el.shadowRoot?.querySelector("button.btn-close")).to.be.null;
   });
+
+  it("should lock or unlock scrolling on body when modal opens or closes respectively", async () => {
+    document.body.style.overflow = "auto";
+    const el = await fixture<SgdsModal>(html` <sgds-modal open></sgds-modal> `);
+    el.open = true;
+    expect(document.body.style.overflow).to.equal("hidden");
+
+    const afterHideHandler = sinon.spy();
+    el.addEventListener("sgds-after-hide", afterHideHandler);
+    el.open = false;
+
+    await waitUntil(() => afterHideHandler.calledOnce);
+    expect(document.body.style.overflow).to.not.equal("hidden");
+  });
 });
