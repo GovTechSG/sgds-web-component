@@ -35,10 +35,6 @@ export class SgdsAccordionItem extends SgdsElement {
   /** Disables the accordion item */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  firstUpdated() {
-    if (!this.open) this.body.classList.add("hidden");
-  }
-
   private handleSummaryClick() {
     if (this.open) {
       this.hide();
@@ -129,6 +125,8 @@ export class SgdsAccordionItem extends SgdsElement {
     return waitForEvent(this, "sgds-after-hide");
   }
   render() {
+    const isHydrated = this.hasUpdated;
+
     return html`
       <div class="accordion-item">
         <button
@@ -151,7 +149,12 @@ export class SgdsAccordionItem extends SgdsElement {
             <sgds-icon name="chevron-down" size=${this.getAttribute("density") === "compact" ? "md" : "lg"}></sgds-icon>
           </slot>
         </button>
-        <div class="accordion-body">
+        <div
+          class=${classMap({
+            "accordion-body": true,
+            hidden: !this.open && !isHydrated
+          })}
+        >
           <slot id="content" name="content" class="content" role="region" aria-labelledby="header"></slot>
         </div>
       </div>
