@@ -32,6 +32,8 @@ When `sgds-checkbox-group` hasFeedback is set to true, it takes precedence and s
 
 ## Validation
 
+### CheckboxGroup 
+
 HTML form constraint validation is built-in. By default, there is no need to control the `invalid` prop to enable constraint validations. 
 
 - To enable invalid styles and feedback message, set `hasFeedback` to true on `sgds-checkbox-group`.
@@ -39,10 +41,21 @@ HTML form constraint validation is built-in. By default, there is no need to con
 In this example, press submit to show constraint validation behaviour for `required` on the checkboxes. 
 Form reset reset's the validity and the value of the input to its initial default value.
 
+  CheckboxGroup constraint validation works as a single form entity. 
+  When `required` is set to true on CheckboxGroup, user has to minimally check one option for a valid submission. 
+  Do not set `required` on the Checkbox children when using CheckboxGroup.
+
 <Canvas of={CheckboxStories.Validation}>
   <Story of={CheckboxStories.Validation} />
 </Canvas>
 
+### Checkbox
+
+Set `hasFeedback="both"` and `required` to true on individual `sgds-checkbox`. Each checkbox will have its own invalid feedback message
+
+<Canvas of={CheckboxStories.ValidationSingle}>
+  <Story of={CheckboxStories.ValidationSingle} />
+</Canvas>
 
 ### Overriding the invalid feedback message 
 
