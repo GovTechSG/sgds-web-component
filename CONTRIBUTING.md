@@ -18,11 +18,13 @@ To contribute, please start off at the Issue section of our github repository.
 
 ## Development
 
-This project uses Lit 2.0 + SASS + TS and bundled with rollup
+1. `npm run dev` uses Vite to serve the HTML files. Use it for development for a faster dev experience
+2. `/playground` is setup for easier dev preview when developing on a single component rather than the component dump in index.html.
+   For example, to preview masthead, navigate to http://localhost:5173/playground/Masthead.html 
 
 ### Recommended : Auto-generate boilerplate code
 
-A simple plop generator is written to help kickstart component writing. On your terminal, run `npm run write:component`. This will generate the boilerplate code for the main component and its storybook template
+A simple plop generator is written to help kickstart component writing. On your terminal, run `npm run write:component`. This will generate the boilerplate code for the main component, its storybook template, test file and playground html file for dev preview.
 
 **NOTE** Please add any sub-component manually
 
@@ -54,7 +56,9 @@ To run single test file, run the output javascript test file instead of the type
 
 To start the storybook server
 
-`npm run storybook`
+1. `npm run build`
+
+2. `npm run storybook`
 
 The basic storybook documentation is auto-generated from the cem metadata. Write your basic template example inside `stories/templates/<Component>/basic.js`. Follow this template and be sure to export `args` and `Template`
 

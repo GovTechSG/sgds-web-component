@@ -32,6 +32,11 @@ export default function (plop) {
         templateFile: "plop-templates/test.hbs"
       },
       {
+        type: "add",
+        path: "playground/{{main-component-name}}.html",
+        templateFile: "plop-templates/playground.hbs"
+      },
+      {
         type: 'modify',
         path: 'src/components/index.ts',
         pattern: /(\/\/ COMPONENT EXPORTS)/g,
