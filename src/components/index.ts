@@ -34,6 +34,7 @@ export * from "./ProgressBar/sgds-progress-bar";
 export * from "./QuantityToggle/sgds-quantity-toggle";
 export * from "./Radio/sgds-radio";
 export * from "./Radio/sgds-radio-group";
+export * from "./Select/sgds-select";
 export * from "./Sidenav/sgds-sidenav";
 export * from "./Sidenav/sgds-sidenav-item";
 export * from "./Sidenav/sgds-sidenav-link";

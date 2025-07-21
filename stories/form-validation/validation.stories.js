@@ -18,6 +18,21 @@ const ConstraintValidationTemplate = args => {
       >
       </sgds-input>
       <sgds-datepicker required hasFeedback name="appointmentDate" label="Appointment date"></sgds-datepicker>
+      <sgds-select
+        required
+        hasFeedback
+        name="favouriteAnimal"
+        menuList='[
+      { "label": "Aligator", "value": "1" },
+      { "label": "Bear", "value": "2" },
+      { "label": "Cat", "value": "3" },
+      { "label": "Dog", "value": "4" },
+      { "label": "Elephant", "value": "5" },
+      { "label": "Frog", "value": "6" },
+      { "label": "Goose", "value": "7" },
+      { "label": "Hen", "value": "8" }
+    ]'
+      ></sgds-select>
       <sgds-combo-box
         required
         hasFeedback
@@ -102,6 +117,21 @@ const FormDataTemplate = args => {
         hasFeedback="both"
       ></sgds-quantity-toggle>
       <sgds-datepicker required hasFeedback name="appointmentDate" label="Appointment date"></sgds-datepicker>
+      <sgds-select
+        required
+        hasFeedback
+        name="favouriteAnimal"
+        menuList='[
+      { "label": "Aligator", "value": "1" },
+      { "label": "Bear", "value": "2" },
+      { "label": "Cat", "value": "3" },
+      { "label": "Dog", "value": "4" },
+      { "label": "Elephant", "value": "5" },
+      { "label": "Frog", "value": "6" },
+      { "label": "Goose", "value": "7" },
+      { "label": "Hen", "value": "8" }
+    ]'
+      ></sgds-select>
       <sgds-combo-box
         required
         hasFeedback
