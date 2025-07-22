@@ -78,7 +78,7 @@ describe("sgds-combo-box ", () => {
     await el.updateComplete;
     expect(el.shadowRoot?.querySelector(".dropdown-menu.show")).to.be.null;
   });
-  it("should emit sgds-select when combobx value is updated", async () => {
+  it("should emit sgds-select event when combobx value is updated", async () => {
     const el = await fixture<SgdsComboBox>(html` <sgds-combo-box
       .menuList=${[
         { label: "Option 1", value: "option1" },
