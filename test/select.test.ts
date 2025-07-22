@@ -59,6 +59,16 @@ describe("<sgds-select>", () => {
       { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
     );
   });
+  it("Should not be able to type in the input", async () => {
+    const el = await fixture<SgdsSelect>(html`<sgds-select></sgds-select>`);
+    const input = el.shadowRoot?.querySelector("input");
+    input?.focus();
+    await sendKeys({ type: "hi" });
+
+    await el.updateComplete;
+    expect(input?.value).not.to.equal("hi");
+    expect(input?.value).to.equal("");
+  });
   it("should be disabled with the disabled attribute to be true", async () => {
     const el = await fixture(html`<sgds-select disabled></sgds-select>`);
     const selectInput = el.shadowRoot?.querySelector("input");
@@ -258,24 +268,18 @@ describe("<sgds-select>", () => {
     const select = () => form.querySelector("sgds-select");
     expect(input()?.value).to.equal("Dur");
     // Clear input
-    input()?.focus();
-    await sendKeys({ press: "Backspace" });
-    await sendKeys({ press: "Backspace" });
-    await sendKeys({ press: "Backspace" });
-    await waitUntil(() => input()?.value === "");
+    input()?.click();
+    await waitUntil(() => select()?.shadowRoot?.querySelector(".dropdown-menu.show"));
 
-    const submitButton = form.querySelector<SgdsButton>("sgds-button[type='submit']");
-    submitButton?.click();
-    //submitting empty combobox value triggers invalid
-    await waitUntil(() => select()?.invalid);
-    expect(select()?.invalid).to.be.true;
+    const itemOne = select()?.shadowRoot?.querySelectorAll("sgds-select-item")[0] as SelectItem;
+
+    itemOne?.click();
+    await waitUntil(() => select()?.value === "option1");
 
     const resetButton = form.querySelector<SgdsButton>("sgds-button[type='reset']");
     resetButton?.click();
-    // resets value to the defaultValue and removes the invalid state
-    await waitUntil(() => !select()?.invalid);
-    expect(select()?.invalid).to.be.false;
-    expect(input()?.value).to.equal("Dur");
+    // resets value to the defaultValue
+    await waitUntil(() => select()?.value === "option3");
   });
   it("when touched and blurred and value is empty, error is shown", async () => {
     const el = await fixture<SgdsSelect>(
@@ -297,32 +301,6 @@ describe("<sgds-select>", () => {
     await el.updateComplete;
     await waitUntil(() => el.shadowRoot?.querySelector("input:invalid"));
   });
-  it("when invalid, typing in the input sets invalid to false", async () => {
-    const el = await fixture<SgdsSelect>(
-      html`
-        <sgds-select
-          hasFeedback
-          required
-          .menuList=${[
-            { label: "Apple", value: "option1" },
-            { label: "Apricot", value: "option2" },
-            { label: "Dur", value: "option3" }
-          ]}
-        ></sgds-select>
-      `
-    );
-    const input = el.shadowRoot?.querySelector("input");
-    input?.focus();
-    el.blur();
-
-    await el.updateComplete;
-    await waitUntil(() => el.shadowRoot?.querySelector("input:invalid"));
-    input?.focus();
-    await sendKeys({ type: "Abcd" });
-    await waitUntil(() => el.shadowRoot?.querySelector("input")?.value === "Abcd");
-    expect(el.invalid).to.be.false;
-  });
-
   it("when traversing menu, no error should be shown", async () => {
     const el = await fixture<SgdsSelect>(
       html`

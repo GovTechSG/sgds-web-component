@@ -137,6 +137,7 @@ export class SgdsSelect extends SelectElement {
             aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
               ? `${this._controlId}-invalid`
               : ""}"
+            @keydown=${(e: KeyboardEvent) => e.preventDefault()}
           />
         </div>
         <sgds-icon name="chevron-down" size="md"></sgds-icon>

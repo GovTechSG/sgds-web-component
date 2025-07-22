@@ -1,13 +1,19 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args =>
   html`
-    <sgds-select
-      id="select-example"
-      ?required=${args.required}
-      .menuList=${args.menuList}
-      ?multiSelect=${args.multiSelect}
-    ></sgds-select>
+    <div style="height:500px;">
+      <sgds-select
+        id="select-example"
+        ?required=${args.required}
+        .menuList=${args.menuList}
+        ?hasFeedback=${args.hasFeedback}
+        label=${ifDefined(args.label)}
+        hintText=${ifDefined(args.hintText)}
+        placeholder=${ifDefined(args.placeholder)}
+      ></sgds-select>
+    </div>
     <script>
       const comboBox = document.querySelector("#select-example");
       comboBox.menuList = [
@@ -220,6 +226,10 @@ export const Template = args =>
     </script>
   `;
 
-export const args = {};
+export const args = {
+  hintText: "Select an option",
+  placeholder: "Select an option",
+  label: "Select label"
+};
 
 export const parameters = {};

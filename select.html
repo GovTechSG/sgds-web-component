@@ -1,0 +1,45 @@
+<script type="module" src="src/index.ts"></script>
+
+<script type="module" src="src/internals/OverflowMenu/index.ts"></script>
+<link href="./src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="./src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="./src/css/sgds.css" rel="stylesheet" type="text/css" />
+
+<sgds-select
+  label="Select"
+  placeholder="select an option"
+  hasFeedback
+  name="selection"
+  menuList='[
+      { "label": "John Smith", "value": "1" },
+      { "label": "Jack Adams", "value": "2" },
+      { "label": "Regina Bride", "value": "3" },
+      { "label": "Christian Dior", "value": "4" },
+      { "label": "Prada Low", "value": "5" },
+      { "label": "Chloe Delight", "value": "6" },
+      { "label": "Jade Apheremal", "value": "7" },
+      { "label": "Louis Vuitton", "value": "8" }
+    ]'
+></sgds-select>
+
+<form>
+  <sgds-select
+    label="Select in form context"
+    required
+    placeholder="select an option"
+    hasFeedback
+    name="selection"
+    menuList='[
+      { "label": "John Smith", "value": "1" },
+      { "label": "Jack Adams", "value": "2" },
+      { "label": "Regina Bride", "value": "3" },
+      { "label": "Christian Dior", "value": "4" },
+      { "label": "Prada Low", "value": "5" },
+      { "label": "Chloe Delight", "value": "6" },
+      { "label": "Jade Apheremal", "value": "7" },
+      { "label": "Louis Vuitton", "value": "8" }
+    ]'
+  ></sgds-select>
+  <sgds-button type="submit">submit</sgds-button>
+  <sgds-button type="reset">reset</sgds-button>
+</form>

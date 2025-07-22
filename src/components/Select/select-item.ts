@@ -27,6 +27,9 @@ export class SelectItem extends SgdsElement {
         this._handleClickItem();
       }
     });
+    this.addEventListener("click", (e: MouseEvent) => {
+      this._handleClickItem();
+    });
   }
 
   private _handleClickItem() {
@@ -41,7 +44,7 @@ export class SelectItem extends SgdsElement {
 
     return html`
       <div class="dropdown-item ${classMap(classes)}" tabindex=${this.disabled ? "-1" : "0"}>
-        <div class="normal-item-content" @click=${this._handleClickItem}>
+        <div class="normal-item-content">
           <slot></slot>
           ${this.active ? html` <sgds-icon name="check"></sgds-icon> ` : nothing}
         </div>
