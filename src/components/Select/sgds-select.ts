@@ -1,28 +1,29 @@
-import SgdsElement from "../../base/sgds-element";
 import { html } from "lit";
-import SgdsComboBox from "../ComboBox/sgds-combo-box";
-import { SelectElement } from "../../base/select-element";
-import SgdsIcon from "../Icon/sgds-icon";
-import ComboBoxItem from "../ComboBox/combo-box-item";
-import { watch } from "../../utils/watch";
-import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { ref } from "lit/directives/ref.js";
-import comboBoxStyle from "../ComboBox/combo-box.css";
-
+import { SelectElement } from "../../base/select-element";
+import { watch } from "../../utils/watch";
+import SgdsIcon from "../Icon/sgds-icon";
+import selectStyle from "./select.css";
+import SelectItem from "./select-item";
+/**
+ * @summary Select is used to make one selection from a list through keyboard or mouse actions
+ *
+ * @event sgds-select - Emitted when an option is selected and the value of select is updated
+ */
 export class SgdsSelect extends SelectElement {
-  static styles = [...SelectElement.styles, comboBoxStyle];
+  static styles = [...SelectElement.styles, selectStyle];
 
   /** @internal */
   static dependencies = {
     "sgds-icon": SgdsIcon,
-    "sgds-combo-box-item": ComboBoxItem
+    "sgds-select-item": SelectItem
   };
 
   async firstUpdated() {
     super.firstUpdated();
 
-    // this._renderedMenu = this.menuList;
     if (this.value) {
       const valueArray = this.value.split(";");
       const initialSelectedItem = this.menuList.filter(({ value }) => valueArray.includes(value));
@@ -51,15 +52,13 @@ export class SgdsSelect extends SelectElement {
   }
 
   protected async _handleItemSelected(e: CustomEvent) {
-    const itemEl = e.target as ComboBoxItem;
+    const itemEl = e.target as SelectItem;
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
     const foundItem = this.filteredMenuList.find(i => i.value.toString() === itemValueAttr) || {
       label: itemLabel,
       value: itemValueAttr
     };
-
-    // Single-select
     this.selectedItems = [foundItem];
     this.value = foundItem.value.toString();
     this.displayValue = this.selectedItems[0].label;
@@ -93,9 +92,9 @@ export class SgdsSelect extends SelectElement {
       const isActive = item.value === this.value;
 
       return html`
-        <sgds-combo-box-item ?active=${isActive} value=${item.value} @sgds-select=${this._handleItemSelected}>
+        <sgds-select-item ?active=${isActive} value=${item.value} @sgds-select=${this._handleItemSelected}>
           ${item.label}
-        </sgds-combo-box-item>
+        </sgds-select-item>
       `;
     });
     return this.menuList.length === 0 ? emptyMenu : menu;
@@ -112,7 +111,7 @@ export class SgdsSelect extends SelectElement {
         })}"
         @click=${this._handleClick}
       >
-        <div class="combobox-input-container">
+        <div class="select-input-container">
           <input
             class="form-control"
             type="text"
@@ -122,7 +121,7 @@ export class SgdsSelect extends SelectElement {
             aria-invalid=${this.invalid ? "true" : "false"}
             ?autofocus=${this.autofocus}
             ?disabled=${this.disabled}
-            readonly
+            ?readonly=${this.readonly}
             ?required=${this.required}
             .value=${this.displayValue}
             @blur=${this._handleInputBlur}
@@ -139,7 +138,7 @@ export class SgdsSelect extends SelectElement {
 
   render() {
     return html`
-      <div class="combobox">
+      <div class="select">
         ${this._renderLabel()}
         <!-- The input -->
         ${this._renderInput()} ${this._renderFeedback()}

@@ -17,7 +17,7 @@ import comboBoxStyle from "./combo-box.css";
  */
 type SgdsComboBoxItemData = SgdsSelectItemData;
 /**
- * @summary ComboBox component is used for users to make one or more selections from a list.
+ * @summary ComboBox component is used for users to make one or more selections from a list through user input, keyboard or mouse actions
  *
  * @slot icon - slot for form control icon to be displayed on the right of the input box.
  *
@@ -64,7 +64,10 @@ export class SgdsComboBox extends SelectElement {
       this._renderedMenu = this.menuList;
     });
 
-    this._handleReadOnly.forKeyboard?.();
+    if (this.readonly) {
+      this._handleKeyboardMenuEvent = null;
+      this._handleKeyboardMenuItemsEvent = null;
+    }
   }
 
   async firstUpdated() {
@@ -83,27 +86,10 @@ export class SgdsComboBox extends SelectElement {
     this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._input);
     this._mixinValidate(this.input);
 
-    this._handleReadOnly.whenDisabledMenu?.();
-  }
-
-  protected _handleReadOnly = {
-    whenDisabledMenu: () => {
-      if (this.menuIsOpen && !this.readonly) {
-        this.showMenu();
-      }
-    },
-    forKeyboard: () => {
-      if (this.readonly) {
-        this._handleKeyboardMenuEvent = null;
-        this._handleKeyboardMenuItemsEvent = null;
-      }
-    },
-    forMouseClick: async () => {
-      if (this.readonly) {
-        return null;
-      }
+    if (this.menuIsOpen && !this.readonly) {
+      this.showMenu();
     }
-  };
+  }
 
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {

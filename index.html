@@ -118,7 +118,9 @@
   <script type="module" src="src/index.ts"></script>
 
   <script type="module" src="src/internals/OverflowMenu/index.ts"></script>
-
+  <link href="./src/themes/day.css" rel="stylesheet" type="text/css" />
+  <link href="./src/themes/night.css" rel="stylesheet" type="text/css" />
+  <link href="./src/css/sgds.css" rel="stylesheet" type="text/css" />
   <script>
     const steps = [
       { title: 1, stepHeader: "Marker title", template: `<p>Step 1 Content</p>` },
@@ -126,9 +128,7 @@
       { title: 3, stepHeader: "Marker title", template: `<p>Step 3 Content</p>` }
     ];
   </script>
-  <link href="./src/themes/day.css" rel="stylesheet" type="text/css" />
-  <link href="./src/themes/night.css" rel="stylesheet" type="text/css" />
-  <link href="./src/css/sgds.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 
@@ -1903,7 +1903,7 @@
       <h2>File Upload</h2>
       <div class="row">
         <div class="col is-6">
-          <sgds-file-upload multiple id="my-fileupload" variant="outline-secondary" />
+          <sgds-file-upload label="My file upload label" multiple id="my-fileupload" variant="outline-secondary" />
           Choose a File
           </sgds-file-upload>
         </div>

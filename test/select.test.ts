@@ -8,7 +8,7 @@ describe("<sgds-select>", () => {
     const el = await fixture<SgdsSelect>(html`<sgds-select readonly></sgds-select>`);
     const input = el.shadowRoot?.querySelector("input.form-control") as HTMLInputElement;
     input?.click();
-
+    await el.updateComplete;
     expect(el.shadowRoot?.querySelector(".dropdown-menu.show")).not.to.exist;
   });
 });
