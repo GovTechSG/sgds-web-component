@@ -63,11 +63,6 @@ export class SgdsComboBox extends SelectElement {
       sgdsInput.focus();
       this._renderedMenu = this.menuList;
     });
-
-    if (this.readonly) {
-      this._handleKeyboardMenuEvent = null;
-      this._handleKeyboardMenuItemsEvent = null;
-    }
   }
 
   async firstUpdated() {

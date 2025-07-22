@@ -97,6 +97,10 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
     this.addEventListener("blur", async () => {
       this.invalid = !this._mixinReportValidity();
     });
+    if (this.readonly) {
+      this._handleKeyboardMenuEvent = null;
+      this._handleKeyboardMenuItemsEvent = null;
+    }
   }
 
   /**

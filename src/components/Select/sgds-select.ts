@@ -20,6 +20,13 @@ export class SgdsSelect extends SelectElement {
     "sgds-icon": SgdsIcon,
     "sgds-select-item": SelectItem
   };
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener("sgds-hide", async () => {
+      const sgdsInput = await this._input;
+      sgdsInput.focus();
+    });
+  }
 
   async firstUpdated() {
     super.firstUpdated();
@@ -28,6 +35,7 @@ export class SgdsSelect extends SelectElement {
       const valueArray = this.value.split(";");
       const initialSelectedItem = this.menuList.filter(({ value }) => valueArray.includes(value));
       this.selectedItems = [...initialSelectedItem, ...this.selectedItems];
+      this.displayValue = initialSelectedItem[0].label;
     }
     this.input = await this._input;
     this._mixinValidate(this.input);

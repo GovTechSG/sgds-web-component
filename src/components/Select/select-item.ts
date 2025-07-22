@@ -22,6 +22,11 @@ export class SelectItem extends SgdsElement {
     super.connectedCallback();
     this.setAttribute("role", "menuitem");
     this.setAttribute("aria-disabled", `${this.disabled}`);
+    this.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        this._handleClickItem();
+      }
+    });
   }
 
   private _handleClickItem() {

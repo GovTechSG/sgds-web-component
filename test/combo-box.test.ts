@@ -108,7 +108,7 @@ describe("sgds-combo-box ", () => {
     expect(inputHandler).to.have.been.calledOnce;
   });
 
-  it("should update value of selected item", async () => {
+  it("mouse click on item, should update value of selected item", async () => {
     const el = await fixture<SgdsComboBox>(
       html`<sgds-combo-box
         .menuList=${[
@@ -263,14 +263,10 @@ describe("single select combobox", () => {
     );
     const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     const durianItem = el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']") as ComboBoxItem;
-    // const appleItem = el.shadowRoot?.querySelector("sgds-combo-box-item[value='option1']") as SgdsComboBoxItem;
-    // const apricotItem = el.shadowRoot?.querySelector("sgds-combo-box-item[value='option2']") as SgdsComboBoxItem;
 
     expect(input.value).to.equal("Durian");
     expect(el.value).to.equal("option3");
     expect(durianItem.active).to.be.true;
-    // expect(appleItem.active).to.be.false
-    // expect(apricotItem.active).to.be.false
   });
 
   it("invalid displayValue entered should be cleared when blurred", async () => {
@@ -366,7 +362,7 @@ describe("single select combobox", () => {
     expect(el.value).to.equal("option1");
   });
 
-  it("Keyboard arrowDown and enter populates the input with badge", async () => {
+  it("Keyboard arrowDown and enter populates the input and update value", async () => {
     const el = await fixture<SgdsComboBox>(
       html`<sgds-combo-box
         .menuList=${[
