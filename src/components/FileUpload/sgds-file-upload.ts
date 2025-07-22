@@ -42,6 +42,9 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   /** Makes the input as a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
+  /** Sets the file size limit in bytes. */
+  @property({ type: Number, reflect: true }) limit: number;
+
   @state()
   private selectedFiles: File[] = [];
 
@@ -69,6 +72,10 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
    */
   public get validationMessage(): string {
     return this._mixinGetValidationMessage();
+  }
+
+  public setCustomValidity(message: string) {
+    return this.input.setCustomValidity(message);
   }
   /**
    * Returns files selected for upload
@@ -103,6 +110,10 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
     // Trigger a re-render of the component to update the list of selected files
     this._setFileList(files);
     this.requestUpdate();
+
+    if (files[0].size > this.limit) {
+      this.input.setCustomValidity("File size surpass limit");
+    }
     super._mixinHandleChange(event);
   }
 

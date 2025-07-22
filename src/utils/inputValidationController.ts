@@ -128,6 +128,8 @@ export class InputValidationController implements ReactiveController {
     // if the input is invalid, show the correct error
     if (!validState.valid) {
       // loop through the error reasons
+      console.log(validState);
+      console.log("invalid");
       for (const state in validState) {
         // if there is an error and corresponding attribute holding
         // the message
@@ -139,6 +141,7 @@ export class InputValidationController implements ReactiveController {
         }
       }
     } else {
+      console.log("valid");
       this._internals.setValidity({});
     }
   }

@@ -107,7 +107,6 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
     _mixinSetValidity(flags?: ValidityStateFlags, message?: string, anchor?: HTMLElement): void {
       return this.inputValidationController.setValidity(flags, message, anchor);
     }
-
     /** DECLARED INSTANCE METHODS AND PROPERTIES*/
 
     /**
