@@ -118,7 +118,9 @@
   <script type="module" src="src/index.ts"></script>
 
   <script type="module" src="src/internals/OverflowMenu/index.ts"></script>
-
+  <link href="./src/themes/day.css" rel="stylesheet" type="text/css" />
+  <link href="./src/themes/night.css" rel="stylesheet" type="text/css" />
+  <link href="./src/css/sgds.css" rel="stylesheet" type="text/css" />
   <script>
     const steps = [
       { title: 1, stepHeader: "Marker title", template: `<p>Step 1 Content</p>` },
@@ -126,9 +128,7 @@
       { title: 3, stepHeader: "Marker title", template: `<p>Step 3 Content</p>` }
     ];
   </script>
-  <link href="./src/themes/day.css" rel="stylesheet" type="text/css" />
-  <link href="./src/themes/night.css" rel="stylesheet" type="text/css" />
-  <link href="./src/css/sgds.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -777,22 +777,33 @@ Hide code
       { "label": "Chloe Delight", "value": "6" },
       { "label": "Jade Apheremal", "value": "7" },
       { "label": "Louis Vuitton", "value": "8" }
-    ]' multiSelect label="label" hintText="multiple" hasFeedback="true" invalidFeedback="test">
-        </sgds-combo-box>
-        <input readonly value="hello" />
-        <h2>Datepicker</h2>
-        <form id="datepicker-form">
-          <sgds-input type="date" hasFeedback required></sgds-input>
-          <sgds-input required readonly value="hello" type="text" label="Label" hinttext="This is a hint text"
-            name="email" inputclasses="" invalidfeedback="test" icon='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-												<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-												</svg>' placeholder="Placeholder" required hasFeedback>
-          </sgds-input>
-          <sgds-datepicker noFlip required mindate="2024-01-02T12:00:00.000Z"
-            maxdate="2024-01-30T12:00:00.000Z"></sgds-datepicker>
-          <sgds-button type="submit">Submit TEST DATEPICKER</sgds-button>
-        </form>
-        <sgds-datepicker label="Choose a date" hintText="hint text"></sgds-datepicker>
+    ]'  multiSelect label="label" hintText="multiple" hasFeedback="true" invalidFeedback="test">
+      </sgds-combo-box>
+      <input readonly value="hello" />
+      <h2>Datepicker</h2>
+      <form id="datepicker-form">
+
+        <sgds-select placeholder="Select an option" label="SELECTME"  menuList='[
+      { "label": "John Smith", "value": "1" },
+      { "label": "Jack Adams", "value": "2" },
+      { "label": "Regina Bride", "value": "3" },
+      { "label": "Christian Dior", "value": "4" },
+      { "label": "Prada Low", "value": "5" },
+      { "label": "Chloe Delight", "value": "6" },
+      { "label": "Jade Apheremal", "value": "7" },
+      { "label": "Louis Vuitton", "value": "8" }
+    ]'></sgds-select>
+        <sgds-input type="date" hasFeedback required ></sgds-input>
+        <sgds-input required readonly value="hello" type="text" label="Label" hinttext="This is a hint text" name="email" inputclasses=""
+          invalidfeedback="test" icon="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-envelope&quot; viewBox=&quot;0 0 16 16&quot;>
+												<path d=&quot;M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z&quot;/>
+												</svg>" placeholder="Placeholder" required hasFeedback>
+        </sgds-input>
+        <sgds-datepicker noFlip required mindate="2024-01-02T12:00:00.000Z"
+          maxdate="2024-01-30T12:00:00.000Z"></sgds-datepicker>
+        <sgds-button type="submit">Submit TEST DATEPICKER</sgds-button>
+      </form>
+      <sgds-datepicker label="Choose a date" hintText="hint text"></sgds-datepicker>
 
         <sgds-datepicker id="lukhei" label="Birthdate" initialValue='["20/01/2024"]' mindate="2024-01-02T12:00:00.000Z"
           maxdate="2024-01-30T12:00:00.000Z">
@@ -1050,7 +1061,18 @@ Hide code
           <sgds-datepicker required name="datepicker-hi" hasFeedback></sgds-datepicker>
           <!-- <sgds-datepicker required initialValue='["20/01/2024"]' id="test-date" name="datepicker-hi" mindate="2024-01-02T12:00:00.000Z"
           maxdate="2024-12-30T12:00:00.000Z" hasFeedback></sgds-datepicker> -->
-          <sgds-combo-box id="combobox-test" value="1" label="readonly combobox" required menuList='[
+          <sgds-combo-box readonly id="combobox-test" value="1"  label="readonly combobox" required menuList='[
+      { "label": "John Smith", "value": "1" },
+      { "label": "Jack Adams", "value": "2" },
+      { "label": "Regina Bride", "value": "3" },
+      { "label": "Christian Dior", "value": "4" },
+      { "label": "Prada Low", "value": "5" },
+      { "label": "Chloe Delight", "value": "6" },
+      { "label": "Jade Apheremal", "value": "7" },
+      { "label": "Louis Vuitton", "value": "8" }
+    ]' label="label" hintText="hint" hasFeedback>
+      </sgds-combo-box>
+          <sgds-combo-box multiSelect id="combobox-test" value="1;2"  label="readonly combobox" required menuList='[
       { "label": "John Smith", "value": "1" },
       { "label": "Jack Adams", "value": "2" },
       { "label": "Regina Bride", "value": "3" },

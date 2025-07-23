@@ -37,4 +37,5 @@ import "./components/Toast";
 import "./components/Tooltip";
 import "./components/TableOfContents";
 import "./components/Subnav";
+import "./components/Select";
 // COMPONENT IMPORTS
