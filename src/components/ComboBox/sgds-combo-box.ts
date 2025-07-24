@@ -44,15 +44,9 @@ export class SgdsComboBox extends SelectElement {
     return item.label.toLowerCase().startsWith(inputValue.toLowerCase());
   };
 
-  // /** @internal Managed filtered menu on the fly with input change*/
-  // @state()
-  // private filteredMenuList: SgdsComboBoxItemData[] = [];
-  /** @internal Managed menu to render depending on the activity. On input change, show filteredMenu, on selections and initial state show full menu list. */
+  /** Managed menu to render depending on the activity. On input change, show filteredMenu, on selections and initial state show full menu list. */
   @state()
   private _renderedMenu: SgdsComboBoxItemData[] = [];
-  // /** Track selected items (even for single-select, but it will have at most one). */
-  // @state()
-  // private selectedItems: SgdsComboBoxItemData[] = [];
 
   @queryAsync("input#multi-select-input-tracker") private _multiSelectInput: Promise<HTMLInputElement>;
 

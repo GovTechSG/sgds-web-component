@@ -27,7 +27,7 @@ export class SelectItem extends SgdsElement {
         this._handleClickItem();
       }
     });
-    this.addEventListener("click", (e: MouseEvent) => {
+    this.addEventListener("click", () => {
       this._handleClickItem();
     });
   }
