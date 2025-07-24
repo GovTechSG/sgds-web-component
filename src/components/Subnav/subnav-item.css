@@ -1,4 +1,4 @@
-:host(:not([disabled])[active]) ::slotted(*) {
+:host(:not([disabled])[active="true"]) ::slotted(*) {
   --sgds-link-color-default: var(--sgds-primary-color-default);
   color: var(--sgds-link-color-default, var(--sgds-primary-color-default));
   border-bottom: var(--sgds-border-width-2) solid var(--sgds-primary-border-color-default);
@@ -8,7 +8,7 @@
   padding: var(--sgds-padding-sm) var(--sgds-padding-lg);
 }
 
-:host(:not([disabled])[isCollapsed][active]) ::slotted(*) {
+:host(:not([disabled])[isCollapsed][active="true"]) ::slotted(*) {
   border-bottom: none;
   background-color: var(--sgds-bg-translucent-subtle);
 }
@@ -26,7 +26,7 @@
   white-space: nowrap;
 }
 
-:host(:not([disabled])[active]) ::slotted(*) {
+:host(:not([disabled])[active="true"]) ::slotted(*) {
   --sgds-link-color-default: var(--sgds-primary-color-default);
   color: var(--sgds-link-color-default, var(--sgds-primary-color-default));
 }
