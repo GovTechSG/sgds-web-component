@@ -2,7 +2,8 @@
   position: relative;
 }
 
+
 .dropdown {
-  display: flex;
-  height: 100%;
+  display: flex; 
+  height: inherit;
 }
