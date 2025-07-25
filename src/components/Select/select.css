@@ -2,12 +2,12 @@
   display: block;
   position: relative;
 }
-.combobox {
+.select {
   display: flex;
   flex-direction: column;
   gap: var(--sgds-form-gap-md);
 }
-.combobox .dropdown-menu {
+.select .dropdown-menu {
   min-width: 100%;
 }
 .dropdown {
@@ -15,7 +15,7 @@
   height: 100%;
 }
 
-.sgds.combobox {
+.select {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
@@ -33,22 +33,10 @@
   box-sizing: border-box;
 }
 
-.visually-hidden {
-  clip: rect(0, 0, 0, 0) !important;
-  border: 0 !important;
-  height: 1px !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  padding: 0 !important;
-  position: absolute !important;
-  white-space: nowrap !important;
-  width: 1px !important;
-}
 .form-control-group.disabled {
   opacity: var(--sgds-opacity-50);
   cursor: not-allowed
 }
-
 
 .form-control-group {
   display: flex;
@@ -78,9 +66,10 @@
   color: var(--sgds-form-color-default);
   font-size: var(--sgds-font-size-2);
   line-height: var(--sgds-line-height-body);
+  caret-color: transparent;
 }
 
-.combobox-input-container {
+.select-input-container {
   display: flex;
   gap: var(--sgds-gap-xs);
   flex-wrap: wrap;

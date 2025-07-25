@@ -4,16 +4,9 @@ import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import { ref } from "lit/directives/ref.js";
-import { DropdownListElement } from "../../base/dropdown-list-element";
-import feedbackStyles from "../../styles/feedback.css";
-import hintTextStyles from "../../styles/form-hint.css";
-import { defaultValue } from "../../utils/defaultvalue";
-import { SgdsFormControl } from "../../utils/formSubmitController";
-import generateId from "../../utils/generateId";
-import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
+import { SelectElement, SgdsSelectItemData } from "../../base/select-element";
 import { watch } from "../../utils/watch";
 import { SgdsBadge } from "../Badge/sgds-badge";
-import dropdownMenuStyle from "../Dropdown/dropdown-menu.css";
 import SgdsIcon from "../Icon/sgds-icon";
 import { ComboBoxItem } from "./combo-box-item";
 import comboBoxStyle from "./combo-box.css";
@@ -22,13 +15,9 @@ import comboBoxStyle from "./combo-box.css";
  * Each item in the ComboBox has a label to display
  * and a value (the actual data / ID).
  */
-interface SgdsComboBoxItemData {
-  label: string;
-  value: string;
-}
-
+type SgdsComboBoxItemData = SgdsSelectItemData;
 /**
- * @summary ComboBox component is used for users to make one or more selections from a list.
+ * @summary ComboBox component is used for users to make one or more selections from a list through user input, keyboard or mouse actions
  *
  * @slot icon - slot for form control icon to be displayed on the right of the input box.
  *
@@ -36,8 +25,8 @@ interface SgdsComboBoxItemData {
  * @event sgds-input -  Emitted when user input is received and its value changes.
  */
 
-export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) implements SgdsFormControl {
-  static styles = [...DropdownListElement.styles, dropdownMenuStyle, hintTextStyles, feedbackStyles, comboBoxStyle];
+export class SgdsComboBox extends SelectElement {
+  static styles = [...SelectElement.styles, comboBoxStyle];
 
   /** @internal */
   static dependencies = {
@@ -45,75 +34,6 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
     "sgds-icon": SgdsIcon,
     "sgds-badge": SgdsBadge
   };
-
-  constructor() {
-    super();
-    /** @internal */
-    this.modifierOpt = [
-      {
-        name: "offset",
-        options: {
-          offset: [0, 8]
-        }
-      }
-    ];
-  }
-
-  /** The input's label  */
-  @property({ reflect: true }) label = "";
-
-  /** The input's hint text below the label */
-  @property({ reflect: true }) hintText = "";
-
-  /** The input's name attribute */
-  @property({ reflect: true }) name: string;
-
-  /** The input's placeholder text. */
-  @property({ type: String, reflect: true }) placeholder: string;
-
-  /** Autofocus the input */
-  @property({ type: Boolean, reflect: true }) autofocus = false;
-
-  /** Disables the input. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
-
-  /** Makes the input a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
-
-  /** Makes the input readonly. */
-  @property({ type: Boolean, reflect: true }) readonly = false;
-
-  /**
-   * IMPORTANT:
-   * We still expose `.value` externally, but this is now the underlying ID or data
-   * (e.g. 1, 2, 'abc', ...), not the label that appears in the input box.
-   */
-  @property({ type: String, reflect: true })
-  value = "";
-
-  @state()
-  private displayValue = "";
-
-  /** @internal Gets or sets the default value used to reset this element. */
-  @defaultValue()
-  defaultValue = "";
-
-  /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
-  @property({ type: Boolean, reflect: true }) hasFeedback = false;
-
-  /** Feedback text for error state when validated */
-  @property({ type: String, reflect: true }) invalidFeedback = "";
-
-  /** Marks the component as invalid. Replace the pseudo :invalid selector. */
-  @property({ type: Boolean, reflect: true }) invalid = false;
-
-  /** The list of items to display in the dropdown.
-   * `interface SgdsComboBoxItemData {
-   * label: string;
-   * value: string;
-   * }`
-   */
-  @property({ type: Array }) menuList: SgdsComboBoxItemData[] = [];
 
   /** If true, renders multiple checkbox selection items. If false, single-select. */
   @property({ type: Boolean, reflect: true }) multiSelect = false;
@@ -124,36 +44,19 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
     return item.label.toLowerCase().startsWith(inputValue.toLowerCase());
   };
 
-  /** @internal Managed filtered menu on the fly with input change*/
-  @state()
-  private filteredMenuList: SgdsComboBoxItemData[] = [];
-  /** @internal Managed menu to render depending on the activity. On input change, show filteredMenu, on selections and initial state show full menu list. */
+  /** Managed menu to render depending on the activity. On input change, show filteredMenu, on selections and initial state show full menu list. */
   @state()
   private _renderedMenu: SgdsComboBoxItemData[] = [];
-  /** Track selected items (even for single-select, but it will have at most one). */
-  @state()
-  private selectedItems: SgdsComboBoxItemData[] = [];
 
-  private _isTouched = false;
-
-  @queryAsync("input.form-control") private _sgdsInput: Promise<HTMLInputElement>;
   @queryAsync("input#multi-select-input-tracker") private _multiSelectInput: Promise<HTMLInputElement>;
 
   connectedCallback(): void {
     super.connectedCallback();
-    this.addEventListener("blur", async () => {
-      this.invalid = !this._mixinReportValidity();
-    });
     this.addEventListener("sgds-hide", async () => {
-      const sgdsInput = await this._sgdsInput;
+      const sgdsInput = await this._input;
       sgdsInput.focus();
       this._renderedMenu = this.menuList;
     });
-    /** @internal */
-    if (this.readonly) {
-      this._handleKeyboardMenuEvent = null;
-      this._handleKeyboardMenuItemsEvent = null;
-    }
   }
 
   async firstUpdated() {
@@ -169,7 +72,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
         this.displayValue = initialSelectedItem[0].label;
       }
     }
-    this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._sgdsInput);
+    this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._input);
     this._mixinValidate(this.input);
 
     if (this.menuIsOpen && !this.readonly) {
@@ -182,7 +85,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
     if (this.value) {
       this.emit("sgds-select");
     }
-    const sgdsInput = await this._sgdsInput;
+    const sgdsInput = await this._input;
     this._mixinSetFormValue();
 
     if (this.multiSelect) {
@@ -224,7 +127,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
   /**
    * Called whenever an <sgds-combo-box-item> dispatches sgds-select"
    */
-  private async _handleItemSelected(e: CustomEvent) {
+  protected async _handleItemSelected(e: CustomEvent) {
     const itemEl = e.target as ComboBoxItem;
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
@@ -280,7 +183,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
       }
     }
   }
-  private async _handleInputBlur(e: Event) {
+  protected async _handleInputBlur(e: Event) {
     e.preventDefault();
     if (this.multiSelect) {
       const displayValueMatchedSelectedItems = this.selectedItems.filter(({ label }) => this.displayValue === label);
@@ -297,57 +200,8 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
     }
   }
 
-  /**
-   * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
-   * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
-   */
-  public reportValidity(): boolean {
-    return this._mixinReportValidity();
-  }
-  /**
-   * Checks for validity without any native error popup message
-   */
-  public checkValidity(): boolean {
-    return this._mixinCheckValidity();
-  }
-
-  /**
-   * Returns the ValidityState object
-   */
-  public get validity(): ValidityState {
-    return this._mixinGetValidity();
-  }
-  /**
-   * Returns the validation message based on the ValidityState
-   */
-  public get validationMessage(): string {
-    return this._mixinGetValidationMessage();
-  }
-  protected _controlId = generateId("input");
-  protected _renderFeedback() {
-    return this.invalid && this.hasFeedback
-      ? html` <div class="invalid-feedback-container">
-          <slot name="invalidIcon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path
-                d="M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10ZM10 6.25C9.49805 6.25 9.10584 6.68339 9.15578 7.18285L9.48461 10.4711C9.51109 10.7359 9.7339 10.9375 10 10.9375C10.2661 10.9375 10.4889 10.7359 10.5154 10.4711L10.8442 7.18285C10.8942 6.68339 10.5019 6.25 10 6.25ZM10.0014 11.875C9.48368 11.875 9.06394 12.2947 9.06394 12.8125C9.06394 13.3303 9.48368 13.75 10.0014 13.75C10.5192 13.75 10.9389 13.3303 10.9389 12.8125C10.9389 12.2947 10.5192 11.875 10.0014 11.875Z"
-                fill="currentColor"
-              />
-            </svg>
-          </slot>
-          <div id="${this._controlId}-invalid" class="invalid-feedback">
-            ${this.invalidFeedback ? this.invalidFeedback : this.validationMessage}
-          </div>
-        </div>`
-      : html`${this._renderHintText()}`;
-  }
-
-  protected _renderHintText() {
-    const hintTextTemplate = html` <div id="${this._controlId}Help" class="form-text">${this.hintText}</div> `;
-    return this.hintText && hintTextTemplate;
-  }
   /** For form reset  */
-  private async _mixinResetFormControl() {
+  protected async _mixinResetFormControl() {
     this.value = this.defaultValue;
     if (!this.multiSelect) {
       const initialItem = this.menuList.filter(({ value }) => value === this.value);
@@ -356,7 +210,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
       } else {
         this.displayValue = initialItem[0].label;
       }
-      this._mixinResetValidity(await this._sgdsInput);
+      this._mixinResetValidity(await this._input);
     } else {
       const valueArray = this.value.split(";");
       const initialItem = this.menuList.filter(({ value }) => valueArray.includes(value));
@@ -365,7 +219,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
     }
   }
 
-  private _menu() {
+  protected _renderMenu() {
     const emptyMenu = html` <div class="empty-menu">No options</div> `;
     const menu = this._renderedMenu.map(item => {
       let isActive = false;
@@ -388,33 +242,6 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
       `;
     });
     return this._renderedMenu.length === 0 ? emptyMenu : menu;
-  }
-
-  private _handleClick() {
-    if (this.readonly) {
-      return null;
-    }
-
-    if (!this.menuIsOpen) {
-      this.showMenu();
-    } else {
-      this.hideMenu();
-    }
-  }
-  protected _labelId = generateId("label");
-  protected _renderLabel() {
-    const labelTemplate = html`
-      <label
-        for=${this._controlId}
-        id=${this._labelId}
-        class=${classMap({
-          "form-label": true,
-          required: this.required
-        })}
-        >${this.label}</label
-      >
-    `;
-    return this.label && labelTemplate;
   }
 
   protected _renderInput() {
@@ -476,7 +303,7 @@ export class SgdsComboBox extends SgdsFormValidatorMixin(DropdownListElement) im
         <!-- The input -->
         ${this._renderInput()} ${this._renderFeedback()}
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1">
-          ${this._menu()}
+          ${this._renderMenu()}
         </ul>
       </div>
       <!-- Required an input element for constraint validation -->
