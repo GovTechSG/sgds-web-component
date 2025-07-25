@@ -1,0 +1,4 @@
+div.test {
+    background-color: var(--sgds-primary-200);
+    border: 1px solid var(--sgds-primary-500);
+}
