@@ -526,4 +526,14 @@ describe("sgds-dropdown-item", () => {
     const el = await fixture(html`<sgds-dropdown-item active>test</sgds-dropdown-item>`);
     expect(el.shadowRoot?.querySelector("div.dropdown-item")).to.have.class("active");
   });
+  it("when clicked on, should trigger a navigation", async () => {
+    const el = await fixture<SgdsDropdownItem>(html`<sgds-dropdown-item>
+      <a>Example</a>
+    </sgds-dropdown-item>`);
+    const anchor = el.querySelector("a");
+    const anchorSpy = sinon.spy();
+    anchor?.addEventListener("click", anchorSpy);
+    el.click();
+    expect(anchorSpy.calledOnce).to.be.true;
+  });
 });
