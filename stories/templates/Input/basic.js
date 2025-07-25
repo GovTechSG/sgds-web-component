@@ -11,7 +11,6 @@ export const Template = args =>
       value=${ifDefined(args.value)}
       pattern=${ifDefined(args.pattern)}
       invalidFeedback=${ifDefined(args.invalidFeedback)}
-      icon=${ifDefined(args.icon)}
       ?disabled=${args.disabled}
       placeholder=${ifDefined(args.placeholder)}
       ?autofocus=${args.autofocus}
