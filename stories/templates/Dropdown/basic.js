@@ -29,11 +29,11 @@ export const Template = ({
         Dropdown
         <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
       </sgds-button>
-      <sgds-dropdown-item href=${ifDefined(href)} ?disabled=${disabled} ?active=${active} target=${ifDefined(target)}
-        >item #1 (argsTable controlled)</sgds-dropdown-item
-      >
-      <sgds-dropdown-item href="https://google.com">item #2</sgds-dropdown-item>
-      <sgds-dropdown-item href="#" disabled>item #3</sgds-dropdown-item>
+      <sgds-dropdown-item ?disabled=${disabled} ?active=${active} target=${ifDefined(target)}>
+        <a href=${ifDefined(href)}>item #1 (argsTable controlled) </a>
+      </sgds-dropdown-item>
+      <sgds-dropdown-item><a href="https://google.com">item #2</a></sgds-dropdown-item>
+      <sgds-dropdown-item disabled>item #3</sgds-dropdown-item>
     </sgds-dropdown>
   `;
 };

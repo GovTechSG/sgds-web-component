@@ -2,7 +2,7 @@ import { html } from "lit";
 import { expect, fixture, waitUntil } from "@open-wc/testing";
 import { SgdsButton, SgdsSelect } from "../src/components";
 import "../src/index";
-import { assert } from "@esm-bundle/chai";
+import { assert } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
 import SelectItem from "../src/components/Select/select-item";

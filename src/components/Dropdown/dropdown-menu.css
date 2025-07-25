@@ -8,17 +8,13 @@
   list-style: none;
   margin: 0;
   min-width: var(--sgds-dimension-280);
+  max-height: var(--sgds-dimension-480);
   padding: var(--sgds-padding-xs) 0;
   position: absolute;
   text-align: left;
   overflow-y: auto;
   z-index: 1000;
 }
-
-.dropdown .dropdown-menu {
-  max-height: var(--sgds-dimension-192);
-}
-
 .dropdown-menu.show {
   display: block;
 }

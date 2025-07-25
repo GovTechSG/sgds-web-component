@@ -1,0 +1,19 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@govtechsg/sgds-web-component": "file:../../../lib",
+    "nuxt": "^3.13.0",
+    "nuxt-ssr-lit": "^1.6.30",
+    "vue": "latest",
+    "vue-router": "latest"
+  }
+}
