@@ -34,6 +34,14 @@ export const Template = ({
       </sgds-dropdown-item>
       <sgds-dropdown-item><a href="https://google.com">item #2</a></sgds-dropdown-item>
       <sgds-dropdown-item disabled>item #3</sgds-dropdown-item>
+      <sgds-dropdown-item>item #4</sgds-dropdown-item>
+      <sgds-dropdown-item>item #5</sgds-dropdown-item>
+      <sgds-dropdown-item>item #6</sgds-dropdown-item>
+      <sgds-dropdown-item>item #7</sgds-dropdown-item>
+      <sgds-dropdown-item>item #8</sgds-dropdown-item>
+      <sgds-dropdown-item>item #9</sgds-dropdown-item>
+      <sgds-dropdown-item>item #10</sgds-dropdown-item>
+      <sgds-dropdown-item>item #11</sgds-dropdown-item>
     </sgds-dropdown>
   `;
 };
@@ -46,7 +54,7 @@ export const args = {
 export const parameters = {
   docs: {
     story: {
-      height: "300px"
+      height: "600px"
     }
   }
 };
