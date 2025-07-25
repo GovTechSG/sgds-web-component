@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import ServerComponentVue from './components/ServerComponent.vue.vue';
 </script>
 
 <template>
   <div>
-    <NuxtRouteAnnouncer />
+    <Masthead></Masthead>
     <Button></Button>
-    <!-- <ServerComponentVue></ServerComponentVue> -->
-    <NuxtWelcome />
+    <Accordion></Accordion>
+    <Icon></Icon>
   </div>
 </template>
