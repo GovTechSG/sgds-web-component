@@ -1,13 +1,19 @@
 :host([size="sm"]) .modal-panel {
-  max-width: 480px;
+  max-width: var(--sgds-dimension-480);
+}
+
+:host([size="md"]) .modal-panel {
+  max-width: var(--sgds-dimension-640);
 }
 
 :host([size="lg"]) .modal-panel {
-  max-width: 800px;
+  max-width: var(--sgds-dimension-800);
 }
 
 :host([size="fullscreen"]) .modal-panel {
-  max-width: 1320px;
+  max-width: var(--sgds-dimension-1320);
+  padding: var(--sgds-padding-none);
+  margin: var(--sgds-margin-xl) var(--sgds-margin-xs);
 }
 
 :host(:not([size="fullscreen"])) .modal-panel {
@@ -45,24 +51,58 @@
 
 .modal-panel {
   width: 100%;
-  max-width: 640px;
+  max-width: var(--sgds-dimension-640);
   border-radius: var(--sgds-border-radius-md);
-  margin: var(--sgds-margin-lg) var(--sgds-margin-xs);
+  padding: var(--sgds-padding-xl);
+  margin: var(--sgds-margin-2-xl) var(--sgds-margin-xs);
   position: relative;
   display: flex;
   flex-direction: column;
-  max-height: calc(100% - var(--sgds-margin-lg) - var(--sgds-margin-lg));
+  max-height: calc(100% - var(--sgds-margin-2-xl) - var(--sgds-margin-2-xl));
 }
 
 .modal-panel:focus {
   outline: none;
 }
 
+.modal-content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-gap-2-xl);
+  min-height: 0;
+  position: relative;
+}
+
+.modal-header__close {
+  position: absolute;
+  top: calc(-1 * var(--sgds-padding-md));
+  right: calc(-1 * var(--sgds-padding-md));
+}
+
+@media screen and (max-width: 1024px) {
+  :host([size="fullscreen"]) .modal-panel {
+    margin: var(--sgds-margin-md)
+  } 
+}
+
+@media screen and (max-width: 768px) {
+  :host([size="fullscreen"]) .modal-panel {
+    margin: var(--sgds-margin-sm)
+  } 
+}
+
+@media screen and (max-width: 512px) {
+  :host([size="fullscreen"]) .modal-panel {
+    margin: var(--sgds-margin-sm) var(--sgds-margin-xs)
+  } 
+}
+
 /* Ensure there's enough vertical padding for phones that don't update vh when chrome appears (e.g. iPhone) */
 @media screen and (max-width: 420px) {
-  .modal-panel {
-    margin: var(--sgds-margin-md) var(--sgds-margin-xs);
-    max-height: calc(100% - var(--sgds-margin-md) - var(--sgds-margin-md));
+  :host(:not([size="fullscreen"])) .modal-panel {
+    margin: var(--sgds-margin-sm) var(--sgds-margin-xs);
+    max-height: calc(100% - var(--sgds-margin-sm) - var(--sgds-margin-sm));
   }
 }
 
@@ -76,7 +116,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: var(--sgds-padding-xl);
+  max-width: var(--sgds-dimension-872);
 }
 .modal-header__title-description {
   display: flex;
@@ -105,14 +145,13 @@ slot[name="description"]::slotted(*) {
 }
 
 .modal-body {
+  flex: 1 1 auto;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 0 var(--sgds-padding-xl) var(--sgds-padding-xl);
 }
 
 .modal-body slot::slotted(*) {
   --sgds-paragraph-spacing-xl: var(--sgds-margin-none);
-  margin: var(--sgds-paragraph-spacing-xl, --sgds-margin-none);
 }
 
 .modal-footer {
@@ -121,7 +160,7 @@ slot[name="description"]::slotted(*) {
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: var(--sgds-gap-md);
-  padding: var(--sgds-padding-xl);
+  padding-top: var(--sgds-padding-md);
 }
 
 .modal:not(.has-footer) .modal-footer {
