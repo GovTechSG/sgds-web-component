@@ -1,0 +1,7 @@
+:host {
+  display: table-header-group;
+}
+
+::slotted(sgds-table-row){
+  font-weight: bold!important;
+}

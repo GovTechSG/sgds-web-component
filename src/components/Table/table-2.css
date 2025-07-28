@@ -1,0 +1,44 @@
+.table {
+  display: table;
+  width: 100%;
+}
+
+.table-responsive {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+}
+
+@media (max-width: 575.98px) {
+  .table-responsive-sm {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .table-responsive-md {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .table-responsive-lg {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .table-responsive-xl {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 1399.98px) {
+  .table-responsive-xxl {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+  }
+}
