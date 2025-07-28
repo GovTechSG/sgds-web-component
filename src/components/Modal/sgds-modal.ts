@@ -273,20 +273,22 @@ export class SgdsModal extends SgdsElement {
           aria-labelledby="title"
           tabindex="-1"
         >
-          <div class="modal-header">
-            <div class="modal-header__title-description">
-              <slot class="modal-title" id="title" name="title"></slot>
-              <slot name="description"></slot>
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="modal-header__title-description">
+                <slot class="modal-title" id="title" name="title"></slot>
+                <slot name="description"></slot>
+              </div>
+              <sgds-close-button
+                class="modal-header__close"
+                @click="${() => this.requestClose("close-button")}"
+                ariaLabel="close modal"
+              ></sgds-close-button>
             </div>
-            <sgds-close-button
-              class="modal-header__close"
-              @click="${() => this.requestClose("close-button")}"
-              ariaLabel="close modal"
-            ></sgds-close-button>
-          </div>
-          <div class="modal-body">
-            <slot></slot>
-          </div>
+            <div class="modal-body">
+              <slot></slot>
+            </div>
+          </div class="modal-content">
           <div class="modal-footer">
             <slot name="footer"></slot>
           </div>
