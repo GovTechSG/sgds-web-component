@@ -1,3 +1,16 @@
+## v3.1.1 (2025-07-29)
+
+### Fix
+
+- **subnav**: update active selector
+- **subnav**: apply gap for subnav item for external link icon
+- **subnav**: update active selector
+
+### Refactor
+
+- **icon**: update icon component for SSR support (#265)
+- **icon**: update icon component for SSR support
+
 ## v3.1.0 (2025-07-28)
 
 ### Feat
