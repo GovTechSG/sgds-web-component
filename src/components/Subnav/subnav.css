@@ -2,6 +2,7 @@
   position: sticky;
   top: 0;
   z-index: 1000;
+  display: block;
 }
 
 nav {
@@ -11,6 +12,8 @@ nav {
 
 nav.mobile {
   border-bottom: none;
+  position: absolute;
+  width: 100%;
 }
 
 .subnav {
@@ -24,6 +27,7 @@ nav.mobile {
 .subnav.mobile {
   padding: var(--sgds-padding-md) var(--sgds-padding-lg);
   gap: var(--sgds-gap-md);
+  flex-wrap: nowrap;
 }
 
 slot[name="header"]::slotted(*) {

@@ -52,6 +52,7 @@
   padding: 0px var(--sgds-padding-md);
   min-width: var(--sgds-dimension-80);
   height: var(--sgds-dimension-40);
+  line-height: var(--sgds-line-height-min);
 }
 
 .btn {
