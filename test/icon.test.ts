@@ -20,15 +20,19 @@ describe("<sgds-icon>", () => {
 
   it("handles invalid icon name gracefully", async () => {
     // Mock console to check if error is called
-    const consoleStub = Sinon.stub(console, "error");
+    const warnStub = Sinon.stub(console, "warn");
+
     const el = await fixture<SgdsIcon>(html`<sgds-icon name="invalid-icon"></sgds-icon>`);
     await el.updateComplete;
-    await waitUntil(() => consoleStub.calledOnce);
 
-    expect(consoleStub.calledOnce).to.be.true;
-    expect(el.shadowRoot?.querySelector("svg")).not.to.exist;
+    expect(warnStub.calledOnce).to.be.true;
+    expect(warnStub.firstCall.args[0]).to.include("Icon not found: invalid-icon");
 
-    consoleStub.restore();
+    // Since invalid icon, shadowRoot should be empty or not contain <svg>
+    const svg = el.shadowRoot?.querySelector("svg");
+    expect(svg).to.not.exist;
+
+    warnStub.restore();
   });
 
   it("should render icon when icon is available", async () => {
