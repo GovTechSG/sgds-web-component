@@ -51,7 +51,7 @@ export class SgdsSubnav extends SgdsElement {
   private mobileActions: HTMLElement;
 
   @state()
-  private isCollapsed = false;
+  private isCollapsed = window.innerWidth < LG_BREAKPOINT;
 
   @state()
   private isMenuOpen = false;
@@ -70,7 +70,9 @@ export class SgdsSubnav extends SgdsElement {
   }
 
   firstUpdated() {
-    this._updateMobileNavMaxHeight();
+    requestAnimationFrame(() => {
+      this._updateMobileLayout();
+    });
   }
 
   private _handleResize = () => {
@@ -80,16 +82,36 @@ export class SgdsSubnav extends SgdsElement {
       this.isMenuOpen = false;
     }
 
-    this._updateMobileNavMaxHeight();
+    this._updateMobileLayout();
   };
 
-  private _updateMobileNavMaxHeight = () => {
+  private _updateMobileLayout = () => {
     if (!this.nav || !this.subnav || !this.mobileActions || !this.mobileNav) return;
-    const { top: subnavTop } = this.nav.getBoundingClientRect();
-    const headerHeight = this.subnav.clientHeight;
-    const actionsButtonHeight = this.mobileActions.clientHeight;
-    const offset = subnavTop + headerHeight + actionsButtonHeight;
-    this.mobileNav.style.maxHeight = `calc(100dvh - ${offset}px)`;
+
+    const actionsSlot = this.shadowRoot?.querySelector('slot[name="actions"]') as HTMLSlotElement;
+
+    if (this.isCollapsed) {
+      const subnavHeight = this.nav.clientHeight;
+      const { top: subnavTop } = this.nav.getBoundingClientRect();
+      const headerHeight = this.subnav.clientHeight;
+      const actionsButtonHeight = this.mobileActions.clientHeight;
+      const offset = subnavTop + headerHeight + actionsButtonHeight;
+      this.mobileNav.style.maxHeight = `calc(100dvh - ${offset}px)`;
+      this.style.minHeight = `${subnavHeight}px`;
+
+      if (actionsSlot) {
+        const buttons = actionsSlot.assignedElements({ flatten: true });
+        buttons.forEach(el => el.setAttribute("fullWidth", "true"));
+      }
+    } else {
+      this.mobileNav.style.maxHeight = "none";
+      this.style.minHeight = "auto";
+
+      if (actionsSlot) {
+        const buttons = actionsSlot.assignedElements({ flatten: true });
+        buttons.forEach(el => el.removeAttribute("isCollapsed"));
+      }
+    }
   };
 
   private _handleSlotChange(e: Event) {

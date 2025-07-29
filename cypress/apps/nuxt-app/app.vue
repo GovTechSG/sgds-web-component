@@ -4,6 +4,7 @@
 <template>
   <div>
     <Masthead></Masthead>
+    <Subnav></Subnav>
     <Button></Button>
     <Accordion></Accordion>
     <Icon></Icon>
