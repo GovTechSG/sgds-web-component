@@ -11,10 +11,10 @@ describe("<sgds-modal>", () => {
     assert.shadowDom.equal(
       el,
       `
-   <div
-       class="modal"
-       hidden=""
-     >
+    <div
+      class="modal"
+      hidden=""
+    >
         <div class="modal-overlay"></div>
         <div
           class="modal-panel"
@@ -24,22 +24,23 @@ describe("<sgds-modal>", () => {
           aria-labelledby="title"
           tabindex="-1"
         >
-         <div class="modal-header">
-            <div class="modal-header__title-description">
-              <slot class="modal-title" id="title" name="title"></slot>
-              <slot name="description"></slot>
-            </div>
-            <sgds-close-button
-            class="modal-header__close"
-            ariaLabel="close modal"
-            size="md" 
-            variant="default"
-          ></sgds-close-button>
-          </div>
-          <div class="modal-body">
-            <slot>
-            </slot>
-          </div>
+          <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-header__title-description">
+                  <slot class="modal-title" id="title" name="title"></slot>
+                  <slot name="description"></slot>
+                </div>
+                <sgds-close-button
+                class="modal-header__close"
+                ariaLabel="close modal"
+                size="md" 
+                variant="default"
+              ></sgds-close-button>
+              </div>
+              <div class="modal-body">
+                <slot></slot>
+              </div>
+          </div class="modal=content">
           <div class="modal-footer">
             <slot name="footer">
             </slot>
@@ -176,5 +177,19 @@ describe("<sgds-modal>", () => {
   it("noCloseButton prop removes button from modal", async () => {
     const el = await fixture<SgdsModal>(html`<sgds-modal noCloseButton></sgds-modal>`);
     expect(el.shadowRoot?.querySelector("button.btn-close")).to.be.null;
+  });
+
+  it("should lock or unlock scrolling on body when modal opens or closes respectively", async () => {
+    document.body.style.overflow = "auto";
+    const el = await fixture<SgdsModal>(html` <sgds-modal open></sgds-modal> `);
+    el.open = true;
+    expect(document.body.style.overflow).to.equal("hidden");
+
+    const afterHideHandler = sinon.spy();
+    el.addEventListener("sgds-after-hide", afterHideHandler);
+    el.open = false;
+
+    await waitUntil(() => afterHideHandler.calledOnce);
+    expect(document.body.style.overflow).to.not.equal("hidden");
   });
 });
