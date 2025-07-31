@@ -146,4 +146,18 @@ describe("<sgds-drawer>", () => {
 
     expect(el.open).to.be.false;
   });
+
+  it("should lock or unlock scrolling on body when drawer opens or closes respectively", async () => {
+    document.body.style.overflow = "auto";
+    const el = await fixture<SgdsDrawer>(html` <sgds-drawer open></sgds-drawer> `);
+    el.open = true;
+    expect(document.body.style.overflow).to.equal("hidden");
+
+    const afterHideHandler = sinon.spy();
+    el.addEventListener("sgds-after-hide", afterHideHandler);
+    el.open = false;
+
+    await waitUntil(() => afterHideHandler.calledOnce);
+    expect(document.body.style.overflow).to.not.equal("hidden");
+  });
 });
