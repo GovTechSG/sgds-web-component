@@ -40,7 +40,7 @@ describe("<sgds-modal>", () => {
               <div class="modal-body">
                 <slot></slot>
               </div>
-          </div class="modal=content">
+          </div>
           <div class="modal-footer">
             <slot name="footer">
             </slot>
