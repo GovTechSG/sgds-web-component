@@ -100,7 +100,7 @@ export class SgdsModal extends SgdsElement {
 
     if (buttonElements.length <= 1) return;
 
-    if (panelWidth <= 360) {
+    if (panelWidth < 512 || (this.size === "fullscreen" && panelWidth < 768)) {
       buttonElements.forEach(buttonElement => {
         const button = buttonElement as SgdsButton;
         button.fullWidth = true;
