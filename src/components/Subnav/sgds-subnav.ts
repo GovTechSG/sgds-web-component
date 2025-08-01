@@ -51,13 +51,14 @@ export class SgdsSubnav extends SgdsElement {
   private mobileActions: HTMLElement;
 
   @state()
-  private isCollapsed = window.innerWidth < LG_BREAKPOINT;
+  private isCollapsed = true;
 
   @state()
   private isMenuOpen = false;
 
   connectedCallback() {
     super.connectedCallback();
+
     this._handleResize();
     window.addEventListener("resize", this._handleResize);
     window.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
@@ -65,14 +66,13 @@ export class SgdsSubnav extends SgdsElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
+
     window.removeEventListener("resize", this._handleResize);
     window.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
   }
 
   firstUpdated() {
-    requestAnimationFrame(() => {
-      this._updateMobileLayout();
-    });
+    this._updateMobileLayout();
   }
 
   private _handleResize = () => {
@@ -91,11 +91,11 @@ export class SgdsSubnav extends SgdsElement {
     const actionsSlot = this.shadowRoot?.querySelector('slot[name="actions"]') as HTMLSlotElement;
 
     if (this.isCollapsed) {
-      const subnavHeight = this.nav.clientHeight;
       const { top: subnavTop } = this.nav.getBoundingClientRect();
       const headerHeight = this.subnav.clientHeight;
       const actionsButtonHeight = this.mobileActions.clientHeight;
       const offset = subnavTop + headerHeight + actionsButtonHeight;
+      const subnavHeight = this.subnav.clientHeight + actionsButtonHeight;
       this.mobileNav.style.maxHeight = `calc(100dvh - ${offset}px)`;
       this.style.minHeight = `${subnavHeight}px`;
 
@@ -113,20 +113,6 @@ export class SgdsSubnav extends SgdsElement {
       }
     }
   };
-
-  private _handleSlotChange(e: Event) {
-    const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
-
-    if (this.isCollapsed) {
-      childElements.forEach(element => {
-        element.setAttribute("isCollapsed", `${this.isCollapsed}`);
-      });
-    } else {
-      childElements.forEach(element => {
-        element.removeAttribute("isCollapsed");
-      });
-    }
-  }
 
   private _handleClickOutOfElement(e: MouseEvent, self: HTMLElement) {
     if (!e.composedPath().includes(self) && !e.composedPath().includes(this.toggler)) {
@@ -243,7 +229,7 @@ export class SgdsSubnav extends SgdsElement {
             : html`
                 <div class="subnav-nav-group">
                   <div class="subnav-nav">
-                    <slot @slotchange="${this._handleSlotChange}"></slot>
+                    <slot></slot>
                   </div>
                   <div class="subnav-actions">
                     <slot name="actions"></slot>
@@ -260,7 +246,7 @@ export class SgdsSubnav extends SgdsElement {
                     hidden: !this.isMenuOpen && !isHydrated
                   })}
                 >
-                  <slot @slotchange="${this._handleSlotChange}"></slot>
+                  <slot></slot>
                 </div>
                 <div class="subnav-actions-mobile">
                   <slot name="actions"></slot>
