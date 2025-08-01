@@ -10,16 +10,6 @@
   max-width: var(--sgds-dimension-800);
 }
 
-:host([size="fullscreen"]) .modal-panel {
-  max-width: var(--sgds-dimension-1320);
-  padding: var(--sgds-padding-none);
-  margin: var(--sgds-margin-xl) var(--sgds-margin-xs);
-}
-
-:host(:not([size="fullscreen"])) .modal-panel {
-  background-color: var(--sgds-surface-default);
-}
-
 :host([size="fullscreen"]) .modal-overlay {
   background-color: var(--sgds-surface-default);
 }
@@ -51,14 +41,19 @@
 
 .modal-panel {
   width: 100%;
-  max-width: var(--sgds-dimension-640);
   border-radius: var(--sgds-border-radius-md);
-  padding: var(--sgds-padding-xl);
-  margin: var(--sgds-margin-2-xl) var(--sgds-margin-xs);
   position: relative;
   display: flex;
   flex-direction: column;
-  max-height: calc(100% - var(--sgds-margin-2-xl) - var(--sgds-margin-2-xl));
+  gap: var(--sgds-gap-2-xl);
+  margin: var(--sgds-margin-sm) var(--sgds-margin-xs);
+  max-height: calc(100% - var(--sgds-margin-sm) - var(--sgds-margin-sm));
+}
+
+:host(:not([size="fullscreen"])) .modal-panel {
+  background-color: var(--sgds-surface-default);
+  padding: var(--sgds-padding-xl);
+  max-width: var(--sgds-dimension-640);
 }
 
 .modal-panel:focus {
@@ -80,30 +75,37 @@
   right: calc(-1 * var(--sgds-padding-md));
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (min-width: 512px) {
   :host([size="fullscreen"]) .modal-panel {
-    margin: var(--sgds-margin-md)
+    margin: var(--sgds-margin-sm);
   } 
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
   :host([size="fullscreen"]) .modal-panel {
-    margin: var(--sgds-margin-sm)
+    margin: var(--sgds-margin-md);
+    max-height: calc(100% - var(--sgds-margin-md) - var(--sgds-margin-md));
   } 
 }
 
-@media screen and (max-width: 512px) {
+@media screen and (min-width: 1024px) {
   :host([size="fullscreen"]) .modal-panel {
-    margin: var(--sgds-margin-sm) var(--sgds-margin-xs)
+    margin: var(--sgds-margin-xl) var(--sgds-margin-xs);
+    max-height: calc(100% - var(--sgds-margin-xl) - var(--sgds-margin-xl));
+    max-width: var(--sgds-dimension-896);
   } 
 }
 
-/* Ensure there's enough vertical padding for phones that don't update vh when chrome appears (e.g. iPhone) */
-@media screen and (max-width: 420px) {
-  :host(:not([size="fullscreen"])) .modal-panel {
-    margin: var(--sgds-margin-sm) var(--sgds-margin-xs);
-    max-height: calc(100% - var(--sgds-margin-sm) - var(--sgds-margin-sm));
-  }
+@media screen and (min-width: 1280px) {
+  :host([size="fullscreen"]) .modal-panel {
+    max-width: var(--sgds-dimension-1176);
+  } 
+}
+
+@media screen and (min-width: 1440px) {
+  :host([size="fullscreen"]) .modal-panel {
+    max-width: var(--sgds-dimension-1320);
+  } 
 }
 
 .modal.show .modal-panel {
@@ -118,10 +120,15 @@
   justify-content: space-between;
   max-width: var(--sgds-dimension-872);
 }
+
 .modal-header__title-description {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-gap-xs);
+  gap: var(--sgds-gap-sm);
+}
+
+:host([size="fullscreen"]) .modal-header__title-description {
+  gap: var(--sgds-gap-md);
 }
 
 slot[name="title"]::slotted(*) {
