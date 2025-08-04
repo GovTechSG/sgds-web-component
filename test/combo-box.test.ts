@@ -6,6 +6,7 @@ import "./sgds-web-component";
 
 import type { SgdsBadge, SgdsButton, SgdsComboBox } from "../src/components";
 import type ComboBoxItem from "../src/components/ComboBox/combo-box-item";
+import SgdsCloseButton from "../src/internals/CloseButton/sgds-close-button";
 describe("sgds-combo-box ", () => {
   it("matches shadowDom semantically", async () => {
     const el = await fixture<SgdsComboBox>(html` <sgds-combo-box
@@ -460,6 +461,32 @@ describe("multi select combobox", () => {
     await sendKeys({ press: "Backspace" });
     await el.updateComplete;
     expect(el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']")).not.to.have.attribute("active");
+  });
+  it("when badge dismissed by mouseclick, menu and badges are sync", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`<sgds-combo-box
+        multiSelect
+        .menuList=${[
+          { label: "Apple", value: "option1" },
+          { label: "Apricot", value: "option2" },
+          { label: "Durian", value: "option3" }
+        ]}
+        value="option1;option2;option3"
+      ></sgds-combo-box>`
+    );
+    const badges = () => el.shadowRoot?.querySelectorAll("sgds-badge") as NodeListOf<SgdsBadge>;
+    expect(badges().length).to.equal(3);
+    const appleBadgeCloseButton = badges()[0].shadowRoot?.querySelector<SgdsCloseButton>("sgds-close-button");
+    appleBadgeCloseButton?.click();
+    await waitUntil(() => el.value === "option2;option3");
+    expect(badges()?.length).to.equal(2);
+    expect(badges()[0].textContent).to.equal("Apricot");
+    expect(badges()[1].textContent).to.equal("Durian");
+
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector("sgds-combo-box-item[value='option1']")).not.to.have.attribute("active");
+    expect(el.shadowRoot?.querySelector("sgds-combo-box-item[value='option2']")).to.have.attribute("active");
+    expect(el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']")).to.have.attribute("active");
   });
   it("when initial value is specified, input is populated, item is active", async () => {
     const el = await fixture<SgdsComboBox>(
