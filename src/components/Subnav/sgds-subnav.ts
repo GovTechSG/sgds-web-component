@@ -35,23 +35,23 @@ export class SgdsSubnav extends SgdsElement {
   @query("nav")
   private nav: HTMLElement;
 
-  @query(".subnav")
-  private subnav: HTMLElement;
-
-  @query(".subnav-nav-mobile")
+  @query(".subnav-nav")
   private mobileNav: HTMLElement;
+
+  @query(".header-container")
+  private headerContainer: HTMLElement;
 
   @query(".subnav-toggler")
   private toggler: HTMLElement;
 
-  @query(".subnav-dropdown")
-  private body: HTMLElement;
+  @query(".subnav-nav-group")
+  private navGroup: HTMLElement;
 
-  @query(".subnav-actions-mobile")
+  @query(".subnav-actions")
   private mobileActions: HTMLElement;
 
   @state()
-  private isCollapsed = true;
+  private isCollapsed = false;
 
   @state()
   private isMenuOpen = false;
@@ -59,58 +59,53 @@ export class SgdsSubnav extends SgdsElement {
   connectedCallback() {
     super.connectedCallback();
 
-    this._handleResize();
+    // this._handleResize();
     window.addEventListener("resize", this._handleResize);
-    window.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
+    window.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.navGroup));
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
 
     window.removeEventListener("resize", this._handleResize);
-    window.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
+    window.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.navGroup));
   }
 
   firstUpdated() {
-    this._updateMobileLayout();
+    this._handleResize();
   }
 
-  private _handleResize = () => {
+  private _handleResize = async () => {
     this.isCollapsed = window.innerWidth < LG_BREAKPOINT;
+
+    await this.updateComplete;
 
     if (!this.isCollapsed) {
       this.isMenuOpen = false;
+      this.mobileNav.style.display = "flex";
+    } else {
+      this.mobileNav.style.display = "none";
     }
 
     this._updateMobileLayout();
   };
 
   private _updateMobileLayout = () => {
-    if (!this.nav || !this.subnav || !this.mobileActions || !this.mobileNav) return;
-
-    const actionsSlot = this.shadowRoot?.querySelector('slot[name="actions"]') as HTMLSlotElement;
+    if (!this.nav || !this.headerContainer || !this.mobileActions || !this.mobileNav) return;
 
     if (this.isCollapsed) {
       const { top: subnavTop } = this.nav.getBoundingClientRect();
-      const headerHeight = this.subnav.clientHeight;
+      const headerHeight = this.headerContainer.clientHeight;
       const actionsButtonHeight = this.mobileActions.clientHeight;
       const offset = subnavTop + headerHeight + actionsButtonHeight;
-      const subnavHeight = this.subnav.clientHeight + actionsButtonHeight;
+      const subnavHeight = this.headerContainer.clientHeight + actionsButtonHeight;
       this.mobileNav.style.maxHeight = `calc(100dvh - ${offset}px)`;
       this.style.minHeight = `${subnavHeight}px`;
-
-      if (actionsSlot) {
-        const buttons = actionsSlot.assignedElements({ flatten: true });
-        buttons.forEach(el => el.setAttribute("fullWidth", "true"));
-      }
+      this.nav.style.position = "absolute";
     } else {
       this.mobileNav.style.maxHeight = "none";
       this.style.minHeight = "auto";
-
-      if (actionsSlot) {
-        const buttons = actionsSlot.assignedElements({ flatten: true });
-        buttons.forEach(el => el.removeAttribute("isCollapsed"));
-      }
+      this.nav.style.position = "relative";
     }
   };
 
@@ -161,11 +156,10 @@ export class SgdsSubnav extends SgdsElement {
     }
 
     await stopAnimations(this.mobileNav);
-    this.mobileNav.classList.remove("hidden");
+    this.mobileNav.style.display = "flex";
 
     const { keyframes, options } = getAnimation(this, "subnav.show");
     await animateTo(this.mobileNav, shimKeyframesHeightAuto(keyframes, this.mobileNav.scrollHeight), options);
-    // this.mobileNav.style.height = "auto";
 
     this.emit("sgds-after-show");
   }
@@ -181,8 +175,7 @@ export class SgdsSubnav extends SgdsElement {
 
     const { keyframes, options } = getAnimation(this, "subnav.hide");
     await animateTo(this.mobileNav, shimKeyframesHeightAuto(keyframes, this.mobileNav.scrollHeight), options);
-    this.mobileNav.classList.add("hidden");
-    // this.mobileNav.style.height = "auto";
+    this.mobileNav.style.display = "none";
 
     this.emit("sgds-after-hide");
   }
@@ -199,61 +192,33 @@ export class SgdsSubnav extends SgdsElement {
   }
 
   render() {
-    const isHydrated = this.hasUpdated;
-
     return html`
-      <nav
-        class=${classMap({
-          mobile: this.isCollapsed
-        })}
-        aria-label="Sub navigation"
-      >
+      <nav aria-label="Sub navigation">
         <div
           class=${classMap({
             "sgds-container": !this.isCollapsed,
             subnav: true,
-            mobile: this.isCollapsed,
             collapsed: !this.isMenuOpen
           })}
         >
-          <slot name="header"></slot>
-          ${this.isCollapsed
-            ? html`
-                <sgds-icon
-                  class="subnav-toggler"
-                  name="chevron-down"
-                  @click=${this._toggleMenu}
-                  aria-label="Toggle sub navigation"
-                ></sgds-icon>
-              `
-            : html`
-                <div class="subnav-nav-group">
-                  <div class="subnav-nav">
-                    <slot></slot>
-                  </div>
-                  <div class="subnav-actions">
-                    <slot name="actions"></slot>
-                  </div>
-                </div>
-              `}
+          <div class="header-container">
+            <slot name="header"></slot>
+            <sgds-icon
+              class="subnav-toggler"
+              name="chevron-down"
+              @click=${this._toggleMenu}
+              aria-label="Toggle sub navigation"
+            ></sgds-icon>
+          </div>
+          <div class="subnav-nav-group">
+            <div class="subnav-nav">
+              <slot></slot>
+            </div>
+            <div class="subnav-actions">
+              <slot name="actions"></slot>
+            </div>
+          </div>
         </div>
-        ${this.isCollapsed
-          ? html`
-              <div class="subnav-dropdown">
-                <div
-                  class=${classMap({
-                    "subnav-nav-mobile": true,
-                    hidden: !this.isMenuOpen && !isHydrated
-                  })}
-                >
-                  <slot></slot>
-                </div>
-                <div class="subnav-actions-mobile">
-                  <slot name="actions"></slot>
-                </div>
-              </div>
-            `
-          : nothing}
       </nav>
     `;
   }
