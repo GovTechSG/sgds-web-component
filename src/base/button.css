@@ -70,7 +70,9 @@
   line-height: var(--sgds-line-height-body);
   padding: 0px var(--sgds-padding-lg);
   min-width: var(--sgds-dimension-96);
+  width: inherit;
   height: var(--sgds-dimension-48);
+  white-space: nowrap;
   text-align: center;
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
