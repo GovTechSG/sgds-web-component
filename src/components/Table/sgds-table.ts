@@ -1,8 +1,12 @@
 import { html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property, queryAssignedNodes, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
+
 import tableStyle from "./table.css";
+import tableCellStyle from "./table-cell.css";
+import tableHeadStyle from "./table-head.css";
+import tableRowStyle from "./table-row.css";
 
 export type HeaderPosition = "horizontal" | "vertical" | "both";
 
@@ -39,6 +43,9 @@ export class SgdsTable extends SgdsElement {
   @property({ type: String, reflect: true }) headerPosition: HeaderPosition = "horizontal";
 
   /** @internal */
+  @state() tableContents: Array<Node> = [];
+
+  /** @internal */
   @state() originalTableData: Array<(string | number)[]> = [];
 
   connectedCallback() {
@@ -51,7 +58,7 @@ export class SgdsTable extends SgdsElement {
       return html`
         <thead>
           <tr>
-            ${this.rowHeader.map((header: string, index: number) => html` <th>${header}</th> `)}
+            ${this.rowHeader.map((header: string) => html` <th>${header}</th> `)}
           </tr>
         </thead>
         <tbody>
@@ -71,7 +78,7 @@ export class SgdsTable extends SgdsElement {
         <thead>
           <tr>
             <th></th>
-            ${this.rowHeader.map((header: string, index: number) => html` <th>${header}</th> `)}
+            ${this.rowHeader.map((header: string) => html` <th>${header}</th> `)}
           </tr>
         </thead>
         <tbody>
@@ -103,6 +110,16 @@ export class SgdsTable extends SgdsElement {
     }
   }
 
+  firstUpdated() {
+    const slot = this.shadowRoot.querySelector("#table-slot") as HTMLSlotElement;
+    this.tableContents = slot.assignedElements({ flatten: true });
+  }
+
+  private _handleSlotChange(e: Event) {
+    const childNodes = (e.target as HTMLSlotElement).assignedElements();
+    this.tableContents = childNodes;
+  }
+
   render() {
     return html`
       <div
@@ -115,11 +132,59 @@ export class SgdsTable extends SgdsElement {
         })}
         tabindex="0"
       >
-        <table class="table">
-          ${this._renderTable()}
-        </table>
+        <slot id="table-slot" class="table" @slotchange=${this._handleSlotChange}> </slot>
+
+        ${this.tableContents.length === 0
+          ? html`<table class="table">
+              ${this._renderTable()}
+            </table>`
+          : ""}
       </div>
     `;
+  }
+}
+
+export class SgdsTableCell extends SgdsElement {
+  static styles = [...SgdsElement.styles, tableCellStyle];
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.setAttribute("role", "cell");
+  }
+
+  render() {
+    return html` <slot class="table-cell"></slot> `;
+  }
+}
+
+export class SgdsTableHead extends SgdsElement {
+  static styles = [...SgdsElement.styles, tableHeadStyle];
+  @property({ type: Boolean, reflect: true }) border = true;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.setAttribute("role", "columnheader");
+
+    if (this.border) {
+      this.style.borderColor = "var(--sgds-border-color-emphasis)";
+    }
+  }
+
+  render() {
+    return html` <slot></slot> `;
+  }
+}
+
+export class SgdsTableRow extends SgdsElement {
+  static styles = [...SgdsElement.styles, tableRowStyle];
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.setAttribute("role", "row");
+  }
+
+  render() {
+    return html`<slot class="table-row}"></slot>`;
   }
 }
 

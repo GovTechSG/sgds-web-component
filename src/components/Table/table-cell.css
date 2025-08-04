@@ -1,5 +1,5 @@
 :host {
   display: table-cell;
-  border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
   padding: var(--sgds-padding-lg);
+  border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }

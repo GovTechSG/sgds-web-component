@@ -1,7 +1,6 @@
 :host {
-  display: table-header-group;
-}
-
-::slotted(sgds-table-row){
+  display: table-cell;
+  padding: var(--sgds-padding-lg);
   font-weight: bold!important;
+  border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }

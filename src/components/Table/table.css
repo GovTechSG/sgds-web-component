@@ -17,6 +17,7 @@ table {
 }
 
 .table {
+  display: table;
   border-color: var(--sgds-border-color-default);
   vertical-align: top;
   width: 100%;
