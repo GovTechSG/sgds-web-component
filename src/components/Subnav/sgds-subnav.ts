@@ -51,13 +51,14 @@ export class SgdsSubnav extends SgdsElement {
   private mobileActions: HTMLElement;
 
   @state()
-  private isCollapsed = false;
+  private isCollapsed = true;
 
   @state()
   private isMenuOpen = false;
 
   connectedCallback() {
     super.connectedCallback();
+
     this._handleResize();
     window.addEventListener("resize", this._handleResize);
     window.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
@@ -65,12 +66,13 @@ export class SgdsSubnav extends SgdsElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
+
     window.removeEventListener("resize", this._handleResize);
     window.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
   }
 
   firstUpdated() {
-    this._updateMobileNavMaxHeight();
+    this._updateMobileLayout();
   }
 
   private _handleResize = () => {
@@ -80,31 +82,37 @@ export class SgdsSubnav extends SgdsElement {
       this.isMenuOpen = false;
     }
 
-    this._updateMobileNavMaxHeight();
+    this._updateMobileLayout();
   };
 
-  private _updateMobileNavMaxHeight = () => {
+  private _updateMobileLayout = () => {
     if (!this.nav || !this.subnav || !this.mobileActions || !this.mobileNav) return;
-    const { top: subnavTop } = this.nav.getBoundingClientRect();
-    const headerHeight = this.subnav.clientHeight;
-    const actionsButtonHeight = this.mobileActions.clientHeight;
-    const offset = subnavTop + headerHeight + actionsButtonHeight;
-    this.mobileNav.style.maxHeight = `calc(100dvh - ${offset}px)`;
-  };
 
-  private _handleSlotChange(e: Event) {
-    const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
+    const actionsSlot = this.shadowRoot?.querySelector('slot[name="actions"]') as HTMLSlotElement;
 
     if (this.isCollapsed) {
-      childElements.forEach(element => {
-        element.setAttribute("isCollapsed", `${this.isCollapsed}`);
-      });
+      const { top: subnavTop } = this.nav.getBoundingClientRect();
+      const headerHeight = this.subnav.clientHeight;
+      const actionsButtonHeight = this.mobileActions.clientHeight;
+      const offset = subnavTop + headerHeight + actionsButtonHeight;
+      const subnavHeight = this.subnav.clientHeight + actionsButtonHeight;
+      this.mobileNav.style.maxHeight = `calc(100dvh - ${offset}px)`;
+      this.style.minHeight = `${subnavHeight}px`;
+
+      if (actionsSlot) {
+        const buttons = actionsSlot.assignedElements({ flatten: true });
+        buttons.forEach(el => el.setAttribute("fullWidth", "true"));
+      }
     } else {
-      childElements.forEach(element => {
-        element.removeAttribute("isCollapsed");
-      });
+      this.mobileNav.style.maxHeight = "none";
+      this.style.minHeight = "auto";
+
+      if (actionsSlot) {
+        const buttons = actionsSlot.assignedElements({ flatten: true });
+        buttons.forEach(el => el.removeAttribute("isCollapsed"));
+      }
     }
-  }
+  };
 
   private _handleClickOutOfElement(e: MouseEvent, self: HTMLElement) {
     if (!e.composedPath().includes(self) && !e.composedPath().includes(this.toggler)) {
@@ -221,7 +229,7 @@ export class SgdsSubnav extends SgdsElement {
             : html`
                 <div class="subnav-nav-group">
                   <div class="subnav-nav">
-                    <slot @slotchange="${this._handleSlotChange}"></slot>
+                    <slot></slot>
                   </div>
                   <div class="subnav-actions">
                     <slot name="actions"></slot>
@@ -238,7 +246,7 @@ export class SgdsSubnav extends SgdsElement {
                     hidden: !this.isMenuOpen && !isHydrated
                   })}
                 >
-                  <slot @slotchange="${this._handleSlotChange}"></slot>
+                  <slot></slot>
                 </div>
                 <div class="subnav-actions-mobile">
                   <slot name="actions"></slot>

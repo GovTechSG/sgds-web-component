@@ -1,11 +1,9 @@
 import { html } from "lit-html";
-import * as icons from "../../../src/components/Icon/icon-registry";
-import { pascalToKebab } from "../../../scripts/shared.mjs";
+import { iconRegistry } from "../../../src/components/Icon/icon-registry";
 
 export const Template = args => {
-  const iconNames = Object.keys(icons).map(i => pascalToKebab(i));
   return html` <div>
-    ${iconNames.map(
+    ${Object.keys(iconRegistry).map(
       i => html`
         <sgds-tooltip content=${i}>
           <sgds-icon name=${i} size=${args.size}></sgds-icon>

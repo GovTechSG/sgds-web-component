@@ -11,10 +11,10 @@ describe("<sgds-modal>", () => {
     assert.shadowDom.equal(
       el,
       `
-   <div
-       class="modal"
-       hidden=""
-     >
+    <div
+      class="modal"
+      hidden=""
+    >
         <div class="modal-overlay"></div>
         <div
           class="modal-panel"
@@ -24,21 +24,22 @@ describe("<sgds-modal>", () => {
           aria-labelledby="title"
           tabindex="-1"
         >
-         <div class="modal-header">
-            <div class="modal-header__title-description">
-              <slot class="modal-title" id="title" name="title"></slot>
-              <slot name="description"></slot>
-            </div>
-            <sgds-close-button
-            class="modal-header__close"
-            ariaLabel="close modal"
-            size="md" 
-            variant="default"
-          ></sgds-close-button>
-          </div>
-          <div class="modal-body">
-            <slot>
-            </slot>
+          <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-header__title-description">
+                  <slot class="modal-title" id="title" name="title"></slot>
+                  <slot name="description"></slot>
+                </div>
+                <sgds-close-button
+                class="modal-header__close"
+                ariaLabel="close modal"
+                size="md" 
+                variant="default"
+              ></sgds-close-button>
+              </div>
+              <div class="modal-body">
+                <slot></slot>
+              </div>
           </div>
           <div class="modal-footer">
             <slot name="footer">

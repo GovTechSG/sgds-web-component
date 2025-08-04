@@ -238,10 +238,16 @@
   --sgds-dimension-384: 384px;
   --sgds-dimension-480: 480px;
   --sgds-dimension-512: 512px;
+  --sgds-dimension-640: 640px;
   --sgds-dimension-688: 688px;
   --sgds-dimension-768: 768px;
+  --sgds-dimension-800: 800px;
+  --sgds-dimension-872: 872px;
+  --sgds-dimension-896: 896px;
   --sgds-dimension-1024: 1024px;
+  --sgds-dimension-1176: 1176px;
   --sgds-dimension-1280: 1280px;
+  --sgds-dimension-1320: 1320px;
   --sgds-dimension-1440: 1440px;
 
   /* Semantic - Padding */

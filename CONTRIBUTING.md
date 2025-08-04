@@ -116,7 +116,7 @@ Library publication is performed in workflow by github actions. When ready for p
 
 ##### Generate Changelog
 
-3. run `cz changelog` to update CHANGELOG.md file (ensure that you have set up [cz-cli](https://github.com/commitizen/cz-cli) globally)
+3. run `cz changelog` to update CHANGELOG.md file (ensure that you have set up [commitizen](https://commitizen-tools.github.io/commitizen/#installation) globally)
    \*\*`cz changelog` updates based on your local git tags
 4. Push the changes
 
