@@ -20,6 +20,7 @@ nav {
 
 .header-container {
   display: flex;
+  align-items: flex-start;
   gap: var(--sgds-gap-md);
   width: 100%;
   padding: var(--sgds-padding-md) var(--sgds-padding-lg);
@@ -101,7 +102,6 @@ slot[name="actions"]::slotted(*) {
 
   .subnav {
     flex-direction: row;
-    align-items: center; 
   }
 
   .subnav.collapsed {
@@ -136,7 +136,6 @@ slot[name="actions"]::slotted(*) {
 
   .subnav {
     flex-wrap: wrap;
-    align-items: flex-start;
     gap: var(--sgds-gap-xl);
     row-gap: var(--sgds-gap-none);
   }
@@ -157,16 +156,21 @@ slot[name="actions"]::slotted(*) {
   }
 
   .subnav-nav-group {
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     gap: var(--sgds-gap-xl);
-    flex: 1;
+    row-gap: var(--sgds-gap-none);
+    flex: inherit;
+    width: auto;
   }
 
   .subnav-nav {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--sgds-gap-lg);
+    row-gap: 0;
     align-items: center;
     flex-direction: row;
     overflow-y: inherit;
@@ -174,6 +178,7 @@ slot[name="actions"]::slotted(*) {
     position: inherit;
     background-color: inherit;
     border-bottom: var(--sgds-border-width-0);
+    width: auto;
   }
   
   .subnav-nav ::slotted(*) {
@@ -186,6 +191,7 @@ slot[name="actions"]::slotted(*) {
 
   .subnav-actions {
     padding: var(--sgds-padding-sm) var(--sgds-padding-none);
+    width: auto;
   }
 
   slot[name="actions"]::slotted(*) {
