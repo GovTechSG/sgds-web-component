@@ -1,4 +1,4 @@
 /** @format */
 
 import "@govtechsg/sgds-web-component/themes/day.css";
-import "@govtechsg/sgds-web-component/css/reboot.css";
+import "@govtechsg/sgds-web-component/css/sgds.css";
