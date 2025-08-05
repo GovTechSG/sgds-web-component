@@ -1,15 +1,17 @@
 import SgdsElement from "../../base/sgds-element";
-import { html, nothing } from "lit";
+import { html } from "lit";
 import { query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { watch } from "../../utils/watch";
 import { waitForEvent } from "../../utils/event";
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/animate";
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
-import { LG_BREAKPOINT } from "../../utils/breakpoints";
+import { LG_BREAKPOINT, MD_BREAKPOINT } from "../../utils/breakpoints";
 import SgdsIcon from "../Icon/sgds-icon";
 import subnavStyle from "./subnav.css";
 import gridStyle from "../../css/grid.css";
+
+const VALID_KEYS = ["Enter", " "];
 
 /**
  * @summary This component provides secondary navigation within a specific section or page. It typically appears below the main navigation and offers context-specific links or actions to help users explore related content.
@@ -82,9 +84,6 @@ export class SgdsSubnav extends SgdsElement {
 
     if (!this.isCollapsed) {
       this.isMenuOpen = false;
-      this.mobileNav.style.display = "flex";
-    } else {
-      this.mobileNav.style.display = "none";
     }
 
     this._updateMobileLayout();
@@ -97,10 +96,13 @@ export class SgdsSubnav extends SgdsElement {
       const { top: subnavTop } = this.nav.getBoundingClientRect();
       const headerHeight = this.headerContainer.clientHeight;
       const actionsButtonHeight = this.mobileActions.clientHeight;
-      const offset = subnavTop + headerHeight + actionsButtonHeight;
-      const subnavHeight = this.headerContainer.clientHeight + actionsButtonHeight;
+      const offset =
+        window.innerWidth >= MD_BREAKPOINT && window.innerWidth < LG_BREAKPOINT
+          ? subnavTop + headerHeight
+          : subnavTop + headerHeight + actionsButtonHeight;
+
       this.mobileNav.style.maxHeight = `calc(100dvh - ${offset}px)`;
-      this.style.minHeight = `${subnavHeight}px`;
+      this.style.minHeight = `${this.nav.clientHeight}px`;
       this.nav.style.position = "absolute";
     } else {
       this.mobileNav.style.maxHeight = "none";
@@ -125,6 +127,13 @@ export class SgdsSubnav extends SgdsElement {
 
     this.toggler?.focus();
   };
+
+  private async _onKeyboardToggle(event: KeyboardEvent) {
+    if (!VALID_KEYS.includes(event.key)) return;
+
+    event.preventDefault();
+    this._toggleMenu();
+  }
 
   /** Shows the menu. For when subnav is in the collapsed form */
   public async show() {
@@ -156,7 +165,9 @@ export class SgdsSubnav extends SgdsElement {
     }
 
     await stopAnimations(this.mobileNav);
-    this.mobileNav.style.display = "flex";
+    if (this.isCollapsed) {
+      this.mobileNav.style.display = "flex";
+    }
 
     const { keyframes, options } = getAnimation(this, "subnav.show");
     await animateTo(this.mobileNav, shimKeyframesHeightAuto(keyframes, this.mobileNav.scrollHeight), options);
@@ -175,7 +186,9 @@ export class SgdsSubnav extends SgdsElement {
 
     const { keyframes, options } = getAnimation(this, "subnav.hide");
     await animateTo(this.mobileNav, shimKeyframesHeightAuto(keyframes, this.mobileNav.scrollHeight), options);
-    this.mobileNav.style.display = "none";
+    if (this.isCollapsed) {
+      this.mobileNav.style.display = "none";
+    }
 
     this.emit("sgds-after-hide");
   }
@@ -191,12 +204,18 @@ export class SgdsSubnav extends SgdsElement {
     }
   }
 
+  @watch("isCollapsed", { waitUntilFirstUpdate: true })
+  async handleCollapsedChange() {
+    await this.updateComplete;
+    this.mobileNav.style.display = this.isCollapsed ? "none" : "flex";
+  }
+
   render() {
     return html`
       <nav aria-label="Sub navigation">
         <div
           class=${classMap({
-            "sgds-container": !this.isCollapsed,
+            "sgds-container": true,
             subnav: true,
             collapsed: !this.isMenuOpen
           })}
@@ -206,8 +225,11 @@ export class SgdsSubnav extends SgdsElement {
             <sgds-icon
               class="subnav-toggler"
               name="chevron-down"
+              tabindex="0"
               @click=${this._toggleMenu}
+              @keydown=${this._onKeyboardToggle}
               aria-label="Toggle sub navigation"
+              aria-expanded=${this.isMenuOpen}
             ></sgds-icon>
           </div>
           <div class="subnav-nav-group">
