@@ -37,6 +37,12 @@ slot[name="header"]::slotted(*) {
   transition: transform 0.2s ease-in-out;
 }
 
+.subnav-toggler:focus,
+.subnav-toggler:focus-visible {
+  box-shadow: var(--sgds-box-shadow-focus);
+  outline: 0;
+}
+
 .subnav:not(.collapsed) .subnav-toggler {
   transform: rotate(-180deg);
 }
@@ -82,16 +88,61 @@ slot[name="actions"]::slotted(*) {
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 512px) {
+  .subnav-actions {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 768px) {
   nav {
-    position: inherit;
+    border-bottom: var(--sgds-border-width-0);
   }
 
   .subnav {
     flex-direction: row;
+    align-items: center; 
+  }
+
+  .subnav.collapsed {
+    border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+  }
+
+  .header-container {
+    padding: var(--sgds-padding-lg) var(--sgds-padding-2-xl);
+  }
+
+  .subnav-nav {
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    background-color: var(--sgds-surface-default);
+    border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+  }
+  
+  .subnav-actions {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--sgds-padding-sm) var(--sgds-padding-2-xl) var(--sgds-padding-sm) var(--sgds-padding-none);
+    position: inherit;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  nav {
+    position: inherit;
+    border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+  }
+
+  .subnav {
     flex-wrap: wrap;
+    align-items: flex-start;
     gap: var(--sgds-gap-xl);
     row-gap: var(--sgds-gap-none);
+  }
+  
+  .subnav.collapsed {
+    border-bottom: var(--sgds-border-width-0);
   }
 
   .header-container {
@@ -120,6 +171,9 @@ slot[name="actions"]::slotted(*) {
     flex-direction: row;
     overflow-y: inherit;
     transition: none;
+    position: inherit;
+    background-color: inherit;
+    border-bottom: var(--sgds-border-width-0);
   }
   
   .subnav-nav ::slotted(*) {
@@ -131,11 +185,7 @@ slot[name="actions"]::slotted(*) {
   }
 
   .subnav-actions {
-    flex-direction: row;
-    align-items: center;
-    padding: var(--sgds-padding-none);
-    position: inherit;
-    flex: 0;
+    padding: var(--sgds-padding-sm) var(--sgds-padding-none);
   }
 
   slot[name="actions"]::slotted(*) {
