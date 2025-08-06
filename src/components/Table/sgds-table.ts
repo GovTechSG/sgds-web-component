@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { property, queryAssignedNodes, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 
@@ -11,7 +11,8 @@ import tableRowStyle from "./table-row.css";
 export type HeaderPosition = "horizontal" | "vertical" | "both";
 
 /**
- * @summary The use of a table is to organise a collections of data into readable rows
+ * @summary The use of a table is to organise a collections of data into readable rows.
+ * There are two ways to utilise the table, by structured element via slot or by array of data.
  */
 
 export class SgdsTable extends SgdsElement {
@@ -159,6 +160,9 @@ export class SgdsTableCell extends SgdsElement {
 
 export class SgdsTableHead extends SgdsElement {
   static styles = [...SgdsElement.styles, tableHeadStyle];
+  /**
+   * To indicate if the header will have a darker bottom border style
+   */
   @property({ type: Boolean, reflect: true }) border = true;
 
   connectedCallback() {
@@ -176,6 +180,10 @@ export class SgdsTableHead extends SgdsElement {
 }
 
 export class SgdsTableRow extends SgdsElement {
+  /**
+   * @summary Table row to group table cell or table head together as a single row
+   * @slot - Accepts any elements passed in
+   */
   static styles = [...SgdsElement.styles, tableRowStyle];
 
   connectedCallback() {
@@ -184,7 +192,7 @@ export class SgdsTableRow extends SgdsElement {
   }
 
   render() {
-    return html`<slot class="table-row}"></slot>`;
+    return html`<slot class="table-row"></slot>`;
   }
 }
 
