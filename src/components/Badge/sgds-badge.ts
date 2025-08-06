@@ -2,9 +2,9 @@ import { html, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
-import badgeStyle from "./badge.css";
-import { watch } from "../../utils/watch";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import { watch } from "../../utils/watch";
+import badgeStyle from "./badge.css";
 export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral";
 
 /**
@@ -14,7 +14,9 @@ export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral"
  * @slot icon - The slot for icon to the left of the badge text
  *
  * @event sgds-show - Emitted when the badge appears.
- * @event sgds-hide - Emitted after the badge closes.
+ * @event sgds-hide - Emitted when the badge is starting to close but has not closed.
+ * @event sgds-after-show - Emitted after the badge has appeared
+ * @event sgds-after-hide - Emitted after the badge has closed
  */
 export class SgdsBadge extends SgdsElement {
   static styles = [...SgdsElement.styles, badgeStyle];
@@ -43,7 +45,25 @@ export class SgdsBadge extends SgdsElement {
   /**@internal */
   @watch("show")
   _handleShowChange() {
-    this.show ? this.emit("sgds-show") : this.emit("sgds-hide");
+    if (this.show) {
+      const sgdsShow = this.emit("sgds-show", { cancelable: true });
+      if (sgdsShow.defaultPrevented) {
+        this.show = false;
+        return;
+      }
+      // animations if any go here
+
+      this.emit("sgds-after-show");
+    } else {
+      const sgdsHide = this.emit("sgds-hide", { cancelable: true });
+      if (sgdsHide.defaultPrevented) {
+        this.show = true;
+        return;
+      }
+      // animations if any go here
+
+      this.emit("sgds-after-hide");
+    }
   }
 
   render() {
