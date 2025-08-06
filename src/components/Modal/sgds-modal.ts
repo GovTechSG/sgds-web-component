@@ -14,6 +14,7 @@ import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 import modalStyle from "./modal.css";
 import headerStyles from "../../styles/header-class.css";
 import svgStyles from "../../styles/svg.css";
+import { SM_BREAKPOINT, MD_BREAKPOINT } from "../../utils/breakpoints";
 /**
  * @summary The modal component inform users about a specific task and may contain critical information which users then have to make a decision.
  *
@@ -100,7 +101,7 @@ export class SgdsModal extends SgdsElement {
 
     if (buttonElements.length <= 1) return;
 
-    if (panelWidth <= 360) {
+    if (panelWidth < SM_BREAKPOINT || (this.size === "fullscreen" && panelWidth < MD_BREAKPOINT)) {
       buttonElements.forEach(buttonElement => {
         const button = buttonElement as SgdsButton;
         button.fullWidth = true;
@@ -273,20 +274,22 @@ export class SgdsModal extends SgdsElement {
           aria-labelledby="title"
           tabindex="-1"
         >
-          <div class="modal-header">
-            <div class="modal-header__title-description">
-              <slot class="modal-title" id="title" name="title"></slot>
-              <slot name="description"></slot>
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="modal-header__title-description">
+                <slot class="modal-title" id="title" name="title"></slot>
+                <slot name="description"></slot>
+              </div>
+              <sgds-close-button
+                class="modal-header__close"
+                @click="${() => this.requestClose("close-button")}"
+                ariaLabel="close modal"
+              ></sgds-close-button>
             </div>
-            <sgds-close-button
-              class="modal-header__close"
-              @click="${() => this.requestClose("close-button")}"
-              ariaLabel="close modal"
-            ></sgds-close-button>
-          </div>
-          <div class="modal-body">
-            <slot></slot>
-          </div>
+            <div class="modal-body">
+              <slot></slot>
+            </div>
+          </div class="modal-content">
           <div class="modal-footer">
             <slot name="footer"></slot>
           </div>
