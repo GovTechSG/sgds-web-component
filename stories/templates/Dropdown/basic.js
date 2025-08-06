@@ -25,7 +25,10 @@ export const Template = ({
       ?menuIsOpen=${menuIsOpen}
       ?disabled=${disabled}
     >
-      <span slot="toggler">Dropdown</span>
+      <sgds-button slot="toggler" role="button">
+        Dropdown
+        <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
+      </sgds-button>
       <sgds-dropdown-item href=${ifDefined(href)} ?disabled=${disabled} ?active=${active} target=${ifDefined(target)}
         >item #1 (argsTable controlled)</sgds-dropdown-item
       >
@@ -43,7 +46,7 @@ export const args = {
 export const parameters = {
   docs: {
     story: {
-      height: "300px"
+      height: "600px"
     }
   }
 };

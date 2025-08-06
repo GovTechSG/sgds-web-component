@@ -3,6 +3,81 @@ import { expect, fixture, html } from "@open-wc/testing";
 import { SgdsTable } from "../src/components";
 import { SgdsTableRow } from "../lib/components";
 
+const mockRowHeader = [
+  {
+    key: "first-name",
+    value: "First Name"
+  },
+  {
+    key: "last-name",
+    value: "Last Name"
+  },
+  {
+    key: "email",
+    value: "Email"
+  },
+  {
+    key: "button",
+    value: "Button"
+  },
+  {
+    key: "action",
+    value: "Actions"
+  }
+];
+
+const mockTableData = [
+  {
+    email: "@alicedoe",
+    "first-name": "Alice",
+    "last-name": "Doe",
+    button: {
+      id: "email_button",
+      type: "button",
+      value: "@alicedoe",
+      variant: "outline"
+    },
+    action: [
+      {
+        id: "edit_btn",
+        type: "icon-button",
+        value: "edit",
+        variant: "outline"
+      },
+      {
+        id: "add_btn",
+        type: "icon-button",
+        value: "plus",
+        variant: "outline"
+      }
+    ]
+  },
+  {
+    email: "@johndoe",
+    "first-name": "John",
+    "last-name": "Doe",
+    button: {
+      id: "badge",
+      type: "badge",
+      value: "@johndoe",
+      variant: "outline"
+    },
+    action: [
+      {
+        id: "add_btn",
+        type: "icon-button",
+        value: "three-dots-vertical",
+        variant: "ghost"
+      },
+      {
+        id: "add_btn",
+        type: "icon-button",
+        value: "trash"
+      }
+    ]
+  }
+];
+
 describe("Table", () => {
   it("renders with default properties", async () => {
     const el = await fixture<SgdsTable>(html`<sgds-table></sgds-table>`);
@@ -14,19 +89,13 @@ describe("Table", () => {
   });
 
   it("renders with row headers", async () => {
-    const el = await fixture<SgdsTable>(html`<sgds-table .rowHeader=${["Name", "Age", "Country"]}></sgds-table>`);
-    expect(el.rowHeader).to.deep.equal(["Name", "Age", "Country"]);
+    const el = await fixture<SgdsTable>(html`<sgds-table .rowHeader=${mockRowHeader}></sgds-table>`);
+    expect(el.rowHeader).to.deep.equal(mockRowHeader);
   });
 
   it("renders table data correctly", async () => {
     const el = await fixture<SgdsTable>(
-      html`<sgds-table
-        .rowHeader=${["Name", "Age"]}
-        .tableData=${[
-          ["Alice", 25],
-          ["Bob", 30]
-        ]}
-      ></sgds-table>`
+      html`<sgds-table .rowHeader=${mockRowHeader} .tableData=${mockTableData}></sgds-table>`
     );
 
     await el.updateComplete;
@@ -34,7 +103,7 @@ describe("Table", () => {
     const rows = el.shadowRoot?.querySelectorAll("tbody tr");
     expect(rows?.length).to.equal(2);
     expect(rows?.[0].innerHTML).to.include("Alice");
-    expect(rows?.[1].innerHTML).to.include("Bob");
+    expect(rows?.[1].innerHTML).to.include("John");
   });
 
   it("renders with column headers in vertical mode", async () => {
@@ -42,10 +111,7 @@ describe("Table", () => {
       html`<sgds-table
         headerPosition="vertical"
         .columnHeader=${["Attribute", "Value"]}
-        .tableData=${[
-          ["Alice", 25],
-          ["Bob", 30]
-        ]}
+        .tableData=${mockTableData}
       ></sgds-table>`
     );
 
@@ -60,12 +126,9 @@ describe("Table", () => {
     const el = await fixture<SgdsTable>(
       html`<sgds-table
         headerPosition="both"
-        .rowHeader=${["Name", "Age"]}
+        .rowHeader=${mockRowHeader}
         .columnHeader=${["Person 1", "Person 2"]}
-        .tableData=${[
-          ["Alice", 25],
-          ["Bob", 30]
-        ]}
+        .tableData=${mockTableData}
       ></sgds-table>`
     );
     await el.updateComplete;

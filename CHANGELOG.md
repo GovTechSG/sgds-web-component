@@ -1,4 +1,79 @@
-## Unreleased
+## v3.1.1 (2025-07-29)
+
+### Fix
+
+- **subnav**: update active selector
+- **subnav**: apply gap for subnav item for external link icon
+- **subnav**: update active selector
+
+### Refactor
+
+- **icon**: update icon component for SSR support (#265)
+- **icon**: update icon component for SSR support
+
+## v3.1.0 (2025-07-28)
+
+### Feat
+
+- **Dropdown**: increase max height to 480 for menu
+- **Select**: disabled typing of input
+- **Select**: add Select component and refactor Combobox
+- **CheckboxGroup**: handle invalid on first render
+- **CheckboxGroup**: ensure that value is resetted to defaultValue when reset happens
+- **CheckboxGroup**: reset checkboxgroup in form context and validity during keyboard changes
+
+### Fix
+
+- **Dropdown**: use height inherit and apply 100% height for dropdown in mainnav dropdown
+- **Dropdown**: having a 100% height of its parent container
+- **DropdownItem**: click area bug (#266)
+- **DropdownItem**: click area bug
+
+### Refactor
+
+- **Select**: add select-item and clean up css
+
+## v3.1.0-rc.6 (2025-07-10)
+
+## v3.1.0-rc.5 (2025-07-07)
+
+### Fix
+
+- **Mainnav**: dependency changed to sgds-icon-button
+
+## v3.1.0-rc.4 (2025-07-07)
+
+## v3.1.0-rc.3 (2025-07-07)
+
+## v3.1.0-rc.2 (2025-07-05)
+
+## v3.1.0-rc.1 (2025-07-03)
+
+### Feat
+
+- **CheckboxGroup**: emit change event
+
+## v3.1.0-rc.0 (2025-07-03)
+
+### Feat
+
+- **checkboxgroup, checkbox**: initial implementation of validation in checkboxgroup
+- **subnav**: add subnav component
+
+### Fix
+
+- **checkbox**: value changes when checkbox is clicked, should not be the case
+- **accordion**: fix flickering issue of accordion body on page load with SSR (#258)
+- **accordion**: fix flickering issue of accordion body on page load with SSR
+- **mainnav**: update dependency to icon-button (#252)
+
+## v3.0.7-rc.0 (2025-07-10)
+
+### Fix
+
+- **mainnav**: change dependency from icon to icon-button
+- **switch**: hide label to avoid flex gap issue (#251)
+- **switch**: hide label to avoid flex gap issue
 
 ## v3.0.6 (2025-06-27)
 

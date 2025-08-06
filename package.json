@@ -1,6 +1,6 @@
 {
   "name": "@govtechsg/sgds-web-component",
-  "version": "3.1.0-rc.6",
+  "version": "3.1.1-rc.3",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "VITE_ENV=development vite --open",
     "preview": "VITE_ENV=production vite --open",
-    "build": "npm run build:react && rm -rf lib && rollup --config rollup.config.mjs && node ./scripts/frankBuild.js",
+    "build": "npm run build:react && rm -rf lib && rollup --config rollup.config.mjs && node ./scripts/frankBuild.js && npm run generate:icons",
     "build:react": "npm run cem && node ./scripts/makeReact.mjs",
     "build:readme": "gulp build-readme",
     "write:stories": "npm run cem && node ./scripts/generateStories.mjs && npm run concat:stories && npm run update:version",
@@ -26,7 +26,8 @@
     "storybook": "nodemon --exec \"npm run write:stories &&  STORYBOOK_ENV=development storybook dev -p 6006\" --watch stories/templates stories/getting-started -e js,mdx",
     "build-storybook": "npm run build && npm run write:stories && STORYBOOK_ENV=production storybook build",
     "trial-sb": "storybook dev",
-    "trial-sb-build": "storybook build"
+    "trial-sb-build": "storybook build",
+    "generate:icons": "node scripts/generateIconRegistry.js"
   },
   "author": "GovTechSG",
   "contributors": [
@@ -46,7 +47,7 @@
   "license": "MIT",
   "dependencies": {
     "@lit/context": "^1.1.3",
-    "@lit/react": "^1.0.6",
+    "@lit/react": "^1.0.7",
     "bootstrap": "^5.1.3",
     "date-fns": "^3.3.1",
     "imask": "^7.4.0",
