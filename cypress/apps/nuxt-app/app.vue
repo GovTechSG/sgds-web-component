@@ -8,5 +8,6 @@
     <Button></Button>
     <Accordion></Accordion>
     <Icon></Icon>
+    <Card></Card>
   </div>
 </template>

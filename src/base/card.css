@@ -2,6 +2,10 @@
   flex-direction: row;
 }
 
+:host([orientation="horizontal"]) .card-body {
+  flex: 1;
+}
+
 :host(:not([hideBorder])) .card {
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }
@@ -54,7 +58,7 @@
   border-radius: var(--sgds-border-radius-md);
   display: flex;
   flex-direction: column;
-  height: auto;
+  height: 100%;
   min-width: 0;
   position: relative;
   box-shadow: none;
@@ -97,7 +101,7 @@ a.card:not(.disabled):focus-visible {
   display: flex;
   flex-direction: column;
   gap: var(--sgds-gap-lg);
-  flex: 1;
+  flex: 1 1 auto;
   color: var(--sgds-body-color-default);
   padding: var(--sgds-padding-xl);
 }
@@ -146,7 +150,8 @@ slot[name="image"]::slotted(img) {
 }
 
 slot[name="link"]::slotted(*) {
-  margin-top: var(--sgds-padding-sm);
+  margin-top: auto;
+  padding-top: var(--sgds-padding-sm);
   font-weight: 700;
 }
 
@@ -155,6 +160,7 @@ slot[name="link"]::slotted(a) {
   gap: var(--sgds-gap-2-xs);
   color: var(--sgds-link-color-default);
   text-decoration: none !important;
+  height: auto !important;
 }
 
 slot[name="title"]::slotted(a:hover),
