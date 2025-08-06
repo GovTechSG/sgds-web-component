@@ -40,12 +40,7 @@ export class SgdsBadge extends SgdsElement {
 
   /** Closes the badge  */
   public close() {
-    const sgdsHide = this.emit("sgds-hide", { cancelable: true });
-    if (sgdsHide.defaultPrevented) {
-      return;
-    }
     this.show = false;
-    this.emit("sgds-after-hide");
   }
   /**@internal */
   @watch("show")
