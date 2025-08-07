@@ -166,7 +166,8 @@ export class SgdsComboBox extends SelectElement {
     this.value = this.selectedItems.map(i => i.value).join(";");
   }
 
-  private async _handleBadgeDismissed(item: SgdsComboBoxItemData) {
+  private async _handleBadgeDismissed(e: CustomEvent, item: SgdsComboBoxItemData) {
+    e.preventDefault();
     this.selectedItems = this.selectedItems.filter(i => i.value !== item.value);
     this.value = this.selectedItems.map(i => i.value).join(";");
   }
@@ -266,7 +267,7 @@ export class SgdsComboBox extends SelectElement {
                       variant="neutral"
                       show
                       dismissible
-                      @sgds-hide=${() => this._handleBadgeDismissed(item)}
+                      @sgds-hide=${e => this._handleBadgeDismissed(e, item)}
                       >${item.label}</sgds-badge
                     >`
                 )}

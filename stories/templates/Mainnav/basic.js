@@ -18,9 +18,9 @@ export const Template = ({ expand, brandHref, active, href, disabled, menuIsOpen
       </sgds-mainnav-item>
       <sgds-mainnav-dropdown ?active=${active} ?menuIsOpen=${menuIsOpen} close=${ifDefined(close)}>
         <span slot="toggler">Dropdown</span>
-        <sgds-dropdown-item href="https://google.com">Item 1</sgds-dropdown-item>
-        <sgds-dropdown-item href="#">Item 2</sgds-dropdown-item>
-        <sgds-dropdown-item href="#">Item 3</sgds-dropdown-item>
+        <sgds-dropdown-item><a href="https://google.com">Item 1</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
       </sgds-mainnav-dropdown>
       <sgds-mainnav-item slot="end">
         <a href="#">Contact Us</a>
