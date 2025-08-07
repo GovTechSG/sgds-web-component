@@ -18,15 +18,6 @@ const StretchedTemplate = () => {
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
-      <sgds-card stretchedLink>
-        <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
-        <span slot="subtitle">SUBTITLE</span>
-        <h3 slot="title">Stretched Link Card</h3>
-        <span slot="description">stretched link card</span>
-        <sgds-link slot="link">
-          <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
-        </sgds-link>
-      </sgds-card>
     </div>
   `;
 };
@@ -50,15 +41,6 @@ const DisabledTemplate = () => {
           height="300"
           src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80"
         />
-        <span slot="subtitle">SUBTITLE</span>
-        <h3 slot="title">Disabled Card</h3>
-        <span slot="description">disabled card</span>
-        <sgds-link slot="link">
-          <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
-        </sgds-link>
-      </sgds-card>
-      <sgds-card disabled>
-        <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Disabled Card</h3>
         <span slot="description">disabled card</span>
@@ -346,15 +328,6 @@ const TintedTemplate = () => {
         />
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Vertical Image Card</h3>
-        <span slot="description">vertical card with tinted background</span>
-        <sgds-link slot="link">
-          <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
-        </sgds-link>
-      </sgds-card>
-      <sgds-card tinted>
-        <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
-        <span slot="subtitle">SUBTITLE</span>
-        <h3 slot="title">Vertical Icon Card</h3>
         <span slot="description">vertical card with tinted background</span>
         <sgds-link slot="link">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
