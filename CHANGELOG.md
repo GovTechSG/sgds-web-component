@@ -1,3 +1,17 @@
+## v3.1.2 (2025-08-06)
+
+### Fix
+
+- paddings/margins/dimensions and add new primitives
+- **Badge**: remove duplicate sgds-hide sgds-after-hide
+- **ComboBox**: preventDefault in badge hide event to remove duplication of badge removal
+- **Badge**: event emissions sgds-hide and show to be cancellable by preventDefault
+
+### Refactor
+
+- use exported constants; add xs breakpoint
+- mobile-first styles, spacing and button group fix
+
 ## v3.1.1 (2025-07-29)
 
 ### Fix

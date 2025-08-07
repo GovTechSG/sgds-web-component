@@ -160,6 +160,7 @@ slot[name="link"]::slotted(a) {
   gap: var(--sgds-gap-2-xs);
   color: var(--sgds-link-color-default);
   text-decoration: none !important;
+  height: auto !important;
 }
 
 slot[name="title"]::slotted(a:hover),

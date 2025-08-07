@@ -67,7 +67,7 @@ describe("SgdsBadge component", () => {
     el.addEventListener("sgds-hide", spyHide);
     const closeBtn = el.shadowRoot?.querySelector<SgdsCloseButton>("sgds-close-button");
     closeBtn?.click();
-
+    await waitUntil(() => spyHide.calledOnce);
     expect(spyHide).to.be.calledOnce;
     await waitUntil(() => !el.show);
     expect(el.shadowRoot?.querySelector("div.badge")).not.to.exist;
