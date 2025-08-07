@@ -14,7 +14,6 @@ import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 import modalStyle from "./modal.css";
 import headerStyles from "../../styles/header-class.css";
 import svgStyles from "../../styles/svg.css";
-import { SM_BREAKPOINT, MD_BREAKPOINT } from "../../utils/breakpoints";
 /**
  * @summary The modal component inform users about a specific task and may contain critical information which users then have to make a decision.
  *
@@ -101,7 +100,7 @@ export class SgdsModal extends SgdsElement {
 
     if (buttonElements.length <= 1) return;
 
-    if (panelWidth < SM_BREAKPOINT || (this.size === "fullscreen" && panelWidth < MD_BREAKPOINT)) {
+    if (panelWidth < 512 || (this.size === "fullscreen" && panelWidth < 768)) {
       buttonElements.forEach(buttonElement => {
         const button = buttonElement as SgdsButton;
         button.fullWidth = true;

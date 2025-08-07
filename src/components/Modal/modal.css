@@ -14,6 +14,18 @@
   background-color: var(--sgds-surface-default);
 }
 
+:host([size="fullscreen"]) .modal-header {
+  padding: var(--sgds-padding-none) var(--sgds-padding-none) var(--sgds-padding-xl);
+}
+
+:host([size="fullscreen"]) .modal-body {
+  padding: var(--sgds-padding-none);
+}
+
+:host([size="fullscreen"]) .modal-footer {
+  padding: var(--sgds-padding-xl) var(--sgds-padding-none) var(--sgds-padding-none);
+}
+
 .modal {
   display: flex;
   justify-content: center;
