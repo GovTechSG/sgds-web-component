@@ -36,6 +36,7 @@
 
   <body>
     <div class="container">
+      <h3>Table - Structured elements with horizontal header</h3>
       <sgds-table>
         <sgds-table-row>
           <sgds-table-head>#</sgds-table-head>
@@ -86,39 +87,104 @@
     </div>
 
     <div class="container">
-      <sgds-table
-        headerPosition="vertical"
-        responsive="md"
-        columnheader='["#", "First Names", "Last Name", "Username"]'
-        rowheader='["#", "First Names", "Last Name", "Username"]'
-        tabledata='[
-        ["1", "John", "Doe", "@johndoe"],
-        ["2", "Jane", "Doe", "@janedoe"],
-        ["3", "Bob", "Smith", "@bobsmith"]
-        ]'
-      />
-    </div>
-
-    <div class="container">
-      <sgds-table
-        headerPosition="both"
-        responsive="md"
-        columnheader='["First Names", "Last Name", "Username"]'
-        rowheader='["#", "First Names", "Last Name", "Username"]'
-        tabledata='[
-        ["1", "John", "Doe", "@johndoe"],
-        ["2", "Jane", "Doe", "@janedoe"],
-        ["3", "Bob", "Smith", "@bobsmith"]
-        ]'
-      >
+      <h3>Table - Structured elements with vertical header</h3>
+      <sgds-table>
+        <sgds-table-row>
+          <sgds-table-head noborder>1</sgds-table-head>
+          <sgds-table-cell>John</sgds-table-cell>
+          <sgds-table-cell>Doe</sgds-table-cell>
+          <sgds-table-cell>
+            <sgds-link>
+              <a href="#">@johndoe</a>
+            </sgds-link>
+          </sgds-table-cell>
+          <sgds-table-cell>
+            <sgds-icon-button name="three-dots-vertical"></sgds-icon-button>
+          </sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-head noborder>2</sgds-table-head>
+          <sgds-table-cell>Jane</sgds-table-cell>
+          <sgds-table-cell>Doe</sgds-table-cell>
+          <sgds-table-cell>
+            <sgds-link>
+              <a href="#">@janedoe</a>
+            </sgds-link>
+          </sgds-table-cell>
+          <sgds-table-cell>-</sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-head noborder>3</sgds-table-head>
+          <sgds-table-cell>Bob</sgds-table-cell>
+          <sgds-table-cell>Smith</sgds-table-cell>
+          <sgds-table-cell>
+            <sgds-link>
+              <a href="#">@bobsmith</a>
+            </sgds-link>
+          </sgds-table-cell>
+          <sgds-table-cell>
+            <sgds-badge outlined> active </sgds-badge>
+          </sgds-table-cell>
+        </sgds-table-row>
       </sgds-table>
     </div>
 
     <div class="container">
+      <h3>Table - Structured elements with both header</h3>
+      <sgds-table>
+        <sgds-table-row>
+          <sgds-table-head>#</sgds-table-head>
+          <sgds-table-head>First name</sgds-table-head>
+          <sgds-table-head>Last name</sgds-table-head>
+          <sgds-table-head>Username</sgds-table-head>
+          <sgds-table-head>Action</sgds-table-head>
+        </sgds-table-row>
+
+        <sgds-table-row>
+          <sgds-table-head noborder>1</sgds-table-head>
+          <sgds-table-cell>John</sgds-table-cell>
+          <sgds-table-cell>Doe</sgds-table-cell>
+          <sgds-table-cell>
+            <sgds-link>
+              <a href="#">@johndoe</a>
+            </sgds-link>
+          </sgds-table-cell>
+          <sgds-table-cell>
+            <sgds-icon-button name="three-dots-vertical"></sgds-icon-button>
+          </sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-head noborder>2</sgds-table-head>
+          <sgds-table-cell>Jane</sgds-table-cell>
+          <sgds-table-cell>Doe</sgds-table-cell>
+          <sgds-table-cell>
+            <sgds-link>
+              <a href="#">@janedoe</a>
+            </sgds-link>
+          </sgds-table-cell>
+          <sgds-table-cell>-</sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-head noborder>3</sgds-table-head>
+          <sgds-table-cell>Bob</sgds-table-cell>
+          <sgds-table-cell>Smith</sgds-table-cell>
+          <sgds-table-cell>
+            <sgds-link>
+              <a href="#">@bobsmith</a>
+            </sgds-link>
+          </sgds-table-cell>
+          <sgds-table-cell>
+            <sgds-badge outlined> active </sgds-badge>
+          </sgds-table-cell>
+        </sgds-table-row>
+      </sgds-table>
+    </div>
+
+    <div class="container">
+      <h3>Table - table data with horizontal header</h3>
       <sgds-table
         headerPosition="horizontal"
         responsive="md"
-        columnheader='["#", "First Names", "Last Name", "Username"]'
         rowheader='["#", "First Names", "Last Name", "Username"]'
         tabledata='[
         ["1", "John", "Doe", "@johndoe"],
@@ -126,6 +192,36 @@
         ["3", "Bob", "Smith", "@bobsmith"]
         ]'
       />
+    </div>
+
+    <div class="container">
+      <h3>Table - table data with vertical header</h3>
+      <sgds-table
+        headerPosition="vertical"
+        responsive="md"
+        columnheader='["1", "2", "3"]'
+        tabledata='[
+        ["John", "Doe", "@johndoe"],
+        ["Jane", "Doe", "@janedoe"],
+        ["Bob", "Smith", "@bobsmith"]
+        ]'
+      />
+    </div>
+
+    <div class="container">
+      <h3>Table - table data with both header</h3>
+      <sgds-table
+        headerPosition="both"
+        responsive="md"
+        rowheader='["First Names", "Last Name", "Username"]'
+        columnheader='["1", "2", "3"]'
+        tabledata='[
+        ["John", "Doe", "@johndoe"],
+        ["Jane", "Doe", "@janedoe"],
+        ["Bob", "Smith", "@bobsmith"]
+        ]'
+      >
+      </sgds-table>
     </div>
   </body>
 </html>
