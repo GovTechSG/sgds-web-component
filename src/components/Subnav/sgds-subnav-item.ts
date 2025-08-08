@@ -11,8 +11,8 @@ import subnavItemStyle from "./subnav-item.css";
 export class SgdsSubnavItem extends SgdsElement {
   static styles = [...SgdsElement.styles, subnavItemStyle];
 
-  /** when true, sets the active stylings of .nav-link */
-  @property({ type: Boolean })
+  /** when true, sets the active stylings of the navigation item */
+  @property({ type: Boolean, reflect: true })
   active = false;
 
   /** Disables the SgdsSubnavItem */
