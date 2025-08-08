@@ -1,13 +1,16 @@
 import { html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
+
 import tableStyle from "./table.css";
 
 export type HeaderPosition = "horizontal" | "vertical" | "both";
 
 /**
- * @summary The use of a table is to organise a collections of data into readable rows
+ * @summary The use of a table is to organise a collections of data into readable rows.
+ * There are two ways to utilise the table, by structured element via slot or by array of data.
+ * @slot - Accepts any elements passed in, used for structured element method
  */
 
 export class SgdsTable extends SgdsElement {
@@ -38,8 +41,10 @@ export class SgdsTable extends SgdsElement {
    */
   @property({ type: String, reflect: true }) headerPosition: HeaderPosition = "horizontal";
 
-  /** @internal */
-  @state() originalTableData: Array<(string | number)[]> = [];
+  @queryAssignedElements({ flatten: true, selector: "#table-slot" })
+  private tableContents!: Node[];
+
+  @state() private originalTableData: Array<(string | number)[]> = [];
 
   connectedCallback() {
     super.connectedCallback();
@@ -51,7 +56,7 @@ export class SgdsTable extends SgdsElement {
       return html`
         <thead>
           <tr>
-            ${this.rowHeader.map((header: string, index: number) => html` <th>${header}</th> `)}
+            ${this.rowHeader.map((header: string) => html` <th>${header}</th> `)}
           </tr>
         </thead>
         <tbody>
@@ -71,7 +76,7 @@ export class SgdsTable extends SgdsElement {
         <thead>
           <tr>
             <th></th>
-            ${this.rowHeader.map((header: string, index: number) => html` <th>${header}</th> `)}
+            ${this.rowHeader.map((header: string) => html` <th>${header}</th> `)}
           </tr>
         </thead>
         <tbody>
@@ -103,6 +108,11 @@ export class SgdsTable extends SgdsElement {
     }
   }
 
+  private _handleSlotChange(e: Event) {
+    const childNodes = (e.target as HTMLSlotElement).assignedElements();
+    this.tableContents = childNodes;
+  }
+
   render() {
     return html`
       <div
@@ -115,9 +125,13 @@ export class SgdsTable extends SgdsElement {
         })}
         tabindex="0"
       >
-        <table class="table">
-          ${this._renderTable()}
-        </table>
+        <slot id="table-slot" class="table" @slotchange=${this._handleSlotChange}> </slot>
+
+        ${this.tableContents.length === 0
+          ? html`<table class="table">
+              ${this._renderTable()}
+            </table>`
+          : ""}
       </div>
     `;
   }
