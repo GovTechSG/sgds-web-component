@@ -48,10 +48,18 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
   /** When true, adds disabled attribute to input and button element */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** Sets the initial value of the datepicker. Replaces deprecated `initialValue` */
-  @property({type: String, reflect: true}) value: string;
+  /** Sets the initial value of the datepicker. Replaces deprecated `initialValue`.
+   * Pass in dates in this format `dd/mm/yyyy` for single mode and  `dd/mm/yyyy - dd/mm/yyyy` for range mode
+   * For example, `value="22/12/2023"` for single mode or `value="22/12/2023 - 25/12/2023"` for range mode
+   */
+  @property({ type: String, reflect: true }) value = "";
 
-  /** @deprecated since v3.1.1. The initial value of DatePicker on first load for single & range mode as array of string. eg.'["22/12/2023"]' for single & '["22/12/2023","25/12/2023"]' for range respectively  */
+  /**
+   * @deprecated since v3.1.1 in favour of `value`.
+   * The initial value of DatePicker on first load for single &
+   * range mode as array of string. eg.'["22/12/2023"]' for single &
+   * '["22/12/2023","25/12/2023"]' for range respectively
+   * */
   @property({ type: Array, reflect: true }) initialValue: string[] = [];
 
   private dateFormat = "DD/MM/YYYY";
@@ -93,7 +101,6 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
 
   @state()
   private view: ViewEnum = "days";
-    
 
   @state() private selectedDateRange: Date[] = [];
 
@@ -164,9 +171,8 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     this.addEventListener("sgds-hide", this._handleCloseMenu);
     this.addEventListener("sgds-show", this._handleOpenMenu);
     this.addEventListener("blur", this._mixinCheckValidity);
-    
-    this.initialValue = this.value ? this.value.split(" - ").map(v => v.trim()): []
-    console.log(this.initialValue, "initial value")
+
+    this.initialValue = this.value ? this.value.split(" - ").map(v => v.trim()) : this.initialValue;
     this.initialDisplayDate = this.displayDate || new Date();
     if (this.initialValue && this.initialValue.length > 0) {
       // Validate initialValue against the dateFormat regex
@@ -174,7 +180,6 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
       // const startDateString = this.initialValue[0];
       const invalidDates = this.initialValue.filter(v => !dateFormatRegex.test(v));
       if (invalidDates.length > 0) {
-        console.log({invalidDates})
         return console.error("Invalid date format in initialValue:", invalidDates);
       } else {
         const initialSelectedDates = this.initialValue.map(v =>
@@ -184,7 +189,6 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
       }
     } else {
       this.displayDate = this.initialDisplayDate;
-      console.log(this.displayDate, "hhhh")
     }
   }
 
@@ -229,7 +233,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     }
   }
 
-  @watch("value")
+  @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
     this.emit("sgds-change-date");
   }
