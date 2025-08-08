@@ -11,8 +11,8 @@ import mainnavItemStyle from "./mainnav-item.css";
 export class SgdsMainnavItem extends SgdsElement {
   static styles = [...SgdsElement.styles, mainnavItemStyle];
 
-  /** when true, sets the active stylings of .nav-link */
-  @property({ type: Boolean })
+  /** when true, sets the active stylings of the navigation item */
+  @property({ type: Boolean, reflect: true })
   active = false;
 
   /** Disables the SgdsMainnavItem */
