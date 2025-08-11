@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { property, queryAssignedElements, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 
@@ -8,9 +8,10 @@ import tableStyle from "./table.css";
 export type HeaderPosition = "horizontal" | "vertical" | "both";
 
 /**
- * @summary The use of a table is to organise a collections of data into readable rows.
- * There are two ways to utilise the table, by structured element via slot or by array of data.
- * @slot - Accepts any elements passed in, used for structured element method
+ * @summary Provides a flexible table for displaying collections of data in organized rows and columns.
+ * The table supports two rendering methods: supply an array of data for automatic table generation, or use the slot to insert custom table elements for full structural control.
+ *
+ * @slot - Insert custom table elements (such as rows, headers, or cells) to define the table structure manually.
  */
 
 export class SgdsTable extends SgdsElement {
@@ -41,8 +42,7 @@ export class SgdsTable extends SgdsElement {
    */
   @property({ type: String, reflect: true }) headerPosition: HeaderPosition = "horizontal";
 
-  @queryAssignedElements({ flatten: true, selector: "#table-slot" })
-  private tableContents!: Node[];
+  @state() private tableContents: Element[] = [];
 
   @state() private originalTableData: Array<(string | number)[]> = [];
 
@@ -125,7 +125,7 @@ export class SgdsTable extends SgdsElement {
         })}
         tabindex="0"
       >
-        <slot id="table-slot" class="table" @slotchange=${this._handleSlotChange}> </slot>
+        <slot id="table-slot" class="table" @slotchange=${this._handleSlotChange}></slot>
 
         ${this.tableContents.length === 0
           ? html`<table class="table">

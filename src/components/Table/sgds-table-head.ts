@@ -7,8 +7,10 @@ import tableHeadStyle from "./table-head.css";
 export type HeaderPosition = "horizontal" | "vertical" | "both";
 
 /**
- * @summary Table head defines a cell as a header of a group of information
- * @slot - Accepts any elements passed in
+ * @summary Represents a table header cell that identifies a group of information within the table.
+ * The table head is typically styled with bold text and may include an optional darker bottom border for emphasis.
+ *
+ * @slot - Place any elements inside to display as the header content.
  */
 export class SgdsTableHead extends SgdsElement {
   static styles = [...SgdsElement.styles, tableHeadStyle];
