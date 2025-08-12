@@ -4,6 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 
 import tableStyle from "./table.css";
+import { HasSlotController } from "../../utils/slot";
 
 export type HeaderPosition = "horizontal" | "vertical" | "both";
 
@@ -42,13 +43,11 @@ export class SgdsTable extends SgdsElement {
    */
   @property({ type: String, reflect: true }) headerPosition: HeaderPosition = "horizontal";
 
-  @state() private tableContents: Element[] = [];
-
-  @state() private originalTableData: Array<(string | number)[]> = [];
+  /** @internal */
+  private readonly hasSlotController = new HasSlotController(this, "[default]");
 
   connectedCallback() {
     super.connectedCallback();
-    this.originalTableData = [...this.tableData];
   }
 
   private _renderTable() {
@@ -108,12 +107,9 @@ export class SgdsTable extends SgdsElement {
     }
   }
 
-  private _handleSlotChange(e: Event) {
-    const childNodes = (e.target as HTMLSlotElement).assignedElements();
-    this.tableContents = childNodes;
-  }
-
   render() {
+    const hasDefaultSlot = this.hasSlotController.test("[default]");
+
     return html`
       <div
         class=${classMap({
@@ -125,9 +121,9 @@ export class SgdsTable extends SgdsElement {
         })}
         tabindex="0"
       >
-        <slot id="table-slot" class="table" @slotchange=${this._handleSlotChange}></slot>
+        <slot id="table-slot" class="table"></slot>
 
-        ${this.tableContents.length === 0
+        ${!hasDefaultSlot
           ? html`<table class="table">
               ${this._renderTable()}
             </table>`

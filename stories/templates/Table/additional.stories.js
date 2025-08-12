@@ -53,7 +53,7 @@ const StructuredElementsTemplate = () => html`
 const StructuredElementsTemplateVertical = () => html`
   <sgds-table>
     <sgds-table-row>
-      <sgds-table-head noborder>1</sgds-table-head>
+      <sgds-table-head>1</sgds-table-head>
       <sgds-table-cell>John</sgds-table-cell>
       <sgds-table-cell>Doe</sgds-table-cell>
       <sgds-table-cell>
@@ -66,7 +66,7 @@ const StructuredElementsTemplateVertical = () => html`
       </sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
-      <sgds-table-head noborder>2</sgds-table-head>
+      <sgds-table-head>2</sgds-table-head>
       <sgds-table-cell>Jane</sgds-table-cell>
       <sgds-table-cell>Doe</sgds-table-cell>
       <sgds-table-cell>
@@ -77,7 +77,7 @@ const StructuredElementsTemplateVertical = () => html`
       <sgds-table-cell>-</sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
-      <sgds-table-head noborder>3</sgds-table-head>
+      <sgds-table-head>3</sgds-table-head>
       <sgds-table-cell>Bob</sgds-table-cell>
       <sgds-table-cell>Smith</sgds-table-cell>
       <sgds-table-cell>
@@ -102,7 +102,7 @@ const StructuredElementsTemplateBoth = () => html`<sgds-table>
   </sgds-table-row>
 
   <sgds-table-row>
-    <sgds-table-head noborder>1</sgds-table-head>
+    <sgds-table-head>1</sgds-table-head>
     <sgds-table-cell>John</sgds-table-cell>
     <sgds-table-cell>Doe</sgds-table-cell>
     <sgds-table-cell>
@@ -115,7 +115,7 @@ const StructuredElementsTemplateBoth = () => html`<sgds-table>
     </sgds-table-cell>
   </sgds-table-row>
   <sgds-table-row>
-    <sgds-table-head noborder>2</sgds-table-head>
+    <sgds-table-head>2</sgds-table-head>
     <sgds-table-cell>Jane</sgds-table-cell>
     <sgds-table-cell>Doe</sgds-table-cell>
     <sgds-table-cell>
@@ -126,7 +126,7 @@ const StructuredElementsTemplateBoth = () => html`<sgds-table>
     <sgds-table-cell>-</sgds-table-cell>
   </sgds-table-row>
   <sgds-table-row>
-    <sgds-table-head noborder>3</sgds-table-head>
+    <sgds-table-head>3</sgds-table-head>
     <sgds-table-cell>Bob</sgds-table-cell>
     <sgds-table-cell>Smith</sgds-table-cell>
     <sgds-table-cell>

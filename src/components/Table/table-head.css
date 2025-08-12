@@ -4,3 +4,7 @@
   font-weight: bold;
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-emphasis);
 }
+
+:host(:not([border])){
+  border-color: var(--sgds-border-color-muted);
+ }
