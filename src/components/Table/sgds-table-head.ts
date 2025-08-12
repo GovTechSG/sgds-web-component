@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { state } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 
 import tableHeadStyle from "./table-head.css";
