@@ -1,3 +1,26 @@
+## v3.2.0 (2025-08-13)
+
+### Fix
+
+- **card**: stretched link prop not working when slotting in sgds-link (#273)
+- **Toast**: missing gap between title and body (#277)
+- **Toast**: missing gap between title and body
+
+## v3.1.2-rc.0 (2025-08-08)
+
+### Feat
+
+- **Table**: added new implementation for table with dynamic columns
+
+### Fix
+
+- **mainnav**: add reflect prop to properly reflect it in the DOM
+- **subnav**: add reflect prop to properly reflect it in the DOM
+- **card**: stretched link prop not working when slotting in sgds-link
+- **subnav**: remove the usage of window object in default state (#270)
+- **subnav**: separate logic from ui rendering
+- **subnav**: remove the usage of window object in default state
+
 ## v3.1.2 (2025-08-06)
 
 ### Fix
