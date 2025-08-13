@@ -2,6 +2,7 @@ import { html, literal } from "lit/static-html.js";
 import { property, query, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
+import SgdsLink from "../Link/sgds-link";
 import cardStyle from "./card.css";
 
 export type CardImageAdjustment = "default" | "padding around" | "aspect ratio";
@@ -77,19 +78,21 @@ export class SgdsCard extends CardElement {
   handleLinkSlotChange(e: Event) {
     const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as
       | Array<HTMLLinkElement>
-      | Array<HTMLAnchorElement>;
+      | Array<HTMLAnchorElement>
+      | Array<SgdsLink>;
 
     if (childNodes.length > 1) {
       return console.error("Multiple elements passed into SgdsCard's link slot");
     }
 
-    if (this.stretchedLink && childNodes[0] instanceof HTMLAnchorElement) {
-      const hyperlink = childNodes[0].querySelector("a") || childNodes[0];
+    if (!this.stretchedLink) return;
+
+    if (childNodes[0] instanceof HTMLAnchorElement || childNodes[0] instanceof SgdsLink) {
+      const hyperlink = (childNodes[0].querySelector("a") || childNodes[0]) as HTMLAnchorElement;
       this.card.setAttribute("href", hyperlink.href);
       const linkSlot = this.shadowRoot.querySelector("slot[name='link']") as HTMLSlotElement;
       linkSlot.style.display = "none";
     }
-    return;
   }
 
   handleImgSlotChange(e: Event) {
