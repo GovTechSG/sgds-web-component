@@ -1,6 +1,7 @@
 import "./sgds-web-component";
-import { assert, expect, fixture, html } from "@open-wc/testing";
-import { SgdsTable } from "../src/components";
+import { expect, fixture, html } from "@open-wc/testing";
+import { SgdsTable } from "../src/components/Table/sgds-table";
+import { SgdsTableRow } from "../src/components/Table/sgds-table-row";
 
 describe("Table", () => {
   it("renders with default properties", async () => {
@@ -90,6 +91,114 @@ describe("Table", () => {
   it("Should have responsive breakpoints", async () => {
     const el = await fixture<SgdsTable>(html`<sgds-table responsive="md"></sgds-table>`);
     expect(el.shadowRoot?.querySelector("div")?.classList.contains("table-responsive-md")).to.be.true;
+  });
+
+  it("Should render all content passed in slot, without the provided table data", async () => {
+    const el = await fixture<SgdsTable>(html`<sgds-table
+      responsive="md"
+      .rowHeader=${["Name", "Age"]}
+      .tableData=${[
+        ["Alice", 25],
+        ["Bob", 30]
+      ]}
+    >
+      <sgds-table-row>
+        <sgds-table-head>#</sgds-table-head>
+        <sgds-table-head>First name</sgds-table-head>
+        <sgds-table-head>Last name</sgds-table-head>
+        <sgds-table-head>Username</sgds-table-head>
+        <sgds-table-head>Action</sgds-table-head>
+      </sgds-table-row>
+
+      <sgds-table-row>
+        <sgds-table-cell>1</sgds-table-cell>
+        <sgds-table-cell>John</sgds-table-cell>
+        <sgds-table-cell>Doe</sgds-table-cell>
+        <sgds-table-cell>
+          <sgds-link>
+            <a href="#">@johndoe</a>
+          </sgds-link>
+        </sgds-table-cell>
+        <sgds-table-cell> </sgds-table-cell>
+      </sgds-table-row>
+
+      <sgds-table-row>
+        <sgds-table-cell>2</sgds-table-cell>
+        <sgds-table-cell>Jane</sgds-table-cell>
+        <sgds-table-cell>Doe</sgds-table-cell>
+        <sgds-table-cell>
+          <sgds-link>
+            <a href="#">@janedoe</a>
+          </sgds-link>
+        </sgds-table-cell>
+        <sgds-table-cell>
+          <sgds-icon-button name="three-dots-vertical"></sgds-icon-button>
+        </sgds-table-cell>
+      </sgds-table-row>
+
+      <sgds-table-row>
+        <sgds-table-cell>3</sgds-table-cell>
+        <sgds-table-cell>Bob</sgds-table-cell>
+        <sgds-table-cell>Smith</sgds-table-cell>
+        <sgds-table-cell>
+          <sgds-link>
+            <a href="#">@bobsmith</a>
+          </sgds-link>
+        </sgds-table-cell>
+        <sgds-table-cell>
+          <sgds-badge outlined> active </sgds-badge>
+        </sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>`);
+
+    expect(el.shadowRoot?.querySelector("div")?.classList.contains("table-responsive-md")).to.be.true;
+    expect(el.shadowRoot?.querySelector("#table-slot")).not.to.be.null;
+
+    const rows = el.shadowRoot?.querySelectorAll("tbody tr");
+    expect(rows?.length).to.equal(0);
+
+    const columns = el.shadowRoot?.querySelectorAll("tbody td");
+    expect(columns?.length).to.equal(0);
+
+    const slot = el.shadowRoot.querySelector("slot");
+    const slotContent = slot.assignedElements() as HTMLSlotElement[];
+    expect(slotContent?.length).to.equal(4);
+
+    const headerCells = slotContent?.[0].querySelectorAll("sgds-table-head");
+    expect(headerCells.length).to.equal(5);
+    expect(headerCells?.[0].innerHTML).to.include("#");
+    expect(headerCells?.[1].innerHTML).to.include("First name");
+    expect(headerCells?.[2].innerHTML).to.include("Last name");
+    expect(headerCells?.[3].innerHTML).to.include("Username");
+    expect(headerCells?.[4].innerHTML).to.include("Action");
+
+    const secondRowCells = slotContent?.[2].querySelectorAll("sgds-table-cell");
+    expect(secondRowCells.length).to.equal(5);
+    expect(secondRowCells?.[0].innerHTML).to.include("2");
+    expect(secondRowCells?.[1].innerHTML).to.include("Jane");
+    expect(secondRowCells?.[2].innerHTML).to.include("Doe");
+    expect(secondRowCells?.[3].innerHTML).to.include("janedoe");
+    expect(secondRowCells?.[4].innerHTML).to.include("sgds-icon-button");
+  });
+
+  it("Should render all content when passed into a sgds-table-row", async () => {
+    const el = await fixture<SgdsTableRow>(html`<sgds-table-row>
+      <sgds-table-head>#</sgds-table-head>
+      <sgds-table-head>First name</sgds-table-head>
+      <sgds-table-head>Last name</sgds-table-head>
+      <sgds-table-head>Username</sgds-table-head>
+      <sgds-table-head>Action</sgds-table-head>
+    </sgds-table-row> `);
+
+    expect(el.shadowRoot?.querySelector("slot")?.classList.contains("table-row")).to.be.true;
+    const slot = el.shadowRoot.querySelector("slot");
+    const slotContent = slot.assignedElements() as HTMLSlotElement[];
+    expect(slotContent?.length).to.equal(5);
+    expect(slotContent?.[0].innerHTML).to.include("#");
+    expect(slotContent?.[1].innerHTML).to.include("First name");
+    expect(slotContent?.[2].innerHTML).to.include("Last name");
+    expect(slotContent?.[3].innerHTML).to.include("Username");
+    expect(slotContent?.[4].innerHTML).to.include("Action");
   });
 });
 
