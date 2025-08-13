@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 
@@ -9,8 +9,8 @@ import { HasSlotController } from "../../utils/slot";
 export type HeaderPosition = "horizontal" | "vertical" | "both";
 
 /**
- * @summary Provides a flexible table for displaying collections of data in organized rows and columns.
- * The table supports two rendering methods: supply an array of data for automatic table generation, or use the slot to insert custom table elements for full structural control.
+ * @summary Table is used for displaying collections of data in organized rows and columns.
+ * It supports two rendering methods: supply an array of data for automatic table generation, or use the slot to insert custom table elements for full structural control.
  *
  * @slot - Insert custom table elements (such as rows, headers, or cells) to define the table structure manually.
  */
@@ -41,7 +41,7 @@ export class SgdsTable extends SgdsElement {
   /**
    * Defines the placement of headers in the table (horizontal, vertical, or both)
    */
-  @property({ type: String, reflect: true }) headerPosition: HeaderPosition = "horizontal";
+  @property({ type: String }) headerPosition: HeaderPosition = "horizontal";
 
   /** @internal */
   private readonly hasSlotController = new HasSlotController(this, "[default]");

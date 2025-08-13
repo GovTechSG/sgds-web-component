@@ -1,5 +1,4 @@
 import { html } from "lit-html";
-import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args => {
   const headerPositionVal = args.headerPosition ?? "horizontal";
@@ -43,6 +42,6 @@ export const Template = args => {
   `;
 };
 
-export const args = {};
+export const args = { headerPosition: "horizontal" };
 
 export const parameters = {};
