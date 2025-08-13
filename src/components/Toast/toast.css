@@ -40,6 +40,7 @@
 .toast-body {
   display: flex;
   flex-direction: column;
+  gap: var(--sgds-gap-2-xs);
 }
 
 .toast-body strong {
