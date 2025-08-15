@@ -343,7 +343,10 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     this._manageInternalsBadInput();
   }
   private async _handleEmptyInput() {
-    this._manageEmptyInput();
+    if (this.required) {
+      this._manageEmptyInput();
+    }
+    return;
   }
   private async _resetDatepicker(resetValue = "") {
     this.displayDate = this.initialDisplayDate;
@@ -356,7 +359,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     await input.applyInputMask();
 
     this._mixinResetValidity(input);
-    if (this.isValueEmpty() && this.required) {
+    if (this.isValueEmpty()) {
       this._handleEmptyInput();
     }
   }

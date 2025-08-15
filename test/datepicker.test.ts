@@ -1596,6 +1596,21 @@ describe("datepicker in form context", () => {
     const formData = new FormData(el);
     expect(formData.get("myDatepicker")).to.equal("23/03/2020");
   });
+  it("allows empty value datepicker, not required field to be submitted in form", async () => {
+    const el = await fixture<HTMLFormElement>(
+      html`<form><sgds-datepicker value="23/03/2020" name="myDatepicker"></sgds-datepicker></form>`
+    );
+    const datepicker = el.querySelector("sgds-datepicker") as SgdsDatepicker;
+    const input = datepicker?.shadowRoot?.querySelector("sgds-datepicker-input")?.shadowRoot?.querySelector("input");
+    input?.focus();
+    for (let i = 0; i < 8; i++) {
+      await sendKeys({ press: "Backspace" });
+    }
+    input?.blur();
+    await elementUpdated(datepicker);
+    expect(datepicker.value).to.equal("");
+    expect(el.checkValidity()).to.be.true;
+  });
   it("For required, should be invalid when touched and blurred but empty", async () => {
     const el = await fixture<HTMLFormElement>(
       html`<form><sgds-datepicker name="myDatepicker" required></sgds-datepicker></form>`
