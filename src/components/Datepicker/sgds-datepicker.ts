@@ -18,6 +18,7 @@ import SgdsIconButton from "../IconButton/sgds-icon-button";
 import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
+import { defaultValue } from "../../utils/defaultvalue";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -95,6 +96,10 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
 
   /** Provides the date context for Calendar to present the appropriate view. Defaults to today's date */
   @property({ attribute: false }) displayDate: Date;
+
+  /**Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  @defaultValue()
+  defaultValue = "";
 
   /**@internal */
   @state() invalid = false;
@@ -340,10 +345,10 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
   private async _handleEmptyInput() {
     this._manageEmptyInput();
   }
-  private async _resetDatepicker() {
+  private async _resetDatepicker(resetValue = "") {
     this.displayDate = this.initialDisplayDate;
     this.selectedDateRange = [];
-    this.value = "";
+    this.value = resetValue;
     this.view = "days";
     const input = await this.datepickerInputAsync;
     input.setInvalid(false);
@@ -396,7 +401,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
    * Handles the form "reset" event
    */
   private async _mixinResetFormControl() {
-    this._resetDatepicker();
+    this._resetDatepicker(this.defaultValue);
   }
   private async _handleInputMaskChange(e: CustomEvent) {
     this.value = e.detail;

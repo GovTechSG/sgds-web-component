@@ -65,6 +65,7 @@ describe("sgds-datepicker", () => {
   //   expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("false");
   // });
 
+  /**@deprecated Remove in v4.0.0 */
   it("should pass the initialvalue to sgds-datepicker-input for single mode", async () => {
     const initialDate = '["23/11/2023"]';
     const initialValueArray = JSON.parse(initialDate) as string[];
@@ -75,13 +76,27 @@ describe("sgds-datepicker", () => {
     await el.updateComplete;
     expect(inputEl?.value).to.equal("23/11/2023");
   });
-
+  it("should pass the default value to sgds-datepicker-input for single mode", async () => {
+    const value = "23/11/2023";
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker value=${value}></sgds-datepicker>`);
+    const inputEl = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
+    await el.updateComplete;
+    expect(inputEl?.value).to.equal("23/11/2023");
+  });
+  /**@deprecated Remove in v4.0.0 */
   it("should pass the initialvalue to sgds-datepicker-input for range mode", async () => {
     const initialDate = '["23/11/2023", "25/11/2023"]';
     const initialValueArray = JSON.parse(initialDate) as string[];
     const el = await fixture<SgdsDatepicker>(
       html`<sgds-datepicker mode="range" .initialValue=${initialValueArray}></sgds-datepicker>`
     );
+    const inputEl = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
+    await el.updateComplete;
+    expect(inputEl?.value).to.equal("23/11/2023 - 25/11/2023");
+  });
+  it("should pass the default value to sgds-datepicker-input for range mode", async () => {
+    const value = "23/11/2023 - 25/11/2023";
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker mode="range" value=${value}></sgds-datepicker>`);
     const inputEl = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
     await el.updateComplete;
     expect(inputEl?.value).to.equal("23/11/2023 - 25/11/2023");
@@ -1545,19 +1560,19 @@ describe("datepicker in form context", () => {
   });
   it("should be valid when required is true and value is valid", async () => {
     const el = await fixture<HTMLFormElement>(
-      html`<form><sgds-datepicker required .initialValue=${["23/03/2020"]}></sgds-datepicker></form>`
+      html`<form><sgds-datepicker required value="23/03/2020"></sgds-datepicker></form>`
     );
     expect(el.checkValidity()).to.be.true;
   });
   it("should be valid when  value is valid", async () => {
     const el = await fixture<HTMLFormElement>(
-      html`<form><sgds-datepicker .initialValue=${["23/03/2020"]}></sgds-datepicker></form>`
+      html`<form><sgds-datepicker value="23/03/2020"></sgds-datepicker></form>`
     );
     expect(el.checkValidity()).to.be.true;
   });
   it("should be invalid when  value is invalid", async () => {
     const el = await fixture<HTMLFormElement>(
-      html`<form><sgds-datepicker .initialValue=${["23/03/2020"]}></sgds-datepicker></form>`
+      html`<form><sgds-datepicker value="23/03/2020"></sgds-datepicker></form>`
     );
     const datepicker = el.querySelector("sgds-datepicker") as SgdsDatepicker;
     const input = el
@@ -1576,7 +1591,7 @@ describe("datepicker in form context", () => {
 
   it("obtain value of datepicker via name attribute and formData", async () => {
     const el = await fixture<HTMLFormElement>(
-      html`<form><sgds-datepicker .initialValue=${["23/03/2020"]} name="myDatepicker"></sgds-datepicker></form>`
+      html`<form><sgds-datepicker value="23/03/2020" name="myDatepicker"></sgds-datepicker></form>`
     );
     const formData = new FormData(el);
     expect(formData.get("myDatepicker")).to.equal("23/03/2020");
@@ -1596,7 +1611,7 @@ describe("datepicker in form context", () => {
   it("For required, should be invalid when input is emptied and blurred away", async () => {
     const el = await fixture<HTMLFormElement>(
       html`<form>
-        <sgds-datepicker name="myDatepicker" .initialValue=${["23/03/2020"]} required></sgds-datepicker>
+        <sgds-datepicker name="myDatepicker" value="23/03/2020" required></sgds-datepicker>
       </form>`
     );
     const datepicker = el.querySelector("sgds-datepicker") as SgdsDatepicker;
@@ -1611,6 +1626,22 @@ describe("datepicker in form context", () => {
     input?.blur();
     await elementUpdated(datepicker);
     expect(datepicker.invalid).to.be.true;
+  });
+  it("form reset, sets the value back to initial value", async () => {
+    const el = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-datepicker name="myDatepicker" value="23/03/2020" required></sgds-datepicker>
+      </form>`
+    );
+    const datepicker = el.querySelector("sgds-datepicker") as SgdsDatepicker;
+    const input = datepicker?.shadowRoot?.querySelector("sgds-datepicker-input")?.shadowRoot?.querySelector("input");
+
+    datepicker.value = "24/03/2020";
+    await waitUntil(() => input?.value === "24/03/2020");
+
+    el.reset();
+    await waitUntil(() => input?.value === "23/03/2020");
+    expect(datepicker.value).to.equal("23/03/2020");
   });
 });
 
