@@ -1,6 +1,7 @@
 import "./sgds-web-component";
 import { expect, fixture, html } from "@open-wc/testing";
-import { SgdsTable, SgdsTableRow } from "../src/components";
+import { SgdsTable } from "../src/components/Table/sgds-table";
+import { SgdsTableRow } from "../src/components/Table/sgds-table-row";
 
 describe("Table", () => {
   it("renders with default properties", async () => {

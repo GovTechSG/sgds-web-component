@@ -1,18 +1,18 @@
 import { html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 
 import tableStyle from "./table.css";
-import tableCellStyle from "./table-cell.css";
-import tableHeadStyle from "./table-head.css";
-import tableRowStyle from "./table-row.css";
+import { HasSlotController } from "../../utils/slot";
 
 export type HeaderPosition = "horizontal" | "vertical" | "both";
 
 /**
- * @summary The use of a table is to organise a collections of data into readable rows.
- * There are two ways to utilise the table, by structured element via slot or by array of data.
+ * @summary Table is used for displaying collections of data in organized rows and columns.
+ * It supports two rendering methods: supply an array of data for automatic table generation, or use the slot to insert custom table elements for full structural control.
+ *
+ * @slot - Insert custom table elements (such as rows, headers, or cells) to define the table structure manually.
  */
 
 export class SgdsTable extends SgdsElement {
@@ -41,17 +41,13 @@ export class SgdsTable extends SgdsElement {
   /**
    * Defines the placement of headers in the table (horizontal, vertical, or both)
    */
-  @property({ type: String, reflect: true }) headerPosition: HeaderPosition = "horizontal";
+  @property({ type: String }) headerPosition: HeaderPosition = "horizontal";
 
   /** @internal */
-  @state() tableContents: Array<Node> = [];
-
-  /** @internal */
-  @state() originalTableData: Array<(string | number)[]> = [];
+  private readonly hasSlotController = new HasSlotController(this, "[default]");
 
   connectedCallback() {
     super.connectedCallback();
-    this.originalTableData = [...this.tableData];
   }
 
   private _renderTable() {
@@ -111,17 +107,9 @@ export class SgdsTable extends SgdsElement {
     }
   }
 
-  firstUpdated() {
-    const slot = this.shadowRoot.querySelector("#table-slot") as HTMLSlotElement;
-    this.tableContents = slot.assignedElements({ flatten: true });
-  }
-
-  private _handleSlotChange(e: Event) {
-    const childNodes = (e.target as HTMLSlotElement).assignedElements();
-    this.tableContents = childNodes;
-  }
-
   render() {
+    const hasDefaultSlot = this.hasSlotController.test("[default]");
+
     return html`
       <div
         class=${classMap({
@@ -133,66 +121,15 @@ export class SgdsTable extends SgdsElement {
         })}
         tabindex="0"
       >
-        <slot id="table-slot" class="table" @slotchange=${this._handleSlotChange}> </slot>
+        <slot id="table-slot" class="table"></slot>
 
-        ${this.tableContents.length === 0
+        ${!hasDefaultSlot
           ? html`<table class="table">
               ${this._renderTable()}
             </table>`
           : ""}
       </div>
     `;
-  }
-}
-
-export class SgdsTableCell extends SgdsElement {
-  static styles = [...SgdsElement.styles, tableCellStyle];
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.setAttribute("role", "cell");
-  }
-
-  render() {
-    return html` <slot class="table-cell"></slot> `;
-  }
-}
-
-export class SgdsTableHead extends SgdsElement {
-  static styles = [...SgdsElement.styles, tableHeadStyle];
-  /**
-   * To indicate if the header will have a darker bottom border style
-   */
-  @property({ type: Boolean, reflect: true }) border = true;
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.setAttribute("role", "columnheader");
-
-    if (this.border) {
-      this.style.borderColor = "var(--sgds-border-color-emphasis)";
-    }
-  }
-
-  render() {
-    return html` <slot></slot> `;
-  }
-}
-
-export class SgdsTableRow extends SgdsElement {
-  /**
-   * @summary Table row to group table cell or table head together as a single row
-   * @slot - Accepts any elements passed in
-   */
-  static styles = [...SgdsElement.styles, tableRowStyle];
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.setAttribute("role", "row");
-  }
-
-  render() {
-    return html`<slot class="table-row"></slot>`;
   }
 }
 
