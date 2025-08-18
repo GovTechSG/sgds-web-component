@@ -23,6 +23,7 @@ function runCommand(command, name) {
 
 // Run the commands and store the child processes
 const reactProcess = runCommand(`sh ${__dirname}/run_react.sh`, "React");
+const react19Process = runCommand(`sh ${__dirname}/run_react_19.sh`, "React19");
 const angularProcess = runCommand(`sh ${__dirname}/run_angular.sh`, "Angular");
 const vueProcess = runCommand(`sh ${__dirname}/run_vue.sh`, "Vue");
 const nextProcess = runCommand(`sh ${__dirname}/run_next.sh`, "Next");
@@ -30,6 +31,7 @@ const nuxtProcess = runCommand(`sh ${__dirname}/run_nuxt.sh`, "Nuxt");
 // Terminate all child processes when the main process exits
 process.on("exit", () => {
   reactProcess.kill();
+  react19Process.kill();
   angularProcess.kill();
   vueProcess.kill();
   nextProcess.kill();
