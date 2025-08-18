@@ -95,3 +95,18 @@
 .form-control-group.quantity-toggle {
   padding: 0;
 }
+sgds-icon[role="button"] {
+  cursor: pointer;
+}
+sgds-icon[role="button"]:focus,  
+sgds-icon[role="button"]:focus-visible {
+  box-shadow: var(--sgds-box-shadow-focus);
+  outline: none;
+}
+
+.form-control-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--sgds-gap-sm);
+}
