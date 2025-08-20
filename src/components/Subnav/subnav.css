@@ -6,7 +6,7 @@
 }
 
 nav {
-  background-color: var(--sgds-surface-default);
+  background-color: var(--sgds-surface-raised);
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
   width: 100%;
 }
@@ -116,7 +116,7 @@ slot[name="actions"]::slotted(*) {
     position: absolute;
     top: 100%;
     left: 0px;
-    background-color: var(--sgds-surface-default);
+    background-color: var(--sgds-surface-raised);
     border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
   }
   
