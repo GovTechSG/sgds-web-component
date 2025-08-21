@@ -7,7 +7,6 @@
   align-items: center;
   color: var(--sgds-color-default);
   text-align: inherit;
-  white-space: nowrap;
   cursor: pointer;
 }
 

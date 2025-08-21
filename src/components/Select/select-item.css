@@ -8,7 +8,6 @@
     clear: both;
     color: var(--sgds-color-default);
     text-align: inherit;
-    white-space: nowrap;
     cursor: pointer;
     height: 100%;
   }
