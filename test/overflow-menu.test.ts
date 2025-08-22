@@ -1,6 +1,6 @@
 import { assert, fixture } from "@open-wc/testing";
 import { html } from "lit";
-import "../src/internals/OverflowMenu";
+import "../src/index";
 
 describe("<sgds-overflow-menu>", () => {
   it("semantically matches the DOM", async () => {
