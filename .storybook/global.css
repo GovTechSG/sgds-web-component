@@ -17,7 +17,6 @@ sgds-card.intro::part(base) {
   border-radius: 24px;
   height: 100%;
 }
-
 /* FAQ stylings */
 sgds-card.faq::part(base) {
   border: none;
@@ -31,7 +30,6 @@ sgds-faq-grid {
   column-gap: 2rem;
   width: 100%;
 }
-
 .d-flex-column {
   display: flex;
   flex-direction: column;
@@ -42,14 +40,16 @@ sgds-faq-grid {
   flex-direction: row;
   gap: var(--sgds-gap-sm);
 }
-
 .docs-story{
   background: var(--sgds-bg-default);
+}
+.sb-story{
+  padding: var(--sgds-padding-xs);
+  margin: calc(var(--sgds-margin-3-xs) * -1);
 }
 ul.toc-list > * {
   font-size: var(--sgds-font-size-1);
 }
-
 .grid-item {
   background-color: var(--sgds-product-primary-600);
   color: white;
