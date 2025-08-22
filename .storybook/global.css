@@ -43,7 +43,7 @@ sgds-faq-grid {
 .flex-wrap {
   flex-wrap: wrap;
 }
-.docs-story{
+.docs-story {
   background: var(--sgds-bg-default);
 }
 .sb-story{
