@@ -1,0 +1,67 @@
+## Stretched Link
+
+By default, a link inside the card only applies to the text or element within the link slot. Enabling `stretchedLink` extends the hyperlink to cover the entire card, making the whole card clickable.
+
+This feature is useful when you want users to be able to click anywhere on the card to navigate, rather than just the link text. If `stretchedLink` is set to `true`, the component ensures that the card itself behaves like an anchor tag (`<a>`), using the `href` from the link slot.
+
+Usage:
+
+- Ensure that only a single anchor element (`<a>`) is passed into the `link` slot.
+- If the card is disabled, the link will automatically be disabled, removing its `href` attribute to prevent navigation.
+
+<Canvas of={IconCardStories.Stretched}>
+  <Story of={IconCardStories.Stretched} />
+</Canvas>
+
+## Disabled State
+
+The `disabled` property prevents interaction with the card, making it non-clickable and visually indicating its inactive state. When `disabled` is set to `true`:
+
+Any link inside the `link` slot will be disabled, and its `href` attribute will be removed to prevent navigation.
+
+The card's appearance is adjusted to reflect its disabled state.
+
+If `stretchedLink` is enabled, the entire card will still appear as a link but will not be interactive.
+
+This is useful when you want to temporarily prevent user interaction while maintaining the card's structure in the UI.
+
+<Canvas of={IconCardStories.Disabled}>
+  <Story of={IconCardStories.Disabled} />
+</Canvas>
+
+## Orientation
+
+The `orientation` prop allows you to control the layout of the card. By default, the card is displayed in a vertical orientation. You can set `orientation="horizontal"` to arrange the card content in a side-by-side layout.
+
+Available Options:
+
+- `"vertical"`(default): The image and text are stacked vertically.
+- `"horizontal"`: The image and text are arranged side by side.
+
+<Canvas of={IconCardStories.Orientation}>
+  <Story of={IconCardStories.Orientation} />
+</Canvas>
+
+## Hide Border
+
+The `hideBorder` prop removes the default border from the card. When `hideBorder` is set to `true`, the card appears seamless, making it useful for designs that require a cleaner or more minimalistic look.
+
+<Canvas of={IconCardStories.HideBorder}>
+  <Story of={IconCardStories.HideBorder} />
+</Canvas>
+
+## Tinted
+
+The `tinted` prop applies a subtle tinted background to the card, enhancing its visual distinction from the surrounding content. This can be useful for highlighting important cards or grouping related information visually.
+
+<Canvas of={IconCardStories.Tinted}>
+  <Story of={IconCardStories.Tinted} />
+</Canvas>
+
+## No Padding
+
+The `noPadding` prop removes the padding, border, and tinted background of the card, allowing the content to align seamlessly with the page header. This is useful when the card needs to visually integrate with surrounding layout elements rather than stand out as a separate block.
+
+<Canvas of={IconCardStories.NoPadding}>
+  <Story of={IconCardStories.NoPadding} />
+</Canvas>
