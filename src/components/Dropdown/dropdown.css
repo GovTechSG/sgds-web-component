@@ -1,9 +1,9 @@
 :host {
-  position: relative;
+  /* position: relative; */
 }
 
-
 .dropdown {
+  position: relative;
   display: flex; 
   height: inherit;
 }
