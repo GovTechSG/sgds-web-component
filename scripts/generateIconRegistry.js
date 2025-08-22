@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const prettier = require("prettier");
 
 const iconsDir = path.resolve(__dirname, "../src/components/Icon/icons");
 const outputFile = path.resolve(__dirname, "../src/components/Icon/icon-registry.ts");
@@ -10,6 +11,10 @@ function kebabToPascalCase(str) {
     .map(part => part.charAt(0).toUpperCase() + part.slice(1))
     .join("");
 }
+
+const prettierOptions = prettier.resolveConfig.sync(process.cwd()) || {
+  parser: "typescript"
+};
 
 const files = fs.readdirSync(iconsDir).filter(file => {
   const ext = path.extname(file);
@@ -35,5 +40,10 @@ ${registryEntries.join("\n")}
 };
 `;
 
-fs.writeFileSync(outputFile, content);
+const formatted = prettier.format(content, {
+  ...prettierOptions,
+  parser: "typescript"
+});
+
+fs.writeFileSync(outputFile, formatted);
 console.log("icon-registry.ts generated successfully.");
