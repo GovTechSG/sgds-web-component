@@ -21,6 +21,7 @@ import "./components/Link";
 import "./components/Mainnav";
 import "./components/Masthead";
 import "./components/Modal";
+import "./components/OverflowMenu";
 import "./components/Pagination";
 import "./components/ProgressBar";
 import "./components/QuantityToggle";
@@ -38,4 +39,7 @@ import "./components/Tooltip";
 import "./components/TableOfContents";
 import "./components/Subnav";
 import "./components/Select";
+import "./components/ImageCard";
+import "./components/ThumbnailCard";
+import "./components/IconCard";
 // COMPONENT IMPORTS
