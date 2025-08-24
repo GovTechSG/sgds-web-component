@@ -27,7 +27,6 @@ async function main() {
 
   const api = new FigmaApi(process.env.PERSONAL_ACCESS_TOKEN);
   const localVariables = await api.getLocalVariables(fileKey);
-  // console.log(JSON.stringify(localVariables, null, 2))
   const tokensFiles = tokenFilesFromLocalVariables(localVariables);
 
   let outputDir = path.join(__dirname, "tokens_new");
@@ -49,7 +48,7 @@ async function main() {
 
   console.log(green(`✅ Tokens files have been written to the ${outputDir} directory`));
 
-  tokenToCssVars();
+  // tokenToCssVars();
 }
 
 main();

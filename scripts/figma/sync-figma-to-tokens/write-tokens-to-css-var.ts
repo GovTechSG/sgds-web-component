@@ -1,7 +1,7 @@
 import { stat, readFile, readdir, writeFile } from "fs/promises";
 import * as path from "path";
 import { Token } from "./token_types";
-
+import * as prettier from "prettier";
 export function arrangeSgdsFiles(fileName: string): string {
   const isPrimitive = fileName.startsWith("Primitive");
   const isSemantic = fileName.startsWith("Semantic");
@@ -21,7 +21,6 @@ export function arrangeSgdsFiles(fileName: string): string {
 export async function saveToMap(filePath: string, map: Map<string, object>, mapKey: string) {
   const content: string = await readFile(filePath, "utf-8");
   const contentObj = JSON.parse(content);
-  console.log(contentObj);
   const cssVars = flattenTokensToCssVars(contentObj);
   if (map.has(mapKey)) {
     const existing = map.get(mapKey) as Record<string, string>;
@@ -54,6 +53,7 @@ function generateCss(tokenMap: object, type?: "day" | "night"): string {
         :root.sgds-night-theme {
             color-scheme: only dark;
             ${content}    
+    }
         `;
   }
   return `
@@ -115,8 +115,6 @@ export async function tokenToCssVars(): Promise<void> {
     const forLightRoot = isSemanticLight;
     const forDarkRoot = isSemanticDark;
 
-    const shouldLog: boolean = isPrimitive || isSemantic || isThemeSgds;
-
     const filePath: string = path.join(tokensDir, file);
     const isFile = (await stat(filePath)).isFile();
 
@@ -135,9 +133,9 @@ export async function tokenToCssVars(): Promise<void> {
   const lightFilePath = path.join(__dirname, "tokens_new", "day.css");
   const darkFilePath = path.join(__dirname, "tokens_new", "night.css");
   try {
-    await writeFile(rootFilePath, generateCss(rootMap.get("root")));
-    await writeFile(lightFilePath, generateCss(rootMap.get("day"), "day"));
-    await writeFile(darkFilePath, generateCss(rootMap.get("night"), "night"));
+    await writeFile(rootFilePath, prettier.format(generateCss(rootMap.get("root")), { parser: "css" }));
+    await writeFile(lightFilePath, prettier.format(generateCss(rootMap.get("day"), "day"), { parser: "css" }));
+    await writeFile(darkFilePath, prettier.format(generateCss(rootMap.get("night"), "night"), { parser: "css" }));
   } catch (e) {
     console.log(e);
   }
