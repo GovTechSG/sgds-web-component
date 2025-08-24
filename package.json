@@ -14,7 +14,7 @@
     "write:stories": "npm run cem && node ./scripts/generateStories.mjs && npm run concat:stories && npm run update:version",
     "write:component": "plop",
     "test": "rm -rf test-outdir && rollup --config rollup.test.config.js && web-test-runner",
-    "test:scripts": "wtr scripts/__tests__/**/*.test.js --node-resolve",
+    "test:scripts": "wtr scripts/**/__tests__/**/*.test.{js,ts} --node-resolve",
     "prepare": "husky install",
     "concat:stories": "gulp concat-stories-js && gulp concat-storybook-mdx",
     "update:version": "gulp replace-version",
@@ -27,7 +27,8 @@
     "build-storybook": "npm run build && npm run write:stories && STORYBOOK_ENV=production storybook build",
     "trial-sb": "storybook dev",
     "trial-sb-build": "storybook build",
-    "generate:icons": "node scripts/generateIconRegistry.js"
+    "generate:icons": "node scripts/generateIconRegistry.js",
+    "sync-figma-to-tokens": "tsx scripts/figma/sync-figma-to-tokens/sync-figma-to-tokens.ts"
   },
   "author": "GovTechSG",
   "contributors": [
@@ -64,6 +65,7 @@
     "@custom-elements-manifest/analyzer": "^0.6.4",
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@etchteam/storybook-addon-css-variables-theme": "^3.0.0",
+    "@figma/rest-api-spec": "^0.33.0",
     "@open-wc/testing": "^3.0.0-next.5",
     "@playwright/test": "^1.45.1",
     "@rollup/plugin-node-resolve": "^11.2.1",
@@ -88,11 +90,13 @@
     "@web/test-runner-playwright": "^0.8.10",
     "@webcomponents/scoped-custom-element-registry": "^0.0.9",
     "autoprefixer": "^10.4.19",
+    "axios": "^1.11.0",
     "cem-plugin-better-lit-types": "^0.2.0",
     "cypress": "^13.6.0",
     "cypress-fail-on-console-error": "^5.0.3",
     "cz-conventional-changelog": "^3.3.0",
     "del": "^7.0.0",
+    "dotenv": "^17.2.1",
     "esbuild-sass-plugin": "^2.3.2",
     "eslint": "^8.38.0",
     "eslint-config-standard-with-typescript": "^34.0.1",
@@ -127,6 +131,7 @@
     "sinon": "^14.0.0",
     "storybook": "^8.2.6",
     "style-loader": "^4.0.0",
+    "tsx": "^4.20.4",
     "typescript": "^5.0.4",
     "vite": "^4.4.9"
   },

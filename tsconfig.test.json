@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "rootDir": "."
+    "rootDir": ".",
   },
   "include": ["**/*.ts", "./mocks/*.ts"],
   "exclude": ["node_modules", "lib", "src", "cypress", "cypress.config.ts"]
