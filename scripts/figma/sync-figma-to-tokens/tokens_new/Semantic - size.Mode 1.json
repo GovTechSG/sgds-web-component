@@ -7,7 +7,9 @@
       "$extensions": {
         "com.figma": {
           "hiddenFromPublishing": false,
-          "scopes": ["WIDTH_HEIGHT"],
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
           "codeSyntax": {}
         }
       }
@@ -22,7 +24,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["WIDTH_HEIGHT"],
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -34,7 +38,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["WIDTH_HEIGHT"],
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -46,7 +52,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["WIDTH_HEIGHT"],
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
             "codeSyntax": {}
           }
         }
