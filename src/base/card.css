@@ -1,3 +1,7 @@
+:host([disabled]) {
+  cursor: not-allowed;
+}
+
 :host([orientation="horizontal"]) .card {
   flex-direction: row;
 }
@@ -97,7 +101,7 @@ a.card {
 
 .card.disabled {
   opacity: var(--sgds-opacity-50);
-  cursor: not-allowed;
+  pointer-events: none;
 }
 
 a.card:focus {

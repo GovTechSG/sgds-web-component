@@ -1,4 +1,4 @@
-import { property, query, queryAssignedNodes } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { SgdsLink } from "../components/Link/sgds-link";
 import { CardOrientation } from "../components/Card/types";
 import SgdsElement from "./sgds-element";
@@ -15,10 +15,6 @@ export class CardElement extends SgdsElement {
   /** @internal */
   @query("a.card") card: HTMLAnchorElement;
 
-  /** @internal */
-  @queryAssignedNodes({ slot: "link", flatten: true })
-  _linkNode!: Array<Node>;
-
   /** Extends the link passed in slot[name="link"] to the entire card */
   @property({ type: Boolean, reflect: true }) stretchedLink = false;
 
@@ -33,14 +29,6 @@ export class CardElement extends SgdsElement {
 
   /** Sets the orientation of the card. Available options: `vertical`, `horizontal` */
   @property({ type: String, reflect: true }) orientation: CardOrientation = "vertical";
-
-  protected firstUpdated() {
-    if (this.disabled && this._linkNode.length > 0) {
-      const hyperlink = (this._linkNode[0] as HTMLLinkElement).querySelector("a");
-      hyperlink.setAttribute("disabled", "true");
-      hyperlink.removeAttribute("href");
-    }
-  }
 
   handleTitleSlotChange(e: Event) {
     const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLElement>;
