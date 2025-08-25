@@ -6,7 +6,6 @@ import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import SgdsElement from "../../base/sgds-element";
 import tooltipStyle from "./tooltip.css";
-import { watch } from "../../utils/watch";
 /**
  * @summary Tooltips display more information when users hover over, focus on, or interact with an element.
  * @slot default - The element to target the tooltip to.
@@ -62,11 +61,6 @@ export class SgdsTooltip extends SgdsElement {
 
     document.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
     document.removeEventListener("touchstart", (event: TouchEvent) => this._handleClickOutOfElement(event, this));
-  }
-
-  @watch("content")
-  handleContentUpdate() {
-    if (this._bsTooltip) this._initializeTooltip();
   }
 
   private _initializeTooltip() {

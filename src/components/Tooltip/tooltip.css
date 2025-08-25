@@ -2,10 +2,6 @@
   display: contents;
 }
 
-slot::slotted(*) {
-  display: none;
-}
-
 .tooltip-placeholder {
   display: inline-block;
   max-width: 100%;
