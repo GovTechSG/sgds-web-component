@@ -106,7 +106,6 @@ sgds-icon[role="button"]:focus-visible {
 
 .form-control-row {
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: var(--sgds-gap-sm);
 }
