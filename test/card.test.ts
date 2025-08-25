@@ -13,20 +13,26 @@ describe("<sgds-card>", () => {
           class="card"
           tabindex="-1"
         >
+          <div class="card-tinted-bg"></div>
+          <slot name="menu"></slot>
           <div class="card-image" style="display: none;">
             <slot name="image"></slot>
           </div>
-          <div class="card-icon" style="display: none;">
+          <div class="card-media" style="display: none;">
             <slot name="icon"></slot>
           </div>
           <div class="card-body">
-            <div class="card-header">
-              <slot name="subtitle"></slot>
-              <h3 class="card-title"><slot name="title"></slot></h3>
+            <div class="card-header-container">
+              <div class="card-header">
+                <slot name="subtitle"></slot>
+                <h3 class="card-title"><slot name="title"></slot></h3>
+              </div>
+              <slot></slot>
             </div>
             <p class="card-text">
               <slot name="description"></slot>
             </p>
+            <slot name="lower"></slot>
             <slot name="link"></slot>
           </div>
         </div>
