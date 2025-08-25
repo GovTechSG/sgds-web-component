@@ -12,10 +12,10 @@
     "skipLibCheck": true,
     "noImplicitAny": false,
     "importHelpers": true,
-    "rootDir": "src",
+    "rootDir": "./",
     "allowJs": true,
     "typeRoots": ["./src/typings", "./node_modules/@types"]
   },
-  "include": ["**/*.ts", "typings"],
+  "include": ["**/*.ts", "typings", "scripts/figma/figma_api.ts"],
   "exclude": ["node_modules", "lib", "test", "test-outdir", "mocks", "react", "cypress", "cypress.config.ts"]
 }

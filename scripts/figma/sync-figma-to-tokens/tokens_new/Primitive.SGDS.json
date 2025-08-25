@@ -1,0 +1,3052 @@
+{
+  "sgds": {
+    "gray": {
+      "0": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#f3f3f3",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#dfdfdf",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#c6c6c6",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#a5a5a5",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#868686",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#6b6b6b",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#525252",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#3b3b3b",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#2a2a2a",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "#1a1a1a",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "1100": {
+        "$type": "color",
+        "$value": "#0e0e0e",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "red": {
+      "100": {
+        "$type": "color",
+        "$value": "#fcf1f1",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#f8d7d7",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#f1b2b2",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#e98b8b",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#e05959",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#cf2323",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#a11b1b",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#791414",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#550e0e",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "yellow": {
+      "100": {
+        "$type": "color",
+        "$value": "#fef4cb",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#fcde63",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#e5bf29",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#c2a223",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#9d841c",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#7e6917",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#605111",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#483c0d",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#322909",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "green": {
+      "100": {
+        "$type": "color",
+        "$value": "#e3f9ed",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#b1edcb",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#62db96",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#16bd5e",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#129a4d",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#0e7c3d",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#0b5e2f",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#084523",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#063119",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "cyan": {
+      "100": {
+        "$type": "color",
+        "$value": "#e0f7fc",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#a8e9f7",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#49d2ef",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#00b4da",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#0092b1",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#00758d",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#005a6d",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#004352",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#002f38",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "blue": {
+      "100": {
+        "$type": "color",
+        "$value": "#ecf5fe",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#c8e2fb",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#96c7f7",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#60aaf4",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#1e87ef",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#0269d0",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#0151a0",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#013c77",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#012a54",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "purple": {
+      "100": {
+        "$type": "color",
+        "$value": "#fbf0fe",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#f2d6fc",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#e6adf9",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#d983f6",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#c94cf2",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#ac1cdb",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#8516a9",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#641180",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#460c5a",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "focus": {
+      "width": {
+        "$type": "number",
+        "$value": 2,
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "border-width": {
+      "0": {
+        "$type": "number",
+        "$value": 0,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "1": {
+        "$type": "number",
+        "$value": 1,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "2": {
+        "$type": "number",
+        "$value": 2,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "3": {
+        "$type": "number",
+        "$value": 3,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "4": {
+        "$type": "number",
+        "$value": 4,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "border-radius": {
+      "none": {
+        "$type": "number",
+        "$value": 0,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "xs": {
+        "$type": "number",
+        "$value": 2,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "sm": {
+        "$type": "number",
+        "$value": 4,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "md": {
+        "$type": "number",
+        "$value": 8,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "lg": {
+        "$type": "number",
+        "$value": 12,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "xl": {
+        "$type": "number",
+        "$value": 16,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "2-xl": {
+        "$type": "number",
+        "$value": 24,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "full": {
+        "$type": "number",
+        "$value": 999,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "breakpoint": {
+      "xs": {
+        "$type": "number",
+        "$value": "{sgds-dimension-320}",
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "sm": {
+        "$type": "number",
+        "$value": "{sgds-dimension-512}",
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "md": {
+        "$type": "number",
+        "$value": "{sgds-dimension-768}",
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "lg": {
+        "$type": "number",
+        "$value": "{sgds-dimension-1024}",
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "xl": {
+        "$type": "number",
+        "$value": "{sgds-dimension-1280}",
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "2-xl": {
+        "$type": "number",
+        "$value": "{sgds-dimension-1440}",
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "font-family": {
+      "brand": {
+        "$type": "string",
+        "$value": "Inter",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "FONT_FAMILY"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "font-weight": {
+      "light": {
+        "$type": "number",
+        "$value": 300,
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "FONT_STYLE"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "regular": {
+        "$type": "number",
+        "$value": 400,
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "FONT_STYLE"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "semibold": {
+        "$type": "number",
+        "$value": 600,
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "FONT_STYLE"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "bold": {
+        "$type": "number",
+        "$value": 700,
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "FONT_STYLE"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "icon-size": {
+      "xs": {
+        "$type": "number",
+        "$value": 12,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "sm": {
+        "$type": "number",
+        "$value": 16,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "md": {
+        "$type": "number",
+        "$value": 20,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "lg": {
+        "$type": "number",
+        "$value": 24,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "xl": {
+        "$type": "number",
+        "$value": 32,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "2-xl": {
+        "$type": "number",
+        "$value": 48,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "3-xl": {
+        "$type": "number",
+        "$value": 64,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "letter-spacing": {
+      "tighter": {
+        "$type": "number",
+        "$value": -1,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "LETTER_SPACING"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "tight": {
+        "$type": "number",
+        "$value": -0.4000000059604645,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "LETTER_SPACING"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "normal": {
+        "$type": "number",
+        "$value": 0,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "LETTER_SPACING"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "wide": {
+        "$type": "number",
+        "$value": 1,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "LETTER_SPACING"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "wider": {
+        "$type": "number",
+        "$value": 2,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "LETTER_SPACING"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "line-height": {
+      "16": {
+        "$type": "number",
+        "$value": 16,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "LINE_HEIGHT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "body": {
+        "$type": "number",
+        "$value": 150,
+        "$description": "Values are defined in %",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "LINE_HEIGHT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "heading": {
+        "$type": "number",
+        "$value": 120,
+        "$description": "Values are defined in %",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "LINE_HEIGHT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "min": {
+        "$type": "number",
+        "$value": 20,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "LINE_HEIGHT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "opacity": {
+      "0": {
+        "$type": "number",
+        "$value": 0,
+        "$description": "Values are defined in %",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "OPACITY"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "3": {
+        "$type": "number",
+        "$value": 3,
+        "$description": "Values are defined in %",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "OPACITY"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "5": {
+        "$type": "number",
+        "$value": 5,
+        "$description": "Values are defined in %",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "OPACITY"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "10": {
+        "$type": "number",
+        "$value": 10,
+        "$description": "Values are defined in %",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "OPACITY"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "20": {
+        "$type": "number",
+        "$value": 20,
+        "$description": "Values are defined in %",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "OPACITY"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "30": {
+        "$type": "number",
+        "$value": 30,
+        "$description": "Values are defined in %",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "OPACITY"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "40": {
+        "$type": "number",
+        "$value": 40,
+        "$description": "Values are defined in %",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "OPACITY"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "50": {
+        "$type": "number",
+        "$value": 50,
+        "$description": "Values are defined in %",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "OPACITY"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "60": {
+        "$type": "number",
+        "$value": 60,
+        "$description": "Values are defined in %",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "OPACITY"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "70": {
+        "$type": "number",
+        "$value": 70,
+        "$description": "Values are defined in %",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "OPACITY"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "80": {
+        "$type": "number",
+        "$value": 80,
+        "$description": "Values are defined in %",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "OPACITY"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "90": {
+        "$type": "number",
+        "$value": 90,
+        "$description": "Values are defined in %",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "OPACITY"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "100": {
+        "$type": "number",
+        "$value": 100,
+        "$description": "Values are defined in %",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "OPACITY"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "paragraph-spacing": {
+      "none": {
+        "$type": "number",
+        "$value": 0,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "PARAGRAPH_SPACING"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "sm": {
+        "$type": "number",
+        "$value": 8,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "PARAGRAPH_SPACING"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "md": {
+        "$type": "number",
+        "$value": 16,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "PARAGRAPH_SPACING"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "lg": {
+        "$type": "number",
+        "$value": 24,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "PARAGRAPH_SPACING"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "xl": {
+        "$type": "number",
+        "$value": 32,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "PARAGRAPH_SPACING"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "spacer": {
+      "0": {
+        "$type": "number",
+        "$value": 0,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "1": {
+        "$type": "number",
+        "$value": 2,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "2": {
+        "$type": "number",
+        "$value": 4,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "3": {
+        "$type": "number",
+        "$value": 8,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "4": {
+        "$type": "number",
+        "$value": 12,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "5": {
+        "$type": "number",
+        "$value": 16,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "6": {
+        "$type": "number",
+        "$value": 20,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "7": {
+        "$type": "number",
+        "$value": 24,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "8": {
+        "$type": "number",
+        "$value": 32,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "9": {
+        "$type": "number",
+        "$value": 48,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "10": {
+        "$type": "number",
+        "$value": 64,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "11": {
+        "$type": "number",
+        "$value": 96,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "12": {
+        "$type": "number",
+        "$value": 128,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "dimension": {
+      "0": {
+        "$type": "number",
+        "$value": 0,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "1": {
+        "$type": "number",
+        "$value": 1,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "2": {
+        "$type": "number",
+        "$value": 2,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "4": {
+        "$type": "number",
+        "$value": 4,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "8": {
+        "$type": "number",
+        "$value": 8,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "12": {
+        "$type": "number",
+        "$value": 12,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "16": {
+        "$type": "number",
+        "$value": 16,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "20": {
+        "$type": "number",
+        "$value": 20,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "24": {
+        "$type": "number",
+        "$value": 24,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "32": {
+        "$type": "number",
+        "$value": 32,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "40": {
+        "$type": "number",
+        "$value": 40,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "48": {
+        "$type": "number",
+        "$value": 48,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "52": {
+        "$type": "number",
+        "$value": 52,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "56": {
+        "$type": "number",
+        "$value": 56,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "60": {
+        "$type": "number",
+        "$value": 60,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "64": {
+        "$type": "number",
+        "$value": 64,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "72": {
+        "$type": "number",
+        "$value": 72,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "76": {
+        "$type": "number",
+        "$value": 76,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "80": {
+        "$type": "number",
+        "$value": 80,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "88": {
+        "$type": "number",
+        "$value": 88,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "96": {
+        "$type": "number",
+        "$value": 96,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "112": {
+        "$type": "number",
+        "$value": 112,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "120": {
+        "$type": "number",
+        "$value": 120,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "128": {
+        "$type": "number",
+        "$value": 128,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "132": {
+        "$type": "number",
+        "$value": 132,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "136": {
+        "$type": "number",
+        "$value": 136,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "144": {
+        "$type": "number",
+        "$value": 144,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "160": {
+        "$type": "number",
+        "$value": 160,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "168": {
+        "$type": "number",
+        "$value": 168,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "192": {
+        "$type": "number",
+        "$value": 192,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "224": {
+        "$type": "number",
+        "$value": 224,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "256": {
+        "$type": "number",
+        "$value": 256,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "280": {
+        "$type": "number",
+        "$value": 280,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "288": {
+        "$type": "number",
+        "$value": 288,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "320": {
+        "$type": "number",
+        "$value": 320,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "328": {
+        "$type": "number",
+        "$value": 328,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "340": {
+        "$type": "number",
+        "$value": 340,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "384": {
+        "$type": "number",
+        "$value": 384,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "480": {
+        "$type": "number",
+        "$value": 480,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "512": {
+        "$type": "number",
+        "$value": 512,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "640": {
+        "$type": "number",
+        "$value": 640,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "688": {
+        "$type": "number",
+        "$value": 688,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "768": {
+        "$type": "number",
+        "$value": 768,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "800": {
+        "$type": "number",
+        "$value": 800,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "872": {
+        "$type": "number",
+        "$value": 872,
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "896": {
+        "$type": "number",
+        "$value": 896,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "1024": {
+        "$type": "number",
+        "$value": 1024,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "1176": {
+        "$type": "number",
+        "$value": 1176,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "1280": {
+        "$type": "number",
+        "$value": 1280,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "1320": {
+        "$type": "number",
+        "$value": 1320,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "1440": {
+        "$type": "number",
+        "$value": 1440,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "TEXT_CONTENT",
+              "CORNER_RADIUS",
+              "WIDTH_HEIGHT",
+              "GAP",
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT",
+              "OPACITY",
+              "FONT_VARIATIONS"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    }
+  }
+}
