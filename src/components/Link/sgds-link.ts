@@ -11,12 +11,12 @@ export class SgdsLink extends SgdsElement {
   static styles = [...SgdsElement.styles, linkStyles];
   /** Determines the size of the link */
   @property({ type: String, reflect: true })
-  size: "sm" | "md" | "lg" = "md";
+  size: "xs" | "sm" | "md" | "lg" = "md";
   /** when true, sets the active stylings of the link */
   @property({ type: String, reflect: true })
-  variant: "primary" | "danger" | "light" | "dark" = "primary";
+  variant: "primary" | "danger" | "neutral" | "light" | "dark" = "primary";
 
-  private _handleSlotChange(e: Event) {
+  private _handleSlotChange() {
     const anchor = this.querySelector("a");
     if (anchor) {
       if (anchor.hasAttribute("disabled")) {
