@@ -4,11 +4,13 @@
       "0": {
         "$type": "number",
         "$value": 12,
-        "$description": "px",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["FONT_SIZE"],
+            "scopes": [
+              "FONT_SIZE"
+            ],
             "codeSyntax": {}
           }
         }
@@ -16,11 +18,13 @@
       "1": {
         "$type": "number",
         "$value": 14,
-        "$description": "px",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["FONT_SIZE"],
+            "scopes": [
+              "FONT_SIZE"
+            ],
             "codeSyntax": {}
           }
         }
@@ -28,11 +32,13 @@
       "2": {
         "$type": "number",
         "$value": 16,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["FONT_SIZE"],
+            "scopes": [
+              "FONT_SIZE"
+            ],
             "codeSyntax": {}
           }
         }
@@ -40,11 +46,13 @@
       "3": {
         "$type": "number",
         "$value": 20,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["FONT_SIZE"],
+            "scopes": [
+              "FONT_SIZE"
+            ],
             "codeSyntax": {}
           }
         }
@@ -52,11 +60,13 @@
       "4": {
         "$type": "number",
         "$value": 24,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["FONT_SIZE"],
+            "scopes": [
+              "FONT_SIZE"
+            ],
             "codeSyntax": {}
           }
         }
@@ -64,11 +74,13 @@
       "5": {
         "$type": "number",
         "$value": 28,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["FONT_SIZE"],
+            "scopes": [
+              "FONT_SIZE"
+            ],
             "codeSyntax": {}
           }
         }
@@ -76,11 +88,13 @@
       "6": {
         "$type": "number",
         "$value": 32,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["FONT_SIZE"],
+            "scopes": [
+              "FONT_SIZE"
+            ],
             "codeSyntax": {}
           }
         }
@@ -88,11 +102,13 @@
       "7": {
         "$type": "number",
         "$value": 40,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["FONT_SIZE"],
+            "scopes": [
+              "FONT_SIZE"
+            ],
             "codeSyntax": {}
           }
         }
@@ -100,11 +116,13 @@
       "8": {
         "$type": "number",
         "$value": 48,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["FONT_SIZE"],
+            "scopes": [
+              "FONT_SIZE"
+            ],
             "codeSyntax": {}
           }
         }
@@ -112,11 +130,13 @@
       "9": {
         "$type": "number",
         "$value": 56,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["FONT_SIZE"],
+            "scopes": [
+              "FONT_SIZE"
+            ],
             "codeSyntax": {}
           }
         }

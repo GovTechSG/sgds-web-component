@@ -8,7 +8,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -20,7 +22,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -32,7 +36,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -44,7 +50,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -56,7 +64,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -68,7 +78,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -80,7 +92,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -92,7 +106,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -104,7 +120,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -116,7 +134,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -128,7 +148,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -140,7 +162,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -154,7 +178,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -166,7 +192,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -178,7 +206,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -190,7 +220,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -202,7 +234,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -214,7 +248,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -226,7 +262,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -238,7 +276,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -250,7 +290,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -264,7 +306,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -276,7 +320,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -288,7 +334,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -300,7 +348,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -312,7 +362,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -324,7 +376,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -336,7 +390,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -348,7 +404,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -360,7 +418,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -374,7 +434,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -386,7 +448,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -398,7 +462,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -410,7 +476,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -422,7 +490,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -434,7 +504,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -446,7 +518,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -458,7 +532,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -470,7 +546,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -484,7 +562,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -496,7 +576,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -508,7 +590,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -520,7 +604,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -532,7 +618,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -544,7 +632,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -556,7 +646,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -568,7 +660,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -580,7 +674,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -594,7 +690,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -606,7 +704,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -618,7 +718,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -630,7 +732,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -642,7 +746,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -654,7 +760,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -666,7 +774,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -678,7 +788,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -690,7 +802,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -704,7 +818,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -716,7 +832,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -728,7 +846,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -740,7 +860,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -752,7 +874,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -764,7 +888,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -776,7 +902,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -788,7 +916,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -800,7 +930,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "ALL_SCOPES"
+            ],
             "codeSyntax": {}
           }
         }
@@ -814,7 +946,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["STROKE_FLOAT"],
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -824,11 +958,14 @@
       "0": {
         "$type": "number",
         "$value": 0,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["STROKE_FLOAT", "EFFECT_FLOAT"],
+            "scopes": [
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -836,11 +973,14 @@
       "1": {
         "$type": "number",
         "$value": 1,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["STROKE_FLOAT", "EFFECT_FLOAT"],
+            "scopes": [
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -848,11 +988,14 @@
       "2": {
         "$type": "number",
         "$value": 2,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["STROKE_FLOAT", "EFFECT_FLOAT"],
+            "scopes": [
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -860,11 +1003,14 @@
       "3": {
         "$type": "number",
         "$value": 3,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["STROKE_FLOAT", "EFFECT_FLOAT"],
+            "scopes": [
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -872,11 +1018,14 @@
       "4": {
         "$type": "number",
         "$value": 4,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["STROKE_FLOAT", "EFFECT_FLOAT"],
+            "scopes": [
+              "STROKE_FLOAT",
+              "EFFECT_FLOAT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -886,11 +1035,13 @@
       "none": {
         "$type": "number",
         "$value": 0,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["CORNER_RADIUS"],
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
             "codeSyntax": {}
           }
         }
@@ -898,11 +1049,13 @@
       "xs": {
         "$type": "number",
         "$value": 2,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["CORNER_RADIUS"],
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
             "codeSyntax": {}
           }
         }
@@ -910,11 +1063,13 @@
       "sm": {
         "$type": "number",
         "$value": 4,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["CORNER_RADIUS"],
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
             "codeSyntax": {}
           }
         }
@@ -922,11 +1077,13 @@
       "md": {
         "$type": "number",
         "$value": 8,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["CORNER_RADIUS"],
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
             "codeSyntax": {}
           }
         }
@@ -934,11 +1091,13 @@
       "lg": {
         "$type": "number",
         "$value": 12,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["CORNER_RADIUS"],
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
             "codeSyntax": {}
           }
         }
@@ -946,11 +1105,13 @@
       "xl": {
         "$type": "number",
         "$value": 16,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["CORNER_RADIUS"],
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
             "codeSyntax": {}
           }
         }
@@ -958,11 +1119,13 @@
       "2-xl": {
         "$type": "number",
         "$value": 24,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["CORNER_RADIUS"],
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
             "codeSyntax": {}
           }
         }
@@ -970,11 +1133,13 @@
       "full": {
         "$type": "number",
         "$value": 999,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["CORNER_RADIUS"],
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
             "codeSyntax": {}
           }
         }
@@ -984,11 +1149,13 @@
       "xs": {
         "$type": "number",
         "$value": "{sgds-dimension-320}",
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["CORNER_RADIUS"],
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
             "codeSyntax": {}
           }
         }
@@ -996,11 +1163,13 @@
       "sm": {
         "$type": "number",
         "$value": "{sgds-dimension-512}",
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["CORNER_RADIUS"],
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1008,11 +1177,13 @@
       "md": {
         "$type": "number",
         "$value": "{sgds-dimension-768}",
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["CORNER_RADIUS"],
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1020,11 +1191,13 @@
       "lg": {
         "$type": "number",
         "$value": "{sgds-dimension-1024}",
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["CORNER_RADIUS"],
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1032,11 +1205,13 @@
       "xl": {
         "$type": "number",
         "$value": "{sgds-dimension-1280}",
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["CORNER_RADIUS"],
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1044,11 +1219,13 @@
       "2-xl": {
         "$type": "number",
         "$value": "{sgds-dimension-1440}",
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["CORNER_RADIUS"],
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1062,7 +1239,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["FONT_FAMILY"],
+            "scopes": [
+              "FONT_FAMILY"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1076,7 +1255,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["FONT_STYLE"],
+            "scopes": [
+              "FONT_STYLE"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1088,7 +1269,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["FONT_STYLE"],
+            "scopes": [
+              "FONT_STYLE"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1100,7 +1283,9 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["FONT_STYLE"],
+            "scopes": [
+              "FONT_STYLE"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1112,21 +1297,39 @@
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["FONT_STYLE"],
+            "scopes": [
+              "FONT_STYLE"
+            ],
             "codeSyntax": {}
           }
         }
       }
     },
     "icon-size": {
-      "sm": {
+      "xs": {
         "$type": "number",
-        "$value": 16,
-        "$description": "",
+        "$value": 12,
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["WIDTH_HEIGHT"],
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "sm": {
+        "$type": "number",
+        "$value": 16,
+        "$description": "Values are defined in px",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1134,11 +1337,13 @@
       "md": {
         "$type": "number",
         "$value": 20,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["WIDTH_HEIGHT"],
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1146,11 +1351,13 @@
       "lg": {
         "$type": "number",
         "$value": 24,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["WIDTH_HEIGHT"],
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1158,11 +1365,13 @@
       "xl": {
         "$type": "number",
         "$value": 32,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["WIDTH_HEIGHT"],
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1170,11 +1379,13 @@
       "2-xl": {
         "$type": "number",
         "$value": 48,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1182,11 +1393,13 @@
       "3-xl": {
         "$type": "number",
         "$value": 64,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": false,
-            "scopes": ["ALL_SCOPES"],
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1196,11 +1409,13 @@
       "tighter": {
         "$type": "number",
         "$value": -1,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["LETTER_SPACING"],
+            "scopes": [
+              "LETTER_SPACING"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1208,11 +1423,13 @@
       "tight": {
         "$type": "number",
         "$value": -0.4000000059604645,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["LETTER_SPACING"],
+            "scopes": [
+              "LETTER_SPACING"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1220,11 +1437,13 @@
       "normal": {
         "$type": "number",
         "$value": 0,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["LETTER_SPACING"],
+            "scopes": [
+              "LETTER_SPACING"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1232,11 +1451,13 @@
       "wide": {
         "$type": "number",
         "$value": 1,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["LETTER_SPACING"],
+            "scopes": [
+              "LETTER_SPACING"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1244,11 +1465,13 @@
       "wider": {
         "$type": "number",
         "$value": 2,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["LETTER_SPACING"],
+            "scopes": [
+              "LETTER_SPACING"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1258,11 +1481,13 @@
       "16": {
         "$type": "number",
         "$value": 16,
-        "$description": "In pixel",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["LINE_HEIGHT"],
+            "scopes": [
+              "LINE_HEIGHT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1270,11 +1495,13 @@
       "body": {
         "$type": "number",
         "$value": 150,
-        "$description": "In percentage",
+        "$description": "Values are defined in %",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["LINE_HEIGHT"],
+            "scopes": [
+              "LINE_HEIGHT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1282,11 +1509,13 @@
       "heading": {
         "$type": "number",
         "$value": 120,
-        "$description": "In percentage",
+        "$description": "Values are defined in %",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["LINE_HEIGHT"],
+            "scopes": [
+              "LINE_HEIGHT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1294,11 +1523,13 @@
       "min": {
         "$type": "number",
         "$value": 20,
-        "$description": "In pixel",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["LINE_HEIGHT"],
+            "scopes": [
+              "LINE_HEIGHT"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1308,11 +1539,13 @@
       "0": {
         "$type": "number",
         "$value": 0,
-        "$description": "",
+        "$description": "Values are defined in %",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["OPACITY"],
+            "scopes": [
+              "OPACITY"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1320,11 +1553,13 @@
       "3": {
         "$type": "number",
         "$value": 3,
-        "$description": "",
+        "$description": "Values are defined in %",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["OPACITY"],
+            "scopes": [
+              "OPACITY"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1332,11 +1567,13 @@
       "5": {
         "$type": "number",
         "$value": 5,
-        "$description": "",
+        "$description": "Values are defined in %",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["OPACITY"],
+            "scopes": [
+              "OPACITY"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1344,11 +1581,13 @@
       "10": {
         "$type": "number",
         "$value": 10,
-        "$description": "",
+        "$description": "Values are defined in %",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["OPACITY"],
+            "scopes": [
+              "OPACITY"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1356,11 +1595,13 @@
       "20": {
         "$type": "number",
         "$value": 20,
-        "$description": "",
+        "$description": "Values are defined in %",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["OPACITY"],
+            "scopes": [
+              "OPACITY"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1368,11 +1609,13 @@
       "30": {
         "$type": "number",
         "$value": 30,
-        "$description": "",
+        "$description": "Values are defined in %",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["OPACITY"],
+            "scopes": [
+              "OPACITY"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1380,11 +1623,13 @@
       "40": {
         "$type": "number",
         "$value": 40,
-        "$description": "",
+        "$description": "Values are defined in %",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["OPACITY"],
+            "scopes": [
+              "OPACITY"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1392,11 +1637,13 @@
       "50": {
         "$type": "number",
         "$value": 50,
-        "$description": "",
+        "$description": "Values are defined in %",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["OPACITY"],
+            "scopes": [
+              "OPACITY"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1404,11 +1651,13 @@
       "60": {
         "$type": "number",
         "$value": 60,
-        "$description": "",
+        "$description": "Values are defined in %",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["OPACITY"],
+            "scopes": [
+              "OPACITY"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1416,11 +1665,13 @@
       "70": {
         "$type": "number",
         "$value": 70,
-        "$description": "",
+        "$description": "Values are defined in %",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["OPACITY"],
+            "scopes": [
+              "OPACITY"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1428,11 +1679,13 @@
       "80": {
         "$type": "number",
         "$value": 80,
-        "$description": "",
+        "$description": "Values are defined in %",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["OPACITY"],
+            "scopes": [
+              "OPACITY"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1440,11 +1693,13 @@
       "90": {
         "$type": "number",
         "$value": 90,
-        "$description": "",
+        "$description": "Values are defined in %",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["OPACITY"],
+            "scopes": [
+              "OPACITY"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1452,11 +1707,13 @@
       "100": {
         "$type": "number",
         "$value": 100,
-        "$description": "",
+        "$description": "Values are defined in %",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["OPACITY"],
+            "scopes": [
+              "OPACITY"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1466,11 +1723,13 @@
       "none": {
         "$type": "number",
         "$value": 0,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["PARAGRAPH_SPACING"],
+            "scopes": [
+              "PARAGRAPH_SPACING"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1478,11 +1737,13 @@
       "sm": {
         "$type": "number",
         "$value": 8,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["PARAGRAPH_SPACING"],
+            "scopes": [
+              "PARAGRAPH_SPACING"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1490,11 +1751,13 @@
       "md": {
         "$type": "number",
         "$value": 16,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["PARAGRAPH_SPACING"],
+            "scopes": [
+              "PARAGRAPH_SPACING"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1502,11 +1765,13 @@
       "lg": {
         "$type": "number",
         "$value": 24,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["PARAGRAPH_SPACING"],
+            "scopes": [
+              "PARAGRAPH_SPACING"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1514,11 +1779,13 @@
       "xl": {
         "$type": "number",
         "$value": 32,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["PARAGRAPH_SPACING"],
+            "scopes": [
+              "PARAGRAPH_SPACING"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1528,11 +1795,13 @@
       "0": {
         "$type": "number",
         "$value": 0,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["GAP"],
+            "scopes": [
+              "GAP"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1540,11 +1809,13 @@
       "1": {
         "$type": "number",
         "$value": 2,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["GAP"],
+            "scopes": [
+              "GAP"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1552,11 +1823,13 @@
       "2": {
         "$type": "number",
         "$value": 4,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["GAP"],
+            "scopes": [
+              "GAP"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1564,11 +1837,13 @@
       "3": {
         "$type": "number",
         "$value": 8,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["GAP"],
+            "scopes": [
+              "GAP"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1576,11 +1851,13 @@
       "4": {
         "$type": "number",
         "$value": 12,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["GAP"],
+            "scopes": [
+              "GAP"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1588,11 +1865,13 @@
       "5": {
         "$type": "number",
         "$value": 16,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["GAP"],
+            "scopes": [
+              "GAP"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1600,11 +1879,13 @@
       "6": {
         "$type": "number",
         "$value": 20,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["GAP"],
+            "scopes": [
+              "GAP"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1612,11 +1893,13 @@
       "7": {
         "$type": "number",
         "$value": 24,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["GAP"],
+            "scopes": [
+              "GAP"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1624,11 +1907,13 @@
       "8": {
         "$type": "number",
         "$value": 32,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["GAP"],
+            "scopes": [
+              "GAP"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1636,11 +1921,13 @@
       "9": {
         "$type": "number",
         "$value": 48,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["GAP"],
+            "scopes": [
+              "GAP"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1648,11 +1935,13 @@
       "10": {
         "$type": "number",
         "$value": 64,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["GAP"],
+            "scopes": [
+              "GAP"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1660,11 +1949,13 @@
       "11": {
         "$type": "number",
         "$value": 96,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["GAP"],
+            "scopes": [
+              "GAP"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1672,11 +1963,13 @@
       "12": {
         "$type": "number",
         "$value": 128,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
-            "scopes": ["GAP"],
+            "scopes": [
+              "GAP"
+            ],
             "codeSyntax": {}
           }
         }
@@ -1686,7 +1979,7 @@
       "0": {
         "$type": "number",
         "$value": 0,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -1707,7 +2000,7 @@
       "1": {
         "$type": "number",
         "$value": 1,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -1728,7 +2021,7 @@
       "2": {
         "$type": "number",
         "$value": 2,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -1749,7 +2042,7 @@
       "4": {
         "$type": "number",
         "$value": 4,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -1770,7 +2063,7 @@
       "8": {
         "$type": "number",
         "$value": 8,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -1791,7 +2084,7 @@
       "12": {
         "$type": "number",
         "$value": 12,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -1812,7 +2105,7 @@
       "16": {
         "$type": "number",
         "$value": 16,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -1833,7 +2126,7 @@
       "20": {
         "$type": "number",
         "$value": 20,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -1854,7 +2147,7 @@
       "24": {
         "$type": "number",
         "$value": 24,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -1875,7 +2168,7 @@
       "32": {
         "$type": "number",
         "$value": 32,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -1896,7 +2189,7 @@
       "40": {
         "$type": "number",
         "$value": 40,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -1917,7 +2210,7 @@
       "48": {
         "$type": "number",
         "$value": 48,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -1938,7 +2231,7 @@
       "52": {
         "$type": "number",
         "$value": 52,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -1959,7 +2252,7 @@
       "56": {
         "$type": "number",
         "$value": 56,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -1980,7 +2273,7 @@
       "60": {
         "$type": "number",
         "$value": 60,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2001,7 +2294,7 @@
       "64": {
         "$type": "number",
         "$value": 64,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2022,7 +2315,7 @@
       "72": {
         "$type": "number",
         "$value": 72,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2043,7 +2336,7 @@
       "76": {
         "$type": "number",
         "$value": 76,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2064,7 +2357,7 @@
       "80": {
         "$type": "number",
         "$value": 80,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2085,7 +2378,7 @@
       "88": {
         "$type": "number",
         "$value": 88,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2106,7 +2399,7 @@
       "96": {
         "$type": "number",
         "$value": 96,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2127,7 +2420,7 @@
       "112": {
         "$type": "number",
         "$value": 112,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2148,7 +2441,7 @@
       "120": {
         "$type": "number",
         "$value": 120,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2169,7 +2462,7 @@
       "128": {
         "$type": "number",
         "$value": 128,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2190,7 +2483,7 @@
       "132": {
         "$type": "number",
         "$value": 132,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2211,7 +2504,7 @@
       "136": {
         "$type": "number",
         "$value": 136,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2232,7 +2525,7 @@
       "144": {
         "$type": "number",
         "$value": 144,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2253,7 +2546,7 @@
       "160": {
         "$type": "number",
         "$value": 160,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2274,7 +2567,7 @@
       "168": {
         "$type": "number",
         "$value": 168,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2295,7 +2588,7 @@
       "192": {
         "$type": "number",
         "$value": 192,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2316,7 +2609,7 @@
       "224": {
         "$type": "number",
         "$value": 224,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2337,7 +2630,7 @@
       "256": {
         "$type": "number",
         "$value": 256,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2358,7 +2651,7 @@
       "280": {
         "$type": "number",
         "$value": 280,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2379,7 +2672,7 @@
       "288": {
         "$type": "number",
         "$value": 288,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2400,7 +2693,7 @@
       "320": {
         "$type": "number",
         "$value": 320,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2421,7 +2714,7 @@
       "328": {
         "$type": "number",
         "$value": 328,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2442,7 +2735,7 @@
       "340": {
         "$type": "number",
         "$value": 340,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2463,7 +2756,7 @@
       "384": {
         "$type": "number",
         "$value": 384,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2484,7 +2777,7 @@
       "480": {
         "$type": "number",
         "$value": 480,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2505,7 +2798,7 @@
       "512": {
         "$type": "number",
         "$value": 512,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2526,7 +2819,7 @@
       "640": {
         "$type": "number",
         "$value": 640,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2547,7 +2840,7 @@
       "688": {
         "$type": "number",
         "$value": 688,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2568,7 +2861,7 @@
       "768": {
         "$type": "number",
         "$value": 768,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2589,7 +2882,7 @@
       "800": {
         "$type": "number",
         "$value": 800,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2631,7 +2924,7 @@
       "896": {
         "$type": "number",
         "$value": 896,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2652,7 +2945,7 @@
       "1024": {
         "$type": "number",
         "$value": 1024,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2673,7 +2966,7 @@
       "1176": {
         "$type": "number",
         "$value": 1176,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2694,7 +2987,7 @@
       "1280": {
         "$type": "number",
         "$value": 1280,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2715,7 +3008,7 @@
       "1320": {
         "$type": "number",
         "$value": 1320,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
@@ -2736,7 +3029,7 @@
       "1440": {
         "$type": "number",
         "$value": 1440,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
