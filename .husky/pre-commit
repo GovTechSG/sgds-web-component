@@ -1,4 +1,11 @@
 #!/usr/bin/env sh
+
+if [ -n "$CI" ]; then
+  echo "Skipping pre-commit checks in local environment."
+else
 . "$(dirname -- "$0")/_/husky.sh"
 
 npm run format && npm run lint:fix
+
+fi
+
