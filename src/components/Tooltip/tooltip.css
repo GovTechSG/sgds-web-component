@@ -1,8 +1,10 @@
 :host {
   display: contents;
 }
-.tooltip-placeholder{
+
+.tooltip-placeholder {
   display: inline-block;
+  max-width: 100%;
 }
 .tooltip {
   word-wrap: break-word;

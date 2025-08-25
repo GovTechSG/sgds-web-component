@@ -43,9 +43,14 @@ sgds-faq-grid {
   gap: var(--sgds-gap-sm);
 }
 
-.docs-story{
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.docs-story {
   background: var(--sgds-bg-default);
 }
+
 ul.toc-list > * {
   font-size: var(--sgds-font-size-1);
 }
