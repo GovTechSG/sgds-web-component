@@ -2,7 +2,7 @@ import { property, query } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
-import SgdsOverflowMenu from "../../internals/OverflowMenu/sgds-overflow-menu";
+import SgdsOverflowMenu from "../OverflowMenu/sgds-overflow-menu";
 import breadcrumbStyle from "./breadcrumb.css";
 import type SgdsBreadcrumbItem from "./sgds-breadcrumb-item";
 /**
