@@ -1,12 +1,16 @@
 import { html, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import SgdsElement from "../../base/sgds-element";
-import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+
 import { watch } from "../../utils/watch";
 import badgeStyle from "./badge.css";
+
+import SgdsElement from "../../base/sgds-element";
 import SgdsTooltip from "../Tooltip/sgds-tooltip";
+import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+
 import { getTextContent } from "../../utils/slot";
+
 export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral";
 
 /**

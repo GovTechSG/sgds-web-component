@@ -53,7 +53,7 @@ sgds-tooltip {
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
   border-radius: var(--sgds-border-radius-sm);
   font-size: var(--sgds-font-size-1);
-  height: var(--sgds-dimension-24);
+  height: var(--sgds-dimension-24, 24px);
   min-width: var(--sgds-dimension-24);
   display: inline-flex;
   justify-content: center;
@@ -70,7 +70,6 @@ sgds-tooltip {
 .badge-label {
   padding: var(--sgds-padding-none) var(--sgds-padding-2-xs);
   line-height: var(--sgds-line-height-min);
-  white-space: unset;
 }
 
 .badge-dismissible {
