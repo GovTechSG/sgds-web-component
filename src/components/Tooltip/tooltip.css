@@ -1,8 +1,14 @@
 :host {
   display: contents;
 }
-.tooltip-placeholder{
+
+slot::slotted(*) {
+  display: none;
+}
+
+.tooltip-placeholder {
   display: inline-block;
+  max-width: 100%;
 }
 .tooltip {
   word-wrap: break-word;

@@ -41,7 +41,13 @@
   border: var(--sgds-border-width-1) solid var(--sgds-neutral-border-color-default);
 }
 
+sgds-tooltip {
+  display: block;
+  max-width: 100%;
+}
+
 .badge {
+  max-width: 100%;
   background-color: var(--sgds-primary-surface-default);
   color: var(--sgds-color-fixed-light);
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);

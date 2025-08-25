@@ -7,11 +7,10 @@ import { watch } from "../../utils/watch";
 import badgeStyle from "./badge.css";
 import SgdsTooltip from "../Tooltip/sgds-tooltip";
 import { getTextContent } from "../../utils/slot";
-import { truncate } from "lodash";
 export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral";
 
 /**
- * @summary Badges can be used to highlight important bits of information such as labels, notifications & status.
+ * @summary Badges can be used to highlight important bits of information such as labels, notifications & status. When the text exceeds the width, it will be truncated with a tooltip.
  *
  * @slot default - slot for badge
  * @slot icon - The slot for icon to the left of the badge text
@@ -102,10 +101,8 @@ export class SgdsBadge extends SgdsElement {
         badge: true,
         outlined: this.outlined,
         truncated: this.truncated
-      })}
-            "
+      })}"
       aria-hidden=${this.show ? "false" : "true"}
-      title=${this.truncated ? this.text : ""}
     >
       ${!this.dismissible ? html`<slot name="icon"></slot>` : nothing}
 
@@ -127,7 +124,7 @@ export class SgdsBadge extends SgdsElement {
   render() {
     return (this.dismissible && this.show) || !this.dismissible
       ? this.truncated
-        ? html`${this._renderContent()}`
+        ? html`<sgds-tooltip content=${this.text}>${this._renderContent()}</sgds-tooltip>`
         : this._renderContent()
       : nothing;
   }
