@@ -1,6 +1,23 @@
+import React, { useEffect } from "react";
 
 export const Table = () => {
+    const tableData = [
+        ["1", "John", "Doe", "@johndoe"],
+        ["2", "Jane", "Doe", "@janedoe"],
+        ["3", "Bob", "Smith", "@bobsmith"]
+      ]
+  const [state, setState] = React.useState(tableData)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setState([])
+    }, 5000)
+  }, [])
+  const rowHeader = ["#", "First Names", "Last Name", "Username"]
   return (
+    <>
+    <sgds-table tableData={state} rowHeader={rowHeader}></sgds-table>
+    <br/>
     <sgds-table>
   <sgds-table-row>
     <sgds-table-head>#</sgds-table-head>
@@ -48,5 +65,6 @@ export const Table = () => {
     </sgds-table-cell>
   </sgds-table-row>
 </sgds-table>
+</>
   );
 };
