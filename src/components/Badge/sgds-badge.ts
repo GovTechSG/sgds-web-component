@@ -1,10 +1,13 @@
 import { html, nothing } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 import { watch } from "../../utils/watch";
 import badgeStyle from "./badge.css";
+import SgdsTooltip from "../Tooltip/sgds-tooltip";
+import { getTextContent } from "../../utils/slot";
+import { truncate } from "lodash";
 export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral";
 
 /**
@@ -23,7 +26,8 @@ export class SgdsBadge extends SgdsElement {
 
   /**@internal */
   static dependencies = {
-    "sgds-close-button": SgdsCloseButton
+    "sgds-close-button": SgdsCloseButton,
+    "sgds-tooltip": SgdsTooltip
   };
 
   /** Controls the appearance of the dismissible badge. This prop only applies when dismissible is true  */
@@ -38,10 +42,14 @@ export class SgdsBadge extends SgdsElement {
   /** Manually set the dismissible state of the button to `false` */
   @property({ type: Boolean, reflect: true }) dismissible = false;
 
+  @state() private truncated = false;
+  @state() private text = "";
+
   /** Closes the badge  */
   public close() {
     this.show = false;
   }
+
   /**@internal */
   @watch("show")
   _handleShowChange() {
@@ -66,34 +74,61 @@ export class SgdsBadge extends SgdsElement {
     }
   }
 
+  /**@internal */
+  @watch("text")
+  _handleTruncation() {
+    // checking of text height if its exceeding parent, it needs to be truncated
+    const badge = this.shadowRoot.querySelector(".badge");
+    const badgeLabel = this.shadowRoot.querySelector(".badge-label");
+
+    if (badge && badgeLabel) {
+      const labelHeight = badgeLabel.getBoundingClientRect().height;
+      const badgeHeight = badge.getBoundingClientRect().height;
+
+      this.truncated = labelHeight > badgeHeight;
+    }
+  }
+
+  _handleLabelSlotChange(e: Event) {
+    this.text = getTextContent(e.target as HTMLSlotElement);
+    return;
+  }
+
+  _renderContent() {
+    return html`<div
+      class="  
+          ${classMap({
+        [`badge-dismissible`]: this.dismissible,
+        badge: true,
+        outlined: this.outlined,
+        truncated: this.truncated
+      })}
+            "
+      aria-hidden=${this.show ? "false" : "true"}
+      title=${this.truncated ? this.text : ""}
+    >
+      ${!this.dismissible ? html`<slot name="icon"></slot>` : nothing}
+
+      <span class="badge-label">
+        <slot @slotchange=${this._handleLabelSlotChange}></slot>
+      </span>
+
+      ${this.dismissible
+        ? html`<sgds-close-button
+            size="sm"
+            aria-label="close the badge"
+            @click=${this.close}
+            variant=${this.outlined ? "dark" : "light"}
+          ></sgds-close-button>`
+        : nothing}
+    </div>`;
+  }
+
   render() {
     return (this.dismissible && this.show) || !this.dismissible
-      ? html`
-          <div
-            class="  
-          ${classMap({
-              [`badge-dismissible`]: this.dismissible,
-              badge: true,
-              outlined: this.outlined
-            })}
-            "
-            aria-hidden=${this.show ? "false" : "true"}
-          >
-            ${!this.dismissible ? html`<slot name="icon"></slot>` : nothing}
-            <span class="badge-label">
-              <slot></slot>
-            </span>
-
-            ${this.dismissible
-              ? html`<sgds-close-button
-                  size="sm"
-                  aria-label="close the badge"
-                  @click=${this.close}
-                  variant=${this.outlined ? "dark" : "light"}
-                ></sgds-close-button>`
-              : nothing}
-          </div>
-        `
+      ? this.truncated
+        ? html`${this._renderContent()}`
+        : this._renderContent()
       : nothing;
   }
 }

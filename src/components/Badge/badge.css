@@ -1,5 +1,7 @@
 :host {
   display: inline-flex;
+  max-width: 100%;
+  cursor: default;
 }
 
 :host([variant="success"]) .badge {
@@ -62,6 +64,7 @@
 .badge-label {
   padding: var(--sgds-padding-none) var(--sgds-padding-2-xs);
   line-height: var(--sgds-line-height-min);
+  white-space: unset;
 }
 
 .badge-dismissible {
@@ -72,7 +75,13 @@
   --sgds-close-btn-border-radius: var(--sgds-border-radius-sm);
 }
 
-slot::slotted(*){
+.badge.truncated .badge-label {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+slot::slotted(*) {
   font-weight: normal;
   font-size: 14px;
 }
