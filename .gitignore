@@ -8,3 +8,4 @@ custom-elements.json
 stories/components
 stats.html
 *storybook.log
+.env

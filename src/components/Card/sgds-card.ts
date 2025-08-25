@@ -85,21 +85,14 @@ export class SgdsCard extends CardElement {
       return console.error("Multiple elements passed into SgdsCard's link slot");
     }
 
-    if (this.stretchedLink && childNodes[0] instanceof HTMLAnchorElement) {
-      const hyperlink = childNodes[0].querySelector("a") || childNodes[0];
-      this.card.setAttribute("href", hyperlink.href);
-      const linkSlot = this.shadowRoot.querySelector("slot[name='link']") as HTMLSlotElement;
-      linkSlot.style.display = "none";
-    }
+    if (!this.stretchedLink) return;
 
-    if (this.stretchedLink && childNodes[0] instanceof SgdsLink) {
+    if (childNodes[0] instanceof HTMLAnchorElement || childNodes[0] instanceof SgdsLink) {
       const hyperlink = (childNodes[0].querySelector("a") || childNodes[0]) as HTMLAnchorElement;
       this.card.setAttribute("href", hyperlink.href);
       const linkSlot = this.shadowRoot.querySelector("slot[name='link']") as HTMLSlotElement;
       linkSlot.style.display = "none";
     }
-
-    return;
   }
 
   handleImgSlotChange(e: Event) {

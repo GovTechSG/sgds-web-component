@@ -18,6 +18,7 @@ import SgdsIconButton from "../IconButton/sgds-icon-button";
 import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
+import { defaultValue } from "../../utils/defaultvalue";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -48,7 +49,18 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
   /** When true, adds disabled attribute to input and button element */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** The initial value of DatePicker on first load for single & range mode as array of string. eg.'["22/12/2023"]' for single & '["22/12/2023","25/12/2023"]' for range respectively  */
+  /** Sets the initial value of the datepicker. Replaces deprecated `initialValue`.
+   * Pass in dates in this format `dd/mm/yyyy` for single mode and  `dd/mm/yyyy - dd/mm/yyyy` for range mode
+   * For example, `value="22/12/2023"` for single mode or `value="22/12/2023 - 25/12/2023"` for range mode
+   */
+  @property({ type: String, reflect: true }) value = "";
+
+  /**
+   * @deprecated since v3.1.1 in favour of `value`.
+   * The initial value of DatePicker on first load for single &
+   * range mode as array of string. eg.'["22/12/2023"]' for single &
+   * '["22/12/2023","25/12/2023"]' for range respectively
+   * */
   @property({ type: Array, reflect: true }) initialValue: string[] = [];
 
   private dateFormat = "DD/MM/YYYY";
@@ -84,8 +96,11 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
 
   /** Provides the date context for Calendar to present the appropriate view. Defaults to today's date */
   @property({ attribute: false }) displayDate: Date;
-  /**@internal */
-  @state() value = "";
+
+  /**Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  @defaultValue()
+  defaultValue = "";
+
   /**@internal */
   @state() invalid = false;
 
@@ -161,6 +176,8 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     this.addEventListener("sgds-hide", this._handleCloseMenu);
     this.addEventListener("sgds-show", this._handleOpenMenu);
     this.addEventListener("blur", this._mixinCheckValidity);
+
+    this.initialValue = this.value ? this.value.split(" - ").map(v => v.trim()) : this.initialValue;
     this.initialDisplayDate = this.displayDate || new Date();
     if (this.initialValue && this.initialValue.length > 0) {
       // Validate initialValue against the dateFormat regex
@@ -221,7 +238,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     }
   }
 
-  @watch("value")
+  @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
     this.emit("sgds-change-date");
   }
@@ -326,12 +343,15 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     this._manageInternalsBadInput();
   }
   private async _handleEmptyInput() {
-    this._manageEmptyInput();
+    if (this.required) {
+      this._manageEmptyInput();
+    }
+    return;
   }
-  private async _resetDatepicker() {
+  private async _resetDatepicker(resetValue = "") {
     this.displayDate = this.initialDisplayDate;
     this.selectedDateRange = [];
-    this.value = "";
+    this.value = resetValue;
     this.view = "days";
     const input = await this.datepickerInputAsync;
     input.setInvalid(false);
@@ -339,7 +359,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     await input.applyInputMask();
 
     this._mixinResetValidity(input);
-    if (this.isValueEmpty() && this.required) {
+    if (this.isValueEmpty()) {
       this._handleEmptyInput();
     }
   }
@@ -384,7 +404,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
    * Handles the form "reset" event
    */
   private async _mixinResetFormControl() {
-    this._resetDatepicker();
+    this._resetDatepicker(this.defaultValue);
   }
   private async _handleInputMaskChange(e: CustomEvent) {
     this.value = e.detail;

@@ -129,6 +129,7 @@
   /* Semantic - Form Color */
   --sgds-form-surface-default: var(--sgds-gray-000);
   --sgds-form-surface-emphasis: var(--sgds-gray-700);
+  --sgds-form-surface-raised: var(--sgds-gray-100);
   --sgds-form-surface-subtle: var(--sgds-gray-400);
   --sgds-form-surface-muted: var(--sgds-gray-200);
   --sgds-form-surface-inverse: var(--sgds-gray-900);

@@ -1,3 +1,11 @@
+## Password 
+
+With the `type` prop set to `password`, a eye icon appears to allow unmasking of sensitive content in the input. 
+
+<Canvas of={InputStories.PasswordInput}>
+  <Story of={InputStories.PasswordInput} />
+</Canvas>
+
 ## Disabled 
 
 Add `disabled` prop to disabled the input
@@ -51,12 +59,27 @@ Use the string type `prefix` or `suffix` prop to add more indication and meaning
   <Story of={InputStories.SuffixInput} />
 </Canvas>
 
-## Leading Icon 
+## Leading and trailing icons 
+
+Icon slots are meant to insert icons for visual and descriptive purposes. It is not intended for call to action. 
 
 <Canvas of={InputStories.LeadingIcon}>
   <Story of={InputStories.LeadingIcon} />
 </Canvas>
 
+When trailing icon slot is present, it overrides the valid icon and loading spinner rendered when `valid` or `loading` prop are true.
+
+<Canvas of={InputStories.TrailingIcon}>
+  <Story of={InputStories.TrailingIcon} />
+</Canvas>
+
+## Call to Action
+
+Add call to action items in the `action` slot. It is recommended to use `<sgds-icon-button>` within this slot.
+
+<Canvas of={InputStories.Action}>
+  <Story of={InputStories.Action} />
+</Canvas>
 
 ## Validation 
 

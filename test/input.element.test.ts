@@ -1,5 +1,5 @@
 import "./sgds-web-component";
-import type { SgdsInput, SgdsButton } from "../src/components";
+import type { SgdsInput, SgdsButton, SgdsIcon } from "../src/components";
 import { expect, fixture, html, oneEvent, waitUntil, assert, elementUpdated } from "@open-wc/testing";
 import sinon from "sinon";
 import { sendKeys, sendMouse } from "@web/test-runner-commands";
@@ -12,9 +12,13 @@ describe("sgds-input", () => {
       `
         <div class="form-control-container">
           <label class="form-label" for="test-id">label</label>
+           <div class="form-control-row">
           <div class="form-control-group">
             <slot name="icon"></slot>
             <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+            <slot name="trailing-icon"></slot>
+          </div>
+          <slot name="action"></slot>
           </div>
           <div class="form-text" id="test-idHelp">hello</div>
         </div>
@@ -28,13 +32,14 @@ describe("sgds-input", () => {
       el,
       `
         <div class="form-control-container">
+        <div class="form-control-row">
           <div class="form-control-group">
             <slot name="icon"></slot>
             <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
-             <span class="form-control-suffix">
-           test
-         </span>
+            <span class="form-control-suffix">test</span>  
+            <slot name="trailing-icon"></slot>
           </div>
+            <slot name="action"></slot>
         </div>
     `,
       { ignoreAttributes: ["id", "for", "aria-labelledby"] }
@@ -46,14 +51,17 @@ describe("sgds-input", () => {
       el,
       `
         <div class="form-control-container">
+        <div class="form-control-row">
           <div class="form-control-group">
             <slot name="icon"></slot>
             <span class="form-control-prefix">
               test
             </span>
             <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+            <slot name="trailing-icon"></slot>
           </div>
-        </div>
+            <slot name="action"></slot>
+          </div>
     `,
       { ignoreAttributes: ["id", "for", "aria-labelledby"] }
     );
@@ -64,14 +72,18 @@ describe("sgds-input", () => {
       el,
       `
         <div class="form-control-container">
-          <div class="form-control-group">
-            <slot name="icon"></slot>
-            <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
-            <sgds-spinner
-            size="sm"
-            variant="primary">
-          </sgds-spinner>
+          <div class="form-control-row">
+            <div class="form-control-group">
+              <slot name="icon"></slot>
+              <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+              <slot name="trailing-icon">
+              <sgds-spinner
+                size="sm"
+                variant="primary">
+              </sgds-spinner>
+            </slot>
             </div>
+              <slot name="action"></slot>
         </div>
     `,
       { ignoreAttributes: ["id", "for", "aria-labelledby"] }
@@ -171,6 +183,33 @@ describe("sgds-input", () => {
     await waitUntil(() => submitHandler.calledOnce);
 
     expect(submitHandler).to.have.been.calledOnce;
+  });
+});
+
+describe("sgds-input type='password'", () => {
+  it("when type=password, eye-fill icon should appear", async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input type="password"></sgds-input> `);
+    const icon = el.shadowRoot?.querySelector<SgdsIcon>("sgds-icon");
+    expect(icon?.name).to.equal("eye-fill");
+  });
+  it("when eye-fill icon is clicked, it becomes eye-slash-fill icon", async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input type="password"></sgds-input> `);
+    const icon = el.shadowRoot?.querySelector<SgdsIcon>("sgds-icon");
+    expect(icon?.name).to.equal("eye-fill");
+
+    icon?.click();
+    await elementUpdated(el);
+    expect(icon?.name).to.equal("eye-slash-fill");
+  });
+  it("when eye-fill icon is clicked, shadow dom input's type becomes text to show password", async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input type="password"></sgds-input> `);
+    const icon = el.shadowRoot?.querySelector<SgdsIcon>("sgds-icon");
+    expect(icon?.name).to.equal("eye-fill");
+
+    icon?.click();
+    await elementUpdated(el);
+    const shadowInput = el.shadowRoot?.querySelector("input");
+    expect(shadowInput?.type).to.equal("text");
   });
 });
 describe("Feedback UI optional", () => {
@@ -343,7 +382,9 @@ describe("when using constraint validation", () => {
   });
 
   it("when disabled, invalid state is removed", async () => {
-    const el = await fixture<SgdsInput>(html` <sgds-input invalid invalidFeedback="" hasFeedback></sgds-input> `);
+    const el = await fixture<SgdsInput>(
+      html` <sgds-input invalid invalidFeedback="test" hasFeedback="both"></sgds-input> `
+    );
     expect(el.invalid).to.be.true;
     el.disabled = true;
     await el.updateComplete;

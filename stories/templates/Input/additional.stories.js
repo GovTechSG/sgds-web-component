@@ -26,6 +26,33 @@ const LeadingIconTemplate = args =>
       <sgds-icon slot="icon" name="telephone"></sgds-icon>
     </sgds-input>
   `;
+const TrailingIconTemplate = args =>
+  html`
+    <sgds-input name="trailing-icon-input" id="trailing-icon-input" hintText="with trailing icon" label="Trailing Icon">
+      <sgds-icon slot="trailing-icon" name="telephone"></sgds-icon>
+    </sgds-input>
+  `;
+const ActionTemplate = args =>
+  html`
+    <sgds-input name="action-input" id="action-input" hintText="with action" label="Action">
+      <sgds-icon-button slot="action" name="trash" id="call-to-action">Action</sgds-icon-button>
+    </sgds-input>
+
+    <script>
+      const button = document.querySelector("sgds-icon-button#call-to-action");
+      const input = document.querySelector("sgds-input#action-input");
+      button.addEventListener("click", () => {
+        input.value = "";
+      });
+    </script>
+  `;
+export const PasswordInput = {
+  render: Template.bind({}),
+  name: "Password",
+  args: { ...args, type: "password" },
+  parameters: {},
+  tags: ["!dev"]
+};
 export const DisabledInput = {
   render: Template.bind({}),
   name: "Disabled",
@@ -84,6 +111,25 @@ export const SuffixInput = {
 export const LeadingIcon = {
   render: LeadingIconTemplate.bind({}),
   name: "With leading icon",
+  args: {
+    ...args
+  },
+  parameters: {},
+  tags: ["!dev"]
+};
+export const TrailingIcon = {
+  render: TrailingIconTemplate.bind({}),
+  name: "With trailing icon",
+  args: {
+    ...args
+  },
+  parameters: {},
+  tags: ["!dev"]
+};
+
+export const Action = {
+  render: ActionTemplate.bind({}),
+  name: "With action",
   args: {
     ...args
   },

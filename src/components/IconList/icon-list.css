@@ -7,7 +7,7 @@ slot {
 slot::slotted(*){
   display: flex;
   gap: var(--sgds-gap-xs);
-  align-items: center;
+  align-items: flex-start;
 }
 
 .sm {

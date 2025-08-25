@@ -1,0 +1,64 @@
+{
+  "text": {
+    "max-width": {
+      "$type": "number",
+      "$value": "{sgds-dimension-872}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {}
+        }
+      }
+    }
+  },
+  "container": {
+    "max-width": {
+      "2-xl": {
+        "$type": "number",
+        "$value": "{sgds-dimension-1320}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "xl": {
+        "$type": "number",
+        "$value": "{sgds-dimension-1176}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "lg": {
+        "$type": "number",
+        "$value": "{sgds-dimension-896}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    }
+  }
+}
