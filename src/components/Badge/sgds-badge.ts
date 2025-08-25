@@ -14,7 +14,8 @@ import { getTextContent } from "../../utils/slot";
 export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral";
 
 /**
- * @summary Badges can be used to highlight important bits of information such as labels, notifications & status. When the text exceeds the width, it will be truncated with a tooltip.
+ * @summary Badges can be used to highlight important bits of information such as labels, notifications & status.
+ * When the text exceeds the width, it will be truncated with a tooltip that will be displayed on hover.
  *
  * @slot default - slot for badge
  * @slot icon - The slot for icon to the left of the badge text
