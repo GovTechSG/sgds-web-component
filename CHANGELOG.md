@@ -3,8 +3,8 @@
 ### Fix
 
 - **Badge**: stop tooltip event from propagation
-- **Pagination**: next button to disable  where pages length is less than 2 (#370)
-- **Pagination**: next button to disable  where pages length is less than 2
+- **Pagination**: next button to disable where pages length is less than 2 (#370)
+- **Pagination**: next button to disable where pages length is less than 2
 - **validation**: make ElementInternals instantiation idempotent (#367)
 
 ### Refactor
@@ -16,8 +16,8 @@
 ### Fix
 
 - **validation**: implement check if controller is instantiated and defined then do not run again
-- **Masthead**: provide fallback values for when --sgds-mainnav-* toke… (#351)
-- **Masthead**: provide fallback values for when --sgds-mainnav-* tokens not defined
+- **Masthead**: provide fallback values for when --sgds-mainnav-\* toke… (#351)
+- **Masthead**: provide fallback values for when --sgds-mainnav-\* tokens not defined
 
 ## v3.3.1 (2025-09-01)
 
