@@ -12,8 +12,8 @@
 
 - **Datepicker**: configure popper for datepicker
 - **Dropdown**: select, combobox, dropdown dependencies checked
-- *****: restores types definition in the library (#350)
-- *****: restores types definition in the library
+- **\***: restores types definition in the library (#350)
+- **\***: restores types definition in the library
 - **modal**: css override for sizes (#347)
 - **modal**: css override for sizes
 - **card**: remove pointer events for disabled card
@@ -42,6 +42,7 @@
 ### Refactor
 
 - **themes**: update tokens from Figma
+- **icon**: update icon component for SSR support
 - **Datepicker**: wip
 
 ## v3.2.0 (2025-08-13)
@@ -53,10 +54,6 @@
 - **Toast**: missing gap between title and body
 
 ## v3.1.2-rc.0 (2025-08-08)
-
-### Feat
-
-- **Table**: added new implementation for table with dynamic columns
 
 ### Fix
 
@@ -99,6 +96,7 @@
 ### Feat
 
 - **Dropdown**: increase max height to 480 for menu
+- **Table**: added new implementation for table with dynamic columns
 - **Select**: disabled typing of input
 - **Select**: add Select component and refactor Combobox
 - **CheckboxGroup**: handle invalid on first render
@@ -218,7 +216,7 @@
 ### BREAKING CHANGE
 
 - Removal of icon prop and render the icon with slot, users who previously use this
-prop will find that the icon no longer appears
+  prop will find that the icon no longer appears
 
 ### Feat
 
@@ -281,7 +279,7 @@ prop will find that the icon no longer appears
 - **description-list**: reviewed and update changes
 - **overflow-menu**: bring out as internal component and refactor breadcrumb
 - **icon-button**: review
-- *****: remove scoped elements mixin and implement dependency registration
+- **\***: remove scoped elements mixin and implement dependency registration
 - **dropdown-item**: let users pass in anchor as slots
 - **text input**: removal of icon prop
 - **tab, tabgroup**: review commit
@@ -365,7 +363,7 @@ prop will find that the icon no longer appears
 
 ### Refactor
 
-- *****: revert @open-wc/scoped-elements to v2
+- **\***: revert @open-wc/scoped-elements to v2
 
 ## v2.0.0-rc.1 (2024-08-29)
 
@@ -380,10 +378,10 @@ prop will find that the icon no longer appears
 ### BREAKING CHANGE
 
 - Users who previously use the css variables will find that it no longer applies and
-will have styling breaks
+  will have styling breaks
 - Removeal of variants in progress bar
 - Users who previously use the props will find that it no longer applies and will
-have styling breaks.
+  have styling breaks.
 - removed <sgds-alert-heading>
 - Users who previously use any of the colors will find that it no longer applies
 
@@ -439,8 +437,8 @@ have styling breaks.
 
 ### Refactor
 
-- *****: remove --sgds prefix for component specific tokens
-- *****: remove excess css tokens complete
+- **\***: remove --sgds prefix for component specific tokens
+- **\***: remove excess css tokens complete
 - **spinner**: use label prop over slot to simplify rendering process
 - **stepper**: label color during default state and remove max width from vertical stepper
 - **switch**: remove form features in switch
@@ -480,58 +478,58 @@ have styling breaks.
 ### BREAKING CHANGE
 
 - Users who previously use the css variables will find that the css they passed in no
-longer applies and will have styling breaks
+  longer applies and will have styling breaks
 - Users who previously use the css variables will find that the css they passed in no
-longer applies and will have styling breaks
+  longer applies and will have styling breaks
 - size prop
 - Users who previously use this css variable will find that the css they passed in no
-longer applies and will have styling breaks
+  longer applies and will have styling breaks
 - Users who previously use this variable will find that the css they passed in no
-longer applies and will have styling breaks
+  longer applies and will have styling breaks
 - Users who previously use this css variable will find that the css they passed in no
-longer applies and will have styling breaks
+  longer applies and will have styling breaks
 - added --sgds prefix to existing tokens and rename to follow convention strictly
 - --sgds prefix added to existing css props and certain namings are replaced to
-follow convention strictly
+  follow convention strictly
 - Users who previously use this props will find that the css tokens they passed in no
-longer applies and will have styling breaks
+  longer applies and will have styling breaks
 - Users who previously use this prop will find that the css tokens they passed in no
-longer applies and will have styling breaks
+  longer applies and will have styling breaks
 - Users who previously use this props will find that the values they passed in no
-longer applies and will have styling breaks
+  longer applies and will have styling breaks
 - added --sgds prefix to existing cssprops , renamed --stepper-default-theme-color to
---sgds-stepper-inactive-theme-color
+  --sgds-stepper-inactive-theme-color
 - Users who previously use this variant will have styling breaks
 - Users who previously use the variables will find that the css they passed in no
-longer applies and will have styling breaks
+  longer applies and will have styling breaks
 - Users who previously use this prop will find that the css tokens they passed in no
-longer applies and will have styling breaks
+  longer applies and will have styling breaks
 - prefixed with --sgds and rename fileupload to file-upload to follow convention
 - Users who previously use this variable will find that the css they passed in no
-longer applies and will have styling breaks
+  longer applies and will have styling breaks
 - Users who previously use this prop will find that the css tokens they passed in no
-longer applies and will have styling breaks
+  longer applies and will have styling breaks
 - Users who previously use this css variables will find that it no longer applies and
-will have styling breaks
+  will have styling breaks
 - Users who previously use the css variables will find that the css they passed in no
-longer applies and will have styling breaks
+  longer applies and will have styling breaks
 - Users using inputClasses prop and type="date" or type="datetime-local" will find
-that the stylings will not be applied or supported
+  that the stylings will not be applied or supported
 - existing css variables in v1 has to have --sgds prefix
 - css properties will require a prefix of --sgds
 - Users who previously use this css variable will find that it no longer applies and
-will have styling breaks
+  will have styling breaks
 - --mainnav-borderBottom-width is replaced with --mainnav-border-bottom width for
-example.
+  example.
 - Users who used buttonClasses prop will find that css tokens they passed in no
-longer applies , breaking the styles. Users who passed in outlined variants to the variant prop will
-be affected
+  longer applies , breaking the styles. Users who passed in outlined variants to the variant prop will
+  be affected
 - Users who previously use this css variable will have styling breaks as the variable
-is no longer be used
+  is no longer be used
 - Users who previously use this props will find that the css tokens they passed in no
-longer applies and will have styling breaks
+  longer applies and will have styling breaks
 - Users who previously use this prop will find that the css tokens they passed in no
-longer applies and will have styling breaks
+  longer applies and will have styling breaks
 
 ### Feat
 
@@ -575,28 +573,28 @@ longer applies and will have styling breaks
 
 ### Fix
 
-- *****: accessibiliyt based on storybook accesibility addon
+- **\***: accessibiliyt based on storybook accesibility addon
 - **mainnav**: fix dropdown menu border and box shadow rgba value
 - **pagination**: duplicate first page button
 - **toast**: background of toast is visible when dismissing
 - **datepicker header**: align chevron icons in the middle vertically
 - **toast**: fix dismissible toast not dismissing
 - **alert**: remove alert instead of hiding it when dismissed
-- *****: fix git command instead of npm push (#198)
-- *****: fix git command instead of npm push
+- **\***: fix git command instead of npm push (#198)
+- **\***: fix git command instead of npm push
 
 ### Refactor
 
 - **tooltip**: handle click out of element to hide tooltip
 - **button**: disabled styles
-- *****: remove css @import rule and transfer to js import
-- *****: create form semantic tokens used in form components
+- **\***: remove css @import rule and transfer to js import
+- **\***: create form semantic tokens used in form components
 - **toast container**: code refactor for toast container
 - **input**: extract label and hint to separate css file
 - **input**: remove inputClasses and reduced scope of attribute type
-- *****: add variables to root
+- **\***: add variables to root
 - **button**: bring out box-shadow-color to a css variable
-- *****: rename background-color to bg and button to btn
+- **\***: rename background-color to bg and button to btn
 - **mainnav, mainnav-item, mainnav-dropdown**: add --sgds prefix to css variables
 - **accordion, accordion-item**: add --sgds prefix to all css variables
 - **mainnav, mainnavitem, mainnavdropdown**: replacement of camelCase to kebab case in cssprop
@@ -610,9 +608,9 @@ longer applies and will have styling breaks
 
 ### Fix
 
-- *****: icon to appear programmatically with anchor tag target="blank"  (#196)
+- **\***: icon to appear programmatically with anchor tag target="blank" (#196)
 - **sgds-element**: modify padding right to cater to safari
-- *****: set target blank icon programmatically for all components
+- **\***: set target blank icon programmatically for all components
 
 ### Refactor
 
@@ -658,8 +656,8 @@ longer applies and will have styling breaks
 - **mainnav**: wip
 - **datepicker**: replace scss
 - **sidenav**: replace scss files
-- *****: remove scss
-- *****: wip remove scss files
+- **\***: remove scss
+- **\***: wip remove scss files
 - **tooltip**: replace sgdsElement.style
 - **toast**: replace sgdsElement.styles
 - **textarea**: replace textarea
@@ -815,20 +813,20 @@ longer applies and will have styling breaks
 ### Fix
 
 - **combobox**: menu item should not be an anchor link based on a11y comments
-- *****: lint fixes
+- **\***: lint fixes
 - **frankBuild**: update main path to new umd entry point
 - **alert**: remove default svg vertical align stylings for alert
 - **breadcrumb**: add default value for aria-label
 - **accordionitem**: correct accordion item padding-x
-- *****: update lib endpoint in storybook
-- *****: update path to combobox in components entry point
+- **\***: update lib endpoint in storybook
+- **\***: update path to combobox in components entry point
 - **combobox**: update and fix failing test cases
-- *****: import paths after updating branch
-- *****: declare bootstrap typings for non typed boostrap src files
+- **\***: import paths after updating branch
+- **\***: declare bootstrap typings for non typed boostrap src files
 - **pagination**: add nav wrapper for acc, fix tabindex rendering
 - **combobox**: fix bug to close menu when an item is selected
-- **dropdown-element**: update _getMenuItems() to query slot#default
-- **dropdown-element**: fix _getMenuItems() to correctly obtain dropdown items
+- **dropdown-element**: update \_getMenuItems() to query slot#default
+- **dropdown-element**: fix \_getMenuItems() to correctly obtain dropdown items
 - **combobox**: replace dropdown-item href="#" to href that does nothing
 - **combobox**: always show dropdown when user inputs value
 - **combobox**: fix position of label and hintText to be vertically on top of input box
@@ -861,7 +859,7 @@ longer applies and will have styling breaks
 
 ### Refactor
 
-- *****: add custom elements typings to HTMLEledmentTagNameMap for typescript users
+- **\***: add custom elements typings to HTMLEledmentTagNameMap for typescript users
 - **stepper, drawer, input, tab**: update css property naming to convention
 - **datepicker**: housekeeping
 
@@ -869,7 +867,7 @@ longer applies and will have styling breaks
 
 ### Fix
 
-- *****: merge conflic
+- **\***: merge conflic
 
 ## v1.0.0-rc.1 (2023-07-04)
 
@@ -932,7 +930,7 @@ longer applies and will have styling breaks
 - **drawer**: replace close button compnent with html button
 - **close button**: remove component and replace dependencies with html button.btn-close.btn-sm
 - **drawer, tab**: patch new components
-- *****: custom element registration brought out to component.ts
+- **\***: custom element registration brought out to component.ts
 - **datepicker**: allow passing of initialValue to sync with dateFormat value
 - **datepicker**: added watch decorator for value prop and emit change date event
 - **datepicker**: added sgds-change-date event emitter for onload and closebutton
@@ -986,7 +984,7 @@ longer applies and will have styling breaks
 - **fileuploader**: add multiple and accept args
 - **fileuploader**: change event name, remove unused imports
 - **fileuploader**: change accept type to string, add correct type to props
-- *****: linting
+- **\***: linting
 - **button**: storybook syntax mistake
 - **sgds-card-action**: remove extra slot
 - **button**: fix button docs in canvas mode not rendering
@@ -1004,8 +1002,8 @@ longer applies and will have styling breaks
 - **fileuploader**: update jsdocs
 - **fileuploader**: add custom variable, update icon
 - **sgds-element**: set default custom variable to sass variable value
-- *****: update branch from parent
-- *****: make custom is props into internals
+- **\***: update branch from parent
+- **\***: make custom is props into internals
 - **quantity-toggle**: add form features, fix stylings and jsdocs
 - **button**: change the way button has a gap between icon
 - **footer**: revert to filled string
@@ -1019,7 +1017,7 @@ longer applies and will have styling breaks
 - **accordion**: modify css prop to convention and update jsdocs
 - **input**: give placeholder a default value according to dss
 - **input**: let visual props have default empty string
-- *****: shift SgdsFormControl interface to utils folder"
+- **\***: shift SgdsFormControl interface to utils folder"
 - **input**: remove default values from certain props
 - **input**: defaultFeedback to empty string, add jsdocs
 - **input**: add jsdocs for props
@@ -1060,8 +1058,8 @@ longer applies and will have styling breaks
 - **sgds-mainnav**: remove offcanvas ref
 - **sgds-mainnav**: remove offcanvas mode, update flex order
 - **modal**: extend styls from parent class
-- *****: spike reusing parent class styles to reduce css duplication
-- *****: component folder
+- **\***: spike reusing parent class styles to reduce css duplication
+- **\***: component folder
 - **eslint**: add eslint rules on typescript files
 - **accordion**: refactor conditional statement
 
@@ -1119,7 +1117,7 @@ longer applies and will have styling breaks
 - **checkbox**: added dirty/clean functionality for form submission
 - **checkbox**: replace inputId with checkboxId
 - **checkbox**: keydown enter mimick mouseclick behaviour
-- *****: added checkbox comp, unit test, sb documentation
+- **\***: added checkbox comp, unit test, sb documentation
 - **dropdown**: remove all value related functionalitiy
 - **sidenav**: add disabled props to sidenavlink and sidenavitem
 - **mainnav**: add sgds-mainnav-dropdown
@@ -1219,8 +1217,8 @@ longer applies and will have styling breaks
 - **button**: remove prefix
 - **button**: change naming convention
 - **button**: change naming convention
-- *****: update scss file name convention
-- *****: change naming convention and create extend a sgds base class
+- **\***: update scss file name convention
+- **\***: change naming convention and create extend a sgds base class
 
 ## v0.0.3 (2022-09-28)
 
