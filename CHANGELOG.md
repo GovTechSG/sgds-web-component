@@ -1,3 +1,39 @@
+## v3.2.0-rc.2 (2025-08-25)
+
+### Feat
+
+- **Badge**: added tooltip for long text in badge
+- **input**: new trailing icon slot, action slot and unmask mask pass… (#299)
+- **input**: new trailing icon slot, action slot and unmask mask password type input
+
+### Refactor
+
+- **themes**: update tokens from Figma
+
+## v3.2.0-rc.1 (2025-08-22)
+
+### Feat
+
+- **thumbnail card**: add thumbnail card component
+- **image card**: add image card component
+- **card**: add icon card component
+- **card**: update new card component
+- **overflow menu**: update overflow menu to be public component
+- **MenuItem**: dropdown-item, select-item, combo-box-item remove nowrap
+- **Datepicker**: value becomes a prop over initialValue, form reset context handled
+- **Datepicker**: add deprecation notice to initialValue prop
+
+### Fix
+
+- **Datepicker**: only assess empty input when required is true
+- **Input**: readonly UI (#298)
+- **Input**: readonly UI
+
+### Refactor
+
+- **icon**: update icon component for SSR support
+- **Datepicker**: wip
+
 ## v3.2.0 (2025-08-13)
 
 ### Fix
@@ -7,10 +43,6 @@
 - **Toast**: missing gap between title and body
 
 ## v3.1.2-rc.0 (2025-08-08)
-
-### Feat
-
-- **Table**: added new implementation for table with dynamic columns
 
 ### Fix
 
@@ -53,6 +85,7 @@
 ### Feat
 
 - **Dropdown**: increase max height to 480 for menu
+- **Table**: added new implementation for table with dynamic columns
 - **Select**: disabled typing of input
 - **Select**: add Select component and refactor Combobox
 - **CheckboxGroup**: handle invalid on first render
