@@ -94,7 +94,7 @@ export function getTextContent(slot: HTMLSlotElement | undefined | null): string
 
   [...nodes].forEach(node => {
     if (node.nodeType === Node.TEXT_NODE) {
-      text += node.textContent;
+      text += node.textContent.trim();
     }
   });
 

@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 1200px;
+        margin: 0 auto 36px auto;
+      }
+
+      .d-flex-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Badge - Default samples</h2>
+      <div class="d-flex-row">
+        <sgds-badge variant="info" outlined>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          A very long badge name without limitation of parent width
+        </sgds-badge>
+        <sgds-badge variant="info" show dismissible> badge </sgds-badge>
+        <sgds-badge variant="success">
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          badge
+        </sgds-badge>
+        <sgds-badge variant="success" outlined>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          badge
+        </sgds-badge>
+        <sgds-badge variant="danger"> badge</sgds-badge>
+        <sgds-badge variant="danger" outlined>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          badge
+        </sgds-badge>
+        <sgds-badge variant="warning">
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          badge
+        </sgds-badge>
+        <sgds-badge variant="warning" outlined>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          badge
+        </sgds-badge>
+        <sgds-badge variant="neutral">
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          badge
+        </sgds-badge>
+        <sgds-badge variant="neutral" outlined>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          badge
+        </sgds-badge>
+        <sgds-badge variant="success" outlined show dismissible>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          A very long badge name without limitation of parent width
+        </sgds-badge>
+        <sgds-badge variant="neutral" show dismissible> badge </sgds-badge>
+        <br />
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Badge - Truncation samples</h2>
+      <div class="d-flex-row" style="width: 300px">
+        <sgds-badge variant="info" outlined>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          A very long badge name without limitation of parent width
+        </sgds-badge>
+        <sgds-badge variant="info" show dismissible> badge </sgds-badge>
+        <sgds-badge variant="success">
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          badge
+        </sgds-badge>
+        <sgds-badge variant="success" outlined>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          badge
+        </sgds-badge>
+        <sgds-badge variant="danger"> badge</sgds-badge>
+        <sgds-badge variant="danger" outlined fullWidth>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          A very long badge name without limitation of parent width
+        </sgds-badge>
+        <sgds-badge variant="warning">
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          badge
+        </sgds-badge>
+        <sgds-badge variant="warning" outlined>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          badge
+        </sgds-badge>
+        <sgds-badge variant="neutral">
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          badge
+        </sgds-badge>
+        <sgds-badge variant="neutral" outlined>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          badge
+        </sgds-badge>
+        <sgds-badge variant="success" outlined show dismissible>
+          <sgds-icon slot="icon" name="placeholder" size="sm"></sgds-icon>
+          A very long badge name without limitation of parent width
+        </sgds-badge>
+        <sgds-badge variant="neutral" show dismissible> badge </sgds-badge>
+      </div>
+    </div>
+  </body>
+</html>

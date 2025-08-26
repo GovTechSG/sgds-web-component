@@ -1,5 +1,7 @@
 :host {
   display: inline-flex;
+  max-width: 100%;
+  cursor: default;
 }
 
 :host([variant="success"]) .badge {
@@ -39,13 +41,19 @@
   border: var(--sgds-border-width-1) solid var(--sgds-neutral-border-color-default);
 }
 
+sgds-tooltip {
+  display: block;
+  max-width: 100%;
+}
+
 .badge {
+  max-width: 192px;
   background-color: var(--sgds-primary-surface-default);
   color: var(--sgds-color-fixed-light);
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
   border-radius: var(--sgds-border-radius-sm);
   font-size: var(--sgds-font-size-1);
-  height: var(--sgds-dimension-24);
+  height: var(--sgds-dimension-24, 24px);
   min-width: var(--sgds-dimension-24);
   display: inline-flex;
   justify-content: center;
@@ -57,6 +65,9 @@
   color: var(--sgds-color-fixed-dark);
   background-color: var(--sgds-primary-surface-muted);
   border: var(--sgds-border-width-1) solid var(--sgds-primary-border-color-default);
+}
+.badge.full-width {
+  max-width: 100%;
 }
 
 .badge-label {
@@ -72,7 +83,13 @@
   --sgds-close-btn-border-radius: var(--sgds-border-radius-sm);
 }
 
-slot::slotted(*){
+.badge.truncated .badge-label {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+slot::slotted(*) {
   font-weight: normal;
   font-size: 14px;
 }
