@@ -14,10 +14,11 @@ npm install @govtechsg/sgds-web-component@<version>
 
 ```js
 import "@govtechsg/sgds-web-component/themes/day.css";
+import "@govtechsg/sgds-web-component/css/sgds.css";
 import "@govtechsg/sgds-web-component";
 ```
 
-### Step 2: Framework specific setup 
+### Step 2: Framework specific setup
 
 Please refer to the respective framework setup before importing the components.
 
