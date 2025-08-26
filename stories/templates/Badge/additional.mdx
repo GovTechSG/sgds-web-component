@@ -48,7 +48,8 @@ The leading icon is added via `slot="icon"`.
 
 ## Truncation
 
-A badge with a long text will be truncated to fit the parent's width and a tooltip will be enabled for users to view the full text.
+If a badge contains long text, it will be automatically truncated, and a tooltip will appear on hover to display the full text.
+The badge's `max-width` can be adjusted by setting the boolean `fullWidth`. When `fullWidth` is true, the badge fill to the parent width.
 
 <Canvas of={BadgeStories.WithTruncation}>
   <Story of={BadgeStories.WithTruncation} />

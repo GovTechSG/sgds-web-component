@@ -46,6 +46,9 @@ export class SgdsBadge extends SgdsElement {
   /** Manually set the dismissible state of the button to `false` */
   @property({ type: Boolean, reflect: true }) dismissible = false;
 
+  /** Manually enable full width */
+  @property({ type: Boolean, reflect: true }) fullWidth = false;
+
   @state() private truncated = false;
   @state() private text = "";
 
@@ -93,19 +96,20 @@ export class SgdsBadge extends SgdsElement {
     }
   }
 
-  _handleLabelSlotChange(e: Event) {
+  private _handleLabelSlotChange(e: Event) {
     this.text = getTextContent(e.target as HTMLSlotElement);
     return;
   }
 
-  _renderContent() {
+  private _renderBadge() {
     return html`<div
       class="  
           ${classMap({
         [`badge-dismissible`]: this.dismissible,
         badge: true,
         outlined: this.outlined,
-        truncated: this.truncated
+        truncated: this.truncated,
+        "full-width": this.fullWidth
       })}"
       aria-hidden=${this.show ? "false" : "true"}
     >
@@ -129,8 +133,8 @@ export class SgdsBadge extends SgdsElement {
   render() {
     return (this.dismissible && this.show) || !this.dismissible
       ? this.truncated
-        ? html`<sgds-tooltip content=${this.text}>${this._renderContent()}</sgds-tooltip>`
-        : this._renderContent()
+        ? html`<sgds-tooltip content=${this.text}>${this._renderBadge()}</sgds-tooltip>`
+        : this._renderBadge()
       : nothing;
   }
 }
