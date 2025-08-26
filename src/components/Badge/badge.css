@@ -47,7 +47,7 @@ sgds-tooltip {
 }
 
 .badge {
-  max-width: 100%;
+  max-width: 192px;
   background-color: var(--sgds-primary-surface-default);
   color: var(--sgds-color-fixed-light);
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
@@ -65,6 +65,9 @@ sgds-tooltip {
   color: var(--sgds-color-fixed-dark);
   background-color: var(--sgds-primary-surface-muted);
   border: var(--sgds-border-width-1) solid var(--sgds-primary-border-color-default);
+}
+.badge.full-width {
+  max-width: 100%;
 }
 
 .badge-label {
