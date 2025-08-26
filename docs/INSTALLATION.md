@@ -8,7 +8,7 @@ Install SGDS web components locally with the following command
 
 ```js
 
-npm install @govtechsg/sgds-web-component@3.2.0-rc.0
+npm install @govtechsg/sgds-web-component@3.2.0-rc.3
 
 ```
 
@@ -17,7 +17,7 @@ import "@govtechsg/sgds-web-component/themes/day.css";
 import "@govtechsg/sgds-web-component";
 ```
 
-### Step 2: Framework specific setup
+### Step 2: Framework specific setup 
 
 Please refer to the respective framework setup before importing the components.
 
@@ -62,13 +62,13 @@ This method registers all SGDS elements up front in the Custom Elements Registry
 
 ```js
 // Load global css file
-<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.2.0-rc.0/themes/day.css' rel='stylesheet' type='text/css' />
+<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.2.0-rc.3/themes/day.css' rel='stylesheet' type='text/css' />
 
 // it is recommended to load a particular version when using cdn e.g. https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@1.0.2
-<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.2.0-rc.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.2.0-rc.3"></script>
 
 //or load a single component e.g. Masthead
-<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.2.0-rc.0/components/Masthead/index.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.2.0-rc.3/components/Masthead/index.umd.js"></script>
 
 ```
 
