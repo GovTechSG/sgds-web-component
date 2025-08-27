@@ -132,6 +132,7 @@
   --sgds-font-weight-bold: 700;
 
   /* Primitive - Font Size */
+  --sgds-font-size-0: 0.75rem;
   --sgds-font-size-1: 0.875rem;
   --sgds-font-size-2: 1rem;
   --sgds-font-size-3: 1.25rem;
@@ -161,6 +162,7 @@
   --sgds-line-height-body: 1.5;
   --sgds-line-height-heading: 1.2;
   --sgds-line-height-min: 20px;
+  --sgds-line-height-16: 16px;
 
   /* Primitive - Opacity */
   --sgds-opacity-0: 0;

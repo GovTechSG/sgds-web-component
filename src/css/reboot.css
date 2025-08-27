@@ -139,7 +139,6 @@ a {
   letter-spacing: var(--sgds-letter-spacing-normal);
   text-decoration: underline;
   color: var(--sgds-link-color-default);
-  height: 100%;
 }
 
 a:hover, a:focus-visible, a:focus {
