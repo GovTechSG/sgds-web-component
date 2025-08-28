@@ -1,5 +1,6 @@
 :host {
   z-index: 1200;
+  position: relative;
 }
 
 nav {
@@ -140,7 +141,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
     display: none;
   }
 }
-@media (min-width: 992px) {
+@media (min-width: 1024px) {
   .navbar-expand-lg {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -164,11 +165,15 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
     display: none;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
   .navbar-expand-xl {
     flex-wrap: nowrap;
     justify-content: flex-start;
     gap: var(--sgds-gap-xl);
+  }
+
+  .navbar-expand-xl .navbar-nav {
+    flex-direction: row;
   }
   
   .navbar-expand-xl .navbar-nav .nav-link {
@@ -189,7 +194,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
     display: none;
   }
 }
-@media (min-width: 1400px) {
+@media (min-width: 1440px) {
   .navbar-expand-xxl {
     flex-wrap: nowrap;
     justify-content: flex-start;

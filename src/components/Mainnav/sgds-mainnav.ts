@@ -21,7 +21,7 @@ const SIZES = {
   md: MD_BREAKPOINT,
   lg: LG_BREAKPOINT,
   xl: XL_BREAKPOINT,
-  XXL: XXL_BREAKPOINT,
+  xxl: XXL_BREAKPOINT,
   never: Infinity,
   always: -1
 };
