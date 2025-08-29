@@ -13,6 +13,7 @@ const ARROW_UP = "ArrowUp";
 const ESC = "Escape";
 
 export type DropDirection = "left" | "right" | "up" | "down";
+type DropdownModifier = StrictModifiers | Popper.Modifier<string, object>;
 
 /**
  * @event sgds-show - Emitted event when show instance is called
@@ -53,7 +54,7 @@ export class DropdownElement extends SgdsElement {
   dropdownConfig: Partial<Popper.Options>;
   /** @internal */
   @property()
-  protected modifierOpt: StrictModifiers[] = [];
+  protected modifierOpt: DropdownModifier[] = [];
 
   /** When true, dropdown menu shows on first load */
   @property({ type: Boolean, reflect: true })
@@ -87,6 +88,7 @@ export class DropdownElement extends SgdsElement {
         //working
         this.dropdownConfig = {
           placement: "bottom-start",
+          strategy: "fixed",
           modifiers: !this.noFlip
             ? this.modifierOpt
             : [
