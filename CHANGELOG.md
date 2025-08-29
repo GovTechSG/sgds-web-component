@@ -1,3 +1,29 @@
+## v3.3.0 (2025-08-29)
+
+### Feat
+
+- **masthead**: update styling and add scam alert notice
+- **link**: add xs size and neutral variant for link component (#339)
+- **link**: add xs size and neutral variant for link component
+- **Badge**: added tooltip for long text in badge
+- **input**: new trailing icon slot, action slot and unmask mask pass… (#299)
+- **input**: new trailing icon slot, action slot and unmask mask password type input
+- **MenuItem**: dropdown-item, select-item, combo-box-item remove nowrap
+- **Datepicker**: value becomes a prop over initialValue, form reset context handled
+- **Datepicker**: add deprecation notice to initialValue prop
+
+### Fix
+
+- **mainnav**: fix correct collapse breakpoint for xl and xxl
+- **Datepicker**: only assess empty input when required is true
+- **Input**: readonly UI (#298)
+- **Input**: readonly UI
+
+### Refactor
+
+- **themes**: update tokens from Figma
+- **Datepicker**: wip
+
 ## v3.2.0 (2025-08-13)
 
 ### Fix
