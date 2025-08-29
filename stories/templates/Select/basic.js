@@ -3,20 +3,18 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args =>
   html`
-    <div style="height:500px;">
-      <sgds-select
-        id="select-example"
-        ?required=${args.required}
-        .menuList=${args.menuList}
-        ?hasFeedback=${args.hasFeedback}
-        label=${ifDefined(args.label)}
-        hintText=${ifDefined(args.hintText)}
-        placeholder=${ifDefined(args.placeholder)}
-      ></sgds-select>
-    </div>
+    <sgds-select
+      id="select-example"
+      ?required=${args.required}
+      .menuList=${args.menuList}
+      ?hasFeedback=${args.hasFeedback}
+      label=${ifDefined(args.label)}
+      hintText=${ifDefined(args.hintText)}
+      placeholder=${ifDefined(args.placeholder)}
+    ></sgds-select>
     <script>
-      const comboBox = document.querySelector("#select-example");
-      comboBox.menuList = [
+      const select = document.querySelector("#select-example");
+      select.menuList = [
         { label: "Afghanistan", value: "1" },
         { label: "Albania", value: "2" },
         { label: "Algeria", value: "3" },

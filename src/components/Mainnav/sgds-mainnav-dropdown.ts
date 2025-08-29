@@ -280,7 +280,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
     `;
 
     const desktopView = html`<sgds-dropdown
-      modifierOpt=${[
+      .modifierOpt=${[
         {
           name: "offset",
           options: {

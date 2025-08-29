@@ -1,5 +1,5 @@
-:host([orientation="horizontal"]) .card {
-  flex-direction: row;
+:host([disabled]) {
+  cursor: not-allowed;
 }
 
 :host(:not([hideBorder])) .card {

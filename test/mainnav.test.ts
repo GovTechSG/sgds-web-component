@@ -250,7 +250,6 @@ describe("sgds-mainnav-dropdown", () => {
       `
       <sgds-dropdown
         drop="down"
-        modifieropt="[object Object]"
       >
         <a
           aria-disabled="false"

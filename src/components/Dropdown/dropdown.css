@@ -1,7 +1,3 @@
-:host {
-  /* position: relative; */
-}
-
 .dropdown {
   position: relative;
   display: flex; 

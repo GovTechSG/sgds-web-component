@@ -13,10 +13,4 @@ export const args = {
   size: "md"
 };
 
-export const parameters = {
-  docs: {
-    story: {
-      height: "300px"
-    }
-  }
-};
+export const parameters = {};
