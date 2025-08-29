@@ -15,13 +15,15 @@ export const Template = ({
   label,
   hintText,
   drop,
-  displayDate
+  displayDate,
+  value
 }) =>
   html`
     <div style="height:400px;">
       <sgds-datepicker
         ?noFlip=${noFlip}
         .initialValue=${initialValue}
+        value=${ifDefined(value)}
         ?required=${required}
         minDate=${ifDefined(minDate)}
         maxDate=${ifDefined(maxDate)}
@@ -40,7 +42,7 @@ export const Template = ({
   `;
 
 export const args = {
-  initialValue: ["19/02/1990"],
+  value: "19/02/1990",
   minDate: "1920-01-01T16:00:00.000Z",
   maxDate: "2030-12-02T12:00:00.000Z",
   label: "Birthdate",

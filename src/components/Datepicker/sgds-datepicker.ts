@@ -56,11 +56,10 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
   @property({ type: String, reflect: true }) value = "";
 
   /**
-   * @deprecated
    * Deprecated since v3.3.0 in favour of `value`.
    * The initial value of DatePicker on first load for single &
    * range mode as array of string. eg.'["22/12/2023"]' for single &
-   * '["22/12/2023","25/12/2023"]' for range respectively
+   * '["22/12/2023","25/12/2023"]' for range respectively @deprecated
    * */
   @property({ type: Array, reflect: true }) initialValue: string[] = [];
 
