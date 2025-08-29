@@ -1,31 +1,33 @@
+import { nothing } from "lit";
 import { html, literal } from "lit/static-html.js";
 import { property, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
-import { CardImageAdjustment, CardImagePosition } from "./types";
-import cardStyle from "./card.css";
+import { CardImageAdjustment, CardImagePosition } from "../Card/types";
+import imageCardStyle from "./image-card.css";
 
 /**
- * @summary Cards can be used for headers and footers, a wide variety of content, contain contextual background colors and images.
+ * @summary Image cards can be used for headers and footers, a wide variety of content, contain contextual background colors and images.
  * @slot default - The content area of the card, placed directly under the title. Accepts any HTML or custom elements.
- * @slot menu - Accepts an element for an overflow or contextual menu, positioned at the top-right corner of the card. Typically used for action menus or dropdowns.
  * @slot image - Accepts an image or svg element of the card. Only a single element is allowed to be passed in.
- * @slot icon - Accepts an icon element to visually represent the card. Only a single element is allowed to be passed in.
+ * @slot image-badge - Accepts an element for a badge, positioned at the top-left corner of the image.
+ * @slot image-action - Accepts an element for an overflow or contextual menu, positioned at the top-right corner of the image. Typically used for action menu.
+ * @slot upper - Accepts any content to be displayed at the top of the subtitle. Commonly used for badges, status indicators, or decorative elements.
  * @slot subtitle - The subtitle of the card
  * @slot title - The title of the card
  * @slot description - The paragrapher text of the card
  * @slot lower - Accepts any additional content to be displayed below the card description, such as badges, metadata, or supplementary information.
  * @slot link - Accepts an anchor element. Only a single element is allowed to be passed in.
  */
-export class SgdsCard extends CardElement {
-  static styles = [...CardElement.styles, cardStyle];
+export class SgdsImageCard extends CardElement {
+  static styles = [...CardElement.styles, imageCardStyle];
 
   /** @internal */
   @queryAssignedNodes({ slot: "image", flatten: true })
   _imageNode!: Array<Node>;
-  /** @internal */
-  @queryAssignedNodes({ slot: "icon", flatten: true })
-  _iconNode!: Array<Node>;
+
+  /** Removes the card's internal padding when set to true.  */
+  @property({ type: Boolean, reflect: true }) noPadding = false;
 
   /** Sets the image position of the card. Available options: `before`, `after` */
   @property({ type: String, reflect: true }) imagePosition: CardImagePosition = "before";
@@ -35,12 +37,10 @@ export class SgdsCard extends CardElement {
 
   protected firstUpdated() {
     if (this._imageNode.length === 0) {
-      const icon = this.shadowRoot.querySelector(".card-image") as HTMLDivElement;
-      icon.style.display = "none";
-    }
-    if (this._iconNode.length === 0) {
-      const media = this.shadowRoot.querySelector(".card-media") as HTMLDivElement;
-      media.style.display = "none";
+      const image = this.shadowRoot.querySelector(".card-image") as HTMLDivElement;
+      const body = this.shadowRoot.querySelector(".card-body") as HTMLDivElement;
+      image.style.display = "none";
+      if (this.noPadding) body.style.padding = "0px";
     }
   }
 
@@ -63,15 +63,14 @@ export class SgdsCard extends CardElement {
         })}"
         tabindex=${cardTabIndex}
       >
-        <div class="card-tinted-bg"></div>
-        <slot name="menu"></slot>
+        ${this.tinted && !this.noPadding ? html`<div class="card-tinted-bg"></div>` : nothing}
         <div class="card-image">
-          <slot name="image" @slotchange=${this.handleImgSlotChange}></slot>
-        </div>
-        <div class="card-media">
-          <slot name="icon"></slot>
+					<slot name="image" @slotchange=${this.handleImgSlotChange}></slot>
+					<slot name="image-badge"></slot>
+					<slot name="image-action"></slot>
         </div>
         <div class="card-body">
+					<slot name="upper"></slot>
           <div class="card-header-container">
             <div class="card-header">
               <slot name="subtitle"></slot>
@@ -90,4 +89,4 @@ export class SgdsCard extends CardElement {
   }
 }
 
-export default SgdsCard;
+export default SgdsImageCard;
