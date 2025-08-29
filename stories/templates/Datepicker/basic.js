@@ -19,26 +19,24 @@ export const Template = ({
   value
 }) =>
   html`
-    <div style="height:400px;">
-      <sgds-datepicker
-        ?noFlip=${noFlip}
-        .initialValue=${initialValue}
-        value=${ifDefined(value)}
-        ?required=${required}
-        minDate=${ifDefined(minDate)}
-        maxDate=${ifDefined(maxDate)}
-        dateFormat=${ifDefined(dateFormat)}
-        ?disabled=${disabled}
-        menuAlignRight=${ifDefined(menuAlighRight)}
-        mode=${ifDefined(mode)}
-        invalidFeedback=${ifDefined(invalidFeedback)}
-        label=${ifDefined(label)}
-        hintText=${ifDefined(hintText)}
-        drop=${ifDefined(drop)}
-        displayDate=${ifDefined(displayDate)}
-      >
-      </sgds-datepicker>
-    </div>
+    <sgds-datepicker
+      ?noFlip=${noFlip}
+      .initialValue=${initialValue}
+      value=${ifDefined(value)}
+      ?required=${required}
+      minDate=${ifDefined(minDate)}
+      maxDate=${ifDefined(maxDate)}
+      dateFormat=${ifDefined(dateFormat)}
+      ?disabled=${disabled}
+      menuAlignRight=${ifDefined(menuAlighRight)}
+      mode=${ifDefined(mode)}
+      invalidFeedback=${ifDefined(invalidFeedback)}
+      label=${ifDefined(label)}
+      hintText=${ifDefined(hintText)}
+      drop=${ifDefined(drop)}
+      displayDate=${ifDefined(displayDate)}
+    >
+    </sgds-datepicker>
   `;
 
 export const args = {
