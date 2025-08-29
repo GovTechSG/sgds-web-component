@@ -1,3 +1,8 @@
+:host(:not([size="fullscreen"])) .modal-panel {
+  background-color: var(--sgds-surface-default);
+  padding: var(--sgds-padding-xl);
+  max-width: var(--sgds-dimension-640);
+}
 :host([size="sm"]) .modal-panel {
   max-width: var(--sgds-dimension-480);
 }
@@ -38,11 +43,7 @@
   max-height: calc(100% - var(--sgds-margin-sm) - var(--sgds-margin-sm));
 }
 
-:host(:not([size="fullscreen"])) .modal-panel {
-  background-color: var(--sgds-surface-default);
-  padding: var(--sgds-padding-xl);
-  max-width: var(--sgds-dimension-640);
-}
+
 
 .modal-panel:focus {
   outline: none;

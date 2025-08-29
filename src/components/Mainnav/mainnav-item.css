@@ -1,12 +1,10 @@
 :host([expand="always"]) ::slotted(*) {
-  min-height: 100%;
   padding: 0px var(--sgds-padding-md);
   border-bottom: var(--sgds-border-width-4) solid transparent;
 }
 
 @media screen and (min-width: 512px) {
   :host([expand="sm"]) ::slotted(*) {
-    min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
@@ -22,7 +20,6 @@
 
 @media screen and (min-width: 768px) {
   :host([expand="md"]) ::slotted(*) {
-    min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
@@ -38,7 +35,6 @@
 
 @media screen and (min-width: 1024px) {
   :host([expand="lg"]) ::slotted(*) {
-    min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
@@ -54,7 +50,6 @@
 
 @media screen and (min-width: 1280px) {
   :host([expand="xl"]) ::slotted(*) {
-    min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
@@ -70,7 +65,6 @@
 
 @media screen and (min-width: 1440px) {
   :host([expand="xxl"]) ::slotted(*) {
-    min-height: 100%;
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
@@ -119,6 +113,7 @@
   display: flex;
   cursor: pointer;
   height: auto !important;
+  min-height: 100%;
   text-decoration: none !important;
   align-items: center;
   text-decoration: none;

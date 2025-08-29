@@ -42,14 +42,14 @@ const ModeTemplate = args => {
 export const SingleMode = {
   render: ModeTemplate.bind({}),
   name: "Initial Value for Single mode",
-  args: { initialValue: ["23/05/2023"], mode: "single" },
+  args: { value: "23/05/2023", mode: "single" },
   parameters: {},
   tags: ["!dev"]
 };
 export const RangeMode = {
   render: ModeTemplate.bind({}),
   name: "Initial Value for Range mode",
-  args: { initialValue: ["23/05/2023", "15/12/2023"], mode: "range" },
+  args: { value: "23/05/2023 - 15/12/2023", mode: "range" },
   parameters: {},
   tags: ["!dev"]
 };
