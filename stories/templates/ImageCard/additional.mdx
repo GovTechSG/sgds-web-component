@@ -9,8 +9,8 @@ Usage:
 - Ensure that only a single anchor element (`<a>`) is passed into the `link` slot.
 - If the card is disabled, the link will automatically be disabled, removing its `href` attribute to prevent navigation.
 
-<Canvas of={CardStories.Stretched}>
-  <Story of={CardStories.Stretched} />
+<Canvas of={ImageCardStories.Stretched}>
+  <Story of={ImageCardStories.Stretched} />
 </Canvas>
 
 ## Disabled State
@@ -25,8 +25,8 @@ If `stretchedLink` is enabled, the entire card will still appear as a link but w
 
 This is useful when you want to temporarily prevent user interaction while maintaining the card's structure in the UI.
 
-<Canvas of={CardStories.Disabled}>
-  <Story of={CardStories.Disabled} />
+<Canvas of={ImageCardStories.Disabled}>
+  <Story of={ImageCardStories.Disabled} />
 </Canvas>
 
 ## Orientation
@@ -38,8 +38,8 @@ Available Options:
 - `"vertical"`(default): The image and text are stacked vertically.
 - `"horizontal"`: The image and text are arranged side by side.
 
-<Canvas of={CardStories.Orientation}>
-  <Story of={CardStories.Orientation} />
+<Canvas of={ImageCardStories.Orientation}>
+  <Story of={ImageCardStories.Orientation} />
 </Canvas>
 
 ## Image Position
@@ -51,8 +51,8 @@ Available Options:
 - `"before"`(default): The image appears above (for vertical cards) or to the left (for horizontal cards).
 - `"after"`: The image appears below (for vertical cards) or to the right (for horizontal cards).
 
-<Canvas of={CardStories.ImagePosition}>
-  <Story of={CardStories.ImagePosition} />
+<Canvas of={ImageCardStories.ImagePosition}>
+  <Story of={ImageCardStories.ImagePosition} />
 </Canvas>
 
 ## Image Adjustment
@@ -65,30 +65,30 @@ Available Options:
 - `"padding around"`: Adds padding around the image to create spacing within the card layout.
 - `"aspect ratio"`: Ensures the image maintains a specific aspect ratio for a consistent appearance.
 
-<Canvas of={CardStories.ImageAdjustment}>
-  <Story of={CardStories.ImageAdjustment} />
+<Canvas of={ImageCardStories.ImageAdjustment}>
+  <Story of={ImageCardStories.ImageAdjustment} />
 </Canvas>
 
 ## Hide Border
 
 The `hideBorder` prop removes the default border from the card. When `hideBorder` is set to `true`, the card appears seamless, making it useful for designs that require a cleaner or more minimalistic look.
 
-<Canvas of={CardStories.HideBorder}>
-  <Story of={CardStories.HideBorder} />
+<Canvas of={ImageCardStories.HideBorder}>
+  <Story of={ImageCardStories.HideBorder} />
 </Canvas>
 
 ## Tinted
 
 The `tinted` prop applies a subtle tinted background to the card, enhancing its visual distinction from the surrounding content. This can be useful for highlighting important cards or grouping related information visually.
 
-<Canvas of={CardStories.Tinted}>
-  <Story of={CardStories.Tinted} />
+<Canvas of={ImageCardStories.Tinted}>
+  <Story of={ImageCardStories.Tinted} />
 </Canvas>
 
-## With Overflow Menu
+## No Padding
 
-The `menu` slot is positioned at the top-right corner of the card, allowing you to add an overflow or actions menu to provide quick access to additional actions or options. This is useful for managing card-specific controls without cluttering the main content.
+The `noPadding` prop removes the padding, border, and tinted background of the card, allowing the content to align seamlessly with the page header. This is useful when the card needs to visually integrate with surrounding layout elements rather than stand out as a separate block.
 
-<Canvas of={CardStories.OverflowMenu}>
-  <Story of={CardStories.OverflowMenu} />
+<Canvas of={ImageCardStories.NoPadding}>
+  <Story of={ImageCardStories.NoPadding} />
 </Canvas>

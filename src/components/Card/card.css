@@ -1,32 +1,11 @@
-:host([orientation="horizontal"]) .card-icon {
-  padding: var(--sgds-padding-xl) 0px var(--sgds-padding-xl) var(--sgds-padding-xl);
+:host([tinted]) .card-tinted-bg {
+  background-color: var(--sgds-bg-translucent-subtle);
+  opacity: var(--sgds-opacity-50);
 }
 
-.card-icon {
-  padding: var(--sgds-padding-xl) var(--sgds-padding-xl) 0px;
-  line-height: 0;
-}
-
-.card-header {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sgds-gap-xs);
-}
-
-slot[name="subtitle"]::slotted(*) {
-  --sgds-margin-2-xs: var(--sgds-margin-none);
-  --sgds-margin-xs: var(--sgds-margin-none);
-  --sgds-font-size-4: var(--sgds-font-size-1);
-  --sgds-font-size-5: var(--sgds-font-size-1);
-  --sgds-font-size-6: var(--sgds-font-size-1);
-  --sgds-font-weight-bold: var(--sgds-font-weight-semibold);
-  --sgds-line-height-heading: var(--sgds-line-height-min);
-  --sgds-letter-spacing-tight: var(--sgds-letter-spacing-wide);
-  color: var(--sgds-color-default);
-  font-size: var(--sgds-font-size-1);
-  font-weight: var(--sgds-font-weight-semibold);
-  letter-spacing: var(--sgds-letter-spacing-wide);
-  text-transform: uppercase;
-  line-height: var(--sgds-line-height-min);
-  margin: var(--sgds-margin-none);
+slot[name="menu"]::slotted(*) {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
 }
