@@ -14,25 +14,13 @@ export const SmallSize = {
   render: SizeTemplate.bind({}),
   name: "Small size",
   args: { size: "sm" },
-  parameters: {
-    docs: {
-      story: {
-        height: "300px"
-      }
-    }
-  },
+  parameters: {},
   tags: ["!dev"]
 };
 export const MediumSize = {
   render: SizeTemplate.bind({}),
   name: "Medium size",
   args: { size: "md" },
-  parameters: {
-    docs: {
-      story: {
-        height: "300px"
-      }
-    }
-  },
+  parameters: {},
   tags: ["!dev"]
 };
