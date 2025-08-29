@@ -25,7 +25,7 @@ const OrientationTemplate = () =>
           alt="img alternate text goes here"
           width="48"
           height="48"
-          src="https://automation.vuejs.org/images/buy_youtube_views_on_buzzoid.png"
+          src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
         />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
@@ -51,7 +51,7 @@ const OrientationTemplate = () =>
           alt="img alternate text goes here"
           width="48"
           height="48"
-          src="https://automation.vuejs.org/images/buy_youtube_views_on_buzzoid.png"
+          src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
         />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
@@ -107,7 +107,7 @@ const NoPaddingTemplate = () =>
           alt="img alternate text goes here"
           width="48"
           height="48"
-          src="https://automation.vuejs.org/images/buy_youtube_views_on_buzzoid.png"
+          src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
         />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
@@ -133,7 +133,7 @@ const NoPaddingTemplate = () =>
           alt="img alternate text goes here"
           width="48"
           height="48"
-          src="https://automation.vuejs.org/images/buy_youtube_views_on_buzzoid.png"
+          src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
         />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
