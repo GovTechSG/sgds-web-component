@@ -38,6 +38,9 @@ export class SgdsComboBox extends SelectElement {
   /** If true, renders multiple checkbox selection items. If false, single-select. */
   @property({ type: Boolean, reflect: true }) multiSelect = false;
 
+  /** If true, renders badge that fills width of combobox */
+  @property({ type: Boolean, reflect: true }) badgeFullWidth = false;
+
   /** The function used to filter the menu list, given the user's input value. */
   @property()
   filterFunction: (inputValue: string, item: SgdsComboBoxItemData) => boolean = (inputValue, item) => {
@@ -267,6 +270,7 @@ export class SgdsComboBox extends SelectElement {
                       variant="neutral"
                       show
                       dismissible
+                      ?fullwidth=${this.badgeFullWidth}
                       @sgds-hide=${e => this._handleBadgeDismissed(e, item)}
                       >${item.label}</sgds-badge
                     >`
