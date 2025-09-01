@@ -42,6 +42,22 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     "sgds-icon-button": SgdsIconButton
   };
 
+  constructor() {
+    super();
+    this.modifierOpt = [
+      {
+        name: "offset",
+        options: {
+          /**
+           * size of calendar `--sgds-dimension-320` offset with
+           *  size of icon button `--sgds-dimension-48`
+           */
+          offset: [-320 + 48, 8]
+        }
+      }
+    ];
+  }
+
   /** When true, adds required attribute to input element */
   @property({ type: Boolean, reflect: true }) required = false;
   /**The datepicker input's name attribute */
@@ -156,14 +172,6 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
 
   async connectedCallback() {
     super.connectedCallback();
-    this.modifierOpt = [
-      {
-        name: "offset",
-        options: {
-          offset: [0, 8]
-        }
-      }
-    ];
     this.addEventListener("sgds-view", this._handleViewChanged);
     this.addEventListener("sgds-change-calendar", this._handleDateChanged);
     this.addEventListener("sgds-update-focus", this._handleFocusDateChanged);

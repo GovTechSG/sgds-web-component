@@ -60,3 +60,7 @@ ul.toc-list > * {
   padding: 16px;
   border-radius: 4px;
 }
+/* https://github.com/storybookjs/storybook/issues/23586 */
+.docs-story :not(.sb-story *) {
+  transform: none;
+}
