@@ -28,7 +28,8 @@
     "trial-sb": "storybook dev",
     "trial-sb-build": "storybook build",
     "generate:icons": "node scripts/generateIconRegistry.js",
-    "sync-figma-to-tokens": "tsx scripts/figma/sync-figma-to-tokens/sync-figma-to-tokens.ts"
+    "sync-figma-to-tokens": "tsx scripts/figma/sync-figma-to-tokens/sync-figma-to-tokens.ts",
+    "style-dictionary": "style-dictionary build --verbose"
   },
   "author": "GovTechSG",
   "contributors": [
@@ -78,6 +79,7 @@
     "@storybook/test": "^8.2.6",
     "@storybook/web-components": "^8.2.6",
     "@storybook/web-components-vite": "^8.2.6",
+    "@tokens-studio/sd-transforms": "^2.0.1",
     "@types/bootstrap": "^5.2.6",
     "@types/mocha": "^10.0.6",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
@@ -130,6 +132,7 @@
     "sass-loader": "^13.0.2",
     "sinon": "^14.0.0",
     "storybook": "^8.2.6",
+    "style-dictionary": "^5.0.4",
     "style-loader": "^4.0.0",
     "tsx": "^4.20.4",
     "typescript": "^5.0.4",

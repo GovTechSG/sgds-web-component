@@ -1,0 +1,23 @@
+{
+  "source": ["scripts/figma/sync-figma-to-tokens/tokens_new/root/Primitive.SGDS.json"],
+  "preprocessors": ["tokens-studio"],
+  "platforms": {
+    "css": {
+      "transformGroup": "css",
+            "transforms": [
+                "size/px",
+        "size/pxToRem"
+      ],
+      "buildPath": "scripts/figma/sync-figma-to-tokens/",
+      "files": [
+        {
+          "destination": "root.css",
+          "format": "css/variables",
+           "options": {
+             "outputReferences": true
+           }
+        }
+      ]
+    }
+  }
+}
