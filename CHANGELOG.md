@@ -1,3 +1,23 @@
+## v3.3.1 (2025-09-01)
+
+### Feat
+
+- **thumbnail card**: add thumbnail card component
+- **image card**: add image card component
+- **card**: add icon card component
+- **card**: update new card component
+- **overflow menu**: update overflow menu to be public component
+
+### Fix
+
+- **Datepicker**: configure popper for datepicker
+- **Dropdown**: select, combobox, dropdown dependencies checked
+- *****: restores types definition in the library (#350)
+- *****: restores types definition in the library
+- **modal**: css override for sizes (#347)
+- **modal**: css override for sizes
+- **card**: remove pointer events for disabled card
+
 ## v3.3.0 (2025-08-29)
 
 ### Feat
