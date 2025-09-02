@@ -46,7 +46,7 @@ sgds-faq-grid {
 .docs-story {
   background: var(--sgds-bg-default);
 }
-.sb-story{
+.sb-story {
   padding: var(--sgds-padding-xs);
   margin: calc(var(--sgds-margin-3-xs) * -1);
 }

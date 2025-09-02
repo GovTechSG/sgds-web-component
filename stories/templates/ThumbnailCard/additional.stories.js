@@ -46,13 +46,10 @@ const OrientationTemplate = () =>
         </sgds-link>
       </sgds-thumbnail-card>
       <sgds-thumbnail-card orientation="horizontal">
-        <img
-          slot="thumbnail"
-          alt="img alternate text goes here"
-          width="48"
-          height="48"
-          src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
-        />
+        <img slot="thumbnail" alt="img alternate text goes here" width="48" height="48" <<<<<<< HEAD
+        src="https://automation.vuejs.org/images/buy_youtube_views_on_buzzoid.png" =======
+        src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" >>>>>>>
+        93cd96cf735f9cec2d7d01574faaef0df4c69898 />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
         <span slot="title">Innovative Solutions for You</span>
@@ -102,13 +99,10 @@ const NoPaddingTemplate = () =>
   html`
     <div class="container">
       <sgds-thumbnail-card noPadding>
-        <img
-          slot="thumbnail"
-          alt="img alternate text goes here"
-          width="48"
-          height="48"
-          src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
-        />
+        <img slot="thumbnail" alt="img alternate text goes here" width="48" height="48" <<<<<<< HEAD
+        src="https://automation.vuejs.org/images/buy_youtube_views_on_buzzoid.png" =======
+        src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" >>>>>>>
+        93cd96cf735f9cec2d7d01574faaef0df4c69898 />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
         <span slot="title">Innovative Solutions for You</span>
@@ -128,13 +122,10 @@ const NoPaddingTemplate = () =>
         </sgds-link>
       </sgds-thumbnail-card>
       <sgds-thumbnail-card orientation="horizontal" noPadding>
-        <img
-          slot="thumbnail"
-          alt="img alternate text goes here"
-          width="48"
-          height="48"
-          src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
-        />
+        <img slot="thumbnail" alt="img alternate text goes here" width="48" height="48" <<<<<<< HEAD
+        src="https://automation.vuejs.org/images/buy_youtube_views_on_buzzoid.png" =======
+        src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" >>>>>>>
+        93cd96cf735f9cec2d7d01574faaef0df4c69898 />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
         <span slot="title">Innovative Solutions for You</span>
