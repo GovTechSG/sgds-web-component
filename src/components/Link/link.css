@@ -1,10 +1,9 @@
-.nav-link::slotted(a) {
+:host {
   display: inline-flex;
+}
+
+.nav-link::slotted(a) {
   line-height: var(--sgds-line-height-body);
-  justify-content: center;
-  align-items: center;
-  gap: var(--sgds-gap-2-xs);
-  flex-shrink: 0;
   /* If clash of styles happens from other light dom css on anchor tag, will need to add !important here */
   color: var(--sgds-link-color-default);
   cursor: pointer;
