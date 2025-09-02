@@ -1,11 +1,30 @@
-<script type="module" src="../src/index.ts"></script>
-<link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
-<link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
-<link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<html>
+  <head>
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 1200px;
+        margin: 36px auto;
+      }
 
+      .small-container {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="small-container">
+        <h2>Single selection combo-box</h2>
 
-<sgds-combo-box value="1" menuList='[
-      { "label": "John Smith", "value": "1" },
+        <sgds-combo-box
+          value="1"
+          menuList='[
+      { "label": "John Smith John Smith John Smith John Smith John Smith", "value": "1" },
       { "label": "Jack Adams", "value": "2" },
       { "label": "Regina Bride", "value": "3" },
       { "label": "Christian Dior", "value": "4" },
@@ -13,11 +32,22 @@
       { "label": "Chloe Delight", "value": "6" },
       { "label": "Jade Apheremal", "value": "7" },
       { "label": "Louis Vuitton", "value": "8" }
-    ]' label="label" hintText="hint" hasFeedback="true" invalidFeedback="test">
-</sgds-combo-box>
+    ]'
+          label="label"
+          hintText="hint"
+          hasFeedback="true"
+          invalidFeedback="test"
+        >
+        </sgds-combo-box>
+      </div>
 
-<sgds-combo-box multiSelect value="1" menuList='[
-      { "label": "John Smith", "value": "1" },
+      <div class="small-container">
+        <h2>Multi selection combo-box</h2>
+        <sgds-combo-box
+          multiSelect
+          value="1"
+          menuList='[
+      { "label": "John Smith John Smith John Smith John Smith John Smith John Smith", "value": "1" },
       { "label": "Jack Adams", "value": "2" },
       { "label": "Regina Bride", "value": "3" },
       { "label": "Christian Dior", "value": "4" },
@@ -25,5 +55,15 @@
       { "label": "Chloe Delight", "value": "6" },
       { "label": "Jade Apheremal", "value": "7" },
       { "label": "Louis Vuitton", "value": "8" }
-    ]' label="label" hintText="hint" hasFeedback="true" invalidFeedback="test">
-</sgds-combo-box>
+    ]'
+          label="label"
+          hintText="hint"
+          hasFeedback="true"
+          invalidFeedback="test"
+          badgeFullWidth="true"
+        >
+        </sgds-combo-box>
+      </div>
+    </div>
+  </body>
+</html>
