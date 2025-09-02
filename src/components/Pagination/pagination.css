@@ -28,15 +28,18 @@ svg {
     transition: none;
   }
 }
-.page-link:not(.ellipsis):hover, .page-link:focus{
+.page-link:not(.ellipsis):hover, .page-link:focus {
   color: var(--sgds-primary-color-default);
   background-color: var(--sgds-primary-bg-translucent);
   z-index: 2;
 }
-.page-link:focus {
-  box-shadow: var(--sgds-box-shadow-focus);
+.page-link:focus,
+.page-link:focus-visible {
   outline: 0;
   z-index: 3;
+}
+.page-link:focus-visible {
+  box-shadow: var(--sgds-box-shadow-focus);
 }
 .page-item > .page-link:not(.ellipsis) {
   cursor: pointer;

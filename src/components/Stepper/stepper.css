@@ -43,7 +43,6 @@
   outline: 0;
 }
 
-.stepper .stepper-item.is-clickable:focus,
 .stepper .stepper-item.is-clickable:focus-visible {
   box-shadow: var(--sgds-box-shadow-focus);
 }

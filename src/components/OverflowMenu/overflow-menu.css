@@ -24,6 +24,9 @@
 .overflow-btn:focus,
 .overflow-btn:focus-visible {
 	outline: 0;
-	box-shadow: var(--sgds-box-shadow-focus);
 	background-color: var(--sgds-bg-translucent-subtle);
+}
+
+.overflow-btn:focus-visible {
+	box-shadow: var(--sgds-box-shadow-focus);
 }

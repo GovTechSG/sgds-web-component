@@ -72,6 +72,7 @@
   align-items: center;
   text-decoration: none;
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: 767px) {

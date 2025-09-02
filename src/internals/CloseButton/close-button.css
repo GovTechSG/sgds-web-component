@@ -30,8 +30,11 @@
 .btn-close:focus,
 .btn-close:focus-visible {
   outline: 0;
-  box-shadow: var(--sgds-box-shadow-focus);
   background-color: var(--sgds-bg-translucent);
+}
+
+.btn-close:focus-visible {
+  box-shadow: var(--sgds-box-shadow-focus);
 }
 
 .btn-close-sm {

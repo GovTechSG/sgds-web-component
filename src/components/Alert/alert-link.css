@@ -11,5 +11,8 @@
 .alert-link:focus,
 .alert-link:focus-visible {
   outline: 0;
+}
+
+.alert-link:focus-visible {
   box-shadow: var(--sgds-box-shadow-focus);
 }
