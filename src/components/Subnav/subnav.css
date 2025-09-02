@@ -40,8 +40,11 @@ slot[name="header"]::slotted(*) {
 
 .subnav-toggler:focus,
 .subnav-toggler:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
   outline: 0;
+}
+
+.subnav-toggler:focus-visible {
+  box-shadow: var(--sgds-box-shadow-focus);
 }
 
 .subnav:not(.collapsed) .subnav-toggler {

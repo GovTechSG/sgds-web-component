@@ -37,8 +37,11 @@ nav {
 
 .navbar-brand:focus,
 .navbar-brand:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
   outline: 0;
+}
+
+.navbar-brand:focus-visible {
+  box-shadow: var(--sgds-box-shadow-focus);
 }
 
 .navbar-nav {
