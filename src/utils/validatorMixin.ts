@@ -22,7 +22,8 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
 
     connectedCallback(): void {
       super.connectedCallback();
-      this.inputValidationController = new InputValidationController(this);
+      this.inputValidationController ??= new InputValidationController(this);
+      console.log("TESTING: HOW MANY TIMES IS CONNECTEDCALLBACK CALLED IN REACT");
     }
     async firstUpdated(changedProperties) {
       super.firstUpdated(changedProperties);
