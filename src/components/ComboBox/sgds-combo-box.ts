@@ -189,6 +189,8 @@ export class SgdsComboBox extends SelectElement {
   }
   protected async _handleInputBlur(e: Event) {
     e.preventDefault();
+    this.hideMenu();
+
     if (this.multiSelect) {
       const displayValueMatchedSelectedItems = this.selectedItems.filter(({ label }) => this.displayValue === label);
       if (displayValueMatchedSelectedItems.length <= 0) {
