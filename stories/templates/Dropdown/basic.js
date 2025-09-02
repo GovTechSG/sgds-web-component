@@ -51,10 +51,4 @@ export const args = {
   href: "#"
 };
 
-export const parameters = {
-  docs: {
-    story: {
-      height: "600px"
-    }
-  }
-};
+export const parameters = {};

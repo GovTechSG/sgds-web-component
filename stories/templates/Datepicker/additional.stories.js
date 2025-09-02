@@ -1,6 +1,6 @@
 import { html } from "lit-html";
 
-const RangeTemplate = () => html` <div style="height:500px;"><sgds-datepicker mode="range"></sgds-datepicker></div> `;
+const RangeTemplate = () => html`<sgds-datepicker mode="range"></sgds-datepicker> `;
 
 export const RangeSelection = {
   render: RangeTemplate.bind({}),
@@ -12,11 +12,9 @@ export const RangeSelection = {
 
 const FlipTemplate = args =>
   html`
-    <div style="height:500px;">
-      <sgds-datepicker label="Flip disabled" mode="range" noFlip></sgds-datepicker>
-      <sgds-datepicker label="Flip enabled" mode="range"></sgds-datepicker>
-      <sgds-datepicker label="Flip disabled, Drop=up" mode="range" drop="up" noFlip></sgds-datepicker>
-    </div>
+    <sgds-datepicker label="Flip disabled" mode="range" noFlip></sgds-datepicker>
+    <sgds-datepicker label="Flip enabled" mode="range"></sgds-datepicker>
+    <sgds-datepicker label="Flip disabled, Drop=up" mode="range" drop="up" noFlip></sgds-datepicker>
   `;
 
 export const Flip = {
@@ -29,27 +27,25 @@ export const Flip = {
 
 const ModeTemplate = args => {
   return html`
-    <div style="height:500px;">
-      <sgds-datepicker id="single-mode-example" .initialValue=${args.initialValue} mode=${args.mode}></sgds-datepicker>
-      <script>
-        const datepicker = document.querySelector("#single-mode-example");
-        datepicker.initialValue = ["23/05/2023"];
-      </script>
-    </div>
+    <sgds-datepicker id="single-mode-example" .initialValue=${args.initialValue} mode=${args.mode}></sgds-datepicker>
+    <script>
+      const datepicker = document.querySelector("#single-mode-example");
+      datepicker.initialValue = ["23/05/2023"];
+    </script>
   `;
 };
 
 export const SingleMode = {
   render: ModeTemplate.bind({}),
   name: "Initial Value for Single mode",
-  args: { initialValue: ["23/05/2023"], mode: "single" },
+  args: { value: "23/05/2023", mode: "single" },
   parameters: {},
   tags: ["!dev"]
 };
 export const RangeMode = {
   render: ModeTemplate.bind({}),
   name: "Initial Value for Range mode",
-  args: { initialValue: ["23/05/2023", "15/12/2023"], mode: "range" },
+  args: { value: "23/05/2023 - 15/12/2023", mode: "range" },
   parameters: {},
   tags: ["!dev"]
 };

@@ -1,18 +1,4 @@
-## v3.2.0-rc.3 (2025-08-26)
-
-## v3.2.0-rc.2 (2025-08-25)
-
-### Feat
-
-- **Badge**: added tooltip for long text in badge
-- **input**: new trailing icon slot, action slot and unmask mask pass… (#299)
-- **input**: new trailing icon slot, action slot and unmask mask password type input
-
-### Refactor
-
-- **themes**: update tokens from Figma
-
-## v3.2.0-rc.1 (2025-08-22)
+## v3.3.1 (2025-09-01)
 
 ### Feat
 
@@ -21,19 +7,41 @@
 - **card**: add icon card component
 - **card**: update new card component
 - **overflow menu**: update overflow menu to be public component
+
+### Fix
+
+- **Datepicker**: configure popper for datepicker
+- **Dropdown**: select, combobox, dropdown dependencies checked
+- *****: restores types definition in the library (#350)
+- *****: restores types definition in the library
+- **modal**: css override for sizes (#347)
+- **modal**: css override for sizes
+- **card**: remove pointer events for disabled card
+
+## v3.3.0 (2025-08-29)
+
+### Feat
+
+- **masthead**: update styling and add scam alert notice
+- **link**: add xs size and neutral variant for link component (#339)
+- **link**: add xs size and neutral variant for link component
+- **Badge**: added tooltip for long text in badge
+- **input**: new trailing icon slot, action slot and unmask mask pass… (#299)
+- **input**: new trailing icon slot, action slot and unmask mask password type input
 - **MenuItem**: dropdown-item, select-item, combo-box-item remove nowrap
 - **Datepicker**: value becomes a prop over initialValue, form reset context handled
 - **Datepicker**: add deprecation notice to initialValue prop
 
 ### Fix
 
+- **mainnav**: fix correct collapse breakpoint for xl and xxl
 - **Datepicker**: only assess empty input when required is true
 - **Input**: readonly UI (#298)
 - **Input**: readonly UI
 
 ### Refactor
 
-- **icon**: update icon component for SSR support
+- **themes**: update tokens from Figma
 - **Datepicker**: wip
 
 ## v3.2.0 (2025-08-13)

@@ -9,6 +9,7 @@ import { SgdsFormControl } from "../utils/formSubmitController";
 import generateId from "../utils/generateId";
 import { SgdsFormValidatorMixin } from "../utils/validatorMixin";
 import { DropdownListElement } from "./dropdown-list-element";
+import { referenceTargetWidth } from "../utils/popper";
 
 export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) implements SgdsFormControl {
   static styles = [...DropdownListElement.styles, dropdownMenuStyle, hintTextStyles, feedbackStyles];
@@ -85,7 +86,8 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
         options: {
           offset: [0, 8]
         }
-      }
+      },
+      referenceTargetWidth
     ];
   }
 

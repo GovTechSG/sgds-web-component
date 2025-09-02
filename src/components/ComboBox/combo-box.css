@@ -7,9 +7,6 @@
   flex-direction: column;
   gap: var(--sgds-form-gap-md);
 }
-.combobox .dropdown-menu {
-  min-width: 100%;
-}
 .dropdown {
   display: flex;
   height: 100%;

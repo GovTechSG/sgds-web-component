@@ -1,43 +1,13 @@
-import { html } from "lit-html";
-import { ifDefined } from "lit/directives/if-defined.js";
+<script type="module" src="../src/index.ts"></script>
+<link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
 
-export const Template = ({
-  label,
-  hintText,
-  name,
-  placeholder,
-  autofocus,
-  disabled,
-  required,
-  readonly,
-  multiSelect,
-  value,
-  menuList,
-  popperOpts,
-  menuIsOpen,
-  filterFunction
-}) => {
-  return html`
-    <sgds-combo-box
-      label=${ifDefined(label)}
-      hintText=${ifDefined(hintText)}
-      name=${ifDefined(name)}
-      placeholder=${ifDefined(placeholder)}
-      ?autofocus=${autofocus}
-      ?disabled=${disabled}
-      ?required=${required}
-      ?readonly=${readonly}
-      value=${ifDefined(value)}
-      .menuList=${menuList}
-      popperOpts=${ifDefined(popperOpts)}
-      ?menuIsOpen=${menuIsOpen}
-      filterFunction=${ifDefined(filterFunction)}
-      ?multiSelect=${multiSelect}
-      id="combobox-example"
-    >
-    </sgds-combo-box>
+<sgds-modal open>
+  <sgds-select id="select-example" label="Select label" hinttext="Select an option" placeholder="Select an option"></sgds-select>
+    </div>
     <script>
-      const comboBox = document.querySelector("#combobox-example");
+      const comboBox = document.querySelector("#select-example");
       comboBox.menuList = [
         { label: "Afghanistan", value: "1" },
         { label: "Albania", value: "2" },
@@ -246,12 +216,4 @@ export const Template = ({
         { label: "Zimbabwe", value: "205" }
       ];
     </script>
-  `;
-};
-
-export const args = {
-  label: "Items",
-  placeholder: "ComboBox"
-};
-
-export const parameters = {};
+</sgds-modal>
