@@ -99,9 +99,9 @@ export class SgdsFooter extends SgdsElement {
               <li><a href=${this.feedbackHref}>Feedback</a></li>
               <li><a href=${this.faqHref}>FAQ</a></li>
               <li>
-                <a href="https://tech.gov.sg/report_vulnerability" target="_blank" rel="noopener noreferrer">
-                  Report Vulnerability
-                </a>
+                <a href="https://tech.gov.sg/report_vulnerability" target="_blank" rel="noopener noreferrer"
+                  >Report Vulnerability</a
+                >
               </li>
               <li><a href=${this.privacyHref}>Privacy Statement</a></li>
               <li><a href=${this.termsOfUseHref}>Terms of use</a></li>

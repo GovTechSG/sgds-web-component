@@ -1,7 +1,17 @@
 :host {
   color: inherit;
   display: inline-flex;
+  vertical-align: bottom;
 }
+
+:host(.icon-left) {
+  margin-right: 0.25rem;
+}
+
+:host(.icon-right) {
+  margin-left: 0.25rem;
+}
+
 :host([size="sm"]) svg {
   width: var(--sgds-icon-size-sm);
   height: var(--sgds-icon-size-sm);
