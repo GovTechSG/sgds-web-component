@@ -96,8 +96,11 @@
 .btn:focus-visible {
   background-color: var(--btn-hover-bg);
   border-color: transparent;
-  box-shadow: var(--sgds-box-shadow-focus);
   outline: 0;
+}
+
+.btn:focus-visible {
+  box-shadow: var(--sgds-box-shadow-focus);
 }
 
 .btn.disabled,

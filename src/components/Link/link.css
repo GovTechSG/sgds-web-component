@@ -22,7 +22,6 @@
   outline: 0;
 }
 
-.nav-link::slotted(a:focus:not([disabled])),
 .nav-link::slotted(a:focus-visible:not([disabled])) {
   box-shadow: var(--sgds-box-shadow-focus);
 }
