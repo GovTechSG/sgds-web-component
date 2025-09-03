@@ -1,0 +1,33 @@
+<script type="module" src="../src/index.ts"></script>
+<link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto 36px auto;
+  }
+
+  .d-flex-row {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+  }
+</style>
+<div class="container">
+  <h2>Pagination - Default samples</h2>
+  <div class="d-flex-row">
+    <sgds-pagination></sgds-pagination>
+    <sgds-pagination dataLength="1"></sgds-pagination>
+    <sgds-pagination dataLength="20" itemsPerPage="10" currentPage="1"></sgds-pagination>
+    <sgds-pagination dataLength="20" itemsPerPage="8" currentPage="1"></sgds-pagination>
+    <sgds-pagination dataLength="20" itemsPerPage="5" currentPage="4"></sgds-pagination>
+    <sgds-pagination dataLength="20" itemsPerPage="4" currentPage="4"></sgds-pagination>
+    <sgds-pagination dataLength="18" itemsPerPage="3" currentPage="4"></sgds-pagination>
+    <sgds-pagination dataLength="20" itemsPerPage="3" currentPage="4"></sgds-pagination>
+    <sgds-pagination dataLength="16" itemsPerPage="2"></sgds-pagination>
+    <sgds-pagination dataLength="18" itemsPerPage="2"></sgds-pagination>
+    <sgds-pagination dataLength="20" itemsPerPage="2"></sgds-pagination>
+  </div>
+</div>
