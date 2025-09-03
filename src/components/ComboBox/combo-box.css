@@ -79,7 +79,7 @@
   display: flex;
   gap: var(--sgds-gap-xs);
   flex-wrap: wrap;
-  width: calc(100% - var(--sgds-icon-size-md));
+  width: calc(100% - var(--sgds-icon-size-md, 1.25rem));
 }
 .empty-menu {
   padding: var(--sgds-padding-sm) var(--sgds-padding-lg, 20px);
