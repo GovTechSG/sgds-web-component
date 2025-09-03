@@ -259,7 +259,7 @@ export class SgdsPagination extends SgdsElement {
     directionLabel: "Prev" | "Next",
     clickHandler: (event: MouseEvent) => void
   ): TemplateResult {
-    const nextNavDisableCondition = this.currentPage === this.pages.length || this.pages.length < 2;
+    const nextNavDisableCondition = this.currentPage === this.pages.length || this.pages.length <= 1;
     const prevNavDisableCondition = this.currentPage === 1;
     const isDisabled = directionLabel === "Prev" ? prevNavDisableCondition : nextNavDisableCondition;
 
