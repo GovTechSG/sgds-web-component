@@ -102,11 +102,6 @@ export class SgdsComboBox extends SelectElement {
     this.invalid = !this._mixinReportValidity();
   }
 
-  // When combobox is blurred, close menu
-  private _handleBlur() {
-    this.hideMenu();
-  }
-
   // Called each time the user types in the <sgds-input>, we set .value and show the menu
   private async _handleInputChange(e: CustomEvent) {
     this.emit("sgds-input");
@@ -194,7 +189,6 @@ export class SgdsComboBox extends SelectElement {
   }
   protected async _handleInputBlur(e: Event) {
     e.preventDefault();
-
     if (this.multiSelect) {
       const displayValueMatchedSelectedItems = this.selectedItems.filter(({ label }) => this.displayValue === label);
       if (displayValueMatchedSelectedItems.length <= 0) {
@@ -266,7 +260,7 @@ export class SgdsComboBox extends SelectElement {
         })}"
         @click=${this._handleClick}
       >
-        <div class="combobox-input-container" @blur=${this._handleBlur}>
+        <div class="combobox-input-container">
           ${this.multiSelect
             ? html`
                 ${this.selectedItems.map(
