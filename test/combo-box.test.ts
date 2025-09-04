@@ -1,4 +1,4 @@
-import { assert, expect, fixture, waitUntil } from "@open-wc/testing";
+import { assert, elementUpdated, expect, fixture, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
@@ -59,11 +59,13 @@ describe("sgds-combo-box ", () => {
       { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
     );
   });
+
   it("should be disabled with the disabled attribute to be true", async () => {
     const el = await fixture(html`<sgds-combo-box disabled></sgds-combo-box>`);
     const comboBoxInput = el.shadowRoot?.querySelector("input");
     expect(comboBoxInput?.disabled).to.be.true;
   });
+
   it("when readonly is true, menu cannot open ", async () => {
     const el = await fixture<SgdsComboBox>(html`<sgds-combo-box readonly></sgds-combo-box>`);
     const input = el.shadowRoot?.querySelector("input");
@@ -79,6 +81,7 @@ describe("sgds-combo-box ", () => {
     await el.updateComplete;
     expect(el.shadowRoot?.querySelector(".dropdown-menu.show")).to.be.null;
   });
+
   it("should emit sgds-select event when combobx value is updated", async () => {
     const el = await fixture<SgdsComboBox>(html` <sgds-combo-box
       .menuList=${[
@@ -201,6 +204,7 @@ describe("sgds-combo-box ", () => {
     const items = el.shadowRoot?.querySelectorAll("sgds-combo-box-item");
     expect(items?.length).to.equal(3);
   });
+
   it("should display checkboxes for each item in multi-select mode", async () => {
     const el = await fixture<SgdsComboBox>(
       html`
@@ -230,6 +234,7 @@ describe("sgds-combo-box ", () => {
       expect(checkboxEl, "sgds-checkbox found").to.exist;
     });
   });
+
   it("empty menu appears when no search options found", async () => {
     const el = await fixture<SgdsComboBox>(
       html`
@@ -247,6 +252,61 @@ describe("sgds-combo-box ", () => {
 
     await el.updateComplete;
     expect(el.shadowRoot?.querySelector(".empty-menu")).to.exist;
+  });
+
+  it("should display the badge with max-width of 192px with badgeFullWidth is not set", async () => {
+    const parentNode = document.createElement("div");
+    parentNode.style.width = "300px";
+
+    const el = await fixture<SgdsComboBox>(
+      html`
+        <sgds-combo-box
+          multiSelect
+          value="option1"
+          .menuList=${[
+            { label: "A very long badge name without limitation of parent width", value: "option1" },
+            { label: "Option 2", value: "option2" }
+          ]}
+        ></sgds-combo-box>
+      `,
+      { parentNode }
+    );
+
+    await elementUpdated(el);
+
+    const parentContainer = el.shadowRoot?.querySelector(".combobox-input-container");
+    const badge = el.shadowRoot?.querySelector("sgds-badge");
+
+    // should not match width parent width
+    expect(badge?.clientWidth).to.equal(192);
+    expect(badge?.clientWidth).not.to.equal(parentContainer?.clientWidth);
+  });
+
+  it("should display the badge with max-width of parent with badgeFullWidth is set to true", async () => {
+    const parentNode = document.createElement("div");
+    parentNode.style.width = "300px";
+
+    const el = await fixture<SgdsComboBox>(
+      html`
+        <sgds-combo-box
+          multiSelect
+          badgeFullWidth
+          value="option1"
+          .menuList=${[
+            { label: "A very long badge name without limitation of parent width", value: "option1" },
+            { label: "Option 2", value: "option2" }
+          ]}
+        ></sgds-combo-box>
+      `,
+      { parentNode }
+    );
+
+    await elementUpdated(el);
+    const parentContainer = el.shadowRoot?.querySelector(".combobox-input-container");
+    const badge = el.shadowRoot?.querySelector("sgds-badge");
+
+    // should match width parent width
+    expect(badge?.clientWidth).to.equal(parentContainer?.clientWidth);
   });
 });
 
@@ -339,6 +399,7 @@ describe("single select combobox", () => {
     const durItem = el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']") as ComboBoxItem;
     expect(durItem.active).to.be.false;
   });
+
   it("When there is already a selectedItem, even when user types more rubbish, the value of input or displayValue will sync with the menu selected item regardless of the value", async () => {
     const el = await fixture<SgdsComboBox>(
       html`<sgds-combo-box
@@ -382,7 +443,35 @@ describe("single select combobox", () => {
     expect(el.value).to.equal("option1");
     expect(el.shadowRoot?.querySelector("input")?.value).to.equal("Apple");
   });
-  it(" Menu filters while typing, but when reopen should show the full menu again", async () => {
+
+  it("Keyboard arrowDown and enter populates the input and update value, sgds-change and sgds-select will be called", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`<sgds-combo-box
+        .menuList=${[
+          { label: "Apple", value: "option1" },
+          { label: "Apricot", value: "option2" },
+          { label: "Dur", value: "option3" }
+        ]}
+      ></sgds-combo-box>`
+    );
+
+    const spySelect = sinon.spy();
+    el.addEventListener("sgds-select", spySelect);
+
+    const spyChange = sinon.spy();
+    el.addEventListener("sgds-change", spyChange);
+
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    input.focus();
+    await sendKeys({ press: "ArrowDown" });
+    await sendKeys({ press: "Enter" });
+    await el.updateComplete;
+
+    expect(spyChange).to.be.called;
+    expect(spySelect).to.be.called;
+  });
+
+  it("Menu filters while typing, but when reopen should show the full menu again", async () => {
     const el = await fixture<SgdsComboBox>(
       html`<sgds-combo-box
         .menuList=${[
@@ -462,6 +551,7 @@ describe("multi select combobox", () => {
     await el.updateComplete;
     expect(el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']")).not.to.have.attribute("active");
   });
+
   it("when badge dismissed by mouseclick, menu and badges are sync", async () => {
     const el = await fixture<SgdsComboBox>(
       html`<sgds-combo-box
@@ -488,6 +578,7 @@ describe("multi select combobox", () => {
     expect(el.shadowRoot?.querySelector("sgds-combo-box-item[value='option2']")).to.have.attribute("active");
     expect(el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']")).to.have.attribute("active");
   });
+
   it("when initial value is specified, input is populated, item is active", async () => {
     const el = await fixture<SgdsComboBox>(
       html`<sgds-combo-box
@@ -510,6 +601,7 @@ describe("multi select combobox", () => {
     expect(input.value).to.equal("");
     expect(el.value).to.equal("option3");
   });
+
   it("when initial value (more than 1) is specified, input is populated, item is active", async () => {
     const el = await fixture<SgdsComboBox>(
       html`<sgds-combo-box
@@ -589,6 +681,7 @@ describe("multi select combobox", () => {
     const updatedBadge = el.shadowRoot?.querySelector("sgds-badge") as SgdsBadge;
     expect(updatedBadge).not.to.exist;
   });
+
   it("When no purposeful selection is made through clicking or keyboard, input clears when blur", async () => {
     const el = await fixture<SgdsComboBox>(
       html`<sgds-combo-box
@@ -612,6 +705,7 @@ describe("multi select combobox", () => {
     const durItem = el.shadowRoot?.querySelector("sgds-combo-box-item[value='option3']") as ComboBoxItem;
     expect(durItem.active).to.be.false;
   });
+
   it("Keyboard arrowDown and enter populates the input with badge", async () => {
     const el = await fixture<SgdsComboBox>(
       html`<sgds-combo-box
@@ -633,7 +727,68 @@ describe("multi select combobox", () => {
     const badge = el.shadowRoot?.querySelector("sgds-badge") as SgdsBadge;
     expect(badge.innerText).to.equal("Apple");
   });
-  it(" Menu filters while typing, but when reopen should show the full menu again", async () => {
+
+  it("Keyboard arrowDown and enter populates the input with badge, sgds-change and sgds-select will be called", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`<sgds-combo-box
+        multiSelect
+        .menuList=${[
+          { label: "Apple", value: "option1" },
+          { label: "Apricot", value: "option2" },
+          { label: "Dur", value: "option3" }
+        ]}
+      ></sgds-combo-box>`
+    );
+
+    const spySelect = sinon.spy();
+    el.addEventListener("sgds-select", spySelect);
+
+    const spyChange = sinon.spy();
+    el.addEventListener("sgds-change", spyChange);
+
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    input.focus();
+    await sendKeys({ press: "ArrowDown" });
+    await sendKeys({ press: "Enter" });
+    await el.updateComplete;
+
+    expect(spyChange).to.be.called;
+    expect(spySelect).to.be.called;
+  });
+
+  it("When badge is dismissed and value is set to empty, sgds-change will be called", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`<sgds-combo-box
+        multiSelect
+        .menuList=${[
+          { label: "Apple", value: "option1" },
+          { label: "Apricot", value: "option2" },
+          { label: "Durian", value: "option3" }
+        ]}
+        value="option1"
+      ></sgds-combo-box>`
+    );
+
+    const spySelect = sinon.spy();
+    el.addEventListener("sgds-select", spySelect);
+
+    const spyChange = sinon.spy();
+    el.addEventListener("sgds-change", spyChange);
+
+    const badges = () => el.shadowRoot?.querySelectorAll("sgds-badge") as NodeListOf<SgdsBadge>;
+    expect(badges().length).to.equal(1);
+
+    const badgeCloseBtn = badges()[0].shadowRoot?.querySelector<SgdsCloseButton>("sgds-close-button");
+    badgeCloseBtn?.click();
+
+    await waitUntil(() => spyChange.called);
+    await waitUntil(() => spySelect.notCalled);
+
+    expect(spyChange).to.be.called;
+    expect(spySelect).not.to.be.called;
+  });
+
+  it("Menu filters while typing, but when reopen should show the full menu again", async () => {
     const el = await fixture<SgdsComboBox>(
       html`<sgds-combo-box
         multiSelect
@@ -868,6 +1023,7 @@ describe("single select >> when submitting a form", () => {
     expect(el.invalid).to.be.false;
   });
 });
+
 describe("multi select >> when submitting a form", () => {
   it("when required=true should block submission of form when there is no value", async () => {
     const form = await fixture<HTMLFormElement>(

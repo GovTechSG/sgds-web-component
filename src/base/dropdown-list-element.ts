@@ -60,8 +60,8 @@ export class DropdownListElement extends DropdownElement {
     // reset the tabindex
     const items = this._getMenuItems();
     items.forEach(item => {
-      const dropdownItem = item.shadowRoot.querySelector(".dropdown-item") as HTMLAnchorElement;
-      dropdownItem.removeAttribute("tabindex");
+      const dropdownItem = item?.shadowRoot?.querySelector(".dropdown-item") as HTMLAnchorElement;
+      dropdownItem && dropdownItem.removeAttribute("tabindex");
     });
   }
 

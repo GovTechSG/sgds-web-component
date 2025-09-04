@@ -38,6 +38,9 @@ export class SgdsComboBox extends SelectElement {
   /** If true, renders multiple checkbox selection items. If false, single-select. */
   @property({ type: Boolean, reflect: true }) multiSelect = false;
 
+  /** If true, renders badge that fills width of combobox */
+  @property({ type: Boolean, reflect: true }) badgeFullWidth = false;
+
   /** The function used to filter the menu list, given the user's input value. */
   @property()
   filterFunction: (inputValue: string, item: SgdsComboBoxItemData) => boolean = (inputValue, item) => {
@@ -82,9 +85,13 @@ export class SgdsComboBox extends SelectElement {
 
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
+    // when value change, always emit a change event
+    this.emit("sgds-change");
+
     if (this.value) {
       this.emit("sgds-select");
     }
+
     const sgdsInput = await this._input;
     this._mixinSetFormValue();
 
@@ -267,6 +274,7 @@ export class SgdsComboBox extends SelectElement {
                       variant="neutral"
                       show
                       dismissible
+                      ?fullwidth=${this.badgeFullWidth}
                       @sgds-hide=${e => this._handleBadgeDismissed(e, item)}
                       >${item.label}</sgds-badge
                     >`

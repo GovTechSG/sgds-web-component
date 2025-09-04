@@ -133,7 +133,9 @@ export class SgdsBadge extends SgdsElement {
   render() {
     return (this.dismissible && this.show) || !this.dismissible
       ? this.truncated
-        ? html`<sgds-tooltip content=${this.text}>${this._renderBadge()}</sgds-tooltip>`
+        ? html`<sgds-tooltip content=${this.text} @sgds-hide=${e => e.stopPropagation()}
+            >${this._renderBadge()}</sgds-tooltip
+          >`
         : this._renderBadge()
       : nothing;
   }

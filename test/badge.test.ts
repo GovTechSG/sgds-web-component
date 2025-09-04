@@ -4,6 +4,7 @@ import * as Sinon from "sinon";
 import type { SgdsBadge } from "../src/components";
 import SgdsCloseButton from "../src/internals/CloseButton/sgds-close-button";
 import "./sgds-web-component";
+import { sendMouse } from "@web/test-runner-commands";
 
 describe("SgdsBadge component", () => {
   it("should render when show is true", async () => {
@@ -148,6 +149,41 @@ describe("SgdsBadge component", () => {
     const tooltip = el.shadowRoot?.querySelector("sgds-tooltip");
 
     expect(tooltip).to.exist;
-    expect(tooltip.querySelector(".truncated")).to.exist;
+    expect(tooltip?.querySelector(".truncated")).to.exist;
+  });
+
+  it("should not trigger sgds-hide when tooltip is hidden", async () => {
+    const parentNode = document.createElement("div");
+    parentNode.style.width = "100px";
+    parentNode.style.padding = "24px";
+
+    const el = await fixture<SgdsBadge>(
+      html`<sgds-badge> A very long badge name without limitation of parent width </sgds-badge>`,
+      { parentNode }
+    );
+
+    const spyHide = Sinon.spy();
+    el.addEventListener("sgds-hide", spyHide);
+
+    await elementUpdated(el);
+
+    const badge = el.shadowRoot?.querySelector(".badge");
+    expect(badge).to.exist;
+
+    const tooltip = el.shadowRoot?.querySelector("sgds-tooltip");
+
+    expect(tooltip).to.exist;
+    expect(tooltip?.querySelector(".truncated")).to.exist;
+
+    await sendMouse({ type: "move", position: [50, 50] });
+    await el.updateComplete;
+
+    // when tooltip is shown
+    expect(tooltip?.shadowRoot?.querySelector(".tooltip")).to.exist;
+
+    await sendMouse({ type: "move", position: [0, 0] });
+    await el.updateComplete;
+
+    expect(spyHide).not.to.be.called;
   });
 });
