@@ -29,7 +29,7 @@ export class SgdsCard extends CardElement {
   /** Controls how the image is sized and aligned within the card. Available options: `default`, `padding around`, `aspect ratio` */
   @property({ type: String, reflect: true }) imageAdjustment: CardImageAdjustment = "default";
 
-  private readonly hasSlotController = new HasSlotController(this, "image", "icon", "menu");
+  private readonly hasSlotController = new HasSlotController(this, "image", "icon", "menu", "description");
 
   handleImgSlotChange(e: Event) {
     const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLOrSVGImageElement>;

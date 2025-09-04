@@ -24,9 +24,6 @@ describe("<sgds-card>", () => {
               </div>
               <slot></slot>
             </div>
-            <p class="card-text">
-              <slot name="description"></slot>
-            </p>
             <slot name="lower"></slot>
             <slot name="link"></slot>
           </div>
@@ -57,9 +54,6 @@ describe("<sgds-card>", () => {
               </div>
               <slot></slot>
             </div>
-            <p class="card-text">
-              <slot name="description"></slot>
-            </p>
             <slot name="lower"></slot>
             <slot name="link"></slot>
           </div>
@@ -92,9 +86,6 @@ describe("<sgds-card>", () => {
               </div>
               <slot></slot>
             </div>
-            <p class="card-text">
-              <slot name="description"></slot>
-            </p>
             <slot name="lower"></slot>
             <slot name="link"></slot>
           </div>
