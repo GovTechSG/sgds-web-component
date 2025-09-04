@@ -48,9 +48,9 @@ button.year:focus:not(.active) {
   background-color: var(--sgds-bg-translucent-subtle);
 }
 
-td[data-day]:focus,
-button.month:focus,
-button.year:focus  {
+td[data-day]:focus-visible,
+button.month:focus-visible,
+button.year:focus-visible {
   outline: var(--sgds-form-border-radius-sm) solid var(--sgds-blue-400);
 }
 
