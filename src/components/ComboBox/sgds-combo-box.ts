@@ -85,9 +85,13 @@ export class SgdsComboBox extends SelectElement {
 
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
+    // when value change, always emit a change event
+    this.emit("sgds-change");
+
     if (this.value) {
       this.emit("sgds-select");
     }
+
     const sgdsInput = await this._input;
     this._mixinSetFormValue();
 
