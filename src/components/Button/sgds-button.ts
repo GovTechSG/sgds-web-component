@@ -1,9 +1,10 @@
-import { property, state } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html, literal } from "lit/static-html.js";
 import ButtonElement from "../../base/button-element";
 import anchorStyles from "../../styles/anchor.css";
+import { HasSlotController } from "../../utils/slot";
 import { FormSubmitController } from "../../utils/formSubmitController";
 import buttonStyles from "./button.css";
 
@@ -23,13 +24,6 @@ export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
  */
 export class SgdsButton extends ButtonElement {
   static styles = [...ButtonElement.styles, anchorStyles, buttonStyles];
-  /** @internal */
-  @state()
-  private _hasLeftIcon = false;
-
-  /** @internal */
-  @state()
-  private _hasRightIcon = false;
 
   /** @internal */
   private readonly formSubmitController = new FormSubmitController(this, {
@@ -75,6 +69,8 @@ export class SgdsButton extends ButtonElement {
   /** When set, the button will be in full width. */
   @property({ type: Boolean, reflect: true }) fullWidth = false;
 
+  private readonly hasSlotController = new HasSlotController(this, "leftIcon", "rightIcon");
+
   protected override _handleClick(event: MouseEvent) {
     if (this.disabled) {
       event.preventDefault();
@@ -95,30 +91,21 @@ export class SgdsButton extends ButtonElement {
     }
   };
 
-  private _handleLeftIconSlotchange(e: Event) {
-    const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLOrSVGImageElement>;
-    if (childNodes.length > 0) {
-      return (this._hasLeftIcon = true);
-    }
-  }
-
-  private _handleRightIconSlotchange(e: Event) {
-    const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLOrSVGImageElement>;
-    if (childNodes.length > 0) {
-      return (this._hasRightIcon = true);
-    }
-  }
-
   render() {
     const isLink = this.href;
     const tag = isLink ? literal`a` : literal`button`;
+    const hasLeftIconSlot = this.hasSlotController.test("leftIcon");
+    const hasRightIconSlot = this.hasSlotController.test("rightIcon");
+    const noIconSlot = !hasLeftIconSlot && !hasRightIconSlot;
+
     return html`
       <${tag}
         class="btn ${classMap({
           disabled: this.disabled,
           active: this.active,
-          "has-left-icon": this._hasLeftIcon,
-          "has-right-icon": this._hasRightIcon
+          "has-left-icon": hasLeftIconSlot,
+          "has-right-icon": hasRightIconSlot,
+          "no-icon": noIconSlot
         })}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
@@ -134,9 +121,9 @@ export class SgdsButton extends ButtonElement {
         @blur=${this._handleBlur}
         aria-label=${ifDefined(this.ariaLabel)}
       >
-      <slot name="leftIcon" @slotchange=${this._handleLeftIconSlotchange}></slot>
+      <slot name="leftIcon"></slot>
       <span><slot></slot></span>
-      <slot name="rightIcon" @slotchange=${this._handleRightIconSlotchange}></slot>
+      <slot name="rightIcon"></slot>
       </${tag}>
     `;
   }
