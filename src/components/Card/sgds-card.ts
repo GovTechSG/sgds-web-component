@@ -51,6 +51,7 @@ export class SgdsCard extends CardElement {
     const hasImageSlot = this.hasSlotController.test("image");
     const hasIconSlot = this.hasSlotController.test("icon");
     const hasMenuSlot = this.hasSlotController.test("menu");
+    const hasUpperSlot = this.hasSlotController.test("upper");
     return html`
       <${tag}
         class="card ${classMap({
@@ -61,7 +62,7 @@ export class SgdsCard extends CardElement {
         <div class="card-tinted-bg"></div>
         
         ${hasMenuSlot ? html` <slot name="menu"></slot> ` : nothing}
-        <div class=${classMap({ "card-image": hasImageSlot, "card-media": hasIconSlot })}>
+        <div class=${classMap({ "card-image": hasImageSlot, "card-media": hasIconSlot || hasUpperSlot })}>
           <slot name="upper">
           ${hasImageSlot ? html` <slot name="image" @slotchange=${this.handleImgSlotChange}></slot> ` : nothing}
           ${hasIconSlot ? html` <slot name="icon"></slot> ` : nothing}
