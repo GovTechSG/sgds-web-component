@@ -22,7 +22,8 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
 
     connectedCallback(): void {
       super.connectedCallback();
-      this.inputValidationController = new InputValidationController(this);
+      /** Idempotency guarantee */
+      this.inputValidationController ??= new InputValidationController(this);
     }
     async firstUpdated(changedProperties) {
       super.firstUpdated(changedProperties);
