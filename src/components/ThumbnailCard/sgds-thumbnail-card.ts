@@ -3,6 +3,7 @@ import { html, literal } from "lit/static-html.js";
 import { property, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
+import { HasSlotController } from "../../utils/slot";
 import thumbnailCardStyle from "./thumbnail-card.css";
 
 /**
@@ -29,6 +30,8 @@ export class SgdsThumbnailCard extends CardElement {
   /** Removes the card's internal padding when set to true.  */
   @property({ type: Boolean, reflect: true }) noPadding = false;
 
+  private readonly hasSlotController = new HasSlotController(this, "description");
+
   protected firstUpdated() {
     if (this._thumbnailNode.length === 0) {
       const thumbnail = this.shadowRoot.querySelector(".card-thumbnail") as HTMLDivElement;
@@ -47,6 +50,7 @@ export class SgdsThumbnailCard extends CardElement {
   render() {
     const tag = this.stretchedLink ? literal`a` : literal`div`;
     const cardTabIndex = !this.stretchedLink || this.disabled ? -1 : 0;
+    const hasDescriptionSlot = this.hasSlotController.test("description");
 
     return html`
       <${tag} 
@@ -71,9 +75,13 @@ export class SgdsThumbnailCard extends CardElement {
             </div>
             <slot></slot>
           </div>
-          <p class="card-text">
-            <slot name="description"></slot>
-          </p>
+          ${
+            hasDescriptionSlot
+              ? html`<p class="card-text">
+                  <slot name="description"></slot>
+                </p>`
+              : nothing
+          }
           <slot name="lower"></slot>
           <slot name="link" @slotchange=${this.handleLinkSlotChange}></slot>
         </div>

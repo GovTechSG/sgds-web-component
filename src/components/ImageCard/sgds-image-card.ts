@@ -3,6 +3,7 @@ import { html, literal } from "lit/static-html.js";
 import { property, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
+import { HasSlotController } from "../../utils/slot";
 import { CardImageAdjustment, CardImagePosition } from "../Card/types";
 import imageCardStyle from "./image-card.css";
 
@@ -35,6 +36,8 @@ export class SgdsImageCard extends CardElement {
   /** Controls how the image is sized and aligned within the card. Available options: `default`, `padding around`, `aspect ratio` */
   @property({ type: String, reflect: true }) imageAdjustment: CardImageAdjustment = "default";
 
+  private readonly hasSlotController = new HasSlotController(this, "description");
+
   protected firstUpdated() {
     if (this._imageNode.length === 0) {
       const image = this.shadowRoot.querySelector(".card-image") as HTMLDivElement;
@@ -55,6 +58,7 @@ export class SgdsImageCard extends CardElement {
   render() {
     const tag = this.stretchedLink ? literal`a` : literal`div`;
     const cardTabIndex = !this.stretchedLink || this.disabled ? -1 : 0;
+    const hasDescriptionSlot = this.hasSlotController.test("description");
 
     return html`
       <${tag} 
@@ -78,9 +82,13 @@ export class SgdsImageCard extends CardElement {
             </div>
             <slot></slot>
           </div>
-          <p class="card-text">
-            <slot name="description"></slot>
-          </p>
+          ${
+            hasDescriptionSlot
+              ? html`<p class="card-text">
+                  <slot name="description"></slot>
+                </p>`
+              : nothing
+          }
           <slot name="lower"></slot>
           <slot name="link" @slotchange=${this.handleLinkSlotChange}></slot>
         </div>
