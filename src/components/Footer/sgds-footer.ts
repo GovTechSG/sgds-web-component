@@ -1,6 +1,7 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
+import { HasSlotController } from "../../utils/slot";
 import footerStyle from "./footer.css";
 
 /**
@@ -51,56 +52,47 @@ export class SgdsFooter extends SgdsElement {
   @property({ type: String })
   termsOfUseHref = "#";
 
-  firstUpdated() {
-    const socialMediaSlot = this.shadowRoot.querySelector("slot[name='social-media']") as HTMLSlotElement;
-    const footerTitleSlot = this.shadowRoot.querySelector("slot[name='title']") as HTMLSlotElement;
-    const footerDescriptionSlot = this.shadowRoot.querySelector("slot[name='description']") as HTMLSlotElement;
-    const footerItemsSlot = this.shadowRoot.querySelector("slot[name='items']") as HTMLSlotElement;
-    const socialMediaChildNodes = socialMediaSlot.assignedNodes({ flatten: true });
-    const footerTitleChildNodes = footerTitleSlot.assignedNodes({ flatten: true });
-    const footerDescriptionChildNodes = footerDescriptionSlot.assignedNodes({ flatten: true });
-    const footerItemsChildNodes = footerItemsSlot.assignedNodes({ flatten: true });
-    if (socialMediaChildNodes.length === 0) {
-      const socialMediaContainer = this.shadowRoot.querySelector(".social-media") as HTMLDivElement;
-      socialMediaContainer.style.display = "none";
-    }
-
-    if (footerTitleChildNodes.length === 0 && footerDescriptionChildNodes.length === 0) {
-      const footerHeaderContainer = this.shadowRoot.querySelector(".footer-header") as HTMLDivElement;
-      footerHeaderContainer.style.display = "none";
-    }
-
-    if (footerItemsChildNodes.length === 0) {
-      const footerItemsContainer = this.shadowRoot.querySelector(".footer-items") as HTMLDivElement;
-      footerItemsContainer.style.display = "none";
-    }
-
-    if (
-      footerTitleChildNodes.length === 0 &&
-      footerDescriptionChildNodes.length === 0 &&
-      footerItemsChildNodes.length === 0
-    ) {
-      const footerTopContainer = this.shadowRoot.querySelector(".footer-top") as HTMLDivElement;
-      footerTopContainer.style.display = "none";
-    }
-  }
+  private readonly hasSlotController = new HasSlotController(this, "social-media", "title", "description", "items");
 
   render() {
+    const hasSocialMediaSlot = this.hasSlotController.test("social-media");
+    const hasTitleSlot = this.hasSlotController.test("title");
+    const hasDescriptionSlot = this.hasSlotController.test("description");
+    const hasItemsSlot = this.hasSlotController.test("items");
+
+    const displayFooterHeader = hasTitleSlot || hasDescriptionSlot;
+    const displayFooterItems = hasItemsSlot;
+    const displaySocialMedia = hasSocialMediaSlot;
+    const displayFooterTop = displayFooterHeader || displayFooterItems;
+
     return html`
       <footer class="footer">
-        <section class="footer-top">
-          <div class="footer-header">
-            <slot name="title"></slot>
-            <slot name="description"></slot>
-          </div>
-          <div class="footer-items">
-            <slot name="items"></slot>
-          </div>
-        </section>
+        ${displayFooterTop
+          ? html` <section class="footer-top">
+              ${displayFooterHeader
+                ? html`
+                    <div class="footer-header">
+                      <slot name="title"></slot>
+                      <slot name="description"></slot>
+                    </div>
+                  `
+                : nothing}
+              ${displayFooterItems
+                ? html` <div class="footer-items">
+                    <slot name="items"></slot>
+                  </div>`
+                : nothing}
+            </section>`
+          : nothing}
+
         <section class="footer-bottom">
-          <div class="social-media">
-            <slot name="social-media"></slot>
-          </div>
+          ${displaySocialMedia
+            ? html`
+                <div class="social-media">
+                  <slot name="social-media"></slot>
+                </div>
+              `
+            : nothing}
           <div class="footer-mandatory-links">
             <ul>
               <li><a href=${this.contactHref}>Contact</a></li>

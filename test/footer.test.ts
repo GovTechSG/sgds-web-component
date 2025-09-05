@@ -9,23 +9,8 @@ describe("footer", () => {
     assert.shadowDom.equal(
       el,
       `
-          <footer class="footer">
-          <section class="footer-top" style="display: none;">
-            <div class="footer-header" style="display: none;">
-              <slot name="title"></slot>
-              <slot name="description"></slot>
-            </div>
-            <div class="footer-items" style="display: none;">
-              <slot name="items"></slot>
-            </div>
-          </section>
+        <footer class="footer">
           <section class="footer-bottom">
-            <div
-              class="social-media"
-              style="display: none;"
-            >
-              <slot name="social-media"></slot>
-            </div>
             <div class="footer-mandatory-links">
               <ul>
                 <li><a href="#">Contact</a></li>
@@ -46,7 +31,7 @@ describe("footer", () => {
             </div>
           </section>
         </footer>
-          `
+      `
     );
   });
 
