@@ -228,8 +228,6 @@ slot[name="link"]::slotted(*) {
 }
 
 slot[name="link"]::slotted(a) {
-  display: inline-flex;
-  gap: var(--sgds-gap-2-xs);
   color: var(--sgds-link-color-default);
   text-decoration: none !important;
   height: auto !important;
