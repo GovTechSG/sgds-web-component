@@ -320,6 +320,24 @@ describe("variant=button sgds-pagination", () => {
     expect(nextButton).to.have.attribute("disabled");
     expect(prevButton).not.to.have.attribute("disabled");
   });
+  it("when pages are less than 2, both arrows are disabled", async () => {
+    const el = await fixture(
+      html` <sgds-pagination dataLength="5" itemsPerPage="5" variant="button" currentPage="1"></sgds-pagination>`
+    );
+
+    const nextButton = el.shadowRoot?.querySelector("sgds-icon-button[ariaLabel='Next']");
+    const prevButton = el.shadowRoot?.querySelector("sgds-icon-button[ariaLabel='Previous']");
+    expect(nextButton).to.have.attribute("disabled");
+    expect(prevButton).to.have.attribute("disabled");
+  });
+
+  it("when there are no pages, both arrows are disabled", async () => {
+    const el = await fixture(html` <sgds-pagination></sgds-pagination>`);
+    const nextButton = el.shadowRoot?.querySelector("sgds-icon-button[ariaLabel='Next']");
+    const prevButton = el.shadowRoot?.querySelector("sgds-icon-button[ariaLabel='Previous']");
+    expect(nextButton).to.have.attribute("disabled");
+    expect(prevButton).to.have.attribute("disabled");
+  });
 });
 describe("variant=description sgds-pagination", () => {
   it("can be semantically matched with the DOM", async () => {

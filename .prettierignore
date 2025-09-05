@@ -1,0 +1,17 @@
+node_modules
+lib
+test-outdir
+storybook-static
+react
+src/react
+custom-elements.json
+stories/components
+stats.html
+*storybook.log
+.env
+tokens/**/*.json
+scripts/**/*.json
+cypress/apps/nuxt-app/.nuxt
+cypress/apps/next-app/.next
+cypress/apps/angular-app/.angular
+coverage
