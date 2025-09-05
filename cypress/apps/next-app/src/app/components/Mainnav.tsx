@@ -12,16 +12,26 @@ export const Mainnav = () => {
   return (
     <SgdsMainnav>
       <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
-      <SgdsMainnavItem>ArgsTable Controlled </SgdsMainnavItem>
+      <SgdsMainnavItem>
+        <a href="#">ArgsTable Controlled</a>
+      </SgdsMainnavItem>
       <SgdsMainnavDropdown close="default">
         <span slot="toggler">Dropdown</span>
-        <SgdsDropdownItem href="https://google.com">Item 1</SgdsDropdownItem>
-        <SgdsDropdownItem href="#">Item 2</SgdsDropdownItem>
-        <SgdsDropdownItem href="#">Item 3</SgdsDropdownItem>
+        <SgdsDropdownItem disabled>
+          <a href="https://google.com">Item 1</a>
+        </SgdsDropdownItem>
+        <SgdsDropdownItem>
+          <a href="#">Item 2</a>
+        </SgdsDropdownItem>
+        <SgdsDropdownItem>
+          <a href="#">Item 3</a>
+        </SgdsDropdownItem>
       </SgdsMainnavDropdown>
-      <SgdsMainnavItem href="#">About</SgdsMainnavItem>
-      <SgdsMainnavItem href="#" slot="end">
-        Contact Us
+      <SgdsMainnavItem>
+        <a href="#">About</a>
+      </SgdsMainnavItem>
+      <SgdsMainnavItem slot="end">
+        <a href="#">Contact Us</a>
       </SgdsMainnavItem>
       <SgdsButton slot="end">Login</SgdsButton>
     </SgdsMainnav>

@@ -1,3 +1,7 @@
+:host([disabled]) {
+  cursor: not-allowed;
+}
+
 .dropdown-item {
   background-color: var(--sgds-bg-transparent);
   padding: var(--sgds-padding-sm) var(--sgds-padding-lg);
