@@ -57,7 +57,12 @@ export class SgdsMainnavItem extends SgdsElement {
       if (this.disabled) {
         anchor.setAttribute("href", "javascript:void(0)");
         anchor.setAttribute("tabindex", "-1");
+        return;
       }
+
+      anchor.addEventListener("click", () => {
+        this.emit("sgds-mainnav-close");
+      });
     }
   }
 
