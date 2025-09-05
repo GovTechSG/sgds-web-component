@@ -129,12 +129,22 @@ export class SgdsMainnav extends SgdsElement {
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
+    this.addEventListener("sgds-mainnav-close", () => {
+      if (this.breakpointReached) {
+        this.hide();
+      }
+    });
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
 
     this.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
+    this.removeEventListener("sgds-mainnav-close", () => {
+      if (this.breakpointReached) {
+        this.hide();
+      }
+    });
   }
 
   firstUpdated() {
@@ -246,7 +256,9 @@ export class SgdsMainnav extends SgdsElement {
 
     this.expanded = false;
     document.querySelector("body").style.removeProperty("overflow");
-    this.emit("close-dropdown-menu");
+    setTimeout(() => {
+      this.emit("close-dropdown-menu");
+    }, 200);
 
     return waitForEvent(this, "sgds-after-hide");
   }
