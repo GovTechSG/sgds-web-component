@@ -1,4 +1,4 @@
-import { assert, fixture } from "@open-wc/testing";
+import { assert, fixture, expect } from "@open-wc/testing";
 import { html } from "lit";
 import type { SgdsCard } from "../src/components";
 import "./sgds-web-component";
@@ -35,5 +35,32 @@ describe("<sgds-card>", () => {
         </div>
       `
     );
+  });
+
+  it("renders description when slotted", async () => {
+    const el = await fixture<SgdsCard>(html`
+      <sgds-card>
+        <span slot="description">This is a description</span>
+      </sgds-card>
+    `);
+
+    await el.updateComplete;
+
+    const desc = el.shadowRoot?.querySelector(".card-text");
+    expect(desc).to.exist;
+
+    const slot = desc?.querySelector("slot[name=description]") as HTMLSlotElement;
+    const assigned = slot.assignedNodes({ flatten: true });
+    expect(assigned.length).to.be.greaterThan(0);
+    expect((assigned[0] as HTMLElement).textContent).to.equal("This is a description");
+  });
+
+  it("does not render description when not slotted", async () => {
+    const el = await fixture<SgdsCard>(html`<sgds-card></sgds-card>`);
+
+    await el.updateComplete;
+
+    const desc = el.shadowRoot?.querySelector(".card-text");
+    expect(desc).to.not.exist;
   });
 });
