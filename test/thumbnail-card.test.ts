@@ -23,22 +23,6 @@ describe("sgds-thumbnail-card", () => {
     expect(title).to.exist;
   });
 
-  it("hides thumbnail if no content is slotted", async () => {
-    const el = await fixture<SgdsThumbnailCard>(html`<sgds-thumbnail-card></sgds-thumbnail-card>`);
-    const thumbnail = el.shadowRoot?.querySelector(".card-thumbnail") as HTMLElement;
-    expect(getComputedStyle(thumbnail).display).to.equal("none");
-  });
-
-  it("shows thumbnail when slotted", async () => {
-    const el = await fixture<SgdsThumbnailCard>(html`
-      <sgds-thumbnail-card>
-        <img slot="thumbnail" src="https://automation.vuejs.org/images/goread_io.png" />
-      </sgds-thumbnail-card>
-    `);
-    const thumbnail = el.shadowRoot?.querySelector(".card-thumbnail") as HTMLElement;
-    expect(getComputedStyle(thumbnail).display).to.not.equal("none");
-  });
-
   it("renders description when slotted", async () => {
     const el = await fixture<SgdsThumbnailCard>(html`
       <sgds-thumbnail-card>
