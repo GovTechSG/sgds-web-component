@@ -192,7 +192,7 @@ slot[name="subtitle"]::slotted(*) {
   --sgds-font-weight-bold: var(--sgds-font-weight-semibold);
   --sgds-line-height-heading: var(--sgds-line-height-min);
   --sgds-letter-spacing-tight: var(--sgds-letter-spacing-wide);
-  color: var(--sgds-color-default);
+  color: var(--sgds-color-subtle);
   font-size: var(--sgds-font-size-1);
   font-weight: var(--sgds-font-weight-semibold);
   letter-spacing: var(--sgds-letter-spacing-wide);
