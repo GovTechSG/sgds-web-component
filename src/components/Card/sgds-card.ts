@@ -38,7 +38,7 @@ export class SgdsCard extends CardElement {
       console.error("Multiple elements passed into SgdsCard's image slot");
     }
 
-    if (this.hasSlotController.test("icon") && this.hasSlotController.test("icon")) {
+    if (this.hasSlotController.test("icon") && this.hasSlotController.test("image")) {
       console.error("Both image and icon slots cannot be used together in SgdsCard");
     }
   }
