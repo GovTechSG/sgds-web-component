@@ -1,6 +1,7 @@
 import { html } from "lit";
 import { consume } from "@lit/context";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { SgdsMainnav } from "./sgds-mainnav";
 import { classMap } from "lit/directives/class-map.js";
 import genId from "../../utils/generateId";
 import dropdownStyle from "../Dropdown/dropdown.css";
@@ -71,16 +72,20 @@ export class SgdsMainnavDropdown extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
-    document.addEventListener("close-dropdown-menu", () => {
-      this._resetDropdownMenu();
-      this._hideDropdownMenuItems();
+    document.addEventListener("sgds-after-hide", (e: CustomEvent) => {
+      const target = e.target as HTMLElement;
+      const mainnav = target.closest("sgds-mainnav") as SgdsMainnav;
+      if (mainnav) {
+        this._resetDropdownMenu();
+        this._hideDropdownMenuItems();
+      }
     });
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     // Clean up the event listener when the element is removed from the DOM
-    document.removeEventListener("close-dropdown-menu", () => {
+    document.removeEventListener("sgds-after-hide", () => {
       this._resetDropdownMenu();
       this._hideDropdownMenuItems();
     });
@@ -120,8 +125,10 @@ export class SgdsMainnavDropdown extends SgdsElement {
         link.setAttribute("href", "javascript:void(0)");
         link.setAttribute("tabindex", "-1");
       } else {
-        link.addEventListener("click", () => {
-          this.emit("sgds-mainnav-close");
+        link.addEventListener("click", (e: Event) => {
+          const target = e.target as HTMLElement;
+          const mainnav = target.closest("sgds-mainnav") as SgdsMainnav;
+          mainnav.hide();
         });
       }
     });
