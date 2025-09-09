@@ -122,6 +122,33 @@ describe("<sgds-card>", () => {
       `
     );
   });
+
+  it("renders description when slotted", async () => {
+    const el = await fixture<SgdsCard>(html`
+      <sgds-card>
+        <span slot="description">This is a description</span>
+      </sgds-card>
+    `);
+
+    await el.updateComplete;
+
+    const desc = el.shadowRoot?.querySelector(".card-text");
+    expect(desc).to.exist;
+
+    const slot = desc?.querySelector("slot[name=description]") as HTMLSlotElement;
+    const assigned = slot.assignedNodes({ flatten: true });
+    expect(assigned.length).to.be.greaterThan(0);
+    expect((assigned[0] as HTMLElement).textContent).to.equal("This is a description");
+  });
+
+  it("does not render description when not slotted", async () => {
+    const el = await fixture<SgdsCard>(html`<sgds-card></sgds-card>`);
+
+    await el.updateComplete;
+
+    const desc = el.shadowRoot?.querySelector(".card-text");
+    expect(desc).to.not.exist;
+  });
 });
 
 describe("SgdsCard error logging", () => {
