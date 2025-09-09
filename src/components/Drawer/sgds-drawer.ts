@@ -17,6 +17,7 @@ import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
  * @slot default - The drawer's main content
  * @slot title - The title of the drawer
  * @slot description - The description of the drawer
+ * @slot footer - The footer of the drawer
  *
  * @event sgds-show - Emitted when the drawer opens.
  * @event sgds-after-show - Emitted after the drawer opens and all animations are complete.
@@ -297,6 +298,7 @@ export class SgdsDrawer extends SgdsElement {
             ></sgds-close-button>
           </header>
           <slot class="drawer-body"></slot>
+          <slot name="footer"></slot>
         </div>
       </div>
     `;

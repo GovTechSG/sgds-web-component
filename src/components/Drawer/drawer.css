@@ -114,6 +114,12 @@ slot[name="description"]::slotted(*) {
   color: var(--sgds-color-subtle);
 }
 
+slot[name="footer"]::slotted(*) {
+  padding: var(--sgds-padding-lg) var(--sgds-padding-lg) var(--sgds-padding-none);
+  box-shadow: 0 -2px 2px 0 rgba(14, 14, 14, 0.08);
+  margin: var(--sgds-margin-none) calc(var(--sgds-margin-xs) * -1);
+}
+
 sgds-close-button {
   position: absolute;
   top: 8px;
@@ -145,5 +151,10 @@ sgds-close-button {
 @media screen and (min-width: 512px) {
   .drawer-panel {
     padding: var(--sgds-padding-2-xl);
+  }
+
+  slot[name="footer"]::slotted(*) {
+    padding: var(--sgds-padding-2-xl) var(--sgds-padding-2-xl) var(--sgds-padding-none);
+    margin: var(--sgds-margin-none) calc(var(--sgds-margin-md) * -1);
   }
 }
