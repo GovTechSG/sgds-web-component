@@ -34,9 +34,6 @@ export class SgdsThumbnailCard extends CardElement {
 
   protected firstUpdated() {
     if (this._thumbnailNode.length === 0) {
-      const thumbnail = this.shadowRoot.querySelector(".card-thumbnail") as HTMLDivElement;
-      thumbnail.style.display = "none";
-
       if ((this.orientation === "vertical" && this._upperNode.length === 0) || this.orientation === "horizontal") {
         const media = this.shadowRoot.querySelector(".card-media") as HTMLDivElement;
         media.style.display = "none";
@@ -61,9 +58,7 @@ export class SgdsThumbnailCard extends CardElement {
       >
         ${this.tinted && !this.noPadding ? html`<div class="card-tinted-bg"></div>` : nothing}
         <div class="card-media">
-					<div class="card-thumbnail">
-            <slot name="thumbnail"></slot>
-          </div>
+          <slot name="thumbnail"></slot>
 					${this.orientation === "vertical" ? html`<slot name="upper"></slot>` : nothing}
         </div>
         <div class="card-body">
