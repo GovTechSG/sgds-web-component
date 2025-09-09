@@ -160,4 +160,56 @@ describe("<sgds-drawer>", () => {
     await waitUntil(() => afterHideHandler.calledOnce);
     expect(document.body.style.overflow).to.not.equal("hidden");
   });
+
+  it("should update placement to bottom when window < SM_BREAKPOINT", async () => {
+    const el = await fixture<SgdsDrawer>(html`<sgds-drawer placement="end"></sgds-drawer>`);
+
+    const stub = sinon.stub(window, "innerWidth").value(400);
+    window.dispatchEvent(new Event("resize"));
+    await el.updateComplete;
+
+    expect(el.placement).to.equal("bottom");
+    stub.restore();
+  });
+
+  it("should remain placement to top when window < SM_BREAKPOINT and placement = top", async () => {
+    const el = await fixture<SgdsDrawer>(html`<sgds-drawer placement="top"></sgds-drawer>`);
+
+    const stub = sinon.stub(window, "innerWidth").value(400);
+    window.dispatchEvent(new Event("resize"));
+    await el.updateComplete;
+
+    expect(el.placement).to.equal("top");
+    stub.restore();
+  });
+
+  it("should keep original placement when window >= SM_BREAKPOINT", async () => {
+    const el = await fixture<SgdsDrawer>(html`<sgds-drawer placement="start"></sgds-drawer>`);
+
+    const stub = sinon.stub(window, "innerWidth").value(1200); // assume >= SM_BREAKPOINT
+    window.dispatchEvent(new Event("resize"));
+    await el.updateComplete;
+
+    expect(el.placement).to.equal("start");
+    stub.restore();
+  });
+
+  it("should accept size prop and reflect it", async () => {
+    const el = await fixture<SgdsDrawer>(html`<sgds-drawer size="md"></sgds-drawer>`);
+    expect(el.size).to.equal("md");
+    expect(el.hasAttribute("size")).to.be.true;
+  });
+
+  it("should render footer slot content", async () => {
+    const el = await fixture<SgdsDrawer>(html`
+      <sgds-drawer open>
+        <div slot="footer" id="footer-content">Footer here</div>
+      </sgds-drawer>
+    `);
+
+    const footer = el.shadowRoot?.querySelector("slot[name='footer']") as HTMLSlotElement;
+    const assigned = footer.assignedNodes({ flatten: true });
+    expect(assigned.length).to.be.greaterThan(0);
+    expect((assigned[0] as HTMLElement).id).to.equal("footer-content");
+  });
 });
