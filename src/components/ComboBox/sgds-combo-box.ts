@@ -21,6 +21,7 @@ type SgdsComboBoxItemData = SgdsSelectItemData;
  *
  * @slot icon - slot for form control icon to be displayed on the right of the input box.
  *
+ * @event sgds-change - Emitted when the combo box's value changes.
  * @event sgds-select - Emitted when the combo box's selected value changes.
  * @event sgds-input -  Emitted when user input is received and its value changes.
  */
