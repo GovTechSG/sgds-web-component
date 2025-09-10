@@ -11,6 +11,10 @@ import SelectItem from "./select-item";
  * @summary Select is used to make one selection from a list through keyboard or mouse actions
  *
  * @event sgds-select - Emitted when an option is selected and the value of select is updated
+ * @event sgds-change - Emitted when the select value changes.
+ * @event sgds-focus -  Emitted when user input is focused.
+ * @event sgds-blur -  Emitted when user input is blurred.
+ *
  */
 export class SgdsSelect extends SelectElement {
   static styles = [...SelectElement.styles, selectStyle];
@@ -46,6 +50,9 @@ export class SgdsSelect extends SelectElement {
 
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
+    // when value change, always emit a change event
+    this.emit("sgds-change");
+
     if (this.value) {
       this.emit("sgds-select");
     }
@@ -73,8 +80,14 @@ export class SgdsSelect extends SelectElement {
     this.hideMenu();
   }
 
+  protected _handleFocus() {
+    this.emit("sgds-focus");
+  }
+
   protected async _handleInputBlur(e: Event) {
     e.preventDefault();
+    this.emit("sgds-blur");
+
     if (this.selectedItems.length > 0) {
       this.displayValue = this.selectedItems[0].label;
     } else {
@@ -133,6 +146,7 @@ export class SgdsSelect extends SelectElement {
             ?required=${this.required}
             .value=${this.displayValue}
             @blur=${this._handleInputBlur}
+            @focus=${this._handleFocus}
             aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this._controlId}-invalid` : undefined)}
             aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
               ? `${this._controlId}-invalid`
