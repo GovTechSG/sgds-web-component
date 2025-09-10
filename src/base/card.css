@@ -135,16 +135,6 @@ a.card:not(.disabled):focus-visible {
   line-height: 0;
 }
 
-.card-thumbnail {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--sgds-dimension-80);
-  height: var(--sgds-dimension-80);
-  border-radius: var(--sgds-border-radius-full);
-  border: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
-}
-
 .card-body {
   display: flex;
   flex-direction: column;
