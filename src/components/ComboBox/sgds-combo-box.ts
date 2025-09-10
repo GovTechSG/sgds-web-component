@@ -21,9 +21,11 @@ type SgdsComboBoxItemData = SgdsSelectItemData;
  *
  * @slot icon - slot for form control icon to be displayed on the right of the input box.
  *
- * @event sgds-change - Emitted when the combo box's value changes.
  * @event sgds-select - Emitted when the combo box's selected value changes.
+ * @event sgds-change - Emitted when the combo box's value changes.
  * @event sgds-input -  Emitted when user input is received and its value changes.
+ * @event sgds-focus -  Emitted when user input is focused.
+ * @event sgds-blur -  Emitted when user input is blurred.
  */
 
 export class SgdsComboBox extends SelectElement {
@@ -192,8 +194,14 @@ export class SgdsComboBox extends SelectElement {
       }
     }
   }
+
+  protected _handleFocus() {
+    this.emit("sgds-focus");
+  }
+
   protected async _handleInputBlur(e: Event) {
     e.preventDefault();
+    this.emit("sgds-blur");
     if (this.multiSelect) {
       const displayValueMatchedSelectedItems = this.selectedItems.filter(({ label }) => this.displayValue === label);
       if (displayValueMatchedSelectedItems.length <= 0) {
@@ -296,6 +304,7 @@ export class SgdsComboBox extends SelectElement {
             .value=${this.displayValue}
             @input=${this._handleInputChange}
             @blur=${this._handleInputBlur}
+            @focus=${this._handleFocus}
             aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this._controlId}-invalid` : undefined)}
             aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
               ? `${this._controlId}-invalid`
