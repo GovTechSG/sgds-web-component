@@ -39,6 +39,33 @@ describe("sgds-thumbnail-card", () => {
     expect(getComputedStyle(thumbnail).display).to.not.equal("none");
   });
 
+  it("renders description when slotted", async () => {
+    const el = await fixture<SgdsThumbnailCard>(html`
+      <sgds-thumbnail-card>
+        <span slot="description">This is a description</span>
+      </sgds-thumbnail-card>
+    `);
+
+    await el.updateComplete;
+
+    const desc = el.shadowRoot?.querySelector(".card-text");
+    expect(desc).to.exist;
+
+    const slot = desc?.querySelector("slot[name=description]") as HTMLSlotElement;
+    const assigned = slot.assignedNodes({ flatten: true });
+    expect(assigned.length).to.be.greaterThan(0);
+    expect((assigned[0] as HTMLElement).textContent).to.equal("This is a description");
+  });
+
+  it("does not render description when not slotted", async () => {
+    const el = await fixture<SgdsThumbnailCard>(html`<sgds-thumbnail-card></sgds-thumbnail-card>`);
+
+    await el.updateComplete;
+
+    const desc = el.shadowRoot?.querySelector(".card-text");
+    expect(desc).to.not.exist;
+  });
+
   it("supports noPadding prop (removes padding and tint)", async () => {
     const el = await fixture<SgdsThumbnailCard>(html`<sgds-thumbnail-card noPadding></sgds-thumbnail-card>`);
     expect(el.noPadding).to.be.true;

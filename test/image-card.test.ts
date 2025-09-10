@@ -57,9 +57,24 @@ describe("sgds-image-card", () => {
       </sgds-image-card>
     `);
 
-    const slot = el.shadowRoot?.querySelector("slot[name=description]") as HTMLSlotElement;
-    const nodes = slot.assignedNodes();
-    expect(nodes[0].textContent).to.equal("This is a description");
+    await el.updateComplete;
+
+    const desc = el.shadowRoot?.querySelector(".card-text");
+    expect(desc).to.exist;
+
+    const slot = desc?.querySelector("slot[name=description]") as HTMLSlotElement;
+    const assigned = slot.assignedNodes({ flatten: true });
+    expect(assigned.length).to.be.greaterThan(0);
+    expect((assigned[0] as HTMLElement).textContent).to.equal("This is a description");
+  });
+
+  it("does not render description when not slotted", async () => {
+    const el = await fixture<SgdsImageCard>(html`<sgds-image-card></sgds-image-card>`);
+
+    await el.updateComplete;
+
+    const desc = el.shadowRoot?.querySelector(".card-text");
+    expect(desc).to.not.exist;
   });
 
   it("sets tabindex correctly based on stretchedLink and disabled", async () => {

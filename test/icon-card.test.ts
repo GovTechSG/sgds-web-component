@@ -49,6 +49,33 @@ describe("<sgds-icon-card>", () => {
     expect(title).to.exist;
   });
 
+  it("renders description when slotted", async () => {
+    const el = await fixture<SgdsIconCard>(html`
+      <sgds-icon-card>
+        <span slot="description">This is a description</span>
+      </sgds-icon-card>
+    `);
+
+    await el.updateComplete;
+
+    const desc = el.shadowRoot?.querySelector(".card-text");
+    expect(desc).to.exist;
+
+    const slot = desc?.querySelector("slot[name=description]") as HTMLSlotElement;
+    const assigned = slot.assignedNodes({ flatten: true });
+    expect(assigned.length).to.be.greaterThan(0);
+    expect((assigned[0] as HTMLElement).textContent).to.equal("This is a description");
+  });
+
+  it("does not render description when not slotted", async () => {
+    const el = await fixture<SgdsIconCard>(html`<sgds-icon-card></sgds-icon-card>`);
+
+    await el.updateComplete;
+
+    const desc = el.shadowRoot?.querySelector(".card-text");
+    expect(desc).to.not.exist;
+  });
+
   it("applies disabled class when disabled", async () => {
     const el = await fixture<SgdsIconCard>(html`<sgds-icon-card disabled></sgds-icon-card>`);
     expect(el.shadowRoot?.querySelector(".card")?.classList.contains("disabled")).to.be.true;

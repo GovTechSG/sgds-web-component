@@ -1,11 +1,11 @@
-import { html, literal } from "lit/static-html.js";
+import { nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { html, literal } from "lit/static-html.js";
 import { CardElement } from "../../base/card-element";
-import { CardImageAdjustment, CardImagePosition } from "./types";
-import cardStyle from "./card.css";
 import { HasSlotController } from "../../utils/slot";
-import { nothing } from "lit";
+import cardStyle from "./card.css";
+import { CardImageAdjustment, CardImagePosition } from "./types";
 
 /**
  * @summary Cards can be used for headers and footers, a wide variety of content, contain contextual background colors and images.
@@ -29,7 +29,7 @@ export class SgdsCard extends CardElement {
   /** Controls how the image is sized and aligned within the card. Available options: `default`, `padding around`, `aspect ratio` */
   @property({ type: String, reflect: true }) imageAdjustment: CardImageAdjustment = "default";
 
-  private readonly hasSlotController = new HasSlotController(this, "image", "icon", "menu");
+  private readonly hasSlotController = new HasSlotController(this, "image", "icon", "menu", "description");
 
   handleImgSlotChange(e: Event) {
     const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLOrSVGImageElement>;
@@ -46,6 +46,7 @@ export class SgdsCard extends CardElement {
   render() {
     const tag = this.stretchedLink ? literal`a` : literal`div`;
     const cardTabIndex = !this.stretchedLink || this.disabled ? -1 : 0;
+    const hasDescriptionSlot = this.hasSlotController.test("description");
 
     const hasImageSlot = this.hasSlotController.test("image");
     const hasIconSlot = this.hasSlotController.test("icon");
@@ -76,9 +77,13 @@ export class SgdsCard extends CardElement {
             </div>
             <slot></slot>
           </div>
-          <p class="card-text">
-            <slot name="description"></slot>
-          </p>
+          ${
+            hasDescriptionSlot
+              ? html`<p class="card-text">
+                  <slot name="description"></slot>
+                </p>`
+              : nothing
+          }
           <slot name="lower"></slot>
           <slot name="link" @slotchange=${this.handleLinkSlotChange}></slot>
         </div>
