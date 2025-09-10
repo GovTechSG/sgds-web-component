@@ -82,7 +82,7 @@ describe("sgds-combo-box ", () => {
     expect(el.shadowRoot?.querySelector(".dropdown-menu.show")).to.be.null;
   });
 
-  it("should emit sgds-select event when combobx value is updated", async () => {
+  it("should emit sgds-select event when combobox value is updated", async () => {
     const el = await fixture<SgdsComboBox>(html` <sgds-combo-box
       .menuList=${[
         { label: "Option 1", value: "option1" },
@@ -110,6 +110,42 @@ describe("sgds-combo-box ", () => {
     await sendKeys({ press: "A" });
     waitUntil(() => inputHandler.calledOnce);
     expect(inputHandler).to.have.been.calledOnce;
+  });
+
+  it("should emit sgds-change event when combobox value changes", async () => {
+    const el = await fixture<SgdsComboBox>(html` <sgds-combo-box
+      .menuList=${[
+        { label: "Option 1", value: "option1" },
+        { label: "Option 2", value: "option2" }
+      ]}
+    ></sgds-combo-box>`);
+    const changeHandler = sinon.spy();
+    el?.addEventListener("sgds-change", changeHandler);
+
+    expect(el.value).to.equal("");
+    el.value = "option1";
+
+    await waitUntil(() => changeHandler.calledOnce);
+    expect(changeHandler).to.have.been.calledOnce;
+  });
+
+  it("should emit sgds-focus and sgds-blur event when combobox is focused/blurred", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box></sgds-combo-box>`);
+    const comboBoxInput = el.shadowRoot?.querySelector("input");
+
+    const focusHandler = sinon.spy();
+    el?.addEventListener("sgds-focus", focusHandler);
+
+    const blurHandler = sinon.spy();
+    el?.addEventListener("sgds-blur", blurHandler);
+
+    comboBoxInput?.focus();
+    await waitUntil(() => focusHandler.calledOnce);
+    expect(focusHandler).to.have.been.calledOnce;
+
+    comboBoxInput?.blur();
+    await waitUntil(() => blurHandler.calledOnce);
+    expect(blurHandler).to.have.been.calledOnce;
   });
 
   it("mouse click on item, should update value of selected item", async () => {

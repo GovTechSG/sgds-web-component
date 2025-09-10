@@ -2,19 +2,40 @@
 <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
 <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<style>
+  body {
+    padding: var(--sgds-padding-lg);
+  }
 
-<sgds-modal open>
+  body > div {
+    max-width: var(--sgds-dimension-768);
+    margin: 0 auto;
+  }
+</style>
+
+<div>
+  <!-- Modal Example -->
+  <sgds-modal open>
+    <sgds-select
+      id="select-example-in-modal"
+      label="Select label"
+      hinttext="Select an option"
+      placeholder="Select an option"
+    ></sgds-select>
+  </sgds-modal>
+
   <sgds-select
     id="select-example"
     label="Select label"
     hinttext="Select an option"
     placeholder="Select an option"
   ></sgds-select>
-</sgds-modal>
+</div>
+
 <script>
   const select = document.querySelector("#select-example");
-  const combobox = document.querySelector("#combobox-example");
-  combobox.menuList = select.menuList = [
+  const modalSelect = document.querySelector("#select-example-in-modal");
+  modalSelect.menuList = select.menuList = [
     { label: "Afghanistan", value: "1" },
     { label: "Albania", value: "2" },
     { label: "Algeria", value: "3" },
@@ -221,4 +242,10 @@
     { label: "Zambia", value: "204" },
     { label: "Zimbabwe", value: "205" }
   ];
+</script>
+
+<script>
+  window.addEventListener("sgds-change", () => console.log("sgds-change"));
+  window.addEventListener("sgds-blur", () => console.log("sgds-blur"));
+  window.addEventListener("sgds-focus", () => console.log("sgds-focus"));
 </script>

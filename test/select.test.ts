@@ -59,6 +59,7 @@ describe("<sgds-select>", () => {
       { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
     );
   });
+
   it("Should not be able to type in the input", async () => {
     const el = await fixture<SgdsSelect>(html`<sgds-select></sgds-select>`);
     const input = el.shadowRoot?.querySelector("input");
@@ -69,11 +70,13 @@ describe("<sgds-select>", () => {
     expect(input?.value).not.to.equal("hi");
     expect(input?.value).to.equal("");
   });
+
   it("should be disabled with the disabled attribute to be true", async () => {
     const el = await fixture(html`<sgds-select disabled></sgds-select>`);
     const selectInput = el.shadowRoot?.querySelector("input");
     expect(selectInput?.disabled).to.be.true;
   });
+
   it("when readonly set to true, menu cannot open", async () => {
     const el = await fixture<SgdsSelect>(html`<sgds-select readonly></sgds-select>`);
     const input = el.shadowRoot?.querySelector("input.form-control") as HTMLInputElement;
@@ -89,7 +92,8 @@ describe("<sgds-select>", () => {
     await el.updateComplete;
     expect(el.shadowRoot?.querySelector(".dropdown-menu.show")).to.be.null;
   });
-  it("should emit sgds-select event when combobx value is updated", async () => {
+
+  it("should emit sgds-select event when select value is updated", async () => {
     const el = await fixture<SgdsSelect>(html` <sgds-select
       .menuList=${[
         { label: "Option 1", value: "option1" },
@@ -105,6 +109,48 @@ describe("<sgds-select>", () => {
     await waitUntil(() => selectHandler.calledOnce);
     expect(selectHandler).to.have.been.calledOnce;
   });
+
+  it("should emit sgds-change event when select value is updated", async () => {
+    const el = await fixture<SgdsSelect>(html` <sgds-select
+      .menuList=${[
+        { label: "Option 1", value: "option1" },
+        { label: "Option 2", value: "option2" }
+      ]}
+    ></sgds-select>`);
+    const changeHandler = sinon.spy();
+    el?.addEventListener("sgds-change", changeHandler);
+
+    expect(el.value).to.equal("");
+    el.value = "option1";
+
+    await waitUntil(() => changeHandler.calledOnce);
+    expect(changeHandler).to.have.been.calledOnce;
+  });
+
+  it("should emit sgds-focus and sgds-blur event when select is focused/blurred", async () => {
+    const el = await fixture<SgdsSelect>(html` <sgds-select
+      .menuList=${[
+        { label: "Option 1", value: "option1" },
+        { label: "Option 2", value: "option2" }
+      ]}
+    ></sgds-select>`);
+    const selectInput = el.shadowRoot?.querySelector("input");
+
+    const focusHandler = sinon.spy();
+    el?.addEventListener("sgds-focus", focusHandler);
+
+    const blurHandler = sinon.spy();
+    el?.addEventListener("sgds-blur", blurHandler);
+
+    selectInput?.focus();
+    await waitUntil(() => focusHandler.calledOnce);
+    expect(focusHandler).to.have.been.calledOnce;
+
+    selectInput?.blur();
+    await waitUntil(() => blurHandler.calledOnce);
+    expect(blurHandler).to.have.been.calledOnce;
+  });
+
   it("mouse click on item, should update value of selected item", async () => {
     const el = await fixture<SgdsSelect>(
       html`<sgds-select
@@ -127,6 +173,7 @@ describe("<sgds-select>", () => {
 
     expect(el.value).to.equal("option1");
   });
+
   it("should not show any items in dropdown menu when there is no match (for default filter)", async () => {
     const el = await fixture<SgdsSelect>(html`<sgds-select .menuList=${[]}></sgds-select>`);
 
@@ -136,6 +183,7 @@ describe("<sgds-select>", () => {
     const emptyMenu = el.shadowRoot?.querySelector(".empty-menu");
     expect(emptyMenu).to.exist;
   });
+
   it("when initial value is specified, input is populated, item is active", async () => {
     const el = await fixture<SgdsSelect>(
       html`<sgds-select
@@ -178,30 +226,31 @@ describe("<sgds-select>", () => {
     await sendKeys({ press: "Escape" });
     await waitUntil(() => el.shadowRoot?.activeElement === input());
   });
+});
 
-  describe("select >> when submitting a form", () => {
-    it("when required=true should block submission of form when there is no value", async () => {
-      const form = await fixture<HTMLFormElement>(
-        html`<form>
-          <sgds-select
-            required
-            .menuList=${[
-              { label: "Apple", value: "option1" },
-              { label: "Apricot", value: "option2" },
-              { label: "Dur", value: "option3" }
-            ]}
-          ></sgds-select>
-          <sgds-button type="submit"></sgds-button>
-        </form>`
-      );
-      const submitButton = form.querySelector<SgdsButton>("sgds-button");
-      const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
-      expect(form.reportValidity()).to.equal(false);
-      form.addEventListener("submit", submitHandler);
-      submitButton?.click();
-      expect(submitHandler).not.to.have.been.calledOnce;
-    });
+describe("select >> when submitting a form", () => {
+  it("when required=true should block submission of form when there is no value", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-select
+          required
+          .menuList=${[
+            { label: "Apple", value: "option1" },
+            { label: "Apricot", value: "option2" },
+            { label: "Dur", value: "option3" }
+          ]}
+        ></sgds-select>
+        <sgds-button type="submit"></sgds-button>
+      </form>`
+    );
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    expect(form.reportValidity()).to.equal(false);
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    expect(submitHandler).not.to.have.been.calledOnce;
   });
+
   it("when required=true and value is true , form can be submitted", async () => {
     const form = await fixture<HTMLFormElement>(
       html`<form>
@@ -225,6 +274,7 @@ describe("<sgds-select>", () => {
     await waitUntil(() => submitHandler.calledOnce);
     expect(submitHandler).to.have.been.calledOnce;
   });
+
   it("when disabled, form is always able to submit even if there is no value", async () => {
     const form = await fixture<HTMLFormElement>(
       html`<form>
@@ -248,6 +298,7 @@ describe("<sgds-select>", () => {
     await waitUntil(() => submitHandler.calledOnce);
     expect(submitHandler).to.have.been.calledOnce;
   });
+
   it("when reset, values are reset to defaultValue", async () => {
     const form = await fixture<HTMLFormElement>(
       html`<form>
@@ -281,6 +332,7 @@ describe("<sgds-select>", () => {
     // resets value to the defaultValue
     await waitUntil(() => select()?.value === "option3");
   });
+
   it("when touched and blurred and value is empty, error is shown", async () => {
     const el = await fixture<SgdsSelect>(
       html`
@@ -301,6 +353,7 @@ describe("<sgds-select>", () => {
     await el.updateComplete;
     await waitUntil(() => el.shadowRoot?.querySelector("input:invalid"));
   });
+
   it("when traversing menu, no error should be shown", async () => {
     const el = await fixture<SgdsSelect>(
       html`
