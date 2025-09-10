@@ -5,6 +5,7 @@
   <div>
     <Masthead></Masthead>
     <Subnav></Subnav>
+    <Drawer></Drawer>
     <Button></Button>
     <Accordion></Accordion>
     <Icon></Icon>
