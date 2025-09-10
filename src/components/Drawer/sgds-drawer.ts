@@ -73,8 +73,6 @@ export class SgdsDrawer extends SgdsElement {
   @state() private drawerPlacement: "top" | "end" | "bottom" | "start";
 
   firstUpdated() {
-    this.drawer.hidden = !this.open;
-
     if (this.open) {
       this.addOpenListeners();
 
@@ -266,11 +264,12 @@ export class SgdsDrawer extends SgdsElement {
   }
 
   render() {
+    const isHydrated = this.hasUpdated;
+
     return html`
       <div
         class=${classMap({
           drawer: true,
-          "drawer-open": this.open,
           "drawer-top": this.placement === "top",
           "drawer-end": this.placement === "end",
           "drawer-bottom": this.placement === "bottom",
@@ -278,6 +277,7 @@ export class SgdsDrawer extends SgdsElement {
           "drawer-contained": this.contained,
           "drawer-fixed": !this.contained
         })}
+        hidden=${!this.open && !isHydrated}
       >
         <div class="drawer-overlay" @click=${() => this.requestClose("overlay")} tabindex="-1"></div>
 
