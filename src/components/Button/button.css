@@ -22,3 +22,7 @@
 .btn span {
   padding: 0px var(--sgds-padding-2-xs);
 }
+
+.btn.no-icon {
+  gap: var(--sgds-gap-none);
+}
