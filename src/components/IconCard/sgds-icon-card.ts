@@ -3,7 +3,6 @@ import { html, literal } from "lit/static-html.js";
 import { property, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
-import { HasSlotController } from "../../utils/slot";
 import IconCardStyle from "./icon-card.css";
 
 /**
@@ -30,8 +29,6 @@ export class SgdsIconCard extends CardElement {
   /** Removes the card's internal padding when set to true.  */
   @property({ type: Boolean, reflect: true }) noPadding = false;
 
-  private readonly hasSlotController = new HasSlotController(this, "description");
-
   protected firstUpdated() {
     if (this._iconNode.length === 0) {
       if ((this.orientation === "vertical" && this._upperNode.length === 0) || this.orientation === "horizontal") {
@@ -47,7 +44,6 @@ export class SgdsIconCard extends CardElement {
   render() {
     const tag = this.stretchedLink ? literal`a` : literal`div`;
     const cardTabIndex = !this.stretchedLink || this.disabled ? -1 : 0;
-    const hasDescriptionSlot = this.hasSlotController.test("description");
 
     return html`
       <${tag} 
@@ -70,13 +66,7 @@ export class SgdsIconCard extends CardElement {
             </div>
             <slot></slot>
           </div>
-          ${
-            hasDescriptionSlot
-              ? html`<p class="card-text">
-                  <slot name="description"></slot>
-                </p>`
-              : nothing
-          }
+          <slot name="description"></slot>
           <slot name="lower"></slot>
           <slot name="link" @slotchange=${this.handleLinkSlotChange}></slot>
         </div>
