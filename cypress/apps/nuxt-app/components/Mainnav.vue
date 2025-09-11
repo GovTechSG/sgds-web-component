@@ -1,9 +1,13 @@
-<script type="module" src="../src/index.ts"></script>
-<link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
-<link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
-<link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<script lang="ts" setup>
+import { onMounted } from "vue";
 
-<sgds-mainnav expand="lg">
+onMounted(async () => {
+  await import("@govtechsg/sgds-web-component/components/Mainnav/index.js");
+});
+</script>
+
+<template>
+  <sgds-mainnav expand="lg">
     <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
     <sgds-mainnav-item active>
         <a href="#">Home</a>
@@ -38,4 +42,5 @@
     <sgds-button slot="end">Login</sgds-button>
     <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px">
     </dev-console-widget>
-</sgds-mainnav>
+  </sgds-mainnav>
+</template>
