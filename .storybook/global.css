@@ -61,6 +61,6 @@ ul.toc-list > * {
   border-radius: 4px;
 }
 /* https://github.com/storybookjs/storybook/issues/23586 */
-.docs-story :not(.sb-story *) {
+.docs-story :not(.sb-story *):not(:has(sgds-toast-container)) {
   transform: none;
 }
