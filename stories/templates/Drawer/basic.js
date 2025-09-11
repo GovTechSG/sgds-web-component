@@ -4,7 +4,12 @@ import { ifDefined } from "lit/directives/if-defined.js";
 export const Template = args => {
   return html`
     <sgds-button @click=${showDrawer}>Open ${args.placement} Drawer</sgds-button>
-    <sgds-drawer ?open=${args.open} placement=${ifDefined(args.placement)} ?contained=${args.contained}>
+    <sgds-drawer
+      ?open=${args.open}
+      size=${args.size}
+      placement=${ifDefined(args.placement)}
+      ?contained=${args.contained}
+    >
       <h2 slot="title">Title</h2>
       <p slot="description">Description</p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dictum est vitae erat molestie blandit.
@@ -23,6 +28,9 @@ export const Template = args => {
       consectetur massa. Pellentesque sed euismod dolor, vel ornare orci. Proin tincidunt gravida lorem. Duis vehicula,
       turpis quis placerat pharetra, lacus tortor fermentum tortor, a tincidunt mi arcu quis risus. Duis id ultrices
       urna, non placerat ex.
+      <div slot="footer">
+        <sgds-button>Button</sgds-button>
+      </div>
     </sgds-drawer>
   `;
 };

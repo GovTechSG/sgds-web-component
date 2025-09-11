@@ -1,11 +1,12 @@
 import { html } from "lit";
-import { property, query } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { animateTo, stopAnimations } from "../../utils/animate.js";
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry.js";
 import { waitForEvent } from "../../utils/event.js";
 import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
+import { SM_BREAKPOINT } from "../../utils/breakpoints";
 import { watch } from "../../utils/watch.js";
 import drawerStyles from "./drawer.css";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
@@ -16,6 +17,7 @@ import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
  * @slot default - The drawer's main content
  * @slot title - The title of the drawer
  * @slot description - The description of the drawer
+ * @slot footer - The footer of the drawer
  *
  * @event sgds-show - Emitted when the drawer opens.
  * @event sgds-after-show - Emitted after the drawer opens and all animations are complete.
@@ -51,6 +53,14 @@ export class SgdsDrawer extends SgdsElement {
    */
   @property({ type: Boolean, reflect: true }) open = false;
 
+  /**
+   * Defines the size of the drawer panel.
+   * For drawers placed on the left or right (`start`/`end`), this controls the drawer's width.
+   * For drawers placed on the top or bottom, this controls the drawer's height.
+   * Accepts `small`, `medium`, or `large`. Defaults to `small`.
+   */
+  @property({ type: String, reflect: true }) size: "sm" | "md" | "lg" = "sm";
+
   /** The direction from which the drawer will open. */
   @property({ type: String, reflect: true }) placement: "top" | "end" | "bottom" | "start" = "end";
 
@@ -60,9 +70,9 @@ export class SgdsDrawer extends SgdsElement {
    */
   @property({ type: Boolean, reflect: true }) contained = false;
 
-  firstUpdated() {
-    this.drawer.hidden = !this.open;
+  @state() private drawerPlacement: "top" | "end" | "bottom" | "start";
 
+  firstUpdated() {
     if (this.open) {
       this.addOpenListeners();
 
@@ -70,12 +80,28 @@ export class SgdsDrawer extends SgdsElement {
         lockBodyScrolling(this);
       }
     }
+
+    this._handleResize();
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
+    this.drawerPlacement = this.placement;
+    window.addEventListener("resize", this._handleResize);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
+
     unlockBodyScrolling(this);
+    window.removeEventListener("resize", this._handleResize);
   }
+
+  private _handleResize = async () => {
+    const replacePlacement = this.drawerPlacement === "top" ? "top" : "bottom";
+    this.placement = window.innerWidth < SM_BREAKPOINT ? replacePlacement : this.drawerPlacement;
+  };
 
   private uppercaseFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -238,11 +264,12 @@ export class SgdsDrawer extends SgdsElement {
   }
 
   render() {
+    const isHydrated = this.hasUpdated;
+
     return html`
       <div
         class=${classMap({
           drawer: true,
-          "drawer-open": this.open,
           "drawer-top": this.placement === "top",
           "drawer-end": this.placement === "end",
           "drawer-bottom": this.placement === "bottom",
@@ -250,6 +277,7 @@ export class SgdsDrawer extends SgdsElement {
           "drawer-contained": this.contained,
           "drawer-fixed": !this.contained
         })}
+        hidden=${!this.open && !isHydrated}
       >
         <div class="drawer-overlay" @click=${() => this.requestClose("overlay")} tabindex="-1"></div>
 
@@ -270,6 +298,7 @@ export class SgdsDrawer extends SgdsElement {
             ></sgds-close-button>
           </header>
           <slot class="drawer-body"></slot>
+          <slot name="footer"></slot>
         </div>
       </div>
     `;
