@@ -3,12 +3,11 @@
 
 <template>
   <div>
-    <Masthead></Masthead>
-    <Mainnav></Mainnav>
+    <!-- <Masthead></Masthead>
     <Subnav></Subnav>
     <Button></Button>
     <Accordion></Accordion>
-    <Icon></Icon>
+    <Icon></Icon> -->
     <Card></Card>
   </div>
 </template>
