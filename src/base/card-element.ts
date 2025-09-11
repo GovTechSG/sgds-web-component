@@ -49,14 +49,5 @@ export class CardElement extends SgdsElement {
     if (childNodes.length > 1) {
       return console.error("Multiple elements passed into SgdsCard's link slot");
     }
-
-    if (!this.stretchedLink) return;
-
-    if (childNodes[0] instanceof HTMLAnchorElement || childNodes[0] instanceof SgdsLink) {
-      const hyperlink = (childNodes[0].querySelector("a") || childNodes[0]) as HTMLAnchorElement;
-      this.card.setAttribute("href", hyperlink.href);
-      const linkSlot = this.shadowRoot.querySelector("slot[name='link']") as HTMLSlotElement;
-      linkSlot.style.display = "none";
-    }
   }
 }

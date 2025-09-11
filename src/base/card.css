@@ -2,6 +2,10 @@
   cursor: not-allowed;
 }
 
+:host([stretchedLink]) slot[name="link"] {
+  display: none;
+}
+
 :host([orientation="horizontal"]) .card {
   flex-direction: row;
 }
@@ -168,11 +172,6 @@ a.card:not(.disabled):focus-visible {
   margin-bottom: var(--sgds-margin-none);
 }
 
-.card-subtitle,
-.card-text {
-  margin-bottom: var(--sgds-margin-none);
-}
-
 slot[name="subtitle"]::slotted(*) {
   --sgds-margin-2-xs: var(--sgds-margin-none);
   --sgds-margin-xs: var(--sgds-margin-none);
@@ -201,7 +200,9 @@ slot[name="title"]::slotted(a) {
 }
 
 slot[name="description"]::slotted(*) {
+  --sgds-paragraph-spacing-xl: var(--sgds-margin-none);
   color: var(--sgds-color-subtle);
+  margin-bottom: var(--sgds-paragraph-spacing-xl, --sgds-margin-none);
 }
 
 slot[name="image"]::slotted(img) {
