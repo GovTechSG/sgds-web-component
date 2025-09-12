@@ -32,7 +32,11 @@ export class SgdsMainnavDropdown extends SgdsElement {
 
   @consume({ context: MainnavContext, subscribe: true })
   @state()
-  private _breakpointReached: boolean;
+  private _breakpointReached = true;
+
+  @consume({ context: MainnavContext, subscribe: true })
+  @state()
+  private expanded: boolean;
 
   /** @internal */
   @query(".nav-link") navLink: HTMLElement;
@@ -63,6 +67,28 @@ export class SgdsMainnavDropdown extends SgdsElement {
   /** @internal */
   @queryAssignedElements() private defaultNodes!: SgdsDropdownItem[];
 
+  //   connectedCallback() {
+  //   super.connectedCallback();
+  //   document.addEventListener("sgds-after-hide", (e: CustomEvent) => {
+  //     const target = e.target as HTMLElement;
+  //     const mainnav = target.closest("sgds-mainnav") as SgdsMainnav;
+  //     if (mainnav) {
+  //       this._resetDropdownMenu();
+  //       this._hideDropdownMenuItems();
+  //     }
+  //   });
+  // }
+
+  // disconnectedCallback() {
+  //   super.disconnectedCallback();
+  //   // Clean up the event listener when the element is removed from the DOM
+  //   document.removeEventListener("sgds-after-hide", () => {
+  //     this._resetDropdownMenu();
+  //     this._hideDropdownMenuItems();
+  //   });
+  // }
+
+
   /** @internal */
   get defaultSlotItems(): SgdsDropdownItem[] {
     return [...(this.defaultNodes || [])].filter(
@@ -70,44 +96,32 @@ export class SgdsMainnavDropdown extends SgdsElement {
     ) as SgdsDropdownItem[];
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-    document.addEventListener("sgds-after-hide", (e: CustomEvent) => {
-      const target = e.target as HTMLElement;
-      const mainnav = target.closest("sgds-mainnav") as SgdsMainnav;
-      if (mainnav) {
-        this._resetDropdownMenu();
-        this._hideDropdownMenuItems();
-      }
-    });
-  }
+  // protected willUpdate(changedProperties: Map<string, unknown>) {
+  //   super.willUpdate(changedProperties);
 
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    // Clean up the event listener when the element is removed from the DOM
-    document.removeEventListener("sgds-after-hide", () => {
-      this._resetDropdownMenu();
-      this._hideDropdownMenuItems();
-    });
-  }
+  //   if (!this.shadowRoot) {
+  //     return;
+  //   }
+  //   // console.log(this._breakpointReached)
+  //   // if(changedProperties.has('_breakpointReached')){
+  //   //   console.log("breakpoint changed")
+  //   // }
+  //   // if (this._breakpointReached) {
+  //   //   console.log('whats this doing')
+  //   //   this.shadowRoot.adoptedStyleSheets = [dropdownMenuStyle.styleSheet, mainnavDropdownStyle.styleSheet];
+  //   // }
 
-  protected willUpdate(changedProperties: Map<string, unknown>) {
-    super.willUpdate(changedProperties);
-
-    if (!this.shadowRoot) {
-      return;
-    }
-
-    if (this._breakpointReached) {
-      this.shadowRoot.adoptedStyleSheets = [dropdownMenuStyle.styleSheet, mainnavDropdownStyle.styleSheet];
-    }
-  }
+  // }
 
   updated() {
     if (this._breakpointReached) {
+      console.log('breakpoint reached')
       this._copyTextToMenu();
       this._resetDropdownMenu();
       this._hideDropdownMenuItems();
+    }
+    if(!this.expanded){
+            this._resetDropdownMenu();
     }
   }
 
@@ -201,6 +215,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
   }
 
   private _hideDropdownMenuItems() {
+    console.log(this.dropdownItems)
     this.dropdownItems.style.display = "none";
     this.dropdownItems.setAttribute("aria-hidden", "true");
   }
@@ -268,15 +283,15 @@ export class SgdsMainnavDropdown extends SgdsElement {
   }
 
   private _closeMenu() {
+    console.log('closemenu')
     // 200ms delay as the transform transition is set to this timing
     this._resetDropdownMenu();
-    setTimeout(() => {
       this._hideDropdownMenuItems();
       this.navLink.focus();
-    }, 200);
   }
 
   render() {
+    console.log("dropdown render")
     const mobileView = html`
       <a
         class="${classMap({

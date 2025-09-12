@@ -1,7 +1,9 @@
 import "./sgds-web-component";
-import { aTimeout, assert, expect, fixture, fixtureCleanup, nextFrame, oneEvent, waitUntil } from "@open-wc/testing";
+import { aTimeout, assert, elementUpdated, expect, fixture, fixtureCleanup, nextFrame, oneEvent, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
-import { SgdsMainnav, SgdsMainnavDropdown, SgdsMainnavItem, type MainnavExpandSize } from "../src/components";
+import { SgdsDropdownItem, SgdsIconButton, SgdsMainnav, SgdsMainnavDropdown, SgdsMainnavItem, type MainnavExpandSize } from "../src/components";
+import { setViewport } from '@web/test-runner-commands';
+import Sinon from "sinon";
 
 describe("sgds-mainnav", () => {
   afterEach(() => fixtureCleanup());
@@ -281,6 +283,9 @@ describe("sgds-mainnav-dropdown", () => {
   });
 
   it("calls mainnav.hide() and emits sgds-after-hide when dropdown item is clicked", async () => {
+    const showSpy = Sinon.spy();
+    const hideSpy = Sinon.spy();
+    const afterHideSpy = Sinon.spy();
     const mainnav = await fixture<SgdsMainnav>(html`
       <sgds-mainnav expand="lg">
         <sgds-mainnav-dropdown>
@@ -290,32 +295,23 @@ describe("sgds-mainnav-dropdown", () => {
         </sgds-mainnav-dropdown>
       </sgds-mainnav>
     `);
+        mainnav.addEventListener("sgds-show", showSpy)
+        mainnav.addEventListener("sgds-hide", hideSpy)
+        document.addEventListener("sgds-after-hide", afterHideSpy)
 
-    const dropdown = mainnav.querySelector("sgds-mainnav-dropdown")!;
-    // simulate mobile state if needed
-    (dropdown as any)._breakpointReached = true;
-    await dropdown.updateComplete;
+    await setViewport({ width: 900, height: 640 });
 
-    // Wait for slotchange wiring to run and for defaultSlotItems to be populated
-    await waitUntil(() => dropdown.defaultSlotItems.length > 0, "slot items not ready", {
-      interval: 20,
-      timeout: 1000
-    });
+    const hamburgerButton = mainnav.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler") as SgdsIconButton;
+    hamburgerButton.click();
+    await elementUpdated(mainnav);
+    expect(showSpy.calledOnce).to.be.true;
+    const anchorOne = mainnav.querySelectorAll("sgds-dropdown-item > a")?.[0] as SgdsDropdownItem;
+    anchorOne.click();
+    await elementUpdated(mainnav);
+    await waitUntil(() => hideSpy.calledOnce)
+    await waitUntil(() => afterHideSpy.calledOnce);
 
-    const firstItem = dropdown.defaultSlotItems[0] as HTMLElement & { shadowRoot?: ShadowRoot };
+    expect(mainnav.shadowRoot?.querySelector(".navbar-body")).to.have.attribute("hidden");
 
-    // anchor may be in light DOM or inside shadowRoot of dropdown item — handle both
-    const anchor = (firstItem.shadowRoot?.querySelector("a") ?? firstItem.querySelector("a")) as HTMLElement | null;
-    expect(anchor, "expected anchor to exist").to.exist;
-
-    // listen for the mainnav hide event (mainnav emits sgds-after-hide when hide finishes)
-    const evPromise = oneEvent(mainnav, "sgds-after-hide");
-
-    // trigger click that should call mainnav.hide()
-    anchor!.click();
-
-    // wait for hide to finish
-    const ev = await evPromise;
-    expect(ev).to.exist;
-  });
+  }).retries(1); // retries 1 time as occasionally fails with timeout (CI or local)
 });

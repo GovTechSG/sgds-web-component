@@ -50,7 +50,10 @@ export class SgdsMainnav extends SgdsElement {
   @provide({ context: MainnavContext })
   @state()
   private _breakpointReached = false;
-
+ /** @internal Indicates if mobile menu is open or closed*/
+  @provide({ context: MainnavContext })
+  @state() private expanded = false;
+  
   /** @internal */
   @query("nav") nav: HTMLElement;
   /** @internal */
@@ -102,9 +105,7 @@ export class SgdsMainnav extends SgdsElement {
   @state()
   breakpointReached = false;
 
-  /** @internal */
-  @state()
-  expanded = false;
+ 
 
   /** @internal */
   @queryAssignedElements() private defaultNodes!: SgdsMainnavItem[] | SgdsMainnavDropdown[];
@@ -201,7 +202,7 @@ export class SgdsMainnav extends SgdsElement {
   }
 
   private async _animateToHide() {
-    const slHide = this.emit("sgds-hide", { cancelable: true });
+   const slHide = this.emit("sgds-hide", { cancelable: true });
     if (slHide.defaultPrevented) {
       this.expanded = true;
       return;
@@ -213,7 +214,6 @@ export class SgdsMainnav extends SgdsElement {
     await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
     this.body.hidden = true;
     this.body.style.height = "auto";
-
     this.emit("sgds-after-hide");
   }
 
@@ -225,9 +225,11 @@ export class SgdsMainnav extends SgdsElement {
     } else {
       this.header.focus();
       // Hide
-      this._animateToHide();
+       this._animateToHide();
     }
   }
+
+
   /** Shows the menu. For when mainnav is in the collapsed form */
   public async show() {
     if (this.expanded) {
