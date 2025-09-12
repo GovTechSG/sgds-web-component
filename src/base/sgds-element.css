@@ -9,8 +9,8 @@
   margin: 0;
 
   *,
-  :after,
-  :before {
+  *::after,
+  *::before {
     box-sizing: border-box;
   }
   *:disabled {
