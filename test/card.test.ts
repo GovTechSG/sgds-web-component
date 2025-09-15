@@ -26,7 +26,9 @@ describe("<sgds-card>", () => {
             </div>
             <slot name="description"></slot>
             <slot name="lower"></slot>
-            <slot name="link"></slot>
+            <slot name="footer">
+              <slot name="link"></slot>
+            </slot>
           </div>
         </div>
       `
@@ -57,7 +59,9 @@ describe("<sgds-card>", () => {
             </div>
             <slot name="description"></slot>
             <slot name="lower"></slot>
-            <slot name="link"></slot>
+            <slot name="footer">
+              <slot name="link"></slot>
+            </slot>
           </div>
         </div>
       `
@@ -90,7 +94,9 @@ describe("<sgds-card>", () => {
             </div>
             <slot name="description"></slot>
             <slot name="lower"></slot>
-            <slot name="link"></slot>
+            <slot name="footer">
+              <slot name="link"></slot>
+            </slot>
           </div>
         </div>
       `
@@ -120,7 +126,9 @@ describe("<sgds-card>", () => {
             </div>
             <slot name="description"></slot>
             <slot name="lower"></slot>
-            <slot name="link"></slot>
+            <slot name="footer">
+              <slot name="link"></slot>
+            </slot>
           </div>
         </div>
       `
@@ -148,6 +156,16 @@ describe("<sgds-card>", () => {
     const descriptionSlot = el.shadowRoot?.querySelector('slot[name="description"]') as HTMLSlotElement;
     const assignedNodes = descriptionSlot.assignedNodes({ flatten: true });
     expect(assignedNodes.length).to.equal(0);
+  });
+
+  it("renders footer slot with stretchedLink", async () => {
+    const el = await fixture<SgdsCard>(html`
+      <sgds-card stretchedLink>
+        <a slot="footer" href="#">Read More</a>
+      </sgds-card>
+    `);
+    const tag = el.shadowRoot?.querySelector(".card") as HTMLElement;
+    expect(tag.tagName.toLowerCase()).to.equal("a");
   });
 });
 

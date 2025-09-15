@@ -15,7 +15,9 @@ import thumbnailCardStyle from "./thumbnail-card.css";
  * @slot title - The title of the card
  * @slot description - The paragrapher text of the card
  * @slot lower - Accepts any additional content to be displayed below the card description, such as badges, metadata, or supplementary information.
- * @slot link - Accepts an anchor element. Only a single element is allowed to be passed in.
+ * @slot footer - Footer area of the card. Accepts links, actions, or any custom content.
+ * @slot link - (@deprecated) Deprecated since 3.3.2 in favour of `footer` slot.
+ *  Legacy slot for anchor elements. Use `footer` instead.
  */
 export class SgdsThumbnailCard extends CardElement {
   static styles = [...CardElement.styles, thumbnailCardStyle];
@@ -26,14 +28,23 @@ export class SgdsThumbnailCard extends CardElement {
   /** @internal */
   @queryAssignedNodes({ slot: "upper", flatten: true })
   _upperNode!: Array<Node>;
+  @queryAssignedElements({ slot: "footer" })
+  private footerNode!: HTMLElement[];
   @queryAssignedElements({ slot: "link" })
   private linkNode!: HTMLAnchorElement[] | SgdsLink[];
 
   /** Removes the card's internal padding when set to true.  */
   @property({ type: Boolean, reflect: true }) noPadding = false;
 
-  private get linkSlotItems(): HTMLAnchorElement {
+  private get linkSlotItems(): HTMLAnchorElement | null {
+    if (!this.linkNode || this.linkNode.length === 0) return null;
     const element = this.linkNode[0] as HTMLElement;
+    return (element.querySelector("a") || element) as HTMLAnchorElement;
+  }
+
+  private get footerSlotItems(): HTMLAnchorElement | null {
+    if (!this.footerNode || this.footerNode.length === 0) return null;
+    const element = this.footerNode[0] as HTMLElement;
     return (element.querySelector("a") || element) as HTMLAnchorElement;
   }
 
@@ -49,7 +60,14 @@ export class SgdsThumbnailCard extends CardElement {
     }
 
     if (this.stretchedLink) {
-      this.card.setAttribute("href", this.linkSlotItems.href);
+      const footerHref = this.footerSlotItems?.href;
+      const linkHref = this.linkSlotItems?.href;
+
+      if (footerHref) {
+        this.card.setAttribute("href", footerHref);
+      } else if (linkHref) {
+        this.card.setAttribute("href", linkHref);
+      }
     }
   }
 
@@ -80,7 +98,9 @@ export class SgdsThumbnailCard extends CardElement {
           </div>
           <slot name="description"></slot>
           <slot name="lower"></slot>
-          <slot name="link" @slotchange=${this.handleLinkSlotChange}></slot>
+          <slot name="footer">
+            <slot name="link" @slotchange=${this.handleLinkSlotChange}></slot>
+          </slot>
         </div>
       </${tag}>
     `;
