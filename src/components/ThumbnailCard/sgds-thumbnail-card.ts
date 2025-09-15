@@ -3,8 +3,8 @@ import { html, literal } from "lit/static-html.js";
 import { property, queryAssignedElements, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
-import thumbnailCardStyle from "./thumbnail-card.css";
 import SgdsLink from "../Link/sgds-link";
+import thumbnailCardStyle from "./thumbnail-card.css";
 
 /**
  * @summary Thumbnail cards can be used for headers and footers, a wide variety of content, contain contextual background colors and images.
