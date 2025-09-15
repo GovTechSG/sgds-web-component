@@ -247,6 +247,7 @@ export class SgdsDrawer extends SgdsElement {
 
   render() {
     const isHydrated = this.hasUpdated;
+    const shouldHide = !this.open && !isHydrated;
 
     return html`
       <div
@@ -259,7 +260,7 @@ export class SgdsDrawer extends SgdsElement {
           "drawer-contained": this.contained,
           "drawer-fixed": !this.contained
         })}
-        hidden=${!this.open && !isHydrated}
+        ?hidden=${shouldHide}
       >
         <div class="drawer-overlay" @click=${() => this.requestClose("overlay")} tabindex="-1"></div>
 
