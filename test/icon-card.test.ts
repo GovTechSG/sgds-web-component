@@ -83,6 +83,16 @@ describe("<sgds-icon-card>", () => {
     expect(tinted).to.exist;
   });
 
+  it("renders footer slot with stretchedLink", async () => {
+    const el = await fixture<SgdsIconCard>(html`
+      <sgds-icon-card stretchedLink>
+        <a slot="footer" href="#">Read More</a>
+      </sgds-icon-card>
+    `);
+    const tag = el.shadowRoot?.querySelector(".card") as HTMLElement;
+    expect(tag.tagName.toLowerCase()).to.equal("a");
+  });
+
   it("applies tabindex correctly when stretchedLink and not disabled", async () => {
     const el = await fixture<SgdsIconCard>(html`<sgds-icon-card></sgds-icon-card>`);
     el.stretchedLink = true;

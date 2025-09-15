@@ -63,10 +63,21 @@ describe("sgds-thumbnail-card", () => {
     expect(upper).to.exist;
   });
 
+  /**@deprecated Remove in v4.0.0 */
   it("renders link slot with stretchedLink", async () => {
     const el = await fixture<SgdsThumbnailCard>(html`
       <sgds-thumbnail-card stretchedLink>
         <a slot="link" href="#">Read More</a>
+      </sgds-thumbnail-card>
+    `);
+    const tag = el.shadowRoot?.querySelector(".card") as HTMLElement;
+    expect(tag.tagName.toLowerCase()).to.equal("a");
+  });
+
+  it("renders footer slot with stretchedLink", async () => {
+    const el = await fixture<SgdsThumbnailCard>(html`
+      <sgds-thumbnail-card stretchedLink>
+        <a slot="footer" href="#">Read More</a>
       </sgds-thumbnail-card>
     `);
     const tag = el.shadowRoot?.querySelector(".card") as HTMLElement;

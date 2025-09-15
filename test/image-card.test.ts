@@ -73,6 +73,16 @@ describe("sgds-image-card", () => {
     expect(assignedNodes.length).to.equal(0);
   });
 
+  it("renders footer slot with stretchedLink", async () => {
+    const el = await fixture<SgdsImageCard>(html`
+      <sgds-image-card stretchedLink>
+        <a slot="footer" href="#">Read More</a>
+      </sgds-image-card>
+    `);
+    const tag = el.shadowRoot?.querySelector(".card") as HTMLElement;
+    expect(tag.tagName.toLowerCase()).to.equal("a");
+  });
+
   it("sets tabindex correctly based on stretchedLink and disabled", async () => {
     const el = await fixture<SgdsImageCard>(html`<sgds-image-card></sgds-image-card>`);
     el.stretchedLink = true;
