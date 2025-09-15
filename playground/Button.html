@@ -53,17 +53,19 @@
       }
 
       button {
+        outline: 0;
         padding: var(--sgds-spacer-3);
         background-color: var(--sgds-gray-200);
-        outline: 0;
         border: 1px solid var(--sgds-gray-400);
         border-radius: 8px;
         color: var(--sgds-gray-1100);
+        text-transform: capitalize;
       }
 
       button.active {
         background: var(--sgds-gray-600);
         color: var(--sgds-gray-000);
+        border: 1px solid var(--sgds-gray-600);
       }
 
       span {
@@ -77,7 +79,7 @@
       <div class="container d-flex-column">
         <div>
           Toggle light/dark mode:
-          <button onclick="toggle()">Toggle</button>
+          <button name="toggle-mode" onclick="toggle()">Light mode</button>
         </div>
         <div>
           Tone:
@@ -172,22 +174,26 @@
       const darkClass = "sgds-night-theme";
 
       function onLoad() {
-        toggle(localStorage.getItem("sgds-mode") === "dark" ?? false);
+        toggle(localStorage.getItem("sgds-mode") === "dark");
         toggleTone(localStorage.getItem("sgds-tone") ?? "default");
       }
 
       function toggle(isDark) {
         const htmlEl = document.getElementsByTagName("html").item(0);
         const mode = htmlEl.classList.contains(darkClass) && !isDark ? "light" : "dark";
+        const toggleBtn = document.getElementsByName("toggle-mode")[0];
 
         if (mode === "light") {
           htmlEl.classList.remove(darkClass);
+          toggleBtn.classList.remove("active");
         } else {
           htmlEl.classList.add(darkClass);
+          toggleBtn.classList.add("active");
         }
 
         localStorage.setItem("sgds-mode", mode);
         document.getElementById("mode").innerText = mode;
+        toggleBtn.innerText = `${mode} mode`;
       }
 
       function toggleTone(tone) {
