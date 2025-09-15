@@ -50,7 +50,7 @@ All test needs to pass in order for aws amplify deployment build to pass
 ### Run single test file
 
 To run single test file, run the output javascript test file instead of the typescript file
-`npm run test test-outdir/button-element.test.js`
+`npm run test test-outdir/mainnav.test.js`
 
 ## Storybook
 
