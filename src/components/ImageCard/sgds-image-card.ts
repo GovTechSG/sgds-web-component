@@ -1,9 +1,10 @@
 import { nothing } from "lit";
 import { html, literal } from "lit/static-html.js";
-import { property, queryAssignedNodes } from "lit/decorators.js";
+import { property, queryAssignedElements, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
 import { CardImageAdjustment, CardImagePosition } from "../Card/types";
+import SgdsLink from "../Link/sgds-link";
 import imageCardStyle from "./image-card.css";
 
 /**
@@ -25,6 +26,8 @@ export class SgdsImageCard extends CardElement {
   /** @internal */
   @queryAssignedNodes({ slot: "image", flatten: true })
   _imageNode!: Array<Node>;
+  @queryAssignedElements({ slot: "link" })
+  private linkNode!: HTMLAnchorElement[] | SgdsLink[];
 
   /** Removes the card's internal padding when set to true.  */
   @property({ type: Boolean, reflect: true }) noPadding = false;
@@ -35,12 +38,21 @@ export class SgdsImageCard extends CardElement {
   /** Controls how the image is sized and aligned within the card. Available options: `default`, `padding around`, `aspect ratio` */
   @property({ type: String, reflect: true }) imageAdjustment: CardImageAdjustment = "default";
 
+  private get linkSlotItems(): HTMLAnchorElement {
+    const element = this.linkNode[0] as HTMLElement;
+    return (element.querySelector("a") || element) as HTMLAnchorElement;
+  }
+
   protected firstUpdated() {
     if (this._imageNode.length === 0) {
       const image = this.shadowRoot.querySelector(".card-image") as HTMLDivElement;
       const body = this.shadowRoot.querySelector(".card-body") as HTMLDivElement;
       image.style.display = "none";
       if (this.noPadding) body.style.padding = "0px";
+    }
+
+    if (this.stretchedLink) {
+      this.card.setAttribute("href", this.linkSlotItems.href);
     }
   }
 

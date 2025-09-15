@@ -1,11 +1,12 @@
 import { nothing } from "lit";
-import { property } from "lit/decorators.js";
+import { property, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html, literal } from "lit/static-html.js";
 import { CardElement } from "../../base/card-element";
 import { HasSlotController } from "../../utils/slot";
-import cardStyle from "./card.css";
 import { CardImageAdjustment, CardImagePosition } from "./types";
+import SgdsLink from "../Link/sgds-link";
+import cardStyle from "./card.css";
 
 /**
  * @summary Cards can be used for headers and footers, a wide variety of content, contain contextual background colors and images.
@@ -23,13 +24,27 @@ import { CardImageAdjustment, CardImagePosition } from "./types";
 export class SgdsCard extends CardElement {
   static styles = [...CardElement.styles, cardStyle];
 
+  @queryAssignedElements({ slot: "link" })
+  private linkNode!: HTMLAnchorElement[] | SgdsLink[];
+
   /** Sets the image position of the card. Available options: `before`, `after` */
   @property({ type: String, reflect: true }) imagePosition: CardImagePosition = "before";
 
   /** Controls how the image is sized and aligned within the card. Available options: `default`, `padding around`, `aspect ratio` */
   @property({ type: String, reflect: true }) imageAdjustment: CardImageAdjustment = "default";
 
+  private get linkSlotItems(): HTMLAnchorElement {
+    const element = this.linkNode[0] as HTMLElement;
+    return (element.querySelector("a") || element) as HTMLAnchorElement;
+  }
+
   private readonly hasSlotController = new HasSlotController(this, "image", "icon", "menu");
+
+  protected firstUpdated() {
+    if (this.stretchedLink) {
+      this.card.setAttribute("href", this.linkSlotItems.href);
+    }
+  }
 
   handleImgSlotChange(e: Event) {
     const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLOrSVGImageElement>;
