@@ -35,6 +35,7 @@ slot[name="thumbnail"]::slotted(*) {
   min-width: 64px !important;
   max-width: 128px !important;
   height: 64px !important;
+  width: 100%;
   object-fit: contain;
   object-position: left;
 }
