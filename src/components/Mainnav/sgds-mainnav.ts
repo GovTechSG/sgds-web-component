@@ -10,7 +10,7 @@ import { waitForEvent } from "../../utils/event";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
-import { MainnavContext } from "./mainnav-context";
+import { MainnavBreakpointContext, MainnavExpandedContext } from "./mainnav-context";
 import mainnavStyle from "./mainnav.css";
 import SgdsMainnavDropdown from "./sgds-mainnav-dropdown";
 import SgdsMainnavItem from "./sgds-mainnav-item";
@@ -47,13 +47,17 @@ export class SgdsMainnav extends SgdsElement {
     "sgds-icon-button": SgdsIconButton
   };
 
-  @provide({ context: MainnavContext })
+  @provide({ context: MainnavBreakpointContext })
   @state()
   private _breakpointReached = false;
- /** @internal Indicates if mobile menu is open or closed*/
-  @provide({ context: MainnavContext })
-  @state() private expanded = false;
-  
+  /** Indicates if mobile menu is open or closed */
+  @provide({ context: MainnavExpandedContext })
+  @state()
+  private expanded = false;
+  /** Denotes the transition state of mobile mainnav menu opening  */
+  @state()
+  private expanding = false;
+
   /** @internal */
   @query("nav") nav: HTMLElement;
   /** @internal */
@@ -75,7 +79,8 @@ export class SgdsMainnav extends SgdsElement {
         this.requestUpdate();
       } else {
         this.body ? (this.body.hidden = true) : null;
-        this.expanded = false;
+        // this.expanded = false;
+        this.expanding = false;
       }
 
       if (newBreakpointReachedValue) {
@@ -104,8 +109,6 @@ export class SgdsMainnav extends SgdsElement {
   /** @internal */
   @state()
   breakpointReached = false;
-
- 
 
   /** @internal */
   @queryAssignedElements() private defaultNodes!: SgdsMainnavItem[] | SgdsMainnavDropdown[];
@@ -187,6 +190,7 @@ export class SgdsMainnav extends SgdsElement {
   private async _animateToShow() {
     const sgdsShow = this.emit("sgds-show", { cancelable: true });
     if (sgdsShow.defaultPrevented) {
+      this.expanding = false;
       this.expanded = false;
       return;
     }
@@ -202,8 +206,9 @@ export class SgdsMainnav extends SgdsElement {
   }
 
   private async _animateToHide() {
-   const slHide = this.emit("sgds-hide", { cancelable: true });
+    const slHide = this.emit("sgds-hide", { cancelable: true });
     if (slHide.defaultPrevented) {
+      this.expanding = false;
       this.expanded = true;
       return;
     }
@@ -217,18 +222,19 @@ export class SgdsMainnav extends SgdsElement {
     this.emit("sgds-after-hide");
   }
 
-  @watch("expanded", { waitUntilFirstUpdate: true })
+  @watch("expanding", { waitUntilFirstUpdate: true })
   async handleOpenChange() {
-    if (this.expanded) {
+    if (this.expanding) {
       // Show
-      this._animateToShow();
+      await this._animateToShow();
+      this.expanded = true;
     } else {
       this.header.focus();
       // Hide
-       this._animateToHide();
+      await this._animateToHide();
+      this.expanded = false;
     }
   }
-
 
   /** Shows the menu. For when mainnav is in the collapsed form */
   public async show() {
@@ -236,7 +242,7 @@ export class SgdsMainnav extends SgdsElement {
       return;
     }
 
-    this.expanded = true;
+    this.expanding = true;
     return waitForEvent(this, "sgds-after-show");
   }
 
@@ -246,7 +252,7 @@ export class SgdsMainnav extends SgdsElement {
       return;
     }
 
-    this.expanded = false;
+    this.expanding = false;
     document.querySelector("body").style.removeProperty("overflow");
 
     return waitForEvent(this, "sgds-after-hide");

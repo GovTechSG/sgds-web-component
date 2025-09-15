@@ -1,3 +1,5 @@
 import { createContext } from "@lit/context";
 
-export const MainnavContext = createContext<boolean>("mainnav-context");
+export const MainnavBreakpointContext = createContext<boolean>("mainnav-context");
+
+export const MainnavExpandedContext = createContext<boolean>("mainnav-expanded-context");
