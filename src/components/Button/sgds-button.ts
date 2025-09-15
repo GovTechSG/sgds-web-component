@@ -1,4 +1,4 @@
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html, literal } from "lit/static-html.js";
@@ -7,6 +7,8 @@ import anchorStyles from "../../styles/anchor.css";
 import { HasSlotController } from "../../utils/slot";
 import { FormSubmitController } from "../../utils/formSubmitController";
 import buttonStyles from "./button.css";
+import SgdsSpinner, { SpinnerVariant } from "../Spinner/sgds-spinner";
+import { watch } from "../../utils/watch";
 
 export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
 
@@ -25,6 +27,11 @@ export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
 export class SgdsButton extends ButtonElement {
   static styles = [...ButtonElement.styles, anchorStyles, buttonStyles];
 
+  /**@internal */
+  static dependencies = {
+    "sgds-spinner": SgdsSpinner
+  };
+
   /** @internal */
   private readonly formSubmitController = new FormSubmitController(this, {
     form: (input: HTMLInputElement) => {
@@ -40,6 +47,7 @@ export class SgdsButton extends ButtonElement {
       return input.closest("form");
     }
   });
+
   /** The behavior of the button with default as `type='button', `reset` resets all the controls to their initial values and `submit` submits the form data to the server */
   @property({ type: String, reflect: true }) type: "button" | "submit" | "reset" = "button";
   /**
@@ -58,6 +66,14 @@ export class SgdsButton extends ButtonElement {
   @property({ attribute: "formnovalidate", type: Boolean, reflect: true })
   formNoValidate: boolean;
 
+  // To remove
+  @property({ type: Boolean, reflect: false }) focused = false;
+  // To remove
+  @property({ type: Boolean, reflect: false }) hovered = false;
+
+  /** Used to display a loading state of the button */
+  @property({ type: Boolean, reflect: true }) loading = false;
+
   /** Used to override the form owner's `target` attribute. */
   @property({ type: String, reflect: true, attribute: "formtarget" }) formTarget:
     | "_self"
@@ -70,6 +86,9 @@ export class SgdsButton extends ButtonElement {
   @property({ type: Boolean, reflect: true }) fullWidth = false;
 
   private readonly hasSlotController = new HasSlotController(this, "leftIcon", "rightIcon");
+
+  @state()
+  private spinnerVariant: SpinnerVariant = "primary";
 
   protected override _handleClick(event: MouseEvent) {
     if (this.disabled) {
@@ -91,6 +110,22 @@ export class SgdsButton extends ButtonElement {
     }
   };
 
+  @watch("variant")
+  _updateSpinnerVariantByVariant = () => {
+    switch (this.variant) {
+      case "primary":
+      case "danger":
+        this.spinnerVariant = "fixed-white";
+        break;
+      case "outline":
+        this.spinnerVariant = "primary";
+        break;
+      case "ghost":
+        this.spinnerVariant = "neutral";
+        break;
+    }
+  };
+
   render() {
     const isLink = this.href;
     const tag = isLink ? literal`a` : literal`button`;
@@ -105,7 +140,9 @@ export class SgdsButton extends ButtonElement {
           active: this.active,
           "has-left-icon": hasLeftIconSlot,
           "has-right-icon": hasRightIconSlot,
-          "no-icon": noIconSlot
+          "no-icon": noIconSlot,
+          focused: this.focused,
+          hovered: this.hovered
         })}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
@@ -121,9 +158,13 @@ export class SgdsButton extends ButtonElement {
         @blur=${this._handleBlur}
         aria-label=${ifDefined(this.ariaLabel)}
       >
-      <slot name="leftIcon"></slot>
-      <span><slot></slot></span>
-      <slot name="rightIcon"></slot>
+      ${
+        this.loading
+          ? html`<sgds-spinner size="sm" variant=${this.spinnerVariant} />`
+          : html`<slot name="leftIcon"></slot>
+              <span><slot></slot></span>
+              <slot name="rightIcon"></slot>`
+      }
       </${tag}>
     `;
   }

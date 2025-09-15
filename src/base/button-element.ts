@@ -1,6 +1,8 @@
 import { property, query } from "lit/decorators.js";
 import SgdsElement from "./sgds-element";
 import buttonStyles from "./button.css";
+
+export type ButtonTone = "primary" | "danger" | "fixed-white" | "neutral";
 export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
 
 export default class ButtonElement extends SgdsElement {
@@ -8,8 +10,17 @@ export default class ButtonElement extends SgdsElement {
   /** @internal */
   @query(".btn") protected button: HTMLButtonElement | HTMLLinkElement;
 
+  /**
+   * Deprecated since v3.3.0 in favour of `danger`.
+   * To display a danger button, please use tone=`danger`
+   *
+   * @deprecated
+   * */
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `danger`, `outline`, `ghost` */
   @property({ reflect: true }) variant: ButtonVariant = "primary";
+
+  /** Specifies the tone of the button, the tone is `primary` by default */
+  @property({ reflect: true }) tone: ButtonTone = "primary";
 
   /** Specifies a small, medium or large button, the size is medium by default. */
   @property({ reflect: true }) size: "sm" | "md" | "lg" = "md";
@@ -19,6 +30,9 @@ export default class ButtonElement extends SgdsElement {
 
   /** The disabled state of the button */
   @property({ type: Boolean, reflect: true }) disabled = false;
+
+  /** The loading state of the button */
+  @property({ type: Boolean, reflect: true }) loading = false;
 
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
   @property({ type: String, reflect: true }) href: string;
@@ -46,6 +60,7 @@ export default class ButtonElement extends SgdsElement {
   public blur() {
     this.button.blur();
   }
+
   protected _handleBlur() {
     this.emit("sgds-blur");
   }

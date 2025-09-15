@@ -1,43 +1,65 @@
 :host {
   --btn-font-weight: var(--sgds-font-weight-regular);
-  --btn-bg: var(--sgds-primary-surface-default);
-  --btn-hover-bg: var(--sgds-primary-surface-emphasis);
   --btn-border-radius: var(--sgds-border-radius-md);
+  --btn-border-color: var(--sgds-border-color-transparent);
+  --btn-hover-border-color: var(--sgds-border-color-transparent);
+}
+
+:host,
+:host([tone="primary"]) {
+  --btn-main-color: var(--sgds-product-primary-600);
+  --btn-main-hover-bg-color: var(--sgds-product-primary-700);
+  --btn-main-border-color: var(--sgds-product-primary-600);
+  --btn-secondary-hover-color: oklch(from var(--sgds-product-primary-700) l c h / 0.1);
+  --btn-main-text-color: var(--sgds-color-fixed-light);
+  --btn-hover-color: var(--btn-main-text-color);
+}
+
+:host([tone="danger"]) {
+  --btn-main-color: var(--sgds-red-600);
+  --btn-main-hover-bg-color: var(--sgds-red-700);
+  --btn-main-border-color: var(--sgds-red-600);
+  --btn-secondary-hover-color: oklch(from var(--sgds-red-700) l c h / 0.1);
+  --btn-main-text-color: var(--sgds-color-fixed-light);
+}
+
+:host([tone="fixed-white"]) {
+  --btn-main-color: var(--sgds-gray-000);
+  --btn-main-hover-bg-color: oklch(from var(--sgds-gray-000) l c h / 0.95);
+  --btn-main-border-color: var(--sgds-gray-000);
+  --btn-secondary-hover-color: oklch(from var(--sgds-gray-000) l c h / 0.2);
+  --btn-main-text-color: var(--sgds-color-fixed-dark);
+}
+
+:host([tone="neutral"]) {
+  --btn-main-color: var(--sgds-gray-900);
+  --btn-main-hover-bg-color: var(--sgds-gray-1000);
+  --btn-main-border-color: var(--sgds-gray-800);
+  --btn-secondary-hover-color: oklch(from var(--sgds-gray-1100) l c h / 0.05);
+  --btn-main-text-color: var(--sgds-color-fixed-light);
 }
 
 :host([variant="primary"]) {
-  --btn-bg: var(--sgds-primary-surface-default);
-  --btn-color: var(--sgds-color-fixed-light);
-}
-
-:host([variant="outline"]) {
-  --btn-bg: var(--sgds-bg-transparent);
-  --btn-hover-bg: var(--sgds-primary-surface-translucent);
-  --btn-color: var(--sgds-primary-color-default);
-  --btn-border-width: var(--sgds-border-width-1);
-  --btn-border-color: var(--sgds-primary-border-color-default);
+  --btn-bg: var(--btn-main-color);
+  --btn-hover-bg: var(--btn-main-hover-bg-color);
+  --btn-color: var(--btn-main-text-color);
 }
 
 :host([variant="ghost"]) {
   --btn-bg: var(--sgds-bg-transparent);
-  --btn-hover-bg: var(--sgds-primary-surface-translucent);
-  --btn-color: var(--sgds-primary-color-default);
+  --btn-hover-bg: var(--btn-secondary-hover-color);
+  --btn-color: var(--btn-main-color);
+  --btn-hover-color: var(--btn-main-color);
 }
 
-:host([variant="danger"]) {
-  --btn-bg: var(--sgds-danger-surface-default);
-  --btn-hover-bg: var(--sgds-danger-surface-emphasis);
-  --btn-color: var(--sgds-color-fixed-light);
-}
-
-:host([variant="primary"]) .btn, 
-:host([variant="outline"]) .btn, 
-:host([variant="ghost"]) .btn {
-  color: var(--btn-color);
-}
-
-:host([variant="outline"]) .btn {
-  border: var(--btn-border-width) solid var(--btn-border-color);
+:host([variant="outline"]) {
+  --btn-bg: var(--sgds-bg-transparent);
+  --btn-hover-bg: var(--btn-secondary-hover-color);
+  --btn-color: var(--btn-main-color);
+  --btn-border-width: var(--sgds-border-width-1);
+  --btn-border-color: var(--btn-main-border-color);
+  --btn-hover-border-color: var(--btn-main-border-color);
+  --btn-hover-color: var(--btn-main-color);
 }
 
 :host([size="lg"]) .btn {
@@ -57,9 +79,9 @@
 
 .btn {
   background-color: var(--btn-bg);
-  border: 1px solid var(--sgds-border-color-transparent);
+  border: 1px solid var(--btn-border-color);
   border-radius: var(--btn-border-radius);
-  color: var(--sgds-color-fixed-light);
+  color: var(--btn-color);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -87,16 +109,20 @@
   }
 }
 
+.btn.hovered,
 .btn:hover,
 .btn.active {
   background-color: var(--btn-hover-bg);
+  border-color: var(--btn-hover-border-color);
+  color: var(--btn-hover-color);
 }
-
+.btn.focused,
 .btn:focus,
 .btn:focus-visible {
   background-color: var(--btn-hover-bg);
-  border-color: transparent;
+  border-color: var(--btn-hover-border-color);
   outline: 0;
+  box-shadow: 0px 0px 0px 2px var(--sgds-blue-500);
 }
 
 .btn:focus-visible {

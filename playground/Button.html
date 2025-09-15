@@ -1,0 +1,224 @@
+<html class="sgds-night-theme">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <meta name="color-scheme" content="dark" />
+
+    <script type="module" src="../src/index.ts"></script>
+
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/glo.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      body {
+        padding: var(--sgds-padding-lg);
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+      }
+
+      .container {
+        padding: var(--sgds-padding-lg);
+        max-width: var(--sgds-dimension-1440);
+        margin: 0 auto;
+      }
+
+      .dark {
+        background-color: black;
+      }
+
+      .dark h4 {
+        color: var(--sgds-gray-000);
+      }
+
+      .d-flex-row,
+      .d-flex-column {
+        display: flex;
+        gap: var(--sgds-paragraph-spacing-lg);
+      }
+
+      .d-flex-column {
+        flex-direction: column;
+        gap: var(--sgds-paragraph-spacing-sm);
+        margin-bottom: 0;
+      }
+
+      .sgds-night-theme h4 {
+        color: var(--sgds-gray-100);
+      }
+
+      h6 {
+        margin-top: var(--sgds-spacer-6);
+        margin-bottom: var(--sgds-spacer-2);
+      }
+
+      button {
+        padding: var(--sgds-spacer-3);
+        background-color: var(--sgds-gray-200);
+        outline: 0;
+        border: 1px solid var(--sgds-gray-400);
+        border-radius: 8px;
+        color: var(--sgds-gray-1100);
+      }
+
+      button.active {
+        background: var(--sgds-gray-600);
+        color: var(--sgds-gray-000);
+      }
+
+      span {
+        text-transform: capitalize;
+      }
+    </style>
+  </head>
+
+  <body onload="onLoad()">
+    <div>
+      <div class="container d-flex-column">
+        <div>
+          Toggle light/dark mode:
+          <button onclick="toggle()">Toggle</button>
+        </div>
+        <div>
+          Tone:
+          <button name="toggle-btn-default" onclick="toggleTone('default')">Default</button>
+          <button name="toggle-btn-primary" onclick="toggleTone('primary')">Primary</button>
+          <button name="toggle-btn-danger" onclick="toggleTone('danger')">Danger</button>
+          <button name="toggle-btn-neutral" onclick="toggleTone('neutral')">Neutral</button>
+          <button name="toggle-btn-fixed-white" onclick="toggleTone('fixed-white')">Fixed-White</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Currently viewing in: <span id="tone">Default</span> tone (<span id="mode">Light</span> mode)</h2>
+
+      <div class="d-flex-row">
+        <div class="d-flex-column">
+          <h5>Tone, State and variants</h5>
+
+          <div class="d-flex-column">
+            <h6>State: Default</h6>
+            <div class="d-flex-row">
+              <sgds-button variant="primary">Primary Button </sgds-button>
+              <sgds-button variant="outline">Outline Button </sgds-button>
+              <sgds-button variant="ghost">Ghost Button </sgds-button>
+            </div>
+
+            <h6>State: Focused</h6>
+            <div class="d-flex-row">
+              <sgds-button focused variant="primary">Primary Button </sgds-button>
+              <sgds-button focused variant="outline">Outline Button </sgds-button>
+              <sgds-button focused variant="ghost">Ghost Button </sgds-button>
+            </div>
+
+            <h6>State: Hovered</h6>
+            <div class="d-flex-row">
+              <sgds-button hovered variant="primary">Primary Button </sgds-button>
+              <sgds-button hovered variant="outline">Outline Button </sgds-button>
+              <sgds-button hovered variant="ghost">Ghost Button </sgds-button>
+            </div>
+
+            <h6>State: Active</h6>
+            <div class="d-flex-row">
+              <sgds-button active variant="primary">Primary Button </sgds-button>
+              <sgds-button active variant="outline">Outline Button </sgds-button>
+              <sgds-button active variant="ghost">Ghost Button </sgds-button>
+            </div>
+
+            <h6>State: Disabled</h6>
+            <div class="d-flex-row">
+              <sgds-button disabled variant="primary">Primary Button </sgds-button>
+              <sgds-button disabled variant="outline">Outline Button </sgds-button>
+              <sgds-button disabled variant="ghost">Ghost Button </sgds-button>
+            </div>
+
+            <h6>State: Loading</h6>
+            <div class="d-flex-row">
+              <sgds-button loading variant="primary">Primary Button </sgds-button>
+              <sgds-button loading variant="outline">Outline Button </sgds-button>
+              <sgds-button loading variant="ghost">Ghost Button </sgds-button>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex-column">
+          <h5>Size and variants</h5>
+          <h6>Size: Small</h6>
+          <div class="d-flex-row">
+            <sgds-button size="sm" variant="primary">Primary Button </sgds-button>
+            <sgds-button size="sm" variant="outline">Outline Button </sgds-button>
+            <sgds-button size="sm" variant="ghost">Ghost Button </sgds-button>
+          </div>
+
+          <h6>Size: Medium/Default</h6>
+          <div class="d-flex-row">
+            <sgds-button size="md" variant="primary">Primary Button </sgds-button>
+            <sgds-button size="md" variant="outline">Outline Button </sgds-button>
+            <sgds-button size="md" variant="ghost">Ghost Button </sgds-button>
+          </div>
+
+          <h6>Size: Large</h6>
+          <div class="d-flex-row">
+            <sgds-button size="lg" variant="primary">Primary Button </sgds-button>
+            <sgds-button size="lg" variant="outline">Outline Button </sgds-button>
+            <sgds-button size="lg" variant="ghost">Ghost Button </sgds-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const darkClass = "sgds-night-theme";
+
+      function onLoad() {
+        toggle(localStorage.getItem("sgds-mode") === "dark" ?? false);
+        toggleTone(localStorage.getItem("sgds-tone") ?? "default");
+      }
+
+      function toggle(isDark) {
+        const htmlEl = document.getElementsByTagName("html").item(0);
+        const mode = htmlEl.classList.contains(darkClass) && !isDark ? "light" : "dark";
+
+        if (mode === "light") {
+          htmlEl.classList.remove(darkClass);
+        } else {
+          htmlEl.classList.add(darkClass);
+        }
+
+        localStorage.setItem("sgds-mode", mode);
+        document.getElementById("mode").innerText = mode;
+      }
+
+      function toggleTone(tone) {
+        const buttonEls = document.getElementsByTagName("sgds-button");
+        localStorage.setItem("sgds-tone", tone);
+        document.getElementById("tone").innerText = tone;
+
+        if (tone === "fixed-white") {
+          toggle(true);
+        }
+
+        for (let index = 0; index < buttonEls.length; index++) {
+          if (tone === "default") {
+            buttonEls.item(index).removeAttribute("tone", tone);
+          } else {
+            buttonEls.item(index).setAttribute("tone", tone);
+          }
+        }
+
+        setButtonColor(tone);
+      }
+
+      function setButtonColor(tone) {
+        const buttonEls = document.querySelectorAll(`button[name*='toggle-btn-']`);
+
+        for (let index = 0; index < buttonEls.length; index++) {
+          buttonEls[index].classList.remove("active");
+        }
+
+        document.querySelector(`button[name='toggle-btn-${tone}']`).classList.add("active");
+      }
+    </script>
+  </body>
+</html>
