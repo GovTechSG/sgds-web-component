@@ -1,8 +1,9 @@
 import { nothing } from "lit";
 import { html, literal } from "lit/static-html.js";
-import { property, queryAssignedNodes } from "lit/decorators.js";
+import { property, queryAssignedElements, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
+import SgdsLink from "../Link/sgds-link";
 import IconCardStyle from "./icon-card.css";
 
 /**
@@ -25,9 +26,16 @@ export class SgdsIconCard extends CardElement {
   /** @internal */
   @queryAssignedNodes({ slot: "upper", flatten: true })
   _upperNode!: Array<Node>;
+  @queryAssignedElements({ slot: "link" })
+  private linkNode!: HTMLAnchorElement[] | SgdsLink[];
 
   /** Removes the card's internal padding when set to true.  */
   @property({ type: Boolean, reflect: true }) noPadding = false;
+
+  private get linkSlotItems(): HTMLAnchorElement {
+    const element = this.linkNode[0] as HTMLElement;
+    return (element.querySelector("a") || element) as HTMLAnchorElement;
+  }
 
   protected firstUpdated() {
     if (this._iconNode.length === 0) {
@@ -39,6 +47,10 @@ export class SgdsIconCard extends CardElement {
         if (this.noPadding) body.style.padding = "0px";
       }
     }
+
+    if (this.stretchedLink) {
+      this.card.setAttribute("href", this.linkSlotItems.href);
+    }
   }
 
   render() {
@@ -47,7 +59,8 @@ export class SgdsIconCard extends CardElement {
 
     return html`
       <${tag} 
-        class="card ${classMap({
+        class="${classMap({
+          card: true,
           disabled: this.disabled
         })}"
         tabindex=${cardTabIndex}
