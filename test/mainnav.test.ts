@@ -1,7 +1,15 @@
-import "./sgds-web-component";
-import { aTimeout, assert, expect, fixture, fixtureCleanup, nextFrame, oneEvent, waitUntil } from "@open-wc/testing";
+import { aTimeout, assert, elementUpdated, expect, fixture, fixtureCleanup, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
-import { SgdsMainnav, SgdsMainnavDropdown, SgdsMainnavItem, type MainnavExpandSize } from "../src/components";
+import Sinon from "sinon";
+import {
+  SgdsDropdownItem,
+  SgdsIconButton,
+  SgdsMainnav,
+  SgdsMainnavDropdown,
+  SgdsMainnavItem,
+  type MainnavExpandSize
+} from "../src/components";
+import "./sgds-web-component";
 
 describe("sgds-mainnav", () => {
   afterEach(() => fixtureCleanup());
@@ -98,14 +106,15 @@ describe("sgds-mainnav", () => {
     const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler") as HTMLButtonElement;
     expect(toggler.getAttribute("aria-expanded")).to.equal("false");
     toggler?.click();
-    await nextFrame();
+    // await nextFrame();
+    await elementUpdated(el);
     expect(mainNavCollapse).not.to.have.attribute("hidden");
-    // await aTimeout(500);
+    await aTimeout(500);
 
     expect(toggler.getAttribute("aria-expanded")).to.equal("true");
     toggler?.click();
     await aTimeout(500);
-    // await waitUntil(() => expect(mainNavCollapse).to.have.attribute("hidden"))
+    // // await waitUntil(() => expect(mainNavCollapse).to.have.attribute("hidden"))
     expect(mainNavCollapse).to.have.attribute("hidden");
     expect(toggler.getAttribute("aria-expanded")).to.equal("false");
   });
@@ -243,10 +252,21 @@ describe("sgds-mainnav-dropdown", () => {
     const el = document.createElement("sgds-mainnav-dropdown");
     assert.instanceOf(el, SgdsMainnavDropdown);
   });
-  it("can be semantically compare with shadowDom trees", async () => {
-    const el = await fixture(html`<sgds-mainnav-dropdown></sgds-mainnav-dropdown>`);
+  it("desktop view: can be semantically compare with shadowDom trees", async () => {
+    const el = await fixture<SgdsMainnav>(html`
+      <sgds-mainnav>
+        <sgds-mainnav-dropdown>
+          <span slot="toggler">Dropdown</span>
+          <sgds-dropdown-item>
+            <a href="https://www.google.com/">Item 1</a>
+          </sgds-dropdown-item>
+        </sgds-mainnav-dropdown>
+      </sgds-mainnav>
+    `);
+    const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+    await dropdown?.updateComplete;
     assert.shadowDom.equal(
-      el,
+      dropdown as SgdsMainnavDropdown,
       `
       <sgds-dropdown
         drop="down"
@@ -273,14 +293,119 @@ describe("sgds-mainnav-dropdown", () => {
       { ignoreAttributes: ["id"] }
     );
   });
+  it("mobile view: can be semantically compare with shadowDom trees", async () => {
+    Object.defineProperty(window, "innerWidth", {
+      writable: true,
+      configurable: true,
+      value: 300 // mobile size
+    });
+    window.dispatchEvent(new Event("resize"));
+    const el = await fixture<SgdsMainnav>(html`
+      <sgds-mainnav>
+        <sgds-mainnav-dropdown>
+          <span slot="toggler">Dropdown</span>
+          <sgds-dropdown-item>
+            <a href="https://www.google.com/">Item 1</a>
+          </sgds-dropdown-item>
+        </sgds-mainnav-dropdown>
+      </sgds-mainnav>
+    `);
+
+    const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+    await waitUntil(() => dropdown?.shadowRoot?.querySelector("div.dropdown-items"));
+    assert.shadowDom.equal(
+      dropdown as SgdsMainnavDropdown,
+      `
+      <a
+             class="nav-link"
+             aria-disabled="false"
+             tabindex="0"
+             role="button"
+           >
+             <slot name="toggler"></slot>
+             <sgds-icon name="chevron-right" size="lg"></sgds-icon>
+           </a>
+           <div class="dropdown-items" aria-hidden="true" style="display: none;">
+             <a tabindex="0" role="button">
+               <sgds-icon name="chevron-left" size="lg"></sgds-icon>
+               <span>Dropdown</span>
+             </a>
+             <slot></slot>
+           </div>
+      `,
+      { ignoreAttributes: ["id"] }
+    );
+  });
+  it("mobile view second layer of navigation: can be semantically compare with shadowDom trees", async () => {
+    Object.defineProperty(window, "innerWidth", {
+      writable: true,
+      configurable: true,
+      value: 300 // mobile size
+    });
+    window.dispatchEvent(new Event("resize"));
+    const el = await fixture<SgdsMainnav>(html`
+      <sgds-mainnav>
+        <sgds-mainnav-dropdown>
+          <span slot="toggler">Dropdown</span>
+          <sgds-dropdown-item>
+            <a href="https://www.google.com/">Item 1</a>
+          </sgds-dropdown-item>
+        </sgds-mainnav-dropdown>
+      </sgds-mainnav>
+    `);
+
+    const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+    await waitUntil(() => dropdown?.shadowRoot?.querySelector("div.dropdown-items"));
+    const togglerAnchor = dropdown?.shadowRoot?.querySelector("a.nav-link") as HTMLAnchorElement;
+    togglerAnchor.click();
+    await waitUntil(
+      () => dropdown?.shadowRoot?.querySelector("div.dropdown-items")?.getAttribute("aria-hidden") === "false"
+    );
+    assert.shadowDom.equal(
+      dropdown as SgdsMainnavDropdown,
+      `
+      <a
+             class="nav-link"
+             aria-disabled="false"
+             tabindex="0"
+             role="button"
+           >
+             <slot name="toggler"></slot>
+             <sgds-icon name="chevron-right" size="lg"></sgds-icon>
+           </a>
+           <div class="dropdown-items" aria-hidden="false" style="">
+             <a tabindex="0" role="button">
+               <sgds-icon name="chevron-left" size="lg"></sgds-icon>
+               <span>Dropdown</span>
+             </a>
+             <slot></slot>
+           </div>
+      `,
+      { ignoreAttributes: ["id"] }
+    );
+  });
 
   it("when prop active=true, .active class is defined in the button", async () => {
-    const el = await fixture(html`<sgds-mainnav-dropdown active></sgds-mainnav-dropdown>`);
+    const el = await fixture(html`<sgds-mainnav-dropdown active
+      ><span slot="toggler">Dropdown</span>
+      <sgds-dropdown-item>
+        <a href="https://www.google.com/">Item 1</a>
+      </sgds-dropdown-item></sgds-mainnav-dropdown
+    >`);
 
     expect(el.shadowRoot?.querySelector("a[role=button]")).to.have.class("active");
   });
 
-  it("calls mainnav.hide() and emits sgds-after-hide when dropdown item is clicked", async () => {
+  it("in mobile view, mainnavdropdown calls mainnav.hide() when dropdown item anchor is clicked", async () => {
+    Object.defineProperty(window, "innerWidth", {
+      writable: true,
+      configurable: true,
+      value: 300 // mobile size
+    });
+    window.dispatchEvent(new Event("resize"));
+    const stubHide = Sinon.stub(SgdsMainnav.prototype, "hide");
+    const showSpy = Sinon.spy();
+
     const mainnav = await fixture<SgdsMainnav>(html`
       <sgds-mainnav expand="lg">
         <sgds-mainnav-dropdown>
@@ -290,32 +415,20 @@ describe("sgds-mainnav-dropdown", () => {
         </sgds-mainnav-dropdown>
       </sgds-mainnav>
     `);
+    mainnav.addEventListener("sgds-show", showSpy);
+    await mainnav.updateComplete;
+    const hamburgerButton = mainnav.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler") as SgdsIconButton;
+    hamburgerButton.click();
+    await elementUpdated(mainnav);
+    expect(showSpy.calledOnce).to.be.true;
+    const anchorOne = mainnav.querySelectorAll("sgds-dropdown-item")?.[0] as SgdsDropdownItem;
+    anchorOne.click();
+    await elementUpdated(mainnav);
+    const dropdown = mainnav.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
 
-    const dropdown = mainnav.querySelector("sgds-mainnav-dropdown")!;
-    // simulate mobile state if needed
-    (dropdown as any)._breakpointReached = true;
-    await dropdown.updateComplete;
-
-    // Wait for slotchange wiring to run and for defaultSlotItems to be populated
-    await waitUntil(() => dropdown.defaultSlotItems.length > 0, "slot items not ready", {
-      interval: 20,
-      timeout: 1000
-    });
-
-    const firstItem = dropdown.defaultSlotItems[0] as HTMLElement & { shadowRoot?: ShadowRoot };
-
-    // anchor may be in light DOM or inside shadowRoot of dropdown item — handle both
-    const anchor = (firstItem.shadowRoot?.querySelector("a") ?? firstItem.querySelector("a")) as HTMLElement | null;
-    expect(anchor, "expected anchor to exist").to.exist;
-
-    // listen for the mainnav hide event (mainnav emits sgds-after-hide when hide finishes)
-    const evPromise = oneEvent(mainnav, "sgds-after-hide");
-
-    // trigger click that should call mainnav.hide()
-    anchor!.click();
-
-    // wait for hide to finish
-    const ev = await evPromise;
-    expect(ev).to.exist;
-  });
+    await dropdown?.updateComplete;
+    await waitUntil(() => stubHide.called);
+    expect(stubHide.called).to.be.true;
+    stubHide.restore();
+  }); // retries 1 time as occasionally fails with timeout (CI or local)
 });

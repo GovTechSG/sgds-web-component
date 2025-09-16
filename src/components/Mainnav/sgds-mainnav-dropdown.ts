@@ -10,7 +10,7 @@ import mainnavDropdownStyle from "./mainnav-dropdown.css";
 import SgdsDropdown from "../Dropdown/sgds-dropdown";
 import SgdsDropdownItem from "../Dropdown/sgds-dropdown-item";
 import SgdsIcon from "../Icon/sgds-icon";
-import { MainnavContext } from "./mainnav-context";
+import { MainnavBreakpointContext, MainnavExpandedContext } from "./mainnav-context";
 import SgdsElement from "../../base/sgds-element";
 
 const TAB = "Tab";
@@ -30,9 +30,13 @@ export class SgdsMainnavDropdown extends SgdsElement {
     "sgds-icon": SgdsIcon
   };
 
-  @consume({ context: MainnavContext, subscribe: true })
+  @consume({ context: MainnavBreakpointContext, subscribe: true })
   @state()
-  private _breakpointReached: boolean;
+  private _breakpointReached = true;
+
+  @consume({ context: MainnavExpandedContext, subscribe: true })
+  @state()
+  private expanded: boolean;
 
   /** @internal */
   @query(".nav-link") navLink: HTMLElement;
@@ -68,39 +72,6 @@ export class SgdsMainnavDropdown extends SgdsElement {
     return [...(this.defaultNodes || [])].filter(
       (node: HTMLElement) => typeof node.tagName !== "undefined"
     ) as SgdsDropdownItem[];
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    document.addEventListener("sgds-after-hide", (e: CustomEvent) => {
-      const target = e.target as HTMLElement;
-      const mainnav = target.closest("sgds-mainnav") as SgdsMainnav;
-      if (mainnav) {
-        this._resetDropdownMenu();
-        this._hideDropdownMenuItems();
-      }
-    });
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    // Clean up the event listener when the element is removed from the DOM
-    document.removeEventListener("sgds-after-hide", () => {
-      this._resetDropdownMenu();
-      this._hideDropdownMenuItems();
-    });
-  }
-
-  protected willUpdate(changedProperties: Map<string, unknown>) {
-    super.willUpdate(changedProperties);
-
-    if (!this.shadowRoot) {
-      return;
-    }
-
-    if (this._breakpointReached) {
-      this.shadowRoot.adoptedStyleSheets = [dropdownMenuStyle.styleSheet, mainnavDropdownStyle.styleSheet];
-    }
   }
 
   updated() {
@@ -268,12 +239,9 @@ export class SgdsMainnavDropdown extends SgdsElement {
   }
 
   private _closeMenu() {
-    // 200ms delay as the transform transition is set to this timing
     this._resetDropdownMenu();
-    setTimeout(() => {
-      this._hideDropdownMenuItems();
-      this.navLink.focus();
-    }, 200);
+    this._hideDropdownMenuItems();
+    this.navLink.focus();
   }
 
   render() {
