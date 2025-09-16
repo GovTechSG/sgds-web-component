@@ -1,5 +1,5 @@
 import "./sgds-web-component";
-import { aTimeout, assert, expect, fixture, fixtureCleanup, nextFrame } from "@open-wc/testing";
+import { aTimeout, assert, expect, fixture, fixtureCleanup, nextFrame, oneEvent, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import { SgdsMainnav, SgdsMainnavDropdown, SgdsMainnavItem, type MainnavExpandSize } from "../src/components";
 
@@ -273,9 +273,49 @@ describe("sgds-mainnav-dropdown", () => {
       { ignoreAttributes: ["id"] }
     );
   });
+
   it("when prop active=true, .active class is defined in the button", async () => {
     const el = await fixture(html`<sgds-mainnav-dropdown active></sgds-mainnav-dropdown>`);
 
     expect(el.shadowRoot?.querySelector("a[role=button]")).to.have.class("active");
+  });
+
+  it("calls mainnav.hide() and emits sgds-after-hide when dropdown item is clicked", async () => {
+    const mainnav = await fixture<SgdsMainnav>(html`
+      <sgds-mainnav expand="lg">
+        <sgds-mainnav-dropdown>
+          <span slot="toggler">Menu</span>
+          <sgds-dropdown-item><a href="#">Item 1</a></sgds-dropdown-item>
+          <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
+        </sgds-mainnav-dropdown>
+      </sgds-mainnav>
+    `);
+
+    const dropdown = mainnav.querySelector("sgds-mainnav-dropdown")!;
+    // simulate mobile state if needed
+    (dropdown as any)._breakpointReached = true;
+    await dropdown.updateComplete;
+
+    // Wait for slotchange wiring to run and for defaultSlotItems to be populated
+    await waitUntil(() => dropdown.defaultSlotItems.length > 0, "slot items not ready", {
+      interval: 20,
+      timeout: 1000
+    });
+
+    const firstItem = dropdown.defaultSlotItems[0] as HTMLElement & { shadowRoot?: ShadowRoot };
+
+    // anchor may be in light DOM or inside shadowRoot of dropdown item — handle both
+    const anchor = (firstItem.shadowRoot?.querySelector("a") ?? firstItem.querySelector("a")) as HTMLElement | null;
+    expect(anchor, "expected anchor to exist").to.exist;
+
+    // listen for the mainnav hide event (mainnav emits sgds-after-hide when hide finishes)
+    const evPromise = oneEvent(mainnav, "sgds-after-hide");
+
+    // trigger click that should call mainnav.hide()
+    anchor!.click();
+
+    // wait for hide to finish
+    const ev = await evPromise;
+    expect(ev).to.exist;
   });
 });

@@ -1,6 +1,7 @@
 import { html } from "lit";
 import { consume } from "@lit/context";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { SgdsMainnav } from "./sgds-mainnav";
 import { classMap } from "lit/directives/class-map.js";
 import genId from "../../utils/generateId";
 import dropdownStyle from "../Dropdown/dropdown.css";
@@ -71,16 +72,20 @@ export class SgdsMainnavDropdown extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
-    document.addEventListener("close-dropdown-menu", () => {
-      this._resetDropdownMenu();
-      this._hideDropdownMenuItems();
+    document.addEventListener("sgds-after-hide", (e: CustomEvent) => {
+      const target = e.target as HTMLElement;
+      const mainnav = target.closest("sgds-mainnav") as SgdsMainnav;
+      if (mainnav) {
+        this._resetDropdownMenu();
+        this._hideDropdownMenuItems();
+      }
     });
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     // Clean up the event listener when the element is removed from the DOM
-    document.removeEventListener("close-dropdown-menu", () => {
+    document.removeEventListener("sgds-after-hide", () => {
       this._resetDropdownMenu();
       this._hideDropdownMenuItems();
     });
@@ -114,12 +119,18 @@ export class SgdsMainnavDropdown extends SgdsElement {
       const dropdownItem = item.shadowRoot.querySelector(".dropdown-item") as HTMLElement;
       dropdownItem.classList.add("nav-link");
 
-      const slottedItem = (item.shadowRoot.querySelector(".dropdown-item slot") as HTMLSlotElement).assignedElements({
-        flatten: true
-      });
-      slottedItem.forEach(item => {
-        (item as HTMLElement).tabIndex = -1;
-      });
+      const link = item.shadowRoot?.querySelector("a") || item.querySelector("a");
+      link.tabIndex = -1;
+      if (dropdownItem.classList.contains("disabled")) {
+        link.setAttribute("href", "javascript:void(0)");
+        link.setAttribute("tabindex", "-1");
+      } else {
+        link.addEventListener("click", (e: Event) => {
+          const target = e.target as HTMLElement;
+          const mainnav = target.closest("sgds-mainnav") as SgdsMainnav;
+          mainnav.hide();
+        });
+      }
     });
   }
 
@@ -128,6 +139,16 @@ export class SgdsMainnavDropdown extends SgdsElement {
     items.forEach(item => {
       const dropdownItem = item.shadowRoot.querySelector(".dropdown-item") as HTMLElement;
       dropdownItem.classList.remove("nav-link");
+
+      const slottedItem = (item.shadowRoot.querySelector(".dropdown-item slot") as HTMLSlotElement).assignedElements({
+        flatten: true
+      });
+      slottedItem.forEach(item => {
+        if (dropdownItem.classList.contains("disabled")) {
+          item.setAttribute("href", "javascript:void(0)");
+          item.setAttribute("tabindex", "-1");
+        }
+      });
     });
   }
 
@@ -186,7 +207,9 @@ export class SgdsMainnavDropdown extends SgdsElement {
 
   private _resetDropdownMenu() {
     const navbarBody = this._getNavbarBody();
-    navbarBody.style.removeProperty("transform");
+    if (navbarBody) {
+      navbarBody.style.removeProperty("transform");
+    }
   }
 
   private _handleKeyboardOpen(event: KeyboardEvent) {

@@ -1,5 +1,6 @@
 import { html } from "lit";
 import { property } from "lit/decorators.js";
+import { SgdsMainnav } from "./sgds-mainnav";
 import { watch } from "../../utils/watch";
 import SgdsElement from "../../base/sgds-element";
 import mainnavItemStyle from "./mainnav-item.css";
@@ -57,7 +58,14 @@ export class SgdsMainnavItem extends SgdsElement {
       if (this.disabled) {
         anchor.setAttribute("href", "javascript:void(0)");
         anchor.setAttribute("tabindex", "-1");
+        return;
       }
+
+      anchor.addEventListener("click", (e: Event) => {
+        const target = e.target as HTMLElement;
+        const mainnav = target.closest("sgds-mainnav") as SgdsMainnav;
+        mainnav.hide();
+      });
     }
   }
 

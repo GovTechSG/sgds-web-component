@@ -128,6 +128,7 @@ export class SgdsMainnav extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
+
     this.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
   }
 
@@ -164,8 +165,6 @@ export class SgdsMainnav extends SgdsElement {
       document.querySelector("body").style.overflow = "hidden";
       this.show();
     }
-
-    this.header.focus();
   }
 
   private async _handleMobileNav() {
@@ -224,6 +223,7 @@ export class SgdsMainnav extends SgdsElement {
       // Show
       this._animateToShow();
     } else {
+      this.header.focus();
       // Hide
       this._animateToHide();
     }
@@ -246,7 +246,6 @@ export class SgdsMainnav extends SgdsElement {
 
     this.expanded = false;
     document.querySelector("body").style.removeProperty("overflow");
-    this.emit("close-dropdown-menu");
 
     return waitForEvent(this, "sgds-after-hide");
   }
