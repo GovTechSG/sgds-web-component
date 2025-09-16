@@ -8,7 +8,6 @@ import { HasSlotController } from "../../utils/slot";
 import { FormSubmitController } from "../../utils/formSubmitController";
 import buttonStyles from "./button.css";
 import SgdsSpinner, { SpinnerVariant } from "../Spinner/sgds-spinner";
-import { watch } from "../../utils/watch";
 
 export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
 

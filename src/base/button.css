@@ -22,8 +22,8 @@
 
 :host([tone="fixed-light"]) {
   --btn-main-color: var(--sgds-fixed-light-surface-default);
-  --btn-main-hover-bg-color: var(--sgds-fixed-light-translucent);
-  --btn-secondary-hover-color: var(--sgds-fixed-light-translucent);
+  --btn-main-hover-bg-color: var(--sgds-fixed-light-surface-translucent);
+  --btn-secondary-hover-color: var(--sgds-fixed-light-surface-translucent);
   --btn-main-text-color: var(--sgds-color-fixed-dark);
 }
 
@@ -58,6 +58,13 @@
   --btn-hover-color: var(--btn-main-color);
 }
 
+:host([size="xs"]) .btn {
+  font-size: var(--sgds-font-size-0);
+  padding: 0px var(--sgds-padding-sm);
+  min-width: var(--sgds-dimension-64);
+  height: var(--sgds-dimension-32);
+}
+
 :host([size="lg"]) .btn {
   font-size: var(--sgds-font-size-3);
   padding: 0px var(--sgds-padding-xl);
@@ -74,7 +81,7 @@
 }
 
 .btn {
-  background: var(--btn-bg);
+  background-color: var(--btn-bg);
   border: 1px solid var(--btn-border-color);
   border-radius: var(--btn-border-radius);
   color: var(--btn-color);
@@ -109,7 +116,7 @@
 .btn.hovered,
 .btn:hover,
 .btn.active {
-  background: var(--btn-hover-bg);
+  background-color: var(--btn-hover-bg);
   border-color: var(--btn-hover-border-color);
   color: var(--btn-hover-color);
 }
@@ -117,7 +124,7 @@
 .btn.focused,
 .btn:focus,
 .btn:focus-visible {
-  background: var(--btn-hover-bg);
+  background-color: var(--btn-hover-bg);
   border-color: var(--btn-hover-border-color);
   outline: 0;
   box-shadow: 0px 0px 0px 2px var(--sgds-blue-500);

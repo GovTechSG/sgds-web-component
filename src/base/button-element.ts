@@ -2,7 +2,7 @@ import { property, query } from "lit/decorators.js";
 import SgdsElement from "./sgds-element";
 import buttonStyles from "./button.css";
 
-export type ButtonTone = "primary" | "danger" | "fixed-light" | "neutral";
+export type ButtonTone = "brand" | "danger" | "fixed-light" | "neutral";
 export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
 
 export default class ButtonElement extends SgdsElement {
@@ -20,10 +20,10 @@ export default class ButtonElement extends SgdsElement {
   @property({ reflect: true }) variant: ButtonVariant = "primary";
 
   /** Specifies the tone of the button, the tone is `primary` by default */
-  @property({ reflect: true }) tone: ButtonTone = "primary";
+  @property({ reflect: true }) tone: ButtonTone = "brand";
 
   /** Specifies a small, medium or large button, the size is medium by default. */
-  @property({ reflect: true }) size: "sm" | "md" | "lg" = "md";
+  @property({ reflect: true }) size: "xs" | "sm" | "md" | "lg" = "md";
 
   /** Manually set the visual state of the button to `:active` */
   @property({ type: Boolean, reflect: true }) active = false;

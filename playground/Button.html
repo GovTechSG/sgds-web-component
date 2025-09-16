@@ -47,9 +47,16 @@
         color: var(--sgds-gray-100);
       }
 
+      h2 {
+        margin-bottom: var(--sgds-spacer-6);
+      }
+
+      h5 {
+        margin-bottom: var(--sgds-spacer-0);
+      }
+
       h6 {
-        margin-top: var(--sgds-spacer-6);
-        margin-bottom: var(--sgds-spacer-2);
+        margin-top: var(--sgds-spacer-3);
       }
 
       button {
@@ -71,6 +78,10 @@
       span {
         text-transform: capitalize;
       }
+
+      .gap {
+        gap: var(--sgds-spacer-8);
+      }
     </style>
   </head>
 
@@ -84,7 +95,7 @@
         <div>
           Tone:
           <button name="toggle-btn-default" onclick="toggleTone('default')">Default</button>
-          <button name="toggle-btn-primary" onclick="toggleTone('primary')">Primary</button>
+          <button name="toggle-btn-primary" onclick="toggleTone('brand')">Brand</button>
           <button name="toggle-btn-danger" onclick="toggleTone('danger')">Danger</button>
           <button name="toggle-btn-neutral" onclick="toggleTone('neutral')">Neutral</button>
           <button name="toggle-btn-fixed-light" onclick="toggleTone('fixed-light')">fixed-light</button>
@@ -144,27 +155,66 @@
           </div>
         </div>
 
-        <div class="d-flex-column">
-          <h5>Size and variants</h5>
-          <h6>Size: Small</h6>
-          <div class="d-flex-row">
-            <sgds-button size="sm" variant="primary">Primary Button </sgds-button>
-            <sgds-button size="sm" variant="outline">Outline Button </sgds-button>
-            <sgds-button size="sm" variant="ghost">Ghost Button </sgds-button>
-          </div>
+        <div class="d-flex-column gap">
+          <div class="d-flex-column">
+            <h5>Icon placements</h5>
+            <h6>Position - left</h6>
+            <div class="d-flex-row">
+              <sgds-button size="sm" variant="primary">
+                Primary Button
+                <sgds-icon slot="leftIcon" name="placeholder"></sgds-icon>
+              </sgds-button>
+              <sgds-button size="sm" variant="outline"
+                >Outline Button <sgds-icon slot="leftIcon" name="placeholder"></sgds-icon
+              ></sgds-button>
+              <sgds-button size="sm" variant="ghost"
+                >Ghost Button <sgds-icon slot="leftIcon" name="placeholder"></sgds-icon
+              ></sgds-button>
+            </div>
 
-          <h6>Size: Medium/Default</h6>
-          <div class="d-flex-row">
-            <sgds-button size="md" variant="primary">Primary Button </sgds-button>
-            <sgds-button size="md" variant="outline">Outline Button </sgds-button>
-            <sgds-button size="md" variant="ghost">Ghost Button </sgds-button>
+            <h6>Position - right</h6>
+            <div class="d-flex-row">
+              <sgds-button size="sm" variant="primary">
+                Primary Button
+                <sgds-icon slot="rightIcon" name="placeholder"></sgds-icon>
+              </sgds-button>
+              <sgds-button size="sm" variant="outline"
+                >Outline Button <sgds-icon slot="rightIcon" name="placeholder"></sgds-icon
+              ></sgds-button>
+              <sgds-button size="sm" variant="ghost"
+                >Ghost Button <sgds-icon slot="rightIcon" name="placeholder"></sgds-icon
+              ></sgds-button>
+            </div>
           </div>
+          <div class="d-flex-column">
+            <h5>Size and variants</h5>
+            <h6>Size (xs): Extra Small</h6>
+            <div class="d-flex-row">
+              <sgds-button size="xs" variant="primary">Primary Button </sgds-button>
+              <sgds-button size="xs" variant="outline">Outline Button </sgds-button>
+              <sgds-button size="xs" variant="ghost">Ghost Button </sgds-button>
+            </div>
 
-          <h6>Size: Large</h6>
-          <div class="d-flex-row">
-            <sgds-button size="lg" variant="primary">Primary Button </sgds-button>
-            <sgds-button size="lg" variant="outline">Outline Button </sgds-button>
-            <sgds-button size="lg" variant="ghost">Ghost Button </sgds-button>
+            <h6>Size (sm): Small</h6>
+            <div class="d-flex-row">
+              <sgds-button size="sm" variant="primary">Primary Button </sgds-button>
+              <sgds-button size="sm" variant="outline">Outline Button </sgds-button>
+              <sgds-button size="sm" variant="ghost">Ghost Button </sgds-button>
+            </div>
+
+            <h6>Size (md): Medium/Default</h6>
+            <div class="d-flex-row">
+              <sgds-button size="md" variant="primary">Primary Button </sgds-button>
+              <sgds-button size="md" variant="outline">Outline Button </sgds-button>
+              <sgds-button size="md" variant="ghost">Ghost Button </sgds-button>
+            </div>
+
+            <h6>Size (lg): Large</h6>
+            <div class="d-flex-row">
+              <sgds-button size="lg" variant="primary">Primary Button </sgds-button>
+              <sgds-button size="lg" variant="outline">Outline Button </sgds-button>
+              <sgds-button size="lg" variant="ghost">Ghost Button </sgds-button>
+            </div>
           </div>
         </div>
       </div>

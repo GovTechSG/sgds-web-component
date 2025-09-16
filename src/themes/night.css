@@ -155,5 +155,5 @@
 
   /* Semantic - Fixed light */
   --sgds-fixed-light-surface-default: var(--sgds-gray-000);
-  --sgds-fixed-light-surface-translucent: oklch(from var(--sgds-gray-1100) l c h / 0.01);
+  --sgds-fixed-light-surface-translucent: oklch(from var(--sgds-gray-1100) l c h / 0.05);
 }
