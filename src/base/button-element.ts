@@ -2,7 +2,7 @@ import { property, query } from "lit/decorators.js";
 import SgdsElement from "./sgds-element";
 import buttonStyles from "./button.css";
 
-export type ButtonTone = "primary" | "danger" | "fixed-white" | "neutral";
+export type ButtonTone = "primary" | "danger" | "fixed-light" | "neutral";
 export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
 
 export default class ButtonElement extends SgdsElement {

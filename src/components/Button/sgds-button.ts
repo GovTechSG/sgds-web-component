@@ -110,28 +110,13 @@ export class SgdsButton extends ButtonElement {
     }
   };
 
-  @watch("variant")
-  _updateSpinnerVariantByVariant = () => {
-    switch (this.variant) {
-      case "primary":
-      case "danger":
-        this.spinnerVariant = "fixed-white";
-        break;
-      case "outline":
-        this.spinnerVariant = "primary";
-        break;
-      case "ghost":
-        this.spinnerVariant = "neutral";
-        break;
-    }
-  };
-
   render() {
     const isLink = this.href;
     const tag = isLink ? literal`a` : literal`button`;
     const hasLeftIconSlot = this.hasSlotController.test("leftIcon");
     const hasRightIconSlot = this.hasSlotController.test("rightIcon");
     const noIconSlot = !hasLeftIconSlot && !hasRightIconSlot;
+    const linearBgTones = ["neutral", "fixed-light"];
 
     return html`
       <${tag}
@@ -142,7 +127,8 @@ export class SgdsButton extends ButtonElement {
           "has-right-icon": hasRightIconSlot,
           "no-icon": noIconSlot,
           focused: this.focused,
-          hovered: this.hovered
+          hovered: this.hovered,
+          "has-linear-bg": linearBgTones.includes(this.tone)
         })}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
@@ -160,7 +146,7 @@ export class SgdsButton extends ButtonElement {
       >
       ${
         this.loading
-          ? html`<sgds-spinner size="sm" variant=${this.spinnerVariant} />`
+          ? html`<sgds-spinner size="sm" variant="neutral" />`
           : html`<slot name="leftIcon"></slot>
               <span><slot></slot></span>
               <slot name="rightIcon"></slot>`

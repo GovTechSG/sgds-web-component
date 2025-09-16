@@ -67,6 +67,7 @@
   --sgds-danger-surface-default: var(--sgds-red-600);
   --sgds-danger-surface-emphasis: var(--sgds-red-700);
   --sgds-danger-surface-muted: var(--sgds-red-200);
+  --sgds-danger-surface-translucent: oklch(from var(--sgds-red-600) l c h / 0.1);
   --sgds-danger-color-default: var(--sgds-red-400);
   --sgds-danger-color-emphasis: var(--sgds-red-300);
   --sgds-danger-color-fixed-light: var(--sgds-red-400);
@@ -95,6 +96,7 @@
   --sgds-neutral-surface-default: var(--sgds-gray-700);
   --sgds-neutral-surface-emphasis: var(--sgds-gray-700);
   --sgds-neutral-surface-muted: var(--sgds-gray-200);
+  --sgds-neutral-surface-translucent: oklch(from var(--sgds-gray-000) l c h / 0.1);
   --sgds-neutral-color-default: var(--sgds-gray-400);
   --sgds-neutral-color-emphasis: var(--sgds-gray-300);
   --sgds-neutral-color-fixed-light: var(--sgds-gray-400);
@@ -150,4 +152,8 @@
   --sgds-form-danger-surface-default: var(--sgds-red-600);
   --sgds-form-danger-color-default: var(--sgds-red-500);
   --sgds-form-danger-border-color-default: var(--sgds-red-500);
+
+  /* Semantic - Fixed light */
+  --sgds-fixed-light-surface-default: var(--sgds-gray-000);
+  --sgds-fixed-light-surface-translucent: oklch(from var(--sgds-gray-1100) l c h / 0.01);
 }

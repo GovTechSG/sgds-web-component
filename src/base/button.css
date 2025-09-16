@@ -7,35 +7,30 @@
 
 :host,
 :host([tone="primary"]) {
-  --btn-main-color: var(--sgds-product-primary-600);
-  --btn-main-hover-bg-color: var(--sgds-product-primary-700);
-  --btn-main-border-color: var(--sgds-product-primary-600);
-  --btn-secondary-hover-color: oklch(from var(--sgds-product-primary-700) l c h / 0.1);
+  --btn-main-color: var(--sgds-primary-surface-default);
+  --btn-main-hover-bg-color: var(--sgds-primary-surface-emphasis);
+  --btn-secondary-hover-color: var(--sgds-primary-surface-translucent);
   --btn-main-text-color: var(--sgds-color-fixed-light);
-  --btn-hover-color: var(--btn-main-text-color);
 }
 
 :host([tone="danger"]) {
-  --btn-main-color: var(--sgds-red-600);
-  --btn-main-hover-bg-color: var(--sgds-red-700);
-  --btn-main-border-color: var(--sgds-red-600);
-  --btn-secondary-hover-color: oklch(from var(--sgds-red-700) l c h / 0.1);
+  --btn-main-color: var(--sgds-danger-surface-default);
+  --btn-main-hover-bg-color: var(--sgds-danger-surface-emphasis);
+  --btn-secondary-hover-color: var(--sgds-danger-surface-translucent);
   --btn-main-text-color: var(--sgds-color-fixed-light);
 }
 
-:host([tone="fixed-white"]) {
-  --btn-main-color: var(--sgds-gray-000);
-  --btn-main-hover-bg-color: oklch(from var(--sgds-gray-000) l c h / 0.95);
-  --btn-main-border-color: var(--sgds-gray-000);
-  --btn-secondary-hover-color: oklch(from var(--sgds-gray-000) l c h / 0.2);
+:host([tone="fixed-light"]) {
+  --btn-main-color: var(--sgds-fixed-light-surface-default);
+  --btn-main-hover-bg-color: var(--sgds-fixed-light-translucent);
+  --btn-secondary-hover-color: var(--sgds-fixed-light-translucent);
   --btn-main-text-color: var(--sgds-color-fixed-dark);
 }
 
 :host([tone="neutral"]) {
-  --btn-main-color: var(--sgds-gray-900);
-  --btn-main-hover-bg-color: var(--sgds-gray-1000);
-  --btn-main-border-color: var(--sgds-gray-800);
-  --btn-secondary-hover-color: oklch(from var(--sgds-gray-1100) l c h / 0.05);
+  --btn-main-color: var(--sgds-neutral-surface-default);
+  --btn-main-hover-bg-color: var(--sgds-neutral-surface-emphasis);
+  --btn-secondary-hover-color: var(--sgds-neutral-surface-translucent);
   --btn-main-text-color: var(--sgds-color-fixed-light);
 }
 
@@ -43,6 +38,7 @@
   --btn-bg: var(--btn-main-color);
   --btn-hover-bg: var(--btn-main-hover-bg-color);
   --btn-color: var(--btn-main-text-color);
+  --btn-hover-color: var(--btn-main-text-color);
 }
 
 :host([variant="ghost"]) {
@@ -57,8 +53,8 @@
   --btn-hover-bg: var(--btn-secondary-hover-color);
   --btn-color: var(--btn-main-color);
   --btn-border-width: var(--sgds-border-width-1);
-  --btn-border-color: var(--btn-main-border-color);
-  --btn-hover-border-color: var(--btn-main-border-color);
+  --btn-border-color: var(--btn-main-color);
+  --btn-hover-border-color: var(--btn-main-color);
   --btn-hover-color: var(--btn-main-color);
 }
 
@@ -78,7 +74,7 @@
 }
 
 .btn {
-  background-color: var(--btn-bg);
+  background: var(--btn-bg);
   border: 1px solid var(--btn-border-color);
   border-radius: var(--btn-border-radius);
   color: var(--btn-color);
@@ -101,6 +97,7 @@
     box-shadow 0.15s ease-in-out;
   user-select: none;
   vertical-align: middle;
+  position: relative;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -112,14 +109,15 @@
 .btn.hovered,
 .btn:hover,
 .btn.active {
-  background-color: var(--btn-hover-bg);
+  background: var(--btn-hover-bg);
   border-color: var(--btn-hover-border-color);
   color: var(--btn-hover-color);
 }
+
 .btn.focused,
 .btn:focus,
 .btn:focus-visible {
-  background-color: var(--btn-hover-bg);
+  background: var(--btn-hover-bg);
   border-color: var(--btn-hover-border-color);
   outline: 0;
   box-shadow: 0px 0px 0px 2px var(--sgds-blue-500);
@@ -136,6 +134,46 @@
   color: var(--btn-color);
 }
 
+.btn > * {
+  z-index: 2;
+}
+
 .btn slot::slotted(*) {
   color: var(--btn-color);
+}
+
+.btn.has-linear-bg.hovered,
+.btn.has-linear-bg:hover,
+.btn.has-linear-bg.active,
+.btn.has-linear-bg.focused,
+.btn.has-linear-bg:focus,
+.btn.has-linear-bg:focus-visible {
+  background-color: var(--btn-bg);
+}
+
+/* 
+  For fixed-light and neutral, there is a overlay of gray-1100 (5%) on a background color. 
+  So we will use a before to handle the smooth transiation. if we use background image, it is not smooth transition
+*/
+.btn.has-linear-bg::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  border-radius: var(--sgds-border-radius-md);
+  background-color: var(--btn-hover-bg);
+  transition: opacity 0.15s ease-in-out;
+}
+
+.btn.has-linear-bg.hovered::before,
+.btn.has-linear-bg:hover::before,
+.btn.has-linear-bg.active::before,
+.btn.has-linear-bg.focused::before,
+.btn.has-linear-bg:focus::before,
+.btn.has-linear-bg:focus-visible::before {
+  opacity: 1;
 }

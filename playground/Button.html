@@ -87,7 +87,7 @@
           <button name="toggle-btn-primary" onclick="toggleTone('primary')">Primary</button>
           <button name="toggle-btn-danger" onclick="toggleTone('danger')">Danger</button>
           <button name="toggle-btn-neutral" onclick="toggleTone('neutral')">Neutral</button>
-          <button name="toggle-btn-fixed-white" onclick="toggleTone('fixed-white')">Fixed-White</button>
+          <button name="toggle-btn-fixed-light" onclick="toggleTone('fixed-light')">fixed-light</button>
         </div>
       </div>
     </div>
@@ -201,7 +201,7 @@
         localStorage.setItem("sgds-tone", tone);
         document.getElementById("tone").innerText = tone;
 
-        if (tone === "fixed-white") {
+        if (tone === "fixed-light") {
           toggle(true);
         }
 

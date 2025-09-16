@@ -7,10 +7,6 @@
   --sgds-spinner-bg: var(--sgds-neutral-surface-default);
 }
 
-:host([variant="fixed-white"]) {
-  --sgds-spinner-bg: var(--sgds-gray-000);
-}
-
 .spinner-wrapper {
   display: flex;
   flex-direction: column;

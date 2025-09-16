@@ -35,6 +35,6 @@ export class SgdsSpinner extends SgdsElement {
   }
 }
 
-export type SpinnerVariant = "primary" | "neutral" | "fixed-white";
+export type SpinnerVariant = "primary" | "neutral";
 
 export default SgdsSpinner;
