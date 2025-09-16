@@ -160,4 +160,23 @@ describe("<sgds-drawer>", () => {
     await waitUntil(() => afterHideHandler.calledOnce);
     expect(document.body.style.overflow).to.not.equal("hidden");
   });
+
+  it("should accept size prop and reflect it", async () => {
+    const el = await fixture<SgdsDrawer>(html`<sgds-drawer size="md"></sgds-drawer>`);
+    expect(el.size).to.equal("md");
+    expect(el.hasAttribute("size")).to.be.true;
+  });
+
+  it("should render footer slot content", async () => {
+    const el = await fixture<SgdsDrawer>(html`
+      <sgds-drawer open>
+        <div slot="footer" id="footer-content">Footer here</div>
+      </sgds-drawer>
+    `);
+
+    const footer = el.shadowRoot?.querySelector("slot[name='footer']") as HTMLSlotElement;
+    const assigned = footer.assignedNodes({ flatten: true });
+    expect(assigned.length).to.be.greaterThan(0);
+    expect((assigned[0] as HTMLElement).id).to.equal("footer-content");
+  });
 });
