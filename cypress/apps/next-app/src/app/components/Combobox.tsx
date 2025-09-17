@@ -1,30 +1,36 @@
-import dynamic from "next/dynamic"
+"use client";
+import { SgdsButton } from "@govtechsg/sgds-web-component/react";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 // import SgdsCombobox from "@govtechsg/sgds-web-component/react/combo-box/index.js";
 
-const SgdsCombobox = dynamic(
-    () => import("@govtechsg/sgds-web-component/react/combo-box/index.js"),
-    {
-      ssr: false,
-    }
-  );
+const SgdsSelect = dynamic(() => import("@govtechsg/sgds-web-component/react/select/index.js"), {
+  ssr: false
+});
 export const Combobox = () => {
-    return (
-      <div>
-      <SgdsCombobox 
-        label="Fruits" 
-        hintText="single select" 
-        name="combobox" 
-        placeholder="ComboBox" 
-        menuList={[{label: "apple", value: "apple"}, {label: "orange", value: "orange"}, {label: "pear", value: "pear"}]}>
-      </SgdsCombobox>
-      <SgdsCombobox 
-        multiSelect
-        label="Fruits" 
-        hintText="single select" 
-        name="combobox" 
-        placeholder="ComboBox" 
-        menuList={[{label: "apple", value: "apple"}, {label: "orange", value: "orange"}, {label: "pear", value: "pear"}]}>
-      </SgdsCombobox>
-      </div>
-    )
-}
+  const [menuList, setMenuList] = useState([
+    { label: "Afghanistan", value: "1" },
+    { label: "Albania", value: "2" },
+    { label: "Algeria", value: "3" }
+  ]);
+
+  const handleClick = () => {
+       setMenuList([
+      { label: "Burundi", value: "32" },
+      { label: "Cambodia", value: "33" },
+      { label: "Cameroon", value: "34" }
+    ]);
+  };
+  return (
+    <div>
+      <SgdsButton onClick={handleClick}>Click</SgdsButton>
+      <SgdsSelect
+        label="Fruits"
+        hintText="single select"
+        name="combobox"
+        placeholder="ComboBox"
+        menuList={menuList}
+      ></SgdsSelect>
+    </div>
+  );
+};

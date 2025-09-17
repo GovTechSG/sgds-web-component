@@ -4,21 +4,20 @@
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
 
 
-<sgds-input readonly value="This is a readonly input"></sgds-input>
-<br/>
-<sgds-input value="This is a normal input"></sgds-input>
-<br/>
-<sgds-input value="This is a disabled input" disabled></sgds-input>
+<form>
+<sgds-input id="test-input" value="This is a invalid input"  hasFeedback="style"></sgds-input>
+<sgds-input  value="This is a normal input"  required hasFeedback="both"></sgds-input>
+<sgds-button type="submit">submit</sgds-button >
+</form>
 
-<h2>Password</h2>
-<sgds-input type="password" value="This is a password input" suffix="test" loading>
-    <sgds-icon-button slot="action" name="trash"></sgds-icon-button>
-</sgds-input>
-
-<br/>
-<h2>Trailing Icon</h2>
-<sgds-input value="This is a normal input" loading ></sgds-input>
-<sgds-input value="This is a normal input" valid></sgds-input>
-<sgds-input value="This is a normal input" valid>
-    <sgds-icon name="trash" slot="trailing-icon"></sgds-icon>
-</sgds-input>
+<script>
+    const input = document.querySelector("sgds-input#test-input");
+    input.addEventListener("sgds-input", (e) => {
+        console.log(e.target.value)
+        if (e.target.value === "test") {
+            console.log('invalid')
+            input.invalid =true
+            input.setValidity({patternMismatch: true}, 'invalid input', )
+        }
+    })
+</script>
