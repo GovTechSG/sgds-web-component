@@ -45,7 +45,30 @@
         <h2>Multi selection combo-box</h2>
         <sgds-combo-box
           multiSelect
-          value="1"
+          value="2"
+          menuList='[
+      { "label": "John Smith John Smith John Smith John Smith John Smith John Smith", "value": "1" },
+      { "label": "Jack Adams", "value": "2" },
+      { "label": "Regina Bride", "value": "3" },
+      { "label": "Christian Dior", "value": "4" },
+      { "label": "Prada Low", "value": "5" },
+      { "label": "Chloe Delight", "value": "6" },
+      { "label": "Jade Apheremal", "value": "7" },
+      { "label": "Louis Vuitton", "value": "8" }
+    ]'
+          label="label"
+          hintText="hint"
+          hasFeedback="true"
+          invalidFeedback="test"
+          badgeFullWidth="true"
+          onchange="reduceList()"
+        >
+        </sgds-combo-box>
+
+        <sgds-combo-box
+          id="combobox-2"
+          multiSelect
+          value="3"
           menuList='[
       { "label": "John Smith John Smith John Smith John Smith John Smith John Smith", "value": "1" },
       { "label": "Jack Adams", "value": "2" },
@@ -65,5 +88,23 @@
         </sgds-combo-box>
       </div>
     </div>
+    <script>
+      document.addEventListener("sgds-change", reduceList);
+
+      function reduceList() {
+        console.log("reduceList");
+        const combobox = document.getElementById("combobox-2");
+        const tempArray = [
+          { label: "Regina Bride", value: "3" },
+          { label: "Christian Dior", value: "4" },
+          { label: "Prada Low", value: "5" },
+          { label: "Chloe Delight", value: "6" },
+          { label: "Jade Apheremal", value: "7" },
+          { label: "Louis Vuitton", value: "8" }
+        ];
+
+        combobox.setAttribute("menuList", JSON.stringify(tempArray));
+      }
+    </script>
   </body>
 </html>

@@ -11,6 +11,8 @@ import SgdsIcon from "../Icon/sgds-icon";
 import { ComboBoxItem } from "./combo-box-item";
 import comboBoxStyle from "./combo-box.css";
 
+import { repeat } from "lit-html/directives/repeat.js";
+
 /**
  * Each item in the ComboBox has a label to display
  * and a value (the actual data / ID).
@@ -107,6 +109,24 @@ export class SgdsComboBox extends SelectElement {
     if (!this._isTouched && this.value === "") return;
 
     this.invalid = !this._mixinReportValidity();
+
+    // When value is updated by user and it doesn't map to selectedItems, we should re-map selectedItems
+    const selectedItemVal = this.selectedItems.map(val => val.value).join(";");
+    if (selectedItemVal !== this.value) {
+      const valueArray = this.value.split(";");
+      const initialSelectedItem = this.menuList.filter(({ value }) => valueArray.includes(value));
+      this.selectedItems = [...initialSelectedItem];
+
+      if (!this.multiSelect) {
+        console.log(this.value), this.selectedItems;
+        this.displayValue = initialSelectedItem[0].label;
+      }
+    }
+  }
+
+  @watch("menuList")
+  _handleMenuListChange() {
+    this._renderedMenu = this.menuList;
   }
 
   // Called each time the user types in the <sgds-input>, we set .value and show the menu
@@ -181,6 +201,7 @@ export class SgdsComboBox extends SelectElement {
     this.selectedItems = this.selectedItems.filter(i => i.value !== item.value);
     this.value = this.selectedItems.map(i => i.value).join(";");
   }
+
   private async _handleMultiSelectKeyDown(e: KeyboardEvent) {
     // Only do this in multi-select mode
     if (!this.multiSelect) {
@@ -261,8 +282,17 @@ export class SgdsComboBox extends SelectElement {
     return this._renderedMenu.length === 0 ? emptyMenu : menu;
   }
 
+  /**
+   * Used `repeat` helper from Lit to render instead of .map:
+   * The reassigning of value is affecting the truncation on badge as it is not triggering the slot change event.
+   *
+   * To compare this to lit-html's default handling for lists, consider reversing a large list of names:
+   * For a list created using Array.map, lit-html maintains the DOM nodes for the list items, but reassigns the values
+   * For a list created using repeat, the repeat directive reorders the existing DOM nodes, so the nodes representing the first list item move to the last position.
+   */
   protected _renderInput() {
     const wantFeedbackStyle = this.hasFeedback;
+
     return html`
       <div
         ${ref(this.myDropdown)}
@@ -276,17 +306,19 @@ export class SgdsComboBox extends SelectElement {
         <div class="combobox-input-container">
           ${this.multiSelect
             ? html`
-                ${this.selectedItems.map(
-                  item =>
-                    html`<sgds-badge
-                      outlined
-                      variant="neutral"
-                      show
-                      dismissible
-                      ?fullwidth=${this.badgeFullWidth}
-                      @sgds-hide=${e => this._handleBadgeDismissed(e, item)}
-                      >${item.label}</sgds-badge
-                    >`
+                ${repeat(
+                  this.selectedItems,
+                  item => item.value,
+                  item => html`<sgds-badge
+                    name=${item.label}
+                    outlined
+                    variant="neutral"
+                    show
+                    dismissible
+                    ?fullwidth=${this.badgeFullWidth}
+                    @sgds-hide=${e => this._handleBadgeDismissed(e, item)}
+                    >${item.label}</sgds-badge
+                  >`
                 )}
               `
             : nothing}
