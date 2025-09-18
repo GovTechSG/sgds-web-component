@@ -11,7 +11,7 @@ import SgdsIcon from "../Icon/sgds-icon";
 import { ComboBoxItem } from "./combo-box-item";
 import comboBoxStyle from "./combo-box.css";
 
-import { repeat } from "lit-html/directives/repeat.js";
+import { repeat } from "lit/directives/repeat.js";
 
 /**
  * Each item in the ComboBox has a label to display
@@ -269,31 +269,37 @@ export class SgdsComboBox extends SelectElement {
 
   protected _renderMenu() {
     const emptyMenu = html` <div class="empty-menu">No options</div> `;
-    const menu = repeat(
-      this._renderedMenu,
-      item => item.value,
-      item => {
-        let isActive = false;
-        if (this.multiSelect) {
-          const selectedItemValueArray = this.selectedItems.map(i => i.value);
-          isActive = selectedItemValueArray.includes(item.value);
-        } else {
-          isActive = item.value === this.value;
-        }
-        return html`
-          <sgds-combo-box-item
-            ?active=${isActive}
-            ?checkbox=${this.multiSelect}
-            value=${item.value}
-            @sgds-select=${this._handleItemSelected}
-            @sgds-unselect=${this._handleItemUnselect}
-          >
-            ${item.label}
-          </sgds-combo-box-item>
-        `;
-      }
-    );
-    return this._renderedMenu.length === 0 ? emptyMenu : menu;
+
+    const menu =
+      this._renderedMenu.length === 0
+        ? emptyMenu
+        : repeat(
+            this._renderedMenu,
+            item => item.value,
+            item => {
+              let isActive = false;
+              if (this.multiSelect) {
+                const selectedItemValueArray = this.selectedItems.map(i => i.value);
+                isActive = selectedItemValueArray.includes(item.value);
+              } else {
+                isActive = item.value === this.value;
+              }
+
+              return html`
+                <sgds-combo-box-item
+                  ?active=${isActive}
+                  ?checkbox=${this.multiSelect}
+                  value=${item.value}
+                  @sgds-select=${this._handleItemSelected}
+                  @sgds-unselect=${this._handleItemUnselect}
+                >
+                  ${item.label}
+                </sgds-combo-box-item>
+              `;
+            }
+          );
+
+    return menu;
   }
 
   /**
@@ -323,16 +329,16 @@ export class SgdsComboBox extends SelectElement {
                 ${repeat(
                   this.selectedItems,
                   item => item.value,
-                  item => html`<sgds-badge
-                    name=${item.label}
-                    outlined
-                    variant="neutral"
-                    show
-                    dismissible
-                    ?fullwidth=${this.badgeFullWidth}
-                    @sgds-hide=${e => this._handleBadgeDismissed(e, item)}
-                    >${item.label}</sgds-badge
-                  >`
+                  item =>
+                    html`<sgds-badge
+                      outlined
+                      variant="neutral"
+                      show
+                      dismissible
+                      ?fullwidth=${this.badgeFullWidth}
+                      @sgds-hide=${e => this._handleBadgeDismissed(e, item)}
+                      >${item.label}</sgds-badge
+                    >`
                 )}
               `
             : nothing}
