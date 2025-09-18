@@ -61,12 +61,34 @@
           hasFeedback="true"
           invalidFeedback="test"
           badgeFullWidth="true"
-          onchange="reduceList()"
+          filterFunction="reduceList()"
         >
         </sgds-combo-box>
 
         <sgds-combo-box
           id="combobox-2"
+          value="3"
+          menuList='[
+      { "label": "John Smith John Smith John Smith John Smith John Smith John Smith", "value": "1" },
+      { "label": "Jack Adams", "value": "2" },
+      { "label": "Regina Bride", "value": "3" },
+      { "label": "Christian Dior", "value": "4" },
+      { "label": "Prada Low", "value": "5" },
+      { "label": "Chloe Delight", "value": "6" },
+      { "label": "Jade Apheremal", "value": "7" },
+      { "label": "Louis Vuitton", "value": "8" }
+    ]'
+          label="label"
+          hintText="hint"
+          hasFeedback="true"
+          invalidFeedback="test"
+          badgeFullWidth="true"
+          placeholder="Combobox placeholder"
+        >
+        </sgds-combo-box>
+
+        <sgds-combo-box
+          id="combobox-3"
           multiSelect
           value="3"
           menuList='[
@@ -84,6 +106,7 @@
           hasFeedback="true"
           invalidFeedback="test"
           badgeFullWidth="true"
+          placeholder="Combobox placeholder"
         >
         </sgds-combo-box>
       </div>
@@ -92,10 +115,8 @@
       document.addEventListener("sgds-change", reduceList);
 
       function reduceList() {
-        console.log("reduceList");
         const combobox = document.getElementById("combobox-2");
         const tempArray = [
-          { label: "Regina Bride", value: "3" },
           { label: "Christian Dior", value: "4" },
           { label: "Prada Low", value: "5" },
           { label: "Chloe Delight", value: "6" },
@@ -103,7 +124,11 @@
           { label: "Louis Vuitton", value: "8" }
         ];
 
-        combobox.setAttribute("menuList", JSON.stringify(tempArray));
+        if (combobox.getAttribute("menuList") !== JSON.stringify(tempArray))
+          combobox.setAttribute("menuList", JSON.stringify(tempArray));
+
+        const combobox3 = document.getElementById("combobox-3");
+        combobox3.setAttribute("value", "4");
       }
     </script>
   </body>

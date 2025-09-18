@@ -90,7 +90,6 @@ export class SgdsComboBox extends SelectElement {
 
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
-    console.log("value", this.value);
     // when value change, always emit a change event
     this.emit("sgds-change");
 
@@ -114,19 +113,30 @@ export class SgdsComboBox extends SelectElement {
     // When value is updated by user and it doesn't map to selectedItems, we should re-map selectedItems
     const selectedItemVal = this.selectedItems.map(val => val.value).join(";");
     if (selectedItemVal !== this.value) {
-      const valueArray = this.value.split(";");
-      const initialSelectedItem = this.menuList.filter(({ value }) => valueArray.includes(value));
-      this.selectedItems = [...initialSelectedItem];
-
-      if (!this.multiSelect) {
-        this.displayValue = initialSelectedItem[0].label;
-      }
+      this._updateValueAndDisplayValue();
     }
   }
 
-  @watch("menuList")
+  @watch("menuList", { waitUntilFirstUpdate: true })
   _handleMenuListChange() {
+    this._updateValueAndDisplayValue();
     this._renderedMenu = this.menuList;
+  }
+
+  private _updateValueAndDisplayValue() {
+    const valueArray = this.value.split(";");
+    const initialSelectedItem = this.menuList.filter(({ value }) => valueArray.includes(value));
+    this.selectedItems = [...initialSelectedItem];
+
+    // When the new filtered items don't match value we update it
+    const updatedValue = initialSelectedItem.map(item => item.value).join(";");
+    if (updatedValue !== this.value) {
+      this.value = updatedValue;
+    }
+
+    if (!this.multiSelect) {
+      this.displayValue = initialSelectedItem[0]?.label ?? "";
+    }
   }
 
   // Called each time the user types in the <sgds-input>, we set .value and show the menu
@@ -259,26 +269,30 @@ export class SgdsComboBox extends SelectElement {
 
   protected _renderMenu() {
     const emptyMenu = html` <div class="empty-menu">No options</div> `;
-    const menu = this._renderedMenu.map(item => {
-      let isActive = false;
-      if (this.multiSelect) {
-        const selectedItemValueArray = this.selectedItems.map(i => i.value);
-        isActive = selectedItemValueArray.includes(item.value);
-      } else {
-        isActive = item.value === this.value;
+    const menu = repeat(
+      this._renderedMenu,
+      item => item.value,
+      item => {
+        let isActive = false;
+        if (this.multiSelect) {
+          const selectedItemValueArray = this.selectedItems.map(i => i.value);
+          isActive = selectedItemValueArray.includes(item.value);
+        } else {
+          isActive = item.value === this.value;
+        }
+        return html`
+          <sgds-combo-box-item
+            ?active=${isActive}
+            ?checkbox=${this.multiSelect}
+            value=${item.value}
+            @sgds-select=${this._handleItemSelected}
+            @sgds-unselect=${this._handleItemUnselect}
+          >
+            ${item.label}
+          </sgds-combo-box-item>
+        `;
       }
-      return html`
-        <sgds-combo-box-item
-          ?active=${isActive}
-          ?checkbox=${this.multiSelect}
-          value=${item.value}
-          @sgds-select=${this._handleItemSelected}
-          @sgds-unselect=${this._handleItemUnselect}
-        >
-          ${item.label}
-        </sgds-combo-box-item>
-      `;
-    });
+    );
     return this._renderedMenu.length === 0 ? emptyMenu : menu;
   }
 
