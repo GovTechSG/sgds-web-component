@@ -344,6 +344,68 @@ describe("sgds-combo-box ", () => {
     // should match width parent width
     expect(badge?.clientWidth).to.equal(parentContainer?.clientWidth);
   });
+
+  it("when menu list is updated, and the current value is no longer valid it should null the value", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`<sgds-combo-box
+        multiSelect
+        value="option1;option2"
+        .menuList=${[
+          { label: "Apple", value: "option1" },
+          { label: "Apricot", value: "option2" },
+          { label: "Durian", value: "option3" },
+          { label: "Grapes", value: "option4" },
+          { label: "Orange", value: "option5" }
+        ]}
+      ></sgds-combo-box>`
+    );
+
+    expect(el.value).to.equal("option1;option2");
+
+    el.setAttribute(
+      "menuList",
+      JSON.stringify([
+        { label: "Durian", value: "option3" },
+        { label: "Grapes", value: "option4" },
+        { label: "Orange", value: "option5" }
+      ])
+    );
+
+    await el.updateComplete;
+    expect(el.value).to.equal("");
+  });
+
+  it("when value is updated, it should reflect the new value on the select", async () => {
+    // Create component with initial value
+    const el = await fixture<SgdsComboBox>(
+      html`<sgds-combo-box
+        value="option1;option2"
+        .menuList=${[
+          { label: "Apple", value: "option1" },
+          { label: "Apricot", value: "option2" },
+          { label: "Durian", value: "option3" },
+          { label: "Grapes", value: "option4" },
+          { label: "Orange", value: "option5" }
+        ]}
+      ></sgds-combo-box>`
+    );
+    await el.updateComplete;
+
+    // Get and verify input element
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    expect(input, "Input element should exist").to.exist;
+    expect(input instanceof HTMLInputElement, "Input should be HTMLInputElement").to.be.true;
+
+    // Verify initial values
+    expect(el.value).to.equal("option1;option2");
+
+    // Update value and wait for changes to propagate
+    el.setAttribute("value", "option4;option5");
+    await el.updateComplete;
+
+    // Verify value change
+    expect(el.value).to.equal("option4;option5");
+  });
 });
 
 describe("single select combobox", () => {
@@ -563,6 +625,77 @@ describe("single select combobox", () => {
 
     await sendKeys({ press: "Escape" });
     await waitUntil(() => el.shadowRoot?.activeElement === input());
+  });
+
+  it("when menu list is updated, and the current value is no longer valid it should null the value", async () => {
+    const el = await fixture<SgdsComboBox>(
+      html`<sgds-combo-box
+        value="option1"
+        .menuList=${[
+          { label: "Apple", value: "option1" },
+          { label: "Apricot", value: "option2" },
+          { label: "Durian", value: "option3" },
+          { label: "Grapes", value: "option4" },
+          { label: "Orange", value: "option5" }
+        ]}
+      ></sgds-combo-box>`
+    );
+
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+
+    expect(input.value).to.equal("Apple");
+    expect(el.value).to.equal("option1");
+
+    el.setAttribute(
+      "menuList",
+      JSON.stringify([
+        { label: "Durian", value: "option3" },
+        { label: "Grapes", value: "option4" },
+        { label: "Orange", value: "option5" }
+      ])
+    );
+
+    await el.updateComplete;
+    expect(input.value).to.equal("");
+    expect(el.value).to.equal("");
+  });
+
+  it("when value is updated, it should reflect the new value on the select", async () => {
+    // Create component with initial value
+    const el = await fixture<SgdsComboBox>(
+      html`<sgds-combo-box
+        value="option1"
+        .menuList=${[
+          { label: "Apple", value: "option1" },
+          { label: "Apricot", value: "option2" },
+          { label: "Durian", value: "option3" },
+          { label: "Grapes", value: "option4" },
+          { label: "Orange", value: "option5" }
+        ]}
+      ></sgds-combo-box>`
+    );
+    await el.updateComplete;
+
+    // Get and verify input element
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    expect(input, "Input element should exist").to.exist;
+    expect(input instanceof HTMLInputElement, "Input should be HTMLInputElement").to.be.true;
+
+    // Verify initial values
+    expect(input.value).to.equal("Apple");
+    expect(el.value).to.equal("option1");
+
+    // Update value and wait for changes to propagate
+    el.setAttribute("value", "option4");
+    await el.updateComplete;
+    await new Promise(resolve => setTimeout(resolve, 100)); // Wait for value change to process
+
+    // Verify value change
+    expect(el.value).to.equal("option4");
+
+    // Wait for and verify input update
+    await waitUntil(() => input.value === "Grapes", "Input value should update to Grapes", { timeout: 2000 });
+    expect(input.value).to.equal("Grapes");
   });
 });
 
