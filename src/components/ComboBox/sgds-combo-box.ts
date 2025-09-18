@@ -90,6 +90,7 @@ export class SgdsComboBox extends SelectElement {
 
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
+    console.log("value", this.value);
     // when value change, always emit a change event
     this.emit("sgds-change");
 
@@ -118,7 +119,6 @@ export class SgdsComboBox extends SelectElement {
       this.selectedItems = [...initialSelectedItem];
 
       if (!this.multiSelect) {
-        console.log(this.value), this.selectedItems;
         this.displayValue = initialSelectedItem[0].label;
       }
     }
