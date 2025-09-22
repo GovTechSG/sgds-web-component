@@ -148,7 +148,7 @@ export class SgdsSelect extends SelectElement {
             ?required=${this.required}
             .value=${this.displayValue}
             @blur=${this._handleInputBlur}
-            @change=${() => console.log('native change')}
+            @change=${() => console.log("native change")}
             @focus=${this._handleFocus}
             aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this._controlId}-invalid` : undefined)}
             aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
