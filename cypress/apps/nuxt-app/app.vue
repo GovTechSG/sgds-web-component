@@ -6,6 +6,7 @@
     <Masthead></Masthead>
     <Mainnav></Mainnav>
     <Subnav></Subnav>
+    <Drawer></Drawer>
     <Button></Button>
     <Accordion></Accordion>
     <Icon></Icon>
