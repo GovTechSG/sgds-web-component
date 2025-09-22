@@ -1,3 +1,4 @@
+"use client"
 import dynamic from "next/dynamic"
 const SgdsDatepicker = dynamic(
     () => import("@govtechsg/sgds-web-component/react/datepicker/index.js"),

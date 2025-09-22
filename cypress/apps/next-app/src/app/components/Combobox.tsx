@@ -1,3 +1,4 @@
+"use client"
 import dynamic from "next/dynamic"
 // import SgdsCombobox from "@govtechsg/sgds-web-component/react/combo-box/index.js";
 

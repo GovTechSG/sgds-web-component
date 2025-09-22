@@ -1,3 +1,4 @@
+"use client"
 import SgdsBreadcrumbItem from "@govtechsg/sgds-web-component/react/breadcrumb-item/index.js";
 import dynamic from "next/dynamic"
 const SgdsBreadcrumb = dynamic(
