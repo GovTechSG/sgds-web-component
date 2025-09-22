@@ -3,6 +3,7 @@ import { consume } from "@lit/context";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { SgdsMainnav } from "./sgds-mainnav";
 import { classMap } from "lit/directives/class-map.js";
+import { offset } from "@floating-ui/dom";
 import genId from "../../utils/generateId";
 import dropdownStyle from "../Dropdown/dropdown.css";
 import dropdownMenuStyle from "../Dropdown/dropdown-menu.css";
@@ -271,14 +272,9 @@ export class SgdsMainnavDropdown extends SgdsElement {
     `;
 
     const desktopView = html`<sgds-dropdown
-      .modifierOpt=${[
-        {
-          name: "offset",
-          options: {
-            offset: [0, 0]
-          }
-        }
-      ]}
+      .floatingOpts=${{
+        middleware: [offset(0)]
+      }}
       ?disabled=${this.disabled}
     >
       <a
