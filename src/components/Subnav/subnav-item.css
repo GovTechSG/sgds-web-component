@@ -58,5 +58,6 @@
 
   ::slotted(*) {
     padding: var(--sgds-padding-lg) var(--sgds-padding-none);
+    border-bottom: var(--sgds-border-width-2) solid transparent;
   }
 }
