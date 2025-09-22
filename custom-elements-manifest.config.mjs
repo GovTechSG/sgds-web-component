@@ -114,6 +114,7 @@ export default {
             const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
             if (classDoc?.events) {
               classDoc.events.forEach(event => {
+                if (!event.name) return;
                 event.reactName = `on${pascalCase(event.name)}`;
               });
             }
