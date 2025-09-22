@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <main>
       <div>hello world</div>
-      <Masthead />
+      {/* <Masthead />
       <Mainnav />
       <Accordion />
       <Alert />
@@ -49,9 +49,9 @@ export default function Home() {
       <Breadcrumb />
       <Button />
       <Card />
-      <Checkbox />
+      <Checkbox /> */}
       <Combobox />
-      <Datepicker />
+      {/* <Datepicker />
       <DescriptionList />
       <Divider />
       <Drawer />
@@ -78,7 +78,7 @@ export default function Home() {
       <Textarea />
       <Toast />
       <Tooltip />
-      <Footer />
+      <Footer /> */}
     </main>
   );
 }
