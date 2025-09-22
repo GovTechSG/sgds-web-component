@@ -52,7 +52,7 @@ export class SgdsSelect extends SelectElement {
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
     // when value change, always emit a change event
-    // this.relayNativeEvent(new Event("change", { bubbles: true, composed: true }));
+    this.relayNativeEvent(new Event("change", { bubbles: true, composed: true }));
     this.emit("sgds-change");
 
     if (this.value) {
