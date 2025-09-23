@@ -59,7 +59,7 @@ export const parameters = {
         ["Angular", "Vue", "React", "NextJS"],
         "Style",
         "Form",
-        ["Validation","Custom Validation"],
+        ["Validation", "Custom Validation"],
         "Troubleshooting",
         "Components",
         "Patterns",

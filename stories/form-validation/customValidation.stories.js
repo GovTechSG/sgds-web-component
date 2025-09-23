@@ -48,14 +48,14 @@ const DisableValidationByFormTemplate = args => {
       >
       </sgds-input>
     </form>
-       <script>
+    <script>
       const inputTwo = document.getElementById("custom-validation__input-two-novalidate");
-      inputTwo.addEventListener("sgds-input", (e) => {
-         if(!/^[^a-zA-Z0-9]/.test(e.target.value)) {
-            e.target.setInvalid(false)
+      inputTwo.addEventListener("sgds-input", e => {
+        if (!/^[^a-zA-Z0-9]/.test(e.target.value)) {
+          e.target.setInvalid(false);
         } else {
-            e.target.setInvalid(true)
-            e.target.invalidFeedback = "This is an invalid message";
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "This is an invalid message";
         }
       });
     </script>
