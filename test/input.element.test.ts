@@ -472,21 +472,6 @@ describe("when submitting a form", () => {
     submitButton?.click();
     expect(submitHandler).not.to.have.been.calledOnce;
   });
-  it("when form has novalidate, form submission is proceeds even when input is required", async () => {
-    const form = await fixture<HTMLFormElement>(html`
-      <form novalidate>
-        <sgds-input required></sgds-input>
-        <sgds-button type="submit"></sgds-button>
-      </form>
-    `);
-    const submitButton = form.querySelector<SgdsButton>("sgds-button");
-    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
-    expect(form.reportValidity()).to.equal(false);
-    form.addEventListener("submit", submitHandler);
-    submitButton?.click();
-    await waitUntil(() => submitHandler.calledOnce);
-    expect(submitHandler).to.have.been.calledOnce;
-  });
 });
 
 describe("when resetting a form", () => {
@@ -536,5 +521,102 @@ describe("when resetting a form", () => {
     await input?.updateComplete;
 
     expect(input?.invalid).to.equal(false);
+  });
+});
+
+describe("noValidate disables native and sgds validation behaviours", async () => {
+  it("should disable native validation when form has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input noValidate></sgds-input>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    button?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+  it("should override required prop and  disable native validation when form has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input noValidate required></sgds-input>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    button?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+  it("should override pattern prop and disable native validation when form has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input noValidate pattern="test"></sgds-input>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const input = form.querySelector<SgdsInput>("sgds-input");
+    if (input) input.value = "tes";
+    await input?.updateComplete;
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    button?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+  it("with noValidate, feedback UI does not appear for a required input when touched ", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input noValidate hasFeedback="both" required></sgds-input>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const input = form.querySelector<SgdsInput>("sgds-input");
+    input?.focus();
+    input?.blur();
+    await input?.updateComplete;
+    expect(input?.invalid).to.be.false;
+    expect(input?.shadowRoot?.querySelector("div.invalid-feedback")).to.be.null;
+  });
+});
+
+describe("form novalidate", () => {
+  it("when form has novalidate, form submission proceeds even when input is required", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-input required></sgds-input>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    expect(form.reportValidity()).to.equal(true);
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+  it("when form has novalidate, input does not have any validation stylings", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-input required hasFeedback="both"></sgds-input>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const input = form.querySelector<SgdsInput>("sgds-input");
+    input?.focus();
+    input?.blur();
+    await input?.updateComplete;
+    expect(input?.invalid).to.be.false;
+    expect(input?.shadowRoot?.querySelector("div.invalid-feedback")).to.be.null;
   });
 });

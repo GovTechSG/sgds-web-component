@@ -22,3 +22,31 @@
 <sgds-input value="This is a normal input" valid>
     <sgds-icon name="trash" slot="trailing-icon"></sgds-icon>
 </sgds-input>
+
+
+  <form novalidate>
+        <sgds-input required hasFeedback="both" ></sgds-input>
+        <sgds-button type="submit">Novalidate </sgds-button>
+      </form>
+
+<form>
+    <sgds-input id="no-validation-test" noValidate required hasFeedback="both" ></sgds-input>
+    <sgds-button type="submit">Submit</sgds-button>
+</form>
+
+<script>
+const handleInput = (e) => {
+        if(!/^[^a-zA-Z0-9]/.test(e.target.value)) {
+            e.target.setInvalid(false)
+        } else {
+            e.target.setInvalid(true)
+            e.target.invalidFeedback = "This is an invalid message";
+        }
+    }
+    const handleChange = (e) => {
+        console.log('change event', e);
+    }
+    document.querySelector("#no-validation-test").addEventListener('sgds-input', handleInput);
+    document.querySelector("#no-validation-test").addEventListener('sgds-change', handleChange);
+
+</script>

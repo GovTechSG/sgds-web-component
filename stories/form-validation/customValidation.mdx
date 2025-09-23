@@ -1,0 +1,37 @@
+import { Meta, Markdown, Canvas, Story } from "@storybook/blocks";
+import * as CustomValidationStories from "./customValidation.stories.js";
+
+<Meta title="Form/Custom Validation" />
+
+# Custom Validation
+
+## Disabling validation on individual components using `noValidate` prop
+
+<Canvas of={CustomValidationStories.DisableThroughInput}>
+  <Story of={CustomValidationStories.DisableThroughInput} />
+</Canvas>
+
+## Disabling validation on form level using native `novalidate` attribute
+
+Alternatively, you can disable validation on the form level using the native `novalidate` attribute on the `<form>` element.
+
+When `novalidate` is present on the closest parent `<form>`, all child form components will have their constraint validation and SGDS validation disabled.
+
+<Canvas of={CustomValidationStories.DisableThroughForm}>
+  <Story of={CustomValidationStories.DisableThroughForm} />
+</Canvas>
+
+## Summary status of components supporting custom validation
+
+| **Component**  | **Status**  |
+| -------------- | ----------- |
+| Input          | Implemented |
+| Checkbox       | WIP         |
+| CheckboxGroup  | WIP         |
+| Datepicker     | WIP         |
+| QuantityToggle | WIP         |
+| RadioGroup     | WIP         |
+| Textarea       | WIP         |
+| FileUpload     | WIP         |
+| Select         | WIP         |
+| Combo          | WIP         |
