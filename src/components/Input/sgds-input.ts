@@ -93,7 +93,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   /** Makes the input a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
-  @property({ type: Boolean, reflect: true }) noSgdsValidate = false;
+  @property({ type: Boolean, reflect: true }) noValidate = false;
 
   /**The input's value attribute. */
   @property({ reflect: true }) value = "";

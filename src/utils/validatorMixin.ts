@@ -113,9 +113,11 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
     _mixinSetValidity(flags?: ValidityStateFlags, message?: string, anchor?: HTMLElement): void {
       return this.inputValidationController.setValidity(flags, message, anchor);
     }
-    // Only check for noSgdsValidate prop
+    // Only check for noValidate prop
     _mixinShouldSkipSgdsValidation() {
-      return this.noSgdsValidate;
+      const form = this.closest("form");
+
+      return form?.noValidate || this.noValidate;
     }
 
     /** DECLARED INSTANCE METHODS AND PROPERTIES*/
@@ -127,7 +129,7 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
     declare value: string;
     declare defaultValue: string;
     declare defaultChecked: boolean;
-    declare noSgdsValidate: boolean;
+    declare noValidate: boolean;
   }
 
   return ToBeValidatedElement as Constructor<ToBeValidatedElementInterface> & T;

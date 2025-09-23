@@ -24,8 +24,13 @@
 </sgds-input>
 
 
+  <form novalidate>
+        <sgds-input required hasFeedback="both" ></sgds-input>
+        <sgds-button type="submit">Novalidate </sgds-button>
+      </form>
+
 <form>
-    <sgds-input id="no-validation-test" noSgdsValidate hasFeedback="both"  @sgds-input="handleInput"></sgds-input>
+    <sgds-input id="no-validation-test" noValidate required hasFeedback="both"  @sgds-input="handleInput"></sgds-input>
     <sgds-button type="submit">Submit</sgds-button>
 </form>
 
