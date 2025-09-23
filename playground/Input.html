@@ -30,19 +30,17 @@
       </form>
 
 <form>
-    <sgds-input id="no-validation-test" noValidate required hasFeedback="both"  @sgds-input="handleInput"></sgds-input>
+    <sgds-input id="no-validation-test" noValidate required hasFeedback="both" ></sgds-input>
     <sgds-button type="submit">Submit</sgds-button>
 </form>
 
 <script>
-        const handleInput = (e) => {
-        console.log(e);
-        if(e.target.value === 'test') {
-            e.target.setInvalid(false);
+const handleInput = (e) => {
+        if(!/^[^a-zA-Z0-9]/.test(e.target.value)) {
+            e.target.setInvalid(false)
         } else {
-            e.target.setInvalid(true);
+            e.target.setInvalid(true)
             e.target.invalidFeedback = "This is an invalid message";
-
         }
     }
     const handleChange = (e) => {
