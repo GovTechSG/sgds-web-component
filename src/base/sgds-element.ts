@@ -25,16 +25,6 @@ export default class SgdsElement extends LitElement {
 
     return event;
   }
-  relayNativeEvent(event: Event, eventOptions?: EventInit) {
-    event.stopImmediatePropagation();
-
-    this.dispatchEvent(
-      new (event.constructor as typeof Event)(event.type, {
-        ...event,
-        ...eventOptions
-      })
-    );
-  }
   static define(name: string, elementConstructor = this, options: ElementDefinitionOptions = {}) {
     const currentlyRegisteredConstructor = customElements.get(name) as CustomElementConstructor | typeof SgdsElement;
 
