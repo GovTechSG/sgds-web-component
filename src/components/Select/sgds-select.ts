@@ -14,7 +14,6 @@ import SelectItem from "./select-item";
  * @event sgds-change - Emitted when the select value changes.
  * @event sgds-focus -  Emitted when user input is focused.
  * @event sgds-blur -  Emitted when user input is blurred.
- * @event change -  Emitted when the select value changes (native event)
  *
  */
 export class SgdsSelect extends SelectElement {
@@ -52,7 +51,6 @@ export class SgdsSelect extends SelectElement {
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
     // when value change, always emit a change event
-    this.relayNativeEvent(new Event("change", { bubbles: true, composed: true }));
     this.emit("sgds-change");
 
     if (this.value) {
