@@ -272,8 +272,7 @@ describe("sgds-dropdown", () => {
 
     expect(menuEl.getAttribute("data-placement")).to.equal("bottom-start");
   });
-  // //Popper attri data-popper-placemetn not responding to test changes in open-wc
-  // //unsure why not working when console logging values are bottom-end
+
   it("when menuAlignRight is true on default dropdown, floatingOpts placement is bottom-end", async () => {
     const el = await fixture<SgdsDropdown>(
       html`<sgds-dropdown menuAlignRight><sgds-button slot="toggler">Dropdown</sgds-button></sgds-dropdown>`
