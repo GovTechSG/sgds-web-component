@@ -1,3 +1,28 @@
+## v3.4.0 (2025-09-22)
+
+### Feat
+
+- **drawer**: add footer slot
+- **drawer**: add size prop
+- **Card**: console error logic if both image and icon are present
+- **Card**: handle upper slot styles
+- **Card**: new upper slot
+
+### Fix
+
+- **drawer**: eliminate flickering in SSR
+- **ComboBox**: resolving re-rendering of menulist and badge truncation
+- **Modal**: change positioning of close button to relative
+- **Modal**: replace position relative with higher z-index to show the modal-panel
+- **mainnav**: close menu on mobile when link is clicked (#374)
+- **mainanv**: close menu on mobile when link is clicked
+- **cards**: remove the paragraph when empty slot (#373)
+- **cards**: remove the paragraph when empty slot
+
+### Refactor
+
+- **Mainnav**: use context to tell mainnavdropdown if the mainnav has complete expanded
+
 ## v3.3.2 (2025-09-04)
 
 ### Fix

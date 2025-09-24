@@ -1,6 +1,6 @@
 {
   "name": "@govtechsg/sgds-web-component",
-  "version": "3.3.2",
+  "version": "3.4.0",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -43,6 +43,14 @@
     {
       "name": "clukhei",
       "url": "https://github.com/clukhei"
+    },
+    {
+      "name": "tonghauhive",
+      "url": "https://github.com/tonghauhive"
+    },
+    {
+      "name": "amandac628",
+      "url": "https://github.com/amandac628"
     }
   ],
   "license": "MIT",
