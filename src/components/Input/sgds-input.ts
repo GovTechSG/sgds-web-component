@@ -93,6 +93,8 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   /** Makes the input a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
+  @property({ type: Boolean, reflect: true }) noValidate = false;
+
   /**The input's value attribute. */
   @property({ reflect: true }) value = "";
 
@@ -148,9 +150,10 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
 
   protected _handleBlur() {
     const sgdsBlur = this.emit("sgds-blur", { cancelable: true });
-    this.setInvalid(!this._mixinCheckValidity());
+    if (this._mixinShouldSkipSgdsValidation()) return;
     if (sgdsBlur.defaultPrevented) return;
 
+    this.setInvalid(!this._mixinCheckValidity());
     this._isTouched = true;
   }
   private _handleClick() {
@@ -160,6 +163,8 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   protected _handleChange(e: Event) {
     this.value = this.input.value;
     const sgdsChange = this.emit("sgds-change", { cancelable: true });
+
+    if (this._mixinShouldSkipSgdsValidation()) return;
     if (sgdsChange.defaultPrevented) return;
 
     super._mixinHandleChange(e);
@@ -168,12 +173,14 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
     this.value = this.input.value;
     const sgdsInput = this.emit("sgds-input", { cancelable: true });
 
+    if (this._mixinShouldSkipSgdsValidation()) return;
     if (sgdsInput.defaultPrevented) return;
     super._mixinHandleInputChange(e);
   }
   /** @internal */
   @watch("_isTouched", { waitUntilFirstUpdate: true })
   _handleIsTouched() {
+    if (this._mixinShouldSkipSgdsValidation()) return;
     if (this._isTouched) {
       this.setInvalid(!this._mixinCheckValidity());
     }
@@ -250,6 +257,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   }
   protected _renderFeedback() {
     const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
+
     return this.invalid && wantFeedbackText
       ? html` <div class="invalid-feedback-container">
           <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
