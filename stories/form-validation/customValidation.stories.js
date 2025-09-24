@@ -21,15 +21,13 @@ const DisableValidationByInputTemplate = args => {
       </sgds-input>
     </form>
     <script>
-      const input = document.querySelector("sgds-input#custom-validation__input-novalidate");
-      input.addEventListener("sgds-input", () => {
+      const inputOne = document.querySelector("sgds-input#custom-validation__input-novalidate");
+      inputOne.addEventListener("sgds-input", e => {
         if (!/^[^a-zA-Z0-9]/.test(e.target.value)) {
-          input.setInvalid(false);
+          e.target.setInvalid(false);
         } else {
-          input.setInvalid(true);
-          alert("invalid");
-          input.invalidFeedback = "This is an invalid message";
-          input.requestUpdate();
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "This is an invalid message";
         }
       });
     </script>
@@ -64,7 +62,7 @@ const DisableValidationByFormTemplate = args => {
 
 export const DisableThroughForm = {
   render: DisableValidationByFormTemplate.bind({}),
-  name: "Disable native validation through form",
+  name: "Form novalidate attribute",
   args: {},
   parameters: {},
   tags: ["!dev"]
@@ -72,7 +70,7 @@ export const DisableThroughForm = {
 
 export const DisableThroughInput = {
   render: DisableValidationByInputTemplate.bind({}),
-  name: "Disable native validation through component",
+  name: "Component noValidate property",
   args: {},
   parameters: {},
   tags: ["!dev"]
