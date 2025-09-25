@@ -3,23 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 3002",
+    "dev": "next dev --turbopack --port 3002",
     "build": "next build",
     "start": "next start --port 3002",
     "lint": "next lint"
   },
   "dependencies": {
     "@govtechsg/sgds-web-component": "file:../../../lib",
-    "next": "14.2.3",
-    "react": "^18",
-    "react-dom": "^18"
+    "next": "15.5.3",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "19.1.13",
+    "@types/react-dom": "19.1.9",
     "eslint": "^8",
-    "eslint-config-next": "14.2.3",
+    "eslint-config-next": "15.5.3",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@types/react": "19.1.13",
+    "@types/react-dom": "19.1.9"
   }
 }
