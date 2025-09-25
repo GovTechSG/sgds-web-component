@@ -8,7 +8,7 @@ import { SelectElement, SgdsSelectItemData } from "../../base/select-element";
 import { watch } from "../../utils/watch";
 import { SgdsBadge } from "../Badge/sgds-badge";
 import SgdsIcon from "../Icon/sgds-icon";
-import { ComboBoxItem } from "./combo-box-item";
+import { SgdsComboBoxOption } from "./sgds-combo-box-option";
 import comboBoxStyle from "./combo-box.css";
 
 import { repeat } from "lit/directives/repeat.js";
@@ -35,7 +35,7 @@ export class SgdsComboBox extends SelectElement {
 
   /** @internal */
   static dependencies = {
-    "sgds-combo-box-item": ComboBoxItem,
+    "sgds-combo-box-option": SgdsComboBoxOption,
     "sgds-icon": SgdsIcon,
     "sgds-badge": SgdsBadge
   };
@@ -165,10 +165,10 @@ export class SgdsComboBox extends SelectElement {
   }
 
   /**
-   * Called whenever an <sgds-combo-box-item> dispatches sgds-select"
+   * Called whenever an <sgds-combo-box-option> dispatches sgds-select"
    */
   protected async _handleItemSelected(e: CustomEvent) {
-    const itemEl = e.target as ComboBoxItem;
+    const itemEl = e.target as SgdsComboBoxOption;
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
     const foundItem = this.filteredMenuList.find(i => i.value.toString() === itemValueAttr) || {
@@ -193,7 +193,7 @@ export class SgdsComboBox extends SelectElement {
   }
 
   private _handleItemUnselect(e: CustomEvent) {
-    const itemEl = e.target as ComboBoxItem;
+    const itemEl = e.target as SgdsComboBoxOption;
 
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
@@ -286,7 +286,7 @@ export class SgdsComboBox extends SelectElement {
               }
 
               return html`
-                <sgds-combo-box-item
+                <sgds-combo-box-option
                   ?active=${isActive}
                   ?checkbox=${this.multiSelect}
                   value=${item.value}
@@ -294,7 +294,7 @@ export class SgdsComboBox extends SelectElement {
                   @sgds-unselect=${this._handleItemUnselect}
                 >
                   ${item.label}
-                </sgds-combo-box-item>
+                </sgds-combo-box-option>
               `;
             }
           );
