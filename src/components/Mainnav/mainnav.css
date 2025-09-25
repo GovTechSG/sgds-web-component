@@ -1,5 +1,6 @@
 :host {
   z-index: 1200;
+  position: relative;
 }
 
 nav {
@@ -53,9 +54,12 @@ nav {
   margin-bottom: 0;
 }
 
+nav > .navbar-body .navbar-nav {
+  height: 100dvh;
+}
+
 nav > .navbar-body {
-  position: absolute;
-  bottom: 0;
+  position: fixed;
   z-index: 2000;
   width: 100%;
   background-color: var(--sgds-surface-default);
