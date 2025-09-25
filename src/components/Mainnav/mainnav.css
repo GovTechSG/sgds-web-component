@@ -1,8 +1,5 @@
 :host {
   z-index: 1200;
-}
-
-:host([expand="always"]) {
   position: relative;
 }
 
@@ -57,9 +54,12 @@ nav {
   margin-bottom: 0;
 }
 
+nav > .navbar-body .navbar-nav {
+  height: 100dvh;
+}
+
 nav > .navbar-body {
-  position: absolute;
-  bottom: 0;
+  position: fixed;
   z-index: 2000;
   width: 100%;
   background-color: var(--sgds-surface-default);
@@ -100,10 +100,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 }
 
 @media (min-width: 576px) {
-  :host([expand="sm"]) {
-    position: relative;
-  }
-
   .navbar-expand-sm {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -128,10 +124,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   }
 }
 @media (min-width: 768px) {
-  :host([expand="md"]) {
-    position: relative;
-  }
-
   .navbar-expand-md {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -156,10 +148,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   }
 }
 @media (min-width: 1024px) {
-  :host([expand="lg"]) {
-    position: relative;
-  }
-
   .navbar-expand-lg {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -184,10 +172,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   }
 }
 @media (min-width: 1280px) {
-  :host([expand="xl"]) {
-    position: relative;
-  }
-
   .navbar-expand-xl {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -217,10 +201,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   }
 }
 @media (min-width: 1440px) {
-  :host([expand="xxl"]) {
-    position: relative;
-  }
-
   .navbar-expand-xxl {
     flex-wrap: nowrap;
     justify-content: flex-start;
