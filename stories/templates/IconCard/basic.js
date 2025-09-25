@@ -30,7 +30,7 @@ export const Template = args =>
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
           <sgds-badge variant="neutral" outlined>Research</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-icon-card>

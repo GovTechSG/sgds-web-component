@@ -22,7 +22,7 @@ export const Template = args =>
         <span slot="description"
           >Some quick example text to build on the card title and make up the bulk of the card's content.</span
         >
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -37,7 +37,7 @@ export const Template = args =>
           >Some quick example text to build on the card title and make up the bulk of the card's content. Some quick
           example text to build on the card title and make up the bulk of the card's content.</span
         >
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -48,7 +48,7 @@ export const Template = args =>
         <span slot="description"
           >Some quick example text to build on the card title and make up the bulk of the card's content.</span
         >
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -60,7 +60,7 @@ export const Template = args =>
           Some quick example text to build on the card title and make up the bulk of the card's content. Some quick
           example text to build on the card title and make up the bulk of the card's content.
         </span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
