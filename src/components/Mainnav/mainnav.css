@@ -3,10 +3,6 @@
   position: relative;
 }
 
-:host([expand="always"]) {
-  position: relative;
-}
-
 nav {
   background-color: var(--sgds-surface-default);
   box-shadow: 0px 2px 2px 0px rgba(14, 14, 14, 0.08);
@@ -104,10 +100,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 }
 
 @media (min-width: 576px) {
-  :host([expand="sm"]) {
-    position: relative;
-  }
-
   .navbar-expand-sm {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -132,10 +124,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   }
 }
 @media (min-width: 768px) {
-  :host([expand="md"]) {
-    position: relative;
-  }
-
   .navbar-expand-md {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -160,10 +148,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   }
 }
 @media (min-width: 1024px) {
-  :host([expand="lg"]) {
-    position: relative;
-  }
-
   .navbar-expand-lg {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -188,10 +172,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   }
 }
 @media (min-width: 1280px) {
-  :host([expand="xl"]) {
-    position: relative;
-  }
-
   .navbar-expand-xl {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -221,10 +201,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   }
 }
 @media (min-width: 1440px) {
-  :host([expand="xxl"]) {
-    position: relative;
-  }
-
   .navbar-expand-xxl {
     flex-wrap: nowrap;
     justify-content: flex-start;
