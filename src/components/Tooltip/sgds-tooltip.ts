@@ -1,7 +1,7 @@
 import { html } from "lit";
 import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
-import { computePosition, offset, flip, shift, hide, autoUpdate } from "@floating-ui/dom";
+import { computePosition, offset, flip, shift, hide, autoUpdate, Strategy } from "@floating-ui/dom";
 import SgdsElement from "../../base/sgds-element";
 import tooltipStyle from "./tooltip.css";
 
@@ -95,6 +95,7 @@ export class SgdsTooltip extends SgdsElement {
       this._tooltipTargetElements[0],
       this._tooltipBubble.value,
       {
+        strategy: "fixed" as Strategy,
         placement: this.placement,
         middleware: [offset(8), flip(), shift(), hide()]
       }
