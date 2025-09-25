@@ -11,7 +11,7 @@ import SgdsSelectOption from "./sgds-select-option";
 /**
  * @summary Select is used to make one selection from a list through keyboard or mouse actions
  *
- * @event sgds-select - Emitted when an option is selected and the value of select is updated. @deprecated
+ * @event sgds-select - Emitted when an option is selected and the value of select is updated.
  * @event sgds-change - Emitted when the select value changes.
  * @event sgds-focus -  Emitted when user input is focused.
  * @event sgds-blur -  Emitted when user input is blurred.
@@ -50,7 +50,7 @@ export class SgdsSelect extends SelectElement {
       this.selectedItems = [...initialSelectedItem];
       this.displayValue = initialSelectedItem[0].label;
 
-     this._setActiveToOption()
+      this._setActiveToOption();
     }
 
     this.input = await this._input;

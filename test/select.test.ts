@@ -5,7 +5,7 @@ import "../src/index";
 import { assert } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
-import SelectItem from "../src/components/Select/select-item";
+import SgdsSelectOption from "../src/components/Select/sgds-select-option";
 
 describe("<sgds-select>", () => {
   it("matches shadowDom semantically", async () => {
@@ -40,20 +40,20 @@ describe("<sgds-select>", () => {
             part="menu"
             tabindex="-1"
             >
-            <sgds-select-item
+            <sgds-select-option
               aria-disabled="false"
               role="menuitem"
               value="option1"
             >
               Option 1
-            </sgds-select-item>
-            <sgds-select-item
+            </sgds-select-option>
+            <sgds-select-option
               aria-disabled="false"
               role="menuitem"
               value="option2"
             >
               Option 2
-            </sgds-select-item>
+            </sgds-select-option>
           </ul>
             `,
       { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
@@ -165,7 +165,7 @@ describe("<sgds-select>", () => {
     input?.click();
     await waitUntil(() => el.shadowRoot?.querySelector(".dropdown-menu.show"));
 
-    const item = el.shadowRoot?.querySelectorAll("sgds-select-item")[0] as SelectItem;
+    const item = el.shadowRoot?.querySelectorAll("sgds-select-option")[0] as SgdsSelectOption;
     const itemContent = item.shadowRoot?.querySelector("div.normal-item-content") as HTMLDivElement;
     itemContent?.click();
 
@@ -196,7 +196,7 @@ describe("<sgds-select>", () => {
       ></sgds-select>`
     );
     const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
-    const durianItem = el.shadowRoot?.querySelector("sgds-select-item[value='option3']") as SelectItem;
+    const durianItem = el.shadowRoot?.querySelector("sgds-select-option[value='option3']") as SgdsSelectOption;
 
     expect(input.value).to.equal("Durian");
     expect(el.value).to.equal("option3");
@@ -219,7 +219,7 @@ describe("<sgds-select>", () => {
     await sendKeys({ press: "ArrowDown" });
 
     await waitUntil(() => {
-      const comboItem1 = el.shadowRoot?.querySelectorAll("sgds-select-item")[0];
+      const comboItem1 = el.shadowRoot?.querySelectorAll("sgds-select-option")[0];
       return el.shadowRoot?.activeElement === comboItem1;
     });
 
@@ -322,7 +322,7 @@ describe("select >> when submitting a form", () => {
     input()?.click();
     await waitUntil(() => select()?.shadowRoot?.querySelector(".dropdown-menu.show"));
 
-    const itemOne = select()?.shadowRoot?.querySelectorAll("sgds-select-item")[0] as SelectItem;
+    const itemOne = select()?.shadowRoot?.querySelectorAll("sgds-select-option")[0] as SgdsSelectOption;
 
     itemOne?.click();
     await waitUntil(() => select()?.value === "option1");
@@ -372,7 +372,7 @@ describe("select >> when submitting a form", () => {
     input?.focus();
     await sendKeys({ press: "ArrowDown" });
     await waitUntil(() => {
-      const selectItem1 = el.shadowRoot?.querySelectorAll("sgds-select-item")[0];
+      const selectItem1 = el.shadowRoot?.querySelectorAll("sgds-select-option")[0];
       return el.shadowRoot?.activeElement === selectItem1;
     });
     expect(el.invalid).to.be.false;

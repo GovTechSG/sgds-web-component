@@ -11,7 +11,7 @@ export class OptionElement extends SgdsElement {
 
   /** Disables the Item */
   @property({ type: Boolean, reflect: true }) disabled = false;
-  
+
   /** The value of the option item */
   @property({ type: String }) value: string;
 
@@ -33,5 +33,5 @@ export class OptionElement extends SgdsElement {
     `;
   }
 
-  declare protected _renderItemContent: () => TemplateResult<1>;
+  protected declare _renderItemContent: () => TemplateResult<1>;
 }
