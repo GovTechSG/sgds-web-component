@@ -15,7 +15,7 @@ export class CardElement extends SgdsElement {
   /** @internal */
   @query("a.card") card: HTMLAnchorElement;
 
-  /** Extends the link passed in the `link` slot to the entire card. Prefer using the `footer` slot for links going forward. The `link` slot is still supported for backward compatibility, but is **deprecated** and will be removed in a future release.
+  /** Extends the link passed in either `footer` or `link`(deprecated) slot.
    */
   @property({ type: Boolean, reflect: true }) stretchedLink = false;
 
