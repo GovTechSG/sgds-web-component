@@ -26,7 +26,7 @@ const StretchedLinkTemplate = () =>
         <div slot="lower">
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
@@ -76,7 +76,7 @@ const OrientationTemplate = () =>
         <div slot="lower">
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
@@ -104,7 +104,7 @@ const OrientationTemplate = () =>
         <div slot="lower">
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
@@ -146,7 +146,7 @@ const ImagePositionTemplate = () => {
         <div slot="lower">
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
@@ -174,7 +174,7 @@ const ImagePositionTemplate = () => {
         <div slot="lower">
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
@@ -202,7 +202,7 @@ const ImagePositionTemplate = () => {
         <div slot="lower">
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
@@ -230,7 +230,7 @@ const ImagePositionTemplate = () => {
         <div slot="lower">
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
@@ -273,7 +273,7 @@ const ImageAdjustmentTemplate = () => {
         <div slot="lower">
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
@@ -301,7 +301,7 @@ const ImageAdjustmentTemplate = () => {
         <div slot="lower">
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
@@ -329,7 +329,7 @@ const ImageAdjustmentTemplate = () => {
         <div slot="lower">
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
@@ -387,7 +387,7 @@ const NoPaddingTemplate = () =>
         <div slot="lower">
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
@@ -414,7 +414,7 @@ const NoPaddingTemplate = () =>
         <div slot="lower">
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>

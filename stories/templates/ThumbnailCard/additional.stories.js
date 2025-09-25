@@ -41,7 +41,7 @@ const OrientationTemplate = () =>
         <div slot="lower">
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-thumbnail-card>
@@ -67,7 +67,7 @@ const OrientationTemplate = () =>
         <div slot="lower">
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-thumbnail-card>
@@ -123,7 +123,7 @@ const NoPaddingTemplate = () =>
         <div slot="lower">
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-thumbnail-card>
@@ -149,7 +149,7 @@ const NoPaddingTemplate = () =>
         <div slot="lower">
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-thumbnail-card>
