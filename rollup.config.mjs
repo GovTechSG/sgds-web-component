@@ -14,14 +14,12 @@ const external = [
   "@lit",
   "lit",
   "lit-element",
-  "@popperjs",
   /@open-wc\/.*/,
-  "bootstrap",
   "tslib",
   /lit\/.*/,
-  /bootstrap\/.*/,
   "imask",
-  "date-fns"
+  "date-fns",
+  "@floating-ui"
 ];
 
 const copyPlugin = copy({
