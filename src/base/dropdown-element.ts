@@ -1,6 +1,6 @@
 import { property } from "lit/decorators.js";
 import { Ref, createRef } from "lit/directives/ref.js";
-import { computePosition, flip, shift, offset, Placement, Middleware, autoUpdate } from "@floating-ui/dom";
+import { computePosition, flip, shift, offset, Placement, Middleware, autoUpdate, Strategy } from "@floating-ui/dom";
 import SgdsElement from "./sgds-element";
 import generateId from "../utils/generateId";
 
@@ -191,6 +191,7 @@ export class DropdownElement extends SgdsElement {
     }
 
     const opts = {
+      strategy: "fixed" as Strategy,
       placement,
       ...this.floatingOpts,
       middleware
