@@ -19,9 +19,6 @@
   overflow-y: auto;
   z-index: 500;
 }
-.dropdown-menu.show {
-  display: block;
-}
 
 .nav-tabs .dropdown-menu {
   border-top-left-radius: 0;
