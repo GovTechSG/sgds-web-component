@@ -165,7 +165,7 @@ export class SgdsSelect extends SelectElement {
         ${this._renderLabel()}
         <!-- The input -->
         ${this._renderInput()} ${this._renderFeedback()}
-        <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1">
+        <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
           ${this._renderMenu()}
         </ul>
       </div>

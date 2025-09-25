@@ -44,18 +44,9 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
 
   constructor() {
     super();
-    this.modifierOpt = [
-      {
-        name: "offset",
-        options: {
-          /**
-           * size of calendar `--sgds-dimension-320` offset with
-           *  size of icon button `--sgds-dimension-48`
-           */
-          offset: [-320 + 48, 8]
-        }
-      }
-    ];
+    this.floatingOpts = {
+      placement: "bottom-end"
+    };
   }
 
   /** When true, adds required attribute to input element */
@@ -473,6 +464,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
           role="dialog"
           aria-label=${this._dialogAriaLabels[this.view]}
           @click=${(event: MouseEvent) => event.stopPropagation()}
+          ${ref(this.menuRef)}
         >
           <sgds-datepicker-header
             .view=${this.view}

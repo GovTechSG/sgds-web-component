@@ -1,10 +1,6 @@
-import type { StrictModifiers } from "@popperjs/core";
-import * as Popper from "@popperjs/core";
-import Dropdown from "bootstrap/js/src/dropdown";
-import type { Dropdown as BsDropdown } from "bootstrap";
-import { property, state } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { Ref, createRef } from "lit/directives/ref.js";
-import mergeDeep from "../utils/mergeDeep";
+import { computePosition, flip, shift, offset, Placement, Middleware, autoUpdate, Strategy } from "@floating-ui/dom";
 import SgdsElement from "./sgds-element";
 import generateId from "../utils/generateId";
 
@@ -13,7 +9,6 @@ const ARROW_UP = "ArrowUp";
 const ESC = "Escape";
 
 export type DropDirection = "left" | "right" | "up" | "down";
-type DropdownModifier = StrictModifiers | Popper.Modifier<string, object>;
 
 /**
  * @event sgds-show - Emitted event when show instance is called
@@ -27,8 +22,6 @@ export class DropdownElement extends SgdsElement {
 
   /** @internal */
   protected myDropdown: Ref<HTMLElement> = createRef();
-  /** @internal */
-  protected bsDropdown: BsDropdown = null;
 
   /** @internal Unique id generated for the dropdown menu */
   protected dropdownMenuId: string = generateId("dropdown-menu", "div");
@@ -45,16 +38,9 @@ export class DropdownElement extends SgdsElement {
   @property({ type: String, reflect: true, state: true })
   protected drop: DropDirection = "down";
 
-  /**  Additional configuration to pass to Popper.js. See https://popper.js.org/ for config opts */
+  /**  Additional configuration to pass to Floating UI. */
   @property({ type: Object })
-  popperOpts = {};
-
-  /** @internal */
-  @state()
-  dropdownConfig: Partial<Popper.Options>;
-  /** @internal */
-  @property({ type: Array })
-  protected modifierOpt: DropdownModifier[] = [];
+  floatingOpts: { placement?: Placement; middleware?: Array<Middleware> } = {};
 
   /** When true, dropdown menu shows on first load */
   @property({ type: Boolean, reflect: true })
@@ -67,117 +53,163 @@ export class DropdownElement extends SgdsElement {
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  /** Makes the input readonly. */
+  @property({ type: Boolean, reflect: true }) readonly = false;
+
+  private _cleanupAutoUpdate?: () => void;
+
+  /** @internal Reference to the floating menu element */
+  protected menuRef: Ref<HTMLElement> = createRef();
+
   connectedCallback() {
     super.connectedCallback();
 
     if (this.close !== "inside") {
-      document.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
+      document.addEventListener("click", this._handleClickOutOfElement);
     }
+    this.addEventListener("keydown", this._handleKeyboardMenuEvent);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    document.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this));
+    document.removeEventListener("click", this._handleClickOutOfElement);
+    this.removeEventListener("keydown", this._handleKeyboardMenuEvent);
+    if (this._cleanupAutoUpdate) {
+      this._cleanupAutoUpdate();
+      this._cleanupAutoUpdate = undefined;
+    }
   }
 
   firstUpdated() {
-    this.bsDropdown = new Dropdown(this.myDropdown.value, {
-      // autoClose not working as bootstrap is using attribute data-bs-toggle="dropdown" to configure autoclose. But it doesnt look into this attribute in the shadow dom
-      reference: "toggle", // working
-      popperConfig: (defaultConfig?: Partial<Popper.Options>) => {
-        //working
-        this.dropdownConfig = {
-          placement: "bottom-start",
-          strategy: "fixed",
-          modifiers: !this.noFlip
-            ? this.modifierOpt
-            : [
-                ...this.modifierOpt,
-                {
-                  name: "flip",
-                  options: { fallbackPlacements: [] }
-                }
-              ]
-        };
-
-        switch (this.drop) {
-          case "up":
-            this.dropdownConfig.placement = this.menuAlignRight ? "top-end" : "top-start";
-            break;
-          case "right":
-            this.dropdownConfig.placement = "right-start";
-            break;
-          case "left":
-            this.dropdownConfig.placement = "left-start";
-            break;
-          case "down":
-            this.dropdownConfig.placement = this.menuAlignRight ? "bottom-end" : "bottom-start";
-            break;
-          default:
-            this.dropdownConfig.placement = undefined;
-            break;
-        }
-        return mergeDeep(defaultConfig, mergeDeep(this.dropdownConfig, this.popperOpts));
-      }
-    });
-
-    this.myDropdown.value.addEventListener("show.bs.dropdown", () => {
-      this.menuIsOpen = true;
-      this.emit("sgds-show");
-    });
-
-    this.myDropdown.value.addEventListener("shown.bs.dropdown", () => {
-      this.menuIsOpen = true;
-      this.emit("sgds-after-show");
-    });
-
-    this.myDropdown.value.addEventListener("hide.bs.dropdown", () => {
-      this.menuIsOpen = false;
-      this.emit("sgds-hide");
-    });
-
-    this.myDropdown.value.addEventListener("hidden.bs.dropdown", () => {
-      this.menuIsOpen = false;
-      this.emit("sgds-after-hide");
-    });
-
-    this.addEventListener("keydown", this._handleKeyboardMenuEvent);
+    // Optionally open menu on first load
+    if (this.menuIsOpen) {
+      this.updateFloatingPosition();
+    }
   }
 
   /** When invoked, opens the dropdown menu */
-  public showMenu() {
-    this.bsDropdown.show();
+  public async showMenu() {
+    if (this.disabled || this.menuIsOpen) return;
+    this.menuIsOpen = true;
+    this.emit("sgds-show");
+    await this.updateFloatingPosition();
+    this.emit("sgds-after-show");
+
+    if (this.myDropdown.value && this.menuRef.value) {
+      this._cleanupAutoUpdate = autoUpdate(this.myDropdown.value, this.menuRef.value, () =>
+        this.updateFloatingPosition()
+      );
+    }
   }
 
   /** When invoked, hides the dropdown menu */
-  public hideMenu() {
-    this.bsDropdown.hide();
+  public async hideMenu() {
+    if (!this.menuIsOpen) return;
+    this.emit("sgds-hide");
+    this.menuIsOpen = false;
+    setTimeout(() => this.emit("sgds-after-hide"), 0);
+
+    if (this._cleanupAutoUpdate) {
+      this._cleanupAutoUpdate();
+      this._cleanupAutoUpdate = undefined;
+    }
   }
 
   toggleMenu() {
-    this.bsDropdown.toggle();
+    if (this.menuIsOpen) {
+      this.hideMenu();
+    } else {
+      this.showMenu();
+    }
   }
 
-  protected _handleKeyboardMenuEvent(e: KeyboardEvent) {
+  protected _handleKeyboardMenuEvent = (e: KeyboardEvent) => {
+    if (this.readonly) return;
     switch (e.key) {
       case ARROW_DOWN:
-        e.preventDefault();
-        if (!this.menuIsOpen) return this.showMenu();
-        break;
       case ARROW_UP:
         e.preventDefault();
-        if (!this.menuIsOpen) return this.showMenu();
+        if (!this.menuIsOpen) this.showMenu();
         break;
       case ESC:
-        return this.hideMenu();
+        this.hideMenu();
+        break;
       default:
         break;
     }
-  }
+  };
 
-  private _handleClickOutOfElement(e: MouseEvent, self: DropdownElement) {
-    if (!e.composedPath().includes(self)) {
+  private _handleClickOutOfElement = (e: MouseEvent) => {
+    if (!this.menuIsOpen) return;
+    if (!e.composedPath().includes(this)) {
       this.hideMenu();
     }
+  };
+
+  protected mergeMiddleware(defaults: Middleware[], custom: Middleware[]): Middleware[] {
+    const getType = (mw: Middleware) => mw?.name || mw?.constructor?.name;
+    const customTypes = custom.map(getType);
+
+    const merged = defaults
+      .map(def => {
+        const type = getType(def);
+        const customIdx = customTypes.indexOf(type);
+        return customIdx !== -1 ? custom[customIdx] : def;
+      })
+
+      .concat(custom.filter(c => !defaults.some(def => getType(def) === getType(c))));
+    return merged;
+  }
+
+  protected async updateFloatingPosition() {
+    if (!this.myDropdown.value || !this.menuRef.value) return;
+
+    let placement: Placement = "bottom-start";
+    switch (this.drop) {
+      case "up":
+        placement = this.menuAlignRight ? "top-end" : "top-start";
+        break;
+      case "right":
+        placement = "right-start";
+        break;
+      case "left":
+        placement = "left-start";
+        break;
+      case "down":
+        placement = this.menuAlignRight ? "bottom-end" : "bottom-start";
+        break;
+      default:
+        placement = "bottom-start";
+        break;
+    }
+
+    const defaultMiddleware = [offset(8), !this.noFlip ? flip() : undefined, shift()].filter(Boolean);
+
+    let middleware = defaultMiddleware;
+    if (Array.isArray(this.floatingOpts.middleware) && this.floatingOpts.middleware.length > 0) {
+      middleware = this.mergeMiddleware(defaultMiddleware, this.floatingOpts.middleware.filter(Boolean));
+    }
+
+    const opts = {
+      strategy: "fixed" as Strategy,
+      placement,
+      ...this.floatingOpts,
+      middleware
+    };
+
+    const {
+      x,
+      y,
+      strategy,
+      placement: computedPlacement
+    } = await computePosition(this.myDropdown.value, this.menuRef.value, opts);
+
+    this.menuRef.value.setAttribute("data-placement", computedPlacement);
+
+    Object.assign(this.menuRef.value.style, {
+      position: strategy,
+      left: `${x}px`,
+      top: `${y}px`
+    });
   }
 }

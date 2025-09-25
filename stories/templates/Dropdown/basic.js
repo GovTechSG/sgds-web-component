@@ -5,7 +5,7 @@ export const Template = ({
   noFlip,
   menuAlignRight,
   drop,
-  popperOpts,
+  floatingOpts,
   variant,
   active,
   href,
@@ -19,7 +19,7 @@ export const Template = ({
       ?noFlip=${noFlip}
       drop=${ifDefined(drop)}
       ?menuAlignRight=${menuAlignRight}
-      popperOpts=${ifDefined(popperOpts)}
+      floatingOpts=${ifDefined(floatingOpts)}
       variant=${ifDefined(variant)}
       close=${ifDefined(close)}
       ?menuIsOpen=${menuIsOpen}

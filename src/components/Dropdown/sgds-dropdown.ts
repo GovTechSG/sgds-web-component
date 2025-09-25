@@ -5,6 +5,7 @@ import { DropdownListElement } from "../../base/dropdown-list-element";
 import { watch } from "../../utils/watch";
 import dropdownMenuStyle from "./dropdown-menu.css";
 import dropdownStyle from "./dropdown.css";
+
 export type DropDirection = "left" | "right" | "up" | "down";
 export type DropdownButtonVariant =
   | "primary"
@@ -24,17 +25,10 @@ export type DropdownButtonVariant =
  */
 export class SgdsDropdown extends DropdownListElement {
   static styles = [...DropdownListElement.styles, dropdownStyle, dropdownMenuStyle];
+
   constructor() {
     super();
-    /**@internal */
-    this.modifierOpt = [
-      {
-        name: "offset",
-        options: {
-          offset: [0, 8]
-        }
-      }
-    ];
+    this.menuRef = ref();
   }
 
   /** Controls auto-flipping of menu */
@@ -52,17 +46,18 @@ export class SgdsDropdown extends DropdownListElement {
   @queryAssignedElements({ slot: "toggler", flatten: true })
   private _toggler: Array<HTMLElement>;
 
-  private _handleCloseMenu() {
-    const button = this._toggler[0];
-    button.focus();
-  }
+  protected menuRef;
 
-  private _handleClick() {
+  private async _handleClick() {
     if (this.disabled) {
       return;
     }
-
     this.toggleMenu();
+  }
+
+  private _handleCloseMenu() {
+    const button = this._toggler[0];
+    button?.focus();
   }
 
   async connectedCallback() {
@@ -77,7 +72,7 @@ export class SgdsDropdown extends DropdownListElement {
   async firstUpdated() {
     super.firstUpdated();
     if (this.menuIsOpen) {
-      this.showMenu();
+      await this.showMenu();
     }
     this._handleDisabled();
   }
@@ -85,13 +80,15 @@ export class SgdsDropdown extends DropdownListElement {
   @watch("disabled", { waitUntilFirstUpdate: true })
   _handleDisabled() {
     const button = this._toggler[0];
-
-    if (this.disabled) {
-      button.setAttribute("disabled", "true");
-    } else {
-      button.hasAttribute("disabled") && button.removeAttribute("disabled");
+    if (button) {
+      if (this.disabled) {
+        button.setAttribute("disabled", "true");
+      } else {
+        button.hasAttribute("disabled") && button.removeAttribute("disabled");
+      }
     }
   }
+
   render() {
     return html`
       <div class="dropdown">
@@ -104,7 +101,7 @@ export class SgdsDropdown extends DropdownListElement {
         >
           <slot name="toggler"></slot>
         </div>
-        <div class="dropdown-menu" role="menu">
+        <div class="dropdown-menu" role="menu" ${ref(this.menuRef)}>
           <slot id="default" @click=${this.handleSelectSlot}></slot>
         </div>
       </div>

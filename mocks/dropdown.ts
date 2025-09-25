@@ -13,7 +13,7 @@ export class MockDropdown extends DropdownListElement {
     super.firstUpdated();
     if (this.menuIsOpen) {
       await this.button;
-      this.bsDropdown.show();
+      this.showMenu();
     }
   }
 
@@ -29,7 +29,7 @@ export class MockDropdown extends DropdownListElement {
         >
           Mock Dropdown
         </button>
-        <div class="dropdown-menu" role="menu" part="menu">
+        <div class="dropdown-menu" role="menu" part="menu" ${ref(this.menuRef)}>
           <slot id="default" @click=${this.handleSelectSlot}></slot>
         </div>
       </div>
