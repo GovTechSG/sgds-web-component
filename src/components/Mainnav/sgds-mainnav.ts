@@ -176,11 +176,12 @@ export class SgdsMainnav extends SgdsElement {
 
     this.nav.appendChild(this.body);
     await customElements.whenDefined("sgds-masthead");
-    const offsetTop = this.nav.offsetTop;
+    const { top } = this.nav.getBoundingClientRect();
     const navHeight = this.nav.clientHeight;
-    const mainNavPosition = offsetTop + navHeight;
-    this.body.style.top = `${mainNavPosition}px`;
-    this.navScroll.style.maxHeight = `calc(100dvh - ${mainNavPosition}px)`;
+    const mainNavPosition = top + navHeight;
+    const navBodyPaddingY =
+      parseFloat(getComputedStyle(this.body).paddingTop) + parseFloat(getComputedStyle(this.body).paddingBottom);
+    this.navScroll.style.maxHeight = `calc(100dvh - ${mainNavPosition}px - ${navBodyPaddingY}px)`;
   }
 
   private _handleDesktopNav() {

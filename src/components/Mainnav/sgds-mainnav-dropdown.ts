@@ -177,11 +177,28 @@ export class SgdsMainnavDropdown extends SgdsElement {
     this.dropdownItems.setAttribute("aria-hidden", "true");
   }
 
-  private _resetDropdownMenu() {
+  private _resetDropdownMenu(): Promise<void> {
     const navbarBody = this._getNavbarBody();
-    if (navbarBody) {
-      navbarBody.style.removeProperty("transform");
-    }
+    if (!navbarBody) return Promise.resolve();
+
+    return new Promise(resolve => {
+      const onEnd = (event: TransitionEvent) => {
+        if (event.propertyName === "transform") {
+          navbarBody.removeEventListener("transitionend", onEnd);
+          resolve();
+        }
+      };
+
+      const hasTransition = getComputedStyle(navbarBody).transitionProperty.includes("transform");
+
+      if (hasTransition) {
+        navbarBody.addEventListener("transitionend", onEnd);
+        navbarBody.style.removeProperty("transform");
+      } else {
+        navbarBody.style.removeProperty("transform");
+        resolve();
+      }
+    });
   }
 
   private _handleKeyboardOpen(event: KeyboardEvent) {
@@ -239,8 +256,8 @@ export class SgdsMainnavDropdown extends SgdsElement {
     }
   }
 
-  private _closeMenu() {
-    this._resetDropdownMenu();
+  private async _closeMenu() {
+    await this._resetDropdownMenu();
     this._hideDropdownMenuItems();
     this.navLink.focus();
   }
