@@ -10,6 +10,7 @@
     <Button></Button>
     <Accordion></Accordion>
     <Icon></Icon>
+    <Dropdown></Dropdown>
     <Card></Card>
   </div>
 </template>
