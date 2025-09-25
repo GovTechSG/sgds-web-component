@@ -24,8 +24,11 @@ describe("<sgds-card>", () => {
               </div>
               <slot></slot>
             </div>
+            <slot name="description"></slot>
             <slot name="lower"></slot>
-            <slot name="link"></slot>
+            <slot name="footer">
+              <slot name="link"></slot>
+            </slot>
           </div>
         </div>
       `
@@ -54,8 +57,11 @@ describe("<sgds-card>", () => {
               </div>
               <slot></slot>
             </div>
+            <slot name="description"></slot>
             <slot name="lower"></slot>
-            <slot name="link"></slot>
+            <slot name="footer">
+              <slot name="link"></slot>
+            </slot>
           </div>
         </div>
       `
@@ -86,8 +92,11 @@ describe("<sgds-card>", () => {
               </div>
               <slot></slot>
             </div>
+            <slot name="description"></slot>
             <slot name="lower"></slot>
-            <slot name="link"></slot>
+            <slot name="footer">
+              <slot name="link"></slot>
+            </slot>
           </div>
         </div>
       `
@@ -115,39 +124,48 @@ describe("<sgds-card>", () => {
               </div>
               <slot></slot>
             </div>
+            <slot name="description"></slot>
             <slot name="lower"></slot>
-            <slot name="link"></slot>
+            <slot name="footer">
+              <slot name="link"></slot>
+            </slot>
           </div>
         </div>
       `
     );
   });
 
-  it("renders description when slotted", async () => {
+  it("renders content in the description slot", async () => {
     const el = await fixture<SgdsCard>(html`
       <sgds-card>
         <span slot="description">This is a description</span>
       </sgds-card>
     `);
 
-    await el.updateComplete;
+    const descriptionSlot = el.shadowRoot?.querySelector('slot[name="description"]') as HTMLSlotElement;
+    expect(descriptionSlot).to.exist;
 
-    const desc = el.shadowRoot?.querySelector(".card-text");
-    expect(desc).to.exist;
-
-    const slot = desc?.querySelector("slot[name=description]") as HTMLSlotElement;
-    const assigned = slot.assignedNodes({ flatten: true });
-    expect(assigned.length).to.be.greaterThan(0);
-    expect((assigned[0] as HTMLElement).textContent).to.equal("This is a description");
+    const assignedNodes = descriptionSlot.assignedNodes({ flatten: true });
+    expect(assignedNodes.length).to.equal(1);
+    expect(assignedNodes[0].textContent?.trim()).to.equal("This is a description");
   });
 
-  it("does not render description when not slotted", async () => {
+  it("renders nothing if no description slot is provided", async () => {
     const el = await fixture<SgdsCard>(html`<sgds-card></sgds-card>`);
 
-    await el.updateComplete;
+    const descriptionSlot = el.shadowRoot?.querySelector('slot[name="description"]') as HTMLSlotElement;
+    const assignedNodes = descriptionSlot.assignedNodes({ flatten: true });
+    expect(assignedNodes.length).to.equal(0);
+  });
 
-    const desc = el.shadowRoot?.querySelector(".card-text");
-    expect(desc).to.not.exist;
+  it("renders footer slot with stretchedLink", async () => {
+    const el = await fixture<SgdsCard>(html`
+      <sgds-card stretchedLink>
+        <a slot="footer" href="#">Read More</a>
+      </sgds-card>
+    `);
+    const tag = el.shadowRoot?.querySelector(".card") as HTMLElement;
+    expect(tag.tagName.toLowerCase()).to.equal("a");
   });
 });
 

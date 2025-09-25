@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import "@govtechsg/sgds-web-component/components/Card/index.js";
+import "@govtechsg/sgds-web-component/components/Icon/index.js";
 import "@govtechsg/sgds-web-component/components/Link/index.js";
 </script>
 

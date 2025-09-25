@@ -49,31 +49,27 @@ describe("<sgds-icon-card>", () => {
     expect(title).to.exist;
   });
 
-  it("renders description when slotted", async () => {
+  it("renders content in the description slot", async () => {
     const el = await fixture<SgdsIconCard>(html`
       <sgds-icon-card>
         <span slot="description">This is a description</span>
       </sgds-icon-card>
     `);
 
-    await el.updateComplete;
+    const descriptionSlot = el.shadowRoot?.querySelector('slot[name="description"]') as HTMLSlotElement;
+    expect(descriptionSlot).to.exist;
 
-    const desc = el.shadowRoot?.querySelector(".card-text");
-    expect(desc).to.exist;
-
-    const slot = desc?.querySelector("slot[name=description]") as HTMLSlotElement;
-    const assigned = slot.assignedNodes({ flatten: true });
-    expect(assigned.length).to.be.greaterThan(0);
-    expect((assigned[0] as HTMLElement).textContent).to.equal("This is a description");
+    const assignedNodes = descriptionSlot.assignedNodes({ flatten: true });
+    expect(assignedNodes.length).to.equal(1);
+    expect(assignedNodes[0].textContent?.trim()).to.equal("This is a description");
   });
 
-  it("does not render description when not slotted", async () => {
+  it("renders nothing if no description slot is provided", async () => {
     const el = await fixture<SgdsIconCard>(html`<sgds-icon-card></sgds-icon-card>`);
 
-    await el.updateComplete;
-
-    const desc = el.shadowRoot?.querySelector(".card-text");
-    expect(desc).to.not.exist;
+    const descriptionSlot = el.shadowRoot?.querySelector('slot[name="description"]') as HTMLSlotElement;
+    const assignedNodes = descriptionSlot.assignedNodes({ flatten: true });
+    expect(assignedNodes.length).to.equal(0);
   });
 
   it("applies disabled class when disabled", async () => {
@@ -87,15 +83,35 @@ describe("<sgds-icon-card>", () => {
     expect(tinted).to.exist;
   });
 
+  it("renders footer slot with stretchedLink", async () => {
+    const el = await fixture<SgdsIconCard>(html`
+      <sgds-icon-card stretchedLink>
+        <a slot="footer" href="#">Read More</a>
+      </sgds-icon-card>
+    `);
+    const tag = el.shadowRoot?.querySelector(".card") as HTMLElement;
+    expect(tag.tagName.toLowerCase()).to.equal("a");
+  });
+
   it("applies tabindex correctly when stretchedLink and not disabled", async () => {
-    const el = await fixture<SgdsIconCard>(html`<sgds-icon-card stretchedLink></sgds-icon-card>`);
+    const el = await fixture<SgdsIconCard>(html`<sgds-icon-card></sgds-icon-card>`);
+    el.stretchedLink = true;
+    await el.updateComplete;
+
     const card = el.shadowRoot?.querySelector(".card") as HTMLElement;
     expect(card.getAttribute("tabindex")).to.equal("0");
   });
 
   it("sets tabindex to -1 when disabled", async () => {
-    const el = await fixture<SgdsIconCard>(html`<sgds-icon-card stretchedLink disabled></sgds-icon-card>`);
+    const el = await fixture<SgdsIconCard>(html`<sgds-icon-card></sgds-icon-card>`);
+    el.stretchedLink = true;
+    await el.updateComplete;
+
     const card = el.shadowRoot?.querySelector(".card") as HTMLElement;
+    expect(card.getAttribute("tabindex")).to.equal("0");
+
+    el.disabled = true;
+    await el.updateComplete;
     expect(card.getAttribute("tabindex")).to.equal("-1");
   });
 });

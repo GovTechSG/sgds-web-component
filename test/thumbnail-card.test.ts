@@ -12,10 +12,10 @@ describe("sgds-thumbnail-card", () => {
 
   it("renders title and subtitle properly", async () => {
     const el = await fixture<SgdsThumbnailCard>(html`
-      <sgds-icon-card>
+      <sgds-thumbnail-card>
         <span slot="subtitle">Subtitle text</span>
         <span slot="title">Title text</span>
-      </sgds-icon-card>
+      </sgds-thumbnail-card>
     `);
     const subtitle = el.shadowRoot?.querySelector("slot[name=subtitle]");
     const title = el.shadowRoot?.querySelector("slot[name=title]");
@@ -23,31 +23,27 @@ describe("sgds-thumbnail-card", () => {
     expect(title).to.exist;
   });
 
-  it("renders description when slotted", async () => {
+  it("renders content in the description slot", async () => {
     const el = await fixture<SgdsThumbnailCard>(html`
       <sgds-thumbnail-card>
         <span slot="description">This is a description</span>
       </sgds-thumbnail-card>
     `);
 
-    await el.updateComplete;
+    const descriptionSlot = el.shadowRoot?.querySelector('slot[name="description"]') as HTMLSlotElement;
+    expect(descriptionSlot).to.exist;
 
-    const desc = el.shadowRoot?.querySelector(".card-text");
-    expect(desc).to.exist;
-
-    const slot = desc?.querySelector("slot[name=description]") as HTMLSlotElement;
-    const assigned = slot.assignedNodes({ flatten: true });
-    expect(assigned.length).to.be.greaterThan(0);
-    expect((assigned[0] as HTMLElement).textContent).to.equal("This is a description");
+    const assignedNodes = descriptionSlot.assignedNodes({ flatten: true });
+    expect(assignedNodes.length).to.equal(1);
+    expect(assignedNodes[0].textContent?.trim()).to.equal("This is a description");
   });
 
-  it("does not render description when not slotted", async () => {
+  it("renders nothing if no description slot is provided", async () => {
     const el = await fixture<SgdsThumbnailCard>(html`<sgds-thumbnail-card></sgds-thumbnail-card>`);
 
-    await el.updateComplete;
-
-    const desc = el.shadowRoot?.querySelector(".card-text");
-    expect(desc).to.not.exist;
+    const descriptionSlot = el.shadowRoot?.querySelector('slot[name="description"]') as HTMLSlotElement;
+    const assignedNodes = descriptionSlot.assignedNodes({ flatten: true });
+    expect(assignedNodes.length).to.equal(0);
   });
 
   it("supports noPadding prop (removes padding and tint)", async () => {
@@ -67,6 +63,7 @@ describe("sgds-thumbnail-card", () => {
     expect(upper).to.exist;
   });
 
+  /**@deprecated Remove in v4.0.0 */
   it("renders link slot with stretchedLink", async () => {
     const el = await fixture<SgdsThumbnailCard>(html`
       <sgds-thumbnail-card stretchedLink>
@@ -77,11 +74,26 @@ describe("sgds-thumbnail-card", () => {
     expect(tag.tagName.toLowerCase()).to.equal("a");
   });
 
-  it("sets tabindex correctly when stretchedLink + disabled", async () => {
-    const el = await fixture<SgdsThumbnailCard>(
-      html`<sgds-thumbnail-card stretchedLink disabled></sgds-thumbnail-card>`
-    );
+  it("renders footer slot with stretchedLink", async () => {
+    const el = await fixture<SgdsThumbnailCard>(html`
+      <sgds-thumbnail-card stretchedLink>
+        <a slot="footer" href="#">Read More</a>
+      </sgds-thumbnail-card>
+    `);
+    const tag = el.shadowRoot?.querySelector(".card") as HTMLElement;
+    expect(tag.tagName.toLowerCase()).to.equal("a");
+  });
+
+  it("sets tabindex correctly based on stretchedLink and disabled", async () => {
+    const el = await fixture<SgdsThumbnailCard>(html`<sgds-thumbnail-card></sgds-thumbnail-card>`);
+    el.stretchedLink = true;
+    await el.updateComplete;
+
     const card = el.shadowRoot?.querySelector(".card") as HTMLElement;
+    expect(card.getAttribute("tabindex")).to.equal("0");
+
+    el.disabled = true;
+    await el.updateComplete;
     expect(card.getAttribute("tabindex")).to.equal("-1");
   });
 

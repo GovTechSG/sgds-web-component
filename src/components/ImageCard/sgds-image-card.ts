@@ -1,10 +1,10 @@
 import { nothing } from "lit";
 import { html, literal } from "lit/static-html.js";
-import { property, queryAssignedNodes } from "lit/decorators.js";
+import { property, queryAssignedElements, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
-import { HasSlotController } from "../../utils/slot";
 import { CardImageAdjustment, CardImagePosition } from "../Card/types";
+import SgdsLink from "../Link/sgds-link";
 import imageCardStyle from "./image-card.css";
 
 /**
@@ -18,7 +18,9 @@ import imageCardStyle from "./image-card.css";
  * @slot title - The title of the card
  * @slot description - The paragrapher text of the card
  * @slot lower - Accepts any additional content to be displayed below the card description, such as badges, metadata, or supplementary information.
- * @slot link - Accepts an anchor element. Only a single element is allowed to be passed in.
+ * @slot footer - Footer area of the card. Accepts links, actions, or any custom content.
+ * @slot link - (@deprecated) Deprecated since 3.3.2 in favour of `footer` slot.
+ *  Legacy slot for anchor elements. Use `footer` instead.
  */
 export class SgdsImageCard extends CardElement {
   static styles = [...CardElement.styles, imageCardStyle];
@@ -26,6 +28,10 @@ export class SgdsImageCard extends CardElement {
   /** @internal */
   @queryAssignedNodes({ slot: "image", flatten: true })
   _imageNode!: Array<Node>;
+  @queryAssignedElements({ slot: "footer" })
+  private footerNode!: HTMLElement[];
+  @queryAssignedElements({ slot: "link" })
+  private linkNode!: HTMLAnchorElement[] | SgdsLink[];
 
   /** Removes the card's internal padding when set to true.  */
   @property({ type: Boolean, reflect: true }) noPadding = false;
@@ -36,7 +42,17 @@ export class SgdsImageCard extends CardElement {
   /** Controls how the image is sized and aligned within the card. Available options: `default`, `padding around`, `aspect ratio` */
   @property({ type: String, reflect: true }) imageAdjustment: CardImageAdjustment = "default";
 
-  private readonly hasSlotController = new HasSlotController(this, "description");
+  private get linkSlotItems(): HTMLAnchorElement | null {
+    if (!this.linkNode || this.linkNode.length === 0) return null;
+    const element = this.linkNode[0] as HTMLElement;
+    return (element.querySelector("a") || element) as HTMLAnchorElement;
+  }
+
+  private get footerSlotItems(): HTMLAnchorElement | null {
+    if (!this.footerNode || this.footerNode.length === 0) return null;
+    const element = this.footerNode[0] as HTMLElement;
+    return (element.querySelector("a") || element) as HTMLAnchorElement;
+  }
 
   protected firstUpdated() {
     if (this._imageNode.length === 0) {
@@ -44,6 +60,17 @@ export class SgdsImageCard extends CardElement {
       const body = this.shadowRoot.querySelector(".card-body") as HTMLDivElement;
       image.style.display = "none";
       if (this.noPadding) body.style.padding = "0px";
+    }
+
+    if (this.stretchedLink) {
+      const footerHref = this.footerSlotItems?.href;
+      const linkHref = this.linkSlotItems?.href;
+
+      if (footerHref) {
+        this.card.setAttribute("href", footerHref);
+      } else if (linkHref) {
+        this.card.setAttribute("href", linkHref);
+      }
     }
   }
 
@@ -58,7 +85,6 @@ export class SgdsImageCard extends CardElement {
   render() {
     const tag = this.stretchedLink ? literal`a` : literal`div`;
     const cardTabIndex = !this.stretchedLink || this.disabled ? -1 : 0;
-    const hasDescriptionSlot = this.hasSlotController.test("description");
 
     return html`
       <${tag} 
@@ -82,15 +108,11 @@ export class SgdsImageCard extends CardElement {
             </div>
             <slot></slot>
           </div>
-          ${
-            hasDescriptionSlot
-              ? html`<p class="card-text">
-                  <slot name="description"></slot>
-                </p>`
-              : nothing
-          }
+          <slot name="description"></slot>
           <slot name="lower"></slot>
-          <slot name="link" @slotchange=${this.handleLinkSlotChange}></slot>
+          <slot name="footer">
+            <slot name="link" @slotchange=${this.handleLinkSlotChange}></slot>
+          </slot>
         </div>
       </${tag}>
     `;
