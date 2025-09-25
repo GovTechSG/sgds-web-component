@@ -17,7 +17,7 @@
   position: absolute;
   text-align: left;
   overflow-y: auto;
-  z-index: 500;
+  z-index: 1050;
 }
 
 .nav-tabs .dropdown-menu {
