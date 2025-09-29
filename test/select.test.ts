@@ -1,12 +1,10 @@
-import { html } from "lit";
-import { expect, fixture, waitUntil } from "@open-wc/testing";
-import { SgdsButton, SgdsSelect } from "../src/components";
-import "../src/index";
-import { assert } from "@open-wc/testing";
+import { assert, expect, fixture, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
+import { html } from "lit";
 import sinon from "sinon";
+import { SgdsButton, SgdsSelect } from "../src/components";
 import SgdsSelectOption from "../src/components/Select/sgds-select-option";
-import { ifDefined } from "lit/directives/if-defined.js";
+import "../src/index";
 
 const NoOptionsSelects = [
   { render: html`<sgds-select .menuList=${[]}></sgds-select>`, mode: "property" },

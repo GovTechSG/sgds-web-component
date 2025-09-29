@@ -114,15 +114,18 @@ export class DropdownListElement extends DropdownElement {
   private _getMenuItems(): SgdsDropdownItem[] {
     // for case when default slot is used e.g. dropdown, mainnavdropdown
     if (this.shadowRoot.querySelector("slot#default")) {
-      return (this.shadowRoot.querySelector("slot#default") as HTMLSlotElement)?.assignedElements({
-        flatten: true
-      }) as SgdsDropdownItem[];
+      const defaultSlotItems = (this.shadowRoot.querySelector("slot#default") as HTMLSlotElement)
+        ?.assignedElements({
+          flatten: true
+        })
+        .filter(el => !el.classList.contains("empty-menu")) as SgdsDropdownItem[];
+
+      return defaultSlotItems;
     }
 
     // for case when there is no slot e.g. combobox
     if (this.menu.hasChildNodes()) {
       const menuItems = this.menu.children;
-
       return [...menuItems] as SgdsDropdownItem[];
     }
   }

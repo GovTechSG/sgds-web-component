@@ -11,7 +11,7 @@ import SgdsSelectOption from "./sgds-select-option";
 /**
  * @summary Select is used to make one selection from a list through keyboard or mouse actions
  *
- * @event sgds-select - Emitted when an option is selected and the value of select is updated.
+ * @event sgds-select - Emitted when an option is selected.
  * @event sgds-change - Emitted when the select value changes.
  * @event sgds-focus -  Emitted when user input is focused.
  * @event sgds-blur -  Emitted when user input is blurred.
@@ -145,6 +145,11 @@ export class SgdsSelect extends SelectElement {
       })
     );
   }
+  private _blockInputKeydown = (e: KeyboardEvent) => {
+    if (e.key !== "Tab") {
+      e.preventDefault();
+    }
+  };
 
   protected _renderEmptyMenu() {
     return html` <div class="empty-menu">No options</div> `;
@@ -202,7 +207,7 @@ export class SgdsSelect extends SelectElement {
             aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
               ? `${this._controlId}-invalid`
               : ""}"
-            @keydown=${(e: KeyboardEvent) => e.preventDefault()}
+            @keydown=${this._blockInputKeydown}
           />
         </div>
         <sgds-icon name="chevron-down" size="md"></sgds-icon>
