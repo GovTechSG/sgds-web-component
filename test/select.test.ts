@@ -208,7 +208,7 @@ describe("<sgds-select>", () => {
       const el = await fixture<SgdsSelect>(render);
       const input = el.shadowRoot?.querySelector("input");
       input?.click();
-      await waitUntil(() => el.shadowRoot?.querySelector(".dropdown-menu.show"));
+      await waitUntil(() => el.menuIsOpen);
 
       if (mode === "slot") {
         const item = el.querySelectorAll("sgds-select-option")[0] as SgdsSelectOption;
@@ -256,24 +256,35 @@ describe("<sgds-select>", () => {
     it(`MODE=${mode}, when menu is close, focused is brought back to input`, async () => {
       const el = await fixture<SgdsSelect>(render);
 
-      const input = () => el.shadowRoot?.querySelector("input");
+      const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+      await simulateUserClick(input);
 
-      input()?.focus();
       await sendKeys({ press: "ArrowDown" });
-
-      await waitUntil(() => {
-        let comboItem1: SgdsSelectOption;
-        if (mode === "slot") {
-          comboItem1 = el.querySelectorAll("sgds-select-option")[0] as SgdsSelectOption;
-          return comboItem1.shadowRoot?.activeElement;
-        } else {
-          comboItem1 = el.shadowRoot?.querySelectorAll("sgds-select-option")[0] as SgdsSelectOption;
-          return el.shadowRoot?.activeElement === comboItem1;
-        }
-      });
+      if (mode === "slot") {
+        await waitUntil(
+          () => {
+            const selectItem1 = el.querySelectorAll("sgds-select-option")[0];
+            return getRootActiveElement(el) === selectItem1;
+          },
+          "focus did not move into first select item",
+          { timeout: 2000 }
+        );
+      } else {
+        await waitUntil(
+          () => {
+            const selectItem1 = el.shadowRoot?.querySelectorAll("sgds-select-option")[0];
+            return getRootActiveElement(input) === selectItem1;
+          },
+          "focus did not move into first select item",
+          { timeout: 2000 }
+        );
+      }
 
       await sendKeys({ press: "Escape" });
-      await waitUntil(() => el.shadowRoot?.activeElement === input());
+      await waitUntil(() => getRootActiveElement(input) === input, "focus did not return to the input after Escape", {
+        timeout: 2000
+      });
+      expect(getRootActiveElement(input)).to.equal(input);
     });
   });
 });
