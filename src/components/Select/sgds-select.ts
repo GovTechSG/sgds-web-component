@@ -33,7 +33,7 @@ export class SgdsSelect extends SelectElement {
       sgdsInput.focus();
     });
   }
-  @queryAssignedElements({ flatten: true })
+  @queryAssignedElements({ flatten: true, selector: "sgds-select-option" })
   protected options: SgdsSelectOption[];
 
   async firstUpdated() {
@@ -146,8 +146,11 @@ export class SgdsSelect extends SelectElement {
     );
   }
 
+  protected _renderEmptyMenu() {
+    return html` <div class="empty-menu">No options</div> `;
+  }
+
   protected _renderMenu() {
-    const emptyMenu = html` <div class="empty-menu">No options</div> `;
     const menu = this.menuList.map(item => {
       const isActive = item.value === this.value;
 
@@ -166,7 +169,7 @@ export class SgdsSelect extends SelectElement {
         </sgds-select-option>
       `;
     });
-    return this.menuList.length === 0 ? emptyMenu : menu;
+    return this.menuList.length === 0 ? this._renderEmptyMenu() : menu;
   }
   protected _renderInput() {
     const wantFeedbackStyle = this.hasFeedback;

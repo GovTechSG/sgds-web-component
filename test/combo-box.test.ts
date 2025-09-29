@@ -6,7 +6,7 @@ import "./sgds-web-component";
 
 import type { SgdsBadge, SgdsButton, SgdsComboBox } from "../src/components";
 import SgdsCloseButton from "../src/internals/CloseButton/sgds-close-button";
-import  SgdsComboBoxOption from "../src/components/ComboBox/sgds-combo-box-option";
+import SgdsComboBoxOption from "../src/components/ComboBox/sgds-combo-box-option";
 describe("sgds-combo-box ", () => {
   it("matches shadowDom semantically", async () => {
     const el = await fixture<SgdsComboBox>(html` <sgds-combo-box
@@ -471,7 +471,9 @@ describe("single select combobox", () => {
     await sendKeys({ press: "Backspace" });
     await sendKeys({ press: "Backspace" });
     await waitUntil(() => el.value === "");
-    const updatedDurianItem = el.shadowRoot?.querySelector("sgds-combo-box-option[value='option3']") as SgdsComboBoxOption;
+    const updatedDurianItem = el.shadowRoot?.querySelector(
+      "sgds-combo-box-option[value='option3']"
+    ) as SgdsComboBoxOption;
     expect(updatedDurianItem.active).to.be.false;
   });
 
@@ -844,7 +846,9 @@ describe("multi select combobox", () => {
     input.focus();
     await sendKeys({ press: "Backspace" });
     await waitUntil(() => el.value === "");
-    const updatedDurianItem = el.shadowRoot?.querySelector("sgds-combo-box-option[value='option3']") as SgdsComboBoxOption;
+    const updatedDurianItem = el.shadowRoot?.querySelector(
+      "sgds-combo-box-option[value='option3']"
+    ) as SgdsComboBoxOption;
     expect(updatedDurianItem.active).to.be.false;
 
     const updatedBadge = el.shadowRoot?.querySelector("sgds-badge") as SgdsBadge;

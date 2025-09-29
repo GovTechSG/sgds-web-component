@@ -74,6 +74,7 @@
 }
 .empty-menu {
   padding: var(--sgds-padding-sm) var(--sgds-padding-lg, 20px);
+  pointer-events: none;
 }
 
 
