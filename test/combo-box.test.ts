@@ -1,4 +1,4 @@
-import { assert, elementUpdated, expect, fixture, waitUntil } from "@open-wc/testing";
+import { assert, aTimeout, elementUpdated, expect, fixture, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
@@ -7,6 +7,25 @@ import "./sgds-web-component";
 import type { SgdsBadge, SgdsButton, SgdsComboBox } from "../src/components";
 import SgdsCloseButton from "../src/internals/CloseButton/sgds-close-button";
 import SgdsComboBoxOption from "../src/components/ComboBox/sgds-combo-box-option";
+
+function getRootActiveElement(el: HTMLElement | null): Element | null {
+  if (!el) return null;
+  const root = el.getRootNode();
+  return (root as Document | ShadowRoot).activeElement as Element | null;
+}
+
+async function simulateUserClick(element: HTMLElement) {
+  // Simulate a real user pointer/mouse sequence before calling focus
+  element.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, composed: true }));
+  element.dispatchEvent(new MouseEvent("mousedown", { bubbles: true, composed: true }));
+  element.click(); // triggers click handlers
+  element.dispatchEvent(new MouseEvent("mouseup", { bubbles: true, composed: true }));
+  // ensure focus after the click
+  element.focus();
+  // allow event loop/slot listeners to run
+  await aTimeout(0);
+}
+
 describe("sgds-combo-box ", () => {
   it("matches shadowDom semantically", async () => {
     const el = await fixture<SgdsComboBox>(html` <sgds-combo-box
@@ -71,15 +90,15 @@ describe("sgds-combo-box ", () => {
     const input = el.shadowRoot?.querySelector("input");
     input?.click();
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector(".dropdown-menu.show")).to.be.null;
+    expect(el.menuIsOpen).to.be.false;
 
     input?.focus();
     await sendKeys({ press: "ArrowDown" });
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector(".dropdown-menu.show")).to.be.null;
+    expect(el.menuIsOpen).to.be.false;
     await sendKeys({ press: "ArrowUp" });
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector(".dropdown-menu.show")).to.be.null;
+    expect(el.menuIsOpen).to.be.false;
   });
 
   it("should emit sgds-select event when combobox value is updated", async () => {
@@ -160,7 +179,7 @@ describe("sgds-combo-box ", () => {
 
     const input = el.shadowRoot?.querySelector("input");
     input?.click();
-    await waitUntil(() => el.shadowRoot?.querySelector(".dropdown-menu.show"));
+    await waitUntil(() => el.menuIsOpen);
 
     const item = el.shadowRoot?.querySelectorAll("sgds-combo-box-option")[0] as SgdsComboBoxOption;
     const itemContent = item.shadowRoot?.querySelector("div.normal-item-content") as HTMLDivElement;
@@ -536,12 +555,13 @@ describe("single select combobox", () => {
     );
 
     const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
-    input.focus();
+    await simulateUserClick(input);
+
     await sendKeys({ press: "ArrowDown" });
     await sendKeys({ press: "Enter" });
-    await el.updateComplete;
+
     expect(el.value).to.equal("option1");
-    expect(el.shadowRoot?.querySelector("input")?.value).to.equal("Apple");
+    expect(input.value).to.equal("Apple");
   });
 
   it("Keyboard arrowDown and enter populates the input and update value, sgds-change and sgds-select will be called", async () => {
@@ -562,7 +582,8 @@ describe("single select combobox", () => {
     el.addEventListener("sgds-change", spyChange);
 
     const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
-    input.focus();
+    await simulateUserClick(input);
+
     await sendKeys({ press: "ArrowDown" });
     await sendKeys({ press: "Enter" });
     await el.updateComplete;
@@ -595,7 +616,7 @@ describe("single select combobox", () => {
     item.click();
 
     await el.updateComplete;
-    await waitUntil(() => !el.shadowRoot?.querySelector(".dropdown-menu.show"));
+    await waitUntil(() => !el.menuIsOpen);
     expect(input().value).to.equal("Dur");
 
     input().click();
@@ -615,18 +636,29 @@ describe("single select combobox", () => {
         ]}
       ></sgds-combo-box>`
     );
-    const input = () => el.shadowRoot?.querySelector("input");
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    const menuEl = el.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
 
-    input()?.focus();
+    await simulateUserClick(input);
+    await waitUntil(() => el.menuIsOpen === true, "menu did not open", { timeout: 2000 });
+    expect(getComputedStyle(menuEl).display).to.equal("block");
+
     await sendKeys({ press: "ArrowDown" });
 
-    await waitUntil(() => {
-      const comboItem1 = el.shadowRoot?.querySelectorAll("sgds-combo-box-option")[0];
-      return el.shadowRoot?.activeElement === comboItem1;
-    });
+    await waitUntil(
+      () => {
+        const comboItem1 = el.shadowRoot?.querySelectorAll("sgds-combo-box-option")[0];
+        return getRootActiveElement(input) === comboItem1;
+      },
+      "focus did not move into first combo item",
+      { timeout: 2000 }
+    );
 
     await sendKeys({ press: "Escape" });
-    await waitUntil(() => el.shadowRoot?.activeElement === input());
+    await waitUntil(() => getRootActiveElement(input) === input, "focus did not return to the input after Escape", {
+      timeout: 2000
+    });
+    expect(getRootActiveElement(input)).to.equal(input);
   });
 
   it("when menu list is updated, and the current value is no longer valid it should null the value", async () => {
@@ -892,10 +924,11 @@ describe("multi select combobox", () => {
     );
 
     const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
-    input.focus();
+    await simulateUserClick(input);
+
     await sendKeys({ press: "ArrowDown" });
     await sendKeys({ press: "Enter" });
-    await el.updateComplete;
+
     expect(el.value).to.equal("option1");
     const badge = el.shadowRoot?.querySelector("sgds-badge") as SgdsBadge;
     expect(badge.innerText).to.equal("Apple");
@@ -920,10 +953,10 @@ describe("multi select combobox", () => {
     el.addEventListener("sgds-change", spyChange);
 
     const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
-    input.focus();
+    await simulateUserClick(input);
+
     await sendKeys({ press: "ArrowDown" });
     await sendKeys({ press: "Enter" });
-    await el.updateComplete;
 
     expect(spyChange).to.be.called;
     expect(spySelect).to.be.called;
@@ -983,12 +1016,12 @@ describe("multi select combobox", () => {
     el.shadowRoot?.querySelectorAll("sgds-combo-box-option")[0].shadowRoot?.querySelector("sgds-checkbox")?.click();
 
     await el.updateComplete;
-    await waitUntil(() => !el.shadowRoot?.querySelector(".dropdown-menu.show"));
+    await waitUntil(() => !el.menuIsOpen);
     expect(el.shadowRoot?.querySelector("sgds-badge")?.textContent?.trim()).to.equal("Dur");
 
     input().click();
 
-    await waitUntil(() => el.shadowRoot?.querySelector(".dropdown-menu.show"));
+    await waitUntil(() => el.menuIsOpen);
     expect(el.shadowRoot?.querySelectorAll("sgds-combo-box-option").length).to.equal(3);
     expect(el.shadowRoot?.querySelector("sgds-combo-box-option[value='option3']")).to.have.attribute("active");
   });
@@ -1004,18 +1037,30 @@ describe("multi select combobox", () => {
         ]}
       ></sgds-combo-box>`
     );
-    const input = () => el.shadowRoot?.querySelector("input");
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    const menuEl = el.shadowRoot?.querySelector(".dropdown-menu") as HTMLUListElement;
 
-    input()?.focus();
+    await simulateUserClick(input);
+
+    await waitUntil(() => el.menuIsOpen === true, "menu did not open", { timeout: 2000 });
+
+    expect(getComputedStyle(menuEl).display).to.equal("block");
+
     await sendKeys({ press: "ArrowDown" });
-
-    await waitUntil(() => {
-      const comboItem1 = el.shadowRoot?.querySelectorAll("sgds-combo-box-option")[0];
-      return el.shadowRoot?.activeElement === comboItem1;
-    });
+    await waitUntil(
+      () => {
+        const comboItem1 = el.shadowRoot?.querySelectorAll("sgds-combo-box-option")[0];
+        return getRootActiveElement(input) === comboItem1;
+      },
+      "focus did not move into first combo item",
+      { timeout: 2000 }
+    );
 
     await sendKeys({ press: "Escape" });
-    await waitUntil(() => el.shadowRoot?.activeElement === input());
+    await waitUntil(() => getRootActiveElement(input) === input, "focus did not return to the input after Escape", {
+      timeout: 2000
+    });
+    expect(getRootActiveElement(input)).to.equal(input);
   });
 });
 
@@ -1186,13 +1231,19 @@ describe("single select >> when submitting a form", () => {
         ></sgds-combo-box>
       `
     );
-    const input = el.shadowRoot?.querySelector("input");
-    input?.focus();
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    await simulateUserClick(input);
+
     await sendKeys({ press: "ArrowDown" });
-    await waitUntil(() => {
-      const comboItem1 = el.shadowRoot?.querySelectorAll("sgds-combo-box-option")[0];
-      return el.shadowRoot?.activeElement === comboItem1;
-    });
+    await waitUntil(
+      () => {
+        const comboItem1 = el.shadowRoot?.querySelectorAll("sgds-combo-box-option")[0];
+        return getRootActiveElement(input) === comboItem1;
+      },
+      "focus did not move into first combo item",
+      { timeout: 2000 }
+    );
+
     expect(el.invalid).to.be.false;
   });
 });
@@ -1371,13 +1422,19 @@ describe("multi select >> when submitting a form", () => {
         ></sgds-combo-box>
       `
     );
-    const input = el.shadowRoot?.querySelector("input");
-    input?.focus();
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    await simulateUserClick(input);
+
     await sendKeys({ press: "ArrowDown" });
-    await waitUntil(() => {
-      const comboItem1 = el.shadowRoot?.querySelectorAll("sgds-combo-box-option")[0];
-      return el.shadowRoot?.activeElement === comboItem1;
-    });
+    await waitUntil(
+      () => {
+        const comboItem1 = el.shadowRoot?.querySelectorAll("sgds-combo-box-option")[0];
+        return getRootActiveElement(input) === comboItem1;
+      },
+      "focus did not move into first combo item",
+      { timeout: 2000 }
+    );
+
     expect(el.invalid).to.be.false;
   });
 });

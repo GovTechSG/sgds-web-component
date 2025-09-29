@@ -2,6 +2,13 @@
   cursor: not-allowed;
 }
 
+:host([stretchedLink]) slot[name="footer"]::slotted(sgds-link),
+:host([stretchedLink]) slot[name="footer"]::slotted(a),
+:host([stretchedLink]) slot[name="link"]::slotted(sgds-link),
+:host([stretchedLink]) slot[name="link"]::slotted(a) {
+  display: none;
+}
+
 :host([orientation="horizontal"]) .card {
   flex-direction: row;
 }
@@ -168,11 +175,6 @@ a.card:not(.disabled):focus-visible {
   margin-bottom: var(--sgds-margin-none);
 }
 
-.card-subtitle,
-.card-text {
-  margin-bottom: var(--sgds-margin-none);
-}
-
 slot[name="subtitle"]::slotted(*) {
   --sgds-margin-2-xs: var(--sgds-margin-none);
   --sgds-margin-xs: var(--sgds-margin-none);
@@ -201,7 +203,9 @@ slot[name="title"]::slotted(a) {
 }
 
 slot[name="description"]::slotted(*) {
+  --sgds-paragraph-spacing-xl: var(--sgds-margin-none);
   color: var(--sgds-color-subtle);
+  margin-bottom: var(--sgds-paragraph-spacing-xl, --sgds-margin-none);
 }
 
 slot[name="image"]::slotted(img) {
@@ -211,15 +215,15 @@ slot[name="image"]::slotted(img) {
   border-top-right-radius: calc(var(--sgds-border-radius-md) - var(--sgds-border-width-1));
 }
 
+slot[name="footer"]::slotted(*),
 slot[name="link"]::slotted(*) {
   margin-top: auto;
   padding-top: var(--sgds-padding-sm);
-  font-weight: 700;
+  width: fit-content;
 }
 
+slot[name="footer"]::slotted(a),
 slot[name="link"]::slotted(a) {
-  display: inline-flex;
-  gap: var(--sgds-gap-2-xs);
   color: var(--sgds-link-color-default);
   text-decoration: none !important;
   height: auto !important;
@@ -227,17 +231,21 @@ slot[name="link"]::slotted(a) {
 
 slot[name="title"]::slotted(a:hover),
 slot[name="title"]::slotted(a:focus),
+slot[name="footer"]::slotted(a:hover),
+slot[name="footer"]::slotted(a:focus),
 slot[name="link"]::slotted(a:hover),
 slot[name="link"]::slotted(a:focus) {
   color: var(--sgds-link-color-emphasis);
 }
 
 slot[name="title"]::slotted(a:focus),
+slot[name="footer"]::slotted(a:focus),
 slot[name="link"]::slotted(a:focus) {
   outline: 0;
 }
 
 slot[name="title"]::slotted(a:focus-visible),
+slot[name="footer"]::slotted(a:focus-visible),
 slot[name="link"]::slotted(a:focus-visible) {
   box-shadow: var(--sgds-box-shadow-focus);
 }

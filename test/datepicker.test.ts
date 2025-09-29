@@ -14,23 +14,25 @@ customElements.define("sgds-datepicker-input", DatepickerInput);
 
 describe("sgds-datepicker", () => {
   it("renders sgds-datepicker component correctly", async () => {
-    const el = await fixture(html` <sgds-datepicker></sgds-datepicker> `);
+    const el = await fixture<SgdsDatepicker>(html` <sgds-datepicker></sgds-datepicker> `);
 
     expect(el).to.exist;
     expect(el).to.be.an.instanceOf(SgdsDatepicker);
   });
 
   it("opens the datepicker menu when sgds-icon-button is clicked", async () => {
-    const el = await fixture(html` <sgds-datepicker></sgds-datepicker> `);
+    const el = await fixture<SgdsDatepicker>(html` <sgds-datepicker></sgds-datepicker> `);
 
     const calendarBtnEl = el.shadowRoot?.querySelector("sgds-icon-button[aria-haspopup='dialog']") as HTMLButtonElement;
     const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLUListElement;
 
-    expect(menuEl?.classList.contains("show")).to.be.false;
+    expect(getComputedStyle(menuEl).display).to.equal("none");
     expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("false");
 
     calendarBtnEl?.click();
-    await waitUntil(() => menuEl?.classList.contains("show"));
+    await waitUntil(() => el.menuIsOpen);
+
+    expect(getComputedStyle(menuEl).display).to.equal("flex");
     expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("true");
   });
 
@@ -38,13 +40,13 @@ describe("sgds-datepicker", () => {
     const el = await fixture<SgdsDatepicker>(html` <sgds-datepicker menuIsOpen></sgds-datepicker> `);
     const calendarBtnEl = el.shadowRoot?.querySelector("sgds-icon-button[aria-haspopup='dialog']") as HTMLButtonElement;
     const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
-    expect(menuEl?.classList.contains("show")).to.be.true;
+    expect(getComputedStyle(menuEl).display).to.equal("flex");
     expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("true");
 
     calendarBtnEl?.click();
-    await waitUntil(() => !menuEl?.classList.contains("show"));
+    await waitUntil(() => !el.menuIsOpen);
 
-    expect(menuEl?.classList.contains("show")).to.be.false;
+    expect(getComputedStyle(menuEl).display).to.equal("none");
     expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("false");
   });
 
@@ -103,25 +105,25 @@ describe("sgds-datepicker", () => {
   });
 
   it("closes the menu when outside of the element sgds-datepicker is clicked", async () => {
-    const el = await fixture(html` <sgds-datepicker menuIsOpen></sgds-datepicker> `);
+    const el = await fixture<SgdsDatepicker>(html` <sgds-datepicker menuIsOpen></sgds-datepicker> `);
 
     const calendarBtnEl = el.shadowRoot?.querySelector("sgds-icon-button[aria-haspopup='dialog']") as HTMLButtonElement;
     const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLButtonElement;
 
-    expect(menuEl?.classList.contains("show")).to.be.true;
+    expect(getComputedStyle(menuEl).display).to.be.equal("flex");
     expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("true");
 
     // dispatch click event on document object
     const outsideClickEvent = new MouseEvent("click", { bubbles: true });
     document.dispatchEvent(outsideClickEvent);
 
-    await waitUntil(() => !menuEl?.classList.contains("show"));
-    expect(menuEl?.classList.contains("show")).to.be.false;
+    await waitUntil(() => !el.menuIsOpen);
+    expect(getComputedStyle(menuEl).display).to.be.equal("none");
     expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("false");
   });
 
   it("should be able to select and display a date in single mode and close menu", async () => {
-    const el = await fixture(html`<sgds-datepicker></sgds-datepicker>`);
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker></sgds-datepicker>`);
     const calendarBtnEl = el.shadowRoot?.querySelector("sgds-icon-button[aria-haspopup='dialog']") as HTMLButtonElement;
     const inputEl = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
     const menuEl = el.shadowRoot?.querySelector("ul.datepicker") as HTMLElement;
@@ -132,19 +134,19 @@ describe("sgds-datepicker", () => {
     calendarBtnEl?.click();
 
     tdButtonOne?.click();
-    await waitUntil(() => !menuEl?.classList.contains("show"));
+    await waitUntil(() => !el.menuIsOpen);
     expect(inputEl?.value).to.contain("01");
 
-    expect(menuEl?.classList.contains("show")).to.be.false;
+    expect(getComputedStyle(menuEl).display).to.be.equal("none");
     expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("false");
 
     calendarBtnEl?.click();
 
     tdButtonTwo?.click();
-    await waitUntil(() => !menuEl?.classList.contains("show"));
+    await waitUntil(() => !el.menuIsOpen);
     expect(inputEl?.value).to.contain("02");
 
-    expect(menuEl?.classList.contains("show")).to.be.false;
+    expect(getComputedStyle(menuEl).display).to.be.equal("none");
     expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("false");
   });
 
@@ -163,7 +165,7 @@ describe("sgds-datepicker", () => {
     await el.updateComplete;
     expect(inputEl.value).to.contain("01");
 
-    expect(menuEl?.classList.contains("show")).to.be.true;
+    expect(getComputedStyle(menuEl).display).to.be.equal("flex");
     expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("true");
     inputEl?.click();
 
@@ -173,7 +175,7 @@ describe("sgds-datepicker", () => {
     expect(inputEl.value).to.contain("01");
     expect(inputEl.value).to.contain("02");
 
-    expect(menuEl?.classList.contains("show")).to.be.false;
+    expect(getComputedStyle(menuEl).display).to.be.equal("none");
     expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("false");
   });
 
@@ -182,7 +184,7 @@ describe("sgds-datepicker", () => {
     const initialDate = '["22/06/2023"]';
     const initialValueArray = JSON.parse(initialDate) as string[];
 
-    const el = await fixture(
+    const el = await fixture<SgdsDatepicker>(
       html`<sgds-datepicker minDate=${minDate} .initialValue=${initialValueArray}></sgds-datepicker>`
     );
 
@@ -206,9 +208,9 @@ describe("sgds-datepicker", () => {
 
     calendarBtnEl?.click();
 
-    await waitUntil(() => menuElement?.classList.contains("show"));
+    await waitUntil(() => el.menuIsOpen);
 
-    expect(menuElement?.classList.contains("show")).to.be.true;
+    expect(getComputedStyle(menuElement).display).to.be.equal("flex");
     expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("true");
 
     // 2. keep clicking the header previous button in a loop until headerButtonElement show text "May" "2023"
@@ -251,7 +253,7 @@ describe("sgds-datepicker", () => {
     const initialDate = '["22/06/2023"]';
     const initialValueArray = JSON.parse(initialDate) as string[];
 
-    const el = await fixture(
+    const el = await fixture<SgdsDatepicker>(
       html`<sgds-datepicker maxDate=${maxDate} .initialValue=${initialValueArray}></sgds-datepicker>`
     );
 
@@ -275,8 +277,8 @@ describe("sgds-datepicker", () => {
     ) as SgdsButton;
 
     calendarBtnEl?.click();
-    await waitUntil(() => menuElement?.classList.contains("show"));
-    expect(menuElement?.classList.contains("show")).to.be.true;
+    await waitUntil(() => el.menuIsOpen);
+    expect(getComputedStyle(menuElement).display).to.be.equal("flex");
     expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("true");
 
     // expect(headerButtonElement?.innerText).to.contain("July");
@@ -312,7 +314,7 @@ describe("sgds-datepicker", () => {
 
     // 5. check it should not close the menu
 
-    expect(menuElement?.classList.contains("show")).to.be.true;
+    expect(getComputedStyle(menuElement).display).to.be.equal("flex");
     expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("true");
   });
 
@@ -333,8 +335,8 @@ describe("sgds-datepicker", () => {
     ) as SgdsButton;
     await el.updateComplete;
     calendarBtnElement?.click();
-    await waitUntil(() => menuElement?.classList.contains("show"));
-    expect(menuElement?.classList.contains("show")).to.be.true;
+    await waitUntil(() => el.menuIsOpen);
+    expect(getComputedStyle(menuElement).display).to.be.equal("flex");
     expect(calendarBtnElement?.getAttribute("aria-expanded")).to.be.equal("true");
 
     // 2.  click the header button twice to go the year view calendar
@@ -371,7 +373,7 @@ describe("sgds-datepicker", () => {
     calendarTdElement.click();
 
     expect(calendarTdElement).to.exist;
-    await waitUntil(() => !menuElement?.classList.contains("show"));
+    await waitUntil(() => !el.menuIsOpen);
     await elementUpdated(datepickerHeader);
     await elementUpdated(el);
     await elementUpdated(datepickerCalendar);
@@ -412,7 +414,7 @@ describe("sgds-datepicker", () => {
   });
 
   it("should add the required attribute to sgds-datepicker-input when required is true", async () => {
-    const el = await fixture(html`<sgds-datepicker required></sgds-datepicker>`);
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker required></sgds-datepicker>`);
     const input = el.shadowRoot?.querySelector("sgds-datepicker-input");
 
     expect(input).to.have.attribute("required");

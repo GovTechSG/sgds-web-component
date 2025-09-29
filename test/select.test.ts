@@ -1,4 +1,4 @@
-import { assert, expect, fixture, waitUntil } from "@open-wc/testing";
+import { assert, aTimeout, expect, fixture, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
@@ -53,6 +53,24 @@ const ThreeOptionsSelects = [
     mode: "slot"
   }
 ];
+function getRootActiveElement(el: HTMLElement | null): Element | null {
+  if (!el) return null;
+  const root = el.getRootNode();
+  return (root as Document | ShadowRoot).activeElement as Element | null;
+}
+
+async function simulateUserClick(element: HTMLElement) {
+  // Simulate a real user pointer/mouse sequence before calling focus
+  element.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, composed: true }));
+  element.dispatchEvent(new MouseEvent("mousedown", { bubbles: true, composed: true }));
+  element.click(); // triggers click handlers
+  element.dispatchEvent(new MouseEvent("mouseup", { bubbles: true, composed: true }));
+  // ensure focus after the click
+  element.focus();
+  // allow event loop/slot listeners to run
+  await aTimeout(0);
+}
+
 describe("<sgds-select>", () => {
   it("matches shadowDom semantically", async () => {
     const el = await fixture<SgdsSelect>(html` <sgds-select
@@ -128,17 +146,19 @@ describe("<sgds-select>", () => {
   it("when readonly set to true, menu cannot open", async () => {
     const el = await fixture<SgdsSelect>(html`<sgds-select readonly></sgds-select>`);
     const input = el.shadowRoot?.querySelector("input.form-control") as HTMLInputElement;
+    const menuEl = el.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
     input?.click();
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector(".dropdown-menu.show")).not.to.exist;
+    expect(el.menuIsOpen).to.be.false;
+    expect(getComputedStyle(menuEl).display).to.equal("none");
 
     input?.focus();
     await sendKeys({ press: "ArrowDown" });
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector(".dropdown-menu.show")).to.be.null;
+    expect(getComputedStyle(menuEl).display).to.equal("none");
     await sendKeys({ press: "ArrowUp" });
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector(".dropdown-menu.show")).to.be.null;
+    expect(getComputedStyle(menuEl).display).to.equal("none");
   });
 
   TwoOptionsSelects.forEach(({ mode, render }) => {
@@ -350,7 +370,7 @@ describe("select >> when submitting a form", () => {
     expect(input()?.value).to.equal("Dur");
     // Clear input
     input()?.click();
-    await waitUntil(() => select()?.shadowRoot?.querySelector(".dropdown-menu.show"));
+    await waitUntil(() => select()?.menuIsOpen);
 
     const itemOne = select()?.shadowRoot?.querySelectorAll("sgds-select-option")[0] as SgdsSelectOption;
 
@@ -398,13 +418,19 @@ describe("select >> when submitting a form", () => {
         ></sgds-select>
       `
     );
-    const input = el.shadowRoot?.querySelector("input");
-    input?.focus();
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    await simulateUserClick(input);
+
     await sendKeys({ press: "ArrowDown" });
-    await waitUntil(() => {
-      const selectItem1 = el.shadowRoot?.querySelectorAll("sgds-select-option")[0];
-      return el.shadowRoot?.activeElement === selectItem1;
-    });
+    await waitUntil(
+      () => {
+        const selectItem1 = el.shadowRoot?.querySelectorAll("sgds-select-option")[0];
+        return getRootActiveElement(input) === selectItem1;
+      },
+      "focus did not move into first select item",
+      { timeout: 2000 }
+    );
+
     expect(el.invalid).to.be.false;
   });
 });

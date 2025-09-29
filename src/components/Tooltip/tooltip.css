@@ -6,26 +6,8 @@
   display: inline-block;
   max-width: 100%;
 }
+
 .tooltip {
-  word-wrap: break-word;
-  display: block;
-  line-break: auto;
-  opacity: 0;
-  text-align: left;
-  text-decoration: none;
-  text-shadow: none;
-  text-transform: none;
-  white-space: normal;
-  word-break: normal;
-  word-spacing: normal;
-  z-index: 1080;
-}
-
-.tooltip.show {
-  opacity: 1;
-}
-
-.tooltip-inner {
   background-color: var(--sgds-surface-fixed-dark);
   border-radius: var(--sgds-border-radius-md);
   color: var(--sgds-color-fixed-light);
@@ -33,6 +15,17 @@
   max-width: var(--sgds-dimension-320);
   padding: var(--sgds-padding-xs) var(--sgds-padding-sm);
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 8px 16px 0px rgba(0, 0, 0, 0.14);
+  word-wrap: break-word;
+  display: block;
+  line-break: auto;
+  text-align: left;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  white-space: normal;
+  word-break: normal;
+  word-spacing: normal;
+  z-index: 900;
 }
 
 div {

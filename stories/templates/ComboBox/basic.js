@@ -13,7 +13,7 @@ export const Template = ({
   multiSelect,
   value,
   menuList,
-  popperOpts,
+  floatingOpts,
   menuIsOpen,
   filterFunction
 }) => {
@@ -29,7 +29,7 @@ export const Template = ({
       ?readonly=${readonly}
       value=${ifDefined(value)}
       .menuList=${menuList}
-      popperOpts=${ifDefined(popperOpts)}
+      floatingOpts=${ifDefined(floatingOpts)}
       ?menuIsOpen=${menuIsOpen}
       filterFunction=${ifDefined(filterFunction)}
       ?multiSelect=${multiSelect}
