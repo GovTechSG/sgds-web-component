@@ -37,8 +37,7 @@
           hintText="hint"
           hasFeedback="true"
           invalidFeedback="test"
-        >
-        </sgds-combo-box>
+        ></sgds-combo-box>
       </div>
 
       <div class="small-container">
@@ -62,8 +61,7 @@
           invalidFeedback="test"
           badgeFullWidth="true"
           filterFunction="reduceList()"
-        >
-        </sgds-combo-box>
+        ></sgds-combo-box>
 
         <sgds-combo-box
           id="combobox-2"
@@ -84,8 +82,7 @@
           invalidFeedback="test"
           badgeFullWidth="true"
           placeholder="Combobox placeholder"
-        >
-        </sgds-combo-box>
+        ></sgds-combo-box>
 
         <sgds-combo-box
           id="combobox-3"
@@ -107,11 +104,45 @@
           invalidFeedback="test"
           badgeFullWidth="true"
           placeholder="Combobox placeholder"
+        ></sgds-combo-box>
+
+        <h2>Single selection combo-box using slot</h2>
+        <sgds-combo-box
+          label="Combobox using slot"
+          hinttext="Select an option"
+          placeholder="Select an option"
+          id="combobox-single-selection-slot"
         >
+          <sgds-combo-box-option value="1">lion</sgds-combo-box-option>
+          <sgds-combo-box-option value="2">tiger</sgds-combo-box-option>
+          <sgds-combo-box-option value="3">bear</sgds-combo-box-option>
         </sgds-combo-box>
+
+        <h2>Multi selection combo-box using slot</h2>
+        <sgds-combo-box
+          label="Combobox using slot"
+          hinttext="Select an option"
+          placeholder="Select an option"
+          value="1"
+          id="combobox-multi-selection-slot"
+          multiSelect
+        >
+          <sgds-combo-box-option value="1">lion</sgds-combo-box-option>
+          <sgds-combo-box-option value="2">tiger</sgds-combo-box-option>
+          <sgds-combo-box-option value="3">bear</sgds-combo-box-option>
+          </sgds-combo-box>
+        <h2>Empty combobox with slots</h2>
+        <sgds-combo-box
+          label="Combobox using slot"
+          hinttext="Select an option"
+          placeholder="Select an option"
+          value="1"
+          id="combobox-multi-selection-slot"
+          multiSelect
+        ></sgds-combo-box>
       </div>
     </div>
-    <script>
+    <!-- <script>
       document.addEventListener("sgds-change", reduceList);
 
       function reduceList() {
@@ -130,6 +161,6 @@
         const combobox3 = document.getElementById("combobox-3");
         combobox3.setAttribute("value", "4");
       }
-    </script>
+    </script> -->
   </body>
 </html>

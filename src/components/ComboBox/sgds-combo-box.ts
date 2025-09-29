@@ -1,5 +1,5 @@
 import { html, nothing } from "lit";
-import { property, queryAsync, state } from "lit/decorators.js";
+import { property, queryAssignedElements, queryAsync, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
@@ -12,6 +12,7 @@ import { SgdsComboBoxOption } from "./sgds-combo-box-option";
 import comboBoxStyle from "./combo-box.css";
 
 import { repeat } from "lit/directives/repeat.js";
+import { assign } from "lodash";
 
 /**
  * Each item in the ComboBox has a label to display
@@ -58,6 +59,9 @@ export class SgdsComboBox extends SelectElement {
 
   @queryAsync("input#multi-select-input-tracker") private _multiSelectInput: Promise<HTMLInputElement>;
 
+  @queryAssignedElements({ flatten: true, selector: "sgds-combo-box-option" })
+  protected options: SgdsComboBoxOption[];
+
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("sgds-hide", async () => {
@@ -69,6 +73,13 @@ export class SgdsComboBox extends SelectElement {
 
   async firstUpdated() {
     super.firstUpdated();
+    this.menuList =
+      this.options.length > 0
+        ? this.options?.map(el => ({
+            label: el.textContent?.trim() ?? "",
+            value: el.getAttribute("value") ?? el.textContent?.trim() ?? ""
+          }))
+        : this.menuList;
 
     this._renderedMenu = this.menuList;
     if (this.value) {
@@ -167,7 +178,7 @@ export class SgdsComboBox extends SelectElement {
   /**
    * Called whenever an <sgds-combo-box-option> dispatches sgds-select"
    */
-  protected async _handleItemSelected(e: CustomEvent) {
+  protected async _handleItemSelected(e: Event) {
     const itemEl = e.target as SgdsComboBoxOption;
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
@@ -298,7 +309,6 @@ export class SgdsComboBox extends SelectElement {
               `;
             }
           );
-
     return menu;
   }
 
@@ -376,6 +386,7 @@ export class SgdsComboBox extends SelectElement {
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1">
           ${this._renderMenu()}
         </ul>
+        <slot></slot>
       </div>
       <!-- Required an input element for constraint validation -->
       ${this.multiSelect

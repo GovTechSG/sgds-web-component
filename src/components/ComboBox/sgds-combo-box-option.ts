@@ -23,6 +23,12 @@ export class SgdsComboBoxOption extends OptionElement {
     });
   }
 
+  firstUpdated() {
+    const parent = this.closest("sgds-combo-box");
+    if (parent?.multiSelect) {
+      this.checkbox = true;
+    }
+  }
   private _handleNonCheckboxClick() {
     if (!this.checkbox) {
       this.emit("sgds-select");
