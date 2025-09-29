@@ -59,7 +59,7 @@ nav > .navbar-body .navbar-nav {
 }
 
 nav > .navbar-body {
-  position: fixed;
+  position: absolute;
   z-index: 2000;
   width: 100%;
   background-color: var(--sgds-surface-default);
