@@ -17,10 +17,7 @@
   position: absolute;
   text-align: left;
   overflow-y: auto;
-  z-index: 500;
-}
-.dropdown-menu.show {
-  display: block;
+  z-index: 1050;
 }
 
 .nav-tabs .dropdown-menu {

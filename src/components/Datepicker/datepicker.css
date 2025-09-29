@@ -10,12 +10,8 @@
 
   font-size: var(--sgds-font-size-1);
 }
-.dropdown {
-  display: flex;
-  height: 100%;
-}
 
-.datepicker.dropdown-menu.show {
+:host([menuisopen]) .dropdown-menu {
   background-color: var(--sgds-form-surface-default);
   padding: var(--sgds-form-padding-y) var(--sgds-form-padding-x);
   display: flex;
@@ -24,6 +20,12 @@
   overflow: unset;
   width: var(--sgds-dimension-320);
 }
+
+.dropdown {
+  display: flex;
+  height: 100%;
+}
+
 sgds-datepicker-input {
   flex: 1;
   margin-right: 0; /* Remove the margin on the right */

@@ -71,31 +71,6 @@ export class SgdsMainnav extends SgdsElement {
   /** @internal */
   @query("slot[name='non-collapsible']") nonCollapsibleSlot: HTMLSlotElement;
 
-  constructor() {
-    super();
-    window.addEventListener("resize", () => {
-      const newBreakpointReachedValue = window.innerWidth < SIZES[this.expand];
-      if (newBreakpointReachedValue !== this.breakpointReached) {
-        this.requestUpdate();
-      } else {
-        this.body ? (this.body.hidden = true) : null;
-        // this.expanded = false;
-        this.expanding = false;
-      }
-
-      if (newBreakpointReachedValue) {
-        this._handleMobileNav();
-
-        if (!this._breakpointReached) {
-          this._breakpointReached = true;
-        }
-      } else {
-        this._handleDesktopNav();
-        this._breakpointReached = false;
-      }
-    });
-  }
-
   /** The href link for brand logo */
   @property({ type: String })
   brandHref = "";
@@ -133,13 +108,17 @@ export class SgdsMainnav extends SgdsElement {
   connectedCallback() {
     super.connectedCallback();
 
-    this.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
+    this._handleResize();
+
+    window.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
+    window.addEventListener("resize", this._handleResize.bind(this));
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
 
-    this.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
+    window.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
+    window.removeEventListener("resize", this._handleResize.bind(this));
   }
 
   firstUpdated() {
@@ -171,16 +150,44 @@ export class SgdsMainnav extends SgdsElement {
     }
   }
 
+  private _handleResize() {
+    const newBreakpointReachedValue = window.innerWidth < SIZES[this.expand];
+    if (newBreakpointReachedValue !== this.breakpointReached) {
+      this.requestUpdate();
+    } else {
+      this.body ? (this.body.hidden = true) : null;
+      // this.expanded = false;
+      this.expanding = false;
+    }
+
+    if (newBreakpointReachedValue) {
+      this._handleMobileNav();
+
+      if (!this._breakpointReached) {
+        this._breakpointReached = true;
+
+        window.addEventListener("scrollend", this._handleMobileNavBound);
+      }
+    } else {
+      this._handleDesktopNav();
+      this._breakpointReached = false;
+      window.removeEventListener("scrollend", this._handleMobileNavBound);
+    }
+  }
+
+  private _handleMobileNavBound = this._handleMobileNav.bind(this);
+
   private async _handleMobileNav() {
     if (!this.nav) return;
 
     this.nav.appendChild(this.body);
     await customElements.whenDefined("sgds-masthead");
-    const offsetTop = this.nav.offsetTop;
-    const navHeight = this.nav.clientHeight;
-    const mainNavPosition = offsetTop + navHeight;
-    this.body.style.top = `${mainNavPosition}px`;
-    this.navScroll.style.maxHeight = `calc(100dvh - ${mainNavPosition}px)`;
+
+    const { bottom } = this.nav.getBoundingClientRect();
+    const navBodyPaddingY =
+      parseFloat(getComputedStyle(this.body).paddingTop) + parseFloat(getComputedStyle(this.body).paddingBottom);
+
+    this.navScroll.style.maxHeight = `calc(100dvh - ${bottom}px - ${navBodyPaddingY}px)`;
   }
 
   private _handleDesktopNav() {
