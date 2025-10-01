@@ -8,11 +8,10 @@ import { SelectElement, SgdsSelectItemData } from "../../base/select-element";
 import { watch } from "../../utils/watch";
 import { SgdsBadge } from "../Badge/sgds-badge";
 import SgdsIcon from "../Icon/sgds-icon";
-import { SgdsComboBoxOption } from "./sgds-combo-box-option";
 import comboBoxStyle from "./combo-box.css";
+import { SgdsComboBoxOption } from "./sgds-combo-box-option";
 
 import { repeat } from "lit/directives/repeat.js";
-import { assign } from "lodash";
 
 /**
  * Each item in the ComboBox has a label to display
@@ -380,9 +379,7 @@ export class SgdsComboBox extends SelectElement {
   render() {
     return html`
       <div class="combobox" @keydown=${this._handleMultiSelectKeyDown}>
-        ${this._renderLabel()}
-        <!-- The input -->
-        ${this._renderInput()} ${this._renderFeedback()}
+        ${this._renderLabel()} ${this._renderInput()} ${this._renderFeedback()}
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
           ${this._renderMenu()}
         </ul>

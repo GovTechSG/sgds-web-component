@@ -112,6 +112,7 @@
           hinttext="Select an option"
           placeholder="Select an option"
           id="combobox-single-selection-slot"
+          value="1"
         >
           <sgds-combo-box-option value="1">lion</sgds-combo-box-option>
           <sgds-combo-box-option value="2">tiger</sgds-combo-box-option>
@@ -143,6 +144,14 @@
       </div>
     </div>
 
+  <script>
+      const durianOption = document.createElement("sgds-combo-box-option");
+      durianOption.textContent = "Durian";
+      durianOption.setAttribute("value", "5");
+      const slotSingle = document.getElementById("combobox-single-selection-slot");
+      slotSingle.replaceChildren(durianOption);
+
+</script>
   
     <!-- <script>
       document.addEventListener("sgds-change", reduceList);
