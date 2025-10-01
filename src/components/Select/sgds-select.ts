@@ -128,23 +128,23 @@ export class SgdsSelect extends SelectElement {
     this._mixinResetValidity(await this._input);
   }
 
-  protected _handleSlotChange(e: Event) {
-    const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true }) as SgdsSelectOption[];
-    assignedElements.forEach(el =>
-      el.addEventListener("click", (e: MouseEvent) => {
-        const option = e.target as SgdsSelectOption;
-        if (option.disabled) return;
-        this._handleItemSelected(e);
-      })
-    );
-    assignedElements.forEach(el =>
-      el.addEventListener("keydown", (e: KeyboardEvent) => {
-        if (e.key === "Enter") {
-          this._handleItemSelected(e);
-        }
-      })
-    );
-  }
+  // protected _handleSlotChange(e: Event) {
+  //   const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true }) as SgdsSelectOption[];
+  //   assignedElements.forEach(el =>
+  //     el.addEventListener("click", (e: MouseEvent) => {
+  //       const option = e.target as SgdsSelectOption;
+  //       if (option.disabled) return;
+  //       this._handleItemSelected(e);
+  //     })
+  //   );
+  //   assignedElements.forEach(el =>
+  //     el.addEventListener("keydown", (e: KeyboardEvent) => {
+  //       if (e.key === "Enter") {
+  //         this._handleItemSelected(e);
+  //       }
+  //     })
+  //   );
+  // }
   private _blockInputKeydown = (e: KeyboardEvent) => {
     if (e.key !== "Tab") {
       e.preventDefault();
@@ -222,9 +222,10 @@ export class SgdsSelect extends SelectElement {
         <!-- The input -->
         ${this._renderInput()} ${this._renderFeedback()}
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
-          <slot id="default" @slotchange=${this._handleSlotChange}>${this._renderMenu()}</slot>
+           ${this._renderMenu()}
         </ul>
       </div>
+      <slot></slot>
     `;
   }
 }

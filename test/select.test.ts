@@ -104,7 +104,6 @@ describe("<sgds-select>", () => {
             part="menu"
             tabindex="-1"
             >
-            <slot>
             <sgds-select-option
               aria-disabled="false"
               role="menuitem"
@@ -119,8 +118,10 @@ describe("<sgds-select>", () => {
             >
               Option 2
             </sgds-select-option>
-            </slot>
           </ul>
+          </div>
+          <slot></slot>
+
             `,
       { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
     );
@@ -210,14 +211,9 @@ describe("<sgds-select>", () => {
       input?.click();
       await waitUntil(() => el.menuIsOpen);
 
-      if (mode === "slot") {
-        const item = el.querySelectorAll("sgds-select-option")[0] as SgdsSelectOption;
-        item?.click();
-      } else {
-        const item = el.shadowRoot?.querySelectorAll("sgds-select-option")[0] as SgdsSelectOption;
-        const itemContent = item.shadowRoot?.querySelector("div.normal-item-content") as HTMLDivElement;
-        itemContent?.click();
-      }
+      const item = el.shadowRoot?.querySelectorAll("sgds-select-option")[0] as SgdsSelectOption;
+      const itemContent = item.shadowRoot?.querySelector("div.normal-item-content") as HTMLDivElement;
+      itemContent?.click();
 
       await waitUntil(() => el.value === "option1");
 
@@ -260,25 +256,14 @@ describe("<sgds-select>", () => {
       await simulateUserClick(input);
 
       await sendKeys({ press: "ArrowDown" });
-      if (mode === "slot") {
-        await waitUntil(
-          () => {
-            const selectItem1 = el.querySelectorAll("sgds-select-option")[0];
-            return getRootActiveElement(el) === selectItem1;
-          },
-          "focus did not move into first select item",
-          { timeout: 2000 }
-        );
-      } else {
-        await waitUntil(
-          () => {
-            const selectItem1 = el.shadowRoot?.querySelectorAll("sgds-select-option")[0];
-            return getRootActiveElement(input) === selectItem1;
-          },
-          "focus did not move into first select item",
-          { timeout: 2000 }
-        );
-      }
+      await waitUntil(
+        () => {
+          const selectItem1 = el.shadowRoot?.querySelectorAll("sgds-select-option")[0];
+          return getRootActiveElement(input) === selectItem1;
+        },
+        "focus did not move into first select item",
+        { timeout: 2000 }
+      );
 
       await sendKeys({ press: "Escape" });
       await waitUntil(() => getRootActiveElement(input) === input, "focus did not return to the input after Escape", {

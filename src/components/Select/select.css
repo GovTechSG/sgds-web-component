@@ -100,3 +100,7 @@
 .form-control-group.disabled {
   background-color: var(--sgds-form-surface-muted);
 }
+
+slot::slotted(*){
+  display: none;
+}
