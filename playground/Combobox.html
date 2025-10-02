@@ -106,7 +106,7 @@
           placeholder="Combobox placeholder"
         ></sgds-combo-box>
 
-        <h2>Single selection combo-box using slot</h2>
+        <h2>Single selection combo-box using slot *********</h2>
         <sgds-combo-box
           label="Combobox using slot"
           hinttext="Select an option"
@@ -131,7 +131,7 @@
           <sgds-combo-box-option value="1" disabled>lion</sgds-combo-box-option>
           <sgds-combo-box-option value="2">tiger</sgds-combo-box-option>
           <sgds-combo-box-option value="3">bear</sgds-combo-box-option>
-          </sgds-combo-box>
+        </sgds-combo-box>
         <h2>Empty combobox with slots</h2>
         <sgds-combo-box
           label="Combobox using slot"
@@ -144,16 +144,18 @@
       </div>
     </div>
 
-  <!-- <script>
-      const durianOption = document.createElement("sgds-combo-box-option");
-      durianOption.textContent = "Durian";
-      durianOption.setAttribute("value", "5");
-      const slotSingle = document.getElementById("combobox-single-selection-slot");
-      slotSingle.replaceChildren(durianOption);
+    <!-- Slot method: Test if menu option changes will trigger an update in the combo box value -->
+    <script>
+      setTimeout(() => {
+        const durianOption = document.createElement("sgds-combo-box-option");
+        durianOption.textContent = "Durian";
+        durianOption.setAttribute("value", "5");
+        const slotSingle = document.getElementById("combobox-single-selection-slot");
+        slotSingle.replaceChildren(durianOption);
+      }, 2000);
+    </script>
 
-</script> -->
-  
-    <!-- <script>
+    <script>
       document.addEventListener("sgds-change", reduceList);
 
       function reduceList() {
@@ -172,6 +174,6 @@
         const combobox3 = document.getElementById("combobox-3");
         combobox3.setAttribute("value", "4");
       }
-    </script> -->
+    </script>
   </body>
 </html>

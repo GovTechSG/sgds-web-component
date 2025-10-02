@@ -12,8 +12,8 @@ export const Template = args =>
       hintText=${ifDefined(args.hintText)}
       placeholder=${ifDefined(args.placeholder)}
       >${args.menuList.map(
-        (m, i) => html`<sgds-combo-box-option value=${m.value} ?disabled=${thirdOptionDisabled && i === 2}
-          >${m.label}</sgds-combo-box-option
+        (m, i) => html`<sgds-select-option value=${m.value} ?disabled=${args.thirdOptionDisabled && i === 2}
+          >${m.label}</sgds-select-option
         > `
       )}</sgds-select
     >
