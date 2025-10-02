@@ -17,13 +17,8 @@
   color: var( --sgds-link-color-emphasis);
 }
 
-.nav-link::slotted(a:focus),
-.nav-link::slotted(a:focus-visible) {
-  outline: 0;
-}
-
 .nav-link::slotted(a:focus-visible:not([disabled])) {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
 }
 
 .nav-link::slotted(a[disabled]) {

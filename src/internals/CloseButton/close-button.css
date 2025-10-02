@@ -29,12 +29,11 @@
 
 .btn-close:focus,
 .btn-close:focus-visible {
-  outline: 0;
   background-color: var(--sgds-bg-translucent);
 }
 
 .btn-close:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
 }
 
 .btn-close-sm {

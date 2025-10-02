@@ -46,20 +46,12 @@ button {
 }
 .sidenav-btn:focus:not(.disabled),
 .sidenav-btn:focus-visible:not(.disabled) {
-  outline: 0;
   background-color: var(--sgds-bg-translucent-subtle);
 }
 .sidenav-btn:focus-visible:not(.disabled) {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
 }
 
-.no-menu-default:focus,
-.no-menu-default:focus-visible {
-  background-color: var(--sgds-default-bg-translucent-subtle);
-}
-.no-menu-default:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
-}
 .no-menu-default::slotted(a) {
   text-decoration: none !important;
   color: inherit !important;
@@ -78,11 +70,10 @@ button {
 
 .no-menu-default::slotted(a:focus),
 .no-menu-default::slotted(a:focus-visible) {
-  outline: 0 !important;
   background-color: var(--sgds-bg-translucent-subtle);
 }
 .no-menu-default::slotted(a:focus-visible) {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
 }
 
 :host([class^="first-level"][active]) .no-menu-default::slotted(a) {
