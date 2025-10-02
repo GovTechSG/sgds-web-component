@@ -10,9 +10,9 @@ export const SelectDefaultSlot = {
 
 const SelectMenuListProp = () => {
   return html`
-    <sgds-select id="select-example" label="Items" placeholder="Select"> </sgds-select>
+    <sgds-select id="select-menuList-prop-example" label="Items" placeholder="Select"></sgds-select>
     <script>
-      const select = document.querySelector("#select-example");
+      const select = document.querySelector("#select-menuList-prop-example");
       select.menuList = [
         { label: "Afghanistan", value: "1" },
         { label: "Albania", value: "2" },

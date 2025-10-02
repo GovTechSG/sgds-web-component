@@ -408,17 +408,28 @@ describe("sgds-combo-box ", () => {
       const el = await fixture<SgdsComboBox>(render({ multiSelect: true, value: "option1;option2" }));
 
       expect(el.value).to.equal("option1;option2");
-
-      el.setAttribute(
-        "menuList",
-        JSON.stringify([
-          { label: "Durian", value: "option3" },
-          { label: "Grapes", value: "option4" },
-          { label: "Orange", value: "option5" }
-        ])
-      );
+      const newMenuList = [
+        { label: "Durian", value: "option3" },
+        { label: "Grapes", value: "option4" },
+        { label: "Orange", value: "option5" }
+      ];
+      if (mode === "property") {
+        el.setAttribute("menuList", JSON.stringify(newMenuList));
+      } else {
+        const newElements = newMenuList.map(list => {
+          const newOption = document.createElement("sgds-combo-box-option");
+          newOption.textContent = list.label;
+          newOption.setAttribute("value", "option3");
+          return newOption;
+        });
+        el.replaceChildren(...newElements);
+        el.requestUpdate();
+      }
 
       await el.updateComplete;
+      // testing that menu has changed
+      const newMenu = el.shadowRoot?.querySelectorAll("sgds-combo-box-option")[0];
+      expect(newMenu?.textContent.trim()).to.equal("Durian");
       expect(el.value).to.equal("");
     });
     it("when value is updated, it should reflect the new value on the select", async () => {
@@ -618,21 +629,31 @@ describe("single select combobox", () => {
     it(`MODE=${mode}, when menu list is updated, and the current value is no longer valid it should null the value`, async () => {
       const el = await fixture<SgdsComboBox>(render({ multiSelect: false, value: "option1" }));
 
-      const input = () => el.shadowRoot?.querySelector("input") as HTMLInputElement;
+      const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
       await el.updateComplete;
-      expect(input().value).to.equal("Apple");
+      expect(input.value).to.equal("Apple");
       expect(el.value).to.equal("option1");
 
-      const newMenu = [
+      const newMenuList = [
         { label: "Durian", value: "option3" },
         { label: "Grapes", value: "option4" },
         { label: "Orange", value: "option5" }
       ];
-      el.setAttribute("menuList", JSON.stringify(newMenu));
-      // TODO: re-render and change slots
+      if (mode === "property") {
+        el.setAttribute("menuList", JSON.stringify(newMenuList));
+      } else {
+        const newElements = newMenuList.map(list => {
+          const newOption = document.createElement("sgds-combo-box-option");
+          newOption.textContent = list.label;
+          newOption.setAttribute("value", "option3");
+          return newOption;
+        });
+        el.replaceChildren(...newElements);
+        el.requestUpdate();
+      }
       await el.updateComplete;
-      await waitUntil(() => input().value === "");
-      expect(input().value).to.equal("");
+      await waitUntil(() => input.value === "");
+      expect(input.value).to.equal("");
       expect(el.value).to.equal("");
     });
   });

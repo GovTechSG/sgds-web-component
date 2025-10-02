@@ -22,7 +22,6 @@ type SgdsComboBoxOptionData = SgdsOptionData;
  * @summary ComboBox component is used for users to make one or more selections from a list through user input, keyboard or mouse actions
  *
  * @slot default - default slot to pass in sgds-combo-box-option
- * @slot icon - slot for form control icon to be displayed on the right of the input box.
  *
  * @event sgds-select - Emitted when the combo box's selected value changes.
  * @event sgds-change - Emitted when the combo box's value changes.
@@ -72,7 +71,7 @@ export class SgdsComboBox extends SelectElement {
   }
   async firstUpdated() {
     super.firstUpdated();
-    this.menuList = this.options.length > 0 ? this._updateMenuListFromOptions() : this.menuList;
+    this.menuList = this.options.length > 0 ? this._getMenuListFromOptions() : this.menuList;
     this._renderedMenu = this.menuList;
     if (this.value) {
       const valueArray = this.value.split(";");
@@ -375,7 +374,7 @@ export class SgdsComboBox extends SelectElement {
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
           ${this._renderMenu()}
         </ul>
-        <slot @slotchange=${() => this._updateMenuListFromOptions()}></slot>
+        <slot @slotchange=${this._handleDefaultSlotChange}></slot>
       </div>
 
       <!-- Required an input element for constraint validation -->

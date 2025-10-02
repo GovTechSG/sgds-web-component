@@ -65,6 +65,8 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
    * label: string;
    * value: string;
    * }`
+   * @deprecated
+   * Deprecated in favour of slots
    */
   @property({ type: Array }) menuList: SgdsOptionData[] = [];
   /** Track selected items (even for single-select, but it will have at most one). */
@@ -168,12 +170,15 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
       this.hideMenu();
     }
   }
-  protected _updateMenuListFromOptions(): SgdsOptionData[] {
+  protected _getMenuListFromOptions(): SgdsOptionData[] {
     return this.options?.map((el: OptionElement) => ({
       label: el.textContent?.trim() ?? "",
       value: el.getAttribute("value") ?? el.textContent?.trim() ?? "",
       disabled: el.disabled ?? undefined
     }));
+  }
+  protected _handleDefaultSlotChange() {
+    this.menuList = this._getMenuListFromOptions();
   }
 
   protected declare options: OptionElement[];

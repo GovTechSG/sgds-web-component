@@ -39,7 +39,7 @@ export class SgdsSelect extends SelectElement {
 
   async firstUpdated() {
     super.firstUpdated();
-    this.menuList = this.options.length > 0 ? this._updateMenuListFromOptions() : this.menuList;
+    this.menuList = this.options.length > 0 ? this._getMenuListFromOptions() : this.menuList;
     if (this.value) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
       this.selectedItems = [...initialSelectedItem];
@@ -133,7 +133,6 @@ export class SgdsSelect extends SelectElement {
   protected _renderMenu() {
     const menu = this.menuList.map(item => {
       const isActive = item.value === this.value;
-
       return html`
         <sgds-select-option
           ?active=${isActive}
@@ -200,7 +199,7 @@ export class SgdsSelect extends SelectElement {
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
           ${this._renderMenu()}
         </ul>
-        <slot @slotchange=${() => this._updateMenuListFromOptions()}></slot>
+        <slot @slotchange=${this._handleDefaultSlotChange}></slot>
       </div>
     `;
   }
