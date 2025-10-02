@@ -80,19 +80,19 @@
   :host([size="fullscreen"]) .modal-panel {
     margin: var(--sgds-margin-xl) var(--sgds-margin-xs);
     max-height: calc(100% - var(--sgds-margin-xl) - var(--sgds-margin-xl));
-    max-width: var(--sgds-dimension-896);
+    max-width: var(--sgds-dimension-888);
   } 
 }
 
 @media screen and (min-width: 1280px) {
   :host([size="fullscreen"]) .modal-panel {
-    max-width: var(--sgds-dimension-1176);
+    max-width: var(--sgds-dimension-1168);
   } 
 }
 
 @media screen and (min-width: 1440px) {
   :host([size="fullscreen"]) .modal-panel {
-    max-width: var(--sgds-dimension-1320);
+    max-width: var(--sgds-dimension-1312);
   } 
 }
 

@@ -9,7 +9,7 @@
 }
 
 .title {
-  color: var(--sgds-header-color-default);
+  color: var(--sgds-heading-color-default);
   font-weight: var(--sgds-font-weight-semibold);
   letter-spacing: var(--sgds-letter-spacing-tight);
   font-size: var(--sgds-font-size-4);
