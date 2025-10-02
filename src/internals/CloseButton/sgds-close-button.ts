@@ -36,16 +36,7 @@ export class SgdsCloseButton extends SgdsElement {
   }
   render() {
     return html`
-      <button
-        class=${classMap({
-          "btn-close": true,
-          [`btn-close-${this.size}`]: this.size,
-          "btn-close-light": this.variant === "light",
-          "btn-close-dark": this.variant === "dark"
-        })}
-        aria-label=${ifDefined(this.ariaLabel)}
-        @click=${this._handleClick}
-      >
+      <button class="btn-close" aria-label=${ifDefined(this.ariaLabel)} @click=${this._handleClick}>
         <sgds-icon name="cross" size=${this.size}></sgds-icon>
       </button>
     `;
