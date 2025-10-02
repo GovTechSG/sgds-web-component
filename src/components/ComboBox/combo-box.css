@@ -96,8 +96,9 @@
 .form-control-group:not(.disabled):not(.is-invalid):focus,
 .form-control-group:not(.disabled):not(.is-invalid):focus-within {
   border: var(--sgds-form-border-width-thick) solid var(--sgds-border-color-emphasis);
-  box-shadow: var(--sgds-form-box-shadow-focus);
-  outline: 0;
+}
+.form-control-group:not(.disabled):not(.is-invalid):focus-within {
+  outline: var(--sgds-outline-focus);
 }
 
 .form-control-group.is-invalid {

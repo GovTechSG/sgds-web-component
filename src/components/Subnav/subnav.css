@@ -38,13 +38,8 @@ slot[name="header"]::slotted(*) {
   transition: transform 0.2s ease-in-out;
 }
 
-.subnav-toggler:focus,
 .subnav-toggler:focus-visible {
-  outline: 0;
-}
-
-.subnav-toggler:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
 }
 
 .subnav:not(.collapsed) .subnav-toggler {

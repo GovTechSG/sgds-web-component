@@ -5,11 +5,8 @@
 }
 input {
   margin: 0;
+}
 
-}
-input[type="checkbox"]:focus-visible {
-  outline: none;
-}
 .form-check {
   display: flex;
   gap: var(--sgds-form-gap-md);
@@ -42,6 +39,7 @@ input[type="checkbox"]:focus-visible {
 .form-check-input:focus-visible {
   border: var(--sgds-form-border-width-thick) solid var(--sgds-border-color-emphasis);
   outline: var(--sgds-form-outline-focus);
+  outline-offset: 0;
 }
 
 .form-check-input:checked,

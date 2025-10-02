@@ -20,9 +20,11 @@
 
 .dropdown-item:focus,
 .dropdown-item:focus-visible {
-  outline: 0;
-  box-shadow: inset var(--sgds-form-box-shadow-focus);
   background-color: var(--sgds-bg-translucent-subtle);
+}
+.dropdown-item:focus-visible {
+  outline-offset: -4px;
+  outline: var(--sgds-outline-focus);
 }
 
 .dropdown-item.active {

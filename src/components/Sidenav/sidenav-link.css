@@ -46,16 +46,14 @@
 :host([disabled]) ::slotted(a:focus),
 :host([disabled]) ::slotted(a:focus-visible) {
   outline: 0;
-  box-shadow: none;
 }
 
 ::slotted(a:focus),
 ::slotted(a:focus-visible) {
-  outline: 0;
   background-color: var(--sgds-bg-translucent-subtle);
 }
 ::slotted(a:focus-visible) {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
 }
 
 :host([active]) ::slotted(a:focus),

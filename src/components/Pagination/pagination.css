@@ -31,22 +31,16 @@ svg {
 .page-link:not(.ellipsis):hover, .page-link:focus {
   color: var(--sgds-primary-color-default);
   background-color: var(--sgds-primary-bg-translucent);
-  z-index: 2;
 }
-.page-link:focus,
+
 .page-link:focus-visible {
-  outline: 0;
-  z-index: 3;
-}
-.page-link:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
 }
 .page-item > .page-link:not(.ellipsis) {
   cursor: pointer;
 }
 
 .page-item.active .page-link {
-  z-index: 3;
   color: var(--sgds-color-fixed-light);
   border-color: var(--sgds-info);
   background-color: var(--sgds-primary-bg-default);

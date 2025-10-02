@@ -28,8 +28,11 @@ input {
 
 .form-check-input:focus,
 .form-check-input:focus-visible {
-  box-shadow: var(--sgds-form-box-shadow-focus);
-  outline: 0;
+  background-color: var(--sgds-form-surface-emphasis);
+}
+.form-check-input:focus-visible {
+  outline: var(--sgds-outline-focus);
+  outline-offset: 0;
   background-color: var(--sgds-form-surface-emphasis);
 }
 

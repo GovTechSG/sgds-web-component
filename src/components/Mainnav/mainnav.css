@@ -36,13 +36,9 @@ nav {
   white-space: nowrap;
 }
 
-.navbar-brand:focus,
 .navbar-brand:focus-visible {
-  outline: 0;
-}
-
-.navbar-brand:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
+  outline-offset: -4px;
 }
 
 .navbar-nav {
