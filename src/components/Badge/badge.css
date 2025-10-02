@@ -4,6 +4,10 @@
   cursor: default;
 }
 
+:host([variant="accent"]) .badge {
+  background-color: var(--sgds-accent-surface-default);
+}
+
 :host([variant="success"]) .badge {
   background-color: var(--sgds-success-surface-default);
 }
@@ -17,28 +21,69 @@
   background-color: var(--sgds-warning-surface-default);
 }
 
+:host([variant="cyan"]) .badge {
+  background-color: var(--sgds-cyan-surface-default);
+}
+
+:host([variant="purple"]) .badge {
+  background-color: var(--sgds-purple-surface-default);
+}
+
 :host([variant="neutral"]) .badge {
   background-color: var(--sgds-neutral-surface-default);
 }
 
+:host([variant="white"]) .badge {
+  color: var(--sgds-color-fixed-dark);
+  background-color: var(--sgds-surface-fixed-light);
+}
+
+:host([variant="accent"][outlined]) .badge {
+  color: var(--sgds-accent-color-fixed-dark);
+  background-color: var(--sgds-accent-surface-muted);
+  border: var(--sgds-border-width-1) solid var(--sgds-accent-border-color-muted);
+}
+
 :host([variant="success"][outlined]) .badge {
+  color: var(--sgds-success-color-fixed-dark);
   background-color: var(--sgds-success-surface-muted);
-  border: var(--sgds-border-width-1) solid var(--sgds-success-border-color-default);
+  border: var(--sgds-border-width-1) solid var(--sgds-success-border-color-muted);
 }
 
 :host([variant="danger"][outlined]) .badge {
+  color: var(--sgds-danger-color-fixed-dark);
   background-color: var(--sgds-danger-surface-muted);
-  border: var(--sgds-border-width-1) solid var(--sgds-danger-border-color-default);
+  border: var(--sgds-border-width-1) solid var(--sgds-danger-border-color-muted);
 }
 
 :host([variant="warning"][outlined]) .badge {
+  color: var(--sgds-warning-color-fixed-dark);
   background-color: var(--sgds-warning-surface-muted);
-  border: var(--sgds-border-width-1) solid var(--sgds-warning-border-color-default);
+  border: var(--sgds-border-width-1) solid var(--sgds-warning-border-color-muted);
+}
+
+:host([variant="cyan"][outlined]) .badge {
+  color: var(--sgds-cyan-color-fixed-dark);
+  background-color: var(--sgds-cyan-surface-muted);
+  border: var(--sgds-border-width-1) solid var(--sgds-cyan-border-color-muted);
+}
+
+:host([variant="purple"][outlined]) .badge {
+  color: var(--sgds-purple-color-fixed-dark);
+  background-color: var(--sgds-purple-surface-muted);
+  border: var(--sgds-border-width-1) solid var(--sgds-purple-border-color-muted);
 }
 
 :host([variant="neutral"][outlined]) .badge {
+  color: var(--sgds-color-fixed-dark);
   background-color: var(--sgds-neutral-surface-muted);
-  border: var(--sgds-border-width-1) solid var(--sgds-neutral-border-color-default);
+  border: var(--sgds-border-width-1) solid var(--sgds-neutral-border-color-muted);
+}
+
+:host([variant="white"][outlined]) .badge {
+  color: var(--sgds-color-fixed-dark);
+  background-color: var(--sgds-surface-fixed-light);
+  border: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }
 
 sgds-tooltip {
@@ -47,7 +92,7 @@ sgds-tooltip {
 }
 
 .badge {
-  max-width: 192px;
+  max-width: var(--sgds-dimension-192);
   background-color: var(--sgds-primary-surface-default);
   color: var(--sgds-color-fixed-light);
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
@@ -58,21 +103,21 @@ sgds-tooltip {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: var(--sgds-padding-none) var(--sgds-padding-2-xs);
+  padding: var(--sgds-padding-none) var(--sgds-padding-xs);
 }
 
 .badge.outlined {
-  color: var(--sgds-color-fixed-dark);
+  color: var(--sgds-primary-color-fixed-dark);
   background-color: var(--sgds-primary-surface-muted);
-  border: var(--sgds-border-width-1) solid var(--sgds-primary-border-color-default);
+  border: var(--sgds-border-width-1) solid var(--sgds-primary-border-color-muted);
 }
 .badge.full-width {
   max-width: 100%;
 }
 
 .badge-label {
-  padding: var(--sgds-padding-none) var(--sgds-padding-2-xs);
-  line-height: var(--sgds-line-height-min);
+  padding: var(--sgds-padding-none) var(--sgds-padding-3-xs);
+  line-height: var(--sgds-line-height-20);
 }
 
 .badge-dismissible {
@@ -90,6 +135,6 @@ sgds-tooltip {
 }
 
 slot::slotted(*) {
-  font-weight: normal;
-  font-size: 14px;
+  font-weight: var(--sgds-font-weight-regular);
+  font-size: var(--sgds-font-size-1);
 }
