@@ -19,7 +19,7 @@
     "max-width": {
       "2-xl": {
         "$type": "number",
-        "$value": "{sgds-dimension-1320}",
+        "$value": "{sgds-dimension-1312}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -33,7 +33,7 @@
       },
       "xl": {
         "$type": "number",
-        "$value": "{sgds-dimension-1176}",
+        "$value": "{sgds-dimension-1168}",
         "$description": "",
         "$extensions": {
           "com.figma": {
@@ -47,7 +47,7 @@
       },
       "lg": {
         "$type": "number",
-        "$value": "{sgds-dimension-896}",
+        "$value": "{sgds-dimension-888}",
         "$description": "",
         "$extensions": {
           "com.figma": {
