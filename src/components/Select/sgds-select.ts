@@ -8,6 +8,7 @@ import { watch } from "../../utils/watch";
 import SgdsIcon from "../Icon/sgds-icon";
 import selectStyle from "./select.css";
 import SgdsSelectOption from "./sgds-select-option";
+
 /**
  * @summary Select is used to make one selection from a list through keyboard or mouse actions
  *
@@ -38,13 +39,7 @@ export class SgdsSelect extends SelectElement {
 
   async firstUpdated() {
     super.firstUpdated();
-    this.menuList =
-      this.options.length > 0
-        ? this.options?.map(el => ({
-            label: el.textContent?.trim() ?? "",
-            value: el.getAttribute("value") ?? el.textContent?.trim() ?? ""
-          }))
-        : this.menuList;
+    this.menuList = this.options.length > 0 ? this._updateMenuListFromOptions() : this.menuList;
     if (this.value) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
       this.selectedItems = [...initialSelectedItem];
@@ -59,7 +54,6 @@ export class SgdsSelect extends SelectElement {
       this.showMenu();
     }
   }
-
   private _setActiveToOption() {
     const activeIndex = this.menuList.findIndex(item => item.value.toString() === this.value);
     this.options.forEach((option, index) => {
@@ -127,30 +121,11 @@ export class SgdsSelect extends SelectElement {
     }
     this._mixinResetValidity(await this._input);
   }
-
-  // protected _handleSlotChange(e: Event) {
-  //   const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true }) as SgdsSelectOption[];
-  //   assignedElements.forEach(el =>
-  //     el.addEventListener("click", (e: MouseEvent) => {
-  //       const option = e.target as SgdsSelectOption;
-  //       if (option.disabled) return;
-  //       this._handleItemSelected(e);
-  //     })
-  //   );
-  //   assignedElements.forEach(el =>
-  //     el.addEventListener("keydown", (e: KeyboardEvent) => {
-  //       if (e.key === "Enter") {
-  //         this._handleItemSelected(e);
-  //       }
-  //     })
-  //   );
-  // }
   private _blockInputKeydown = (e: KeyboardEvent) => {
     if (e.key !== "Tab") {
       e.preventDefault();
     }
   };
-
   protected _renderEmptyMenu() {
     return html` <div class="empty-menu">No options</div> `;
   }
@@ -163,6 +138,7 @@ export class SgdsSelect extends SelectElement {
         <sgds-select-option
           ?active=${isActive}
           value=${item.value}
+          ?disabled=${item.disabled}
           @click=${this._handleItemSelected}
           @keydown=${(e: KeyboardEvent) => {
             if (e.key === "Enter") {
@@ -222,10 +198,10 @@ export class SgdsSelect extends SelectElement {
         <!-- The input -->
         ${this._renderInput()} ${this._renderFeedback()}
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
-           ${this._renderMenu()}
+          ${this._renderMenu()}
         </ul>
+        <slot @slotchange=${() => this._updateMenuListFromOptions()}></slot>
       </div>
-      <slot></slot>
     `;
   }
 }

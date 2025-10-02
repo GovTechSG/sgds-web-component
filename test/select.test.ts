@@ -119,9 +119,7 @@ describe("<sgds-select>", () => {
               Option 2
             </sgds-select-option>
           </ul>
-          </div>
           <slot></slot>
-
             `,
       { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
     );
@@ -428,5 +426,48 @@ describe("select >> when submitting a form", () => {
     );
 
     expect(el.invalid).to.be.false;
+  });
+});
+
+describe("sgds-select-option (default)", () => {
+  it("matches shadowDom semantically", async () => {
+    const el = await fixture<SgdsSelectOption>(html`<sgds-select-option></sgds-select-option>`);
+    assert.shadowDom.equal(
+      el,
+      `
+       <div class="dropdown-item" tabindex="0">
+       <div class="normal-item-content">
+                  <slot></slot>
+                </div>
+      </div>
+      `
+    );
+  });
+  it("when active is true, tick sgds-icon appears", async () => {
+    const el = await fixture<SgdsSelectOption>(html`<sgds-select-option active></sgds-select-option>`);
+    assert.shadowDom.equal(
+      el,
+      `
+          <div class="dropdown-item active" tabindex="0">
+          <div class="normal-item-content" >
+            <slot></slot>
+            <sgds-icon name="check" size="lg"></sgds-icon>
+          </div>
+          </div>
+      `
+    );
+  });
+  it("when disabled is true, matches the shadow Dom semantically", async () => {
+    const el = await fixture<SgdsSelectOption>(html`<sgds-select-option disabled></sgds-select-option>`);
+    assert.shadowDom.equal(
+      el,
+      `
+      <div class="dropdown-item disabled" tabindex="-1">
+          <div class="normal-item-content" >
+            <slot></slot>
+          </div>
+        </div>
+      `
+    );
   });
 });

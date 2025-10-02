@@ -4,7 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import { ref } from "lit/directives/ref.js";
-import { SelectElement, SgdsSelectItemData } from "../../base/select-element";
+import { SelectElement, SgdsOptionData } from "../../base/select-element";
 import { watch } from "../../utils/watch";
 import { SgdsBadge } from "../Badge/sgds-badge";
 import SgdsIcon from "../Icon/sgds-icon";
@@ -17,10 +17,11 @@ import { repeat } from "lit/directives/repeat.js";
  * Each item in the ComboBox has a label to display
  * and a value (the actual data / ID).
  */
-type SgdsComboBoxItemData = SgdsSelectItemData;
+type SgdsComboBoxOptionData = SgdsOptionData;
 /**
  * @summary ComboBox component is used for users to make one or more selections from a list through user input, keyboard or mouse actions
  *
+ * @slot default - default slot to pass in sgds-combo-box-option
  * @slot icon - slot for form control icon to be displayed on the right of the input box.
  *
  * @event sgds-select - Emitted when the combo box's selected value changes.
@@ -48,13 +49,13 @@ export class SgdsComboBox extends SelectElement {
 
   /** The function used to filter the menu list, given the user's input value. */
   @property()
-  filterFunction: (inputValue: string, item: SgdsComboBoxItemData) => boolean = (inputValue, item) => {
+  filterFunction: (inputValue: string, item: SgdsComboBoxOptionData) => boolean = (inputValue, item) => {
     return item.label.toLowerCase().startsWith(inputValue.toLowerCase());
   };
 
   /** Managed menu to render depending on the activity. On input change, show filteredMenu, on selections and initial state show full menu list. */
   @state()
-  private _renderedMenu: SgdsComboBoxItemData[] = [];
+  private _renderedMenu: SgdsComboBoxOptionData[] = [];
 
   @queryAsync("input#multi-select-input-tracker") private _multiSelectInput: Promise<HTMLInputElement>;
 
@@ -69,17 +70,9 @@ export class SgdsComboBox extends SelectElement {
       this._renderedMenu = this.menuList;
     });
   }
-
   async firstUpdated() {
     super.firstUpdated();
-    this.menuList =
-      this.options.length > 0
-        ? this.options?.map(el => ({
-            label: el.textContent?.trim() ?? "",
-            value: el.getAttribute("value") ?? el.textContent?.trim() ?? ""
-          }))
-        : this.menuList;
-
+    this.menuList = this.options.length > 0 ? this._updateMenuListFromOptions() : this.menuList;
     this._renderedMenu = this.menuList;
     if (this.value) {
       const valueArray = this.value.split(";");
@@ -216,7 +209,7 @@ export class SgdsComboBox extends SelectElement {
     this.value = this.selectedItems.map(i => i.value).join(";");
   }
 
-  private async _handleBadgeDismissed(e: CustomEvent, item: SgdsComboBoxItemData) {
+  private async _handleBadgeDismissed(e: CustomEvent, item: SgdsComboBoxOptionData) {
     e.preventDefault();
     this.selectedItems = this.selectedItems.filter(i => i.value !== item.value);
     this.value = this.selectedItems.map(i => i.value).join(";");
@@ -276,10 +269,8 @@ export class SgdsComboBox extends SelectElement {
       this._mixinResetValidity(await this._multiSelectInput);
     }
   }
-
   protected _renderMenu() {
     const emptyMenu = html` <div class="empty-menu">No options</div> `;
-
     const menu =
       this._renderedMenu.length === 0
         ? emptyMenu
@@ -300,8 +291,9 @@ export class SgdsComboBox extends SelectElement {
                   ?active=${isActive}
                   ?checkbox=${this.multiSelect}
                   value=${item.value}
-                  @sgds-select=${this._handleItemSelected}
-                  @sgds-unselect=${this._handleItemUnselect}
+                  ?disabled=${item.disabled}
+                  @i-sgds-select=${this._handleItemSelected}
+                  @i-sgds-unselect=${this._handleItemUnselect}
                 >
                   ${item.label}
                 </sgds-combo-box-option>
@@ -383,8 +375,9 @@ export class SgdsComboBox extends SelectElement {
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
           ${this._renderMenu()}
         </ul>
-        <slot></slot>
+        <slot @slotchange=${() => this._updateMenuListFromOptions()}></slot>
       </div>
+
       <!-- Required an input element for constraint validation -->
       ${this.multiSelect
         ? html`<input

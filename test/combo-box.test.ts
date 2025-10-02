@@ -1,10 +1,10 @@
-import { assert, aTimeout, elementUpdated, expect, fixture, waitUntil } from "@open-wc/testing";
+import { assert, aTimeout, elementUpdated, expect, fixture, oneEvent, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
 import "./sgds-web-component";
 
-import type { SgdsBadge, SgdsButton, SgdsComboBox } from "../src/components";
+import type { SgdsBadge, SgdsButton, SgdsCheckbox, SgdsComboBox } from "../src/components";
 import SgdsCloseButton from "../src/internals/CloseButton/sgds-close-button";
 import SgdsComboBoxOption from "../src/components/ComboBox/sgds-combo-box-option";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -629,19 +629,9 @@ describe("single select combobox", () => {
         { label: "Orange", value: "option5" }
       ];
       el.setAttribute("menuList", JSON.stringify(newMenu));
-
-      // else {
-      //   // newMenu.map(menu => {
-      //   //   document.createElement("sgds-combo-box-option")
-      //   // })
-      //   const durianOption = document.createElement("sgds-combo-box-option");
-      //   durianOption.textContent = "Durian";
-      //   durianOption.setAttribute("value", "option3");
-      //   el.replaceChildren(durianOption);
-      //   el.requestUpdate();
-      // }
-
+      // TODO: re-render and change slots
       await el.updateComplete;
+      await waitUntil(() => input().value === "");
       expect(input().value).to.equal("");
       expect(el.value).to.equal("");
     });
@@ -1299,3 +1289,89 @@ describe("multi select >> when submitting a form", () => {
 // 5. When a badge is cancelled, it syncs with the removal actie item in the menu (DONE)
 // 6. Keyboard arrowdown and enter populates the input with badge (DONE)
 // 8. Menu filters while typing, but when reopen should show the full menu again
+
+describe("sgds-combo-box-option (default)", () => {
+  it("matches shadowDom semantically", async () => {
+    const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option></sgds-combo-box-option>`);
+    assert.shadowDom.equal(
+      el,
+      `
+       <div class="dropdown-item" tabindex="0">
+       <div class="normal-item-content">
+                  <slot></slot>
+                </div>
+      </div>
+      `
+    );
+  });
+  it("when active is true, tick sgds-icon appears", async () => {
+    const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option active></sgds-combo-box-option>`);
+    assert.shadowDom.equal(
+      el,
+      `
+          <div class="dropdown-item active" tabindex="0">
+          <div class="normal-item-content" >
+            <slot></slot>
+            <sgds-icon name="check" size="lg"></sgds-icon>
+          </div>
+          </div>
+      `
+    );
+  });
+  it("when disabled is true, matches the shadow Dom semantically", async () => {
+    const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option disabled></sgds-combo-box-option>`);
+    assert.shadowDom.equal(
+      el,
+      `
+      <div class="dropdown-item disabled" tabindex="-1">
+          <div class="normal-item-content" >
+            <slot></slot>
+          </div>
+        </div>
+      `
+    );
+  });
+
+  it("on click triggers i-sgds-select event", async () => {
+    const spy = sinon.spy();
+    const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option></sgds-combo-box-option>`);
+    el.addEventListener("i-sgds-select", spy);
+    const item = el.shadowRoot?.querySelector(".normal-item-content") as HTMLDivElement;
+    item?.click();
+    expect(spy.calledOnce).to.be.true;
+  });
+});
+describe("sgds-combo-box-option (checkbox)", () => {
+  it("matches shadowDom semantically ", async () => {
+    const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option checkbox></sgds-combo-box-option>`);
+    assert.shadowDom.equal(
+      el,
+      `
+      <div class="dropdown-item" tabindex="0">
+          <sgds-checkbox>
+            <slot></slot>
+          </sgds-checkbox>
+        </div>
+      `,
+      { ignoreAttributes: ["hinttext", "invalidfeedback", "label"] }
+    );
+  });
+  it("when checkbox and active is true, checkbox is checked", async () => {
+    const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option checkbox active></sgds-combo-box-option>`);
+    const checkbox = el.shadowRoot?.querySelector<SgdsCheckbox>("sgds-checkbox");
+    expect(checkbox?.checked).to.be.true;
+  });
+
+  it("on click triggers sgds-select event, click again triggers sgds-unselect", async () => {
+    const selectSpy = sinon.spy();
+    const unselectSpy = sinon.spy();
+    const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option checkbox></sgds-combo-box-option>`);
+    el.addEventListener("i-sgds-select", selectSpy);
+    el.addEventListener("i-sgds-unselect", unselectSpy);
+    const item = el.shadowRoot?.querySelector("sgds-checkbox") as SgdsCheckbox;
+    item?.click();
+    expect(selectSpy.calledOnce).to.be.true;
+    item.click();
+    expect(unselectSpy.calledOnce).to.be.true;
+  });
+});

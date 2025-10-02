@@ -4,6 +4,11 @@ import { OptionElement } from "../../base/option-element";
 import SgdsCheckbox from "../Checkbox/sgds-checkbox";
 import SgdsIcon from "../Icon/sgds-icon";
 
+/**
+ * @summary ComboBoxOption is the option of the Combobox
+ *
+ * @slot default - The label of the option
+ */
 export class SgdsComboBoxOption extends OptionElement {
   /** @internal */
   static override dependencies = {
@@ -11,7 +16,10 @@ export class SgdsComboBoxOption extends OptionElement {
     "sgds-checkbox": SgdsCheckbox
   };
 
-  /** If true, this item is rendered as a checkbox item */
+  /**
+   * @internal If true, this item is rendered as a checkbox item.
+   * This property is controlled by its combo box parent
+   */
   @property({ type: Boolean, reflect: true }) checkbox = false;
 
   connectedCallback(): void {
@@ -31,7 +39,7 @@ export class SgdsComboBoxOption extends OptionElement {
   }
   private _handleNonCheckboxClick() {
     if (!this.checkbox) {
-      this.emit("sgds-select");
+      this.emit("i-sgds-select");
     }
   }
   private _handleCheckboxClick() {
@@ -41,7 +49,7 @@ export class SgdsComboBoxOption extends OptionElement {
   private _handleCheckboxChange(e: Event) {
     const checkbox = e.target as HTMLInputElement;
     this.active = checkbox.checked;
-    this.active ? this.emit("sgds-select") : this.emit("sgds-unselect");
+    this.active ? this.emit("i-sgds-select") : this.emit("i-sgds-unselect");
   }
 
   protected _renderItemContent = () => {
