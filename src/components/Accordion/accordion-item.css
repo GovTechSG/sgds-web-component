@@ -53,13 +53,12 @@
 .accordion-btn:not(:disabled):focus,
 .accordion-btn:not(:disabled):focus-visible {
   z-index: 3;
-  outline: 0;
   background-color: var(--sgds-bg-translucent-subtle);
 }
 
 .accordion-btn:not(.disabled):focus-visible,
 .accordion-btn:not(:disabled):focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
 }
 
 .accordion-btn.disabled,

@@ -100,8 +100,7 @@ sgds-icon[role="button"] {
 }
 sgds-icon[role="button"]:focus,  
 sgds-icon[role="button"]:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
-  outline: none;
+    outline: var(--sgds-form-outline-focus);
 }
 
 .form-control-row {

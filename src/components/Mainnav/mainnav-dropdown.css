@@ -10,10 +10,10 @@
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
-  
-  :host([expand="sm"]) .nav-link:not(.disabled):focus-visible {
-    box-shadow: var(--sgds-box-shadow-focus);
-  }
+
+  /* :host([expand="sm"]) .nav-link:not(.disabled):focus-visible {
+    outline: var(--sgds-outline-focus);
+  } */
 }
 
 @media (min-width: 768px) {
@@ -23,9 +23,9 @@
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
 
-  :host([expand="md"]) .nav-link:not(.disabled):focus-visible {
-    box-shadow: var(--sgds-box-shadow-focus);
-  }
+  /* :host([expand="md"]) .nav-link:not(.disabled):focus-visible {
+    outline: var(--sgds-outline-focus);
+  } */
 }
 
 @media (min-width: 1024px) {
@@ -36,9 +36,9 @@
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
 
-  :host([expand="lg"]) .nav-link:not(.disabled):focus-visible {
-    box-shadow: var(--sgds-box-shadow-focus);
-  }
+  /* :host([expand="lg"]) .nav-link:not(.disabled):focus-visible {
+    outline: var(--sgds-outline-focus);
+  } */
 }
 
 @media (min-width: 1280px) {
@@ -47,10 +47,10 @@
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
-
+/* 
   :host([expand="xl"]) .nav-link:not(.disabled):focus-visible {
     box-shadow: var(--sgds-box-shadow-focus);
-  }
+  } */
 }
 
 @media (min-width: 1440px) {
@@ -60,9 +60,9 @@
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
 
-  :host([expand="xxl"]) .nav-link:not(.disabled):focus-visible {
+  /* :host([expand="xxl"]) .nav-link:not(.disabled):focus-visible {
     box-shadow: var(--sgds-box-shadow-focus);
-  }
+  } */
 }
 
 .nav-link {
@@ -90,14 +90,14 @@
 .nav-link:not(.disabled):hover {
   color: var(--sgds-primary-color-default);
 }
-
+/* 
 .nav-link:not(.disabled):focus,
 .nav-link:not(.disabled):focus-visible {
   outline: 0;
-}
+} */
 
 .nav-link:not(.disabled):focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus) inset;
+  outline: var(--sgds-outline-focus);
   color: var(--sgds-primary-color-default);
 }
 
@@ -136,7 +136,7 @@
 }
 
 .dropdown-items a:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus) inset;
+  outline: var(--sgds-outline-focus);
   color: var(--sgds-primary-color-default);
 }
 
@@ -145,5 +145,5 @@ slot[name="toggler"]::slotted(*) {
 }
 
 sgds-dropdown {
-  height: 100%;   
+  height: 100%;
 }
