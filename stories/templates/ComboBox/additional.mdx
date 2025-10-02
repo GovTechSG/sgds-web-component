@@ -1,17 +1,32 @@
+## Populating the menu items
+
+### Default slot
+
+Populate menu list of the combo box with `<sgds-combo-box-option>`.
+
+<Canvas of={ComboBoxStories.ComboBoxDefaultSlot}>
+  <Story of={ComboBoxStories.ComboBoxDefaultSlot} />
+</Canvas>
+
+### `menuList` property (deprecated)
+
+Populate menu list of the combo box with `menuList` property.
+
+<Canvas of={ComboBoxStories.ComboBoxMenuList}>
+  <Story of={ComboBoxStories.ComboBoxMenuList} />
+</Canvas>
+
 ## MultiSelect ComboBox
 
-Set `multiSelect` to true for a multi-select combo box. 
+Set `multiSelect` to true for a multi-select combo box.
 
 <Canvas of={ComboBoxStories.ComboBoxMultiSelect}>
   <Story of={ComboBoxStories.ComboBoxMultiSelect} />
 </Canvas>
 
-
 ## Customising the Filter Function
 
-
 `SgdsComboBox` contains the `filterFunction` prop that is called on each item's label in the `menuList` whenever the input value changes, to determine whether an item should be displayed in the dropdown menu based on the input value.
-
 
 ### filterFunction
 
@@ -37,17 +52,16 @@ Set `multiSelect` to true for a multi-select combo box.
   </tbody>
 </table>
 
-
 #### Returns:
 
 `boolean` value indicating if the `menuItem` should be displayed in the dropdown menu, given the `inputValue`.
-
 
 #### Default Value:
 
 A filter that displays items that contain a prefix that matches the input value:
 
 **JavaScript Code**
+
 ```
 (inputValue, menuItem) => {
     const itemLowerCase = menuItem.label.toLowerCase();
@@ -55,17 +69,17 @@ A filter that displays items that contain a prefix that matches the input value:
     return itemLowerCase.startsWith(valueLower);
 }
 ```
+
 <Canvas of={ComboBoxStories.ComboBoxDefaultFilter}>
   <Story of={ComboBoxStories.ComboBoxDefaultFilter} />
 </Canvas>
-
-
 
 ### Example usage
 
 A filter displays items that contain input value as substring.
 
 **JavaScript Code**
+
 ```
 const comboBox = document.querySelector('sgds-combo-box');
 comboBox.filterFunction = (inputValue, menuItem) => {

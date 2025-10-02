@@ -10,6 +10,7 @@ import { SgdsFormControl } from "../utils/formSubmitController";
 import generateId from "../utils/generateId";
 import { SgdsFormValidatorMixin } from "../utils/validatorMixin";
 import { DropdownListElement } from "./dropdown-list-element";
+import { OptionElement } from "./option-element";
 
 export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) implements SgdsFormControl {
   static styles = [...DropdownListElement.styles, dropdownMenuStyle, hintTextStyles, feedbackStyles];
@@ -65,13 +66,13 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
    * value: string;
    * }`
    */
-  @property({ type: Array }) menuList: SgdsSelectItemData[] = [];
+  @property({ type: Array }) menuList: SgdsOptionData[] = [];
   /** Track selected items (even for single-select, but it will have at most one). */
   @state()
-  protected selectedItems: SgdsSelectItemData[] = [];
+  protected selectedItems: SgdsOptionData[] = [];
   /** @internal Managed filtered menu on the fly with input change*/
   @state()
-  protected filteredMenuList: SgdsSelectItemData[] = [];
+  protected filteredMenuList: SgdsOptionData[] = [];
 
   protected _isTouched = false;
 
@@ -167,9 +168,19 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
       this.hideMenu();
     }
   }
+  protected _updateMenuListFromOptions(): SgdsOptionData[] {
+    return this.options?.map((el: OptionElement) => ({
+      label: el.textContent?.trim() ?? "",
+      value: el.getAttribute("value") ?? el.textContent?.trim() ?? "",
+      disabled: el.disabled ?? undefined
+    }));
+  }
+
+  protected declare options: OptionElement[];
 }
 
-export interface SgdsSelectItemData {
+export interface SgdsOptionData {
   label: string;
   value: string;
+  disabled?: boolean;
 }
