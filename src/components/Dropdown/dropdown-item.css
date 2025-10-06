@@ -23,8 +23,8 @@
   background-color: var(--sgds-bg-translucent-subtle);
 }
 .dropdown-item:focus-visible {
-  outline-offset: -4px;
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .dropdown-item.active {

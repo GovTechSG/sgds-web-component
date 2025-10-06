@@ -67,6 +67,7 @@
 
 .form-control-group:not(.disabled):not(.is-invalid):focus-within {
   outline: var(--sgds-form-outline-focus);
+  outline-offset: var(--sgds-form-outline-offset-focus);
 }
 
 .form-control-group.is-invalid {

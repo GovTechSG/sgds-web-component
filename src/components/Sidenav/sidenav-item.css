@@ -50,6 +50,7 @@ button {
 }
 .sidenav-btn:focus-visible:not(.disabled) {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .no-menu-default::slotted(a) {
@@ -74,6 +75,7 @@ button {
 }
 .no-menu-default::slotted(a:focus-visible) {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 :host([class^="first-level"][active]) .no-menu-default::slotted(a) {

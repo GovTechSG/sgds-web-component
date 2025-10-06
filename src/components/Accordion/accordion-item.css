@@ -59,6 +59,7 @@
 .accordion-btn:not(.disabled):focus-visible,
 .accordion-btn:not(:disabled):focus-visible {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .accordion-btn.disabled,

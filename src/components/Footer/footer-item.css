@@ -14,7 +14,7 @@ slot[name="title"]::slotted(*) {
   --sgds-font-weight-regular: var(--sgds-font-weight-semibold);
   color: var(--sgds-color-fixed-light);
   font-weight: var(--sgds-font-weight-regular, --sgds-font-weight-semibold);
-  margin: var(--sgds-paragraph-spacing-xl, --sgds-margin-none); 
+  margin: var(--sgds-paragraph-spacing-xl, --sgds-margin-none);
 }
 
 .links {
@@ -38,4 +38,5 @@ slot::slotted(a:hover),
 
 .links slot::slotted(a:focus-visible) {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }

@@ -39,12 +39,11 @@
   color: var(--sgds-link-color-emphasis, var(--sgds-primary-color-default));
 }
 
-
 ::slotted(a:focus-visible) {
   --sgds-link-color-emphasis: var(--sgds-primary-color-default);
   color: var(--sgds-link-color-emphasis, var(--sgds-primary-color-default));
   outline: var(--sgds-outline-focus);
-  outline-offset: -4px;
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 :host([disabled]) ::slotted(*) {

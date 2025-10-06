@@ -14,11 +14,12 @@
 .nav-link::slotted(a[active]),
 .nav-link::slotted(a:focus),
 .nav-link::slotted(a:focus-visible) {
-  color: var( --sgds-link-color-emphasis);
+  color: var(--sgds-link-color-emphasis);
 }
 
 .nav-link::slotted(a:focus-visible:not([disabled])) {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .nav-link::slotted(a[disabled]) {

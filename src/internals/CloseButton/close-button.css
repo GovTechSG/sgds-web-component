@@ -13,7 +13,7 @@
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
   border-radius: var(--sgds-close-btn-border-radius);
   background-color: var(--sgds-bg-transparent);
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -34,6 +34,7 @@
 
 .btn-close:focus-visible {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .btn-close-sm {

@@ -113,6 +113,7 @@ a.card {
 
 a.card:not(.disabled):focus-visible {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .card-tinted-bg {
@@ -238,4 +239,5 @@ slot[name="title"]::slotted(a:focus-visible),
 slot[name="footer"]::slotted(a:focus-visible),
 slot[name="link"]::slotted(a:focus-visible) {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }

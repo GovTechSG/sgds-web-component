@@ -24,6 +24,7 @@
 
 :host([variant="solid"]:not([active]):not([disabled])) .tab:focus-visible {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 :host([variant="solid"]:not([active]):not([disabled])) .tab:hover {
@@ -75,6 +76,7 @@
 
 :host([variant="underlined"]:not([active]):not([disabled])) .tab:focus-visible {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 :host([variant="underlined"]:not([active]):not([disabled])) .tab:hover {
@@ -92,4 +94,5 @@
 
 .tab:focus-visible {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }

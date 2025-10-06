@@ -40,7 +40,7 @@ input {
 }
 .form-check-input:focus-visible {
   outline: var(--sgds-form-outline-focus);
-  outline-offset: 0;
+  outline-offset: var(--sgds-form-outline-offset-focus);
 }
 
 .form-check-input:checked,
@@ -62,7 +62,7 @@ input {
   cursor: not-allowed;
 }
 
-.form-check-input:not([disabled]).is-invalid{
+.form-check-input:not([disabled]).is-invalid {
   border: var(--sgds-form-border-width-thick) solid var(--sgds-form-danger-border-color-default);
 }
 

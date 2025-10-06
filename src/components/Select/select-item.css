@@ -36,5 +36,5 @@
 .dropdown-item:focus-visible {
   background: var(--sgds-bg-translucent-subtle);
   outline: var(--sgds-form-outline-focus);
-  outline-offset: -4px;
+  outline-offset: var(--sgds-form-outline-offset-focus);
 }
