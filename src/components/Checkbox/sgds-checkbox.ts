@@ -9,6 +9,8 @@ import { SgdsFormControl } from "../../utils/formSubmitController";
 import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
 import checkboxStyle from "./checkbox.css";
+import formCheckStyles from "../../styles/form-check.css";
+
 
 /**
  * @summary Checkbox component is used when you require users to select multiple items from a list.
@@ -22,7 +24,7 @@ import checkboxStyle from "./checkbox.css";
  * @event sgds-uncheck - Emitted when checkbox is unchecked
  */
 export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
-  static styles = [...FormControlElement.styles, checkboxStyle];
+  static styles = [...FormControlElement.styles, formCheckStyles, checkboxStyle];
 
   /** Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name. */
   @property({ type: String, reflect: true }) value: string;
@@ -153,7 +155,6 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
 
     return html`
       <div class="form-check">
-        <div class="form-check-input-container">
           <input
             class=${classMap({
               "form-check-input": true,
@@ -176,7 +177,6 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
             @blur=${this._handleBlur}
             @focus=${this._handleFocus}
           />
-        </div>
         <label for="${this._controlId}" class="form-check-label" id="${this._labelId}"><slot></slot></label>
       </div>
       ${displayFeedbackText && this.invalid

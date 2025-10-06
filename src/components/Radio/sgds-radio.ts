@@ -4,6 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 import formLabelStyles from "../../styles/form-label.css";
+import formCheckStyles from "../../styles/form-check.css";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import radioStyles from "./radio.css";
@@ -16,7 +17,7 @@ import radioStyles from "./radio.css";
  * @event sgds-blur - Emitted when the control loses focus.
  */
 export class SgdsRadio extends SgdsElement {
-  static styles = [...SgdsElement.styles, formLabelStyles, radioStyles];
+  static styles = [...SgdsElement.styles, formCheckStyles, formLabelStyles, radioStyles];
   /**
    * Draws the radio in a checked state. When used with SgdsRadioGroup, the value prop of SgdsRadioGroup overrides the checked prop
    */
@@ -85,7 +86,6 @@ export class SgdsRadio extends SgdsElement {
   render() {
     return html`
       <div class="form-check">
-        <div class="form-check-input-container">
           <input
             class=${classMap({
               "form-check-input": true,
@@ -100,7 +100,6 @@ export class SgdsRadio extends SgdsElement {
             aria-checked=${this.checked ? "true" : "false"}
             @click=${this.handleClick}
           />
-        </div>
         <label for="${ifDefined(this.radioId)}" aria-label=${ifDefined(this.ariaLabel)} class="form-check-label">
           <slot></slot>
         </label>

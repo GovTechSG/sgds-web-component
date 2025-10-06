@@ -37,15 +37,13 @@ describe("<sgds-select>", () => {
     assert.shadowDom.equal(
       el,
       `
-        <div class="select">
+        <div class="form-control-container select">
           <div class="form-control-group">
-            <div class="select-input-container">
               <input
                 aria-invalid="false"
                   class="form-control"
                 type="text"
               >
-            </div>
             <sgds-icon
               name="chevron-down"
               size="md"
