@@ -1,22 +1,14 @@
-.input-container {
+.datepicker-input-container {
   display: flex;
   flex-direction: row;
   width: -webkit-fill-available;
   width: -moz-available;
 }
 
-.form-control-group {
-border-right: 0;
-}
-
-.input-feedback {
-  display: flex;
-  flex-direction: column;
-  width: -webkit-fill-available;
-  width: -moz-available;
+.datepicker-input-container .form-control-group {
+  border-right: 0;
 }
 
 .calendar-btn {
   all: unset;
-  
 }

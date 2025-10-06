@@ -37,17 +37,14 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
   /** The input's value. Set to 0 by default */
   @property({ type: Number, reflect: true }) value = 0;
 
-  // /** The quantity toggle's button variants */
-  // @property({ type: String }) iconButtonVariant = "ghost";
-
   /**  Controls the incremental / decremental value of the input */
   @property({ type: Number }) step = 1;
 
   /** The input's minimum value. Only applies number input types. */
-  @property() min: number;
+  @property({ type: Number }) min: number;
 
   /** The input's maximum value. Only applies number input types. */
-  @property() max: number;
+  @property({ type: Number }) max: number;
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: String, reflect: true }) hasFeedback: "style" | "text" | "both";
 

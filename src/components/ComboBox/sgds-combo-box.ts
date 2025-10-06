@@ -10,7 +10,7 @@ import { SgdsBadge } from "../Badge/sgds-badge";
 import SgdsIcon from "../Icon/sgds-icon";
 import { ComboBoxItem } from "./combo-box-item";
 import comboBoxStyle from "./combo-box.css";
-
+import formTextControlStyle from "../../styles/form-text-control.css";
 import { repeat } from "lit/directives/repeat.js";
 
 /**
@@ -31,7 +31,7 @@ type SgdsComboBoxItemData = SgdsSelectItemData;
  */
 
 export class SgdsComboBox extends SelectElement {
-  static styles = [...SelectElement.styles, comboBoxStyle];
+  static styles = [...SelectElement.styles, formTextControlStyle, comboBoxStyle];
 
   /** @internal */
   static dependencies = {
@@ -369,7 +369,10 @@ export class SgdsComboBox extends SelectElement {
   }
   render() {
     return html`
-      <div class="combobox" @keydown=${this._handleMultiSelectKeyDown}>
+      <div
+        class=${classMap({ "form-control-container": true, disabled: this.disabled, combobox: true })}
+        @keydown=${this._handleMultiSelectKeyDown}
+      >
         ${this._renderLabel()}
         <!-- The input -->
         ${this._renderInput()} ${this._renderFeedback()}

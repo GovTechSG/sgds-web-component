@@ -2,24 +2,9 @@
   display: block;
   position: relative;
 }
-.select {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sgds-form-gap-md);
-}
 .dropdown {
   display: flex;
   height: 100%;
-}
-
-.select {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  justify-content: flex-end;
-  position: relative;
-  width: -webkit-fill-available;
-  width: -moz-available;
 }
 
 .dropdown-menu {
@@ -28,76 +13,6 @@
   overflow-x: hidden;
   box-sizing: border-box;
 }
-
-.form-control-group.disabled {
-  opacity: var(--sgds-opacity-50);
-  cursor: not-allowed;
-}
-
-.form-control-group {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--sgds-form-gap-md);
-  background-color: var(--sgds-form-surface-default);
-  border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-default);
-  border-radius: var(--sgds-form-border-radius-md);
-  padding: var(--sgds-form-padding-y) var(--sgds-form-padding-x);
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  min-height: var(--sgds-dimension-48);
-  min-width: var(--sgds-dimension-256);
-  width: -webkit-fill-available;
-  width: -moz-available;
-}
-
-.form-control {
-  display: inline;
-  appearance: none;
-  background-clip: padding-box;
-  border: none;
-  background: none;
-  outline: none;
-  padding: 0;
-  flex-grow: 1;
-  color: var(--sgds-form-color-default);
-  font-size: var(--sgds-font-size-2);
-  line-height: var(--sgds-line-height-body);
-  caret-color: transparent;
-}
-
-.select-input-container {
-  display: flex;
-  gap: var(--sgds-gap-xs);
-  flex-wrap: wrap;
-  width: 100%;
-}
 .empty-menu {
   padding: var(--sgds-padding-sm) var(--sgds-padding-lg, 20px);
-}
-
-.form-control-group.readonly {
-  border-color: var(--sgds-border-color-muted);
-}
-
-.form-control-group:not(.disabled):not(.is-invalid):hover {
-  outline: var(--sgds-form-border-width-thick) solid var(--sgds-border-color-emphasis);
-  outline-offset: var(--sgds-form-outline-offset-focus);
-}
-
-.form-control-group:not(.disabled):not(.is-invalid):focus-within {
-  outline: var(--sgds-form-outline-focus);
-  outline-offset: var(--sgds-form-outline-offset-focus);
-}
-
-.form-control-group.is-invalid:not(.disabled) {
-  border: var(--sgds-form-border-width-default) solid var(--sgds-form-danger-border-color-default);
-}
-
-.form-control-group:not(.disabled).is-invalid:focus-within {
-  outline: var(--sgds-border-width-2) solid var(--sgds-form-danger-color-default);
-  outline-offset: var(--sgds-form-outline-offset-focus);
-}
-
-.form-control-group.disabled {
-  background-color: var(--sgds-form-surface-muted);
 }

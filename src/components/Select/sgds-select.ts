@@ -7,6 +7,8 @@ import { watch } from "../../utils/watch";
 import SgdsIcon from "../Icon/sgds-icon";
 import selectStyle from "./select.css";
 import SelectItem from "./select-item";
+import formTextControlStyles from "../../styles/form-text-control.css";
+
 /**
  * @summary Select is used to make one selection from a list through keyboard or mouse actions
  *
@@ -17,7 +19,7 @@ import SelectItem from "./select-item";
  *
  */
 export class SgdsSelect extends SelectElement {
-  static styles = [...SelectElement.styles, selectStyle];
+  static styles = [...SelectElement.styles, formTextControlStyles, selectStyle];
 
   /** @internal */
   static dependencies = {
@@ -132,28 +134,26 @@ export class SgdsSelect extends SelectElement {
         })}"
         @click=${this._handleClick}
       >
-        <div class="select-input-container">
-          <input
-            class="form-control"
-            type="text"
-            id=${this._controlId}
-            name=${ifDefined(this.name)}
-            placeholder=${ifDefined(this.placeholder)}
-            aria-invalid=${this.invalid ? "true" : "false"}
-            ?autofocus=${this.autofocus}
-            ?disabled=${this.disabled}
-            ?readonly=${this.readonly}
-            ?required=${this.required}
-            .value=${this.displayValue}
-            @blur=${this._handleInputBlur}
-            @focus=${this._handleFocus}
-            aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this._controlId}-invalid` : undefined)}
-            aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
-              ? `${this._controlId}-invalid`
-              : ""}"
-            @keydown=${(e: KeyboardEvent) => e.preventDefault()}
-          />
-        </div>
+        <input
+          class="form-control"
+          type="text"
+          id=${this._controlId}
+          name=${ifDefined(this.name)}
+          placeholder=${ifDefined(this.placeholder)}
+          aria-invalid=${this.invalid ? "true" : "false"}
+          ?autofocus=${this.autofocus}
+          ?disabled=${this.disabled}
+          ?readonly=${this.readonly}
+          ?required=${this.required}
+          .value=${this.displayValue}
+          @blur=${this._handleInputBlur}
+          @focus=${this._handleFocus}
+          aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this._controlId}-invalid` : undefined)}
+          aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
+            ? `${this._controlId}-invalid`
+            : ""}"
+          @keydown=${(e: KeyboardEvent) => e.preventDefault()}
+        />
         <sgds-icon name="chevron-down" size="md"></sgds-icon>
       </div>
     `;
@@ -161,7 +161,13 @@ export class SgdsSelect extends SelectElement {
 
   render() {
     return html`
-      <div class="select">
+      <div
+        class=${classMap({
+          disabled: this.disabled,
+          select: true,
+          "form-control-container": true
+        })}
+      >
         ${this._renderLabel()}
         <!-- The input -->
         ${this._renderInput()} ${this._renderFeedback()}
