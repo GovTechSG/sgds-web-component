@@ -1,12 +1,58 @@
-import { html } from "lit";
-import { aTimeout, expect, fixture, waitUntil } from "@open-wc/testing";
-import { SgdsButton, SgdsSelect } from "../src/components";
-import "../src/index";
-import { assert } from "@open-wc/testing";
+import { assert, aTimeout, expect, fixture, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
+import { html } from "lit";
 import sinon from "sinon";
-import SelectItem from "../src/components/Select/select-item";
+import { SgdsButton, SgdsSelect } from "../src/components";
+import SgdsSelectOption from "../src/components/Select/sgds-select-option";
+import "../src/index";
 
+const NoOptionsSelects = [
+  { render: html`<sgds-select .menuList=${[]}></sgds-select>`, mode: "property" },
+  { render: html`<sgds-select></sgds-select>`, mode: "slot" }
+];
+
+const TwoOptionsSelects = [
+  {
+    render: html`<sgds-select
+      .menuList=${[
+        { label: "Option 1", value: "option1" },
+        { label: "Option 2", value: "option2" }
+      ]}
+    ></sgds-select>`,
+    mode: "property"
+  },
+  {
+    render: html`<sgds-select>
+      <sgds-select-option value="option1">Option 1</sgds-select-option>
+      <sgds-select-option value="option2">Option 2</sgds-select-option>
+    </sgds-select>`,
+    mode: "slot"
+  }
+];
+
+const ThreeOptionsSelects = [
+  {
+    render: html`<sgds-select
+      .menuList=${[
+        { label: "Apple", value: "option1" },
+        { label: "Apricot", value: "option2" },
+        { label: "Durian", value: "option3" }
+      ]}
+      value="option3"
+    ></sgds-select>`,
+
+    mode: "property"
+  },
+  {
+    render: html`<sgds-select value="option3">
+      <sgds-select-option value="option1">Apple</sgds-select-option>
+      <sgds-select-option value="option2">Apricot</sgds-select-option>
+      <sgds-select-option value="option3">Durian</sgds-select-option>
+    </sgds-select>`,
+
+    mode: "slot"
+  }
+];
 function getRootActiveElement(el: HTMLElement | null): Element | null {
   if (!el) return null;
   const root = el.getRootNode();
@@ -56,21 +102,22 @@ describe("<sgds-select>", () => {
             part="menu"
             tabindex="-1"
             >
-            <sgds-select-item
+            <sgds-select-option
               aria-disabled="false"
               role="menuitem"
               value="option1"
             >
               Option 1
-            </sgds-select-item>
-            <sgds-select-item
+            </sgds-select-option>
+            <sgds-select-option
               aria-disabled="false"
               role="menuitem"
               value="option2"
             >
               Option 2
-            </sgds-select-item>
+            </sgds-select-option>
           </ul>
+          <slot></slot>
             `,
       { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
     );
@@ -111,145 +158,115 @@ describe("<sgds-select>", () => {
     expect(getComputedStyle(menuEl).display).to.equal("none");
   });
 
-  it("should emit sgds-select event when select value is updated", async () => {
-    const el = await fixture<SgdsSelect>(html` <sgds-select
-      .menuList=${[
-        { label: "Option 1", value: "option1" },
-        { label: "Option 2", value: "option2" }
-      ]}
-    ></sgds-select>`);
-    const selectHandler = sinon.spy();
-    el?.addEventListener("sgds-select", selectHandler);
+  TwoOptionsSelects.forEach(({ mode, render }) => {
+    it(`MODE: ${mode} , should emit sgds-select event when select value is updated`, async () => {
+      const el = await fixture<SgdsSelect>(render);
+      const selectHandler = sinon.spy();
+      el?.addEventListener("sgds-select", selectHandler);
 
-    expect(el.value).to.equal("");
-    el.value = "option1";
+      expect(el.value).to.equal("");
+      el.value = "option1";
 
-    await waitUntil(() => selectHandler.calledOnce);
-    expect(selectHandler).to.have.been.calledOnce;
-  });
-
-  it("should emit sgds-change event when select value is updated", async () => {
-    const el = await fixture<SgdsSelect>(html` <sgds-select
-      .menuList=${[
-        { label: "Option 1", value: "option1" },
-        { label: "Option 2", value: "option2" }
-      ]}
-    ></sgds-select>`);
-    const changeHandler = sinon.spy();
-    el?.addEventListener("sgds-change", changeHandler);
-
-    expect(el.value).to.equal("");
-    el.value = "option1";
-
-    await waitUntil(() => changeHandler.calledOnce);
-    expect(changeHandler).to.have.been.calledOnce;
-  });
-
-  it("should emit sgds-focus and sgds-blur event when select is focused/blurred", async () => {
-    const el = await fixture<SgdsSelect>(html` <sgds-select
-      .menuList=${[
-        { label: "Option 1", value: "option1" },
-        { label: "Option 2", value: "option2" }
-      ]}
-    ></sgds-select>`);
-    const selectInput = el.shadowRoot?.querySelector("input");
-
-    const focusHandler = sinon.spy();
-    el?.addEventListener("sgds-focus", focusHandler);
-
-    const blurHandler = sinon.spy();
-    el?.addEventListener("sgds-blur", blurHandler);
-
-    selectInput?.focus();
-    await waitUntil(() => focusHandler.calledOnce);
-    expect(focusHandler).to.have.been.calledOnce;
-
-    selectInput?.blur();
-    await waitUntil(() => blurHandler.calledOnce);
-    expect(blurHandler).to.have.been.calledOnce;
-  });
-
-  it("mouse click on item, should update value of selected item", async () => {
-    const el = await fixture<SgdsSelect>(
-      html`<sgds-select
-        .menuList=${[
-          { label: "Option 1", value: "option1" },
-          { label: "Option 2", value: "option2" }
-        ]}
-      ></sgds-select>`
-    );
-
-    const input = el.shadowRoot?.querySelector("input");
-    input?.click();
-    await waitUntil(() => el.menuIsOpen);
-
-    const item = el.shadowRoot?.querySelectorAll("sgds-select-item")[0] as SelectItem;
-    const itemContent = item.shadowRoot?.querySelector("div.normal-item-content") as HTMLDivElement;
-    itemContent?.click();
-
-    await waitUntil(() => el.value === "option1");
-
-    expect(el.value).to.equal("option1");
-  });
-
-  it("should not show any items in dropdown menu when there is no match (for default filter)", async () => {
-    const el = await fixture<SgdsSelect>(html`<sgds-select .menuList=${[]}></sgds-select>`);
-
-    await el.updateComplete;
-    const items = el.shadowRoot?.querySelectorAll("sgds-combox-box-item");
-    expect(items?.length).to.equal(0);
-    const emptyMenu = el.shadowRoot?.querySelector(".empty-menu");
-    expect(emptyMenu).to.exist;
-  });
-
-  it("when initial value is specified, input is populated, item is active", async () => {
-    const el = await fixture<SgdsSelect>(
-      html`<sgds-select
-        .menuList=${[
-          { label: "Apple", value: "option1" },
-          { label: "Apricot", value: "option2" },
-          { label: "Durian", value: "option3" }
-        ]}
-        value="option3"
-      ></sgds-select>`
-    );
-    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
-    const durianItem = el.shadowRoot?.querySelector("sgds-select-item[value='option3']") as SelectItem;
-
-    expect(input.value).to.equal("Durian");
-    expect(el.value).to.equal("option3");
-    expect(durianItem.active).to.be.true;
-  });
-
-  it("when menu is close, focused is brought back to input", async () => {
-    const el = await fixture<SgdsSelect>(
-      html`<sgds-select
-        .menuList=${[
-          { label: "Apple", value: "option1" },
-          { label: "Apricot", value: "option2" },
-          { label: "Dur", value: "option3" }
-        ]}
-      ></sgds-select>`
-    );
-    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
-    await simulateUserClick(input);
-
-    await sendKeys({ press: "ArrowDown" });
-
-    await waitUntil(
-      () => {
-        const selectItem1 = el.shadowRoot?.querySelectorAll("sgds-select-item")[0];
-        return getRootActiveElement(input) === selectItem1;
-      },
-      "focus did not move into first select item",
-      { timeout: 2000 }
-    );
-
-    await sendKeys({ press: "Escape" });
-    await waitUntil(() => getRootActiveElement(input) === input, "focus did not return to the input after Escape", {
-      timeout: 2000
+      await waitUntil(() => selectHandler.calledOnce);
+      expect(selectHandler).to.have.been.calledOnce;
     });
-    expect(getRootActiveElement(input)).to.equal(input);
+    it(`MODE: ${mode} ,should emit sgds-change event when select value is updated`, async () => {
+      const el = await fixture<SgdsSelect>(render);
+      const changeHandler = sinon.spy();
+      el?.addEventListener("sgds-change", changeHandler);
+
+      expect(el.value).to.equal("");
+      el.value = "option1";
+
+      await waitUntil(() => changeHandler.calledOnce);
+      expect(changeHandler).to.have.been.calledOnce;
+    });
+
+    it(`MODE: ${mode} ,should emit sgds-focus and sgds-blur event when select is focused/blurred`, async () => {
+      const el = await fixture<SgdsSelect>(render);
+
+      const selectInput = el.shadowRoot?.querySelector("input");
+
+      const focusHandler = sinon.spy();
+      el?.addEventListener("sgds-focus", focusHandler);
+
+      const blurHandler = sinon.spy();
+      el?.addEventListener("sgds-blur", blurHandler);
+
+      selectInput?.focus();
+      await waitUntil(() => focusHandler.calledOnce);
+      expect(focusHandler).to.have.been.calledOnce;
+
+      selectInput?.blur();
+      await waitUntil(() => blurHandler.calledOnce);
+      expect(blurHandler).to.have.been.calledOnce;
+    });
+    it(`MODE: ${mode} mouse click on item, should update value of selected item`, async () => {
+      const el = await fixture<SgdsSelect>(render);
+      const input = el.shadowRoot?.querySelector("input");
+      input?.click();
+      await waitUntil(() => el.menuIsOpen);
+
+      const item = el.shadowRoot?.querySelectorAll("sgds-select-option")[0] as SgdsSelectOption;
+      const itemContent = item.shadowRoot?.querySelector("div.normal-item-content") as HTMLDivElement;
+      itemContent?.click();
+
+      await waitUntil(() => el.value === "option1");
+
+      expect(el.value).to.equal("option1");
+    });
+  });
+
+  NoOptionsSelects.forEach(({ mode, render }) => {
+    it(`MODE=${mode}, it should not show any items in dropdown menu when there is no match (for default filter)`, async () => {
+      const el = await fixture<SgdsSelect>(render);
+
+      await el.updateComplete;
+      const items = el.shadowRoot?.querySelectorAll("sgds-select-option");
+      expect(items?.length).to.equal(0);
+      const emptyMenu = el.shadowRoot?.querySelector(".empty-menu");
+      expect(emptyMenu).to.exist;
+    });
+  });
+
+  ThreeOptionsSelects.forEach(({ mode, render }) => {
+    it(`MODE=${mode},when initial value is specified, input is populated, item is active`, async () => {
+      const el = await fixture<SgdsSelect>(render);
+
+      const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+      let durianItem: SgdsSelectOption;
+      if (mode === "slot") {
+        durianItem = el.querySelector("sgds-select-option[value='option3']") as SgdsSelectOption;
+      } else {
+        durianItem = el.shadowRoot?.querySelector("sgds-select-option[value='option3']") as SgdsSelectOption;
+      }
+      await el.updateComplete;
+      expect(input.value).to.equal("Durian");
+      expect(el.value).to.equal("option3");
+      expect(durianItem.active).to.be.true;
+    });
+    it(`MODE=${mode}, when menu is close, focused is brought back to input`, async () => {
+      const el = await fixture<SgdsSelect>(render);
+
+      const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+      await simulateUserClick(input);
+
+      await sendKeys({ press: "ArrowDown" });
+      await waitUntil(
+        () => {
+          const selectItem1 = el.shadowRoot?.querySelectorAll("sgds-select-option")[0];
+          return getRootActiveElement(input) === selectItem1;
+        },
+        "focus did not move into first select item",
+        { timeout: 2000 }
+      );
+
+      await sendKeys({ press: "Escape" });
+      await waitUntil(() => getRootActiveElement(input) === input, "focus did not return to the input after Escape", {
+        timeout: 2000
+      });
+      expect(getRootActiveElement(input)).to.equal(input);
+    });
   });
 });
 
@@ -347,7 +364,7 @@ describe("select >> when submitting a form", () => {
     input()?.click();
     await waitUntil(() => select()?.menuIsOpen);
 
-    const itemOne = select()?.shadowRoot?.querySelectorAll("sgds-select-item")[0] as SelectItem;
+    const itemOne = select()?.shadowRoot?.querySelectorAll("sgds-select-option")[0] as SgdsSelectOption;
 
     itemOne?.click();
     await waitUntil(() => select()?.value === "option1");
@@ -399,7 +416,7 @@ describe("select >> when submitting a form", () => {
     await sendKeys({ press: "ArrowDown" });
     await waitUntil(
       () => {
-        const selectItem1 = el.shadowRoot?.querySelectorAll("sgds-select-item")[0];
+        const selectItem1 = el.shadowRoot?.querySelectorAll("sgds-select-option")[0];
         return getRootActiveElement(input) === selectItem1;
       },
       "focus did not move into first select item",
@@ -407,5 +424,48 @@ describe("select >> when submitting a form", () => {
     );
 
     expect(el.invalid).to.be.false;
+  });
+});
+
+describe("sgds-select-option (default)", () => {
+  it("matches shadowDom semantically", async () => {
+    const el = await fixture<SgdsSelectOption>(html`<sgds-select-option></sgds-select-option>`);
+    assert.shadowDom.equal(
+      el,
+      `
+       <div class="dropdown-item" tabindex="0">
+       <div class="normal-item-content">
+                  <slot></slot>
+                </div>
+      </div>
+      `
+    );
+  });
+  it("when active is true, tick sgds-icon appears", async () => {
+    const el = await fixture<SgdsSelectOption>(html`<sgds-select-option active></sgds-select-option>`);
+    assert.shadowDom.equal(
+      el,
+      `
+          <div class="dropdown-item active" tabindex="0">
+          <div class="normal-item-content" >
+            <slot></slot>
+            <sgds-icon name="check" size="lg"></sgds-icon>
+          </div>
+          </div>
+      `
+    );
+  });
+  it("when disabled is true, matches the shadow Dom semantically", async () => {
+    const el = await fixture<SgdsSelectOption>(html`<sgds-select-option disabled></sgds-select-option>`);
+    assert.shadowDom.equal(
+      el,
+      `
+      <div class="dropdown-item disabled" tabindex="-1">
+          <div class="normal-item-content" >
+            <slot></slot>
+          </div>
+        </div>
+      `
+    );
   });
 });

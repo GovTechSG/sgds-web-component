@@ -28,20 +28,18 @@ export class SgdsDropdown extends ScopedElementsMixin(DropdownListElement) {
 
 ```
 
-## Scoped Custom Element Registry Polyfill 
+## Scoped Custom Element Registry Polyfill
 
 ### When to load the polyfill
 
 Loading the polyfill is only required for components that uses the ScopeElementsMixin as shown in the code snippet above.
 As a rule of thumb, start by not loading the polyfill. If you encounter an error like so, it means you need to load the polyfill.
 
-
->`Uncaught DOMException: Failed to execute 'define' on 'CustomElementRegistry': the name "sgds-<component-name>" has already been used with this registry at`
-
+> `Uncaught DOMException: Failed to execute 'define' on 'CustomElementRegistry': the name "sgds-<component-name>" has already been used with this registry at`
 
 > Not loading the polyfill by default will also allow sites to opt out of it altogether. This means until the browser ships scoped registries, the developer can choose to fall back to the global registry, by not loading the polyfill. This will save bandwidth & complexity since it doesn't need to be loaded by the client in that case. [Source](https://open-wc.org/blog/scoped-elements-without-polyfill/)
 
-### How to load the polyfill 
+### How to load the polyfill
 
 #### Local installation
 
@@ -52,16 +50,14 @@ npm install @webcomponents/scoped-custom-element-registry@0.0.9
 ```
 
 ```js
-
 // Polyfill has to be loaded at the top of the application before the web components
-import "@webcomponents/scoped-custom-element-registry"
+import "@webcomponents/scoped-custom-element-registry";
 import "@govtechsg/sgds-web-component";
-
 ```
 
 #### CDN usage
 
-Load the polyfill CDN before the web component CDN 
+Load the polyfill CDN before the web component CDN
 
 ```js
 

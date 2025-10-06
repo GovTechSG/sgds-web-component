@@ -11,7 +11,10 @@
   cursor: pointer;
   height: 100%;
 }
-
+.dropdown-item.disabled {
+  opacity: var(--sgds-opacity-50);
+  pointer-events: none;
+}
 .dropdown-item .normal-item-content {
   display: flex;
   align-items: center;
@@ -29,10 +32,7 @@
 .dropdown-item:hover {
   background: var(--sgds-bg-translucent-subtle);
 }
-.dropdown-item:focus,
-.dropdown-item:focus-visible {
-  background: var(--sgds-bg-translucent-subtle);
-}
+
 .dropdown-item:focus-visible {
   background: var(--sgds-bg-translucent-subtle);
   outline: var(--sgds-form-outline-focus);

@@ -16,7 +16,8 @@ export const Template = ({
   hintText,
   drop,
   displayDate,
-  value
+  value,
+  readOnly
 }) =>
   html`
     <sgds-datepicker
@@ -35,6 +36,7 @@ export const Template = ({
       hintText=${ifDefined(hintText)}
       drop=${ifDefined(drop)}
       displayDate=${ifDefined(displayDate)}
+      ?readonly=${readOnly}
     >
     </sgds-datepicker>
   `;
