@@ -11,7 +11,6 @@ import { watch } from "../../utils/watch";
 import checkboxStyle from "./checkbox.css";
 import formCheckStyles from "../../styles/form-check.css";
 
-
 /**
  * @summary Checkbox component is used when you require users to select multiple items from a list.
  *
@@ -155,28 +154,28 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
 
     return html`
       <div class="form-check">
-          <input
-            class=${classMap({
-              "form-check-input": true,
-              "is-invalid": displayFeedbackStyle && this.invalid
-            })}
-            type="checkbox"
-            id=${this._controlId}
-            aria-invalid=${this.invalid ? "true" : "false"}
-            name=${ifDefined(this.name)}
-            ?indeterminate=${this.indeterminate}
-            ?required=${this.required}
-            aria-disabled=${this.disabled ? "true" : "false"}
-            aria-checked=${this.checked ? "true" : "false"}
-            @change=${(e: Event) => this._handleChange(e)}
-            @keydown=${this._handleKeyDown}
-            @invalid=${(e: Event) => this._handleInvalid(e)}
-            .checked=${live(this.checked)}
-            .disabled=${this.disabled}
-            .required=${this.required}
-            @blur=${this._handleBlur}
-            @focus=${this._handleFocus}
-          />
+        <input
+          class=${classMap({
+            "form-check-input": true,
+            "is-invalid": displayFeedbackStyle && this.invalid
+          })}
+          type="checkbox"
+          id=${this._controlId}
+          aria-invalid=${this.invalid ? "true" : "false"}
+          name=${ifDefined(this.name)}
+          ?indeterminate=${this.indeterminate}
+          ?required=${this.required}
+          aria-disabled=${this.disabled ? "true" : "false"}
+          aria-checked=${this.checked ? "true" : "false"}
+          @change=${(e: Event) => this._handleChange(e)}
+          @keydown=${this._handleKeyDown}
+          @invalid=${(e: Event) => this._handleInvalid(e)}
+          .checked=${live(this.checked)}
+          .disabled=${this.disabled}
+          .required=${this.required}
+          @blur=${this._handleBlur}
+          @focus=${this._handleFocus}
+        />
         <label for="${this._controlId}" class="form-check-label" id="${this._labelId}"><slot></slot></label>
       </div>
       ${displayFeedbackText && this.invalid

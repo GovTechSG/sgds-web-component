@@ -70,6 +70,16 @@
       <sgds-checkbox value="apple">Apple</sgds-checkbox>
       <sgds-checkbox value="lychee">Lychee</sgds-checkbox>
     </sgds-checkbox-group>
+<sgds-radio-group disabled hinttext="hint" label="Label">
+  <sgds-radio >Option 1</sgds-radio>
+  <sgds-radio value="2">Option 2</sgds-radio>
+  <sgds-radio value="3">Option 3</sgds-radio>
+</sgds-radio-group>
+<sgds-checkbox-group disabled label="CheckboxGroup Label" hinttext="Check at least one option">
+      <sgds-checkbox  value="watermelon">Watermelon</sgds-checkbox>
+      <sgds-checkbox value="apple">Apple</sgds-checkbox>
+      <sgds-checkbox value="lychee">Lychee</sgds-checkbox>
+    </sgds-checkbox-group>
 
 <h2>Readonly</h2>
 <sgds-input readonly label="readonly" hinttext="readonlye" value="This is a readonly input"></sgds-input>
@@ -95,17 +105,6 @@
   value="1"
   menuList='[{"label":"Afghanistan","value":"1"},{"label":"Albania","value":"2"},{"label":"Algeria","value":"3"},{"label":"Andorra","value":"4"}]'
 ></sgds-combo-box>
-
-<sgds-radio-group hinttext="hint" label="Label" readonly>
-  <sgds-radio>Option 1</sgds-radio>
-  <sgds-radio value="2">Option 2</sgds-radio>
-  <sgds-radio value="3">Option 3</sgds-radio>
-</sgds-radio-group>
-<sgds-checkbox-group label="CheckboxGroup Label" hinttext="Check at least one option" readonly>
-      <sgds-checkbox value="watermelon">Watermelon</sgds-checkbox>
-      <sgds-checkbox value="apple">Apple</sgds-checkbox>
-      <sgds-checkbox value="lychee">Lychee</sgds-checkbox>
-    </sgds-checkbox-group>
 
 <h2>Invalid</h2>
 <sgds-input required hasFeedback="both" label="invalid" hinttext="invalide"></sgds-input>
