@@ -310,6 +310,14 @@ describe("sgds-combo-box ", () => {
   });
 
   it("should display the badge with max-width of 192px with badgeFullWidth is not set", async () => {
+    const style = document.createElement("style");
+    style.textContent = `
+      :root {
+        --sgds-dimension-192: 192px;
+      }
+    `;
+    document.head.appendChild(style);
+
     const parentNode = document.createElement("div");
     parentNode.style.width = "300px";
 
@@ -330,11 +338,17 @@ describe("sgds-combo-box ", () => {
     await elementUpdated(el);
 
     const parentContainer = el.shadowRoot?.querySelector(".combobox-input-container");
-    const badge = el.shadowRoot?.querySelector("sgds-badge");
+    const parentWidth = getComputedStyle(parentContainer as Element).width;
+
+    const badge = el.shadowRoot?.querySelector("sgds-badge") as SgdsBadge;
+    const badgeEl = badge.shadowRoot?.querySelector(".badge") as HTMLElement;
+
+    const styles = getComputedStyle(badgeEl);
+    const badgeWidth = styles.width;
 
     // should not match width parent width
-    expect(badge?.clientWidth).to.equal(192);
-    expect(badge?.clientWidth).not.to.equal(parentContainer?.clientWidth);
+    expect(badgeWidth).to.equal("192px");
+    expect(badgeWidth).not.to.equal(parentWidth);
   });
 
   it("should display the badge with max-width of parent with badgeFullWidth is set to true", async () => {
