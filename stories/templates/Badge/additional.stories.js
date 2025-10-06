@@ -1,6 +1,6 @@
 import { html } from "lit-html";
 
-const variants = ["info", "success", "danger", "warning", "neutral"];
+const variants = ["primary", "accent", "success", "danger", "warning", "cyan", "purple", "neutral", "white"];
 
 const VariantTemplate = _ => {
   return html`
