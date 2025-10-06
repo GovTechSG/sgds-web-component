@@ -438,6 +438,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
           name=${this.name}
           ?invalid=${this.invalid}
           hasFeedback=${ifDefined(this.hasFeedback ? "both" : undefined)}
+          ?readonly=${this.readonly}
         >
         </sgds-datepicker-input>
         <sgds-icon-button
