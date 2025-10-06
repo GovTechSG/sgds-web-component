@@ -9,11 +9,14 @@
     color: var(--sgds-color-default);
     text-align: inherit;
     cursor: pointer;
-    /* width: 100%; */
     height: 100%;
   }
 
+.dropdown-item.disabled {
+    opacity: var(--sgds-opacity-50);
+      pointer-events: none;
 
+}
 .dropdown-item .normal-item-content {
     display: flex;
     align-items: center;
