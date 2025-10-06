@@ -64,6 +64,13 @@ const CustomFilter = () => {
         <sgds-combo-box-option value="eggplant">Eggplant</sgds-combo-box-option>
       </sgds-combo-box>
     </div>
+    <script>
+      const customFilterComboBox = document.querySelector("#custom-filter-single-select-combobox-example");
+      const customFilterMultiSelectComboBox = document.querySelector("#custom-filter-multi-select-combobox-example");
+
+      customFilterComboBox.filterFunction = customFilterMultiSelectComboBox.filterFunction = (inputValue, menuItem) =>
+        menuItem.label.toLowerCase().includes(inputValue);
+    </script>
   `;
 };
 

@@ -123,7 +123,7 @@
         <sgds-combo-box
           label="Combobox using slot"
           hinttext="Select an option"
-          placeholder="Select an option"
+          placeholder="Select an option, test filterFunction"
           value="1"
           id="combobox-multi-selection-slot"
           multiSelect
@@ -138,12 +138,17 @@
           hinttext="Select an option"
           placeholder="Select an option"
           value="1"
-          id="combobox-multi-selection-slot"
           multiSelect
         ></sgds-combo-box>
       </div>
     </div>
 
+    <script>
+      const multiSelectCombo = document.querySelector("#combobox-multi-selection-slot")
+      multiSelectCombo.filterFunction = (inputValue, menuItem) => {
+    return  menuItem.label.toLowerCase().includes(inputValue)
+}
+    </script>
     <!-- Slot method: Test if menu option changes will trigger an update in the combo box value -->
     <script>
       setTimeout(() => {
