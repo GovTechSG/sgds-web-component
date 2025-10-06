@@ -42,7 +42,6 @@ export class SgdsSelect extends SelectElement {
     this.menuList = this.options.length > 0 ? this._getMenuListFromOptions() : this.menuList;
     if (this.value) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
-      this.selectedItems = [...initialSelectedItem];
       this.displayValue = initialSelectedItem[0].label;
 
       this._setActiveToOption();
@@ -85,13 +84,12 @@ export class SgdsSelect extends SelectElement {
     const itemEl = e.target as SgdsSelectOption;
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
-    const foundItem = this.filteredMenuList.find(i => i.value.toString() === itemValueAttr) || {
+    const foundItem = {
       label: itemLabel,
       value: itemValueAttr
     };
-    this.selectedItems = [foundItem];
     this.value = foundItem.value.toString();
-    this.displayValue = this.selectedItems[0].label;
+    this.displayValue = foundItem.label;
     this.hideMenu();
   }
 
@@ -102,12 +100,6 @@ export class SgdsSelect extends SelectElement {
   protected async _handleInputBlur(e: Event) {
     e.preventDefault();
     this.emit("sgds-blur");
-
-    if (this.selectedItems.length > 0) {
-      this.displayValue = this.selectedItems[0].label;
-    } else {
-      this.displayValue = "";
-    }
   }
 
   /** For form reset  */

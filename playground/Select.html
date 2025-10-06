@@ -14,15 +14,6 @@
 </style>
 
 <div>
-  <!-- Modal Example -->
-  <sgds-modal>
-    <sgds-select
-      id="select-example-in-modal"
-      label="Select label"
-      hinttext="Select an option"
-      placeholder="Select an option"
-    ></sgds-select>
-  </sgds-modal>
 
   <h2> Select populated by menuList prop</h2>
   <sgds-select
@@ -30,7 +21,8 @@
     label="Select label"
     hinttext="Select an option"
     placeholder="Select an option"
-    value="1"
+    required
+    hasFeedback
   ></sgds-select>
 
   <h2> Select populated by slots</h2>
