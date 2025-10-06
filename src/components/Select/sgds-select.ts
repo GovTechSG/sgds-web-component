@@ -43,7 +43,6 @@ export class SgdsSelect extends SelectElement {
     this.menuList = this.options.length > 0 ? this._getMenuListFromOptions() : this.menuList;
     if (this.value) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
-      this.selectedItems = [...initialSelectedItem];
       this.displayValue = initialSelectedItem[0].label;
 
       this._setActiveToOption();
@@ -86,13 +85,12 @@ export class SgdsSelect extends SelectElement {
     const itemEl = e.target as SgdsSelectOption;
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
-    const foundItem = this.filteredMenuList.find(i => i.value.toString() === itemValueAttr) || {
+    const foundItem = {
       label: itemLabel,
       value: itemValueAttr
     };
-    this.selectedItems = [foundItem];
     this.value = foundItem.value.toString();
-    this.displayValue = this.selectedItems[0].label;
+    this.displayValue = foundItem.label;
     this.hideMenu();
   }
 
@@ -103,12 +101,6 @@ export class SgdsSelect extends SelectElement {
   protected async _handleInputBlur(e: Event) {
     e.preventDefault();
     this.emit("sgds-blur");
-
-    if (this.selectedItems.length > 0) {
-      this.displayValue = this.selectedItems[0].label;
-    } else {
-      this.displayValue = "";
-    }
   }
 
   /** For form reset  */
@@ -164,30 +156,6 @@ export class SgdsSelect extends SelectElement {
         })}"
         @click=${this._handleClick}
       >
-        <<<<<<< HEAD
-        <div class="select-input-container">
-          <input
-            class="form-control"
-            type="text"
-            id=${this._controlId}
-            name=${ifDefined(this.name)}
-            placeholder=${ifDefined(this.placeholder)}
-            aria-invalid=${this.invalid ? "true" : "false"}
-            ?autofocus=${this.autofocus}
-            ?disabled=${this.disabled}
-            ?readonly=${this.readonly}
-            ?required=${this.required}
-            .value=${this.displayValue}
-            @blur=${this._handleInputBlur}
-            @focus=${this._handleFocus}
-            aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this._controlId}-invalid` : undefined)}
-            aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
-              ? `${this._controlId}-invalid`
-              : ""}"
-            @keydown=${this._blockInputKeydown}
-          />
-        </div>
-        =======
         <input
           class="form-control"
           type="text"
@@ -206,9 +174,8 @@ export class SgdsSelect extends SelectElement {
           aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
             ? `${this._controlId}-invalid`
             : ""}"
-          @keydown=${(e: KeyboardEvent) => e.preventDefault()}
+          @keydown=${this._blockInputKeydown}
         />
-        >>>>>>> 371/focus-ring-outline
         <sgds-icon name="chevron-down" size="md"></sgds-icon>
       </div>
     `;

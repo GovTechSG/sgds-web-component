@@ -1,3 +1,33 @@
+## v3.5.0 (2025-10-06)
+
+### Feat
+
+- **badge**: update clearer variable naming
+- **badge**: add new variants
+- **options**: new options component and slot for select and combobox  (#406)
+- **Select**: allow menuList to be updated when slot change to trigger component update
+- **combobox**: support default slots
+- **Select**: new sgds-select-option
+- **tooltip**: migrate to floating ui
+- **dropdown**: migrate from popperjs to floating-ui
+- **cards**: add footer slot and deprecate link slot
+- **input**: enable form novalidate attribute to disable any native and sgds validation inside input
+- **input**: disable sgds built in constraint validation with noSgdsValidate prop
+
+### Fix
+
+- **close button**: fix sm size and remove unnecessary classes
+- **Select**: console error when menu item has no options
+- **mainnav**: recalculate mobile menu max-height on scroll to account for page offset
+- **mainnav**: await transition before hiding dropdown items in mobile to prevent flickering
+- **cards**: remove hasController usage to eliminate ssr error
+- **link**: align icons correctly with multi-line text
+
+### Refactor
+
+- **select**: remove unnecessary selectedItems
+- **Select**: display none to default slot
+
 ## v3.4.0 (2025-09-22)
 
 ### Feat
@@ -100,10 +130,6 @@
 
 ## v3.1.2-rc.0 (2025-08-08)
 
-### Feat
-
-- **Table**: added new implementation for table with dynamic columns
-
 ### Fix
 
 - **mainnav**: add reflect prop to properly reflect it in the DOM
@@ -145,6 +171,7 @@
 ### Feat
 
 - **Dropdown**: increase max height to 480 for menu
+- **Table**: added new implementation for table with dynamic columns
 - **Select**: disabled typing of input
 - **Select**: add Select component and refactor Combobox
 - **CheckboxGroup**: handle invalid on first render

@@ -15,7 +15,7 @@
 
 <div>
   <!-- Modal Example -->
-  <sgds-modal>
+  <sgds-modal open>
     <sgds-select
       id="select-example-in-modal"
       label="Select label"
@@ -40,7 +40,8 @@
     label="Select label"
     hinttext="Select an option"
     placeholder="Select an option"
-    value="1"
+    required
+    hasFeedback
   ></sgds-select>
 
   <h2> Select populated by slots</h2>

@@ -32,7 +32,7 @@
 .dropdown-item:hover {
   background: var(--sgds-bg-translucent-subtle);
 }
-.dropdown-item:focus,
+
 .dropdown-item:focus-visible {
   background: var(--sgds-bg-translucent-subtle);
   outline: var(--sgds-form-outline-focus);
