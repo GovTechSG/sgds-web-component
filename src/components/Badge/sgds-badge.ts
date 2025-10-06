@@ -117,7 +117,7 @@ export class SgdsBadge extends SgdsElement {
   }
 
   private _renderBadge() {
-    const isDarkButton = this.outlined || this.variant === "warning" || this.variant === "white";
+    const isDarkCloseButton = this.outlined || this.variant === "warning" || this.variant === "white";
 
     return html`<div
       class="  
@@ -141,7 +141,7 @@ export class SgdsBadge extends SgdsElement {
             size="sm"
             aria-label="close the badge"
             @click=${this.close}
-            variant=${isDarkButton ? "dark" : "light"}
+            variant=${isDarkCloseButton ? "dark" : "light"}
           ></sgds-close-button>`
         : nothing}
     </div>`;
