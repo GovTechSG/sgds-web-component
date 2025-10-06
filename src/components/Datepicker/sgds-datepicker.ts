@@ -454,7 +454,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
           aria-controls=${this.dropdownMenuId}
           @click=${() => this.toggleMenu()}
           ariaLabel=${this.menuIsOpen ? "Close Calendar" : "Open Calendar"}
-          ?disabled=${this.disabled}
+          ?disabled=${this.disabled || this.readonly}
           variant="outline"
           name="calendar"
         >

@@ -50,6 +50,8 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
 
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback: string;
+  /** Sets the quantity toggle as readonly  */
+  @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
@@ -227,7 +229,9 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
           <sgds-icon-button
             variant="ghost"
             ariaLabel=${`decrease by ${this.step}`}
-            ?disabled=${this.disabled || (this.min !== undefined ? this.value <= this.min : this.value < 1)}
+            ?disabled=${this.disabled ||
+            (this.min !== undefined ? this.value <= this.min : this.value < 1) ||
+            this.readonly}
             @click=${this._onMinus}
             name="dash"
           >
@@ -254,7 +258,9 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
             variant="ghost"
             ariaLabel=${`increase by ${this.step}`}
             @click=${this._onPlus}
-            ?disabled=${this.disabled || (this.max !== undefined && this.max && this.value >= this.max)}
+            ?disabled=${this.disabled ||
+            (this.max !== undefined && this.max && this.value >= this.max) ||
+            this.readonly}
             name="plus"
           >
           </sgds-icon-button>
