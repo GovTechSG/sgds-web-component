@@ -22,7 +22,6 @@ nav {
   margin: auto;
 }
 
-
 @media screen and (max-width: 768px) {
   .navbar {
     padding: 0px var(--sgds-mainnav-mobile-padding-x);
@@ -38,7 +37,7 @@ nav {
 
 .navbar-brand:focus-visible {
   outline: var(--sgds-outline-focus);
-  outline-offset: -4px;
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .navbar-nav {
@@ -177,12 +176,12 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   .navbar-expand-xl .navbar-nav {
     flex-direction: row;
   }
-  
+
   .navbar-expand-xl .navbar-nav .nav-link {
     padding-left: var(--mainnav-nav-link-padding-x);
     padding-right: var(--mainnav-nav-link-padding-x);
   }
-  
+
   .navbar-expand-xl .navbar-nav-scroll {
     overflow: visible;
   }

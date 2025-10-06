@@ -6,6 +6,7 @@ import { live } from "lit/directives/live.js";
 import { html } from "lit/static-html.js";
 import FormControlElement from "../../base/form-control-element";
 import formPlaceholderStyles from "../../styles/form-placeholder.css";
+import formTextControlStyles from "../../styles/form-text-control.css";
 import { defaultValue } from "../../utils/defaultvalue";
 import type { SgdsFormControl } from "../../utils/formSubmitController";
 import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
@@ -28,7 +29,7 @@ import SgdsIcon from "../Icon/sgds-icon";
  *
  */
 export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
-  static styles = [...FormControlElement.styles, formPlaceholderStyles, inputStyle];
+  static styles = [...FormControlElement.styles, formTextControlStyles, formPlaceholderStyles, inputStyle];
   /** @internal */
   static dependencies = {
     "sgds-spinner": SgdsSpinner,

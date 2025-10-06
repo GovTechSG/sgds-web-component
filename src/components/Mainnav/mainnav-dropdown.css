@@ -27,7 +27,6 @@
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
   }
-
 }
 
 @media (min-width: 1280px) {
@@ -74,7 +73,7 @@
 
 .nav-link:not(.disabled):focus-visible {
   outline: var(--sgds-outline-focus);
-  outline-offset: -4px;
+  outline-offset: var(--sgds-outline-offset-focus);
   color: var(--sgds-primary-color-default);
 }
 
@@ -114,6 +113,7 @@
 
 .dropdown-items a:focus-visible {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
   outline-offset: -5px;
   color: var(--sgds-primary-color-default);
 }

@@ -146,7 +146,7 @@ export class DatepickerInput extends SgdsInput {
         })}"
       >
         ${this._renderLabel()}
-        <div class="input-container">
+        <div class="datepicker-input-container">
           ${this._renderInput()}
           <slot name="calendar-btn"></slot>
         </div>

@@ -30,8 +30,8 @@
   --btn-color: var(--sgds-color-fixed-light);
 }
 
-:host([variant="primary"]) .btn, 
-:host([variant="outline"]) .btn, 
+:host([variant="primary"]) .btn,
+:host([variant="outline"]) .btn,
 :host([variant="ghost"]) .btn {
   color: var(--btn-color);
 }
@@ -97,6 +97,7 @@
   background-color: var(--btn-hover-bg);
   border-color: transparent;
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .btn.disabled,

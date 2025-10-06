@@ -87,7 +87,7 @@ describe("<sgds-radio-group>", () => {
   it("radio-group should update and reflect the value for the checked radio", async () => {
     const el = await fixture<SgdsRadioGroup>(
       html`<sgds-radio-group id="radio-group">
-        <sgds-radio id="radio2" value="2">two</sgds-radio>
+        <sgds-radio id="radio2" value="1">two</sgds-radio>
       </sgds-radio-group>`
     );
 
@@ -96,7 +96,7 @@ describe("<sgds-radio-group>", () => {
     const radio = el.querySelector("sgds-radio");
     radio?.click();
     await el.updateComplete;
-    expect(el).to.have.attribute("value", "2");
+    expect(el).to.have.attribute("value", "1");
   });
 
   it("should be invalid state on form submission with required passed in", async () => {

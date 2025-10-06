@@ -38,9 +38,9 @@
   margin-bottom: var(--sgds-padding-xl);
 }
 
-
 .stepper .stepper-item.is-clickable:focus-visible {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .stepper.horizontal .stepper-item-container:not(:first-child) .stepper-item:before {

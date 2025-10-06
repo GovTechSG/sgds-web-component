@@ -1,0 +1,88 @@
+
+/* 
+<div class="form-control-container>
+    <div class="form-control-group"><input class="form-control" /></div>
+</div>    
+*/
+
+.form-control-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-form-gap-md);
+}
+
+.form-control-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sgds-form-gap-md);
+  background-color: var(--sgds-form-surface-default);
+  border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-default);
+  border-radius: var(--input-border-radius, var(--sgds-form-border-radius-md));
+  padding: 0px var(--sgds-form-padding-x);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  height: var(--sgds-dimension-48);
+  min-width: var(--sgds-dimension-256);
+  width: -webkit-fill-available;
+  width: -moz-available;
+}
+
+
+.form-control {
+  display: block;
+  background-clip: padding-box;
+  appearance: none;
+  border: none;
+  background: none;
+  outline: none;
+  padding: 0;
+  flex-grow: 1;
+  color: var(--sgds-form-color-default);
+  font-size: var(--sgds-font-size-2);
+  line-height: var(--sgds-line-height-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-control-group {
+    transition: none;
+  }
+}
+
+.form-control-group:not(.disabled):not(.is-invalid):not(.readonly):hover {
+  outline: var(--sgds-form-border-width-thick) solid var(--sgds-border-color-emphasis);
+  outline-offset: var(--sgds-form-outline-offset-focus);
+}
+
+.form-control-group:not(.disabled):not(.is-invalid):focus-within {
+  outline: var(--sgds-form-outline-focus);
+  outline-offset: var(--sgds-form-outline-offset-focus);
+}
+
+
+/* Disabled */
+
+.form-control-container.disabled {
+  opacity: var(--sgds-opacity-50);
+}
+
+.form-control-group.disabled {
+  background-color: var(--sgds-form-surface-muted);
+  cursor: not-allowed;
+}
+
+
+/* Readonly */
+
+.form-control-group.readonly{
+  background-color: var(--sgds-form-surface-raised);
+}
+
+/* Invalid */
+
+.form-control-group.is-invalid:not(.disabled) {
+  border: var(--sgds-form-border-width-default) solid var(--sgds-form-danger-border-color-default);
+}
+.form-control-group:not(.disabled).is-invalid:focus-within {
+  outline: var(--sgds-border-width-2) solid var(--sgds-form-danger-color-default);
+  outline-offset: var(--sgds-form-outline-offset-focus);
+}

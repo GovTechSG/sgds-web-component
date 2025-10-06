@@ -37,22 +37,21 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
   /** The input's value. Set to 0 by default */
   @property({ type: Number, reflect: true }) value = 0;
 
-  // /** The quantity toggle's button variants */
-  // @property({ type: String }) iconButtonVariant = "ghost";
-
   /**  Controls the incremental / decremental value of the input */
   @property({ type: Number }) step = 1;
 
   /** The input's minimum value. Only applies number input types. */
-  @property() min: number;
+  @property({ type: Number }) min: number;
 
   /** The input's maximum value. Only applies number input types. */
-  @property() max: number;
+  @property({ type: Number }) max: number;
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: String, reflect: true }) hasFeedback: "style" | "text" | "both";
 
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback: string;
+  /** Sets the quantity toggle as readonly  */
+  @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
@@ -230,7 +229,9 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
           <sgds-icon-button
             variant="ghost"
             ariaLabel=${`decrease by ${this.step}`}
-            ?disabled=${this.disabled || (this.min !== undefined ? this.value <= this.min : this.value < 1)}
+            ?disabled=${this.disabled ||
+            (this.min !== undefined ? this.value <= this.min : this.value < 1) ||
+            this.readonly}
             @click=${this._onMinus}
             name="dash"
           >
@@ -257,7 +258,9 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
             variant="ghost"
             ariaLabel=${`increase by ${this.step}`}
             @click=${this._onPlus}
-            ?disabled=${this.disabled || (this.max !== undefined && this.max && this.value >= this.max)}
+            ?disabled=${this.disabled ||
+            (this.max !== undefined && this.max && this.value >= this.max) ||
+            this.readonly}
             name="plus"
           >
           </sgds-icon-button>

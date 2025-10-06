@@ -21,20 +21,21 @@ svg {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 @media (prefers-reduced-motion: reduce) {
   .page-link {
     transition: none;
   }
 }
-.page-link:not(.ellipsis):hover, .page-link:focus {
+.page-link:not(.ellipsis):hover,
+.page-link:focus {
   color: var(--sgds-primary-color-default);
   background-color: var(--sgds-primary-bg-translucent);
 }
 
 .page-link:focus-visible {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 .page-item > .page-link:not(.ellipsis) {
   cursor: pointer;
@@ -52,7 +53,6 @@ svg {
   cursor: not-allowed;
   pointer-events: none;
   opacity: var(--sgds-opacity-50);
-
 }
 .pagination-sm .page-link {
   font-size: var(--sgds-font-size-1);
@@ -61,7 +61,7 @@ svg {
 }
 
 .sr-only {
-  clip: rect(0, 0, 0, 0) ;
+  clip: rect(0, 0, 0, 0);
   border: 0;
   height: 1px;
   margin: -1px;

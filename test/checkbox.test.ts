@@ -13,7 +13,6 @@ describe("<sgds-checkbox>", () => {
       el,
       `
            <div class="form-check">
-                  <div class="form-check-input-container">
                     <input
                       class="form-check-input"
                       type="checkbox"
@@ -22,7 +21,6 @@ describe("<sgds-checkbox>", () => {
                       aria-checked="false"
                       name="testname"
                     />
-                  </div>
                   <label class="form-check-label"><slot></slot></label>
                 </div>
           `,
@@ -37,7 +35,6 @@ describe("<sgds-checkbox>", () => {
       el,
       `
            <div class="form-check">
-                  <div class="form-check-input-container">
                     <input
                       class="form-check-input is-invalid"
                       type="checkbox"
@@ -45,7 +42,6 @@ describe("<sgds-checkbox>", () => {
                       aria-disabled="false"
                       aria-checked="false"
                     />
-                  </div>
                   <label class="form-check-label"><slot></slot></label>
                 </div>
                       <div class="invalid-feedback-container">

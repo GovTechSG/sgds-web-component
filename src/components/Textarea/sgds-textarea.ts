@@ -10,6 +10,7 @@ import { SgdsFormControl } from "../../utils/formSubmitController";
 import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
 import textareaStyle from "./textarea.css";
+import formTextControlStyles from "../../styles/form-text-control.css";
 
 /**
  * @summary Text areas allow for the collection of input longer than a single line.
@@ -22,9 +23,9 @@ import textareaStyle from "./textarea.css";
  * @event sgds-blur - Emitted when textarea loses focus.
  */
 export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
-  static styles = [...FormControlElement.styles, textareaStyle];
+  static styles = [...FormControlElement.styles, formTextControlStyles, textareaStyle];
   /**@internal */
-  @query("textarea.form-control") textarea: HTMLTextAreaElement;
+  @query("textarea.form-control-group") textarea: HTMLTextAreaElement;
   /**@internal */
   private resizeObserver: ResizeObserver;
   /**The textarea's name attribute */
@@ -60,7 +61,7 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
     | "email"
     | "url";
   /** The native textarea's autocorrect attribute. */
-  @property({ type: String, reflect: true }) autocorrect: string;
+  @property({ type: Boolean, reflect: true }) autocorrect: boolean;
   /** @internal Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
   defaultValue = "";
@@ -200,11 +201,14 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
         <label for=${this._controlId} class="form-label">${this.label}</label>
         <textarea
           class=${classMap({
-            "form-control": true,
+            "form-control-group": true,
+            // "form-control": true,
             "is-invalid": this.hasFeedback && this.invalid,
             "textarea-resize-none": this.resize === "none",
             "textarea-resize-vertical": this.resize === "vertical",
-            "textarea-resize-auto": this.resize === "auto"
+            "textarea-resize-auto": this.resize === "auto",
+            readonly: this.readonly,
+            disabled: this.disabled
           })}
           id=${this._controlId}
           name=${ifDefined(this.name)}

@@ -52,6 +52,7 @@ td[data-day]:focus-visible,
 button.month:focus-visible,
 button.year:focus-visible {
   outline: var(--sgds-form-outline-focus);
+  outline-offset: var(--sgds-form-outline-offset-focus);
 }
 
 td[data-day].active:not(.selected-ends):focus,

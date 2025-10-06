@@ -68,6 +68,7 @@ slot[name="description"]::slotted(*) {
 
 .footer-mandatory-links ul li a:focus-visible {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .footer-bottom {
@@ -103,6 +104,7 @@ slot[name="social-media"]::slotted(a:focus-visible) {
 
 slot[name="social-media"]::slotted(a:focus-visible) {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .footer-mandatory-links {

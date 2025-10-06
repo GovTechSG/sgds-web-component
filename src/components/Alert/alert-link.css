@@ -10,4 +10,6 @@
 
 .alert-link:focus-visible {
   outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
+
 }
