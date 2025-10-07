@@ -16,11 +16,65 @@
         gap: 8px;
         flex-wrap: wrap;
       }
+
+      .d-flex-column {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
     </style>
   </head>
 
   <body>
     <div class="container">
+      <h2>Badge - Variants</h2>
+      <div class="d-flex-column">
+        <div class="d-flex-row">
+          <sgds-badge variant="primary">Badge label</sgds-badge>
+          <sgds-badge variant="accent">Badge label</sgds-badge>
+          <sgds-badge variant="success">Badge label</sgds-badge>
+          <sgds-badge variant="danger">Badge label</sgds-badge>
+          <sgds-badge variant="warning">Badge label</sgds-badge>
+          <sgds-badge variant="cyan">Badge label</sgds-badge>
+          <sgds-badge variant="purple">Badge label</sgds-badge>
+          <sgds-badge variant="neutral">Badge label</sgds-badge>
+          <sgds-badge variant="white">Badge label</sgds-badge>
+        </div>
+        <div class="d-flex-row">
+          <sgds-badge variant="primary" outlined>Badge label</sgds-badge>
+          <sgds-badge variant="accent" outlined>Badge label</sgds-badge>
+          <sgds-badge variant="success" outlined>Badge label</sgds-badge>
+          <sgds-badge variant="danger" outlined>Badge label</sgds-badge>
+          <sgds-badge variant="warning" outlined>Badge label</sgds-badge>
+          <sgds-badge variant="cyan" outlined>Badge label</sgds-badge>
+          <sgds-badge variant="purple" outlined>Badge label</sgds-badge>
+          <sgds-badge variant="neutral" outlined>Badge label</sgds-badge>
+          <sgds-badge variant="white" outlined>Badge label</sgds-badge>
+        </div>
+        <div class="d-flex-row">
+          <sgds-badge variant="primary" show dismissible>Badge label</sgds-badge>
+          <sgds-badge variant="accent" show dismissible>Badge label</sgds-badge>
+          <sgds-badge variant="success" show dismissible>Badge label</sgds-badge>
+          <sgds-badge variant="danger" show dismissible>Badge label</sgds-badge>
+          <sgds-badge variant="warning" show dismissible>Badge label</sgds-badge>
+          <sgds-badge variant="cyan" show dismissible>Badge label</sgds-badge>
+          <sgds-badge variant="purple" show dismissible>Badge label</sgds-badge>
+          <sgds-badge variant="neutral" show dismissible>Badge label</sgds-badge>
+          <sgds-badge variant="white" show dismissible>Badge label</sgds-badge>
+        </div>
+        <div class="d-flex-row">
+          <sgds-badge variant="primary" show dismissible outlined>Badge label</sgds-badge>
+          <sgds-badge variant="accent" show dismissible outlined>Badge label</sgds-badge>
+          <sgds-badge variant="success" show dismissible outlined>Badge label</sgds-badge>
+          <sgds-badge variant="danger" show dismissible outlined>Badge label</sgds-badge>
+          <sgds-badge variant="warning" show dismissible outlined>Badge label</sgds-badge>
+          <sgds-badge variant="cyan" show dismissible outlined>Badge label</sgds-badge>
+          <sgds-badge variant="purple" show dismissible outlined>Badge label</sgds-badge>
+          <sgds-badge variant="neutral" show dismissible outlined>Badge label</sgds-badge>
+          <sgds-badge variant="white" show dismissible outlined>Badge label</sgds-badge>
+        </div>
+      </div>
+      <br />
       <h2>Badge - Default samples</h2>
       <div class="d-flex-row">
         <sgds-badge variant="info" outlined>

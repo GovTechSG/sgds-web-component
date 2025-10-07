@@ -1,88 +1,6 @@
 import { html } from "lit-html";
 
-export const ComboBoxMultiSelect = {
-  render: Template.bind({}),
-  name: "MultiSelect",
-  args: { ...args, multiSelect: true, id: "multiselect-combobox-example" },
-  parameters: {},
-  tags: ["!dev"]
-};
-
-const DefaultFilter = () => {
-  return html`<div style="display:flex;flex-direction:column;gap:3rem;">
-    <sgds-combo-box placeholder="Single select combo box with default filter" id="default-filter-combobox-example">
-      <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
-      <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
-      <sgds-combo-box-option value="carrot">Carrot</sgds-combo-box-option>
-      <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
-      <sgds-combo-box-option value="eggplant">Eggplant</sgds-combo-box-option>
-    </sgds-combo-box>
-    <sgds-combo-box
-      multiSelect
-      placeholder="Multi select combo box with default filter"
-      id="default-filter-multiselect-combobox-example"
-    >
-      <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
-      <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
-      <sgds-combo-box-option value="carrot">Carrot</sgds-combo-box-option>
-      <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
-      <sgds-combo-box-option value="eggplant">Eggplant</sgds-combo-box-option>
-    </sgds-combo-box>
-  </div> `;
-};
-
-export const ComboBoxDefaultFilter = {
-  render: DefaultFilter.bind({}),
-  name: "ComboBox with default filter",
-  args: {},
-  parameters: {},
-  tags: ["!dev"]
-};
-
-const CustomFilter = () => {
-  return html`
-    <div style="display:flex;flex-direction:column;gap:3rem;">
-      <sgds-combo-box
-        placeholder="Single select combo box with custom filter"
-        id="custom-filter-single-select-combobox-example"
-      >
-        <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
-        <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
-        <sgds-combo-box-option value="carrot">Carrot</sgds-combo-box-option>
-        <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
-        <sgds-combo-box-option value="eggplant">Eggplant</sgds-combo-box-option>
-      </sgds-combo-box>
-      <sgds-combo-box
-        multiSelect
-        placeholder="Multi select combobox with custom filter"
-        id="custom-filter-multi-select-combobox-example"
-      >
-        <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
-        <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
-        <sgds-combo-box-option value="carrot">Carrot</sgds-combo-box-option>
-        <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
-        <sgds-combo-box-option value="eggplant">Eggplant</sgds-combo-box-option>
-      </sgds-combo-box>
-    </div>
-    <script>
-      const customFilterComboBox = document.querySelector("#custom-filter-single-select-combobox-example");
-      const customFilterMultiSelectComboBox = document.querySelector("#custom-filter-multi-select-combobox-example");
-
-      customFilterComboBox.filterFunction = customFilterMultiSelectComboBox.filterFunction = (inputValue, menuItem) =>
-        menuItem.label.toLowerCase().includes(inputValue);
-    </script>
-  `;
-};
-
-export const ComboBoxCustomFilter = {
-  render: CustomFilter.bind({}),
-  name: "ComboBox with custom filter",
-  args: {},
-  parameters: {},
-  tags: ["!dev"]
-};
-
-export const ComboBoxDefaultSlot = {
+export const SelectDefaultSlot = {
   render: Template.bind({}),
   name: "Populating menu list with default slot",
   args: { ...args, thirdOptionDisabled: true },
@@ -90,12 +8,12 @@ export const ComboBoxDefaultSlot = {
   tags: ["!dev"]
 };
 
-const ComboBoxMenuListProp = () => {
+const SelectMenuListProp = () => {
   return html`
-    <sgds-combo-box id="combobox-example" label="Items" placeholder="ComboBox"> </sgds-combo-box>
+    <sgds-select id="select-menuList-prop-example" label="Items" placeholder="Select"></sgds-select>
     <script>
-      const comboBox = document.querySelector("#combobox-example");
-      comboBox.menuList = [
+      const select = document.querySelector("#select-menuList-prop-example");
+      select.menuList = [
         { label: "Afghanistan", value: "1" },
         { label: "Albania", value: "2" },
         { label: "Algeria", value: "3" },
@@ -306,8 +224,8 @@ const ComboBoxMenuListProp = () => {
   `;
 };
 
-export const ComboBoxMenuList = {
-  render: ComboBoxMenuListProp.bind({}),
+export const SelectMenuList = {
+  render: SelectMenuListProp.bind({}),
   name: "Populating menu list with property",
   args: {},
   parameters: {},

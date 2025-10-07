@@ -11,7 +11,17 @@ import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 
 import { getTextContent } from "../../utils/slot";
 
-export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral";
+export type BadgeVariant =
+  | "primary"
+  | "accent"
+  | "success"
+  | "danger"
+  | "warning"
+  | "cyan"
+  | "purple"
+  | "neutral"
+  | "white"
+  | "info";
 
 /**
  * @summary Badges can be used to highlight important bits of information such as labels, notifications & status.
@@ -37,8 +47,13 @@ export class SgdsBadge extends SgdsElement {
   /** Controls the appearance of the dismissible badge. This prop only applies when dismissible is true  */
   @property({ type: Boolean, reflect: true }) show = false;
 
-  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `info`, `success`, `danger`, `warning`, 'neutral' */
-  @property({ reflect: true }) variant: BadgeVariant = "info";
+  /**
+   * One or more badge variant combinations.
+   * Variants include: `primary`, `accent`, `success`, `danger`, `warning`, `cyan`, `purple`, `neutral`, `white`, `info`.
+   *
+   * (@deprecated) The `info` variant is deprecated. Use `primary` instead.
+   */
+  @property({ reflect: true }) variant: BadgeVariant = "primary";
 
   /** Manually set the outlined state to false */
   @property({ type: Boolean, reflect: true }) outlined = false;
@@ -102,6 +117,8 @@ export class SgdsBadge extends SgdsElement {
   }
 
   private _renderBadge() {
+    const isDarkCloseButton = this.outlined || this.variant === "warning" || this.variant === "white";
+
     return html`<div
       class="  
           ${classMap({
@@ -124,7 +141,7 @@ export class SgdsBadge extends SgdsElement {
             size="sm"
             aria-label="close the badge"
             @click=${this.close}
-            variant=${this.outlined ? "dark" : "light"}
+            variant=${isDarkCloseButton ? "dark" : "light"}
           ></sgds-close-button>`
         : nothing}
     </div>`;
