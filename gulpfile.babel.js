@@ -52,7 +52,7 @@ exports.default = task("concat-storybook-mdx", done => {
 exports.default = task("replace-version-and-sri", async () => {
   return src("docs/templates/INSTALLATION.md")
     .pipe(replace(/<version>/g, version))
-    .pipe(replace(/<subresource-integrity-entrypoint>/g, await generateSri("lib/index.umd.js")))
-    .pipe(replace(/<subresource-integrity-masthead>/g, await generateSri("lib/components/Masthead/index.umd.js")))
+    .pipe(replace(/<subresource-integrity-entrypoint>/g, await generateSri("lib/index.umd.min.js")))
+    .pipe(replace(/<subresource-integrity-masthead>/g, await generateSri("lib/components/Masthead/index.umd.min.js")))
     .pipe(dest("./docs"));
 });
