@@ -31,7 +31,7 @@ input {
   outline-offset: var(--sgds-form-outline-offset-focus);
 }
 
-.form-check-input:not([disabled]):not(.is-invalid):not([aria-checked="true"]):hover {
+.form-check-input:not([disabled]):not(.is-invalid):not([aria-checked="true"]):not(:focus-visible):hover {
   outline: var(--sgds-form-border-width-thick) solid var(--sgds-border-color-emphasis);
   outline-offset: var(--sgds-form-outline-offset-focus);
 }

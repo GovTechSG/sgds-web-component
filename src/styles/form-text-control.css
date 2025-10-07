@@ -48,7 +48,7 @@
   }
 }
 
-.form-control-group:not(.disabled):not(.is-invalid):not(.readonly):hover {
+.form-control-group:not(.disabled):not(.is-invalid):not(.readonly):not(:focus-within):hover {
   outline: var(--sgds-form-border-width-thick) solid var(--sgds-border-color-emphasis);
   outline-offset: var(--sgds-form-outline-offset-focus);
 }
