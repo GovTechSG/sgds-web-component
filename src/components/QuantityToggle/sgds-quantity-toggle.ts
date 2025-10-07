@@ -12,6 +12,7 @@ import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import SgdsInput from "../Input/sgds-input";
 import quantityToggleStyle from "./quantity-toggle.css";
+import formControlStyle from "../../styles/form-text-control.css";
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
  *
@@ -22,7 +23,13 @@ import quantityToggleStyle from "./quantity-toggle.css";
  *
  */
 export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
-  static styles = [...FormControlElement.styles, formPlaceholderStyles, svgStyles, quantityToggleStyle];
+  static styles = [
+    ...FormControlElement.styles,
+    formPlaceholderStyles,
+    svgStyles,
+    formControlStyle,
+    quantityToggleStyle
+  ];
 
   /** @internal */
   static dependencies = {

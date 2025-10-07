@@ -80,7 +80,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
   }
 
   protected _renderHintText() {
-    const hintTextTemplate = html` <div class="form-text">${this.hintText}</div> `;
+    const hintTextTemplate = html` <div class="form-text" id="${this._controlId}Help">${this.hintText}</div> `;
     return this.hintText && hintTextTemplate;
   }
 
@@ -213,6 +213,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
             super._mixinHandleChange(e);
           }}
           .value=${live(this.value)}
+          aria-describedby=${this.invalid && this.hasFeedback ? "checkbox-group-feedback" : `${this._controlId}Help`}
         />
         ${this.invalid && this.hasFeedback
           ? html`
@@ -225,7 +226,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
                     />
                   </svg>
                 </slot>
-                <div id="checkbox-feedback" tabindex="0" class="invalid-feedback">
+                <div id="checkbox-group-feedback" class="invalid-feedback">
                   ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
                 </div>
               </div>
