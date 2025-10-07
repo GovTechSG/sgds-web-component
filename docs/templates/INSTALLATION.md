@@ -72,7 +72,7 @@ This method registers all SGDS elements up front in the Custom Elements Registry
 <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@<version>" async crossorigin="anonymous" integrity="<subresource-integrity-entrypoint>"></script>
 
 //or load a single component e.g. Masthead
-<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@<version>/components/Masthead/index.umd.js" async crossorigin="anonymous" integrity="<subresource-integrity-masthead>"></script>
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@<version>/components/Masthead/index.umd.min.js" async crossorigin="anonymous" integrity="<subresource-integrity-masthead>"></script>
 
 ```
 
