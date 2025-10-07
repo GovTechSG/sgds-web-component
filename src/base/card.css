@@ -112,6 +112,7 @@ a.card {
 }
 
 a.card:not(.disabled):focus-visible {
+  --sgds-outline-offset-focus: -1px;
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
 }
