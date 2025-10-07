@@ -1,0 +1,44 @@
+:host([noPadding]) .card {
+  border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
+}
+
+:host(:not([noPadding])) .card:not(.disabled):hover {
+  box-shadow: 0px 0px 1px 0px rgba(14, 14, 14, 0.12), 0px 8px 16px 0px rgba(14, 14, 14, 0.12);
+}
+
+:host([orientation="vertical"][noPadding]) .card-body {
+  padding: var(--sgds-padding-xl) var(--sgds-padding-none) var(--sgds-padding-none) var(--sgds-padding-none);
+}
+
+:host([orientation="vertical"][imagePosition="after"][noPadding]) .card-body {
+  padding: var(--sgds-padding-none) var(--sgds-padding-none) var(--sgds-padding-xl) var(--sgds-padding-none);
+}
+
+:host([orientation="horizontal"][noPadding]) .card-body {
+  padding: var(--sgds-padding-none) var(--sgds-padding-none) var(--sgds-padding-none) var(--sgds-padding-xl);
+}
+
+:host([orientation="horizontal"][imagePosition="after"][noPadding]) .card-body {
+  padding: var(--sgds-padding-none) var(--sgds-padding-xl) var(--sgds-padding-none) var(--sgds-padding-none);
+}
+
+:host([tinted]:not([noPadding])) .card-tinted-bg {
+  background-color: var(--sgds-bg-translucent-subtle);
+  opacity: var(--sgds-opacity-50);
+}
+
+:host([orientation][noPadding]) .card-media {
+  padding: var(--sgds-padding-none);
+}
+
+slot[name="image-badge"]::slotted(*) {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+slot[name="image-action"]::slotted(*) {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}

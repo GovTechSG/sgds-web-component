@@ -1,5 +1,6 @@
 :host {
   z-index: 1200;
+  position: relative;
 }
 
 nav {
@@ -37,8 +38,11 @@ nav {
 
 .navbar-brand:focus,
 .navbar-brand:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
   outline: 0;
+}
+
+.navbar-brand:focus-visible {
+  box-shadow: var(--sgds-box-shadow-focus);
 }
 
 .navbar-nav {
@@ -50,9 +54,12 @@ nav {
   margin-bottom: 0;
 }
 
+nav > .navbar-body .navbar-nav {
+  height: 100dvh;
+}
+
 nav > .navbar-body {
   position: absolute;
-  bottom: 0;
   z-index: 2000;
   width: 100%;
   background-color: var(--sgds-surface-default);
@@ -140,7 +147,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
     display: none;
   }
 }
-@media (min-width: 992px) {
+@media (min-width: 1024px) {
   .navbar-expand-lg {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -164,11 +171,15 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
     display: none;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
   .navbar-expand-xl {
     flex-wrap: nowrap;
     justify-content: flex-start;
     gap: var(--sgds-gap-xl);
+  }
+
+  .navbar-expand-xl .navbar-nav {
+    flex-direction: row;
   }
   
   .navbar-expand-xl .navbar-nav .nav-link {
@@ -189,7 +200,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
     display: none;
   }
 }
-@media (min-width: 1400px) {
+@media (min-width: 1440px) {
   .navbar-expand-xxl {
     flex-wrap: nowrap;
     justify-content: flex-start;

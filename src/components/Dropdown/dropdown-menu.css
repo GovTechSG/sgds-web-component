@@ -1,3 +1,7 @@
+:host([menuisopen]) .dropdown-menu {
+  display: block;
+}
+
 .dropdown-menu {
   background-clip: padding-box;
   background-color: var(--sgds-surface-default);
@@ -13,10 +17,7 @@
   position: absolute;
   text-align: left;
   overflow-y: auto;
-  z-index: 1000;
-}
-.dropdown-menu.show {
-  display: block;
+  z-index: 1050;
 }
 
 .nav-tabs .dropdown-menu {

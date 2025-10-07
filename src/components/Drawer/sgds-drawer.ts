@@ -16,6 +16,7 @@ import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
  * @slot default - The drawer's main content
  * @slot title - The title of the drawer
  * @slot description - The description of the drawer
+ * @slot footer - The footer of the drawer
  *
  * @event sgds-show - Emitted when the drawer opens.
  * @event sgds-after-show - Emitted after the drawer opens and all animations are complete.
@@ -51,6 +52,14 @@ export class SgdsDrawer extends SgdsElement {
    */
   @property({ type: Boolean, reflect: true }) open = false;
 
+  /**
+   * Defines the size of the drawer panel.
+   * For drawers placed on the left or right (`start`/`end`), this controls the drawer's width.
+   * For drawers placed on the top or bottom, this controls the drawer's height.
+   * Accepts `small`, `medium`, or `large`. Defaults to `small`.
+   */
+  @property({ type: String, reflect: true }) size: "sm" | "md" | "lg" = "sm";
+
   /** The direction from which the drawer will open. */
   @property({ type: String, reflect: true }) placement: "top" | "end" | "bottom" | "start" = "end";
 
@@ -61,8 +70,6 @@ export class SgdsDrawer extends SgdsElement {
   @property({ type: Boolean, reflect: true }) contained = false;
 
   firstUpdated() {
-    this.drawer.hidden = !this.open;
-
     if (this.open) {
       this.addOpenListeners();
 
@@ -74,6 +81,7 @@ export class SgdsDrawer extends SgdsElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
+
     unlockBodyScrolling(this);
   }
 
@@ -238,11 +246,13 @@ export class SgdsDrawer extends SgdsElement {
   }
 
   render() {
+    const isHydrated = this.hasUpdated;
+    const shouldHide = !this.open && !isHydrated;
+
     return html`
       <div
         class=${classMap({
           drawer: true,
-          "drawer-open": this.open,
           "drawer-top": this.placement === "top",
           "drawer-end": this.placement === "end",
           "drawer-bottom": this.placement === "bottom",
@@ -250,6 +260,7 @@ export class SgdsDrawer extends SgdsElement {
           "drawer-contained": this.contained,
           "drawer-fixed": !this.contained
         })}
+        ?hidden=${shouldHide}
       >
         <div class="drawer-overlay" @click=${() => this.requestClose("overlay")} tabindex="-1"></div>
 
@@ -270,6 +281,7 @@ export class SgdsDrawer extends SgdsElement {
             ></sgds-close-button>
           </header>
           <slot class="drawer-body"></slot>
+          <slot name="footer"></slot>
         </div>
       </div>
     `;

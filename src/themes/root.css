@@ -132,6 +132,7 @@
   --sgds-font-weight-bold: 700;
 
   /* Primitive - Font Size */
+  --sgds-font-size-0: 0.75rem;
   --sgds-font-size-1: 0.875rem;
   --sgds-font-size-2: 1rem;
   --sgds-font-size-3: 1.25rem;
@@ -143,6 +144,7 @@
   --sgds-font-size-9: 3.5rem;
 
   /* Primitive - Icon Size */
+  --sgds-icon-size-xs: 0.75rem;
   --sgds-icon-size-sm: 1rem;
   --sgds-icon-size-md: 1.25rem;
   --sgds-icon-size-lg: 1.5rem;
@@ -161,9 +163,19 @@
   --sgds-line-height-body: 1.5;
   --sgds-line-height-heading: 1.2;
   --sgds-line-height-min: 20px;
+  --sgds-line-height-16: 16px;
+  --sgds-line-height-20: 20px;
+  --sgds-line-height-24: 24px;
+  --sgds-line-height-32: 32px;
+  --sgds-line-height-36: 36px;
+  --sgds-line-height-40: 40px;
+  --sgds-line-height-48: 48px;
+  --sgds-line-height-56: 56px;
+  --sgds-line-height-64: 64px;
 
   /* Primitive - Opacity */
   --sgds-opacity-0: 0;
+  --sgds-opacity-3: 0.03;
   --sgds-opacity-5: 0.05;
   --sgds-opacity-10: 0.1;
   --sgds-opacity-20: 0.2;
@@ -208,6 +220,7 @@
   --sgds-dimension-16: 16px;
   --sgds-dimension-20: 20px;
   --sgds-dimension-24: 24px;
+  --sgds-dimension-28: 28px;
   --sgds-dimension-32: 32px;
   --sgds-dimension-40: 40px;
   --sgds-dimension-48: 48px;
@@ -215,6 +228,7 @@
   --sgds-dimension-56: 56px;
   --sgds-dimension-60: 60px;
   --sgds-dimension-64: 64px;
+  --sgds-dimension-68: 68px;
   --sgds-dimension-72: 72px;
   --sgds-dimension-76: 76px;
   --sgds-dimension-80: 80px;
@@ -226,6 +240,7 @@
   --sgds-dimension-132: 132px;
   --sgds-dimension-136: 136px;
   --sgds-dimension-144: 144px;
+  --sgds-dimension-160: 160px;
   --sgds-dimension-168: 168px;
   --sgds-dimension-192: 192px;
   --sgds-dimension-224: 224px;
@@ -234,20 +249,25 @@
   --sgds-dimension-288: 288px;
   --sgds-dimension-320: 320px;
   --sgds-dimension-328: 328px;
+  --sgds-dimension-332: 332px;
   --sgds-dimension-340: 340px;
+  --sgds-dimension-344: 344px;
   --sgds-dimension-384: 384px;
+  --sgds-dimension-400: 400px;
   --sgds-dimension-480: 480px;
   --sgds-dimension-512: 512px;
   --sgds-dimension-640: 640px;
   --sgds-dimension-688: 688px;
   --sgds-dimension-768: 768px;
   --sgds-dimension-800: 800px;
+  --sgds-dimension-840: 840px;
   --sgds-dimension-872: 872px;
-  --sgds-dimension-896: 896px;
+  --sgds-dimension-888: 888px;
+  --sgds-dimension-960: 960px;
   --sgds-dimension-1024: 1024px;
-  --sgds-dimension-1176: 1176px;
+  --sgds-dimension-1168: 1168px;
   --sgds-dimension-1280: 1280px;
-  --sgds-dimension-1320: 1320px;
+  --sgds-dimension-1312: 1312px;
   --sgds-dimension-1440: 1440px;
 
   /* Semantic - Padding */

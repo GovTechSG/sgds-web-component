@@ -14,7 +14,7 @@ const StretchedTemplate = () => {
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Stretched Link Card</h3>
         <span slot="description">stretched link card</span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -44,7 +44,7 @@ const DisabledTemplate = () => {
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Disabled Card</h3>
         <span slot="description">disabled card</span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -74,7 +74,7 @@ const OrientationTemplate = () => {
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Vertical Image Card</h3>
         <span slot="description">vertical card</span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -89,7 +89,7 @@ const OrientationTemplate = () => {
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Horizontal Image Card</h3>
         <span slot="description">horizontal card</span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -119,7 +119,7 @@ const ImagePositionTemplate = () => {
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Vertical Image Card</h3>
         <span slot="description">vertical card with image position set to before the content</span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -134,7 +134,7 @@ const ImagePositionTemplate = () => {
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Vertical Image Card</h3>
         <span slot="description">vertical card with image position set to after the content</span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -149,7 +149,7 @@ const ImagePositionTemplate = () => {
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Horizontal Image Card</h3>
         <span slot="description">horizontal card with image position set to before the content</span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -164,7 +164,7 @@ const ImagePositionTemplate = () => {
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Horizontal Image Card</h3>
         <span slot="description">horizontal card with image position set to after the content</span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -194,7 +194,7 @@ const ImageAdjustmentTemplate = () => {
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Vertical Image Card</h3>
         <span slot="description">vertical card with image adjustment set to default</span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -209,7 +209,7 @@ const ImageAdjustmentTemplate = () => {
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Vertical Image Card</h3>
         <span slot="description">vertical card with image adjustment set to padding around</span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -224,7 +224,7 @@ const ImageAdjustmentTemplate = () => {
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Vertical Image Card</h3>
         <span slot="description">vertical card with image adjustment set to aspect ratio</span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -254,7 +254,7 @@ const HideBorderTemplate = () => {
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Vertical Image Card</h3>
         <span slot="description">vertical card with no border</span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -269,7 +269,7 @@ const HideBorderTemplate = () => {
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Vertical Image Card</h3>
         <span slot="description">vertical card with no border</span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -284,7 +284,7 @@ const HideBorderTemplate = () => {
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Horizontal Image Card</h3>
         <span slot="description">horizontal card with no border</span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -299,7 +299,7 @@ const HideBorderTemplate = () => {
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Horizontal Image Card</h3>
         <span slot="description">horizontal card with no border</span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -329,7 +329,7 @@ const TintedTemplate = () => {
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Vertical Image Card</h3>
         <span slot="description">vertical card with tinted background</span>
-        <sgds-link slot="link">
+        <sgds-link slot="footer">
           <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-card>
@@ -340,6 +340,45 @@ const TintedTemplate = () => {
 export const Tinted = {
   render: TintedTemplate.bind({}),
   name: "Tinted",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
+
+const OverflowMenuTemplate = () => {
+  return html`
+    <div class="container">
+      <sgds-card>
+        <sgds-badge variant="primary" slot="upper">New</sgds-badge>
+        <sgds-overflow-menu slot="menu">
+          <sgds-dropdown-item>View</sgds-dropdown-item>
+          <sgds-dropdown-item>Edit</sgds-dropdown-item>
+          <sgds-dropdown-item>Delete</sgds-dropdown-item>
+        </sgds-overflow-menu>
+        <span slot="subtitle">EVENTS</span>
+        <span slot="title">Innovative Solutions for You</span>
+        <sgds-icon-list size="sm">
+          <div role="listitem"><sgds-icon size="md" name="calendar"></sgds-icon>12 September</div>
+          <div role="listitem"><sgds-icon size="md" name="laptop"></sgds-icon>Online</div>
+        </sgds-icon-list>
+        <span slot="description"
+          >Discover how our platform can streamline your workflow and enhance productivity. With cutting-edge technology
+          and user-friendly design, we empower you to achieve more.</span
+        >
+        <div slot="lower">
+          <sgds-badge variant="neutral" outlined>Design</sgds-badge>
+        </div>
+        <sgds-link slot="footer">
+          <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
+        </sgds-link>
+      </sgds-card>
+    </div>
+  `;
+};
+
+export const OverflowMenu = {
+  render: OverflowMenuTemplate.bind({}),
+  name: "Overflow Menu",
   args: {},
   parameters: {},
   tags: ["!dev"]

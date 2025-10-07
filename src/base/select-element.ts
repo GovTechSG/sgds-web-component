@@ -1,6 +1,7 @@
 import { html } from "lit";
 import { property, queryAsync, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { size } from "@floating-ui/dom";
 import dropdownMenuStyle from "../components/Dropdown/dropdown-menu.css";
 import feedbackStyles from "../styles/feedback.css";
 import hintTextStyles from "../styles/form-hint.css";
@@ -9,6 +10,7 @@ import { SgdsFormControl } from "../utils/formSubmitController";
 import generateId from "../utils/generateId";
 import { SgdsFormValidatorMixin } from "../utils/validatorMixin";
 import { DropdownListElement } from "./dropdown-list-element";
+import { OptionElement } from "./option-element";
 
 export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) implements SgdsFormControl {
   static styles = [...DropdownListElement.styles, dropdownMenuStyle, hintTextStyles, feedbackStyles];
@@ -34,8 +36,6 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
   /** Makes the input a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
-  /** Makes the input readonly. */
-  @property({ type: Boolean, reflect: true }) readonly = false;
   /**
    * IMPORTANT:
    * We still expose `.value` externally, but this is now the underlying ID or data
@@ -65,28 +65,31 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
    * label: string;
    * value: string;
    * }`
+   * @deprecated
+   * Deprecated in favour of slots
    */
-  @property({ type: Array }) menuList: SgdsSelectItemData[] = [];
+  @property({ type: Array }) menuList: SgdsOptionData[] = [];
   /** Track selected items (even for single-select, but it will have at most one). */
   @state()
-  protected selectedItems: SgdsSelectItemData[] = [];
+  protected selectedItems: SgdsOptionData[] = [];
   /** @internal Managed filtered menu on the fly with input change*/
   @state()
-  protected filteredMenuList: SgdsSelectItemData[] = [];
+  protected filteredMenuList: SgdsOptionData[] = [];
 
   protected _isTouched = false;
 
   constructor() {
     super();
-    /** @internal */
-    this.modifierOpt = [
-      {
-        name: "offset",
-        options: {
-          offset: [0, 8]
-        }
-      }
-    ];
+
+    this.floatingOpts = {
+      middleware: [
+        size({
+          apply({ rects, elements }) {
+            elements.floating.style.width = `${rects.reference.width}px`;
+          }
+        })
+      ]
+    };
   }
 
   @queryAsync("input.form-control") protected _input: Promise<HTMLInputElement>;
@@ -96,10 +99,6 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
     this.addEventListener("blur", async () => {
       this.invalid = !this._mixinReportValidity();
     });
-    if (this.readonly) {
-      this._handleKeyboardMenuEvent = null;
-      this._handleKeyboardMenuItemsEvent = null;
-    }
   }
 
   /**
@@ -171,9 +170,22 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
       this.hideMenu();
     }
   }
+  protected _getMenuListFromOptions(): SgdsOptionData[] {
+    return this.options?.map((el: OptionElement) => ({
+      label: el.textContent?.trim() ?? "",
+      value: el.getAttribute("value") ?? el.textContent?.trim() ?? "",
+      disabled: el.disabled ?? undefined
+    }));
+  }
+  protected _handleDefaultSlotChange() {
+    this.menuList = this._getMenuListFromOptions();
+  }
+
+  protected declare options: OptionElement[];
 }
 
-export interface SgdsSelectItemData {
+export interface SgdsOptionData {
   label: string;
   value: string;
+  disabled?: boolean;
 }

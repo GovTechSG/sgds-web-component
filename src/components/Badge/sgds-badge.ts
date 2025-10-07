@@ -1,14 +1,31 @@
 import { html, nothing } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import SgdsElement from "../../base/sgds-element";
-import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+
 import { watch } from "../../utils/watch";
 import badgeStyle from "./badge.css";
-export type BadgeVariant = "info" | "success" | "danger" | "warning" | "neutral";
+
+import SgdsElement from "../../base/sgds-element";
+import SgdsTooltip from "../Tooltip/sgds-tooltip";
+import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+
+import { getTextContent } from "../../utils/slot";
+
+export type BadgeVariant =
+  | "primary"
+  | "accent"
+  | "success"
+  | "danger"
+  | "warning"
+  | "cyan"
+  | "purple"
+  | "neutral"
+  | "white"
+  | "info";
 
 /**
  * @summary Badges can be used to highlight important bits of information such as labels, notifications & status.
+ * When the text exceeds the width, it will be truncated with a tooltip that will be displayed on hover.
  *
  * @slot default - slot for badge
  * @slot icon - The slot for icon to the left of the badge text
@@ -23,14 +40,20 @@ export class SgdsBadge extends SgdsElement {
 
   /**@internal */
   static dependencies = {
-    "sgds-close-button": SgdsCloseButton
+    "sgds-close-button": SgdsCloseButton,
+    "sgds-tooltip": SgdsTooltip
   };
 
   /** Controls the appearance of the dismissible badge. This prop only applies when dismissible is true  */
   @property({ type: Boolean, reflect: true }) show = false;
 
-  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `info`, `success`, `danger`, `warning`, 'neutral' */
-  @property({ reflect: true }) variant: BadgeVariant = "info";
+  /**
+   * One or more badge variant combinations.
+   * Variants include: `primary`, `accent`, `success`, `danger`, `warning`, `cyan`, `purple`, `neutral`, `white`, `info`.
+   *
+   * (@deprecated) The `info` variant is deprecated. Use `primary` instead.
+   */
+  @property({ reflect: true }) variant: BadgeVariant = "primary";
 
   /** Manually set the outlined state to false */
   @property({ type: Boolean, reflect: true }) outlined = false;
@@ -38,10 +61,17 @@ export class SgdsBadge extends SgdsElement {
   /** Manually set the dismissible state of the button to `false` */
   @property({ type: Boolean, reflect: true }) dismissible = false;
 
+  /** Manually enable full width */
+  @property({ type: Boolean, reflect: true }) fullWidth = false;
+
+  @state() private truncated = false;
+  @state() private text = "";
+
   /** Closes the badge  */
   public close() {
     this.show = false;
   }
+
   /**@internal */
   @watch("show")
   _handleShowChange() {
@@ -66,34 +96,64 @@ export class SgdsBadge extends SgdsElement {
     }
   }
 
+  /**@internal */
+  @watch("text")
+  _handleTruncation() {
+    // checking of text height if its exceeding parent, it needs to be truncated
+    const badge = this.shadowRoot.querySelector(".badge");
+    const badgeLabel = this.shadowRoot.querySelector(".badge-label");
+
+    if (badge && badgeLabel) {
+      const labelHeight = badgeLabel.getBoundingClientRect().height;
+      const badgeHeight = badge.getBoundingClientRect().height;
+
+      this.truncated = labelHeight > badgeHeight;
+    }
+  }
+
+  private _handleLabelSlotChange(e: Event) {
+    this.text = getTextContent(e.target as HTMLSlotElement);
+    return;
+  }
+
+  private _renderBadge() {
+    const isDarkCloseButton = this.outlined || this.variant === "warning" || this.variant === "white";
+
+    return html`<div
+      class="  
+          ${classMap({
+        [`badge-dismissible`]: this.dismissible,
+        badge: true,
+        outlined: this.outlined,
+        truncated: this.truncated,
+        "full-width": this.fullWidth
+      })}"
+      aria-hidden=${this.show ? "false" : "true"}
+    >
+      ${!this.dismissible ? html`<slot name="icon"></slot>` : nothing}
+
+      <span class="badge-label">
+        <slot @slotchange=${this._handleLabelSlotChange}></slot>
+      </span>
+
+      ${this.dismissible
+        ? html`<sgds-close-button
+            size="sm"
+            aria-label="close the badge"
+            @click=${this.close}
+            variant=${isDarkCloseButton ? "dark" : "light"}
+          ></sgds-close-button>`
+        : nothing}
+    </div>`;
+  }
+
   render() {
     return (this.dismissible && this.show) || !this.dismissible
-      ? html`
-          <div
-            class="  
-          ${classMap({
-              [`badge-dismissible`]: this.dismissible,
-              badge: true,
-              outlined: this.outlined
-            })}
-            "
-            aria-hidden=${this.show ? "false" : "true"}
-          >
-            ${!this.dismissible ? html`<slot name="icon"></slot>` : nothing}
-            <span class="badge-label">
-              <slot></slot>
-            </span>
-
-            ${this.dismissible
-              ? html`<sgds-close-button
-                  size="sm"
-                  aria-label="close the badge"
-                  @click=${this.close}
-                  variant=${this.outlined ? "dark" : "light"}
-                ></sgds-close-button>`
-              : nothing}
-          </div>
-        `
+      ? this.truncated
+        ? html`<sgds-tooltip content=${this.text} @sgds-hide=${e => e.stopPropagation()}
+            >${this._renderBadge()}</sgds-tooltip
+          >`
+        : this._renderBadge()
       : nothing;
   }
 }

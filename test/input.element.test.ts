@@ -1,5 +1,5 @@
 import "./sgds-web-component";
-import type { SgdsInput, SgdsButton } from "../src/components";
+import type { SgdsInput, SgdsButton, SgdsIcon } from "../src/components";
 import { expect, fixture, html, oneEvent, waitUntil, assert, elementUpdated } from "@open-wc/testing";
 import sinon from "sinon";
 import { sendKeys, sendMouse } from "@web/test-runner-commands";
@@ -12,9 +12,13 @@ describe("sgds-input", () => {
       `
         <div class="form-control-container">
           <label class="form-label" for="test-id">label</label>
+           <div class="form-control-row">
           <div class="form-control-group">
             <slot name="icon"></slot>
             <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+            <slot name="trailing-icon"></slot>
+          </div>
+          <slot name="action"></slot>
           </div>
           <div class="form-text" id="test-idHelp">hello</div>
         </div>
@@ -28,13 +32,14 @@ describe("sgds-input", () => {
       el,
       `
         <div class="form-control-container">
+        <div class="form-control-row">
           <div class="form-control-group">
             <slot name="icon"></slot>
             <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
-             <span class="form-control-suffix">
-           test
-         </span>
+            <span class="form-control-suffix">test</span>  
+            <slot name="trailing-icon"></slot>
           </div>
+            <slot name="action"></slot>
         </div>
     `,
       { ignoreAttributes: ["id", "for", "aria-labelledby"] }
@@ -46,14 +51,17 @@ describe("sgds-input", () => {
       el,
       `
         <div class="form-control-container">
+        <div class="form-control-row">
           <div class="form-control-group">
             <slot name="icon"></slot>
             <span class="form-control-prefix">
               test
             </span>
             <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+            <slot name="trailing-icon"></slot>
           </div>
-        </div>
+            <slot name="action"></slot>
+          </div>
     `,
       { ignoreAttributes: ["id", "for", "aria-labelledby"] }
     );
@@ -64,14 +72,18 @@ describe("sgds-input", () => {
       el,
       `
         <div class="form-control-container">
-          <div class="form-control-group">
-            <slot name="icon"></slot>
-            <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
-            <sgds-spinner
-            size="sm"
-            variant="primary">
-          </sgds-spinner>
+          <div class="form-control-row">
+            <div class="form-control-group">
+              <slot name="icon"></slot>
+              <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+              <slot name="trailing-icon">
+              <sgds-spinner
+                size="sm"
+                variant="primary">
+              </sgds-spinner>
+            </slot>
             </div>
+              <slot name="action"></slot>
         </div>
     `,
       { ignoreAttributes: ["id", "for", "aria-labelledby"] }
@@ -171,6 +183,33 @@ describe("sgds-input", () => {
     await waitUntil(() => submitHandler.calledOnce);
 
     expect(submitHandler).to.have.been.calledOnce;
+  });
+});
+
+describe("sgds-input type='password'", () => {
+  it("when type=password, eye-fill icon should appear", async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input type="password"></sgds-input> `);
+    const icon = el.shadowRoot?.querySelector<SgdsIcon>("sgds-icon");
+    expect(icon?.name).to.equal("eye-fill");
+  });
+  it("when eye-fill icon is clicked, it becomes eye-slash-fill icon", async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input type="password"></sgds-input> `);
+    const icon = el.shadowRoot?.querySelector<SgdsIcon>("sgds-icon");
+    expect(icon?.name).to.equal("eye-fill");
+
+    icon?.click();
+    await elementUpdated(el);
+    expect(icon?.name).to.equal("eye-slash-fill");
+  });
+  it("when eye-fill icon is clicked, shadow dom input's type becomes text to show password", async () => {
+    const el = await fixture<SgdsInput>(html` <sgds-input type="password"></sgds-input> `);
+    const icon = el.shadowRoot?.querySelector<SgdsIcon>("sgds-icon");
+    expect(icon?.name).to.equal("eye-fill");
+
+    icon?.click();
+    await elementUpdated(el);
+    const shadowInput = el.shadowRoot?.querySelector("input");
+    expect(shadowInput?.type).to.equal("text");
   });
 });
 describe("Feedback UI optional", () => {
@@ -343,7 +382,9 @@ describe("when using constraint validation", () => {
   });
 
   it("when disabled, invalid state is removed", async () => {
-    const el = await fixture<SgdsInput>(html` <sgds-input invalid invalidFeedback="" hasFeedback></sgds-input> `);
+    const el = await fixture<SgdsInput>(
+      html` <sgds-input invalid invalidFeedback="test" hasFeedback="both"></sgds-input> `
+    );
     expect(el.invalid).to.be.true;
     el.disabled = true;
     await el.updateComplete;
@@ -431,21 +472,6 @@ describe("when submitting a form", () => {
     submitButton?.click();
     expect(submitHandler).not.to.have.been.calledOnce;
   });
-  it("when form has novalidate, form submission is proceeds even when input is required", async () => {
-    const form = await fixture<HTMLFormElement>(html`
-      <form novalidate>
-        <sgds-input required></sgds-input>
-        <sgds-button type="submit"></sgds-button>
-      </form>
-    `);
-    const submitButton = form.querySelector<SgdsButton>("sgds-button");
-    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
-    expect(form.reportValidity()).to.equal(false);
-    form.addEventListener("submit", submitHandler);
-    submitButton?.click();
-    await waitUntil(() => submitHandler.calledOnce);
-    expect(submitHandler).to.have.been.calledOnce;
-  });
 });
 
 describe("when resetting a form", () => {
@@ -495,5 +521,102 @@ describe("when resetting a form", () => {
     await input?.updateComplete;
 
     expect(input?.invalid).to.equal(false);
+  });
+});
+
+describe("noValidate disables native and sgds validation behaviours", async () => {
+  it("should disable native validation when form has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input noValidate></sgds-input>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    button?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+  it("should override required prop and  disable native validation when form has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input noValidate required></sgds-input>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    button?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+  it("should override pattern prop and disable native validation when form has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input noValidate pattern="test"></sgds-input>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const input = form.querySelector<SgdsInput>("sgds-input");
+    if (input) input.value = "tes";
+    await input?.updateComplete;
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    button?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+  it("with noValidate, feedback UI does not appear for a required input when touched ", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input noValidate hasFeedback="both" required></sgds-input>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const input = form.querySelector<SgdsInput>("sgds-input");
+    input?.focus();
+    input?.blur();
+    await input?.updateComplete;
+    expect(input?.invalid).to.be.false;
+    expect(input?.shadowRoot?.querySelector("div.invalid-feedback")).to.be.null;
+  });
+});
+
+describe("form novalidate", () => {
+  it("when form has novalidate, form submission proceeds even when input is required", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-input required></sgds-input>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    expect(form.reportValidity()).to.equal(true);
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+  it("when form has novalidate, input does not have any validation stylings", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-input required hasFeedback="both"></sgds-input>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const input = form.querySelector<SgdsInput>("sgds-input");
+    input?.focus();
+    input?.blur();
+    await input?.updateComplete;
+    expect(input?.invalid).to.be.false;
+    expect(input?.shadowRoot?.querySelector("div.invalid-feedback")).to.be.null;
   });
 });

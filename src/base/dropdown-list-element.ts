@@ -12,6 +12,7 @@ const ENTER = "Enter";
  */
 export class DropdownListElement extends DropdownElement {
   static styles = DropdownElement.styles;
+
   /**@internal */
   @query("ul.dropdown-menu")
   private menu: HTMLUListElement;
@@ -19,19 +20,18 @@ export class DropdownListElement extends DropdownElement {
   /** @internal */
   @state()
   nextDropdownItemNo = 0;
+
   /** @internal */
   @state()
   prevDropdownItemNo = -1;
 
   connectedCallback() {
     super.connectedCallback();
-
     this.addEventListener("sgds-hide", this._resetMenu);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-
     this.removeEventListener("sgds-hide", this._resetMenu);
   }
 
@@ -50,8 +50,10 @@ export class DropdownListElement extends DropdownElement {
     const selectedItem = e.target as SgdsDropdownItem;
     if (!selectedItem.disabled) {
       this.emit("sgds-select");
-      this.close !== "outside" && this.bsDropdown.hide();
-    } else return;
+      if (this.close !== "outside") {
+        this.hideMenu(); // <-- Use new API
+      }
+    }
   }
 
   private _resetMenu() {
@@ -60,12 +62,13 @@ export class DropdownListElement extends DropdownElement {
     // reset the tabindex
     const items = this._getMenuItems();
     items.forEach(item => {
-      const dropdownItem = item.shadowRoot.querySelector(".dropdown-item") as HTMLAnchorElement;
-      dropdownItem.removeAttribute("tabindex");
+      const dropdownItem = item?.shadowRoot?.querySelector(".dropdown-item") as HTMLAnchorElement;
+      dropdownItem && dropdownItem.removeAttribute("tabindex");
     });
   }
 
   protected _handleKeyboardMenuItemsEvent(e: KeyboardEvent) {
+    if (this.readonly) return;
     const menuItems = this._getActiveMenuItems();
     switch (e.key) {
       case ARROW_DOWN:
@@ -86,7 +89,6 @@ export class DropdownListElement extends DropdownElement {
         if (!this.menuIsOpen) {
           return;
         }
-
         e.preventDefault();
         if (e.shiftKey) {
           if (this.prevDropdownItemNo < 0) {
@@ -95,7 +97,6 @@ export class DropdownListElement extends DropdownElement {
             return this._setMenuItem(this.prevDropdownItemNo, false);
           }
         }
-
         if (this.nextDropdownItemNo === menuItems.length) {
           return this._setMenuItem(0);
         } else {
@@ -114,18 +115,23 @@ export class DropdownListElement extends DropdownElement {
   private _getMenuItems(): SgdsDropdownItem[] {
     // for case when default slot is used e.g. dropdown, mainnavdropdown
     if (this.shadowRoot.querySelector("slot#default")) {
-      return (this.shadowRoot.querySelector("slot#default") as HTMLSlotElement)?.assignedElements({
-        flatten: true
-      }) as SgdsDropdownItem[];
+      const defaultSlotItems = (this.shadowRoot.querySelector("slot#default") as HTMLSlotElement)
+        ?.assignedElements({
+          flatten: true
+        })
+        .filter(el => !el.classList.contains("empty-menu")) as SgdsDropdownItem[];
+
+      return defaultSlotItems;
     }
 
     // for case when there is no slot e.g. combobox
-    if (this.menu.hasChildNodes()) {
+    if (this.menu?.hasChildNodes()) {
       const menuItems = this.menu.children;
-
       return [...menuItems] as SgdsDropdownItem[];
     }
+    return [];
   }
+
   private _getActiveMenuItems(): SgdsDropdownItem[] {
     return this._getMenuItems().filter(item => !item.disabled);
   }

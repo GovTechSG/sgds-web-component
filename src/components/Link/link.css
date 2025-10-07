@@ -1,10 +1,9 @@
-.nav-link::slotted(a) {
+:host {
   display: inline-flex;
-  height: var(--sgds-dimension-24);
-  justify-content: center;
-  align-items: center;
-  gap: var(--sgds-gap-2-xs);
-  flex-shrink: 0;
+}
+
+.nav-link::slotted(a) {
+  line-height: var(--sgds-line-height-body);
   /* If clash of styles happens from other light dom css on anchor tag, will need to add !important here */
   color: var(--sgds-link-color-default);
   cursor: pointer;
@@ -21,6 +20,9 @@
 .nav-link::slotted(a:focus),
 .nav-link::slotted(a:focus-visible) {
   outline: 0;
+}
+
+.nav-link::slotted(a:focus-visible:not([disabled])) {
   box-shadow: var(--sgds-box-shadow-focus);
 }
 
@@ -39,6 +41,18 @@
 :host([variant="danger"]) .nav-link::slotted(a:focus-visible) {
   --sgds-link-color-emphasis: var(--sgds-danger-color-emphasis);
   color: var(--sgds-link-color-emphasis, --sgds-danger-color-emphasis);
+}
+
+:host([variant="neutral"]) .nav-link::slotted(a) {
+  --sgds-link-color-default: var(--sgds-color-default);
+  color: var(--sgds-link-color-default, --sgds-color-default);
+}
+
+:host([variant="neutral"]) .nav-link::slotted(a:hover),
+:host([variant="neutral"]) .nav-link::slotted(a:focus),
+:host([variant="neutral"]) .nav-link::slotted(a:focus-visible) {
+  --sgds-link-color-emphasis: var(--sgds-color-default);
+  color: var(--sgds-link-color-emphasis, --sgds-color-default);
 }
 
 :host([variant="light"]) .nav-link::slotted(a) {
@@ -66,13 +80,15 @@
 }
 
 :host([size="lg"]) .nav-link::slotted(a) {
-  height: var(--sgds-dimension-32);
   font-size: var(--sgds-font-size-3) !important;
 }
 
 :host([size="sm"]) .nav-link::slotted(a) {
-  height: var(--sgds-dimension-20);
+  line-height: var(--sgds-line-height-min);
   font-size: var(--sgds-font-size-1) !important;
 }
 
-/* Check with Andy if target blank need to auto add an icon */
+:host([size="xs"]) .nav-link::slotted(a) {
+  line-height: var(--sgds-line-height-16);
+  font-size: var(--sgds-font-size-0) !important;
+}

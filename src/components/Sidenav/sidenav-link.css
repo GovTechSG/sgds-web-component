@@ -49,11 +49,13 @@
   box-shadow: none;
 }
 
- ::slotted(a:focus),
- ::slotted(a:focus-visible){
+::slotted(a:focus),
+::slotted(a:focus-visible) {
   outline: 0;
-  box-shadow: var(--sgds-box-shadow-focus);
   background-color: var(--sgds-bg-translucent-subtle);
+}
+::slotted(a:focus-visible) {
+  box-shadow: var(--sgds-box-shadow-focus);
 }
 
 :host([active]) ::slotted(a:focus),

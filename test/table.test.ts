@@ -160,8 +160,8 @@ describe("Table", () => {
     const columns = el.shadowRoot?.querySelectorAll("tbody td");
     expect(columns?.length).to.equal(0);
 
-    const slot = el.shadowRoot.querySelector("slot");
-    const slotContent = slot.assignedElements() as HTMLSlotElement[];
+    const slot = el.shadowRoot?.querySelector("slot");
+    const slotContent = slot?.assignedElements() as HTMLSlotElement[];
     expect(slotContent?.length).to.equal(4);
 
     const headerCells = slotContent?.[0].querySelectorAll("sgds-table-head");
@@ -191,8 +191,8 @@ describe("Table", () => {
     </sgds-table-row> `);
 
     expect(el.shadowRoot?.querySelector("slot")?.classList.contains("table-row")).to.be.true;
-    const slot = el.shadowRoot.querySelector("slot");
-    const slotContent = slot.assignedElements() as HTMLSlotElement[];
+    const slot = el.shadowRoot?.querySelector("slot");
+    const slotContent = slot?.assignedElements() as HTMLSlotElement[];
     expect(slotContent?.length).to.equal(5);
     expect(slotContent?.[0].innerHTML).to.include("#");
     expect(slotContent?.[1].innerHTML).to.include("First name");

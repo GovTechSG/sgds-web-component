@@ -20,8 +20,11 @@
 :host([variant="solid"]:not([active]):not([disabled])) .tab:focus,
 :host([variant="solid"]:not([active]):not([disabled])) .tab:focus-visible {
   outline: 0;
-  box-shadow: var(--sgds-box-shadow-focus);
   background-color: var(--sgds-bg-translucent);
+}
+
+:host([variant="solid"]:not([active]):not([disabled])) .tab:focus-visible {
+  box-shadow: var(--sgds-box-shadow-focus);
 }
 
 :host([variant="solid"]:not([active]):not([disabled])) .tab:hover {
@@ -68,8 +71,11 @@
 :host([variant="underlined"]:not([active]):not([disabled])) .tab:focus,
 :host([variant="underlined"]:not([active]):not([disabled])) .tab:focus-visible {
   outline: 0;
-  box-shadow: var(--sgds-box-shadow-focus);
   background-color: var(--sgds-bg-translucent-subtle);
+}
+
+:host([variant="underlined"]:not([active]):not([disabled])) .tab:focus-visible {
+  box-shadow: var(--sgds-box-shadow-focus);
 }
 
 :host([variant="underlined"]:not([active]):not([disabled])) .tab:hover {
@@ -86,6 +92,10 @@
 }
 
 .tab:focus,
+.tab:focus-visible {
+  outline: 0;
+}
+
 .tab:focus-visible {
   box-shadow: var(--sgds-box-shadow-focus);
   outline: 0;

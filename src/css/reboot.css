@@ -56,7 +56,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--sgds-header-color-default);
+  color: var(--sgds-heading-color-default);
   font-family: var(--sgds-font-family-brand);
   font-style: normal;
   margin-top: var(--sgds-margin-none);
@@ -139,7 +139,6 @@ a {
   letter-spacing: var(--sgds-letter-spacing-normal);
   text-decoration: underline;
   color: var(--sgds-link-color-default);
-  height: 100%;
 }
 
 a:hover, a:focus-visible, a:focus {

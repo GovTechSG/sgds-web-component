@@ -4,18 +4,15 @@
   "platforms": {
     "css": {
       "transformGroup": "css",
-            "transforms": [
-                "size/px",
-        "size/pxToRem"
-      ],
+      "transforms": ["size/px", "size/pxToRem"],
       "buildPath": "scripts/figma/sync-figma-to-tokens/",
       "files": [
         {
           "destination": "root.css",
           "format": "css/variables",
-           "options": {
-             "outputReferences": true
-           }
+          "options": {
+            "outputReferences": true
+          }
         }
       ]
     }

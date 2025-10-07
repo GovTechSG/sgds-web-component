@@ -1,7 +1,9 @@
 import { html } from "lit";
 import { consume } from "@lit/context";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { SgdsMainnav } from "./sgds-mainnav";
 import { classMap } from "lit/directives/class-map.js";
+import { offset } from "@floating-ui/dom";
 import genId from "../../utils/generateId";
 import dropdownStyle from "../Dropdown/dropdown.css";
 import dropdownMenuStyle from "../Dropdown/dropdown-menu.css";
@@ -9,7 +11,7 @@ import mainnavDropdownStyle from "./mainnav-dropdown.css";
 import SgdsDropdown from "../Dropdown/sgds-dropdown";
 import SgdsDropdownItem from "../Dropdown/sgds-dropdown-item";
 import SgdsIcon from "../Icon/sgds-icon";
-import { MainnavContext } from "./mainnav-context";
+import { MainnavBreakpointContext, MainnavExpandedContext } from "./mainnav-context";
 import SgdsElement from "../../base/sgds-element";
 
 const TAB = "Tab";
@@ -29,9 +31,13 @@ export class SgdsMainnavDropdown extends SgdsElement {
     "sgds-icon": SgdsIcon
   };
 
-  @consume({ context: MainnavContext, subscribe: true })
+  @consume({ context: MainnavBreakpointContext, subscribe: true })
   @state()
-  private _breakpointReached: boolean;
+  private _breakpointReached = true;
+
+  @consume({ context: MainnavExpandedContext, subscribe: true })
+  @state()
+  private expanded: boolean;
 
   /** @internal */
   @query(".nav-link") navLink: HTMLElement;
@@ -69,35 +75,6 @@ export class SgdsMainnavDropdown extends SgdsElement {
     ) as SgdsDropdownItem[];
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-    document.addEventListener("close-dropdown-menu", () => {
-      this._resetDropdownMenu();
-      this._hideDropdownMenuItems();
-    });
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    // Clean up the event listener when the element is removed from the DOM
-    document.removeEventListener("close-dropdown-menu", () => {
-      this._resetDropdownMenu();
-      this._hideDropdownMenuItems();
-    });
-  }
-
-  protected willUpdate(changedProperties: Map<string, unknown>) {
-    super.willUpdate(changedProperties);
-
-    if (!this.shadowRoot) {
-      return;
-    }
-
-    if (this._breakpointReached) {
-      this.shadowRoot.adoptedStyleSheets = [dropdownMenuStyle.styleSheet, mainnavDropdownStyle.styleSheet];
-    }
-  }
-
   updated() {
     if (this._breakpointReached) {
       this._copyTextToMenu();
@@ -114,12 +91,18 @@ export class SgdsMainnavDropdown extends SgdsElement {
       const dropdownItem = item.shadowRoot.querySelector(".dropdown-item") as HTMLElement;
       dropdownItem.classList.add("nav-link");
 
-      const slottedItem = (item.shadowRoot.querySelector(".dropdown-item slot") as HTMLSlotElement).assignedElements({
-        flatten: true
-      });
-      slottedItem.forEach(item => {
-        (item as HTMLElement).tabIndex = -1;
-      });
+      const link = item.shadowRoot?.querySelector("a") || item.querySelector("a");
+      link.tabIndex = -1;
+      if (dropdownItem.classList.contains("disabled")) {
+        link.setAttribute("href", "javascript:void(0)");
+        link.setAttribute("tabindex", "-1");
+      } else {
+        link.addEventListener("click", (e: Event) => {
+          const target = e.target as HTMLElement;
+          const mainnav = target.closest("sgds-mainnav") as SgdsMainnav;
+          mainnav.hide();
+        });
+      }
     });
   }
 
@@ -128,6 +111,16 @@ export class SgdsMainnavDropdown extends SgdsElement {
     items.forEach(item => {
       const dropdownItem = item.shadowRoot.querySelector(".dropdown-item") as HTMLElement;
       dropdownItem.classList.remove("nav-link");
+
+      const slottedItem = (item.shadowRoot.querySelector(".dropdown-item slot") as HTMLSlotElement).assignedElements({
+        flatten: true
+      });
+      slottedItem.forEach(item => {
+        if (dropdownItem.classList.contains("disabled")) {
+          item.setAttribute("href", "javascript:void(0)");
+          item.setAttribute("tabindex", "-1");
+        }
+      });
     });
   }
 
@@ -184,9 +177,28 @@ export class SgdsMainnavDropdown extends SgdsElement {
     this.dropdownItems.setAttribute("aria-hidden", "true");
   }
 
-  private _resetDropdownMenu() {
+  private _resetDropdownMenu(): Promise<void> {
     const navbarBody = this._getNavbarBody();
-    navbarBody.style.removeProperty("transform");
+    if (!navbarBody) return Promise.resolve();
+
+    return new Promise(resolve => {
+      const onEnd = (event: TransitionEvent) => {
+        if (event.propertyName === "transform") {
+          navbarBody.removeEventListener("transitionend", onEnd);
+          resolve();
+        }
+      };
+
+      const hasTransition = getComputedStyle(navbarBody).transitionProperty.includes("transform");
+
+      if (hasTransition) {
+        navbarBody.addEventListener("transitionend", onEnd);
+        navbarBody.style.removeProperty("transform");
+      } else {
+        navbarBody.style.removeProperty("transform");
+        resolve();
+      }
+    });
   }
 
   private _handleKeyboardOpen(event: KeyboardEvent) {
@@ -244,13 +256,10 @@ export class SgdsMainnavDropdown extends SgdsElement {
     }
   }
 
-  private _closeMenu() {
-    // 200ms delay as the transform transition is set to this timing
-    this._resetDropdownMenu();
-    setTimeout(() => {
-      this._hideDropdownMenuItems();
-      this.navLink.focus();
-    }, 200);
+  private async _closeMenu() {
+    await this._resetDropdownMenu();
+    this._hideDropdownMenuItems();
+    this.navLink.focus();
   }
 
   render() {
@@ -280,14 +289,9 @@ export class SgdsMainnavDropdown extends SgdsElement {
     `;
 
     const desktopView = html`<sgds-dropdown
-      modifierOpt=${[
-        {
-          name: "offset",
-          options: {
-            offset: [0, 0]
-          }
-        }
-      ]}
+      .floatingOpts=${{
+        middleware: [offset(0)]
+      }}
       ?disabled=${this.disabled}
     >
       <a

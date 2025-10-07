@@ -1,9 +1,10 @@
 import { elementUpdated, expect, fixture, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
-import Sinon from "sinon";
+import * as Sinon from "sinon";
 import type { SgdsBadge } from "../src/components";
 import SgdsCloseButton from "../src/internals/CloseButton/sgds-close-button";
 import "./sgds-web-component";
+import { sendMouse } from "@web/test-runner-commands";
 
 describe("SgdsBadge component", () => {
   it("should render when show is true", async () => {
@@ -11,11 +12,13 @@ describe("SgdsBadge component", () => {
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector(".badge")).to.exist;
   });
+
   it("should render a close button when dismissible is true", async () => {
     const el = await fixture<SgdsBadge>(html`<sgds-badge show dismissible></sgds-badge>`);
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("sgds-close-button")).to.exist;
   });
+
   it("should render the icon slot", async () => {
     // Mock fetch to prevent network requests
     const fetchStub = Sinon.stub(window, "fetch").resolves(
@@ -34,33 +37,39 @@ describe("SgdsBadge component", () => {
     // Restore the stubbed fetch method
     fetchStub.restore();
   });
+
   it("should not render a close button when dismissible is false", async () => {
     const el = await fixture<SgdsBadge>(html`<sgds-badge show></sgds-badge>`);
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector("sgds-close-button")).to.not.exist;
   });
+
   it("should render with the 'outlined' class when outlined is true", async () => {
     const el = await fixture<SgdsBadge>(html`<sgds-badge show outlined></sgds-badge>`);
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector(".badge")).to.have.class("outlined");
   });
+
   it("should not render with the 'outlined' class when outlined is false", async () => {
     const el = await fixture<SgdsBadge>(html`<sgds-badge show></sgds-badge>`);
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector(".badge")).to.not.have.class("outlined");
   });
+
   it("close public method invoke, removes badge from the document", async () => {
     const el = await fixture<SgdsBadge>(html`<sgds-badge show dismissible></sgds-badge>`);
     el.close();
     await waitUntil(() => !el.show);
     expect(el.shadowRoot?.querySelector("div.badge")).not.to.exist;
   });
+
   it("default prevented in sgds-hide will prevent dismissible badge from closing", async () => {
     const el = await fixture<SgdsBadge>(html`<sgds-badge show dismissible></sgds-badge>`);
     el.addEventListener("sgds-hide", e => e.preventDefault());
     el.close();
     expect(el.shadowRoot?.querySelector("div.badge")).to.exist;
   });
+
   it("mouse click badge close button emits sgds-hide and removes shadowDom contents of badge", async () => {
     const el = await fixture<SgdsBadge>(html`<sgds-badge show dismissible></sgds-badge>`);
     const spyHide = Sinon.spy();
@@ -72,6 +81,7 @@ describe("SgdsBadge component", () => {
     await waitUntil(() => !el.show);
     expect(el.shadowRoot?.querySelector("div.badge")).not.to.exist;
   });
+
   it("when show is true, emits sgds-show event", async () => {
     const el = await fixture<SgdsBadge>(html`<sgds-badge dismissible></sgds-badge>`);
     const spyShow = Sinon.spy();
@@ -81,7 +91,7 @@ describe("SgdsBadge component", () => {
     expect(spyShow).to.be.calledOnce;
     expect(el.shadowRoot?.querySelector("div.badge")).to.exist;
   });
-  // it("sgds-after- events are called when show is set to true/false")
+
   it("when default prevented for sgds-show, sgds-after-show is emitted and show cannot be set to true", async () => {
     const el = await fixture<SgdsBadge>(html`<sgds-badge dismissible></sgds-badge>`);
     const afterShowSpy = Sinon.spy();
@@ -92,6 +102,7 @@ describe("SgdsBadge component", () => {
     expect(afterShowSpy).not.to.be.called;
     expect(el.show).to.be.false;
   });
+
   it("when default prevented, sgds-after-hide toggling and show cannot be set to false ", async () => {
     const el = await fixture<SgdsBadge>(html`<sgds-badge show dismissible></sgds-badge>`);
     const afterHideSpy = Sinon.spy();
@@ -103,5 +114,76 @@ describe("SgdsBadge component", () => {
     await el.updateComplete;
     expect(afterHideSpy).not.to.be.called;
     expect(el.show).to.be.true;
+  });
+
+  it("should not render with the 'truncated' class when badge content fits parent width", async () => {
+    const parentNode = document.createElement("div");
+    parentNode.style.width = "1";
+
+    const el = await fixture<SgdsBadge>(html`<sgds-badge> Short text </sgds-badge>`, { parentNode });
+
+    await elementUpdated(el);
+
+    const badge = el.shadowRoot?.querySelector(".badge");
+    expect(badge).to.exist;
+
+    const tooltip = el.shadowRoot?.querySelector("sgds-tooltip");
+    expect(tooltip).to.not.exist;
+    expect(el.querySelector(".truncated")).to.not.exist;
+  });
+
+  it("should render with the 'truncated' class when badge content exceeds parent width", async () => {
+    const parentNode = document.createElement("div");
+    parentNode.style.width = "100px";
+
+    const el = await fixture<SgdsBadge>(
+      html`<sgds-badge> A very long badge name without limitation of parent width </sgds-badge>`,
+      { parentNode }
+    );
+
+    await elementUpdated(el);
+
+    const badge = el.shadowRoot?.querySelector(".badge");
+    expect(badge).to.exist;
+
+    const tooltip = el.shadowRoot?.querySelector("sgds-tooltip");
+
+    expect(tooltip).to.exist;
+    expect(tooltip?.querySelector(".truncated")).to.exist;
+  });
+
+  it("should not trigger sgds-hide when tooltip is hidden", async () => {
+    const parentNode = document.createElement("div");
+    parentNode.style.width = "100px";
+    parentNode.style.padding = "24px";
+
+    const el = await fixture<SgdsBadge>(
+      html`<sgds-badge> A very long badge name without limitation of parent width </sgds-badge>`,
+      { parentNode }
+    );
+
+    const spyHide = Sinon.spy();
+    el.addEventListener("sgds-hide", spyHide);
+
+    await elementUpdated(el);
+
+    const badge = el.shadowRoot?.querySelector(".badge");
+    expect(badge).to.exist;
+
+    const tooltip = el.shadowRoot?.querySelector("sgds-tooltip");
+
+    expect(tooltip).to.exist;
+    expect(tooltip?.querySelector(".truncated")).to.exist;
+
+    await sendMouse({ type: "move", position: [50, 50] });
+    await el.updateComplete;
+
+    // when tooltip is shown
+    expect(tooltip?.shadowRoot?.querySelector(".tooltip")).to.exist;
+
+    await sendMouse({ type: "move", position: [0, 0] });
+    await el.updateComplete;
+
+    expect(spyHide).not.to.be.called;
   });
 });

@@ -8,12 +8,15 @@
     clear: both;
     color: var(--sgds-color-default);
     text-align: inherit;
-    white-space: nowrap;
     cursor: pointer;
     height: 100%;
   }
 
+.dropdown-item.disabled {
+    opacity: var(--sgds-opacity-50);
+      pointer-events: none;
 
+}
 .dropdown-item .normal-item-content {
     display: flex;
     align-items: center;

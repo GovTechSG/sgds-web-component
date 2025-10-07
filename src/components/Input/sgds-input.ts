@@ -17,7 +17,8 @@ import SgdsIcon from "../Icon/sgds-icon";
  * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
  *
  * @slot icon - The slot for leading icon of text input
- *
+ * @slot trailing-icon - The slot for trailing icon of text input. When present, it overrides valid icon and loading spinner rendered when valid prop or loading prop are true
+ * @slot action - The slot for call to action of the text input. It is recommended to use sgds-icon-button within this slot
  * @event sgds-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sgds-input - Emitted when the control receives input and its value changes.
  * @event sgds-focus - Emitted when input is in focus.
@@ -92,10 +93,14 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   /** Makes the input a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
+  @property({ type: Boolean, reflect: true }) noValidate = false;
+
   /**The input's value attribute. */
   @property({ reflect: true }) value = "";
 
   @state() protected _isTouched = false;
+
+  @state() private _showPassword = false;
 
   /** Sets focus on the input. */
   public focus(options?: FocusOptions) {
@@ -145,9 +150,10 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
 
   protected _handleBlur() {
     const sgdsBlur = this.emit("sgds-blur", { cancelable: true });
-    this.setInvalid(!this._mixinCheckValidity());
+    if (this._mixinShouldSkipSgdsValidation()) return;
     if (sgdsBlur.defaultPrevented) return;
 
+    this.setInvalid(!this._mixinCheckValidity());
     this._isTouched = true;
   }
   private _handleClick() {
@@ -157,6 +163,8 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   protected _handleChange(e: Event) {
     this.value = this.input.value;
     const sgdsChange = this.emit("sgds-change", { cancelable: true });
+
+    if (this._mixinShouldSkipSgdsValidation()) return;
     if (sgdsChange.defaultPrevented) return;
 
     super._mixinHandleChange(e);
@@ -165,12 +173,14 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
     this.value = this.input.value;
     const sgdsInput = this.emit("sgds-input", { cancelable: true });
 
+    if (this._mixinShouldSkipSgdsValidation()) return;
     if (sgdsInput.defaultPrevented) return;
     super._mixinHandleInputChange(e);
   }
   /** @internal */
   @watch("_isTouched", { waitUntilFirstUpdate: true })
   _handleIsTouched() {
+    if (this._mixinShouldSkipSgdsValidation()) return;
     if (this._isTouched) {
       this.setInvalid(!this._mixinCheckValidity());
     }
@@ -196,7 +206,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
         ${this.prefix ? html`<span class="form-control-prefix">${this.prefix}</span>` : nothing}
         <input
           class="form-control"
-          type=${this.type}
+          type=${this._inputType()}
           id=${this._controlId}
           name=${ifDefined(this.name)}
           placeholder=${ifDefined(this.placeholder)}
@@ -222,14 +232,32 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
             ? `${this._controlId}-invalid`
             : ""}"
         />
-        ${this.loading ? html`<sgds-spinner size="sm"></sgds-spinner>` : nothing}
-        ${this.valid ? html`<sgds-icon name="check-circle-fill" class="valid-icon"></sgds-icon>` : nothing}
+        ${this.type === "password" ? this._renderPasswordToggle() : nothing}
         ${this.suffix ? html`<span class="form-control-suffix">${this.suffix}</span>` : nothing}
+        <slot name="trailing-icon">
+          ${this.loading ? html`<sgds-spinner size="sm"></sgds-spinner>` : nothing}
+          ${this.valid ? html`<sgds-icon name="check-circle-fill" class="valid-icon"></sgds-icon>` : nothing}
+        </slot>
       </div>
     `;
   }
+  protected _renderPasswordToggle() {
+    return html`<sgds-icon
+      tabIndex="0"
+      role="button"
+      name=${this._showPassword ? "eye-slash-fill" : "eye-fill"}
+      @click=${() => (this._showPassword = !this._showPassword)}
+    ></sgds-icon>`;
+  }
+  protected _inputType() {
+    if (this.type === "password" && this._showPassword) {
+      return "text";
+    }
+    return this.type;
+  }
   protected _renderFeedback() {
     const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
+
     return this.invalid && wantFeedbackText
       ? html` <div class="invalid-feedback-container">
           <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
@@ -264,7 +292,12 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
           disabled: this.disabled
         })}"
       >
-        ${this._renderLabel()} ${this._renderInput()} ${this._renderFeedback()}
+        ${this._renderLabel()}
+        <div class="form-control-row">
+          ${this._renderInput()}
+          <slot name="action"></slot>
+        </div>
+        ${this._renderFeedback()}
       </div>
     `;
   }

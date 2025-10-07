@@ -6,7 +6,7 @@ import prettier from "prettier";
 import { makeArgTypes } from "./makeArgTypes.mjs";
 import { methodsTable, writeParams } from "./methodsTable.mjs";
 import { getAllComponents, getSgdsComponents, pascalToKebab } from "./shared.mjs";
-import packageJson from "../package.json" assert { type: "json" };
+import packageJson from "../package.json" with { type: "json" };
 const storiesDir = path.join("stories/components");
 
 // Clear build directory

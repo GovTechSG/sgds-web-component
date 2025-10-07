@@ -10,7 +10,7 @@ import { waitForEvent } from "../../utils/event";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
-import { MainnavContext } from "./mainnav-context";
+import { MainnavBreakpointContext, MainnavExpandedContext } from "./mainnav-context";
 import mainnavStyle from "./mainnav.css";
 import SgdsMainnavDropdown from "./sgds-mainnav-dropdown";
 import SgdsMainnavItem from "./sgds-mainnav-item";
@@ -21,7 +21,7 @@ const SIZES = {
   md: MD_BREAKPOINT,
   lg: LG_BREAKPOINT,
   xl: XL_BREAKPOINT,
-  XXL: XXL_BREAKPOINT,
+  xxl: XXL_BREAKPOINT,
   never: Infinity,
   always: -1
 };
@@ -47,9 +47,16 @@ export class SgdsMainnav extends SgdsElement {
     "sgds-icon-button": SgdsIconButton
   };
 
-  @provide({ context: MainnavContext })
+  @provide({ context: MainnavBreakpointContext })
   @state()
   private _breakpointReached = false;
+  /** Indicates if mobile menu is open or closed */
+  @provide({ context: MainnavExpandedContext })
+  @state()
+  private expanded = false;
+  /** Denotes the transition state of mobile mainnav menu opening  */
+  @state()
+  private expanding = false;
 
   /** @internal */
   @query("nav") nav: HTMLElement;
@@ -64,30 +71,6 @@ export class SgdsMainnav extends SgdsElement {
   /** @internal */
   @query("slot[name='non-collapsible']") nonCollapsibleSlot: HTMLSlotElement;
 
-  constructor() {
-    super();
-    window.addEventListener("resize", () => {
-      const newBreakpointReachedValue = window.innerWidth < SIZES[this.expand];
-      if (newBreakpointReachedValue !== this.breakpointReached) {
-        this.requestUpdate();
-      } else {
-        this.body ? (this.body.hidden = true) : null;
-        this.expanded = false;
-      }
-
-      if (newBreakpointReachedValue) {
-        this._handleMobileNav();
-
-        if (!this._breakpointReached) {
-          this._breakpointReached = true;
-        }
-      } else {
-        this._handleDesktopNav();
-        this._breakpointReached = false;
-      }
-    });
-  }
-
   /** The href link for brand logo */
   @property({ type: String })
   brandHref = "";
@@ -101,10 +84,6 @@ export class SgdsMainnav extends SgdsElement {
   /** @internal */
   @state()
   breakpointReached = false;
-
-  /** @internal */
-  @state()
-  expanded = false;
 
   /** @internal */
   @queryAssignedElements() private defaultNodes!: SgdsMainnavItem[] | SgdsMainnavDropdown[];
@@ -128,13 +107,18 @@ export class SgdsMainnav extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
+
+    this._handleResize();
+
+    window.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
+    window.addEventListener("resize", this._handleResize.bind(this));
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
 
-    this.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
+    window.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
+    window.removeEventListener("resize", this._handleResize.bind(this));
   }
 
   firstUpdated() {
@@ -164,20 +148,46 @@ export class SgdsMainnav extends SgdsElement {
       document.querySelector("body").style.overflow = "hidden";
       this.show();
     }
-
-    this.header.focus();
   }
+
+  private _handleResize() {
+    const newBreakpointReachedValue = window.innerWidth < SIZES[this.expand];
+    if (newBreakpointReachedValue !== this.breakpointReached) {
+      this.requestUpdate();
+    } else {
+      this.body ? (this.body.hidden = true) : null;
+      // this.expanded = false;
+      this.expanding = false;
+    }
+
+    if (newBreakpointReachedValue) {
+      this._handleMobileNav();
+
+      if (!this._breakpointReached) {
+        this._breakpointReached = true;
+
+        window.addEventListener("scrollend", this._handleMobileNavBound);
+      }
+    } else {
+      this._handleDesktopNav();
+      this._breakpointReached = false;
+      window.removeEventListener("scrollend", this._handleMobileNavBound);
+    }
+  }
+
+  private _handleMobileNavBound = this._handleMobileNav.bind(this);
 
   private async _handleMobileNav() {
     if (!this.nav) return;
 
     this.nav.appendChild(this.body);
     await customElements.whenDefined("sgds-masthead");
-    const offsetTop = this.nav.offsetTop;
-    const navHeight = this.nav.clientHeight;
-    const mainNavPosition = offsetTop + navHeight;
-    this.body.style.top = `${mainNavPosition}px`;
-    this.navScroll.style.maxHeight = `calc(100dvh - ${mainNavPosition}px)`;
+
+    const { bottom } = this.nav.getBoundingClientRect();
+    const navBodyPaddingY =
+      parseFloat(getComputedStyle(this.body).paddingTop) + parseFloat(getComputedStyle(this.body).paddingBottom);
+
+    this.navScroll.style.maxHeight = `calc(100dvh - ${bottom}px - ${navBodyPaddingY}px)`;
   }
 
   private _handleDesktopNav() {
@@ -187,6 +197,7 @@ export class SgdsMainnav extends SgdsElement {
   private async _animateToShow() {
     const sgdsShow = this.emit("sgds-show", { cancelable: true });
     if (sgdsShow.defaultPrevented) {
+      this.expanding = false;
       this.expanded = false;
       return;
     }
@@ -204,6 +215,7 @@ export class SgdsMainnav extends SgdsElement {
   private async _animateToHide() {
     const slHide = this.emit("sgds-hide", { cancelable: true });
     if (slHide.defaultPrevented) {
+      this.expanding = false;
       this.expanded = true;
       return;
     }
@@ -214,27 +226,30 @@ export class SgdsMainnav extends SgdsElement {
     await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
     this.body.hidden = true;
     this.body.style.height = "auto";
-
     this.emit("sgds-after-hide");
   }
 
-  @watch("expanded", { waitUntilFirstUpdate: true })
+  @watch("expanding", { waitUntilFirstUpdate: true })
   async handleOpenChange() {
-    if (this.expanded) {
+    if (this.expanding) {
       // Show
-      this._animateToShow();
+      await this._animateToShow();
+      this.expanded = true;
     } else {
+      this.header.focus();
       // Hide
-      this._animateToHide();
+      await this._animateToHide();
+      this.expanded = false;
     }
   }
+
   /** Shows the menu. For when mainnav is in the collapsed form */
   public async show() {
     if (this.expanded) {
       return;
     }
 
-    this.expanded = true;
+    this.expanding = true;
     return waitForEvent(this, "sgds-after-show");
   }
 
@@ -244,9 +259,8 @@ export class SgdsMainnav extends SgdsElement {
       return;
     }
 
-    this.expanded = false;
+    this.expanding = false;
     document.querySelector("body").style.removeProperty("overflow");
-    this.emit("close-dropdown-menu");
 
     return waitForEvent(this, "sgds-after-hide");
   }

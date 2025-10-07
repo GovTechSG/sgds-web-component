@@ -29,13 +29,6 @@ slot[name="title"]::slotted(*) {
   width: fit-content;
 }
 
-.links slot::slotted(a[target="_blank"]) {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--sgds-gap-2-xs);
-}
-
 slot::slotted(a:hover),
 .links slot::slotted(a:focus),
 .links slot::slotted(a:focus-visible) {
@@ -46,5 +39,8 @@ slot::slotted(a:hover),
 .links slot::slotted(a:focus),
 .links slot::slotted(a:focus-visible) {
   outline: 0;
+}
+
+.links slot::slotted(a:focus-visible) {
   box-shadow: var(--sgds-box-shadow-focus);
 }

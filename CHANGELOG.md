@@ -1,3 +1,125 @@
+## v3.5.0 (2025-10-06)
+
+### Feat
+
+- **badge**: update clearer variable naming
+- **badge**: add new variants
+- **options**: new options component and slot for select and combobox  (#406)
+- **Select**: allow menuList to be updated when slot change to trigger component update
+- **combobox**: support default slots
+- **Select**: new sgds-select-option
+- **tooltip**: migrate to floating ui
+- **dropdown**: migrate from popperjs to floating-ui
+- **cards**: add footer slot and deprecate link slot
+- **input**: enable form novalidate attribute to disable any native and sgds validation inside input
+- **input**: disable sgds built in constraint validation with noSgdsValidate prop
+
+### Fix
+
+- **close button**: fix sm size and remove unnecessary classes
+- **Select**: console error when menu item has no options
+- **mainnav**: recalculate mobile menu max-height on scroll to account for page offset
+- **mainnav**: await transition before hiding dropdown items in mobile to prevent flickering
+- **cards**: remove hasController usage to eliminate ssr error
+- **link**: align icons correctly with multi-line text
+
+### Refactor
+
+- **select**: remove unnecessary selectedItems
+- **Select**: display none to default slot
+
+## v3.4.0 (2025-09-22)
+
+### Feat
+
+- **drawer**: add footer slot
+- **drawer**: add size prop
+- **Card**: console error logic if both image and icon are present
+- **Card**: handle upper slot styles
+- **Card**: new upper slot
+
+### Fix
+
+- **drawer**: eliminate flickering in SSR
+- **ComboBox**: resolving re-rendering of menulist and badge truncation
+- **Modal**: change positioning of close button to relative
+- **Modal**: replace position relative with higher z-index to show the modal-panel
+- **mainnav**: close menu on mobile when link is clicked (#374)
+- **mainanv**: close menu on mobile when link is clicked
+- **cards**: remove the paragraph when empty slot (#373)
+- **cards**: remove the paragraph when empty slot
+
+### Refactor
+
+- **Mainnav**: use context to tell mainnavdropdown if the mainnav has complete expanded
+
+## v3.3.2 (2025-09-04)
+
+### Fix
+
+- **Badge**: stop tooltip event from propagation
+- **Pagination**: next button to disable  where pages length is less than 2 (#370)
+- **Pagination**: next button to disable  where pages length is less than 2
+- **validation**: make ElementInternals instantiation idempotent (#367)
+
+### Refactor
+
+- **Pagination**: more precise check on pages.length to disable button
+
+## v3.3.2-rc.0 (2025-09-02)
+
+### Fix
+
+- **validation**: implement check if controller is instantiated and defined then do not run again
+- **Masthead**: provide fallback values for when --sgds-mainnav-* toke… (#351)
+- **Masthead**: provide fallback values for when --sgds-mainnav-* tokens not defined
+
+## v3.3.1 (2025-09-01)
+
+### Feat
+
+- **thumbnail card**: add thumbnail card component
+- **image card**: add image card component
+- **card**: add icon card component
+- **card**: update new card component
+- **overflow menu**: update overflow menu to be public component
+
+### Fix
+
+- **Datepicker**: configure popper for datepicker
+- **Dropdown**: select, combobox, dropdown dependencies checked
+- *****: restores types definition in the library (#350)
+- *****: restores types definition in the library
+- **modal**: css override for sizes (#347)
+- **modal**: css override for sizes
+- **card**: remove pointer events for disabled card
+
+## v3.3.0 (2025-08-29)
+
+### Feat
+
+- **masthead**: update styling and add scam alert notice
+- **link**: add xs size and neutral variant for link component (#339)
+- **link**: add xs size and neutral variant for link component
+- **Badge**: added tooltip for long text in badge
+- **input**: new trailing icon slot, action slot and unmask mask pass… (#299)
+- **input**: new trailing icon slot, action slot and unmask mask password type input
+- **MenuItem**: dropdown-item, select-item, combo-box-item remove nowrap
+- **Datepicker**: value becomes a prop over initialValue, form reset context handled
+- **Datepicker**: add deprecation notice to initialValue prop
+
+### Fix
+
+- **mainnav**: fix correct collapse breakpoint for xl and xxl
+- **Datepicker**: only assess empty input when required is true
+- **Input**: readonly UI (#298)
+- **Input**: readonly UI
+
+### Refactor
+
+- **themes**: update tokens from Figma
+- **Datepicker**: wip
+
 ## v3.2.0 (2025-08-13)
 
 ### Fix
@@ -7,10 +129,6 @@
 - **Toast**: missing gap between title and body
 
 ## v3.1.2-rc.0 (2025-08-08)
-
-### Feat
-
-- **Table**: added new implementation for table with dynamic columns
 
 ### Fix
 
@@ -53,6 +171,7 @@
 ### Feat
 
 - **Dropdown**: increase max height to 480 for menu
+- **Table**: added new implementation for table with dynamic columns
 - **Select**: disabled typing of input
 - **Select**: add Select component and refactor Combobox
 - **CheckboxGroup**: handle invalid on first render

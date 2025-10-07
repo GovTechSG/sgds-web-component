@@ -22,7 +22,10 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
 
     connectedCallback(): void {
       super.connectedCallback();
-      this.inputValidationController = new InputValidationController(this);
+      if (this._mixinShouldSkipSgdsValidation()) return;
+
+      /** Idempotency guarantee */
+      this.inputValidationController ??= new InputValidationController(this);
     }
     async firstUpdated(changedProperties) {
       super.firstUpdated(changedProperties);
@@ -33,6 +36,9 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
         (await this.sgdsInput) ||
         this.shadowRoot.querySelector("textarea") ||
         (await this.sgdsDatepickerInput);
+
+      if (this._mixinShouldSkipSgdsValidation()) return;
+
       this._mixinValidate(this.input);
     }
 
@@ -107,6 +113,12 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
     _mixinSetValidity(flags?: ValidityStateFlags, message?: string, anchor?: HTMLElement): void {
       return this.inputValidationController.setValidity(flags, message, anchor);
     }
+    // Only check for noValidate prop
+    _mixinShouldSkipSgdsValidation() {
+      const form = this.closest("form");
+
+      return form?.noValidate || this.noValidate;
+    }
 
     /** DECLARED INSTANCE METHODS AND PROPERTIES*/
 
@@ -117,6 +129,7 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
     declare value: string;
     declare defaultValue: string;
     declare defaultChecked: boolean;
+    declare noValidate: boolean;
   }
 
   return ToBeValidatedElement as Constructor<ToBeValidatedElementInterface> & T;
@@ -135,4 +148,5 @@ export declare class ToBeValidatedElementInterface {
   _mixinSetValidity(flags?: ValidityStateFlags, message?: string, anchor?: HTMLElement): void;
   _mixinGetValidity(): ValidityState;
   _mixinGetValidationMessage(): string;
+  _mixinShouldSkipSgdsValidation(): boolean;
 }

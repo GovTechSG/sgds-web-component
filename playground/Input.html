@@ -9,3 +9,44 @@
 <sgds-input value="This is a normal input"></sgds-input>
 <br/>
 <sgds-input value="This is a disabled input" disabled></sgds-input>
+
+<h2>Password</h2>
+<sgds-input type="password" value="This is a password input" suffix="test" loading>
+    <sgds-icon-button slot="action" name="trash"></sgds-icon-button>
+</sgds-input>
+
+<br/>
+<h2>Trailing Icon</h2>
+<sgds-input value="This is a normal input" loading ></sgds-input>
+<sgds-input value="This is a normal input" valid></sgds-input>
+<sgds-input value="This is a normal input" valid>
+    <sgds-icon name="trash" slot="trailing-icon"></sgds-icon>
+</sgds-input>
+
+
+  <form novalidate>
+        <sgds-input required hasFeedback="both" ></sgds-input>
+        <sgds-button type="submit">Novalidate </sgds-button>
+      </form>
+
+<form>
+    <sgds-input id="no-validation-test" noValidate required hasFeedback="both" ></sgds-input>
+    <sgds-button type="submit">Submit</sgds-button>
+</form>
+
+<script>
+const handleInput = (e) => {
+        if(!/^[^a-zA-Z0-9]/.test(e.target.value)) {
+            e.target.setInvalid(false)
+        } else {
+            e.target.setInvalid(true)
+            e.target.invalidFeedback = "This is an invalid message";
+        }
+    }
+    const handleChange = (e) => {
+        console.log('change event', e);
+    }
+    document.querySelector("#no-validation-test").addEventListener('sgds-input', handleInput);
+    document.querySelector("#no-validation-test").addEventListener('sgds-change', handleChange);
+
+</script>
