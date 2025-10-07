@@ -77,7 +77,7 @@ const buildUMDComponentBundles = () => {
     input: meta.inputPath,
     output: {
       name: `${meta.name}Bundle`,
-      file: `lib/${meta.outputPath}.umd.js`,
+      file: `lib/${meta.outputPath}.umd.min.js`,
       format: "umd",
       sourcemap: true,
       inlineDynamicImports: true,
@@ -108,7 +108,7 @@ const buildSgdsPackage = () => {
     {
       input: ["src/index.ts"],
       output: {
-        entryFileNames: "[name].umd.js",
+        entryFileNames: "[name].umd.min.js",
         dir: "lib",
         format: "umd",
         sourcemap: true,
