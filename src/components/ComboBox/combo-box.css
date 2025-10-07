@@ -43,3 +43,6 @@
 .empty-menu {
   padding: var(--sgds-padding-sm) var(--sgds-padding-lg, 20px);
 }
+slot::slotted(*){
+  display:none;
+}
