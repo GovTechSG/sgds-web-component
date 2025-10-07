@@ -101,20 +101,8 @@
             --border-radius: 5px;
         } */
   </style>
-  <script type="module">
-    let scriptTarget = document.getElementsByTagName("head")[0];
-    let moduleScript = document.createElement("script");
-    moduleScript.type = "module";
-    if (process.env.VITE_ENV === "production") {
-      // preview production build
-      moduleScript.src = "lib/index.js";
-    } else {
-      // development server
-      moduleScript.src = "src/index.ts";
-    }
-    scriptTarget.appendChild(moduleScript);
-  </script>
-  <script type="module" src="src/index.ts"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.1-rc.0" async crossorigin="anonymous" integrity="sha384-qRauoz00hFCxC59ZTTCosxBYNglhjYXfkeI+MrIf1AW9e0ase0r/gmpzZIjr+MT7"></script>
+
 
   <script type="module" src="src/OverflowMenu/index.ts"></script>
   <link href="./src/themes/day.css" rel="stylesheet" type="text/css" />

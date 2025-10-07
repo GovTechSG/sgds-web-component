@@ -46,7 +46,7 @@ async function includeFileInBuild(file, targetFolder = distPath) {
  */
 async function copyMastheadCdnToRoot() {
   await mkdir("./lib/Masthead");
-  await copy("./lib/components/Masthead/index.umd.js", "./lib/Masthead/index.js");
+  await copy("./lib/components/Masthead/index.umd.min.js", "./lib/Masthead/index.js");
 }
 async function run() {
   try {

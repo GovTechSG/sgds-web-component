@@ -11,7 +11,8 @@ export const Template = args =>
       label=${ifDefined(args.label)}
       hintText=${ifDefined(args.hintText)}
       placeholder=${ifDefined(args.placeholder)}
-      >${args.menuList.map(
+    >
+      ${args.menuList.map(
         (m, i) => html`<sgds-select-option value=${m.value} ?disabled=${args.thirdOptionDisabled && i === 2}
           >${m.label}</sgds-select-option
         > `

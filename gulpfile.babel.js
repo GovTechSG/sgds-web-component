@@ -5,6 +5,7 @@ const fs = require("fs");
 const order = require("gulp-order");
 const replace = require("gulp-replace");
 const { version } = require("./package.json");
+const { default: generateSri } = require("./scripts/generateSri.mjs");
 
 exports.default = task("build-readme", () => {
   return src("docs/*.md")
@@ -48,8 +49,10 @@ exports.default = task("concat-storybook-mdx", done => {
   });
 });
 
-exports.default = task("replace-version", () => {
+exports.default = task("replace-version-and-sri", async () => {
   return src("docs/templates/INSTALLATION.md")
     .pipe(replace(/<version>/g, version))
+    .pipe(replace(/<subresource-integrity-entrypoint>/g, await generateSri("lib/index.umd.min.js")))
+    .pipe(replace(/<subresource-integrity-masthead>/g, await generateSri("lib/components/Masthead/index.umd.min.js")))
     .pipe(dest("./docs"));
 });

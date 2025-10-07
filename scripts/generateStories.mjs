@@ -88,7 +88,7 @@ import "@govtechsg/sgds-web-component/components/${key}";
 \`\`\`html
 <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@${
       packageJson.version
-    }/components/${key}/index.umd.js"></script>
+    }/components/${key}/index.umd.min.js"></script>
 \`\`\`
 
 ## API
