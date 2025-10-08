@@ -8,7 +8,7 @@ Install SGDS web components locally with the following command
 
 ```js
 
-npm install @govtechsg/sgds-web-component@3.4.0
+npm install @govtechsg/sgds-web-component@3.5.0
 
 ```
 
