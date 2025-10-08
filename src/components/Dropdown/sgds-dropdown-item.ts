@@ -18,7 +18,7 @@ export class SgdsDropdownItem extends SgdsElement {
   /** @internal */
   @queryAssignedElements({ flatten: true }) private anchor: HTMLAnchorElement[];
 
-  /** when true, sets the active stylings of .nav-link */
+  /** when true, sets the active stylings of dropdown item */
   @property({ type: Boolean })
   active = false;
 

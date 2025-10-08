@@ -9,6 +9,7 @@ import { watch } from "../../utils/watch";
 import { SgdsBadge } from "../Badge/sgds-badge";
 import SgdsIcon from "../Icon/sgds-icon";
 import comboBoxStyle from "./combo-box.css";
+import formTextControlStyle from "../../styles/form-text-control.css";
 import { SgdsComboBoxOption } from "./sgds-combo-box-option";
 
 import { repeat } from "lit/directives/repeat.js";
@@ -31,7 +32,7 @@ type SgdsComboBoxOptionData = SgdsOptionData;
  */
 
 export class SgdsComboBox extends SelectElement {
-  static styles = [...SelectElement.styles, comboBoxStyle];
+  static styles = [...SelectElement.styles, formTextControlStyle, comboBoxStyle];
 
   /** @internal */
   static dependencies = {
@@ -369,8 +370,13 @@ export class SgdsComboBox extends SelectElement {
   }
   render() {
     return html`
-      <div class="combobox" @keydown=${this._handleMultiSelectKeyDown}>
-        ${this._renderLabel()} ${this._renderInput()} ${this._renderFeedback()}
+      <div
+        class=${classMap({ "form-control-container": true, disabled: this.disabled, combobox: true })}
+        @keydown=${this._handleMultiSelectKeyDown}
+      >
+        ${this._renderLabel()}
+        <!-- The input -->
+        ${this._renderInput()} ${this._renderFeedback()}
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
           ${this._renderMenu()}
         </ul>

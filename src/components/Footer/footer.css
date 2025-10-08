@@ -66,13 +66,9 @@ slot[name="description"]::slotted(*) {
   color: var(--sgds-color-fixed-light);
 }
 
-.footer-mandatory-links ul li a:focus,
 .footer-mandatory-links ul li a:focus-visible {
-  outline: 0;
-}
-
-.footer-mandatory-links ul li a:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .footer-bottom {
@@ -103,12 +99,12 @@ slot[name="social-media"]::slotted(a:hover) {
 slot[name="social-media"]::slotted(a:focus),
 slot[name="social-media"]::slotted(a:focus-visible) {
   --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-  outline: 0;
   color: var(--sgds-link-color-emphasis);
 }
 
 slot[name="social-media"]::slotted(a:focus-visible) {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .footer-mandatory-links {

@@ -19,12 +19,12 @@
 
 :host([variant="solid"]:not([active]):not([disabled])) .tab:focus,
 :host([variant="solid"]:not([active]):not([disabled])) .tab:focus-visible {
-  outline: 0;
   background-color: var(--sgds-bg-translucent);
 }
 
 :host([variant="solid"]:not([active]):not([disabled])) .tab:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 :host([variant="solid"]:not([active]):not([disabled])) .tab:hover {
@@ -45,7 +45,7 @@
 }
 
 :host([variant="underlined"][orientation="vertical"][active]) .tab::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   right: -1px;
@@ -59,7 +59,7 @@
 }
 
 :host([variant="underlined"][orientation="horizontal"][active]) .tab::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -1px;
   left: 0;
@@ -75,7 +75,8 @@
 }
 
 :host([variant="underlined"]:not([active]):not([disabled])) .tab:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 :host([variant="underlined"]:not([active]):not([disabled])) .tab:hover {
@@ -91,12 +92,7 @@
   position: relative;
 }
 
-.tab:focus,
 .tab:focus-visible {
-  outline: 0;
-}
-
-.tab:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
-  outline: 0;
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }

@@ -1,60 +1,13 @@
-:host {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sgds-gap-xs);
-}
-input {
-  margin: 0;
-}
-
-.form-check {
-  display: flex;
-  gap: var(--sgds-form-gap-md);
-  padding: var(--sgds-form-padding-inline-sm) 0px;
-}
-
-.form-check-input-container {
-  width: var(--sgds-form-width-xs);
-  height: var(--sgds-form-height-sm);
-}
-
-.form-check-input {
-  appearance: none;
-  background-color: var(--sgds-form-surface-default);
-  background-image: var(--sgds-radio-bg-image);
-  background-position: 50%;
-  background-repeat: no-repeat;
-  background-size: auto;
-  border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-default);
+.form-check-input[type="checkbox"] {
   border-radius: var(--sgds-form-border-radius-md);
-  width: var(--sgds-form-width-xs);
-  height: var(--sgds-form-height-sm);
 }
 
-:host(:not([disabled]):not([invalid]):not([checked]):not([indeterminate])) .form-check-input:hover {
-  border: var(--sgds-form-border-width-thick) solid var(--sgds-border-color-emphasis);
-}
-
-.form-check-input:focus,
-.form-check-input:focus-visible {
-  border: var(--sgds-form-border-width-thick) solid var(--sgds-border-color-emphasis);
-  box-shadow: var(--sgds-form-box-shadow-focus);
-  outline: 0;
-}
 
 .form-check-input:checked,
 .form-check-input[checked] {
-  border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-transparent);
-  background-color: var(--sgds-form-primary-surface-default);
   --sgds-radio-bg-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none"><path d="M14.3467 3.97894C14.3953 4.0274 14.4339 4.08497 14.4602 4.14835C14.4865 4.21172 14.5 4.27967 14.5 4.34829C14.5 4.4169 14.4865 4.48485 14.4602 4.54823C14.4339 4.6116 14.3953 4.66917 14.3467 4.71763L7.04336 12.021C6.9949 12.0696 6.93734 12.1081 6.87396 12.1344C6.81058 12.1607 6.74264 12.1743 6.67402 12.1743C6.6054 12.1743 6.53746 12.1607 6.47408 12.1344C6.4107 12.1081 6.35314 12.0696 6.30468 12.021L2.65299 8.36932C2.55503 8.27136 2.5 8.13851 2.5 7.99998C2.5 7.86144 2.55503 7.72859 2.65299 7.63063C2.75094 7.53268 2.8838 7.47765 3.02233 7.47765C3.16086 7.47765 3.29372 7.53268 3.39167 7.63063L6.67402 10.914L13.6081 3.97894C13.6565 3.93036 13.7141 3.89182 13.7775 3.86552C13.8408 3.83922 13.9088 3.82568 13.9774 3.82568C14.046 3.82568 14.114 3.83922 14.1773 3.86552C14.2407 3.89182 14.2983 3.93036 14.3467 3.97894Z" fill="white"/></svg>');
 }
 
-.form-check-input:checked:hover,
-.form-check-input[checked]:hover,
-.form-check-input:checked:focus,
-.form-check-input[checked]:focus-visible {
-  background-color: var(--sgds-form-primary-surface-emphasis);
-}
 
 .form-check-input:indeterminate,
 .form-check-input[indeterminate] {
@@ -70,20 +23,10 @@ input {
   background-color: var(--sgds-form-primary-surface-emphasis);
 }
 
-:host([disabled]) .form-check {
-  opacity: var(--sgds-opacity-50);
-  cursor: not-allowed;
-}
-
-.form-check-input.is-invalid {
-  border: var(--sgds-form-border-width-thick) solid var(--sgds-form-danger-border-color-default);
-}
-
 .form-check-input:checked.is-invalid,
 .form-check-input[checked].is-invalid,
 .form-check-input:indeterminate.is-invalid,
 .form-check-input[indeterminate].is-invalid {
-  border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-transparent);
   background-color: var(--sgds-form-danger-surface-default);
 }
 

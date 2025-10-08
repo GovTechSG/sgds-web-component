@@ -251,6 +251,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
           tabindex="-1"
           @change=${(e: Event) => super._mixinHandleChange(e)}
           .value=${live(this.value)}
+          aria-describedby=${this.invalid && this.hasFeedback ? "radio-group-feedback" : `${this._controlId}Help`}
         />
         ${this.invalid && this.hasFeedback
           ? html`
@@ -263,7 +264,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
                     />
                   </svg>
                 </slot>
-                <div id="radio-group-feedback" tabindex="0" class="invalid-feedback">
+                <div id="radio-group-feedback" class="invalid-feedback">
                   ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
                 </div>
               </div>
