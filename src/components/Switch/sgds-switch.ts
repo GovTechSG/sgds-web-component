@@ -33,6 +33,12 @@ export class SgdsSwitch extends SgdsElement {
   /** Disables the switch (so the user can't check / uncheck it). */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
+  /** Used only for SSR to indicate the presence of the `default` slot. */
+  @property({ type: Boolean }) hasDefaultSlot = false;
+
+  /** Used only for SSR to indicate the presence of the `leftLabel` slot. */
+  @property({ type: Boolean }) hasLeftLabelSlot = false;
+
   /** @internal Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("checked")
   defaultChecked = false;
@@ -42,6 +48,11 @@ export class SgdsSwitch extends SgdsElement {
 
   /** @internal */
   private readonly hasSlotController = new HasSlotController(this, "[default]", "leftLabel");
+
+  updated() {
+    if (!this.hasDefaultSlot) this.hasDefaultSlot = this.hasSlotController.test("[default]");
+    if (!this.hasLeftLabelSlot) this.hasLeftLabelSlot = this.hasSlotController.test("leftLabel");
+  }
 
   /** Simulates a click on the switch. */
   public click() {
@@ -80,9 +91,7 @@ export class SgdsSwitch extends SgdsElement {
   }
 
   render() {
-    const hasDefaultSlot = this.hasSlotController.test("[default]");
-    const hasLeftLabelSlot = this.hasSlotController.test("leftLabel");
-    const noLabelSlot = !hasDefaultSlot && !hasLeftLabelSlot;
+    const noLabel = !this.hasDefaultSlot && !this.hasLeftLabelSlot;
 
     return html`
       <div class="form-check">
@@ -91,7 +100,7 @@ export class SgdsSwitch extends SgdsElement {
           class=${classMap({
             "form-check-label": true,
             "left-label": true,
-            "d-none": hasDefaultSlot || noLabelSlot
+            "d-none": this.hasDefaultSlot || noLabel
           })}
         >
           <slot name="leftLabel"></slot>
@@ -113,7 +122,7 @@ export class SgdsSwitch extends SgdsElement {
           for="${this._inputId}"
           class=${classMap({
             "form-check-label": true,
-            "d-none": hasLeftLabelSlot || noLabelSlot
+            "d-none": this.hasLeftLabelSlot || noLabel
           })}
         >
           <slot></slot>
