@@ -10,5 +10,7 @@
     <Accordion></Accordion>
     <Icon></Icon> -->
     <Card></Card>
+    <Table></Table>
+    <DescriptionList></DescriptionList>
   </div>
 </template>

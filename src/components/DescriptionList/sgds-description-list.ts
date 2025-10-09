@@ -34,14 +34,14 @@ export class SgdsDescriptionList extends SgdsElement {
 
   render() {
     return html`
-      <div class="container" part="container">
-        <div class="label-container" part="label-container">
-          <span class="label" part="label">
+      <div class="container">
+        <div class="label-container">
+          <span class="label">
             <slot></slot>
           </span>
         </div>
-        <div class="data-container" part="data-container">
-          <span class="data" part="data">
+        <div class="data-container">
+          <span class="data">
             <slot name="data"></slot>
           </span>
         </div>

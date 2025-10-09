@@ -43,11 +43,18 @@ export class SgdsTable extends SgdsElement {
    */
   @property({ type: String }) headerPosition: HeaderPosition = "horizontal";
 
+  /** Used only for SSR to indicate the presence of the `default` slot. */
+  @property({ type: Boolean }) hasDefaultSlot = false;
+
   /** @internal */
   private readonly hasSlotController = new HasSlotController(this, "[default]");
 
   connectedCallback() {
     super.connectedCallback();
+  }
+
+  updated() {
+    if (!this.hasDefaultSlot) this.hasDefaultSlot = this.hasSlotController.test("[default]");
   }
 
   private _renderTable() {
@@ -108,8 +115,6 @@ export class SgdsTable extends SgdsElement {
   }
 
   render() {
-    const hasDefaultSlot = this.hasSlotController.test("[default]");
-
     return html`
       <div
         class=${classMap({
@@ -123,7 +128,7 @@ export class SgdsTable extends SgdsElement {
       >
         <slot id="table-slot" class="table"></slot>
 
-        ${!hasDefaultSlot
+        ${!this.hasDefaultSlot
           ? html`<table class="table">
               ${this._renderTable()}
             </table>`

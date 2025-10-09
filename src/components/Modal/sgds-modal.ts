@@ -9,12 +9,12 @@ import { waitForEvent } from "../../utils/event";
 import Modal from "../../utils/modal";
 import { HasSlotController } from "../../utils/slot";
 import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll";
+import { SM_BREAKPOINT, MD_BREAKPOINT } from "../../utils/breakpoints";
 import SgdsButton from "../Button/sgds-button";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 import modalStyle from "./modal.css";
 import headerStyles from "../../styles/header-class.css";
 import svgStyles from "../../styles/svg.css";
-import { SM_BREAKPOINT, MD_BREAKPOINT } from "../../utils/breakpoints";
 /**
  * @summary The modal component inform users about a specific task and may contain critical information which users then have to make a decision.
  *
@@ -54,16 +54,27 @@ export class SgdsModal extends SgdsElement {
 
   /**Indicates whether or not the modal is open. You can use this in lieu of the show/hide methods. */
   @property({ type: Boolean, reflect: true }) open = false;
+
   /** Removes the default animation when opening and closing of modal */
   @property({ type: Boolean, reflect: true }) noAnimation = false;
+
   /** Specifies a small, medium, large or fullscreen modal, the size is medium by default. */
   @property({ reflect: true }) size: "sm" | "md" | "lg" | "fullscreen" = "md";
+
+  /** Used only for SSR to indicate the presence of the `footer` slot. */
+  @property({ type: Boolean }) hasFooterSlot = false;
 
   connectedCallback() {
     super.connectedCallback();
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.modal = new Modal(this);
     this._resizeHandler = this._debounce(this._onWindowResize.bind(this), 200);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._removeResizeListener();
+    unlockBodyScrolling(this);
   }
 
   firstUpdated() {
@@ -77,10 +88,8 @@ export class SgdsModal extends SgdsElement {
     }
   }
 
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this._removeResizeListener();
-    unlockBodyScrolling(this);
+  updated() {
+    if (!this.hasFooterSlot) this.hasFooterSlot = this.hasSlotController.test("footer");
   }
 
   private _debounce(func: (...args: any[]) => void, wait: number) {
@@ -261,7 +270,7 @@ export class SgdsModal extends SgdsElement {
         class=${classMap({
           modal: true,
           show: this.open,
-          "has-footer": this.hasSlotController.test("footer")
+          "has-footer": this.hasFooterSlot
         })}
       >
         <div class="modal-overlay" @click=${this._overlayClickHandler}></div>
