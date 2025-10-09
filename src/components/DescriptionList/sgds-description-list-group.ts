@@ -1,8 +1,9 @@
-import { html, nothing, PropertyValues } from "lit";
+import { html, PropertyValues } from "lit";
+import { classMap } from "lit/directives/class-map.js";
 import { property, queryAssignedElements } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
-import descriptionListGroupStyle from "./description-list-group.css";
 import { HasSlotController } from "../../utils/slot";
+import descriptionListGroupStyle from "./description-list-group.css";
 
 /**
  * @summary Description List Group organizes multiple description lists.
@@ -20,6 +21,12 @@ export class SgdsDescriptionListGroup extends SgdsElement {
 
   /** When true, the description lists are displayed in a stacked layout. */
   @property({ type: Boolean, reflect: true }) stacked = false;
+
+  /** Used only for SSR to indicate the presence of the `title` slot. */
+  @property({ type: Boolean }) hasTitleSlot = false;
+
+  /** Used only for SSR to indicate the presence of the `description` slot. */
+  @property({ type: Boolean }) hasDescriptionSlot = false;
 
   @queryAssignedElements({ flatten: true })
   private _descriptionLists!: HTMLElement[];
@@ -62,31 +69,23 @@ export class SgdsDescriptionListGroup extends SgdsElement {
     if (_changedProperties.has("bordered")) {
       this._updateDescriptionLists();
     }
+
+    if (!this.hasTitleSlot) this.hasTitleSlot = this.hasSlotController.test("title");
+    if (!this.hasDescriptionSlot) this.hasDescriptionSlot = this.hasSlotController.test("description");
   }
 
   render() {
-    const hasTitleSlot = this.hasSlotController.test("title");
-    const hasDescriptionSlot = this.hasSlotController.test("description");
     return html`
-      <div class="container" part="base">
-        ${hasTitleSlot || hasDescriptionSlot
-          ? html`
-              <div class="header">
-                ${hasTitleSlot
-                  ? html` <div class="title">
-                      <slot name="title"></slot>
-                    </div>`
-                  : nothing}
-                ${hasDescriptionSlot
-                  ? html`
-                      <div class="description">
-                        <slot name="description"></slot>
-                      </div>
-                    `
-                  : nothing}
-              </div>
-            `
-          : nothing}
+      <div class="container">
+        <div
+          class="${classMap({
+            header: true,
+            "has-header": this.hasTitleSlot || this.hasDescriptionSlot
+          })}"
+        >
+          <slot name="title"></slot>
+          <slot name="description"></slot>
+        </div>
         <div>
           <slot></slot>
         </div>

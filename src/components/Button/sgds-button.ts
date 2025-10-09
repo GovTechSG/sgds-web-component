@@ -3,9 +3,9 @@ import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html, literal } from "lit/static-html.js";
 import ButtonElement from "../../base/button-element";
-import anchorStyles from "../../styles/anchor.css";
 import { HasSlotController } from "../../utils/slot";
 import { FormSubmitController } from "../../utils/formSubmitController";
+import anchorStyles from "../../styles/anchor.css";
 import buttonStyles from "./button.css";
 
 export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
@@ -69,7 +69,18 @@ export class SgdsButton extends ButtonElement {
   /** When set, the button will be in full width. */
   @property({ type: Boolean, reflect: true }) fullWidth = false;
 
+  /** Used only for SSR to indicate the presence of the `leftIcon` slot. */
+  @property({ type: Boolean }) hasLeftIconSlot = false;
+
+  /** Used only for SSR to indicate the presence of the `rightIcon` slot. */
+  @property({ type: Boolean }) hasRightIconSlot = false;
+
   private readonly hasSlotController = new HasSlotController(this, "leftIcon", "rightIcon");
+
+  updated() {
+    if (!this.hasLeftIconSlot) this.hasLeftIconSlot = this.hasSlotController.test("leftIcon");
+    if (!this.hasRightIconSlot) this.hasRightIconSlot = this.hasSlotController.test("rightIcon");
+  }
 
   protected override _handleClick(event: MouseEvent) {
     if (this.disabled) {
@@ -94,18 +105,16 @@ export class SgdsButton extends ButtonElement {
   render() {
     const isLink = this.href;
     const tag = isLink ? literal`a` : literal`button`;
-    const hasLeftIconSlot = this.hasSlotController.test("leftIcon");
-    const hasRightIconSlot = this.hasSlotController.test("rightIcon");
-    const noIconSlot = !hasLeftIconSlot && !hasRightIconSlot;
+    const noIcon = !this.hasLeftIconSlot && !this.hasRightIconSlot;
 
     return html`
       <${tag}
         class="btn ${classMap({
           disabled: this.disabled,
           active: this.active,
-          "has-left-icon": hasLeftIconSlot,
-          "has-right-icon": hasRightIconSlot,
-          "no-icon": noIconSlot
+          "has-left-icon": this.hasLeftIconSlot,
+          "has-right-icon": this.hasRightIconSlot,
+          "no-icon": noIcon
         })}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}

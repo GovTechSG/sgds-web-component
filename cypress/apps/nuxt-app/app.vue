@@ -12,5 +12,7 @@
     <Icon></Icon>
     <Dropdown></Dropdown>
     <Card></Card>
+    <Table></Table>
+    <DescriptionList></DescriptionList>
   </div>
 </template>
