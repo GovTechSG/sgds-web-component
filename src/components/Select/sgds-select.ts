@@ -40,6 +40,11 @@ export class SgdsSelect extends SelectElement {
 
   async firstUpdated() {
     super.firstUpdated();
+    console.log(this.options, "before awaiting");
+    const readyOptions = this.options.map(async (e: SgdsSelectOption) => await e.updateComplete);
+    await Promise.all(readyOptions);
+    console.log(this.options, "after awaiting");
+
     this.menuList = this.options.length > 0 ? this._getMenuListFromOptions() : this.menuList;
     if (this.value) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);

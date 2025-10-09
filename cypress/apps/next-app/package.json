@@ -18,6 +18,7 @@
     "@types/node": "^20",
     "@types/react": "19.1.13",
     "@types/react-dom": "19.1.9",
+    "copy-webpack-plugin": "^13.0.1",
     "eslint": "^8",
     "eslint-config-next": "15.5.3",
     "typescript": "^5"

@@ -40,7 +40,9 @@ import { Tooltip } from "./components/Tooltip";
 export default function Home() {
   return (
     <main>
-      <div>hello world</div>
+            <Card />
+
+      {/* <div>hello world</div>
       <Masthead />
       <Mainnav />
       <Accordion />
@@ -48,7 +50,6 @@ export default function Home() {
       <Badge />
       <Breadcrumb />
       <Button />
-      <Card />
       <Checkbox />
       <Combobox />
       <Datepicker />
@@ -78,7 +79,7 @@ export default function Home() {
       <Textarea />
       <Toast />
       <Tooltip />
-      <Footer />
+      <Footer /> */}
     </main>
   );
 }
