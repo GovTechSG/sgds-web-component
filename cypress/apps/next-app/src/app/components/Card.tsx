@@ -1,25 +1,30 @@
-import SgdsCard from "@govtechsg/sgds-web-component/react/card/index.js";
-import Image from "next/image";
+"use client"
+// import SgdsCard from "@govtechsg/sgds-web-component/react/card/index.js";
+// import SgdsThumbnailCard from "@govtechsg/sgds-web-component/react/thumbnail-card/index.js";
+// import SgdsLink from "@govtechsg/sgds-web-component/react/link/index.js";
+// import Image from "next/image";
 export const Card = () => {
+  console.log("card")
   return (
     <>
-      <SgdsCard>
-        <Image
-          suppressHydrationWarning
-          width={100}
-          height={120}
-          slot="image"
-          alt="img alternate text goes here"
-          src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80"
-        />
-        <span slot="title">Card</span>
-        <span slot="description">
-          Some quick example text to build on the card title and make up the bulk of the card's content.
-        </span>
-        <a suppressHydrationWarning slot="link" href="https://google.com">
-          Go somewhere
-        </a>
-      </SgdsCard>
+      {/* <SgdsThumbnailCard stretchedlink="" orientation="vertical">
+        <img slot="thumbnail" alt="img alternate text goes here" width="48" height="48" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"/>
+        <span slot="subtitle">EXPLORE THE FEATURES</span>
+        <span slot="title">Innovative Solutions for You</span>
+        <span slot="description">Discover how our platform can streamline your workflow and enhance productivity. With cutting-edge technology
+          and user-friendly design, we empower you to achieve more.</span>
+        <div slot="lower">
+        </div>
+          <a href="#"  slot="link">Register now</a>
+      </SgdsThumbnailCard> */}
+         <sgds-thumbnail-card stretchedlink="" orientation="vertical">
+          <a href="#" slot="link">Register now </a>
+      </sgds-thumbnail-card>
+      <sgds-select value="1">
+        <sgds-select-option value="1">1</sgds-select-option>
+        <sgds-select-option value="2">2</sgds-select-option>
+        <sgds-select-option value="3">3</sgds-select-option>
+      </sgds-select>
     </>
   );
 };

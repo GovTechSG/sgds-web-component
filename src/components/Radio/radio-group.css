@@ -23,3 +23,7 @@ fieldset {
   flex-direction: column;
   gap: var(--sgds-form-gap-md)
 }
+:host([disabled]) .label-hint-container{
+  opacity: var(--sgds-opacity-50);
+  cursor: not-allowed;
+}

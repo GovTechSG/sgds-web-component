@@ -62,10 +62,11 @@ export class SgdsThumbnailCard extends CardElement {
     if (this.stretchedLink) {
       const footerHref = this.footerSlotItems?.href;
       const linkHref = this.linkSlotItems?.href;
-
+      console.log("firstUpdated, linkSlotItems", this.linkSlotItems);
       if (footerHref) {
         this.card.setAttribute("href", footerHref);
       } else if (linkHref) {
+        console.log("linkhref firstUpdated");
         this.card.setAttribute("href", linkHref);
       }
     }

@@ -5,6 +5,7 @@ import { size } from "@floating-ui/dom";
 import dropdownMenuStyle from "../components/Dropdown/dropdown-menu.css";
 import feedbackStyles from "../styles/feedback.css";
 import hintTextStyles from "../styles/form-hint.css";
+import formControlStyles from "../styles/form-text-control.css";
 import { defaultValue } from "../utils/defaultvalue";
 import { SgdsFormControl } from "../utils/formSubmitController";
 import generateId from "../utils/generateId";
@@ -13,7 +14,7 @@ import { DropdownListElement } from "./dropdown-list-element";
 import { OptionElement } from "./option-element";
 
 export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) implements SgdsFormControl {
-  static styles = [...DropdownListElement.styles, dropdownMenuStyle, hintTextStyles, feedbackStyles];
+  static styles = [...DropdownListElement.styles, dropdownMenuStyle, hintTextStyles, feedbackStyles, formControlStyles];
 
   /** The input's label  */
   @property({ reflect: true }) label = "";

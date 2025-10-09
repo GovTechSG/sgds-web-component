@@ -111,12 +111,10 @@ a.card {
   pointer-events: none;
 }
 
-a.card:focus {
-  outline: 0;
-}
-
 a.card:not(.disabled):focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
+  --sgds-outline-offset-focus: -1px;
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .card-tinted-bg {
@@ -238,14 +236,9 @@ slot[name="link"]::slotted(a:focus) {
   color: var(--sgds-link-color-emphasis);
 }
 
-slot[name="title"]::slotted(a:focus),
-slot[name="footer"]::slotted(a:focus),
-slot[name="link"]::slotted(a:focus) {
-  outline: 0;
-}
-
 slot[name="title"]::slotted(a:focus-visible),
 slot[name="footer"]::slotted(a:focus-visible),
 slot[name="link"]::slotted(a:focus-visible) {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }

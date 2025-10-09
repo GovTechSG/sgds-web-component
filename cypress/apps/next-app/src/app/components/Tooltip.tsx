@@ -1,3 +1,4 @@
+"use client"
 import dynamic from "next/dynamic";
 const SgdsTooltip = dynamic(() => import("@govtechsg/sgds-web-component/react/tooltip/index.js"), {
   ssr: false

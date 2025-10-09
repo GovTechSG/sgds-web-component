@@ -1,3 +1,8 @@
+## v3.5.1 (2025-10-08)
+
+### Fix
+- *****: properly externalise @floating-ui/dom dependency
+
 ## v3.5.0 (2025-10-06)
 
 ### Feat

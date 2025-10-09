@@ -22,7 +22,6 @@ nav {
   margin: auto;
 }
 
-
 @media screen and (max-width: 768px) {
   .navbar {
     padding: 0px var(--sgds-mainnav-mobile-padding-x);
@@ -36,13 +35,9 @@ nav {
   white-space: nowrap;
 }
 
-.navbar-brand:focus,
 .navbar-brand:focus-visible {
-  outline: 0;
-}
-
-.navbar-brand:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .navbar-nav {
@@ -181,12 +176,12 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   .navbar-expand-xl .navbar-nav {
     flex-direction: row;
   }
-  
+
   .navbar-expand-xl .navbar-nav .nav-link {
     padding-left: var(--mainnav-nav-link-padding-x);
     padding-right: var(--mainnav-nav-link-padding-x);
   }
-  
+
   .navbar-expand-xl .navbar-nav-scroll {
     overflow: visible;
   }
