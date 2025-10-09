@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+import withLitSSR from "@lit-labs/nextjs"
 const nextConfig = {
     images: {
         domains: ['images.unsplash.com'],
@@ -22,4 +23,4 @@ const nextConfig = {
       // }
 };
 
-export default nextConfig;
+export default withLitSSR(nextConfig);
