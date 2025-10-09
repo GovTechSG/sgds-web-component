@@ -1,4 +1,4 @@
-import { nothing } from "lit";
+import { nothing, PropertyValues } from "lit";
 import { html, literal } from "lit/static-html.js";
 import { property, queryAssignedElements, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -58,11 +58,13 @@ export class SgdsThumbnailCard extends CardElement {
         if (this.noPadding) body.style.padding = "0px";
       }
     }
+  }
 
-    if (this.stretchedLink) {
+  protected updated(__changedProperties: PropertyValues) {
+    if (__changedProperties.has("stretchedLink") && this.stretchedLink) {
       const footerHref = this.footerSlotItems?.href;
       const linkHref = this.linkSlotItems?.href;
-      console.log("firstUpdated, linkSlotItems", this.linkSlotItems);
+      console.log("updated, linkSlotItems", this.linkSlotItems);
       if (footerHref) {
         this.card.setAttribute("href", footerHref);
       } else if (linkHref) {
@@ -82,7 +84,7 @@ export class SgdsThumbnailCard extends CardElement {
           disabled: this.disabled
         })}"
         tabindex=${cardTabIndex}
-      >
+      > 
         ${this.tinted && !this.noPadding ? html`<div class="card-tinted-bg"></div>` : nothing}
         <div class="card-media">
           <slot name="thumbnail"></slot>

@@ -39,14 +39,24 @@ export class SgdsSelect extends SelectElement {
   @queryAssignedElements({ flatten: true, selector: "sgds-select-option" })
   protected options: SgdsSelectOption[];
 
+  protected get menuListFromlightDomOptions() {
+    return this.lighDomOptions.map((o: HTMLElement) => ({
+      disabled: o.hasAttribute("disabled"),
+      value: o.getAttribute("value"),
+      label: o.textContent
+    }));
+  }
+  protected get lighDomOptions() {
+    return Array.from(this.querySelectorAll("sgds-select-options"));
+  }
   async firstUpdated() {
     super.firstUpdated();
-    console.log(this.options, "before awaiting");
-    const readyOptions = this.options.map(async (e: SgdsSelectOption) => await e.updateComplete);
-    await Promise.all(readyOptions);
-    console.log(this.options, "after awaiting");
+    if (this.options.length > 0) {
+      this.menuList = this._getMenuListFromOptions();
+    } else if (this.lighDomOptions.length > 0) {
+      this.menuList = this.menuListFromlightDomOptions;
+    }
 
-    this.menuList = this.options.length > 0 ? this._getMenuListFromOptions() : this.menuList;
     if (this.value) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
       this.displayValue = initialSelectedItem[0].label;

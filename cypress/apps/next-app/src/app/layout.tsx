@@ -4,7 +4,6 @@ import "./globals.css";
 import Script from "next/script";
 const CopyPlugin = require("copy-webpack-plugin")
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.0/themes/day.css' rel='stylesheet' type='text/css' />
+         <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.0/themes/day.css' rel='stylesheet preload' type='text/css' />
          <Script
           type="module"
           id="scoped-element-polyfill"
