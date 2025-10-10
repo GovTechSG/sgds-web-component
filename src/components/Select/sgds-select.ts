@@ -84,6 +84,22 @@ export class SgdsSelect extends SelectElement {
       this.showMenu();
     }
   }
+  private _handleSlotChange() {
+    if (this.ssr) {
+      console.log("slotchange happend");
+      if (this.options.length > 0) {
+        this.menuList = this._getMenuListFromOptions();
+      }
+
+      if (this.value) {
+        const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
+        this.displayValue = initialSelectedItem[0].label;
+
+        this._setActiveToOption();
+      }
+    }
+    this.menuList = this._getMenuListFromOptions();
+  }
   private _setActiveToOption() {
     const activeIndex = this.menuList.findIndex(item => item.value.toString() === this.value);
     this.options.forEach((option, index) => {
@@ -153,6 +169,10 @@ export class SgdsSelect extends SelectElement {
     return html` <div class="empty-menu">No options</div> `;
   }
 
+  @watch("ssr")
+  handleSSRChange() {
+    console.log("ssr changed", this.ssr);
+  }
   protected _renderMenu() {
     const menu = this.menuList.map(item => {
       const isActive = item.value === this.value;
@@ -226,7 +246,7 @@ export class SgdsSelect extends SelectElement {
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
           ${this._renderMenu()}
         </ul>
-        <slot @slotchange=${this._handleDefaultSlotChange} id="options"></slot>
+        <slot @slotchange=${this._handleSlotChange} id="options"></slot>
       </div>
     `;
   }
