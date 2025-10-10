@@ -51,22 +51,20 @@ export class SgdsSelect extends SelectElement {
   async firstUpdated() {
     super.firstUpdated();
     this.shadowRoot.querySelector("slot#options").addEventListener("slotchange", () => {
-      console.log("slotchange happend")
+      console.log("slotchange happend");
       if (this.options.length > 0) {
         this.menuList = this._getMenuListFromOptions();
-      } else if (this.lighDomOptions.length > 0) {
-        this.menuList = this.menuListFromlightDomOptions;
       }
 
-    if (this.value) {
-      const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
-      this.displayValue = initialSelectedItem[0].label;
+      if (this.value) {
+        const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
+        this.displayValue = initialSelectedItem[0].label;
 
-      this._setActiveToOption();
-    }
+        this._setActiveToOption();
+      }
     });
 
-    if (this.value) {
+    if (this.value && this.menuList.length > 0) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
       this.displayValue = initialSelectedItem[0].label;
 
