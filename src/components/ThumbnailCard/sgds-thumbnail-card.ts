@@ -59,20 +59,20 @@ export class SgdsThumbnailCard extends CardElement {
         if (this.noPadding) body.style.padding = "0px";
       }
     }
+  }
 
-    this.shadowRoot.querySelector("slot[name='footer']").addEventListener("slotchange", () => {
-      console.log("footer slot onslotchange in firstUpdated");
-      const footerHref = this.footerSlotItems?.href;
-      if (footerHref) {
-        this.card.setAttribute("href", footerHref);
-      }
-    });
-    this.shadowRoot.querySelector("slot[name='link']").addEventListener("slotchange", () => {
-      console.log("link slot onslotchange in firstUpdated");
-      const linkHref = this.linkSlotItems?.href;
+  private _handleFooterSlotChange() {
+    const footerHref = this.footerSlotItems?.href;
 
-      if (linkHref) this.card.setAttribute("href", linkHref);
-    });
+    if (this.stretchedLink && footerHref) {
+      this.card.setAttribute("href", footerHref);
+    }
+  }
+
+  private _handleLinkSlotChange(e: Event) {
+    this.handleLinkSlotChange(e);
+    const linkHref = this.linkSlotItems?.href;
+    if (this.stretchedLink && linkHref) this.card.setAttribute("href", linkHref);
   }
 
   render() {
@@ -102,8 +102,8 @@ export class SgdsThumbnailCard extends CardElement {
           </div>
           <slot name="description"></slot>
           <slot name="lower"></slot>
-          <slot name="footer">
-            <slot name="link" @slotchange=${this.handleLinkSlotChange}></slot>
+          <slot name="footer" @slotchange=${this._handleFooterSlotChange}>
+            <slot name="link" @slotchange=${this._handleLinkSlotChange}></slot>
           </slot>
         </div>
       </${tag}>

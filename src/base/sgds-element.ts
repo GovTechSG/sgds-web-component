@@ -1,5 +1,6 @@
-import { LitElement, type CSSResult } from "lit";
+import { isServer, LitElement, type CSSResult } from "lit";
 import style from "./sgds-element.css";
+import { property } from "lit/decorators.js";
 /**
  * @cssprop --sgds-{stateColor} - State colors in hexadecimal value
  * @cssprop --sgds-{stateColor}-rgb - State colors in rgb value
@@ -11,6 +12,8 @@ import style from "./sgds-element.css";
 
 export default class SgdsElement extends LitElement {
   static styles: CSSResult[] = [style];
+  @property({ type: Boolean, reflect: true }) ssr = isServer || Boolean(this.shadowRoot);
+
   /** Emits a custom event with more convenient defaults. */
   emit(name: string, options?: CustomEventInit) {
     const event = new CustomEvent(name, {
@@ -40,27 +43,6 @@ export default class SgdsElement extends LitElement {
       }
       return;
     }
-
-    // let newVersion = ' (unknown version)';
-    // let existingVersion = newVersion;
-
-    // if ('version' in elementConstructor && elementConstructor.version) {
-    //   newVersion = ' v' + elementConstructor.version;
-    // }
-
-    // if ('version' in currentlyRegisteredConstructor && currentlyRegisteredConstructor.version) {
-    //   existingVersion = ' v' + currentlyRegisteredConstructor.version;
-    // }
-
-    // // Need to make sure we're not working with null or empty strings before doing version comparisons.
-    // if (newVersion && existingVersion && newVersion === existingVersion) {
-    //   // If versions match, we don't need to warn anyone. Carry on.
-    //   return;
-    // }
-
-    // console.warn(
-    //   `Attempted to register <${name}>${newVersion}, but <${name}>${existingVersion} has already been registered.`
-    // );
   }
   /** @internal */
   static dependencies: Record<string, typeof SgdsElement> = {};
@@ -70,5 +52,17 @@ export default class SgdsElement extends LitElement {
     Object.entries((this.constructor as typeof SgdsElement).dependencies).forEach(([name, component]) => {
       (this.constructor as typeof SgdsElement).define(name, component);
     });
+  }
+
+  protected firstUpdated(changedProperties: Parameters<LitElement["firstUpdated"]>[0]): void {
+    super.firstUpdated(changedProperties);
+    // This is a fix to workaround SSR not being able to catch slotchange events.
+    // https://github.com/lit/lit/discussions/4697
+    if (this.ssr) {
+      console.log(this.ssr, "ssr is true");
+      this.shadowRoot?.querySelectorAll("slot").forEach(slotElement => {
+        slotElement.dispatchEvent(new Event("slotchange", { bubbles: true, composed: false, cancelable: false }));
+      });
+    }
   }
 }
