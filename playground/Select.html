@@ -15,24 +15,6 @@
 
 <div>
   <!-- Modal Example -->
-  <sgds-modal open>
-    <sgds-select
-      id="select-example-in-modal"
-      label="Select label"
-      hinttext="Select an option"
-      placeholder="Select an option"
-      hasFeedback
-      required
-    ></sgds-select>
-    <sgds-select
-      id="select-example-in-modal"
-      label="Select label"
-      hinttext="Select an option"
-      placeholder="Select an option"
-      hasFeedback
-      required
-    ></sgds-select>
-  </sgds-modal>
 
   <h2> Select populated by menuList prop</h2>
   <sgds-select
@@ -55,7 +37,7 @@
   <sgds-select-option disabled value="2">Option 2</sgds-select-option>
   <sgds-select-option value="3">Option 3</sgds-select-option>
 </sgds-select>
-  <sgds-select
+  <!-- <sgds-select
     label="Using slots with some disabled options"
     hinttext="Select an option"
     placeholder="Select an option"
@@ -80,15 +62,14 @@
     label="Empty menu (slot)"
     hinttext="Select an option"
     placeholder="Select an option"
-  ></sgds-select>
+  ></sgds-select> -->
 
 </div>
 
 <script>
   const select = document.querySelector("#select-example");
   const modalSelect = document.querySelector("#select-example-in-modal");
-  modalSelect.addEventListener("change", (e) => console.log(e.target.value));
-  modalSelect.menuList = select.menuList = [
+  select.menuList = [
     { label: "Afghanistan", value: "1" },
     { label: "Albania", value: "2" },
     { label: "Algeria", value: "3" },

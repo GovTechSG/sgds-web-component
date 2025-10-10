@@ -51,6 +51,7 @@ export class SgdsSelect extends SelectElement {
   }
   async firstUpdated() {
     super.firstUpdated();
+    console.log("firstUPdated");
     // this.shadowRoot.querySelector("slot#options").addEventListener("slotchange", () => {
     //   console.log("slotchange happend");
     //   if (this.options.length > 0) {
@@ -64,8 +65,8 @@ export class SgdsSelect extends SelectElement {
     //     this._setActiveToOption();
     //   }
     // });
-    this.menuList = this.options.length > 0 ? this._getMenuListFromOptions() : this.menuList;
-    if (this.value) {
+    // this.menuList = this.options.length > 0 ? this._getMenuListFromOptions() : this.menuList;
+    if (this.menuList.length > 0 && this.value) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
       this.displayValue = initialSelectedItem[0].label;
 
@@ -86,20 +87,15 @@ export class SgdsSelect extends SelectElement {
     }
   }
   private _handleSlotChange() {
-    if (this.ssr) {
-      console.log("slotchange happend");
-      if (this.options.length > 0) {
-        this.menuList = this._getMenuListFromOptions();
-      }
-
-      if (this.value) {
-        const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
-        this.displayValue = initialSelectedItem[0].label;
-
-        this._setActiveToOption();
-      }
-    }
+    console.log("slotchange happend");
     this.menuList = this._getMenuListFromOptions();
+
+    if (this.value) {
+      const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
+      this.displayValue = initialSelectedItem[0].label;
+
+      this._setActiveToOption();
+    }
   }
   private _setActiveToOption() {
     const activeIndex = this.menuList.findIndex(item => item.value.toString() === this.value);
