@@ -46,7 +46,7 @@ export class SgdsSelect extends SelectElement {
     }));
   }
   protected get lighDomOptions() {
-    return Array.from(this.querySelectorAll("sgds-select-options"));
+    return Array.from(this.querySelectorAll("sgds-select-option"));
   }
   async firstUpdated() {
     super.firstUpdated();

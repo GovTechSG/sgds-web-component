@@ -48,7 +48,8 @@ export class SgdsThumbnailCard extends CardElement {
     return (element.querySelector("a") || element) as HTMLAnchorElement;
   }
 
-  protected firstUpdated() {
+  protected async firstUpdated(__changedProperties) {
+    super.firstUpdated(__changedProperties);
     if (this._thumbnailNode.length === 0) {
       if ((this.orientation === "vertical" && this._upperNode.length === 0) || this.orientation === "horizontal") {
         const media = this.shadowRoot.querySelector(".card-media") as HTMLDivElement;
@@ -58,19 +59,16 @@ export class SgdsThumbnailCard extends CardElement {
         if (this.noPadding) body.style.padding = "0px";
       }
     }
-  }
 
-  protected updated(__changedProperties: PropertyValues) {
-    if (__changedProperties.has("stretchedLink") && this.stretchedLink) {
-      const footerHref = this.footerSlotItems?.href;
-      const linkHref = this.linkSlotItems?.href;
-      console.log("updated, linkSlotItems", this.linkSlotItems);
-      if (footerHref) {
-        this.card.setAttribute("href", footerHref);
-      } else if (linkHref) {
-        console.log("linkhref firstUpdated");
-        this.card.setAttribute("href", linkHref);
-      }
+    await this.updateComplete;
+    const footerHref = this.footerSlotItems?.href;
+    const linkHref = this.linkSlotItems?.href;
+    console.log("updated, linkSlotItems", this.linkSlotItems);
+    if (footerHref) {
+      this.card.setAttribute("href", footerHref);
+    } else if (linkHref) {
+      console.log("linkhref firstUpdated");
+      this.card.setAttribute("href", linkHref);
     }
   }
 
