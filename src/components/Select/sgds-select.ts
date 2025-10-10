@@ -51,11 +51,21 @@ export class SgdsSelect extends SelectElement {
   }
   async firstUpdated() {
     super.firstUpdated();
-    if (this.options.length > 0) {
-      this.menuList = this._getMenuListFromOptions();
-    } else if (this.lighDomOptions.length > 0) {
-      this.menuList = this.menuListFromlightDomOptions;
+    this.shadowRoot.querySelector("slot#options").addEventListener("slotchange", () => {
+      console.log("slotchange happend")
+      if (this.options.length > 0) {
+        this.menuList = this._getMenuListFromOptions();
+      } else if (this.lighDomOptions.length > 0) {
+        this.menuList = this.menuListFromlightDomOptions;
+      }
+
+    if (this.value) {
+      const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
+      this.displayValue = initialSelectedItem[0].label;
+
+      this._setActiveToOption();
     }
+    });
 
     if (this.value) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
@@ -213,7 +223,7 @@ export class SgdsSelect extends SelectElement {
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
           ${this._renderMenu()}
         </ul>
-        <slot @slotchange=${this._handleDefaultSlotChange}></slot>
+        <slot @slotchange=${this._handleDefaultSlotChange} id="options"></slot>
       </div>
     `;
   }

@@ -60,16 +60,19 @@ export class SgdsThumbnailCard extends CardElement {
       }
     }
 
-    await this.updateComplete;
-    const footerHref = this.footerSlotItems?.href;
-    const linkHref = this.linkSlotItems?.href;
-    console.log("updated, linkSlotItems", this.linkSlotItems);
-    if (footerHref) {
-      this.card.setAttribute("href", footerHref);
-    } else if (linkHref) {
-      console.log("linkhref firstUpdated");
-      this.card.setAttribute("href", linkHref);
-    }
+    this.shadowRoot.querySelector("slot[name='footer']").addEventListener("slotchange", () => {
+      console.log("footer slot onslotchange in firstUpdated");
+      const footerHref = this.footerSlotItems?.href;
+      if (footerHref) {
+        this.card.setAttribute("href", footerHref);
+      } 
+    });
+    this.shadowRoot.querySelector("slot[name='link']").addEventListener("slotchange", () => {
+      console.log("link slot onslotchange in firstUpdated");
+      const linkHref = this.linkSlotItems?.href;
+
+      if (linkHref) this.card.setAttribute("href", linkHref);
+    });
   }
 
   render() {
