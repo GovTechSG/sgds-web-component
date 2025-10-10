@@ -51,19 +51,26 @@ export class SgdsSelect extends SelectElement {
   }
   async firstUpdated() {
     super.firstUpdated();
-    this.shadowRoot.querySelector("slot#options").addEventListener("slotchange", () => {
-      console.log("slotchange happend");
-      if (this.options.length > 0) {
-        this.menuList = this._getMenuListFromOptions();
-      }
+    // this.shadowRoot.querySelector("slot#options").addEventListener("slotchange", () => {
+    //   console.log("slotchange happend");
+    //   if (this.options.length > 0) {
+    //     this.menuList = this._getMenuListFromOptions();
+    //   }
 
-      if (this.value) {
-        const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
-        this.displayValue = initialSelectedItem[0].label;
+    //   if (this.value) {
+    //     const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
+    //     this.displayValue = initialSelectedItem[0].label;
 
-        this._setActiveToOption();
-      }
-    });
+    //     this._setActiveToOption();
+    //   }
+    // });
+    this.menuList = this.options.length > 0 ? this._getMenuListFromOptions() : this.menuList;
+    if (this.value) {
+      const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
+      this.displayValue = initialSelectedItem[0].label;
+
+      this._setActiveToOption();
+    }
 
     if (this.value && this.menuList.length > 0) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
