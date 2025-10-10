@@ -65,7 +65,7 @@ export class SgdsThumbnailCard extends CardElement {
       const footerHref = this.footerSlotItems?.href;
       if (footerHref) {
         this.card.setAttribute("href", footerHref);
-      } 
+      }
     });
     this.shadowRoot.querySelector("slot[name='link']").addEventListener("slotchange", () => {
       console.log("link slot onslotchange in firstUpdated");
