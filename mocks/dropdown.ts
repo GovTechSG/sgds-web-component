@@ -9,8 +9,8 @@ export class MockDropdown extends DropdownListElement {
   @queryAsync("button")
   button: Promise<HTMLButtonElement>;
 
-  async firstUpdated() {
-    super.firstUpdated();
+  async firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
     if (this.menuIsOpen) {
       await this.button;
       this.showMenu();
