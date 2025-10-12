@@ -3,7 +3,7 @@
 
 <template>
   <div>
-    <Masthead></Masthead>
+    <!-- <Masthead></Masthead>
     <Mainnav></Mainnav>
     <Subnav></Subnav>
     <Drawer></Drawer>
@@ -11,6 +11,7 @@
     <Accordion></Accordion>
     <Icon></Icon>
     <Dropdown></Dropdown>
-    <Card></Card>
+    <Card></Card> -->
+    <Select></Select>
   </div>
 </template>

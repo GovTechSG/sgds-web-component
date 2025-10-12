@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
          <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.0/themes/day.css' rel='stylesheet preload' type='text/css' />
-         <Script
+         {/* <Script
           type="module"
           id="scoped-element-polyfill"
           src='https://cdn.jsdelivr.net/npm/@webcomponents/scoped-custom-element-registry@0.0.10'
@@ -28,8 +28,8 @@ export default function RootLayout({
          <Script
           type="module"
           id="scoped-element-polyfill"
-          src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.1"
-        ></Script>
+          src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.2-rc.7"
+        ></Script> */}
       </head>
       <body className={inter.className}>
       {/* <PolyfillContext> */}
