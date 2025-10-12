@@ -48,8 +48,8 @@ export class SgdsSelect extends SelectElement {
   protected get lighDomOptions() {
     return Array.from(this.querySelectorAll("sgds-select-option"));
   }
-  async firstUpdated() {
-    super.firstUpdated();
+  async firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
     console.log("firstUpdated in select")
     if (this.menuList.length > 0 && this.value) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
@@ -72,7 +72,7 @@ export class SgdsSelect extends SelectElement {
     }
   }
   /**@internal Force handleSlotChange to be called if SSR is true */
- @runOnFirstUpdatedWhenSSR()
+//  @runOnFirstUpdatedWhenSSR()
   _handleSlotChange() {
     console.log("_handleSlotChange select")
     this.menuList = this._getMenuListFromOptions();

@@ -70,8 +70,8 @@ export class SgdsComboBox extends SelectElement {
       this._renderedMenu = this.menuList;
     });
   }
-  async firstUpdated() {
-    super.firstUpdated();
+  async firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
     this.menuList = this.options.length > 0 ? this._getMenuListFromOptions() : this.menuList;
     this._renderedMenu = this.menuList;
     if (this.value) {
