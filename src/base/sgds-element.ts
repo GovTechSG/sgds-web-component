@@ -68,11 +68,11 @@ export default class SgdsElement extends LitElement {
     super.firstUpdated(changedProperties);
     // This is a fix to workaround SSR not being able to catch slotchange events.
     // https://github.com/lit/lit/discussions/4697
-    // if (this.ssr) {
-    //   this.shadowRoot?.querySelectorAll("slot").forEach(slotElement => {
-    //     console.log(slotElement)
-    //     slotElement.dispatchEvent(new Event("slotchange", { bubbles: true, composed: false, cancelable: false }));
-    //   });
-    // }
+    if (this.ssr) {
+      this.shadowRoot?.querySelectorAll("slot").forEach(slotElement => {
+        console.log(slotElement);
+        slotElement.dispatchEvent(new Event("slotchange", { bubbles: true, composed: false, cancelable: false }));
+      });
+    }
   }
 }

@@ -196,8 +196,8 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     }
   }
 
-  async firstUpdated() {
-    super.firstUpdated();
+  async firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
     if (this.menuIsOpen) {
       const input = await this.datepickerInputAsync;
       this.showMenu();

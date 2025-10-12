@@ -9,7 +9,7 @@ import SgdsIcon from "../Icon/sgds-icon";
 import selectStyle from "./select.css";
 import formTextControlStyles from "../../styles/form-text-control.css";
 import SgdsSelectOption from "./sgds-select-option";
-import {runOnFirstUpdatedWhenSSR} from "../../utils/ssrSlotChangePatch"
+import { runOnFirstUpdatedWhenSSR } from "../../utils/ssrSlotChangePatch";
 /**
  * @summary Select is used to make one selection from a list through keyboard or mouse actions
  *
@@ -49,9 +49,9 @@ export class SgdsSelect extends SelectElement {
   protected get lighDomOptions() {
     return Array.from(this.querySelectorAll("sgds-select-option"));
   }
-  async firstUpdated() {
-    super.firstUpdated();
-    console.log("firstUpdated in select")
+  async firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+    console.log("firstUpdated in select");
     if (this.menuList.length > 0 && this.value) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
       this.displayValue = initialSelectedItem[0].label;
@@ -73,9 +73,9 @@ export class SgdsSelect extends SelectElement {
     }
   }
   /**@internal Force handleSlotChange to be called if SSR is true */
- @runOnFirstUpdatedWhenSSR()
+  //  @runOnFirstUpdatedWhenSSR()
   _handleSlotChange() {
-    console.log("_handleSlotChange select")
+    console.log("_handleSlotChange select");
     this.menuList = this._getMenuListFromOptions();
 
     if (this.value) {

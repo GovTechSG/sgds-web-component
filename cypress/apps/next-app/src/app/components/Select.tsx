@@ -9,16 +9,6 @@ export const Select = () => {
     console.log(typeof window === 'undefined', "isServer")
     return (
       <div>
-      {/* <SgdsSelect
-        label="Fruits" 
-        hintText="single select" 
-        name="combobox" 
-        placeholder="ComboBox" 
-        value="1"
-        >
-            <SgdsSelectOption value="1">One</SgdsSelectOption>
-      </SgdsSelect> */}
-     
       <sgds-select
         label="Fruits" 
         hintText="single select" 

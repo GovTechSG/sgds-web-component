@@ -35,8 +35,8 @@ export class DropdownListElement extends DropdownElement {
     this.removeEventListener("sgds-hide", this._resetMenu);
   }
 
-  firstUpdated() {
-    super.firstUpdated();
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
     this.addEventListener("keydown", this._handleKeyboardMenuItemsEvent);
   }
 

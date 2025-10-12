@@ -69,8 +69,8 @@ export class SgdsDropdown extends DropdownListElement {
     this.removeEventListener("sgds-hide", this._handleCloseMenu);
   }
 
-  async firstUpdated() {
-    super.firstUpdated();
+  async firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
     if (this.menuIsOpen) {
       await this.showMenu();
     }

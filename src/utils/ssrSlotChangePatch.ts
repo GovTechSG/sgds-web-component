@@ -1,7 +1,7 @@
 // @runOnFirstUpdatedWhenSSR decorator
 //
 // Runs a decorated method once right before `firstUpdated()`
-// if the reactive property `ssr` is true. 
+// if the reactive property `ssr` is true.
 // Lit components not running slotchange event if element is SSR-ed
 // see https://github.com/lit/lit/discussions/4697
 // To be removed once this issue is resolved
@@ -42,7 +42,7 @@ export function runOnFirstUpdatedWhenSSR() {
       }
       // Call original firstUpdated if defined
       if (originalFirstUpdated) {
-        console.log("howmany times called")
+        console.log("howmany times called");
         originalFirstUpdated.call(this, changedProps);
       }
     };
