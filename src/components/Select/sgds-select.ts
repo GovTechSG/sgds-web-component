@@ -37,32 +37,9 @@ export class SgdsSelect extends SelectElement {
   @queryAssignedElements({ flatten: true, selector: "sgds-select-option" })
   protected options: SgdsSelectOption[];
 
-  protected get menuListFromlightDomOptions() {
-    return this.lighDomOptions.map((o: HTMLElement) => ({
-      disabled: o.hasAttribute("disabled"),
-      value: o.getAttribute("value"),
-      label: o.textContent
-    }));
-  }
-  protected get lighDomOptions() {
-    return Array.from(this.querySelectorAll("sgds-select-option"));
-  }
   async firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
-    if (this.menuList.length > 0 && this.value) {
-      const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
-      this.displayValue = initialSelectedItem[0].label;
-
-      this._setActiveToOption();
-    }
-
-    if (this.value && this.menuList.length > 0) {
-      const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
-      this.displayValue = initialSelectedItem[0].label;
-
-      this._setActiveToOption();
-    }
-
+    this._updateDisplayValue();
     this.input = await this._input;
     this._mixinValidate(this.input);
     if (this.menuIsOpen && !this.readonly) {
@@ -70,17 +47,20 @@ export class SgdsSelect extends SelectElement {
     }
   }
 
-  _handleSlotChange() {
-    this.menuList = this._getMenuListFromOptions();
+  private _handleSlotChange(e: Event) {
+    const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
+    this.menuList = this._getMenuListFromOptions(assignedElements);
 
-    if (this.value) {
+    this._updateDisplayValue();
+  }
+  private _updateDisplayValue() {
+    if (this.value && this.menuList.length > 0) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
       this.displayValue = initialSelectedItem[0].label;
 
       this._setActiveToOption();
     }
   }
-
   private _setActiveToOption() {
     const activeIndex = this.menuList.findIndex(item => item.value.toString() === this.value);
     this.options.forEach((option, index) => {
