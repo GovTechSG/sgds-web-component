@@ -1,3 +1,4 @@
+"use client"
 import SgdsDropdownItem from "@govtechsg/sgds-web-component/react/dropdown-item/index.js";
 import dynamic from "next/dynamic";
 const SgdsDropdown = dynamic(() => import("@govtechsg/sgds-web-component/react/dropdown/index.js"), {

@@ -16,7 +16,7 @@ export class OptionElement extends SgdsElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The value of the option item */
-  @property({ type: String }) value: string;
+  @property({ type: String, reflect: true }) value: string;
 
   connectedCallback(): void {
     super.connectedCallback();

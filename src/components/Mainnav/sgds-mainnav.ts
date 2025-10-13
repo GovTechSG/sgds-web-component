@@ -1,5 +1,5 @@
 import { provide } from "@lit/context";
-import { html } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -121,7 +121,9 @@ export class SgdsMainnav extends SgdsElement {
     window.removeEventListener("resize", this._handleResize.bind(this));
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
+
     if (this.breakpointReached && this.body) {
       this.expanded = false;
       this.body.hidden = true;

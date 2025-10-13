@@ -1,4 +1,4 @@
-import { html, nothing } from "lit";
+import { html, nothing, PropertyValueMap } from "lit";
 import { property } from "lit/decorators.js";
 import { OptionElement } from "../../base/option-element";
 import SgdsCheckbox from "../Checkbox/sgds-checkbox";
@@ -31,7 +31,9 @@ export class SgdsComboBoxOption extends OptionElement {
     });
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
+
     const parent = this.closest("sgds-combo-box");
     if (parent?.multiSelect) {
       this.checkbox = true;

@@ -1,15 +1,14 @@
-import { html } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { ref } from "lit/directives/ref.js";
 import { SelectElement } from "../../base/select-element";
+import formTextControlStyles from "../../styles/form-text-control.css";
 import { watch } from "../../utils/watch";
 import SgdsIcon from "../Icon/sgds-icon";
 import selectStyle from "./select.css";
-import formTextControlStyles from "../../styles/form-text-control.css";
 import SgdsSelectOption from "./sgds-select-option";
-
 /**
  * @summary Select is used to make one selection from a list through keyboard or mouse actions
  *
@@ -38,10 +37,26 @@ export class SgdsSelect extends SelectElement {
   @queryAssignedElements({ flatten: true, selector: "sgds-select-option" })
   protected options: SgdsSelectOption[];
 
-  async firstUpdated() {
-    super.firstUpdated();
-    this.menuList = this.options.length > 0 ? this._getMenuListFromOptions() : this.menuList;
-    if (this.value) {
+  protected get menuListFromlightDomOptions() {
+    return this.lighDomOptions.map((o: HTMLElement) => ({
+      disabled: o.hasAttribute("disabled"),
+      value: o.getAttribute("value"),
+      label: o.textContent
+    }));
+  }
+  protected get lighDomOptions() {
+    return Array.from(this.querySelectorAll("sgds-select-option"));
+  }
+  async firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
+    if (this.menuList.length > 0 && this.value) {
+      const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
+      this.displayValue = initialSelectedItem[0].label;
+
+      this._setActiveToOption();
+    }
+
+    if (this.value && this.menuList.length > 0) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
       this.displayValue = initialSelectedItem[0].label;
 
@@ -54,6 +69,18 @@ export class SgdsSelect extends SelectElement {
       this.showMenu();
     }
   }
+
+  _handleSlotChange() {
+    this.menuList = this._getMenuListFromOptions();
+
+    if (this.value) {
+      const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
+      this.displayValue = initialSelectedItem[0].label;
+
+      this._setActiveToOption();
+    }
+  }
+
   private _setActiveToOption() {
     const activeIndex = this.menuList.findIndex(item => item.value.toString() === this.value);
     this.options.forEach((option, index) => {
@@ -122,7 +149,6 @@ export class SgdsSelect extends SelectElement {
   protected _renderEmptyMenu() {
     return html` <div class="empty-menu">No options</div> `;
   }
-
   protected _renderMenu() {
     const menu = this.menuList.map(item => {
       const isActive = item.value === this.value;
@@ -196,7 +222,7 @@ export class SgdsSelect extends SelectElement {
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
           ${this._renderMenu()}
         </ul>
-        <slot @slotchange=${this._handleDefaultSlotChange}></slot>
+        <slot @slotchange=${this._handleSlotChange} id="options"></slot>
       </div>
     `;
   }

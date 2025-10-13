@@ -3,12 +3,17 @@
 
 <template>
   <div>
-    <!-- <Masthead></Masthead>
+   <Masthead></Masthead>
+    <Mainnav></Mainnav>
     <Subnav></Subnav>
     <Drawer></Drawer>
     <Button></Button>
     <Accordion></Accordion>
-    <Icon></Icon> -->
+    <Icon></Icon>
+    <Dropdown></Dropdown>
+    <ThumbnailCard></ThumbnailCard>  
+    <Select></Select>
+    <Combobox></Combobox>
     <Card></Card>
     <Table></Table>
     <DescriptionList></DescriptionList>

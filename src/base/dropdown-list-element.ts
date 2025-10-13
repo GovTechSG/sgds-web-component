@@ -1,6 +1,7 @@
 import { query, state } from "lit/decorators.js";
 import { DropdownElement } from "./dropdown-element";
 import { SgdsDropdownItem } from "../components";
+import { PropertyValueMap } from "lit";
 
 const TAB = "Tab";
 const ARROW_DOWN = "ArrowDown";
@@ -35,8 +36,8 @@ export class DropdownListElement extends DropdownElement {
     this.removeEventListener("sgds-hide", this._resetMenu);
   }
 
-  firstUpdated() {
-    super.firstUpdated();
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
     this.addEventListener("keydown", this._handleKeyboardMenuItemsEvent);
   }
 

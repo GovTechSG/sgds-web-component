@@ -1,4 +1,4 @@
-import { html, nothing } from "lit";
+import { html, nothing, PropertyValueMap } from "lit";
 import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { live } from "lit/directives/live.js";
 import FormControlElement from "../../base/form-control-element";
@@ -68,7 +68,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
       }
     });
   }
-  firstUpdated(changedProperties) {
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
     if (this.value) {
       this._updateInputValue();

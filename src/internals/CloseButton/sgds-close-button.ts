@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { property } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
@@ -29,7 +29,9 @@ export class SgdsCloseButton extends SgdsElement {
     return;
   };
 
-  firstUpdated() {
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
+
     /** Cannot register sgds-icon as dependency due to some circular dependencies, so we check and warn instead */
     warnUnregisteredElements("sgds-icon");
   }

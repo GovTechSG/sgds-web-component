@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { customElement, queryAsync } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import genId from "../src/utils/generateId";
@@ -9,8 +9,8 @@ export class MockDropdown extends DropdownListElement {
   @queryAsync("button")
   button: Promise<HTMLButtonElement>;
 
-  async firstUpdated() {
-    super.firstUpdated();
+  async firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
     if (this.menuIsOpen) {
       await this.button;
       this.showMenu();

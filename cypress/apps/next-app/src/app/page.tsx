@@ -25,6 +25,7 @@ import { Pagination } from "./components/Pagination";
 import { ProgressBar } from "./components/ProgressBar";
 import { QuantityToggle } from "./components/QuantityToggle";
 import { Radio } from "./components/Radio";
+import { Select } from "./components/Select";
 import { Sidenav } from "./components/Sidenav";
 import { Skeleton } from "./components/Skeleton";
 import { Spinner } from "./components/Spinner";
@@ -40,15 +41,16 @@ import { Tooltip } from "./components/Tooltip";
 export default function Home() {
   return (
     <main>
+            {/* <Card /> */}
+    <Select />
       <div>hello world</div>
-      <Masthead />
+      {/* <Masthead />
       <Mainnav />
-      <Accordion />
-      <Alert />
+      <Accordion /> */}
+      {/* <Alert />
       <Badge />
       <Breadcrumb />
       <Button />
-      <Card />
       <Checkbox />
       <Combobox />
       <Datepicker />
@@ -78,7 +80,7 @@ export default function Home() {
       <Textarea />
       <Toast />
       <Tooltip />
-      <Footer />
+      <Footer /> */}
     </main>
   );
 }

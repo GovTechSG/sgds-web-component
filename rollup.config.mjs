@@ -19,7 +19,7 @@ const external = [
   /lit\/.*/,
   "imask",
   "date-fns",
-  "@floating-ui"
+  "@floating-ui/dom"
 ];
 
 const copyPlugin = copy({

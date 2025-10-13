@@ -1,4 +1,4 @@
-import { LitElement } from "lit";
+import { LitElement, PropertyValueMap } from "lit";
 import { queryAsync } from "lit/decorators.js";
 import { SgdsInput } from "../components";
 import { InputValidationController } from "./inputValidationController";
@@ -27,7 +27,7 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
       /** Idempotency guarantee */
       this.inputValidationController ??= new InputValidationController(this);
     }
-    async firstUpdated(changedProperties) {
+    async firstUpdated(changedProperties: PropertyValueMap<this>) {
       super.firstUpdated(changedProperties);
 
       /* Either input or sgds-input. For example, quantity-toggle uses sgds-input */
