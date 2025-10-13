@@ -1,4 +1,4 @@
-import { html, nothing } from "lit";
+import { html, nothing, PropertyValueMap } from "lit";
 import { property, query, queryAssignedNodes } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
@@ -93,7 +93,7 @@ export class SgdsToast extends SgdsElement {
     }
   }
 
-  protected firstUpdated(changedProperties): void {
+  protected firstUpdated(changedProperties: PropertyValueMap<this>): void {
     super.firstUpdated(changedProperties);
 
     if (!this.show) {

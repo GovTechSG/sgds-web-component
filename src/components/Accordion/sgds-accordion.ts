@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { property, queryAssignedElements } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsAccordionItem from "./sgds-accordion-item";
@@ -37,7 +37,7 @@ export class SgdsAccordion extends SgdsElement {
     ) as SgdsAccordionItem[];
   }
 
-  firstUpdated(changedProperties) {
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
     const items = [...this.items] as SgdsAccordionItem[];
     items.forEach((item, index) => {

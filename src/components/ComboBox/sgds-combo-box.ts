@@ -1,4 +1,4 @@
-import { html, nothing } from "lit";
+import { html, nothing, PropertyValueMap } from "lit";
 import { property, queryAssignedElements, queryAsync, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -70,7 +70,7 @@ export class SgdsComboBox extends SelectElement {
       this._renderedMenu = this.menuList;
     });
   }
-  async firstUpdated(changedProperties) {
+  async firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
     this._renderedMenu = this.menuList;
     if (this.value && this.menuList.length > 0) {

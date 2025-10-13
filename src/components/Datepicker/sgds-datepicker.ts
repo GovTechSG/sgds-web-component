@@ -1,5 +1,5 @@
 import { format, parse } from "date-fns";
-import { html } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { property, query, queryAsync, state } from "lit/decorators.js";
 import { live } from "lit/directives/live.js";
 import { ref } from "lit/directives/ref.js";
@@ -196,7 +196,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     }
   }
 
-  async firstUpdated(changedProperties) {
+  async firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
     if (this.menuIsOpen) {
       const input = await this.datepickerInputAsync;

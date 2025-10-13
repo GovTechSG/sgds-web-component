@@ -1,4 +1,4 @@
-import { nothing } from "lit";
+import { nothing, PropertyValueMap } from "lit";
 import { property, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html, literal } from "lit/static-html.js";
@@ -51,7 +51,7 @@ export class SgdsCard extends CardElement {
 
   private readonly hasSlotController = new HasSlotController(this, "image", "icon", "menu");
 
-  protected firstUpdated(changedProperties) {
+  protected firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
     if (this.stretchedLink) {
       const footerHref = this.footerSlotItems?.href;

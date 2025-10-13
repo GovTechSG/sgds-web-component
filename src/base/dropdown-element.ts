@@ -3,6 +3,7 @@ import { Ref, createRef } from "lit/directives/ref.js";
 import { computePosition, flip, shift, offset, Placement, Middleware, autoUpdate, Strategy } from "@floating-ui/dom";
 import SgdsElement from "./sgds-element";
 import generateId from "../utils/generateId";
+import { PropertyValueMap } from "lit";
 
 const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
@@ -80,7 +81,7 @@ export class DropdownElement extends SgdsElement {
     }
   }
 
-  firstUpdated(changedProperties) {
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
     // Optionally open menu on first load
     if (this.menuIsOpen) {

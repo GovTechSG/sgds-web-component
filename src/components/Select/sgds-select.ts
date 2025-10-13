@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -47,7 +47,7 @@ export class SgdsSelect extends SelectElement {
   protected get lighDomOptions() {
     return Array.from(this.querySelectorAll("sgds-select-option"));
   }
-  async firstUpdated(changedProperties) {
+  async firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
     if (this.menuList.length > 0 && this.value) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);

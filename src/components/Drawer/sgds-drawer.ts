@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -69,7 +69,7 @@ export class SgdsDrawer extends SgdsElement {
    */
   @property({ type: Boolean, reflect: true }) contained = false;
 
-  firstUpdated(changedProperties) {
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
 
     if (this.open) {

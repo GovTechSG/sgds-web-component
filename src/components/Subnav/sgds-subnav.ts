@@ -1,5 +1,5 @@
 import SgdsElement from "../../base/sgds-element";
-import { html } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { watch } from "../../utils/watch";
@@ -73,7 +73,7 @@ export class SgdsSubnav extends SgdsElement {
     window.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.navGroup));
   }
 
-  firstUpdated(changedProperties) {
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
 
     this._handleResize();

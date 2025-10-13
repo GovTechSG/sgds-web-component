@@ -1,4 +1,4 @@
-import { nothing } from "lit";
+import { nothing, PropertyValueMap } from "lit";
 import { html, literal } from "lit/static-html.js";
 import { property, queryAssignedElements, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -54,7 +54,7 @@ export class SgdsImageCard extends CardElement {
     return (element.querySelector("a") || element) as HTMLAnchorElement;
   }
 
-  protected firstUpdated(changedProperties) {
+  protected firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
 
     if (this._imageNode.length === 0) {
