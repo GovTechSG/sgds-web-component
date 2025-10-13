@@ -121,7 +121,9 @@ export class SgdsMainnav extends SgdsElement {
     window.removeEventListener("resize", this._handleResize.bind(this));
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+
     if (this.breakpointReached && this.body) {
       this.expanded = false;
       this.body.hidden = true;

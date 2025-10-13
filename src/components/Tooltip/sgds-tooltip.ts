@@ -59,7 +59,9 @@ export class SgdsTooltip extends SgdsElement {
     }
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+
     this._tooltipTargetElements.forEach(el => {
       el.setAttribute("data-sgds-tooltip", this.content);
 

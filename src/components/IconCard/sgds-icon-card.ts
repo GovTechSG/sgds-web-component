@@ -48,7 +48,9 @@ export class SgdsIconCard extends CardElement {
     return (element.querySelector("a") || element) as HTMLAnchorElement;
   }
 
-  protected firstUpdated() {
+  protected firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+
     if (this._iconNode.length === 0) {
       if ((this.orientation === "vertical" && this._upperNode.length === 0) || this.orientation === "horizontal") {
         const media = this.shadowRoot.querySelector(".card-media") as HTMLDivElement;
@@ -100,7 +102,7 @@ export class SgdsIconCard extends CardElement {
           <slot name="description"></slot>
           <slot name="lower"></slot>
           <slot name="footer">
-            <slot name="link" @slotchange=${this.handleLinkSlotChange}></slot>
+            <slot name="link" @slotchange=${this.warnLinkSlotMisused}></slot>
           </slot>
         </div>
       </${tag}>

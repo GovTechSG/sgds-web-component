@@ -4,12 +4,11 @@ import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { ref } from "lit/directives/ref.js";
 import { SelectElement } from "../../base/select-element";
+import formTextControlStyles from "../../styles/form-text-control.css";
 import { watch } from "../../utils/watch";
 import SgdsIcon from "../Icon/sgds-icon";
 import selectStyle from "./select.css";
-import formTextControlStyles from "../../styles/form-text-control.css";
 import SgdsSelectOption from "./sgds-select-option";
-import {runOnFirstUpdatedWhenSSR} from "../../utils/ssrSlotChangePatch"
 /**
  * @summary Select is used to make one selection from a list through keyboard or mouse actions
  *
@@ -50,7 +49,6 @@ export class SgdsSelect extends SelectElement {
   }
   async firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
-    console.log("firstUpdated in select")
     if (this.menuList.length > 0 && this.value) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
       this.displayValue = initialSelectedItem[0].label;
@@ -71,10 +69,8 @@ export class SgdsSelect extends SelectElement {
       this.showMenu();
     }
   }
-  /**@internal Force handleSlotChange to be called if SSR is true */
-//  @runOnFirstUpdatedWhenSSR()
+
   _handleSlotChange() {
-    console.log("_handleSlotChange select")
     this.menuList = this._getMenuListFromOptions();
 
     if (this.value) {

@@ -99,7 +99,9 @@ export class SgdsSidenavItem extends SgdsElement {
     super.connectedCallback();
     this.classList.add(this._firstLevelId);
   }
-  firstUpdated() {
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+
     if (!this.isLink) {
       this.body.hidden = !this.active;
       this.body.style.height = this.active ? "auto" : "0";

@@ -31,7 +31,9 @@ export class SgdsComboBoxOption extends OptionElement {
     });
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+
     const parent = this.closest("sgds-combo-box");
     if (parent?.multiSelect) {
       this.checkbox = true;

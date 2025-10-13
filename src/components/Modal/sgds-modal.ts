@@ -66,7 +66,9 @@ export class SgdsModal extends SgdsElement {
     this._resizeHandler = this._debounce(this._onWindowResize.bind(this), 200);
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+
     this._onWindowResize();
     this.dialog.hidden = !this.open;
 

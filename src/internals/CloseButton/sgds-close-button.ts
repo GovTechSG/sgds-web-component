@@ -29,7 +29,9 @@ export class SgdsCloseButton extends SgdsElement {
     return;
   };
 
-  firstUpdated() {
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+
     /** Cannot register sgds-icon as dependency due to some circular dependencies, so we check and warn instead */
     warnUnregisteredElements("sgds-icon");
   }

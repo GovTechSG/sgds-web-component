@@ -51,7 +51,9 @@ export class SgdsFooter extends SgdsElement {
   @property({ type: String })
   termsOfUseHref = "#";
 
-  firstUpdated() {
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+
     const socialMediaSlot = this.shadowRoot.querySelector("slot[name='social-media']") as HTMLSlotElement;
     const footerTitleSlot = this.shadowRoot.querySelector("slot[name='title']") as HTMLSlotElement;
     const footerDescriptionSlot = this.shadowRoot.querySelector("slot[name='description']") as HTMLSlotElement;

@@ -81,7 +81,7 @@ export class DropdownElement extends SgdsElement {
   }
 
   firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties)
+    super.firstUpdated(changedProperties);
     // Optionally open menu on first load
     if (this.menuIsOpen) {
       this.updateFloatingPosition();

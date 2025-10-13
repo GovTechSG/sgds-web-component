@@ -73,7 +73,9 @@ export class SgdsSubnav extends SgdsElement {
     window.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.navGroup));
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+
     this._handleResize();
   }
 

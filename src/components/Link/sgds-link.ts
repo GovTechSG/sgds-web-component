@@ -52,7 +52,9 @@ export class SgdsLink extends SgdsElement {
     }
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+
     const anchor = this.querySelector("a");
     if (anchor) {
       this._processAnchor(anchor);

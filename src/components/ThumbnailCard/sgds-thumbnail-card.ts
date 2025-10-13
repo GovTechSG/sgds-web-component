@@ -23,34 +23,20 @@ export class SgdsThumbnailCard extends CardElement {
   static styles = [...CardElement.styles, thumbnailCardStyle];
 
   /** @internal */
-  @queryAssignedNodes({ slot: "thumbnail", flatten: true })
-  _thumbnailNode!: Array<Node>;
-  /** @internal */
   @queryAssignedNodes({ slot: "upper", flatten: true })
   _upperNode!: Array<Node>;
-  @queryAssignedElements({ slot: "footer" })
-  private footerNode!: HTMLElement[];
-  @queryAssignedElements({ slot: "link" })
-  private linkNode!: HTMLAnchorElement[] | SgdsLink[];
 
   /** Removes the card's internal padding when set to true.  */
   @property({ type: Boolean, reflect: true }) noPadding = false;
 
-  private get linkSlotItems(): HTMLAnchorElement | null {
-    if (!this.linkNode || this.linkNode.length === 0) return null;
-    const element = this.linkNode[0] as HTMLElement;
+  private _getAnchorFromSlot(elements: Element[]): HTMLAnchorElement | null {
+    if (!elements || elements.length === 0) return null;
+    const element = elements[0] as HTMLElement;
     return (element.querySelector("a") || element) as HTMLAnchorElement;
   }
-
-  private get footerSlotItems(): HTMLAnchorElement | null {
-    if (!this.footerNode || this.footerNode.length === 0) return null;
-    const element = this.footerNode[0] as HTMLElement;
-    return (element.querySelector("a") || element) as HTMLAnchorElement;
-  }
-
-  protected async firstUpdated(__changedProperties) {
-    super.firstUpdated(__changedProperties);
-    if (this._thumbnailNode.length === 0) {
+  private _handleThumbnailSlotChange(e: Event) {
+    const thumbnailNode = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
+    if (thumbnailNode.length === 0) {
       if ((this.orientation === "vertical" && this._upperNode.length === 0) || this.orientation === "horizontal") {
         const media = this.shadowRoot.querySelector(".card-media") as HTMLDivElement;
         media.style.display = "none";
@@ -60,9 +46,9 @@ export class SgdsThumbnailCard extends CardElement {
       }
     }
   }
-
-  private _handleFooterSlotChange() {
-    const footerHref = this.footerSlotItems?.href;
+  private _handleFooterSlotChange(e: Event) {
+    const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
+    const footerHref = this._getAnchorFromSlot(assignedElements)?.href;
 
     if (this.stretchedLink && footerHref) {
       this.card.setAttribute("href", footerHref);
@@ -70,8 +56,9 @@ export class SgdsThumbnailCard extends CardElement {
   }
 
   private _handleLinkSlotChange(e: Event) {
-    this.handleLinkSlotChange(e);
-    const linkHref = this.linkSlotItems?.href;
+    this.warnLinkSlotMisused(e);
+    const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
+    const linkHref = this._getAnchorFromSlot(assignedElements)?.href;
     if (this.stretchedLink && linkHref) this.card.setAttribute("href", linkHref);
   }
 
@@ -88,7 +75,7 @@ export class SgdsThumbnailCard extends CardElement {
       > 
         ${this.tinted && !this.noPadding ? html`<div class="card-tinted-bg"></div>` : nothing}
         <div class="card-media">
-          <slot name="thumbnail"></slot>
+          <slot name="thumbnail" @slotchange=${this._handleThumbnailSlotChange}></slot>
 					${this.orientation === "vertical" ? html`<slot name="upper"></slot>` : nothing}
         </div>
         <div class="card-body">

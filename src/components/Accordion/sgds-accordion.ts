@@ -37,7 +37,8 @@ export class SgdsAccordion extends SgdsElement {
     ) as SgdsAccordionItem[];
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
     const items = [...this.items] as SgdsAccordionItem[];
     items.forEach((item, index) => {
       if (items.length > 1) {

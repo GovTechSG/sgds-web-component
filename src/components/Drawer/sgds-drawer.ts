@@ -69,7 +69,9 @@ export class SgdsDrawer extends SgdsElement {
    */
   @property({ type: Boolean, reflect: true }) contained = false;
 
-  firstUpdated() {
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+
     if (this.open) {
       this.addOpenListeners();
 

@@ -12,6 +12,8 @@
     <Icon></Icon>
     <Dropdown></Dropdown>
     <Card></Card> -->
+    <ThumbnailCard></ThumbnailCard>  
     <Select></Select>
+    <Combobox></Combobox>
   </div>
 </template>

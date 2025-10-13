@@ -93,7 +93,9 @@ export class SgdsToast extends SgdsElement {
     }
   }
 
-  protected firstUpdated(): void {
+  protected firstUpdated(changedProperties): void {
+    super.firstUpdated(changedProperties);
+
     if (!this.show) {
       this.toast.classList.add("d-none");
     }

@@ -41,7 +41,7 @@ export class CardElement extends SgdsElement {
     return;
   }
 
-  handleLinkSlotChange(e: Event) {
+  warnLinkSlotMisused(e: Event) {
     const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as
       | Array<HTMLLinkElement>
       | Array<HTMLAnchorElement>

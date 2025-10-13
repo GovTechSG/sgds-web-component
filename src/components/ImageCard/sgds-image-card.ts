@@ -54,7 +54,9 @@ export class SgdsImageCard extends CardElement {
     return (element.querySelector("a") || element) as HTMLAnchorElement;
   }
 
-  protected firstUpdated() {
+  protected firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+
     if (this._imageNode.length === 0) {
       const image = this.shadowRoot.querySelector(".card-image") as HTMLDivElement;
       const body = this.shadowRoot.querySelector(".card-body") as HTMLDivElement;
@@ -111,7 +113,7 @@ export class SgdsImageCard extends CardElement {
           <slot name="description"></slot>
           <slot name="lower"></slot>
           <slot name="footer">
-            <slot name="link" @slotchange=${this.handleLinkSlotChange}></slot>
+            <slot name="link" @slotchange=${this.warnLinkSlotMisused}></slot>
           </slot>
         </div>
       </${tag}>

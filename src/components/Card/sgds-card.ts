@@ -51,7 +51,8 @@ export class SgdsCard extends CardElement {
 
   private readonly hasSlotController = new HasSlotController(this, "image", "icon", "menu");
 
-  protected firstUpdated() {
+  protected firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
     if (this.stretchedLink) {
       const footerHref = this.footerSlotItems?.href;
       const linkHref = this.linkSlotItems?.href;
@@ -116,7 +117,7 @@ export class SgdsCard extends CardElement {
           <slot name="description"></slot>
           <slot name="lower"></slot>
           <slot name="footer">
-            <slot name="link" @slotchange=${this.handleLinkSlotChange}></slot>
+            <slot name="link" @slotchange=${this.warnLinkSlotMisused}></slot>
           </slot>
         </div>
       </${tag}>
