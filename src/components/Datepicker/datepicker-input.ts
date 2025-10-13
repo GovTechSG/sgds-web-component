@@ -1,6 +1,6 @@
 import { isAfter, isBefore, isValid, parse } from "date-fns";
 import IMask, { InputMask } from "imask";
-import { html } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { property, queryAsync } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { DATE_PATTERNS, setTimeToNoon } from "../../utils/time";
@@ -38,7 +38,7 @@ export class DatepickerInput extends SgdsInput {
     await this._validateInput();
   }
 
-  async firstUpdated(changedProperties) {
+  async firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
     this._applyInputMask(this.dateFormat);
   }

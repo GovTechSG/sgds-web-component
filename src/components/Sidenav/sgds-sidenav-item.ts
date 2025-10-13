@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -99,7 +99,9 @@ export class SgdsSidenavItem extends SgdsElement {
     super.connectedCallback();
     this.classList.add(this._firstLevelId);
   }
-  firstUpdated() {
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
+
     if (!this.isLink) {
       this.body.hidden = !this.active;
       this.body.style.height = this.active ? "auto" : "0";

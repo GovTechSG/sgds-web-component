@@ -1,4 +1,4 @@
-import { html, nothing } from "lit";
+import { html, nothing, PropertyValueMap } from "lit";
 import { property, queryAssignedElements, queryAsync, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -70,17 +70,16 @@ export class SgdsComboBox extends SelectElement {
       this._renderedMenu = this.menuList;
     });
   }
-  async firstUpdated() {
-    super.firstUpdated();
-    this.menuList = this.options.length > 0 ? this._getMenuListFromOptions() : this.menuList;
+  async firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
     this._renderedMenu = this.menuList;
-    if (this.value) {
+    if (this.value && this.menuList.length > 0) {
       const valueArray = this.value.split(";");
       const initialSelectedItem = this.menuList.filter(({ value }) => valueArray.includes(value));
       this.selectedItems = [...initialSelectedItem, ...this.selectedItems];
 
       if (!this.multiSelect) {
-        this.displayValue = initialSelectedItem[0].label;
+        this.displayValue = initialSelectedItem[0]?.label;
       }
     }
     this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._input);
@@ -89,6 +88,10 @@ export class SgdsComboBox extends SelectElement {
     if (this.menuIsOpen && !this.readonly) {
       this.showMenu();
     }
+  }
+  protected _handleDefaultSlotChange() {
+    /** this will trigger _updateValueAndDisplayValue */
+    this.menuList = this._getMenuListFromOptions();
   }
 
   @watch("value", { waitUntilFirstUpdate: true })
@@ -106,7 +109,6 @@ export class SgdsComboBox extends SelectElement {
     if (this.multiSelect) {
       this._mixinValidate(this.input);
     } else {
-      // this._mixinValidate(sgdsInput.input);
       this._mixinValidate(sgdsInput);
     }
     if (!this._isTouched && this.value === "") return;

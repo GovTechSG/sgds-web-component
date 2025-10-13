@@ -178,9 +178,6 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
       disabled: el.disabled ?? undefined
     }));
   }
-  protected _handleDefaultSlotChange() {
-    this.menuList = this._getMenuListFromOptions();
-  }
 
   protected declare options: OptionElement[];
 }

@@ -1,2 +1,6 @@
 @import url("@govtechsg/sgds-web-component/themes/day.css");
 @import url("@govtechsg/sgds-web-component/css/reboot.css");
+
+sgds-thumbnail-card:not(:defined) {
+    visibility: hidden;
+}

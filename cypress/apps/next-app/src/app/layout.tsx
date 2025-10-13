@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
-
+const CopyPlugin = require("copy-webpack-plugin")
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,9 +19,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.3.2/themes/day.css' rel='stylesheet' type='text/css' />
-        <Script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.4.0-rc.5"></Script>
-
+         <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.0/themes/day.css' rel='stylesheet preload' type='text/css' />
+         {/* <Script
+          type="module"
+          id="scoped-element-polyfill"
+          src='https://cdn.jsdelivr.net/npm/@webcomponents/scoped-custom-element-registry@0.0.10'
+        ></Script>
+         <Script
+          type="module"
+          id="scoped-element-polyfill"
+          src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.2-rc.7"
+        ></Script> */}
       </head>
       <body className={inter.className}>
       {/* <PolyfillContext> */}

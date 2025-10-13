@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import linkStyles from "./link.css";
@@ -52,7 +52,9 @@ export class SgdsLink extends SgdsElement {
     }
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
+
     const anchor = this.querySelector("a");
     if (anchor) {
       this._processAnchor(anchor);

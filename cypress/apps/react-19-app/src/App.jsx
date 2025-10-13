@@ -23,6 +23,7 @@ import { Pagination } from "./components/Pagination";
 import { ProgressBar } from "./components/ProgressBar";
 import { QuantityToggle } from "./components/QuantityToggle";
 import { Radio } from "./components/Radio";
+import { Select } from "./components/Select";
 import { Sidenav } from "./components/Sidenav";
 import { Spinner } from "./components/Spinner";
 import { Skeleton } from "./components/Skeleton";
@@ -39,6 +40,7 @@ function App() {
 
   return (
     <>
+    <Select />
     <Masthead />
       <Mainnav />
       <IconButton />

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@govtechsg/sgds-web-component": "file:../../../lib",
+    "@lit-labs/nextjs": "^0.2.4",
     "next": "15.5.3",
     "react": "19.1.1",
     "react-dom": "19.1.1"
@@ -18,6 +19,7 @@
     "@types/node": "^20",
     "@types/react": "19.1.13",
     "@types/react-dom": "19.1.9",
+    "copy-webpack-plugin": "^13.0.1",
     "eslint": "^8",
     "eslint-config-next": "15.5.3",
     "typescript": "^5"
