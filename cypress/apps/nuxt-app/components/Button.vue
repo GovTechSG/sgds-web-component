@@ -5,7 +5,8 @@ const variant = 'primary';
 </script>
 
 <template>
-  <sgds-button :variant>
+  <sgds-button :variant hasRightIconSlot>
     <span class="testing">Hello</span>
+    <sgds-icon slot="rightIcon" name="arrow-bar-up"></sgds-icon>
   </sgds-button>
 </template>

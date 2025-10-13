@@ -23,6 +23,10 @@ table {
   width: 100%;
 }
 
+.hidden {
+  display: none;
+}
+
 .table > :not(caption) th,
 .table > :not(caption) td {
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);

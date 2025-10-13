@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import "@govtechsg/sgds-web-component/components/Drawer/index.js"
-import "@govtechsg/sgds-web-component/components/Button/index.js"
 import type SgdsButton from "@govtechsg/sgds-web-component/components/Button/sgds-button.js";
 import type SgdsDrawer from "@govtechsg/sgds-web-component/components/Drawer/sgds-drawer.js";
 
