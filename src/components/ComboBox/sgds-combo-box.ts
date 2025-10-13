@@ -90,7 +90,7 @@ export class SgdsComboBox extends SelectElement {
     }
   }
   protected _handleDefaultSlotChange(e: Event) {
-    const assignedElements = (e.target as HTMLSlotElement).assignedElements({flatten: true})
+    const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
     /** this will trigger _updateValueAndDisplayValue */
     this.menuList = this._getMenuListFromOptions(assignedElements);
   }
