@@ -49,7 +49,8 @@ export class SgdsSelect extends SelectElement {
 
   private _handleSlotChange(e: Event) {
     const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
-    this.menuList = this._getMenuListFromOptions(assignedElements);
+    console.log({assignedElements}, "in select slotchange")
+    this.menuList = this._getMenuListFromSlots(assignedElements);
 
     this._updateDisplayValue();
   }
