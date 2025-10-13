@@ -37,6 +37,15 @@ export class SgdsCard extends CardElement {
   /** Controls how the image is sized and aligned within the card. Available options: `default`, `padding around`, `aspect ratio` */
   @property({ type: String, reflect: true }) imageAdjustment: CardImageAdjustment = "default";
 
+  /** Used only for SSR to indicate the presence of the `image` slot. */
+  @property({ type: Boolean }) hasImageSlot = false;
+
+  /** Used only for SSR to indicate the presence of the `icon` slot. */
+  @property({ type: Boolean }) hasIconSlot = false;
+
+  /** Used only for SSR to indicate the presence of the `upper` slot. */
+  @property({ type: Boolean }) hasUpperSlot = false;
+
   private get linkSlotItems(): HTMLAnchorElement | null {
     if (!this.linkNode || this.linkNode.length === 0) return null;
     const element = this.linkNode[0] as HTMLElement;
@@ -49,7 +58,7 @@ export class SgdsCard extends CardElement {
     return (element.querySelector("a") || element) as HTMLAnchorElement;
   }
 
-  private readonly hasSlotController = new HasSlotController(this, "image", "icon", "menu");
+  private readonly hasSlotController = new HasSlotController(this, "image", "icon", "upper");
 
   protected firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
@@ -65,6 +74,12 @@ export class SgdsCard extends CardElement {
     }
   }
 
+  updated() {
+    if (!this.hasImageSlot) this.hasImageSlot = this.hasSlotController.test("image");
+    if (!this.hasIconSlot) this.hasIconSlot = this.hasSlotController.test("icon");
+    if (!this.hasUpperSlot) this.hasUpperSlot = this.hasSlotController.test("upper");
+  }
+
   handleImgSlotChange(e: Event) {
     const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLOrSVGImageElement>;
 
@@ -72,7 +87,7 @@ export class SgdsCard extends CardElement {
       console.error("Multiple elements passed into SgdsCard's image slot");
     }
 
-    if (this.hasSlotController.test("icon") && this.hasSlotController.test("image")) {
+    if (this.hasSlotController.test("image") && this.hasSlotController.test("icon")) {
       console.error("Both image and icon slots cannot be used together in SgdsCard");
     }
   }
@@ -80,11 +95,6 @@ export class SgdsCard extends CardElement {
   render() {
     const tag = this.stretchedLink ? literal`a` : literal`div`;
     const cardTabIndex = !this.stretchedLink || this.disabled ? -1 : 0;
-
-    const hasImageSlot = this.hasSlotController.test("image");
-    const hasIconSlot = this.hasSlotController.test("icon");
-    const hasMenuSlot = this.hasSlotController.test("menu");
-    const hasUpperSlot = this.hasSlotController.test("upper");
 
     return html`
       <${tag}
@@ -95,14 +105,14 @@ export class SgdsCard extends CardElement {
       >
         <div class="card-tinted-bg"></div>
         
-        ${hasMenuSlot ? html` <slot name="menu"></slot> ` : nothing}
+        <slot name="menu"></slot>
         <div class=${classMap({
-          "card-image": hasImageSlot,
-          "card-media": hasIconSlot || hasUpperSlot
+          "card-image": this.hasImageSlot,
+          "card-media": this.hasIconSlot || this.hasUpperSlot
         })}>
           <slot name="upper">
-          ${hasImageSlot ? html` <slot name="image" @slotchange=${this.handleImgSlotChange}></slot> ` : nothing}
-          ${hasIconSlot ? html` <slot name="icon"></slot> ` : nothing}
+            <slot name="image" @slotchange=${this.handleImgSlotChange}></slot>
+            <slot name="icon"></slot>
           </slot>
         </div>
 

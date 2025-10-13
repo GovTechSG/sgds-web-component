@@ -15,7 +15,13 @@ describe("<sgds-card>", () => {
           tabindex="-1"
         >
           <div class="card-tinted-bg"></div>
-          <div><slot name="upper"></slot></div>
+          <slot name="menu"></slot>
+          <div>
+            <slot name="upper">
+              <slot name="image"></slot>
+              <slot name="icon"></slot>
+            </slot>
+          </div>
           <div class="card-body">
             <div class="card-header-container">
               <div class="card-header">
@@ -44,9 +50,11 @@ describe("<sgds-card>", () => {
           tabindex="-1"
         >
           <div class="card-tinted-bg"></div>
+          <slot name="menu"></slot>
           <div class="card-image">
             <slot name="upper">
               <slot name="image"></slot>
+              <slot name="icon"></slot>
             </slot>
           </div>
           <div class="card-body">
@@ -79,8 +87,10 @@ describe("<sgds-card>", () => {
           tabindex="-1"
         >
           <div class="card-tinted-bg"></div>
+          <slot name="menu"></slot>
           <div class="card-media">
             <slot name="upper">
+              <slot name="image"></slot>
               <slot name="icon"></slot>
             </slot>
           </div>
@@ -114,7 +124,10 @@ describe("<sgds-card>", () => {
           <div class="card-tinted-bg"></div>
           <slot name="menu"></slot>
           <div>
-            <slot name="upper"></slot>
+            <slot name="upper">
+              <slot name="image"></slot>
+              <slot name="icon"></slot>
+            </slot>
           </div>
           <div class="card-body">
             <div class="card-header-container">
