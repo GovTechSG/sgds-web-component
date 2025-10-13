@@ -1,3 +1,9 @@
+## v3.5.3 (2025-10-13)
+
+### Refactor
+
+- *****: build cdn files with own minifier and define new file path entry point index.umd.min.js
+
 ## v3.5.2 (2025-10-13)
 
 ### Feat
