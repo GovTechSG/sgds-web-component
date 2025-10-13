@@ -1,0 +1,139 @@
+<script type="module" src="../src/index.ts"></script>
+<link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+
+<h2>Default</h2>
+<sgds-input label="default" hinttext="default" value="This is a disablde input"></sgds-input>
+<sgds-textarea label="default" hinttext="default" value="This is a disablde textarea"></sgds-textarea>
+<sgds-datepicker label="default" hinttext="default"></sgds-datepicker>
+<sgds-quantity-toggle
+  label="default"
+  hinttext="default"
+></sgds-quantity-toggle>
+<sgds-select
+  label="default"
+  hinttext="default"
+  value="1"
+  menuList='[{"label":"Afghanistan","value":"1"},{"label":"Albania","value":"2"},{"label":"Algeria","value":"3"},{"label":"Andorra","value":"4"}]'
+></sgds-select>
+<sgds-combo-box
+  multiselect
+  label="default"
+  hinttext="default"
+  value="1"
+  menuList='[{"label":"Afghanistan","value":"1"},{"label":"Albania","value":"2"},{"label":"Algeria","value":"3"},{"label":"Andorra","value":"4"}]'
+></sgds-combo-box>
+<sgds-radio-group hinttext="hint" label="Label">
+  <sgds-radio value="1">Option 1</sgds-radio>
+  <sgds-radio value="2">Option 2</sgds-radio>
+  <sgds-radio value="3">Option 3</sgds-radio>
+</sgds-radio-group>
+<sgds-checkbox-group label="CheckboxGroup Label" hinttext="Check at least one option">
+      <sgds-checkbox value="watermelon">Watermelon</sgds-checkbox>
+      <sgds-checkbox value="apple">Apple</sgds-checkbox>
+      <sgds-checkbox value="lychee">Lychee</sgds-checkbox>
+    </sgds-checkbox-group>
+
+<h2>Disabled</h2>
+<sgds-input disabled label="disabled" hinttext="disbaled" value="This is a disablde input"></sgds-input>
+<sgds-textarea disabled label="disabled" hinttext="disbaled" value="This is a disablde textarea"></sgds-textarea>
+<sgds-datepicker disabled label="disabled" hinttext="disbaled"></sgds-datepicker>
+<sgds-quantity-toggle
+  disabled
+  label="disabled"
+  hinttext="disbaled"
+></sgds-quantity-toggle>
+<sgds-select
+  disabled
+  label="disabled"
+  hinttext="disblaed"
+  value="1"
+  menuList='[{"label":"Afghanistan","value":"1"},{"label":"Albania","value":"2"},{"label":"Algeria","value":"3"},{"label":"Andorra","value":"4"}]'
+></sgds-select>
+<sgds-combo-box
+  disabled
+  label="disabled"
+  hinttext="disblaed"
+  value="1"
+  menuList='[{"label":"Afghanistan","value":"1"},{"label":"Albania","value":"2"},{"label":"Algeria","value":"3"},{"label":"Andorra","value":"4"}]'
+></sgds-combo-box>
+<sgds-radio-group  hinttext="hint" label="Label">
+  <sgds-radio disabled>Option 1</sgds-radio>
+  <sgds-radio value="2">Option 2</sgds-radio>
+  <sgds-radio value="3">Option 3</sgds-radio>
+</sgds-radio-group>
+<sgds-checkbox-group label="CheckboxGroup Label" hinttext="Check at least one option">
+      <sgds-checkbox disabled value="watermelon">Watermelon</sgds-checkbox>
+      <sgds-checkbox value="apple">Apple</sgds-checkbox>
+      <sgds-checkbox value="lychee">Lychee</sgds-checkbox>
+    </sgds-checkbox-group>
+<sgds-radio-group disabled hinttext="hint" label="Label">
+  <sgds-radio >Option 1</sgds-radio>
+  <sgds-radio value="2">Option 2</sgds-radio>
+  <sgds-radio value="3">Option 3</sgds-radio>
+</sgds-radio-group>
+<sgds-checkbox-group disabled label="CheckboxGroup Label" hinttext="Check at least one option">
+      <sgds-checkbox  value="watermelon">Watermelon</sgds-checkbox>
+      <sgds-checkbox value="apple">Apple</sgds-checkbox>
+      <sgds-checkbox value="lychee">Lychee</sgds-checkbox>
+    </sgds-checkbox-group>
+
+<h2>Readonly</h2>
+<sgds-input readonly label="readonly" hinttext="readonlye" value="This is a readonly input"></sgds-input>
+<sgds-textarea readonly label="readonly" hinttext="readonlye" value="This is a readonly textarea"></sgds-textarea>
+<sgds-datepicker readonly label="readonly" hinttext="readonlye"></sgds-datepicker>
+<sgds-quantity-toggle
+  readonly
+  label="readonly"
+  hinttext="readonlye"
+  value="2"
+></sgds-quantity-toggle>
+<sgds-select
+  readonly
+  label="readonly"
+  hinttext="readonlye"
+  value="1"
+  menuList='[{"label":"Afghanistan","value":"1"},{"label":"Albania","value":"2"},{"label":"Algeria","value":"3"},{"label":"Andorra","value":"4"}]'
+></sgds-select>
+<sgds-combo-box
+  readonly
+  label="readonly"
+  hinttext="readonlye"
+  value="1"
+  menuList='[{"label":"Afghanistan","value":"1"},{"label":"Albania","value":"2"},{"label":"Algeria","value":"3"},{"label":"Andorra","value":"4"}]'
+></sgds-combo-box>
+
+<h2>Invalid</h2>
+<sgds-input required hasFeedback="both" label="invalid" hinttext="invalide"></sgds-input>
+<sgds-textarea required hasFeedback label="invalid" hinttext="invalide"></sgds-textarea>
+<sgds-datepicker required hasFeedback label="invalid" hinttext="invalide"></sgds-datepicker>
+<sgds-quantity-toggle
+  label="default"
+  hinttext="default"
+></sgds-quantity-toggle>
+<sgds-select
+  required
+  hasFeedback
+  label="invalid"
+  hinttext="invalide"
+  menuList='[{"label":"Afghanistan","value":"1"},{"label":"Albania","value":"2"},{"label":"Algeria","value":"3"},{"label":"Andorra","value":"4"}]'
+></sgds-select>
+<sgds-combo-box
+  required
+  hasFeedback
+  label="invalid"
+  hinttext="invalide"
+  menuList='[{"label":"Afghanistan","value":"1"},{"label":"Albania","value":"2"},{"label":"Algeria","value":"3"},{"label":"Andorra","value":"4"}]'
+></sgds-combo-box>
+<sgds-radio-group hinttext="hint" label="Label" required hasFeedback>
+  <sgds-radio value="2">Option 2</sgds-radio>
+  <sgds-radio value="3">Option 3</sgds-radio>
+</sgds-radio-group>
+
+<sgds-checkbox-group hasFeedback label="CheckboxGroup Label" hinttext="Check at least one option" required>
+      <sgds-checkbox value="watermelon">Watermelon</sgds-checkbox>
+      <sgds-checkbox value="apple">Apple</sgds-checkbox>
+      <sgds-checkbox value="lychee">Lychee</sgds-checkbox>
+    </sgds-checkbox-group>
+          <sgds-checkbox value="lychee" indeterminate>Lychee</sgds-checkbox>

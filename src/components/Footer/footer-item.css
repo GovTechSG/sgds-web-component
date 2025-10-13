@@ -14,7 +14,7 @@ slot[name="title"]::slotted(*) {
   --sgds-font-weight-regular: var(--sgds-font-weight-semibold);
   color: var(--sgds-color-fixed-light);
   font-weight: var(--sgds-font-weight-regular, --sgds-font-weight-semibold);
-  margin: var(--sgds-paragraph-spacing-xl, --sgds-margin-none); 
+  margin: var(--sgds-paragraph-spacing-xl, --sgds-margin-none);
 }
 
 .links {
@@ -36,11 +36,7 @@ slot::slotted(a:hover),
   color: var(--sgds-link-color-emphasis, --sgds-color-fixed-light);
 }
 
-.links slot::slotted(a:focus),
 .links slot::slotted(a:focus-visible) {
-  outline: 0;
-}
-
-.links slot::slotted(a:focus-visible) {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }

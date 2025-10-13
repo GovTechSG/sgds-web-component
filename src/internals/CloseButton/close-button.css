@@ -26,7 +26,7 @@
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
   border-radius: var(--sgds-close-btn-border-radius);
   background-color: var(--sgds-bg-transparent);
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -37,10 +37,20 @@
 
 .btn-close:focus,
 .btn-close:focus-visible {
-  outline: 0;
   background-color: var(--sgds-bg-translucent);
 }
 
 .btn-close:focus-visible {
-  box-shadow: var(--sgds-box-shadow-focus);
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
+}
+
+.btn-close-sm {
+  width: var(--sgds-dimension-24);
+  height: var(--sgds-dimension-24);
+}
+
+.btn-close.btn-close-sm {
+  width: var(--sgds-icon-size-sm);
+  height: var(--sgds-icon-size-sm);
 }

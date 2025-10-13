@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,6 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.3.2/themes/day.css' rel='stylesheet' type='text/css' />
+        <Script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.4.0-rc.5"></Script>
+
+      </head>
       <body className={inter.className}>
       {/* <PolyfillContext> */}
         {children}

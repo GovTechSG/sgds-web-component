@@ -51,13 +51,14 @@ button.year:focus:not(.active) {
 td[data-day]:focus-visible,
 button.month:focus-visible,
 button.year:focus-visible {
-  outline: var(--sgds-form-border-radius-sm) solid var(--sgds-blue-400);
+  outline: var(--sgds-form-outline-focus);
+  outline-offset: var(--sgds-form-outline-offset-focus);
 }
 
 td[data-day].active:not(.selected-ends):focus,
 button.month.active:not(.selected-ends):focus,
 button.year.active:not(.selected-ends):focus {
-  border-radius:  var(--sgds-form-border-radius-sm);
+  border-radius: var(--sgds-form-border-radius-sm);
 }
 
 button.year.active {

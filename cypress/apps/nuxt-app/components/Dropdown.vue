@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import "@govtechsg/sgds-web-component/components/Dropdown/index.js"
+import "@govtechsg/sgds-web-component/components/Checkbox/index.js"
 </script>
 
 <template>

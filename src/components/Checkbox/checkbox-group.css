@@ -32,3 +32,8 @@ fieldset {
 .checkbox-group-validation-input {
   display: none;
 }
+
+:host([disabled]) .label-hint-container{
+  opacity: var(--sgds-opacity-50);
+  cursor: not-allowed;
+}

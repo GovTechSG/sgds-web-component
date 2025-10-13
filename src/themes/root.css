@@ -341,9 +341,11 @@
   --sgds-form-icon-size-md: var(--sgds-icon-size-md);
   --sgds-form-icon-size-lg: var(--sgds-icon-size-lg);
 
-  --sgds-box-shadow-focus: 0px 0px 0px 4px var(--sgds-blue-400);
-  --sgds-form-box-shadow-focus: var(--sgds-box-shadow-focus);
-
+  --sgds-outline-focus: var(--sgds-border-width-2) solid var(--sgds-blue-400);
+  --sgds-outline-offset-focus: calc(-1 * var(--sgds-border-width-2));
+  --sgds-form-outline-focus: var(--sgds-outline-focus);
+  --sgds-form-outline-offset-focus: var(--sgds-outline-offset-focus);
+  
   /* Masthead and Mainnav Max Width and Padding */
   --sgds-mainnav-max-width: 1440px;
   --sgds-mainnav-padding-x: 2rem;
