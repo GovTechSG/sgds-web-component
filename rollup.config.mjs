@@ -9,7 +9,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import copy from "rollup-plugin-copy";
 import preserveDirectives from "rollup-plugin-preserve-directives";
-
+import  terser from "@rollup/plugin-terser";
 const external = [
   "@lit",
   "lit",
@@ -77,12 +77,12 @@ const buildUMDComponentBundles = () => {
     input: meta.inputPath,
     output: {
       name: `${meta.name}Bundle`,
-      file: `lib/${meta.outputPath}.umd.js`,
+      file: `lib/${meta.outputPath}.umd.min.js`,
       format: "umd",
       sourcemap: true,
-      inlineDynamicImports: true
+      inlineDynamicImports: true,
     },
-    plugins: wcPlugins
+    plugins: [...wcPlugins, terser()]
   }));
 };
 const buildSgdsPackage = () => {
@@ -108,13 +108,13 @@ const buildSgdsPackage = () => {
     {
       input: ["src/index.ts"],
       output: {
-        entryFileNames: "[name].umd.js",
+        entryFileNames: "[name].umd.min.js",
         dir: "lib",
         format: "umd",
         sourcemap: true,
         inlineDynamicImports: true
       },
-      plugins: wcPlugins
+      plugins: [...wcPlugins, terser()]
     },
     ...buildUMDComponentBundles()
   ];
