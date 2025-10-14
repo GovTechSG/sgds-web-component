@@ -178,8 +178,8 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
     });
     const options = await Promise.all(readyOptions);
     return options?.map((el: OptionElement) => ({
-      label: el.textContent?.trim() ?? "",
-      value: el.getAttribute("value") ?? el.textContent?.trim() ?? "",
+      label: el.innerText,
+      value: el.getAttribute("value"),
       disabled: el.disabled ?? undefined
     }));
   }
