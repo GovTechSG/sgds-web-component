@@ -1,6 +1,7 @@
 import { SgdsTableOfContents } from "./sgds-table-of-contents";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-table-of-contents", SgdsTableOfContents);
+register("sgds-table-of-contents", SgdsTableOfContents);
 
 declare global {
   interface HTMLElementTagNameMap {

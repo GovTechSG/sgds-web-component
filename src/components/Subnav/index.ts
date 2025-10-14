@@ -1,8 +1,9 @@
 import { SgdsSubnav } from "./sgds-subnav";
 import { SgdsSubnavItem } from "./sgds-subnav-item";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-subnav", SgdsSubnav);
-customElements.define("sgds-subnav-item", SgdsSubnavItem);
+register("sgds-subnav", SgdsSubnav);
+register("sgds-subnav-item", SgdsSubnavItem);
 
 declare global {
   interface HTMLElementTagNameMap {
