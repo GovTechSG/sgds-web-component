@@ -89,17 +89,16 @@ export class SgdsComboBox extends SelectElement {
       this.showMenu();
     }
   }
-  protected _handleDefaultSlotChange(e: Event) {
+  protected async _handleDefaultSlotChange(e: Event) {
     const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
     /** this will trigger _updateValueAndDisplayValue */
-    this.menuList = this._getMenuListFromSlots(assignedElements);
+    this.menuList = await this._getMenuListFromOptions(assignedElements);
   }
 
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
     // when value change, always emit a change event
     this.emit("sgds-change");
-
     if (this.value) {
       this.emit("sgds-select");
     }
@@ -295,8 +294,8 @@ export class SgdsComboBox extends SelectElement {
                   ?checkbox=${this.multiSelect}
                   value=${item.value}
                   ?disabled=${item.disabled}
-                  @i-sgds-select=${this._handleItemSelected}
-                  @i-sgds-unselect=${this._handleItemUnselect}
+                  @i-sgds-select=${item.disabled ? null : this._handleItemSelected}
+                  @i-sgds-unselect=${item.disabled ? null : this._handleItemUnselect}
                 >
                   ${item.label}
                 </sgds-combo-box-option>

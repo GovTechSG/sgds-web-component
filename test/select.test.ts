@@ -241,6 +241,7 @@ describe("<sgds-select>", () => {
         durianItem = el.shadowRoot?.querySelector("sgds-select-option[value='option3']") as SgdsSelectOption;
       }
       await el.updateComplete;
+      await waitUntil(() => input.value === "Durian");
       expect(input.value).to.equal("Durian");
       expect(el.value).to.equal("option3");
       expect(durianItem.active).to.be.true;

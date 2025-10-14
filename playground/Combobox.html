@@ -21,7 +21,7 @@
       <div class="small-container">
         <h2>Single selection combo-box</h2>
 
-        <!-- <sgds-combo-box
+        <sgds-combo-box
           value="1"
           menuList='[
       { "label": "John Smith John Smith John Smith John Smith John Smith", "value": "1" },
@@ -98,13 +98,13 @@
       { "label": "Jade Apheremal", "value": "7" },
       { "label": "Louis Vuitton", "value": "8" }
     ]'
-          label="label"
+          label="CHRISTIAN DIRO"
           hintText="hint"
           hasFeedback="true"
           invalidFeedback="test"
           badgeFullWidth="true"
           placeholder="Combobox placeholder"
-        ></sgds-combo-box> -->
+        ></sgds-combo-box>
 
         <h2>Single selection combo-box using slot *********</h2>
         <sgds-combo-box
@@ -119,12 +119,12 @@
           <sgds-combo-box-option value="3">bear</sgds-combo-box-option>
         </sgds-combo-box>
 
-        <!-- <h2>Multi selection combo-box using slot</h2>
+        <h2>Multi selection combo-box using slot</h2>
         <sgds-combo-box
           label="Combobox using slot"
           hinttext="Select an option"
           placeholder="Select an option, test filterFunction"
-          value="1"
+          value="1;2"
           id="combobox-multi-selection-slot"
           multiSelect
         >
@@ -140,15 +140,15 @@
           value="1"
           multiSelect
         ></sgds-combo-box>
-      </div> -->
+      </div>
     </div>
 
-    <!-- <script>
+    <script>
       const multiSelectCombo = document.querySelector("#combobox-multi-selection-slot")
       multiSelectCombo.filterFunction = (inputValue, menuItem) => {
     return  menuItem.label.toLowerCase().includes(inputValue)
 }
-    </script> -->
+    </script>
     <!-- Slot method: Test if menu option changes will trigger an update in the combo box value -->
     <script>
       setTimeout(() => {
@@ -160,7 +160,7 @@
       }, 2000);
     </script>
 
-    <!-- <script>
+    <script>
       document.addEventListener("sgds-change", reduceList);
 
       function reduceList() {
@@ -179,6 +179,6 @@
         const combobox3 = document.getElementById("combobox-3");
         combobox3.setAttribute("value", "4");
       }
-    </script> -->
+    </script>
   </body>
 </html>

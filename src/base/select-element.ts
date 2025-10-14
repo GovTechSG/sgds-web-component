@@ -171,8 +171,13 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
       this.hideMenu();
     }
   }
-  protected _getMenuListFromSlots(assignedElements: Element[]): SgdsOptionData[] {
-    return assignedElements?.map((el: OptionElement) => ({
+  protected async _getMenuListFromOptions(assignedElements: Element[]): Promise<SgdsOptionData[]> {
+    const readyOptions = assignedElements.map(async (e: OptionElement) => {
+      await e.updateComplete;
+      return e;
+    });
+    const options = await Promise.all(readyOptions);
+    return options?.map((el: OptionElement) => ({
       label: el.textContent?.trim() ?? "",
       value: el.getAttribute("value") ?? el.textContent?.trim() ?? "",
       disabled: el.disabled ?? undefined
