@@ -47,10 +47,11 @@ export class SgdsSelect extends SelectElement {
     }
   }
 
-  private _handleSlotChange(e: Event) {
+  private async _handleSlotChange(e: Event) {
     const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
-    this.menuList = this._getMenuListFromOptions(assignedElements);
 
+    this.menuList = await this._getMenuListFromOptions(assignedElements);
+    console.log(this.menuList);
     this._updateDisplayValue();
   }
   private _updateDisplayValue() {
@@ -137,7 +138,7 @@ export class SgdsSelect extends SelectElement {
           ?active=${isActive}
           value=${item.value}
           ?disabled=${item.disabled}
-          @click=${this._handleItemSelected}
+          @click=${item.disabled ? null : this._handleItemSelected}
           @keydown=${(e: KeyboardEvent) => {
             if (e.key === "Enter") {
               this._handleItemSelected(e);
