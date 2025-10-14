@@ -1,7 +1,28 @@
-## v3.5.1 (2025-10-08)
+## v3.5.3 (2025-10-13)
+
+### Refactor
+
+- *****: build cdn files with own minifier and define new file path entry point index.umd.min.js
+
+## v3.5.2 (2025-10-13)
+
+### Feat
+
+- **quantity-toggle**: add missign readonly
 
 ### Fix
-- *****: properly externalise @floating-ui/dom dependency
+
+- *****: add SSR props and defer HasSlotController checks until after hydration
+
+### Refactor
+
+- *****: focus box-shadow to outline (#411)
+- **radio**: share styles for radio and checkbox
+- **form**: form text input components shares a common css
+- *****: change box-shadow to outline
+- *****: box-shadow to outline wip
+
+## v3.5.1 (2025-10-08)
 
 ## v3.5.0 (2025-10-06)
 

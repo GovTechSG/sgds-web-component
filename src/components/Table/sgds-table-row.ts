@@ -1,9 +1,6 @@
 import { html } from "lit";
 import SgdsElement from "../../base/sgds-element";
-
 import tableRowStyle from "./table-row.css";
-
-export type HeaderPosition = "horizontal" | "vertical" | "both";
 
 /**
  * @summary Table row organizes and groups table cells or header cells into a single horizontal line within the table.

@@ -1,6 +1,7 @@
 import { SgdsIconCard } from "./sgds-icon-card";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-icon-card", SgdsIconCard);
+register("sgds-icon-card", SgdsIconCard);
 
 declare global {
   interface HTMLElementTagNameMap {

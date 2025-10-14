@@ -1,6 +1,7 @@
 import { SgdsThumbnailCard } from "./sgds-thumbnail-card";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-thumbnail-card", SgdsThumbnailCard);
+register("sgds-thumbnail-card", SgdsThumbnailCard);
 
 declare global {
   interface HTMLElementTagNameMap {
