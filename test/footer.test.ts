@@ -10,37 +10,63 @@ describe("footer", () => {
       el,
       `
           <footer class="footer">
-          <section class="footer-top" style="display: none;">
-            <div class="footer-header" style="display: none;">
+          <section>
+            <div class="footer-header">
               <slot name="title"></slot>
               <slot name="description"></slot>
             </div>
-            <div class="footer-items" style="display: none;">
-              <slot name="items"></slot>
+            <div>
+              <slot name="content">
+                <div class="footer-items">
+                  <slot name="items"></slot>
+                </div>
+              </slot>
             </div>
           </section>
           <section class="footer-bottom">
-            <div
-              class="social-media"
-              style="display: none;"
-            >
-              <slot name="social-media"></slot>
-            </div>
             <div class="footer-mandatory-links">
               <ul>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Feedback</a></li>
-                <li><a href="#">FAQ</a></li>
                 <li>
-                  <a
-                    href="https://tech.gov.sg/report_vulnerability"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Report Vulnerability</a
-                  >
+                  <sgds-link size="sm" variant="primary">
+                    <a href="#" tabindex="0">Contact</a>
+                  </sgds-link>
                 </li>
-                <li><a href="#">Privacy Statement</a></li>
-                <li><a href="#">Terms of use</a></li>
+                <li>
+                  <sgds-link size="sm" variant="primary">
+                    <a href="#" tabindex="0">Feedback</a>
+                  </sgds-link>
+                </li>
+                <li>
+                  <sgds-link size="sm" variant="primary">
+                    <a href="#" tabindex="0">FAQ</a>
+                  </sgds-link>
+                </li>
+                <li>
+                  <sgds-link size="sm" variant="primary">
+                    <a href="#" tabindex="0">Sitemap</a>
+                  </sgds-link>
+                </li>
+                <li>
+                  <sgds-link size="sm" variant="primary">
+                    <a
+                      href="https://tech.gov.sg/report_vulnerability"
+                      rel="noopener noreferrer"
+                      tabindex="0"
+                      target="_blank"
+                      >Report Vulnerability</a
+                    >
+                  </sgds-link>
+                </li>
+                <li>
+                  <sgds-link size="sm" variant="primary">
+                    <a href="#" tabindex="0">Privacy Statement</a>
+                  </sgds-link>
+                </li>
+                <li>
+                  <sgds-link size="sm" variant="primary">
+                    <a href="#" tabindex="0">Terms of use</a>
+                  </sgds-link>
+                </li>
               </ul>
               <div class="footer-copyrights">© ${new Date().getFullYear()}, Government of Singapore</div>
             </div>

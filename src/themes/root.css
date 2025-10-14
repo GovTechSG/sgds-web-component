@@ -307,6 +307,7 @@
   --sgds-gap-lg: var(--sgds-spacer-6);
   --sgds-gap-xl: var(--sgds-spacer-7);
   --sgds-gap-2-xl: var(--sgds-spacer-8);
+  --sgds-gap-3-xl: var(--sgds-spacer-9);
   --sgds-form-gap-sm: var(--sgds-gap-2-xs);
   --sgds-form-gap-md: var(--sgds-gap-xs);
   --sgds-form-gap-lg: var(--sgds-gap-sm);
