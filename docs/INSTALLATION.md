@@ -8,7 +8,7 @@ Install SGDS web components locally with the following command
 
 ```js
 
-npm install @govtechsg/sgds-web-component@3.5.0
+npm install @govtechsg/sgds-web-component@3.5.3
 
 ```
 
@@ -65,25 +65,14 @@ This method registers all SGDS elements up front in the Custom Elements Registry
 
 ```js
 // Load global css file
-<<<<<<< HEAD
-<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.0-rc.1/themes/day.css' rel='stylesheet' type='text/css' />
-<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.0-rc.1/css/sgds.css' rel='stylesheet' type='text/css' />
+<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.3/themes/day.css' rel='stylesheet' type='text/css' />
+<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.3/css/sgds.css' rel='stylesheet' type='text/css' />
 
 // it is recommended to load a particular version when using cdn e.g. https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@1.0.2
-<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.0-rc.1" async crossorigin="anonymous" integrity="sha384-mKIYpzWb7cwFCSMPvrwJmPejN02ijNywueWS5u9QbTQhfsnxIjSTA6wMW26BsLiX"></script>
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.3" async crossorigin="anonymous" integrity="sha384-SxZxZ8UlZHmjmD7Oqz+OIyr9hKjr3NKl90zvWdeG9WbHn20QsSY0EfLEp42QIE/M"></script>
 
 //or load a single component e.g. Masthead
-<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.0-rc.1/components/Masthead/index.umd.js" async crossorigin="anonymous" integrity="sha384-TvoOvC8GEsYB8euEB27aPJTOx+cVYWZAk+YVJx6QzefK9ZpLfSmYQNRuJYR3j9pn"></script>
-=======
-<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.0/themes/day.css' rel='stylesheet' type='text/css' />
-<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.0/css/sgds.css' rel='stylesheet' type='text/css' />
-
-// it is recommended to load a particular version when using cdn e.g. https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@1.0.2
-<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.0" async></script>
-
-//or load a single component e.g. Masthead
-<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.0/components/Masthead/index.umd.js" async></script>
->>>>>>> master
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.5.3/components/Masthead/index.umd.min.js" async crossorigin="anonymous" integrity="sha384-YdC0gszPpfdu8dQ+hMBmQHfYdpgCI83jCKL8blU2LmQ7I44qGVzS1ud+Bb1hIMXD"></script>
 
 ```
 
