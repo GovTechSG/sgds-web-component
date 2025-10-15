@@ -136,7 +136,7 @@ slot[name="description"]::slotted(*) {
   --sgds-paragraph-spacing-xl: var(--sgds-margin-none);
   margin: var(--sgds-margin-none, --sgds-paragraph-spacing-xl);
   color: var(--sgds-color-subtle);
-  line-height: var(--sgds-line-height-body);
+  line-height: var(--sgds-line-height-24);
 }
 
 .modal-body {
