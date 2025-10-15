@@ -50,8 +50,21 @@ export class SgdsSelect extends SelectElement {
   private async _handleSlotChange(e: Event) {
     const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
 
+    assignedElements.forEach(el =>
+      el.addEventListener("click", (e: MouseEvent) => {
+        const option = e.target as SgdsSelectOption;
+        if (option.disabled) return;
+        this._handleItemSelected(e);
+      })
+    );
+    assignedElements.forEach(el =>
+      el.addEventListener("keydown", (e: KeyboardEvent) => {
+        if (e.key === "Enter") {
+          this._handleItemSelected(e);
+        }
+      })
+    );
     this.menuList = await this._getMenuListFromOptions(assignedElements);
-    console.log(this.menuList);
     this._updateDisplayValue();
   }
   private _updateDisplayValue() {
@@ -130,6 +143,7 @@ export class SgdsSelect extends SelectElement {
   protected _renderEmptyMenu() {
     return html` <div class="empty-menu">No options</div> `;
   }
+  /** Applicable for menuList prop only */
   protected _renderMenu() {
     const menu = this.menuList.map(item => {
       const isActive = item.value === this.value;
@@ -201,9 +215,8 @@ export class SgdsSelect extends SelectElement {
         <!-- The input -->
         ${this._renderInput()} ${this._renderFeedback()}
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
-          ${this._renderMenu()}
+          <slot id="default" @slotchange=${this._handleSlotChange}>${this._renderMenu()}</slot>
         </ul>
-        <slot @slotchange=${this._handleSlotChange} id="options"></slot>
       </div>
     `;
   }
