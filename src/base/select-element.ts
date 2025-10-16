@@ -75,7 +75,7 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
   protected selectedItems: SgdsOptionData[] = [];
   /** @internal Managed filtered menu on the fly with input change*/
   @state()
-  protected filteredMenuList: SgdsOptionData[] = [];
+  protected filteredList: SgdsOptionData[] = [];
 
   protected _isTouched = false;
 

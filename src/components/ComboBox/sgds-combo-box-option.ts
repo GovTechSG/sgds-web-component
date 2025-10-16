@@ -57,7 +57,7 @@ export class SgdsComboBoxOption extends OptionElement {
   protected _renderItemContent = () => {
     return this.checkbox
       ? html`
-          <sgds-checkbox .checked=${this.active} .disabled=${this.disabled} @sgds-change=${this._handleCheckboxChange}>
+          <sgds-checkbox ?checked=${this.active} .disabled=${this.disabled} @sgds-change=${this._handleCheckboxChange}>
             <slot></slot>
           </sgds-checkbox>
         `

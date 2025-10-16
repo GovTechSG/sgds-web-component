@@ -62,6 +62,9 @@ export class SgdsComboBox extends SelectElement {
   @queryAssignedElements({ flatten: true, selector: "sgds-combo-box-option" })
   protected options: SgdsComboBoxOption[];
 
+  @state() optionList: SgdsComboBoxOptionData[] = [];
+  @state() emptyMenu = false;
+
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("sgds-hide", async () => {
@@ -89,16 +92,36 @@ export class SgdsComboBox extends SelectElement {
       this.showMenu();
     }
   }
+
   protected async _handleDefaultSlotChange(e: Event) {
     const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
+      assignedElements.forEach(option => {
+        option.addEventListener("i-sgds-select", (e: CustomEvent) => {
+          if (option.hasAttribute("disabled")) return;
+          this._handleItemSelected(e);
+        });
+        if (this.value.includes(option.getAttribute("value"))) {
+          option.setAttribute("active", "true");
+        }
+        if (this.multiSelect) {
+          option.addEventListener("i-sgds-unselect", (e: CustomEvent) => {
+            const option = e.target as SgdsComboBoxOption;
+            if (option.disabled) return;
+            this._handleItemUnselect(e);
+          });
+        }
+      });
+    
+
     /** this will trigger _updateValueAndDisplayValue */
-    this.menuList = await this._getMenuListFromOptions(assignedElements);
+    this.optionList = await this._getMenuListFromOptions(assignedElements);
   }
 
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
     // when value change, always emit a change event
     this.emit("sgds-change");
+    this.options.forEach((o) => o.removeAttribute("hidden"))
     if (this.value) {
       this.emit("sgds-select");
     }
@@ -118,19 +141,26 @@ export class SgdsComboBox extends SelectElement {
     // When value is updated by user and it doesn't map to selectedItems, we should re-map selectedItems
     const selectedItemVal = this.selectedItems.map(val => val.value).join(";");
     if (selectedItemVal !== this.value) {
-      this._updateValueAndDisplayValue();
+      this.menuList.length > 0
+        ? this._updateValueAndDisplayValue(this.menuList)
+        : this._updateValueAndDisplayValue(this.optionList);
     }
   }
 
+  @watch("optionList", { waitUntilFirstUpdate: true })
+  _handleOptionListChange() {
+    this._updateValueAndDisplayValue(this.optionList);
+    this._renderedMenu = this.optionList;
+  }
   @watch("menuList", { waitUntilFirstUpdate: true })
   _handleMenuListChange() {
-    this._updateValueAndDisplayValue();
+    this._updateValueAndDisplayValue(this.menuList);
     this._renderedMenu = this.menuList;
   }
 
-  private _updateValueAndDisplayValue() {
+  private _updateValueAndDisplayValue(list: SgdsComboBoxOptionData[]) {
     const valueArray = this.value.split(";");
-    const initialSelectedItem = this.menuList.filter(({ value }) => valueArray.includes(value));
+    const initialSelectedItem = list.filter(({ value }) => valueArray.includes(value));
     this.selectedItems = [...initialSelectedItem];
 
     // When the new filtered items don't match value we update it
@@ -149,7 +179,10 @@ export class SgdsComboBox extends SelectElement {
     this.emit("sgds-input");
     const input = e.target as HTMLInputElement;
     this.displayValue = input.value;
-    this.filteredMenuList = this.menuList.filter(item => this.filterFunction(this.displayValue, item));
+    this.filteredList =
+      this.menuList.length > 0
+        ? this.menuList.filter(item => this.filterFunction(this.displayValue, item))
+        : this.optionList.filter(item => this.filterFunction(this.displayValue, item));
 
     // reset menu list when displayValue
     if (this.displayValue === "" && !this.multiSelect) {
@@ -160,11 +193,21 @@ export class SgdsComboBox extends SelectElement {
     this.invalid = false;
     this.showMenu();
 
-    this.displayValue = (e.target as HTMLInputElement).value;
-    this._renderedMenu = this.filteredMenuList;
+    this._renderedMenu = this.filteredList;
 
+    // Filtering for slots
+    this.emptyMenu = this.filteredList.length === 0;
+    const filteredValues = this.filteredList.map(l => l.value);
+    this.options.forEach(o => {
+      if (!filteredValues.includes(o.value)) {
+        o.hidden = true;
+      } else {
+        o.hidden = false;
+      }
+    });
     if (this.displayValue === "") {
       this._renderedMenu = this.menuList;
+      this.options.forEach(o => (o.hidden = false));
       await this.updateComplete;
     }
   }
@@ -174,9 +217,11 @@ export class SgdsComboBox extends SelectElement {
    */
   protected async _handleItemSelected(e: Event) {
     const itemEl = e.target as SgdsComboBoxOption;
+    itemEl.active = true;
+
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
-    const foundItem = this.filteredMenuList.find(i => i.value.toString() === itemValueAttr) || {
+    const foundItem = this.filteredList.find(i => i.value.toString() === itemValueAttr) || {
       label: itemLabel,
       value: itemValueAttr
     };
@@ -190,6 +235,9 @@ export class SgdsComboBox extends SelectElement {
       this.value = this.selectedItems.map(i => i.value).join(";");
     } else {
       // Single-select
+      const previousValue = this.value;
+      this.options?.forEach(o => (o.value === previousValue ? (o.active = false) : null));
+
       this.selectedItems = [foundItem];
       this.value = foundItem.value.toString();
       this.displayValue = this.selectedItems[0].label;
@@ -199,10 +247,11 @@ export class SgdsComboBox extends SelectElement {
 
   private _handleItemUnselect(e: CustomEvent) {
     const itemEl = e.target as SgdsComboBoxOption;
+    itemEl.removeAttribute("active")
 
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
-    const foundItem = this.filteredMenuList.find(i => i.value.toString() === itemValueAttr) || {
+    const foundItem = this.filteredList.find(i => i.value.toString() === itemValueAttr) || {
       label: itemLabel,
       value: itemValueAttr
     };
@@ -213,6 +262,8 @@ export class SgdsComboBox extends SelectElement {
 
   private async _handleBadgeDismissed(e: CustomEvent, item: SgdsComboBoxOptionData) {
     e.preventDefault();
+    const removedValue = item.value;
+    this.options?.forEach(o => (o.value === removedValue ? (o.active = false) : null));
     this.selectedItems = this.selectedItems.filter(i => i.value !== item.value);
     this.value = this.selectedItems.map(i => i.value).join(";");
   }
@@ -225,6 +276,8 @@ export class SgdsComboBox extends SelectElement {
 
     if (e.key === "Backspace" && this.multiSelect) {
       if (this.displayValue.trim() === "" && this.selectedItems.length > 0) {
+        const removedValue = this.selectedItems[this.selectedItems.length - 1].value;
+        this.options?.forEach(o => (o.value === removedValue ? (o.active = false) : null));
         this.selectedItems = this.selectedItems.slice(0, -1);
         this.value = this.selectedItems.map(i => i.value).join(";");
       }
@@ -271,6 +324,7 @@ export class SgdsComboBox extends SelectElement {
       this._mixinResetValidity(await this._multiSelectInput);
     }
   }
+
   protected _renderMenu() {
     const emptyMenu = html` <div class="empty-menu">No options</div> `;
     const menu =
@@ -356,7 +410,7 @@ export class SgdsComboBox extends SelectElement {
             ?disabled=${this.disabled}
             ?readonly=${this.readonly}
             ?required=${this.required}
-            .value=${this.displayValue}
+            .value=${this.displayValue.trim()}
             @input=${this._handleInputChange}
             @blur=${this._handleInputBlur}
             @focus=${this._handleFocus}
@@ -380,9 +434,11 @@ export class SgdsComboBox extends SelectElement {
         <!-- The input -->
         ${this._renderInput()} ${this._renderFeedback()}
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
-          ${this._renderMenu()}
+          ${this.menuList.length > 0
+            ? this._renderMenu()
+            : html`<slot id="default" @slotchange=${this._handleDefaultSlotChange}></slot>`}
+          ${this.emptyMenu && this.optionList.length > 0 ? html`<div class="empty-menu">No options</div>` : nothing}
         </ul>
-        <slot @slotchange=${this._handleDefaultSlotChange}></slot>
       </div>
 
       <!-- Required an input element for constraint validation -->
