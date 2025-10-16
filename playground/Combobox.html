@@ -20,7 +20,6 @@
     <div class="container">
       <div class="small-container">
     <h2>Single selection combo-box</h2>
-
        <sgds-combo-box
           value="1"
           menuList='[
@@ -37,9 +36,16 @@
           hintText="hint"
           hasFeedback="true"
           invalidFeedback="test"
+          id="alter-menu-list"
+          required
+          hasFeedback
         ></sgds-combo-box>
 
-       <sgds-combo-box
+<!-- <script>
+  const alterMenuListCombo = document.querySelector("sgds-combo-box#alter-menu-list")
+  setTimeout(() => alterMenuListCombo.menuList = [{label: "Just me", value: "9"}, {label: "hello", value: "1"}], 2000)
+</script>        -->
+<sgds-combo-box
        multiSelect 
           value="1"
           menuList='[
@@ -57,20 +63,35 @@
           hasFeedback="true"
           invalidFeedback="test"
         ></sgds-combo-box>
-
+<form>
            <sgds-combo-box
-           multiselect
+           
           label="Combobox using slot"
           hinttext="Select an option"
           placeholder="Select an option"
           id="combobox-single-selection-slot"
-          value="1"
+          required
+          hasFeedback
         >
           <sgds-combo-box-option value="1" disabled>lion</sgds-combo-box-option>
           <sgds-combo-box-option value="2">tiger</sgds-combo-box-option>
           <sgds-combo-box-option value="3">bear</sgds-combo-box-option>
         </sgds-combo-box>
-
+           <sgds-select
+           
+          label="Combobox using slot"
+          hinttext="Select an option"
+          placeholder="Select an option"
+          id="combobox-single-selection-slot"
+          required
+          hasFeedback
+        >
+          <sgds-select-option value="1" disabled>lion</sgds-select-option>
+          <sgds-select-option value="2">tiger</sgds-select-option>
+          <sgds-select-option value="3">bear</sgds-select-option>
+        </sgds-select>
+        <button type="submit">submit=</button>
+        </form>
       </div>
 
       <!--  <div class="small-container">
