@@ -44,7 +44,7 @@
 }
 
 .toast-body strong {
-  line-height: var(--sgds-line-height-min);
+  line-height: var(--sgds-line-height-20);
 }
 
 .toast-body span {

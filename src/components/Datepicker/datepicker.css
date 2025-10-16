@@ -45,11 +45,11 @@ sgds-icon-button{
 
 .calendar-btn:not(.with-hint-text).with-label {
  align-self: end;
- margin-top: calc(var(--sgds-font-size-2) * var(--sgds-line-height-body) - var(--sgds-line-height-min))
+ margin-top: calc(var(--sgds-line-height-24) - var(--sgds-line-height-20))
 }
 
 .calendar-btn.with-hint-text.with-label {
   align-self: center;
   /* line height of label minus line height of hinttext/feedback */
-  margin-top: calc(var(--sgds-font-size-2) * var(--sgds-line-height-body) - var(--sgds-line-height-min))
+  margin-top: calc(var(--sgds-line-height-24) - var(--sgds-line-height-20))
 }

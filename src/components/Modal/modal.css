@@ -128,7 +128,7 @@ slot[name="title"]::slotted(*) {
   align-items: center;
   gap: 1rem;
   margin: var(--sgds-margin-none, var(--sgds-margin-xs, --sgds-margin-2-xs));
-  line-height: var(--sgds-line-height-heading);
+  line-height: var(--sgds-line-height-40);
   font-size: var(--sgds-font-size-6, --sgds-font-size-4);
 }
 
@@ -136,7 +136,7 @@ slot[name="description"]::slotted(*) {
   --sgds-paragraph-spacing-xl: var(--sgds-margin-none);
   margin: var(--sgds-margin-none, --sgds-paragraph-spacing-xl);
   color: var(--sgds-color-subtle);
-  line-height: var(--sgds-line-height-body);
+  line-height: var(--sgds-line-height-24);
 }
 
 .modal-body {

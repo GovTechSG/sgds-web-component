@@ -3,7 +3,7 @@
 }
 
 .nav-link::slotted(a) {
-  line-height: var(--sgds-line-height-body);
+  line-height: var(--sgds-line-height-24);
   /* If clash of styles happens from other light dom css on anchor tag, will need to add !important here */
   color: var(--sgds-link-color-default);
   cursor: pointer;
@@ -80,7 +80,7 @@
 }
 
 :host([size="sm"]) .nav-link::slotted(a) {
-  line-height: var(--sgds-line-height-min);
+  line-height: var(--sgds-line-height-20);
   font-size: var(--sgds-font-size-1) !important;
 }
 

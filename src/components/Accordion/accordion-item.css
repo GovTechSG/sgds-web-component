@@ -5,7 +5,7 @@
 :host([density="compact"]) .accordion-btn {
   padding: var(--sgds-padding-sm) var(--sgds-padding-sm);
   font-size: var(--sgds-font-size-2);
-  line-height: var(--sgds-line-height-min);
+  line-height: var(--sgds-line-height-20);
 }
 
 :host([density="compact"]) .content {
@@ -26,7 +26,7 @@
   text-align: left;
   border: 0;
   color: var(--sgds-color-default);
-  line-height: var(--sgds-line-height-heading);
+  line-height: var(--sgds-line-height-24);
   font-size: var(--sgds-font-size-3);
   overflow-anchor: none;
 }
