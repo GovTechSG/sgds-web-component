@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
+import withLitSSR from "@lit-labs/nextjs"
 const nextConfig = {
+   reactStrictMode: true,
+  swcMinify: true,
     images: {
         domains: ['images.unsplash.com'],
       },
@@ -22,4 +25,4 @@ const nextConfig = {
       // }
 };
 
-export default nextConfig;
+export default withLitSSR(nextConfig);

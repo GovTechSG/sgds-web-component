@@ -19,9 +19,34 @@
   <body>
     <div class="container">
       <div class="small-container">
-        <h2>Single selection combo-box</h2>
+    <h2>Single selection combo-box</h2>
+       <sgds-combo-box
+          value="1"
+          menuList='[
+      { "label": "John Smith John Smith John Smith John Smith John Smith", "value": "1" },
+      { "label": "Jack Adams", "value": "2" },
+      { "label": "Regina Bride", "value": "3" },
+      { "label": "Christian Dior", "value": "4" },
+      { "label": "Prada Low", "value": "5" },
+      { "label": "Chloe Delight", "value": "6" },
+      { "label": "Jade Apheremal", "value": "7" },
+      { "label": "Louis Vuitton", "value": "8" }
+    ]'
+          label="label"
+          hintText="hint"
+          hasFeedback="true"
+          invalidFeedback="test"
+          id="alter-menu-list"
+          required
+          hasFeedback
+        ></sgds-combo-box>
 
-        <sgds-combo-box
+<!-- <script>
+  const alterMenuListCombo = document.querySelector("sgds-combo-box#alter-menu-list")
+  setTimeout(() => alterMenuListCombo.menuList = [{label: "Just me", value: "9"}, {label: "hello", value: "1"}], 2000)
+</script>        -->
+<sgds-combo-box
+       multiSelect 
           value="1"
           menuList='[
       { "label": "John Smith John Smith John Smith John Smith John Smith", "value": "1" },
@@ -38,9 +63,38 @@
           hasFeedback="true"
           invalidFeedback="test"
         ></sgds-combo-box>
+<form>
+           <sgds-combo-box
+           
+          label="Combobox using slot"
+          hinttext="Select an option"
+          placeholder="Select an option"
+          id="combobox-single-selection-slot"
+          required
+          hasFeedback
+        >
+          <sgds-combo-box-option value="1" disabled>lion</sgds-combo-box-option>
+          <sgds-combo-box-option value="2">tiger</sgds-combo-box-option>
+          <sgds-combo-box-option value="3">bear</sgds-combo-box-option>
+        </sgds-combo-box>
+           <sgds-select
+           
+          label="Combobox using slot"
+          hinttext="Select an option"
+          placeholder="Select an option"
+          id="combobox-single-selection-slot"
+          required
+          hasFeedback
+        >
+          <sgds-select-option value="1" disabled>lion</sgds-select-option>
+          <sgds-select-option value="2">tiger</sgds-select-option>
+          <sgds-select-option value="3">bear</sgds-select-option>
+        </sgds-select>
+        <button type="submit">submit=</button>
+        </form>
       </div>
 
-      <div class="small-container">
+      <!--  <div class="small-container">
         <h2>Multi selection combo-box</h2>
         <sgds-combo-box
           multiSelect
@@ -98,13 +152,13 @@
       { "label": "Jade Apheremal", "value": "7" },
       { "label": "Louis Vuitton", "value": "8" }
     ]'
-          label="label"
+          label="CHRISTIAN DIRO"
           hintText="hint"
           hasFeedback="true"
           invalidFeedback="test"
           badgeFullWidth="true"
           placeholder="Combobox placeholder"
-        ></sgds-combo-box>
+        ></sgds-combo-box> 
 
         <h2>Single selection combo-box using slot *********</h2>
         <sgds-combo-box
@@ -124,32 +178,32 @@
           label="Combobox using slot"
           hinttext="Select an option"
           placeholder="Select an option, test filterFunction"
-          value="1"
+          value="1;2"
           id="combobox-multi-selection-slot"
           multiSelect
         >
           <sgds-combo-box-option value="1" disabled>lion</sgds-combo-box-option>
           <sgds-combo-box-option value="2">tiger</sgds-combo-box-option>
           <sgds-combo-box-option value="3">bear</sgds-combo-box-option>
-        </sgds-combo-box>
-        <h2>Empty combobox with slots</h2>
+        </sgds-combo-box> -->
+        <!--  <h2>Empty combobox with slots</h2>
         <sgds-combo-box
           label="Combobox using slot"
           hinttext="Select an option"
           placeholder="Select an option"
           value="1"
           multiSelect
-        ></sgds-combo-box>
+        ></sgds-combo-box> -->
       </div>
     </div>
 
-    <script>
+    <!-- <script>
       const multiSelectCombo = document.querySelector("#combobox-multi-selection-slot")
       multiSelectCombo.filterFunction = (inputValue, menuItem) => {
     return  menuItem.label.toLowerCase().includes(inputValue)
 }
     </script>
-    <!-- Slot method: Test if menu option changes will trigger an update in the combo box value -->
+    Slot method: Test if menu option changes will trigger an update in the combo box value 
     <script>
       setTimeout(() => {
         const durianOption = document.createElement("sgds-combo-box-option");
@@ -161,7 +215,7 @@
     </script>
 
     <script>
-      document.addEventListener("sgds-change", reduceList);
+      document.addEventListener("sgds-input", reduceList);
 
       function reduceList() {
         const combobox = document.getElementById("combobox-2");
@@ -179,6 +233,6 @@
         const combobox3 = document.getElementById("combobox-3");
         combobox3.setAttribute("value", "4");
       }
-    </script>
+    </script> -->
   </body>
 </html>

@@ -1,3 +1,4 @@
+import { nothing, PropertyValueMap } from "lit";
 import { property, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html, literal } from "lit/static-html.js";
@@ -59,7 +60,8 @@ export class SgdsCard extends CardElement {
 
   private readonly hasSlotController = new HasSlotController(this, "image", "icon", "upper");
 
-  protected firstUpdated() {
+  protected firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
     if (this.stretchedLink) {
       const footerHref = this.footerSlotItems?.href;
       const linkHref = this.linkSlotItems?.href;
@@ -125,7 +127,7 @@ export class SgdsCard extends CardElement {
           <slot name="description"></slot>
           <slot name="lower"></slot>
           <slot name="footer">
-            <slot name="link" @slotchange=${this.handleLinkSlotChange}></slot>
+            <slot name="link" @slotchange=${this.warnLinkSlotMisused}></slot>
           </slot>
         </div>
       </${tag}>

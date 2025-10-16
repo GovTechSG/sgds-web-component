@@ -1,4 +1,4 @@
-import { html, nothing } from "lit";
+import { html, nothing, PropertyValueMap } from "lit";
 import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -27,7 +27,9 @@ export class SgdsSkeleton extends SgdsElement {
   /** Adds a sheening animated effect to the skeleton  */
   @property({ type: Boolean, reflect: true }) sheen = false;
 
-  protected firstUpdated(): void {
+  protected firstUpdated(changedProperties: PropertyValueMap<this>): void {
+    super.firstUpdated(changedProperties);
+
     this.width ? (this.skeleton.style.width = this.width) : null;
     this.height ? (this.skeleton.style.height = this.height) : null;
     this.borderRadius ? (this.skeleton.style.borderRadius = this.borderRadius) : null;

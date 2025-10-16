@@ -1,4 +1,4 @@
-<script type="module" src="../src/index.ts"></script>
+<script type="module" src="../src/components/Select/index.ts"></script>
 <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
 <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
@@ -15,26 +15,8 @@
 
 <div>
   <!-- Modal Example -->
-  <sgds-modal open>
-    <sgds-select
-      id="select-example-in-modal"
-      label="Select label"
-      hinttext="Select an option"
-      placeholder="Select an option"
-      hasFeedback
-      required
-    ></sgds-select>
-    <sgds-select
-      id="select-example-in-modal"
-      label="Select label"
-      hinttext="Select an option"
-      placeholder="Select an option"
-      hasFeedback
-      required
-    ></sgds-select>
-  </sgds-modal>
 
-  <h2> Select populated by menuList prop</h2>
+  <!-- <h2> Select populated by menuList prop</h2>
   <sgds-select
     id="select-example"
     label="Select label"
@@ -42,7 +24,8 @@
     placeholder="Select an option"
     required
     hasFeedback
-  ></sgds-select>
+    value="1"
+  ></sgds-select> -->
 
   <h2> Select populated by slots</h2>
   <sgds-select
@@ -54,7 +37,7 @@
   <sgds-select-option disabled value="2">Option 2</sgds-select-option>
   <sgds-select-option value="3">Option 3</sgds-select-option>
 </sgds-select>
-  <sgds-select
+  <!-- <sgds-select
     label="Using slots with some disabled options"
     hinttext="Select an option"
     placeholder="Select an option"
@@ -79,14 +62,14 @@
     label="Empty menu (slot)"
     hinttext="Select an option"
     placeholder="Select an option"
-  ></sgds-select>
+  ></sgds-select> -->
 
 </div>
-
+<!-- 
 <script>
   const select = document.querySelector("#select-example");
   const modalSelect = document.querySelector("#select-example-in-modal");
-  modalSelect.menuList = select.menuList = [
+  select.menuList = [
     { label: "Afghanistan", value: "1" },
     { label: "Albania", value: "2" },
     { label: "Algeria", value: "3" },
@@ -293,7 +276,7 @@
     { label: "Zambia", value: "204" },
     { label: "Zimbabwe", value: "205" }
   ];
-</script>
+</script> -->
 
 <script>
   window.addEventListener("sgds-change", () => console.log("sgds-change"));

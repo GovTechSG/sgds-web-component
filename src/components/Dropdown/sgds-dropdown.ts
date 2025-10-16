@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { property, queryAssignedElements } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownListElement } from "../../base/dropdown-list-element";
@@ -69,8 +69,8 @@ export class SgdsDropdown extends DropdownListElement {
     this.removeEventListener("sgds-hide", this._handleCloseMenu);
   }
 
-  async firstUpdated() {
-    super.firstUpdated();
+  async firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
     if (this.menuIsOpen) {
       await this.showMenu();
     }

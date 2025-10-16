@@ -75,7 +75,7 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
   protected selectedItems: SgdsOptionData[] = [];
   /** @internal Managed filtered menu on the fly with input change*/
   @state()
-  protected filteredMenuList: SgdsOptionData[] = [];
+  protected filteredList: SgdsOptionData[] = [];
 
   protected _isTouched = false;
 
@@ -98,7 +98,7 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("blur", async () => {
-      this.invalid = !this._mixinReportValidity();
+      this.invalid = this.menuIsOpen ? false : !this._mixinReportValidity();
     });
   }
 
@@ -171,15 +171,17 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
       this.hideMenu();
     }
   }
-  protected _getMenuListFromOptions(): SgdsOptionData[] {
-    return this.options?.map((el: OptionElement) => ({
-      label: el.textContent?.trim() ?? "",
-      value: el.getAttribute("value") ?? el.textContent?.trim() ?? "",
+  protected async _getMenuListFromOptions(assignedElements: Element[]): Promise<SgdsOptionData[]> {
+    const readyOptions = assignedElements.map(async (e: OptionElement) => {
+      await e.updateComplete;
+      return e;
+    });
+    const options = await Promise.all(readyOptions);
+    return options?.map((el: OptionElement) => ({
+      label: el.innerText,
+      value: el.getAttribute("value"),
       disabled: el.disabled ?? undefined
     }));
-  }
-  protected _handleDefaultSlotChange() {
-    this.menuList = this._getMenuListFromOptions();
   }
 
   protected declare options: OptionElement[];

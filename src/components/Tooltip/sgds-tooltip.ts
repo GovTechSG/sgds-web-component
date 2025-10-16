@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { computePosition, offset, flip, shift, hide, autoUpdate, Strategy } from "@floating-ui/dom";
@@ -59,7 +59,9 @@ export class SgdsTooltip extends SgdsElement {
     }
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
+
     this._tooltipTargetElements.forEach(el => {
       el.setAttribute("data-sgds-tooltip", this.content);
 

@@ -1,6 +1,7 @@
-import { query, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 import { DropdownElement } from "./dropdown-element";
 import { SgdsDropdownItem } from "../components";
+import { PropertyValueMap } from "lit";
 
 const TAB = "Tab";
 const ARROW_DOWN = "ArrowDown";
@@ -25,6 +26,9 @@ export class DropdownListElement extends DropdownElement {
   @state()
   prevDropdownItemNo = -1;
 
+  @property({ type: Boolean, reflect: true })
+  hidden = false;
+
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener("sgds-hide", this._resetMenu);
@@ -35,8 +39,8 @@ export class DropdownListElement extends DropdownElement {
     this.removeEventListener("sgds-hide", this._resetMenu);
   }
 
-  firstUpdated() {
-    super.firstUpdated();
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
     this.addEventListener("keydown", this._handleKeyboardMenuItemsEvent);
   }
 
@@ -113,22 +117,22 @@ export class DropdownListElement extends DropdownElement {
   }
 
   private _getMenuItems(): SgdsDropdownItem[] {
+    const defaultSlot = this.shadowRoot.querySelector("slot#default");
     // for case when default slot is used e.g. dropdown, mainnavdropdown
-    if (this.shadowRoot.querySelector("slot#default")) {
+    if (defaultSlot) {
       const defaultSlotItems = (this.shadowRoot.querySelector("slot#default") as HTMLSlotElement)
         ?.assignedElements({
           flatten: true
         })
-        .filter(el => !el.classList.contains("empty-menu")) as SgdsDropdownItem[];
-
+        .filter(el => !el.classList.contains("empty-menu") && !el.hasAttribute("hidden")) as SgdsDropdownItem[];
       return defaultSlotItems;
     }
-
     // for case when there is no slot e.g. combobox
     if (this.menu?.hasChildNodes()) {
-      const menuItems = this.menu.children;
+      const menuItems = Array.from(this.menu.children);
       return [...menuItems] as SgdsDropdownItem[];
     }
+
     return [];
   }
 
