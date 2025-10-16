@@ -26,8 +26,8 @@ export class DropdownListElement extends DropdownElement {
   @state()
   prevDropdownItemNo = -1;
 
-  @property({type: Boolean, reflect: true})
-  hidden = false
+  @property({ type: Boolean, reflect: true })
+  hidden = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -124,7 +124,7 @@ export class DropdownListElement extends DropdownElement {
         ?.assignedElements({
           flatten: true
         })
-        .filter(el => !el.classList.contains("empty-menu") && !el.hasAttribute('hidden')) as SgdsDropdownItem[];
+        .filter(el => !el.classList.contains("empty-menu") && !el.hasAttribute("hidden")) as SgdsDropdownItem[];
       return defaultSlotItems;
     }
     // for case when there is no slot e.g. combobox
