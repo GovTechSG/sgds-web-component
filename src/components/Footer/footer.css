@@ -32,7 +32,8 @@ slot[name="title"]::slotted(*) {
   margin-bottom: var(--sgds-margin-none) !important;
 }
 
-slot[name="description"]::slotted(*) {
+slot[name="description"]::slotted(*),
+slot:not([name])::slotted(*) {
   color: var(--sgds-color-fixed-light);
   margin-top: var(--sgds-margin-none);
   margin-bottom: var(--sgds-margin-none) !important;

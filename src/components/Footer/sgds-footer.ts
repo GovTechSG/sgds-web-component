@@ -9,10 +9,10 @@ import footerStyle from "./footer.css";
 /**
  * @summary The footer contains supporting information for your service at the bottom of your website. All .gov.sg digital services shall contain a Global Footer Bar across all pages. The Global Footer Bar should include the name of the digital service, contact information, a privacy statement and the terms of use.
  *
+ * @slot default - The slot for footer content. Use this slot if you want full control over the layout or styling. When provided, it replaces the `items` slot layout.
  * @slot title - The slot for title
  * @slot description - The slot for description
- * @slot content - The slot for footer content. Use this slot if you want full control over the layout or styling. When provided, it replaces the `items` slot layout.
- * @slot items - the slot for the list of footer items, styled automatically with `.footer-items`. For custom layouts or styles, use the `content` slot instead.
+ * @slot items - the slot for the list of footer items, styled automatically with `.footer-items`. For custom layouts or styles, use the `default` slot instead.
  */
 export class SgdsFooter extends SgdsElement {
   static styles = [...SgdsElement.styles, footerStyle];
@@ -50,6 +50,9 @@ export class SgdsFooter extends SgdsElement {
   @property({ type: String })
   termsOfUseHref = "#";
 
+  /** Used only for SSR to indicate the presence of the `default` slot. */
+  @property({ type: Boolean }) hasDefaultSlot = false;
+
   /** Used only for SSR to indicate the presence of the `title` slot. */
   @property({ type: Boolean }) hasTitleSlot = false;
 
@@ -59,16 +62,13 @@ export class SgdsFooter extends SgdsElement {
   /** Used only for SSR to indicate the presence of the `items` slot. */
   @property({ type: Boolean }) hasItemsSlot = false;
 
-  /** Used only for SSR to indicate the presence of the `content` slot. */
-  @property({ type: Boolean }) hasContentSlot = false;
-
-  private readonly hasSlotController = new HasSlotController(this, "title", "description", "content", "items");
+  private readonly hasSlotController = new HasSlotController(this, "[default]", "title", "description", "items");
 
   updated() {
+    if (!this.hasDefaultSlot) this.hasDefaultSlot = this.hasSlotController.test("[default]");
     if (!this.hasTitleSlot) this.hasTitleSlot = this.hasSlotController.test("title");
     if (!this.hasDescriptionSlot) this.hasDescriptionSlot = this.hasSlotController.test("description");
     if (!this.hasItemsSlot) this.hasItemsSlot = this.hasSlotController.test("items");
-    if (!this.hasContentSlot) this.hasContentSlot = this.hasSlotController.test("content");
   }
 
   render() {
@@ -76,8 +76,8 @@ export class SgdsFooter extends SgdsElement {
       <footer class="footer">
         <section
           class="${classMap({
-            "footer-top": this.hasTitleSlot || this.hasDescriptionSlot || this.hasItemsSlot || this.hasContentSlot,
-            "has-content": this.hasItemsSlot || this.hasContentSlot
+            "footer-top": this.hasDefaultSlot || this.hasTitleSlot || this.hasDescriptionSlot || this.hasItemsSlot,
+            "has-content": this.hasDefaultSlot || this.hasItemsSlot
           })}"
         >
           <div class="footer-header">
@@ -85,11 +85,13 @@ export class SgdsFooter extends SgdsElement {
             <slot name="description"></slot>
           </div>
           <div>
-            <slot name="content">
-              <div class="footer-items">
-                <slot name="items"></slot>
-              </div>
-            </slot>
+            ${this.hasDefaultSlot
+              ? html`<slot></slot>`
+              : html`
+                  <div class="footer-items">
+                    <slot name="items"></slot>
+                  </div>
+                `}
           </div>
         </section>
         <section class="footer-bottom">

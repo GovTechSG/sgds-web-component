@@ -16,11 +16,83 @@ describe("footer", () => {
               <slot name="description"></slot>
             </div>
             <div>
-              <slot name="content">
-                <div class="footer-items">
-                  <slot name="items"></slot>
-                </div>
-              </slot>
+              <div class="footer-items">
+                <slot name="items"></slot>
+              </div>
+            </div>
+          </section>
+          <section class="footer-bottom">
+            <div class="footer-mandatory-links">
+              <ul>
+                <li>
+                  <sgds-link size="sm" variant="primary">
+                    <a href="#" tabindex="0">Contact</a>
+                  </sgds-link>
+                </li>
+                <li>
+                  <sgds-link size="sm" variant="primary">
+                    <a href="#" tabindex="0">Feedback</a>
+                  </sgds-link>
+                </li>
+                <li>
+                  <sgds-link size="sm" variant="primary">
+                    <a href="#" tabindex="0">FAQ</a>
+                  </sgds-link>
+                </li>
+                <li>
+                  <sgds-link size="sm" variant="primary">
+                    <a href="#" tabindex="0">Sitemap</a>
+                  </sgds-link>
+                </li>
+                <li>
+                  <sgds-link size="sm" variant="primary">
+                    <a
+                      href="https://tech.gov.sg/report_vulnerability"
+                      rel="noopener noreferrer"
+                      tabindex="0"
+                      target="_blank"
+                      >Report Vulnerability</a
+                    >
+                  </sgds-link>
+                </li>
+                <li>
+                  <sgds-link size="sm" variant="primary">
+                    <a href="#" tabindex="0">Privacy Statement</a>
+                  </sgds-link>
+                </li>
+                <li>
+                  <sgds-link size="sm" variant="primary">
+                    <a href="#" tabindex="0">Terms of use</a>
+                  </sgds-link>
+                </li>
+              </ul>
+              <div class="footer-copyrights">© ${new Date().getFullYear()}, Government of Singapore</div>
+            </div>
+          </section>
+        </footer>
+          `
+    );
+  });
+
+  it("renders with default values when default slot has content", async () => {
+    const el = await fixture<SgdsFooter>(
+      html`
+        <sgds-footer>
+          <p>footer content</p>
+        </sgds-footer>
+      `
+    );
+    assert.shadowDom.equal(
+      el,
+      `
+          <footer class="footer">
+          <section class="footer-top has-content">
+            <div class="footer-header">
+              <slot name="title"></slot>
+              <slot name="description"></slot>
+            </div>
+            <div>
+              <slot></slot>
             </div>
           </section>
           <section class="footer-bottom">
