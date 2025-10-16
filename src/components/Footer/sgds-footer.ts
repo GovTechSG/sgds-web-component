@@ -11,9 +11,8 @@ import footerStyle from "./footer.css";
  *
  * @slot title - The slot for title
  * @slot description - The slot for description
- * @slot content - The slot for footer content.
- * @slot items - (@deprecated) Deprecated since 3.5.3 in favour of `content` slot.
- * Legacy slot for the list of footer items. Use `content` slot instead.
+ * @slot content - The slot for footer content. Use this slot if you want full control over the layout or styling. When provided, it replaces the `items` slot layout.
+ * @slot items - the slot for the list of footer items, styled automatically with `.footer-items`. For custom layouts or styles, use the `content` slot instead.
  */
 export class SgdsFooter extends SgdsElement {
   static styles = [...SgdsElement.styles, footerStyle];
