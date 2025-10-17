@@ -60,7 +60,7 @@ export const parameters = {
         "Style",
         "Form",
         ["Validation", "Custom Validation"],
-        "Troubleshooting",
+        "Troubleshoot",
         "Components",
         "Patterns",
         "Templates"

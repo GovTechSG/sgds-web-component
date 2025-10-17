@@ -8,9 +8,10 @@
   "scripts": {
     "dev": "VITE_ENV=development vite --open",
     "preview": "VITE_ENV=production vite --open",
-    "build": "npm run build:react && rm -rf lib && rollup --config rollup.config.mjs && node ./scripts/frankBuild.js && npm run generate:icons",
-    "build:react": "npm run cem && node ./scripts/makeReact.mjs",
+    "build": "npm run cem && npm run build:react && rm -rf lib && rollup --config rollup.config.mjs && node ./scripts/frankBuild.js && npm run generate:icons && npm run build:fouc",
+    "build:react": "node ./scripts/makeReact.mjs",
     "build:readme": "gulp build-readme",
+    "build:fouc": "node ./scripts/generateFoucStyle.mjs",
     "write:stories": "npm run cem && node ./scripts/generateStories.mjs && npm run concat:stories && npm run update:docs",
     "write:component": "plop",
     "test": "rm -rf test-outdir && rollup --config rollup.test.config.js && web-test-runner",

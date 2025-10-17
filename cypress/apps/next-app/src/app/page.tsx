@@ -41,13 +41,13 @@ import { Tooltip } from "./components/Tooltip";
 export default function Home() {
   return (
     <main>
-            {/* <Card /> */}
+            <Card />
     <Select />
       <div>hello world</div>
-      {/* <Masthead />
+     <Masthead />
       <Mainnav />
-      <Accordion /> */}
-      {/* <Alert />
+      <Accordion /> 
+     <Alert />
       <Badge />
       <Breadcrumb />
       <Button />
@@ -80,7 +80,7 @@ export default function Home() {
       <Textarea />
       <Toast />
       <Tooltip />
-      <Footer /> */}
+      <Footer /> 
     </main>
   );
 }
