@@ -8,14 +8,12 @@ const components = getSgdsComponents(getAllComponents(cem))
 const directory = path.join('lib/css');
 const cssSelector = components.map(com => {
     const tagName = com.tagName
-    const selector = `${tagName}:not(:defined) > * `
+    const selector = `${tagName}:not(:defined), ${tagName}:not(:defined) > * `
     return selector
 }).join(",")
 
 const source = prettier.format(
     `${cssSelector} {
-        display: block;
-        height: 100vh;
         opacity: 0;
         transition: opacity 0.5s ease-in-out;
     }`, 
