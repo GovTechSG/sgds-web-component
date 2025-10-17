@@ -1,3 +1,34 @@
+## v3.5.4 (2025-10-17)
+
+### Feat
+
+- **fouc**: new styles to mitigate fouc (#455)
+- **fouc**: remove child selection
+- **fouc**: refine the css
+- **fouc**: new styles to mitigate fouc
+- **footer**: update footer (#441)
+- **footer**: add default slot and its SSR prop and replace items slot when presence
+- **footer**: update footer
+- *****: new ssr prop to detect server and force call slotchange in server environment
+
+### Fix
+
+- **checkbox**: ensure checkbox box remains square and not compressed by label text (#457)
+- **checkbox**: ensure checkbox box remains square and not compressed by label text
+- **Select, ThumbnailCard**: slotted items not accessible at firstUpdated (#430)
+- *****: add missing sub components export
+
+### Refactor
+
+- **ComboBox**: complete iwth test
+- **Combobox**: separate menuList from slotted options
+- **Select**: show menu list from slotted element instead of map from menuList
+- **select**: use innerText
+- **Select**: await options to updateComplete before populating menuList
+- **Select**: for slots access menulist by slot change event
+- *****: typed changedProperties in firstUpdated
+- *****: forwards base element firstUpdated in all downstream components
+
 ## v3.5.3 (2025-10-13)
 
 ### Refactor
