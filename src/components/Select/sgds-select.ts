@@ -37,32 +37,9 @@ export class SgdsSelect extends SelectElement {
   @queryAssignedElements({ flatten: true, selector: "sgds-select-option" })
   protected options: SgdsSelectOption[];
 
-  protected get menuListFromlightDomOptions() {
-    return this.lighDomOptions.map((o: HTMLElement) => ({
-      disabled: o.hasAttribute("disabled"),
-      value: o.getAttribute("value"),
-      label: o.textContent
-    }));
-  }
-  protected get lighDomOptions() {
-    return Array.from(this.querySelectorAll("sgds-select-option"));
-  }
   async firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
-    if (this.menuList.length > 0 && this.value) {
-      const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
-      this.displayValue = initialSelectedItem[0].label;
-
-      this._setActiveToOption();
-    }
-
-    if (this.value && this.menuList.length > 0) {
-      const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
-      this.displayValue = initialSelectedItem[0].label;
-
-      this._setActiveToOption();
-    }
-
+    this._updateDisplayValue();
     this.input = await this._input;
     this._mixinValidate(this.input);
     if (this.menuIsOpen && !this.readonly) {
@@ -70,17 +47,34 @@ export class SgdsSelect extends SelectElement {
     }
   }
 
-  _handleSlotChange() {
-    this.menuList = this._getMenuListFromOptions();
+  private async _handleSlotChange(e: Event) {
+    const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
 
-    if (this.value) {
+    assignedElements.forEach(el =>
+      el.addEventListener("click", (e: MouseEvent) => {
+        const option = e.target as SgdsSelectOption;
+        if (option.disabled) return;
+        this._handleItemSelected(e);
+      })
+    );
+    assignedElements.forEach(el =>
+      el.addEventListener("keydown", (e: KeyboardEvent) => {
+        if (e.key === "Enter") {
+          this._handleItemSelected(e);
+        }
+      })
+    );
+    this.menuList = await this._getMenuListFromOptions(assignedElements);
+    this._updateDisplayValue();
+  }
+  private _updateDisplayValue() {
+    if (this.value && this.menuList.length > 0) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
       this.displayValue = initialSelectedItem[0].label;
 
       this._setActiveToOption();
     }
   }
-
   private _setActiveToOption() {
     const activeIndex = this.menuList.findIndex(item => item.value.toString() === this.value);
     this.options.forEach((option, index) => {
@@ -149,6 +143,7 @@ export class SgdsSelect extends SelectElement {
   protected _renderEmptyMenu() {
     return html` <div class="empty-menu">No options</div> `;
   }
+  /** Applicable for menuList prop only */
   protected _renderMenu() {
     const menu = this.menuList.map(item => {
       const isActive = item.value === this.value;
@@ -157,7 +152,7 @@ export class SgdsSelect extends SelectElement {
           ?active=${isActive}
           value=${item.value}
           ?disabled=${item.disabled}
-          @click=${this._handleItemSelected}
+          @click=${item.disabled ? null : this._handleItemSelected}
           @keydown=${(e: KeyboardEvent) => {
             if (e.key === "Enter") {
               this._handleItemSelected(e);
@@ -220,9 +215,8 @@ export class SgdsSelect extends SelectElement {
         <!-- The input -->
         ${this._renderInput()} ${this._renderFeedback()}
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
-          ${this._renderMenu()}
+          <slot id="default" @slotchange=${this._handleSlotChange}>${this._renderMenu()}</slot>
         </ul>
-        <slot @slotchange=${this._handleSlotChange} id="options"></slot>
       </div>
     `;
   }

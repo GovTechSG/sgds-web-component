@@ -2,7 +2,7 @@
   display: flex;
   gap: var(--sgds-form-gap-sm);
   color: var(--sgds-form-danger-color-default);
-  line-height: var(--sgds-line-height-min);
+  line-height: var(--sgds-line-height-20);
 
 }
 
@@ -10,7 +10,7 @@
   color: var(--sgds-form-danger-color-default);
   font-size: var(--sgds-font-size-1);
   font-weight: var(--sgds-font-weight-regular);
-  line-height: var(--sgds-line-height-min);
+  line-height: var(--sgds-line-height-20);
 }
 
 .valid-icon{

@@ -20,7 +20,7 @@ button.month,
 button.year {
   padding: 0;
   border: 0;
-  line-height: var(--sgds-line-height-min);
+  line-height: var(--sgds-line-height-20);
   background-color: transparent;
   border-radius: var(--sgds-form-border-radius-sm);
   position: relative;
@@ -70,7 +70,7 @@ td, th {
   width: var(--sgds-form-width-md);
   height: var(--sgds-form-height-lg);
   padding: 0;
-  line-height: var(--sgds-line-height-min);
+  line-height: var(--sgds-line-height-20);
   border-radius: var(--sgds-form-border-radius-sm);
   position: relative;
 }

@@ -12,6 +12,7 @@ import { property } from "lit/decorators.js";
 
 export default class SgdsElement extends LitElement {
   static styles: CSSResult[] = [style];
+  /**@internal Set to true in SSR environment */
   @property({ type: Boolean, reflect: true }) ssr = isServer || Boolean(this.shadowRoot);
 
   /** Emits a custom event with more convenient defaults. */
