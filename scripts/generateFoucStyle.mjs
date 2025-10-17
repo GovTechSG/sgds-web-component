@@ -8,7 +8,7 @@ const components = getSgdsComponents(getAllComponents(cem))
 const directory = path.join('lib/css');
 const cssSelector = components.map(com => {
     const tagName = com.tagName
-    const selector = `${tagName}:not(:defined), ${tagName}:not(:defined) > * `
+    const selector = `${tagName}:not(:defined)`
     return selector
 }).join(",")
 
