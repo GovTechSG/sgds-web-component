@@ -1,14 +1,63 @@
 # React
 
-Web components are [not fully supported in React](https://custom-elements-everywhere.com/#react) and should only be used directly when no rich data is required to be passed into the web components and your use case does not require any events handling.
+React 19 fully supports Web Components, enabling seamless integration of custom elements without additional wrappers. Therefore, using React-wrapped Web Components is no longer required, simplifying development and improving interoperability.
 
-Instead, our library outputs the React version of each of our web components. You can choose to use either the React components or the web components. This React instruction page mainly focuses on how to use the React version.
+Our library still outputs the React version of each of our web components for backward compabiltiy, but if you are on React 19, it is highly recommended to use the web components directly as we are looking to phase out the React wrapped components in the future. 
 
-## Demo app 
+## React 19 and onwards
+
+### Usage 
+
+You can directly use the native web components
+```jsx
+//Select.ts
+import "@govtechsg/sgds-web-component/components/Select";
+
+const SgdsSelect = () => {
+  return <sgds-select></sgds-select>;
+};
+export default ButtonWc;
+```
+
+### Events
+
+React 19 has a new syntax for custom events. For example, a custom event `sgds-change` should be written prefixed with an `on`
+
+```jsx
+const SgdsSelect = () => {
+  return <sgds-select onsgds-change={(e: CustomEvent) => console.log(e)}></sgds-select>;
+};
+```
+
+### Complex props
+
+Complex properties like arrays and objects can now be declaratively defined in React 19
+
+```jsx
+
+const SgdsStepper = () => {
+    const step = [
+    {
+      component: <PersonalDetails setData={setData} data={data} />,
+      stepHeader: "Personal details",
+    },
+    {
+      component: <ContactDetails setData={setData} data={data} />,
+      stepHeader: "Contact details",
+    },
+    { component: <Review data={data} />, stepHeader: "Review" },
+  ];
+  return <sgds-stepper steps={step}></sgds-stepper>;
+};
+```
+
+## React 18 and below
+
+### Demo app 
 
 Refer to this [stackblitz demo app](https://stackblitz.com/edit/vitejs-vite-gebvf5) on the usage example 
 
-## Importing the library
+### Importing the library
 
 Follow instructions in `Installation` documentation section.
 Our components are exported via named exports. Import the components like so
