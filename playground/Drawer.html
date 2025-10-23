@@ -12,13 +12,27 @@
     justify-content: flex-end;
     gap: var(--sgds-gap-md);
   }
+  .container{
+    width: 500px;
+    border: 1px solid red;
+    height: 500px;
+    position: relative;
+  }
 </style>
 
-<div>
+<div class="container">
   <h2>Drawer</h2>
-  <sgds-drawer size="lg">
+  <sgds-drawer size="sm">
     <h1 slot="title">Title</h1>
     <p slot="description">Description</p>
+    <sgds-accordion density="compact">
+      <sgds-accordion-item>
+        <div slot="header">Accordion title #1</div>
+        <div slot="content">
+       <sgds-checkbox value="watermelon">Watermelon</sgds-checkbox>
+        </div>
+      </sgds-accordion-item>
+    </sgds-accordion>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dictum est vitae erat molestie blandit.
       Pellentesque at nunc at mi auctor imperdiet eu at leo. Integer aliquam, turpis vel ultricies ornare, sem massa
       commodo velit, pretium dictum quam nibh et ex. Suspendisse eu dignissim libero. Donec aliquam, lacus eu
@@ -101,4 +115,9 @@
   const drawer = document.querySelector('sgds-drawer');
   const openButton = drawer.nextElementSibling;
   openButton.addEventListener('click', () => drawer.show());
+
+  const checkbox = document.querySelector("sgds-checkbox")
+  checkbox.addEventListener("sgds-check", () => {
+
+  })
 </script>

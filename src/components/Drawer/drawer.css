@@ -25,8 +25,8 @@
 .drawer {
   top: 0;
   inset-inline-start: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
   overflow: hidden;
 }
@@ -142,7 +142,10 @@ sgds-close-button {
 .drawer-contained .drawer-overlay {
   display: none;
 }
-
+.drawer-contained {
+  height: unset;
+  width: unset;
+}
 @media screen and (min-width: 512px) {
   .drawer-panel {
     padding: var(--sgds-padding-2-xl);
