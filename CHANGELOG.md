@@ -1,3 +1,10 @@
+## v3.5.5 (2025-10-24)
+
+### Fix
+
+- **Drawer**: set width and height to viewport width and height (#459)
+- **Drawer**: set width and height to viewport width and height
+
 ## v3.5.4 (2025-10-17)
 
 ### Feat
