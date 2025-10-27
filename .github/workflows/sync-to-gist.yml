@@ -2,8 +2,7 @@ name: Sync to Lu Khei's Gist
 on:
   push:
     branches:
-      - '3.0.0-alpha' 
-      - 'lab'
+      - 'master' 
 jobs:
   Theme-Gist:
     runs-on: ubuntu-latest
