@@ -1,5 +1,6 @@
 import "./components/Accordion";
 import "./components/Alert";
+import "./components/AlertBanner";
 import "./components/Badge";
 import "./components/Breadcrumb";
 import "./components/Button";

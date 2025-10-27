@@ -1,0 +1,25 @@
+.alert {
+  --sgds-alert-color: var(--sgds-color-fixed-light);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--sgds-gap-sm);
+  background-color: var(--sgds-primary-surface-default);
+  color: var(--sgds-alert-color);
+  padding: var(--sgds-padding-sm) var(--sgds-padding-2-xl);
+}
+
+.content {
+  flex: 1;
+
+}
+
+.pagination {
+  display: flex;
+  gap: var(--sgds-gap-2-xs);
+  font-size: var(--sgds-font-size-0);
+  align-items: center;
+  font-weight: var(--sgds-font-weight-regular, 400);
+  line-height: var(--sgds-line-height-16, 16px); /* 133.333% */
+  letter-spacing: var(--sgds-letter-spacing-normal, 0);
+}

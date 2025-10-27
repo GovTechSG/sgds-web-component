@@ -112,7 +112,7 @@
   height: var(--sgds-dimension-40);
 }
 :host([size="xs"]) .btn {
-  font-size: var(--sgds-font-size-1);
+  font-size: var(--sgds-font-size-0);
   line-height: var(--sgds-line-height-16);
   padding: var(--sgds-padding-none) var(--sgds-padding-sm);
   min-width: var(--sgds-dimension-64);

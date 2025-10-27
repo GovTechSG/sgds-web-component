@@ -2,6 +2,7 @@ export * from "./Accordion/sgds-accordion";
 export * from "./Accordion/sgds-accordion-item";
 export * from "./Alert/sgds-alert";
 export * from "./Alert/sgds-alert-link";
+export * from "./AlertBanner/sgds-alert-banner";
 export * from "./Badge/sgds-badge";
 export * from "./Breadcrumb/sgds-breadcrumb";
 export * from "./Breadcrumb/sgds-breadcrumb-item";
