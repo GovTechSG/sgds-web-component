@@ -2,9 +2,11 @@ import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html, literal } from "lit/static-html.js";
-import ButtonElement from "../../base/button-element";
+import ButtonElement, { ButtonTone } from "../../base/button-element";
 import SgdsIcon from "../Icon/sgds-icon";
 import iconButtonStyles from "./icon-button.css";
+import SgdsSpinner from "../Spinner/sgds-spinner";
+import { ButtonVariant } from "../Button/sgds-button";
 
 /**
  * @summary An icon button is a user interface element that combines an icon and a button, serving as a clickable or tabbable component.
@@ -16,18 +18,37 @@ export class SgdsIconButton extends ButtonElement {
   static styles = [...ButtonElement.styles, iconButtonStyles];
   /** @internal */
   static dependencies = {
-    "sgds-icon": SgdsIcon
+    "sgds-icon": SgdsIcon,
+    "sgds-spinner": SgdsSpinner
   };
 
   /** The name of the icon from sgds icon library */
   @property({ type: String, reflect: true }) name: string;
 
-  private _assignIconSize(buttonSize: "sm" | "md" | "lg") {
+  private _assignIconSize(buttonSize: "xs" | "sm" | "md" | "lg") {
+    if (buttonSize === "xs") return "sm";
     if (buttonSize === "sm") return "md";
     if (buttonSize === "md") return "lg";
     if (buttonSize === "lg") return "xl";
   }
+  private _assignSpinnerSize(buttonSize: "xs" | "sm" | "md" | "lg") {
+    if (buttonSize === "xs") return "xs";
+    if (buttonSize === "sm") return "xs";
+    if (buttonSize === "md") return "sm";
+    if (buttonSize === "lg") return "md";
+  }
 
+  private _assignSpinnerTone(buttonTone: ButtonTone, buttonVariant: ButtonVariant) {
+    let spinnerTone: string | undefined = undefined;
+
+    if (buttonVariant === "primary") {
+      spinnerTone = "fixed-light";
+    }
+    if ((buttonTone === "neutral" && buttonVariant === "outline") || buttonVariant === "ghost") {
+      spinnerTone = "neutral";
+    }
+    return spinnerTone;
+  }
   render() {
     const isLink = this.href;
     const tag = isLink ? literal`a` : literal`button`;
@@ -53,7 +74,17 @@ export class SgdsIconButton extends ButtonElement {
             @blur=${this._handleBlur}
             aria-label=${ifDefined(this.ariaLabel)}
           >
-            <sgds-icon name=${ifDefined(this.name)} size=${ifDefined(this._assignIconSize(this.size))}></sgds-icon>
+            ${
+              this.loading
+                ? html`<sgds-spinner
+                    size=${ifDefined(this._assignSpinnerSize(this.size))}
+                    tone=${ifDefined(this._assignSpinnerTone(this.tone, this.variant))}
+                  ></sgds-spinner>`
+                : html`<sgds-icon
+                    name=${ifDefined(this.name)}
+                    size=${ifDefined(this._assignIconSize(this.size))}
+                  ></sgds-icon>`
+            }
           </${tag}>
         `;
   }

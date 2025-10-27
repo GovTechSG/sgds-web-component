@@ -11,10 +11,12 @@ import { nothing } from "lit";
  */
 export class SgdsSpinner extends SgdsElement {
   static styles = [...SgdsElement.styles, textStyles, spinnerStyle];
-  /** The variant of spinner */
+  /** @deprecated The variant of spinner. Deprecated in favor of `tone` */
   @property({ type: String, reflect: true }) variant: SpinnerVariant = "primary";
+  /** @deprecated The variant of spinner. Deprecated in favor of `tone` */
+  @property({ type: String, reflect: true }) tone: SpinnerTone = "brand";
   /** Specifies a small, medium or large button, the size is medium by default. */
-  @property({ reflect: true }) size: "sm" | "md" | "lg" = "md";
+  @property({ reflect: true }) size: "xs" | "sm" | "md" | "lg" | "xl" = "md";
   /** Text label of the spinner */
   @property({ reflect: true, type: String }) label: string;
 
@@ -34,7 +36,7 @@ export class SgdsSpinner extends SgdsElement {
     `;
   }
 }
-
+export type SpinnerTone = "brand" | "neutral" | "inverse" | "fixed-light" | "fixed-dark";
 export type SpinnerVariant = "primary" | "neutral";
 
 export default SgdsSpinner;

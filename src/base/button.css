@@ -3,31 +3,87 @@
   --btn-bg: var(--sgds-primary-surface-default);
   --btn-hover-bg: var(--sgds-primary-surface-emphasis);
   --btn-border-radius: var(--sgds-border-radius-md);
+  --btn-opacity: var(--sgds-opacity-100, 1);
+}
+/* deprecated in v3.5.6 */
+:host([variant="danger"]) {
+  --btn-bg: var(--sgds-danger-surface-default);
+  --btn-hover-bg: var(--sgds-danger-surface-emphasis);
+  --btn-color: var(--sgds-color-fixed-light);
 }
 
-:host([variant="primary"]) {
+:host([variant="primary"][tone="brand"]) {
   --btn-bg: var(--sgds-primary-surface-default);
   --btn-color: var(--sgds-color-fixed-light);
 }
 
 :host([variant="outline"]) {
-  --btn-bg: var(--sgds-bg-transparent);
-  --btn-hover-bg: var(--sgds-primary-surface-translucent);
-  --btn-color: var(--sgds-primary-color-default);
   --btn-border-width: var(--sgds-border-width-1);
-  --btn-border-color: var(--sgds-primary-border-color-default);
 }
 
-:host([variant="ghost"]) {
+:host([variant="outline"][tone="brand"]) {
+  --btn-border-color: var(--sgds-primary-border-color-default);
+  --btn-bg: var(--sgds-bg-transparent);
+  --btn-color: var(--sgds-primary-color-default);
+  --btn-hover-bg: var(--sgds-primary-bg-translucent);
+}
+
+:host([variant="ghost"][tone="brand"]) {
   --btn-bg: var(--sgds-bg-transparent);
   --btn-hover-bg: var(--sgds-primary-surface-translucent);
   --btn-color: var(--sgds-primary-color-default);
 }
 
-:host([variant="danger"]) {
+:host([variant="primary"][tone="danger"]) {
   --btn-bg: var(--sgds-danger-surface-default);
   --btn-hover-bg: var(--sgds-danger-surface-emphasis);
   --btn-color: var(--sgds-color-fixed-light);
+}
+:host([variant="outline"][tone="danger"]) {
+  --btn-border-color: var(--sgds-danger-border-color-default);
+  --btn-bg: var(--sgds-bg-transparent);
+  --btn-hover-bg: var(--sgds-danger-surface-translucent);
+  --btn-color: var(--sgds-danger-color-default);
+}
+:host([variant="ghost"][tone="danger"]) {
+  --btn-bg: var(--sgds-bg-transparent);
+  --btn-hover-bg: var(--sgds-danger-surface-translucent);
+  --btn-color: var(--sgds-danger-color-default);
+}
+
+:host([variant="primary"][tone="fixed-light"]) {
+  --btn-bg: var(--sgds-surface-fixed-light); 
+  --btn-hover-bg: var(--sgds-surface-raised);
+  --btn-color: var(--sgds-color-fixed-dark);
+}
+
+:host([variant="outline"][tone="fixed-light"]) {
+  --btn-border-color: var(--sgds-border-color-fixed-light);
+  --btn-bg: var(--sgds-bg-transparent);
+  --btn-hover-bg: var(--sgds-bg-translucent);
+  --btn-color: var(--sgds-color-fixed-light); 
+}
+:host([variant="ghost"][tone="fixed-light"]) {
+  --btn-bg: var(--sgds-bg-transparent);
+  --btn-hover-bg: var(--sgds-bg-translucent);
+  --btn-color: var(--sgds-color-fixed-light);
+}
+
+:host([variant="primary"][tone="neutral"]) {
+  --btn-bg: var(--sgds-surface-inverse);
+  --btn-hover-bg: var(--sgds-surface-inverse);
+  --btn-color: var(--sgds-color-inverse);
+}
+:host([variant="outline"][tone="neutral"]) {
+  --btn-border-color: var(--sgds-border-color-emphasis);
+  --btn-bg: var(--sgds-bg-transparent);
+  --btn-hover-bg: var(--sgds-bg-translucent-subtle);
+  --btn-color: var(--sgds-color-default);
+}
+:host([variant="ghost"][tone="neutral"]) {
+  --btn-bg: var(--sgds-bg-transparent);
+  --btn-hover-bg: var(--sgds-bg-translucent-subtle);
+  --btn-color: var(--sgds-color-default);
 }
 
 :host([variant="primary"]) .btn,
@@ -55,6 +111,13 @@
   min-width: var(--sgds-dimension-80);
   height: var(--sgds-dimension-40);
 }
+:host([size="xs"]) .btn {
+  font-size: var(--sgds-font-size-1);
+  line-height: var(--sgds-line-height-16);
+  padding: var(--sgds-padding-none) var(--sgds-padding-sm);
+  min-width: var(--sgds-dimension-64);
+  height: var(--sgds-dimension-32);
+}
 
 .btn {
   background-color: var(--btn-bg);
@@ -80,6 +143,7 @@
     box-shadow 0.15s ease-in-out;
   user-select: none;
   vertical-align: middle;
+  opacity: var(--btn-opacity)
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -92,7 +156,9 @@
 .btn.active {
   background-color: var(--btn-hover-bg);
 }
-
+:host([variant="primary"][tone="neutral"]) .btn:hover {
+  --btn-opacity: var(--sgds-opacity-80, 0.8);
+}
 .btn:focus,
 .btn:focus-visible {
   background-color: var(--btn-hover-bg);

@@ -1,7 +1,14 @@
 import { property, query } from "lit/decorators.js";
 import SgdsElement from "./sgds-element";
 import buttonStyles from "./button.css";
-export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
+
+export type ButtonTone = "brand" | "danger" | "fixed-light" | "neutral";
+export type ButtonVariant =
+  | "primary"
+  | "outline"
+  | "ghost"
+  /** @deprecated since v3.5.6 */
+  | "danger";
 
 export default class ButtonElement extends SgdsElement {
   static styles = [...SgdsElement.styles, buttonStyles];
@@ -11,8 +18,11 @@ export default class ButtonElement extends SgdsElement {
   /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `danger`, `outline`, `ghost` */
   @property({ reflect: true }) variant: ButtonVariant = "primary";
 
+  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `danger`, `outline`, `ghost` */
+  @property({ reflect: true }) tone: ButtonTone = "brand";
+
   /** Specifies a small, medium or large button, the size is medium by default. */
-  @property({ reflect: true }) size: "sm" | "md" | "lg" = "md";
+  @property({ reflect: true }) size: "xs" | "sm" | "md" | "lg" = "md";
 
   /** Manually set the visual state of the button to `:active` */
   @property({ type: Boolean, reflect: true }) active = false;
@@ -31,6 +41,9 @@ export default class ButtonElement extends SgdsElement {
 
   /** The aria-label attribute to passed to button element when necessary */
   @property({ type: String }) ariaLabel: string;
+
+  /** When true, shows a loading spinner */
+  @property({ type: Boolean }) loading: boolean;
 
   /** Sets focus on the button. */
   public focus(options?: FocusOptions) {
