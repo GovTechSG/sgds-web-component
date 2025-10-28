@@ -31,24 +31,6 @@ export class SgdsIconButton extends ButtonElement {
     if (buttonSize === "md") return "lg";
     if (buttonSize === "lg") return "xl";
   }
-  private _assignSpinnerSize(buttonSize: "xs" | "sm" | "md" | "lg") {
-    if (buttonSize === "xs") return "xs";
-    if (buttonSize === "sm") return "xs";
-    if (buttonSize === "md") return "sm";
-    if (buttonSize === "lg") return "md";
-  }
-
-  private _assignSpinnerTone(buttonTone: ButtonTone, buttonVariant: ButtonVariant) {
-    let spinnerTone: string | undefined = undefined;
-
-    if (buttonVariant === "primary") {
-      spinnerTone = "fixed-light";
-    }
-    if ((buttonTone === "neutral" && buttonVariant === "outline") || buttonVariant === "ghost") {
-      spinnerTone = "neutral";
-    }
-    return spinnerTone;
-  }
   render() {
     const isLink = this.href;
     const tag = isLink ? literal`a` : literal`button`;

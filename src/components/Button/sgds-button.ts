@@ -130,9 +130,17 @@ export class SgdsButton extends ButtonElement {
         @blur=${this._handleBlur}
         aria-label=${ifDefined(this.ariaLabel)}
       >
-      <slot name="leftIcon"></slot>
-      <span><slot></slot></span>
-      <slot name="rightIcon"></slot>
+       ${
+         this.loading
+           ? html`<sgds-spinner
+               size=${ifDefined(this._assignSpinnerSize(this.size))}
+               tone=${ifDefined(this._assignSpinnerTone(this.tone, this.variant))}
+             ></sgds-spinner>`
+           : html`<slot name="leftIcon"></slot>
+               <span><slot></slot></span>
+               <slot name="rightIcon"></slot>`
+       }
+      
       </${tag}>
     `;
   }

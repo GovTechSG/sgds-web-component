@@ -1,6 +1,7 @@
 import { property, query } from "lit/decorators.js";
 import SgdsElement from "./sgds-element";
 import buttonStyles from "./button.css";
+import { SpinnerTone } from "../components";
 
 export type ButtonTone = "brand" | "danger" | "fixed-light" | "neutral";
 export type ButtonVariant =
@@ -72,5 +73,16 @@ export default class ButtonElement extends SgdsElement {
       event.stopPropagation();
       return;
     }
+  }
+  protected _assignSpinnerSize(buttonSize: "xs" | "sm" | "md" | "lg") {
+    if (buttonSize === "xs" || buttonSize === "sm") return "xs";
+    if (buttonSize === "md" || buttonSize === "lg") return "sm";
+  }
+  protected _assignSpinnerTone(buttonTone: ButtonTone, buttonVariant: ButtonVariant): SpinnerTone {
+  // Default spinner tone
+  if (buttonTone === "fixed-light" && buttonVariant === "primary") return "fixed-dark";
+  if (buttonTone === "fixed-light" || buttonVariant === "primary") return "fixed-light";
+  if (buttonTone === "neutral" && (buttonVariant === "outline" || buttonVariant === "ghost")) return "neutral";
+  return "brand";
   }
 }
