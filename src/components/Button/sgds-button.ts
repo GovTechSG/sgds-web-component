@@ -114,7 +114,8 @@ export class SgdsButton extends ButtonElement {
           active: this.active,
           "has-left-icon": this.hasLeftIconSlot,
           "has-right-icon": this.hasRightIconSlot,
-          "no-icon": noIcon
+          "no-icon": noIcon,
+          loading: this.loading
         })}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}

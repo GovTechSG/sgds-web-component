@@ -40,7 +40,8 @@ export class SgdsIconButton extends ButtonElement {
               disabled: this.disabled,
               active: this.active,
               [`btn-${this.variant}`]: this.variant,
-              [`btn-${this.size}`]: this.size
+              [`btn-${this.size}`]: this.size,
+              loading: this.loading
             })}"
             ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
             type=${ifDefined(isLink ? undefined : "button")}

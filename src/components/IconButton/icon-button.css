@@ -30,3 +30,6 @@
   height: var(--sgds-dimension-32);
   width: var(--sgds-dimension-32);
 }
+.loading {
+  cursor: default;
+}

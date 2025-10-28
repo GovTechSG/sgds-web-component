@@ -1,16 +1,20 @@
-## Variant
+## Tone
 
-Spinners come in two variants: primary(default) and neutral.
+Spinners come in various tones: brand, neutral, inverse, fixed-light, and fixed-dark.
 
-<Canvas of={SpinnerStories.Variant} >
-  <Story of={SpinnerStories.Variant} />
+<Canvas of={SpinnerStories.Tone}>
+  <Story of={SpinnerStories.Tone} />
+</Canvas>
+
+<Canvas of={SpinnerStories.ToneInverseFixedLight}>
+  <Story of={SpinnerStories.ToneInverseFixedLight} parameters={{ backgrounds: { default: "custom-blue" } }} />
 </Canvas>
 
 ## Size
 
-There are three sizes of spinners: small, medium(default) and large.
+There are three sizes of spinners: extra-small, small, medium(default), large and extra-large.
 
-<Canvas of={SpinnerStories.Size} >
+<Canvas of={SpinnerStories.Size}>
   <Story of={SpinnerStories.Size} />
 </Canvas>
 
@@ -18,6 +22,6 @@ There are three sizes of spinners: small, medium(default) and large.
 
 Set a label for the spinner with `label` prop of string type.
 
-<Canvas of={SpinnerStories.Label} >
+<Canvas of={SpinnerStories.Label}>
   <Story of={SpinnerStories.Label} />
 </Canvas>

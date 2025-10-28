@@ -64,24 +64,36 @@
 :host([variant="outline"][tone="fixed-light"]) {
   --btn-border-color: var(--sgds-border-color-fixed-light);
   --btn-bg: var(--sgds-bg-transparent);
-  --btn-hover-bg: linear-gradient(0deg, var(--sgds-bg-translucent-fixed-dark) 0%, var(--sgds-bg-translucent-fixed-dark) 100%), var(--sgds-bg-transparent);
+  --btn-hover-bg: linear-gradient(
+      0deg,
+      var(--sgds-bg-translucent-fixed-dark) 0%,
+      var(--sgds-bg-translucent-fixed-dark) 100%
+    ),
+    var(--sgds-bg-transparent);
   --btn-color: var(--sgds-color-fixed-light);
 }
 :host([variant="ghost"][tone="fixed-light"]) {
   --btn-bg: var(--sgds-bg-transparent);
-  --btn-hover-bg: linear-gradient(0deg, var(--sgds-bg-translucent-fixed-dark) 0%, var(--sgds-bg-translucent-fixed-dark) 100%), var(--sgds-bg-transparent);
+  --btn-hover-bg: linear-gradient(
+      0deg,
+      var(--sgds-bg-translucent-fixed-dark) 0%,
+      var(--sgds-bg-translucent-fixed-dark) 100%
+    ),
+    var(--sgds-bg-transparent);
   --btn-color: var(--sgds-color-fixed-light);
 }
 
 :host([variant="primary"][tone="neutral"]) {
   --btn-bg: var(--sgds-surface-inverse);
-  --btn-hover-bg: linear-gradient(0deg, var(--sgds-bg-translucent-inverse) 0%, var(--sgds-bg-translucent-inverse) 100%), var(--sgds-surface-inverse);
+  --btn-hover-bg: linear-gradient(0deg, var(--sgds-bg-translucent-inverse) 0%, var(--sgds-bg-translucent-inverse) 100%),
+    var(--sgds-surface-inverse);
   --btn-color: var(--sgds-color-inverse);
 }
 :host([variant="outline"][tone="neutral"]) {
-  --btn-border-color: var(--sgds-border-color-emphasis); 
+  --btn-border-color: var(--sgds-border-color-emphasis);
   --btn-bg: var(--sgds-bg-transparent);
-  --btn-hover-bg: linear-gradient(0deg, var(--sgds-bg-translucent-inverse) 0%, var(--sgds-bg-translucent-inverse) 100%), var(--sgds-bg-translucent-subtle);
+  --btn-hover-bg: linear-gradient(0deg, var(--sgds-bg-translucent-inverse) 0%, var(--sgds-bg-translucent-inverse) 100%),
+    var(--sgds-bg-translucent-subtle);
   --btn-color: var(--sgds-color-default);
 }
 :host([variant="ghost"][tone="neutral"]) {
@@ -171,7 +183,7 @@
 
 .btn.disabled,
 .btn:disabled {
-  opacity: var(--sgds-opacity-50);
+  opacity: var(--sgds-opacity-40);
   cursor: not-allowed;
   color: var(--btn-color);
 }

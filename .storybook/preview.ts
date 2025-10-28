@@ -34,6 +34,14 @@ export const setCustomElementsManifestWithOptions = (
 setCustomElementsManifestWithOptions(customElements, { privateFields: false });
 
 export const parameters = {
+  backgrounds: {
+    default: "light", // Set a default background
+    values: [
+      { name: "light", value: "#FFFFFF" },
+      { name: "dark", value: "#333333" },
+      { name: "custom-blue", value: "#ADD8E6" } // Add your custom color
+    ]
+  },
   viewMode: "docs",
   docs: {
     //@ts-ignore
