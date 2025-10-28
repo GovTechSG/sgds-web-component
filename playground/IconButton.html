@@ -3,100 +3,200 @@
 <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
 <style>
-    .fixed-light-container {
+    .fixed-light-cell {
         padding: 12px;
-        background-color: black;
+        background-color: #06402B;
     }
 </style>
-<h2>Button variants</h2>
-<sgds-icon-button name="placeholder">Primary</sgds-icon-button>
-<sgds-icon-button name="placeholder" variant="outline">Outline</sgds-icon-button>
-<sgds-icon-button name="placeholder" variant="ghost">Ghost</sgds-icon-button>
+<sgds-table>
+  <sgds-table-row>
+    <sgds-table-head>Variant</sgds-table-head>
+    <sgds-table-head>Tone</sgds-table-head>
+    <sgds-table-head>Size</sgds-table-head>
+    <sgds-table-head>Loading</sgds-table-head>
+    <sgds-table-head>Button</sgds-table-head>
+  </sgds-table-row>
 
-<br />
-
-<h2>Button tones</h2>
-<sgds-icon-button name="placeholder" variant="primary" tone="danger">Primary</sgds-icon-button>
-<sgds-icon-button name="placeholder" variant="outline" tone="danger">Outline</sgds-icon-button>
-<sgds-icon-button name="placeholder" variant="ghost" tone="danger">Ghost</sgds-icon-button>
-<br />
-
-<div class="fixed-light-container">
-<sgds-icon-button name="placeholder" variant="primary" tone="fixed-light">Primary</sgds-icon-button>
-<sgds-icon-button name="placeholder" variant="outline" tone="fixed-light">Outline</sgds-icon-button>
-<sgds-icon-button name="placeholder" variant="ghost" tone="fixed-light">Ghost</sgds-icon-button>
-</div>
-
-<br />
-
-
-<sgds-icon-button name="placeholder" variant="primary" tone="neutral">Primary</sgds-icon-button>
-<sgds-icon-button name="placeholder" variant="outline" tone="neutral">Outline</sgds-icon-button>
-<sgds-icon-button name="placeholder" variant="ghost" tone="neutral">Ghost</sgds-icon-button>
-
-<br />
-
-<sgds-icon-button name="placeholder" variant="danger">Deprecated Danger</sgds-icon-button>
-<br />
-
-
-<sgds-icon-button name="placeholder" size="xs">Extra Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="sm">Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="md">Medium</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="lg">Large</sgds-icon-button>
-<br/>
-
-<h3>Primary Brand Loading</h3>
-<sgds-icon-button name="placeholder" size="xs" loading>Extra Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="sm" loading>Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="md" loading>Medium</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="lg" loading>Large</sgds-icon-button>
-<br/>
-<h3>Outline Brand Loading</h3>
-<sgds-icon-button name="placeholder" size="xs" loading variant="outline">Extra Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="sm" loading variant="outline">Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="md" loading variant="outline">Medium</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="lg" loading variant="outline">Large</sgds-icon-button>
-<br/>
-<h3>Ghost Brand Loading</h3>
-<sgds-icon-button name="placeholder" size="xs" loading variant="ghost">Extra Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="sm" loading variant="ghost">Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="md" loading variant="ghost">Medium</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="lg" loading variant="ghost">Large</sgds-icon-button>
-<h3>Primary Danger Loading</h3>
-<sgds-icon-button name="placeholder" size="xs" loading tone="danger">Extra Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="sm" loading tone="danger">Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="md" loading tone="danger">Medium</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="lg" loading tone="danger">Large</sgds-icon-button>
-<br/>
-<h3>Outline Danger Loading</h3>
-<sgds-icon-button name="placeholder" size="xs" loading variant="outline" tone="danger">Extra Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="sm" loading variant="outline" tone="danger">Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="md" loading variant="outline" tone="danger">Medium</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="lg" loading variant="outline" tone="danger">Large</sgds-icon-button>
-<br/>
-<h3>Ghost Danger Loading</h3>
-<sgds-icon-button name="placeholder" size="xs" loading variant="ghost" tone="danger">Extra Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="sm" loading variant="ghost" tone="danger">Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="md" loading variant="ghost" tone="danger">Medium</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="lg" loading variant="ghost" tone="danger">Large</sgds-icon-button>
-<h3>Primary Neutral Loading</h3>
-<sgds-icon-button name="placeholder" size="xs" loading tone="neutral">Extra Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="sm" loading tone="neutral">Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="md" loading tone="neutral">Medium</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="lg" loading tone="neutral">Large</sgds-icon-button>
-<br/>
-<h3>Outline Neutral Loading</h3>
-<sgds-icon-button name="placeholder" size="xs" loading variant="outline" tone="neutral">Extra Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="sm" loading variant="outline" tone="neutral">Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="md" loading variant="outline" tone="neutral">Medium</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="lg" loading variant="outline" tone="neutral">Large</sgds-icon-button>
-<br/>
-<h3>Ghost Neutral Loading</h3>
-<sgds-icon-button name="placeholder" size="xs" loading variant="ghost" tone="neutral">Extra Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="sm" loading variant="ghost" tone="neutral">Small</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="md" loading variant="ghost" tone="neutral">Medium</sgds-icon-button>
-<sgds-icon-button name="placeholder" size="lg" loading variant="ghost" tone="neutral">Large</sgds-icon-button>
-
-
-
+  <sgds-table-row>
+    <sgds-table-cell>primary</sgds-table-cell>
+    <sgds-table-cell>brand</sgds-table-cell>
+    <sgds-table-cell>md</sgds-table-cell>
+    <sgds-table-cell>false</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>outline</sgds-table-cell>
+    <sgds-table-cell>brand</sgds-table-cell>
+    <sgds-table-cell>md</sgds-table-cell>
+    <sgds-table-cell>false</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" variant="outline"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>ghost</sgds-table-cell>
+    <sgds-table-cell>brand</sgds-table-cell>
+    <sgds-table-cell>md</sgds-table-cell>
+    <sgds-table-cell>false</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" variant="ghost"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>primary</sgds-table-cell>
+    <sgds-table-cell>danger</sgds-table-cell>
+    <sgds-table-cell>md</sgds-table-cell>
+    <sgds-table-cell>false</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" variant="primary" tone="danger"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>outline</sgds-table-cell>
+    <sgds-table-cell>danger</sgds-table-cell>
+    <sgds-table-cell>md</sgds-table-cell>
+    <sgds-table-cell>false</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" variant="outline" tone="danger"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>ghost</sgds-table-cell>
+    <sgds-table-cell>danger</sgds-table-cell>
+    <sgds-table-cell>md</sgds-table-cell>
+    <sgds-table-cell>false</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" variant="ghost" tone="danger"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>primary</sgds-table-cell>
+    <sgds-table-cell>fixed-light</sgds-table-cell>
+    <sgds-table-cell>md</sgds-table-cell>
+    <sgds-table-cell>false</sgds-table-cell>
+    <sgds-table-cell class="fixed-light-cell"><sgds-icon-button name="placeholder" variant="primary" tone="fixed-light"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row >
+    <sgds-table-cell>outline</sgds-table-cell>
+    <sgds-table-cell>fixed-light</sgds-table-cell>
+    <sgds-table-cell>md</sgds-table-cell>
+    <sgds-table-cell>false</sgds-table-cell>
+    <sgds-table-cell class="fixed-light-cell"><sgds-icon-button name="placeholder" variant="outline" tone="fixed-light"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>ghost</sgds-table-cell>
+    <sgds-table-cell >fixed-light</sgds-table-cell>
+    <sgds-table-cell>md</sgds-table-cell>
+    <sgds-table-cell>false</sgds-table-cell>
+    <sgds-table-cell class="fixed-light-cell"><sgds-icon-button name="placeholder" variant="ghost" tone="fixed-light">Ghost</sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>primary</sgds-table-cell>
+    <sgds-table-cell>neutral</sgds-table-cell>
+    <sgds-table-cell>md</sgds-table-cell>
+    <sgds-table-cell>false</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" variant="primary" tone="neutral"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>outline</sgds-table-cell>
+    <sgds-table-cell>neutral</sgds-table-cell>
+    <sgds-table-cell>md</sgds-table-cell>
+    <sgds-table-cell>false</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" variant="outline" tone="neutral"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>ghost</sgds-table-cell>
+    <sgds-table-cell>neutral</sgds-table-cell>
+    <sgds-table-cell>md</sgds-table-cell>
+    <sgds-table-cell>false</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" variant="ghost" tone="neutral"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>primary</sgds-table-cell>
+    <sgds-table-cell>Deprecated Danger</sgds-table-cell>
+    <sgds-table-cell>md</sgds-table-cell>
+    <sgds-table-cell>false</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" variant="danger"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>primary</sgds-table-cell>
+    <sgds-table-cell>brand</sgds-table-cell>
+    <sgds-table-cell>xs</sgds-table-cell>
+    <sgds-table-cell>false</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" size="xs"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>primary</sgds-table-cell>
+    <sgds-table-cell>brand</sgds-table-cell>
+    <sgds-table-cell>loading</sgds-table-cell>
+    <sgds-table-cell>true</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" loading></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>primary</sgds-table-cell>
+    <sgds-table-cell>danger</sgds-table-cell>
+    <sgds-table-cell>loading</sgds-table-cell>
+    <sgds-table-cell>true</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" loading tone="danger"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>primary</sgds-table-cell>
+    <sgds-table-cell>neutral</sgds-table-cell>
+    <sgds-table-cell>loading</sgds-table-cell>
+    <sgds-table-cell>true</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" loading tone="neutral"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>primary</sgds-table-cell>
+    <sgds-table-cell >fixed-light</sgds-table-cell>
+    <sgds-table-cell>loading</sgds-table-cell>
+    <sgds-table-cell>true</sgds-table-cell>
+    <sgds-table-cell class="fixed-light-cell"><sgds-icon-button name="placeholder" loading tone="fixed-light"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>ghost</sgds-table-cell>
+    <sgds-table-cell>brand</sgds-table-cell>
+    <sgds-table-cell>loading</sgds-table-cell>
+    <sgds-table-cell>true</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" loading variant="ghost"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>ghost</sgds-table-cell>
+    <sgds-table-cell>danger</sgds-table-cell>
+    <sgds-table-cell>loading</sgds-table-cell>
+    <sgds-table-cell>true</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" loading tone="danger" variant="ghost"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>ghost</sgds-table-cell>
+    <sgds-table-cell>neutral</sgds-table-cell>
+    <sgds-table-cell>loading</sgds-table-cell>
+    <sgds-table-cell>true</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" loading tone="neutral" variant="ghost"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>ghost</sgds-table-cell>
+    <sgds-table-cell>fixed-light</sgds-table-cell>
+    <sgds-table-cell>loading</sgds-table-cell>
+    <sgds-table-cell>true</sgds-table-cell>
+    <sgds-table-cell  class="fixed-light-cell"><sgds-icon-button name="placeholder" loading tone="fixed-light" variant="ghost"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>outline</sgds-table-cell>
+    <sgds-table-cell>brand</sgds-table-cell>
+    <sgds-table-cell>loading</sgds-table-cell>
+    <sgds-table-cell>true</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" loading variant="outline"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>outline</sgds-table-cell>
+    <sgds-table-cell>danger</sgds-table-cell>
+    <sgds-table-cell>loading</sgds-table-cell>
+    <sgds-table-cell>true</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" loading tone="danger" variant="outline"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>outline</sgds-table-cell>
+    <sgds-table-cell>neutral</sgds-table-cell>
+    <sgds-table-cell>loading</sgds-table-cell>
+    <sgds-table-cell>true</sgds-table-cell>
+    <sgds-table-cell><sgds-icon-button name="placeholder" loading tone="neutral" variant="outline"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row >
+    <sgds-table-cell>outline</sgds-table-cell>
+    <sgds-table-cell >fixed-light</sgds-table-cell>
+    <sgds-table-cell>loading</sgds-table-cell>
+    <sgds-table-cell>true</sgds-table-cell>
+    <sgds-table-cell class="fixed-light-cell"><sgds-icon-button name="placeholder" loading tone="fixed-light" variant="outline"></sgds-icon-button></sgds-table-cell>
+  </sgds-table-row>
+</sgds-table>

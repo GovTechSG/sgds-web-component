@@ -79,10 +79,10 @@ export default class ButtonElement extends SgdsElement {
     if (buttonSize === "md" || buttonSize === "lg") return "sm";
   }
   protected _assignSpinnerTone(buttonTone: ButtonTone, buttonVariant: ButtonVariant): SpinnerTone {
-  // Default spinner tone
-  if (buttonTone === "fixed-light" && buttonVariant === "primary") return "fixed-dark";
-  if (buttonTone === "fixed-light" || buttonVariant === "primary") return "fixed-light";
-  if (buttonTone === "neutral" && (buttonVariant === "outline" || buttonVariant === "ghost")) return "neutral";
-  return "brand";
+    // Default spinner tone
+    if (buttonTone === "fixed-light" && buttonVariant === "primary") return "fixed-dark";
+    if (buttonTone === "fixed-light" || buttonVariant === "primary") return "fixed-light";
+    if (buttonTone === "neutral" && (buttonVariant === "outline" || buttonVariant === "ghost")) return "neutral";
+    return "brand";
   }
 }
