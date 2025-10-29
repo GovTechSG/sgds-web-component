@@ -140,7 +140,7 @@ export const Loading = {
         <sgds-button variant="outline" tone="neutral" loading> Loading... </sgds-button>
         <sgds-button variant="ghost" tone="neutral" loading> Loading... </sgds-button>
       </div>
-      <div class="d-flex-row"  style="padding: 12px; background-color: #333;">
+      <div class="d-flex-row" style="padding: 12px; background-color: #333;">
         <sgds-button variant="primary" tone="fixed-light" loading> Loading... </sgds-button>
         <sgds-button variant="outline" tone="fixed-light" loading> Loading... </sgds-button>
         <sgds-button variant="ghost" tone="fixed-light" loading> Loading... </sgds-button>
