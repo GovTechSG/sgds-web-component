@@ -1,8 +1,9 @@
 import { html } from "lit";
-import { assert, expect, fixture } from "@open-wc/testing";
-import { SgdsIcon, SgdsIconButton } from "../src/components";
+import { assert, expect, fixture, waitUntil } from "@open-wc/testing";
+import { SgdsIcon, SgdsIconButton, SgdsSpinner } from "../src/components";
 import "../src/index";
 import Sinon from "sinon";
+import { sendKeys } from "@web/test-runner-commands";
 
 describe("<sgds-icon-button>", () => {
   it("semantically matches the DOM", async () => {
@@ -30,6 +31,7 @@ describe("<sgds-icon-button>", () => {
     fetchStub.restore();
   });
   const mappedSize = [
+    { btnSize: "xs", iconSize: "sm" },
     { btnSize: "sm", iconSize: "md" },
     { btnSize: "md", iconSize: "lg" },
     { btnSize: "lg", iconSize: "xl" }
@@ -41,6 +43,22 @@ describe("<sgds-icon-button>", () => {
       );
       const icon = el.shadowRoot?.querySelector("sgds-icon") as SgdsIcon;
       expect(icon.size).to.equal(iconSize);
+    });
+  });
+
+  const mappedIconButtonToSpinnerSize = [
+    { btnSize: "xs", spinnerSize: "xs" },
+    { btnSize: "sm", spinnerSize: "xs" },
+    { btnSize: "md", spinnerSize: "sm" },
+    { btnSize: "lg", spinnerSize: "sm" }
+  ];
+  mappedIconButtonToSpinnerSize.forEach(({ btnSize, spinnerSize }) => {
+    it(`when icon button size is ${btnSize}, expected spinner size is ${spinnerSize}`, async () => {
+      const el = await fixture<SgdsIconButton>(
+        html`<sgds-icon-button size=${btnSize} loading name="placeholder"></sgds-icon-button>`
+      );
+      const spinner = el.shadowRoot?.querySelector("sgds-spinner") as SgdsSpinner;
+      expect(spinner.size).to.equal(spinnerSize);
     });
   });
   it("renders an anchor tag when href is provided", async () => {
@@ -140,5 +158,65 @@ describe("<sgds-icon-button>", () => {
 
     button?.blur();
     expect(blurred).to.be.true;
+  });
+  it("loading is true, spinner replaces the icon", async () => {
+    const el = await fixture(html`<sgds-icon-button name="placeholder" loading></sgds-icon-button>`);
+    const icon = el.shadowRoot?.querySelector("sgds-icon");
+    const spinner = el.shadowRoot?.querySelector("sgds-spinner");
+    expect(spinner).to.exist;
+    expect(icon).not.to.exist;
+  });
+  it("loading is true, aria-label set to Loading, aria-disabled is true, .disabled.loading styles are set", async () => {
+    const el = await fixture(html`<sgds-icon-button name="placeholder" loading></sgds-icon-button>`);
+    const button = el.shadowRoot?.querySelector("button");
+    expect(button).to.have.attribute("aria-label", "Loading");
+    expect(button).to.have.attribute("aria-disabled", "true");
+    expect(button).to.have.class("loading");
+  });
+  it("loading is true, onclick handler are disabled", async () => {
+    const el = await fixture<SgdsIconButton>(
+      html`<sgds-icon-button
+        name="placeholder"
+        ?loading=${true}
+        onclick=${() => console.log("click")}
+      ></sgds-icon-button>`
+    );
+    const button = el.shadowRoot?.querySelector<HTMLButtonElement>("button");
+
+    let clicked = false;
+    el.addEventListener("click", () => (clicked = true));
+    button?.click();
+    expect(clicked).to.be.false;
+
+    el.loading = false;
+    await el.updateComplete;
+    button?.click();
+    expect(clicked).to.be.true;
+  });
+  it("loading is true, keydown enter handler are disabled", async () => {
+    const el = await fixture<SgdsIconButton>(
+      html`<sgds-icon-button
+        name="placeholder"
+        loading
+        onkeydown=${(e: KeyboardEvent) => (e.key === "Enter" ? console.log("enter") : null)}
+      ></sgds-icon-button>`
+    );
+    const button = el.shadowRoot?.querySelector<HTMLButtonElement>("button");
+    let enter = false;
+    el.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        enter = true;
+      }
+    });
+    button?.focus();
+    await sendKeys({ press: "Enter" });
+    expect(enter).to.be.false;
+
+    el.loading = false;
+    await el.updateComplete;
+
+    button?.focus();
+    await sendKeys({ press: "Enter" });
+    expect(enter).to.be.true;
   });
 });

@@ -40,6 +40,7 @@ describe("sgds-mainnav", () => {
             size="sm"
             target="_self"
             variant="ghost"
+            tone="brand"
           >
           </sgds-icon-button>
         </div>

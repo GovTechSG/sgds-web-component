@@ -11,7 +11,6 @@
 }
 
 .btn.btn-icon.btn-lg {
-  font-size: var(--sgds-font-size-3);
   padding: 0;
   min-width: unset;
   height: var(--sgds-dimension-56);
@@ -19,9 +18,15 @@
 }
 
 .btn.btn-icon.btn-sm {
-  font-size: var(--sgds-font-size-1);
   padding: 0;
   min-width: unset;
   height: var(--sgds-dimension-40);
   width: var(--sgds-dimension-40);
+}
+
+.btn.btn-icon.btn-xs {
+  padding: 0;
+  min-width: unset;
+  height: var(--sgds-dimension-32);
+  width: var(--sgds-dimension-32);
 }

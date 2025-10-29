@@ -26,3 +26,7 @@
 .btn.no-icon {
   gap: var(--sgds-gap-none);
 }
+
+.loading {
+  cursor: default;
+}

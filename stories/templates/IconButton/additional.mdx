@@ -4,20 +4,33 @@ The default variant is `primary`. Modify the `variant` prop to the intended valu
 
 - Use `primary` buttons to show the key action on a page or view. Most pages should only have one primary action.
 - Use `outlined` buttons next to primary buttons to indicate alternative or less pronounced actions.
-- Use `ghost` button for supplementary action as they are subtle in their appearance 
-- Use `danger` buttons  to remove things or for irreversible actions. 
+- Use `ghost` button for supplementary action as they are subtle in their appearance
+- Use `danger` buttons to remove things or for irreversible actions.
 
 <Canvas of={IconButtonStories.Variants}>
   <Story of={IconButtonStories.Variants} />
 </Canvas>
 
+## Tone
+
+Tone sets the colour of the button. Use the `tone` prop to modify the button's appearance.
+
+- Use `brand` tone for main action in the interface. Using the brand color draws attention.
+- Use `danger` tone for destructive or irreversible action
+- Use `fixed-light` tone for high-contrast white button for dark or image backgrounds.
+- Use `neutral` tone for buttons for high-contrast black/gray button on light backgrounds.
+
+<Canvas of={IconButtonStories.Tone}>
+  <Story of={IconButtonStories.Tone} />
+</Canvas>
+
 ## Sizes
 
-The default button size is medium. Add `size="lg"`,` size="sm"` for additional sizes.
+The default button size is medium. Add `size="lg"`,` size="sm"`, `size="xs"` for additional sizes.
 
 - Large buttons are used sparingly across the UI. They may be used for page components that demand attention, such as on the homepage banner.
 - The medium (default) button is the standard size for buttons everywhere.
-- Small button should be used sparingly and only in places where the UI is very dense.   
+- Small button should be used sparingly and only in places where the UI is very dense.
 
 <Canvas of={IconButtonStories.Sizes}>
   <Story of={IconButtonStories.Sizes} />
@@ -38,4 +51,12 @@ Add `disabled` prop to the button to apply the disabled state
 
 <Canvas of={IconButtonStories.Disabled}>
   <Story of={IconButtonStories.Disabled} />
+</Canvas>
+
+## Loading state
+
+To set a button's loading state, set the component's `loading` prop. When loading is true, it shows a spinner and the icon gets overridden.
+
+<Canvas of={IconButtonStories.Loading}>
+  <Story of={IconButtonStories.Loading} />
 </Canvas>

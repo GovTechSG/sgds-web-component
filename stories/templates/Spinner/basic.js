@@ -3,7 +3,12 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args =>
   html`
-    <sgds-spinner label=${ifDefined(args.label)} variant=${ifDefined(args.variant)} size=${ifDefined(args.size)}>
+    <sgds-spinner
+      label=${ifDefined(args.label)}
+      tone=${ifDefined(args.tone)}
+      size=${ifDefined(args.size)}
+      orientation=${ifDefined(args.orientation)}
+    >
     </sgds-spinner>
   `;
 

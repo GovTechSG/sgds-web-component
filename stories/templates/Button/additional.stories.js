@@ -16,6 +16,40 @@ export const Variants = {
   parameters: {},
   tags: ["!dev"]
 };
+const ToneTemplate = args => {
+  return html`
+    <div class="d-flex-column">
+      <div class="d-flex-row">
+        <sgds-button tone="brand" variant="primary">Brand Primary</sgds-button>
+        <sgds-button tone="brand" variant="outline">Brand Outline</sgds-button>
+        <sgds-button tone="brand" variant="ghost">Brand Ghost</sgds-button>
+      </div>
+      <div class="d-flex-row">
+        <sgds-button tone="danger" variant="primary">Danger Primary</sgds-button>
+        <sgds-button tone="danger" variant="outline">Danger Outline</sgds-button>
+        <sgds-button tone="danger" variant="ghost">Danger Ghost</sgds-button>
+      </div>
+      <div class="d-flex-row">
+        <sgds-button tone="neutral" variant="primary">Neutral Primary</sgds-button>
+        <sgds-button tone="neutral" variant="outline">Neutral Outline</sgds-button>
+        <sgds-button tone="neutral" variant="ghost">Neutral Ghost</sgds-button>
+      </div>
+      <div class="d-flex-row" style="padding: 12px; background-color: #333;">
+        <sgds-button tone="fixed-light" variant="primary">Fixed Light Primary</sgds-button>
+        <sgds-button tone="fixed-light" variant="outline">Fixed Light Outline</sgds-button>
+        <sgds-button tone="fixed-light" variant="ghost">Fixed Light Ghost</sgds-button>
+      </div>
+    </div>
+  `;
+};
+
+export const Tone = {
+  render: ToneTemplate.bind({}),
+  name: "Tone",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
 
 const FullWidthTemplate = () => {
   return html`<sgds-button fullWidth>Full width button</sgds-button>`;
@@ -30,7 +64,8 @@ export const FullWidth = {
 };
 
 const SizeTemplate = () => {
-  return html`<sgds-button size="sm"> small button </sgds-button>
+  return html` <sgds-button size="xs"> extra small button </sgds-button>
+    <sgds-button size="sm"> small button </sgds-button>
     <sgds-button> medium button </sgds-button>
     <sgds-button size="lg"> large button </sgds-button>`;
 };
@@ -82,6 +117,37 @@ export const ButtonWithIcon = {
     </sgds-button>
   `,
   name: "Button with Icon",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
+
+export const Loading = {
+  render: () => html`
+    <div class="d-flex-column">
+      <div class="d-flex-row">
+        <sgds-button variant="primary" loading> Loading... </sgds-button>
+        <sgds-button variant="outline" loading> Loading... </sgds-button>
+        <sgds-button variant="ghost" loading> Loading... </sgds-button>
+      </div>
+      <div class="d-flex-row">
+        <sgds-button variant="primary" tone="danger" loading> Loading... </sgds-button>
+        <sgds-button variant="outline" tone="danger" loading> Loading... </sgds-button>
+        <sgds-button variant="ghost" tone="danger" loading> Loading... </sgds-button>
+      </div>
+      <div class="d-flex-row">
+        <sgds-button variant="primary" tone="neutral" loading> Loading... </sgds-button>
+        <sgds-button variant="outline" tone="neutral" loading> Loading... </sgds-button>
+        <sgds-button variant="ghost" tone="neutral" loading> Loading... </sgds-button>
+      </div>
+      <div class="d-flex-row" style="padding: 12px; background-color: #333;">
+        <sgds-button variant="primary" tone="fixed-light" loading> Loading... </sgds-button>
+        <sgds-button variant="outline" tone="fixed-light" loading> Loading... </sgds-button>
+        <sgds-button variant="ghost" tone="fixed-light" loading> Loading... </sgds-button>
+      </div>
+    </div>
+  `,
+  name: "Loading state",
   args: {},
   parameters: {},
   tags: ["!dev"]

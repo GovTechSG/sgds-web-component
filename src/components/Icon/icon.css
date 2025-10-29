@@ -12,6 +12,10 @@
   margin-left: 0.25rem;
 }
 
+:host([size="xs"]) svg {
+  width: var(--sgds-icon-size-xs);
+  height: var(--sgds-icon-size-xs);
+}
 :host([size="sm"]) svg {
   width: var(--sgds-icon-size-sm);
   height: var(--sgds-icon-size-sm);

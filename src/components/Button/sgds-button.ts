@@ -83,12 +83,11 @@ export class SgdsButton extends ButtonElement {
   }
 
   protected override _handleClick(event: MouseEvent) {
-    if (this.disabled) {
+    if (this.disabled || this.loading) {
       event.preventDefault();
       event.stopPropagation();
       return;
     }
-
     this.removeEventListener("click", this._clickHandler);
     this.addEventListener("click", this._clickHandler);
   }
@@ -114,7 +113,8 @@ export class SgdsButton extends ButtonElement {
           active: this.active,
           "has-left-icon": this.hasLeftIconSlot,
           "has-right-icon": this.hasRightIconSlot,
-          "no-icon": noIcon
+          "no-icon": noIcon,
+          loading: this.loading
         })}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
@@ -123,16 +123,25 @@ export class SgdsButton extends ButtonElement {
         download=${ifDefined(isLink ? this.download : undefined)}
         rel=${ifDefined(isLink && this.target === "_blank" ? "noreferrer noopener" : undefined)}
         role=${ifDefined(isLink ? "button" : undefined)}
-        aria-disabled=${this.disabled ? "true" : "false"}
+        aria-disabled=${this.disabled || this.loading ? "true" : "false"}
         tabindex=${this.disabled ? "-1" : "0"}
         @click=${this._handleClick}
+        @keydown=${this._handleKeydown}
         @focus=${this._handleFocus}
         @blur=${this._handleBlur}
-        aria-label=${ifDefined(this.ariaLabel)}
+        aria-label=${ifDefined(this.loading ? "Loading" : this.ariaLabel)}
       >
-      <slot name="leftIcon"></slot>
-      <span><slot></slot></span>
-      <slot name="rightIcon"></slot>
+       ${
+         this.loading
+           ? html`<sgds-spinner
+               size=${ifDefined(this._assignSpinnerSize(this.size))}
+               tone=${ifDefined(this._assignSpinnerTone(this.tone, this.variant))}
+             ></sgds-spinner>`
+           : html`<slot name="leftIcon"></slot>
+               <span><slot></slot></span>
+               <slot name="rightIcon"></slot>`
+       }
+      
       </${tag}>
     `;
   }
