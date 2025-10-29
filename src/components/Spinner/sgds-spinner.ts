@@ -11,7 +11,7 @@ import { nothing } from "lit";
  */
 export class SgdsSpinner extends SgdsElement {
   static styles = [...SgdsElement.styles, textStyles, spinnerStyle];
-  /** @deprecated The variant of spinner. Deprecated in favor of `tone` */
+  /** The variant of spinner. Deprecated in favor of `tone` @deprecated */
   @property({ type: String, reflect: true }) variant: SpinnerVariant = "primary";
   /** The color tones of spinner, replaces variant prop */
   @property({ type: String, reflect: true }) tone: SpinnerTone = "brand";

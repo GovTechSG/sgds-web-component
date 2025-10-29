@@ -16,10 +16,10 @@ export default class ButtonElement extends SgdsElement {
   /** @internal */
   @query(".btn") protected button: HTMLButtonElement | HTMLLinkElement;
 
-  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `danger`, `outline`, `ghost` */
+  /** Sets the visual variants such as: `primary`, `outline`, `ghost`. `danger` is @deprecated since v3.5.6 */
   @property({ reflect: true }) variant: ButtonVariant = "primary";
 
-  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `danger`, `outline`, `ghost` */
+  /** Sets the visual colour of the button: `brand`, `danger`, `fixed-light`, `neutral` */
   @property({ reflect: true }) tone: ButtonTone = "brand";
 
   /** Specifies a small, medium or large button, the size is medium by default. */
