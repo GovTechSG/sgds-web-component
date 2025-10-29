@@ -3,6 +3,7 @@ import { fixture, assert, expect, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 import type { SgdsButton } from "../src/components";
+import { sendKeys } from "@web/test-runner-commands";
 
 describe("sgds-button", () => {
   it("renders with default values", async () => {
@@ -179,5 +180,61 @@ describe("when using methods", () => {
     await waitUntil(() => clickHandler.calledOnce);
 
     expect(clickHandler).to.have.been.calledOnce;
+  });
+
+  it("loading is true, spinner replaces the icon", async () => {
+    const el = await fixture(html`<sgds-button loading>hello</sgds-button>`);
+    const button = el.shadowRoot?.querySelector("button");
+    const spinner = el.shadowRoot?.querySelector("sgds-spinner");
+    expect(spinner).to.exist;
+    expect(button?.textContent).not.to.equal("hello");
+  });
+  it("loading is true, aria-label set to Loading, aria-disabled is true, .disabled.loading styles are set", async () => {
+    const el = await fixture(html`<sgds-button loading>hello</sgds-button>`);
+    const button = el.shadowRoot?.querySelector("button");
+    expect(button).to.have.attribute("aria-label", "Loading");
+    expect(button).to.have.attribute("aria-disabled", "true");
+    expect(button).to.have.class("disabled");
+    expect(button).to.have.class("loading");
+  });
+  it("loading is true, onclick handler are disabled", async () => {
+    const el = await fixture<SgdsButton>(
+      html`<sgds-button ?loading=${true} onclick=${() => console.log("click")}>hello</sgds-button>`
+    );
+    const button = el.shadowRoot?.querySelector<HTMLButtonElement>("button");
+
+    let clicked = false;
+    el.addEventListener("click", () => (clicked = true));
+    button?.click();
+    expect(clicked).to.be.false;
+
+    el.loading = false;
+    await el.updateComplete;
+    button?.click();
+    expect(clicked).to.be.true;
+  });
+  it("loading is true, keydown enter handler are disabled", async () => {
+    const el = await fixture<SgdsButton>(
+      html`<sgds-button loading onkeydown=${(e: KeyboardEvent) => (e.key === "Enter" ? console.log("enter") : null)}
+        >hello</sgds-button
+      >`
+    );
+    const button = el.shadowRoot?.querySelector<HTMLButtonElement>("button");
+    let enter = false;
+    el.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        enter = true;
+      }
+    });
+    button?.focus();
+    await sendKeys({ press: "Enter" });
+    expect(enter).to.be.false;
+
+    el.loading = false;
+    await el.updateComplete;
+
+    button?.focus();
+    await sendKeys({ press: "Enter" });
+    expect(enter).to.be.true;
   });
 });

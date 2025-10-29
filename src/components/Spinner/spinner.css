@@ -2,7 +2,10 @@
   --sgds-spinner-bg: var(--sgds-primary-surface-default);
   display: inline-flex;
 }
-
+/* variant prop is deprecated in 3.5.5 */
+:host([variant="neutral"]) {
+  --sgds-spinner-bg: var(--sgds-neutral-surface-default);
+}
 :host([tone="neutral"]) {
   --sgds-spinner-bg: var(--sgds-surface-inverse);
 }
@@ -22,7 +25,9 @@
   align-items: center;
   gap: var(--sgds-gap-2-xs);
 }
-
+.spinner-wrapper.horizontal{
+  flex-direction: row;
+}
 .spinner {
   --border-thickness: 4px;
   display: inline-flex;

@@ -270,3 +270,23 @@
 </sgds-table>
 
 <sgds-button disabled>disabled</sgds-button>
+<sgds-button loading id="test-loading-disabled">Loading</sgds-button>
+
+
+<script>
+  const button = document.getElementById("test-loading-disabled");
+
+  button.addEventListener("click", () => {
+    alert("HELLO")
+  })
+  
+  button.addEventListener("keydown", () => {
+    alert("HELLO")
+  })
+
+  setTimeout(() => {
+    button.loading = false
+    alert('loading false')
+  }, 5000)
+
+  </script> 

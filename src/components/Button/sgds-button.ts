@@ -83,12 +83,11 @@ export class SgdsButton extends ButtonElement {
   }
 
   protected override _handleClick(event: MouseEvent) {
-    if (this.disabled) {
+    if (this.disabled || this.loading) {
       event.preventDefault();
       event.stopPropagation();
       return;
     }
-
     this.removeEventListener("click", this._clickHandler);
     this.addEventListener("click", this._clickHandler);
   }
@@ -110,7 +109,7 @@ export class SgdsButton extends ButtonElement {
     return html`
       <${tag}
         class="btn ${classMap({
-          disabled: this.disabled,
+          disabled: this.disabled || this.loading,
           active: this.active,
           "has-left-icon": this.hasLeftIconSlot,
           "has-right-icon": this.hasRightIconSlot,
@@ -124,12 +123,13 @@ export class SgdsButton extends ButtonElement {
         download=${ifDefined(isLink ? this.download : undefined)}
         rel=${ifDefined(isLink && this.target === "_blank" ? "noreferrer noopener" : undefined)}
         role=${ifDefined(isLink ? "button" : undefined)}
-        aria-disabled=${this.disabled ? "true" : "false"}
+        aria-disabled=${this.disabled || this.loading ? "true" : "false"}
         tabindex=${this.disabled ? "-1" : "0"}
         @click=${this._handleClick}
+        @keydown=${this._handleKeydown}
         @focus=${this._handleFocus}
         @blur=${this._handleBlur}
-        aria-label=${ifDefined(this.ariaLabel)}
+        aria-label=${ifDefined(this.loading ? "Loading" : this.ariaLabel)}
       >
        ${
          this.loading

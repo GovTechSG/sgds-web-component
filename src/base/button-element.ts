@@ -68,7 +68,14 @@ export default class ButtonElement extends SgdsElement {
     this.emit("sgds-focus");
   }
   protected _handleClick(event: MouseEvent) {
-    if (this.disabled) {
+    if (this.disabled || this.loading) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+  }
+  protected _handleKeydown(event: KeyboardEvent) {
+    if (event.key === "Enter" && this.loading) {
       event.preventDefault();
       event.stopPropagation();
       return;

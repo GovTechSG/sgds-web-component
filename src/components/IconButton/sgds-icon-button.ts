@@ -2,11 +2,10 @@ import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html, literal } from "lit/static-html.js";
-import ButtonElement, { ButtonTone } from "../../base/button-element";
+import ButtonElement from "../../base/button-element";
 import SgdsIcon from "../Icon/sgds-icon";
-import iconButtonStyles from "./icon-button.css";
 import SgdsSpinner from "../Spinner/sgds-spinner";
-import { ButtonVariant } from "../Button/sgds-button";
+import iconButtonStyles from "./icon-button.css";
 
 /**
  * @summary An icon button is a user interface element that combines an icon and a button, serving as a clickable or tabbable component.
@@ -37,7 +36,7 @@ export class SgdsIconButton extends ButtonElement {
     return html`
           <${tag}
             class="btn btn-icon${classMap({
-              disabled: this.disabled,
+              disabled: this.disabled || this.loading,
               active: this.active,
               [`btn-${this.variant}`]: this.variant,
               [`btn-${this.size}`]: this.size,
@@ -50,12 +49,13 @@ export class SgdsIconButton extends ButtonElement {
             download=${ifDefined(isLink ? this.download : undefined)}
             rel=${ifDefined(isLink && this.target === "_blank" ? "noreferrer noopener" : undefined)}
             role=${ifDefined(isLink ? "button" : undefined)}
-            aria-disabled=${this.disabled ? "true" : "false"}
+            aria-disabled=${this.disabled || this.loading ? "true" : "false"}
             tabindex=${this.disabled ? "-1" : "0"}
             @click=${this._handleClick}
+            @keydown=${this._handleKeydown}
             @focus=${this._handleFocus}
             @blur=${this._handleBlur}
-            aria-label=${ifDefined(this.ariaLabel)}
+            aria-label=${ifDefined(this.loading ? "Loading" : this.ariaLabel)}
           >
             ${
               this.loading

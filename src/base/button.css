@@ -181,11 +181,14 @@
   outline-offset: var(--sgds-outline-offset-focus);
 }
 
-.btn.disabled,
-.btn:disabled {
+.btn.disabled:not(.loading),
+.btn:disabled:not(.loading) {
   opacity: var(--sgds-opacity-40);
   cursor: not-allowed;
   color: var(--btn-color);
+}
+.btn.loading.disabled {
+  cursor: default;
 }
 
 .btn slot::slotted(*) {

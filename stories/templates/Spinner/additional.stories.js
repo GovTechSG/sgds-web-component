@@ -54,3 +54,11 @@ export const Label = {
   parameters: {},
   tags: ["!dev"]
 };
+
+export const LabelHorizontal = {
+  render: Template.bind({}),
+  name: "Label - Horizontal",
+  args: { label: "Label", orientation: "horizontal" },
+  parameters: {},
+  tags: ["!dev"]
+};

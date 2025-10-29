@@ -16,13 +16,19 @@ export class SgdsSpinner extends SgdsElement {
   /** @deprecated The variant of spinner. Deprecated in favor of `tone` */
   @property({ type: String, reflect: true }) tone: SpinnerTone = "brand";
   /** Specifies a small, medium or large button, the size is medium by default. */
-  @property({ reflect: true }) size: "xs" | "sm" | "md" | "lg" | "xl" = "md";
+  @property({ type: String, reflect: true }) size: "xs" | "sm" | "md" | "lg" | "xl" = "md";
   /** Text label of the spinner */
   @property({ reflect: true, type: String }) label: string;
+  /** Orientation of label relative to the spinner */
+  @property({ type: String, reflect: true }) orientation: "horizontal" | "vertical" = "vertical";
 
   render() {
     return html`
-      <div class="spinner-wrapper">
+      <div
+        class="spinner-wrapper ${classMap({
+          horizontal: this.orientation === "horizontal"
+        })}"
+      >
         <div
           class="spinner ${classMap({
             [`spinner-${this.size}`]: this.size
