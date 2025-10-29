@@ -13,7 +13,7 @@ export class SgdsSpinner extends SgdsElement {
   static styles = [...SgdsElement.styles, textStyles, spinnerStyle];
   /** @deprecated The variant of spinner. Deprecated in favor of `tone` */
   @property({ type: String, reflect: true }) variant: SpinnerVariant = "primary";
-  /** @deprecated The variant of spinner. Deprecated in favor of `tone` */
+  /** The color tones of spinner, replaces variant prop */
   @property({ type: String, reflect: true }) tone: SpinnerTone = "brand";
   /** Specifies a small, medium or large button, the size is medium by default. */
   @property({ type: String, reflect: true }) size: "xs" | "sm" | "md" | "lg" | "xl" = "md";

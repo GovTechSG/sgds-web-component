@@ -171,7 +171,6 @@ describe("<sgds-icon-button>", () => {
     const button = el.shadowRoot?.querySelector("button");
     expect(button).to.have.attribute("aria-label", "Loading");
     expect(button).to.have.attribute("aria-disabled", "true");
-    expect(button).to.have.class("disabled");
     expect(button).to.have.class("loading");
   });
   it("loading is true, onclick handler are disabled", async () => {

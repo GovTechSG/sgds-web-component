@@ -36,7 +36,7 @@ export class SgdsIconButton extends ButtonElement {
     return html`
           <${tag}
             class="btn btn-icon${classMap({
-              disabled: this.disabled || this.loading,
+              disabled: this.disabled,
               active: this.active,
               [`btn-${this.variant}`]: this.variant,
               [`btn-${this.size}`]: this.size,

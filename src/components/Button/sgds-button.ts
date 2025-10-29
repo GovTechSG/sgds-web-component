@@ -109,7 +109,7 @@ export class SgdsButton extends ButtonElement {
     return html`
       <${tag}
         class="btn ${classMap({
-          disabled: this.disabled || this.loading,
+          disabled: this.disabled,
           active: this.active,
           "has-left-icon": this.hasLeftIconSlot,
           "has-right-icon": this.hasRightIconSlot,
