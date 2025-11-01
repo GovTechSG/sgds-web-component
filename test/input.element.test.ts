@@ -79,7 +79,10 @@ describe("sgds-input", () => {
               <slot name="trailing-icon">
               <sgds-spinner
                 size="sm"
-                variant="primary">
+                variant="primary"
+                tone="brand"
+                orientation="vertical"
+                >
               </sgds-spinner>
             </slot>
             </div>

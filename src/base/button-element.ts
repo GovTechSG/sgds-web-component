@@ -1,18 +1,29 @@
 import { property, query } from "lit/decorators.js";
 import SgdsElement from "./sgds-element";
 import buttonStyles from "./button.css";
-export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
+import { SpinnerTone } from "../components";
+
+export type ButtonTone = "brand" | "danger" | "fixed-light" | "neutral";
+export type ButtonVariant =
+  | "primary"
+  | "outline"
+  | "ghost"
+  /** @deprecated since v3.5.6 */
+  | "danger";
 
 export default class ButtonElement extends SgdsElement {
   static styles = [...SgdsElement.styles, buttonStyles];
   /** @internal */
   @query(".btn") protected button: HTMLButtonElement | HTMLLinkElement;
 
-  /** One or more button variant combinations buttons may be one of a variety of visual variants such as: `primary`, `danger`, `outline`, `ghost` */
+  /** Sets the visual variants such as: `primary`, `outline`, `ghost`. `danger` is @deprecated since v3.5.6 */
   @property({ reflect: true }) variant: ButtonVariant = "primary";
 
+  /** Sets the visual colour of the button: `brand`, `danger`, `fixed-light`, `neutral` */
+  @property({ reflect: true }) tone: ButtonTone = "brand";
+
   /** Specifies a small, medium or large button, the size is medium by default. */
-  @property({ reflect: true }) size: "sm" | "md" | "lg" = "md";
+  @property({ reflect: true }) size: "xs" | "sm" | "md" | "lg" = "md";
 
   /** Manually set the visual state of the button to `:active` */
   @property({ type: Boolean, reflect: true }) active = false;
@@ -31,6 +42,9 @@ export default class ButtonElement extends SgdsElement {
 
   /** The aria-label attribute to passed to button element when necessary */
   @property({ type: String }) ariaLabel: string;
+
+  /** When true, shows a loading spinner */
+  @property({ type: Boolean }) loading: boolean;
 
   /** Sets focus on the button. */
   public focus(options?: FocusOptions) {
@@ -54,10 +68,29 @@ export default class ButtonElement extends SgdsElement {
     this.emit("sgds-focus");
   }
   protected _handleClick(event: MouseEvent) {
-    if (this.disabled) {
+    if (this.disabled || this.loading) {
       event.preventDefault();
       event.stopPropagation();
       return;
     }
+  }
+  protected _handleKeydown(event: KeyboardEvent) {
+    if (event.key === "Enter" && this.loading) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+  }
+  protected _assignSpinnerSize(buttonSize: "xs" | "sm" | "md" | "lg") {
+    if (buttonSize === "xs" || buttonSize === "sm") return "xs";
+    if (buttonSize === "md" || buttonSize === "lg") return "sm";
+  }
+  protected _assignSpinnerTone(buttonTone: ButtonTone, buttonVariant: ButtonVariant): SpinnerTone {
+    // Default spinner tone
+    if (buttonTone === "fixed-light" && buttonVariant === "primary") return "fixed-dark";
+    if (buttonTone === "neutral" && buttonVariant === "primary") return "inverse";
+    if (buttonTone === "fixed-light" || buttonVariant === "primary") return "fixed-light";
+    if (buttonTone === "neutral" && (buttonVariant === "outline" || buttonVariant === "ghost")) return "neutral";
+    return "brand";
   }
 }

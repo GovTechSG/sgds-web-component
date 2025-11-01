@@ -14,7 +14,7 @@ export class SgdsIcon extends SgdsElement {
   @property({ type: String, reflect: true }) name: string;
 
   /** Specifies a small, medium or large icon, the size is medium by default. */
-  @property({ type: String, reflect: true }) size: "sm" | "md" | "lg" | "xl" | "2-xl" | "3-xl" = "lg";
+  @property({ type: String, reflect: true }) size: "xs" | "sm" | "md" | "lg" | "xl" | "2-xl" | "3-xl" = "lg";
 
   private _getIconByName(name: string) {
     if (!name) return;

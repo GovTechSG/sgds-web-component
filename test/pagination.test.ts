@@ -18,11 +18,11 @@ describe("variant=default sgds-pagination", () => {
       `
       <nav aria-label="pagination" role="navigation">
       <ul class="pagination pagination-md">
-      <sgds-icon-button ariaLabel="Previous" variant="ghost" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
+      <sgds-icon-button ariaLabel="Previous" variant="ghost" tone="brand" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
       <li key="1" class="page-item active">
           <span class="page-link"  role="button" aria-current="true" aria-label="Current Page, Page 1" tabindex="0">1</span>
         </li>
-      <sgds-icon-button ariaLabel="Next" variant="ghost" size="md" disabled="" name="arrow-right" target="_self"></sgds-icon-button>
+      <sgds-icon-button ariaLabel="Next" variant="ghost" tone="brand" size="md" disabled="" name="arrow-right" target="_self"></sgds-icon-button>
       </ul>
       </nav>
       `
@@ -35,14 +35,14 @@ describe("variant=default sgds-pagination", () => {
       `
       <nav aria-label="pagination" role="navigation">
       <ul class="pagination pagination-md">
-      <sgds-icon-button ariaLabel="Previous" variant="ghost" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
+      <sgds-icon-button ariaLabel="Previous" variant="ghost" tone="brand" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
       <li key="1" class="page-item active">
           <span class="page-link" tabindex="0" aria-current="true" aria-label="Current Page, Page 1" role="button">1</span>
         </li>
       <li key="2" class="page-item">
           <span class="page-link" tabindex="0" aria-current="false" aria-label="Go to Page 2" role="button">2</span>
         </li>
-      <sgds-icon-button ariaLabel="Next" variant="ghost" size="md" name="arrow-right" target="_self"></sgds-icon-button>
+      <sgds-icon-button ariaLabel="Next" variant="ghost" tone="brand" size="md" name="arrow-right" target="_self"></sgds-icon-button>
       </ul>
       </nav>
       `
@@ -57,14 +57,14 @@ describe("variant=default sgds-pagination", () => {
       `
       <nav aria-label="pagination" role="navigation">
       <ul class="pagination pagination-md">
-      <sgds-icon-button ariaLabel="Previous" variant="ghost" size="md"  name="arrow-left" target="_self"></sgds-icon-button>
+      <sgds-icon-button ariaLabel="Previous" variant="ghost" tone="brand" size="md"  name="arrow-left" target="_self"></sgds-icon-button>
       <li key="1" class="page-item">
           <span class="page-link" tabindex="0" aria-current="false" aria-label="Go to Page 1" role="button">1</span>
         </li>
       <li key="2" class="page-item active">
           <span class="page-link" tabindex="0" aria-current="true" aria-label="Current Page, Page 2" role="button">2</span>
         </li>
-      <sgds-icon-button ariaLabel="Next" variant="ghost" size="md" disabled="" name="arrow-right" target="_self"></sgds-icon-button>
+      <sgds-icon-button ariaLabel="Next" variant="ghost" tone="brand" size="md" disabled="" name="arrow-right" target="_self"></sgds-icon-button>
       </ul>
       </nav>
       `
@@ -221,13 +221,13 @@ describe("variant=default sgds-pagination", () => {
       `
       <nav aria-label="pagination" role="navigation">
       <ul class="pagination pagination-md">
-      <sgds-button ariaLabel="Previous" variant="ghost" size="md" disabled="" target="_self" type="button">
+      <sgds-button ariaLabel="Previous" variant="ghost" tone="brand" size="md" disabled="" target="_self" type="button">
       <sgds-icon name="arrow-left" size="md" slot="leftIcon"></sgds-icon>Prev
       </sgds-button>
       <li key="1" class="page-item active">
           <span class="page-link" tabindex="0" aria-current="true" aria-label="Current Page, Page 1" role="button">1</span>
         </li>
-        <sgds-button ariaLabel="Next" variant="ghost" size="md" disabled="" target="_self" type="button">
+        <sgds-button ariaLabel="Next" variant="ghost" tone="brand" size="md" disabled="" target="_self" type="button">
       <sgds-icon name="arrow-right" size="md" slot="rightIcon"></sgds-icon>Next
       </sgds-button>
       </ul>
@@ -302,8 +302,8 @@ describe("variant=button sgds-pagination", () => {
       `
       <nav aria-label="pagination" role="navigation">
       <ul class="pagination pagination-md">
-      <sgds-icon-button ariaLabel="Previous" variant="ghost" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
-      <sgds-icon-button ariaLabel="Next" variant="ghost" size="md" name="arrow-right" target="_self"></sgds-icon-button>
+      <sgds-icon-button ariaLabel="Previous" variant="ghost" tone="brand" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
+      <sgds-icon-button ariaLabel="Next" variant="ghost" tone="brand"size="md" name="arrow-right" target="_self"></sgds-icon-button>
       </ul>
       </nav>
       `
@@ -350,9 +350,9 @@ describe("variant=description sgds-pagination", () => {
       `
       <nav aria-label="pagination" role="navigation">
       <ul class="pagination pagination-md">
-      <sgds-icon-button ariaLabel="Previous" variant="ghost" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
+      <sgds-icon-button ariaLabel="Previous" variant="ghost" tone="brand" size="md" disabled="" name="arrow-left" target="_self"></sgds-icon-button>
       <div class="pagination-description">Page 1 of 5</div>
-      <sgds-icon-button ariaLabel="Next" variant="ghost" size="md" name="arrow-right" target="_self"></sgds-icon-button>
+      <sgds-icon-button ariaLabel="Next" variant="ghost" tone="brand" size="md" name="arrow-right" target="_self"></sgds-icon-button>
       </ul>
       </nav>
       `

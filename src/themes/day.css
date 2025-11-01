@@ -11,6 +11,9 @@
   --sgds-bg-translucent: oklch(from var(--sgds-gray-1100) l c h / 0.1);
   --sgds-bg-translucent-subtle: oklch(from var(--sgds-gray-1100) l c h / 0.05);
   --sgds-bg-transparent: transparent;
+  --sgds-bg-translucent-inverse: oklch(from var(--sgds-gray-000) l c h / 0.2);
+  --sgds-bg-translucent-fixed-dark: oklch(from var(--sgds-gray-1100) l c h / 0.2);
+  --sgds-bg-translucent-fixed-light: oklch(from var(--sgds-gray-000) l c h / 0.2);
   --sgds-surface-default: var(--sgds-gray-000);
   --sgds-surface-raised: var(--sgds-gray-100);
   --sgds-surface-inverse: var(--sgds-gray-900);
@@ -81,7 +84,7 @@
   --sgds-danger-surface-default: var(--sgds-red-600);
   --sgds-danger-surface-emphasis: var(--sgds-red-700);
   --sgds-danger-surface-muted: var(--sgds-red-100);
-  --sgds-danger-surface-translucent: oklch(from var(--sgds-red-700) l c h / 0.1);
+  --sgds-danger-surface-translucent: oklch(from var(--sgds-red-700) l c h / 0.08);
   --sgds-danger-color-default: var(--sgds-red-600);
   --sgds-danger-color-emphasis: var(--sgds-red-700);
   --sgds-danger-color-fixed-light: var(--sgds-red-400);

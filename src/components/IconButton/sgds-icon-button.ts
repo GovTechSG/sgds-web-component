@@ -4,6 +4,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { html, literal } from "lit/static-html.js";
 import ButtonElement from "../../base/button-element";
 import SgdsIcon from "../Icon/sgds-icon";
+import SgdsSpinner from "../Spinner/sgds-spinner";
 import iconButtonStyles from "./icon-button.css";
 
 /**
@@ -16,18 +17,19 @@ export class SgdsIconButton extends ButtonElement {
   static styles = [...ButtonElement.styles, iconButtonStyles];
   /** @internal */
   static dependencies = {
-    "sgds-icon": SgdsIcon
+    "sgds-icon": SgdsIcon,
+    "sgds-spinner": SgdsSpinner
   };
 
   /** The name of the icon from sgds icon library */
   @property({ type: String, reflect: true }) name: string;
 
-  private _assignIconSize(buttonSize: "sm" | "md" | "lg") {
+  private _assignIconSize(buttonSize: "xs" | "sm" | "md" | "lg") {
+    if (buttonSize === "xs") return "sm";
     if (buttonSize === "sm") return "md";
     if (buttonSize === "md") return "lg";
     if (buttonSize === "lg") return "xl";
   }
-
   render() {
     const isLink = this.href;
     const tag = isLink ? literal`a` : literal`button`;
@@ -37,7 +39,8 @@ export class SgdsIconButton extends ButtonElement {
               disabled: this.disabled,
               active: this.active,
               [`btn-${this.variant}`]: this.variant,
-              [`btn-${this.size}`]: this.size
+              [`btn-${this.size}`]: this.size,
+              loading: this.loading
             })}"
             ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
             type=${ifDefined(isLink ? undefined : "button")}
@@ -46,14 +49,25 @@ export class SgdsIconButton extends ButtonElement {
             download=${ifDefined(isLink ? this.download : undefined)}
             rel=${ifDefined(isLink && this.target === "_blank" ? "noreferrer noopener" : undefined)}
             role=${ifDefined(isLink ? "button" : undefined)}
-            aria-disabled=${this.disabled ? "true" : "false"}
+            aria-disabled=${this.disabled || this.loading ? "true" : "false"}
             tabindex=${this.disabled ? "-1" : "0"}
             @click=${this._handleClick}
+            @keydown=${this._handleKeydown}
             @focus=${this._handleFocus}
             @blur=${this._handleBlur}
-            aria-label=${ifDefined(this.ariaLabel)}
+            aria-label=${ifDefined(this.loading ? "Loading" : this.ariaLabel)}
           >
-            <sgds-icon name=${ifDefined(this.name)} size=${ifDefined(this._assignIconSize(this.size))}></sgds-icon>
+            ${
+              this.loading
+                ? html`<sgds-spinner
+                    size=${ifDefined(this._assignSpinnerSize(this.size))}
+                    tone=${ifDefined(this._assignSpinnerTone(this.tone, this.variant))}
+                  ></sgds-spinner>`
+                : html`<sgds-icon
+                    name=${ifDefined(this.name)}
+                    size=${ifDefined(this._assignIconSize(this.size))}
+                  ></sgds-icon>`
+            }
           </${tag}>
         `;
   }
