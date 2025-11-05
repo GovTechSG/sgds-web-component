@@ -1038,7 +1038,7 @@ describe("single select >> when submitting a form", () => {
     );
     const combobox = form.querySelector<SgdsComboBox>("sgds-combo-box");
     const button = form.querySelector<SgdsButton>("sgds-button");
-    form?.addEventListener("submit", (e) => e.preventDefault());
+    form?.addEventListener("submit", e => e.preventDefault());
     expect(combobox?.value).to.equal("option1");
     expect(combobox?.invalid).to.be.false;
     button?.click();
