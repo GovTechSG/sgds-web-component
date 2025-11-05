@@ -25,17 +25,17 @@ describe("<sgds-modal>", () => {
           tabindex="-1"
         >
           <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-header__title-description">
-                  <slot class="modal-title" id="title" name="title"></slot>
-                  <slot name="description"></slot>
-                </div>
                 <sgds-close-button
                 class="modal-header__close"
                 ariaLabel="close modal"
                 size="md" 
                 variant="default"
               ></sgds-close-button>
+            <div class="modal-header">
+                <div class="modal-header__title-description">
+                  <slot class="modal-title" id="title" name="title"></slot>
+                  <slot name="description"></slot>
+                </div>
               </div>
               <div class="modal-body">
                 <slot></slot>
