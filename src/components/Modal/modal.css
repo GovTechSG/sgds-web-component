@@ -55,12 +55,16 @@
   flex-direction: column;
   gap: var(--sgds-gap-2-xl);
   min-height: 0;
+      position: relative;
+
 }
 
 .modal-header__close {
-  position: relative;
-  top: calc(-1 * var(--sgds-padding-md));
-  right: calc(-1 * var(--sgds-padding-md));
+  /* top: var(--sgds-padding-md);
+  right: var(--sgds-padding-md); */
+  position: absolute;
+  top: -16px;
+  right: -16px;
 }
 
 @media screen and (min-width: 512px) {
