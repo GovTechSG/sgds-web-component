@@ -61,8 +61,8 @@
 
 .modal-header__close {
   position: absolute;
-  top: -16px;
-  right: -16px;
+  top: calc(-1 * var(--sgds-padding-md));;
+  right: calc(-1 * var(--sgds-padding-md));;
 }
 
 @media screen and (min-width: 512px) {
