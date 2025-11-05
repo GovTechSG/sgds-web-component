@@ -130,6 +130,12 @@ export class SgdsComboBox extends SelectElement {
       this.emit("sgds-select");
     }
 
+    // When value is updated by user and it doesn't map to selectedItems, we should re-map selectedItems
+    const selectedItemVal = this.selectedItems.map(val => val.value).join(";");
+    if (selectedItemVal !== this.value) {
+      this._updateValueAndDisplayValue(this.optionList);
+    }
+
     const sgdsInput = await this._input;
     this._mixinSetFormValue();
 
@@ -138,21 +144,19 @@ export class SgdsComboBox extends SelectElement {
     } else {
       this._mixinValidate(sgdsInput);
     }
+
+    // When form reset, we want to be able to set the value to be empty without displaying the validate
     if (!this._isTouched && this.value === "") return;
-
     this.invalid = !this._mixinReportValidity();
-
-    // When value is updated by user and it doesn't map to selectedItems, we should re-map selectedItems
-    const selectedItemVal = this.selectedItems.map(val => val.value).join(";");
-    if (selectedItemVal !== this.value) {
-      this._updateValueAndDisplayValue(this.optionList);
-    }
   }
 
   @watch("optionList", { waitUntilFirstUpdate: true })
   _handleOptionListChange() {
+    // When the option list updated, we will check if the list is empty or not
+    this.emptyMenu = this.optionList.length === 0;
     this._updateValueAndDisplayValue(this.optionList);
   }
+
   @watch("menuList", { waitUntilFirstUpdate: true })
   _handleMenuListChange() {
     const newMenu = this.menuList.map(o => {
@@ -394,6 +398,7 @@ export class SgdsComboBox extends SelectElement {
       </div>
     `;
   }
+
   render() {
     return html`
       <div
@@ -405,7 +410,7 @@ export class SgdsComboBox extends SelectElement {
         ${this._renderInput()} ${this._renderFeedback()}
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
           <slot id="default" @slotchange=${this._handleDefaultSlotChange}></slot>
-          ${this.emptyMenu && this.optionList.length > 0 ? html`<div class="empty-menu">No options</div>` : nothing}
+          ${this.emptyMenu ? html`<div class="empty-menu">No options</div>` : nothing}
         </ul>
       </div>
 
