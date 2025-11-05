@@ -79,19 +79,7 @@ export class SgdsComboBox extends SelectElement {
       comboBoxOption.active = this.value.includes(o.value);
       this.appendChild(comboBoxOption);
     });
-
-    if (this.value && this.menuList.length > 0) {
-      const valueArray = this.value.split(";");
-      const initialSelectedItem = this.menuList.filter(({ value }) => valueArray.includes(value));
-      this.selectedItems = [...initialSelectedItem, ...this.selectedItems];
-
-      if (!this.multiSelect) {
-        this.displayValue = initialSelectedItem[0]?.label;
-      }
-    }
-    this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._input);
-
-    this._mixinValidate(this.input);
+    this._setupValidation(this.menuList);
 
     if (this.menuIsOpen && !this.readonly) {
       this.showMenu();
@@ -119,8 +107,23 @@ export class SgdsComboBox extends SelectElement {
 
     /** this will trigger _updateValueAndDisplayValue */
     this.optionList = await this._getMenuListFromOptions(assignedElements);
+    this._setupValidation(this.optionList);
   }
 
+  private async _setupValidation(list: SgdsComboBoxOptionData[]) {
+    if (this.value && list.length > 0) {
+      const valueArray = this.value.split(";");
+      const initialSelectedItem = list.filter(({ value }) => valueArray.includes(value));
+      this.selectedItems = [...initialSelectedItem, ...this.selectedItems];
+
+      if (!this.multiSelect) {
+        this.displayValue = initialSelectedItem[0]?.label;
+      }
+      this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._input);
+
+      this._mixinValidate(this.input);
+    }
+  }
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
     // when value change, always emit a change event
@@ -128,12 +131,6 @@ export class SgdsComboBox extends SelectElement {
     this.options.forEach(o => o.removeAttribute("hidden"));
     if (this.value) {
       this.emit("sgds-select");
-    }
-
-    // When value is updated by user and it doesn't map to selectedItems, we should re-map selectedItems
-    const selectedItemVal = this.selectedItems.map(val => val.value).join(";");
-    if (selectedItemVal !== this.value) {
-      this._updateValueAndDisplayValue(this.optionList);
     }
 
     const sgdsInput = await this._input;
@@ -145,18 +142,20 @@ export class SgdsComboBox extends SelectElement {
       this._mixinValidate(sgdsInput);
     }
 
-    // When form reset, we want to be able to set the value to be empty without displaying the validate
+    // When value is updated by user and it doesn't map to selectedItems, we should re-map selectedItems
+    const selectedItemVal = this.selectedItems.map(val => val.value).join(";");
+    if (selectedItemVal !== this.value) {
+      this._updateValueAndDisplayValue(this.optionList);
+    }
+
     if (!this._isTouched && this.value === "") return;
     this.invalid = !this._mixinReportValidity();
   }
 
   @watch("optionList", { waitUntilFirstUpdate: true })
   _handleOptionListChange() {
-    // When the option list updated, we will check if the list is empty or not
-    this.emptyMenu = this.optionList.length === 0;
     this._updateValueAndDisplayValue(this.optionList);
   }
-
   @watch("menuList", { waitUntilFirstUpdate: true })
   _handleMenuListChange() {
     const newMenu = this.menuList.map(o => {
@@ -398,7 +397,6 @@ export class SgdsComboBox extends SelectElement {
       </div>
     `;
   }
-
   render() {
     return html`
       <div
@@ -410,7 +408,7 @@ export class SgdsComboBox extends SelectElement {
         ${this._renderInput()} ${this._renderFeedback()}
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
           <slot id="default" @slotchange=${this._handleDefaultSlotChange}></slot>
-          ${this.emptyMenu ? html`<div class="empty-menu">No options</div>` : nothing}
+          ${this.emptyMenu && this.optionList.length > 0 ? html`<div class="empty-menu">No options</div>` : nothing}
         </ul>
       </div>
 

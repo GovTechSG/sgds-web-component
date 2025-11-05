@@ -1043,6 +1043,52 @@ describe("single select >> when submitting a form", () => {
     expect(comboBox()?.invalid).to.be.false;
     expect(input()?.value).to.equal("Dur");
   });
+  it("when value exist in required field, pressing submit should not show error", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-combo-box required value="option1">
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+          <sgds-combo-box-option value="option3">Dur</sgds-combo-box-option>
+        </sgds-combo-box>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>`
+    );
+    const combobox = form.querySelector<SgdsComboBox>("sgds-combo-box");
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    form?.addEventListener("submit", e => e.preventDefault());
+    expect(combobox?.value).to.equal("option1");
+    expect(combobox?.invalid).to.be.false;
+    button?.click();
+    await combobox?.updateComplete;
+    expect(combobox?.invalid).to.be.false;
+  });
+  it("when value is truthy, and reset button is clicked, input is reset and is valid", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-combo-box required menuIsOpen>
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+          <sgds-combo-box-option value="option3">Dur</sgds-combo-box-option>
+        </sgds-combo-box>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>`
+    );
+
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    const combobox = form.querySelector<SgdsComboBox>("sgds-combo-box");
+    const appleItem = form
+      .querySelector<SgdsComboBoxOption>("sgds-combo-box-option[value='option1']")
+      ?.shadowRoot?.querySelector("div.normal-item-content") as HTMLElement;
+    appleItem?.click();
+    await combobox?.updateComplete;
+    await waitUntil(() => combobox?.value === "option1");
+    expect(combobox?.value).to.equal("option1");
+    button?.click();
+
+    await waitUntil(() => !combobox?.value);
+    expect(combobox?.invalid).to.be.false;
+  });
   it("when touched and blurred and value is empty, error is shown", async () => {
     const el = await fixture<SgdsComboBox>(
       html`
