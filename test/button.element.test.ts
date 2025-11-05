@@ -236,4 +236,50 @@ describe("when using methods", () => {
     await sendKeys({ press: "Enter" });
     expect(enter).to.be.true;
   });
+  it("should assign spinner tone=fixed-dark when button tone=fixed-light and button variant=primary", async () => {
+    const el = await fixture<SgdsButton>(
+      html`<sgds-button variant="primary" tone="fixed-light" ?loading=${true}>hello</sgds-button>`
+    );
+    const spinner = el.shadowRoot?.querySelector("sgds-spinner");
+    expect(spinner?.tone).to.equal("fixed-dark");
+  });
+  it("should assign spinner tone=inverse when button tone=neutral and button variant=primary", async () => {
+    const el = await fixture<SgdsButton>(
+      html`<sgds-button variant="primary" tone="neutral" ?loading=${true}>hello</sgds-button>`
+    );
+    const spinner = el.shadowRoot?.querySelector("sgds-spinner");
+    expect(spinner?.tone).to.equal("inverse");
+  });
+  it("should assign spinner tone=fixed-light when button tone=fixed-light or button variant=primary", async () => {
+    const el1 = await fixture<SgdsButton>(
+      html`<sgds-button variant="ghost" tone="fixed-light" ?loading=${true}>hello</sgds-button>`
+    );
+    const spinner1 = el1.shadowRoot?.querySelector("sgds-spinner");
+    expect(spinner1?.tone).to.equal("fixed-light");
+
+    const el2 = await fixture<SgdsButton>(
+      html`<sgds-button variant="primary" tone="brand" ?loading=${true}>hello</sgds-button>`
+    );
+    const spinner2 = el2.shadowRoot?.querySelector("sgds-spinner");
+    expect(spinner2?.tone).to.equal("fixed-light");
+  });
+  it("should assign spinner tone=neutral when button tone=neutral and button variant=outline or ghost", async () => {
+    const el = await fixture<SgdsButton>(
+      html`<sgds-button variant="ghost" tone="neutral" ?loading=${true}>hello</sgds-button>`
+    );
+    const spinner = el.shadowRoot?.querySelector("sgds-spinner");
+    expect(spinner?.tone).to.equal("neutral");
+  });
+  it("should assign spinner tone=brand when variant=outline tone is default", async () => {
+    const el = await fixture<SgdsButton>(
+      html`<sgds-button variant="outline" tone="brand" ?loading=${true}>hello</sgds-button>`
+    );
+    const spinner = el.shadowRoot?.querySelector("sgds-spinner");
+    expect(spinner?.tone).to.equal("brand");
+  });
+  it("should assign spinner tone=fixed-light by default", async () => {
+    const el = await fixture<SgdsButton>(html`<sgds-button ?loading=${true}>hello</sgds-button>`);
+    const spinner = el.shadowRoot?.querySelector("sgds-spinner");
+    expect(spinner?.tone).to.equal("fixed-light");
+  });
 });
