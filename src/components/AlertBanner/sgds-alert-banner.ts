@@ -1,12 +1,13 @@
-import { property } from "lit/decorators.js";
+import { property, queryAssignedElements } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
-import { html, nothing } from "lit";
+import { html, LitElement, nothing } from "lit";
 import SgdsIcon from "../Icon/sgds-icon";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
 import alertBannerStyles from "./alert-banner.css";
 import { watch } from "../../utils/watch";
 import { classMap } from "lit/directives/class-map.js";
+import SgdsAlertBannerItem from "./sgds-alert-banner-item";
 export type AlertBannerVariant = "info" | "danger" | "warning" | "neutral";
 
 export class SgdsAlertBanner extends SgdsElement {
@@ -42,6 +43,15 @@ export class SgdsAlertBanner extends SgdsElement {
     this.show ? this.emit("sgds-show") : this.emit("sgds-hide");
   }
 
+  @queryAssignedElements({flatten: true})
+  defaultSlotElements: SgdsAlertBannerItem[]
+ protected async firstUpdated(changedProperties: Parameters<LitElement["firstUpdated"]>[0]): void {
+   
+  console.log(this.children)
+  this.appendChild(this.children[0].cloneNode(true))
+  this.appendChild(this.children[1].cloneNode(true))
+  this.appendChild(this.children[2].cloneNode(true))
+ }
   render() {
     return (this.dismissible && this.show) || !this.dismissible
       ? html`
@@ -56,7 +66,9 @@ export class SgdsAlertBanner extends SgdsElement {
             aria-hidden=${this.show ? "false" : "true"}
           >
             <div class="content">
-              <slot></slot>
+              <div class="looping-content">
+              <slot id="loop-slot"></slot>
+              </div>
             </div>
             <div class="pagination">
               <sgds-icon-button name="chevron-left" tone="fixed-light" variant="ghost" size="xs"></sgds-icon-button>
