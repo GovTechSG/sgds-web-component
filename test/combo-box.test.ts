@@ -250,6 +250,7 @@ describe("sgds-combo-box ", () => {
       expect(el.value).to.equal("option1");
     });
   });
+
   TwoOptionsComboBox.forEach(({ render, mode }) => {
     it(`MODE=${mode}should not show any items in dropdown menu when there is no match (for default filter)`, async () => {
       const el = await fixture<SgdsComboBox>(render({ multiSelect: false }));
@@ -454,6 +455,23 @@ describe("sgds-combo-box ", () => {
       // Verify value change
       expect(el.value).to.equal("option4;option5");
     });
+  });
+
+  it("No option dropdown item should present when no child is provided", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box
+      label="Combobox using slot"
+      hinttext="Select an option"
+      placeholder="Select an option"
+    >
+    </sgds-combo-box>`);
+
+    const input = el.shadowRoot?.querySelector("input");
+    input?.click();
+
+    await el.updateComplete;
+    expect(el.menuIsOpen).to.be.true;
+
+    expect(el.shadowRoot?.querySelectorAll(".empty-menu")).to.exist;
   });
 });
 
@@ -1372,6 +1390,7 @@ describe("sgds-combo-box-option (default)", () => {
     expect(spy.calledOnce).to.be.true;
   });
 });
+
 describe("sgds-combo-box-option (checkbox)", () => {
   it("matches shadowDom semantically ", async () => {
     const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option checkbox></sgds-combo-box-option>`);
