@@ -282,7 +282,7 @@ describe("<sgds-select>", () => {
 });
 
 describe("select >> when submitting a form", () => {
-   it("when value exist in required field, pressing submit should not show error", async () => {
+  it("when value exist in required field, pressing submit should not show error", async () => {
     const form = await fixture<HTMLFormElement>(
       html`<form>
         <sgds-select required value="option1">
