@@ -14,6 +14,10 @@
         max-width: 500px;
         margin: 0 auto;
       }
+      .flex {
+        display: flex;
+        gap: 4px;
+      }
     </style>
   </head>
   <body>
@@ -22,8 +26,13 @@
     <h2>Single selection combo-box</h2>
 
 
-<form>
+<form class="flex">
 <sgds-combo-box id="combobox-example" label="Items" placeholder="ComboBox"> </sgds-combo-box>
+<sgds-select label="Items">
+  <sgds-select-option value="hi">hi</sgds-select-option>
+</sgds-select>
+<sgds-input label="Items"></sgds-input>
+<sgds-datepicker label="Items"></sgds-datepicker>
     <script>
       const comboBox = document.querySelector("#combobox-example");
       comboBox.menuList = [
