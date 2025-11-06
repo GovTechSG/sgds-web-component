@@ -70,45 +70,32 @@ export class DropdownListElement extends DropdownElement {
       dropdownItem && dropdownItem.removeAttribute("tabindex");
     });
   }
-
   protected _handleKeyboardMenuItemsEvent(e: KeyboardEvent) {
     if (this.readonly) return;
     const menuItems = this._getActiveMenuItems();
+    if (menuItems.length === 0) return;
+
     switch (e.key) {
       case ARROW_DOWN:
         e.preventDefault();
-        if (this.nextDropdownItemNo === menuItems.length) {
-          return this._setMenuItem(0);
-        } else {
-          return this._setMenuItem(this.nextDropdownItemNo > 0 ? this.nextDropdownItemNo : 0);
-        }
+        this._setMenuItem(this.nextDropdownItemNo);
+        break;
       case ARROW_UP:
         e.preventDefault();
-        if (this.prevDropdownItemNo < 0) {
-          return this._setMenuItem(menuItems.length - 1, false);
-        } else {
-          return this._setMenuItem(this.prevDropdownItemNo, false);
-        }
+        this._setMenuItem(this.prevDropdownItemNo);
+        break;
       case TAB:
-        if (!this.menuIsOpen) {
-          return;
-        }
+        if (!this.menuIsOpen) return;
         e.preventDefault();
         if (e.shiftKey) {
-          if (this.prevDropdownItemNo < 0) {
-            return this._setMenuItem(menuItems.length - 1, false);
-          } else {
-            return this._setMenuItem(this.prevDropdownItemNo, false);
-          }
-        }
-        if (this.nextDropdownItemNo === menuItems.length) {
-          return this._setMenuItem(0);
+          this._setMenuItem(this.prevDropdownItemNo);
         } else {
-          return this._setMenuItem(this.nextDropdownItemNo > 0 ? this.nextDropdownItemNo : 0);
+          this._setMenuItem(this.nextDropdownItemNo);
         }
+        break;
       case ENTER:
         if (menuItems.includes(e.target as SgdsDropdownItem)) {
-          return this.handleSelectSlot(e);
+          this.handleSelectSlot(e);
         }
         break;
       default:
@@ -137,25 +124,24 @@ export class DropdownListElement extends DropdownElement {
   }
 
   private _getActiveMenuItems(): SgdsDropdownItem[] {
-    return this._getMenuItems().filter(item => !item.disabled);
+    return this._getMenuItems().filter(item => !item.disabled && !item.hidden);
   }
-
-  private _setMenuItem(currentItemIdx: number, isArrowDown = true) {
+  private _setMenuItem(currentItemIdx: number) {
     const items = this._getActiveMenuItems();
     if (items.length === 0) return;
-    const item = items[currentItemIdx];
-    this.nextDropdownItemNo = currentItemIdx + 1;
-    this.prevDropdownItemNo = currentItemIdx - 1 < 0 ? items.length - 1 : currentItemIdx - 1;
-    let activeItem: SgdsDropdownItem;
-    if (item.disabled) {
-      return this._setMenuItem(isArrowDown ? this.nextDropdownItemNo : this.prevDropdownItemNo);
-    } else activeItem = item;
 
-    // focus or blur items depending on active or not
+    // Use modulo for looping
+    const idx = ((currentItemIdx % items.length) + items.length) % items.length;
+    const activeItem = items[idx];
+    console.log(activeItem, "activeItem");
+    this.emit("i-sgds-option-focus", { detail: { option: activeItem } });
+    this.nextDropdownItemNo = (idx + 1) % items.length;
+    this.prevDropdownItemNo = (idx - 1 + items.length) % items.length;
+
     items.forEach(item => {
       const dropdownItem = item.shadowRoot.querySelector(".dropdown-item") as HTMLAnchorElement;
       dropdownItem.setAttribute("tabindex", item === activeItem ? "0" : "-1");
-      item === activeItem && dropdownItem.focus();
+      if (item === activeItem) dropdownItem.focus();
     });
   }
 }

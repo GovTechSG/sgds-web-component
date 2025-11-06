@@ -195,8 +195,6 @@ export class SgdsComboBox extends SelectElement {
     const input = e.target as HTMLInputElement;
     this.displayValue = input.value;
     const optionList = this.options.map(o => ({ value: o.value, label: o.textContent.trim() }));
-    console.log(optionList, "inputchange");
-    // this.filteredList = this.optionList.filter(item => this.filterFunction(this.displayValue, item));
     this.filteredList = optionList.filter(item => this.filterFunction(this.displayValue, item));
 
     // reset menu list when displayValue
@@ -434,3 +432,8 @@ export class SgdsComboBox extends SelectElement {
 }
 
 export default SgdsComboBox;
+
+//TODO:
+//  Address menu clicking bug in single select
+// Remove this.optionList ?
+// Address resetForm bug
