@@ -67,6 +67,8 @@ export class SgdsComboBox extends SelectElement {
       const sgdsInput = await this._input;
       sgdsInput.focus();
       this.options.forEach(o => o.removeAttribute("hidden"));
+      // reset emptyMenu state
+      this.emptyMenu = false;
     });
   }
   async firstUpdated(changedProperties: PropertyValueMap<this>) {
@@ -192,8 +194,6 @@ export class SgdsComboBox extends SelectElement {
     const input = e.target as HTMLInputElement;
     this.displayValue = input.value;
     const optionList = this.options.map(o => ({ value: o.value, label: o.textContent.trim() }));
-    console.log(optionList, "inputchange");
-    // this.filteredList = this.optionList.filter(item => this.filterFunction(this.displayValue, item));
     this.filteredList = optionList.filter(item => this.filterFunction(this.displayValue, item));
 
     // reset menu list when displayValue
@@ -321,7 +321,6 @@ export class SgdsComboBox extends SelectElement {
   protected async _mixinResetFormControl() {
     this.value = this.defaultValue;
     if (!this.multiSelect) {
-      // const initialItem = this.menuList.filter(({ value }) => value === this.value);
       const initialItem = this.optionList.filter(({ value }) => value === this.value);
       if (initialItem.length <= 0) {
         this.displayValue = "";
@@ -331,7 +330,6 @@ export class SgdsComboBox extends SelectElement {
       this._mixinResetValidity(await this._input);
     } else {
       const valueArray = this.value.split(";");
-      // const initialItem = this.menuList.filter(({ value }) => valueArray.includes(value));
       const initialItem = this.optionList.filter(({ value }) => valueArray.includes(value));
       this.selectedItems = initialItem;
       this._mixinResetValidity(await this._multiSelectInput);
@@ -412,7 +410,9 @@ export class SgdsComboBox extends SelectElement {
         <!-- The input -->
         ${this._renderInput()} ${this._renderFeedback()}
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
-          <slot id="default" @slotchange=${this._handleDefaultSlotChange}></slot>
+          <slot id="default" @slotchange=${this._handleDefaultSlotChange}
+            ><div class="empty-menu">No options</div></slot
+          >
           ${this.emptyMenu && this.optionList.length > 0 ? html`<div class="empty-menu">No options</div>` : nothing}
         </ul>
       </div>

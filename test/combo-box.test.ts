@@ -139,7 +139,7 @@ describe("sgds-combo-box ", () => {
           part="menu"
           tabindex="-1"
           >
-              <slot></slot> 
+              <slot><div class="empty-menu">No options</div></slot> 
         </ul>
           `,
       { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
