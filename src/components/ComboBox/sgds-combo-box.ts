@@ -108,6 +108,7 @@ export class SgdsComboBox extends SelectElement {
     });
 
     /** this will trigger _updateValueAndDisplayValue */
+    await this.updateComplete;
     this.optionList = await this._getMenuListFromOptions(assignedElements);
     console.log("optionList", this.optionList);
     this._setupValidation(this.optionList);
@@ -193,8 +194,10 @@ export class SgdsComboBox extends SelectElement {
     this.emit("sgds-input");
     const input = e.target as HTMLInputElement;
     this.displayValue = input.value;
-    console.log(this.optionList, "handleInputChange");
-    this.filteredList = this.optionList.filter(item => this.filterFunction(this.displayValue, item));
+    const optionList = this.options.map(o => ({ value: o.value, label: o.textContent.trim() }));
+    console.log(optionList, "inputchange");
+    // this.filteredList = this.optionList.filter(item => this.filterFunction(this.displayValue, item));
+    this.filteredList = optionList.filter(item => this.filterFunction(this.displayValue, item));
 
     // reset menu list when displayValue
     if (this.displayValue === "" && !this.multiSelect) {
@@ -209,6 +212,7 @@ export class SgdsComboBox extends SelectElement {
     // Filtering for slots
     this.emptyMenu = this.filteredList.length === 0;
     const filteredValues = this.filteredList.map(l => l.value);
+
     this.options.forEach(o => {
       if (!filteredValues.includes(o.value)) {
         o.hidden = true;

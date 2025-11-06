@@ -26,14 +26,13 @@
     <h2>Single selection combo-box</h2>
 
 
+
 <form class="flex">
-<sgds-combo-box id="combobox-example" label="Items" placeholder="ComboBox"> </sgds-combo-box>
-<sgds-select label="Items">
-  <sgds-select-option value="hi">hi</sgds-select-option>
-</sgds-select>
-<sgds-input label="Items"></sgds-input>
-<sgds-datepicker label="Items"></sgds-datepicker>
-    <script>
+<sgds-combo-box id="combobox-example" label="Items" placeholder="ComboBox"> 
+<sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
+<sgds-combo-box-option value="2">Zimbabwe</sgds-combo-box-option>
+</sgds-combo-box>
+    <!-- <script>
       const comboBox = document.querySelector("#combobox-example");
       comboBox.menuList = [
         { label: "Afghanistan", value: "1" },
@@ -242,8 +241,9 @@
         { label: "Zambia", value: "204" },
         { label: "Zimbabwe", value: "205" }
       ];
-    </script>
-  <button type="submit">Submit</button>
+    </script> -->
+  <button type="reset">rest</button>
+
   </form>
 
   </body>
