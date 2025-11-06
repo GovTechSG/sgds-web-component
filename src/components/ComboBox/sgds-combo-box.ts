@@ -79,19 +79,7 @@ export class SgdsComboBox extends SelectElement {
       comboBoxOption.active = this.value.includes(o.value);
       this.appendChild(comboBoxOption);
     });
-
-    if (this.value && this.menuList.length > 0) {
-      const valueArray = this.value.split(";");
-      const initialSelectedItem = this.menuList.filter(({ value }) => valueArray.includes(value));
-      this.selectedItems = [...initialSelectedItem, ...this.selectedItems];
-
-      if (!this.multiSelect) {
-        this.displayValue = initialSelectedItem[0]?.label;
-      }
-    }
-    this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._input);
-
-    this._mixinValidate(this.input);
+    this._setupValidation(this.menuList);
 
     if (this.menuIsOpen && !this.readonly) {
       this.showMenu();
@@ -119,8 +107,23 @@ export class SgdsComboBox extends SelectElement {
 
     /** this will trigger _updateValueAndDisplayValue */
     this.optionList = await this._getMenuListFromOptions(assignedElements);
+    this._setupValidation(this.optionList);
   }
 
+  private async _setupValidation(list: SgdsComboBoxOptionData[]) {
+    if (this.value && list.length > 0) {
+      const valueArray = this.value.split(";");
+      const initialSelectedItem = list.filter(({ value }) => valueArray.includes(value));
+      this.selectedItems = [...initialSelectedItem, ...this.selectedItems];
+
+      if (!this.multiSelect) {
+        this.displayValue = initialSelectedItem[0]?.label;
+      }
+      this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._input);
+
+      this._mixinValidate(this.input);
+    }
+  }
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
     // when value change, always emit a change event
@@ -138,15 +141,15 @@ export class SgdsComboBox extends SelectElement {
     } else {
       this._mixinValidate(sgdsInput);
     }
-    if (!this._isTouched && this.value === "") return;
-
-    this.invalid = !this._mixinReportValidity();
 
     // When value is updated by user and it doesn't map to selectedItems, we should re-map selectedItems
     const selectedItemVal = this.selectedItems.map(val => val.value).join(";");
     if (selectedItemVal !== this.value) {
       this._updateValueAndDisplayValue(this.optionList);
     }
+
+    if (!this._isTouched && this.value === "") return;
+    this.invalid = !this._mixinReportValidity();
   }
 
   @watch("optionList", { waitUntilFirstUpdate: true })

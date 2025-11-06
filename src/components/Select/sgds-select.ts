@@ -66,6 +66,8 @@ export class SgdsSelect extends SelectElement {
     );
     this.menuList = await this._getMenuListFromOptions(assignedElements);
     this._updateDisplayValue();
+    this.input = await this._input;
+    this._mixinValidate(this.input);
   }
   private _updateDisplayValue() {
     if (this.value && this.menuList.length > 0) {

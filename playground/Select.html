@@ -28,15 +28,31 @@
   ></sgds-select> -->
 
   <h2> Select populated by slots</h2>
+  <form>
   <sgds-select
     label="Select label"
     hinttext="Select an option"
     placeholder="Select an option"
     value="1"
+    required
+    hasFeedback
   ><sgds-select-option disabled value="1">Option 1</sgds-select-option>
   <sgds-select-option disabled value="2">Option 2</sgds-select-option>
   <sgds-select-option value="3">Option 3</sgds-select-option>
 </sgds-select>
+  <sgds-select
+    label="Select label"
+    hinttext="Select an option"
+    placeholder="Select an option"
+    required
+    hasFeedback
+  ><sgds-select-option disabled value="1">Option 1</sgds-select-option>
+  <sgds-select-option disabled value="2">Option 2</sgds-select-option>
+  <sgds-select-option value="3">Option 3</sgds-select-option>
+</sgds-select>
+<button type="submit">submit</button>
+<button type="reset">reset</button>
+</form>
   <!-- <sgds-select
     label="Using slots with some disabled options"
     hinttext="Select an option"
