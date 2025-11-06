@@ -139,7 +139,11 @@ describe("sgds-combo-box ", () => {
           part="menu"
           tabindex="-1"
           >
-              <slot></slot> 
+              <slot>
+              <div class="empty-menu">
+              No options
+            </div>
+              </slot> 
         </ul>
           `,
       { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
@@ -462,8 +466,7 @@ describe("sgds-combo-box ", () => {
       label="Combobox using slot"
       hinttext="Select an option"
       placeholder="Select an option"
-    >
-    </sgds-combo-box>`);
+    ></sgds-combo-box>`);
 
     const input = el.shadowRoot?.querySelector("input");
     input?.click();
@@ -472,6 +475,27 @@ describe("sgds-combo-box ", () => {
     expect(el.menuIsOpen).to.be.true;
 
     expect(el.shadowRoot?.querySelectorAll(".empty-menu")).to.exist;
+  });
+  it("no option div should not persist when menu is closed", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box
+      label="Combobox using slot"
+      hinttext="Select an option"
+      placeholder="Select an option"
+      ><sgds-combo-box-option value="one">One</sgds-combo-box-option>
+    </sgds-combo-box>`);
+    expect(el.shadowRoot?.querySelector("ul>.empty-menu")).to.not.exist;
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input.form-control");
+    input?.focus();
+
+    await el.updateComplete;
+    await sendKeys({ type: "x" });
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector("ul>.empty-menu")).to.exist;
+    input?.blur();
+    await el.updateComplete;
+    input?.click();
+    await waitUntil(() => !el.shadowRoot?.querySelector("ul>.empty-menu"));
+    expect(el.shadowRoot?.querySelector("ul>.empty-menu")).to.not.exist;
   });
 });
 

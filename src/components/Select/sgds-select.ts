@@ -96,9 +96,9 @@ export class SgdsSelect extends SelectElement {
     }
     const sgdsInput = await this._input;
     this._mixinSetFormValue();
-
     this._mixinValidate(sgdsInput);
 
+    this._updateDisplayValue();
     if (!this._isTouched && this.value === "") return;
 
     this.invalid = !this._mixinReportValidity();
