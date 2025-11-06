@@ -29,7 +29,6 @@ export const Template = ({
       ?required=${required}
       ?readonly=${readonly}
       value=${ifDefined(value)}
-      .menuList=${menuList}
       floatingOpts=${ifDefined(floatingOpts)}
       ?menuIsOpen=${menuIsOpen}
       filterFunction=${ifDefined(filterFunction)}
