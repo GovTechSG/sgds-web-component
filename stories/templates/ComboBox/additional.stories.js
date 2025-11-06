@@ -92,9 +92,9 @@ export const ComboBoxDefaultSlot = {
 
 const ComboBoxMenuListProp = () => {
   return html`
-    <sgds-combo-box id="combobox-example" label="Items" placeholder="ComboBox"> </sgds-combo-box>
+    <sgds-combo-box id="menulist-prop-combobox-example" label="Items" placeholder="ComboBox"> </sgds-combo-box>
     <script>
-      const comboBox = document.querySelector("#combobox-example");
+      const comboBox = document.querySelector("#menulist-prop-combobox-example");
       comboBox.menuList = [
         { label: "Afghanistan", value: "1" },
         { label: "Albania", value: "2" },
