@@ -43,15 +43,24 @@ export class SgdsAlertBanner extends SgdsElement {
     this.show ? this.emit("sgds-show") : this.emit("sgds-hide");
   }
 
-  @queryAssignedElements({flatten: true})
-  defaultSlotElements: SgdsAlertBannerItem[]
- protected async firstUpdated(changedProperties: Parameters<LitElement["firstUpdated"]>[0]): void {
-   
-  console.log(this.children)
-  this.appendChild(this.children[0].cloneNode(true))
-  this.appendChild(this.children[1].cloneNode(true))
-  this.appendChild(this.children[2].cloneNode(true))
- }
+  @queryAssignedElements({ flatten: true })
+  defaultSlotElements: SgdsAlertBannerItem[];
+  protected async firstUpdated(changedProperties: Parameters<LitElement["firstUpdated"]>[0]): void {
+    //     await this.updateComplete;
+    //   const slot = this.shadowRoot.querySelector('slot');
+    //   const wrapper = this.shadowRoot.querySelector('.content');
+    //   // Clone assigned nodes once and append them to create the duplicate track
+    //   const assigned = slot.assignedElements({ flatten: true });
+    //   const clones = assigned.map(el => el.cloneNode(true));
+    //   const track2 = document.createElement('div');
+    //   track2.classList.add('looping-content');
+    //   clones.forEach(el => track2.appendChild(el));
+    //   wrapper.appendChild(track2);
+    // // console.log(this.children)
+    // // this.appendChild(this.children[0].cloneNode(true))
+    // // this.appendChild(this.children[1].cloneNode(true))
+    // // this.appendChild(this.children[2].cloneNode(true))
+  }
   render() {
     return (this.dismissible && this.show) || !this.dismissible
       ? html`
@@ -67,7 +76,10 @@ export class SgdsAlertBanner extends SgdsElement {
           >
             <div class="content">
               <div class="looping-content">
-              <slot id="loop-slot"></slot>
+                <slot id="loop-slot"></slot>
+              </div>
+              <div class="looping-content duplicate">
+                <slot name="duplicate"></slot>
               </div>
             </div>
             <div class="pagination">
