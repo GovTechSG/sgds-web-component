@@ -109,6 +109,7 @@ export class SgdsComboBox extends SelectElement {
 
     /** this will trigger _updateValueAndDisplayValue */
     this.optionList = await this._getMenuListFromOptions(assignedElements);
+    console.log("optionList", this.optionList)
     this._setupValidation(this.optionList);
   }
 
@@ -192,6 +193,7 @@ export class SgdsComboBox extends SelectElement {
     this.emit("sgds-input");
     const input = e.target as HTMLInputElement;
     this.displayValue = input.value;
+    console.log(this.optionList, "handleInputChange")
     this.filteredList = this.optionList.filter(item => this.filterFunction(this.displayValue, item));
 
     // reset menu list when displayValue
