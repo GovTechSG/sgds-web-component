@@ -282,6 +282,52 @@ describe("<sgds-select>", () => {
 });
 
 describe("select >> when submitting a form", () => {
+  it("when value exist in required field, pressing submit should not show error", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-select required value="option1">
+          <sgds-select-option value="option1">Apple</sgds-select-option>
+          <sgds-select-option value="option2">Apricot</sgds-select-option>
+          <sgds-select-option value="option3">Dur</sgds-select-option>
+        </sgds-select>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>`
+    );
+    const select = form.querySelector<SgdsSelect>("sgds-select");
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    form?.addEventListener("submit", e => e.preventDefault());
+    expect(select?.value).to.equal("option1");
+    expect(select?.invalid).to.be.false;
+    button?.click();
+    await select?.updateComplete;
+    expect(select?.invalid).to.be.false;
+  });
+  it("when value is truthy, and reset button is clicked, input is reset and is valid", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-select required menuIsOpen>
+          <sgds-select-option value="option1">Apple</sgds-select-option>
+          <sgds-select-option value="option2">Apricot</sgds-select-option>
+          <sgds-select-option value="option3">Dur</sgds-select-option>
+        </sgds-select>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>`
+    );
+
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    const select = form.querySelector<SgdsSelect>("sgds-select");
+    const appleItem = form
+      .querySelector<SgdsSelectOption>("sgds-select-option[value='option1']")
+      ?.shadowRoot?.querySelector("div.normal-item-content") as HTMLElement;
+    appleItem?.click();
+    await select?.updateComplete;
+    await waitUntil(() => select?.value === "option1");
+    expect(select?.value).to.equal("option1");
+    button?.click();
+
+    await waitUntil(() => !select?.value);
+    expect(select?.invalid).to.be.false;
+  });
   it("when required=true should block submission of form when there is no value", async () => {
     const form = await fixture<HTMLFormElement>(
       html`<form>
@@ -435,6 +481,27 @@ describe("select >> when submitting a form", () => {
     );
 
     expect(el.invalid).to.be.false;
+  });
+  it("should dynamically update the display value when the value changes", async () => {
+    const el = await fixture<SgdsSelect>(html`<sgds-select value="1">
+      <sgds-select-option value="1">Option 1</sgds-select-option>
+      <sgds-select-option value="2">Option 2</sgds-select-option>
+      <sgds-select-option value="3">Option 3</sgds-select-option>
+    </sgds-select>`);
+    expect(el.value).to.equal("1");
+    const firstOption = el.querySelector<SgdsSelectOption>("sgds-select-option[value='1']");
+    await waitUntil(() => firstOption?.active);
+    expect(firstOption?.active).to.be.true;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    expect(input.value).to.equal("Option 1");
+
+    el.value = "2";
+    await el.updateComplete;
+    await waitUntil(() => input.value === "Option 2");
+    expect(input.value).to.equal("Option 2");
+    expect(firstOption?.active).to.be.false;
+    const secondOption = el.querySelector<SgdsSelectOption>("sgds-select-option[value='2']");
+    expect(secondOption?.active).to.be.true;
   });
 });
 
