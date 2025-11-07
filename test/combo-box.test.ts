@@ -8,6 +8,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import type { SgdsBadge, SgdsButton, SgdsCheckbox, SgdsComboBox } from "../src/components";
 import SgdsComboBoxOption from "../src/components/ComboBox/sgds-combo-box-option";
 import SgdsCloseButton from "../src/internals/CloseButton/sgds-close-button";
+import { clearPart } from "lit/directive-helpers.js";
 interface IComboBoxRenderProps {
   multiSelect?: boolean;
   value?: string;
@@ -139,11 +140,7 @@ describe("sgds-combo-box ", () => {
           part="menu"
           tabindex="-1"
           >
-              <slot>
-              <div class="empty-menu">
-              No options
-            </div>
-              </slot> 
+              <slot><div class="empty-menu">No options</div></slot> 
         </ul>
           `,
       { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
@@ -1187,6 +1184,25 @@ describe("single select >> when submitting a form", () => {
     );
 
     expect(el.invalid).to.be.false;
+  });
+  it("when clicking menu item, only one option turns active at a time", async () => {
+    const el = await fixture<SgdsComboBox>(html` <sgds-combo-box>
+      <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
+      <sgds-combo-box-option value="2">Zimbabwe</sgds-combo-box-option>
+      <sgds-combo-box-option value="3">Zoo</sgds-combo-box-option>
+      <sgds-combo-box-option value="4">Zzzbabwe</sgds-combo-box-option>
+    </sgds-combo-box>`);
+
+    const comboBoxOptionOne = el.querySelector<SgdsComboBoxOption>("sgds-combo-box-option[value='1']");
+    const clickDiv1 = comboBoxOptionOne?.shadowRoot?.querySelector("div.normal-item-content") as HTMLDivElement;
+    clickDiv1?.click();
+    await waitUntil(() => comboBoxOptionOne?.active);
+
+    const comboBoxOptionTwo = el.querySelector<SgdsComboBoxOption>("sgds-combo-box-option[value='2']");
+    const clickDiv2 = comboBoxOptionTwo?.shadowRoot?.querySelector("div.normal-item-content") as HTMLDivElement;
+    clickDiv2?.click();
+    await waitUntil(() => comboBoxOptionTwo?.active);
+    expect(comboBoxOptionOne?.active).to.be.false;
   });
 });
 

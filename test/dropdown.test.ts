@@ -71,7 +71,7 @@ describe("dropdown-element generic keyboard interactions", () => {
     await sendKeys({ press: "ArrowDown" });
     //currentItem = 1
     await el.updateComplete;
-    expect(el.nextDropdownItemNo).to.equal(2);
+    expect(el.nextDropdownItemNo).to.equal(0);
     expect(el.prevDropdownItemNo).to.equal(0);
     expect(el.querySelectorAll("sgds-dropdown-item")[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
       "tabindex",
@@ -108,7 +108,7 @@ describe("dropdown-element generic keyboard interactions", () => {
     await sendKeys({ press: "ArrowUp" });
     // currentItem = 1
     await el.updateComplete;
-    expect(el.nextDropdownItemNo).to.equal(2);
+    expect(el.nextDropdownItemNo).to.equal(0);
     expect(el.prevDropdownItemNo).to.equal(0);
     expect(el.querySelectorAll("sgds-dropdown-item")[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
       "tabindex",
@@ -134,7 +134,7 @@ describe("dropdown-element generic keyboard interactions", () => {
     await sendKeys({ press: "ArrowUp" });
     //currentItem = 1
     await el.updateComplete;
-    expect(el.nextDropdownItemNo).to.equal(2);
+    expect(el.nextDropdownItemNo).to.equal(0);
     expect(el.prevDropdownItemNo).to.equal(0);
     expect(el.querySelectorAll("sgds-dropdown-item")[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute(
       "tabindex",

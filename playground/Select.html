@@ -36,16 +36,12 @@
     value="1"
     required
     hasFeedback
-  ></sgds-select>
+  >  <sgds-select-option  value="1">Option 1</sgds-select-option>
+  <sgds-select-option  value="2">Option 2</sgds-select-option>
+  <sgds-select-option value="3">Option 3</sgds-select-option></sgds-select>
 
  
-<script>
-  const select = document.querySelector("sgds-select")
-  setTimeout(() => {
-    console.log("changed")
-    select.value = "2"
-    }, 2000)
-</script>
+
   <!-- <sgds-select
     label="Using slots with some disabled options"
     hinttext="Select an option"
