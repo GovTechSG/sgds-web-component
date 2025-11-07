@@ -194,6 +194,8 @@ export class SgdsComboBox extends SelectElement {
     this.emit("sgds-input");
     const input = e.target as HTMLInputElement;
     this.displayValue = input.value;
+    // There is a race condition in certain situations where this.optionList is not fully updated during slotchange
+    // Hence instead of using this.optionList, we have to perform a query on the <sgds-combo-box-option> elements
     const optionList = this.options.map(o => ({ value: o.value, label: o.textContent.trim() }));
     this.filteredList = optionList.filter(item => this.filterFunction(this.displayValue, item));
 
@@ -229,8 +231,6 @@ export class SgdsComboBox extends SelectElement {
    */
   protected async _handleItemSelected(e: Event) {
     const itemEl = e.target as SgdsComboBoxOption;
-    itemEl.active = true;
-
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
     const foundItem = this.filteredList.find(i => i.value.toString() === itemValueAttr) || {
@@ -247,13 +247,18 @@ export class SgdsComboBox extends SelectElement {
       this.value = this.selectedItems.map(i => i.value).join(";");
     } else {
       // Single-select
-      const previousValue = this.value;
-      this.options?.forEach(o => (o.value === previousValue ? (o.active = false) : null));
-
-      this.selectedItems = [foundItem];
-      this.value = foundItem.value.toString();
-      this.displayValue = this.selectedItems[0].label;
-      this.hideMenu();
+      // Only update active states if a new item is selected
+      if (this.selectedItems.length === 0 || this.selectedItems[0].value !== foundItem.value) {
+        // Remove active from all options
+        this.options.forEach(o => (o.active = false));
+        // Set active only on the selected item
+        itemEl.active = true;
+        this.selectedItems = [foundItem];
+        this.value = foundItem.value.toString();
+        this.displayValue = foundItem.label;
+        this.hideMenu();
+      }
+      // If the same item is clicked again, do nothing (keep active state)
     }
   }
 
@@ -322,17 +327,25 @@ export class SgdsComboBox extends SelectElement {
   protected async _mixinResetFormControl() {
     this.value = this.defaultValue;
     if (!this.multiSelect) {
-      const initialItem = this.optionList.filter(({ value }) => value === this.value);
-      if (initialItem.length <= 0) {
+      //reset menu
+      this.options.forEach(o => {
+        o.active = o.value === this.value;
+      });
+      const initialOption = this.options.filter(o => o.value === this.value);
+      if (initialOption.length <= 0) {
         this.displayValue = "";
       } else {
-        this.displayValue = initialItem[0].label;
+        this.displayValue = initialOption[0].textContent.trim();
       }
       this._mixinResetValidity(await this._input);
     } else {
       const valueArray = this.value.split(";");
-      const initialItem = this.optionList.filter(({ value }) => valueArray.includes(value));
-      this.selectedItems = initialItem;
+      // reset menu
+      this.options.forEach(o => {
+        o.active = valueArray.includes(o.value);
+      });
+      const initialOption = this.options.filter(o => valueArray.includes(o.value));
+      this.selectedItems = initialOption.map(o => ({ value: o.value, label: o.textContent.trim() }));
       this._mixinResetValidity(await this._multiSelectInput);
     }
   }
@@ -434,6 +447,8 @@ export class SgdsComboBox extends SelectElement {
 export default SgdsComboBox;
 
 //TODO:
-//  Address menu clicking bug in single select
-// Remove this.optionList ?
-// Address resetForm bug
+// Replace this.optionList ?
+// During slotchange event _handleDefaultSlotChange, we try to populate this.optionList to obtain value attribute and textContent as label from <sgds-combo-box-option>
+// However, it has race conditions in certain situation like nextjs, where the last option's label (essentially the slot of <sgds-combo-box-option>) may not be available immediately.
+// To circumvent this, I avoid relying on this.optionList to perform filterFunction onInput handler and query this.options directly at the point of user typing.
+// To prevent confusion, this.optionList should ideally be removed in future iterations
