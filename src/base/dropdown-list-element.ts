@@ -133,7 +133,6 @@ export class DropdownListElement extends DropdownElement {
     // Use modulo for looping
     const idx = ((currentItemIdx % items.length) + items.length) % items.length;
     const activeItem = items[idx];
-    console.log(activeItem, "activeItem");
     this.emit("i-sgds-option-focus", { detail: { option: activeItem } });
     this.nextDropdownItemNo = (idx + 1) % items.length;
     this.prevDropdownItemNo = (idx - 1 + items.length) % items.length;
