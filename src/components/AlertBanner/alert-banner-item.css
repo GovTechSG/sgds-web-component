@@ -1,6 +1,11 @@
 :host{
-  width: 100%;
-  height: 100%;
+display: block;
+width: inherit;
+
+           
+}
+:host([variant="warning"]) .banner-item {
+  color: var(--sgds-color-fixed-dark);
 }
 .banner-item {
   display: flex;
@@ -31,6 +36,9 @@
   font-weight: var(--sgds-font-weight-regular, 400);
   line-height: var(--sgds-line-height-20, 20px); /* 142.857% */
   letter-spacing: var(--sgds-letter-spacing-normal, 0);
+  display: flex;
+  gap: var(--sgds-gap-2-xs, 4px);
+  align-items: center;
 }
 .content-top {
   display: flex;
@@ -45,18 +53,17 @@
   align-items: flex-start;
   gap: var(--sgds-gap-sm, 12px);
 }
-.action {
-  display: flex;
-  gap: var(--sgds-gap-2-xs, 4px);
-  align-items: center;
-}
 
 slot[name="action"]::slotted(a) {
+  --action-color: var(--sgds-color-fixed-light);
   text-decoration: none !important;
-  color: var(--sgds-color-fixed-light) !important;
+  color: var(--action-color) !important;
   font-size: var(--sgds-font-size-1, 14px);
   font-style: normal;
   font-weight: var(--sgds-font-weight-regular, 400);
   line-height: var(--sgds-line-height-20, 20px); /* 142.857% */
   letter-spacing: var(--sgds-letter-spacing-normal, 0);
+}
+:host([variant="warning"]) slot[name="action"]::slotted(a) {
+  --action-color: var(--sgds-color-fixed-dark);
 }
