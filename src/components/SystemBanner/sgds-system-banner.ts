@@ -115,24 +115,12 @@ export class SgdsSystemBanner extends SgdsElement {
     this._animateItem(items[this._currentIndex], "prev");
     this._resetAutoCycle();
   }
-  private _animateItem(item: SgdsSystemBannerItem, direction: "next" | "prev") {
+  private async _animateItem(item: SgdsSystemBannerItem, direction: "next" | "prev") {
     // Cancel any existing animations before starting a new one
     item.getAnimations().forEach(a => a.cancel());
     // Start the slide-down animation
-    const animationSettings = {
-      next: [
-        { opacity: 0, transform: "translateY(-100%)" },
-        { opacity: 1, transform: "translateY(0)" }
-      ],
-      prev: [
-        { opacity: 0, transform: "translateY(100%)" },
-        { opacity: 1, transform: "translateY(0)" }
-      ]
-    };
-    item.animate(animationSettings[direction], {
-      duration: 500,
-      easing: "cubic-bezier(0.45,0.05,0.55,0.95)"
-    });
+    const bannerLoopMessage = getAnimation(this, `banner.item.${direction}`);
+    await animateTo(item, bannerLoopMessage.keyframes, bannerLoopMessage.options);
   }
   private _startAutoCycle() {
     this._stopAutoCycle(); // avoid duplicates
@@ -212,9 +200,29 @@ export default SgdsSystemBanner;
 
 setDefaultAnimation("banner.show", {
   keyframes: [{ opacity: 0 }, { opacity: 1 }],
-  options: { duration: 400, easing: "ease" }
+  options: { duration: 500, easing: "ease" }
 });
 setDefaultAnimation("banner.hide", {
   keyframes: [{ opacity: 1 }, { opacity: 0 }],
-  options: { duration: 400, easing: "ease" }
+  options: { duration: 500, easing: "ease" }
+});
+setDefaultAnimation("banner.item.next", {
+  keyframes: [
+    { opacity: 0, transform: "translateY(-100%)" },
+    { opacity: 1, transform: "translateY(0)" }
+  ],
+  options: {
+    duration: 500,
+    easing: "cubic-bezier(0.45,0.05,0.55,0.95)"
+  }
+});
+setDefaultAnimation("banner.item.prev", {
+  keyframes: [
+    { opacity: 0, transform: "translateY(100%)" },
+    { opacity: 1, transform: "translateY(0)" }
+  ],
+  options: {
+    duration: 500,
+    easing: "cubic-bezier(0.45,0.05,0.55,0.95)"
+  }
 });
