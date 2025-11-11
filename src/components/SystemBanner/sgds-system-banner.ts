@@ -1,18 +1,18 @@
+import { html, nothing, PropertyValueMap } from "lit";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
-import { html, LitElement, nothing, PropertyValueMap } from "lit";
+import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import { animateTo } from "../../utils/animate";
+import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
+import { watch } from "../../utils/watch";
 import SgdsIcon from "../Icon/sgds-icon";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
-import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
-import alertBannerStyles from "./alert-banner.css";
-import { watch } from "../../utils/watch";
-import { classMap } from "lit/directives/class-map.js";
-import SgdsAlertBannerItem from "./sgds-alert-banner-item";
-import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
-import { animateTo } from "../../utils/animate";
+import alertBannerStyles from "./system-banner.css";
+import SgdsSystemBannerItem from "./sgds-system-banner-item";
 export type AlertBannerVariant = "info" | "danger" | "warning" | "neutral";
 
-export class SgdsAlertBanner extends SgdsElement {
+export class SgdsSystemBanner extends SgdsElement {
   static styles = [...SgdsElement.styles, alertBannerStyles];
   /**@internal */
   static dependencies = {
@@ -40,7 +40,7 @@ export class SgdsAlertBanner extends SgdsElement {
     this.show = false;
   }
   @queryAssignedElements({ flatten: true })
-  bannerItem: SgdsAlertBannerItem[];
+  bannerItem: SgdsSystemBannerItem[];
 
   @query(".banner")
   banner: HTMLDivElement;
@@ -48,7 +48,7 @@ export class SgdsAlertBanner extends SgdsElement {
 
   @state() private _intervalId = null;
 
-  private _intervalTime = 20000; // 20 seconds
+  private _intervalTime = 5000; // 20 seconds
 
   @state() private _currentIndex = 0;
 
@@ -115,7 +115,7 @@ export class SgdsAlertBanner extends SgdsElement {
     this._animateItem(items[this._currentIndex], "prev");
     this._resetAutoCycle();
   }
-  private _animateItem(item: SgdsAlertBannerItem, direction: "next" | "prev") {
+  private _animateItem(item: SgdsSystemBannerItem, direction: "next" | "prev") {
     // Cancel any existing animations before starting a new one
     item.getAnimations().forEach(a => a.cancel());
     // Start the slide-down animation
@@ -160,7 +160,7 @@ export class SgdsAlertBanner extends SgdsElement {
   }
   private _handleSlotChange(e: Event) {
     const slot = e.target as HTMLSlotElement;
-    const assignedElements = slot.assignedElements() as SgdsAlertBannerItem[];
+    const assignedElements = slot.assignedElements() as SgdsSystemBannerItem[];
     assignedElements.forEach(item => item.setAttribute("variant", this.variant));
   }
   render() {
@@ -177,23 +177,25 @@ export class SgdsAlertBanner extends SgdsElement {
         <div class="content">
           <slot id="loop-slot" @slotchange=${this._handleSlotChange}></slot>
         </div>
-        <div class="pagination">
-          <sgds-icon-button
-            name="chevron-left"
-            tone=${buttonTone}
-            variant="ghost"
-            size="xs"
-            @click=${this._prev}
-          ></sgds-icon-button>
-          <span>${this._currentIndex + 1}/${this.childCount}</span>
-          <sgds-icon-button
-            name="chevron-right"
-            tone=${buttonTone}
-            variant="ghost"
-            size="xs"
-            @click=${this._next}
-          ></sgds-icon-button>
-        </div>
+        ${this.childCount > 1
+          ? html` <div class="pagination">
+              <sgds-icon-button
+                name="chevron-left"
+                tone=${buttonTone}
+                variant="ghost"
+                size="xs"
+                @click=${this._prev}
+              ></sgds-icon-button>
+              <span>${this._currentIndex + 1}/${this.childCount}</span>
+              <sgds-icon-button
+                name="chevron-right"
+                tone=${buttonTone}
+                variant="ghost"
+                size="xs"
+                @click=${this._next}
+              ></sgds-icon-button>
+            </div>`
+          : nothing}
         ${this.dismissible
           ? html`<sgds-close-button
               aria-label="close the alert"
@@ -206,7 +208,7 @@ export class SgdsAlertBanner extends SgdsElement {
   }
 }
 
-export default SgdsAlertBanner;
+export default SgdsSystemBanner;
 
 setDefaultAnimation("banner.show", {
   keyframes: [{ opacity: 0 }, { opacity: 1 }],

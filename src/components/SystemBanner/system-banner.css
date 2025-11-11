@@ -1,6 +1,6 @@
- :host {
-      display: block; /* Ensure the host element behaves as a block for width calculations */
-    }
+:host {
+  display: block; /* Ensure the host element behaves as a block for width calculations */
+}
 
 .banner {
   display: flex;
@@ -11,37 +11,31 @@
   color: var(--sgds-color-fixed-light);
   padding: var(--sgds-padding-sm) var(--sgds-padding-2-xl);
 }
-:host([variant="danger"]) .banner{
+:host([variant="danger"]) .banner {
   background-color: var(--sgds-danger-surface-default);
-} 
-:host([variant="neutral"]) .banner{
+}
+:host([variant="neutral"]) .banner {
   background-color: var(--sgds-surface-fixed-dark);
-} 
+}
 :host([variant="warning"]) .banner {
   background-color: var(--sgds-warning-surface-default);
   color: var(--sgds-color-fixed-dark);
-} 
+}
 .content {
   flex: 1;
-  height: 100px;
   overflow: hidden;
   width: 100%;
 }
 
-::slotted(sgds-alert-banner-item) {
+::slotted(sgds-system-banner-item) {
   display: none;
   opacity: 0;
+  flex: 0 0 100%;
+}
 
- 
-}
-::slotted(*) {
-    flex: 0 0 100%;
-}
-::slotted(sgds-alert-banner-item[active]) {
+::slotted(sgds-system-banner-item[active]) {
   display: block;
   opacity: 1;
-   
-
 }
 
 .pagination {

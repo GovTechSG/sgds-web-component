@@ -28,6 +28,12 @@ width: inherit;
   font-weight: var(--sgds-font-weight-regular, 400);
   line-height: var(--sgds-line-height-20, 20px); /* 142.857% */
   letter-spacing: var(--sgds-letter-spacing-normal, 0);
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .action {
@@ -52,6 +58,7 @@ width: inherit;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--sgds-gap-sm, 12px);
+  max-width: var(--sgds-dimension-872);
 }
 
 slot[name="action"]::slotted(a) {

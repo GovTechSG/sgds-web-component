@@ -1,6 +1,5 @@
 import "./components/Accordion";
 import "./components/Alert";
-import "./components/AlertBanner";
 import "./components/Badge";
 import "./components/Breadcrumb";
 import "./components/Button";
@@ -30,8 +29,9 @@ import "./components/Radio";
 import "./components/Sidenav";
 import "./components/Skeleton";
 import "./components/Spinner";
-import "./components/Switch";
 import "./components/Stepper";
+import "./components/Switch";
+import "./components/SystemBanner";
 import "./components/Tab";
 import "./components/Table";
 import "./components/Textarea";

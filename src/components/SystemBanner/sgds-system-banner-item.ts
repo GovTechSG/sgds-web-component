@@ -1,9 +1,9 @@
 import { html } from "lit";
 import SgdsElement from "../../base/sgds-element";
-import alertBannerItemStyles from "./alert-banner-item.css";
+import alertBannerItemStyles from "./system-banner-item.css";
 export type AlertBannerVariant = "info" | "danger" | "warning" | "neutral";
 
-export class SgdsAlertBannerItem extends SgdsElement {
+export class SgdsSystemBannerItem extends SgdsElement {
   static styles = [...SgdsElement.styles, alertBannerItemStyles];
 
   render() {
@@ -27,4 +27,4 @@ export class SgdsAlertBannerItem extends SgdsElement {
   }
 }
 
-export default SgdsAlertBannerItem;
+export default SgdsSystemBannerItem;
