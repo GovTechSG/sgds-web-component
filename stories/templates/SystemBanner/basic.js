@@ -1,7 +1,11 @@
 import { html } from "lit-html";
 import { ifDefined } from "lit/directives/if-defined.js";
 
-export const Template = args => html`<sgds-system-banner ?dismissible=${args.dismissible} ?show=${args.show} variant=${ifDefined(args.variant)}>
+export const Template = args => html`<sgds-system-banner
+  ?dismissible=${args.dismissible}
+  ?show=${args.show}
+  variant=${ifDefined(args.variant)}
+>
   <sgds-system-banner-item>
     <sgds-icon slot="icon" name="placeholder"></sgds-icon>
     <div>
@@ -34,7 +38,7 @@ export const Template = args => html`<sgds-system-banner ?dismissible=${args.dis
 </sgds-system-banner>`;
 
 export const args = {
-  show: true,
+  show: true
 };
 
 export const parameters = {};

@@ -13,11 +13,11 @@ import SgdsSystemBannerItem from "./sgds-system-banner-item";
 export type AlertBannerVariant = "info" | "danger" | "warning" | "neutral";
 
 /**
- * @summary A system banner component for displaying important messages to users at the application level. 
- * Each banner can contain up to 5 banner items that cycle automatically every 5 seconds. Pagination is also 
- * 
+ * @summary A system banner component for displaying important messages to users at the application level.
+ * Each banner can contain up to 5 banner items that cycle automatically every 5 seconds. Pagination is also
+ *
  * @slot default - The slot to pass in `sgds-system-banner-item`
- * 
+ *
  * @event sgds-show - Emitted when the banner has start to appear on screen before animation is complete
  * @event sgds-after-show - Emitted when the banner appears on screen after animation is complete (to removed ?)
  * @event sgds-hide - Emitted when the banner is disappearing from the screen before animation is complete

@@ -36,12 +36,12 @@ export const Variants = {
 };
 
 export const Dimissible = {
-    render: Template.bind({}),
-    name: "Dismissible",
-    args: {
-      dismissible: true,
-      show: true,
-    },
-    parameters: {},
-    tags: ["!dev"]
-}
+  render: Template.bind({}),
+  name: "Dismissible",
+  args: {
+    dismissible: true,
+    show: true
+  },
+  parameters: {},
+  tags: ["!dev"]
+};
