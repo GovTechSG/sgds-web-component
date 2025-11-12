@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: var(--sgds-gap-xs);
   border-radius: var(--sgds-border-radius-sm);
+  max-width: 100%;
 }
 .skeleton.skeleton-paragraph {
   background-color: transparent;
