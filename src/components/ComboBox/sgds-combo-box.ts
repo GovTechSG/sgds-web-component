@@ -67,6 +67,8 @@ export class SgdsComboBox extends SelectElement {
       const sgdsInput = await this._input;
       sgdsInput.focus();
       this.options.forEach(o => o.removeAttribute("hidden"));
+      // reset emptyMenu state
+      this.emptyMenu = false;
     });
   }
   async firstUpdated(changedProperties: PropertyValueMap<this>) {
@@ -79,19 +81,7 @@ export class SgdsComboBox extends SelectElement {
       comboBoxOption.active = this.value.includes(o.value);
       this.appendChild(comboBoxOption);
     });
-
-    if (this.value && this.menuList.length > 0) {
-      const valueArray = this.value.split(";");
-      const initialSelectedItem = this.menuList.filter(({ value }) => valueArray.includes(value));
-      this.selectedItems = [...initialSelectedItem, ...this.selectedItems];
-
-      if (!this.multiSelect) {
-        this.displayValue = initialSelectedItem[0]?.label;
-      }
-    }
-    this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._input);
-
-    this._mixinValidate(this.input);
+    this._setupValidation(this.menuList);
 
     if (this.menuIsOpen && !this.readonly) {
       this.showMenu();
@@ -118,9 +108,25 @@ export class SgdsComboBox extends SelectElement {
     });
 
     /** this will trigger _updateValueAndDisplayValue */
+    await this.updateComplete;
     this.optionList = await this._getMenuListFromOptions(assignedElements);
+    this._setupValidation(this.optionList);
   }
 
+  private async _setupValidation(list: SgdsComboBoxOptionData[]) {
+    if (this.value && list.length > 0) {
+      const valueArray = this.value.split(";");
+      const initialSelectedItem = list.filter(({ value }) => valueArray.includes(value));
+      this.selectedItems = [...initialSelectedItem, ...this.selectedItems];
+
+      if (!this.multiSelect) {
+        this.displayValue = initialSelectedItem[0]?.label;
+      }
+      this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._input);
+
+      this._mixinValidate(this.input);
+    }
+  }
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
     // when value change, always emit a change event
@@ -138,15 +144,15 @@ export class SgdsComboBox extends SelectElement {
     } else {
       this._mixinValidate(sgdsInput);
     }
-    if (!this._isTouched && this.value === "") return;
-
-    this.invalid = !this._mixinReportValidity();
 
     // When value is updated by user and it doesn't map to selectedItems, we should re-map selectedItems
     const selectedItemVal = this.selectedItems.map(val => val.value).join(";");
     if (selectedItemVal !== this.value) {
       this._updateValueAndDisplayValue(this.optionList);
     }
+
+    if (!this._isTouched && this.value === "") return;
+    this.invalid = !this._mixinReportValidity();
   }
 
   @watch("optionList", { waitUntilFirstUpdate: true })
@@ -187,7 +193,10 @@ export class SgdsComboBox extends SelectElement {
     this.emit("sgds-input");
     const input = e.target as HTMLInputElement;
     this.displayValue = input.value;
-    this.filteredList = this.optionList.filter(item => this.filterFunction(this.displayValue, item));
+    // There is a race condition in certain situations where this.optionList is not fully updated during slotchange
+    // Hence instead of using this.optionList, we have to perform a query on the <sgds-combo-box-option> elements
+    const optionList = this.options.map(o => ({ value: o.value, label: o.textContent.trim() }));
+    this.filteredList = optionList.filter(item => this.filterFunction(this.displayValue, item));
 
     // reset menu list when displayValue
     if (this.displayValue === "" && !this.multiSelect) {
@@ -202,6 +211,7 @@ export class SgdsComboBox extends SelectElement {
     // Filtering for slots
     this.emptyMenu = this.filteredList.length === 0;
     const filteredValues = this.filteredList.map(l => l.value);
+
     this.options.forEach(o => {
       if (!filteredValues.includes(o.value)) {
         o.hidden = true;
@@ -220,8 +230,6 @@ export class SgdsComboBox extends SelectElement {
    */
   protected async _handleItemSelected(e: Event) {
     const itemEl = e.target as SgdsComboBoxOption;
-    itemEl.active = true;
-
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
     const foundItem = this.filteredList.find(i => i.value.toString() === itemValueAttr) || {
@@ -238,13 +246,18 @@ export class SgdsComboBox extends SelectElement {
       this.value = this.selectedItems.map(i => i.value).join(";");
     } else {
       // Single-select
-      const previousValue = this.value;
-      this.options?.forEach(o => (o.value === previousValue ? (o.active = false) : null));
-
-      this.selectedItems = [foundItem];
-      this.value = foundItem.value.toString();
-      this.displayValue = this.selectedItems[0].label;
-      this.hideMenu();
+      // Only update active states if a new item is selected
+      if (this.selectedItems.length === 0 || this.selectedItems[0].value !== foundItem.value) {
+        // Remove active from all options
+        this.options.forEach(o => (o.active = false));
+        // Set active only on the selected item
+        itemEl.active = true;
+        this.selectedItems = [foundItem];
+        this.value = foundItem.value.toString();
+        this.displayValue = foundItem.label;
+        this.hideMenu();
+      }
+      // If the same item is clicked again, do nothing (keep active state)
     }
   }
 
@@ -313,19 +326,25 @@ export class SgdsComboBox extends SelectElement {
   protected async _mixinResetFormControl() {
     this.value = this.defaultValue;
     if (!this.multiSelect) {
-      // const initialItem = this.menuList.filter(({ value }) => value === this.value);
-      const initialItem = this.optionList.filter(({ value }) => value === this.value);
-      if (initialItem.length <= 0) {
+      //reset menu
+      this.options.forEach(o => {
+        o.active = o.value === this.value;
+      });
+      const initialOption = this.options.filter(o => o.value === this.value);
+      if (initialOption.length <= 0) {
         this.displayValue = "";
       } else {
-        this.displayValue = initialItem[0].label;
+        this.displayValue = initialOption[0].textContent.trim();
       }
       this._mixinResetValidity(await this._input);
     } else {
       const valueArray = this.value.split(";");
-      // const initialItem = this.menuList.filter(({ value }) => valueArray.includes(value));
-      const initialItem = this.optionList.filter(({ value }) => valueArray.includes(value));
-      this.selectedItems = initialItem;
+      // reset menu
+      this.options.forEach(o => {
+        o.active = valueArray.includes(o.value);
+      });
+      const initialOption = this.options.filter(o => valueArray.includes(o.value));
+      this.selectedItems = initialOption.map(o => ({ value: o.value, label: o.textContent.trim() }));
       this._mixinResetValidity(await this._multiSelectInput);
     }
   }
@@ -404,7 +423,9 @@ export class SgdsComboBox extends SelectElement {
         <!-- The input -->
         ${this._renderInput()} ${this._renderFeedback()}
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
-          <slot id="default" @slotchange=${this._handleDefaultSlotChange}></slot>
+          <slot id="default" @slotchange=${this._handleDefaultSlotChange}
+            ><div class="empty-menu">No options</div></slot
+          >
           ${this.emptyMenu && this.optionList.length > 0 ? html`<div class="empty-menu">No options</div>` : nothing}
         </ul>
       </div>
@@ -423,3 +444,10 @@ export class SgdsComboBox extends SelectElement {
 }
 
 export default SgdsComboBox;
+
+//TODO:
+// Replace this.optionList ?
+// During slotchange event _handleDefaultSlotChange, we try to populate this.optionList to obtain value attribute and textContent as label from <sgds-combo-box-option>
+// However, it has race conditions in certain situation like nextjs, where the last option's label (essentially the slot of <sgds-combo-box-option>) may not be available immediately.
+// To circumvent this, I avoid relying on this.optionList to perform filterFunction onInput handler and query this.options directly at the point of user typing.
+// To prevent confusion, this.optionList should ideally be removed in future iterations

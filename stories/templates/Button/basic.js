@@ -17,6 +17,7 @@ export const Template = args =>
       formMethod=${ifDefined(args.formMethod)}
       ?formNoValidate=${args.formNoValidate}
       formTarget=${ifDefined(args.formTarget)}
+      ?loading=${args.loading}
     >
       Button
     </sgds-button>

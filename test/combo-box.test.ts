@@ -8,6 +8,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import type { SgdsBadge, SgdsButton, SgdsCheckbox, SgdsComboBox } from "../src/components";
 import SgdsComboBoxOption from "../src/components/ComboBox/sgds-combo-box-option";
 import SgdsCloseButton from "../src/internals/CloseButton/sgds-close-button";
+import { clearPart } from "lit/directive-helpers.js";
 interface IComboBoxRenderProps {
   multiSelect?: boolean;
   value?: string;
@@ -139,7 +140,7 @@ describe("sgds-combo-box ", () => {
           part="menu"
           tabindex="-1"
           >
-              <slot></slot> 
+              <slot><div class="empty-menu">No options</div></slot> 
         </ul>
           `,
       { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
@@ -250,6 +251,7 @@ describe("sgds-combo-box ", () => {
       expect(el.value).to.equal("option1");
     });
   });
+
   TwoOptionsComboBox.forEach(({ render, mode }) => {
     it(`MODE=${mode}should not show any items in dropdown menu when there is no match (for default filter)`, async () => {
       const el = await fixture<SgdsComboBox>(render({ multiSelect: false }));
@@ -454,6 +456,43 @@ describe("sgds-combo-box ", () => {
       // Verify value change
       expect(el.value).to.equal("option4;option5");
     });
+  });
+
+  it("No option dropdown item should present when no child is provided", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box
+      label="Combobox using slot"
+      hinttext="Select an option"
+      placeholder="Select an option"
+    ></sgds-combo-box>`);
+
+    const input = el.shadowRoot?.querySelector("input");
+    input?.click();
+
+    await el.updateComplete;
+    expect(el.menuIsOpen).to.be.true;
+
+    expect(el.shadowRoot?.querySelectorAll(".empty-menu")).to.exist;
+  });
+  it("no option div should not persist when menu is closed", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box
+      label="Combobox using slot"
+      hinttext="Select an option"
+      placeholder="Select an option"
+      ><sgds-combo-box-option value="one">One</sgds-combo-box-option>
+    </sgds-combo-box>`);
+    expect(el.shadowRoot?.querySelector("ul>.empty-menu")).to.not.exist;
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input.form-control");
+    input?.focus();
+
+    await el.updateComplete;
+    await sendKeys({ type: "x" });
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector("ul>.empty-menu")).to.exist;
+    input?.blur();
+    await el.updateComplete;
+    input?.click();
+    await waitUntil(() => !el.shadowRoot?.querySelector("ul>.empty-menu"));
+    expect(el.shadowRoot?.querySelector("ul>.empty-menu")).to.not.exist;
   });
 });
 
@@ -1025,6 +1064,52 @@ describe("single select >> when submitting a form", () => {
     expect(comboBox()?.invalid).to.be.false;
     expect(input()?.value).to.equal("Dur");
   });
+  it("when value exist in required field, pressing submit should not show error", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-combo-box required value="option1">
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+          <sgds-combo-box-option value="option3">Dur</sgds-combo-box-option>
+        </sgds-combo-box>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>`
+    );
+    const combobox = form.querySelector<SgdsComboBox>("sgds-combo-box");
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    form?.addEventListener("submit", e => e.preventDefault());
+    expect(combobox?.value).to.equal("option1");
+    expect(combobox?.invalid).to.be.false;
+    button?.click();
+    await combobox?.updateComplete;
+    expect(combobox?.invalid).to.be.false;
+  });
+  it("when value is truthy, and reset button is clicked, input is reset and is valid", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form>
+        <sgds-combo-box required menuIsOpen>
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+          <sgds-combo-box-option value="option3">Dur</sgds-combo-box-option>
+        </sgds-combo-box>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>`
+    );
+
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    const combobox = form.querySelector<SgdsComboBox>("sgds-combo-box");
+    const appleItem = form
+      .querySelector<SgdsComboBoxOption>("sgds-combo-box-option[value='option1']")
+      ?.shadowRoot?.querySelector("div.normal-item-content") as HTMLElement;
+    appleItem?.click();
+    await combobox?.updateComplete;
+    await waitUntil(() => combobox?.value === "option1");
+    expect(combobox?.value).to.equal("option1");
+    button?.click();
+
+    await waitUntil(() => !combobox?.value);
+    expect(combobox?.invalid).to.be.false;
+  });
   it("when touched and blurred and value is empty, error is shown", async () => {
     const el = await fixture<SgdsComboBox>(
       html`
@@ -1099,6 +1184,25 @@ describe("single select >> when submitting a form", () => {
     );
 
     expect(el.invalid).to.be.false;
+  });
+  it("when clicking menu item, only one option turns active at a time", async () => {
+    const el = await fixture<SgdsComboBox>(html` <sgds-combo-box>
+      <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
+      <sgds-combo-box-option value="2">Zimbabwe</sgds-combo-box-option>
+      <sgds-combo-box-option value="3">Zoo</sgds-combo-box-option>
+      <sgds-combo-box-option value="4">Zzzbabwe</sgds-combo-box-option>
+    </sgds-combo-box>`);
+
+    const comboBoxOptionOne = el.querySelector<SgdsComboBoxOption>("sgds-combo-box-option[value='1']");
+    const clickDiv1 = comboBoxOptionOne?.shadowRoot?.querySelector("div.normal-item-content") as HTMLDivElement;
+    clickDiv1?.click();
+    await waitUntil(() => comboBoxOptionOne?.active);
+
+    const comboBoxOptionTwo = el.querySelector<SgdsComboBoxOption>("sgds-combo-box-option[value='2']");
+    const clickDiv2 = comboBoxOptionTwo?.shadowRoot?.querySelector("div.normal-item-content") as HTMLDivElement;
+    clickDiv2?.click();
+    await waitUntil(() => comboBoxOptionTwo?.active);
+    expect(comboBoxOptionOne?.active).to.be.false;
   });
 });
 
@@ -1372,6 +1476,7 @@ describe("sgds-combo-box-option (default)", () => {
     expect(spy.calledOnce).to.be.true;
   });
 });
+
 describe("sgds-combo-box-option (checkbox)", () => {
   it("matches shadowDom semantically ", async () => {
     const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option checkbox></sgds-combo-box-option>`);

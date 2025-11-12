@@ -52,32 +52,48 @@
 }
 
 :host([variant="primary"][tone="fixed-light"]) {
-  --btn-bg: var(--sgds-surface-fixed-light); 
-  --btn-hover-bg: var(--sgds-surface-raised);
+  --btn-bg: var(--sgds-surface-fixed-light);
+  --btn-hover-bg: linear-gradient(
+      0deg,
+      var(--sgds-bg-translucent-fixed-dark, rgba(14, 14, 14, 0.2)) 0%,
+      var(--sgds-bg-translucent-fixed-dark, rgba(14, 14, 14, 0.2)) 100%
+    ),
+    var(--sgds-surface-fixed-light, #fff);
   --btn-color: var(--sgds-color-fixed-dark);
 }
-
 :host([variant="outline"][tone="fixed-light"]) {
   --btn-border-color: var(--sgds-border-color-fixed-light);
   --btn-bg: var(--sgds-bg-transparent);
-  --btn-hover-bg: var(--sgds-bg-translucent);
-  --btn-color: var(--sgds-color-fixed-light); 
+  --btn-hover-bg: linear-gradient(
+      0deg,
+      var(--sgds-bg-translucent-fixed-dark) 0%,
+      var(--sgds-bg-translucent-fixed-dark) 100%
+    ),
+    var(--sgds-bg-transparent);
+  --btn-color: var(--sgds-color-fixed-light);
 }
 :host([variant="ghost"][tone="fixed-light"]) {
   --btn-bg: var(--sgds-bg-transparent);
-  --btn-hover-bg: var(--sgds-bg-translucent);
+  --btn-hover-bg: linear-gradient(
+      0deg,
+      var(--sgds-bg-translucent-fixed-dark) 0%,
+      var(--sgds-bg-translucent-fixed-dark) 100%
+    ),
+    var(--sgds-bg-transparent);
   --btn-color: var(--sgds-color-fixed-light);
 }
 
 :host([variant="primary"][tone="neutral"]) {
   --btn-bg: var(--sgds-surface-inverse);
-  --btn-hover-bg: var(--sgds-surface-inverse);
+  --btn-hover-bg: linear-gradient(0deg, var(--sgds-bg-translucent-inverse) 0%, var(--sgds-bg-translucent-inverse) 100%),
+    var(--sgds-surface-inverse);
   --btn-color: var(--sgds-color-inverse);
 }
 :host([variant="outline"][tone="neutral"]) {
   --btn-border-color: var(--sgds-border-color-emphasis);
   --btn-bg: var(--sgds-bg-transparent);
-  --btn-hover-bg: var(--sgds-bg-translucent-subtle);
+  --btn-hover-bg: linear-gradient(0deg, var(--sgds-bg-translucent-inverse) 0%, var(--sgds-bg-translucent-inverse) 100%),
+    var(--sgds-bg-translucent-subtle);
   --btn-color: var(--sgds-color-default);
 }
 :host([variant="ghost"][tone="neutral"]) {
@@ -143,7 +159,7 @@
     box-shadow 0.15s ease-in-out;
   user-select: none;
   vertical-align: middle;
-  opacity: var(--btn-opacity)
+  opacity: var(--btn-opacity);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -154,14 +170,12 @@
 
 .btn:hover,
 .btn.active {
-  background-color: var(--btn-hover-bg);
+  background: var(--btn-hover-bg);
 }
-:host([variant="primary"][tone="neutral"]) .btn:hover {
-  --btn-opacity: var(--sgds-opacity-80, 0.8);
-}
+
 .btn:focus,
 .btn:focus-visible {
-  background-color: var(--btn-hover-bg);
+  background: var(--btn-hover-bg);
   border-color: transparent;
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
@@ -169,9 +183,12 @@
 
 .btn.disabled,
 .btn:disabled {
-  opacity: var(--sgds-opacity-50);
+  opacity: var(--sgds-opacity-40);
   cursor: not-allowed;
   color: var(--btn-color);
+}
+.btn.loading {
+  cursor: default;
 }
 
 .btn slot::slotted(*) {

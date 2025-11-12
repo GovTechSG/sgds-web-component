@@ -39,4 +39,9 @@ describe("<sgds-spinner>", () => {
     expect(spinnerLabel).to.exist;
     expect(spinnerLabel?.textContent).to.equal("Loading");
   });
+  it("when orientation='horizontal', should render class 'horizontal'", async () => {
+    const el = await fixture(html`<sgds-spinner label="Loading" orientation="horizontal"></sgds-spinner>`);
+    const wrapper = el.shadowRoot?.querySelector<HTMLElement>(".spinner-wrapper");
+    expect(wrapper).to.have.class("horizontal");
+  });
 });
