@@ -29,9 +29,6 @@ export class SgdsSystemBanner extends SgdsElement {
   /** The alert's theme variant. */
   @property({ type: String, reflect: true }) variant: AlertBannerVariant = "info";
 
-  /** Controls the alert visual between a lighter outline and a solid darker variant. */
-  @property({ type: Boolean, reflect: true }) outlined = false;
-
   /** The title of the alert. Only text is allowed */
   @property({ type: String, reflect: true }) title: string;
 
@@ -156,8 +153,7 @@ export class SgdsSystemBanner extends SgdsElement {
     return html`
       <div
         class="${classMap({
-          banner: true,
-          outlined: this.outlined
+          banner: true
         })}"
         role="alert"
         aria-hidden=${this.show ? "false" : "true"}
