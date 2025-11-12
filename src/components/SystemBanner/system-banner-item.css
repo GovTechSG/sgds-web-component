@@ -29,7 +29,7 @@ width: inherit;
   line-height: var(--sgds-line-height-20, 20px); /* 142.857% */
   letter-spacing: var(--sgds-letter-spacing-normal, 0);
   display: -webkit-box;
-  -webkit-line-clamp: 3; 
+  -webkit-line-clamp: 2; 
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;

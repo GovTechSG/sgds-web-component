@@ -1,9 +1,9 @@
 import { html } from "lit-html";
+import { ifDefined } from "lit/directives/if-defined.js";
 
-export const Template = args => html`<sgds-system-banner dismissible show>
+export const Template = args => html`<sgds-system-banner ?dismissible=${args.dismissible} ?show=${args.show} variant=${ifDefined(args.variant)}>
   <sgds-system-banner-item>
     <sgds-icon slot="icon" name="placeholder"></sgds-icon>
-    <div slot="title">Title 1</div>
     <div>
       Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
       facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
@@ -15,7 +15,6 @@ export const Template = args => html`<sgds-system-banner dismissible show>
   </sgds-system-banner-item>
   <sgds-system-banner-item>
     <sgds-icon slot="icon" name="placeholder"></sgds-icon>
-    <div slot="title">Title 1</div>
     <div>
       Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
       facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
@@ -25,7 +24,6 @@ export const Template = args => html`<sgds-system-banner dismissible show>
   </sgds-system-banner-item>
   <sgds-system-banner-item>
     <sgds-icon slot="icon" name="placeholder"></sgds-icon>
-    <div slot="title">Title 2</div>
     <div>
       Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
       facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
@@ -35,6 +33,8 @@ export const Template = args => html`<sgds-system-banner dismissible show>
   </sgds-system-banner-item>
 </sgds-system-banner>`;
 
-export const args = {};
+export const args = {
+  show: true,
+};
 
 export const parameters = {};

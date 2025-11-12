@@ -3,6 +3,13 @@ import SgdsElement from "../../base/sgds-element";
 import alertBannerItemStyles from "./system-banner-item.css";
 export type AlertBannerVariant = "info" | "danger" | "warning" | "neutral";
 
+/**
+ * @summary The item component for `sgds-system-banner`. Each banner item represents a message in the system banner.
+ *
+ * @slot icon - The slot to pass in an icon element
+ * @slot action - The slot to pass in an action element such as a button or link
+ * @slot default - The slot to pass in the message content of the banner item
+ */
 export class SgdsSystemBannerItem extends SgdsElement {
   static styles = [...SgdsElement.styles, alertBannerItemStyles];
 
@@ -11,12 +18,7 @@ export class SgdsSystemBannerItem extends SgdsElement {
       <div class="banner-item">
         <slot name="icon"></slot>
         <div class="content">
-          <div class="content-top">
-            <div class="title">
-              <slot name="title"></slot>
-            </div>
-            <div class="message"><slot></slot></div>
-          </div>
+          <div class="message"><slot></slot></div>
           <div class="action">
             <slot name="action"></slot>
             <sgds-icon name="arrow-right"></sgds-icon>
