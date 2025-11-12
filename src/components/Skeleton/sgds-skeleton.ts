@@ -27,20 +27,13 @@ export class SgdsSkeleton extends SgdsElement {
   /** Adds a sheening animated effect to the skeleton  */
   @property({ type: Boolean, reflect: true }) sheen = false;
 
-  protected firstUpdated(changedProperties: PropertyValueMap<this>): void {
-    super.firstUpdated(changedProperties);
-
-    this.width ? (this.skeleton.style.width = this.width) : null;
-    this.height ? (this.skeleton.style.height = this.height) : null;
-    this.borderRadius ? (this.skeleton.style.borderRadius = this.borderRadius) : null;
-
-    if (this.rows > 0) {
-      const skeletonRows = Array.from(this.skeleton.children) as HTMLElement[];
-      skeletonRows.forEach(row => (row.style.borderRadius = this.borderRadius));
-    }
-  }
-
   render() {
+    const styleMap = {
+      width: this.width || undefined,
+      height: this.height || undefined,
+      borderRadius: this.borderRadius || undefined
+    };
+
     return html`
       <div
         class=${classMap({
@@ -49,11 +42,18 @@ export class SgdsSkeleton extends SgdsElement {
           "auto-size-rows": this.rows > 0,
           sheen: this.sheen && !this.rows
         })}
+        style=${Object.entries(styleMap)
+          .filter(([_, v]) => v)
+          .map(([k, v]) => `${k.replace(/([A-Z])/g, "-$1").toLowerCase()}: ${v}`)
+          .join("; ")}
       >
         ${this.rows > 0
           ? [...Array(this.rows).keys()].map(n => {
               const classes = { [`skeleton-row-${n}`]: true, sheen: this.sheen };
-              return html`<div class=${classMap(classes)}></div>`;
+              return html`<div
+                class=${classMap(classes)}
+                style=${this.borderRadius ? `border-radius: ${this.borderRadius}` : nothing}
+              ></div>`;
             })
           : nothing}
       </div>
