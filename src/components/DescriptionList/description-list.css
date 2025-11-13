@@ -17,6 +17,10 @@
   flex: 1;
 }
 
+.label-container {
+  max-width: var(--sgds-dimension-280);
+}
+
 .label {
   color: var(--sgds-color-default);
   font-weight: var(--sgds-font-weight-semibold);
