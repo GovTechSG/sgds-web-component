@@ -12,8 +12,10 @@ slot::slotted(*){
 
 .sm {
   font-size: var(--sgds-font-size-1);
+  line-height: var(--sgds-line-height-20);
 }
 
 .lg {
-  font-size : var(--sgds-font-size-3)
+  font-size : var(--sgds-font-size-3);
+  line-height: var(--sgds-line-height-32);
 }
