@@ -11,6 +11,7 @@ width: inherit;
   display: flex;
   gap: var(--sgds-gap-sm);
   color: var(--sgds-color-fixed-light);
+  padding: var(--sgds-padding-2-xs) 0
 }
 
 .message {
@@ -24,8 +25,29 @@ width: inherit;
   line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  overflow: hidden;
+  
   text-overflow: ellipsis;
+    overflow: hidden;
+  /* max-height: 40px;
+
+  padding-right: 50px;
+  position: relative; */
+}
+/* .show-more {
+  position: absolute;
+  right: 0;
+bottom: 0;
+display: inline; 
+white-space: nowrap;
+}
+.show-more__link {
+  text-decoration: underline;
+    cursor: pointer;
+
+
+} */
+.ellipsis{
+  color: white;
 }
 
 .action {
@@ -37,6 +59,7 @@ width: inherit;
   display: flex;
   gap: var(--sgds-gap-2-xs, 4px);
   align-items: center;
+  margin-top: 6px;
 }
 
 slot[name="action"]::slotted(a) {
@@ -53,3 +76,20 @@ slot[name="action"]::slotted(a) {
 :host([variant="warning"]) slot[name="action"]::slotted(a) {
   --action-color: var(--sgds-color-fixed-dark);
 }
+
+
+.banner-item__message_and__action {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-gap-xs);
+}
+@media (min-width: 512px) {
+  .banner-item__message_and__action {
+    flex-direction: row;
+    gap: var(--sgds-gap-sm);
+  }
+  .action {
+    margin-top: 0;
+  }
+} 
+

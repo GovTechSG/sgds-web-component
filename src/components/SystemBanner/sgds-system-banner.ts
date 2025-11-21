@@ -59,15 +59,15 @@ export class SgdsSystemBanner extends SgdsElement {
 
   protected firstUpdated(changedProperties: PropertyValueMap<this>): void {
     super.firstUpdated(changedProperties);
+    this.childCount = this.bannerItem.length;
     if (!this.show) {
       this.banner.classList.add("d-none");
     } else {
-      this._startAutoCycle();
+      this.childCount > 1 && this._startAutoCycle();
       this.addEventListener("mouseenter", this._pauseAutoCycle.bind(this));
       this.addEventListener("mouseleave", this._resumeAutoCycle.bind(this));
     }
     this._updateActiveItem();
-    this.childCount = this.bannerItem.length;
   }
   disconnectedCallback() {
     super.disconnectedCallback();
@@ -78,7 +78,7 @@ export class SgdsSystemBanner extends SgdsElement {
   @watch("show", { waitUntilFirstUpdate: true })
   async _handleShowChange() {
     if (this.show) {
-      this._startAutoCycle();
+      this.childCount > 1 && this._startAutoCycle();
       this.emit("sgds-show");
       this.banner.classList.remove("d-none");
       //Andy says remove show and hide motion. Confirm with him and remove
@@ -152,7 +152,7 @@ export class SgdsSystemBanner extends SgdsElement {
   }
 
   private _resumeAutoCycle(): void {
-    if (this.show) {
+    if (this.show && this.childCount > 1) {
       this._startAutoCycle();
     }
   }
@@ -194,11 +194,13 @@ export class SgdsSystemBanner extends SgdsElement {
             </div>`
           : nothing}
         ${this.dismissible
-          ? html`<sgds-close-button
-              aria-label="close the alert"
-              @click=${this.close}
-              variant=${this.variant === "warning" ? "dark" : "light"}
-            ></sgds-close-button>`
+          ? html`
+              <sgds-close-button
+                aria-label="close the alert"
+                @click=${this.close}
+                variant=${this.variant === "warning" ? "dark" : "light"}
+              ></sgds-close-button>
+            `
           : nothing}
       </div>
     `;
