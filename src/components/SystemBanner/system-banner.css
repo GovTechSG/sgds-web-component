@@ -5,22 +5,27 @@
 .banner {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  gap: var(--sgds-gap-sm);
-  background-color: var(--sgds-primary-surface-default);
+  align-items: center;
+  gap: var(--sgds-gap-xl);
+  background-color: var(--sgds-surface-fixed-dark);
+  min-height: var(--sgds-dimension-64);
   color: var(--sgds-color-fixed-light);
   padding: var(--sgds-padding-sm) var(--sgds-padding-2-xl);
 }
+
 :host([variant="danger"]) .banner {
   background-color: var(--sgds-danger-surface-default);
 }
+
 :host([variant="neutral"]) .banner {
   background-color: var(--sgds-surface-fixed-dark);
 }
+
 :host([variant="warning"]) .banner {
   background-color: var(--sgds-warning-surface-default);
   color: var(--sgds-color-fixed-dark);
 }
+
 .content {
   flex: 1;
   overflow: hidden;

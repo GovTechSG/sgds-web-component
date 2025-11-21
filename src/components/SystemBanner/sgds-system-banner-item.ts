@@ -17,12 +17,10 @@ export class SgdsSystemBannerItem extends SgdsElement {
     return html`
       <div class="banner-item">
         <slot name="icon"></slot>
-        <div class="content">
-          <div class="message"><slot></slot></div>
-          <div class="action">
-            <slot name="action"></slot>
-            <sgds-icon name="arrow-right"></sgds-icon>
-          </div>
+        <div class="message"><slot></slot></div>
+        <div class="action">
+          <slot name="action"></slot>
+          <sgds-icon name="arrow-right" size="md"></sgds-icon>
         </div>
       </div>
     `;
