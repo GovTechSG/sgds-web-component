@@ -15,9 +15,7 @@ const VariantTemplate = args => {
          <sgds-system-banner-item>
             <sgds-icon slot="icon" name="placeholder"></sgds-icon>
             <div>
-            <strong>Etiam suscipit nisi eget porta cursus.</strong> Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
-            facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
-            congue sapien eu, rhoncus
+            <strong>Etiam suscipit nisi eget porta cursus.</strong> Ut sit amet felis aliquet
             </div>
             <a href="#" slot="action">Action</a>
         </sgds-system-banner-item>

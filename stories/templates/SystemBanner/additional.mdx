@@ -20,19 +20,17 @@ When the close button is clicked, it updates the `show` state of the system bann
   <Story of={SystemBannerStories.Dismissible} />
 </Canvas>
 
-## Action slot
+## Two-line clamped and show more
 
-The action slot allows you to add a custom action element to the system banner. This can be a link or a button.
-
-## Two-line clamped
-
-The two-line clamped feature limits the content of the system banner to two lines to achieve a consistency in the banner's height.
+The two-line clamped feature limits the content of the system banner to two lines to achieve a consistency in the banner's height. It is a responsive feature that ensures the banner looks good on all screen sizes.
 If the content exceeds two lines, it will be truncated with an ellipsis and a show more link appears.
 
 When the show more link is clicked, it emits a custom event called `sgds-show-more`
 You can hook onto the click event of the show more link to perform your side effect action. It could be an opening of a modal
 or a redirect to another page.
 
+In this example, the show more link opens a modal with the full message about the banner content.
+
 <Canvas of={SystemBannerStories.ShowMore}>
-  <Story of={SystemBannerStories.Dismissible} />
+  <Story of={SystemBannerStories.ShowMore} />
 </Canvas>
