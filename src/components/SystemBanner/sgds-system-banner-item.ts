@@ -10,7 +10,7 @@ import alertBannerItemStyles from "./system-banner-item.css";
  * @slot icon - The slot to pass in an icon element
  * @slot action - The slot to pass in an action element such as a button or link
  * @slot default - The slot to pass in the message content of the banner item. Text will be clamped at 2 lines
- * 
+ *
  * @event sgds-show-more - The event emitted when user clicks on "show more" in the banner text message
  */
 export class SgdsSystemBannerItem extends SgdsElement {
@@ -18,7 +18,7 @@ export class SgdsSystemBannerItem extends SgdsElement {
 
   @state() private clamped = false;
 
-  _resizeObserver: ResizeObserver;
+  private _resizeObserver: ResizeObserver;
   async firstUpdated(_changedProperties) {
     super.firstUpdated(_changedProperties);
     await this.updateComplete;
@@ -37,7 +37,6 @@ export class SgdsSystemBannerItem extends SgdsElement {
     const textEl = this.shadowRoot.querySelector(".message");
     requestAnimationFrame(() => {
       this.clamped = textEl.scrollHeight > textEl.clientHeight;
-
     });
   }
 
@@ -53,7 +52,11 @@ export class SgdsSystemBannerItem extends SgdsElement {
             <div class=${classMap({ message: true, truncated: this.clamped })}>
               <slot></slot>
             </div>
-            ${this.clamped ? html`<span class="show-more">...<a class="show-more__link" @click="${this._handleShowMoreClick}">show more</a></span>` : nothing}
+            ${this.clamped
+              ? html`<span class="show-more"
+                  >...<a class="show-more__link" @click="${this._handleShowMoreClick}">show more</a></span
+                >`
+              : nothing}
           </div>
           <div class="action">
             <slot name="action"></slot>

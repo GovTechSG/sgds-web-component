@@ -1,0 +1,38 @@
+## Variants
+
+The default variant is `info`. Modify the `variant` prop to the intended value.
+
+- Use `info` banner to provide additional information to users that is related to their completion of current action or task. Info variant is using primary brand color.
+- Use `danger` banner to alert users of a critical error or failure. Users may be prevented to proceed unitl the issue is rectified.
+- Use `warning` banner to alert users that are engaging in less desirable actions that may have unexpected results.
+- Use `neutral` banner to provide additional information to users that is not related to their completion of current action or task
+
+<Canvas of={SystemBannerStories.Variants}>
+  <Story of={SystemBannerStories.Variants} />
+</Canvas>
+
+## Dismissible
+
+The dismissible prop adds a close button to the system banner to allow the component to be removed from the DOM when no longer needed.
+When the close button is clicked, it updates the `show` state of the system banner to false.
+
+<Canvas of={SystemBannerStories.Dismissible}>
+  <Story of={SystemBannerStories.Dismissible} />
+</Canvas>
+
+## Action slot
+
+The action slot allows you to add a custom action element to the system banner. This can be a link or a button.
+
+## Two-line clamped
+
+The two-line clamped feature limits the content of the system banner to two lines to achieve a consistency in the banner's height.
+If the content exceeds two lines, it will be truncated with an ellipsis and a show more link appears.
+
+When the show more link is clicked, it emits a custom event called `sgds-show-more`
+You can hook onto the click event of the show more link to perform your side effect action. It could be an opening of a modal
+or a redirect to another page.
+
+<Canvas of={SystemBannerStories.ShowMore}>
+  <Story of={SystemBannerStories.Dismissible} />
+</Canvas>

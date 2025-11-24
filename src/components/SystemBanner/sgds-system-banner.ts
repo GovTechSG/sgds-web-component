@@ -18,10 +18,8 @@ export type AlertBannerVariant = "info" | "danger" | "warning" | "neutral";
  *
  * @slot default - The slot to pass in `sgds-system-banner-item`
  *
- * @event sgds-show - Emitted when the banner has start to appear on screen before animation is complete
- * @event sgds-after-show - Emitted when the banner appears on screen after animation is complete (to removed ?)
- * @event sgds-hide - Emitted when the banner is disappearing from the screen before animation is complete
- * @event sgds-after-hide - Emitted when the banner has disappeared from the screen after animation is complete (to removed ?)
+ * @event sgds-show - Emitted when the banner has start to appear on screen
+ * @event sgds-hide - Emitted when the banner is disappearing from the screen
  */
 export class SgdsSystemBanner extends SgdsElement {
   static styles = [...SgdsElement.styles, alertBannerStyles];
@@ -45,10 +43,10 @@ export class SgdsSystemBanner extends SgdsElement {
     this.show = false;
   }
   @queryAssignedElements({ flatten: true })
-  bannerItem: SgdsSystemBannerItem[];
+  private bannerItem: SgdsSystemBannerItem[];
 
   @query(".banner")
-  banner: HTMLDivElement;
+  private banner: HTMLDivElement;
   @state() private childCount: number;
 
   @state() private _intervalId = null;
@@ -68,6 +66,10 @@ export class SgdsSystemBanner extends SgdsElement {
       this.addEventListener("mouseleave", this._resumeAutoCycle.bind(this));
     }
     this._updateActiveItem();
+
+    if (this.childCount > 5) {
+      console.warn("It is not recommended to have more than 5 <sgds-system-banner-item> elements.");
+    }
   }
   disconnectedCallback() {
     super.disconnectedCallback();

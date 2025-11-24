@@ -76,6 +76,7 @@
   gap: var(--sgds-gap-2-xs, 4px);
   align-items: center;
   margin-top: 6px;
+  white-space: nowrap;
 }
 
 slot[name="action"]::slotted(a) {
