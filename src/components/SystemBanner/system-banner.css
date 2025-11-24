@@ -4,7 +4,7 @@
   flex-direction: row;
   align-items: center;
   gap: var(--sgds-gap-xl);
-  background-color: var(--sgds-surface-fixed-dark);
+  background-color: var(--sgds-primary-surface-default);
   min-height: var(--sgds-dimension-64);
   color: var(--sgds-color-fixed-light);
   padding: var(--sgds-padding-sm) var(--sgds-padding-2-xl);
