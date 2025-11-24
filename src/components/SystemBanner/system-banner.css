@@ -1,26 +1,29 @@
-:host {
-  display: block; /* Ensure the host element behaves as a block for width calculations */
-}
 
 .banner {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  gap: var(--sgds-gap-sm);
+  align-items: center;
+  gap: var(--sgds-gap-xl);
   background-color: var(--sgds-primary-surface-default);
+  min-height: var(--sgds-dimension-64);
   color: var(--sgds-color-fixed-light);
   padding: var(--sgds-padding-sm) var(--sgds-padding-2-xl);
+  position: relative;
 }
+
 :host([variant="danger"]) .banner {
   background-color: var(--sgds-danger-surface-default);
 }
+
 :host([variant="neutral"]) .banner {
   background-color: var(--sgds-surface-fixed-dark);
 }
+
 :host([variant="warning"]) .banner {
   background-color: var(--sgds-warning-surface-default);
   color: var(--sgds-color-fixed-dark);
 }
+
 .content {
   flex: 1;
   overflow: hidden;
@@ -46,8 +49,25 @@
   font-weight: var(--sgds-font-weight-regular, 400);
   line-height: var(--sgds-line-height-16, 16px); /* 133.333% */
   letter-spacing: var(--sgds-letter-spacing-normal, 0);
+  position: absolute;
+  bottom: 12px;
+  right: 20px;
 }
 
 .d-none {
   display: none;
+}
+sgds-close-button {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+
+@media (min-width: 512px) {
+  sgds-close-button {
+    position: static;
+  }
+  .pagination {
+    position: static;
+  }
 }

@@ -1,30 +1,70 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
+import { state } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import alertBannerItemStyles from "./system-banner-item.css";
-export type AlertBannerVariant = "info" | "danger" | "warning" | "neutral";
 
+/**
+ * @summary The item component for `sgds-system-banner`. Each banner item represents a message in the system banner.
+ *
+ * @slot icon - The slot to pass in an icon element.
+ * @slot action - The slot to pass in an action element such as a button or link
+ * @slot default - The slot to pass in the message content of the banner item. Text will be clamped at 2 lines
+ *
+ * @event sgds-show-more - The event emitted when user clicks on "show more" in the banner text message
+ */
 export class SgdsSystemBannerItem extends SgdsElement {
   static styles = [...SgdsElement.styles, alertBannerItemStyles];
 
+  @state() private clamped = false;
+
+  private _resizeObserver: ResizeObserver;
+  async firstUpdated(_changedProperties) {
+    super.firstUpdated(_changedProperties);
+    await this.updateComplete;
+    this._clampCheck();
+
+    // Watch resizing for dynamic layout changes
+    this._resizeObserver = new ResizeObserver(() => this._clampCheck());
+    this._resizeObserver.observe(this.shadowRoot.querySelector(".message"));
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this._resizeObserver) this._resizeObserver.disconnect();
+  }
+  private _clampCheck() {
+    const textEl = this.shadowRoot.querySelector(".message");
+    requestAnimationFrame(() => {
+      this.clamped = textEl.scrollHeight > textEl.clientHeight;
+    });
+  }
+
+  private _handleShowMoreClick() {
+    this.emit("sgds-show-more");
+  }
   render() {
     return html`
       <div class="banner-item">
         <slot name="icon"></slot>
-        <div class="content">
-          <div class="content-top">
-            <div class="title">
-              <slot name="title"></slot>
+        <div class="banner-item__message_and__action">
+          <div class="clamped-container">
+            <div class=${classMap({ message: true, truncated: this.clamped })}>
+              <slot></slot>
             </div>
-            <div class="message"><slot></slot></div>
+            ${this.clamped
+              ? html`<span class="show-more"
+                  >...<a class="show-more__link" @click="${this._handleShowMoreClick}">show more</a></span
+                >`
+              : nothing}
           </div>
           <div class="action">
             <slot name="action"></slot>
-            <sgds-icon name="arrow-right"></sgds-icon>
           </div>
         </div>
       </div>
     `;
   }
 }
-
+export type SystemBannerVariant = "info" | "danger" | "warning" | "neutral";
 export default SgdsSystemBannerItem;

@@ -12,6 +12,15 @@ import alertBannerStyles from "./system-banner.css";
 import SgdsSystemBannerItem from "./sgds-system-banner-item";
 export type AlertBannerVariant = "info" | "danger" | "warning" | "neutral";
 
+/**
+ * @summary A system banner component for displaying important messages to users at the application level.
+ * Each banner can contain up to 5 banner items that cycle automatically every 5 seconds. Pagination is also
+ *
+ * @slot default - The slot to pass in `sgds-system-banner-item`
+ *
+ * @event sgds-show - Emitted when the banner has start to appear on screen
+ * @event sgds-hide - Emitted when the banner is disappearing from the screen
+ */
 export class SgdsSystemBanner extends SgdsElement {
   static styles = [...SgdsElement.styles, alertBannerStyles];
   /**@internal */
@@ -29,21 +38,15 @@ export class SgdsSystemBanner extends SgdsElement {
   /** The alert's theme variant. */
   @property({ type: String, reflect: true }) variant: AlertBannerVariant = "info";
 
-  /** Controls the alert visual between a lighter outline and a solid darker variant. */
-  @property({ type: Boolean, reflect: true }) outlined = false;
-
-  /** The title of the alert. Only text is allowed */
-  @property({ type: String, reflect: true }) title: string;
-
   /** Closes the alert  */
   public close() {
     this.show = false;
   }
   @queryAssignedElements({ flatten: true })
-  bannerItem: SgdsSystemBannerItem[];
+  private bannerItem: SgdsSystemBannerItem[];
 
   @query(".banner")
-  banner: HTMLDivElement;
+  private banner: HTMLDivElement;
   @state() private childCount: number;
 
   @state() private _intervalId = null;
@@ -54,15 +57,22 @@ export class SgdsSystemBanner extends SgdsElement {
 
   protected firstUpdated(changedProperties: PropertyValueMap<this>): void {
     super.firstUpdated(changedProperties);
+    this.childCount = this.bannerItem.length;
     if (!this.show) {
       this.banner.classList.add("d-none");
     } else {
-      this._startAutoCycle();
+      this.childCount > 1 && this._startAutoCycle();
       this.addEventListener("mouseenter", this._pauseAutoCycle.bind(this));
       this.addEventListener("mouseleave", this._resumeAutoCycle.bind(this));
+
+      this.addEventListener("focus", this._pauseAutoCycle.bind(this));
+      this.addEventListener("blur", this._resumeAutoCycle.bind(this));
     }
     this._updateActiveItem();
-    this.childCount = this.bannerItem.length;
+
+    if (this.childCount > 5) {
+      console.warn("It is not recommended to have more than 5 <sgds-system-banner-item> elements.");
+    }
   }
   disconnectedCallback() {
     super.disconnectedCallback();
@@ -73,20 +83,25 @@ export class SgdsSystemBanner extends SgdsElement {
   @watch("show", { waitUntilFirstUpdate: true })
   async _handleShowChange() {
     if (this.show) {
-      this._startAutoCycle();
+      this.childCount > 1 && this._startAutoCycle();
       this.emit("sgds-show");
       this.banner.classList.remove("d-none");
+      //Andy says remove show and hide motion. Confirm with him and remove
       const bannerShow = getAnimation(this, "banner.show");
       await animateTo(this, bannerShow.keyframes, bannerShow.options);
       this.emit("sgds-after-show");
+      // End of Andy's part
     } else {
       this._stopAutoCycle();
       this.emit("sgds-hide");
+      //>>>To remove: if andy say no need animation
       const bannerHide = getAnimation(this, "banner.hide");
       await animateTo(this, bannerHide.keyframes, bannerHide.options);
+      //>>>End to remove
       this.banner.classList.add("d-none");
-
+      //To remove: if andy say no need animation
       this.emit("sgds-after-hide");
+      //End to remove
     }
   }
 
@@ -142,7 +157,7 @@ export class SgdsSystemBanner extends SgdsElement {
   }
 
   private _resumeAutoCycle(): void {
-    if (this.show) {
+    if (this.show && this.childCount > 1) {
       this._startAutoCycle();
     }
   }
@@ -156,8 +171,7 @@ export class SgdsSystemBanner extends SgdsElement {
     return html`
       <div
         class="${classMap({
-          banner: true,
-          outlined: this.outlined
+          banner: true
         })}"
         role="alert"
         aria-hidden=${this.show ? "false" : "true"}
@@ -185,11 +199,13 @@ export class SgdsSystemBanner extends SgdsElement {
             </div>`
           : nothing}
         ${this.dismissible
-          ? html`<sgds-close-button
-              aria-label="close the alert"
-              @click=${this.close}
-              variant=${this.variant === "warning" ? "dark" : "light"}
-            ></sgds-close-button>`
+          ? html`
+              <sgds-close-button
+                aria-label="close the alert"
+                @click=${this.close}
+                variant=${this.variant === "warning" ? "dark" : "light"}
+              ></sgds-close-button>
+            `
           : nothing}
       </div>
     `;
@@ -198,6 +214,7 @@ export class SgdsSystemBanner extends SgdsElement {
 
 export default SgdsSystemBanner;
 
+//TODO: Andy says remove show and hide motion. Confirm with him and remove
 setDefaultAnimation("banner.show", {
   keyframes: [{ opacity: 0 }, { opacity: 1 }],
   options: { duration: 500, easing: "ease" }
@@ -206,6 +223,7 @@ setDefaultAnimation("banner.hide", {
   keyframes: [{ opacity: 1 }, { opacity: 0 }],
   options: { duration: 500, easing: "ease" }
 });
+// End of remove
 setDefaultAnimation("banner.item.next", {
   keyframes: [
     { opacity: 0, transform: "translateY(-100%)" },

@@ -81,3 +81,9 @@ export async function moveMouseOnElement(
 
   await sendMouse({ type: "move", position: [clickX, clickY] });
 }
+
+export async function moveMouseOutOfElement(el: Element) {
+  const { x, y, width, height } = el.getBoundingClientRect();
+  // Move mouse to a point 50px above and to the left of the element
+  await sendMouse({ type: "move", position: [x - 50, y - 50] });
+}
