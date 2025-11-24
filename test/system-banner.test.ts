@@ -129,6 +129,32 @@ describe("<sgds-system-banner>", () => {
     );
     clock.restore();
   });
+  it("keyboard focuses the elements , pauses the interval", async () => {
+    const clock = sinon.useFakeTimers();
+    const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
+      <sgds-system-banner-item>one</sgds-system-banner-item>
+      <sgds-system-banner-item>two</sgds-system-banner-item>
+      <sgds-system-banner-item>three</sgds-system-banner-item>
+    </sgds-system-banner>`);
+    const paginationButton = el.shadowRoot?.querySelector("sgds-icon-button[name='chevron-right']") as SgdsIconButton;
+    paginationButton.focus();
+    expect(el.querySelector<SgdsSystemBannerItem>("sgds-system-banner-item[active]")?.textContent.trim()).to.equal(
+      "one"
+    );
+    clock.tick(5000);
+    await el.updateComplete;
+    expect(el.querySelector<SgdsSystemBannerItem>("sgds-system-banner-item[active]")?.textContent.trim()).to.equal(
+      "one"
+    );
+    //mouseleaves clock ticks rotation resumes
+    paginationButton.blur();
+    clock.tick(5000);
+    await el.updateComplete;
+    expect(el.querySelector<SgdsSystemBannerItem>("sgds-system-banner-item[active]")?.textContent.trim()).to.equal(
+      "two"
+    );
+    clock.restore();
+  });
   it("clicking next button loops the items and page indicator", async () => {
     const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
       <sgds-system-banner-item>one</sgds-system-banner-item>
@@ -194,5 +220,21 @@ describe("<sgds-system-banner>", () => {
       "one"
     );
     expect(el.shadowRoot?.querySelector("span")?.textContent.trim()).to.equal("1/3");
+  });
+
+  it("more than 5 items trigger console warning", async () => {
+    const consoleWarnStub = sinon.stub(console, "warn");
+
+    const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
+      <sgds-system-banner-item>one</sgds-system-banner-item>
+      <sgds-system-banner-item>two</sgds-system-banner-item>
+      <sgds-system-banner-item>three</sgds-system-banner-item>
+      <sgds-system-banner-item>four</sgds-system-banner-item>
+      <sgds-system-banner-item>five</sgds-system-banner-item>
+      <sgds-system-banner-item>six</sgds-system-banner-item>
+    </sgds-system-banner>`);
+    expect(consoleWarnStub).to.have.been.calledWith(
+      "It is not recommended to have more than 5 <sgds-system-banner-item> elements."
+    );
   });
 });

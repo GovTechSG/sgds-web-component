@@ -64,6 +64,9 @@ export class SgdsSystemBanner extends SgdsElement {
       this.childCount > 1 && this._startAutoCycle();
       this.addEventListener("mouseenter", this._pauseAutoCycle.bind(this));
       this.addEventListener("mouseleave", this._resumeAutoCycle.bind(this));
+
+      this.addEventListener("focus", this._pauseAutoCycle.bind(this));
+      this.addEventListener("blur", this._resumeAutoCycle.bind(this));
     }
     this._updateActiveItem();
 
