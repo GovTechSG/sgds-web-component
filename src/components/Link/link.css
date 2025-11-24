@@ -1,5 +1,18 @@
 :host {
   display: inline-flex;
+  --color-emphasis: var(--sgds-link-color-emphasis);
+}
+:host([variant="danger"]) {
+  --color-emphasis: var(--sgds-danger-color-emphasis);
+}
+:host([variant="neutral"]) {
+  --color-emphasis: var(--sgds-color-default);
+}
+:host([variant="light"]){
+  --color-emphasis:var(--sgds-color-fixed-light);
+}
+:host([variant="dark"]){
+  --color-emphasis:var(--sgds-color-fixed-dark);
 }
 
 .nav-link::slotted(a) {
@@ -7,14 +20,17 @@
   /* If clash of styles happens from other light dom css on anchor tag, will need to add !important here */
   color: var(--sgds-link-color-default);
   cursor: pointer;
-  text-decoration: none !important;
+  /* text-decoration: none !important; */
+  text-decoration-color: transparent !important;
+  transition: text-decoration-color 1s ease-in-out;
 }
 
 .nav-link::slotted(a:hover),
 .nav-link::slotted(a[active]),
 .nav-link::slotted(a:focus),
 .nav-link::slotted(a:focus-visible) {
-  color: var(--sgds-link-color-emphasis);
+  color: var(--color-emphasis) !important;
+  text-decoration-color: var(--color-emphasis) !important
 }
 
 .nav-link::slotted(a:focus-visible:not([disabled])) {
@@ -35,8 +51,8 @@
 :host([variant="danger"]) .nav-link::slotted(a:hover),
 :host([variant="danger"]) .nav-link::slotted(a:focus),
 :host([variant="danger"]) .nav-link::slotted(a:focus-visible) {
-  --sgds-link-color-emphasis: var(--sgds-danger-color-emphasis);
-  color: var(--sgds-link-color-emphasis, --sgds-danger-color-emphasis);
+  --color-emphasis: var(--sgds-danger-color-emphasis);
+  color: var(--color-emphasis, --sgds-danger-color-emphasis);
 }
 
 :host([variant="neutral"]) .nav-link::slotted(a) {
@@ -47,8 +63,8 @@
 :host([variant="neutral"]) .nav-link::slotted(a:hover),
 :host([variant="neutral"]) .nav-link::slotted(a:focus),
 :host([variant="neutral"]) .nav-link::slotted(a:focus-visible) {
-  --sgds-link-color-emphasis: var(--sgds-color-default);
-  color: var(--sgds-link-color-emphasis, --sgds-color-default);
+  --color-emphasis: var(--sgds-color-default);
+  color: var(--color-emphasis, --sgds-color-default);
 }
 
 :host([variant="light"]) .nav-link::slotted(a) {
@@ -59,8 +75,8 @@
 :host([variant="light"]) .nav-link::slotted(a:hover),
 :host([variant="light"]) .nav-link::slotted(a:focus),
 :host([variant="light"]) .nav-link::slotted(a:focus-visible) {
-  --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-  color: var(--sgds-link-color-emphasis, --sgds-color-fixed-light);
+  --color-emphasis: var(--sgds-color-fixed-light);
+  color: var(--color-emphasis, --sgds-color-fixed-light);
 }
 
 :host([variant="dark"]) .nav-link::slotted(a) {
@@ -71,8 +87,8 @@
 :host([variant="dark"]) .nav-link::slotted(a:hover),
 :host([variant="dark"]) .nav-link::slotted(a:focus),
 :host([variant="dark"]) .nav-link::slotted(a:focus-visible) {
-  --sgds-link-color-emphasis: var(--sgds-color-fixed-dark);
-  color: var(--sgds-link-color-emphasis, --sgds-color-fixed-dark);
+  --color-emphasis: var(--sgds-color-fixed-dark);
+  color: var(--color-emphasis, --sgds-color-fixed-dark);
 }
 
 :host([size="lg"]) .nav-link::slotted(a) {
@@ -80,7 +96,7 @@
 }
 
 :host([size="sm"]) .nav-link::slotted(a) {
-  line-height: var(--sgds-line-height-20);
+  line-height: var(--sgds-line-height-20) !important;
   font-size: var(--sgds-font-size-1) !important;
 }
 
@@ -95,3 +111,28 @@
   line-height: var(--sgds-line-height-16);
   font-size: var(--sgds-font-size-0) !important;
 }
+
+
+/* .un {
+  display: inline-block;
+}
+
+.un::after {
+  content: "";
+  width: 0px;
+  height: 1px;
+  display: block;
+  background-color: var(--color-emphasis);
+  transition: 300ms;
+}
+
+.un:hover::after, .un:focus::after, .un:focus-visible::after {
+  width: 100%;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .un::after {
+    transition: none;
+  }
+} */
