@@ -13,7 +13,7 @@ export const Template = args => html`<sgds-system-banner
       facilisis tellus.
     </div>
     <sgds-link size="sm" variant="light" slot="action"
-      ><a href="#">Action link<sgds-icon name="arrow-right"></sgds-icon></a
+      ><a href="#">Action link<sgds-icon name="arrow-right" size="md"></sgds-icon></a
     ></sgds-link>
   </sgds-system-banner-item>
   <sgds-system-banner-item>
@@ -35,8 +35,8 @@ export const Template = args => html`<sgds-system-banner
       facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
       congue sapien eu, rhoncus
     </div>
-    <sgds-link size="sm" variant="light" slot="action"
-      ><a href="#">Action link<sgds-icon name="arrow-right"></sgds-icon></a
+       <sgds-link size="sm" variant="light" slot="action"
+      ><a href="#">Action link<sgds-icon name="arrow-right" size="md"></sgds-icon></a
     ></sgds-link>
   </sgds-system-banner-item>
 </sgds-system-banner>`;

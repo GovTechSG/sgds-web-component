@@ -77,6 +77,8 @@
   align-items: center;
   margin-top: 6px;
   white-space: nowrap;
+  /** even if no action is slotted, the container needs a height in mobile **/
+  min-height: var(--sgds-line-height-20); 
 }
 
 slot[name="action"]::slotted(a) {
