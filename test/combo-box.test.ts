@@ -473,6 +473,7 @@ describe("sgds-combo-box ", () => {
 
     expect(el.shadowRoot?.querySelectorAll(".empty-menu")).to.exist;
   });
+
   it("no option div should not persist when menu is closed", async () => {
     const el = await fixture<SgdsComboBox>(html`<sgds-combo-box
       label="Combobox using slot"
@@ -663,6 +664,7 @@ describe("single select combobox", () => {
       expect(getRootActiveElement(input)).to.equal(input);
     });
   });
+
   FiveOptionsCombobox.forEach(({ render, mode }) => {
     it(`MODE=${mode}, when menu list is updated, and the current value is no longer valid it should null the value`, async () => {
       const el = await fixture<SgdsComboBox>(render({ multiSelect: false, value: "option1" }));
@@ -978,6 +980,7 @@ describe("single select >> when submitting a form", () => {
     submitButton?.click();
     expect(submitHandler).not.to.have.been.calledOnce;
   });
+
   it("when required=true and value is true , form can be submitted", async () => {
     const form = await fixture<HTMLFormElement>(
       html`<form>
@@ -1002,6 +1005,7 @@ describe("single select >> when submitting a form", () => {
     await waitUntil(() => submitHandler.calledOnce);
     expect(submitHandler).to.have.been.calledOnce;
   });
+
   it("when disabled, form is always able to submit even if there is no value", async () => {
     const form = await fixture<HTMLFormElement>(
       html`<form>
@@ -1025,6 +1029,7 @@ describe("single select >> when submitting a form", () => {
     await waitUntil(() => submitHandler.calledOnce);
     expect(submitHandler).to.have.been.calledOnce;
   });
+
   it("when reset, values are reset to defaultValue", async () => {
     const form = await fixture<HTMLFormElement>(
       html`<form>
@@ -1064,6 +1069,7 @@ describe("single select >> when submitting a form", () => {
     expect(comboBox()?.invalid).to.be.false;
     expect(input()?.value).to.equal("Dur");
   });
+
   it("when value exist in required field, pressing submit should not show error", async () => {
     const form = await fixture<HTMLFormElement>(
       html`<form>
@@ -1084,6 +1090,7 @@ describe("single select >> when submitting a form", () => {
     await combobox?.updateComplete;
     expect(combobox?.invalid).to.be.false;
   });
+
   it("when value is truthy, and reset button is clicked, input is reset and is valid", async () => {
     const form = await fixture<HTMLFormElement>(
       html`<form>
@@ -1110,6 +1117,7 @@ describe("single select >> when submitting a form", () => {
     await waitUntil(() => !combobox?.value);
     expect(combobox?.invalid).to.be.false;
   });
+
   it("when touched and blurred and value is empty, error is shown", async () => {
     const el = await fixture<SgdsComboBox>(
       html`
@@ -1130,6 +1138,7 @@ describe("single select >> when submitting a form", () => {
     await el.updateComplete;
     await waitUntil(() => el.shadowRoot?.querySelector("input:invalid"));
   });
+
   it("when invalid, typing in the input sets invalid to false", async () => {
     const el = await fixture<SgdsComboBox>(
       html`
@@ -1185,6 +1194,7 @@ describe("single select >> when submitting a form", () => {
 
     expect(el.invalid).to.be.false;
   });
+
   it("when clicking menu item, only one option turns active at a time", async () => {
     const el = await fixture<SgdsComboBox>(html` <sgds-combo-box>
       <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
@@ -1203,6 +1213,53 @@ describe("single select >> when submitting a form", () => {
     clickDiv2?.click();
     await waitUntil(() => comboBoxOptionTwo?.active);
     expect(comboBoxOptionOne?.active).to.be.false;
+  });
+
+  it("when there is value, and on focus, it should show clearable button when enabled and can clear value", async () => {
+    const closeButtonClass = "sgds-icon[name='xcircle-fill']";
+    const el = await fixture<SgdsComboBox>(html` <sgds-combo-box value="1" clearable>
+      <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
+      <sgds-combo-box-option value="2">Zimbabwe</sgds-combo-box-option>
+      <sgds-combo-box-option value="3">Zoo</sgds-combo-box-option>
+      <sgds-combo-box-option value="4">Zzzbabwe</sgds-combo-box-option>
+    </sgds-combo-box>`);
+
+    await el.updateComplete;
+
+    expect(el.value).to.equal("1");
+    expect(el.shadowRoot?.querySelector(closeButtonClass)).to.be.null;
+
+    const input = el.shadowRoot?.querySelector("input");
+    input?.focus();
+
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector(closeButtonClass)).not.to.be.null;
+
+    const closeButton = el.shadowRoot?.querySelector(closeButtonClass) as HTMLElement;
+    expect(closeButton).not.to.be.null;
+
+    closeButton && simulateUserClick(closeButton);
+    await el.updateComplete;
+    expect(el.value).to.equal("");
+  });
+
+  it("when there is value, and on focus, it should not show clearable button when disabled", async () => {
+    const closeButtonClass = "sgds-icon[name='xcircle-fill']";
+    const el = await fixture<SgdsComboBox>(html` <sgds-combo-box value="1">
+      <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
+      <sgds-combo-box-option value="2">Zimbabwe</sgds-combo-box-option>
+      <sgds-combo-box-option value="3">Zoo</sgds-combo-box-option>
+      <sgds-combo-box-option value="4">Zzzbabwe</sgds-combo-box-option>
+    </sgds-combo-box>`);
+
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector(closeButtonClass)).to.be.null;
+
+    const input = el.shadowRoot?.querySelector("input");
+    input?.focus();
+
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector(closeButtonClass)).to.be.null;
   });
 });
 
@@ -1229,6 +1286,7 @@ describe("multi select >> when submitting a form", () => {
     submitButton?.click();
     expect(submitHandler).not.to.have.been.calledOnce;
   });
+
   it("when required=true and value is true , form can be submitted", async () => {
     const form = await fixture<HTMLFormElement>(
       html`<form>
@@ -1253,6 +1311,7 @@ describe("multi select >> when submitting a form", () => {
     await waitUntil(() => submitHandler.calledOnce);
     expect(submitHandler).to.have.been.calledOnce;
   });
+
   it("when disabled, form is always able to submit even if there is no value", async () => {
     const form = await fixture<HTMLFormElement>(
       html`<form>
@@ -1277,6 +1336,7 @@ describe("multi select >> when submitting a form", () => {
     await waitUntil(() => submitHandler.calledOnce);
     expect(submitHandler).to.have.been.calledOnce;
   });
+
   it("when reset, values are reset to defaultValue", async () => {
     const form = await fixture<HTMLFormElement>(
       html`<form>
@@ -1317,6 +1377,7 @@ describe("multi select >> when submitting a form", () => {
     expect(comboBox()?.invalid).to.be.false;
     expect(badge()?.textContent).to.equal("Dur");
   });
+
   it("when touched and blurred and value is empty, error is shown", async () => {
     const el = await fixture<SgdsComboBox>(
       html`
@@ -1338,6 +1399,7 @@ describe("multi select >> when submitting a form", () => {
     await el.updateComplete;
     await waitUntil(() => el.shadowRoot?.querySelector("input:invalid"));
   });
+
   it("when invalid, typing in the input sets invalid to false", async () => {
     const el = await fixture<SgdsComboBox>(
       html`
@@ -1394,6 +1456,52 @@ describe("multi select >> when submitting a form", () => {
     );
 
     expect(el.invalid).to.be.false;
+  });
+
+  it("when there is value, and on focus, it should show clearable button when enabled and can clear value", async () => {
+    const closeButtonClass = "sgds-icon[name='xcircle-fill']";
+    const el = await fixture<SgdsComboBox>(html` <sgds-combo-box value="1;2" clearable multiSelect>
+      <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
+      <sgds-combo-box-option value="2">Zimbabwe</sgds-combo-box-option>
+      <sgds-combo-box-option value="3">Zoo</sgds-combo-box-option>
+      <sgds-combo-box-option value="4">Zzzbabwe</sgds-combo-box-option>
+    </sgds-combo-box>`);
+
+    await el.updateComplete;
+
+    expect(el.value).to.equal("1;2");
+    expect(el.shadowRoot?.querySelector(closeButtonClass)).to.be.null;
+
+    const input = el.shadowRoot?.querySelector("input");
+    input?.focus();
+
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector(closeButtonClass)).not.to.be.null;
+
+    const closeButton = el.shadowRoot?.querySelector(closeButtonClass) as HTMLElement;
+    expect(closeButton).not.to.be.null;
+
+    closeButton && simulateUserClick(closeButton);
+    await el.updateComplete;
+    expect(el.value).to.equal("");
+  });
+  it("when there is value, and on focus, it should not show clearable button when disabled", async () => {
+    const closeButtonClass = "sgds-icon[name='xcircle-fill']";
+    const el = await fixture<SgdsComboBox>(html` <sgds-combo-box value="1;2" multiSelect>
+      <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
+      <sgds-combo-box-option value="2">Zimbabwe</sgds-combo-box-option>
+      <sgds-combo-box-option value="3">Zoo</sgds-combo-box-option>
+      <sgds-combo-box-option value="4">Zzzbabwe</sgds-combo-box-option>
+    </sgds-combo-box>`);
+
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector(closeButtonClass)).to.be.null;
+
+    const input = el.shadowRoot?.querySelector("input");
+    input?.focus();
+
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector(closeButtonClass)).to.be.null;
   });
 });
 

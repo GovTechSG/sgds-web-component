@@ -1,8 +1,9 @@
+import { live } from "lit/directives/live.js";
 import { html, nothing, PropertyValueMap } from "lit";
 import { property, queryAssignedElements, queryAsync, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
-import { live } from "lit/directives/live.js";
+
 import { ref } from "lit/directives/ref.js";
 import { SelectElement, SgdsOptionData } from "../../base/select-element";
 import { watch } from "../../utils/watch";
@@ -47,6 +48,9 @@ export class SgdsComboBox extends SelectElement {
   /** If true, renders badge that fills width of combobox */
   @property({ type: Boolean, reflect: true }) badgeFullWidth = false;
 
+  /** If true, a clear value button will enabled */
+  @property({ type: Boolean, reflect: true }) clearable = false;
+
   /** The function used to filter the menu list, given the user's input value. */
   @property()
   filterFunction: (inputValue: string, item: SgdsComboBoxOptionData) => boolean = (inputValue, item) => {
@@ -61,11 +65,33 @@ export class SgdsComboBox extends SelectElement {
   @state() optionList: SgdsComboBoxOptionData[] = [];
   @state() emptyMenu = false;
 
+  // Used to show and hide the clear button
+  @state() isFocused = false;
+
   connectedCallback(): void {
     super.connectedCallback();
+
+    this.addEventListener("focus", async () => {
+      this.isFocused = true;
+    });
+
+    this.addEventListener("blur", async () => {
+      this.isFocused = false;
+    });
+
+    this.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (
+        e.key === "Enter" &&
+        (e.target as HTMLElement).shadowRoot?.querySelector(".form-clearable")?.matches(":focus")
+      ) {
+        this._handleClear();
+      }
+    });
+
     this.addEventListener("sgds-hide", async () => {
       const sgdsInput = await this._input;
       sgdsInput.focus();
+
       this.options.forEach(o => o.removeAttribute("hidden"));
       // reset emptyMenu state
       this.emptyMenu = false;
@@ -159,6 +185,7 @@ export class SgdsComboBox extends SelectElement {
   _handleOptionListChange() {
     this._updateValueAndDisplayValue(this.optionList);
   }
+
   @watch("menuList", { waitUntilFirstUpdate: true })
   _handleMenuListChange() {
     const newMenu = this.menuList.map(o => {
@@ -306,7 +333,9 @@ export class SgdsComboBox extends SelectElement {
 
   protected async _handleInputBlur(e: Event) {
     e.preventDefault();
+
     this.emit("sgds-blur");
+
     if (this.multiSelect) {
       const displayValueMatchedSelectedItems = this.selectedItems.filter(({ label }) => this.displayValue === label);
       if (displayValueMatchedSelectedItems.length <= 0) {
@@ -320,6 +349,16 @@ export class SgdsComboBox extends SelectElement {
         this.displayValue = "";
       }
     }
+  }
+
+  // For clearing the value
+  protected async _handleClear() {
+    this.value = "";
+    this.options?.forEach(o => (o.active = false));
+
+    const sgdsInput = await this._input;
+    sgdsInput.focus();
+    this.showMenu();
   }
 
   /** For form reset  */
@@ -348,6 +387,7 @@ export class SgdsComboBox extends SelectElement {
       this._mixinResetValidity(await this._multiSelectInput);
     }
   }
+
   /**
    * Used `repeat` helper from Lit to render instead of .map:
    * The reassigning of value is affecting the truncation on badge as it is not triggering the slot change event.
@@ -358,6 +398,7 @@ export class SgdsComboBox extends SelectElement {
    */
   protected _renderInput() {
     const wantFeedbackStyle = this.hasFeedback;
+    const showButton = (this.isFocused || this.menuIsOpen) && this.value !== "" && this.clearable;
 
     return html`
       <div
@@ -409,7 +450,22 @@ export class SgdsComboBox extends SelectElement {
               : ""}"
           />
         </div>
-        <sgds-icon name="chevron-down" size="md"></sgds-icon>
+
+        ${showButton
+          ? html`
+              <sgds-icon
+                id=${`${this._controlId}-combobox-clear-button`}
+                tabindex="0"
+                class="form-clearable"
+                name="xcircle-fill"
+                size="md"
+                @click=${this._handleClear}
+                aria-hidden=${showButton ? "false" : "true"}
+              ></sgds-icon>
+            `
+          : nothing}
+
+        <sgds-icon name=${this.menuIsOpen ? "chevron-up" : "chevron-down"} size="md"></sgds-icon>
       </div>
     `;
   }
@@ -422,6 +478,7 @@ export class SgdsComboBox extends SelectElement {
         ${this._renderLabel()}
         <!-- The input -->
         ${this._renderInput()} ${this._renderFeedback()}
+
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
           <slot id="default" @slotchange=${this._handleDefaultSlotChange}
             ><div class="empty-menu">No options</div></slot
