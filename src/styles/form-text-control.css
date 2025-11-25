@@ -1,4 +1,3 @@
-
 /* 
 <div class="form-control-container>
     <div class="form-control-group"><input class="form-control" /></div>
@@ -27,7 +26,6 @@
   width: -moz-available;
 }
 
-
 .form-control {
   display: block;
   background-clip: padding-box;
@@ -40,6 +38,11 @@
   color: var(--sgds-form-color-default);
   font-size: var(--sgds-font-size-2);
   line-height: var(--sgds-line-height-24);
+}
+
+.form-clearable {
+  cursor: pointer;
+  color: var(--sgds-neutral-color-default);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -58,7 +61,6 @@
   outline-offset: var(--sgds-form-outline-offset-focus);
 }
 
-
 /* Disabled */
 
 .form-control-container.disabled {
@@ -70,10 +72,9 @@
   cursor: not-allowed;
 }
 
-
 /* Readonly */
 
-.form-control-group.readonly{
+.form-control-group.readonly {
   background-color: var(--sgds-form-surface-raised);
 }
 

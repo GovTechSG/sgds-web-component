@@ -1,3 +1,32 @@
+## v3.5.6 (2025-11-12)
+
+### Feat
+
+- **drawer**: use dvh over vh
+- **button**: return inverse spinner tone when button tone is netural and variant is primary
+- **button**: assign appropriate spinner color to button
+- new tone and size for button, spinner and icon button
+
+### Fix
+
+- **skeleton**: fix skeleton flickering in ssr
+- **combobox**: slot label not ready by first render due to race condition and few more bugs (#469)
+- **combobox**: shift padding to inner container holding badge and tex… (#467)
+- **combobox**: handle no options when 0 options passed in, reset empt… (#466)
+- **combobox**: handle no options when 0 options passed in, reset empty menu when menu is close
+- **combobox**: shift padding to inner container holding badge and text content|
+- **Combobox**: clicking active menu item in single select bug
+- **combobox**: form optionList from this.options directly in input change handler
+- **drawer**:  revert to percentages for width and height (#462)
+- **Drawer**: revert to percentages
+- **drawer**: use vh over percentage for drawer panel height
+- **modal**: close button misalignment in full screen mode
+- **Select**: setup validation at the end of slotchange event
+
+### Refactor
+
+- **dropdown**: use modulo method to loop dropdown menu
+
 ## v3.5.5 (2025-10-24)
 
 ### Fix
@@ -16,7 +45,7 @@
 - **footer**: update footer (#441)
 - **footer**: add default slot and its SSR prop and replace items slot when presence
 - **footer**: update footer
-- *****: new ssr prop to detect server and force call slotchange in server environment
+- *****: new ssr slot change patch decorator
 
 ### Fix
 
@@ -37,10 +66,6 @@
 - *****: forwards base element firstUpdated in all downstream components
 
 ## v3.5.3 (2025-10-13)
-
-### Refactor
-
-- *****: build cdn files with own minifier and define new file path entry point index.umd.min.js
 
 ## v3.5.2 (2025-10-13)
 

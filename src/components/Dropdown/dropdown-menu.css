@@ -26,7 +26,7 @@
   margin-top: calc(var(--sgds-nav-tabs-border-width) * -1);
 }
 
-@media (min-width: 576px) {
+@media (min-width: 512px) {
   .navbar-expand-sm .navbar-nav .dropdown-menu {
     position: absolute;
   }
@@ -38,19 +38,19 @@
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1024px) {
   .navbar-expand-lg .navbar-nav .dropdown-menu {
     position: absolute;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
   .navbar-expand-xl .navbar-nav .dropdown-menu {
     position: absolute;
   }
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1440px) {
   .navbar-expand-xxl .navbar-nav .dropdown-menu {
     position: absolute;
   }
