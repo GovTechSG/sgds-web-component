@@ -48,7 +48,7 @@ export class SgdsComboBox extends SelectElement {
   /** If true, renders badge that fills width of combobox */
   @property({ type: Boolean, reflect: true }) badgeFullWidth = false;
 
-  /** If true, a clear value button will enabled */
+  /** If true, a clear button will be enabled on focus */
   @property({ type: Boolean, reflect: true }) clearable = false;
 
   /** The function used to filter the menu list, given the user's input value. */
