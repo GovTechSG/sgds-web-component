@@ -29,6 +29,14 @@ export class SgdsComboBoxOption extends OptionElement {
         this.checkbox ? this._handleCheckboxClick() : this._handleNonCheckboxClick();
       }
     });
+
+    this.shadowRoot.addEventListener("click", e => {
+      const element = e.target as HTMLElement;
+
+      if (element.classList.contains("dropdown-item")) {
+        this._handleCheckboxClick();
+      }
+    });
   }
 
   firstUpdated(changedProperties: PropertyValueMap<this>) {
@@ -39,6 +47,7 @@ export class SgdsComboBoxOption extends OptionElement {
       this.checkbox = true;
     }
   }
+
   private _handleNonCheckboxClick() {
     if (!this.checkbox) {
       this.emit("i-sgds-select");

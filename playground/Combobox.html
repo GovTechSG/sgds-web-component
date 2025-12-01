@@ -23,16 +23,36 @@
   <body>
     <div class="container">
       <div class="small-container">
-    <h2>Single selection combo-box</h2>
+        <sgds-combo-box id="combobox-example" label="Items" clearable placeholder="ComboBox">
+          <sgds-combo-box-option value="1">Option 1</sgds-combo-box-option>
+          <sgds-combo-box-option value="2">Option 2</sgds-combo-box-option>
+          <sgds-combo-box-option value="3">Option 3</sgds-combo-box-option>
+        </sgds-combo-box>
 
+        <sgds-combo-box id="combobox-example" label="Items" clearable multiSelect placeholder="ComboBox">
+          <sgds-combo-box-option value="1">Option 1</sgds-combo-box-option>
+          <sgds-combo-box-option value="2">Option 2</sgds-combo-box-option>
+          <sgds-combo-box-option value="3">Option 3</sgds-combo-box-option>
+        </sgds-combo-box>
+      </div>
 
-<form class="flex">
-<sgds-combo-box id="combobox-example" label="Items" placeholder="ComboBox" value="1"> 
-<sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
-<sgds-combo-box-option value="2">Zimbabwe</sgds-combo-box-option>
-</sgds-combo-box>
-<sgds-combo-box multiselect id="combobox-example" label="Items" value="1;2" placeholder="ComboBox"></sgds-combo-box>
-    <!-- <script>
+      <div class="small-container">
+        <h2>Single selection combo-box</h2>
+
+        <form class="flex">
+          <sgds-combo-box id="combobox-example" label="Items" placeholder="ComboBox" value="1">
+            <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
+            <sgds-combo-box-option value="2">Zimbabwe</sgds-combo-box-option>
+          </sgds-combo-box>
+
+          <sgds-combo-box
+            multiselect
+            id="combobox-example"
+            label="Items"
+            value="1;2"
+            placeholder="ComboBox"
+          ></sgds-combo-box>
+          <!-- <script>
       const comboBox = document.querySelector("#combobox-example");
       comboBox.menuList = [
         { label: "Afghanistan", value: "1" },
@@ -242,14 +262,9 @@
         { label: "Zimbabwe", value: "205" }
       ];
     </script> -->
-  <button type="reset">rest</button>
-<<<<<<< HEAD
-
-=======
->>>>>>> fix/combobox-slot-race
-  </form>
-
+          <button type="reset">rest</button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
-
-
