@@ -34,7 +34,7 @@ export class SgdsComboBoxOption extends OptionElement {
       const element = e.target as HTMLElement;
 
       if (element.classList.contains("dropdown-item")) {
-        this._handleCheckboxClick();
+        this.checkbox ? this._handleCheckboxClick() : this._handleNonCheckboxClick();
       }
     });
   }
