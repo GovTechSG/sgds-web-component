@@ -136,7 +136,7 @@ export class SgdsComboBox extends SelectElement {
     /** this will trigger _updateValueAndDisplayValue */
     await this.updateComplete;
     this.optionList = await this._getMenuListFromOptions(assignedElements);
-    console.log("optionList", this.optionList);
+
     this._setupValidation(this.optionList);
   }
 
