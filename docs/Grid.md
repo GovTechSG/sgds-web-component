@@ -39,7 +39,7 @@ The **SGDS Grid System** is a mobile-first, fully responsive layout system based
 | ----------------- | ---------------- | ------------------ | ------- | --------------- | ------- | ------------- |
 | Extra Small       | 511px and below  | `.sgds-col-*`      | 4       | auto            | 16      | 20            |
 | Small             | 512px - 767px    | `.sgds-col-sm-*`   | 8       | auto            | 16      | 24            |
-| Medium            | 768px - 1023px   | `.sgds-col-md-*`   | 8       | auto            | 16      | 32            |
-| Large             | 1024px - 1279px  | `.sgds-col-lg-*`   | 12      | 896px           | 16      | auto          |
-| Extra Large       | 1280px - 1439px  | `.sgds-col-xl-*`   | 12      | 1176px          | 24      | auto          |
-| Extra Extra Large | 1440px and above | `.sgds-col-2-xl-*` | 12      | 1320px          | 24      | auto          |
+| Medium            | 768px - 1023px   | `.sgds-col-md-*`   | 8       | auto            | 24      | 28            |
+| Large             | 1024px - 1279px  | `.sgds-col-lg-*`   | 12      | 888px           | 24      | auto          |
+| Extra Large       | 1280px - 1439px  | `.sgds-col-xl-*`   | 12      | 1168px          | 32      | auto          |
+| Extra Extra Large | 1440px and above | `.sgds-col-2-xl-*` | 12      | 1312px          | 32      | auto          |
