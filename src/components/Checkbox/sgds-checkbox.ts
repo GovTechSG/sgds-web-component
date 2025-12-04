@@ -170,7 +170,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
           @change=${(e: Event) => this._handleChange(e)}
           @keydown=${this._handleKeyDown}
           @invalid=${(e: Event) => this._handleInvalid(e)}
-          .checked=${live(this.checked)}
+          ?checked=${live(this.checked)}
           .disabled=${this.disabled}
           .required=${this.required}
           @blur=${this._handleBlur}
