@@ -122,11 +122,11 @@ export class SgdsComboBox extends SelectElement {
 
     assignedElements.forEach(option => {
       // Handling of click events
+      if (option.hasAttribute("disabled")) return false;
+
       option.addEventListener("click", (evt: PointerEvent) => {
         evt.preventDefault();
-
         const optionTarget = evt.target as SgdsComboBoxOption;
-        if (optionTarget.disabled) return;
 
         if (this.multiSelect) {
           optionTarget.active ? this._handleItemUnselect(evt) : this._handleItemSelected(evt);
@@ -140,8 +140,9 @@ export class SgdsComboBox extends SelectElement {
       option.addEventListener("keydown", (evt: KeyboardEvent) => {
         if (evt.key === "Enter") {
           this.close = "outside";
-          const option = evt.target as SgdsComboBoxOption;
-          option.click();
+
+          const optionTarget = evt.target as SgdsComboBoxOption;
+          optionTarget.click();
         }
       });
     });
