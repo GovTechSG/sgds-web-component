@@ -24,19 +24,6 @@ export class SgdsComboBoxOption extends OptionElement {
 
   connectedCallback(): void {
     super.connectedCallback();
-    this.addEventListener("keydown", (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
-        this.checkbox ? this._handleCheckboxClick() : this._handleNonCheckboxClick();
-      }
-    });
-
-    this.shadowRoot.addEventListener("click", e => {
-      const element = e.target as HTMLElement;
-
-      if (element.classList.contains("dropdown-item")) {
-        this.checkbox ? this._handleCheckboxClick() : this._handleNonCheckboxClick();
-      }
-    });
   }
 
   firstUpdated(changedProperties: PropertyValueMap<this>) {
@@ -48,30 +35,15 @@ export class SgdsComboBoxOption extends OptionElement {
     }
   }
 
-  private _handleNonCheckboxClick() {
-    if (!this.checkbox) {
-      this.emit("i-sgds-select");
-    }
-  }
-  private _handleCheckboxClick() {
-    this.shadowRoot.querySelector("sgds-checkbox").click();
-  }
-
-  private _handleCheckboxChange(e: Event) {
-    const checkbox = e.target as HTMLInputElement;
-    this.active = checkbox.checked;
-    this.active ? this.emit("i-sgds-select") : this.emit("i-sgds-unselect");
-  }
-
   protected _renderItemContent = () => {
     return this.checkbox
       ? html`
-          <sgds-checkbox ?checked=${this.active} .disabled=${this.disabled} @sgds-change=${this._handleCheckboxChange}>
+          <sgds-checkbox .checked=${this.active} .disabled=${this.disabled}>
             <slot></slot>
           </sgds-checkbox>
         `
       : html`
-          <div class="normal-item-content" @click=${this._handleNonCheckboxClick}>
+          <div class="normal-item-content">
             <slot></slot>
             ${this.active ? html` <sgds-icon name="check"></sgds-icon> ` : nothing}
           </div>

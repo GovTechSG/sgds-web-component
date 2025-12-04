@@ -42,7 +42,7 @@
 
 .form-clearable {
   cursor: pointer;
-  color: var(--sgds-neutral-color-default);
+  color: var(--sgds-color-subtle);
 }
 
 @media (prefers-reduced-motion: reduce) {

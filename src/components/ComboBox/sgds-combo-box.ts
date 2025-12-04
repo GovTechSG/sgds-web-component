@@ -88,9 +88,11 @@ export class SgdsComboBox extends SelectElement {
       }
     });
 
-    this.addEventListener("sgds-hide", async () => {
-      const sgdsInput = await this._input;
-      sgdsInput.focus();
+    this.addEventListener("sgds-hide", async (e: CustomEvent) => {
+      if (!e.detail.isOutside) {
+        const sgdsInput = await this._input;
+        sgdsInput.focus();
+      }
 
       this.options.forEach(o => o.removeAttribute("hidden"));
       // reset emptyMenu state
@@ -107,6 +109,7 @@ export class SgdsComboBox extends SelectElement {
       comboBoxOption.active = this.value.includes(o.value);
       this.appendChild(comboBoxOption);
     });
+
     this._setupValidation(this.menuList);
 
     if (this.menuIsOpen && !this.readonly) {
@@ -116,21 +119,31 @@ export class SgdsComboBox extends SelectElement {
 
   protected async _handleDefaultSlotChange(e: Event) {
     const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
+
     assignedElements.forEach(option => {
-      option.addEventListener("i-sgds-select", (e: CustomEvent) => {
-        if (option.hasAttribute("disabled")) return;
-        this._handleItemSelected(e);
+      // Handling of click events
+      option.addEventListener("click", (evt: PointerEvent) => {
+        evt.preventDefault();
+
+        const optionTarget = evt.target as SgdsComboBoxOption;
+        if (optionTarget.disabled) return;
+
+        if (this.multiSelect) {
+          optionTarget.active ? this._handleItemUnselect(evt) : this._handleItemSelected(evt);
+        } else {
+          this._handleItemSelected(evt);
+        }
+
+        return false;
       });
-      if (this.value.includes(option.getAttribute("value"))) {
-        option.setAttribute("active", "true");
-      }
-      if (this.multiSelect) {
-        option.addEventListener("i-sgds-unselect", (e: CustomEvent) => {
-          const option = e.target as SgdsComboBoxOption;
-          if (option.disabled) return;
-          this._handleItemUnselect(e);
-        });
-      }
+
+      option.addEventListener("keydown", (evt: KeyboardEvent) => {
+        if (evt.key === "Enter") {
+          this.close = "outside";
+          const option = evt.target as SgdsComboBoxOption;
+          option.click();
+        }
+      });
     });
 
     /** this will trigger _updateValueAndDisplayValue */
@@ -153,11 +166,13 @@ export class SgdsComboBox extends SelectElement {
       this._mixinValidate(this.input);
     }
   }
+
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
     // when value change, always emit a change event
     this.emit("sgds-change");
     this.options.forEach(o => o.removeAttribute("hidden"));
+
     if (this.value) {
       this.emit("sgds-select");
     }
@@ -196,6 +211,7 @@ export class SgdsComboBox extends SelectElement {
       comboBoxOption.active = this.value.includes(o.value);
       return comboBoxOption;
     });
+
     this.replaceChildren(...newMenu);
   }
 
@@ -213,6 +229,8 @@ export class SgdsComboBox extends SelectElement {
     if (!this.multiSelect) {
       this.displayValue = initialSelectedItem[0]?.label ?? "";
     }
+
+    this.options.forEach(o => (o.active = valueArray.includes(o.value)));
   }
 
   // Called each time the user types in the <sgds-input>, we set .value and show the menu
@@ -220,6 +238,7 @@ export class SgdsComboBox extends SelectElement {
     this.emit("sgds-input");
     const input = e.target as HTMLInputElement;
     this.displayValue = input.value;
+
     // There is a race condition in certain situations where this.optionList is not fully updated during slotchange
     // Hence instead of using this.optionList, we have to perform a query on the <sgds-combo-box-option> elements
     const optionList = this.options.map(o => ({ value: o.value, label: o.textContent.trim() }));
@@ -267,28 +286,27 @@ export class SgdsComboBox extends SelectElement {
     if (this.multiSelect) {
       if (!this.selectedItems.some(i => i.value === foundItem.value)) {
         this.selectedItems = [...this.selectedItems, foundItem];
-        setTimeout(() => (this.displayValue = ""));
       }
-      this.hideMenu();
+
       this.value = this.selectedItems.map(i => i.value).join(";");
+      itemEl.active = true;
     } else {
       // Single-select
       // Only update active states if a new item is selected
       if (this.selectedItems.length === 0 || this.selectedItems[0].value !== foundItem.value) {
         // Remove active from all options
         this.options.forEach(o => (o.active = false));
-        // Set active only on the selected item
         itemEl.active = true;
+
         this.selectedItems = [foundItem];
         this.value = foundItem.value.toString();
         this.displayValue = foundItem.label;
         this.hideMenu();
       }
-      // If the same item is clicked again, do nothing (keep active state)
     }
   }
 
-  private _handleItemUnselect(e: CustomEvent) {
+  private _handleItemUnselect(e: Event) {
     const itemEl = e.target as SgdsComboBoxOption;
     itemEl.removeAttribute("active");
 
