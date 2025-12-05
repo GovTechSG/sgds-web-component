@@ -1,8 +1,9 @@
 import { html, nothing } from "lit";
-import { state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import alertBannerItemStyles from "./system-banner-item.css";
+import { HasSlotController } from "../../utils/slot";
 
 /**
  * @summary The item component for `sgds-system-banner`. Each banner item represents a message in the system banner.
@@ -18,6 +19,10 @@ export class SgdsSystemBannerItem extends SgdsElement {
 
   @state() private clamped = false;
 
+  @property({ type: Boolean }) hasActionSlot = false;
+
+  private readonly hasSlotController = new HasSlotController(this, "action");
+
   private _resizeObserver: ResizeObserver;
   async firstUpdated(_changedProperties) {
     super.firstUpdated(_changedProperties);
@@ -32,6 +37,9 @@ export class SgdsSystemBannerItem extends SgdsElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     if (this._resizeObserver) this._resizeObserver.disconnect();
+  }
+  updated() {
+    if (!this.hasActionSlot) this.hasActionSlot = this.hasSlotController.test("action");
   }
   private _clampCheck() {
     const textEl = this.shadowRoot.querySelector(".message");
@@ -58,13 +66,16 @@ export class SgdsSystemBannerItem extends SgdsElement {
                 >`
               : nothing}
           </div>
-          <div class="action">
-            <slot name="action"></slot>
-          </div>
+          ${this.hasActionSlot || this.getAttribute("data-banner-item")
+            ? html`
+                <div class=${classMap({ action: true, "mh-20": this.getAttribute("data-banner-item") })}>
+                  <slot name="action"></slot>
+                </div>
+              `
+            : nothing}
         </div>
       </div>
     `;
   }
 }
-export type SystemBannerVariant = "info" | "danger" | "warning" | "neutral";
 export default SgdsSystemBannerItem;

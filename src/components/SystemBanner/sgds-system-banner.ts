@@ -10,7 +10,6 @@ import SgdsIcon from "../Icon/sgds-icon";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import alertBannerStyles from "./system-banner.css";
 import SgdsSystemBannerItem from "./sgds-system-banner-item";
-export type AlertBannerVariant = "info" | "danger" | "warning" | "neutral";
 
 /**
  * @summary A system banner component for displaying important messages to users at the application level.
@@ -34,9 +33,6 @@ export class SgdsSystemBanner extends SgdsElement {
 
   /** Enables a close button that allows the user to dismiss the alert. */
   @property({ type: Boolean, reflect: true }) dismissible = false;
-
-  /** The alert's theme variant. */
-  @property({ type: String, reflect: true }) variant: AlertBannerVariant = "info";
 
   /** Closes the alert  */
   public close() {
@@ -86,22 +82,10 @@ export class SgdsSystemBanner extends SgdsElement {
       this.childCount > 1 && this._startAutoCycle();
       this.emit("sgds-show");
       this.banner.classList.remove("d-none");
-      //Andy says remove show and hide motion. Confirm with him and remove
-      const bannerShow = getAnimation(this, "banner.show");
-      await animateTo(this, bannerShow.keyframes, bannerShow.options);
-      this.emit("sgds-after-show");
-      // End of Andy's part
     } else {
       this._stopAutoCycle();
       this.emit("sgds-hide");
-      //>>>To remove: if andy say no need animation
-      const bannerHide = getAnimation(this, "banner.hide");
-      await animateTo(this, bannerHide.keyframes, bannerHide.options);
-      //>>>End to remove
       this.banner.classList.add("d-none");
-      //To remove: if andy say no need animation
-      this.emit("sgds-after-hide");
-      //End to remove
     }
   }
 
@@ -162,12 +146,12 @@ export class SgdsSystemBanner extends SgdsElement {
     }
   }
   private _handleSlotChange(e: Event) {
+    if (this.childCount <= 1) return;
     const slot = e.target as HTMLSlotElement;
     const assignedElements = slot.assignedElements() as SgdsSystemBannerItem[];
-    assignedElements.forEach(item => item.setAttribute("variant", this.variant));
+    assignedElements.forEach((item, index) => item.setAttribute("data-banner-item", (index + 1).toString()));
   }
   render() {
-    const buttonTone = this.variant === "warning" ? "neutral" : "fixed-light";
     return html`
       <div
         class="${classMap({
@@ -183,7 +167,7 @@ export class SgdsSystemBanner extends SgdsElement {
           ? html` <div class="pagination">
               <sgds-icon-button
                 name="chevron-left"
-                tone=${buttonTone}
+                tone="fixed-light"
                 variant="ghost"
                 size="xs"
                 @click=${this._prev}
@@ -191,7 +175,7 @@ export class SgdsSystemBanner extends SgdsElement {
               <span>${this._currentIndex + 1}/${this.childCount}</span>
               <sgds-icon-button
                 name="chevron-right"
-                tone=${buttonTone}
+                tone="fixed-light"
                 variant="ghost"
                 size="xs"
                 @click=${this._next}
@@ -200,11 +184,7 @@ export class SgdsSystemBanner extends SgdsElement {
           : nothing}
         ${this.dismissible
           ? html`
-              <sgds-close-button
-                aria-label="close the alert"
-                @click=${this.close}
-                variant=${this.variant === "warning" ? "dark" : "light"}
-              ></sgds-close-button>
+              <sgds-close-button aria-label="close the alert" @click=${this.close} variant="light"></sgds-close-button>
             `
           : nothing}
       </div>
@@ -214,16 +194,6 @@ export class SgdsSystemBanner extends SgdsElement {
 
 export default SgdsSystemBanner;
 
-//TODO: Andy says remove show and hide motion. Confirm with him and remove
-setDefaultAnimation("banner.show", {
-  keyframes: [{ opacity: 0 }, { opacity: 1 }],
-  options: { duration: 500, easing: "ease" }
-});
-setDefaultAnimation("banner.hide", {
-  keyframes: [{ opacity: 1 }, { opacity: 0 }],
-  options: { duration: 500, easing: "ease" }
-});
-// End of remove
 setDefaultAnimation("banner.item.next", {
   keyframes: [
     { opacity: 0, transform: "translateY(-100%)" },

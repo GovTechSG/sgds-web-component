@@ -30,13 +30,6 @@ describe("<sgds-system-banner>", () => {
     const closeButton = el.shadowRoot?.querySelector("sgds-close-button[variant='light']");
     expect(closeButton).to.exist;
   });
-  it("when variant is set to warning, close button variant is dark", async () => {
-    const el = await fixture<SgdsSystemBanner>(
-      html`<sgds-system-banner show dismissible variant="warning"></sgds-system-banner>`
-    );
-    const closeButton = el.shadowRoot?.querySelector("sgds-close-button[variant='dark']");
-    expect(closeButton).to.exist;
-  });
   it("when more than one child, pagination is rendered, matches shadowDOM", async () => {
     const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
       <sgds-system-banner-item></sgds-system-banner-item>
@@ -236,5 +229,28 @@ describe("<sgds-system-banner>", () => {
     expect(consoleWarnStub).to.have.been.calledWith(
       "It is not recommended to have more than 5 <sgds-system-banner-item> elements."
     );
+  });
+  it("if there is only one item, sgds-system-banner-item has no data-banner-item attribute", async () => {
+    const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
+      <sgds-system-banner-item>one</sgds-system-banner-item>
+    </sgds-system-banner>`);
+    const item = el.querySelector("sgds-system-banner-item") as SgdsSystemBannerItem;
+    expect(item.hasAttribute("data-banner-item")).to.be.false;
+
+    const bannerItemActionDiv = item.shadowRoot?.querySelector(".action") as HTMLDivElement;
+    expect(bannerItemActionDiv.classList.contains("mh-20")).to.be.false;
+  });
+  it("if there is more than one item, sgds-system-banner-item has data-banner-item attribute", async () => {
+    const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
+      <sgds-system-banner-item>one</sgds-system-banner-item>
+      <sgds-system-banner-item>two</sgds-system-banner-item>
+      <sgds-system-banner-item>three</sgds-system-banner-item>
+    </sgds-system-banner>`);
+    const items = el.querySelectorAll("sgds-system-banner-item") as NodeListOf<SgdsSystemBannerItem>;
+    items.forEach(item => {
+      expect(item.hasAttribute("data-banner-item")).to.be.true;
+      const bannerItemActionDiv = item.shadowRoot?.querySelector(".action") as HTMLDivElement;
+      expect(bannerItemActionDiv.classList.contains("mh-20")).to.be.true;
+    });
   });
 });
