@@ -271,5 +271,5 @@ describe("<sgds-system-banner>", () => {
       <sgds-system-banner-item>three</sgds-system-banner-item>
     </sgds-system-banner>`);
     expect(el.getAttribute("data-total-items")).to.equal("3");
-  })
+  });
 });
