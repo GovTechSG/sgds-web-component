@@ -43,17 +43,19 @@ export class SgdsSystemBanner extends SgdsElement {
 
   @query(".banner")
   private banner: HTMLDivElement;
+
   @state() private childCount: number;
 
   @state() private _intervalId = null;
 
-  private _intervalTime = 5000; // 20 seconds
+  private _intervalTime = 5000;
 
   @state() private _currentIndex = 0;
 
   protected firstUpdated(changedProperties: PropertyValueMap<this>): void {
     super.firstUpdated(changedProperties);
     this.childCount = this.bannerItem.length;
+    this.setAttribute("data-total-items", this.childCount.toString());
     if (!this.show) {
       this.banner.classList.add("d-none");
     } else {
@@ -145,12 +147,6 @@ export class SgdsSystemBanner extends SgdsElement {
       this._startAutoCycle();
     }
   }
-  private _handleSlotChange(e: Event) {
-    if (this.childCount <= 1) return;
-    const slot = e.target as HTMLSlotElement;
-    const assignedElements = slot.assignedElements() as SgdsSystemBannerItem[];
-    assignedElements.forEach((item, index) => item.setAttribute("data-banner-item", (index + 1).toString()));
-  }
   render() {
     return html`
       <div
@@ -161,7 +157,7 @@ export class SgdsSystemBanner extends SgdsElement {
         aria-hidden=${this.show ? "false" : "true"}
       >
         <div class="content">
-          <slot id="loop-slot" @slotchange=${this._handleSlotChange}></slot>
+          <slot id="loop-slot"></slot>
         </div>
         ${this.childCount > 1
           ? html` <div class="pagination">

@@ -6,20 +6,20 @@ import alertBannerItemStyles from "./system-banner-item.css";
 import { HasSlotController } from "../../utils/slot";
 
 /**
- * @summary The item component for `sgds-system-banner`. Each banner item represents a message in the system banner.
+ * @summary `sgds-system-banner-item` is the subcomponent for `sgds-system-banner`. Each banner item represents a message in the system banner.
  *
  * @slot icon - The slot to pass in an icon element.
  * @slot action - The slot to pass in an action element such as a button or link
- * @slot default - The slot to pass in the message content of the banner item. Text will be clamped at 2 lines
+ * @slot default - The slot to pass in the message content of the banner item. Text will be clamped at 2 lines in desktop view and 5 lines in mobile view
  *
  * @event sgds-show-more - The event emitted when user clicks on "show more" in the banner text message
  */
 export class SgdsSystemBannerItem extends SgdsElement {
   static styles = [...SgdsElement.styles, alertBannerItemStyles];
+  /** Used only for SSR to indicate the presence of the `action` slot. */
+  @property({ type: Boolean }) hasActionSlot = false;
 
   @state() private clamped = false;
-
-  @property({ type: Boolean }) hasActionSlot = false;
 
   private readonly hasSlotController = new HasSlotController(this, "action");
 
@@ -52,6 +52,7 @@ export class SgdsSystemBannerItem extends SgdsElement {
     this.emit("sgds-show-more");
   }
   render() {
+    const banner = this.closest("sgds-system-banner");
     return html`
       <div class="banner-item">
         <slot name="icon"></slot>
@@ -66,9 +67,9 @@ export class SgdsSystemBannerItem extends SgdsElement {
                 >`
               : nothing}
           </div>
-          ${this.hasActionSlot || this.getAttribute("data-banner-item")
+          ${this.hasActionSlot || parseInt(banner.getAttribute("data-total-items")) > 1
             ? html`
-                <div class=${classMap({ action: true, "mh-20": this.getAttribute("data-banner-item") })}>
+                <div class="action">
                   <slot name="action"></slot>
                 </div>
               `

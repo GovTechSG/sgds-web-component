@@ -59,12 +59,9 @@
   align-items: center;
   margin-top: 6px;
   white-space: nowrap;
-}
-.action.mh-20 {
   /** even if no action is slotted, the container needs a height in mobile **/
   min-height: var(--sgds-line-height-20);
 }
-
 slot[name="action"]::slotted(a) {
   text-decoration: none !important;
   color: var(--sgds-color-fixed-light) !important;
