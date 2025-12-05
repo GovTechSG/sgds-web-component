@@ -6,8 +6,6 @@ import alertBannerItemStyles from "./system-banner-item.css";
 import { HasSlotController } from "../../utils/slot";
 
 /**
- * @summary `sgds-system-banner-item` is the subcomponent for `sgds-system-banner`. Each banner item represents a message in the system banner.
- *
  * @slot icon - The slot to pass in an icon element.
  * @slot action - The slot to pass in an action element such as a button or link
  * @slot default - The slot to pass in the message content of the banner item. Text will be clamped at 2 lines in desktop view and 5 lines in mobile view

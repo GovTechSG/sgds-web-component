@@ -12,9 +12,10 @@ import alertBannerStyles from "./system-banner.css";
 import SgdsSystemBannerItem from "./sgds-system-banner-item";
 
 /**
- * @summary A system banner component for displaying important messages to users at the application level.
- * Each banner can contain up to 5 banner items that cycle automatically every 5 seconds. Pagination is also
- *
+ * @summary The system banner component for displaying important messages to users at the application level.
+ * Each banner can contain up to 5 banner items that cycle automatically every 5 seconds. Pagination appears when there are multiple items, allowing users to navigate between them. The banner can also be made dismissible with a close button.
+ * `sgds-system-banner-item` is the subcomponent for `sgds-system-banner`. Each banner item represents a message in the system banner.
+ * 
  * @slot default - The slot to pass in `sgds-system-banner-item`
  *
  * @event sgds-show - Emitted when the banner has start to appear on screen
