@@ -25,16 +25,10 @@ describe("<sgds-system-banner>", () => {
     expect(getComputedStyle(bannerDiv).display).to.equal("none");
     expect(bannerDiv.getAttribute("aria-hidden")).to.equal("true");
   });
+
   it("when dimissible is true, close button is rendered", async () => {
     const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show dismissible></sgds-system-banner>`);
     const closeButton = el.shadowRoot?.querySelector("sgds-close-button[variant='light']");
-    expect(closeButton).to.exist;
-  });
-  it("when variant is set to warning, close button variant is dark", async () => {
-    const el = await fixture<SgdsSystemBanner>(
-      html`<sgds-system-banner show dismissible variant="warning"></sgds-system-banner>`
-    );
-    const closeButton = el.shadowRoot?.querySelector("sgds-close-button[variant='dark']");
     expect(closeButton).to.exist;
   });
   it("when more than one child, pagination is rendered, matches shadowDOM", async () => {
@@ -225,7 +219,7 @@ describe("<sgds-system-banner>", () => {
   it("more than 5 items trigger console warning", async () => {
     const consoleWarnStub = sinon.stub(console, "warn");
 
-    const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
+    await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
       <sgds-system-banner-item>one</sgds-system-banner-item>
       <sgds-system-banner-item>two</sgds-system-banner-item>
       <sgds-system-banner-item>three</sgds-system-banner-item>
@@ -237,4 +231,45 @@ describe("<sgds-system-banner>", () => {
       "It is not recommended to have more than 5 <sgds-system-banner-item> elements."
     );
   });
+  it("if there is only one item and no slot action in banner item, sgds-system-banner-item has no data-item-index attribute, div.action does not exist", async () => {
+    const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
+      <sgds-system-banner-item>one</sgds-system-banner-item>
+    </sgds-system-banner>`);
+    const item = el.querySelector("sgds-system-banner-item") as SgdsSystemBannerItem;
+
+    const bannerItemActionDiv = item.shadowRoot?.querySelector(".action") as HTMLDivElement;
+    expect(bannerItemActionDiv).not.to.exist;
+  });
+  it("if there is only one item and but slot action in banner item exists, sgds-system-banner-item's div.action exists", async () => {
+    const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
+      <sgds-system-banner-item
+        >one
+        <div slot="action">action</div></sgds-system-banner-item
+      >
+    </sgds-system-banner>`);
+    const item = el.querySelector("sgds-system-banner-item") as SgdsSystemBannerItem;
+
+    const bannerItemActionDiv = item.shadowRoot?.querySelector(".action") as HTMLDivElement;
+    expect(bannerItemActionDiv).to.exist;
+  });
+  it("if there is more than one item, sgds-system-banner-item's .action exist", async () => {
+    const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
+      <sgds-system-banner-item>one</sgds-system-banner-item>
+      <sgds-system-banner-item>two</sgds-system-banner-item>
+      <sgds-system-banner-item>three</sgds-system-banner-item>
+    </sgds-system-banner>`);
+    const items = el.querySelectorAll("sgds-system-banner-item") as NodeListOf<SgdsSystemBannerItem>;
+    items.forEach(async item => {
+      const bannerItemActionDiv = item.shadowRoot?.querySelector(".action") as HTMLDivElement;
+      expect(bannerItemActionDiv).to.exist;
+    });
+  });
+  it("data-total-items attribute is set on sgds-system-banner", async () => {
+    const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
+      <sgds-system-banner-item>one</sgds-system-banner-item>
+      <sgds-system-banner-item>two</sgds-system-banner-item>
+      <sgds-system-banner-item>three</sgds-system-banner-item>
+    </sgds-system-banner>`);
+    expect(el.getAttribute("data-total-items")).to.equal("3");
+  })
 });

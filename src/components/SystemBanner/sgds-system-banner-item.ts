@@ -1,22 +1,27 @@
 import { html, nothing } from "lit";
-import { state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import alertBannerItemStyles from "./system-banner-item.css";
+import { HasSlotController } from "../../utils/slot";
 
 /**
- * @summary The item component for `sgds-system-banner`. Each banner item represents a message in the system banner.
+ * @summary `sgds-system-banner-item` is the subcomponent for `sgds-system-banner`. Each banner item represents a message in the system banner.
  *
  * @slot icon - The slot to pass in an icon element.
  * @slot action - The slot to pass in an action element such as a button or link
- * @slot default - The slot to pass in the message content of the banner item. Text will be clamped at 2 lines
+ * @slot default - The slot to pass in the message content of the banner item. Text will be clamped at 2 lines in desktop view and 5 lines in mobile view
  *
  * @event sgds-show-more - The event emitted when user clicks on "show more" in the banner text message
  */
 export class SgdsSystemBannerItem extends SgdsElement {
   static styles = [...SgdsElement.styles, alertBannerItemStyles];
+  /** Used only for SSR to indicate the presence of the `action` slot. */
+  @property({ type: Boolean }) hasActionSlot = false;
 
   @state() private clamped = false;
+
+  private readonly hasSlotController = new HasSlotController(this, "action");
 
   private _resizeObserver: ResizeObserver;
   async firstUpdated(_changedProperties) {
@@ -33,6 +38,9 @@ export class SgdsSystemBannerItem extends SgdsElement {
     super.disconnectedCallback();
     if (this._resizeObserver) this._resizeObserver.disconnect();
   }
+  updated() {
+    if (!this.hasActionSlot) this.hasActionSlot = this.hasSlotController.test("action");
+  }
   private _clampCheck() {
     const textEl = this.shadowRoot.querySelector(".message");
     requestAnimationFrame(() => {
@@ -44,6 +52,7 @@ export class SgdsSystemBannerItem extends SgdsElement {
     this.emit("sgds-show-more");
   }
   render() {
+    const banner = this.closest("sgds-system-banner");
     return html`
       <div class="banner-item">
         <slot name="icon"></slot>
@@ -58,13 +67,16 @@ export class SgdsSystemBannerItem extends SgdsElement {
                 >`
               : nothing}
           </div>
-          <div class="action">
-            <slot name="action"></slot>
-          </div>
+          ${this.hasActionSlot || parseInt(banner.getAttribute("data-total-items")) > 1
+            ? html`
+                <div class="action">
+                  <slot name="action"></slot>
+                </div>
+              `
+            : nothing}
         </div>
       </div>
     `;
   }
 }
-export type SystemBannerVariant = "info" | "danger" | "warning" | "neutral";
 export default SgdsSystemBannerItem;
