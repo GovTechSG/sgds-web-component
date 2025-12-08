@@ -11,9 +11,9 @@
   "dependencies": {
     "@govtechsg/sgds-web-component": "file:../../../lib",
     "@lit-labs/nextjs": "^0.2.4",
-    "next": "15.5.3",
-    "react": "19.1.1",
-    "react-dom": "19.1.1"
+    "next": ">=15.5.7",
+    "react": "19.2.1",
+    "react-dom": "19.2.1"
   },
   "devDependencies": {
     "@types/node": "^20",
