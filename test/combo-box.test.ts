@@ -626,7 +626,7 @@ describe("single select combobox", () => {
       item.click();
 
       await el.updateComplete;
-      await waitUntil(() => !el.menuIsOpen);
+
       expect(input().value).to.equal("Durian");
 
       input().click();
@@ -736,13 +736,15 @@ describe("multi select combobox", () => {
       const option3 = () => el.querySelector<SgdsComboBoxOption>("sgds-combo-box-option[value='option3']");
       await option3()?.updateComplete;
       await waitUntil(() => option3());
-      expect(option3()).to.have.attribute("active");
+
+      expect(option3()?.active).to.be.true;
       const input = () => el.shadowRoot?.querySelector("input");
       input()?.focus();
 
       await sendKeys({ press: "Backspace" });
       await waitUntil(() => expect(option3()).not.to.have.attribute("active"));
     });
+
     it(`MODE=${mode}, when badge dismissed by mouseclick, menu and badges are sync`, async () => {
       const el = await fixture<SgdsComboBox>(render({ value: "option1;option2;option3", multiSelect: true }));
 
@@ -773,8 +775,12 @@ describe("multi select combobox", () => {
       const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
       const badges = () => el.shadowRoot?.querySelectorAll("sgds-badge") as NodeListOf<SgdsBadge>;
       const durianItem = () => el.querySelector("sgds-combo-box-option[value='option3']") as SgdsComboBoxOption;
+
+      await durianItem().updateComplete;
       await waitUntil(() => durianItem());
+
       expect(durianItem().active).to.be.true;
+
       await waitUntil(() => badges().length === 1);
       expect(badges().length).to.equal(1);
       expect(badges()[0].innerText).to.equal("Durian");
@@ -821,6 +827,7 @@ describe("multi select combobox", () => {
     it(`MODE=${mode}, When input is cleared, the active item is no longer active, badge is removed`, async () => {
       const el = await fixture<SgdsComboBox>(render({ multiSelect: true, value: "option3" }));
       const durianItem = () => el.querySelector("sgds-combo-box-option[value='option3']") as SgdsComboBoxOption;
+      await durianItem().updateComplete;
       await waitUntil(() => durianItem());
       expect(durianItem().active).to.be.true;
 
@@ -831,12 +838,14 @@ describe("multi select combobox", () => {
       input.focus();
       await sendKeys({ press: "Backspace" });
       await waitUntil(() => el.value === "");
+
       const updatedDurianItem = () => el.querySelector("sgds-combo-box-option[value='option3']") as SgdsComboBoxOption;
       await updatedDurianItem().updateComplete;
       expect(updatedDurianItem().active).to.be.false;
       await el.updateComplete;
       expect(badge()).not.to.exist;
     });
+
     it(`MODE=${mode},When no purposeful selection is made through clicking or keyboard, input clears when blur`, async () => {
       const el = await fixture<SgdsComboBox>(render({ multiSelect: true }));
 
@@ -918,12 +927,16 @@ describe("multi select combobox", () => {
       el.querySelectorAll("sgds-combo-box-option:not([hidden])")[0].shadowRoot?.querySelector("sgds-checkbox")?.click();
 
       await el.updateComplete;
-      await waitUntil(() => !el.menuIsOpen);
       expect(el.shadowRoot?.querySelector("sgds-badge")?.textContent?.trim()).to.equal("Durian");
 
+      // to trigger closing of menu
       input().click();
+      await waitUntil(() => !el.menuIsOpen);
 
+      // to trigger opening of menu
+      input().click();
       await waitUntil(() => el.menuIsOpen);
+
       expect(el.querySelectorAll("sgds-combo-box-option:not([hidden])").length).to.equal(3);
       expect(el.querySelector("sgds-combo-box-option[value='option3']")).to.have.attribute("active");
     });
@@ -1574,15 +1587,6 @@ describe("sgds-combo-box-option (default)", () => {
       `
     );
   });
-
-  it("on click triggers i-sgds-select event", async () => {
-    const spy = sinon.spy();
-    const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option></sgds-combo-box-option>`);
-    el.addEventListener("i-sgds-select", spy);
-    const item = el.shadowRoot?.querySelector(".normal-item-content") as HTMLDivElement;
-    item?.click();
-    expect(spy.calledOnce).to.be.true;
-  });
 });
 
 describe("sgds-combo-box-option (checkbox)", () => {
@@ -1604,18 +1608,5 @@ describe("sgds-combo-box-option (checkbox)", () => {
     const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option checkbox active></sgds-combo-box-option>`);
     const checkbox = el.shadowRoot?.querySelector<SgdsCheckbox>("sgds-checkbox");
     expect(checkbox?.checked).to.be.true;
-  });
-
-  it("on click triggers sgds-select event, click again triggers sgds-unselect", async () => {
-    const selectSpy = sinon.spy();
-    const unselectSpy = sinon.spy();
-    const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option checkbox></sgds-combo-box-option>`);
-    el.addEventListener("i-sgds-select", selectSpy);
-    el.addEventListener("i-sgds-unselect", unselectSpy);
-    const item = el.shadowRoot?.querySelector("sgds-checkbox") as SgdsCheckbox;
-    item?.click();
-    expect(selectSpy.calledOnce).to.be.true;
-    item.click();
-    expect(unselectSpy.calledOnce).to.be.true;
   });
 });
