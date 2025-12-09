@@ -15,8 +15,8 @@ export const Template = args =>
         <img
           slot="thumbnail"
           alt="img alternate text goes here"
-          width="48"
-          height="48"
+          width="64"
+          height="64"
           src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
         />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
