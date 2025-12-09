@@ -14,6 +14,7 @@
     <ThumbnailCard></ThumbnailCard>   -->
     <Select></Select>
     <Combobox></Combobox>
+    <Skeleton></Skeleton>
     <!-- <Card></Card>
     <Table></Table>
     <DescriptionList></DescriptionList> -->

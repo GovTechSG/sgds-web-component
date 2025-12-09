@@ -1,5 +1,6 @@
 :host {
   --btn-font-weight: var(--sgds-font-weight-regular);
+  --btn-color: var(--sgds-color-fixed-light);
   --btn-bg: var(--sgds-primary-surface-default);
   --btn-hover-bg: var(--sgds-primary-surface-emphasis);
   --btn-border-radius: var(--sgds-border-radius-md);
