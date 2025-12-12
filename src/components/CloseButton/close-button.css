@@ -8,11 +8,11 @@
   height: var(--sgds-dimension-24);
 }
 
-:host([variant="light"]) .btn-close {
+:host([tone="fixed-light"]) .btn-close {
   color: var(--sgds-color-fixed-light);
 }
 
-:host([variant="dark"]) .btn-close {
+:host([tone="fixed-dark"]) .btn-close {
   color: var(--sgds-color-fixed-dark);
 }
 

@@ -11,7 +11,7 @@ import { HasSlotController } from "../../utils/slot";
 import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll";
 import { SM_BREAKPOINT, MD_BREAKPOINT } from "../../utils/breakpoints";
 import SgdsButton from "../Button/sgds-button";
-import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import SgdsCloseButton from "../CloseButton/sgds-close-button";
 import modalStyle from "./modal.css";
 import headerStyles from "../../styles/header-class.css";
 import svgStyles from "../../styles/svg.css";

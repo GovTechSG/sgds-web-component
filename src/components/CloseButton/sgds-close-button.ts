@@ -7,8 +7,6 @@ import { warnUnregisteredElements } from "../../utils/ce-registry";
 /**
  * @summary Close button for closing actions. Used in Modal, Drawer, Alert and Toast.
  *
- * @cssprop --sgds-close-btn-border-radius - The border radius of close button border
- *
  */
 export class SgdsCloseButton extends SgdsElement {
   static styles = [...SgdsElement.styles, closeButtonStyles];
@@ -18,7 +16,7 @@ export class SgdsCloseButton extends SgdsElement {
   /** Specifies a large or small button */
   @property({ type: String, reflect: true }) size: "sm" | "md" = "md";
 
-  @property({ type: String, reflect: true }) variant: "default" | "dark" | "light" = "default";
+  @property({ type: String, reflect: true }) tone: "default" | "fixed-dark" | "fixed-light" = "default";
 
   private _handleClick() {
     this.removeEventListener("click", this._clickHandler);
