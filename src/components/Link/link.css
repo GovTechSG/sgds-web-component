@@ -26,7 +26,10 @@
 .nav-link::slotted(a:focus),
 .nav-link::slotted(a:focus-visible) {
   color: var(--color-emphasis) !important;
-  text-decoration-color: var(--color-emphasis) !important
+  text-decoration-color: var(--color-emphasis) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px;
+  transition: text-underline-offset 300ms ease ;
 }
 
 .nav-link::slotted(a:focus-visible:not([disabled])) {
@@ -91,8 +94,13 @@
   /* If clash of styles happens from other light dom css on anchor tag, will need to add !important here */
   color: var(--sgds-link-color-default);
   cursor: pointer;
-  text-decoration: none !important;
 }
+.nav-link::slotted(a:not(:hover):not(:focus):not(:focus-visible)){
+  /* text-decoration: none !important; */
+    text-decoration: underline solid transparent !important;
+    text-underline-offset: 0px;
+}
+
 :host([size="md"]) .nav-link::slotted(a) {
   line-height: var(--sgds-line-height-24) !important;
   font-size: var(--sgds-font-size-2) !important;
@@ -118,8 +126,6 @@
   line-height: var(--sgds-line-height-16) !important;
   font-size: var(--sgds-font-size-0) !important;
 }
-
-
 /* .un {
   display: inline-block;
 }
@@ -136,7 +142,6 @@
 .un:hover::after, .un:focus::after, .un:focus-visible::after {
   width: 100%;
 }
-
 
 @media (prefers-reduced-motion: reduce) {
   .un::after {

@@ -73,7 +73,9 @@ export class SgdsLink extends SgdsElement {
 
   render() {
     /** When removing href, link is no longer focusable */
-    return html` <slot class="nav-link" @slotchange=${this._handleSlotChange}></slot> `;
+    return html`
+    <slot class="nav-link " @slotchange=${this._handleSlotChange}></slot>
+    `;
   }
 }
 
