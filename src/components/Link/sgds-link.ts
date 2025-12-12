@@ -2,6 +2,7 @@ import { html, PropertyValueMap } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import linkStyles from "./link.css";
+import SgdsIcon from "../Icon/sgds-icon";
 /**
  * @summary Link allows users to click and navigate their way from page to page
  *
@@ -26,9 +27,17 @@ export class SgdsLink extends SgdsElement {
   }
 
   private _processIcon(anchor: HTMLAnchorElement) {
-    const icons = anchor.querySelectorAll("sgds-icon");
+    const linkToIconSizeMapping = {
+      xs: "sm",
+      sm: "md",
+      md: "lg",
+      lg: "xl"
+    };
+    const icons = anchor.querySelectorAll<SgdsIcon>("sgds-icon");
 
     icons.forEach(icon => {
+      // icon.size = linkToIconSizeMapping[this.size]
+      icon.setAttribute("size", linkToIconSizeMapping[this.size]);
       icon.classList.remove("icon-left", "icon-right");
 
       if (!icon.previousElementSibling && !icon.previousSibling) {

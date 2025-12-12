@@ -1,5 +1,6 @@
 :host {
   display: inline-flex;
+  vertical-align: middle;
   --color-emphasis: var(--sgds-link-color-emphasis);
 }
 :host([variant="danger"]) {
@@ -15,14 +16,9 @@
   --color-emphasis:var(--sgds-color-fixed-dark);
 }
 
-.nav-link::slotted(a) {
-  line-height: var(--sgds-line-height-24);
-  /* If clash of styles happens from other light dom css on anchor tag, will need to add !important here */
-  color: var(--sgds-link-color-default);
-  cursor: pointer;
-  /* text-decoration: none !important; */
-  text-decoration-color: transparent !important;
-  transition: text-decoration-color 1s ease-in-out;
+::slotted(*) {
+  display: flex;
+  align-items: center;
 }
 
 .nav-link::slotted(a:hover),
@@ -91,12 +87,23 @@
   color: var(--color-emphasis, --sgds-color-fixed-dark);
 }
 
+.nav-link::slotted(a) {
+  /* If clash of styles happens from other light dom css on anchor tag, will need to add !important here */
+  color: var(--sgds-link-color-default);
+  cursor: pointer;
+  text-decoration: none !important;
+}
+:host([size="md"]) .nav-link::slotted(a) {
+  line-height: var(--sgds-line-height-24) !important;
+  font-size: var(--sgds-font-size-2) !important;
+}
 :host([size="lg"]) .nav-link::slotted(a) {
   font-size: var(--sgds-font-size-3) !important;
+  line-height: var(--sgds-line-height-32) !important;
 }
 
 :host([size="sm"]) .nav-link::slotted(a) {
-  line-height: var(--sgds-line-height-20) !important;
+  line-height: var(--sgds-line-height-20)!important;
   font-size: var(--sgds-font-size-1) !important;
 }
 
@@ -108,7 +115,7 @@
 }
 
 :host([size="xs"]) .nav-link::slotted(a) {
-  line-height: var(--sgds-line-height-16);
+  line-height: var(--sgds-line-height-16) !important;
   font-size: var(--sgds-font-size-0) !important;
 }
 
