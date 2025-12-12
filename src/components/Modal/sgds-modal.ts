@@ -288,7 +288,7 @@ export class SgdsModal extends SgdsElement {
                    <sgds-close-button
                 class="modal-header__close"
                 @click="${() => this.requestClose("close-button")}"
-                ariaLabel="close modal"
+                aria-label="close modal"
               ></sgds-close-button>
             <div class="modal-header">
               <div class="modal-header__title-description">

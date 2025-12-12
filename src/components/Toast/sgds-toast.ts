@@ -133,7 +133,7 @@ export class SgdsToast extends SgdsElement {
         ${this.dismissible
           ? html`<sgds-close-button
               class="close-btn"
-              ariaLabel="close toast"
+              aria-label="close toast"
               @click=${this.handleCloseClick}
             ></sgds-close-button>`
           : nothing}
