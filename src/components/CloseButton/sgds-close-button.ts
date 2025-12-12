@@ -1,24 +1,19 @@
 import { html, PropertyValueMap } from "lit";
 import { property } from "lit/decorators.js";
-import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 import closeButtonStyles from "./close-button.css";
 import { warnUnregisteredElements } from "../../utils/ce-registry";
 /**
  * @summary Close button for closing actions. Used in Modal, Drawer, Alert and Toast.
  *
- * @cssprop --sgds-close-btn-border-radius - The border radius of close button border
- *
  */
 export class SgdsCloseButton extends SgdsElement {
   static styles = [...SgdsElement.styles, closeButtonStyles];
 
-  @property({ type: String }) ariaLabel = "Close button";
-
   /** Specifies a large or small button */
   @property({ type: String, reflect: true }) size: "sm" | "md" = "md";
-
-  @property({ type: String, reflect: true }) variant: "default" | "dark" | "light" = "default";
+  /** The tone of the close button */
+  @property({ type: String, reflect: true }) tone: "default" | "fixed-dark" | "fixed-light" = "default";
 
   private _handleClick() {
     this.removeEventListener("click", this._clickHandler);
@@ -37,7 +32,7 @@ export class SgdsCloseButton extends SgdsElement {
   }
   render() {
     return html`
-      <button class="btn-close" aria-label=${ifDefined(this.ariaLabel)} @click=${this._handleClick}>
+      <button class="btn-close" aria-label="Close button" @click=${this._handleClick}>
         <sgds-icon name="cross" size=${this.size}></sgds-icon>
       </button>
     `;

@@ -2,7 +2,7 @@ import { assert, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 import { SgdsAlert } from "../src/components";
-import type { SgdsCloseButton } from "../src/internals/CloseButton/sgds-close-button";
+import type { SgdsCloseButton } from "../src/components/CloseButton/sgds-close-button";
 import "./sgds-web-component";
 
 describe("<sgds-alert-link>", () => {

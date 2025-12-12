@@ -2,7 +2,7 @@ import "./sgds-web-component";
 import { expect, fixture, oneEvent, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import type { SgdsFileUpload, SgdsButton } from "../src/components";
-import SgdsCloseButton from "../src/internals/CloseButton/sgds-close-button";
+import SgdsCloseButton from "../src/components/CloseButton/sgds-close-button";
 
 describe("sgds-file-upload", () => {
   it("should be able to pass in content in between the slot", async () => {

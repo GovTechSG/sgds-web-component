@@ -7,7 +7,7 @@ import badgeStyle from "./badge.css";
 
 import SgdsElement from "../../base/sgds-element";
 import SgdsTooltip from "../Tooltip/sgds-tooltip";
-import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import SgdsCloseButton from "../CloseButton/sgds-close-button";
 
 import { getTextContent } from "../../utils/slot";
 
@@ -141,7 +141,7 @@ export class SgdsBadge extends SgdsElement {
             size="sm"
             aria-label="close the badge"
             @click=${this.close}
-            variant=${isDarkCloseButton ? "dark" : "light"}
+            tone=${isDarkCloseButton ? "fixed-dark" : "fixed-light"}
           ></sgds-close-button>`
         : nothing}
     </div>`;

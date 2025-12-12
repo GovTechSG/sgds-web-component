@@ -9,6 +9,7 @@ export * from "./Button/sgds-button";
 export * from "./Card/sgds-card";
 export * from "./Checkbox/sgds-checkbox";
 export * from "./Checkbox/sgds-checkbox-group";
+export * from "./CloseButton/sgds-close-button";
 export * from "./ComboBox/sgds-combo-box";
 export * from "./ComboBox/sgds-combo-box-option";
 export * from "./Datepicker/sgds-datepicker";

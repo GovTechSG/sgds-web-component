@@ -1,8 +1,8 @@
 import { html } from "lit";
 import { expect, fixture, waitUntil, assert } from "@open-wc/testing";
-import { SgdsCloseButton } from "../src/internals/CloseButton/sgds-close-button";
+import { SgdsCloseButton } from "../src/components/CloseButton/sgds-close-button";
 import "../src/components/Icon";
-import "../src/internals/CloseButton";
+import "../src/components/CloseButton";
 import * as sinon from "sinon";
 
 describe("<sgds-close-button>", () => {
@@ -17,35 +17,35 @@ describe("<sgds-close-button>", () => {
       `
     );
   });
-  it('should apply dark variant styles when variant="dark"', async () => {
+  it('should apply dark tone styles when variant="fixed-dark"', async () => {
     document.documentElement.style.setProperty("--sgds-color-fixed-dark", "rgb(26, 26, 26)");
 
-    const el = await fixture<SgdsCloseButton>(html`<sgds-close-button variant="dark"></sgds-close-button>`);
+    const el = await fixture<SgdsCloseButton>(html`<sgds-close-button tone="fixed-dark"></sgds-close-button>`);
 
     // Check attribute reflection
-    expect(el.getAttribute("variant")).to.equal("dark");
+    expect(el.getAttribute("tone")).to.equal("fixed-dark");
 
     // Access the rendered button
     const button = el.shadowRoot?.querySelector(".btn-close") as HTMLElement;
     expect(button).to.exist;
 
     expect(getComputedStyle(button).color).to.equal("rgb(26, 26, 26)");
-    expect(el.variant).to.equal("dark");
+    expect(el.tone).to.equal("fixed-dark");
   });
-  it('should apply light variant styles when variant="light"', async () => {
+  it('should apply light tone styles when variant="light"', async () => {
     document.documentElement.style.setProperty("--sgds-color-fixed-light", "rgb(243, 243, 243)");
 
-    const el = await fixture<SgdsCloseButton>(html`<sgds-close-button variant="light"></sgds-close-button>`);
+    const el = await fixture<SgdsCloseButton>(html`<sgds-close-button tone="fixed-light"></sgds-close-button>`);
 
     // Check attribute reflection
-    expect(el.getAttribute("variant")).to.equal("light");
+    expect(el.getAttribute("tone")).to.equal("fixed-light");
 
     // Access the rendered button
     const button = el.shadowRoot?.querySelector(".btn-close") as HTMLElement;
     expect(button).to.exist;
 
     expect(getComputedStyle(button).color).to.equal("rgb(243, 243, 243)");
-    expect(el.variant).to.equal("light");
+    expect(el.tone).to.equal("fixed-light");
   });
   it('should apply sm size styles when size="sm"', async () => {
     const el = await fixture<SgdsCloseButton>(html`<sgds-close-button size="sm"></sgds-close-button>`);

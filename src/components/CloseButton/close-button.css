@@ -8,11 +8,11 @@
   height: var(--sgds-dimension-24);
 }
 
-:host([variant="light"]) .btn-close {
+:host([tone="fixed-light"]) .btn-close {
   color: var(--sgds-color-fixed-light);
 }
 
-:host([variant="dark"]) .btn-close {
+:host([tone="fixed-dark"]) .btn-close {
   color: var(--sgds-color-fixed-dark);
 }
 
@@ -31,13 +31,20 @@
   align-items: center;
 }
 
-.btn-close:hover {
-  background-color: var(--sgds-bg-translucent);
-}
-
+.btn-close:hover,
 .btn-close:focus,
 .btn-close:focus-visible {
   background-color: var(--sgds-bg-translucent);
+}
+:host([tone="fixed-light"]) .btn-close:hover,
+:host([tone="fixed-light"]) .btn-close:focus,
+:host([tone="fixed-light"]) .btn-close:focus-visible {
+  background-color: var(--sgds-bg-translucent-fixed-light);
+}
+:host([tone="fixed-dark"]) .btn-close:hover,
+:host([tone="fixed-dark"]) .btn-close:focus,
+:host([tone="fixed-dark"]) .btn-close:focus-visible {
+  background-color: var(--sgds-bg-translucent-fixed-dark);
 }
 
 .btn-close:focus-visible {
