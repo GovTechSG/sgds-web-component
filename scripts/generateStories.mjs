@@ -50,7 +50,7 @@ for (const [key, value] of Object.entries(groupedComponents)) {
 
   // Only add in the ArgType table when there is at least one attribute
   const ArgsType = value.map(component =>
-    component.attributes
+    component.attributes || component.slots || component.events
       ? `### ${component.tagName}
 <ArgTypes of="${component.tagName}"/>\n
   `
