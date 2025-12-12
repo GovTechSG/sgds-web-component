@@ -10,6 +10,8 @@ import SgdsIcon from "../Icon/sgds-icon";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import alertBannerStyles from "./system-banner.css";
 import SgdsSystemBannerItem from "./sgds-system-banner-item";
+import { SystemBannerChildCountContext } from "./system-banner-context";
+import { provide } from "@lit/context";
 
 /**
  * @summary The system banner component for displaying important messages to users at the application level.
@@ -45,7 +47,9 @@ export class SgdsSystemBanner extends SgdsElement {
   @query(".banner")
   private banner: HTMLDivElement;
 
-  @state() private childCount: number;
+  @provide({ context: SystemBannerChildCountContext })
+  @state()
+  private childCount: number;
 
   @state() private _intervalId = null;
 
@@ -56,7 +60,6 @@ export class SgdsSystemBanner extends SgdsElement {
   protected firstUpdated(changedProperties: PropertyValueMap<this>): void {
     super.firstUpdated(changedProperties);
     this.childCount = this.bannerItem.length;
-    this.setAttribute("data-total-items", this.childCount.toString());
     if (!this.show) {
       this.banner.classList.add("d-none");
     } else {

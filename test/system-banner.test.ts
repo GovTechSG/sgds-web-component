@@ -231,7 +231,7 @@ describe("<sgds-system-banner>", () => {
       "It is not recommended to have more than 5 <sgds-system-banner-item> elements."
     );
   });
-  it("if there is only one item and no slot action in banner item, sgds-system-banner-item has no data-item-index attribute, div.action does not exist", async () => {
+  it("if there is only one item and no slot action in banner item, div.action does not exist", async () => {
     const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
       <sgds-system-banner-item>one</sgds-system-banner-item>
     </sgds-system-banner>`);
@@ -263,13 +263,5 @@ describe("<sgds-system-banner>", () => {
       const bannerItemActionDiv = item.shadowRoot?.querySelector(".action") as HTMLDivElement;
       expect(bannerItemActionDiv).to.exist;
     });
-  });
-  it("data-total-items attribute is set on sgds-system-banner", async () => {
-    const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
-      <sgds-system-banner-item>one</sgds-system-banner-item>
-      <sgds-system-banner-item>two</sgds-system-banner-item>
-      <sgds-system-banner-item>three</sgds-system-banner-item>
-    </sgds-system-banner>`);
-    expect(el.getAttribute("data-total-items")).to.equal("3");
   });
 });

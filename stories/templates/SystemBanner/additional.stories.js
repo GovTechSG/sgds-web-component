@@ -10,7 +10,9 @@ const ShowMoreHookTemplate = args => {
           arcu. Aenean quis leo gravida, congue sapien eu, rhoncus ac libero scelerisque tellus maximus accumsan a
           vehicula arcu. Aenean quis leo gravida, congue sapien eu, rhoncus
         </div>
-        <a href="#" slot="action">Action</a>
+         <sgds-link size="sm" variant="light" slot="action"
+      ><a href="#">Action link<sgds-icon name="arrow-right"></sgds-icon></a
+    ></sgds-link>
       </sgds-system-banner-item>
     </sgds-system-banner>
     <sgds-modal>
