@@ -15,7 +15,7 @@ export class SgdsCloseButton extends SgdsElement {
 
   /** Specifies a large or small button */
   @property({ type: String, reflect: true }) size: "sm" | "md" = "md";
-
+  /** The tone of the close button */
   @property({ type: String, reflect: true }) tone: "default" | "fixed-dark" | "fixed-light" = "default";
 
   private _handleClick() {

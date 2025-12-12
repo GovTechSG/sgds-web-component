@@ -6,6 +6,7 @@ import "./components/Button";
 import "./components/Card";
 import "./components/ComboBox";
 import "./components/Checkbox";
+import "./components/CloseButton";
 import "./components/Datepicker";
 import "./components/DescriptionList";
 import "./components/Divider";
