@@ -20,6 +20,11 @@ import { repeat } from "lit/directives/repeat.js";
  * and a value (the actual data / ID).
  */
 type SgdsComboBoxOptionData = SgdsOptionData;
+
+export interface ISgdsComboBoxInputEventDetail {
+  displayValue: string;
+}
+
 /**
  * @summary ComboBox component is used for users to make one or more selections from a list through user input, keyboard or mouse actions
  *
@@ -27,7 +32,7 @@ type SgdsComboBoxOptionData = SgdsOptionData;
  *
  * @event sgds-select - Emitted when the combo box's selected value changes.
  * @event sgds-change - Emitted when the combo box's value changes.
- * @event sgds-input -  Emitted when user input is received and its value changes.
+ * @event sgds-input -  Emitted when user input is received and its value changes. `event.detail = { displayValue }`
  * @event sgds-focus -  Emitted when user input is focused.
  * @event sgds-blur -  Emitted when user input is blurred.
  */
@@ -62,8 +67,8 @@ export class SgdsComboBox extends SelectElement {
   @queryAssignedElements({ flatten: true, selector: "sgds-combo-box-option" })
   protected options: SgdsComboBoxOption[];
 
-  @state() optionList: SgdsComboBoxOptionData[] = [];
-  @state() emptyMenu = false;
+  @state() private optionList: SgdsComboBoxOptionData[] = [];
+  @state() private emptyMenu = false;
 
   // Used to show and hide the clear button
   @state() isFocused = false;
@@ -236,10 +241,9 @@ export class SgdsComboBox extends SelectElement {
 
   // Called each time the user types in the <sgds-input>, we set .value and show the menu
   private async _handleInputChange(e: CustomEvent) {
-    this.emit("sgds-input");
     const input = e.target as HTMLInputElement;
     this.displayValue = input.value;
-
+    this.emit<ISgdsComboBoxInputEventDetail>("sgds-input", { detail: { displayValue: this.displayValue } });
     // There is a race condition in certain situations where this.optionList is not fully updated during slotchange
     // Hence instead of using this.optionList, we have to perform a query on the <sgds-combo-box-option> elements
     const optionList = this.options.map(o => ({ value: o.value, label: o.textContent.trim() }));
