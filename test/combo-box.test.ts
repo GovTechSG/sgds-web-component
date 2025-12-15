@@ -1,4 +1,4 @@
-import { assert, aTimeout, elementUpdated, expect, fixture, waitUntil } from "@open-wc/testing";
+import { assert, aTimeout, elementUpdated, expect, fixture, oneEvent, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
@@ -8,7 +8,6 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import type { SgdsBadge, SgdsButton, SgdsCheckbox, SgdsComboBox } from "../src/components";
 import SgdsComboBoxOption from "../src/components/ComboBox/sgds-combo-box-option";
 import SgdsCloseButton from "../src/internals/CloseButton/sgds-close-button";
-import { clearPart } from "lit/directive-helpers.js";
 interface IComboBoxRenderProps {
   multiSelect?: boolean;
   value?: string;
@@ -189,14 +188,12 @@ describe("sgds-combo-box ", () => {
   it("should emit sgds-input event when input value changes", async () => {
     const el = await fixture<SgdsComboBox>(html`<sgds-combo-box></sgds-combo-box>`);
     const comboBoxInput = el.shadowRoot?.querySelector("input");
-
-    const inputHandler = sinon.spy();
-    el?.addEventListener("sgds-input", inputHandler);
+    const listener = oneEvent(el, "sgds-input");
 
     comboBoxInput?.focus();
     await sendKeys({ press: "A" });
-    waitUntil(() => inputHandler.calledOnce);
-    expect(inputHandler).to.have.been.calledOnce;
+    const event = await listener;
+    expect(event.detail).to.deep.equal({ displayValue: "A" });
   });
 
   it("should emit sgds-change event when combobox value changes", async () => {
