@@ -338,7 +338,7 @@ export const ComboBoxMenuListClearable = {
   args: {},
   parameters: {},
   tags: ["!dev"]
-}
+};
 
 const AccessDisplayValueTemplate = () => {
   return html`

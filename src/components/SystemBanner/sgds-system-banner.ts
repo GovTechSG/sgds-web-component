@@ -2,7 +2,7 @@ import { html, nothing, PropertyValueMap } from "lit";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
-import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import SgdsCloseButton from "../CloseButton/sgds-close-button";
 import { animateTo } from "../../utils/animate";
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { watch } from "../../utils/watch";
