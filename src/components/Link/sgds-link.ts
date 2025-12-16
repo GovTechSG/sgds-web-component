@@ -13,11 +13,19 @@ export class SgdsLink extends SgdsElement {
   /** Determines the size of the link */
   @property({ type: String, reflect: true })
   size: "xs" | "sm" | "md" | "lg" = "md";
-  /** when true, sets the active stylings of the link */
   @property({ type: String, reflect: true })
   variant: "primary" | "danger" | "neutral" | "light" | "dark" = "primary";
+  /** When true, sets the active stylings of the link */
+  @property({ type: Boolean, reflect: true })
+  active = false;
+  /** Disables the link */
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
 
   private _processAnchor(anchor: HTMLAnchorElement) {
+    if(this.disabled) {
+      anchor.setAttribute("disabled", "true")
+    }
     if (anchor.hasAttribute("disabled")) {
       anchor.setAttribute("href", "javascript:void(0)");
       anchor.setAttribute("tabindex", "-1");
@@ -73,7 +81,7 @@ export class SgdsLink extends SgdsElement {
 
   render() {
     /** When removing href, link is no longer focusable */
-    return html` <slot class="nav-link " @slotchange=${this._handleSlotChange}></slot> `;
+    return html`<slot class="nav-link " @slotchange=${this._handleSlotChange}></slot> `;
   }
 }
 

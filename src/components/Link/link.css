@@ -9,37 +9,11 @@
 :host([variant="neutral"]) {
   --color-emphasis: var(--sgds-color-default);
 }
-:host([variant="light"]){
-  --color-emphasis:var(--sgds-color-fixed-light);
+:host([variant="light"]) {
+  --color-emphasis: var(--sgds-color-fixed-light);
 }
-:host([variant="dark"]){
-  --color-emphasis:var(--sgds-color-fixed-dark);
-}
-
-::slotted(*) {
-  display: flex;
-  align-items: center;
-}
-
-.nav-link::slotted(a:hover),
-.nav-link::slotted(a[active]),
-.nav-link::slotted(a:focus),
-.nav-link::slotted(a:focus-visible) {
-  color: var(--color-emphasis) !important;
-  text-decoration-color: var(--color-emphasis) !important;
-  text-decoration: underline !important;
-  text-underline-offset: 2px;
-  transition: text-underline-offset 300ms ease ;
-}
-
-.nav-link::slotted(a:focus-visible:not([disabled])) {
-  outline: var(--sgds-outline-focus);
-  outline-offset: var(--sgds-outline-offset-focus);
-}
-
-.nav-link::slotted(a[disabled]) {
-  opacity: var(--sgds-opacity-50);
-  cursor: not-allowed;
+:host([variant="dark"]) {
+  --color-emphasis: var(--sgds-color-fixed-dark);
 }
 
 :host([variant="danger"]) .nav-link::slotted(a) {
@@ -90,61 +64,102 @@
   color: var(--color-emphasis, --sgds-color-fixed-dark);
 }
 
-.nav-link::slotted(a) {
-  /* If clash of styles happens from other light dom css on anchor tag, will need to add !important here */
-  color: var(--sgds-link-color-default);
-  cursor: pointer;
-}
-.nav-link::slotted(a:not(:hover):not(:focus):not(:focus-visible)){
-  /* text-decoration: none !important; */
-    text-decoration: underline solid transparent !important;
-    text-underline-offset: 0px;
-}
-
 :host([size="md"]) .nav-link::slotted(a) {
   line-height: var(--sgds-line-height-24) !important;
   font-size: var(--sgds-font-size-2) !important;
+  --text-under-line-offset: 3px;
 }
 :host([size="lg"]) .nav-link::slotted(a) {
   font-size: var(--sgds-font-size-3) !important;
   line-height: var(--sgds-line-height-32) !important;
+  --text-under-line-offset: 4px;
 }
 
 :host([size="sm"]) .nav-link::slotted(a) {
-  line-height: var(--sgds-line-height-20)!important;
+  line-height: var(--sgds-line-height-20) !important;
   font-size: var(--sgds-font-size-1) !important;
-}
-
-:host([size="sm"]) .nav-link::slotted(a)::after {
-  width: var(--sgds-icon-size-md) !important;
-  height: var(--sgds-icon-size-md) !important;
-  -webkit-mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.14462 3.66667L8.1665 3.66667C8.44265 3.66667 8.6665 3.89053 8.6665 4.16667C8.6665 4.44281 8.44265 4.66667 8.1665 4.66667C7.45819 4.66667 6.95702 4.66706 6.56522 4.69907C6.17927 4.73061 5.94368 4.79032 5.75852 4.88466C5.3822 5.07641 5.07624 5.38237 4.88449 5.75869C4.79015 5.94385 4.73044 6.17943 4.6989 6.56539C4.66689 6.95719 4.6665 7.45836 4.6665 8.16667V11.8333C4.6665 12.5417 4.66689 13.0428 4.6989 13.4346C4.73044 13.8206 4.79015 14.0562 4.88449 14.2413C5.07624 14.6176 5.3822 14.9236 5.75852 15.1154C5.94368 15.2097 6.17927 15.2694 6.56522 15.3009C6.95702 15.333 7.45819 15.3333 8.1665 15.3333H11.8332C12.5415 15.3333 13.0427 15.333 13.4345 15.3009C13.8204 15.2694 14.056 15.2097 14.2412 15.1154C14.6175 14.9236 14.9234 14.6176 15.1152 14.2413C15.2095 14.0562 15.2692 13.8206 15.3008 13.4346C15.3328 13.0428 15.3332 12.5417 15.3332 11.8333C15.3332 11.5572 15.557 11.3333 15.8332 11.3333C16.1093 11.3333 16.3332 11.5572 16.3332 11.8333V11.8552C16.3332 12.5367 16.3332 13.0788 16.2974 13.5161C16.2609 13.9639 16.1843 14.3457 16.0062 14.6953C15.7186 15.2598 15.2596 15.7187 14.6951 16.0064C14.3455 16.1845 13.9637 16.261 13.5159 16.2976C13.0786 16.3333 12.5366 16.3333 11.855 16.3333H8.14464C7.46311 16.3333 6.92109 16.3333 6.48379 16.2976C6.03599 16.261 5.65416 16.1845 5.30453 16.0064C4.74005 15.7187 4.2811 15.2598 3.99348 14.6953C3.81534 14.3457 3.73881 13.9639 3.70223 13.5161C3.6665 13.0788 3.6665 12.5367 3.6665 11.8552V8.14479C3.6665 7.46327 3.6665 6.92125 3.70223 6.48396C3.73881 6.03616 3.81534 5.65432 3.99348 5.3047C4.2811 4.74021 4.74005 4.28127 5.30453 3.99365C5.65416 3.81551 6.03599 3.73898 6.48379 3.70239C6.92109 3.66666 7.4631 3.66667 8.14462 3.66667ZM10.3332 4.16668C10.3332 3.89054 10.557 3.66668 10.8332 3.66668H15.8332C16.1093 3.66668 16.3331 3.89054 16.3332 4.16668L16.3332 9.16668C16.3332 9.44282 16.1093 9.66668 15.8332 9.66668C15.557 9.66668 15.3332 9.44282 15.3332 9.16668L15.3332 5.37379L10.3534 10.3536C10.1581 10.5488 9.84155 10.5488 9.64628 10.3536C9.45102 10.1583 9.45102 9.84172 9.64628 9.64645L14.626 4.66668H10.8332C10.557 4.66668 10.3332 4.44282 10.3332 4.16668Z" fill="%230E0E0E"/></svg>') !important;
-  mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.14462 3.66667L8.1665 3.66667C8.44265 3.66667 8.6665 3.89053 8.6665 4.16667C8.6665 4.44281 8.44265 4.66667 8.1665 4.66667C7.45819 4.66667 6.95702 4.66706 6.56522 4.69907C6.17927 4.73061 5.94368 4.79032 5.75852 4.88466C5.3822 5.07641 5.07624 5.38237 4.88449 5.75869C4.79015 5.94385 4.73044 6.17943 4.6989 6.56539C4.66689 6.95719 4.6665 7.45836 4.6665 8.16667V11.8333C4.6665 12.5417 4.66689 13.0428 4.6989 13.4346C4.73044 13.8206 4.79015 14.0562 4.88449 14.2413C5.07624 14.6176 5.3822 14.9236 5.75852 15.1154C5.94368 15.2097 6.17927 15.2694 6.56522 15.3009C6.95702 15.333 7.45819 15.3333 8.1665 15.3333H11.8332C12.5415 15.3333 13.0427 15.333 13.4345 15.3009C13.8204 15.2694 14.056 15.2097 14.2412 15.1154C14.6175 14.9236 14.9234 14.6176 15.1152 14.2413C15.2095 14.0562 15.2692 13.8206 15.3008 13.4346C15.3328 13.0428 15.3332 12.5417 15.3332 11.8333C15.3332 11.5572 15.557 11.3333 15.8332 11.3333C16.1093 11.3333 16.3332 11.5572 16.3332 11.8333V11.8552C16.3332 12.5367 16.3332 13.0788 16.2974 13.5161C16.2609 13.9639 16.1843 14.3457 16.0062 14.6953C15.7186 15.2598 15.2596 15.7187 14.6951 16.0064C14.3455 16.1845 13.9637 16.261 13.5159 16.2976C13.0786 16.3333 12.5366 16.3333 11.855 16.3333H8.14464C7.46311 16.3333 6.92109 16.3333 6.48379 16.2976C6.03599 16.261 5.65416 16.1845 5.30453 16.0064C4.74005 15.7187 4.2811 15.2598 3.99348 14.6953C3.81534 14.3457 3.73881 13.9639 3.70223 13.5161C3.6665 13.0788 3.6665 12.5367 3.6665 11.8552V8.14479C3.6665 7.46327 3.6665 6.92125 3.70223 6.48396C3.73881 6.03616 3.81534 5.65432 3.99348 5.3047C4.2811 4.74021 4.74005 4.28127 5.30453 3.99365C5.65416 3.81551 6.03599 3.73898 6.48379 3.70239C6.92109 3.66666 7.4631 3.66667 8.14462 3.66667ZM10.3332 4.16668C10.3332 3.89054 10.557 3.66668 10.8332 3.66668H15.8332C16.1093 3.66668 16.3331 3.89054 16.3332 4.16668L16.3332 9.16668C16.3332 9.44282 16.1093 9.66668 15.8332 9.66668C15.557 9.66668 15.3332 9.44282 15.3332 9.16668L15.3332 5.37379L10.3534 10.3536C10.1581 10.5488 9.84155 10.5488 9.64628 10.3536C9.45102 10.1583 9.45102 9.84172 9.64628 9.64645L14.626 4.66668H10.8332C10.557 4.66668 10.3332 4.44282 10.3332 4.16668Z" fill="%230E0E0E"/></svg>') !important;
+  --text-under-line-offset: 2.8px;
 }
 
 :host([size="xs"]) .nav-link::slotted(a) {
   line-height: var(--sgds-line-height-16) !important;
   font-size: var(--sgds-font-size-0) !important;
+
+  --text-under-line-offset: 2.2px;
 }
-/* .un {
-  display: inline-block;
+/* External Links */
+.nav-link::slotted(a)::after {
+  -webkit-mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.14462 3.66667L8.1665 3.66667C8.44265 3.66667 8.6665 3.89053 8.6665 4.16667C8.6665 4.44281 8.44265 4.66667 8.1665 4.66667C7.45819 4.66667 6.95702 4.66706 6.56522 4.69907C6.17927 4.73061 5.94368 4.79032 5.75852 4.88466C5.3822 5.07641 5.07624 5.38237 4.88449 5.75869C4.79015 5.94385 4.73044 6.17943 4.6989 6.56539C4.66689 6.95719 4.6665 7.45836 4.6665 8.16667V11.8333C4.6665 12.5417 4.66689 13.0428 4.6989 13.4346C4.73044 13.8206 4.79015 14.0562 4.88449 14.2413C5.07624 14.6176 5.3822 14.9236 5.75852 15.1154C5.94368 15.2097 6.17927 15.2694 6.56522 15.3009C6.95702 15.333 7.45819 15.3333 8.1665 15.3333H11.8332C12.5415 15.3333 13.0427 15.333 13.4345 15.3009C13.8204 15.2694 14.056 15.2097 14.2412 15.1154C14.6175 14.9236 14.9234 14.6176 15.1152 14.2413C15.2095 14.0562 15.2692 13.8206 15.3008 13.4346C15.3328 13.0428 15.3332 12.5417 15.3332 11.8333C15.3332 11.5572 15.557 11.3333 15.8332 11.3333C16.1093 11.3333 16.3332 11.5572 16.3332 11.8333V11.8552C16.3332 12.5367 16.3332 13.0788 16.2974 13.5161C16.2609 13.9639 16.1843 14.3457 16.0062 14.6953C15.7186 15.2598 15.2596 15.7187 14.6951 16.0064C14.3455 16.1845 13.9637 16.261 13.5159 16.2976C13.0786 16.3333 12.5366 16.3333 11.855 16.3333H8.14464C7.46311 16.3333 6.92109 16.3333 6.48379 16.2976C6.03599 16.261 5.65416 16.1845 5.30453 16.0064C4.74005 15.7187 4.2811 15.2598 3.99348 14.6953C3.81534 14.3457 3.73881 13.9639 3.70223 13.5161C3.6665 13.0788 3.6665 12.5367 3.6665 11.8552V8.14479C3.6665 7.46327 3.6665 6.92125 3.70223 6.48396C3.73881 6.03616 3.81534 5.65432 3.99348 5.3047C4.2811 4.74021 4.74005 4.28127 5.30453 3.99365C5.65416 3.81551 6.03599 3.73898 6.48379 3.70239C6.92109 3.66666 7.4631 3.66667 8.14462 3.66667ZM10.3332 4.16668C10.3332 3.89054 10.557 3.66668 10.8332 3.66668H15.8332C16.1093 3.66668 16.3331 3.89054 16.3332 4.16668L16.3332 9.16668C16.3332 9.44282 16.1093 9.66668 15.8332 9.66668C15.557 9.66668 15.3332 9.44282 15.3332 9.16668L15.3332 5.37379L10.3534 10.3536C10.1581 10.5488 9.84155 10.5488 9.64628 10.3536C9.45102 10.1583 9.45102 9.84172 9.64628 9.64645L14.626 4.66668H10.8332C10.557 4.66668 10.3332 4.44282 10.3332 4.16668Z" fill="%230E0E0E"/></svg>') !important;
+  mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.14462 3.66667L8.1665 3.66667C8.44265 3.66667 8.6665 3.89053 8.6665 4.16667C8.6665 4.44281 8.44265 4.66667 8.1665 4.66667C7.45819 4.66667 6.95702 4.66706 6.56522 4.69907C6.17927 4.73061 5.94368 4.79032 5.75852 4.88466C5.3822 5.07641 5.07624 5.38237 4.88449 5.75869C4.79015 5.94385 4.73044 6.17943 4.6989 6.56539C4.66689 6.95719 4.6665 7.45836 4.6665 8.16667V11.8333C4.6665 12.5417 4.66689 13.0428 4.6989 13.4346C4.73044 13.8206 4.79015 14.0562 4.88449 14.2413C5.07624 14.6176 5.3822 14.9236 5.75852 15.1154C5.94368 15.2097 6.17927 15.2694 6.56522 15.3009C6.95702 15.333 7.45819 15.3333 8.1665 15.3333H11.8332C12.5415 15.3333 13.0427 15.333 13.4345 15.3009C13.8204 15.2694 14.056 15.2097 14.2412 15.1154C14.6175 14.9236 14.9234 14.6176 15.1152 14.2413C15.2095 14.0562 15.2692 13.8206 15.3008 13.4346C15.3328 13.0428 15.3332 12.5417 15.3332 11.8333C15.3332 11.5572 15.557 11.3333 15.8332 11.3333C16.1093 11.3333 16.3332 11.5572 16.3332 11.8333V11.8552C16.3332 12.5367 16.3332 13.0788 16.2974 13.5161C16.2609 13.9639 16.1843 14.3457 16.0062 14.6953C15.7186 15.2598 15.2596 15.7187 14.6951 16.0064C14.3455 16.1845 13.9637 16.261 13.5159 16.2976C13.0786 16.3333 12.5366 16.3333 11.855 16.3333H8.14464C7.46311 16.3333 6.92109 16.3333 6.48379 16.2976C6.03599 16.261 5.65416 16.1845 5.30453 16.0064C4.74005 15.7187 4.2811 15.2598 3.99348 14.6953C3.81534 14.3457 3.73881 13.9639 3.70223 13.5161C3.6665 13.0788 3.6665 12.5367 3.6665 11.8552V8.14479C3.6665 7.46327 3.6665 6.92125 3.70223 6.48396C3.73881 6.03616 3.81534 5.65432 3.99348 5.3047C4.2811 4.74021 4.74005 4.28127 5.30453 3.99365C5.65416 3.81551 6.03599 3.73898 6.48379 3.70239C6.92109 3.66666 7.4631 3.66667 8.14462 3.66667ZM10.3332 4.16668C10.3332 3.89054 10.557 3.66668 10.8332 3.66668H15.8332C16.1093 3.66668 16.3331 3.89054 16.3332 4.16668L16.3332 9.16668C16.3332 9.44282 16.1093 9.66668 15.8332 9.66668C15.557 9.66668 15.3332 9.44282 15.3332 9.16668L15.3332 5.37379L10.3534 10.3536C10.1581 10.5488 9.84155 10.5488 9.64628 10.3536C9.45102 10.1583 9.45102 9.84172 9.64628 9.64645L14.626 4.66668H10.8332C10.557 4.66668 10.3332 4.44282 10.3332 4.16668Z" fill="%230E0E0E"/></svg>') !important;
 }
 
-.un::after {
-  content: "";
-  width: 0px;
-  height: 1px;
-  display: block;
-  background-color: var(--color-emphasis);
-  transition: 300ms;
+:host([size="xs"]) .nav-link::slotted(a)::after {
+  width: var(--sgds-icon-size-sm) !important;
+  height: var(--sgds-icon-size-sm) !important;
+}
+:host([size="sm"]) .nav-link::slotted(a)::after {
+  width: var(--sgds-icon-size-md) !important;
+  height: var(--sgds-icon-size-md) !important;
+}
+:host([size="md"]) .nav-link::slotted(a)::after {
+  width: var(--sgds-icon-size-lg) !important;
+  height: var(--sgds-icon-size-lg) !important;
+}
+:host([size="lg"]) .nav-link::slotted(a)::after {
+  width: var(--sgds-icon-size-xl) !important;
+  height: var(--sgds-icon-size-xl) !important;
 }
 
-.un:hover::after, .un:focus::after, .un:focus-visible::after {
-  width: 100%;
+::slotted(*) {
+  display: flex;
+  align-items: center;
 }
 
+.nav-link::slotted(a:focus-visible:not([disabled])) {
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
+}
+
+.nav-link::slotted(a[disabled]) {
+  opacity: var(--sgds-opacity-50);
+  cursor: not-allowed;
+}
+.nav-link::slotted(a) {
+  /* If clash of styles happens from other light dom css on anchor tag, will need to add !important here */
+  color: var(--sgds-link-color-default);
+  cursor: pointer;
+}
+
+:host(:not([active])) .nav-link::slotted(a:not(:hover)) {
+  text-decoration: underline solid transparent !important;
+  text-underline-offset: 0px;
+  transition: text-underline-offset var(--sgds-motion-duration-standard) var(--sgds-motion-easing-enter),
+    text-decoration-color var(--sgds-motion-duration-standard) var(--sgds-motion-easing-enter);
+}
+
+:host([active]) .nav-link::slotted(a),
+.nav-link::slotted(a:hover),
+.nav-link::slotted(a:focus),
+.nav-link::slotted(a:focus-visible) {
+  color: var(--color-emphasis) !important;
+}
+
+:host([active]) .nav-link::slotted(a),
+.nav-link::slotted(a:hover) {
+  text-decoration-color: var(--color-emphasis) !important;
+  text-underline-offset: var(--text-under-line-offset);
+  transition: text-underline-offset var(--sgds-motion-duration-standard) var(--sgds-motion-easing-enter),
+    text-decoration-color var(--sgds-motion-duration-standard) var(--sgds-motion-easing-enter);
+}
+
+:host([disabled]) .nav-link::slotted(a),
+.nav-link::slotted(a[disabled]) {
+  text-decoration: none !important;
+}
 @media (prefers-reduced-motion: reduce) {
-  .un::after {
+  :host(:not([active])) .nav-link::slotted(a:not(:hover)),
+  :host([active]) .nav-link::slotted(a),
+  .nav-link::slotted(a:hover) {
     transition: none;
   }
-} */
+}
