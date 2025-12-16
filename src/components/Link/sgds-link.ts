@@ -23,8 +23,8 @@ export class SgdsLink extends SgdsElement {
   disabled = false;
 
   private _processAnchor(anchor: HTMLAnchorElement) {
-    if(this.disabled) {
-      anchor.setAttribute("disabled", "true")
+    if (this.disabled) {
+      anchor.setAttribute("disabled", "true");
     }
     if (anchor.hasAttribute("disabled")) {
       anchor.setAttribute("href", "javascript:void(0)");
