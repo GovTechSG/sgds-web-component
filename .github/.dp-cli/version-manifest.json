@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0.0",
+  "currentInstallation": {
+    "version": "2.0.0",
+    "installedAt": "2025-12-10T09:12:15.495Z",
+    "command": "--dp-agents",
+    "source": "default-latest",
+    "files": [
+      "/Users/chonglukhei/Repositories/singapore-design-system/sgds-web-component/.github/agents/dp.code-reviewer-v1.agent.md",
+      "/Users/chonglukhei/Repositories/singapore-design-system/sgds-web-component/.github/agents/dp.docs-agent-v1.agent.md",
+      "/Users/chonglukhei/Repositories/singapore-design-system/sgds-web-component/.github/agents/dp.im8-checker-v1.agent.md",
+      "/Users/chonglukhei/Repositories/singapore-design-system/sgds-web-component/.github/agents/dp.onboarding-agent-v1.agent.md",
+      "/Users/chonglukhei/Repositories/singapore-design-system/sgds-web-component/.github/agents/dp.release-manager-v1.agent.md",
+      "/Users/chonglukhei/Repositories/singapore-design-system/sgds-web-component/.github/agents/dp.test-agent-v1.agent.md",
+      "/Users/chonglukhei/Repositories/singapore-design-system/sgds-web-component/.github/prompts/dp.code-reviewer.prompt.md",
+      "/Users/chonglukhei/Repositories/singapore-design-system/sgds-web-component/.github/prompts/dp.docs-agent.prompt.md",
+      "/Users/chonglukhei/Repositories/singapore-design-system/sgds-web-component/.github/prompts/dp.im8-checker.prompt.md",
+      "/Users/chonglukhei/Repositories/singapore-design-system/sgds-web-component/.github/prompts/dp.onboarding-agent.prompt.md",
+      "/Users/chonglukhei/Repositories/singapore-design-system/sgds-web-component/.github/prompts/dp.release-manager.prompt.md",
+      "/Users/chonglukhei/Repositories/singapore-design-system/sgds-web-component/.github/prompts/dp.test-agent.prompt.md",
+      "/Users/chonglukhei/Repositories/singapore-design-system/sgds-web-component/.github/instructions/dp.markdown-v1.instructions.md",
+      "/Users/chonglukhei/Repositories/singapore-design-system/sgds-web-component/.github/instructions/dp.self-explanatory-code-commenting-v1.instructions.md"
+    ]
+  },
+  "history": [
+    {
+      "version": "2.0.0",
+      "timestamp": "2025-12-10T09:12:15.495Z",
+      "operation": "install",
+      "outcome": "success"
+    }
+  ]
+}

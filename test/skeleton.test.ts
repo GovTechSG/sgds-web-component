@@ -9,7 +9,7 @@ describe("<sgds-skeleton>", () => {
     assert.shadowDom.equal(
       el,
       `
-          <div class="skeleton"></div>
+          <div class="skeleton" style=""></div>
         `
     );
   });
@@ -18,7 +18,7 @@ describe("<sgds-skeleton>", () => {
     assert.shadowDom.equal(
       el,
       `
-          <div class="skeleton skeleton-paragraph auto-size-rows">
+          <div class="skeleton skeleton-paragraph auto-size-rows" style="">
           <div class="skeleton-row-0"></div>
           <div class="skeleton-row-1"></div>
           <div class="skeleton-row-2"></div>
@@ -31,7 +31,7 @@ describe("<sgds-skeleton>", () => {
     assert.shadowDom.equal(
       el,
       `
-          <div class="skeleton sheen">
+          <div class="skeleton sheen" style="">
           </div>
         `
     );
@@ -41,7 +41,7 @@ describe("<sgds-skeleton>", () => {
     assert.shadowDom.equal(
       el,
       `
-          <div class="skeleton auto-size-rows skeleton-paragraph">
+          <div class="skeleton auto-size-rows skeleton-paragraph" style="">
           <div class="skeleton-row-0 sheen"></div>
           <div class="skeleton-row-1 sheen"></div>
           <div class="skeleton-row-2 sheen"></div>

@@ -22,7 +22,7 @@ nav {
   margin: auto;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .navbar {
     padding: 0px var(--sgds-mainnav-mobile-padding-x);
   }
@@ -68,7 +68,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdown)) {
     padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
   }
@@ -94,7 +94,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   overflow-y: auto;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 512px) {
   .navbar-expand-sm {
     flex-wrap: nowrap;
     justify-content: flex-start;
