@@ -90,3 +90,23 @@ comboBox.filterFunction = (inputValue, menuItem) => {
 <Canvas of={ComboBoxStories.ComboBoxCustomFilter}>
   <Story of={ComboBoxStories.ComboBoxCustomFilter} />
 </Canvas>
+
+## Access input's display value via custom event: sgds-input
+
+Hook onto the custom event: `sgds-input` to obtain the display value of the input 
+
+<Canvas of={ComboBoxStories.AccessDisplayValue}>
+  <Story of={ComboBoxStories.AccessDisplayValue} />
+</Canvas>
+
+### Types
+
+```ts
+
+import type { ISgdsComboBoxInputEventDetail } from '@govtechsg/sgds-web-component/components/ComboBox/sgds-combo-box';
+
+const inputHandler = (e: CustomEvent<ISgdsComboBoxInputEventDetail>) => {
+  const displayValue = e.detail.displayValue
+}
+
+```
