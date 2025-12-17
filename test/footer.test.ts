@@ -204,17 +204,17 @@ describe("SgdsFooterItem", () => {
     expect(titleSlot).to.exist;
     expect(defaultSlot).to.exist;
   });
-  it("slotted sgds-link should have tone=fixed-light and size=sm attributes added", async() => {
+  it("slotted sgds-link should have tone=fixed-light and size=sm attributes added", async () => {
     const el = await fixture<SgdsFooter>(html`<sgds-footer-item>
       <div slot="title">Application Guidelines</div>
       <sgds-link><a href="/application-guidelines/lorem-ipsum-one/second-level-a/">hello world</a></sgds-link>
       <sgds-link><a href="/application-guidelines/lorem-ipsum-one/part-A/">Second Level B</a></sgds-link>
       <sgds-link><a href="/application-guidelines/lorem-ipsum-three/">Lorem Ipsum Three</a></sgds-link>
     </sgds-footer-item>`);
-    const links = el.querySelectorAll<SgdsLink>("sgds-link")
+    const links = el.querySelectorAll<SgdsLink>("sgds-link");
     links.forEach(l => {
-      expect(l.tone).to.equal("fixed-light")
-      expect(l.size).to.equal("sm")
-    })
-  })
+      expect(l.tone).to.equal("fixed-light");
+      expect(l.size).to.equal("sm");
+    });
+  });
 });

@@ -13,20 +13,28 @@ export const Template = args => {
         termsOfUseHref=${ifDefined(args.termsOfUseHref)}
         copyrightLiner=${ifDefined(args.copyrightLiner)}
       ></sgds-footer>
-      <sgds-footer contacthref="https://form.gov.sg/" feedbackhref="https://form.gov.sg/" faqhref="https://form.gov.sg/" privacyhref="https://www.designsystem.tech.gov.sg/privacy/" termsofusehref="https://www.designsystem.tech.gov.sg/terms-of-use/">
+      <sgds-footer
+        contacthref="https://form.gov.sg/"
+        feedbackhref="https://form.gov.sg/"
+        faqhref="https://form.gov.sg/"
+        privacyhref="https://www.designsystem.tech.gov.sg/privacy/"
+        termsofusehref="https://www.designsystem.tech.gov.sg/terms-of-use/"
+      >
         <h2 slot="title">Name of portal/digital service</h2>
         <p slot="description">Description of portal/digital service</p>
         <sgds-footer-item slot="items">
           <div slot="title">Application Guidelines</div>
           <sgds-link><a href="/application-guidelines/lorem-ipsum-one/second-level-a/">hello world</a></sgds-link>
-           <sgds-link><a href="/application-guidelines/lorem-ipsum-one/part-A/">Second Level B</a></sgds-link>
-           <sgds-link><a href="/application-guidelines/lorem-ipsum-three/">Lorem Ipsum Three</a></sgds-link>
+          <sgds-link><a href="/application-guidelines/lorem-ipsum-one/part-A/">Second Level B</a></sgds-link>
+          <sgds-link><a href="/application-guidelines/lorem-ipsum-three/">Lorem Ipsum Three</a></sgds-link>
         </sgds-footer-item>
         <sgds-footer-item slot="items">
           <div slot="title">Legislation</div>
           <sgds-link><a href="#">Legislation</a></sgds-link>
           <sgds-link><a href="https://en.wikipedia.org/wiki/Year" target="_blank">External Link One</a></sgds-link>
-          <sgds-link><a href="https://en.wikipedia.org/wiki/Spring_(season)" target="_blank">External Link Two</a></sgds-link>
+          <sgds-link
+            ><a href="https://en.wikipedia.org/wiki/Spring_(season)" target="_blank">External Link Two</a></sgds-link
+          >
         </sgds-footer-item>
         <sgds-footer-item slot="items">
           <div slot="title">Resources</div>
