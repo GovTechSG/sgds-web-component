@@ -9,13 +9,16 @@ import SgdsElement from "../../base/sgds-element";
  * @slot default - The link of the item. Pass in anchor tags into this slot
  */
 export class SgdsBreadcrumbItem extends SgdsElement {
-  static styles = [...SgdsLink.styles, breadcrumbItemStyle];
+  static styles = [breadcrumbItemStyle];
+  static dependencies: Record<string, typeof SgdsElement> = {
+    "sgds-link": SgdsLink
+  };
   /** Indicates the link matches the current location of the page. Programmatically handled by SgdsBreadcrumb to set this prop to true for the last breadcrumb item  */
   @property({ type: Boolean, reflect: true }) active = false;
 
   render() {
     return html`
-      <slot class="nav-link"></slot>
+      <sgds-link><slot class="nav-link"></slot></sgds-link>
       <div class="separator">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path
