@@ -121,7 +121,13 @@ describe("sgds-breadcrumb-item", () => {
     const el = await fixture(html`<sgds-breadcrumb-item></sgds-breadcrumb-item>`);
     assert.shadowDom.equal(
       el,
-      `<slot class="nav-link"></slot>
+      `<sgds-link
+        size="md"
+        tone="primary"
+        variant="primary"
+      >
+      <slot class="nav-link"></slot>
+      </sgds-link>
       <div class="separator">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path

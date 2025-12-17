@@ -1,11 +1,11 @@
-import { nothing, PropertyValueMap } from "lit";
+import { PropertyValueMap } from "lit";
 import { property, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html, literal } from "lit/static-html.js";
 import { CardElement } from "../../base/card-element";
 import { HasSlotController } from "../../utils/slot";
 import { CardImageAdjustment, CardImagePosition } from "./types";
-import SgdsLink from "../Link/sgds-link";
+import type SgdsLink from "../Link/sgds-link";
 import cardStyle from "./card.css";
 
 /**

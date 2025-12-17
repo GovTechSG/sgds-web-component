@@ -3,7 +3,7 @@ import { html, literal } from "lit/static-html.js";
 import { property, queryAssignedElements, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
-import SgdsLink from "../Link/sgds-link";
+import type SgdsLink from "../Link/sgds-link";
 import IconCardStyle from "./icon-card.css";
 
 /**

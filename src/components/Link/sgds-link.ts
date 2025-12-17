@@ -13,8 +13,12 @@ export class SgdsLink extends SgdsElement {
   /** Determines the size of the link */
   @property({ type: String, reflect: true })
   size: "xs" | "sm" | "md" | "lg" = "md";
+  /** Sets the colour of the link @deprecated since 3.6.0 */
   @property({ type: String, reflect: true })
   variant: "primary" | "danger" | "neutral" | "light" | "dark" = "primary";
+  /** Sets the colour of the link, replaces variant prop  */
+  @property({ type: String, reflect: true })
+  tone: "primary" | "danger" | "neutral" | "fixed-light" | "fixed-dark" = "primary";
   /** When true, sets the active stylings of the link */
   @property({ type: Boolean, reflect: true })
   active = false;

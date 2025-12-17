@@ -78,7 +78,6 @@ slot:not([name])::slotted(*) {
 
 .footer-mandatory-links ul li a {
   color: var(--sgds-color-fixed-light);
-  text-decoration: none;
 }
 
 .footer-mandatory-links ul li a:hover,

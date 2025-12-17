@@ -1,4 +1,4 @@
-import { assert, aTimeout, elementUpdated, expect, fixture, nextFrame, oneEvent, waitUntil } from "@open-wc/testing";
+import { assert, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import { SgdsIcon, SgdsLink } from "../src/components";
 import "../src/index";
