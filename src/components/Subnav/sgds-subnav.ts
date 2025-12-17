@@ -1,6 +1,6 @@
 import SgdsElement from "../../base/sgds-element";
 import { html, PropertyValueMap } from "lit";
-import { query, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { watch } from "../../utils/watch";
 import { waitForEvent } from "../../utils/event";
@@ -10,6 +10,7 @@ import { LG_BREAKPOINT, MD_BREAKPOINT } from "../../utils/breakpoints";
 import SgdsIcon from "../Icon/sgds-icon";
 import subnavStyle from "./subnav.css";
 import gridStyle from "../../css/grid.css";
+import { HasSlotController } from "../../utils/slot";
 
 const VALID_KEYS = ["Enter", " "];
 
@@ -33,6 +34,9 @@ export class SgdsSubnav extends SgdsElement {
   static dependencies = {
     "sgds-icon": SgdsIcon
   };
+
+  /** Used only for SSR to indicate the presence of the `actions` slot. */
+  @property({ type: Boolean }) hasActionsSlot = false;
 
   @query("nav")
   private nav: HTMLElement;
@@ -58,6 +62,8 @@ export class SgdsSubnav extends SgdsElement {
   @state()
   private isMenuOpen = false;
 
+  private readonly hasSlotController = new HasSlotController(this, "actions");
+
   connectedCallback() {
     super.connectedCallback();
 
@@ -77,6 +83,10 @@ export class SgdsSubnav extends SgdsElement {
     super.firstUpdated(changedProperties);
 
     this._handleResize();
+  }
+
+  updated() {
+    if (!this.hasActionsSlot) this.hasActionsSlot = this.hasSlotController.test("actions");
   }
 
   private _handleResize = async () => {
@@ -238,7 +248,12 @@ export class SgdsSubnav extends SgdsElement {
             <div class="subnav-nav">
               <slot></slot>
             </div>
-            <div class="subnav-actions">
+            <div
+              class="${classMap({
+                "subnav-actions": true,
+                "no-actions": !this.hasActionsSlot
+              })}"
+            >
               <slot name="actions"></slot>
             </div>
           </div>

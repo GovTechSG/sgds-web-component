@@ -78,6 +78,10 @@ slot[name="header"]::slotted(*) {
   width: 100%;
 }
 
+.no-actions {
+  display: none;
+}
+
 slot[name="actions"]::slotted(*) {
   width: 100%;
 }

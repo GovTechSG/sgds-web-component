@@ -4,10 +4,10 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import alertBannerItemStyles from "./system-banner-item.css";
 import { HasSlotController } from "../../utils/slot";
+import { SystemBannerChildCountContext } from "./system-banner-context";
+import { consume } from "@lit/context";
 
 /**
- * @summary `sgds-system-banner-item` is the subcomponent for `sgds-system-banner`. Each banner item represents a message in the system banner.
- *
  * @slot icon - The slot to pass in an icon element.
  * @slot action - The slot to pass in an action element such as a button or link
  * @slot default - The slot to pass in the message content of the banner item. Text will be clamped at 2 lines in desktop view and 5 lines in mobile view
@@ -20,6 +20,10 @@ export class SgdsSystemBannerItem extends SgdsElement {
   @property({ type: Boolean }) hasActionSlot = false;
 
   @state() private clamped = false;
+
+  @consume({ context: SystemBannerChildCountContext, subscribe: true })
+  @state()
+  private siblingsCount = 0;
 
   private readonly hasSlotController = new HasSlotController(this, "action");
 
@@ -52,7 +56,6 @@ export class SgdsSystemBannerItem extends SgdsElement {
     this.emit("sgds-show-more");
   }
   render() {
-    const banner = this.closest("sgds-system-banner");
     return html`
       <div class="banner-item">
         <slot name="icon"></slot>
@@ -67,7 +70,7 @@ export class SgdsSystemBannerItem extends SgdsElement {
                 >`
               : nothing}
           </div>
-          ${this.hasActionSlot || parseInt(banner.getAttribute("data-total-items")) > 1
+          ${this.hasActionSlot || this.siblingsCount > 1
             ? html`
                 <div class="action">
                   <slot name="action"></slot>
