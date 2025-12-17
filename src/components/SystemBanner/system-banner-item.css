@@ -74,15 +74,14 @@ slot[name="action"]::slotted(a) {
   gap: var(--sgds-gap-xs);
   flex: 1 0 0;
   /* padding-right prevents overlap of long message with close button */
-  padding-right: var(--sgds-padding-2-xl);
-
+  margin-right: var(--sgds-margin-md);
 }
 /* DESKTOP */
 @media (min-width: 512px) {
   .banner-item__message_and__action {
     flex-direction: row;
-    gap: calc(var(--sgds-gap-sm) + var(--sgds-padding-2-xl));
-    padding-right: unset;
+    gap: calc(var(--sgds-gap-sm) + var(--sgds-margin-md));
+    margin-right: unset;
   }
   .action {
     margin-top: 0;
