@@ -1,17 +1,27 @@
-## Danger variant 
+## Tone
 
-Danger variant for link
-
-<Canvas of={LinkStories.Variants}>
-  <Story of={LinkStories.Variants} />
+<Canvas of={LinkStories.Tones}>
+  <Story of={LinkStories.Tones} />
 </Canvas>
 
 ## Sizes 
 
-Links are available in `size=sm` `size=md` or `size=lg`
+Links are available in `size=xs`, `size=sm` `size=md` or `size=lg`
 
 <Canvas of={LinkStories.Size}>
   <Story of={LinkStories.Size} />
+</Canvas>
+
+## Disabled
+
+<Canvas of={LinkStories.Disabled}>
+  <Story of={LinkStories.Disabled} />
+</Canvas>
+
+## Active
+
+<Canvas of={LinkStories.Active}>
+  <Story of={LinkStories.Active} />
 </Canvas>
 
 ## Icons 
@@ -28,4 +38,12 @@ Adding `target="_blank"` to the anchor tag automatically adds an external link i
 
 <Canvas of={LinkStories.ExternalLink}>
   <Story of={LinkStories.ExternalLink} />
+</Canvas>
+
+## Variants (deprecated)
+
+Since v3.6.0, `variant` is deprecated in favour of `tone` prop
+
+<Canvas of={LinkStories.Variants}>
+  <Story of={LinkStories.Variants} />
 </Canvas>

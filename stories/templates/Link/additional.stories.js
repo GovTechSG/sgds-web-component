@@ -1,16 +1,40 @@
 import { html } from "lit-html";
 import { ifDefined } from "lit/directives/if-defined.js";
 
+const ToneTemplate = () => {
+  const tones = ["Primary", "Danger", "Neutral", "Fixed-Light", "Fixed-Dark"];
+  return html`
+    <div class="d-flex-column">
+      ${tones.map(
+        tone => html`
+          <sgds-link tone="${tone.toLowerCase()}">
+            <a href="#">${tone} link</a>
+          </sgds-link>
+        `
+      )}
+    </div>
+  `;
+};
+export const Tones = {
+  render: ToneTemplate.bind({}),
+  name: "Tone",
+  args: { ...args },
+  parameters: {},
+  tags: ["!dev"]
+};
+
 const VariantTemplate = () => {
   const variants = ["Primary", "Danger", "Neutral", "Light", "Dark"];
   return html`
-    ${variants.map(
-      variant => html`
-        <sgds-link variant="${variant}">
-          <a href="#">${variant} link</a>
-        </sgds-link>
-      `
-    )}
+    <div class="d-flex-column">
+      ${variants.map(
+        variant => html`
+          <sgds-link variant="${variant.toLowerCase()}">
+            <a href="#">${variant} link</a>
+          </sgds-link>
+        `
+      )}
+    </div>
   `;
 };
 export const Variants = {
@@ -23,17 +47,20 @@ export const Variants = {
 
 const SizeTemplate = () => {
   return html`
-    <sgds-link size="sm">
-      <a href="#">Small</a>
-    </sgds-link>
-    <br />
-    <sgds-link size="md">
-      <a href="#">Medium (default)</a>
-    </sgds-link>
-    <br />
-    <sgds-link size="lg">
-      <a href="#">Large</a>
-    </sgds-link>
+    <div class="d-flex-column">
+      <sgds-link size="xs">
+        <a href="#">Extra small</a>
+      </sgds-link>
+      <sgds-link size="sm">
+        <a href="#">Small</a>
+      </sgds-link>
+      <sgds-link size="md">
+        <a href="#">Medium (default)</a>
+      </sgds-link>
+      <sgds-link size="lg">
+        <a href="#">Large</a>
+      </sgds-link>
+    </div>
   `;
 };
 
@@ -47,9 +74,20 @@ export const Size = {
 
 const ExternalLinkTemplate = () => {
   return html`
-    <sgds-link size="sm">
-      <a href="#" target="_blank">Going to an external link</a>
-    </sgds-link>
+    <div class="d-flex-column">
+      <sgds-link size="xs">
+        <a href="#" target="_blank">Going to an external link</a>
+      </sgds-link>
+      <sgds-link size="sm">
+        <a href="#" target="_blank">Going to an external link</a>
+      </sgds-link>
+      <sgds-link size="md">
+        <a href="#" target="_blank">Going to an external link</a>
+      </sgds-link>
+      <sgds-link size="lg">
+        <a href="#" target="_blank">Going to an external link</a>
+      </sgds-link>
+    </div>
   `;
 };
 
@@ -63,13 +101,14 @@ export const ExternalLink = {
 
 const WithIconTemplate = () => {
   return html`
-    <sgds-link
-      ><a href="#"><sgds-icon name="placeholder"></sgds-icon>Icon on the left</a></sgds-link
-    >
-    <br />
-    <sgds-link
-      ><a href="#">Icon on the right <sgds-icon name="placeholder"></sgds-icon></a
-    ></sgds-link>
+    <div class="d-flex-column">
+      <sgds-link
+        ><a href="#"><sgds-icon name="placeholder"></sgds-icon>Icon on the left</a></sgds-link
+      >
+      <sgds-link
+        ><a href="#">Icon on the right <sgds-icon name="placeholder"></sgds-icon></a
+      ></sgds-link>
+    </div>
   `;
 };
 
@@ -77,6 +116,21 @@ export const Icon = {
   render: WithIconTemplate.bind({}),
   name: "Icons",
   args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
+
+export const Disabled = {
+  render: Template.bind({}),
+  name: "Disabled",
+  args: { disabled: true },
+  parameters: {},
+  tags: ["!dev"]
+};
+export const Active = {
+  render: Template.bind({}),
+  name: "Active",
+  args: { active: true },
   parameters: {},
   tags: ["!dev"]
 };
