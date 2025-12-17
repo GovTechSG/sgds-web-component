@@ -184,7 +184,11 @@ export class SgdsSystemBanner extends SgdsElement {
           : nothing}
         ${this.dismissible
           ? html`
-              <sgds-close-button aria-label="close the alert" @click=${this.close} tone="fixed-light"></sgds-close-button>
+              <sgds-close-button
+                aria-label="close the alert"
+                @click=${this.close}
+                tone="fixed-light"
+              ></sgds-close-button>
             `
           : nothing}
       </div>
