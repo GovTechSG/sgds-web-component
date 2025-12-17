@@ -5,6 +5,7 @@ export const Template = args => html`
   <sgds-link
     size=${ifDefined(args.size)}
     variant=${ifDefined(args.variant)}
+    tone=${ifDefined(args.tone)}
     ?active=${args.active}
     ?disabled=${args.disabled}
   >

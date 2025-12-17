@@ -3,63 +3,79 @@
   vertical-align: middle;
   --color-emphasis: var(--sgds-link-color-emphasis);
 }
-:host([variant="danger"]) {
+:host([variant="danger"]), :host([tone="danger"]) {
   --color-emphasis: var(--sgds-danger-color-emphasis);
 }
-:host([variant="neutral"]) {
+:host([variant="neutral"]), :host([tone="neutral"]) {
   --color-emphasis: var(--sgds-color-default);
 }
-:host([variant="light"]) {
+:host([variant="light"]), :host([tone="fixed-light"]) {
   --color-emphasis: var(--sgds-color-fixed-light);
 }
-:host([variant="dark"]) {
+:host([variant="dark"]) :host([tone="fixed-dark"]){
   --color-emphasis: var(--sgds-color-fixed-dark);
 }
 
-:host([variant="danger"]) .nav-link::slotted(a) {
+:host([variant="danger"]) .nav-link::slotted(a),  
+:host([tone="danger"]) .nav-link::slotted(a) {
   --sgds-link-color-default: var(--sgds-danger-color-default);
   color: var(--sgds-link-color-default, --sgds-danger-color-default);
 }
 
 :host([variant="danger"]) .nav-link::slotted(a:hover),
 :host([variant="danger"]) .nav-link::slotted(a:focus),
-:host([variant="danger"]) .nav-link::slotted(a:focus-visible) {
+:host([variant="danger"]) .nav-link::slotted(a:focus-visible),
+:host([tone="danger"]) .nav-link::slotted(a:hover),
+:host([tone="danger"]) .nav-link::slotted(a:focus),
+:host([tone="danger"]) .nav-link::slotted(a:focus-visible){
   --color-emphasis: var(--sgds-danger-color-emphasis);
   color: var(--color-emphasis, --sgds-danger-color-emphasis);
 }
 
-:host([variant="neutral"]) .nav-link::slotted(a) {
+:host([variant="neutral"]) .nav-link::slotted(a),
+:host([tone="neutral"]) .nav-link::slotted(a) {
   --sgds-link-color-default: var(--sgds-color-default);
   color: var(--sgds-link-color-default, --sgds-color-default);
 }
 
 :host([variant="neutral"]) .nav-link::slotted(a:hover),
 :host([variant="neutral"]) .nav-link::slotted(a:focus),
-:host([variant="neutral"]) .nav-link::slotted(a:focus-visible) {
+:host([variant="neutral"]) .nav-link::slotted(a:focus-visible),
+:host([tone="neutral"]) .nav-link::slotted(a:hover),
+:host([tone="neutral"]) .nav-link::slotted(a:focus),
+:host([tone="neutral"]) .nav-link::slotted(a:focus-visible) {
   --color-emphasis: var(--sgds-color-default);
   color: var(--color-emphasis, --sgds-color-default);
 }
 
-:host([variant="light"]) .nav-link::slotted(a) {
+:host([variant="light"]) .nav-link::slotted(a),
+:host([tone="fixed-light"]) .nav-link::slotted(a) {
   --sgds-link-color-default: var(--sgds-color-fixed-light);
   color: var(--sgds-link-color-default, --sgds-color-fixed-light);
 }
 
 :host([variant="light"]) .nav-link::slotted(a:hover),
 :host([variant="light"]) .nav-link::slotted(a:focus),
-:host([variant="light"]) .nav-link::slotted(a:focus-visible) {
+:host([variant="light"]) .nav-link::slotted(a:focus-visible),
+:host([tone="fixed-light"]) .nav-link::slotted(a:hover),
+:host([tone="fixed-light"]) .nav-link::slotted(a:focus),
+:host([tone="fixed-light"]) .nav-link::slotted(a:focus-visible) {
   --color-emphasis: var(--sgds-color-fixed-light);
   color: var(--color-emphasis, --sgds-color-fixed-light);
 }
 
-:host([variant="dark"]) .nav-link::slotted(a) {
+:host([variant="dark"]) .nav-link::slotted(a),
+:host([tone="fixed-dark"]) .nav-link::slotted(a) {
   --sgds-link-color-default: var(--sgds-color-fixed-dark);
   color: var(--sgds-link-color-default, --sgds-color-fixed-dark);
 }
 
 :host([variant="dark"]) .nav-link::slotted(a:hover),
 :host([variant="dark"]) .nav-link::slotted(a:focus),
-:host([variant="dark"]) .nav-link::slotted(a:focus-visible) {
+:host([variant="dark"]) .nav-link::slotted(a:focus-visible),
+:host([tone="fixed-dark"]) .nav-link::slotted(a:hover),
+:host([tone="fixed-dark"]) .nav-link::slotted(a:focus),
+:host([tone="fixed-dark"]) .nav-link::slotted(a:focus-visible) {
   --color-emphasis: var(--sgds-color-fixed-dark);
   color: var(--color-emphasis, --sgds-color-fixed-dark);
 }

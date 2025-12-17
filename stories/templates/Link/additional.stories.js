@@ -1,6 +1,28 @@
 import { html } from "lit-html";
 import { ifDefined } from "lit/directives/if-defined.js";
 
+const ToneTemplate = () => {
+  const tones = ["Primary", "Danger", "Neutral", "Fixed-Light", "Fixed-Dark"];
+  return html`
+    <div class="d-flex-column">
+      ${tones.map(
+        tone => html`
+          <sgds-link tone="${tone.toLowerCase()}">
+            <a href="#">${tone} link</a>
+          </sgds-link>
+        `
+      )}
+    </div>
+  `;
+};
+export const Tones = {
+  render: ToneTemplate.bind({}),
+  name: "Tone",
+  args: { ...args },
+  parameters: {},
+  tags: ["!dev"]
+};
+
 const VariantTemplate = () => {
   const variants = ["Primary", "Danger", "Neutral", "Light", "Dark"];
   return html`
