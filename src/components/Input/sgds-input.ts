@@ -36,7 +36,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
     "sgds-icon": SgdsIcon
   };
 
-  @property({ reflect: true }) type: "email" | "number" | "password" | "search" | "tel" | "text" | "time" | "url" =
+  @property({ reflect: true }) type: "email" | "number" | "password" | "search" | "tel" | "text" | "time" | "url" | "datetime-local" =
     "text";
 
   /** The prefix of the input */

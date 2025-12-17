@@ -1,4 +1,4 @@
-import { assert, aTimeout, elementUpdated, expect, fixture, waitUntil } from "@open-wc/testing";
+import { assert, aTimeout, elementUpdated, expect, fixture, oneEvent, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
@@ -187,14 +187,12 @@ describe("sgds-combo-box ", () => {
   it("should emit sgds-input event when input value changes", async () => {
     const el = await fixture<SgdsComboBox>(html`<sgds-combo-box></sgds-combo-box>`);
     const comboBoxInput = el.shadowRoot?.querySelector("input");
-
-    const inputHandler = sinon.spy();
-    el?.addEventListener("sgds-input", inputHandler);
+    const listener = oneEvent(el, "sgds-input");
 
     comboBoxInput?.focus();
     await sendKeys({ press: "A" });
-    waitUntil(() => inputHandler.calledOnce);
-    expect(inputHandler).to.have.been.calledOnce;
+    const event = await listener;
+    expect(event.detail).to.deep.equal({ displayValue: "A" });
   });
 
   it("should emit sgds-change event when combobox value changes", async () => {

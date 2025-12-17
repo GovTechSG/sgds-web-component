@@ -81,4 +81,23 @@ describe("<sgds-subnav>", () => {
     expect(button).to.exist;
     expect(button?.textContent?.trim()).to.equal("Action");
   });
+
+  it("handles absence of actions slot correctly", async () => {
+    const el = await fixture<SgdsSubnav>(html`
+      <sgds-subnav>
+        <div slot="header">Subnav Header</div>
+        <sgds-subnav-item>Home</sgds-subnav-item>
+      </sgds-subnav>
+    `);
+
+    const actionsContainer = el.shadowRoot?.querySelector(".subnav-actions");
+    expect(actionsContainer).to.exist;
+
+    expect(actionsContainer?.classList.contains("no-actions")).to.be.true;
+
+    const slottedActions = el.querySelector('[slot="actions"]');
+    expect(slottedActions).to.not.exist;
+
+    expect(el.hasActionsSlot).to.be.false;
+  });
 });

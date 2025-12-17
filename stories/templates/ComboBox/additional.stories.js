@@ -313,3 +313,33 @@ export const ComboBoxMenuList = {
   parameters: {},
   tags: ["!dev"]
 };
+
+const AccessDisplayValueTemplate = () => {
+  return html`
+    <sgds-combo-box
+      placeholder="Accessing display value via @sgds-input custom event"
+      id="access-display-value-combobox-example"
+    >
+      <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+      <sgds-combo-box-option value="carrot">Carrot</sgds-combo-box-option>
+      <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
+      <sgds-combo-box-option value="eggplant">Eggplant</sgds-combo-box-option>
+    </sgds-combo-box>
+    <script>
+      const combobox = document.querySelector("#access-display-value-combobox-example");
+      combobox.addEventListener("sgds-input", e => {
+        const displayValue = e.detail.displayValue;
+        console.log(displayValue);
+      });
+    </script>
+  `;
+};
+
+export const AccessDisplayValue = {
+  render: AccessDisplayValueTemplate.bind({}),
+  name: "Accessing display value of ComboBox's input",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
