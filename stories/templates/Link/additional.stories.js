@@ -1,10 +1,22 @@
 import { html } from "lit-html";
 import { ifDefined } from "lit/directives/if-defined.js";
 
+const VariantTemplate = () => {
+  const variants = ["Primary", "Danger", "Neutral", "Light", "Dark"];
+  return html`
+    ${variants.map(
+      variant => html`
+        <sgds-link variant="${variant}">
+          <a href="#">${variant} link</a>
+        </sgds-link>
+      `
+    )}
+  `;
+};
 export const Variants = {
-  render: Template.bind({}),
+  render: VariantTemplate.bind({}),
   name: "Variant",
-  args: { ...args, variant: "danger" },
+  args: { ...args },
   parameters: {},
   tags: ["!dev"]
 };
