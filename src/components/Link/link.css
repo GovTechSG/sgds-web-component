@@ -67,25 +67,24 @@
 :host([size="md"]) .nav-link::slotted(a) {
   line-height: var(--sgds-line-height-24) !important;
   font-size: var(--sgds-font-size-2) !important;
-  --text-under-line-offset: 3px;
+  --text-underline-offset: 3px;
 }
 :host([size="lg"]) .nav-link::slotted(a) {
   font-size: var(--sgds-font-size-3) !important;
   line-height: var(--sgds-line-height-32) !important;
-  --text-under-line-offset: 4px;
+  --text-underline-offset: 4px;
 }
 
 :host([size="sm"]) .nav-link::slotted(a) {
   line-height: var(--sgds-line-height-20) !important;
   font-size: var(--sgds-font-size-1) !important;
-  --text-under-line-offset: 2.8px;
+  --text-underline-offset: 2.8px;
 }
 
 :host([size="xs"]) .nav-link::slotted(a) {
   line-height: var(--sgds-line-height-16) !important;
   font-size: var(--sgds-font-size-0) !important;
-
-  --text-under-line-offset: 2.2px;
+  --text-underline-offset: 2.2px;
 }
 /* External Links */
 .nav-link::slotted(a)::after {
@@ -147,7 +146,7 @@
 :host([active]) .nav-link::slotted(a),
 .nav-link::slotted(a:hover) {
   text-decoration-color: var(--color-emphasis) !important;
-  text-underline-offset: var(--text-under-line-offset);
+  text-underline-offset: var(--text-underline-offset);
   transition: text-underline-offset var(--sgds-motion-duration-standard) var(--sgds-motion-easing-enter),
     text-decoration-color var(--sgds-motion-duration-standard) var(--sgds-motion-easing-enter);
 }
