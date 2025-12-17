@@ -27,7 +27,7 @@ describe("<sgds-system-banner>", () => {
   });
   it("when dimissible is true, close button is rendered", async () => {
     const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show dismissible></sgds-system-banner>`);
-    const closeButton = el.shadowRoot?.querySelector("sgds-close-button[variant='light']");
+    const closeButton = el.shadowRoot?.querySelector("sgds-close-button[tone='fixed-light']");
     expect(closeButton).to.exist;
   });
   it("when more than one child, pagination is rendered, matches shadowDOM", async () => {
