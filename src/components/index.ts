@@ -50,6 +50,7 @@ export * from "./Stepper/sgds-stepper";
 export * from "./Subnav/sgds-subnav";
 export * from "./Subnav/sgds-subnav-item";
 export * from "./Switch/sgds-switch";
+export * from "./SystemBanner/sgds-system-banner";
 export * from "./Tab/sgds-tab";
 export * from "./Tab/sgds-tab-group";
 export * from "./Tab/sgds-tab-panel";

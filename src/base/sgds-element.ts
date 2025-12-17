@@ -16,7 +16,8 @@ export default class SgdsElement extends LitElement {
   @property({ type: Boolean, reflect: true }) ssr = isServer || Boolean(this.shadowRoot);
 
   /** Emits a custom event with more convenient defaults. */
-  emit(name: string, options?: CustomEventInit) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  emit<T = any>(name: string, options?: CustomEventInit<T>) {
     const event = new CustomEvent(name, {
       bubbles: true,
       cancelable: false,
