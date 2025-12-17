@@ -40,6 +40,7 @@
   position: relative;
   display: inline-block;
   max-width: var(--sgds-dimension-872);
+  margin-right: var(--sgds-margin-md);
 }
 
 .show-more {
@@ -73,15 +74,12 @@ slot[name="action"]::slotted(a) {
   flex-direction: column;
   gap: var(--sgds-gap-xs);
   flex: 1 0 0;
-  /* padding-right prevents overlap of long message with close button */
-  margin-right: var(--sgds-margin-md);
 }
 /* DESKTOP */
 @media (min-width: 512px) {
   .banner-item__message_and__action {
     flex-direction: row;
-    gap: calc(var(--sgds-gap-sm) + var(--sgds-margin-md));
-    margin-right: unset;
+    gap: var(--sgds-gap-sm);
   }
   .action {
     margin-top: 0;
@@ -94,6 +92,6 @@ slot[name="action"]::slotted(a) {
     -webkit-box-orient: vertical;
     overflow: hidden;
     word-break: break-all;
-    max-height: calc(2 * var(--sgds-line-height-20, 20px)); /* 3 lines */
+    max-height: calc(2 * var(--sgds-line-height-20, 20px)); /* 2 lines */
   }
 }
