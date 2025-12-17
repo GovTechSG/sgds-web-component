@@ -3,11 +3,10 @@ import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
 import "./sgds-web-component";
-
 import { ifDefined } from "lit/directives/if-defined.js";
 import type { SgdsBadge, SgdsButton, SgdsCheckbox, SgdsComboBox } from "../src/components";
 import SgdsComboBoxOption from "../src/components/ComboBox/sgds-combo-box-option";
-import SgdsCloseButton from "../src/internals/CloseButton/sgds-close-button";
+import SgdsCloseButton from "../src/components/CloseButton/sgds-close-button";
 interface IComboBoxRenderProps {
   multiSelect?: boolean;
   value?: string;

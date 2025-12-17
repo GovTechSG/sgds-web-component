@@ -4,7 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
-import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import SgdsCloseButton from "../CloseButton/sgds-close-button";
 import SgdsIcon from "../Icon/sgds-icon";
 import alertStyle from "./alert.css";
 
@@ -73,7 +73,7 @@ export class SgdsAlert extends SgdsElement {
               ? html`<sgds-close-button
                   aria-label="close the alert"
                   @click=${this.close}
-                  variant=${this.outlined ? "dark" : "light"}
+                  tone=${this.outlined ? "fixed-dark" : "fixed-light"}
                 ></sgds-close-button>`
               : nothing}
           </div>
