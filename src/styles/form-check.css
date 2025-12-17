@@ -20,7 +20,6 @@ input {
   height: var(--sgds-form-height-sm);
 }
 
-.form-check-input:checked,
 .form-check-input[checked] {
   border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-transparent);
   background-color: var(--sgds-form-primary-surface-default);
@@ -36,9 +35,7 @@ input {
   outline-offset: var(--sgds-form-outline-offset-focus);
 }
 
-.form-check-input:not([disabled]):not(.is-invalid):checked:hover,
 .form-check-input:not([disabled]):not(.is-invalid)[checked]:hover,
-.form-check-input:not([disabled]):not(.is-invalid):checked:focus-visible,
 .form-check-input:not([disabled]):not(.is-invalid)[checked]:focus-visible {
   background-color: var(--sgds-form-primary-surface-emphasis);
 }
