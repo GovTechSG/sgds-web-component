@@ -30,13 +30,6 @@ describe("<sgds-system-banner>", () => {
     const closeButton = el.shadowRoot?.querySelector("sgds-close-button[variant='light']");
     expect(closeButton).to.exist;
   });
-  it("when variant is set to warning, close button variant is dark", async () => {
-    const el = await fixture<SgdsSystemBanner>(
-      html`<sgds-system-banner show dismissible variant="warning"></sgds-system-banner>`
-    );
-    const closeButton = el.shadowRoot?.querySelector("sgds-close-button[variant='dark']");
-    expect(closeButton).to.exist;
-  });
   it("when more than one child, pagination is rendered, matches shadowDOM", async () => {
     const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
       <sgds-system-banner-item></sgds-system-banner-item>

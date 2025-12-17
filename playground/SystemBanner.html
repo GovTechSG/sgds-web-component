@@ -3,48 +3,273 @@
 <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
 
-<style>
-    div.another-container {
-        margin-top: 136px;
-        transition: margin-top 1s ease;
-    }
-    div.another-container.no-banner {
-        margin-top: 0px;
-    }
-    sgds-system-banner {
-        position: absolute;
-        inset: 0
-    }
-</style>
-<sgds-system-banner dismissible show>
+<h3> long message only</h3>
+<sgds-system-banner show>
+  <sgds-system-banner-item>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
+      facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus  Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus
+    </div>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<h3> long message with close button</h3>
+<sgds-system-banner show dismissible>
+  <sgds-system-banner-item>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
+      facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus  Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus
+    </div>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<h3> long message with close button and icon only</h3>
+<sgds-system-banner show dismissible>
+  <sgds-system-banner-item>
+      <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
+      facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus  Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus
+    </div>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<h3> long message with close button , action link and icon</h3>
+<sgds-system-banner show dismissible>
   <sgds-system-banner-item>
     <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
     <div>
      1 Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
       facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus  Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
       congue sapien eu, rhoncus
     </div>
-    <sgds-link size="sm" variant="light" slot="action"
-      ><a href="#">Action link<sgds-icon name="arrow-right" size="md"></sgds-icon></a
+     <sgds-link size="sm" variant="light" slot="action"
+      ><a href="#">Action link<sgds-icon name="arrow-right"  size="md"></sgds-icon></a
+    ></sgds-link>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<h3> long message with action link and icon only </h3>
+<sgds-system-banner show >
+  <sgds-system-banner-item>
+    <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
+      facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus  Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus
+    </div>
+     <sgds-link size="sm" variant="light" slot="action"
+      ><a href="#">Action link<sgds-icon name="arrow-right"  size="md"></sgds-icon></a
+    ></sgds-link>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<h3> long message with action link, icon and pagination </h3>
+<sgds-system-banner show >
+  <sgds-system-banner-item>
+    <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
+      facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus  Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus
+    </div>
+     <sgds-link size="sm" variant="light" slot="action"
+      ><a href="#">Action link<sgds-icon name="arrow-right"  size="md"></sgds-icon></a
     ></sgds-link>
   </sgds-system-banner-item>
   <sgds-system-banner-item>
     <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
     <div>
-      2Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
+     1 Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
       facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus  Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
       congue sapien eu, rhoncus
     </div>
-    <sgds-link size="sm" variant="light" slot="action"
-      ><a href="#">Action link<sgds-icon name="arrow-right" size="md"></sgds-icon></a
+     <sgds-link size="sm" variant="light" slot="action"
+      ><a href="#">Action link<sgds-icon name="arrow-right"  size="md"></sgds-icon></a
+    ></sgds-link>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<h3> long message with pagination only</h3>
+<sgds-system-banner show >
+  <sgds-system-banner-item>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
+      facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus  Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus
+    </div>
+  </sgds-system-banner-item>
+  <sgds-system-banner-item>
+    <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
+      facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus  Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus
+    </div>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<h3> long message with pagination and close button</h3>
+<sgds-system-banner show dismissible>
+  <sgds-system-banner-item>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
+      facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus  Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus
+    </div>
+  </sgds-system-banner-item>
+  <sgds-system-banner-item>
+    <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
+      facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus  Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus
+    </div>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+
+
+
+<h3> short message only</h3>
+<sgds-system-banner show>
+  <sgds-system-banner-item>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus.
+    </div>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<h3> short message with close button</h3>
+<sgds-system-banner show dismissible>
+  <sgds-system-banner-item>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus
+    </div>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<h3> short message with close button and icon only</h3>
+<sgds-system-banner show dismissible>
+  <sgds-system-banner-item>
+      <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus.
+    </div>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<h3> short message with close button , action link and icon</h3>
+<sgds-system-banner show dismissible>
+  <sgds-system-banner-item>
+    <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus.
+    </div>
+     <sgds-link size="sm" variant="light" slot="action"
+      ><a href="#">Action link<sgds-icon name="arrow-right"  size="md"></sgds-icon></a
+    ></sgds-link>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<h3> short message with action link and icon only </h3>
+<sgds-system-banner show >
+  <sgds-system-banner-item>
+    <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus.
+    </div>
+     <sgds-link size="sm" variant="light" slot="action"
+      ><a href="#">Action link<sgds-icon name="arrow-right"  size="md"></sgds-icon></a
+    ></sgds-link>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<h3> short message with action link, icon and pagination </h3>
+<sgds-system-banner show >
+  <sgds-system-banner-item>
+    <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus.
+    </div>
+     <sgds-link size="sm" variant="light" slot="action"
+      ><a href="#">Action link<sgds-icon name="arrow-right"  size="md"></sgds-icon></a
     ></sgds-link>
   </sgds-system-banner-item>
   <sgds-system-banner-item>
     <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
     <div>
-      3Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
-      facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
-      congue sapien eu, rhoncus
+     1 Etiam suscipit nisi eget porta cursus. 
+    </div>
+     <sgds-link size="sm" variant="light" slot="action"
+      ><a href="#">Action link<sgds-icon name="arrow-right"  size="md"></sgds-icon></a
+    ></sgds-link>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<h3> short message with pagination only</h3>
+<sgds-system-banner show >
+  <sgds-system-banner-item>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus.
+    </div>
+  </sgds-system-banner-item>
+  <sgds-system-banner-item>
+    <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus. 
+    </div>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<h3> long message with pagination and close button</h3>
+<sgds-system-banner show dismissible>
+  <sgds-system-banner-item>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus.
+    </div>
+  </sgds-system-banner-item>
+  <sgds-system-banner-item>
+    <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus.
+    </div>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<h3>  short message mix with pagination only</h3>
+<sgds-system-banner show >
+  <sgds-system-banner-item>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus.
+    </div>
+  </sgds-system-banner-item>
+  <sgds-system-banner-item>
+    <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus. 
+    </div>
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<h3> mix long and short message with pagination, action link and  close button</h3>
+<sgds-system-banner show dismissible>
+  <sgds-system-banner-item>
+    <div>
+     1 Etiam suscipit nisi eget porta cursus.
     </div>
     <sgds-link size="sm" variant="light" slot="action"
       ><a href="#">Action link<sgds-icon name="arrow-right"  size="md"></sgds-icon></a
@@ -53,23 +278,17 @@
   <sgds-system-banner-item>
     <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
     <div>
-      4Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
+       1 Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
       facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus  Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
       congue sapien eu, rhoncus
     </div>
-    <sgds-link size="sm" variant="light" slot="action"
-      ><a href="#">Action link<sgds-icon name="arrow-right" size="md"></sgds-icon></a
+      <sgds-link size="sm" variant="light" slot="action"
+      ><a href="#">Action link<sgds-icon name="arrow-right"  size="md"></sgds-icon></a
     ></sgds-link>
   </sgds-system-banner-item>
-  <sgds-system-banner-item>
-    <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
-    <div>
-      5Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
-      facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
-      congue sapien eu, rhoncus
-    </div>
-  </sgds-system-banner-item>
 </sgds-system-banner>
+<br/>
 
 <div class="another-container">another container</div>
 <script>
