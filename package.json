@@ -28,7 +28,7 @@
     "build-storybook": "npm run build && npm run write:stories && STORYBOOK_ENV=production storybook build",
     "generate:icons": "node scripts/generateIconRegistry.js",
     "sync-figma-to-tokens": "tsx scripts/figma/sync-figma-to-tokens/sync-figma-to-tokens.ts",
-    "chromatic": "chromatic"
+    "chromatic": "chromatic "
   },
   "author": "GovTechSG",
   "contributors": [
