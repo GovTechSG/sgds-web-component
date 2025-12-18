@@ -41,15 +41,12 @@ input {
   background-color: var(--sgds-form-surface-emphasis);
 }
 
-.form-check-input:checked,
 .form-check-input[checked] {
   background-color: var(--sgds-form-primary-surface-default);
   background-position: right var(--sgds-form-padding-inline-sm) center;
 }
 
-.form-check-input:not([disabled]):checked:hover,
 .form-check-input:not([disabled])[checked]:hover,
-.form-check-input:not([disabled]):checked:focus,
 .form-check-input:not([disabled])[checked]:focus-visible {
   background-color: var(--sgds-form-primary-surface-emphasis);
 }
@@ -85,7 +82,6 @@ input {
   }
 }
 
-:host([icon]) .form-check-input:checked,
 :host([icon]) .form-check-input[checked] {
   --sgds-switch-bg-image: url('data:image/svg+xml,<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 32C24.8367 32 32 24.8367 32 16C32 7.16333 24.8367 0 16 0C7.16333 0 0 7.16333 0 16C0 24.8367 7.16333 32 16 32ZM24.9402 10.2224C24.9009 10.1274 24.843 10.041 24.77 9.96851C24.6975 9.89551 24.6111 9.83765 24.5161 9.79834C24.4209 9.75879 24.3191 9.73853 24.2161 9.73853C24.1133 9.73853 24.0112 9.75879 23.9163 9.79834C23.821 9.83765 23.7349 9.89551 23.6621 9.96851L13.261 20.3711L8.3374 15.446C8.19067 15.2991 7.99121 15.2166 7.78345 15.2166C7.57568 15.2166 7.37646 15.2991 7.22949 15.446C7.08252 15.5928 7 15.7922 7 16C7 16.2078 7.08252 16.407 7.22949 16.554L12.707 22.0315C12.7625 22.0872 12.8257 22.134 12.8953 22.1707C12.9167 22.1819 12.9387 22.1924 12.9612 22.2017C13.0562 22.2412 13.1582 22.2615 13.261 22.2615C13.3074 22.2615 13.3535 22.2573 13.3989 22.2493C13.4543 22.2393 13.5088 22.2234 13.561 22.2017C13.656 22.1621 13.7424 22.1045 13.8149 22.0315L24.77 11.0764C24.843 11.0037 24.9009 10.9175 24.9402 10.8223C24.9797 10.7273 25 10.6252 25 10.5225C25 10.4194 24.9797 10.3176 24.9402 10.2224Z" fill="white"/></svg>');
 }

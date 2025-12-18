@@ -24,6 +24,14 @@ Set `multiSelect` to true for a multi-select combo box.
   <Story of={ComboBoxStories.ComboBoxMultiSelect} />
 </Canvas>
 
+## Clearable ComboBox
+
+Set `clearable` to true for a clearable combo box. The clearable button will appear on `focus` when there is a `value`.
+
+<Canvas of={ComboBoxStories.ComboBoxMenuListClearable}>
+  <Story of={ComboBoxStories.ComboBoxMenuListClearable} />
+</Canvas>
+
 ## Customising the Filter Function
 
 `SgdsComboBox` contains the `filterFunction` prop that is called on each item's label in the `menuList` whenever the input value changes, to determine whether an item should be displayed in the dropdown menu based on the input value.

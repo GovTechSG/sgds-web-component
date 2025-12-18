@@ -314,6 +314,30 @@ export const ComboBoxMenuList = {
   tags: ["!dev"]
 };
 
+const ComboBoxMenuListClearableProp = () => {
+  return html` <sgds-combo-box
+    label="Items"
+    id="menulist-clearable-prop-combobox-example"
+    clearable
+    multiSelect
+    placeholder="ComboBox"
+  >
+    <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+    <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+    <sgds-combo-box-option value="carrot">Carrot</sgds-combo-box-option>
+    <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
+    <sgds-combo-box-option value="eggplant">Eggplant</sgds-combo-box-option>
+  </sgds-combo-box>`;
+};
+
+export const ComboBoxMenuListClearable = {
+  render: ComboBoxMenuListClearableProp.bind({}),
+  name: "Populating menu list with clearable property",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
+
 const AccessDisplayValueTemplate = () => {
   return html`
     <sgds-combo-box

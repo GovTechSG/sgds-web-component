@@ -105,9 +105,10 @@ export class DropdownElement extends SgdsElement {
   }
 
   /** When invoked, hides the dropdown menu */
-  public async hideMenu() {
+  public async hideMenu(isOutside?: boolean) {
     if (!this.menuIsOpen) return;
-    this.emit("sgds-hide");
+    this.emit("sgds-hide", { detail: { isOutside } });
+
     this.menuIsOpen = false;
     setTimeout(() => this.emit("sgds-after-hide"), 0);
 
@@ -144,7 +145,7 @@ export class DropdownElement extends SgdsElement {
   private _handleClickOutOfElement = (e: MouseEvent) => {
     if (!this.menuIsOpen) return;
     if (!e.composedPath().includes(this)) {
-      this.hideMenu();
+      this.hideMenu(true);
     }
   };
 
