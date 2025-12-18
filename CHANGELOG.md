@@ -1,3 +1,10 @@
+## v3.6.1 (2025-12-18)
+
+### Feat
+
+- **ComboBox**: added clear all button for combobox and added handlin… (#476)
+- **ComboBox**: added clear all button for combobox and added handling for on click on option
+
 ## v3.6.0 (2025-12-17)
 
 ### Feat
