@@ -1,0 +1,57 @@
+name: "Chromatic"
+permissions:
+  contents: read
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  chromatic:
+    name: Run Chromatic
+    runs-on: ubuntu-latest
+    if: > 
+      github.event.issue.pull_request &&
+      github.event.pull_request.head.repo.full_name == github.repository.full_name &&
+      contains(github.event.comment.body, '/chromatic')
+    steps:
+      - name: Check if actor is repo admin
+        id: permission
+        env: 
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+          ACTOR: ${{ github.actor }}
+          REPO: ${{ github.repository }}
+        run: |
+          PERMISSION=$(curl -L \
+           -H "Accept: application/vnd.github+json" \
+           -H "Authorization: Bearer $GH_TOKEN" \
+           -H "X-GitHub-Api-Version: 2022-11-28" \
+           https://api.github.com/repos/$REPO/collaborators/$ACTOR/permission \
+           | jq -r '.permission')
+
+          echo "Actor permission: $PERMISSION"
+
+          if [[ "$PERMISSION" != "admin" ]]; then
+            echo "❌ Actor is not an admin"
+            exit 1
+          fi
+
+          echo "✅ Actor is admin"
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.20.0
+      - name: Install dependencies
+        # ⚠️ See your package manager's documentation for the correct command to install dependencies in a CI environment.
+        run: npm ci
+      - name: Run Chromatic
+        uses: chromaui/action@latest
+        with:
+          # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          onlyChanged: true 
+          exitZeroOnChanges: false
+          skip: "dependabot/**"
