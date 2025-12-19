@@ -8,6 +8,13 @@
   letter-spacing: var(--sgds-letter-spacing-normal, 0);
 }
 
+/* Handles inline links and all texts */
+::slotted(*) {
+  font-size: var(--sgds-font-size-1, 14px) !important;
+  line-height: var(--sgds-line-height-20, 20px) !important;
+  color: var(--sgds-color-fixed-light) !important;
+}
+
 .banner-item {
   display: flex;
   gap: var(--sgds-gap-sm);
