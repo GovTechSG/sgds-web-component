@@ -141,7 +141,7 @@
 }
 .nav-link::slotted(a) {
   /* If clash of styles happens from other light dom css on anchor tag, will need to add !important here */
-  color: var(--sgds-link-color-default);
+  color: var(--sgds-link-color-default) !important;
   cursor: pointer;
 }
 

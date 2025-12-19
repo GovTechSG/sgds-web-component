@@ -71,7 +71,7 @@ export class SgdsComboBox extends SelectElement {
   @state() private emptyMenu = false;
 
   // Used to show and hide the clear button
-  @state() isFocused = false;
+  @state() private isFocused = false;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -483,7 +483,8 @@ export class SgdsComboBox extends SelectElement {
                 name="xcircle-fill"
                 size="md"
                 @click=${this._handleClear}
-                aria-hidden=${showButton ? "false" : "true"}
+                aria-label="Clear selections"
+                role="button"
               ></sgds-icon>
             `
           : nothing}

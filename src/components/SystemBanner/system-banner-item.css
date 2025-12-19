@@ -8,6 +8,13 @@
   letter-spacing: var(--sgds-letter-spacing-normal, 0);
 }
 
+/* Handles inline links and all texts */
+::slotted(*) {
+  font-size: var(--sgds-font-size-1, 14px) !important;
+  line-height: var(--sgds-line-height-20, 20px) !important;
+  color: var(--sgds-color-fixed-light) !important;
+}
+
 .banner-item {
   display: flex;
   gap: var(--sgds-gap-sm);
@@ -21,7 +28,7 @@
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  word-break: break-all;
+  word-break: break-word;
   max-height: calc(5 * var(--sgds-line-height-20, 20px)); /* 5 lines */
 }
 
@@ -90,8 +97,6 @@ slot[name="action"]::slotted(a) {
     line-clamp: 2;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    overflow: hidden;
-    word-break: break-all;
     max-height: calc(2 * var(--sgds-line-height-20, 20px)); /* 2 lines */
   }
 }

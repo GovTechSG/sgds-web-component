@@ -1,3 +1,55 @@
+## v3.6.2 (2025-12-19)
+
+### Fix
+
+- **Link**: set color to have highest importance (#496)
+- **Link**: set color to have highest importance
+
+## v3.6.1 (2025-12-18)
+
+### Feat
+
+- **ComboBox**: added clear all button for combobox and added handlin… (#476)
+- **ComboBox**: added clear all button for combobox and added handling for on click on option
+
+## v3.6.0 (2025-12-17)
+
+### Feat
+
+- **CloseButton**: new close button component (#493)
+- **CloseButton**: expose to public
+- **Link**: underline motion, icon size to link mappings, external link icon size handling, new disabled and active prop (#492)
+- **SystemBanner**: new system banner component (#475)
+- **SystemBanner**: css refinements on the action link positioning
+- **SystemBannerItem**: hasActionSlot prop for ssr support
+- **SystemBanner**: handle when slot action is not filled
+- **Link**: new tone prop to replace deprecated variant prop
+- **combobox**: sgds-input event emits detail with displayValue to allow users to obtain real-time value of input text (#489)
+- **combobox**: sgds-input event emits detail with display value of input
+- **Input**: new datetime-local type (#488)
+- **Input**: new datetime-local type
+- **Link**: add motion tokens and applied to underline transition
+- **Link**: animation wip
+- **Link**: add underline motion wip
+- **SystemBannerItem**: give action div a height to ensure bottom half in mobile layout stays
+- **SystemBanner**: pause animation on keyboard focus for better accessibility
+- **SystemBanner**: show more to dynamically appear and disappear when screen width changes
+- **SystemBanner**: show more when line has clamped
+- **SystemBanner**: handle mobile layout
+- **SystemBanner**: refactor animation
+- **system-banner**: implement animation , pagination looping, variant colors
+- **SystemBanner**: initial html structure and styles
+
+### Fix
+
+- **subnav**: hide the container of actions slot when the slot is empty (#491)
+- **subnav**: hide the container of actions slot when the slot is empty
+- **Link**: icon size to link size and alignment
+
+### Refactor
+
+- **Footer,Breadcrumb**: patch link dependecies
+
 ## v3.5.6 (2025-11-12)
 
 ### Feat

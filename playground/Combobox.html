@@ -48,7 +48,7 @@
 
         <form>
           <div class="flex">
-            <sgds-combo-box id="combobox-example" label="Items" placeholder="ComboBox" value="1" hasfeedback="both">
+            <sgds-combo-box id="combobox-example" clearable label="Items" placeholder="ComboBox" value="1" hasfeedback>
               <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
               <sgds-combo-box-option value="2">Zimbabwe</sgds-combo-box-option>
             </sgds-combo-box>
@@ -57,19 +57,35 @@
               required
               hasFeedback
               multiselect
+              clearable
               id="combobox-example"
               label="Items"
-              value="1;2"
+              value="option1;option2"
               placeholder="ComboBox"
             >
               <sgds-combo-box-option disabled value="option1">Apple</sgds-combo-box-option>
               <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
-              <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option></sgds-combo-box
-            >
+              <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
+              </sgds-combo-box>
           </div>
-          <button type="reset">rest</button>
+          <sgds-button type="reset">rest</sgds-button>
           <button type="submit">submit</button>
         </form>
+
+         <form>
+        <sgds-combo-box value="1;2" multiSelect clearable required hasFeedback>
+          <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
+          <sgds-combo-box-option value="2">Zimbabwe</sgds-combo-box-option>
+          <sgds-combo-box-option value="3">Zoo</sgds-combo-box-option>
+          <sgds-combo-box-option value="4">Zzzbabwe</sgds-combo-box-option>
+        </sgds-combo-box>
+        <button type="reset" id="abc">Reset</button>
+
+        <script>
+          const resset = document.querySelector("#abc")
+          resset.addEventListener("click", () => console.log("click"))
+        </script>
+      </form>
       </div>
     </div>
   </body>
