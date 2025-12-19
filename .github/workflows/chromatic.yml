@@ -1,6 +1,8 @@
-  name: "Chromatic"
+name: "Chromatic"
 
-on: push
+on:
+  issue_comment:
+    types: [created]
 
 jobs:
   chromatic:
@@ -8,6 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.head.repo.full_name == github.repository.full_name
     steps:
+      - name: Check if actor is repo admin
+        id: permission
+        env: 
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+          ACTOR: ${{ github.actor }}
+          REPO: ${{ github.repository }}
+        run: |
+          PERMISSION=$(curl -L \
+           -H "Accept: application/vnd.github+json" \
+           -H "Authorization: Bearer $GH_TOKEN" \
+           -H "X-GitHub-Api-Version: 2022-11-28" \
+           https://api.github.com/repos/$REPO/collaborators/$ACTOR/permission \
+           | jq -r '.permission')
+
+          echo "Actor permission: $PERMISSION"
+
+          if [[ "$PERMISSION" != "admin" ]]; then
+            echo "❌ Actor is not an admin"
+            exit 1
+          fi
+
+          echo "✅ Actor is admin"
       - name: Checkout code
         uses: actions/checkout@v4
         with:
@@ -24,3 +48,5 @@ jobs:
           # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           onlyChanged: true 
+          exitZeroOnChanges: false
+          skip: "dependabot/**"

@@ -7,10 +7,10 @@ export const args = {};
 
 export const parameters = {
   layout: "fullscreen",
-   chromatic: {
-      modes: {
-        mobile: allModes["sm"],
-        desktop: allModes["lg"],
-      },
-    },
+  chromatic: {
+    modes: {
+      mobile: allModes["sm"],
+      desktop: allModes["lg"]
+    }
+  }
 };

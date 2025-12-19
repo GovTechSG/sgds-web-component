@@ -48,10 +48,10 @@ export const parameters = {
     viewports: {
       xs: { name: "xs mobile", styles: { width: "320px", height: "568px" } },
       sm: { name: "sm mobile", styles: { width: "512px", height: "960px" } },
-      md: { name: "md tablet", styles: { width: "768px", height: "1080px"} },
-      lg: { name: "lg laptop", styles: { width: "1024px",height: "1117px"} },
+      md: { name: "md tablet", styles: { width: "768px", height: "1080px" } },
+      lg: { name: "lg laptop", styles: { width: "1024px", height: "1117px" } },
       xl: { name: "xl desktop", styles: { width: "1280px", height: "1117px" } },
-      "2-xl": { name: "2-xl desktop", styles: { width: "1440px", height: "1117px"} }
+      "2-xl": { name: "2-xl desktop", styles: { width: "1440px", height: "1117px" } }
     }
   },
   controls: {
