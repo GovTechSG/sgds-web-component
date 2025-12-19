@@ -1,3 +1,10 @@
+## v3.6.2 (2025-12-19)
+
+### Fix
+
+- **Link**: set color to have highest importance (#496)
+- **Link**: set color to have highest importance
+
 ## v3.6.1 (2025-12-18)
 
 ### Feat
