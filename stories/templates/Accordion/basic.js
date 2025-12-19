@@ -11,7 +11,7 @@ export const Template = args =>
       <sgds-accordion-item ?open=${args.open} ?disabled=${args.disabled}>
         <div slot="header">Accordion title #1</div>
         <div slot="content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
+          Lorem ipsum dolorsdsf sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
         </div>
       </sgds-accordion-item>
       <sgds-accordion-item>
