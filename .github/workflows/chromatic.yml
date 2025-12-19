@@ -1,5 +1,7 @@
 name: "Chromatic"
-
+permissions:
+  contents: read
+  
 on:
   issue_comment:
     types: [created]
