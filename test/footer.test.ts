@@ -36,16 +36,6 @@ describe("footer", () => {
                 </li>
                 <li>
                   <sgds-link size="sm" variant="primary" tone="fixed-light">
-                    <a href="#" tabindex="0">FAQ</a>
-                  </sgds-link>
-                </li>
-                <li>
-                  <sgds-link size="sm" variant="primary" tone="fixed-light">
-                    <a href="#" tabindex="0">Sitemap</a>
-                  </sgds-link>
-                </li>
-                <li>
-                  <sgds-link size="sm" variant="primary" tone="fixed-light">
                     <a
                       href="https://tech.gov.sg/report_vulnerability"
                       rel="noopener noreferrer"
@@ -106,16 +96,6 @@ describe("footer", () => {
                 <li>
                   <sgds-link size="sm" variant="primary" tone="fixed-light">
                     <a href="#" tabindex="0">Feedback</a>
-                  </sgds-link>
-                </li>
-                <li>
-                  <sgds-link size="sm" variant="primary" tone="fixed-light">
-                    <a href="#" tabindex="0">FAQ</a>
-                  </sgds-link>
-                </li>
-                <li>
-                  <sgds-link size="sm" variant="primary" tone="fixed-light">
-                    <a href="#" tabindex="0">Sitemap</a>
                   </sgds-link>
                 </li>
                 <li>
@@ -187,6 +167,14 @@ describe("footer", () => {
   it("termsOfUseHref prop forward to Terms of use's href attr", async () => {
     const el = await fixture(html`<sgds-footer termsOfUseHref="test"></sgds-footer>`);
     expect(el.shadowRoot?.querySelector("a[href='test']")?.textContent).to.contain("Terms of use");
+  });
+  it("sitemapHref prop forward to Ssitemap href attr", async () => {
+    const el = await fixture(html`<sgds-footer sitemapHref="test"></sgds-footer>`);
+    expect(el.shadowRoot?.querySelector("a[href='test']")?.textContent).to.contain("Sitemap");
+  });
+  it("faqHref prop forward to Ssitemap href attr", async () => {
+    const el = await fixture(html`<sgds-footer faqHref="test"></sgds-footer>`);
+    expect(el.shadowRoot?.querySelector("a[href='test']")?.textContent).to.contain("FAQ");
   });
 });
 

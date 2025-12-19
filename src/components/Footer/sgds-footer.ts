@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsLink from "../Link/sgds-link";
@@ -34,13 +34,13 @@ export class SgdsFooter extends SgdsElement {
   @property({ type: String })
   feedbackHref = "#";
 
-  /**	href link for faq */
+  /**	href link for faq (optional) */
   @property({ type: String })
-  faqHref = "#";
+  faqHref = "";
 
-  /**	href link for sitemap */
+  /**	href link for sitemap (optional) */
   @property({ type: String })
-  sitemapHref = "#";
+  sitemapHref = "";
 
   /**	href link for privacy statement */
   @property({ type: String })
@@ -103,12 +103,16 @@ export class SgdsFooter extends SgdsElement {
               <li>
                 <sgds-link size="sm" tone="fixed-light"><a href=${this.feedbackHref}>Feedback</a></sgds-link>
               </li>
-              <li>
-                <sgds-link size="sm" tone="fixed-light"><a href=${this.faqHref}>FAQ</a></sgds-link>
-              </li>
-              <li>
-                <sgds-link size="sm" tone="fixed-light"><a href=${this.sitemapHref}>Sitemap</a></sgds-link>
-              </li>
+              ${this.faqHref
+                ? html`<li>
+                    <sgds-link size="sm" tone="fixed-light"><a href=${this.faqHref}>FAQ</a></sgds-link>
+                  </li>`
+                : nothing}
+              ${this.sitemapHref
+                ? html`<li>
+                    <sgds-link size="sm" tone="fixed-light"><a href=${this.sitemapHref}>Sitemap</a></sgds-link>
+                  </li>`
+                : nothing}
               <li>
                 <sgds-link size="sm" tone="fixed-light">
                   <a href="https://tech.gov.sg/report_vulnerability" target="_blank" rel="noopener noreferrer">
