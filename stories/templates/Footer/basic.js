@@ -12,6 +12,7 @@ export const Template = args => {
         privacyHref=${ifDefined(args.privacyHref)}
         termsOfUseHref=${ifDefined(args.termsOfUseHref)}
         copyrightLiner=${ifDefined(args.copyrightLiner)}
+        sitemapHref=${ifDefined(args.sitemapHref)}
       ></sgds-footer>
       <sgds-footer
         contacthref="https://form.gov.sg/"
@@ -19,6 +20,7 @@ export const Template = args => {
         faqhref="https://form.gov.sg/"
         privacyhref="https://www.designsystem.tech.gov.sg/privacy/"
         termsofusehref="https://www.designsystem.tech.gov.sg/terms-of-use/"
+        sitemapHref="#"
       >
         <h2 slot="title">Name of portal/digital service</h2>
         <p slot="description">Description of portal/digital service</p>
