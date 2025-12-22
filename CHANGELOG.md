@@ -1,3 +1,10 @@
+## v3.6.4 (2025-12-22)
+
+### Feat
+
+- **Footer**: make sitemap and faq optional (#498)
+- **Footer**: make sitemap and faq optional
+
 ## v3.6.3 (2025-12-22)
 
 ### Fix
