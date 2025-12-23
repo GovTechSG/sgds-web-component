@@ -1,0 +1,10 @@
+.loading-menu {
+  padding: var(--sgds-padding-sm) var(--sgds-padding-lg, 20px);
+  display: flex;
+  gap: var(--sgds-gap-xs);
+  align-items: center;
+}
+
+.d-none {
+    display:none;
+}

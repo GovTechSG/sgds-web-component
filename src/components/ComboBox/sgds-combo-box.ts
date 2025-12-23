@@ -1,5 +1,5 @@
 import { live } from "lit/directives/live.js";
-import { html, nothing, PropertyValueMap } from "lit";
+import { html, nothing, PropertyValueMap, TemplateResult } from "lit";
 import { property, queryAssignedElements, queryAsync, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -56,6 +56,7 @@ export class SgdsComboBox extends SelectElement {
   /** If true, a clear button will be enabled on focus */
   @property({ type: Boolean, reflect: true }) clearable = false;
 
+  @property({ type: Boolean, reflect: true }) loading = false;
   /** The function used to filter the menu list, given the user's input value. */
   @property()
   filterFunction: (inputValue: string, item: SgdsComboBoxOptionData) => boolean = (inputValue, item) => {
@@ -71,7 +72,7 @@ export class SgdsComboBox extends SelectElement {
   @state() private emptyMenu = false;
 
   // Used to show and hide the clear button
-  @state() private isFocused = false;
+  @state() protected isFocused = false;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -240,7 +241,7 @@ export class SgdsComboBox extends SelectElement {
   }
 
   // Called each time the user types in the <sgds-input>, we set .value and show the menu
-  private async _handleInputChange(e: CustomEvent) {
+  protected async _handleInputChange(e: CustomEvent) {
     const input = e.target as HTMLInputElement;
     this.displayValue = input.value;
     this.emit<ISgdsComboBoxInputEventDetail>("sgds-input", { detail: { displayValue: this.displayValue } });
@@ -410,7 +411,13 @@ export class SgdsComboBox extends SelectElement {
       this._mixinResetValidity(await this._multiSelectInput);
     }
   }
+  /** Template for the suffix icon */
+  protected suffixIconTemplate: TemplateResult = html`<sgds-icon
+    name=${this.menuIsOpen ? "chevron-up" : "chevron-down"}
+    size="md"
+  ></sgds-icon>`;
 
+  protected prefixIconTemplate: TemplateResult = html`${nothing}`;
   /**
    * Used `repeat` helper from Lit to render instead of .map:
    * The reassigning of value is affecting the truncation on badge as it is not triggering the slot change event.
@@ -419,9 +426,9 @@ export class SgdsComboBox extends SelectElement {
    * For a list created using Array.map, lit-html maintains the DOM nodes for the list items, but reassigns the values
    * For a list created using repeat, the repeat directive reorders the existing DOM nodes, so the nodes representing the first list item move to the last position.
    */
-  protected _renderInput() {
+  protected _renderInput(showClearButton: boolean): TemplateResult {
     const wantFeedbackStyle = this.hasFeedback;
-    const showButton = (this.isFocused || this.menuIsOpen) && this.value !== "" && this.clearable;
+    const showButton = showClearButton;
 
     return html`
       <div
@@ -433,6 +440,7 @@ export class SgdsComboBox extends SelectElement {
         })}"
         @click=${this._handleClick}
       >
+        ${this.prefixIconTemplate}
         <div class="combobox-input-container">
           ${this.multiSelect
             ? html`
@@ -488,12 +496,15 @@ export class SgdsComboBox extends SelectElement {
               ></sgds-icon>
             `
           : nothing}
-
-        <sgds-icon name=${this.menuIsOpen ? "chevron-up" : "chevron-down"} size="md"></sgds-icon>
+        ${this.suffixIconTemplate}
       </div>
     `;
   }
+  protected _renderFeedbackMenu() {
+    return this.emptyMenu && this.optionList.length > 0 ? html`<div class="empty-menu">No options</div>` : nothing;
+  }
   render() {
+    const showClearButton = (this.isFocused || this.menuIsOpen) && this.value !== "" && this.clearable;
     return html`
       <div
         class=${classMap({ "form-control-container": true, disabled: this.disabled, combobox: true })}
@@ -501,13 +512,15 @@ export class SgdsComboBox extends SelectElement {
       >
         ${this._renderLabel()}
         <!-- The input -->
-        ${this._renderInput()} ${this._renderFeedback()}
+        ${this._renderInput(showClearButton)} ${this._renderFeedback()}
 
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
-          <slot id="default" @slotchange=${this._handleDefaultSlotChange}
-            ><div class="empty-menu">No options</div></slot
-          >
-          ${this.emptyMenu && this.optionList.length > 0 ? html`<div class="empty-menu">No options</div>` : nothing}
+          ${!this.loading
+            ? html` <slot id="default" @slotchange=${this._handleDefaultSlotChange}
+                ><div class="empty-menu">No options</div></slot
+              >`
+            : nothing}
+          ${this._renderFeedbackMenu()}
         </ul>
       </div>
 

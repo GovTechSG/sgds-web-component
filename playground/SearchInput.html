@@ -1,0 +1,45 @@
+<script type="module" src="../src/index.ts"></script>
+<link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+
+<style>
+    body {
+        padding: 1rem;
+    }
+</style>
+<body>
+<sgds-search-input multiSelect id="multiselect"></sgds-search-input>
+<sgds-combo-box multiselect></sgds-combo-box>
+
+<form>
+    <sgds-search-input required hasFeedback>
+        <sgds-combo-box-option value="1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="2">Bananna</sgds-combo-box-option>
+          <sgds-combo-box-option value="3">Chayote</sgds-combo-box-option>
+    </sgds-search-input>
+    <sgds-combo-box multiSelect required hasFeedback>
+        <sgds-combo-box-option value="1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="2">Bananna</sgds-combo-box-option>
+          <sgds-combo-box-option value="3">Chayote</sgds-combo-box-option>
+    </sgds-combo-box>
+    <button type="submit">Submit</button>
+</form>
+</body>
+
+<!-- <script>
+        const searchInput = document.querySelector('sgds-search-input')
+
+    setTimeout(() => {
+        // searchInput.loading = true;
+        // window.setTimeout(() => {
+        //     searchInput.loading = false;
+        // }, 3000);
+        searchInput.innerHTML = ` <sgds-combo-box-option value="1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="2">Bananna</sgds-combo-box-option>
+          <sgds-combo-box-option value="3">Chayote</sgds-combo-box-option>`
+    }, 5000);
+    searchInput.addEventListener("sgds-input", (e) => {
+        console.log(e.detail.displayValue)
+    })
+</script> -->
