@@ -21,7 +21,7 @@ import SgdsSelectOption from "./sgds-select-option";
  */
 export class SgdsSelect extends SelectElement {
   static styles = [...SelectElement.styles, formTextControlStyles, selectStyle];
-
+  protected childName = "sgds-select-option";
   /** @internal */
   static dependencies = {
     "sgds-icon": SgdsIcon,

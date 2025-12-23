@@ -97,8 +97,10 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
 
   connectedCallback(): void {
     super.connectedCallback();
-    this.addEventListener("blur", async () => {
-      this.invalid = this.menuIsOpen ? false : !this._mixinReportValidity();
+    this.addEventListener("blur", async (e) => {
+      /** If user clicks the menu, we want to keep the input valid */
+      const isSelf = (e.relatedTarget as HTMLElement)?.tagName.toLowerCase() === this.childName
+      this.invalid =  isSelf ? false : !this._mixinReportValidity();
     });
   }
 
@@ -185,6 +187,7 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
   }
 
   protected declare options: OptionElement[];
+  protected declare childName: string;
 }
 
 export interface SgdsOptionData {

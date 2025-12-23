@@ -39,7 +39,7 @@ export interface ISgdsComboBoxInputEventDetail {
 
 export class SgdsComboBox extends SelectElement {
   static styles = [...SelectElement.styles, formTextControlStyle, comboBoxStyle];
-
+  protected childName = "sgds-combo-box-option";
   /** @internal */
   static dependencies = {
     "sgds-combo-box-option": SgdsComboBoxOption,
@@ -115,7 +115,6 @@ export class SgdsComboBox extends SelectElement {
       comboBoxOption.active = this.value.includes(o.value);
       this.appendChild(comboBoxOption);
     });
-
     this._setupValidation(this.menuList);
 
     if (this.menuIsOpen && !this.readonly) {
@@ -168,10 +167,10 @@ export class SgdsComboBox extends SelectElement {
       if (!this.multiSelect) {
         this.displayValue = initialSelectedItem[0]?.label;
       }
-      this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._input);
-
-      this._mixinValidate(this.input);
     }
+    /** We want to run validation regardless of value or list present */
+      this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._input);
+      this._mixinValidate(this.input);
   }
 
   @watch("value", { waitUntilFirstUpdate: true })
@@ -292,6 +291,7 @@ export class SgdsComboBox extends SelectElement {
     if (this.multiSelect) {
       if (!this.selectedItems.some(i => i.value === foundItem.value)) {
         this.selectedItems = [...this.selectedItems, foundItem];
+        // setTimeout(() => (this.displayValue = ""));
       }
 
       this.value = this.selectedItems.map(i => i.value).join(";");
@@ -531,6 +531,7 @@ export class SgdsComboBox extends SelectElement {
             id="multi-select-input-tracker"
             class="visually-hidden"
             ?required=${this.required}
+            tabindex="-1"
           />`
         : nothing}
     `;

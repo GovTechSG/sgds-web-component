@@ -1,10 +1,16 @@
 import { html, nothing, TemplateResult } from "lit";
+import { property, queryAssignedElements } from "lit/decorators.js";
 import SgdsComboBox from "../ComboBox/sgds-combo-box";
-import { property } from "lit/decorators.js";
 import searchInputStyles from "./search-input.css";
+import SgdsSearchInputOption from "./sgds-search-input-option";
 
 export class SgdsSearchInput extends SgdsComboBox {
   static styles = [...SgdsComboBox.styles, searchInputStyles];
+  protected childName = "sgds-search-input-option";
+
+  @queryAssignedElements({ flatten: true, selector: "sgds-search-input-option" })
+  protected options: SgdsSearchInputOption[];
+
   @property({ type: Boolean, reflect: true }) loading = false;
 
   constructor() {

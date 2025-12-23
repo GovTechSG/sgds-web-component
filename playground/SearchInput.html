@@ -9,21 +9,26 @@
     }
 </style>
 <body>
-<sgds-search-input multiSelect id="multiselect"></sgds-search-input>
-<sgds-combo-box multiselect></sgds-combo-box>
 
 <form>
-    <sgds-search-input required hasFeedback>
-        <sgds-combo-box-option value="1">Apple</sgds-combo-box-option>
-          <sgds-combo-box-option value="2">Bananna</sgds-combo-box-option>
-          <sgds-combo-box-option value="3">Chayote</sgds-combo-box-option>
-    </sgds-search-input>
-    <sgds-combo-box multiSelect required hasFeedback>
+        <sgds-combo-box value="1" multiSelect required hasFeedback>
         <sgds-combo-box-option value="1">Apple</sgds-combo-box-option>
           <sgds-combo-box-option value="2">Bananna</sgds-combo-box-option>
           <sgds-combo-box-option value="3">Chayote</sgds-combo-box-option>
     </sgds-combo-box>
+    <sgds-combo-box value="1" required hasFeedback>
+        <sgds-combo-box-option value="1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="2">Bananna</sgds-combo-box-option>
+          <sgds-combo-box-option value="3">Chayote</sgds-combo-box-option>
+    </sgds-combo-box>
+    <sgds-search-input  required hasFeedback>
+        <sgds-search-input-option value="1">Apple</sgds-search-input-option>
+          <sgds-search-input-option value="2">Bananna</sgds-search-input-option>
+          <sgds-search-input-option value="3">Chayote</sgds-search-input-option>
+    </sgds-search-input>
+
     <button type="submit">Submit</button>
+    <button type="reset">rest</button>
 </form>
 </body>
 
