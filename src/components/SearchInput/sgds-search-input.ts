@@ -8,14 +8,20 @@ import SgdsBadge from "../Badge/sgds-badge";
 import SgdsSpinner from "../Spinner/sgds-spinner";
 
 /**
- * @summary ComboBox component is used for users to make one or more selections from a list through user input, keyboard or mouse actions
+ * @summary SearchInput component is used for users to make one or more selections from a list through user input, keyboard or mouse actions.
+ * SearchInput extends from ComboBox component. The main difference lies in their use case and interaction behaviour.
+ * SearchInput is used for dynamic searches resulting in asynchronous loading of data while Combo Box is used to filter static data already present in the option list.
+ * SearchInputOption is the option of the SearchInput
  *
- * @slot default - default slot to pass in sgds-combo-box-option
+ * @slot default - default slot to pass in sgds-search-input-option
  *
  * @event sgds-change - Emitted when the search input's value changes.
  * @event sgds-input -  Emitted when user input is received and its value changes. `event.detail = { displayValue }`
  * @event sgds-focus -  Emitted when user input is focused.
  * @event sgds-blur -  Emitted when user input is blurred.
+ * @omit-event sgds-select
+ * @omit clearable
+ * @omit filterFunction
  */
 export class SgdsSearchInput extends SgdsComboBox {
   static styles = [...SgdsComboBox.styles, searchInputStyles];
@@ -34,6 +40,7 @@ export class SgdsSearchInput extends SgdsComboBox {
 
   constructor() {
     super();
+    /** @internal */
     this.clearable = true;
     this.suffixIconTemplate = html`${nothing}`;
     this.prefixIconTemplate = html`<sgds-icon name="search" size="md"></sgds-icon>`;
@@ -44,8 +51,9 @@ export class SgdsSearchInput extends SgdsComboBox {
    *  has typed display value or selected value
    */
   protected override _renderInput(): TemplateResult {
-    const showClearButtonForSingle = this.isFocused && !!this.displayValue;
-    const showClearButtonForMulti = this.isFocused && (!!this.displayValue || this.selectedItems.length > 0);
+    const showClearButtonForSingle = !this.readonly && this.isFocused && !!this.displayValue;
+    const showClearButtonForMulti =
+      !this.readonly && this.isFocused && (!!this.displayValue || this.selectedItems.length > 0);
     return super._renderInput(this.multiSelect ? showClearButtonForMulti : showClearButtonForSingle);
   }
   /**
@@ -63,6 +71,12 @@ export class SgdsSearchInput extends SgdsComboBox {
       return null;
     }
     super._handleKeyboardMenuEvent(e);
+  }
+  protected override async _handleInputChange(e: CustomEvent) {
+    if (this.options.length === 0 && !this.loading) {
+      return super._handleInputChange(e, false);
+    }
+    return super._handleInputChange(e, true);
   }
 }
 

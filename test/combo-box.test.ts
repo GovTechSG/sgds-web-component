@@ -510,6 +510,17 @@ describe("sgds-combo-box ", () => {
     const dropdownMenu = el.shadowRoot?.querySelector(".dropdown-menu");
     expect(dropdownMenu?.textContent).to.contain("Loading...");
   });
+  it("readonly prevents clear button from showing", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box readonly clearable value="1">
+      <sgds-combo-box-option value="1">Option 1</sgds-combo-box-option>
+    </sgds-combo-box>`);
+    await el.updateComplete;
+    const input = el.shadowRoot?.querySelector("input");
+    input?.focus();
+    await el.updateComplete;
+    const clearBtn = el.shadowRoot?.querySelector(".form-clearable");
+    expect(clearBtn).to.be.null;
+  });
 });
 
 describe("single select combobox", () => {

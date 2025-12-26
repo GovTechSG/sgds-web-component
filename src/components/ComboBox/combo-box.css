@@ -47,3 +47,8 @@ slot[id='default'].is-loading::slotted(*),
 slot[id='default'].is-loading{
   display: none;
 }
+
+.form-clearable:focus-visible {
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
+}

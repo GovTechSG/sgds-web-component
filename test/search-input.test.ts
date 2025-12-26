@@ -169,7 +169,7 @@ describe("sgds-search-input clear button behaviour", () => {
     expect(clearBtn).to.exist;
   });
   it("shows clear button when focused and with display value", async () => {
-    const el = await fixture<SgdsSearchInput>(html`<sgds-search-input clearable>
+    const el = await fixture<SgdsSearchInput>(html`<sgds-search-input>
       <sgds-search-input-option value="1">Option 1</sgds-search-input-option>
     </sgds-search-input>`);
     await el.updateComplete;
@@ -180,5 +180,26 @@ describe("sgds-search-input clear button behaviour", () => {
     await el.updateComplete;
     const clearBtn = el.shadowRoot?.querySelector(".form-clearable");
     expect(clearBtn).to.exist;
+  });
+  it("readonly prevents clear button from showing", async () => {
+    const el = await fixture<SgdsSearchInput>(html`<sgds-search-input readonly value="1">
+      <sgds-search-input-option value="1">Option 1</sgds-search-input-option>
+    </sgds-search-input>`);
+    await el.updateComplete;
+    const input = el.shadowRoot?.querySelector("input");
+    input?.focus();
+    await el.updateComplete;
+    const clearBtn = el.shadowRoot?.querySelector(".form-clearable");
+    expect(clearBtn).to.be.null;
+  });
+  it("if there are no options and not loading, menu does not open when input changes", async () => {
+    const el = await fixture<SgdsSearchInput>(html`<sgds-search-input></sgds-search-input>`);
+    await el.updateComplete;
+    const input = el.shadowRoot?.querySelector("input");
+    input?.focus();
+    await el.updateComplete;
+    await sendKeys({ type: "abc" });
+    await el.updateComplete;
+    expect(el.menuIsOpen).to.be.false;
   });
 });

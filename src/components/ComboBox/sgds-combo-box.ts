@@ -240,7 +240,7 @@ export class SgdsComboBox extends SelectElement {
   }
 
   // Called each time the user types in the <sgds-input>, we set .value and show the menu
-  protected async _handleInputChange(e: CustomEvent) {
+  protected async _handleInputChange(e: CustomEvent, showMenuOnInput = true) {
     const input = e.target as HTMLInputElement;
     this.displayValue = input.value;
     this.emit<ISgdsComboBoxInputEventDetail>("sgds-input", { detail: { displayValue: this.displayValue } });
@@ -257,7 +257,9 @@ export class SgdsComboBox extends SelectElement {
     }
 
     this.invalid = false;
-    this.showMenu();
+    if (showMenuOnInput) {
+      this.showMenu();
+    }
 
     // Filtering for slots
     this.emptyMenu = this.filteredList.length === 0;
@@ -510,7 +512,8 @@ export class SgdsComboBox extends SelectElement {
     }
   }
   render() {
-    const showClearButton = (this.isFocused || this.menuIsOpen) && this.value !== "" && this.clearable;
+    const showClearButton =
+      (this.isFocused || this.menuIsOpen) && this.value !== "" && this.clearable && !this.readonly;
     return html`
       <div
         class=${classMap({ "form-control-container": true, disabled: this.disabled, combobox: true })}
