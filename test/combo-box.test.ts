@@ -491,6 +491,25 @@ describe("sgds-combo-box ", () => {
     await waitUntil(() => !el.shadowRoot?.querySelector("ul>.empty-menu"));
     expect(el.shadowRoot?.querySelector("ul>.empty-menu")).to.not.exist;
   });
+     it("loading menu overrides no options menu ", async () => {
+        const el = await fixture<SgdsComboBox>(html`<sgds-combo-box loading menuIsOpen> </sgds-combo-box>`);
+        await el.updateComplete;
+        const slot = el.shadowRoot?.querySelector("slot#default");
+        expect(slot?.classList.contains("is-loading")).to.be.true;
+        const dropdownMenu = el.shadowRoot?.querySelector(".dropdown-menu");
+        expect(dropdownMenu?.textContent).to.contain("Loading...")
+      });
+    
+      it("loading menu overrides options menu ", async () => {
+        const el = await fixture<SgdsComboBox>(html`<sgds-combo-box loading menuIsOpen>
+          <sgds-combo-box-option value="1">Option 1</sgds-combo-box-option>
+        </sgds-combo-box>`);
+        await el.updateComplete;
+        const slot = el.shadowRoot?.querySelector("slot#default");
+        expect(slot?.classList.contains("is-loading")).to.be.true;
+          const dropdownMenu = el.shadowRoot?.querySelector(".dropdown-menu");
+        expect(dropdownMenu?.textContent).to.contain("Loading...")
+      });
 });
 
 describe("single select combobox", () => {

@@ -126,7 +126,7 @@ export class DropdownElement extends SgdsElement {
     }
   }
 
-  protected _handleKeyboardMenuEvent = (e: KeyboardEvent) => {
+  protected _handleKeyboardMenuEvent (e: KeyboardEvent) {
     if (this.readonly) return;
     switch (e.key) {
       case ARROW_DOWN:

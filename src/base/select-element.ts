@@ -12,10 +12,25 @@ import generateId from "../utils/generateId";
 import { SgdsFormValidatorMixin } from "../utils/validatorMixin";
 import { DropdownListElement } from "./dropdown-list-element";
 import { OptionElement } from "./option-element";
+import selectStyles from "./select.css";
 
-export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) implements SgdsFormControl {
-  static styles = [...DropdownListElement.styles, dropdownMenuStyle, hintTextStyles, feedbackStyles, formControlStyles];
+// Abstract base class to enforce static abstract childName
+abstract class AbstractSelectBase {
+  static childName: string;
+}
 
+export class SelectElement
+  extends SgdsFormValidatorMixin(DropdownListElement)
+  implements SgdsFormControl, AbstractSelectBase
+{
+  static styles = [
+    ...DropdownListElement.styles,
+    dropdownMenuStyle,
+    hintTextStyles,
+    feedbackStyles,
+    formControlStyles,
+    selectStyles
+  ];
   /** The input's label  */
   @property({ reflect: true }) label = "";
 
@@ -36,6 +51,9 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
 
   /** Makes the input a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
+
+  /** Sets the loading state of the component */
+  @property({ type: Boolean, reflect: true }) loading = false;
 
   /**
    * IMPORTANT:
@@ -97,10 +115,11 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
 
   connectedCallback(): void {
     super.connectedCallback();
-    this.addEventListener("blur", async (e) => {
+    this.addEventListener("blur", async e => {
+      const childName = (this.constructor as typeof SelectElement).childName;
       /** If user clicks the menu, we want to keep the input valid */
-      const isSelf = (e.relatedTarget as HTMLElement)?.tagName.toLowerCase() === this.childName
-      this.invalid =  isSelf ? false : !this._mixinReportValidity();
+      const isSelf = (e.relatedTarget as HTMLElement)?.tagName.toLowerCase() === childName;
+      this.invalid = isSelf ? false : !this._mixinReportValidity();
     });
   }
 
@@ -185,9 +204,14 @@ export class SelectElement extends SgdsFormValidatorMixin(DropdownListElement) i
       disabled: el.disabled ?? undefined
     }));
   }
-
+  protected _renderEmptyMenu() {
+    return html` <div class="empty-menu">No options</div> `;
+  }
+  protected _renderLoadingMenu() {
+    return html`<div class="loading-menu"><sgds-spinner size="xs" tone="brand"></sgds-spinner>Loading...</div>`;
+  }
   protected declare options: OptionElement[];
-  protected declare childName: string;
+  declare static childName: string;
 }
 
 export interface SgdsOptionData {

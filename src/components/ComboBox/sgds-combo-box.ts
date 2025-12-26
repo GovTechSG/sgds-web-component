@@ -14,6 +14,7 @@ import formTextControlStyle from "../../styles/form-text-control.css";
 import { SgdsComboBoxOption } from "./sgds-combo-box-option";
 
 import { repeat } from "lit/directives/repeat.js";
+import SgdsSpinner from "../Spinner/sgds-spinner";
 
 /**
  * Each item in the ComboBox has a label to display
@@ -36,15 +37,15 @@ export interface ISgdsComboBoxInputEventDetail {
  * @event sgds-focus -  Emitted when user input is focused.
  * @event sgds-blur -  Emitted when user input is blurred.
  */
-
 export class SgdsComboBox extends SelectElement {
   static styles = [...SelectElement.styles, formTextControlStyle, comboBoxStyle];
-  protected childName = "sgds-combo-box-option";
+  static childName = "sgds-combo-box-option";
   /** @internal */
   static dependencies = {
-    "sgds-combo-box-option": SgdsComboBoxOption,
+    [SgdsComboBox.childName]: SgdsComboBoxOption,
     "sgds-icon": SgdsIcon,
-    "sgds-badge": SgdsBadge
+    "sgds-badge": SgdsBadge,
+    "sgds-spinner": SgdsSpinner
   };
 
   /** If true, renders multiple checkbox selection items. If false, single-select. */
@@ -56,7 +57,6 @@ export class SgdsComboBox extends SelectElement {
   /** If true, a clear button will be enabled on focus */
   @property({ type: Boolean, reflect: true }) clearable = false;
 
-  @property({ type: Boolean, reflect: true }) loading = false;
   /** The function used to filter the menu list, given the user's input value. */
   @property()
   filterFunction: (inputValue: string, item: SgdsComboBoxOptionData) => boolean = (inputValue, item) => {
@@ -169,8 +169,8 @@ export class SgdsComboBox extends SelectElement {
       }
     }
     /** We want to run validation regardless of value or list present */
-      this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._input);
-      this._mixinValidate(this.input);
+    this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._input);
+    this._mixinValidate(this.input);
   }
 
   @watch("value", { waitUntilFirstUpdate: true })
@@ -501,7 +501,13 @@ export class SgdsComboBox extends SelectElement {
     `;
   }
   protected _renderFeedbackMenu() {
-    return this.emptyMenu && this.optionList.length > 0 ? html`<div class="empty-menu">No options</div>` : nothing;
+    if (this.loading) {
+     return this._renderLoadingMenu()
+    }
+    // filtered to zero items
+    if (this.emptyMenu && this.optionList.length > 0) {
+      return this._renderEmptyMenu();
+    }
   }
   render() {
     const showClearButton = (this.isFocused || this.menuIsOpen) && this.value !== "" && this.clearable;
@@ -515,11 +521,12 @@ export class SgdsComboBox extends SelectElement {
         ${this._renderInput(showClearButton)} ${this._renderFeedback()}
 
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
-          ${!this.loading
-            ? html` <slot id="default" @slotchange=${this._handleDefaultSlotChange}
-                ><div class="empty-menu">No options</div></slot
-              >`
-            : nothing}
+          <slot
+            id="default"
+            class=${classMap({ "is-loading": this.loading })}
+            @slotchange=${this._handleDefaultSlotChange}
+            ><div class="empty-menu">No options</div></slot
+          >
           ${this._renderFeedbackMenu()}
         </ul>
       </div>

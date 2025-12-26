@@ -9,27 +9,90 @@
     }
 </style>
 <body>
+    <h4>Initial untouched state, no options available in menu and user has not typed</h4>
+    <sgds-search-input placeholder="type something.."></sgds-search-input>
 
-<form>
-        <sgds-combo-box value="1" multiSelect required hasFeedback>
-        <sgds-combo-box-option value="1">Apple</sgds-combo-box-option>
-          <sgds-combo-box-option value="2">Bananna</sgds-combo-box-option>
-          <sgds-combo-box-option value="3">Chayote</sgds-combo-box-option>
-    </sgds-combo-box>
-    <sgds-combo-box value="1" required hasFeedback>
-        <sgds-combo-box-option value="1">Apple</sgds-combo-box-option>
-          <sgds-combo-box-option value="2">Bananna</sgds-combo-box-option>
-          <sgds-combo-box-option value="3">Chayote</sgds-combo-box-option>
-    </sgds-combo-box>
-    <sgds-search-input  required hasFeedback>
-        <sgds-search-input-option value="1">Apple</sgds-search-input-option>
+    <h4>Loading,takes priority over no options available in menu</h4>
+    <sgds-search-input loading placeholder="type something.."></sgds-search-input>
+
+    <h4>Loading, takes priority over options in menu</h4>
+    <sgds-search-input loading placeholder="type something..">
+          <sgds-search-input-option value="1">Apple</sgds-search-input-option>
           <sgds-search-input-option value="2">Bananna</sgds-search-input-option>
           <sgds-search-input-option value="3">Chayote</sgds-search-input-option>
     </sgds-search-input>
 
+    <h4>single select, with menu options</h4>
+    <sgds-search-input placeholder="type something..">
+          <sgds-search-input-option value="1">Apple</sgds-search-input-option>
+          <sgds-search-input-option value="2">Bananna</sgds-search-input-option>
+          <sgds-search-input-option value="3">Chayote</sgds-search-input-option>
+    </sgds-search-input>
+    <h4>multi select, with menu options</h4>
+    <sgds-search-input placeholder="type something.." multiSelect>
+          <sgds-search-input-option value="1">Apple</sgds-search-input-option>
+          <sgds-search-input-option value="2">Bananna</sgds-search-input-option>
+          <sgds-search-input-option value="3">Chayote</sgds-search-input-option>
+    </sgds-search-input>
+    <h4>clearable single select, with menu options</h4>
+    <sgds-search-input clearable value="1" placeholder="type something..">
+          <sgds-search-input-option value="1">Apple</sgds-search-input-option>
+          <sgds-search-input-option value="2">Bananna</sgds-search-input-option>
+          <sgds-search-input-option value="3">Chayote</sgds-search-input-option>
+    </sgds-search-input>
+    <h4>multi select, with menu options</h4>
+    <sgds-search-input clearable value="1" placeholder="type something.." multiSelect>
+          <sgds-search-input-option value="1">Apple</sgds-search-input-option>
+          <sgds-search-input-option value="2">Bananna</sgds-search-input-option>
+          <sgds-search-input-option value="3">Chayote</sgds-search-input-option>
+    </sgds-search-input>
+    <h4>Form, required empty fields show error when submit, reset clears error</h4>
+    <form>
+    <sgds-search-input required hasFeedback>
+        <sgds-search-input-option value="1">Apple</sgds-search-input-option>
+          <sgds-search-input-option value="2">Bananna</sgds-search-input-option>
+          <sgds-search-input-option value="3">Chayote</sgds-search-input-option>
+    </sgds-search-input>
+    <sgds-search-input required hasFeedback multiselect>
+        <sgds-search-input-option value="1">Apple</sgds-search-input-option>
+          <sgds-search-input-option value="2">Bananna</sgds-search-input-option>
+          <sgds-search-input-option value="3">Chayote</sgds-search-input-option>
+    </sgds-search-input>
     <button type="submit">Submit</button>
     <button type="reset">rest</button>
 </form>
+    <h4>Form, required filled fields can be submitted</h4>
+    <form>
+    <sgds-search-input required hasFeedback value="1">
+        <sgds-search-input-option value="1">Apple</sgds-search-input-option>
+          <sgds-search-input-option value="2">Bananna</sgds-search-input-option>
+          <sgds-search-input-option value="3">Chayote</sgds-search-input-option>
+    </sgds-search-input>
+    <sgds-search-input required hasFeedback multiselect value="1">
+        <sgds-search-input-option value="1">Apple</sgds-search-input-option>
+          <sgds-search-input-option value="2">Bananna</sgds-search-input-option>
+          <sgds-search-input-option value="3">Chayote</sgds-search-input-option>
+    </sgds-search-input>
+    <button type="submit">Submit</button>
+    <button type="reset">rest</button>
+</form>
+</form>
+    <h4>Form reset, clears selection with no error </h4>
+    <form>
+    <sgds-search-input required hasFeedback>
+        <sgds-search-input-option value="1">Apple</sgds-search-input-option>
+          <sgds-search-input-option value="2">Bananna</sgds-search-input-option>
+          <sgds-search-input-option value="3">Chayote</sgds-search-input-option>
+    </sgds-search-input>
+    <sgds-search-input required hasFeedback multiselect>
+        <sgds-search-input-option value="1">Apple</sgds-search-input-option>
+          <sgds-search-input-option value="2">Bananna</sgds-search-input-option>
+          <sgds-search-input-option value="3">Chayote</sgds-search-input-option>
+    </sgds-search-input>
+    <button type="submit">Submit</button>
+    <button type="reset">rest</button>
+</form>
+
 </body>
 
 <!-- <script>
