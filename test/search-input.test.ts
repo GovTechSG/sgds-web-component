@@ -130,7 +130,7 @@ describe("<sgds-search-input>", () => {
     const slot = el.shadowRoot?.querySelector("slot#default");
     expect(slot?.classList.contains("is-loading")).to.be.true;
     const dropdownMenu = el.shadowRoot?.querySelector(".dropdown-menu");
-    expect(dropdownMenu?.textContent).to.contain("Loading...")
+    expect(dropdownMenu?.textContent).to.contain("Loading...");
   });
 
   it("loading menu overrides options menu ", async () => {
@@ -140,8 +140,8 @@ describe("<sgds-search-input>", () => {
     await el.updateComplete;
     const slot = el.shadowRoot?.querySelector("slot#default");
     expect(slot?.classList.contains("is-loading")).to.be.true;
-      const dropdownMenu = el.shadowRoot?.querySelector(".dropdown-menu");
-    expect(dropdownMenu?.textContent).to.contain("Loading...")
+    const dropdownMenu = el.shadowRoot?.querySelector(".dropdown-menu");
+    expect(dropdownMenu?.textContent).to.contain("Loading...");
   });
 });
 

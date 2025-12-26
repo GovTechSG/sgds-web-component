@@ -20,8 +20,8 @@ import SgdsSpinner from "../Spinner/sgds-spinner";
 export class SgdsSearchInput extends SgdsComboBox {
   static styles = [...SgdsComboBox.styles, searchInputStyles];
   static override childName = "sgds-search-input-option";
-  
- /** @internal */
+
+  /** @internal */
   static override dependencies = {
     "sgds-icon": SgdsIcon,
     "sgds-badge": SgdsBadge,
@@ -59,7 +59,7 @@ export class SgdsSearchInput extends SgdsComboBox {
     super._handleClick();
   }
   protected override _handleKeyboardMenuEvent(e: KeyboardEvent) {
-      if (this.options.length === 0 && !this.loading) {
+    if (this.options.length === 0 && !this.loading) {
       return null;
     }
     super._handleKeyboardMenuEvent(e);

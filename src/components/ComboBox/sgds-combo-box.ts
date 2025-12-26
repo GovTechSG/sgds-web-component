@@ -502,7 +502,7 @@ export class SgdsComboBox extends SelectElement {
   }
   protected _renderFeedbackMenu() {
     if (this.loading) {
-     return this._renderLoadingMenu()
+      return this._renderLoadingMenu();
     }
     // filtered to zero items
     if (this.emptyMenu && this.optionList.length > 0) {
