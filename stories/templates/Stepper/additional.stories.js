@@ -1,4 +1,4 @@
-import { MockStepper } from "../../mocks/stepper.ts";
+import "../../mocks/stepper.ts";
 import { html } from "lit-html";
 
 const ClickableTemplate = args => {
@@ -32,7 +32,7 @@ export const Clickable = {
   tags: ["!dev"]
 };
 
-const MockStepperTemplate = () => Object.assign(new MockStepper());
+const MockStepperTemplate = () => html`<mock-stepper></mock-stepper>`;
 
 export const StepperExample = {
   render: MockStepperTemplate.bind({}),

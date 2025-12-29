@@ -3,6 +3,7 @@ import { property } from "lit/decorators.js";
 import { OptionElement } from "../../base/option-element";
 import SgdsCheckbox from "../Checkbox/sgds-checkbox";
 import SgdsIcon from "../Icon/sgds-icon";
+import SgdsComboBox from "./sgds-combo-box";
 
 /**
  * @summary ComboBoxOption is the option of the Combobox
@@ -28,8 +29,7 @@ export class SgdsComboBoxOption extends OptionElement {
 
   firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
-
-    const parent = this.closest("sgds-combo-box");
+    const parent = this.parentElement as SgdsComboBox;
     if (parent?.multiSelect) {
       this.checkbox = true;
     }

@@ -546,4 +546,23 @@ describe("sgds-select-option (default)", () => {
       `
     );
   });
+  it("loading menu overrides no options menu ", async () => {
+    const el = await fixture<SgdsSelect>(html`<sgds-select loading menuIsOpen> </sgds-select>`);
+    await el.updateComplete;
+    const slot = el.shadowRoot?.querySelector("slot#default");
+    expect(slot?.classList.contains("is-loading")).to.be.true;
+    const dropdownMenu = el.shadowRoot?.querySelector(".dropdown-menu");
+    expect(dropdownMenu?.textContent).to.contain("Loading...");
+  });
+
+  it("loading menu overrides options menu ", async () => {
+    const el = await fixture<SgdsSelect>(html`<sgds-select loading menuIsOpen>
+      <sgds-select-option value="1">Option 1</sgds-select-option>
+    </sgds-select>`);
+    await el.updateComplete;
+    const slot = el.shadowRoot?.querySelector("slot#default");
+    expect(slot?.classList.contains("is-loading")).to.be.true;
+    const dropdownMenu = el.shadowRoot?.querySelector(".dropdown-menu");
+    expect(dropdownMenu?.textContent).to.contain("Loading...");
+  });
 });

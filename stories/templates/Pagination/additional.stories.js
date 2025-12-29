@@ -1,7 +1,7 @@
-import { MockPagination } from "../../mocks/pagination.ts";
+import "../../mocks/pagination.ts";
 import { html } from "lit-html";
 
-const MockPaginationTemplate = () => Object.assign(new MockPagination());
+const MockPaginationTemplate = () => html`<mock-pagination></mock-pagination>`;
 
 export const PaginationWithAPI = {
   render: MockPaginationTemplate.bind({}),

@@ -16,7 +16,8 @@ export const Template = ({
   floatingOpts,
   menuIsOpen,
   filterFunction,
-  thirdOptionDisabled
+  thirdOptionDisabled,
+  loading
 }) => {
   return html`
     <sgds-combo-box
@@ -34,6 +35,7 @@ export const Template = ({
       filterFunction=${ifDefined(filterFunction)}
       ?multiSelect=${multiSelect}
       id=${args.id}
+      ?loading=${loading}
       >${menuList.map(
         (m, i) => html`<sgds-combo-box-option value=${m.value} ?disabled=${thirdOptionDisabled && i === 2}
           >${m.label}</sgds-combo-box-option

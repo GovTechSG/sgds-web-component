@@ -2,12 +2,12 @@ import fs from 'fs';
 import { parse } from 'comment-parser';
 import { pascalCase } from 'pascal-case';
 import { resolveTypeAliasPlugin } from './scripts/resolveTypeAliasPlugin.mjs';
+import { cemInheritancePlugin } from "@wc-toolkit/cem-inheritance";
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
 // eslint-disable-next-line func-style
 const noDash = string => string.replace(/^\s?-/, '').trim();
-
 
 const typesByAliasMap = new Map()
 
@@ -105,6 +105,7 @@ export default {
         }
       }
     },
+        cemInheritancePlugin(),
     {
       name: 'sgds-react-event-names',
       analyzePhase({ ts, node, moduleDoc }) {

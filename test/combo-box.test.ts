@@ -114,6 +114,7 @@ describe("sgds-combo-box ", () => {
       ]}
     ></sgds-combo-box>`);
     await el.updateComplete;
+    await waitUntil(() => !el.shadowRoot?.querySelector(".empty-menu"));
     assert.shadowDom.equal(
       el,
       `
@@ -138,7 +139,7 @@ describe("sgds-combo-box ", () => {
           part="menu"
           tabindex="-1"
           >
-              <slot><div class="empty-menu">No options</div></slot> 
+              <slot></slot> 
         </ul>
           `,
       { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
@@ -280,6 +281,14 @@ describe("sgds-combo-box ", () => {
       const item = el.querySelector("sgds-combo-box-option");
       const itemVal = (item as SgdsComboBoxOption).innerText;
       expect(itemVal).to.equal("Apple");
+    });
+    it("when options are empty, returns empty menu", async () => {
+      const el = await fixture<SgdsComboBox>(html`<sgds-combo-box></sgds-combo-box>`);
+      const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+      await simulateUserClick(input);
+      await waitUntil(() => el.menuIsOpen);
+      expect(el.querySelectorAll("sgds-combo-box-option").length).to.equal(0);
+      expect(el.shadowRoot?.querySelector("div.empty-menu")?.textContent?.trim()).to.equal("No options");
     });
   });
 
@@ -467,7 +476,7 @@ describe("sgds-combo-box ", () => {
     await el.updateComplete;
     expect(el.menuIsOpen).to.be.true;
 
-    expect(el.shadowRoot?.querySelectorAll(".empty-menu")).to.exist;
+    expect(el.shadowRoot?.querySelector(".empty-menu")).to.exist;
   });
 
   it("no option div should not persist when menu is closed", async () => {
@@ -477,6 +486,7 @@ describe("sgds-combo-box ", () => {
       placeholder="Select an option"
       ><sgds-combo-box-option value="one">One</sgds-combo-box-option>
     </sgds-combo-box>`);
+    await waitUntil(() => !el.shadowRoot?.querySelector(".empty-menu"));
     expect(el.shadowRoot?.querySelector("ul>.empty-menu")).to.not.exist;
     const input = el.shadowRoot?.querySelector<HTMLInputElement>("input.form-control");
     input?.focus();
@@ -490,6 +500,36 @@ describe("sgds-combo-box ", () => {
     input?.click();
     await waitUntil(() => !el.shadowRoot?.querySelector("ul>.empty-menu"));
     expect(el.shadowRoot?.querySelector("ul>.empty-menu")).to.not.exist;
+  });
+  it("loading menu overrides no options menu ", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box loading menuIsOpen> </sgds-combo-box>`);
+    await el.updateComplete;
+    const slot = el.shadowRoot?.querySelector("slot#default");
+    expect(slot?.classList.contains("is-loading")).to.be.true;
+    const dropdownMenu = el.shadowRoot?.querySelector(".dropdown-menu");
+    expect(dropdownMenu?.textContent).to.contain("Loading...");
+  });
+
+  it("loading menu overrides options menu ", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box loading menuIsOpen>
+      <sgds-combo-box-option value="1">Option 1</sgds-combo-box-option>
+    </sgds-combo-box>`);
+    await el.updateComplete;
+    const slot = el.shadowRoot?.querySelector("slot#default");
+    expect(slot?.classList.contains("is-loading")).to.be.true;
+    const dropdownMenu = el.shadowRoot?.querySelector(".dropdown-menu");
+    expect(dropdownMenu?.textContent).to.contain("Loading...");
+  });
+  it("readonly prevents clear button from showing", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box readonly clearable value="1">
+      <sgds-combo-box-option value="1">Option 1</sgds-combo-box-option>
+    </sgds-combo-box>`);
+    await el.updateComplete;
+    const input = el.shadowRoot?.querySelector("input");
+    input?.focus();
+    await el.updateComplete;
+    const clearBtn = el.shadowRoot?.querySelector(".form-clearable");
+    expect(clearBtn).to.be.null;
   });
 });
 
@@ -688,7 +728,7 @@ describe("single select combobox", () => {
         el.requestUpdate();
       }
       await el.updateComplete;
-      await waitUntil(() => input.value === "");
+      await waitUntil(() => input.value === "", "this timeout");
       expect(input.value).to.equal("");
       expect(el.value).to.equal("");
     });
@@ -1638,5 +1678,26 @@ describe("sgds-combo-box-option (checkbox)", () => {
     const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option checkbox active></sgds-combo-box-option>`);
     const checkbox = el.shadowRoot?.querySelector<SgdsCheckbox>("sgds-checkbox");
     expect(checkbox?.checked).to.be.true;
+  });
+});
+
+describe("async combobox", () => {
+  it("when emptyMenuAsync is true, returns empty menu. It takes precedence even when options are available", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box emptyMenuAsync async>
+      <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
+    </sgds-combo-box>`);
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    await simulateUserClick(input);
+    await waitUntil(() => el.menuIsOpen);
+    expect(el.querySelectorAll("sgds-combo-box-option").length).to.equal(1);
+    expect(el.shadowRoot?.querySelector("div.empty-menu")?.textContent?.trim()).to.equal("No options");
+  });
+  it("when options are empty, returns empty menu", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box async></sgds-combo-box>`);
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    await simulateUserClick(input);
+    await waitUntil(() => el.menuIsOpen);
+    expect(el.querySelectorAll("sgds-combo-box-option").length).to.equal(0);
+    expect(el.shadowRoot?.querySelector("div.empty-menu")?.textContent?.trim()).to.equal("No options");
   });
 });

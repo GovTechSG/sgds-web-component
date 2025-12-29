@@ -37,10 +37,18 @@
   display: flex;
   gap: var(--sgds-gap-xs);
   flex-wrap: wrap;
+  align-items: center;
   width: calc(100% - var(--sgds-icon-size-md, 1.25rem));
   /* deduct 1px from top and bottom padding due to border */
   padding: calc(var(--sgds-form-padding-y) - var(--sgds-form-border-width-default)) 0; 
 }
-.empty-menu {
-  padding: var(--sgds-padding-sm) var(--sgds-padding-lg, 20px);
+
+slot[id='default'].is-loading::slotted(*),
+slot[id='default'].is-loading{
+  display: none;
+}
+
+.form-clearable:focus-visible {
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }

@@ -13,7 +13,8 @@
   overflow-x: hidden;
   box-sizing: border-box;
 }
-.empty-menu {
-  padding: var(--sgds-padding-sm) var(--sgds-padding-lg, 20px);
-  pointer-events: none;
+
+slot[id='default'].is-loading::slotted(*),
+slot[id='default'].is-loading{
+  display: none;
 }
