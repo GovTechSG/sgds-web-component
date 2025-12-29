@@ -282,6 +282,14 @@ describe("sgds-combo-box ", () => {
       const itemVal = (item as SgdsComboBoxOption).innerText;
       expect(itemVal).to.equal("Apple");
     });
+    it("when options are empty, returns empty menu", async () => {
+      const el = await fixture<SgdsComboBox>(html`<sgds-combo-box></sgds-combo-box>`);
+      const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+      await simulateUserClick(input);
+      await waitUntil(() => el.menuIsOpen);
+      expect(el.querySelectorAll("sgds-combo-box-option").length).to.equal(0);
+      expect(el.shadowRoot?.querySelector("div.empty-menu")?.textContent?.trim()).to.equal("No options");
+    });
   });
 
   ThreeOptionsComboBox.forEach(({ render, mode }) => {
@@ -1670,5 +1678,26 @@ describe("sgds-combo-box-option (checkbox)", () => {
     const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option checkbox active></sgds-combo-box-option>`);
     const checkbox = el.shadowRoot?.querySelector<SgdsCheckbox>("sgds-checkbox");
     expect(checkbox?.checked).to.be.true;
+  });
+});
+
+describe("async combobox", () => {
+  it("when emptyMenuAsync is true, returns empty menu. It takes precedence even when options are available", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box emptyMenuAsync async>
+      <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
+    </sgds-combo-box>`);
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    await simulateUserClick(input);
+    await waitUntil(() => el.menuIsOpen);
+    expect(el.querySelectorAll("sgds-combo-box-option").length).to.equal(1);
+    expect(el.shadowRoot?.querySelector("div.empty-menu")?.textContent?.trim()).to.equal("No options");
+  });
+  it("when options are empty, returns empty menu", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box async></sgds-combo-box>`);
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    await simulateUserClick(input);
+    await waitUntil(() => el.menuIsOpen);
+    expect(el.querySelectorAll("sgds-combo-box-option").length).to.equal(0);
+    expect(el.shadowRoot?.querySelector("div.empty-menu")?.textContent?.trim()).to.equal("No options");
   });
 });

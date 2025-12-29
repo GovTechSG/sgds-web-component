@@ -7,18 +7,15 @@ export class MockSearchInput extends LitElement {
   @state() private options: Array<{ value: string; label: string }> = [];
   @state() private loading = false;
   @state() private empty = false;
-  private userTypedValue = "";
 
   render() {
     return html`
       <sgds-combo-box
-        required
-        hasFeedback
         ?emptyMenuAsync=${this.empty}
         clearable
         placeholder="search"
         async
-        multiselect
+        multiSelect
         @sgds-input=${this.onInput}
         ?loading=${this.loading}
         @sgds-change=${this.onChange}
@@ -43,24 +40,36 @@ export class MockSearchInput extends LitElement {
     // Persist only selected options
     this.options = selectedOptions;
   }
-  private async onInput(e: CustomEvent) {
+
+  private debounceTimer: number | undefined;
+  private lastQuery = "";
+
+  private onInput(e: CustomEvent) {
     this.empty = false;
     const { displayValue } = e.detail;
-    this.userTypedValue = displayValue;
-    // Only fetch if at least 3 characters
-    if (!displayValue || displayValue.length < 2) {
-      // this.options = [];
-      this.loading = false;
-      return;
+    this.lastQuery = displayValue;
+
+    if (this.debounceTimer) {
+      clearTimeout(this.debounceTimer);
     }
-    // Prevent race conditions with multiple requests
-    this.loading = true;
-    const options = await this.fetchOptions(displayValue);
-    // Merge new options with existing, dedupe by value
-    const merged = [...this.options, ...options];
-    const deduped = Array.from(new Map(merged.map(opt => [opt.value, opt])).values());
-    this.options = deduped;
-    this.loading = false;
+
+    this.debounceTimer = window.setTimeout(async () => {
+      if (!displayValue || displayValue.length < 2) {
+        this.loading = false;
+        return;
+      }
+      this.loading = true;
+      const options = await this.fetchOptions(displayValue);
+      if (options.length === 0) {
+        this.empty = true;
+      } else this.empty = false;
+      // Only update if this is still the latest query
+      if (this.lastQuery !== displayValue) return;
+      const merged = [...this.options, ...options];
+      const deduped = Array.from(new Map(merged.map(opt => [opt.value, opt])).values());
+      this.options = deduped;
+      this.loading = false;
+    }, 1000);
   }
 
   private async fetchOptions(query: string) {
@@ -89,7 +98,6 @@ export class MockSearchInput extends LitElement {
     ];
     // Filter mock data by query
     const filteredData = mockData.filter(item => item.label.toLowerCase().includes(query.toLowerCase()));
-    if (filteredData.length === 0) this.empty = true;
     return filteredData;
   }
 }

@@ -258,12 +258,6 @@ export class SgdsComboBox extends SelectElement {
       this.value = this.selectedItems.join(";");
       this.options.forEach(o => (o.active = false));
     }
-
-    // if (this.displayValue === "") {
-    //   this.options.forEach(o => (o.hidden = false));
-    //   await this.updateComplete;
-    // }
-    // if(this.async) return
     // There is a race condition in certain situations where this.optionList is not fully updated during slotchange
     // Hence instead of using this.optionList, we have to perform a query on the <sgds-combo-box-option> elements
     const optionList = this.options.map(o => ({ value: o.value, label: o.textContent.trim() }));
@@ -280,10 +274,6 @@ export class SgdsComboBox extends SelectElement {
         o.hidden = false;
       }
     });
-    if (this.displayValue === "") {
-      this.options.forEach(o => (o.hidden = false));
-      await this.updateComplete;
-    }
   }
 
   /**
@@ -516,7 +506,8 @@ export class SgdsComboBox extends SelectElement {
     if (this.async) {
       return this.emptyMenuAsync || this.optionList.length === 0 ? this._renderEmptyMenu() : nothing;
     } else {
-      return this.optionList.length === 0 || (this.emptyMenuAfterFiltering && this.optionList.length > 0)
+      return this.optionList.length === 0 || // no options at all
+        (this.emptyMenuAfterFiltering && this.optionList.length > 0) // check if filtering results in empty menu
         ? this._renderEmptyMenu()
         : nothing;
     }

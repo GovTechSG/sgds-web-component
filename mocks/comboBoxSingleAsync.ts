@@ -7,13 +7,10 @@ export class MockSearchInput extends LitElement {
   @state() private options: Array<{ value: string; label: string }> = [];
   @state() private loading = false;
   @state() private empty = false;
-  private userTypedValue = "";
 
   render() {
     return html`
       <sgds-combo-box
-        required
-        hasFeedback
         ?emptyMenuAsync=${this.empty}
         clearable
         placeholder="search"
@@ -49,7 +46,6 @@ export class MockSearchInput extends LitElement {
   private onInput(e: CustomEvent) {
     this.empty = false;
     const { displayValue } = e.detail;
-    this.userTypedValue = displayValue;
     this.lastQuery = displayValue;
 
     if (this.debounceTimer) {

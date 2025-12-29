@@ -63,7 +63,7 @@ export class SelectElement
   @property({ type: String, reflect: true })
   value = "";
 
-  @property()
+  @state()
   displayValue = "";
 
   /** @internal Gets or sets the default value used to reset this element. */
