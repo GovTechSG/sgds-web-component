@@ -27,9 +27,9 @@ describe("<sgds-modal>", () => {
           <div class="modal-content">
                 <sgds-close-button
                 class="modal-header__close"
-                ariaLabel="close modal"
+                aria-label="close modal"
                 size="md" 
-                variant="default"
+                tone="default"
               ></sgds-close-button>
             <div class="modal-header">
                 <div class="modal-header__title-description">

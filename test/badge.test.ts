@@ -2,7 +2,7 @@ import { elementUpdated, expect, fixture, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import * as Sinon from "sinon";
 import type { SgdsBadge } from "../src/components";
-import SgdsCloseButton from "../src/internals/CloseButton/sgds-close-button";
+import SgdsCloseButton from "../src/components/CloseButton/sgds-close-button";
 import "./sgds-web-component";
 import { sendMouse } from "@web/test-runner-commands";
 

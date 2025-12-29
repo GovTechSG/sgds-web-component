@@ -22,7 +22,7 @@
   --sgds-purple-900: #460c5a;
 
   /* Primitive - Cyan Color */
-  --sgds-cyan-100: #DBf9fd;
+  --sgds-cyan-100: #dbf9fd;
   --sgds-cyan-200: #94edfa;
   --sgds-cyan-300: #24d5ee;
   --sgds-cyan-400: #1fb5ca;
@@ -343,9 +343,21 @@
   --sgds-outline-offset-focus: calc(-1 * var(--sgds-border-width-2));
   --sgds-form-outline-focus: var(--sgds-outline-focus);
   --sgds-form-outline-offset-focus: var(--sgds-outline-offset-focus);
-  
+
   /* Masthead and Mainnav Max Width and Padding */
   --sgds-mainnav-max-width: 1440px;
   --sgds-mainnav-padding-x: 2rem;
   --sgds-mainnav-mobile-padding-x: 1.25rem;
+
+  /* Foundation - Motion Easing  */
+  --sgds-motion-easing-enter: cubic-bezier(0.1, 0, 0.5, 0);
+  --sgds-motion-easing-exit: cubic-bezier(0.15, 0.6, 0.6, 1);
+  --sgds-motion-easing-standard: cubic-bezier(0.25, 0, 0.25, 1);
+  /* Foundation - Motion Duration  */
+  --sgds-motion-duration-faster: 100ms;
+  --sgds-motion-duration-fast: 200ms;
+  --sgds-motion-duration-standard: 300ms;
+  --sgds-motion-duration-slow: 400ms; 
+  --sgds-motion-duration-slower: 500ms;
+
 }

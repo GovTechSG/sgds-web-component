@@ -1,7 +1,7 @@
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { createRef, ref } from "lit/directives/ref.js";
-import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import SgdsCloseButton from "../CloseButton/sgds-close-button";
 import { SgdsButton } from "../Button/sgds-button";
 import fileUploadStyles from "./file-upload.css";
 

@@ -4,7 +4,26 @@
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
 
 <div>
-  <h3>Variants</h3>
+  <h3>Tone</h3>
+  <sgds-link>
+    <a href="#">Read more</a>
+  </sgds-link>
+  <sgds-link tone="danger">
+    <a href="#">Read more</a>
+  </sgds-link>
+  <sgds-link tone="neutral">
+    <a href="#">Read more</a>
+  </sgds-link>
+  <sgds-link tone="fixed-light">
+    <a href="#">Read more</a>
+  </sgds-link>
+  <sgds-link tone="fixed-dark">
+    <a href="#">Read more</a>
+  </sgds-link>
+</div>
+<br>
+<div>
+  <h3>Variants (deprecated)</h3>
   <sgds-link>
     <a href="#">Read more</a>
   </sgds-link>
@@ -46,6 +65,20 @@
 </div>
 <br>
 <div>
+  <h3>Alternative disabled</h3>
+  <sgds-link disabled>
+    <a href="#" disabled>Read more</a>
+  </sgds-link>
+</div>
+<br>
+<div>
+  <h3>active</h3>
+  <sgds-link active>
+    <a href="#">Read more</a>
+  </sgds-link>
+</div>
+<br>
+<div>
   <h3>With Icon</h3>
   <sgds-link>
     <a href="#"><sgds-icon name="placeholder"></sgds-icon>Read more</a>
@@ -54,10 +87,35 @@
     <a href="#">Read more<sgds-icon name="placeholder"></sgds-icon></a>
   </sgds-link>
 </div>
+<div>
+  <h3>Sizes with icon</h3>
+  <sgds-link size="xs">
+    <a href="#"><sgds-icon name="placeholder"></sgds-icon>Size xsg</a>
+  </sgds-link>
+  <sgds-link size="sm">
+    <a href="#"><sgds-icon name="placeholder"></sgds-icon>Size smq</a>
+  </sgds-link>
+  <sgds-link size="md">
+    <a href="#"><sgds-icon name="placeholder"></sgds-icon>Size mdp</a>
+  </sgds-link>
+  <sgds-link size="lg">
+    <a href="#"><sgds-icon name="placeholder"></sgds-icon>Size lg</a>
+  </sgds-link>
+</div>
 <br>
 <div>
   <h3>External Link</h3>
-  <sgds-link>
-    <a href="#" target="_blank">Read more</a>
+  <sgds-link size="lg">
+    <a href="#" target="_blank">Read more lg</a>
   </sgds-link>
+  <sgds-link>
+    <a href="#" target="_blank">Read more md</a>
+  </sgds-link>
+    <sgds-link size="sm">
+    <a href="#" target="_blank">Read more sm</a>
+      </sgds-link>
+     <sgds-link size="xs">
+    <a href="#" target="_blank">Read more xs</a>
+  </sgds-link>
+ 
 </div>

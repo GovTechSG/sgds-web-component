@@ -24,6 +24,22 @@ Set `multiSelect` to true for a multi-select combo box.
   <Story of={ComboBoxStories.ComboBoxMultiSelect} />
 </Canvas>
 
+## Clearable ComboBox
+
+Set `clearable` to true for a clearable combo box. The clearable button will appear on `focus` when there is a `value`.
+
+<Canvas of={ComboBoxStories.ComboBoxMenuListClearable}>
+  <Story of={ComboBoxStories.ComboBoxMenuListClearable} />
+</Canvas>
+
+## Loading State
+
+Set `loading` to true to show loading spinner in the combo box menu.
+
+<Canvas of={ComboBoxStories.Loading}>
+  <Story of={ComboBoxStories.Loading} />
+</Canvas>
+
 ## Customising the Filter Function
 
 `SgdsComboBox` contains the `filterFunction` prop that is called on each item's label in the `menuList` whenever the input value changes, to determine whether an item should be displayed in the dropdown menu based on the input value.
@@ -110,3 +126,17 @@ const inputHandler = (e: CustomEvent<ISgdsComboBoxInputEventDetail>) => {
 }
 
 ```
+
+## Asynchronous ComboBox
+
+Asynchronous ComboBox search is for filtering remotely via an API request. The filtering is done through the response of API requests.
+Set the `async` attribute to true. You can then hook onto the `sgds-input` event to listen for input changes and make API requests accordingly.
+
+
+  - Use `loading` property to show loading spinner while waiting for API response.
+  - Use `emptyMenuAsync` property to show "No options" when there are no results from the API response.
+  - Populate the combo box options based on the API response.
+
+<Canvas of={ComboBoxStories.AsyncCombobox}>
+  <Story of={ComboBoxStories.AsyncCombobox} />
+</Canvas>

@@ -98,29 +98,29 @@ export class SgdsFooter extends SgdsElement {
           <div class="footer-mandatory-links">
             <ul>
               <li>
-                <sgds-link size="sm"><a href=${this.contactHref}>Contact</a></sgds-link>
+                <sgds-link size="sm" tone="fixed-light"><a href=${this.contactHref}>Contact</a></sgds-link>
               </li>
               <li>
-                <sgds-link size="sm"><a href=${this.feedbackHref}>Feedback</a></sgds-link>
+                <sgds-link size="sm" tone="fixed-light"><a href=${this.feedbackHref}>Feedback</a></sgds-link>
               </li>
               <li>
-                <sgds-link size="sm"><a href=${this.faqHref}>FAQ</a></sgds-link>
+                <sgds-link size="sm" tone="fixed-light"><a href=${this.faqHref}>FAQ</a></sgds-link>
               </li>
               <li>
-                <sgds-link size="sm"><a href=${this.sitemapHref}>Sitemap</a></sgds-link>
+                <sgds-link size="sm" tone="fixed-light"><a href=${this.sitemapHref}>Sitemap</a></sgds-link>
               </li>
               <li>
-                <sgds-link size="sm">
+                <sgds-link size="sm" tone="fixed-light">
                   <a href="https://tech.gov.sg/report_vulnerability" target="_blank" rel="noopener noreferrer">
                     Report Vulnerability
                   </a>
                 </sgds-link>
               </li>
               <li>
-                <sgds-link size="sm"><a href=${this.privacyHref}>Privacy Statement</a></sgds-link>
+                <sgds-link size="sm" tone="fixed-light"><a href=${this.privacyHref}>Privacy Statement</a></sgds-link>
               </li>
               <li>
-                <sgds-link size="sm"><a href=${this.termsOfUseHref}>Terms of use</a></sgds-link>
+                <sgds-link size="sm" tone="fixed-light"><a href=${this.termsOfUseHref}>Terms of use</a></sgds-link>
               </li>
             </ul>
             <div class="footer-copyrights">© ${new Date().getFullYear()}, ${this.copyrightLiner}</div>

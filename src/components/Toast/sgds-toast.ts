@@ -1,7 +1,7 @@
 import { html, nothing, PropertyValueMap } from "lit";
 import { property, query, queryAssignedNodes } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
-import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import SgdsCloseButton from "../CloseButton/sgds-close-button";
 import { animateTo } from "../../utils/animate";
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
 import { waitForEvent } from "../../utils/event";
@@ -133,7 +133,7 @@ export class SgdsToast extends SgdsElement {
         ${this.dismissible
           ? html`<sgds-close-button
               class="close-btn"
-              ariaLabel="close toast"
+              aria-label="close toast"
               @click=${this.handleCloseClick}
             ></sgds-close-button>`
           : nothing}

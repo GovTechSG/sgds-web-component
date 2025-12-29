@@ -4,7 +4,7 @@ import { property, queryAssignedElements, queryAssignedNodes } from "lit/decorat
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
 import { CardImageAdjustment, CardImagePosition } from "../Card/types";
-import SgdsLink from "../Link/sgds-link";
+import type SgdsLink from "../Link/sgds-link";
 import imageCardStyle from "./image-card.css";
 
 /**

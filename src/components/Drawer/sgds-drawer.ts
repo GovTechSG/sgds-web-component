@@ -8,7 +8,7 @@ import { waitForEvent } from "../../utils/event.js";
 import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
 import { watch } from "../../utils/watch.js";
 import drawerStyles from "./drawer.css";
-import SgdsCloseButton from "../../internals/CloseButton/sgds-close-button";
+import SgdsCloseButton from "../CloseButton/sgds-close-button";
 
 /**
  * @summary Drawers slide in from a container to expose additional options and information.

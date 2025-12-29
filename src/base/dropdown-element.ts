@@ -105,9 +105,10 @@ export class DropdownElement extends SgdsElement {
   }
 
   /** When invoked, hides the dropdown menu */
-  public async hideMenu() {
+  public hideMenu(isOutside?: boolean) {
     if (!this.menuIsOpen) return;
-    this.emit("sgds-hide");
+    this.emit("sgds-hide", { detail: { isOutside } });
+
     this.menuIsOpen = false;
     setTimeout(() => this.emit("sgds-after-hide"), 0);
 
@@ -125,7 +126,7 @@ export class DropdownElement extends SgdsElement {
     }
   }
 
-  protected _handleKeyboardMenuEvent = (e: KeyboardEvent) => {
+  protected _handleKeyboardMenuEvent(e: KeyboardEvent) {
     if (this.readonly) return;
     switch (e.key) {
       case ARROW_DOWN:
@@ -139,12 +140,12 @@ export class DropdownElement extends SgdsElement {
       default:
         break;
     }
-  };
+  }
 
   private _handleClickOutOfElement = (e: MouseEvent) => {
     if (!this.menuIsOpen) return;
     if (!e.composedPath().includes(this)) {
-      this.hideMenu();
+      this.hideMenu(true);
     }
   };
 
