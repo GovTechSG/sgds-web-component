@@ -114,6 +114,7 @@ describe("sgds-combo-box ", () => {
       ]}
     ></sgds-combo-box>`);
     await el.updateComplete;
+    await waitUntil(() => !el.shadowRoot?.querySelector(".empty-menu"));
     assert.shadowDom.equal(
       el,
       `
@@ -138,7 +139,7 @@ describe("sgds-combo-box ", () => {
           part="menu"
           tabindex="-1"
           >
-              <slot><div class="empty-menu">No options</div></slot> 
+              <slot></slot> 
         </ul>
           `,
       { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
@@ -467,7 +468,7 @@ describe("sgds-combo-box ", () => {
     await el.updateComplete;
     expect(el.menuIsOpen).to.be.true;
 
-    expect(el.shadowRoot?.querySelectorAll(".empty-menu")).to.exist;
+    expect(el.shadowRoot?.querySelector(".empty-menu")).to.exist;
   });
 
   it("no option div should not persist when menu is closed", async () => {
@@ -477,6 +478,7 @@ describe("sgds-combo-box ", () => {
       placeholder="Select an option"
       ><sgds-combo-box-option value="one">One</sgds-combo-box-option>
     </sgds-combo-box>`);
+    await waitUntil(() => !el.shadowRoot?.querySelector(".empty-menu"));
     expect(el.shadowRoot?.querySelector("ul>.empty-menu")).to.not.exist;
     const input = el.shadowRoot?.querySelector<HTMLInputElement>("input.form-control");
     input?.focus();
@@ -718,7 +720,7 @@ describe("single select combobox", () => {
         el.requestUpdate();
       }
       await el.updateComplete;
-      await waitUntil(() => input.value === "");
+      await waitUntil(() => input.value === "", "this timeout");
       expect(input.value).to.equal("");
       expect(el.value).to.equal("");
     });

@@ -63,8 +63,8 @@ export class SelectElement
   @property({ type: String, reflect: true })
   value = "";
 
-  @state()
-  protected displayValue = "";
+  @property()
+  displayValue = "";
 
   /** @internal Gets or sets the default value used to reset this element. */
   @defaultValue()

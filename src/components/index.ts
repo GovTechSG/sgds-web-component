@@ -40,8 +40,6 @@ export * from "./ProgressBar/sgds-progress-bar";
 export * from "./QuantityToggle/sgds-quantity-toggle";
 export * from "./Radio/sgds-radio";
 export * from "./Radio/sgds-radio-group";
-export * from "./SearchInput/sgds-search-input";
-export * from "./SearchInput/sgds-search-input-option";
 export * from "./Select/sgds-select";
 export * from "./Select/sgds-select-option";
 export * from "./Sidenav/sgds-sidenav";

@@ -5,6 +5,8 @@
     <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
     <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
     <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <script type="module" src="../mocks/comboBoxSingleAsync.ts"></script>
+<script type="module" src="../mocks/comboBoxMultiAsync.ts"></script>
     <style>
       .container {
         max-width: 1200px;
@@ -24,6 +26,29 @@
   <body>
     <div class="container">
       <div class="small-container">
+    <mock-async-single-combo-box></mock-async-single-combo-box>
+    <mock-async-multi-combo-box></mock-async-multi-combo-box>
+
+    <h4>Empty single select combobox</h4>
+    <sgds-combo-box></sgds-combo-box>
+
+    <h4>Single select combobox , populated by menuList (deprecated)</h4>
+    <sgds-combo-box id="menuList-population-example" value="1"></sgds-combo-box>
+    <script>
+      document.querySelector("#menuList-population-example").menuList = [
+        { value: "1", label: "Option 1" },
+        { value: "2", label: "Option 2" },
+        { value: "3", label: "Option 3" },
+      ];  
+      setTimeout(() => {
+        document.querySelector("#menuList-population-example").menuList =[
+          { value: "4", label: "Option 4" },
+          { value: "5", label: "Option 5" },
+          { value: "6", label: "Option 6" },
+        ]
+      }, 5000);
+    </script>
+
         <sgds-combo-box id="combobox-example" label="Items" clearable placeholder="ComboBox">
           <sgds-combo-box-option value="1">Option 1</sgds-combo-box-option>
           <sgds-combo-box-option value="2">Option 2</sgds-combo-box-option>
