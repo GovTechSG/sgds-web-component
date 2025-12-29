@@ -13,9 +13,10 @@ export class MockSearchInput extends LitElement {
       <sgds-combo-box
         ?emptyMenuAsync=${this.empty}
         clearable
-        placeholder="search"
+        placeholder="Type fruits to search e.g. 'ap'"
         async
         multiSelect
+        label="Multi select async combo box"
         @sgds-input=${this.onInput}
         ?loading=${this.loading}
         @sgds-change=${this.onChange}
@@ -101,5 +102,3 @@ export class MockSearchInput extends LitElement {
     return filteredData;
   }
 }
-
-// Usage: <mock-search-input></mock-search-input>

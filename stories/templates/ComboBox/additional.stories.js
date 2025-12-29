@@ -1,4 +1,6 @@
 import { html } from "lit-html";
+import "../../mocks/ComboBoxMultiAsync.ts";
+import "../../mocks/ComboBoxSingleAsync.ts";
 
 export const ComboBoxMultiSelect = {
   render: Template.bind({}),
@@ -363,6 +365,31 @@ const AccessDisplayValueTemplate = () => {
 export const AccessDisplayValue = {
   render: AccessDisplayValueTemplate.bind({}),
   name: "Accessing display value of ComboBox's input",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
+
+export const Loading = {
+  render: Template.bind({}),
+  name: "Loading state",
+  args: { ...args, loading: true, id: "loading-combobox-example" },
+  parameters: {},
+  tags: ["!dev"]
+};
+
+const AsyncComboboxTemplate = () => {
+  return html`
+    <div style="display:flex;flex-direction:column;gap:3rem;">
+      <mock-async-single-combo-box></mock-async-single-combo-box>
+      <mock-async-multi-combo-box></mock-async-multi-combo-box>
+    </div>
+  `;
+};
+
+export const AsyncCombobox = {
+  render: AsyncComboboxTemplate.bind({}),
+  name: "Asynchronous ComboBox",
   args: {},
   parameters: {},
   tags: ["!dev"]
