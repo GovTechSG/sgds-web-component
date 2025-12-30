@@ -239,7 +239,6 @@ export class SgdsComboBox extends SelectElement {
 
     if (!this.multiSelect) {
       this.displayValue = initialSelectedItem[0]?.label ?? "";
-      // this.displayValue = initialSelectedItem[0]?.label ?? this.displayValue;
     }
 
     this.options.forEach(o => (o.active = valueArray.includes(o.value)));
