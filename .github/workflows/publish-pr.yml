@@ -27,11 +27,11 @@ jobs:
       - run: pnpm exec playwright install 
       - run: pnpm run test
       - run: pnpm run build
-      - run: pnpm publish --tag alpha ./lib --access public
+      - run: pnpm publish --no-git-checks --tag alpha ./lib --access public 
         if: contains(env.NPM_TAG, 'alpha')
-      - run: pnpm publish --tag beta ./lib --access public
+      - run: pnpm publish --no-git-checks --tag beta ./lib --access public
         if: contains(env.NPM_TAG, 'beta')
-      - run: pnpm publish --tag rc ./lib --access public
+      - run: pnpm publish --no-git-checks --tag rc ./lib --access public
         if: contains(env.NPM_TAG, 'rc')
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
