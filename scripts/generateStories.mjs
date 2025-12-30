@@ -60,7 +60,7 @@ for (const [key, value] of Object.entries(groupedComponents)) {
   const mdxSource = prettier.format(
     `
 import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
-import { html } from "lit-html";
+import { html } from "lit";
 import * as ${key}Stories from './${key}.stories';
 
 <Meta of={${key}Stories}/>

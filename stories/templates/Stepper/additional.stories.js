@@ -1,5 +1,5 @@
 import "../../mocks/stepper.ts";
-import { html } from "lit-html";
+import { html } from "lit";
 
 const ClickableTemplate = args => {
   return html`

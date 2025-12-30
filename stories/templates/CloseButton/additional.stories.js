@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 const SizeTemplate = args => html`
   <div style="display: flex; gap: 1rem; align-items: center;">

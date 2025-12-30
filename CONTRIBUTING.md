@@ -63,7 +63,7 @@ To start the storybook server
 The basic storybook documentation is auto-generated from the cem metadata. Write your basic template example inside `stories/templates/<Component>/basic.js`. Follow this template and be sure to export `args` and `Template`
 
 ```hbs
-import { html } from "lit-html";
+import { html } from "lit";
 
 export const Template = args =>
       html`<sgds-{{kebabCase main-component-name}}></sgds-{{kebabCase main-component-name}}>`

@@ -1,6 +1,6 @@
-import { html } from "lit-html";
-import "../../mocks/ComboBoxMultiAsync.ts";
-import "../../mocks/ComboBoxSingleAsync.ts";
+import "../../mocks/comboBoxMultiAsync.ts";
+import "../../mocks/comboBoxSingleAsync.ts";
+import { html } from "lit";
 
 export const ComboBoxMultiSelect = {
   render: Template.bind({}),

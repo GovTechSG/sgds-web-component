@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 const variants = ["primary", "accent", "success", "danger", "warning", "cyan", "purple", "neutral", "white"];
 
