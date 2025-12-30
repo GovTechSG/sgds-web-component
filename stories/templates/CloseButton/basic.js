@@ -1,5 +1,5 @@
 // Basic usage story for sgds-close-button
-import { html } from "lit-html";
+import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args => {

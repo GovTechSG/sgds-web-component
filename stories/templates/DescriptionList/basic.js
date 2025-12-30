@@ -1,4 +1,4 @@
-import { html, nothing } from "lit-html";
+import { html, nothing } from "lit";
 
 export const Template = args => html`
   <sgds-description-list-group ?stacked=${args.stacked} ?bordered=${args.bordered}>

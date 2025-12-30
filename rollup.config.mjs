@@ -4,7 +4,7 @@ import postcss from "rollup-plugin-postcss";
 import litcss from "rollup-plugin-postcss-lit";
 import replace from "@rollup/plugin-replace";
 import { visualizer } from "rollup-plugin-visualizer";
-import glob from "glob";
+import { glob } from "glob";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import copy from "rollup-plugin-copy";

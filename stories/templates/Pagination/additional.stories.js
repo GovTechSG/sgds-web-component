@@ -1,5 +1,5 @@
 import "../../mocks/pagination.ts";
-import { html } from "lit-html";
+import { html } from "lit";
 
 const MockPaginationTemplate = () => html`<mock-pagination></mock-pagination>`;
 

@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { allModes } from "../../../.storybook/modes";
 
 export const Template = ({ fluid }) => html` <sgds-masthead ?fluid=${fluid}></sgds-masthead> `;

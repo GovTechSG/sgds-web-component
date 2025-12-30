@@ -1,3 +1,18 @@
+## v3.6.4 (2025-12-22)
+
+### Feat
+
+- **Footer**: make sitemap and faq optional (#498)
+- **Footer**: make sitemap and faq optional
+
+## v3.6.3 (2025-12-22)
+
+### Fix
+
+- **SystemBannerItem**: style font size, color and line height of all … (#497)
+- **anchor**: anchor external link icon size to be equal to font size and align top
+- **SystemBannerItem**: style font size, color and line height of all text and inline links
+
 ## v3.6.2 (2025-12-19)
 
 ### Fix
@@ -28,23 +43,11 @@
 - **combobox**: sgds-input event emits detail with display value of input
 - **Input**: new datetime-local type (#488)
 - **Input**: new datetime-local type
-- **Link**: add motion tokens and applied to underline transition
-- **Link**: animation wip
-- **Link**: add underline motion wip
-- **SystemBannerItem**: give action div a height to ensure bottom half in mobile layout stays
-- **SystemBanner**: pause animation on keyboard focus for better accessibility
-- **SystemBanner**: show more to dynamically appear and disappear when screen width changes
-- **SystemBanner**: show more when line has clamped
-- **SystemBanner**: handle mobile layout
-- **SystemBanner**: refactor animation
-- **system-banner**: implement animation , pagination looping, variant colors
-- **SystemBanner**: initial html structure and styles
 
 ### Fix
 
 - **subnav**: hide the container of actions slot when the slot is empty (#491)
 - **subnav**: hide the container of actions slot when the slot is empty
-- **Link**: icon size to link size and alignment
 
 ### Refactor
 
@@ -54,14 +57,26 @@
 
 ### Feat
 
+- **Link**: add motion tokens and applied to underline transition
+- **Link**: animation wip
+- **Link**: add underline motion wip
+- **SystemBannerItem**: give action div a height to ensure bottom half in mobile layout stays
+- **SystemBanner**: pause animation on keyboard focus for better accessibility
+- **SystemBanner**: show more to dynamically appear and disappear when screen width changes
+- **SystemBanner**: show more when line has clamped
+- **SystemBanner**: handle mobile layout
 - **drawer**: use dvh over vh
 - **button**: return inverse spinner tone when button tone is netural and variant is primary
 - **button**: assign appropriate spinner color to button
+- **SystemBanner**: refactor animation
+- **system-banner**: implement animation , pagination looping, variant colors
+- **SystemBanner**: initial html structure and styles
 - new tone and size for button, spinner and icon button
 
 ### Fix
 
 - **skeleton**: fix skeleton flickering in ssr
+- **Link**: icon size to link size and alignment
 - **combobox**: slot label not ready by first render due to race condition and few more bugs (#469)
 - **combobox**: shift padding to inner container holding badge and tex… (#467)
 - **combobox**: handle no options when 0 options passed in, reset empt… (#466)

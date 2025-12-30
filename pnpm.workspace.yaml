@@ -1,0 +1,5 @@
+# pnpm-workspace.yaml
+packages:
+  # all packages in subdirectories of apps/ and packages/
+  - 'cypress/apps/**'
+  - './*'

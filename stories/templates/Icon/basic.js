@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { iconRegistry } from "../../../src/components/Icon/icon-registry";
 
 export const Template = args => {

@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 export const Template = ({ active, disabled }) => html`<sgds-subnav>
   <h5 slot="header">Header</h5>
