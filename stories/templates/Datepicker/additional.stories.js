@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 const RangeTemplate = () => html`<sgds-datepicker mode="range"></sgds-datepicker> `;
 

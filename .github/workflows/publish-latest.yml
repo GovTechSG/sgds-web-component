@@ -7,17 +7,27 @@ on:
 
 jobs:
   publish:    
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20]
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
-          node-version: 18
+          version: 10
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org'
-      - run: npm ci
-      - run: npx playwright install
-      - run: npm run test
-      - run: npm run build
-      - run: npm publish --tag latest ./lib --access public
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - run: pnpm exec playwright install  
+      - run: pnpm run test
+      - run: pnpm run build
+      - run: pnpm publish --tag latest ./lib --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

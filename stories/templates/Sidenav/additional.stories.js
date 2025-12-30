@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 const SidenavItemAsLinkTemplate = args => html` <sgds-sidenav-item><a href="#">Item as a link</a></sgds-sidenav-item> `;
 
