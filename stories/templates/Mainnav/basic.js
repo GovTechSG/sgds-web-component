@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = ({ expand, brandHref, active, href, disabled, menuIsOpen, close, target }) => {
