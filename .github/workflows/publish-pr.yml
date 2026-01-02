@@ -1,5 +1,7 @@
 name: Publish Pre-releases
-
+permissions:
+  contents: read
+  
 on:
   push:
     tags:
@@ -9,24 +11,29 @@ on:
 
 jobs:
   publish:    
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
       - name: Set Tag env
         run: echo "NPM_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org'
-      - run: npm ci
-      - run: npx playwright install
-      - run: npm run test
-      - run: npm run build
-      - run: npm publish --tag alpha ./lib --access public
+      - run: pnpm install
+      - run: pnpm exec playwright install 
+      - run: pnpm run test
+      - run: pnpm run build
+      - run: pnpm publish --no-git-checks --tag alpha ./lib --access public 
         if: contains(env.NPM_TAG, 'alpha')
-      - run: npm publish --tag beta ./lib --access public
+      - run: pnpm publish --no-git-checks --tag beta ./lib --access public
         if: contains(env.NPM_TAG, 'beta')
-      - run: npm publish --tag rc ./lib --access public
+      - run: pnpm publish --no-git-checks --tag rc ./lib --access public
         if: contains(env.NPM_TAG, 'rc')
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

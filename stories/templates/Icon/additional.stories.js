@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 const SizeTemplate = args => {
   const sizes = ["sm", "md", "lg", "xl", "2-xl", "3-xl"];
