@@ -9,6 +9,9 @@ on:
 jobs:
   chromatic:
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20]
     if: > 
       github.event.issue.pull_request &&
       github.event.pull_request.head.repo.full_name == github.repository.full_name &&
