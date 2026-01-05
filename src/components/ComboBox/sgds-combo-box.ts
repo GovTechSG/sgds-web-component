@@ -449,7 +449,7 @@ export class SgdsComboBox extends SelectElement {
                       outlined
                       variant="neutral"
                       show
-                      dismissible
+                      ?dismissible=${!(this.readonly || this.disabled)}
                       ?fullwidth=${this.badgeFullWidth}
                       @sgds-hide=${e => this._handleBadgeDismissed(e, item)}
                       >${item.label}</sgds-badge

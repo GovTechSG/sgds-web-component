@@ -766,6 +766,30 @@ describe("single select combobox", () => {
 });
 
 describe("multi select combobox", () => {
+  it("when combobox is disabled with a value, badges cannot be removed", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box disabled multiSelect value="option1">
+      <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+      <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
+    </sgds-combo-box>`);
+    const badges = () => el.shadowRoot?.querySelector("sgds-badge") as SgdsBadge;
+    await waitUntil(() => badges());
+    expect(badges()).to.exist;
+    const closeButton = badges().shadowRoot?.querySelector<SgdsCloseButton>("sgds-close-button");
+    expect(closeButton).not.to.exist;
+  });
+  it("when combobox is readonly with a value, badges cannot be removed", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box readonly multiSelect value="option1">
+      <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+      <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
+    </sgds-combo-box>`);
+    const badges = () => el.shadowRoot?.querySelector("sgds-badge") as SgdsBadge;
+    await waitUntil(() => badges());
+    expect(badges()).to.exist;
+    const closeButton = badges().shadowRoot?.querySelector<SgdsCloseButton>("sgds-close-button");
+    expect(closeButton).not.to.exist;
+  });
   ThreeOptionsComboBox.forEach(({ render, mode }) => {
     it(`MODE=${mode}, when badge dismissed by keyboard, menu is synced`, async () => {
       const el = await fixture<SgdsComboBox>(render({ value: "option3", multiSelect: true }));
