@@ -13,12 +13,13 @@ export class MockSearchInput extends LitElement {
       <sgds-combo-box
         ?emptyMenuAsync=${this.empty}
         clearable
-        placeholder="Type fruits to search e.g. 'ap'"
+        placeholder="Type fruits to search e.g. 'app'"
         async
         label="Single select async combo box"
         @sgds-input=${this.onInput}
         ?loading=${this.loading}
         @sgds-change=${this.onChange}
+        value="apple"
         >${repeat(
           this.options,
           opt => opt.value,

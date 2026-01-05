@@ -1,4 +1,7 @@
 name: Sync to Lu Khei's Gist
+permissions:
+  contents: read
+  
 on:
   push:
     branches:

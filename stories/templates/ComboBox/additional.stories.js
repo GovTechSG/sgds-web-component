@@ -1,5 +1,5 @@
-import "../../mocks/comboBoxMultiAsync.ts";
-import "../../mocks/comboBoxSingleAsync.ts";
+import "../../mocks/ComboBoxMultiAsync.ts";
+import "../../mocks/ComboBoxSingleAsync.ts";
 import { html } from "lit";
 
 export const ComboBoxMultiSelect = {

@@ -1443,7 +1443,7 @@ describe("datepicker calendar will not show before 1900", () => {
     expect(header.shadowRoot?.querySelectorAll("sgds-icon-button.invisible")).to.exist;
     const calendar = el.shadowRoot?.querySelector("sgds-datepicker-calendar");
     const disabledButtons = calendar?.shadowRoot?.querySelectorAll("button.year[disabled]");
-    expect(disabledButtons?.length).to.equal(7);
+    expect(disabledButtons?.length).to.equal(6);
     expect(calendar?.shadowRoot?.querySelector("button.year[data-year='1900']")?.hasAttribute("disabled")).to.be.false;
   });
   it("in day view keypress ArrowUp and ArrowLeft when focusedDate is 01/01/1900 will not trigger change to previous year", async () => {

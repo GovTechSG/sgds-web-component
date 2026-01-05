@@ -43,8 +43,8 @@
   padding: calc(var(--sgds-form-padding-y) - var(--sgds-form-border-width-default)) 0; 
 }
 
-slot[id='default'].is-loading::slotted(*),
-slot[id='default'].is-loading{
+slot[id='default'].d-none::slotted(*),
+slot[id='default'].d-none{
   display: none;
 }
 

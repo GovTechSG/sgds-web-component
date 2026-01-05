@@ -235,7 +235,7 @@ export const SelectMenuList = {
 export const SelectLoading = {
   render: Template.bind({}),
   name: "Loading state",
-  args: { loading: true },
+  args: { ...args, loading: true },
   parameters: {},
   tags: ["!dev"]
 };
