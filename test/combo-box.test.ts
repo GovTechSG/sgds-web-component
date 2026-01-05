@@ -440,6 +440,8 @@ describe("sgds-combo-box ", () => {
       expect(newMenu()?.textContent.trim()).to.equal("Durian");
       await waitUntil(() => el.value === "");
       expect(el.value).to.equal("");
+      //displayValue should also be cleared
+      expect(el.shadowRoot?.querySelector("input.form-control")?.textContent.trim()).to.equal("");
     });
     it("when value is updated, it should reflect the new value on the select", async () => {
       // Create component with initial value
@@ -452,14 +454,23 @@ describe("sgds-combo-box ", () => {
       expect(input instanceof HTMLInputElement, "Input should be HTMLInputElement").to.be.true;
 
       // Verify initial values
-      expect(el.value).to.equal("option1;option2");
-
+      const badges = () => el.shadowRoot?.querySelectorAll("sgds-badge");
+      await waitUntil(() => badges()?.length === 2);
+      expect(badges()?.length).to.equal(2);
+      expect(badges()?.[0].textContent?.trim()).to.equal("Apple");
+      expect(badges()?.[1].textContent?.trim()).to.equal("Apricot");
       // Update value and wait for changes to propagate
       el.setAttribute("value", "option4;option5");
       await el.updateComplete;
 
       // Verify value change
       expect(el.value).to.equal("option4;option5");
+      await waitUntil(
+        () => badges()?.[0].textContent?.trim() === "Grapes" && badges()?.[1].textContent?.trim() === "Orange"
+      );
+
+      expect(badges()?.[0].textContent?.trim()).to.equal("Grapes");
+      expect(badges()?.[1].textContent?.trim()).to.equal("Orange");
     });
   });
 
@@ -505,7 +516,7 @@ describe("sgds-combo-box ", () => {
     const el = await fixture<SgdsComboBox>(html`<sgds-combo-box loading menuIsOpen> </sgds-combo-box>`);
     await el.updateComplete;
     const slot = el.shadowRoot?.querySelector("slot#default");
-    expect(slot?.classList.contains("is-loading")).to.be.true;
+    expect(slot?.classList.contains("d-none")).to.be.true;
     const dropdownMenu = el.shadowRoot?.querySelector(".dropdown-menu");
     expect(dropdownMenu?.textContent).to.contain("Loading...");
   });
@@ -516,9 +527,28 @@ describe("sgds-combo-box ", () => {
     </sgds-combo-box>`);
     await el.updateComplete;
     const slot = el.shadowRoot?.querySelector("slot#default");
-    expect(slot?.classList.contains("is-loading")).to.be.true;
+    expect(slot?.classList.contains("d-none")).to.be.true;
     const dropdownMenu = el.shadowRoot?.querySelector(".dropdown-menu");
     expect(dropdownMenu?.textContent).to.contain("Loading...");
+  });
+
+  it("emptyMenuAsync overrides options menu", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box emptyMenuAsync menuIsOpen>
+      <sgds-combo-box-option value="1">Option 1</sgds-combo-box-option>
+    </sgds-combo-box>`);
+    await el.updateComplete;
+    const slot = el.shadowRoot?.querySelector("slot#default");
+    expect(slot?.classList.contains("d-none")).to.be.true;
+    const dropdownMenu = el.shadowRoot?.querySelector(".dropdown-menu");
+    expect(dropdownMenu?.textContent).to.contain("No options");
+  });
+  it("when options length is 0, no options appear", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box menuIsOpen></sgds-combo-box>`);
+    await el.updateComplete;
+    const slot = el.shadowRoot?.querySelector("slot#default");
+    expect(slot?.classList.contains("d-none")).to.be.true;
+    const dropdownMenu = el.shadowRoot?.querySelector(".dropdown-menu");
+    expect(dropdownMenu?.textContent).to.contain("No options");
   });
   it("readonly prevents clear button from showing", async () => {
     const el = await fixture<SgdsComboBox>(html`<sgds-combo-box readonly clearable value="1">
@@ -761,6 +791,33 @@ describe("single select combobox", () => {
       // Wait for and verify input update
       await waitUntil(() => input.value === "Grapes", "Input value should update to Grapes", { timeout: 2000 });
       expect(input.value).to.equal("Grapes");
+    });
+    it(`MODE=${mode}, when value is updated to rubbish value, it should clear everything in the input`, async () => {
+      const el = await fixture<SgdsComboBox>(render({ value: "option1", multiSelect: false }));
+
+      await el.updateComplete;
+
+      // Get and verify input element
+      const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+      expect(input, "Input element should exist").to.exist;
+      expect(input instanceof HTMLInputElement, "Input should be HTMLInputElement").to.be.true;
+
+      // Verify initial values
+      await waitUntil(() => input.value === "Apple");
+      expect(input.value).to.equal("Apple");
+      expect(el.value).to.equal("option1");
+
+      // Update value and wait for changes to propagate
+      el.setAttribute("value", "optionNULL");
+      await el.updateComplete;
+      await new Promise(resolve => setTimeout(resolve, 100)); // Wait for value change to process
+
+      // Verify value change
+      expect(el.value).to.equal("");
+
+      // Wait for and verify input update
+      await waitUntil(() => input.value === "", "Input value should update to empty", { timeout: 2000 });
+      expect(input.value).to.equal("");
     });
   });
 });
@@ -1723,5 +1780,10 @@ describe("async combobox", () => {
     await waitUntil(() => el.menuIsOpen);
     expect(el.querySelectorAll("sgds-combo-box-option").length).to.equal(0);
     expect(el.shadowRoot?.querySelector("div.empty-menu")?.textContent?.trim()).to.equal("No options");
+  });
+  it("filterFunction returns true", async () => {
+    const el = await fixture<SgdsComboBox>(html`<sgds-combo-box async></sgds-combo-box>`);
+    await el.updateComplete;
+    expect(el.filterFunction("", { label: "", value: "" })).to.be.true;
   });
 });
