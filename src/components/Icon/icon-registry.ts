@@ -1,5 +1,6 @@
 // Auto-generated icon registry. Do not edit manually.
 
+import Announcement from "./icons/announcement";
 import Archive from "./icons/archive";
 import ArrowBarDown from "./icons/arrow-bar-down";
 import ArrowBarLeft from "./icons/arrow-bar-left";
@@ -52,6 +53,7 @@ import CloudDownload from "./icons/cloud-download";
 import CloudUpload from "./icons/cloud-upload";
 import Cloud from "./icons/cloud";
 import Compass from "./icons/compass";
+import Copy from "./icons/copy";
 import Cross from "./icons/cross";
 import CursorFill from "./icons/cursor-fill";
 import Cursor from "./icons/cursor";
@@ -76,6 +78,7 @@ import FilePlus from "./icons/file-plus";
 import FileText from "./icons/file-text";
 import File from "./icons/file";
 import Files from "./icons/files";
+import Flash from "./icons/flash";
 import FolderCheck from "./icons/folder-check";
 import FolderMinus from "./icons/folder-minus";
 import FolderPlus from "./icons/folder-plus";
@@ -115,11 +118,15 @@ import Logout from "./icons/logout";
 import Luggage from "./icons/luggage";
 import Mail from "./icons/mail";
 import Map from "./icons/map";
+import Meetup from "./icons/meetup";
 import Menu from "./icons/menu";
 import Microphone from "./icons/microphone";
 import Monitor from "./icons/monitor";
+import Moon from "./icons/moon";
+import Move from "./icons/move";
 import Paperclip from "./icons/paperclip";
 import Passport from "./icons/passport";
+import Pause from "./icons/pause";
 import Pencil from "./icons/pencil";
 import PendingCircle from "./icons/pending-circle";
 import PersonDash from "./icons/person-dash";
@@ -131,6 +138,7 @@ import PinMapFill from "./icons/pin-map-fill";
 import Pin from "./icons/pin";
 import Placeholder from "./icons/placeholder";
 import Plane from "./icons/plane";
+import Play from "./icons/play";
 import PlusCircle from "./icons/plus-circle";
 import PlusSquare from "./icons/plus-square";
 import Plus from "./icons/plus";
@@ -143,14 +151,17 @@ import Send from "./icons/send";
 import SgCrest from "./icons/sg-crest";
 import Share from "./icons/share";
 import SlashCircle from "./icons/slash-circle";
+import SlashDivider from "./icons/slash-divider";
 import Sliders from "./icons/sliders";
 import Speedometer from "./icons/speedometer";
 import StarFill from "./icons/star-fill";
 import Star from "./icons/star";
 import Stoplights from "./icons/stoplights";
+import Sun from "./icons/sun";
 import SwitchHorizontal from "./icons/switch-horizontal";
 import SwitchVertical from "./icons/switch-vertical";
 import Tablet from "./icons/tablet";
+import Telegram from "./icons/telegram";
 import Telephone from "./icons/telephone";
 import ThreeDotsVertical from "./icons/three-dots-vertical";
 import ThreeDots from "./icons/three-dots";
@@ -160,6 +171,8 @@ import ToggleOn from "./icons/toggle-on";
 import Train from "./icons/train";
 import Translate from "./icons/translate";
 import Trash from "./icons/trash";
+import TrendDown from "./icons/trend-down";
+import TrendUp from "./icons/trend-up";
 import Truck from "./icons/truck";
 import TwitterX from "./icons/twitter-x";
 import Unlock from "./icons/unlock";
@@ -187,6 +200,7 @@ import ZoomIn from "./icons/zoom-in";
 import ZoomOut from "./icons/zoom-out";
 
 export const iconRegistry = {
+  announcement: Announcement,
   archive: Archive,
   "arrow-bar-down": ArrowBarDown,
   "arrow-bar-left": ArrowBarLeft,
@@ -239,6 +253,7 @@ export const iconRegistry = {
   "cloud-upload": CloudUpload,
   cloud: Cloud,
   compass: Compass,
+  copy: Copy,
   cross: Cross,
   "cursor-fill": CursorFill,
   cursor: Cursor,
@@ -263,6 +278,7 @@ export const iconRegistry = {
   "file-text": FileText,
   file: File,
   files: Files,
+  flash: Flash,
   "folder-check": FolderCheck,
   "folder-minus": FolderMinus,
   "folder-plus": FolderPlus,
@@ -302,11 +318,15 @@ export const iconRegistry = {
   luggage: Luggage,
   mail: Mail,
   map: Map,
+  meetup: Meetup,
   menu: Menu,
   microphone: Microphone,
   monitor: Monitor,
+  moon: Moon,
+  move: Move,
   paperclip: Paperclip,
   passport: Passport,
+  pause: Pause,
   pencil: Pencil,
   "pending-circle": PendingCircle,
   "person-dash": PersonDash,
@@ -318,6 +338,7 @@ export const iconRegistry = {
   pin: Pin,
   placeholder: Placeholder,
   plane: Plane,
+  play: Play,
   "plus-circle": PlusCircle,
   "plus-square": PlusSquare,
   plus: Plus,
@@ -330,14 +351,17 @@ export const iconRegistry = {
   "sg-crest": SgCrest,
   share: Share,
   "slash-circle": SlashCircle,
+  "slash-divider": SlashDivider,
   sliders: Sliders,
   speedometer: Speedometer,
   "star-fill": StarFill,
   star: Star,
   stoplights: Stoplights,
+  sun: Sun,
   "switch-horizontal": SwitchHorizontal,
   "switch-vertical": SwitchVertical,
   tablet: Tablet,
+  telegram: Telegram,
   telephone: Telephone,
   "three-dots-vertical": ThreeDotsVertical,
   "three-dots": ThreeDots,
@@ -347,6 +371,8 @@ export const iconRegistry = {
   train: Train,
   translate: Translate,
   trash: Trash,
+  "trend-down": TrendDown,
+  "trend-up": TrendUp,
   truck: Truck,
   "twitter-x": TwitterX,
   unlock: Unlock,
