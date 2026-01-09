@@ -65,6 +65,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
+    "@wc-toolkit/cem-inheritance": "^1.2.2",
     "@babel/preset-env": "^7.25.3",
     "@babel/register": "^7.21.0",
     "@chromatic-com/storybook": "^1.6.1",

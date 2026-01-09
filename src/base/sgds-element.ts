@@ -1,14 +1,6 @@
 import { isServer, LitElement, type CSSResult } from "lit";
 import style from "./sgds-element.css";
 import { property } from "lit/decorators.js";
-/**
- * @cssprop --sgds-{stateColor} - State colors in hexadecimal value
- * @cssprop --sgds-{stateColor}-rgb - State colors in rgb value
- * @cssprop --sgds-{stateColor}-{weights} - State colors with different weightage in hexadecimal value
- * @cssprop --sgds-gray-{weights} - State colors with different weightage in hexadecimal value
- * @cssprop --overlay-background-color - The drawer and modal component overlay background color
- * @cssprop --zindex-modal - The drawer and modal component z-index value
- */
 
 export default class SgdsElement extends LitElement {
   static styles: CSSResult[] = [style];

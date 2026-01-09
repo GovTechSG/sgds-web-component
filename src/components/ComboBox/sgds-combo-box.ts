@@ -1,5 +1,5 @@
 import { live } from "lit/directives/live.js";
-import { html, nothing, PropertyValueMap } from "lit";
+import { html, nothing, PropertyValueMap, TemplateResult } from "lit";
 import { property, queryAssignedElements, queryAsync, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -14,6 +14,7 @@ import formTextControlStyle from "../../styles/form-text-control.css";
 import { SgdsComboBoxOption } from "./sgds-combo-box-option";
 
 import { repeat } from "lit/directives/repeat.js";
+import SgdsSpinner from "../Spinner/sgds-spinner";
 
 /**
  * Each item in the ComboBox has a label to display
@@ -36,15 +37,15 @@ export interface ISgdsComboBoxInputEventDetail {
  * @event sgds-focus -  Emitted when user input is focused.
  * @event sgds-blur -  Emitted when user input is blurred.
  */
-
 export class SgdsComboBox extends SelectElement {
   static styles = [...SelectElement.styles, formTextControlStyle, comboBoxStyle];
-
+  static childName = "sgds-combo-box-option";
   /** @internal */
   static dependencies = {
-    "sgds-combo-box-option": SgdsComboBoxOption,
+    [SgdsComboBox.childName]: SgdsComboBoxOption,
     "sgds-icon": SgdsIcon,
-    "sgds-badge": SgdsBadge
+    "sgds-badge": SgdsBadge,
+    "sgds-spinner": SgdsSpinner
   };
 
   /** If true, renders multiple checkbox selection items. If false, single-select. */
@@ -55,6 +56,12 @@ export class SgdsComboBox extends SelectElement {
 
   /** If true, a clear button will be enabled on focus */
   @property({ type: Boolean, reflect: true }) clearable = false;
+
+  /** Enables the asynchronous behaviour of a combo box. When true, filterFunction is ignored and filtering is done remotely. */
+  @property({ type: Boolean, reflect: true }) async = false;
+
+  /** When filtering remotely and there are no results, set this to true to enable no options feedback on the menu. Applicable for async combo box only. */
+  @property({ type: Boolean, reflect: true }) emptyMenuAsync = false;
 
   /** The function used to filter the menu list, given the user's input value. */
   @property()
@@ -68,10 +75,10 @@ export class SgdsComboBox extends SelectElement {
   protected options: SgdsComboBoxOption[];
 
   @state() private optionList: SgdsComboBoxOptionData[] = [];
-  @state() private emptyMenu = false;
+  @state() private emptyMenuAfterFiltering = false;
 
   // Used to show and hide the clear button
-  @state() private isFocused = false;
+  @state() protected isFocused = false;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -101,11 +108,12 @@ export class SgdsComboBox extends SelectElement {
 
       this.options.forEach(o => o.removeAttribute("hidden"));
       // reset emptyMenu state
-      this.emptyMenu = false;
+      this.emptyMenuAfterFiltering = false;
     });
   }
   async firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
+    if (this.async) this.filterFunction = () => true;
     this.menuList.forEach(o => {
       const comboBoxOption = document.createElement("sgds-combo-box-option") as SgdsComboBoxOption;
       comboBoxOption.innerText = o.label;
@@ -114,7 +122,6 @@ export class SgdsComboBox extends SelectElement {
       comboBoxOption.active = this.value.includes(o.value);
       this.appendChild(comboBoxOption);
     });
-
     this._setupValidation(this.menuList);
 
     if (this.menuIsOpen && !this.readonly) {
@@ -123,12 +130,13 @@ export class SgdsComboBox extends SelectElement {
   }
 
   protected async _handleDefaultSlotChange(e: Event) {
-    const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
-
+    const assignedElements = (e.target as HTMLSlotElement).assignedElements({
+      flatten: true
+    }) as ComboBoxOptionWithFlag[];
     assignedElements.forEach(option => {
       // Handling of click events
       if (option.hasAttribute("disabled")) return false;
-
+      if (option.clickEventAdded) return false;
       option.addEventListener("click", (evt: PointerEvent) => {
         evt.preventDefault();
         const optionTarget = evt.target as SgdsComboBoxOption;
@@ -141,11 +149,10 @@ export class SgdsComboBox extends SelectElement {
 
         return false;
       });
-
+      option.clickEventAdded = true;
       option.addEventListener("keydown", (evt: KeyboardEvent) => {
         if (evt.key === "Enter") {
           this.close = "outside";
-
           const optionTarget = evt.target as SgdsComboBoxOption;
           optionTarget.click();
         }
@@ -167,10 +174,10 @@ export class SgdsComboBox extends SelectElement {
       if (!this.multiSelect) {
         this.displayValue = initialSelectedItem[0]?.label;
       }
-      this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._input);
-
-      this._mixinValidate(this.input);
     }
+    /** We want to run validation regardless of value or list present */
+    this.multiSelect ? (this.input = await this._multiSelectInput) : (this.input = await this._input);
+    this._mixinValidate(this.input);
   }
 
   @watch("value", { waitUntilFirstUpdate: true })
@@ -225,42 +232,39 @@ export class SgdsComboBox extends SelectElement {
     const valueArray = this.value.split(";");
     const initialSelectedItem = list.filter(({ value }) => valueArray.includes(value));
     this.selectedItems = [...initialSelectedItem];
-
     // When the new filtered items don't match value we update it
     const updatedValue = initialSelectedItem.map(item => item.value).join(";");
     if (updatedValue !== this.value) {
       this.value = updatedValue;
     }
-
-    if (!this.multiSelect) {
-      this.displayValue = initialSelectedItem[0]?.label ?? "";
+    // Disabling this condition for async combobox so that the display value in the input will not clear when menu options changes
+    if (!this.multiSelect && !this.async) {
+      this.displayValue = initialSelectedItem[0]?.label || "";
     }
 
     this.options.forEach(o => (o.active = valueArray.includes(o.value)));
   }
 
   // Called each time the user types in the <sgds-input>, we set .value and show the menu
-  private async _handleInputChange(e: CustomEvent) {
+  protected async _handleInputChange(e: CustomEvent) {
     const input = e.target as HTMLInputElement;
     this.displayValue = input.value;
     this.emit<ISgdsComboBoxInputEventDetail>("sgds-input", { detail: { displayValue: this.displayValue } });
-    // There is a race condition in certain situations where this.optionList is not fully updated during slotchange
-    // Hence instead of using this.optionList, we have to perform a query on the <sgds-combo-box-option> elements
-    const optionList = this.options.map(o => ({ value: o.value, label: o.textContent.trim() }));
-    this.filteredList = optionList.filter(item => this.filterFunction(this.displayValue, item));
-
-    // reset menu list when displayValue
+    this.invalid = false;
+    this.showMenu();
+    // reset menu list when displayValue is cleared
     if (this.displayValue === "" && !this.multiSelect) {
       this.selectedItems = [];
       this.value = this.selectedItems.join(";");
       this.options.forEach(o => (o.active = false));
     }
-
-    this.invalid = false;
-    this.showMenu();
+    // There is a race condition in certain situations where this.optionList is not fully updated during slotchange
+    // Hence instead of using this.optionList, we have to perform a query on the <sgds-combo-box-option> elements
+    const optionList = this.options.map(o => ({ value: o.value, label: o.textContent.trim() }));
+    this.filteredList = optionList.filter(item => this.filterFunction(this.displayValue, item));
 
     // Filtering for slots
-    this.emptyMenu = this.filteredList.length === 0;
+    this.emptyMenuAfterFiltering = this.filteredList.length === 0;
     const filteredValues = this.filteredList.map(l => l.value);
 
     this.options.forEach(o => {
@@ -270,10 +274,6 @@ export class SgdsComboBox extends SelectElement {
         o.hidden = false;
       }
     });
-    if (this.displayValue === "") {
-      this.options.forEach(o => (o.hidden = false));
-      await this.updateComplete;
-    }
   }
 
   /**
@@ -314,7 +314,6 @@ export class SgdsComboBox extends SelectElement {
   private _handleItemUnselect(e: Event) {
     const itemEl = e.target as SgdsComboBoxOption;
     itemEl.removeAttribute("active");
-
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
     const foundItem = this.filteredList.find(i => i.value.toString() === itemValueAttr) || {
@@ -376,7 +375,7 @@ export class SgdsComboBox extends SelectElement {
 
   // For clearing the value
   protected async _handleClear() {
-    this.value = "";
+    this.value = this.displayValue = "";
     this.options?.forEach(o => (o.active = false));
 
     const sgdsInput = await this._input;
@@ -410,7 +409,13 @@ export class SgdsComboBox extends SelectElement {
       this._mixinResetValidity(await this._multiSelectInput);
     }
   }
+  /** Template for the suffix icon */
+  protected suffixIconTemplate: TemplateResult = html`<sgds-icon
+    name=${this.menuIsOpen ? "chevron-up" : "chevron-down"}
+    size="md"
+  ></sgds-icon>`;
 
+  protected prefixIconTemplate: TemplateResult = html`${nothing}`;
   /**
    * Used `repeat` helper from Lit to render instead of .map:
    * The reassigning of value is affecting the truncation on badge as it is not triggering the slot change event.
@@ -419,9 +424,9 @@ export class SgdsComboBox extends SelectElement {
    * For a list created using Array.map, lit-html maintains the DOM nodes for the list items, but reassigns the values
    * For a list created using repeat, the repeat directive reorders the existing DOM nodes, so the nodes representing the first list item move to the last position.
    */
-  protected _renderInput() {
+  protected _renderInput(showClearButton: boolean): TemplateResult {
     const wantFeedbackStyle = this.hasFeedback;
-    const showButton = (this.isFocused || this.menuIsOpen) && this.value !== "" && this.clearable;
+    const showButton = showClearButton;
 
     return html`
       <div
@@ -433,6 +438,7 @@ export class SgdsComboBox extends SelectElement {
         })}"
         @click=${this._handleClick}
       >
+        ${this.prefixIconTemplate}
         <div class="combobox-input-container">
           ${this.multiSelect
             ? html`
@@ -444,7 +450,7 @@ export class SgdsComboBox extends SelectElement {
                       outlined
                       variant="neutral"
                       show
-                      dismissible
+                      ?dismissible=${!(this.readonly || this.disabled)}
                       ?fullwidth=${this.badgeFullWidth}
                       @sgds-hide=${e => this._handleBadgeDismissed(e, item)}
                       >${item.label}</sgds-badge
@@ -463,7 +469,7 @@ export class SgdsComboBox extends SelectElement {
             ?disabled=${this.disabled}
             ?readonly=${this.readonly}
             ?required=${this.required}
-            .value=${this.displayValue.trim()}
+            .value=${this.displayValue ? this.displayValue.trim() : ""}
             @input=${this._handleInputChange}
             @blur=${this._handleInputBlur}
             @focus=${this._handleFocus}
@@ -488,12 +494,27 @@ export class SgdsComboBox extends SelectElement {
               ></sgds-icon>
             `
           : nothing}
-
-        <sgds-icon name=${this.menuIsOpen ? "chevron-up" : "chevron-down"} size="md"></sgds-icon>
+        ${this.suffixIconTemplate}
       </div>
     `;
   }
+  protected _renderFeedbackMenu() {
+    if (this.loading) {
+      return this._renderLoadingMenu();
+    }
+    // When async, the filtering is done by remote server, so we do not check for emptyMenu of combobox filterFunction
+    if (this.async) {
+      return this.emptyMenuAsync || this.optionList.length === 0 ? this._renderEmptyMenu() : nothing;
+    } else {
+      return this.optionList.length === 0 || // no options at all
+        (this.emptyMenuAfterFiltering && this.optionList.length > 0) // check if filtering results in empty menu
+        ? this._renderEmptyMenu()
+        : nothing;
+    }
+  }
   render() {
+    const showClearButton =
+      (this.isFocused || this.menuIsOpen) && this.value !== "" && this.clearable && !this.readonly;
     return html`
       <div
         class=${classMap({ "form-control-container": true, disabled: this.disabled, combobox: true })}
@@ -501,13 +522,15 @@ export class SgdsComboBox extends SelectElement {
       >
         ${this._renderLabel()}
         <!-- The input -->
-        ${this._renderInput()} ${this._renderFeedback()}
+        ${this._renderInput(showClearButton)} ${this._renderFeedback()}
 
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
-          <slot id="default" @slotchange=${this._handleDefaultSlotChange}
-            ><div class="empty-menu">No options</div></slot
-          >
-          ${this.emptyMenu && this.optionList.length > 0 ? html`<div class="empty-menu">No options</div>` : nothing}
+          <slot
+            id="default"
+            class=${classMap({ "d-none": this.loading || this.emptyMenuAsync || this.optionList.length === 0 })}
+            @slotchange=${this._handleDefaultSlotChange}
+          ></slot>
+          ${this._renderFeedbackMenu()}
         </ul>
       </div>
 
@@ -518,10 +541,15 @@ export class SgdsComboBox extends SelectElement {
             id="multi-select-input-tracker"
             class="visually-hidden"
             ?required=${this.required}
+            tabindex="-1"
           />`
         : nothing}
     `;
   }
+}
+
+interface ComboBoxOptionWithFlag extends SgdsComboBoxOption {
+  clickEventAdded?: boolean;
 }
 
 export default SgdsComboBox;

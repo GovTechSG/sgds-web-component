@@ -1,4 +1,4 @@
-import { html, PropertyValueMap } from "lit";
+import { html, nothing, PropertyValueMap } from "lit";
 import { queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -9,6 +9,7 @@ import { watch } from "../../utils/watch";
 import SgdsIcon from "../Icon/sgds-icon";
 import selectStyle from "./select.css";
 import SgdsSelectOption from "./sgds-select-option";
+import SgdsSpinner from "../Spinner/sgds-spinner";
 /**
  * @summary Select is used to make one selection from a list through keyboard or mouse actions
  *
@@ -21,11 +22,12 @@ import SgdsSelectOption from "./sgds-select-option";
  */
 export class SgdsSelect extends SelectElement {
   static styles = [...SelectElement.styles, formTextControlStyles, selectStyle];
-
+  static childName = "sgds-select-option";
   /** @internal */
   static dependencies = {
     "sgds-icon": SgdsIcon,
-    "sgds-select-option": SgdsSelectOption
+    "sgds-spinner": SgdsSpinner,
+    [SgdsSelect.childName]: SgdsSelectOption
   };
   connectedCallback(): void {
     super.connectedCallback();
@@ -142,9 +144,6 @@ export class SgdsSelect extends SelectElement {
       e.preventDefault();
     }
   };
-  protected _renderEmptyMenu() {
-    return html` <div class="empty-menu">No options</div> `;
-  }
   /** Applicable for menuList prop only */
   protected _renderMenu() {
     const menu = this.menuList.map(item => {
@@ -217,7 +216,10 @@ export class SgdsSelect extends SelectElement {
         <!-- The input -->
         ${this._renderInput()} ${this._renderFeedback()}
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
-          <slot id="default" @slotchange=${this._handleSlotChange}>${this._renderMenu()}</slot>
+          <slot id="default" class=${classMap({ "is-loading": this.loading })} @slotchange=${this._handleSlotChange}
+            >${this._renderMenu()}</slot
+          >
+          ${this.loading ? this._renderLoadingMenu() : nothing}
         </ul>
       </div>
     `;

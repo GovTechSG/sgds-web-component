@@ -1,92 +1,163 @@
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <script type="module" src="../src/index.ts"></script>
-    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
-    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
-    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
-    <style>
-      .container {
-        max-width: 1200px;
-        margin: 36px auto;
-      }
 
-      .small-container {
-        max-width: 500px;
-        margin: 0 auto;
-      }
-      .flex {
-        display: flex;
-        gap: 4px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="small-container">
-        <sgds-combo-box id="combobox-example" label="Items" clearable placeholder="ComboBox">
-          <sgds-combo-box-option value="1">Option 1</sgds-combo-box-option>
-          <sgds-combo-box-option value="2">Option 2</sgds-combo-box-option>
-          <sgds-combo-box-option value="3">Option 3</sgds-combo-box-option>
+<head>
+  <meta charset="utf-8" />
+  <script type="module" src="../src/index.ts"></script>
+  <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+  <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+  <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+  <script type="module" src="../mocks/comboBoxSingleAsync.ts"></script>
+  <script type="module" src="../mocks/comboBoxMultiAsync.ts"></script>
+  <style>
+    .container {
+      max-width: 1200px;
+      margin: 36px auto;
+    }
+
+    .small-container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .flex {
+      display: flex;
+      gap: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="small-container"></div>
+    <h4>Empty single select combobox</h4>
+    <sgds-combo-box></sgds-combo-box>
+    <h4>Empty multi select combobox</h4>
+    <sgds-combo-box multiSelect></sgds-combo-box>
+    <h4>Single select combobox , populated by menuList (deprecated)</h4>
+    <sgds-combo-box id="menuList-population-example" value="1"></sgds-combo-box>
+    <script>
+      document.querySelector("#menuList-population-example").menuList = [
+        { value: "1", label: "Option 1" },
+        { value: "2", label: "Option 2" },
+        { value: "3", label: "Option 3" },
+      ];
+      setTimeout(() => {
+        document.querySelector("#menuList-population-example").menuList = [
+          { value: "4", label: "Option 4" },
+          { value: "5", label: "Option 5" },
+          { value: "6", label: "Option 6" },
+        ]
+      }, 5000);
+    </script>
+    <h4>Single select combobox , populated by slots</h4>
+    <sgds-combo-box id="slot-population-example" value="2">
+      <sgds-combo-box-option value="1">Option 1</sgds-combo-box-option>
+      <sgds-combo-box-option value="2">Option 2</sgds-combo-box-option>
+      <sgds-combo-box-option value="3">Option 3</sgds-combo-box-option>
+    </sgds-combo-box>
+    <script>
+      setTimeout(() => {
+        const comboBox = document.querySelector("#slot-population-example");
+        comboBox.innerHTML = `
+          <sgds-combo-box-option value="4">Option 4</sgds-combo-box-option>
+          <sgds-combo-box-option value="5">Option 5</sgds-combo-box-option>
+          <sgds-combo-box-option value="6">Option 6</sgds-combo-box-option>
+        `;
+      }, 5000);
+    </script>
+    <h4>Single select combobox loading state</h4>
+    <sgds-combo-box loading>
+      <sgds-combo-box-option value="1">Option 1</sgds-combo-box-option>
+      <sgds-combo-box-option value="2">Option 2</sgds-combo-box-option>
+      <sgds-combo-box-option value="3">Option 3</sgds-combo-box-option>
+    </sgds-combo-box>
+    <h4>Multi select combobox loading state</h4>
+    <sgds-combo-box loading multiSelect>
+      <sgds-combo-box-option value="1">Option 1</sgds-combo-box-option>
+      <sgds-combo-box-option value="2">Option 2</sgds-combo-box-option>
+      <sgds-combo-box-option value="3">Option 3</sgds-combo-box-option>
+    </sgds-combo-box>
+
+    <h4>Async single select combobox</h4>
+    <mock-async-single-combo-box></mock-async-single-combo-box>
+    <h4>Async multi select combobox</h4>
+    <mock-async-multi-combo-box></mock-async-multi-combo-box>
+
+    <sgds-combo-box id="combobox-example" label="Items" clearable placeholder="ComboBox">
+      <sgds-combo-box-option value="1">Option 1</sgds-combo-box-option>
+      <sgds-combo-box-option value="2">Option 2</sgds-combo-box-option>
+      <sgds-combo-box-option value="3">Option 3</sgds-combo-box-option>
+    </sgds-combo-box>
+
+    <sgds-combo-box id="combobox-example" label="Items" clearable multiSelect placeholder="ComboBox">
+      <sgds-combo-box-option value="1">Option 1</sgds-combo-box-option>
+      <sgds-combo-box-option value="2">Option 2</sgds-combo-box-option>
+      <sgds-combo-box-option value="3">Option 3</sgds-combo-box-option>
+    </sgds-combo-box>
+
+    <sgds-combo-box id="combobox-example" label="Items" value="option3" multiSelect placeholder="ComboBox">
+      <sgds-combo-box-option disabled value="option1">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+      <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
+    </sgds-combo-box>
+
+    <sgds-combo-box id="combobox-loading" label="Loading state" loading value="option3" multiSelect
+      placeholder="ComboBox">
+      <sgds-combo-box-option disabled value="option1">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+      <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
+    </sgds-combo-box>
+    <sgds-combo-box id="combobox-loading" label="Readonly and Clearable" readonly clearable value="option3" multiSelect
+      placeholder="ComboBox">
+      <sgds-combo-box-option disabled value="option1">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+      <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
+    </sgds-combo-box>
+    <sgds-combo-box id="combobox-loading" label="Disabled and Clearable" disabled clearable value="option3" multiSelect
+      placeholder="ComboBox">
+      <sgds-combo-box-option disabled value="option1">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+      <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
+    </sgds-combo-box>
+  </div>
+
+  <div class="small-container">
+    <h2>Single selection combo-box</h2>
+
+    <form>
+      <div class="flex">
+        <sgds-combo-box id="combobox-example" clearable label="Items" placeholder="ComboBox" value="1" hasfeedback>
+          <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
+          <sgds-combo-box-option value="2">Zimbabwe</sgds-combo-box-option>
         </sgds-combo-box>
 
-        <sgds-combo-box id="combobox-example" label="Items" clearable multiSelect placeholder="ComboBox">
-          <sgds-combo-box-option value="1">Option 1</sgds-combo-box-option>
-          <sgds-combo-box-option value="2">Option 2</sgds-combo-box-option>
-          <sgds-combo-box-option value="3">Option 3</sgds-combo-box-option>
-        </sgds-combo-box>
-
-        <sgds-combo-box id="combobox-example" label="Items" value="option3" multiSelect placeholder="ComboBox">
+        <sgds-combo-box required hasFeedback multiselect clearable id="combobox-example" label="Items"
+          value="option1;option2" placeholder="ComboBox">
           <sgds-combo-box-option disabled value="option1">Apple</sgds-combo-box-option>
           <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
           <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
         </sgds-combo-box>
       </div>
+      <sgds-button type="reset">rest</sgds-button>
+      <button type="submit">submit</button>
+    </form>
 
-      <div class="small-container">
-        <h2>Single selection combo-box</h2>
+    <form>
+      <sgds-combo-box multiSelect clearable required hasFeedback>
+        <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
+        <sgds-combo-box-option value="2">Zimbabwe</sgds-combo-box-option>
+        <sgds-combo-box-option value="3">Zoo</sgds-combo-box-option>
+        <sgds-combo-box-option value="4">Zzzbabwe</sgds-combo-box-option>
+      </sgds-combo-box>
+      <button type="reset" id="abc">Reset</button>
 
-        <form>
-          <div class="flex">
-            <sgds-combo-box id="combobox-example" clearable label="Items" placeholder="ComboBox" value="1" hasfeedback>
-              <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
-              <sgds-combo-box-option value="2">Zimbabwe</sgds-combo-box-option>
-            </sgds-combo-box>
+      <script>
+        const resset = document.querySelector("#abc")
+        resset.addEventListener("click", () => console.log("click"))
+      </script>
+    </form>
+  </div>
+  </div>
+</body>
 
-            <sgds-combo-box
-              required
-              hasFeedback
-              multiselect
-              clearable
-              id="combobox-example"
-              label="Items"
-              value="option1;option2"
-              placeholder="ComboBox"
-            >
-              <sgds-combo-box-option disabled value="option1">Apple</sgds-combo-box-option>
-              <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
-              <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
-              </sgds-combo-box>
-          </div>
-          <sgds-button type="reset">rest</sgds-button>
-          <button type="submit">submit</button>
-        </form>
-
-         <form>
-        <sgds-combo-box value="1;2" multiSelect clearable required hasFeedback>
-          <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
-          <sgds-combo-box-option value="2">Zimbabwe</sgds-combo-box-option>
-          <sgds-combo-box-option value="3">Zoo</sgds-combo-box-option>
-          <sgds-combo-box-option value="4">Zzzbabwe</sgds-combo-box-option>
-        </sgds-combo-box>
-        <button type="reset" id="abc">Reset</button>
-
-        <script>
-          const resset = document.querySelector("#abc")
-          resset.addEventListener("click", () => console.log("click"))
-        </script>
-      </form>
-      </div>
-    </div>
-  </body>
 </html>
