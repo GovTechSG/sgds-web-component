@@ -122,14 +122,14 @@
 }
 
 slot[name="title"]::slotted(*) {
-  --sgds-margin-2-xs: var(--sgds-margin-none);
-  --sgds-margin-xs: var(--sgds-margin-none);
+ --sgds-margin-md: var(--sgds-margin-none);
+ --sgds-margin-lg: var(--sgds-margin-none);
   --sgds-font-size-6: var(--sgds-font-size-4);
   display: flex;
   flex: 1 1 auto;
   align-items: center;
   gap: 1rem;
-  margin: var(--sgds-margin-none, var(--sgds-margin-xs, --sgds-margin-2-xs));
+  margin: var(--sgds-margin-none, var(--sgds-margin-xs,--sgds-margin-md));
   line-height: var(--sgds-line-height-40);
   font-size: var(--sgds-font-size-6, --sgds-font-size-4);
 }

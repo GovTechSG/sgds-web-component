@@ -288,17 +288,20 @@
   --sgds-form-padding-inline-lg: var(--sgds-padding-sm);
   --sgds-form-padding-inline-xl: var(--sgds-padding-md);
 
+    /* NEW - MARGIN */
   --sgds-margin-none: var(--sgds-spacer-0);
-  --sgds-margin-3-xs: var(--sgds-spacer-3);
-  --sgds-margin-2-xs: var(--sgds-spacer-5);
-  --sgds-margin-xs: var(--sgds-spacer-6);
-  --sgds-margin-sm: var(--sgds-spacer-7);
-  --sgds-margin-md: var(--sgds-spacer-8);
-  --sgds-margin-lg: var(--sgds-spacer-9);
-  --sgds-margin-xl: var(--sgds-spacer-10);
-  --sgds-margin-2-xl: var(--sgds-spacer-11);
-  --sgds-margin-3-xl: var(--sgds-spacer-12);
-
+  --sgds-margin-3-xs: var(--sgds-spacer-1);
+  --sgds-margin-2-xs: var(--sgds-spacer-2);
+  --sgds-margin-xs: var(--sgds-spacer-3);
+  --sgds-margin-sm: var(--sgds-spacer-4);
+  --sgds-margin-md: var(--sgds-spacer-5);
+  --sgds-margin-lg: var(--sgds-spacer-6);
+  --sgds-margin-xl: var(--sgds-spacer-7);
+  --sgds-margin-2-xl: var(--sgds-spacer-8);
+  --sgds-margin-3-xl: var(--sgds-spacer-9);
+  --sgds-margin-4-xl: var(--sgds-spacer-10);
+  --sgds-margin-5-xl: var(--sgds-spacer-11);
+  
   --sgds-gap-none: var(--sgds-spacer-0);
   --sgds-gap-2-xs: var(--sgds-spacer-2);
   --sgds-gap-xs: var(--sgds-spacer-3);

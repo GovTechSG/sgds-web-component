@@ -165,7 +165,7 @@ a.card:not(.disabled):focus-visible {
 .card-title {
   --sgds-font-size-5: var(--sgds-font-size-4);
   --sgds-font-size-6: var(--sgds-font-size-4);
-  --sgds-margin-2-xs: var(--sgds-margin-none);
+ --sgds-margin-md: var(--sgds-margin-none);
   --sgds-font-weight-bold: var(--sgds-font-weight-semibold);
   color: var(--sgds-body-color-default);
   font-size: var(--sgds-font-size-4);
