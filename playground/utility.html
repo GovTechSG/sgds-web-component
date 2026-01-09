@@ -1,0 +1,119 @@
+<script type="module" src="../src/index.ts"></script>
+<link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../lib/css/utility.css" rel="stylesheet" type="text/css" />
+
+<!-- <div class="bg-product-primary-100 rounded-none border-1 border-indigo-600">test</div>
+<div class="text-purple-500 rounded-xs border-1 border-indigo-600">test</div>
+
+<label class="text-3 leading-body font-regular tracking-normal">sgds label lg regular</label>
+
+<h1>Heading extra large bold</h1>
+
+<div class="text-sgds-7 leading-48 font-light tracking-tight" role="heading" aria-level="2"> 
+    Heading extra large bold
+</div>
+
+
+ -->
+<style>
+    body.app-container {
+        /* display: flex; */
+        /* flex-direction: column; */
+        min-height: 100vh;
+    }
+    .content-container{
+        /* display: flex; */
+        /* flex-grow: 1; */
+
+    }
+    .sidenav-area{
+       height: 100% ;
+       top: 0;
+       border: 1px solid red;
+
+    }
+    .content-area {
+        width: 100%;
+        height: 100%;
+        /* flex-grow: 1; */
+    }
+</style>
+<body class="app-container sgds:flex sgds:flex-col">
+<sgds-mainnav>
+      <img alt="sgds logo" width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
+      <sgds-mainnav-item>
+        <a href="#">ArgsTable Controlled</a>
+      </sgds-mainnav-item>
+      <sgds-mainnav-item>
+        <a href="#">About</a>
+      </sgds-mainnav-item>
+      <sgds-mainnav-dropdown>
+        <span slot="toggler">Dropdown</span>
+        <sgds-dropdown-item><a href="https://google.com">Item 1</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
+      </sgds-mainnav-dropdown>
+      <sgds-mainnav-item slot="end">
+        <a href="#">Contact Us</a>
+      </sgds-mainnav-item>
+      <sgds-button slot="end">Login</sgds-button>
+      <dev-console-widget slot="non-collapsible" iconcolor="black" iconwidth="28px" iconheight="28px"></dev-console-widget>
+    </sgds-mainnav>
+<div class="content-container sgds:flex sgds:grow-1">
+    <div class="sidenav-area">
+        <sgds-sidenav>
+      <sgds-sidenav-item>
+          <span slot="title">SideNavItem L1 label (menu) </span>
+          <sgds-sidenav-link><a href="#">SidenavLink L2 label</a></sgds-sidenav-link>
+          <sgds-sidenav-link> 
+            <a href="#">SidenavLink L2 label</a>
+          </sgds-sidenav-link>
+          <sgds-sidenav-link>
+            <a href="#">SidenavLink L2 label</a>
+          </sgds-sidenav-link>
+          <sgds-sidenav-item>
+            <span slot="title">
+            SidenavItem L2 label
+            </span>
+            <sgds-sidenav-link>
+              <a href="#"> SidenavLink L3 label</a>
+            </sgds-sidenav-link>
+            <sgds-sidenav-link>
+              <a href="#">SidenavLink L3 label</a>
+            </sgds-sidenav-link>
+          </sgds-sidenav-item>
+      </sgds-sidenav-item>
+      <sgds-sidenav-item>
+        <span slot="title">SideNavItem L1 label (menu)</span>
+        <sgds-sidenav-link> 
+            <a href="#">SidenavLink L2 label</a>
+          <sgds-sidenav-link>
+            <a href="#">SidenavLink L2 label</a>
+          </sgds-sidenav-link>
+      </sgds-sidenav-link></sgds-sidenav-item>
+      <sgds-sidenav-item>
+        <a href="#">SidenavItem L1 label (link)</a>
+      </sgds-sidenav-item>
+    </sgds-sidenav>
+    </div>
+ <div class="sgds-container-sbar">
+    <div class="content-area sgds:grow-1 sgds-grid">
+        <span class="sgds:h-sm sgds:border sgds:p-1">Column 1</span>
+        <span>Column 2</span>
+        <span>Column 3</span>
+        <span>Column 4</span>
+        <span>Column 5</span>
+        <span>Column 6</span>
+        <span>Column 7</span>
+        <span>Column 8</span>
+        <span>Column 9</span>
+        <span>Column 10</span>
+        <span>Column 11</span>
+        <span>Column 12</span>
+    </div>
+ </div>
+</div>
+<sgds-footer contacthref="https://form.gov.sg/" feedbackhref="https://form.gov.sg/" faqhref="https://form.gov.sg/" privacyhref="https://www.designsystem.tech.gov.sg/privacy/" termsofusehref="https://www.designsystem.tech.gov.sg/terms-of-use/"></sgds-footer>
+</body>

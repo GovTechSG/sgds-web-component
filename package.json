@@ -28,7 +28,8 @@
     "build-storybook": "npm run build && npm run write:stories && STORYBOOK_ENV=production storybook build",
     "generate:icons": "node scripts/generateIconRegistry.js",
     "sync-figma-to-tokens": "tsx scripts/figma/sync-figma-to-tokens/sync-figma-to-tokens.ts",
-    "chromatic": "chromatic "
+    "chromatic": "chromatic",
+    "utility": "tailwindcss -i ./src/css/utility.css -o ./lib/css/utility.css --config tailwind.config.js"
   },
   "author": "GovTechSG",
   "contributors": [
@@ -85,6 +86,8 @@
     "@storybook/blocks": "^8.2.7",
     "@storybook/web-components": "^8.2.6",
     "@storybook/web-components-vite": "^8.2.6",
+    "@tailwindcss/cli": "^4.1.18",
+    "@tailwindcss/postcss": "^4.1.18",
     "@types/mocha": "^10.0.6",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
@@ -136,6 +139,7 @@
     "rollup-plugin-visualizer": "^5.9.2",
     "sinon": "^21.0.1",
     "storybook": "^8.6.15",
+    "tailwindcss": "^4.1.18",
     "tsx": "^4.20.4",
     "typescript": "^5.0.4",
     "vite": "^4.4.9"
