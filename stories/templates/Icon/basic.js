@@ -19,6 +19,10 @@ export const parameters = {
   docs: {
     source: {
       code: `
+          <sgds-icon name="announcement"></sgds-icon>
+
+          <sgds-icon name="archive"></sgds-icon>
+      
           <sgds-icon name="arrow-bar-down"></sgds-icon>
       
           <sgds-icon name="arrow-bar-left"></sgds-icon>
@@ -26,6 +30,14 @@ export const parameters = {
           <sgds-icon name="arrow-bar-right"></sgds-icon>
       
           <sgds-icon name="arrow-bar-up"></sgds-icon>
+      
+          <sgds-icon name="arrow-circle-down"></sgds-icon>
+      
+          <sgds-icon name="arrow-circle-left"></sgds-icon>
+      
+          <sgds-icon name="arrow-circle-right"></sgds-icon>
+      
+          <sgds-icon name="arrow-circle-up"></sgds-icon>
       
           <sgds-icon name="arrow-clockwise"></sgds-icon>
       
@@ -36,6 +48,14 @@ export const parameters = {
           <sgds-icon name="arrow-repeat"></sgds-icon>
       
           <sgds-icon name="arrow-right"></sgds-icon>
+      
+          <sgds-icon name="arrow-square-down"></sgds-icon>
+      
+          <sgds-icon name="arrow-square-left"></sgds-icon>
+      
+          <sgds-icon name="arrow-square-right"></sgds-icon>
+      
+          <sgds-icon name="arrow-square-up"></sgds-icon>
       
           <sgds-icon name="arrow-up"></sgds-icon>
       
@@ -57,6 +77,8 @@ export const parameters = {
       
           <sgds-icon name="building"></sgds-icon>
       
+          <sgds-icon name="bus"></sgds-icon>
+      
           <sgds-icon name="calculator"></sgds-icon>
       
           <sgds-icon name="calendar-check"></sgds-icon>
@@ -66,8 +88,14 @@ export const parameters = {
           <sgds-icon name="calendar"></sgds-icon>
       
           <sgds-icon name="camera"></sgds-icon>
+
+          <sgds-icon name="car"></sgds-icon>
+
+          <sgds-icon name="chat-dots"></sgds-icon>
       
           <sgds-icon name="chat-left-text"></sgds-icon>
+      
+          <sgds-icon name="chat"></sgds-icon>
       
           <sgds-icon name="check-circle-fill"></sgds-icon>
           
@@ -80,6 +108,8 @@ export const parameters = {
           <sgds-icon name="chevron-left"></sgds-icon>
       
           <sgds-icon name="chevron-right"></sgds-icon>
+      
+          <sgds-icon name="chevron-selector-vertical"></sgds-icon>
       
           <sgds-icon name="chevron-up"></sgds-icon>
       
@@ -95,6 +125,8 @@ export const parameters = {
       
           <sgds-icon name="compass"></sgds-icon>
       
+          <sgds-icon name="copy"></sgds-icon>
+      
           <sgds-icon name="cross"></sgds-icon>
       
           <sgds-icon name="cursor-fill"></sgds-icon>
@@ -108,6 +140,8 @@ export const parameters = {
           <sgds-icon name="dash"></sgds-icon>
           
           <sgds-icon name="download"></sgds-icon>
+          
+          <sgds-icon name="edit"></sgds-icon>
       
           <sgds-icon name="exclamation-circle-fill"></sgds-icon>
           
@@ -165,6 +199,10 @@ export const parameters = {
       
           <sgds-icon name="hand-thumbs-up"></sgds-icon>
       
+          <sgds-icon name="hard-drive"></sgds-icon>
+      
+          <sgds-icon name="heart"></sgds-icon>
+      
           <sgds-icon name="house-door"></sgds-icon>
 
           <sgds-icon name="house"></sgds-icon>
@@ -179,6 +217,8 @@ export const parameters = {
       
           <sgds-icon name="instagram"></sgds-icon>
       
+          <sgds-icon name="laptop"></sgds-icon>
+      
           <sgds-icon name="layers"></sgds-icon>
       
           <sgds-icon name="layout-text-window-reverse"></sgds-icon>
@@ -187,23 +227,45 @@ export const parameters = {
           
           <sgds-icon name="layout"></sgds-icon>
       
+          <sgds-icon name="lightbulb"></sgds-icon>
+      
           <sgds-icon name="link"></sgds-icon>
       
           <sgds-icon name="linkedin"></sgds-icon>
       
           <sgds-icon name="list"></sgds-icon>
-          
+      
           <sgds-icon name="lock-fill"></sgds-icon>
-          
+      
           <sgds-icon name="lock"></sgds-icon>
+      
+          <sgds-icon name="login"></sgds-icon>
+      
+          <sgds-icon name="logout"></sgds-icon>
+      
+          <sgds-icon name="luggage"></sgds-icon>
       
           <sgds-icon name="mail"></sgds-icon>
       
           <sgds-icon name="map"></sgds-icon>
+      
+          <sgds-icon name="meetup"></sgds-icon>
 
           <sgds-icon name="menu"></sgds-icon>
+
+          <sgds-icon name="microphone"></sgds-icon>
+
+          <sgds-icon name="monitor"></sgds-icon>
+
+          <sgds-icon name="moon"></sgds-icon>
+
+          <sgds-icon name="move"></sgds-icon>
       
           <sgds-icon name="paperclip"></sgds-icon>
+      
+          <sgds-icon name="passport"></sgds-icon>
+      
+          <sgds-icon name="pause"></sgds-icon>
       
           <sgds-icon name="pencil"></sgds-icon>
       
@@ -216,12 +278,18 @@ export const parameters = {
           <sgds-icon name="person-x"></sgds-icon>
           
           <sgds-icon name="person"></sgds-icon>
+          
+          <sgds-icon name="phone"></sgds-icon>
       
           <sgds-icon name="pin-map-fill"></sgds-icon>
           
           <sgds-icon name="pin"></sgds-icon>
       
           <sgds-icon name="placeholder"></sgds-icon>
+      
+          <sgds-icon name="plane"></sgds-icon>
+      
+          <sgds-icon name="play"></sgds-icon>
       
           <sgds-icon name="plus-circle"></sgds-icon>
       
@@ -233,13 +301,21 @@ export const parameters = {
       
           <sgds-icon name="question-circle"></sgds-icon>
       
+          <sgds-icon name="rocket"></sgds-icon>
+      
           <sgds-icon name="save"></sgds-icon>
       
           <sgds-icon name="search"></sgds-icon>
       
+          <sgds-icon name="send"></sgds-icon>
+      
+          <sgds-icon name="sg-crest"></sgds-icon>
+      
           <sgds-icon name="share"></sgds-icon>
       
           <sgds-icon name="slash-circle"></sgds-icon>
+      
+          <sgds-icon name="slash-divider"></sgds-icon>
       
           <sgds-icon name="sliders"></sgds-icon>
       
@@ -251,23 +327,57 @@ export const parameters = {
       
           <sgds-icon name="stoplights"></sgds-icon>
       
+          <sgds-icon name="sun"></sgds-icon>
+      
+          <sgds-icon name="switch-horizontal"></sgds-icon>
+      
+          <sgds-icon name="switch-vertical"></sgds-icon>
+      
+          <sgds-icon name="tablet"></sgds-icon>
+      
+          <sgds-icon name="telegram"></sgds-icon>
+      
           <sgds-icon name="telephone"></sgds-icon>
       
           <sgds-icon name="three-dots-vertical"></sgds-icon>
           
           <sgds-icon name="three-dots"></sgds-icon>
+          
+          <sgds-icon name="ticket"></sgds-icon>
       
           <sgds-icon name="toggle-off"></sgds-icon>
       
           <sgds-icon name="toggle-on"></sgds-icon>
       
+          <sgds-icon name="train"></sgds-icon>
+      
+          <sgds-icon name="translate"></sgds-icon>
+      
           <sgds-icon name="trash"></sgds-icon>
+      
+          <sgds-icon name="trend-down"></sgds-icon>
+      
+          <sgds-icon name="trend-up"></sgds-icon>
+      
+          <sgds-icon name="truck"></sgds-icon>
       
           <sgds-icon name="twitter-x"></sgds-icon>
       
           <sgds-icon name="unlock"></sgds-icon>
       
           <sgds-icon name="upload"></sgds-icon>
+      
+          <sgds-icon name="user-circle"></sgds-icon>
+      
+          <sgds-icon name="user-square"></sgds-icon>
+      
+          <sgds-icon name="users"></sgds-icon>
+      
+          <sgds-icon name="video-recorder"></sgds-icon>
+      
+          <sgds-icon name="volume-max"></sgds-icon>
+      
+          <sgds-icon name="volume-x"></sgds-icon>
       
           <sgds-icon name="window-dash"></sgds-icon>
           
