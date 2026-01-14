@@ -1,12 +1,24 @@
-:host{
+:host {
   display: flex;
   gap: var(--sgds-gap-xs);
   align-items: center;
+  min-width: 0;
 }
+
+:host .nav-link::slotted(*) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+}
+
 :host([active]) .nav-link::slotted(*) {
   --sgds-link-color-default: var(--sgds-color-default);
- color: var(--sgds-link-color-default, --sgds-color-default);
- pointer-events: none;
+  color: var(--sgds-link-color-default, --sgds-color-default);
+  pointer-events: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 :host([active]) .nav-link::slotted(*:hover),
@@ -14,6 +26,16 @@
 :host([active]) .nav-link::slotted(*:focus-visible){
   --sgds-link-color-emphasis: var(--sgds-color-default);
   color: var(--sgds-link-color-emphasis, --sgds-color-default);
+}
+
+:host(.overflow-menu) {
+  flex-shrink: 0;
+}
+
+sgds-link {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .separator svg {
