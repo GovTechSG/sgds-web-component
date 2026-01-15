@@ -247,7 +247,7 @@ importers:
         specifier: ^21.0.1
         version: 21.0.1
       storybook:
-        specifier: ^8.2.6
+        specifier: ^8.6.15
         version: 8.6.15(prettier@2.8.8)
       tsx:
         specifier: ^4.20.4
