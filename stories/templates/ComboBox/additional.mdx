@@ -127,19 +127,4 @@ const inputHandler = (e: CustomEvent<ISgdsComboBoxInputEventDetail>) => {
 
 ```
 
-## Asynchronous ComboBox
-
-Asynchronous ComboBox search is for filtering remotely via an API request. The filtering is done through the response of API requests.
-Set the `async` attribute to true. You can then hook onto the `sgds-input` event to listen for input changes and make API requests accordingly.
-
-
-  - Use `loading` property to show loading spinner while waiting for API response.
-  - Use `emptyMenuAsync` property to show "No options" when there are no results from the API response.
-  - Populate the combo box options based on the API response.
-
-<Canvas of={ComboBoxStories.AsyncCombobox}>
-  <Story of={ComboBoxStories.AsyncCombobox} />
-</Canvas>
-
-  [React demo](https://codesandbox.io/p/github/clukhei/sgds-asynchronous-combo-box-demo)
 
