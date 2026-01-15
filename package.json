@@ -136,7 +136,7 @@
     "rollup-plugin-typescript2": "^0.33.0",
     "rollup-plugin-visualizer": "^5.9.2",
     "sinon": "^21.0.1",
-    "storybook": "^8.6.15",
+    "storybook": "^8.2.6",
     "tsx": "^4.20.4",
     "typescript": "^5.0.4",
     "vite": "^4.4.9"
