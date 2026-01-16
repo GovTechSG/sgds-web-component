@@ -3,8 +3,8 @@ permissions:
   contents: read
 
 on:
-  pull_request_review_comment:
-    types: [created]
+  pull_request:
+    types: [opened, reopened, synchronize]
 
 jobs:
   chromatic:
@@ -13,7 +13,8 @@ jobs:
       matrix:
         node-version: [22.18.0]
     if: > 
-      contains(github.event.comment.body, '/chromatic')
+      github.event.pull_request.head.repo.full_name == github.repository.full_name &&
+      contains(github.event.pull_request.title, '[run-chromatic]')
     steps:
       - name: Check if actor is repo admin
         id: permission
