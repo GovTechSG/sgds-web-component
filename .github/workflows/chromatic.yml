@@ -3,7 +3,7 @@ permissions:
   contents: read
 
 on:
-  pull_request_comment:
+  pull_request_review_comment:
     types: [created]
 
 jobs:
