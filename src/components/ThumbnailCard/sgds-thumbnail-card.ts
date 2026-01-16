@@ -1,9 +1,8 @@
-import { nothing, PropertyValues } from "lit";
-import { html, literal } from "lit/static-html.js";
-import { property, queryAssignedElements, queryAssignedNodes } from "lit/decorators.js";
+import { nothing } from "lit";
+import { property, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { html, literal } from "lit/static-html.js";
 import { CardElement } from "../../base/card-element";
-import SgdsLink from "../Link/sgds-link";
 import thumbnailCardStyle from "./thumbnail-card.css";
 
 /**
