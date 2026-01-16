@@ -44,6 +44,10 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.event.issue.pull_request.head.sha }}
+      - name: Verify checkout
+        run: |
+          echo ">>>>GitHub Event Pull Request Head SHA: ${{ github.event.issue.pull_request.head.sha }}"
+          echo ">>>>Checked out commit: $(git rev-parse HEAD)"
       - uses: pnpm/action-setup@v4
       - name: Install dependencies
         # ⚠️ See your package manager's documentation for the correct command to install dependencies in a CI environment.
