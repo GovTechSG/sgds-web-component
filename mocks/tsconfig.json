@@ -4,18 +4,13 @@
     "module": "esnext",
     "moduleResolution": "node",
     "lib": ["es2017", "dom", "dom.iterable"],
-    "declaration": true,
-    "declarationDir": "lib",
     "sourceMap": true,
     "experimentalDecorators": true,
     "inlineSources": true,
     "skipLibCheck": true,
     "noImplicitAny": false,
     "importHelpers": true,
-    "rootDir": "src",
-    "allowJs": true,
-    "typeRoots": ["./node_modules/@types"]
-  },
-  "include": ["**/*.ts", "typings"],
-  "exclude": ["node_modules", "lib", "test", "test-outdir", "react", "cypress", "cypress.config.ts", "scripts", "mocks"]
+    "rootDir": ".",
+    "allowJs": true
+  }
 }

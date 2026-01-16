@@ -1,7 +1,7 @@
+import { expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
-import { fixture, expect, elementUpdated } from "@open-wc/testing";
-import "../src/index"; // Adjust the path as necessary
 import { SgdsDescriptionListGroup } from "../src/components";
+import "../src/index"; // Adjust the path as necessary
 
 describe("<sgds-description-list-group>", () => {
   it("should render title element when title is provided", async () => {

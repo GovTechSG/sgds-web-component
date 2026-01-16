@@ -3,19 +3,17 @@ permissions:
   contents: read
 
 on:
-  issue_comment:
-    types: [created]
+  pull_request:
+    types: [opened, reopened, synchronize]
 
 jobs:
   chromatic:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        node-version: [20]
+        node-version: [22.18.0]
     if: > 
-      github.event.issue.pull_request &&
-      github.event.pull_request.head.repo.full_name == github.repository.full_name &&
-      contains(github.event.comment.body, '/chromatic')
+      contains(github.event.pull_request.title, '[run-chromatic]')
     steps:
       - name: Check if actor is repo admin
         id: permission
@@ -43,10 +41,19 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+        env: 
+           CHROMATIC_BRANCH: ${{ github.event.pull_request.head.ref || github.ref_name }}
+           CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.ref }}
+           CHROMATIC_SLUG: ${{ github.repository }}      
+      - name: Verify checkout
+        run: |
+          echo ">>>>GitHub Event Pull Request Head SHA: ${{ github.event.pull_request.head.ref }}"
+          echo ">>>>Checked out commit: $(git rev-parse HEAD)"
       - uses: pnpm/action-setup@v4
       - name: Install dependencies
         # ⚠️ See your package manager's documentation for the correct command to install dependencies in a CI environment.
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:
