@@ -375,3 +375,20 @@ export const Loading = {
   parameters: {},
   tags: ["!dev"]
 };
+
+const AsyncComboboxTemplate = () => {
+  return html`
+    <div style="display:flex;flex-direction:column;gap:3rem;">
+      <mock-async-single-combo-box></mock-async-single-combo-box>
+      <mock-async-multi-combo-box></mock-async-multi-combo-box>
+    </div>
+  `;
+};
+
+export const AsyncCombobox = {
+  render: AsyncComboboxTemplate.bind({}),
+  name: "Asynchronous ComboBox",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
