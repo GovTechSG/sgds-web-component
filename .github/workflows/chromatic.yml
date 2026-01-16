@@ -13,7 +13,6 @@ jobs:
       matrix:
         node-version: [22.18.0]
     if: > 
-      github.event.pull_request.head.repo.full_name == github.repository.full_name &&
       contains(github.event.pull_request.title, '[run-chromatic]')
     steps:
       - name: Check if actor is repo admin
