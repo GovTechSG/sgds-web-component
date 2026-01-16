@@ -3,7 +3,7 @@ permissions:
   contents: read
 
 on:
-  pull_request_review_comment:
+  pull_request_comment:
     types: [created]
 
 jobs:
@@ -13,8 +13,6 @@ jobs:
       matrix:
         node-version: [22.18.0]
     if: > 
-      github.event.pull_request &&
-      github.event.pull_request.head.repo.full_name == github.repository.full_name &&
       contains(github.event.comment.body, '/chromatic')
     steps:
       - name: Check if actor is repo admin
@@ -43,7 +41,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Verify checkout commit
+      - name: Verify checkout
         run: |
           echo ">>>>Checked out commit: $(git rev-parse HEAD)"
       - uses: pnpm/action-setup@v4
