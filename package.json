@@ -26,6 +26,7 @@
     "e2e-test": "node cypress/scripts/run_all.js & cypress open",
     "storybook": "nodemon --exec \"npm run write:stories &&  STORYBOOK_ENV=development storybook dev -p 6006\" --watch stories/templates stories/getting-started -e js,mdx",
     "build-storybook": "npm run build && npm run write:stories && STORYBOOK_ENV=production storybook build",
+    "convert:icons": "node scripts/convertIcons.js && pnpm run generate:icons",
     "generate:icons": "node scripts/generateIconRegistry.js",
     "sync-figma-to-tokens": "tsx scripts/figma/sync-figma-to-tokens/sync-figma-to-tokens.ts",
     "chromatic": "chromatic "
