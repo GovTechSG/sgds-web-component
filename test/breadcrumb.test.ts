@@ -57,8 +57,7 @@ describe("sgds-breadcrumb", () => {
               Home
             </a>
           </sgds-breadcrumb-item>
-         <sgds-breadcrumb-item
-         >
+         <sgds-breadcrumb-item class="overflow-menu">
            <sgds-overflow-menu aria-haspopup="menu" size="sm">
              <sgds-dropdown-item
                aria-disabled="false"
