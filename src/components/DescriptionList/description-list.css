@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: var(--sgds-gap-xs);
+  gap: var(--sgds-gap-2-xs);
   padding: var(--sgds-padding-lg) var(--sgds-padding-xl);
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }
@@ -37,5 +37,6 @@
 @media (min-width: 512px) {
   :host(:not([stacked])) .container {
     flex-direction: row;
+    gap: var(--sgds-gap-2-xl);
   }
 }
