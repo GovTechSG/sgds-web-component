@@ -19,7 +19,7 @@ fieldset {
 
 .label-hint-container .form-label {
   color: var(--sgds-form-color-default);
-  font-size: var(--sgds-font-size-2);
+  font-size: var(--sgds-font-size-16);
   font-weight: var(--sgds-font-weight-regular);
 }
 

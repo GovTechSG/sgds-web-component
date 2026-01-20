@@ -29,7 +29,7 @@
 .pagination {
   display: flex;
   gap: var(--sgds-gap-2-xs);
-  font-size: var(--sgds-font-size-0);
+  font-size: var(--sgds-font-size-12);
   align-items: center;
   font-weight: var(--sgds-font-weight-regular, 400);
   line-height: var(--sgds-line-height-16, 16px); /* 133.333% */
