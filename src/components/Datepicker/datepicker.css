@@ -8,7 +8,7 @@
   --datepicker-selected-date-bg: var(--sgds-primary);
   --datepicker-selected-date-color: white;
 
-  font-size: var(--sgds-font-size-1);
+  font-size: var(--sgds-font-size-14);
 }
 
 :host([menuisopen]) .dropdown-menu {

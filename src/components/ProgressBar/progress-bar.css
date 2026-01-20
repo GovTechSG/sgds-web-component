@@ -41,7 +41,7 @@ progress {
 
 .label {
   white-space: nowrap;
-  font-size: var(--sgds-font-size-1);
+  font-size: var(--sgds-font-size-14);
   color: var(--sgds-color-subtle);
 }
 

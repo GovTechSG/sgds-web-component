@@ -11,11 +11,11 @@ slot::slotted(*){
 }
 
 .sm {
-  font-size: var(--sgds-font-size-1);
+  font-size: var(--sgds-font-size-14);
   line-height: var(--sgds-line-height-20);
 }
 
 .lg {
-  font-size : var(--sgds-font-size-3);
+  font-size : var(--sgds-font-size-20);
   line-height: var(--sgds-line-height-32);
 }

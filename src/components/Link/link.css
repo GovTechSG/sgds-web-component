@@ -82,24 +82,24 @@
 
 :host([size="md"]) .nav-link::slotted(a) {
   line-height: var(--sgds-line-height-24) !important;
-  font-size: var(--sgds-font-size-2) !important;
+  font-size: var(--sgds-font-size-16) !important;
   --text-underline-offset: 3px;
 }
 :host([size="lg"]) .nav-link::slotted(a) {
-  font-size: var(--sgds-font-size-3) !important;
+  font-size: var(--sgds-font-size-20) !important;
   line-height: var(--sgds-line-height-32) !important;
   --text-underline-offset: 4px;
 }
 
 :host([size="sm"]) .nav-link::slotted(a) {
   line-height: var(--sgds-line-height-20) !important;
-  font-size: var(--sgds-font-size-1) !important;
+  font-size: var(--sgds-font-size-14) !important;
   --text-underline-offset: 2.8px;
 }
 
 :host([size="xs"]) .nav-link::slotted(a) {
   line-height: var(--sgds-line-height-16) !important;
-  font-size: var(--sgds-font-size-0) !important;
+  font-size: var(--sgds-font-size-12) !important;
   --text-underline-offset: 2.2px;
 }
 /* External Links */

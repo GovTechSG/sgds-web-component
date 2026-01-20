@@ -99,7 +99,7 @@
 
 slot[name="title"]::slotted(*) {
   margin-bottom: var(--sgds-margin-none) !important;
-  font-size: var(--sgds-font-size-4) !important;
+  font-size: var(--sgds-font-size-24) !important;
   color: var(--sgds-color-default) !important;
 }
 

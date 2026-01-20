@@ -1,0 +1,261 @@
+:root {
+  /* Font Size - Display */
+  --sgds-font-size-display-sm: var(--sgds-font-size-32);
+  --sgds-font-size-display-md: var(--sgds-font-size-36);
+  --sgds-font-size-display-lg: var(--sgds-font-size-40);
+
+  /* Font Size - Heading */
+  --sgds-font-size-heading-sm: var(--sgds-font-size-20);
+  --sgds-font-size-heading-md: var(--sgds-font-size-24);
+  --sgds-font-size-heading-lg: var(--sgds-font-size-28);
+  --sgds-font-size-heading-xl: var(--sgds-font-size-32);
+
+  /* Font Size - Subtitle */
+  --sgds-font-size-subtitle-sm: var(--sgds-font-size-16);
+  --sgds-font-size-subtitle-md: var(--sgds-font-size-18);
+
+  /* Font Size - Body */
+  --sgds-font-size-body-sm: var(--sgds-font-size-14);
+  --sgds-font-size-body-md: var(--sgds-font-size-16);
+  --sgds-font-size-body-lg: var(--sgds-font-size-18);
+
+  /* Font Size - Label */
+  --sgds-font-size-label-xs: var(--sgds-font-size-12);
+  --sgds-font-size-label-sm: var(--sgds-font-size-14);
+  --sgds-font-size-label-md: var(--sgds-font-size-16);
+  --sgds-font-size-label-lg: var(--sgds-font-size-18);
+
+  /* Font Size - Caption */
+  --sgds-font-size-caption-md: var(--sgds-font-size-14);
+
+  /* Font Size - Overline */
+  --sgds-font-size-overline-md: var(--sgds-font-size-14);
+
+  /* Line Height */
+  --sgds-line-height-3-xs: var(--sgds-line-height-16);
+  --sgds-line-height-2-xs: var(--sgds-line-height-20);
+  --sgds-line-height-xs: var(--sgds-line-height-24);
+  --sgds-line-height-sm: var(--sgds-line-height-24);
+  --sgds-line-height-md: var(--sgds-line-height-28);
+  --sgds-line-height-lg: var(--sgds-line-height-32);
+  --sgds-line-height-xl: var(--sgds-line-height-40);
+  --sgds-line-height-2-xl: var(--sgds-line-height-44);
+  --sgds-line-height-3-xl: var(--sgds-line-height-48);
+
+  /* Text - Gap */
+  --sgds-text-gap-2-xs: var(--sgds-spacer-2);
+  --sgds-text-gap-xs: var(--sgds-spacer-3);
+  --sgds-text-gap-sm: var(--sgds-spacer-3);
+  --sgds-text-gap-md: var(--sgds-spacer-4);
+  --sgds-text-gap-lg: var(--sgds-spacer-5);
+  --sgds-text-gap-xl: var(--sgds-spacer-6);
+  --sgds-text-gap-2-xl: var(--sgds-spacer-7);
+
+  /* Layout - Gap */
+  --sgds-layout-gap-2-xs: var(--sgds-spacer-2);
+  --sgds-layout-gap-xs: var(--sgds-spacer-3);
+  --sgds-layout-gap-sm: var(--sgds-spacer-4);
+  --sgds-layout-gap-md: var(--sgds-spacer-5);
+  --sgds-layout-gap-lg: var(--sgds-spacer-6);
+  --sgds-layout-gap-xl: var(--sgds-spacer-7);
+
+  /* Layout - Padding */
+  --sgds-layout-padding-xs: var(--sgds-spacer-5);
+  --sgds-layout-padding-sm: var(--sgds-spacer-6);
+  --sgds-layout-padding-md: var(--sgds-spacer-7);
+  --sgds-layout-padding-lg: var(--sgds-spacer-8);
+  --sgds-layout-padding-xl: var(--sgds-spacer-9);
+
+  /* Component - Gap */
+  --sgds-component-gap-xs: var(--sgds-spacer-3);
+  --sgds-component-gap-sm: var(--sgds-spacer-4);
+  --sgds-component-gap-md: var(--sgds-spacer-5);
+  --sgds-component-gap-lg: var(--sgds-spacer-6);
+  --sgds-component-gap-xl: var(--sgds-spacer-7);
+
+  /* Component - Padding */
+  --sgds-component-padding-xs: var(--sgds-spacer-5);
+  --sgds-component-padding-sm: var(--sgds-spacer-6);
+  --sgds-component-padding-md: var(--sgds-spacer-7);
+  --sgds-component-padding-lg: var(--sgds-spacer-8);
+  --sgds-component-padding-xl: var(--sgds-spacer-9);
+
+  /* Container - Width */
+  --sgds-container-width: var(--sgds-dimension-360);
+}
+
+@media screen and (min-width: 1024px) { /* For tablets and larger screens */
+  :root {
+    /* Font Size - Display */
+    --sgds-font-size-display-sm: var(--sgds-font-size-36);
+    --sgds-font-size-display-md: var(--sgds-font-size-44);
+    --sgds-font-size-display-lg: var(--sgds-font-size-52);
+
+    /* Font Size - Heading */
+    --sgds-font-size-heading-sm: var(--sgds-font-size-22);
+    --sgds-font-size-heading-md: var(--sgds-font-size-26);
+    --sgds-font-size-heading-lg: var(--sgds-font-size-30);
+    --sgds-font-size-heading-xl: var(--sgds-font-size-36);
+
+    /* Font Size - Subtitle */
+    --sgds-font-size-subtitle-sm: var(--sgds-font-size-16);
+    --sgds-font-size-subtitle-md: var(--sgds-font-size-20);
+
+    /* Font Size - Body */
+    --sgds-font-size-body-sm: var(--sgds-font-size-14);
+    --sgds-font-size-body-md: var(--sgds-font-size-16);
+    --sgds-font-size-body-lg: var(--sgds-font-size-20);
+
+    /* Font Size - Label */
+    --sgds-font-size-label-xs: var(--sgds-font-size-12);
+    --sgds-font-size-label-sm: var(--sgds-font-size-14);
+    --sgds-font-size-label-md: var(--sgds-font-size-16);
+    --sgds-font-size-label-lg: var(--sgds-font-size-20);
+
+    /* Font Size - Caption */
+    --sgds-font-size-caption-md: var(--sgds-font-size-14);
+
+    /* Font Size - Overline */
+    --sgds-font-size-overline-md: var(--sgds-font-size-14);
+
+    /* Line Height */
+    --sgds-line-height-3-xs: var(--sgds-line-height-16);
+    --sgds-line-height-2-xs: var(--sgds-line-height-20);
+    --sgds-line-height-xs: var(--sgds-line-height-24);
+    --sgds-line-height-sm: var(--sgds-line-height-28);
+    --sgds-line-height-md: var(--sgds-line-height-32);
+    --sgds-line-height-lg: var(--sgds-line-height-36);
+    --sgds-line-height-xl: var(--sgds-line-height-44);
+    --sgds-line-height-2-xl: var(--sgds-line-height-52);
+    --sgds-line-height-3-xl: var(--sgds-line-height-60);
+
+    /* Text - Gap */
+    --sgds-text-gap-2-xs: var(--sgds-spacer-2);
+    --sgds-text-gap-xs: var(--sgds-spacer-3);
+    --sgds-text-gap-sm: var(--sgds-spacer-4);
+    --sgds-text-gap-md: var(--sgds-spacer-5);
+    --sgds-text-gap-lg: var(--sgds-spacer-6);
+    --sgds-text-gap-xl: var(--sgds-spacer-7);
+    --sgds-text-gap-2-xl: var(--sgds-spacer-8);
+
+    /* Layout - Gap */
+    --sgds-layout-gap-2-xs: var(--sgds-spacer-4);
+    --sgds-layout-gap-xs: var(--sgds-spacer-5);
+    --sgds-layout-gap-sm: var(--sgds-spacer-6);
+    --sgds-layout-gap-md: var(--sgds-spacer-7);
+    --sgds-layout-gap-lg: var(--sgds-spacer-8);
+    --sgds-layout-gap-xl: var(--sgds-spacer-9);
+
+    /* Layout - Padding */
+    --sgds-layout-padding-xs: var(--sgds-spacer-6);
+    --sgds-layout-padding-sm: var(--sgds-spacer-7);
+    --sgds-layout-padding-md: var(--sgds-spacer-8);
+    --sgds-layout-padding-lg: var(--sgds-spacer-9);
+    --sgds-layout-padding-xl: var(--sgds-spacer-10);
+    
+    /* Component - Gap */
+    --sgds-component-gap-xs: var(--sgds-spacer-5);
+    --sgds-component-gap-sm: var(--sgds-spacer-6);
+    --sgds-component-gap-md: var(--sgds-spacer-7);
+    --sgds-component-gap-lg: var(--sgds-spacer-8);
+    --sgds-component-gap-xl: var(--sgds-spacer-9);
+
+    /* Component - Padding */
+    --sgds-component-padding-xs: var(--sgds-spacer-6);
+    --sgds-component-padding-sm: var(--sgds-spacer-7);
+    --sgds-component-padding-md: var(--sgds-spacer-8);
+    --sgds-component-padding-lg: var(--sgds-spacer-9);
+    --sgds-component-padding-xl: var(--sgds-spacer-10);
+
+    /* Container - Width */
+    --sgds-container-width: var(--sgds-dimension-888);
+  }
+}
+
+@media screen and (min-width: 1440px) { /* For desktops */
+  :root {
+    /* Font Size - Display */
+    --sgds-font-size-display-sm: var(--sgds-font-size-40);
+    --sgds-font-size-display-md: var(--sgds-font-size-48);
+    --sgds-font-size-display-lg: var(--sgds-font-size-56);
+
+    /* Font Size - Heading */
+    --sgds-font-size-heading-sm: var(--sgds-font-size-24);
+    --sgds-font-size-heading-md: var(--sgds-font-size-28);
+    --sgds-font-size-heading-lg: var(--sgds-font-size-32);
+    --sgds-font-size-heading-xl: var(--sgds-font-size-40);
+
+    /* Font Size - Subtitle */
+    --sgds-font-size-subtitle-sm: var(--sgds-font-size-16);
+    --sgds-font-size-subtitle-md: var(--sgds-font-size-20);
+
+    /* Font Size - Body */
+    --sgds-font-size-body-sm: var(--sgds-font-size-14);
+    --sgds-font-size-body-md: var(--sgds-font-size-16);
+    --sgds-font-size-body-lg: var(--sgds-font-size-20);
+
+    /* Font Size - Label */
+    --sgds-font-size-label-xs: var(--sgds-font-size-12);
+    --sgds-font-size-label-sm: var(--sgds-font-size-14);
+    --sgds-font-size-label-md: var(--sgds-font-size-16);
+    --sgds-font-size-label-lg: var(--sgds-font-size-20);
+
+    /* Font Size - Caption */
+    --sgds-font-size-caption-md: var(--sgds-font-size-14);
+
+    /* Font Size - Overline */
+    --sgds-font-size-overline-md: var(--sgds-font-size-14);
+
+    /* Line Height */
+    --sgds-line-height-3-xs: var(--sgds-line-height-16);
+    --sgds-line-height-2-xs: var(--sgds-line-height-20);
+    --sgds-line-height-xs: var(--sgds-line-height-24);
+    --sgds-line-height-sm: var(--sgds-line-height-28);
+    --sgds-line-height-md: var(--sgds-line-height-32);
+    --sgds-line-height-lg: var(--sgds-line-height-40);
+    --sgds-line-height-xl: var(--sgds-line-height-48);
+    --sgds-line-height-2-xl: var(--sgds-line-height-56);
+    --sgds-line-height-3-xl: var(--sgds-line-height-64);
+
+    /* Text - Gap */
+    --sgds-text-gap-2-xs: var(--sgds-spacer-2);
+    --sgds-text-gap-xs: var(--sgds-spacer-3);
+    --sgds-text-gap-sm: var(--sgds-spacer-4);
+    --sgds-text-gap-md: var(--sgds-spacer-5);
+    --sgds-text-gap-lg: var(--sgds-spacer-6);
+    --sgds-text-gap-xl: var(--sgds-spacer-7);
+    --sgds-text-gap-2-xl: var(--sgds-spacer-8);
+
+    /* Layout - Gap */
+    --sgds-layout-gap-2-xs: var(--sgds-spacer-5);
+    --sgds-layout-gap-xs: var(--sgds-spacer-6);
+    --sgds-layout-gap-sm: var(--sgds-spacer-7);
+    --sgds-layout-gap-md: var(--sgds-spacer-8);
+    --sgds-layout-gap-lg: var(--sgds-spacer-9);
+    --sgds-layout-gap-xl: var(--sgds-spacer-10);
+
+    /* Layout - Padding */
+    --sgds-layout-padding-xs: var(--sgds-spacer-7);
+    --sgds-layout-padding-sm: var(--sgds-spacer-8);
+    --sgds-layout-padding-md: var(--sgds-spacer-9);
+    --sgds-layout-padding-lg: var(--sgds-spacer-10);
+    --sgds-layout-padding-xl: var(--sgds-spacer-11);
+
+    /* Component - Gap */
+    --sgds-component-gap-xs: var(--sgds-spacer-6);
+    --sgds-component-gap-sm: var(--sgds-spacer-7);
+    --sgds-component-gap-md: var(--sgds-spacer-8);
+    --sgds-component-gap-lg: var(--sgds-spacer-9);
+    --sgds-component-gap-xl: var(--sgds-spacer-10);
+
+    /* Component - Padding */
+    --sgds-component-padding-xs: var(--sgds-spacer-7);
+    --sgds-component-padding-sm: var(--sgds-spacer-8);
+    --sgds-component-padding-md: var(--sgds-spacer-9);
+    --sgds-component-padding-lg: var(--sgds-spacer-10);
+    --sgds-component-padding-xl: var(--sgds-spacer-11);
+
+    /* Container - Width */
+    --sgds-container-width: var(--sgds-dimension-1312);
+  }
+}

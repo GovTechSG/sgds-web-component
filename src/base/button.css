@@ -114,7 +114,7 @@
 }
 
 :host([size="lg"]) .btn {
-  font-size: var(--sgds-font-size-3);
+  font-size: var(--sgds-font-size-20);
   line-height: var(--sgds-line-height-32);
   padding: var(--sgds-padding-none) var(--sgds-padding-xl);
   min-width: var(--sgds-dimension-112);
@@ -122,14 +122,14 @@
 }
 
 :host([size="sm"]) .btn {
-  font-size: var(--sgds-font-size-1);
+  font-size: var(--sgds-font-size-14);
   line-height: var(--sgds-line-height-20);
   padding: var(--sgds-padding-none) var(--sgds-padding-md);
   min-width: var(--sgds-dimension-80);
   height: var(--sgds-dimension-40);
 }
 :host([size="xs"]) .btn {
-  font-size: var(--sgds-font-size-0);
+  font-size: var(--sgds-font-size-12);
   line-height: var(--sgds-line-height-16);
   padding: var(--sgds-padding-none) var(--sgds-padding-sm);
   min-width: var(--sgds-dimension-64);
@@ -146,7 +146,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--sgds-gap-2-xs);
-  font-size: var(--sgds-font-size-2);
+  font-size: var(--sgds-font-size-16);
   font-weight: var(--btn-font-weight);
   line-height: var(--sgds-line-height-24);
   padding: var(--sgds-padding-none) var(--sgds-padding-lg);

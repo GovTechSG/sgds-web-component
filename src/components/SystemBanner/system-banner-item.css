@@ -1,7 +1,7 @@
 :host {
   display: block;
   width: inherit;
-  font-size: var(--sgds-font-size-1, 14px);
+  font-size: var(--sgds-font-size-14, 14px);
   font-style: normal;
   font-weight: var(--sgds-font-weight-regular, 400);
   line-height: var(--sgds-line-height-20, 20px); /* 142.857% */
@@ -10,7 +10,7 @@
 
 /* Handles inline links and all texts */
 ::slotted(*) {
-  font-size: var(--sgds-font-size-1, 14px) !important;
+  font-size: var(--sgds-font-size-14, 14px) !important;
   line-height: var(--sgds-line-height-20, 20px) !important;
   color: var(--sgds-color-fixed-light) !important;
 }
@@ -73,7 +73,7 @@
 slot[name="action"]::slotted(a) {
   text-decoration: none !important;
   color: var(--sgds-color-fixed-light) !important;
-  font-size: var(--sgds-font-size-1, 14px) !important;
+  font-size: var(--sgds-font-size-14, 14px) !important;
 }
 
 .banner-item__message_and__action {

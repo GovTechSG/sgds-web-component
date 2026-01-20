@@ -41,6 +41,33 @@ import "@govtechsg/sgds-web-component/css/sgds.css";
 @import "@govtechsg/sgds-web-component/css/sgds.css";
 ```
 
+## Responsive Typography and Layout
+
+SGDS foundation styles include a comprehensive responsive design system that automatically adapts typography sizes, line heights, and spacing across different screen sizes. All HTML elements (headings, paragraphs, labels, etc.) use CSS custom properties that scale at three primary breakpoints:
+
+- **Mobile**: 0px and above (default)
+- **Tablet**: 1024px and above
+- **Desktop**: 1440px and above
+
+### Key Features
+
+**Automatic Responsive Scaling**: All foundation elements automatically scale their typography and spacing based on the viewport size. No additional media queries needed—just import and use.
+
+**Consistent Typography Hierarchy**: Headings (h1–h6) maintain visual hierarchy across all screen sizes with responsive font sizes and line heights:
+
+- h1: 32px (mobile) → 36px (tablet) → 40px (desktop)
+- h2: 28px (mobile) → 30px (tablet) → 32px (desktop)
+- And so on for h3–h6
+
+**Body Text Handling**:
+
+- Small and regular body text (`body-sm`, `body-md`) remain consistent at 14px and 16px across all viewports
+- Large body text (`body-lg`) scales from 18px (mobile) to 20px (tablet/desktop)
+
+**Responsive Spacing**: Layout gaps, padding, and component spacing adapt at each breakpoint to maintain optimal spacing hierarchy and visual rhythm across devices.
+
+**Mobile-First Approach**: The system uses progressive enhancement—mobile styles are the default, then enhanced at larger breakpoints via CSS media queries.
+
 <!-- ### Cherry pick the styles
 
 `css/sgds.css` contains all the stylings found in the folder `css`. You can also choose to cherry pick the styles you required. For example, `label.css`

@@ -24,12 +24,12 @@
 .label {
   color: var(--sgds-color-default);
   font-weight: var(--sgds-font-weight-semibold);
-  font-size: var(--sgds-font-size-2);
+  font-size: var(--sgds-font-size-16);
 }
 
 .data {
   color: var(--sgds-color-subtle);
-  font-size: var(--sgds-font-size-2);
+  font-size: var(--sgds-font-size-16);
   font-weight: var(--sgds-font-weight-regular);
   margin: 0;
 }

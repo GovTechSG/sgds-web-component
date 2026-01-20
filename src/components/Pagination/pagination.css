@@ -55,7 +55,7 @@ svg {
   opacity: var(--sgds-opacity-50);
 }
 .pagination-sm .page-link {
-  font-size: var(--sgds-font-size-1);
+  font-size: var(--sgds-font-size-14);
   width: var(--sgds-dimension-40);
   height: var(--sgds-dimension-40);
 }
@@ -76,5 +76,5 @@ svg {
   align-items: center;
 }
 .pagination-sm .pagination-description {
-  font-size: var(--sgds-font-size-1);
+  font-size: var(--sgds-font-size-14);
 }

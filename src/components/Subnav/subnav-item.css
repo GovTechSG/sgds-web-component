@@ -4,12 +4,11 @@
 }
 
 ::slotted(*) {
-  --sgds-font-size-2: var(--sgds-font-size-1);
   --sgds-link-color-default: var(--sgds-color-default);
   display: inline-block;
   width: 100%;
   text-decoration: none !important;
-  font-size: var(--sgds-font-size-2, var(--sgds-font-size-1));
+  font-size: var(--sgds-font-size-14) !important;
   color: var(--sgds-link-color-default, var(--sgds-color-default));
   padding: var(--sgds-padding-sm) var(--sgds-padding-lg);
   cursor: pointer;

@@ -8,7 +8,7 @@
 
 .invalid-feedback {
   color: var(--sgds-form-danger-color-default);
-  font-size: var(--sgds-font-size-1);
+  font-size: var(--sgds-font-size-14);
   font-weight: var(--sgds-font-weight-regular);
   line-height: var(--sgds-line-height-20);
 }
