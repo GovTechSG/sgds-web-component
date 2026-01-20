@@ -10,7 +10,7 @@ button {
   width: 100%;
   text-align: initial;
   line-height: var(--sgds-line-height-24);
-  font-size: var(--sgds-font-size-2);
+  font-size: var(--sgds-font-size-16);
   border: 0;
   background: 0;
   padding: var(--sgds-padding-sm) var(--sgds-padding-sm) var(--sgds-padding-sm)
@@ -57,7 +57,7 @@ button {
   text-decoration: none !important;
   color: inherit !important;
   line-height: var(--sgds-line-height-24) !important;
-  font-size: var(--sgds-font-size-2);
+  font-size: var(--sgds-font-size-16);
   border: 0;
   background: 0;
   padding: var(--sgds-padding-sm) var(--sgds-padding-sm) var(--sgds-padding-sm)
