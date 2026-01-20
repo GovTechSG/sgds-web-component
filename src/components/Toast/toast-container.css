@@ -1,3 +1,24 @@
+/* Deprecated since 3.7.1: top-start, middle-start, middle-center, middle-end */
+.top-start {
+  top: var(--toast-container-top);
+  left: var(--toast-container-left);
+}
+.middle-start {
+  top: 50%;
+  left: var(--toast-container-left);
+  transform: translateY(-50%);
+}
+.middle-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.middle-end {
+  top: 50%;
+  right: var(--toast-container-right);
+  transform: translateY(-50%);
+}
+
 .toast-container {
   max-width: 100%;
   pointer-events: none;
@@ -6,12 +27,10 @@
   z-index: 1200;
   /* Height of masthead + mainnav  */
   --toast-container-top: calc(28px + 80px + var(--sgds-spacer-8));
+  --toast-container-right: var(--sgds-spacer-8);
+  --toast-container-left: var(--sgds-spacer-8);
 }
 
-.top-start {
-  top: var(--toast-container-top);
-  left: 0;
-}
 
 .top-center {
   top: var(--toast-container-top);
@@ -21,30 +40,12 @@
 
 .top-end {
   top: var(--toast-container-top);
-  right: 32px;
-}
-
-.middle-start {
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-}
-
-.middle-center {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.middle-end {
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
+  right: var(--toast-container-right);
 }
 
 .bottom-start {
   bottom: 0;
-  left: 0;
+  left: var(--toast-container-left);
 }
 
 .bottom-center {
@@ -55,7 +56,7 @@
 
 .bottom-end {
   bottom: 0;
-  right: 0;
+  right: var(--toast-container-right);
 }
 
 slot {
@@ -63,3 +64,5 @@ slot {
   flex-direction: column;
   gap: 0.5rem;
 }
+
+

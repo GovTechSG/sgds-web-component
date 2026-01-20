@@ -75,14 +75,6 @@ export const Dismissible = {
   parameters: {},
   tags: ["!dev"]
 };
-
-export const TopStart = {
-  render: Template.bind({}),
-  name: "Top start",
-  args: { ...args, position: "top-start" },
-  parameters: {},
-  tags: ["!dev"]
-};
 export const TopCenter = {
   render: Template.bind({}),
   name: "Top center",
@@ -94,27 +86,6 @@ export const TopEnd = {
   render: Template.bind({}),
   name: "Top end",
   args: { ...args, position: "top-end" },
-  parameters: {},
-  tags: ["!dev"]
-};
-export const MiddleStart = {
-  render: Template.bind({}),
-  name: "Middle start",
-  args: { ...args, position: "middle-start" },
-  parameters: {},
-  tags: ["!dev"]
-};
-export const MiddleCenter = {
-  render: Template.bind({}),
-  name: "Middle center",
-  args: { ...args, position: "middle-center" },
-  parameters: {},
-  tags: ["!dev"]
-};
-export const MiddleEnd = {
-  render: Template.bind({}),
-  name: "Middle end",
-  args: { ...args, position: "middle-end" },
   parameters: {},
   tags: ["!dev"]
 };
@@ -161,7 +132,7 @@ const StackingTemplate = () =>
 export const Stacking = {
   render: StackingTemplate.bind({}),
   name: "Stacking the toasts",
-  args: {},
+  args: { position: "bottom-end" },
   parameters: {},
   tags: ["!dev"]
 };

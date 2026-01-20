@@ -12,7 +12,10 @@ import toastContainerStyle from "./toast-container.css";
 export class SgdsToastContainer extends SgdsElement {
   static styles = [toastContainerStyle];
 
-  /** Controls the position of `sgds-toast` within itself. When specified, toast container becomes position-absolute */
+  /**
+   * Controls the position of `sgds-toast` within itself.
+   * Since 3.7.1, the positions "top-start", "middle-start", "middle-center", and "middle-end" are deprecated.
+   */
   @property({ type: String, reflect: true }) position: ToastPosition;
 
   render() {

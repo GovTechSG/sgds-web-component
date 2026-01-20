@@ -23,7 +23,8 @@ export const Template = args =>
   `;
 
 export const args = {
-  show: true
+  show: true,
+  position: "bottom-end"
 };
 
 export const parameters = {
