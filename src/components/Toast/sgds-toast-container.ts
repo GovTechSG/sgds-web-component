@@ -19,7 +19,7 @@ export class SgdsToastContainer extends SgdsElement {
     return html`
       <div
         class=${classMap({
-          "sgds toast-container": true,
+          "toast-container": true,
           [this.position]: this.position
         })}
       >
