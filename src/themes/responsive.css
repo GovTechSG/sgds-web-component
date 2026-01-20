@@ -60,11 +60,11 @@
   --sgds-layout-gap-xl: var(--sgds-spacer-7);
 
   /* Layout - Padding */
-  --sgds-padding-xs: var(--sgds-spacer-5);
-  --sgds-padding-sm: var(--sgds-spacer-6);
-  --sgds-padding-md: var(--sgds-spacer-7);
-  --sgds-padding-lg: var(--sgds-spacer-8);
-  --sgds-padding-xl: var(--sgds-spacer-9);
+  --sgds-layout-padding-xs: var(--sgds-spacer-5);
+  --sgds-layout-padding-sm: var(--sgds-spacer-6);
+  --sgds-layout-padding-md: var(--sgds-spacer-7);
+  --sgds-layout-padding-lg: var(--sgds-spacer-8);
+  --sgds-layout-padding-xl: var(--sgds-spacer-9);
 
   /* Component - Gap */
   --sgds-component-gap-xs: var(--sgds-spacer-3);
@@ -147,12 +147,12 @@
     --sgds-layout-gap-xl: var(--sgds-spacer-9);
 
     /* Layout - Padding */
-    --sgds-padding-xs: var(--sgds-spacer-6);
-    --sgds-padding-sm: var(--sgds-spacer-7);
-    --sgds-padding-md: var(--sgds-spacer-8);
-    --sgds-padding-lg: var(--sgds-spacer-9);
-    --sgds-padding-xl: var(--sgds-spacer-10);
-
+    --sgds-layout-padding-xs: var(--sgds-spacer-6);
+    --sgds-layout-padding-sm: var(--sgds-spacer-7);
+    --sgds-layout-padding-md: var(--sgds-spacer-8);
+    --sgds-layout-padding-lg: var(--sgds-spacer-9);
+    --sgds-layout-padding-xl: var(--sgds-spacer-10);
+    
     /* Component - Gap */
     --sgds-component-gap-xs: var(--sgds-spacer-5);
     --sgds-component-gap-sm: var(--sgds-spacer-6);
