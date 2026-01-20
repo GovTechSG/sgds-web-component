@@ -1,0 +1,120 @@
+import { Meta, Markdown, Canvas, Story } from "@storybook/blocks";
+
+<Meta title="Foundation/Responsive" />
+
+# Responsive Typography and Layout
+
+SGDS foundation styles include a comprehensive responsive design system that automatically adapts typography sizes, line heights, and spacing across different screen sizes. All HTML elements (headings, paragraphs, labels, etc.) use CSS custom properties that scale at three primary breakpoints:
+
+- **Mobile**: 0px and above (default)
+- **Tablet**: 1024px and above
+- **Desktop**: 1440px and above
+
+## Key Features
+
+**Automatic Responsive Scaling**: All foundation elements automatically scale their typography and spacing based on the viewport size. No additional media queries needed—just import and use.
+
+**Consistent Typography Hierarchy**: Headings (h1–h6) maintain visual hierarchy across all screen sizes with responsive font sizes and line heights:
+
+- h1: 32px (mobile) → 36px (tablet) → 40px (desktop)
+- h2: 28px (mobile) → 30px (tablet) → 32px (desktop)
+- And so on for h3–h6
+
+**Body Text Handling**:
+
+- Small and regular body text (`body-sm`, `body-md`) remain consistent at 14px and 16px across all viewports
+- Large body text (`body-lg`) scales from 18px (mobile) to 20px (tablet/desktop)
+
+**Responsive Spacing**: Layout gaps, padding, and component spacing adapt at each breakpoint to maintain optimal spacing hierarchy and visual rhythm across devices.
+
+**Mobile-First Approach**: The system uses progressive enhancement—mobile styles are the default, then enhanced at larger breakpoints via CSS media queries.
+
+## Technical Reference
+
+Learn how to use the CSS variables that power the responsive typography and layout system:
+
+### Typography Variables
+
+Font sizes for headings, body text, labels, and captions automatically scale at different breakpoints:
+
+#### Headings
+
+- `--sgds-font-size-heading-sm`: Responsive H4 sizing
+- `--sgds-font-size-heading-md`: Responsive H3 sizing
+- `--sgds-font-size-heading-lg`: Responsive H2 sizing
+- `--sgds-font-size-heading-xl`: Responsive H1 sizing
+
+#### Body Text
+
+- `--sgds-font-size-body-sm`: Small body text (14px on all viewports)
+- `--sgds-font-size-body-md`: Regular body text (16px on all viewports)
+- `--sgds-font-size-body-lg`: Large body text (responsive: 18px mobile → 20px tablet/desktop)
+
+#### Line Heights
+
+Line height variables scale proportionally with font sizes for improved readability:
+
+- `--sgds-line-height-xs` through `--sgds-line-height-3-xl`
+
+Example progression:
+
+- Mobile: `--sgds-line-height-xs: 24px`, `--sgds-line-height-md: 28px`
+- Tablet (1024px+): `--sgds-line-height-xs: 24px`, `--sgds-line-height-md: 32px`
+- Desktop (1440px+): `--sgds-line-height-xs: 24px`, `--sgds-line-height-md: 32px`
+
+### Layout and Spacing Variables
+
+These variables enable responsive spacing and layout adjustments:
+
+#### Text Gaps
+
+Control spacing between text elements: `--sgds-text-gap-2-xs` through `--sgds-text-gap-2-xl`
+
+#### Layout Gaps
+
+Control spacing in layout components:
+
+- Mobile: `--sgds-layout-gap-md: 1rem`
+- Tablet (1024px+): `--sgds-layout-gap-md: 1.5rem`
+- Desktop (1440px+): `--sgds-layout-gap-md: 2rem`
+
+#### Layout Padding
+
+Responsive padding for containers:
+
+- Mobile: `--sgds-layout-padding-md: 1.5rem`
+- Tablet (1024px+): `--sgds-layout-padding-md: 2rem`
+- Desktop (1440px+): `--sgds-layout-padding-md: 3rem`
+
+## CSS Variables Reference
+
+### How Responsive Variables Work
+
+All typography and layout variables are defined at the root level with default (mobile) values, then updated via media queries at each breakpoint. This approach ensures:
+
+1. **Progressive enhancement**: Mobile styles load first, then enhance on larger screens
+2. **Consistency**: All components using the same variables stay aligned
+3. **Flexibility**: Override defaults by adjusting CSS variables in your own code
+
+Example variable definition:
+
+```css
+:root {
+  --sgds-font-size-heading-xl: var(--sgds-font-size-32); /* Mobile: 32px */
+  --sgds-line-height-xl: var(--sgds-line-height-40);
+}
+
+@media screen and (min-width: 1024px) {
+  :root {
+    --sgds-font-size-heading-xl: var(--sgds-font-size-36); /* Tablet: 36px */
+    --sgds-line-height-xl: var(--sgds-line-height-44);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  :root {
+    --sgds-font-size-heading-xl: var(--sgds-font-size-40); /* Desktop: 40px */
+    --sgds-line-height-xl: var(--sgds-line-height-48);
+  }
+}
+```

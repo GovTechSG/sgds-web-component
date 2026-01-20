@@ -1,4 +1,4 @@
-# Foundation
+# Introduction
 
 The library also provides styles for SGDS foundation to help users style your application wholistically with SGDS.
 The styles help to override the default browser's native styles with SGDS.
