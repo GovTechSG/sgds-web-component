@@ -2,3 +2,8 @@
   display: flex;
   gap: var(--sgds-gap-xs);
 }
+
+.breadcrumb sgds-breadcrumb-item:first-child,
+.breadcrumb slot::slotted(sgds-breadcrumb-item:first-child) {
+  flex: 0 0 auto;
+}

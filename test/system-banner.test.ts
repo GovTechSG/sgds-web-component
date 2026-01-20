@@ -1,10 +1,10 @@
-import { html } from "lit";
 import { assert, expect, fixture } from "@open-wc/testing";
-import { SgdsIconButton, SgdsSystemBanner } from "../src/components";
-import "../src/index";
+import { html } from "lit";
 import * as sinon from "sinon";
-import { moveMouseOnElement, moveMouseOutOfElement } from "./utils";
+import { SgdsIconButton, SgdsSystemBanner } from "../src/components";
 import SgdsSystemBannerItem from "../src/components/SystemBanner/sgds-system-banner-item";
+import "../src/index";
+import { moveMouseOnElement, moveMouseOutOfElement } from "./utils";
 describe("<sgds-system-banner>", () => {
   it("matches the shadowDOM", async () => {
     const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show></sgds-system-banner>`);

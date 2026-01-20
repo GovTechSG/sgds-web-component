@@ -113,6 +113,7 @@ export class SgdsComboBox extends SelectElement {
   }
   async firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
+    if (this.async) this.filterFunction = () => true;
     this.menuList.forEach(o => {
       const comboBoxOption = document.createElement("sgds-combo-box-option") as SgdsComboBoxOption;
       comboBoxOption.innerText = o.label;
@@ -236,10 +237,9 @@ export class SgdsComboBox extends SelectElement {
     if (updatedValue !== this.value) {
       this.value = updatedValue;
     }
-
-    if (!this.multiSelect) {
-      this.displayValue = initialSelectedItem[0]?.label ?? "";
-      // this.displayValue = initialSelectedItem[0]?.label ?? this.displayValue;
+    // Disabling this condition for async combobox so that the display value in the input will not clear when menu options changes
+    if (!this.multiSelect && !this.async) {
+      this.displayValue = initialSelectedItem[0]?.label || "";
     }
 
     this.options.forEach(o => (o.active = valueArray.includes(o.value)));
@@ -450,7 +450,7 @@ export class SgdsComboBox extends SelectElement {
                       outlined
                       variant="neutral"
                       show
-                      dismissible
+                      ?dismissible=${!(this.readonly || this.disabled)}
                       ?fullwidth=${this.badgeFullWidth}
                       @sgds-hide=${e => this._handleBadgeDismissed(e, item)}
                       >${item.label}</sgds-badge
@@ -469,7 +469,7 @@ export class SgdsComboBox extends SelectElement {
             ?disabled=${this.disabled}
             ?readonly=${this.readonly}
             ?required=${this.required}
-            .value=${this.displayValue.trim()}
+            .value=${this.displayValue ? this.displayValue.trim() : ""}
             @input=${this._handleInputChange}
             @blur=${this._handleInputBlur}
             @focus=${this._handleFocus}
@@ -527,7 +527,7 @@ export class SgdsComboBox extends SelectElement {
         <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
           <slot
             id="default"
-            class=${classMap({ "is-loading": this.loading })}
+            class=${classMap({ "d-none": this.loading || this.emptyMenuAsync || this.optionList.length === 0 })}
             @slotchange=${this._handleDefaultSlotChange}
           ></slot>
           ${this._renderFeedbackMenu()}

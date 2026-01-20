@@ -25,7 +25,8 @@
     "cem": "cem analyze --litelement ",
     "e2e-test": "node cypress/scripts/run_all.js & cypress open",
     "storybook": "nodemon --exec \"npm run write:stories &&  STORYBOOK_ENV=development storybook dev -p 6006\" --watch stories/templates stories/getting-started -e js,mdx",
-    "build-storybook": "npm run build && npm run write:stories && STORYBOOK_ENV=production storybook build",
+    "build-storybook": "npm run build && npm run write:stories && STORYBOOK_ENV=production storybook build --loglevel verbose",
+    "convert:icons": "node scripts/convertIcons.js && pnpm run generate:icons",
     "generate:icons": "node scripts/generateIconRegistry.js",
     "sync-figma-to-tokens": "tsx scripts/figma/sync-figma-to-tokens/sync-figma-to-tokens.ts",
     "chromatic": "chromatic "
@@ -136,7 +137,7 @@
     "rollup-plugin-typescript2": "^0.33.0",
     "rollup-plugin-visualizer": "^5.9.2",
     "sinon": "^21.0.1",
-    "storybook": "^8.2.6",
+    "storybook": "^8.6.15",
     "tsx": "^4.20.4",
     "typescript": "^5.0.4",
     "vite": "^4.4.9"

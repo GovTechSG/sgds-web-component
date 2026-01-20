@@ -46,6 +46,7 @@ export class SgdsBreadcrumb extends SgdsElement {
         return item;
       }
     });
+    breadcrumbItem.classList.add("overflow-menu");
     breadcrumbItem.appendChild(overflowMenu);
     mapItems.splice(1, 0, breadcrumbItem);
 

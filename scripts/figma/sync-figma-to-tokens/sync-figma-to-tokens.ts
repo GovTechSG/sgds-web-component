@@ -1,13 +1,12 @@
 import "dotenv/config";
-import { access, writeFile, mkdir } from "fs/promises";
+import { access, mkdir, writeFile } from "fs/promises";
 
 import * as path from "path";
 
 import FigmaApi from "./figma_api";
 
-import { green } from "./utils";
 import { tokenFilesFromLocalVariables } from "./token_export";
-import { tokenToCssVars } from "./write-tokens-to-css-var";
+import { green } from "./utils";
 
 /**
  * Usage:
