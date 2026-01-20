@@ -29,6 +29,7 @@
   --toast-container-top: calc(28px + 80px + var(--sgds-spacer-8));
   --toast-container-right: var(--sgds-spacer-8);
   --toast-container-left: var(--sgds-spacer-8);
+  --toast-container-bottom: var(--sgds-spacer-8);
 }
 
 
@@ -44,18 +45,18 @@
 }
 
 .bottom-start {
-  bottom: 0;
+  bottom: var(--toast-container-bottom);
   left: var(--toast-container-left);
 }
 
 .bottom-center {
-  bottom: 0;
+  bottom: var(--toast-container-bottom);
   left: 50%;
   transform: translateX(-50%);
 }
 
 .bottom-end {
-  bottom: 0;
+  bottom: var(--toast-container-bottom);
   right: var(--toast-container-right);
 }
 
