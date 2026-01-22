@@ -69,10 +69,10 @@ This method registers all SGDS elements up front in the Custom Elements Registry
 <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.6.4/css/sgds.css' rel='stylesheet' type='text/css' />
 
 // it is recommended to load a particular version when using cdn e.g. https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@1.0.2
-<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.6.4" async crossorigin="anonymous" integrity="sha384-l2wDpDWqaG9T35wz73+vVSRD34GaxMBLrZXc0giBqUDltuRasNltLVL5XcqPZqH8"></script>
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.6.4" async crossorigin="anonymous" integrity="sha384-ztbQnGYW6IKQJzull/C3GPRHFK5yxTOSzW+PFPgsNHaHlQoadP0Rovsz4PnRVuO5"></script>
 
 //or load a single component e.g. Masthead
-<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.6.4/components/Masthead/index.umd.min.js" async crossorigin="anonymous" integrity="sha384-kF8b8ASzezryQAXh/NhABOjzVo+K+zYbtKN77sVNT94MuN3tmg+Qz8g2n101gvWK"></script>
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.6.4/components/Masthead/index.umd.min.js" async crossorigin="anonymous" integrity="sha384-D6fmcLmJHlvW0xQlQo1kjqs2QlMWNEnEG6Lkv6cIG52HMoOpytomw7H6cMue1VSg"></script>
 
 ```
 

@@ -76,64 +76,65 @@ export const Dismissible = {
   tags: ["!dev"]
 };
 
-export const TopStart = {
-  render: Template.bind({}),
-  name: "Top start",
-  args: { ...args, position: "top-start" },
-  parameters: {},
-  tags: ["!dev"]
-};
+const PositionTemplate = args =>
+  html`
+    <div style="height:600px;">
+      <sgds-masthead></sgds-masthead>
+      <sgds-mainnav>
+        <img
+          alt="sgds logo"
+          width="130"
+          src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
+          slot="brand"
+        />
+      </sgds-mainnav>
+      <sgds-toast-container position=${ifDefined(args.position)}>
+        <sgds-toast
+          ?show=${args.show}
+          variant=${ifDefined(args.variant)}
+          ?autohide=${args.autohide}
+          delay=${ifDefined(args.delay)}
+          ?noAnimation=${args.noAnimation}
+          ?dismissable=${args.dismissable}
+          title=${ifDefined(args.title)}
+        >
+          <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+          This is a toast notifications
+          <sgds-link slot="action"><a href="#" target="_blank">Action</a></sgds-link>
+        </sgds-toast>
+      </sgds-toast-container>
+    </div>
+  `;
 export const TopCenter = {
-  render: Template.bind({}),
+  render: PositionTemplate.bind({}),
   name: "Top center",
   args: { ...args, position: "top-center" },
   parameters: {},
   tags: ["!dev"]
 };
 export const TopEnd = {
-  render: Template.bind({}),
+  render: PositionTemplate.bind({}),
   name: "Top end",
   args: { ...args, position: "top-end" },
   parameters: {},
   tags: ["!dev"]
 };
-export const MiddleStart = {
-  render: Template.bind({}),
-  name: "Middle start",
-  args: { ...args, position: "middle-start" },
-  parameters: {},
-  tags: ["!dev"]
-};
-export const MiddleCenter = {
-  render: Template.bind({}),
-  name: "Middle center",
-  args: { ...args, position: "middle-center" },
-  parameters: {},
-  tags: ["!dev"]
-};
-export const MiddleEnd = {
-  render: Template.bind({}),
-  name: "Middle end",
-  args: { ...args, position: "middle-end" },
-  parameters: {},
-  tags: ["!dev"]
-};
 export const BottomStart = {
-  render: Template.bind({}),
+  render: PositionTemplate.bind({}),
   name: "Bottom start",
   args: { ...args, position: "bottom-start" },
   parameters: {},
   tags: ["!dev"]
 };
 export const BottomCenter = {
-  render: Template.bind({}),
+  render: PositionTemplate.bind({}),
   name: "Bottom Center",
   args: { ...args, position: "bottom-center" },
   parameters: {},
   tags: ["!dev"]
 };
 export const BottomEnd = {
-  render: Template.bind({}),
+  render: PositionTemplate.bind({}),
   name: "Bottom End",
   args: { ...args, position: "bottom-end" },
   parameters: {},
@@ -161,7 +162,7 @@ const StackingTemplate = () =>
 export const Stacking = {
   render: StackingTemplate.bind({}),
   name: "Stacking the toasts",
-  args: {},
+  args: { position: "bottom-end" },
   parameters: {},
   tags: ["!dev"]
 };
