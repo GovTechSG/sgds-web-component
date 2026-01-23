@@ -131,7 +131,6 @@ export class SgdsComboBox extends SelectElement {
   }
 
   protected async _handleDefaultSlotChange(e: Event) {
-    console.log("_handleDefaultSlotChange");
     const assignedElements = (e.target as HTMLSlotElement).assignedElements({
       flatten: true
     }) as ComboBoxOptionWithFlag[];
