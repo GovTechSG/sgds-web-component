@@ -48,7 +48,7 @@ sgds-faq-grid {
 }
 .sb-story{
   padding: var(--sgds-padding-xs);
-  margin: calc(var(--sgds-margin-3-xs) * -1);
+  margin: calc(var(--sgds-margin-xs) * -1);
 }
 ul.toc-list > * {
   font-size: var(--sgds-font-size-14);

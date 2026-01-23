@@ -27,9 +27,9 @@ nav {
 }
 
 slot[name="header"]::slotted(*) {
-  --sgds-margin-3-xs: var(--sgds-margin-none);
+  --sgds-margin-xs: var(--sgds-margin-none);
   flex: 1 1 auto;
-  margin-bottom: var(--sgds-margin-3-xs, --sgds-margin-none);
+  margin-bottom: var(--sgds-margin-xs, --sgds-margin-none);
   padding-top: var(--sgds-padding-none);
 }
 
