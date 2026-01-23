@@ -1,9 +1,9 @@
+import { assert, expect, fixture } from "@open-wc/testing";
+import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
-import { assert, expect, fixture, waitUntil } from "@open-wc/testing";
+import Sinon from "sinon";
 import { SgdsIcon, SgdsIconButton, SgdsSpinner } from "../src/components";
 import "../src/index";
-import Sinon from "sinon";
-import { sendKeys } from "@web/test-runner-commands";
 
 describe("<sgds-icon-button>", () => {
   it("semantically matches the DOM", async () => {
