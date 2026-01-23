@@ -122,6 +122,12 @@
   --sgds-breakpoint-xl: var(--sgds-dimension-1280);
   --sgds-breakpoint-2-xl: var(--sgds-dimension-1440);
 
+    /* Primitive - Breakpoint with sticky side bar*/
+  --sgds-breakpoint-sbar-md: var(--sgds-dimension-768);
+  --sgds-breakpoint-sbar-lg: var(--sgds-dimension-1024);
+  --sgds-breakpoint-sbar-xl: var(--sgds-dimension-1280);
+  --sgds-breakpoint-sbar-2-xl: var(--sgds-dimension-1440);
+
   /* Primitive - Font Family */
   --sgds-font-family-brand: "Inter", system-ui, sans-serif;
 

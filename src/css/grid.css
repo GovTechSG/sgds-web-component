@@ -4,6 +4,27 @@
   margin-right: auto;
   max-width: calc(100% - 40px); /* outer margin of 20px on each side */
 }
+.sgds-container-sidebar {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  grid-template-areas: 
+  "sidebar main";
+}
+
+.sgds-container-sidebar .sgds-sidebar {
+  grid-area: sidebar;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(100vh - 80px - 88px);
+   /** should be handled by user **/
+}
+.sgds-container-sidebar .sgds-main {
+  grid-area: main;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+
+}
 
 .sgds-grid {
   display: grid;
@@ -46,6 +67,9 @@
   .sgds-container {
     max-width: calc(100% - 56px); /* outer margin of 28px on each side */
   }
+    .sgds-container-sidebar .sgds-main {
+    max-width: calc(100% - 96px); /* outer margin of 48px on each side */
+  }
 
   .sgds-grid {
     gap: var(--sgds-gap-xl);
@@ -69,6 +93,10 @@
 @media (min-width: 1024px) {  /* sgds-breakpoint-lg */
   .sgds-grid {
     grid-template-columns: repeat(12, 1fr);
+  }
+
+  .sgds-container-sidebar .sgds-main{
+    max-width: var(--sgds-dimension-840);
   }
 
   .sgds-container {
@@ -104,6 +132,12 @@
   .sgds-container {
     max-width: var(--sgds-dimension-1168);
   }
+  .sgds-container-sidebar {
+    grid-template-columns: 272px 1fr;
+  }
+  .sgds-container-sidebar .sgds-main {
+    max-width: var(--sgds-dimension-888); 
+  }
 
   .sgds-col-xl-1 { grid-column: span 1; }
   .sgds-col-xl-2 { grid-column: span 2; }
@@ -129,6 +163,12 @@
 @media (min-width: 1440px) {  /* sgds-breakpoint-2-xl */
   .sgds-container {
     max-width: var(--sgds-dimension-1312);
+  }
+  .sgds-container-sidebar {
+    grid-template-columns: 272px 1fr;
+  }
+   .sgds-container-sidebar .sgds-main {
+    max-width: var(--sgds-dimension-1024); 
   }
 
   .sgds-col-2-xl-1 { grid-column: span 1; }
