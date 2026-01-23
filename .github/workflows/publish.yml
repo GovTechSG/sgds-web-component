@@ -1,12 +1,11 @@
-name: Publish Pre-releases
+name: Publish Latest
 permissions:
   contents: read
   
 on:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+-alpha.[0-9]+'
-      - 'v[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+'
       - 'v[0-9]+.[0-9]+.[0-9]+-rc.[0-9]+'
 
 jobs:
@@ -21,19 +20,20 @@ jobs:
         uses: pnpm/action-setup@v4
       - name: Set Tag env
         run: echo "NPM_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-      - uses: actions/setup-node@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org'
-      - run: pnpm install
-      - run: pnpm exec playwright install 
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - run: pnpm exec playwright install  
       - run: pnpm run test
       - run: pnpm run build
-      - run: pnpm publish --no-git-checks --tag alpha ./lib --access public 
-        if: contains(env.NPM_TAG, 'alpha')
-      - run: pnpm publish --no-git-checks --tag beta ./lib --access public
-        if: contains(env.NPM_TAG, 'beta')
       - run: pnpm publish --no-git-checks --tag rc ./lib --access public
         if: contains(env.NPM_TAG, 'rc')
+      - run: pnpm publish --no-git-checks --tag latest ./lib --access public
+        if: "!contains(env.NPM_TAG, 'rc')"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
