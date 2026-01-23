@@ -40,7 +40,7 @@
   flex-direction: column;
   gap: var(--sgds-gap-2-xl);
   margin: var(--sgds-margin-xl) var(--sgds-margin-lg);
-  max-height: calc(100% - var(--sgds-margin-xl) - var(--sgds-margin-lg));
+  max-height: calc(100% - var(--sgds-margin-xl) - var(--sgds-margin-xl));
 }
 
 
