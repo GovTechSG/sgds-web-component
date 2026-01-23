@@ -1,3 +1,18 @@
+## v3.7.0 (2026-01-23)
+
+### Feat
+
+- **icons**: new icons added 
+- **ComboBox**: new asynchronous combo box behaviour with loading state
+
+### Fix
+
+- **ComboBox**: added check for disabled option (#524)
+- **breadcrumb**: ensure breadcrumb text truncates with ellipsis instead of wrapping [run-chromatic] (#507)
+- **breadcrumb**: ensure breadcrumb text truncates with ellipsis instead of wrapping
+- **ComboBox**: badge not dismissible when combobox is readonly or disabled
+- **Combobox**: constraint validation when clicking on menu behaviour
+
 ## v3.6.4 (2025-12-22)
 
 ### Feat
