@@ -111,6 +111,7 @@ export class SgdsComboBox extends SelectElement {
       this.emptyMenuAfterFiltering = false;
     });
   }
+
   async firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
     if (this.async) this.filterFunction = () => true;
@@ -130,9 +131,11 @@ export class SgdsComboBox extends SelectElement {
   }
 
   protected async _handleDefaultSlotChange(e: Event) {
+    console.log("_handleDefaultSlotChange");
     const assignedElements = (e.target as HTMLSlotElement).assignedElements({
       flatten: true
     }) as ComboBoxOptionWithFlag[];
+
     assignedElements.forEach(option => {
       // Handling of click events
       if (option.hasAttribute("disabled")) return false;
@@ -281,6 +284,8 @@ export class SgdsComboBox extends SelectElement {
    */
   protected async _handleItemSelected(e: Event) {
     const itemEl = e.target as SgdsComboBoxOption;
+    if (itemEl.disabled) return;
+
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
     const foundItem = this.filteredList.find(i => i.value.toString() === itemValueAttr) || {
@@ -313,6 +318,8 @@ export class SgdsComboBox extends SelectElement {
 
   private _handleItemUnselect(e: Event) {
     const itemEl = e.target as SgdsComboBoxOption;
+    if (itemEl.disabled) return;
+
     itemEl.removeAttribute("active");
     const itemLabel = itemEl.textContent?.trim() ?? "";
     const itemValueAttr = itemEl.getAttribute("value") ?? itemLabel;
@@ -409,6 +416,7 @@ export class SgdsComboBox extends SelectElement {
       this._mixinResetValidity(await this._multiSelectInput);
     }
   }
+
   /** Template for the suffix icon */
   protected suffixIconTemplate: TemplateResult = html`<sgds-icon
     name=${this.menuIsOpen ? "chevron-up" : "chevron-down"}
@@ -498,6 +506,7 @@ export class SgdsComboBox extends SelectElement {
       </div>
     `;
   }
+
   protected _renderFeedbackMenu() {
     if (this.loading) {
       return this._renderLoadingMenu();
@@ -512,6 +521,7 @@ export class SgdsComboBox extends SelectElement {
         : nothing;
     }
   }
+
   render() {
     const showClearButton =
       (this.isFocused || this.menuIsOpen) && this.value !== "" && this.clearable && !this.readonly;
