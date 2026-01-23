@@ -81,22 +81,22 @@ h6 {
 h1 {
   font-size: var(--sgds-font-size-7);
   line-height: var(--sgds-line-height-48);
-  margin-bottom: var(--sgds-margin-xs);
+  margin-bottom: var(--sgds-margin-lg);
 }
 h2 {
   font-size: var(--sgds-font-size-6);
   line-height: var(--sgds-line-height-40);
-  margin-bottom: var(--sgds-margin-2-xs);
+  margin-bottom: var(--sgds-margin-md);
 }
 h3 {
   font-size: var(--sgds-font-size-5);
   line-height: var(--sgds-line-height-36);
-  margin-bottom: var(--sgds-margin-2-xs);
+  margin-bottom: var(--sgds-margin-md);
 }
 h4 {
   font-size: var(--sgds-font-size-4);
   line-height: var(--sgds-line-height-32);
-  margin-bottom: var(--sgds-margin-2-xs);
+  margin-bottom: var(--sgds-margin-md);
 }
 h5 {
   font-size: var(--sgds-font-size-3);
