@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Style/Grid System"
+  title: "Foundation/Grid System"
 };
 
 /** 🎨 Basic Grid Example */
