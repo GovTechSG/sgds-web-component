@@ -29,11 +29,12 @@ const copyPlugin = copy({
     { src: "src/icons/**/*", dest: "lib/icons" }
   ]
 });
-const wcPlugins = [
+
+const createPlugins = (resolveOptions = {}) => [
   resolve({
     browser: true,
-    dedupe: external,
-    exportConditions: ["development"]
+    exportConditions: ["development"],
+    ...resolveOptions
   }),
   replace({
     "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
@@ -50,6 +51,9 @@ const wcPlugins = [
   }),
   visualizer()
 ];
+
+const wcPlugins = createPlugins({ dedupe: external });
+const umdPlugins = createPlugins();
 
 const reactBuildPlugins = [
   resolve(),
@@ -82,7 +86,7 @@ const buildUMDComponentBundles = () => {
       sourcemap: true,
       inlineDynamicImports: true,
     },
-    plugins: [...wcPlugins, terser()]
+    plugins: [...umdPlugins, terser()]
   }));
 };
 const buildSgdsPackage = () => {
@@ -114,7 +118,7 @@ const buildSgdsPackage = () => {
         sourcemap: true,
         inlineDynamicImports: true
       },
-      plugins: [...wcPlugins, terser()]
+      plugins: [...umdPlugins, terser()]
     },
     ...buildUMDComponentBundles()
   ];
