@@ -7,9 +7,9 @@
 slot:not([name])::slotted(*) {
   --sgds-font-size-5: var(--sgds-font-size-4);
   --sgds-font-size-6: var(--sgds-font-size-4);
-  --sgds-margin-2-xs: var(--sgds-margin-none);
+ --sgds-margin-md: var(--sgds-margin-none);
   --sgds-font-weight-bold: var(--sgds-font-weight-semibold);
-  margin-bottom: var(--sgds-margin-2-xs, var(--sgds-margin-none));
+  margin-bottom: var(--sgds-margin-md, var(--sgds-margin-none));
   font-size: var(--sgds-font-size-4);
   font-weight: var(--sgds-font-weight-bold, var(--sgds-font-weight-semibold));
 }
@@ -24,6 +24,6 @@ slot:not([name])::slotted(*) {
 }
 
 slot[name="contents"]::slotted(li) {
-  --sgds-margin-3-xs: var(--sgds-margin-none);
-  margin-top: var(--sgds-margin-3-xs, var(--sgds-margin-none));
+  --sgds-margin-xs: var(--sgds-margin-none);
+  margin-top: var(--sgds-margin-xs, var(--sgds-margin-none));
 }
