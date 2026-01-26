@@ -4,18 +4,20 @@
 
 @theme {
   --*: initial;
-  --color-gray-000: var(--sgds-gray-000);
-  --color-gray-100: var(--sgds-gray-100);
-  --color-gray-200: var(--sgds-gray-200);
-  --color-gray-300: var(--sgds-gray-300);
-  --color-gray-400: var(--sgds-gray-400);
-  --color-gray-500: var(--sgds-gray-500);
-  --color-gray-600: var(--sgds-gray-600);
-  --color-gray-700: var(--sgds-gray-700);
-  --color-gray-800: var(--sgds-gray-800);
-  --color-gray-900: var(--sgds-gray-900);
-  --color-gray-1000: var(--sgds-gray-1000);               
-  --color-gray-1100: var(--sgds-gray-1100);
+  /* Margin and Padding */
+  --spacing-none: var(--sgds-spacer-0);
+  --spacing-3-xs: var(--sgds-spacer-1);
+  --spacing-2-xs: var(--sgds-spacer-2);
+  --spacing-xs: var(--sgds-spacer-3);
+  --spacing-sm: var(--sgds-spacer-4);
+  --spacing-md: var(--sgds-spacer-5);
+  --spacing-lg: var(--sgds-spacer-6);
+  --spacing-xl: var(--sgds-spacer-7);
+  --spacing-2-xl: var(--sgds-spacer-8);
+  --spacing-3-xl: var(--sgds-spacer-9);
+  --spacing-4-xl: var(--sgds-spacer-10);
+  --spacing-5-xl: var(--sgds-spacer-11);
+
 
   --radius-none: var(--sgds-border-radius-none);
   --radius-xs: var(--sgds-border-radius-xs);

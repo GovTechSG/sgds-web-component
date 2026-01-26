@@ -2,6 +2,7 @@
 <link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
 <link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
 <link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../../lib/css/utility.css" rel="stylesheet" type="text/css" />
 
 <style>
     .sgds-main{
@@ -19,11 +20,10 @@
        flex-direction: column;
        height: 100vh;
     }
-    .sgds-container-sidebar{
+    /* .sgds-container-sidebar{
         flex-grow: 1;
         overflow: hidden;
-        min-height: 0;
-    }
+    } */
     
     .sgds-sidebar{
         height: 100%;
@@ -32,7 +32,7 @@
 </style>
 <body>
     <sgds-mainnav><strong slot="brand">SGDS</strong></sgds-mainnav>
-    <div class="sgds-container-sidebar">
+    <div class="sgds-container-sidebar sgds:grow sgds:overflow-hidden ">
         <div class="sgds-sidebar">
             <sgds-sidenav>
       <sgds-sidenav-item>

@@ -15,7 +15,6 @@
   grid-area: sidebar;
   overflow-y: auto;
   overflow-x: hidden;
-  height: calc(100vh - 80px - 88px);
    /** should be handled by user **/
 }
 .sgds-container-sidebar .sgds-main {
