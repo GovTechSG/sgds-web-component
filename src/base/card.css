@@ -53,19 +53,19 @@
 }
 
 :host([orientation="vertical"][imageAdjustment="padding around"]) .card-image {
-  margin: var(--sgds-margin-sm) var(--sgds-margin-sm) var(--sgds-padding-none);
+  margin: var(--sgds-margin-xl) var(--sgds-margin-xl) var(--sgds-padding-none);
 }
 
 :host([orientation="vertical"][imageAdjustment="padding around"][imagePosition="after"]) .card-image {
-  margin: var(--sgds-margin-none) var(--sgds-margin-sm) var(--sgds-margin-sm);
+  margin: var(--sgds-margin-none) var(--sgds-margin-xl) var(--sgds-margin-xl);
 }
 
 :host([orientation="horizontal"][imageAdjustment="padding around"]) .card-image {
-  margin: var(--sgds-margin-sm) var(--sgds-margin-none) var(--sgds-margin-sm) var(--sgds-margin-sm);
+  margin: var(--sgds-margin-xl) var(--sgds-margin-none) var(--sgds-margin-xl) var(--sgds-margin-xl);
 }
 
 :host([orientation="horizontal"][imageAdjustment="padding around"][imagePosition="after"]) .card-image {
-  margin: var(--sgds-margin-sm) var(--sgds-margin-sm) var(--sgds-margin-sm) var(--sgds-margin-none);
+  margin: var(--sgds-margin-xl) var(--sgds-margin-xl) var(--sgds-margin-xl) var(--sgds-margin-none);
 }
 
 :host([orientation][imageAdjustment="padding around"]) slot[name="image"]::slotted(img) {

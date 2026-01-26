@@ -112,6 +112,19 @@ export const LargeSize = {
     }
   }
 };
+export const ExtraLargeSize = {
+  render: SizeTemplate.bind({}),
+  name: "Extra large size",
+  args: { size: "xl" },
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      story: {
+        height: "700px"
+      }
+    }
+  }
+};
 export const FullscreenSize = {
   render: SizeTemplate.bind({}),
   name: "Fullscreen size",

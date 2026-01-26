@@ -47,7 +47,7 @@
   position: relative;
   display: inline-block;
   max-width: var(--sgds-dimension-872);
-  margin-right: var(--sgds-margin-md);
+  margin-right: var(--sgds-margin-2-xl);
 }
 
 .show-more {
