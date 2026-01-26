@@ -1,0 +1,38 @@
+@layer theme, utilities;
+@import "tailwindcss/theme.css" layer(theme) prefix(sgds);
+@import "tailwindcss/utilities.css" layer(utilities) prefix(sgds);
+
+@theme {
+  --*: initial;
+  --color-gray-000: var(--sgds-gray-000);
+  --color-gray-100: var(--sgds-gray-100);
+  --color-gray-200: var(--sgds-gray-200);
+  --color-gray-300: var(--sgds-gray-300);
+  --color-gray-400: var(--sgds-gray-400);
+  --color-gray-500: var(--sgds-gray-500);
+  --color-gray-600: var(--sgds-gray-600);
+  --color-gray-700: var(--sgds-gray-700);
+  --color-gray-800: var(--sgds-gray-800);
+  --color-gray-900: var(--sgds-gray-900);
+  --color-gray-1000: var(--sgds-gray-1000);               
+  --color-gray-1100: var(--sgds-gray-1100);
+
+  --radius-none: var(--sgds-border-radius-none);
+  --radius-xs: var(--sgds-border-radius-xs);
+  
+  --text-3: var(--sgds-font-size-3);
+  --text-3-line-height: var(--sgds-line-height-body);
+  --leading-16: var(--sgds-line-height-16);
+  --font-weight-regular: var(--sgds-font-weight-regular);
+  --tracking-normal:var(--sgds-letter-spacing-normal);
+
+
+  --text-sgds-7: var(--sgds-font-size-7);
+  --leading-48: var(--sgds-line-height-48);
+  --font-weight-bold: var(--sgds-font-weight-bold);
+  --tracking-tight: var(--sgds-letter-spacing-tight);
+
+  --font-weight-light: var(--sgds-font-weight-light);
+
+
+}
