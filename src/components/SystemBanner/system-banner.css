@@ -1,3 +1,9 @@
+:host{
+  display: block;
+  width: 100%;
+  background-color: var(--sgds-surface-fixed-dark);
+}
+
 .banner {
   display: flex;
   flex-direction: row;
@@ -55,4 +61,20 @@ sgds-close-button {
   .pagination {
     position: static;
   }
+  .banner{
+    padding-left: var(--sgds-mainnav-mobile-padding-x);
+    padding-right: var(--sgds-mainnav-mobile-padding-x);
+  }
 }
+
+
+@media (min-width: 1440px) { /** --sgds-breakpoint-2-xl */
+  .banner{
+    padding-left: var(--sgds-mainnav-padding-x, 32px);
+    padding-right: var(--sgds-mainnav-padding-x, 32px);
+    max-width: var(--sgds-mainnav-max-width);
+    margin: auto;
+  }
+
+}
+
