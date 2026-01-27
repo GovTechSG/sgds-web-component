@@ -70,8 +70,8 @@ sgds-close-button {
 
 @media (min-width: 1440px) { /** --sgds-breakpoint-2-xl */
   .banner{
-    padding-left: var(--sgds-mainnav-padding-x, 32px);
-    padding-right: var(--sgds-mainnav-padding-x, 32px);
+    padding-left: var(--sgds-mainnav-padding-x);
+    padding-right: var(--sgds-mainnav-padding-x);
     max-width: var(--sgds-mainnav-max-width);
     margin: auto;
   }
