@@ -1,56 +1,18 @@
-<script type="module" src="../../src/index.ts"></script>
-<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
-<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
-<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
-<link href="../../lib/css/utility.css" rel="stylesheet" type="text/css" />
+import { html } from "lit";
 
-<style>
-  /* .main-wrapper {
-        width: 100%;
-        overflow-y: auto
-    } */
-  /* body{
-       display: flex;
-       flex-direction: column;
-       height: 100vh;
-    } */
-  /* .sgds-container-sidebar{
-        flex-grow: 1;
-        overflow: hidden;
-    } */
+export default {
+  title: "Templates/App layout with sidebar"
+};
 
-  /* .sgds-sidebar{
-        height: 100%;
-        overflow-y: auto;
-        
-
-        1. footer always not seen 
-        2. top nav not sticky 
-        3. provide two layout for footer being inside the scrollable area or outside the scrollable area
-    } */
-
-  .sgds-sidebar {
-    border-right: 1px solid gray;
-  }
-  .header{
-    position: sticky;
-    top: 0;
-  }
-  body{
-    overflow: auto;
-  }
-
-</style>
-
+const Template = () => {
+  return html`
 <body>
-  <div class="header">
   <sgds-masthead></sgds-masthead>
   <sgds-mainnav>
     <strong slot="brand">SGDS</strong>
     <strong slot="end">End</strong>
   </sgds-mainnav>
-  </div>
-  <div class="sgds-container-sidebar">
+  <div class="sgds-container-sidebar sgds:grow">
     <div class="sgds-sidebar">
       <sgds-sidenav>
         <sgds-sidenav-item>
@@ -344,8 +306,17 @@
           ipsum dolor sit amet...'
         </div>
       </div>
-      <sgds-footer></sgds-footer>
+      <!-- <sgds-footer></sgds-footer> -->
     </div>
   </div>
 </body>
-<!-- <sgds-footer></sgds-footer> -->
+<sgds-footer></sgds-footer>
+  `;
+};
+export const ApplicationLayoutWithSidebar = {
+  render: Template.bind({}),
+  name: "Application layout with sidebar",
+  args: {},
+  parameters: { layout: "fullscreen" },
+  tags: []
+};

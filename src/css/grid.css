@@ -9,20 +9,30 @@
   grid-template-columns: 72px 1fr;
   grid-template-areas: 
   "sidebar main";
+  height: 100%;
+  overflow-y: scroll;
+  /* height: calc(100vh - 108px); */
 }
 
 .sgds-container-sidebar .sgds-sidebar {
   grid-area: sidebar;
   overflow-y: auto;
-  overflow-x: hidden;
-   /** should be handled by user **/
+  /* height: 100vh; */
 }
+
 .sgds-container-sidebar .sgds-main {
   grid-area: main;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   width: 100%;
-
+}
+.sgds-main-wrapper {
+    width: 100%;
+    /* overflow-y: auto; */
+    display: grid;
+    grid-template-areas:
+    "main"
+    "footer";
+    grid-template-rows: 1fr auto;
 }
 
 .sgds-grid {
