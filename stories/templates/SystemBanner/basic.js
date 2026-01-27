@@ -37,7 +37,7 @@ export const args = {
 
 export const parameters = {
   layout: "fullscreen",
-   chromatic: {
+  chromatic: {
     modes: {
       mobile: allModes["sm"],
       desktop: allModes["lg"]
