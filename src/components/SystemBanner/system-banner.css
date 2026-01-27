@@ -12,7 +12,7 @@
   background-color: var(--sgds-surface-fixed-dark);
   min-height: var(--sgds-dimension-64);
   color: var(--sgds-color-fixed-light);
-  padding: var(--sgds-padding-sm) var(--sgds-padding-2-xl);
+  padding: var(--sgds-padding-sm) calc(var(--sgds-padding-sm) + var(--sgds-mainnav-mobile-padding-x));
   position: relative;
 }
 .content {
