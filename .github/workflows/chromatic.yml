@@ -3,17 +3,20 @@ permissions:
   contents: read
 
 on:
+  push:
+    branches:
+      - master # Workflow runs on pushes to the main branch
   pull_request:
     types: [opened, reopened, synchronize]
 
 jobs:
-  chromatic:
+  pr-chromatic:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
         node-version: [22.18.0]
     if: > 
-      contains(github.event.pull_request.title, '[run-chromatic]')
+      ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.title, '[run-chromatic]') }}
     steps:
       - name: Check if actor is repo admin
         id: permission
@@ -50,6 +53,27 @@ jobs:
         run: |
           echo ">>>>GitHub Event Pull Request Head SHA: ${{ github.event.pull_request.head.ref }}"
           echo ">>>>Checked out commit: $(git rev-parse HEAD)"
+      - uses: pnpm/action-setup@v4
+      - name: Install dependencies
+        # ⚠️ See your package manager's documentation for the correct command to install dependencies in a CI environment.
+        run: pnpm install
+      - name: Run Chromatic
+        uses: chromaui/action@latest
+        with:
+          # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          onlyChanged: true 
+          exitZeroOnChanges: false
+          skip: "dependabot/**"
+
+  master-chromatic:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [22.18.0]
+    if: > 
+      ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && contains(github.event.head_commit.message, '[run-chromatic]') }}
+    steps:    
       - uses: pnpm/action-setup@v4
       - name: Install dependencies
         # ⚠️ See your package manager's documentation for the correct command to install dependencies in a CI environment.
