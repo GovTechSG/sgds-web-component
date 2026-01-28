@@ -1,10 +1,13 @@
 :host {
+  vertical-align: middle;
   display: table-cell;
-  padding: var(--sgds-padding-lg);
   font-weight: bold;
-  border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-emphasis);
+  border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+}
+.table-head {
+  padding: var(--sgds-padding-lg) var(--sgds-padding-md);
 }
 
-:host(:not([border])){
-  border-color: var(--sgds-border-color-muted);
- }
+:host([background]) {
+  background-color: var(--sgds-surface-raised);
+}

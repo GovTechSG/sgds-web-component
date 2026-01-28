@@ -18,7 +18,6 @@ table {
 
 .table {
   display: table;
-  border-color: var(--sgds-border-color-default);
   vertical-align: top;
   width: 100%;
 }
@@ -41,14 +40,6 @@ table {
   vertical-align: bottom;
 }
 
-.table > thead th {
-  border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-emphasis);
-}
-
-.table-group-divider {
-  border-top: calc(var(--sgds-border-width) * 2) solid;
-}
-
 .table > :not(:first-child) {
   border-top: var(--sgds-border-width-1) solid var(--sgds-border-color-emphasis);
 }
@@ -56,6 +47,15 @@ table {
 .table-responsive {
   -webkit-overflow-scrolling: touch;
   overflow-x: auto;
+}
+
+:host([tableBorder]) .table {
+  border: var(--sgds-border-width-1) solid;
+  border-color: var(--sgds-border-color-muted);
+}
+
+:host([headerBackground]) th {
+  background-color: var(--sgds-surface-raised);
 }
 
 @media (max-width: 575.98px) {

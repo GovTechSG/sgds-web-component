@@ -5,6 +5,8 @@ import SgdsElement from "../../base/sgds-element";
 
 import tableStyle from "./table.css";
 import { HasSlotController } from "../../utils/slot";
+import SgdsTableRow from "./sgds-table-row";
+import SgdsTableHead from "./sgds-table-head";
 
 export type HeaderPosition = "horizontal" | "vertical" | "both";
 
@@ -42,6 +44,16 @@ export class SgdsTable extends SgdsElement {
    * Defines the placement of headers in the table (horizontal, vertical, or both)
    */
   @property({ type: String }) headerPosition: HeaderPosition = "horizontal";
+
+  /**
+   * Defines the placement of headers in the table (horizontal, vertical, or both)
+   */
+  @property({ type: Boolean }) headerBackground = false;
+
+  /**
+   * Defines the placement of headers in the table (horizontal, vertical, or both)
+   */
+  @property({ type: Boolean }) tableBorder = false;
 
   /** Used only for SSR to indicate the presence of the `default` slot. */
   @property({ type: Boolean }) hasDefaultSlot = false;
@@ -114,6 +126,28 @@ export class SgdsTable extends SgdsElement {
     }
   }
 
+  /**
+   * When there is a slot change, we will check if the background boolean is true
+   * if true, we will find the grand node of the table structure and set the sgds-table-head background attribute
+   *
+   */
+  private _handleSlotChange(e: Event) {
+    if (this.headerBackground) {
+      const childNodes = (e.target as HTMLSlotElement)
+        .assignedNodes({ flatten: true })
+        .filter((item: SgdsTableRow) => item?.tagName?.toLowerCase() === "sgds-table-row") as SgdsTableRow[];
+
+      childNodes.forEach(node => {
+        const grandChildNodes = node.shadowRoot
+          .querySelector("slot")
+          .assignedNodes({ flatten: true })
+          .filter((item: SgdsTableRow) => item?.tagName?.toLowerCase() === "sgds-table-head") as SgdsTableHead[];
+        grandChildNodes.forEach(grandNode => grandNode.setAttribute("background", "true"));
+      });
+    }
+    return;
+  }
+
   render() {
     return html`
       <div
@@ -126,7 +160,11 @@ export class SgdsTable extends SgdsElement {
         })}
         tabindex="0"
       >
-        <slot id="table-slot" class="table"></slot>
+        <slot
+          id="table-slot"
+          class=${classMap({ table: true, "no-border": !this.hasDefaultSlot })}
+          @slotchange=${this._handleSlotChange}
+        ></slot>
 
         ${!this.hasDefaultSlot
           ? html`<table class="table">

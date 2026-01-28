@@ -1,7 +1,6 @@
 import { html } from "lit";
-import { state } from "lit/decorators.js";
+
 import SgdsElement from "../../base/sgds-element";
-import { watch } from "../../utils/watch";
 import tableHeadStyle from "./table-head.css";
 
 /**
@@ -11,16 +10,6 @@ import tableHeadStyle from "./table-head.css";
  */
 export class SgdsTableHead extends SgdsElement {
   static styles = [...SgdsElement.styles, tableHeadStyle];
-  /**
-   * To indicate if the header will have a darker bottom border style
-   */
-  @state() private border = false;
-
-  @watch("border")
-  _handleBorderChange() {
-    this.border = this.nextElementSibling?.tagName?.toLowerCase() !== "sgds-table-cell";
-    this.border ? this.setAttribute("border", "true") : this.removeAttribute("border");
-  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -28,7 +17,7 @@ export class SgdsTableHead extends SgdsElement {
   }
 
   render() {
-    return html`<slot></slot>`;
+    return html`<div class="table-head"><slot></slot></div>`;
   }
 }
 

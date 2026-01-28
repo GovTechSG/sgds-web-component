@@ -1,4 +1,5 @@
 import { html } from "lit";
+
 import SgdsElement from "../../base/sgds-element";
 import tableCellStyle from "./table-cell.css";
 
@@ -16,7 +17,7 @@ export class SgdsTableCell extends SgdsElement {
   }
 
   render() {
-    return html` <slot class="table-cell"></slot> `;
+   return html`<div class="table-cell"><slot></slot></div>`;
   }
 }
 
