@@ -1,3 +1,10 @@
+## v3.8.1 (2026-01-28)
+
+### Feat
+
+- **Masthead**: remove scam alert message [run-chromatic] (#534)
+- **Masthead**: remove scam alert message
+
 ## v3.8.0 (2026-01-27)
 
 ### Feat
