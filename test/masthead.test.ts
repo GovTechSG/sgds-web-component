@@ -9,7 +9,7 @@ describe("sgds-masthead", () => {
     assert.shadowDom.equal(
       el,
       ` 
-    <div id="sgds-masthead" class="sgds-masthead" aria-label="A Singapore Government Agency Website." role="banner">
+    <div id="sgds-masthead" class="sgds-masthead" aria-label="A Singapore Government Agency Website" role="banner">
         <div class="banner">
           <div class="container">
             <div class="masthead-layout">
@@ -47,7 +47,7 @@ describe("sgds-masthead", () => {
                 />
               </svg>
               <div class="masthead-text-layout">
-                <span>A Singapore Government Agency Website.</span>
+                <span>A Singapore Government Agency Website</span>
                 <div
                   class="sgds-masthead-button"
                   id="sgds-masthead-identify"

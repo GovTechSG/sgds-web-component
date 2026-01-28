@@ -30,7 +30,7 @@ export class SgdsMasthead extends SgdsElement {
 
   render() {
     return html`
-      <div id="sgds-masthead" class="sgds-masthead" aria-label="A Singapore Government Agency Website." role="banner">
+      <div id="sgds-masthead" class="sgds-masthead" aria-label="A Singapore Government Agency Website" role="banner">
         <div class="banner">
           <div class="container">
             <div class="masthead-layout">
@@ -68,7 +68,7 @@ export class SgdsMasthead extends SgdsElement {
                 />
               </svg>
               <div class="masthead-text-layout">
-                <span>A Singapore Government Agency Website.</span>
+                <span>A Singapore Government Agency Website</span>
                 <div
                   class="sgds-masthead-button"
                   id="sgds-masthead-identify"
@@ -111,9 +111,9 @@ export class SgdsMasthead extends SgdsElement {
                 <div class="icon">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
                     fill="none"
                     class="banner-icon"
                   >
@@ -141,9 +141,9 @@ export class SgdsMasthead extends SgdsElement {
                 <div class="icon">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="17"
-                    height="16"
-                    viewBox="0 0 17 16"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
                     fill="none"
                     class="banner-icon"
                   >
@@ -160,16 +160,16 @@ export class SgdsMasthead extends SgdsElement {
                   <article>
                     Look for a lock (<svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
                       fill="none"
                       class="banner-icon-inline"
                     >
                       <path
                         fill-rule="evenodd"
                         clip-rule="evenodd"
-                        d="M4.66699 6.66683H4.33366C3.41318 6.66683 2.66699 7.41302 2.66699 8.3335V13.0002C2.66699 13.9206 3.41318 14.6668 4.33366 14.6668H11.667C12.5875 14.6668 13.3337 13.9206 13.3337 13.0002V8.3335C13.3337 7.41302 12.5875 6.66683 11.667 6.66683H11.3337V4.66683C11.3337 2.82588 9.84127 1.3335 8.00033 1.3335C6.15938 1.3335 4.66699 2.82588 4.66699 4.66683V6.66683ZM6.00033 6.66683H10.0003V4.66683C10.0003 3.56226 9.10489 2.66683 8.00033 2.66683C6.89576 2.66683 6.00033 3.56226 6.00033 4.66683V6.66683Z"
+                        d="M5.83331 8.33317H5.41665C4.26605 8.33317 3.33331 9.26591 3.33331 10.4165V16.2498C3.33331 17.4004 4.26605 18.3332 5.41665 18.3332H14.5833C15.7339 18.3332 16.6666 17.4004 16.6666 16.2498V10.4165C16.6666 9.26591 15.7339 8.33317 14.5833 8.33317H14.1666V5.83317C14.1666 3.53198 12.3012 1.6665 9.99998 1.6665C7.69879 1.6665 5.83331 3.53198 5.83331 5.83317V8.33317ZM7.49998 8.33317H12.5V5.83317C12.5 4.45246 11.3807 3.33317 9.99998 3.33317C8.61927 3.33317 7.49998 4.45246 7.49998 5.83317V8.33317Z"
                         fill="currentColor"
                       /></svg
                     >) or https:// as an added precaution. Share sensitive information only on official, secure
