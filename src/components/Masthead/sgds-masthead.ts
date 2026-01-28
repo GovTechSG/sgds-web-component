@@ -30,12 +30,7 @@ export class SgdsMasthead extends SgdsElement {
 
   render() {
     return html`
-      <div
-        id="sgds-masthead"
-        class="sgds-masthead"
-        aria-label="A Singapore Government Agency Website. Beware of government impersonation scams."
-        role="banner"
-      >
+      <div id="sgds-masthead" class="sgds-masthead" aria-label="A Singapore Government Agency Website." role="banner">
         <div class="banner">
           <div class="container">
             <div class="masthead-layout">
@@ -73,7 +68,7 @@ export class SgdsMasthead extends SgdsElement {
                 />
               </svg>
               <div class="masthead-text-layout">
-                <span>A Singapore Government Agency Website</span>
+                <span>A Singapore Government Agency Website.</span>
                 <div
                   class="sgds-masthead-button"
                   id="sgds-masthead-identify"
