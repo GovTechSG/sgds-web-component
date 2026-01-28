@@ -31,26 +31,37 @@
 
   .sgds-sidebar {
     border-right: 1px solid gray;
+    position: sticky;
+    top: 108px;
+    height: calc(100vh - 108px);
+    overflow-y: scroll
   }
-  .header{
+
+  body {
+    height: calc(100vh - 108px);
+  }
+
+  .header {
     position: sticky;
     top: 0;
   }
-  body{
-    overflow: auto;
-  }
 
+  .main-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 </style>
 
 <body>
   <div class="header">
-  <sgds-masthead></sgds-masthead>
-  <sgds-mainnav>
-    <strong slot="brand">SGDS</strong>
-    <strong slot="end">End</strong>
-  </sgds-mainnav>
+    <sgds-masthead></sgds-masthead>
+    <sgds-mainnav>
+      <strong slot="brand">SGDS</strong>
+      <strong slot="end">End</strong>
+    </sgds-mainnav>
   </div>
-  <div class="sgds-container-sidebar">
+  <div class="sgds:flex sgds:flex-row">
     <div class="sgds-sidebar">
       <sgds-sidenav>
         <sgds-sidenav-item>
@@ -246,10 +257,29 @@
         </sgds-sidenav-item>
       </sgds-sidenav>
     </div>
-    <div class="sgds-main-wrapper">
-      <div class="sgds-main">
+    <div class="main-wrapper">
+      <div class="sgds-container-sidebar">
+
         <div>
 
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+          typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+          sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+          PageMaker including versions of Lorem Ipsum.
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+          typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+          sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+          PageMaker including versions of Lorem Ipsum.
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+          typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+          sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+          PageMaker including versions of Lorem Ipsum.
           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
           standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
           make a type specimen book. It has survived not only five centuries, but also the leap into electronic
@@ -343,9 +373,11 @@
           Start with 'Lorem
           ipsum dolor sit amet...'
         </div>
+
       </div>
       <sgds-footer></sgds-footer>
     </div>
   </div>
 </body>
+
 <!-- <sgds-footer></sgds-footer> -->
