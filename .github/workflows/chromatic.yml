@@ -54,8 +54,6 @@ jobs:
           echo ">>>>GitHub Event Pull Request Head SHA: ${{ github.event.pull_request.head.ref }}"
           echo ">>>>Checked out commit: $(git rev-parse HEAD)"
       - uses: pnpm/action-setup@v4
-        with: 
-            version: 10
       - name: Install dependencies
         # ⚠️ See your package manager's documentation for the correct command to install dependencies in a CI 
         run: pnpm install
@@ -75,7 +73,11 @@ jobs:
         node-version: [22.18.0]
     if: > 
       ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && contains(github.event.head_commit.message, '[run-chromatic]') }}
-    steps:    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: pnpm/action-setup@v4
       - name: Install dependencies
         # ⚠️ See your package manager's documentation for the correct command to install dependencies in a CI environment.
