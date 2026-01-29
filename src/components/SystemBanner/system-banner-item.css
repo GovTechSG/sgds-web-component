@@ -9,7 +9,7 @@
 }
 
 /* Handles inline links and all texts */
-::slotted(*) {
+::slotted(:not(sgds-icon)) {
   font-size: var(--sgds-font-size-1, 14px) !important;
   line-height: var(--sgds-line-height-20, 20px) !important;
   color: var(--sgds-color-fixed-light) !important;
