@@ -59,7 +59,7 @@ export class SgdsModal extends SgdsElement {
   @property({ type: Boolean, reflect: true }) noAnimation = false;
 
   /** Specifies a small, medium, large or fullscreen modal, the size is medium by default. */
-  @property({ reflect: true }) size: "sm" | "md" | "lg" | "fullscreen" = "md";
+  @property({ reflect: true }) size: "sm" | "md" | "lg" | "xl" | "fullscreen" = "md";
 
   /** Used only for SSR to indicate the presence of the `footer` slot. */
   @property({ type: Boolean }) hasFooterSlot = false;

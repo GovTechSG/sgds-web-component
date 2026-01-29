@@ -1,3 +1,17 @@
+## v3.8.1 (2026-01-28)
+
+### Feat
+
+- **Masthead**: remove scam alert message [run-chromatic] (#534)
+- **Masthead**: remove scam alert message
+
+## v3.8.0 (2026-01-27)
+
+### Feat
+
+- **Modal**: new size extra large [run-chromatic] (#527)
+- **Modal**: new size extra large
+
 ## v3.7.0 (2026-01-23)
 
 ### Feat
