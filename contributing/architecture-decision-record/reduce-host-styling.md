@@ -25,22 +25,9 @@ This approach includes:
 ## Consequences
 
 **Positive:**
-- Consuming applications have greater flexibility to customize component appearance without fighting against component styles
-- Components integrate more seamlessly into different design systems and products
 - Reduced CSS specificity conflicts
-- Easier for applications to adapt components to their brand guidelines
+- Isolate the CSS within SGDS components
 
-**Negative:**
-- Applications may need to apply more styling themselves if they want specific appearance
-- Less out-of-box styling could require applications to define more custom CSS
-- Components may appear less polished in isolation if viewed without application-level styling
-
-## Components Affected
-
-Future components and components requiring updates:
-- Sidebar (in development)
-- Other new components going forward
-
-## Date of proposal 
+## Date of proposal
 
 29/01/2026
