@@ -6,6 +6,7 @@ import "../lib/index.js";
 import "../lib/themes/day.css";
 import "../lib/themes/night.css";
 import "../lib/css/sgds.css";
+import "./utility.css";
 import "./global.css";
 import sgdsTheme from "./sgdsTheme";
 
@@ -42,7 +43,8 @@ export const parameters = {
       headingSelector: "h1, h2, h3",
       title: "Table of Contents",
       disable: false
-    }
+    },
+    codePanel: true
   },
   viewport: {
     viewports: {

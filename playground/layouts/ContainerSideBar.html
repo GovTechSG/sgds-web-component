@@ -1,0 +1,29 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="..//css/utility.css" rel="stylesheet" type="text/css" />
+
+<body>
+  <div class="sgds:sticky sgds:top-0">
+    <sgds-masthead fluid></sgds-masthead>
+    <sgds-mainnav fluid>
+      <strong slot="brand">SGDS</strong>
+      <strong slot="end">End</strong>
+    </sgds-mainnav>
+  </div>
+  <div class="sgds:flex sgds:flex-row">
+    <div class="sgds:sticky sgds:bg-translucent-subtle sgds:h-[calc(100vh-108px)] sgds:overflow-y-scroll sgds:top-27 sgds:md:w-68 sgds:w-18 ">
+      <div id="sidebar-component" class="sgds:bg-translucent-subtle sgds:h-500 sgds:w-full">Place SideBar here </div>
+    </div>
+    <div class="sgds:flex sgds:flex-col sgds:w-full ">
+      <div class="sgds-container-sidebar sgds:py-2-xl">
+        <div id="content" class="sgds:bg-translucent-subtle sgds:h-250 sgds:w-full">
+          Place content here
+        </div>
+      </div>
+      <sgds-footer></sgds-footer>
+    </div>
+  </div>
+</body>
+
