@@ -5,5 +5,8 @@
 }
 
 .table-cell {
-  padding: var(--sgds-padding-lg) var(--sgds-padding-md);
+  display: flex;
+  align-items: center;
+  min-height: var(--sgds-dimension-56);
+  padding: var(--sgds-padding-sm) var(--sgds-padding-md);
 }

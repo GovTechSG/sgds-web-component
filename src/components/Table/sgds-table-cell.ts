@@ -17,7 +17,7 @@ export class SgdsTableCell extends SgdsElement {
   }
 
   render() {
-   return html`<div class="table-cell"><slot></slot></div>`;
+    return html`<div class="table-cell"><slot></slot></div>`;
   }
 }
 

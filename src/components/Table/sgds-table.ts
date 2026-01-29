@@ -21,41 +21,65 @@ export class SgdsTable extends SgdsElement {
   static styles = [...SgdsElement.styles, tableStyle];
 
   /**
-   * Use responsive="sm", responsive="md" , responsive="lg", or responsive="xl" as needed to create responsive tables up to a particular breakpoint. From that breakpoint and up, the table will behave normally and not scroll horizontally. Use reponsive="always" to let table be always responsive
+   * Specifies the responsive breakpoint for the table.
+   * Use "sm", "md", "lg", or "xl" to create responsive tables up to a particular breakpoint.
+   * From that breakpoint and up, the table will behave normally and not scroll horizontally.
+   * Use "always" to make the table always responsive.
+   * @type {"sm" | "md" | "lg" | "xl" | "always"}
    */
   @property({ type: String, reflect: true }) responsive: "sm" | "md" | "lg" | "xl" | "always";
 
   /**
-   * Populate row header cells using Arrays
+   * Array of strings to populate row header cells.
+   * @type {string[]}
    */
   @property({ type: Array }) rowHeader: string[] = [];
 
   /**
-   * Populate column header cells using Arrays only when <code>headerPosition="vertical"</code> or <code>headerPosition="both"</code>
+   * Array of strings to populate column header cells.
+   * Only used when `headerPosition` is set to "vertical" or "both".
+   * @type {string[]}
    */
   @property({ type: Array }) columnHeader: string[] = [];
 
   /**
-   * Populate data cells using Arrays
+   * Two-dimensional array of strings or numbers to populate table data cells.
+   * @type {Array<(string | number)[]>}
    */
   @property({ type: Array }) tableData: Array<(string | number)[]> = [];
 
   /**
-   * Defines the placement of headers in the table (horizontal, vertical, or both)
+   * Defines the placement of headers in the table.
+   * Use "horizontal" for top headers only, "vertical" for left headers only,
+   * or "both" for both row and column headers.
+   * @type {"horizontal" | "vertical" | "both"}
+   * @default "horizontal"
    */
   @property({ type: String }) headerPosition: HeaderPosition = "horizontal";
 
   /**
-   * Defines the placement of headers in the table (horizontal, vertical, or both)
+   * Enables background styling on horizontal header rows.
+   * When true, applies background color to header cells for better visual distinction.
+   * @type {boolean}
+   * @default false
    */
   @property({ type: Boolean }) headerBackground = false;
 
   /**
-   * Defines the placement of headers in the table (horizontal, vertical, or both)
+   * Enables borders around table cells.
+   * When true, displays visible borders between all table cells.
+   * @type {boolean}
+   * @default false
    */
   @property({ type: Boolean }) tableBorder = false;
 
-  /** Used only for SSR to indicate the presence of the `default` slot. */
+  /**
+   * Indicates the presence of the default slot.
+   * Used for server-side rendering to determine table structure.
+   * @type {boolean}
+   * @internal
+   * @default false
+   */
   @property({ type: Boolean }) hasDefaultSlot = false;
 
   /** @internal */
@@ -74,14 +98,14 @@ export class SgdsTable extends SgdsElement {
       return html`
         <thead>
           <tr>
-            ${this.rowHeader.map((header: string) => html` <th>${header}</th> `)}
+            ${this.rowHeader.map((header: string) => html` <th><div>${header}</div></th> `)}
           </tr>
         </thead>
         <tbody>
           ${this.tableData.map(
             row => html`
               <tr>
-                ${row.map((cell: string) => html`<td>${cell}</td>`)}
+                ${row.map((cell: string) => html`<td><div>${cell}</div></td>`)}
               </tr>
             `
           )}
@@ -93,16 +117,16 @@ export class SgdsTable extends SgdsElement {
       return html`
         <thead>
           <tr>
-            <th></th>
-            ${this.rowHeader.map((header: string) => html` <th>${header}</th> `)}
+            <th><div></div></th>
+            ${this.rowHeader.map((header: string) => html` <th><div>${header}</div></th> `)}
           </tr>
         </thead>
         <tbody>
           ${this.tableData.map(
             (row, index) => html`
               <tr>
-                <th>${this.columnHeader[index]}</th>
-                ${row.map((cell: string) => html`<td>${cell}</td>`)}
+                <th><div>${this.columnHeader[index]}</div></th>
+                ${row.map((cell: string) => html`<td><div>${cell}</div></td>`)}
               </tr>
             `
           )}
@@ -117,8 +141,8 @@ export class SgdsTable extends SgdsElement {
         ${flippedTableData.map(
           (row, index) => html`
             <tr>
-              <th>${this.columnHeader[index]}</th>
-              ${row.map((cell: string) => html`<td>${cell}</td>`)}
+              <th><div>${this.columnHeader[index]}</div></th>
+              ${row.map((cell: string) => html`<td><div>${cell}</div></td>`)}
             </tr>
           `
         )}
@@ -133,16 +157,24 @@ export class SgdsTable extends SgdsElement {
    */
   private _handleSlotChange(e: Event) {
     if (this.headerBackground) {
-      const childNodes = (e.target as HTMLSlotElement)
-        .assignedNodes({ flatten: true })
-        .filter((item: SgdsTableRow) => item?.tagName?.toLowerCase() === "sgds-table-row") as SgdsTableRow[];
-
-      childNodes.forEach(node => {
-        const grandChildNodes = node.shadowRoot
-          .querySelector("slot")
+      const childNodes =
+        (e.target as HTMLSlotElement)
           .assignedNodes({ flatten: true })
-          .filter((item: SgdsTableRow) => item?.tagName?.toLowerCase() === "sgds-table-head") as SgdsTableHead[];
-        grandChildNodes.forEach(grandNode => grandNode.setAttribute("background", "true"));
+          ?.filter((item: SgdsTableRow) => item?.tagName?.toLowerCase() === "sgds-table-row") || [];
+
+      childNodes.forEach((node: SgdsTableRow) => {
+        if (node && node.shadowRoot) {
+          const slotEle = node.shadowRoot.querySelector("slot");
+          const grandChildNodes =
+            slotEle
+              ?.assignedNodes({ flatten: true })
+              ?.filter((item: SgdsTableRow) => item?.tagName?.toLowerCase() === "sgds-table-head") || [];
+
+          grandChildNodes.forEach((grandNode: SgdsTableHead) => {
+            if (grandNode && grandNode.nextElementSibling?.tagName?.toLowerCase() !== "sgds-table-cell")
+              grandNode.setAttribute("background", "true");
+          });
+        }
       });
     }
     return;

@@ -2,6 +2,8 @@ import { html } from "lit";
 
 import SgdsElement from "../../base/sgds-element";
 import tableHeadStyle from "./table-head.css";
+import { state } from "lit/decorators";
+import { watch } from "../../utils/watch";
 
 /**
  * @summary Table head represents a table header cell that identifies a group of information within the table.

@@ -1,13 +1,17 @@
 :host {
   vertical-align: middle;
-  display: table-cell;
-  font-weight: bold;
+  display: table-cell;  
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }
+
 .table-head {
-  padding: var(--sgds-padding-lg) var(--sgds-padding-md);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  padding: var(--sgds-padding-sm) var(--sgds-padding-md);
+  min-height: var(--sgds-dimension-56);
 }
 
-:host([background]) {
+:host([background])  {
   background-color: var(--sgds-surface-raised);
 }

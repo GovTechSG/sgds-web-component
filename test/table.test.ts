@@ -11,6 +11,8 @@ describe("Table", () => {
     expect(el.rowHeader).to.deep.equal([]);
     expect(el.columnHeader).to.deep.equal([]);
     expect(el.tableData).to.deep.equal([]);
+    expect(el.headerBackground).to.be.false;
+    expect(el.tableBorder).to.be.false;
   });
 
   it("renders with row headers", async () => {
@@ -91,6 +93,29 @@ describe("Table", () => {
   it("Should have responsive breakpoints", async () => {
     const el = await fixture<SgdsTable>(html`<sgds-table responsive="md"></sgds-table>`);
     expect(el.shadowRoot?.querySelector("div")?.classList.contains("table-responsive-md")).to.be.true;
+  });
+
+  it("Should set headerBackground property", async () => {
+    const el = await fixture<SgdsTable>(html`<sgds-table headerBackground></sgds-table>`);
+    expect(el.headerBackground).to.be.true;
+  });
+
+  it("Should set tableBorder property", async () => {
+    const el = await fixture<SgdsTable>(html`<sgds-table tableBorder></sgds-table>`);
+    expect(el.tableBorder).to.be.true;
+  });
+
+  it("Should toggle headerBackground and tableBorder dynamically", async () => {
+    const el = await fixture<SgdsTable>(html`<sgds-table></sgds-table>`);
+    expect(el.headerBackground).to.be.false;
+    expect(el.tableBorder).to.be.false;
+
+    el.headerBackground = true;
+    el.tableBorder = true;
+    await el.updateComplete;
+
+    expect(el.headerBackground).to.be.true;
+    expect(el.tableBorder).to.be.true;
   });
 
   it("Should render all content passed in slot, without the provided table data", async () => {
