@@ -4,6 +4,16 @@
 
 @theme {
   --*: initial;
+  --spacing: 4px;
+  
+  /* Breakpoints (raw values required) */
+  --breakpoint-xs: 320px;
+  --breakpoint-sm: 512px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2-xl: 1440px;
+  
   /* Margin and Padding */
   --spacing-none: var(--sgds-spacer-0);
   --spacing-3-xs: var(--sgds-spacer-1);
@@ -18,7 +28,19 @@
   --spacing-4-xl: var(--sgds-spacer-10);
   --spacing-5-xl: var(--sgds-spacer-11);
  
-
+  /* Semantic background colors */
+  --background-color-default: var(--sgds-bg-default);
+  --background-color-alternate: var(--sgds-bg-alternate);
+  --background-color-fixed-light: var(--sgds-bg-fixed-light);
+  --background-color-fixed-dark: var(--sgds-bg-fixed-dark);
+  --background-color-overlay: var(--sgds-bg-overlay);
+  --background-color-translucent: var(--sgds-bg-translucent);
+  --background-color-translucent-subtle: var(--sgds-bg-translucent-subtle);
+  --background-color-transparent: var(--sgds-bg-transparent);
+  --background-color-translucent-inverse: var(--sgds-bg-translucent-inverse);
+  --background-color-translucent-fixed-dark: var(--sgds-bg-translucent-fixed-dark);
+  --background-color-translucent-fixed-light: var(--sgds-bg-translucent-fixed-light);
+  
 
   --radius-none: var(--sgds-border-radius-none);
   --radius-xs: var(--sgds-border-radius-xs);

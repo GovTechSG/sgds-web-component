@@ -1,0 +1,61 @@
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, utilities;
+@layer theme {
+  :root, :host {
+    --sgds-spacing: 4px;
+    --sgds-spacing-2-xl: var(--sgds-spacer-8);
+    --sgds-background-color-translucent-subtle: var(--sgds-bg-translucent-subtle);
+    --sgds-font-weight-regular: var(--sgds-font-weight-regular);
+    --sgds-font-weight-bold: var(--sgds-font-weight-bold);
+    --sgds-font-weight-light: var(--sgds-font-weight-light);
+  }
+}
+@layer utilities {
+  .sgds\:sticky {
+    position: sticky;
+  }
+  .sgds\:top-0 {
+    top: calc(var(--sgds-spacing) * 0);
+  }
+  .sgds\:top-27 {
+    top: calc(var(--sgds-spacing) * 27);
+  }
+  .sgds\:flex {
+    display: flex;
+  }
+  .sgds\:h-250 {
+    height: calc(var(--sgds-spacing) * 250);
+  }
+  .sgds\:h-500 {
+    height: calc(var(--sgds-spacing) * 500);
+  }
+  .sgds\:h-\[calc\(100vh-108px\)\] {
+    height: calc(100vh - 108px);
+  }
+  .sgds\:w-18 {
+    width: calc(var(--sgds-spacing) * 18);
+  }
+  .sgds\:w-full {
+    width: 100%;
+  }
+  .sgds\:flex-col {
+    flex-direction: column;
+  }
+  .sgds\:flex-row {
+    flex-direction: row;
+  }
+  .sgds\:overflow-y-scroll {
+    overflow-y: scroll;
+  }
+  .sgds\:bg-translucent-subtle {
+    background-color: var(--sgds-background-color-translucent-subtle);
+  }
+  .sgds\:py-2-xl {
+    padding-block: var(--sgds-spacing-2-xl);
+  }
+  .sgds\:md\:w-68 {
+    @media (width >= 768px) {
+      width: calc(var(--sgds-spacing) * 68);
+    }
+  }
+}

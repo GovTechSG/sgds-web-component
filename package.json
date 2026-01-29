@@ -24,13 +24,14 @@
     "lint:fix": "npm run lint -- --fix",
     "cem": "cem analyze --litelement ",
     "e2e-test": "node cypress/scripts/run_all.js & cypress open",
-    "storybook": "nodemon --exec \"npm run write:stories &&  STORYBOOK_ENV=development storybook dev -p 6006\" --watch stories/templates stories/getting-started -e js,mdx",
-    "build-storybook": "npm run build && npm run write:stories && STORYBOOK_ENV=production storybook build --loglevel verbose",
+    "storybook": "nodemon --exec \"npm run utility:storybook && npm run write:stories &&  STORYBOOK_ENV=development storybook dev -p 6006\" --watch stories/templates stories/getting-started src/css/utility.css -e js,mdx,css",
+    "build-storybook": "npm run utility:storybook && npm run build && npm run write:stories && STORYBOOK_ENV=production storybook build --loglevel verbose",
     "convert:icons": "node scripts/convertIcons.js && pnpm run generate:icons",
     "generate:icons": "node scripts/generateIconRegistry.js",
     "sync-figma-to-tokens": "tsx scripts/figma/sync-figma-to-tokens/sync-figma-to-tokens.ts",
     "chromatic": "chromatic",
-    "utility": "tailwindcss -i ./src/css/utility.css -o ./lib/css/utility.css --config tailwind.config.js"
+    "utility:dev": "tailwindcss -i ./src/css/utility.css -o ./playground/css/utility.css --config tailwind.config.js",
+    "utility:storybook": "tailwindcss -i ./src/css/utility.css -o ./.storybook/utility.css --config tailwind.config.js"
   },
   "author": "GovTechSG",
   "contributors": [
