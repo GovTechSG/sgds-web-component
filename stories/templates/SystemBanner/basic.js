@@ -1,7 +1,11 @@
 import { html } from "lit";
 import { allModes } from "../../../.storybook/modes";
 
-export const Template = args => html`<sgds-system-banner ?dismissible=${args.dismissible} ?show=${args.show}>
+export const Template = args => html`<sgds-system-banner
+  ?dismissible=${args.dismissible}
+  ?show=${args.show}
+  ?fluid=${args.fluid}
+>
   <sgds-system-banner-item>
     <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
     Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
