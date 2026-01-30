@@ -61,6 +61,20 @@ describe("sgds-mainnav", () => {
       { ignoreAttributes: ["id", "aria-controls", "style"] }
     );
   });
+  it("when fluid is false (default), .navbar has max-width constraint", async () => {
+    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav></sgds-mainnav>`);
+    const navbar = el.shadowRoot?.querySelector(".navbar") as HTMLElement;
+    const styles = getComputedStyle(navbar);
+    expect(styles.maxWidth).to.equal("1440px");
+  });
+
+  it("when fluid is true, .navbar has no max-width constraint", async () => {
+    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav fluid></sgds-mainnav>`);
+    const navbar = el.shadowRoot?.querySelector(".navbar") as HTMLElement;
+    const styles = getComputedStyle(navbar);
+    expect(styles.maxWidth).to.equal("none");
+  });
+
   it("expect div.collapse's id to equal to button's aria-controls", async () => {
     const el = await fixture(html`<sgds-mainnav></sgds-mainnav>`);
     const collapse = el.shadowRoot?.querySelector("div.navbar-body");
