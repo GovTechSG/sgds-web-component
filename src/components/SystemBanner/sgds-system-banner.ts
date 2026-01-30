@@ -10,7 +10,7 @@ import SgdsIcon from "../Icon/sgds-icon";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import alertBannerStyles from "./system-banner.css";
 import SgdsSystemBannerItem from "./sgds-system-banner-item";
-import { SystemBannerChildCountContext } from "./system-banner-context";
+import { SystemBannerChildCountContext, NoClampActionContext } from "./system-banner-context";
 import { provide } from "@lit/context";
 
 /**
@@ -39,6 +39,12 @@ export class SgdsSystemBanner extends SgdsElement {
 
   /** When true, removes max-width constraint to allow content to stretch full screen width */
   @property({ type: Boolean, reflect: true }) fluid = false;
+  /** Disables the action link that appears when text content is clamped */
+  @provide({ context: NoClampActionContext })
+
+  /** When true, all its children SgdsSystemBannerItem's message will be truncated with ellipsis only */
+  @property({ type: Boolean })
+  noClampAction = false;
 
   /** Closes the alert  */
   public close() {
