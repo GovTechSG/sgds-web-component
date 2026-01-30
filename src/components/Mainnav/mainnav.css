@@ -17,9 +17,13 @@ nav {
   position: relative;
   padding: 0px var(--sgds-mainnav-padding-x);
   width: 100%;
-  max-width: var(--sgds-mainnav-max-width);
+  max-width: var(--sgds-mainnav-max-width, 1440px);
   min-height: 80px;
   margin: auto;
+}
+
+:host([fluid]) .navbar {
+  max-width: none;
 }
 
 @media screen and (max-width: 767px) {

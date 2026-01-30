@@ -61,6 +61,7 @@ describe("sgds-mainnav", () => {
       { ignoreAttributes: ["id", "aria-controls", "style"] }
     );
   });
+
   it("expect div.collapse's id to equal to button's aria-controls", async () => {
     const el = await fixture(html`<sgds-mainnav></sgds-mainnav>`);
     const collapse = el.shadowRoot?.querySelector("div.navbar-body");

@@ -1,3 +1,8 @@
+.banner-wrapper {
+  display: block;
+  width: 100%;
+  background-color: var(--sgds-surface-fixed-dark);
+}
 .banner {
   display: flex;
   flex-direction: row;
@@ -6,7 +11,7 @@
   background-color: var(--sgds-surface-fixed-dark);
   min-height: var(--sgds-dimension-64);
   color: var(--sgds-color-fixed-light);
-  padding: var(--sgds-padding-sm) var(--sgds-padding-2-xl);
+  padding: var(--sgds-padding-sm) calc(var(--sgds-padding-sm) + var(--sgds-mainnav-mobile-padding-x));
   position: relative;
 }
 .content {
@@ -55,4 +60,23 @@ sgds-close-button {
   .pagination {
     position: static;
   }
+  .banner{
+    padding-left: var(--sgds-mainnav-mobile-padding-x);
+    padding-right: var(--sgds-mainnav-mobile-padding-x);
+  }
+}
+
+
+@media (min-width: 1440px) { /** --sgds-breakpoint-2-xl */
+  .banner{
+    padding-left: var(--sgds-mainnav-padding-x);
+    padding-right: var(--sgds-mainnav-padding-x);
+    max-width: var(--sgds-mainnav-max-width, 1440px);
+    margin: auto;
+  }
+
+}
+
+:host([fluid]) .banner {
+  max-width: none;
 }
