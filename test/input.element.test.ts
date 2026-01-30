@@ -475,6 +475,26 @@ describe("when submitting a form", () => {
     submitButton?.click();
     expect(submitHandler).not.to.have.been.calledOnce;
   });
+
+  it("should capture default value in form data when input is not touched before submission", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input name="test-field" value="default-value"></sgds-input>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      expect(formData.get("test-field")).to.equal("default-value");
+    });
+
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
 });
 
 describe("when resetting a form", () => {

@@ -191,4 +191,20 @@ describe("sgds-masthead", () => {
     await el.updateComplete;
     expect(el.toggleVisibility).to.be.true;
   });
+
+  describe("fluid property", () => {
+    it("when fluid is false (default), .container has max-width constraint", async () => {
+      const el = await fixture<SgdsMasthead>(html`<sgds-masthead></sgds-masthead>`);
+      const container = el.shadowRoot?.querySelector(".container") as HTMLElement;
+      const styles = getComputedStyle(container);
+      expect(styles.maxWidth).to.equal("1440px");
+    });
+
+    it("when fluid is true, .container has no max-width constraint", async () => {
+      const el = await fixture<SgdsMasthead>(html`<sgds-masthead fluid></sgds-masthead>`);
+      const container = el.shadowRoot?.querySelector(".container") as HTMLElement;
+      const styles = getComputedStyle(container);
+      expect(styles.maxWidth).to.equal("none");
+    });
+  });
 });

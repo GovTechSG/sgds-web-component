@@ -1,0 +1,87 @@
+<script type="module" src="../src/index.ts"></script>
+<link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+
+<style>
+  body {
+    margin: 0;
+  }
+  .content-placeholder {
+    padding: 2rem;
+    text-align: center;
+    color: #868686;
+  }
+</style>
+
+<h1>Header Components Demo</h1>
+
+<h2>Default</h2>
+<sgds-masthead></sgds-masthead>
+<sgds-mainnav>
+  <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
+  <sgds-mainnav-item active>
+    <a href="#">Home</a>
+  </sgds-mainnav-item>
+  <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
+  <sgds-mainnav-item><a href="#">Services</a></sgds-mainnav-item>
+  <sgds-mainnav-dropdown>
+    <span slot="toggler">More</span>
+    <sgds-dropdown-item><a href="#">Item 1</a></sgds-dropdown-item>
+    <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
+    <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
+  </sgds-mainnav-dropdown>
+  <sgds-button slot="end">Login</sgds-button>
+</sgds-mainnav>
+<sgds-system-banner show dismissible>
+  <sgds-system-banner-item>
+    <sgds-icon name="exclamation-circle" slot="icon"></sgds-icon>
+    This is a system banner message without fluid prop
+  </sgds-system-banner-item>
+  <sgds-system-banner-item>
+    <sgds-icon name="exclamation-circle" slot="icon"></sgds-icon>
+    This is a system banner message without fluid prop
+  </sgds-system-banner-item>
+  <sgds-system-banner-item>
+    <sgds-icon name="exclamation-circle" slot="icon"></sgds-icon>
+    This is a system banner message without fluid prop
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<sgds-footer></sgds-footer>
+
+<div class="content-placeholder">
+  Page content goes here. Notice the header components have max-width constraint.
+</div>
+
+<h2>With Fluid</h2>
+<sgds-masthead fluid></sgds-masthead>
+<sgds-mainnav fluid>
+  <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
+  <sgds-mainnav-item active>
+    <a href="#">Home</a>
+  </sgds-mainnav-item>
+  <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
+  <sgds-mainnav-item><a href="#">Services</a></sgds-mainnav-item>
+  <sgds-mainnav-dropdown>
+    <span slot="toggler">More</span>
+    <sgds-dropdown-item><a href="#">Item 1</a></sgds-dropdown-item>
+    <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
+    <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
+  </sgds-mainnav-dropdown>
+  <sgds-button slot="end">Login</sgds-button>
+</sgds-mainnav>
+<sgds-system-banner show fluid dismissible>
+  <sgds-system-banner-item>
+    <sgds-icon name="exclamation-circle" slot="icon"></sgds-icon>
+    1This is a system banner message with fluid prop - stretches full width
+  </sgds-system-banner-item>
+  <sgds-system-banner-item>
+    <sgds-icon name="exclamation-circle" slot="icon"></sgds-icon>
+    2This is a system banner message with fluid prop - stretches full width
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<sgds-footer></sgds-footer>
+
+<div class="content-placeholder">
+  Page content goes here. Notice the header components stretch to full screen width.
+</div>
