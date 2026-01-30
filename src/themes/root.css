@@ -335,6 +335,10 @@
   --sgds-margin-3-xl: var(--sgds-spacer-9);
   --sgds-margin-4-xl: var(--sgds-spacer-10);
   --sgds-margin-5-xl: var(--sgds-spacer-11);
+
+  --sgds-gutter-sm: var(--sgds-dimension-16);
+  --sgds-gutter-md: var(--sgds-dimension-24);
+  --sgds-gutter-lg: var(--sgds-dimension-32);
   
   --sgds-gap-none: var(--sgds-spacer-0);
   --sgds-gap-2-xs: var(--sgds-spacer-2);

@@ -163,14 +163,10 @@ a.card:not(.disabled):focus-visible {
 }
 
 .card-title {
-  --sgds-font-size-5: var(--sgds-font-size-4);
-  --sgds-font-size-6: var(--sgds-font-size-4);
- --sgds-margin-md: var(--sgds-margin-none);
-  --sgds-font-weight-bold: var(--sgds-font-weight-semibold);
   color: var(--sgds-body-color-default);
   font-size: var(--sgds-font-size-24) !important;
-  font-weight: var(--sgds-font-weight-semibold);
-  margin-bottom: var(--sgds-margin-none);
+  font-weight: var(--sgds-font-weight-semibold) !important;
+  margin-bottom: var(--sgds-margin-none) !important;
 }
 
 slot[name="subtitle"]::slotted(*) {

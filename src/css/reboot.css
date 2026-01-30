@@ -81,32 +81,32 @@ h6 {
 h1 {
   font-size: var(--sgds-font-size-heading-xl);
   line-height: var(--sgds-line-height-xl);
-  margin-bottom: var(--sgds-margin-xs);
+  margin-bottom: var(--sgds-margin-lg);
 }
 h2 {
   font-size: var(--sgds-font-size-heading-lg);
   line-height: var(--sgds-line-height-lg);
-  margin-bottom: var(--sgds-margin-2-xs);
+  margin-bottom: var(--sgds-margin-md);
 }
 h3 {
   font-size: var(--sgds-font-size-heading-md);
   line-height: var(--sgds-line-height-md);
-  margin-bottom: var(--sgds-margin-2-xs);
+  margin-bottom: var(--sgds-margin-md);
 }
 h4 {
   font-size: var(--sgds-font-size-heading-sm);
   line-height: var(--sgds-line-height-sm);
-  margin-bottom: var(--sgds-margin-2-xs);
+  margin-bottom: var(--sgds-margin-md);
 }
 h5 {
   font-size: var(--sgds-font-size-subtitle-md);
   line-height: var(--sgds-line-height-xs);
-   margin-bottom: var(--sgds-margin-xs);
+  margin-bottom: var(--sgds-margin-xs);
 }
 h6 {
   font-size: var(--sgds-font-size-subtitle-sm);
   line-height: var(--sgds-line-height-2-xs);
-   margin-bottom: var(--sgds-margin-xs);
+  margin-bottom: var(--sgds-margin-xs);
 }
 /* CAPTION */
 caption {
