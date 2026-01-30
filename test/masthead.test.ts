@@ -9,7 +9,7 @@ describe("sgds-masthead", () => {
     assert.shadowDom.equal(
       el,
       ` 
-    <div id="sgds-masthead" class="sgds-masthead" aria-label="A Singapore Government Agency Website. Beware of government impersonation scams." role="banner">
+    <div id="sgds-masthead" class="sgds-masthead" aria-label="A Singapore Government Agency Website" role="banner">
         <div class="banner">
           <div class="container">
             <div class="masthead-layout">
@@ -47,7 +47,7 @@ describe("sgds-masthead", () => {
                 />
               </svg>
               <div class="masthead-text-layout">
-                <span>A Singapore Government Agency Website. Beware of government impersonation scams.</span>
+                <span>A Singapore Government Agency Website</span>
                 <div
                   class="sgds-masthead-button"
                   id="sgds-masthead-identify"
@@ -151,32 +151,6 @@ describe("sgds-masthead", () => {
                       /></svg
                     >) or https:// as an added precaution. Share sensitive information only on official, secure
                     websites.
-                  </article>
-                </div>
-              </div>
-              <div class="wrapper">
-                <div class="icon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="17"
-                    height="16"
-                    viewBox="0 0 17 16"
-                    fill="none"
-                    class="banner-icon"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                      d="M8.33342 1.3335C12.0153 1.3335 15.0001 4.31826 15.0001 8.00016C15.0001 11.6821 12.0153 14.6668 8.33342 14.6668C4.65152 14.6668 1.66675 11.6821 1.66675 8.00016C1.66675 4.31826 4.65152 1.3335 8.33342 1.3335ZM8.33342 10.0002C7.96523 10.0002 7.66675 10.2986 7.66675 10.6668C7.66675 11.035 7.96523 11.3335 8.33342 11.3335C8.7016 11.3335 9.00008 11.035 9.00008 10.6668C9.00008 10.2986 8.7016 10.0002 8.33342 10.0002ZM8.33342 4.68311C8.01125 4.68311 7.75008 4.94492 7.75008 5.26709V8.66683C7.75026 8.98885 8.01136 9.25016 8.33342 9.25016C8.65547 9.25016 8.91657 8.98885 8.91675 8.66683V5.26709C8.91675 4.94492 8.65558 4.68311 8.33342 4.68311Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-                <div class="content">
-                  <div class="title">Scam alert</div>
-                  <article>
-                    Government officers will never ask you to send money or share your details over the phone. When
-                    unsure, hang up and call Scamshield at 1799.
                   </article>
                 </div>
               </div>
