@@ -21,9 +21,10 @@ export class SgdsSystemBannerItem extends SgdsElement {
 
   /** Disables the action link that appears when text content is clamped */
   @consume({ context: NoClampActionContext, subscribe: true })
-  
+
   /** When true, message text will be truncated with ellipsis only */
-  @property({ type: Boolean }) noClampAction = false;
+  @property({ type: Boolean })
+  noClampAction = false;
 
   @state() private clamped = false;
 
@@ -67,12 +68,13 @@ export class SgdsSystemBannerItem extends SgdsElement {
         <slot name="icon"></slot>
         <div class="banner-item__message_and__action">
           <div class="clamped-container">
-            <div class=${classMap({ message: true, truncated: this.clamped && !this.noClampAction})}>
+            <div class=${classMap({ message: true, truncated: this.clamped && !this.noClampAction })}>
               <slot></slot>
             </div>
             ${this.clamped && !this.noClampAction
               ? html`<span class="show-more"
-                  >...<a class="show-more__link" @click="${this._handleShowMoreClick}">show more</a></span>`
+                  >...<a class="show-more__link" @click="${this._handleShowMoreClick}">show more</a></span
+                >`
               : nothing}
           </div>
           ${this.hasActionSlot || this.siblingsCount > 1

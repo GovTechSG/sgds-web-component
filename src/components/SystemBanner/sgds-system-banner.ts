@@ -41,7 +41,8 @@ export class SgdsSystemBanner extends SgdsElement {
   @provide({ context: NoClampActionContext })
 
   /** When true, all its children SgdsSystemBannerItem's message will be truncated with ellipsis only */
-  @property({ type: Boolean }) noClampAction = false;
+  @property({ type: Boolean })
+  noClampAction = false;
 
   /** Closes the alert  */
   public close() {
