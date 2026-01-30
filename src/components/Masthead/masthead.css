@@ -40,6 +40,10 @@ a:hover {
   padding: 0.25rem var(--sgds-mainnav-padding-x, 2rem);
 }
 
+:host([fluid]) .container {
+  max-width: none;
+}
+
 .sg-crest {
   width: 20px;
   height: 20px;

@@ -56,6 +56,37 @@ describe('Calculator', () => {
 - Follow existing test file naming: `*.test.ts`, `*.spec.ts`, or `*.test.js`
 - Place tests in `tests/`, `__tests__/`, or co-located with source files
 
+**Lit Component Testing (Web Components):**
+When testing Lit components, focus on component-specific behavior, not Lit framework internals:
+
+✅ **DO TEST:**
+- Component-specific behavior (e.g., how props affect rendered output/CSS)
+- User interactions and event handling
+- DOM structure and rendered content
+- Component methods and custom logic
+
+❌ **DON'T TEST:**
+- Lit's reactive property system (property reflection, attribute syncing)
+- Property toggling (e.g., `element.prop = true; expect(element.hasAttribute('prop'))`)
+- Framework built-in functionality
+
+```typescript
+// ✅ GOOD: Test component-specific behavior
+it("when fluid is true, .navbar has no max-width constraint", async () => {
+  const el = await fixture<SgdsMainnav>(html`<sgds-mainnav fluid></sgds-mainnav>`);
+  const navbar = el.shadowRoot?.querySelector(".navbar") as HTMLElement;
+  expect(getComputedStyle(navbar).maxWidth).to.equal("none");
+});
+
+// ❌ BAD: Testing Lit's reactive properties (out of scope)
+it("can toggle fluid property", async () => {
+  const el = await fixture<SgdsMainnav>(html`<sgds-mainnav></sgds-mainnav>`);
+  el.fluid = true;
+  await el.updateComplete;
+  expect(el.hasAttribute("fluid")).to.be.true; // Testing framework behavior
+});
+```
+
 ### Go (testing package)
 
 Follow table-driven test patterns:

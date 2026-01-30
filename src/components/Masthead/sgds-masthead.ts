@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import mastheadStyle from "./masthead.css";
 import svgStyles from "../../styles/svg.css";
@@ -10,6 +10,10 @@ import anchorStyles from "../../styles/anchor.css";
  */
 export class SgdsMasthead extends SgdsElement {
   static styles = [...SgdsElement.styles, svgStyles, anchorStyles, mastheadStyle];
+
+  /** When true, removes max-width constraint to allow content to stretch full screen width */
+  @property({ type: Boolean, reflect: true })
+  fluid = false;
 
   /** @internal */
   @state()
