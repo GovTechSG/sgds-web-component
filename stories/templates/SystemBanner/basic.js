@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { ifDefined } from "lit/directives/if-defined.js";
+import { allModes } from "../../../.storybook/modes";
 
 export const Template = args => html`<sgds-system-banner ?dismissible=${args.dismissible} ?show=${args.show}>
   <sgds-system-banner-item>
@@ -35,4 +35,12 @@ export const args = {
   show: true
 };
 
-export const parameters = {};
+export const parameters = {
+  layout: "fullscreen",
+  chromatic: {
+    modes: {
+      mobile: allModes["sm"],
+      desktop: allModes["lg"]
+    }
+  }
+};
