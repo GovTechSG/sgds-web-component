@@ -107,27 +107,6 @@ const buildSgdsPackage = () => {
     }
   ];
 
-  const umdPlugins = [
-    resolve({
-      browser: true,
-      exportConditions: ["development"]
-    }),
-    replace({
-      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
-      preventAssignment: true
-    }),
-    postcss({
-      minimize: true,
-      inject: false
-    }),
-    litcss(),
-    typescript({
-      tsconfig: "tsconfig.json",
-      useTsconfigDeclarationDir: true
-    }),
-    visualizer()
-  ];
-
   const umdBundles = [
     // bundled form for cdn
     {
