@@ -1,0 +1,58 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--sgds-surface-default);
+  border-right: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+  overflow: hidden;
+  position: relative;
+  transition: width var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
+  padding: var(--sgds-padding-md) var(--sgds-padding-none);
+}
+
+.sidebar--expanded {
+  width: var(--sgds-dimension-280);
+}
+
+.sidebar--collapsed {
+  width: var(--sgds-dimension-72);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sgds-padding-xs);
+}
+
+.sidebar-header .brand-name {
+  padding-left: var(--sgds-padding-xs);
+}
+
+.sidebar--collapsed .brand-name {
+  display: none;
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sgds-padding-2-xs) var(--sgds-padding-none);
+}
+
+/* Scrollbar styling for better UX */
+.sidebar-content::-webkit-scrollbar {
+  width: var(--sgds-dimension-6);
+}
+
+.sidebar-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+  background: var(--sgds-border-color-muted);
+  border-radius: var(--sgds-border-radius-xs);
+}
+
+.sidebar-content::-webkit-scrollbar-thumb:hover {
+  background: var(--sgds-color-subtle);
+}

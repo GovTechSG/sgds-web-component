@@ -150,6 +150,8 @@ import Search from "./icons/search";
 import Send from "./icons/send";
 import SgCrest from "./icons/sg-crest";
 import Share from "./icons/share";
+import SidebarCollapse from "./icons/sidebar-collapse";
+import SidebarExpand from "./icons/sidebar-expand";
 import SlashCircle from "./icons/slash-circle";
 import SlashDivider from "./icons/slash-divider";
 import Sliders from "./icons/sliders";
@@ -350,6 +352,8 @@ export const iconRegistry = {
   send: Send,
   "sg-crest": SgCrest,
   share: Share,
+  "sidebar-collapse": SidebarCollapse,
+  "sidebar-expand": SidebarExpand,
   "slash-circle": SlashCircle,
   "slash-divider": SlashDivider,
   sliders: Sliders,

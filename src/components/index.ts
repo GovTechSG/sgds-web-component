@@ -45,6 +45,7 @@ export * from "./Select/sgds-select-option";
 export * from "./Sidenav/sgds-sidenav";
 export * from "./Sidenav/sgds-sidenav-item";
 export * from "./Sidenav/sgds-sidenav-link";
+export * from "./Sidebar/sgds-sidebar";
 export * from "./Skeleton/sgds-skeleton";
 export * from "./Spinner/sgds-spinner";
 export * from "./Stepper/sgds-stepper";
