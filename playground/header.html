@@ -14,9 +14,9 @@
   }
 </style>
 
-<h1 style="text-align: center; padding: 2rem;">Header Components Demo</h1>
+<h1>Header Components Demo</h1>
 
-<!-- Without Fluid -->
+<h2>Default</h2>
 <sgds-masthead></sgds-masthead>
 <sgds-mainnav>
   <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
@@ -33,18 +33,27 @@
   </sgds-mainnav-dropdown>
   <sgds-button slot="end">Login</sgds-button>
 </sgds-mainnav>
-<sgds-system-banner show>
+<sgds-system-banner show dismissible>
+  <sgds-system-banner-item>
+    <sgds-icon name="exclamation-circle" slot="icon"></sgds-icon>
+    This is a system banner message without fluid prop
+  </sgds-system-banner-item>
+  <sgds-system-banner-item>
+    <sgds-icon name="exclamation-circle" slot="icon"></sgds-icon>
+    This is a system banner message without fluid prop
+  </sgds-system-banner-item>
   <sgds-system-banner-item>
     <sgds-icon name="exclamation-circle" slot="icon"></sgds-icon>
     This is a system banner message without fluid prop
   </sgds-system-banner-item>
 </sgds-system-banner>
+<sgds-footer></sgds-footer>
 
 <div class="content-placeholder">
   Page content goes here. Notice the header components have max-width constraint.
 </div>
 
-<!-- With Fluid -->
+<h2>With Fluid</h2>
 <sgds-masthead fluid></sgds-masthead>
 <sgds-mainnav fluid>
   <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
@@ -61,12 +70,17 @@
   </sgds-mainnav-dropdown>
   <sgds-button slot="end">Login</sgds-button>
 </sgds-mainnav>
-<sgds-system-banner show fluid>
+<sgds-system-banner show fluid dismissible>
   <sgds-system-banner-item>
     <sgds-icon name="exclamation-circle" slot="icon"></sgds-icon>
-    This is a system banner message with fluid prop - stretches full width
+    1This is a system banner message with fluid prop - stretches full width
+  </sgds-system-banner-item>
+  <sgds-system-banner-item>
+    <sgds-icon name="exclamation-circle" slot="icon"></sgds-icon>
+    2This is a system banner message with fluid prop - stretches full width
   </sgds-system-banner-item>
 </sgds-system-banner>
+<sgds-footer></sgds-footer>
 
 <div class="content-placeholder">
   Page content goes here. Notice the header components stretch to full screen width.
