@@ -1,18 +1,16 @@
-import { html } from "lit";
-import { property } from "lit/decorators.js";
+import { html, nothing } from "lit";
+import { property, state, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import sidebarOptionStyle from "./sidebar-option.css";
+import SgdsSidebar from "./sgds-sidebar";
 
 /**
  * @summary Sidebar option represents a selectable or navigable item within the sidebar component.
  * It can be used to display menu items, navigation links, or other sidebar content options.
- * Supports nested options that display in a floating overlay when the parent option is hovered or focused.
  *
- * @slot - Insert any elements to be rendered as the option's content (label text).
- * @slot before - Insert content (typically an icon) to display before the label text.
- * @slot after - Insert content (typically an icon) to display after the label text.
- * @slot nested - Insert nested sidebar options that will appear in the floating overlay.
+ * @slot icon - Insert content (typically an icon) to display before the label text.
+ * @slot trailing-icon - Insert content (typically an icon) to display after the label text.
  */
 export class SgdsSidebarOption extends SgdsElement {
   static styles = [...SgdsElement.styles, sidebarOptionStyle];
@@ -24,30 +22,120 @@ export class SgdsSidebarOption extends SgdsElement {
    * @default false
    */
   @property({ type: Boolean, reflect: true }) selected = false;
-  @property({ type: String, reflect: true }) label = "";
+
+  /**
+   * The name identifier for the sidebar option.
+   * @type {string}
+   */
+  @property({ type: String }) name = "";
+
+  @state() private sidebarCollapsed = false;
+  @state() private hasNestedOptions = false;
+  @state() private isNested = false;
+  @state() private isFirstLevel = false;
+
+  @state() private showFirstLevel = false;
+
+  @queryAssignedElements({ flatten: true, selector: "sgds-sidebar-option" })
+  protected nestedItems: SgdsSidebarOption[];
 
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute("role", "option");
-    this.classList.add("sidebar-option");
+    this.detectParentSidebar();
+    this.observeSidebarChanges();
+    this.checkNestedOptions();
+    this.checkIfNested();
+    this.checkIfFirstLevel();
+  }
+
+  private checkIfNested() {
+    const parentOption = this.closest("sgds-sidebar-option");
+
+    console.log(parentOption);
+    this.isNested = parentOption !== null;
+  }
+
+  private checkNestedOptions() {
+    const nestedOptions = this.querySelectorAll(":scope > sgds-sidebar-option");
+    this.hasNestedOptions = nestedOptions.length > 0;
+  }
+
+  private detectParentSidebar() {
+    const sidebar = this.closest("sgds-sidebar");
+    if (sidebar) {
+      this.sidebarCollapsed = !(sidebar as SgdsSidebar).expanded;
+    }
+  }
+
+  private checkIfFirstLevel() {
+    const parent = this.parentElement;
+    console.log(parent.tagName);
+    if (parent.tagName.toLowerCase() === "sgds-sidebar-section") {
+      this.isFirstLevel = true;
+    }
+  }
+
+  private observeSidebarChanges() {
+    const sidebar = this.closest("sgds-sidebar");
+    if (sidebar) {
+      const observer = new MutationObserver(() => {
+        const isExpanded = (sidebar as SgdsSidebar).expanded;
+        this.sidebarCollapsed = !isExpanded;
+      });
+
+      observer.observe(sidebar, {
+        attributes: true,
+        attributeFilter: ["expanded"]
+      });
+    }
+  }
+
+  private _handleClick() {
+    if (this.isFirstLevel && this.hasNestedOptions) {
+      this.showFirstLevel = !this.showFirstLevel;
+      this.emit("sgds-select", { detail: { name: this.name, id: this.id } });
+    }
+  }
+
+  private _handleSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    const assignedElements = slot.assignedElements({ flatten: true });
+    const nestedOptions = assignedElements.filter(item => item.tagName.toLowerCase() === "sgds-sidebar-option");
+
+    if (nestedOptions.length > 0) {
+      this.hasNestedOptions = true;
+    }
   }
 
   render() {
-    const hasNestedSlot = this.querySelector('[slot="nested"]');
-
     return html`
       <div
-        class=${classMap({
-          "sidebar-option-content": true,
-          "sidebar-option-content--selected": this.selected,
-          "sidebar-option-content--has-nested": !!hasNestedSlot
-        })}
+        class=${classMap({ "sidebar-option": true, "sidebar-option--collapsed": this.sidebarCollapsed })}
+        @click=${this._handleClick}
       >
-        <div class="sidebar-option">
+        <div class="sidebar-option-label-wrapper">
           <slot name="icon"></slot>
-          ${this.label}
+          <span class="sidebar-option-label">${this.title}</span>
+
+          <span class="sidebar-option-trailing-icon">
+            ${this.hasNestedOptions
+              ? html`<sgds-icon name="chevron-right" size="sm"></sgds-icon>`
+              : html`<slot name="trailing-icon"></slot>`}
+          </span>
         </div>
       </div>
+
+      ${this.isFirstLevel && this.hasNestedOptions
+        ? html`<div
+            class=${classMap({
+              "sidebar-nested-overlay": true,
+              show: this.showFirstLevel
+            })}
+          >
+            <slot></slot>
+          </div>`
+        : nothing}
     `;
   }
 }

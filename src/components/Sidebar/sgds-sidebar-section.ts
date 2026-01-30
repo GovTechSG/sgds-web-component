@@ -1,5 +1,5 @@
 import { html, nothing } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import sidebarSectionStyle from "./sidebar-section.css";
@@ -30,8 +30,44 @@ export class SgdsSidebarSection extends SgdsElement {
    */
   @property({ type: Boolean, reflect: true }) collapsible = false;
 
+  @state() private isLastChild = false;
+  @state() private sidebarCollapsed = false;
+
   connectedCallback() {
     super.connectedCallback();
+    this.checkIfLastChild();
+    this.detectParentSidebar();
+    this.observeSidebarChanges();
+  }
+
+  private checkIfLastChild() {
+    const parent = this.parentElement;
+    if (parent) {
+      const siblings = Array.from(parent.children);
+      this.isLastChild = siblings[siblings.length - 1] === this;
+    }
+  }
+
+  private detectParentSidebar() {
+    const sidebar = this.closest("sgds-sidebar");
+    if (sidebar) {
+      this.sidebarCollapsed = !(sidebar as any).expanded;
+    }
+  }
+
+  private observeSidebarChanges() {
+    const sidebar = this.closest("sgds-sidebar");
+    if (sidebar) {
+      const observer = new MutationObserver(() => {
+        const isExpanded = (sidebar as any).expanded;
+        this.sidebarCollapsed = !isExpanded;
+      });
+
+      observer.observe(sidebar, {
+        attributes: true,
+        attributeFilter: ["expanded"]
+      });
+    }
   }
 
   /**
@@ -48,7 +84,9 @@ export class SgdsSidebarSection extends SgdsElement {
     return html`
       <div
         class=${classMap({
-          "sidebar-section": true
+          "sidebar-section": true,
+          "no-border": this.isLastChild,
+          "sidebar-section--collapsed": this.sidebarCollapsed
         })}
         tabindex=${this.collapsible ? 0 : -1}
       >

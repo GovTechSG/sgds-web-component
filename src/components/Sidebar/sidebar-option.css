@@ -1,88 +1,52 @@
-:host {
-  --option-padding: 12px;
-  --option-text-color: #1a1a1a;
-  --option-hover-bg: #f3f4f6;
-  --option-selected-bg: #e5e7eb;
-  --option-disabled-opacity: 0.5;
-  --option-transition: 200ms ease;
-}
-
-.sidebar-option-content {
-  display: flex;
-  flex-direction: column;
-  padding: var(--option-padding);
+.sidebar-option {
+  padding: var(--sgds-padding-xs);
   cursor: pointer;
-  color: var(--option-text-color);
-  transition: background-color var(--option-transition);
-  border: none;
-  background: transparent;
 }
 
-.sidebar-option-content:hover {
-  background-color: var(--option-hover-bg);
-}
-
-.sidebar-option-content--selected {
-  background-color: var(--option-selected-bg);
-  font-weight: 600;
-}
-
-.sidebar-option-content--disabled {
-  opacity: var(--option-disabled-opacity);
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.sidebar-option-main {
+.sidebar-option-label-wrapper {
   display: flex;
+  font-size: var(--sgds-font-size-1);
+  line-height: var(--sgds-line-height-20);
+  gap: var(--sgds-gap-sm);
   align-items: center;
-  gap: 8px;
-  width: 100%;
 }
 
-.sidebar-option-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-}
-
-.sidebar-option-before {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.sidebar-option-after {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-left: auto;
-}
-
-.sidebar-option-label {
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.sidebar-option-nested {
+.sidebar-option--collapsed .sidebar-option-label,
+.sidebar-option--collapsed .sidebar-option-trailing-icon {
   display: none;
 }
 
-.sidebar-option-content--has-nested .sidebar-option-nested {
-  display: block;
+.sidebar-option--collapsed .sidebar-option-label-wrapper {
+  justify-content: center;
 }
 
-/* Nested options styling */
-:host(.sidebar-option) .sidebar-option-nested ::slotted(*) {
-  padding: 8px 12px;
-  font-size: 13px;
+.sidebar-nested-overlay {
+  pointer-events: none;
+  position: fixed;
+  width: var(--sgds-dimension-280);
+  padding: var(--sgds-padding-md) var(--sgds-padding-xs);
+  background-color: var(--sgds-bg-default);
+  opacity: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+  width: var(--sgds-dimension-280);
+  transition: all var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
+  border-right: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+  transition-property: opacity left;
+}
+
+.sidebar-option--collapsed .sidebar-nested-overlay {
+  width: 0;
+  opacity: 0;
+  pointer-events: none;
+  left: var(--sgds-dimension-72);
+}
+
+.sidebar-nested-overlay.show {
+  pointer-events: auto;
+  opacity: 1;
+  left: var(--sgds-dimension-280);
+  z-index: 1100;
 }

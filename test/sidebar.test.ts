@@ -186,4 +186,49 @@ describe("<sgds-sidebar>", () => {
       expect(iconButton).to.have.attribute("name", "sidebar-expand");
     });
   });
+
+  describe("Collapse Behavior", () => {
+    it("should hide sidebar-option labels when sidebar is collapsed", async () => {
+      element.expanded = true;
+      await element.updateComplete;
+
+      const option = element.querySelector("sgds-sidebar-option") as any;
+      const optionLabel = option.shadowRoot?.querySelector(".sidebar-option-label");
+      let styles = window.getComputedStyle(optionLabel);
+      expect(styles.display).to.not.equal("none");
+
+      element.expanded = false;
+      await element.updateComplete;
+      await option.updateComplete;
+
+      styles = window.getComputedStyle(optionLabel);
+      expect(styles.display).to.equal("none");
+    });
+
+    it("should hide section title when sidebar is collapsed", async () => {
+      const sectionElement = (await fixture(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main">
+            <sgds-sidebar-option label="Dashboard"></sgds-sidebar-option>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `)) as any;
+
+      sectionElement.expanded = true;
+      await sectionElement.updateComplete;
+
+      const section = sectionElement.querySelector("sgds-sidebar-section") as any;
+      await section.updateComplete;
+      const sectionLabel = section.shadowRoot?.querySelector(".sidebar-section-label");
+      let styles = window.getComputedStyle(sectionLabel);
+      expect(styles.display).to.not.equal("none");
+
+      sectionElement.expanded = false;
+      await sectionElement.updateComplete;
+      await section.updateComplete;
+
+      styles = window.getComputedStyle(sectionLabel);
+      expect(styles.display).to.equal("none");
+    });
+  });
 });

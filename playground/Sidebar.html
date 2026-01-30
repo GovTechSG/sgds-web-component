@@ -50,87 +50,40 @@
         <div slot="brand-name">brand-name</div>
         <!-- Main Navigation Section -->
         <sgds-sidebar-section title="Main" expanded collapsible>
-          <sgds-sidebar-option selected label="Dashboard">
-            <sgds-icon name="placeholder" slot="icon"></sgds-icon>
+          <sgds-sidebar-option selected title="Dashboard">
+            <sgds-icon name="house" slot="icon"></sgds-icon>
+            <sgds-sidebar-option selected title="Summary">
+              <sgds-icon name="house" slot="icon"></sgds-icon
+            ></sgds-sidebar-option>
           </sgds-sidebar-option>
 
-          <sgds-sidebar-option label="Reports">
-            <sgds-icon name="placeholder" slot="icon"></sgds-icon>
-            <div slot="nested">
-              <sgds-sidebar-option label="Sales Report"></sgds-sidebar-option>
-              <sgds-sidebar-option label="Analytics Dashboard"></sgds-sidebar-option>
-              <sgds-sidebar-option label="Performance Metrics"></sgds-sidebar-option>
-            </div>
+          <sgds-sidebar-option title="Reports">
+            <sgds-icon name="file-text" slot="icon"></sgds-icon>
           </sgds-sidebar-option>
         </sgds-sidebar-section>
 
         <!-- Organization Section (Collapsible) -->
         <sgds-sidebar-section title="Organization" collapsible expanded>
-          <sgds-sidebar-option label="Team Management">
-            <sgds-icon name="placeholder" slot="icon"></sgds-icon>
-            <div slot="nested">
-              <sgds-sidebar-option label="Members">
-                <div slot="nested">
-                  <sgds-sidebar-option label="Active Members"></sgds-sidebar-option>
-                  <sgds-sidebar-option label="Inactive Members"></sgds-sidebar-option>
-                  <sgds-sidebar-option label="Pending Invites"></sgds-sidebar-option>
-                </div>
-              </sgds-sidebar-option>
-              <sgds-sidebar-option label="Roles & Permissions">
-                <div slot="nested">
-                  <sgds-sidebar-option label="Admin"></sgds-sidebar-option>
-                  <sgds-sidebar-option label="Editor"></sgds-sidebar-option>
-                  <sgds-sidebar-option label="Viewer"></sgds-sidebar-option>
-                </div>
-              </sgds-sidebar-option>
-              <sgds-sidebar-option label="Teams"></sgds-sidebar-option>
-            </div>
+          <sgds-sidebar-option title="Team Management">
+            <sgds-icon name="users" slot="icon"></sgds-icon>
           </sgds-sidebar-option>
 
-          <sgds-sidebar-option label="Projects">
-            <sgds-icon name="placeholder" slot="icon"></sgds-icon>
-            <div slot="nested">
-              <sgds-sidebar-option label="Active Projects">
-                <div slot="nested">
-                  <sgds-sidebar-option label="Project A"></sgds-sidebar-option>
-                  <sgds-sidebar-option label="Project B"></sgds-sidebar-option>
-                  <sgds-sidebar-option label="Project C"></sgds-sidebar-option>
-                </div>
-              </sgds-sidebar-option>
-              <sgds-sidebar-option label="Archived Projects">
-                <div slot="nested">
-                  <sgds-sidebar-option label="2024 Q1 Project"></sgds-sidebar-option>
-                  <sgds-sidebar-option label="2024 Q2 Project"></sgds-sidebar-option>
-                </div>
-              </sgds-sidebar-option>
-              <sgds-sidebar-option label="Templates"></sgds-sidebar-option>
-            </div>
+          <sgds-sidebar-option title="Projects">
+            <sgds-icon name="layers" slot="icon"></sgds-icon>
           </sgds-sidebar-option>
         </sgds-sidebar-section>
 
         <!-- Configuration Section (Collapsible) -->
         <sgds-sidebar-section title="Configuration" collapsible expanded>
-          <sgds-sidebar-option label="Settings">
-            <sgds-icon name="placeholder" slot="icon"></sgds-icon>
-            <div slot="nested">
-              <sgds-sidebar-option label="General"></sgds-sidebar-option>
-              <sgds-sidebar-option label="Privacy & Security">
-                <div slot="nested">
-                  <sgds-sidebar-option label="Data Protection"></sgds-sidebar-option>
-                  <sgds-sidebar-option label="Two-Factor Auth"></sgds-sidebar-option>
-                  <sgds-sidebar-option label="API Keys"></sgds-sidebar-option>
-                </div>
-              </sgds-sidebar-option>
-              <sgds-sidebar-option label="Integrations"></sgds-sidebar-option>
-              <sgds-sidebar-option label="Notifications"></sgds-sidebar-option>
-            </div>
+          <sgds-sidebar-option title="Settings">
+            <sgds-icon name="gear" slot="icon"></sgds-icon>
           </sgds-sidebar-option>
         </sgds-sidebar-section>
 
         <!-- Support Section -->
         <sgds-sidebar-section title="Support" expanded>
-          <sgds-sidebar-option label="Help & Support">
-            <sgds-icon name="placeholder" slot="icon"></sgds-icon>
+          <sgds-sidebar-option title="Help & Support">
+            <sgds-icon name="question-circle" slot="icon"></sgds-icon>
             <span
               slot="after"
               style="
@@ -149,8 +102,8 @@
             >
           </sgds-sidebar-option>
 
-          <sgds-sidebar-option label="Premium Features" disabled>
-            <sgds-icon name="placeholder" slot="icon"></sgds-icon>
+          <sgds-sidebar-option title="Premium Features" disabled>
+            <sgds-icon name="star" slot="icon"></sgds-icon>
           </sgds-sidebar-option>
         </sgds-sidebar-section>
       </sgds-sidebar>

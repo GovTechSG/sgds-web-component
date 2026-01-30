@@ -2,12 +2,11 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: var(--sgds-surface-default);
   border-right: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
-  overflow: hidden;
-  position: relative;
-  transition: width var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
+  overflow-x: visible;
+  transition: all var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
   padding: var(--sgds-padding-md) var(--sgds-padding-none);
+  background-color: var(--sgds-bg-default);
 }
 
 .sidebar--expanded {
@@ -27,6 +26,10 @@
 
 .sidebar-header .brand-name {
   padding-left: var(--sgds-padding-xs);
+}
+
+.sidebar--collapsed .sidebar-header {
+  justify-content: center;
 }
 
 .sidebar--collapsed .brand-name {
