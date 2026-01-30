@@ -1,9 +1,10 @@
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { allModes } from "../../../.storybook/modes";
 
-export const Template = ({ expand, brandHref, active, href, disabled, menuIsOpen, close, target }) => {
+export const Template = ({ expand, brandHref, active, href, disabled, menuIsOpen, close, target, fluid }) => {
   return html`
-    <sgds-mainnav expand=${ifDefined(expand)} brandHref=${ifDefined(brandHref)}>
+    <sgds-mainnav expand=${ifDefined(expand)} brandHref=${ifDefined(brandHref)} ?fluid=${fluid}>
       <img
         alt="sgds logo"
         width="130"
@@ -38,4 +39,12 @@ export const Template = ({ expand, brandHref, active, href, disabled, menuIsOpen
 
 export const args = {};
 
-export const parameters = {};
+export const parameters = {
+  layout: "fullscreen",
+  chromatic: {
+    modes: {
+      mobile: allModes["sm"],
+      desktop: allModes["lg"]
+    }
+  }
+};

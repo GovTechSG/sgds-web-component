@@ -37,6 +37,9 @@ export class SgdsSystemBanner extends SgdsElement {
   /** Enables a close button that allows the user to dismiss the alert. */
   @property({ type: Boolean, reflect: true }) dismissible = false;
 
+  /** When true, removes max-width constraint to allow content to stretch full screen width */
+  @property({ type: Boolean, reflect: true }) fluid = false;
+
   /** Closes the alert  */
   public close() {
     this.show = false;

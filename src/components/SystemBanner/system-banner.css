@@ -72,9 +72,12 @@ sgds-close-button {
   .banner{
     padding-left: var(--sgds-mainnav-padding-x);
     padding-right: var(--sgds-mainnav-padding-x);
-    max-width: var(--sgds-mainnav-max-width);
+    max-width: var(--sgds-mainnav-max-width, 1440px);
     margin: auto;
   }
 
 }
 
+:host([fluid]) .banner {
+  max-width: none;
+}

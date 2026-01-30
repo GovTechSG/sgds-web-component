@@ -23,8 +23,8 @@ a:hover {
 }
 
 .sgds-masthead {
-  line-height: 1rem;
-  font-size: 0.75rem;
+  line-height: 1.25rem;
+  font-size: 0.875rem;
   font-family: "Inter", system-ui, sans-serif;
 }
 
@@ -38,6 +38,10 @@ a:hover {
   margin-left: auto;
   margin-right: auto;
   padding: 0.25rem var(--sgds-mainnav-padding-x, 2rem);
+}
+
+:host([fluid]) .container {
+  max-width: none;
 }
 
 .sg-crest {
@@ -59,7 +63,7 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0 0.25rem;
+  gap: 0 0.75rem;
 }
 
 .sgds-masthead-identify-icon {
@@ -132,8 +136,8 @@ a:hover {
 }
 
 .banner-icon, .banner-icon-inline {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
 }
 
 .banner-icon path,
