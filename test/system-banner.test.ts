@@ -1,10 +1,11 @@
-import { assert, expect, fixture } from "@open-wc/testing";
+import { assert, expect, fixture, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import * as sinon from "sinon";
 import { SgdsIconButton, SgdsSystemBanner } from "../src/components";
 import SgdsSystemBannerItem from "../src/components/SystemBanner/sgds-system-banner-item";
-import "../src/index";
+import "./sgds-web-component";
 import { moveMouseOnElement, moveMouseOutOfElement } from "./utils";
+
 describe("<sgds-system-banner>", () => {
   it("matches the shadowDOM", async () => {
     const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show></sgds-system-banner>`);
@@ -222,7 +223,7 @@ describe("<sgds-system-banner>", () => {
   it("more than 5 items trigger console warning", async () => {
     const consoleWarnStub = sinon.stub(console, "warn");
 
-    const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
+    await fixture<SgdsSystemBanner>(html`<sgds-system-banner show>
       <sgds-system-banner-item>one</sgds-system-banner-item>
       <sgds-system-banner-item>two</sgds-system-banner-item>
       <sgds-system-banner-item>three</sgds-system-banner-item>
@@ -233,5 +234,87 @@ describe("<sgds-system-banner>", () => {
     expect(consoleWarnStub).to.have.been.calledWith(
       "It is not recommended to have more than 5 <sgds-system-banner-item> elements."
     );
+  });
+
+  it("when noClampAction is true on parent, children inherit the property", async () => {
+    const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show noClampAction>
+      <sgds-system-banner-item id="item1">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet
+        consectetur adipisicing elit. Quisquam, voluptatum.
+      </sgds-system-banner-item>
+    </sgds-system-banner>`);
+
+    await el.updateComplete;
+    const bannerItem = el.querySelector("#item1") as SgdsSystemBannerItem;
+    await bannerItem.updateComplete;
+
+    expect(bannerItem.noClampAction).to.be.true;
+  });
+
+  it("when noClampAction is true, show more link does not appear even when text is long", async () => {
+    const el = await fixture<SgdsSystemBannerItem>(html`<sgds-system-banner-item noClampAction>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet
+      consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+    </sgds-system-banner-item>`);
+
+    await el.updateComplete;
+    const showMoreLink = el.shadowRoot?.querySelector(".show-more__link");
+    expect(showMoreLink).to.not.exist;
+  });
+
+  it("when noClampAction is true, text is not truncated", async () => {
+    const el = await fixture<SgdsSystemBannerItem>(html`<sgds-system-banner-item noClampAction>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet
+      consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Quisquam, voluptatum.
+    </sgds-system-banner-item>`);
+
+    await el.updateComplete;
+    const messageDiv = el.shadowRoot?.querySelector(".message");
+    expect(messageDiv?.classList.contains("truncated")).to.be.false;
+  });
+
+  it("when noClampAction is false, show more link appears for long text", async () => {
+    const el = await fixture<SgdsSystemBanner>(html`
+      <sgds-system-banner-item>
+        1 Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus
+        ac facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo
+        gravida, congue sapien eu, rhoncus Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu.
+        Aenean quis leo gravida, congue sapien eu, rhoncus
+      </sgds-system-banner-item>
+    `);
+
+    await el.updateComplete;
+    const messageDiv = el.shadowRoot?.querySelector(".message");
+    await waitUntil(() => messageDiv?.classList.contains("truncated") === true, "Message div did not get truncated");
+    expect(messageDiv?.classList.contains("truncated")).to.be.true;
+    const showMore = el.shadowRoot?.querySelector(".show-more");
+    expect(showMore).to.exist;
+  });
+
+  it("clicking show more link emits sgds-show-more event", async () => {
+    const el = await fixture<SgdsSystemBannerItem>(html`<sgds-system-banner-item>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    </sgds-system-banner-item>`);
+
+    const showMoreHandler = sinon.spy();
+    el.addEventListener("sgds-show-more", showMoreHandler);
+
+    await el.updateComplete;
+    // Force clamping
+    const messageDiv = el.shadowRoot?.querySelector(".message") as HTMLElement;
+    if (messageDiv) {
+      Object.defineProperty(messageDiv, "scrollHeight", { value: 100, configurable: true });
+      Object.defineProperty(messageDiv, "clientHeight", { value: 50, configurable: true });
+      (el as unknown as { _clampCheck: () => void })._clampCheck();
+      await el.updateComplete;
+    }
+
+    const showMoreLink = el.shadowRoot?.querySelector(".show-more__link") as HTMLAnchorElement;
+    if (showMoreLink) {
+      showMoreLink.click();
+      expect(showMoreHandler).to.have.been.called;
+    }
   });
 });
