@@ -1,9 +1,8 @@
-:host{
+.banner-wrapper {
   display: block;
   width: 100%;
   background-color: var(--sgds-surface-fixed-dark);
 }
-
 .banner {
   display: flex;
   flex-direction: row;

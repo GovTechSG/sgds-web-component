@@ -156,44 +156,46 @@ export class SgdsSystemBanner extends SgdsElement {
   }
   render() {
     return html`
-      <div
-        class="${classMap({
-          banner: true
-        })}"
-        role="alert"
-        aria-hidden=${this.show ? "false" : "true"}
-      >
-        <div class="content">
-          <slot id="loop-slot"></slot>
+      <div class="banner-wrapper">
+        <div
+          class="${classMap({
+            banner: true
+          })}"
+          role="alert"
+          aria-hidden=${this.show ? "false" : "true"}
+        >
+          <div class="content">
+            <slot id="loop-slot"></slot>
+          </div>
+          ${this.childCount > 1
+            ? html` <div class="pagination">
+                <sgds-icon-button
+                  name="chevron-left"
+                  tone="fixed-light"
+                  variant="ghost"
+                  size="xs"
+                  @click=${this._prev}
+                ></sgds-icon-button>
+                <span>${this._currentIndex + 1}/${this.childCount}</span>
+                <sgds-icon-button
+                  name="chevron-right"
+                  tone="fixed-light"
+                  variant="ghost"
+                  size="xs"
+                  @click=${this._next}
+                ></sgds-icon-button>
+              </div>`
+            : nothing}
+          ${this.dismissible
+            ? html`
+                <sgds-close-button
+                  aria-label="close the alert"
+                  @click=${this.close}
+                  tone="fixed-light"
+                ></sgds-close-button>
+              `
+            : nothing}
         </div>
-        ${this.childCount > 1
-          ? html` <div class="pagination">
-              <sgds-icon-button
-                name="chevron-left"
-                tone="fixed-light"
-                variant="ghost"
-                size="xs"
-                @click=${this._prev}
-              ></sgds-icon-button>
-              <span>${this._currentIndex + 1}/${this.childCount}</span>
-              <sgds-icon-button
-                name="chevron-right"
-                tone="fixed-light"
-                variant="ghost"
-                size="xs"
-                @click=${this._next}
-              ></sgds-icon-button>
-            </div>`
-          : nothing}
-        ${this.dismissible
-          ? html`
-              <sgds-close-button
-                aria-label="close the alert"
-                @click=${this.close}
-                tone="fixed-light"
-              ></sgds-close-button>
-            `
-          : nothing}
       </div>
     `;
   }
