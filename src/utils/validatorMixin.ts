@@ -39,6 +39,8 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
 
       if (this._mixinShouldSkipSgdsValidation()) return;
 
+      this._mixinSetFormValue();
+
       this._mixinValidate(this.input);
     }
 
