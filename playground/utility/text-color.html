@@ -1,0 +1,174 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<style>
+  body {
+    background-color: var(--sgds-bg-default);
+    color: var(--sgds-color-default);
+  }
+  code {
+    background-color: var(--sgds-surface-raised);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+  }
+  .dark-bg {
+    background-color: var(--sgds-bg-fixed-dark);
+    padding: 8px;
+  }
+  .light-bg {
+    background-color: var(--sgds-bg-fixed-light);
+    padding: 8px;
+  }
+</style>
+
+<body class="sgds:p-2-xl">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Text Colors</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+  
+  <section class="sgds:mb-2-xl">
+    <h2>Basic Text Colors</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:text-default</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-color-default</code></sgds-table-cell>
+        <sgds-table-cell><span class="sgds:text-default">Standard text color that adapts to theme</span></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:text-subtle</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-color-subtle</code></sgds-table-cell>
+        <sgds-table-cell><span class="sgds:text-subtle">De-emphasized text for secondary information</span></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:text-muted</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-color-muted</code></sgds-table-cell>
+        <sgds-table-cell><span class="sgds:text-muted">Further de-emphasized text for tertiary content</span></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:text-inverse</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-color-inverse</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:bg-surface-inverse sgds:p-md"><span class="sgds:text-inverse">Text that contrasts with inverted backgrounds</span></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:text-transparent</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-color-transparent</code></sgds-table-cell>
+        <sgds-table-cell><span class="sgds:text-transparent">Fully transparent text (invisible)</span></sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Fixed Text Colors</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:text-fixed-light</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-color-fixed-light</code></sgds-table-cell>
+        <sgds-table-cell><div class="dark-bg"><span class="sgds:text-fixed-light">Always light text (shown on dark background)</span></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:text-fixed-dark</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-color-fixed-dark</code></sgds-table-cell>
+        <sgds-table-cell><div class="light-bg"><span class="sgds:text-fixed-dark">Always dark text (shown on light background)</span></div></sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Primary Text Colors</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:text-primary-default</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-primary-color-default</code></sgds-table-cell>
+        <sgds-table-cell><span class="sgds:text-primary-default">Standard primary text color</span></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:text-primary-emphasis</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-primary-color-emphasis</code></sgds-table-cell>
+        <sgds-table-cell><span class="sgds:text-primary-emphasis">Emphasized primary text</span></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:text-primary-fixed-light</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-primary-color-fixed-light</code></sgds-table-cell>
+        <sgds-table-cell><div class="dark-bg"><span class="sgds:text-primary-fixed-light">Always light primary text (on dark bg)</span></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:text-primary-fixed-dark</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-primary-color-fixed-dark</code></sgds-table-cell>
+        <sgds-table-cell><div class="light-bg"><span class="sgds:text-primary-fixed-dark">Always dark primary text (on light bg)</span></div></sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section>
+    <h2>Combined Examples</h2>
+    
+    <div class="sgds:bg-surface-raised sgds:p-lg sgds:mb-md">
+      <h3 class="sgds:text-default sgds:mb-sm">Card with Default Text</h3>
+      <p class="sgds:text-subtle sgds:mb-sm">This is subtle text for secondary information like descriptions or metadata.</p>
+      <p class="sgds:text-muted">This is muted text for tertiary content or less important details.</p>
+    </div>
+
+    <div class="sgds:bg-surface-inverse sgds:p-lg sgds:mb-md">
+      <h3 class="sgds:text-inverse sgds:mb-sm">Inverse Surface with Inverse Text</h3>
+      <p class="sgds:text-fixed-light">Fixed light text ensures readability on dark surfaces regardless of theme.</p>
+    </div>
+
+    <div class="sgds:bg-surface-raised sgds:p-lg sgds:mb-md">
+      <h3 class="sgds:text-default sgds:mb-sm">Text Hierarchy Example</h3>
+      <p class="sgds:text-default sgds:mb-sm">
+        <strong>Primary content</strong> uses default text color for maximum readability.
+      </p>
+      <p class="sgds:text-subtle sgds:mb-sm">
+        Secondary information uses subtle text to create visual hierarchy.
+      </p>
+      <p class="sgds:text-muted">
+        Tertiary or supplementary details use muted text.
+      </p>
+    </div>
+
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Alert-like Component</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <h4 class="sgds:text-default">Alert Title</h4>
+        <p class="sgds:text-subtle sgds:mb-sm">This is the main alert message using subtle text.</p>
+        <p class="sgds:text-muted">Additional context or details in muted text.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const nightBtn = document.querySelector("#night-theme");
+    nightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const html = document.querySelector("html");
+      if (html.classList.contains("sgds-night-theme")) {
+        html.classList.remove("sgds-night-theme");
+      } else {
+        html.classList.add("sgds-night-theme");
+      }
+    });
+  </script>
+</body>

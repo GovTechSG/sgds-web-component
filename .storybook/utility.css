@@ -5,6 +5,11 @@
     --sgds-spacing: 4px;
     --sgds-spacing-2-xl: var(--sgds-spacer-8);
     --sgds-background-color-translucent-subtle: var(--sgds-bg-translucent-subtle);
+    --sgds-text-color-default: var(--sgds-color-default);
+    --sgds-text-color-subtle: var(--sgds-color-subtle);
+    --sgds-text-color-muted: var(--sgds-color-muted);
+    --sgds-text-color-inverse: var(--sgds-color-inverse);
+    --sgds-text-color-fixed-light: var(--sgds-color-fixed-light);
     --sgds-font-weight-regular: var(--sgds-font-weight-regular);
     --sgds-font-weight-bold: var(--sgds-font-weight-bold);
     --sgds-font-weight-light: var(--sgds-font-weight-light);
@@ -52,6 +57,21 @@
   }
   .sgds\:py-2-xl {
     padding-block: var(--sgds-spacing-2-xl);
+  }
+  .sgds\:text-default {
+    color: var(--sgds-text-color-default);
+  }
+  .sgds\:text-fixed-light {
+    color: var(--sgds-text-color-fixed-light);
+  }
+  .sgds\:text-inverse {
+    color: var(--sgds-text-color-inverse);
+  }
+  .sgds\:text-muted {
+    color: var(--sgds-text-color-muted);
+  }
+  .sgds\:text-subtle {
+    color: var(--sgds-text-color-subtle);
   }
   .sgds\:md\:w-68 {
     @media (width >= 768px) {

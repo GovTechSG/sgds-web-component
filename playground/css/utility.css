@@ -3,8 +3,53 @@
 @layer theme {
   :root, :host {
     --sgds-spacing: 4px;
+    --sgds-spacing-sm: var(--sgds-spacer-4);
+    --sgds-spacing-md: var(--sgds-spacer-5);
+    --sgds-spacing-lg: var(--sgds-spacer-6);
+    --sgds-spacing-xl: var(--sgds-spacer-7);
     --sgds-spacing-2-xl: var(--sgds-spacer-8);
+    --sgds-background-color-default: var(--sgds-bg-default);
+    --sgds-background-color-alternate: var(--sgds-bg-alternate);
+    --sgds-background-color-fixed-light: var(--sgds-bg-fixed-light);
+    --sgds-background-color-fixed-dark: var(--sgds-bg-fixed-dark);
+    --sgds-background-color-overlay: var(--sgds-bg-overlay);
+    --sgds-background-color-translucent: var(--sgds-bg-translucent);
     --sgds-background-color-translucent-subtle: var(--sgds-bg-translucent-subtle);
+    --sgds-background-color-translucent-inverse: var(--sgds-bg-translucent-inverse);
+    --sgds-background-color-translucent-fixed-dark: var(--sgds-bg-translucent-fixed-dark);
+    --sgds-background-color-translucent-fixed-light: var(--sgds-bg-translucent-fixed-light);
+    --sgds-background-color-surface-default: var(--sgds-surface-default);
+    --sgds-background-color-surface-raised: var(--sgds-surface-raised);
+    --sgds-background-color-surface-inverse: var(--sgds-surface-inverse);
+    --sgds-background-color-surface-fixed-light: var(--sgds-surface-fixed-light);
+    --sgds-background-color-surface-fixed-dark: var(--sgds-surface-fixed-dark);
+    --sgds-text-color-default: var(--sgds-color-default);
+    --sgds-text-color-subtle: var(--sgds-color-subtle);
+    --sgds-text-color-muted: var(--sgds-color-muted);
+    --sgds-text-color-inverse: var(--sgds-color-inverse);
+    --sgds-text-color-fixed-light: var(--sgds-color-fixed-light);
+    --sgds-text-color-fixed-dark: var(--sgds-color-fixed-dark);
+    --sgds-border-color-default: var(--sgds-border-color-default);
+    --sgds-border-color-emphasis: var(--sgds-border-color-emphasis);
+    --sgds-border-color-muted: var(--sgds-border-color-muted);
+    --sgds-border-color-fixed-light: var(--sgds-border-color-fixed-light);
+    --sgds-border-color-fixed-dark: var(--sgds-border-color-fixed-dark);
+    --sgds-border-color-translucent: var(--sgds-border-color-translucent);
+    --sgds-border-color-transparent: var(--sgds-border-color-transparent);
+    --sgds-background-color-primary-default: var(--sgds-primary-bg-default);
+    --sgds-background-color-primary-muted: var(--sgds-primary-bg-muted);
+    --sgds-background-color-primary-translucent: var(--sgds-primary-bg-translucent);
+    --sgds-background-color-primary-surface-default: var(--sgds-primary-surface-default);
+    --sgds-background-color-primary-surface-emphasis: var(--sgds-primary-surface-emphasis);
+    --sgds-background-color-primary-surface-muted: var(--sgds-primary-surface-muted);
+    --sgds-background-color-primary-surface-translucent: var(--sgds-primary-surface-translucent);
+    --sgds-text-color-primary-default: var(--sgds-primary-color-default);
+    --sgds-text-color-primary-emphasis: var(--sgds-primary-color-emphasis);
+    --sgds-text-color-primary-fixed-light: var(--sgds-primary-color-fixed-light);
+    --sgds-text-color-primary-fixed-dark: var(--sgds-primary-color-fixed-dark);
+    --sgds-border-color-primary-default: var(--sgds-primary-border-color-default);
+    --sgds-border-color-primary-emphasis: var(--sgds-primary-border-color-emphasis);
+    --sgds-border-color-primary-muted: var(--sgds-primary-border-color-muted);
     --sgds-font-weight-regular: var(--sgds-font-weight-regular);
     --sgds-font-weight-bold: var(--sgds-font-weight-bold);
     --sgds-font-weight-light: var(--sgds-font-weight-light);
@@ -19,6 +64,18 @@
   }
   .sgds\:top-27 {
     top: calc(var(--sgds-spacing) * 27);
+  }
+  .sgds\:my-md {
+    margin-block: var(--sgds-spacing-md);
+  }
+  .sgds\:mb-2-xl {
+    margin-bottom: var(--sgds-spacing-2-xl);
+  }
+  .sgds\:mb-md {
+    margin-bottom: var(--sgds-spacing-md);
+  }
+  .sgds\:mb-sm {
+    margin-bottom: var(--sgds-spacing-sm);
   }
   .sgds\:flex {
     display: flex;
@@ -44,14 +101,164 @@
   .sgds\:flex-row {
     flex-direction: row;
   }
+  .sgds\:items-center {
+    align-items: center;
+  }
+  .sgds\:justify-between {
+    justify-content: space-between;
+  }
   .sgds\:overflow-y-scroll {
     overflow-y: scroll;
+  }
+  .sgds\:border-default {
+    border-color: var(--sgds-border-color-default);
+  }
+  .sgds\:border-emphasis {
+    border-color: var(--sgds-border-color-emphasis);
+  }
+  .sgds\:border-fixed-dark {
+    border-color: var(--sgds-border-color-fixed-dark);
+  }
+  .sgds\:border-fixed-light {
+    border-color: var(--sgds-border-color-fixed-light);
+  }
+  .sgds\:border-muted {
+    border-color: var(--sgds-border-color-muted);
+  }
+  .sgds\:border-primary-default {
+    border-color: var(--sgds-border-color-primary-default);
+  }
+  .sgds\:border-primary-emphasis {
+    border-color: var(--sgds-border-color-primary-emphasis);
+  }
+  .sgds\:border-primary-muted {
+    border-color: var(--sgds-border-color-primary-muted);
+  }
+  .sgds\:border-translucent {
+    border-color: var(--sgds-border-color-translucent);
+  }
+  .sgds\:border-transparent {
+    border-color: transparent;
+  }
+  .sgds\:bg-alternate {
+    background-color: var(--sgds-background-color-alternate);
+  }
+  .sgds\:bg-default {
+    background-color: var(--sgds-background-color-default);
+  }
+  .sgds\:bg-fixed-dark {
+    background-color: var(--sgds-background-color-fixed-dark);
+  }
+  .sgds\:bg-fixed-light {
+    background-color: var(--sgds-background-color-fixed-light);
+  }
+  .sgds\:bg-overlay {
+    background-color: var(--sgds-background-color-overlay);
+  }
+  .sgds\:bg-primary-default {
+    background-color: var(--sgds-background-color-primary-default);
+  }
+  .sgds\:bg-primary-muted {
+    background-color: var(--sgds-background-color-primary-muted);
+  }
+  .sgds\:bg-primary-surface-default {
+    background-color: var(--sgds-background-color-primary-surface-default);
+  }
+  .sgds\:bg-primary-surface-emphasis {
+    background-color: var(--sgds-background-color-primary-surface-emphasis);
+  }
+  .sgds\:bg-primary-surface-muted {
+    background-color: var(--sgds-background-color-primary-surface-muted);
+  }
+  .sgds\:bg-primary-surface-translucent {
+    background-color: var(--sgds-background-color-primary-surface-translucent);
+  }
+  .sgds\:bg-primary-translucent {
+    background-color: var(--sgds-background-color-primary-translucent);
+  }
+  .sgds\:bg-surface-default {
+    background-color: var(--sgds-background-color-surface-default);
+  }
+  .sgds\:bg-surface-fixed-dark {
+    background-color: var(--sgds-background-color-surface-fixed-dark);
+  }
+  .sgds\:bg-surface-fixed-light {
+    background-color: var(--sgds-background-color-surface-fixed-light);
+  }
+  .sgds\:bg-surface-inverse {
+    background-color: var(--sgds-background-color-surface-inverse);
+  }
+  .sgds\:bg-surface-raised {
+    background-color: var(--sgds-background-color-surface-raised);
+  }
+  .sgds\:bg-translucent {
+    background-color: var(--sgds-background-color-translucent);
+  }
+  .sgds\:bg-translucent-fixed-dark {
+    background-color: var(--sgds-background-color-translucent-fixed-dark);
+  }
+  .sgds\:bg-translucent-fixed-light {
+    background-color: var(--sgds-background-color-translucent-fixed-light);
+  }
+  .sgds\:bg-translucent-inverse {
+    background-color: var(--sgds-background-color-translucent-inverse);
   }
   .sgds\:bg-translucent-subtle {
     background-color: var(--sgds-background-color-translucent-subtle);
   }
+  .sgds\:bg-transparent {
+    background-color: transparent;
+  }
+  .sgds\:p-2-xl {
+    padding: var(--sgds-spacing-2-xl);
+  }
+  .sgds\:p-lg {
+    padding: var(--sgds-spacing-lg);
+  }
+  .sgds\:p-md {
+    padding: var(--sgds-spacing-md);
+  }
+  .sgds\:p-sm {
+    padding: var(--sgds-spacing-sm);
+  }
+  .sgds\:p-xl {
+    padding: var(--sgds-spacing-xl);
+  }
   .sgds\:py-2-xl {
     padding-block: var(--sgds-spacing-2-xl);
+  }
+  .sgds\:text-default {
+    color: var(--sgds-text-color-default);
+  }
+  .sgds\:text-fixed-dark {
+    color: var(--sgds-text-color-fixed-dark);
+  }
+  .sgds\:text-fixed-light {
+    color: var(--sgds-text-color-fixed-light);
+  }
+  .sgds\:text-inverse {
+    color: var(--sgds-text-color-inverse);
+  }
+  .sgds\:text-muted {
+    color: var(--sgds-text-color-muted);
+  }
+  .sgds\:text-primary-default {
+    color: var(--sgds-text-color-primary-default);
+  }
+  .sgds\:text-primary-emphasis {
+    color: var(--sgds-text-color-primary-emphasis);
+  }
+  .sgds\:text-primary-fixed-dark {
+    color: var(--sgds-text-color-primary-fixed-dark);
+  }
+  .sgds\:text-primary-fixed-light {
+    color: var(--sgds-text-color-primary-fixed-light);
+  }
+  .sgds\:text-subtle {
+    color: var(--sgds-text-color-subtle);
+  }
+  .sgds\:text-transparent {
+    color: transparent;
   }
   .sgds\:md\:w-68 {
     @media (width >= 768px) {

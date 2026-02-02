@@ -40,7 +40,45 @@
   --background-color-translucent-inverse: var(--sgds-bg-translucent-inverse);
   --background-color-translucent-fixed-dark: var(--sgds-bg-translucent-fixed-dark);
   --background-color-translucent-fixed-light: var(--sgds-bg-translucent-fixed-light);
+  --background-color-surface-default: var(--sgds-surface-default);
+  --background-color-surface-raised: var(--sgds-surface-raised);
+  --background-color-surface-inverse: var(--sgds-surface-inverse);
+  --background-color-surface-fixed-light: var(--sgds-surface-fixed-light);
+  --background-color-surface-fixed-dark: var(--sgds-surface-fixed-dark);
+
+  /* Semantic text colors */
+  --text-color-default: var(--sgds-color-default);
+  --text-color-subtle: var(--sgds-color-subtle);
+  --text-color-muted: var(--sgds-color-muted);
+  --text-color-inverse: var(--sgds-color-inverse);
+  --text-color-fixed-light: var(--sgds-color-fixed-light);
+  --text-color-fixed-dark: var(--sgds-color-fixed-dark);
+  --text-color-transparent: var(--sgds-color-transparent);
+
+  /* Semantic border colors */
+  --border-color-default: var(--sgds-border-color-default);
+  --border-color-emphasis: var(--sgds-border-color-emphasis);
+  --border-color-muted: var(--sgds-border-color-muted);
+  --border-color-fixed-light: var(--sgds-border-color-fixed-light);
+  --border-color-fixed-dark: var(--sgds-border-color-fixed-dark);
+  --border-color-translucent: var(--sgds-border-color-translucent);
+  --border-color-transparent: var(--sgds-border-color-transparent);
   
+  /* Semantic - Primary Colors */
+  --background-color-primary-default: var(--sgds-primary-bg-default);
+  --background-color-primary-muted: var(--sgds-primary-bg-muted);
+  --background-color-primary-translucent: var(--sgds-primary-bg-translucent);
+  --background-color-primary-surface-default: var(--sgds-primary-surface-default);
+  --background-color-primary-surface-emphasis: var(--sgds-primary-surface-emphasis);
+  --background-color-primary-surface-muted: var(--sgds-primary-surface-muted);
+  --background-color-primary-surface-translucent: var(--sgds-primary-surface-translucent);
+  --text-color-primary-default: var(--sgds-primary-color-default);
+  --text-color-primary-emphasis: var(--sgds-primary-color-emphasis);
+  --text-color-primary-fixed-light: var(--sgds-primary-color-fixed-light);
+  --text-color-primary-fixed-dark: var(--sgds-primary-color-fixed-dark);
+  --border-color-primary-default: var(--sgds-primary-border-color-default);
+  --border-color-primary-emphasis: var(--sgds-primary-border-color-emphasis);
+  --border-color-primary-muted: var(--sgds-primary-border-color-muted);
 
   --radius-none: var(--sgds-border-radius-none);
   --radius-xs: var(--sgds-border-radius-xs);

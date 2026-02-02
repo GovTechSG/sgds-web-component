@@ -1,0 +1,176 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<style>
+  body {
+    background-color: var(--sgds-bg-default);
+    color: var(--sgds-color-default);
+  }
+  .border-demo {
+    border-width: 2px;
+    border-style: solid;
+  }
+  code {
+    background-color: var(--sgds-surface-raised);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+  }
+</style>
+
+<body class="sgds:p-2-xl">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Border Colors</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+  
+  <section class="sgds:mb-2-xl">
+    <h2>Basic Border Colors</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:border-default</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-border-color-default</code></sgds-table-cell>
+        <sgds-table-cell><div class="border-demo sgds:border-default sgds:p-md">Standard border color</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:border-emphasis</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-border-color-emphasis</code></sgds-table-cell>
+        <sgds-table-cell><div class="border-demo sgds:border-emphasis sgds:p-md">Emphasized border for focus states</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:border-muted</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-border-color-muted</code></sgds-table-cell>
+        <sgds-table-cell><div class="border-demo sgds:border-muted sgds:p-md">Subtle border for minimal separation</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:border-transparent</code></sgds-table-cell>
+        <sgds-table-cell><code>transparent</code></sgds-table-cell>
+        <sgds-table-cell><div class="border-demo sgds:border-transparent sgds:p-md">Fully transparent border</div></sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Fixed Border Colors</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:border-fixed-light</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-border-color-fixed-light</code></sgds-table-cell>
+        <sgds-table-cell><div class="border-demo sgds:border-fixed-light sgds:bg-fixed-dark sgds:text-fixed-light sgds:p-md">Always light border (on dark bg)</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:border-fixed-dark</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-border-color-fixed-dark</code></sgds-table-cell>
+        <sgds-table-cell><div class="border-demo sgds:border-fixed-dark sgds:bg-fixed-light sgds:text-fixed-dark sgds:p-md">Always dark border (on light bg)</div></sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Translucent Border</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:border-translucent</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-border-color-translucent</code></sgds-table-cell>
+        <sgds-table-cell><div class="border-demo sgds:border-translucent sgds:p-md">Semi-transparent border</div></sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Primary Border Colors</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:border-primary-default</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-primary-border-color-default</code></sgds-table-cell>
+        <sgds-table-cell><div class="border-demo sgds:border-primary-default sgds:p-md">Standard primary border</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:border-primary-emphasis</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-primary-border-color-emphasis</code></sgds-table-cell>
+        <sgds-table-cell><div class="border-demo sgds:border-primary-emphasis sgds:p-md">Emphasized primary border for focus</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code>sgds:border-primary-muted</code></sgds-table-cell>
+        <sgds-table-cell><code>--sgds-primary-border-color-muted</code></sgds-table-cell>
+        <sgds-table-cell><div class="border-demo sgds:border-primary-muted sgds:p-md">Subtle primary border</div></sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section>
+    <h2>Combined Examples</h2>
+    
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Card with Default Border</h3>
+      <div class="border-demo sgds:border-default sgds:bg-surface-raised sgds:p-lg">
+        <h4 class="sgds:text-default">Card Title</h4>
+        <p class="sgds:text-subtle">A card with a default border color that adapts to the theme.</p>
+      </div>
+    </div>
+
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Input-like Component with Emphasis Border</h3>
+      <div class="border-demo sgds:border-emphasis sgds:bg-surface-default sgds:p-md">
+        Focus state with emphasis border
+      </div>
+    </div>
+
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Divider with Muted Border</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <p>Content section 1</p>
+        <hr class="sgds:border-muted sgds:my-md" style="border-width: 1px; border-style: solid; border-bottom: none;">
+        <p>Content section 2</p>
+      </div>
+    </div>
+
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Mixed Border Styles</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <div class="border-demo sgds:border-default sgds:p-md sgds:mb-sm">Default border</div>
+        <div class="border-demo sgds:border-emphasis sgds:p-md sgds:mb-sm">Emphasis border</div>
+        <div class="border-demo sgds:border-muted sgds:p-md">Muted border</div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const nightBtn = document.querySelector("#night-theme");
+    nightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const html = document.querySelector("html");
+      if (html.classList.contains("sgds-night-theme")) {
+        html.classList.remove("sgds-night-theme");
+      } else {
+        html.classList.add("sgds-night-theme");
+      }
+    });
+  </script>
+</body>
