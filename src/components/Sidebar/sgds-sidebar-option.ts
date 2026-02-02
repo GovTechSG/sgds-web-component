@@ -4,6 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import sidebarOptionStyle from "./sidebar-option.css";
 import SgdsSidebar from "./sgds-sidebar";
+import { watch } from "../../utils/watch";
 
 /**
  * @summary Sidebar option represents a selectable or navigable item within the sidebar component.
@@ -27,14 +28,40 @@ export class SgdsSidebarOption extends SgdsElement {
    * The name identifier for the sidebar option.
    * @type {string}
    */
-  @property({ type: String }) name = "";
+  @property({ type: String, reflect: true }) name = "";
+  @property({ type: String, reflect: true }) icon = "";
 
+  /**
+   * Tracks whether the parent sidebar is in a collapsed state.
+   * Used to hide option labels when the sidebar is collapsed.
+   * @type {boolean}
+   * @internal
+   */
   @state() private sidebarCollapsed = false;
-  @state() private hasNestedOptions = false;
-  @state() private isNested = false;
-  @state() private isFirstLevel = false;
 
-  @state() private showFirstLevel = false;
+  /**
+   * Tracks whether this option has nested child options.
+   * Used to display the chevron icon.
+   * @type {boolean}
+   * @internal
+   */
+  @state() private hasNestedOptions = false;
+
+  /**
+   * Stores the currently selected nested level option.
+   * Used to manage submenu visibility.
+   * @type {SgdsSidebarOption}
+   * @internal
+   */
+  @state() private selectedNestedLevel: SgdsSidebarOption;
+
+  /**
+   * Tracks the nesting level of this option (0 = top level, 1 = nested once, etc.).
+   * Used to determine behavior on click and icon display.
+   * @type {number}
+   * @internal
+   */
+  @state() private childLevel = 0;
 
   @queryAssignedElements({ flatten: true, selector: "sgds-sidebar-option" })
   protected nestedItems: SgdsSidebarOption[];
@@ -45,22 +72,36 @@ export class SgdsSidebarOption extends SgdsElement {
     this.detectParentSidebar();
     this.observeSidebarChanges();
     this.checkNestedOptions();
-    this.checkIfNested();
-    this.checkIfFirstLevel();
   }
 
-  private checkIfNested() {
-    const parentOption = this.closest("sgds-sidebar-option");
-
-    console.log(parentOption);
-    this.isNested = parentOption !== null;
+  @watch("selected")
+  _handleDisabled() {
+    if (this.selected === true) {
+      this.parentElement.setAttribute("selected", `${this.selected}`);
+    } else {
+      this.parentElement.removeAttribute("selected");
+    }
   }
 
+  protected firstUpdated(): void {
+    this.getChildLevel();
+  }
+
+  /**
+   * Checks for nested sgds-sidebar-option elements.
+   * Updates hasNestedOptions state if nested options are found.
+   * @private
+   */
   private checkNestedOptions() {
     const nestedOptions = this.querySelectorAll(":scope > sgds-sidebar-option");
     this.hasNestedOptions = nestedOptions.length > 0;
   }
 
+  /**
+   * Detects the parent sidebar element and checks its expanded state.
+   * Updates sidebarCollapsed state accordingly.
+   * @private
+   */
   private detectParentSidebar() {
     const sidebar = this.closest("sgds-sidebar");
     if (sidebar) {
@@ -68,19 +109,34 @@ export class SgdsSidebarOption extends SgdsElement {
     }
   }
 
-  private checkIfFirstLevel() {
-    const parent = this.parentElement;
-    console.log(parent.tagName);
-    if (parent.tagName.toLowerCase() === "sgds-sidebar-section") {
-      this.isFirstLevel = true;
+  /**
+   * Calculates the nesting level of this option by counting parent sgds-sidebar-option elements.
+   * Updates childLevel state with the calculated level (0 = top level, 1+ = nested).
+   * @private
+   */
+  private getChildLevel() {
+    let currentEle = this.parentElement;
+    let level = 0;
+
+    while (currentEle.tagName.toLowerCase() === "sgds-sidebar-option") {
+      level += 1;
+      currentEle = currentEle.parentElement;
     }
+
+    this.childLevel = level;
   }
 
+  /**
+   * Observes changes to the parent sidebar's expanded attribute.
+   * Automatically updates the option's collapsed state when the sidebar expands or collapses.
+   * @private
+   */
   private observeSidebarChanges() {
-    const sidebar = this.closest("sgds-sidebar");
+    const sidebar = this.closest("sgds-sidebar") as SgdsSidebar;
+
     if (sidebar) {
       const observer = new MutationObserver(() => {
-        const isExpanded = (sidebar as SgdsSidebar).expanded;
+        const isExpanded = sidebar.expanded;
         this.sidebarCollapsed = !isExpanded;
       });
 
@@ -91,49 +147,67 @@ export class SgdsSidebarOption extends SgdsElement {
     }
   }
 
+  /**
+   * Handles click events on the option.
+   * For level 0 options with nested items, opens the drawer overlay.
+   * For other levels, manages submenu visibility and emits click events.
+   * @private
+   */
   private _handleClick() {
-    if (this.isFirstLevel && this.hasNestedOptions) {
-      this.showFirstLevel = !this.showFirstLevel;
-      this.emit("sgds-select", { detail: { name: this.name, id: this.id } });
+    if (this.childLevel === 0 && this.hasNestedOptions) {
+      this.emit("i-sgds-sidebar-open-drawer", { detail: { element: this } });
+    } else {
+      this.selectedNestedLevel = this.childLevel === 1 && this.selectedNestedLevel ? null : this;
+      this.emit("i-sgds-click", { detail: { element: this, level: this.childLevel } });
     }
   }
 
-  private _handleSlotChange(e: Event) {
-    const slot = e.target as HTMLSlotElement;
-    const assignedElements = slot.assignedElements({ flatten: true });
-    const nestedOptions = assignedElements.filter(item => item.tagName.toLowerCase() === "sgds-sidebar-option");
-
-    if (nestedOptions.length > 0) {
-      this.hasNestedOptions = true;
+  /**
+   * Determines the appropriate icon to display based on the option's nesting level and selected state.
+   * At level 0: shows chevron-right (selected) or chevron-left (not selected)
+   * At level 1+: shows chevron-down (selected) or chevron-up (not selected)
+   * @private\n   * @returns {string} The icon name to display
+   */
+  private getIcon() {
+    if (this.childLevel === 0) {
+      return this.selected ? "chevron-right" : "chevron-left";
+    } else {
+      return this.selectedNestedLevel ? "chevron-down" : "chevron-up";
     }
   }
 
   render() {
     return html`
       <div
-        class=${classMap({ "sidebar-option": true, "sidebar-option--collapsed": this.sidebarCollapsed })}
+        class=${classMap({
+          "sidebar-option": true,
+          "sidebar-option--collapsed": this.sidebarCollapsed && this.childLevel === 0,
+          active: this.selected
+        })}
         @click=${this._handleClick}
       >
         <div class="sidebar-option-label-wrapper">
-          <slot name="icon"></slot>
+          <sgds-icon name=${this.icon}></sgds-icon>
           <span class="sidebar-option-label">${this.title}</span>
 
           <span class="sidebar-option-trailing-icon">
             ${this.hasNestedOptions
-              ? html`<sgds-icon name="chevron-right" size="sm"></sgds-icon>`
+              ? html`<sgds-icon name=${this.getIcon()} size="sm"></sgds-icon>`
               : html`<slot name="trailing-icon"></slot>`}
           </span>
         </div>
       </div>
 
-      ${this.isFirstLevel && this.hasNestedOptions
-        ? html`<div
+      ${this.childLevel === 1 && this.hasNestedOptions
+        ? html` <div
             class=${classMap({
-              "sidebar-nested-overlay": true,
-              show: this.showFirstLevel
+              "sidebar-submenu": true,
+              show: this.selectedNestedLevel === this
             })}
           >
-            <slot></slot>
+            <div>
+              <slot></slot>
+            </div>
           </div>`
         : nothing}
     `;

@@ -3,6 +3,7 @@ import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import sidebarSectionStyle from "./sidebar-section.css";
+import SgdsSidebar from "./sgds-sidebar";
 
 /**
  * @summary Sidebar section is a container component that groups related sidebar options into organized sections.
@@ -30,7 +31,20 @@ export class SgdsSidebarSection extends SgdsElement {
    */
   @property({ type: Boolean, reflect: true }) collapsible = false;
 
+  /**
+   * Tracks whether this section is the last child of its parent.
+   * Used to remove bottom border from the last section.
+   * @type {boolean}
+   * @internal
+   */
   @state() private isLastChild = false;
+
+  /**
+   * Tracks whether the parent sidebar is in a collapsed state.
+   * Used to hide section title when sidebar is collapsed.
+   * @type {boolean}
+   * @internal
+   */
   @state() private sidebarCollapsed = false;
 
   connectedCallback() {
@@ -40,6 +54,11 @@ export class SgdsSidebarSection extends SgdsElement {
     this.observeSidebarChanges();
   }
 
+  /**
+   * Checks if this section is the last child of its parent.
+   * Sets isLastChild state to true if it is the last sibling.
+   * @private
+   */
   private checkIfLastChild() {
     const parent = this.parentElement;
     if (parent) {
@@ -48,18 +67,28 @@ export class SgdsSidebarSection extends SgdsElement {
     }
   }
 
+  /**
+   * Detects the parent sidebar element and checks its expanded state.
+   * Updates sidebarCollapsed state accordingly.
+   * @private
+   */
   private detectParentSidebar() {
     const sidebar = this.closest("sgds-sidebar");
     if (sidebar) {
-      this.sidebarCollapsed = !(sidebar as any).expanded;
+      this.sidebarCollapsed = !(sidebar as SgdsSidebar).expanded;
     }
   }
 
+  /**
+   * Observes changes to the parent sidebar's expanded attribute.
+   * Automatically updates the section visibility when the sidebar expands or collapses.
+   * @private
+   */
   private observeSidebarChanges() {
     const sidebar = this.closest("sgds-sidebar");
     if (sidebar) {
       const observer = new MutationObserver(() => {
-        const isExpanded = (sidebar as any).expanded;
+        const isExpanded = (sidebar as SgdsSidebar).expanded;
         this.sidebarCollapsed = !isExpanded;
       });
 
@@ -68,16 +97,6 @@ export class SgdsSidebarSection extends SgdsElement {
         attributeFilter: ["expanded"]
       });
     }
-  }
-
-  /**
-   * Toggle the expanded/collapsed state of the section.
-   * Only applies if collapsible property is true.
-   * @public
-   */
-  public toggleExpanded() {
-    if (!this.collapsible) return;
-    this.expanded = !this.expanded;
   }
 
   render() {
@@ -98,8 +117,7 @@ export class SgdsSidebarSection extends SgdsElement {
         <div
           class=${classMap({
             "sidebar-section-content": true,
-            "sidebar-section-content--expanded": this.expanded,
-            "sidebar-section-content--collapsed": !this.expanded
+            "sidebar-section-content--expanded": this.expanded
           })}
         >
           <slot></slot>
