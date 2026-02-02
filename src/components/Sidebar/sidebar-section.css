@@ -38,7 +38,7 @@
 .sidebar-section-content > div {
   pointer-events: auto;
   margin-top: 0;
-  transition: all var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
+  transition: all var(--sgds-motion-duration-slow) var(--sgds-motion-easing-standard);
 }
 
 .sidebar-section-content.sidebar-section-content--collapsed > div {

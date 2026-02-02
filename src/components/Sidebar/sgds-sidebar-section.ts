@@ -49,7 +49,7 @@ export class SgdsSidebarSection extends SgdsElement {
 
   /**
    * Stores the MutationObserver instance for tracking parent sidebar state changes.
-   * Used to observe the parent sidebar's expanded attribute.
+   * Used to observe the parent sidebar's collapsed attribute.
    * @type {MutationObserver | null}
    * @internal
    */
@@ -94,12 +94,12 @@ export class SgdsSidebarSection extends SgdsElement {
   private detectParentSidebar() {
     const sidebar = this.closest("sgds-sidebar");
     if (sidebar) {
-      this.sidebarCollapsed = !(sidebar as SgdsSidebar).expanded;
+      this.sidebarCollapsed = (sidebar as SgdsSidebar).collapsed;
     }
   }
 
   /**
-   * Sets up a MutationObserver to track the parent sidebar's expanded attribute.
+   * Sets up a MutationObserver to track the parent sidebar's collapsed attribute.
    * Automatically updates sidebarCollapsed state when sidebar expand/collapse state changes.
    * Observer is stored for cleanup in disconnectedCallback to prevent memory leaks.
    * @private
@@ -108,13 +108,13 @@ export class SgdsSidebarSection extends SgdsElement {
     const sidebar = this.closest("sgds-sidebar");
     if (sidebar) {
       this.sidebarObserver = new MutationObserver(() => {
-        const isExpanded = (sidebar as SgdsSidebar).expanded;
-        this.sidebarCollapsed = !isExpanded;
+        const isCollapsed = (sidebar as SgdsSidebar).collapsed;
+        this.sidebarCollapsed = isCollapsed;
       });
 
       this.sidebarObserver.observe(sidebar, {
         attributes: true,
-        attributeFilter: ["expanded"]
+        attributeFilter: ["collapsed"]
       });
     }
   }
@@ -127,7 +127,7 @@ export class SgdsSidebarSection extends SgdsElement {
    * @returns {void}
    */
   private _handleClick() {
-    this.collapsed = !this.collapsed;
+    if (this.collapsible) this.collapsed = !this.collapsed;
   }
 
   render() {

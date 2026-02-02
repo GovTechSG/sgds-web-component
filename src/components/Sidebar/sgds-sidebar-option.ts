@@ -42,7 +42,7 @@ export class SgdsSidebarOption extends SgdsElement {
    * @type {string}
    * @default ""
    */
-  @property({ type: String, reflect: true }) icon = "";
+  @property({ type: String, reflect: true }) icon = "placeholder";
 
   /**
    * Tracks whether the parent sidebar is in a collapsed state.
@@ -81,7 +81,7 @@ export class SgdsSidebarOption extends SgdsElement {
 
   /**
    * Stores the MutationObserver instance for tracking parent sidebar state changes.
-   * Used to observe the parent sidebar's expanded attribute.
+   * Used to observe the parent sidebar's collapsed attribute.
    * @type {MutationObserver | null}
    * @internal
    */
@@ -151,14 +151,14 @@ export class SgdsSidebarOption extends SgdsElement {
 
   /**
    * Traverses the DOM to find the nearest parent sgds-sidebar component.
-   * Checks the parent sidebar's expanded state and updates sidebarCollapsed flag accordingly.
+   * Checks the parent sidebar's collapsed state and updates sidebarCollapsed flag accordingly.
    * Required for responsive label hiding when sidebar is collapsed.
    * @private
    */
   private detectParentSidebar() {
     const sidebar = this.closest("sgds-sidebar");
     if (sidebar) {
-      this.sidebarCollapsed = !(sidebar as SgdsSidebar).expanded;
+      this.sidebarCollapsed = (sidebar as SgdsSidebar).collapsed;
     }
   }
 
@@ -183,7 +183,7 @@ export class SgdsSidebarOption extends SgdsElement {
   }
 
   /**
-   * Sets up a MutationObserver to track the parent sidebar's expanded attribute.
+   * Sets up a MutationObserver to track the parent sidebar's collapsed attribute.
    * Automatically updates sidebarCollapsed state when sidebar expand/collapse state changes.
    * Observer is stored for cleanup in disconnectedCallback to prevent memory leaks.
    * @private
@@ -194,13 +194,13 @@ export class SgdsSidebarOption extends SgdsElement {
 
     if (sidebar) {
       this.sidebarObserver = new MutationObserver(() => {
-        const isExpanded = sidebar.expanded;
-        this.sidebarCollapsed = !isExpanded;
+        const isCollapsed = (sidebar as SgdsSidebar).collapsed;
+        this.sidebarCollapsed = isCollapsed;
       });
 
       this.sidebarObserver.observe(sidebar, {
         attributes: true,
-        attributeFilter: ["expanded"]
+        attributeFilter: ["collapsed"]
       });
     }
   }

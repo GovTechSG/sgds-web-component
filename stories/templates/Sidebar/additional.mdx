@@ -1,0 +1,47 @@
+## SgdsSidebarOption - Level 0 only
+
+SidebarOption can be used as a standalone top-level navigation item. Level 0 options are shown directly in the sidebar and do not have nested children.
+
+<Canvas of={SidebarStories.Level0Only}>
+  <Story of={SidebarStories.Level0Only} />
+</Canvas>
+
+## SgdsSidebarOption - Level 0 to Level 1 nested
+
+SidebarOption accepts another SidebarOption as its children in the default slot. This creates a nested menu structure where Level 1 options are displayed in a drawer overlay when the parent Level 0 option is clicked.
+
+<Canvas of={SidebarStories.Level0Level1}>
+  <Story of={SidebarStories.Level0Level1} />
+</Canvas>
+
+## SgdsSidebarOption - Level 0 to Level 2 nested
+
+SidebarOption supports up to Level 2 nesting (double nested options). Level 2 options can be nested within Level 1 options, creating a three-level navigation hierarchy.
+
+<Canvas of={SidebarStories.Level0Level1Level2}>
+  <Story of={SidebarStories.Level0Level1Level2} />
+</Canvas>
+
+## Collapsed state
+
+The sidebar can be collapsed by setting the `expanded` property to `false`. When collapsed, only icons are visible for Level 0 options. Nested options are still accessible via the drawer overlay.
+
+<Canvas of={SidebarStories.CollapsedState}>
+  <Story of={SidebarStories.CollapsedState} />
+</Canvas>
+
+## With sections
+
+SidebarSection can be used to organize SidebarOption items into logical groups. Sections are collapsible and can contain Level 0 and Level 1 options.
+
+<Canvas of={SidebarStories.WithSections}>
+  <Story of={SidebarStories.WithSections} />
+</Canvas>
+
+## Active state
+
+The sidebar tracks the currently active option via the `active` property. When an option is selected, its `name` property is set as the active value. This is useful for highlighting the current page or section in your application.
+
+<Canvas of={SidebarStories.ActiveState}>
+  <Story of={SidebarStories.ActiveState} />
+</Canvas>

@@ -15,13 +15,13 @@ export class SgdsSidebar extends SgdsElement {
   static styles = [...SgdsElement.styles, sidebarStyle];
 
   /**
-   * Controls whether the sidebar is expanded or collapsed.
-   * When true, the sidebar is in expanded state showing full labels.
-   * When false, the sidebar is collapsed showing only icons.
+   * Controls whether the sidebar is collapsed or expanded.
+   * When true, the sidebar is in collapsed state showing only icons.
+   * When false, the sidebar is expanded showing full labels.
    * @type {boolean}
-   * @default true
+   * @default false
    */
-  @property({ type: Boolean, reflect: true }) expanded = true;
+  @property({ type: Boolean, reflect: true }) collapsed = false;
 
   /**
    * The name of the currently active sidebar option.
@@ -125,6 +125,10 @@ export class SgdsSidebar extends SgdsElement {
         options.forEach(e => e.removeAttribute("selected"));
         element.setAttribute("selected", "true");
 
+        if (this.currentSelected) {
+          this.currentSelected.setAttribute("selected", "true");
+        }
+
         this.active = element.name;
         this.emit("sgds-select");
 
@@ -164,17 +168,17 @@ export class SgdsSidebar extends SgdsElement {
   }
 
   /**
-   * Toggles the sidebar between expanded and collapsed states.
-   * Updates the expanded property and emits sgds-sidebar-toggle event.
+   * Toggles the sidebar between collapsed and expanded states.
+   * Updates the collapsed property and emits sgds-sidebar-toggle event.
    * @public
-   * @emits sgds-sidebar-toggle Emitted with detail.expanded indicating new state
+   * @emits sgds-sidebar-toggle Emitted with detail.collapsed indicating new state
    * @returns {void}
    */
-  public toggleExpanded() {
-    this.expanded = !this.expanded;
+  public toggleCollapsed() {
+    this.collapsed = !this.collapsed;
     this.dispatchEvent(
       this.emit("sgds-sidebar-toggle", {
-        detail: { expanded: this.expanded },
+        detail: { collapsed: this.collapsed },
         composed: true,
         bubbles: true
       })
@@ -186,8 +190,8 @@ export class SgdsSidebar extends SgdsElement {
       <div
         class=${classMap({
           sidebar: true,
-          "sidebar--expanded": this.expanded,
-          "sidebar--collapsed": !this.expanded
+          "sidebar--expanded": !this.collapsed,
+          "sidebar--collapsed": this.collapsed
         })}
       >
         <nav class="sidebar-content" aria-label="Navigation menu">
@@ -197,13 +201,13 @@ export class SgdsSidebar extends SgdsElement {
             </div>
 
             <sgds-icon-button
-              name=${this.expanded ? "sidebar-collapse" : "sidebar-expand"}
+              name=${this.collapsed ? "sidebar-expand" : "sidebar-collapse"}
               variant="ghost"
               tone="neutral"
               size="md"
-              @click=${this.toggleExpanded}
-              aria-label=${this.expanded ? "Collapse sidebar" : "Expand sidebar"}
-              aria-expanded=${this.expanded}
+              @click=${this.toggleCollapsed}
+              aria-label=${this.collapsed ? "Expand sidebar" : "Collapse sidebar"}
+              aria-expanded=${!this.collapsed}
             ></sgds-icon-button>
           </div>
 
