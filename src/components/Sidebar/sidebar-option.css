@@ -1,6 +1,8 @@
 .sidebar-option {
   padding: var(--sgds-padding-xs);
   cursor: pointer;
+  border-radius: var(--sgds-border-radius-md);
+  outline-offset: -1px;
 }
 
 .sidebar-option.active {

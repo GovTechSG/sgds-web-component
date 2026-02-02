@@ -21,7 +21,7 @@ export class SgdsSidebarSection extends SgdsElement {
    * @type {boolean}
    * @default true
    */
-  @property({ type: Boolean, reflect: true }) expanded = true;
+  @property({ type: Boolean, reflect: true }) collapsed = false;
 
   /**
    * Enables a collapsible section header with expand/collapse toggle.
@@ -47,17 +47,35 @@ export class SgdsSidebarSection extends SgdsElement {
    */
   @state() private sidebarCollapsed = false;
 
+  /**
+   * Stores the MutationObserver instance for tracking parent sidebar state changes.
+   * Used to observe the parent sidebar's expanded attribute.
+   * @type {MutationObserver | null}
+   * @internal
+   */
+  private sidebarObserver: MutationObserver | null = null;
+
   connectedCallback() {
     super.connectedCallback();
+    this.setAttribute("role", "region");
+    this.setAttribute("aria-label", this.title || "Sidebar section");
     this.checkIfLastChild();
     this.detectParentSidebar();
     this.observeSidebarChanges();
   }
 
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this.sidebarObserver) {
+      this.sidebarObserver.disconnect();
+    }
+  }
+
   /**
-   * Checks if this section is the last child of its parent.
-   * Sets isLastChild state to true if it is the last sibling.
+   * Checks if this section is the last child sibling in its parent.
+   * Used to remove bottom border styling from the final section for visual polish.
    * @private
+   * @returns {void} Updates isLastChild state property
    */
   private checkIfLastChild() {
     const parent = this.parentElement;
@@ -68,8 +86,9 @@ export class SgdsSidebarSection extends SgdsElement {
   }
 
   /**
-   * Detects the parent sidebar element and checks its expanded state.
-   * Updates sidebarCollapsed state accordingly.
+   * Traverses the DOM to find the nearest parent sgds-sidebar component.
+   * Checks the parent sidebar's expanded state and updates sidebarCollapsed flag accordingly.
+   * Used to hide section titles when parent sidebar is in collapsed state.
    * @private
    */
   private detectParentSidebar() {
@@ -80,23 +99,35 @@ export class SgdsSidebarSection extends SgdsElement {
   }
 
   /**
-   * Observes changes to the parent sidebar's expanded attribute.
-   * Automatically updates the section visibility when the sidebar expands or collapses.
+   * Sets up a MutationObserver to track the parent sidebar's expanded attribute.
+   * Automatically updates sidebarCollapsed state when sidebar expand/collapse state changes.
+   * Observer is stored for cleanup in disconnectedCallback to prevent memory leaks.
    * @private
    */
   private observeSidebarChanges() {
     const sidebar = this.closest("sgds-sidebar");
     if (sidebar) {
-      const observer = new MutationObserver(() => {
+      this.sidebarObserver = new MutationObserver(() => {
         const isExpanded = (sidebar as SgdsSidebar).expanded;
         this.sidebarCollapsed = !isExpanded;
       });
 
-      observer.observe(sidebar, {
+      this.sidebarObserver.observe(sidebar, {
         attributes: true,
         attributeFilter: ["expanded"]
       });
     }
+  }
+
+  /**
+   * Handles click events on the section label.
+   * Toggles the collapsed state to show/hide section content.
+   * Only called if the section is collapsible (collapsible prop is true).
+   * @private
+   * @returns {void}
+   */
+  private _handleClick() {
+    this.collapsed = !this.collapsed;
   }
 
   render() {
@@ -107,20 +138,29 @@ export class SgdsSidebarSection extends SgdsElement {
           "no-border": this.isLastChild,
           "sidebar-section--collapsed": this.sidebarCollapsed
         })}
-        tabindex=${this.collapsible ? 0 : -1}
       >
-        <div class="sidebar-section-label">
+        <div
+          class="sidebar-section-label"
+          @click=${this._handleClick}
+          tabindex=${this.collapsible ? 0 : -1}
+          aria-expanded=${!this.collapsed}
+          aria-disabled=${!this.collapsible}
+        >
           <span>${this.title}</span>
-          ${this.collapsible ? html`<sgds-icon name="chevron-down" size="sm"></sgds-icon>` : nothing}
+          ${this.collapsible
+            ? html`<sgds-icon name=${this.collapsed ? "chevron-down" : "chevron-up"} size="sm"></sgds-icon>`
+            : nothing}
         </div>
 
         <div
           class=${classMap({
             "sidebar-section-content": true,
-            "sidebar-section-content--expanded": this.expanded
+            "sidebar-section-content--collapsed": this.collapsed
           })}
         >
-          <slot></slot>
+          <div>
+            <slot></slot>
+          </div>
         </div>
       </div>
     `;

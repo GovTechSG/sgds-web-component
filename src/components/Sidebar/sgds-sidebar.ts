@@ -49,13 +49,17 @@ export class SgdsSidebar extends SgdsElement {
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute("role", "navigation");
+    this.setAttribute("aria-label", "Main navigation");
     this.addOptionListeners();
   }
 
   /**
-   * Reverts nested nodes back to their parent element and clears the drawer content.
+   * Reverts nested options back to their original parent element.
+   * Clears the drawer overlay content and updates selected attributes.
+   * Called when closing the drawer or switching to a different parent option.
    * @private
-   * @param {SgdsSidebarOption} element - The parent option element to return nodes to
+   * @param {SgdsSidebarOption} element - The parent option to return nodes to
+   * @returns {void}
    */
   private _revertNodesToParent(element: SgdsSidebarOption) {
     this.drawerContent.forEach(e => {
@@ -66,10 +70,12 @@ export class SgdsSidebar extends SgdsElement {
   }
 
   /**
-   * Manages the content of the drawer overlay based on the selected option.
-   * Moves nested options to the drawer or reverts them back to their parent.
+   * Manages the drawer overlay content based on the selected parent option.
+   * Extracts direct child options from the selected parent and populates the drawer.
+   * When undefined is passed, closes the drawer and reverts nodes back to parents.
    * @private
-   * @param {SgdsSidebarOption} [element] - The option element to display in the drawer. If undefined, drawer is closed.
+   * @param {SgdsSidebarOption} [element] - The parent option to display in drawer. Undefined closes drawer.
+   * @returns {void}
    */
   private _setNodesToDrawer(element?: SgdsSidebarOption) {
     if (this.currentSelected) {
@@ -95,9 +101,12 @@ export class SgdsSidebar extends SgdsElement {
   }
 
   /**
-   * Adds event listeners to all sidebar options for click and drawer open events.
-   * Manages option selection, drawer state, and active styling.
+   * Attaches event listeners to all direct child sidebar options.
+   * Handles option selection events and drawer overlay state management.
+   * Manages emitting sgds-select custom events for external components.
+   * Automatically triggers anchor links if present in options.
    * @private
+   * @returns {void}
    */
   private addOptionListeners() {
     const options = this.querySelectorAll("sgds-sidebar-option");
@@ -155,8 +164,11 @@ export class SgdsSidebar extends SgdsElement {
   }
 
   /**
-   * Toggle the expanded/collapsed state of the sidebar.
+   * Toggles the sidebar between expanded and collapsed states.
+   * Updates the expanded property and emits sgds-sidebar-toggle event.
    * @public
+   * @emits sgds-sidebar-toggle Emitted with detail.expanded indicating new state
+   * @returns {void}
    */
   public toggleExpanded() {
     this.expanded = !this.expanded;
@@ -178,23 +190,23 @@ export class SgdsSidebar extends SgdsElement {
           "sidebar--collapsed": !this.expanded
         })}
       >
-        <div class="sidebar-header">
-          <div class="brand-name">
-            <slot name="brand-name"></slot>
+        <nav class="sidebar-content" aria-label="Navigation menu">
+          <div class="sidebar-header">
+            <div class="brand-name">
+              <slot name="brand-name"></slot>
+            </div>
+
+            <sgds-icon-button
+              name=${this.expanded ? "sidebar-collapse" : "sidebar-expand"}
+              variant="ghost"
+              tone="neutral"
+              size="md"
+              @click=${this.toggleExpanded}
+              aria-label=${this.expanded ? "Collapse sidebar" : "Expand sidebar"}
+              aria-expanded=${this.expanded}
+            ></sgds-icon-button>
           </div>
 
-          <sgds-icon-button
-            name=${this.expanded ? "sidebar-collapse" : "sidebar-expand"}
-            variant="ghost"
-            tone="neutral"
-            size="md"
-            @click=${this.toggleExpanded}
-            aria-label=${this.expanded ? "Collapse sidebar" : "Expand sidebar"}
-            aria-expanded=${this.expanded}
-          ></sgds-icon-button>
-        </div>
-
-        <nav class="sidebar-content">
           <slot></slot>
         </nav>
 
@@ -203,6 +215,9 @@ export class SgdsSidebar extends SgdsElement {
             "sidebar-nested-overlay": true,
             show: this.currentSelected !== null
           })}
+          role="region"
+          aria-label=${this.currentSelected?.title ? `Nested options for ${this.currentSelected.title}` : ""}
+          aria-hidden=${!this.currentSelected ? "true" : "false"}
         >
           ${this.drawerContent}
         </div>

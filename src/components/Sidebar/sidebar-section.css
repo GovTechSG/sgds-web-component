@@ -21,6 +21,7 @@
   padding-right: var(--sgds-padding-none);
   transition: all var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
 }
+
 .sidebar-section--collapsed .sidebar-section-label {
   width: 0;
   height: 0;
@@ -28,4 +29,20 @@
   padding: 0;
   margin: 0;
   pointer-events: none;
+}
+
+.sidebar-section-content {
+  overflow: hidden;
+}
+
+.sidebar-section-content > div {
+  pointer-events: auto;
+  margin-top: 0;
+  transition: all var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
+}
+
+.sidebar-section-content.sidebar-section-content--collapsed > div {
+  padding: var(--sgds-padding-xs);
+  pointer-events: none;
+  margin-top: -100%;
 }

@@ -3,11 +3,10 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  border-right: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
   overflow-x: visible;
   transition: all var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
-  padding: var(--sgds-padding-md) var(--sgds-padding-none);
-  background-color: var(--sgds-bg-default);
+
+  z-index: 1100;
 }
 
 .sidebar--expanded {
@@ -40,12 +39,14 @@
 .sidebar-content {
   flex: 1;
   overflow-y: auto;
-  padding: var(--sgds-padding-2-xs) var(--sgds-padding-none);
+  padding: var(--sgds-padding-lg) var(--sgds-padding-none);
+  border-right: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+  background-color: var(--sgds-bg-default);
 }
 
 /* Scrollbar styling for better UX */
 .sidebar-content::-webkit-scrollbar {
-  width: var(--sgds-dimension-6);
+  width: var(--sgds-dimension-2);
 }
 
 .sidebar-content::-webkit-scrollbar-track {
@@ -82,7 +83,6 @@
   pointer-events: auto;
   opacity: 1;
   left: var(--sgds-dimension-280);
-  z-index: 1100;
 }
 
 .sidebar--collapsed .sidebar-nested-overlay.show {
