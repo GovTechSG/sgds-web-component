@@ -162,7 +162,8 @@ a.card:not(.disabled):focus-visible {
   gap: var(--sgds-gap-xs);
 }
 
-.card-title {
+.card-title,
+slot[name="title"]::slotted(*) {
   color: var(--sgds-body-color-default);
   font-size: var(--sgds-font-size-24) !important;
   font-weight: var(--sgds-font-weight-semibold) !important;
@@ -180,10 +181,10 @@ slot[name="subtitle"]::slotted(*) {
 }
 
 slot[name="title"]::slotted(a) {
-  --sgds-font-weight-regular: var(--sgds-font-weight-semibold);
   color: var(--sgds-link-color-default);
   font-size: var(--sgds-font-size-24) !important;
-  font-weight: var(--sgds-font-weight-semibold);
+  font-weight: var(--sgds-font-weight-semibold) !important;
+  margin-bottom: var(--sgds-margin-none) !important;
   text-decoration: none !important;
 }
 
