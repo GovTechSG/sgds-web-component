@@ -50,6 +50,124 @@
     --sgds-border-color-primary-default: var(--sgds-primary-border-color-default);
     --sgds-border-color-primary-emphasis: var(--sgds-primary-border-color-emphasis);
     --sgds-border-color-primary-muted: var(--sgds-primary-border-color-muted);
+    --sgds-background-color-accent-default: var(--sgds-accent-bg-default);
+    --sgds-background-color-accent-muted: var(--sgds-accent-bg-muted);
+    --sgds-background-color-accent-surface-default: var(--sgds-accent-surface-default);
+    --sgds-background-color-accent-surface-emphasis: var(--sgds-accent-surface-emphasis);
+    --sgds-background-color-accent-surface-muted: var(--sgds-accent-surface-muted);
+    --sgds-text-color-accent-default: var(--sgds-accent-color-default);
+    --sgds-text-color-accent-emphasis: var(--sgds-accent-color-emphasis);
+    --sgds-text-color-accent-fixed-light: var(--sgds-accent-color-fixed-light);
+    --sgds-text-color-accent-fixed-dark: var(--sgds-accent-color-fixed-dark);
+    --sgds-border-color-accent-default: var(--sgds-accent-border-color-default);
+    --sgds-border-color-accent-emphasis: var(--sgds-accent-border-color-emphasis);
+    --sgds-border-color-accent-muted: var(--sgds-accent-border-color-muted);
+    --sgds-background-color-success-default: var(--sgds-success-bg-default);
+    --sgds-background-color-success-muted: var(--sgds-success-bg-muted);
+    --sgds-background-color-success-surface-default: var(--sgds-success-surface-default);
+    --sgds-background-color-success-surface-emphasis: var(--sgds-success-surface-emphasis);
+    --sgds-background-color-success-surface-muted: var(--sgds-success-surface-muted);
+    --sgds-text-color-success-default: var(--sgds-success-color-default);
+    --sgds-text-color-success-emphasis: var(--sgds-success-color-emphasis);
+    --sgds-text-color-success-fixed-light: var(--sgds-success-color-fixed-light);
+    --sgds-text-color-success-fixed-dark: var(--sgds-success-color-fixed-dark);
+    --sgds-border-color-success-default: var(--sgds-success-border-color-default);
+    --sgds-border-color-success-emphasis: var(--sgds-success-border-color-emphasis);
+    --sgds-border-color-success-muted: var(--sgds-success-border-color-muted);
+    --sgds-background-color-danger-default: var(--sgds-danger-bg-default);
+    --sgds-background-color-danger-muted: var(--sgds-danger-bg-muted);
+    --sgds-background-color-danger-surface-default: var(--sgds-danger-surface-default);
+    --sgds-background-color-danger-surface-emphasis: var(--sgds-danger-surface-emphasis);
+    --sgds-background-color-danger-surface-muted: var(--sgds-danger-surface-muted);
+    --sgds-background-color-danger-surface-translucent: var(--sgds-danger-surface-translucent);
+    --sgds-text-color-danger-default: var(--sgds-danger-color-default);
+    --sgds-text-color-danger-emphasis: var(--sgds-danger-color-emphasis);
+    --sgds-text-color-danger-fixed-light: var(--sgds-danger-color-fixed-light);
+    --sgds-text-color-danger-fixed-dark: var(--sgds-danger-color-fixed-dark);
+    --sgds-border-color-danger-default: var(--sgds-danger-border-color-default);
+    --sgds-border-color-danger-emphasis: var(--sgds-danger-border-color-emphasis);
+    --sgds-border-color-danger-subtle: var(--sgds-danger-border-color-subtle);
+    --sgds-background-color-warning-default: var(--sgds-warning-bg-default);
+    --sgds-background-color-warning-muted: var(--sgds-warning-bg-muted);
+    --sgds-background-color-warning-surface-default: var(--sgds-warning-surface-default);
+    --sgds-background-color-warning-surface-emphasis: var(--sgds-warning-surface-emphasis);
+    --sgds-background-color-warning-surface-muted: var(--sgds-warning-surface-muted);
+    --sgds-text-color-warning-default: var(--sgds-warning-color-default);
+    --sgds-text-color-warning-emphasis: var(--sgds-warning-color-emphasis);
+    --sgds-text-color-warning-fixed-light: var(--sgds-warning-color-fixed-light);
+    --sgds-text-color-warning-fixed-dark: var(--sgds-warning-color-fixed-dark);
+    --sgds-border-color-warning-default: var(--sgds-warning-border-color-default);
+    --sgds-border-color-warning-emphasis: var(--sgds-warning-border-color-emphasis);
+    --sgds-border-color-warning-subtle: var(--sgds-warning-border-color-subtle);
+    --sgds-background-color-purple-default: var(--sgds-purple-bg-default);
+    --sgds-background-color-purple-muted: var(--sgds-purple-bg-muted);
+    --sgds-background-color-purple-surface-default: var(--sgds-purple-surface-default);
+    --sgds-background-color-purple-surface-emphasis: var(--sgds-purple-surface-emphasis);
+    --sgds-background-color-purple-surface-muted: var(--sgds-purple-surface-muted);
+    --sgds-text-color-purple-default: var(--sgds-purple-color-default);
+    --sgds-text-color-purple-emphasis: var(--sgds-purple-color-emphasis);
+    --sgds-text-color-purple-fixed-light: var(--sgds-purple-color-fixed-light);
+    --sgds-text-color-purple-fixed-dark: var(--sgds-purple-color-fixed-dark);
+    --sgds-border-color-purple-default: var(--sgds-purple-border-color-default);
+    --sgds-border-color-purple-emphasis: var(--sgds-purple-border-color-emphasis);
+    --sgds-border-color-purple-muted: var(--sgds-purple-border-color-muted);
+    --sgds-background-color-cyan-default: var(--sgds-cyan-bg-default);
+    --sgds-background-color-cyan-muted: var(--sgds-cyan-bg-muted);
+    --sgds-background-color-cyan-surface-default: var(--sgds-cyan-surface-default);
+    --sgds-background-color-cyan-surface-emphasis: var(--sgds-cyan-surface-emphasis);
+    --sgds-background-color-cyan-surface-muted: var(--sgds-cyan-surface-muted);
+    --sgds-text-color-cyan-default: var(--sgds-cyan-color-default);
+    --sgds-text-color-cyan-emphasis: var(--sgds-cyan-color-emphasis);
+    --sgds-text-color-cyan-fixed-light: var(--sgds-cyan-color-fixed-light);
+    --sgds-text-color-cyan-fixed-dark: var(--sgds-cyan-color-fixed-dark);
+    --sgds-border-color-cyan-default: var(--sgds-cyan-border-color-default);
+    --sgds-border-color-cyan-emphasis: var(--sgds-cyan-border-color-emphasis);
+    --sgds-border-color-cyan-muted: var(--sgds-cyan-border-color-muted);
+    --sgds-background-color-neutral-default: var(--sgds-neutral-bg-default);
+    --sgds-background-color-neutral-muted: var(--sgds-neutral-bg-muted);
+    --sgds-background-color-neutral-surface-default: var(--sgds-neutral-surface-default);
+    --sgds-background-color-neutral-surface-emphasis: var(--sgds-neutral-surface-emphasis);
+    --sgds-background-color-neutral-surface-muted: var(--sgds-neutral-surface-muted);
+    --sgds-text-color-neutral-default: var(--sgds-neutral-color-default);
+    --sgds-text-color-neutral-emphasis: var(--sgds-neutral-color-emphasis);
+    --sgds-text-color-neutral-fixed-light: var(--sgds-neutral-color-fixed-light);
+    --sgds-text-color-neutral-fixed-dark: var(--sgds-neutral-color-fixed-dark);
+    --sgds-border-color-neutral-default: var(--sgds-neutral-border-color-default);
+    --sgds-border-color-neutral-emphasis: var(--sgds-neutral-border-color-emphasis);
+    --sgds-border-color-neutral-muted: var(--sgds-neutral-border-color-muted);
+    --sgds-text-color-display-default: var(--sgds-display-color-default);
+    --sgds-text-color-display-subtle: var(--sgds-display-color-subtle);
+    --sgds-text-color-heading-default: var(--sgds-heading-color-default);
+    --sgds-text-color-heading-subtle: var(--sgds-heading-color-subtle);
+    --sgds-text-color-body-default: var(--sgds-body-color-default);
+    --sgds-text-color-body-subtle: var(--sgds-body-color-subtle);
+    --sgds-text-color-label-default: var(--sgds-label-color-default);
+    --sgds-text-color-label-subtle: var(--sgds-label-color-subtle);
+    --sgds-text-color-link-default: var(--sgds-link-color-default);
+    --sgds-text-color-link-emphasis: var(--sgds-link-color-emphasis);
+    --sgds-background-color-form-surface-default: var(--sgds-form-surface-default);
+    --sgds-background-color-form-surface-raised: var(--sgds-form-surface-raised);
+    --sgds-background-color-form-surface-emphasis: var(--sgds-form-surface-emphasis);
+    --sgds-background-color-form-surface-subtle: var(--sgds-form-surface-subtle);
+    --sgds-background-color-form-surface-muted: var(--sgds-form-surface-muted);
+    --sgds-background-color-form-surface-inverse: var(--sgds-form-surface-inverse);
+    --sgds-background-color-form-surface-fixed-light: var(--sgds-form-surface-fixed-light);
+    --sgds-background-color-form-surface-fixed-dark: var(--sgds-form-surface-fixed-dark);
+    --sgds-text-color-form-default: var(--sgds-form-color-default);
+    --sgds-text-color-form-subtle: var(--sgds-form-color-subtle);
+    --sgds-text-color-form-muted: var(--sgds-form-color-muted);
+    --sgds-text-color-form-inverse: var(--sgds-form-color-inverse);
+    --sgds-text-color-form-fixed-light: var(--sgds-form-color-fixed-light);
+    --sgds-text-color-form-fixed-dark: var(--sgds-form-color-fixed-dark);
+    --sgds-background-color-form-primary-surface-default: var(--sgds-form-primary-surface-default);
+    --sgds-background-color-form-primary-surface-emphasis: var(--sgds-form-primary-surface-emphasis);
+    --sgds-text-color-form-primary-default: var(--sgds-form-primary-color-default);
+    --sgds-background-color-form-success-surface-default: var(--sgds-form-success-surface-default);
+    --sgds-text-color-form-success-default: var(--sgds-form-success-color-default);
+    --sgds-border-color-form-success-default: var(--sgds-form-success-border-color-default);
+    --sgds-background-color-form-danger-surface-default: var(--sgds-form-danger-surface-default);
+    --sgds-text-color-form-danger-default: var(--sgds-form-danger-color-default);
+    --sgds-border-color-form-danger-default: var(--sgds-form-danger-border-color-default);
     --sgds-font-weight-regular: var(--sgds-font-weight-regular);
     --sgds-font-weight-bold: var(--sgds-font-weight-bold);
     --sgds-font-weight-light: var(--sgds-font-weight-light);
@@ -110,6 +228,33 @@
   .sgds\:overflow-y-scroll {
     overflow-y: scroll;
   }
+  .sgds\:border-accent-default {
+    border-color: var(--sgds-border-color-accent-default);
+  }
+  .sgds\:border-accent-emphasis {
+    border-color: var(--sgds-border-color-accent-emphasis);
+  }
+  .sgds\:border-accent-muted {
+    border-color: var(--sgds-border-color-accent-muted);
+  }
+  .sgds\:border-cyan-default {
+    border-color: var(--sgds-border-color-cyan-default);
+  }
+  .sgds\:border-cyan-emphasis {
+    border-color: var(--sgds-border-color-cyan-emphasis);
+  }
+  .sgds\:border-cyan-muted {
+    border-color: var(--sgds-border-color-cyan-muted);
+  }
+  .sgds\:border-danger-default {
+    border-color: var(--sgds-border-color-danger-default);
+  }
+  .sgds\:border-danger-emphasis {
+    border-color: var(--sgds-border-color-danger-emphasis);
+  }
+  .sgds\:border-danger-subtle {
+    border-color: var(--sgds-border-color-danger-subtle);
+  }
   .sgds\:border-default {
     border-color: var(--sgds-border-color-default);
   }
@@ -122,8 +267,23 @@
   .sgds\:border-fixed-light {
     border-color: var(--sgds-border-color-fixed-light);
   }
+  .sgds\:border-form-danger-default {
+    border-color: var(--sgds-border-color-form-danger-default);
+  }
+  .sgds\:border-form-success-default {
+    border-color: var(--sgds-border-color-form-success-default);
+  }
   .sgds\:border-muted {
     border-color: var(--sgds-border-color-muted);
+  }
+  .sgds\:border-neutral-default {
+    border-color: var(--sgds-border-color-neutral-default);
+  }
+  .sgds\:border-neutral-emphasis {
+    border-color: var(--sgds-border-color-neutral-emphasis);
+  }
+  .sgds\:border-neutral-muted {
+    border-color: var(--sgds-border-color-neutral-muted);
   }
   .sgds\:border-primary-default {
     border-color: var(--sgds-border-color-primary-default);
@@ -134,14 +294,89 @@
   .sgds\:border-primary-muted {
     border-color: var(--sgds-border-color-primary-muted);
   }
+  .sgds\:border-purple-default {
+    border-color: var(--sgds-border-color-purple-default);
+  }
+  .sgds\:border-purple-emphasis {
+    border-color: var(--sgds-border-color-purple-emphasis);
+  }
+  .sgds\:border-purple-muted {
+    border-color: var(--sgds-border-color-purple-muted);
+  }
+  .sgds\:border-success-default {
+    border-color: var(--sgds-border-color-success-default);
+  }
+  .sgds\:border-success-emphasis {
+    border-color: var(--sgds-border-color-success-emphasis);
+  }
+  .sgds\:border-success-muted {
+    border-color: var(--sgds-border-color-success-muted);
+  }
   .sgds\:border-translucent {
     border-color: var(--sgds-border-color-translucent);
   }
   .sgds\:border-transparent {
     border-color: transparent;
   }
+  .sgds\:border-warning-default {
+    border-color: var(--sgds-border-color-warning-default);
+  }
+  .sgds\:border-warning-emphasis {
+    border-color: var(--sgds-border-color-warning-emphasis);
+  }
+  .sgds\:border-warning-subtle {
+    border-color: var(--sgds-border-color-warning-subtle);
+  }
+  .sgds\:bg-accent-default {
+    background-color: var(--sgds-background-color-accent-default);
+  }
+  .sgds\:bg-accent-muted {
+    background-color: var(--sgds-background-color-accent-muted);
+  }
+  .sgds\:bg-accent-surface-default {
+    background-color: var(--sgds-background-color-accent-surface-default);
+  }
+  .sgds\:bg-accent-surface-emphasis {
+    background-color: var(--sgds-background-color-accent-surface-emphasis);
+  }
+  .sgds\:bg-accent-surface-muted {
+    background-color: var(--sgds-background-color-accent-surface-muted);
+  }
   .sgds\:bg-alternate {
     background-color: var(--sgds-background-color-alternate);
+  }
+  .sgds\:bg-cyan-default {
+    background-color: var(--sgds-background-color-cyan-default);
+  }
+  .sgds\:bg-cyan-muted {
+    background-color: var(--sgds-background-color-cyan-muted);
+  }
+  .sgds\:bg-cyan-surface-default {
+    background-color: var(--sgds-background-color-cyan-surface-default);
+  }
+  .sgds\:bg-cyan-surface-emphasis {
+    background-color: var(--sgds-background-color-cyan-surface-emphasis);
+  }
+  .sgds\:bg-cyan-surface-muted {
+    background-color: var(--sgds-background-color-cyan-surface-muted);
+  }
+  .sgds\:bg-danger-default {
+    background-color: var(--sgds-background-color-danger-default);
+  }
+  .sgds\:bg-danger-muted {
+    background-color: var(--sgds-background-color-danger-muted);
+  }
+  .sgds\:bg-danger-surface-default {
+    background-color: var(--sgds-background-color-danger-surface-default);
+  }
+  .sgds\:bg-danger-surface-emphasis {
+    background-color: var(--sgds-background-color-danger-surface-emphasis);
+  }
+  .sgds\:bg-danger-surface-muted {
+    background-color: var(--sgds-background-color-danger-surface-muted);
+  }
+  .sgds\:bg-danger-surface-translucent {
+    background-color: var(--sgds-background-color-danger-surface-translucent);
   }
   .sgds\:bg-default {
     background-color: var(--sgds-background-color-default);
@@ -151,6 +386,57 @@
   }
   .sgds\:bg-fixed-light {
     background-color: var(--sgds-background-color-fixed-light);
+  }
+  .sgds\:bg-form-danger-surface-default {
+    background-color: var(--sgds-background-color-form-danger-surface-default);
+  }
+  .sgds\:bg-form-primary-surface-default {
+    background-color: var(--sgds-background-color-form-primary-surface-default);
+  }
+  .sgds\:bg-form-primary-surface-emphasis {
+    background-color: var(--sgds-background-color-form-primary-surface-emphasis);
+  }
+  .sgds\:bg-form-success-surface-default {
+    background-color: var(--sgds-background-color-form-success-surface-default);
+  }
+  .sgds\:bg-form-surface-default {
+    background-color: var(--sgds-background-color-form-surface-default);
+  }
+  .sgds\:bg-form-surface-emphasis {
+    background-color: var(--sgds-background-color-form-surface-emphasis);
+  }
+  .sgds\:bg-form-surface-fixed-dark {
+    background-color: var(--sgds-background-color-form-surface-fixed-dark);
+  }
+  .sgds\:bg-form-surface-fixed-light {
+    background-color: var(--sgds-background-color-form-surface-fixed-light);
+  }
+  .sgds\:bg-form-surface-inverse {
+    background-color: var(--sgds-background-color-form-surface-inverse);
+  }
+  .sgds\:bg-form-surface-muted {
+    background-color: var(--sgds-background-color-form-surface-muted);
+  }
+  .sgds\:bg-form-surface-raised {
+    background-color: var(--sgds-background-color-form-surface-raised);
+  }
+  .sgds\:bg-form-surface-subtle {
+    background-color: var(--sgds-background-color-form-surface-subtle);
+  }
+  .sgds\:bg-neutral-default {
+    background-color: var(--sgds-background-color-neutral-default);
+  }
+  .sgds\:bg-neutral-muted {
+    background-color: var(--sgds-background-color-neutral-muted);
+  }
+  .sgds\:bg-neutral-surface-default {
+    background-color: var(--sgds-background-color-neutral-surface-default);
+  }
+  .sgds\:bg-neutral-surface-emphasis {
+    background-color: var(--sgds-background-color-neutral-surface-emphasis);
+  }
+  .sgds\:bg-neutral-surface-muted {
+    background-color: var(--sgds-background-color-neutral-surface-muted);
   }
   .sgds\:bg-overlay {
     background-color: var(--sgds-background-color-overlay);
@@ -175,6 +461,36 @@
   }
   .sgds\:bg-primary-translucent {
     background-color: var(--sgds-background-color-primary-translucent);
+  }
+  .sgds\:bg-purple-default {
+    background-color: var(--sgds-background-color-purple-default);
+  }
+  .sgds\:bg-purple-muted {
+    background-color: var(--sgds-background-color-purple-muted);
+  }
+  .sgds\:bg-purple-surface-default {
+    background-color: var(--sgds-background-color-purple-surface-default);
+  }
+  .sgds\:bg-purple-surface-emphasis {
+    background-color: var(--sgds-background-color-purple-surface-emphasis);
+  }
+  .sgds\:bg-purple-surface-muted {
+    background-color: var(--sgds-background-color-purple-surface-muted);
+  }
+  .sgds\:bg-success-default {
+    background-color: var(--sgds-background-color-success-default);
+  }
+  .sgds\:bg-success-muted {
+    background-color: var(--sgds-background-color-success-muted);
+  }
+  .sgds\:bg-success-surface-default {
+    background-color: var(--sgds-background-color-success-surface-default);
+  }
+  .sgds\:bg-success-surface-emphasis {
+    background-color: var(--sgds-background-color-success-surface-emphasis);
+  }
+  .sgds\:bg-success-surface-muted {
+    background-color: var(--sgds-background-color-success-surface-muted);
   }
   .sgds\:bg-surface-default {
     background-color: var(--sgds-background-color-surface-default);
@@ -209,6 +525,21 @@
   .sgds\:bg-transparent {
     background-color: transparent;
   }
+  .sgds\:bg-warning-default {
+    background-color: var(--sgds-background-color-warning-default);
+  }
+  .sgds\:bg-warning-muted {
+    background-color: var(--sgds-background-color-warning-muted);
+  }
+  .sgds\:bg-warning-surface-default {
+    background-color: var(--sgds-background-color-warning-surface-default);
+  }
+  .sgds\:bg-warning-surface-emphasis {
+    background-color: var(--sgds-background-color-warning-surface-emphasis);
+  }
+  .sgds\:bg-warning-surface-muted {
+    background-color: var(--sgds-background-color-warning-surface-muted);
+  }
   .sgds\:p-2-xl {
     padding: var(--sgds-spacing-2-xl);
   }
@@ -218,17 +549,62 @@
   .sgds\:p-md {
     padding: var(--sgds-spacing-md);
   }
-  .sgds\:p-sm {
-    padding: var(--sgds-spacing-sm);
-  }
   .sgds\:p-xl {
     padding: var(--sgds-spacing-xl);
   }
   .sgds\:py-2-xl {
     padding-block: var(--sgds-spacing-2-xl);
   }
+  .sgds\:text-accent-default {
+    color: var(--sgds-text-color-accent-default);
+  }
+  .sgds\:text-accent-emphasis {
+    color: var(--sgds-text-color-accent-emphasis);
+  }
+  .sgds\:text-accent-fixed-dark {
+    color: var(--sgds-text-color-accent-fixed-dark);
+  }
+  .sgds\:text-accent-fixed-light {
+    color: var(--sgds-text-color-accent-fixed-light);
+  }
+  .sgds\:text-body-default {
+    color: var(--sgds-text-color-body-default);
+  }
+  .sgds\:text-body-subtle {
+    color: var(--sgds-text-color-body-subtle);
+  }
+  .sgds\:text-cyan-default {
+    color: var(--sgds-text-color-cyan-default);
+  }
+  .sgds\:text-cyan-emphasis {
+    color: var(--sgds-text-color-cyan-emphasis);
+  }
+  .sgds\:text-cyan-fixed-dark {
+    color: var(--sgds-text-color-cyan-fixed-dark);
+  }
+  .sgds\:text-cyan-fixed-light {
+    color: var(--sgds-text-color-cyan-fixed-light);
+  }
+  .sgds\:text-danger-default {
+    color: var(--sgds-text-color-danger-default);
+  }
+  .sgds\:text-danger-emphasis {
+    color: var(--sgds-text-color-danger-emphasis);
+  }
+  .sgds\:text-danger-fixed-dark {
+    color: var(--sgds-text-color-danger-fixed-dark);
+  }
+  .sgds\:text-danger-fixed-light {
+    color: var(--sgds-text-color-danger-fixed-light);
+  }
   .sgds\:text-default {
     color: var(--sgds-text-color-default);
+  }
+  .sgds\:text-display-default {
+    color: var(--sgds-text-color-display-default);
+  }
+  .sgds\:text-display-subtle {
+    color: var(--sgds-text-color-display-subtle);
   }
   .sgds\:text-fixed-dark {
     color: var(--sgds-text-color-fixed-dark);
@@ -236,11 +612,68 @@
   .sgds\:text-fixed-light {
     color: var(--sgds-text-color-fixed-light);
   }
+  .sgds\:text-form-danger-default {
+    color: var(--sgds-text-color-form-danger-default);
+  }
+  .sgds\:text-form-default {
+    color: var(--sgds-text-color-form-default);
+  }
+  .sgds\:text-form-fixed-dark {
+    color: var(--sgds-text-color-form-fixed-dark);
+  }
+  .sgds\:text-form-fixed-light {
+    color: var(--sgds-text-color-form-fixed-light);
+  }
+  .sgds\:text-form-inverse {
+    color: var(--sgds-text-color-form-inverse);
+  }
+  .sgds\:text-form-muted {
+    color: var(--sgds-text-color-form-muted);
+  }
+  .sgds\:text-form-primary-default {
+    color: var(--sgds-text-color-form-primary-default);
+  }
+  .sgds\:text-form-subtle {
+    color: var(--sgds-text-color-form-subtle);
+  }
+  .sgds\:text-form-success-default {
+    color: var(--sgds-text-color-form-success-default);
+  }
+  .sgds\:text-heading-default {
+    color: var(--sgds-text-color-heading-default);
+  }
+  .sgds\:text-heading-subtle {
+    color: var(--sgds-text-color-heading-subtle);
+  }
   .sgds\:text-inverse {
     color: var(--sgds-text-color-inverse);
   }
+  .sgds\:text-label-default {
+    color: var(--sgds-text-color-label-default);
+  }
+  .sgds\:text-label-subtle {
+    color: var(--sgds-text-color-label-subtle);
+  }
+  .sgds\:text-link-default {
+    color: var(--sgds-text-color-link-default);
+  }
+  .sgds\:text-link-emphasis {
+    color: var(--sgds-text-color-link-emphasis);
+  }
   .sgds\:text-muted {
     color: var(--sgds-text-color-muted);
+  }
+  .sgds\:text-neutral-default {
+    color: var(--sgds-text-color-neutral-default);
+  }
+  .sgds\:text-neutral-emphasis {
+    color: var(--sgds-text-color-neutral-emphasis);
+  }
+  .sgds\:text-neutral-fixed-dark {
+    color: var(--sgds-text-color-neutral-fixed-dark);
+  }
+  .sgds\:text-neutral-fixed-light {
+    color: var(--sgds-text-color-neutral-fixed-light);
   }
   .sgds\:text-primary-default {
     color: var(--sgds-text-color-primary-default);
@@ -254,11 +687,47 @@
   .sgds\:text-primary-fixed-light {
     color: var(--sgds-text-color-primary-fixed-light);
   }
+  .sgds\:text-purple-default {
+    color: var(--sgds-text-color-purple-default);
+  }
+  .sgds\:text-purple-emphasis {
+    color: var(--sgds-text-color-purple-emphasis);
+  }
+  .sgds\:text-purple-fixed-dark {
+    color: var(--sgds-text-color-purple-fixed-dark);
+  }
+  .sgds\:text-purple-fixed-light {
+    color: var(--sgds-text-color-purple-fixed-light);
+  }
   .sgds\:text-subtle {
     color: var(--sgds-text-color-subtle);
   }
+  .sgds\:text-success-default {
+    color: var(--sgds-text-color-success-default);
+  }
+  .sgds\:text-success-emphasis {
+    color: var(--sgds-text-color-success-emphasis);
+  }
+  .sgds\:text-success-fixed-dark {
+    color: var(--sgds-text-color-success-fixed-dark);
+  }
+  .sgds\:text-success-fixed-light {
+    color: var(--sgds-text-color-success-fixed-light);
+  }
   .sgds\:text-transparent {
     color: transparent;
+  }
+  .sgds\:text-warning-default {
+    color: var(--sgds-text-color-warning-default);
+  }
+  .sgds\:text-warning-emphasis {
+    color: var(--sgds-text-color-warning-emphasis);
+  }
+  .sgds\:text-warning-fixed-dark {
+    color: var(--sgds-text-color-warning-fixed-dark);
+  }
+  .sgds\:text-warning-fixed-light {
+    color: var(--sgds-text-color-warning-fixed-light);
   }
   .sgds\:md\:w-68 {
     @media (width >= 768px) {
