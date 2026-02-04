@@ -329,6 +329,9 @@
   .sgds\:h-\[calc\(100vh-108px\)\] {
     height: calc(100vh - 108px);
   }
+  .sgds\:min-h-24 {
+    min-height: calc(var(--sgds-spacing) * 24);
+  }
   .sgds\:w-2-xl {
     width: var(--sgds-spacing-2-xl);
   }
@@ -929,6 +932,9 @@
   .sgds\:tracking-wider {
     --tw-tracking: var(--sgds-tracking-wider);
     letter-spacing: var(--sgds-tracking-wider);
+  }
+  .sgds\:break-words {
+    overflow-wrap: break-word;
   }
   .sgds\:text-accent-default {
     color: var(--sgds-text-color-accent-default);

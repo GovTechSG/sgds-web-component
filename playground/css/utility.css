@@ -281,14 +281,26 @@
   .sgds\:top-27 {
     top: calc(var(--sgds-spacing) * 27);
   }
+  .sgds\:m-0 {
+    margin: calc(var(--sgds-spacing) * 0);
+  }
   .sgds\:my-md {
     margin-block: var(--sgds-spacing-md);
+  }
+  .sgds\:mt-0 {
+    margin-top: calc(var(--sgds-spacing) * 0);
+  }
+  .sgds\:mt-2-xl {
+    margin-top: var(--sgds-spacing-2-xl);
   }
   .sgds\:mt-lg {
     margin-top: var(--sgds-spacing-lg);
   }
   .sgds\:mt-md {
     margin-top: var(--sgds-spacing-md);
+  }
+  .sgds\:mt-sm {
+    margin-top: var(--sgds-spacing-sm);
   }
   .sgds\:mb-2-xl {
     margin-bottom: var(--sgds-spacing-2-xl);
@@ -311,6 +323,9 @@
   .sgds\:ml-md {
     margin-left: var(--sgds-spacing-md);
   }
+  .sgds\:block {
+    display: block;
+  }
   .sgds\:flex {
     display: flex;
   }
@@ -320,6 +335,9 @@
   .sgds\:h-2-xl {
     height: var(--sgds-spacing-2-xl);
   }
+  .sgds\:h-32 {
+    height: calc(var(--sgds-spacing) * 32);
+  }
   .sgds\:h-250 {
     height: calc(var(--sgds-spacing) * 250);
   }
@@ -328,6 +346,9 @@
   }
   .sgds\:h-\[calc\(100vh-108px\)\] {
     height: calc(100vh - 108px);
+  }
+  .sgds\:min-h-24 {
+    min-height: calc(var(--sgds-spacing) * 24);
   }
   .sgds\:w-2-xl {
     width: var(--sgds-spacing-2-xl);
@@ -487,6 +508,18 @@
   .sgds\:border {
     border-style: var(--tw-border-style);
     border-width: 1px;
+  }
+  .sgds\:border-0 {
+    border-style: var(--tw-border-style);
+    border-width: var(--sgds-border-width-0);
+  }
+  .sgds\:border-2 {
+    border-style: var(--tw-border-style);
+    border-width: var(--sgds-border-width-2);
+  }
+  .sgds\:border-l {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 1px;
   }
   .sgds\:border-none {
     --tw-border-style: none;
@@ -841,6 +874,15 @@
   .sgds\:py-sm {
     padding-block: var(--sgds-spacing-sm);
   }
+  .sgds\:pt-lg {
+    padding-top: var(--sgds-spacing-lg);
+  }
+  .sgds\:pl-lg {
+    padding-left: var(--sgds-spacing-lg);
+  }
+  .sgds\:pl-md {
+    padding-left: var(--sgds-spacing-md);
+  }
   .sgds\:font-display {
     font-family: var(--sgds-font-display);
   }
@@ -929,6 +971,9 @@
   .sgds\:tracking-wider {
     --tw-tracking: var(--sgds-tracking-wider);
     letter-spacing: var(--sgds-tracking-wider);
+  }
+  .sgds\:break-words {
+    overflow-wrap: break-word;
   }
   .sgds\:text-accent-default {
     color: var(--sgds-text-color-accent-default);
@@ -1107,6 +1152,9 @@
   .sgds\:uppercase {
     text-transform: uppercase;
   }
+  .sgds\:underline {
+    text-decoration-line: underline;
+  }
   .sgds\:opacity-0 {
     opacity: var(--sgds-opacity-0);
   }
@@ -1136,6 +1184,9 @@
   }
   .sgds\:opacity-70 {
     opacity: var(--sgds-opacity-70);
+  }
+  .sgds\:opacity-75 {
+    opacity: 75%;
   }
   .sgds\:opacity-80 {
     opacity: var(--sgds-opacity-80);
