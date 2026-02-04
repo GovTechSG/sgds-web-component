@@ -232,25 +232,125 @@
   --text-color-form-danger-default: var(--sgds-form-danger-color-default);
   --border-color-form-danger-default: var(--sgds-form-danger-border-color-default);
 
+  /* Border Width */
+  --border-width-0: var(--sgds-border-width-0);
+  --border-width-1: var(--sgds-border-width-1);
+  --border-width-2: var(--sgds-border-width-2);
+  --border-width-3: var(--sgds-border-width-3);
+  --border-width-4: var(--sgds-border-width-4);
 
+  /* Form Border Width */
+  --border-width-form-default: var(--sgds-form-border-width-default);
+  --border-width-form-thick: var(--sgds-form-border-width-thick);
 
-  
+  /* Breakpoint */
+  --breakpoint-xs: var(--sgds-breakpoint-xs);
+  --breakpoint-sm: var(--sgds-breakpoint-sm);
+  --breakpoint-md: var(--sgds-breakpoint-md);
+  --breakpoint-lg: var(--sgds-breakpoint-lg);
+  --breakpoint-xl: var(--sgds-breakpoint-xl);
+  --breakpoint-2-xl: var(--sgds-breakpoint-2-xl);
+
+  /* Breakpoint with Sidebar */
+  --breakpoint-sbar-md: var(--sgds-breakpoint-sbar-md);
+  --breakpoint-sbar-lg: var(--sgds-breakpoint-sbar-lg);
+  --breakpoint-sbar-xl: var(--sgds-breakpoint-sbar-xl);
+  --breakpoint-sbar-2-xl: var(--sgds-breakpoint-sbar-2-xl);
+
+  /* Font Family */
+  --font-display: var(--sgds-font-family-brand);
+
+  /* Font Weight */
+  --font-weight-light: var(--sgds-font-weight-light);
+  --font-weight-regular: var(--sgds-font-weight-regular);
+  --font-weight-semibold: var(--sgds-font-weight-semibold);
+  --font-weight-bold: var(--sgds-font-weight-bold);
+
+  /* Font Size */
+  --text-0: var(--sgds-font-size-0);
+  --text-1: var(--sgds-font-size-1);
+  --text-2: var(--sgds-font-size-2);
+  --text-3: var(--sgds-font-size-3);
+  --text-4: var(--sgds-font-size-4);
+  --text-5: var(--sgds-font-size-5);
+  --text-6: var(--sgds-font-size-6);
+  --text-7: var(--sgds-font-size-7);
+  --text-8: var(--sgds-font-size-8);
+  --text-9: var(--sgds-font-size-9);
+
+  /* Letter Spacing */
+  --tracking-tighter: var(--sgds-letter-spacing-tighter);
+  --tracking-tight: var(--sgds-letter-spacing-tight);
+  --tracking-normal: var(--sgds-letter-spacing-normal);
+  --tracking-wide: var(--sgds-letter-spacing-wide);
+  --tracking-wider: var(--sgds-letter-spacing-wider);
+
+  /* Line Height */
+  --leading-16: var(--sgds-line-height-16);
+  --leading-20: var(--sgds-line-height-20);
+  --leading-24: var(--sgds-line-height-24);
+  --leading-32: var(--sgds-line-height-32);
+  --leading-36: var(--sgds-line-height-36);
+  --leading-40: var(--sgds-line-height-40);
+  --leading-48: var(--sgds-line-height-48);
+  --leading-56: var(--sgds-line-height-56);
+  --leading-64: var(--sgds-line-height-64);
+
+  /* Opacity */
+  --opacity-0: var(--sgds-opacity-0);
+  --opacity-3: var(--sgds-opacity-3);
+  --opacity-5: var(--sgds-opacity-5);
+  --opacity-10: var(--sgds-opacity-10);
+  --opacity-20: var(--sgds-opacity-20);
+  --opacity-30: var(--sgds-opacity-30);
+  --opacity-40: var(--sgds-opacity-40);
+  --opacity-50: var(--sgds-opacity-50);
+  --opacity-60: var(--sgds-opacity-60);
+  --opacity-70: var(--sgds-opacity-70);
+  --opacity-80: var(--sgds-opacity-80);
+  --opacity-90: var(--sgds-opacity-90);
+  --opacity-100: var(--sgds-opacity-100);
+
+  /* Gap */
+  --gap-none: var(--sgds-gap-none);
+  --gap-2-xs: var(--sgds-gap-2-xs);
+  --gap-xs: var(--sgds-gap-xs);
+  --gap-sm: var(--sgds-gap-sm);
+  --gap-md: var(--sgds-gap-md);
+  --gap-lg: var(--sgds-gap-lg);
+  --gap-xl: var(--sgds-gap-xl);
+  --gap-2-xl: var(--sgds-gap-2-xl);
+  --gap-3-xl: var(--sgds-gap-3-xl);
+
+  /* Form Gap */
+  --gap-form-sm: var(--sgds-form-gap-sm);
+  --gap-form-md: var(--sgds-form-gap-md);
+  --gap-form-lg: var(--sgds-form-gap-lg);
+  --gap-form-xl: var(--sgds-form-gap-xl);
+  --gap-form-2-xl: var(--sgds-form-gap-2-xl);
+
+  /* Border Radius */
   --radius-none: var(--sgds-border-radius-none);
   --radius-xs: var(--sgds-border-radius-xs);
-  
-  --text-3: var(--sgds-font-size-3);
-  --text-3-line-height: var(--sgds-line-height-body);
-  --leading-16: var(--sgds-line-height-16);
-  --font-weight-regular: var(--sgds-font-weight-regular);
-  --tracking-normal:var(--sgds-letter-spacing-normal);
+  --radius-sm: var(--sgds-border-radius-sm);
+  --radius-md: var(--sgds-border-radius-md);
+  --radius-lg: var(--sgds-border-radius-lg);
+  --radius-xl: var(--sgds-border-radius-xl);
+  --radius-2-xl: var(--sgds-border-radius-2-xl);
+  --radius-full: var(--sgds-border-radius-full);
 
+  /* Form Border Radius */
+  --radius-form-none: var(--sgds-form-border-radius-none);
+  --radius-form-xs: var(--sgds-form-border-radius-xs);
+  --radius-form-sm: var(--sgds-form-border-radius-sm);
+  --radius-form-md: var(--sgds-form-border-radius-md);
+  --radius-form-full: var(--sgds-form-border-radius-full);
 
-  --text-sgds-7: var(--sgds-font-size-7);
-  --leading-48: var(--sgds-line-height-48);
-  --font-weight-bold: var(--sgds-font-weight-bold);
-  --tracking-tight: var(--sgds-letter-spacing-tight);
-
-  --font-weight-light: var(--sgds-font-weight-light);
-
+  /* Paragraph Spacing */
+  --space-paragraph-none: var(--sgds-paragraph-spacing-none);
+  --space-paragraph-sm: var(--sgds-paragraph-spacing-sm);
+  --space-paragraph-md: var(--sgds-paragraph-spacing-md);
+  --space-paragraph-lg: var(--sgds-paragraph-spacing-lg);
+  --space-paragraph-xl: var(--sgds-paragraph-spacing-xl);
 
 }

@@ -1,0 +1,199 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Gap</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+  
+  <section class="sgds:mb-2-xl">
+    <h2>Gap</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Value</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-none</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-gap-none</code></sgds-table-cell>
+        <sgds-table-cell>0rem</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-none"><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-2-xs</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-gap-2-xs</code></sgds-table-cell>
+        <sgds-table-cell>0.25rem (4px)</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-2-xs"><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-xs</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-gap-xs</code></sgds-table-cell>
+        <sgds-table-cell>0.5rem (8px)</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-xs"><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-sm</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-gap-sm</code></sgds-table-cell>
+        <sgds-table-cell>0.75rem (12px)</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-sm"><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-md</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-gap-md</code></sgds-table-cell>
+        <sgds-table-cell>1rem (16px)</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-md"><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-lg</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-gap-lg</code></sgds-table-cell>
+        <sgds-table-cell>1.25rem (20px)</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-lg"><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-xl</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-gap-xl</code></sgds-table-cell>
+        <sgds-table-cell>1.5rem (24px)</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-xl"><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-2-xl</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-gap-2-xl</code></sgds-table-cell>
+        <sgds-table-cell>2rem (32px)</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-2-xl"><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-3-xl</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-gap-3-xl</code></sgds-table-cell>
+        <sgds-table-cell>3rem (48px)</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-3-xl"><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div><div class="sgds:bg-primary-default sgds:p-md"></div></div></sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Form Gap</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Maps To</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-form-sm</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-form-gap-sm</code></sgds-table-cell>
+        <sgds-table-cell>gap-2-xs (0.25rem)</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-form-sm"><div class="sgds:bg-accent-default sgds:p-sm"></div><div class="sgds:bg-accent-default sgds:p-sm"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-form-md</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-form-gap-md</code></sgds-table-cell>
+        <sgds-table-cell>gap-xs (0.5rem)</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-form-md"><div class="sgds:bg-accent-default sgds:p-sm"></div><div class="sgds:bg-accent-default sgds:p-sm"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-form-lg</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-form-gap-lg</code></sgds-table-cell>
+        <sgds-table-cell>gap-sm (0.75rem)</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-form-lg"><div class="sgds:bg-accent-default sgds:p-sm"></div><div class="sgds:bg-accent-default sgds:p-sm"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-form-xl</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-form-gap-xl</code></sgds-table-cell>
+        <sgds-table-cell>gap-md (1rem)</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-form-xl"><div class="sgds:bg-accent-default sgds:p-sm"></div><div class="sgds:bg-accent-default sgds:p-sm"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-form-2-xl</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-form-gap-2-xl</code></sgds-table-cell>
+        <sgds-table-cell>gap-xl (1.5rem)</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-form-2-xl"><div class="sgds:bg-accent-default sgds:p-sm"></div><div class="sgds:bg-accent-default sgds:p-sm"></div></div></sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section>
+    <h2>Combined Examples</h2>
+    
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Card Grid with Different Gaps</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <p class="sgds:mb-sm sgds:text-subtle">Gap: xs (8px)</p>
+        <div class="sgds:grid sgds:grid-cols-3 sgds:gap-xs sgds:mb-lg">
+          <div class="sgds:bg-primary-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm">Card 1</div>
+          <div class="sgds:bg-primary-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm">Card 2</div>
+          <div class="sgds:bg-primary-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm">Card 3</div>
+        </div>
+        
+        <p class="sgds:mb-sm sgds:text-subtle">Gap: md (16px)</p>
+        <div class="sgds:grid sgds:grid-cols-3 sgds:gap-md sgds:mb-lg">
+          <div class="sgds:bg-accent-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm">Card 1</div>
+          <div class="sgds:bg-accent-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm">Card 2</div>
+          <div class="sgds:bg-accent-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm">Card 3</div>
+        </div>
+        
+        <p class="sgds:mb-sm sgds:text-subtle">Gap: xl (24px)</p>
+        <div class="sgds:grid sgds:grid-cols-3 sgds:gap-xl">
+          <div class="sgds:bg-success-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm">Card 1</div>
+          <div class="sgds:bg-success-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm">Card 2</div>
+          <div class="sgds:bg-success-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm">Card 3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Flexbox Navigation with Gap</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <div class="sgds:flex sgds:gap-md sgds:items-center">
+          <div class="sgds:bg-primary-default sgds:px-lg sgds:py-sm sgds:text-fixed-light sgds:rounded-sm">Home</div>
+          <div class="sgds:bg-primary-default sgds:px-lg sgds:py-sm sgds:text-fixed-light sgds:rounded-sm">About</div>
+          <div class="sgds:bg-primary-default sgds:px-lg sgds:py-sm sgds:text-fixed-light sgds:rounded-sm">Services</div>
+          <div class="sgds:bg-primary-default sgds:px-lg sgds:py-sm sgds:text-fixed-light sgds:rounded-sm">Contact</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Form Elements with Form Gap</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <form class="sgds:flex sgds:flex-col sgds:gap-form-lg sgds:max-w-md">
+          <div class="sgds:flex sgds:flex-col sgds:gap-form-sm">
+            <label class="sgds:text-sm sgds:font-weight-semibold">Full Name</label>
+            <input type="text" class="sgds:bg-form-surface-default sgds:border sgds:border-default sgds:px-md sgds:py-sm sgds:rounded-sm" placeholder="John Doe" />
+          </div>
+          <div class="sgds:flex sgds:flex-col sgds:gap-form-sm">
+            <label class="sgds:text-sm sgds:font-weight-semibold">Email Address</label>
+            <input type="email" class="sgds:bg-form-surface-default sgds:border sgds:border-default sgds:px-md sgds:py-sm sgds:rounded-sm" placeholder="john@example.com" />
+          </div>
+          <div class="sgds:flex sgds:flex-col sgds:gap-form-sm">
+            <label class="sgds:text-sm sgds:font-weight-semibold">Message</label>
+            <textarea class="sgds:bg-form-surface-default sgds:border sgds:border-default sgds:px-md sgds:py-sm sgds:rounded-sm" rows="3" placeholder="Your message here..."></textarea>
+          </div>
+          <button type="submit" class="sgds:bg-primary-default sgds:text-fixed-light sgds:px-lg sgds:py-sm sgds:rounded-sm sgds:border-none">Submit</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const nightBtn = document.querySelector("#night-theme");
+    nightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const html = document.querySelector("html");
+      if (html.classList.contains("sgds-night-theme")) {
+        html.classList.remove("sgds-night-theme");
+      } else {
+        html.classList.add("sgds-night-theme");
+      }
+    });
+  </script>
+</body>

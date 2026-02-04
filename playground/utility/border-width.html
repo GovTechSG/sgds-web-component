@@ -1,0 +1,111 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Border Width</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+  
+  <section class="sgds:mb-2-xl">
+    <h2>Border Width</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:border-width-0</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-border-width-0</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:border-width-0 sgds:border-solid sgds:border-default sgds:p-md">Border width 0px (no border)</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:border-width-1</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-border-width-1</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:border-width-1 sgds:border-solid sgds:border-default sgds:p-md">Border width 1px</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:border-width-2</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-border-width-2</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:border-width-2 sgds:border-solid sgds:border-default sgds:p-md">Border width 2px</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:border-width-3</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-border-width-3</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:border-width-3 sgds:border-solid sgds:border-default sgds:p-md">Border width 3px</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:border-width-4</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-border-width-4</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:border-width-4 sgds:border-solid sgds:border-default sgds:p-md">Border width 4px</div></sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Form Border Width</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:border-width-form-default</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-form-border-width-default</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:border-width-form-default sgds:border-solid sgds:border-default sgds:p-md">Form default border (1px)</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:border-width-form-thick</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-form-border-width-thick</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:border-width-form-thick sgds:border-solid sgds:border-default sgds:p-md">Form thick border (2px)</div></sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section>
+    <h2>Combined Examples</h2>
+    
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Border Widths Comparison</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <div class="sgds:border-width-1 sgds:border-solid sgds:border-default sgds:p-md sgds:mb-sm">1px border</div>
+        <div class="sgds:border-width-2 sgds:border-solid sgds:border-default sgds:p-md sgds:mb-sm">2px border</div>
+        <div class="sgds:border-width-3 sgds:border-solid sgds:border-default sgds:p-md sgds:mb-sm">3px border</div>
+        <div class="sgds:border-width-4 sgds:border-solid sgds:border-default sgds:p-md">4px border</div>
+      </div>
+    </div>
+
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Form Input Example</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <div class="sgds:border-width-form-default sgds:border-solid sgds:border-default sgds:bg-form-surface-default sgds:p-md sgds:mb-sm">
+          Input with default form border
+        </div>
+        <div class="sgds:border-width-form-thick sgds:border-solid sgds:border-default sgds:bg-form-surface-default sgds:p-md">
+          Input with thick form border (focus state)
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const nightBtn = document.querySelector("#night-theme");
+    nightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const html = document.querySelector("html");
+      if (html.classList.contains("sgds-night-theme")) {
+        html.classList.remove("sgds-night-theme");
+      } else {
+        html.classList.add("sgds-night-theme");
+      }
+    });
+  </script>
+</body>
