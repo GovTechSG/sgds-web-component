@@ -1,0 +1,197 @@
+import { Canvas, Meta } from '@storybook/addon-docs';
+import * as BackgroundColorStories from './background-color.stories';
+
+<Meta of={BackgroundColorStories} />
+
+# Background Color
+
+Background color utilities define the color of background surfaces. SGDS provides semantic color tokens for different surface types and states.
+
+## Surface Colors
+
+<Canvas of={BackgroundColorStories.SurfaceColors} />
+
+## Base Colors
+
+<Canvas of={BackgroundColorStories.BaseColors} />
+
+## Primary Colors
+
+<Canvas of={BackgroundColorStories.PrimaryColors} />
+
+## Accent Colors
+
+<Canvas of={BackgroundColorStories.AccentColors} />
+
+## Success Colors
+
+<Canvas of={BackgroundColorStories.SuccessColors} />
+
+## Danger Colors
+
+<Canvas of={BackgroundColorStories.DangerColors} />
+
+## Warning Colors
+
+<Canvas of={BackgroundColorStories.WarningColors} />
+
+## Purple Colors
+
+<Canvas of={BackgroundColorStories.PurpleColors} />
+
+## Cyan Colors
+
+<Canvas of={BackgroundColorStories.CyanColors} />
+
+## Neutral Colors
+
+<Canvas of={BackgroundColorStories.NeutralColors} />
+
+## Form Surface Colors
+
+<Canvas of={BackgroundColorStories.FormColors} />
+
+
+## Color Groupings
+
+### Surface Colors
+
+| SGDS Tailwind Token | CSS Variable | Purpose |
+|---|---|---|
+| `sgds:bg-surface-default` | `--sgds-surface-default` | Base surface color |
+| `sgds:bg-surface-raised` | `--sgds-surface-raised` | Elevated surface (cards, panels) |
+| `sgds:bg-surface-inverse` | `--sgds-surface-inverse` | Inverted surface with inverse text |
+| `sgds:bg-surface-fixed-light` | `--sgds-surface-fixed-light` | Always light surface |
+| `sgds:bg-surface-fixed-dark` | `--sgds-surface-fixed-dark` | Always dark surface |
+
+### Background Colors
+
+| SGDS Tailwind Token | CSS Variable | Purpose |
+|---|---|---|
+| `sgds:bg-default` | `--sgds-bg-default` | Main page background |
+| `sgds:bg-alternate` | `--sgds-bg-alternate` | Alternate background shade |
+| `sgds:bg-fixed-light` | `--sgds-bg-fixed-light` | Always light background |
+| `sgds:bg-fixed-dark` | `--sgds-bg-fixed-dark` | Always dark background |
+| `sgds:bg-overlay` | `--sgds-bg-overlay` | Semi-transparent dark overlay |
+| `sgds:bg-translucent` | `--sgds-bg-translucent` | Semi-transparent overlay |
+| `sgds:bg-translucent-subtle` | `--sgds-bg-translucent-subtle` | Very subtle overlay |
+| `sgds:bg-transparent` | `transparent` | Fully transparent |
+| `sgds:bg-translucent-inverse` | `--sgds-bg-translucent-inverse` | Light translucent |
+| `sgds:bg-translucent-fixed-dark` | `--sgds-bg-translucent-fixed-dark` | Translucent fixed dark |
+| `sgds:bg-translucent-fixed-light` | `--sgds-bg-translucent-fixed-light` | Translucent fixed light |
+
+### Primary Colors
+
+| SGDS Tailwind Token | CSS Variable | Purpose |
+|---|---|---|
+| `sgds:bg-primary-default` | `--sgds-primary-bg-default` | Main primary background |
+| `sgds:bg-primary-muted` | `--sgds-primary-bg-muted` | Subtle primary background |
+| `sgds:bg-primary-translucent` | `--sgds-primary-bg-translucent` | Semi-transparent primary overlay |
+| `sgds:bg-primary-surface-default` | `--sgds-primary-surface-default` | Primary surface color |
+| `sgds:bg-primary-surface-emphasis` | `--sgds-primary-surface-emphasis` | Emphasized primary surface |
+| `sgds:bg-primary-surface-muted` | `--sgds-primary-surface-muted` | Subtle primary surface |
+| `sgds:bg-primary-surface-translucent` | `--sgds-primary-surface-translucent` | Semi-transparent primary surface |
+
+### Accent Colors
+
+| SGDS Tailwind Token | CSS Variable | Purpose |
+|---|---|---|
+| `sgds:bg-accent-default` | `--sgds-accent-bg-default` | Accent background |
+| `sgds:bg-accent-muted` | `--sgds-accent-bg-muted` | Muted accent background |
+| `sgds:bg-accent-surface-default` | `--sgds-accent-surface-default` | Accent surface |
+| `sgds:bg-accent-surface-emphasis` | `--sgds-accent-surface-emphasis` | Emphasized accent surface |
+| `sgds:bg-accent-surface-muted` | `--sgds-accent-surface-muted` | Muted accent surface |
+
+### Success Colors
+
+| SGDS Tailwind Token | CSS Variable | Purpose |
+|---|---|---|
+| `sgds:bg-success-default` | `--sgds-success-bg-default` | Success background |
+| `sgds:bg-success-muted` | `--sgds-success-bg-muted` | Muted success background |
+| `sgds:bg-success-surface-default` | `--sgds-success-surface-default` | Success surface |
+| `sgds:bg-success-surface-emphasis` | `--sgds-success-surface-emphasis` | Emphasized success surface |
+| `sgds:bg-success-surface-muted` | `--sgds-success-surface-muted` | Muted success surface |
+
+### Danger Colors
+
+| SGDS Tailwind Token | CSS Variable | Purpose |
+|---|---|---|
+| `sgds:bg-danger-default` | `--sgds-danger-bg-default` | Danger background |
+| `sgds:bg-danger-muted` | `--sgds-danger-bg-muted` | Muted danger background |
+| `sgds:bg-danger-surface-default` | `--sgds-danger-surface-default` | Danger surface |
+| `sgds:bg-danger-surface-emphasis` | `--sgds-danger-surface-emphasis` | Emphasized danger surface |
+| `sgds:bg-danger-surface-muted` | `--sgds-danger-surface-muted` | Muted danger surface |
+| `sgds:bg-danger-surface-translucent` | `--sgds-danger-surface-translucent` | Translucent danger surface |
+
+### Warning Colors
+
+| SGDS Tailwind Token | CSS Variable | Purpose |
+|---|---|---|
+| `sgds:bg-warning-default` | `--sgds-warning-bg-default` | Warning background |
+| `sgds:bg-warning-muted` | `--sgds-warning-bg-muted` | Muted warning background |
+| `sgds:bg-warning-surface-default` | `--sgds-warning-surface-default` | Warning surface |
+| `sgds:bg-warning-surface-emphasis` | `--sgds-warning-surface-emphasis` | Emphasized warning surface |
+| `sgds:bg-warning-surface-muted` | `--sgds-warning-surface-muted` | Muted warning surface |
+
+### Purple Colors
+
+| SGDS Tailwind Token | CSS Variable | Purpose |
+|---|---|---|
+| `sgds:bg-purple-default` | `--sgds-purple-bg-default` | Purple background |
+| `sgds:bg-purple-muted` | `--sgds-purple-bg-muted` | Muted purple background |
+| `sgds:bg-purple-surface-default` | `--sgds-purple-surface-default` | Purple surface |
+| `sgds:bg-purple-surface-emphasis` | `--sgds-purple-surface-emphasis` | Emphasized purple surface |
+| `sgds:bg-purple-surface-muted` | `--sgds-purple-surface-muted` | Muted purple surface |
+
+### Cyan Colors
+
+| SGDS Tailwind Token | CSS Variable | Purpose |
+|---|---|---|
+| `sgds:bg-cyan-default` | `--sgds-cyan-bg-default` | Cyan background |
+| `sgds:bg-cyan-muted` | `--sgds-cyan-bg-muted` | Muted cyan background |
+| `sgds:bg-cyan-surface-default` | `--sgds-cyan-surface-default` | Cyan surface |
+| `sgds:bg-cyan-surface-emphasis` | `--sgds-cyan-surface-emphasis` | Emphasized cyan surface |
+| `sgds:bg-cyan-surface-muted` | `--sgds-cyan-surface-muted` | Muted cyan surface |
+
+### Neutral Colors
+
+| SGDS Tailwind Token | CSS Variable | Purpose |
+|---|---|---|
+| `sgds:bg-neutral-default` | `--sgds-neutral-bg-default` | Neutral background |
+| `sgds:bg-neutral-muted` | `--sgds-neutral-bg-muted` | Muted neutral background |
+| `sgds:bg-neutral-surface-default` | `--sgds-neutral-surface-default` | Neutral surface |
+| `sgds:bg-neutral-surface-emphasis` | `--sgds-neutral-surface-emphasis` | Emphasized neutral surface |
+| `sgds:bg-neutral-surface-muted` | `--sgds-neutral-surface-muted` | Muted neutral surface |
+
+### Form Surface Colors
+
+| SGDS Tailwind Token | CSS Variable | Purpose |
+|---|---|---|
+| `sgds:bg-form-surface-default` | `--sgds-form-surface-default` | Form surface default |
+| `sgds:bg-form-surface-raised` | `--sgds-form-surface-raised` | Form surface raised |
+| `sgds:bg-form-surface-emphasis` | `--sgds-form-surface-emphasis` | Form surface emphasis |
+| `sgds:bg-form-surface-subtle` | `--sgds-form-surface-subtle` | Form surface subtle |
+| `sgds:bg-form-surface-muted` | `--sgds-form-surface-muted` | Form surface muted |
+| `sgds:bg-form-surface-inverse` | `--sgds-form-surface-inverse` | Form surface inverse |
+| `sgds:bg-form-surface-fixed-light` | `--sgds-form-surface-fixed-light` | Form surface fixed-light |
+| `sgds:bg-form-surface-fixed-dark` | `--sgds-form-surface-fixed-dark` | Form surface fixed-dark |
+
+### Form Primary Colors
+
+| SGDS Tailwind Token | CSS Variable | Purpose |
+|---|---|---|
+| `sgds:bg-form-primary-surface-default` | `--sgds-form-primary-surface-default` | Form primary surface default |
+| `sgds:bg-form-primary-surface-emphasis` | `--sgds-form-primary-surface-emphasis` | Form primary surface emphasis |
+
+### Form Success Colors
+
+| SGDS Tailwind Token | CSS Variable | Purpose |
+|---|---|---|
+| `sgds:bg-form-success-surface-default` | `--sgds-form-success-surface-default` | Form success surface default |
+
+### Form Danger Colors
+
+| SGDS Tailwind Token | CSS Variable | Purpose |
+|---|---|---|
+| `sgds:bg-form-danger-surface-default` | `--sgds-form-danger-surface-default` | Form danger surface default |
+
