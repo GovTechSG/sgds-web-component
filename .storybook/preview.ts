@@ -72,10 +72,13 @@ export const parameters = {
         "Style",
         "Form",
         ["Validation", "Custom Validation"],
-        "Troubleshoot",
+        "Utilities",
+        ["Introduction"],
         "Components",
+        "Templates",
+        ["Introduction"],
+        "Troubleshoot",
         "Patterns",
-        "Templates"
       ]
     }
   }

@@ -11,6 +11,7 @@
     --sgds-breakpoint-xl: var(--sgds-breakpoint-xl);
     --sgds-breakpoint-2-xl: var(--sgds-breakpoint-2-xl);
     --sgds-spacing-3-xs: var(--sgds-spacer-1);
+    --sgds-spacing-2-xs: var(--sgds-spacer-2);
     --sgds-spacing-xs: var(--sgds-spacer-3);
     --sgds-spacing-sm: var(--sgds-spacer-4);
     --sgds-spacing-md: var(--sgds-spacer-5);
@@ -295,6 +296,9 @@
   .sgds\:mb-2-xl {
     margin-bottom: var(--sgds-spacing-2-xl);
   }
+  .sgds\:mb-2-xs {
+    margin-bottom: var(--sgds-spacing-2-xs);
+  }
   .sgds\:mb-lg {
     margin-bottom: var(--sgds-spacing-lg);
   }
@@ -331,6 +335,12 @@
   .sgds\:h-12 {
     height: calc(var(--sgds-spacing) * 12);
   }
+  .sgds\:h-16 {
+    height: calc(var(--sgds-spacing) * 16);
+  }
+  .sgds\:h-20 {
+    height: calc(var(--sgds-spacing) * 20);
+  }
   .sgds\:h-250 {
     height: calc(var(--sgds-spacing) * 250);
   }
@@ -355,6 +365,9 @@
   .sgds\:w-12 {
     width: calc(var(--sgds-spacing) * 12);
   }
+  .sgds\:w-16 {
+    width: calc(var(--sgds-spacing) * 16);
+  }
   .sgds\:w-18 {
     width: calc(var(--sgds-spacing) * 18);
   }
@@ -375,6 +388,9 @@
   }
   .sgds\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .sgds\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
   .sgds\:flex-col {
     flex-direction: column;
@@ -435,6 +451,13 @@
   }
   .sgds\:gap-xs {
     gap: var(--sgds-gap-xs);
+  }
+  .sgds\:space-y-md {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(var(--sgds-spacing-md) * var(--tw-space-y-reverse));
+      margin-block-end: calc(var(--sgds-spacing-md) * calc(1 - var(--tw-space-y-reverse)));
+    }
   }
   .sgds\:space-y-paragraph-lg {
     :where(& > :not(:last-child)) {
@@ -945,6 +968,10 @@
   .sgds\:leading-24 {
     --tw-leading: var(--sgds-leading-24);
     line-height: var(--sgds-leading-24);
+  }
+  .sgds\:leading-28 {
+    --tw-leading: calc(var(--sgds-spacing) * 28);
+    line-height: calc(var(--sgds-spacing) * 28);
   }
   .sgds\:leading-32 {
     --tw-leading: var(--sgds-leading-32);
