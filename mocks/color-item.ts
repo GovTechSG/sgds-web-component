@@ -15,8 +15,8 @@ export class ColorItem extends LitElement {
       display: block;
     }
     .token-name {
-        display: flex;
-        justify-content: space-between;
+      display: flex;
+      justify-content: space-between;
     }
     .color-item {
       display: flex;

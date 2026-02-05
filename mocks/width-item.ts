@@ -102,18 +102,16 @@ export class WidthItem extends LitElement {
   render() {
     return html`
       <div class="width-item">
-        <div class="width-box" style="border-width: var(${this.widthValue}); border-style: solid; border-color: var(--sgds-primary-bg-default, #0066cc);"></div>
+        <div
+          class="width-box"
+          style="border-width: var(${this
+            .widthValue}); border-style: solid; border-color: var(--sgds-primary-bg-default, #0066cc);"
+        ></div>
         <div class="token-info">
           <div class="token-header">
             <div class="token-name">${this.token}</div>
-            <button
-              class="copy-button"
-              @click=${this.copyToClipboard}
-              aria-label="Copy token to clipboard"
-            >
-              <sgds-icon
-                name="${this.isCopied ? "check" : "files"}"
-              ></sgds-icon>
+            <button class="copy-button" @click=${this.copyToClipboard} aria-label="Copy token to clipboard">
+              <sgds-icon name="${this.isCopied ? "check" : "files"}"></sgds-icon>
             </button>
           </div>
           <div class="token-variable">${this.variable}</div>

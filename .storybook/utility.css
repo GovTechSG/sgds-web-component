@@ -358,6 +358,9 @@
   .sgds\:w-18 {
     width: calc(var(--sgds-spacing) * 18);
   }
+  .sgds\:w-68 {
+    width: calc(var(--sgds-spacing) * 68);
+  }
   .sgds\:w-full {
     width: 100%;
   }

@@ -1,5 +1,5 @@
 import { html } from "lit";
-import '../../mocks/color-item.ts';
+import "../../mocks/color-item.ts";
 
 export default {
   title: "Utilities/Background Color",
@@ -12,7 +12,7 @@ const copyToClipboard = async (token, updateCallback) => {
   await navigator.clipboard.writeText(token);
   copyStates.set(token, true);
   updateCallback();
-  
+
   setTimeout(() => {
     copyStates.set(token, false);
     updateCallback();
@@ -26,9 +26,7 @@ const ColorItem = (token, variable, bgClass, textClass = "") => {
 };
 
 const ColorGrid = (...items) => html`
-  <div class="sgds:grid sgds:gap-2-xl sgds:p-2-xl" style="grid-template-columns: repeat(3, 1fr);">
-    ${items}
-  </div>
+  <div class="sgds:grid sgds:gap-2-xl sgds:p-2-xl" style="grid-template-columns: repeat(3, 1fr);">${items}</div>
 `;
 
 export const SurfaceColors = () =>
@@ -267,7 +265,7 @@ export const FormColors = () =>
       "sgds:bg-form-surface-fixed-dark",
       "sgds:text-fixed-light"
     ),
-       ColorItem(
+    ColorItem(
       "sgds:bg-form-primary-surface-default",
       "--sgds-form-primary-surface-default",
       "sgds:bg-form-primary-surface-default",
@@ -279,7 +277,7 @@ export const FormColors = () =>
       "sgds:bg-form-primary-surface-emphasis",
       "sgds:text-fixed-light"
     ),
-     ColorItem(
+    ColorItem(
       "sgds:bg-form-success-surface-default",
       "--sgds-form-success-surface-default",
       "sgds:bg-form-success-surface-default",

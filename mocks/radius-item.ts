@@ -32,7 +32,6 @@ export class RadiusItem extends LitElement {
       transition: all 200ms ease-in-out;
     }
 
-
     .token-info {
       display: flex;
       flex-direction: column;
@@ -102,21 +101,13 @@ export class RadiusItem extends LitElement {
 
   render() {
     return html`
-      <div class="radius-item" >
-        <div class="radius-box" style="border-radius: var(${this.radiusValue});">
-
-        </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius: var(${this.radiusValue});"></div>
         <div class="token-info">
           <div class="token-header">
             <div class="token-name">${this.token}</div>
-            <button
-              class="copy-button"
-              @click=${this.copyToClipboard}
-              aria-label="Copy token to clipboard"
-            >
-              <sgds-icon
-                name="${this.isCopied ? "check" : "files"}"
-              ></sgds-icon>
+            <button class="copy-button" @click=${this.copyToClipboard} aria-label="Copy token to clipboard">
+              <sgds-icon name="${this.isCopied ? "check" : "files"}"></sgds-icon>
             </button>
           </div>
           <div class="token-variable">${this.variable}</div>

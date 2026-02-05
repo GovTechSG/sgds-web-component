@@ -2,7 +2,7 @@ import { html } from "lit";
 
 export default {
   title: "Utilities/Text Color",
-  tags: ["autodocs"],
+  tags: ["autodocs"]
 };
 
 const copyToClipboard = (token, buttonEl) => {
@@ -24,14 +24,22 @@ export const BasicTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-default">Standard text color that adapts to theme</span>
@@ -40,14 +48,22 @@ export const BasicTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-subtle</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-subtle', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-subtle</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-subtle", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-color-subtle</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-color-subtle</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-subtle">De-emphasized text for secondary information</span>
@@ -56,14 +72,22 @@ export const BasicTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-muted</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-muted', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-muted</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-muted", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-color-muted</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-color-muted</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-muted">Further de-emphasized text for tertiary content</span>
@@ -72,14 +96,22 @@ export const BasicTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-inverse</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-inverse', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-inverse</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-inverse", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-color-inverse</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-color-inverse</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-surface-inverse sgds:p-md sgds:rounded-sm">
@@ -90,14 +122,22 @@ export const BasicTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-transparent</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-transparent', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-transparent</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-transparent", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-color-transparent</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-color-transparent</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-transparent">Fully transparent text (invisible)</span>
@@ -106,14 +146,22 @@ export const BasicTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-fixed-light</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-fixed-light', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-fixed-light</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-fixed-light", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-color-fixed-light</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-color-fixed-light</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -124,14 +172,22 @@ export const BasicTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-fixed-dark</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-fixed-dark', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-fixed-dark</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-fixed-dark", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-color-fixed-dark</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-color-fixed-dark</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -152,14 +208,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-primary-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-primary-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-primary-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-primary-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-primary-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-primary-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-primary-default">Standard primary text color</span>
@@ -168,14 +232,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-primary-emphasis</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-primary-emphasis', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-primary-emphasis</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-primary-emphasis", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-primary-color-emphasis</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-primary-color-emphasis</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-primary-emphasis">Emphasized primary text</span>
@@ -184,14 +256,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-primary-fixed-light</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-primary-fixed-light', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-primary-fixed-light</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-primary-fixed-light", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-primary-color-fixed-light</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-primary-color-fixed-light</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -202,14 +282,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-primary-fixed-dark</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-primary-fixed-dark', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-primary-fixed-dark</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-primary-fixed-dark", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-primary-color-fixed-dark</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-primary-color-fixed-dark</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -220,14 +308,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-accent-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-accent-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-accent-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-accent-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-accent-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-accent-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-accent-default">Standard accent text color</span>
@@ -236,14 +332,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-accent-emphasis</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-accent-emphasis', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-accent-emphasis</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-accent-emphasis", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-accent-color-emphasis</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-accent-color-emphasis</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-accent-emphasis">Emphasized accent text</span>
@@ -252,14 +356,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-accent-fixed-light</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-accent-fixed-light', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-accent-fixed-light</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-accent-fixed-light", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-accent-color-fixed-light</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-accent-color-fixed-light</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -270,14 +382,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-accent-fixed-dark</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-accent-fixed-dark', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-accent-fixed-dark</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-accent-fixed-dark", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-accent-color-fixed-dark</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-accent-color-fixed-dark</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -288,14 +408,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-success-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-success-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-success-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-success-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-success-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-success-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-success-default">Standard success text color</span>
@@ -304,14 +432,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-success-emphasis</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-success-emphasis', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-success-emphasis</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-success-emphasis", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-success-color-emphasis</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-success-color-emphasis</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-success-emphasis">Emphasized success text</span>
@@ -320,14 +456,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-success-fixed-light</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-success-fixed-light', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-success-fixed-light</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-success-fixed-light", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-success-color-fixed-light</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-success-color-fixed-light</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -338,14 +482,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-success-fixed-dark</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-success-fixed-dark', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-success-fixed-dark</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-success-fixed-dark", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-success-color-fixed-dark</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-success-color-fixed-dark</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -356,14 +508,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-danger-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-danger-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-danger-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-danger-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-danger-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-danger-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-danger-default">Standard danger text color</span>
@@ -372,14 +532,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-danger-emphasis</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-danger-emphasis', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-danger-emphasis</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-danger-emphasis", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-danger-color-emphasis</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-danger-color-emphasis</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-danger-emphasis">Emphasized danger text</span>
@@ -388,14 +556,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-danger-fixed-light</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-danger-fixed-light', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-danger-fixed-light</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-danger-fixed-light", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-danger-color-fixed-light</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-danger-color-fixed-light</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -406,14 +582,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-danger-fixed-dark</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-danger-fixed-dark', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-danger-fixed-dark</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-danger-fixed-dark", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-danger-color-fixed-dark</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-danger-color-fixed-dark</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -424,14 +608,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-warning-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-warning-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-warning-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-warning-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-warning-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-warning-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-warning-default">Standard warning text color</span>
@@ -440,14 +632,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-warning-emphasis</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-warning-emphasis', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-warning-emphasis</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-warning-emphasis", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-warning-color-emphasis</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-warning-color-emphasis</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-warning-emphasis">Emphasized warning text</span>
@@ -456,14 +656,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-warning-fixed-light</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-warning-fixed-light', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-warning-fixed-light</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-warning-fixed-light", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-warning-color-fixed-light</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-warning-color-fixed-light</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -474,14 +682,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-warning-fixed-dark</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-warning-fixed-dark', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-warning-fixed-dark</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-warning-fixed-dark", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-warning-color-fixed-dark</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-warning-color-fixed-dark</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -492,14 +708,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-purple-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-purple-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-purple-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-purple-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-purple-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-purple-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-purple-default">Standard purple text color</span>
@@ -508,14 +732,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-purple-emphasis</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-purple-emphasis', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-purple-emphasis</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-purple-emphasis", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-purple-color-emphasis</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-purple-color-emphasis</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-purple-emphasis">Emphasized purple text</span>
@@ -524,14 +756,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-purple-fixed-light</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-purple-fixed-light', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-purple-fixed-light</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-purple-fixed-light", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-purple-color-fixed-light</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-purple-color-fixed-light</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -542,14 +782,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-purple-fixed-dark</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-purple-fixed-dark', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-purple-fixed-dark</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-purple-fixed-dark", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-purple-color-fixed-dark</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-purple-color-fixed-dark</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -560,14 +808,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-cyan-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-cyan-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-cyan-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-cyan-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-cyan-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-cyan-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-cyan-default">Standard cyan text color</span>
@@ -576,14 +832,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-cyan-emphasis</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-cyan-emphasis', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-cyan-emphasis</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-cyan-emphasis", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-cyan-color-emphasis</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-cyan-color-emphasis</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-cyan-emphasis">Emphasized cyan text</span>
@@ -592,14 +856,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-cyan-fixed-light</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-cyan-fixed-light', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-cyan-fixed-light</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-cyan-fixed-light", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-cyan-color-fixed-light</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-cyan-color-fixed-light</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -610,14 +882,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-cyan-fixed-dark</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-cyan-fixed-dark', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-cyan-fixed-dark</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-cyan-fixed-dark", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-cyan-color-fixed-dark</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-cyan-color-fixed-dark</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -628,14 +908,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-neutral-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-neutral-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-neutral-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-neutral-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-neutral-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-neutral-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-neutral-default">Standard neutral text color</span>
@@ -644,14 +932,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-neutral-emphasis</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-neutral-emphasis', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-neutral-emphasis</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-neutral-emphasis", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-neutral-color-emphasis</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-neutral-color-emphasis</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-neutral-emphasis">Emphasized neutral text</span>
@@ -660,14 +956,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-neutral-fixed-light</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-neutral-fixed-light', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-neutral-fixed-light</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-neutral-fixed-light", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-neutral-color-fixed-light</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-neutral-color-fixed-light</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -678,14 +982,22 @@ export const SemanticTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-neutral-fixed-dark</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-neutral-fixed-dark', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-neutral-fixed-dark</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-neutral-fixed-dark", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-neutral-color-fixed-dark</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-neutral-color-fixed-dark</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -706,14 +1018,22 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-display-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-display-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-display-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-display-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-display-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-display-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-display-default">Display text default</span>
@@ -722,14 +1042,22 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-display-subtle</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-display-subtle', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-display-subtle</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-display-subtle", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-display-color-subtle</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-display-color-subtle</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-display-subtle">Display text subtle</span>
@@ -738,14 +1066,22 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-heading-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-heading-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-heading-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-heading-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-heading-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-heading-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-heading-default">Heading text default</span>
@@ -754,14 +1090,22 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-heading-subtle</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-heading-subtle', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-heading-subtle</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-heading-subtle", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-heading-color-subtle</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-heading-color-subtle</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-heading-subtle">Heading text subtle</span>
@@ -770,14 +1114,22 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-body-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-body-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-body-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-body-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-body-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-body-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-body-default">Body text default</span>
@@ -786,14 +1138,22 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-body-subtle</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-body-subtle', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-body-subtle</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-body-subtle", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-body-color-subtle</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-body-color-subtle</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-body-subtle">Body text subtle</span>
@@ -802,14 +1162,22 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-label-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-label-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-label-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-label-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-label-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-label-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-label-default">Label text default</span>
@@ -818,14 +1186,22 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-label-subtle</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-label-subtle', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-label-subtle</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-label-subtle", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-label-color-subtle</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-label-color-subtle</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-label-subtle">Label text subtle</span>
@@ -844,14 +1220,22 @@ export const LinkTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-link-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-link-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-link-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-link-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-link-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-link-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-link-default">Link text default</span>
@@ -860,14 +1244,22 @@ export const LinkTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-link-emphasis</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-link-emphasis', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-link-emphasis</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-link-emphasis", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-link-color-emphasis</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-link-color-emphasis</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-link-emphasis">Link text emphasis</span>
@@ -886,14 +1278,22 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-form-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-form-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-form-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-form-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-form-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-form-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-form-default">Form text default</span>
@@ -902,14 +1302,22 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-form-subtle</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-form-subtle', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-form-subtle</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-form-subtle", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-form-color-subtle</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-form-color-subtle</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-form-subtle">Form text subtle</span>
@@ -918,14 +1326,22 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-form-muted</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-form-muted', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-form-muted</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-form-muted", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-form-color-muted</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-form-color-muted</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-form-muted">Form text muted</span>
@@ -934,14 +1350,22 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-form-inverse</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-form-inverse', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-form-inverse</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-form-inverse", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-form-color-inverse</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-form-color-inverse</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -952,14 +1376,22 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-form-fixed-light</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-form-fixed-light', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-form-fixed-light</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-form-fixed-light", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-form-color-fixed-light</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-form-color-fixed-light</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -970,14 +1402,22 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-form-fixed-dark</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-form-fixed-dark', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-form-fixed-dark</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-form-fixed-dark", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-form-color-fixed-dark</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-form-color-fixed-dark</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -988,14 +1428,22 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-form-primary-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-form-primary-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-form-primary-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-form-primary-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-form-primary-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-form-primary-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-form-primary-default">Form primary text</span>
@@ -1004,14 +1452,22 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-form-success-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-form-success-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-form-success-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-form-success-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-form-success-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-form-success-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-form-success-default">Form success text</span>
@@ -1020,14 +1476,22 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-form-danger-default</code>
-          <button class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0" @click="${(e) => copyToClipboard('sgds:text-form-danger-default', e.target.closest('button'))}" aria-label="Copy token">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:text-form-danger-default</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:text-form-danger-default", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
             <sgds-icon name="files"></sgds-icon>
           </button>
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-form-danger-color-default</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-form-danger-color-default</code
+        >
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-form-danger-default">Form danger text</span>
