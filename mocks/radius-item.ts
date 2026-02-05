@@ -8,8 +8,6 @@ export class RadiusItem extends LitElement {
 
   @state() private isCopied = false;
 
-  static shadowRootOptions = { mode: "open" };
-
   static styles = css`
     :host {
       display: block;
