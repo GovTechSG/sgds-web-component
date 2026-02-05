@@ -1,3 +1,5 @@
+@import "./responsive.css";
+
 :root {
   /* Primitive - Product Primary Color */
   --sgds-product-primary-100: #f4f2fe;
@@ -22,15 +24,15 @@
   --sgds-purple-900: #460c5a;
 
   /* Primitive - Cyan Color */
-  --sgds-cyan-100: #dbf9fd;
-  --sgds-cyan-200: #94edfa;
-  --sgds-cyan-300: #24d5ee;
-  --sgds-cyan-400: #1fb5ca;
-  --sgds-cyan-500: #1993a4;
-  --sgds-cyan-600: #147583;
-  --sgds-cyan-700: #0f5a65;
-  --sgds-cyan-800: #0b434b;
-  --sgds-cyan-900: #082e34;
+  --sgds-cyan-100: #e0f7fc;
+  --sgds-cyan-200: #a8e9f7;
+  --sgds-cyan-300: #49d2ef;
+  --sgds-cyan-400: #00b4da;
+  --sgds-cyan-500: #0092b1;
+  --sgds-cyan-600: #00758d;
+  --sgds-cyan-700: #005a6d;
+  --sgds-cyan-800: #004352;
+  --sgds-cyan-900: #002f38;
 
   /* Primitive - Green Color */
   --sgds-green-100: #e3f9ed;
@@ -78,6 +80,7 @@
 
   /* Primitive - Gray Color */
   --sgds-gray-000: #ffffff;
+  --sgds-gray-50: #f7f7f7;
   --sgds-gray-100: #f3f3f3;
   --sgds-gray-200: #dfdfdf;
   --sgds-gray-300: #c6c6c6;
@@ -107,6 +110,7 @@
   --sgds-border-radius-lg: 12px;
   --sgds-border-radius-xl: 16px;
   --sgds-border-radius-2-xl: 24px;
+  --sgds-border-radius-3-xl: 32px;
   --sgds-border-radius-full: 999px;
   --sgds-form-border-radius-none: var(--sgds-border-radius-none);
   --sgds-form-border-radius-xs: var(--sgds-border-radius-xs);
@@ -138,6 +142,7 @@
   --sgds-font-weight-bold: 700;
 
   /* Primitive - Font Size */
+  /* --sgds-font-size-0 to --sgds-font-size-9 is deprecated in v3.7.0 */
   --sgds-font-size-0: 0.75rem;
   --sgds-font-size-1: 0.875rem;
   --sgds-font-size-2: 1rem;
@@ -148,6 +153,23 @@
   --sgds-font-size-7: 2.5rem;
   --sgds-font-size-8: 3rem;
   --sgds-font-size-9: 3.5rem;
+  --sgds-font-size-12: 0.75rem;
+  --sgds-font-size-14: 0.875rem;
+  --sgds-font-size-16: 1rem;
+  --sgds-font-size-18: 1.125rem;
+  --sgds-font-size-20: 1.25rem;
+  --sgds-font-size-22: 1.375rem;
+  --sgds-font-size-24: 1.5rem;
+  --sgds-font-size-26: 1.625rem;
+  --sgds-font-size-28: 1.75rem;
+  --sgds-font-size-30: 1.875rem;
+  --sgds-font-size-32: 2rem;
+  --sgds-font-size-36: 2.25rem;
+  --sgds-font-size-40: 2.5rem;
+  --sgds-font-size-44: 2.75rem;
+  --sgds-font-size-48: 3rem;
+  --sgds-font-size-52: 3.25rem;
+  --sgds-font-size-56: 3.5rem;
 
   /* Primitive - Icon Size */
   --sgds-icon-size-xs: 0.75rem;
@@ -169,11 +191,15 @@
   --sgds-line-height-16: 16px;
   --sgds-line-height-20: 20px;
   --sgds-line-height-24: 24px;
+  --sgds-line-height-28: 28px;
   --sgds-line-height-32: 32px;
   --sgds-line-height-36: 36px;
   --sgds-line-height-40: 40px;
+  --sgds-line-height-44: 44px;
   --sgds-line-height-48: 48px;
+  --sgds-line-height-52: 52px;
   --sgds-line-height-56: 56px;
+  --sgds-line-height-60: 60px;
   --sgds-line-height-64: 64px;
 
   /* Primitive - Opacity */
@@ -255,6 +281,7 @@
   --sgds-dimension-332: 332px;
   --sgds-dimension-340: 340px;
   --sgds-dimension-344: 344px;
+  --sgds-dimension-360: 360px;
   --sgds-dimension-384: 384px;
   --sgds-dimension-400: 400px;
   --sgds-dimension-480: 480px;
@@ -264,6 +291,7 @@
   --sgds-dimension-768: 768px;
   --sgds-dimension-800: 800px;
   --sgds-dimension-840: 840px;
+  --sgds-dimension-864: 864px;
   --sgds-dimension-872: 872px;
   --sgds-dimension-888: 888px;
   --sgds-dimension-960: 960px;
@@ -307,6 +335,10 @@
   --sgds-margin-3-xl: var(--sgds-spacer-9);
   --sgds-margin-4-xl: var(--sgds-spacer-10);
   --sgds-margin-5-xl: var(--sgds-spacer-11);
+
+  --sgds-gutter-sm: var(--sgds-dimension-16);
+  --sgds-gutter-md: var(--sgds-dimension-24);
+  --sgds-gutter-lg: var(--sgds-dimension-32);
   
   --sgds-gap-none: var(--sgds-spacer-0);
   --sgds-gap-2-xs: var(--sgds-spacer-2);
@@ -353,6 +385,16 @@
   --sgds-form-outline-focus: var(--sgds-outline-focus);
   --sgds-form-outline-offset-focus: var(--sgds-outline-offset-focus);
 
+  /* Semantic - Text Max Width */
+  --sgds-text-max-width: var(--sgds-dimension-864);
+
+  /* Semantic - Container Max Width */
+  --sgds-container-max-width-md: var(--sgds-dimension-768);
+  --sgds-container-max-width-lg: var(--sgds-dimension-888);
+  --sgds-container-max-width-xl: var(--sgds-dimension-1168);
+  --sgds-container-max-width-2-xl: var(--sgds-dimension-1312);
+  --sgds-container-max-width-3-xl: var(--sgds-dimension-1440);
+
   /* Masthead and Mainnav Max Width and Padding */
   --sgds-mainnav-max-width: 1440px;
   --sgds-mainnav-padding-x: 2rem;
@@ -362,11 +404,11 @@
   --sgds-motion-easing-enter: cubic-bezier(0.1, 0, 0.5, 0);
   --sgds-motion-easing-exit: cubic-bezier(0.15, 0.6, 0.6, 1);
   --sgds-motion-easing-standard: cubic-bezier(0.25, 0, 0.25, 1);
+
   /* Foundation - Motion Duration  */
   --sgds-motion-duration-faster: 100ms;
   --sgds-motion-duration-fast: 200ms;
   --sgds-motion-duration-standard: 300ms;
-  --sgds-motion-duration-slow: 400ms; 
+  --sgds-motion-duration-slow: 400ms;
   --sgds-motion-duration-slower: 500ms;
-
 }

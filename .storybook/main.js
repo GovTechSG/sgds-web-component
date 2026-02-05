@@ -1,7 +1,7 @@
 import remarkGfm from "remark-gfm";
 module.exports = {
   stories: [
-    "../stories/style/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/foundation/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/usage/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/migration/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/frameworks/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",

@@ -1,9 +1,50 @@
+## v3.9.0 (2026-02-03)
+
+### Feat
+
+- **Masthead, Mainnav, SystemBanner**: fluid prop to disable max-width [run-chromatic] (#540)
+- **Mainnav**: new fluid prop
+- **Masthead**: new fluid prop
+
+### Fix
+
+- **form validation**: fix untouched default value is not submitted in form data
+
+### Refactor
+
+- **SystemBanner**: remove stylings from host and shift to shadow dom
+
+## v3.8.1 (2026-01-28)
+
+### Feat
+
+- **Masthead**: remove scam alert message [run-chromatic] (#534)
+- **Masthead**: remove scam alert message
+
+### Fix
+
+- **Masthead**: revert icons size
+
+## v3.8.0 (2026-01-27)
+
+### Feat
+
+- **Modal**: new size extra large [run-chromatic] (#527)
+- **Modal**: new size extra large
+
+### Fix
+
+- **docs**: add missing newline before code block in React.md (#526)
+- **docs**: add missing newline before code block in React.md
+
 ## v3.7.0 (2026-01-23)
 
 ### Feat
 
-- **icons**: new icons added 
-- **ComboBox**: new asynchronous combo box behaviour with loading state
+- **icons**: add script to convert svg icon
+- **ComboBox**: when async displayValue will not clear when menu items changes
+- **Combobox**: async
+- **SearchInput**: extends from combobox
 
 ### Fix
 

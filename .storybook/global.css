@@ -51,7 +51,7 @@ sgds-faq-grid {
   margin: calc(var(--sgds-margin-xs) * -1);
 }
 ul.toc-list > * {
-  font-size: var(--sgds-font-size-1);
+  font-size: var(--sgds-font-size-14);
 }
 .grid-item {
   background-color: var(--sgds-product-primary-600);

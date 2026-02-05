@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Style/Foundation"
+  title: "Foundation/Introduction"
 };
 
 const HeaderTemplate = () => {

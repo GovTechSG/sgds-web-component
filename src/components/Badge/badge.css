@@ -97,7 +97,7 @@ sgds-tooltip {
   color: var(--sgds-color-fixed-light);
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
   border-radius: var(--sgds-border-radius-sm);
-  font-size: var(--sgds-font-size-1);
+  font-size: var(--sgds-font-size-14);
   height: var(--sgds-dimension-24, 24px);
   min-width: var(--sgds-dimension-24);
   display: inline-flex;
@@ -136,5 +136,5 @@ sgds-tooltip {
 
 slot::slotted(*) {
   font-weight: var(--sgds-font-weight-regular);
-  font-size: var(--sgds-font-size-1);
+  font-size: var(--sgds-font-size-14);
 }
