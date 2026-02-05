@@ -78,7 +78,7 @@ export const parameters = {
         "Templates",
         ["Introduction"],
         "Troubleshoot",
-        "Patterns",
+        "Patterns"
       ]
     }
   }
