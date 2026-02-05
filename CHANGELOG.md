@@ -1,3 +1,19 @@
+## v3.9.0-rc.2 (2026-02-05)
+
+### Feat
+
+- **utility**: border-rad, border-width, fonts, gap etc
+- **utility**: complete conversion of semantic day night css to tailwind v4
+- **utility**: border color, text color and background color
+- **Layouts**: templates for sidebar layout
+- **utility**: basic utility setup:
+
+## v3.9.0-rc.1 (2026-01-30)
+
+### Feat
+
+- **SystemBanner**: noClampAction prop to make show more action optional
+
 ## v3.9.0 (2026-02-03)
 
 ### Feat
