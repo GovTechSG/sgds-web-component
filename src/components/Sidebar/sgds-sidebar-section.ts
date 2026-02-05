@@ -62,12 +62,31 @@ export class SgdsSidebarSection extends SgdsElement {
     this.checkIfLastChild();
     this.detectParentSidebar();
     this.observeSidebarChanges();
+    this.addEventListener("keydown", this._handleKeyPress);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     if (this.sidebarObserver) {
       this.sidebarObserver.disconnect();
+    }
+  }
+
+  /**
+   * Handles keyboard events on the sidebar option.
+   * Activates the option when Enter key is pressed.
+   * @private
+   * @param {KeyboardEvent} event - The keyboard event object
+   */
+  private _handleKeyPress(event: KeyboardEvent) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const ele = event.target as HTMLElement;
+      if (ele.tagName.toLowerCase() === "sgds-sidebar-section") {
+        this._handleClick();
+      }
+
+      return;
     }
   }
 

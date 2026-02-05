@@ -258,8 +258,10 @@ export class SgdsSidebarOption extends SgdsElement {
         aria-label=${this.title || this.name}
       >
         <div class="sidebar-option-label-wrapper">
-          <sgds-icon name=${this.icon}></sgds-icon>
-          <span class="sidebar-option-label">${this.title}</span>
+          <div>
+            <sgds-icon name=${this.icon}></sgds-icon>
+            <span class="sidebar-option-label">${this.title}</span>
+          </div>
 
           <span class="sidebar-option-trailing-icon">
             ${this.hasNestedOptions

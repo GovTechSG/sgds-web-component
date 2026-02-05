@@ -12,10 +12,17 @@
 
 .sidebar-option-label-wrapper {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sgds-gap-sm);
+}
+
+.sidebar-option-label-wrapper > div {
+  display: flex;
+  align-items: center;
   font-size: var(--sgds-font-size-1);
   line-height: var(--sgds-line-height-20);
   gap: var(--sgds-gap-sm);
-  align-items: center;
 }
 
 .sidebar-option--collapsed .sidebar-option-label,
