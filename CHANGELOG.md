@@ -1,4 +1,4 @@
-## v3.9.0-rc.2 (2026-02-05)
+## v3.10.0-rc.0 (2026-02-06)
 
 ### Feat
 
@@ -7,6 +7,17 @@
 - **utility**: border color, text color and background color
 - **Layouts**: templates for sidebar layout
 - **utility**: basic utility setup:
+
+## v3.9.0 (2026-02-03)
+
+### Feat
+
+- **Masthead, Mainnav, SystemBanner**: fluid prop to disable max-width [run-chromatic] (#540)
+
+### Fix
+
+- **form validation**: fix untouched default value is not submitted in form data
+
 
 ## v3.9.0-rc.1 (2026-01-30)
 
