@@ -19,6 +19,7 @@ export const BasicTextColor = () => html`
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
       <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Value (day / night)</sgds-table-head>
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     <sgds-table-row>
@@ -39,6 +40,11 @@ export const BasicTextColor = () => html`
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-color-default</code
+        >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#1a1a1a / #ffffff</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
@@ -66,6 +72,11 @@ export const BasicTextColor = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#525252 / #c6c6c6</code
+        >
+      </sgds-table-cell>
+      <sgds-table-cell>
         <span class="sgds:text-subtle">De-emphasized text for secondary information</span>
       </sgds-table-cell>
     </sgds-table-row>
@@ -90,6 +101,11 @@ export const BasicTextColor = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#c6c6c6 / #3b3b3b</code
+        >
+      </sgds-table-cell>
+      <sgds-table-cell>
         <span class="sgds:text-muted">Further de-emphasized text for tertiary content</span>
       </sgds-table-cell>
     </sgds-table-row>
@@ -111,6 +127,11 @@ export const BasicTextColor = () => html`
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-color-inverse</code
+        >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#f3f3f3 / #1a1a1a</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
@@ -140,6 +161,9 @@ export const BasicTextColor = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">transparent</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <span class="sgds:text-transparent">Fully transparent text (invisible)</span>
       </sgds-table-cell>
     </sgds-table-row>
@@ -162,6 +186,9 @@ export const BasicTextColor = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-color-fixed-light</code
         >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">#f3f3f3</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -190,6 +217,9 @@ export const BasicTextColor = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">#1a1a1a</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-fixed-dark">Always dark text (shown on light background)</span>
         </div>
@@ -198,11 +228,12 @@ export const BasicTextColor = () => html`
   </sgds-table>
 `;
 
-export const SemanticTextColor = () => html`
+export const Primary = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
       <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Value (day / night)</sgds-table-head>
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     <sgds-table-row>
@@ -223,6 +254,11 @@ export const SemanticTextColor = () => html`
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-primary-color-default</code
+        >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#6b4feb / #a999f3</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
@@ -250,6 +286,11 @@ export const SemanticTextColor = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#523abc / #c8bdf7</code
+        >
+      </sgds-table-cell>
+      <sgds-table-cell>
         <span class="sgds:text-primary-emphasis">Emphasized primary text</span>
       </sgds-table-cell>
     </sgds-table-row>
@@ -272,6 +313,9 @@ export const SemanticTextColor = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-primary-color-fixed-light</code
         >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">#a999f3</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -300,10 +344,24 @@ export const SemanticTextColor = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">#6b4feb</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-primary-fixed-dark">Always dark primary text (on light bg)</span>
         </div>
       </sgds-table-cell>
+    </sgds-table-row>
+  </sgds-table>
+`;
+
+export const Accent = () => html`
+  <sgds-table>
+    <sgds-table-row>
+      <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+      <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Value (day / night)</sgds-table-head>
+      <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -323,6 +381,11 @@ export const SemanticTextColor = () => html`
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-accent-color-default</code
+        >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#0269d0 / #60aaf4</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
@@ -350,6 +413,11 @@ export const SemanticTextColor = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#0151a0 / #96c7f7</code
+        >
+      </sgds-table-cell>
+      <sgds-table-cell>
         <span class="sgds:text-accent-emphasis">Emphasized accent text</span>
       </sgds-table-cell>
     </sgds-table-row>
@@ -372,6 +440,9 @@ export const SemanticTextColor = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-accent-color-fixed-light</code
         >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">#60aaf4</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -400,10 +471,24 @@ export const SemanticTextColor = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">#0269d0</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-accent-fixed-dark">Always dark accent text (on light bg)</span>
         </div>
       </sgds-table-cell>
+    </sgds-table-row>
+  </sgds-table>
+`;
+
+export const Success = () => html`
+  <sgds-table>
+    <sgds-table-row>
+      <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+      <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Value (day / night)</sgds-table-head>
+      <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -423,6 +508,11 @@ export const SemanticTextColor = () => html`
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-success-color-default</code
+        >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#0e7c3d / #16bd5e</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
@@ -450,6 +540,11 @@ export const SemanticTextColor = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#0b5e2f / #62db96</code
+        >
+      </sgds-table-cell>
+      <sgds-table-cell>
         <span class="sgds:text-success-emphasis">Emphasized success text</span>
       </sgds-table-cell>
     </sgds-table-row>
@@ -472,6 +567,9 @@ export const SemanticTextColor = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-success-color-fixed-light</code
         >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">#16bd5e</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -500,10 +598,24 @@ export const SemanticTextColor = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">#0e7c3d</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-success-fixed-dark">Always dark success text (on light bg)</span>
         </div>
       </sgds-table-cell>
+    </sgds-table-row>
+  </sgds-table>
+`;
+
+export const Danger = () => html`
+  <sgds-table>
+    <sgds-table-row>
+      <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+      <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Value (day / night)</sgds-table-head>
+      <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -520,14 +632,17 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-danger-color-default</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <span class="sgds:text-danger-default">Standard danger text color</span>
-      </sgds-table-cell>
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#cf2323 / #e98b8b</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell><span class="sgds:text-danger-default">Standard danger text color</span></sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -544,14 +659,17 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-danger-color-emphasis</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <span class="sgds:text-danger-emphasis">Emphasized danger text</span>
-      </sgds-table-cell>
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#a11b1b / #f1b2b2</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell><span class="sgds:text-danger-emphasis">Emphasized danger text</span></sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -568,16 +686,21 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-danger-color-fixed-light</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#e98b8b</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-danger-fixed-light">Always light danger text (on dark bg)</span>
-        </div>
-      </sgds-table-cell>
+        </div></sgds-table-cell
+      >
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -594,16 +717,32 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-danger-color-fixed-dark</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#cf2323</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-danger-fixed-dark">Always dark danger text (on light bg)</span>
-        </div>
-      </sgds-table-cell>
+        </div></sgds-table-cell
+      >
+    </sgds-table-row>
+  </sgds-table>
+`;
+
+export const Warning = () => html`
+  <sgds-table>
+    <sgds-table-row>
+      <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+      <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Value (day / night)</sgds-table-head>
+      <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -620,14 +759,17 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-warning-color-default</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <span class="sgds:text-warning-default">Standard warning text color</span>
-      </sgds-table-cell>
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#7e6917 / #e5bf29</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell><span class="sgds:text-warning-default">Standard warning text color</span></sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -644,14 +786,17 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-warning-color-emphasis</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <span class="sgds:text-warning-emphasis">Emphasized warning text</span>
-      </sgds-table-cell>
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#c2a223 / #fcde63</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell><span class="sgds:text-warning-emphasis">Emphasized warning text</span></sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -668,16 +813,21 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-warning-color-fixed-light</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#fcde63</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-warning-fixed-light">Always light warning text (on dark bg)</span>
-        </div>
-      </sgds-table-cell>
+        </div></sgds-table-cell
+      >
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -694,16 +844,32 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-warning-color-fixed-dark</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#7e6917</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-warning-fixed-dark">Always dark warning text (on light bg)</span>
-        </div>
-      </sgds-table-cell>
+        </div></sgds-table-cell
+      >
+    </sgds-table-row>
+  </sgds-table>
+`;
+
+export const Purple = () => html`
+  <sgds-table>
+    <sgds-table-row>
+      <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+      <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Value (day / night)</sgds-table-head>
+      <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -720,14 +886,17 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-purple-color-default</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <span class="sgds:text-purple-default">Standard purple text color</span>
-      </sgds-table-cell>
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#ac1cdb / #d983f6</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell><span class="sgds:text-purple-default">Standard purple text color</span></sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -744,14 +913,17 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-purple-color-emphasis</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <span class="sgds:text-purple-emphasis">Emphasized purple text</span>
-      </sgds-table-cell>
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#8516a9 / #e6adf9</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell><span class="sgds:text-purple-emphasis">Emphasized purple text</span></sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -768,16 +940,21 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-purple-color-fixed-light</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#d983f6</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-purple-fixed-light">Always light purple text (on dark bg)</span>
-        </div>
-      </sgds-table-cell>
+        </div></sgds-table-cell
+      >
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -794,16 +971,32 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-purple-color-fixed-dark</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#ac1cdb</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-purple-fixed-dark">Always dark purple text (on light bg)</span>
-        </div>
-      </sgds-table-cell>
+        </div></sgds-table-cell
+      >
+    </sgds-table-row>
+  </sgds-table>
+`;
+
+export const Cyan = () => html`
+  <sgds-table>
+    <sgds-table-row>
+      <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+      <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Value (day / night)</sgds-table-head>
+      <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -820,14 +1013,17 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-cyan-color-default</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <span class="sgds:text-cyan-default">Standard cyan text color</span>
-      </sgds-table-cell>
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#00758d / #00b4da</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell><span class="sgds:text-cyan-default">Standard cyan text color</span></sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -844,14 +1040,17 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-cyan-color-emphasis</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <span class="sgds:text-cyan-emphasis">Emphasized cyan text</span>
-      </sgds-table-cell>
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#005a6d / #49d2ef</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell><span class="sgds:text-cyan-emphasis">Emphasized cyan text</span></sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -868,16 +1067,21 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-cyan-color-fixed-light</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#00b4da</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-cyan-fixed-light">Always light cyan text (on dark bg)</span>
-        </div>
-      </sgds-table-cell>
+        </div></sgds-table-cell
+      >
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -894,16 +1098,32 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-cyan-color-fixed-dark</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#00758d</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-cyan-fixed-dark">Always dark cyan text (on light bg)</span>
-        </div>
-      </sgds-table-cell>
+        </div></sgds-table-cell
+      >
+    </sgds-table-row>
+  </sgds-table>
+`;
+
+export const Neutral = () => html`
+  <sgds-table>
+    <sgds-table-row>
+      <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+      <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Value (day / night)</sgds-table-head>
+      <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -920,14 +1140,17 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-neutral-color-default</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <span class="sgds:text-neutral-default">Standard neutral text color</span>
-      </sgds-table-cell>
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#6b6b6b / #a5a5a5</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell><span class="sgds:text-neutral-default">Standard neutral text color</span></sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -944,14 +1167,17 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-neutral-color-emphasis</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <span class="sgds:text-neutral-emphasis">Emphasized neutral text</span>
-      </sgds-table-cell>
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#525252 / #c6c6c6</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell><span class="sgds:text-neutral-emphasis">Emphasized neutral text</span></sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -968,16 +1194,21 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-neutral-color-fixed-light</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#a5a5a5</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-neutral-fixed-light">Always light neutral text (on dark bg)</span>
-        </div>
-      </sgds-table-cell>
+        </div></sgds-table-cell
+      >
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
@@ -994,16 +1225,21 @@ export const SemanticTextColor = () => html`
           </button>
         </div>
       </sgds-table-cell>
-      <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-neutral-color-fixed-dark</code
-        >
-      </sgds-table-cell>
-      <sgds-table-cell>
-        <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#6b6b6b</code
+        ></sgds-table-cell
+      >
+      <sgds-table-cell
+        ><div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-neutral-fixed-dark">Always dark neutral text (on light bg)</span>
-        </div>
-      </sgds-table-cell>
+        </div></sgds-table-cell
+      >
     </sgds-table-row>
   </sgds-table>
 `;
@@ -1013,6 +1249,7 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
       <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Value (day / night)</sgds-table-head>
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     <sgds-table-row>
@@ -1035,6 +1272,11 @@ export const TypographyTextColor = () => html`
           >--sgds-display-color-default</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#1a1a1a / #ffffff</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <span class="sgds:text-display-default">Display text default</span>
       </sgds-table-cell>
@@ -1059,6 +1301,11 @@ export const TypographyTextColor = () => html`
           >--sgds-display-color-subtle</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#3b3b3b / #dfdfdf</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <span class="sgds:text-display-subtle">Display text subtle</span>
       </sgds-table-cell>
@@ -1083,6 +1330,11 @@ export const TypographyTextColor = () => html`
           >--sgds-heading-color-default</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#2a2a2a / #f3f3f3</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <span class="sgds:text-heading-default">Heading text default</span>
       </sgds-table-cell>
@@ -1107,6 +1359,11 @@ export const TypographyTextColor = () => html`
           >--sgds-heading-color-subtle</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#3b3b3b / #dfdfdf</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <span class="sgds:text-heading-subtle">Heading text subtle</span>
       </sgds-table-cell>
@@ -1131,6 +1388,11 @@ export const TypographyTextColor = () => html`
           >--sgds-body-color-default</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#1a1a1a / #ffffff</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <span class="sgds:text-body-default">Body text default</span>
       </sgds-table-cell>
@@ -1155,6 +1417,11 @@ export const TypographyTextColor = () => html`
           >--sgds-body-color-subtle</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#525252 / #c6c6c6</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <span class="sgds:text-body-subtle">Body text subtle</span>
       </sgds-table-cell>
@@ -1179,6 +1446,11 @@ export const TypographyTextColor = () => html`
           >--sgds-label-color-default</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#2a2a2a / #f3f3f3</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <span class="sgds:text-label-default">Label text default</span>
       </sgds-table-cell>
@@ -1203,6 +1475,11 @@ export const TypographyTextColor = () => html`
           >--sgds-label-color-subtle</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#525252 / #c6c6c6</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <span class="sgds:text-label-subtle">Label text subtle</span>
       </sgds-table-cell>
@@ -1215,6 +1492,7 @@ export const LinkTextColor = () => html`
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
       <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Value (day / night)</sgds-table-head>
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     <sgds-table-row>
@@ -1237,6 +1515,11 @@ export const LinkTextColor = () => html`
           >--sgds-link-color-default</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#0269d0 / #60aaf4</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <span class="sgds:text-link-default">Link text default</span>
       </sgds-table-cell>
@@ -1261,6 +1544,11 @@ export const LinkTextColor = () => html`
           >--sgds-link-color-emphasis</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#0151a0 / #96c7f7</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <span class="sgds:text-link-emphasis">Link text emphasis</span>
       </sgds-table-cell>
@@ -1273,6 +1561,7 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
       <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Value (day / night)</sgds-table-head>
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     <sgds-table-row>
@@ -1295,6 +1584,11 @@ export const FormTextColor = () => html`
           >--sgds-form-color-default</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#2a2a2a / #f3f3f3</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <span class="sgds:text-form-default">Form text default</span>
       </sgds-table-cell>
@@ -1319,6 +1613,11 @@ export const FormTextColor = () => html`
           >--sgds-form-color-subtle</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#525252 / #c6c6c6</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <span class="sgds:text-form-subtle">Form text subtle</span>
       </sgds-table-cell>
@@ -1343,6 +1642,11 @@ export const FormTextColor = () => html`
           >--sgds-form-color-muted</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#c6c6c6 / #3b3b3b</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <span class="sgds:text-form-muted">Form text muted</span>
       </sgds-table-cell>
@@ -1367,6 +1671,11 @@ export const FormTextColor = () => html`
           >--sgds-form-color-inverse</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#f3f3f3 / #2a2a2a</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-form-inverse">Form text inverse</span>
@@ -1393,6 +1702,11 @@ export const FormTextColor = () => html`
           >--sgds-form-color-fixed-light</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#f3f3f3</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-form-fixed-light">Form text fixed-light</span>
@@ -1419,6 +1733,11 @@ export const FormTextColor = () => html`
           >--sgds-form-color-fixed-dark</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#1a1a1a</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
           <span class="sgds:text-form-fixed-dark">Form text fixed-dark</span>
@@ -1445,6 +1764,11 @@ export const FormTextColor = () => html`
           >--sgds-form-primary-color-default</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#6b4feb / #a999f3</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <span class="sgds:text-form-primary-default">Form primary text</span>
       </sgds-table-cell>
@@ -1469,6 +1793,11 @@ export const FormTextColor = () => html`
           >--sgds-form-success-color-default</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#0e7c3d / #16bd5e</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <span class="sgds:text-form-success-default">Form success text</span>
       </sgds-table-cell>
@@ -1493,6 +1822,11 @@ export const FormTextColor = () => html`
           >--sgds-form-danger-color-default</code
         >
       </sgds-table-cell>
+      <sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >#cf2323 / #e98b8b</code
+        ></sgds-table-cell
+      >
       <sgds-table-cell>
         <span class="sgds:text-form-danger-default">Form danger text</span>
       </sgds-table-cell>

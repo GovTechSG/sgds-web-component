@@ -14,11 +14,12 @@ const copyToClipboard = (token, buttonEl) => {
   }, 3000);
 };
 
-export const DefaultLineHeight = () => html`
+export const LineHeight = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
       <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Value</sgds-table-head>
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     <sgds-table-row>
@@ -42,6 +43,7 @@ export const DefaultLineHeight = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">16px</code>
         <div class="sgds:leading-16 sgds:text-sm">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
@@ -69,6 +71,7 @@ export const DefaultLineHeight = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">20px</code>
         <div class="sgds:leading-20 sgds:text-sm">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
@@ -96,6 +99,7 @@ export const DefaultLineHeight = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">24px</code>
         <div class="sgds:leading-24">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
@@ -123,6 +127,7 @@ export const DefaultLineHeight = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">32px</code>
         <div class="sgds:leading-32 sgds:text-lg">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
@@ -150,6 +155,7 @@ export const DefaultLineHeight = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">36px</code>
         <div class="sgds:leading-36 sgds:text-lg">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
@@ -177,6 +183,7 @@ export const DefaultLineHeight = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">40px</code>
         <div class="sgds:leading-40 sgds:text-xl">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
@@ -204,6 +211,7 @@ export const DefaultLineHeight = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">48px</code>
         <div class="sgds:leading-48 sgds:text-2xl">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
@@ -231,6 +239,7 @@ export const DefaultLineHeight = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">56px</code>
         <div class="sgds:leading-56 sgds:text-3xl">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
@@ -258,6 +267,7 @@ export const DefaultLineHeight = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">64px</code>
         <div class="sgds:leading-64 sgds:text-4xl">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.

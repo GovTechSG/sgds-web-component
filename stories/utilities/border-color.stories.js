@@ -20,7 +20,7 @@ const ColorGrid = (...items) => html`
   <div class="sgds:grid sgds:gap-2-xl sgds:p-2-xl" style="grid-template-columns: repeat(3, 1fr);">${items}</div>
 `;
 
-export const DefaultBorderColors = () =>
+export const BorderColors = () =>
   ColorGrid(
     ColorItem("sgds:border-default", "--sgds-border-color-default"),
     ColorItem("sgds:border-emphasis", "--sgds-border-color-emphasis"),
