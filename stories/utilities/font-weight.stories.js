@@ -14,11 +14,12 @@ const copyToClipboard = (token, buttonEl) => {
   }, 3000);
 };
 
-export const DefaultFontWeights = () => html`
+export const FontWeights = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
       <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Value</sgds-table-head>
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     <sgds-table-row>
@@ -40,6 +41,9 @@ export const DefaultFontWeights = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-font-light</code
         >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">300</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:font-light">Sample Text</div>
@@ -66,6 +70,9 @@ export const DefaultFontWeights = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">400</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:font-regular">Sample Text</div>
       </sgds-table-cell>
     </sgds-table-row>
@@ -90,6 +97,9 @@ export const DefaultFontWeights = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">600</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:font-semibold">Sample Text</div>
       </sgds-table-cell>
     </sgds-table-row>
@@ -112,6 +122,9 @@ export const DefaultFontWeights = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-font-bold</code
         >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">700</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:font-bold">Sample Text</div>

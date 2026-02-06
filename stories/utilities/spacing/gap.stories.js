@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Gap",
+  title: "Utilities/Spacing/Gap",
   tags: ["autodocs"]
 };
 
@@ -14,11 +14,12 @@ const copyToClipboard = (token, buttonEl) => {
   }, 3000);
 };
 
-export const DefaultGap = () => html`
+export const Gap = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
       <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Value</sgds-table-head>
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     <sgds-table-row>
@@ -40,6 +41,9 @@ export const DefaultGap = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-gap-none</code
         >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">0px</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:flex sgds:gap-none">
@@ -70,6 +74,9 @@ export const DefaultGap = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">4px</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:flex sgds:gap-2-xs">
           <div class="sgds:bg-primary-default sgds:w-6 sgds:h-6"></div>
           <div class="sgds:bg-primary-default sgds:w-6 sgds:h-6"></div>
@@ -92,6 +99,9 @@ export const DefaultGap = () => html`
       </sgds-table-cell>
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-gap-xs</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">8px</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:flex sgds:gap-xs">
@@ -118,6 +128,9 @@ export const DefaultGap = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-gap-sm</code>
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">12px</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:flex sgds:gap-sm">
           <div class="sgds:bg-primary-default sgds:w-6 sgds:h-6"></div>
           <div class="sgds:bg-primary-default sgds:w-6 sgds:h-6"></div>
@@ -140,6 +153,9 @@ export const DefaultGap = () => html`
       </sgds-table-cell>
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-gap-md</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">16px</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:flex sgds:gap-md">
@@ -166,6 +182,9 @@ export const DefaultGap = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-gap-lg</code>
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">20px</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:flex sgds:gap-lg">
           <div class="sgds:bg-primary-default sgds:w-6 sgds:h-6"></div>
           <div class="sgds:bg-primary-default sgds:w-6 sgds:h-6"></div>
@@ -188,6 +207,9 @@ export const DefaultGap = () => html`
       </sgds-table-cell>
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-gap-xl</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">24px</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:flex sgds:gap-xl">
@@ -218,6 +240,9 @@ export const DefaultGap = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">32px</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:flex sgds:gap-2-xl">
           <div class="sgds:bg-primary-default sgds:w-6 sgds:h-6"></div>
           <div class="sgds:bg-primary-default sgds:w-6 sgds:h-6"></div>
@@ -244,6 +269,9 @@ export const DefaultGap = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-gap-3-xl</code
         >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">48px</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:flex sgds:gap-3-xl">

@@ -10,6 +10,7 @@
     --sgds-breakpoint-lg: var(--sgds-breakpoint-lg);
     --sgds-breakpoint-xl: var(--sgds-breakpoint-xl);
     --sgds-breakpoint-2-xl: var(--sgds-breakpoint-2-xl);
+    --sgds-spacing-none: var(--sgds-spacer-0);
     --sgds-spacing-3-xs: var(--sgds-spacer-1);
     --sgds-spacing-2-xs: var(--sgds-spacer-2);
     --sgds-spacing-xs: var(--sgds-spacer-3);
@@ -18,6 +19,9 @@
     --sgds-spacing-lg: var(--sgds-spacer-6);
     --sgds-spacing-xl: var(--sgds-spacer-7);
     --sgds-spacing-2-xl: var(--sgds-spacer-8);
+    --sgds-spacing-3-xl: var(--sgds-spacer-9);
+    --sgds-spacing-4-xl: var(--sgds-spacer-10);
+    --sgds-spacing-5-xl: var(--sgds-spacer-11);
     --sgds-background-color-default: var(--sgds-bg-default);
     --sgds-background-color-alternate: var(--sgds-bg-alternate);
     --sgds-background-color-fixed-light: var(--sgds-bg-fixed-light);
@@ -284,14 +288,83 @@
   .sgds\:top-27 {
     top: calc(var(--sgds-spacing) * 27);
   }
+  .sgds\:m-2-xl {
+    margin: var(--sgds-spacing-2-xl);
+  }
+  .sgds\:m-2-xs {
+    margin: var(--sgds-spacing-2-xs);
+  }
+  .sgds\:m-3-xl {
+    margin: var(--sgds-spacing-3-xl);
+  }
+  .sgds\:m-3-xs {
+    margin: var(--sgds-spacing-3-xs);
+  }
+  .sgds\:m-4-xl {
+    margin: var(--sgds-spacing-4-xl);
+  }
+  .sgds\:m-5-xl {
+    margin: var(--sgds-spacing-5-xl);
+  }
+  .sgds\:m-lg {
+    margin: var(--sgds-spacing-lg);
+  }
+  .sgds\:m-md {
+    margin: var(--sgds-spacing-md);
+  }
+  .sgds\:m-none {
+    margin: var(--sgds-spacing-none);
+  }
+  .sgds\:m-sm {
+    margin: var(--sgds-spacing-sm);
+  }
+  .sgds\:m-xl {
+    margin: var(--sgds-spacing-xl);
+  }
+  .sgds\:m-xs {
+    margin: var(--sgds-spacing-xs);
+  }
+  .sgds\:mx-3-xl {
+    margin-inline: var(--sgds-spacing-3-xl);
+  }
+  .sgds\:mx-md {
+    margin-inline: var(--sgds-spacing-md);
+  }
+  .sgds\:mx-xs {
+    margin-inline: var(--sgds-spacing-xs);
+  }
+  .sgds\:my-2-xl {
+    margin-block: var(--sgds-spacing-2-xl);
+  }
+  .sgds\:my-lg {
+    margin-block: var(--sgds-spacing-lg);
+  }
   .sgds\:my-md {
     margin-block: var(--sgds-spacing-md);
+  }
+  .sgds\:my-sm {
+    margin-block: var(--sgds-spacing-sm);
+  }
+  .sgds\:my-xl {
+    margin-block: var(--sgds-spacing-xl);
+  }
+  .sgds\:my-xs {
+    margin-block: var(--sgds-spacing-xs);
   }
   .sgds\:mt-lg {
     margin-top: var(--sgds-spacing-lg);
   }
   .sgds\:mt-md {
     margin-top: var(--sgds-spacing-md);
+  }
+  .sgds\:mt-sm {
+    margin-top: var(--sgds-spacing-sm);
+  }
+  .sgds\:mt-xl {
+    margin-top: var(--sgds-spacing-xl);
+  }
+  .sgds\:mt-xs {
+    margin-top: var(--sgds-spacing-xs);
   }
   .sgds\:mb-2-xl {
     margin-bottom: var(--sgds-spacing-2-xl);
@@ -341,6 +414,9 @@
   .sgds\:h-20 {
     height: calc(var(--sgds-spacing) * 20);
   }
+  .sgds\:h-40 {
+    height: calc(var(--sgds-spacing) * 40);
+  }
   .sgds\:h-250 {
     height: calc(var(--sgds-spacing) * 250);
   }
@@ -370,6 +446,12 @@
   }
   .sgds\:w-18 {
     width: calc(var(--sgds-spacing) * 18);
+  }
+  .sgds\:w-20 {
+    width: calc(var(--sgds-spacing) * 20);
+  }
+  .sgds\:w-40 {
+    width: calc(var(--sgds-spacing) * 40);
   }
   .sgds\:w-68 {
     width: calc(var(--sgds-spacing) * 68);
@@ -898,17 +980,38 @@
   .sgds\:p-2-xl {
     padding: var(--sgds-spacing-2-xl);
   }
+  .sgds\:p-2-xs {
+    padding: var(--sgds-spacing-2-xs);
+  }
+  .sgds\:p-3-xl {
+    padding: var(--sgds-spacing-3-xl);
+  }
+  .sgds\:p-3-xs {
+    padding: var(--sgds-spacing-3-xs);
+  }
+  .sgds\:p-4-xl {
+    padding: var(--sgds-spacing-4-xl);
+  }
+  .sgds\:p-5-xl {
+    padding: var(--sgds-spacing-5-xl);
+  }
   .sgds\:p-lg {
     padding: var(--sgds-spacing-lg);
   }
   .sgds\:p-md {
     padding: var(--sgds-spacing-md);
   }
+  .sgds\:p-none {
+    padding: var(--sgds-spacing-none);
+  }
   .sgds\:p-sm {
     padding: var(--sgds-spacing-sm);
   }
   .sgds\:p-xl {
     padding: var(--sgds-spacing-xl);
+  }
+  .sgds\:p-xs {
+    padding: var(--sgds-spacing-xs);
   }
   .sgds\:px-lg {
     padding-inline: var(--sgds-spacing-lg);
@@ -927,6 +1030,9 @@
   }
   .sgds\:py-sm {
     padding-block: var(--sgds-spacing-sm);
+  }
+  .sgds\:text-center {
+    text-align: center;
   }
   .sgds\:font-display {
     font-family: var(--sgds-font-display);

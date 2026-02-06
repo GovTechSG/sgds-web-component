@@ -14,11 +14,12 @@ const copyToClipboard = (token, buttonEl) => {
   }, 3000);
 };
 
-export const DefaultOpacity = () => html`
+export const Opacity = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
       <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Value</sgds-table-head>
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     <sgds-table-row>
@@ -40,6 +41,9 @@ export const DefaultOpacity = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-opacity-0</code
         >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">0</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:opacity-0 sgds:bg-primary-default sgds:w-12 sgds:h-12 sgds:rounded-sm"></div>
@@ -66,6 +70,9 @@ export const DefaultOpacity = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">0.03</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:opacity-3 sgds:bg-primary-default sgds:w-12 sgds:h-12 sgds:rounded-sm"></div>
       </sgds-table-cell>
     </sgds-table-row>
@@ -88,6 +95,9 @@ export const DefaultOpacity = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-opacity-5</code
         >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">0.05</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:opacity-5 sgds:bg-primary-default sgds:w-12 sgds:h-12 sgds:rounded-sm"></div>
@@ -114,6 +124,9 @@ export const DefaultOpacity = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">0.1</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:opacity-10 sgds:bg-primary-default sgds:w-12 sgds:h-12 sgds:rounded-sm"></div>
       </sgds-table-cell>
     </sgds-table-row>
@@ -136,6 +149,9 @@ export const DefaultOpacity = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-opacity-20</code
         >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">0.2</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:opacity-20 sgds:bg-primary-default sgds:w-12 sgds:h-12 sgds:rounded-sm"></div>
@@ -162,6 +178,9 @@ export const DefaultOpacity = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">0.3</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:opacity-30 sgds:bg-primary-default sgds:w-12 sgds:h-12 sgds:rounded-sm"></div>
       </sgds-table-cell>
     </sgds-table-row>
@@ -184,6 +203,9 @@ export const DefaultOpacity = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-opacity-40</code
         >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">0.4</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:opacity-40 sgds:bg-primary-default sgds:w-12 sgds:h-12 sgds:rounded-sm"></div>
@@ -210,6 +232,9 @@ export const DefaultOpacity = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">0.5</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:opacity-50 sgds:bg-primary-default sgds:w-12 sgds:h-12 sgds:rounded-sm"></div>
       </sgds-table-cell>
     </sgds-table-row>
@@ -232,6 +257,9 @@ export const DefaultOpacity = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-opacity-60</code
         >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">0.6</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:opacity-60 sgds:bg-primary-default sgds:w-12 sgds:h-12 sgds:rounded-sm"></div>
@@ -258,6 +286,9 @@ export const DefaultOpacity = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">0.7</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:opacity-70 sgds:bg-primary-default sgds:w-12 sgds:h-12 sgds:rounded-sm"></div>
       </sgds-table-cell>
     </sgds-table-row>
@@ -280,6 +311,9 @@ export const DefaultOpacity = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-opacity-80</code
         >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">0.8</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:opacity-80 sgds:bg-primary-default sgds:w-12 sgds:h-12 sgds:rounded-sm"></div>
@@ -306,6 +340,9 @@ export const DefaultOpacity = () => html`
         >
       </sgds-table-cell>
       <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">0.9</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:opacity-90 sgds:bg-primary-default sgds:w-12 sgds:h-12 sgds:rounded-sm"></div>
       </sgds-table-cell>
     </sgds-table-row>
@@ -328,6 +365,9 @@ export const DefaultOpacity = () => html`
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
           >--sgds-opacity-100</code
         >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">1</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:opacity-100 sgds:bg-primary-default sgds:w-12 sgds:h-12 sgds:rounded-sm"></div>

@@ -1,21 +1,23 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Border Width",
+  title: "Utilities/Spacing/Padding",
   tags: ["autodocs"]
 };
 
-const WIDTH_SCALE = [
-  { name: "0", class: "sgds:border-0", variable: "--sgds-border-width-0", value: "0px" },
-  { name: "1", class: "sgds:border-1", variable: "--sgds-border-width-1", value: "1px" },
-  { name: "2", class: "sgds:border-2", variable: "--sgds-border-width-2", value: "2px" },
-  { name: "3", class: "sgds:border-3", variable: "--sgds-border-width-3", value: "3px" },
-  { name: "4", class: "sgds:border-4", variable: "--sgds-border-width-4", value: "4px" }
-];
-
-const FORM_WIDTH_SCALE = [
-  { name: "default", class: "sgds:border-form-default", variable: "--sgds-form-border-width-default", value: "1px" },
-  { name: "thick", class: "sgds:border-form-thick", variable: "--sgds-form-border-width-thick", value: "2px" }
+const PADDING_SCALE = [
+  { name: "none", class: "sgds:p-none", variable: "--sgds-padding-none", value: "0px" },
+  { name: "3-xs", class: "sgds:p-3-xs", variable: "--sgds-padding-3-xs", value: "2px" },
+  { name: "2-xs", class: "sgds:p-2-xs", variable: "--sgds-padding-2-xs", value: "4px" },
+  { name: "xs", class: "sgds:p-xs", variable: "--sgds-padding-xs", value: "8px" },
+  { name: "sm", class: "sgds:p-sm", variable: "--sgds-padding-sm", value: "12px" },
+  { name: "md", class: "sgds:p-md", variable: "--sgds-padding-md", value: "16px" },
+  { name: "lg", class: "sgds:p-lg", variable: "--sgds-padding-lg", value: "20px" },
+  { name: "xl", class: "sgds:p-xl", variable: "--sgds-padding-xl", value: "24px" },
+  { name: "2-xl", class: "sgds:p-2-xl", variable: "--sgds-padding-2-xl", value: "32px" },
+  { name: "3-xl", class: "sgds:p-3-xl", variable: "--sgds-padding-3-xl", value: "48px" },
+  { name: "4-xl", class: "sgds:p-4-xl", variable: "--sgds-padding-4-xl", value: "64px" },
+  { name: "5-xl", class: "sgds:p-5-xl", variable: "--sgds-padding-5-xl", value: "96px" }
 ];
 
 const copyToClipboard = (token, buttonEl) => {
@@ -27,7 +29,7 @@ const copyToClipboard = (token, buttonEl) => {
   }, 3000);
 };
 
-const WidthTableRow = (item) => {
+const PaddingTableRow = (item) => {
   return html`
     <sgds-table-row>
       <sgds-table-cell>
@@ -49,13 +51,17 @@ const WidthTableRow = (item) => {
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">${item.value}</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <div style="${item.class === 'sgds:border-0' ? 'border: var(--sgds-border-width-0) solid var(--sgds-border-color-default)' : 'border: var(' + item.variable + ') solid var(--sgds-border-color-default)'}" class="sgds:w-16 sgds:h-16"></div>
+        <div class="${item.class} sgds:bg-primary-default">
+          <div class="sgds:bg-surface-raised sgds:p-xs sgds:rounded sgds:text-xs sgds:text-center">
+            Content
+          </div>
+        </div>
       </sgds-table-cell>
     </sgds-table-row>
   `;
 };
 
-export const Width = () => html`
+export const Padding = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
@@ -63,18 +69,6 @@ export const Width = () => html`
       <sgds-table-head>Value</sgds-table-head>
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
-    ${WIDTH_SCALE.map((item) => WidthTableRow(item))}
-  </sgds-table>
-`;
-
-export const FormWidth = () => html`
-  <sgds-table>
-    <sgds-table-row>
-      <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
-      <sgds-table-head>CSS Variable</sgds-table-head>
-      <sgds-table-head>Value</sgds-table-head>
-      <sgds-table-head>Preview</sgds-table-head>
-    </sgds-table-row>
-    ${FORM_WIDTH_SCALE.map((item) => WidthTableRow(item))}
+    ${PADDING_SCALE.map((item) => PaddingTableRow(item))}
   </sgds-table>
 `;
