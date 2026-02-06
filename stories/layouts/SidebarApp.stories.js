@@ -14,7 +14,7 @@ const Template = () => {
       </sgds-mainnav>
     </div>
     <div class="sgds:flex sgds:flex-row">
-      <div class="sgds:sticky sgds:h-[calc(100vh-108px)] sgds:overflow-y-scroll sgds:top-27 sgds:w-68">
+      <div class="sgds:sticky sgds:h-[calc(100vh-108px)] sgds:overflow-y-scroll sgds:top-27 sgds:w-68 sgds:border-r sgds:border-muted">
         <div id="sidebar-component" class="sgds:h-500 sgds:w-full">Place SideBar here</div>
       </div>
       <div class="sgds:flex sgds:flex-col sgds:w-full ">

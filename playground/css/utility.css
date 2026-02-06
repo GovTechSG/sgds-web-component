@@ -568,6 +568,14 @@
     border-style: var(--tw-border-style);
     border-width: var(--sgds-border-width-form-thick);
   }
+  .sgds\:border-r {
+    border-right-style: var(--tw-border-style);
+    border-right-width: 1px;
+  }
+  .sgds\:border-l {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 1px;
+  }
   .sgds\:border-none {
     --tw-border-style: none;
     border-style: none;
