@@ -1,6 +1,6 @@
 {
   "name": "@govtechsg/sgds-web-component",
-  "version": "3.8.1",
+  "version": "3.9.0",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -30,7 +30,7 @@
     "generate:icons": "node scripts/generateIconRegistry.js",
     "sync-figma-to-tokens": "tsx scripts/figma/sync-figma-to-tokens/sync-figma-to-tokens.ts",
     "chromatic": "chromatic",
-    "utility:dev": "tailwindcss -i ./src/css/utility.css -o ./playground/css/utility.css --config tailwind.config.js",
+    "utility:dev": "tailwindcss -i ./src/css/utility.css -o ./playground/css/utility.css --config tailwind.config.js --watch",
     "utility:storybook": "tailwindcss -i ./src/css/utility.css -o ./.storybook/utility.css --config tailwind.config.js"
   },
   "author": "GovTechSG",
@@ -90,6 +90,7 @@
     "@storybook/web-components-vite": "^8.2.6",
     "@tailwindcss/cli": "^4.1.18",
     "@tailwindcss/postcss": "^4.1.18",
+    "@tailwindcss/vite": "^4.1.18",
     "@types/mocha": "^10.0.6",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",

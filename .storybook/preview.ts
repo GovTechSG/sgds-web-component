@@ -73,10 +73,13 @@ export const parameters = {
         ["Introduction", "Typography and Layout", "Grid System", "Theming"],
         "Form",
         ["Validation", "Custom Validation"],
-        "Troubleshoot",
+        "Utilities",
+        ["Introduction"],
         "Components",
-        "Patterns",
-        "Templates"
+        "Templates",
+        ["Introduction"],
+        "Troubleshoot",
+        "Patterns"
       ]
     }
   }

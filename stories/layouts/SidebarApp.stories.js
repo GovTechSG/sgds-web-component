@@ -14,14 +14,12 @@ const Template = () => {
       </sgds-mainnav>
     </div>
     <div class="sgds:flex sgds:flex-row">
-      <div
-        class="sgds:sticky sgds:bg-translucent-subtle sgds:h-[calc(100vh-108px)] sgds:overflow-y-scroll sgds:top-27 sgds:md:w-68 sgds:w-18 "
-      >
-        <div id="sidebar-component" class="sgds:bg-translucent-subtle sgds:h-500 sgds:w-full">Place SideBar here</div>
+      <div class="sgds:sticky sgds:h-[calc(100vh-108px)] sgds:overflow-y-scroll sgds:top-27 sgds:w-68">
+        <div id="sidebar-component" class="sgds:h-500 sgds:w-full">Place SideBar here</div>
       </div>
       <div class="sgds:flex sgds:flex-col sgds:w-full ">
         <div class="sgds-container-sidebar sgds:py-2-xl">
-          <div id="content" class="sgds:bg-translucent-subtle sgds:h-250 sgds:w-full">Place content here</div>
+          <div id="content" class="sgds:h-250 sgds:w-full">Place content here</div>
         </div>
         <sgds-footer></sgds-footer>
       </div>
@@ -33,5 +31,5 @@ export const ApplicationLayoutWithSidebar = {
   name: "Application layout with sidebar",
   args: {},
   parameters: { layout: "fullscreen" },
-  tags: []
+  tags: ["!autodocs"]
 };
