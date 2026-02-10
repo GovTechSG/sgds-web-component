@@ -5,6 +5,10 @@
   "main": "lib/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GovTechSG/sgds-web-component.git"
+  },
   "scripts": {
     "dev": "VITE_ENV=development vite --open",
     "preview": "VITE_ENV=production vite --open",
