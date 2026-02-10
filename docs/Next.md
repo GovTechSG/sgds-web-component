@@ -71,17 +71,6 @@ export default function RootLayout({
 }
 ```
 
-### Step 3: Import CSS Files
-
-Import SGDS CSS files in your global styles or root layout:
-
-```tsx
-// In your root layout or global CSS file
-import '@govtechsg/sgds-web-component/themes/day.css';
-import '@govtechsg/sgds-web-component/themes/night.css';
-import '@govtechsg/sgds-web-component/css/sgds.css';
-```
-
 ## Common Issues and Solutions
 
 ### 1. Event Listeners Not Firing on First Load
