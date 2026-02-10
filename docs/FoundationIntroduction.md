@@ -1,4 +1,4 @@
-# Foundation
+# Introduction
 
 The library also provides styles for SGDS foundation to help users style your application wholistically with SGDS.
 The styles help to override the default browser's native styles with SGDS.
@@ -17,6 +17,23 @@ Foundation aspects of SGDS includes:
 - headers `<h1>, <h2>, <h3>, <h4>, <h5>, <h6>`
 - list `<ol>, <ul>, <li>`
 - [grid system](?path=/docs/style-grid-system--docs)
+
+## Font Import
+
+SGDS foundation styles use the **Inter** typeface for typography. Import the Inter Google Font in your HTML `<head>` to ensure all foundation elements (headings, paragraphs, labels, etc.) display correctly.
+
+<strong>HTML</strong>
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+  rel="stylesheet"
+/>
+```
+
+Add this in the `<head>` section of your HTML document before importing SGDS styles. The font-display swap parameter ensures text remains visible while the font loads.
 
 ## Import
 

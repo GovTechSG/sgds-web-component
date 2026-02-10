@@ -1,10 +1,14 @@
 {
   "name": "@govtechsg/sgds-web-component",
-  "version": "3.8.1",
+  "version": "3.9.0",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GovTechSG/sgds-web-component.git"
+  },
   "scripts": {
     "dev": "VITE_ENV=development vite --open",
     "preview": "VITE_ENV=production vite --open",
