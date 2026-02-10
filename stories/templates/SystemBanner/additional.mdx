@@ -22,6 +22,16 @@ In this example, the show more link opens a modal with the full message about th
   <Story of={SystemBannerStories.ShowMore} />
 </Canvas>
 
+## Fluid
+
+By default, the SystemBanner content is contained within a max-width container. Use the `fluid` prop to remove this constraint and allow the content to stretch to the full screen width.
+
+- Use `fluid` system banner when you need the banner to span the full viewport width.
+
+<Canvas of={SystemBannerStories.Fluid}>
+  <Story of={SystemBannerStories.Fluid} />
+</Canvas>
+
 ## No Clamp Action
 
 The `noClampAction` prop disables the "show more" link functionality when set to `true`. When enabled, long content will be truncated with an ellipsis only, without providing the option to expand the message.

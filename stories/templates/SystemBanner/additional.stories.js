@@ -37,7 +37,7 @@ export const Dismissible = {
     dismissible: true,
     show: true
   },
-  parameters: {},
+  parameters,
   tags: ["!dev"]
 };
 
@@ -45,7 +45,7 @@ export const ShowMore = {
   render: ShowMoreHookTemplate.bind({}),
   name: "Show More",
   args: {},
-  parameters: {},
+  parameters,
   tags: ["!dev"]
 };
 
@@ -58,4 +58,14 @@ export const NoClampAction = {
   },
   parameters: {},
   tags: ["!dev"]
+}
+export const Fluid = {
+  render: Template.bind({}),
+  name: "Fluid",
+  args: {
+    fluid: true,
+    show: true
+  },
+  parameters,
+  tags: []
 };

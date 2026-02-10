@@ -24,9 +24,23 @@ Stories are written in CSF format, imported into the *.mdx files to show in Docs
 Each component consist of Basic story and Additional stories. Basic story makes up of the first component preview in the Storybook Docs example. Additional stories are further examples that appear below API documentation and methods table.
 
 1.  Basic stories are written in `stories/templates/**/basic.js`
+    - basic.js exports a `Template` function that can be reused
     - basic.js is used in `stories/components/*.stories.js`
 2.  Additional stories CSF format are written in `stories/templates/**/additional.stories.js`. These CSF stories are then imported to `stories/templates/**/additional.mdx` for mdx format. 
-Write your text description in `additional.mdx` and the respective CSF story in the `additional.stories.js`
+    - Write your text description in `additional.mdx` and the respective CSF story in the `additional.stories.js`
+    - **Important:** Since `additional.stories.js` is concatenated with `basic.js` by gulp, you can directly reference the `Template` exported from `basic.js` without importing it
+    - For simple prop variations, reuse the `Template` with different args instead of creating new template functions
+    - Example:
+      ```javascript
+      // In additional.stories.js - no imports needed
+      export const Fluid = {
+        render: Template.bind({}),
+        name: "Fluid",
+        args: { fluid: true },
+        parameters: { layout: "fullscreen" },
+        tags: []
+      };
+      ```
 3. The script that help writes the final `stories/components/*.stories.js` and `stories/components/*.mdx` is in `scripts/generateStories.mjs` file
 4. `stories/templates/**/additional.stories.js is concatenated with `stories/components/*.stories.js`
 5. `stories/templates/**/additional.mdx` is added to the final mdx file in `stories/components/*.mdx` via gulp concatenation. See `gulpfile.babel.js` for the gulp concatenation action. 

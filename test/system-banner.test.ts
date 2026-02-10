@@ -11,10 +11,12 @@ describe("<sgds-system-banner>", () => {
     const el = await fixture<SgdsSystemBanner>(html`<sgds-system-banner show></sgds-system-banner>`);
     assert.shadowDom.equal(
       el,
-      `
+      `   
+                <div class="banner-wrapper">
                 <div class="banner" role="alert" aria-hidden="false">
                 <div class="content">
                     <slot id="loop-slot"></slot>
+                </div>
                 </div>
                 </div>
             `
@@ -39,6 +41,7 @@ describe("<sgds-system-banner>", () => {
     assert.shadowDom.equal(
       el,
       `
+              <div class="banner-wrapper">
                 <div class="banner" role="alert" aria-hidden="false">
                 <div class="content">
                     <slot id="loop-slot"></slot>
@@ -59,8 +62,9 @@ describe("<sgds-system-banner>", () => {
                 size="xs"
                 target="_self"
               ></sgds-icon-button>
-            </div>
                 </div>
+              </div>
+            </div>
             `
     );
   });

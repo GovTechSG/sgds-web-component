@@ -1,9 +1,11 @@
 import { html } from "lit";
+import { allModes } from "../../../.storybook/modes";
 
 export const Template = args => html`<sgds-system-banner
   ?dismissible=${args.dismissible}
   ?show=${args.show}
   ?noClampAction=${args.noClampAction}
+  ?fluid=${args.fluid}
 >
   <sgds-system-banner-item>
     <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
@@ -38,4 +40,12 @@ export const args = {
   show: true
 };
 
-export const parameters = {};
+export const parameters = {
+  layout: "fullscreen",
+  chromatic: {
+    modes: {
+      mobile: allModes["sm"],
+      desktop: allModes["lg"]
+    }
+  }
+};

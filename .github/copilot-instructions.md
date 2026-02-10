@@ -41,6 +41,27 @@ description: 'AI agent guide for contributing to and navigating the sgds-web-com
 4. Add tests in `test/`
 5. Document in `docs/`
 
+## Storybook Story Conventions
+- **Basic stories**: Written in `stories/templates/<ComponentName>/basic.js`
+  - Exports a `Template` function that can be reused
+  - Exports `args` and `parameters` for the default story
+- **Additional stories**: Written in `stories/templates/<ComponentName>/additional.stories.js` and `additional.mdx`
+  - **Important**: Files are concatenated by gulp, so `Template` from `basic.js` is available without importing
+  - For simple prop variations, reuse `Template.bind({})` with different args instead of creating new templates
+  - Example:
+    ```javascript
+    // In additional.stories.js - no imports needed
+    export const Fluid = {
+      render: Template.bind({}),
+      name: "Fluid",
+      args: { fluid: true },
+      parameters: { layout: "fullscreen" },
+      tags: []
+    };
+    ```
+  - Write documentation in `additional.mdx` and reference stories with `<Canvas of={ComponentStories.StoryName}>`
+- **Build process**: `scripts/generateStories.mjs` concatenates templates into `stories/components/`
+
 ## References
 - [README.md](../README.md): Installation, usage, and framework integration
 - [docs/](../docs/): In-depth guides and API docs
