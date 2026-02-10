@@ -1,7 +1,10 @@
 import { html } from "lit";
-import { ifDefined } from "lit/directives/if-defined.js";
 
-export const Template = args => html`<sgds-system-banner ?dismissible=${args.dismissible} ?show=${args.show}>
+export const Template = args => html`<sgds-system-banner
+  ?dismissible=${args.dismissible}
+  ?show=${args.show}
+  ?noClampAction=${args.noClampAction}
+>
   <sgds-system-banner-item>
     <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
     Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
