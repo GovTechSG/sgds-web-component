@@ -42,7 +42,7 @@ export class SgdsSystemBanner extends SgdsElement {
   /** When true, all its children SgdsSystemBannerItem's message will be truncated with ellipsis only */
   @property({ type: Boolean })
   noClampAction = false;
-  
+
   /** When true, removes max-width constraint to allow content to stretch full screen width */
   @property({ type: Boolean, reflect: true }) fluid = false;
 

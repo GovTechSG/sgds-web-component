@@ -58,7 +58,7 @@ export const NoClampAction = {
   },
   parameters: {},
   tags: ["!dev"]
-}
+};
 export const Fluid = {
   render: Template.bind({}),
   name: "Fluid",
