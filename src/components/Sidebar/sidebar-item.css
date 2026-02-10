@@ -1,23 +1,26 @@
-.sidebar-option {
+.sidebar-item {
   padding: var(--sgds-padding-xs);
   cursor: pointer;
   border-radius: var(--sgds-border-radius-md);
   outline-offset: -1px;
 }
 
-.sidebar-option.active {
+.sidebar-item.active {
   background-color: var(--sgds-surface-raised);
   color: var(--sgds-primary-color-default);
 }
+.sidebar-item-label.offset {
+  padding-left: var(--sgds-padding-lg);
+}
 
-.sidebar-option-label-wrapper {
+.sidebar-item-label-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--sgds-gap-sm);
 }
 
-.sidebar-option-label-wrapper > div {
+.sidebar-item-label-wrapper > div {
   display: flex;
   align-items: center;
   font-size: var(--sgds-font-size-1);
@@ -25,12 +28,16 @@
   gap: var(--sgds-gap-sm);
 }
 
-.sidebar-option--collapsed .sidebar-option-label,
-.sidebar-option--collapsed .sidebar-option-trailing-icon {
+.sidebar-item-label-wrapper .sidebar-item-trailingIcon {
+  display: flex;
+}
+
+.sidebar-item--collapsed .sidebar-item-label,
+.sidebar-item--collapsed .sidebar-item-trailingIcon {
   display: none;
 }
 
-.sidebar-option--collapsed .sidebar-option-label-wrapper {
+.sidebar-item--collapsed .sidebar-item-label-wrapper {
   justify-content: center;
 }
 

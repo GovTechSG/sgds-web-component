@@ -62,39 +62,47 @@
         <sgds-sidebar>
           <div slot="brand-name">brand-name</div>
           <!-- Main Navigation Section -->
-          <sgds-sidebar-section title="Main" collapsible>
-            <sgds-sidebar-option title="Dashboard" icon="house">
-              <sgds-sidebar-option title="Summary" icon="building">
-                <sgds-sidebar-option title="Latest Sales" icon="calculator"> </sgds-sidebar-option>
-                <sgds-sidebar-option title="Refunds" icon="monitor"> </sgds-sidebar-option>
-              </sgds-sidebar-option>
-              <sgds-sidebar-option title="Meetings" icon="calendar"> </sgds-sidebar-option>
-              <sgds-sidebar-option title="Gallery" icon="camera"><a href="#div"></a></sgds-sidebar-option>
-            </sgds-sidebar-option>
 
-            <sgds-sidebar-option title="Reports" icon="file-text">
-              <sgds-sidebar-option title="Yearly" icon="house"></sgds-sidebar-option>
-              <sgds-sidebar-option title="Monthly" icon="house"></sgds-sidebar-option>
-            </sgds-sidebar-option>
+          <sgds-sidebar-section title="Main" collapsible>
+            <sgds-sidebar-group title="Dashboard" icon="house">
+              <sgds-sidebar-group title="Summary" icon="building">
+                <sgds-sidebar-item title="Latest Sales">
+                  <a href="http://localhost:5173/playground/badge.html"></a>
+                </sgds-sidebar-item>
+                <sgds-sidebar-item title="Refunds"> </sgds-sidebar-item>
+              </sgds-sidebar-group>
+
+              <sgds-sidebar-item title="Meetings" icon="calendar">
+                <a href="http://localhost:5173/playground/select.html"></a>
+              </sgds-sidebar-item>
+              <sgds-sidebar-item title="Gallery" icon="camera">
+                <a href="http://localhost:5173/playground/combobox.html"></a>
+              </sgds-sidebar-item>
+            </sgds-sidebar-group>
+
+            <sgds-sidebar-item title="Reports" icon="file-text">
+              <sgds-sidebar-item title="Yearly" icon="house"></sgds-sidebar-item>
+              <sgds-sidebar-item title="Monthly" icon="house"></sgds-sidebar-item>
+            </sgds-sidebar-item>
           </sgds-sidebar-section>
 
           <!-- Organization Section (Collapsible) -->
           <sgds-sidebar-section title="Organization">
-            <sgds-sidebar-option title="Team Management" icon="users"> </sgds-sidebar-option>
+            <sgds-sidebar-item title="Team Management" icon="users"> </sgds-sidebar-item>
 
-            <sgds-sidebar-option title="Projects" icon="layers"> </sgds-sidebar-option>
+            <sgds-sidebar-item title="Projects" icon="layers"> </sgds-sidebar-item>
           </sgds-sidebar-section>
 
           <!-- Configuration Section (Collapsible) -->
           <sgds-sidebar-section title="Configuration" collapsible>
-            <sgds-sidebar-option title="Settings" icon="gear"> </sgds-sidebar-option>
+            <sgds-sidebar-item title="Settings" icon="gear"> </sgds-sidebar-item>
           </sgds-sidebar-section>
 
           <!-- Support Section -->
           <sgds-sidebar-section title="Support">
-            <sgds-sidebar-option title="Help & Support" icon="question-circle">
+            <sgds-sidebar-item title="Help & Support" icon="question-circle">
               <span
-                slot="trailing-icon"
+                slot="trailingIcon"
                 style="
                   background: #ef4444;
                   color: white;
@@ -109,9 +117,9 @@
                 "
                 >3</span
               >
-            </sgds-sidebar-option>
+            </sgds-sidebar-item>
 
-            <sgds-sidebar-option title="Premium Features" icon="star" disabled> </sgds-sidebar-option>
+            <sgds-sidebar-item title="Premium Features" icon="star" disabled> </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
       </div>
@@ -137,7 +145,7 @@
           <ul style="color: #4b5563; line-height: 1.8">
             <li><strong>sgds-sidebar</strong> - Main container component</li>
             <li><strong>sgds-sidebar-section</strong> - Organizes and groups options (NEW!)</li>
-            <li><strong>sgds-sidebar-option</strong> - Individual navigation items</li>
+            <li><strong>sgds-sidebar-item</strong> - Individual navigation items</li>
           </ul>
         </div>
 

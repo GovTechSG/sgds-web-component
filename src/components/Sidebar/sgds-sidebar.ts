@@ -3,13 +3,14 @@ import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import sidebarStyle from "./sidebar.css";
-import SgdsSidebarOption from "./sgds-sidebar-option";
+import SgdsSidebarItem from "./sgds-sidebar-item";
+import SgdsSidebarGroup from "./sgds-sidebar-group";
 
 /**
  * @summary Sidebar is a collapsible navigation component that displays menu items and options.
  * Users can expand and collapse the sidebar to save screen space.
  *
- * @slot - Insert sgds-sidebar-option elements or other navigation content.
+ * @slot - Insert sgds-sidebar-item elements or other navigation content.
  */
 export class SgdsSidebar extends SgdsElement {
   static styles = [...SgdsElement.styles, sidebarStyle];
@@ -33,18 +34,18 @@ export class SgdsSidebar extends SgdsElement {
 
   /**
    * Stores the nested sidebar options that should be displayed in the drawer.
-   * @type {SgdsSidebarOption[]}
+   * @type {SgdsSidebarItem[]}
    * @internal
    */
-  @state() private drawerContent: SgdsSidebarOption[] = [];
+  @state() private drawerContent: (SgdsSidebarItem | SgdsSidebarGroup)[] = [];
 
   /**
    * Tracks the currently selected sidebar option.
    * Used to manage drawer state and active styling.
-   * @type {SgdsSidebarOption | null}
+   * @type {SgdsSidebarItem | null}
    * @internal
    */
-  @state() currentSelected: SgdsSidebarOption | null = null;
+  @state() currentSelected: SgdsSidebarGroup | null = null;
 
   connectedCallback() {
     super.connectedCallback();
@@ -58,10 +59,10 @@ export class SgdsSidebar extends SgdsElement {
    * Clears the drawer overlay content and updates selected attributes.
    * Called when closing the drawer or switching to a different parent option.
    * @private
-   * @param {SgdsSidebarOption} element - The parent option to return nodes to
+   * @param {SgdsSidebarItem} element - The parent option to return nodes to
    * @returns {void}
    */
-  private _revertNodesToParent(element: SgdsSidebarOption) {
+  private _revertNodesToParent(element: SgdsSidebarGroup) {
     this.drawerContent.forEach(e => {
       e.removeAttribute("selected");
       element.append(e);
@@ -74,10 +75,10 @@ export class SgdsSidebar extends SgdsElement {
    * Extracts direct child options from the selected parent and populates the drawer.
    * When undefined is passed, closes the drawer and reverts nodes back to parents.
    * @private
-   * @param {SgdsSidebarOption} [element] - The parent option to display in drawer. Undefined closes drawer.
+   * @param {SgdsSidebarGroup|SgdsSidebarItem} [element] - The parent option to display in drawer. Undefined closes drawer.
    * @returns {void}
    */
-  private _setNodesToDrawer(element?: SgdsSidebarOption) {
+  private _setNodesToDrawer(element?: SgdsSidebarGroup) {
     if (this.currentSelected) {
       // if element is passed in means its a new selected ooption that needs to be assign nodes
       // when another node is selected return the node child back to previous element
@@ -87,11 +88,11 @@ export class SgdsSidebar extends SgdsElement {
       }
 
       // only set nodes when drawer is opened, only getting direct child
-      const menuItems = this.currentSelected.querySelectorAll(":scope > sgds-sidebar-option");
+      const menuItems = this.currentSelected.querySelectorAll(":scope > *");
 
       this.drawerContent = []; //always clear before assigning
       menuItems.forEach(e => {
-        this.drawerContent.push(e as SgdsSidebarOption);
+        this.drawerContent.push(e as SgdsSidebarItem | SgdsSidebarGroup);
       });
     } else {
       // when drawer is closed, we unset the values
@@ -109,11 +110,13 @@ export class SgdsSidebar extends SgdsElement {
    * @returns {void}
    */
   private addOptionListeners() {
-    const options = this.querySelectorAll("sgds-sidebar-option");
-    options.forEach(option => {
+    const options = this.querySelectorAll("sgds-sidebar-item");
+    const groups = this.querySelectorAll("sgds-sidebar-group");
+
+    [...options, ...groups].forEach(option => {
       // when option on level 0 is clicked
       option.addEventListener("i-sgds-click", (e: CustomEvent) => {
-        const element = e.detail.element as SgdsSidebarOption;
+        const element = e.detail.element as SgdsSidebarItem;
         const childLevel = e.detail.level;
 
         if (childLevel === 0) {
@@ -125,6 +128,7 @@ export class SgdsSidebar extends SgdsElement {
         options.forEach(e => e.removeAttribute("selected"));
         element.setAttribute("selected", "true");
 
+        // setting for parent if there is any
         if (this.currentSelected) {
           this.currentSelected.setAttribute("selected", "true");
         }
@@ -138,9 +142,11 @@ export class SgdsSidebar extends SgdsElement {
           anchorLink.click();
         }
       });
+    });
 
-      option.addEventListener("i-sgds-sidebar-open-drawer", (e: CustomEvent) => {
-        const element = e.detail.element as SgdsSidebarOption;
+    groups.forEach(group => {
+      group.addEventListener("i-sgds-sidebar-open-drawer", (e: CustomEvent) => {
+        const element = e.detail.element as SgdsSidebarGroup;
         options.forEach(e => e.removeAttribute("selected"));
 
         if (!this.currentSelected) {
@@ -163,6 +169,33 @@ export class SgdsSidebar extends SgdsElement {
         this._setNodesToDrawer(this.currentSelected !== element ? element : undefined);
         this.active = element.name;
         this.emit("sgds-select");
+      });
+
+      group.addEventListener("i-sgds-click", (e: CustomEvent) => {
+        const element = e.detail.element as SgdsSidebarItem;
+        const childLevel = e.detail.level;
+
+        if (childLevel === 0) {
+          // first level, we reset all attributes
+          this._revertNodesToParent(this.currentSelected);
+          this.currentSelected = null;
+        }
+
+        options.forEach(e => e.removeAttribute("selected"));
+        element.setAttribute("selected", "true");
+
+        if (this.currentSelected) {
+          this.currentSelected.setAttribute("selected", "true");
+        }
+
+        this.active = element.name;
+        this.emit("sgds-select");
+
+        // when anchorLink is provided, we click
+        const anchorLink = group.querySelector(":scope > a") as HTMLAnchorElement;
+        if (anchorLink) {
+          anchorLink.click();
+        }
       });
     });
   }

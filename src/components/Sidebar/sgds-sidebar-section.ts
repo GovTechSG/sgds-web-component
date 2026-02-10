@@ -7,10 +7,10 @@ import SgdsSidebar from "./sgds-sidebar";
 
 /**
  * @summary Sidebar section is a container component that groups related sidebar options into organized sections.
- * It displays a section header/title and can contain multiple sgds-sidebar-option elements.
+ * It displays a section header/title and can contain multiple sgds-sidebar-item elements.
  * Sections help organize navigation items hierarchically within the sidebar.
  *
- * @slot - Insert sgds-sidebar-option elements to be grouped within this section.
+ * @slot - Insert sgds-sidebar-item elements to be grouped within this section.
  */
 export class SgdsSidebarSection extends SgdsElement {
   static styles = [...SgdsElement.styles, sidebarSectionStyle];
