@@ -19,6 +19,7 @@ import SgdsRadio from "./sgds-radio";
  */
 export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
   static styles = [...FormControlElement.styles, radioGroupStyles];
+  static formAssociated = true;
 
   /**@internal */
   @query("slot:not([name])") defaultSlot: HTMLSlotElement;

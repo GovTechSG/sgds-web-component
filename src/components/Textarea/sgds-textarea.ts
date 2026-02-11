@@ -24,6 +24,7 @@ import formTextControlStyles from "../../styles/form-text-control.css";
  */
 export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
   static styles = [...FormControlElement.styles, formTextControlStyles, textareaStyle];
+  static formAssociated = true;
   /**@internal */
   @query("textarea.form-control-group") textarea: HTMLTextAreaElement;
   /**@internal */

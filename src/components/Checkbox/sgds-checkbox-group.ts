@@ -18,7 +18,7 @@ import SgdsCheckbox from "./sgds-checkbox";
  */
 export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement) {
   static styles = [...FormControlElement.styles, checkboxGroupStyles];
-
+  static formAssociated = true;
   /** The checkbox group's label  */
   @property({ reflect: true }) label = "";
 
