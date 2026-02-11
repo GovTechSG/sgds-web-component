@@ -20,13 +20,22 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
     @queryAsync("sgds-input") sgdsInput: Promise<SgdsInput>;
     @queryAsync("sgds-datepicker-input") sgdsDatepickerInput: Promise<SgdsInput>;
 
-    connectedCallback(): void {
-      super.connectedCallback();
-      if (this._mixinShouldSkipSgdsValidation()) return;
-
+    private _internals: ElementInternals;
+    constructor(...args: any[]) {
+      super(...args);
+      this._internals = this.attachInternals();
       /** Idempotency guarantee */
-      this.inputValidationController ??= new InputValidationController(this);
+      this.inputValidationController ??= new InputValidationController(this, this._internals);
     }
+    // connectedCallback(): void {
+    //   super.connectedCallback();
+    //   if (this._mixinShouldSkipSgdsValidation()) return;
+    //   console.log('1')
+    //   this._internals = this.attachInternals();
+    //   /** Idempotency guarantee */
+    //   this.inputValidationController ??= new InputValidationController(this, this._internals);
+
+    // }
     async firstUpdated(changedProperties: PropertyValueMap<this>) {
       super.firstUpdated(changedProperties);
 
