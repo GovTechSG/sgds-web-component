@@ -11,9 +11,13 @@ export class InputValidationController implements ReactiveController {
   validationError: keyof ValidityState;
   options: InputValidationControllerOptions;
 
-  constructor(host: ReactiveControllerHost & HTMLElement, internals: ElementInternals, options?: Partial<InputValidationControllerOptions>) {
+  constructor(
+    host: ReactiveControllerHost & HTMLElement,
+    internals: ElementInternals,
+    options?: Partial<InputValidationControllerOptions>
+  ) {
     (this.host = host).addController(this);
-    this._internals =  internals;
+    this._internals = internals;
     this.options = {
       setInvalid: (host: SgdsFormControl, value: boolean) => {
         host.invalid = value;
