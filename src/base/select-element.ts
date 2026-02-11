@@ -23,7 +23,7 @@ export class SelectElement
   extends SgdsFormValidatorMixin(DropdownListElement)
   implements SgdsFormControl, AbstractSelectBase
 {
-  static formAssociated = true; 
+  static formAssociated = true;
   static styles = [
     ...DropdownListElement.styles,
     dropdownMenuStyle,
