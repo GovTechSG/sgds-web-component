@@ -20,6 +20,7 @@ import SgdsIcon from "../Icon/sgds-icon";
 
 export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   static styles = [...FormControlElement.styles, fileUploadStyles];
+  static formAssociated = true;
   /**@internal */
   static dependencies = {
     "sgds-button": SgdsButton,

@@ -24,7 +24,7 @@ import formCheckStyles from "../../styles/form-check.css";
  */
 export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
   static styles = [...FormControlElement.styles, formCheckStyles, checkboxStyle];
-
+  static formAssociated = true;
   /** Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name. */
   @property({ type: String, reflect: true }) value: string;
 

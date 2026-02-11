@@ -30,6 +30,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
     formControlStyle,
     quantityToggleStyle
   ];
+  static formAssociated = true;
 
   /** @internal */
   static dependencies = {

@@ -13,7 +13,7 @@ type Constructor<T> = new (...args: any[]) => T;
  */
 export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superClass: T) => {
   class ToBeValidatedElement extends superClass {
-    static formAssociated = true;
+    // static formAssociated = true;
     inputValidationController: InputValidationController;
     input: HTMLInputElement | SgdsInput | HTMLTextAreaElement;
     private _isTouched = false;

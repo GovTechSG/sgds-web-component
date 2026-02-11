@@ -33,6 +33,7 @@ export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
  */
 export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) implements SgdsFormControl {
   static styles = [...DropdownElement.styles, dropdownMenuStyle, datepickerStyle];
+  static formAssociated = true;
   /**@internal */
   static dependencies = {
     "sgds-datepicker-input": DatepickerInput,
