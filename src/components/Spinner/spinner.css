@@ -64,7 +64,7 @@
 }
 
 .spinner-label {
-  font-size: var(--sgds-font-size-1);
+  font-size: var(--sgds-font-size-14);
   color: var(--sgds-neutral-color-default);
 }
 

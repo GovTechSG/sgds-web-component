@@ -33,6 +33,8 @@ jobs:
       - run: pnpm run build
       - run: pnpm publish --no-git-checks --tag rc ./lib --access public
         if: contains(env.NPM_TAG, 'rc')
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: pnpm publish --no-git-checks --tag latest ./lib --access public
         if: "!contains(env.NPM_TAG, 'rc')"
         env:
