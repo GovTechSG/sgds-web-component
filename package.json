@@ -70,7 +70,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
-    "@wc-toolkit/cem-inheritance": "^1.2.2",
     "@babel/preset-env": "^7.25.3",
     "@babel/register": "^7.21.0",
     "@chromatic-com/storybook": "^1.6.1",
@@ -94,6 +93,7 @@
     "@types/mocha": "^10.0.6",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
+    "@wc-toolkit/cem-inheritance": "^1.2.2",
     "@web/dev-server-esbuild": "^0.3.6",
     "@web/test-runner": "^0.17.1",
     "@web/test-runner-commands": "^0.6.5",
@@ -132,6 +132,7 @@
     "prettier": "^2.8.7",
     "react": "^19.2.3",
     "remark-gfm": "^4.0.0",
+    "resize-observer-polyfill": "^1.5.1",
     "rollup": "^2.79.1",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-generate-package-json": "^3.2.0",
