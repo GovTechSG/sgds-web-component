@@ -20,7 +20,7 @@ export const Template = args => {
       ]
     },
     both: {
-      rowHeader: ["#", "First Names", "Last Name", "Username"],
+      rowHeader: ["First Names", "Last Name", "Username"],
       columnHeader: ["1", "2", "3"],
       tableData: [
         ["John", "Doe", "@johndoe"],
@@ -37,11 +37,13 @@ export const Template = args => {
       .columnHeader=${data.columnHeader}
       .rowHeader=${data.rowHeader}
       .tableData=${data.tableData}
+      ?headerBackground=${args.headerBackground}
+      ?tableBorder=${args.tableBorder}
     >
     </sgds-table>
   `;
 };
 
-export const args = { headerPosition: "horizontal" };
+export const args = { headerPosition: "horizontal", headerBackground: false, tableBorder: true };
 
 export const parameters = {};
