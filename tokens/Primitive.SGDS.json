@@ -1145,92 +1145,6 @@
         }
       }
     },
-    "breakpoint": {
-      "xs": {
-        "$type": "number",
-        "$value": "{sgds-dimension-320}",
-        "$description": "Values are defined in px",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "CORNER_RADIUS"
-            ],
-            "codeSyntax": {}
-          }
-        }
-      },
-      "sm": {
-        "$type": "number",
-        "$value": "{sgds-dimension-512}",
-        "$description": "Values are defined in px",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "CORNER_RADIUS"
-            ],
-            "codeSyntax": {}
-          }
-        }
-      },
-      "md": {
-        "$type": "number",
-        "$value": "{sgds-dimension-768}",
-        "$description": "Values are defined in px",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "CORNER_RADIUS"
-            ],
-            "codeSyntax": {}
-          }
-        }
-      },
-      "lg": {
-        "$type": "number",
-        "$value": "{sgds-dimension-1024}",
-        "$description": "Values are defined in px",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "CORNER_RADIUS"
-            ],
-            "codeSyntax": {}
-          }
-        }
-      },
-      "xl": {
-        "$type": "number",
-        "$value": "{sgds-dimension-1280}",
-        "$description": "Values are defined in px",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "CORNER_RADIUS"
-            ],
-            "codeSyntax": {}
-          }
-        }
-      },
-      "2-xl": {
-        "$type": "number",
-        "$value": "{sgds-dimension-1440}",
-        "$description": "Values are defined in px",
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": false,
-            "scopes": [
-              "CORNER_RADIUS"
-            ],
-            "codeSyntax": {}
-          }
-        }
-      }
-    },
     "font-family": {
       "brand": {
         "$type": "string",
@@ -1299,6 +1213,108 @@
             "hiddenFromPublishing": true,
             "scopes": [
               "FONT_STYLE"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "gap": {
+      "2-xs": {
+        "$type": "number",
+        "$value": "{sgds-spacer-2}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "-sgds-gap-2-xs"
+            }
+          }
+        }
+      },
+      "xs": {
+        "$type": "number",
+        "$value": "{sgds-spacer-3}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "sm": {
+        "$type": "number",
+        "$value": "{sgds-spacer-4}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "md": {
+        "$type": "number",
+        "$value": "{sgds-spacer-5}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "xl": {
+        "$type": "number",
+        "$value": "{sgds-spacer-7}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "2-xl": {
+        "$type": "number",
+        "$value": "{sgds-spacer-8}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "3-xl": {
+        "$type": "number",
+        "$value": "{sgds-spacer-9}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "GAP"
             ],
             "codeSyntax": {}
           }
@@ -1713,6 +1729,106 @@
             "hiddenFromPublishing": true,
             "scopes": [
               "OPACITY"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      }
+    },
+    "padding": {
+      "3-xs": {
+        "$type": "number",
+        "$value": "{sgds-spacer-1}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "2-xs": {
+        "$type": "number",
+        "$value": "{sgds-spacer-2}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "md": {
+        "$type": "number",
+        "$value": "{sgds-spacer-5}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "lg": {
+        "$type": "number",
+        "$value": "{sgds-spacer-6}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "xl": {
+        "$type": "number",
+        "$value": "{sgds-spacer-7}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "2-xl": {
+        "$type": "number",
+        "$value": "{sgds-spacer-8}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {}
+          }
+        }
+      },
+      "3-xl": {
+        "$type": "number",
+        "$value": "{sgds-spacer-9}",
+        "$description": "",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": false,
+            "scopes": [
+              "GAP"
             ],
             "codeSyntax": {}
           }
@@ -2903,7 +3019,7 @@
       "872": {
         "$type": "number",
         "$value": 872,
-        "$description": "",
+        "$description": "Values are defined in px",
         "$extensions": {
           "com.figma": {
             "hiddenFromPublishing": true,
