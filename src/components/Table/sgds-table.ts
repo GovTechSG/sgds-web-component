@@ -1,12 +1,12 @@
 import { html } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 
 import tableStyle from "./table.css";
 import { HasSlotController } from "../../utils/slot";
-import SgdsTableRow from "./sgds-table-row";
-import SgdsTableHead from "./sgds-table-head";
+import { provide } from "@lit/context";
+import { TableHeaderBackgroundContext } from "./table-context";
 
 export type HeaderPosition = "horizontal" | "vertical" | "both";
 
@@ -25,6 +25,8 @@ export class SgdsTable extends SgdsElement {
    * Use "sm", "md", "lg", or "xl" to create responsive tables up to a particular breakpoint.
    * From that breakpoint and up, the table will behave normally and not scroll horizontally.
    * Use "always" to make the table always responsive.
+   *
+   * (@deprecated) Deprecated since 3.9.0 legacy from v2
    * @type {"sm" | "md" | "lg" | "xl" | "always"}
    */
   @property({ type: String, reflect: true }) responsive: "sm" | "md" | "lg" | "xl" | "always";
@@ -82,6 +84,10 @@ export class SgdsTable extends SgdsElement {
    */
   @property({ type: Boolean }) hasDefaultSlot = false;
 
+  @provide({ context: TableHeaderBackgroundContext })
+  @state()
+  private _headerBackground = false;
+
   /** @internal */
   private readonly hasSlotController = new HasSlotController(this, "[default]");
 
@@ -91,6 +97,7 @@ export class SgdsTable extends SgdsElement {
 
   updated() {
     if (!this.hasDefaultSlot) this.hasDefaultSlot = this.hasSlotController.test("[default]");
+    this._headerBackground = this.headerBackground;
   }
 
   private _renderTable() {
@@ -150,36 +157,6 @@ export class SgdsTable extends SgdsElement {
     }
   }
 
-  /**
-   * When there is a slot change, we will check if the background boolean is true
-   * if true, we will find the grand node of the table structure and set the sgds-table-head background attribute
-   *
-   */
-  private _handleSlotChange(e: Event) {
-    if (this.headerBackground) {
-      const childNodes =
-        (e.target as HTMLSlotElement)
-          .assignedNodes({ flatten: true })
-          ?.filter((item: SgdsTableRow) => item?.tagName?.toLowerCase() === "sgds-table-row") || [];
-
-      childNodes.forEach((node: SgdsTableRow) => {
-        if (node && node.shadowRoot) {
-          const slotEle = node.shadowRoot.querySelector("slot");
-          const grandChildNodes =
-            slotEle
-              ?.assignedNodes({ flatten: true })
-              ?.filter((item: SgdsTableRow) => item?.tagName?.toLowerCase() === "sgds-table-head") || [];
-
-          grandChildNodes.forEach((grandNode: SgdsTableHead) => {
-            if (grandNode && grandNode.nextElementSibling?.tagName?.toLowerCase() !== "sgds-table-cell")
-              grandNode.setAttribute("background", "true");
-          });
-        }
-      });
-    }
-    return;
-  }
-
   render() {
     return html`
       <div
@@ -192,11 +169,7 @@ export class SgdsTable extends SgdsElement {
         })}
         tabindex="0"
       >
-        <slot
-          id="table-slot"
-          class=${classMap({ table: true, "no-border": !this.hasDefaultSlot })}
-          @slotchange=${this._handleSlotChange}
-        ></slot>
+        <slot id="table-slot" class=${classMap({ table: true, "no-border": !this.hasDefaultSlot })}></slot>
 
         ${!this.hasDefaultSlot
           ? html`<table class="table">
