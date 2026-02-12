@@ -38,7 +38,7 @@
 .sidebar-content {
   flex: 1;
   overflow-y: auto;
-  padding: var(--sgds-padding-lg) var(--sgds-padding-none);
+  padding: var(--sgds-padding-xs) var(--sgds-padding-xs) var(--sgds-padding-lg) var(--sgds-padding-xs);
   border-right: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
   background-color: var(--sgds-bg-default);
 }

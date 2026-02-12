@@ -237,7 +237,7 @@ export class SgdsSidebar extends SgdsElement {
               name=${this.collapsed ? "sidebar-expand" : "sidebar-collapse"}
               variant="ghost"
               tone="neutral"
-              size="md"
+              size="sm"
               @click=${this.toggleCollapsed}
               aria-label=${this.collapsed ? "Expand sidebar" : "Collapse sidebar"}
               aria-expanded=${!this.collapsed}
