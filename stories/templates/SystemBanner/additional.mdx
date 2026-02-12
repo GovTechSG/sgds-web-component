@@ -31,3 +31,18 @@ By default, the SystemBanner content is contained within a max-width container. 
 <Canvas of={SystemBannerStories.Fluid}>
   <Story of={SystemBannerStories.Fluid} />
 </Canvas>
+
+## No Clamp Action
+
+The `noClampAction` prop disables the "show more" link functionality when set to `true`. When enabled, long content will be truncated with an ellipsis only, without providing the option to expand the message.
+
+This is useful when you want to enforce a strict two-line limit for banner messages without giving users the ability to view the full content. All child `sgds-system-banner-item` components will inherit this behavior.
+
+**Key behaviors when `noClampAction` is true:**
+- Text content is truncated to two lines with an ellipsis
+- No "show more" link appears, even for long content
+- The `sgds-show-more` event will not be emitted
+
+<Canvas of={SystemBannerStories.NoClampAction}>
+  <Story of={SystemBannerStories.NoClampAction} />
+</Canvas>

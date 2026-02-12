@@ -5,6 +5,10 @@
   "main": "lib/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GovTechSG/sgds-web-component.git"
+  },
   "scripts": {
     "dev": "VITE_ENV=development vite --open",
     "preview": "VITE_ENV=production vite --open",
@@ -133,6 +137,7 @@
     "prettier": "^2.8.7",
     "react": "^19.2.3",
     "remark-gfm": "^4.0.0",
+    "resize-observer-polyfill": "^1.5.1",
     "rollup": "^2.79.1",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-generate-package-json": "^3.2.0",

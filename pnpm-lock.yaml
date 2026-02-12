@@ -228,6 +228,9 @@ importers:
       remark-gfm:
         specifier: ^4.0.0
         version: 4.0.1
+      resize-observer-polyfill:
+        specifier: ^1.5.1
+        version: 1.5.1
       rollup:
         specifier: ^2.79.1
         version: 2.79.2
@@ -6066,6 +6069,9 @@ packages:
   requireindex@1.2.0:
     resolution: {integrity: sha512-L9jEkOi3ASd9PYit2cwRfyppc9NoABujTP8/5gFcbERmo5jUoAKovIC3fsF17pkTnGsrByysqX+Kxd2OTNI1ww==}
     engines: {node: '>=0.10.5'}
+
+  resize-observer-polyfill@1.5.1:
+    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
 
   resolve-dir@1.0.1:
     resolution: {integrity: sha512-R7uiTjECzvOsWSfdM0QKFNBVFcK27aHOUwdvK53BcW8zqnGdYp0Fbj82cy54+2A4P2tFM22J5kRfe1R+lM/1yg==}
@@ -13832,6 +13838,8 @@ snapshots:
   require-from-string@2.0.2: {}
 
   requireindex@1.2.0: {}
+
+  resize-observer-polyfill@1.5.1: {}
 
   resolve-dir@1.0.1:
     dependencies:
