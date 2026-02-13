@@ -1,0 +1,356 @@
+@layer theme, utilities;
+@import "tailwindcss/theme.css" layer(theme) prefix(sgds);
+@import "tailwindcss/utilities.css" layer(utilities) prefix(sgds);
+
+@theme {
+  --*: initial;
+  --spacing: 4px;
+  
+  /* Breakpoints (raw values required) */
+  --breakpoint-xs: 320px;
+  --breakpoint-sm: 512px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2-xl: 1440px;
+  
+  /* Margin and Padding */
+  --spacing-none: var(--sgds-spacer-0);
+  --spacing-3-xs: var(--sgds-spacer-1);
+  --spacing-2-xs: var(--sgds-spacer-2);
+  --spacing-xs: var(--sgds-spacer-3);
+  --spacing-sm: var(--sgds-spacer-4);
+  --spacing-md: var(--sgds-spacer-5);
+  --spacing-lg: var(--sgds-spacer-6);
+  --spacing-xl: var(--sgds-spacer-7);
+  --spacing-2-xl: var(--sgds-spacer-8);
+  --spacing-3-xl: var(--sgds-spacer-9);
+  --spacing-4-xl: var(--sgds-spacer-10);
+  --spacing-5-xl: var(--sgds-spacer-11);
+ 
+  /* Semantic background colors */
+  --background-color-default: var(--sgds-bg-default);
+  --background-color-alternate: var(--sgds-bg-alternate);
+  --background-color-fixed-light: var(--sgds-bg-fixed-light);
+  --background-color-fixed-dark: var(--sgds-bg-fixed-dark);
+  --background-color-overlay: var(--sgds-bg-overlay);
+  --background-color-translucent: var(--sgds-bg-translucent);
+  --background-color-translucent-subtle: var(--sgds-bg-translucent-subtle);
+  --background-color-transparent: var(--sgds-bg-transparent);
+  --background-color-translucent-inverse: var(--sgds-bg-translucent-inverse);
+  --background-color-translucent-fixed-dark: var(--sgds-bg-translucent-fixed-dark);
+  --background-color-translucent-fixed-light: var(--sgds-bg-translucent-fixed-light);
+  --background-color-surface-default: var(--sgds-surface-default);
+  --background-color-surface-raised: var(--sgds-surface-raised);
+  --background-color-surface-inverse: var(--sgds-surface-inverse);
+  --background-color-surface-fixed-light: var(--sgds-surface-fixed-light);
+  --background-color-surface-fixed-dark: var(--sgds-surface-fixed-dark);
+
+  /* Semantic text colors */
+  --text-color-default: var(--sgds-color-default);
+  --text-color-subtle: var(--sgds-color-subtle);
+  --text-color-muted: var(--sgds-color-muted);
+  --text-color-inverse: var(--sgds-color-inverse);
+  --text-color-fixed-light: var(--sgds-color-fixed-light);
+  --text-color-fixed-dark: var(--sgds-color-fixed-dark);
+  --text-color-transparent: var(--sgds-color-transparent);
+
+  /* Semantic border colors */
+  --border-color-default: var(--sgds-border-color-default);
+  --border-color-emphasis: var(--sgds-border-color-emphasis);
+  --border-color-muted: var(--sgds-border-color-muted);
+  --border-color-fixed-light: var(--sgds-border-color-fixed-light);
+  --border-color-fixed-dark: var(--sgds-border-color-fixed-dark);
+  --border-color-translucent: var(--sgds-border-color-translucent);
+  --border-color-transparent: var(--sgds-border-color-transparent);
+  
+  /* Semantic - Primary Colors */
+  --background-color-primary-default: var(--sgds-primary-bg-default);
+  --background-color-primary-muted: var(--sgds-primary-bg-muted);
+  --background-color-primary-translucent: var(--sgds-primary-bg-translucent);
+  --background-color-primary-surface-default: var(--sgds-primary-surface-default);
+  --background-color-primary-surface-emphasis: var(--sgds-primary-surface-emphasis);
+  --background-color-primary-surface-muted: var(--sgds-primary-surface-muted);
+  --background-color-primary-surface-translucent: var(--sgds-primary-surface-translucent);
+  --text-color-primary-default: var(--sgds-primary-color-default);
+  --text-color-primary-emphasis: var(--sgds-primary-color-emphasis);
+  --text-color-primary-fixed-light: var(--sgds-primary-color-fixed-light);
+  --text-color-primary-fixed-dark: var(--sgds-primary-color-fixed-dark);
+  --border-color-primary-default: var(--sgds-primary-border-color-default);
+  --border-color-primary-emphasis: var(--sgds-primary-border-color-emphasis);
+  --border-color-primary-muted: var(--sgds-primary-border-color-muted);
+
+  /* Semantic - Accent Colors */
+  --background-color-accent-default: var(--sgds-accent-bg-default);
+  --background-color-accent-muted: var(--sgds-accent-bg-muted);
+  --background-color-accent-surface-default: var(--sgds-accent-surface-default);
+  --background-color-accent-surface-emphasis: var(--sgds-accent-surface-emphasis);
+  --background-color-accent-surface-muted: var(--sgds-accent-surface-muted);
+  --text-color-accent-default: var(--sgds-accent-color-default);
+  --text-color-accent-emphasis: var(--sgds-accent-color-emphasis);
+  --text-color-accent-fixed-light: var(--sgds-accent-color-fixed-light);
+  --text-color-accent-fixed-dark: var(--sgds-accent-color-fixed-dark);
+  --border-color-accent-default: var(--sgds-accent-border-color-default);
+  --border-color-accent-emphasis: var(--sgds-accent-border-color-emphasis);
+  --border-color-accent-muted: var(--sgds-accent-border-color-muted);
+
+  /* Semantic - Success Colors */
+  --background-color-success-default: var(--sgds-success-bg-default);
+  --background-color-success-muted: var(--sgds-success-bg-muted);
+  --background-color-success-surface-default: var(--sgds-success-surface-default);
+  --background-color-success-surface-emphasis: var(--sgds-success-surface-emphasis);
+  --background-color-success-surface-muted: var(--sgds-success-surface-muted);
+  --text-color-success-default: var(--sgds-success-color-default);
+  --text-color-success-emphasis: var(--sgds-success-color-emphasis);
+  --text-color-success-fixed-light: var(--sgds-success-color-fixed-light);
+  --text-color-success-fixed-dark: var(--sgds-success-color-fixed-dark);
+  --border-color-success-default: var(--sgds-success-border-color-default);
+  --border-color-success-emphasis: var(--sgds-success-border-color-emphasis);
+  --border-color-success-muted: var(--sgds-success-border-color-muted);
+
+  /* Semantic - Danger Colors */
+  --background-color-danger-default: var(--sgds-danger-bg-default);
+  --background-color-danger-muted: var(--sgds-danger-bg-muted);
+  --background-color-danger-surface-default: var(--sgds-danger-surface-default);
+  --background-color-danger-surface-emphasis: var(--sgds-danger-surface-emphasis);
+  --background-color-danger-surface-muted: var(--sgds-danger-surface-muted);
+  --background-color-danger-surface-translucent: var(--sgds-danger-surface-translucent);
+  --text-color-danger-default: var(--sgds-danger-color-default);
+  --text-color-danger-emphasis: var(--sgds-danger-color-emphasis);
+  --text-color-danger-fixed-light: var(--sgds-danger-color-fixed-light);
+  --text-color-danger-fixed-dark: var(--sgds-danger-color-fixed-dark);
+  --border-color-danger-default: var(--sgds-danger-border-color-default);
+  --border-color-danger-emphasis: var(--sgds-danger-border-color-emphasis);
+  --border-color-danger-subtle: var(--sgds-danger-border-color-subtle);
+
+  /* Semantic - Warning Colors */
+  --background-color-warning-default: var(--sgds-warning-bg-default);
+  --background-color-warning-muted: var(--sgds-warning-bg-muted);
+  --background-color-warning-surface-default: var(--sgds-warning-surface-default);
+  --background-color-warning-surface-emphasis: var(--sgds-warning-surface-emphasis);
+  --background-color-warning-surface-muted: var(--sgds-warning-surface-muted);
+  --text-color-warning-default: var(--sgds-warning-color-default);
+  --text-color-warning-emphasis: var(--sgds-warning-color-emphasis);
+  --text-color-warning-fixed-light: var(--sgds-warning-color-fixed-light);
+  --text-color-warning-fixed-dark: var(--sgds-warning-color-fixed-dark);
+  --border-color-warning-default: var(--sgds-warning-border-color-default);
+  --border-color-warning-emphasis: var(--sgds-warning-border-color-emphasis);
+  --border-color-warning-subtle: var(--sgds-warning-border-color-subtle);
+
+  /* Semantic - Purple Colors */
+  --background-color-purple-default: var(--sgds-purple-bg-default);
+  --background-color-purple-muted: var(--sgds-purple-bg-muted);
+  --background-color-purple-surface-default: var(--sgds-purple-surface-default);
+  --background-color-purple-surface-emphasis: var(--sgds-purple-surface-emphasis);
+  --background-color-purple-surface-muted: var(--sgds-purple-surface-muted);
+  --text-color-purple-default: var(--sgds-purple-color-default);
+  --text-color-purple-emphasis: var(--sgds-purple-color-emphasis);
+  --text-color-purple-fixed-light: var(--sgds-purple-color-fixed-light);
+  --text-color-purple-fixed-dark: var(--sgds-purple-color-fixed-dark);
+  --border-color-purple-default: var(--sgds-purple-border-color-default);
+  --border-color-purple-emphasis: var(--sgds-purple-border-color-emphasis);
+  --border-color-purple-muted: var(--sgds-purple-border-color-muted);
+
+  /* Semantic - Cyan Colors */
+  --background-color-cyan-default: var(--sgds-cyan-bg-default);
+  --background-color-cyan-muted: var(--sgds-cyan-bg-muted);
+  --background-color-cyan-surface-default: var(--sgds-cyan-surface-default);
+  --background-color-cyan-surface-emphasis: var(--sgds-cyan-surface-emphasis);
+  --background-color-cyan-surface-muted: var(--sgds-cyan-surface-muted);
+  --text-color-cyan-default: var(--sgds-cyan-color-default);
+  --text-color-cyan-emphasis: var(--sgds-cyan-color-emphasis);
+  --text-color-cyan-fixed-light: var(--sgds-cyan-color-fixed-light);
+  --text-color-cyan-fixed-dark: var(--sgds-cyan-color-fixed-dark);
+  --border-color-cyan-default: var(--sgds-cyan-border-color-default);
+  --border-color-cyan-emphasis: var(--sgds-cyan-border-color-emphasis);
+  --border-color-cyan-muted: var(--sgds-cyan-border-color-muted);
+
+  /* Semantic - Neutral Colors */
+  --background-color-neutral-default: var(--sgds-neutral-bg-default);
+  --background-color-neutral-muted: var(--sgds-neutral-bg-muted);
+  --background-color-neutral-surface-default: var(--sgds-neutral-surface-default);
+  --background-color-neutral-surface-emphasis: var(--sgds-neutral-surface-emphasis);
+  --background-color-neutral-surface-muted: var(--sgds-neutral-surface-muted);
+  --text-color-neutral-default: var(--sgds-neutral-color-default);
+  --text-color-neutral-emphasis: var(--sgds-neutral-color-emphasis);
+  --text-color-neutral-fixed-light: var(--sgds-neutral-color-fixed-light);
+  --text-color-neutral-fixed-dark: var(--sgds-neutral-color-fixed-dark);
+  --border-color-neutral-default: var(--sgds-neutral-border-color-default);
+  --border-color-neutral-emphasis: var(--sgds-neutral-border-color-emphasis);
+  --border-color-neutral-muted: var(--sgds-neutral-border-color-muted);
+
+  /* Typography - Display Colors */
+  --text-color-display-default: var(--sgds-display-color-default);
+  --text-color-display-subtle: var(--sgds-display-color-subtle);
+
+  /* Typography - Heading Colors */
+  --text-color-heading-default: var(--sgds-heading-color-default);
+  --text-color-heading-subtle: var(--sgds-heading-color-subtle);
+
+  /* Typography - Body Colors */
+  --text-color-body-default: var(--sgds-body-color-default);
+  --text-color-body-subtle: var(--sgds-body-color-subtle);
+
+  /* Typography - Label Colors */
+  --text-color-label-default: var(--sgds-label-color-default);
+  --text-color-label-subtle: var(--sgds-label-color-subtle);
+
+  /* Typography - Link Colors */
+  --text-color-link-default: var(--sgds-link-color-default);
+  --text-color-link-emphasis: var(--sgds-link-color-emphasis);
+
+  /* Form - Surface/Background Colors */
+  --background-color-form-surface-default: var(--sgds-form-surface-default);
+  --background-color-form-surface-raised: var(--sgds-form-surface-raised);
+  --background-color-form-surface-emphasis: var(--sgds-form-surface-emphasis);
+  --background-color-form-surface-subtle: var(--sgds-form-surface-subtle);
+  --background-color-form-surface-muted: var(--sgds-form-surface-muted);
+  --background-color-form-surface-inverse: var(--sgds-form-surface-inverse);
+  --background-color-form-surface-fixed-light: var(--sgds-form-surface-fixed-light);
+  --background-color-form-surface-fixed-dark: var(--sgds-form-surface-fixed-dark);
+
+  /* Form - Text Colors */
+  --text-color-form-default: var(--sgds-form-color-default);
+  --text-color-form-subtle: var(--sgds-form-color-subtle);
+  --text-color-form-muted: var(--sgds-form-color-muted);
+  --text-color-form-inverse: var(--sgds-form-color-inverse);
+  --text-color-form-fixed-light: var(--sgds-form-color-fixed-light);
+  --text-color-form-fixed-dark: var(--sgds-form-color-fixed-dark);
+
+  /* Form - Primary Colors */
+  --background-color-form-primary-surface-default: var(--sgds-form-primary-surface-default);
+  --background-color-form-primary-surface-emphasis: var(--sgds-form-primary-surface-emphasis);
+  --text-color-form-primary-default: var(--sgds-form-primary-color-default);
+
+  /* Form - Success Colors */
+  --background-color-form-success-surface-default: var(--sgds-form-success-surface-default);
+  --text-color-form-success-default: var(--sgds-form-success-color-default);
+  --border-color-form-success-default: var(--sgds-form-success-border-color-default);
+
+  /* Form - Danger Colors */
+  --background-color-form-danger-surface-default: var(--sgds-form-danger-surface-default);
+  --text-color-form-danger-default: var(--sgds-form-danger-color-default);
+  --border-color-form-danger-default: var(--sgds-form-danger-border-color-default);
+
+  /* Border Width */
+  --border-width-0: var(--sgds-border-width-0);
+  --border-width-1: var(--sgds-border-width-1);
+  --border-width-2: var(--sgds-border-width-2);
+  --border-width-3: var(--sgds-border-width-3);
+  --border-width-4: var(--sgds-border-width-4);
+
+  /* Form Border Width */
+  --border-width-form-default: var(--sgds-form-border-width-default);
+  --border-width-form-thick: var(--sgds-form-border-width-thick);
+
+  /* Breakpoint */
+  --breakpoint-xs: var(--sgds-breakpoint-xs);
+  --breakpoint-sm: var(--sgds-breakpoint-sm);
+  --breakpoint-md: var(--sgds-breakpoint-md);
+  --breakpoint-lg: var(--sgds-breakpoint-lg);
+  --breakpoint-xl: var(--sgds-breakpoint-xl);
+  --breakpoint-2-xl: var(--sgds-breakpoint-2-xl);
+
+  /* Breakpoint with Sidebar */
+  --breakpoint-sbar-md: var(--sgds-breakpoint-sbar-md);
+  --breakpoint-sbar-lg: var(--sgds-breakpoint-sbar-lg);
+  --breakpoint-sbar-xl: var(--sgds-breakpoint-sbar-xl);
+  --breakpoint-sbar-2-xl: var(--sgds-breakpoint-sbar-2-xl);
+
+  /* Font Family */
+  --font-display: var(--sgds-font-family-brand);
+
+  /* Font Weight */
+  --font-weight-light: var(--sgds-font-weight-light);
+  --font-weight-regular: var(--sgds-font-weight-regular);
+  --font-weight-semibold: var(--sgds-font-weight-semibold);
+  --font-weight-bold: var(--sgds-font-weight-bold);
+
+  /* Font Size */
+  --text-0: var(--sgds-font-size-0);
+  --text-1: var(--sgds-font-size-1);
+  --text-2: var(--sgds-font-size-2);
+  --text-3: var(--sgds-font-size-3);
+  --text-4: var(--sgds-font-size-4);
+  --text-5: var(--sgds-font-size-5);
+  --text-6: var(--sgds-font-size-6);
+  --text-7: var(--sgds-font-size-7);
+  --text-8: var(--sgds-font-size-8);
+  --text-9: var(--sgds-font-size-9);
+
+  /* Letter Spacing */
+  --tracking-tighter: var(--sgds-letter-spacing-tighter);
+  --tracking-tight: var(--sgds-letter-spacing-tight);
+  --tracking-normal: var(--sgds-letter-spacing-normal);
+  --tracking-wide: var(--sgds-letter-spacing-wide);
+  --tracking-wider: var(--sgds-letter-spacing-wider);
+
+  /* Line Height */
+  --leading-16: var(--sgds-line-height-16);
+  --leading-20: var(--sgds-line-height-20);
+  --leading-24: var(--sgds-line-height-24);
+  --leading-32: var(--sgds-line-height-32);
+  --leading-36: var(--sgds-line-height-36);
+  --leading-40: var(--sgds-line-height-40);
+  --leading-48: var(--sgds-line-height-48);
+  --leading-56: var(--sgds-line-height-56);
+  --leading-64: var(--sgds-line-height-64);
+
+  /* Opacity */
+  --opacity-0: var(--sgds-opacity-0);
+  --opacity-3: var(--sgds-opacity-3);
+  --opacity-5: var(--sgds-opacity-5);
+  --opacity-10: var(--sgds-opacity-10);
+  --opacity-20: var(--sgds-opacity-20);
+  --opacity-30: var(--sgds-opacity-30);
+  --opacity-40: var(--sgds-opacity-40);
+  --opacity-50: var(--sgds-opacity-50);
+  --opacity-60: var(--sgds-opacity-60);
+  --opacity-70: var(--sgds-opacity-70);
+  --opacity-80: var(--sgds-opacity-80);
+  --opacity-90: var(--sgds-opacity-90);
+  --opacity-100: var(--sgds-opacity-100);
+
+  /* Gap */
+  --gap-none: var(--sgds-gap-none);
+  --gap-2-xs: var(--sgds-gap-2-xs);
+  --gap-xs: var(--sgds-gap-xs);
+  --gap-sm: var(--sgds-gap-sm);
+  --gap-md: var(--sgds-gap-md);
+  --gap-lg: var(--sgds-gap-lg);
+  --gap-xl: var(--sgds-gap-xl);
+  --gap-2-xl: var(--sgds-gap-2-xl);
+  --gap-3-xl: var(--sgds-gap-3-xl);
+
+  /* Form Gap */
+  --gap-form-sm: var(--sgds-form-gap-sm);
+  --gap-form-md: var(--sgds-form-gap-md);
+  --gap-form-lg: var(--sgds-form-gap-lg);
+  --gap-form-xl: var(--sgds-form-gap-xl);
+  --gap-form-2-xl: var(--sgds-form-gap-2-xl);
+
+  /* Border Radius */
+  --radius-none: var(--sgds-border-radius-none);
+  --radius-xs: var(--sgds-border-radius-xs);
+  --radius-sm: var(--sgds-border-radius-sm);
+  --radius-md: var(--sgds-border-radius-md);
+  --radius-lg: var(--sgds-border-radius-lg);
+  --radius-xl: var(--sgds-border-radius-xl);
+  --radius-2-xl: var(--sgds-border-radius-2-xl);
+  --radius-full: var(--sgds-border-radius-full);
+
+  /* Form Border Radius */
+  --radius-form-none: var(--sgds-form-border-radius-none);
+  --radius-form-xs: var(--sgds-form-border-radius-xs);
+  --radius-form-sm: var(--sgds-form-border-radius-sm);
+  --radius-form-md: var(--sgds-form-border-radius-md);
+  --radius-form-full: var(--sgds-form-border-radius-full);
+
+  /* Paragraph Spacing */
+  --space-paragraph-none: var(--sgds-paragraph-spacing-none);
+  --space-paragraph-sm: var(--sgds-paragraph-spacing-sm);
+  --space-paragraph-md: var(--sgds-paragraph-spacing-md);
+  --space-paragraph-lg: var(--sgds-paragraph-spacing-lg);
+  --space-paragraph-xl: var(--sgds-paragraph-spacing-xl);
+
+}

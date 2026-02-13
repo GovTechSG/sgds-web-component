@@ -9,13 +9,14 @@ logger.warn = (msg, options) => {
   originalWarning(msg, options);
 };
 
+
 export default defineConfig({
   plugins: [
     replace({
       ".css": ".css?inline",
       preventAssignment: true
     }),
-    postcssLit({ include: ["**/*.css", "**/*.css?*"] })
+    postcssLit({ include: ["**/*.css", "**/*.css?*"] }),
   ],
   resolve: {
     alias: [

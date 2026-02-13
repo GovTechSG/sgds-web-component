@@ -1,0 +1,166 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+<style>
+p {
+    margin-bottom: unset;
+    margin-top: unset;
+}
+</style>
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Paragraph Spacing</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+  
+  <section class="sgds:mb-2-xl">
+    <h2>Paragraph Spacing</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Value</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:space-paragraph-none</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-paragraph-spacing-none</code></sgds-table-cell>
+        <sgds-table-cell>0</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:space-y-paragraph-none">
+            <p>First paragraph with no spacing.</p>
+            <p>Second paragraph with no spacing.</p>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:space-paragraph-sm</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-paragraph-spacing-sm</code></sgds-table-cell>
+        <sgds-table-cell>0.5rem (8px)</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:space-y-paragraph-sm">
+            <p>First paragraph with small spacing.</p>
+            <p>Second paragraph with small spacing.</p>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:space-paragraph-md</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-paragraph-spacing-md</code></sgds-table-cell>
+        <sgds-table-cell>1rem (16px)</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:space-y-paragraph-md">
+            <p>First paragraph with medium spacing.</p>
+            <p>Second paragraph with medium spacing.</p>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:space-paragraph-lg</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-paragraph-spacing-lg</code></sgds-table-cell>
+        <sgds-table-cell>1.5rem (24px)</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:space-y-paragraph-lg">
+            <p>First paragraph with large spacing.</p>
+            <p>Second paragraph with large spacing.</p>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:space-paragraph-xl</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-paragraph-spacing-xl</code></sgds-table-cell>
+        <sgds-table-cell>2rem (32px)</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:space-y-paragraph-xl">
+            <p>First paragraph with extra large spacing.</p>
+            <p>Second paragraph with extra large spacing.</p>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section>
+    <h2>Combined Examples</h2>
+    
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Compact Content (sm - 8px)</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <div class="sgds:space-y-paragraph-sm">
+          <p>This layout uses small paragraph spacing, ideal for dense content like terms and conditions, footnotes, or technical specifications where space is limited.</p>
+          <p>The tight spacing helps fit more content in a smaller area while maintaining readability. This is commonly used in legal documents or product specifications.</p>
+          <p>Notice how the paragraphs feel closely connected, creating a sense of cohesion and density that works well for related information.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Standard Content (md - 16px)</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <div class="sgds:space-y-paragraph-md">
+          <p>This layout uses medium paragraph spacing, which is the recommended default for most body content. It provides a good balance between readability and space efficiency.</p>
+          <p>Medium spacing gives readers a clear visual break between paragraphs without creating too much white space. This is perfect for articles, blog posts, and general documentation.</p>
+          <p>The spacing feels natural and comfortable for extended reading sessions, making it ideal for content where comprehension is key.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Comfortable Reading (lg - 24px)</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <div class="sgds:space-y-paragraph-lg">
+          <p>This layout uses large paragraph spacing, creating a more open and breathable reading experience. The generous spacing makes content feel less dense and more approachable.</p>
+          <p>Large spacing works well for marketing content, landing pages, or educational material where you want readers to digest information in distinct chunks.</p>
+          <p>The visual separation helps emphasize each paragraph as its own thought or concept, improving comprehension and retention.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Emphasis Content (xl - 32px)</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <div class="sgds:space-y-paragraph-xl">
+          <p>This layout uses extra large paragraph spacing, creating dramatic separation between sections. Each paragraph becomes a distinct visual element with significant breathing room.</p>
+          <p>Extra large spacing is best reserved for hero sections, key messages, or content where each paragraph needs to stand alone as a significant statement.</p>
+          <p>The generous white space creates a premium, editorial feel that's perfect for high-impact content or storytelling.</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="sgds:mb-sm">Mixed Content Example</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <h4 class="sgds:font-weight-bold sgds:text-lg sgds:mb-md">Understanding Paragraph Spacing</h4>
+        <div class="sgds:space-y-paragraph-md">
+          <p>Paragraph spacing is one of the most important aspects of typography and layout design. It affects readability, user experience, and the overall aesthetic of your content.</p>
+          <p>Different spacing values serve different purposes. Smaller spacing creates density and urgency, while larger spacing creates calm and emphasis.</p>
+        </div>
+        <h5 class="sgds:font-weight-semibold sgds:text-md sgds:mt-lg sgds:mb-sm">Key Considerations</h5>
+        <div class="sgds:space-y-paragraph-sm">
+          <p><strong>Line length:</strong> Longer lines benefit from larger paragraph spacing.</p>
+          <p><strong>Font size:</strong> Larger text needs more paragraph spacing.</p>
+          <p><strong>Content type:</strong> Technical content can be tighter; marketing content should be more open.</p>
+          <p><strong>Screen size:</strong> Mobile devices often need tighter spacing to reduce scrolling.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const nightBtn = document.querySelector("#night-theme");
+    nightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const html = document.querySelector("html");
+      if (html.classList.contains("sgds-night-theme")) {
+        html.classList.remove("sgds-night-theme");
+      } else {
+        html.classList.add("sgds-night-theme");
+      }
+    });
+  </script>
+</body>

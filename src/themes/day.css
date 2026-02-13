@@ -19,6 +19,7 @@
   --sgds-surface-inverse: var(--sgds-gray-900);
   --sgds-surface-fixed-light: var(--sgds-gray-000);
   --sgds-surface-fixed-dark: var(--sgds-gray-900);
+
   --sgds-color-default: var(--sgds-gray-1000);
   --sgds-color-subtle: var(--sgds-gray-700);
   --sgds-color-muted: var(--sgds-gray-300);
@@ -26,6 +27,7 @@
   --sgds-color-fixed-light: var(--sgds-gray-100);
   --sgds-color-fixed-dark: var(--sgds-gray-1000);
   --sgds-color-transparent: transparent;
+  
   --sgds-border-color-default: var(--sgds-gray-500);
   --sgds-border-color-emphasis: var(--sgds-gray-800);
   --sgds-border-color-muted: var(--sgds-gray-200);

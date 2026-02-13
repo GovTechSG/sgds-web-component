@@ -1,0 +1,115 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Line Height</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+  
+  <section class="sgds:mb-2-xl">
+    <h2>Line Height</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:leading-16</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-line-height-16</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:leading-16 sgds:text-sm">Line height 16px</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:leading-20</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-line-height-20</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:leading-20 sgds:text-sm">Line height 20px</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:leading-24</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-line-height-24</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:leading-24">Line height 24px</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:leading-32</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-line-height-32</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:leading-32 sgds:text-lg">Line height 32px</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:leading-36</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-line-height-36</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:leading-36 sgds:text-lg">Line height 36px</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:leading-40</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-line-height-40</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:leading-40 sgds:text-xl">Line height 40px</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:leading-48</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-line-height-48</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:leading-48 sgds:text-2xl">Line height 48px</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:leading-56</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-line-height-56</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:leading-56 sgds:text-3xl">Line height 56px</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:leading-64</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-line-height-64</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:leading-64 sgds:text-4xl">Line height 64px</div></sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section>
+    <h2>Combined Examples</h2>
+    
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Tight Line Height</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <p class="sgds:leading-20 sgds:text-md">
+          This paragraph uses a tight line height (20px). Notice how the lines are closer together, which can be useful for compact layouts or headings. The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.
+        </p>
+      </div>
+    </div>
+
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Comfortable Reading</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <p class="sgds:leading-32 sgds:text-md">
+          This paragraph uses a comfortable line height (32px) ideal for body text. The increased spacing between lines improves readability and reduces eye strain. The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump.
+        </p>
+      </div>
+    </div>
+
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Generous Spacing</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <p class="sgds:leading-48 sgds:text-lg">
+          This paragraph uses generous line height (48px). The extra vertical space creates a more open, airy feel that can work well for large text or emphasis sections. The quick brown fox jumps over the lazy dog.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const nightBtn = document.querySelector("#night-theme");
+    nightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const html = document.querySelector("html");
+      if (html.classList.contains("sgds-night-theme")) {
+        html.classList.remove("sgds-night-theme");
+      } else {
+        html.classList.add("sgds-night-theme");
+      }
+    });
+  </script>
+</body>

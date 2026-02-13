@@ -1,0 +1,59 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Utilities/Introduction" />
+
+# SGDS Utility
+
+SGDS utility provides CSS class utilities powered by Tailwind generator. It offers a convenient way to apply design tokens and styling directly through utility classes in your HTML.
+
+## What is SGDS Utility?
+
+SGDS utility classes are:
+
+- **CSS class utility tokens** powered by the Tailwind CSS generator
+- **Prefixed with `sgds:`** to ensure specificity and prevent CSS naming conflicts
+- **Stripped of Tailwind's default stylings** and fully powered by SGDS CSS variable tokens, ensuring consistent design system adherence
+
+This approach allows you to leverage utility-first CSS with SGDS design tokens while maintaining design consistency across your application.
+
+## Setup Instructions
+
+1. **Install the package:**
+
+   ```bash
+   npm install @govtechsg/sgds-web-component
+   ```
+
+2. **Configure Tailwind CSS:**
+
+   Follow the [Tailwind CSS installation guide](https://tailwindcss.com/docs/installation/framework-guides) for your framework.
+
+3. **Import SGDS CSS files:**
+
+   ```javascript
+   // Import theme files
+   import '@govtechsg/sgds-web-component/themes/day.css';
+   import '@govtechsg/sgds-web-component/themes/night.css';
+   
+   // Import utility styles
+   import '@govtechsg/sgds-web-component/css/utility.css';
+   ```
+
+## Using SGDS Utility Tokens
+
+Once installed and configured, you can start using SGDS utility classes in your application:
+
+```html
+<!-- Example: Using SGDS utility classes -->
+ <div class="sgds:bg-surface-raised sgds:p-lg sgds:mb-md">
+      <h3 class="sgds:text-default sgds:mb-sm">Card with Default Text</h3>
+      <p class="sgds:text-subtle sgds:mb-sm">This is subtle text for secondary information like descriptions or metadata.</p>
+      <p class="sgds:text-muted">This is muted text for tertiary content or less important details.</p>
+    </div>
+```
+
+All utility classes follow the `sgds:` prefix convention and are fully supported by SGDS CSS variables, ensuring a seamless design system experience.
+
+## Other Available Utilities
+
+SGDS supports all standard [Tailwind CSS utilities](https://tailwindcss.com/docs) with the `sgds:` prefix. Examples include: `sgds:flex`, `sgds:justify-center`, `sgds:align-self`,`sgds:cursor-pointer`, and many more. For a complete reference of all available utilities, please refer to the [Tailwind CSS documentation](https://tailwindcss.com/docs).

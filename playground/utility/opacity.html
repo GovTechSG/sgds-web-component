@@ -1,0 +1,144 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Opacity</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+  
+  <section class="sgds:mb-2-xl">
+    <h2>Opacity</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:opacity-0</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-opacity-0</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:opacity-0 sgds:bg-primary sgds:text-primary-default sgds:p-md">Opacity 0 (invisible)</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:opacity-3</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-opacity-3</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:opacity-3 sgds:bg-primary sgds:text-primary-default sgds:p-md">Opacity 0.03</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:opacity-5</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-opacity-5</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:opacity-5 sgds:bg-primary sgds:text-primary-default sgds:p-md">Opacity 0.05</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:opacity-10</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-opacity-10</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:opacity-10 sgds:bg-primary sgds:text-primary-default sgds:p-md">Opacity 0.1</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:opacity-20</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-opacity-20</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:opacity-20 sgds:bg-primary sgds:text-primary-default sgds:p-md">Opacity 0.2</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:opacity-30</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-opacity-30</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:opacity-30 sgds:bg-primary sgds:text-primary-default sgds:p-md">Opacity 0.3</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:opacity-40</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-opacity-40</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:opacity-40 sgds:bg-primary sgds:text-primary-default sgds:p-md">Opacity 0.4</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:opacity-50</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-opacity-50</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:opacity-50 sgds:bg-primary sgds:text-primary-default sgds:p-md">Opacity 0.5</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:opacity-60</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-opacity-60</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:opacity-60 sgds:bg-primary sgds:text-primary-default sgds:p-md">Opacity 0.6</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:opacity-70</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-opacity-70</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:opacity-70 sgds:bg-primary sgds:text-primary-default sgds:p-md">Opacity 0.7</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:opacity-80</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-opacity-80</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:opacity-80 sgds:bg-primary sgds:text-primary-default sgds:p-md">Opacity 0.8</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:opacity-90</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-opacity-90</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:opacity-90 sgds:bg-primary sgds:text-primary-default sgds:p-md">Opacity 0.9</div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:opacity-100</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-opacity-100</code></sgds-table-cell>
+        <sgds-table-cell><div class="sgds:opacity-100 sgds:bg-primary sgds:text-primary-default sgds:p-md">Opacity 1.0 (fully visible)</div></sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section>
+    <h2>Combined Examples</h2>
+    
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Layered Elements</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg sgds:relative" style="height: 300px;">
+        <div class="sgds:absolute sgds:inset-0 sgds:bg-primary sgds:opacity-100 sgds:flex sgds:items-center sgds:justify-center sgds:text-primary-default">Base Layer (100%)</div>
+        <div class="sgds:absolute sgds:inset-0 sgds:bg-accent sgds:opacity-70 sgds:flex sgds:items-center sgds:justify-center sgds:text-accent-default sgds:mt-md sgds:ml-md">Second Layer (70%)</div>
+        <div class="sgds:absolute sgds:inset-0 sgds:bg-success sgds:opacity-40 sgds:flex sgds:items-center sgds:justify-center sgds:text-success-default sgds:mt-lg sgds:ml-lg">Third Layer (40%)</div>
+      </div>
+    </div>
+
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Disabled States</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg sgds:flex sgds:gap-md">
+        <sgds-button class="sgds:opacity-100">Active Button</sgds-button>
+        <sgds-button class="sgds:opacity-50">Disabled Button (50%)</sgds-button>
+        <sgds-button class="sgds:opacity-30">Disabled Button (30%)</sgds-button>
+      </div>
+    </div>
+
+    <div class="sgds:mb-md">
+      <h3 class="sgds:mb-sm">Overlay Examples</h3>
+      <div class="sgds:bg-surface-raised sgds:p-lg">
+        <div class="sgds:relative sgds:mb-md">
+          <img src="https://via.placeholder.com/600x200" alt="placeholder" class="sgds:w-full" />
+          <div class="sgds:absolute sgds:inset-0 sgds:bg-default sgds:opacity-80 sgds:flex sgds:items-center sgds:justify-center">
+            <span class="sgds:text-2xl sgds:font-weight-bold">80% Overlay</span>
+          </div>
+        </div>
+        <div class="sgds:relative">
+          <img src="https://via.placeholder.com/600x200" alt="placeholder" class="sgds:w-full" />
+          <div class="sgds:absolute sgds:inset-0 sgds:bg-default sgds:opacity-50 sgds:flex sgds:items-center sgds:justify-center">
+            <span class="sgds:text-2xl sgds:font-weight-bold">50% Overlay</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const nightBtn = document.querySelector("#night-theme");
+    nightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const html = document.querySelector("html");
+      if (html.classList.contains("sgds-night-theme")) {
+        html.classList.remove("sgds-night-theme");
+      } else {
+        html.classList.add("sgds-night-theme");
+      }
+    });
+  </script>
+</body>

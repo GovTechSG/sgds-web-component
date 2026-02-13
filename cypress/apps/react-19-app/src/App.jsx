@@ -34,12 +34,14 @@ import { Textarea } from "./components/Textarea";
 import { Toast } from "./components/Toast";
 import { Tooltip } from "./components/Tooltip";
 import { IconButton } from "./components/IconButton";
+import { SgdsTokensShowcase } from "./components/SgdsTokensShowcase";
 
 
 function App() {
 
   return (
     <>
+    <SgdsTokensShowcase />
     <Select />
     <Masthead />
       <Mainnav />
