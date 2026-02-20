@@ -11,8 +11,8 @@ import tabGroupStyle from "./tab-group.css";
  * @slot default - The slot for `sgds-tab-panel`
  * @slot nav - The slot for `sgds-tab`
  *
- * @event sgds-tab-show  Emitted when a tab and its panels are shown
- * @event sgds-tab-hide  Emitted when a tab and its panels are hidden.
+ * @event sgds-tab-show - Emitted when a tab and its panels are shown. `event.detail.name` contains the active tab's panel name.
+ * @event sgds-tab-hide - Emitted when a tab and its panels are hidden. `event.detail.name` contains the hidden tab's panel name.
  *
  */
 export class SgdsTabGroup extends SgdsElement {
