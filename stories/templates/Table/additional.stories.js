@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 const StructuredElementsTemplate = () => html`
-  <sgds-table>
+  <sgds-table ?headerbackground=${true} ?tableBorder=${true}>
     <sgds-table-row>
       <sgds-table-head>#</sgds-table-head>
       <sgds-table-head>First name</sgds-table-head>
@@ -51,7 +51,7 @@ const StructuredElementsTemplate = () => html`
 `;
 
 const StructuredElementsTemplateVertical = () => html`
-  <sgds-table>
+  <sgds-table ?headerbackground=${true} ?tableBorder=${true}>
     <sgds-table-row>
       <sgds-table-head>1</sgds-table-head>
       <sgds-table-cell>John</sgds-table-cell>
@@ -92,7 +92,7 @@ const StructuredElementsTemplateVertical = () => html`
   </sgds-table>
 `;
 
-const StructuredElementsTemplateBoth = () => html`<sgds-table>
+const StructuredElementsTemplateBoth = () => html` <sgds-table ?headerbackground=${true} ?tableBorder=${true}>
   <sgds-table-row>
     <sgds-table-head>#</sgds-table-head>
     <sgds-table-head>First name</sgds-table-head>

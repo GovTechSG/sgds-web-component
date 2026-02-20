@@ -32,6 +32,7 @@ import Building from "./icons/building";
 import Bus from "./icons/bus";
 import Calculator from "./icons/calculator";
 import CalendarCheck from "./icons/calendar-check";
+import CalendarHeart from "./icons/calendar-heart";
 import CalendarX from "./icons/calendar-x";
 import Calendar from "./icons/calendar";
 import Camera from "./icons/camera";
@@ -52,14 +53,19 @@ import CloudCheck from "./icons/cloud-check";
 import CloudDownload from "./icons/cloud-download";
 import CloudUpload from "./icons/cloud-upload";
 import Cloud from "./icons/cloud";
+import CodeSquare from "./icons/code-square";
+import CoinsHand from "./icons/coins-hand";
 import Compass from "./icons/compass";
 import Copy from "./icons/copy";
+import CpuChipAi from "./icons/cpu-chip-ai";
 import Cross from "./icons/cross";
 import CursorFill from "./icons/cursor-fill";
 import Cursor from "./icons/cursor";
 import DashCircle from "./icons/dash-circle";
 import DashSquare from "./icons/dash-square";
 import Dash from "./icons/dash";
+import Database from "./icons/database";
+import Dataflow from "./icons/dataflow";
 import Download from "./icons/download";
 import Edit from "./icons/edit";
 import ExclamationCircleFill from "./icons/exclamation-circle-fill";
@@ -78,6 +84,7 @@ import FilePlus from "./icons/file-plus";
 import FileText from "./icons/file-text";
 import File from "./icons/file";
 import Files from "./icons/files";
+import Fingerprint from "./icons/fingerprint";
 import Flash from "./icons/flash";
 import FolderCheck from "./icons/folder-check";
 import FolderMinus from "./icons/folder-minus";
@@ -102,11 +109,14 @@ import InBox from "./icons/in-box";
 import InfoCircleFill from "./icons/info-circle-fill";
 import InfoCircle from "./icons/info-circle";
 import Instagram from "./icons/instagram";
+import Key from "./icons/key";
+import LaptopGear from "./icons/laptop-gear";
 import Laptop from "./icons/laptop";
 import Layers from "./icons/layers";
 import LayoutTextWindowReverse from "./icons/layout-text-window-reverse";
 import LayoutTextWindow from "./icons/layout-text-window";
 import Layout from "./icons/layout";
+import LifeBuoy from "./icons/life-buoy";
 import Lightbulb from "./icons/lightbulb";
 import Link from "./icons/link";
 import Linkedin from "./icons/linkedin";
@@ -116,6 +126,7 @@ import Lock from "./icons/lock";
 import Login from "./icons/login";
 import Logout from "./icons/logout";
 import Luggage from "./icons/luggage";
+import MailOpen from "./icons/mail-open";
 import Mail from "./icons/mail";
 import Map from "./icons/map";
 import Meetup from "./icons/meetup";
@@ -125,6 +136,7 @@ import Monitor from "./icons/monitor";
 import Moon from "./icons/moon";
 import Move from "./icons/move";
 import Paperclip from "./icons/paperclip";
+import Passcode from "./icons/passcode";
 import Passport from "./icons/passport";
 import Pause from "./icons/pause";
 import Pencil from "./icons/pencil";
@@ -150,6 +162,7 @@ import Search from "./icons/search";
 import Send from "./icons/send";
 import SgCrest from "./icons/sg-crest";
 import Share from "./icons/share";
+import ShieldTick from "./icons/shield-tick";
 import SidebarCollapse from "./icons/sidebar-collapse";
 import SidebarExpand from "./icons/sidebar-expand";
 import SlashCircle from "./icons/slash-circle";
@@ -179,7 +192,9 @@ import Truck from "./icons/truck";
 import TwitterX from "./icons/twitter-x";
 import Unlock from "./icons/unlock";
 import Upload from "./icons/upload";
+import UserCheck from "./icons/user-check";
 import UserCircle from "./icons/user-circle";
+import UserPause from "./icons/user-pause";
 import UserSquare from "./icons/user-square";
 import Users from "./icons/users";
 import VideoRecorder from "./icons/video-recorder";
@@ -234,6 +249,7 @@ export const iconRegistry = {
   bus: Bus,
   calculator: Calculator,
   "calendar-check": CalendarCheck,
+  "calendar-heart": CalendarHeart,
   "calendar-x": CalendarX,
   calendar: Calendar,
   camera: Camera,
@@ -254,14 +270,19 @@ export const iconRegistry = {
   "cloud-download": CloudDownload,
   "cloud-upload": CloudUpload,
   cloud: Cloud,
+  "code-square": CodeSquare,
+  "coins-hand": CoinsHand,
   compass: Compass,
   copy: Copy,
+  "cpu-chip-ai": CpuChipAi,
   cross: Cross,
   "cursor-fill": CursorFill,
   cursor: Cursor,
   "dash-circle": DashCircle,
   "dash-square": DashSquare,
   dash: Dash,
+  database: Database,
+  dataflow: Dataflow,
   download: Download,
   edit: Edit,
   "exclamation-circle-fill": ExclamationCircleFill,
@@ -280,6 +301,7 @@ export const iconRegistry = {
   "file-text": FileText,
   file: File,
   files: Files,
+  fingerprint: Fingerprint,
   flash: Flash,
   "folder-check": FolderCheck,
   "folder-minus": FolderMinus,
@@ -304,11 +326,14 @@ export const iconRegistry = {
   "info-circle-fill": InfoCircleFill,
   "info-circle": InfoCircle,
   instagram: Instagram,
+  key: Key,
+  "laptop-gear": LaptopGear,
   laptop: Laptop,
   layers: Layers,
   "layout-text-window-reverse": LayoutTextWindowReverse,
   "layout-text-window": LayoutTextWindow,
   layout: Layout,
+  "life-buoy": LifeBuoy,
   lightbulb: Lightbulb,
   link: Link,
   linkedin: Linkedin,
@@ -318,6 +343,7 @@ export const iconRegistry = {
   login: Login,
   logout: Logout,
   luggage: Luggage,
+  "mail-open": MailOpen,
   mail: Mail,
   map: Map,
   meetup: Meetup,
@@ -327,6 +353,7 @@ export const iconRegistry = {
   moon: Moon,
   move: Move,
   paperclip: Paperclip,
+  passcode: Passcode,
   passport: Passport,
   pause: Pause,
   pencil: Pencil,
@@ -352,6 +379,7 @@ export const iconRegistry = {
   send: Send,
   "sg-crest": SgCrest,
   share: Share,
+  "shield-tick": ShieldTick,
   "sidebar-collapse": SidebarCollapse,
   "sidebar-expand": SidebarExpand,
   "slash-circle": SlashCircle,
@@ -381,7 +409,9 @@ export const iconRegistry = {
   "twitter-x": TwitterX,
   unlock: Unlock,
   upload: Upload,
+  "user-check": UserCheck,
   "user-circle": UserCircle,
+  "user-pause": UserPause,
   "user-square": UserSquare,
   users: Users,
   "video-recorder": VideoRecorder,

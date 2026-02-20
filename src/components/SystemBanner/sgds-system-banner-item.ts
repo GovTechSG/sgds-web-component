@@ -4,7 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import alertBannerItemStyles from "./system-banner-item.css";
 import { HasSlotController } from "../../utils/slot";
-import { SystemBannerChildCountContext } from "./system-banner-context";
+import { SystemBannerChildCountContext, NoClampActionContext } from "./system-banner-context";
 import { consume } from "@lit/context";
 
 /**
@@ -18,6 +18,13 @@ export class SgdsSystemBannerItem extends SgdsElement {
   static styles = [...SgdsElement.styles, alertBannerItemStyles];
   /** Used only for SSR to indicate the presence of the `action` slot. */
   @property({ type: Boolean }) hasActionSlot = false;
+
+  /** Disables the action link that appears when text content is clamped */
+  @consume({ context: NoClampActionContext, subscribe: true })
+
+  /** When true, message text will be truncated with ellipsis only */
+  @property({ type: Boolean })
+  noClampAction = false;
 
   @state() private clamped = false;
 
@@ -61,10 +68,10 @@ export class SgdsSystemBannerItem extends SgdsElement {
         <slot name="icon"></slot>
         <div class="banner-item__message_and__action">
           <div class="clamped-container">
-            <div class=${classMap({ message: true, truncated: this.clamped })}>
+            <div class=${classMap({ message: true, truncated: this.clamped && !this.noClampAction })}>
               <slot></slot>
             </div>
-            ${this.clamped
+            ${this.clamped && !this.noClampAction
               ? html`<span class="show-more"
                   >...<a class="show-more__link" @click="${this._handleShowMoreClick}">show more</a></span
                 >`
