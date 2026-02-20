@@ -3,7 +3,8 @@ import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import sidebarSectionStyle from "./sidebar-section.css";
-import SgdsSidebar from "./sgds-sidebar";
+
+import { SidebarElement } from "../../base/sidebar-element";
 
 /**
  * @summary Sidebar section is a container component that groups related sidebar options into organized sections.
@@ -12,7 +13,7 @@ import SgdsSidebar from "./sgds-sidebar";
  *
  * @slot - Insert sgds-sidebar-item elements to be grouped within this section.
  */
-export class SgdsSidebarSection extends SgdsElement {
+export class SgdsSidebarSection extends SidebarElement {
   static styles = [...SgdsElement.styles, sidebarSectionStyle];
 
   /**
@@ -37,105 +38,12 @@ export class SgdsSidebarSection extends SgdsElement {
    * @type {boolean}
    * @internal
    */
-  @state() private isLastChild = false;
-
-  /**
-   * Tracks whether the parent sidebar is in a collapsed state.
-   * Used to hide section title when sidebar is collapsed.
-   * @type {boolean}
-   * @internal
-   */
-  @state() private sidebarCollapsed = false;
-
-  /**
-   * Stores the MutationObserver instance for tracking parent sidebar state changes.
-   * Used to observe the parent sidebar's collapsed attribute.
-   * @type {MutationObserver | null}
-   * @internal
-   */
-  private sidebarObserver: MutationObserver | null = null;
+  @state() private _isLastChild = false;
 
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute("role", "region");
-    this.setAttribute("aria-label", this.title || "Sidebar section");
-    this.checkIfLastChild();
-    this.detectParentSidebar();
-    this.observeSidebarChanges();
-    this.addEventListener("keydown", this._handleKeyPress);
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    if (this.sidebarObserver) {
-      this.sidebarObserver.disconnect();
-    }
-  }
-
-  /**
-   * Handles keyboard events on the sidebar option.
-   * Activates the option when Enter key is pressed.
-   * @private
-   * @param {KeyboardEvent} event - The keyboard event object
-   */
-  private _handleKeyPress(event: KeyboardEvent) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      const ele = event.target as HTMLElement;
-      if (ele.tagName.toLowerCase() === "sgds-sidebar-section") {
-        this._handleClick();
-      }
-
-      return;
-    }
-  }
-
-  /**
-   * Checks if this section is the last child sibling in its parent.
-   * Used to remove bottom border styling from the final section for visual polish.
-   * @private
-   * @returns {void} Updates isLastChild state property
-   */
-  private checkIfLastChild() {
-    const parent = this.parentElement;
-    if (parent) {
-      const siblings = Array.from(parent.children);
-      this.isLastChild = siblings[siblings.length - 1] === this;
-    }
-  }
-
-  /**
-   * Traverses the DOM to find the nearest parent sgds-sidebar component.
-   * Checks the parent sidebar's expanded state and updates sidebarCollapsed flag accordingly.
-   * Used to hide section titles when parent sidebar is in collapsed state.
-   * @private
-   */
-  private detectParentSidebar() {
-    const sidebar = this.closest("sgds-sidebar");
-    if (sidebar) {
-      this.sidebarCollapsed = (sidebar as SgdsSidebar).collapsed;
-    }
-  }
-
-  /**
-   * Sets up a MutationObserver to track the parent sidebar's collapsed attribute.
-   * Automatically updates sidebarCollapsed state when sidebar expand/collapse state changes.
-   * Observer is stored for cleanup in disconnectedCallback to prevent memory leaks.
-   * @private
-   */
-  private observeSidebarChanges() {
-    const sidebar = this.closest("sgds-sidebar");
-    if (sidebar) {
-      this.sidebarObserver = new MutationObserver(() => {
-        const isCollapsed = (sidebar as SgdsSidebar).collapsed;
-        this.sidebarCollapsed = isCollapsed;
-      });
-
-      this.sidebarObserver.observe(sidebar, {
-        attributes: true,
-        attributeFilter: ["collapsed"]
-      });
-    }
+    this._isLastChild = this.parentElement.lastElementChild === this;
   }
 
   /**
@@ -145,7 +53,7 @@ export class SgdsSidebarSection extends SgdsElement {
    * @private
    * @returns {void}
    */
-  private _handleClick() {
+  override _handleClick() {
     if (this.collapsible) this.collapsed = !this.collapsed;
   }
 
@@ -154,14 +62,14 @@ export class SgdsSidebarSection extends SgdsElement {
       <div
         class=${classMap({
           "sidebar-section": true,
-          "no-border": this.isLastChild,
-          "sidebar-section--collapsed": this.sidebarCollapsed
+          "no-border": this._isLastChild,
+          "sidebar-section--collapsed": this._sidebarCollapsed
         })}
       >
         <div
           class="sidebar-section-label"
           @click=${this._handleClick}
-          tabindex=${this.collapsible ? 0 : -1}
+          tabindex="0"
           aria-expanded=${!this.collapsed}
           aria-disabled=${!this.collapsible}
         >
@@ -178,7 +86,7 @@ export class SgdsSidebarSection extends SgdsElement {
           })}
         >
           <div>
-            <slot></slot>
+            <slot @slotchange=${this._handleSlotChange}></slot>
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@
 
       .container {
         display: flex;
-        height: 100vh;
+        height: calc(100vh - 28px);
       }
 
       .sidebar-wrapper {
@@ -59,48 +59,55 @@
 
     <div class="container">
       <div class="sidebar-wrapper">
-        <sgds-sidebar>
+        <sgds-sidebar active="team-management">
           <div slot="brand-name">brand-name</div>
           <!-- Main Navigation Section -->
 
-          <sgds-sidebar-section title="Main" collapsible>
-            <sgds-sidebar-group title="Dashboard" icon="house">
-              <sgds-sidebar-group title="Summary" icon="building">
-                <sgds-sidebar-item title="Latest Sales">
+          <sgds-sidebar-section title="Main" name="main" collapsible>
+            <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
+              <sgds-sidebar-group title="Summary" name="summary" icon="building">
+                <sgds-sidebar-item title="Latest Sales" name="latest-sales">
                   <a href="http://localhost:5173/playground/badge.html"></a>
                 </sgds-sidebar-item>
-                <sgds-sidebar-item title="Refunds"> </sgds-sidebar-item>
+                <sgds-sidebar-item title="Refunds" name="refunds"> </sgds-sidebar-item>
               </sgds-sidebar-group>
 
-              <sgds-sidebar-item title="Meetings" icon="calendar">
+              <sgds-sidebar-item title="Meetings" name="meetings" icon="calendar">
                 <a href="http://localhost:5173/playground/select.html"></a>
               </sgds-sidebar-item>
-              <sgds-sidebar-item title="Gallery" icon="camera">
+              <sgds-sidebar-item title="Gallery" name="gallery" icon="camera">
                 <a href="http://localhost:5173/playground/combobox.html"></a>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
 
-            <sgds-sidebar-item title="Reports" icon="file-text">
-              <sgds-sidebar-item title="Yearly" icon="house"></sgds-sidebar-item>
-              <sgds-sidebar-item title="Monthly" icon="house"></sgds-sidebar-item>
-            </sgds-sidebar-item>
+            <sgds-sidebar-group title="Reports" name="reports" icon="file-text">
+              <sgds-sidebar-item title="Yearly" name="yearly" icon="house"></sgds-sidebar-item>
+              <sgds-sidebar-item title="Monthly" name="monthly" icon="house"></sgds-sidebar-item>
+            </sgds-sidebar-group>
+
+            <sgds-sidebar-item title="Team Management" name="team-management-2" icon="users"> </sgds-sidebar-item>
+
+            <sgds-sidebar-group title="Reports" name="reports-1" icon="file-text">
+              <sgds-sidebar-item title="Yearly" name="yearly-1" icon="house"></sgds-sidebar-item>
+              <sgds-sidebar-item title="Monthly" name="monthly-1" icon="house"></sgds-sidebar-item>
+            </sgds-sidebar-group>
           </sgds-sidebar-section>
 
           <!-- Organization Section (Collapsible) -->
-          <sgds-sidebar-section title="Organization">
-            <sgds-sidebar-item title="Team Management" icon="users"> </sgds-sidebar-item>
+          <sgds-sidebar-section title="Organization" name="organization">
+            <sgds-sidebar-item title="Team Management" name="team-management" icon="users"> </sgds-sidebar-item>
 
-            <sgds-sidebar-item title="Projects" icon="layers"> </sgds-sidebar-item>
+            <sgds-sidebar-item title="Projects" name="projects" icon="layers"> </sgds-sidebar-item>
           </sgds-sidebar-section>
 
           <!-- Configuration Section (Collapsible) -->
-          <sgds-sidebar-section title="Configuration" collapsible>
-            <sgds-sidebar-item title="Settings" icon="gear"> </sgds-sidebar-item>
+          <sgds-sidebar-section title="Configuration" name="configuration" collapsible>
+            <sgds-sidebar-item title="Settings" name="settings" icon="gear"> </sgds-sidebar-item>
           </sgds-sidebar-section>
 
           <!-- Support Section -->
-          <sgds-sidebar-section title="Support">
-            <sgds-sidebar-item title="Help & Support" icon="question-circle">
+          <sgds-sidebar-section title="Support" name="support">
+            <sgds-sidebar-item title="Help & Support" name="help-support" icon="question-circle">
               <span
                 slot="trailingIcon"
                 style="
@@ -119,7 +126,8 @@
               >
             </sgds-sidebar-item>
 
-            <sgds-sidebar-item title="Premium Features" icon="star" disabled> </sgds-sidebar-item>
+            <sgds-sidebar-item title="Premium Features" name="premium-features" icon="star" disabled>
+            </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
       </div>

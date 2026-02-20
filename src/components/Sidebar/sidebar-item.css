@@ -2,7 +2,17 @@
   padding: var(--sgds-padding-xs);
   cursor: pointer;
   border-radius: var(--sgds-border-radius-md);
-  outline-offset: -1px;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+.sidebar-item:hover:not(.active) {
+  background-color: var(--sgds-surface-translucent-subtle);
+}
+
+.sidebar-item:focus,
+.sidebar-item:focus-visible {
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .sidebar-item.active {
@@ -49,10 +59,12 @@
   padding: var(--sgds-padding-xs);
   pointer-events: none;
   margin-top: -100%;
+  opacity: 0;
   transition: all var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
 }
 
 .sidebar-submenu.show > div {
   pointer-events: auto;
   margin-top: 0;
+  opacity: 1;
 }
