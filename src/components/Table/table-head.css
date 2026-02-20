@@ -1,7 +1,11 @@
 :host {
   vertical-align: middle;
-  display: table-cell;  
+  display: table-cell;
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+}
+
+:host([headerBackground]) {
+  background-color: var(--sgds-surface-raised);
 }
 
 .table-head {
@@ -10,8 +14,4 @@
   align-items: center;
   padding: var(--sgds-padding-sm) var(--sgds-padding-md);
   min-height: var(--sgds-dimension-56);
-}
-
-:host([background])  {
-  background-color: var(--sgds-surface-raised);
 }

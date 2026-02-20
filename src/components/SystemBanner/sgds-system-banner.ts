@@ -37,14 +37,14 @@ export class SgdsSystemBanner extends SgdsElement {
   /** Enables a close button that allows the user to dismiss the alert. */
   @property({ type: Boolean, reflect: true }) dismissible = false;
 
-  /** When true, removes max-width constraint to allow content to stretch full screen width */
-  @property({ type: Boolean, reflect: true }) fluid = false;
   /** Disables the action link that appears when text content is clamped */
   @provide({ context: NoClampActionContext })
-
   /** When true, all its children SgdsSystemBannerItem's message will be truncated with ellipsis only */
   @property({ type: Boolean })
   noClampAction = false;
+
+  /** When true, removes max-width constraint to allow content to stretch full screen width */
+  @property({ type: Boolean, reflect: true }) fluid = false;
 
   /** Closes the alert  */
   public close() {

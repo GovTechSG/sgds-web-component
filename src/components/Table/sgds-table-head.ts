@@ -2,7 +2,11 @@ import { html } from "lit";
 
 import SgdsElement from "../../base/sgds-element";
 import tableHeadStyle from "./table-head.css";
-import { state } from "lit/decorators";
+
+import { consume } from "@lit/context";
+import { TableHeaderBackgroundContext } from "./table-context";
+import { state } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import { watch } from "../../utils/watch";
 
 /**
@@ -10,16 +14,34 @@ import { watch } from "../../utils/watch";
  *
  * @slot - Place any elements inside to display as the header content.
  */
+
 export class SgdsTableHead extends SgdsElement {
   static styles = [...SgdsElement.styles, tableHeadStyle];
+
+  @consume({ context: TableHeaderBackgroundContext, subscribe: true })
+  @state()
+  private _headerBackground = false;
 
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute("role", "columnheader");
   }
 
+  @watch("_headerBackground")
+  _handleHeaderBackground() {
+    if (this._headerBackground) this.setAttribute("headerBackground", "true");
+    else this.removeAttribute("headerBackground");
+  }
+
   render() {
-    return html`<div class="table-head"><slot></slot></div>`;
+    return html`<div
+      class=${classMap({
+        "table-head": true,
+        "header-background": this._headerBackground
+      })}
+    >
+      <slot></slot>
+    </div>`;
   }
 }
 

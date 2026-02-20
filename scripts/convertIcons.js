@@ -40,7 +40,7 @@ const svgFiles = fs.readdirSync(svgDir).filter(file => path.extname(file) === ".
 svgFiles.forEach(file => {
   const nameWithoutExt = path.basename(file, ".svg");
   const svgContent = fs.readFileSync(path.join(svgDir, file), "utf8");
-  const tsContent = svgToLitTemplate(svgContent);
+  const tsContent = svgToLitTemplate(svgContent, nameWithoutExt);
 
   const tsFilePath = path.join(iconsDir, `${nameWithoutExt}.ts`);
 

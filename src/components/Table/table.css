@@ -61,6 +61,10 @@ table {
   border-bottom: 0;
 }
 
+:host([tableBorder]) .table.no-border {
+  border: 0;
+}
+
 :host([headerBackground]) th {
   background-color: var(--sgds-surface-raised);
 }

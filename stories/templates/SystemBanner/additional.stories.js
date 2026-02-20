@@ -49,6 +49,16 @@ export const ShowMore = {
   tags: ["!dev"]
 };
 
+export const NoClampAction = {
+  render: Template.bind({}),
+  name: "No Clamp Action",
+  args: {
+    show: true,
+    noClampAction: true
+  },
+  parameters: {},
+  tags: ["!dev"]
+};
 export const Fluid = {
   render: Template.bind({}),
   name: "Fluid",

@@ -4,6 +4,7 @@ import { allModes } from "../../../.storybook/modes";
 export const Template = args => html`<sgds-system-banner
   ?dismissible=${args.dismissible}
   ?show=${args.show}
+  ?noClampAction=${args.noClampAction}
   ?fluid=${args.fluid}
 >
   <sgds-system-banner-item>

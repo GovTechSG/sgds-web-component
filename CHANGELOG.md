@@ -1,3 +1,17 @@
+## v3.10.0 (2026-02-16)
+
+### Feat
+
+- **utility**: new utility API (#541)
+- **utility**: border-rad, border-width, fonts, gap etc
+- **utility**: complete conversion of semantic day night css to tailwind v4
+- **utility**: border color, text color and background color
+- **Layouts**: templates for sidebar layout
+- **utility**: basic utility setup:
+- **Table**: static table styles [run-chromatic]  (#537)
+- **SystemBanner**: noClampAction prop to make show more clamped action optional (#539)
+- **SystemBanner**: noClampAction prop to make show more action optional
+
 ## v3.9.0 (2026-02-03)
 
 ### Feat

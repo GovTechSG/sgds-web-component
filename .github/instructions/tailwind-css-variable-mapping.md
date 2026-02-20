@@ -243,3 +243,9 @@ Each documentation section should include:
 ## Summary
 
 The key principle is systematic transformation of SGDS semantic variables into Tailwind v4 custom properties that generate utility classes with the `sgds:` prefix. The naming structure preserves semantic meaning while following Tailwind conventions for property-based utilities (bg-, text-, border-).
+
+---
+
+## See Also
+
+- **[token-mapping-and-documentation-workflow.md](token-mapping-and-documentation-workflow.md)** - High-level token architecture, layer definitions, and documentation patterns for Storybook. Use this for understanding the complete flow from primitive tokens through semantic mappings to Tailwind utility generation, as well as guidelines for adding new utilities and updating documentation.
