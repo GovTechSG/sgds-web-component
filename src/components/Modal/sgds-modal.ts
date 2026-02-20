@@ -23,7 +23,7 @@ import svgStyles from "../../styles/svg.css";
  * @slot description - The description of the Modal.
  * @slot footer - The content of the Modal's footer, typically used to pass in buttons for call to action.
  *
- * @event sgds-close - Emitted when the modal is called to close via mouseclick of close button, overlay or via keyboard esc key
+ * @event sgds-close - Emitted when the modal is called to close via mouseclick of close button, overlay or via keyboard esc key. This event is cancelable; use `event.preventDefault()` to prevent the modal from closing. `event.detail.source` indicates the trigger source: 'close-button', 'overlay', or 'keyboard'.
  * @event sgds-show - Emitted when the modal opens
  * @event sgds-hide - Emitted when the modal closes
  * @event sgds-after-show - Emitted after modal opens and the animations has completed
