@@ -43,7 +43,7 @@ export class SgdsSidebarSection extends SidebarElement {
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute("role", "region");
-    this._isLastChild = this.parentElement.lastElementChild === this;
+    this._isLastChild = this.parentElement?.lastElementChild === this;
   }
 
   /**

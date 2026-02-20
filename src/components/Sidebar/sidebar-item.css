@@ -56,7 +56,6 @@
 }
 
 .sidebar-submenu > div {
-  padding: var(--sgds-padding-xs);
   pointer-events: none;
   margin-top: -100%;
   opacity: 0;
@@ -64,6 +63,7 @@
 }
 
 .sidebar-submenu.show > div {
+  padding: var(--sgds-padding-xs);
   pointer-events: auto;
   margin-top: 0;
   opacity: 1;

@@ -43,11 +43,11 @@ describe("sgds-sidebar", () => {
   it("accepts slot content with sidebar options", async () => {
     const el = await fixture<SgdsSidebar>(html`
       <sgds-sidebar>
-        <sgds-sidebar-option title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-option>
-        <sgds-sidebar-option title="Settings" name="settings" icon="gear"></sgds-sidebar-option>
+        <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+        <sgds-sidebar-item title="Settings" name="settings" icon="gear"></sgds-sidebar-item>
       </sgds-sidebar>
     `);
-    expect(el.querySelectorAll("sgds-sidebar-option").length).to.equal(2);
+    expect(el.querySelectorAll("sgds-sidebar-item").length).to.equal(2);
   });
 
   describe("State and Toggle", () => {
@@ -94,11 +94,11 @@ describe("sgds-sidebar", () => {
     it("renders level 0 options with aria-level=1", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-option>
-          <sgds-sidebar-option title="Reports" name="reports" icon="file-text"></sgds-sidebar-option>
+          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+          <sgds-sidebar-item title="Reports" name="reports" icon="file-text"></sgds-sidebar-item>
         </sgds-sidebar>
       `);
-      const options = el.querySelectorAll("sgds-sidebar-option");
+      const options = el.querySelectorAll("sgds-sidebar-item");
       for (const option of options) {
         expect(option).to.have.attribute("aria-level", "1");
       }
@@ -106,16 +106,16 @@ describe("sgds-sidebar", () => {
 
     it("has role option for level 0 items", async () => {
       const el = await fixture<SgdsSidebar>(
-        html`<sgds-sidebar><sgds-sidebar-option title="Dashboard" icon="house"></sgds-sidebar-option></sgds-sidebar>`
+        html`<sgds-sidebar><sgds-sidebar-item title="Dashboard" icon="house"></sgds-sidebar-item></sgds-sidebar>`
       );
-      expect(el.querySelector("sgds-sidebar-option")).to.have.attribute("role", "option");
+      expect(el.querySelector("sgds-sidebar-item")).to.have.attribute("role", "option");
     });
 
     it("does not show submenu for level 0 without nested options", async () => {
       const el = await fixture<SgdsSidebar>(
-        html`<sgds-sidebar><sgds-sidebar-option title="Dashboard" icon="house"></sgds-sidebar-option></sgds-sidebar>`
+        html`<sgds-sidebar><sgds-sidebar-item title="Dashboard" icon="house"></sgds-sidebar-item></sgds-sidebar>`
       );
-      const option = el.querySelector("sgds-sidebar-option") as any;
+      const option = el.querySelector("sgds-sidebar-item") as any;
       await elementUpdated(option);
       expect(option.shadowRoot?.querySelector(".sidebar-submenu")).to.not.exist;
     });
@@ -123,14 +123,14 @@ describe("sgds-sidebar", () => {
     it("emits sgds-select event when level 0 option is clicked", async () => {
       const el = await fixture<SgdsSidebar>(
         html`<sgds-sidebar
-          ><sgds-sidebar-option title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-option
+          ><sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item
         ></sgds-sidebar>`
       );
       const selectHandler = sinon.spy();
       el.addEventListener("sgds-select", selectHandler);
-      const option = el.querySelector("sgds-sidebar-option") as any;
+      const option = el.querySelector("sgds-sidebar-item") as any;
       await elementUpdated(option);
-      const optionDiv = option.shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
+      const optionDiv = option.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
       optionDiv.click();
       expect(selectHandler).to.have.been.calledOnce;
     });
@@ -138,12 +138,12 @@ describe("sgds-sidebar", () => {
     it("updates active property when option is clicked", async () => {
       const el = await fixture<SgdsSidebar>(
         html`<sgds-sidebar
-          ><sgds-sidebar-option title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-option
+          ><sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item
         ></sgds-sidebar>`
       );
-      const option = el.querySelector("sgds-sidebar-option") as any;
+      const option = el.querySelector("sgds-sidebar-item") as any;
       await elementUpdated(option);
-      const optionDiv = option.shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
+      const optionDiv = option.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
       optionDiv.click();
       await elementUpdated(el);
       expect(el.active).to.equal("dashboard");
@@ -154,25 +154,25 @@ describe("sgds-sidebar", () => {
     it("detects level 1 nesting correctly", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard" name="dashboard" icon="house">
-            <sgds-sidebar-option title="Sales" name="sales" icon="chart"></sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
+            <sgds-sidebar-item title="Sales" name="sales" icon="chart"></sgds-sidebar-item>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
-      const parentOption = el.querySelector("sgds-sidebar-option") as HTMLElement;
-      const childOption = parentOption.querySelector("sgds-sidebar-option") as HTMLElement;
+      const parentOption = el.querySelector("sgds-sidebar-group") as HTMLElement;
+      const childOption = parentOption.querySelector("sgds-sidebar-item") as HTMLElement;
       expect(childOption).to.have.attribute("aria-level", "2");
     });
 
     it("renders submenu container for level 1 nested items", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard" icon="house">
-            <sgds-sidebar-option title="Sales" name="sales" icon="chart"></sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard" icon="house">
+            <sgds-sidebar-item title="Sales" name="sales" icon="chart"></sgds-sidebar-item>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
-      const option = el.querySelector("sgds-sidebar-option") as any;
+      const option = el.querySelector("sgds-sidebar-group") as any;
       await elementUpdated(option);
       expect(option.shadowRoot?.querySelector(".sidebar-submenu")).to.exist;
     });
@@ -180,27 +180,27 @@ describe("sgds-sidebar", () => {
     it("displays nested options in submenu", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard" icon="house">
-            <sgds-sidebar-option title="Sales" icon="chart"></sgds-sidebar-option>
-            <sgds-sidebar-option title="Revenue" icon="trending-up"></sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard" icon="house">
+            <sgds-sidebar-item title="Sales" icon="chart"></sgds-sidebar-item>
+            <sgds-sidebar-item title="Revenue" icon="trending-up"></sgds-sidebar-item>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
-      const parentOption = el.querySelector("sgds-sidebar-option") as HTMLElement;
-      expect(parentOption.querySelectorAll("sgds-sidebar-option").length).to.equal(2);
+      const parentOption = el.querySelector("sgds-sidebar-group") as HTMLElement;
+      expect(parentOption.querySelectorAll("sgds-sidebar-item").length).to.equal(2);
     });
 
     it("toggles submenu visibility on parent click", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard" icon="house">
-            <sgds-sidebar-option title="Sales" name="sales" icon="chart"></sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard" icon="house">
+            <sgds-sidebar-item title="Sales" name="sales" icon="chart"></sgds-sidebar-item>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
-      const option = el.querySelector("sgds-sidebar-option") as any;
+      const option = el.querySelector("sgds-sidebar-group") as any;
       await elementUpdated(option);
-      const optionDiv = option.shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
+      const optionDiv = option.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
 
       expect(option.shadowRoot?.querySelector(".sidebar-submenu.show")).to.not.exist;
       optionDiv.click();
@@ -211,30 +211,30 @@ describe("sgds-sidebar", () => {
     it("shows chevron icon for parent with nested options", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard">
-            <sgds-sidebar-option title="Sales" icon="chart"></sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard">
+            <sgds-sidebar-item title="Sales" icon="chart"></sgds-sidebar-item>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
-      const option = el.querySelector("sgds-sidebar-option") as any;
+      const option = el.querySelector("sgds-sidebar-group") as any;
       await elementUpdated(option);
-      expect(option.shadowRoot?.querySelector(".sidebar-option-trailing-icon sgds-icon")).to.exist;
+      expect(option.shadowRoot?.querySelector(".sidebar-item-trailingIcon sgds-icon")).to.exist;
     });
 
     it("emits sgds-select when level 1 option is clicked", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard" name="dashboard">
-            <sgds-sidebar-option title="Sales" name="sales" icon="chart"></sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-sidebar-item title="Sales" name="sales" icon="chart"></sgds-sidebar-item>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
       const selectHandler = sinon.spy();
       el.addEventListener("sgds-select", selectHandler);
-      const parentOption = el.querySelector("sgds-sidebar-option") as any;
-      const childOption = parentOption.querySelector("sgds-sidebar-option") as any;
+      const parentOption = el.querySelector("sgds-sidebar-group") as any;
+      const childOption = parentOption.querySelector("sgds-sidebar-item") as any;
       await elementUpdated(childOption);
-      const childDiv = childOption.shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
+      const childDiv = childOption.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
       childDiv.click();
       expect(selectHandler).to.have.been.calledOnce;
     });
@@ -244,49 +244,50 @@ describe("sgds-sidebar", () => {
     it("detects level 2 nesting correctly", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard" name="dashboard">
-            <sgds-sidebar-option title="Sales" name="sales">
-              <sgds-sidebar-option title="By Region" icon="geo"></sgds-sidebar-option>
-            </sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-sidebar-group title="Sales" name="sales">
+              <sgds-sidebar-item title="By Region" icon="geo"></sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
-      const parentOption = el.querySelector("sgds-sidebar-option") as HTMLElement;
-      const level1Option = parentOption.querySelector("sgds-sidebar-option") as HTMLElement;
-      const level2Option = level1Option.querySelector("sgds-sidebar-option") as HTMLElement;
+      const parentOption = el.querySelector("sgds-sidebar-group") as HTMLElement;
+      const level1Option = parentOption.querySelector("sgds-sidebar-group") as HTMLElement;
+      const level2Option = level1Option.querySelector("sgds-sidebar-item") as HTMLElement;
       expect(level2Option).to.have.attribute("aria-level", "3");
     });
 
     it("maintains parent-child relationships across levels", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard">
-            <sgds-sidebar-option title="Sales">
-              <sgds-sidebar-option title="By Region" icon="geo"></sgds-sidebar-option>
-              <sgds-sidebar-option title="By Product" icon="box-seam"></sgds-sidebar-option>
-            </sgds-sidebar-option>
-            <sgds-sidebar-option title="Revenue" icon="trending-up"></sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard">
+            <sgds-sidebar-group title="Sales">
+              <sgds-sidebar-item title="By Region" icon="geo"></sgds-sidebar-item>
+              <sgds-sidebar-item title="By Product" icon="box-seam"></sgds-sidebar-item>
+            </sgds-sidebar-group>
+            <sgds-sidebar-item title="Revenue" icon="trending-up"></sgds-sidebar-item>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
-      const parentOption = el.querySelector("sgds-sidebar-option") as HTMLElement;
-      expect(parentOption.querySelectorAll(":scope > sgds-sidebar-option").length).to.equal(2);
-      const level1First = parentOption.querySelectorAll(":scope > sgds-sidebar-option")[0];
-      expect(level1First.querySelectorAll(":scope > sgds-sidebar-option").length).to.equal(2);
+      const parentOption = el.querySelector("sgds-sidebar-group") as HTMLElement;
+      const directChildren = parentOption.querySelectorAll(":scope > sgds-sidebar-group, :scope > sgds-sidebar-item");
+      expect(directChildren.length).to.equal(2);
+      const level1First = parentOption.querySelector("sgds-sidebar-group");
+      expect(level1First?.querySelectorAll(":scope > sgds-sidebar-item").length).to.equal(2);
     });
 
     it("renders submenu for level 1 options with level 2 children", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard">
-            <sgds-sidebar-option title="Sales">
-              <sgds-sidebar-option title="By Region"></sgds-sidebar-option>
-            </sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard">
+            <sgds-sidebar-group title="Sales">
+              <sgds-sidebar-item title="By Region"></sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
-      const parentOption = el.querySelector("sgds-sidebar-option") as any;
-      const level1Option = parentOption.querySelector("sgds-sidebar-option") as any;
+      const parentOption = el.querySelector("sgds-sidebar-group") as any;
+      const level1Option = parentOption.querySelector("sgds-sidebar-group") as any;
       await elementUpdated(level1Option);
       expect(level1Option.shadowRoot?.querySelector(".sidebar-submenu")).to.exist;
     });
@@ -294,14 +295,14 @@ describe("sgds-sidebar", () => {
     it("does not display submenu for level 0 options", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard">
-            <sgds-sidebar-option title="Sales">
-              <sgds-sidebar-option title="By Region"></sgds-sidebar-option>
-            </sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard">
+            <sgds-sidebar-group title="Sales">
+              <sgds-sidebar-item title="By Region"></sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
-      const parentOption = el.querySelector("sgds-sidebar-option") as any;
+      const parentOption = el.querySelector("sgds-sidebar-group") as any;
       await elementUpdated(parentOption);
       expect(parentOption.shadowRoot?.querySelector(".sidebar-submenu")).to.not.exist;
     });
@@ -309,20 +310,20 @@ describe("sgds-sidebar", () => {
     it("handles click on level 2 nested option", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard">
-            <sgds-sidebar-option title="Sales">
-              <sgds-sidebar-option title="By Region" name="by-region"></sgds-sidebar-option>
-            </sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard">
+            <sgds-sidebar-group title="Sales">
+              <sgds-sidebar-item title="By Region" name="by-region"></sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
       const selectHandler = sinon.spy();
       el.addEventListener("sgds-select", selectHandler);
-      const parentOption = el.querySelector("sgds-sidebar-option") as any;
-      const level1Option = parentOption.querySelector("sgds-sidebar-option") as any;
-      const level2Option = level1Option.querySelector("sgds-sidebar-option") as any;
+      const parentOption = el.querySelector("sgds-sidebar-group") as any;
+      const level1Option = parentOption.querySelector("sgds-sidebar-group") as any;
+      const level2Option = level1Option.querySelector("sgds-sidebar-item") as any;
       await elementUpdated(level2Option);
-      const level2Div = level2Option.shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
+      const level2Div = level2Option.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
       level2Div.click();
       expect(selectHandler).to.have.been.calledOnce;
     });
@@ -396,14 +397,14 @@ describe("sgds-sidebar", () => {
     it("displays drawer overlay when level 0 option with children is clicked", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard" name="dashboard" icon="house">
-            <sgds-sidebar-option title="Sales" name="sales" icon="chart"></sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
+            <sgds-sidebar-item title="Sales" name="sales" icon="chart"></sgds-sidebar-item>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
-      const option = el.querySelector("sgds-sidebar-option") as any;
+      const option = el.querySelector("sgds-sidebar-group") as any;
       await elementUpdated(option);
-      const optionDiv = option.shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
+      const optionDiv = option.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
       optionDiv.click();
       await elementUpdated(el);
       expect(el.shadowRoot?.querySelector(".sidebar-nested-overlay.show")).to.exist;
@@ -412,14 +413,14 @@ describe("sgds-sidebar", () => {
     it("hides drawer overlay when clicking the same option again", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard" icon="house">
-            <sgds-sidebar-option title="Sales"></sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard" icon="house">
+            <sgds-sidebar-item title="Sales"></sgds-sidebar-item>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
-      const option = el.querySelector("sgds-sidebar-option") as any;
+      const option = el.querySelector("sgds-sidebar-group") as any;
       await elementUpdated(option);
-      const optionDiv = option.shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
+      const optionDiv = option.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
 
       optionDiv.click();
       await elementUpdated(el);
@@ -433,14 +434,14 @@ describe("sgds-sidebar", () => {
     it("sets aria-expanded on level 0 option when drawer opens", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard">
-            <sgds-sidebar-option title="Sales" icon="chart"></sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard">
+            <sgds-sidebar-item title="Sales" icon="chart"></sgds-sidebar-item>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
-      const option = el.querySelector("sgds-sidebar-option") as any;
+      const option = el.querySelector("sgds-sidebar-group") as any;
       await elementUpdated(option);
-      const optionDiv = option.shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
+      const optionDiv = option.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
       optionDiv.click();
       await elementUpdated(el);
       expect(option).to.have.attribute("aria-expanded", "true");
@@ -449,15 +450,15 @@ describe("sgds-sidebar", () => {
     it("shows nested options in drawer when opened", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard" icon="house">
-            <sgds-sidebar-option title="Sales" icon="chart"></sgds-sidebar-option>
-            <sgds-sidebar-option title="Analytics" icon="bar-chart"></sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard" icon="house">
+            <sgds-sidebar-item title="Sales" icon="chart"></sgds-sidebar-item>
+            <sgds-sidebar-item title="Analytics" icon="bar-chart"></sgds-sidebar-item>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
-      const option = el.querySelector("sgds-sidebar-option") as any;
+      const option = el.querySelector("sgds-sidebar-group") as any;
       await elementUpdated(option);
-      const optionDiv = option.shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
+      const optionDiv = option.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
       optionDiv.click();
       await elementUpdated(el);
       const overlay = el.shadowRoot?.querySelector(".sidebar-nested-overlay.show");
@@ -517,13 +518,13 @@ describe("sgds-sidebar", () => {
     it("updates active property when option is clicked", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-option>
-          <sgds-sidebar-option title="Reports" name="reports" icon="file-text"></sgds-sidebar-option>
+          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+          <sgds-sidebar-item title="Reports" name="reports" icon="file-text"></sgds-sidebar-item>
         </sgds-sidebar>
       `);
-      const option = el.querySelector("sgds-sidebar-option") as any;
+      const option = el.querySelector("sgds-sidebar-item") as any;
       await elementUpdated(option);
-      const optionDiv = option.shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
+      const optionDiv = option.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
       optionDiv.click();
       await elementUpdated(el);
       expect(el.active).to.equal("dashboard");
@@ -532,19 +533,19 @@ describe("sgds-sidebar", () => {
     it("changes active property when different option is clicked", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-option>
-          <sgds-sidebar-option title="Settings" name="settings" icon="gear"></sgds-sidebar-option>
+          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+          <sgds-sidebar-item title="Settings" name="settings" icon="gear"></sgds-sidebar-item>
         </sgds-sidebar>
       `);
-      const options = el.querySelectorAll("sgds-sidebar-option") as NodeListOf<any>;
+      const options = el.querySelectorAll("sgds-sidebar-item") as NodeListOf<any>;
       await elementUpdated(options[0]);
-      let optionDiv = options[0].shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
+      let optionDiv = options[0].shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
       optionDiv.click();
       await elementUpdated(el);
       expect(el.active).to.equal("dashboard");
 
       await elementUpdated(options[1]);
-      optionDiv = options[1].shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
+      optionDiv = options[1].shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
       optionDiv.click();
       await elementUpdated(el);
       expect(el.active).to.equal("settings");
@@ -553,15 +554,15 @@ describe("sgds-sidebar", () => {
     it("updates active property when nested option is clicked", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard">
-            <sgds-sidebar-option title="Sales" name="sales"></sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard">
+            <sgds-sidebar-item title="Sales" name="sales"></sgds-sidebar-item>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
-      const parentOption = el.querySelector("sgds-sidebar-option") as any;
-      const childOption = parentOption.querySelector("sgds-sidebar-option") as any;
+      const parentOption = el.querySelector("sgds-sidebar-group") as any;
+      const childOption = parentOption.querySelector("sgds-sidebar-item") as any;
       await elementUpdated(childOption);
-      const childDiv = childOption.shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
+      const childDiv = childOption.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
       childDiv.click();
       await elementUpdated(el);
       expect(el.active).to.equal("sales");

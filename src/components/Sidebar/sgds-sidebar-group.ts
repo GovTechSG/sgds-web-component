@@ -73,7 +73,11 @@ export class SgdsSidebarGroup extends SidebarElement {
     } else {
       this.activeNestedGroup = this.activeNestedGroup ? null : this;
       this._selected = !!this.activeNestedGroup;
-      this._childElements.forEach(v => ((v as SidebarElement)._hidden = this._selected));
+
+      this._childElements.forEach(v => {
+        const ele = v as SidebarElement;
+        ele._hidden = !this._selected;
+      });
 
       this.emit("i-sgds-click", { detail: { element: this, level: this._childLevel } });
     }

@@ -18,7 +18,9 @@ import { SidebarElement } from "../../base/sidebar-element";
  * - Enter/Space: Activate the focused item or group
  * - Tab: Navigate to interactive elements (standard focus management)
  *
- * @slot - Insert sgds-sidebar-item elements or sgds-sidebar-group elements.
+ * @slot - Insert sgds-sidebar-item, sgds-sidebar-group, and sgds-sidebar-section elements
+ * @slot brand-name - Insert brand/logo content in sidebar header
+ * @fires sgds-select - Emitted when a sidebar item or group is selected. Detail includes activeItem, activeGroup, and source.
  */
 export class SgdsSidebar extends SgdsElement {
   static styles = [...SgdsElement.styles, sidebarStyle];
@@ -81,26 +83,26 @@ export class SgdsSidebar extends SgdsElement {
 
   /**
    * Manages the drawer overlay content based on the selected parent option.
-   * Extracts direct child options from the selected parent and populates the drawer.
-   * When undefined is passed, closes the drawer and reverts nodes back to parents.
+   * If element is provided: Opens drawer for that element's children.
+   * If element is undefined: Closes drawer and reverts items to their parent.
    * @private
    * @param {SidebarElement} [element] - The parent option to display in drawer. Undefined closes drawer.
    * @returns {void}
    */
   private _setNodesToDrawer(element?: SidebarElement) {
     if (this._sidebarActiveGroup) {
+      // when there is element, we will revert the nodes of the previous active group before setting new value into the active group
       if (element) {
         this._revertNodesToParent(this._sidebarActiveGroup);
         this._sidebarActiveGroup = element;
       }
 
+      // when there is an active group set, always set new menu items
       const menuItems = this._sidebarActiveGroup.querySelectorAll(":scope > *");
+      this._drawerItems = []; // always set to empty to prevent duplicate
       menuItems.forEach(e => {
         this._drawerItems.push(e);
       });
-    } else {
-      this._revertNodesToParent(element);
-      this._sidebarActiveGroup = null;
     }
   }
 
@@ -112,11 +114,13 @@ export class SgdsSidebar extends SgdsElement {
    * @param {SgdsSidebarItem} element - The parent option to return nodes to
    * @returns {void}
    */
-  private _revertNodesToParent(element: SidebarElement) {
-    this._drawerItems.forEach(e => {
-      element.append(e);
-    });
-    this._drawerItems = [];
+  private _revertNodesToParent(element: SidebarElement | null) {
+    if (element) {
+      this._drawerItems.forEach(e => {
+        element.append(e);
+      });
+      this._drawerItems = [];
+    }
   }
 
   /**
@@ -142,13 +146,17 @@ export class SgdsSidebar extends SgdsElement {
         }
 
         this._sidebarActiveItem = element.name;
-        this.emit("sgds-select");
+        this.emit("sgds-select", {
+          detail: {
+            activeItem: element.name,
+            activeGroup: null,
+            source: "item"
+          }
+        });
 
-        // when anchorLink is provided, we click
+        // when there is achorlink we will trigger click to redirect and allow user to handle the navigation themselves
         const anchorLink = option.querySelector(":scope > a") as HTMLAnchorElement;
-        if (anchorLink) {
-          // anchorLink.click();
-        }
+        if (anchorLink) anchorLink.click();
       });
     });
 
@@ -170,7 +178,21 @@ export class SgdsSidebar extends SgdsElement {
         // setting nodes
         this._setNodesToDrawer(this._sidebarActiveGroup !== element ? element : undefined);
         this._sidebarActiveItem = element.name;
-        this.emit("sgds-select");
+        this.emit("sgds-select", {
+          detail: {
+            activeItem: element.name,
+            activeGroup: element.name,
+            source: "drawer"
+          }
+        });
+
+        // Auto-focus first drawer item for keyboard accessibility
+        if (this._drawerItems?.length > 0) {
+          setTimeout(() => {
+            const firstItem = this._drawerItems[0]?.shadowRoot?.querySelector("[tabindex]") as HTMLElement | null;
+            firstItem?.focus();
+          }, 0);
+        }
       });
     });
   }

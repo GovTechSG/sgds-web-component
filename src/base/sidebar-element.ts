@@ -10,7 +10,6 @@ import {
   SidebarCollapsed,
   SidebarDrawerItems
 } from "../components/Sidebar/sidebar-context";
-import SgdsSidebarGroup from "../components/Sidebar/sgds-sidebar-group";
 
 const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
@@ -41,11 +40,11 @@ export class SidebarElement extends SgdsElement {
 
   @consume({ context: SidebarActiveGroup, subscribe: true })
   @state()
-  _sidebarActiveGroup = null;
+  _sidebarActiveGroup: SidebarElement | null = null;
 
   @consume({ context: SidebarDrawerItems, subscribe: true })
   @state()
-  _drawerItems = null;
+  _drawerItems: SidebarElement[] | null = null;
 
   @state() _childLevel = 0;
 
@@ -66,7 +65,7 @@ export class SidebarElement extends SgdsElement {
    * @internal
    */
   @state()
-  _childElements = [];
+  _childElements: SidebarElement[] = [];
 
   @queryAssignedElements({ flatten: false })
   private _defaultNodes!: SidebarElement[];
@@ -92,7 +91,8 @@ export class SidebarElement extends SgdsElement {
     if (this._childLevel === 1) {
       this._hidden = !this.closest(".sidebar-nested-overlay");
     } else if (this._childLevel > 1) {
-      this._hidden = !this.parentElement.shadowRoot.querySelector(".sidebar-submenu.show");
+      const parentShadowRoot = this.parentElement?.shadowRoot;
+      this._hidden = !parentShadowRoot?.querySelector(".sidebar-submenu.show");
     } else {
       this._hidden = false;
     }
@@ -159,14 +159,13 @@ export class SidebarElement extends SgdsElement {
 
         const child = (target as SidebarElement)._childElements[0];
 
-        console.log(child);
-
         const isChildHidden = child?._hidden;
         const childElement = !isChildHidden ? child : null;
         const nextElement = childElement || target.nextElementSibling || target.parentElement.nextElementSibling;
 
-        if (nextElement) {
-          (nextElement.shadowRoot?.querySelector("[tabindex]") as HTMLElement).focus();
+        if (nextElement?.shadowRoot) {
+          const focusTarget = nextElement.shadowRoot.querySelector("[tabindex]") as HTMLElement | null;
+          focusTarget?.focus();
         }
 
         return;
@@ -182,8 +181,9 @@ export class SidebarElement extends SgdsElement {
         const childElement = !isChildHidden ? lastChild : null;
         const prevElement = childElement || target.previousElementSibling || target.parentElement;
 
-        if (prevElement) {
-          (prevElement.shadowRoot?.querySelector("[tabindex]") as HTMLElement).focus();
+        if (prevElement?.shadowRoot) {
+          const focusTarget = prevElement.shadowRoot.querySelector("[tabindex]") as HTMLElement | null;
+          focusTarget?.focus();
         }
         return;
       }
@@ -196,8 +196,9 @@ export class SidebarElement extends SgdsElement {
         } else {
           // check if we are on the drawer, if so move back to parent
           const childLevel = (target as SidebarElement)._childLevel;
-          if (childLevel >= 1 && this._sidebarActiveGroup !== null) {
-            (this._sidebarActiveGroup.shadowRoot?.querySelector("[tabindex]") as HTMLElement).focus();
+          if (childLevel >= 1 && this._sidebarActiveGroup?.shadowRoot) {
+            const focusTarget = this._sidebarActiveGroup.shadowRoot.querySelector("[tabindex]") as HTMLElement | null;
+            focusTarget?.focus();
           }
         }
 
@@ -207,8 +208,12 @@ export class SidebarElement extends SgdsElement {
         event.preventDefault();
         event.stopPropagation();
 
-        if (this._sidebarActiveGroup === this) {
-          (this._drawerItems[0].shadowRoot?.querySelector("[tabindex]") as HTMLElement).focus();
+        if (this._sidebarActiveGroup === this && this._drawerItems?.length) {
+          const drawerItem = this._drawerItems[0];
+          if (drawerItem?.shadowRoot) {
+            const focusTarget = drawerItem.shadowRoot.querySelector("[tabindex]") as HTMLElement | null;
+            focusTarget?.focus();
+          }
         } else {
           if (this._childLevel === 0 && this._childElements.length > 0) {
             // when there is nested, we trigger click to show drawer
