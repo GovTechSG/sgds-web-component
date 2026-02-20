@@ -288,11 +288,20 @@
   .sgds\:top-27 {
     top: calc(var(--sgds-spacing) * 27);
   }
+  .sgds\:m-1 {
+    margin: calc(var(--sgds-spacing) * 1);
+  }
+  .sgds\:m-2 {
+    margin: calc(var(--sgds-spacing) * 2);
+  }
   .sgds\:m-2-xl {
     margin: var(--sgds-spacing-2-xl);
   }
   .sgds\:m-2-xs {
     margin: var(--sgds-spacing-2-xs);
+  }
+  .sgds\:m-3 {
+    margin: calc(var(--sgds-spacing) * 3);
   }
   .sgds\:m-3-xl {
     margin: var(--sgds-spacing-3-xl);
@@ -300,11 +309,41 @@
   .sgds\:m-3-xs {
     margin: var(--sgds-spacing-3-xs);
   }
+  .sgds\:m-4 {
+    margin: calc(var(--sgds-spacing) * 4);
+  }
   .sgds\:m-4-xl {
     margin: var(--sgds-spacing-4-xl);
   }
+  .sgds\:m-5 {
+    margin: calc(var(--sgds-spacing) * 5);
+  }
   .sgds\:m-5-xl {
     margin: var(--sgds-spacing-5-xl);
+  }
+  .sgds\:m-6 {
+    margin: calc(var(--sgds-spacing) * 6);
+  }
+  .sgds\:m-8 {
+    margin: calc(var(--sgds-spacing) * 8);
+  }
+  .sgds\:m-12 {
+    margin: calc(var(--sgds-spacing) * 12);
+  }
+  .sgds\:m-13 {
+    margin: calc(var(--sgds-spacing) * 13);
+  }
+  .sgds\:m-16 {
+    margin: calc(var(--sgds-spacing) * 16);
+  }
+  .sgds\:m-24 {
+    margin: calc(var(--sgds-spacing) * 24);
+  }
+  .sgds\:m-32 {
+    margin: calc(var(--sgds-spacing) * 32);
+  }
+  .sgds\:m-40 {
+    margin: calc(var(--sgds-spacing) * 40);
   }
   .sgds\:m-lg {
     margin: var(--sgds-spacing-lg);
@@ -324,32 +363,29 @@
   .sgds\:m-xs {
     margin: var(--sgds-spacing-xs);
   }
-  .sgds\:mx-3-xl {
-    margin-inline: var(--sgds-spacing-3-xl);
+  .sgds\:mx-2 {
+    margin-inline: calc(var(--sgds-spacing) * 2);
   }
-  .sgds\:mx-md {
-    margin-inline: var(--sgds-spacing-md);
+  .sgds\:mx-4 {
+    margin-inline: calc(var(--sgds-spacing) * 4);
   }
-  .sgds\:mx-xs {
-    margin-inline: var(--sgds-spacing-xs);
+  .sgds\:mx-12 {
+    margin-inline: calc(var(--sgds-spacing) * 12);
   }
-  .sgds\:my-2-xl {
-    margin-block: var(--sgds-spacing-2-xl);
+  .sgds\:my-3 {
+    margin-block: calc(var(--sgds-spacing) * 3);
   }
-  .sgds\:my-lg {
-    margin-block: var(--sgds-spacing-lg);
+  .sgds\:my-6 {
+    margin-block: calc(var(--sgds-spacing) * 6);
+  }
+  .sgds\:my-8 {
+    margin-block: calc(var(--sgds-spacing) * 8);
   }
   .sgds\:my-md {
     margin-block: var(--sgds-spacing-md);
   }
-  .sgds\:my-sm {
-    margin-block: var(--sgds-spacing-sm);
-  }
-  .sgds\:my-xl {
-    margin-block: var(--sgds-spacing-xl);
-  }
-  .sgds\:my-xs {
-    margin-block: var(--sgds-spacing-xs);
+  .sgds\:mt-3 {
+    margin-top: calc(var(--sgds-spacing) * 3);
   }
   .sgds\:mt-lg {
     margin-top: var(--sgds-spacing-lg);
@@ -357,20 +393,14 @@
   .sgds\:mt-md {
     margin-top: var(--sgds-spacing-md);
   }
-  .sgds\:mt-sm {
-    margin-top: var(--sgds-spacing-sm);
-  }
-  .sgds\:mt-xl {
-    margin-top: var(--sgds-spacing-xl);
-  }
-  .sgds\:mt-xs {
-    margin-top: var(--sgds-spacing-xs);
-  }
   .sgds\:mb-2-xl {
     margin-bottom: var(--sgds-spacing-2-xl);
   }
   .sgds\:mb-2-xs {
     margin-bottom: var(--sgds-spacing-2-xs);
+  }
+  .sgds\:mb-4 {
+    margin-bottom: calc(var(--sgds-spacing) * 4);
   }
   .sgds\:mb-lg {
     margin-bottom: var(--sgds-spacing-lg);
@@ -500,6 +530,12 @@
   }
   .sgds\:gap-3-xl {
     gap: var(--sgds-gap-3-xl);
+  }
+  .sgds\:gap-4 {
+    gap: calc(var(--sgds-spacing) * 4);
+  }
+  .sgds\:gap-6 {
+    gap: calc(var(--sgds-spacing) * 6);
   }
   .sgds\:gap-form-2-xl {
     gap: var(--sgds-gap-form-2-xl);
@@ -989,11 +1025,17 @@
   .sgds\:p-3-xs {
     padding: var(--sgds-spacing-3-xs);
   }
+  .sgds\:p-4 {
+    padding: calc(var(--sgds-spacing) * 4);
+  }
   .sgds\:p-4-xl {
     padding: var(--sgds-spacing-4-xl);
   }
   .sgds\:p-5-xl {
     padding: var(--sgds-spacing-5-xl);
+  }
+  .sgds\:p-6 {
+    padding: calc(var(--sgds-spacing) * 6);
   }
   .sgds\:p-lg {
     padding: var(--sgds-spacing-lg);
@@ -1013,6 +1055,9 @@
   .sgds\:p-xs {
     padding: var(--sgds-spacing-xs);
   }
+  .sgds\:px-2 {
+    padding-inline: calc(var(--sgds-spacing) * 2);
+  }
   .sgds\:px-lg {
     padding-inline: var(--sgds-spacing-lg);
   }
@@ -1024,6 +1069,9 @@
   }
   .sgds\:py-2-xl {
     padding-block: var(--sgds-spacing-2-xl);
+  }
+  .sgds\:py-3 {
+    padding-block: calc(var(--sgds-spacing) * 3);
   }
   .sgds\:py-3-xs {
     padding-block: var(--sgds-spacing-3-xs);
