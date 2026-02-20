@@ -49,3 +49,17 @@ By default, tabs are presented horizontally. Set `orientation` to `vertical` for
 <Canvas of={TabStories.OrientationSolid}>
   <Story of={TabStories.OrientationSolid} />
 </Canvas>
+
+## Tab Events
+
+The `sgds-tab-group` component emits custom events when tabs are shown or hidden, allowing you to perform side effects and track which tab is currently active.
+
+### Available Events
+
+- **`sgds-tab-show`**: Emitted when a tab becomes active. Use `event.detail.name` to get the active tab's panel name.
+- **`sgds-tab-hide`**: Emitted when a tab is hidden (another tab becomes active). Use `event.detail.name` to get the hidden tab's panel name.
+
+
+<Canvas of={TabStories.Events}>
+  <Story of={TabStories.Events} />
+</Canvas>
