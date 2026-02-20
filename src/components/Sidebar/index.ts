@@ -9,8 +9,8 @@ customElements.define("sgds-sidebar-section", SgdsSidebarSection);
 customElements.define("sgds-sidebar-group", SgdsSidebarGroup);
 
 export type { SgdsSidebar } from "./sgds-sidebar";
-export type { SgdsSidebarItem } from "./sgds-sidebar-item";
 export type { SgdsSidebarGroup } from "./sgds-sidebar-group";
+export type { SgdsSidebarItem } from "./sgds-sidebar-item";
 export type { SgdsSidebarSection } from "./sgds-sidebar-section";
 
 declare global {
