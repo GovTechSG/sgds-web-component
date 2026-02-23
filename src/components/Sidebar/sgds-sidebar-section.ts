@@ -7,26 +7,39 @@ import sidebarSectionStyle from "./sidebar-section.css";
 import { SidebarElement } from "../../base/sidebar-element";
 
 /**
- * @summary Sidebar section is a container component that groups related sidebar options into organized sections.
- * It displays a section header/title and can contain multiple sgds-sidebar-item elements.
- * Sections help organize navigation items hierarchically within the sidebar.
+ * @summary Sidebar section is a container component that groups related sidebar items into organized sections.
+ * It displays a section header/title and can optionally be collapsible. Sections help organize navigation
+ * items hierarchically within the sidebar, providing visual separation between different areas of functionality.
  *
- * @slot - Insert sgds-sidebar-item elements to be grouped within this section.
+ * @slot - Insert sgds-sidebar-item and sgds-sidebar-group elements to be grouped within this section
  */
 export class SgdsSidebarSection extends SidebarElement {
   static styles = [...SgdsElement.styles, sidebarSectionStyle];
 
   /**
+   * The display title/label for the sidebar section header.
+   * Always visible in the sidebar, used to group related items.
+   * @attribute title
+   * @type {string}
+   * @default ""
+   */
+  @property({ type: String, reflect: true }) title = "";
+
+  /**
    * Controls whether the section content is expanded or collapsed.
-   * When false, the section options are hidden but the section header remains visible.
+   * When true, the section content is hidden but the section header remains visible.
+   * Only applicable when the section is collapsible.
+   * @attribute collapsed
    * @type {boolean}
-   * @default true
+   * @default false
    */
   @property({ type: Boolean, reflect: true }) collapsed = false;
 
   /**
-   * Enables a collapsible section header with expand/collapse toggle.
+   * Enables a collapsible section header with expand/collapse toggle functionality.
    * When true, users can click the header to toggle section visibility.
+   * When false, the section header is display-only and not interactive.
+   * @attribute collapsible
    * @type {boolean}
    * @default false
    */
@@ -69,9 +82,9 @@ export class SgdsSidebarSection extends SidebarElement {
         <div
           class="sidebar-section-label"
           @click=${this._handleClick}
-          tabindex="0"
           aria-expanded=${!this.collapsed}
           aria-disabled=${!this.collapsible}
+          tabindex="0"
         >
           <span>${this.title}</span>
           ${this.collapsible
@@ -82,7 +95,7 @@ export class SgdsSidebarSection extends SidebarElement {
         <div
           class=${classMap({
             "sidebar-section-content": true,
-            "sidebar-section-content--collapsed": this.collapsed
+            "sidebar-section-content--collapsed": this.collapsed && this.collapsible
           })}
         >
           <div>

@@ -22,7 +22,6 @@
 
       .sidebar-wrapper {
         height: 100%;
-        border-right: 1px solid #e5e7eb;
       }
 
       .content {
@@ -59,14 +58,15 @@
 
     <div class="container">
       <div class="sidebar-wrapper">
-        <sgds-sidebar active="team-management">
-          <div slot="brand-name">brand-name</div>
+        <sgds-sidebar active="refunds">
+          <div slot="brandName">brand-name</div>
           <!-- Main Navigation Section -->
 
-          <sgds-sidebar-section title="Main" name="main" collapsible>
+          <sgds-sidebar-section title="Main" name="main" ?collapsible="false">
             <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
               <sgds-sidebar-group title="Summary" name="summary" icon="building">
-                <sgds-sidebar-item title="Latest Sales" name="latest-sales">
+                <sgds-sidebar-item title="Summary Sales" name="latest-sales" icon="building">
+                  <sgds-icon name="placeholder" slot="trailingIcon"></sgds-icon>
                   <a href="http://localhost:5173/playground/badge.html"></a>
                 </sgds-sidebar-item>
                 <sgds-sidebar-item title="Refunds" name="refunds"> </sgds-sidebar-item>
@@ -85,17 +85,19 @@
               <sgds-sidebar-item title="Monthly" name="monthly" icon="house"></sgds-sidebar-item>
             </sgds-sidebar-group>
 
-            <sgds-sidebar-item title="Team Management" name="team-management-2" icon="users"> </sgds-sidebar-item>
-
-            <sgds-sidebar-group title="Reports" name="reports-1" icon="file-text">
-              <sgds-sidebar-item title="Yearly" name="yearly-1" icon="house"></sgds-sidebar-item>
-              <sgds-sidebar-item title="Monthly" name="monthly-1" icon="house"></sgds-sidebar-item>
-            </sgds-sidebar-group>
+            <sgds-sidebar-item title="Public Members" name="public-members" icon="user-circle">
+              <sgds-icon slot="trailingIcon" name="summary"></sgds-icon>
+            </sgds-sidebar-item>
           </sgds-sidebar-section>
 
           <!-- Organization Section (Collapsible) -->
           <sgds-sidebar-section title="Organization" name="organization">
-            <sgds-sidebar-item title="Team Management" name="team-management" icon="users"> </sgds-sidebar-item>
+            <sgds-sidebar-item
+              title="Team Management Team Management Team Management Team Management"
+              name="team-management"
+              icon="users"
+            >
+            </sgds-sidebar-item>
 
             <sgds-sidebar-item title="Projects" name="projects" icon="layers"> </sgds-sidebar-item>
           </sgds-sidebar-section>
@@ -106,29 +108,27 @@
           </sgds-sidebar-section>
 
           <!-- Support Section -->
-          <sgds-sidebar-section title="Support" name="support">
-            <sgds-sidebar-item title="Help & Support" name="help-support" icon="question-circle">
-              <span
-                slot="trailingIcon"
-                style="
-                  background: #ef4444;
-                  color: white;
-                  border-radius: 50%;
-                  width: 20px;
-                  height: 20px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  font-size: 11px;
-                  font-weight: 600;
-                "
-                >3</span
-              >
-            </sgds-sidebar-item>
 
-            <sgds-sidebar-item title="Premium Features" name="premium-features" icon="star" disabled>
-            </sgds-sidebar-item>
-          </sgds-sidebar-section>
+          <sgds-sidebar-item title="Help & Support" name="help-support" icon="question-circle">
+            <span
+              slot="trailingIcon"
+              style="
+                background: #ef4444;
+                color: white;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 11px;
+                font-weight: 600;
+              "
+              >3</span
+            >
+          </sgds-sidebar-item>
+
+          <sgds-sidebar-item title="Premium Features" name="premium-features" icon="star" disabled> </sgds-sidebar-item>
         </sgds-sidebar>
       </div>
 

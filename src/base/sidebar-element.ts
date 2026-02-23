@@ -18,34 +18,67 @@ const ARROW_RIGHT = "ArrowRight";
 const ENTER = "Enter";
 
 /**
- * @event sgds-select - Emitted event when a slot item is selected
+ * @summary Base class for sidebar navigation components.
+ * Provides core functionality for sidebar items and groups including keyboard navigation,
+ * selection state management, and nesting support.
+ *
+ * Features:
+ * - Keyboard navigation (Arrow keys, Enter)
+ * - Active state management via context
+ * - Support for nested hierarchies up to 3 levels deep
+ * - Focus management and ARIA attributes
+ * - Event emission for sidebar coordination
+ *
+ * Keyboard Navigation:
+ * - Arrow Up/Down: Navigate between siblings in the same level
+ * - Arrow Left/Right: Navigate hierarchically (collapse/expand or move in drawer)
+ * - Enter: Activate focused item or group
+ *
+ * @internal
  */
 export class SidebarElement extends SgdsElement {
   static styles = DropdownElement.styles;
 
   /**
-   * The name identifier for the sidebar option.
+   * The display title/label for the sidebar element.
+   * Shown in the UI and used for accessibility labels (aria-label).
+   * @attribute title
+   * @type {string}
+   * @default ""
+   */
+  @property({ type: String, reflect: true }) title = "";
+
+  /**
+   * The unique name identifier for the sidebar element.
+   * Used to identify selections in sgds-select events and manage active states.
+   * Should be unique among siblings in the same navigation level.
+   * @attribute name
    * @type {string}
    * @default ""
    */
   @property({ type: String, reflect: true }) name = "";
 
+  /** @internal */
   @consume({ context: SidebarCollapsed, subscribe: true })
   @state()
   _sidebarCollapsed = false;
 
+  /** @internal */
   @consume({ context: SidebarActiveItem, subscribe: true })
   @state()
   _sidebarActiveItem = "";
 
+  /** @internal */
   @consume({ context: SidebarActiveGroup, subscribe: true })
   @state()
   _sidebarActiveGroup: SidebarElement | null = null;
 
+  /** @internal */
   @consume({ context: SidebarDrawerItems, subscribe: true })
   @state()
   _drawerItems: SidebarElement[] | null = null;
 
+  /** @internal */
   @state() _childLevel = 0;
 
   /**
@@ -67,6 +100,7 @@ export class SidebarElement extends SgdsElement {
   @state()
   _childElements: SidebarElement[] = [];
 
+  /** @internal */
   @queryAssignedElements({ flatten: false })
   private _defaultNodes!: SidebarElement[];
 
@@ -108,26 +142,10 @@ export class SidebarElement extends SgdsElement {
   }
 
   /**
-   * Watches the active item context and updates selection state.
-   * @internal
-   * @returns {void}
-   */
-  @watch("_sidebarActiveItem")
-  _handleActive() {
-    this._selected = this._sidebarActiveItem === this.name && this.name !== "";
-
-    if (this._selected) {
-      const parent = this.parentElement as SidebarElement;
-      if (parent) parent._selected = true;
-    }
-  }
-
-  /**
    * Handles click/activation events on the sidebar element.
    * Emits internal click event for parent sidebar to handle selection.
    * @internal
    * @param {SidebarElement} [element] - Optional element parameter (for keyboard compatibility)
-   * @emits i-sgds-click - Emitted when element is activated
    * @returns {void}
    */
   _handleClick(element?: SidebarElement) {
@@ -152,7 +170,6 @@ export class SidebarElement extends SgdsElement {
         if (event.target === this) this._handleClick();
         return;
       }
-
       case ARROW_DOWN: {
         event.preventDefault();
         event.stopPropagation();

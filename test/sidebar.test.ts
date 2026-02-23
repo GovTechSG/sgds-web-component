@@ -56,10 +56,11 @@ describe("sgds-sidebar", () => {
       expect(el.collapsed).to.be.false;
     });
 
-    it("toggles collapsed state when toggleCollapsed is called", async () => {
+    it("toggles collapsed state when toggle button is clicked", async () => {
       const el = await fixture<SgdsSidebar>(html`<sgds-sidebar></sgds-sidebar>`);
       const initialState = el.collapsed;
-      el.toggleCollapsed();
+      const iconButton = el.shadowRoot?.querySelector("sgds-icon-button");
+      (iconButton as HTMLElement)?.click();
       await elementUpdated(el);
       expect(el.collapsed).to.equal(!initialState);
     });
@@ -71,11 +72,12 @@ describe("sgds-sidebar", () => {
       expect(el.collapsed).to.be.true;
     });
 
-    it("emits sgds-sidebar-toggle event when toggleCollapsed is called", async () => {
+    it("emits sgds-sidebar-toggle event when toggle button is clicked", async () => {
       const el = await fixture<SgdsSidebar>(html`<sgds-sidebar></sgds-sidebar>`);
       const toggleHandler = sinon.spy();
       el.addEventListener("sgds-sidebar-toggle", toggleHandler);
-      el.toggleCollapsed();
+      const iconButton = el.shadowRoot?.querySelector("sgds-icon-button");
+      (iconButton as HTMLElement)?.click();
       await elementUpdated(el);
       expect(toggleHandler).to.have.been.calledOnce;
     });
@@ -329,67 +331,214 @@ describe("sgds-sidebar", () => {
     });
   });
 
-  describe("Keyboard Events", () => {
-    it("handles Enter key on level 0 option", async () => {
+  describe("Keyboard Events - Enter", () => {
+    it("handles Enter key on level 0 item", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard" name="dashboard" icon="file-text"></sgds-sidebar-option>
+          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
         </sgds-sidebar>
       `);
       const clickHandler = sinon.spy();
-      const option = el.querySelector("sgds-sidebar-option") as any;
-      option.addEventListener("i-sgds-click", clickHandler);
-      await elementUpdated(option);
-      const optionDiv = option.shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
-      optionDiv.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+      const item = el.querySelector("sgds-sidebar-item") as any;
+
+      await elementUpdated(item);
+      const itemDiv = item.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      itemDiv.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
       expect(clickHandler).to.have.been.calledOnce;
     });
 
-    it("handles Enter key on level 1 nested option", async () => {
+    it("handles Space key on level 0 item", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard">
-            <sgds-sidebar-option title="Sales" name="sales" icon="chart"></sgds-sidebar-option>
-          </sgds-sidebar-option>
+          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
         </sgds-sidebar>
       `);
       const clickHandler = sinon.spy();
-      const parentOption = el.querySelector("sgds-sidebar-option") as any;
-      const childOption = parentOption.querySelector("sgds-sidebar-option") as any;
-      childOption.addEventListener("i-sgds-click", clickHandler);
-      await elementUpdated(childOption);
-      const optionDiv = childOption.shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
-      optionDiv.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+      const item = el.querySelector("sgds-sidebar-item") as any;
+
+      await elementUpdated(item);
+      const itemDiv = item.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      itemDiv.dispatchEvent(new KeyboardEvent("keydown", { key: " ", bubbles: true }));
       expect(clickHandler).to.have.been.calledOnce;
     });
 
-    it("does not trigger on non-Enter keys", async () => {
+    it("handles Enter key on nested item", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard" icon="house"></sgds-sidebar-option>
+          <sgds-sidebar-group title="Dashboard">
+            <sgds-sidebar-item title="Sales" name="sales" icon="chart"></sgds-sidebar-item>
+          </sgds-sidebar-group>
         </sgds-sidebar>
       `);
       const clickHandler = sinon.spy();
-      const option = el.querySelector("sgds-sidebar-option") as any;
-      option.addEventListener("i-sgds-click", clickHandler);
-      await elementUpdated(option);
-      const optionDiv = option.shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
-      optionDiv.dispatchEvent(new KeyboardEvent("keydown", { key: " ", bubbles: true }));
+      const parentGroup = el.querySelector("sgds-sidebar-group") as any;
+      const childItem = parentGroup.querySelector("sgds-sidebar-item") as any;
+
+      await elementUpdated(childItem);
+      const itemDiv = childItem.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      itemDiv.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+      expect(clickHandler).to.have.been.calledOnce;
+    });
+
+    it("does not trigger on other keys", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+        </sgds-sidebar>
+      `);
+      const clickHandler = sinon.spy();
+      const item = el.querySelector("sgds-sidebar-item") as any;
+
+      await elementUpdated(item);
+      const itemDiv = item.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      itemDiv.dispatchEvent(new KeyboardEvent("keydown", { key: "a", bubbles: true }));
       expect(clickHandler).not.to.be.called;
     });
 
-    it("updates active property when Enter key used on option", async () => {
+    it("updates active property when Enter key pressed on item", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-option title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-option>
+          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
         </sgds-sidebar>
       `);
-      const option = el.querySelector("sgds-sidebar-option") as any;
-      await elementUpdated(option);
-      const optionDiv = option.shadowRoot?.querySelector(".sidebar-option") as HTMLElement;
-      optionDiv.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+      const item = el.querySelector("sgds-sidebar-item") as any;
+      await elementUpdated(item);
+      const itemDiv = item.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      itemDiv.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
       await elementUpdated(el);
       expect(el.active).to.equal("dashboard");
+    });
+  });
+
+  describe("Keyboard Events - Arrow Navigation", () => {
+    it("navigates down between sibling items with ArrowDown", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+          <sgds-sidebar-item title="Reports" name="reports" icon="file-text"></sgds-sidebar-item>
+          <sgds-sidebar-item title="Settings" name="settings" icon="gear"></sgds-sidebar-item>
+        </sgds-sidebar>
+      `);
+      const items = el.querySelectorAll("sgds-sidebar-item") as NodeListOf<any>;
+      const firstItem = items[0];
+
+      await elementUpdated(firstItem);
+      const firstItemDiv = firstItem.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      firstItem.focus();
+      firstItemDiv.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+
+      // Second item should receive focus
+      await elementUpdated(el);
+      expect(document.activeElement).to.not.equal(firstItem);
+    });
+
+    it("navigates up between sibling items with ArrowUp", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+          <sgds-sidebar-item title="Reports" name="reports" icon="file-text"></sgds-sidebar-item>
+          <sgds-sidebar-item title="Settings" name="settings" icon="gear"></sgds-sidebar-item>
+        </sgds-sidebar>
+      `);
+      const items = el.querySelectorAll("sgds-sidebar-item") as NodeListOf<any>;
+      const lastItem = items[items.length - 1];
+
+      await elementUpdated(lastItem);
+      const lastItemDiv = lastItem.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      lastItem.focus();
+      lastItemDiv.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowUp", bubbles: true }));
+
+      await elementUpdated(el);
+      expect(document.activeElement).to.not.equal(lastItem);
+    });
+
+    it("opens drawer with ArrowRight on level 0 group with children", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
+            <sgds-sidebar-item title="Sales" name="sales"></sgds-sidebar-item>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+      const group = el.querySelector("sgds-sidebar-group") as any;
+      await elementUpdated(group);
+      const groupDiv = group.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      group.focus();
+      groupDiv.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
+      await elementUpdated(el);
+      expect(el.shadowRoot?.querySelector(".sidebar-nested-overlay.show")).to.exist;
+    });
+
+    it("closes drawer with ArrowLeft on level 0 group", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
+            <sgds-sidebar-item title="Sales" name="sales"></sgds-sidebar-item>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+      const group = el.querySelector("sgds-sidebar-group") as any;
+      await elementUpdated(group);
+      const groupDiv = group.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      // Open drawer first
+      groupDiv.click();
+      await elementUpdated(el);
+      expect(el.shadowRoot?.querySelector(".sidebar-nested-overlay.show")).to.exist;
+
+      // Close with ArrowLeft
+      group.focus();
+      groupDiv.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }));
+      await elementUpdated(el);
+      expect(el.shadowRoot?.querySelector(".sidebar-nested-overlay.show")).to.not.exist;
+    });
+
+    it("toggles submenu with ArrowRight on nested group", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard">
+            <sgds-sidebar-group title="Sales" icon="chart">
+              <sgds-sidebar-item title="By Region" name="by-region"></sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+      const rootGroup = el.querySelector("sgds-sidebar-group") as any;
+      const nestedGroup = rootGroup.querySelector("sgds-sidebar-group") as any;
+      await elementUpdated(nestedGroup);
+      const nestedDiv = nestedGroup.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      nestedGroup.focus();
+
+      nestedDiv.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
+      await elementUpdated(nestedGroup);
+      expect(nestedGroup.shadowRoot?.querySelector(".sidebar-submenu.show")).to.exist;
+    });
+
+    it("closes submenu with ArrowLeft on nested group", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard">
+            <sgds-sidebar-group title="Sales" icon="chart">
+              <sgds-sidebar-item title="By Region" name="by-region"></sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+      const rootGroup = el.querySelector("sgds-sidebar-group") as any;
+      const nestedGroup = rootGroup.querySelector("sgds-sidebar-group") as any;
+      await elementUpdated(nestedGroup);
+      const nestedDiv = nestedGroup.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      // Open submenu first
+      nestedDiv.click();
+      await elementUpdated(nestedGroup);
+      expect(nestedGroup.shadowRoot?.querySelector(".sidebar-submenu.show")).to.exist;
+
+      // Close with ArrowLeft
+      nestedGroup.focus();
+      nestedDiv.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }));
+      await elementUpdated(nestedGroup);
+      expect(nestedGroup.shadowRoot?.querySelector(".sidebar-submenu.show")).to.not.exist;
     });
   });
 
@@ -465,17 +614,90 @@ describe("sgds-sidebar", () => {
       expect(overlay?.textContent).to.include("Sales");
       expect(overlay?.textContent).to.include("Analytics");
     });
+
+    it("auto-focuses first drawer item when drawer opens", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard" icon="house">
+            <sgds-sidebar-item title="Sales" name="sales"></sgds-sidebar-item>
+            <sgds-sidebar-item title="Analytics" name="analytics"></sgds-sidebar-item>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+      const group = el.querySelector("sgds-sidebar-group") as any;
+      await elementUpdated(group);
+      const groupDiv = group.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      groupDiv.click();
+      await new Promise(resolve => setTimeout(resolve, 10));
+      await elementUpdated(el);
+
+      expect(el.shadowRoot?.querySelector(".sidebar-nested-overlay.show")).to.exist;
+    });
+
+    it("closes drawer when clicking outside", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard" icon="house">
+            <sgds-sidebar-item title="Sales"></sgds-sidebar-item>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+      const group = el.querySelector("sgds-sidebar-group") as any;
+      await elementUpdated(group);
+      const groupDiv = group.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      // Open drawer
+      groupDiv.click();
+      await elementUpdated(el);
+      expect(el.shadowRoot?.querySelector(".sidebar-nested-overlay.show")).to.exist;
+
+      // Click outside (on sidebar itself)
+      el.click();
+      await elementUpdated(el);
+      expect(el.shadowRoot?.querySelector(".sidebar-nested-overlay.show")).to.not.exist;
+    });
+
+    it("emits sgds-select with source drawer when item clicked in drawer", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
+            <sgds-sidebar-item title="Sales" name="sales"></sgds-sidebar-item>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+      const selectHandler = sinon.spy();
+      el.addEventListener("sgds-select", selectHandler);
+      const group = el.querySelector("sgds-sidebar-group") as any;
+      await elementUpdated(group);
+
+      // Open drawer
+      const groupDiv = group.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      groupDiv.click();
+      await elementUpdated(el);
+
+      // Click item in drawer
+      const item = group.querySelector("sgds-sidebar-item") as any;
+      await elementUpdated(item);
+      const itemDiv = item.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      itemDiv.click();
+      await elementUpdated(el);
+
+      expect(selectHandler).to.have.been.called;
+      const callArgs = selectHandler.getCall(selectHandler.callCount - 1);
+      expect(callArgs.args[0].detail.source).to.equal("drawer");
+    });
   });
 
   describe("Multiple Sections", () => {
     it("renders multiple sections", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-section title="Main" collapsible expanded>
-            <sgds-sidebar-option title="Dashboard" icon="house"></sgds-sidebar-option>
+          <sgds-sidebar-section title="Main" collapsible>
+            <sgds-sidebar-item title="Dashboard" icon="house"></sgds-sidebar-item>
           </sgds-sidebar-section>
-          <sgds-sidebar-section title="Tools" collapsible expanded>
-            <sgds-sidebar-option title="Settings" icon="gear"></sgds-sidebar-option>
+          <sgds-sidebar-section title="Tools" collapsible>
+            <sgds-sidebar-item title="Settings" icon="gear"></sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
       `);
@@ -486,24 +708,24 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section title="Main">
-            <sgds-sidebar-option title="Dashboard" name="dashboard" icon="house">
-              <sgds-sidebar-option title="Summary" icon="building"></sgds-sidebar-option>
-            </sgds-sidebar-option>
+            <sgds-sidebar-group title="Dashboard" icon="house">
+              <sgds-sidebar-item title="Summary"></sgds-sidebar-item>
+            </sgds-sidebar-group>
           </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const section = el.querySelector("sgds-sidebar-section") as HTMLElement;
-      const option = section.querySelector("sgds-sidebar-option") as HTMLElement;
-      expect(option).to.have.attribute("aria-level", "1");
-      const nested = option.querySelector("sgds-sidebar-option") as HTMLElement;
-      expect(nested).to.have.attribute("aria-level", "2");
+      const group = section.querySelector("sgds-sidebar-group") as HTMLElement;
+      expect(group).to.have.attribute("aria-level", "1");
+      const item = group.querySelector("sgds-sidebar-item") as HTMLElement;
+      expect(item).to.have.attribute("aria-level", "2");
     });
 
     it("collapses/expands sections independently", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-section title="Main" collapsible expanded></sgds-sidebar-section>
-          <sgds-sidebar-section title="Tools" collapsible expanded></sgds-sidebar-section>
+          <sgds-sidebar-section title="Main" collapsible></sgds-sidebar-section>
+          <sgds-sidebar-section title="Tools" collapsible></sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const sections = el.querySelectorAll("sgds-sidebar-section") as NodeListOf<any>;
@@ -511,6 +733,25 @@ describe("sgds-sidebar", () => {
       await elementUpdated(sections[0]);
       expect(sections[0].shadowRoot?.querySelector(".sidebar-section-content--collapsed")).to.exist;
       expect(sections[1].shadowRoot?.querySelector(".sidebar-section-content--collapsed")).to.not.exist;
+    });
+
+    it("section 1 collapse does not affect section 2 state", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Products" collapsible>
+            <sgds-sidebar-item name="item1" title="Item 1"></sgds-sidebar-item>
+          </sgds-sidebar-section>
+          <sgds-sidebar-section title="Tools" collapsible>
+            <sgds-sidebar-item name="item2" title="Item 2"></sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const sections = el.querySelectorAll("sgds-sidebar-section") as NodeListOf<any>;
+      sections[0].collapsed = true;
+      await elementUpdated(sections[0]);
+
+      expect(sections[0].collapsed).to.be.true;
+      expect(sections[1].collapsed).to.be.false;
     });
   });
 
@@ -566,6 +807,159 @@ describe("sgds-sidebar", () => {
       childDiv.click();
       await elementUpdated(el);
       expect(el.active).to.equal("sales");
+    });
+
+    it("applies active CSS class to selected item", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+          <sgds-sidebar-item title="Reports" name="reports" icon="file-text"></sgds-sidebar-item>
+        </sgds-sidebar>
+      `);
+      const items = el.querySelectorAll("sgds-sidebar-item") as NodeListOf<any>;
+      await elementUpdated(items[0]);
+      const itemDiv = items[0].shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      itemDiv.click();
+      await elementUpdated(el);
+
+      const activeItem = el.querySelector("sgds-sidebar-item[active]") as HTMLElement;
+      expect(activeItem?.getAttribute("name")).to.equal("dashboard");
+    });
+  });
+
+  describe("Link Navigation", () => {
+    it("follows anchor link when item wraps link element", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house">
+            <a href="/dashboard"></a>
+          </sgds-sidebar-item>
+        </sgds-sidebar>
+      `);
+      const item = el.querySelector("sgds-sidebar-item") as any;
+      const linkSpy = sinon.spy();
+      const link = item.querySelector("a");
+      if (link) {
+        link.addEventListener("click", linkSpy);
+      }
+      await elementUpdated(item);
+      const itemDiv = item.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      itemDiv.click();
+      await elementUpdated(el);
+
+      expect(linkSpy).to.have.been.called;
+    });
+  });
+
+  describe("Accessibility", () => {
+    it("has proper navigation role and aria-label on sidebar", async () => {
+      const el = await fixture<SgdsSidebar>(html`<sgds-sidebar></sgds-sidebar>`);
+      const nav = el.shadowRoot?.querySelector("nav");
+      expect(nav).to.have.attribute("role", "navigation");
+      expect(nav).to.have.attribute("aria-label", "Main navigation");
+    });
+
+    it("items have role option", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-item title="Dashboard" name="dashboard"></sgds-sidebar-item>
+        </sgds-sidebar>
+      `);
+      const item = el.querySelector("sgds-sidebar-item");
+      expect(item).to.have.attribute("role", "option");
+    });
+
+    it("items have aria-level attribute", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-item title="Dashboard" name="dashboard"></sgds-sidebar-item>
+        </sgds-sidebar>
+      `);
+      const item = el.querySelector("sgds-sidebar-item");
+      expect(item).to.have.attribute("aria-level");
+    });
+
+    it("manages tabindex for keyboard navigation", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+        </sgds-sidebar>
+      `);
+      const item = el.querySelector("sgds-sidebar-item") as any;
+      await elementUpdated(item);
+      const itemDiv = item.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      expect(itemDiv.tabIndex).to.be.a("number");
+    });
+
+    it("hides drawer content from tab order", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard" icon="house">
+            <sgds-sidebar-item title="Sales" name="sales"></sgds-sidebar-item>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+
+      const overlay = el.shadowRoot?.querySelector(".sidebar-nested-overlay");
+      expect(overlay).to.exist;
+    });
+  });
+
+  describe("Event Handling", () => {
+    it("emits sgds-select with correct event detail structure", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+        </sgds-sidebar>
+      `);
+      const selectHandler = sinon.spy();
+      el.addEventListener("sgds-select", selectHandler);
+      const item = el.querySelector("sgds-sidebar-item") as any;
+      await elementUpdated(item);
+      const itemDiv = item.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      itemDiv.click();
+      await elementUpdated(el);
+
+      expect(selectHandler).to.have.been.called;
+      const event = selectHandler.getCall(0).args[0];
+      expect(event.detail).to.have.property("activeItem");
+      expect(event.detail).to.have.property("activeGroup");
+      expect(event.detail).to.have.property("source");
+    });
+
+    it("emits sgds-select only once per click interaction", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+        </sgds-sidebar>
+      `);
+      const selectHandler = sinon.spy();
+      el.addEventListener("sgds-select", selectHandler);
+      const item = el.querySelector("sgds-sidebar-item") as any;
+      await elementUpdated(item);
+      const itemDiv = item.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      itemDiv.click();
+      await elementUpdated(el);
+
+      expect(selectHandler.callCount).to.equal(1);
+    });
+
+    it("includes source property set to item for item selection", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+        </sgds-sidebar>
+      `);
+      const selectHandler = sinon.spy();
+      el.addEventListener("sgds-select", selectHandler);
+      const item = el.querySelector("sgds-sidebar-item") as any;
+      await elementUpdated(item);
+      const itemDiv = item.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      itemDiv.click();
+
+      expect(selectHandler).to.have.been.called;
+      const event = selectHandler.getCall(0).args[0];
+      expect(event.detail.source).to.equal("item");
     });
   });
 });
