@@ -102,6 +102,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   /** Makes the input a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
+  /** Disables native and sgds validation for the input. */
   @property({ type: Boolean, reflect: true }) noValidate = false;
 
   /**The input's value attribute. */
@@ -173,7 +174,6 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
     this.value = this.input.value;
     const sgdsChange = this.emit("sgds-change", { cancelable: true });
 
-    if (this._mixinShouldSkipSgdsValidation()) return;
     if (sgdsChange.defaultPrevented) return;
 
     super._mixinHandleChange(e);
@@ -182,8 +182,8 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
     this.value = this.input.value;
     const sgdsInput = this.emit("sgds-input", { cancelable: true });
 
-    if (this._mixinShouldSkipSgdsValidation()) return;
     if (sgdsInput.defaultPrevented) return;
+
     super._mixinHandleInputChange(e);
   }
   /** @internal */
