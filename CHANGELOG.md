@@ -1,3 +1,13 @@
+## v3.12.0-rc.0 (2026-02-23)
+
+### Feat
+
+- **Textarea**: noValidate
+
+### Fix
+
+- **Form**: noValidate should not inhibit FormData
+
 ## v3.11.0 (2026-02-20)
 
 ### Feat
