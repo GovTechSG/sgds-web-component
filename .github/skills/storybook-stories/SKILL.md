@@ -1,13 +1,14 @@
 ---
-description: 'Guidelines for writing Storybook stories in the templates folder'
-applyTo: 'stories/templates/**'
+name: storybook-stories
+description: Writes Storybook stories following the templates folder pattern with automatic file concatenation. Use when creating or updating component stories in stories/templates/, organizing story variants, or documenting component usage in Storybook.
+metadata:
+  author: singapore-design-system
+  version: "1.0.0"
 ---
 
-# Storybook Story Writing Pattern
+# Storybook Stories Skill
 
-## Overview
-
-This document defines the standardized pattern for organizing and writing Storybook stories in the `stories/templates/` directory.
+Implements the standardized pattern for organizing and writing Storybook stories in the `stories/templates/` directory.
 
 ## File Structure Pattern
 
@@ -378,8 +379,12 @@ export const NoClampAction = {
 };
 ```
 
-## Related Documentation
+## Commands
 
-- [Token Workflow Skill](../.github/skills/token-workflow/SKILL.md) - For documentation patterns
-- [Markdown Standards](.github/instructions/dp.markdown-v1.instructions.md) - For MDX content formatting
-- [Copilot Instructions](.github/copilot-instructions.md) - General project conventions
+- **Storybook:** `pnpm run storybook` (preview stories)
+- **Build Stories:** `pnpm run build:storybook` (production build)
+
+## Related Skills
+
+- **token-workflow** - For documentation patterns
+- **tailwind-mapping** - For utility class documentation in stories
