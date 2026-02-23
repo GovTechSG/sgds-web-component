@@ -1,3 +1,9 @@
+## v3.11.0 (2026-02-20)
+
+### Feat
+
+- **icon**: update new icons
+
 ## v3.10.0 (2026-02-16)
 
 ### Feat
@@ -10,7 +16,6 @@
 - **utility**: basic utility setup:
 - **Table**: static table styles [run-chromatic]  (#537)
 - **SystemBanner**: noClampAction prop to make show more clamped action optional (#539)
-- **SystemBanner**: noClampAction prop to make show more action optional
 
 ## v3.9.0 (2026-02-03)
 
@@ -19,6 +24,7 @@
 - **Masthead, Mainnav, SystemBanner**: fluid prop to disable max-width [run-chromatic] (#540)
 - **Mainnav**: new fluid prop
 - **Masthead**: new fluid prop
+- **SystemBanner**: noClampAction prop to make show more action optional
 
 ### Fix
 
