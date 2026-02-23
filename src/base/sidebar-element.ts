@@ -2,7 +2,6 @@ import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { DropdownElement } from "./dropdown-element";
 import { PropertyValueMap } from "lit";
 import SgdsElement from "./sgds-element";
-import { watch } from "../utils/watch";
 import { consume } from "@lit/context";
 import {
   SidebarActiveGroup,
@@ -20,19 +19,25 @@ const ENTER = "Enter";
 /**
  * @summary Base class for sidebar navigation components.
  * Provides core functionality for sidebar items and groups including keyboard navigation,
- * selection state management, and nesting support.
+ * selection state management, and nesting support. This class manages hierarchical navigation,
+ * active state tracking, and drawer overlay coordination through context providers.
  *
  * Features:
- * - Keyboard navigation (Arrow keys, Enter)
- * - Active state management via context
+ * - Multi-level keyboard navigation (Arrow keys, Enter)
+ * - Active state management via Lit context subscription
  * - Support for nested hierarchies up to 3 levels deep
- * - Focus management and ARIA attributes
- * - Event emission for sidebar coordination
+ * - Focus management and full ARIA attribute support
+ * - Event emission for sidebar coordination (i-sgds-click)
+ * - Automatic child element tracking and nesting level detection
  *
  * Keyboard Navigation:
  * - Arrow Up/Down: Navigate between siblings in the same level
  * - Arrow Left/Right: Navigate hierarchically (collapse/expand or move in drawer)
- * - Enter: Activate focused item or group
+ * - Enter: Activate focused item or toggle group
+ *
+ * Context Management:
+ * - Consumes: SidebarCollapsed, SidebarActiveItem, SidebarActiveGroup, SidebarDrawerItems
+ * - Updates state based on context changes for responsive UI updates
  *
  * @internal
  */
@@ -66,7 +71,7 @@ export class SidebarElement extends SgdsElement {
   /** @internal */
   @consume({ context: SidebarActiveItem, subscribe: true })
   @state()
-  _sidebarActiveItem = "";
+  _sidebarActiveItem: SidebarElement | null = null;
 
   /** @internal */
   @consume({ context: SidebarActiveGroup, subscribe: true })
@@ -101,11 +106,15 @@ export class SidebarElement extends SgdsElement {
   _childElements: SidebarElement[] = [];
 
   /** @internal */
+  @state() _childActive = false;
+
+  /** @internal */
   @queryAssignedElements({ flatten: false })
   private _defaultNodes!: SidebarElement[];
 
   connectedCallback() {
     super.connectedCallback();
+    this.getChildLevel();
     this.setAttribute("role", "option");
     this.setAttribute("aria-label", this.title || this.name);
     this.addEventListener("keydown", this._handleKeyDown);
@@ -124,11 +133,6 @@ export class SidebarElement extends SgdsElement {
   updated() {
     if (this._childLevel === 1) {
       this._hidden = !this.closest(".sidebar-nested-overlay");
-    } else if (this._childLevel > 1) {
-      const parentShadowRoot = this.parentElement?.shadowRoot;
-      this._hidden = !parentShadowRoot?.querySelector(".sidebar-submenu.show");
-    } else {
-      this._hidden = false;
     }
   }
 
@@ -148,8 +152,7 @@ export class SidebarElement extends SgdsElement {
    * @param {SidebarElement} [element] - Optional element parameter (for keyboard compatibility)
    * @returns {void}
    */
-  _handleClick(element?: SidebarElement) {
-    if (element && element !== this) return;
+  _handleClick() {
     this.emit("i-sgds-click", { detail: { element: this, level: this._childLevel } });
   }
 
@@ -259,6 +262,7 @@ export class SidebarElement extends SgdsElement {
       currentEle = currentEle.parentElement;
     }
 
-    this._childLevel = level;
+    const isInDrawer = currentEle.classList.contains("sidebar-nested-overlay");
+    this._childLevel = isInDrawer ? level + 1 : level;
   }
 }

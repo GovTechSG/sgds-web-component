@@ -3,7 +3,6 @@ import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import sidebarOptionStyle from "./sidebar-item.css";
-import { watch } from "../../utils/watch";
 import SgdsIcon from "../Icon/sgds-icon";
 
 import { SidebarElement } from "../../base/sidebar-element";
@@ -40,75 +39,21 @@ export class SgdsSidebarGroup extends SidebarElement {
   @property({ type: String, reflect: true }) icon = "placeholder";
 
   /**
-   * Stores the currently selected nested level option.
-   * Used to manage submenu visibility.
-   * @type {SgdsSidebarItem}
+   * Manages submenu visibility state for nested groups.
+   * When true, the submenu is displayed showing nested children.
+   * When false, the submenu is hidden.
+   * Only used for nested groups (level 1+). Root-level groups use drawer overlay instead.
    * @internal
    */
-  @state() private activeNestedGroup: SgdsSidebarGroup;
-
-  /**
-   * Lifecycle method called when the component is inserted into the DOM.
-   * Sets up ARIA attributes, initializes state watchers, and attaches event listeners.
-   * @internal
-   */
-
-  @watch("_sidebarActiveItem")
-  _handleActive() {
-    if (this._sidebarActiveGroup === this) {
-      this._selected = true;
-    } else {
-      if (this.parentElement.tagName.toLowerCase() !== "sgds-sidebar-group") {
-        // first level of group
-        this._selected = false;
-      } else {
-        this._selected = this._sidebarActiveItem === this.name && this.name !== "";
-      }
-    }
-  }
+  @state() showMenu: boolean;
 
   /** @internal */
-  @watch("_selected")
-  _handleSelected() {
-    if (this._selected) {
-      // set parent to be selected
-      const parent = this.parentElement as SidebarElement;
-      if (parent.tagName.toLowerCase() === "sgds-sidebar-group") {
-        this.activeNestedGroup = this;
-        parent._selected = true;
-      } else {
-        if (!this._sidebarActiveGroup) {
-          this.emit("i-sgds-sidebar-open-drawer", { detail: { element: this } });
-        }
-      }
-    }
-  }
-
-  /**
-   * Handles click/activation events on the sidebar option.
-   * Behavior varies by nesting level:
-   * - Level 0 with nested items: Opens drawer overlay to show nested content
-   * - Level 1+: Toggles submenu visibility
-   * - Always: Emits custom events for parent sidebar to handle selection and navigation
-   * @private
-   * @param {SgdsSidebarItem} [element] - Optional element parameter (for keyboard compatibility)
-   *
-   */
-  override _handleClick(element?: SgdsSidebarGroup) {
-    if (element && element !== this) return;
-
-    if (this._childLevel === 0 && this._childElements.length > 0) {
-      this.emit("i-sgds-sidebar-open-drawer", { detail: { element: this, selected: true } });
+  _handleClick(): void {
+    if (this._childLevel !== 0) {
+      this.showMenu = !this.showMenu;
+      this._childElements.forEach(v => (v._hidden = !this.showMenu));
     } else {
-      this.activeNestedGroup = this.activeNestedGroup ? null : this;
-      this._selected = !!this.activeNestedGroup;
-
-      this._childElements.forEach(v => {
-        const ele = v as SidebarElement;
-        ele._hidden = !this._selected;
-      });
-
-      this.emit("i-sgds-click", { detail: { element: this, level: this._childLevel } });
+      super._handleClick();
     }
   }
   /**
@@ -116,7 +61,7 @@ export class SgdsSidebarGroup extends SidebarElement {
    * Icon changes indicate expandable/expandable state to users:
    * - Level 0: chevron-right (expanded) or chevron-left (collapsed)
    * - Level 1+: chevron-down (expanded) or chevron-up (collapsed)
-   * Used for visual feedback on nested navigation options.
+   * Used for visual feedback on nested navigation items.
    * @private
    * @returns {string} The icon name to display (e.g., 'chevron-right', 'chevron-down')
    */
@@ -124,7 +69,7 @@ export class SgdsSidebarGroup extends SidebarElement {
     if (this._childLevel === 0) {
       return "chevron-right";
     } else {
-      return this.activeNestedGroup ? "chevron-down" : "chevron-up";
+      return this.showMenu ? "chevron-down" : "chevron-up";
     }
   }
 
@@ -138,10 +83,9 @@ export class SgdsSidebarGroup extends SidebarElement {
         })}
         @click=${() => this._handleClick()}
         aria-level=${this._childLevel}
-        aria-expanded=${this._childElements ? !!this.activeNestedGroup : "false"}
+        .aria-expanded=${this.showMenu}
         aria-label=${this.title || this.name}
-        ?hidden=${this._hidden}
-        tabindex=${this._hidden ? "-1" : "0"}
+        tabindex=${this._childLevel > 1 && !this.showMenu ? -1 : 0}
       >
         <div class="sidebar-item-label-wrapper">
           <div>
@@ -158,7 +102,7 @@ export class SgdsSidebarGroup extends SidebarElement {
       <div
         class=${classMap({
           "sidebar-submenu": true,
-          show: !!this.activeNestedGroup && this._childLevel !== 0
+          show: this.showMenu
         })}
       >
         <div>

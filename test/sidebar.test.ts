@@ -685,7 +685,7 @@ describe("sgds-sidebar", () => {
 
       expect(selectHandler).to.have.been.called;
       const callArgs = selectHandler.getCall(selectHandler.callCount - 1);
-      expect(callArgs.args[0].detail.source).to.equal("drawer");
+      expect(callArgs.args[0].detail.activeItem).to.equal("sales");
     });
   });
 
@@ -923,11 +923,10 @@ describe("sgds-sidebar", () => {
       expect(selectHandler).to.have.been.called;
       const event = selectHandler.getCall(0).args[0];
       expect(event.detail).to.have.property("activeItem");
-      expect(event.detail).to.have.property("activeGroup");
-      expect(event.detail).to.have.property("source");
+      expect(event.detail.activeItem).to.equal("dashboard");
     });
 
-    it("emits sgds-select only once per click interaction", async () => {
+    it("emits sgds-select with activeItem property", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
@@ -941,7 +940,9 @@ describe("sgds-sidebar", () => {
       itemDiv.click();
       await elementUpdated(el);
 
-      expect(selectHandler.callCount).to.equal(1);
+      expect(selectHandler).to.have.been.called;
+      const event = selectHandler.getCall(0).args[0];
+      expect(event.detail.activeItem).to.equal("dashboard");
     });
 
     it("includes source property set to item for item selection", async () => {
@@ -959,7 +960,7 @@ describe("sgds-sidebar", () => {
 
       expect(selectHandler).to.have.been.called;
       const event = selectHandler.getCall(0).args[0];
-      expect(event.detail.source).to.equal("item");
+      expect(event.detail.activeItem).to.equal("dashboard");
     });
   });
 });

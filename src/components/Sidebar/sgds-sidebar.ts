@@ -8,29 +8,31 @@ import { provide } from "@lit/context";
 import { SidebarCollapsed, SidebarActiveItem, SidebarActiveGroup, SidebarDrawerItems } from "./sidebar-context";
 import { watch } from "../../utils/watch";
 import { SidebarElement } from "../../base/sidebar-element";
+import SgdsSidebarGroup from "./sgds-sidebar-group";
 
 /**
- * @summary Sidebar is a collapsible navigation component that displays menu items and options.
- * Users can expand and collapse the sidebar to save screen space. The sidebar coordinates
- * selection and navigation across nested items using context providers and custom events.
+ * @summary Sidebar is a collapsible navigation component that displays menu items and groups.
+ * Users can expand and collapse the sidebar to save screen space while navigating through organized menu items.
+ * The sidebar coordinates selection and navigation across nested items using context providers and custom events.
  *
  * Features:
- * - Collapsible state for space-saving layouts
- * - Multi-level nesting with drawer overlay for level 0 items
- * - Keyboard navigation with full ARIA support
- * - Programmatic link navigation support
+ * - Collapsible state for space-saving layouts with icon-only mode
+ * - Multi-level nesting (up to 3 levels) with drawer overlay for root-level groups
+ * - Keyboard navigation with full ARIA support for accessibility
+ * - Programmatic link navigation support with anchor elements
+ * - Active item tracking and synchronized state management
  *
  * Keyboard Navigation:
- * - Arrow Up/Down: Navigate between all first-level sidebar items and groups
- * - Arrow Left/Right: Collapse/expand items or navigate in drawer
- * - Enter: Activate the focused item or group
- * - Tab: Navigate to interactive elements (standard focus management)
+ * - Arrow Up/Down: Navigate between sidebar items and groups
+ * - Arrow Left/Right: Collapse/expand groups or navigate drawer overlays
+ * - Enter/Space: Activate focused item or toggle group
+ * - Tab: Standard focus management to interactive elements
  *
  * @slot - Insert sgds-sidebar-item, sgds-sidebar-group, and sgds-sidebar-section elements
  * @slot brandName - Insert brand/logo content in sidebar header
  *
  * @fires sgds-select - Emitted when a sidebar item or group is selected.
- *   Detail object: { activeItem: string, activeGroup: string | null, source: "item" | "drawer" }
+ *   Event detail: { activeItem: string } - name of the selected item
  *
  */
 export class SgdsSidebar extends SgdsElement {
@@ -71,7 +73,7 @@ export class SgdsSidebar extends SgdsElement {
   /** @internal */
   @provide({ context: SidebarActiveItem })
   @state()
-  private _sidebarActiveItem = "";
+  private _sidebarActiveItem = null;
 
   /** @internal */
   @provide({ context: SidebarDrawerItems })
@@ -82,7 +84,7 @@ export class SgdsSidebar extends SgdsElement {
     super.connectedCallback();
     this.setAttribute("role", "navigation");
     this.setAttribute("aria-label", "Main navigation");
-    this.addOptionListeners();
+    this.addItemListeners();
     document.addEventListener("click", this._handleClickOutOfElement);
   }
 
@@ -98,40 +100,65 @@ export class SgdsSidebar extends SgdsElement {
 
   @watch("active")
   _handleActive() {
-    this._sidebarActiveItem = this.active;
-  }
+    // finding active element in both shadowRoot and sidebar root
+    const activeElement = this?.querySelector(`[name=${this.active}]`);
+    const activeShadowElement = this?.shadowRoot?.querySelector(`[name=${this.active}]`);
+    this._sidebarActiveItem = (activeElement || activeShadowElement) as SidebarElement;
 
-  /**
-   * Manages the drawer overlay content based on the selected parent option.
-   * If element is provided: Opens drawer for that element's children.
-   * If element is undefined: Closes drawer and reverts items to their parent.
-   * @private
-   * @param {SidebarElement} [element] - The parent option to display in drawer. Undefined closes drawer.
-   * @returns {void}
-   */
-  private _setNodesToDrawer(element?: SidebarElement) {
-    if (this._sidebarActiveGroup) {
-      // when there is element, we will revert the nodes of the previous active group before setting new value into the active group
-      if (element) {
-        this._revertNodesToParent(this._sidebarActiveGroup);
-        this._sidebarActiveGroup = element;
+    if (this._sidebarActiveItem) {
+      this._sidebarActiveItem._selected = true;
+
+      if (this._sidebarActiveItem._childLevel > 0) {
+        let parentEle = this._sidebarActiveItem.parentElement as SgdsSidebarGroup;
+
+        while (parentEle._childLevel > 0) {
+          parentEle._selected = true;
+
+          // when in drawer, we need to open the menu
+          parentEle.showMenu = parentEle._childLevel >= 1;
+          parentEle = parentEle.parentElement as SgdsSidebarGroup;
+        }
+
+        if (!this._sidebarActiveGroup) {
+          this._setNodesToDrawer(parentEle);
+        } else {
+          this._sidebarActiveGroup._selected = true;
+        }
       }
-
-      // when there is an active group set, always set new menu items
-      const menuItems = this._sidebarActiveGroup.querySelectorAll(":scope > *");
-      this._drawerItems = []; // always set to empty to prevent duplicate
-      menuItems.forEach(e => {
-        this._drawerItems.push(e);
-      });
     }
   }
 
   /**
-   * Reverts nested options back to their original parent element.
-   * Clears the drawer overlay content and updates selected attributes.
-   * Called when closing the drawer or switching to a different parent option.
+   * Manages the drawer overlay content based on the selected parent item.
+   * If element is provided: Opens drawer for that element's children.
+   * If element is undefined: Closes drawer and reverts items to their parent.
    * @private
-   * @param {SgdsSidebarItem} element - The parent option to return nodes to
+   * @param {SidebarElement} [element] - The parent item to display in drawer. Undefined closes drawer.
+   * @returns {void}
+   */
+  private _setNodesToDrawer(element: SidebarElement) {
+    // when there is element, we will revert the nodes of the previous active group before setting new value into the active group
+    if (this._sidebarActiveGroup && element !== this._sidebarActiveGroup) {
+      this._revertNodesToParent(this._sidebarActiveGroup);
+    }
+
+    this._sidebarActiveGroup = element;
+    this._sidebarActiveGroup._selected = true;
+
+    // when there is an active group set, always set new menu items
+    this._drawerItems = []; // always set to empty to prevent duplicate
+    const menuItems = this._sidebarActiveGroup.querySelectorAll(":scope > *");
+    menuItems.forEach(e => {
+      this._drawerItems.push(e);
+    });
+  }
+
+  /**
+   * Reverts nested items back to their original parent element.
+   * Clears the drawer overlay content and updates selected attributes.
+   * Called when closing the drawer or switching to a different parent item.
+   * @private
+   * @param {SgdsSidebarItem} element - The parent item to return nodes to
    * @returns {void}
    */
   private _revertNodesToParent(element: SidebarElement | null) {
@@ -144,75 +171,48 @@ export class SgdsSidebar extends SgdsElement {
   }
 
   /**
-   * Attaches event listeners to all direct child sidebar options.
-   * Handles option selection events and drawer overlay state management.
+   * Attaches event listeners to all direct child sidebar items.
+   * Handles item selection events and drawer overlay state management.
    * Manages emitting sgds-select custom events for external components.
    * @private
    * @returns {void}
    */
-  private addOptionListeners() {
-    const options = this.querySelectorAll("sgds-sidebar-item");
+  private addItemListeners() {
+    const items = this.querySelectorAll("sgds-sidebar-item");
     const groups = this.querySelectorAll("sgds-sidebar-group");
+    const allItems = [...items, ...groups];
 
-    [...options, ...groups].forEach(option => {
-      option.addEventListener("i-sgds-click", (e: CustomEvent) => {
-        const element = e.detail.element;
-
-        if (e.detail.level === 0) {
-          this.closeDrawer();
-        }
-
-        this._sidebarActiveItem = element.name;
-        this.emit("sgds-select", {
-          detail: {
-            activeItem: element.name,
-            activeGroup: null,
-            source: "item"
-          }
-        });
-
-        // when there is achorlink we will trigger click to redirect and allow user to handle the navigation themselves
-        const anchorLink = option.querySelector(":scope > a") as HTMLAnchorElement;
-        if (anchorLink) anchorLink.click();
-      });
-    });
-
-    groups.forEach(group => {
-      group.addEventListener("i-sgds-sidebar-open-drawer", (e: CustomEvent) => {
+    allItems.forEach(item => {
+      item.addEventListener("i-sgds-click", (e: CustomEvent) => {
         const element = e.detail.element as SidebarElement;
-        if (!this._sidebarActiveGroup) {
-          // when current selected is empty, means drawer is not opened.
-          this._sidebarActiveGroup = element;
+        const childLevel = e.detail.level;
+
+        if (element.name === this._sidebarActiveItem?.name && this._sidebarActiveItem !== this._sidebarActiveGroup)
+          return;
+
+        allItems.forEach(v => ((v as SidebarElement)._selected = false));
+
+        if (element === this._sidebarActiveGroup) {
+          // when same we close drawer
+          this.closeDrawer();
+          return;
         } else {
-          if (this._sidebarActiveGroup === element) {
-            this.closeDrawer();
+          if (element._childElements.length == 0) {
+            // when it is not nested item
+            if (childLevel === 0) this.closeDrawer();
+
+            // when there is anchorLink we will trigger click to redirect and allow user to handle the navigation themselves
+            const anchorLink = item.querySelector(":scope > a") as HTMLAnchorElement;
+            if (anchorLink) anchorLink.click();
+          } else {
+            // has children we will render
+            if (childLevel === 0) this._setNodesToDrawer(element);
           }
-        }
 
-        // setting nodes
-        this._setNodesToDrawer(this._sidebarActiveGroup !== element ? element : undefined);
-
-        if (e.detail.selected) {
-          this._sidebarActiveItem = element.name;
+          this.active = element.name || "";
           this.emit("sgds-select", {
-            detail: {
-              activeItem: element.name,
-              activeGroup: element.name,
-              source: "drawer"
-            }
+            detail: { activeItem: element.name || "" }
           });
-        }
-
-        // Auto-focus first drawer item for keyboard accessibility
-        if (this._drawerItems?.length > 0) {
-          setTimeout(() => {
-            const activeItem = this._sidebarActiveItem
-              ? this.shadowRoot.querySelectorAll(`[name=${this._sidebarActiveItem}]`)
-              : [];
-            const item = activeItem[0] || this._drawerItems[0];
-            const focusItem = item?.shadowRoot?.querySelector("[tabindex]") as HTMLElement | null;
-            focusItem?.focus();
-          }, 0);
         }
       });
     });
@@ -232,7 +232,7 @@ export class SgdsSidebar extends SgdsElement {
   private closeDrawer() {
     this._revertNodesToParent(this._sidebarActiveGroup);
     this._sidebarActiveGroup = null;
-    this._sidebarActiveItem = "";
+    this._sidebarActiveItem = null;
   }
 
   private _handleClickOutOfElement = (e: MouseEvent) => {
@@ -269,7 +269,9 @@ export class SgdsSidebar extends SgdsElement {
             ></sgds-icon-button>
           </div>
 
-          <nav class="sidebar-content" aria-label="Navigation menu" aria-activedescendant=${this._sidebarActiveItem}>
+          <nav class="sidebar-content" aria-label="Navigation menu" aria-activedescendant=${
+            this._sidebarActiveItem?.name || ""
+          }>
             <slot></slot>
           </nav>
         </div>
@@ -280,7 +282,7 @@ export class SgdsSidebar extends SgdsElement {
               show: this._sidebarActiveGroup !== null
             })}
             role="dialog"
-            aria-label=${this._sidebarActiveGroup?.title ? `Nested options for ${this._sidebarActiveGroup.title}` : ""}
+            aria-label=${this._sidebarActiveGroup?.title ? `Nested items for ${this._sidebarActiveGroup.title}` : ""}
           >
             ${this._drawerItems}
           </div>

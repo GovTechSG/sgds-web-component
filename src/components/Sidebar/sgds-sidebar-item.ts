@@ -7,10 +7,9 @@ import sidebarOptionStyle from "./sidebar-item.css";
 import SgdsIcon from "../Icon/sgds-icon";
 
 import { SidebarElement } from "../../base/sidebar-element";
-import { watch } from "../../utils/watch";
 
 /**
- * @summary Sidebar item is a selectable navigation option within the sidebar component.
+ * @summary Sidebar item is a selectable navigation item within the sidebar component.
  * It can be used as a terminal leaf node in the navigation hierarchy (does not support nested children).
  * Items can optionally wrap anchor links for programmatic navigation to external URLs or routes.
  *
@@ -37,21 +36,6 @@ export class SgdsSidebarItem extends SidebarElement {
    */
   @property({ type: String, reflect: true }) icon = "";
 
-  /**
-   * Watches the active item context and updates selection state.
-   * @internal
-   * @returns {void}
-   */
-  @watch("_sidebarActiveItem")
-  _handleActive() {
-    this._selected = this._sidebarActiveItem === this.name && this.name !== "";
-
-    if (this._selected) {
-      const parent = this.parentElement as SidebarElement;
-      if (parent) parent._selected = true;
-    }
-  }
-
   render() {
     return html`
       <div
@@ -61,11 +45,10 @@ export class SgdsSidebarItem extends SidebarElement {
           active: this._selected
         })}
         @click=${() => this._handleClick()}
-        aria-level=${this._childLevel + 1}
+        aria-level=${this._childLevel}
         aria-label=${this.title || this.name}
         name=${this.name}
-        ?hidden=${this._hidden}
-        tabindex=${this._hidden ? "-1" : "0"}
+        tabindex=${this._hidden ? -1 : 0}
         role="button"
       >
         <div class="sidebar-item-label-wrapper">

@@ -3,30 +3,36 @@ import { SidebarElement } from "../../base/sidebar-element";
 
 /**
  * Context providing the currently active sidebar group (parent with nested children).
- * Consumed by all sidebar child elements to determine visibility and state.
+ * Stores the SidebarElement instance of the group whose drawer overlay is currently open.
+ * Used to manage drawer visibility and determine which nested items to display.
  * Value is null when no group drawer is open.
  * @type {SidebarElement | null}
  */
 export const SidebarActiveGroup = createContext<SidebarElement | null>("sidebar-active-group");
 
 /**
- * Context providing the name of the currently selected/active sidebar item.
- * Consumed by all sidebar child elements for styling and state management.
- * @type {string}
+ * Context providing the currently selected/active sidebar item element.
+ * Stores the SidebarElement instance that is currently marked as active/selected.
+ * Used to highlight and visually emphasize the selected navigation item.
+ * Value is null when no item is selected.
+ * @type {SidebarElement | null}
  */
-export const SidebarActiveItem = createContext<string>("sidebar-active");
+export const SidebarActiveItem = createContext<SidebarElement | null>("sidebar-active");
 
 /**
  * Context indicating whether the sidebar is in collapsed (icon-only) state.
- * When true, sidebar shows only icons and tooltips; when false, shows full labels.
- * Consumed by all sidebar child elements to adjust their layout.
+ * When true, sidebar displays only icons and uses tooltips for labels.
+ * When false, sidebar displays full labels alongside icons.
+ * Consumed by all sidebar child elements to adjust their layout and styling accordingly.
  * @type {boolean}
  */
 export const SidebarCollapsed = createContext<boolean>("sidebar-collapsed");
 
 /**
  * Context providing the array of drawer items currently displayed in the sidebar overlay.
- * Updated when group drawers open/close to show nested children.
+ * Contains the child elements of the active group that are rendered in the drawer.
+ * Updated when group drawers open/close to show/hide nested children.
+ * Empty array when no drawer is open.
  * @type {SidebarElement[]}
  */
 export const SidebarDrawerItems = createContext<SidebarElement[]>("sidebar-drawer-items");
