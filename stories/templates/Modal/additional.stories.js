@@ -73,6 +73,35 @@ const closeModal = () => {
   const modal = document.querySelector("#no-animation-modal");
   modal.hide();
 };
+
+export const PreventCloseTemplate = args => {
+  return html`
+    <sgds-modal id="prevent-close-modal" open=${true}>
+      <h2 slot="title">Prevent Close Example</h2>
+      <p slot="description">This modal cannot be closed by clicking the close button, overlay, or pressing Escape</p>
+      <p>
+        The <code>sgds-close</code> event is cancelable. By calling <code>event.preventDefault()</code>, you can prevent
+        the modal from closing. Try clicking the close button, overlay, or pressing Escape - an alert will show the
+        trigger source instead of closing.
+      </p>
+      <p>
+        This is useful for scenarios where you need to validate user input or confirm an action before allowing the
+        modal to close.
+      </p>
+      <sgds-button slot="footer" variant="primary">Cannot Close Modal</sgds-button>
+    </sgds-modal>
+
+    <script>
+      const modal = document.querySelector("#prevent-close-modal");
+
+      modal.addEventListener("sgds-close", e => {
+        e.preventDefault();
+        alert("Modal closing has been prevented! Check the source: " + e.detail.source);
+      });
+    </script>
+  `;
+};
+
 export const SmallSize = {
   render: SizeTemplate.bind({}),
   name: "Small size",
@@ -164,5 +193,20 @@ export const noAnimation = {
         height: "700px"
       }
     }
+  }
+};
+
+export const PreventClose = {
+  render: PreventCloseTemplate.bind({}),
+  name: "Prevent close",
+  args: {},
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      story: {
+        height: "700px"
+      }
+    },
+    chromatic: { disableSnapshot: true }
   }
 };
