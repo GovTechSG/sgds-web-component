@@ -245,3 +245,195 @@ describe("Validaiton", () => {
     expect(textarea?.invalid).to.be.false;
   });
 });
+
+describe("noValidate disables native and sgds validation behaviours", () => {
+  it("should disable native validation when textarea has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-textarea noValidate></sgds-textarea>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    button?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it("should override required prop and disable native validation when textarea has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-textarea noValidate required></sgds-textarea>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    button?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it("should override minlength prop and disable native validation when textarea has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-textarea noValidate minlength="10"></sgds-textarea>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const textarea = form.querySelector<SgdsTextarea>("sgds-textarea");
+    if (textarea) textarea.value = "short";
+    await textarea?.updateComplete;
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    button?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it("with noValidate, feedback UI does not appear for a required textarea when touched", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-textarea noValidate hasFeedback required></sgds-textarea>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const textarea = form.querySelector<SgdsTextarea>("sgds-textarea");
+    textarea?.focus();
+    textarea?.blur();
+    await textarea?.updateComplete;
+    expect(textarea?.invalid).to.be.false;
+    expect(textarea?.shadowRoot?.querySelector("div.invalid-feedback")).to.be.null;
+  });
+
+  it("should still populate FormData when noValidate is enabled", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-textarea noValidate name="test-field" value="test-value"></sgds-textarea>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const textarea = form.querySelector<SgdsTextarea>("sgds-textarea");
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      expect(formData.get("test-field")).to.equal("test-value");
+    });
+
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it("should update FormData when textarea value changes with noValidate enabled", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-textarea noValidate name="test-field" value="initial"></sgds-textarea>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const textarea = form.querySelector<SgdsTextarea>("sgds-textarea");
+
+    if (textarea) textarea.value = "updated-value";
+    await textarea?.updateComplete;
+
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy(async (event: SubmitEvent) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      await waitUntil(() => expect(formData.get("test-field")).to.equal("updated-value"));
+    });
+
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+});
+
+describe("form novalidate", () => {
+  it("when form has novalidate, form submission proceeds even when textarea is required", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-textarea required></sgds-textarea>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    expect(form.reportValidity()).to.equal(true);
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it("when form has novalidate, textarea does not have any validation stylings", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-textarea required hasFeedback></sgds-textarea>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const textarea = form.querySelector<SgdsTextarea>("sgds-textarea");
+    textarea?.focus();
+    textarea?.blur();
+    await textarea?.updateComplete;
+    expect(textarea?.invalid).to.be.false;
+    expect(textarea?.shadowRoot?.querySelector("div.invalid-feedback")).to.be.null;
+  });
+
+  it("should still populate FormData when form has novalidate attribute", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-textarea name="test-field" value="test-value"></sgds-textarea>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      expect(formData.get("test-field")).to.equal("test-value");
+    });
+
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it("should update FormData when textarea value changes with form novalidate attribute", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-textarea name="test-field" value="initial"></sgds-textarea>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const textarea = form.querySelector<SgdsTextarea>("sgds-textarea");
+
+    if (textarea) textarea.value = "updated-value";
+    await textarea?.updateComplete;
+
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy(async (event: SubmitEvent) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      await waitUntil(() => expect(formData.get("test-field")).to.equal("updated-value"));
+    });
+
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+});
