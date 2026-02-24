@@ -266,7 +266,7 @@
   --font-weight-semibold: var(--sgds-font-weight-semibold);
   --font-weight-bold: var(--sgds-font-weight-bold);
 
-  /* Font Size */
+  /* Font Size - Primitive */
   --text-0: var(--sgds-font-size-0);
   --text-1: var(--sgds-font-size-1);
   --text-2: var(--sgds-font-size-2);
@@ -277,6 +277,26 @@
   --text-7: var(--sgds-font-size-7);
   --text-8: var(--sgds-font-size-8);
   --text-9: var(--sgds-font-size-9);
+
+  /* Font Size - Semantic Responsive */
+  --text-display-sm: var(--sgds-font-size-display-sm);
+  --text-display-md: var(--sgds-font-size-display-md);
+  --text-display-lg: var(--sgds-font-size-display-lg);
+  --text-heading-sm: var(--sgds-font-size-heading-sm);
+  --text-heading-md: var(--sgds-font-size-heading-md);
+  --text-heading-lg: var(--sgds-font-size-heading-lg);
+  --text-heading-xl: var(--sgds-font-size-heading-xl);
+  --text-subtitle-sm: var(--sgds-font-size-subtitle-sm);
+  --text-subtitle-md: var(--sgds-font-size-subtitle-md);
+  --text-body-sm: var(--sgds-font-size-body-sm);
+  --text-body-md: var(--sgds-font-size-body-md);
+  --text-body-lg: var(--sgds-font-size-body-lg);
+  --text-label-xs: var(--sgds-font-size-label-xs);
+  --text-label-sm: var(--sgds-font-size-label-sm);
+  --text-label-md: var(--sgds-font-size-label-md);
+  --text-label-lg: var(--sgds-font-size-label-lg);
+  --text-caption-md: var(--sgds-font-size-caption-md);
+  --text-overline-md: var(--sgds-font-size-overline-md);
 
   /* Letter Spacing */
   --tracking-tighter: var(--sgds-letter-spacing-tighter);
