@@ -87,6 +87,7 @@ slot[name="action"]::slotted(a) {
   .banner-item__message_and__action {
     flex-direction: row;
     gap: var(--sgds-gap-sm);
+    align-items: center;
   }
   .action {
     margin-top: 0;
