@@ -184,7 +184,11 @@ const FontSizeTableRow = item => {
   `;
 };
 
-const ResponsiveFontSizeTableRow = item => {
+const ResponsiveFontSizeTableRow = (item, customPreview) => {
+  const preview = customPreview
+    ? customPreview(item)
+    : html`<div class="${item.class}">${item.name}</div>`;
+
   return html`
     <sgds-table-row>
       <sgds-table-cell>
@@ -212,7 +216,7 @@ const ResponsiveFontSizeTableRow = item => {
         >
       </sgds-table-cell>
       <sgds-table-cell>
-        <div class="${item.class}">${item.name}</div>
+        ${preview}
       </sgds-table-cell>
     </sgds-table-row>
   `;
@@ -291,42 +295,17 @@ export const CaptionSizes = () => html`
       <sgds-table-head>Sizes (Mobile / Tablet / Desktop)</sgds-table-head>
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
-    ${RESPONSIVE_FONT_SIZES.caption.map(
-      item => html`
-        <sgds-table-row>
-          <sgds-table-cell>
-            <div class="sgds:flex sgds:items-center sgds:gap-xs">
-              <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-                >${item.class}</code
-              >
-              <button
-                class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
-                @click="${e => copyToClipboard(item.class, e.target.closest("button"))}"
-                aria-label="Copy token"
-              >
-                <sgds-icon name="files"></sgds-icon>
-              </button>
-            </div>
-          </sgds-table-cell>
-          <sgds-table-cell>
-            <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-              >${item.variable}</code
-            >
-          </sgds-table-cell>
-          <sgds-table-cell>
-            <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-              >${item.responsive}</code
-            >
-          </sgds-table-cell>
-          <sgds-table-cell>
-            <table class="sgds:border-0">
-              <caption class="${item.class}">
-                ${item.name}
-              </caption>
-            </table>
-          </sgds-table-cell>
-        </sgds-table-row>
-      `
+    ${RESPONSIVE_FONT_SIZES.caption.map(item =>
+      ResponsiveFontSizeTableRow(
+        item,
+        item => html`
+          <table class="sgds:border-0">
+            <caption class="${item.class}">
+              ${item.name}
+            </caption>
+          </table>
+        `
+      )
     )}
   </sgds-table>
 `;
@@ -339,7 +318,12 @@ export const OverlineSizes = () => html`
       <sgds-table-head>Sizes (Mobile / Tablet / Desktop)</sgds-table-head>
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
-    ${RESPONSIVE_FONT_SIZES.overline.map(item => ResponsiveFontSizeTableRow(item))}
+    ${RESPONSIVE_FONT_SIZES.overline.map(item =>
+      ResponsiveFontSizeTableRow(
+        item,
+        item => html`<div class="${item.class} sgds:uppercase">${item.name}</div>`
+      )
+    )}
   </sgds-table>
 `;
 
