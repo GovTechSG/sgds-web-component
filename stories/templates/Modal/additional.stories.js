@@ -207,6 +207,6 @@ export const PreventClose = {
       story: {
         height: "700px"
       }
-    },
+    }
   }
 };

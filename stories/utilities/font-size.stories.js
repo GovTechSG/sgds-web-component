@@ -185,9 +185,7 @@ const FontSizeTableRow = item => {
 };
 
 const ResponsiveFontSizeTableRow = (item, customPreview) => {
-  const preview = customPreview
-    ? customPreview(item)
-    : html`<div class="${item.class}">${item.name}</div>`;
+  const preview = customPreview ? customPreview(item) : html`<div class="${item.class}">${item.name}</div>`;
 
   return html`
     <sgds-table-row>
@@ -215,9 +213,7 @@ const ResponsiveFontSizeTableRow = (item, customPreview) => {
           >${item.responsive}</code
         >
       </sgds-table-cell>
-      <sgds-table-cell>
-        ${preview}
-      </sgds-table-cell>
+      <sgds-table-cell> ${preview} </sgds-table-cell>
     </sgds-table-row>
   `;
 };
@@ -319,10 +315,7 @@ export const OverlineSizes = () => html`
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     ${RESPONSIVE_FONT_SIZES.overline.map(item =>
-      ResponsiveFontSizeTableRow(
-        item,
-        item => html`<div class="${item.class} sgds:uppercase">${item.name}</div>`
-      )
+      ResponsiveFontSizeTableRow(item, item => html`<div class="${item.class} sgds:uppercase">${item.name}</div>`)
     )}
   </sgds-table>
 `;
