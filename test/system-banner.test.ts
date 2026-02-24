@@ -317,4 +317,22 @@ describe("<sgds-system-banner>", () => {
       expect(showMoreHandler).to.have.been.called;
     }
   });
+
+  it("triggers console error when both icon and badge slots are used", async () => {
+    const consoleErrorStub = sinon.stub(console, "error");
+
+    await fixture<SgdsSystemBannerItem>(html`<sgds-system-banner-item>
+      <sgds-icon slot="icon" name="info-circle"></sgds-icon>
+      <sgds-badge slot="badge" variant="warning">New</sgds-badge>
+      Message content
+    </sgds-system-banner-item>`);
+
+    await waitUntil(() => consoleErrorStub.called, "Console error was not called");
+
+    expect(consoleErrorStub).to.have.been.calledWith(
+      "Both icon and badge slot are used in the same banner item. This is not recommended as it may cause layout issues."
+    );
+
+    consoleErrorStub.restore();
+  });
 });
