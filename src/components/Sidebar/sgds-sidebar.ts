@@ -100,9 +100,15 @@ export class SgdsSidebar extends SgdsElement {
 
   @watch("active")
   _handleActive() {
-    // finding active element in both shadowRoot and sidebar root
-    const activeElement = this?.querySelector(`[name=${this.active}]`);
-    const activeShadowElement = this?.shadowRoot?.querySelector(`[name=${this.active}]`);
+    // Return early if active is empty
+    if (!this.active) {
+      this._sidebarActiveItem = null;
+      return;
+    }
+
+    // finding active element in both shadowRoot and sidebar root with proper quoting
+    const activeElement = this?.querySelector(`[name="${this.active}"]`);
+    const activeShadowElement = this?.shadowRoot?.querySelector(`[name="${this.active}"]`);
     this._sidebarActiveItem = (activeElement || activeShadowElement) as SidebarElement;
 
     if (this._sidebarActiveItem) {
@@ -111,7 +117,7 @@ export class SgdsSidebar extends SgdsElement {
       if (this._sidebarActiveItem._childLevel > 0) {
         let parentEle = this._sidebarActiveItem.parentElement as SgdsSidebarGroup;
 
-        while (parentEle._childLevel > 0) {
+        while (parentEle && parentEle._childLevel > 0) {
           parentEle._selected = true;
 
           // when in drawer, we need to open the menu
@@ -119,9 +125,9 @@ export class SgdsSidebar extends SgdsElement {
           parentEle = parentEle.parentElement as SgdsSidebarGroup;
         }
 
-        if (!this._sidebarActiveGroup) {
+        if (parentEle && !this._sidebarActiveGroup) {
           this._setNodesToDrawer(parentEle);
-        } else {
+        } else if (this._sidebarActiveGroup) {
           this._sidebarActiveGroup._selected = true;
         }
       }
@@ -137,6 +143,8 @@ export class SgdsSidebar extends SgdsElement {
    * @returns {void}
    */
   private _setNodesToDrawer(element: SidebarElement) {
+    if (!element) return;
+
     // when there is element, we will revert the nodes of the previous active group before setting new value into the active group
     if (this._sidebarActiveGroup && element !== this._sidebarActiveGroup) {
       this._revertNodesToParent(this._sidebarActiveGroup);
@@ -226,7 +234,7 @@ export class SgdsSidebar extends SgdsElement {
    * @returns {void}
    */
   private toggleCollapsed() {
-    this._sidebarCollapsed = !this._sidebarCollapsed;
+    this.collapsed = !this.collapsed;
   }
 
   private closeDrawer() {
@@ -269,7 +277,7 @@ export class SgdsSidebar extends SgdsElement {
             ></sgds-icon-button>
           </div>
 
-          <nav class="sidebar-content" aria-label="Navigation menu" aria-activedescendant=${
+          <nav class="sidebar-content" role="navigation" aria-label="Main navigation" aria-activedescendant=${
             this._sidebarActiveItem?.name || ""
           }>
             <slot></slot>

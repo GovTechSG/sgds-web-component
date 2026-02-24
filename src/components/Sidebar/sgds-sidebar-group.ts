@@ -45,7 +45,7 @@ export class SgdsSidebarGroup extends SidebarElement {
    * Only used for nested groups (level 1+). Root-level groups use drawer overlay instead.
    * @internal
    */
-  @state() showMenu: boolean;
+  @state() showMenu = false;
 
   /** @internal */
   _handleClick(): void {
@@ -102,6 +102,7 @@ export class SgdsSidebarGroup extends SidebarElement {
       <div
         class=${classMap({
           "sidebar-submenu": true,
+          "sidebar-submenu--collapsed": this._sidebarCollapsed,
           show: this.showMenu
         })}
       >
