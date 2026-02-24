@@ -36,3 +36,12 @@ export const SidebarCollapsed = createContext<boolean>("sidebar-collapsed");
  * @type {SidebarElement[]}
  */
 export const SidebarDrawerItems = createContext<SidebarElement[]>("sidebar-drawer-items");
+
+/**
+ * Context indicating whether a drawer overlay is currently open for displaying nested items.
+ * When true, a group drawer is open showing child elements.
+ * When false, no drawer is currently displayed.
+ * Used to manage the visibility state of the overlay across the component hierarchy.
+ * @type {boolean}
+ */
+export const SidebarDrawerOpen = createContext<boolean>("sidebar-drawer-open");

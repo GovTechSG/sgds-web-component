@@ -7,7 +7,8 @@ import {
   SidebarActiveGroup,
   SidebarActiveItem,
   SidebarCollapsed,
-  SidebarDrawerItems
+  SidebarDrawerItems,
+  SidebarDrawerOpen
 } from "../components/Sidebar/sidebar-context";
 
 const ARROW_DOWN = "ArrowDown";
@@ -82,6 +83,11 @@ export class SidebarElement extends SgdsElement {
   @consume({ context: SidebarDrawerItems, subscribe: true })
   @state()
   _drawerItems: SidebarElement[] | null = null;
+
+  /** @internal Tracks whether a drawer overlay is currently open */
+  @consume({ context: SidebarDrawerOpen, subscribe: true })
+  @state()
+  _showDrawer = false;
 
   /** @internal */
   @state() _childLevel = 0;
@@ -212,7 +218,8 @@ export class SidebarElement extends SgdsElement {
         event.stopPropagation();
 
         if (this._sidebarActiveGroup === this) {
-          this._handleClick();
+          // when drawer is open, close it
+          if (this._showDrawer) this._handleClick();
         } else {
           // check if we are on the drawer, if so move back to parent
           const childLevel = (target as SidebarElement)._childLevel;
@@ -228,11 +235,17 @@ export class SidebarElement extends SgdsElement {
         event.preventDefault();
         event.stopPropagation();
 
-        if (this._sidebarActiveGroup === this && this._drawerItems?.length) {
-          const drawerItem = this._drawerItems[0];
-          if (drawerItem?.shadowRoot) {
-            const focusTarget = drawerItem.shadowRoot.querySelector("[tabindex]") as HTMLElement | null;
-            focusTarget?.focus();
+        if (this._sidebarActiveGroup === this) {
+          if (this._drawerItems?.length) {
+            if (this._showDrawer) {
+              const drawerItem = this._drawerItems[0];
+              if (drawerItem?.shadowRoot) {
+                const focusTarget = drawerItem.shadowRoot.querySelector("[tabindex]") as HTMLElement | null;
+                focusTarget?.focus();
+              }
+            } else {
+              this._handleClick();
+            }
           }
         } else {
           if (this._childLevel === 0 && this._childElements.length > 0) {

@@ -5,7 +5,13 @@ import SgdsElement from "../../base/sgds-element";
 import sidebarStyle from "./sidebar.css";
 
 import { provide } from "@lit/context";
-import { SidebarCollapsed, SidebarActiveItem, SidebarActiveGroup, SidebarDrawerItems } from "./sidebar-context";
+import {
+  SidebarCollapsed,
+  SidebarActiveItem,
+  SidebarActiveGroup,
+  SidebarDrawerItems,
+  SidebarDrawerOpen
+} from "./sidebar-context";
 import { watch } from "../../utils/watch";
 import { SidebarElement } from "../../base/sidebar-element";
 import SgdsSidebarGroup from "./sgds-sidebar-group";
@@ -60,25 +66,30 @@ export class SgdsSidebar extends SgdsElement {
    */
   @property({ type: String, reflect: true }) active = "";
 
-  /** @internal */
+  /** @internal Tracks the currently active group and provides it via context to all child elements */
   @provide({ context: SidebarActiveGroup })
   @state()
-  _sidebarActiveGroup = null;
+  _sidebarActiveGroup: SgdsSidebarGroup | null = null;
 
-  /** @internal */
+  /** @internal Tracks the collapsed state and provides it via context to all child elements */
   @provide({ context: SidebarCollapsed })
   @state()
   private _sidebarCollapsed: boolean;
 
-  /** @internal */
+  /** @internal Tracks the currently active item and provides it via context to all child elements */
   @provide({ context: SidebarActiveItem })
   @state()
-  private _sidebarActiveItem = null;
+  private _sidebarActiveItem: SidebarElement | null = null;
 
-  /** @internal */
+  /** @internal Provides the list of items shown in the drawer overlay */
   @provide({ context: SidebarDrawerItems })
   @state()
   private _drawerItems = [];
+
+  /** @internal Indicates whether a drawer overlay is currently open */
+  @provide({ context: SidebarDrawerOpen })
+  @state()
+  private _showDrawer = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -98,6 +109,52 @@ export class SgdsSidebar extends SgdsElement {
     this._sidebarCollapsed = this.collapsed;
   }
 
+  /**
+   * Handles changes to the active item selection.
+   * Updates selection state and manages drawer overlay visibility based on the active item's nesting level.
+   * For root-level items with children, opens the drawer overlay.
+   * For nested items, expands parent groups and opens the appropriate drawer if needed.
+   * @private
+   * @returns {void}
+   */
+  @watch("_sidebarActiveItem")
+  _handleActiveItem() {
+    if (!this._sidebarActiveItem) return;
+    const childLevel = this._sidebarActiveItem._childLevel;
+    this._sidebarActiveItem._selected = true;
+
+    if (childLevel === 0) {
+      // First level of navigation, check if need to open drawer or not.
+      if (this._sidebarActiveItem._childElements.length > 0) {
+        this._setNodesToDrawer(this._sidebarActiveItem as SgdsSidebarGroup);
+      } else {
+        this._revertNodesToParent();
+      }
+    } else {
+      // when nested, we will find the top level of parent
+      let parentEle = this._sidebarActiveItem.parentElement as SgdsSidebarGroup;
+
+      while (parentEle._childLevel >= 0 && parentEle.tagName.toLowerCase() === "sgds-sidebar-group") {
+        if (parentEle.tagName.toLowerCase() === "sgds-sidebar-group") {
+          parentEle._showMenu = parentEle._childLevel > 0; //setting this to true as the child is active
+          parentEle._selected = true;
+          parentEle = parentEle.parentElement as SgdsSidebarGroup;
+
+          if (parentEle._childLevel === 0) {
+            // when active item already in drawer, don't need set nodes.
+            if (!parentEle.classList.contains("sidebar-nested-overlay")) {
+              this._setNodesToDrawer(parentEle);
+            }
+          }
+        }
+      }
+
+      if (this._sidebarActiveGroup) {
+        this._sidebarActiveGroup._selected = true;
+      }
+    }
+  }
+
   @watch("active")
   _handleActive() {
     // Return early if active is empty
@@ -110,28 +167,6 @@ export class SgdsSidebar extends SgdsElement {
     const activeElement = this?.querySelector(`[name="${this.active}"]`);
     const activeShadowElement = this?.shadowRoot?.querySelector(`[name="${this.active}"]`);
     this._sidebarActiveItem = (activeElement || activeShadowElement) as SidebarElement;
-
-    if (this._sidebarActiveItem) {
-      this._sidebarActiveItem._selected = true;
-
-      if (this._sidebarActiveItem._childLevel > 0) {
-        let parentEle = this._sidebarActiveItem.parentElement as SgdsSidebarGroup;
-
-        while (parentEle && parentEle._childLevel > 0) {
-          parentEle._selected = true;
-
-          // when in drawer, we need to open the menu
-          parentEle.showMenu = parentEle._childLevel >= 1;
-          parentEle = parentEle.parentElement as SgdsSidebarGroup;
-        }
-
-        if (parentEle && !this._sidebarActiveGroup) {
-          this._setNodesToDrawer(parentEle);
-        } else if (this._sidebarActiveGroup) {
-          this._sidebarActiveGroup._selected = true;
-        }
-      }
-    }
   }
 
   /**
@@ -139,19 +174,18 @@ export class SgdsSidebar extends SgdsElement {
    * If element is provided: Opens drawer for that element's children.
    * If element is undefined: Closes drawer and reverts items to their parent.
    * @private
-   * @param {SidebarElement} [element] - The parent item to display in drawer. Undefined closes drawer.
+   * @param {SgdsSidebarGroup} [element] - The parent item to display in drawer. Undefined closes drawer.
    * @returns {void}
    */
-  private _setNodesToDrawer(element: SidebarElement) {
+  private _setNodesToDrawer(element: SgdsSidebarGroup) {
     if (!element) return;
 
     // when there is element, we will revert the nodes of the previous active group before setting new value into the active group
     if (this._sidebarActiveGroup && element !== this._sidebarActiveGroup) {
-      this._revertNodesToParent(this._sidebarActiveGroup);
+      this._revertNodesToParent();
     }
 
     this._sidebarActiveGroup = element;
-    this._sidebarActiveGroup._selected = true;
 
     // when there is an active group set, always set new menu items
     this._drawerItems = []; // always set to empty to prevent duplicate
@@ -169,13 +203,16 @@ export class SgdsSidebar extends SgdsElement {
    * @param {SgdsSidebarItem} element - The parent item to return nodes to
    * @returns {void}
    */
-  private _revertNodesToParent(element: SidebarElement | null) {
-    if (element) {
+  private _revertNodesToParent() {
+    if (this._sidebarActiveGroup) {
       this._drawerItems.forEach(e => {
-        element.append(e);
+        this._sidebarActiveGroup.append(e);
       });
+
       this._drawerItems = [];
     }
+
+    this._sidebarActiveGroup = null;
   }
 
   /**
@@ -188,39 +225,33 @@ export class SgdsSidebar extends SgdsElement {
   private addItemListeners() {
     const items = this.querySelectorAll("sgds-sidebar-item");
     const groups = this.querySelectorAll("sgds-sidebar-group");
-    const allItems = [...items, ...groups];
+    const allItems = [...items, ...groups] as SidebarElement[];
 
     allItems.forEach(item => {
       item.addEventListener("i-sgds-click", (e: CustomEvent) => {
         const element = e.detail.element as SidebarElement;
-        const childLevel = e.detail.level;
-
-        if (element.name === this._sidebarActiveItem?.name && this._sidebarActiveItem !== this._sidebarActiveGroup)
-          return;
-
-        allItems.forEach(v => ((v as SidebarElement)._selected = false));
 
         if (element === this._sidebarActiveGroup) {
-          // when same we close drawer
-          this.closeDrawer();
-          return;
+          // just toggle drawer
+          this._showDrawer = !this._showDrawer;
         } else {
-          if (element._childElements.length == 0) {
-            // when it is not nested item
-            if (childLevel === 0) this.closeDrawer();
+          if (this.active !== element.name) {
+            this.active = element.name;
+            allItems.forEach(item => (item._selected = false));
+          }
+
+          if (element._childElements.length > 0) {
+            this._showDrawer = true;
+          } else {
+            this._showDrawer = false;
 
             // when there is anchorLink we will trigger click to redirect and allow user to handle the navigation themselves
             const anchorLink = item.querySelector(":scope > a") as HTMLAnchorElement;
             if (anchorLink) anchorLink.click();
-          } else {
-            // has children we will render
-            if (childLevel === 0) this._setNodesToDrawer(element);
           }
 
-          this.active = element.name || "";
-          this.emit("sgds-select", {
-            detail: { activeItem: element.name || "" }
-          });
+          // Emit sgds-select event when an item is selected
+          this.emit("sgds-select", { detail: { activeItem: element.name } });
         }
       });
     });
@@ -237,17 +268,11 @@ export class SgdsSidebar extends SgdsElement {
     this.collapsed = !this.collapsed;
   }
 
-  private closeDrawer() {
-    this._revertNodesToParent(this._sidebarActiveGroup);
-    this._sidebarActiveGroup = null;
-    this._sidebarActiveItem = null;
-  }
-
   private _handleClickOutOfElement = (e: MouseEvent) => {
     if (!this._sidebarActiveGroup) return;
 
     if (!e.composedPath().includes(this)) {
-      this.closeDrawer();
+      this._showDrawer = false;
     }
   };
 
@@ -287,7 +312,7 @@ export class SgdsSidebar extends SgdsElement {
           <div
             class=${classMap({
               "sidebar-nested-overlay": true,
-              show: this._sidebarActiveGroup !== null
+              show: this._showDrawer
             })}
             role="dialog"
             aria-label=${this._sidebarActiveGroup?.title ? `Nested items for ${this._sidebarActiveGroup.title}` : ""}

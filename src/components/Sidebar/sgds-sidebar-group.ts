@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -45,23 +45,35 @@ export class SgdsSidebarGroup extends SidebarElement {
    * Only used for nested groups (level 1+). Root-level groups use drawer overlay instead.
    * @internal
    */
-  @state() showMenu = false;
+  @state() _showMenu = false;
+
+  /**
+   * Reports the visibility state of the submenu for nested groups.
+   * Returns true when the submenu is displayed showing child items, false when hidden.
+   * Only applicable for nested groups (level 1+). Root-level groups use drawer overlay instead.
+   * @readonly
+   * @type {boolean}
+   */
+  get showMenu(): boolean {
+    return this._showMenu;
+  }
 
   /** @internal */
   _handleClick(): void {
     if (this._childLevel !== 0) {
-      this.showMenu = !this.showMenu;
-      this._childElements.forEach(v => (v._hidden = !this.showMenu));
+      this._showMenu = !this._showMenu;
+      this._childElements.forEach(v => {
+        v._hidden = !this._showMenu;
+      });
     } else {
       super._handleClick();
     }
   }
   /**
-   * Determines the appropriate chevron icon based on nesting level and selection state.
-   * Icon changes indicate expandable/expandable state to users:
-   * - Level 0: chevron-right (expanded) or chevron-left (collapsed)
-   * - Level 1+: chevron-down (expanded) or chevron-up (collapsed)
-   * Used for visual feedback on nested navigation items.
+   * Determines the appropriate chevron icon based on nesting level and menu visibility.
+   * Icon changes provide visual feedback on expandable/collapsible state:
+   * - Level 0: chevron-right (closed drawer) or chevron-right (no change - drawer controlled by parent)
+   * - Level 1+: chevron-down (submenu open) or chevron-up (submenu closed)
    * @private
    * @returns {string} The icon name to display (e.g., 'chevron-right', 'chevron-down')
    */
@@ -69,7 +81,7 @@ export class SgdsSidebarGroup extends SidebarElement {
     if (this._childLevel === 0) {
       return "chevron-right";
     } else {
-      return this.showMenu ? "chevron-down" : "chevron-up";
+      return this._showMenu ? "chevron-down" : "chevron-up";
     }
   }
 
@@ -83,9 +95,9 @@ export class SgdsSidebarGroup extends SidebarElement {
         })}
         @click=${() => this._handleClick()}
         aria-level=${this._childLevel}
-        .aria-expanded=${this.showMenu}
+        .aria-expanded=${this._showMenu}
         aria-label=${this.title || this.name}
-        tabindex=${this._childLevel > 1 && !this.showMenu ? -1 : 0}
+        tabindex=${this._childLevel > 1 && !this._showMenu ? -1 : 0}
       >
         <div class="sidebar-item-label-wrapper">
           <div>
@@ -103,7 +115,7 @@ export class SgdsSidebarGroup extends SidebarElement {
         class=${classMap({
           "sidebar-submenu": true,
           "sidebar-submenu--collapsed": this._sidebarCollapsed,
-          show: this.showMenu
+          show: this._showMenu
         })}
       >
         <div>
