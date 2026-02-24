@@ -1,6 +1,9 @@
 :host([disabled]) {
   cursor: not-allowed;
 }
+:host(:not([noPadding])) .card:not(.disabled):hover {
+  box-shadow: 0px 0px 1px 0px rgba(14, 14, 14, 0.12), 0px 8px 16px 0px rgba(14, 14, 14, 0.12);
+}
 
 :host([stretchedLink]) slot[name="footer"]::slotted(sgds-link),
 :host([stretchedLink]) slot[name="footer"]::slotted(a),
