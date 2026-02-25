@@ -7,6 +7,7 @@ description: 'AI agent guide for contributing to and navigating the sgds-web-com
 ## Architecture Overview
 - **Monorepo** for Singapore Design System web components and related tooling.
 - **Core library**: `src/` (source for all web components, built with LitElement, TypeScript, and Sass)
+- **Skills**: `src/skills/` (AI agent skills for teaching developers how to use SGDS utilities)
 - **Distribution**: `lib/` (compiled JS, CSS, and type declarations)
 - **Docs**: `docs/` (Markdown documentation for usage, migration, and framework integration)
 - **Playground**: `playground/` (HTML demos for each component)
@@ -69,9 +70,21 @@ description: 'AI agent guide for contributing to and navigating the sgds-web-com
 
 ## Skills
 Specialized knowledge for specific development tasks:
-- [storybook-stories](../.github/skills/storybook-stories/SKILL.md) - Storybook story writing patterns for templates folder
-- [token-workflow](../.github/skills/token-workflow/SKILL.md) - Design token architecture and documentation workflows
-- [tailwind-mapping](../.github/skills/tailwind-mapping/SKILL.md) - Tailwind v4 CSS variable mappings and utility class generation
+
+### Internal Skills (Maintainer tools in .github/skills/)
+- [storybook-stories](.github/skills/storybook-stories/SKILL.md) - Storybook story writing patterns for templates folder
+- [token-workflow](.github/skills/token-workflow/SKILL.md) - Design token architecture and documentation workflows
+- [tailwind-mapping](.github/skills/tailwind-mapping/SKILL.md) - Tailwind v4 CSS variable mappings and utility class generation
+
+### User-Facing Skills (Usage guidance in src/skills/)
+- [overview](../src/skills/overview/SKILL.md) - Overview of all SGDS utility skills
+- [setup](../src/skills/setup/SKILL.md) - Setup and prerequisites for using SGDS utilities
+- [spacing](../src/skills/spacing/SKILL.md) - Margin, padding, gap utilities with 4px scale system
+- [background-color](../src/skills/background-color/SKILL.md) - Theme-aware background color utilities with semantic tokens
+- [text-color](../src/skills/text-color/SKILL.md) - Text color utilities that adapt to themes
+- [border](../src/skills/border/SKILL.md) - Border utilities (width, color, radius, style)
+- [typography](../src/skills/typography/SKILL.md) - Typography utilities (font size, weight, line height, etc.)
+- [opacity](../src/skills/opacity/SKILL.md) - Opacity utilities
 
 ## Instruction Files
 Detailed guidelines for specific aspects of development:
