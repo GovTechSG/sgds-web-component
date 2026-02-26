@@ -1,0 +1,55 @@
+## Level 0 only
+
+SidebarItem is used as a standalone top-level navigation item. Level 0 items are shown directly in the sidebar and do not have nested children. They can be terminal leaf nodes in your navigation structure.
+
+<Canvas of={SidebarStories.Level0Only}>
+  <Story of={SidebarStories.Level0Only} />
+</Canvas>
+
+## With nested items (Level 1)
+
+SidebarGroup is used for parent navigation items that contain nested children. Level 1 groups display their items in a drawer overlay when the parent group is clicked, allowing for expandable menu hierarchies.
+
+<Canvas of={SidebarStories.Level0Level1}>
+  <Story of={SidebarStories.Level0Level1} />
+</Canvas>
+
+## Double nested structure (Level 2)
+
+SidebarGroup supports up to two levels of nesting, creating three-level navigation hierarchies. Nested groups show their items in a drawer when Level 0 groups open, making complex navigation structures manageable.
+
+<Canvas of={SidebarStories.Level0Level1Level2}>
+  <Story of={SidebarStories.Level0Level1Level2} />
+</Canvas>
+
+## Collapsed state
+
+The sidebar can be collapsed by setting the `expanded` property to `false`. When collapsed, only icons are visible for Level 0 options. Nested options are still accessible via the drawer overlay.
+
+<Canvas of={SidebarStories.CollapsedState}>
+  <Story of={SidebarStories.CollapsedState} />
+</Canvas>
+
+## With sections
+
+SidebarSection is used to organize sidebar items into logical groups. Sections are collapsible containers that can hold both items and groups, enabling a well-organized navigation structure with clear separation between different parts of your application.
+
+<Canvas of={SidebarStories.WithSections}>
+  <Story of={SidebarStories.WithSections} />
+</Canvas>
+
+## Active state
+
+The sidebar tracks the currently active item via the `active` property. When an item or group is selected, its `name` property is set as the active value. This is useful for highlighting the current page or section in your application, providing clear user feedback about their location.
+
+<Canvas of={SidebarStories.ActiveState}>
+  <Story of={SidebarStories.ActiveState} />
+</Canvas>
+
+## Link navigation
+
+SidebarItem and SidebarGroup can wrap anchor elements to enable programmatic navigation. When an item with an anchor link is clicked, the link is automatically followed, allowing the sidebar to work seamlessly with your application's routing system.
+
+<Canvas of={SidebarStories.LinkNavigation}>
+  <Story of={SidebarStories.LinkNavigation} />
+</Canvas>
