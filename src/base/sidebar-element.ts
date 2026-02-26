@@ -115,7 +115,7 @@ export class SidebarElement extends SgdsElement {
   @state() _childActive = false;
 
   /** @internal */
-  @queryAssignedElements({ flatten: false })
+  @queryAssignedElements({ flatten: true })
   private _defaultNodes!: SidebarElement[];
 
   connectedCallback() {

@@ -71,8 +71,8 @@ const ActiveStateTemplate = args => html`
       <sgds-sidebar-item title="Summary" name="summary" icon="building"></sgds-sidebar-item>
     </sgds-sidebar-group>
     <sgds-sidebar-group title="Reports" name="reports" icon="file-text">
-      <sgds-sidebar-item title="Sales Report" name="sales-report" icon="chart"></sgds-sidebar-item>
-      <sgds-sidebar-item title="Revenue Report" name="revenue-report" icon="trending-up"></sgds-sidebar-item>
+      <sgds-sidebar-item title="Sales Report" name="sales-report" icon="building"></sgds-sidebar-item>
+      <sgds-sidebar-item title="Revenue Report" name="revenue-report" icon="trend-up"></sgds-sidebar-item>
     </sgds-sidebar-group>
     <sgds-sidebar-item title="Settings" name="settings" icon="gear"></sgds-sidebar-item>
   </sgds-sidebar>

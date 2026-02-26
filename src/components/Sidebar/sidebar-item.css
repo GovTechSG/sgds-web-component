@@ -49,6 +49,8 @@
 
 .sidebar-item-label-wrapper .sidebar-item-trailingIcon {
   display: flex;
+  align-items: center;
+  gap: var(--sgds-gap-2-xs);
 }
 
 .sidebar-item--collapsed .sidebar-item-label,

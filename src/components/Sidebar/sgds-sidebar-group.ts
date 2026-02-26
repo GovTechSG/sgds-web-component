@@ -106,6 +106,7 @@ export class SgdsSidebarGroup extends SidebarElement {
           </div>
 
           <span class="sidebar-item-trailingIcon">
+            <slot name="trailingIcon"></slot>
             <sgds-icon name=${this.getIcon()} size="sm"></sgds-icon>
           </span>
         </div>
