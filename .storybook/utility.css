@@ -208,6 +208,24 @@
     --sgds-text-7: var(--sgds-font-size-7);
     --sgds-text-8: var(--sgds-font-size-8);
     --sgds-text-9: var(--sgds-font-size-9);
+    --sgds-text-display-sm: var(--sgds-font-size-display-sm);
+    --sgds-text-display-md: var(--sgds-font-size-display-md);
+    --sgds-text-display-lg: var(--sgds-font-size-display-lg);
+    --sgds-text-heading-sm: var(--sgds-font-size-heading-sm);
+    --sgds-text-heading-md: var(--sgds-font-size-heading-md);
+    --sgds-text-heading-lg: var(--sgds-font-size-heading-lg);
+    --sgds-text-heading-xl: var(--sgds-font-size-heading-xl);
+    --sgds-text-subtitle-sm: var(--sgds-font-size-subtitle-sm);
+    --sgds-text-subtitle-md: var(--sgds-font-size-subtitle-md);
+    --sgds-text-body-sm: var(--sgds-font-size-body-sm);
+    --sgds-text-body-md: var(--sgds-font-size-body-md);
+    --sgds-text-body-lg: var(--sgds-font-size-body-lg);
+    --sgds-text-label-xs: var(--sgds-font-size-label-xs);
+    --sgds-text-label-sm: var(--sgds-font-size-label-sm);
+    --sgds-text-label-md: var(--sgds-font-size-label-md);
+    --sgds-text-label-lg: var(--sgds-font-size-label-lg);
+    --sgds-text-caption-md: var(--sgds-font-size-caption-md);
+    --sgds-text-overline-md: var(--sgds-font-size-overline-md);
     --sgds-tracking-tighter: var(--sgds-letter-spacing-tighter);
     --sgds-tracking-tight: var(--sgds-letter-spacing-tight);
     --sgds-tracking-normal: var(--sgds-letter-spacing-normal);
@@ -395,6 +413,9 @@
   }
   .sgds\:mt-md {
     margin-top: var(--sgds-spacing-md);
+  }
+  .sgds\:mt-sm {
+    margin-top: var(--sgds-spacing-sm);
   }
   .sgds\:mb-2-xl {
     margin-bottom: var(--sgds-spacing-2-xl);
@@ -1119,6 +1140,60 @@
   }
   .sgds\:text-9 {
     font-size: var(--sgds-text-9);
+  }
+  .sgds\:text-body-lg {
+    font-size: var(--sgds-text-body-lg);
+  }
+  .sgds\:text-body-md {
+    font-size: var(--sgds-text-body-md);
+  }
+  .sgds\:text-body-sm {
+    font-size: var(--sgds-text-body-sm);
+  }
+  .sgds\:text-caption-md {
+    font-size: var(--sgds-text-caption-md);
+  }
+  .sgds\:text-display-lg {
+    font-size: var(--sgds-text-display-lg);
+  }
+  .sgds\:text-display-md {
+    font-size: var(--sgds-text-display-md);
+  }
+  .sgds\:text-display-sm {
+    font-size: var(--sgds-text-display-sm);
+  }
+  .sgds\:text-heading-lg {
+    font-size: var(--sgds-text-heading-lg);
+  }
+  .sgds\:text-heading-md {
+    font-size: var(--sgds-text-heading-md);
+  }
+  .sgds\:text-heading-sm {
+    font-size: var(--sgds-text-heading-sm);
+  }
+  .sgds\:text-heading-xl {
+    font-size: var(--sgds-text-heading-xl);
+  }
+  .sgds\:text-label-lg {
+    font-size: var(--sgds-text-label-lg);
+  }
+  .sgds\:text-label-md {
+    font-size: var(--sgds-text-label-md);
+  }
+  .sgds\:text-label-sm {
+    font-size: var(--sgds-text-label-sm);
+  }
+  .sgds\:text-label-xs {
+    font-size: var(--sgds-text-label-xs);
+  }
+  .sgds\:text-overline-md {
+    font-size: var(--sgds-text-overline-md);
+  }
+  .sgds\:text-subtitle-md {
+    font-size: var(--sgds-text-subtitle-md);
+  }
+  .sgds\:text-subtitle-sm {
+    font-size: var(--sgds-text-subtitle-sm);
   }
   .sgds\:leading-16 {
     --tw-leading: var(--sgds-leading-16);

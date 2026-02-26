@@ -46,3 +46,16 @@ Disabled animation by setting `noAnimation` to true
 <Canvas of={ModalStories.noAnimation}>
   <Story of={ModalStories.noAnimation} />
 </Canvas>
+
+## Prevent close
+
+The `sgds-close` event is cancelable, allowing you to prevent the modal from closing by calling `event.preventDefault()`. This is useful when you need to validate user input or confirm an action before allowing the modal to close.
+
+The event provides `event.detail.source` which indicates how the close was triggered:
+- `'close-button'` - User clicked the close button
+- `'overlay'` - User clicked the modal overlay
+- `'keyboard'` - User pressed the Escape key
+
+<Canvas of={ModalStories.PreventClose}>
+  <Story of={ModalStories.PreventClose} />
+</Canvas>
