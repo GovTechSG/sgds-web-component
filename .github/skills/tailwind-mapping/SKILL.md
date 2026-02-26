@@ -3,7 +3,7 @@ name: tailwind-mapping
 description: Converts SGDS CSS variables to Tailwind v4 utility classes in src/css/utility.css and creates playground documentation in playground/utility/ HTML files. Use when adding Tailwind mappings, creating utility class documentation, or implementing new color/spacing/typography utilities with proper preview examples.
 metadata:
   author: singapore-design-system
-  version: "1.0.0"
+  version: "0.0.0"
 ---
 
 # Tailwind Mapping Skill

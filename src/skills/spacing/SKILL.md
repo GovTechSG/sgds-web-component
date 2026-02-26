@@ -3,7 +3,7 @@ name: sgds-spacing
 description: Teaches AI agents how to help developers use SGDS spacing utilities (margin, padding, gap) with the sgds: prefix. Use when users ask about spacing, margins, padding, gaps, or layout spacing in SGDS designs.
 metadata:
   author: singapore-design-system
-  version: "1.0.0"
+  version: "0.0.0"
   audience: external
   category: spacing
 ---

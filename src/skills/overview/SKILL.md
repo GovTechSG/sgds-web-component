@@ -3,7 +3,7 @@ name: sgds-utilities-overview
 description: Overview of SGDS utility classes with the sgds: prefix. Use for general utility class questions or when the specific category is unclear. For specialized help, refer to category-specific skills (setup, spacing, background-color, text-color, border, typography, opacity).
 metadata:
   author: singapore-design-system
-  version: "1.0.0"
+  version: "0.0.0"
   audience: external
   category: overview
 ---

@@ -3,7 +3,7 @@ name: sgds-text-color
 description: Teaches AI agents how to help developers use SGDS text color utilities with the sgds: prefix. Use when users ask about text colors, typography colors, link colors, or theme-aware text styling in SGDS designs.
 metadata:
   author: singapore-design-system
-  version: "1.0.0"
+  version: "0.0.0"
   audience: external
   category: color
 ---

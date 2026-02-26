@@ -3,7 +3,7 @@ name: sgds-utilities-setup
 description: Setup instructions for using SGDS utility classes. This is a prerequisite skill for all SGDS utility categories (spacing, colors, typography, etc.). Use when users need help with initial setup or imports.
 metadata:
   author: singapore-design-system
-  version: "1.0.0"
+  version: "0.0.0"
   audience: external
   category: setup
 ---

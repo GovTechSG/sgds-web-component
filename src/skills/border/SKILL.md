@@ -3,7 +3,7 @@ name: sgds-border
 description: Teaches AI agents how to help developers use SGDS border utilities (color, width, radius) with the sgds: prefix. Use when users ask about borders, border colors, rounded corners, border styles, or card edges in SGDS designs.
 metadata:
   author: singapore-design-system
-  version: "1.0.0"
+  version: "0.0.0"
   audience: external
   category: border
 ---
