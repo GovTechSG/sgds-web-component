@@ -122,6 +122,7 @@ export class SgdsSidebar extends SgdsElement {
   @watch("_sidebarActiveItem")
   _handleActiveItem() {
     if (!this._sidebarActiveItem) return;
+
     const childLevel = this._sidebarActiveItem._childLevel;
     this._sidebarActiveItem._selected = true;
 
@@ -145,10 +146,15 @@ export class SgdsSidebar extends SgdsElement {
             }
           }
 
-          parentEle._showMenu = parentEle._childLevel > 0; //setting this to true as the child is active
           parentEle._selected = true;
+
+          parentEle._showMenu = parentEle._childLevel > 0; //setting this to true as the child is active
           parentEle = parentEle.parentElement as SgdsSidebarGroup;
         }
+      }
+
+      if (this._sidebarActiveGroup) {
+        this._sidebarActiveGroup._selected = true;
       }
     }
   }
