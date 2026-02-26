@@ -21,11 +21,6 @@ import { SidebarElement } from "../../base/sidebar-element";
 export class SgdsSidebarItem extends SidebarElement {
   static styles = [...SgdsElement.styles, sidebarOptionStyle];
 
-  /** @internal */
-  static dependencies = {
-    "sgds-icon": SgdsIcon
-  };
-
   /**
    * The name of the icon to display before the item label.
    * Icon name corresponds to sgds-icon component icons.
@@ -53,7 +48,7 @@ export class SgdsSidebarItem extends SidebarElement {
       >
         <div class="sidebar-item-label-wrapper">
           <div>
-            ${this._childLevel <= 1 ? html`<sgds-icon name=${this.icon}></sgds-icon>` : nothing}
+            ${this._childLevel <= 1 ? html`<slot name="leadingIcon"></slot>` : nothing}
             <span
               class=${classMap({
                 "sidebar-item-label": true,

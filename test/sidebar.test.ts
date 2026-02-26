@@ -1,7 +1,7 @@
 import { elementUpdated, expect, fixture } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
-import type { SgdsSidebar, SgdsSidebarGroup, SgdsSidebarItem } from "../src/components/Sidebar";
+import type { SgdsSidebar, SgdsSidebarGroup, SgdsSidebarItem, SgdsSidebarSection } from "../src/components/Sidebar";
 import "./sgds-web-component";
 
 describe("sgds-sidebar", () => {
@@ -352,11 +352,13 @@ describe("sgds-sidebar", () => {
     it("leaf items display icons when not collapsed", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+          <sgds-sidebar-item title="Dashboard" name="dashboard">
+            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+          </sgds-sidebar-item>
         </sgds-sidebar>
       `);
       const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
-      const icon = item.shadowRoot?.querySelector("sgds-icon[name='house']");
+      const icon = item.querySelector("sgds-icon[slot='leadingIcon']");
       expect(icon).to.exist;
     });
   });
@@ -648,6 +650,247 @@ describe("sgds-sidebar", () => {
 
       // Last click should win
       expect((items[0] as SgdsSidebarItem)._selected).to.be.true;
+    });
+  });
+
+  describe("sgds-sidebar-section", () => {
+    it("renders section with title", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main Navigation" name="main"></sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section");
+      expect(section).to.exist;
+      expect(section).to.have.attribute("title", "Main Navigation");
+    });
+
+    it("displays section title in DOM", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main"></sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section");
+      const titleText = section?.shadowRoot?.querySelector(".sidebar-section-label span");
+      expect(titleText?.textContent).to.include("Main");
+    });
+
+    it("has collapsed property set to false by default", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main"></sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section") as any;
+      expect(section.collapsed).to.be.false;
+    });
+
+    it("has collapsible property set to false by default", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main"></sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section") as any;
+      expect(section.collapsible).to.be.false;
+    });
+
+    it("renders chevron icon only when collapsible is true", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main" collapsible></sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section");
+      const chevron = section?.shadowRoot?.querySelector(".sidebar-section-label sgds-icon");
+      expect(chevron).to.exist;
+    });
+
+    it("does not render chevron icon when collapsible is false", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main"></sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section");
+      const chevron = section?.shadowRoot?.querySelector(".sidebar-section-label sgds-icon");
+      expect(chevron).not.to.exist;
+    });
+
+    it("toggles collapsed state when clicked and collapsible is true", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main" collapsible></sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section") as any;
+      const sectionLabel = section.shadowRoot?.querySelector(".sidebar-section-label") as HTMLElement;
+
+      expect(section.collapsed).to.be.false;
+
+      sectionLabel.click();
+      await elementUpdated(el);
+
+      expect(section.collapsed).to.be.true;
+
+      sectionLabel.click();
+      await elementUpdated(el);
+
+      expect(section.collapsed).to.be.false;
+    });
+
+    it("has aria-expanded attribute that reflects collapsed state", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main" collapsible collapsed></sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section");
+      const sectionLabel = section?.shadowRoot?.querySelector(".sidebar-section-label") as HTMLElement;
+
+      expect(sectionLabel).to.have.attribute("aria-expanded", "false");
+    });
+
+    it("contains sidebar items and groups within slot", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main">
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-group title="Reports" name="reports">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section");
+      const items = section?.querySelectorAll("sgds-sidebar-item");
+      const groups = section?.querySelectorAll("sgds-sidebar-group");
+
+      expect(items?.length).to.equal(1);
+      expect(groups?.length).to.equal(1);
+    });
+
+    it("hides content when collapsed and collapsible is true", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main" collapsible collapsed>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section");
+      const content = section?.shadowRoot?.querySelector(".sidebar-section-content");
+
+      expect(content).to.have.class("sidebar-section-content--collapsed");
+    });
+
+    it("shows content when expanded or collapsible is false", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main">
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section");
+      const content = section?.shadowRoot?.querySelector(".sidebar-section-content");
+
+      expect(content).not.to.have.class("sidebar-section-content--collapsed");
+    });
+
+    it("reflects collapsed property as attribute", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main" collapsible></sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section") as any;
+
+      expect(section).not.to.have.attribute("collapsed");
+
+      section.collapsed = true;
+      await elementUpdated(el);
+
+      expect(section).to.have.attribute("collapsed");
+    });
+
+    it("has role region attribute", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main"></sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section");
+
+      expect(section).to.have.attribute("role", "region");
+    });
+
+    it("handles multiple sections in sidebar", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main"></sgds-sidebar-section>
+          <sgds-sidebar-section title="Organization" name="org"></sgds-sidebar-section>
+          <sgds-sidebar-section title="Configuration" name="config"></sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const sections = el.querySelectorAll("sgds-sidebar-section");
+
+      expect(sections.length).to.equal(3);
+    });
+
+    it("applies no-border class to last child section", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main"></sgds-sidebar-section>
+          <sgds-sidebar-section title="Last" name="last"></sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const sections = el.querySelectorAll("sgds-sidebar-section");
+      const lastSection = sections[sections.length - 1];
+      const sectionDiv = lastSection.shadowRoot?.querySelector(".sidebar-section");
+
+      expect(sectionDiv).to.have.class("no-border");
+    });
+
+    it("chevron icon changes when toggling collapsed state", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main" collapsible></sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section");
+      const sectionLabel = section?.shadowRoot?.querySelector(".sidebar-section-label") as HTMLElement;
+      const chevronIcon = section?.shadowRoot?.querySelector(".sidebar-section-label sgds-icon");
+
+      expect(chevronIcon).to.have.attribute("name", "chevron-up");
+
+      sectionLabel.click();
+      await elementUpdated(el);
+
+      expect(chevronIcon).to.have.attribute("name", "chevron-down");
+    });
+
+    it("sections within collapsed sidebar maintain visibility", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar collapsed>
+          <sgds-sidebar-section title="Main" name="main">
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section");
+      const sectionDiv = section?.shadowRoot?.querySelector(".sidebar-section");
+
+      expect(sectionDiv).to.have.class("sidebar-section--collapsed");
     });
   });
 });

@@ -1,4 +1,4 @@
-import { html, nothing } from "lit";
+import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -27,16 +27,6 @@ export class SgdsSidebarGroup extends SidebarElement {
   static dependencies = {
     "sgds-icon": SgdsIcon
   };
-
-  /**
-   * The name of the icon to display before the group label.
-   * Icon name corresponds to sgds-icon component icons.
-   * A chevron icon is automatically appended to show expand/collapse state.
-   * @attribute icon
-   * @type {string}
-   * @default "placeholder"
-   */
-  @property({ type: String, reflect: true }) icon = "placeholder";
 
   /**
    * Manages submenu visibility state for nested groups.
@@ -101,7 +91,7 @@ export class SgdsSidebarGroup extends SidebarElement {
       >
         <div class="sidebar-item-label-wrapper">
           <div>
-            <sgds-icon name=${this.icon}></sgds-icon>
+            <slot name="leadingIcon"></slot>
             <span class="sidebar-item-label">${this.title}</span>
           </div>
 
@@ -115,7 +105,7 @@ export class SgdsSidebarGroup extends SidebarElement {
       <div
         class=${classMap({
           "sidebar-submenu": true,
-          "sidebar-submenu--collapsed": this._sidebarCollapsed,
+          "sidebar-submenu--collapsed": this._sidebarCollapsed && this._childLevel == 0,
           show: this._showMenu
         })}
       >

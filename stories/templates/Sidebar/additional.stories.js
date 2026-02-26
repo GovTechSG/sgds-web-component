@@ -2,95 +2,160 @@ import { html } from "lit";
 
 const Level0OnlyTemplate = args => html`
   <sgds-sidebar>
-    <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
-    <sgds-sidebar-item title="Analytics" name="analytics" icon="speedometer"></sgds-sidebar-item>
-    <sgds-sidebar-item title="Reports" name="reports" icon="file-text"></sgds-sidebar-item>
-    <sgds-sidebar-item title="Settings" name="settings" icon="gear"></sgds-sidebar-item>
+    <sgds-sidebar-item title="Dashboard" name="dashboard">
+      <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+    <sgds-sidebar-item title="Analytics" name="analytics">
+      <sgds-icon name="speedometer" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+    <sgds-sidebar-item title="Reports" name="reports">
+      <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+    <sgds-sidebar-item title="Settings" name="settings">
+      <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
   </sgds-sidebar>
 `;
 
 const Level0Level1Template = args => html`
   <sgds-sidebar>
-    <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
-      <sgds-sidebar-item title="Summary" name="summary" icon="building"></sgds-sidebar-item>
-      <sgds-sidebar-item title="Meetings" name="meetings" icon="calendar"></sgds-sidebar-item>
+    <sgds-sidebar-group title="Dashboard" name="dashboard">
+      <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+      <sgds-sidebar-item title="Summary" name="summary">
+        <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+      </sgds-sidebar-item>
+      <sgds-sidebar-item title="Meetings" name="meetings">
+        <sgds-icon name="calendar" slot="leadingIcon"></sgds-icon>
+      </sgds-sidebar-item>
     </sgds-sidebar-group>
-    <sgds-sidebar-group title="Reports" name="reports" icon="file-text">
-      <sgds-sidebar-item title="Sales Report" name="sales-report" icon="trend-up"></sgds-sidebar-item>
-      <sgds-sidebar-item title="Revenue Report" name="revenue-report" icon="trend-up"></sgds-sidebar-item>
+    <sgds-sidebar-group title="Reports" name="reports">
+      <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+      <sgds-sidebar-item title="Sales Report" name="sales-report">
+        <sgds-icon name="trend-up" slot="leadingIcon"></sgds-icon>
+      </sgds-sidebar-item>
+      <sgds-sidebar-item title="Revenue Report" name="revenue-report">
+        <sgds-icon name="trend-up" slot="leadingIcon"></sgds-icon>
+      </sgds-sidebar-item>
     </sgds-sidebar-group>
-    <sgds-sidebar-item title="Settings" name="settings" icon="gear"></sgds-sidebar-item>
+    <sgds-sidebar-item title="Settings" name="settings">
+      <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
   </sgds-sidebar>
 `;
 
 const Level0Level1Level2Template = args => html`
   <sgds-sidebar>
-    <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
-      <sgds-sidebar-group title="Sales" name="sales" icon="trend-up">
-        <sgds-sidebar-item title="By Region" name="by-region" icon="geo"></sgds-sidebar-item>
-        <sgds-sidebar-item title="By Product" name="by-product" icon="box-seam"></sgds-sidebar-item>
+    <sgds-sidebar-group title="Dashboard" name="dashboard">
+      <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+      <sgds-sidebar-group title="Sales" name="sales">
+        <sgds-icon name="trend-up" slot="leadingIcon"></sgds-icon>
+        <sgds-sidebar-item title="By Region" name="by-region">
+          <sgds-icon name="geo" slot="leadingIcon"></sgds-icon>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item title="By Product" name="by-product">
+          <sgds-icon name="box-seam" slot="leadingIcon"></sgds-icon>
+        </sgds-sidebar-item>
       </sgds-sidebar-group>
-      <sgds-sidebar-item title="Revenue" name="revenue" icon="trend-up"></sgds-sidebar-item>
+      <sgds-sidebar-item title="Revenue" name="revenue">
+        <sgds-icon name="trend-up" slot="leadingIcon"></sgds-icon>
+      </sgds-sidebar-item>
     </sgds-sidebar-group>
-    <sgds-sidebar-item title="Settings" name="settings" icon="gear"></sgds-sidebar-item>
+    <sgds-sidebar-item title="Settings" name="settings">
+      <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
   </sgds-sidebar>
 `;
 
 const CollapsedStateTemplate = args => html`
   <sgds-sidebar ?collapsed=${true}>
-    <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
-      <sgds-sidebar-item title="Summary" name="summary" icon="building"></sgds-sidebar-item>
+    <sgds-sidebar-group title="Dashboard" name="dashboard">
+      <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+      <sgds-sidebar-item title="Summary" name="summary">
+        <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+      </sgds-sidebar-item>
     </sgds-sidebar-group>
-    <sgds-sidebar-item title="Reports" name="reports" icon="file-text"></sgds-sidebar-item>
-    <sgds-sidebar-item title="Settings" name="settings" icon="gear"></sgds-sidebar-item>
+    <sgds-sidebar-item title="Reports" name="reports">
+      <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+    <sgds-sidebar-item title="Settings" name="settings">
+      <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
   </sgds-sidebar>
 `;
 
 const WithSectionsTemplate = args => html`
   <sgds-sidebar>
-    <sgds-sidebar-section title="Main" collapsible>
-      <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
-      <sgds-sidebar-item title="Analytics" name="analytics" icon="trend-up"></sgds-sidebar-item>
+    <sgds-sidebar-section title="Main" name="main" ?collapsible=${false}>
+      <sgds-sidebar-item title="Dashboard" name="dashboard">
+        <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+      </sgds-sidebar-item>
+      <sgds-sidebar-item title="Analytics" name="analytics">
+        <sgds-icon name="trend-up" slot="leadingIcon"></sgds-icon>
+      </sgds-sidebar-item>
     </sgds-sidebar-section>
-    <sgds-sidebar-section title="Organization" collapsible>
-      <sgds-sidebar-group title="Team Management" name="team" icon="users">
-        <sgds-sidebar-item title="Members" name="members" icon="person"></sgds-sidebar-item>
-        <sgds-sidebar-item title="Roles" name="roles" icon="lock"></sgds-sidebar-item>
+    <sgds-sidebar-section title="Organization" name="organization" collapsible>
+      <sgds-sidebar-group title="Team Management" name="team">
+        <sgds-icon name="users" slot="leadingIcon"></sgds-icon>
+        <sgds-sidebar-item title="Members" name="members">
+          <sgds-icon name="person" slot="leadingIcon"></sgds-icon>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item title="Roles" name="roles">
+          <sgds-icon name="lock" slot="leadingIcon"></sgds-icon>
+        </sgds-sidebar-item>
       </sgds-sidebar-group>
-      <sgds-sidebar-item title="Projects" name="projects" icon="layers"></sgds-sidebar-item>
+      <sgds-sidebar-item title="Projects" name="projects">
+        <sgds-icon name="layers" slot="leadingIcon"></sgds-icon>
+      </sgds-sidebar-item>
     </sgds-sidebar-section>
-    <sgds-sidebar-section title="Configuration" collapsible>
-      <sgds-sidebar-item title="Settings" name="settings" icon="gear"></sgds-sidebar-item>
+    <sgds-sidebar-section title="Configuration" name="configuration" collapsible>
+      <sgds-sidebar-item title="Settings" name="settings">
+        <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+      </sgds-sidebar-item>
     </sgds-sidebar-section>
   </sgds-sidebar>
 `;
 
 const ActiveStateTemplate = args => html`
   <sgds-sidebar active="sales-report">
-    <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
-      <sgds-sidebar-item title="Summary" name="summary" icon="building"></sgds-sidebar-item>
+    <sgds-sidebar-group title="Dashboard" name="dashboard">
+      <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+      <sgds-sidebar-item title="Summary" name="summary">
+        <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+      </sgds-sidebar-item>
     </sgds-sidebar-group>
-    <sgds-sidebar-group title="Reports" name="reports" icon="file-text">
-      <sgds-sidebar-item title="Sales Report" name="sales-report" icon="building"></sgds-sidebar-item>
-      <sgds-sidebar-item title="Revenue Report" name="revenue-report" icon="trend-up"></sgds-sidebar-item>
+    <sgds-sidebar-group title="Reports" name="reports">
+      <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+      <sgds-sidebar-item title="Sales Report" name="sales-report">
+        <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+      </sgds-sidebar-item>
+      <sgds-sidebar-item title="Revenue Report" name="revenue-report">
+        <sgds-icon name="trend-up" slot="leadingIcon"></sgds-icon>
+      </sgds-sidebar-item>
     </sgds-sidebar-group>
-    <sgds-sidebar-item title="Settings" name="settings" icon="gear"></sgds-sidebar-item>
+    <sgds-sidebar-item title="Settings" name="settings">
+      <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
   </sgds-sidebar>
 `;
 
 const LinkNavigationTemplate = args => html`
   <sgds-sidebar active="profile">
-    <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house">
+    <sgds-sidebar-item title="Dashboard" name="dashboard">
+      <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
       <a href="#"></a>
     </sgds-sidebar-item>
-    <sgds-sidebar-item title="Profile" name="profile" icon="person">
+    <sgds-sidebar-item title="Profile" name="profile">
+      <sgds-icon name="person" slot="leadingIcon"></sgds-icon>
       <a href="#"></a>
     </sgds-sidebar-item>
-    <sgds-sidebar-group title="Settings" name="settings" icon="gear">
-      <sgds-sidebar-item title="Account" name="account" icon="user-circle">
+    <sgds-sidebar-group title="Settings" name="settings">
+      <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+      <sgds-sidebar-item title="Account" name="account">
+        <sgds-icon name="user-circle" slot="leadingIcon"></sgds-icon>
         <a href="#"></a>
       </sgds-sidebar-item>
-      <sgds-sidebar-item title="Preferences" name="preferences" icon="sliders">
+      <sgds-sidebar-item title="Preferences" name="preferences">
+        <sgds-icon name="sliders" slot="leadingIcon"></sgds-icon>
         <a href="#"></a>
       </sgds-sidebar-item>
     </sgds-sidebar-group>
