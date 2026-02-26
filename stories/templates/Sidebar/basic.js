@@ -6,6 +6,7 @@ export const Template = args => html`
     <!-- Main Navigation Section -->
     <sgds-sidebar-section title="Main" name="main" collapsible>
       <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
+        <sgds-icon name="placeholder" slot="trailingIcon"></sgds-icon>
         <sgds-sidebar-group title="Summary" name="summary" icon="building">
           <sgds-sidebar-item title="Latest Sales" name="latest-sales">
             <a href="#"></a>

@@ -41,6 +41,8 @@ import SgdsSidebarGroup from "./sgds-sidebar-group";
  *   Event detail: { activeItem: string } - name of the selected item
  *
  */
+
+const SGDS_SIDEBAR_GROUP = "sgds-sidebar-group";
 export class SgdsSidebar extends SgdsElement {
   static styles = [...SgdsElement.styles, sidebarStyle];
 
@@ -134,23 +136,19 @@ export class SgdsSidebar extends SgdsElement {
       // when nested, we will find the top level of parent
       let parentEle = this._sidebarActiveItem.parentElement as SgdsSidebarGroup;
 
-      while (parentEle._childLevel >= 0 && parentEle.tagName.toLowerCase() === "sgds-sidebar-group") {
-        if (parentEle.tagName.toLowerCase() === "sgds-sidebar-group") {
-          parentEle._showMenu = parentEle._childLevel > 0; //setting this to true as the child is active
-          parentEle._selected = true;
-          parentEle = parentEle.parentElement as SgdsSidebarGroup;
-
+      while (parentEle._childLevel >= 0 && parentEle.tagName.toLowerCase() === SGDS_SIDEBAR_GROUP) {
+        if (parentEle.tagName.toLowerCase() === SGDS_SIDEBAR_GROUP) {
           if (parentEle._childLevel === 0) {
-            // when active item already in drawer, don't need set nodes.
+            // when active item not in drawer, set nodes into drawer.
             if (!parentEle.classList.contains("sidebar-nested-overlay")) {
               this._setNodesToDrawer(parentEle);
             }
           }
-        }
-      }
 
-      if (this._sidebarActiveGroup) {
-        this._sidebarActiveGroup._selected = true;
+          parentEle._showMenu = parentEle._childLevel > 0; //setting this to true as the child is active
+          parentEle._selected = true;
+          parentEle = parentEle.parentElement as SgdsSidebarGroup;
+        }
       }
     }
   }
@@ -189,7 +187,9 @@ export class SgdsSidebar extends SgdsElement {
 
     // when there is an active group set, always set new menu items
     this._drawerItems = []; // always set to empty to prevent duplicate
-    const menuItems = this._sidebarActiveGroup.querySelectorAll(":scope > *");
+    const menuItems = this._sidebarActiveGroup.querySelectorAll(
+      ":scope > sgds-sidebar-group, :scope > sgds-sidebar-item"
+    );
     menuItems.forEach(e => {
       this._drawerItems.push(e);
     });
@@ -224,7 +224,7 @@ export class SgdsSidebar extends SgdsElement {
    */
   private addItemListeners() {
     const items = this.querySelectorAll("sgds-sidebar-item");
-    const groups = this.querySelectorAll("sgds-sidebar-group");
+    const groups = this.querySelectorAll(SGDS_SIDEBAR_GROUP);
     const allItems = [...items, ...groups] as SidebarElement[];
 
     allItems.forEach(item => {
