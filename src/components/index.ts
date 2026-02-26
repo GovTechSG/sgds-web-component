@@ -42,6 +42,7 @@ export * from "./Radio/sgds-radio";
 export * from "./Radio/sgds-radio-group";
 export * from "./Select/sgds-select";
 export * from "./Select/sgds-select-option";
+export * from "./Sidebar/sgds-sidebar";
 export * from "./Sidenav/sgds-sidenav";
 export * from "./Sidenav/sgds-sidenav-item";
 export * from "./Sidenav/sgds-sidenav-link";

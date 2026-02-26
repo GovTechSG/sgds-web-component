@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sidebar Playground</title>
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      }
+
+      .container {
+        display: flex;
+        height: calc(100vh - 28px);
+      }
+
+      .sidebar-wrapper {
+        height: 100%;
+      }
+
+      .content {
+        flex: 1;
+        padding: 24px;
+        overflow-y: auto;
+      }
+
+      .content h1 {
+        margin-top: 0;
+      }
+
+      .example-section {
+        margin-bottom: 32px;
+      }
+
+      .example-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #374151;
+      }
+
+      .example-description {
+        font-size: 14px;
+        color: #6b7280;
+        margin-bottom: 16px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <sgds-masthead fluid></sgds-masthead>
+
+    <div class="container">
+      <div class="sidebar-wrapper">
+        <sgds-sidebar active="meetings">
+          <div slot="brandName">brand-name</div>
+          <!-- Main Navigation Section -->
+
+          <sgds-sidebar-section title="Main" name="main" ?collapsible="false">
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="placeholder" slot="trailingIcon"></sgds-icon>
+              <sgds-sidebar-group title="Summary" name="summary">
+                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-sidebar-item title="Latest Sales" name="latest-sales">
+                  <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                  <sgds-icon name="placeholder" slot="trailingIcon"></sgds-icon>
+                  <a href="#"></a>
+                </sgds-sidebar-item>
+                <sgds-sidebar-item title="Refunds" name="refunds"> </sgds-sidebar-item>
+              </sgds-sidebar-group>
+
+              <sgds-sidebar-item title="Meetings" name="meetings">
+                <sgds-icon name="calendar" slot="leadingIcon"></sgds-icon>
+                <a href="http://localhost:5173/playground/select.html"></a>
+              </sgds-sidebar-item>
+              <sgds-sidebar-item title="Gallery" name="gallery">
+                <sgds-icon name="camera" slot="leadingIcon"></sgds-icon>
+                <a href="http://localhost:5173/playground/combobox.html"></a>
+              </sgds-sidebar-item>
+            </sgds-sidebar-group>
+
+            <sgds-sidebar-group title="Reports" name="reports">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Yearly" name="yearly">
+                <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+              <sgds-sidebar-item title="Monthly" name="monthly">
+                <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+            </sgds-sidebar-group>
+
+            <sgds-sidebar-item title="Public Members" name="public-members">
+              <sgds-icon name="user-circle" slot="leadingIcon"></sgds-icon>
+              <sgds-icon slot="trailingIcon" name="summary"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+
+          <!-- Organization Section (Collapsible) -->
+          <sgds-sidebar-section title="Organization" name="organization">
+            <sgds-sidebar-item
+              title="Team Management Team Management Team Management Team Management"
+              name="team-management"
+            >
+              <sgds-icon name="users" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+
+            <sgds-sidebar-item title="Projects" name="projects">
+              <sgds-icon name="layers" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+
+          <!-- Configuration Section (Collapsible) -->
+          <sgds-sidebar-section title="Configuration" name="configuration" collapsible>
+            <sgds-sidebar-item title="Settings" name="settings">
+              <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+
+          <!-- Support Section -->
+
+          <sgds-sidebar-item title="Help & Support" name="help-support">
+            <sgds-icon name="question-circle" slot="leadingIcon"></sgds-icon>
+            <span
+              slot="trailingIcon"
+              style="
+                background: #ef4444;
+                color: white;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 11px;
+                font-weight: 600;
+              "
+              >3</span
+            >
+          </sgds-sidebar-item>
+
+          <sgds-sidebar-item title="Premium Features" name="premium-features">
+            <sgds-icon name="star" slot="leadingIcon"></sgds-icon>
+          </sgds-sidebar-item>
+        </sgds-sidebar>
+      </div>
+
+      <div class="content">
+        <h1>Sidebar Component Playground</h1>
+
+        <div class="example-section">
+          <div class="example-title">Overview</div>
+          <div class="example-description">
+            This sidebar demonstrates a collapsible navigation component with support for:
+            <ul style="color: #6b7280; margin: 8px 0 0 0; padding-left: 20px">
+              <li>Organized sections to group related options</li>
+              <li>Collapsible sections to save space</li>
+              <li>Up to 3 levels of nested options</li>
+              <li>Floating overlays for nested content</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="example-section">
+          <div class="example-title">Components</div>
+          <ul style="color: #4b5563; line-height: 1.8">
+            <li><strong>sgds-sidebar</strong> - Main container component</li>
+            <li><strong>sgds-sidebar-section</strong> - Organizes and groups options (NEW!)</li>
+            <li><strong>sgds-sidebar-item</strong> - Individual navigation items</li>
+          </ul>
+        </div>
+
+        <div class="example-section">
+          <div class="example-title">Features</div>
+          <ul style="color: #4b5563; line-height: 1.8">
+            <li>Click the menu icon in the sidebar header to collapse/expand the entire sidebar</li>
+            <li>Click section headers to expand/collapse sections (if collapsible)</li>
+            <li>Hover over or focus on options with nested items to show floating overlay</li>
+            <li>Organize options with sidebar sections for better structure</li>
+            <li>Supports up to 3 levels of nesting within options</li>
+            <li>Selected state for active option (Dashboard)</li>
+            <li>Disabled state example (Premium Features)</li>
+            <li>Custom icons using sgds-icon component</li>
+            <li>Smooth animations and transitions</li>
+          </ul>
+        </div>
+
+        <div class="example-section">
+          <div class="example-title">Sidebar Sections</div>
+          <p style="color: #6b7280; margin-bottom: 12px">The sidebar is organized into sections:</p>
+          <ul style="color: #4b5563; line-height: 1.8">
+            <li><strong>Main Section</strong> - Always expanded, contains Dashboard and Reports</li>
+            <li><strong>Organization Section</strong> - Collapsible, contains Team Management and Projects</li>
+            <li><strong>Configuration Section</strong> - Collapsible, contains Settings</li>
+            <li><strong>Support Section</strong> - Always expanded, contains Help & Support and Premium Features</li>
+          </ul>
+        </div>
+
+        <div class="example-section">
+          <div class="example-title">sgds-sidebar-section Properties</div>
+          <ul style="color: #4b5563; line-height: 2; font-family: monospace; font-size: 13px">
+            <li><strong>title</strong> (string) - The section header text displayed above the options</li>
+            <li><strong>collapsed</strong> (boolean, default: false) - Whether the section is in collapsed state</li>
+            <li>
+              <strong>collapsible</strong> (boolean, default: false) - If true, users can toggle the section open/closed
+            </li>
+          </ul>
+          <p style="color: #6b7280; margin-top: 12px; font-size: 13px">
+            Example: &lt;sgds-sidebar-section title="Organization" collapsible
+            collapsed="true"&gt;...&lt;/sgds-sidebar-section&gt;
+          </p>
+        </div>
+
+        <div class="example-section">
+          <div class="example-title">Slot Features</div>
+          <ul style="color: #4b5563; line-height: 1.8">
+            <li><strong>Default slot</strong> - Label text for the option</li>
+            <li><strong>before slot</strong> - Icon or content displayed before the label</li>
+            <li><strong>after slot</strong> - Icon, badge, or indicator displayed after the label</li>
+            <li><strong>nested slot</strong> - Nested options that appear in overlay on hover</li>
+          </ul>
+          <p style="color: #6b7280; margin-top: 12px; font-size: 13px">
+            The "Help & Support" option demonstrates the <code>after</code> slot with a badge indicator.
+          </p>
+        </div>
+
+        <div class="example-section">
+          <div class="example-title">Interactive Examples</div>
+          <p style="color: #6b7280; margin-bottom: 12px">Try these interactions:</p>
+          <ul style="color: #4b5563; line-height: 1.8">
+            <li>Hover over "Team Management" to see options with 3 levels of nesting</li>
+            <li>Hover over "Settings" to see nested Privacy & Security with 3rd level items</li>
+            <li>Hover over "Projects" to see multiple branches with nested items</li>
+            <li>Check the red badge on "Help & Support" - demonstrates the <code>after</code> slot</li>
+            <li>Click the collapse button to minimize the sidebar width</li>
+            <li>Try "Premium Features" - it's disabled and cannot be interacted with</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Log sidebar events
+      const sidebar = document.querySelector("sgds-sidebar");
+      sidebar?.addEventListener("sgds-sidebar-toggle", event => {
+        console.log("Sidebar toggled:", event.detail);
+      });
+    </script>
+  </body>
+</html>

@@ -201,12 +201,12 @@ export const PreventClose = {
   name: "Prevent close",
   args: {},
   parameters: {
+    chromatic: { disableSnapshot: true },
     layout: "fullscreen",
     docs: {
       story: {
         height: "700px"
       }
-    },
-    chromatic: { disableSnapshot: true }
+    }
   }
 };
