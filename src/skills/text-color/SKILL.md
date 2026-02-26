@@ -26,6 +26,8 @@ All SGDS text utilities use the `sgds:text-{variant}-{modifier}` pattern with th
 
 ## Semantic Text Colors
 
+For definitions of suffix modifiers used here (`default`, `muted`, `fixed-light`, `fixed-dark`, `inverse`, `emphasis`), see **[`color-semantics`](../color-semantics/SKILL.md)**.
+
 Basic text colors for content hierarchy:
 
 ```html

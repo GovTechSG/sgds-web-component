@@ -11,6 +11,7 @@ Skills that help with building and maintaining the SGDS library:
 - **[tailwind-mapping](tailwind-mapping/)** - Converting SGDS CSS variables to Tailwind v4 utilities
 - **[token-workflow](token-workflow/)** - Maintaining design token architecture across theme layers
 - **[storybook-stories](storybook-stories/)** - Writing Storybook stories following project patterns
+- **[agent-skills-writing](agent-skills-writing/)** - Standards and patterns for authoring new agent skills
 
 ## Using Skills
 

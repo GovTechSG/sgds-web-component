@@ -153,65 +153,24 @@ Both methods work identically once loaded.
 
 ## Framework-Specific Setup
 
-### React
+Since SGDS utilities are built on Tailwind v4, you must first set up Tailwind CSS for your framework before importing the SGDS CSS files.
 
-```javascript
-// App.js or index.js
-import '@govtechsg/sgds-web-component/css/utility.css';
-import '@govtechsg/sgds-web-component/themes/day.css';
-import '@govtechsg/sgds-web-component/themes/night.css';
+**Step 1**: Follow the Tailwind CSS guide for your framework:
 
-function App() {
-  return (
-    <div className="sgds:p-6 sgds:bg-default">
-      <h1 className="sgds:text-heading-default sgds:text-3-xl sgds:font-bold">
-        React App
-      </h1>
-    </div>
-  );
-}
-```
+| Framework | Guide |
+|-----------|-------|
+| Next.js | https://tailwindcss.com/docs/installation/framework-guides/nextjs |
+| Nuxt (Vue) | https://tailwindcss.com/docs/installation/framework-guides/nuxt |
+| Angular | https://tailwindcss.com/docs/installation/framework-guides/angular |
+| SvelteKit | https://tailwindcss.com/docs/installation/framework-guides/sveltekit |
+| Astro | https://tailwindcss.com/docs/installation/framework-guides/astro |
+| Gatsby | https://tailwindcss.com/docs/installation/framework-guides/gatsby |
+| React Router | https://tailwindcss.com/docs/installation/framework-guides/react-router |
+| Vite (generic) | https://tailwindcss.com/docs/installation/using-vite |
 
-### Vue
+Not listed? See the full list at https://tailwindcss.com/docs/installation/framework-guides.
 
-```javascript
-// main.js
-import '@govtechsg/sgds-web-component/css/utility.css';
-import '@govtechsg/sgds-web-component/themes/day.css';
-import '@govtechsg/sgds-web-component/themes/night.css';
-```
-
-```vue
-<template>
-  <div class="sgds:p-6 sgds:bg-default">
-    <h1 class="sgds:text-heading-default sgds:text-3-xl sgds:font-bold">
-      Vue App
-    </h1>
-  </div>
-</template>
-```
-
-### Angular
-
-```typescript
-// angular.json
-{
-  "styles": [
-    "node_modules/@govtechsg/sgds-web-component/css/utility.css",
-    "node_modules/@govtechsg/sgds-web-component/themes/day.css",
-    "node_modules/@govtechsg/sgds-web-component/themes/night.css"
-  ]
-}
-```
-
-```html
-<!-- component.html -->
-<div class="sgds:p-6 sgds:bg-default">
-  <h1 class="sgds:text-heading-default sgds:text-3-xl sgds:font-bold">
-    Angular App
-  </h1>
-</div>
-```
+**Step 2**: After Tailwind is set up, import the SGDS CSS files as described in [Required Setup](#required-setup) above.
 
 ## Next Steps
 
@@ -219,7 +178,9 @@ Once setup is complete, explore the specialized utility skills:
 - **sgds-spacing** - Margin, padding, gap utilities
 - **sgds-background-color** - Background colors and surfaces
 - **sgds-text-color** - Text colors and typography colors
-- **sgds-border** - Borders, colors, and radius
+- **sgds-border-color** - Border colors
+- **sgds-border-width** - Border thickness and sides
+- **sgds-border-radius** - Rounded corners
 - **sgds-typography** - Font sizes, weights, spacing
 - **sgds-opacity** - Transparency and overlays
 

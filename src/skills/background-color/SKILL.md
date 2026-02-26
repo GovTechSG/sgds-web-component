@@ -62,25 +62,14 @@ See **[`surface.md`](reference/surface.md)** and **[`base.md`](reference/base.md
 
 ### Semantic Color Meanings
 
-**primary** = Brand color (emphasis)  
-**accent** = Informational/links (neutral, no urgency)  
-**success** = Positive feedback  
-**danger** = Errors, destructive actions  
-**warning** = Caution messages  
-**purple/cyan** = Visual variety (no semantic meaning)  
-**neutral** = Equal importance (no differentiation)  
+For full definitions of semantic categories (`primary`, `accent`, `success`, `danger`, `warning`, `purple`, `cyan`, `neutral`) and what each suffix modifier means (`default`, `emphasis`, `muted`, `fixed-light`, `fixed-dark`, `inverse`, `surface`, `alternate`, `overlay`, `translucent`, `transparent`), see **[`color-semantics`](../color-semantics/SKILL.md)**.
 
-Each semantic color has these variants:
-- `{color}-default` - Page level, default emphasis
-- `{color}-muted` - Reduced emphasis (page or component)
-- `{color}-surface-default` - Component level, standard
-- `{color}-surface-emphasis` - Component level, strong
-- `{color}-surface-muted` - Component level, subtle
-
-**When to use Purple/Cyan:**
-- Primary and accent colors are too similar
-- Need visual variety without semantic meaning
-- Non-semantic categorization/tagging
+Each semantic color has these variants (background-specific):
+- `{color}-default` — Page level, default emphasis
+- `{color}-muted` — Reduced emphasis (page level)
+- `{color}-surface-default` — Component level, standard
+- `{color}-surface-emphasis` — Component level, strong
+- `{color}-surface-muted` — Component level, subtle
 
 See **[`primary.md`](reference/primary.md)**, **[`accent.md`](reference/accent.md)**, **[`success.md`](reference/success.md)**, **[`danger.md`](reference/danger.md)**, **[`warning.md`](reference/warning.md)**, **[`purple.md`](reference/purple.md)**, **[`cyan.md`](reference/cyan.md)**, **[`neutral.md`](reference/neutral.md)** for detailed usage.
 

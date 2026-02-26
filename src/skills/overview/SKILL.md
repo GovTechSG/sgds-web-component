@@ -1,6 +1,6 @@
 ---
 name: sgds-utilities-overview
-description: Overview of SGDS utility classes with the sgds: prefix. Use for general utility class questions or when the specific category is unclear. For specialized help, refer to category-specific skills (setup, spacing, background-color, text-color, border, typography, opacity).
+description: Overview of SGDS utility classes with the sgds: prefix. Use for general utility class questions or when the specific category is unclear. For specialized help, refer to category-specific skills (setup, spacing, color-semantics, background-color, text-color, border-color, border-width, border-radius, typography, opacity).
 metadata:
   author: singapore-design-system
   version: "0.0.0"
@@ -56,6 +56,13 @@ Margin, padding, and gap utilities based on the 4px scale system.
 
 ---
 
+### **sgds-color-semantics** - Color Token Suffix Reference
+Shared definitions for suffix modifiers (`default`, `emphasis`, `muted`, `fixed-light`, `fixed-dark`, `inverse`, `surface`, etc.) used across all color skills.
+
+**Use when**: unsure what a color token suffix means, or implementing a new color skill.
+
+---
+
 ### **sgds-background-color** - Background Colors
 Theme-aware background colors for surfaces, pages, and semantic states.
 
@@ -94,22 +101,57 @@ Theme-aware text colors for content hierarchy and semantic states.
 
 ---
 
-### **sgds-border** - Border Utilities
-Border colors, widths, and border radius.
+### **sgds-border-color** - Border Colors
+Theme-aware semantic border colors for components and containers.
 
 ```html
-<div class="sgds:border sgds:border-default sgds:rounded-lg">
-  Border utilities
-</div>
+<div class="sgds:border sgds:border-default">Standard border</div>
+<div class="sgds:border sgds:border-primary-default">Brand border</div>
+<div class="sgds:border sgds:border-danger-default">Error border</div>
 ```
 
 **Common patterns**:
-- `sgds:border`, `sgds:border-{n}` - Border width
-- `sgds:border-{color}-default` - Border colors
-- `sgds:rounded-{size}` - Border radius
-- `sgds:border-{side}` - Side-specific borders
+- `sgds:border-default` / `sgds:border-emphasis` / `sgds:border-muted` - Base borders
+- `sgds:border-{color}-default` - Semantic border colors
+- `sgds:border-transparent` - Invisible border (preserves spacing)
 
-**Theme files**: Required for colors only
+**Theme files**: Required
+
+---
+
+### **sgds-border-width** - Border Width
+Border thickness and side selection.
+
+```html
+<div class="sgds:border-2">2px all sides</div>
+<div class="sgds:border-l-4">4px left side</div>
+<div class="sgds:border-b">1px bottom only</div>
+```
+
+**Common patterns**:
+- `sgds:border`, `sgds:border-{n}` - All sides (0, 2, 4, 8)
+- `sgds:border-{side}` - One side (t, r, b, l)
+- `sgds:border-{side}-{n}` - Specific width per side
+
+**Theme files**: Not required
+
+---
+
+### **sgds-border-radius** - Border Radius
+Rounded corners for components and interactive elements.
+
+```html
+<div class="sgds:rounded-lg">Card (8px)</div>
+<span class="sgds:rounded-full">Badge / pill</span>
+<img class="sgds:rounded-full sgds:w-12 sgds:h-12" src="avatar.jpg">
+```
+
+**Common patterns**:
+- `sgds:rounded-{size}` - All corners (sm, md, lg, xl, 2-xl, 3-xl, full)
+- `sgds:rounded-{side}-{size}` - Top/bottom/left/right corners
+- `sgds:rounded-full` - Pill shape or circle
+
+**Theme files**: Not required
 
 ---
 
@@ -272,9 +314,10 @@ Combines: opacity, background-color, border, spacing, text-color, typography
 ## Quick Reference by Use Case
 
 **Layout & Spacing**: → **sgds-spacing** skill  
+**Color Token Suffixes (default, emphasis, muted, etc.)**: → **sgds-color-semantics** skill  
 **Card Backgrounds**: → **sgds-background-color** skill  
 **Text Content**: → **sgds-text-color** skill  
-**Borders & Rounded Corners**: → **sgds-border** skill  
+**Borders & Rounded Corners**: → **sgds-border-color**, **sgds-border-width**, **sgds-border-radius** skills  
 **Headings & Text Sizes**: → **sgds-typography** skill  
 **Transparent Overlays**: → **sgds-opacity** skill  
 **Setup Issues**: → **sgds-utilities-setup** skill
@@ -283,8 +326,8 @@ Combines: opacity, background-color, border, spacing, text-color, typography
 
 1. **Start**: Complete **sgds-utilities-setup** skill
 2. **Layout**: Learn **sgds-spacing** for margins, padding, gaps
-3. **Colors**: Learn **sgds-background-color** and **sgds-text-color**
-4. **Polish**: Learn **sgds-border** and **sgds-typography**
+3. **Colors**: Learn **sgds-color-semantics** first, then **sgds-background-color** and **sgds-text-color**
+4. **Polish**: Learn **sgds-border-color**, **sgds-border-width**, **sgds-border-radius**, and **sgds-typography**
 5. **Advanced**: Learn **sgds-opacity** for effects
 
 ---

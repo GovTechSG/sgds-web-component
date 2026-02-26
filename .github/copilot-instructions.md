@@ -73,6 +73,7 @@ Specialized knowledge for specific development tasks:
 
 ### Internal Skills (Maintainer tools in .github/skills/)
 - [storybook-stories](.github/skills/storybook-stories/SKILL.md) - Storybook story writing patterns for templates folder
+- [agent-skills-writing](.github/skills/agent-skills-writing/SKILL.md) - Standards and patterns for authoring new agent skills
 - [token-workflow](.github/skills/token-workflow/SKILL.md) - Design token architecture and documentation workflows
 - [tailwind-mapping](.github/skills/tailwind-mapping/SKILL.md) - Tailwind v4 CSS variable mappings and utility class generation
 
@@ -80,9 +81,12 @@ Specialized knowledge for specific development tasks:
 - [overview](../src/skills/overview/SKILL.md) - Overview of all SGDS utility skills
 - [setup](../src/skills/setup/SKILL.md) - Setup and prerequisites for using SGDS utilities
 - [spacing](../src/skills/spacing/SKILL.md) - Margin, padding, gap utilities with 4px scale system
+- [color-semantics](../src/skills/color-semantics/SKILL.md) - Shared definitions for color token suffix modifiers (default, emphasis, muted, fixed-light, fixed-dark, inverse, surface, etc.) reused across all color skills
 - [background-color](../src/skills/background-color/SKILL.md) - Theme-aware background color utilities with semantic tokens
 - [text-color](../src/skills/text-color/SKILL.md) - Text color utilities that adapt to themes
-- [border](../src/skills/border/SKILL.md) - Border utilities (width, color, radius, style)
+- [border-color](../src/skills/border-color/SKILL.md) - Border color utilities (semantic, theme-aware)
+- [border-width](../src/skills/border-width/SKILL.md) - Border thickness and side selection
+- [border-radius](../src/skills/border-radius/SKILL.md) - Rounded corner utilities
 - [typography](../src/skills/typography/SKILL.md) - Typography utilities (font size, weight, line height, etc.)
 - [opacity](../src/skills/opacity/SKILL.md) - Opacity utilities
 
