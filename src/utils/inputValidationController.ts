@@ -2,6 +2,10 @@ import { ReactiveController, ReactiveControllerHost } from "lit";
 import { SgdsFormControl } from "./formSubmitController";
 import { SgdsCheckbox, SgdsInput } from "../components";
 
+interface HostWithInternals extends ReactiveControllerHost, HTMLElement {
+  _internals?: ElementInternals;
+}
+
 /**
  * SGDS custom form validation methods and behaviours
  */
@@ -13,7 +17,8 @@ export class InputValidationController implements ReactiveController {
 
   constructor(host: ReactiveControllerHost & HTMLElement, options?: Partial<InputValidationControllerOptions>) {
     (this.host = host).addController(this);
-    this._internals = this.host.attachInternals();
+    // Use the internals from the host if it implements the mixin
+    this._internals = (host as HostWithInternals)._internals || this.host.attachInternals();
     this.options = {
       setInvalid: (host: SgdsFormControl, value: boolean) => {
         host.invalid = value;
