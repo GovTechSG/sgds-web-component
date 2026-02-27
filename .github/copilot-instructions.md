@@ -67,9 +67,14 @@ description: 'AI agent guide for contributing to and navigating the sgds-web-com
 - [docs/](../docs/): In-depth guides and API docs
 - [contributing/](../contributing/): Architecture decisions and contribution process
 
+## Skills
+Specialized knowledge for specific development tasks:
+- [storybook-stories](../.github/skills/storybook-stories/SKILL.md) - Storybook story writing patterns for templates folder
+- [token-workflow](../.github/skills/token-workflow/SKILL.md) - Design token architecture and documentation workflows
+- [tailwind-mapping](../.github/skills/tailwind-mapping/SKILL.md) - Tailwind v4 CSS variable mappings and utility class generation
+
 ## Instruction Files
 Detailed guidelines for specific aspects of development:
-- [storybook-stories-pattern.md](.github/instructions/storybook-stories-pattern.md) - Storybook story writing patterns for templates folder
 - [dp.markdown-v1.instructions.md](.github/instructions/dp.markdown-v1.instructions.md) - Markdown documentation standards
 - [dp.self-explanatory-code-commenting-v1.instructions.md](.github/instructions/dp.self-explanatory-code-commenting-v1.instructions.md) - Code commenting guidelines
 
