@@ -44,3 +44,12 @@
   text-decoration: none !important;
   color: inherit !important;
 }
+
+/* Expand slotted anchors and checkboxes to fill the full item hit area including padding,
+   so clicking anywhere in the item activates them without JS click delegation. */
+::slotted(a),
+::slotted(sgds-checkbox) {
+  flex: 1;
+  margin: calc(var(--sgds-padding-sm) * -1) calc(var(--sgds-padding-lg) * -1);
+  padding: var(--sgds-padding-sm) var(--sgds-padding-lg);
+}

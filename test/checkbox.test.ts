@@ -192,6 +192,43 @@ describe("<sgds-checkbox>", () => {
     expect(el.checked).to.equal(true);
   });
 
+  it("clicking directly on the host element (e.g. padding area) delegates to the internal input and toggles the checkbox", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox></sgds-checkbox>`);
+    const inputSpy = Sinon.spy();
+    el.shadowRoot?.querySelector("input")?.addEventListener("click", inputSpy);
+
+    el.click();
+    await el.updateComplete;
+
+    expect(inputSpy.calledOnce).to.be.true;
+    expect(el.checked).to.be.true;
+  });
+
+  it("clicking directly on the host element twice toggles the checkbox back to unchecked", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox></sgds-checkbox>`);
+
+    el.click();
+    await el.updateComplete;
+    expect(el.checked).to.be.true;
+
+    el.click();
+    await el.updateComplete;
+    expect(el.checked).to.be.false;
+  });
+
+  it("host click does not propagate the original event, only the delegated input click propagates", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox></sgds-checkbox>`);
+    const hostClickSpy = Sinon.spy();
+    // Listener on a parent to count how many clicks bubble out of sgds-checkbox
+    el.parentElement?.addEventListener("click", hostClickSpy);
+
+    el.click();
+    await el.updateComplete;
+
+    // The original host click was stopped; only the delegated input click bubbles out
+    expect(hostClickSpy.callCount).to.equal(1);
+  });
+
   it("When required attr is passed in, it should not show invalid on first load", async () => {
     const el = await fixture<SgdsCheckbox>(html` <sgds-checkbox required></sgds-checkbox> `);
     expect(el.invalid).to.be.false;
