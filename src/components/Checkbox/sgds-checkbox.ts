@@ -148,6 +148,26 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
     super.firstUpdated(_changedProperties);
     this.checked && this.emit("sgds-check", { detail: { value: this.value } });
   }
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener("click", this._handleHostClick);
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    this.removeEventListener("click", this._handleHostClick);
+  }
+
+  // Delegates host-targeted clicks to the internal input so that clicking anywhere
+  // on the sgds-checkbox element (e.g. expanded padding inside sgds-dropdown-item) toggles
+  // the checkbox. Clicks already originating from inside the shadow DOM are left alone.
+  private _handleHostClick = (e: Event) => {
+    if (e.composedPath()[0] === this) {
+      e.stopPropagation();
+      this.input.click();
+    }
+  };
   render() {
     const displayFeedbackStyle = this.hasFeedback === "both" || this.hasFeedback === "style";
     const displayFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
