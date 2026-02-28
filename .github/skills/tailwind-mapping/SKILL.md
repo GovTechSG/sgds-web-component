@@ -77,7 +77,7 @@ Semantic colors follow the standard property patterns with these variants:
 - Background: `default`, `muted`, `translucent`
 - Surface: `default`, `emphasis`, `muted`, `translucent`
 - Text: `default`, `emphasis`, `fixed-light`, `fixed-dark`
-- Border: `default`, `emphasis`, `muted`, `subtle`
+- Border: `default`, `emphasis`, `muted`
 
 ## Typography Colors
 
@@ -192,7 +192,7 @@ Each section should include:
 - **Fixed-dark backgrounds**: Use `sgds:text-fixed-light` for contrast
 - **Light/bright colors** (warning/yellow): Use `sgds:text-fixed-dark`
 - **Dark colors**: Use `sgds:text-fixed-light`
-- **Border demos**: Use `.border-demo` class (2px solid border) with `sgds:p-md`
+- **Border demos**: Use `sgds:border-2 sgds:border-{color} sgds:p-md` — `sgds:border-2` applies the width/style, the color class sets the color
 
 ## Complete Mapping Workflow
 

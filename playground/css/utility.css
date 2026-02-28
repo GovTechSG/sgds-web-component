@@ -100,7 +100,7 @@
     --sgds-text-color-danger-fixed-dark: var(--sgds-danger-color-fixed-dark);
     --sgds-border-color-danger-default: var(--sgds-danger-border-color-default);
     --sgds-border-color-danger-emphasis: var(--sgds-danger-border-color-emphasis);
-    --sgds-border-color-danger-subtle: var(--sgds-danger-border-color-subtle);
+    --sgds-border-color-danger-muted: var(--sgds-danger-border-color-muted);
     --sgds-background-color-warning-default: var(--sgds-warning-bg-default);
     --sgds-background-color-warning-muted: var(--sgds-warning-bg-muted);
     --sgds-background-color-warning-surface-default: var(--sgds-warning-surface-default);
@@ -112,7 +112,7 @@
     --sgds-text-color-warning-fixed-dark: var(--sgds-warning-color-fixed-dark);
     --sgds-border-color-warning-default: var(--sgds-warning-border-color-default);
     --sgds-border-color-warning-emphasis: var(--sgds-warning-border-color-emphasis);
-    --sgds-border-color-warning-subtle: var(--sgds-warning-border-color-subtle);
+    --sgds-border-color-warning-muted: var(--sgds-warning-border-color-muted);
     --sgds-background-color-purple-default: var(--sgds-purple-bg-default);
     --sgds-background-color-purple-muted: var(--sgds-purple-bg-muted);
     --sgds-background-color-purple-surface-default: var(--sgds-purple-surface-default);
@@ -410,6 +410,9 @@
   }
   .sgds\:mt-md {
     margin-top: var(--sgds-spacing-md);
+  }
+  .sgds\:mt-sm {
+    margin-top: var(--sgds-spacing-sm);
   }
   .sgds\:mb-2-xl {
     margin-bottom: var(--sgds-spacing-2-xl);
@@ -740,8 +743,8 @@
   .sgds\:border-danger-emphasis {
     border-color: var(--sgds-border-color-danger-emphasis);
   }
-  .sgds\:border-danger-subtle {
-    border-color: var(--sgds-border-color-danger-subtle);
+  .sgds\:border-danger-muted {
+    border-color: var(--sgds-border-color-danger-muted);
   }
   .sgds\:border-default {
     border-color: var(--sgds-border-color-default);
@@ -812,8 +815,8 @@
   .sgds\:border-warning-emphasis {
     border-color: var(--sgds-border-color-warning-emphasis);
   }
-  .sgds\:border-warning-subtle {
-    border-color: var(--sgds-border-color-warning-subtle);
+  .sgds\:border-warning-muted {
+    border-color: var(--sgds-border-color-warning-muted);
   }
   .sgds\:bg-accent-default {
     background-color: var(--sgds-background-color-accent-default);
