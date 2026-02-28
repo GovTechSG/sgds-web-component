@@ -121,7 +121,7 @@
   --text-color-danger-fixed-dark: var(--sgds-danger-color-fixed-dark);
   --border-color-danger-default: var(--sgds-danger-border-color-default);
   --border-color-danger-emphasis: var(--sgds-danger-border-color-emphasis);
-  --border-color-danger-subtle: var(--sgds-danger-border-color-subtle);
+  --border-color-danger-muted: var(--sgds-danger-border-color-muted);
 
   /* Semantic - Warning Colors */
   --background-color-warning-default: var(--sgds-warning-bg-default);
@@ -135,7 +135,7 @@
   --text-color-warning-fixed-dark: var(--sgds-warning-color-fixed-dark);
   --border-color-warning-default: var(--sgds-warning-border-color-default);
   --border-color-warning-emphasis: var(--sgds-warning-border-color-emphasis);
-  --border-color-warning-subtle: var(--sgds-warning-border-color-subtle);
+  --border-color-warning-muted: var(--sgds-warning-border-color-muted);
 
   /* Semantic - Purple Colors */
   --background-color-purple-default: var(--sgds-purple-bg-default);

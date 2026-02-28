@@ -41,6 +41,18 @@ utility.css (Tailwind v4 CSS Configuration)
 - Uses `@supports` to detect Tailwind v4 capability
 - Generates utility classes with `sgds:` prefix
 
+## When a Token is Renamed
+
+When a semantic token is renamed (e.g., `subtle` → `muted`), update all five downstream layers in one pass:
+
+- [ ] **`src/themes/day.css` + `night.css`** — rename the token definition
+- [ ] **`src/css/utility.css`** — rename the Tailwind custom property and its reference
+- [ ] **`playground/css/utility.css`** — rename both the CSS variable mapping and the generated `.sgds\:` utility class
+- [ ] **`playground/utility/*.html`** — update the token name in the table cell, the CSS variable cell, the utility class on the preview div, and the preview label text
+- [ ] **`stories/utilities/*.stories.js`** — update the `ColorItem(...)` call with the new token name and variable
+
+> Run `pnpm run utility:dev` after editing playground files so Tailwind regenerates the utility class.
+
 ## When Tokens Change in root.css
 
 ### Checklist for Token Updates
