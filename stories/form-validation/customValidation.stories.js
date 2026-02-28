@@ -19,6 +19,16 @@ const DisableValidationByInputTemplate = args => {
         @sgds-input=${handleInput}
       >
       </sgds-input>
+      <sgds-textarea
+        noValidate
+        label="Bio"
+        hinttext="Must be at least 10 characters long"
+        name="textarea-bio"
+        hasFeedback
+        placeholder="Enter bio"
+        id="custom-validation__textarea-novalidate"
+      >
+      </sgds-textarea>
     </form>
     <script>
       const inputOne = document.querySelector("sgds-input#custom-validation__input-novalidate");
@@ -28,6 +38,16 @@ const DisableValidationByInputTemplate = args => {
         } else {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "This is an invalid message";
+        }
+      });
+
+      const textareaOne = document.querySelector("sgds-textarea#custom-validation__textarea-novalidate");
+      textareaOne.addEventListener("sgds-input", e => {
+        if (!e.target.value || e.target.value.length >= 10) {
+          e.target.setInvalid(false);
+        } else {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Bio must be at least 10 characters long";
         }
       });
     </script>
@@ -45,6 +65,15 @@ const DisableValidationByFormTemplate = args => {
         id="custom-validation__input-two-novalidate"
       >
       </sgds-input>
+      <sgds-textarea
+        label="Notes"
+        hinttext="Custom validation: minimum 5 characters"
+        name="textarea-notes"
+        hasFeedback
+        placeholder="Enter notes"
+        id="custom-validation__textarea-two-novalidate"
+      >
+      </sgds-textarea>
     </form>
     <script>
       const inputTwo = document.getElementById("custom-validation__input-two-novalidate");
@@ -54,6 +83,16 @@ const DisableValidationByFormTemplate = args => {
         } else {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "This is an invalid message";
+        }
+      });
+
+      const textareaTwo = document.getElementById("custom-validation__textarea-two-novalidate");
+      textareaTwo.addEventListener("sgds-input", e => {
+        if (!e.target.value || e.target.value.length >= 5) {
+          e.target.setInvalid(false);
+        } else {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Notes must be at least 5 characters long";
         }
       });
     </script>

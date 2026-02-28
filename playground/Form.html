@@ -4,8 +4,8 @@
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
 
 <h2>Default</h2>
-<sgds-input label="default" hinttext="default" value="This is a disablde input"></sgds-input>
-<sgds-textarea label="default" hinttext="default" value="This is a disablde textarea"></sgds-textarea>
+<sgds-input label="default" hinttext="default" value="This is a disablde input" disabled></sgds-input>
+<sgds-textarea label="default" hinttext="default" value="This is a disablde textarea" disabled></sgds-textarea>
 <sgds-datepicker label="default" hinttext="default"></sgds-datepicker>
 <sgds-quantity-toggle
   label="default"
@@ -105,35 +105,42 @@
 ></sgds-combo-box>
 
 <h2>Invalid</h2>
-<sgds-input required hasFeedback="both" label="invalid" hinttext="invalide"></sgds-input>
-<sgds-textarea required hasFeedback label="invalid" hinttext="invalide"></sgds-textarea>
-<sgds-datepicker required hasFeedback label="invalid" hinttext="invalide"></sgds-datepicker>
-<sgds-quantity-toggle
-  label="default"
-  hinttext="default"
-></sgds-quantity-toggle>
-<sgds-select
-  required
-  hasFeedback
-  label="invalid"
-  hinttext="invalide"
-  menuList='[{"label":"Afghanistan","value":"1"},{"label":"Albania","value":"2"},{"label":"Algeria","value":"3"},{"label":"Andorra","value":"4"}]'
-></sgds-select>
-<sgds-combo-box
-  required
-  hasFeedback
-  label="invalid"
-  hinttext="invalide"
-  menuList='[{"label":"Afghanistan","value":"1"},{"label":"Albania","value":"2"},{"label":"Algeria","value":"3"},{"label":"Andorra","value":"4"}]'
-></sgds-combo-box>
-<sgds-radio-group hinttext="hint" label="Label" required hasFeedback>
-  <sgds-radio value="2">Option 2</sgds-radio>
-  <sgds-radio value="3">Option 3</sgds-radio>
-</sgds-radio-group>
+<form id="invalid-form">
+  <sgds-input required hasFeedback="both" label="invalid" hinttext="invalide"></sgds-input>
+  <sgds-textarea required hasFeedback label="invalid" hinttext="invalide"></sgds-textarea>
+  <sgds-datepicker required hasFeedback label="invalid" hinttext="invalide"></sgds-datepicker>
+  <sgds-quantity-toggle
+    label="default"
+    hinttext="default"
+  ></sgds-quantity-toggle>
+  <sgds-select
+    required
+    hasFeedback
+    label="invalid"
+    hinttext="invalide"
+    menuList='[{"label":"Afghanistan","value":"1"},{"label":"Albania","value":"2"},{"label":"Algeria","value":"3"},{"label":"Andorra","value":"4"}]'
+  ></sgds-select>
+  <sgds-combo-box
+    required
+    hasFeedback
+    label="invalid"
+    hinttext="invalide"
+    menuList='[{"label":"Afghanistan","value":"1"},{"label":"Albania","value":"2"},{"label":"Algeria","value":"3"},{"label":"Andorra","value":"4"}]'
+  ></sgds-combo-box>
+  <sgds-radio-group hinttext="hint" label="Label" required hasFeedback>
+    <sgds-radio value="2">Option 2</sgds-radio>
+    <sgds-radio value="3">Option 3</sgds-radio>
+  </sgds-radio-group>
 
-<sgds-checkbox-group hasFeedback label="CheckboxGroup Label" hinttext="Check at least one option" required>
-      <sgds-checkbox value="watermelon">Watermelon</sgds-checkbox>
-      <sgds-checkbox value="apple">Apple</sgds-checkbox>
-      <sgds-checkbox value="lychee">Lychee</sgds-checkbox>
-    </sgds-checkbox-group>
-          <sgds-checkbox value="lychee" indeterminate>Lychee</sgds-checkbox>
+  <sgds-checkbox-group hasFeedback label="CheckboxGroup Label" hinttext="Check at least one option" required>
+    <sgds-checkbox value="watermelon">Watermelon</sgds-checkbox>
+    <sgds-checkbox value="apple">Apple</sgds-checkbox>
+    <sgds-checkbox value="lychee">Lychee</sgds-checkbox>
+  </sgds-checkbox-group>
+  <sgds-checkbox value="lychee" indeterminate>Lychee</sgds-checkbox>
+  
+  <div class="d-flex gap-2">
+    <sgds-button type="submit">Submit</sgds-button>
+    <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+  </div>
+</form>
