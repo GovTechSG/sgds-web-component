@@ -28,27 +28,27 @@ All SGDS utility classes use the `sgds:` prefix (Tailwind v4 @theme syntax):
 
 ### Import Utility CSS
 
-Users **must** import the utility CSS file before using any `sgds:` prefixed classes:
+`utility.css` is a **Tailwind source file** — it contains Tailwind v4 directives (`@theme`, `@import "tailwindcss/theme.css"`) that must be processed by Tailwind's build pipeline. It cannot be imported directly in JavaScript.
 
-```javascript
-// ES modules
-import '@govtechsg/sgds-web-component/css/utility.css';
+**Import it inside your project's main CSS file** (the one Tailwind processes):
+
+```css
+/* e.g. globals.css, index.css, main.css */
+@import '@govtechsg/sgds-web-component/css/utility.css';
 ```
 
-```html
-<!-- CDN -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component/css/utility.css">
-```
+Tailwind will resolve and process the nested imports at build time, generating all `sgds:` utility classes.
 
 **Without this import, utility classes will not work.**
 
 ## Optional: Theme Setup
 
-For theme-aware utilities that adapt to light/dark mode (background colors, text colors, border colors):
+For theme-aware utilities that adapt to light/dark mode (background colors, text colors, border colors), import the theme files in your project's CSS file:
 
-```javascript
-import '@govtechsg/sgds-web-component/themes/day.css';
-import '@govtechsg/sgds-web-component/themes/night.css';
+```css
+/* e.g. globals.css, index.css, main.css */
+@import '@govtechsg/sgds-web-component/themes/day.css';
+@import '@govtechsg/sgds-web-component/themes/night.css';
 ```
 
 ### When Theme Setup is Required
@@ -92,9 +92,7 @@ Test that setup is complete:
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component/css/utility.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component/themes/day.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component/themes/night.css">
+  <!-- processed by your Tailwind build -->
 </head>
 <body class="sgds:bg-default sgds:p-6">
   <div class="sgds:bg-surface-raised sgds:p-4 sgds:rounded-lg">
@@ -137,19 +135,17 @@ Test that setup is complete:
 3. Verify theme toggle adds/removes `sgds-theme-night` class on `<html>` element
 4. Check browser console for CSS import errors
 
-### CDN vs Package Manager
+### Import Not Working
 
-**Using CDN**: Link directly in HTML (good for quick prototypes)
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component/css/utility.css">
+**Problem**: `utility.css` import has no effect or causes build errors
+
+**Solution**: Ensure `utility.css` is imported via CSS `@import` inside the CSS file that Tailwind processes — not in a JavaScript file:
+```css
+/* globals.css / index.css */
+@import '@govtechsg/sgds-web-component/css/utility.css';
 ```
 
-**Using npm/pnpm**: Import in JavaScript (recommended for production)
-```javascript
-import '@govtechsg/sgds-web-component/css/utility.css';
-```
-
-Both methods work identically once loaded.
+> ⚠️ Do **not** import `utility.css` in a JavaScript file. It contains Tailwind directives that only Tailwind's build pipeline can process.
 
 ## Framework-Specific Setup
 
@@ -170,7 +166,15 @@ Since SGDS utilities are built on Tailwind v4, you must first set up Tailwind CS
 
 Not listed? See the full list at https://tailwindcss.com/docs/installation/framework-guides.
 
-**Step 2**: After Tailwind is set up, import the SGDS CSS files as described in [Required Setup](#required-setup) above.
+**Step 2**: After Tailwind is set up, add the SGDS `@import` to the same CSS file that Tailwind processes (usually `globals.css`, `main.css`, or `index.css`):
+
+```css
+@import '@govtechsg/sgds-web-component/css/utility.css';
+
+/* Optional: theme-aware color tokens */
+@import '@govtechsg/sgds-web-component/themes/day.css';
+@import '@govtechsg/sgds-web-component/themes/night.css';
+```
 
 ## Next Steps
 
