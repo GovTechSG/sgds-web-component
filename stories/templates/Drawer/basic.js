@@ -10,7 +10,7 @@ export const Template = args => {
       placement=${ifDefined(args.placement)}
       ?contained=${args.contained}
     >
-      <h2 slot="title">Title</h2>
+      <h4 slot="title">Title</h4>
       <p slot="description">Description</p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dictum est vitae erat molestie blandit.
       Pellentesque at nunc at mi auctor imperdiet eu at leo. Integer aliquam, turpis vel ultricies ornare, sem massa
