@@ -53,8 +53,8 @@ sgds-close-button {
   right: 20px;
   top: 10px;
 }
-/* Tablet to Desktop */
-@media (min-width: 512px) {
+/* Laptop to Desktop */
+@media (min-width: 1024px) {
   sgds-close-button {
     position: static;
   }

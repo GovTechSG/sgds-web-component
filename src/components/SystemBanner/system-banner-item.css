@@ -83,7 +83,7 @@ slot[name="action"]::slotted(a) {
   flex: 1 0 0;
 }
 /* DESKTOP */
-@media (min-width: 512px) {
+@media (min-width: 1024px) {
   .banner-item__message_and__action {
     flex-direction: row;
     gap: var(--sgds-gap-sm);
