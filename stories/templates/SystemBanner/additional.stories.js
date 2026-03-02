@@ -56,7 +56,7 @@ export const NoClampAction = {
     show: true,
     noClampAction: true
   },
-  parameters: {},
+  parameters,
   tags: ["!dev"]
 };
 export const Fluid = {
@@ -68,4 +68,36 @@ export const Fluid = {
   },
   parameters,
   tags: []
+};
+
+const BadgeSlotTemplate = args => {
+  return html`
+    <sgds-system-banner show>
+      <sgds-system-banner-item>
+        <sgds-badge slot="badge" variant="danger" outlined>Critical</sgds-badge>
+        <strong>Important system update available.</strong> Review the latest security patches and feature updates for
+        your system.
+        <sgds-link size="sm" variant="light" slot="action"
+          ><a href="#">Learn more<sgds-icon name="arrow-right"></sgds-icon></a
+        ></sgds-link>
+      </sgds-system-banner-item>
+      <sgds-system-banner-item>
+        <sgds-badge slot="badge" variant="warning" outlined>Alert</sgds-badge>
+        <strong>Scheduled maintenance window.</strong> Services will be temporarily unavailable during the maintenance
+        period.
+        <sgds-button href="#" slot="action" size="sm" tone="fixed-light" variant="outline">
+          View schedule
+          <sgds-icon name="arrow-right" slot="rightIcon" size="md"></sgds-icon>
+        </sgds-button>
+      </sgds-system-banner-item>
+    </sgds-system-banner>
+  `;
+};
+
+export const BadgeSlot = {
+  render: BadgeSlotTemplate.bind({}),
+  name: "Badge Slot",
+  args: {},
+  parameters,
+  tags: ["!dev"]
 };

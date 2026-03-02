@@ -267,7 +267,11 @@ describe("<sgds-system-banner>", () => {
     const el = await fixture<SgdsSystemBannerItem>(html`<sgds-system-banner-item noClampAction>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet
       consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      Quisquam, voluptatum.
+      Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum
+      dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur
+      adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+      voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit
+      amet consectetur adipisicing elit. Quisquam, voluptatum.
     </sgds-system-banner-item>`);
 
     await el.updateComplete;
@@ -278,16 +282,20 @@ describe("<sgds-system-banner>", () => {
   it("when noClampAction is false, show more link appears for long text", async () => {
     const el = await fixture<SgdsSystemBanner>(html`
       <sgds-system-banner-item>
-        1 Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus
-        ac facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo
-        gravida, congue sapien eu, rhoncus Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu.
-        Aenean quis leo gravida, congue sapien eu, rhoncus
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet
+        consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum
+        dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur
+        adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+        voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit
+        amet consectetur adipisicing elit. Quisquam, voluptatum.
       </sgds-system-banner-item>
     `);
 
     await el.updateComplete;
     const messageDiv = el.shadowRoot?.querySelector(".message");
     await waitUntil(() => messageDiv?.classList.contains("truncated") === true, "Message div did not get truncated");
+
     expect(messageDiv?.classList.contains("truncated")).to.be.true;
     const showMore = el.shadowRoot?.querySelector(".show-more");
     expect(showMore).to.exist;
@@ -316,5 +324,23 @@ describe("<sgds-system-banner>", () => {
       showMoreLink.click();
       expect(showMoreHandler).to.have.been.called;
     }
+  });
+
+  it("triggers console error when both icon and badge slots are used", async () => {
+    const consoleErrorStub = sinon.stub(console, "error");
+
+    await fixture<SgdsSystemBannerItem>(html`<sgds-system-banner-item>
+      <sgds-icon slot="icon" name="info-circle"></sgds-icon>
+      <sgds-badge slot="badge" variant="warning">New</sgds-badge>
+      Message content
+    </sgds-system-banner-item>`);
+
+    await waitUntil(() => consoleErrorStub.called, "Console error was not called");
+
+    expect(consoleErrorStub).to.have.been.calledWith(
+      "Both icon and badge slot are used in the same banner item. This is not recommended as it may cause layout issues."
+    );
+
+    consoleErrorStub.restore();
   });
 });
