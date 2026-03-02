@@ -41,7 +41,7 @@
   gap: var(--sgds-gap-2-xl);
   position: absolute;
   z-index: 2;
-  padding: var(--sgds-padding-lg);
+  /* padding: var(--sgds-padding-lg); */
   background-color: var(--sgds-surface-default);
   overflow: auto;
   pointer-events: all;
@@ -95,6 +95,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--sgds-gap-sm);
+  padding: var(--sgds-padding-lg);
 }
 
 slot[name="title"]::slotted(*) {
@@ -125,6 +126,7 @@ sgds-close-button {
   display: block;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+  padding: var(--sgds-padding-lg);
 }
 
 .drawer-overlay {
@@ -146,10 +148,9 @@ sgds-close-button {
   width: unset;
 }
 @media screen and (min-width: 512px) {
-  .drawer-panel {
-    padding: var(--sgds-padding-2-xl);
-  }
-
+  .drawer-header, .drawer-body {
+     padding: var(--sgds-padding-2-xl);
+  } 
   slot[name="footer"]::slotted(*) {
     padding: var(--sgds-padding-2-xl) var(--sgds-padding-2-xl) var(--sgds-padding-none);
     margin: var(--sgds-margin-none) calc(var(--sgds-margin-md) * -1);
