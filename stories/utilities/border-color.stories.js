@@ -56,11 +56,12 @@ export const DangerBorderColors = () =>
   ColorGrid(
     ColorItem("sgds:border-danger-default", "--sgds-danger-border-color-default"),
     ColorItem("sgds:border-danger-emphasis", "--sgds-danger-border-color-emphasis"),
-    ColorItem("sgds:border-danger-subtle", "--sgds-danger-border-color-subtle")
+    ColorItem("sgds:border-danger-muted", "--sgds-danger-border-color-muted")
   );
 
 export const WarningBorderColors = () =>
   ColorGrid(
     ColorItem("sgds:border-warning-default", "--sgds-warning-border-color-default"),
-    ColorItem("sgds:border-warning-emphasis", "--sgds-warning-border-color-emphasis")
+    ColorItem("sgds:border-warning-emphasis", "--sgds-warning-border-color-emphasis"),
+    ColorItem("sgds:border-warning-muted", "--sgds-warning-border-color-muted")
   );
