@@ -9,7 +9,7 @@ const ARROW_UP = "ArrowUp";
 const ENTER = "Enter";
 
 /**
- * @event sgds-select - Emitted event when a slot item is selected
+ * @event sgds-select - Emitted when a dropdown item is selected. `event.detail.item` is the clicked `SgdsDropdownItem` element.
  */
 export class DropdownListElement extends DropdownElement {
   static styles = DropdownElement.styles;
@@ -53,7 +53,7 @@ export class DropdownListElement extends DropdownElement {
     /** Emitted event from SgdsDropdown element when a slot item is selected */
     const selectedItem = e.target as SgdsDropdownItem;
     if (!selectedItem.disabled) {
-      this.emit("sgds-select");
+      this.emit("sgds-select", { detail: { item: selectedItem } });
       if (this.close !== "outside") {
         this.hideMenu(); // <-- Use new API
       }
@@ -143,4 +143,8 @@ export class DropdownListElement extends DropdownElement {
       if (item === activeItem) dropdownItem.focus();
     });
   }
+}
+
+export interface IDropdownListElement {
+  item: SgdsDropdownItem;
 }

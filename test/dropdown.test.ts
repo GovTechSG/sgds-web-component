@@ -493,6 +493,50 @@ describe("sgds-dropdown", () => {
     await el.updateComplete;
     expect(selectHandler).not.to.be.called;
   });
+  it("emits sgds-select exactly once when dropdown-item has no anchor (plain text)", async () => {
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown menuIsOpen>
+        <sgds-button slot="toggler">Dropdown</sgds-button>
+        <sgds-dropdown-item>plain text item</sgds-dropdown-item>
+      </sgds-dropdown>`
+    );
+    const selectHandler = sinon.spy();
+    el.addEventListener("sgds-select", selectHandler);
+    const item = el.querySelector("sgds-dropdown-item");
+    item?.click();
+    await el.updateComplete;
+    expect(selectHandler).to.be.calledOnce;
+  });
+  it("emits sgds-select exactly once when dropdown-item has an anchor", async () => {
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown menuIsOpen>
+        <sgds-button slot="toggler">Dropdown</sgds-button>
+        <sgds-dropdown-item><a href="#">Option</a></sgds-dropdown-item>
+      </sgds-dropdown>`
+    );
+    const selectHandler = sinon.spy();
+    el.addEventListener("sgds-select", selectHandler);
+    const item = el.querySelector("sgds-dropdown-item");
+    item?.click();
+    await el.updateComplete;
+    expect(selectHandler).to.be.calledOnce;
+  });
+  it("sgds-select event detail contains the clicked dropdown-item", async () => {
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown menuIsOpen>
+        <sgds-button slot="toggler">Dropdown</sgds-button>
+        <sgds-dropdown-item>item 1</sgds-dropdown-item>
+        <sgds-dropdown-item>item 2</sgds-dropdown-item>
+      </sgds-dropdown>`
+    );
+    const selectHandler = sinon.spy();
+    el.addEventListener("sgds-select", selectHandler);
+    const items = el.querySelectorAll("sgds-dropdown-item");
+    items[1].click();
+    await el.updateComplete;
+    expect(selectHandler).to.be.calledOnce;
+    expect(selectHandler.firstCall.args[0].detail.item).to.equal(items[1]);
+  });
   // // testing _handleSelectSlot functionality
   it("when clicked on slot, menu closes", async () => {
     const el = await fixture<SgdsDropdown>(
@@ -610,14 +654,14 @@ describe("sgds-dropdown-item", () => {
     const el = await fixture(html`<sgds-dropdown-item active>test</sgds-dropdown-item>`);
     expect(el.shadowRoot?.querySelector("div.dropdown-item")).to.have.class("active");
   });
-  it("when clicked on, should trigger a navigation", async () => {
+  it("when clicked on, should trigger a navigation and change the page url", async () => {
     const el = await fixture<SgdsDropdownItem>(html`<sgds-dropdown-item>
-      <a>Example</a>
+      <a href="#navigation-test">Example</a>
     </sgds-dropdown-item>`);
-    const anchor = el.querySelector("a");
-    const anchorSpy = sinon.spy();
-    anchor?.addEventListener("click", anchorSpy);
-    el.click();
-    expect(anchorSpy.calledOnce).to.be.true;
+    const anchor = el.querySelector("a") as HTMLAnchorElement;
+    anchor.click();
+    await waitUntil(() => window.location.hash === "#navigation-test");
+    expect(window.location.hash).to.equal("#navigation-test");
+    window.location.hash = "";
   });
 });
