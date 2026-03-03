@@ -44,6 +44,8 @@ export const LineHeight = () => html`
       </sgds-table-cell>
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">16px</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:leading-16 sgds:text-sm">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
@@ -72,6 +74,8 @@ export const LineHeight = () => html`
       </sgds-table-cell>
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">20px</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:leading-20 sgds:text-sm">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
@@ -100,6 +104,8 @@ export const LineHeight = () => html`
       </sgds-table-cell>
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">24px</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:leading-24">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
@@ -128,6 +134,8 @@ export const LineHeight = () => html`
       </sgds-table-cell>
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">32px</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:leading-32 sgds:text-lg">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
@@ -156,6 +164,8 @@ export const LineHeight = () => html`
       </sgds-table-cell>
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">36px</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:leading-36 sgds:text-lg">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
@@ -184,6 +194,8 @@ export const LineHeight = () => html`
       </sgds-table-cell>
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">40px</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:leading-40 sgds:text-xl">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
@@ -212,6 +224,8 @@ export const LineHeight = () => html`
       </sgds-table-cell>
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">48px</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:leading-48 sgds:text-2xl">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
@@ -240,6 +254,8 @@ export const LineHeight = () => html`
       </sgds-table-cell>
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">56px</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:leading-56 sgds:text-3xl">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
@@ -268,6 +284,8 @@ export const LineHeight = () => html`
       </sgds-table-cell>
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">64px</code>
+      </sgds-table-cell>
+      <sgds-table-cell>
         <div class="sgds:leading-64 sgds:text-4xl">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.

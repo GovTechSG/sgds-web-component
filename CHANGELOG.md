@@ -1,3 +1,31 @@
+## v3.12.0 (2026-03-02)
+
+### Feat
+
+- **Dropdown**: sgds-select emits selected item
+- **SystemBanner**: new badge slot [run-chromatic] [skip-cd] (#550)
+- **SystemBanner**: new badge slot
+- **Textarea**: noValidate prop support [skip-cd] (#549)
+- **Utility**: responsive semantic font sizes added with agent skills [run-chromatic] (#548)
+- **Textarea**: noValidate
+
+### Fix
+
+- **Masthead**: background color [run-chromatic] [skip-cd] (#554)
+- **Utility**: update downstream deps when border color danger tokesn is renamed
+- *****: update wrong css variable name
+- **DropdownItem**: click area not expanding full area [run-chromatic] [skip-cd] (#555)
+- **Dropdown**: click area for anchors and checkboxes
+- **SystemBanner**: raise media query screen min width to laptop 1024px
+- **SystemBanner**: left and right padding swapped
+- **Card**: card should have hover effects (#551)
+- **Card**: card should have hover effects
+- **Form**: noValidate should not inhibit FormData
+
+### Refactor
+
+- **Drawer**: move padding from outer container to inner header and body container respectively
+
 ## v3.11.0 (2026-02-20)
 
 ### Feat

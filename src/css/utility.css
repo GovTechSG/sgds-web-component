@@ -357,6 +357,7 @@
   --radius-lg: var(--sgds-border-radius-lg);
   --radius-xl: var(--sgds-border-radius-xl);
   --radius-2-xl: var(--sgds-border-radius-2-xl);
+  --radius-3-xl: var(--sgds-border-radius-3-xl);
   --radius-full: var(--sgds-border-radius-full);
 
   /* Form Border Radius */
