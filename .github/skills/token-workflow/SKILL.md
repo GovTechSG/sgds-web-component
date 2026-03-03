@@ -57,8 +57,17 @@ utility.css (Tailwind v4 CSS Configuration)
 
 ### Checklist for Token Updates
 
-- [ ] **Check `src/themes/responsive.css`** for responsive semantic tokens referencing changed primitives
-  - Responsive typography tokens (`--sgds-font-size-*`, `--sgds-line-height-*`) and layout tokens live here
+- [ ] **Read all source files in full first — before doing any analysis or updates:**
+  - `src/themes/root.css` — all primitive tokens
+  - `src/themes/responsive.css` — all responsive semantic tokens across all three breakpoint blocks
+  - `src/themes/day.css` — all day theme semantic mappings
+  - `src/themes/night.css` — all night theme semantic mappings
+  - Do not rely on grep counts or previous conversation context; always read the actual current file contents
+
+- [ ] **Identify all token types present in `responsive.css`**
+  - There are **two distinct token types** that both need `utility.css` mappings:
+    - **Primitive numeric tokens** (e.g. `--sgds-line-height-32`) → map as `--leading-32`
+    - **Semantic responsive tokens** (e.g. `--sgds-line-height-md`) → map as `--leading-md`
   - Update all three breakpoint blocks (mobile, 1024px, 1440px) consistently
   - This file is the source of truth for any token that scales across screen sizes
 
@@ -155,8 +164,10 @@ import CategoryDocs from "../../../docs/Category.md?raw";
   - Map to primitive tokens with theme variations
   - Ensure consistency across both theme files
 
-- [ ] **Add Tailwind CSS mapping** to utility.css
-  - Map semantic tokens to Tailwind theme categories
+- [ ] **Add Tailwind CSS mapping** to utility.css — for **both** token types:
+  - Primitive tokens (e.g. `--leading-32: var(--sgds-line-height-32)`)
+  - Semantic responsive tokens (e.g. `--leading-md: var(--sgds-line-height-md)`)
+  - Always read `responsive.css` directly to identify all semantic tokens — grepping only for primitives will miss semantic aliases
   - Use `@supports` for Tailwind v4 detection
   - Follow existing pattern for other utilities
 
@@ -205,8 +216,9 @@ Before pushing changes:
 - [ ] All semantic tokens in `day.css` reference valid primitives
 - [ ] All semantic tokens in `night.css` reference valid primitives
 - [ ] Day and night versions of each semantic token exist
-- [ ] All semantic tokens used in `utility.css` are defined
+- [ ] **Both** primitive numeric tokens AND semantic responsive tokens from `responsive.css` have Tailwind mappings in `utility.css`
 - [ ] Utility.css Tailwind mappings match semantic token names
+- [ ] Stories document both primitive and responsive semantic token tables (where applicable)
 - [ ] No circular references between token layers
 - [ ] Stories display correct token values
 - [ ] Documentation markdown renders without errors in Storybook
