@@ -74,4 +74,3 @@ export const LineHeight = () => html`
     )}
   </sgds-table>
 `;
-
