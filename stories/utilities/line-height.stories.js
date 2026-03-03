@@ -110,6 +110,34 @@ export const LineHeight = () => html`
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
           <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:leading-28</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:leading-28", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
+            <sgds-icon name="files"></sgds-icon>
+          </button>
+        </div>
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-line-height-28</code
+        >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">28px</code>
+        <div class="sgds:leading-28">
+          The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
+          zebras jump.
+        </div>
+      </sgds-table-cell>
+    </sgds-table-row>
+    <sgds-table-row>
+      <sgds-table-cell>
+        <div class="sgds:flex sgds:items-center sgds:gap-xs">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
             >sgds:leading-32</code
           >
           <button
@@ -194,6 +222,34 @@ export const LineHeight = () => html`
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
           <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:leading-44</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:leading-44", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
+            <sgds-icon name="files"></sgds-icon>
+          </button>
+        </div>
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-line-height-44</code
+        >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">44px</code>
+        <div class="sgds:leading-44 sgds:text-2xl">
+          The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
+          zebras jump.
+        </div>
+      </sgds-table-cell>
+    </sgds-table-row>
+    <sgds-table-row>
+      <sgds-table-cell>
+        <div class="sgds:flex sgds:items-center sgds:gap-xs">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
             >sgds:leading-48</code
           >
           <button
@@ -222,6 +278,34 @@ export const LineHeight = () => html`
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
           <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:leading-52</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:leading-52", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
+            <sgds-icon name="files"></sgds-icon>
+          </button>
+        </div>
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-line-height-52</code
+        >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">52px</code>
+        <div class="sgds:leading-52 sgds:text-3xl">
+          The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
+          zebras jump.
+        </div>
+      </sgds-table-cell>
+    </sgds-table-row>
+    <sgds-table-row>
+      <sgds-table-cell>
+        <div class="sgds:flex sgds:items-center sgds:gap-xs">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
             >sgds:leading-56</code
           >
           <button
@@ -241,6 +325,34 @@ export const LineHeight = () => html`
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">56px</code>
         <div class="sgds:leading-56 sgds:text-3xl">
+          The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
+          zebras jump.
+        </div>
+      </sgds-table-cell>
+    </sgds-table-row>
+    <sgds-table-row>
+      <sgds-table-cell>
+        <div class="sgds:flex sgds:items-center sgds:gap-xs">
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:leading-60</code
+          >
+          <button
+            class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
+            @click="${e => copyToClipboard("sgds:leading-60", e.target.closest("button"))}"
+            aria-label="Copy token"
+          >
+            <sgds-icon name="files"></sgds-icon>
+          </button>
+        </div>
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          >--sgds-line-height-60</code
+        >
+      </sgds-table-cell>
+      <sgds-table-cell>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">60px</code>
+        <div class="sgds:leading-60 sgds:text-4xl">
           The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft
           zebras jump.
         </div>

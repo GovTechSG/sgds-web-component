@@ -1,6 +1,6 @@
 ---
 name: token-workflow
-description: Maintains SGDS design token architecture across three layers (primitive tokens in root.css, semantic mappings in day.css/night.css, and Tailwind utilities in utility.css). Use when adding/modifying design tokens, creating new utilities, updating Storybook documentation, or ensuring token consistency across theme files.
+description: Maintains SGDS design token architecture across four layers (primitive tokens in root.css, responsive semantic tokens in responsive.css, theme semantic mappings in day.css/night.css, and Tailwind utilities in utility.css). Use when adding/modifying design tokens, creating new utilities, updating Storybook documentation, or ensuring token consistency across theme files.
 metadata:
   author: singapore-design-system
   version: "0.0.0"
@@ -12,12 +12,14 @@ Maintains consistency in the SGDS design token system and documentation workflow
 
 ## Token Architecture
 
-### Three-Layer System
+### Four-Layer System
 
 ```
 root.css (Primitive Tokens)
     ↓
-day.css + night.css (Semantic Token Mappings)
+responsive.css (Responsive Semantic Tokens — imported by root.css)
+    ↓
+day.css + night.css (Theme Semantic Token Mappings)
     ↓
 utility.css (Tailwind v4 CSS Configuration)
 ```
@@ -29,21 +31,36 @@ utility.css (Tailwind v4 CSS Configuration)
 - Examples: `--sgds-gray-000`, `--sgds-product-primary-100`, `--sgds-blue-600`
 - Categories: Colors, Spacing, Typography, Layout
 - No theme variations (same for day and night)
+- Imports `responsive.css` to pull in responsive semantic tokens
 
-**2. Semantic Token Mappings (`src/themes/day.css` + `night.css`)**
+**2. Responsive Semantic Tokens (`src/themes/responsive.css`)**
+- **Source of truth** for responsive typography and layout semantic tokens
+- Defines semantic aliases that map to primitives and change value across breakpoints
+- Examples: `--sgds-font-size-heading-xl`, `--sgds-line-height-md`, `--sgds-layout-gap-sm`
+- Organised into sections: Font Size, Line Height, Text Gap, Layout Gap, Layout Padding, Component Gap, Component Padding, Container Width
+- Three breakpoint blocks: mobile (`:root`), tablet (`min-width: 1024px`), desktop (`min-width: 1440px`)
+- When adding or modifying responsive tokens, **always update all three breakpoint blocks** consistently
+- Imported by `root.css`, so its tokens are available globally
+
+**3. Theme Semantic Token Mappings (`src/themes/day.css` + `night.css`)**
 - Theme-aware tokens that reference primitive tokens
 - Examples: `--sgds-bg-default`, `--sgds-color-subtle`, `--sgds-primary-surface-emphasis`
 - Categories: Default colors, Status-specific colors, Form-specific colors
 - Each token has two definitions (one per theme)
 
-**3. Tailwind CSS Configuration (`src/css/utility.css`)**
+**4. Tailwind CSS Configuration (`src/css/utility.css`)**
 - Converts SGDS semantic tokens into Tailwind v4 CSS custom properties
 - Uses `@supports` to detect Tailwind v4 capability
 - Generates utility classes with `sgds:` prefix
 
-## When Tokens Change in root.css
+## When Tokens Change in root.css or responsive.css
 
 ### Checklist for Token Updates
+
+- [ ] **Check `src/themes/responsive.css`** for responsive semantic tokens referencing changed primitives
+  - Responsive typography tokens (`--sgds-font-size-*`, `--sgds-line-height-*`) and layout tokens live here
+  - Update all three breakpoint blocks (mobile, 1024px, 1440px) consistently
+  - This file is the source of truth for any token that scales across screen sizes
 
 - [ ] **Verify semantic token usage** in `src/themes/day.css` and `src/themes/night.css`
   - Check if any semantic tokens reference the changed primitive token
@@ -129,7 +146,12 @@ import CategoryDocs from "../../../docs/Category.md?raw";
   - Add primitive tokens with values
   - Follow naming convention: `--sgds-[category]-[variant]`
 
-- [ ] **Add semantic mappings** to day.css and night.css
+- [ ] **Add responsive semantic tokens** to `responsive.css` (for typography and layout)
+  - Add the token to all three breakpoint blocks (mobile `:root`, `min-width: 1024px`, `min-width: 1440px`)
+  - Reference primitive tokens from `root.css`
+  - This is the source of truth for any token that responds to screen size
+
+- [ ] **Add semantic mappings** to day.css and night.css (for theme-aware color tokens)
   - Map to primitive tokens with theme variations
   - Ensure consistency across both theme files
 
@@ -178,6 +200,8 @@ import CategoryDocs from "../../../docs/Category.md?raw";
 Before pushing changes:
 
 - [ ] All primitive tokens in `root.css` have values
+- [ ] All responsive semantic tokens in `responsive.css` reference valid primitives from `root.css`
+- [ ] All three breakpoint blocks in `responsive.css` are updated consistently (mobile, 1024px, 1440px)
 - [ ] All semantic tokens in `day.css` reference valid primitives
 - [ ] All semantic tokens in `night.css` reference valid primitives
 - [ ] Day and night versions of each semantic token exist
