@@ -1,5 +1,5 @@
-import { html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { html, PropertyValues } from "lit";
+import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import sidebarStyle from "./sidebar.css";
@@ -93,12 +93,20 @@ export class SgdsSidebar extends SgdsElement {
   @state()
   private _showDrawer = false;
 
+  /** @internal */
+  @queryAssignedElements()
+  private _defaultNodes!: SidebarElement[];
+
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute("role", "navigation");
     this.setAttribute("aria-label", "Main navigation");
-    this.addItemListeners();
-    document.addEventListener("click", this._handleClickOutOfElement);
+
+    this.updateComplete.then(() => {
+      this.addItemListeners();
+      this._handleActive();
+      document.addEventListener("click", this._handleClickOutOfElement);
+    });
   }
 
   disconnectedCallback() {
@@ -167,10 +175,24 @@ export class SgdsSidebar extends SgdsElement {
       return;
     }
 
-    // finding active element in both shadowRoot and sidebar root with proper quoting
-    const activeElement = this?.querySelector(`[name="${this.active}"]`);
-    const activeShadowElement = this?.shadowRoot?.querySelector(`[name="${this.active}"]`);
-    this._sidebarActiveItem = (activeElement || activeShadowElement) as SidebarElement;
+    this._sidebarActiveItem = this._getActiveChild();
+  }
+
+  private _getActiveChild() {
+    const findByName = (elements: SidebarElement[]): SidebarElement | null => {
+      for (const element of elements) {
+        if (element.name === this.active) {
+          return element;
+        }
+        if (element._childElements?.length) {
+          const found = findByName(element._childElements);
+          if (found) return found;
+        }
+      }
+      return null;
+    };
+
+    return findByName(this._defaultNodes);
   }
 
   /**
