@@ -38,10 +38,8 @@
 .drawer-panel {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-gap-2-xl);
   position: absolute;
   z-index: 2;
-  padding: var(--sgds-padding-lg);
   background-color: var(--sgds-surface-default);
   overflow: auto;
   pointer-events: all;
@@ -91,10 +89,22 @@
   max-width: var(--sgds-dimension-512);
 }
 
+.drawer-close-wrapper {
+  position: sticky;
+  top: 0;
+}
+
+sgds-close-button.drawer-close {
+  position: absolute;
+  top: 8px;
+  inset-inline-end: 8px;
+}
+
 .drawer-header {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-gap-sm);
+  gap: var(--sgds-gap-xs);
+  padding: var(--sgds-padding-lg) var(--sgds-padding-lg) var(--sgds-padding-none);
 }
 
 slot[name="title"]::slotted(*) {
@@ -109,31 +119,24 @@ slot[name="description"]::slotted(*) {
 }
 
 slot[name="footer"]::slotted(*) {
-  padding: var(--sgds-padding-lg) var(--sgds-padding-lg) var(--sgds-padding-none);
-  box-shadow: 0 -2px 2px 0 rgba(14, 14, 14, 0.08);
-  margin: var(--sgds-margin-none) calc(var(--sgds-margin-xs) * -1);
-}
-
-sgds-close-button {
-  position: absolute;
-  top: 8px;
-  right: 8px;
+  padding: var(--sgds-padding-lg);
+  position: sticky;
+  background-color: var(--sgds-surface-default);
+  bottom: 0;
 }
 
 .drawer-body {
   flex: 1 1 auto;
   display: block;
-  overflow: auto;
   -webkit-overflow-scrolling: touch;
+  padding: var(--sgds-padding-lg);
+  overflow: hidden;
 }
 
 .drawer-overlay {
   display: block;
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   background-color: var(--sgds-bg-overlay);
   pointer-events: all;
 }
@@ -146,12 +149,13 @@ sgds-close-button {
   width: unset;
 }
 @media screen and (min-width: 512px) {
-  .drawer-panel {
-    padding: var(--sgds-padding-2-xl);
-  }
-
-  slot[name="footer"]::slotted(*) {
+  .drawer-body {
+     padding: var(--sgds-padding-2-xl);
+  } 
+  .drawer-header {
     padding: var(--sgds-padding-2-xl) var(--sgds-padding-2-xl) var(--sgds-padding-none);
-    margin: var(--sgds-margin-none) calc(var(--sgds-margin-md) * -1);
+  }
+  slot[name="footer"]::slotted(*) {
+    padding: var(--sgds-padding-2-xl);
   }
 }

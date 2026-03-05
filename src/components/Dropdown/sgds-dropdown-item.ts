@@ -33,9 +33,6 @@ export class SgdsDropdownItem extends SgdsElement {
         this.anchor[0].click();
       }
     });
-    this.addEventListener("click", () => {
-      this.anchor.length > 0 && this.anchor[0].click();
-    });
     this.setAttribute("role", "menuitem");
     this.setAttribute("aria-disabled", `${this.disabled}`);
   }

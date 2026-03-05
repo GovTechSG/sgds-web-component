@@ -610,6 +610,50 @@ describe("noValidate disables native and sgds validation behaviours", async () =
     expect(input?.invalid).to.be.false;
     expect(input?.shadowRoot?.querySelector("div.invalid-feedback")).to.be.null;
   });
+  it("should still populate FormData when noValidate is enabled", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input noValidate name="test-field" value="test-value"></sgds-input>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const input = form.querySelector<SgdsInput>("sgds-input");
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      expect(formData.get("test-field")).to.equal("test-value");
+    });
+
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+  it("should update FormData when input value changes with noValidate enabled", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input noValidate name="test-field" value="initial"></sgds-input>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const input = form.querySelector<SgdsInput>("sgds-input");
+
+    if (input) input.value = "updated-value";
+    await input?.updateComplete;
+
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy(async (event: SubmitEvent) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      await waitUntil(() => expect(formData.get("test-field")).to.equal("updated-value"));
+    });
+
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
 });
 
 describe("form novalidate", () => {
@@ -641,5 +685,48 @@ describe("form novalidate", () => {
     await input?.updateComplete;
     expect(input?.invalid).to.be.false;
     expect(input?.shadowRoot?.querySelector("div.invalid-feedback")).to.be.null;
+  });
+  it("should still populate FormData when form has novalidate attribute", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-input name="test-field" value="test-value"></sgds-input>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      expect(formData.get("test-field")).to.equal("test-value");
+    });
+
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+  it("should update FormData when input value changes with form novalidate attribute", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-input name="test-field" value="initial"></sgds-input>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const input = form.querySelector<SgdsInput>("sgds-input");
+
+    if (input) input.value = "updated-value";
+    await input?.updateComplete;
+
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy(async (event: SubmitEvent) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      await waitUntil(() => expect(formData.get("test-field")).to.equal("updated-value"));
+    });
+
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
   });
 });

@@ -46,3 +46,13 @@ This is useful when you want to enforce a strict two-line limit for banner messa
 <Canvas of={SystemBannerStories.NoClampAction}>
   <Story of={SystemBannerStories.NoClampAction} />
 </Canvas>
+
+## Badge Slot
+
+The `badge` slot allows you to add a badge component to highlight important information or system status within the banner item. This provides a visual indicator that draws attention to critical messages.
+
+**Important:** Do not use both `icon` and `badge` slots together as it is not supported and may cause layout issues
+
+<Canvas of={SystemBannerStories.BadgeSlot}>
+  <Story of={SystemBannerStories.BadgeSlot} />
+</Canvas>

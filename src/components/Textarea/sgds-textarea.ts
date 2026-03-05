@@ -71,6 +71,9 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
   /** Makes the textarea as a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
+  /** Disables native and sgds validation for the textarea. */
+  @property({ type: Boolean, reflect: true }) noValidate = false;
+
   /** The textarea's hint text */
   @property({ reflect: true }) hintText = "";
 
@@ -136,8 +139,12 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
   }
 
   private _handleBlur() {
+    const sgdsBlur = this.emit("sgds-blur", { cancelable: true });
+    if (this._mixinShouldSkipSgdsValidation()) return;
+    if (sgdsBlur.defaultPrevented) return;
+
+    this.setInvalid(!this._mixinCheckValidity());
     this._isTouched = true;
-    this.emit("sgds-blur");
   }
 
   /** @internal */
@@ -157,8 +164,9 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
   /** @internal */
   @watch("_isTouched", { waitUntilFirstUpdate: true })
   _handleIsTouched() {
+    if (this._mixinShouldSkipSgdsValidation()) return;
     if (this._isTouched) {
-      this.invalid = !this.textarea.checkValidity();
+      this.setInvalid(!this._mixinCheckValidity());
     }
   }
 
