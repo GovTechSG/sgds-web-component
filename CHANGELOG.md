@@ -1,3 +1,24 @@
+## v3.13.0 (2026-03-05)
+
+### Feat
+
+- **Utility**: new responsive line height [skip-cd][run-chromatic] (#560)
+- **Utility**: responsive line height tokens added
+
+### Fix
+
+- **Drawer**: make close button sticky in all positions
+- **Drawer**: make footer sticky and apply paddings
+- **Masthead**: remove role banner and aria label for accessibility fix [run-chromatic] [skip-cd] (#561)
+- **Masthead**: remove role banner and aria label for accessibilityfix
+- **Utility**: missing rounded-3-xl tokens [skip-cd][run-chromatic] (#558)
+- **Utility**: missing rounded-3-xl mappings
+
+### Refactor
+
+- **Drawer**: container paddings and examples [skip-cd][run-chromatic] (#556)
+- **Drawer**: move padding from outer container to inner header and body container respectively
+
 ## v3.12.0 (2026-03-02)
 
 ### Feat
