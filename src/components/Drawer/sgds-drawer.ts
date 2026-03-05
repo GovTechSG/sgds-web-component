@@ -273,15 +273,17 @@ export class SgdsDrawer extends SgdsElement {
           aria-hidden=${this.open ? "false" : "true"}
           tabindex="0"
         >
+          <div class="drawer-close-wrapper">
+            <sgds-close-button
+              class="drawer-close"
+              aria-label="close drawer"
+              @click="${() => this.requestClose("close-button")}"
+            ></sgds-close-button>
+          </div>
           <div class="drawer-header_and_body">
             <div class="drawer-header">
               <slot name="title"></slot>
               <slot name="description"></slot>
-              <sgds-close-button
-                class="drawer-close"
-                aria-label="close drawer"
-                @click="${() => this.requestClose("close-button")}"
-              ></sgds-close-button>
             </div>
           </div>
           <div>
