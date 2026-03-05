@@ -234,12 +234,25 @@
     --sgds-leading-16: var(--sgds-line-height-16);
     --sgds-leading-20: var(--sgds-line-height-20);
     --sgds-leading-24: var(--sgds-line-height-24);
+    --sgds-leading-28: var(--sgds-line-height-28);
     --sgds-leading-32: var(--sgds-line-height-32);
     --sgds-leading-36: var(--sgds-line-height-36);
     --sgds-leading-40: var(--sgds-line-height-40);
+    --sgds-leading-44: var(--sgds-line-height-44);
     --sgds-leading-48: var(--sgds-line-height-48);
+    --sgds-leading-52: var(--sgds-line-height-52);
     --sgds-leading-56: var(--sgds-line-height-56);
+    --sgds-leading-60: var(--sgds-line-height-60);
     --sgds-leading-64: var(--sgds-line-height-64);
+    --sgds-leading-3-xs: var(--sgds-line-height-3-xs);
+    --sgds-leading-2-xs: var(--sgds-line-height-2-xs);
+    --sgds-leading-xs: var(--sgds-line-height-xs);
+    --sgds-leading-sm: var(--sgds-line-height-sm);
+    --sgds-leading-md: var(--sgds-line-height-md);
+    --sgds-leading-lg: var(--sgds-line-height-lg);
+    --sgds-leading-xl: var(--sgds-line-height-xl);
+    --sgds-leading-2-xl: var(--sgds-line-height-2-xl);
+    --sgds-leading-3-xl: var(--sgds-line-height-3-xl);
     --sgds-opacity-0: var(--sgds-opacity-0);
     --sgds-opacity-3: var(--sgds-opacity-3);
     --sgds-opacity-5: var(--sgds-opacity-5);
@@ -274,6 +287,7 @@
     --sgds-radius-lg: var(--sgds-border-radius-lg);
     --sgds-radius-xl: var(--sgds-border-radius-xl);
     --sgds-radius-2-xl: var(--sgds-border-radius-2-xl);
+    --sgds-radius-3-xl: var(--sgds-border-radius-3-xl);
     --sgds-radius-full: var(--sgds-border-radius-full);
     --sgds-radius-form-none: var(--sgds-form-border-radius-none);
     --sgds-radius-form-xs: var(--sgds-form-border-radius-xs);
@@ -638,6 +652,9 @@
   }
   .sgds\:rounded-2-xl {
     border-radius: var(--sgds-radius-2-xl);
+  }
+  .sgds\:rounded-3-xl {
+    border-radius: var(--sgds-radius-3-xl);
   }
   .sgds\:rounded-form-full {
     border-radius: var(--sgds-radius-form-full);
@@ -1190,6 +1207,22 @@
   .sgds\:text-subtitle-sm {
     font-size: var(--sgds-text-subtitle-sm);
   }
+  .sgds\:leading-2-xl {
+    --tw-leading: var(--sgds-leading-2-xl);
+    line-height: var(--sgds-leading-2-xl);
+  }
+  .sgds\:leading-2-xs {
+    --tw-leading: var(--sgds-leading-2-xs);
+    line-height: var(--sgds-leading-2-xs);
+  }
+  .sgds\:leading-3-xl {
+    --tw-leading: var(--sgds-leading-3-xl);
+    line-height: var(--sgds-leading-3-xl);
+  }
+  .sgds\:leading-3-xs {
+    --tw-leading: var(--sgds-leading-3-xs);
+    line-height: var(--sgds-leading-3-xs);
+  }
   .sgds\:leading-16 {
     --tw-leading: var(--sgds-leading-16);
     line-height: var(--sgds-leading-16);
@@ -1203,8 +1236,8 @@
     line-height: var(--sgds-leading-24);
   }
   .sgds\:leading-28 {
-    --tw-leading: calc(var(--sgds-spacing) * 28);
-    line-height: calc(var(--sgds-spacing) * 28);
+    --tw-leading: var(--sgds-leading-28);
+    line-height: var(--sgds-leading-28);
   }
   .sgds\:leading-32 {
     --tw-leading: var(--sgds-leading-32);
@@ -1218,17 +1251,49 @@
     --tw-leading: var(--sgds-leading-40);
     line-height: var(--sgds-leading-40);
   }
+  .sgds\:leading-44 {
+    --tw-leading: var(--sgds-leading-44);
+    line-height: var(--sgds-leading-44);
+  }
   .sgds\:leading-48 {
     --tw-leading: var(--sgds-leading-48);
     line-height: var(--sgds-leading-48);
+  }
+  .sgds\:leading-52 {
+    --tw-leading: var(--sgds-leading-52);
+    line-height: var(--sgds-leading-52);
   }
   .sgds\:leading-56 {
     --tw-leading: var(--sgds-leading-56);
     line-height: var(--sgds-leading-56);
   }
+  .sgds\:leading-60 {
+    --tw-leading: var(--sgds-leading-60);
+    line-height: var(--sgds-leading-60);
+  }
   .sgds\:leading-64 {
     --tw-leading: var(--sgds-leading-64);
     line-height: var(--sgds-leading-64);
+  }
+  .sgds\:leading-lg {
+    --tw-leading: var(--sgds-leading-lg);
+    line-height: var(--sgds-leading-lg);
+  }
+  .sgds\:leading-md {
+    --tw-leading: var(--sgds-leading-md);
+    line-height: var(--sgds-leading-md);
+  }
+  .sgds\:leading-sm {
+    --tw-leading: var(--sgds-leading-sm);
+    line-height: var(--sgds-leading-sm);
+  }
+  .sgds\:leading-xl {
+    --tw-leading: var(--sgds-leading-xl);
+    line-height: var(--sgds-leading-xl);
+  }
+  .sgds\:leading-xs {
+    --tw-leading: var(--sgds-leading-xs);
+    line-height: var(--sgds-leading-xs);
   }
   .sgds\:font-bold {
     --tw-font-weight: var(--sgds-font-weight-bold);
