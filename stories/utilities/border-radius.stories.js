@@ -2,7 +2,7 @@ import { html } from "lit";
 
 export default {
   title: "Utilities/Border Radius",
-  tags: ["autodocs"]
+  tags: ["!autodocs"]
 };
 
 const RADIUS_SCALE = [
