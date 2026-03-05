@@ -22,7 +22,11 @@ const renderTokenCell = token => html`
   <sgds-table-cell>
     <div class="sgds:flex sgds:items-center sgds:gap-xs">
       <code class="${CODE_CLASSES}">${token}</code>
-      <button class="${COPY_BTN_CLASSES}" @click="${e => copyToClipboard(token, e.target.closest("button"))}" aria-label="Copy token">
+      <button
+        class="${COPY_BTN_CLASSES}"
+        @click="${e => copyToClipboard(token, e.target.closest("button"))}"
+        aria-label="Copy token"
+      >
         <sgds-icon name="files"></sgds-icon>
       </button>
     </div>
@@ -71,7 +75,9 @@ export const LineHeight = () => html`
           ${renderTokenCell(`sgds:leading-${suffix}`)}
           <sgds-table-cell><code class="${CODE_CLASSES}">--sgds-line-height-${suffix}</code></sgds-table-cell>
           <sgds-table-cell><code class="${CODE_CLASSES}">${value}</code></sgds-table-cell>
-          <sgds-table-cell><div class="sgds:leading-${suffix}">The quick brown fox jumps over the lazy dog.</div></sgds-table-cell>
+          <sgds-table-cell
+            ><div class="sgds:leading-${suffix}">The quick brown fox jumps over the lazy dog.</div></sgds-table-cell
+          >
         </sgds-table-row>
       `
     )}
@@ -94,7 +100,8 @@ export const StaticLineHeight = () => html`
           <sgds-table-cell><code class="${CODE_CLASSES}">${value}</code></sgds-table-cell>
           <sgds-table-cell>
             <div class="sgds:leading-${suffix}">
-              The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump.
+              The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick
+              daft zebras jump.
             </div>
           </sgds-table-cell>
         </sgds-table-row>
