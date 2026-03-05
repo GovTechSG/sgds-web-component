@@ -3,7 +3,7 @@ import "../../mocks/color-item.ts";
 
 export default {
   title: "Utilities/Border Color",
-  tags: ["autodocs"]
+  tags: ["!autodocs"]
 };
 
 const ColorItem = (token, variable, borderColorValue = true) => {
