@@ -89,6 +89,17 @@
   max-width: var(--sgds-dimension-512);
 }
 
+.drawer-close-wrapper {
+  position: sticky;
+  top: 0;
+}
+
+sgds-close-button.drawer-close {
+  position: absolute;
+  top: 8px;
+  inset-inline-end: 8px;
+}
+
 .drawer-header {
   display: flex;
   flex-direction: column;
@@ -114,12 +125,6 @@ slot[name="footer"]::slotted(*) {
   bottom: 0;
 }
 
-sgds-close-button {
-  position: fixed;
-  top: 8px;
-  right: 8px;
-}
-
 .drawer-body {
   flex: 1 1 auto;
   display: block;
@@ -131,10 +136,7 @@ sgds-close-button {
 .drawer-overlay {
   display: block;
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   background-color: var(--sgds-bg-overlay);
   pointer-events: all;
 }
