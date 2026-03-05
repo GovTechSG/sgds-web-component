@@ -2,7 +2,7 @@ import { html } from "lit";
 
 export default {
   title: "Utilities/Font Size",
-  tags: ["autodocs"]
+  tags: ["!autodocs"]
 };
 
 const FONT_SIZE_SCALE = [

@@ -2,7 +2,7 @@ import { html } from "lit";
 
 export default {
   title: "Utilities/Text Color",
-  tags: ["autodocs"]
+  tags: ["!autodocs"]
 };
 
 const copyToClipboard = (token, buttonEl) => {

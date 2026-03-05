@@ -7,7 +7,7 @@ const PlacementTemplate = () => {
     <sgds-button @click=${() => showDrawer("top")}>Open Top Drawer</sgds-button>
     <sgds-button @click=${() => showDrawer("bottom")}>Open Bottom Drawer</sgds-button>
     <sgds-drawer id="drawer_placement">
-      <h2 slot="title">Title</h2>
+      <h4 slot="title">Title</h4>
       <p slot="description">Description</p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dictum est vitae erat molestie blandit.
       Pellentesque at nunc at mi auctor imperdiet eu at leo. Integer aliquam, turpis vel ultricies ornare, sem massa
@@ -59,7 +59,7 @@ const SizeTemplate = () => {
     <sgds-button @click=${() => showDrawerSize("lg")}>Open Large Drawer</sgds-button>
 
     <sgds-drawer id="drawer_size">
-      <h2 slot="title">Size Example</h2>
+      <h4 slot="title">Size Example</h4>
       <p slot="description">This demonstrates drawer size options.</p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dictum est vitae erat molestie blandit.
       Pellentesque at nunc at mi auctor imperdiet eu at leo. Integer aliquam, turpis vel ultricies ornare, sem massa

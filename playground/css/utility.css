@@ -100,7 +100,7 @@
     --sgds-text-color-danger-fixed-dark: var(--sgds-danger-color-fixed-dark);
     --sgds-border-color-danger-default: var(--sgds-danger-border-color-default);
     --sgds-border-color-danger-emphasis: var(--sgds-danger-border-color-emphasis);
-    --sgds-border-color-danger-subtle: var(--sgds-danger-border-color-subtle);
+    --sgds-border-color-danger-muted: var(--sgds-danger-border-color-muted);
     --sgds-background-color-warning-default: var(--sgds-warning-bg-default);
     --sgds-background-color-warning-muted: var(--sgds-warning-bg-muted);
     --sgds-background-color-warning-surface-default: var(--sgds-warning-surface-default);
@@ -112,7 +112,7 @@
     --sgds-text-color-warning-fixed-dark: var(--sgds-warning-color-fixed-dark);
     --sgds-border-color-warning-default: var(--sgds-warning-border-color-default);
     --sgds-border-color-warning-emphasis: var(--sgds-warning-border-color-emphasis);
-    --sgds-border-color-warning-subtle: var(--sgds-warning-border-color-subtle);
+    --sgds-border-color-warning-muted: var(--sgds-warning-border-color-muted);
     --sgds-background-color-purple-default: var(--sgds-purple-bg-default);
     --sgds-background-color-purple-muted: var(--sgds-purple-bg-muted);
     --sgds-background-color-purple-surface-default: var(--sgds-purple-surface-default);
@@ -244,6 +244,15 @@
     --sgds-leading-56: var(--sgds-line-height-56);
     --sgds-leading-60: var(--sgds-line-height-60);
     --sgds-leading-64: var(--sgds-line-height-64);
+    --sgds-leading-3-xs: var(--sgds-line-height-3-xs);
+    --sgds-leading-2-xs: var(--sgds-line-height-2-xs);
+    --sgds-leading-xs: var(--sgds-line-height-xs);
+    --sgds-leading-sm: var(--sgds-line-height-sm);
+    --sgds-leading-md: var(--sgds-line-height-md);
+    --sgds-leading-lg: var(--sgds-line-height-lg);
+    --sgds-leading-xl: var(--sgds-line-height-xl);
+    --sgds-leading-2-xl: var(--sgds-line-height-2-xl);
+    --sgds-leading-3-xl: var(--sgds-line-height-3-xl);
     --sgds-opacity-0: var(--sgds-opacity-0);
     --sgds-opacity-3: var(--sgds-opacity-3);
     --sgds-opacity-5: var(--sgds-opacity-5);
@@ -278,6 +287,7 @@
     --sgds-radius-lg: var(--sgds-border-radius-lg);
     --sgds-radius-xl: var(--sgds-border-radius-xl);
     --sgds-radius-2-xl: var(--sgds-border-radius-2-xl);
+    --sgds-radius-3-xl: var(--sgds-border-radius-3-xl);
     --sgds-radius-full: var(--sgds-border-radius-full);
     --sgds-radius-form-none: var(--sgds-form-border-radius-none);
     --sgds-radius-form-xs: var(--sgds-form-border-radius-xs);
@@ -453,15 +463,6 @@
   }
   .sgds\:mt-sm {
     margin-top: var(--sgds-spacing-sm);
-  }
-  .sgds\:mr-4 {
-    margin-right: calc(var(--sgds-spacing) * 4);
-  }
-  .sgds\:mb-1 {
-    margin-bottom: calc(var(--sgds-spacing) * 1);
-  }
-  .sgds\:mb-2 {
-    margin-bottom: calc(var(--sgds-spacing) * 2);
   }
   .sgds\:mb-2-xl {
     margin-bottom: var(--sgds-spacing-2-xl);
@@ -754,6 +755,9 @@
   .sgds\:rounded-2-xl {
     border-radius: var(--sgds-radius-2-xl);
   }
+  .sgds\:rounded-3-xl {
+    border-radius: var(--sgds-radius-3-xl);
+  }
   .sgds\:rounded-form-full {
     border-radius: var(--sgds-radius-form-full);
   }
@@ -938,8 +942,8 @@
   .sgds\:border-danger-emphasis {
     border-color: var(--sgds-border-color-danger-emphasis);
   }
-  .sgds\:border-danger-subtle {
-    border-color: var(--sgds-border-color-danger-subtle);
+  .sgds\:border-danger-muted {
+    border-color: var(--sgds-border-color-danger-muted);
   }
   .sgds\:border-default {
     border-color: var(--sgds-border-color-default);
@@ -1010,8 +1014,8 @@
   .sgds\:border-warning-emphasis {
     border-color: var(--sgds-border-color-warning-emphasis);
   }
-  .sgds\:border-warning-subtle {
-    border-color: var(--sgds-border-color-warning-subtle);
+  .sgds\:border-warning-muted {
+    border-color: var(--sgds-border-color-warning-muted);
   }
   .sgds\:bg-accent-default {
     background-color: var(--sgds-background-color-accent-default);
@@ -1451,6 +1455,22 @@
   .sgds\:text-subtitle-sm {
     font-size: var(--sgds-text-subtitle-sm);
   }
+  .sgds\:leading-2-xl {
+    --tw-leading: var(--sgds-leading-2-xl);
+    line-height: var(--sgds-leading-2-xl);
+  }
+  .sgds\:leading-2-xs {
+    --tw-leading: var(--sgds-leading-2-xs);
+    line-height: var(--sgds-leading-2-xs);
+  }
+  .sgds\:leading-3-xl {
+    --tw-leading: var(--sgds-leading-3-xl);
+    line-height: var(--sgds-leading-3-xl);
+  }
+  .sgds\:leading-3-xs {
+    --tw-leading: var(--sgds-leading-3-xs);
+    line-height: var(--sgds-leading-3-xs);
+  }
   .sgds\:leading-16 {
     --tw-leading: var(--sgds-leading-16);
     line-height: var(--sgds-leading-16);
@@ -1503,9 +1523,25 @@
     --tw-leading: var(--sgds-leading-64);
     line-height: var(--sgds-leading-64);
   }
-  .sgds\:leading-none {
-    --tw-leading: var(--sgds-spacing-none);
-    line-height: var(--sgds-spacing-none);
+  .sgds\:leading-lg {
+    --tw-leading: var(--sgds-leading-lg);
+    line-height: var(--sgds-leading-lg);
+  }
+  .sgds\:leading-md {
+    --tw-leading: var(--sgds-leading-md);
+    line-height: var(--sgds-leading-md);
+  }
+  .sgds\:leading-sm {
+    --tw-leading: var(--sgds-leading-sm);
+    line-height: var(--sgds-leading-sm);
+  }
+  .sgds\:leading-xl {
+    --tw-leading: var(--sgds-leading-xl);
+    line-height: var(--sgds-leading-xl);
+  }
+  .sgds\:leading-xs {
+    --tw-leading: var(--sgds-leading-xs);
+    line-height: var(--sgds-leading-xs);
   }
   .sgds\:font-bold {
     --tw-font-weight: var(--sgds-font-weight-bold);

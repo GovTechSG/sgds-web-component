@@ -1,9 +1,6 @@
 :host([noPadding]) .card {
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
-}
-
-:host(:not([noPadding])) .card:not(.disabled):hover {
-  box-shadow: 0px 0px 1px 0px rgba(14, 14, 14, 0.12), 0px 8px 16px 0px rgba(14, 14, 14, 0.12);
+  background-color: inherit;
 }
 
 :host([orientation="vertical"][noPadding]) .card-body {

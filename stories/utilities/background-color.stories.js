@@ -3,7 +3,7 @@ import "../../mocks/color-item.ts";
 
 export default {
   title: "Utilities/Background Color",
-  tags: ["autodocs"]
+  tags: ["!autodocs"]
 };
 
 const copyStates = new Map();
