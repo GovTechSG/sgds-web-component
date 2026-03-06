@@ -35,11 +35,11 @@ const renderTokenCell = token => html`
 
 const TOKENS = [
   { suffix: "2-xs", value: "4px / 12px / 16px" },
-  { suffix: "xs",   value: "8px / 16px / 20px" },
-  { suffix: "sm",   value: "12px / 20px / 24px" },
-  { suffix: "md",   value: "16px / 24px / 32px" },
-  { suffix: "lg",   value: "20px / 32px / 48px" },
-  { suffix: "xl",   value: "24px / 48px / 64px" }
+  { suffix: "xs", value: "8px / 16px / 20px" },
+  { suffix: "sm", value: "12px / 20px / 24px" },
+  { suffix: "md", value: "16px / 24px / 32px" },
+  { suffix: "lg", value: "20px / 32px / 48px" },
+  { suffix: "xl", value: "24px / 48px / 64px" }
 ];
 
 export const Layout = () => html`

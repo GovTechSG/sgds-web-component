@@ -35,11 +35,11 @@ const renderTokenCell = token => html`
 
 const TOKENS = [
   { suffix: "2-xs", value: "4px / 4px / 4px" },
-  { suffix: "xs",   value: "8px / 8px / 8px" },
-  { suffix: "sm",   value: "8px / 12px / 12px" },
-  { suffix: "md",   value: "12px / 16px / 16px" },
-  { suffix: "lg",   value: "16px / 20px / 20px" },
-  { suffix: "xl",   value: "20px / 24px / 24px" },
+  { suffix: "xs", value: "8px / 8px / 8px" },
+  { suffix: "sm", value: "8px / 12px / 12px" },
+  { suffix: "md", value: "12px / 16px / 16px" },
+  { suffix: "lg", value: "16px / 20px / 20px" },
+  { suffix: "xl", value: "20px / 24px / 24px" },
   { suffix: "2-xl", value: "24px / 32px / 32px" }
 ];
 
@@ -59,8 +59,12 @@ export const Text = () => html`
           <sgds-table-cell><code class="${CODE_CLASSES}">${value}</code></sgds-table-cell>
           <sgds-table-cell>
             <div class="sgds:flex sgds:flex-col sgds:gap-text-${suffix}">
-              <span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm sgds:text-label-sm">Heading</span>
-              <span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm sgds:text-label-sm">Body text</span>
+              <span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm sgds:text-label-sm"
+                >Heading</span
+              >
+              <span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm sgds:text-label-sm"
+                >Body text</span
+              >
             </div>
           </sgds-table-cell>
         </sgds-table-row>

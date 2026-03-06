@@ -56,8 +56,14 @@ export const Layout = () => html`
           <sgds-table-cell><code class="${CODE_CLASSES}">--sgds-layout-padding-${suffix}</code></sgds-table-cell>
           <sgds-table-cell><code class="${CODE_CLASSES}">${value}</code></sgds-table-cell>
           <sgds-table-cell>
-            <div class="sgds:bg-warning-surface-muted sgds:border sgds:border-warning-default sgds:rounded-sm sgds:inline-block">
-              <div class="sgds:p-layout-${suffix} sgds:bg-warning-default sgds:text-fixed-dark sgds:rounded-sm sgds:text-label-sm">Content</div>
+            <div
+              class="sgds:bg-warning-surface-muted sgds:border sgds:border-warning-default sgds:rounded-sm sgds:inline-block"
+            >
+              <div
+                class="sgds:p-layout-${suffix} sgds:bg-warning-default sgds:text-fixed-dark sgds:rounded-sm sgds:text-label-sm"
+              >
+                Content
+              </div>
             </div>
           </sgds-table-cell>
         </sgds-table-row>

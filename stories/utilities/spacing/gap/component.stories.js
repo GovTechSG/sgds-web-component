@@ -68,4 +68,3 @@ export const Component = () => html`
     )}
   </sgds-table>
 `;
-

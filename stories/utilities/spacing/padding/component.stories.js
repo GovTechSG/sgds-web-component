@@ -56,8 +56,14 @@ export const Component = () => html`
           <sgds-table-cell><code class="${CODE_CLASSES}">--sgds-component-padding-${suffix}</code></sgds-table-cell>
           <sgds-table-cell><code class="${CODE_CLASSES}">${value}</code></sgds-table-cell>
           <sgds-table-cell>
-            <div class="sgds:bg-accent-surface-muted sgds:border sgds:border-accent-default sgds:rounded-sm sgds:inline-block">
-              <div class="sgds:p-component-${suffix} sgds:bg-accent-default sgds:text-fixed-light sgds:rounded-sm sgds:text-label-sm">Button</div>
+            <div
+              class="sgds:bg-accent-surface-muted sgds:border sgds:border-accent-default sgds:rounded-sm sgds:inline-block"
+            >
+              <div
+                class="sgds:p-component-${suffix} sgds:bg-accent-default sgds:text-fixed-light sgds:rounded-sm sgds:text-label-sm"
+              >
+                Button
+              </div>
             </div>
           </sgds-table-cell>
         </sgds-table-row>
