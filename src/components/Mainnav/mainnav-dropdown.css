@@ -123,5 +123,6 @@ slot[name="toggler"]::slotted(*) {
 }
 
 sgds-dropdown {
+  display: block;
   height: 100%;
 }

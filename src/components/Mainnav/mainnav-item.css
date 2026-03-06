@@ -26,6 +26,10 @@
 }
 
 @media screen and (min-width: 1024px) {
+  ::slotted(*) {
+    min-height: 100%;
+  }
+
   :host([expand="lg"]) ::slotted(*) {
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
@@ -93,7 +97,6 @@
   display: flex;
   cursor: pointer;
   height: auto !important;
-  min-height: 100%;
   text-decoration: none !important;
   align-items: center;
   text-decoration: none;
