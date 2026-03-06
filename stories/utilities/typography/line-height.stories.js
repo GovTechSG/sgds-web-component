@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Line Height",
+  title: "Utilities/Typography/Line Height",
   tags: ["!autodocs"]
 };
 

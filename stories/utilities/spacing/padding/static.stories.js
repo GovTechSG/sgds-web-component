@@ -1,8 +1,8 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Spacing/Padding",
-  tags: ["autodocs"]
+  title: "Utilities/Spacing/Padding/Static",
+  tags: ["!autodocs"]
 };
 
 const PADDING_SCALE = [
@@ -63,7 +63,7 @@ const PaddingTableRow = item => {
   `;
 };
 
-export const Padding = () => html`
+export const Static = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
