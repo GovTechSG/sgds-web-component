@@ -214,6 +214,64 @@ export const AllVariants = {
 };
 ```
 
+## DRY (Don't Repeat Yourself) Rules
+
+When stories live inside a named folder, the folder name already provides the context — do not repeat it in filenames or story export names.
+
+### File Naming
+
+The folder name is the namespace. Strip the folder name from the filename:
+
+```
+stories/utilities/border/
+  ✅ color.stories.js        (not border-color.stories.js)
+  ✅ radius.stories.js       (not border-radius.stories.js)
+  ✅ width.stories.js        (not border-width.stories.js)
+
+stories/utilities/spacing/gap/
+  ✅ static.stories.js       (not gap-static.stories.js)
+  ✅ form.stories.js         (not form-gap.stories.js)
+  ✅ text.stories.js         (not text-gap.stories.js)
+  ✅ layout.stories.js       (not layout-gap.stories.js)
+  ✅ component.stories.js    (not component-gap.stories.js)
+
+stories/utilities/spacing/padding/
+  ✅ static.stories.js       (not padding.stories.js)
+  ✅ layout.stories.js       (not layout-padding.stories.js)
+  ✅ component.stories.js    (not component-padding.stories.js)
+```
+
+### Story Export Names
+
+The Storybook sidebar title already includes the folder/category. Strip the category word from export names:
+
+```javascript
+// In stories/utilities/border/color.stories.js
+// title: "Utilities/Border/Color" — "Border" is already in the path
+
+export const Grayscales = ...   // ✅ not BorderGrayscales
+export const Primary = ...      // ✅ not PrimaryBorder
+
+// In stories/utilities/spacing/gap/text.stories.js
+// title: "Utilities/Spacing/Gap/Text Gap" — "Gap" is in the path
+
+export const Text = ...         // ✅ not TextGap
+```
+
+### Storybook Title
+
+The `title` field in the default export mirrors the folder structure. Each segment adds one level of context — no need to repeat parent segments in child segments:
+
+```javascript
+// ✅ Correct
+export default { title: "Utilities/Border/Color" };
+export default { title: "Utilities/Spacing/Gap/Form" };
+
+// ❌ Wrong — repeats the category
+export default { title: "Utilities/Border/Border Color" };
+export default { title: "Utilities/Spacing/Gap/Form Gap" };
+```
+
 ## Best Practices
 
 ### DO:
@@ -224,6 +282,7 @@ export const AllVariants = {
 - ✅ Document each story variant in `additional.mdx`
 - ✅ Use meaningful story names that describe the variant
 - ✅ Include `tags: ["!dev"]` for stories that shouldn't show in development
+- ✅ Apply DRY naming — strip folder/category name from filenames and export names
 
 ### DON'T:
 - ❌ Import `Template` from `basic.js` in `additional.stories.js` (it's auto-concatenated)
@@ -231,6 +290,7 @@ export const AllVariants = {
 - ❌ Create stories without corresponding documentation
 - ❌ Use generic names like "Story1", "Story2"
 - ❌ Include complex logic in args - use custom templates instead
+- ❌ Repeat the folder/category name in filenames or export names (violates DRY)
 
 ## Story Naming Conventions
 

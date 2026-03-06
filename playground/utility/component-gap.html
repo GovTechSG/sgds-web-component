@@ -1,0 +1,89 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Component Gap</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+
+  <p class="sgds:mb-2-xl sgds:text-subtle">Component gap tokens control spacing between elements within a component (e.g. icon and label, list items, form fields). Values scale across breakpoints: mobile / tablet (≥ 1024px) / desktop (≥ 1440px).</p>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Component Gap</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Mobile / Tablet / Desktop</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-component-xs</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-component-gap-xs</code></sgds-table-cell>
+        <sgds-table-cell>8px / 16px / 20px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:items-center sgds:gap-component-xs sgds:bg-primary-default sgds:text-fixed-light sgds:px-sm sgds:py-2-xs sgds:rounded-full sgds:w-fit"><sgds-icon name="star-fill"></sgds-icon><span class="sgds:text-label-sm">Badge</span></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-component-sm</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-component-gap-sm</code></sgds-table-cell>
+        <sgds-table-cell>12px / 20px / 24px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:items-center sgds:gap-component-sm sgds:bg-primary-default sgds:text-fixed-light sgds:px-sm sgds:py-2-xs sgds:rounded-full sgds:w-fit"><sgds-icon name="star-fill"></sgds-icon><span class="sgds:text-label-sm">Badge</span></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-component-md</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-component-gap-md</code></sgds-table-cell>
+        <sgds-table-cell>16px / 24px / 32px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:items-center sgds:gap-component-md sgds:bg-primary-default sgds:text-fixed-light sgds:px-sm sgds:py-2-xs sgds:rounded-full sgds:w-fit"><sgds-icon name="star-fill"></sgds-icon><span class="sgds:text-label-sm">Badge</span></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-component-lg</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-component-gap-lg</code></sgds-table-cell>
+        <sgds-table-cell>20px / 32px / 48px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:items-center sgds:gap-component-lg sgds:bg-primary-default sgds:text-fixed-light sgds:px-sm sgds:py-2-xs sgds:rounded-full sgds:w-fit"><sgds-icon name="star-fill"></sgds-icon><span class="sgds:text-label-sm">Badge</span></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-component-xl</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-component-gap-xl</code></sgds-table-cell>
+        <sgds-table-cell>24px / 48px / 64px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:items-center sgds:gap-component-xl sgds:bg-primary-default sgds:text-fixed-light sgds:px-sm sgds:py-2-xs sgds:rounded-full sgds:w-fit"><sgds-icon name="star-fill"></sgds-icon><span class="sgds:text-label-sm">Badge</span></div></sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Example: Card Component</h2>
+    <p class="sgds:mb-md sgds:text-subtle">Using <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-component-sm</code> between the card icon, title and description.</p>
+    <div class="sgds:flex sgds:gap-layout-md">
+      <div class="sgds:bg-surface-raised sgds:p-xl sgds:rounded-md sgds:flex sgds:flex-col sgds:gap-component-sm sgds:flex-1">
+        <sgds-icon name="shield-check" class="sgds:text-primary-default"></sgds-icon>
+        <h3 class="sgds:text-heading-sm">Secure by Design</h3>
+        <p class="sgds:text-body-sm sgds:text-subtle">Every component is built with accessibility and security in mind.</p>
+      </div>
+      <div class="sgds:bg-surface-raised sgds:p-xl sgds:rounded-md sgds:flex sgds:flex-col sgds:gap-component-sm sgds:flex-1">
+        <sgds-icon name="lightning-charge" class="sgds:text-success-default"></sgds-icon>
+        <h3 class="sgds:text-heading-sm">Fast to Build</h3>
+        <p class="sgds:text-body-sm sgds:text-subtle">Pre-built components speed up your development workflow.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const nightBtn = document.querySelector("#night-theme");
+    nightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const html = document.querySelector("html");
+      if (html.classList.contains("sgds-night-theme")) {
+        html.classList.remove("sgds-night-theme");
+      } else {
+        html.classList.add("sgds-night-theme");
+      }
+    });
+  </script>
+</body>

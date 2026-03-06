@@ -1,0 +1,85 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Container Width</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+
+  <p class="sgds:mb-2-xl sgds:text-subtle">The container width token sets the maximum width of the page content area. It responds to the current viewport: 360px (mobile) / 888px (tablet ≥ 1024px) / 1312px (desktop ≥ 1440px).</p>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Container Width</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Mobile / Tablet / Desktop</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:w-container</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-container-width</code></sgds-table-cell>
+        <sgds-table-cell>360px / 888px / 1312px</sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Example: Centred Page Container</h2>
+    <p class="sgds:mb-md sgds:text-subtle">Apply <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:w-container sgds:mx-auto</code> to a wrapper to keep page content within the responsive content width at every breakpoint.</p>
+    <div class="sgds:bg-surface-raised sgds:p-xl sgds:rounded-md">
+      <div class="sgds:w-container sgds:mx-auto sgds:bg-primary-surface-muted sgds:p-xl sgds:rounded-md">
+        <p class="sgds:text-label-sm sgds:text-subtle sgds:mb-xs">w-container · mx-auto</p>
+        <h3 class="sgds:text-heading-sm sgds:mb-sm">Content Container</h3>
+        <p class="sgds:text-body-md sgds:text-subtle">This block is constrained to <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-container-width</code> and centred horizontally. Resize the window to see it adapt between 360px, 888px and 1312px.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Breakpoint Reference</h2>
+    <p class="sgds:mb-md sgds:text-subtle">Container width changes at these breakpoints.</p>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>Breakpoint</sgds-table-head>
+        <sgds-table-head>Min Width</sgds-table-head>
+        <sgds-table-head>Container Width</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell>Mobile (default)</sgds-table-cell>
+        <sgds-table-cell>—</sgds-table-cell>
+        <sgds-table-cell>360px</sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell>Tablet</sgds-table-cell>
+        <sgds-table-cell>1024px</sgds-table-cell>
+        <sgds-table-cell>888px</sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell>Desktop</sgds-table-cell>
+        <sgds-table-cell>1440px</sgds-table-cell>
+        <sgds-table-cell>1312px</sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <script>
+    const nightBtn = document.querySelector("#night-theme");
+    nightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const html = document.querySelector("html");
+      if (html.classList.contains("sgds-night-theme")) {
+        html.classList.remove("sgds-night-theme");
+      } else {
+        html.classList.add("sgds-night-theme");
+      }
+    });
+  </script>
+</body>

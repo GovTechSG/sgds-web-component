@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Text Color",
+  title: "Utilities/Typography/Text Color",
   tags: ["!autodocs"]
 };
 
@@ -14,7 +14,7 @@ const copyToClipboard = (token, buttonEl) => {
   }, 3000);
 };
 
-export const BasicTextColor = () => html`
+export const Grayscales = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>

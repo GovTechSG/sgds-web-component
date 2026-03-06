@@ -74,7 +74,7 @@ export const parameters = {
         "Form",
         ["Validation", "Custom Validation"],
         "Utilities",
-        ["Introduction"],
+        ["Introduction", "Spacing", ["Introduction"]],
         "Components",
         "Templates",
         ["Introduction"],

@@ -1,0 +1,96 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Text Gap</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+
+  <p class="sgds:mb-2-xl sgds:text-subtle">Text gap tokens control spacing between text elements (headings, body, captions). Values adapt across breakpoints: mobile / tablet (≥ 1024px) / desktop (≥ 1440px).</p>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Text Gap</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Mobile / Tablet / Desktop</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-text-2-xs</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-text-gap-2-xs</code></sgds-table-cell>
+        <sgds-table-cell>4px / 4px / 4px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:flex-col sgds:gap-text-2-xs"><span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm">Heading</span><span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm">Body text</span></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-text-xs</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-text-gap-xs</code></sgds-table-cell>
+        <sgds-table-cell>8px / 8px / 8px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:flex-col sgds:gap-text-xs"><span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm">Heading</span><span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm">Body text</span></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-text-sm</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-text-gap-sm</code></sgds-table-cell>
+        <sgds-table-cell>8px / 12px / 12px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:flex-col sgds:gap-text-sm"><span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm">Heading</span><span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm">Body text</span></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-text-md</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-text-gap-md</code></sgds-table-cell>
+        <sgds-table-cell>12px / 16px / 16px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:flex-col sgds:gap-text-md"><span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm">Heading</span><span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm">Body text</span></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-text-lg</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-text-gap-lg</code></sgds-table-cell>
+        <sgds-table-cell>16px / 20px / 20px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:flex-col sgds:gap-text-lg"><span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm">Heading</span><span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm">Body text</span></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-text-xl</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-text-gap-xl</code></sgds-table-cell>
+        <sgds-table-cell>20px / 24px / 24px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:flex-col sgds:gap-text-xl"><span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm">Heading</span><span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm">Body text</span></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-text-2-xl</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-text-gap-2-xl</code></sgds-table-cell>
+        <sgds-table-cell>24px / 32px / 32px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:flex-col sgds:gap-text-2-xl"><span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm">Heading</span><span class="sgds:bg-primary-surface-muted sgds:px-sm sgds:py-3-xs sgds:rounded-sm">Body text</span></div></sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Example: Article Layout</h2>
+    <p class="sgds:mb-md sgds:text-subtle">Using <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-text-md</code> between heading, subtitle and body copy.</p>
+    <div class="sgds:bg-surface-raised sgds:p-xl sgds:rounded-md">
+      <div class="sgds:flex sgds:flex-col sgds:gap-text-md">
+        <h2 class="sgds:text-heading-md">Singapore Design System</h2>
+        <p class="sgds:text-subtitle-sm sgds:text-subtle">Building accessible, consistent digital experiences.</p>
+        <p class="sgds:text-body-md">The design system provides a foundation of reusable components and patterns that help teams across the Singapore Government build cohesive, user-centred services faster.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const nightBtn = document.querySelector("#night-theme");
+    nightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const html = document.querySelector("html");
+      if (html.classList.contains("sgds-night-theme")) {
+        html.classList.remove("sgds-night-theme");
+      } else {
+        html.classList.add("sgds-night-theme");
+      }
+    });
+  </script>
+</body>

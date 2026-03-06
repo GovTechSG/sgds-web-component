@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Font Size",
+  title: "Utilities/Typography/Font Size",
   tags: ["!autodocs"]
 };
 

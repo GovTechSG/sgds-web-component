@@ -1,21 +1,28 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Border Width",
+  title: "Utilities/Border/Radius",
   tags: ["!autodocs"]
 };
 
-const WIDTH_SCALE = [
-  { name: "0", class: "sgds:border-0", variable: "--sgds-border-width-0", value: "0px" },
-  { name: "1", class: "sgds:border-1", variable: "--sgds-border-width-1", value: "1px" },
-  { name: "2", class: "sgds:border-2", variable: "--sgds-border-width-2", value: "2px" },
-  { name: "3", class: "sgds:border-3", variable: "--sgds-border-width-3", value: "3px" },
-  { name: "4", class: "sgds:border-4", variable: "--sgds-border-width-4", value: "4px" }
+const RADIUS_SCALE = [
+  { name: "none", class: "sgds:rounded-none", variable: "--sgds-border-radius-none", value: "0px" },
+  { name: "xs", class: "sgds:rounded-xs", variable: "--sgds-border-radius-xs", value: "2px" },
+  { name: "sm", class: "sgds:rounded-sm", variable: "--sgds-border-radius-sm", value: "4px" },
+  { name: "md", class: "sgds:rounded-md", variable: "--sgds-border-radius-md", value: "8px" },
+  { name: "lg", class: "sgds:rounded-lg", variable: "--sgds-border-radius-lg", value: "12px" },
+  { name: "xl", class: "sgds:rounded-xl", variable: "--sgds-border-radius-xl", value: "16px" },
+  { name: "2-xl", class: "sgds:rounded-2-xl", variable: "--sgds-border-radius-2-xl", value: "24px" },
+  { name: "3-xl", class: "sgds:rounded-3-xl", variable: "--sgds-border-radius-3-xl", value: "32px" },
+  { name: "full", class: "sgds:rounded-full", variable: "--sgds-border-radius-full", value: "999px" }
 ];
 
-const FORM_WIDTH_SCALE = [
-  { name: "default", class: "sgds:border-form-default", variable: "--sgds-form-border-width-default", value: "1px" },
-  { name: "thick", class: "sgds:border-form-thick", variable: "--sgds-form-border-width-thick", value: "2px" }
+const FORM_RADIUS_SCALE = [
+  { name: "none", class: "sgds:rounded-form-none", variable: "--sgds-form-border-radius-none", value: "0px" },
+  { name: "xs", class: "sgds:rounded-form-xs", variable: "--sgds-form-border-radius-xs", value: "2px" },
+  { name: "sm", class: "sgds:rounded-form-sm", variable: "--sgds-form-border-radius-sm", value: "4px" },
+  { name: "md", class: "sgds:rounded-form-md", variable: "--sgds-form-border-radius-md", value: "8px" },
+  { name: "full", class: "sgds:rounded-form-full", variable: "--sgds-form-border-radius-full", value: "999px" }
 ];
 
 const copyToClipboard = (token, buttonEl) => {
@@ -27,7 +34,7 @@ const copyToClipboard = (token, buttonEl) => {
   }, 3000);
 };
 
-const WidthTableRow = item => {
+const RadiusTableRow = item => {
   return html`
     <sgds-table-row>
       <sgds-table-cell>
@@ -54,17 +61,14 @@ const WidthTableRow = item => {
       </sgds-table-cell>
       <sgds-table-cell>
         <div
-          style="${item.class === "sgds:border-0"
-            ? "border: var(--sgds-border-width-0) solid var(--sgds-border-color-default)"
-            : "border: var(" + item.variable + ") solid var(--sgds-border-color-default)"}"
-          class="sgds:w-16 sgds:h-16"
+          class="sgds:flex sgds:items-center sgds:justify-center sgds:w-20 sgds:h-20 sgds:bg-primary-default ${item.class}"
         ></div>
       </sgds-table-cell>
     </sgds-table-row>
   `;
 };
 
-export const Width = () => html`
+export const Radius = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
@@ -72,11 +76,11 @@ export const Width = () => html`
       <sgds-table-head>Value</sgds-table-head>
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
-    ${WIDTH_SCALE.map(item => WidthTableRow(item))}
+    ${RADIUS_SCALE.map(item => RadiusTableRow(item))}
   </sgds-table>
 `;
 
-export const FormWidth = () => html`
+export const FormRadius = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
@@ -84,6 +88,6 @@ export const FormWidth = () => html`
       <sgds-table-head>Value</sgds-table-head>
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
-    ${FORM_WIDTH_SCALE.map(item => WidthTableRow(item))}
+    ${FORM_RADIUS_SCALE.map(item => RadiusTableRow(item))}
   </sgds-table>
 `;

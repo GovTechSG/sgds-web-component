@@ -256,6 +256,33 @@ Each section should include:
 
 ## Commands
 
+### Token Conversion Script
+
+A code-generation script is in the `scripts/` directory:
+
+```
+scripts/generate-mapping.mjs
+```
+
+Run it from the **workspace root**. It reads `--sgds-*` variables from a theme CSS file and outputs ready-to-paste `@theme` block entries for `src/css/utility.css`.
+
+```bash
+# Preview all mappings from day.css
+node .github/skills/tailwind-mapping/scripts/generate-mapping.mjs src/themes/day.css
+
+# Filter to a specific variant
+node .github/skills/tailwind-mapping/scripts/generate-mapping.mjs src/themes/day.css --filter primary
+node .github/skills/tailwind-mapping/scripts/generate-mapping.mjs src/themes/day.css --filter "danger|warning"
+
+# Use responsive.css as source
+node .github/skills/tailwind-mapping/scripts/generate-mapping.mjs src/themes/responsive.css
+
+# Append output directly to src/css/utility.css (use with care)
+node .github/skills/tailwind-mapping/scripts/generate-mapping.mjs src/themes/day.css --filter primary --write
+```
+
+**The script applies all conversion rules in the correct specificity order** (border-color before color, etc.) and groups output by the source comment sections. Anything it cannot convert is listed as "Skipped" in the summary.
+
 ### Developer Preview
 - **Utility Dev:** `pnpm run utility:dev` (Tailwind scans playground/utility/*.html files)
 - **Dev Server:** `pnpm run dev` (preview playground files in browser)
