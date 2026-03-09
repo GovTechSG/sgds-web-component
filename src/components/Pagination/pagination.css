@@ -48,7 +48,6 @@ svg {
 
 .page-item.active .page-link {
   color: var(--sgds-color-fixed-light);
-  border-color: var(--sgds-info);
   background-color: var(--sgds-primary-surface-default);
 }
 
