@@ -2,7 +2,7 @@ import { html } from "lit";
 
 export default {
   title: "Utilities/Spacing/Margin",
-  tags: ["autodocs"]
+  tags: ["!autodocs"]
 };
 
 const MARGIN_SCALE = [

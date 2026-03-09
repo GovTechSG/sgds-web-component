@@ -37,7 +37,7 @@ a:hover {
   max-width: var(--sgds-mainnav-max-width, 1440px);
   margin-left: auto;
   margin-right: auto;
-  padding: 0.25rem var(--sgds-mainnav-padding-x, 2rem);
+  padding: 0.25rem var(--sgds-mainnav-mobile-padding-x, 1.25rem);
 }
 
 :host([fluid]) .container {
@@ -108,8 +108,8 @@ a:hover {
 
 .content-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  gap: 1rem;
 }
 
 .icon {
@@ -160,13 +160,15 @@ a.trusted-websites-link:focus-visible,
   outline: 4px solid #60aaf4;
 }
 
-@media screen and (max-width: 767px) {
-  .container {
-    padding: 0.25rem var(--sgds-mainnav-mobile-padding-x, 1.25rem);
+@media screen and (min-width: 768px) {
+  .content-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
   }
+}
 
-  .sgds-masthead-content .content-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+@media screen and (min-width: 1024px) {
+  .container {
+    padding: 0.25rem var(--sgds-mainnav-padding-x, 2rem);
   }
 }

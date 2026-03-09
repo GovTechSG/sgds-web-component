@@ -1,0 +1,108 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Component Padding</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+
+  <p class="sgds:mb-2-xl sgds:text-subtle">Component padding tokens control inset spacing within individual UI components (buttons, cards, badges, list items). Values scale across breakpoints: mobile / tablet (≥ 1024px) / desktop (≥ 1440px).</p>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Component Padding</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Mobile / Tablet / Desktop</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:p-component-xs</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-component-padding-xs</code></sgds-table-cell>
+        <sgds-table-cell>16px / 20px / 24px</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:bg-accent-surface-muted sgds:border sgds:border-accent-default sgds:rounded-sm sgds:inline-block">
+            <div class="sgds:p-component-xs sgds:bg-accent-default sgds:text-fixed-light sgds:rounded-sm sgds:text-label-sm">Button</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:p-component-sm</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-component-padding-sm</code></sgds-table-cell>
+        <sgds-table-cell>20px / 24px / 32px</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:bg-accent-surface-muted sgds:border sgds:border-accent-default sgds:rounded-sm sgds:inline-block">
+            <div class="sgds:p-component-sm sgds:bg-accent-default sgds:text-fixed-light sgds:rounded-sm sgds:text-label-sm">Button</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:p-component-md</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-component-padding-md</code></sgds-table-cell>
+        <sgds-table-cell>24px / 32px / 48px</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:bg-accent-surface-muted sgds:border sgds:border-accent-default sgds:rounded-sm sgds:inline-block">
+            <div class="sgds:p-component-md sgds:bg-accent-default sgds:text-fixed-light sgds:rounded-sm sgds:text-label-sm">Button</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:p-component-lg</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-component-padding-lg</code></sgds-table-cell>
+        <sgds-table-cell>32px / 48px / 64px</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:bg-accent-surface-muted sgds:border sgds:border-accent-default sgds:rounded-sm sgds:inline-block">
+            <div class="sgds:p-component-lg sgds:bg-accent-default sgds:text-fixed-light sgds:rounded-sm sgds:text-label-sm">Button</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:p-component-xl</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-component-padding-xl</code></sgds-table-cell>
+        <sgds-table-cell>48px / 64px / 96px</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:bg-accent-surface-muted sgds:border sgds:border-accent-default sgds:rounded-sm sgds:inline-block">
+            <div class="sgds:p-component-xl sgds:bg-accent-default sgds:text-fixed-light sgds:rounded-sm sgds:text-label-sm">Button</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Example: Component Size Variants</h2>
+    <p class="sgds:mb-md sgds:text-subtle">Applying different component padding tokens to produce small, medium, and large button-like elements.</p>
+    <div class="sgds:flex sgds:items-end sgds:gap-layout-sm">
+      <div class="sgds:bg-primary-default sgds:text-fixed-light sgds:rounded-md sgds:py-component-xs sgds:px-layout-xs">
+        <span class="sgds:text-label-sm">Small</span>
+      </div>
+      <div class="sgds:bg-primary-default sgds:text-fixed-light sgds:rounded-md sgds:py-component-sm sgds:px-layout-sm">
+        <span class="sgds:text-label-md">Medium</span>
+      </div>
+      <div class="sgds:bg-primary-default sgds:text-fixed-light sgds:rounded-md sgds:py-component-md sgds:px-layout-md">
+        <span class="sgds:text-label-lg">Large</span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const nightBtn = document.querySelector("#night-theme");
+    nightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const html = document.querySelector("html");
+      if (html.classList.contains("sgds-night-theme")) {
+        html.classList.remove("sgds-night-theme");
+      } else {
+        html.classList.add("sgds-night-theme");
+      }
+    });
+  </script>
+</body>
