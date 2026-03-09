@@ -281,6 +281,7 @@ export class SgdsPagination extends SgdsElement {
     ></sgds-icon>`;
     return html`
       <sgds-button
+        tone="neutral"
         ariaLabel=${direction === "Prev" ? "Previous" : "Next"}
         size=${this.size}
         @click=${isDisabled ? undefined : clickHandler}
@@ -294,6 +295,7 @@ export class SgdsPagination extends SgdsElement {
   private _getIconButton(direction: "Prev" | "Next", clickHandler: (e: MouseEvent) => void, isDisabled: boolean) {
     return html`
       <sgds-icon-button
+        tone="neutral"
         ariaLabel=${direction === "Prev" ? "Previous" : "Next"}
         size=${this.size}
         @click=${isDisabled ? undefined : clickHandler}
