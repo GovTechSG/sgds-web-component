@@ -34,7 +34,7 @@ const writeMode = args.includes("--write");
 const inputArg = args.find(a => !a.startsWith("--") && args.indexOf(a) !== filterIndex + 1);
 const inputFile = inputArg ?? "src/themes/day.css";
 
-const ROOT = new URL("../../../", import.meta.url).pathname;
+const ROOT = new URL("../../../../", import.meta.url).pathname;
 const inputPath = resolve(ROOT, inputFile);
 
 let css;
@@ -58,9 +58,25 @@ if (variables.length === 0) {
   process.exit(1);
 }
 
-const filtered = filterPattern
-  ? variables.filter(v => new RegExp(filterPattern, "i").test(v))
-  : variables;
+const createFilterRegex = pattern => {
+  if (typeof pattern !== "string") {
+    console.error("Filter pattern must be a string.");
+    process.exit(1);
+  }
+  if (pattern.length > 500) {
+    console.error("Filter pattern exceeds maximum allowed length of 500 characters.");
+    process.exit(1);
+  }
+  try {
+    return new RegExp(pattern, "i");
+  } catch (e) {
+    console.error(`Invalid filter pattern "${pattern}": ${e.message}`);
+    process.exit(1);
+  }
+};
+
+const filterRegex = filterPattern ? createFilterRegex(filterPattern) : null;
+const filtered = filterRegex ? variables.filter(v => filterRegex.test(v)) : variables;
 
 if (filtered.length === 0) {
   console.error(`No variables matched the filter pattern "${filterPattern}".`);
@@ -135,6 +151,14 @@ const rules = [
     toTailwind: ([, variant, modifier]) => [
       `text-color-${variant}-${modifier}`,
       `--sgds-${variant}-color-${modifier}`
+    ]
+  },
+  // --sgds-line-height-{modifier}  →  --leading-{modifier}
+  {
+    test: /^line-height-(.+)$/,
+    toTailwind: ([, modifier]) => [
+      `leading-${modifier}`,
+      `--sgds-line-height-${modifier}`
     ]
   }
 ];
