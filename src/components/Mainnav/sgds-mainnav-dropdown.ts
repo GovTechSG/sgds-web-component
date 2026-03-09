@@ -89,7 +89,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
       item.addEventListener("keydown", this._handleKeyboardMenuItemsEvent.bind(this));
 
       const dropdownItem = item.shadowRoot.querySelector(".dropdown-item") as HTMLElement;
-      dropdownItem.classList.add("nav-link");
+      dropdownItem.classList.add("mainnav-dropdown-link");
 
       const link = item.shadowRoot?.querySelector("a") || item.querySelector("a");
       link.tabIndex = -1;
@@ -110,7 +110,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
     const items = (e.target as HTMLSlotElement).assignedElements({ flatten: true }) as SgdsDropdownItem[];
     items.forEach(item => {
       const dropdownItem = item.shadowRoot.querySelector(".dropdown-item") as HTMLElement;
-      dropdownItem.classList.remove("nav-link");
+      dropdownItem.classList.remove("mainnav-dropdown-link");
 
       const slottedItem = (item.shadowRoot.querySelector(".dropdown-item slot") as HTMLSlotElement).assignedElements({
         flatten: true
