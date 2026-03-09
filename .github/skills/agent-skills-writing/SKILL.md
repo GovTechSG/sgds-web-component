@@ -14,22 +14,29 @@ Standards and patterns for authoring AI agent skills in this repository.
 
 | Location | Purpose | Audience |
 |----------|---------|---------|
-| `src/skills/` | Teach external developers how to use SGDS utilities | `external` |
+| `src/skills/utilities-*/` | Teach external developers how to use SGDS foundational style utilities (the Utilities API) | `external` |
+| `src/skills/components-*/` | Teach external developers how to use SGDS web components | `external` |
 | `.github/skills/` | Internal tools for SGDS maintainers | `internal` (no `audience` field) |
+
+**Folder naming convention**: All `src/skills/` folders use a domain prefix so agents and users can discover them by category:
+- `utilities-{name}` — foundational styles exposed via the `sgds:` Tailwind prefix
+- `components-{name}` — usage guidance for SGDS web components (`<sgds-*>`)
 
 ## SKILL.md Frontmatter
 
 ```yaml
 ---
-name: sgds-{skill-name}
-description: One sentence. What the skill teaches. Include trigger keywords ("Use when users ask about...").
+name: sgds-utilities-{skill-name}   # or sgds-components-{skill-name}
+description: "One sentence. What the skill teaches. Include trigger keywords (Use when users ask about...)."
 metadata:
   author: singapore-design-system
   version: "0.0.0"
   audience: external       # external skills only; omit for internal skills
-  category: {category}     # e.g. color, border, spacing, typography
+  category: {category}     # e.g. color, border, spacing, typography, component
 ---
 ```
+
+> **Important**: Always quote the `description` value. YAML will error if the value contains a colon (e.g., `sgds: prefix`).
 
 - File starts directly with `---` — no wrapping code fences
 - Version stays `"0.0.0"` until officially released; bump major version on breaking changes
@@ -38,13 +45,16 @@ metadata:
 
 **Simple skill** (no reference files needed, under ~500 lines):
 ```
-src/skills/{skill-name}/
+src/skills/utilities-{name}/
+└── SKILL.md
+
+src/skills/components-{name}/
 └── SKILL.md
 ```
 
 **Complex skill** (semantic categories, would exceed ~500 lines):
 ```
-src/skills/{skill-name}/
+src/skills/utilities-{name}/
 ├── SKILL.md          ← navigation hub + Quick Decision Guide only
 └── reference/
     ├── base.md
@@ -64,7 +74,7 @@ Do **not** extract if the skill is a single focused topic (e.g., spacing utiliti
 
 ## SKILL.md Structure (with references)
 
-Model: see `src/skills/background-color/SKILL.md` and `src/skills/border-color/SKILL.md`.
+Model: see `src/skills/utilities-background-color/SKILL.md` and `src/skills/utilities-border-color/SKILL.md`.
 
 The SKILL.md is a **navigation hub and decision guide** — not an example gallery.
 
@@ -91,7 +101,7 @@ One-line description of what it helps with.
 
 ## Reference File Structure
 
-Model: see any file in `src/skills/background-color/reference/`.
+Model: see any file in `src/skills/utilities-background-color/reference/`.
 
 ```markdown
 # {Category} {Skill Name} Reference
@@ -164,11 +174,11 @@ Exception: Common Patterns section may combine tokens from the same category (e.
 
 When **two or more skills** share the same suffix modifier vocabulary (e.g., `default`, `emphasis`, `muted`, `fixed-light`, `fixed-dark`, `inverse`), extract the definitions into a dedicated shared skill rather than duplicating them.
 
-**Pattern used**: `src/skills/color-semantics/SKILL.md` is the shared reference for all suffix modifiers used by `background-color`, `border-color`, and `text-color`.
+**Pattern used**: `src/skills/utilities-color-semantics/SKILL.md` is the shared reference for all suffix modifiers used by `utilities-background-color`, `utilities-border-color`, and `utilities-text-color`.
 
 Each consumer skill replaces its duplicated prose with:
 ```markdown
-For full definitions of suffix modifiers, see **[`color-semantics`](../color-semantics/SKILL.md)**.
+For full definitions of suffix modifiers, see **[`utilities-color-semantics`](../utilities-color-semantics/SKILL.md)**.
 ```
 
 Apply this pattern whenever you notice the same conceptual definitions appearing verbatim across multiple SKILL.md files.
@@ -186,17 +196,18 @@ Name specific relevant library components (e.g., `<sgds-alert>` in danger/warnin
 
 ## Registering a New Skill
 
-### 1. Add to `src/skills/overview/SKILL.md`
+### 1. Add to `src/skills/utilities-overview/SKILL.md`
 Add an entry in the Utility Categories section with a code example and common patterns list.
 
 ### 2. Add to `.github/copilot-instructions.md`
-Add a line under User-Facing Skills (or Internal Skills):
+Add a line under the appropriate domain section (Utilities Skills or Component Skills):
 ```markdown
-- [skill-name](../src/skills/{skill-name}/SKILL.md) - One-line description
+- [utilities-{name}](../src/skills/utilities-{name}/SKILL.md) - One-line description
+- [components-{name}](../src/skills/components-{name}/SKILL.md) - One-line description
 ```
 
 ### 3. Update overview frontmatter description
-Add the skill name to the comma-separated list in the `description` field of `src/skills/overview/SKILL.md`.
+Add the skill name to the comma-separated list in the `description` field of `src/skills/utilities-overview/SKILL.md`.
 
 ## Checklist for New Skills
 
@@ -209,7 +220,7 @@ Before considering a skill complete:
 - [ ] All HTML examples contain only the token(s) for that file's category
 - [ ] Every Common Patterns section has a library-first note
 - [ ] Shared modifier definitions link to a shared skill, not duplicated
-- [ ] Registered in `src/skills/overview/SKILL.md`
+- [ ] Registered in `src/skills/utilities-overview/SKILL.md` (for utilities skills)
 - [ ] Registered in `.github/copilot-instructions.md`
 
 ## Related

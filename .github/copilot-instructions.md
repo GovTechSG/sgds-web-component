@@ -7,7 +7,7 @@ description: 'AI agent guide for contributing to and navigating the sgds-web-com
 ## Architecture Overview
 - **Monorepo** for Singapore Design System web components and related tooling.
 - **Core library**: `src/` (source for all web components, built with LitElement, TypeScript, and Sass)
-- **Skills**: `src/skills/` (AI agent skills for teaching developers how to use SGDS utilities)
+- **Skills**: `src/skills/` (AI agent skills for teaching developers how to use SGDS — split into `utilities-*` foundation style skills and `components-*` component usage skills)
 - **Distribution**: `lib/` (compiled JS, CSS, and type declarations)
 - **Docs**: `docs/` (Markdown documentation for usage, migration, and framework integration)
 - **Playground**: `playground/` (HTML demos for each component)
@@ -78,17 +78,24 @@ Specialized knowledge for specific development tasks:
 - [tailwind-mapping](.github/skills/tailwind-mapping/SKILL.md) - Tailwind v4 CSS variable mappings and utility class generation
 
 ### User-Facing Skills (Usage guidance in src/skills/)
-- [overview](../src/skills/overview/SKILL.md) - Overview of all SGDS utility skills
-- [setup](../src/skills/setup/SKILL.md) - Setup and prerequisites for using SGDS utilities
-- [spacing](../src/skills/spacing/SKILL.md) - Margin, padding, gap utilities with 4px scale system
-- [color-semantics](../src/skills/color-semantics/SKILL.md) - Shared definitions for color token suffix modifiers (default, emphasis, muted, fixed-light, fixed-dark, inverse, surface, etc.) reused across all color skills
-- [background-color](../src/skills/background-color/SKILL.md) - Theme-aware background color utilities with semantic tokens
-- [text-color](../src/skills/text-color/SKILL.md) - Text color utilities that adapt to themes
-- [border-color](../src/skills/border-color/SKILL.md) - Border color utilities (semantic, theme-aware)
-- [border-width](../src/skills/border-width/SKILL.md) - Border thickness and side selection
-- [border-radius](../src/skills/border-radius/SKILL.md) - Rounded corner utilities
-- [typography](../src/skills/typography/SKILL.md) - Typography utilities (font size, weight, line height, etc.)
-- [opacity](../src/skills/opacity/SKILL.md) - Opacity utilities
+
+These skills cover two domains. Each domain uses a folder naming prefix so agents and users can identify them at a glance:
+
+#### Utilities Skills (`utilities-*`) — Foundational styles via the `sgds:` Tailwind prefix
+- [utilities-overview](../src/skills/utilities-overview/SKILL.md) - Overview of all SGDS foundational style utilities and the Utilities API
+- [utilities-setup](../src/skills/utilities-setup/SKILL.md) - Setup and prerequisites for using SGDS utilities
+- [utilities-spacing](../src/skills/utilities-spacing/SKILL.md) - Margin, padding, gap utilities with 4px scale system
+- [utilities-color-semantics](../src/skills/utilities-color-semantics/SKILL.md) - Shared definitions for color token suffix modifiers (default, emphasis, muted, fixed-light, fixed-dark, inverse, surface, etc.) reused across all color skills
+- [utilities-background-color](../src/skills/utilities-background-color/SKILL.md) - Theme-aware background color utilities with semantic tokens
+- [utilities-text-color](../src/skills/utilities-text-color/SKILL.md) - Text color utilities that adapt to themes
+- [utilities-border-color](../src/skills/utilities-border-color/SKILL.md) - Border color utilities (semantic, theme-aware)
+- [utilities-border-width](../src/skills/utilities-border-width/SKILL.md) - Border thickness and side selection
+- [utilities-border-radius](../src/skills/utilities-border-radius/SKILL.md) - Rounded corner utilities
+- [utilities-typography](../src/skills/utilities-typography/SKILL.md) - Typography utilities (font size, weight, line height, etc.)
+- [utilities-opacity](../src/skills/utilities-opacity/SKILL.md) - Opacity utilities
+
+#### Component Skills (`components-*`) — How to use SGDS web components
+_No component skills yet. Future skills follow the `components-{name}` folder naming convention._
 
 ## Instruction Files
 Detailed guidelines for specific aspects of development:
