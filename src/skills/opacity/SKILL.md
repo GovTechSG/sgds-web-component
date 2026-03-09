@@ -1,6 +1,6 @@
 ---
 name: sgds-opacity
-description: Teaches AI agents how to help developers use SGDS opacity utilities with the sgds: prefix. Use when users ask about transparency, opacity levels, fading elements, or semi-transparent overlays in SGDS designs.
+description: "Teaches AI agents how to help developers use SGDS opacity utilities with the sgds: prefix. Use when users ask about transparency, opacity levels, fading elements, or semi-transparent overlays in SGDS designs."
 metadata:
   author: singapore-design-system
   version: "0.0.0"

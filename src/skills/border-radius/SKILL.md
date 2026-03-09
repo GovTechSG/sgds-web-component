@@ -1,6 +1,6 @@
 ---
 name: sgds-border-radius
-description: Teaches AI agents how to help developers use SGDS border radius utilities with the sgds: prefix. Use when users ask about rounded corners, pill shapes, circular elements, card edge rounding, or rounded form inputs.
+description: "Teaches AI agents how to help developers use SGDS border radius utilities with the sgds: prefix. Use when users ask about rounded corners, pill shapes, circular elements, card edge rounding, or rounded form inputs."
 metadata:
   author: singapore-design-system
   version: "0.0.0"

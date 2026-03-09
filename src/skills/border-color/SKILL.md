@@ -1,6 +1,6 @@
 ---
 name: sgds-border-color
-description: Teaches AI agents how to help developers use SGDS border color utilities with the sgds: prefix. Use when users ask about border colors, semantic borders, theme-aware borders, or colored card/component edges in SGDS designs.
+description: "Teaches AI agents how to help developers use SGDS border color utilities with the sgds: prefix. Use when users ask about border colors, semantic borders, theme-aware borders, or colored card/component edges in SGDS designs."
 metadata:
   author: singapore-design-system
   version: "0.0.0"

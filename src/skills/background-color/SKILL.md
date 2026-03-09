@@ -1,10 +1,11 @@
 ---
 name: sgds-background-color
-description: Teaches AI agents how to help developers use SGDS background color utilities with the sgds: prefix. Use when users ask about background colors, surface colors, theme-aware backgrounds, or color tokens in SGDS designs.
+description: "Teaches AI agents how to help developers use SGDS background color utilities with the sgds: prefix. Use when users ask about background colors, surface colors, theme-aware backgrounds, or color tokens in SGDS designs."
 metadata:
   author: singapore-design-system
   version: "0.0.0"
   audience: external
+
   category: color
 ---
 

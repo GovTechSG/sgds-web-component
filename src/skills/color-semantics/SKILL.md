@@ -1,6 +1,6 @@
 ---
 name: sgds-color-semantics
-description: Shared definitions for color token suffix modifiers used across all SGDS color utility skills (background-color, border-color, text-color). Use when clarifying what default, emphasis, muted, fixed-light, fixed-dark, inverse, alternate, or surface means in the context of SGDS color tokens.
+description: "Shared definitions for color token suffix modifiers used across all SGDS color utility skills (background-color, border-color, text-color). Use when clarifying what default, emphasis, muted, fixed-light, fixed-dark, inverse, alternate, or surface means in the context of SGDS color tokens."
 metadata:
   author: singapore-design-system
   version: "0.0.0"

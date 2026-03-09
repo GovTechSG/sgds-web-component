@@ -1,6 +1,6 @@
 ---
 name: sgds-typography
-description: Teaches AI agents how to help developers use SGDS typography utilities (font-size, font-weight, line-height, letter-spacing) with the sgds: prefix. Use when users ask about text sizing, font weights, line spacing, or typography styling in SGDS designs.
+description: "Teaches AI agents how to help developers use SGDS typography utilities (font-size, font-weight, line-height, letter-spacing) with the sgds: prefix. Use when users ask about text sizing, font weights, line spacing, or typography styling in SGDS designs."
 metadata:
   author: singapore-design-system
   version: "0.0.0"

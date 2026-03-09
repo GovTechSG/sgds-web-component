@@ -1,6 +1,6 @@
 ---
 name: sgds-border-width
-description: Teaches AI agents how to help developers use SGDS border width utilities with the sgds: prefix. Use when users ask about border thickness, border sides, adding borders to elements, or controlling which sides have borders.
+description: "Teaches AI agents how to help developers use SGDS border width utilities with the sgds: prefix. Use when users ask about border thickness, border sides, adding borders to elements, or controlling which sides have borders."
 metadata:
   author: singapore-design-system
   version: "0.0.0"
