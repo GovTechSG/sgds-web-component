@@ -25,7 +25,7 @@ export const LetterSpacing = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:tracking-tighter</code
           >
           <button
@@ -38,21 +38,21 @@ export const LetterSpacing = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-letter-spacing-tighter</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">-1px</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">-1px</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <div class="sgds:tracking-tighter sgds:text-lg">Tighter Letter Spacing</div>
+        <div class="sgds:tracking-tighter">Tighter Letter Spacing</div>
       </sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:tracking-tight</code
           >
           <button
@@ -65,21 +65,21 @@ export const LetterSpacing = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-letter-spacing-tight</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">-0.4px</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">-0.4px</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <div class="sgds:tracking-tight sgds:text-lg">Tight Letter Spacing</div>
+        <div class="sgds:tracking-tight">Tight Letter Spacing</div>
       </sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:tracking-normal</code
           >
           <button
@@ -92,21 +92,21 @@ export const LetterSpacing = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-letter-spacing-normal</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">0px</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">0px</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <div class="sgds:tracking-normal sgds:text-lg">Normal Letter Spacing</div>
+        <div class="sgds:tracking-normal">Normal Letter Spacing</div>
       </sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:tracking-wide</code
           >
           <button
@@ -119,21 +119,21 @@ export const LetterSpacing = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-letter-spacing-wide</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">1px</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">1px</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <div class="sgds:tracking-wide sgds:text-lg">Wide Letter Spacing</div>
+        <div class="sgds:tracking-wide">Wide Letter Spacing</div>
       </sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:tracking-wider</code
           >
           <button
@@ -146,15 +146,15 @@ export const LetterSpacing = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-letter-spacing-wider</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">2px</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">2px</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <div class="sgds:tracking-wider sgds:text-lg">Wider Letter Spacing</div>
+        <div class="sgds:tracking-wider">Wider Letter Spacing</div>
       </sgds-table-cell>
     </sgds-table-row>
   </sgds-table>

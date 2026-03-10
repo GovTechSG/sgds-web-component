@@ -24,7 +24,7 @@ export const Form = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:gap-form-sm</code
           >
           <button
@@ -37,7 +37,7 @@ export const Form = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-form-gap-sm</code
         >
       </sgds-table-cell>
@@ -51,7 +51,7 @@ export const Form = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:gap-form-md</code
           >
           <button
@@ -64,7 +64,7 @@ export const Form = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-form-gap-md</code
         >
       </sgds-table-cell>
@@ -78,7 +78,7 @@ export const Form = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:gap-form-lg</code
           >
           <button
@@ -91,7 +91,7 @@ export const Form = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-form-gap-lg</code
         >
       </sgds-table-cell>
@@ -105,7 +105,7 @@ export const Form = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:gap-form-xl</code
           >
           <button
@@ -118,7 +118,7 @@ export const Form = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-form-gap-xl</code
         >
       </sgds-table-cell>
@@ -132,7 +132,7 @@ export const Form = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:gap-form-2-xl</code
           >
           <button
@@ -145,7 +145,7 @@ export const Form = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-form-gap-2-xl</code
         >
       </sgds-table-cell>

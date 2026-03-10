@@ -57,33 +57,12 @@ Each `playground/utility/*.html` table section follows this structure:
 ## Workflow: Adding a New Token Mapping
 
 1. **Add token to theme file** (`root.css`, `day.css`, or `night.css`)
-2. **Preview the mapping** with the script (see Commands)
-3. **Paste into `src/css/utility.css`** inside the correct existing `@theme {}` section — do not use `--write` for this unless creating a brand-new section
-4. **Create/update `playground/utility/[name].html`** with a live preview table
-5. **Run `pnpm run utility:dev`** and verify the utility class renders in light and dark mode
-6. **Create `stories/utilities/[name].stories.js`** Storybook story
+2. **Add mapping to `src/css/utility.css`** inside the correct existing `@theme {}` section — follow the conversion pattern table above
+3. **Create/update `playground/utility/[name].html`** with a live preview table
+4. **Run `pnpm run utility:dev`** and verify the utility class renders in light and dark mode
+5. **Create `stories/utilities/[name].stories.js`** Storybook story
 
 ## Commands
-
-### Code-Generation Script
-
-Reads `--sgds-*` variables from a CSS file and outputs ready-to-paste `@theme {}` entries. Run from workspace root.
-
-```bash
-# Preview all mappings
-node .github/skills/tailwind-mapping/scripts/generate-mapping.mjs src/themes/day.css
-
-# Filter to specific tokens
-node .github/skills/tailwind-mapping/scripts/generate-mapping.mjs src/themes/day.css --filter primary
-node .github/skills/tailwind-mapping/scripts/generate-mapping.mjs src/themes/day.css --filter "danger|warning"
-
-# Append a new @theme {} block to utility.css (only for brand-new sections)
-node .github/skills/tailwind-mapping/scripts/generate-mapping.mjs src/themes/day.css --filter primary --write
-```
-
-If a token appears under "Skipped", add a new rule to the `rules` array in the script.
-
-### Dev Commands
 
 | Command | Purpose |
 |---------|---------|
