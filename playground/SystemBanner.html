@@ -3,6 +3,35 @@
 <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
 
+<h3>Badge slot</h3>
+<sgds-system-banner show>
+  <sgds-system-banner-item>
+    <sgds-badge slot="badge" variant="danger" size="sm">Error</sgds-badge>
+     1 Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
+      facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus  Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<sgds-system-banner show dismissible>
+  <sgds-system-banner-item>
+    <sgds-badge slot="badge" variant="danger" size="sm">Very long text in the badge that it should truncated</sgds-badge>
+     1 Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
+      facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus  Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo gravida,
+      congue sapien eu, rhoncus
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
+<sgds-system-banner show dismissible>
+  <sgds-system-banner-item>
+    <sgds-badge slot="badge" variant="danger" outlined size="sm">Badge and icon throws warning</sgds-badge>
+    <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+     This is a misused of the slots in the banner and should throw a console warning
+  </sgds-system-banner-item>
+</sgds-system-banner>
+<br/>
 <h3> clamped show more disabled</h3>
 <sgds-system-banner show noClampAction>
   <sgds-system-banner-item>

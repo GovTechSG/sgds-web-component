@@ -121,7 +121,7 @@
   --text-color-danger-fixed-dark: var(--sgds-danger-color-fixed-dark);
   --border-color-danger-default: var(--sgds-danger-border-color-default);
   --border-color-danger-emphasis: var(--sgds-danger-border-color-emphasis);
-  --border-color-danger-subtle: var(--sgds-danger-border-color-subtle);
+  --border-color-danger-muted: var(--sgds-danger-border-color-muted);
 
   /* Semantic - Warning Colors */
   --background-color-warning-default: var(--sgds-warning-bg-default);
@@ -135,7 +135,7 @@
   --text-color-warning-fixed-dark: var(--sgds-warning-color-fixed-dark);
   --border-color-warning-default: var(--sgds-warning-border-color-default);
   --border-color-warning-emphasis: var(--sgds-warning-border-color-emphasis);
-  --border-color-warning-subtle: var(--sgds-warning-border-color-subtle);
+  --border-color-warning-muted: var(--sgds-warning-border-color-muted);
 
   /* Semantic - Purple Colors */
   --background-color-purple-default: var(--sgds-purple-bg-default);
@@ -309,12 +309,25 @@
   --leading-16: var(--sgds-line-height-16);
   --leading-20: var(--sgds-line-height-20);
   --leading-24: var(--sgds-line-height-24);
+  --leading-28: var(--sgds-line-height-28);
   --leading-32: var(--sgds-line-height-32);
   --leading-36: var(--sgds-line-height-36);
   --leading-40: var(--sgds-line-height-40);
+  --leading-44: var(--sgds-line-height-44);
   --leading-48: var(--sgds-line-height-48);
+  --leading-52: var(--sgds-line-height-52);
   --leading-56: var(--sgds-line-height-56);
+  --leading-60: var(--sgds-line-height-60);
   --leading-64: var(--sgds-line-height-64);
+  --leading-3-xs: var(--sgds-line-height-3-xs);
+  --leading-2-xs: var(--sgds-line-height-2-xs);
+  --leading-xs: var(--sgds-line-height-xs);
+  --leading-sm: var(--sgds-line-height-sm);
+  --leading-md: var(--sgds-line-height-md);
+  --leading-lg: var(--sgds-line-height-lg);
+  --leading-xl: var(--sgds-line-height-xl);
+  --leading-2-xl: var(--sgds-line-height-2-xl);
+  --leading-3-xl: var(--sgds-line-height-3-xl);
 
   /* Opacity */
   --opacity-0: var(--sgds-opacity-0);
@@ -357,6 +370,7 @@
   --radius-lg: var(--sgds-border-radius-lg);
   --radius-xl: var(--sgds-border-radius-xl);
   --radius-2-xl: var(--sgds-border-radius-2-xl);
+  --radius-3-xl: var(--sgds-border-radius-3-xl);
   --radius-full: var(--sgds-border-radius-full);
 
   /* Form Border Radius */

@@ -2,7 +2,7 @@ import { html } from "lit";
 
 export default {
   title: "Utilities/Border Width",
-  tags: ["autodocs"]
+  tags: ["!autodocs"]
 };
 
 const WIDTH_SCALE = [

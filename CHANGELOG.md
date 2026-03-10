@@ -1,12 +1,60 @@
-## v3.12.0-rc.0 (2026-02-23)
+## Unreleased
+
+### Fix
+
+- **Mainnav**: display issue in safari [run-chromatic] [skip-cd] (#562)
+- **Mainnav**: display issue in safari
+
+## v3.13.0 (2026-03-05)
 
 ### Feat
 
+- **Utility**: new responsive line height [skip-cd][run-chromatic] (#560)
+- **Utility**: responsive line height tokens added
+
+### Fix
+
+- **Drawer**: make close button sticky in all positions
+- **Drawer**: make footer sticky and apply paddings
+- **Masthead**: remove role banner and aria label for accessibility fix [run-chromatic] [skip-cd] (#561)
+- **Masthead**: remove role banner and aria label for accessibilityfix
+- **Utility**: missing rounded-3-xl tokens [skip-cd][run-chromatic] (#558)
+- **Utility**: missing rounded-3-xl mappings
+
+### Refactor
+
+- **Drawer**: container paddings and examples [skip-cd][run-chromatic] (#556)
+- **Drawer**: move padding from outer container to inner header and body container respectively
+
+## v3.12.0 (2026-03-02)
+
+## 3.12.0 (2026-03-02)
+
+### Feat
+
+- **Dropdown**: sgds-select emits selected item
+- **SystemBanner**: new badge slot [run-chromatic] [skip-cd] (#550)
+- **SystemBanner**: new badge slot
+- **Textarea**: noValidate prop support [skip-cd] (#549)
+- **Utility**: responsive semantic font sizes added with agent skills [run-chromatic] (#548)
 - **Textarea**: noValidate
 
 ### Fix
 
+- **Masthead**: background color [run-chromatic] [skip-cd] (#554)
+- **Utility**: update downstream deps when border color danger tokesn is renamed
+- *****: update wrong css variable name
+- **DropdownItem**: click area not expanding full area [run-chromatic] [skip-cd] (#555)
+- **Dropdown**: click area for anchors and checkboxes
+- **SystemBanner**: raise media query screen min width to laptop 1024px
+- **SystemBanner**: left and right padding swapped
+- **Card**: card should have hover effects (#551)
+- **Card**: card should have hover effects
 - **Form**: noValidate should not inhibit FormData
+
+### Refactor
+
+- **Drawer**: move padding from outer container to inner header and body container respectively
 
 ## v3.11.0 (2026-02-20)
 

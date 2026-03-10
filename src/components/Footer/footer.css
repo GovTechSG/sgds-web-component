@@ -1,5 +1,4 @@
 .footer {
-  container: footer / inline-size;
   height: auto;
   background-color: var(--sgds-bg-fixed-dark);
   padding: var(--sgds-padding-none) var(--sgds-padding-lg);
@@ -95,18 +94,13 @@ slot:not([name])::slotted(*) {
   font-size: var(--sgds-font-size-14);
 }
 
-@container footer (min-width: 512px) {
+@media (min-width: 512px) {
   .footer {
     padding: var(--sgds-padding-none) var(--sgds-padding-xl);
   }
-
-  .footer-top,
-  .footer-bottom {
-    padding: var(--sgds-padding-2-xl) var(--sgds-padding-none);
-  }
 }
 
-@container footer (min-width: 768px) {
+@media (min-width: 768px) {
   .footer {
     padding: var(--sgds-padding-none) var(--sgds-padding-2-xl);
   }
@@ -117,7 +111,7 @@ slot:not([name])::slotted(*) {
   }
 }
 
-@container footer (min-width: 1024px) {
+@media (min-width: 1024px) {
   .footer {
     padding: var(--sgds-padding-none);
   }
@@ -150,11 +144,8 @@ slot:not([name])::slotted(*) {
   }
 }
 
-@container footer (min-width: 1280px) {
-  .footer-top {
-    max-width: var(--sgds-dimension-1168);
-  }
-
+@media (min-width: 1280px) {
+  .footer-top,
   .footer-bottom {
     max-width: var(--sgds-dimension-1168);
   }
@@ -164,11 +155,8 @@ slot:not([name])::slotted(*) {
   }
 }
 
-@container footer (min-width: 1440px) {
-  .footer-top {
-    max-width: var(--sgds-dimension-1312);
-  }
-
+@media (min-width: 1440px) {
+  .footer-top,
   .footer-bottom {
     max-width: var(--sgds-dimension-1312);
   }

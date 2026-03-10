@@ -29,7 +29,7 @@ a:hover {
 }
 
 .banner {
-  background-color: light-dark(#f3f3f3, #1a1a1a);
+  background-color: light-dark(#f7f7f7, #1a1a1a);
 }
 
 .container {
@@ -93,7 +93,7 @@ a:hover {
 }
 
 .panel {
-  background-color: light-dark(oklch(from #0e0e0e l c h / 0.1), oklch(from #ffffff l c h / 0.1));
+  background-color: light-dark(#f7f7f7, #1a1a1a);
 }
 
 .sgds-masthead .sgds-masthead-content {

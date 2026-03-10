@@ -1,6 +1,7 @@
 :host {
   z-index: 1200;
   position: relative;
+  display: block;
 }
 
 nav {
