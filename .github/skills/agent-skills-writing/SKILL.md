@@ -72,7 +72,7 @@ Split into `reference/` when **any** of these are true:
 
 Do **not** extract if the skill is a single focused topic (e.g., spacing utilities, opacity).
 
-## SKILL.md Structure (with references)
+## Utility Skill Structure (with references)
 
 Model: see `src/skills/utilities-background-color/SKILL.md` and `src/skills/utilities-border-color/SKILL.md`.
 
@@ -98,6 +98,38 @@ One-line description of what it helps with.
 - Token Categories Overview may include 1–2 short inline examples to illustrate a pattern, not to demonstrate every token
 - Quick Decision Guide uses bullet lists and `→ token` format, not code blocks
 - Reference Documentation section links to every reference file with a `Covers:` and `Use for:` line
+
+## Component Skill Structure
+
+Model: see `src/skills/components-button/SKILL.md`.
+
+Component skills document an `<sgds-*>` element's usage. Their SKILL.md structure differs from utility skills:
+
+```
+# SGDS {Name} Component Skill
+
+One-line role of the component and when to prefer it over a native element.
+
+## Prerequisites
+## Quick Decision Guide   ← variant/tone/size/mode decision tree
+## API Summary            ← all attributes as a compact table (name | type | default | purpose)
+## Slots                  ← slot name + purpose table
+## Events                 ← event name | when fired | React prop
+## Reference Documentation
+
+---
+**For AI agents**: Key rules — default element to reach for, dangerous combinations to avoid,
+                   related components to mention.
+```
+
+### Rules specific to component skills
+- **Lead with the element tag, not attribute tables** — the first code example in Quick Decision Guide must be `<sgds-{name}>` HTML
+- **Slots get a dedicated table** in the hub — they are not optional documentation
+- **Events table** lists event name and when it fires only — framework-specific syntax (React prop names, Vue `@event`, Angular `(event)`) belongs in **sgds-components-setup**, not the individual component skill
+- **Reference `components-setup` in Prerequisites** — every component skill's Prerequisites section links to **sgds-components-setup**
+- **Mention sibling components** where relevant (e.g., `<sgds-icon-button>` from a `<sgds-button>` skill)
+- **No library-first note** needed — this skill *is* the library component; instead, note when to use raw utilities to *extend* it
+- HTML examples in `reference/` may combine the component's own attributes freely — the single-token isolation rule applies to utility skills only
 
 ## Reference File Structure
 
@@ -196,35 +228,52 @@ Name specific relevant library components (e.g., `<sgds-alert>` in danger/warnin
 
 ## Registering a New Skill
 
-### 1. Add to `src/skills/utilities-overview/SKILL.md`
-Add an entry in the Utility Categories section with a code example and common patterns list.
+### Utilities skills
 
-### 2. Add to `.github/copilot-instructions.md`
-Add a line under the appropriate domain section (Utilities Skills or Component Skills):
-```markdown
-- [utilities-{name}](../src/skills/utilities-{name}/SKILL.md) - One-line description
-- [components-{name}](../src/skills/components-{name}/SKILL.md) - One-line description
-```
+1. Add an entry in `src/skills/utilities-overview/SKILL.md` under Utility Categories.
+2. Add the skill name to the `description` field of `src/skills/utilities-overview/SKILL.md`.
+3. Add a line to `.github/copilot-instructions.md` under **Utilities Skills**:
+   ```markdown
+   - [utilities-{name}](../src/skills/utilities-{name}/SKILL.md) - One-line description
+   ```
 
-### 3. Update overview frontmatter description
-Add the skill name to the comma-separated list in the `description` field of `src/skills/utilities-overview/SKILL.md`.
+### Component skills
+
+1. Add a line to `.github/copilot-instructions.md` under **Component Skills**:
+   ```markdown
+   - [components-{name}](../src/skills/components-{name}/SKILL.md) - One-line description
+   ```
+2. Once 3+ component skills exist, create `src/skills/components-overview/SKILL.md` as a navigation hub (same pattern as `utilities-overview`). Until then, `copilot-instructions.md` is the only registry.
 
 ## Checklist for New Skills
 
 Before considering a skill complete:
 
+**All skills**
 - [ ] SKILL.md starts with `---` frontmatter (no wrapping fences)
 - [ ] `version: "0.0.0"` set
+- [ ] `description` value is quoted (required if it contains a colon)
 - [ ] SKILL.md is a navigation hub — no long code blocks
-- [ ] Reference files exist if skill covers multiple semantic categories
+- [ ] Reference files exist if skill covers multiple semantic categories or would exceed ~500 lines
+- [ ] Registered in `.github/copilot-instructions.md`
+
+**Utilities skills only**
 - [ ] All HTML examples contain only the token(s) for that file's category
 - [ ] Every Common Patterns section has a library-first note
 - [ ] Shared modifier definitions link to a shared skill, not duplicated
-- [ ] Registered in `src/skills/utilities-overview/SKILL.md` (for utilities skills)
-- [ ] Registered in `.github/copilot-instructions.md`
+- [ ] Registered in `src/skills/utilities-overview/SKILL.md`
+- [ ] Skill name added to `utilities-overview` frontmatter `description`
+
+**Component skills only**
+- [ ] First code example in hub is raw `<sgds-*>` HTML
+- [ ] Slots documented in a table in the hub
+- [ ] Events table includes React prop name
+- [ ] React import path mentioned if wrapper exists in `lib/react/`
+- [ ] Related/sibling components noted
 
 ## Related
 
+- **[skill-creator](../skill-creator/SKILL.md)** — General methodology for drafting, evaluating, and iterating on any skill. Use alongside this guide: `skill-creator` covers the process, `agent-skills-writing` covers SGDS-specific conventions
 - **[token-workflow](../token-workflow/SKILL.md)** — Adding or modifying design tokens
 - **[tailwind-mapping](../tailwind-mapping/SKILL.md)** — Mapping CSS variables to Tailwind utilities
 - [Copilot Instructions](../../.github/copilot-instructions.md) — Where skills are registered

@@ -35,18 +35,6 @@ Once imported, the web components can be used throughout the project. You may im
 
 Are you a react user? If so, skip to the <a href="/docs/frameworks-react--docs#importing-the-library" target="_self">react import instructions </a>
 
-#### Importing individual component
-
-```js
-// import global css first (once)
-import "@govtechsg/sgds-web-component/themes/day.css";
-import "@govtechsg/sgds-web-component/css/sgds.css";
-//import button only
-import "@govtechsg/sgds-web-component/components/Button";
-```
-
-#### Importing all components
-
 ```js
 import "@govtechsg/sgds-web-component/themes/day.css";
 import "@govtechsg/sgds-web-component/css/sgds.css";

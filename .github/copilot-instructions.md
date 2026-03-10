@@ -95,7 +95,8 @@ These skills cover two domains. Each domain uses a folder naming prefix so agent
 - [utilities-opacity](../src/skills/utilities-opacity/SKILL.md) - Opacity utilities
 
 #### Component Skills (`components-*`) — How to use SGDS web components
-_No component skills yet. Future skills follow the `components-{name}` folder naming convention._
+- [components-setup](../src/skills/components-setup/SKILL.md) - Installation and framework integration (React 19+ vs React ≤18, Vue config, Angular schema)
+- [components-button](../src/skills/components-button/SKILL.md) - `<sgds-button>` usage (variants, tones, form submission, icons, loading, link button, React)
 
 ## Instruction Files
 Detailed guidelines for specific aspects of development:
