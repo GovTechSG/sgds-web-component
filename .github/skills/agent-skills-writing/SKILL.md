@@ -226,6 +226,22 @@ Every `reference/` file **must** include a library-first note at the top of the 
 
 Name specific relevant library components (e.g., `<sgds-alert>` in danger/warning files, `<sgds-badge>` in neutral/purple/cyan files). This reminds developers to check the component library before reaching for raw utility tokens.
 
+## Eval Workspace Convention
+
+When running the skill-creator eval loop for any skill in `src/skills/`, always place the workspace directory under:
+
+```
+test/skills/{skill-folder-name}-workspace/
+```
+
+For example:
+- `src/skills/components-masthead/` → `test/skills/components-masthead-workspace/`
+- `src/skills/utilities-spacing/` → `test/skills/utilities-spacing-workspace/`
+
+This keeps generated eval artefacts (iteration dirs, benchmark.json, grading files, feedback.json) out of `src/` and co-located with the project's other test outputs in `test/`.
+
+---
+
 ## Registering a New Skill
 
 ### Utilities skills

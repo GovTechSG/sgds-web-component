@@ -97,6 +97,7 @@ These skills cover two domains. Each domain uses a folder naming prefix so agent
 #### Component Skills (`components-*`) — How to use SGDS web components
 - [components-setup](../src/skills/components-setup/SKILL.md) - Installation and framework integration (React 19+ vs React ≤18, Vue config, Angular schema)
 - [components-button](../src/skills/components-button/SKILL.md) - `<sgds-button>` usage (variants, tones, form submission, icons, loading, link button, React)
+- [components-masthead](../src/skills/components-masthead/SKILL.md) - `<sgds-masthead>` mandatory Singapore Government banner, fluid layout, placement rules
 
 ## Instruction Files
 Detailed guidelines for specific aspects of development:
