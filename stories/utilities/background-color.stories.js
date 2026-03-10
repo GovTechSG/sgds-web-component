@@ -6,19 +6,6 @@ export default {
   tags: ["!autodocs"]
 };
 
-const copyStates = new Map();
-
-const copyToClipboard = async (token, updateCallback) => {
-  await navigator.clipboard.writeText(token);
-  copyStates.set(token, true);
-  updateCallback();
-
-  setTimeout(() => {
-    copyStates.set(token, false);
-    updateCallback();
-  }, 3000);
-};
-
 const ColorItem = (token, variable, bgClass, textClass = "") => {
   return html`
     <color-item token="${token}" variable="${variable}" bgClass="${bgClass}" textClass="${textClass}"></color-item>
@@ -29,7 +16,7 @@ const ColorGrid = (...items) => html`
   <div class="sgds:grid sgds:gap-2-xl sgds:p-2-xl" style="grid-template-columns: repeat(3, 1fr);">${items}</div>
 `;
 
-export const SurfaceColors = () =>
+export const Surface = () =>
   ColorGrid(
     ColorItem("sgds:bg-surface-default", "--sgds-surface-default", "sgds:bg-surface-default"),
     ColorItem("sgds:bg-surface-raised", "--sgds-surface-raised", "sgds:bg-surface-raised"),
@@ -48,7 +35,7 @@ export const SurfaceColors = () =>
     )
   );
 
-export const BaseColors = () =>
+export const Grayscales = () =>
   ColorGrid(
     ColorItem("sgds:bg-default", "--sgds-bg-default", "sgds:bg-default"),
     ColorItem("sgds:bg-alternate", "--sgds-bg-alternate", "sgds:bg-alternate"),
@@ -73,7 +60,7 @@ export const BaseColors = () =>
     )
   );
 
-export const PrimaryColors = () =>
+export const Primary = () =>
   ColorGrid(
     ColorItem(
       "sgds:bg-primary-default",
@@ -103,7 +90,7 @@ export const PrimaryColors = () =>
     )
   );
 
-export const AccentColors = () =>
+export const Accent = () =>
   ColorGrid(
     ColorItem("sgds:bg-accent-default", "--sgds-accent-bg-default", "sgds:bg-accent-default", "sgds:text-fixed-light"),
     ColorItem("sgds:bg-accent-muted", "--sgds-accent-bg-muted", "sgds:bg-accent-muted"),
@@ -122,7 +109,7 @@ export const AccentColors = () =>
     ColorItem("sgds:bg-accent-surface-muted", "--sgds-accent-surface-muted", "sgds:bg-accent-surface-muted")
   );
 
-export const SuccessColors = () =>
+export const Success = () =>
   ColorGrid(
     ColorItem(
       "sgds:bg-success-default",
@@ -146,7 +133,7 @@ export const SuccessColors = () =>
     ColorItem("sgds:bg-success-surface-muted", "--sgds-success-surface-muted", "sgds:bg-success-surface-muted")
   );
 
-export const DangerColors = () =>
+export const Danger = () =>
   ColorGrid(
     ColorItem("sgds:bg-danger-default", "--sgds-danger-bg-default", "sgds:bg-danger-default", "sgds:text-fixed-light"),
     ColorItem("sgds:bg-danger-muted", "--sgds-danger-bg-muted", "sgds:bg-danger-muted"),
@@ -170,7 +157,7 @@ export const DangerColors = () =>
     )
   );
 
-export const WarningColors = () =>
+export const Warning = () =>
   ColorGrid(
     ColorItem(
       "sgds:bg-warning-default",
@@ -199,7 +186,7 @@ export const WarningColors = () =>
     )
   );
 
-export const PurpleColors = () =>
+export const Purple = () =>
   ColorGrid(
     ColorItem("sgds:bg-purple-default", "--sgds-purple-bg-default", "sgds:bg-purple-default", "sgds:text-fixed-light"),
     ColorItem("sgds:bg-purple-muted", "--sgds-purple-bg-muted", "sgds:bg-purple-muted", "sgds:text-fixed-light"),
@@ -208,7 +195,7 @@ export const PurpleColors = () =>
     ColorItem("sgds:bg-purple-surface-muted", "--sgds-purple-surface-muted", "sgds:bg-purple-surface-muted")
   );
 
-export const CyanColors = () =>
+export const Cyan = () =>
   ColorGrid(
     ColorItem("sgds:bg-cyan-default", "--sgds-cyan-bg-default", "sgds:bg-cyan-default", "sgds:text-fixed-dark"),
     ColorItem("sgds:bg-cyan-muted", "--sgds-cyan-bg-muted", "sgds:bg-cyan-muted", "sgds:text-fixed-dark"),
@@ -217,7 +204,7 @@ export const CyanColors = () =>
     ColorItem("sgds:bg-cyan-surface-muted", "--sgds-cyan-surface-muted", "sgds:bg-cyan-surface-muted")
   );
 
-export const NeutralColors = () =>
+export const Neutral = () =>
   ColorGrid(
     ColorItem(
       "sgds:bg-neutral-default",
@@ -235,7 +222,7 @@ export const NeutralColors = () =>
     ColorItem("sgds:bg-neutral-surface-muted", "--sgds-neutral-surface-muted", "sgds:bg-neutral-surface-muted")
   );
 
-export const FormColors = () =>
+export const Form = () =>
   ColorGrid(
     ColorItem("sgds:bg-form-surface-default", "--sgds-form-surface-default", "sgds:bg-form-surface-default"),
     ColorItem("sgds:bg-form-surface-raised", "--sgds-form-surface-raised", "sgds:bg-form-surface-raised"),
