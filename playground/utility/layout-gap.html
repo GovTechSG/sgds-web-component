@@ -1,0 +1,97 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Layout Gap</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+
+  <p class="sgds:mb-2-xl sgds:text-subtle">Layout gap tokens control spacing between major layout regions (sections, columns, panels). Values scale up significantly across breakpoints: mobile / tablet (≥ 1024px) / desktop (≥ 1440px).</p>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Layout Gap</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Mobile / Tablet / Desktop</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-layout-2-xs</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-layout-gap-2-xs</code></sgds-table-cell>
+        <sgds-table-cell>4px / 12px / 16px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-layout-2-xs"><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-layout-xs</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-layout-gap-xs</code></sgds-table-cell>
+        <sgds-table-cell>8px / 16px / 20px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-layout-xs"><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-layout-sm</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-layout-gap-sm</code></sgds-table-cell>
+        <sgds-table-cell>12px / 20px / 24px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-layout-sm"><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-layout-md</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-layout-gap-md</code></sgds-table-cell>
+        <sgds-table-cell>16px / 24px / 32px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-layout-md"><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-layout-lg</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-layout-gap-lg</code></sgds-table-cell>
+        <sgds-table-cell>20px / 32px / 48px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-layout-lg"><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div></div></sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-layout-xl</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-layout-gap-xl</code></sgds-table-cell>
+        <sgds-table-cell>24px / 48px / 64px</sgds-table-cell>
+        <sgds-table-cell><div class="sgds:flex sgds:gap-layout-xl"><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div><div class="sgds:bg-success-default sgds:p-md sgds:rounded-sm sgds:flex-1"></div></div></sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Example: Page Layout</h2>
+    <p class="sgds:mb-md sgds:text-subtle">A two-column layout using <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:gap-layout-md</code> between sidebar and main content.</p>
+    <div class="sgds:flex sgds:gap-layout-md">
+      <div class="sgds:bg-primary-surface-muted sgds:p-xl sgds:rounded-md sgds:w-48">
+        <p class="sgds:font-weight-semibold sgds:mb-sm">Sidebar</p>
+        <div class="sgds:flex sgds:flex-col sgds:gap-text-sm">
+          <span class="sgds:text-subtle">Navigation item</span>
+          <span class="sgds:text-subtle">Navigation item</span>
+          <span class="sgds:text-subtle">Navigation item</span>
+        </div>
+      </div>
+      <div class="sgds:bg-surface-raised sgds:p-xl sgds:rounded-md sgds:flex-1">
+        <p class="sgds:font-weight-semibold sgds:mb-sm">Main Content</p>
+        <p class="sgds:text-subtle sgds:text-body-md">Page body content fills this region.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const nightBtn = document.querySelector("#night-theme");
+    nightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const html = document.querySelector("html");
+      if (html.classList.contains("sgds-night-theme")) {
+        html.classList.remove("sgds-night-theme");
+      } else {
+        html.classList.add("sgds-night-theme");
+      }
+    });
+  </script>
+</body>

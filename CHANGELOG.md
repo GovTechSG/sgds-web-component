@@ -1,3 +1,10 @@
+## Unreleased
+
+### Fix
+
+- **Mainnav**: display issue in safari [run-chromatic] [skip-cd] (#562)
+- **Mainnav**: display issue in safari
+
 ## v3.13.0 (2026-03-05)
 
 ### Feat
@@ -20,6 +27,8 @@
 - **Drawer**: move padding from outer container to inner header and body container respectively
 
 ## v3.12.0 (2026-03-02)
+
+## 3.12.0 (2026-03-02)
 
 ### Feat
 

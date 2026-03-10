@@ -106,3 +106,8 @@ Detailed guidelines for specific aspects of development:
 
 ---
 For AI agents: Follow project conventions, prefer custom events, and reference docs for framework-specific integration. Use plop templates for new components. See `lib/` for build outputs.
+
+**Token rule:** Whenever new `--sgds-*` design tokens are added, ALL THREE of the following must be completed — never do a partial implementation:
+1. Add the Tailwind mapping to `src/css/utility.css`
+2. Create a playground HTML demo in `playground/utility/`
+3. Create a Storybook story in `stories/utilities/`

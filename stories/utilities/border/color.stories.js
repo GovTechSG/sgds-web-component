@@ -1,8 +1,8 @@
 import { html } from "lit";
-import "../../mocks/color-item.ts";
+import "../../../mocks/color-item.ts";
 
 export default {
-  title: "Utilities/Border Color",
+  title: "Utilities/Border/Color",
   tags: ["!autodocs"]
 };
 
@@ -20,7 +20,7 @@ const ColorGrid = (...items) => html`
   <div class="sgds:grid sgds:gap-2-xl sgds:p-2-xl" style="grid-template-columns: repeat(3, 1fr);">${items}</div>
 `;
 
-export const BorderColors = () =>
+export const Grayscales = () =>
   ColorGrid(
     ColorItem("sgds:border-default", "--sgds-border-color-default"),
     ColorItem("sgds:border-emphasis", "--sgds-border-color-emphasis"),
@@ -31,35 +31,35 @@ export const BorderColors = () =>
     ColorItem("sgds:border-transparent", "--sgds-border-color-transparent")
   );
 
-export const PrimaryBorderColors = () =>
+export const Primary = () =>
   ColorGrid(
     ColorItem("sgds:border-primary-default", "--sgds-primary-border-color-default"),
     ColorItem("sgds:border-primary-emphasis", "--sgds-primary-border-color-emphasis"),
     ColorItem("sgds:border-primary-muted", "--sgds-primary-border-color-muted")
   );
 
-export const AccentBorderColors = () =>
+export const Accent = () =>
   ColorGrid(
     ColorItem("sgds:border-accent-default", "--sgds-accent-border-color-default"),
     ColorItem("sgds:border-accent-emphasis", "--sgds-accent-border-color-emphasis"),
     ColorItem("sgds:border-accent-muted", "--sgds-accent-border-color-muted")
   );
 
-export const SuccessBorderColors = () =>
+export const Success = () =>
   ColorGrid(
     ColorItem("sgds:border-success-default", "--sgds-success-border-color-default"),
     ColorItem("sgds:border-success-emphasis", "--sgds-success-border-color-emphasis"),
     ColorItem("sgds:border-success-muted", "--sgds-success-border-color-muted")
   );
 
-export const DangerBorderColors = () =>
+export const Danger = () =>
   ColorGrid(
     ColorItem("sgds:border-danger-default", "--sgds-danger-border-color-default"),
     ColorItem("sgds:border-danger-emphasis", "--sgds-danger-border-color-emphasis"),
     ColorItem("sgds:border-danger-muted", "--sgds-danger-border-color-muted")
   );
 
-export const WarningBorderColors = () =>
+export const Warning = () =>
   ColorGrid(
     ColorItem("sgds:border-warning-default", "--sgds-warning-border-color-default"),
     ColorItem("sgds:border-warning-emphasis", "--sgds-warning-border-color-emphasis"),

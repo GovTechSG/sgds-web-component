@@ -1,12 +1,14 @@
 :host([expand="always"]) ::slotted(*) {
   padding: 0px var(--sgds-padding-md);
   border-bottom: var(--sgds-border-width-4) solid transparent;
+  min-height: 100%;
 }
 
 @media screen and (min-width: 512px) {
   :host([expand="sm"]) ::slotted(*) {
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
+    min-height: 100%;
   }
 
   :host(:not([disabled])[active][expand="sm"]) ::slotted(*) {
@@ -18,6 +20,7 @@
   :host([expand="md"]) ::slotted(*) {
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
+    min-height: 100%;
   }
 
   :host(:not([disabled])[active][expand="md"]) ::slotted(*) {
@@ -29,6 +32,7 @@
   :host([expand="lg"]) ::slotted(*) {
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
+    min-height: 100%;
   }
 
   :host(:not([disabled])[active][expand="lg"]) ::slotted(*) {
@@ -40,6 +44,7 @@
   :host([expand="xl"]) ::slotted(*) {
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
+    min-height: 100%;
   }
 
   :host(:not([disabled])[active][expand="xl"]) ::slotted(*) {
@@ -51,6 +56,7 @@
   :host([expand="xxl"]) ::slotted(*) {
     padding: 0px var(--sgds-padding-md);
     border-bottom: var(--sgds-border-width-4) solid transparent;
+    min-height: 100%;
   }
 
   :host(:not([disabled])[active][expand="xxl"]) ::slotted(*) {
@@ -93,18 +99,17 @@
   display: flex;
   cursor: pointer;
   height: auto !important;
-  min-height: 100%;
   text-decoration: none !important;
   align-items: center;
   text-decoration: none;
   color: var(--sgds-link-color-default, var(--sgds-color-default));
-  padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
+  padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (min-width: 1024px) {
   ::slotted(*) {
-    padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
+    padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
   }
 }
 

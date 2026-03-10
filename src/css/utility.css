@@ -362,6 +362,47 @@
   --gap-form-xl: var(--sgds-form-gap-xl);
   --gap-form-2-xl: var(--sgds-form-gap-2-xl);
 
+  /* Text Gap */
+  --gap-text-2-xs: var(--sgds-text-gap-2-xs);
+  --gap-text-xs: var(--sgds-text-gap-xs);
+  --gap-text-sm: var(--sgds-text-gap-sm);
+  --gap-text-md: var(--sgds-text-gap-md);
+  --gap-text-lg: var(--sgds-text-gap-lg);
+  --gap-text-xl: var(--sgds-text-gap-xl);
+  --gap-text-2-xl: var(--sgds-text-gap-2-xl);
+
+  /* Layout Gap */
+  --gap-layout-2-xs: var(--sgds-layout-gap-2-xs);
+  --gap-layout-xs: var(--sgds-layout-gap-xs);
+  --gap-layout-sm: var(--sgds-layout-gap-sm);
+  --gap-layout-md: var(--sgds-layout-gap-md);
+  --gap-layout-lg: var(--sgds-layout-gap-lg);
+  --gap-layout-xl: var(--sgds-layout-gap-xl);
+
+  /* Layout Padding */
+  --padding-layout-xs: var(--sgds-layout-padding-xs);
+  --padding-layout-sm: var(--sgds-layout-padding-sm);
+  --padding-layout-md: var(--sgds-layout-padding-md);
+  --padding-layout-lg: var(--sgds-layout-padding-lg);
+  --padding-layout-xl: var(--sgds-layout-padding-xl);
+
+  /* Component Gap */
+  --gap-component-xs: var(--sgds-component-gap-xs);
+  --gap-component-sm: var(--sgds-component-gap-sm);
+  --gap-component-md: var(--sgds-component-gap-md);
+  --gap-component-lg: var(--sgds-component-gap-lg);
+  --gap-component-xl: var(--sgds-component-gap-xl);
+
+  /* Component Padding */
+  --padding-component-xs: var(--sgds-component-padding-xs);
+  --padding-component-sm: var(--sgds-component-padding-sm);
+  --padding-component-md: var(--sgds-component-padding-md);
+  --padding-component-lg: var(--sgds-component-padding-lg);
+  --padding-component-xl: var(--sgds-component-padding-xl);
+
+  /* Container Width */
+  --width-container: var(--sgds-container-width);
+
   /* Border Radius */
   --radius-none: var(--sgds-border-radius-none);
   --radius-xs: var(--sgds-border-radius-xs);

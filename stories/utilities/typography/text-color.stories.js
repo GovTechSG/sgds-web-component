@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Text Color",
+  title: "Utilities/Typography/Text Color",
   tags: ["!autodocs"]
 };
 
@@ -14,7 +14,7 @@ const copyToClipboard = (token, buttonEl) => {
   }, 3000);
 };
 
-export const BasicTextColor = () => html`
+export const Grayscales = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
@@ -25,9 +25,7 @@ export const BasicTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-default</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-default</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-default", e.target.closest("button"))}"
@@ -38,14 +36,10 @@ export const BasicTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-color-default</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-color-default</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#1a1a1a / #ffffff</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#1a1a1a / #ffffff</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-default">Standard text color that adapts to theme</span>
@@ -54,9 +48,7 @@ export const BasicTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-subtle</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-subtle</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-subtle", e.target.closest("button"))}"
@@ -67,14 +59,10 @@ export const BasicTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-color-subtle</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-color-subtle</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#525252 / #c6c6c6</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#525252 / #c6c6c6</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-subtle">De-emphasized text for secondary information</span>
@@ -83,9 +71,7 @@ export const BasicTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-muted</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-muted</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-muted", e.target.closest("button"))}"
@@ -96,14 +82,10 @@ export const BasicTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-color-muted</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-color-muted</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#c6c6c6 / #3b3b3b</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#c6c6c6 / #3b3b3b</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-muted">Further de-emphasized text for tertiary content</span>
@@ -112,9 +94,7 @@ export const BasicTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-inverse</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-inverse</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-inverse", e.target.closest("button"))}"
@@ -125,14 +105,10 @@ export const BasicTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-color-inverse</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-color-inverse</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#f3f3f3 / #1a1a1a</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#f3f3f3 / #1a1a1a</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-surface-inverse sgds:p-md sgds:rounded-sm">
@@ -143,9 +119,7 @@ export const BasicTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-transparent</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-transparent</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-transparent", e.target.closest("button"))}"
@@ -156,12 +130,10 @@ export const BasicTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-color-transparent</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-color-transparent</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">transparent</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">transparent</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-transparent">Fully transparent text (invisible)</span>
@@ -170,9 +142,7 @@ export const BasicTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-fixed-light</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-fixed-light</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-fixed-light", e.target.closest("button"))}"
@@ -183,12 +153,10 @@ export const BasicTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-color-fixed-light</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-color-fixed-light</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">#f3f3f3</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#f3f3f3</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -199,9 +167,7 @@ export const BasicTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-fixed-dark</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-fixed-dark</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-fixed-dark", e.target.closest("button"))}"
@@ -212,12 +178,10 @@ export const BasicTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-color-fixed-dark</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-color-fixed-dark</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">#1a1a1a</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#1a1a1a</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -239,9 +203,7 @@ export const Primary = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-primary-default</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-primary-default</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-primary-default", e.target.closest("button"))}"
@@ -252,14 +214,10 @@ export const Primary = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-primary-color-default</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-primary-color-default</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#6b4feb / #a999f3</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#6b4feb / #a999f3</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-primary-default">Standard primary text color</span>
@@ -268,9 +226,7 @@ export const Primary = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-primary-emphasis</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-primary-emphasis</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-primary-emphasis", e.target.closest("button"))}"
@@ -281,14 +237,12 @@ export const Primary = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-primary-color-emphasis</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#523abc / #c8bdf7</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#523abc / #c8bdf7</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-primary-emphasis">Emphasized primary text</span>
@@ -297,7 +251,7 @@ export const Primary = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-primary-fixed-light</code
           >
           <button
@@ -310,12 +264,12 @@ export const Primary = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-primary-color-fixed-light</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">#a999f3</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#a999f3</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -326,7 +280,7 @@ export const Primary = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-primary-fixed-dark</code
           >
           <button
@@ -339,12 +293,12 @@ export const Primary = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-primary-color-fixed-dark</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">#6b4feb</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#6b4feb</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -366,9 +320,7 @@ export const Accent = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-accent-default</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-accent-default</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-accent-default", e.target.closest("button"))}"
@@ -379,14 +331,10 @@ export const Accent = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-accent-color-default</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-accent-color-default</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#0269d0 / #60aaf4</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#0269d0 / #60aaf4</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-accent-default">Standard accent text color</span>
@@ -395,9 +343,7 @@ export const Accent = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-accent-emphasis</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-accent-emphasis</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-accent-emphasis", e.target.closest("button"))}"
@@ -408,14 +354,10 @@ export const Accent = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-accent-color-emphasis</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-accent-color-emphasis</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#0151a0 / #96c7f7</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#0151a0 / #96c7f7</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-accent-emphasis">Emphasized accent text</span>
@@ -424,7 +366,7 @@ export const Accent = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-accent-fixed-light</code
           >
           <button
@@ -437,12 +379,12 @@ export const Accent = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-accent-color-fixed-light</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">#60aaf4</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#60aaf4</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -453,7 +395,7 @@ export const Accent = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-accent-fixed-dark</code
           >
           <button
@@ -466,12 +408,12 @@ export const Accent = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-accent-color-fixed-dark</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">#0269d0</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#0269d0</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -493,9 +435,7 @@ export const Success = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-success-default</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-success-default</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-success-default", e.target.closest("button"))}"
@@ -506,14 +446,10 @@ export const Success = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-success-color-default</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-success-color-default</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#0e7c3d / #16bd5e</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#0e7c3d / #16bd5e</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-success-default">Standard success text color</span>
@@ -522,9 +458,7 @@ export const Success = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-success-emphasis</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-success-emphasis</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-success-emphasis", e.target.closest("button"))}"
@@ -535,14 +469,12 @@ export const Success = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-success-color-emphasis</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#0b5e2f / #62db96</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#0b5e2f / #62db96</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <span class="sgds:text-success-emphasis">Emphasized success text</span>
@@ -551,7 +483,7 @@ export const Success = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-success-fixed-light</code
           >
           <button
@@ -564,12 +496,12 @@ export const Success = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-success-color-fixed-light</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">#16bd5e</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#16bd5e</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -580,7 +512,7 @@ export const Success = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-success-fixed-dark</code
           >
           <button
@@ -593,12 +525,12 @@ export const Success = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-success-color-fixed-dark</code
         >
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">#0e7c3d</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#0e7c3d</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -620,9 +552,7 @@ export const Danger = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-danger-default</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-danger-default</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-danger-default", e.target.closest("button"))}"
@@ -633,12 +563,12 @@ export const Danger = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-danger-color-default</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#cf2323 / #e98b8b</code
         ></sgds-table-cell
       >
@@ -647,9 +577,7 @@ export const Danger = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-danger-emphasis</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-danger-emphasis</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-danger-emphasis", e.target.closest("button"))}"
@@ -660,12 +588,12 @@ export const Danger = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-danger-color-emphasis</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#a11b1b / #f1b2b2</code
         ></sgds-table-cell
       >
@@ -674,7 +602,7 @@ export const Danger = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-danger-fixed-light</code
           >
           <button
@@ -687,14 +615,12 @@ export const Danger = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-danger-color-fixed-light</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#e98b8b</code
-        ></sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#e98b8b</code></sgds-table-cell
       >
       <sgds-table-cell
         ><div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -705,7 +631,7 @@ export const Danger = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-danger-fixed-dark</code
           >
           <button
@@ -718,14 +644,12 @@ export const Danger = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-danger-color-fixed-dark</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#cf2323</code
-        ></sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#cf2323</code></sgds-table-cell
       >
       <sgds-table-cell
         ><div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -747,9 +671,7 @@ export const Warning = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-warning-default</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-warning-default</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-warning-default", e.target.closest("button"))}"
@@ -760,12 +682,12 @@ export const Warning = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-warning-color-default</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#7e6917 / #e5bf29</code
         ></sgds-table-cell
       >
@@ -774,9 +696,7 @@ export const Warning = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-warning-emphasis</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-warning-emphasis</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-warning-emphasis", e.target.closest("button"))}"
@@ -787,12 +707,12 @@ export const Warning = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-warning-color-emphasis</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#c2a223 / #fcde63</code
         ></sgds-table-cell
       >
@@ -801,7 +721,7 @@ export const Warning = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-warning-fixed-light</code
           >
           <button
@@ -814,14 +734,12 @@ export const Warning = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-warning-color-fixed-light</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#fcde63</code
-        ></sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#fcde63</code></sgds-table-cell
       >
       <sgds-table-cell
         ><div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -832,7 +750,7 @@ export const Warning = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-warning-fixed-dark</code
           >
           <button
@@ -845,14 +763,12 @@ export const Warning = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-warning-color-fixed-dark</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#7e6917</code
-        ></sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#7e6917</code></sgds-table-cell
       >
       <sgds-table-cell
         ><div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -874,9 +790,7 @@ export const Purple = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-purple-default</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-purple-default</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-purple-default", e.target.closest("button"))}"
@@ -887,12 +801,12 @@ export const Purple = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-purple-color-default</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#ac1cdb / #d983f6</code
         ></sgds-table-cell
       >
@@ -901,9 +815,7 @@ export const Purple = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-purple-emphasis</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-purple-emphasis</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-purple-emphasis", e.target.closest("button"))}"
@@ -914,12 +826,12 @@ export const Purple = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-purple-color-emphasis</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#8516a9 / #e6adf9</code
         ></sgds-table-cell
       >
@@ -928,7 +840,7 @@ export const Purple = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-purple-fixed-light</code
           >
           <button
@@ -941,14 +853,12 @@ export const Purple = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-purple-color-fixed-light</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#d983f6</code
-        ></sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#d983f6</code></sgds-table-cell
       >
       <sgds-table-cell
         ><div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -959,7 +869,7 @@ export const Purple = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-purple-fixed-dark</code
           >
           <button
@@ -972,14 +882,12 @@ export const Purple = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-purple-color-fixed-dark</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#ac1cdb</code
-        ></sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#ac1cdb</code></sgds-table-cell
       >
       <sgds-table-cell
         ><div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -1001,9 +909,7 @@ export const Cyan = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-cyan-default</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-cyan-default</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-cyan-default", e.target.closest("button"))}"
@@ -1014,12 +920,12 @@ export const Cyan = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-cyan-color-default</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#00758d / #00b4da</code
         ></sgds-table-cell
       >
@@ -1028,9 +934,7 @@ export const Cyan = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-cyan-emphasis</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-cyan-emphasis</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-cyan-emphasis", e.target.closest("button"))}"
@@ -1041,12 +945,12 @@ export const Cyan = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-cyan-color-emphasis</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#005a6d / #49d2ef</code
         ></sgds-table-cell
       >
@@ -1055,9 +959,7 @@ export const Cyan = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-cyan-fixed-light</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-cyan-fixed-light</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-cyan-fixed-light", e.target.closest("button"))}"
@@ -1068,14 +970,12 @@ export const Cyan = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-cyan-color-fixed-light</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#00b4da</code
-        ></sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#00b4da</code></sgds-table-cell
       >
       <sgds-table-cell
         ><div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -1086,9 +986,7 @@ export const Cyan = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-cyan-fixed-dark</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-cyan-fixed-dark</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-cyan-fixed-dark", e.target.closest("button"))}"
@@ -1099,14 +997,12 @@ export const Cyan = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-cyan-color-fixed-dark</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#00758d</code
-        ></sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#00758d</code></sgds-table-cell
       >
       <sgds-table-cell
         ><div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -1128,9 +1024,7 @@ export const Neutral = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-neutral-default</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-neutral-default</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-neutral-default", e.target.closest("button"))}"
@@ -1141,12 +1035,12 @@ export const Neutral = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-neutral-color-default</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#6b6b6b / #a5a5a5</code
         ></sgds-table-cell
       >
@@ -1155,9 +1049,7 @@ export const Neutral = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-neutral-emphasis</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-neutral-emphasis</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-neutral-emphasis", e.target.closest("button"))}"
@@ -1168,12 +1060,12 @@ export const Neutral = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-neutral-color-emphasis</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#525252 / #c6c6c6</code
         ></sgds-table-cell
       >
@@ -1182,7 +1074,7 @@ export const Neutral = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-neutral-fixed-light</code
           >
           <button
@@ -1195,14 +1087,12 @@ export const Neutral = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-neutral-color-fixed-light</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#a5a5a5</code
-        ></sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#a5a5a5</code></sgds-table-cell
       >
       <sgds-table-cell
         ><div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -1213,7 +1103,7 @@ export const Neutral = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-neutral-fixed-dark</code
           >
           <button
@@ -1226,14 +1116,12 @@ export const Neutral = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-neutral-color-fixed-dark</code
         ></sgds-table-cell
       >
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#6b6b6b</code
-        ></sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#6b6b6b</code></sgds-table-cell
       >
       <sgds-table-cell
         ><div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -1255,9 +1143,7 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-display-default</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-display-default</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-display-default", e.target.closest("button"))}"
@@ -1268,12 +1154,10 @@ export const TypographyTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-display-color-default</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-display-color-default</code>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#1a1a1a / #ffffff</code
         ></sgds-table-cell
       >
@@ -1284,9 +1168,7 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-display-subtle</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-display-subtle</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-display-subtle", e.target.closest("button"))}"
@@ -1297,12 +1179,10 @@ export const TypographyTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-display-color-subtle</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-display-color-subtle</code>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#3b3b3b / #dfdfdf</code
         ></sgds-table-cell
       >
@@ -1313,9 +1193,7 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-heading-default</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-heading-default</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-heading-default", e.target.closest("button"))}"
@@ -1326,12 +1204,10 @@ export const TypographyTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-heading-color-default</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-heading-color-default</code>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#2a2a2a / #f3f3f3</code
         ></sgds-table-cell
       >
@@ -1342,9 +1218,7 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-heading-subtle</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-heading-subtle</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-heading-subtle", e.target.closest("button"))}"
@@ -1355,12 +1229,10 @@ export const TypographyTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-heading-color-subtle</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-heading-color-subtle</code>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#3b3b3b / #dfdfdf</code
         ></sgds-table-cell
       >
@@ -1371,9 +1243,7 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-body-default</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-body-default</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-body-default", e.target.closest("button"))}"
@@ -1384,12 +1254,10 @@ export const TypographyTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-body-color-default</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-body-color-default</code>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#1a1a1a / #ffffff</code
         ></sgds-table-cell
       >
@@ -1400,9 +1268,7 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-body-subtle</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-body-subtle</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-body-subtle", e.target.closest("button"))}"
@@ -1413,12 +1279,10 @@ export const TypographyTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-body-color-subtle</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-body-color-subtle</code>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#525252 / #c6c6c6</code
         ></sgds-table-cell
       >
@@ -1429,9 +1293,7 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-label-default</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-label-default</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-label-default", e.target.closest("button"))}"
@@ -1442,12 +1304,10 @@ export const TypographyTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-label-color-default</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-label-color-default</code>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#2a2a2a / #f3f3f3</code
         ></sgds-table-cell
       >
@@ -1458,9 +1318,7 @@ export const TypographyTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-label-subtle</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-label-subtle</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-label-subtle", e.target.closest("button"))}"
@@ -1471,12 +1329,10 @@ export const TypographyTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-label-color-subtle</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-label-color-subtle</code>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#525252 / #c6c6c6</code
         ></sgds-table-cell
       >
@@ -1498,9 +1354,7 @@ export const LinkTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-link-default</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-link-default</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-link-default", e.target.closest("button"))}"
@@ -1511,12 +1365,10 @@ export const LinkTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-link-color-default</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-link-color-default</code>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#0269d0 / #60aaf4</code
         ></sgds-table-cell
       >
@@ -1527,9 +1379,7 @@ export const LinkTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-link-emphasis</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-link-emphasis</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-link-emphasis", e.target.closest("button"))}"
@@ -1540,12 +1390,10 @@ export const LinkTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-link-color-emphasis</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-link-color-emphasis</code>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#0151a0 / #96c7f7</code
         ></sgds-table-cell
       >
@@ -1567,9 +1415,7 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-form-default</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-form-default</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-form-default", e.target.closest("button"))}"
@@ -1580,12 +1426,10 @@ export const FormTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-form-color-default</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-form-color-default</code>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#2a2a2a / #f3f3f3</code
         ></sgds-table-cell
       >
@@ -1596,9 +1440,7 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-form-subtle</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-form-subtle</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-form-subtle", e.target.closest("button"))}"
@@ -1609,12 +1451,10 @@ export const FormTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-form-color-subtle</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-form-color-subtle</code>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#525252 / #c6c6c6</code
         ></sgds-table-cell
       >
@@ -1625,9 +1465,7 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-form-muted</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-form-muted</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-form-muted", e.target.closest("button"))}"
@@ -1638,12 +1476,10 @@ export const FormTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-form-color-muted</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-form-color-muted</code>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#c6c6c6 / #3b3b3b</code
         ></sgds-table-cell
       >
@@ -1654,9 +1490,7 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-form-inverse</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-form-inverse</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-form-inverse", e.target.closest("button"))}"
@@ -1667,12 +1501,10 @@ export const FormTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-form-color-inverse</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-form-color-inverse</code>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#f3f3f3 / #2a2a2a</code
         ></sgds-table-cell
       >
@@ -1685,9 +1517,7 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-form-fixed-light</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-form-fixed-light</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-form-fixed-light", e.target.closest("button"))}"
@@ -1698,14 +1528,12 @@ export const FormTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-form-color-fixed-light</code
         >
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#f3f3f3</code
-        ></sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#f3f3f3</code></sgds-table-cell
       >
       <sgds-table-cell>
         <div class="sgds:bg-fixed-dark sgds:p-md sgds:rounded-sm">
@@ -1716,9 +1544,7 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >sgds:text-form-fixed-dark</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:text-form-fixed-dark</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:text-form-fixed-dark", e.target.closest("button"))}"
@@ -1729,14 +1555,10 @@ export const FormTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >--sgds-form-color-fixed-dark</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-form-color-fixed-dark</code>
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >#1a1a1a</code
-        ></sgds-table-cell
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">#1a1a1a</code></sgds-table-cell
       >
       <sgds-table-cell>
         <div class="sgds:bg-fixed-light sgds:p-md sgds:rounded-sm">
@@ -1747,7 +1569,7 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-form-primary-default</code
           >
           <button
@@ -1760,12 +1582,12 @@ export const FormTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-form-primary-color-default</code
         >
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#6b4feb / #a999f3</code
         ></sgds-table-cell
       >
@@ -1776,7 +1598,7 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-form-success-default</code
           >
           <button
@@ -1789,12 +1611,12 @@ export const FormTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-form-success-color-default</code
         >
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#0e7c3d / #16bd5e</code
         ></sgds-table-cell
       >
@@ -1805,7 +1627,7 @@ export const FormTextColor = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
             >sgds:text-form-danger-default</code
           >
           <button
@@ -1818,12 +1640,12 @@ export const FormTextColor = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >--sgds-form-danger-color-default</code
         >
       </sgds-table-cell>
       <sgds-table-cell
-        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+        ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
           >#cf2323 / #e98b8b</code
         ></sgds-table-cell
       >
