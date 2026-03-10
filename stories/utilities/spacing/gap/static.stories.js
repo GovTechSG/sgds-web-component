@@ -25,9 +25,7 @@ export const Static = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
-            >sgds:gap-none</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:gap-none</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:gap-none", e.target.closest("button"))}"
@@ -38,9 +36,7 @@ export const Static = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
-          >--sgds-gap-none</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-gap-none</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">0px</code>
@@ -56,9 +52,7 @@ export const Static = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
-            >sgds:gap-2-xs</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:gap-2-xs</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:gap-2-xs", e.target.closest("button"))}"
@@ -69,9 +63,7 @@ export const Static = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
-          >--sgds-gap-2-xs</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-gap-2-xs</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">4px</code>
@@ -222,9 +214,7 @@ export const Static = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
-            >sgds:gap-2-xl</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:gap-2-xl</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:gap-2-xl", e.target.closest("button"))}"
@@ -235,9 +225,7 @@ export const Static = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
-          >--sgds-gap-2-xl</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-gap-2-xl</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">32px</code>
@@ -253,9 +241,7 @@ export const Static = () => html`
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
-            >sgds:gap-3-xl</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">sgds:gap-3-xl</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard("sgds:gap-3-xl", e.target.closest("button"))}"
@@ -266,9 +252,7 @@ export const Static = () => html`
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
-          >--sgds-gap-3-xl</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">--sgds-gap-3-xl</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">48px</code>
