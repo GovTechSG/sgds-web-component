@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SGDS Playground - Component Examples</title>
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        background-color: var(--sgds-bg-default);
+        color: var(--sgds-color-default);
+        line-height: 1.6;
+      }
+
+      .header {
+        background: linear-gradient(135deg, var(--sgds-primary-bg-default), var(--sgds-primary-bg-muted));
+        color: white;
+        padding: 48px 24px;
+        text-align: center;
+        border-bottom: 4px solid var(--sgds-primary-color-emphasis);
+      }
+
+      .header h1 {
+        font-size: 40px;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      .header p {
+        font-size: 16px;
+        opacity: 0.95;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 48px 24px;
+      }
+
+      .content-section {
+        margin-bottom: 64px;
+      }
+
+      .section-title {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 32px;
+        padding-bottom: 16px;
+        border-bottom: 2px solid var(--sgds-border-color-default);
+        color: var(--sgds-heading-color-default);
+      }
+
+      .components-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+      }
+
+      .component-card {
+        display: flex;
+        flex-direction: column;
+        background: var(--sgds-surface-default);
+        border: 1px solid var(--sgds-border-color-default);
+        border-radius: var(--sgds-border-radius-md);
+        padding: 24px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .component-card:hover {
+        border-color: var(--sgds-primary-border-color-emphasis);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: translateY(-4px);
+      }
+
+      .component-card-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--sgds-primary-color-default);
+      }
+
+      .component-card-description {
+        font-size: 14px;
+        color: var(--sgds-color-subtle);
+        margin-bottom: 16px;
+        flex-grow: 1;
+      }
+
+      .component-card-link {
+        display: inline-flex;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--sgds-primary-color-emphasis);
+        text-decoration: none;
+        gap: 6px;
+      }
+
+      .component-card-link::after {
+        content: "→";
+        transition: transform 0.3s ease;
+      }
+
+      .component-card:hover .component-card-link::after {
+        transform: translateX(4px);
+      }
+
+      .category-badge {
+        display: inline-block;
+        background: var(--sgds-primary-surface-translucent);
+        color: var(--sgds-primary-color-emphasis);
+        padding: 4px 12px;
+        border-radius: var(--sgds-border-radius-sm);
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 12px;
+        width: fit-content;
+      }
+
+      .footer {
+        margin-top: 64px;
+        padding-top: 32px;
+        border-top: 1px solid var(--sgds-border-color-default);
+        text-align: center;
+        color: var(--sgds-color-subtle);
+        font-size: 14px;
+      }
+
+      .intro-text {
+        max-width: 700px;
+        margin: 0 auto 48px;
+        font-size: 16px;
+        color: var(--sgds-color-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>SGDS Playground</h1>
+      <p>Interactive component examples and documentation</p>
+    </div>
+
+    <div class="container">
+      <div class="intro-text">
+        <p>
+          Explore all available Singapore Design System web components. Click on any component below to view interactive
+          examples, code samples, and usage patterns.
+        </p>
+      </div>
+
+      <!-- Form & Input Components -->
+      <div class="content-section">
+        <h2 class="section-title">Input & Form Components</h2>
+        <div class="components-grid">
+          <a href="./Button.html" class="component-card">
+            <span class="category-badge">Interactive</span>
+            <div class="component-card-title">Button</div>
+            <div class="component-card-description">
+              Primary action button with multiple variants, tones, and sizes.
+            </div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./Input.html" class="component-card">
+            <span class="category-badge">Form</span>
+            <div class="component-card-title">Input</div>
+            <div class="component-card-description">
+              Text input field with validation, error states, and helper text.
+            </div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./Select.html" class="component-card">
+            <span class="category-badge">Form</span>
+            <div class="component-card-title">Select</div>
+            <div class="component-card-description">Dropdown selection field with native and customizable options.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./Combobox.html" class="component-card">
+            <span class="category-badge">Form</span>
+            <div class="component-card-title">Combobox</div>
+            <div class="component-card-description">Searchable dropdown with autocomplete functionality.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./Datepicker.html" class="component-card">
+            <span class="category-badge">Form</span>
+            <div class="component-card-title">Datepicker</div>
+            <div class="component-card-description">Interactive date selection with calendar interface.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./Form.html" class="component-card">
+            <span class="category-badge">Form</span>
+            <div class="component-card-title">Form</div>
+            <div class="component-card-description">Complete form examples with validation and submission.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./noValidateForm.html" class="component-card">
+            <span class="category-badge">Form</span>
+            <div class="component-card-title">Form (No Validation)</div>
+            <div class="component-card-description">Form examples without built-in validation.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Data Display Components -->
+      <div class="content-section">
+        <h2 class="section-title">Data Display</h2>
+        <div class="components-grid">
+          <a href="./Table.html" class="component-card">
+            <span class="category-badge">Content</span>
+            <div class="component-card-title">Table</div>
+            <div class="component-card-description">Structured data display with headers and rows.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./Pagination.html" class="component-card">
+            <span class="category-badge">Navigation</span>
+            <div class="component-card-title">Pagination</div>
+            <div class="component-card-description">Multi-variant pagination for navigating large datasets.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./Badge.html" class="component-card">
+            <span class="category-badge">Content</span>
+            <div class="component-card-title">Badge</div>
+            <div class="component-card-description">Label component for status, counts, and categories.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./DescriptionList.html" class="component-card">
+            <span class="category-badge">Content</span>
+            <div class="component-card-title">Description List</div>
+            <div class="component-card-description">Semantic list for terms and definitions.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Navigation Components -->
+      <div class="content-section">
+        <h2 class="section-title">Navigation</h2>
+        <div class="components-grid">
+          <a href="./Breadcrumb.html" class="component-card">
+            <span class="category-badge">Navigation</span>
+            <div class="component-card-title">Breadcrumb</div>
+            <div class="component-card-description">
+              Hierarchical navigation showing page location in site structure.
+            </div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./Link.html" class="component-card">
+            <span class="category-badge">Navigation</span>
+            <div class="component-card-title">Link</div>
+            <div class="component-card-description">Hyperlink component with various styling options.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./Dropdown.html" class="component-card">
+            <span class="category-badge">Navigation</span>
+            <div class="component-card-title">Dropdown</div>
+            <div class="component-card-description">Menu dropdown with nested items and actions.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./Mainnav.html" class="component-card">
+            <span class="category-badge">Navigation</span>
+            <div class="component-card-title">Main Navigation</div>
+            <div class="component-card-description">Primary navigation bar for application header.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Layout & Structure Components -->
+      <div class="content-section">
+        <h2 class="section-title">Layout & Structure</h2>
+        <div class="components-grid">
+          <a href="./header.html" class="component-card">
+            <span class="category-badge">Layout</span>
+            <div class="component-card-title">Header</div>
+            <div class="component-card-description">Page header component with masthead integration.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./Masthead.html" class="component-card">
+            <span class="category-badge">Layout</span>
+            <div class="component-card-title">Masthead</div>
+            <div class="component-card-description">Top-level branding and navigation component.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./Footer.html" class="component-card">
+            <span class="category-badge">Layout</span>
+            <div class="component-card-title">Footer</div>
+            <div class="component-card-description">Page footer with links and information sections.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./Card.html" class="component-card">
+            <span class="category-badge">Layout</span>
+            <div class="component-card-title">Card</div>
+            <div class="component-card-description">Container for grouped content with consistent styling.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./Drawer.html" class="component-card">
+            <span class="category-badge">Layout</span>
+            <div class="component-card-title">Drawer</div>
+            <div class="component-card-description">Side panel for navigation or additional content.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card Components -->
+      <div class="content-section">
+        <h2 class="section-title">Card Variants</h2>
+        <div class="components-grid">
+          <a href="./IconCard.html" class="component-card">
+            <span class="category-badge">Card</span>
+            <div class="component-card-title">Icon Card</div>
+            <div class="component-card-description">Card with icon, title, and description for feature display.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./ImageCard.html" class="component-card">
+            <span class="category-badge">Card</span>
+            <div class="component-card-title">Image Card</div>
+            <div class="component-card-description">Card with image, title, and metadata display.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./ThumbnailCard.html" class="component-card">
+            <span class="category-badge">Card</span>
+            <div class="component-card-title">Thumbnail Card</div>
+            <div class="component-card-description">Compact card with thumbnail image and text.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./IconList.html" class="component-card">
+            <span class="category-badge">Card</span>
+            <div class="component-card-title">Icon List</div>
+            <div class="component-card-description">List of items with icons for feature lists.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Feedback & Status Components -->
+      <div class="content-section">
+        <h2 class="section-title">Feedback & Status</h2>
+        <div class="components-grid">
+          <a href="./Toast.html" class="component-card">
+            <span class="category-badge">Feedback</span>
+            <div class="component-card-title">Toast</div>
+            <div class="component-card-description">Non-intrusive notification messages.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./Modal.html" class="component-card">
+            <span class="category-badge">Feedback</span>
+            <div class="component-card-title">Modal</div>
+            <div class="component-card-description">Dialog box for important user interactions.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./Spinner.html" class="component-card">
+            <span class="category-badge">Status</span>
+            <div class="component-card-title">Spinner</div>
+            <div class="component-card-description">Loading indicator for asynchronous operations.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./SystemBanner.html" class="component-card">
+            <span class="category-badge">Feedback</span>
+            <div class="component-card-title">System Banner</div>
+            <div class="component-card-description">Alert banner for system-wide messages.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Icon & Button Variants -->
+      <div class="content-section">
+        <h2 class="section-title">Icons & Controls</h2>
+        <div class="components-grid">
+          <a href="./IconButton.html" class="component-card">
+            <span class="category-badge">Interactive</span>
+            <div class="component-card-title">Icon Button</div>
+            <div class="component-card-description">Button displaying only an icon for compact UI.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+
+          <a href="./CloseButton.html" class="component-card">
+            <span class="category-badge">Interactive</span>
+            <div class="component-card-title">Close Button</div>
+            <div class="component-card-description">Specialized button for dismissing elements.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Utility & Special -->
+      <div class="content-section">
+        <h2 class="section-title">Utilities & Special</h2>
+        <div class="components-grid">
+          <a href="./anchor.html" class="component-card">
+            <span class="category-badge">Navigation</span>
+            <div class="component-card-title">Anchor</div>
+            <div class="component-card-description">Skip link and anchor navigation utilities.</div>
+            <span class="component-card-link">View Examples</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>
+          Singapore Design System Playground • View documentation at
+          <a href="../docs/" style="color: var(--sgds-primary-color-emphasis)">docs/</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
