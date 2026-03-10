@@ -276,7 +276,9 @@ def generate_html(
     if benchmark:
         embedded["benchmark"] = benchmark
 
-    data_json = json.dumps(embedded)
+    # Escape </script> so response content containing code examples never
+    # prematurely closes the <script> block that embeds the JSON data.
+    data_json = json.dumps(embedded).replace("</script>", r"<\/script>")
 
     return template.replace("/*__EMBEDDED_DATA__*/", f"const EMBEDDED_DATA = {data_json};")
 

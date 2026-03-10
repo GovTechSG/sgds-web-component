@@ -187,6 +187,8 @@ Execute this task:
 
 Write an `eval_metadata.json` for each test case (assertions can be empty for now). Give each eval a descriptive name based on what it's testing — not just "eval-0". Use this name for the directory too. If this iteration uses new or modified eval prompts, create these files for each new eval directory — don't assume they carry over from previous iterations.
 
+**Important — `eval_metadata.json` placement**: The viewer checks `<config>/eval_metadata.json` (e.g. `destructive-delete-button/with_skill/eval_metadata.json`), not just the top-level named dir. Always copy `eval_metadata.json` into each config subdir (`with_skill/` and `without_skill/`) as well as the named dir root.
+
 ```json
 {
   "eval_id": 0,
@@ -222,14 +224,16 @@ This is the only opportunity to capture this data — it comes through the task 
 
 Once all runs are done:
 
-1. **Grade each run** — spawn a grader subagent (or grade inline) that reads `agents/grader.md` and evaluates each assertion against the outputs. Save results to `grading.json` in each run directory. The grading.json expectations array must use the fields `text`, `passed`, and `evidence` (not `name`/`met`/`details` or other variants) — the viewer depends on these exact field names. For assertions that can be checked programmatically, write and run a script rather than eyeballing it — scripts are faster, more reliable, and can be reused across iterations.
+1. **Grade each run** — spawn a grader subagent that reads `agents/grader.md` and evaluates each assertion against the outputs. Do not grade inline; the subagent enforces the correct `grading.json` schema. The grading.json **must** use a top-level `summary` key (not `result`) containing `pass_rate`, `passed`, `failed`, `total` — `aggregate_benchmark.py` reads `grading["summary"]["pass_rate"]` and silently zeroes out runs with the wrong schema. The `expectations` array fields must be `text`, `passed`, and `evidence` (not `name`/`met`/`details`). For assertions that can be checked programmatically, write and run a script rather than eyeballing it — scripts are faster, more reliable, and can be reused across iterations.
 
-2. **Aggregate into benchmark** — run the aggregation script from the skill-creator directory:
+2. **Aggregate into benchmark** — the aggregation script only scans directories named `eval-*` (not named dirs like `destructive-delete-button/`). After grading, create `eval-N/` dirs that mirror the named dir structure, then run:
    ```bash
    python -m scripts.aggregate_benchmark <workspace>/iteration-N --skill-name <name>
    ```
    This produces `benchmark.json` and `benchmark.md` with pass_rate, time, and tokens for each configuration, with mean ± stddev and the delta. If generating benchmark.json manually, see `references/schemas.md` for the exact schema the viewer expects.
-Put each with_skill version before its baseline counterpart.
+   Put each with_skill version before its baseline counterpart.
+
+   **Warning**: When pointing the viewer at the iteration directory, it recursively scans ALL subdirectories. If both named dirs (`destructive-delete-button/`) and `eval-N/` dirs coexist, the viewer will find duplicate runs and crash on `eval_id = None` from the named dir runs. To avoid this: point the viewer at a subdirectory that contains only `eval-N` dirs (e.g. create a `viewer/` subdir), or ensure `eval_metadata.json` is present at the config level in named dirs (see above).
 
 3. **Do an analyst pass** — read the benchmark data and surface patterns the aggregate stats might hide. See `agents/analyzer.md` (the "Analyzing Benchmark Results" section) for what to look for — things like assertions that always pass regardless of skill (non-discriminating), high-variance evals (possibly flaky), and time/token tradeoffs.
 
