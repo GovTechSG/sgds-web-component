@@ -81,6 +81,9 @@ Specialized knowledge for specific development tasks:
 
 These skills cover two domains. Each domain uses a folder naming prefix so agents and users can identify them at a glance:
 
+#### Getting Started
+- [getting-started](../src/skills/sgds-getting-started/SKILL.md) - Entry point for any new SGDS application: Inter font, foundation CSS imports, component registration, and app layout setup. Apply this first before any other SGDS skill.
+
 #### Utilities Skills (`utilities-*`) — Foundational styles via the `sgds:` Tailwind prefix
 - [utilities-overview](../src/skills/sgds-utilities-overview/SKILL.md) - Overview of all SGDS foundational style utilities and the Utilities API
 - [utilities-setup](../src/skills/sgds-utilities-setup/SKILL.md) - Setup and prerequisites for using SGDS utilities
@@ -146,6 +149,10 @@ These skills cover two domains. Each domain uses a folder naming prefix so agent
 #### Pattern Skills (`pattern-*`) — Cross-cutting implementation patterns
 - [pattern-form-validation](../src/skills/sgds-pattern-form-validation/SKILL.md) - Form validation using ElementInternals API, hasFeedback, constraint validation per component, FormData, custom validation with noValidate and setInvalid (Input/Textarea only)
 - [pattern-layout](../src/skills/sgds-pattern-layout/SKILL.md) - App layout templates: simple app (sgds-container, public-facing) and sidebar app (sgds-container-sidebar, dashboards/internal tools)
+- [sgds-data-visualisation](../src/skills/sgds-data-visualisation/SKILL.md) - Data visualisation with ECharts and the SGDS colour palette; charts, graphs, dashboards
+
+#### Theming Skills — Visual customisation
+- [sgds-theming](../src/skills/sgds-theming/SKILL.md) - Product brand colour overrides, day/night mode setup, and font customisation via CSS token overrides
 
 ## Instruction Files
 Detailed guidelines for specific aspects of development:
