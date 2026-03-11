@@ -4,6 +4,7 @@ description: Converts SGDS CSS variables to Tailwind v4 utility classes in src/c
 metadata:
   author: singapore-design-system
   version: "0.0.0"
+  internal: true
 ---
 
 # Tailwind Mapping

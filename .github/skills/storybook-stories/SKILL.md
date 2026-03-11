@@ -4,6 +4,7 @@ description: Writes Storybook stories following the templates folder pattern wit
 metadata:
   author: singapore-design-system
   version: "0.0.0"
+  internal: true
 ---
 
 # Storybook Stories

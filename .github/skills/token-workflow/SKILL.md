@@ -4,6 +4,7 @@ description: Maintains SGDS design token architecture across three layers (primi
 metadata:
   author: singapore-design-system
   version: "0.0.0"
+  internal: true
 ---
 
 # Token Workflow

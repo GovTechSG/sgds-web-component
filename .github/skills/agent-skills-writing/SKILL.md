@@ -4,6 +4,7 @@ description: Guidelines for writing new agent skills in skills/ (user-facing) an
 metadata:
   author: singapore-design-system
   version: "0.0.0"
+  internal: true
 ---
 
 # Agent Skills Writing Skill
