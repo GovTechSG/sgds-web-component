@@ -17,3 +17,5 @@ chromatic-diagnostics.json
 .storybook/utility.css
 # macOS
 .DS_Store
+
+test/skills/*
