@@ -6,12 +6,10 @@
 - **Utility**: responsive tokens
 
 ### Fix
-
-- *****: update the alignment of the header components [run-chromatic][skip-cd] (#566)
-- *****: update the alignment of the header components
+- **Mainnav, Masthead, SystemBanner**: update the alignment of the header components
 - **Pagination**: active color and button color[run-chromatic]  (#567)
-- replace container query with media query to resolve responsive issue [run-chromatic] (#563)
-- replace container query with media query to resolve responsive issue
+- **Footer** replace container query with media query to resolve responsive issue [run-chromatic] (#563)
+- **Footer** replace container query with media query to resolve responsive issue
 - **Pagination**: active color and button color
 
 ## v3.13.1 (2026-03-06)
