@@ -1,4 +1,20 @@
-## Unreleased
+## v3.14.0 (2026-03-11)
+
+### Feat
+
+- **Utility**: responsive tokens [run-chromatic][skip-cd] (#564)
+- **Utility**: responsive tokens
+
+### Fix
+
+- *****: update the alignment of the header components [run-chromatic][skip-cd] (#566)
+- *****: update the alignment of the header components
+- **Pagination**: active color and button color[run-chromatic]  (#567)
+- replace container query with media query to resolve responsive issue [run-chromatic] (#563)
+- replace container query with media query to resolve responsive issue
+- **Pagination**: active color and button color
+
+## v3.13.1 (2026-03-06)
 
 ### Fix
 
