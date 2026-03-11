@@ -1,6 +1,6 @@
 ---
 name: agent-skills-writing
-description: Guidelines for writing new agent skills in src/skills/ (user-facing) and .github/skills/ (internal). Use when creating a new skill, adding a reference file, or refactoring an existing skill that has grown too large.
+description: Guidelines for writing new agent skills in skills/ (user-facing) and .github/skills/ (internal). Use when creating a new skill, adding a reference file, or refactoring an existing skill that has grown too large.
 metadata:
   author: singapore-design-system
   version: "0.0.0"
@@ -14,11 +14,11 @@ Standards and patterns for authoring AI agent skills in this repository.
 
 | Location | Purpose | Audience |
 |----------|---------|---------|
-| `src/skills/utilities-*/` | Teach external developers how to use SGDS foundational style utilities (the Utilities API) | `external` |
-| `src/skills/components-*/` | Teach external developers how to use SGDS web components | `external` |
+| `skills/utilities-*/` | Teach external developers how to use SGDS foundational style utilities (the Utilities API) | `external` |
+| `skills/components-*/` | Teach external developers how to use SGDS web components | `external` |
 | `.github/skills/` | Internal tools for SGDS maintainers | `internal` (no `audience` field) |
 
-**Folder naming convention**: All `src/skills/` folders use a domain prefix so agents and users can discover them by category:
+**Folder naming convention**: All `skills/` folders use a domain prefix so agents and users can discover them by category:
 - `utilities-{name}` — foundational styles exposed via the `sgds:` Tailwind prefix
 - `components-{name}` — usage guidance for SGDS web components (`<sgds-*>`)
 
@@ -45,16 +45,16 @@ metadata:
 
 **Simple skill** (no reference files needed, under ~500 lines):
 ```
-src/skills/utilities-{name}/
+skills/utilities-{name}/
 └── SKILL.md
 
-src/skills/components-{name}/
+skills/components-{name}/
 └── SKILL.md
 ```
 
 **Complex skill** (semantic categories, would exceed ~500 lines):
 ```
-src/skills/utilities-{name}/
+skills/utilities-{name}/
 ├── SKILL.md          ← navigation hub + Quick Decision Guide only
 └── reference/
     ├── base.md
@@ -74,7 +74,7 @@ Do **not** extract if the skill is a single focused topic (e.g., spacing utiliti
 
 ## Utility Skill Structure (with references)
 
-Model: see `src/skills/utilities-background-color/SKILL.md` and `src/skills/utilities-border-color/SKILL.md`.
+Model: see `skills/utilities-background-color/SKILL.md` and `skills/utilities-border-color/SKILL.md`.
 
 The SKILL.md is a **navigation hub and decision guide** — not an example gallery.
 
@@ -101,7 +101,7 @@ One-line description of what it helps with.
 
 ## Component Skill Structure
 
-Model: see `src/skills/components-button/SKILL.md`.
+Model: see `skills/components-button/SKILL.md`.
 
 Component skills document an `<sgds-*>` element's usage. Their SKILL.md structure differs from utility skills:
 
@@ -133,7 +133,7 @@ One-line role of the component and when to prefer it over a native element.
 
 ## Reference File Structure
 
-Model: see any file in `src/skills/utilities-background-color/reference/`.
+Model: see any file in `skills/utilities-background-color/reference/`.
 
 ```markdown
 # {Category} {Skill Name} Reference
@@ -206,7 +206,7 @@ Exception: Common Patterns section may combine tokens from the same category (e.
 
 When **two or more skills** share the same suffix modifier vocabulary (e.g., `default`, `emphasis`, `muted`, `fixed-light`, `fixed-dark`, `inverse`), extract the definitions into a dedicated shared skill rather than duplicating them.
 
-**Pattern used**: `src/skills/utilities-color-semantics/SKILL.md` is the shared reference for all suffix modifiers used by `utilities-background-color`, `utilities-border-color`, and `utilities-text-color`.
+**Pattern used**: `skills/utilities-color-semantics/SKILL.md` is the shared reference for all suffix modifiers used by `utilities-background-color`, `utilities-border-color`, and `utilities-text-color`.
 
 Each consumer skill replaces its duplicated prose with:
 ```markdown
@@ -228,15 +228,15 @@ Name specific relevant library components (e.g., `<sgds-alert>` in danger/warnin
 
 ## Eval Workspace Convention
 
-When running the skill-creator eval loop for any skill in `src/skills/`, always place the workspace directory under:
+When running the skill-creator eval loop for any skill in `skills/`, always place the workspace directory under:
 
 ```
 test/skills/{skill-folder-name}-workspace/
 ```
 
 For example:
-- `src/skills/components-masthead/` → `test/skills/components-masthead-workspace/`
-- `src/skills/utilities-spacing/` → `test/skills/utilities-spacing-workspace/`
+- `skills/components-masthead/` → `test/skills/components-masthead-workspace/`
+- `skills/utilities-spacing/` → `test/skills/utilities-spacing-workspace/`
 
 This keeps generated eval artefacts (iteration dirs, benchmark.json, grading files, feedback.json) out of `src/` and co-located with the project's other test outputs in `test/`.
 
@@ -246,20 +246,20 @@ This keeps generated eval artefacts (iteration dirs, benchmark.json, grading fil
 
 ### Utilities skills
 
-1. Add an entry in `src/skills/utilities-overview/SKILL.md` under Utility Categories.
-2. Add the skill name to the `description` field of `src/skills/utilities-overview/SKILL.md`.
+1. Add an entry in `skills/utilities-overview/SKILL.md` under Utility Categories.
+2. Add the skill name to the `description` field of `skills/utilities-overview/SKILL.md`.
 3. Add a line to `.github/copilot-instructions.md` under **Utilities Skills**:
    ```markdown
-   - [utilities-{name}](../src/skills/utilities-{name}/SKILL.md) - One-line description
+   - [utilities-{name}](../skills/utilities-{name}/SKILL.md) - One-line description
    ```
 
 ### Component skills
 
 1. Add a line to `.github/copilot-instructions.md` under **Component Skills**:
    ```markdown
-   - [components-{name}](../src/skills/components-{name}/SKILL.md) - One-line description
+   - [components-{name}](../skills/components-{name}/SKILL.md) - One-line description
    ```
-2. Once 3+ component skills exist, create `src/skills/components-overview/SKILL.md` as a navigation hub (same pattern as `utilities-overview`). Until then, `copilot-instructions.md` is the only registry.
+2. Once 3+ component skills exist, create `skills/components-overview/SKILL.md` as a navigation hub (same pattern as `utilities-overview`). Until then, `copilot-instructions.md` is the only registry.
 
 ## Checklist for New Skills
 
@@ -277,7 +277,7 @@ Before considering a skill complete:
 - [ ] All HTML examples contain only the token(s) for that file's category
 - [ ] Every Common Patterns section has a library-first note
 - [ ] Shared modifier definitions link to a shared skill, not duplicated
-- [ ] Registered in `src/skills/utilities-overview/SKILL.md`
+- [ ] Registered in `skills/utilities-overview/SKILL.md`
 - [ ] Skill name added to `utilities-overview` frontmatter `description`
 
 **Component skills only**
