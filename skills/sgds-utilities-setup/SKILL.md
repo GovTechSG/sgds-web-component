@@ -113,40 +113,6 @@ Test that setup is complete:
 </html>
 ```
 
-## Troubleshooting
-
-### Utilities Not Working
-
-**Problem**: Classes like `sgds:p-4` have no effect
-
-**Solutions**:
-1. Ensure utility CSS is imported in your entry file or HTML
-2. Check browser console for 404 errors on CSS files
-3. Verify the import path matches your package installation
-4. Clear browser cache and reload
-
-### Theme Colors Not Working
-
-**Problem**: Background/text colors don't appear or don't change with theme
-
-**Solutions**:
-1. Import theme CSS files (`day.css` and `night.css`)
-2. Check that semantic color tokens are used (not fixed colors)
-3. Verify theme toggle adds/removes `sgds-theme-night` class on `<html>` element
-4. Check browser console for CSS import errors
-
-### Import Not Working
-
-**Problem**: `utility.css` import has no effect or causes build errors
-
-**Solution**: Ensure `utility.css` is imported via CSS `@import` inside the CSS file that Tailwind processes — not in a JavaScript file:
-```css
-/* globals.css / index.css */
-@import '@govtechsg/sgds-web-component/css/utility.css';
-```
-
-> ⚠️ Do **not** import `utility.css` in a JavaScript file. It contains Tailwind directives that only Tailwind's build pipeline can process.
-
 ## Framework-Specific Setup
 
 Since SGDS utilities are built on Tailwind v4, you must first set up Tailwind CSS for your framework before importing the SGDS CSS files.

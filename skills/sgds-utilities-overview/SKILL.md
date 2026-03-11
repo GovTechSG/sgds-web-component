@@ -193,60 +193,6 @@ Transparency levels for overlays, disabled states, and effects.
 
 ---
 
-## Common Component Patterns
-
-For full examples of Card, Alert Banner, Form Validation, and Modal components combining multiple utility categories, see **[reference/patterns.md](reference/patterns.md)**.
-
-## Best Practices
-
-### ✅ DO: Use Theme-Aware Tokens
-
-```html
-<!-- ✅ Good - adapts to theme -->
-<div class="sgds:bg-surface-raised sgds:text-default">Content</div>
-
-<!-- ❌ Avoid - hardcoded colors -->
-<div style="background: #ffffff; color: #000000">Content</div>
-```
-
-### ✅ DO: Follow the 4px Spacing Scale
-
-```html
-<!-- ✅ Good - follows scale -->
-<div class="sgds:p-4 sgds:gap-4 sgds:mb-6">Content</div>
-
-<!-- ❌ Avoid - arbitrary values -->
-<div style="padding: 17px; gap: 19px">Content</div>
-```
-
-### ✅ DO: Use Semantic Color Pairings
-
-```html
-<!-- ✅ Good - semantic pairing -->
-<div class="sgds:bg-primary-surface-default sgds:text-primary-default sgds:border-primary-default">
-  Primary section
-</div>
-```
-
-### ✅ DO: Combine Typography Utilities
-
-```html
-<!-- ✅ Good - complete typography styling -->
-<h1 class="sgds:text-heading-default sgds:text-4-xl sgds:font-bold sgds:leading-tight sgds:tracking-tight">
-  Display Heading
-</h1>
-```
-
-### ❌ DON'T: Mix Utility Styles
-
-```html
-<!-- ❌ Wrong - mixing SGDS with inline styles -->
-<div class="sgds:p-4" style="margin: 20px">Content</div>
-
-<!-- ✅ Correct - all utilities -->
-<div class="sgds:p-4 sgds:m-5">Content</div>
-```
-
 ## Quick Reference by Use Case
 
 **Layout & Spacing**: → **sgds-utilities-spacing** skill  
@@ -257,14 +203,6 @@ For full examples of Card, Alert Banner, Form Validation, and Modal components c
 **Headings & Text Sizes**: → **sgds-utilities-typography** skill  
 **Transparent Overlays**: → **sgds-utilities-opacity** skill  
 **Setup Issues**: → **sgds-utilities-setup** skill
-
-## Learning Path
-
-1. **Start**: Complete **sgds-utilities-setup** skill
-2. **Layout**: Learn **sgds-utilities-spacing** for margins, padding, gaps
-3. **Colors**: Learn **sgds-utilities-color-semantics** first, then **sgds-utilities-background-color** and **sgds-utilities-text-color**
-4. **Polish**: Learn **sgds-utilities-border-color**, **sgds-utilities-border-width**, **sgds-utilities-border-radius**, and **sgds-utilities-typography**
-5. **Advanced**: Learn **sgds-utilities-opacity** for effects
 
 ---
 
