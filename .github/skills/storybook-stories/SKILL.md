@@ -3,7 +3,8 @@ name: storybook-stories
 description: Writes Storybook stories following the templates folder pattern with automatic file concatenation. Use when creating or updating component stories in stories/templates/, organizing story variants, or documenting component usage in Storybook.
 metadata:
   author: singapore-design-system
-  version: "1.0.0"
+  version: "0.0.0"
+  internal: true
 ---
 
 # Storybook Stories

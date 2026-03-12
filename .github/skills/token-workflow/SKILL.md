@@ -3,7 +3,8 @@ name: token-workflow
 description: Maintains SGDS design token architecture across three layers (primitive tokens in root.css, semantic mappings in day.css/night.css, and Tailwind utilities in utility.css). Use when adding/modifying design tokens, creating new utilities, updating Storybook documentation, or ensuring token consistency across theme files. IMPORTANT - whenever new tokens are requested, ALWAYS complete all three deliverables - (1) utility.css mapping, (2) playground HTML demo in playground/utility/, (3) Storybook story in stories/utilities/. Never do just one without the others.
 metadata:
   author: singapore-design-system
-  version: "1.0.0"
+  version: "0.0.0"
+  internal: true
 ---
 
 # Token Workflow
