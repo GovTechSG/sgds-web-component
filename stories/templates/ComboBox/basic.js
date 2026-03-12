@@ -255,7 +255,8 @@ export const args = {
     { label: "Zambia", value: "204" },
     { label: "Zimbabwe", value: "205" }
   ],
-  id: "combobox-example"
+  id: "combobox-example",
+  menuIsOpen: true
 };
 
 export const parameters = {};

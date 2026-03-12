@@ -17,7 +17,8 @@ export const Template = ({
   drop,
   displayDate,
   value,
-  readOnly
+  readOnly,
+  menuIsOpen
 }) =>
   html`
     <sgds-datepicker
@@ -37,6 +38,7 @@ export const Template = ({
       drop=${ifDefined(drop)}
       displayDate=${ifDefined(displayDate)}
       ?readonly=${readOnly}
+      ?menuIsOpen=${menuIsOpen}
     >
     </sgds-datepicker>
   `;
@@ -46,6 +48,7 @@ export const args = {
   minDate: "1920-01-01T16:00:00.000Z",
   maxDate: "2030-12-02T12:00:00.000Z",
   label: "Birthdate",
-  hintText: "Born after 1920"
+  hintText: "Born after 1920",
+  menuIsOpen: true
 };
 export const parameters = {};

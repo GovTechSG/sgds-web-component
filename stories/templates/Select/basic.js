@@ -12,6 +12,7 @@ export const Template = args =>
       hintText=${ifDefined(args.hintText)}
       placeholder=${ifDefined(args.placeholder)}
       ?loading=${args.loading}
+      ?menuIsOpen=${args.menuIsOpen}
     >
       ${args.menuList.map(
         (m, i) => html`<sgds-select-option value=${m.value} ?disabled=${args.thirdOptionDisabled && i === 2}
@@ -25,6 +26,7 @@ export const args = {
   hintText: "Select an option",
   placeholder: "Select an option",
   label: "Select label",
+  menuIsOpen: true,
   menuList: [
     { label: "Afghanistan", value: "1" },
     { label: "Albania", value: "2" },

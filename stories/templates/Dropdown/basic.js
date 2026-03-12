@@ -22,7 +22,7 @@ export const Template = ({
       floatingOpts=${ifDefined(floatingOpts)}
       variant=${ifDefined(variant)}
       close=${ifDefined(close)}
-      ?menuIsOpen=${menuIsOpen}
+      menuIsOpen="true"
       ?disabled=${disabled}
     >
       <sgds-button slot="toggler" role="button">
@@ -48,7 +48,8 @@ export const Template = ({
 
 export const args = {
   variant: "secondary",
-  href: "#"
+  href: "#",
+  menuIsOpen: true
 };
 
 export const parameters = {};
