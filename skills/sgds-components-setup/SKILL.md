@@ -1,6 +1,6 @@
 ---
 name: sgds-components-setup
-description: "Setup and framework integration instructions for using SGDS web components. Apply this skill whenever a user asks about installing SGDS components, integrating with React, Vue, or Angular, React 19 vs React 18 component usage, importing individual components, or accessing component methods via refs."
+description: "Setup and framework integration for SGDS web components. Apply this skill whenever a user asks about installing SGDS, integrating with React, Vue, Angular, or Next.js, React 19 vs React ≤18 event handling differences, importing individual components, or accessing component methods via refs. Also apply when a user hits hydration errors or SSR crashes with SGDS in Next.js, gets 'unknown custom element' warnings in Vue, sees events not firing in React, or can't figure out why SGDS component behaviour differs from the docs."
 metadata:
   author: singapore-design-system
   version: "0.0.0"
@@ -83,16 +83,7 @@ function App() {
 }
 ```
 
-React wrapper event naming: `sgds-blur` → `onSgdsBlur`, `sgds-change` → `onSgdsChange` (prefix `on`, camelCase).
-
-| Web component event | React ≤18 wrapper prop |
-|---|---|
-| `sgds-change` | `onSgdsChange` |
-| `sgds-blur` | `onSgdsBlur` |
-| `sgds-focus` | `onSgdsFocus` |
-| `sgds-toggle` | `onSgdsToggle` |
-| `sgds-after-show` | `onSgdsAfterShow` |
-| `sgds-after-hide` | `onSgdsAfterHide` |
+React wrapper event naming: `sgds-blur` → `onSgdsBlur`, `sgds-change` → `onSgdsChange` (prefix `on`, camelCase applies to every hyphen-separated word).
 
 **Accessing component methods in React ≤18** (via `useRef`):
 
@@ -163,20 +154,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 <sgds-masthead suppressHydrationWarning></sgds-masthead>
 ```
 
-**Step 4 — TypeScript support** — add `types.d.ts` at the project root:
-
-```ts
-import * as React from 'react';
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'sgds-masthead': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-      // Add other SGDS components as needed
-    }
-  }
-}
-```
+**Step 4 — TypeScript support** — add a `types.d.ts` at the project root declaring each `sgds-*` tag in `JSX.IntrinsicElements` as `React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>`.
 
 **Events in Next.js** — due to hydration timing, wire custom events via `useEffect` + `addEventListener` rather than declarative React props:
 
@@ -215,4 +193,39 @@ Angular supports web components natively via `CUSTOM_ELEMENTS_SCHEMA` — no SGD
 
 ---
 
-**For AI agents**: The key SGDS-specific decision is React version and rendering mode. React 19+ (CSR, e.g. Vite) uses the native `<sgds-*>` tag with a direct import. Next.js (SSR) requires the `SgdsLibraryLoader` pattern with `useEffect` + dynamic import — do NOT use a direct top-level import in Next.js. React ≤18 requires the SGDS React wrapper package. Vue and Angular use native web components — their setup is standard web component integration, not SGDS-specific.
+## Troubleshooting Component Behaviour
+
+When a component behaves unexpectedly — wrong event fired, property not reflected, slot not rendering — read the compiled source directly. It contains full method bodies, event logic, internal defaults, and edge-case handling that no documentation captures.
+
+**Always check `node_modules` first** — if `node_modules/@govtechsg/sgds-web-component` exists, read from there:
+
+```
+node_modules/@govtechsg/sgds-web-component/components/Accordion/sgds-accordion.js
+node_modules/@govtechsg/sgds-web-component/components/Accordion/sgds-accordion-item.js
+node_modules/@govtechsg/sgds-web-component/components/Accordion/sgds-accordion.d.ts
+```
+
+Replace `Accordion/sgds-accordion` with the relevant component folder and file name. The `.js` file contains the full implementation; the `.d.ts` file lists all properties, types, events, slots, and JSDoc descriptions.
+
+**Only if `node_modules` is absent (CDN users)** — browse the source for the exact version in use on the npm package page:
+
+```
+https://www.npmjs.com/package/@govtechsg/sgds-web-component/v/{version}?activeTab=code
+```
+
+Example for `v3.4.0-rc.4`:
+```
+https://www.npmjs.com/package/@govtechsg/sgds-web-component/v/3.4.0-rc.4?activeTab=code
+```
+
+Navigate into `components/{ComponentName}/` to find the same `.js` and `.d.ts` files. Ask the user for their version if unknown — it is visible in the CDN `<script>` or `<link>` tag URL they are using.
+
+---
+
+**For AI agents**: The primary decision tree is React version + rendering mode:
+- **React 19+ CSR (Vite etc.)**: native `<sgds-*>` tag + direct import, event props lowercase with `on` prefix (`onsgds-change`)
+- **Next.js (SSR)**: `SgdsLibraryLoader` + `useEffect` dynamic import — never a top-level import; wire events via `addEventListener` in `useEffect`
+- **React ≤18**: SGDS React wrapper package, camelCase event props (`onSgdsChange`)
+- **Vue / Angular**: standard web component integration; SGDS-specific detail for Vue is `tag.startsWith("sgds-")` to suppress unknown element warnings
+
+When a user reports unexpected component behaviour (wrong event, property not reflecting, slot not rendering), direct them to read the compiled source before trying anything else — see the **Troubleshooting Component Behaviour** section above.
