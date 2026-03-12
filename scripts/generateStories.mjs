@@ -128,7 +128,7 @@ ${methodsMeta
   const csfFilePath = path.join(storiesDir, `${key}.stories.js`);
   const componentTagName = `sgds-${pascalToKebab(key)}`;
   const storiesSource = `
-    import { Template, args, parameters } from "../templates/${key}/basic.js";
+    import { Template, args, parameters, play } from "../templates/${key}/basic.js";
 
     export default {
       title: 'Components/${key}',
@@ -141,6 +141,7 @@ ${methodsMeta
     name: "Basic",
     args: args,
     parameters: parameters,
+    ...(typeof play === 'function' ? { play } : {}),
     }
   `;
   fs.writeFileSync(csfFilePath, storiesSource, "utf8");
