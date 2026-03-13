@@ -4,30 +4,229 @@
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
 
 <style>
-  .container {
-    max-width: 1200px;
-    margin: 0 auto 36px auto;
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 24px;
   }
 
-  .d-flex-row {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto 48px auto;
+  }
+
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--sgds-border-color-default);
+  }
+
+  .example-group {
     display: flex;
-    gap: 8px;
     flex-direction: column;
+    gap: 24px;
+    margin-bottom: 32px;
+    padding: 20px;
+    background-color: var(--sgds-surface-default);
+    border-radius: var(--sgds-border-radius-md);
+    border: 1px solid var(--sgds-border-color-default);
+  }
+
+  .example-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--sgds-color-subtle);
+    margin-bottom: 8px;
+  }
+
+  .example-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .example-item {
+    padding: 16px;
+    background-color: var(--sgds-bg-default);
+    border-radius: var(--sgds-border-radius-sm);
+    border: 1px solid var(--sgds-border-color-muted);
   }
 </style>
+
 <div class="container">
-  <h2>Pagination - Default samples</h2>
-  <div class="d-flex-row">
-    <sgds-pagination></sgds-pagination>
-    <sgds-pagination dataLength="1"></sgds-pagination>
-    <sgds-pagination dataLength="20" itemsPerPage="10" currentPage="1"></sgds-pagination>
-    <sgds-pagination dataLength="20" itemsPerPage="8" currentPage="1"></sgds-pagination>
-    <sgds-pagination dataLength="20" itemsPerPage="5" currentPage="4"></sgds-pagination>
-    <sgds-pagination dataLength="20" itemsPerPage="4" currentPage="4"></sgds-pagination>
-    <sgds-pagination dataLength="18" itemsPerPage="3" currentPage="4"></sgds-pagination>
-    <sgds-pagination dataLength="20" itemsPerPage="3" currentPage="4"></sgds-pagination>
-    <sgds-pagination dataLength="16" itemsPerPage="2"></sgds-pagination>
-    <sgds-pagination dataLength="18" itemsPerPage="2"></sgds-pagination>
-    <sgds-pagination dataLength="20" itemsPerPage="2"></sgds-pagination>
+  <!-- Default Variant -->
+  <div class="section">
+    <h2 class="section-title">Default Variant</h2>
+
+    <div class="example-group">
+      <div>
+        <div class="example-label">Standard pagination with 20 items (5 per page)</div>
+        <sgds-pagination dataLength="20" itemsPerPage="5"></sgds-pagination>
+      </div>
+    </div>
+
+    <div class="example-group">
+      <div>
+        <div class="example-label">Pagination with multiple pages (100 items, 10 per page)</div>
+        <sgds-pagination dataLength="100" itemsPerPage="10"></sgds-pagination>
+      </div>
+    </div>
+
+    <div class="example-group">
+      <div class="example-label">Various configurations</div>
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <div>
+          <div class="example-label" style="margin-bottom: 4px">20 items, 10 per page</div>
+          <sgds-pagination dataLength="20" itemsPerPage="10" currentPage="1"></sgds-pagination>
+        </div>
+        <div>
+          <div class="example-label" style="margin-bottom: 4px">20 items, 8 per page</div>
+          <sgds-pagination dataLength="20" itemsPerPage="8" currentPage="1"></sgds-pagination>
+        </div>
+        <div>
+          <div class="example-label" style="margin-bottom: 4px">20 items, 5 per page, current page 4</div>
+          <sgds-pagination dataLength="20" itemsPerPage="5" currentPage="4"></sgds-pagination>
+        </div>
+        <div>
+          <div class="example-label" style="margin-bottom: 4px">20 items, 4 per page, current page 4</div>
+          <sgds-pagination dataLength="20" itemsPerPage="4" currentPage="4"></sgds-pagination>
+        </div>
+        <div>
+          <div class="example-label" style="margin-bottom: 4px">18 items, 3 per page, current page 4</div>
+          <sgds-pagination dataLength="18" itemsPerPage="3" currentPage="4"></sgds-pagination>
+        </div>
+        <div>
+          <div class="example-label" style="margin-bottom: 4px">20 items, 3 per page, current page 4</div>
+          <sgds-pagination dataLength="20" itemsPerPage="3" currentPage="4"></sgds-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Number Variant -->
+  <div class="section">
+    <h2 class="section-title">Number Variant</h2>
+    <div class="example-group">
+      <div>
+        <div class="example-label">Shows only page numbers without navigation buttons</div>
+        <sgds-pagination variant="number" dataLength="50" itemsPerPage="10"></sgds-pagination>
+      </div>
+    </div>
+    <div class="example-group">
+      <div>
+        <div class="example-label">Number variant with different pagination sizes</div>
+        <div style="display: flex; flex-direction: column; gap: 16px">
+          <div>
+            <div class="example-label" style="margin-bottom: 4px">30 items, 5 per page</div>
+            <sgds-pagination variant="number" dataLength="30" itemsPerPage="5"></sgds-pagination>
+          </div>
+          <div>
+            <div class="example-label" style="margin-bottom: 4px">100 items, 20 per page</div>
+            <sgds-pagination variant="number" dataLength="100" itemsPerPage="20"></sgds-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button Variant -->
+  <div class="section">
+    <h2 class="section-title">Button Variant</h2>
+    <div class="example-group">
+      <div>
+        <div class="example-label">Icon button navigation only</div>
+        <sgds-pagination variant="button" dataLength="30" itemsPerPage="10" navigation="icon-button"></sgds-pagination>
+      </div>
+    </div>
+    <div class="example-group">
+      <div>
+        <div class="example-label">Text button navigation</div>
+        <sgds-pagination variant="button" dataLength="30" itemsPerPage="10" navigation="button"></sgds-pagination>
+      </div>
+    </div>
+  </div>
+
+  <!-- Description Variant -->
+  <div class="section">
+    <h2 class="section-title">Description Variant</h2>
+    <div class="example-group">
+      <div>
+        <div class="example-label">Shows page number as description with icon button navigation</div>
+        <sgds-pagination
+          variant="description"
+          dataLength="50"
+          itemsPerPage="10"
+          navigation="icon-button"
+        ></sgds-pagination>
+      </div>
+    </div>
+    <div class="example-group">
+      <div>
+        <div class="example-label">Description variant with text buttons</div>
+        <sgds-pagination variant="description" dataLength="50" itemsPerPage="10" navigation="button"></sgds-pagination>
+      </div>
+    </div>
+  </div>
+
+  <!-- Size Variant -->
+  <div class="section">
+    <h2 class="section-title">Size Variants</h2>
+    <div class="example-group">
+      <div>
+        <div class="example-label">Small size (sm)</div>
+        <sgds-pagination size="sm" dataLength="40" itemsPerPage="10"></sgds-pagination>
+      </div>
+    </div>
+    <div class="example-group">
+      <div>
+        <div class="example-label">Medium size (md) - default</div>
+        <sgds-pagination size="md" dataLength="40" itemsPerPage="10"></sgds-pagination>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edge Cases -->
+  <div class="section">
+    <h2 class="section-title">Edge Cases</h2>
+    <div class="example-group">
+      <div>
+        <div class="example-label">Single page (1 item, 10 per page)</div>
+        <sgds-pagination dataLength="1"></sgds-pagination>
+      </div>
+    </div>
+    <div class="example-group">
+      <div>
+        <div class="example-label">Empty data (0 items)</div>
+        <sgds-pagination dataLength="0"></sgds-pagination>
+      </div>
+    </div>
+    <div class="example-group">
+      <div>
+        <div class="example-label">Small dataset with few pages</div>
+        <sgds-pagination dataLength="16" itemsPerPage="2"></sgds-pagination>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Types -->
+  <div class="section">
+    <h2 class="section-title">Navigation Types</h2>
+    <div class="example-group">
+      <div>
+        <div class="example-label">Icon button navigation (default)</div>
+        <sgds-pagination navigation="icon-button" dataLength="50" itemsPerPage="10"></sgds-pagination>
+      </div>
+    </div>
+    <div class="example-group">
+      <div>
+        <div class="example-label">Text button navigation</div>
+        <sgds-pagination navigation="button" dataLength="50" itemsPerPage="10"></sgds-pagination>
+      </div>
+    </div>
   </div>
 </div>

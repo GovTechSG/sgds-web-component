@@ -2,7 +2,7 @@ import { html } from "lit";
 
 export default {
   title: "Utilities/Spacing/Margin",
-  tags: ["autodocs"]
+  tags: ["!autodocs"]
 };
 
 const MARGIN_SCALE = [
@@ -34,9 +34,7 @@ const MarginTableRow = item => {
     <sgds-table-row>
       <sgds-table-cell>
         <div class="sgds:flex sgds:items-center sgds:gap-xs">
-          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-            >${item.class}</code
-          >
+          <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">${item.class}</code>
           <button
             class="sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0"
             @click="${e => copyToClipboard(item.class, e.target.closest("button"))}"
@@ -47,12 +45,10 @@ const MarginTableRow = item => {
         </div>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
-          >${item.variable}</code
-        >
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">${item.variable}</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">${item.value}</code>
+        <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">${item.value}</code>
       </sgds-table-cell>
       <sgds-table-cell>
         <div class="sgds:bg-primary-default sgds:w-40 sgds:h-40" style="position: relative;">

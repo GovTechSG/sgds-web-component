@@ -3,6 +3,7 @@
   width: 100%;
   background-color: var(--sgds-surface-fixed-dark);
 }
+
 /* Mobile */
 .banner {
   display: flex;
@@ -48,25 +49,30 @@
 .d-none {
   display: none;
 }
+
 sgds-close-button {
   position: absolute;
   right: 20px;
   top: 10px;
 }
+
 /* Laptop to Desktop */
 @media (min-width: 1024px) {
   sgds-close-button {
     position: static;
   }
+
   .pagination {
     position: static;
   }
+
   .banner {
     padding-left: var(--sgds-mainnav-padding-x);
     padding-right: var(--sgds-mainnav-padding-x);
     max-width: var(--sgds-mainnav-max-width, 1440px);
     margin: auto;
   }
+  
   :host([fluid]) .banner {
     max-width: none;
   }

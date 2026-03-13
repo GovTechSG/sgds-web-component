@@ -1,0 +1,60 @@
+{
+  "skill_name": "sgds-components-button",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I need a delete button that looks dangerous — red color, clearly destructive. How do I style sgds-button for a destructive action?",
+      "expected_output": "Uses tone=\"danger\" (not variant=\"danger\" which is deprecated since v3.5.6). Shows <sgds-button tone=\"danger\"> with optional variant combinations.",
+      "files": [],
+      "expectations": [
+        "Response uses tone=\"danger\" as the primary approach for destructive styling",
+        "Response does NOT recommend variant=\"danger\" as the primary approach (it is deprecated since v3.5.6)",
+        "Response shows a working code example with tone=\"danger\""
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "My save button triggers an API call. How do I stop the user from clicking it multiple times while the request is in flight?",
+      "expected_output": "Uses the loading boolean attribute on sgds-button to show a spinner and block interaction during the async operation. Sets btn.loading = true before the async call and resets to false on completion.",
+      "files": [],
+      "expectations": [
+        "Response uses the loading attribute/property on sgds-button to block re-clicks",
+        "Response shows setting loading = true before the async call and loading = false after",
+        "Response does NOT suggest using disabled as the primary approach for async in-progress state"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "I have a form dialog with a Cancel and a Confirm button. Which side should the primary Confirm button go — left or right?",
+      "expected_output": "Primary action goes on the RIGHT in a horizontal button group, following SGDS button group convention. Cancel/secondary is on the left.",
+      "files": [],
+      "expectations": [
+        "Response places the primary action (Confirm) on the right side",
+        "Response places the secondary action (Cancel) on the left side",
+        "Response shows a code example using sgds:flex sgds:gap-2 sgds:justify-end or equivalent layout with primary button last in DOM order"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "I want a ghost-style destructive button — no background fill, but text and border in red to indicate danger. How do I create this with sgds-button?",
+      "expected_output": "Combines variant=\"ghost\" (or variant=\"outline\") with tone=\"danger\" to get a low-emphasis destructive button.",
+      "files": [],
+      "expectations": [
+        "Response combines a non-filled variant (ghost or outline) with tone=\"danger\"",
+        "Response shows a working code example like <sgds-button variant=\"ghost\" tone=\"danger\"> or <sgds-button variant=\"outline\" tone=\"danger\">",
+        "Response does NOT recommend using only variant=\"danger\" without tone to achieve the ghost/outline destructive look"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I want a button that only shows an icon with no label text. Should I use sgds-button with an icon slot, or is there something else?",
+      "expected_output": "Recommends <sgds-icon-button> as the correct component for icon-only buttons, rather than sgds-button with an icon slot.",
+      "files": [],
+      "expectations": [
+        "Response recommends <sgds-icon-button> for icon-only buttons",
+        "Response does NOT suggest using <sgds-button> with only an icon slot as the recommended approach",
+        "Response explains why sgds-icon-button is the right choice (purpose-built for icon-only)"
+      ]
+    }
+  ]
+}

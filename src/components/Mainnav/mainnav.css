@@ -1,6 +1,7 @@
 :host {
   z-index: 1200;
   position: relative;
+  display: block;
 }
 
 nav {
@@ -15,7 +16,7 @@ nav {
   justify-content: space-between;
   gap: var(--sgds-gap-xs);
   position: relative;
-  padding: 0px var(--sgds-mainnav-padding-x);
+  padding: 0px var(--sgds-mainnav-mobile-padding-x);
   width: 100%;
   max-width: var(--sgds-mainnav-max-width, 1440px);
   min-height: 80px;
@@ -24,12 +25,6 @@ nav {
 
 :host([fluid]) .navbar {
   max-width: none;
-}
-
-@media screen and (max-width: 767px) {
-  .navbar {
-    padding: 0px var(--sgds-mainnav-mobile-padding-x);
-  }
 }
 
 .navbar-brand {
@@ -53,10 +48,6 @@ nav {
   margin-bottom: 0;
 }
 
-nav > .navbar-body .navbar-nav {
-  height: 100dvh;
-}
-
 nav > .navbar-body {
   position: absolute;
   z-index: 2000;
@@ -66,6 +57,12 @@ nav > .navbar-body {
   border-top: var(--sgds-border-width-1) solid var(--sgds-border-color-translucent);
   box-shadow: 0px 2px 2px 0px rgba(14, 14, 14, 0.08);
   transition: transform 0.2s ease-in-out;
+}
+
+nav > .navbar-body .navbar-nav {
+  height: 100dvh;
+  max-width: var(--sgds-mainnav-max-width, 1440px);
+  margin: auto;
 }
 
 nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdown)) {
@@ -147,6 +144,10 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   }
 }
 @media (min-width: 1024px) {
+  .navbar {
+    padding: 0px var(--sgds-mainnav-padding-x);
+  }
+
   .navbar-expand-lg {
     flex-wrap: nowrap;
     justify-content: flex-start;

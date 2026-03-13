@@ -1,4 +1,48 @@
+## v3.14.0 (2026-03-11)
+
+### Feat
+
+- **Utility**: responsive tokens [run-chromatic][skip-cd] (#564)
+- **Utility**: responsive tokens
+
+### Fix
+- **Mainnav, Masthead, SystemBanner**: update the alignment of the header components
+- **Pagination**: active color and button color[run-chromatic]  (#567)
+- **Footer** replace container query with media query to resolve responsive issue [run-chromatic] (#563)
+- **Footer** replace container query with media query to resolve responsive issue
+- **Pagination**: active color and button color
+
+## v3.13.1 (2026-03-06)
+
+### Fix
+
+- **Mainnav**: display issue in safari [run-chromatic] [skip-cd] (#562)
+- **Mainnav**: display issue in safari
+
+## v3.13.0 (2026-03-05)
+
+### Feat
+
+- **Utility**: new responsive line height [skip-cd][run-chromatic] (#560)
+- **Utility**: responsive line height tokens added
+
+### Fix
+
+- **Drawer**: make close button sticky in all positions
+- **Drawer**: make footer sticky and apply paddings
+- **Masthead**: remove role banner and aria label for accessibility fix [run-chromatic] [skip-cd] (#561)
+- **Masthead**: remove role banner and aria label for accessibilityfix
+- **Utility**: missing rounded-3-xl tokens [skip-cd][run-chromatic] (#558)
+- **Utility**: missing rounded-3-xl mappings
+
+### Refactor
+
+- **Drawer**: container paddings and examples [skip-cd][run-chromatic] (#556)
+- **Drawer**: move padding from outer container to inner header and body container respectively
+
 ## v3.12.0 (2026-03-02)
+
+## 3.12.0 (2026-03-02)
 
 ### Feat
 

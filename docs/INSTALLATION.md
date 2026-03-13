@@ -8,7 +8,7 @@ Install SGDS web components locally with the following command
 
 ```js
 
-npm install @govtechsg/sgds-web-component@3.11.0
+npm install @govtechsg/sgds-web-component@3.13.1
 
 ```
 
@@ -35,18 +35,6 @@ Once imported, the web components can be used throughout the project. You may im
 
 Are you a react user? If so, skip to the <a href="/docs/frameworks-react--docs#importing-the-library" target="_self">react import instructions </a>
 
-#### Importing individual component
-
-```js
-// import global css first (once)
-import "@govtechsg/sgds-web-component/themes/day.css";
-import "@govtechsg/sgds-web-component/css/sgds.css";
-//import button only
-import "@govtechsg/sgds-web-component/components/Button";
-```
-
-#### Importing all components
-
 ```js
 import "@govtechsg/sgds-web-component/themes/day.css";
 import "@govtechsg/sgds-web-component/css/sgds.css";
@@ -65,14 +53,14 @@ This method registers all SGDS elements up front in the Custom Elements Registry
 
 ```js
 // Load global css file
-<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.11.0/themes/day.css' rel='stylesheet' type='text/css' />
-<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.11.0/css/sgds.css' rel='stylesheet' type='text/css' />
+<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.13.1/themes/day.css' rel='stylesheet' type='text/css' />
+<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.13.1/css/sgds.css' rel='stylesheet' type='text/css' />
 
 // it is recommended to load a particular version when using cdn e.g. https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@1.0.2
-<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.11.0" async crossorigin="anonymous" integrity="sha384-bI5zkE4BvX6SIRHTfbeXInSFabZ5DKy/wl/VBn+PhGOxhEvJ5GEI/xExwe0UoO4/"></script>
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.13.1" async crossorigin="anonymous" integrity="sha384-GjP2slDEYBHtMVkppn6lLWMJTyVLqFp5KVA5DlcaAu1IGHW6OEhtkLjIiKNfsMq1"></script>
 
 //or load a single component e.g. Masthead
-<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.11.0/components/Masthead/index.umd.min.js" async crossorigin="anonymous" integrity="sha384-1wUwIXJHnxYMzBRufDBYBCODFgRySae3vrH2Ysy8yy1qxXlZcFgh+EaiMGH48y2s"></script>
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.13.1/components/Masthead/index.umd.min.js" async crossorigin="anonymous" integrity="sha384-h94p80kejLk2ZnRBUzRN2VvXNVjuG8iE8FnwXCMZoKou77/Ru0QtYSHhBOuODfeq"></script>
 
 ```
 
