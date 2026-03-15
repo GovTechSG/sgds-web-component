@@ -1,4 +1,4 @@
-import { html, PropertyValues } from "lit";
+import { html } from "lit";
 import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -15,6 +15,10 @@ import {
 import { watch } from "../../utils/watch";
 import { SidebarElement } from "../../base/sidebar-element";
 import SgdsSidebarGroup from "./sgds-sidebar-group";
+import SgdsIconButton from "../IconButton/sgds-icon-button";
+import { SM_BREAKPOINT } from "../../utils/breakpoints";
+
+const SGDS_SIDEBAR_GROUP = "sgds-sidebar-group";
 
 /**
  * @summary Sidebar is a collapsible navigation component that displays menu items and groups.
@@ -34,18 +38,21 @@ import SgdsSidebarGroup from "./sgds-sidebar-group";
  * - Enter/Space: Activate focused item or toggle group
  * - Tab: Standard focus management to interactive elements
  *
- * @slot - Insert sgds-sidebar-item, sgds-sidebar-group, and sgds-sidebar-section elements
- * @slot brandName - Insert brand/logo content in sidebar header
+ * @slot default - Insert sgds-sidebar-item, sgds-sidebar-group, and sgds-sidebar-section elements
+ * @slot top - Insert brand/logo content in sidebar header
+ * @slot bottom - Insert content in sidebar footer
  *
  * @fires sgds-select - Emitted when a sidebar item or group is selected.
  *   Event detail: { activeItem: string } - name of the selected item
  *
  */
 
-const SGDS_SIDEBAR_GROUP = "sgds-sidebar-group";
 export class SgdsSidebar extends SgdsElement {
   static styles = [...SgdsElement.styles, sidebarStyle];
 
+  static dependencies = {
+    "sgds-icon-button": SgdsIconButton
+  };
   /**
    * Controls whether the sidebar is collapsed or expanded.
    * When true, the sidebar is in collapsed state showing only icons.
@@ -97,6 +104,10 @@ export class SgdsSidebar extends SgdsElement {
   @queryAssignedElements()
   private _defaultNodes!: SidebarElement[];
 
+  /** @internal */
+  @state()
+  private _isMobile = false;
+
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute("role", "navigation");
@@ -107,13 +118,24 @@ export class SgdsSidebar extends SgdsElement {
       this._handleActive();
       document.addEventListener("click", this._handleClickOutOfElement);
     });
+
+    window.addEventListener("resize", this._handleResize.bind(this));
+    this._handleResize();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener("click", this._handleClickOutOfElement);
+    window.removeEventListener("resize", this._handleResize.bind(this));
   }
 
+  /**
+   * Watch handler for the collapsed property.
+   * Syncs the internal collapsed state with the property value.
+   * Triggers re-render and updates all child items' collapsed styling.
+   * @private
+   * @returns {void}
+   */
   @watch("collapsed")
   _handleCollapsed() {
     this._sidebarCollapsed = this.collapsed;
@@ -167,6 +189,13 @@ export class SgdsSidebar extends SgdsElement {
     }
   }
 
+  /**
+   * Watch handler for the active property.
+   * Finds and sets the active item by name from the sidebar hierarchy.
+   * Clears active state when active property is empty.
+   * @private
+   * @returns {void}
+   */
   @watch("active")
   _handleActive() {
     // Return early if active is empty
@@ -178,6 +207,13 @@ export class SgdsSidebar extends SgdsElement {
     this._sidebarActiveItem = this._getActiveChild();
   }
 
+  /**
+   * Recursively searches the sidebar hierarchy for an item matching the active name.
+   * Traverses through all nested levels to find the target element.
+   * Used to support programmatic selection of deeply nested items.
+   * @private
+   * @returns {SidebarElement | null} The matching sidebar element or null if not found
+   */
   private _getActiveChild() {
     const findByName = (elements: SidebarElement[]): SidebarElement | null => {
       for (const element of elements) {
@@ -193,6 +229,20 @@ export class SgdsSidebar extends SgdsElement {
     };
 
     return findByName(this._defaultNodes);
+  }
+  /**
+   * Handles window resize events to manage responsive behavior.
+   * Automatically collapses sidebar on mobile devices (width <= SM_BREAKPOINT).
+   * Expands sidebar on larger screens.
+   * @private
+   * @returns {void}
+   */ private _handleResize() {
+    const isMobile = window.innerWidth <= SM_BREAKPOINT;
+
+    if (isMobile !== this._isMobile) {
+      this._isMobile = isMobile;
+      this.collapsed = this._isMobile;
+    }
   }
 
   /**
@@ -287,15 +337,23 @@ export class SgdsSidebar extends SgdsElement {
 
   /**
    * Toggles the sidebar between collapsed and expanded states.
-   * Updates the collapsed property and emits sgds-sidebar-toggle event.
-   *
-   * @emits sgds-sidebar-toggle Emitted with detail.collapsed indicating new state
+   * Updates the collapsed property to show/hide labels and adjust item spacing.
+   * Called when user clicks the collapse/expand button in the sidebar header.
+   * @private
    * @returns {void}
    */
   private toggleCollapsed() {
     this.collapsed = !this.collapsed;
   }
 
+  /**
+   * Handles clicks outside the sidebar to close the drawer overlay.
+   * Closes the nested items drawer when user clicks outside the sidebar.
+   * Maintains drawer visibility when clicking within sidebar boundaries.
+   * @private
+   * @param {MouseEvent} e - The click event from the document
+   * @returns {void}
+   */
   private _handleClickOutOfElement = (e: MouseEvent) => {
     if (!this._sidebarActiveGroup) return;
 
@@ -313,40 +371,56 @@ export class SgdsSidebar extends SgdsElement {
           "sidebar--collapsed": this._sidebarCollapsed
         })}
       >
-        <div class="sidebar-wrapper">
-          <div class="sidebar-header">
-            <div class="sidebar-brand-name">
-              <slot name="brandName"></slot>
+        <div class="sidebar-main">
+          <div class="sidebar-wrapper">
+            <div class="sidebar-top">
+              <div class="sidebar-brand-name">
+                <slot name="top"></slot>
+              </div>
+
+              <sgds-icon-button
+                name=${this._sidebarCollapsed ? "sidebar-expand" : "sidebar-collapse"}
+                variant="ghost"
+                tone="neutral"
+                size="sm"
+                @click=${this.toggleCollapsed}
+                aria-label=${this._sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+                aria-expanded=${!this._sidebarCollapsed}
+              ></sgds-icon-button>
             </div>
 
-            <sgds-icon-button
-              name=${this._sidebarCollapsed ? "sidebar-expand" : "sidebar-collapse"}
-              variant="ghost"
-              tone="neutral"
-              size="sm"
-              @click=${this.toggleCollapsed}
-              aria-label=${this._sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-              aria-expanded=${!this._sidebarCollapsed}
-            ></sgds-icon-button>
-          </div>
+            <nav
+              class="sidebar-content"
+              role="navigation"
+              aria-label="Main navigation"
+              aria-activedescendant=${this._sidebarActiveItem?.name || ""}
+            >
+              <slot></slot>
+            </nav>
 
-          <nav class="sidebar-content" role="navigation" aria-label="Main navigation" aria-activedescendant=${
-            this._sidebarActiveItem?.name || ""
-          }>
-            <slot></slot>
-          </nav>
+            <slot name="bottom"></slot>
+          </div>
         </div>
 
-          <div
-            class=${classMap({
-              "sidebar-nested-overlay": true,
-              show: this._showDrawer
-            })}
-            role="dialog"
-            aria-label=${this._sidebarActiveGroup?.title ? `Nested items for ${this._sidebarActiveGroup.title}` : ""}
-          >
-            ${this._drawerItems}
-          </div>
+        <div
+          class=${classMap({
+            "sidebar-nested-overlay": true,
+            show: this._showDrawer
+          })}
+          role="dialog"
+          aria-label=${this._sidebarActiveGroup?.title ? `Nested items for ${this._sidebarActiveGroup.title}` : ""}
+        >
+          <sgds-icon-button
+            name="chevron-left"
+            variant="ghost"
+            tone="neutral"
+            size="sm"
+            @click=${() => (this._showDrawer = false)}
+            aria-label=${"Close drawer"}
+            aria-expanded=${this._showDrawer}
+          ></sgds-icon-button>
+
+          ${this._drawerItems}
         </div>
       </div>
     `;

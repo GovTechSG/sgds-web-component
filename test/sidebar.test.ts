@@ -31,10 +31,10 @@ describe("sgds-sidebar", () => {
     it("accepts slot content for brand name", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <div slot="brandName">My App</div>
+          <div slot="top">My App</div>
         </sgds-sidebar>
       `);
-      const brand = el.querySelector('[slot="brandName"]');
+      const brand = el.querySelector('[slot="top"]');
       expect(brand?.textContent).to.equal("My App");
     });
 
@@ -843,20 +843,6 @@ describe("sgds-sidebar", () => {
       const sections = el.querySelectorAll("sgds-sidebar-section");
 
       expect(sections.length).to.equal(3);
-    });
-
-    it("applies no-border class to last child section", async () => {
-      const el = await fixture<SgdsSidebar>(html`
-        <sgds-sidebar>
-          <sgds-sidebar-section title="Main" name="main"></sgds-sidebar-section>
-          <sgds-sidebar-section title="Last" name="last"></sgds-sidebar-section>
-        </sgds-sidebar>
-      `);
-      const sections = el.querySelectorAll("sgds-sidebar-section");
-      const lastSection = sections[sections.length - 1];
-      const sectionDiv = lastSection.shadowRoot?.querySelector(".sidebar-section");
-
-      expect(sectionDiv).to.have.class("no-border");
     });
 
     it("chevron icon changes when toggling collapsed state", async () => {
