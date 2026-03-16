@@ -137,11 +137,11 @@ ${methodsMeta
     }
 
     export const Basic = {
-    render: Template.bind({}),
-    name: "Basic",
-    args: args,
-    parameters: parameters,
-    ...(typeof play === 'function' ? { play } : {}),
+      render: Template.bind({}),
+      name: "Basic",
+      args,
+      parameters,
+      ...(play ? { play } : {}),
     }
   `;
   fs.writeFileSync(csfFilePath, storiesSource, "utf8");
