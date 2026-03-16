@@ -65,25 +65,101 @@ Only fall back to raw pixel utilities (`sgds:leading-16` … `sgds:leading-64`) 
 ## Quick Decision Guide
 
 **Styling a hero/display heading?**
-→ `sgds:text-display-lg` + `sgds:font-bold` + `sgds:leading-2-xl` + `sgds:tracking-tight`
 
-**Styling a section heading (H2/H3)?**
-→ `sgds:text-heading-lg` / `sgds:text-heading-md` + `sgds:font-semibold` + `sgds:leading-lg`
+Display tokens are **larger than `h1`** at desktop breakpoints. Using `<h1>` risks `reboot.css` overriding the font size. Use `<div role="heading" aria-level="1">` instead.
+
+| Token | Classes |
+|-------|---------|
+| `sgds-display-lg-bold` | `sgds:text-display-lg sgds:font-bold sgds:leading-3-xl sgds:tracking-tighter` |
+| `sgds-display-lg-light` | `sgds:text-display-lg sgds:font-light sgds:leading-3-xl sgds:tracking-tighter` |
+| `sgds-display-md-bold` *(default)* | `sgds:text-display-md sgds:font-bold sgds:leading-2-xl sgds:tracking-tighter` |
+| `sgds-display-md-light` | `sgds:text-display-md sgds:font-light sgds:leading-2-xl sgds:tracking-tighter` |
+| `sgds-display-sm-bold` | `sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter` |
+| `sgds-display-sm-light` | `sgds:text-display-sm sgds:font-light sgds:leading-xl sgds:tracking-tighter` |
+
+**Styling a section heading (H1–H4)?**
+
+Use native `<h1>`–`<h4>` elements — `reboot.css` font sizes for these match the SGDS heading tokens exactly, so no override risk.
+
+| Token | H-level | Classes |
+|-------|---------|---------|
+| `sgds-heading-xl-bold` | H1 | `sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight` |
+| `sgds-heading-xl-light` | H1 | `sgds:text-heading-xl sgds:font-light sgds:leading-xl sgds:tracking-tight` |
+| `sgds-heading-lg-bold` | H2 | `sgds:text-heading-lg sgds:font-bold sgds:leading-lg sgds:tracking-tight` |
+| `sgds-heading-lg-light` | H2 | `sgds:text-heading-lg sgds:font-light sgds:leading-lg sgds:tracking-tight` |
+| `sgds-heading-md-semibold` *(default)* | H3 | `sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight` |
+| `sgds-heading-md-light` | H3 | `sgds:text-heading-md sgds:font-light sgds:leading-md sgds:tracking-tight` |
+| `sgds-heading-sm-semibold` | H4 | `sgds:text-heading-sm sgds:font-semibold sgds:leading-sm sgds:tracking-tight` |
+| `sgds-heading-sm-light` | H4 | `sgds:text-heading-sm sgds:font-light sgds:leading-sm sgds:tracking-tight` |
 
 **Styling a subtitle or lead text?**
-→ `sgds:text-subtitle-md` / `sgds:text-subtitle-sm` + `sgds:font-normal` + `sgds:leading-md`
+
+`reboot.css` sets `h5`/`h6` to specific sizes and weights; using those elements risks overrides. Use `<div role="heading">` with the correct `aria-level` instead.
+
+| Token | `aria-level` | Classes |
+|-------|----------|---------|
+| `sgds-subtitle-md-semibold` *(default)* | 5 | `sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal` |
+| `sgds-subtitle-md-light` | 5 | `sgds:text-subtitle-md sgds:font-light sgds:leading-xs sgds:tracking-normal` |
+| `sgds-subtitle-sm-semibold` | 6 | `sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal` |
+| `sgds-subtitle-sm-light` | 6 | `sgds:text-subtitle-sm sgds:font-light sgds:leading-2-xs sgds:tracking-normal` |
 
 **Styling body content?**
-→ `sgds:text-body-md` + `sgds:font-normal` + `sgds:leading-md`
+
+| Token | Classes |
+|-------|---------|
+| `sgds-body-lg-semibold` | `sgds:text-body-lg sgds:font-semibold sgds:leading-md sgds:tracking-normal` |
+| `sgds-body-lg-regular` | `sgds:text-body-lg sgds:font-normal sgds:leading-md sgds:tracking-normal` |
+| `sgds-body-md-semibold` | `sgds:text-body-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal` |
+| `sgds-body-md-regular` *(default)* | `sgds:text-body-md sgds:font-normal sgds:leading-xs sgds:tracking-normal` |
+| `sgds-body-sm-semibold` | `sgds:text-body-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal` |
+| `sgds-body-sm-regular` | `sgds:text-body-sm sgds:font-normal sgds:leading-2-xs sgds:tracking-normal` |
+
+All body tokens include `sgds-paragraph-spacing-xl` — apply `sgds:mb-xl` between consecutive paragraphs. Use `<div role="paragraph">` rather than `<p>` to avoid any margin resets that `reboot.css` may apply to paragraph elements.
 
 **Styling a form label or UI label?**
-→ `sgds:text-label-sm` / `sgds:text-label-md` + `sgds:font-semibold` + `sgds:leading-sm`
+
+| Token | Use case | Classes |
+|-------|----------|---------|
+| `sgds-label-lg-semibold` | Large button | `sgds:text-label-lg sgds:font-semibold sgds:leading-md sgds:tracking-normal` |
+| `sgds-label-lg-regular` | Labels in components | `sgds:text-label-lg sgds:font-normal sgds:leading-md sgds:tracking-normal` |
+| `sgds-label-md-semibold` | Medium button | `sgds:text-label-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal` |
+| `sgds-label-md-regular` *(default)* | Labels in components | `sgds:text-label-md sgds:font-normal sgds:leading-xs sgds:tracking-normal` |
+| `sgds-label-md-light` | Placeholder text | `sgds:text-label-md sgds:font-light sgds:leading-xs sgds:tracking-normal` |
+| `sgds-label-sm-semibold` | Small button | `sgds:text-label-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal` |
+| `sgds-label-sm-regular` | Timestamp / tag label | `sgds:text-label-sm sgds:font-normal sgds:leading-2-xs sgds:tracking-normal` |
+| `sgds-label-xs-semibold` | Timestamp / tag label | `sgds:text-label-xs sgds:font-semibold sgds:leading-3-xs sgds:tracking-normal` |
+| `sgds-label-xs-regular` | Timestamp / tag label | `sgds:text-label-xs sgds:font-normal sgds:leading-3-xs sgds:tracking-normal` |
+
+In form context: use the component's built-in label attribute first. Only use a `<label>` element if the SGDS component has no built-in label support. Outside form context: use `<div>`.
 
 **Styling a small uppercase badge or overline?**
-→ `sgds:text-overline-md` + `sgds:font-semibold` + `sgds:uppercase` + `sgds:tracking-wider`
+
+| Token | Classes |
+|-------|---------|
+| `sgds-overline-semibold` | `sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase` |
+| `sgds-overline-regular` *(default)* | `sgds:text-overline-md sgds:font-normal sgds:leading-2-xs sgds:tracking-wide sgds:uppercase` |
+
+Always use `<div>` and always apply `sgds:uppercase`. Use for key-value labels and data table header labels.
 
 **Styling a caption or helper text?**
-→ `sgds:text-caption-md` + `sgds:font-normal` + `sgds:leading-xs`
+
+| Token | Classes |
+|-------|---------|
+| `sgds-caption-semibold` | `sgds:text-caption-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal` |
+| `sgds-caption-regular` *(default)* | `sgds:text-caption-md sgds:font-normal sgds:leading-2-xs sgds:tracking-normal` |
+
+Both caption tokens include `sgds-paragraph-spacing-md` — apply `sgds:mb-md` between consecutive captions. Use `<div role="caption">` — the native `<caption>` HTML element is scoped to `<table>` and causes layout issues outside tables.
+
+**Styling a link?**
+
+| Token | Classes |
+|-------|---------|
+| `sgds-link-lg-regular` | `sgds:text-link-lg sgds:font-normal sgds:leading-md sgds:tracking-normal sgds:underline` |
+| `sgds-link-md-regular` *(default)* | `sgds:text-link-md sgds:font-normal sgds:leading-xs sgds:tracking-normal sgds:underline` |
+| `sgds-link-sm-regular` | `sgds:text-link-sm sgds:font-normal sgds:leading-2-xs sgds:tracking-normal sgds:underline` |
+| `sgds-link-xs-regular` | `sgds:text-link-xs sgds:font-normal sgds:leading-3-xs sgds:tracking-normal sgds:underline` |
+
+Always use `<a>` with an `href`. All link tokens are always underlined.
 
 **Styling inline code or a code block?**
 → `sgds:font-mono` + `sgds:text-body-sm` + `sgds:leading-md`
@@ -100,5 +176,16 @@ Only fall back to raw pixel utilities (`sgds:leading-16` … `sgds:leading-64`) 
 
 ---
 
-**For AI Agents**: Always prefer semantic font-size utilities (`sgds:text-display-*`, `sgds:text-heading-*`, `sgds:text-body-*`, etc.) over raw scale utilities (`sgds:text-xs`, `sgds:text-base`, etc.) — only use raw scale when no semantic role matches. Always prefer semantic line-height utilities (`sgds:leading-xs`, `sgds:leading-md`, `sgds:leading-xl`, etc.) over raw pixel utilities (`sgds:leading-16`, `sgds:leading-20`, etc.) — both font-size and line-height semantic tokens are responsive and defined in `responsive.css`. Pair smaller leading with large display text, larger leading with body/reading text. Use `sgds:font-mono` for all code. For heading hierarchy use semibold/bold; for body use normal/medium. Redirect to reference files for exact token values or specific patterns.
+**For AI Agents**: Always prefer semantic font-size utilities (`sgds:text-display-*`, `sgds:text-heading-*`, `sgds:text-body-*`, etc.) over raw scale utilities (`sgds:text-xs`, `sgds:text-base`, etc.) — only use raw scale when no semantic role matches. Always prefer semantic line-height utilities (`sgds:leading-xs`, `sgds:leading-md`, `sgds:leading-xl`, etc.) over raw pixel utilities. Both semantic font-size and line-height tokens are responsive and defined in `responsive.css`.
+
+**Element and ARIA guidance** (critical — `reboot.css` overrides will silently break your styles if ignored):
+- **Display**: use `<div role="heading" aria-level="1">` — display tokens exceed `h1` desktop size and `reboot.css` would constrain the font size
+- **Headings (xl/lg/md/sm)**: use native `<h1>`–`<h4>` — `reboot.css` sizes for these match the SGDS heading tokens exactly
+- **Subtitles**: use `<div role="heading" aria-level="5">` or `aria-level="6"` — avoids `reboot.css` weight overrides on `h5`/`h6`
+- **Body**: use `<div role="paragraph">` — avoids `reboot.css` margin resets on `<p>`
+- **Captions**: use `<div role="caption">` — native `<caption>` is table-scoped
+- **Links**: always use `<a href="...">` with `sgds:underline`
+- **Code**: inline → `<code>`, block → `<pre>`, both with `sgds:font-mono`
+
+Pair smaller leading with large display text, larger leading with body/reading text. Redirect to reference files for exact token values or specific patterns.
 
