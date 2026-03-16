@@ -5,83 +5,55 @@ export default {
 };
 
 const DisplayLgBoldTemplate = () => html`
-  <div
-    role="heading"
-    aria-level="1"
-    class="sgds:text-display-lg sgds:font-bold sgds:leading-3-xl sgds:tracking-tighter"
-  >
-    Display Large Bold
-  </div>
+  <h1 class="sgds:text-display-lg sgds:font-bold sgds:leading-3-xl sgds:tracking-tighter">Display Large Bold</h1>
 `;
 
 const DisplayLgLightTemplate = () => html`
-  <div
-    role="heading"
-    aria-level="1"
-    class="sgds:text-display-lg sgds:font-light sgds:leading-3-xl sgds:tracking-tighter"
-  >
-    Display Large Light
-  </div>
+  <h1 class="sgds:text-display-lg sgds:font-light sgds:leading-3-xl sgds:tracking-tighter">Display Large Light</h1>
 `;
 
 const DisplayMdBoldTemplate = () => html`
-  <div
-    role="heading"
-    aria-level="1"
-    class="sgds:text-display-md sgds:font-bold sgds:leading-2-xl sgds:tracking-tighter"
-  >
-    Display Medium Bold
-  </div>
+  <h1 class="sgds:text-display-md sgds:font-bold sgds:leading-2-xl sgds:tracking-tighter">Display Medium Bold</h1>
 `;
 
 const DisplayMdLightTemplate = () => html`
-  <div
-    role="heading"
-    aria-level="1"
-    class="sgds:text-display-md sgds:font-light sgds:leading-2-xl sgds:tracking-tighter"
-  >
-    Display Medium Light
-  </div>
+  <h1 class="sgds:text-display-md sgds:font-light sgds:leading-2-xl sgds:tracking-tighter">Display Medium Light</h1>
 `;
 
 const DisplaySmBoldTemplate = () => html`
-  <div role="heading" aria-level="1" class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter">
-    Display Small Bold
-  </div>
+  <h1 class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter">Display Small Bold</h1>
 `;
 
 const DisplaySmLightTemplate = () => html`
-  <div role="heading" aria-level="1" class="sgds:text-display-sm sgds:font-light sgds:leading-xl sgds:tracking-tighter">
-    Display Small Light
-  </div>
+  <h1 class="sgds:text-display-sm sgds:font-light sgds:leading-xl sgds:tracking-tighter">Display Small Light</h1>
 `;
 
 export const DisplayLgBold = {
   render: DisplayLgBoldTemplate.bind({}),
-  name: "Display Large Bold"
+  name: "Large Bold"
 };
 
 export const DisplayLgLight = {
   render: DisplayLgLightTemplate.bind({}),
-  name: "Display Large Light"
+  name: "Large Light"
 };
 
 export const DisplayMdBold = {
   render: DisplayMdBoldTemplate.bind({}),
-  name: "Display Medium Bold"
+  name: "Medium Bold"
 };
 
 export const DisplayMdLight = {
   render: DisplayMdLightTemplate.bind({}),
-  name: "Display Medium Light"
+  name: "Medium Light"
 };
 
 export const DisplaySmBold = {
   render: DisplaySmBoldTemplate.bind({}),
-  name: "Display Small Bold"
+  name: "Small Bold"
 };
 
 export const DisplaySmLight = {
   render: DisplaySmLightTemplate.bind({}),
-  name: "Display Small Light"
+  name: "Small Light"
 };

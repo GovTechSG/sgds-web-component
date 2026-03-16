@@ -9,7 +9,7 @@ const LabelLgSemiboldTemplate = () => html`
 `;
 
 const LabelLgRegularTemplate = () => html`
-  <div class="sgds:text-label-lg sgds:font-normal sgds:leading-md sgds:tracking-normal">Label Large Regular</div>
+  <div class="sgds:text-label-lg sgds:font-regular sgds:leading-md sgds:tracking-normal">Label Large Regular</div>
 `;
 
 const LabelMdSemiboldTemplate = () => html`
@@ -17,7 +17,7 @@ const LabelMdSemiboldTemplate = () => html`
 `;
 
 const LabelMdRegularTemplate = () => html`
-  <div class="sgds:text-label-md sgds:font-normal sgds:leading-xs sgds:tracking-normal">Label Medium Regular</div>
+  <div class="sgds:text-label-md sgds:font-regular sgds:leading-xs sgds:tracking-normal">Label Medium Regular</div>
 `;
 
 const LabelMdLightTemplate = () => html`
@@ -29,7 +29,7 @@ const LabelSmSemiboldTemplate = () => html`
 `;
 
 const LabelSmRegularTemplate = () => html`
-  <div class="sgds:text-label-sm sgds:font-normal sgds:leading-2-xs sgds:tracking-normal">Label Small Regular</div>
+  <div class="sgds:text-label-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal">Label Small Regular</div>
 `;
 
 const LabelXsSemiboldTemplate = () => html`
@@ -37,7 +37,7 @@ const LabelXsSemiboldTemplate = () => html`
 `;
 
 const LabelXsRegularTemplate = () => html`
-  <div class="sgds:text-label-xs sgds:font-normal sgds:leading-3-xs sgds:tracking-normal">Label XS Regular</div>
+  <div class="sgds:text-label-xs sgds:font-regular sgds:leading-3-xs sgds:tracking-normal">Label XS Regular</div>
 `;
 
 const FormBuiltInTemplate = () => html` <sgds-input label="Field label"></sgds-input> `;
@@ -48,55 +48,55 @@ const FormFallbackTemplate = () => html`
 
 export const LabelLgSemibold = {
   render: LabelLgSemiboldTemplate.bind({}),
-  name: "Label Large Semibold"
+  name: "Large Semibold"
 };
 
 export const LabelLgRegular = {
   render: LabelLgRegularTemplate.bind({}),
-  name: "Label Large Regular"
+  name: "Large Regular"
 };
 
 export const LabelMdSemibold = {
   render: LabelMdSemiboldTemplate.bind({}),
-  name: "Label Medium Semibold"
+  name: "Medium Semibold"
 };
 
 export const LabelMdRegular = {
   render: LabelMdRegularTemplate.bind({}),
-  name: "Label Medium Regular"
+  name: "Medium Regular"
 };
 
 export const LabelMdLight = {
   render: LabelMdLightTemplate.bind({}),
-  name: "Label Medium Light"
+  name: "Medium Light"
 };
 
 export const LabelSmSemibold = {
   render: LabelSmSemiboldTemplate.bind({}),
-  name: "Label Small Semibold"
+  name: "Small Semibold"
 };
 
 export const LabelSmRegular = {
   render: LabelSmRegularTemplate.bind({}),
-  name: "Label Small Regular"
+  name: "Small Regular"
 };
 
 export const LabelXsSemibold = {
   render: LabelXsSemiboldTemplate.bind({}),
-  name: "Label XS Semibold"
+  name: "XS Semibold"
 };
 
 export const LabelXsRegular = {
   render: LabelXsRegularTemplate.bind({}),
-  name: "Label XS Regular"
+  name: "XS Regular"
 };
 
 export const FormBuiltIn = {
   render: FormBuiltInTemplate.bind({}),
-  name: "Form — Component Built-in Label"
+  name: "Form — Built-in Label"
 };
 
 export const FormFallback = {
   render: FormFallbackTemplate.bind({}),
-  name: "Form — HTML Label Fallback"
+  name: "Form — Fallback Label"
 };

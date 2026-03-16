@@ -1,0 +1,49 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Foundation/Layout" />
+
+# Layout
+
+SGDS foundation styles include a responsive layout system that automatically adapts spacing across different screen sizes. All layout CSS custom properties scale at three primary breakpoints:
+
+- **Mobile**: 0px and above (default)
+- **Tablet**: 1024px and above
+- **Desktop**: 1440px and above
+
+## Key Features
+
+**Responsive Spacing**: Layout gaps, padding, and component spacing adapt at each breakpoint to maintain optimal spacing hierarchy and visual rhythm across devices.
+
+**Mobile-First Approach**: The system uses progressive enhancement—mobile styles are the default, then enhanced at larger breakpoints via CSS media queries.
+
+## Layout and Spacing Variables
+
+These variables enable responsive spacing and layout adjustments:
+
+### Text Gaps
+
+Control spacing between text elements: `--sgds-text-gap-2-xs` through `--sgds-text-gap-2-xl`
+
+### Layout Gaps
+
+Control spacing in layout components:
+
+- Mobile: `--sgds-layout-gap-md: 1rem`
+- Tablet (1024px+): `--sgds-layout-gap-md: 1.5rem`
+- Desktop (1440px+): `--sgds-layout-gap-md: 2rem`
+
+### Layout Padding
+
+Responsive padding for containers:
+
+- Mobile: `--sgds-layout-padding-md: 1.5rem`
+- Tablet (1024px+): `--sgds-layout-padding-md: 2rem`
+- Desktop (1440px+): `--sgds-layout-padding-md: 3rem`
+
+## How Responsive Layout Works
+
+All layout variables are defined at the root level with default (mobile) values, then updated via media queries at each breakpoint:
+
+1. **Progressive enhancement**: Mobile styles load first, then enhance on larger screens
+2. **Consistency**: All components using the same variables stay aligned
+3. **Flexibility**: Override defaults by adjusting CSS variables in your own code

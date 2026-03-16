@@ -40,7 +40,7 @@ Apply with `sgds:font-{weight}`:
 | `sgds:font-thin` | 100 | Decorative, rarely used |
 | `sgds:font-extralight` | 200 | Decorative |
 | `sgds:font-light` | 300 | Large display text |
-| `sgds:font-normal` | 400 | Default body text |
+| `sgds:font-regular` | 400 | Default body text |
 | `sgds:font-medium` | 500 | Slightly emphasised body, labels |
 | `sgds:font-semibold` | 600 | Subheadings, button labels |
 | `sgds:font-bold` | 700 | Headings |
@@ -48,7 +48,7 @@ Apply with `sgds:font-{weight}`:
 | `sgds:font-black` | 900 | Maximum weight display |
 
 ```html
-<p class="sgds:font-normal">Body text</p>
+<p class="sgds:font-regular">Body text</p>
 <label class="sgds:font-medium">Form label</label>
 <h3 class="sgds:font-semibold">Subheading</h3>
 <h1 class="sgds:font-bold">Heading</h1>

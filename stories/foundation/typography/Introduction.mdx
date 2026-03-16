@@ -1,0 +1,80 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Foundation/Typography/Introduction" />
+
+# Typography
+
+SGDS foundation styles include a comprehensive responsive typography system that automatically adapts font sizes and line heights across different screen sizes. All HTML elements (headings, paragraphs, labels, etc.) use CSS custom properties that scale at three primary breakpoints:
+
+- **Mobile**: 0px and above (default)
+- **Tablet**: 1024px and above
+- **Desktop**: 1440px and above
+
+## Key Features
+
+**Automatic Responsive Scaling**: All foundation elements automatically scale their typography based on the viewport size. No additional media queries needed—just import and use.
+
+**Consistent Typography Hierarchy**: Headings (h1–h6) maintain visual hierarchy across all screen sizes with responsive font sizes and line heights:
+
+- h1: 32px (mobile) → 36px (tablet) → 40px (desktop)
+- h2: 28px (mobile) → 30px (tablet) → 32px (desktop)
+- And so on for h3–h6
+
+**Body Text Handling**:
+
+- Small and regular body text (`body-sm`, `body-md`) remain consistent at 14px and 16px across all viewports
+- Large body text (`body-lg`) scales from 18px (mobile) to 20px (tablet/desktop)
+
+## Typography Variables
+
+Font sizes for headings, body text, labels, and captions automatically scale at different breakpoints:
+
+### Headings
+
+- `--sgds-font-size-heading-sm`: Responsive H4 sizing
+- `--sgds-font-size-heading-md`: Responsive H3 sizing
+- `--sgds-font-size-heading-lg`: Responsive H2 sizing
+- `--sgds-font-size-heading-xl`: Responsive H1 sizing
+
+### Body Text
+
+- `--sgds-font-size-body-sm`: Small body text (14px on all viewports)
+- `--sgds-font-size-body-md`: Regular body text (16px on all viewports)
+- `--sgds-font-size-body-lg`: Large body text (responsive: 18px mobile → 20px tablet/desktop)
+
+### Line Heights
+
+Line height variables scale proportionally with font sizes for improved readability:
+
+- `--sgds-line-height-xs` through `--sgds-line-height-3-xl`
+
+Example progression:
+
+- Mobile: `--sgds-line-height-xs: 24px`, `--sgds-line-height-md: 28px`
+- Tablet (1024px+): `--sgds-line-height-xs: 24px`, `--sgds-line-height-md: 32px`
+- Desktop (1440px+): `--sgds-line-height-xs: 24px`, `--sgds-line-height-md: 32px`
+
+## How Responsive Typography Works
+
+All typography variables are defined at the root level with default (mobile) values, then updated via media queries at each breakpoint:
+
+```css
+:root {
+  --sgds-font-size-heading-xl: var(--sgds-font-size-32); /* Mobile: 32px */
+  --sgds-line-height-xl: var(--sgds-line-height-40);
+}
+
+@media screen and (min-width: 1024px) {
+  :root {
+    --sgds-font-size-heading-xl: var(--sgds-font-size-36); /* Tablet: 36px */
+    --sgds-line-height-xl: var(--sgds-line-height-44);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  :root {
+    --sgds-font-size-heading-xl: var(--sgds-font-size-40); /* Desktop: 40px */
+    --sgds-line-height-xl: var(--sgds-line-height-48);
+  }
+}
+```

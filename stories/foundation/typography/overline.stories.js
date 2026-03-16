@@ -11,17 +11,17 @@ const OverlineSemiboldTemplate = () => html`
 `;
 
 const OverlineRegularTemplate = () => html`
-  <div class="sgds:text-overline-md sgds:font-normal sgds:leading-2-xs sgds:tracking-wide sgds:uppercase">
+  <div class="sgds:text-overline-md sgds:font-regular sgds:leading-2-xs sgds:tracking-wide sgds:uppercase">
     Overline Regular
   </div>
 `;
 
 export const OverlineSemibold = {
   render: OverlineSemiboldTemplate.bind({}),
-  name: "Overline Semibold"
+  name: "Semibold"
 };
 
 export const OverlineRegular = {
   render: OverlineRegularTemplate.bind({}),
-  name: "Overline Regular"
+  name: "Regular"
 };
