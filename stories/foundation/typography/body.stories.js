@@ -2,7 +2,7 @@ import { html } from "lit";
 import NonInteractiveDocsPage from "../../../.storybook/NonInteractiveDocsPage";
 
 export default {
-  title: "Foundation/Typography/Body",
+  title: "Foundation/Typography/Paragraph body",
   parameters: {
     docs: { page: NonInteractiveDocsPage }
   }
