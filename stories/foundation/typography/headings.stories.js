@@ -1,7 +1,11 @@
 import { html } from "lit";
+import NonInteractiveDocsPage from "../../../.storybook/NonInteractiveDocsPage";
 
 export default {
-  title: "Foundation/Typography/Headings"
+  title: "Foundation/Typography/Headings",
+  parameters: {
+    docs: { page: NonInteractiveDocsPage }
+  }
 };
 
 const AllHeadingsTemplate = () => html`

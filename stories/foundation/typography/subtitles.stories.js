@@ -1,7 +1,11 @@
 import { html } from "lit";
+import NonInteractiveDocsPage from "../../../.storybook/NonInteractiveDocsPage";
 
 export default {
-  title: "Foundation/Typography/Subtitles"
+  title: "Foundation/Typography/Subtitles",
+  parameters: {
+    docs: { page: NonInteractiveDocsPage }
+  }
 };
 
 const DefaultTemplate = () => html`

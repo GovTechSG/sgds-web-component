@@ -1,7 +1,11 @@
 import { html } from "lit";
+import NonInteractiveDocsPage from "../../../.storybook/NonInteractiveDocsPage";
 
 export default {
-  title: "Foundation/Typography/Links"
+  title: "Foundation/Typography/Links",
+  parameters: {
+    docs: { page: NonInteractiveDocsPage }
+  }
 };
 
 const AllLinksTemplate = () => html` <a href="#">Anchor link</a> `;

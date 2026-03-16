@@ -1,7 +1,11 @@
 import { html } from "lit";
+import NonInteractiveDocsPage from "../../../.storybook/NonInteractiveDocsPage";
 
 export default {
-  title: "Foundation/Typography/Display"
+  title: "Foundation/Typography/Display",
+  parameters: {
+    docs: { page: NonInteractiveDocsPage }
+  }
 };
 
 const DisplayLgBoldTemplate = () => html`

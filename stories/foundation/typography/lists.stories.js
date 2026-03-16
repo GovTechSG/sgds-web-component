@@ -1,7 +1,11 @@
 import { html } from "lit";
+import NonInteractiveDocsPage from "../../../.storybook/NonInteractiveDocsPage";
 
 export default {
-  title: "Foundation/Typography/Lists"
+  title: "Foundation/Typography/Lists",
+  parameters: {
+    docs: { page: NonInteractiveDocsPage }
+  }
 };
 
 const UListTemplate = () => html`

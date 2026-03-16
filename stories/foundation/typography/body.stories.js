@@ -1,7 +1,11 @@
 import { html } from "lit";
+import NonInteractiveDocsPage from "../../../.storybook/NonInteractiveDocsPage";
 
 export default {
-  title: "Foundation/Typography/Body"
+  title: "Foundation/Typography/Body",
+  parameters: {
+    docs: { page: NonInteractiveDocsPage }
+  }
 };
 
 const AllBodyTemplate = () => html`

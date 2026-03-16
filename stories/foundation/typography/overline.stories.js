@@ -1,7 +1,11 @@
 import { html } from "lit";
+import NonInteractiveDocsPage from "../../../.storybook/NonInteractiveDocsPage";
 
 export default {
-  title: "Foundation/Typography/Overline"
+  title: "Foundation/Typography/Overline",
+  parameters: {
+    docs: { page: NonInteractiveDocsPage }
+  }
 };
 
 const OverlineSemiboldTemplate = () => html`

@@ -1,7 +1,11 @@
 import { html } from "lit";
+import NonInteractiveDocsPage from "../../../.storybook/NonInteractiveDocsPage";
 
 export default {
-  title: "Foundation/Typography/Labels"
+  title: "Foundation/Typography/Labels",
+  parameters: {
+    docs: { page: NonInteractiveDocsPage }
+  }
 };
 
 const LabelLgSemiboldTemplate = () => html`
