@@ -87,6 +87,7 @@ These skills cover two domains. Each domain uses a folder naming prefix so agent
 #### Utilities Skills (`utilities-*`) — Foundational styles via the `sgds:` Tailwind prefix
 - [utilities-overview](../skills/sgds-utilities-overview/SKILL.md) - Overview of all SGDS foundational style utilities and the Utilities API
 - [utilities-setup](../skills/sgds-utilities-setup/SKILL.md) - Setup and prerequisites for using SGDS utilities
+- [utilities-grid](../skills/sgds-utilities-grid/SKILL.md) - **First-priority layout system**: `.sgds-container`, `.sgds-grid`, `.sgds-col-*` — SGDS-native responsive grid with correct breakpoints, gutters, and column counts. Always prefer over generic Tailwind grid utilities.
 - [utilities-spacing](../skills/sgds-utilities-spacing/SKILL.md) - Margin, padding, gap utilities with 4px scale system
 - [utilities-color-semantics](../skills/sgds-utilities-color-semantics/SKILL.md) - Shared definitions for color token suffix modifiers (default, emphasis, muted, fixed-light, fixed-dark, inverse, surface, etc.) reused across all color skills
 - [utilities-background-color](../skills/sgds-utilities-background-color/SKILL.md) - Theme-aware background color utilities with semantic tokens
@@ -131,6 +132,7 @@ These skills cover two domains. Each domain uses a folder naming prefix so agent
 - [components-quantity-toggle](../skills/sgds-components-quantity-toggle/SKILL.md) - `<sgds-quantity-toggle>` number input with increment/decrement buttons, min/max/step
 - [components-radio](../skills/sgds-components-radio/SKILL.md) - `<sgds-radio-group>` and `<sgds-radio>` mutually exclusive radio buttons with group validation
 - [components-select](../skills/sgds-components-select/SKILL.md) - `<sgds-select>` and `<sgds-select-option>` searchable single-select dropdown, sgds-select event
+- [components-sidebar](../skills/sgds-components-sidebar/SKILL.md) - `<sgds-sidebar>`, `<sgds-sidebar-item>`, `<sgds-sidebar-group>`, `<sgds-sidebar-section>` collapsible sidebar nav with icon-only mode, drawer overlays, and multi-level nesting (RC — load via CDN)
 - [components-sidenav](../skills/sgds-components-sidenav/SKILL.md) - `<sgds-sidenav>`, `<sgds-sidenav-item>`, `<sgds-sidenav-link>` vertical sidebar navigation with multi-level nesting
 - [components-skeleton](../skills/sgds-components-skeleton/SKILL.md) - `<sgds-skeleton>` loading placeholders, shapes, rows, sheen animation
 - [components-spinner](../skills/sgds-components-spinner/SKILL.md) - `<sgds-spinner>` loading indicators, tones, sizes, label orientation
