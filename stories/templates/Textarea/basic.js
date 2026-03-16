@@ -30,3 +30,5 @@ export const Template = args =>
 
 export const args = { name: "textarea", label: "Label", maxlength: 100 };
 export const parameters = {};
+
+export const play = undefined;

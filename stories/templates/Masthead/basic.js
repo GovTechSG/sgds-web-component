@@ -14,3 +14,5 @@ export const parameters = {
     }
   }
 };
+
+export const play = undefined;

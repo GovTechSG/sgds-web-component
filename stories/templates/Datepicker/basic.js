@@ -52,3 +52,5 @@ export const args = {
   menuIsOpen: true
 };
 export const parameters = {};
+
+export const play = undefined;
