@@ -108,7 +108,7 @@
     "@webcomponents/scoped-custom-element-registry": "^0.0.9",
     "axios": "^1.11.0",
     "chalk": "^5.6.2",
-    "chromatic": "^13.3.4",
+    "chromatic": "^15.2.0",
     "comment-parser": "^1.4.1",
     "cypress": "^13.6.0",
     "cypress-fail-on-console-error": "^5.0.3",
