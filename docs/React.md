@@ -11,13 +11,12 @@ Our library still outputs the React version of each of our web components for ba
 You can directly use the native web components
 
 ```jsx
-//Select.ts
-import "@govtechsg/sgds-web-component/components/Select";
+import "@govtechsg/sgds-web-component";
 
 const SgdsSelect = () => {
   return <sgds-select></sgds-select>;
 };
-export default ButtonWc;
+export default SgdsSelect;
 ```
 
 ### Events

@@ -15,5 +15,14 @@ chromatic.log
 chromatic-build-*.xml
 chromatic-diagnostics.json
 .storybook/utility.css
+# Skill eval workspaces (ephemeral test artefacts — not committed)
+test/skills/
+
+# Python
+__pycache__/
+*.pyc
+
 # macOS
 .DS_Store
+
+test/skills/*
