@@ -73,6 +73,16 @@
   overflow-y: scroll;
 }
 
+.sidebar--overlay {
+  content: "";
+  position: absolute;
+  width: 100dvw;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--sgds-bg-overlay);
+}
+
 .sidebar-nested-overlay.show {
   pointer-events: auto;
   opacity: 1;
@@ -126,6 +136,10 @@
 }
 
 @media screen and (max-width: 511px) {
+  .sidebar--overlay {
+    display: none;
+  }
+
   .sidebar--expanded {
     width: 100dvw;
     position: absolute;
