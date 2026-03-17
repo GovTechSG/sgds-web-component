@@ -1,0 +1,145 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Default</h2>
+        <sgds-accordion id="accordion-default">
+          <sgds-accordion-item open>
+            <div slot="header">Accordion title #1</div>
+            <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</div>
+          </sgds-accordion-item>
+          <sgds-accordion-item>
+            <div slot="header">Accordion title #2</div>
+            <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</div>
+          </sgds-accordion-item>
+          <sgds-accordion-item open>
+            <div slot="header">Accordion title #3</div>
+            <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</div>
+          </sgds-accordion-item>
+        </sgds-accordion>
+      </div>
+
+      <div>
+        <h2>Border variant</h2>
+        <sgds-accordion variant="border" id="accordion-border">
+          <sgds-accordion-item open>
+            <div slot="header">Accordion title #1</div>
+            <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</div>
+          </sgds-accordion-item>
+          <sgds-accordion-item>
+            <div slot="header">Accordion title #2</div>
+            <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</div>
+          </sgds-accordion-item>
+          <sgds-accordion-item open>
+            <div slot="header">Accordion title #3</div>
+            <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</div>
+          </sgds-accordion-item>
+        </sgds-accordion>
+      </div>
+
+      <div>
+        <h2>Compact density</h2>
+        <sgds-accordion density="compact" id="accordion-compact">
+          <sgds-accordion-item open>
+            <div slot="header">Accordion title #1</div>
+            <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</div>
+          </sgds-accordion-item>
+          <sgds-accordion-item>
+            <div slot="header">Accordion title #2</div>
+            <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</div>
+          </sgds-accordion-item>
+          <sgds-accordion-item open>
+            <div slot="header">Accordion title #3</div>
+            <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</div>
+          </sgds-accordion-item>
+        </sgds-accordion>
+      </div>
+
+      <div>
+        <h2>Allow multiple active accordion</h2>
+        <sgds-accordion allowMultiple id="accordion-multiple">
+          <sgds-accordion-item open>
+            <div slot="header">Accordion title #1</div>
+            <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</div>
+          </sgds-accordion-item>
+          <sgds-accordion-item>
+            <div slot="header">Accordion title #2</div>
+            <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</div>
+          </sgds-accordion-item>
+          <sgds-accordion-item open>
+            <div slot="header">Accordion title #3</div>
+            <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</div>
+          </sgds-accordion-item>
+        </sgds-accordion>
+      </div>
+
+      <div>
+        <h2>Disabled state</h2>
+        <sgds-accordion id="accordion-disabled">
+          <sgds-accordion-item disabled>
+            <div slot="header">Accordion title #1</div>
+            <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</div>
+          </sgds-accordion-item>
+          <sgds-accordion-item>
+            <div slot="header">Accordion title #2</div>
+            <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</div>
+          </sgds-accordion-item>
+          <sgds-accordion-item open>
+            <div slot="header">Accordion title #3</div>
+            <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.</div>
+          </sgds-accordion-item>
+        </sgds-accordion>
+      </div>
+    </div>
+
+    <script>
+      // Verify position/variant/density attributes are set via slotchange (CDN timing fix).
+      // Open the browser console to see results.
+      customElements.whenDefined("sgds-accordion").then(() => {
+        const checks = [
+          { id: "accordion-default", expectedVariant: "default", expectedDensity: "default" },
+          { id: "accordion-border", expectedVariant: "border", expectedDensity: "default" },
+          { id: "accordion-compact", expectedVariant: "default", expectedDensity: "compact" }
+        ];
+
+        checks.forEach(({ id, expectedVariant, expectedDensity }) => {
+          const items = document.getElementById(id).querySelectorAll("sgds-accordion-item");
+          const passed = [...items].every(
+            item =>
+              item.getAttribute("variant") === expectedVariant &&
+              item.getAttribute("density") === expectedDensity
+          );
+          console.log(`[${id}] variant/density attrs correct:`, passed ? "✅ PASS" : "❌ FAIL");
+        });
+
+        const defaultItems = document.getElementById("accordion-default").querySelectorAll("sgds-accordion-item");
+        console.log("[accordion-default] first-of-type on item 1:", defaultItems[0].hasAttribute("first-of-type") ? "✅ PASS" : "❌ FAIL");
+        console.log("[accordion-default] nth-of-type on item 2:", defaultItems[1].hasAttribute("nth-of-type") ? "✅ PASS" : "❌ FAIL");
+        console.log("[accordion-default] last-of-type on item 3:", defaultItems[2].hasAttribute("last-of-type") ? "✅ PASS" : "❌ FAIL");
+
+        const singleItem = document.getElementById("accordion-single").querySelector("sgds-accordion-item");
+        const noPositionAttrs =
+          !singleItem.hasAttribute("first-of-type") &&
+          !singleItem.hasAttribute("nth-of-type") &&
+          !singleItem.hasAttribute("last-of-type");
+        console.log("[accordion-single] no position attrs on single item:", noPositionAttrs ? "✅ PASS" : "❌ FAIL");
+      });
+    </script>
+  </body>
+</html>
