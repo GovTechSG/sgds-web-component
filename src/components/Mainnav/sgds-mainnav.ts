@@ -134,11 +134,6 @@ export class SgdsMainnav extends SgdsElement {
       this._handleMobileNav();
       this._breakpointReached = true;
     }
-
-    const items = [...this.defaultSlotItems, ...this.endSlotItems] as SgdsMainnavItem[] | SgdsMainnavDropdown[];
-    items.forEach((item: SgdsMainnavItem | SgdsMainnavDropdown) => {
-      item.setAttribute("expand", this.expand);
-    });
   }
 
   private _handleClickOutOfElement(e: MouseEvent, self: HTMLElement) {
@@ -234,7 +229,7 @@ export class SgdsMainnav extends SgdsElement {
     this.body.style.height = "auto";
     this.emit("sgds-after-hide");
   }
-
+  /** @internal */
   @watch("expanding", { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.expanding) {
@@ -271,12 +266,20 @@ export class SgdsMainnav extends SgdsElement {
     return waitForEvent(this, "sgds-after-hide");
   }
 
+  private _handleDefaultSlotChange(e: Event) {
+    const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
+    childElements.forEach(el => {
+      el.setAttribute("expand", this.expand);
+    });
+  }
+
   // assigning name attribute to elements added in slot="end", to use wildcard css selector to assign styles only to *-mainnav-item
-  _handleSlotChange(e: Event) {
+  private _handleSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
 
     childElements.forEach(e => {
       e.setAttribute("name", e.tagName.toLowerCase());
+      e.setAttribute("expand", this.expand);
     });
   }
 
@@ -291,7 +294,7 @@ export class SgdsMainnav extends SgdsElement {
           </a>
           <div class="navbar-body navbar-collapse" id=${this.collapseId}>
             <div class="navbar-nav navbar-nav-scroll">
-              <slot></slot>
+              <slot @slotchange=${this._handleDefaultSlotChange}></slot>
               <slot
                 name="end"
                 class=${classMap({ "slot-end": !this.breakpointReached })}
