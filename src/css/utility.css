@@ -297,6 +297,10 @@
   --text-label-lg: var(--sgds-font-size-label-lg);
   --text-caption-md: var(--sgds-font-size-caption-md);
   --text-overline-md: var(--sgds-font-size-overline-md);
+  --text-link-xs: var(--sgds-font-size-link-xs);
+  --text-link-sm: var(--sgds-font-size-link-sm);
+  --text-link-md: var(--sgds-font-size-link-md);
+  --text-link-lg: var(--sgds-font-size-link-lg);
 
   /* Letter Spacing */
   --tracking-tighter: var(--sgds-letter-spacing-tighter);
