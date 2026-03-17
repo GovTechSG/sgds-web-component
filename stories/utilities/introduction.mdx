@@ -30,13 +30,13 @@ This approach allows you to leverage utility-first CSS with SGDS design tokens w
 
 3. **Import SGDS CSS files:**
 
-   ```javascript
-   // Import theme files
-   import '@govtechsg/sgds-web-component/themes/day.css';
-   import '@govtechsg/sgds-web-component/themes/night.css';
-   
+   ```css
+   // Import theme and foundation files
+   @import '@govtechsg/sgds-web-component/themes/day.css';
+   @import '@govtechsg/sgds-web-component/themes/night.css';
+   @import "@govtechsg/sgds-web-component/css/sgds.css";
    // Import utility styles
-   import '@govtechsg/sgds-web-component/css/utility.css';
+   @import '@govtechsg/sgds-web-component/css/utility.css';
    ```
 
 ## Using SGDS Utility Tokens
